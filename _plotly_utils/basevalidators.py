@@ -1211,7 +1211,7 @@ class ColorscaleValidator(BaseValidator):
     named_colorscales = [
         'Greys', 'YlGnBu', 'Greens', 'YlOrRd', 'Bluered', 'RdBu', 'Reds',
         'Blues', 'Picnic', 'Rainbow', 'Portland', 'Jet', 'Hot', 'Blackbody',
-        'Earth', 'Electric', 'Viridis'
+        'Earth', 'Electric', 'Viridis', 'Cividis'
     ]
 
     def __init__(self, plotly_name, parent_name, **kwargs):
@@ -1229,7 +1229,7 @@ class ColorscaleValidator(BaseValidator):
       - One of the following named colorscales:
             ['Greys', 'YlGnBu', 'Greens', 'YlOrRd', 'Bluered', 'RdBu',
             'Reds', 'Blues', 'Picnic', 'Rainbow', 'Portland', 'Jet',
-            'Hot', 'Blackbody', 'Earth', 'Electric', 'Viridis']
+            'Hot', 'Blackbody', 'Earth', 'Electric', 'Viridis', 'Cividis]
         """.format(plotly_name=self.plotly_name)
 
         return desc
@@ -1274,9 +1274,11 @@ class ColorscaleValidator(BaseValidator):
         return v
 
     def present(self, v):
-        # Return tuple of tuples so that colorscale is immutable
+        # Return-type must be immutable
         if v is None:
             return None
+        elif isinstance(v, string_types):
+            return v
         else:
             return tuple([tuple(e) for e in v])
 
@@ -1658,16 +1660,21 @@ class LiteralValidator(BaseValidator):
     """
     Validator for readonly literal values
     """
-    def __init__(self, plotly_name, parent_name, **kwargs):
-        super(LiteralValidator, self).__init__(plotly_name=plotly_name,
-                         parent_name=parent_name,
-                         **kwargs)
+    def __init__(self, plotly_name, parent_name, val, **kwargs):
+        super(LiteralValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            **kwargs)
+        self.val = val
 
     def validate_coerce(self, v):
-        raise ValueError("""\
-The '{plotly_name}' property of {parent_name} is read-only""".format(
-            plotly_name=self.plotly_name, parent_name=self.parent_name
-        ))
+        if v != self.val:
+            raise ValueError("""\
+    The '{plotly_name}' property of {parent_name} is read-only""".format(
+                plotly_name=self.plotly_name, parent_name=self.parent_name
+            ))
+        else:
+            return v
 
 
 class ImageUriValidator(BaseValidator):
@@ -1864,11 +1871,18 @@ class CompoundArrayValidator(BaseValidator):
 
 class BaseDataValidator(BaseValidator):
 
-    def __init__(self, class_strs_map, plotly_name, parent_name, **kwargs):
+    def __init__(self,
+                 class_strs_map,
+                 plotly_name,
+                 parent_name,
+                 set_uid=False,
+                 **kwargs):
         super(BaseDataValidator, self).__init__(
             plotly_name=plotly_name, parent_name=parent_name, **kwargs)
+
         self.class_strs_map = class_strs_map
         self._class_map = None
+        self.set_uid = set_uid
 
     def description(self):
 
@@ -1957,8 +1971,9 @@ class BaseDataValidator(BaseValidator):
             v = to_scalar_or_list(res)
 
             # Set new UIDs
-            for trace in v:
-                trace.uid = str(uuid.uuid1())
+            if self.set_uid:
+                for trace in v:
+                    trace.uid = str(uuid.uuid1())
 
         else:
             self.raise_invalid_val(v)

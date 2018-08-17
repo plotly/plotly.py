@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class YBins(BaseTraceHierarchyType):
@@ -79,12 +80,16 @@ class YBins(BaseTraceHierarchyType):
             Sets the starting value for the y axis bins.
         """
 
-    def __init__(self, end=None, size=None, start=None, **kwargs):
+    def __init__(self, arg=None, end=None, size=None, start=None, **kwargs):
         """
         Construct a new YBins object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of
+            plotly.graph_objs.histogram2dcontour.YBins
         end
             Sets the end value for the y axis bins.
         size
@@ -98,6 +103,22 @@ class YBins(BaseTraceHierarchyType):
         """
         super(YBins, self).__init__('ybins')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.histogram2dcontour.YBins 
+constructor must be a dict or 
+an instance of plotly.graph_objs.histogram2dcontour.YBins"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.histogram2dcontour import (ybins as v_ybins)
@@ -110,10 +131,13 @@ class YBins(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.end = end
-        self.size = size
-        self.start = start
+        _v = arg.pop('end', None)
+        self.end = end if end is not None else _v
+        _v = arg.pop('size', None)
+        self.size = size if size is not None else _v
+        _v = arg.pop('start', None)
+        self.start = start if start is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

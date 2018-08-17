@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Marker(BaseTraceHierarchyType):
@@ -8,13 +9,13 @@ class Marker(BaseTraceHierarchyType):
     @property
     def autocolorscale(self):
         """
-        Has an effect only if `marker.color` is set to a numerical
-        array. Determines whether the colorscale is a default palette
+        Determines whether the colorscale is a default palette
         (`autocolorscale: true`) or the palette determined by
-        `marker.colorscale`. In case `colorscale` is unspecified or
-        `autocolorscale` is true, the default  palette will be chosen
-        according to whether numbers in the `color` array are all
-        positive, all negative or mixed.
+        `marker.colorscale`. Has an effect only if in `marker.color`is
+        set to a numerical array. In case `colorscale` is unspecified
+        or `autocolorscale` is true, the default  palette will be
+        chosen according to whether numbers in the `color` array are
+        all positive, all negative or mixed.
     
         The 'autocolorscale' property must be specified as a bool
         (either True, or False)
@@ -34,12 +35,12 @@ class Marker(BaseTraceHierarchyType):
     @property
     def cauto(self):
         """
-        Has an effect only if `marker.color` is set to a numerical
-        array and `cmin`, `cmax` are set by the user. In this case, it
-        controls whether the range of colors in `colorscale` is mapped
-        to the range of values in the `color` array (`cauto: true`), or
-        the `cmin`/`cmax` values (`cauto: false`). Defaults to `false`
-        when `cmin`, `cmax` are set by the user.
+        Determines whether or not the color domain is computed with
+        respect to the input data (here in `marker.color`) or the
+        bounds set in `marker.cmin` and `marker.cmax`  Has an effect
+        only if in `marker.color`is set to a numerical array. Defaults
+        to `false` when `marker.cmin` and `marker.cmax` are set by the
+        user.
     
         The 'cauto' property must be specified as a bool
         (either True, or False)
@@ -59,10 +60,10 @@ class Marker(BaseTraceHierarchyType):
     @property
     def cmax(self):
         """
-        Has an effect only if `marker.color` is set to a numerical
-        array. Sets the upper bound of the color domain. Value should
-        be associated to the `marker.color` array index, and if set,
-        `marker.cmin` must be set as well.
+        Sets the upper bound of the color domain. Has an effect only if
+        in `marker.color`is set to a numerical array. Value should have
+        the same units as in `marker.color` and if set, `marker.cmin`
+        must be set as well.
     
         The 'cmax' property is a number and may be specified as:
           - An int or float
@@ -82,10 +83,10 @@ class Marker(BaseTraceHierarchyType):
     @property
     def cmin(self):
         """
-        Has an effect only if `marker.color` is set to a numerical
-        array. Sets the lower bound of the color domain. Value should
-        be associated to the `marker.color` array index, and if set,
-        `marker.cmax` must be set as well.
+        Sets the lower bound of the color domain. Has an effect only if
+        in `marker.color`is set to a numerical array. Value should have
+        the same units as in `marker.color` and if set, `marker.cmax`
+        must be set as well.
     
         The 'cmin' property is a number and may be specified as:
           - An int or float
@@ -105,10 +106,10 @@ class Marker(BaseTraceHierarchyType):
     @property
     def color(self):
         """
-        Sets the marker color. It accepts either a specific color or an
+        Sets themarkercolor. It accepts either a specific color or an
         array of numbers that are mapped to the colorscale relative to
-        the max and min values of the array or relative to `cmin` and
-        `cmax` if set.
+        the max and min values of the array or relative to
+        `marker.cmin` and `marker.cmax` if set.
     
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
@@ -389,18 +390,17 @@ class Marker(BaseTraceHierarchyType):
     @property
     def colorscale(self):
         """
-        Sets the colorscale and only has an effect if `marker.color` is
+        Sets the colorscale. Has an effect only if in `marker.color`is
         set to a numerical array. The colorscale must be an array
         containing arrays mapping a normalized value to an rgb, rgba,
         hex, hsl, hsv, or named color string. At minimum, a mapping for
         the lowest (0) and highest (1) values are required. For
         example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To
-        control the bounds of the colorscale in color space, use
-        `marker.cmin` and `marker.cmax`. Alternatively, `colorscale`
-        may be a palette name string of the following list: Greys,
-        YlGnBu, Greens, YlOrRd, Bluered, RdBu, Reds, Blues, Picnic,
-        Rainbow, Portland, Jet, Hot, Blackbody, Earth, Electric,
-        Viridis, Cividis
+        control the bounds of the colorscale in color space,
+        use`marker.cmin` and `marker.cmax`. Alternatively, `colorscale`
+        may be a palette name string of the following list: Greys,YlGnB
+        u,Greens,YlOrRd,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland
+        ,Jet,Hot,Blackbody,Earth,Electric,Viridis,Cividis.
     
         The 'colorscale' property is a colorscale and may be
         specified as:
@@ -489,10 +489,10 @@ class Marker(BaseTraceHierarchyType):
     @property
     def reversescale(self):
         """
-        Has an effect only if `marker.color` is set to a numerical
-        array. Reverses the color mapping if true (`cmin` will
-        correspond to the last color in the array and `cmax` will
-        correspond to the first color).
+        Reverses the color mapping if true. Has an effect only if in
+        `marker.color`is set to a numerical array. If true,
+        `marker.cmin` will correspond to the last color in the array
+        and `marker.cmax` will correspond to the first color.
     
         The 'reversescale' property must be specified as a bool
         (either True, or False)
@@ -512,8 +512,9 @@ class Marker(BaseTraceHierarchyType):
     @property
     def showscale(self):
         """
-        Has an effect only if `marker.color` is set to a numerical
-        array. Determines whether or not a colorbar is displayed.
+        Determines whether or not a colorbar is displayed for this
+        trace. Has an effect only if in `marker.color`is set to a
+        numerical array.
     
         The 'showscale' property must be specified as a bool
         (either True, or False)
@@ -692,56 +693,54 @@ class Marker(BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         autocolorscale
-            Has an effect only if `marker.color` is set to a
-            numerical array. Determines whether the colorscale is a
-            default palette (`autocolorscale: true`) or the palette
-            determined by `marker.colorscale`. In case `colorscale`
-            is unspecified or `autocolorscale` is true, the default
-            palette will be chosen according to whether numbers in
-            the `color` array are all positive, all negative or
-            mixed.
+            Determines whether the colorscale is a default palette
+            (`autocolorscale: true`) or the palette determined by
+            `marker.colorscale`. Has an effect only if in
+            `marker.color`is set to a numerical array. In case
+            `colorscale` is unspecified or `autocolorscale` is
+            true, the default  palette will be chosen according to
+            whether numbers in the `color` array are all positive,
+            all negative or mixed.
         cauto
-            Has an effect only if `marker.color` is set to a
-            numerical array and `cmin`, `cmax` are set by the user.
-            In this case, it controls whether the range of colors
-            in `colorscale` is mapped to the range of values in the
-            `color` array (`cauto: true`), or the `cmin`/`cmax`
-            values (`cauto: false`). Defaults to `false` when
-            `cmin`, `cmax` are set by the user.
+            Determines whether or not the color domain is computed
+            with respect to the input data (here in `marker.color`)
+            or the bounds set in `marker.cmin` and `marker.cmax`
+            Has an effect only if in `marker.color`is set to a
+            numerical array. Defaults to `false` when `marker.cmin`
+            and `marker.cmax` are set by the user.
         cmax
-            Has an effect only if `marker.color` is set to a
-            numerical array. Sets the upper bound of the color
-            domain. Value should be associated to the
-            `marker.color` array index, and if set, `marker.cmin`
-            must be set as well.
+            Sets the upper bound of the color domain. Has an effect
+            only if in `marker.color`is set to a numerical array.
+            Value should have the same units as in `marker.color`
+            and if set, `marker.cmin` must be set as well.
         cmin
-            Has an effect only if `marker.color` is set to a
-            numerical array. Sets the lower bound of the color
-            domain. Value should be associated to the
-            `marker.color` array index, and if set, `marker.cmax`
-            must be set as well.
+            Sets the lower bound of the color domain. Has an effect
+            only if in `marker.color`is set to a numerical array.
+            Value should have the same units as in `marker.color`
+            and if set, `marker.cmax` must be set as well.
         color
-            Sets the marker color. It accepts either a specific
-            color or an array of numbers that are mapped to the
+            Sets themarkercolor. It accepts either a specific color
+            or an array of numbers that are mapped to the
             colorscale relative to the max and min values of the
-            array or relative to `cmin` and `cmax` if set.
+            array or relative to `marker.cmin` and `marker.cmax` if
+            set.
         colorbar
             plotly.graph_objs.scattermapbox.marker.ColorBar
             instance or dict with compatible properties
         colorscale
-            Sets the colorscale and only has an effect if
-            `marker.color` is set to a numerical array. The
+            Sets the colorscale. Has an effect only if in
+            `marker.color`is set to a numerical array. The
             colorscale must be an array containing arrays mapping a
             normalized value to an rgb, rgba, hex, hsl, hsv, or
             named color string. At minimum, a mapping for the
             lowest (0) and highest (1) values are required. For
             example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`.
             To control the bounds of the colorscale in color space,
-            use `marker.cmin` and `marker.cmax`. Alternatively,
+            use`marker.cmin` and `marker.cmax`. Alternatively,
             `colorscale` may be a palette name string of the
-            following list: Greys, YlGnBu, Greens, YlOrRd, Bluered,
-            RdBu, Reds, Blues, Picnic, Rainbow, Portland, Jet, Hot,
-            Blackbody, Earth, Electric, Viridis, Cividis
+            following list: Greys,YlGnBu,Greens,YlOrRd,Bluered,RdBu
+            ,Reds,Blues,Picnic,Rainbow,Portland,Jet,Hot,Blackbody,E
+            arth,Electric,Viridis,Cividis.
         colorsrc
             Sets the source reference on plot.ly for  color .
         opacity
@@ -749,14 +748,15 @@ class Marker(BaseTraceHierarchyType):
         opacitysrc
             Sets the source reference on plot.ly for  opacity .
         reversescale
-            Has an effect only if `marker.color` is set to a
-            numerical array. Reverses the color mapping if true
-            (`cmin` will correspond to the last color in the array
-            and `cmax` will correspond to the first color).
+            Reverses the color mapping if true. Has an effect only
+            if in `marker.color`is set to a numerical array. If
+            true, `marker.cmin` will correspond to the last color
+            in the array and `marker.cmax` will correspond to the
+            first color.
         showscale
-            Has an effect only if `marker.color` is set to a
-            numerical array. Determines whether or not a colorbar
-            is displayed.
+            Determines whether or not a colorbar is displayed for
+            this trace. Has an effect only if in `marker.color`is
+            set to a numerical array.
         size
             Sets the marker size (in px).
         sizemin
@@ -785,6 +785,7 @@ class Marker(BaseTraceHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         autocolorscale=None,
         cauto=None,
         cmax=None,
@@ -811,57 +812,58 @@ class Marker(BaseTraceHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.scattermapbox.Marker
         autocolorscale
-            Has an effect only if `marker.color` is set to a
-            numerical array. Determines whether the colorscale is a
-            default palette (`autocolorscale: true`) or the palette
-            determined by `marker.colorscale`. In case `colorscale`
-            is unspecified or `autocolorscale` is true, the default
-            palette will be chosen according to whether numbers in
-            the `color` array are all positive, all negative or
-            mixed.
+            Determines whether the colorscale is a default palette
+            (`autocolorscale: true`) or the palette determined by
+            `marker.colorscale`. Has an effect only if in
+            `marker.color`is set to a numerical array. In case
+            `colorscale` is unspecified or `autocolorscale` is
+            true, the default  palette will be chosen according to
+            whether numbers in the `color` array are all positive,
+            all negative or mixed.
         cauto
-            Has an effect only if `marker.color` is set to a
-            numerical array and `cmin`, `cmax` are set by the user.
-            In this case, it controls whether the range of colors
-            in `colorscale` is mapped to the range of values in the
-            `color` array (`cauto: true`), or the `cmin`/`cmax`
-            values (`cauto: false`). Defaults to `false` when
-            `cmin`, `cmax` are set by the user.
+            Determines whether or not the color domain is computed
+            with respect to the input data (here in `marker.color`)
+            or the bounds set in `marker.cmin` and `marker.cmax`
+            Has an effect only if in `marker.color`is set to a
+            numerical array. Defaults to `false` when `marker.cmin`
+            and `marker.cmax` are set by the user.
         cmax
-            Has an effect only if `marker.color` is set to a
-            numerical array. Sets the upper bound of the color
-            domain. Value should be associated to the
-            `marker.color` array index, and if set, `marker.cmin`
-            must be set as well.
+            Sets the upper bound of the color domain. Has an effect
+            only if in `marker.color`is set to a numerical array.
+            Value should have the same units as in `marker.color`
+            and if set, `marker.cmin` must be set as well.
         cmin
-            Has an effect only if `marker.color` is set to a
-            numerical array. Sets the lower bound of the color
-            domain. Value should be associated to the
-            `marker.color` array index, and if set, `marker.cmax`
-            must be set as well.
+            Sets the lower bound of the color domain. Has an effect
+            only if in `marker.color`is set to a numerical array.
+            Value should have the same units as in `marker.color`
+            and if set, `marker.cmax` must be set as well.
         color
-            Sets the marker color. It accepts either a specific
-            color or an array of numbers that are mapped to the
+            Sets themarkercolor. It accepts either a specific color
+            or an array of numbers that are mapped to the
             colorscale relative to the max and min values of the
-            array or relative to `cmin` and `cmax` if set.
+            array or relative to `marker.cmin` and `marker.cmax` if
+            set.
         colorbar
             plotly.graph_objs.scattermapbox.marker.ColorBar
             instance or dict with compatible properties
         colorscale
-            Sets the colorscale and only has an effect if
-            `marker.color` is set to a numerical array. The
+            Sets the colorscale. Has an effect only if in
+            `marker.color`is set to a numerical array. The
             colorscale must be an array containing arrays mapping a
             normalized value to an rgb, rgba, hex, hsl, hsv, or
             named color string. At minimum, a mapping for the
             lowest (0) and highest (1) values are required. For
             example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`.
             To control the bounds of the colorscale in color space,
-            use `marker.cmin` and `marker.cmax`. Alternatively,
+            use`marker.cmin` and `marker.cmax`. Alternatively,
             `colorscale` may be a palette name string of the
-            following list: Greys, YlGnBu, Greens, YlOrRd, Bluered,
-            RdBu, Reds, Blues, Picnic, Rainbow, Portland, Jet, Hot,
-            Blackbody, Earth, Electric, Viridis, Cividis
+            following list: Greys,YlGnBu,Greens,YlOrRd,Bluered,RdBu
+            ,Reds,Blues,Picnic,Rainbow,Portland,Jet,Hot,Blackbody,E
+            arth,Electric,Viridis,Cividis.
         colorsrc
             Sets the source reference on plot.ly for  color .
         opacity
@@ -869,14 +871,15 @@ class Marker(BaseTraceHierarchyType):
         opacitysrc
             Sets the source reference on plot.ly for  opacity .
         reversescale
-            Has an effect only if `marker.color` is set to a
-            numerical array. Reverses the color mapping if true
-            (`cmin` will correspond to the last color in the array
-            and `cmax` will correspond to the first color).
+            Reverses the color mapping if true. Has an effect only
+            if in `marker.color`is set to a numerical array. If
+            true, `marker.cmin` will correspond to the last color
+            in the array and `marker.cmax` will correspond to the
+            first color.
         showscale
-            Has an effect only if `marker.color` is set to a
-            numerical array. Determines whether or not a colorbar
-            is displayed.
+            Determines whether or not a colorbar is displayed for
+            this trace. Has an effect only if in `marker.color`is
+            set to a numerical array.
         size
             Sets the marker size (in px).
         sizemin
@@ -908,6 +911,22 @@ class Marker(BaseTraceHierarchyType):
         """
         super(Marker, self).__init__('marker')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.scattermapbox.Marker 
+constructor must be a dict or 
+an instance of plotly.graph_objs.scattermapbox.Marker"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.scattermapbox import (marker as v_marker)
@@ -936,26 +955,45 @@ class Marker(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.autocolorscale = autocolorscale
-        self.cauto = cauto
-        self.cmax = cmax
-        self.cmin = cmin
-        self.color = color
-        self.colorbar = colorbar
-        self.colorscale = colorscale
-        self.colorsrc = colorsrc
-        self.opacity = opacity
-        self.opacitysrc = opacitysrc
-        self.reversescale = reversescale
-        self.showscale = showscale
-        self.size = size
-        self.sizemin = sizemin
-        self.sizemode = sizemode
-        self.sizeref = sizeref
-        self.sizesrc = sizesrc
-        self.symbol = symbol
-        self.symbolsrc = symbolsrc
+        _v = arg.pop('autocolorscale', None)
+        self.autocolorscale = autocolorscale if autocolorscale is not None else _v
+        _v = arg.pop('cauto', None)
+        self.cauto = cauto if cauto is not None else _v
+        _v = arg.pop('cmax', None)
+        self.cmax = cmax if cmax is not None else _v
+        _v = arg.pop('cmin', None)
+        self.cmin = cmin if cmin is not None else _v
+        _v = arg.pop('color', None)
+        self.color = color if color is not None else _v
+        _v = arg.pop('colorbar', None)
+        self.colorbar = colorbar if colorbar is not None else _v
+        _v = arg.pop('colorscale', None)
+        self.colorscale = colorscale if colorscale is not None else _v
+        _v = arg.pop('colorsrc', None)
+        self.colorsrc = colorsrc if colorsrc is not None else _v
+        _v = arg.pop('opacity', None)
+        self.opacity = opacity if opacity is not None else _v
+        _v = arg.pop('opacitysrc', None)
+        self.opacitysrc = opacitysrc if opacitysrc is not None else _v
+        _v = arg.pop('reversescale', None)
+        self.reversescale = reversescale if reversescale is not None else _v
+        _v = arg.pop('showscale', None)
+        self.showscale = showscale if showscale is not None else _v
+        _v = arg.pop('size', None)
+        self.size = size if size is not None else _v
+        _v = arg.pop('sizemin', None)
+        self.sizemin = sizemin if sizemin is not None else _v
+        _v = arg.pop('sizemode', None)
+        self.sizemode = sizemode if sizemode is not None else _v
+        _v = arg.pop('sizeref', None)
+        self.sizeref = sizeref if sizeref is not None else _v
+        _v = arg.pop('sizesrc', None)
+        self.sizesrc = sizesrc if sizesrc is not None else _v
+        _v = arg.pop('symbol', None)
+        self.symbol = symbol if symbol is not None else _v
+        _v = arg.pop('symbolsrc', None)
+        self.symbolsrc = symbolsrc if symbolsrc is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

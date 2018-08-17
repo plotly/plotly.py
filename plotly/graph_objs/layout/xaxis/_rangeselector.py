@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Rangeselector(BaseLayoutHierarchyType):
@@ -223,6 +224,16 @@ class Rangeselector(BaseLayoutHierarchyType):
                     interval.
                 label
                     Sets the text label to appear on the button.
+                name
+                    When used in a template, named items are
+                    created in the output figure in addition to any
+                    items the figure already has in this array. You
+                    can modify these items in the output figure by
+                    making your own item with `templateitemname`
+                    matching this `name` alongside your
+                    modifications (including `visible: false` or
+                    `enabled: false` to hide it). Has no effect
+                    outside of a template.
                 step
                     The unit of measurement that the `count` value
                     will set the range by.
@@ -238,6 +249,20 @@ class Rangeselector(BaseLayoutHierarchyType):
                     to January 01 of the current year. Month and
                     year *todate* are currently available only for
                     the built-in (Gregorian) calendar.
+                templateitemname
+                    Used to refer to a named item in this array in
+                    the template. Named items from the template
+                    will be created even without a matching item in
+                    the input figure, but you can modify one by
+                    making an item with `templateitemname` matching
+                    its `name`, alongside your modifications
+                    (including `visible: false` or `enabled: false`
+                    to hide it). If there is no template or no
+                    matching item, this item will be hidden unless
+                    you explicitly show it with `visible: true`.
+                visible
+                    Determines whether or not this button is
+                    visible.
 
         Returns
         -------
@@ -454,6 +479,7 @@ class Rangeselector(BaseLayoutHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         activecolor=None,
         bgcolor=None,
         bordercolor=None,
@@ -472,6 +498,10 @@ class Rangeselector(BaseLayoutHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of
+            plotly.graph_objs.layout.xaxis.Rangeselector
         activecolor
             Sets the background color of the active range selector
             button.
@@ -514,6 +544,22 @@ class Rangeselector(BaseLayoutHierarchyType):
         """
         super(Rangeselector, self).__init__('rangeselector')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.xaxis.Rangeselector 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.xaxis.Rangeselector"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout.xaxis import (
@@ -539,18 +585,29 @@ class Rangeselector(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.activecolor = activecolor
-        self.bgcolor = bgcolor
-        self.bordercolor = bordercolor
-        self.borderwidth = borderwidth
-        self.buttons = buttons
-        self.font = font
-        self.visible = visible
-        self.x = x
-        self.xanchor = xanchor
-        self.y = y
-        self.yanchor = yanchor
+        _v = arg.pop('activecolor', None)
+        self.activecolor = activecolor if activecolor is not None else _v
+        _v = arg.pop('bgcolor', None)
+        self.bgcolor = bgcolor if bgcolor is not None else _v
+        _v = arg.pop('bordercolor', None)
+        self.bordercolor = bordercolor if bordercolor is not None else _v
+        _v = arg.pop('borderwidth', None)
+        self.borderwidth = borderwidth if borderwidth is not None else _v
+        _v = arg.pop('buttons', None)
+        self.buttons = buttons if buttons is not None else _v
+        _v = arg.pop('font', None)
+        self.font = font if font is not None else _v
+        _v = arg.pop('visible', None)
+        self.visible = visible if visible is not None else _v
+        _v = arg.pop('x', None)
+        self.x = x if x is not None else _v
+        _v = arg.pop('xanchor', None)
+        self.xanchor = xanchor if xanchor is not None else _v
+        _v = arg.pop('y', None)
+        self.y = y if y is not None else _v
+        _v = arg.pop('yanchor', None)
+        self.yanchor = yanchor if yanchor is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

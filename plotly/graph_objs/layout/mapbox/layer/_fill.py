@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Fill(BaseLayoutHierarchyType):
@@ -79,12 +80,16 @@ class Fill(BaseLayoutHierarchyType):
             `type` is set to *fill*.
         """
 
-    def __init__(self, outlinecolor=None, **kwargs):
+    def __init__(self, arg=None, outlinecolor=None, **kwargs):
         """
         Construct a new Fill object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of
+            plotly.graph_objs.layout.mapbox.layer.Fill
         outlinecolor
             Sets the fill outline color. Has an effect only when
             `type` is set to *fill*.
@@ -94,6 +99,22 @@ class Fill(BaseLayoutHierarchyType):
         Fill
         """
         super(Fill, self).__init__('fill')
+
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.mapbox.layer.Fill 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.mapbox.layer.Fill"""
+            )
 
         # Import validators
         # -----------------
@@ -105,8 +126,9 @@ class Fill(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.outlinecolor = outlinecolor
+        _v = arg.pop('outlinecolor', None)
+        self.outlinecolor = outlinecolor if outlinecolor is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

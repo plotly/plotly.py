@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceType
+import copy
 
 
 class Area(BaseTraceType):
@@ -221,11 +222,11 @@ class Area(BaseTraceType):
             Supported dict properties:
                 
                 color
-                    Sets the marker color. It accepts either a
+                    Sets themarkercolor. It accepts either a
                     specific color or an array of numbers that are
                     mapped to the colorscale relative to the max
                     and min values of the array or relative to
-                    `cmin` and `cmax` if set.
+                    `marker.cmin` and `marker.cmax` if set.
                 colorsrc
                     Sets the source reference on plot.ly for  color
                     .
@@ -590,6 +591,7 @@ class Area(BaseTraceType):
 
     def __init__(
         self,
+        arg=None,
         customdata=None,
         customdatasrc=None,
         hoverinfo=None,
@@ -617,6 +619,9 @@ class Area(BaseTraceType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Area
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -689,6 +694,22 @@ class Area(BaseTraceType):
         """
         super(Area, self).__init__('area')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Area 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Area"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators import (area as v_area)
@@ -718,35 +739,55 @@ class Area(BaseTraceType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.customdata = customdata
-        self.customdatasrc = customdatasrc
-        self.hoverinfo = hoverinfo
-        self.hoverinfosrc = hoverinfosrc
-        self.hoverlabel = hoverlabel
-        self.ids = ids
-        self.idssrc = idssrc
-        self.legendgroup = legendgroup
-        self.marker = marker
-        self.name = name
-        self.opacity = opacity
-        self.r = r
-        self.rsrc = rsrc
-        self.selectedpoints = selectedpoints
-        self.showlegend = showlegend
-        self.stream = stream
-        self.t = t
-        self.tsrc = tsrc
-        self.uid = uid
-        self.visible = visible
+        _v = arg.pop('customdata', None)
+        self.customdata = customdata if customdata is not None else _v
+        _v = arg.pop('customdatasrc', None)
+        self.customdatasrc = customdatasrc if customdatasrc is not None else _v
+        _v = arg.pop('hoverinfo', None)
+        self.hoverinfo = hoverinfo if hoverinfo is not None else _v
+        _v = arg.pop('hoverinfosrc', None)
+        self.hoverinfosrc = hoverinfosrc if hoverinfosrc is not None else _v
+        _v = arg.pop('hoverlabel', None)
+        self.hoverlabel = hoverlabel if hoverlabel is not None else _v
+        _v = arg.pop('ids', None)
+        self.ids = ids if ids is not None else _v
+        _v = arg.pop('idssrc', None)
+        self.idssrc = idssrc if idssrc is not None else _v
+        _v = arg.pop('legendgroup', None)
+        self.legendgroup = legendgroup if legendgroup is not None else _v
+        _v = arg.pop('marker', None)
+        self.marker = marker if marker is not None else _v
+        _v = arg.pop('name', None)
+        self.name = name if name is not None else _v
+        _v = arg.pop('opacity', None)
+        self.opacity = opacity if opacity is not None else _v
+        _v = arg.pop('r', None)
+        self.r = r if r is not None else _v
+        _v = arg.pop('rsrc', None)
+        self.rsrc = rsrc if rsrc is not None else _v
+        _v = arg.pop('selectedpoints', None)
+        self.selectedpoints = selectedpoints if selectedpoints is not None else _v
+        _v = arg.pop('showlegend', None)
+        self.showlegend = showlegend if showlegend is not None else _v
+        _v = arg.pop('stream', None)
+        self.stream = stream if stream is not None else _v
+        _v = arg.pop('t', None)
+        self.t = t if t is not None else _v
+        _v = arg.pop('tsrc', None)
+        self.tsrc = tsrc if tsrc is not None else _v
+        _v = arg.pop('uid', None)
+        self.uid = uid if uid is not None else _v
+        _v = arg.pop('visible', None)
+        self.visible = visible if visible is not None else _v
 
         # Read-only literals
         # ------------------
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'area'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='area'
+            plotly_name='type', parent_name='area', val='area'
         )
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

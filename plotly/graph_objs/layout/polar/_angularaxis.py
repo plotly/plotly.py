@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class AngularAxis(BaseLayoutHierarchyType):
@@ -882,6 +883,31 @@ class AngularAxis(BaseLayoutHierarchyType):
                     dtick values which describe some zoom level, it
                     is possible to omit *min* or *max* value by
                     passing *null*
+                enabled
+                    Determines whether or not this stop is used. If
+                    `false`, this stop is ignored even within its
+                    `dtickrange`.
+                name
+                    When used in a template, named items are
+                    created in the output figure in addition to any
+                    items the figure already has in this array. You
+                    can modify these items in the output figure by
+                    making your own item with `templateitemname`
+                    matching this `name` alongside your
+                    modifications (including `visible: false` or
+                    `enabled: false` to hide it). Has no effect
+                    outside of a template.
+                templateitemname
+                    Used to refer to a named item in this array in
+                    the template. Named items from the template
+                    will be created even without a matching item in
+                    the input figure, but you can modify one by
+                    making an item with `templateitemname` matching
+                    its `name`, alongside your modifications
+                    (including `visible: false` or `enabled: false`
+                    to hide it). If there is no template or no
+                    matching item, this item will be hidden unless
+                    you explicitly show it with `visible: true`.
                 value
                     string - dtickformat for described zoom level,
                     the same as *tickformat*
@@ -1373,6 +1399,7 @@ class AngularAxis(BaseLayoutHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         categoryarray=None,
         categoryarraysrc=None,
         categoryorder=None,
@@ -1422,6 +1449,10 @@ class AngularAxis(BaseLayoutHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of
+            plotly.graph_objs.layout.polar.AngularAxis
         categoryarray
             Sets the order in which categories on this axis appear.
             Only has an effect if `categoryorder` is set to
@@ -1630,6 +1661,22 @@ class AngularAxis(BaseLayoutHierarchyType):
         """
         super(AngularAxis, self).__init__('angularaxis')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.polar.AngularAxis 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.polar.AngularAxis"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout.polar import (
@@ -1693,49 +1740,91 @@ class AngularAxis(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.categoryarray = categoryarray
-        self.categoryarraysrc = categoryarraysrc
-        self.categoryorder = categoryorder
-        self.color = color
-        self.direction = direction
-        self.dtick = dtick
-        self.exponentformat = exponentformat
-        self.gridcolor = gridcolor
-        self.gridwidth = gridwidth
-        self.hoverformat = hoverformat
-        self.layer = layer
-        self.linecolor = linecolor
-        self.linewidth = linewidth
-        self.nticks = nticks
-        self.period = period
-        self.rotation = rotation
-        self.separatethousands = separatethousands
-        self.showexponent = showexponent
-        self.showgrid = showgrid
-        self.showline = showline
-        self.showticklabels = showticklabels
-        self.showtickprefix = showtickprefix
-        self.showticksuffix = showticksuffix
-        self.thetaunit = thetaunit
-        self.tick0 = tick0
-        self.tickangle = tickangle
-        self.tickcolor = tickcolor
-        self.tickfont = tickfont
-        self.tickformat = tickformat
-        self.tickformatstops = tickformatstops
-        self.ticklen = ticklen
-        self.tickmode = tickmode
-        self.tickprefix = tickprefix
-        self.ticks = ticks
-        self.ticksuffix = ticksuffix
-        self.ticktext = ticktext
-        self.ticktextsrc = ticktextsrc
-        self.tickvals = tickvals
-        self.tickvalssrc = tickvalssrc
-        self.tickwidth = tickwidth
-        self.type = type
-        self.visible = visible
+        _v = arg.pop('categoryarray', None)
+        self.categoryarray = categoryarray if categoryarray is not None else _v
+        _v = arg.pop('categoryarraysrc', None)
+        self.categoryarraysrc = categoryarraysrc if categoryarraysrc is not None else _v
+        _v = arg.pop('categoryorder', None)
+        self.categoryorder = categoryorder if categoryorder is not None else _v
+        _v = arg.pop('color', None)
+        self.color = color if color is not None else _v
+        _v = arg.pop('direction', None)
+        self.direction = direction if direction is not None else _v
+        _v = arg.pop('dtick', None)
+        self.dtick = dtick if dtick is not None else _v
+        _v = arg.pop('exponentformat', None)
+        self.exponentformat = exponentformat if exponentformat is not None else _v
+        _v = arg.pop('gridcolor', None)
+        self.gridcolor = gridcolor if gridcolor is not None else _v
+        _v = arg.pop('gridwidth', None)
+        self.gridwidth = gridwidth if gridwidth is not None else _v
+        _v = arg.pop('hoverformat', None)
+        self.hoverformat = hoverformat if hoverformat is not None else _v
+        _v = arg.pop('layer', None)
+        self.layer = layer if layer is not None else _v
+        _v = arg.pop('linecolor', None)
+        self.linecolor = linecolor if linecolor is not None else _v
+        _v = arg.pop('linewidth', None)
+        self.linewidth = linewidth if linewidth is not None else _v
+        _v = arg.pop('nticks', None)
+        self.nticks = nticks if nticks is not None else _v
+        _v = arg.pop('period', None)
+        self.period = period if period is not None else _v
+        _v = arg.pop('rotation', None)
+        self.rotation = rotation if rotation is not None else _v
+        _v = arg.pop('separatethousands', None)
+        self.separatethousands = separatethousands if separatethousands is not None else _v
+        _v = arg.pop('showexponent', None)
+        self.showexponent = showexponent if showexponent is not None else _v
+        _v = arg.pop('showgrid', None)
+        self.showgrid = showgrid if showgrid is not None else _v
+        _v = arg.pop('showline', None)
+        self.showline = showline if showline is not None else _v
+        _v = arg.pop('showticklabels', None)
+        self.showticklabels = showticklabels if showticklabels is not None else _v
+        _v = arg.pop('showtickprefix', None)
+        self.showtickprefix = showtickprefix if showtickprefix is not None else _v
+        _v = arg.pop('showticksuffix', None)
+        self.showticksuffix = showticksuffix if showticksuffix is not None else _v
+        _v = arg.pop('thetaunit', None)
+        self.thetaunit = thetaunit if thetaunit is not None else _v
+        _v = arg.pop('tick0', None)
+        self.tick0 = tick0 if tick0 is not None else _v
+        _v = arg.pop('tickangle', None)
+        self.tickangle = tickangle if tickangle is not None else _v
+        _v = arg.pop('tickcolor', None)
+        self.tickcolor = tickcolor if tickcolor is not None else _v
+        _v = arg.pop('tickfont', None)
+        self.tickfont = tickfont if tickfont is not None else _v
+        _v = arg.pop('tickformat', None)
+        self.tickformat = tickformat if tickformat is not None else _v
+        _v = arg.pop('tickformatstops', None)
+        self.tickformatstops = tickformatstops if tickformatstops is not None else _v
+        _v = arg.pop('ticklen', None)
+        self.ticklen = ticklen if ticklen is not None else _v
+        _v = arg.pop('tickmode', None)
+        self.tickmode = tickmode if tickmode is not None else _v
+        _v = arg.pop('tickprefix', None)
+        self.tickprefix = tickprefix if tickprefix is not None else _v
+        _v = arg.pop('ticks', None)
+        self.ticks = ticks if ticks is not None else _v
+        _v = arg.pop('ticksuffix', None)
+        self.ticksuffix = ticksuffix if ticksuffix is not None else _v
+        _v = arg.pop('ticktext', None)
+        self.ticktext = ticktext if ticktext is not None else _v
+        _v = arg.pop('ticktextsrc', None)
+        self.ticktextsrc = ticktextsrc if ticktextsrc is not None else _v
+        _v = arg.pop('tickvals', None)
+        self.tickvals = tickvals if tickvals is not None else _v
+        _v = arg.pop('tickvalssrc', None)
+        self.tickvalssrc = tickvalssrc if tickvalssrc is not None else _v
+        _v = arg.pop('tickwidth', None)
+        self.tickwidth = tickwidth if tickwidth is not None else _v
+        _v = arg.pop('type', None)
+        self.type = type if type is not None else _v
+        _v = arg.pop('visible', None)
+        self.visible = visible if visible is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

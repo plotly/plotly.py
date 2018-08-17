@@ -11,7 +11,8 @@ def validator():
 
 
 @pytest.fixture(params=['Greys', 'YlGnBu', 'Greens', 'YlOrRd', 'Bluered', 'RdBu', 'Reds', 'Blues',
-                        'Picnic', 'Rainbow', 'Portland', 'Jet', 'Hot', 'Blackbody', 'Earth', 'Electric', 'Viridis'])
+                        'Picnic', 'Rainbow', 'Portland', 'Jet', 'Hot', 'Blackbody', 'Earth', 'Electric', 
+                        'Viridis', 'Cividis'])
 def named_colorscale(request):
     return request.param
 
@@ -26,6 +27,8 @@ def test_acceptance_named(named_colorscale, validator: ColorscaleValidator):
     # Uppercase
     assert (validator.validate_coerce(named_colorscale.upper()) ==
            named_colorscale.upper())
+    
+    assert validator.present(named_colorscale) == named_colorscale
 
 # ### Acceptance as array ###
 @pytest.mark.parametrize('val', [

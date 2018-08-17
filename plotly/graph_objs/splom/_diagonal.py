@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Diagonal(BaseTraceHierarchyType):
@@ -40,12 +41,15 @@ class Diagonal(BaseTraceHierarchyType):
             displayed.
         """
 
-    def __init__(self, visible=None, **kwargs):
+    def __init__(self, arg=None, visible=None, **kwargs):
         """
         Construct a new Diagonal object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.splom.Diagonal
         visible
             Determines whether or not subplots on the diagonal are
             displayed.
@@ -55,6 +59,22 @@ class Diagonal(BaseTraceHierarchyType):
         Diagonal
         """
         super(Diagonal, self).__init__('diagonal')
+
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.splom.Diagonal 
+constructor must be a dict or 
+an instance of plotly.graph_objs.splom.Diagonal"""
+            )
 
         # Import validators
         # -----------------
@@ -66,8 +86,9 @@ class Diagonal(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.visible = visible
+        _v = arg.pop('visible', None)
+        self.visible = visible if visible is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceType
+import copy
 
 
 class Carpet(BaseTraceType):
@@ -1399,6 +1400,7 @@ class Carpet(BaseTraceType):
 
     def __init__(
         self,
+        arg=None,
         a=None,
         a0=None,
         aaxis=None,
@@ -1448,6 +1450,9 @@ class Carpet(BaseTraceType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Carpet
         a
             An array containing values of the first parameter value
         a0
@@ -1571,6 +1576,22 @@ class Carpet(BaseTraceType):
         """
         super(Carpet, self).__init__('carpet')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Carpet 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Carpet"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators import (carpet as v_carpet)
@@ -1615,50 +1636,85 @@ class Carpet(BaseTraceType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.a = a
-        self.a0 = a0
-        self.aaxis = aaxis
-        self.asrc = asrc
-        self.b = b
-        self.b0 = b0
-        self.baxis = baxis
-        self.bsrc = bsrc
-        self.carpet = carpet
-        self.cheaterslope = cheaterslope
-        self.color = color
-        self.customdata = customdata
-        self.customdatasrc = customdatasrc
-        self.da = da
-        self.db = db
-        self.font = font
-        self.hoverinfo = hoverinfo
-        self.hoverinfosrc = hoverinfosrc
-        self.hoverlabel = hoverlabel
-        self.ids = ids
-        self.idssrc = idssrc
-        self.legendgroup = legendgroup
-        self.name = name
-        self.opacity = opacity
-        self.selectedpoints = selectedpoints
-        self.showlegend = showlegend
-        self.stream = stream
-        self.uid = uid
-        self.visible = visible
-        self.x = x
-        self.xaxis = xaxis
-        self.xsrc = xsrc
-        self.y = y
-        self.yaxis = yaxis
-        self.ysrc = ysrc
+        _v = arg.pop('a', None)
+        self.a = a if a is not None else _v
+        _v = arg.pop('a0', None)
+        self.a0 = a0 if a0 is not None else _v
+        _v = arg.pop('aaxis', None)
+        self.aaxis = aaxis if aaxis is not None else _v
+        _v = arg.pop('asrc', None)
+        self.asrc = asrc if asrc is not None else _v
+        _v = arg.pop('b', None)
+        self.b = b if b is not None else _v
+        _v = arg.pop('b0', None)
+        self.b0 = b0 if b0 is not None else _v
+        _v = arg.pop('baxis', None)
+        self.baxis = baxis if baxis is not None else _v
+        _v = arg.pop('bsrc', None)
+        self.bsrc = bsrc if bsrc is not None else _v
+        _v = arg.pop('carpet', None)
+        self.carpet = carpet if carpet is not None else _v
+        _v = arg.pop('cheaterslope', None)
+        self.cheaterslope = cheaterslope if cheaterslope is not None else _v
+        _v = arg.pop('color', None)
+        self.color = color if color is not None else _v
+        _v = arg.pop('customdata', None)
+        self.customdata = customdata if customdata is not None else _v
+        _v = arg.pop('customdatasrc', None)
+        self.customdatasrc = customdatasrc if customdatasrc is not None else _v
+        _v = arg.pop('da', None)
+        self.da = da if da is not None else _v
+        _v = arg.pop('db', None)
+        self.db = db if db is not None else _v
+        _v = arg.pop('font', None)
+        self.font = font if font is not None else _v
+        _v = arg.pop('hoverinfo', None)
+        self.hoverinfo = hoverinfo if hoverinfo is not None else _v
+        _v = arg.pop('hoverinfosrc', None)
+        self.hoverinfosrc = hoverinfosrc if hoverinfosrc is not None else _v
+        _v = arg.pop('hoverlabel', None)
+        self.hoverlabel = hoverlabel if hoverlabel is not None else _v
+        _v = arg.pop('ids', None)
+        self.ids = ids if ids is not None else _v
+        _v = arg.pop('idssrc', None)
+        self.idssrc = idssrc if idssrc is not None else _v
+        _v = arg.pop('legendgroup', None)
+        self.legendgroup = legendgroup if legendgroup is not None else _v
+        _v = arg.pop('name', None)
+        self.name = name if name is not None else _v
+        _v = arg.pop('opacity', None)
+        self.opacity = opacity if opacity is not None else _v
+        _v = arg.pop('selectedpoints', None)
+        self.selectedpoints = selectedpoints if selectedpoints is not None else _v
+        _v = arg.pop('showlegend', None)
+        self.showlegend = showlegend if showlegend is not None else _v
+        _v = arg.pop('stream', None)
+        self.stream = stream if stream is not None else _v
+        _v = arg.pop('uid', None)
+        self.uid = uid if uid is not None else _v
+        _v = arg.pop('visible', None)
+        self.visible = visible if visible is not None else _v
+        _v = arg.pop('x', None)
+        self.x = x if x is not None else _v
+        _v = arg.pop('xaxis', None)
+        self.xaxis = xaxis if xaxis is not None else _v
+        _v = arg.pop('xsrc', None)
+        self.xsrc = xsrc if xsrc is not None else _v
+        _v = arg.pop('y', None)
+        self.y = y if y is not None else _v
+        _v = arg.pop('yaxis', None)
+        self.yaxis = yaxis if yaxis is not None else _v
+        _v = arg.pop('ysrc', None)
+        self.ysrc = ysrc if ysrc is not None else _v
 
         # Read-only literals
         # ------------------
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'carpet'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='carpet'
+            plotly_name='type', parent_name='carpet', val='carpet'
         )
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

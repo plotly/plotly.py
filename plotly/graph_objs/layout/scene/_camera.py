@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Camera(BaseLayoutHierarchyType):
@@ -130,12 +131,15 @@ class Camera(BaseLayoutHierarchyType):
             z: 1}* which means that the z axis points up.
         """
 
-    def __init__(self, center=None, eye=None, up=None, **kwargs):
+    def __init__(self, arg=None, center=None, eye=None, up=None, **kwargs):
         """
         Construct a new Camera object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.layout.scene.Camera
         center
             Sets the (x,y,z) components of the 'center' camera
             vector This vector determines the translation (x,y,z)
@@ -157,6 +161,22 @@ class Camera(BaseLayoutHierarchyType):
         """
         super(Camera, self).__init__('camera')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.scene.Camera 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.scene.Camera"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout.scene import (camera as v_camera)
@@ -169,10 +189,13 @@ class Camera(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.center = center
-        self.eye = eye
-        self.up = up
+        _v = arg.pop('center', None)
+        self.center = center if center is not None else _v
+        _v = arg.pop('eye', None)
+        self.eye = eye if eye is not None else _v
+        _v = arg.pop('up', None)
+        self.up = up if up is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

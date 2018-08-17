@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Insidetextfont(BaseTraceHierarchyType):
@@ -140,7 +141,7 @@ class Insidetextfont(BaseTraceHierarchyType):
 
         """
 
-    def __init__(self, color=None, family=None, size=None, **kwargs):
+    def __init__(self, arg=None, color=None, family=None, size=None, **kwargs):
         """
         Construct a new Insidetextfont object
         
@@ -148,6 +149,9 @@ class Insidetextfont(BaseTraceHierarchyType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.pie.Insidetextfont
         color
 
         family
@@ -173,6 +177,22 @@ class Insidetextfont(BaseTraceHierarchyType):
         """
         super(Insidetextfont, self).__init__('insidetextfont')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.pie.Insidetextfont 
+constructor must be a dict or 
+an instance of plotly.graph_objs.pie.Insidetextfont"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.pie import (insidetextfont as v_insidetextfont)
@@ -185,10 +205,13 @@ class Insidetextfont(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.color = color
-        self.family = family
-        self.size = size
+        _v = arg.pop('color', None)
+        self.color = color if color is not None else _v
+        _v = arg.pop('family', None)
+        self.family = family if family is not None else _v
+        _v = arg.pop('size', None)
+        self.size = size if size is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

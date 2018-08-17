@@ -15,55 +15,44 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 cone's center of mass which corresponds to 1/4
                 from the tail to tip.
             autocolorscale
-                Has an effect only if `color` is set to a
-                numerical array. Determines whether the
-                colorscale is a default palette
-                (`autocolorscale: true`) or the palette
+                Determines whether the colorscale is a default
+                palette (`autocolorscale: true`) or the palette
                 determined by `colorscale`. In case
                 `colorscale` is unspecified or `autocolorscale`
                 is true, the default  palette will be chosen
                 according to whether numbers in the `color`
                 array are all positive, all negative or mixed.
             cauto
-                Has an effect only if `color` is set to a
-                numerical array and `cmin`, `cmax` are set by
-                the user. In this case, it controls whether the
-                range of colors in `colorscale` is mapped to
-                the range of values in the `color` array
-                (`cauto: true`), or the `cmin`/`cmax` values
-                (`cauto: false`). Defaults to `false` when
-                `cmin`, `cmax` are set by the user.
+                Determines whether or not the color domain is
+                computed with respect to the input data (here
+                u/v/w norm) or the bounds set in `cmin` and
+                `cmax`  Defaults to `false` when `cmin` and
+                `cmax` are set by the user.
             cmax
-                Has an effect only if `color` is set to a
-                numerical array. Sets the upper bound of the
-                color domain. Value should be associated to the
-                `color` array index, and if set, `cmin` must be
-                set as well.
+                Sets the upper bound of the color domain. Value
+                should have the same units as u/v/w norm and if
+                set, `cmin` must be set as well.
             cmin
-                Has an effect only if `color` is set to a
-                numerical array. Sets the lower bound of the
-                color domain. Value should be associated to the
-                `color` array index, and if set, `cmax` must be
-                set as well.
+                Sets the lower bound of the color domain. Value
+                should have the same units as u/v/w norm and if
+                set, `cmax` must be set as well.
             colorbar
                 plotly.graph_objs.cone.ColorBar instance or
                 dict with compatible properties
             colorscale
-                Sets the colorscale and only has an effect if
-                `color` is set to a numerical array. The
-                colorscale must be an array containing arrays
-                mapping a normalized value to an rgb, rgba,
-                hex, hsl, hsv, or named color string. At
-                minimum, a mapping for the lowest (0) and
-                highest (1) values are required. For example,
-                `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To
-                control the bounds of the colorscale in color
-                space, use `cmin` and `cmax`. Alternatively,
-                `colorscale` may be a palette name string of
-                the following list: Greys, YlGnBu, Greens,
-                YlOrRd, Bluered, RdBu, Reds, Blues, Picnic,
-                Rainbow, Portland, Jet, Hot, Blackbody, Earth,
-                Electric, Viridis, Cividis
+                Sets the colorscale. The colorscale must be an
+                array containing arrays mapping a normalized
+                value to an rgb, rgba, hex, hsl, hsv, or named
+                color string. At minimum, a mapping for the
+                lowest (0) and highest (1) values are required.
+                For example, `[[0, 'rgb(0,0,255)', [1,
+                'rgb(255,0,0)']]`. To control the bounds of the
+                colorscale in color space, use`cmin` and
+                `cmax`. Alternatively, `colorscale` may be a
+                palette name string of the following list: Grey
+                s,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Blues,
+                Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth
+                ,Electric,Viridis,Cividis.
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -108,11 +97,10 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
             opacity
                 Sets the opacity of the surface.
             reversescale
-                Has an effect only if `color` is set to a
-                numerical array. Reverses the color mapping if
-                true (`cmin` will correspond to the last color
-                in the array and `cmax` will correspond to the
-                first color).
+                Reverses the color mapping if true. If true,
+                `cmin` will correspond to the last color in the
+                array and `cmax` will correspond to the first
+                color.
             scene
                 Sets a reference between this trace's 3D
                 coordinate system and a 3D scene. If *scene*
@@ -136,14 +124,26 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not a colorbar is
                 displayed for this trace.
             sizemode
-                Sets the mode by which the cones are sized. If
-                *scaled*, `sizeref` scales such that the
-                reference cone size for the maximum vector
-                magnitude is 1. If *absolute*, `sizeref` scales
-                such that the reference cone size for vector
-                magnitude 1 is one grid unit.
+                Determines whether `sizeref` is set as a
+                *scaled* (i.e unitless) scalar (normalized by
+                the max u/v/w norm in the vector field) or as
+                *absolute* value (in the same units as the
+                vector field).
             sizeref
-                Sets the cone size reference value.
+                Adjusts the cone size scaling. The size of the
+                cones is determined by their u/v/w norm
+                multiplied a factor and `sizeref`. This factor
+                (computed internally) corresponds to the
+                minimum "time" to travel across two successive
+                x/y/z positions at the average velocity of
+                those two successive positions. All cones in a
+                given trace use the same factor. With
+                `sizemode` set to *scaled*, `sizeref` is
+                unitless, its default value is *0.5* With
+                `sizemode` set to *absolute*, `sizeref` has the
+                same units as the u/v/w vector field, its the
+                default value is half the sample's maximum
+                vector norm.
             stream
                 plotly.graph_objs.cone.Stream instance or dict
                 with compatible properties

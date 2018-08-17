@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceType
+import copy
 
 
 class Box(BaseTraceType):
@@ -406,11 +407,11 @@ class Box(BaseTraceType):
             Supported dict properties:
                 
                 color
-                    Sets the marker color. It accepts either a
+                    Sets themarkercolor. It accepts either a
                     specific color or an array of numbers that are
                     mapped to the colorscale relative to the max
                     and min values of the array or relative to
-                    `cmin` and `cmax` if set.
+                    `marker.cmin` and `marker.cmax` if set.
                 line
                     plotly.graph_objs.box.marker.Line instance or
                     dict with compatible properties
@@ -1199,6 +1200,7 @@ class Box(BaseTraceType):
 
     def __init__(
         self,
+        arg=None,
         boxmean=None,
         boxpoints=None,
         customdata=None,
@@ -1258,6 +1260,9 @@ class Box(BaseTraceType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Box
         boxmean
             If *true*, the mean of the box(es)' underlying
             distribution is drawn as a dashed line inside the
@@ -1415,6 +1420,22 @@ class Box(BaseTraceType):
         """
         super(Box, self).__init__('box')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Box 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Box"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators import (box as v_box)
@@ -1465,56 +1486,97 @@ class Box(BaseTraceType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.boxmean = boxmean
-        self.boxpoints = boxpoints
-        self.customdata = customdata
-        self.customdatasrc = customdatasrc
-        self.fillcolor = fillcolor
-        self.hoverinfo = hoverinfo
-        self.hoverinfosrc = hoverinfosrc
-        self.hoverlabel = hoverlabel
-        self.hoveron = hoveron
-        self.ids = ids
-        self.idssrc = idssrc
-        self.jitter = jitter
-        self.legendgroup = legendgroup
-        self.line = line
-        self.marker = marker
-        self.name = name
-        self.notched = notched
-        self.notchwidth = notchwidth
-        self.opacity = opacity
-        self.orientation = orientation
-        self.pointpos = pointpos
-        self.selected = selected
-        self.selectedpoints = selectedpoints
-        self.showlegend = showlegend
-        self.stream = stream
-        self.text = text
-        self.textsrc = textsrc
-        self.uid = uid
-        self.unselected = unselected
-        self.visible = visible
-        self.whiskerwidth = whiskerwidth
-        self.x = x
-        self.x0 = x0
-        self.xaxis = xaxis
-        self.xcalendar = xcalendar
-        self.xsrc = xsrc
-        self.y = y
-        self.y0 = y0
-        self.yaxis = yaxis
-        self.ycalendar = ycalendar
-        self.ysrc = ysrc
+        _v = arg.pop('boxmean', None)
+        self.boxmean = boxmean if boxmean is not None else _v
+        _v = arg.pop('boxpoints', None)
+        self.boxpoints = boxpoints if boxpoints is not None else _v
+        _v = arg.pop('customdata', None)
+        self.customdata = customdata if customdata is not None else _v
+        _v = arg.pop('customdatasrc', None)
+        self.customdatasrc = customdatasrc if customdatasrc is not None else _v
+        _v = arg.pop('fillcolor', None)
+        self.fillcolor = fillcolor if fillcolor is not None else _v
+        _v = arg.pop('hoverinfo', None)
+        self.hoverinfo = hoverinfo if hoverinfo is not None else _v
+        _v = arg.pop('hoverinfosrc', None)
+        self.hoverinfosrc = hoverinfosrc if hoverinfosrc is not None else _v
+        _v = arg.pop('hoverlabel', None)
+        self.hoverlabel = hoverlabel if hoverlabel is not None else _v
+        _v = arg.pop('hoveron', None)
+        self.hoveron = hoveron if hoveron is not None else _v
+        _v = arg.pop('ids', None)
+        self.ids = ids if ids is not None else _v
+        _v = arg.pop('idssrc', None)
+        self.idssrc = idssrc if idssrc is not None else _v
+        _v = arg.pop('jitter', None)
+        self.jitter = jitter if jitter is not None else _v
+        _v = arg.pop('legendgroup', None)
+        self.legendgroup = legendgroup if legendgroup is not None else _v
+        _v = arg.pop('line', None)
+        self.line = line if line is not None else _v
+        _v = arg.pop('marker', None)
+        self.marker = marker if marker is not None else _v
+        _v = arg.pop('name', None)
+        self.name = name if name is not None else _v
+        _v = arg.pop('notched', None)
+        self.notched = notched if notched is not None else _v
+        _v = arg.pop('notchwidth', None)
+        self.notchwidth = notchwidth if notchwidth is not None else _v
+        _v = arg.pop('opacity', None)
+        self.opacity = opacity if opacity is not None else _v
+        _v = arg.pop('orientation', None)
+        self.orientation = orientation if orientation is not None else _v
+        _v = arg.pop('pointpos', None)
+        self.pointpos = pointpos if pointpos is not None else _v
+        _v = arg.pop('selected', None)
+        self.selected = selected if selected is not None else _v
+        _v = arg.pop('selectedpoints', None)
+        self.selectedpoints = selectedpoints if selectedpoints is not None else _v
+        _v = arg.pop('showlegend', None)
+        self.showlegend = showlegend if showlegend is not None else _v
+        _v = arg.pop('stream', None)
+        self.stream = stream if stream is not None else _v
+        _v = arg.pop('text', None)
+        self.text = text if text is not None else _v
+        _v = arg.pop('textsrc', None)
+        self.textsrc = textsrc if textsrc is not None else _v
+        _v = arg.pop('uid', None)
+        self.uid = uid if uid is not None else _v
+        _v = arg.pop('unselected', None)
+        self.unselected = unselected if unselected is not None else _v
+        _v = arg.pop('visible', None)
+        self.visible = visible if visible is not None else _v
+        _v = arg.pop('whiskerwidth', None)
+        self.whiskerwidth = whiskerwidth if whiskerwidth is not None else _v
+        _v = arg.pop('x', None)
+        self.x = x if x is not None else _v
+        _v = arg.pop('x0', None)
+        self.x0 = x0 if x0 is not None else _v
+        _v = arg.pop('xaxis', None)
+        self.xaxis = xaxis if xaxis is not None else _v
+        _v = arg.pop('xcalendar', None)
+        self.xcalendar = xcalendar if xcalendar is not None else _v
+        _v = arg.pop('xsrc', None)
+        self.xsrc = xsrc if xsrc is not None else _v
+        _v = arg.pop('y', None)
+        self.y = y if y is not None else _v
+        _v = arg.pop('y0', None)
+        self.y0 = y0 if y0 is not None else _v
+        _v = arg.pop('yaxis', None)
+        self.yaxis = yaxis if yaxis is not None else _v
+        _v = arg.pop('ycalendar', None)
+        self.ycalendar = ycalendar if ycalendar is not None else _v
+        _v = arg.pop('ysrc', None)
+        self.ysrc = ysrc if ysrc is not None else _v
 
         # Read-only literals
         # ------------------
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'box'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='box'
+            plotly_name='type', parent_name='box', val='box'
         )
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

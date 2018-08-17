@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Transition(BaseLayoutHierarchyType):
@@ -69,12 +70,16 @@ class Transition(BaseLayoutHierarchyType):
             Sets the easing function of the slider transition
         """
 
-    def __init__(self, duration=None, easing=None, **kwargs):
+    def __init__(self, arg=None, duration=None, easing=None, **kwargs):
         """
         Construct a new Transition object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of
+            plotly.graph_objs.layout.slider.Transition
         duration
             Sets the duration of the slider transition
         easing
@@ -85,6 +90,22 @@ class Transition(BaseLayoutHierarchyType):
         Transition
         """
         super(Transition, self).__init__('transition')
+
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.slider.Transition 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.slider.Transition"""
+            )
 
         # Import validators
         # -----------------
@@ -99,9 +120,11 @@ class Transition(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.duration = duration
-        self.easing = easing
+        _v = arg.pop('duration', None)
+        self.duration = duration if duration is not None else _v
+        _v = arg.pop('easing', None)
+        self.easing = easing if easing is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

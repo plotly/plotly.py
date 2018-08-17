@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceType
+import copy
 
 
 class Contour(BaseTraceType):
@@ -8,8 +9,12 @@ class Contour(BaseTraceType):
     @property
     def autocolorscale(self):
         """
-        Determines whether or not the colorscale is picked using the
-        sign of the input z values.
+        Determines whether the colorscale is a default palette
+        (`autocolorscale: true`) or the palette determined by
+        `colorscale`. In case `colorscale` is unspecified or
+        `autocolorscale` is true, the default  palette will be chosen
+        according to whether numbers in the `color` array are all
+        positive, all negative or mixed.
     
         The 'autocolorscale' property must be specified as a bool
         (either True, or False)
@@ -275,7 +280,11 @@ class Contour(BaseTraceType):
         hsv, or named color string. At minimum, a mapping for the
         lowest (0) and highest (1) values are required. For example,
         `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the
-        bounds of the colorscale in z space, use zmin and zmax
+        bounds of the colorscale in color space, use`zmin` and `zmax`.
+        Alternatively, `colorscale` may be a palette name string of the
+        following list: Greys,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Bl
+        ues,Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth,Electric,Vi
+        ridis,Cividis.
     
         The 'colorscale' property is a colorscale and may be
         specified as:
@@ -821,7 +830,9 @@ class Contour(BaseTraceType):
     @property
     def reversescale(self):
         """
-        Reverses the colorscale.
+        Reverses the color mapping if true. If true, `zmin` will
+        correspond to the last color in the array and `zmax` will
+        correspond to the first color.
     
         The 'reversescale' property must be specified as a bool
         (either True, or False)
@@ -1330,8 +1341,10 @@ class Contour(BaseTraceType):
     @property
     def zauto(self):
         """
-        Determines the whether or not the color domain is computed with
-        respect to the input data.
+        Determines whether or not the color domain is computed with
+        respect to the input data (here in `z`) or the bounds set in
+        `zmin` and `zmax`  Defaults to `false` when `zmin` and `zmax`
+        are set by the user.
     
         The 'zauto' property must be specified as a bool
         (either True, or False)
@@ -1374,7 +1387,8 @@ class Contour(BaseTraceType):
     @property
     def zmax(self):
         """
-        Sets the upper bound of color domain.
+        Sets the upper bound of the color domain. Value should have the
+        same units as in `z` and if set, `zmin` must be set as well.
     
         The 'zmax' property is a number and may be specified as:
           - An int or float
@@ -1394,7 +1408,8 @@ class Contour(BaseTraceType):
     @property
     def zmin(self):
         """
-        Sets the lower bound of color domain.
+        Sets the lower bound of the color domain. Value should have the
+        same units as in `z` and if set, `zmax` must be set as well.
     
         The 'zmin' property is a number and may be specified as:
           - An int or float
@@ -1447,8 +1462,12 @@ class Contour(BaseTraceType):
     def _prop_descriptions(self):
         return """\
         autocolorscale
-            Determines whether or not the colorscale is picked
-            using the sign of the input z values.
+            Determines whether the colorscale is a default palette
+            (`autocolorscale: true`) or the palette determined by
+            `colorscale`. In case `colorscale` is unspecified or
+            `autocolorscale` is true, the default  palette will be
+            chosen according to whether numbers in the `color`
+            array are all positive, all negative or mixed.
         autocontour
             Determines whether or not the contour level attributes
             are picked by an algorithm. If *true*, the number of
@@ -1464,7 +1483,11 @@ class Contour(BaseTraceType):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)', [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in z space, use zmin and zmax
+            colorscale in color space, use`zmin` and `zmax`.
+            Alternatively, `colorscale` may be a palette name
+            string of the following list: Greys,YlGnBu,Greens,YlOrR
+            d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
+            ot,Blackbody,Earth,Electric,Viridis,Cividis.
         connectgaps
             Determines whether or not gaps (i.e. {nan} or missing
             values) in the `z` data are filled in.
@@ -1522,7 +1545,9 @@ class Contour(BaseTraceType):
         opacity
             Sets the opacity of the trace.
         reversescale
-            Reverses the colorscale.
+            Reverses the color mapping if true. If true, `zmin`
+            will correspond to the last color in the array and
+            `zmax` will correspond to the first color.
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -1597,23 +1622,30 @@ class Contour(BaseTraceType):
         z
             Sets the z data.
         zauto
-            Determines the whether or not the color domain is
-            computed with respect to the input data.
+            Determines whether or not the color domain is computed
+            with respect to the input data (here in `z`) or the
+            bounds set in `zmin` and `zmax`  Defaults to `false`
+            when `zmin` and `zmax` are set by the user.
         zhoverformat
             Sets the hover text formatting rule using d3 formatting
             mini-languages which are very similar to those in
             Python. See: https://github.com/d3/d3-format/blob/maste
             r/README.md#locale_format
         zmax
-            Sets the upper bound of color domain.
+            Sets the upper bound of the color domain. Value should
+            have the same units as in `z` and if set, `zmin` must
+            be set as well.
         zmin
-            Sets the lower bound of color domain.
+            Sets the lower bound of the color domain. Value should
+            have the same units as in `z` and if set, `zmax` must
+            be set as well.
         zsrc
             Sets the source reference on plot.ly for  z .
         """
 
     def __init__(
         self,
+        arg=None,
         autocolorscale=None,
         autocontour=None,
         colorbar=None,
@@ -1678,9 +1710,16 @@ class Contour(BaseTraceType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Contour
         autocolorscale
-            Determines whether or not the colorscale is picked
-            using the sign of the input z values.
+            Determines whether the colorscale is a default palette
+            (`autocolorscale: true`) or the palette determined by
+            `colorscale`. In case `colorscale` is unspecified or
+            `autocolorscale` is true, the default  palette will be
+            chosen according to whether numbers in the `color`
+            array are all positive, all negative or mixed.
         autocontour
             Determines whether or not the contour level attributes
             are picked by an algorithm. If *true*, the number of
@@ -1696,7 +1735,11 @@ class Contour(BaseTraceType):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)', [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in z space, use zmin and zmax
+            colorscale in color space, use`zmin` and `zmax`.
+            Alternatively, `colorscale` may be a palette name
+            string of the following list: Greys,YlGnBu,Greens,YlOrR
+            d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
+            ot,Blackbody,Earth,Electric,Viridis,Cividis.
         connectgaps
             Determines whether or not gaps (i.e. {nan} or missing
             values) in the `z` data are filled in.
@@ -1754,7 +1797,9 @@ class Contour(BaseTraceType):
         opacity
             Sets the opacity of the trace.
         reversescale
-            Reverses the colorscale.
+            Reverses the color mapping if true. If true, `zmin`
+            will correspond to the last color in the array and
+            `zmax` will correspond to the first color.
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -1829,17 +1874,23 @@ class Contour(BaseTraceType):
         z
             Sets the z data.
         zauto
-            Determines the whether or not the color domain is
-            computed with respect to the input data.
+            Determines whether or not the color domain is computed
+            with respect to the input data (here in `z`) or the
+            bounds set in `zmin` and `zmax`  Defaults to `false`
+            when `zmin` and `zmax` are set by the user.
         zhoverformat
             Sets the hover text formatting rule using d3 formatting
             mini-languages which are very similar to those in
             Python. See: https://github.com/d3/d3-format/blob/maste
             r/README.md#locale_format
         zmax
-            Sets the upper bound of color domain.
+            Sets the upper bound of the color domain. Value should
+            have the same units as in `z` and if set, `zmin` must
+            be set as well.
         zmin
-            Sets the lower bound of color domain.
+            Sets the lower bound of the color domain. Value should
+            have the same units as in `z` and if set, `zmax` must
+            be set as well.
         zsrc
             Sets the source reference on plot.ly for  z .
 
@@ -1848,6 +1899,22 @@ class Contour(BaseTraceType):
         Contour
         """
         super(Contour, self).__init__('contour')
+
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Contour 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Contour"""
+            )
 
         # Import validators
         # -----------------
@@ -1909,64 +1976,113 @@ class Contour(BaseTraceType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.autocolorscale = autocolorscale
-        self.autocontour = autocontour
-        self.colorbar = colorbar
-        self.colorscale = colorscale
-        self.connectgaps = connectgaps
-        self.contours = contours
-        self.customdata = customdata
-        self.customdatasrc = customdatasrc
-        self.dx = dx
-        self.dy = dy
-        self.fillcolor = fillcolor
-        self.hoverinfo = hoverinfo
-        self.hoverinfosrc = hoverinfosrc
-        self.hoverlabel = hoverlabel
-        self.ids = ids
-        self.idssrc = idssrc
-        self.legendgroup = legendgroup
-        self.line = line
-        self.name = name
-        self.ncontours = ncontours
-        self.opacity = opacity
-        self.reversescale = reversescale
-        self.selectedpoints = selectedpoints
-        self.showlegend = showlegend
-        self.showscale = showscale
-        self.stream = stream
-        self.text = text
-        self.textsrc = textsrc
-        self.transpose = transpose
-        self.uid = uid
-        self.visible = visible
-        self.x = x
-        self.x0 = x0
-        self.xaxis = xaxis
-        self.xcalendar = xcalendar
-        self.xsrc = xsrc
-        self.xtype = xtype
-        self.y = y
-        self.y0 = y0
-        self.yaxis = yaxis
-        self.ycalendar = ycalendar
-        self.ysrc = ysrc
-        self.ytype = ytype
-        self.z = z
-        self.zauto = zauto
-        self.zhoverformat = zhoverformat
-        self.zmax = zmax
-        self.zmin = zmin
-        self.zsrc = zsrc
+        _v = arg.pop('autocolorscale', None)
+        self.autocolorscale = autocolorscale if autocolorscale is not None else _v
+        _v = arg.pop('autocontour', None)
+        self.autocontour = autocontour if autocontour is not None else _v
+        _v = arg.pop('colorbar', None)
+        self.colorbar = colorbar if colorbar is not None else _v
+        _v = arg.pop('colorscale', None)
+        self.colorscale = colorscale if colorscale is not None else _v
+        _v = arg.pop('connectgaps', None)
+        self.connectgaps = connectgaps if connectgaps is not None else _v
+        _v = arg.pop('contours', None)
+        self.contours = contours if contours is not None else _v
+        _v = arg.pop('customdata', None)
+        self.customdata = customdata if customdata is not None else _v
+        _v = arg.pop('customdatasrc', None)
+        self.customdatasrc = customdatasrc if customdatasrc is not None else _v
+        _v = arg.pop('dx', None)
+        self.dx = dx if dx is not None else _v
+        _v = arg.pop('dy', None)
+        self.dy = dy if dy is not None else _v
+        _v = arg.pop('fillcolor', None)
+        self.fillcolor = fillcolor if fillcolor is not None else _v
+        _v = arg.pop('hoverinfo', None)
+        self.hoverinfo = hoverinfo if hoverinfo is not None else _v
+        _v = arg.pop('hoverinfosrc', None)
+        self.hoverinfosrc = hoverinfosrc if hoverinfosrc is not None else _v
+        _v = arg.pop('hoverlabel', None)
+        self.hoverlabel = hoverlabel if hoverlabel is not None else _v
+        _v = arg.pop('ids', None)
+        self.ids = ids if ids is not None else _v
+        _v = arg.pop('idssrc', None)
+        self.idssrc = idssrc if idssrc is not None else _v
+        _v = arg.pop('legendgroup', None)
+        self.legendgroup = legendgroup if legendgroup is not None else _v
+        _v = arg.pop('line', None)
+        self.line = line if line is not None else _v
+        _v = arg.pop('name', None)
+        self.name = name if name is not None else _v
+        _v = arg.pop('ncontours', None)
+        self.ncontours = ncontours if ncontours is not None else _v
+        _v = arg.pop('opacity', None)
+        self.opacity = opacity if opacity is not None else _v
+        _v = arg.pop('reversescale', None)
+        self.reversescale = reversescale if reversescale is not None else _v
+        _v = arg.pop('selectedpoints', None)
+        self.selectedpoints = selectedpoints if selectedpoints is not None else _v
+        _v = arg.pop('showlegend', None)
+        self.showlegend = showlegend if showlegend is not None else _v
+        _v = arg.pop('showscale', None)
+        self.showscale = showscale if showscale is not None else _v
+        _v = arg.pop('stream', None)
+        self.stream = stream if stream is not None else _v
+        _v = arg.pop('text', None)
+        self.text = text if text is not None else _v
+        _v = arg.pop('textsrc', None)
+        self.textsrc = textsrc if textsrc is not None else _v
+        _v = arg.pop('transpose', None)
+        self.transpose = transpose if transpose is not None else _v
+        _v = arg.pop('uid', None)
+        self.uid = uid if uid is not None else _v
+        _v = arg.pop('visible', None)
+        self.visible = visible if visible is not None else _v
+        _v = arg.pop('x', None)
+        self.x = x if x is not None else _v
+        _v = arg.pop('x0', None)
+        self.x0 = x0 if x0 is not None else _v
+        _v = arg.pop('xaxis', None)
+        self.xaxis = xaxis if xaxis is not None else _v
+        _v = arg.pop('xcalendar', None)
+        self.xcalendar = xcalendar if xcalendar is not None else _v
+        _v = arg.pop('xsrc', None)
+        self.xsrc = xsrc if xsrc is not None else _v
+        _v = arg.pop('xtype', None)
+        self.xtype = xtype if xtype is not None else _v
+        _v = arg.pop('y', None)
+        self.y = y if y is not None else _v
+        _v = arg.pop('y0', None)
+        self.y0 = y0 if y0 is not None else _v
+        _v = arg.pop('yaxis', None)
+        self.yaxis = yaxis if yaxis is not None else _v
+        _v = arg.pop('ycalendar', None)
+        self.ycalendar = ycalendar if ycalendar is not None else _v
+        _v = arg.pop('ysrc', None)
+        self.ysrc = ysrc if ysrc is not None else _v
+        _v = arg.pop('ytype', None)
+        self.ytype = ytype if ytype is not None else _v
+        _v = arg.pop('z', None)
+        self.z = z if z is not None else _v
+        _v = arg.pop('zauto', None)
+        self.zauto = zauto if zauto is not None else _v
+        _v = arg.pop('zhoverformat', None)
+        self.zhoverformat = zhoverformat if zhoverformat is not None else _v
+        _v = arg.pop('zmax', None)
+        self.zmax = zmax if zmax is not None else _v
+        _v = arg.pop('zmin', None)
+        self.zmin = zmin if zmin is not None else _v
+        _v = arg.pop('zsrc', None)
+        self.zsrc = zsrc if zsrc is not None else _v
 
         # Read-only literals
         # ------------------
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'contour'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='contour'
+            plotly_name='type', parent_name='contour', val='contour'
         )
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

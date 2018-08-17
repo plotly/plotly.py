@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceType
+import copy
 
 
 class Scatter3d(BaseTraceType):
@@ -529,45 +530,44 @@ class Scatter3d(BaseTraceType):
             Supported dict properties:
                 
                 autocolorscale
-                    Has an effect only if `line.color` is set to a
-                    numerical array. Determines whether the
-                    colorscale is a default palette
-                    (`autocolorscale: true`) or the palette
-                    determined by `line.colorscale`. In case
-                    `colorscale` is unspecified or `autocolorscale`
-                    is true, the default  palette will be chosen
-                    according to whether numbers in the `color`
-                    array are all positive, all negative or mixed.
+                    Determines whether the colorscale is a default
+                    palette (`autocolorscale: true`) or the palette
+                    determined by `line.colorscale`. Has an effect
+                    only if in `line.color`is set to a numerical
+                    array. In case `colorscale` is unspecified or
+                    `autocolorscale` is true, the default  palette
+                    will be chosen according to whether numbers in
+                    the `color` array are all positive, all
+                    negative or mixed.
                 cauto
-                    Has an effect only if `line.color` is set to a
-                    numerical array and `cmin`, `cmax` are set by
-                    the user. In this case, it controls whether the
-                    range of colors in `colorscale` is mapped to
-                    the range of values in the `color` array
-                    (`cauto: true`), or the `cmin`/`cmax` values
-                    (`cauto: false`). Defaults to `false` when
-                    `cmin`, `cmax` are set by the user.
+                    Determines whether or not the color domain is
+                    computed with respect to the input data (here
+                    in `line.color`) or the bounds set in
+                    `line.cmin` and `line.cmax`  Has an effect only
+                    if in `line.color`is set to a numerical array.
+                    Defaults to `false` when `line.cmin` and
+                    `line.cmax` are set by the user.
                 cmax
-                    Has an effect only if `line.color` is set to a
-                    numerical array. Sets the upper bound of the
-                    color domain. Value should be associated to the
-                    `line.color` array index, and if set,
+                    Sets the upper bound of the color domain. Has
+                    an effect only if in `line.color`is set to a
+                    numerical array. Value should have the same
+                    units as in `line.color` and if set,
                     `line.cmin` must be set as well.
                 cmin
-                    Has an effect only if `line.color` is set to a
-                    numerical array. Sets the lower bound of the
-                    color domain. Value should be associated to the
-                    `line.color` array index, and if set,
+                    Sets the lower bound of the color domain. Has
+                    an effect only if in `line.color`is set to a
+                    numerical array. Value should have the same
+                    units as in `line.color` and if set,
                     `line.cmax` must be set as well.
                 color
-                    Sets the line color. It accepts either a
-                    specific color or an array of numbers that are
-                    mapped to the colorscale relative to the max
-                    and min values of the array or relative to
-                    `cmin` and `cmax` if set.
+                    Sets thelinecolor. It accepts either a specific
+                    color or an array of numbers that are mapped to
+                    the colorscale relative to the max and min
+                    values of the array or relative to `line.cmin`
+                    and `line.cmax` if set.
                 colorscale
-                    Sets the colorscale and only has an effect if
-                    `line.color` is set to a numerical array. The
+                    Sets the colorscale. Has an effect only if in
+                    `line.color`is set to a numerical array. The
                     colorscale must be an array containing arrays
                     mapping a normalized value to an rgb, rgba,
                     hex, hsl, hsv, or named color string. At
@@ -575,27 +575,27 @@ class Scatter3d(BaseTraceType):
                     highest (1) values are required. For example,
                     `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To
                     control the bounds of the colorscale in color
-                    space, use `line.cmin` and `line.cmax`.
+                    space, use`line.cmin` and `line.cmax`.
                     Alternatively, `colorscale` may be a palette
-                    name string of the following list: Greys,
-                    YlGnBu, Greens, YlOrRd, Bluered, RdBu, Reds,
-                    Blues, Picnic, Rainbow, Portland, Jet, Hot,
-                    Blackbody, Earth, Electric, Viridis, Cividis
+                    name string of the following list: Greys,YlGnBu
+                    ,Greens,YlOrRd,Bluered,RdBu,Reds,Blues,Picnic,R
+                    ainbow,Portland,Jet,Hot,Blackbody,Earth,Electri
+                    c,Viridis,Cividis.
                 colorsrc
                     Sets the source reference on plot.ly for  color
                     .
                 dash
                     Sets the dash style of the lines.
                 reversescale
-                    Has an effect only if `line.color` is set to a
-                    numerical array. Reverses the color mapping if
-                    true (`cmin` will correspond to the last color
-                    in the array and `cmax` will correspond to the
-                    first color).
+                    Reverses the color mapping if true. Has an
+                    effect only if in `line.color`is set to a
+                    numerical array. If true, `line.cmin` will
+                    correspond to the last color in the array and
+                    `line.cmax` will correspond to the first color.
                 showscale
-                    Has an effect only if `line.color` is set to a
-                    numerical array. Determines whether or not a
-                    colorbar is displayed.
+                    Determines whether or not a colorbar is
+                    displayed for this trace. Has an effect only if
+                    in `line.color`is set to a numerical array.
                 width
                     Sets the line width (in px).
 
@@ -623,48 +623,47 @@ class Scatter3d(BaseTraceType):
             Supported dict properties:
                 
                 autocolorscale
-                    Has an effect only if `marker.color` is set to
-                    a numerical array. Determines whether the
-                    colorscale is a default palette
-                    (`autocolorscale: true`) or the palette
-                    determined by `marker.colorscale`. In case
-                    `colorscale` is unspecified or `autocolorscale`
-                    is true, the default  palette will be chosen
-                    according to whether numbers in the `color`
-                    array are all positive, all negative or mixed.
+                    Determines whether the colorscale is a default
+                    palette (`autocolorscale: true`) or the palette
+                    determined by `marker.colorscale`. Has an
+                    effect only if in `marker.color`is set to a
+                    numerical array. In case `colorscale` is
+                    unspecified or `autocolorscale` is true, the
+                    default  palette will be chosen according to
+                    whether numbers in the `color` array are all
+                    positive, all negative or mixed.
                 cauto
-                    Has an effect only if `marker.color` is set to
-                    a numerical array and `cmin`, `cmax` are set by
-                    the user. In this case, it controls whether the
-                    range of colors in `colorscale` is mapped to
-                    the range of values in the `color` array
-                    (`cauto: true`), or the `cmin`/`cmax` values
-                    (`cauto: false`). Defaults to `false` when
-                    `cmin`, `cmax` are set by the user.
+                    Determines whether or not the color domain is
+                    computed with respect to the input data (here
+                    in `marker.color`) or the bounds set in
+                    `marker.cmin` and `marker.cmax`  Has an effect
+                    only if in `marker.color`is set to a numerical
+                    array. Defaults to `false` when `marker.cmin`
+                    and `marker.cmax` are set by the user.
                 cmax
-                    Has an effect only if `marker.color` is set to
-                    a numerical array. Sets the upper bound of the
-                    color domain. Value should be associated to the
-                    `marker.color` array index, and if set,
+                    Sets the upper bound of the color domain. Has
+                    an effect only if in `marker.color`is set to a
+                    numerical array. Value should have the same
+                    units as in `marker.color` and if set,
                     `marker.cmin` must be set as well.
                 cmin
-                    Has an effect only if `marker.color` is set to
-                    a numerical array. Sets the lower bound of the
-                    color domain. Value should be associated to the
-                    `marker.color` array index, and if set,
+                    Sets the lower bound of the color domain. Has
+                    an effect only if in `marker.color`is set to a
+                    numerical array. Value should have the same
+                    units as in `marker.color` and if set,
                     `marker.cmax` must be set as well.
                 color
-                    Sets the marker color. It accepts either a
+                    Sets themarkercolor. It accepts either a
                     specific color or an array of numbers that are
                     mapped to the colorscale relative to the max
                     and min values of the array or relative to
-                    `cmin` and `cmax` if set.
+                    `marker.cmin` and `marker.cmax` if set.
                 colorbar
                     plotly.graph_objs.scatter3d.marker.ColorBar
                     instance or dict with compatible properties
                 colorscale
-                    Sets the colorscale and only has an effect if
-                    `marker.color` is set to a numerical array. The
+                    Sets the colorscale. Has an effect only if in
+                    `marker.color`is set to a numerical array. The
                     colorscale must be an array containing arrays
                     mapping a normalized value to an rgb, rgba,
                     hex, hsl, hsv, or named color string. At
@@ -672,12 +671,12 @@ class Scatter3d(BaseTraceType):
                     highest (1) values are required. For example,
                     `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To
                     control the bounds of the colorscale in color
-                    space, use `marker.cmin` and `marker.cmax`.
+                    space, use`marker.cmin` and `marker.cmax`.
                     Alternatively, `colorscale` may be a palette
-                    name string of the following list: Greys,
-                    YlGnBu, Greens, YlOrRd, Bluered, RdBu, Reds,
-                    Blues, Picnic, Rainbow, Portland, Jet, Hot,
-                    Blackbody, Earth, Electric, Viridis, Cividis
+                    name string of the following list: Greys,YlGnBu
+                    ,Greens,YlOrRd,Bluered,RdBu,Reds,Blues,Picnic,R
+                    ainbow,Portland,Jet,Hot,Blackbody,Earth,Electri
+                    c,Viridis,Cividis.
                 colorsrc
                     Sets the source reference on plot.ly for  color
                     .
@@ -692,15 +691,16 @@ class Scatter3d(BaseTraceType):
                     transparent), set *marker.color* to an rgba
                     color and use its alpha channel.
                 reversescale
-                    Has an effect only if `marker.color` is set to
-                    a numerical array. Reverses the color mapping
-                    if true (`cmin` will correspond to the last
-                    color in the array and `cmax` will correspond
-                    to the first color).
+                    Reverses the color mapping if true. Has an
+                    effect only if in `marker.color`is set to a
+                    numerical array. If true, `marker.cmin` will
+                    correspond to the last color in the array and
+                    `marker.cmax` will correspond to the first
+                    color.
                 showscale
-                    Has an effect only if `marker.color` is set to
-                    a numerical array. Determines whether or not a
-                    colorbar is displayed.
+                    Determines whether or not a colorbar is
+                    displayed for this trace. Has an effect only if
+                    in `marker.color`is set to a numerical array.
                 size
                     Sets the marker size (in px).
                 sizemin
@@ -1561,6 +1561,7 @@ class Scatter3d(BaseTraceType):
 
     def __init__(
         self,
+        arg=None,
         connectgaps=None,
         customdata=None,
         customdatasrc=None,
@@ -1617,6 +1618,9 @@ class Scatter3d(BaseTraceType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Scatter3d
         connectgaps
             Determines whether or not gaps (i.e. {nan} or missing
             values) in the provided data arrays are connected.
@@ -1761,6 +1765,22 @@ class Scatter3d(BaseTraceType):
         """
         super(Scatter3d, self).__init__('scatter3d')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Scatter3d 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Scatter3d"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators import (scatter3d as v_scatter3d)
@@ -1815,57 +1835,99 @@ class Scatter3d(BaseTraceType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.connectgaps = connectgaps
-        self.customdata = customdata
-        self.customdatasrc = customdatasrc
-        self.error_x = error_x
-        self.error_y = error_y
-        self.error_z = error_z
-        self.hoverinfo = hoverinfo
-        self.hoverinfosrc = hoverinfosrc
-        self.hoverlabel = hoverlabel
-        self.hovertext = hovertext
-        self.hovertextsrc = hovertextsrc
-        self.ids = ids
-        self.idssrc = idssrc
-        self.legendgroup = legendgroup
-        self.line = line
-        self.marker = marker
-        self.mode = mode
-        self.name = name
-        self.opacity = opacity
-        self.projection = projection
-        self.scene = scene
-        self.selectedpoints = selectedpoints
-        self.showlegend = showlegend
-        self.stream = stream
-        self.surfaceaxis = surfaceaxis
-        self.surfacecolor = surfacecolor
-        self.text = text
-        self.textfont = textfont
-        self.textposition = textposition
-        self.textpositionsrc = textpositionsrc
-        self.textsrc = textsrc
-        self.uid = uid
-        self.visible = visible
-        self.x = x
-        self.xcalendar = xcalendar
-        self.xsrc = xsrc
-        self.y = y
-        self.ycalendar = ycalendar
-        self.ysrc = ysrc
-        self.z = z
-        self.zcalendar = zcalendar
-        self.zsrc = zsrc
+        _v = arg.pop('connectgaps', None)
+        self.connectgaps = connectgaps if connectgaps is not None else _v
+        _v = arg.pop('customdata', None)
+        self.customdata = customdata if customdata is not None else _v
+        _v = arg.pop('customdatasrc', None)
+        self.customdatasrc = customdatasrc if customdatasrc is not None else _v
+        _v = arg.pop('error_x', None)
+        self.error_x = error_x if error_x is not None else _v
+        _v = arg.pop('error_y', None)
+        self.error_y = error_y if error_y is not None else _v
+        _v = arg.pop('error_z', None)
+        self.error_z = error_z if error_z is not None else _v
+        _v = arg.pop('hoverinfo', None)
+        self.hoverinfo = hoverinfo if hoverinfo is not None else _v
+        _v = arg.pop('hoverinfosrc', None)
+        self.hoverinfosrc = hoverinfosrc if hoverinfosrc is not None else _v
+        _v = arg.pop('hoverlabel', None)
+        self.hoverlabel = hoverlabel if hoverlabel is not None else _v
+        _v = arg.pop('hovertext', None)
+        self.hovertext = hovertext if hovertext is not None else _v
+        _v = arg.pop('hovertextsrc', None)
+        self.hovertextsrc = hovertextsrc if hovertextsrc is not None else _v
+        _v = arg.pop('ids', None)
+        self.ids = ids if ids is not None else _v
+        _v = arg.pop('idssrc', None)
+        self.idssrc = idssrc if idssrc is not None else _v
+        _v = arg.pop('legendgroup', None)
+        self.legendgroup = legendgroup if legendgroup is not None else _v
+        _v = arg.pop('line', None)
+        self.line = line if line is not None else _v
+        _v = arg.pop('marker', None)
+        self.marker = marker if marker is not None else _v
+        _v = arg.pop('mode', None)
+        self.mode = mode if mode is not None else _v
+        _v = arg.pop('name', None)
+        self.name = name if name is not None else _v
+        _v = arg.pop('opacity', None)
+        self.opacity = opacity if opacity is not None else _v
+        _v = arg.pop('projection', None)
+        self.projection = projection if projection is not None else _v
+        _v = arg.pop('scene', None)
+        self.scene = scene if scene is not None else _v
+        _v = arg.pop('selectedpoints', None)
+        self.selectedpoints = selectedpoints if selectedpoints is not None else _v
+        _v = arg.pop('showlegend', None)
+        self.showlegend = showlegend if showlegend is not None else _v
+        _v = arg.pop('stream', None)
+        self.stream = stream if stream is not None else _v
+        _v = arg.pop('surfaceaxis', None)
+        self.surfaceaxis = surfaceaxis if surfaceaxis is not None else _v
+        _v = arg.pop('surfacecolor', None)
+        self.surfacecolor = surfacecolor if surfacecolor is not None else _v
+        _v = arg.pop('text', None)
+        self.text = text if text is not None else _v
+        _v = arg.pop('textfont', None)
+        self.textfont = textfont if textfont is not None else _v
+        _v = arg.pop('textposition', None)
+        self.textposition = textposition if textposition is not None else _v
+        _v = arg.pop('textpositionsrc', None)
+        self.textpositionsrc = textpositionsrc if textpositionsrc is not None else _v
+        _v = arg.pop('textsrc', None)
+        self.textsrc = textsrc if textsrc is not None else _v
+        _v = arg.pop('uid', None)
+        self.uid = uid if uid is not None else _v
+        _v = arg.pop('visible', None)
+        self.visible = visible if visible is not None else _v
+        _v = arg.pop('x', None)
+        self.x = x if x is not None else _v
+        _v = arg.pop('xcalendar', None)
+        self.xcalendar = xcalendar if xcalendar is not None else _v
+        _v = arg.pop('xsrc', None)
+        self.xsrc = xsrc if xsrc is not None else _v
+        _v = arg.pop('y', None)
+        self.y = y if y is not None else _v
+        _v = arg.pop('ycalendar', None)
+        self.ycalendar = ycalendar if ycalendar is not None else _v
+        _v = arg.pop('ysrc', None)
+        self.ysrc = ysrc if ysrc is not None else _v
+        _v = arg.pop('z', None)
+        self.z = z if z is not None else _v
+        _v = arg.pop('zcalendar', None)
+        self.zcalendar = zcalendar if zcalendar is not None else _v
+        _v = arg.pop('zsrc', None)
+        self.zsrc = zsrc if zsrc is not None else _v
 
         # Read-only literals
         # ------------------
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'scatter3d'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='scatter3d'
+            plotly_name='type', parent_name='scatter3d', val='scatter3d'
         )
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

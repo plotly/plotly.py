@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Domain(BaseLayoutHierarchyType):
@@ -124,12 +125,17 @@ class Domain(BaseLayoutHierarchyType):
             plot fraction).
         """
 
-    def __init__(self, column=None, row=None, x=None, y=None, **kwargs):
+    def __init__(
+        self, arg=None, column=None, row=None, x=None, y=None, **kwargs
+    ):
         """
         Construct a new Domain object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.layout.mapbox.Domain
         column
             If there is a layout grid, use the domain for this
             column in the grid for this mapbox subplot .
@@ -149,6 +155,22 @@ class Domain(BaseLayoutHierarchyType):
         """
         super(Domain, self).__init__('domain')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.mapbox.Domain 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.mapbox.Domain"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout.mapbox import (domain as v_domain)
@@ -162,11 +184,15 @@ class Domain(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.column = column
-        self.row = row
-        self.x = x
-        self.y = y
+        _v = arg.pop('column', None)
+        self.column = column if column is not None else _v
+        _v = arg.pop('row', None)
+        self.row = row if row is not None else _v
+        _v = arg.pop('x', None)
+        self.x = x if x is not None else _v
+        _v = arg.pop('y', None)
+        self.y = y if y is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

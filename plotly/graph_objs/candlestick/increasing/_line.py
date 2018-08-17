@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Line(BaseTraceHierarchyType):
@@ -99,12 +100,16 @@ class Line(BaseTraceHierarchyType):
             Sets the width (in px) of line bounding the box(es).
         """
 
-    def __init__(self, color=None, width=None, **kwargs):
+    def __init__(self, arg=None, color=None, width=None, **kwargs):
         """
         Construct a new Line object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of
+            plotly.graph_objs.candlestick.increasing.Line
         color
             Sets the color of line bounding the box(es).
         width
@@ -115,6 +120,22 @@ class Line(BaseTraceHierarchyType):
         Line
         """
         super(Line, self).__init__('line')
+
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.candlestick.increasing.Line 
+constructor must be a dict or 
+an instance of plotly.graph_objs.candlestick.increasing.Line"""
+            )
 
         # Import validators
         # -----------------
@@ -127,9 +148,11 @@ class Line(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.color = color
-        self.width = width
+        _v = arg.pop('color', None)
+        self.color = color if color is not None else _v
+        _v = arg.pop('width', None)
+        self.width = width if width is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

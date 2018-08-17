@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Mapbox(BaseLayoutHierarchyType):
@@ -147,6 +148,16 @@ class Mapbox(BaseLayoutHierarchyType):
                 line
                     plotly.graph_objs.layout.mapbox.layer.Line
                     instance or dict with compatible properties
+                name
+                    When used in a template, named items are
+                    created in the output figure in addition to any
+                    items the figure already has in this array. You
+                    can modify these items in the output figure by
+                    making your own item with `templateitemname`
+                    matching this `name` alongside your
+                    modifications (including `visible: false` or
+                    `enabled: false` to hide it). Has no effect
+                    outside of a template.
                 opacity
                     Sets the opacity of the layer.
                 source
@@ -165,11 +176,24 @@ class Mapbox(BaseLayoutHierarchyType):
                 symbol
                     plotly.graph_objs.layout.mapbox.layer.Symbol
                     instance or dict with compatible properties
+                templateitemname
+                    Used to refer to a named item in this array in
+                    the template. Named items from the template
+                    will be created even without a matching item in
+                    the input figure, but you can modify one by
+                    making an item with `templateitemname` matching
+                    its `name`, alongside your modifications
+                    (including `visible: false` or `enabled: false`
+                    to hide it). If there is no template or no
+                    matching item, this item will be hidden unless
+                    you explicitly show it with `visible: true`.
                 type
                     Sets the layer type. Support for *raster*,
                     *background* types is coming soon. Note that
                     *line* and *fill* are not compatible with Point
                     GeoJSON geometries.
+                visible
+                    Determines whether this layer is displayed
 
         Returns
         -------
@@ -283,6 +307,7 @@ class Mapbox(BaseLayoutHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         accesstoken=None,
         bearing=None,
         center=None,
@@ -298,6 +323,9 @@ class Mapbox(BaseLayoutHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.layout.Mapbox
         accesstoken
             Sets the mapbox access token to be used for this mapbox
             map. Alternatively, the mapbox access token can be set
@@ -330,6 +358,22 @@ class Mapbox(BaseLayoutHierarchyType):
         """
         super(Mapbox, self).__init__('mapbox')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.Mapbox 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.Mapbox"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout import (mapbox as v_mapbox)
@@ -347,15 +391,23 @@ class Mapbox(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.accesstoken = accesstoken
-        self.bearing = bearing
-        self.center = center
-        self.domain = domain
-        self.layers = layers
-        self.pitch = pitch
-        self.style = style
-        self.zoom = zoom
+        _v = arg.pop('accesstoken', None)
+        self.accesstoken = accesstoken if accesstoken is not None else _v
+        _v = arg.pop('bearing', None)
+        self.bearing = bearing if bearing is not None else _v
+        _v = arg.pop('center', None)
+        self.center = center if center is not None else _v
+        _v = arg.pop('domain', None)
+        self.domain = domain if domain is not None else _v
+        _v = arg.pop('layers', None)
+        self.layers = layers if layers is not None else _v
+        _v = arg.pop('pitch', None)
+        self.pitch = pitch if pitch is not None else _v
+        _v = arg.pop('style', None)
+        self.style = style if style is not None else _v
+        _v = arg.pop('zoom', None)
+        self.zoom = zoom if zoom is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

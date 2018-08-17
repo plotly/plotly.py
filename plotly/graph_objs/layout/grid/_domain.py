@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Domain(BaseLayoutHierarchyType):
@@ -78,12 +79,15 @@ class Domain(BaseLayoutHierarchyType):
             domain edges, with no grout around the edges.
         """
 
-    def __init__(self, x=None, y=None, **kwargs):
+    def __init__(self, arg=None, x=None, y=None, **kwargs):
         """
         Construct a new Domain object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.layout.grid.Domain
         x
             Sets the horizontal domain of this grid subplot (in
             plot fraction). The first and last cells end exactly at
@@ -99,6 +103,22 @@ class Domain(BaseLayoutHierarchyType):
         """
         super(Domain, self).__init__('domain')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.grid.Domain 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.grid.Domain"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout.grid import (domain as v_domain)
@@ -110,9 +130,11 @@ class Domain(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.x = x
-        self.y = y
+        _v = arg.pop('x', None)
+        self.x = x if x is not None else _v
+        _v = arg.pop('y', None)
+        self.y = y if y is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

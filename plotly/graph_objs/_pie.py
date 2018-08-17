@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceType
+import copy
 
 
 class Pie(BaseTraceType):
@@ -1160,6 +1161,7 @@ class Pie(BaseTraceType):
 
     def __init__(
         self,
+        arg=None,
         customdata=None,
         customdatasrc=None,
         direction=None,
@@ -1211,6 +1213,9 @@ class Pie(BaseTraceType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Pie
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -1349,6 +1354,22 @@ class Pie(BaseTraceType):
         """
         super(Pie, self).__init__('pie')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Pie 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Pie"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators import (pie as v_pie)
@@ -1398,55 +1419,95 @@ class Pie(BaseTraceType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.customdata = customdata
-        self.customdatasrc = customdatasrc
-        self.direction = direction
-        self.dlabel = dlabel
-        self.domain = domain
-        self.hole = hole
-        self.hoverinfo = hoverinfo
-        self.hoverinfosrc = hoverinfosrc
-        self.hoverlabel = hoverlabel
-        self.hovertext = hovertext
-        self.hovertextsrc = hovertextsrc
-        self.ids = ids
-        self.idssrc = idssrc
-        self.insidetextfont = insidetextfont
-        self.label0 = label0
-        self.labels = labels
-        self.labelssrc = labelssrc
-        self.legendgroup = legendgroup
-        self.marker = marker
-        self.name = name
-        self.opacity = opacity
-        self.outsidetextfont = outsidetextfont
-        self.pull = pull
-        self.pullsrc = pullsrc
-        self.rotation = rotation
-        self.scalegroup = scalegroup
-        self.selectedpoints = selectedpoints
-        self.showlegend = showlegend
-        self.sort = sort
-        self.stream = stream
-        self.text = text
-        self.textfont = textfont
-        self.textinfo = textinfo
-        self.textposition = textposition
-        self.textpositionsrc = textpositionsrc
-        self.textsrc = textsrc
-        self.uid = uid
-        self.values = values
-        self.valuessrc = valuessrc
-        self.visible = visible
+        _v = arg.pop('customdata', None)
+        self.customdata = customdata if customdata is not None else _v
+        _v = arg.pop('customdatasrc', None)
+        self.customdatasrc = customdatasrc if customdatasrc is not None else _v
+        _v = arg.pop('direction', None)
+        self.direction = direction if direction is not None else _v
+        _v = arg.pop('dlabel', None)
+        self.dlabel = dlabel if dlabel is not None else _v
+        _v = arg.pop('domain', None)
+        self.domain = domain if domain is not None else _v
+        _v = arg.pop('hole', None)
+        self.hole = hole if hole is not None else _v
+        _v = arg.pop('hoverinfo', None)
+        self.hoverinfo = hoverinfo if hoverinfo is not None else _v
+        _v = arg.pop('hoverinfosrc', None)
+        self.hoverinfosrc = hoverinfosrc if hoverinfosrc is not None else _v
+        _v = arg.pop('hoverlabel', None)
+        self.hoverlabel = hoverlabel if hoverlabel is not None else _v
+        _v = arg.pop('hovertext', None)
+        self.hovertext = hovertext if hovertext is not None else _v
+        _v = arg.pop('hovertextsrc', None)
+        self.hovertextsrc = hovertextsrc if hovertextsrc is not None else _v
+        _v = arg.pop('ids', None)
+        self.ids = ids if ids is not None else _v
+        _v = arg.pop('idssrc', None)
+        self.idssrc = idssrc if idssrc is not None else _v
+        _v = arg.pop('insidetextfont', None)
+        self.insidetextfont = insidetextfont if insidetextfont is not None else _v
+        _v = arg.pop('label0', None)
+        self.label0 = label0 if label0 is not None else _v
+        _v = arg.pop('labels', None)
+        self.labels = labels if labels is not None else _v
+        _v = arg.pop('labelssrc', None)
+        self.labelssrc = labelssrc if labelssrc is not None else _v
+        _v = arg.pop('legendgroup', None)
+        self.legendgroup = legendgroup if legendgroup is not None else _v
+        _v = arg.pop('marker', None)
+        self.marker = marker if marker is not None else _v
+        _v = arg.pop('name', None)
+        self.name = name if name is not None else _v
+        _v = arg.pop('opacity', None)
+        self.opacity = opacity if opacity is not None else _v
+        _v = arg.pop('outsidetextfont', None)
+        self.outsidetextfont = outsidetextfont if outsidetextfont is not None else _v
+        _v = arg.pop('pull', None)
+        self.pull = pull if pull is not None else _v
+        _v = arg.pop('pullsrc', None)
+        self.pullsrc = pullsrc if pullsrc is not None else _v
+        _v = arg.pop('rotation', None)
+        self.rotation = rotation if rotation is not None else _v
+        _v = arg.pop('scalegroup', None)
+        self.scalegroup = scalegroup if scalegroup is not None else _v
+        _v = arg.pop('selectedpoints', None)
+        self.selectedpoints = selectedpoints if selectedpoints is not None else _v
+        _v = arg.pop('showlegend', None)
+        self.showlegend = showlegend if showlegend is not None else _v
+        _v = arg.pop('sort', None)
+        self.sort = sort if sort is not None else _v
+        _v = arg.pop('stream', None)
+        self.stream = stream if stream is not None else _v
+        _v = arg.pop('text', None)
+        self.text = text if text is not None else _v
+        _v = arg.pop('textfont', None)
+        self.textfont = textfont if textfont is not None else _v
+        _v = arg.pop('textinfo', None)
+        self.textinfo = textinfo if textinfo is not None else _v
+        _v = arg.pop('textposition', None)
+        self.textposition = textposition if textposition is not None else _v
+        _v = arg.pop('textpositionsrc', None)
+        self.textpositionsrc = textpositionsrc if textpositionsrc is not None else _v
+        _v = arg.pop('textsrc', None)
+        self.textsrc = textsrc if textsrc is not None else _v
+        _v = arg.pop('uid', None)
+        self.uid = uid if uid is not None else _v
+        _v = arg.pop('values', None)
+        self.values = values if values is not None else _v
+        _v = arg.pop('valuessrc', None)
+        self.valuessrc = valuessrc if valuessrc is not None else _v
+        _v = arg.pop('visible', None)
+        self.visible = visible if visible is not None else _v
 
         # Read-only literals
         # ------------------
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'pie'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='pie'
+            plotly_name='type', parent_name='pie', val='pie'
         )
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

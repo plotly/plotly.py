@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Scene(BaseLayoutHierarchyType):
@@ -77,6 +78,16 @@ class Scene(BaseLayoutHierarchyType):
                     Sets text to appear when hovering over this
                     annotation. If omitted or blank, no hover label
                     will appear.
+                name
+                    When used in a template, named items are
+                    created in the output figure in addition to any
+                    items the figure already has in this array. You
+                    can modify these items in the output figure by
+                    making your own item with `templateitemname`
+                    matching this `name` alongside your
+                    modifications (including `visible: false` or
+                    `enabled: false` to hide it). Has no effect
+                    outside of a template.
                 opacity
                     Sets the opacity of the annotation (text +
                     arrow).
@@ -108,6 +119,17 @@ class Scene(BaseLayoutHierarchyType):
                     shortens the arrow from the `ax` / `ay` vector,
                     in contrast to `xshift` / `yshift` which moves
                     everything by this amount.
+                templateitemname
+                    Used to refer to a named item in this array in
+                    the template. Named items from the template
+                    will be created even without a matching item in
+                    the input figure, but you can modify one by
+                    making an item with `templateitemname` matching
+                    its `name`, alongside your modifications
+                    (including `visible: false` or `enabled: false`
+                    to hide it). If there is no template or no
+                    matching item, this item will be hidden unless
+                    you explicitly show it with `visible: true`.
                 text
                     Sets the text associated with this annotation.
                     Plotly uses a subset of HTML tags to do things
@@ -1354,6 +1376,7 @@ class Scene(BaseLayoutHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         annotations=None,
         aspectmode=None,
         aspectratio=None,
@@ -1372,6 +1395,9 @@ class Scene(BaseLayoutHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.layout.Scene
         annotations
             plotly.graph_objs.layout.scene.Annotation instance or
             dict with compatible properties
@@ -1418,6 +1444,22 @@ class Scene(BaseLayoutHierarchyType):
         """
         super(Scene, self).__init__('scene')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.Scene 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.Scene"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout import (scene as v_scene)
@@ -1438,18 +1480,29 @@ class Scene(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.annotations = annotations
-        self.aspectmode = aspectmode
-        self.aspectratio = aspectratio
-        self.bgcolor = bgcolor
-        self.camera = camera
-        self.domain = domain
-        self.dragmode = dragmode
-        self.hovermode = hovermode
-        self.xaxis = xaxis
-        self.yaxis = yaxis
-        self.zaxis = zaxis
+        _v = arg.pop('annotations', None)
+        self.annotations = annotations if annotations is not None else _v
+        _v = arg.pop('aspectmode', None)
+        self.aspectmode = aspectmode if aspectmode is not None else _v
+        _v = arg.pop('aspectratio', None)
+        self.aspectratio = aspectratio if aspectratio is not None else _v
+        _v = arg.pop('bgcolor', None)
+        self.bgcolor = bgcolor if bgcolor is not None else _v
+        _v = arg.pop('camera', None)
+        self.camera = camera if camera is not None else _v
+        _v = arg.pop('domain', None)
+        self.domain = domain if domain is not None else _v
+        _v = arg.pop('dragmode', None)
+        self.dragmode = dragmode if dragmode is not None else _v
+        _v = arg.pop('hovermode', None)
+        self.hovermode = hovermode if hovermode is not None else _v
+        _v = arg.pop('xaxis', None)
+        self.xaxis = xaxis if xaxis is not None else _v
+        _v = arg.pop('yaxis', None)
+        self.yaxis = yaxis if yaxis is not None else _v
+        _v = arg.pop('zaxis', None)
+        self.zaxis = zaxis if zaxis is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

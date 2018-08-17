@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Z(BaseTraceHierarchyType):
@@ -304,6 +305,7 @@ class Z(BaseTraceHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         color=None,
         highlight=None,
         highlightcolor=None,
@@ -319,6 +321,9 @@ class Z(BaseTraceHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.surface.contours.Z
         color
             Sets the color of the contour lines.
         highlight
@@ -346,6 +351,22 @@ class Z(BaseTraceHierarchyType):
         """
         super(Z, self).__init__('z')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.surface.contours.Z 
+constructor must be a dict or 
+an instance of plotly.graph_objs.surface.contours.Z"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.surface.contours import (z as v_z)
@@ -363,15 +384,23 @@ class Z(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.color = color
-        self.highlight = highlight
-        self.highlightcolor = highlightcolor
-        self.highlightwidth = highlightwidth
-        self.project = project
-        self.show = show
-        self.usecolormap = usecolormap
-        self.width = width
+        _v = arg.pop('color', None)
+        self.color = color if color is not None else _v
+        _v = arg.pop('highlight', None)
+        self.highlight = highlight if highlight is not None else _v
+        _v = arg.pop('highlightcolor', None)
+        self.highlightcolor = highlightcolor if highlightcolor is not None else _v
+        _v = arg.pop('highlightwidth', None)
+        self.highlightwidth = highlightwidth if highlightwidth is not None else _v
+        _v = arg.pop('project', None)
+        self.project = project if project is not None else _v
+        _v = arg.pop('show', None)
+        self.show = show if show is not None else _v
+        _v = arg.pop('usecolormap', None)
+        self.usecolormap = usecolormap if usecolormap is not None else _v
+        _v = arg.pop('width', None)
+        self.width = width if width is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

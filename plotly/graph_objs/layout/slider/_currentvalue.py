@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Currentvalue(BaseLayoutHierarchyType):
@@ -186,6 +187,7 @@ class Currentvalue(BaseLayoutHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         font=None,
         offset=None,
         prefix=None,
@@ -199,6 +201,10 @@ class Currentvalue(BaseLayoutHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of
+            plotly.graph_objs.layout.slider.Currentvalue
         font
             Sets the font of the current value label text.
         offset
@@ -222,6 +228,22 @@ class Currentvalue(BaseLayoutHierarchyType):
         """
         super(Currentvalue, self).__init__('currentvalue')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.slider.Currentvalue 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.slider.Currentvalue"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout.slider import (
@@ -239,13 +261,19 @@ class Currentvalue(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.font = font
-        self.offset = offset
-        self.prefix = prefix
-        self.suffix = suffix
-        self.visible = visible
-        self.xanchor = xanchor
+        _v = arg.pop('font', None)
+        self.font = font if font is not None else _v
+        _v = arg.pop('offset', None)
+        self.offset = offset if offset is not None else _v
+        _v = arg.pop('prefix', None)
+        self.prefix = prefix if prefix is not None else _v
+        _v = arg.pop('suffix', None)
+        self.suffix = suffix if suffix is not None else _v
+        _v = arg.pop('visible', None)
+        self.visible = visible if visible is not None else _v
+        _v = arg.pop('xanchor', None)
+        self.xanchor = xanchor if xanchor is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

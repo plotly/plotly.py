@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Outsidetextfont(BaseTraceHierarchyType):
@@ -211,6 +212,7 @@ class Outsidetextfont(BaseTraceHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         color=None,
         colorsrc=None,
         family=None,
@@ -226,6 +228,9 @@ class Outsidetextfont(BaseTraceHierarchyType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.bar.Outsidetextfont
         color
 
         colorsrc
@@ -257,6 +262,22 @@ class Outsidetextfont(BaseTraceHierarchyType):
         """
         super(Outsidetextfont, self).__init__('outsidetextfont')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.bar.Outsidetextfont 
+constructor must be a dict or 
+an instance of plotly.graph_objs.bar.Outsidetextfont"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.bar import (
@@ -274,13 +295,19 @@ class Outsidetextfont(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.color = color
-        self.colorsrc = colorsrc
-        self.family = family
-        self.familysrc = familysrc
-        self.size = size
-        self.sizesrc = sizesrc
+        _v = arg.pop('color', None)
+        self.color = color if color is not None else _v
+        _v = arg.pop('colorsrc', None)
+        self.colorsrc = colorsrc if colorsrc is not None else _v
+        _v = arg.pop('family', None)
+        self.family = family if family is not None else _v
+        _v = arg.pop('familysrc', None)
+        self.familysrc = familysrc if familysrc is not None else _v
+        _v = arg.pop('size', None)
+        self.size = size if size is not None else _v
+        _v = arg.pop('sizesrc', None)
+        self.sizesrc = sizesrc if sizesrc is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

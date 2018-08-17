@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Layer(BaseLayoutHierarchyType):
@@ -170,6 +171,33 @@ class Layer(BaseLayoutHierarchyType):
     def line(self, val):
         self['line'] = val
 
+    # name
+    # ----
+    @property
+    def name(self):
+        """
+        When used in a template, named items are created in the output
+        figure in addition to any items the figure already has in this
+        array. You can modify these items in the output figure by
+        making your own item with `templateitemname` matching this
+        `name` alongside your modifications (including `visible: false`
+        or `enabled: false` to hide it). Has no effect outside of a
+        template.
+    
+        The 'name' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['name']
+
+    @name.setter
+    def name(self, val):
+        self['name'] = val
+
     # opacity
     # -------
     @property
@@ -293,6 +321,34 @@ class Layer(BaseLayoutHierarchyType):
     def symbol(self, val):
         self['symbol'] = val
 
+    # templateitemname
+    # ----------------
+    @property
+    def templateitemname(self):
+        """
+        Used to refer to a named item in this array in the template.
+        Named items from the template will be created even without a
+        matching item in the input figure, but you can modify one by
+        making an item with `templateitemname` matching its `name`,
+        alongside your modifications (including `visible: false` or
+        `enabled: false` to hide it). If there is no template or no
+        matching item, this item will be hidden unless you explicitly
+        show it with `visible: true`.
+    
+        The 'templateitemname' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['templateitemname']
+
+    @templateitemname.setter
+    def templateitemname(self, val):
+        self['templateitemname'] = val
+
     # type
     # ----
     @property
@@ -315,6 +371,26 @@ class Layer(BaseLayoutHierarchyType):
     @type.setter
     def type(self, val):
         self['type'] = val
+
+    # visible
+    # -------
+    @property
+    def visible(self):
+        """
+        Determines whether this layer is displayed
+    
+        The 'visible' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self['visible']
+
+    @visible.setter
+    def visible(self, val):
+        self['visible'] = val
 
     # property parent name
     # --------------------
@@ -346,6 +422,15 @@ class Layer(BaseLayoutHierarchyType):
         line
             plotly.graph_objs.layout.mapbox.layer.Line instance or
             dict with compatible properties
+        name
+            When used in a template, named items are created in the
+            output figure in addition to any items the figure
+            already has in this array. You can modify these items
+            in the output figure by making your own item with
+            `templateitemname` matching this `name` alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). Has no effect outside of a
+            template.
         opacity
             Sets the opacity of the layer.
         source
@@ -364,25 +449,41 @@ class Layer(BaseLayoutHierarchyType):
         symbol
             plotly.graph_objs.layout.mapbox.layer.Symbol instance
             or dict with compatible properties
+        templateitemname
+            Used to refer to a named item in this array in the
+            template. Named items from the template will be created
+            even without a matching item in the input figure, but
+            you can modify one by making an item with
+            `templateitemname` matching its `name`, alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). If there is no template or no
+            matching item, this item will be hidden unless you
+            explicitly show it with `visible: true`.
         type
             Sets the layer type. Support for *raster*, *background*
             types is coming soon. Note that *line* and *fill* are
             not compatible with Point GeoJSON geometries.
+        visible
+            Determines whether this layer is displayed
         """
 
     def __init__(
         self,
+        arg=None,
         below=None,
         circle=None,
         color=None,
         fill=None,
         line=None,
+        name=None,
         opacity=None,
         source=None,
         sourcelayer=None,
         sourcetype=None,
         symbol=None,
+        templateitemname=None,
         type=None,
+        visible=None,
         **kwargs
     ):
         """
@@ -390,6 +491,9 @@ class Layer(BaseLayoutHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.layout.mapbox.Layer
         below
             Determines if the layer will be inserted before the
             layer with the specified ID. If omitted or set to '',
@@ -409,6 +513,15 @@ class Layer(BaseLayoutHierarchyType):
         line
             plotly.graph_objs.layout.mapbox.layer.Line instance or
             dict with compatible properties
+        name
+            When used in a template, named items are created in the
+            output figure in addition to any items the figure
+            already has in this array. You can modify these items
+            in the output figure by making your own item with
+            `templateitemname` matching this `name` alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). Has no effect outside of a
+            template.
         opacity
             Sets the opacity of the layer.
         source
@@ -427,16 +540,44 @@ class Layer(BaseLayoutHierarchyType):
         symbol
             plotly.graph_objs.layout.mapbox.layer.Symbol instance
             or dict with compatible properties
+        templateitemname
+            Used to refer to a named item in this array in the
+            template. Named items from the template will be created
+            even without a matching item in the input figure, but
+            you can modify one by making an item with
+            `templateitemname` matching its `name`, alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). If there is no template or no
+            matching item, this item will be hidden unless you
+            explicitly show it with `visible: true`.
         type
             Sets the layer type. Support for *raster*, *background*
             types is coming soon. Note that *line* and *fill* are
             not compatible with Point GeoJSON geometries.
+        visible
+            Determines whether this layer is displayed
 
         Returns
         -------
         Layer
         """
         super(Layer, self).__init__('layers')
+
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.mapbox.Layer 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.mapbox.Layer"""
+            )
 
         # Import validators
         # -----------------
@@ -449,27 +590,48 @@ class Layer(BaseLayoutHierarchyType):
         self._validators['color'] = v_layer.ColorValidator()
         self._validators['fill'] = v_layer.FillValidator()
         self._validators['line'] = v_layer.LineValidator()
+        self._validators['name'] = v_layer.NameValidator()
         self._validators['opacity'] = v_layer.OpacityValidator()
         self._validators['source'] = v_layer.SourceValidator()
         self._validators['sourcelayer'] = v_layer.SourcelayerValidator()
         self._validators['sourcetype'] = v_layer.SourcetypeValidator()
         self._validators['symbol'] = v_layer.SymbolValidator()
+        self._validators['templateitemname'
+                        ] = v_layer.TemplateitemnameValidator()
         self._validators['type'] = v_layer.TypeValidator()
+        self._validators['visible'] = v_layer.VisibleValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        self.below = below
-        self.circle = circle
-        self.color = color
-        self.fill = fill
-        self.line = line
-        self.opacity = opacity
-        self.source = source
-        self.sourcelayer = sourcelayer
-        self.sourcetype = sourcetype
-        self.symbol = symbol
-        self.type = type
+        _v = arg.pop('below', None)
+        self.below = below if below is not None else _v
+        _v = arg.pop('circle', None)
+        self.circle = circle if circle is not None else _v
+        _v = arg.pop('color', None)
+        self.color = color if color is not None else _v
+        _v = arg.pop('fill', None)
+        self.fill = fill if fill is not None else _v
+        _v = arg.pop('line', None)
+        self.line = line if line is not None else _v
+        _v = arg.pop('name', None)
+        self.name = name if name is not None else _v
+        _v = arg.pop('opacity', None)
+        self.opacity = opacity if opacity is not None else _v
+        _v = arg.pop('source', None)
+        self.source = source if source is not None else _v
+        _v = arg.pop('sourcelayer', None)
+        self.sourcelayer = sourcelayer if sourcelayer is not None else _v
+        _v = arg.pop('sourcetype', None)
+        self.sourcetype = sourcetype if sourcetype is not None else _v
+        _v = arg.pop('symbol', None)
+        self.symbol = symbol if symbol is not None else _v
+        _v = arg.pop('templateitemname', None)
+        self.templateitemname = templateitemname if templateitemname is not None else _v
+        _v = arg.pop('type', None)
+        self.type = type if type is not None else _v
+        _v = arg.pop('visible', None)
+        self.visible = visible if visible is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

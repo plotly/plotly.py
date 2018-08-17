@@ -9,11 +9,11 @@ except ImportError:
 
 import ipywidgets as widgets
 from traitlets import List, Unicode, Dict, observe, Integer
-from .basedatatypes import BaseFigure, BasePlotlyType, fullmatch
+from .basedatatypes import BaseFigure, BasePlotlyType
 from .callbacks import (BoxSelector, LassoSelector,
                         InputDeviceState, Points)
 from .serializers import custom_serializers
-
+from .version import __frontend_version__
 
 @widgets.register()
 class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
@@ -28,11 +28,11 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
     # JavaScript object
     _view_name = Unicode('FigureView').tag(sync=True)
     _view_module = Unicode('plotlywidget').tag(sync=True)
-    _view_module_version = Unicode('0.1.0').tag(sync=True)
+    _view_module_version = Unicode(__frontend_version__).tag(sync=True)
 
     _model_name = Unicode('FigureModel').tag(sync=True)
     _model_module = Unicode('plotlywidget').tag(sync=True)
-    _model_module_version = Unicode('0.1.0').tag(sync=True)
+    _model_module_version = Unicode(__frontend_version__).tag(sync=True)
 
     # ### _data and _layout ###
     # These properties store the current state of the traces and
@@ -550,7 +550,7 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
             # may include axes that weren't explicitly defined by the user.
             for proppath in delta_transform:
                 prop = proppath[0]
-                match = fullmatch(self.layout._subplotid_prop_re, prop)
+                match = self.layout._subplotid_prop_re.match(prop)
                 if match and prop not in self.layout:
                     # We need to create a subplotid object
                     self.layout[prop] = {}
@@ -813,6 +813,12 @@ Note: Frames are supported by the plotly.graph_objs.Figure class"""
                             BaseFigureWidget._remove_overlapping_props(
                                 input_val, delta_val, recur_prop_path))
                         removed.extend(recur_removed)
+
+                        # Check whether the last property in input_val
+                        # has been removed. If so, remove it entirely
+                        if not input_val:
+                            input_data.pop(p)
+                            removed.append(recur_prop_path)
 
                 elif p in input_data and p != 'uid':
                     # ### Remove property ###

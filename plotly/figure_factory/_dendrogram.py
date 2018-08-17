@@ -288,11 +288,12 @@ class _Dendrogram(object):
             hovertext_label = None
             if hovertext:
                 hovertext_label = hovertext[i]
-            trace = graph_objs.Scatter(
+            trace = dict(
+                type='scatter',
                 x=np.multiply(self.sign[self.xaxis], xs),
                 y=np.multiply(self.sign[self.yaxis], ys),
                 mode='lines',
-                marker=graph_objs.scatter.Marker(color=colors[color_key]),
+                marker=dict(color=colors[color_key]),
                 text=hovertext_label,
                 hoverinfo='text'
             )

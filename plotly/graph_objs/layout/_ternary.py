@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Ternary(BaseLayoutHierarchyType):
@@ -788,6 +789,7 @@ class Ternary(BaseLayoutHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         aaxis=None,
         baxis=None,
         bgcolor=None,
@@ -801,6 +803,9 @@ class Ternary(BaseLayoutHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.layout.Ternary
         aaxis
             plotly.graph_objs.layout.ternary.Aaxis instance or dict
             with compatible properties
@@ -825,6 +830,22 @@ class Ternary(BaseLayoutHierarchyType):
         """
         super(Ternary, self).__init__('ternary')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.Ternary 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.Ternary"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout import (ternary as v_ternary)
@@ -840,13 +861,19 @@ class Ternary(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.aaxis = aaxis
-        self.baxis = baxis
-        self.bgcolor = bgcolor
-        self.caxis = caxis
-        self.domain = domain
-        self.sum = sum
+        _v = arg.pop('aaxis', None)
+        self.aaxis = aaxis if aaxis is not None else _v
+        _v = arg.pop('baxis', None)
+        self.baxis = baxis if baxis is not None else _v
+        _v = arg.pop('bgcolor', None)
+        self.bgcolor = bgcolor if bgcolor is not None else _v
+        _v = arg.pop('caxis', None)
+        self.caxis = caxis if caxis is not None else _v
+        _v = arg.pop('domain', None)
+        self.domain = domain if domain is not None else _v
+        _v = arg.pop('sum', None)
+        self.sum = sum if sum is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

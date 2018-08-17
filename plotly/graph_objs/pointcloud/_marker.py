@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Marker(BaseTraceHierarchyType):
@@ -228,6 +229,7 @@ class Marker(BaseTraceHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         blend=None,
         border=None,
         color=None,
@@ -241,6 +243,9 @@ class Marker(BaseTraceHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.pointcloud.Marker
         blend
             Determines if colors are blended together for a
             translucency effect in case `opacity` is specified as a
@@ -276,6 +281,22 @@ class Marker(BaseTraceHierarchyType):
         """
         super(Marker, self).__init__('marker')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.pointcloud.Marker 
+constructor must be a dict or 
+an instance of plotly.graph_objs.pointcloud.Marker"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.pointcloud import (marker as v_marker)
@@ -291,13 +312,19 @@ class Marker(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.blend = blend
-        self.border = border
-        self.color = color
-        self.opacity = opacity
-        self.sizemax = sizemax
-        self.sizemin = sizemin
+        _v = arg.pop('blend', None)
+        self.blend = blend if blend is not None else _v
+        _v = arg.pop('border', None)
+        self.border = border if border is not None else _v
+        _v = arg.pop('color', None)
+        self.color = color if color is not None else _v
+        _v = arg.pop('opacity', None)
+        self.opacity = opacity if opacity is not None else _v
+        _v = arg.pop('sizemax', None)
+        self.sizemax = sizemax if sizemax is not None else _v
+        _v = arg.pop('sizemin', None)
+        self.sizemin = sizemin if sizemin is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Line(BaseTraceHierarchyType):
@@ -8,10 +9,10 @@ class Line(BaseTraceHierarchyType):
     @property
     def color(self):
         """
-        Sets the marker.line color. It accepts either a specific color
-        or an array of numbers that are mapped to the colorscale
-        relative to the max and min values of the array or relative to
-        `cmin` and `cmax` if set.
+        Sets themarker.linecolor. It accepts either a specific color or
+        an array of numbers that are mapped to the colorscale relative
+        to the max and min values of the array or relative to
+        `marker.line.cmin` and `marker.line.cmax` if set.
     
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
@@ -139,10 +140,11 @@ class Line(BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         color
-            Sets the marker.line color. It accepts either a
-            specific color or an array of numbers that are mapped
-            to the colorscale relative to the max and min values of
-            the array or relative to `cmin` and `cmax` if set.
+            Sets themarker.linecolor. It accepts either a specific
+            color or an array of numbers that are mapped to the
+            colorscale relative to the max and min values of the
+            array or relative to `marker.line.cmin` and
+            `marker.line.cmax` if set.
         colorsrc
             Sets the source reference on plot.ly for  color .
         width
@@ -153,18 +155,28 @@ class Line(BaseTraceHierarchyType):
         """
 
     def __init__(
-        self, color=None, colorsrc=None, width=None, widthsrc=None, **kwargs
+        self,
+        arg=None,
+        color=None,
+        colorsrc=None,
+        width=None,
+        widthsrc=None,
+        **kwargs
     ):
         """
         Construct a new Line object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.choropleth.marker.Line
         color
-            Sets the marker.line color. It accepts either a
-            specific color or an array of numbers that are mapped
-            to the colorscale relative to the max and min values of
-            the array or relative to `cmin` and `cmax` if set.
+            Sets themarker.linecolor. It accepts either a specific
+            color or an array of numbers that are mapped to the
+            colorscale relative to the max and min values of the
+            array or relative to `marker.line.cmin` and
+            `marker.line.cmax` if set.
         colorsrc
             Sets the source reference on plot.ly for  color .
         width
@@ -179,6 +191,22 @@ class Line(BaseTraceHierarchyType):
         """
         super(Line, self).__init__('line')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.choropleth.marker.Line 
+constructor must be a dict or 
+an instance of plotly.graph_objs.choropleth.marker.Line"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.choropleth.marker import (line as v_line)
@@ -192,11 +220,15 @@ class Line(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.color = color
-        self.colorsrc = colorsrc
-        self.width = width
-        self.widthsrc = widthsrc
+        _v = arg.pop('color', None)
+        self.color = color if color is not None else _v
+        _v = arg.pop('colorsrc', None)
+        self.colorsrc = colorsrc if colorsrc is not None else _v
+        _v = arg.pop('width', None)
+        self.width = width if width is not None else _v
+        _v = arg.pop('widthsrc', None)
+        self.widthsrc = widthsrc if widthsrc is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

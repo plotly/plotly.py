@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceType
+import copy
 
 
 class Cone(BaseTraceType):
@@ -31,7 +32,6 @@ class Cone(BaseTraceType):
     @property
     def autocolorscale(self):
         """
-        Has an effect only if `color` is set to a numerical array.
         Determines whether the colorscale is a default palette
         (`autocolorscale: true`) or the palette determined by
         `colorscale`. In case `colorscale` is unspecified or
@@ -57,12 +57,10 @@ class Cone(BaseTraceType):
     @property
     def cauto(self):
         """
-        Has an effect only if `color` is set to a numerical array and
-        `cmin`, `cmax` are set by the user. In this case, it controls
-        whether the range of colors in `colorscale` is mapped to the
-        range of values in the `color` array (`cauto: true`), or the
-        `cmin`/`cmax` values (`cauto: false`). Defaults to `false` when
-        `cmin`, `cmax` are set by the user.
+        Determines whether or not the color domain is computed with
+        respect to the input data (here u/v/w norm) or the bounds set
+        in `cmin` and `cmax`  Defaults to `false` when `cmin` and
+        `cmax` are set by the user.
     
         The 'cauto' property must be specified as a bool
         (either True, or False)
@@ -82,9 +80,8 @@ class Cone(BaseTraceType):
     @property
     def cmax(self):
         """
-        Has an effect only if `color` is set to a numerical array. Sets
-        the upper bound of the color domain. Value should be associated
-        to the `color` array index, and if set, `cmin` must be set as
+        Sets the upper bound of the color domain. Value should have the
+        same units as u/v/w norm and if set, `cmin` must be set as
         well.
     
         The 'cmax' property is a number and may be specified as:
@@ -105,9 +102,8 @@ class Cone(BaseTraceType):
     @property
     def cmin(self):
         """
-        Has an effect only if `color` is set to a numerical array. Sets
-        the lower bound of the color domain. Value should be associated
-        to the `color` array index, and if set, `cmax` must be set as
+        Sets the lower bound of the color domain. Value should have the
+        same units as u/v/w norm and if set, `cmax` must be set as
         well.
     
         The 'cmin' property is a number and may be specified as:
@@ -346,17 +342,16 @@ class Cone(BaseTraceType):
     @property
     def colorscale(self):
         """
-        Sets the colorscale and only has an effect if `color` is set to
-        a numerical array. The colorscale must be an array containing
+        Sets the colorscale. The colorscale must be an array containing
         arrays mapping a normalized value to an rgb, rgba, hex, hsl,
         hsv, or named color string. At minimum, a mapping for the
         lowest (0) and highest (1) values are required. For example,
         `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the
-        bounds of the colorscale in color space, use `cmin` and `cmax`.
+        bounds of the colorscale in color space, use`cmin` and `cmax`.
         Alternatively, `colorscale` may be a palette name string of the
-        following list: Greys, YlGnBu, Greens, YlOrRd, Bluered, RdBu,
-        Reds, Blues, Picnic, Rainbow, Portland, Jet, Hot, Blackbody,
-        Earth, Electric, Viridis, Cividis
+        following list: Greys,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Bl
+        ues,Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth,Electric,Vi
+        ridis,Cividis.
     
         The 'colorscale' property is a colorscale and may be
         specified as:
@@ -711,10 +706,9 @@ class Cone(BaseTraceType):
     @property
     def reversescale(self):
         """
-        Has an effect only if `color` is set to a numerical array.
-        Reverses the color mapping if true (`cmin` will correspond to
-        the last color in the array and `cmax` will correspond to the
-        first color).
+        Reverses the color mapping if true. If true, `cmin` will
+        correspond to the last color in the array and `cmax` will
+        correspond to the first color.
     
         The 'reversescale' property must be specified as a bool
         (either True, or False)
@@ -825,11 +819,10 @@ class Cone(BaseTraceType):
     @property
     def sizemode(self):
         """
-        Sets the mode by which the cones are sized. If *scaled*,
-        `sizeref` scales such that the reference cone size for the
-        maximum vector magnitude is 1. If *absolute*, `sizeref` scales
-        such that the reference cone size for vector magnitude 1 is one
-        grid unit.
+        Determines whether `sizeref` is set as a *scaled* (i.e
+        unitless) scalar (normalized by the max u/v/w norm in the
+        vector field) or as *absolute* value (in the same units as the
+        vector field).
     
         The 'sizemode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -850,7 +843,16 @@ class Cone(BaseTraceType):
     @property
     def sizeref(self):
         """
-        Sets the cone size reference value.
+        Adjusts the cone size scaling. The size of the cones is
+        determined by their u/v/w norm multiplied a factor and
+        `sizeref`. This factor (computed internally) corresponds to the
+        minimum "time" to travel across two successive x/y/z positions
+        at the average velocity of those two successive positions. All
+        cones in a given trace use the same factor. With `sizemode` set
+        to *scaled*, `sizeref` is unitless, its default value is *0.5*
+        With `sizemode` set to *absolute*, `sizeref` has the same units
+        as the u/v/w vector field, its the default value is half the
+        sample's maximum vector norm.
     
         The 'sizeref' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
@@ -1249,49 +1251,40 @@ class Cone(BaseTraceType):
             positions. Note that *cm* denote the cone's center of
             mass which corresponds to 1/4 from the tail to tip.
         autocolorscale
-            Has an effect only if `color` is set to a numerical
-            array. Determines whether the colorscale is a default
-            palette (`autocolorscale: true`) or the palette
-            determined by `colorscale`. In case `colorscale` is
-            unspecified or `autocolorscale` is true, the default
-            palette will be chosen according to whether numbers in
-            the `color` array are all positive, all negative or
-            mixed.
+            Determines whether the colorscale is a default palette
+            (`autocolorscale: true`) or the palette determined by
+            `colorscale`. In case `colorscale` is unspecified or
+            `autocolorscale` is true, the default  palette will be
+            chosen according to whether numbers in the `color`
+            array are all positive, all negative or mixed.
         cauto
-            Has an effect only if `color` is set to a numerical
-            array and `cmin`, `cmax` are set by the user. In this
-            case, it controls whether the range of colors in
-            `colorscale` is mapped to the range of values in the
-            `color` array (`cauto: true`), or the `cmin`/`cmax`
-            values (`cauto: false`). Defaults to `false` when
-            `cmin`, `cmax` are set by the user.
+            Determines whether or not the color domain is computed
+            with respect to the input data (here u/v/w norm) or the
+            bounds set in `cmin` and `cmax`  Defaults to `false`
+            when `cmin` and `cmax` are set by the user.
         cmax
-            Has an effect only if `color` is set to a numerical
-            array. Sets the upper bound of the color domain. Value
-            should be associated to the `color` array index, and if
-            set, `cmin` must be set as well.
+            Sets the upper bound of the color domain. Value should
+            have the same units as u/v/w norm and if set, `cmin`
+            must be set as well.
         cmin
-            Has an effect only if `color` is set to a numerical
-            array. Sets the lower bound of the color domain. Value
-            should be associated to the `color` array index, and if
-            set, `cmax` must be set as well.
+            Sets the lower bound of the color domain. Value should
+            have the same units as u/v/w norm and if set, `cmax`
+            must be set as well.
         colorbar
             plotly.graph_objs.cone.ColorBar instance or dict with
             compatible properties
         colorscale
-            Sets the colorscale and only has an effect if `color`
-            is set to a numerical array. The colorscale must be an
-            array containing arrays mapping a normalized value to
-            an rgb, rgba, hex, hsl, hsv, or named color string. At
-            minimum, a mapping for the lowest (0) and highest (1)
-            values are required. For example, `[[0, 'rgb(0,0,255)',
-            [1, 'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `cmin` and `cmax`.
+            Sets the colorscale. The colorscale must be an array
+            containing arrays mapping a normalized value to an rgb,
+            rgba, hex, hsl, hsv, or named color string. At minimum,
+            a mapping for the lowest (0) and highest (1) values are
+            required. For example, `[[0, 'rgb(0,0,255)', [1,
+            'rgb(255,0,0)']]`. To control the bounds of the
+            colorscale in color space, use`cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
-            string of the following list: Greys, YlGnBu, Greens,
-            YlOrRd, Bluered, RdBu, Reds, Blues, Picnic, Rainbow,
-            Portland, Jet, Hot, Blackbody, Earth, Electric,
-            Viridis, Cividis
+            string of the following list: Greys,YlGnBu,Greens,YlOrR
+            d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
+            ot,Blackbody,Earth,Electric,Viridis,Cividis.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -1331,10 +1324,9 @@ class Cone(BaseTraceType):
         opacity
             Sets the opacity of the surface.
         reversescale
-            Has an effect only if `color` is set to a numerical
-            array. Reverses the color mapping if true (`cmin` will
-            correspond to the last color in the array and `cmax`
-            will correspond to the first color).
+            Reverses the color mapping if true. If true, `cmin`
+            will correspond to the last color in the array and
+            `cmax` will correspond to the first color.
         scene
             Sets a reference between this trace's 3D coordinate
             system and a 3D scene. If *scene* (the default value),
@@ -1355,13 +1347,22 @@ class Cone(BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         sizemode
-            Sets the mode by which the cones are sized. If
-            *scaled*, `sizeref` scales such that the reference cone
-            size for the maximum vector magnitude is 1. If
-            *absolute*, `sizeref` scales such that the reference
-            cone size for vector magnitude 1 is one grid unit.
+            Determines whether `sizeref` is set as a *scaled* (i.e
+            unitless) scalar (normalized by the max u/v/w norm in
+            the vector field) or as *absolute* value (in the same
+            units as the vector field).
         sizeref
-            Sets the cone size reference value.
+            Adjusts the cone size scaling. The size of the cones is
+            determined by their u/v/w norm multiplied a factor and
+            `sizeref`. This factor (computed internally)
+            corresponds to the minimum "time" to travel across two
+            successive x/y/z positions at the average velocity of
+            those two successive positions. All cones in a given
+            trace use the same factor. With `sizemode` set to
+            *scaled*, `sizeref` is unitless, its default value is
+            *0.5* With `sizemode` set to *absolute*, `sizeref` has
+            the same units as the u/v/w vector field, its the
+            default value is half the sample's maximum vector norm.
         stream
             plotly.graph_objs.cone.Stream instance or dict with
             compatible properties
@@ -1410,6 +1411,7 @@ class Cone(BaseTraceType):
 
     def __init__(
         self,
+        arg=None,
         anchor=None,
         autocolorscale=None,
         cauto=None,
@@ -1465,54 +1467,48 @@ class Cone(BaseTraceType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Cone
         anchor
             Sets the cones' anchor with respect to their x/y/z
             positions. Note that *cm* denote the cone's center of
             mass which corresponds to 1/4 from the tail to tip.
         autocolorscale
-            Has an effect only if `color` is set to a numerical
-            array. Determines whether the colorscale is a default
-            palette (`autocolorscale: true`) or the palette
-            determined by `colorscale`. In case `colorscale` is
-            unspecified or `autocolorscale` is true, the default
-            palette will be chosen according to whether numbers in
-            the `color` array are all positive, all negative or
-            mixed.
+            Determines whether the colorscale is a default palette
+            (`autocolorscale: true`) or the palette determined by
+            `colorscale`. In case `colorscale` is unspecified or
+            `autocolorscale` is true, the default  palette will be
+            chosen according to whether numbers in the `color`
+            array are all positive, all negative or mixed.
         cauto
-            Has an effect only if `color` is set to a numerical
-            array and `cmin`, `cmax` are set by the user. In this
-            case, it controls whether the range of colors in
-            `colorscale` is mapped to the range of values in the
-            `color` array (`cauto: true`), or the `cmin`/`cmax`
-            values (`cauto: false`). Defaults to `false` when
-            `cmin`, `cmax` are set by the user.
+            Determines whether or not the color domain is computed
+            with respect to the input data (here u/v/w norm) or the
+            bounds set in `cmin` and `cmax`  Defaults to `false`
+            when `cmin` and `cmax` are set by the user.
         cmax
-            Has an effect only if `color` is set to a numerical
-            array. Sets the upper bound of the color domain. Value
-            should be associated to the `color` array index, and if
-            set, `cmin` must be set as well.
+            Sets the upper bound of the color domain. Value should
+            have the same units as u/v/w norm and if set, `cmin`
+            must be set as well.
         cmin
-            Has an effect only if `color` is set to a numerical
-            array. Sets the lower bound of the color domain. Value
-            should be associated to the `color` array index, and if
-            set, `cmax` must be set as well.
+            Sets the lower bound of the color domain. Value should
+            have the same units as u/v/w norm and if set, `cmax`
+            must be set as well.
         colorbar
             plotly.graph_objs.cone.ColorBar instance or dict with
             compatible properties
         colorscale
-            Sets the colorscale and only has an effect if `color`
-            is set to a numerical array. The colorscale must be an
-            array containing arrays mapping a normalized value to
-            an rgb, rgba, hex, hsl, hsv, or named color string. At
-            minimum, a mapping for the lowest (0) and highest (1)
-            values are required. For example, `[[0, 'rgb(0,0,255)',
-            [1, 'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `cmin` and `cmax`.
+            Sets the colorscale. The colorscale must be an array
+            containing arrays mapping a normalized value to an rgb,
+            rgba, hex, hsl, hsv, or named color string. At minimum,
+            a mapping for the lowest (0) and highest (1) values are
+            required. For example, `[[0, 'rgb(0,0,255)', [1,
+            'rgb(255,0,0)']]`. To control the bounds of the
+            colorscale in color space, use`cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
-            string of the following list: Greys, YlGnBu, Greens,
-            YlOrRd, Bluered, RdBu, Reds, Blues, Picnic, Rainbow,
-            Portland, Jet, Hot, Blackbody, Earth, Electric,
-            Viridis, Cividis
+            string of the following list: Greys,YlGnBu,Greens,YlOrR
+            d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
+            ot,Blackbody,Earth,Electric,Viridis,Cividis.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -1552,10 +1548,9 @@ class Cone(BaseTraceType):
         opacity
             Sets the opacity of the surface.
         reversescale
-            Has an effect only if `color` is set to a numerical
-            array. Reverses the color mapping if true (`cmin` will
-            correspond to the last color in the array and `cmax`
-            will correspond to the first color).
+            Reverses the color mapping if true. If true, `cmin`
+            will correspond to the last color in the array and
+            `cmax` will correspond to the first color.
         scene
             Sets a reference between this trace's 3D coordinate
             system and a 3D scene. If *scene* (the default value),
@@ -1576,13 +1571,22 @@ class Cone(BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         sizemode
-            Sets the mode by which the cones are sized. If
-            *scaled*, `sizeref` scales such that the reference cone
-            size for the maximum vector magnitude is 1. If
-            *absolute*, `sizeref` scales such that the reference
-            cone size for vector magnitude 1 is one grid unit.
+            Determines whether `sizeref` is set as a *scaled* (i.e
+            unitless) scalar (normalized by the max u/v/w norm in
+            the vector field) or as *absolute* value (in the same
+            units as the vector field).
         sizeref
-            Sets the cone size reference value.
+            Adjusts the cone size scaling. The size of the cones is
+            determined by their u/v/w norm multiplied a factor and
+            `sizeref`. This factor (computed internally)
+            corresponds to the minimum "time" to travel across two
+            successive x/y/z positions at the average velocity of
+            those two successive positions. All cones in a given
+            trace use the same factor. With `sizemode` set to
+            *scaled*, `sizeref` is unitless, its default value is
+            *0.5* With `sizemode` set to *absolute*, `sizeref` has
+            the same units as the u/v/w vector field, its the
+            default value is half the sample's maximum vector norm.
         stream
             plotly.graph_objs.cone.Stream instance or dict with
             compatible properties
@@ -1633,6 +1637,22 @@ class Cone(BaseTraceType):
         Cone
         """
         super(Cone, self).__init__('cone')
+
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Cone 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Cone"""
+            )
 
         # Import validators
         # -----------------
@@ -1686,58 +1706,101 @@ class Cone(BaseTraceType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.anchor = anchor
-        self.autocolorscale = autocolorscale
-        self.cauto = cauto
-        self.cmax = cmax
-        self.cmin = cmin
-        self.colorbar = colorbar
-        self.colorscale = colorscale
-        self.customdata = customdata
-        self.customdatasrc = customdatasrc
-        self.hoverinfo = hoverinfo
-        self.hoverinfosrc = hoverinfosrc
-        self.hoverlabel = hoverlabel
-        self.ids = ids
-        self.idssrc = idssrc
-        self.legendgroup = legendgroup
-        self.lighting = lighting
-        self.lightposition = lightposition
-        self.name = name
-        self.opacity = opacity
-        self.reversescale = reversescale
-        self.scene = scene
-        self.selectedpoints = selectedpoints
-        self.showlegend = showlegend
-        self.showscale = showscale
-        self.sizemode = sizemode
-        self.sizeref = sizeref
-        self.stream = stream
-        self.text = text
-        self.textsrc = textsrc
-        self.u = u
-        self.uid = uid
-        self.usrc = usrc
-        self.v = v
-        self.visible = visible
-        self.vsrc = vsrc
-        self.w = w
-        self.wsrc = wsrc
-        self.x = x
-        self.xsrc = xsrc
-        self.y = y
-        self.ysrc = ysrc
-        self.z = z
-        self.zsrc = zsrc
+        _v = arg.pop('anchor', None)
+        self.anchor = anchor if anchor is not None else _v
+        _v = arg.pop('autocolorscale', None)
+        self.autocolorscale = autocolorscale if autocolorscale is not None else _v
+        _v = arg.pop('cauto', None)
+        self.cauto = cauto if cauto is not None else _v
+        _v = arg.pop('cmax', None)
+        self.cmax = cmax if cmax is not None else _v
+        _v = arg.pop('cmin', None)
+        self.cmin = cmin if cmin is not None else _v
+        _v = arg.pop('colorbar', None)
+        self.colorbar = colorbar if colorbar is not None else _v
+        _v = arg.pop('colorscale', None)
+        self.colorscale = colorscale if colorscale is not None else _v
+        _v = arg.pop('customdata', None)
+        self.customdata = customdata if customdata is not None else _v
+        _v = arg.pop('customdatasrc', None)
+        self.customdatasrc = customdatasrc if customdatasrc is not None else _v
+        _v = arg.pop('hoverinfo', None)
+        self.hoverinfo = hoverinfo if hoverinfo is not None else _v
+        _v = arg.pop('hoverinfosrc', None)
+        self.hoverinfosrc = hoverinfosrc if hoverinfosrc is not None else _v
+        _v = arg.pop('hoverlabel', None)
+        self.hoverlabel = hoverlabel if hoverlabel is not None else _v
+        _v = arg.pop('ids', None)
+        self.ids = ids if ids is not None else _v
+        _v = arg.pop('idssrc', None)
+        self.idssrc = idssrc if idssrc is not None else _v
+        _v = arg.pop('legendgroup', None)
+        self.legendgroup = legendgroup if legendgroup is not None else _v
+        _v = arg.pop('lighting', None)
+        self.lighting = lighting if lighting is not None else _v
+        _v = arg.pop('lightposition', None)
+        self.lightposition = lightposition if lightposition is not None else _v
+        _v = arg.pop('name', None)
+        self.name = name if name is not None else _v
+        _v = arg.pop('opacity', None)
+        self.opacity = opacity if opacity is not None else _v
+        _v = arg.pop('reversescale', None)
+        self.reversescale = reversescale if reversescale is not None else _v
+        _v = arg.pop('scene', None)
+        self.scene = scene if scene is not None else _v
+        _v = arg.pop('selectedpoints', None)
+        self.selectedpoints = selectedpoints if selectedpoints is not None else _v
+        _v = arg.pop('showlegend', None)
+        self.showlegend = showlegend if showlegend is not None else _v
+        _v = arg.pop('showscale', None)
+        self.showscale = showscale if showscale is not None else _v
+        _v = arg.pop('sizemode', None)
+        self.sizemode = sizemode if sizemode is not None else _v
+        _v = arg.pop('sizeref', None)
+        self.sizeref = sizeref if sizeref is not None else _v
+        _v = arg.pop('stream', None)
+        self.stream = stream if stream is not None else _v
+        _v = arg.pop('text', None)
+        self.text = text if text is not None else _v
+        _v = arg.pop('textsrc', None)
+        self.textsrc = textsrc if textsrc is not None else _v
+        _v = arg.pop('u', None)
+        self.u = u if u is not None else _v
+        _v = arg.pop('uid', None)
+        self.uid = uid if uid is not None else _v
+        _v = arg.pop('usrc', None)
+        self.usrc = usrc if usrc is not None else _v
+        _v = arg.pop('v', None)
+        self.v = v if v is not None else _v
+        _v = arg.pop('visible', None)
+        self.visible = visible if visible is not None else _v
+        _v = arg.pop('vsrc', None)
+        self.vsrc = vsrc if vsrc is not None else _v
+        _v = arg.pop('w', None)
+        self.w = w if w is not None else _v
+        _v = arg.pop('wsrc', None)
+        self.wsrc = wsrc if wsrc is not None else _v
+        _v = arg.pop('x', None)
+        self.x = x if x is not None else _v
+        _v = arg.pop('xsrc', None)
+        self.xsrc = xsrc if xsrc is not None else _v
+        _v = arg.pop('y', None)
+        self.y = y if y is not None else _v
+        _v = arg.pop('ysrc', None)
+        self.ysrc = ysrc if ysrc is not None else _v
+        _v = arg.pop('z', None)
+        self.z = z if z is not None else _v
+        _v = arg.pop('zsrc', None)
+        self.zsrc = zsrc if zsrc is not None else _v
 
         # Read-only literals
         # ------------------
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'cone'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='cone'
+            plotly_name='type', parent_name='cone', val='cone'
         )
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

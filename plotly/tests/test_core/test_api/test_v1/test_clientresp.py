@@ -34,7 +34,7 @@ class ClientrespTest(PlotlyApiTestCase):
         expected_data = ({
             'origin': 'plot',
             'args': '[{"name": "what else floats?", "y": [3, 5]}]',
-            'platform': 'python', 'version': version.__version__, 'key': 'bar',
+            'platform': 'python', 'version': version.stable_semver(), 'key': 'bar',
             'kwargs': '{}', 'un': 'foo'
         })
         self.assertEqual(kwargs['data'], expected_data)
@@ -53,7 +53,7 @@ class ClientrespTest(PlotlyApiTestCase):
         expected_data = ({
             'origin': 'plot',
             'args': '[{"name": "what else floats?", "y": [3, 5]}]',
-            'platform': 'python', 'version': version.__version__, 'key': 'bar',
+            'platform': 'python', 'version': version.stable_semver(), 'key': 'bar',
             'kwargs': '{"filename": "ok", "layout": {"title": "mah plot"}}',
             'un': 'foo'
         })

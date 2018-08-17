@@ -9,18 +9,18 @@ class DomainValidator(_plotly_utils.basevalidators.InfoArrayValidator):
         super(DomainValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type='plot+margins',
+            edit_type='plot',
             items=[
                 {
                     'valType': 'number',
                     'min': 0,
                     'max': 1,
-                    'editType': 'plot+margins'
+                    'editType': 'plot'
                 }, {
                     'valType': 'number',
                     'min': 0,
                     'max': 1,
-                    'editType': 'plot+margins'
+                    'editType': 'plot'
                 }
             ],
             role='info',

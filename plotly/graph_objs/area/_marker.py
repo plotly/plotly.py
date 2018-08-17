@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Marker(BaseTraceHierarchyType):
@@ -8,10 +9,10 @@ class Marker(BaseTraceHierarchyType):
     @property
     def color(self):
         """
-        Sets the marker color. It accepts either a specific color or an
+        Sets themarkercolor. It accepts either a specific color or an
         array of numbers that are mapped to the colorscale relative to
-        the max and min values of the array or relative to `cmin` and
-        `cmax` if set.
+        the max and min values of the array or relative to
+        `marker.cmin` and `marker.cmax` if set.
     
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
@@ -285,10 +286,11 @@ class Marker(BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         color
-            Sets the marker color. It accepts either a specific
-            color or an array of numbers that are mapped to the
+            Sets themarkercolor. It accepts either a specific color
+            or an array of numbers that are mapped to the
             colorscale relative to the max and min values of the
-            array or relative to `cmin` and `cmax` if set.
+            array or relative to `marker.cmin` and `marker.cmax` if
+            set.
         colorsrc
             Sets the source reference on plot.ly for  color .
         opacity
@@ -311,6 +313,7 @@ class Marker(BaseTraceHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         color=None,
         colorsrc=None,
         opacity=None,
@@ -326,11 +329,15 @@ class Marker(BaseTraceHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.area.Marker
         color
-            Sets the marker color. It accepts either a specific
-            color or an array of numbers that are mapped to the
+            Sets themarkercolor. It accepts either a specific color
+            or an array of numbers that are mapped to the
             colorscale relative to the max and min values of the
-            array or relative to `cmin` and `cmax` if set.
+            array or relative to `marker.cmin` and `marker.cmax` if
+            set.
         colorsrc
             Sets the source reference on plot.ly for  color .
         opacity
@@ -356,6 +363,22 @@ class Marker(BaseTraceHierarchyType):
         """
         super(Marker, self).__init__('marker')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.area.Marker 
+constructor must be a dict or 
+an instance of plotly.graph_objs.area.Marker"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.area import (marker as v_marker)
@@ -373,15 +396,23 @@ class Marker(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.color = color
-        self.colorsrc = colorsrc
-        self.opacity = opacity
-        self.opacitysrc = opacitysrc
-        self.size = size
-        self.sizesrc = sizesrc
-        self.symbol = symbol
-        self.symbolsrc = symbolsrc
+        _v = arg.pop('color', None)
+        self.color = color if color is not None else _v
+        _v = arg.pop('colorsrc', None)
+        self.colorsrc = colorsrc if colorsrc is not None else _v
+        _v = arg.pop('opacity', None)
+        self.opacity = opacity if opacity is not None else _v
+        _v = arg.pop('opacitysrc', None)
+        self.opacitysrc = opacitysrc if opacitysrc is not None else _v
+        _v = arg.pop('size', None)
+        self.size = size if size is not None else _v
+        _v = arg.pop('sizesrc', None)
+        self.sizesrc = sizesrc if sizesrc is not None else _v
+        _v = arg.pop('symbol', None)
+        self.symbol = symbol if symbol is not None else _v
+        _v = arg.pop('symbolsrc', None)
+        self.symbolsrc = symbolsrc if symbolsrc is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

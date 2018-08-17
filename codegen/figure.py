@@ -91,8 +91,9 @@ class {fig_classname}({base_classname}):\n""")
     def add_{trace_node.plotly_name}(self""")
 
         # #### Function params####
-        add_constructor_params(buffer, trace_node.child_datatypes,
-                               ['row', 'col'])
+        add_constructor_params(buffer,
+                               trace_node.child_datatypes,
+                               append_extras=['row', 'col'])
 
         # #### Docstring ####
         header = f"Add a new {trace_node.name_datatype_class} trace"
@@ -106,7 +107,7 @@ class {fig_classname}({base_classname}):\n""")
                    'added. Only valid if figure was created using '
                    '`plotly.tools.make_subplots`'))
 
-        add_docstring(buffer, trace_node, header, extras=extras)
+        add_docstring(buffer, trace_node, header, append_extras=extras)
 
         # #### Function body ####
         buffer.write(f"""

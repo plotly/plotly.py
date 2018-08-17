@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Polar(BaseLayoutHierarchyType):
@@ -354,6 +355,32 @@ class Polar(BaseLayoutHierarchyType):
     def domain(self, val):
         self['domain'] = val
 
+    # gridshape
+    # ---------
+    @property
+    def gridshape(self):
+        """
+        Determines if the radial axis grid lines and angular axis line
+        are drawn as *circular* sectors or as *linear* (polygon)
+        sectors. Has an effect only when the angular axis has `type`
+        *category*. Note that `radialaxis.angle` is snapped to the
+        angle of the closest vertex when `gridshape` is *circular* (so
+        that radial axis scale is the same as the data scale).
+    
+        The 'gridshape' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['circular', 'linear']
+
+        Returns
+        -------
+        Any
+        """
+        return self['gridshape']
+
+    @gridshape.setter
+    def gridshape(self, val):
+        self['gridshape'] = val
+
     # radialaxis
     # ----------
     @property
@@ -680,6 +707,14 @@ class Polar(BaseLayoutHierarchyType):
         domain
             plotly.graph_objs.layout.polar.Domain instance or dict
             with compatible properties
+        gridshape
+            Determines if the radial axis grid lines and angular
+            axis line are drawn as *circular* sectors or as
+            *linear* (polygon) sectors. Has an effect only when the
+            angular axis has `type` *category*. Note that
+            `radialaxis.angle` is snapped to the angle of the
+            closest vertex when `gridshape` is *circular* (so that
+            radial axis scale is the same as the data scale).
         radialaxis
             plotly.graph_objs.layout.polar.RadialAxis instance or
             dict with compatible properties
@@ -692,9 +727,11 @@ class Polar(BaseLayoutHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         angularaxis=None,
         bgcolor=None,
         domain=None,
+        gridshape=None,
         radialaxis=None,
         sector=None,
         **kwargs
@@ -704,6 +741,9 @@ class Polar(BaseLayoutHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.layout.Polar
         angularaxis
             plotly.graph_objs.layout.polar.AngularAxis instance or
             dict with compatible properties
@@ -712,6 +752,14 @@ class Polar(BaseLayoutHierarchyType):
         domain
             plotly.graph_objs.layout.polar.Domain instance or dict
             with compatible properties
+        gridshape
+            Determines if the radial axis grid lines and angular
+            axis line are drawn as *circular* sectors or as
+            *linear* (polygon) sectors. Has an effect only when the
+            angular axis has `type` *category*. Note that
+            `radialaxis.angle` is snapped to the angle of the
+            closest vertex when `gridshape` is *circular* (so that
+            radial axis scale is the same as the data scale).
         radialaxis
             plotly.graph_objs.layout.polar.RadialAxis instance or
             dict with compatible properties
@@ -727,6 +775,22 @@ class Polar(BaseLayoutHierarchyType):
         """
         super(Polar, self).__init__('polar')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.Polar 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.Polar"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout import (polar as v_polar)
@@ -736,17 +800,25 @@ class Polar(BaseLayoutHierarchyType):
         self._validators['angularaxis'] = v_polar.AngularAxisValidator()
         self._validators['bgcolor'] = v_polar.BgcolorValidator()
         self._validators['domain'] = v_polar.DomainValidator()
+        self._validators['gridshape'] = v_polar.GridshapeValidator()
         self._validators['radialaxis'] = v_polar.RadialAxisValidator()
         self._validators['sector'] = v_polar.SectorValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        self.angularaxis = angularaxis
-        self.bgcolor = bgcolor
-        self.domain = domain
-        self.radialaxis = radialaxis
-        self.sector = sector
+        _v = arg.pop('angularaxis', None)
+        self.angularaxis = angularaxis if angularaxis is not None else _v
+        _v = arg.pop('bgcolor', None)
+        self.bgcolor = bgcolor if bgcolor is not None else _v
+        _v = arg.pop('domain', None)
+        self.domain = domain if domain is not None else _v
+        _v = arg.pop('gridshape', None)
+        self.gridshape = gridshape if gridshape is not None else _v
+        _v = arg.pop('radialaxis', None)
+        self.radialaxis = radialaxis if radialaxis is not None else _v
+        _v = arg.pop('sector', None)
+        self.sector = sector if sector is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

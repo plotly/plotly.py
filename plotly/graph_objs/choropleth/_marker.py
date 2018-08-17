@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Marker(BaseTraceHierarchyType):
@@ -17,11 +18,12 @@ class Marker(BaseTraceHierarchyType):
             Supported dict properties:
                 
                 color
-                    Sets the marker.line color. It accepts either a
+                    Sets themarker.linecolor. It accepts either a
                     specific color or an array of numbers that are
                     mapped to the colorscale relative to the max
                     and min values of the array or relative to
-                    `cmin` and `cmax` if set.
+                    `marker.line.cmin` and `marker.line.cmax` if
+                    set.
                 colorsrc
                     Sets the source reference on plot.ly for  color
                     .
@@ -103,12 +105,17 @@ class Marker(BaseTraceHierarchyType):
             Sets the source reference on plot.ly for  opacity .
         """
 
-    def __init__(self, line=None, opacity=None, opacitysrc=None, **kwargs):
+    def __init__(
+        self, arg=None, line=None, opacity=None, opacitysrc=None, **kwargs
+    ):
         """
         Construct a new Marker object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.choropleth.Marker
         line
             plotly.graph_objs.choropleth.marker.Line instance or
             dict with compatible properties
@@ -123,6 +130,22 @@ class Marker(BaseTraceHierarchyType):
         """
         super(Marker, self).__init__('marker')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.choropleth.Marker 
+constructor must be a dict or 
+an instance of plotly.graph_objs.choropleth.Marker"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.choropleth import (marker as v_marker)
@@ -135,10 +158,13 @@ class Marker(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.line = line
-        self.opacity = opacity
-        self.opacitysrc = opacitysrc
+        _v = arg.pop('line', None)
+        self.line = line if line is not None else _v
+        _v = arg.pop('opacity', None)
+        self.opacity = opacity if opacity is not None else _v
+        _v = arg.pop('opacitysrc', None)
+        self.opacitysrc = opacitysrc if opacitysrc is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

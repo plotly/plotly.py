@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Link(BaseTraceHierarchyType):
@@ -326,6 +327,7 @@ class Link(BaseTraceHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         color=None,
         colorsrc=None,
         label=None,
@@ -346,6 +348,9 @@ class Link(BaseTraceHierarchyType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.sankey.Link
         color
             Sets the `link` color. It can be a single value, or an
             array for specifying color for each `link`. If
@@ -381,6 +386,22 @@ class Link(BaseTraceHierarchyType):
         """
         super(Link, self).__init__('link')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.sankey.Link 
+constructor must be a dict or 
+an instance of plotly.graph_objs.sankey.Link"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.sankey import (link as v_link)
@@ -401,18 +422,29 @@ class Link(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.color = color
-        self.colorsrc = colorsrc
-        self.label = label
-        self.labelsrc = labelsrc
-        self.line = line
-        self.source = source
-        self.sourcesrc = sourcesrc
-        self.target = target
-        self.targetsrc = targetsrc
-        self.value = value
-        self.valuesrc = valuesrc
+        _v = arg.pop('color', None)
+        self.color = color if color is not None else _v
+        _v = arg.pop('colorsrc', None)
+        self.colorsrc = colorsrc if colorsrc is not None else _v
+        _v = arg.pop('label', None)
+        self.label = label if label is not None else _v
+        _v = arg.pop('labelsrc', None)
+        self.labelsrc = labelsrc if labelsrc is not None else _v
+        _v = arg.pop('line', None)
+        self.line = line if line is not None else _v
+        _v = arg.pop('source', None)
+        self.source = source if source is not None else _v
+        _v = arg.pop('sourcesrc', None)
+        self.sourcesrc = sourcesrc if sourcesrc is not None else _v
+        _v = arg.pop('target', None)
+        self.target = target if target is not None else _v
+        _v = arg.pop('targetsrc', None)
+        self.targetsrc = targetsrc if targetsrc is not None else _v
+        _v = arg.pop('value', None)
+        self.value = value if value is not None else _v
+        _v = arg.pop('valuesrc', None)
+        self.valuesrc = valuesrc if valuesrc is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

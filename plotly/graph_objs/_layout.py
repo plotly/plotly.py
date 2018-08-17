@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutType
+import copy
 
 
 class Layout(BaseLayoutType):
@@ -174,6 +175,16 @@ class Layout(BaseLayoutType):
                     Sets text to appear when hovering over this
                     annotation. If omitted or blank, no hover label
                     will appear.
+                name
+                    When used in a template, named items are
+                    created in the output figure in addition to any
+                    items the figure already has in this array. You
+                    can modify these items in the output figure by
+                    making your own item with `templateitemname`
+                    matching this `name` alongside your
+                    modifications (including `visible: false` or
+                    `enabled: false` to hide it). Has no effect
+                    outside of a template.
                 opacity
                     Sets the opacity of the annotation (text +
                     arrow).
@@ -205,6 +216,17 @@ class Layout(BaseLayoutType):
                     shortens the arrow from the `ax` / `ay` vector,
                     in contrast to `xshift` / `yshift` which moves
                     everything by this amount.
+                templateitemname
+                    Used to refer to a named item in this array in
+                    the template. Named items from the template
+                    will be created even without a matching item in
+                    the input figure, but you can modify one by
+                    making an item with `templateitemname` matching
+                    its `name`, alongside your modifications
+                    (including `visible: false` or `enabled: false`
+                    to hide it). If there is no template or no
+                    matching item, this item will be hidden unless
+                    you explicitly show it with `visible: true`.
                 text
                     Sets the text associated with this annotation.
                     Plotly uses a subset of HTML tags to do things
@@ -1057,6 +1079,16 @@ class Layout(BaseLayoutType):
                     above traces. When `xref` and `yref` are both
                     set to `paper`, image is drawn below the entire
                     plot area.
+                name
+                    When used in a template, named items are
+                    created in the output figure in addition to any
+                    items the figure already has in this array. You
+                    can modify these items in the output figure by
+                    making your own item with `templateitemname`
+                    matching this `name` alongside your
+                    modifications (including `visible: false` or
+                    `enabled: false` to hide it). Has no effect
+                    outside of a template.
                 opacity
                     Sets the opacity of the image.
                 sizex
@@ -1077,6 +1109,17 @@ class Layout(BaseLayoutType):
                     URL must be accessible from the domain where
                     the plot code is run, and can be either
                     relative or absolute.
+                templateitemname
+                    Used to refer to a named item in this array in
+                    the template. Named items from the template
+                    will be created even without a matching item in
+                    the input figure, but you can modify one by
+                    making an item with `templateitemname` matching
+                    its `name`, alongside your modifications
+                    (including `visible: false` or `enabled: false`
+                    to hide it). If there is no template or no
+                    matching item, this item will be hidden unless
+                    you explicitly show it with `visible: true`.
                 visible
                     Determines whether or not this image is
                     visible.
@@ -1432,6 +1475,15 @@ class Layout(BaseLayoutType):
                 domain
                     plotly.graph_objs.layout.polar.Domain instance
                     or dict with compatible properties
+                gridshape
+                    Determines if the radial axis grid lines and
+                    angular axis line are drawn as *circular*
+                    sectors or as *linear* (polygon) sectors. Has
+                    an effect only when the angular axis has `type`
+                    *category*. Note that `radialaxis.angle` is
+                    snapped to the angle of the closest vertex when
+                    `gridshape` is *circular* (so that radial axis
+                    scale is the same as the data scale).
                 radialaxis
                     plotly.graph_objs.layout.polar.RadialAxis
                     instance or dict with compatible properties
@@ -1642,6 +1694,16 @@ class Layout(BaseLayoutType):
                 line
                     plotly.graph_objs.layout.shape.Line instance or
                     dict with compatible properties
+                name
+                    When used in a template, named items are
+                    created in the output figure in addition to any
+                    items the figure already has in this array. You
+                    can modify these items in the output figure by
+                    making your own item with `templateitemname`
+                    matching this `name` alongside your
+                    modifications (including `visible: false` or
+                    `enabled: false` to hide it). Has no effect
+                    outside of a template.
                 opacity
                     Sets the opacity of the shape.
                 path
@@ -1670,6 +1732,17 @@ class Layout(BaseLayoutType):
                     strings, we can't use either to separate date
                     from time parts. Therefore we'll use underscore
                     for this purpose: 2015-02-21_13:45:56.789
+                templateitemname
+                    Used to refer to a named item in this array in
+                    the template. Named items from the template
+                    will be created even without a matching item in
+                    the input figure, but you can modify one by
+                    making an item with `templateitemname` matching
+                    its `name`, alongside your modifications
+                    (including `visible: false` or `enabled: false`
+                    to hide it). If there is no template or no
+                    matching item, this item will be hidden unless
+                    you explicitly show it with `visible: true`.
                 type
                     Specifies the shape type to be drawn. If
                     *line*, a line is drawn from (`x0`,`y0`) to
@@ -1834,12 +1907,33 @@ class Layout(BaseLayoutType):
                 minorticklen
                     Sets the length in pixels of minor step tick
                     marks
+                name
+                    When used in a template, named items are
+                    created in the output figure in addition to any
+                    items the figure already has in this array. You
+                    can modify these items in the output figure by
+                    making your own item with `templateitemname`
+                    matching this `name` alongside your
+                    modifications (including `visible: false` or
+                    `enabled: false` to hide it). Has no effect
+                    outside of a template.
                 pad
                     Set the padding of the slider component along
                     each side.
                 steps
                     plotly.graph_objs.layout.slider.Step instance
                     or dict with compatible properties
+                templateitemname
+                    Used to refer to a named item in this array in
+                    the template. Named items from the template
+                    will be created even without a matching item in
+                    the input figure, but you can modify one by
+                    making an item with `templateitemname` matching
+                    its `name`, alongside your modifications
+                    (including `visible: false` or `enabled: false`
+                    to hide it). If there is no template or no
+                    matching item, this item will be hidden unless
+                    you explicitly show it with `visible: true`.
                 tickcolor
                     Sets the color of the border enclosing the
                     slider.
@@ -1903,6 +1997,42 @@ class Layout(BaseLayoutType):
     @spikedistance.setter
     def spikedistance(self, val):
         self['spikedistance'] = val
+
+    # template
+    # --------
+    @property
+    def template(self):
+        """
+        Default attributes to be applied to the plot. Templates can be
+        created from existing plots using `Plotly.makeTemplate`, or
+        created manually. They should be objects with format: `{layout:
+        layoutTemplate, data: {[type]: [traceTemplate, ...]}, ...}`
+        `layoutTemplate` and `traceTemplate` are objects matching the
+        attribute structure of `layout` and a data trace.  Trace
+        templates are applied cyclically to traces of each type.
+        Container arrays (eg `annotations`) have special handling: An
+        object ending in `defaults` (eg `annotationdefaults`) is
+        applied to each array item. But if an item has a
+        `templateitemname` key we look in the template array for an
+        item with matching `name` and apply that instead. If no
+        matching `name` is found we mark the item invisible. Any named
+        template item not referenced is appended to the end of the
+        array, so you can use this for a watermark annotation or a logo
+        image, for example. To omit one of these items on the plot,
+        make an item with matching `templateitemname` and `visible:
+        false`.
+    
+        The 'template' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['template']
+
+    @template.setter
+    def template(self, val):
+        self['template'] = val
 
     # ternary
     # -------
@@ -2047,12 +2177,33 @@ class Layout(BaseLayoutType):
                     top-to-bottom order respectively.
                 font
                     Sets the font of the update menu button text.
+                name
+                    When used in a template, named items are
+                    created in the output figure in addition to any
+                    items the figure already has in this array. You
+                    can modify these items in the output figure by
+                    making your own item with `templateitemname`
+                    matching this `name` alongside your
+                    modifications (including `visible: false` or
+                    `enabled: false` to hide it). Has no effect
+                    outside of a template.
                 pad
                     Sets the padding around the buttons or dropdown
                     menu.
                 showactive
                     Highlights active dropdown item or active
                     button if true.
+                templateitemname
+                    Used to refer to a named item in this array in
+                    the template. Named items from the template
+                    will be created even without a matching item in
+                    the input figure, but you can modify one by
+                    making an item with `templateitemname` matching
+                    its `name`, alongside your modifications
+                    (including `visible: false` or `enabled: false`
+                    to hide it). If there is no template or no
+                    matching item, this item will be hidden unless
+                    you explicitly show it with `visible: true`.
                 type
                     Determines whether the buttons are accessible
                     via a dropdown menu or whether the buttons are
@@ -3113,6 +3264,27 @@ class Layout(BaseLayoutType):
             not apply to area-like objects. In addition, some
             objects can be hovered on but will not generate
             spikelines, such as scatter fills.
+        template
+            Default attributes to be applied to the plot. Templates
+            can be created from existing plots using
+            `Plotly.makeTemplate`, or created manually. They should
+            be objects with format: `{layout: layoutTemplate, data:
+            {[type]: [traceTemplate, ...]}, ...}` `layoutTemplate`
+            and `traceTemplate` are objects matching the attribute
+            structure of `layout` and a data trace.  Trace
+            templates are applied cyclically to traces of each
+            type. Container arrays (eg `annotations`) have special
+            handling: An object ending in `defaults` (eg
+            `annotationdefaults`) is applied to each array item.
+            But if an item has a `templateitemname` key we look in
+            the template array for an item with matching `name` and
+            apply that instead. If no matching `name` is found we
+            mark the item invisible. Any named template item not
+            referenced is appended to the end of the array, so you
+            can use this for a watermark annotation or a logo
+            image, for example. To omit one of these items on the
+            plot, make an item with matching `templateitemname` and
+            `visible: false`.
         ternary
             plotly.graph_objs.layout.Ternary instance or dict with
             compatible properties
@@ -3148,6 +3320,7 @@ class Layout(BaseLayoutType):
 
     def __init__(
         self,
+        arg=None,
         angularaxis=None,
         annotations=None,
         autosize=None,
@@ -3189,6 +3362,7 @@ class Layout(BaseLayoutType):
         showlegend=None,
         sliders=None,
         spikedistance=None,
+        template=None,
         ternary=None,
         title=None,
         titlefont=None,
@@ -3206,6 +3380,9 @@ class Layout(BaseLayoutType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Layout
         angularaxis
             plotly.graph_objs.layout.AngularAxis instance or dict
             with compatible properties
@@ -3366,6 +3543,27 @@ class Layout(BaseLayoutType):
             not apply to area-like objects. In addition, some
             objects can be hovered on but will not generate
             spikelines, such as scatter fills.
+        template
+            Default attributes to be applied to the plot. Templates
+            can be created from existing plots using
+            `Plotly.makeTemplate`, or created manually. They should
+            be objects with format: `{layout: layoutTemplate, data:
+            {[type]: [traceTemplate, ...]}, ...}` `layoutTemplate`
+            and `traceTemplate` are objects matching the attribute
+            structure of `layout` and a data trace.  Trace
+            templates are applied cyclically to traces of each
+            type. Container arrays (eg `annotations`) have special
+            handling: An object ending in `defaults` (eg
+            `annotationdefaults`) is applied to each array item.
+            But if an item has a `templateitemname` key we look in
+            the template array for an item with matching `name` and
+            apply that instead. If no matching `name` is found we
+            mark the item invisible. Any named template item not
+            referenced is appended to the end of the array, so you
+            can use this for a watermark annotation or a logo
+            image, for example. To omit one of these items on the
+            plot, make an item with matching `templateitemname` and
+            `visible: false`.
         ternary
             plotly.graph_objs.layout.Ternary instance or dict with
             compatible properties
@@ -3403,6 +3601,22 @@ class Layout(BaseLayoutType):
         Layout
         """
         super(Layout, self).__init__('layout')
+
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Layout 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Layout"""
+            )
 
         # Import validators
         # -----------------
@@ -3453,6 +3667,7 @@ class Layout(BaseLayoutType):
         self._validators['showlegend'] = v_layout.ShowlegendValidator()
         self._validators['sliders'] = v_layout.SlidersValidator()
         self._validators['spikedistance'] = v_layout.SpikedistanceValidator()
+        self._validators['template'] = v_layout.TemplateValidator()
         self._validators['ternary'] = v_layout.TernaryValidator()
         self._validators['title'] = v_layout.TitleValidator()
         self._validators['titlefont'] = v_layout.TitlefontValidator()
@@ -3466,58 +3681,111 @@ class Layout(BaseLayoutType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.angularaxis = angularaxis
-        self.annotations = annotations
-        self.autosize = autosize
-        self.bargap = bargap
-        self.bargroupgap = bargroupgap
-        self.barmode = barmode
-        self.barnorm = barnorm
-        self.boxgap = boxgap
-        self.boxgroupgap = boxgroupgap
-        self.boxmode = boxmode
-        self.calendar = calendar
-        self.colorway = colorway
-        self.datarevision = datarevision
-        self.direction = direction
-        self.dragmode = dragmode
-        self.font = font
-        self.geo = geo
-        self.grid = grid
-        self.height = height
-        self.hiddenlabels = hiddenlabels
-        self.hiddenlabelssrc = hiddenlabelssrc
-        self.hidesources = hidesources
-        self.hoverdistance = hoverdistance
-        self.hoverlabel = hoverlabel
-        self.hovermode = hovermode
-        self.images = images
-        self.legend = legend
-        self.mapbox = mapbox
-        self.margin = margin
-        self.orientation = orientation
-        self.paper_bgcolor = paper_bgcolor
-        self.plot_bgcolor = plot_bgcolor
-        self.polar = polar
-        self.radialaxis = radialaxis
-        self.scene = scene
-        self.selectdirection = selectdirection
-        self.separators = separators
-        self.shapes = shapes
-        self.showlegend = showlegend
-        self.sliders = sliders
-        self.spikedistance = spikedistance
-        self.ternary = ternary
-        self.title = title
-        self.titlefont = titlefont
-        self.updatemenus = updatemenus
-        self.violingap = violingap
-        self.violingroupgap = violingroupgap
-        self.violinmode = violinmode
-        self.width = width
-        self.xaxis = xaxis
-        self.yaxis = yaxis
+        _v = arg.pop('angularaxis', None)
+        self.angularaxis = angularaxis if angularaxis is not None else _v
+        _v = arg.pop('annotations', None)
+        self.annotations = annotations if annotations is not None else _v
+        _v = arg.pop('autosize', None)
+        self.autosize = autosize if autosize is not None else _v
+        _v = arg.pop('bargap', None)
+        self.bargap = bargap if bargap is not None else _v
+        _v = arg.pop('bargroupgap', None)
+        self.bargroupgap = bargroupgap if bargroupgap is not None else _v
+        _v = arg.pop('barmode', None)
+        self.barmode = barmode if barmode is not None else _v
+        _v = arg.pop('barnorm', None)
+        self.barnorm = barnorm if barnorm is not None else _v
+        _v = arg.pop('boxgap', None)
+        self.boxgap = boxgap if boxgap is not None else _v
+        _v = arg.pop('boxgroupgap', None)
+        self.boxgroupgap = boxgroupgap if boxgroupgap is not None else _v
+        _v = arg.pop('boxmode', None)
+        self.boxmode = boxmode if boxmode is not None else _v
+        _v = arg.pop('calendar', None)
+        self.calendar = calendar if calendar is not None else _v
+        _v = arg.pop('colorway', None)
+        self.colorway = colorway if colorway is not None else _v
+        _v = arg.pop('datarevision', None)
+        self.datarevision = datarevision if datarevision is not None else _v
+        _v = arg.pop('direction', None)
+        self.direction = direction if direction is not None else _v
+        _v = arg.pop('dragmode', None)
+        self.dragmode = dragmode if dragmode is not None else _v
+        _v = arg.pop('font', None)
+        self.font = font if font is not None else _v
+        _v = arg.pop('geo', None)
+        self.geo = geo if geo is not None else _v
+        _v = arg.pop('grid', None)
+        self.grid = grid if grid is not None else _v
+        _v = arg.pop('height', None)
+        self.height = height if height is not None else _v
+        _v = arg.pop('hiddenlabels', None)
+        self.hiddenlabels = hiddenlabels if hiddenlabels is not None else _v
+        _v = arg.pop('hiddenlabelssrc', None)
+        self.hiddenlabelssrc = hiddenlabelssrc if hiddenlabelssrc is not None else _v
+        _v = arg.pop('hidesources', None)
+        self.hidesources = hidesources if hidesources is not None else _v
+        _v = arg.pop('hoverdistance', None)
+        self.hoverdistance = hoverdistance if hoverdistance is not None else _v
+        _v = arg.pop('hoverlabel', None)
+        self.hoverlabel = hoverlabel if hoverlabel is not None else _v
+        _v = arg.pop('hovermode', None)
+        self.hovermode = hovermode if hovermode is not None else _v
+        _v = arg.pop('images', None)
+        self.images = images if images is not None else _v
+        _v = arg.pop('legend', None)
+        self.legend = legend if legend is not None else _v
+        _v = arg.pop('mapbox', None)
+        self.mapbox = mapbox if mapbox is not None else _v
+        _v = arg.pop('margin', None)
+        self.margin = margin if margin is not None else _v
+        _v = arg.pop('orientation', None)
+        self.orientation = orientation if orientation is not None else _v
+        _v = arg.pop('paper_bgcolor', None)
+        self.paper_bgcolor = paper_bgcolor if paper_bgcolor is not None else _v
+        _v = arg.pop('plot_bgcolor', None)
+        self.plot_bgcolor = plot_bgcolor if plot_bgcolor is not None else _v
+        _v = arg.pop('polar', None)
+        self.polar = polar if polar is not None else _v
+        _v = arg.pop('radialaxis', None)
+        self.radialaxis = radialaxis if radialaxis is not None else _v
+        _v = arg.pop('scene', None)
+        self.scene = scene if scene is not None else _v
+        _v = arg.pop('selectdirection', None)
+        self.selectdirection = selectdirection if selectdirection is not None else _v
+        _v = arg.pop('separators', None)
+        self.separators = separators if separators is not None else _v
+        _v = arg.pop('shapes', None)
+        self.shapes = shapes if shapes is not None else _v
+        _v = arg.pop('showlegend', None)
+        self.showlegend = showlegend if showlegend is not None else _v
+        _v = arg.pop('sliders', None)
+        self.sliders = sliders if sliders is not None else _v
+        _v = arg.pop('spikedistance', None)
+        self.spikedistance = spikedistance if spikedistance is not None else _v
+        _v = arg.pop('template', None)
+        self.template = template if template is not None else _v
+        _v = arg.pop('ternary', None)
+        self.ternary = ternary if ternary is not None else _v
+        _v = arg.pop('title', None)
+        self.title = title if title is not None else _v
+        _v = arg.pop('titlefont', None)
+        self.titlefont = titlefont if titlefont is not None else _v
+        _v = arg.pop('updatemenus', None)
+        self.updatemenus = updatemenus if updatemenus is not None else _v
+        _v = arg.pop('violingap', None)
+        self.violingap = violingap if violingap is not None else _v
+        _v = arg.pop('violingroupgap', None)
+        self.violingroupgap = violingroupgap if violingroupgap is not None else _v
+        _v = arg.pop('violinmode', None)
+        self.violinmode = violinmode if violinmode is not None else _v
+        _v = arg.pop('width', None)
+        self.width = width if width is not None else _v
+        _v = arg.pop('xaxis', None)
+        self.xaxis = xaxis if xaxis is not None else _v
+        _v = arg.pop('yaxis', None)
+        self.yaxis = yaxis if yaxis is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

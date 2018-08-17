@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceType
+import copy
 
 
 class Mesh3d(BaseTraceType):
@@ -43,7 +44,6 @@ class Mesh3d(BaseTraceType):
     @property
     def autocolorscale(self):
         """
-        Has an effect only if `color` is set to a numerical array.
         Determines whether the colorscale is a default palette
         (`autocolorscale: true`) or the palette determined by
         `colorscale`. In case `colorscale` is unspecified or
@@ -69,12 +69,10 @@ class Mesh3d(BaseTraceType):
     @property
     def cauto(self):
         """
-        Has an effect only if `color` is set to a numerical array and
-        `cmin`, `cmax` are set by the user. In this case, it controls
-        whether the range of colors in `colorscale` is mapped to the
-        range of values in the `color` array (`cauto: true`), or the
-        `cmin`/`cmax` values (`cauto: false`). Defaults to `false` when
-        `cmin`, `cmax` are set by the user.
+        Determines whether or not the color domain is computed with
+        respect to the input data (here `intensity`) or the bounds set
+        in `cmin` and `cmax`  Defaults to `false` when `cmin` and
+        `cmax` are set by the user.
     
         The 'cauto' property must be specified as a bool
         (either True, or False)
@@ -94,9 +92,8 @@ class Mesh3d(BaseTraceType):
     @property
     def cmax(self):
         """
-        Has an effect only if `color` is set to a numerical array. Sets
-        the upper bound of the color domain. Value should be associated
-        to the `color` array index, and if set, `cmin` must be set as
+        Sets the upper bound of the color domain. Value should have the
+        same units as `intensity` and if set, `cmin` must be set as
         well.
     
         The 'cmax' property is a number and may be specified as:
@@ -117,9 +114,8 @@ class Mesh3d(BaseTraceType):
     @property
     def cmin(self):
         """
-        Has an effect only if `color` is set to a numerical array. Sets
-        the lower bound of the color domain. Value should be associated
-        to the `color` array index, and if set, `cmax` must be set as
+        Sets the lower bound of the color domain. Value should have the
+        same units as `intensity` and if set, `cmax` must be set as
         well.
     
         The 'cmin' property is a number and may be specified as:
@@ -419,17 +415,16 @@ class Mesh3d(BaseTraceType):
     @property
     def colorscale(self):
         """
-        Sets the colorscale and only has an effect if `color` is set to
-        a numerical array. The colorscale must be an array containing
+        Sets the colorscale. The colorscale must be an array containing
         arrays mapping a normalized value to an rgb, rgba, hex, hsl,
         hsv, or named color string. At minimum, a mapping for the
         lowest (0) and highest (1) values are required. For example,
         `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the
-        bounds of the colorscale in color space, use `cmin` and `cmax`.
+        bounds of the colorscale in color space, use`cmin` and `cmax`.
         Alternatively, `colorscale` may be a palette name string of the
-        following list: Greys, YlGnBu, Greens, YlOrRd, Bluered, RdBu,
-        Reds, Blues, Picnic, Rainbow, Portland, Jet, Hot, Blackbody,
-        Earth, Electric, Viridis, Cividis
+        following list: Greys,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Bl
+        ues,Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth,Electric,Vi
+        ridis,Cividis.
     
         The 'colorscale' property is a colorscale and may be
         specified as:
@@ -1081,10 +1076,9 @@ class Mesh3d(BaseTraceType):
     @property
     def reversescale(self):
         """
-        Has an effect only if `color` is set to a numerical array.
-        Reverses the color mapping if true (`cmin` will correspond to
-        the last color in the array and `cmax` will correspond to the
-        first color).
+        Reverses the color mapping if true. If true, `cmin` will
+        correspond to the last color in the array and `cmax` will
+        correspond to the first color.
     
         The 'reversescale' property must be specified as a bool
         (either True, or False)
@@ -1584,51 +1578,42 @@ class Mesh3d(BaseTraceType):
             bodies or if the intention is to enclose the `x`, `y`
             and `z` point set into a convex hull.
         autocolorscale
-            Has an effect only if `color` is set to a numerical
-            array. Determines whether the colorscale is a default
-            palette (`autocolorscale: true`) or the palette
-            determined by `colorscale`. In case `colorscale` is
-            unspecified or `autocolorscale` is true, the default
-            palette will be chosen according to whether numbers in
-            the `color` array are all positive, all negative or
-            mixed.
+            Determines whether the colorscale is a default palette
+            (`autocolorscale: true`) or the palette determined by
+            `colorscale`. In case `colorscale` is unspecified or
+            `autocolorscale` is true, the default  palette will be
+            chosen according to whether numbers in the `color`
+            array are all positive, all negative or mixed.
         cauto
-            Has an effect only if `color` is set to a numerical
-            array and `cmin`, `cmax` are set by the user. In this
-            case, it controls whether the range of colors in
-            `colorscale` is mapped to the range of values in the
-            `color` array (`cauto: true`), or the `cmin`/`cmax`
-            values (`cauto: false`). Defaults to `false` when
-            `cmin`, `cmax` are set by the user.
+            Determines whether or not the color domain is computed
+            with respect to the input data (here `intensity`) or
+            the bounds set in `cmin` and `cmax`  Defaults to
+            `false` when `cmin` and `cmax` are set by the user.
         cmax
-            Has an effect only if `color` is set to a numerical
-            array. Sets the upper bound of the color domain. Value
-            should be associated to the `color` array index, and if
-            set, `cmin` must be set as well.
+            Sets the upper bound of the color domain. Value should
+            have the same units as `intensity` and if set, `cmin`
+            must be set as well.
         cmin
-            Has an effect only if `color` is set to a numerical
-            array. Sets the lower bound of the color domain. Value
-            should be associated to the `color` array index, and if
-            set, `cmax` must be set as well.
+            Sets the lower bound of the color domain. Value should
+            have the same units as `intensity` and if set, `cmax`
+            must be set as well.
         color
             Sets the color of the whole mesh
         colorbar
             plotly.graph_objs.mesh3d.ColorBar instance or dict with
             compatible properties
         colorscale
-            Sets the colorscale and only has an effect if `color`
-            is set to a numerical array. The colorscale must be an
-            array containing arrays mapping a normalized value to
-            an rgb, rgba, hex, hsl, hsv, or named color string. At
-            minimum, a mapping for the lowest (0) and highest (1)
-            values are required. For example, `[[0, 'rgb(0,0,255)',
-            [1, 'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `cmin` and `cmax`.
+            Sets the colorscale. The colorscale must be an array
+            containing arrays mapping a normalized value to an rgb,
+            rgba, hex, hsl, hsv, or named color string. At minimum,
+            a mapping for the lowest (0) and highest (1) values are
+            required. For example, `[[0, 'rgb(0,0,255)', [1,
+            'rgb(255,0,0)']]`. To control the bounds of the
+            colorscale in color space, use`cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
-            string of the following list: Greys, YlGnBu, Greens,
-            YlOrRd, Bluered, RdBu, Reds, Blues, Picnic, Rainbow,
-            Portland, Jet, Hot, Blackbody, Earth, Electric,
-            Viridis, Cividis
+            string of the following list: Greys,YlGnBu,Greens,YlOrR
+            d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
+            ot,Blackbody,Earth,Electric,Viridis,Cividis.
         contour
             plotly.graph_objs.mesh3d.Contour instance or dict with
             compatible properties
@@ -1724,10 +1709,9 @@ class Mesh3d(BaseTraceType):
         opacity
             Sets the opacity of the surface.
         reversescale
-            Has an effect only if `color` is set to a numerical
-            array. Reverses the color mapping if true (`cmin` will
-            correspond to the last color in the array and `cmax`
-            will correspond to the first color).
+            Reverses the color mapping if true. If true, `cmin`
+            will correspond to the last color in the array and
+            `cmax` will correspond to the first color.
         scene
             Sets a reference between this trace's 3D coordinate
             system and a 3D scene. If *scene* (the default value),
@@ -1796,6 +1780,7 @@ class Mesh3d(BaseTraceType):
 
     def __init__(
         self,
+        arg=None,
         alphahull=None,
         autocolorscale=None,
         cauto=None,
@@ -1862,6 +1847,9 @@ class Mesh3d(BaseTraceType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Mesh3d
         alphahull
             Determines how the mesh surface triangles are derived
             from the set of vertices (points) represented by the
@@ -1882,51 +1870,42 @@ class Mesh3d(BaseTraceType):
             bodies or if the intention is to enclose the `x`, `y`
             and `z` point set into a convex hull.
         autocolorscale
-            Has an effect only if `color` is set to a numerical
-            array. Determines whether the colorscale is a default
-            palette (`autocolorscale: true`) or the palette
-            determined by `colorscale`. In case `colorscale` is
-            unspecified or `autocolorscale` is true, the default
-            palette will be chosen according to whether numbers in
-            the `color` array are all positive, all negative or
-            mixed.
+            Determines whether the colorscale is a default palette
+            (`autocolorscale: true`) or the palette determined by
+            `colorscale`. In case `colorscale` is unspecified or
+            `autocolorscale` is true, the default  palette will be
+            chosen according to whether numbers in the `color`
+            array are all positive, all negative or mixed.
         cauto
-            Has an effect only if `color` is set to a numerical
-            array and `cmin`, `cmax` are set by the user. In this
-            case, it controls whether the range of colors in
-            `colorscale` is mapped to the range of values in the
-            `color` array (`cauto: true`), or the `cmin`/`cmax`
-            values (`cauto: false`). Defaults to `false` when
-            `cmin`, `cmax` are set by the user.
+            Determines whether or not the color domain is computed
+            with respect to the input data (here `intensity`) or
+            the bounds set in `cmin` and `cmax`  Defaults to
+            `false` when `cmin` and `cmax` are set by the user.
         cmax
-            Has an effect only if `color` is set to a numerical
-            array. Sets the upper bound of the color domain. Value
-            should be associated to the `color` array index, and if
-            set, `cmin` must be set as well.
+            Sets the upper bound of the color domain. Value should
+            have the same units as `intensity` and if set, `cmin`
+            must be set as well.
         cmin
-            Has an effect only if `color` is set to a numerical
-            array. Sets the lower bound of the color domain. Value
-            should be associated to the `color` array index, and if
-            set, `cmax` must be set as well.
+            Sets the lower bound of the color domain. Value should
+            have the same units as `intensity` and if set, `cmax`
+            must be set as well.
         color
             Sets the color of the whole mesh
         colorbar
             plotly.graph_objs.mesh3d.ColorBar instance or dict with
             compatible properties
         colorscale
-            Sets the colorscale and only has an effect if `color`
-            is set to a numerical array. The colorscale must be an
-            array containing arrays mapping a normalized value to
-            an rgb, rgba, hex, hsl, hsv, or named color string. At
-            minimum, a mapping for the lowest (0) and highest (1)
-            values are required. For example, `[[0, 'rgb(0,0,255)',
-            [1, 'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `cmin` and `cmax`.
+            Sets the colorscale. The colorscale must be an array
+            containing arrays mapping a normalized value to an rgb,
+            rgba, hex, hsl, hsv, or named color string. At minimum,
+            a mapping for the lowest (0) and highest (1) values are
+            required. For example, `[[0, 'rgb(0,0,255)', [1,
+            'rgb(255,0,0)']]`. To control the bounds of the
+            colorscale in color space, use`cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
-            string of the following list: Greys, YlGnBu, Greens,
-            YlOrRd, Bluered, RdBu, Reds, Blues, Picnic, Rainbow,
-            Portland, Jet, Hot, Blackbody, Earth, Electric,
-            Viridis, Cividis
+            string of the following list: Greys,YlGnBu,Greens,YlOrR
+            d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
+            ot,Blackbody,Earth,Electric,Viridis,Cividis.
         contour
             plotly.graph_objs.mesh3d.Contour instance or dict with
             compatible properties
@@ -2022,10 +2001,9 @@ class Mesh3d(BaseTraceType):
         opacity
             Sets the opacity of the surface.
         reversescale
-            Has an effect only if `color` is set to a numerical
-            array. Reverses the color mapping if true (`cmin` will
-            correspond to the last color in the array and `cmax`
-            will correspond to the first color).
+            Reverses the color mapping if true. If true, `cmin`
+            will correspond to the last color in the array and
+            `cmax` will correspond to the first color.
         scene
             Sets a reference between this trace's 3D coordinate
             system and a 3D scene. If *scene* (the default value),
@@ -2097,6 +2075,22 @@ class Mesh3d(BaseTraceType):
         """
         super(Mesh3d, self).__init__('mesh3d')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Mesh3d 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Mesh3d"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators import (mesh3d as v_mesh3d)
@@ -2160,69 +2154,123 @@ class Mesh3d(BaseTraceType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.alphahull = alphahull
-        self.autocolorscale = autocolorscale
-        self.cauto = cauto
-        self.cmax = cmax
-        self.cmin = cmin
-        self.color = color
-        self.colorbar = colorbar
-        self.colorscale = colorscale
-        self.contour = contour
-        self.customdata = customdata
-        self.customdatasrc = customdatasrc
-        self.delaunayaxis = delaunayaxis
-        self.facecolor = facecolor
-        self.facecolorsrc = facecolorsrc
-        self.flatshading = flatshading
-        self.hoverinfo = hoverinfo
-        self.hoverinfosrc = hoverinfosrc
-        self.hoverlabel = hoverlabel
-        self.i = i
-        self.ids = ids
-        self.idssrc = idssrc
-        self.intensity = intensity
-        self.intensitysrc = intensitysrc
-        self.isrc = isrc
-        self.j = j
-        self.jsrc = jsrc
-        self.k = k
-        self.ksrc = ksrc
-        self.legendgroup = legendgroup
-        self.lighting = lighting
-        self.lightposition = lightposition
-        self.name = name
-        self.opacity = opacity
-        self.reversescale = reversescale
-        self.scene = scene
-        self.selectedpoints = selectedpoints
-        self.showlegend = showlegend
-        self.showscale = showscale
-        self.stream = stream
-        self.text = text
-        self.textsrc = textsrc
-        self.uid = uid
-        self.vertexcolor = vertexcolor
-        self.vertexcolorsrc = vertexcolorsrc
-        self.visible = visible
-        self.x = x
-        self.xcalendar = xcalendar
-        self.xsrc = xsrc
-        self.y = y
-        self.ycalendar = ycalendar
-        self.ysrc = ysrc
-        self.z = z
-        self.zcalendar = zcalendar
-        self.zsrc = zsrc
+        _v = arg.pop('alphahull', None)
+        self.alphahull = alphahull if alphahull is not None else _v
+        _v = arg.pop('autocolorscale', None)
+        self.autocolorscale = autocolorscale if autocolorscale is not None else _v
+        _v = arg.pop('cauto', None)
+        self.cauto = cauto if cauto is not None else _v
+        _v = arg.pop('cmax', None)
+        self.cmax = cmax if cmax is not None else _v
+        _v = arg.pop('cmin', None)
+        self.cmin = cmin if cmin is not None else _v
+        _v = arg.pop('color', None)
+        self.color = color if color is not None else _v
+        _v = arg.pop('colorbar', None)
+        self.colorbar = colorbar if colorbar is not None else _v
+        _v = arg.pop('colorscale', None)
+        self.colorscale = colorscale if colorscale is not None else _v
+        _v = arg.pop('contour', None)
+        self.contour = contour if contour is not None else _v
+        _v = arg.pop('customdata', None)
+        self.customdata = customdata if customdata is not None else _v
+        _v = arg.pop('customdatasrc', None)
+        self.customdatasrc = customdatasrc if customdatasrc is not None else _v
+        _v = arg.pop('delaunayaxis', None)
+        self.delaunayaxis = delaunayaxis if delaunayaxis is not None else _v
+        _v = arg.pop('facecolor', None)
+        self.facecolor = facecolor if facecolor is not None else _v
+        _v = arg.pop('facecolorsrc', None)
+        self.facecolorsrc = facecolorsrc if facecolorsrc is not None else _v
+        _v = arg.pop('flatshading', None)
+        self.flatshading = flatshading if flatshading is not None else _v
+        _v = arg.pop('hoverinfo', None)
+        self.hoverinfo = hoverinfo if hoverinfo is not None else _v
+        _v = arg.pop('hoverinfosrc', None)
+        self.hoverinfosrc = hoverinfosrc if hoverinfosrc is not None else _v
+        _v = arg.pop('hoverlabel', None)
+        self.hoverlabel = hoverlabel if hoverlabel is not None else _v
+        _v = arg.pop('i', None)
+        self.i = i if i is not None else _v
+        _v = arg.pop('ids', None)
+        self.ids = ids if ids is not None else _v
+        _v = arg.pop('idssrc', None)
+        self.idssrc = idssrc if idssrc is not None else _v
+        _v = arg.pop('intensity', None)
+        self.intensity = intensity if intensity is not None else _v
+        _v = arg.pop('intensitysrc', None)
+        self.intensitysrc = intensitysrc if intensitysrc is not None else _v
+        _v = arg.pop('isrc', None)
+        self.isrc = isrc if isrc is not None else _v
+        _v = arg.pop('j', None)
+        self.j = j if j is not None else _v
+        _v = arg.pop('jsrc', None)
+        self.jsrc = jsrc if jsrc is not None else _v
+        _v = arg.pop('k', None)
+        self.k = k if k is not None else _v
+        _v = arg.pop('ksrc', None)
+        self.ksrc = ksrc if ksrc is not None else _v
+        _v = arg.pop('legendgroup', None)
+        self.legendgroup = legendgroup if legendgroup is not None else _v
+        _v = arg.pop('lighting', None)
+        self.lighting = lighting if lighting is not None else _v
+        _v = arg.pop('lightposition', None)
+        self.lightposition = lightposition if lightposition is not None else _v
+        _v = arg.pop('name', None)
+        self.name = name if name is not None else _v
+        _v = arg.pop('opacity', None)
+        self.opacity = opacity if opacity is not None else _v
+        _v = arg.pop('reversescale', None)
+        self.reversescale = reversescale if reversescale is not None else _v
+        _v = arg.pop('scene', None)
+        self.scene = scene if scene is not None else _v
+        _v = arg.pop('selectedpoints', None)
+        self.selectedpoints = selectedpoints if selectedpoints is not None else _v
+        _v = arg.pop('showlegend', None)
+        self.showlegend = showlegend if showlegend is not None else _v
+        _v = arg.pop('showscale', None)
+        self.showscale = showscale if showscale is not None else _v
+        _v = arg.pop('stream', None)
+        self.stream = stream if stream is not None else _v
+        _v = arg.pop('text', None)
+        self.text = text if text is not None else _v
+        _v = arg.pop('textsrc', None)
+        self.textsrc = textsrc if textsrc is not None else _v
+        _v = arg.pop('uid', None)
+        self.uid = uid if uid is not None else _v
+        _v = arg.pop('vertexcolor', None)
+        self.vertexcolor = vertexcolor if vertexcolor is not None else _v
+        _v = arg.pop('vertexcolorsrc', None)
+        self.vertexcolorsrc = vertexcolorsrc if vertexcolorsrc is not None else _v
+        _v = arg.pop('visible', None)
+        self.visible = visible if visible is not None else _v
+        _v = arg.pop('x', None)
+        self.x = x if x is not None else _v
+        _v = arg.pop('xcalendar', None)
+        self.xcalendar = xcalendar if xcalendar is not None else _v
+        _v = arg.pop('xsrc', None)
+        self.xsrc = xsrc if xsrc is not None else _v
+        _v = arg.pop('y', None)
+        self.y = y if y is not None else _v
+        _v = arg.pop('ycalendar', None)
+        self.ycalendar = ycalendar if ycalendar is not None else _v
+        _v = arg.pop('ysrc', None)
+        self.ysrc = ysrc if ysrc is not None else _v
+        _v = arg.pop('z', None)
+        self.z = z if z is not None else _v
+        _v = arg.pop('zcalendar', None)
+        self.zcalendar = zcalendar if zcalendar is not None else _v
+        _v = arg.pop('zsrc', None)
+        self.zsrc = zsrc if zsrc is not None else _v
 
         # Read-only literals
         # ------------------
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'mesh3d'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='mesh3d'
+            plotly_name='type', parent_name='mesh3d', val='mesh3d'
         )
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceType
+import copy
 
 
 class Pointcloud(BaseTraceType):
@@ -909,6 +910,7 @@ class Pointcloud(BaseTraceType):
 
     def __init__(
         self,
+        arg=None,
         customdata=None,
         customdatasrc=None,
         hoverinfo=None,
@@ -951,6 +953,9 @@ class Pointcloud(BaseTraceType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Pointcloud
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -1073,6 +1078,22 @@ class Pointcloud(BaseTraceType):
         """
         super(Pointcloud, self).__init__('pointcloud')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Pointcloud 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Pointcloud"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators import (pointcloud as v_pointcloud)
@@ -1116,47 +1137,79 @@ class Pointcloud(BaseTraceType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.customdata = customdata
-        self.customdatasrc = customdatasrc
-        self.hoverinfo = hoverinfo
-        self.hoverinfosrc = hoverinfosrc
-        self.hoverlabel = hoverlabel
-        self.ids = ids
-        self.idssrc = idssrc
-        self.indices = indices
-        self.indicessrc = indicessrc
-        self.legendgroup = legendgroup
-        self.marker = marker
-        self.name = name
-        self.opacity = opacity
-        self.selectedpoints = selectedpoints
-        self.showlegend = showlegend
-        self.stream = stream
-        self.text = text
-        self.textsrc = textsrc
-        self.uid = uid
-        self.visible = visible
-        self.x = x
-        self.xaxis = xaxis
-        self.xbounds = xbounds
-        self.xboundssrc = xboundssrc
-        self.xsrc = xsrc
-        self.xy = xy
-        self.xysrc = xysrc
-        self.y = y
-        self.yaxis = yaxis
-        self.ybounds = ybounds
-        self.yboundssrc = yboundssrc
-        self.ysrc = ysrc
+        _v = arg.pop('customdata', None)
+        self.customdata = customdata if customdata is not None else _v
+        _v = arg.pop('customdatasrc', None)
+        self.customdatasrc = customdatasrc if customdatasrc is not None else _v
+        _v = arg.pop('hoverinfo', None)
+        self.hoverinfo = hoverinfo if hoverinfo is not None else _v
+        _v = arg.pop('hoverinfosrc', None)
+        self.hoverinfosrc = hoverinfosrc if hoverinfosrc is not None else _v
+        _v = arg.pop('hoverlabel', None)
+        self.hoverlabel = hoverlabel if hoverlabel is not None else _v
+        _v = arg.pop('ids', None)
+        self.ids = ids if ids is not None else _v
+        _v = arg.pop('idssrc', None)
+        self.idssrc = idssrc if idssrc is not None else _v
+        _v = arg.pop('indices', None)
+        self.indices = indices if indices is not None else _v
+        _v = arg.pop('indicessrc', None)
+        self.indicessrc = indicessrc if indicessrc is not None else _v
+        _v = arg.pop('legendgroup', None)
+        self.legendgroup = legendgroup if legendgroup is not None else _v
+        _v = arg.pop('marker', None)
+        self.marker = marker if marker is not None else _v
+        _v = arg.pop('name', None)
+        self.name = name if name is not None else _v
+        _v = arg.pop('opacity', None)
+        self.opacity = opacity if opacity is not None else _v
+        _v = arg.pop('selectedpoints', None)
+        self.selectedpoints = selectedpoints if selectedpoints is not None else _v
+        _v = arg.pop('showlegend', None)
+        self.showlegend = showlegend if showlegend is not None else _v
+        _v = arg.pop('stream', None)
+        self.stream = stream if stream is not None else _v
+        _v = arg.pop('text', None)
+        self.text = text if text is not None else _v
+        _v = arg.pop('textsrc', None)
+        self.textsrc = textsrc if textsrc is not None else _v
+        _v = arg.pop('uid', None)
+        self.uid = uid if uid is not None else _v
+        _v = arg.pop('visible', None)
+        self.visible = visible if visible is not None else _v
+        _v = arg.pop('x', None)
+        self.x = x if x is not None else _v
+        _v = arg.pop('xaxis', None)
+        self.xaxis = xaxis if xaxis is not None else _v
+        _v = arg.pop('xbounds', None)
+        self.xbounds = xbounds if xbounds is not None else _v
+        _v = arg.pop('xboundssrc', None)
+        self.xboundssrc = xboundssrc if xboundssrc is not None else _v
+        _v = arg.pop('xsrc', None)
+        self.xsrc = xsrc if xsrc is not None else _v
+        _v = arg.pop('xy', None)
+        self.xy = xy if xy is not None else _v
+        _v = arg.pop('xysrc', None)
+        self.xysrc = xysrc if xysrc is not None else _v
+        _v = arg.pop('y', None)
+        self.y = y if y is not None else _v
+        _v = arg.pop('yaxis', None)
+        self.yaxis = yaxis if yaxis is not None else _v
+        _v = arg.pop('ybounds', None)
+        self.ybounds = ybounds if ybounds is not None else _v
+        _v = arg.pop('yboundssrc', None)
+        self.yboundssrc = yboundssrc if yboundssrc is not None else _v
+        _v = arg.pop('ysrc', None)
+        self.ysrc = ysrc if ysrc is not None else _v
 
         # Read-only literals
         # ------------------
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'pointcloud'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='pointcloud'
+            plotly_name='type', parent_name='pointcloud', val='pointcloud'
         )
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

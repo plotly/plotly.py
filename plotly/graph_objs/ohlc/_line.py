@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Line(BaseTraceHierarchyType):
@@ -77,12 +78,15 @@ class Line(BaseTraceHierarchyType):
             `decreasing.line.width`.
         """
 
-    def __init__(self, dash=None, width=None, **kwargs):
+    def __init__(self, arg=None, dash=None, width=None, **kwargs):
         """
         Construct a new Line object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.ohlc.Line
         dash
             Sets the dash style of lines. Set to a dash type string
             (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or
@@ -101,6 +105,22 @@ class Line(BaseTraceHierarchyType):
         """
         super(Line, self).__init__('line')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.ohlc.Line 
+constructor must be a dict or 
+an instance of plotly.graph_objs.ohlc.Line"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.ohlc import (line as v_line)
@@ -112,9 +132,11 @@ class Line(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.dash = dash
-        self.width = width
+        _v = arg.pop('dash', None)
+        self.dash = dash if dash is not None else _v
+        _v = arg.pop('width', None)
+        self.width = width if width is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

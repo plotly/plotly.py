@@ -1,11 +1,6 @@
 # plotly.py
 
-> 📢  Announcement!  
-> Registration is open for a 2 day, Dash master class in Washington DC, June 9-10.  
-> [Register online here](https://plotcon.plot.ly/tickets/) 🎚📈🏛
-
-***
-
+## Overview
 [plotly.py](https://plot.ly/d3-js-for-python-and-pandas-charts/) is an interactive, browser-based graphing library for Python :sparkles:
 
 Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is a high-level, declarative charting library. plotly.js ships with over 30 chart types, including scientific charts, 3D graphs, statistical charts, SVG maps, financial charts, and more.
@@ -22,14 +17,57 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 ***
 
 - [Online Documentation](https://plot.ly/python)
-- [`contributing.md`](https://github.com/plotly/python-api/blob/master/contributing.md)
+- [Contributing](contributing.md)
+- [Changelog](CHANGELOG.md)
 - [Code of Conduct](CODE_OF_CONDUCT.md)
+- [Version 3 Migration Guide](migration-guide.md)
 - [New! Announcing Dash](https://medium.com/@plotlygraphs/introducing-dash-5ecf7191b503)
 - [Community](https://community.plot.ly/c/api/python)
 
 ***
 
-Code and documentation copyright 2017 Plotly, Inc.
+## Installation of plotly.py Version 3
+To install plotly.py and enable Jupyter or Jupyter Lab support, run:
+```
+pip install plotly==3.1.1
+pip install "notebook>=5.3" "ipywidgets>=7.2"  # only necessary for Jupyter Notebook environments
+```
+
+If you're using older versions of `notebook` or `ipywidgets` you may need to manually activate the widget extensions (this should not be needed for `notebook>=5.3` and `ipywidgets>=7.2`)
+
+```
+jupyter nbextension enable --py widgetsnbextension --sys-prefix
+jupyter nbextension enable --py plotlywidget --sys-prefix
+```
+
+In addition, to add JupyterLab support run the following commands
+
+```
+pip install jupyterlab==0.33
+
+# Avoid "JavaScript heap out of memory" errors during extension installation
+# (OS X/Linux)
+export NODE_OPTIONS=--max-old-space-size=4096
+# (Windows)
+set NODE_OPTIONS=--max-old-space-size=4096
+
+# Jupyter widgets extension
+jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.36 --no-build
+
+# FigureWidget support
+jupyter labextension install plotlywidget@0.2.1  --no-build
+
+# offline iplot support
+jupyter labextension install @jupyterlab/plotly-extension@0.16  --no-build
+
+# Build extensions (must be done to activate extensions since --no-build is used above)
+jupyter lab build
+```
+
+If you're migrating from plotly.py version 2, please check out the [migration guide](migration-guide.md)
+
+## Copyright and Licenses
+Code and documentation copyright 2018 Plotly, Inc.
 
 Code released under the [MIT license](LICENSE.txt).
 

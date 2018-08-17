@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Button(BaseLayoutHierarchyType):
@@ -100,6 +101,81 @@ class Button(BaseLayoutHierarchyType):
     def method(self, val):
         self['method'] = val
 
+    # name
+    # ----
+    @property
+    def name(self):
+        """
+        When used in a template, named items are created in the output
+        figure in addition to any items the figure already has in this
+        array. You can modify these items in the output figure by
+        making your own item with `templateitemname` matching this
+        `name` alongside your modifications (including `visible: false`
+        or `enabled: false` to hide it). Has no effect outside of a
+        template.
+    
+        The 'name' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['name']
+
+    @name.setter
+    def name(self, val):
+        self['name'] = val
+
+    # templateitemname
+    # ----------------
+    @property
+    def templateitemname(self):
+        """
+        Used to refer to a named item in this array in the template.
+        Named items from the template will be created even without a
+        matching item in the input figure, but you can modify one by
+        making an item with `templateitemname` matching its `name`,
+        alongside your modifications (including `visible: false` or
+        `enabled: false` to hide it). If there is no template or no
+        matching item, this item will be hidden unless you explicitly
+        show it with `visible: true`.
+    
+        The 'templateitemname' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['templateitemname']
+
+    @templateitemname.setter
+    def templateitemname(self, val):
+        self['templateitemname'] = val
+
+    # visible
+    # -------
+    @property
+    def visible(self):
+        """
+        Determines whether or not this button is visible.
+    
+        The 'visible' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self['visible']
+
+    @visible.setter
+    def visible(self, val):
+        self['visible'] = val
+
     # property parent name
     # --------------------
     @property
@@ -132,16 +208,50 @@ class Button(BaseLayoutHierarchyType):
             bind automatically to state updates. This may be used
             to create a component interface and attach to
             updatemenu events manually via JavaScript.
+        name
+            When used in a template, named items are created in the
+            output figure in addition to any items the figure
+            already has in this array. You can modify these items
+            in the output figure by making your own item with
+            `templateitemname` matching this `name` alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). Has no effect outside of a
+            template.
+        templateitemname
+            Used to refer to a named item in this array in the
+            template. Named items from the template will be created
+            even without a matching item in the input figure, but
+            you can modify one by making an item with
+            `templateitemname` matching its `name`, alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). If there is no template or no
+            matching item, this item will be hidden unless you
+            explicitly show it with `visible: true`.
+        visible
+            Determines whether or not this button is visible.
         """
 
     def __init__(
-        self, args=None, execute=None, label=None, method=None, **kwargs
+        self,
+        arg=None,
+        args=None,
+        execute=None,
+        label=None,
+        method=None,
+        name=None,
+        templateitemname=None,
+        visible=None,
+        **kwargs
     ):
         """
         Construct a new Button object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of
+            plotly.graph_objs.layout.updatemenu.Button
         args
             Sets the arguments values to be passed to the Plotly
             method set in `method` on click.
@@ -163,12 +273,49 @@ class Button(BaseLayoutHierarchyType):
             bind automatically to state updates. This may be used
             to create a component interface and attach to
             updatemenu events manually via JavaScript.
+        name
+            When used in a template, named items are created in the
+            output figure in addition to any items the figure
+            already has in this array. You can modify these items
+            in the output figure by making your own item with
+            `templateitemname` matching this `name` alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). Has no effect outside of a
+            template.
+        templateitemname
+            Used to refer to a named item in this array in the
+            template. Named items from the template will be created
+            even without a matching item in the input figure, but
+            you can modify one by making an item with
+            `templateitemname` matching its `name`, alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). If there is no template or no
+            matching item, this item will be hidden unless you
+            explicitly show it with `visible: true`.
+        visible
+            Determines whether or not this button is visible.
 
         Returns
         -------
         Button
         """
         super(Button, self).__init__('buttons')
+
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.updatemenu.Button 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.updatemenu.Button"""
+            )
 
         # Import validators
         # -----------------
@@ -180,14 +327,28 @@ class Button(BaseLayoutHierarchyType):
         self._validators['execute'] = v_button.ExecuteValidator()
         self._validators['label'] = v_button.LabelValidator()
         self._validators['method'] = v_button.MethodValidator()
+        self._validators['name'] = v_button.NameValidator()
+        self._validators['templateitemname'
+                        ] = v_button.TemplateitemnameValidator()
+        self._validators['visible'] = v_button.VisibleValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        self.args = args
-        self.execute = execute
-        self.label = label
-        self.method = method
+        _v = arg.pop('args', None)
+        self.args = args if args is not None else _v
+        _v = arg.pop('execute', None)
+        self.execute = execute if execute is not None else _v
+        _v = arg.pop('label', None)
+        self.label = label if label is not None else _v
+        _v = arg.pop('method', None)
+        self.method = method if method is not None else _v
+        _v = arg.pop('name', None)
+        self.name = name if name is not None else _v
+        _v = arg.pop('templateitemname', None)
+        self.templateitemname = templateitemname if templateitemname is not None else _v
+        _v = arg.pop('visible', None)
+        self.visible = visible if visible is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

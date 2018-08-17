@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Hoverlabel(BaseTraceHierarchyType):
@@ -302,6 +303,7 @@ class Hoverlabel(BaseTraceHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         bgcolor=None,
         bgcolorsrc=None,
         bordercolor=None,
@@ -316,6 +318,9 @@ class Hoverlabel(BaseTraceHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.surface.Hoverlabel
         bgcolor
             Sets the background color of the hover labels for this
             trace
@@ -345,6 +350,22 @@ class Hoverlabel(BaseTraceHierarchyType):
         """
         super(Hoverlabel, self).__init__('hoverlabel')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.surface.Hoverlabel 
+constructor must be a dict or 
+an instance of plotly.graph_objs.surface.Hoverlabel"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.surface import (hoverlabel as v_hoverlabel)
@@ -363,14 +384,21 @@ class Hoverlabel(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.bgcolor = bgcolor
-        self.bgcolorsrc = bgcolorsrc
-        self.bordercolor = bordercolor
-        self.bordercolorsrc = bordercolorsrc
-        self.font = font
-        self.namelength = namelength
-        self.namelengthsrc = namelengthsrc
+        _v = arg.pop('bgcolor', None)
+        self.bgcolor = bgcolor if bgcolor is not None else _v
+        _v = arg.pop('bgcolorsrc', None)
+        self.bgcolorsrc = bgcolorsrc if bgcolorsrc is not None else _v
+        _v = arg.pop('bordercolor', None)
+        self.bordercolor = bordercolor if bordercolor is not None else _v
+        _v = arg.pop('bordercolorsrc', None)
+        self.bordercolorsrc = bordercolorsrc if bordercolorsrc is not None else _v
+        _v = arg.pop('font', None)
+        self.font = font if font is not None else _v
+        _v = arg.pop('namelength', None)
+        self.namelength = namelength if namelength is not None else _v
+        _v = arg.pop('namelengthsrc', None)
+        self.namelengthsrc = namelengthsrc if namelengthsrc is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

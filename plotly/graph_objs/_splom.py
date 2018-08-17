@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceType
+import copy
 
 
 class Splom(BaseTraceType):
@@ -89,6 +90,27 @@ class Splom(BaseTraceType):
                 label
                     Sets the label corresponding to this splom
                     dimension.
+                name
+                    When used in a template, named items are
+                    created in the output figure in addition to any
+                    items the figure already has in this array. You
+                    can modify these items in the output figure by
+                    making your own item with `templateitemname`
+                    matching this `name` alongside your
+                    modifications (including `visible: false` or
+                    `enabled: false` to hide it). Has no effect
+                    outside of a template.
+                templateitemname
+                    Used to refer to a named item in this array in
+                    the template. Named items from the template
+                    will be created even without a matching item in
+                    the input figure, but you can modify one by
+                    making an item with `templateitemname` matching
+                    its `name`, alongside your modifications
+                    (including `visible: false` or `enabled: false`
+                    to hide it). If there is no template or no
+                    matching item, this item will be hidden unless
+                    you explicitly show it with `visible: true`.
                 values
                     Sets the dimension values to be plotted.
                 valuessrc
@@ -285,48 +307,47 @@ class Splom(BaseTraceType):
             Supported dict properties:
                 
                 autocolorscale
-                    Has an effect only if `marker.color` is set to
-                    a numerical array. Determines whether the
-                    colorscale is a default palette
-                    (`autocolorscale: true`) or the palette
-                    determined by `marker.colorscale`. In case
-                    `colorscale` is unspecified or `autocolorscale`
-                    is true, the default  palette will be chosen
-                    according to whether numbers in the `color`
-                    array are all positive, all negative or mixed.
+                    Determines whether the colorscale is a default
+                    palette (`autocolorscale: true`) or the palette
+                    determined by `marker.colorscale`. Has an
+                    effect only if in `marker.color`is set to a
+                    numerical array. In case `colorscale` is
+                    unspecified or `autocolorscale` is true, the
+                    default  palette will be chosen according to
+                    whether numbers in the `color` array are all
+                    positive, all negative or mixed.
                 cauto
-                    Has an effect only if `marker.color` is set to
-                    a numerical array and `cmin`, `cmax` are set by
-                    the user. In this case, it controls whether the
-                    range of colors in `colorscale` is mapped to
-                    the range of values in the `color` array
-                    (`cauto: true`), or the `cmin`/`cmax` values
-                    (`cauto: false`). Defaults to `false` when
-                    `cmin`, `cmax` are set by the user.
+                    Determines whether or not the color domain is
+                    computed with respect to the input data (here
+                    in `marker.color`) or the bounds set in
+                    `marker.cmin` and `marker.cmax`  Has an effect
+                    only if in `marker.color`is set to a numerical
+                    array. Defaults to `false` when `marker.cmin`
+                    and `marker.cmax` are set by the user.
                 cmax
-                    Has an effect only if `marker.color` is set to
-                    a numerical array. Sets the upper bound of the
-                    color domain. Value should be associated to the
-                    `marker.color` array index, and if set,
+                    Sets the upper bound of the color domain. Has
+                    an effect only if in `marker.color`is set to a
+                    numerical array. Value should have the same
+                    units as in `marker.color` and if set,
                     `marker.cmin` must be set as well.
                 cmin
-                    Has an effect only if `marker.color` is set to
-                    a numerical array. Sets the lower bound of the
-                    color domain. Value should be associated to the
-                    `marker.color` array index, and if set,
+                    Sets the lower bound of the color domain. Has
+                    an effect only if in `marker.color`is set to a
+                    numerical array. Value should have the same
+                    units as in `marker.color` and if set,
                     `marker.cmax` must be set as well.
                 color
-                    Sets the marker color. It accepts either a
+                    Sets themarkercolor. It accepts either a
                     specific color or an array of numbers that are
                     mapped to the colorscale relative to the max
                     and min values of the array or relative to
-                    `cmin` and `cmax` if set.
+                    `marker.cmin` and `marker.cmax` if set.
                 colorbar
                     plotly.graph_objs.splom.marker.ColorBar
                     instance or dict with compatible properties
                 colorscale
-                    Sets the colorscale and only has an effect if
-                    `marker.color` is set to a numerical array. The
+                    Sets the colorscale. Has an effect only if in
+                    `marker.color`is set to a numerical array. The
                     colorscale must be an array containing arrays
                     mapping a normalized value to an rgb, rgba,
                     hex, hsl, hsv, or named color string. At
@@ -334,12 +355,12 @@ class Splom(BaseTraceType):
                     highest (1) values are required. For example,
                     `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To
                     control the bounds of the colorscale in color
-                    space, use `marker.cmin` and `marker.cmax`.
+                    space, use`marker.cmin` and `marker.cmax`.
                     Alternatively, `colorscale` may be a palette
-                    name string of the following list: Greys,
-                    YlGnBu, Greens, YlOrRd, Bluered, RdBu, Reds,
-                    Blues, Picnic, Rainbow, Portland, Jet, Hot,
-                    Blackbody, Earth, Electric, Viridis, Cividis
+                    name string of the following list: Greys,YlGnBu
+                    ,Greens,YlOrRd,Bluered,RdBu,Reds,Blues,Picnic,R
+                    ainbow,Portland,Jet,Hot,Blackbody,Earth,Electri
+                    c,Viridis,Cividis.
                 colorsrc
                     Sets the source reference on plot.ly for  color
                     .
@@ -352,15 +373,16 @@ class Splom(BaseTraceType):
                     Sets the source reference on plot.ly for
                     opacity .
                 reversescale
-                    Has an effect only if `marker.color` is set to
-                    a numerical array. Reverses the color mapping
-                    if true (`cmin` will correspond to the last
-                    color in the array and `cmax` will correspond
-                    to the first color).
+                    Reverses the color mapping if true. Has an
+                    effect only if in `marker.color`is set to a
+                    numerical array. If true, `marker.cmin` will
+                    correspond to the last color in the array and
+                    `marker.cmax` will correspond to the first
+                    color.
                 showscale
-                    Has an effect only if `marker.color` is set to
-                    a numerical array. Determines whether or not a
-                    colorbar is displayed.
+                    Determines whether or not a colorbar is
+                    displayed for this trace. Has an effect only if
+                    in `marker.color`is set to a numerical array.
                 size
                     Sets the marker size (in px).
                 sizemin
@@ -867,6 +889,7 @@ class Splom(BaseTraceType):
 
     def __init__(
         self,
+        arg=None,
         customdata=None,
         customdatasrc=None,
         diagonal=None,
@@ -908,6 +931,9 @@ class Splom(BaseTraceType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Splom
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -1004,6 +1030,22 @@ class Splom(BaseTraceType):
         """
         super(Splom, self).__init__('splom')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Splom 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Splom"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators import (splom as v_splom)
@@ -1039,41 +1081,67 @@ class Splom(BaseTraceType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.customdata = customdata
-        self.customdatasrc = customdatasrc
-        self.diagonal = diagonal
-        self.dimensions = dimensions
-        self.hoverinfo = hoverinfo
-        self.hoverinfosrc = hoverinfosrc
-        self.hoverlabel = hoverlabel
-        self.ids = ids
-        self.idssrc = idssrc
-        self.legendgroup = legendgroup
-        self.marker = marker
-        self.name = name
-        self.opacity = opacity
-        self.selected = selected
-        self.selectedpoints = selectedpoints
-        self.showlegend = showlegend
-        self.showlowerhalf = showlowerhalf
-        self.showupperhalf = showupperhalf
-        self.stream = stream
-        self.text = text
-        self.textsrc = textsrc
-        self.uid = uid
-        self.unselected = unselected
-        self.visible = visible
-        self.xaxes = xaxes
-        self.yaxes = yaxes
+        _v = arg.pop('customdata', None)
+        self.customdata = customdata if customdata is not None else _v
+        _v = arg.pop('customdatasrc', None)
+        self.customdatasrc = customdatasrc if customdatasrc is not None else _v
+        _v = arg.pop('diagonal', None)
+        self.diagonal = diagonal if diagonal is not None else _v
+        _v = arg.pop('dimensions', None)
+        self.dimensions = dimensions if dimensions is not None else _v
+        _v = arg.pop('hoverinfo', None)
+        self.hoverinfo = hoverinfo if hoverinfo is not None else _v
+        _v = arg.pop('hoverinfosrc', None)
+        self.hoverinfosrc = hoverinfosrc if hoverinfosrc is not None else _v
+        _v = arg.pop('hoverlabel', None)
+        self.hoverlabel = hoverlabel if hoverlabel is not None else _v
+        _v = arg.pop('ids', None)
+        self.ids = ids if ids is not None else _v
+        _v = arg.pop('idssrc', None)
+        self.idssrc = idssrc if idssrc is not None else _v
+        _v = arg.pop('legendgroup', None)
+        self.legendgroup = legendgroup if legendgroup is not None else _v
+        _v = arg.pop('marker', None)
+        self.marker = marker if marker is not None else _v
+        _v = arg.pop('name', None)
+        self.name = name if name is not None else _v
+        _v = arg.pop('opacity', None)
+        self.opacity = opacity if opacity is not None else _v
+        _v = arg.pop('selected', None)
+        self.selected = selected if selected is not None else _v
+        _v = arg.pop('selectedpoints', None)
+        self.selectedpoints = selectedpoints if selectedpoints is not None else _v
+        _v = arg.pop('showlegend', None)
+        self.showlegend = showlegend if showlegend is not None else _v
+        _v = arg.pop('showlowerhalf', None)
+        self.showlowerhalf = showlowerhalf if showlowerhalf is not None else _v
+        _v = arg.pop('showupperhalf', None)
+        self.showupperhalf = showupperhalf if showupperhalf is not None else _v
+        _v = arg.pop('stream', None)
+        self.stream = stream if stream is not None else _v
+        _v = arg.pop('text', None)
+        self.text = text if text is not None else _v
+        _v = arg.pop('textsrc', None)
+        self.textsrc = textsrc if textsrc is not None else _v
+        _v = arg.pop('uid', None)
+        self.uid = uid if uid is not None else _v
+        _v = arg.pop('unselected', None)
+        self.unselected = unselected if unselected is not None else _v
+        _v = arg.pop('visible', None)
+        self.visible = visible if visible is not None else _v
+        _v = arg.pop('xaxes', None)
+        self.xaxes = xaxes if xaxes is not None else _v
+        _v = arg.pop('yaxes', None)
+        self.yaxes = yaxes if yaxes is not None else _v
 
         # Read-only literals
         # ------------------
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'splom'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='splom'
+            plotly_name='type', parent_name='splom', val='splom'
         )
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

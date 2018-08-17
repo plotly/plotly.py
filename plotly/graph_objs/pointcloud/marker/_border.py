@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Border(BaseTraceHierarchyType):
@@ -106,12 +107,16 @@ class Border(BaseTraceHierarchyType):
             panning.
         """
 
-    def __init__(self, arearatio=None, color=None, **kwargs):
+    def __init__(self, arg=None, arearatio=None, color=None, **kwargs):
         """
         Construct a new Border object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of
+            plotly.graph_objs.pointcloud.marker.Border
         arearatio
             Specifies what fraction of the marker area is covered
             with the border.
@@ -127,6 +132,22 @@ class Border(BaseTraceHierarchyType):
         """
         super(Border, self).__init__('border')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.pointcloud.marker.Border 
+constructor must be a dict or 
+an instance of plotly.graph_objs.pointcloud.marker.Border"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.pointcloud.marker import (border as v_border)
@@ -138,9 +159,11 @@ class Border(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.arearatio = arearatio
-        self.color = color
+        _v = arg.pop('arearatio', None)
+        self.arearatio = arearatio if arearatio is not None else _v
+        _v = arg.pop('color', None)
+        self.color = color if color is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

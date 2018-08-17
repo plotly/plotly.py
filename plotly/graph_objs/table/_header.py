@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Header(BaseTraceHierarchyType):
@@ -411,6 +412,7 @@ class Header(BaseTraceHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         align=None,
         alignsrc=None,
         fill=None,
@@ -432,6 +434,9 @@ class Header(BaseTraceHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.table.Header
         align
             Sets the horizontal alignment of the `text` within the
             box. Has an effect only if `text` spans more two or
@@ -481,6 +486,22 @@ class Header(BaseTraceHierarchyType):
         """
         super(Header, self).__init__('header')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.table.Header 
+constructor must be a dict or 
+an instance of plotly.graph_objs.table.Header"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.table import (header as v_header)
@@ -504,21 +525,35 @@ class Header(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.align = align
-        self.alignsrc = alignsrc
-        self.fill = fill
-        self.font = font
-        self.format = format
-        self.formatsrc = formatsrc
-        self.height = height
-        self.line = line
-        self.prefix = prefix
-        self.prefixsrc = prefixsrc
-        self.suffix = suffix
-        self.suffixsrc = suffixsrc
-        self.values = values
-        self.valuessrc = valuessrc
+        _v = arg.pop('align', None)
+        self.align = align if align is not None else _v
+        _v = arg.pop('alignsrc', None)
+        self.alignsrc = alignsrc if alignsrc is not None else _v
+        _v = arg.pop('fill', None)
+        self.fill = fill if fill is not None else _v
+        _v = arg.pop('font', None)
+        self.font = font if font is not None else _v
+        _v = arg.pop('format', None)
+        self.format = format if format is not None else _v
+        _v = arg.pop('formatsrc', None)
+        self.formatsrc = formatsrc if formatsrc is not None else _v
+        _v = arg.pop('height', None)
+        self.height = height if height is not None else _v
+        _v = arg.pop('line', None)
+        self.line = line if line is not None else _v
+        _v = arg.pop('prefix', None)
+        self.prefix = prefix if prefix is not None else _v
+        _v = arg.pop('prefixsrc', None)
+        self.prefixsrc = prefixsrc if prefixsrc is not None else _v
+        _v = arg.pop('suffix', None)
+        self.suffix = suffix if suffix is not None else _v
+        _v = arg.pop('suffixsrc', None)
+        self.suffixsrc = suffixsrc if suffixsrc is not None else _v
+        _v = arg.pop('values', None)
+        self.values = values if values is not None else _v
+        _v = arg.pop('valuessrc', None)
+        self.valuessrc = valuessrc if valuessrc is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Annotation(BaseLayoutHierarchyType):
@@ -615,6 +616,33 @@ class Annotation(BaseLayoutHierarchyType):
     def hovertext(self, val):
         self['hovertext'] = val
 
+    # name
+    # ----
+    @property
+    def name(self):
+        """
+        When used in a template, named items are created in the output
+        figure in addition to any items the figure already has in this
+        array. You can modify these items in the output figure by
+        making your own item with `templateitemname` matching this
+        `name` alongside your modifications (including `visible: false`
+        or `enabled: false` to hide it). Has no effect outside of a
+        template.
+    
+        The 'name' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['name']
+
+    @name.setter
+    def name(self, val):
+        self['name'] = val
+
     # opacity
     # -------
     @property
@@ -747,6 +775,34 @@ class Annotation(BaseLayoutHierarchyType):
     @startstandoff.setter
     def startstandoff(self, val):
         self['startstandoff'] = val
+
+    # templateitemname
+    # ----------------
+    @property
+    def templateitemname(self):
+        """
+        Used to refer to a named item in this array in the template.
+        Named items from the template will be created even without a
+        matching item in the input figure, but you can modify one by
+        making an item with `templateitemname` matching its `name`,
+        alongside your modifications (including `visible: false` or
+        `enabled: false` to hide it). If there is no template or no
+        matching item, this item will be hidden unless you explicitly
+        show it with `visible: true`.
+    
+        The 'templateitemname' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['templateitemname']
+
+    @templateitemname.setter
+    def templateitemname(self, val):
+        self['templateitemname'] = val
 
     # text
     # ----
@@ -1208,6 +1264,15 @@ class Annotation(BaseLayoutHierarchyType):
         hovertext
             Sets text to appear when hovering over this annotation.
             If omitted or blank, no hover label will appear.
+        name
+            When used in a template, named items are created in the
+            output figure in addition to any items the figure
+            already has in this array. You can modify these items
+            in the output figure by making your own item with
+            `templateitemname` matching this `name` alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). Has no effect outside of a
+            template.
         opacity
             Sets the opacity of the annotation (text + arrow).
         showarrow
@@ -1235,6 +1300,16 @@ class Annotation(BaseLayoutHierarchyType):
             Note that this shortens the arrow from the `ax` / `ay`
             vector, in contrast to `xshift` / `yshift` which moves
             everything by this amount.
+        templateitemname
+            Used to refer to a named item in this array in the
+            template. Named items from the template will be created
+            even without a matching item in the input figure, but
+            you can modify one by making an item with
+            `templateitemname` matching its `name`, alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). If there is no template or no
+            matching item, this item will be hidden unless you
+            explicitly show it with `visible: true`.
         text
             Sets the text associated with this annotation. Plotly
             uses a subset of HTML tags to do things like newline
@@ -1328,6 +1403,7 @@ class Annotation(BaseLayoutHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         align=None,
         arrowcolor=None,
         arrowhead=None,
@@ -1348,12 +1424,14 @@ class Annotation(BaseLayoutHierarchyType):
         height=None,
         hoverlabel=None,
         hovertext=None,
+        name=None,
         opacity=None,
         showarrow=None,
         standoff=None,
         startarrowhead=None,
         startarrowsize=None,
         startstandoff=None,
+        templateitemname=None,
         text=None,
         textangle=None,
         valign=None,
@@ -1376,6 +1454,9 @@ class Annotation(BaseLayoutHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.layout.Annotation
         align
             Sets the horizontal alignment of the `text` within the
             box. Has an effect only if `text` spans more two or
@@ -1469,6 +1550,15 @@ class Annotation(BaseLayoutHierarchyType):
         hovertext
             Sets text to appear when hovering over this annotation.
             If omitted or blank, no hover label will appear.
+        name
+            When used in a template, named items are created in the
+            output figure in addition to any items the figure
+            already has in this array. You can modify these items
+            in the output figure by making your own item with
+            `templateitemname` matching this `name` alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). Has no effect outside of a
+            template.
         opacity
             Sets the opacity of the annotation (text + arrow).
         showarrow
@@ -1496,6 +1586,16 @@ class Annotation(BaseLayoutHierarchyType):
             Note that this shortens the arrow from the `ax` / `ay`
             vector, in contrast to `xshift` / `yshift` which moves
             everything by this amount.
+        templateitemname
+            Used to refer to a named item in this array in the
+            template. Named items from the template will be created
+            even without a matching item in the input figure, but
+            you can modify one by making an item with
+            `templateitemname` matching its `name`, alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). If there is no template or no
+            matching item, this item will be hidden unless you
+            explicitly show it with `visible: true`.
         text
             Sets the text associated with this annotation. Plotly
             uses a subset of HTML tags to do things like newline
@@ -1592,6 +1692,22 @@ class Annotation(BaseLayoutHierarchyType):
         """
         super(Annotation, self).__init__('annotations')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.Annotation 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.Annotation"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout import (annotation as v_annotation)
@@ -1619,6 +1735,7 @@ class Annotation(BaseLayoutHierarchyType):
         self._validators['height'] = v_annotation.HeightValidator()
         self._validators['hoverlabel'] = v_annotation.HoverlabelValidator()
         self._validators['hovertext'] = v_annotation.HovertextValidator()
+        self._validators['name'] = v_annotation.NameValidator()
         self._validators['opacity'] = v_annotation.OpacityValidator()
         self._validators['showarrow'] = v_annotation.ShowarrowValidator()
         self._validators['standoff'] = v_annotation.StandoffValidator()
@@ -1628,6 +1745,8 @@ class Annotation(BaseLayoutHierarchyType):
                         ] = v_annotation.StartarrowsizeValidator()
         self._validators['startstandoff'
                         ] = v_annotation.StartstandoffValidator()
+        self._validators['templateitemname'
+                        ] = v_annotation.TemplateitemnameValidator()
         self._validators['text'] = v_annotation.TextValidator()
         self._validators['textangle'] = v_annotation.TextangleValidator()
         self._validators['valign'] = v_annotation.ValignValidator()
@@ -1646,48 +1765,93 @@ class Annotation(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.align = align
-        self.arrowcolor = arrowcolor
-        self.arrowhead = arrowhead
-        self.arrowside = arrowside
-        self.arrowsize = arrowsize
-        self.arrowwidth = arrowwidth
-        self.ax = ax
-        self.axref = axref
-        self.ay = ay
-        self.ayref = ayref
-        self.bgcolor = bgcolor
-        self.bordercolor = bordercolor
-        self.borderpad = borderpad
-        self.borderwidth = borderwidth
-        self.captureevents = captureevents
-        self.clicktoshow = clicktoshow
-        self.font = font
-        self.height = height
-        self.hoverlabel = hoverlabel
-        self.hovertext = hovertext
-        self.opacity = opacity
-        self.showarrow = showarrow
-        self.standoff = standoff
-        self.startarrowhead = startarrowhead
-        self.startarrowsize = startarrowsize
-        self.startstandoff = startstandoff
-        self.text = text
-        self.textangle = textangle
-        self.valign = valign
-        self.visible = visible
-        self.width = width
-        self.x = x
-        self.xanchor = xanchor
-        self.xclick = xclick
-        self.xref = xref
-        self.xshift = xshift
-        self.y = y
-        self.yanchor = yanchor
-        self.yclick = yclick
-        self.yref = yref
-        self.yshift = yshift
+        _v = arg.pop('align', None)
+        self.align = align if align is not None else _v
+        _v = arg.pop('arrowcolor', None)
+        self.arrowcolor = arrowcolor if arrowcolor is not None else _v
+        _v = arg.pop('arrowhead', None)
+        self.arrowhead = arrowhead if arrowhead is not None else _v
+        _v = arg.pop('arrowside', None)
+        self.arrowside = arrowside if arrowside is not None else _v
+        _v = arg.pop('arrowsize', None)
+        self.arrowsize = arrowsize if arrowsize is not None else _v
+        _v = arg.pop('arrowwidth', None)
+        self.arrowwidth = arrowwidth if arrowwidth is not None else _v
+        _v = arg.pop('ax', None)
+        self.ax = ax if ax is not None else _v
+        _v = arg.pop('axref', None)
+        self.axref = axref if axref is not None else _v
+        _v = arg.pop('ay', None)
+        self.ay = ay if ay is not None else _v
+        _v = arg.pop('ayref', None)
+        self.ayref = ayref if ayref is not None else _v
+        _v = arg.pop('bgcolor', None)
+        self.bgcolor = bgcolor if bgcolor is not None else _v
+        _v = arg.pop('bordercolor', None)
+        self.bordercolor = bordercolor if bordercolor is not None else _v
+        _v = arg.pop('borderpad', None)
+        self.borderpad = borderpad if borderpad is not None else _v
+        _v = arg.pop('borderwidth', None)
+        self.borderwidth = borderwidth if borderwidth is not None else _v
+        _v = arg.pop('captureevents', None)
+        self.captureevents = captureevents if captureevents is not None else _v
+        _v = arg.pop('clicktoshow', None)
+        self.clicktoshow = clicktoshow if clicktoshow is not None else _v
+        _v = arg.pop('font', None)
+        self.font = font if font is not None else _v
+        _v = arg.pop('height', None)
+        self.height = height if height is not None else _v
+        _v = arg.pop('hoverlabel', None)
+        self.hoverlabel = hoverlabel if hoverlabel is not None else _v
+        _v = arg.pop('hovertext', None)
+        self.hovertext = hovertext if hovertext is not None else _v
+        _v = arg.pop('name', None)
+        self.name = name if name is not None else _v
+        _v = arg.pop('opacity', None)
+        self.opacity = opacity if opacity is not None else _v
+        _v = arg.pop('showarrow', None)
+        self.showarrow = showarrow if showarrow is not None else _v
+        _v = arg.pop('standoff', None)
+        self.standoff = standoff if standoff is not None else _v
+        _v = arg.pop('startarrowhead', None)
+        self.startarrowhead = startarrowhead if startarrowhead is not None else _v
+        _v = arg.pop('startarrowsize', None)
+        self.startarrowsize = startarrowsize if startarrowsize is not None else _v
+        _v = arg.pop('startstandoff', None)
+        self.startstandoff = startstandoff if startstandoff is not None else _v
+        _v = arg.pop('templateitemname', None)
+        self.templateitemname = templateitemname if templateitemname is not None else _v
+        _v = arg.pop('text', None)
+        self.text = text if text is not None else _v
+        _v = arg.pop('textangle', None)
+        self.textangle = textangle if textangle is not None else _v
+        _v = arg.pop('valign', None)
+        self.valign = valign if valign is not None else _v
+        _v = arg.pop('visible', None)
+        self.visible = visible if visible is not None else _v
+        _v = arg.pop('width', None)
+        self.width = width if width is not None else _v
+        _v = arg.pop('x', None)
+        self.x = x if x is not None else _v
+        _v = arg.pop('xanchor', None)
+        self.xanchor = xanchor if xanchor is not None else _v
+        _v = arg.pop('xclick', None)
+        self.xclick = xclick if xclick is not None else _v
+        _v = arg.pop('xref', None)
+        self.xref = xref if xref is not None else _v
+        _v = arg.pop('xshift', None)
+        self.xshift = xshift if xshift is not None else _v
+        _v = arg.pop('y', None)
+        self.y = y if y is not None else _v
+        _v = arg.pop('yanchor', None)
+        self.yanchor = yanchor if yanchor is not None else _v
+        _v = arg.pop('yclick', None)
+        self.yclick = yclick if yclick is not None else _v
+        _v = arg.pop('yref', None)
+        self.yref = yref if yref is not None else _v
+        _v = arg.pop('yshift', None)
+        self.yshift = yshift if yshift is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

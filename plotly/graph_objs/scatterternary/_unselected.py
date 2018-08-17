@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Unselected(BaseTraceHierarchyType):
@@ -82,12 +83,16 @@ class Unselected(BaseTraceHierarchyType):
             instance or dict with compatible properties
         """
 
-    def __init__(self, marker=None, textfont=None, **kwargs):
+    def __init__(self, arg=None, marker=None, textfont=None, **kwargs):
         """
         Construct a new Unselected object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of
+            plotly.graph_objs.scatterternary.Unselected
         marker
             plotly.graph_objs.scatterternary.unselected.Marker
             instance or dict with compatible properties
@@ -100,6 +105,22 @@ class Unselected(BaseTraceHierarchyType):
         Unselected
         """
         super(Unselected, self).__init__('unselected')
+
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.scatterternary.Unselected 
+constructor must be a dict or 
+an instance of plotly.graph_objs.scatterternary.Unselected"""
+            )
 
         # Import validators
         # -----------------
@@ -114,9 +135,11 @@ class Unselected(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.marker = marker
-        self.textfont = textfont
+        _v = arg.pop('marker', None)
+        self.marker = marker if marker is not None else _v
+        _v = arg.pop('textfont', None)
+        self.textfont = textfont if textfont is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

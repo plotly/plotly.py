@@ -12,7 +12,7 @@ from .optional_imports import get_module
 from . import offline as pyo
 from _plotly_utils.basevalidators import (
     CompoundValidator, CompoundArrayValidator, BaseDataValidator,
-    BaseValidator
+    BaseValidator, LiteralValidator
 )
 from . import animation
 from .callbacks import (Points, BoxSelector, LassoSelector,
@@ -31,20 +31,11 @@ np = get_module('numpy')
 Undefined = object()
 
 
-# back-port of fullmatch from Py3.4+
-def fullmatch(regex, string, flags=0):
-    """Emulate python-3.4 re.fullmatch()."""
-    if 'pattern' in dir(regex):
-        regex_string = regex.pattern
-    else:
-        regex_string = regex
-    return re.match("(?:" + regex_string + r")\Z", string, flags=flags)
-
-
 class BaseFigure(object):
     """
     Base class for all figure types (both widget and non-widget)
     """
+    _bracket_re = re.compile('^(.*)\[(\d+)\]$')
 
     # Constructor
     # -----------
@@ -119,7 +110,7 @@ class BaseFigure(object):
         # ### Construct data validator ###
         # This is the validator that handles importing sequences of trace
         # objects
-        self._data_validator = DataValidator()
+        self._data_validator = DataValidator(set_uid=True)
 
         # ### Import traces ###
         data = self._data_validator.validate_coerce(data)
@@ -143,7 +134,7 @@ class BaseFigure(object):
         self._data_defaults = [{} for _ in data]
 
         # ### Reparent trace objects ###
-        for trace in data:
+        for trace_ind, trace in enumerate(data):
             # By setting the trace's parent to be this figure, we tell the
             # trace object to use the figure's _data and _data_defaults
             # dicts to get/set it's properties, rather than using the trace
@@ -152,6 +143,9 @@ class BaseFigure(object):
 
             # We clear the orphan props since the trace no longer needs then
             trace._orphan_props.clear()
+
+            # Set trace index
+            trace._trace_ind = trace_ind
 
         # Layout
         # ------
@@ -384,7 +378,16 @@ class BaseFigure(object):
             for d in [dict1, kwargs]:
                 if d:
                     for k, v in d.items():
-                        BaseFigure._perform_update(self[k], v)
+                        if self[k] == ():
+                            # existing data or frames property is empty
+                            # In this case we accept the v as is.
+                            if k == 'data':
+                                self.add_traces(v)
+                            else:
+                                # Accept v
+                                self[k] = v
+                        else:
+                            BaseFigure._perform_update(self[k], v)
 
         return self
 
@@ -463,6 +466,7 @@ class BaseFigure(object):
                 old_trace = self.data[i]
                 old_trace._orphan_props.update(deepcopy(old_trace._props))
                 old_trace._parent = None
+                old_trace._trace_ind = None
 
         # ### Compute trace props / defaults after removal ###
         traces_props_post_removal = [t for t in self._data]
@@ -526,6 +530,10 @@ class BaseFigure(object):
 
         # Update trace objects tuple
         self._data_objs = list(new_data)
+
+        # Update trace indexes
+        for trace_ind, trace in enumerate(self._data_objs):
+            trace._trace_ind = trace_ind
 
     # Restyle
     # -------
@@ -690,7 +698,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
 
         # Compute trace index
         # -------------------
-        trace_index = BaseFigure._index_is(self.data, child)
+        trace_index = child._trace_ind
 
         # Not in batch mode
         # -----------------
@@ -743,7 +751,12 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         -------
         tuple[str | int]
         """
-        if isinstance(key_path_str, tuple):
+        if isinstance(key_path_str, string_types) and \
+                '.' not in key_path_str and \
+                '[' not in key_path_str:
+            # Fast path for common case that avoids regular expressions
+            return (key_path_str,)
+        elif isinstance(key_path_str, tuple):
             # Nothing to do
             return key_path_str
         else:
@@ -752,11 +765,9 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
 
             # Split out bracket indexes.
             # e.g. ['foo', 'bar[1]'] -> ['foo', 'bar', '1']
-            bracket_re = re.compile('(.*)\[(\d+)\]')
             key_path2 = []
             for key in key_path:
-                match = fullmatch(bracket_re, key)
-                #match = bracket_re.fullmatch(key)
+                match = BaseFigure._bracket_re.match(key)
                 if match:
                     key_path2.extend(match.groups())
                 else:
@@ -1057,13 +1068,12 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         ...                 rows=[1, 2], cols=[1, 1])
         """
 
-        if self._in_batch_mode:
-            self._batch_layout_edits.clear()
-            self._batch_trace_edits.clear()
-            raise ValueError('Traces may not be added in a batch context')
-
         # Validate traces
         data = self._data_validator.validate_coerce(data)
+
+        # Set trace indexes
+        for ind, new_trace in enumerate(data):
+            new_trace._trace_ind = ind + len(self.data)
 
         # Validate rows / cols
         n = len(data)
@@ -1212,14 +1222,9 @@ Please use the add_trace method with the row and col parameters.
         """
         # Try to find index of child as a trace
         # -------------------------------------
-        try:
-            trace_index = BaseFigure._index_is(self.data, child)
-        except ValueError as _:
-            trace_index = None
-
-        # Child is a trace
-        # ----------------
-        if trace_index is not None:
+        if isinstance(child, BaseTraceType):
+            # ### Child is a trace ###
+            trace_index = child._trace_ind
             return self._data[trace_index]
 
         # Child is the layout
@@ -1247,16 +1252,10 @@ Please use the add_trace method with the row and col parameters.
         -------
         dict
         """
-        # Try to find index of child as a trace
-        # -------------------------------------
-        try:
-            trace_index = BaseFigure._index_is(self.data, child)
-        except ValueError as _:
-            trace_index = None
-
         # Child is a trace
         # ----------------
-        if trace_index is not None:
+        if isinstance(child, BaseTraceType):
+            trace_index = child._trace_ind
             return self._data_defaults[trace_index]
 
         # Child is the layout
@@ -2100,19 +2099,36 @@ Invalid property path '{key_path_str}' for layout
             return
         elif isinstance(plotly_obj, BasePlotlyType):
 
+            # Handle initializing subplot ids
+            # -------------------------------
+            # This should be valid even if xaxis2 hasn't been initialized:
+            # >>> layout.update(xaxis2={'title': 'xaxis 2'})
+            if isinstance(plotly_obj, BaseLayoutType):
+                for key in update_obj:
+                    if key not in plotly_obj:
+                        match = plotly_obj._subplotid_prop_re.match(key)
+                        if match:
+                            # We need to create a subplotid object
+                            plotly_obj[key] = {}
+
             # Handle invalid properties
             # -------------------------
             invalid_props = [
-                k for k in update_obj if k not in plotly_obj._validators
+                k for k in update_obj if k not in plotly_obj
             ]
 
             plotly_obj._raise_on_invalid_property_error(*invalid_props)
+
+            # Convert update_obj to dict
+            # --------------------------
+            if isinstance(update_obj, BasePlotlyType):
+                update_obj = update_obj.to_plotly_json()
 
             # Process valid properties
             # ------------------------
             for key in update_obj:
                 val = update_obj[key]
-                validator = plotly_obj._validators[key]
+                validator = plotly_obj._get_prop_validator(key)
 
                 if isinstance(validator, CompoundValidator):
 
@@ -2121,8 +2137,15 @@ Invalid property path '{key_path_str}' for layout
                     BaseFigure._perform_update(
                         plotly_obj[key], val)
                 elif isinstance(validator, CompoundArrayValidator):
-                    BaseFigure._perform_update(
-                        plotly_obj[key], val)
+                    if plotly_obj[key]:
+                        # plotly_obj has an existing non-empty array for key
+                        # In this case we merge val into the existing elements
+                        BaseFigure._perform_update(
+                            plotly_obj[key], val)
+                    else:
+                        # plotly_obj is an empty or uninitialized list for key
+                        # In this case we accept val as is
+                        plotly_obj[key] = val
                 else:
                     # Assign non-compound value
                     plotly_obj[key] = val
@@ -2453,6 +2476,21 @@ class BasePlotlyType(object):
         else:
             return self.parent._get_child_prop_defaults(self)
 
+    def _get_prop_validator(self, prop):
+        """
+        Return the validator associated with the specified property
+
+        Parameters
+        ----------
+        prop: str
+            A property that exists in this object
+
+        Returns
+        -------
+        BaseValidator
+        """
+        return self._validators[prop]
+
     @property
     def parent(self):
         """
@@ -2734,7 +2772,7 @@ class BasePlotlyType(object):
             # complaint indent
             body = '   ' + pprint_res[1:-1].replace('\n', '\n   ')
 
-            repr_str = class_name + '(**{\n ' + body + '\n})'
+            repr_str = class_name + '({\n ' + body + '\n})'
 
         return repr_str
 
@@ -2743,8 +2781,18 @@ class BasePlotlyType(object):
         Customize object representation when displayed in the
         terminal/notebook
         """
+
+        # Get all properties
+        props = self._props if self._props is not None else {}
+
+        # Remove literals (These can't be specified in the constructor)
+        props = {p: v for p, v in props.items()
+                 if p in self._validators and
+                 not isinstance(self._validators[p], LiteralValidator)}
+
+        # Build repr string
         repr_str = BasePlotlyType._build_repr_for_class(
-            props=self._props if self._props is not None else {},
+            props=props,
             class_name=self.__class__.__name__,
             parent_path_str=self._parent_path_str)
 
@@ -3314,9 +3362,16 @@ class BaseLayoutType(BaseLayoutHierarchyType):
     # generated properties/validators as needed for xaxis2, yaxis3, etc.
 
     # # ### Create subplot property regular expression ###
-    _subplotid_prop_names = ['xaxis', 'yaxis', 'geo', 'ternary', 'scene']
+    _subplotid_prop_names = ['xaxis',
+                             'yaxis',
+                             'geo',
+                             'ternary',
+                             'scene',
+                             'mapbox',
+                             'polar']
+
     _subplotid_prop_re = re.compile(
-        '(' + '|'.join(_subplotid_prop_names) + ')(\d+)')
+        '^(' + '|'.join(_subplotid_prop_names) + ')(\d+)$')
 
     @property
     def _subplotid_validators(self):
@@ -3328,15 +3383,18 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         dict
         """
         from .validators.layout import (XAxisValidator, YAxisValidator,
-                                              GeoValidator, TernaryValidator,
-                                              SceneValidator)
+                                        GeoValidator, TernaryValidator,
+                                        SceneValidator, MapboxValidator,
+                                        PolarValidator)
 
         return {
             'xaxis': XAxisValidator,
             'yaxis': YAxisValidator,
             'geo': GeoValidator,
             'ternary': TernaryValidator,
-            'scene': SceneValidator
+            'scene': SceneValidator,
+            'mapbox': MapboxValidator,
+            'polar': PolarValidator
         }
 
     def __init__(self, plotly_name, **kwargs):
@@ -3377,16 +3435,14 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         unknown_kwargs = {
             k: v
             for k, v in kwargs.items()
-            if not fullmatch(self._subplotid_prop_re, k)
-            # if not self._subplotid_prop_re.fullmatch(k)
+            if not self._subplotid_prop_re.match(k)
         }
         super(BaseLayoutHierarchyType, self)._process_kwargs(**unknown_kwargs)
 
         subplot_kwargs = {
             k: v
             for k, v in kwargs.items()
-            if fullmatch(self._subplotid_prop_re, k)
-            #if self._subplotid_prop_re.fullmatch(k)
+            if self._subplotid_prop_re.match(k)
         }
 
         for prop, value in subplot_kwargs.items():
@@ -3406,8 +3462,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         # Get regular expression match
         # ----------------------------
         # Note: we already tested that match exists in the constructor
-        # match = self._subplotid_prop_re.fullmatch(prop)
-        match = fullmatch(self._subplotid_prop_re, prop)
+        match = self._subplotid_prop_re.match(prop)
         subplot_prop = match.group(1)
         suffix_digit = int(match.group(2))
 
@@ -3468,7 +3523,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         # Handle subplot suffix digit of 1
         # --------------------------------
         # Remove digit of 1 from subplot id (e.g.. xaxis1 -> xaxis)
-        match = fullmatch(self._subplotid_prop_re, prop)
+        match = self._subplotid_prop_re.match(prop)
 
         if match:
             subplot_prop = match.group(1)
@@ -3477,6 +3532,13 @@ class BaseLayoutType(BaseLayoutHierarchyType):
                 prop = subplot_prop
 
         return prop
+
+    def _get_prop_validator(self, prop):
+        """
+        Custom _get_prop_validator that handles subplot properties
+        """
+        prop = self._strip_subplot_suffix_of_1(prop)
+        return super(BaseLayoutHierarchyType, self)._get_prop_validator(prop)
 
     def __getattr__(self, prop):
         """
@@ -3521,7 +3583,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
 
         # Check for subplot assignment
         # ----------------------------
-        match = fullmatch(self._subplotid_prop_re, prop)
+        match = self._subplotid_prop_re.match(prop)
         if match is None:
             # Set as ordinary property
             super(BaseLayoutHierarchyType, self).__setitem__(prop, value)
@@ -3535,8 +3597,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         """
         # Check for subplot assignment
         # ----------------------------
-        # match = self._subplotid_prop_re.fullmatch(prop)
-        match = fullmatch(self._subplotid_prop_re, prop)
+        match = self._subplotid_prop_re.match(prop)
         if match is None:
             # Set as ordinary property
             super(BaseLayoutHierarchyType, self).__setattr__(prop, value)
@@ -3590,6 +3651,7 @@ class BaseTraceHierarchyType(BasePlotlyType):
 
     def __init__(self, plotly_name, **kwargs):
         super(BaseTraceHierarchyType, self).__init__(plotly_name, **kwargs)
+
     def _send_prop_set(self, prop_path_str, val):
         if self.parent:
             # ### Inform parent of restyle operation ###
@@ -3621,6 +3683,9 @@ class BaseTraceType(BaseTraceHierarchyType):
         # ### Callbacks to be called on selection ###
         self._select_callbacks = []
 
+        # ### Trace index in figure ###
+        self._trace_ind = None
+
     # uid
     # ---
     # All trace types must have a top-level UID
@@ -3637,14 +3702,13 @@ class BaseTraceType(BaseTraceHierarchyType):
     def on_hover(self,
                  callback,
                  append=False):
-        # typ.Callable[['BaseTraceType', Points, InputDeviceState], None]
         """
         Register function to be called when the user hovers over one or more
         points in this trace
 
         Note: Callbacks will only be triggered when the trace belongs to a
         instance of plotly.graph_objs.FigureWidget and it is displayed in an
-        ipywidget context. Callbacks will not be triggered when on figures
+        ipywidget context. Callbacks will not be triggered on figures
         that are displayed using plot/iplot.
 
         Parameters
@@ -3665,6 +3729,21 @@ class BaseTraceType(BaseTraceHierarchyType):
         Returns
         -------
         None
+
+        Examples
+        --------
+        >>> from plotly.callbacks import Points, InputDeviceState
+        >>> points, state = Points(), InputDeviceState()
+
+        >>> def hover_fn(trace, points, state):
+        ...     inds = points.point_inds
+        ...     # Do something
+
+        >>> trace.on_hover(hover_fn)
+
+        Note: The creation of the `points` and `state` objects is optional,
+        it's simply a convenience to help the text editor perform completion
+        on the arguments inside `hover_fn`
         """
         if not append:
             del self._hover_callbacks[:]
@@ -3690,7 +3769,7 @@ class BaseTraceType(BaseTraceHierarchyType):
 
         Note: Callbacks will only be triggered when the trace belongs to a
         instance of plotly.graph_objs.FigureWidget and it is displayed in an
-        ipywidget context. Callbacks will not be triggered when on figures
+        ipywidget context. Callbacks will not be triggered on figures
         that are displayed using plot/iplot.
 
         Parameters
@@ -3711,6 +3790,21 @@ class BaseTraceType(BaseTraceHierarchyType):
         Returns
         -------
         None
+
+        Examples
+        --------
+        >>> from plotly.callbacks import Points, InputDeviceState
+        >>> points, state = Points(), InputDeviceState()
+
+        >>> def unhover_fn(trace, points, state):
+        ...     inds = points.point_inds
+        ...     # Do something
+
+        >>> trace.on_unhover(unhover_fn)
+
+        Note: The creation of the `points` and `state` objects is optional,
+        it's simply a convenience to help the text editor perform completion
+        on the arguments inside `unhover_fn`
         """
         if not append:
             del self._unhover_callbacks[:]
@@ -3736,7 +3830,7 @@ class BaseTraceType(BaseTraceHierarchyType):
 
         Note: Callbacks will only be triggered when the trace belongs to a
         instance of plotly.graph_objs.FigureWidget and it is displayed in an
-        ipywidget context. Callbacks will not be triggered when on figures
+        ipywidget context. Callbacks will not be triggered on figures
         that are displayed using plot/iplot.
 
         Parameters
@@ -3757,6 +3851,21 @@ class BaseTraceType(BaseTraceHierarchyType):
         Returns
         -------
         None
+
+        Examples
+        --------
+        >>> from plotly.callbacks import Points, InputDeviceState
+        >>> points, state = Points(), InputDeviceState()
+
+        >>> def click_fn(trace, points, state):
+        ...     inds = points.point_inds
+        ...     # Do something
+
+        >>> trace.on_click(click_fn)
+
+        Note: The creation of the `points` and `state` objects is optional,
+        it's simply a convenience to help the text editor perform completion
+        on the arguments inside `click_fn`
         """
         if not append:
             del self._click_callbacks[:]
@@ -3782,7 +3891,7 @@ class BaseTraceType(BaseTraceHierarchyType):
 
         Note: Callbacks will only be triggered when the trace belongs to a
         instance of plotly.graph_objs.FigureWidget and it is displayed in an
-        ipywidget context. Callbacks will not be triggered when on figures
+        ipywidget context. Callbacks will not be triggered on figures
         that are displayed using plot/iplot.
 
         Parameters
@@ -3803,6 +3912,21 @@ class BaseTraceType(BaseTraceHierarchyType):
         Returns
         -------
         None
+
+        Examples
+        --------
+        >>> from plotly.callbacks import Points
+        >>> points = Points()
+
+        >>> def selection_fn(trace, points, selector):
+        ...     inds = points.point_inds
+        ...     # Do something
+
+        >>> trace.on_selection(selection_fn)
+
+        Note: The creation of the `points` object is optional,
+        it's simply a convenience to help the text editor perform completion
+        on the `points` arguments inside `selection_fn`
         """
         if not append:
             del self._select_callbacks[:]
@@ -3833,6 +3957,51 @@ class BaseFrameHierarchyType(BasePlotlyType):
         # propagated to parents
         pass
 
+    def _restyle_child(self, child, key_path_str, val):
+        # Note: Frames are not supported by FigureWidget, and updates are not
+        # propagated to parents
+        pass
+
     def on_change(self, callback, *args):
         raise NotImplementedError(
             'Change callbacks are not supported on Frames')
+
+    def _get_child_props(self, child):
+        """
+        Return the properties dict for a child trace or child layout
+
+        Note: this method must match the name/signature of one on
+        BasePlotlyType
+
+        Parameters
+        ----------
+        child : BaseTraceType | BaseLayoutType
+
+        Returns
+        -------
+        dict
+        """
+        # Try to find index of child as a trace
+        # -------------------------------------
+        try:
+            trace_index = BaseFigure._index_is(self.data, child)
+        except ValueError as _:
+            trace_index = None
+
+        # Child is a trace
+        # ----------------
+        if trace_index is not None:
+            if 'data' in self._props:
+                return self._props['data'][trace_index]
+            else:
+                return None
+
+        # Child is the layout
+        # -------------------
+        elif child is self.layout:
+            return self._props.get('layout', None)
+
+        # Unknown child
+        # -------------
+        else:
+            raise ValueError('Unrecognized child: %s' % child)

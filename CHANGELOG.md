@@ -2,9 +2,114 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [2.7.1] - [UNRELEASED]
+## [3.1.1] - 2018-08-10
+This release is a minor bug-fix update to version 3.1.0
+
+### JupyterLab Versions
+For use with JupyterLab, the following versions of the following packages
+must be installed:
+
+ - Python Packages
+   - plotly==3.1.1
+   - ipywidgets>=7.2
+   - notebook>=5.3
+   - jupyterlab==0.33
+   
+ - JupyterLab Extensions
+   - plotlywidget@0.2.1
+   - @jupyter-widgets/jupyterlab-manager@0.36
+   - @jupyterlab/plotly-extension@0.16
+
 ### Updated
-- error message for `plotly.figure_factory.create_choropleth` is now helpful to Anaconda users who do not have the correct modules installed for the County Choropleth figure factory.
+ - Updated plotly.js to version 1.39.4.
+   - This is a bug-fix release of plotly.js
+   - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1394----2018-08-02) for more information
+
+### Fixed
+ - Fixed error in validation of configkeys
+   [plotly/plotly.js#1065](https://github.com/plotly/plotly.py/pull/1065)
+ - Fixed error in presentation of named colorscales
+   [plotly/plotly.js#1089](https://github.com/plotly/plotly.py/pull/1089)
+ - Fixed numerical precision error when using `plotly.tools.make_subplots`
+   to create figures with a large number of subplots
+   [plotly/plotly.js#1091](https://github.com/plotly/plotly.py/pull/1091)
+ - Fixed problem that prevented the use of the `.update` method to initialize
+   an array property (e.g. `layout.shapes`)
+   [plotly/plotly.js#1091](https://github.com/plotly/plotly.py/pull/1092)
+ - Fixed `FigureWidget` problem causing scroll zoom on 3D plots to stutter
+   [plotly/plotly.js#1094](https://github.com/plotly/plotly.py/pull/1094) 
+ - Fixed invalid `tickmode` property in `matplotlylib`
+   [plotly/plotly.js#1101](https://github.com/plotly/plotly.py/pull/1101)
+
+## [3.1.0] - 2018-07-20
+
+### JupyterLab Versions
+For use with JupyterLab, the following versions of the following packages
+must be installed. See [README.md](README.md) for instructions.
+
+ - Python Packages
+   - plotly==3.1.0
+   - ipywidgets>=7.2
+   - notebook>=5.3
+   - jupyterlab==0.32.1
+   
+ - JupyterLab Extensions
+   - plotlywidget@0.2.0
+   - @jupyter-widgets/jupyterlab-manager@0.35
+   - @jupyterlab/plotly-extension@0.16
+
+### Updated
+ - Updated Plotly.js to version 1.39.2
+ - See highlights below
+ - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1392----2018-07-16) for more information.
+   
+### Added
+ - Added 3D streamtube traces
+   [plotly/plotly.js#2658](https://github.com/plotly/plotly.js/pull/2658)
+ - Added support for on-graph text in scattergl traces
+ - Added gridshape attribute to polar subplots with values 'circular' (the default) and 'linear' (to draw polygon grids)
+   [plotly/plotly.js#2739](https://github.com/plotly/plotly.js/pull/2739)
+
+## [3.0.2] - 2018-07-17
+This is a minor bug-fix release to 3.0.0
+
+### JupyterLab plotlywidget version: 0.1.1
+
+### Plotly.js version: 1.38.3
+
+### Fixed
+ - Several errors related to numbered subplot labels (e.g. xaxis2, polar3, etc.)
+   [GH1057](https://github.com/plotly/plotly.py/pull/1057)
+ - Error where the `v` property was ignored in `cone` traces
+   [GH1060](https://github.com/plotly/plotly.py/pull/1060)
+ - Assorted performance improvements when constructing graph objects
+   [GH1061](https://github.com/plotly/plotly.py/pull/1061)
+   
+## [3.0.1] - 2018-07-17 [YANKED]
+Note: This release's installation was broken. It has been removed from PyPI
+
+## [3.0.0] - 2018-07-05
+
+This is a major version with many exciting updates. See the [Introducing plotly.py 3.0.0](https://medium.com/@plotlygraphs/introducing-plotly-py-3-0-0-7bb1333f69c6) post for more information.
+
+### JupyterLab plotlywidget version: 0.1.1
+
+### Plotly.js version: 1.38.3
+
+### Added
+- Full Jupyter ipywidgets integration with the new `graph_objs.FigureWidget` class
+- `FigureWidget` figures can be updated interactively using property assignment syntax
+- The full trace and layout API is generated from the plotly schema to provide a great experience for interactive use in the notebook
+- Support for setting array properties as numpy arrays. When numpy arrays are used, ipywidgets binary serialization protocol is used to avoid converting these to JSON strings.
+- Context manager API for animation. Run `help(go.Figure().batch_animate)` for the full doc string.
+- Perform automatic retries when communicating with plot.ly services. This introduces a new required dependency on the [retrying](https://pypi.org/project/retrying/) library.
+- Improved data validation covering the full API with clear, informative error messages. This means that incorrect properties and/or values now always raise a `ValueError` with a description of the error, the invalid property, and the available properties on the level that it was placed in the graph object. Eg. `go.Scatter(foo=123)` raises a validation error. See https://plot.ly/python/reference/ for a reference to all valid properties and values in the Python API.
+- Error message for `plotly.figure_factory.create_choropleth` is now helpful to Anaconda users who do not have the correct modules installed for the County Choropleth figure factory.
+
+### Changed / Deprecated
+Please see the [migration guid](migration-guide.md) for a full list of the changes and deprecations in version 3.0.0
+
+
 
 ## [2.7.0] - 2018-05-23
 ### Updated

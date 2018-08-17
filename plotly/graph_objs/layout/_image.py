@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Image(BaseLayoutHierarchyType):
@@ -25,6 +26,33 @@ class Image(BaseLayoutHierarchyType):
     @layer.setter
     def layer(self, val):
         self['layer'] = val
+
+    # name
+    # ----
+    @property
+    def name(self):
+        """
+        When used in a template, named items are created in the output
+        figure in addition to any items the figure already has in this
+        array. You can modify these items in the output figure by
+        making your own item with `templateitemname` matching this
+        `name` alongside your modifications (including `visible: false`
+        or `enabled: false` to hide it). Has no effect outside of a
+        template.
+    
+        The 'name' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['name']
+
+    @name.setter
+    def name(self, val):
+        self['name'] = val
 
     # opacity
     # -------
@@ -138,6 +166,34 @@ class Image(BaseLayoutHierarchyType):
     @source.setter
     def source(self, val):
         self['source'] = val
+
+    # templateitemname
+    # ----------------
+    @property
+    def templateitemname(self):
+        """
+        Used to refer to a named item in this array in the template.
+        Named items from the template will be created even without a
+        matching item in the input figure, but you can modify one by
+        making an item with `templateitemname` matching its `name`,
+        alongside your modifications (including `visible: false` or
+        `enabled: false` to hide it). If there is no template or no
+        matching item, this item will be hidden unless you explicitly
+        show it with `visible: true`.
+    
+        The 'templateitemname' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['templateitemname']
+
+    @templateitemname.setter
+    def templateitemname(self, val):
+        self['templateitemname'] = val
 
     # visible
     # -------
@@ -312,6 +368,15 @@ class Image(BaseLayoutHierarchyType):
             Specifies whether images are drawn below or above
             traces. When `xref` and `yref` are both set to `paper`,
             image is drawn below the entire plot area.
+        name
+            When used in a template, named items are created in the
+            output figure in addition to any items the figure
+            already has in this array. You can modify these items
+            in the output figure by making your own item with
+            `templateitemname` matching this `name` alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). Has no effect outside of a
+            template.
         opacity
             Sets the opacity of the image.
         sizex
@@ -330,6 +395,16 @@ class Image(BaseLayoutHierarchyType):
             Specifies the URL of the image to be used. The URL must
             be accessible from the domain where the plot code is
             run, and can be either relative or absolute.
+        templateitemname
+            Used to refer to a named item in this array in the
+            template. Named items from the template will be created
+            even without a matching item in the input figure, but
+            you can modify one by making an item with
+            `templateitemname` matching its `name`, alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). If there is no template or no
+            matching item, this item will be hidden unless you
+            explicitly show it with `visible: true`.
         visible
             Determines whether or not this image is visible.
         x
@@ -362,12 +437,15 @@ class Image(BaseLayoutHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         layer=None,
+        name=None,
         opacity=None,
         sizex=None,
         sizey=None,
         sizing=None,
         source=None,
+        templateitemname=None,
         visible=None,
         x=None,
         xanchor=None,
@@ -382,10 +460,22 @@ class Image(BaseLayoutHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.layout.Image
         layer
             Specifies whether images are drawn below or above
             traces. When `xref` and `yref` are both set to `paper`,
             image is drawn below the entire plot area.
+        name
+            When used in a template, named items are created in the
+            output figure in addition to any items the figure
+            already has in this array. You can modify these items
+            in the output figure by making your own item with
+            `templateitemname` matching this `name` alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). Has no effect outside of a
+            template.
         opacity
             Sets the opacity of the image.
         sizex
@@ -404,6 +494,16 @@ class Image(BaseLayoutHierarchyType):
             Specifies the URL of the image to be used. The URL must
             be accessible from the domain where the plot code is
             run, and can be either relative or absolute.
+        templateitemname
+            Used to refer to a named item in this array in the
+            template. Named items from the template will be created
+            even without a matching item in the input figure, but
+            you can modify one by making an item with
+            `templateitemname` matching its `name`, alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). If there is no template or no
+            matching item, this item will be hidden unless you
+            explicitly show it with `visible: true`.
         visible
             Determines whether or not this image is visible.
         x
@@ -439,6 +539,22 @@ class Image(BaseLayoutHierarchyType):
         """
         super(Image, self).__init__('images')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.Image 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.Image"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout import (image as v_image)
@@ -446,11 +562,14 @@ class Image(BaseLayoutHierarchyType):
         # Initialize validators
         # ---------------------
         self._validators['layer'] = v_image.LayerValidator()
+        self._validators['name'] = v_image.NameValidator()
         self._validators['opacity'] = v_image.OpacityValidator()
         self._validators['sizex'] = v_image.SizexValidator()
         self._validators['sizey'] = v_image.SizeyValidator()
         self._validators['sizing'] = v_image.SizingValidator()
         self._validators['source'] = v_image.SourceValidator()
+        self._validators['templateitemname'
+                        ] = v_image.TemplateitemnameValidator()
         self._validators['visible'] = v_image.VisibleValidator()
         self._validators['x'] = v_image.XValidator()
         self._validators['xanchor'] = v_image.XanchorValidator()
@@ -461,20 +580,37 @@ class Image(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.layer = layer
-        self.opacity = opacity
-        self.sizex = sizex
-        self.sizey = sizey
-        self.sizing = sizing
-        self.source = source
-        self.visible = visible
-        self.x = x
-        self.xanchor = xanchor
-        self.xref = xref
-        self.y = y
-        self.yanchor = yanchor
-        self.yref = yref
+        _v = arg.pop('layer', None)
+        self.layer = layer if layer is not None else _v
+        _v = arg.pop('name', None)
+        self.name = name if name is not None else _v
+        _v = arg.pop('opacity', None)
+        self.opacity = opacity if opacity is not None else _v
+        _v = arg.pop('sizex', None)
+        self.sizex = sizex if sizex is not None else _v
+        _v = arg.pop('sizey', None)
+        self.sizey = sizey if sizey is not None else _v
+        _v = arg.pop('sizing', None)
+        self.sizing = sizing if sizing is not None else _v
+        _v = arg.pop('source', None)
+        self.source = source if source is not None else _v
+        _v = arg.pop('templateitemname', None)
+        self.templateitemname = templateitemname if templateitemname is not None else _v
+        _v = arg.pop('visible', None)
+        self.visible = visible if visible is not None else _v
+        _v = arg.pop('x', None)
+        self.x = x if x is not None else _v
+        _v = arg.pop('xanchor', None)
+        self.xanchor = xanchor if xanchor is not None else _v
+        _v = arg.pop('xref', None)
+        self.xref = xref if xref is not None else _v
+        _v = arg.pop('y', None)
+        self.y = y if y is not None else _v
+        _v = arg.pop('yanchor', None)
+        self.yanchor = yanchor if yanchor is not None else _v
+        _v = arg.pop('yref', None)
+        self.yref = yref if yref is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

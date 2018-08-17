@@ -30,7 +30,7 @@ def validator_number3_free():
 # ----------
 # ### Acceptance ###
 @pytest.mark.parametrize('val', [
-    [1, 'A'], ('hello', 'world!'), [1, ()], [-1, 1]
+    [1, 'A'], ('hello', 'world!'), [1, set()], [-1, 1]
 ])
 def test_validator_acceptance_any2(val, validator_any2: InfoArrayValidator):
     coerce_val = validator_any2.validate_coerce(val)

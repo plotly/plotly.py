@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class ColorBar(BaseTraceHierarchyType):
@@ -707,6 +708,31 @@ class ColorBar(BaseTraceHierarchyType):
                     dtick values which describe some zoom level, it
                     is possible to omit *min* or *max* value by
                     passing *null*
+                enabled
+                    Determines whether or not this stop is used. If
+                    `false`, this stop is ignored even within its
+                    `dtickrange`.
+                name
+                    When used in a template, named items are
+                    created in the output figure in addition to any
+                    items the figure already has in this array. You
+                    can modify these items in the output figure by
+                    making your own item with `templateitemname`
+                    matching this `name` alongside your
+                    modifications (including `visible: false` or
+                    `enabled: false` to hide it). Has no effect
+                    outside of a template.
+                templateitemname
+                    Used to refer to a named item in this array in
+                    the template. Named items from the template
+                    will be created even without a matching item in
+                    the input figure, but you can modify one by
+                    making an item with `templateitemname` matching
+                    its `name`, alongside your modifications
+                    (including `visible: false` or `enabled: false`
+                    to hide it). If there is no template or no
+                    matching item, this item will be hidden unless
+                    you explicitly show it with `visible: true`.
                 value
                     string - dtickformat for described zoom level,
                     the same as *tickformat*
@@ -1338,6 +1364,7 @@ class ColorBar(BaseTraceHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         bgcolor=None,
         bordercolor=None,
         borderwidth=None,
@@ -1387,6 +1414,10 @@ class ColorBar(BaseTraceHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of
+            plotly.graph_objs.parcoords.line.ColorBar
         bgcolor
             Sets the color of padded area.
         bordercolor
@@ -1567,6 +1598,22 @@ class ColorBar(BaseTraceHierarchyType):
         """
         super(ColorBar, self).__init__('colorbar')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.parcoords.line.ColorBar 
+constructor must be a dict or 
+an instance of plotly.graph_objs.parcoords.line.ColorBar"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.parcoords.line import (colorbar as v_colorbar)
@@ -1624,49 +1671,91 @@ class ColorBar(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.bgcolor = bgcolor
-        self.bordercolor = bordercolor
-        self.borderwidth = borderwidth
-        self.dtick = dtick
-        self.exponentformat = exponentformat
-        self.len = len
-        self.lenmode = lenmode
-        self.nticks = nticks
-        self.outlinecolor = outlinecolor
-        self.outlinewidth = outlinewidth
-        self.separatethousands = separatethousands
-        self.showexponent = showexponent
-        self.showticklabels = showticklabels
-        self.showtickprefix = showtickprefix
-        self.showticksuffix = showticksuffix
-        self.thickness = thickness
-        self.thicknessmode = thicknessmode
-        self.tick0 = tick0
-        self.tickangle = tickangle
-        self.tickcolor = tickcolor
-        self.tickfont = tickfont
-        self.tickformat = tickformat
-        self.tickformatstops = tickformatstops
-        self.ticklen = ticklen
-        self.tickmode = tickmode
-        self.tickprefix = tickprefix
-        self.ticks = ticks
-        self.ticksuffix = ticksuffix
-        self.ticktext = ticktext
-        self.ticktextsrc = ticktextsrc
-        self.tickvals = tickvals
-        self.tickvalssrc = tickvalssrc
-        self.tickwidth = tickwidth
-        self.title = title
-        self.titlefont = titlefont
-        self.titleside = titleside
-        self.x = x
-        self.xanchor = xanchor
-        self.xpad = xpad
-        self.y = y
-        self.yanchor = yanchor
-        self.ypad = ypad
+        _v = arg.pop('bgcolor', None)
+        self.bgcolor = bgcolor if bgcolor is not None else _v
+        _v = arg.pop('bordercolor', None)
+        self.bordercolor = bordercolor if bordercolor is not None else _v
+        _v = arg.pop('borderwidth', None)
+        self.borderwidth = borderwidth if borderwidth is not None else _v
+        _v = arg.pop('dtick', None)
+        self.dtick = dtick if dtick is not None else _v
+        _v = arg.pop('exponentformat', None)
+        self.exponentformat = exponentformat if exponentformat is not None else _v
+        _v = arg.pop('len', None)
+        self.len = len if len is not None else _v
+        _v = arg.pop('lenmode', None)
+        self.lenmode = lenmode if lenmode is not None else _v
+        _v = arg.pop('nticks', None)
+        self.nticks = nticks if nticks is not None else _v
+        _v = arg.pop('outlinecolor', None)
+        self.outlinecolor = outlinecolor if outlinecolor is not None else _v
+        _v = arg.pop('outlinewidth', None)
+        self.outlinewidth = outlinewidth if outlinewidth is not None else _v
+        _v = arg.pop('separatethousands', None)
+        self.separatethousands = separatethousands if separatethousands is not None else _v
+        _v = arg.pop('showexponent', None)
+        self.showexponent = showexponent if showexponent is not None else _v
+        _v = arg.pop('showticklabels', None)
+        self.showticklabels = showticklabels if showticklabels is not None else _v
+        _v = arg.pop('showtickprefix', None)
+        self.showtickprefix = showtickprefix if showtickprefix is not None else _v
+        _v = arg.pop('showticksuffix', None)
+        self.showticksuffix = showticksuffix if showticksuffix is not None else _v
+        _v = arg.pop('thickness', None)
+        self.thickness = thickness if thickness is not None else _v
+        _v = arg.pop('thicknessmode', None)
+        self.thicknessmode = thicknessmode if thicknessmode is not None else _v
+        _v = arg.pop('tick0', None)
+        self.tick0 = tick0 if tick0 is not None else _v
+        _v = arg.pop('tickangle', None)
+        self.tickangle = tickangle if tickangle is not None else _v
+        _v = arg.pop('tickcolor', None)
+        self.tickcolor = tickcolor if tickcolor is not None else _v
+        _v = arg.pop('tickfont', None)
+        self.tickfont = tickfont if tickfont is not None else _v
+        _v = arg.pop('tickformat', None)
+        self.tickformat = tickformat if tickformat is not None else _v
+        _v = arg.pop('tickformatstops', None)
+        self.tickformatstops = tickformatstops if tickformatstops is not None else _v
+        _v = arg.pop('ticklen', None)
+        self.ticklen = ticklen if ticklen is not None else _v
+        _v = arg.pop('tickmode', None)
+        self.tickmode = tickmode if tickmode is not None else _v
+        _v = arg.pop('tickprefix', None)
+        self.tickprefix = tickprefix if tickprefix is not None else _v
+        _v = arg.pop('ticks', None)
+        self.ticks = ticks if ticks is not None else _v
+        _v = arg.pop('ticksuffix', None)
+        self.ticksuffix = ticksuffix if ticksuffix is not None else _v
+        _v = arg.pop('ticktext', None)
+        self.ticktext = ticktext if ticktext is not None else _v
+        _v = arg.pop('ticktextsrc', None)
+        self.ticktextsrc = ticktextsrc if ticktextsrc is not None else _v
+        _v = arg.pop('tickvals', None)
+        self.tickvals = tickvals if tickvals is not None else _v
+        _v = arg.pop('tickvalssrc', None)
+        self.tickvalssrc = tickvalssrc if tickvalssrc is not None else _v
+        _v = arg.pop('tickwidth', None)
+        self.tickwidth = tickwidth if tickwidth is not None else _v
+        _v = arg.pop('title', None)
+        self.title = title if title is not None else _v
+        _v = arg.pop('titlefont', None)
+        self.titlefont = titlefont if titlefont is not None else _v
+        _v = arg.pop('titleside', None)
+        self.titleside = titleside if titleside is not None else _v
+        _v = arg.pop('x', None)
+        self.x = x if x is not None else _v
+        _v = arg.pop('xanchor', None)
+        self.xanchor = xanchor if xanchor is not None else _v
+        _v = arg.pop('xpad', None)
+        self.xpad = xpad if xpad is not None else _v
+        _v = arg.pop('y', None)
+        self.y = y if y is not None else _v
+        _v = arg.pop('yanchor', None)
+        self.yanchor = yanchor if yanchor is not None else _v
+        _v = arg.pop('ypad', None)
+        self.ypad = ypad if ypad is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

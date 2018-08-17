@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Contours(BaseTraceHierarchyType):
@@ -350,6 +351,7 @@ class Contours(BaseTraceHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         coloring=None,
         end=None,
         labelfont=None,
@@ -368,6 +370,9 @@ class Contours(BaseTraceHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.contour.Contours
         coloring
             Determines the coloring method showing the contour
             values. If *fill*, coloring is done evenly between each
@@ -430,6 +435,22 @@ class Contours(BaseTraceHierarchyType):
         """
         super(Contours, self).__init__('contours')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.contour.Contours 
+constructor must be a dict or 
+an instance of plotly.graph_objs.contour.Contours"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.contour import (contours as v_contours)
@@ -450,18 +471,29 @@ class Contours(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.coloring = coloring
-        self.end = end
-        self.labelfont = labelfont
-        self.labelformat = labelformat
-        self.operation = operation
-        self.showlabels = showlabels
-        self.showlines = showlines
-        self.size = size
-        self.start = start
-        self.type = type
-        self.value = value
+        _v = arg.pop('coloring', None)
+        self.coloring = coloring if coloring is not None else _v
+        _v = arg.pop('end', None)
+        self.end = end if end is not None else _v
+        _v = arg.pop('labelfont', None)
+        self.labelfont = labelfont if labelfont is not None else _v
+        _v = arg.pop('labelformat', None)
+        self.labelformat = labelformat if labelformat is not None else _v
+        _v = arg.pop('operation', None)
+        self.operation = operation if operation is not None else _v
+        _v = arg.pop('showlabels', None)
+        self.showlabels = showlabels if showlabels is not None else _v
+        _v = arg.pop('showlines', None)
+        self.showlines = showlines if showlines is not None else _v
+        _v = arg.pop('size', None)
+        self.size = size if size is not None else _v
+        _v = arg.pop('start', None)
+        self.start = start if start is not None else _v
+        _v = arg.pop('type', None)
+        self.type = type if type is not None else _v
+        _v = arg.pop('value', None)
+        self.value = value if value is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

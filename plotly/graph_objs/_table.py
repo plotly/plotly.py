@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceType
+import copy
 
 
 class Table(BaseTraceType):
@@ -731,6 +732,7 @@ class Table(BaseTraceType):
 
     def __init__(
         self,
+        arg=None,
         cells=None,
         columnorder=None,
         columnordersrc=None,
@@ -766,6 +768,9 @@ class Table(BaseTraceType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Table
         cells
             plotly.graph_objs.table.Cells instance or dict with
             compatible properties
@@ -847,6 +852,22 @@ class Table(BaseTraceType):
         """
         super(Table, self).__init__('table')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Table 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Table"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators import (table as v_table)
@@ -878,37 +899,59 @@ class Table(BaseTraceType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.cells = cells
-        self.columnorder = columnorder
-        self.columnordersrc = columnordersrc
-        self.columnwidth = columnwidth
-        self.columnwidthsrc = columnwidthsrc
-        self.customdata = customdata
-        self.customdatasrc = customdatasrc
-        self.domain = domain
-        self.header = header
-        self.hoverinfo = hoverinfo
-        self.hoverinfosrc = hoverinfosrc
-        self.hoverlabel = hoverlabel
-        self.ids = ids
-        self.idssrc = idssrc
-        self.legendgroup = legendgroup
-        self.name = name
-        self.opacity = opacity
-        self.selectedpoints = selectedpoints
-        self.showlegend = showlegend
-        self.stream = stream
-        self.uid = uid
-        self.visible = visible
+        _v = arg.pop('cells', None)
+        self.cells = cells if cells is not None else _v
+        _v = arg.pop('columnorder', None)
+        self.columnorder = columnorder if columnorder is not None else _v
+        _v = arg.pop('columnordersrc', None)
+        self.columnordersrc = columnordersrc if columnordersrc is not None else _v
+        _v = arg.pop('columnwidth', None)
+        self.columnwidth = columnwidth if columnwidth is not None else _v
+        _v = arg.pop('columnwidthsrc', None)
+        self.columnwidthsrc = columnwidthsrc if columnwidthsrc is not None else _v
+        _v = arg.pop('customdata', None)
+        self.customdata = customdata if customdata is not None else _v
+        _v = arg.pop('customdatasrc', None)
+        self.customdatasrc = customdatasrc if customdatasrc is not None else _v
+        _v = arg.pop('domain', None)
+        self.domain = domain if domain is not None else _v
+        _v = arg.pop('header', None)
+        self.header = header if header is not None else _v
+        _v = arg.pop('hoverinfo', None)
+        self.hoverinfo = hoverinfo if hoverinfo is not None else _v
+        _v = arg.pop('hoverinfosrc', None)
+        self.hoverinfosrc = hoverinfosrc if hoverinfosrc is not None else _v
+        _v = arg.pop('hoverlabel', None)
+        self.hoverlabel = hoverlabel if hoverlabel is not None else _v
+        _v = arg.pop('ids', None)
+        self.ids = ids if ids is not None else _v
+        _v = arg.pop('idssrc', None)
+        self.idssrc = idssrc if idssrc is not None else _v
+        _v = arg.pop('legendgroup', None)
+        self.legendgroup = legendgroup if legendgroup is not None else _v
+        _v = arg.pop('name', None)
+        self.name = name if name is not None else _v
+        _v = arg.pop('opacity', None)
+        self.opacity = opacity if opacity is not None else _v
+        _v = arg.pop('selectedpoints', None)
+        self.selectedpoints = selectedpoints if selectedpoints is not None else _v
+        _v = arg.pop('showlegend', None)
+        self.showlegend = showlegend if showlegend is not None else _v
+        _v = arg.pop('stream', None)
+        self.stream = stream if stream is not None else _v
+        _v = arg.pop('uid', None)
+        self.uid = uid if uid is not None else _v
+        _v = arg.pop('visible', None)
+        self.visible = visible if visible is not None else _v
 
         # Read-only literals
         # ------------------
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'table'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='table'
+            plotly_name='type', parent_name='table', val='table'
         )
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

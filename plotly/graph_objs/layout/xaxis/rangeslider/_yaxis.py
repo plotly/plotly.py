@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class YAxis(BaseLayoutHierarchyType):
@@ -73,12 +74,16 @@ class YAxis(BaseLayoutHierarchyType):
             subplot is used.
         """
 
-    def __init__(self, range=None, rangemode=None, **kwargs):
+    def __init__(self, arg=None, range=None, rangemode=None, **kwargs):
         """
         Construct a new YAxis object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of
+            plotly.graph_objs.layout.xaxis.rangeslider.YAxis
         range
             Sets the range of this axis for the rangeslider.
         rangemode
@@ -95,6 +100,22 @@ class YAxis(BaseLayoutHierarchyType):
         """
         super(YAxis, self).__init__('yaxis')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.xaxis.rangeslider.YAxis 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.xaxis.rangeslider.YAxis"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout.xaxis.rangeslider import (
@@ -108,9 +129,11 @@ class YAxis(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.range = range
-        self.rangemode = rangemode
+        _v = arg.pop('range', None)
+        self.range = range if range is not None else _v
+        _v = arg.pop('rangemode', None)
+        self.rangemode = rangemode if rangemode is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

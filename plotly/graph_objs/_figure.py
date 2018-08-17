@@ -4,7 +4,8 @@ from plotly.graph_objs import (
     Contourcarpet, Heatmap, Heatmapgl, Histogram, Histogram2d,
     Histogram2dContour, Mesh3d, Ohlc, Parcoords, Pie, Pointcloud, Sankey,
     Scatter, Scatter3d, Scattercarpet, Scattergeo, Scattergl, Scattermapbox,
-    Scatterpolar, Scatterpolargl, Scatterternary, Splom, Surface, Table, Violin
+    Scatterpolar, Scatterpolargl, Scatterternary, Splom, Streamtube, Surface,
+    Table, Violin
 )
 
 
@@ -32,8 +33,8 @@ class Figure(BaseFigure):
                              'scatter', 'scatter3d', 'scattercarpet',
                              'scattergeo', 'scattergl', 'scattermapbox',
                              'scatterpolar', 'scatterpolargl',
-                             'scatterternary', 'splom', 'surface', 'table',
-                             'violin']
+                             'scatterternary', 'splom', 'streamtube',
+                             'surface', 'table', 'violin']
         
                 - All remaining properties are passed to the constructor of
                   the specified trace type
@@ -221,6 +222,30 @@ class Figure(BaseFigure):
                         like objects. In addition, some objects can be
                         hovered on but will not generate spikelines,
                         such as scatter fills.
+                    template
+                        Default attributes to be applied to the plot.
+                        Templates can be created from existing plots
+                        using `Plotly.makeTemplate`, or created
+                        manually. They should be objects with format:
+                        `{layout: layoutTemplate, data: {[type]:
+                        [traceTemplate, ...]}, ...}` `layoutTemplate`
+                        and `traceTemplate` are objects matching the
+                        attribute structure of `layout` and a data
+                        trace.  Trace templates are applied cyclically
+                        to traces of each type. Container arrays (eg
+                        `annotations`) have special handling: An object
+                        ending in `defaults` (eg `annotationdefaults`)
+                        is applied to each array item. But if an item
+                        has a `templateitemname` key we look in the
+                        template array for an item with matching `name`
+                        and apply that instead. If no matching `name`
+                        is found we mark the item invisible. Any named
+                        template item not referenced is appended to the
+                        end of the array, so you can use this for a
+                        watermark annotation or a logo image, for
+                        example. To omit one of these items on the
+                        plot, make an item with matching
+                        `templateitemname` and `visible: false`.
                     ternary
                         plotly.graph_objs.layout.Ternary instance or
                         dict with compatible properties
@@ -1495,8 +1520,12 @@ class Figure(BaseFigure):
         Parameters
         ----------
         autocolorscale
-            Determines whether or not the colorscale is picked
-            using the sign of the input z values.
+            Determines whether the colorscale is a default palette
+            (`autocolorscale: true`) or the palette determined by
+            `colorscale`. In case `colorscale` is unspecified or
+            `autocolorscale` is true, the default  palette will be
+            chosen according to whether numbers in the `color`
+            array are all positive, all negative or mixed.
         colorbar
             plotly.graph_objs.choropleth.ColorBar instance or dict
             with compatible properties
@@ -1507,7 +1536,11 @@ class Figure(BaseFigure):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)', [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in z space, use zmin and zmax
+            colorscale in color space, use`zmin` and `zmax`.
+            Alternatively, `colorscale` may be a palette name
+            string of the following list: Greys,YlGnBu,Greens,YlOrR
+            d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
+            ot,Blackbody,Earth,Electric,Viridis,Cividis.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -1558,7 +1591,9 @@ class Figure(BaseFigure):
         opacity
             Sets the opacity of the trace.
         reversescale
-            Reverses the colorscale.
+            Reverses the color mapping if true. If true, `zmin`
+            will correspond to the last color in the array and
+            `zmax` will correspond to the first color.
         selected
             plotly.graph_objs.choropleth.Selected instance or dict
             with compatible properties
@@ -1595,12 +1630,18 @@ class Figure(BaseFigure):
         z
             Sets the color values.
         zauto
-            Determines the whether or not the color domain is
-            computed with respect to the input data.
+            Determines whether or not the color domain is computed
+            with respect to the input data (here in `z`) or the
+            bounds set in `zmin` and `zmax`  Defaults to `false`
+            when `zmin` and `zmax` are set by the user.
         zmax
-            Sets the upper bound of color domain.
+            Sets the upper bound of the color domain. Value should
+            have the same units as in `z` and if set, `zmin` must
+            be set as well.
         zmin
-            Sets the lower bound of color domain.
+            Sets the lower bound of the color domain. Value should
+            have the same units as in `z` and if set, `zmax` must
+            be set as well.
         zsrc
             Sets the source reference on plot.ly for  z .
         row : int or None (default)
@@ -1719,49 +1760,40 @@ class Figure(BaseFigure):
             positions. Note that *cm* denote the cone's center of
             mass which corresponds to 1/4 from the tail to tip.
         autocolorscale
-            Has an effect only if `color` is set to a numerical
-            array. Determines whether the colorscale is a default
-            palette (`autocolorscale: true`) or the palette
-            determined by `colorscale`. In case `colorscale` is
-            unspecified or `autocolorscale` is true, the default
-            palette will be chosen according to whether numbers in
-            the `color` array are all positive, all negative or
-            mixed.
+            Determines whether the colorscale is a default palette
+            (`autocolorscale: true`) or the palette determined by
+            `colorscale`. In case `colorscale` is unspecified or
+            `autocolorscale` is true, the default  palette will be
+            chosen according to whether numbers in the `color`
+            array are all positive, all negative or mixed.
         cauto
-            Has an effect only if `color` is set to a numerical
-            array and `cmin`, `cmax` are set by the user. In this
-            case, it controls whether the range of colors in
-            `colorscale` is mapped to the range of values in the
-            `color` array (`cauto: true`), or the `cmin`/`cmax`
-            values (`cauto: false`). Defaults to `false` when
-            `cmin`, `cmax` are set by the user.
+            Determines whether or not the color domain is computed
+            with respect to the input data (here u/v/w norm) or the
+            bounds set in `cmin` and `cmax`  Defaults to `false`
+            when `cmin` and `cmax` are set by the user.
         cmax
-            Has an effect only if `color` is set to a numerical
-            array. Sets the upper bound of the color domain. Value
-            should be associated to the `color` array index, and if
-            set, `cmin` must be set as well.
+            Sets the upper bound of the color domain. Value should
+            have the same units as u/v/w norm and if set, `cmin`
+            must be set as well.
         cmin
-            Has an effect only if `color` is set to a numerical
-            array. Sets the lower bound of the color domain. Value
-            should be associated to the `color` array index, and if
-            set, `cmax` must be set as well.
+            Sets the lower bound of the color domain. Value should
+            have the same units as u/v/w norm and if set, `cmax`
+            must be set as well.
         colorbar
             plotly.graph_objs.cone.ColorBar instance or dict with
             compatible properties
         colorscale
-            Sets the colorscale and only has an effect if `color`
-            is set to a numerical array. The colorscale must be an
-            array containing arrays mapping a normalized value to
-            an rgb, rgba, hex, hsl, hsv, or named color string. At
-            minimum, a mapping for the lowest (0) and highest (1)
-            values are required. For example, `[[0, 'rgb(0,0,255)',
-            [1, 'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `cmin` and `cmax`.
+            Sets the colorscale. The colorscale must be an array
+            containing arrays mapping a normalized value to an rgb,
+            rgba, hex, hsl, hsv, or named color string. At minimum,
+            a mapping for the lowest (0) and highest (1) values are
+            required. For example, `[[0, 'rgb(0,0,255)', [1,
+            'rgb(255,0,0)']]`. To control the bounds of the
+            colorscale in color space, use`cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
-            string of the following list: Greys, YlGnBu, Greens,
-            YlOrRd, Bluered, RdBu, Reds, Blues, Picnic, Rainbow,
-            Portland, Jet, Hot, Blackbody, Earth, Electric,
-            Viridis, Cividis
+            string of the following list: Greys,YlGnBu,Greens,YlOrR
+            d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
+            ot,Blackbody,Earth,Electric,Viridis,Cividis.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -1801,10 +1833,9 @@ class Figure(BaseFigure):
         opacity
             Sets the opacity of the surface.
         reversescale
-            Has an effect only if `color` is set to a numerical
-            array. Reverses the color mapping if true (`cmin` will
-            correspond to the last color in the array and `cmax`
-            will correspond to the first color).
+            Reverses the color mapping if true. If true, `cmin`
+            will correspond to the last color in the array and
+            `cmax` will correspond to the first color.
         scene
             Sets a reference between this trace's 3D coordinate
             system and a 3D scene. If *scene* (the default value),
@@ -1825,13 +1856,22 @@ class Figure(BaseFigure):
             Determines whether or not a colorbar is displayed for
             this trace.
         sizemode
-            Sets the mode by which the cones are sized. If
-            *scaled*, `sizeref` scales such that the reference cone
-            size for the maximum vector magnitude is 1. If
-            *absolute*, `sizeref` scales such that the reference
-            cone size for vector magnitude 1 is one grid unit.
+            Determines whether `sizeref` is set as a *scaled* (i.e
+            unitless) scalar (normalized by the max u/v/w norm in
+            the vector field) or as *absolute* value (in the same
+            units as the vector field).
         sizeref
-            Sets the cone size reference value.
+            Adjusts the cone size scaling. The size of the cones is
+            determined by their u/v/w norm multiplied a factor and
+            `sizeref`. This factor (computed internally)
+            corresponds to the minimum "time" to travel across two
+            successive x/y/z positions at the average velocity of
+            those two successive positions. All cones in a given
+            trace use the same factor. With `sizemode` set to
+            *scaled*, `sizeref` is unitless, its default value is
+            *0.5* With `sizemode` set to *absolute*, `sizeref` has
+            the same units as the u/v/w vector field, its the
+            default value is half the sample's maximum vector norm.
         stream
             plotly.graph_objs.cone.Stream instance or dict with
             compatible properties
@@ -2006,8 +2046,12 @@ class Figure(BaseFigure):
         Parameters
         ----------
         autocolorscale
-            Determines whether or not the colorscale is picked
-            using the sign of the input z values.
+            Determines whether the colorscale is a default palette
+            (`autocolorscale: true`) or the palette determined by
+            `colorscale`. In case `colorscale` is unspecified or
+            `autocolorscale` is true, the default  palette will be
+            chosen according to whether numbers in the `color`
+            array are all positive, all negative or mixed.
         autocontour
             Determines whether or not the contour level attributes
             are picked by an algorithm. If *true*, the number of
@@ -2023,7 +2067,11 @@ class Figure(BaseFigure):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)', [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in z space, use zmin and zmax
+            colorscale in color space, use`zmin` and `zmax`.
+            Alternatively, `colorscale` may be a palette name
+            string of the following list: Greys,YlGnBu,Greens,YlOrR
+            d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
+            ot,Blackbody,Earth,Electric,Viridis,Cividis.
         connectgaps
             Determines whether or not gaps (i.e. {nan} or missing
             values) in the `z` data are filled in.
@@ -2081,7 +2129,9 @@ class Figure(BaseFigure):
         opacity
             Sets the opacity of the trace.
         reversescale
-            Reverses the colorscale.
+            Reverses the color mapping if true. If true, `zmin`
+            will correspond to the last color in the array and
+            `zmax` will correspond to the first color.
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -2156,17 +2206,23 @@ class Figure(BaseFigure):
         z
             Sets the z data.
         zauto
-            Determines the whether or not the color domain is
-            computed with respect to the input data.
+            Determines whether or not the color domain is computed
+            with respect to the input data (here in `z`) or the
+            bounds set in `zmin` and `zmax`  Defaults to `false`
+            when `zmin` and `zmax` are set by the user.
         zhoverformat
             Sets the hover text formatting rule using d3 formatting
             mini-languages which are very similar to those in
             Python. See: https://github.com/d3/d3-format/blob/maste
             r/README.md#locale_format
         zmax
-            Sets the upper bound of color domain.
+            Sets the upper bound of the color domain. Value should
+            have the same units as in `z` and if set, `zmin` must
+            be set as well.
         zmin
-            Sets the lower bound of color domain.
+            Sets the lower bound of the color domain. Value should
+            have the same units as in `z` and if set, `zmax` must
+            be set as well.
         zsrc
             Sets the source reference on plot.ly for  z .
         row : int or None (default)
@@ -2312,8 +2368,12 @@ class Figure(BaseFigure):
             and *dx* (the default behavior when `x` is not
             provided).
         autocolorscale
-            Determines whether or not the colorscale is picked
-            using the sign of the input z values.
+            Determines whether the colorscale is a default palette
+            (`autocolorscale: true`) or the palette determined by
+            `colorscale`. In case `colorscale` is unspecified or
+            `autocolorscale` is true, the default  palette will be
+            chosen according to whether numbers in the `color`
+            array are all positive, all negative or mixed.
         autocontour
             Determines whether or not the contour level attributes
             are picked by an algorithm. If *true*, the number of
@@ -2346,7 +2406,11 @@ class Figure(BaseFigure):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)', [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in z space, use zmin and zmax
+            colorscale in color space, use`zmin` and `zmax`.
+            Alternatively, `colorscale` may be a palette name
+            string of the following list: Greys,YlGnBu,Greens,YlOrR
+            d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
+            ot,Blackbody,Earth,Electric,Viridis,Cividis.
         contours
             plotly.graph_objs.contourcarpet.Contours instance or
             dict with compatible properties
@@ -2401,7 +2465,9 @@ class Figure(BaseFigure):
         opacity
             Sets the opacity of the trace.
         reversescale
-            Reverses the colorscale.
+            Reverses the color mapping if true. If true, `zmin`
+            will correspond to the last color in the array and
+            `zmax` will correspond to the first color.
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -2444,12 +2510,18 @@ class Figure(BaseFigure):
         z
             Sets the z data.
         zauto
-            Determines the whether or not the color domain is
-            computed with respect to the input data.
+            Determines whether or not the color domain is computed
+            with respect to the input data (here in `z`) or the
+            bounds set in `zmin` and `zmax`  Defaults to `false`
+            when `zmin` and `zmax` are set by the user.
         zmax
-            Sets the upper bound of color domain.
+            Sets the upper bound of the color domain. Value should
+            have the same units as in `z` and if set, `zmin` must
+            be set as well.
         zmin
-            Sets the lower bound of color domain.
+            Sets the lower bound of the color domain. Value should
+            have the same units as in `z` and if set, `zmax` must
+            be set as well.
         zsrc
             Sets the source reference on plot.ly for  z .
         row : int or None (default)
@@ -2593,8 +2665,12 @@ class Figure(BaseFigure):
         Parameters
         ----------
         autocolorscale
-            Determines whether or not the colorscale is picked
-            using the sign of the input z values.
+            Determines whether the colorscale is a default palette
+            (`autocolorscale: true`) or the palette determined by
+            `colorscale`. In case `colorscale` is unspecified or
+            `autocolorscale` is true, the default  palette will be
+            chosen according to whether numbers in the `color`
+            array are all positive, all negative or mixed.
         colorbar
             plotly.graph_objs.heatmap.ColorBar instance or dict
             with compatible properties
@@ -2605,7 +2681,11 @@ class Figure(BaseFigure):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)', [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in z space, use zmin and zmax
+            colorscale in color space, use`zmin` and `zmax`.
+            Alternatively, `colorscale` may be a palette name
+            string of the following list: Greys,YlGnBu,Greens,YlOrR
+            d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
+            ot,Blackbody,Earth,Electric,Viridis,Cividis.
         connectgaps
             Determines whether or not gaps (i.e. {nan} or missing
             values) in the `z` data are filled in.
@@ -2646,7 +2726,9 @@ class Figure(BaseFigure):
         opacity
             Sets the opacity of the trace.
         reversescale
-            Reverses the colorscale.
+            Reverses the color mapping if true. If true, `zmin`
+            will correspond to the last color in the array and
+            `zmax` will correspond to the first color.
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -2725,17 +2807,23 @@ class Figure(BaseFigure):
         z
             Sets the z data.
         zauto
-            Determines the whether or not the color domain is
-            computed with respect to the input data.
+            Determines whether or not the color domain is computed
+            with respect to the input data (here in `z`) or the
+            bounds set in `zmin` and `zmax`  Defaults to `false`
+            when `zmin` and `zmax` are set by the user.
         zhoverformat
             Sets the hover text formatting rule using d3 formatting
             mini-languages which are very similar to those in
             Python. See: https://github.com/d3/d3-format/blob/maste
             r/README.md#locale_format
         zmax
-            Sets the upper bound of color domain.
+            Sets the upper bound of the color domain. Value should
+            have the same units as in `z` and if set, `zmin` must
+            be set as well.
         zmin
-            Sets the lower bound of color domain.
+            Sets the lower bound of the color domain. Value should
+            have the same units as in `z` and if set, `zmax` must
+            be set as well.
         zsmooth
             Picks a smoothing algorithm use to smooth `z` data.
         zsrc
@@ -2859,8 +2947,12 @@ class Figure(BaseFigure):
         Parameters
         ----------
         autocolorscale
-            Determines whether or not the colorscale is picked
-            using the sign of the input z values.
+            Determines whether the colorscale is a default palette
+            (`autocolorscale: true`) or the palette determined by
+            `colorscale`. In case `colorscale` is unspecified or
+            `autocolorscale` is true, the default  palette will be
+            chosen according to whether numbers in the `color`
+            array are all positive, all negative or mixed.
         colorbar
             plotly.graph_objs.heatmapgl.ColorBar instance or dict
             with compatible properties
@@ -2871,7 +2963,11 @@ class Figure(BaseFigure):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)', [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in z space, use zmin and zmax
+            colorscale in color space, use`zmin` and `zmax`.
+            Alternatively, `colorscale` may be a palette name
+            string of the following list: Greys,YlGnBu,Greens,YlOrR
+            d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
+            ot,Blackbody,Earth,Electric,Viridis,Cividis.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -2909,7 +3005,9 @@ class Figure(BaseFigure):
         opacity
             Sets the opacity of the trace.
         reversescale
-            Reverses the colorscale.
+            Reverses the color mapping if true. If true, `zmin`
+            will correspond to the last color in the array and
+            `zmax` will correspond to the first color.
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -2980,12 +3078,18 @@ class Figure(BaseFigure):
         z
             Sets the z data.
         zauto
-            Determines the whether or not the color domain is
-            computed with respect to the input data.
+            Determines whether or not the color domain is computed
+            with respect to the input data (here in `z`) or the
+            bounds set in `zmin` and `zmax`  Defaults to `false`
+            when `zmin` and `zmax` are set by the user.
         zmax
-            Sets the upper bound of color domain.
+            Sets the upper bound of the color domain. Value should
+            have the same units as in `z` and if set, `zmin` must
+            be set as well.
         zmin
-            Sets the lower bound of color domain.
+            Sets the lower bound of the color domain. Value should
+            have the same units as in `z` and if set, `zmax` must
+            be set as well.
         zsrc
             Sets the source reference on plot.ly for  z .
         row : int or None (default)
@@ -3393,8 +3497,12 @@ class Figure(BaseFigure):
             false if you want to manually set the number of bins
             using the attributes in ybins.
         autocolorscale
-            Determines whether or not the colorscale is picked
-            using the sign of the input z values.
+            Determines whether the colorscale is a default palette
+            (`autocolorscale: true`) or the palette determined by
+            `colorscale`. In case `colorscale` is unspecified or
+            `autocolorscale` is true, the default  palette will be
+            chosen according to whether numbers in the `color`
+            array are all positive, all negative or mixed.
         colorbar
             plotly.graph_objs.histogram2d.ColorBar instance or dict
             with compatible properties
@@ -3405,7 +3513,11 @@ class Figure(BaseFigure):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)', [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in z space, use zmin and zmax
+            colorscale in color space, use`zmin` and `zmax`.
+            Alternatively, `colorscale` may be a palette name
+            string of the following list: Greys,YlGnBu,Greens,YlOrR
+            d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
+            ot,Blackbody,Earth,Electric,Viridis,Cividis.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -3477,7 +3589,9 @@ class Figure(BaseFigure):
         opacity
             Sets the opacity of the trace.
         reversescale
-            Reverses the colorscale.
+            Reverses the color mapping if true. If true, `zmin`
+            will correspond to the last color in the array and
+            `zmax` will correspond to the first color.
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -3536,17 +3650,23 @@ class Figure(BaseFigure):
         z
             Sets the aggregation data.
         zauto
-            Determines the whether or not the color domain is
-            computed with respect to the input data.
+            Determines whether or not the color domain is computed
+            with respect to the input data (here in `z`) or the
+            bounds set in `zmin` and `zmax`  Defaults to `false`
+            when `zmin` and `zmax` are set by the user.
         zhoverformat
             Sets the hover text formatting rule using d3 formatting
             mini-languages which are very similar to those in
             Python. See: https://github.com/d3/d3-format/blob/maste
             r/README.md#locale_format
         zmax
-            Sets the upper bound of color domain.
+            Sets the upper bound of the color domain. Value should
+            have the same units as in `z` and if set, `zmin` must
+            be set as well.
         zmin
-            Sets the lower bound of color domain.
+            Sets the lower bound of the color domain. Value should
+            have the same units as in `z` and if set, `zmax` must
+            be set as well.
         zsmooth
             Picks a smoothing algorithm use to smooth `z` data.
         zsrc
@@ -3691,8 +3811,12 @@ class Figure(BaseFigure):
             false if you want to manually set the number of bins
             using the attributes in ybins.
         autocolorscale
-            Determines whether or not the colorscale is picked
-            using the sign of the input z values.
+            Determines whether the colorscale is a default palette
+            (`autocolorscale: true`) or the palette determined by
+            `colorscale`. In case `colorscale` is unspecified or
+            `autocolorscale` is true, the default  palette will be
+            chosen according to whether numbers in the `color`
+            array are all positive, all negative or mixed.
         autocontour
             Determines whether or not the contour level attributes
             are picked by an algorithm. If *true*, the number of
@@ -3708,7 +3832,11 @@ class Figure(BaseFigure):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)', [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in z space, use zmin and zmax
+            colorscale in color space, use`zmin` and `zmax`.
+            Alternatively, `colorscale` may be a palette name
+            string of the following list: Greys,YlGnBu,Greens,YlOrR
+            d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
+            ot,Blackbody,Earth,Electric,Viridis,Cividis.
         contours
             plotly.graph_objs.histogram2dcontour.Contours instance
             or dict with compatible properties
@@ -3792,7 +3920,9 @@ class Figure(BaseFigure):
         opacity
             Sets the opacity of the trace.
         reversescale
-            Reverses the colorscale.
+            Reverses the color mapping if true. If true, `zmin`
+            will correspond to the last color in the array and
+            `zmax` will correspond to the first color.
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -3847,17 +3977,23 @@ class Figure(BaseFigure):
         z
             Sets the aggregation data.
         zauto
-            Determines the whether or not the color domain is
-            computed with respect to the input data.
+            Determines whether or not the color domain is computed
+            with respect to the input data (here in `z`) or the
+            bounds set in `zmin` and `zmax`  Defaults to `false`
+            when `zmin` and `zmax` are set by the user.
         zhoverformat
             Sets the hover text formatting rule using d3 formatting
             mini-languages which are very similar to those in
             Python. See: https://github.com/d3/d3-format/blob/maste
             r/README.md#locale_format
         zmax
-            Sets the upper bound of color domain.
+            Sets the upper bound of the color domain. Value should
+            have the same units as in `z` and if set, `zmin` must
+            be set as well.
         zmin
-            Sets the lower bound of color domain.
+            Sets the lower bound of the color domain. Value should
+            have the same units as in `z` and if set, `zmax` must
+            be set as well.
         zsrc
             Sets the source reference on plot.ly for  z .
         row : int or None (default)
@@ -4015,51 +4151,42 @@ class Figure(BaseFigure):
             bodies or if the intention is to enclose the `x`, `y`
             and `z` point set into a convex hull.
         autocolorscale
-            Has an effect only if `color` is set to a numerical
-            array. Determines whether the colorscale is a default
-            palette (`autocolorscale: true`) or the palette
-            determined by `colorscale`. In case `colorscale` is
-            unspecified or `autocolorscale` is true, the default
-            palette will be chosen according to whether numbers in
-            the `color` array are all positive, all negative or
-            mixed.
+            Determines whether the colorscale is a default palette
+            (`autocolorscale: true`) or the palette determined by
+            `colorscale`. In case `colorscale` is unspecified or
+            `autocolorscale` is true, the default  palette will be
+            chosen according to whether numbers in the `color`
+            array are all positive, all negative or mixed.
         cauto
-            Has an effect only if `color` is set to a numerical
-            array and `cmin`, `cmax` are set by the user. In this
-            case, it controls whether the range of colors in
-            `colorscale` is mapped to the range of values in the
-            `color` array (`cauto: true`), or the `cmin`/`cmax`
-            values (`cauto: false`). Defaults to `false` when
-            `cmin`, `cmax` are set by the user.
+            Determines whether or not the color domain is computed
+            with respect to the input data (here `intensity`) or
+            the bounds set in `cmin` and `cmax`  Defaults to
+            `false` when `cmin` and `cmax` are set by the user.
         cmax
-            Has an effect only if `color` is set to a numerical
-            array. Sets the upper bound of the color domain. Value
-            should be associated to the `color` array index, and if
-            set, `cmin` must be set as well.
+            Sets the upper bound of the color domain. Value should
+            have the same units as `intensity` and if set, `cmin`
+            must be set as well.
         cmin
-            Has an effect only if `color` is set to a numerical
-            array. Sets the lower bound of the color domain. Value
-            should be associated to the `color` array index, and if
-            set, `cmax` must be set as well.
+            Sets the lower bound of the color domain. Value should
+            have the same units as `intensity` and if set, `cmax`
+            must be set as well.
         color
             Sets the color of the whole mesh
         colorbar
             plotly.graph_objs.mesh3d.ColorBar instance or dict with
             compatible properties
         colorscale
-            Sets the colorscale and only has an effect if `color`
-            is set to a numerical array. The colorscale must be an
-            array containing arrays mapping a normalized value to
-            an rgb, rgba, hex, hsl, hsv, or named color string. At
-            minimum, a mapping for the lowest (0) and highest (1)
-            values are required. For example, `[[0, 'rgb(0,0,255)',
-            [1, 'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in color space, use `cmin` and `cmax`.
+            Sets the colorscale. The colorscale must be an array
+            containing arrays mapping a normalized value to an rgb,
+            rgba, hex, hsl, hsv, or named color string. At minimum,
+            a mapping for the lowest (0) and highest (1) values are
+            required. For example, `[[0, 'rgb(0,0,255)', [1,
+            'rgb(255,0,0)']]`. To control the bounds of the
+            colorscale in color space, use`cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
-            string of the following list: Greys, YlGnBu, Greens,
-            YlOrRd, Bluered, RdBu, Reds, Blues, Picnic, Rainbow,
-            Portland, Jet, Hot, Blackbody, Earth, Electric,
-            Viridis, Cividis
+            string of the following list: Greys,YlGnBu,Greens,YlOrR
+            d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
+            ot,Blackbody,Earth,Electric,Viridis,Cividis.
         contour
             plotly.graph_objs.mesh3d.Contour instance or dict with
             compatible properties
@@ -4155,10 +4282,9 @@ class Figure(BaseFigure):
         opacity
             Sets the opacity of the surface.
         reversescale
-            Has an effect only if `color` is set to a numerical
-            array. Reverses the color mapping if true (`cmin` will
-            correspond to the last color in the array and `cmax`
-            will correspond to the first color).
+            Reverses the color mapping if true. If true, `cmin`
+            will correspond to the last color in the array and
+            `cmax` will correspond to the first color.
         scene
             Sets a reference between this trace's 3D coordinate
             system and a 3D scene. If *scene* (the default value),
@@ -6341,6 +6467,8 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hoveron=None,
+        hovertext=None,
+        hovertextsrc=None,
         ids=None,
         idssrc=None,
         legendgroup=None,
@@ -6354,6 +6482,9 @@ class Figure(BaseFigure):
         showlegend=None,
         stream=None,
         text=None,
+        textfont=None,
+        textposition=None,
+        textpositionsrc=None,
         textsrc=None,
         uid=None,
         unselected=None,
@@ -6438,6 +6569,15 @@ class Figure(BaseFigure):
             regions? If the fill is *toself* or *tonext* and there
             are no markers or text, then the default is *fills*,
             otherwise it is *points*.
+        hovertext
+            Sets hover text elements associated with each (x,y)
+            pair. If a single string, the same string appears over
+            all the data points. If an array of string, the items
+            are mapped in order to the this trace's (x,y)
+            coordinates. To be seen, trace `hoverinfo` must contain
+            a *text* flag.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -6483,6 +6623,14 @@ class Figure(BaseFigure):
             appears over all the data points. If an array of
             string, the items are mapped in order to the this
             trace's (x,y) coordinates.
+        textfont
+            Sets the text font.
+        textposition
+            Sets the positions of the `text` elements with respects
+            to the (x,y) coordinates.
+        textpositionsrc
+            Sets the source reference on plot.ly for  textposition
+            .
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
@@ -6552,6 +6700,8 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hoveron=hoveron,
+            hovertext=hovertext,
+            hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
@@ -6565,6 +6715,9 @@ class Figure(BaseFigure):
             showlegend=showlegend,
             stream=stream,
             text=text,
+            textfont=textfont,
+            textposition=textposition,
+            textpositionsrc=textpositionsrc,
             textsrc=textsrc,
             uid=uid,
             unselected=unselected,
@@ -7741,6 +7894,272 @@ class Figure(BaseFigure):
         )
         return self.add_trace(new_trace, row=row, col=col)
 
+    def add_streamtube(
+        self,
+        autocolorscale=None,
+        cauto=None,
+        cmax=None,
+        cmin=None,
+        colorbar=None,
+        colorscale=None,
+        customdata=None,
+        customdatasrc=None,
+        hoverinfo=None,
+        hoverinfosrc=None,
+        hoverlabel=None,
+        ids=None,
+        idssrc=None,
+        legendgroup=None,
+        lighting=None,
+        lightposition=None,
+        maxdisplayed=None,
+        name=None,
+        opacity=None,
+        reversescale=None,
+        scene=None,
+        selectedpoints=None,
+        showlegend=None,
+        showscale=None,
+        sizeref=None,
+        starts=None,
+        stream=None,
+        text=None,
+        u=None,
+        uid=None,
+        usrc=None,
+        v=None,
+        visible=None,
+        vsrc=None,
+        w=None,
+        wsrc=None,
+        x=None,
+        xsrc=None,
+        y=None,
+        ysrc=None,
+        z=None,
+        zsrc=None,
+        row=None,
+        col=None,
+        **kwargs
+    ):
+        """
+        Add a new Streamtube trace
+        
+        Use a streamtube trace to visualize flow in a vector field.
+        Specify a vector field using 6 1D arrays of equal length, 3
+        position arrays `x`, `y` and `z` and 3 vector component arrays
+        `u`, `v`, and `w`.  By default, the tubes' starting positions
+        will be cut from the vector field's x-z plane at its minimum y
+        value. To specify your own starting position, use attributes
+        `starts.x`, `starts.y` and `starts.z`.
+
+        Parameters
+        ----------
+        autocolorscale
+            Determines whether the colorscale is a default palette
+            (`autocolorscale: true`) or the palette determined by
+            `colorscale`. In case `colorscale` is unspecified or
+            `autocolorscale` is true, the default  palette will be
+            chosen according to whether numbers in the `color`
+            array are all positive, all negative or mixed.
+        cauto
+            Determines whether or not the color domain is computed
+            with respect to the input data (here u/v/w norm) or the
+            bounds set in `cmin` and `cmax`  Defaults to `false`
+            when `cmin` and `cmax` are set by the user.
+        cmax
+            Sets the upper bound of the color domain. Value should
+            have the same units as u/v/w norm and if set, `cmin`
+            must be set as well.
+        cmin
+            Sets the lower bound of the color domain. Value should
+            have the same units as u/v/w norm and if set, `cmax`
+            must be set as well.
+        colorbar
+            plotly.graph_objs.streamtube.ColorBar instance or dict
+            with compatible properties
+        colorscale
+            Sets the colorscale. The colorscale must be an array
+            containing arrays mapping a normalized value to an rgb,
+            rgba, hex, hsl, hsv, or named color string. At minimum,
+            a mapping for the lowest (0) and highest (1) values are
+            required. For example, `[[0, 'rgb(0,0,255)', [1,
+            'rgb(255,0,0)']]`. To control the bounds of the
+            colorscale in color space, use`cmin` and `cmax`.
+            Alternatively, `colorscale` may be a palette name
+            string of the following list: Greys,YlGnBu,Greens,YlOrR
+            d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
+            ot,Blackbody,Earth,Electric,Viridis,Cividis.
+        customdata
+            Assigns extra data each datum. This may be useful when
+            listening to hover, click and selection events. Note
+            that, *scatter* traces also appends customdata items in
+            the markers DOM elements
+        customdatasrc
+            Sets the source reference on plot.ly for  customdata .
+        hoverinfo
+            Determines which trace information appear on hover. If
+            `none` or `skip` are set, no information is displayed
+            upon hovering. But, if `none` is set, click and hover
+            events are still fired.
+        hoverinfosrc
+            Sets the source reference on plot.ly for  hoverinfo .
+        hoverlabel
+            plotly.graph_objs.streamtube.Hoverlabel instance or
+            dict with compatible properties
+        ids
+            Assigns id labels to each datum. These ids for object
+            constancy of data points during animation. Should be an
+            array of strings, not numbers or any other type.
+        idssrc
+            Sets the source reference on plot.ly for  ids .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
+        lighting
+            plotly.graph_objs.streamtube.Lighting instance or dict
+            with compatible properties
+        lightposition
+            plotly.graph_objs.streamtube.Lightposition instance or
+            dict with compatible properties
+        maxdisplayed
+            The maximum number of displayed segments in a
+            streamtube.
+        name
+            Sets the trace name. The trace name appear as the
+            legend item and on hover.
+        opacity
+            Sets the opacity of the surface.
+        reversescale
+            Reverses the color mapping if true. If true, `cmin`
+            will correspond to the last color in the array and
+            `cmax` will correspond to the first color.
+        scene
+            Sets a reference between this trace's 3D coordinate
+            system and a 3D scene. If *scene* (the default value),
+            the (x,y,z) coordinates refer to `layout.scene`. If
+            *scene2*, the (x,y,z) coordinates refer to
+            `layout.scene2`, and so on.
+        selectedpoints
+            Array containing integer indices of selected points.
+            Has an effect only for traces that support selections.
+            Note that an empty array means an empty selection where
+            the `unselected` are turned on for all points, whereas,
+            any other non-array values means no selection all where
+            the `selected` and `unselected` styles have no effect.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
+        showscale
+            Determines whether or not a colorbar is displayed for
+            this trace.
+        sizeref
+            The scaling factor for the streamtubes. The default is
+            1, which avoids two max divergence tubes from touching
+            at adjacent starting positions.
+        starts
+            plotly.graph_objs.streamtube.Starts instance or dict
+            with compatible properties
+        stream
+            plotly.graph_objs.streamtube.Stream instance or dict
+            with compatible properties
+        text
+            Sets a text element associated with this trace. If
+            trace `hoverinfo` contains a *text* flag, this text
+            element will be seen in all hover labels. Note that
+            streamtube traces do not support array `text` values.
+        u
+            Sets the x components of the vector field.
+        uid
+
+        usrc
+            Sets the source reference on plot.ly for  u .
+        v
+            Sets the y components of the vector field.
+        visible
+            Determines whether or not this trace is visible. If
+            *legendonly*, the trace is not drawn, but can appear as
+            a legend item (provided that the legend itself is
+            visible).
+        vsrc
+            Sets the source reference on plot.ly for  v .
+        w
+            Sets the z components of the vector field.
+        wsrc
+            Sets the source reference on plot.ly for  w .
+        x
+            Sets the x coordinates of the vector field.
+        xsrc
+            Sets the source reference on plot.ly for  x .
+        y
+            Sets the y coordinates of the vector field.
+        ysrc
+            Sets the source reference on plot.ly for  y .
+        z
+            Sets the z coordinates of the vector field.
+        zsrc
+            Sets the source reference on plot.ly for  z .
+        row : int or None (default)
+            Subplot row index (starting from 1) for the trace to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`
+        col : int or None (default)
+            Subplot col index (starting from 1) for the trace to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`
+
+        Returns
+        -------
+        Streamtube
+        """
+        new_trace = Streamtube(
+            autocolorscale=autocolorscale,
+            cauto=cauto,
+            cmax=cmax,
+            cmin=cmin,
+            colorbar=colorbar,
+            colorscale=colorscale,
+            customdata=customdata,
+            customdatasrc=customdatasrc,
+            hoverinfo=hoverinfo,
+            hoverinfosrc=hoverinfosrc,
+            hoverlabel=hoverlabel,
+            ids=ids,
+            idssrc=idssrc,
+            legendgroup=legendgroup,
+            lighting=lighting,
+            lightposition=lightposition,
+            maxdisplayed=maxdisplayed,
+            name=name,
+            opacity=opacity,
+            reversescale=reversescale,
+            scene=scene,
+            selectedpoints=selectedpoints,
+            showlegend=showlegend,
+            showscale=showscale,
+            sizeref=sizeref,
+            starts=starts,
+            stream=stream,
+            text=text,
+            u=u,
+            uid=uid,
+            usrc=usrc,
+            v=v,
+            visible=visible,
+            vsrc=vsrc,
+            w=w,
+            wsrc=wsrc,
+            x=x,
+            xsrc=xsrc,
+            y=y,
+            ysrc=ysrc,
+            z=z,
+            zsrc=zsrc,
+            **kwargs
+        )
+        return self.add_trace(new_trace, row=row, col=col)
+
     def add_surface(
         self,
         autocolorscale=None,
@@ -7804,15 +8223,25 @@ class Figure(BaseFigure):
         Parameters
         ----------
         autocolorscale
-            Determines whether or not the colorscale is picked
-            using the sign of the input z values.
+            Determines whether the colorscale is a default palette
+            (`autocolorscale: true`) or the palette determined by
+            `colorscale`. In case `colorscale` is unspecified or
+            `autocolorscale` is true, the default  palette will be
+            chosen according to whether numbers in the `color`
+            array are all positive, all negative or mixed.
         cauto
-            Determines the whether or not the color domain is
-            computed with respect to the input data.
+            Determines whether or not the color domain is computed
+            with respect to the input data (here z or surfacecolor)
+            or the bounds set in `cmin` and `cmax`  Defaults to
+            `false` when `cmin` and `cmax` are set by the user.
         cmax
-            Sets the upper bound of color domain.
+            Sets the upper bound of the color domain. Value should
+            have the same units as z or surfacecolor and if set,
+            `cmin` must be set as well.
         cmin
-            Sets the lower bound of color domain.
+            Sets the lower bound of the color domain. Value should
+            have the same units as z or surfacecolor and if set,
+            `cmax` must be set as well.
         colorbar
             plotly.graph_objs.surface.ColorBar instance or dict
             with compatible properties
@@ -7823,7 +8252,11 @@ class Figure(BaseFigure):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)', [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in z space, use zmin and zmax
+            colorscale in color space, use`cmin` and `cmax`.
+            Alternatively, `colorscale` may be a palette name
+            string of the following list: Greys,YlGnBu,Greens,YlOrR
+            d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
+            ot,Blackbody,Earth,Electric,Viridis,Cividis.
         contours
             plotly.graph_objs.surface.Contours instance or dict
             with compatible properties
@@ -7871,7 +8304,9 @@ class Figure(BaseFigure):
         opacity
             Sets the opacity of the surface.
         reversescale
-            Reverses the colorscale.
+            Reverses the color mapping if true. If true, `cmin`
+            will correspond to the last color in the array and
+            `cmax` will correspond to the first color.
         scene
             Sets a reference between this trace's 3D coordinate
             system and a 3D scene. If *scene* (the default value),

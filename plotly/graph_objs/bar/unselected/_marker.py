@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Marker(BaseTraceHierarchyType):
@@ -103,12 +104,15 @@ class Marker(BaseTraceHierarchyType):
             only when a selection exists.
         """
 
-    def __init__(self, color=None, opacity=None, **kwargs):
+    def __init__(self, arg=None, color=None, opacity=None, **kwargs):
         """
         Construct a new Marker object
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.bar.unselected.Marker
         color
             Sets the marker color of unselected points, applied
             only when a selection exists.
@@ -122,6 +126,22 @@ class Marker(BaseTraceHierarchyType):
         """
         super(Marker, self).__init__('marker')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.bar.unselected.Marker 
+constructor must be a dict or 
+an instance of plotly.graph_objs.bar.unselected.Marker"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.bar.unselected import (marker as v_marker)
@@ -133,9 +153,11 @@ class Marker(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.color = color
-        self.opacity = opacity
+        _v = arg.pop('color', None)
+        self.color = color if color is not None else _v
+        _v = arg.pop('opacity', None)
+        self.opacity = opacity if opacity is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

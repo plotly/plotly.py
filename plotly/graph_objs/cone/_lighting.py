@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceHierarchyType
+import copy
 
 
 class Lighting(BaseTraceHierarchyType):
@@ -189,6 +190,7 @@ class Lighting(BaseTraceHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         ambient=None,
         diffuse=None,
         facenormalsepsilon=None,
@@ -203,6 +205,9 @@ class Lighting(BaseTraceHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.cone.Lighting
         ambient
             Ambient light increases overall color visibility but
             can wash out the image.
@@ -233,6 +238,22 @@ class Lighting(BaseTraceHierarchyType):
         """
         super(Lighting, self).__init__('lighting')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.cone.Lighting 
+constructor must be a dict or 
+an instance of plotly.graph_objs.cone.Lighting"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.cone import (lighting as v_lighting)
@@ -251,14 +272,21 @@ class Lighting(BaseTraceHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.ambient = ambient
-        self.diffuse = diffuse
-        self.facenormalsepsilon = facenormalsepsilon
-        self.fresnel = fresnel
-        self.roughness = roughness
-        self.specular = specular
-        self.vertexnormalsepsilon = vertexnormalsepsilon
+        _v = arg.pop('ambient', None)
+        self.ambient = ambient if ambient is not None else _v
+        _v = arg.pop('diffuse', None)
+        self.diffuse = diffuse if diffuse is not None else _v
+        _v = arg.pop('facenormalsepsilon', None)
+        self.facenormalsepsilon = facenormalsepsilon if facenormalsepsilon is not None else _v
+        _v = arg.pop('fresnel', None)
+        self.fresnel = fresnel if fresnel is not None else _v
+        _v = arg.pop('roughness', None)
+        self.roughness = roughness if roughness is not None else _v
+        _v = arg.pop('specular', None)
+        self.specular = specular if specular is not None else _v
+        _v = arg.pop('vertexnormalsepsilon', None)
+        self.vertexnormalsepsilon = vertexnormalsepsilon if vertexnormalsepsilon is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

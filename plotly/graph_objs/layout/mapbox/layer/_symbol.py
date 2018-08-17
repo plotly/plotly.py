@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Symbol(BaseLayoutHierarchyType):
@@ -166,6 +167,7 @@ class Symbol(BaseLayoutHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         icon=None,
         iconsize=None,
         text=None,
@@ -178,6 +180,10 @@ class Symbol(BaseLayoutHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of
+            plotly.graph_objs.layout.mapbox.layer.Symbol
         icon
             Sets the symbol icon image. Full list:
             https://www.mapbox.com/maki-icons/
@@ -199,6 +205,22 @@ class Symbol(BaseLayoutHierarchyType):
         """
         super(Symbol, self).__init__('symbol')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.mapbox.layer.Symbol 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.mapbox.layer.Symbol"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout.mapbox.layer import (symbol as v_symbol)
@@ -213,12 +235,17 @@ class Symbol(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.icon = icon
-        self.iconsize = iconsize
-        self.text = text
-        self.textfont = textfont
-        self.textposition = textposition
+        _v = arg.pop('icon', None)
+        self.icon = icon if icon is not None else _v
+        _v = arg.pop('iconsize', None)
+        self.iconsize = iconsize if iconsize is not None else _v
+        _v = arg.pop('text', None)
+        self.text = text if text is not None else _v
+        _v = arg.pop('textfont', None)
+        self.textfont = textfont if textfont is not None else _v
+        _v = arg.pop('textposition', None)
+        self.textposition = textposition if textposition is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

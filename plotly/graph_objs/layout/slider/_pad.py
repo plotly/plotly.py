@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Pad(BaseLayoutHierarchyType):
@@ -111,7 +112,7 @@ class Pad(BaseLayoutHierarchyType):
             component.
         """
 
-    def __init__(self, b=None, l=None, r=None, t=None, **kwargs):
+    def __init__(self, arg=None, b=None, l=None, r=None, t=None, **kwargs):
         """
         Construct a new Pad object
         
@@ -119,6 +120,9 @@ class Pad(BaseLayoutHierarchyType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.layout.slider.Pad
         b
             The amount of padding (in px) along the bottom of the
             component.
@@ -138,6 +142,22 @@ class Pad(BaseLayoutHierarchyType):
         """
         super(Pad, self).__init__('pad')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.slider.Pad 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.slider.Pad"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout.slider import (pad as v_pad)
@@ -151,11 +171,15 @@ class Pad(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.b = b
-        self.l = l
-        self.r = r
-        self.t = t
+        _v = arg.pop('b', None)
+        self.b = b if b is not None else _v
+        _v = arg.pop('l', None)
+        self.l = l if l is not None else _v
+        _v = arg.pop('r', None)
+        self.r = r if r is not None else _v
+        _v = arg.pop('t', None)
+        self.t = t if t is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

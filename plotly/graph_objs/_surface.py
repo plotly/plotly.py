@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceType
+import copy
 
 
 class Surface(BaseTraceType):
@@ -8,8 +9,12 @@ class Surface(BaseTraceType):
     @property
     def autocolorscale(self):
         """
-        Determines whether or not the colorscale is picked using the
-        sign of the input z values.
+        Determines whether the colorscale is a default palette
+        (`autocolorscale: true`) or the palette determined by
+        `colorscale`. In case `colorscale` is unspecified or
+        `autocolorscale` is true, the default  palette will be chosen
+        according to whether numbers in the `color` array are all
+        positive, all negative or mixed.
     
         The 'autocolorscale' property must be specified as a bool
         (either True, or False)
@@ -29,8 +34,10 @@ class Surface(BaseTraceType):
     @property
     def cauto(self):
         """
-        Determines the whether or not the color domain is computed with
-        respect to the input data.
+        Determines whether or not the color domain is computed with
+        respect to the input data (here z or surfacecolor) or the
+        bounds set in `cmin` and `cmax`  Defaults to `false` when
+        `cmin` and `cmax` are set by the user.
     
         The 'cauto' property must be specified as a bool
         (either True, or False)
@@ -50,7 +57,9 @@ class Surface(BaseTraceType):
     @property
     def cmax(self):
         """
-        Sets the upper bound of color domain.
+        Sets the upper bound of the color domain. Value should have the
+        same units as z or surfacecolor and if set, `cmin` must be set
+        as well.
     
         The 'cmax' property is a number and may be specified as:
           - An int or float
@@ -70,7 +79,9 @@ class Surface(BaseTraceType):
     @property
     def cmin(self):
         """
-        Sets the lower bound of color domain.
+        Sets the lower bound of the color domain. Value should have the
+        same units as z or surfacecolor and if set, `cmax` must be set
+        as well.
     
         The 'cmin' property is a number and may be specified as:
           - An int or float
@@ -313,7 +324,11 @@ class Surface(BaseTraceType):
         hsv, or named color string. At minimum, a mapping for the
         lowest (0) and highest (1) values are required. For example,
         `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the
-        bounds of the colorscale in z space, use zmin and zmax
+        bounds of the colorscale in color space, use`cmin` and `cmax`.
+        Alternatively, `colorscale` may be a palette name string of the
+        following list: Greys,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Bl
+        ues,Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth,Electric,Vi
+        ridis,Cividis.
     
         The 'colorscale' property is a colorscale and may be
         specified as:
@@ -717,7 +732,9 @@ class Surface(BaseTraceType):
     @property
     def reversescale(self):
         """
-        Reverses the colorscale.
+        Reverses the color mapping if true. If true, `cmin` will
+        correspond to the last color in the array and `cmax` will
+        correspond to the first color.
     
         The 'reversescale' property must be specified as a bool
         (either True, or False)
@@ -1193,15 +1210,25 @@ class Surface(BaseTraceType):
     def _prop_descriptions(self):
         return """\
         autocolorscale
-            Determines whether or not the colorscale is picked
-            using the sign of the input z values.
+            Determines whether the colorscale is a default palette
+            (`autocolorscale: true`) or the palette determined by
+            `colorscale`. In case `colorscale` is unspecified or
+            `autocolorscale` is true, the default  palette will be
+            chosen according to whether numbers in the `color`
+            array are all positive, all negative or mixed.
         cauto
-            Determines the whether or not the color domain is
-            computed with respect to the input data.
+            Determines whether or not the color domain is computed
+            with respect to the input data (here z or surfacecolor)
+            or the bounds set in `cmin` and `cmax`  Defaults to
+            `false` when `cmin` and `cmax` are set by the user.
         cmax
-            Sets the upper bound of color domain.
+            Sets the upper bound of the color domain. Value should
+            have the same units as z or surfacecolor and if set,
+            `cmin` must be set as well.
         cmin
-            Sets the lower bound of color domain.
+            Sets the lower bound of the color domain. Value should
+            have the same units as z or surfacecolor and if set,
+            `cmax` must be set as well.
         colorbar
             plotly.graph_objs.surface.ColorBar instance or dict
             with compatible properties
@@ -1212,7 +1239,11 @@ class Surface(BaseTraceType):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)', [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in z space, use zmin and zmax
+            colorscale in color space, use`cmin` and `cmax`.
+            Alternatively, `colorscale` may be a palette name
+            string of the following list: Greys,YlGnBu,Greens,YlOrR
+            d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
+            ot,Blackbody,Earth,Electric,Viridis,Cividis.
         contours
             plotly.graph_objs.surface.Contours instance or dict
             with compatible properties
@@ -1260,7 +1291,9 @@ class Surface(BaseTraceType):
         opacity
             Sets the opacity of the surface.
         reversescale
-            Reverses the colorscale.
+            Reverses the color mapping if true. If true, `cmin`
+            will correspond to the last color in the array and
+            `cmax` will correspond to the first color.
         scene
             Sets a reference between this trace's 3D coordinate
             system and a 3D scene. If *scene* (the default value),
@@ -1325,6 +1358,7 @@ class Surface(BaseTraceType):
 
     def __init__(
         self,
+        arg=None,
         autocolorscale=None,
         cauto=None,
         cmax=None,
@@ -1383,16 +1417,29 @@ class Surface(BaseTraceType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Surface
         autocolorscale
-            Determines whether or not the colorscale is picked
-            using the sign of the input z values.
+            Determines whether the colorscale is a default palette
+            (`autocolorscale: true`) or the palette determined by
+            `colorscale`. In case `colorscale` is unspecified or
+            `autocolorscale` is true, the default  palette will be
+            chosen according to whether numbers in the `color`
+            array are all positive, all negative or mixed.
         cauto
-            Determines the whether or not the color domain is
-            computed with respect to the input data.
+            Determines whether or not the color domain is computed
+            with respect to the input data (here z or surfacecolor)
+            or the bounds set in `cmin` and `cmax`  Defaults to
+            `false` when `cmin` and `cmax` are set by the user.
         cmax
-            Sets the upper bound of color domain.
+            Sets the upper bound of the color domain. Value should
+            have the same units as z or surfacecolor and if set,
+            `cmin` must be set as well.
         cmin
-            Sets the lower bound of color domain.
+            Sets the lower bound of the color domain. Value should
+            have the same units as z or surfacecolor and if set,
+            `cmax` must be set as well.
         colorbar
             plotly.graph_objs.surface.ColorBar instance or dict
             with compatible properties
@@ -1403,7 +1450,11 @@ class Surface(BaseTraceType):
             a mapping for the lowest (0) and highest (1) values are
             required. For example, `[[0, 'rgb(0,0,255)', [1,
             'rgb(255,0,0)']]`. To control the bounds of the
-            colorscale in z space, use zmin and zmax
+            colorscale in color space, use`cmin` and `cmax`.
+            Alternatively, `colorscale` may be a palette name
+            string of the following list: Greys,YlGnBu,Greens,YlOrR
+            d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
+            ot,Blackbody,Earth,Electric,Viridis,Cividis.
         contours
             plotly.graph_objs.surface.Contours instance or dict
             with compatible properties
@@ -1451,7 +1502,9 @@ class Surface(BaseTraceType):
         opacity
             Sets the opacity of the surface.
         reversescale
-            Reverses the colorscale.
+            Reverses the color mapping if true. If true, `cmin`
+            will correspond to the last color in the array and
+            `cmax` will correspond to the first color.
         scene
             Sets a reference between this trace's 3D coordinate
             system and a 3D scene. If *scene* (the default value),
@@ -1519,6 +1572,22 @@ class Surface(BaseTraceType):
         """
         super(Surface, self).__init__('surface')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Surface 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Surface"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators import (surface as v_surface)
@@ -1572,56 +1641,97 @@ class Surface(BaseTraceType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.autocolorscale = autocolorscale
-        self.cauto = cauto
-        self.cmax = cmax
-        self.cmin = cmin
-        self.colorbar = colorbar
-        self.colorscale = colorscale
-        self.contours = contours
-        self.customdata = customdata
-        self.customdatasrc = customdatasrc
-        self.hidesurface = hidesurface
-        self.hoverinfo = hoverinfo
-        self.hoverinfosrc = hoverinfosrc
-        self.hoverlabel = hoverlabel
-        self.ids = ids
-        self.idssrc = idssrc
-        self.legendgroup = legendgroup
-        self.lighting = lighting
-        self.lightposition = lightposition
-        self.name = name
-        self.opacity = opacity
-        self.reversescale = reversescale
-        self.scene = scene
-        self.selectedpoints = selectedpoints
-        self.showlegend = showlegend
-        self.showscale = showscale
-        self.stream = stream
-        self.surfacecolor = surfacecolor
-        self.surfacecolorsrc = surfacecolorsrc
-        self.text = text
-        self.textsrc = textsrc
-        self.uid = uid
-        self.visible = visible
-        self.x = x
-        self.xcalendar = xcalendar
-        self.xsrc = xsrc
-        self.y = y
-        self.ycalendar = ycalendar
-        self.ysrc = ysrc
-        self.z = z
-        self.zcalendar = zcalendar
-        self.zsrc = zsrc
+        _v = arg.pop('autocolorscale', None)
+        self.autocolorscale = autocolorscale if autocolorscale is not None else _v
+        _v = arg.pop('cauto', None)
+        self.cauto = cauto if cauto is not None else _v
+        _v = arg.pop('cmax', None)
+        self.cmax = cmax if cmax is not None else _v
+        _v = arg.pop('cmin', None)
+        self.cmin = cmin if cmin is not None else _v
+        _v = arg.pop('colorbar', None)
+        self.colorbar = colorbar if colorbar is not None else _v
+        _v = arg.pop('colorscale', None)
+        self.colorscale = colorscale if colorscale is not None else _v
+        _v = arg.pop('contours', None)
+        self.contours = contours if contours is not None else _v
+        _v = arg.pop('customdata', None)
+        self.customdata = customdata if customdata is not None else _v
+        _v = arg.pop('customdatasrc', None)
+        self.customdatasrc = customdatasrc if customdatasrc is not None else _v
+        _v = arg.pop('hidesurface', None)
+        self.hidesurface = hidesurface if hidesurface is not None else _v
+        _v = arg.pop('hoverinfo', None)
+        self.hoverinfo = hoverinfo if hoverinfo is not None else _v
+        _v = arg.pop('hoverinfosrc', None)
+        self.hoverinfosrc = hoverinfosrc if hoverinfosrc is not None else _v
+        _v = arg.pop('hoverlabel', None)
+        self.hoverlabel = hoverlabel if hoverlabel is not None else _v
+        _v = arg.pop('ids', None)
+        self.ids = ids if ids is not None else _v
+        _v = arg.pop('idssrc', None)
+        self.idssrc = idssrc if idssrc is not None else _v
+        _v = arg.pop('legendgroup', None)
+        self.legendgroup = legendgroup if legendgroup is not None else _v
+        _v = arg.pop('lighting', None)
+        self.lighting = lighting if lighting is not None else _v
+        _v = arg.pop('lightposition', None)
+        self.lightposition = lightposition if lightposition is not None else _v
+        _v = arg.pop('name', None)
+        self.name = name if name is not None else _v
+        _v = arg.pop('opacity', None)
+        self.opacity = opacity if opacity is not None else _v
+        _v = arg.pop('reversescale', None)
+        self.reversescale = reversescale if reversescale is not None else _v
+        _v = arg.pop('scene', None)
+        self.scene = scene if scene is not None else _v
+        _v = arg.pop('selectedpoints', None)
+        self.selectedpoints = selectedpoints if selectedpoints is not None else _v
+        _v = arg.pop('showlegend', None)
+        self.showlegend = showlegend if showlegend is not None else _v
+        _v = arg.pop('showscale', None)
+        self.showscale = showscale if showscale is not None else _v
+        _v = arg.pop('stream', None)
+        self.stream = stream if stream is not None else _v
+        _v = arg.pop('surfacecolor', None)
+        self.surfacecolor = surfacecolor if surfacecolor is not None else _v
+        _v = arg.pop('surfacecolorsrc', None)
+        self.surfacecolorsrc = surfacecolorsrc if surfacecolorsrc is not None else _v
+        _v = arg.pop('text', None)
+        self.text = text if text is not None else _v
+        _v = arg.pop('textsrc', None)
+        self.textsrc = textsrc if textsrc is not None else _v
+        _v = arg.pop('uid', None)
+        self.uid = uid if uid is not None else _v
+        _v = arg.pop('visible', None)
+        self.visible = visible if visible is not None else _v
+        _v = arg.pop('x', None)
+        self.x = x if x is not None else _v
+        _v = arg.pop('xcalendar', None)
+        self.xcalendar = xcalendar if xcalendar is not None else _v
+        _v = arg.pop('xsrc', None)
+        self.xsrc = xsrc if xsrc is not None else _v
+        _v = arg.pop('y', None)
+        self.y = y if y is not None else _v
+        _v = arg.pop('ycalendar', None)
+        self.ycalendar = ycalendar if ycalendar is not None else _v
+        _v = arg.pop('ysrc', None)
+        self.ysrc = ysrc if ysrc is not None else _v
+        _v = arg.pop('z', None)
+        self.z = z if z is not None else _v
+        _v = arg.pop('zcalendar', None)
+        self.zcalendar = zcalendar if zcalendar is not None else _v
+        _v = arg.pop('zsrc', None)
+        self.zsrc = zsrc if zsrc is not None else _v
 
         # Read-only literals
         # ------------------
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'surface'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='surface'
+            plotly_name='type', parent_name='surface', val='surface'
         )
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

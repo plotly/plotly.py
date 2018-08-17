@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Updatemenu(BaseLayoutHierarchyType):
@@ -199,6 +200,30 @@ class Updatemenu(BaseLayoutHierarchyType):
                     automatically to state updates. This may be
                     used to create a component interface and attach
                     to updatemenu events manually via JavaScript.
+                name
+                    When used in a template, named items are
+                    created in the output figure in addition to any
+                    items the figure already has in this array. You
+                    can modify these items in the output figure by
+                    making your own item with `templateitemname`
+                    matching this `name` alongside your
+                    modifications (including `visible: false` or
+                    `enabled: false` to hide it). Has no effect
+                    outside of a template.
+                templateitemname
+                    Used to refer to a named item in this array in
+                    the template. Named items from the template
+                    will be created even without a matching item in
+                    the input figure, but you can modify one by
+                    making an item with `templateitemname` matching
+                    its `name`, alongside your modifications
+                    (including `visible: false` or `enabled: false`
+                    to hide it). If there is no template or no
+                    matching item, this item will be hidden unless
+                    you explicitly show it with `visible: true`.
+                visible
+                    Determines whether or not this button is
+                    visible.
 
         Returns
         -------
@@ -279,6 +304,33 @@ class Updatemenu(BaseLayoutHierarchyType):
     def font(self, val):
         self['font'] = val
 
+    # name
+    # ----
+    @property
+    def name(self):
+        """
+        When used in a template, named items are created in the output
+        figure in addition to any items the figure already has in this
+        array. You can modify these items in the output figure by
+        making your own item with `templateitemname` matching this
+        `name` alongside your modifications (including `visible: false`
+        or `enabled: false` to hide it). Has no effect outside of a
+        template.
+    
+        The 'name' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['name']
+
+    @name.setter
+    def name(self, val):
+        self['name'] = val
+
     # pad
     # ---
     @property
@@ -336,6 +388,34 @@ class Updatemenu(BaseLayoutHierarchyType):
     @showactive.setter
     def showactive(self, val):
         self['showactive'] = val
+
+    # templateitemname
+    # ----------------
+    @property
+    def templateitemname(self):
+        """
+        Used to refer to a named item in this array in the template.
+        Named items from the template will be created even without a
+        matching item in the input figure, but you can modify one by
+        making an item with `templateitemname` matching its `name`,
+        alongside your modifications (including `visible: false` or
+        `enabled: false` to hide it). If there is no template or no
+        matching item, this item will be hidden unless you explicitly
+        show it with `visible: true`.
+    
+        The 'templateitemname' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['templateitemname']
+
+    @templateitemname.setter
+    def templateitemname(self, val):
+        self['templateitemname'] = val
 
     # type
     # ----
@@ -500,11 +580,30 @@ class Updatemenu(BaseLayoutHierarchyType):
             respectively.
         font
             Sets the font of the update menu button text.
+        name
+            When used in a template, named items are created in the
+            output figure in addition to any items the figure
+            already has in this array. You can modify these items
+            in the output figure by making your own item with
+            `templateitemname` matching this `name` alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). Has no effect outside of a
+            template.
         pad
             Sets the padding around the buttons or dropdown menu.
         showactive
             Highlights active dropdown item or active button if
             true.
+        templateitemname
+            Used to refer to a named item in this array in the
+            template. Named items from the template will be created
+            even without a matching item in the input figure, but
+            you can modify one by making an item with
+            `templateitemname` matching its `name`, alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). If there is no template or no
+            matching item, this item will be hidden unless you
+            explicitly show it with `visible: true`.
         type
             Determines whether the buttons are accessible via a
             dropdown menu or whether the buttons are stacked
@@ -529,6 +628,7 @@ class Updatemenu(BaseLayoutHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         active=None,
         bgcolor=None,
         bordercolor=None,
@@ -536,8 +636,10 @@ class Updatemenu(BaseLayoutHierarchyType):
         buttons=None,
         direction=None,
         font=None,
+        name=None,
         pad=None,
         showactive=None,
+        templateitemname=None,
         type=None,
         visible=None,
         x=None,
@@ -551,6 +653,9 @@ class Updatemenu(BaseLayoutHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.layout.Updatemenu
         active
             Determines which button (by index starting from 0) is
             considered active.
@@ -572,11 +677,30 @@ class Updatemenu(BaseLayoutHierarchyType):
             respectively.
         font
             Sets the font of the update menu button text.
+        name
+            When used in a template, named items are created in the
+            output figure in addition to any items the figure
+            already has in this array. You can modify these items
+            in the output figure by making your own item with
+            `templateitemname` matching this `name` alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). Has no effect outside of a
+            template.
         pad
             Sets the padding around the buttons or dropdown menu.
         showactive
             Highlights active dropdown item or active button if
             true.
+        templateitemname
+            Used to refer to a named item in this array in the
+            template. Named items from the template will be created
+            even without a matching item in the input figure, but
+            you can modify one by making an item with
+            `templateitemname` matching its `name`, alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). If there is no template or no
+            matching item, this item will be hidden unless you
+            explicitly show it with `visible: true`.
         type
             Determines whether the buttons are accessible via a
             dropdown menu or whether the buttons are stacked
@@ -604,6 +728,22 @@ class Updatemenu(BaseLayoutHierarchyType):
         """
         super(Updatemenu, self).__init__('updatemenus')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.Updatemenu 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.Updatemenu"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout import (updatemenu as v_updatemenu)
@@ -617,8 +757,11 @@ class Updatemenu(BaseLayoutHierarchyType):
         self._validators['buttons'] = v_updatemenu.ButtonsValidator()
         self._validators['direction'] = v_updatemenu.DirectionValidator()
         self._validators['font'] = v_updatemenu.FontValidator()
+        self._validators['name'] = v_updatemenu.NameValidator()
         self._validators['pad'] = v_updatemenu.PadValidator()
         self._validators['showactive'] = v_updatemenu.ShowactiveValidator()
+        self._validators['templateitemname'
+                        ] = v_updatemenu.TemplateitemnameValidator()
         self._validators['type'] = v_updatemenu.TypeValidator()
         self._validators['visible'] = v_updatemenu.VisibleValidator()
         self._validators['x'] = v_updatemenu.XValidator()
@@ -628,22 +771,41 @@ class Updatemenu(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.active = active
-        self.bgcolor = bgcolor
-        self.bordercolor = bordercolor
-        self.borderwidth = borderwidth
-        self.buttons = buttons
-        self.direction = direction
-        self.font = font
-        self.pad = pad
-        self.showactive = showactive
-        self.type = type
-        self.visible = visible
-        self.x = x
-        self.xanchor = xanchor
-        self.y = y
-        self.yanchor = yanchor
+        _v = arg.pop('active', None)
+        self.active = active if active is not None else _v
+        _v = arg.pop('bgcolor', None)
+        self.bgcolor = bgcolor if bgcolor is not None else _v
+        _v = arg.pop('bordercolor', None)
+        self.bordercolor = bordercolor if bordercolor is not None else _v
+        _v = arg.pop('borderwidth', None)
+        self.borderwidth = borderwidth if borderwidth is not None else _v
+        _v = arg.pop('buttons', None)
+        self.buttons = buttons if buttons is not None else _v
+        _v = arg.pop('direction', None)
+        self.direction = direction if direction is not None else _v
+        _v = arg.pop('font', None)
+        self.font = font if font is not None else _v
+        _v = arg.pop('name', None)
+        self.name = name if name is not None else _v
+        _v = arg.pop('pad', None)
+        self.pad = pad if pad is not None else _v
+        _v = arg.pop('showactive', None)
+        self.showactive = showactive if showactive is not None else _v
+        _v = arg.pop('templateitemname', None)
+        self.templateitemname = templateitemname if templateitemname is not None else _v
+        _v = arg.pop('type', None)
+        self.type = type if type is not None else _v
+        _v = arg.pop('visible', None)
+        self.visible = visible if visible is not None else _v
+        _v = arg.pop('x', None)
+        self.x = x if x is not None else _v
+        _v = arg.pop('xanchor', None)
+        self.xanchor = xanchor if xanchor is not None else _v
+        _v = arg.pop('y', None)
+        self.y = y if y is not None else _v
+        _v = arg.pop('yanchor', None)
+        self.yanchor = yanchor if yanchor is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

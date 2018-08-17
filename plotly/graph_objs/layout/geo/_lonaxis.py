@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseLayoutHierarchyType
+import copy
 
 
 class Lonaxis(BaseLayoutHierarchyType):
@@ -196,6 +197,7 @@ class Lonaxis(BaseLayoutHierarchyType):
 
     def __init__(
         self,
+        arg=None,
         dtick=None,
         gridcolor=None,
         gridwidth=None,
@@ -209,6 +211,9 @@ class Lonaxis(BaseLayoutHierarchyType):
         
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.layout.geo.Lonaxis
         dtick
             Sets the graticule's longitude/latitude tick step.
         gridcolor
@@ -229,6 +234,22 @@ class Lonaxis(BaseLayoutHierarchyType):
         """
         super(Lonaxis, self).__init__('lonaxis')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.geo.Lonaxis 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.geo.Lonaxis"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators.layout.geo import (lonaxis as v_lonaxis)
@@ -244,13 +265,19 @@ class Lonaxis(BaseLayoutHierarchyType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.dtick = dtick
-        self.gridcolor = gridcolor
-        self.gridwidth = gridwidth
-        self.range = range
-        self.showgrid = showgrid
-        self.tick0 = tick0
+        _v = arg.pop('dtick', None)
+        self.dtick = dtick if dtick is not None else _v
+        _v = arg.pop('gridcolor', None)
+        self.gridcolor = gridcolor if gridcolor is not None else _v
+        _v = arg.pop('gridwidth', None)
+        self.gridwidth = gridwidth if gridwidth is not None else _v
+        _v = arg.pop('range', None)
+        self.range = range if range is not None else _v
+        _v = arg.pop('showgrid', None)
+        self.showgrid = showgrid if showgrid is not None else _v
+        _v = arg.pop('tick0', None)
+        self.tick0 = tick0 if tick0 is not None else _v
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))

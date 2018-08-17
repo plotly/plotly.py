@@ -1,4 +1,5 @@
 from plotly.basedatatypes import BaseTraceType
+import copy
 
 
 class Histogram(BaseTraceType):
@@ -537,48 +538,47 @@ class Histogram(BaseTraceType):
             Supported dict properties:
                 
                 autocolorscale
-                    Has an effect only if `marker.color` is set to
-                    a numerical array. Determines whether the
-                    colorscale is a default palette
-                    (`autocolorscale: true`) or the palette
-                    determined by `marker.colorscale`. In case
-                    `colorscale` is unspecified or `autocolorscale`
-                    is true, the default  palette will be chosen
-                    according to whether numbers in the `color`
-                    array are all positive, all negative or mixed.
+                    Determines whether the colorscale is a default
+                    palette (`autocolorscale: true`) or the palette
+                    determined by `marker.colorscale`. Has an
+                    effect only if in `marker.color`is set to a
+                    numerical array. In case `colorscale` is
+                    unspecified or `autocolorscale` is true, the
+                    default  palette will be chosen according to
+                    whether numbers in the `color` array are all
+                    positive, all negative or mixed.
                 cauto
-                    Has an effect only if `marker.color` is set to
-                    a numerical array and `cmin`, `cmax` are set by
-                    the user. In this case, it controls whether the
-                    range of colors in `colorscale` is mapped to
-                    the range of values in the `color` array
-                    (`cauto: true`), or the `cmin`/`cmax` values
-                    (`cauto: false`). Defaults to `false` when
-                    `cmin`, `cmax` are set by the user.
+                    Determines whether or not the color domain is
+                    computed with respect to the input data (here
+                    in `marker.color`) or the bounds set in
+                    `marker.cmin` and `marker.cmax`  Has an effect
+                    only if in `marker.color`is set to a numerical
+                    array. Defaults to `false` when `marker.cmin`
+                    and `marker.cmax` are set by the user.
                 cmax
-                    Has an effect only if `marker.color` is set to
-                    a numerical array. Sets the upper bound of the
-                    color domain. Value should be associated to the
-                    `marker.color` array index, and if set,
+                    Sets the upper bound of the color domain. Has
+                    an effect only if in `marker.color`is set to a
+                    numerical array. Value should have the same
+                    units as in `marker.color` and if set,
                     `marker.cmin` must be set as well.
                 cmin
-                    Has an effect only if `marker.color` is set to
-                    a numerical array. Sets the lower bound of the
-                    color domain. Value should be associated to the
-                    `marker.color` array index, and if set,
+                    Sets the lower bound of the color domain. Has
+                    an effect only if in `marker.color`is set to a
+                    numerical array. Value should have the same
+                    units as in `marker.color` and if set,
                     `marker.cmax` must be set as well.
                 color
-                    Sets the marker color. It accepts either a
+                    Sets themarkercolor. It accepts either a
                     specific color or an array of numbers that are
                     mapped to the colorscale relative to the max
                     and min values of the array or relative to
-                    `cmin` and `cmax` if set.
+                    `marker.cmin` and `marker.cmax` if set.
                 colorbar
                     plotly.graph_objs.histogram.marker.ColorBar
                     instance or dict with compatible properties
                 colorscale
-                    Sets the colorscale and only has an effect if
-                    `marker.color` is set to a numerical array. The
+                    Sets the colorscale. Has an effect only if in
+                    `marker.color`is set to a numerical array. The
                     colorscale must be an array containing arrays
                     mapping a normalized value to an rgb, rgba,
                     hex, hsl, hsv, or named color string. At
@@ -586,12 +586,12 @@ class Histogram(BaseTraceType):
                     highest (1) values are required. For example,
                     `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To
                     control the bounds of the colorscale in color
-                    space, use `marker.cmin` and `marker.cmax`.
+                    space, use`marker.cmin` and `marker.cmax`.
                     Alternatively, `colorscale` may be a palette
-                    name string of the following list: Greys,
-                    YlGnBu, Greens, YlOrRd, Bluered, RdBu, Reds,
-                    Blues, Picnic, Rainbow, Portland, Jet, Hot,
-                    Blackbody, Earth, Electric, Viridis, Cividis
+                    name string of the following list: Greys,YlGnBu
+                    ,Greens,YlOrRd,Bluered,RdBu,Reds,Blues,Picnic,R
+                    ainbow,Portland,Jet,Hot,Blackbody,Earth,Electri
+                    c,Viridis,Cividis.
                 colorsrc
                     Sets the source reference on plot.ly for  color
                     .
@@ -604,15 +604,16 @@ class Histogram(BaseTraceType):
                     Sets the source reference on plot.ly for
                     opacity .
                 reversescale
-                    Has an effect only if `marker.color` is set to
-                    a numerical array. Reverses the color mapping
-                    if true (`cmin` will correspond to the last
-                    color in the array and `cmax` will correspond
-                    to the first color).
+                    Reverses the color mapping if true. Has an
+                    effect only if in `marker.color`is set to a
+                    numerical array. If true, `marker.cmin` will
+                    correspond to the last color in the array and
+                    `marker.cmax` will correspond to the first
+                    color.
                 showscale
-                    Has an effect only if `marker.color` is set to
-                    a numerical array. Determines whether or not a
-                    colorbar is displayed.
+                    Determines whether or not a colorbar is
+                    displayed for this trace. Has an effect only if
+                    in `marker.color`is set to a numerical array.
 
         Returns
         -------
@@ -1379,6 +1380,7 @@ class Histogram(BaseTraceType):
 
     def __init__(
         self,
+        arg=None,
         autobinx=None,
         autobiny=None,
         cumulative=None,
@@ -1432,6 +1434,9 @@ class Histogram(BaseTraceType):
 
         Parameters
         ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Histogram
         autobinx
             Determines whether or not the x axis bin attributes are
             picked by an algorithm. Note that this should be set to
@@ -1596,6 +1601,22 @@ class Histogram(BaseTraceType):
         """
         super(Histogram, self).__init__('histogram')
 
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Histogram 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Histogram"""
+            )
+
         # Import validators
         # -----------------
         from plotly.validators import (histogram as v_histogram)
@@ -1647,55 +1668,95 @@ class Histogram(BaseTraceType):
 
         # Populate data dict with properties
         # ----------------------------------
-        self.autobinx = autobinx
-        self.autobiny = autobiny
-        self.cumulative = cumulative
-        self.customdata = customdata
-        self.customdatasrc = customdatasrc
-        self.error_x = error_x
-        self.error_y = error_y
-        self.histfunc = histfunc
-        self.histnorm = histnorm
-        self.hoverinfo = hoverinfo
-        self.hoverinfosrc = hoverinfosrc
-        self.hoverlabel = hoverlabel
-        self.ids = ids
-        self.idssrc = idssrc
-        self.legendgroup = legendgroup
-        self.marker = marker
-        self.name = name
-        self.nbinsx = nbinsx
-        self.nbinsy = nbinsy
-        self.opacity = opacity
-        self.orientation = orientation
-        self.selected = selected
-        self.selectedpoints = selectedpoints
-        self.showlegend = showlegend
-        self.stream = stream
-        self.text = text
-        self.textsrc = textsrc
-        self.uid = uid
-        self.unselected = unselected
-        self.visible = visible
-        self.x = x
-        self.xaxis = xaxis
-        self.xbins = xbins
-        self.xcalendar = xcalendar
-        self.xsrc = xsrc
-        self.y = y
-        self.yaxis = yaxis
-        self.ybins = ybins
-        self.ycalendar = ycalendar
-        self.ysrc = ysrc
+        _v = arg.pop('autobinx', None)
+        self.autobinx = autobinx if autobinx is not None else _v
+        _v = arg.pop('autobiny', None)
+        self.autobiny = autobiny if autobiny is not None else _v
+        _v = arg.pop('cumulative', None)
+        self.cumulative = cumulative if cumulative is not None else _v
+        _v = arg.pop('customdata', None)
+        self.customdata = customdata if customdata is not None else _v
+        _v = arg.pop('customdatasrc', None)
+        self.customdatasrc = customdatasrc if customdatasrc is not None else _v
+        _v = arg.pop('error_x', None)
+        self.error_x = error_x if error_x is not None else _v
+        _v = arg.pop('error_y', None)
+        self.error_y = error_y if error_y is not None else _v
+        _v = arg.pop('histfunc', None)
+        self.histfunc = histfunc if histfunc is not None else _v
+        _v = arg.pop('histnorm', None)
+        self.histnorm = histnorm if histnorm is not None else _v
+        _v = arg.pop('hoverinfo', None)
+        self.hoverinfo = hoverinfo if hoverinfo is not None else _v
+        _v = arg.pop('hoverinfosrc', None)
+        self.hoverinfosrc = hoverinfosrc if hoverinfosrc is not None else _v
+        _v = arg.pop('hoverlabel', None)
+        self.hoverlabel = hoverlabel if hoverlabel is not None else _v
+        _v = arg.pop('ids', None)
+        self.ids = ids if ids is not None else _v
+        _v = arg.pop('idssrc', None)
+        self.idssrc = idssrc if idssrc is not None else _v
+        _v = arg.pop('legendgroup', None)
+        self.legendgroup = legendgroup if legendgroup is not None else _v
+        _v = arg.pop('marker', None)
+        self.marker = marker if marker is not None else _v
+        _v = arg.pop('name', None)
+        self.name = name if name is not None else _v
+        _v = arg.pop('nbinsx', None)
+        self.nbinsx = nbinsx if nbinsx is not None else _v
+        _v = arg.pop('nbinsy', None)
+        self.nbinsy = nbinsy if nbinsy is not None else _v
+        _v = arg.pop('opacity', None)
+        self.opacity = opacity if opacity is not None else _v
+        _v = arg.pop('orientation', None)
+        self.orientation = orientation if orientation is not None else _v
+        _v = arg.pop('selected', None)
+        self.selected = selected if selected is not None else _v
+        _v = arg.pop('selectedpoints', None)
+        self.selectedpoints = selectedpoints if selectedpoints is not None else _v
+        _v = arg.pop('showlegend', None)
+        self.showlegend = showlegend if showlegend is not None else _v
+        _v = arg.pop('stream', None)
+        self.stream = stream if stream is not None else _v
+        _v = arg.pop('text', None)
+        self.text = text if text is not None else _v
+        _v = arg.pop('textsrc', None)
+        self.textsrc = textsrc if textsrc is not None else _v
+        _v = arg.pop('uid', None)
+        self.uid = uid if uid is not None else _v
+        _v = arg.pop('unselected', None)
+        self.unselected = unselected if unselected is not None else _v
+        _v = arg.pop('visible', None)
+        self.visible = visible if visible is not None else _v
+        _v = arg.pop('x', None)
+        self.x = x if x is not None else _v
+        _v = arg.pop('xaxis', None)
+        self.xaxis = xaxis if xaxis is not None else _v
+        _v = arg.pop('xbins', None)
+        self.xbins = xbins if xbins is not None else _v
+        _v = arg.pop('xcalendar', None)
+        self.xcalendar = xcalendar if xcalendar is not None else _v
+        _v = arg.pop('xsrc', None)
+        self.xsrc = xsrc if xsrc is not None else _v
+        _v = arg.pop('y', None)
+        self.y = y if y is not None else _v
+        _v = arg.pop('yaxis', None)
+        self.yaxis = yaxis if yaxis is not None else _v
+        _v = arg.pop('ybins', None)
+        self.ybins = ybins if ybins is not None else _v
+        _v = arg.pop('ycalendar', None)
+        self.ycalendar = ycalendar if ycalendar is not None else _v
+        _v = arg.pop('ysrc', None)
+        self.ysrc = ysrc if ysrc is not None else _v
 
         # Read-only literals
         # ------------------
         from _plotly_utils.basevalidators import LiteralValidator
         self._props['type'] = 'histogram'
         self._validators['type'] = LiteralValidator(
-            plotly_name='type', parent_name='histogram'
+            plotly_name='type', parent_name='histogram', val='histogram'
         )
 
         # Process unknown kwargs
         # ----------------------
-        self._process_kwargs(**kwargs)
+        self._process_kwargs(**dict(arg, **kwargs))
