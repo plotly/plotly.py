@@ -743,7 +743,6 @@ var FigureView = widgets.DOMWidgetView.extend({
 
         Plotly.newPlot(that.el, initialTraces, initialLayout).then(
             function () {
-                // Plotly.Plots.resize(that.el);
 
                 // ### Send trace deltas ###
                 // We create an array of deltas corresponding to the new
@@ -786,6 +785,14 @@ var FigureView = widgets.DOMWidgetView.extend({
                     function (update) {
                         that.handle_plotly_doubleclick(update)
                     });
+
+                // Emit event indicating that the widget has finished
+                // rendering
+                var event = new CustomEvent("plotlywidget-after-render",
+                    { "detail": {"element": that.el, 'viewID': that.viewID}});
+
+                // Dispatch/Trigger/Fire the event
+                document.dispatchEvent(event);
             });
     },
 
@@ -796,20 +803,44 @@ var FigureView = widgets.DOMWidgetView.extend({
         FigureView.__super__.processPhosphorMessage.apply(this, arguments);
         var that = this;
         switch (msg.type) {
+            case 'before-attach':
+                // Render an initial empty figure. This establishes with
+                // the page that the element will not be empty, avoiding
+                // some occasions where the dynamic sizing behavior leads
+                // to collapsed figure dimensions.
+                var axisHidden = {
+                    showgrid: false, showline: false, tickvals: []};
+
+                Plotly.newPlot(that.el, [], {
+                    xaxis: axisHidden, yaxis: axisHidden
+                });
+
+                window.addEventListener("resize", function(){
+                    that.autosizeFigure();
+                });
+                break;
             case 'after-attach':
+                // Rendering actual figure in the after-attach event allows
+                // Plotly.js to size the figure to fill the available element
                 this.perform_render();
+                console.log([that.el._fullLayout.height, that.el._fullLayout.width]);
                 break;
             case 'resize':
-                var layout = this.model.get('_layout');
-                if (_.isNil(layout) ||
-                    (_.isNil(layout.width) && _.isNil(layout.height))) {
-                    Plotly.Plots.resize(this.el).then(function(){
-                        var layout_edit_id = that.model.get(
-                            "_last_layout_edit_id");
-                        that._sendLayoutDelta(layout_edit_id);
-                    });
-                }
+                this.autosizeFigure();
                 break
+        }
+    },
+
+    autosizeFigure: function() {
+        var that = this;
+        var layout = that.model.get('_layout');
+        if (_.isNil(layout) ||
+            _.isNil(layout.width)) {
+            Plotly.Plots.resize(that.el).then(function(){
+                var layout_edit_id = that.model.get(
+                    "_last_layout_edit_id");
+                that._sendLayoutDelta(layout_edit_id);
+            });
         }
     },
 
@@ -996,6 +1027,7 @@ var FigureView = widgets.DOMWidgetView.extend({
 
         this.model.set("_js2py_restyle", restyleMsg);
         this.touch();
+        this.model.set("_js2py_restyle", null);
     },
 
     /**
@@ -1026,6 +1058,7 @@ var FigureView = widgets.DOMWidgetView.extend({
 
         this.model.set("_js2py_relayout", relayoutMsg);
         this.touch();
+        this.model.set("_js2py_relayout", null);
     },
 
     /**
@@ -1059,6 +1092,7 @@ var FigureView = widgets.DOMWidgetView.extend({
 
         this.model.set("_js2py_update", updateMsg);
         this.touch();
+        this.model.set("_js2py_update", null);
     },
 
     /**
@@ -1123,6 +1157,7 @@ var FigureView = widgets.DOMWidgetView.extend({
 
             this.model.set("_js2py_pointsCallback", pointsMsg);
             this.touch();
+            this.model.set("_js2py_pointsCallback", null);
         }
     },
 
@@ -1355,6 +1390,7 @@ var FigureView = widgets.DOMWidgetView.extend({
 
         this.model.set("_js2py_layoutDelta", layoutDeltaMsg);
         this.touch();
+        this.model.set("_js2py_layoutDelta", null);
     },
 
     /**
@@ -1386,6 +1422,7 @@ var FigureView = widgets.DOMWidgetView.extend({
         console.log(["traceDeltasMsg", traceDeltasMsg]);
         this.model.set("_js2py_traceDeltas", traceDeltasMsg);
         this.touch();
+        this.model.set("_js2py_traceDeltas", null);
     }
 });
 
@@ -1405,13 +1442,45 @@ var numpy_dtype_to_typedarray_type = {
     float64: Float64Array
 };
 
+function serializeTypedArray(v) {
+    var numpyType;
+    if (v instanceof Int8Array) {
+        numpyType = 'int8';
+    } else if (v instanceof Int16Array) {
+        numpyType = 'int16';
+    } else if (v instanceof Int32Array) {
+        numpyType = 'int32';
+    } else if (v instanceof Uint8Array) {
+        numpyType = 'uint8';
+    } else if (v instanceof Uint16Array) {
+        numpyType = 'uint16';
+    } else if (v instanceof Uint32Array) {
+        numpyType = 'uint32';
+    } else if (v instanceof Float32Array) {
+        numpyType = 'float32';
+    } else if (v instanceof Float64Array) {
+        numpyType = 'float64';
+    } else {
+        // Don't understand it, return as is
+        return v;
+    }
+    var res = {
+        dtype: numpyType,
+        shape: [v.length],
+        value: v.buffer
+    };
+    return res
+}
+
 /**
  * ipywidget JavaScript -> Python serializer
  */
 function js2py_serializer(v, widgetManager) {
     var res;
 
-    if (Array.isArray(v)) {
+    if (_.isTypedArray(v)) {
+        res = serializeTypedArray(v);
+    } else if (Array.isArray(v)) {
         // Serialize array elements recursively
         res = new Array(v.length);
         for (var i = 0; i < v.length; i++) {
@@ -1450,11 +1519,18 @@ function py2js_deserializer(v, widgetManager) {
             res[i] = py2js_deserializer(v[i]);
         }
     } else if (_.isPlainObject(v)) {
-        if (_.has(v, "buffer") && _.has(v, "dtype") && _.has(v, "shape")) {
+        if ((_.has(v, 'value') || _.has(v, 'buffer')) &&
+            _.has(v, 'dtype') &&
+            _.has(v, 'shape')) {
             // Deserialize special buffer/dtype/shape objects into typed arrays
             // These objects correspond to numpy arrays on the Python side
+            //
+            // Note plotly.py<=3.1.1 called the buffer object `buffer`
+            // This was renamed `value` in 3.2 to work around a naming conflict
+            // when saving widget state to a notebook.
             var typedarray_type = numpy_dtype_to_typedarray_type[v.dtype];
-            res = new typedarray_type(v.buffer.buffer);
+            var buffer = _.has(v, 'value')? v.value.buffer: v.buffer.buffer;
+            res = new typedarray_type(buffer);
         } else {
             // Deserialize object properties recursively
             res = {};
