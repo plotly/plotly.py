@@ -785,6 +785,10 @@ var FigureView = widgets.DOMWidgetView.extend({
                     function (update) {
                         that.handle_plotly_doubleclick(update)
                     });
+
+                // Emit event indicating that the widget has finished
+                // rendering
+                that.el.emit('plotlywidget-after-render');
             });
     },
 
