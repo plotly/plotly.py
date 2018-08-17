@@ -1511,12 +1511,18 @@ function py2js_deserializer(v, widgetManager) {
             res[i] = py2js_deserializer(v[i]);
         }
     } else if (_.isPlainObject(v)) {
-        if (_.has(v, "value") && _.has(v, "dtype") && _.has(v, "shape")) {
+        if ((_.has(v, 'value') || _.has(v, 'buffer')) &&
+            _.has(v, 'dtype') &&
+            _.has(v, 'shape')) {
             // Deserialize special buffer/dtype/shape objects into typed arrays
             // These objects correspond to numpy arrays on the Python side
-
+            //
+            // Note plotly.py<=3.1.1 called the buffer object `buffer`
+            // This was renamed `value` in 3.2 to work around a naming conflict
+            // when saving widget state to a notebook.
             var typedarray_type = numpy_dtype_to_typedarray_type[v.dtype];
-            res = new typedarray_type(v.value.buffer);
+            var buffer = _.has(v, 'value')? v.value.buffer: v.buffer.buffer;
+            res = new typedarray_type(buffer);
         } else {
             // Deserialize object properties recursively
             res = {};
