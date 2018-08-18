@@ -19,7 +19,7 @@ def ping_pongs(server_url):
             response.content.decode('utf-8') == 'pong')
 
 
-class ValidateOrcaTest(TestCase):
+class OrcaServerValidationAndManagement(TestCase):
     def setUp(self):
         pio.orca.reset_orca_status()
         pio.orca.config.restore_defaults()
