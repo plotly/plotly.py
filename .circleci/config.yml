@@ -1,0 +1,252 @@
+version: 2
+
+jobs:
+  # Core
+  "python-2.7-core":
+    docker:
+      - image: circleci/python:2.7-stretch-node-browsers
+        environment:
+          PLOTLY_TOX_PYTHON_27: python2.7
+
+    steps:
+      - checkout
+      - run:
+          name: Install tox
+          command: 'sudo pip install tox'
+      - run:
+          name: Test with tox
+          command: 'tox -e py27-core'
+          no_output_timeout: 20m
+
+  "python-3.4-core":
+    docker:
+      - image: circleci/python:3.4-stretch-node-browsers
+        environment:
+          PLOTLY_TOX_PYTHON_34: python3.4
+
+    steps:
+      - checkout
+      - run:
+          name: Install tox
+          command: 'sudo pip install tox'
+      - run:
+          name: Test with tox
+          command: 'tox -e py34-core'
+          no_output_timeout: 20m
+
+  "python-3.5-core":
+    docker:
+      - image: circleci/python:3.5-stretch-node-browsers
+        environment:
+          PLOTLY_TOX_PYTHON_35: python3.5
+
+    steps:
+      - checkout
+      - run:
+          name: Install tox
+          command: 'sudo pip install tox'
+      - run:
+          name: Test with tox
+          command: 'tox -e py35-core'
+          no_output_timeout: 20m
+
+  "python-3.6-core":
+    docker:
+      - image: circleci/python:3.6-stretch-node-browsers
+        environment:
+          PLOTLY_TOX_PYTHON_36: python3.6
+
+    steps:
+      - checkout
+      - run:
+          name: Install tox
+          command: 'sudo pip install tox'
+      - run:
+          name: Test with tox
+          command: 'tox -e py36-core'
+          no_output_timeout: 20m
+
+  "python-3.7-core":
+    docker:
+      - image: circleci/python:3.7-stretch-node-browsers
+        environment:
+          PLOTLY_TOX_PYTHON_37: python3.7
+
+    steps:
+      - checkout
+      - run:
+          name: Install tox
+          command: 'sudo pip install tox'
+      - run:
+          name: Test with tox
+          command: 'tox -e py37-core'
+          no_output_timeout: 20m
+
+  # Optional
+  "python-2.7-optional":
+    docker:
+      - image: circleci/python:2.7-stretch-node-browsers
+        environment:
+          PLOTLY_TOX_PYTHON_27: python2.7
+
+    steps:
+      - checkout
+      - run:
+          name: Install tox
+          command: 'sudo pip install tox'
+      - run:
+          name: Install npm dependencies
+          command: cd plotly/tests/test_optional/test_jupyter && npm install
+          no_output_timeout: 20m
+      - run:
+          name: Test with tox
+          command: 'tox -e py27-optional'
+          no_output_timeout: 20m
+
+  "python-3.4-optional":
+    docker:
+      - image: circleci/python:3.4-stretch-node-browsers
+        environment:
+          PLOTLY_TOX_PYTHON_34: python3.4
+
+    steps:
+      - checkout
+      - run:
+          name: Install tox
+          command: 'sudo pip install tox'
+      - run:
+          name: Install npm dependencies
+          command: cd plotly/tests/test_optional/test_jupyter && npm install
+          no_output_timeout: 20m
+      - run:
+          name: Test with tox
+          command: 'tox -e py34-optional'
+          no_output_timeout: 20m
+
+  "python-3.5-optional":
+    docker:
+      - image: circleci/python:3.5-stretch-node-browsers
+        environment:
+          PLOTLY_TOX_PYTHON_35: python3.5
+
+    steps:
+      - checkout
+      - run:
+          name: Install tox
+          command: 'sudo pip install tox'
+      - run:
+          name: Install npm dependencies
+          command: cd plotly/tests/test_optional/test_jupyter && npm install
+          no_output_timeout: 20m
+      - run:
+          name: Test with tox
+          command: 'tox -e py35-optional'
+          no_output_timeout: 20m
+
+  "python-3.6-optional":
+    docker:
+      - image: circleci/python:3.6-stretch-node-browsers
+        environment:
+          PLOTLY_TOX_PYTHON_36: python3.6
+
+    steps:
+      - checkout
+      - run:
+          name: Install tox
+          command: 'sudo pip install tox'
+      - run:
+          name: Install npm dependencies
+          command: cd plotly/tests/test_optional/test_jupyter && npm install
+          no_output_timeout: 20m
+      - run:
+          name: Test with tox
+          command: 'tox -e py36-optional'
+          no_output_timeout: 20m
+
+  "python-3.7-optional":
+    docker:
+      - image: circleci/python:3.7-stretch-node-browsers
+        environment:
+          PLOTLY_TOX_PYTHON_37: python3.7
+
+    steps:
+      - checkout
+      - run:
+          name: Install tox
+          command: 'sudo pip install tox'
+      - run:
+          name: Install npm dependencies
+          command: cd plotly/tests/test_optional/test_jupyter && npm install
+          no_output_timeout: 20m
+      - run:
+          name: Test with tox
+          command: 'tox -e py37-optional'
+          no_output_timeout: 20m
+
+  # Plot.ly
+  "python-2.7-plot_ly":
+    docker:
+      - image: circleci/python:2.7-stretch-node-browsers
+        environment:
+          PLOTLY_TOX_PYTHON_27: python2.7
+
+    steps:
+      - checkout
+      - run:
+          name: Install tox
+          command: 'sudo pip install tox'
+      - run:
+          name: Test with tox
+          command: 'tox -e py27-plot_ly'
+          no_output_timeout: 20m
+
+  "python-3.4-plot_ly":
+    docker:
+      - image: circleci/python:3.4-stretch-node-browsers
+        environment:
+          PLOTLY_TOX_PYTHON_34: python3.4
+
+    steps:
+      - checkout
+      - run:
+          name: Install tox
+          command: 'sudo pip install tox'
+      - run:
+          name: Test with tox
+          command: 'tox -e py34-plot_ly'
+          no_output_timeout: 20m
+
+  "python-3.7-plot_ly":
+    docker:
+      - image: circleci/python:3.7-stretch-node-browsers
+        environment:
+          PLOTLY_TOX_PYTHON_37: python3.7
+
+    steps:
+      - checkout
+      - run:
+          name: Install tox
+          command: 'sudo pip install tox'
+      - run:
+          name: Test with tox
+          command: 'tox -e py37-plot_ly'
+          no_output_timeout: 20m
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - "python-2.7-core"
+      - "python-3.4-core"
+      - "python-3.5-core"
+      - "python-3.6-core"
+      - "python-3.7-core"
+      - "python-2.7-optional"
+      - "python-3.4-optional"
+      - "python-3.5-optional"
+      - "python-3.6-optional"
+      # 3.7 optional disabled due to current shapely incompatibility
+      # - "python-3.7-optional"
+      - "python-2.7-plot_ly"
+      - "python-3.4-plot_ly"
+      - "python-3.7-plot_ly"
