@@ -22,11 +22,28 @@ def ping_pongs(server_url):
 class ValidateOrcaTest(TestCase):
     def setUp(self):
         pio.orca.reset_orca_status()
+        pio.orca.config.restore_defaults()
 
     def test_validate_orca(self):
         self.assertEqual(pio.orca.status.state, 'unvalidated')
         pio.orca.validate_orca_executable()
         self.assertEqual(pio.orca.status.state, 'validated')
+
+    def test_orca_not_found(self):
+        pio.orca.config.executable = 'bogus'
+        with self.assertRaises(ValueError) as err:
+            pio.orca.validate_orca_executable()
+
+        self.assertEqual(pio.orca.status.state, 'unvalidated')
+        self.assertIn('could not be found', err.exception.args[0])
+
+    def test_invalid_executable_found(self):
+        pio.orca.config.executable = 'cd'
+        with self.assertRaises(ValueError) as err:
+            pio.orca.validate_orca_executable()
+
+        self.assertEqual(pio.orca.status.state, 'unvalidated')
+        self.assertIn('executable that was found at', err.exception.args[0])
 
     def test_orca_executable_path(self):
         self.assertIsNone(pio.orca.status.executable)
