@@ -1051,6 +1051,15 @@ def write_image(fig, file, format=None, scale=None, width=None, height=None):
         _, ext = os.path.splitext(file)
         if ext:
             format = _validate_coerce_format(ext)
+        else:
+            raise ValueError("""
+Cannot infer image type from output path '{file}'.
+Please add a file extension or specify the type using the format parameter.
+For example:
+
+>>> import plotly.io as pio
+>>> pio.write_image(fig, file_path, format='png') 
+""".format(file=file))
 
     # Request image
     # -------------
