@@ -1,5 +1,3 @@
-import signal
-import warnings
 from copy import copy
 from pprint import pformat
 import requests
@@ -13,7 +11,6 @@ import retrying
 import atexit
 
 import plotly
-from plotly.files import PLOTLY_DIR
 from six import string_types
 from plotly.optional_imports import get_module
 
@@ -206,22 +203,40 @@ class OrcaConfig(object):
     """
     def __init__(self):
         self._props = {}
-        self.restore_defaults()
-        self.reload(warn=False)
+        self.restore_defaults(reset_server=False)
 
-    def restore_defaults(self):
+    def restore_defaults(self, reset_server=True):
         """
         Reset all orca configuration properties to their default values
         """
+
+        root_dir = os.path.dirname(os.path.abspath(plotly.__file__))
+        package_dir = os.path.join(root_dir, 'package_data')
+
+        plotlyjs = os.path.join(package_dir, 'plotly.min.js')
+        topojson = os.path.join(package_dir, 'topojson')
+        mathjax = ('https://cdnjs.cloudflare.com'
+                   '/ajax/libs/mathjax/2.7.5/MathJax.js')
+
         self._props.update({
             'port': None,
             'executable': 'orca',
-            'timeout': 120,
+            'timeout': None,
             'default_width': None,
             'default_height': None,
             'default_format': 'png',
-            'default_scale': 1
+            'default_scale': 1,
+            'plotlyjs': plotlyjs,
+            'topojson': topojson,
+            'mathjax': mathjax,
+            'mapbox_access_token': None
         })
+
+        if reset_server:
+            # Server must restart before setting is active
+            reset_orca_status()
+
+
 
     def update(self, d={}, **kwargs):
         """
@@ -331,11 +346,14 @@ The port value must be an integer, but received value of type {typ}.
 
         # Validate val
         # ------------
-        if not isinstance(val, str):
+        if not isinstance(val, string_types):
             raise ValueError("""
 The executable property must be a string, but received value of type {typ}.
     Received value: {val}""".format(typ=type(val), val=val))
         self._props['executable'] = val
+
+        # Server must restart before setting is active
+        shutdown_orca_server()
 
     @property
     def timeout(self):
@@ -346,7 +364,7 @@ The executable property must be a string, but received value of type {typ}.
         For example, if timeout is set to 20, then the orca
         server will shutdown once is has not been used for at least
         20 seconds. If timeout is set to None, then the server will not be
-        automaticaly shut down due to inactivity.
+        automatically shut down due to inactivity.
 
         Regardless of the value of timeout, a running orca server may be
         manually shut down like this:
@@ -458,75 +476,119 @@ The default_scale property must be a number, but received value of type {typ}.
     Received value: {val}""".format(typ=type(val), val=val))
         self._props['default_scale'] = val
 
+
     @property
-    def config_file(self):
+    def plotlyjs(self):
         """
-        Path to orca configuration file
+        The plotly.js bundle to use for image rendering.
 
-        Using the `plotly.io.config.save()` method will save the current
-        configuration settings to this file. Settings in this file are
-        restored at the beginning of each sessions.
-        """
-        return os.path.join(PLOTLY_DIR, ".orca")
+        May be set as:
+         - A valid plotly.js release version string (e.g. 'v1.2.3')
+         - The string 'latest', indicating that most recent version of
+           plotly.js
+         - A string containing the absolute path to a plotly.js bundle
 
-    def reload(self, warn=True):
-        """
-        Reload orca settings from .plotly/.orca, if any.
+        If set to 'latest' or a plotly.js version string then the bundle
+        is retrieved from a CDN and an active internet connection is required
+        during image export.
 
-        Note: Settings are loaded automatically when plotly is imported.
-        This method is only needed if the setting are changed by some outside
-        process (e.g. a text editor) during an interactive session.
-        """
-        if os.path.exists(self.config_file):
-
-            # ### Load file into a string ###
-            try:
-                with open(self.config_file, 'r') as f:
-                    orca_str = f.read()
-            except:
-                if warn:
-                    warnings.warn("""\
-Unable to read orca configuration file at {path}""".format(
-                        path=self.config_file
-                ))
-                return
-
-            # ### Parse as JSON ###
-            try:
-                orca_props = json.loads(orca_str)
-            except ValueError:
-                if warn:
-                    warnings.warn("""\
-Orca configuration file at {path} is not valid JSON""".format(
-                        path=self.config_file
-                    ))
-                return
-
-            # ### Update _props ###
-            for k, v in orca_props.items():
-                # Only keep properties that we understand
-                if k in self._props:
-                    self._props[k] = v
-
-        elif warn:
-            warnings.warn("""\
-Orca configuration file at {path} not found""".format(
-                path=self.config_file))
-
-    def save(self):
-        """
-        Attempt to save current settings to disk, so that they are
-        automatically restored for future sessions.
-
-        This operation requires write access to the path returned by
-        in the `config_file` property.
+        To support offline image generation, this should be set to the
+        full path of a local plotly.js bundle.
 
         Returns
         -------
-        None
+        str
         """
-        with open(self.config_file, 'w', encoding='utf-8') as f:
-            json.dump(self._props, f, indent=4)
+        return self._props.get('plotlyjs', None)
+
+    @plotlyjs.setter
+    def plotlyjs(self, val):
+        # Validate val
+        # ------------
+        if not isinstance(val, string_types):
+            raise ValueError("""
+The plotlyjs property must be a string, but received value of type {typ}.
+    Received value: {val}""".format(typ=type(val), val=val))
+        self._props['plotlyjs'] = val
+
+        # Server must restart before setting is active
+        shutdown_orca_server()
+
+    @property
+    def topojson(self):
+        """
+        Path to the topojson files needed to render choropleth traces.
+
+        If None, topojson files from the plot.ly CDN are used.
+
+        Returns
+        -------
+        str
+        """
+        return self._props.get('topojson', None)
+
+    @topojson.setter
+    def topojson(self, val):
+        # Validate val
+        # ------------
+        if val is not None and not isinstance(val, string_types):
+            raise ValueError("""
+The topojson property must be a string, but received value of type {typ}.
+    Received value: {val}""".format(typ=type(val), val=val))
+        self._props['topojson'] = val
+
+        # Server must restart before setting is active
+        shutdown_orca_server()
+
+    @property
+    def mathjax(self):
+        """
+        Path to the MathJax bundle needed to render LaTeX characters
+
+        Returns
+        -------
+        str
+        """
+        return self._props.get('mathjax', None)
+
+    @mathjax.setter
+    def mathjax(self, val):
+
+        # Validate val
+        # ------------
+        if val is not None and not isinstance(val, string_types):
+            raise ValueError("""
+The mathjax property must be a string, but received value of type {typ}.
+    Received value: {val}""".format(typ=type(val), val=val))
+        self._props['mathjax'] = val
+
+        # Server must restart before setting is active
+        shutdown_orca_server()
+
+    @property
+    def mapbox_access_token(self):
+        """
+        Mapbox access token required to render mapbox traces.
+
+        Returns
+        -------
+        str
+        """
+        return self._props.get('mapbox_access_token', None)
+
+    @mapbox_access_token.setter
+    def mapbox_access_token(self, val):
+        # Validate val
+        # ------------
+        if val is not None and not isinstance(val, string_types):
+            raise ValueError("""
+    The mapbox_access_token property must be a string, \
+but received value of type {typ}.
+        Received value: {val}""".format(typ=type(val), val=val))
+        self._props['mapbox_access_token'] = val
+
+        # Server must restart before setting is active
+        shutdown_orca_server()
 
     def __repr__(self):
         """
@@ -555,7 +617,8 @@ class OrcaStatus(object):
         'executable': None,
         'version': None,
         'pid': None,
-        'port': None
+        'port': None,
+        'command': None
     }
 
     @property
@@ -615,6 +678,14 @@ class OrcaStatus(object):
         property of the `plotly.io.orca.config` object.
         """
         return self._props['port']
+
+    @property
+    def command(self):
+        """
+        The command arguments used to launch the running orca server, if any.
+        This property will be None if the `state` is not 'running'.
+        """
+        return self._props['command']
 
     def __repr__(self):
         """
@@ -832,6 +903,7 @@ def shutdown_orca_server():
                 status._props['state'] = 'validated'
                 status._props['pid'] = None
                 status._props['port'] = None
+                status._props['command'] = None
 
 
 # Launch or get server
@@ -877,17 +949,35 @@ Install using conda:
             else:
                 __orca_state['port'] = config.port
 
+            # Build orca command list
+            cmd_list = [config.executable, 'serve',
+                        '-p', str(__orca_state['port']),
+                        '--graph-only']
+
+            if config.plotlyjs:
+                cmd_list.extend(['--plotly', config.plotlyjs])
+
+            if config.topojson:
+                cmd_list.extend(['--topojson', config.topojson])
+
+            if config.mathjax:
+                cmd_list.extend(['--mathjax', config.mathjax])
+
+            if config.mapbox_access_token:
+                cmd_list.extend(['--mapbox-access-token',
+                                 config.mapbox_access_token])
+
             # Create subprocess that launches the orca server on the
             # specified port.
-            __orca_state['proc'] = subprocess.Popen(
-                [config.executable, 'serve', '-p', str(__orca_state['port']),
-                 '--graph-only'], stdout=subprocess.PIPE)
+            __orca_state['proc'] = subprocess.Popen(cmd_list,
+                                                    stdout=subprocess.PIPE)
 
             # Update orca.status so the user has an accurate view
             # of the state of the orca server
             status._props['state'] = 'running'
             status._props['pid'] = __orca_state['proc'].pid
             status._props['port'] = __orca_state['port']
+            status._props['command'] = cmd_list
 
         # Create new shutdown timer if a timeout was specified
         if config.timeout is not None:

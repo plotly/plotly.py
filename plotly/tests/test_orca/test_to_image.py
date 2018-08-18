@@ -4,6 +4,7 @@ import os
 import shutil
 import pytest
 import sys
+import pandas as pd
 
 if sys.version_info.major == 3 and sys.version_info.minor >= 3:
     from unittest.mock import MagicMock
@@ -17,7 +18,7 @@ failed_dir = images_dir + 'failed/'
 tmp_dir = images_dir + 'tmp/'
 # These formats are deterministic. PDF and svg don't seem to be
 image_formats = ['png', 'jpg', 'jpeg', 'webp', 'eps']
-
+topo_df = pd.read_csv('plotly/tests/test_orca/resources/2011_us_ag_exports.csv')
 
 # Fixtures
 # --------
@@ -29,6 +30,10 @@ def setup():
     # Clear out temp images dir
     shutil.rmtree(tmp_dir, ignore_errors=True)
     os.mkdir(tmp_dir)
+
+    # Make failed directory
+    if not os.path.exists(failed_dir):
+        os.mkdir(failed_dir)
 
 
 # Run setup before every test function in this file
@@ -48,6 +53,80 @@ def fig1():
                                     opacity=0.7)),
         go.Scattergl(y=[3, 4, 2])
     ])
+
+
+@pytest.fixture()
+def topofig():
+    for col in topo_df.columns:
+        topo_df[col] = topo_df[col].astype(str)
+
+    scl = [[0.0, 'rgb(242,240,247)'], [0.2, 'rgb(218,218,235)'],
+           [0.4, 'rgb(188,189,220)'], \
+           [0.6, 'rgb(158,154,200)'], [0.8, 'rgb(117,107,177)'],
+           [1.0, 'rgb(84,39,143)']]
+
+    topo_df['text'] = topo_df['state'] + '<br>' + \
+                      'Beef ' + topo_df['beef'] + ' Dairy ' + \
+                      topo_df['dairy'] + '<br>' + \
+                      'Fruits ' + topo_df['total fruits'] + \
+                      ' Veggies ' + topo_df[
+                          'total veggies'] + '<br>' + \
+                      'Wheat ' + topo_df['wheat'] + \
+                      ' Corn ' + topo_df['corn']
+
+    data = [dict(
+        type='choropleth',
+        colorscale=scl,
+        autocolorscale=False,
+        locations=topo_df['code'],
+        z=topo_df['total exports'].astype(float),
+        locationmode='USA-states',
+        text=topo_df['text'],
+        marker=dict(
+            line=dict(
+                color='rgb(255,255,255)',
+                width=2
+            )),
+        colorbar=dict(
+            title="Millions USD")
+    )]
+
+    layout = dict(
+        title='2011 US Agriculture Exports by State<br>(Hover for breakdown)',
+        geo=dict(
+            scope='usa',
+            projection=dict(type='albers usa'),
+            showlakes=True,
+            lakecolor='rgb(255, 255, 255)'),
+    )
+
+    return dict(data=data, layout=layout)
+
+
+@pytest.fixture()
+def latexfig():
+    trace1 = go.Scatter(
+        x=[1, 2, 3, 4],
+        y=[1, 4, 9, 16],
+        name='$\\alpha_{1c} = 352 \\pm 11 \\text{ km s}^{-1}$'
+    )
+    trace2 = go.Scatter(
+        x=[1, 2, 3, 4],
+        y=[0.5, 2, 4.5, 8],
+        name='$\\beta_{1c} = 25 \\pm 11 \\text{ km s}^{-1}$'
+    )
+    data = [trace1, trace2]
+    layout = go.Layout(
+        xaxis=dict(
+            title='$\\sqrt{(n_\\text{c}(t|{T_\\text{early}}))}$'
+        ),
+        yaxis=dict(
+            title='$d, r \\text{ (solar radius)}$'
+        ),
+        showlegend=True
+    )
+    fig = go.Figure(data=data, layout=layout)
+    return fig
 
 
 # Utilities
@@ -164,3 +243,17 @@ def test_write_image_string_bad_extension_override(fig1):
         expected_bytes = f.read()
 
     assert written_bytes == expected_bytes
+
+
+# Topojson
+# --------
+def test_topojson_fig_to_image(topofig, format):
+    img_bytes = pio.to_image(topofig, format=format)
+    assert_image_bytes(img_bytes, 'topofig.' + format)
+
+
+# Latex / MathJax
+# ---------------
+def test_latex_fig_to_image(latexfig, format):
+    img_bytes = pio.to_image(latexfig, format=format)
+    assert_image_bytes(img_bytes, 'latexfig.' + format)
