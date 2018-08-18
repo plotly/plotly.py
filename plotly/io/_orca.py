@@ -1,3 +1,4 @@
+import signal
 import warnings
 from copy import copy
 from pprint import pformat
@@ -783,6 +784,10 @@ __orca_state = {'proc': None,
 # The @atexit.register annotation ensures that the shutdown function is
 # is run when the Python process is terminated
 @atexit.register
+def cleanup():
+    shutdown_orca_server()
+
+
 def shutdown_orca_server():
     """
     Shutdown the running orca server process, if any
@@ -791,7 +796,6 @@ def shutdown_orca_server():
     -------
     None
     """
-
     # Use double-check locking to make sure the properties of __orca_state
     # are updated consistently across threads.
     if __orca_state['proc'] is not None:
@@ -860,7 +864,6 @@ Install using conda:
     # Acquire lock to make sure that we keep the properties of __orca_state
     # consistent across threads
     with __orca_lock:
-
         # Cancel the current shutdown timer, if any
         if __orca_state['shutdown_timer'] is not None:
             __orca_state['shutdown_timer'].cancel()
@@ -889,6 +892,9 @@ Install using conda:
         # Create new shutdown timer if a timeout was specified
         if config.timeout is not None:
             t = threading.Timer(config.timeout, shutdown_orca_server)
+            # Make t a daemon thread so that exit won't wait for timer to
+            # complete
+            t.daemon = True
             t.start()
             __orca_state['shutdown_timer'] = t
 
