@@ -16,7 +16,7 @@ def validator():
 
 # Tests
 # -----
-def test_acceptance(validator: BaseDataValidator):
+def test_acceptance(validator):
     val = [Scatter(mode='lines'), Box(fillcolor='yellow')]
     res = validator.validate_coerce(val)
     res_present = validator.present(res)
@@ -36,7 +36,7 @@ def test_acceptance(validator: BaseDataValidator):
     assert res_present[0].uid != res_present[1].uid
 
 
-def test_acceptance_dict(validator: BaseDataValidator):
+def test_acceptance_dict(validator):
     val = (dict(type='scatter', mode='lines'),
            dict(type='box', fillcolor='yellow'))
     res = validator.validate_coerce(val)
@@ -56,7 +56,7 @@ def test_acceptance_dict(validator: BaseDataValidator):
     assert res_present[0].uid != res_present[1].uid
 
 
-def test_default_is_scatter(validator: BaseDataValidator):
+def test_default_is_scatter(validator):
     val = [dict(mode='lines')]
     res = validator.validate_coerce(val)
     res_present = validator.present(res)
@@ -68,7 +68,7 @@ def test_default_is_scatter(validator: BaseDataValidator):
     assert res_present[0].mode == 'lines'
 
 
-def test_rejection_type(validator: BaseDataValidator):
+def test_rejection_type(validator):
     val = 37
 
     with pytest.raises(ValueError) as validation_failure:
@@ -77,7 +77,7 @@ def test_rejection_type(validator: BaseDataValidator):
     assert "Invalid value" in str(validation_failure.value)
 
 
-def test_rejection_element_type(validator: BaseDataValidator):
+def test_rejection_element_type(validator):
     val = [42]
 
     with pytest.raises(ValueError) as validation_failure:
@@ -86,7 +86,7 @@ def test_rejection_element_type(validator: BaseDataValidator):
     assert "Invalid element(s)" in str(validation_failure.value)
 
 
-def test_rejection_element_attr(validator: BaseDataValidator):
+def test_rejection_element_attr(validator):
     val = [dict(type='scatter', bogus=99)]
 
     with pytest.raises(ValueError) as validation_failure:
@@ -97,7 +97,7 @@ def test_rejection_element_attr(validator: BaseDataValidator):
             str(validation_failure.value))
 
 
-def test_rejection_element_tracetype(validator: BaseDataValidator):
+def test_rejection_element_tracetype(validator):
     val = [dict(type='bogus', a=4)]
 
     with pytest.raises(ValueError) as validation_failure:

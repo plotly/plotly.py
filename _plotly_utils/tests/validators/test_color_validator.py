@@ -30,14 +30,14 @@ def validator_aok_colorscale():
 @pytest.mark.parametrize('val',
                          ['red', 'BLUE', 'rgb(255, 0, 0)', 'hsl(0, 100%, 50%)', 'hsla(0, 100%, 50%, 100%)',
                           'hsv(0, 100%, 100%)', 'hsva(0, 100%, 100%, 50%)'])
-def test_acceptance(val, validator: ColorValidator):
+def test_acceptance(val, validator):
     assert validator.validate_coerce(val) == val
 
 
 # ### Rejection by type ###
 @pytest.mark.parametrize('val',
                          [set(), 23, 0.5, {}, ['red'], [12]])
-def test_rejection(val, validator: ColorValidator):
+def test_rejection(val, validator):
     with pytest.raises(ValueError) as validation_failure:
         validator.validate_coerce(val)
 
@@ -47,7 +47,7 @@ def test_rejection(val, validator: ColorValidator):
 # ### Rejection by value ###
 @pytest.mark.parametrize('val',
                          ['redd', 'rgbbb(255, 0, 0)', 'hsl(0, 1%0000%, 50%)'])
-def test_rejection(val, validator: ColorValidator):
+def test_rejection(val, validator):
     with pytest.raises(ValueError) as validation_failure:
         validator.validate_coerce(val)
 
@@ -60,14 +60,14 @@ def test_rejection(val, validator: ColorValidator):
 @pytest.mark.parametrize('val',
                          ['red', 'BLUE', 23, 15, 'rgb(255, 0, 0)', 'hsl(0, 100%, 50%)', 'hsla(0, 100%, 50%, 100%)',
                           'hsv(0, 100%, 100%)', 'hsva(0, 100%, 100%, 50%)'])
-def test_acceptance_colorscale(val, validator_colorscale: ColorValidator):
+def test_acceptance_colorscale(val, validator_colorscale):
     assert validator_colorscale.validate_coerce(val) == val
 
 
 # ### Rejection by type ###
 @pytest.mark.parametrize('val',
                          [set(), {}, ['red'], [12]])
-def test_rejection_colorscale(val, validator_colorscale: ColorValidator):
+def test_rejection_colorscale(val, validator_colorscale):
     with pytest.raises(ValueError) as validation_failure:
         validator_colorscale.validate_coerce(val)
 
@@ -77,7 +77,7 @@ def test_rejection_colorscale(val, validator_colorscale: ColorValidator):
 # ### Rejection by value ###
 @pytest.mark.parametrize('val',
                          ['redd', 'rgbbb(255, 0, 0)', 'hsl(0, 1%0000%, 50%)'])
-def test_rejection_colorscale(val, validator_colorscale: ColorValidator):
+def test_rejection_colorscale(val, validator_colorscale):
     with pytest.raises(ValueError) as validation_failure:
         validator_colorscale.validate_coerce(val)
 
@@ -94,7 +94,7 @@ def test_rejection_colorscale(val, validator_colorscale: ColorValidator):
                           ['hsl(0, 100%, 50%)', 'hsla(0, 100%, 50%, 100%)', 'hsv(0, 100%, 100%)'],
                           np.array(['hsl(0, 100%, 50%)', 'hsla(0, 100%, 50%, 100%)', 'hsv(0, 100%, 100%)']),
                           ['hsva(0, 100%, 100%, 50%)']])
-def test_acceptance_aok(val, validator_aok: ColorValidator):
+def test_acceptance_aok(val, validator_aok):
     coerce_val = validator_aok.validate_coerce(val)
 
     if isinstance(val, np.ndarray):
@@ -111,7 +111,7 @@ def test_acceptance_aok(val, validator_aok: ColorValidator):
     [['red', 'rgb(255, 0, 0)'], ['hsl(0, 100%, 50%)', 'hsla(0, 100%, 50%, 100%)']],
     np.array([['red', 'rgb(255, 0, 0)'], ['hsl(0, 100%, 50%)', 'hsla(0, 100%, 50%, 100%)']])
 ])
-def test_acceptance_aok_2D(val, validator_aok: ColorValidator):
+def test_acceptance_aok_2D(val, validator_aok):
     coerce_val = validator_aok.validate_coerce(val)
 
     if isinstance(val, np.ndarray):
@@ -128,7 +128,7 @@ def test_acceptance_aok_2D(val, validator_aok: ColorValidator):
                           ['redd', 'rgb(255, 0, 0)'],
                           ['hsl(0, 100%, 50_00%)', 'hsla(0, 100%, 50%, 100%)', 'hsv(0, 100%, 100%)'],
                           ['hsva(0, 1%00%, 100%, 50%)']])
-def test_rejection_aok(val, validator_aok: ColorValidator):
+def test_rejection_aok(val, validator_aok):
     with pytest.raises(ValueError) as validation_failure:
         validator_aok.validate_coerce(val)
 
@@ -142,7 +142,7 @@ def test_rejection_aok(val, validator_aok: ColorValidator):
                           [np.array(['hsl(0, 100%, 50_00%)', 'hsla(0, 100%, 50%, 100%)']),
                            np.array(['hsv(0, 100%, 100%)', 'purple'])],
                           [['blue'], [2]]])
-def test_rejection_aok_2D(val, validator_aok: ColorValidator):
+def test_rejection_aok_2D(val, validator_aok):
     with pytest.raises(ValueError) as validation_failure:
         validator_aok.validate_coerce(val)
 
@@ -157,7 +157,7 @@ def test_rejection_aok_2D(val, validator_aok: ColorValidator):
                           ['red', 0.5, 'rgb(255, 0, 0)'],
                           ['hsl(0, 100%, 50%)', 'hsla(0, 100%, 50%, 100%)', 'hsv(0, 100%, 100%)'],
                           ['hsva(0, 100%, 100%, 50%)']])
-def test_acceptance_aok_colorscale(val, validator_aok_colorscale: ColorValidator):
+def test_acceptance_aok_colorscale(val, validator_aok_colorscale):
     coerce_val = validator_aok_colorscale.validate_coerce(val)
     if isinstance(val, (list, np.ndarray)):
         assert np.array_equal(list(coerce_val), val)
@@ -170,7 +170,7 @@ def test_acceptance_aok_colorscale(val, validator_aok_colorscale: ColorValidator
                          [['redd', 0.5, 'rgb(255, 0, 0)'],
                           ['hsl(0, 100%, 50_00%)', 'hsla(0, 100%, 50%, 100%)', 'hsv(0, 100%, 100%)'],
                           ['hsva(0, 1%00%, 100%, 50%)']])
-def test_rejection_aok_colorscale(val, validator_aok_colorscale: ColorValidator):
+def test_rejection_aok_colorscale(val, validator_aok_colorscale):
     with pytest.raises(ValueError) as validation_failure:
         validator_aok_colorscale.validate_coerce(val)
 
@@ -180,25 +180,25 @@ def test_rejection_aok_colorscale(val, validator_aok_colorscale: ColorValidator)
 # Description
 # -----------
 # Test dynamic description logic
-def test_description(validator: ColorValidator):
+def test_description(validator):
     desc = validator.description()
     assert 'A number that will be interpreted as a color' not in desc
     assert 'A list or array of any of the above' not in desc
 
 
-def test_description_aok(validator_aok: ColorValidator):
+def test_description_aok(validator_aok):
     desc = validator_aok.description()
     assert 'A number that will be interpreted as a color' not in desc
     assert 'A list or array of any of the above' in desc
 
 
-def test_description_aok(validator_colorscale: ColorValidator):
+def test_description_aok(validator_colorscale):
     desc = validator_colorscale.description()
     assert 'A number that will be interpreted as a color' in desc
     assert 'A list or array of any of the above' not in desc
 
 
-def test_description_aok_colorscale(validator_aok_colorscale: ColorValidator):
+def test_description_aok_colorscale(validator_aok_colorscale):
     desc = validator_aok_colorscale.description()
     assert 'A number that will be interpreted as a color' in desc
     assert 'A list or array of any of the above' in desc

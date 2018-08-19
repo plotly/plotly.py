@@ -1,6 +1,6 @@
 {
   "name": "plotlywidget",
-  "version": "0.2.1",
+  "version": "0.2.2-rc.2",
   "description": "The plotly.py ipywidgets library",
   "author": "The plotly.py team",
   "license": "MIT",

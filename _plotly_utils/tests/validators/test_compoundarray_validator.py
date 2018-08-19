@@ -2,6 +2,7 @@ import pytest
 from _plotly_utils.basevalidators import CompoundArrayValidator
 from plotly.graph_objs.layout import Image
 
+
 # Fixtures
 # --------
 @pytest.fixture()
@@ -13,7 +14,7 @@ def validator():
 
 # Tests
 # -----
-def test_acceptance(validator: CompoundArrayValidator):
+def test_acceptance(validator):
     val = [Image(opacity=0.5, sizex=120), Image(x=99)]
     res = validator.validate_coerce(val)
     res_present = validator.present(res)
@@ -30,7 +31,7 @@ def test_acceptance(validator: CompoundArrayValidator):
     assert res_present[1].x == 99
 
 
-def test_acceptance_empty(validator: CompoundArrayValidator):
+def test_acceptance_empty(validator):
     val = [{}]
     res = validator.validate_coerce(val)
     res_present = validator.present(res)
@@ -43,7 +44,7 @@ def test_acceptance_empty(validator: CompoundArrayValidator):
     assert res_present[0].x is None
 
 
-def test_acceptance_dict(validator: CompoundArrayValidator):
+def test_acceptance_dict(validator):
     val = [dict(opacity=0.5, sizex=120), dict(x=99)]
     res = validator.validate_coerce(val)
     res_present = validator.present(res)
@@ -61,7 +62,7 @@ def test_acceptance_dict(validator: CompoundArrayValidator):
     assert res_present[1].x == 99
 
 
-def test_rejection_type(validator: CompoundArrayValidator):
+def test_rejection_type(validator):
     val = 37
 
     with pytest.raises(ValueError) as validation_failure:
@@ -70,7 +71,7 @@ def test_rejection_type(validator: CompoundArrayValidator):
     assert "Invalid value" in str(validation_failure.value)
 
 
-def test_rejection_element(validator: CompoundArrayValidator):
+def test_rejection_element(validator):
     val = ['a', 37]
 
     with pytest.raises(ValueError) as validation_failure:
@@ -79,7 +80,7 @@ def test_rejection_element(validator: CompoundArrayValidator):
     assert "Invalid element(s)" in str(validation_failure.value)
 
 
-def test_rejection_value(validator: CompoundArrayValidator):
+def test_rejection_value(validator):
     val = [dict(opacity=0.5, sizex=120, bogus=100)]
 
     with pytest.raises(ValueError) as validation_failure:
