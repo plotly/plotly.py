@@ -159,9 +159,6 @@ jobs:
           command: cd plotly/tests/test_optional/test_jupyter && npm install
           no_output_timeout: 20m
       - run:
-          name: Install orca with npm
-          command: npm install electron@1.8.4 orca
-      - run:
           name: Test with tox
           command: 'tox -e py36-optional'
           no_output_timeout: 20m
