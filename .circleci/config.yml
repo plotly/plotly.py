@@ -159,6 +159,9 @@ jobs:
           command: cd plotly/tests/test_optional/test_jupyter && npm install
           no_output_timeout: 20m
       - run:
+          name: Install orca with npm
+          command: npm install -g electron@1.8.4 orca
+      - run:
           name: Test with tox
           command: 'tox -e py36-optional'
           no_output_timeout: 20m
@@ -236,17 +239,17 @@ workflows:
   version: 2
   build:
     jobs:
-      - "python-2.7-core"
-      - "python-3.4-core"
-      - "python-3.5-core"
-      - "python-3.6-core"
-      - "python-3.7-core"
-      - "python-2.7-optional"
-      - "python-3.4-optional"
-      - "python-3.5-optional"
+#      - "python-2.7-core"
+#      - "python-3.4-core"
+#      - "python-3.5-core"
+#      - "python-3.6-core"
+#      - "python-3.7-core"
+#      - "python-2.7-optional"
+#      - "python-3.4-optional"
+#      - "python-3.5-optional"
       - "python-3.6-optional"
       # 3.7 optional disabled due to current shapely incompatibility
       # - "python-3.7-optional"
-      - "python-2.7-plot_ly"
-      - "python-3.4-plot_ly"
-      - "python-3.7-plot_ly"
+#      - "python-2.7-plot_ly"
+#      - "python-3.4-plot_ly"
+#      - "python-3.7-plot_ly"
