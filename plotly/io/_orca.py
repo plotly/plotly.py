@@ -478,20 +478,7 @@ The default_scale property must be a number, but received value of type {typ}.
     @property
     def plotlyjs(self):
         """
-        The plotly.js bundle to use for image rendering.
-
-        May be set as:
-         - A valid plotly.js release version string (e.g. 'v1.2.3')
-         - The string 'latest', indicating that most recent version of
-           plotly.js
-         - A string containing the absolute path to a plotly.js bundle
-
-        If set to 'latest' or a plotly.js version string then the bundle
-        is retrieved from a CDN and an active internet connection is required
-        during image export.
-
-        To support offline image generation, this should be set to the
-        full path of a local plotly.js bundle.
+        The plotly.js bundle being used for image rendering.
 
         Returns
         -------
@@ -499,18 +486,6 @@ The default_scale property must be a number, but received value of type {typ}.
         """
         return self._props.get('plotlyjs', None)
 
-    @plotlyjs.setter
-    def plotlyjs(self, val):
-        # Validate val
-        # ------------
-        if not isinstance(val, string_types):
-            raise ValueError("""
-The plotlyjs property must be a string, but received value of type {typ}.
-    Received value: {val}""".format(typ=type(val), val=val))
-        self._props['plotlyjs'] = val
-
-        # Server must restart before setting is active
-        shutdown_orca_server()
 
     @property
     def topojson(self):
