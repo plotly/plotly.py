@@ -236,8 +236,6 @@ class OrcaConfig(object):
             # Server must restart before setting is active
             reset_orca_status()
 
-
-
     def update(self, d={}, **kwargs):
         """
         Update one or more properties from a dict or from input keyword
@@ -753,12 +751,6 @@ property to the full path to your orca executable. For example:
 
     >>> plotly.io.orca.config.executable = '/path/to/orca'
 
-After updating this executable property, try the export operation again.
-If it is successful then you may want to save this configuration so that it
-will be applied automatically in future sessions. You can do this as follows:
-
-    >>> plotly.io.orca.config.save() 
-
 If you're still having trouble, feel free to ask for help on the forums at
 https://community.plot.ly/c/api/python"""
 
@@ -766,12 +758,26 @@ https://community.plot.ly/c/api/python"""
     # -------------------------
     # Search for executable name or path in config.executable
     executable = which(config.executable)
+
+    # If searching for default ('orca') and none was found,
+    # Try searching for orca.js in case orca was installed using npm
+    if executable is None and config.executable == 'orca':
+        executable = which('orca.js')
+
     if executable is None:
+        path = os.environ.get("PATH", os.defpath)
+        formatted_path = path.replace(':', '\n    ')
+
         raise ValueError("""
 The orca executable is required in order to export figures as static images,
 but it could not be found on the system path.
 
+Searched for executable '{executable}' on the following path:
+    {formatted_path}
+
 {instructions}""".format(
+            executable=config.executable,
+            formatted_path=formatted_path,
             instructions=install_location_instructions))
 
     # Run executable with --help and see if it's our orca
@@ -779,7 +785,7 @@ but it could not be found on the system path.
     invalid_executable_msg = """
 The orca executable is required in order to export figures as static images,
 but the executable that was found at '{executable}' does not seem to be a
-valid plotly orca executable. 
+valid plotly orca executable.
 
 {instructions}""".format(
         executable=executable,

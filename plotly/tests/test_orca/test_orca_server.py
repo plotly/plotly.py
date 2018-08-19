@@ -45,7 +45,7 @@ def test_orca_not_found():
     pio.orca.config.executable = 'bogus'
     with pytest.raises(ValueError) as err:
         pio.orca.validate_orca_executable()
-
+    raise(err.value)
     assert pio.orca.status.state == 'unvalidated'
     assert 'could not be found' in str(err.value)
 
