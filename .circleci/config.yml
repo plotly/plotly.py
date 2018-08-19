@@ -237,7 +237,6 @@ jobs:
       - image: circleci/python:3.7-stretch-node-browsers
         environment:
           PYTHON_VERSION: 3.6
-          BASH_ENV: /home/circleci/.bashrc
 
     steps:
       - checkout
@@ -253,26 +252,14 @@ jobs:
           paths:
             - /home/circleci/miniconda/
       - run:
-          name: Activate conda environment
+          name: Run Tests
           command: |
-            echo ". /home/circleci/miniconda/etc/profile.d/conda.sh" >> $BASH_ENV
-            echo "conda activate circle_optional" >> $BASH_ENV
-            source $BASH_ENV
-      - run:
-          name: core tests
-          command: |
-            echo $PATH
-            conda env list
+            . /home/circleci/miniconda/etc/profile.d/conda.sh
+            conda activate circle_optional
             pytest plotly/tests/test_core
-      - run:
-          name: optional tests
-          command: pytest plotly/tests/test_optional
-      - run:
-          name: validator tests
-          command: pytest _plotly_utils/tests/
-      - run:
-          name: orca tests
-          command: pytest plotly/tests/test_orca
+            pytest plotly/tests/test_optional
+            pytest _plotly_utils/tests/
+            pytest plotly/tests/test_orca
 
 workflows:
   version: 2
