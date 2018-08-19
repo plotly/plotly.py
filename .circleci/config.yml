@@ -232,6 +232,31 @@ jobs:
           command: 'tox -e py37-plot_ly'
           no_output_timeout: 20m
 
+  "python-3-6-orca":
+    docker:
+      - image: circleci/python:3.7-stretch-node-browsers
+        environment:
+          PYTHON_VERSION: 3.6
+          BASH_ENV: ~/.bashrc
+
+    steps:
+      - checkout
+      - run:
+          name: setup conda environment
+          command: .circleci/create_conda_optional_env.sh
+      - run:
+          name: core tests
+          command: pytest plotly/tests/test_core
+      - run:
+          name: optional tests
+          command: pytest plotly/tests/test_optional
+      - run:
+          name: validator tests
+          command: pytest _plotly_utils/tests/
+      - run:
+          name: orca tests
+          command: pytest plotly/tests/test_orca
+
 workflows:
   version: 2
   build:
@@ -250,3 +275,4 @@ workflows:
 #      - "python-2.7-plot_ly"
 #      - "python-3.4-plot_ly"
 #      - "python-3.7-plot_ly"
+      - "python-3-6-orca"
