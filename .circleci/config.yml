@@ -260,7 +260,10 @@ jobs:
             source $BASH_ENV
       - run:
           name: core tests
-          command: pytest plotly/tests/test_core
+          command: |
+            echo $PATH
+            conda env list
+            pytest plotly/tests/test_core
       - run:
           name: optional tests
           command: pytest plotly/tests/test_optional
