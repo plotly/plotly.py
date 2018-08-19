@@ -237,13 +237,21 @@ jobs:
       - image: circleci/python:3.7-stretch-node-browsers
         environment:
           PYTHON_VERSION: 3.6
-          BASH_ENV: ~/.bashrc
+          BASH_ENV: /home/circleci/.bashrc
 
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - conda-optional-v1-{{ checksum ".circleci/create_conda_optional_env.sh" }}
       - run:
           name: setup conda environment
           command: .circleci/create_conda_optional_env.sh
+
+      - save_cache:
+          key: conda-optional-v1-{{ checksum ".circleci/create_conda_optional_env.sh" }}
+          paths:
+            - /home/circleci/miniconda/
       - run:
           name: core tests
           command: pytest plotly/tests/test_core
