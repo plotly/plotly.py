@@ -163,7 +163,7 @@ jobs:
           command: npm install electron@1.8.4 orca
       - run:
           name: Test with tox
-          command: 'export PATH=$PATH:`pwd`/node_modules/orca/bin/ tox -e py36-optional'
+          command: 'export PATH=$PATH:`pwd`/node_modules/orca/bin/ && tox -e py36-optional'
           no_output_timeout: 20m
 
   "python-3.7-optional":
