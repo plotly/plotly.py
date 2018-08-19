@@ -245,13 +245,19 @@ jobs:
           keys:
             - conda-optional-v1-{{ checksum ".circleci/create_conda_optional_env.sh" }}
       - run:
-          name: setup conda environment
+          name: Create conda environment
           command: .circleci/create_conda_optional_env.sh
 
       - save_cache:
           key: conda-optional-v1-{{ checksum ".circleci/create_conda_optional_env.sh" }}
           paths:
             - /home/circleci/miniconda/
+      - run:
+          name: Activate conda environment
+          command: |
+            echo ". /home/circleci/miniconda/etc/profile.d/conda.sh" >> $BASH_ENV
+            echo "conda activate circle_optional" >> $BASH_ENV
+            source $BASH_ENV
       - run:
           name: core tests
           command: pytest plotly/tests/test_core

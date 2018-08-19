@@ -25,8 +25,3 @@ if [ ! -d $HOME/miniconda/envs/circle_optional ]; then
     # conda-forge only
     $HOME/miniconda/bin/conda install --yes -n circle_optional -c conda-forge pyshp==1.2.10
 fi
-
-# Config bashrc to active our new environment automatically
-# This way the rest of the circleci tasks will operate in this environment
-echo 'export PATH="$HOME/miniconda/bin:$PATH"' >> $HOME/.bashrc
-echo 'source activate circle_optional' > $HOME/.bashrc
