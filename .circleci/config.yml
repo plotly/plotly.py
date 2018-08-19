@@ -160,7 +160,7 @@ jobs:
           no_output_timeout: 20m
       - run:
           name: Install orca with npm
-          command: npm install -g electron@1.8.4 orca
+          command: npm install electron@1.8.4 orca
       - run:
           name: Test with tox
           command: 'tox -e py36-optional'
