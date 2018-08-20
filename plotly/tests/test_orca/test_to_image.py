@@ -140,7 +140,7 @@ def assert_image_bytes(img_bytes, file_name, _raise=True):
 
         assert expected == img_bytes
 
-    except (FileNotFoundError, AssertionError) as e:
+    except (OSError, AssertionError) as e:
         with open(failed_dir + file_name, 'wb') as f:
             f.write(img_bytes)
 
