@@ -341,5 +341,5 @@ workflows:
 #      - "python-3.4-plot_ly"
 #      - "python-3.7-plot_ly"
       - "python-2-7-orca"
-      - "python-3-4-orca"
+      - "python-3-5-orca"
       - "python-3-7-orca"
