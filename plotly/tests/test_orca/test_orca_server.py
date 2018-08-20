@@ -50,7 +50,7 @@ def test_orca_not_found():
 
 
 def test_invalid_executable_found():
-    pio.orca.config.executable = 'man'
+    pio.orca.config.executable = 'python'
     with pytest.raises(ValueError) as err:
         pio.orca.validate_orca_executable()
 
