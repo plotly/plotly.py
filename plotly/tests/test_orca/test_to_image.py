@@ -25,7 +25,7 @@ topo_df = pd.read_csv('plotly/tests/test_orca/resources/2011_us_ag_exports.csv')
 @pytest.fixture()
 def setup():
     # Reset orca state
-    pio.orca.config.restore_defaults()
+    pio.orca.config.restore_defaults(reset_server=False)
 
     # Clear out temp images dir
     shutil.rmtree(tmp_dir, ignore_errors=True)
