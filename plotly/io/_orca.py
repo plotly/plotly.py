@@ -205,10 +205,12 @@ class OrcaConfig(object):
     """
     def __init__(self):
         self._props = {}
+
         root_dir = os.path.dirname(os.path.abspath(plotly.__file__))
         self.package_dir = os.path.join(root_dir, 'package_data')
 
         self.restore_defaults(reset_server=False)
+        self.reload(warn=False)
 
         # Constants
         plotlyjs = os.path.join(self.package_dir, 'plotly.min.js')
@@ -375,6 +377,9 @@ The timeout property must be a number, but received value of type {typ}.
     Received value: {val}""".format(typ=type(val), val=val))
         self._props['timeout'] = val
 
+        # Server must restart before setting is active
+        shutdown_orca_server()
+
     @property
     def default_width(self):
         """
@@ -489,8 +494,7 @@ The default_scale property must be a number, but received value of type {typ}.
         -------
         str
         """
-        return self._props.get('topojson',
-                               os.path.join(self.package_dir, 'topojson'))
+        return self._props.get('topojson', None)
 
     @topojson.setter
     def topojson(self, val):
@@ -549,7 +553,7 @@ The mathjax property must be a string, but received value of type {typ}.
         # ------------
         if val is not None and not isinstance(val, string_types):
             raise ValueError("""
-    The mapbox_access_token property must be a string, \
+The mapbox_access_token property must be a string, \
 but received value of type {typ}.
         Received value: {val}""".format(typ=type(val), val=val))
         self._props['mapbox_access_token'] = val
@@ -597,7 +601,7 @@ but received value of type {typ}.
             except:
                 if warn:
                     warnings.warn("""\
-        Unable to read orca configuration file at {path}""".format(
+Unable to read orca configuration file at {path}""".format(
                         path=self.config_file
                     ))
                 return
@@ -608,16 +612,14 @@ but received value of type {typ}.
             except ValueError:
                 if warn:
                     warnings.warn("""\
-        Orca configuration file at {path} is not valid JSON""".format(
+Orca configuration file at {path} is not valid JSON""".format(
                         path=self.config_file
                     ))
                 return
 
             # ### Update _props ###
             for k, v in orca_props.items():
-                # Only keep properties that we understand
-                if k in self._props:
-                    self._props[k] = v
+                self._props[k] = v
 
         elif warn:
             warnings.warn("""\
@@ -643,12 +645,39 @@ but received value of type {typ}.
 
     def __repr__(self):
         """
-        Display a nice representation of the current orca server status.
+        Display a nice representation of the current orca configuration.
         """
         return """\
 orca configuration
 ------------------
-""" + pformat(self._props, width=40)
+    port: {port}
+    executable: {executable}
+    timeout: {timeout}
+    default_width: {default_width}
+    default_height: {default_height}
+    default_scale: {default_scale}
+    default_format: {default_format}
+    mathjax: {mathjax}
+    topojson: {topojson}
+    mapbox_access_token: {mapbox_access_token}
+
+constants
+---------
+    plotlyjs: {plotlyjs} 
+    config_file: {config_file}
+
+""".format(port=self.port,
+           executable=self.executable,
+           timeout=self.timeout,
+           default_width=self.default_width,
+           default_height=self.default_height,
+           default_scale=self.default_scale,
+           default_format=self.default_format,
+           mathjax=self.mathjax,
+           topojson=self.topojson,
+           mapbox_access_token=self.mapbox_access_token,
+           plotlyjs=self.plotlyjs,
+           config_file=self.config_file)
 
 
 # Make config a singleton object
@@ -743,9 +772,21 @@ class OrcaStatus(object):
         Display a nice representation of the current orca server status.
         """
         return """\
-    orca status
-    -----------
-""" + pformat(self._props, width=40)
+orca status
+-----------
+    executable: {executable}
+    version: {version}
+    port: {port}
+    pid: {pid}
+    state: {state}
+    command: {command}
+    
+""".format(executable=self.executable,
+           version=self.version,
+           port=self.port,
+           pid=self.pid,
+           state=self.state,
+           command=self.command)
 
 
 # Make config a singleton object
@@ -803,6 +844,12 @@ locate it. In this case, set the `plotly.io.orca.config.executable`
 property to the full path to your orca executable. For example:
 
     >>> plotly.io.orca.config.executable = '/path/to/orca'
+
+After updating this executable property, try the export operation again.
+If it is successful then you may want to save this configuration so that it
+will be applied automatically in future sessions. You can do this as follows:
+
+    >>> plotly.io.orca.config.save() 
 
 If you're still having trouble, feel free to ask for help on the forums at
 https://community.plot.ly/c/api/python"""
