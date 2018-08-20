@@ -1,3 +1,4 @@
+import warnings
 from copy import copy
 from pprint import pformat
 import requests
@@ -11,6 +12,7 @@ import retrying
 import atexit
 
 import plotly
+from plotly.files import PLOTLY_DIR
 from six import string_types
 from plotly.optional_imports import get_module
 
@@ -203,34 +205,23 @@ class OrcaConfig(object):
     """
     def __init__(self):
         self._props = {}
+        root_dir = os.path.dirname(os.path.abspath(plotly.__file__))
+        self.package_dir = os.path.join(root_dir, 'package_data')
+
         self.restore_defaults(reset_server=False)
+
+        # Constants
+        plotlyjs = os.path.join(self.package_dir, 'plotly.min.js')
+        self._constants = {
+            'plotlyjs': plotlyjs,
+            'config_file': os.path.join(PLOTLY_DIR, ".orca")
+        }
 
     def restore_defaults(self, reset_server=True):
         """
         Reset all orca configuration properties to their default values
         """
-
-        root_dir = os.path.dirname(os.path.abspath(plotly.__file__))
-        package_dir = os.path.join(root_dir, 'package_data')
-
-        plotlyjs = os.path.join(package_dir, 'plotly.min.js')
-        topojson = os.path.join(package_dir, 'topojson')
-        mathjax = ('https://cdnjs.cloudflare.com'
-                   '/ajax/libs/mathjax/2.7.5/MathJax.js')
-
-        self._props.update({
-            'port': None,
-            'executable': 'orca',
-            'timeout': None,
-            'default_width': None,
-            'default_height': None,
-            'default_format': 'png',
-            'default_scale': 1,
-            'plotlyjs': plotlyjs,
-            'topojson': topojson,
-            'mathjax': mathjax,
-            'mapbox_access_token': None
-        })
+        self._props = {}
 
         if reset_server:
             # Server must restart before setting is active
@@ -332,7 +323,7 @@ The port value must be an integer, but received value of type {typ}.
         -------
         str
         """
-        return self._props.get('executable', None)
+        return self._props.get('executable', 'orca')
 
     @executable.setter
     def executable(self, val):
@@ -446,7 +437,7 @@ The default_height property must be an int, but received value of type {typ}.
         -------
         str or None
         """
-        return self._props.get('default_format', None)
+        return self._props.get('default_format', 'png')
 
     @default_format.setter
     def default_format(self, val):
@@ -464,7 +455,7 @@ The default_height property must be an int, but received value of type {typ}.
         -------
         int or None
         """
-        return self._props.get('default_scale', None)
+        return self._props.get('default_scale', 1)
 
     @default_scale.setter
     def default_scale(self, val):
@@ -484,7 +475,7 @@ The default_scale property must be a number, but received value of type {typ}.
         -------
         str
         """
-        return self._props.get('plotlyjs', None)
+        return self._constants.get('plotlyjs', None)
 
 
     @property
@@ -498,7 +489,8 @@ The default_scale property must be a number, but received value of type {typ}.
         -------
         str
         """
-        return self._props.get('topojson', None)
+        return self._props.get('topojson',
+                               os.path.join(self.package_dir, 'topojson'))
 
     @topojson.setter
     def topojson(self, val):
@@ -522,7 +514,9 @@ The topojson property must be a string, but received value of type {typ}.
         -------
         str
         """
-        return self._props.get('mathjax', None)
+        return self._props.get('mathjax',
+                               ('https://cdnjs.cloudflare.com'
+                                '/ajax/libs/mathjax/2.7.5/MathJax.js'))
 
     @mathjax.setter
     def mathjax(self, val):
@@ -562,6 +556,90 @@ but received value of type {typ}.
 
         # Server must restart before setting is active
         shutdown_orca_server()
+
+    @property
+    def config_file(self):
+        """
+        Path to orca configuration file
+
+        Using the `plotly.io.config.save()` method will save the current
+        configuration settings to this file. Settings in this file are
+        restored at the beginning of each sessions.
+
+        Returns
+        -------
+        str
+        """
+        return os.path.join(PLOTLY_DIR, ".orca")
+
+    def reload(self, warn=True):
+        """
+        Reload orca settings from .plotly/.orca, if any.
+
+        Note: Settings are loaded automatically when plotly is imported.
+        This method is only needed if the setting are changed by some outside
+        process (e.g. a text editor) during an interactive session.
+
+        Parameters
+        ----------
+        warn
+
+        Returns
+        -------
+
+        """
+        if os.path.exists(self.config_file):
+
+            # ### Load file into a string ###
+            try:
+                with open(self.config_file, 'r') as f:
+                    orca_str = f.read()
+            except:
+                if warn:
+                    warnings.warn("""\
+        Unable to read orca configuration file at {path}""".format(
+                        path=self.config_file
+                    ))
+                return
+
+            # ### Parse as JSON ###
+            try:
+                orca_props = json.loads(orca_str)
+            except ValueError:
+                if warn:
+                    warnings.warn("""\
+        Orca configuration file at {path} is not valid JSON""".format(
+                        path=self.config_file
+                    ))
+                return
+
+            # ### Update _props ###
+            for k, v in orca_props.items():
+                # Only keep properties that we understand
+                if k in self._props:
+                    self._props[k] = v
+
+        elif warn:
+            warnings.warn("""\
+        Orca configuration file at {path} not found""".format(
+                path=self.config_file))
+
+    def save(self):
+        """
+        Attempt to save current settings to disk, so that they are
+        automatically restored for future sessions.
+
+        This operation requires write access to the path returned by
+        in the `config_file` property.
+
+        Returns
+        -------
+        None
+        """
+        ## Make smarter
+        ## Only save set-able properties with non-default values
+        with open(self.config_file, 'w', encoding='utf-8') as f:
+            json.dump(self._props, f, indent=4)
 
     def __repr__(self):
         """
