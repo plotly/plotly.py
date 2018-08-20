@@ -262,23 +262,23 @@ jobs:
       - store_artifacts:
             path: plotly/tests/test_orca/images/failed
 
-  "python-3-4-orca":
+  "python-3-5-orca":
     docker:
       - image: circleci/node:10.9-stretch-browsers
         environment:
-          PYTHON_VERSION: 3.4
+          PYTHON_VERSION: 3.5
 
     steps:
       - checkout
       - restore_cache:
           keys:
-            - conda-34-v1-{{ checksum ".circleci/create_conda_optional_env.sh" }}
+            - conda-35-v1-{{ checksum ".circleci/create_conda_optional_env.sh" }}
       - run:
           name: Create conda environment
           command: .circleci/create_conda_optional_env.sh
 
       - save_cache:
-          key: conda-34-v1-{{ checksum ".circleci/create_conda_optional_env.sh" }}
+          key: conda-35-v1-{{ checksum ".circleci/create_conda_optional_env.sh" }}
           paths:
             - /home/circleci/miniconda/
       - run:

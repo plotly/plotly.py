@@ -2,8 +2,12 @@
 
 if [ ! -d $HOME/miniconda/envs/circle_optional ]; then
     # Download miniconda
-    # wget http://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh
-    wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+    if [ "$PYTHON_VERSION" = "2.7" ]; then
+        wget http://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -O miniconda.sh
+    else
+        wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+    fi
+
     chmod +x miniconda.sh
 
     # Install miniconda
