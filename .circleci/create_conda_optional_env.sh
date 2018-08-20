@@ -13,7 +13,7 @@ if [ ! -d $HOME/miniconda/envs/circle_optional ]; then
     # PYTHON_VERSION=3.6
     $HOME/miniconda/bin/conda create -n circle_optional --yes python==$PYTHON_VERSION \
 requests six pytz retrying numpy ipython jupyter \
-pandas scipy shapely geopandas \
+pandas scipy shapely \
 pillow psutil pytest mock nose
 
     # Install orca into environment
