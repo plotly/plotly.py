@@ -261,6 +261,9 @@ jobs:
             pytest _plotly_utils/tests/
             pytest plotly/tests/test_orca
 
+      - store_artifacts:
+            path: plotly/tests/test_orca/images/failed
+
 workflows:
   version: 2
   build:
