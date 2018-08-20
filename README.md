@@ -1,5 +1,26 @@
 # plotly.py
 
+## Quickstart
+
+`pip install plotly`
+
+Inside [Jupyter notebook](https://jupyter.org/install):
+```
+import plotly.graph_objs as go
+fig = go.FigureWidget()
+# Display an empty figure
+fig
+
+# Add a scatter chart
+fig.add_scatter(y=[2, 1, 4, 3])
+# Add a bar chart
+fig.add_bar(y=[1, 4, 3, 2])
+# Add a title
+fig.layout.title = 'Hello FigureWidget'
+```
+
+See the [Python documentation](https://plot.ly/python/) for more examples.
+
 ## Overview
 [plotly.py](https://plot.ly/d3-js-for-python-and-pandas-charts/) is an interactive, browser-based graphing library for Python :sparkles:
 
