@@ -50,7 +50,7 @@ def test_orca_not_found():
 
 
 def test_invalid_executable_found():
-    pio.orca.config.executable = 'cd'
+    pio.orca.config.executable = 'man'
     with pytest.raises(ValueError) as err:
         pio.orca.validate_orca_executable()
 
@@ -74,7 +74,7 @@ def test_orca_executable_path():
 def test_orca_version_number():
     assert pio.orca.status.version is None
 
-    expected_min = LooseVersion('1.1.0-rc.1')
+    expected_min = LooseVersion('1.1.0')
     expected_max = LooseVersion('2.0.0')
 
     pio.orca.validate_orca_executable()
