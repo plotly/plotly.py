@@ -13,7 +13,18 @@ else:
 
 # Constants
 # ---------
-images_dir = 'plotly/tests/test_orca/images/'
+images_root = 'plotly/tests/test_orca/images/'
+
+if sys.platform.startswith('linux'):
+    images_dir = images_root + 'linux/'
+elif sys.platform == 'darwin':
+    images_dir = images_root + 'darwin/'
+else:
+    raise ValueError(
+        'No reference images available for platform: {platform}'
+        .format(platform=sys.platform))
+
+
 failed_dir = images_dir + 'failed/'
 tmp_dir = images_dir + 'tmp/'
 # These formats are deterministic. PDF and svg don't seem to be
