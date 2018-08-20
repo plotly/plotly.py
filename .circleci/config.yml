@@ -242,13 +242,13 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - conda-optional-v1-{{ checksum ".circleci/create_conda_optional_env.sh" }}
+            - conda-36-v1-{{ checksum ".circleci/create_conda_optional_env.sh" }}
       - run:
           name: Create conda environment
           command: .circleci/create_conda_optional_env.sh
 
       - save_cache:
-          key: conda-optional-v1-{{ checksum ".circleci/create_conda_optional_env.sh" }}
+          key: conda-36-v1-{{ checksum ".circleci/create_conda_optional_env.sh" }}
           paths:
             - /home/circleci/miniconda/
       - run:
