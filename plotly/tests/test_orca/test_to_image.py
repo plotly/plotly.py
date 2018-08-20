@@ -52,7 +52,12 @@ def fig1():
                marker=go.bar.Marker(color='purple',
                                     opacity=0.7)),
         go.Scattergl(y=[3, 4, 2])
-    ])
+    ], layout={
+        'font': {'family': 'Arial', 'size': 12},
+        'xaxis': {'showticklabels': False},
+        'yaxis': {'showticklabels': False},
+        'showlegend': False
+    })
 
 
 @pytest.fixture()
@@ -87,17 +92,16 @@ def topofig():
                 color='rgb(255,255,255)',
                 width=2
             )),
-        colorbar=dict(
-            title="Millions USD")
+        showscale=False,
     )]
 
     layout = dict(
-        title='2011 US Agriculture Exports by State<br>(Hover for breakdown)',
         geo=dict(
             scope='usa',
             projection=dict(type='albers usa'),
             showlakes=True,
             lakecolor='rgb(255, 255, 255)'),
+        font={'family': 'Arial', 'size': 12},
     )
 
     return dict(data=data, layout=layout)
@@ -108,22 +112,23 @@ def latexfig():
     trace1 = go.Scatter(
         x=[1, 2, 3, 4],
         y=[1, 4, 9, 16],
-        name='$\\alpha_{1c} = 352 \\pm 11 \\text{ km s}^{-1}$'
     )
     trace2 = go.Scatter(
         x=[1, 2, 3, 4],
         y=[0.5, 2, 4.5, 8],
-        name='$\\beta_{1c} = 25 \\pm 11 \\text{ km s}^{-1}$'
     )
     data = [trace1, trace2]
     layout = go.Layout(
         xaxis=dict(
-            title='$\\sqrt{(n_\\text{c}(t|{T_\\text{early}}))}$'
+            title='$\\sqrt{(n_\\text{c}(t|{T_\\text{early}}))}$',
+            showticklabels=False,
         ),
         yaxis=dict(
-            title='$d, r \\text{ (solar radius)}$'
+            title='$d, r \\text{ (solar radius)}$',
+            showticklabels=False,
         ),
-        showlegend=True
+        showlegend=False,
+        font={'family': 'Arial', 'size': 12}
     )
     fig = go.Figure(data=data, layout=layout)
     return fig
@@ -151,13 +156,13 @@ def assert_image_bytes(img_bytes, file_name, _raise=True):
 # Tests
 # -----
 def test_simple_to_image(fig1, format):
-    img_bytes = pio.to_image(fig1, format=format)
+    img_bytes = pio.to_image(fig1, format=format, width=700, height=500)
     assert_image_bytes(img_bytes, 'fig1.' + format)
 
 
 def test_to_image_default(fig1, format):
     pio.orca.config.default_format = format
-    img_bytes = pio.to_image(fig1)
+    img_bytes = pio.to_image(fig1, width=700, height=500)
     assert_image_bytes(img_bytes, 'fig1.' + format)
 
 
@@ -167,7 +172,8 @@ def test_write_image_string(fig1, format):
     file_name = 'fig1.' + format
     file_path = tmp_dir + file_name
 
-    pio.write_image(fig1, tmp_dir + file_name, format=format)
+    pio.write_image(fig1, tmp_dir + file_name,
+                    format=format, width=700, height=500)
 
     with open(file_path, 'rb') as f:
         written_bytes = f.read()
@@ -185,7 +191,8 @@ def test_write_image_writeable(fig1, format):
         expected_bytes = f.read()
 
     mock_file = MagicMock()
-    pio.write_image(fig1, mock_file, format=format)
+    pio.write_image(fig1, mock_file, format=format,
+                    width=700, height=500)
 
     mock_file.write.assert_called_once_with(expected_bytes)
 
@@ -196,7 +203,8 @@ def test_write_image_string_format_inference(fig1, format):
     file_path = tmp_dir + file_name
 
     # Use file extension to infer image type.
-    pio.write_image(fig1, tmp_dir + file_name)
+    pio.write_image(fig1, tmp_dir + file_name,
+                    width=700, height=500)
 
     with open(file_path, 'rb') as f:
         written_bytes = f.read()
@@ -234,7 +242,7 @@ def test_write_image_string_bad_extension_override(fig1):
     file_name = 'fig1.bogus'
     tmp_path = tmp_dir + file_name
 
-    pio.write_image(fig1, tmp_path, format='jpg')
+    pio.write_image(fig1, tmp_path, format='jpg', width=700, height=500)
 
     with open(tmp_path, 'rb') as f:
         written_bytes = f.read()
@@ -248,12 +256,12 @@ def test_write_image_string_bad_extension_override(fig1):
 # Topojson
 # --------
 def test_topojson_fig_to_image(topofig, format):
-    img_bytes = pio.to_image(topofig, format=format)
+    img_bytes = pio.to_image(topofig, format=format, width=700, height=500)
     assert_image_bytes(img_bytes, 'topofig.' + format)
 
 
 # Latex / MathJax
 # ---------------
 def test_latex_fig_to_image(latexfig, format):
-    img_bytes = pio.to_image(latexfig, format=format)
+    img_bytes = pio.to_image(latexfig, format=format, width=700, height=500)
     assert_image_bytes(img_bytes, 'latexfig.' + format)
