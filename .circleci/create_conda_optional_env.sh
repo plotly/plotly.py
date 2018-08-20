@@ -12,7 +12,7 @@ if [ ! -d $HOME/miniconda/envs/circle_optional ]; then
     # Create environment
     # PYTHON_VERSION=3.6
     $HOME/miniconda/bin/conda create -n circle_optional --yes python==$PYTHON_VERSION \
-requests six pytz retrying psutil decorator pytest mock nose
+requests six pytz retrying psutil pandas decorator pytest mock nose
 
     # Install orca into environment
     $HOME/miniconda/bin/conda install --yes -n circle_optional -c plotly plotly-orca
