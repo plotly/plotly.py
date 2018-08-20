@@ -21,7 +21,7 @@ fig.layout.title = 'Hello FigureWidget'
 
 See the [Python documentation](https://plot.ly/python/) for more examples.
 
-React about what's new in [plotly.py v3](https://medium.com/@plotlygraphs/introducing-plotly-py-3-0-0-7bb1333f69c6)
+Read about what's new in [plotly.py v3](https://medium.com/@plotlygraphs/introducing-plotly-py-3-0-0-7bb1333f69c6)
 
 ## Overview
 [plotly.py](https://plot.ly/d3-js-for-python-and-pandas-charts/) is an interactive, open-source, and browser-based graphing library for Python :sparkles:
