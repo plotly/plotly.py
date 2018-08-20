@@ -5,7 +5,7 @@
 `pip install plotly`
 
 Inside [Jupyter notebook](https://jupyter.org/install):
-```
+```python
 import plotly.graph_objs as go
 fig = go.FigureWidget()
 # Display an empty figure
