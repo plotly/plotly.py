@@ -17,11 +17,13 @@ if [ ! -d $HOME/miniconda/envs/circle_optional ]; then
     $HOME/miniconda/bin/conda install --yes -n circle_optional -c plotly plotly-orca
 
     # Install requirements into environment
-    $HOME/miniconda/bin/conda install --yes -n circle_optional --file requirements.txt
-    $HOME/miniconda/bin/conda install --yes -n circle_optional numpy==1.11.3 ipython==5.1.0 jupyter==1.0.0 \
-    pandas==0.19.2 scipy==0.18.1 shapely==1.6.4 geopandas==0.3.0 \
-    pillow==5.2.0 psutil==5.4.6 pytest==3.5.1 mock==2.0.0 nose==1.3.3
+    $HOME/miniconda/bin/conda install --yes -n circle_optional requests \
+six pytz retrying
+
+    $HOME/miniconda/bin/conda install --yes -n circle_optional numpy ipython jupyter \
+    pandas scipy shapely geopandas \
+    pillow psutil pytest mock nose
 
     # conda-forge only
-    $HOME/miniconda/bin/conda install --yes -n circle_optional -c conda-forge pyshp==1.2.10
+    $HOME/miniconda/bin/conda install --yes -n circle_optional -c conda-forge pyshp
 fi
