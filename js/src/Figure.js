@@ -741,7 +741,25 @@ var FigureView = widgets.DOMWidgetView.extend({
         var initialTraces = _.cloneDeep(this.model.get("_data"));
         var initialLayout = _.cloneDeep(this.model.get("_layout"));
 
-        Plotly.newPlot(that.el, initialTraces, initialLayout).then(
+        let holder = document.createElement('div');
+        holder.classList.add('js-plotly-plot-inner');
+        holder.style.height = '100%';
+        holder.style.width = '100%';
+
+        that.plot = holder;
+
+        that.el.appendChild(holder);
+        that.el.style.resize = 'both';
+        that.el.style.paddingBottom = '10px';
+
+        let observer = new MutationObserver(that.autosizeFigure.bind(that));
+        observer.observe(this.el, {attributes: true});
+
+        that.el.addEventListener('resize', function(){
+            that.autosizeFigure();
+        });
+
+        Plotly.newPlot(that.plot, initialTraces, initialLayout).then(
             function () {
 
                 // ### Send trace deltas ###
@@ -753,35 +771,35 @@ var FigureView = widgets.DOMWidgetView.extend({
                 that._sendLayoutDelta(layout_edit_id);
 
                 // Wire up plotly event callbacks
-                that.el.on("plotly_restyle",
+                that.plot.on("plotly_restyle",
                     function (update) {
                         that.handle_plotly_restyle(update)
                     });
-                that.el.on("plotly_relayout",
+                that.plot.on("plotly_relayout",
                     function (update) {
                         that.handle_plotly_relayout(update)
                     });
-                that.el.on("plotly_update",
+                that.plot.on("plotly_update",
                     function (update) {
                         that.handle_plotly_update(update)
                     });
-                that.el.on("plotly_click",
+                that.plot.on("plotly_click",
                     function (update) {
                         that.handle_plotly_click(update)
                     });
-                that.el.on("plotly_hover",
+                that.plot.on("plotly_hover",
                     function (update) {
                         that.handle_plotly_hover(update)
                     });
-                that.el.on("plotly_unhover",
+                that.plot.on("plotly_unhover",
                     function (update) {
                         that.handle_plotly_unhover(update)
                     });
-                that.el.on("plotly_selected",
+                that.plot.on("plotly_selected",
                     function (update) {
                         that.handle_plotly_selected(update)
                     });
-                that.el.on("plotly_doubleclick",
+                that.plot.on("plotly_doubleclick",
                     function (update) {
                         that.handle_plotly_doubleclick(update)
                     });
@@ -789,7 +807,7 @@ var FigureView = widgets.DOMWidgetView.extend({
                 // Emit event indicating that the widget has finished
                 // rendering
                 var event = new CustomEvent("plotlywidget-after-render",
-                    { "detail": {"element": that.el, 'viewID': that.viewID}});
+                    { "detail": {"element": that.plot, 'viewID': that.viewID}});
 
                 // Dispatch/Trigger/Fire the event
                 document.dispatchEvent(event);
@@ -811,7 +829,7 @@ var FigureView = widgets.DOMWidgetView.extend({
                 var axisHidden = {
                     showgrid: false, showline: false, tickvals: []};
 
-                Plotly.newPlot(that.el, [], {
+                Plotly.newPlot(that.plot, [], {
                     xaxis: axisHidden, yaxis: axisHidden
                 });
 
@@ -823,7 +841,7 @@ var FigureView = widgets.DOMWidgetView.extend({
                 // Rendering actual figure in the after-attach event allows
                 // Plotly.js to size the figure to fill the available element
                 this.perform_render();
-                console.log([that.el._fullLayout.height, that.el._fullLayout.width]);
+                console.log([that.plot._fullLayout.height, that.plot._fullLayout.width]);
                 break;
             case 'resize':
                 this.autosizeFigure();
@@ -836,7 +854,7 @@ var FigureView = widgets.DOMWidgetView.extend({
         var layout = that.model.get('_layout');
         if (_.isNil(layout) ||
             _.isNil(layout.width)) {
-            Plotly.Plots.resize(that.el).then(function(){
+            Plotly.Plots.resize(that.plot).then(function(){
                 var layout_edit_id = that.model.get(
                     "_last_layout_edit_id");
                 that._sendLayoutDelta(layout_edit_id);
@@ -849,13 +867,13 @@ var FigureView = widgets.DOMWidgetView.extend({
      * element when the view is destroyed
      */
     destroy: function() {
-        Plotly.purge(this.el);
+        Plotly.purge(this.plot);
     },
 
     /**
      * Return the figure's _fullData array merged with its data array
      *
-     * The merge ensures that for any properties that el._fullData and
+     * The merge ensures that for any properties that.plot._fullData and
      * el.data have in common, we return the version from el.data
      *
      * Named colorscales are one example of why this is needed. The el.data
@@ -870,7 +888,7 @@ var FigureView = widgets.DOMWidgetView.extend({
      *
      */
     getFullData: function () {
-        return _.mergeWith(this.el._fullData, this.el.data,
+        return _.mergeWith(this.plot._fullData, this.plot.data,
             fullMergeCustomizer)
     },
 
@@ -881,7 +899,7 @@ var FigureView = widgets.DOMWidgetView.extend({
      * necessary
      */
     getFullLayout: function () {
-        return _.mergeWith(this.el._fullLayout, this.el.layout,
+        return _.mergeWith(this.plot._fullLayout, this.plot.layout,
             fullMergeCustomizer);
     },
 
@@ -1182,10 +1200,10 @@ var FigureView = widgets.DOMWidgetView.extend({
             console.log(msgData);
 
             // Save off original number of traces
-            var prevNumTraces = this.el.data.length;
+            var prevNumTraces = this.plot.data.length;
 
             var that = this;
-            Plotly.addTraces(this.el, msgData.trace_data).then(function () {
+            Plotly.addTraces(this.plot, msgData.trace_data).then(function () {
 
                 // ### Send trace deltas ###
                 that._sendTraceDeltas(msgData.trace_edit_id);
@@ -1209,7 +1227,7 @@ var FigureView = widgets.DOMWidgetView.extend({
         if (msgData  !== null){
             var delete_inds = msgData.delete_inds;
             var that = this;
-            Plotly.deleteTraces(this.el, delete_inds).then(function () {
+            Plotly.deleteTraces(this.plot, delete_inds).then(function () {
 
                 // ### Send trace deltas ###
                 var trace_edit_id = msgData.trace_edit_id;
@@ -1241,7 +1259,7 @@ var FigureView = widgets.DOMWidgetView.extend({
             var inds_equal = _.isEqual(currentInds, newInds);
 
             if (!inds_equal) {
-                Plotly.moveTraces(this.el, currentInds, newInds)
+                Plotly.moveTraces(this.plot, currentInds, newInds)
             }
         }
     },
@@ -1261,7 +1279,7 @@ var FigureView = widgets.DOMWidgetView.extend({
                 msgData.restyle_traces);
 
             restyleData["_doNotReportToPy"] = true;
-            Plotly.restyle(this.el, restyleData, traceIndexes);
+            Plotly.restyle(this.plot, restyleData, traceIndexes);
 
             // ### Send trace deltas ###
             // We create an array of deltas corresponding to the restyled
@@ -1286,7 +1304,7 @@ var FigureView = widgets.DOMWidgetView.extend({
             if (msgData.source_view_id !== this.viewID) {
                 var relayoutData = msgData.relayout_data;
                 relayoutData["_doNotReportToPy"] = true;
-                Plotly.relayout(this.el, msgData.relayout_data);
+                Plotly.relayout(this.plot, msgData.relayout_data);
             }
 
             // ### Send layout delta ###
@@ -1311,7 +1329,7 @@ var FigureView = widgets.DOMWidgetView.extend({
                 msgData.style_traces);
 
             style["_doNotReportToPy"] = true;
-                Plotly.update(this.el, style, layout, traceIndexes);
+                Plotly.update(this.plot, style, layout, traceIndexes);
 
             // ### Send trace deltas ###
             // We create an array of deltas corresponding to the updated
@@ -1353,7 +1371,7 @@ var FigureView = widgets.DOMWidgetView.extend({
             animationData["_doNotReportToPy"] = true;
             var that = this;
 
-            Plotly.animate(this.el, animationData, animationOpts).then(
+            Plotly.animate(this.plot, animationData, animationOpts).then(
                 function () {
 
                     // ### Send trace deltas ###
