@@ -227,7 +227,7 @@ class OrcaConfig(object):
 
         if reset_server:
             # Server must restart before setting is active
-            reset_orca_status()
+            reset_status()
 
     def update(self, d={}, **kwargs):
         """
@@ -344,7 +344,7 @@ The executable property must be a string, but received value of type {typ}.
         self._props['executable'] = val
 
         # Server must restart before setting is active
-        shutdown_orca_server()
+        shutdown_server()
 
     @property
     def timeout(self):
@@ -378,7 +378,7 @@ The timeout property must be a number, but received value of type {typ}.
         self._props['timeout'] = val
 
         # Server must restart before setting is active
-        shutdown_orca_server()
+        shutdown_server()
 
     @property
     def default_width(self):
@@ -507,7 +507,7 @@ The topojson property must be a string, but received value of type {typ}.
         self._props['topojson'] = val
 
         # Server must restart before setting is active
-        shutdown_orca_server()
+        shutdown_server()
 
     @property
     def mathjax(self):
@@ -534,7 +534,7 @@ The mathjax property must be a string, but received value of type {typ}.
         self._props['mathjax'] = val
 
         # Server must restart before setting is active
-        shutdown_orca_server()
+        shutdown_server()
 
     @property
     def mapbox_access_token(self):
@@ -559,7 +559,7 @@ but received value of type {typ}.
         self._props['mapbox_access_token'] = val
 
         # Server must restart before setting is active
-        shutdown_orca_server()
+        shutdown_server()
 
     @property
     def config_file(self):
@@ -797,7 +797,7 @@ del OrcaStatus
 
 # Public orca server interactino functions
 # ----------------------------------------
-def validate_orca_executable():
+def validate_executable():
     """
     Attempt to find and validate the orca executable specified by the
     `plotly.io.orca.config.executable` property.
@@ -931,7 +931,7 @@ Here is the command that plotly.py ran to request the version:
     status._props['state'] = 'validated'
 
 
-def reset_orca_status():
+def reset_status():
     """
     Shutdown the running orca server, if any, and reset the orca status
     to unvalidated.
@@ -943,7 +943,7 @@ def reset_orca_status():
     -------
     None
     """
-    shutdown_orca_server()
+    shutdown_server()
     status._props['executable'] = None
     status._props['version'] = None
     status._props['state'] = 'unvalidated'
@@ -962,10 +962,10 @@ __orca_state = {'proc': None,
 # is run when the Python process is terminated
 @atexit.register
 def cleanup():
-    shutdown_orca_server()
+    shutdown_server()
 
 
-def shutdown_orca_server():
+def shutdown_server():
     """
     Shutdown the running orca server process, if any
 
@@ -1013,7 +1013,7 @@ def shutdown_orca_server():
 
 
 # Launch or get server
-def ensure_orca_server():
+def ensure_server():
     """
     Start an orca server if none is running. If a server is already running,
     then reset the timeout countdown
@@ -1037,7 +1037,7 @@ Install using conda:
 
     # Validate orca executable
     if status.state == 'unvalidated':
-        validate_orca_executable()
+        validate_executable()
 
     # Acquire lock to make sure that we keep the properties of __orca_state
     # consistent across threads
@@ -1087,7 +1087,7 @@ Install using conda:
 
         # Create new shutdown timer if a timeout was specified
         if config.timeout is not None:
-            t = threading.Timer(config.timeout, shutdown_orca_server)
+            t = threading.Timer(config.timeout, shutdown_server)
             # Make t a daemon thread so that exit won't wait for timer to
             # complete
             t.daemon = True
@@ -1110,7 +1110,7 @@ def _request_image_with_retrying(**kwargs):
     return r.content
 
 
-def to_image(fig, format=None, width=None, height=None, scale=None, ):
+def to_image(fig, format=None, width=None, height=None, scale=None):
     """
     Convert a figure to a static image bytes string
 
@@ -1159,7 +1159,7 @@ def to_image(fig, format=None, width=None, height=None, scale=None, ):
     """
     # Make sure orca sever is running
     # -------------------------------
-    ensure_orca_server()
+    ensure_server()
 
     # Handle defaults
     # ---------------

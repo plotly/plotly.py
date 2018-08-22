@@ -14,7 +14,7 @@ import pytest
 @pytest.fixture()
 def setup():
     # Reset orca state
-    pio.orca.reset_orca_status()
+    pio.orca.reset_status()
     pio.orca.config.restore_defaults()
 
 
@@ -37,14 +37,14 @@ def ping_pongs(server_url):
 
 def test_validate_orca():
     assert pio.orca.status.state == 'unvalidated'
-    pio.orca.validate_orca_executable()
+    pio.orca.validate_executable()
     assert pio.orca.status.state == 'validated'
 
 
 def test_orca_not_found():
     pio.orca.config.executable = 'bogus'
     with pytest.raises(ValueError) as err:
-        pio.orca.validate_orca_executable()
+        pio.orca.validate_executable()
     assert pio.orca.status.state == 'unvalidated'
     assert 'could not be found' in str(err.value)
 
@@ -52,7 +52,7 @@ def test_orca_not_found():
 def test_invalid_executable_found():
     pio.orca.config.executable = 'python'
     with pytest.raises(ValueError) as err:
-        pio.orca.validate_orca_executable()
+        pio.orca.validate_executable()
 
     assert pio.orca.status.state == 'unvalidated'
     assert 'executable that was found at' in str(err.value)
@@ -67,7 +67,7 @@ def test_orca_executable_path():
         expected = subprocess.check_output(['which', 'orca']
                                            ).decode('utf-8').strip()
 
-    pio.orca.validate_orca_executable()
+    pio.orca.validate_executable()
     assert pio.orca.status.executable == expected
 
 
@@ -77,7 +77,7 @@ def test_orca_version_number():
     expected_min = LooseVersion('1.1.0')
     expected_max = LooseVersion('2.0.0')
 
-    pio.orca.validate_orca_executable()
+    pio.orca.validate_executable()
     version = LooseVersion(pio.orca.status.version)
 
     assert expected_min <= version
@@ -90,7 +90,7 @@ def test_ensure_orca_ping_and_proc():
     assert pio.orca.status.port is None
     assert pio.orca.status.pid is None
 
-    pio.orca.ensure_orca_server()
+    pio.orca.ensure_server()
 
     assert pio.orca.status.port is not None
     assert pio.orca.status.pid is not None
@@ -110,7 +110,7 @@ def test_ensure_orca_ping_and_proc():
     assert ping_pongs(server_url)
 
     # shut down server
-    pio.orca.shutdown_orca_server()
+    pio.orca.shutdown_server()
 
     # Check that server process number no longer exists
     assert not psutil.pid_exists(server_pid)
@@ -124,7 +124,7 @@ def test_server_timeout_shutdown():
     # Configure server to shutdown after 10 seconds without
     # calls to ensure_orca_server
     pio.orca.config.timeout = 10
-    pio.orca.ensure_orca_server()
+    pio.orca.ensure_server()
     server_port = pio.orca.status.port
     server_pid = pio.orca.status.pid
 
@@ -139,7 +139,7 @@ def test_server_timeout_shutdown():
         time.sleep(8)
         assert ping_pongs(server_url)
         assert psutil.pid_exists(server_pid)
-        pio.orca.ensure_orca_server()
+        pio.orca.ensure_server()
 
     # Sleep just over 10 seconds, server should then auto shutdown
     time.sleep(11)

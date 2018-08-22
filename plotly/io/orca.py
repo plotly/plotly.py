@@ -1,8 +1,8 @@
 from ._orca import (
-    ensure_orca_server,
-    shutdown_orca_server,
-    validate_orca_executable,
-    reset_orca_status,
+    ensure_server,
+    shutdown_server,
+    validate_executable,
+    reset_status,
     valid_formats,
     config,
     status)
