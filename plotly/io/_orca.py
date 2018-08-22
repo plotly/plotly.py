@@ -12,6 +12,7 @@ import retrying
 import atexit
 
 import plotly
+from plotly.basedatatypes import BaseFigure
 from plotly.files import PLOTLY_DIR
 from six import string_types
 from plotly.optional_imports import get_module
@@ -1107,11 +1108,16 @@ def _request_image_with_retrying(**kwargs):
 
     request_params = {k: v for k, v, in kwargs.items() if v is not None}
     json_str = json.dumps(request_params, cls=plotly.utils.PlotlyJSONEncoder)
-    r = requests.post(server_url + '/', data=json_str)
-    return r.content
+    response = requests.post(server_url + '/', data=json_str)
+    return response
 
 
-def to_image(fig, format=None, width=None, height=None, scale=None):
+def to_image(fig,
+             format=None,
+             width=None,
+             height=None,
+             scale=None,
+             validate=True):
     """
     Convert a figure to a static image bytes string
 
@@ -1153,6 +1159,10 @@ def to_image(fig, format=None, width=None, height=None, scale=None):
 
         If not specified, will default to `plotly.io.config.default_scale`
 
+    validate: bool
+        True if the figure should be validated before being converted to
+        an image, False otherwise.
+
     Returns
     -------
     bytes
@@ -1179,15 +1189,84 @@ def to_image(fig, format=None, width=None, height=None, scale=None):
     if height is None:
         height = config.default_height
 
+    # Validate figure
+    # ---------------
+    if isinstance(fig, BaseFigure):
+        fig_dict = fig.to_plotly_json()
+    elif isinstance(fig, dict):
+        if validate:
+            # This will raise an exception if fig is not a valid plotly figure
+            plotly.graph_objs.Figure(fig)
+        fig_dict = fig
+    else:
+        raise ValueError("""
+The fig parameter must be a dict or Figure.
+    Received value of type {typ}: {v}""".format(typ=type(fig), v=fig))
+
     # Request image from server
     # -------------------------
-    img_data = _request_image_with_retrying(
-        figure=fig, format=format, scale=scale, width=width, height=height)
+    response = _request_image_with_retrying(
+        figure=fig_dict,
+        format=format,
+        scale=scale,
+        width=width,
+        height=height)
 
-    return img_data
+    # Check response
+    # --------------
+    if response.status_code == 200:
+        # All good
+        return response.content
+    else:
+        # ### Something went wrong ###
+        err_message = """
+The image request was rejected by the orca conversion utility
+with the following error:
+   {status}: {msg}
+""".format(status=response.status_code,
+           msg=response.content.decode('utf-8'))
+
+        # ### Try to be helpful ###
+        # Status codes from /src/component/plotly-graph/constants.js in the
+        # orca code base.
+        # statusMsg: {
+        #     400: 'invalid or malformed request syntax',
+        #     525: 'plotly.js error',
+        #     526: 'plotly.js version 1.11.0 or up required',
+        #     530: 'image conversion error'
+        # }
+        if (response.status_code == 400 and
+                isinstance(fig, dict) and
+                not validate):
+            err_message += """
+Try setting the `validate` argument to True to check for errors in the
+figure specification"""
+        elif (response.status_code == 530 and format == 'eps'):
+            err_message += """
+Exporting to EPS format requires the poppler library.  You can install
+poppler on MacOS or Linux with:
+ 
+    $ conda install poppler
+    
+Or, you can install it on MacOS using homebrew with:
+
+    $ brew install poppler
+
+Or, you can install it on Linux using your distribution's package manager to
+install the 'poppler-utils' package.
+
+Unfortunately, we don't yet know of an easy way to install poppler on Windows.
+"""
+        raise ValueError(err_message)
 
 
-def write_image(fig, file, format=None, scale=None, width=None, height=None):
+def write_image(fig,
+                file,
+                format=None,
+                scale=None,
+                width=None,
+                height=None,
+                validate=True):
     """
     Convert a figure to a static image and write it to a file or writeable
     object
@@ -1234,6 +1313,10 @@ def write_image(fig, file, format=None, scale=None, width=None, height=None):
 
         If not specified, will default to `plotly.io.config.default_scale`
 
+    validate: bool
+        True if the figure should be validated before being converted to
+        an image, False otherwise.
+
     Returns
     -------
     None"""
@@ -1265,7 +1348,8 @@ For example:
                         format=format,
                         scale=scale,
                         width=width,
-                        height=height)
+                        height=height,
+                        validate=validate)
 
     # Open file
     # ---------
