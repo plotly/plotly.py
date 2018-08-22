@@ -1,7 +1,30 @@
 # plotly.py
 
+## Quickstart
+
+`pip install plotly`
+
+Inside [Jupyter notebook](https://jupyter.org/install):
+```python
+import plotly.graph_objs as go
+fig = go.FigureWidget()
+# Display an empty figure
+fig
+
+# Add a scatter chart
+fig.add_scatter(y=[2, 1, 4, 3])
+# Add a bar chart
+fig.add_bar(y=[1, 4, 3, 2])
+# Add a title
+fig.layout.title = 'Hello FigureWidget'
+```
+
+See the [Python documentation](https://plot.ly/python/) for more examples.
+
+Read about what's new in [plotly.py v3](https://medium.com/@plotlygraphs/introducing-plotly-py-3-0-0-7bb1333f69c6)
+
 ## Overview
-[plotly.py](https://plot.ly/d3-js-for-python-and-pandas-charts/) is an interactive, browser-based graphing library for Python :sparkles:
+[plotly.py](https://plot.ly/d3-js-for-python-and-pandas-charts/) is an interactive, open-source, and browser-based graphing library for Python :sparkles:
 
 Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is a high-level, declarative charting library. plotly.js ships with over 30 chart types, including scientific charts, 3D graphs, statistical charts, SVG maps, financial charts, and more.
 
