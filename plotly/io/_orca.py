@@ -344,7 +344,7 @@ The executable property must be a string, but received value of type {typ}.
         self._props['executable'] = val
 
         # Server must restart before setting is active
-        shutdown_server()
+        reset_status()
 
     @property
     def timeout(self):
@@ -650,8 +650,8 @@ Orca configuration file at {path} is not valid JSON""".format(
         return """\
 orca configuration
 ------------------
-    port: {port}
     executable: {executable}
+    port: {port}
     timeout: {timeout}
     default_width: {default_width}
     default_height: {default_height}
@@ -774,11 +774,11 @@ class OrcaStatus(object):
         return """\
 orca status
 -----------
+    state: {state}
     executable: {executable}
     version: {version}
     port: {port}
     pid: {pid}
-    state: {state}
     command: {command}
     
 """.format(executable=self.executable,
@@ -835,9 +835,10 @@ If you haven't installed orca yet, you can do so using conda as follows:
 
     $ conda install -c plotly plotly-orca
 
-After installation is complete, no further configuration should be needed. 
-For other approaches to installing orca, see the orca project README at
+Alternatively, see other installation methods in the orca project README at
 https://github.com/plotly/orca.
+
+After installation is complete, no further configuration should be needed. 
 
 If you have installed orca, then for some reason plotly.py was unable to
 locate it. In this case, set the `plotly.io.orca.config.executable`
