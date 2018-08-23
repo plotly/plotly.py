@@ -639,9 +639,7 @@ Orca configuration file at {path} is not valid JSON""".format(
         -------
         None
         """
-        ## Make smarter
-        ## Only save set-able properties with non-default values
-        with open(self.config_file, 'w', encoding='utf-8') as f:
+        with open(self.config_file, 'w') as f:
             json.dump(self._props, f, indent=4)
 
     def __repr__(self):
