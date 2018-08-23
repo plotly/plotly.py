@@ -320,7 +320,7 @@ jobs:
             pytest plotly/tests/test_orca
 
       - store_artifacts:
-            path: plotly/tests/test_orca/images/failed
+            path: plotly/tests/test_orca/images/linux/failed
 
 workflows:
   version: 2
