@@ -1097,7 +1097,7 @@ Install using conda:
             __orca_state['shutdown_timer'] = t
 
 
-@retrying.retry(wait_random_min=5, wait_random_max=10, stop_max_delay=10000)
+@retrying.retry(wait_random_min=5, wait_random_max=10, stop_max_delay=8000)
 def _request_image_with_retrying(**kwargs):
     """
     Helper method to perform an image request to a running orca server process
@@ -1205,12 +1205,43 @@ The fig parameter must be a dict or Figure.
 
     # Request image from server
     # -------------------------
-    response = _request_image_with_retrying(
-        figure=fig_dict,
-        format=format,
-        scale=scale,
-        width=width,
-        height=height)
+    try:
+        response = _request_image_with_retrying(
+            figure=fig_dict,
+            format=format,
+            scale=scale,
+            width=width,
+            height=height)
+    except OSError as err:
+        # Get current status string
+        status_str = repr(status)
+
+        # Check if the orce server process exists
+        pid_exists = psutil.pid_exists(status.pid)
+
+        # Raise error message based on whether the server process existed
+        if pid_exists:
+            raise ValueError("""
+For some reason plotly.py was unable to communicate with the
+local orca server process, even though the server process seems to be running.
+
+Please review the process and connection information below:
+
+{info}
+""".format(info=status_str))
+        else:
+            # Reset the status so that if the user tries again, we'll try to
+            # start the server again
+            reset_status()
+            raise ValueError("""
+For some reason the orca server process is no longer running.
+
+Please review the process and connection information below:
+
+{info}
+plotly.py will attempt to start the local server process again the next time
+an image export operation is performed. 
+""".format(info=status_str))
 
     # Check response
     # --------------
