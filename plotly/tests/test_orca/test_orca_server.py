@@ -98,7 +98,7 @@ def test_ensure_orca_ping_and_proc():
     server_pid = pio.orca.status.pid
 
     # Make sure server has time to start up
-    time.sleep(5)
+    time.sleep(10)
 
     # Check that server process number is valid
     assert psutil.pid_exists(server_pid)
