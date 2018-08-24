@@ -1027,7 +1027,6 @@ var FigureView = widgets.DOMWidgetView.extend({
 
         this.model.set("_js2py_restyle", restyleMsg);
         this.touch();
-        this.model.set("_js2py_restyle", null);
     },
 
     /**
@@ -1058,7 +1057,6 @@ var FigureView = widgets.DOMWidgetView.extend({
 
         this.model.set("_js2py_relayout", relayoutMsg);
         this.touch();
-        this.model.set("_js2py_relayout", null);
     },
 
     /**
@@ -1092,7 +1090,6 @@ var FigureView = widgets.DOMWidgetView.extend({
 
         this.model.set("_js2py_update", updateMsg);
         this.touch();
-        this.model.set("_js2py_update", null);
     },
 
     /**
@@ -1157,7 +1154,6 @@ var FigureView = widgets.DOMWidgetView.extend({
 
             this.model.set("_js2py_pointsCallback", pointsMsg);
             this.touch();
-            this.model.set("_js2py_pointsCallback", null);
         }
     },
 
@@ -1390,7 +1386,6 @@ var FigureView = widgets.DOMWidgetView.extend({
 
         this.model.set("_js2py_layoutDelta", layoutDeltaMsg);
         this.touch();
-        this.model.set("_js2py_layoutDelta", null);
     },
 
     /**
@@ -1422,7 +1417,6 @@ var FigureView = widgets.DOMWidgetView.extend({
         console.log(["traceDeltasMsg", traceDeltasMsg]);
         this.model.set("_js2py_traceDeltas", traceDeltasMsg);
         this.touch();
-        this.model.set("_js2py_traceDeltas", null);
     }
 });
 

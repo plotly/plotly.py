@@ -451,8 +451,8 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         # Receive message
         # ---------------
         msg_data = change['new']
-        self._js2py_traceDeltas = None
         if not msg_data:
+            self._js2py_traceDeltas = None
             return
 
         trace_deltas = msg_data['trace_deltas']
@@ -504,6 +504,8 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
                 while self._waiting_edit_callbacks:
                     self._waiting_edit_callbacks.pop()()
 
+        self._js2py_traceDeltas = None
+
     @observe('_js2py_layoutDelta')
     def _handler_js2py_layoutDelta(self, change):
         """
@@ -513,8 +515,8 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         # Receive message
         # ---------------
         msg_data = change['new']
-        self._js2py_layoutDelta = None
         if not msg_data:
+            self._js2py_layoutDelta = None
             return
 
         layout_delta = msg_data['layout_delta']
@@ -566,6 +568,8 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
                 while self._waiting_edit_callbacks:
                     self._waiting_edit_callbacks.pop()()
 
+        self._js2py_layoutDelta = None
+
     @observe('_js2py_restyle')
     def _handler_js2py_restyle(self, change):
         """
@@ -575,8 +579,9 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         # Receive message
         # ---------------
         restyle_msg = change['new']
-        self._js2py_restyle = None
+
         if not restyle_msg:
+            self._js2py_restyle = None
             return
 
         style_data = restyle_msg['style_data']
@@ -589,6 +594,8 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
                             trace_indexes=style_traces,
                             source_view_id=source_view_id)
 
+        self._js2py_restyle = None
+
     @observe('_js2py_update')
     def _handler_js2py_update(self, change):
         """
@@ -598,8 +605,9 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         # Receive message
         # ---------------
         update_msg = change['new']
-        self._js2py_update = None
+
         if not update_msg:
+            self._js2py_update = None
             return
 
         style = update_msg['style_data']
@@ -613,6 +621,8 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
                            trace_indexes=trace_indexes,
                            source_view_id=source_view_id)
 
+        self._js2py_update = None
+
     @observe('_js2py_relayout')
     def _handler_js2py_relayout(self, change):
         """
@@ -622,8 +632,9 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         # Receive message
         # ---------------
         relayout_msg = change['new']
-        self._js2py_relayout = None
+
         if not relayout_msg:
+            self._js2py_relayout = None
             return
 
         relayout_data = relayout_msg['relayout_data']
@@ -640,6 +651,8 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         self.plotly_relayout(relayout_data=relayout_data,
                              source_view_id=source_view_id)
 
+        self._js2py_relayout = None
+
     @observe('_js2py_pointsCallback')
     def _handler_js2py_pointsCallback(self, change):
         """
@@ -649,8 +662,9 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         # Receive message
         # ---------------
         callback_data = change['new']
-        self._js2py_pointsCallback = None
+
         if not callback_data:
+            self._js2py_pointsCallback = None
             return
 
         # Get event type
@@ -717,6 +731,8 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
                 trace._dispatch_on_unhover(points, state)
             elif event_type == 'plotly_selected':
                 trace._dispatch_on_selection(points, selector)
+
+        self._js2py_pointsCallback = None
 
     # Callbacks
     # ---------
