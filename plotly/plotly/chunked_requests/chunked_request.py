@@ -88,6 +88,8 @@ class Stream:
 
         proxy_server = None
         proxy_port = None
+        proxy_username = None
+        proxy_password = None
         proxy_auth = None
         ssl_enabled = self._ssl_enabled
 
@@ -102,10 +104,12 @@ class Stream:
             p = urlparse(proxy)
             proxy_server = p.hostname
             proxy_port = p.port
+            proxy_username = p.username
+            proxy_password = p.password
 
-        if p.username and p.password:
-            username = unquote(p.username)
-            password = unquote(p.password)
+        if proxy_username and proxy_password:
+            username = unquote(proxy_username)
+            password = unquote(proxy_password)
             proxy_auth = utils.basic_auth(username, password)
 
         return proxy_server, proxy_port, proxy_auth
