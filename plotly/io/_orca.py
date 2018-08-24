@@ -312,7 +312,7 @@ The port value must be an integer, but received value of type {typ}.
            displayed by running the following command:
 
            >>> import os
-           >>> print(os.environ.get('PATH').replace(':', os.linesep))
+           >>> print(os.environ.get('PATH').replace(os.pathsep, os.linesep))
 
          - If a full path (e.g. '/path/to/orca'), then
            is should be the full path to an orca executable. In this case
@@ -861,7 +861,7 @@ https://community.plot.ly/c/api/python"""
 
     if executable is None:
         path = os.environ.get("PATH", os.defpath)
-        formatted_path = path.replace(':', '\n    ')
+        formatted_path = path.replace(os.pathsep, '\n    ')
 
         raise ValueError("""
 The orca executable is required in order to export figures as static images,
