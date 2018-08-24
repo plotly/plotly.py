@@ -859,11 +859,6 @@ https://community.plot.ly/c/api/python"""
     # Search for executable name or path in config.executable
     executable = which(config.executable)
 
-    # If searching for default ('orca') and none was found,
-    # Try searching for orca.js in case orca was installed using npm
-    if executable is None and config.executable == 'orca':
-        executable = which('orca.js')
-
     if executable is None:
         path = os.environ.get("PATH", os.defpath)
         formatted_path = path.replace(':', '\n    ')
@@ -1057,7 +1052,7 @@ Install using conda:
                 __orca_state['port'] = config.port
 
             # Build orca command list
-            cmd_list = [config.executable, 'serve',
+            cmd_list = [status.executable, 'serve',
                         '-p', str(__orca_state['port']),
                         '--graph-only']
 
