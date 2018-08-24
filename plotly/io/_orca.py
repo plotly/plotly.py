@@ -899,7 +899,8 @@ valid plotly orca executable.
     if not help_result:
         raise ValueError(invalid_executable_msg)
 
-    if 'plotly' not in help_result.decode('utf-8').lower():
+    if ("Plotly's image-exporting utilities" not in
+            help_result.decode('utf-8')):
         raise ValueError(invalid_executable_msg)
 
     # Get orca version
