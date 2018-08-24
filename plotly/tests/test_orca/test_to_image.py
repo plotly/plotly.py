@@ -160,7 +160,9 @@ def assert_image_bytes(img_bytes, file_name, _raise=True):
         failed_path = failed_dir + file_name
         print('Saving failed image to "{failed_path}"'
               .format(failed_path=failed_path))
-        os.makedirs(failed_dir, exist_ok=True)
+
+        if not os.path.exists(failed_dir):
+            os.mkdir(failed_dir)
 
         with open(failed_path, 'wb') as f:
             f.write(img_bytes)
