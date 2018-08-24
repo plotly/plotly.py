@@ -912,7 +912,7 @@ An error occurred while trying to get the version of the orca executable.
 Here is the command that plotly.py ran to request the version:
 
     $ {executable} --version
-""")
+""".format(executable=executable))
 
     if not orca_version:
         raise ValueError("""
@@ -921,7 +921,7 @@ No version was reported by the orca executable.
 Here is the command that plotly.py ran to request the version:
 
     $ {executable} --version  
-""")
+""".format(executable=executable))
     else:
         orca_version = orca_version.decode()
 
