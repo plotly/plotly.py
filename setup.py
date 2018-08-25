@@ -265,7 +265,7 @@ setup(name='plotly',
                 'plotly/matplotlylib/mplexporter',
                 'plotly/matplotlylib/mplexporter/renderers',
                 '_plotly_utils'] + graph_objs_packages + validator_packages,
-      package_data={'plotly': ['package_data/*', 'package_data/topojson/*'],
+      package_data={'plotly': ['package_data/*'],
                     'plotlywidget': ['static/*']},
       data_files=[
           ('share/jupyter/nbextensions/plotlywidget', [
