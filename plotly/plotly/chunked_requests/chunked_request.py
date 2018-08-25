@@ -4,7 +4,9 @@ import os
 import ssl
 
 from six.moves import http_client
-from six.moves.urllib.parse import urlparse
+from six.moves.urllib.parse import urlparse, unquote
+
+from plotly.api import utils
 
 
 class Stream:
@@ -86,6 +88,9 @@ class Stream:
 
         proxy_server = None
         proxy_port = None
+        proxy_username = None
+        proxy_password = None
+        proxy_auth = None
         ssl_enabled = self._ssl_enabled
 
         if ssl_enabled:
@@ -99,8 +104,15 @@ class Stream:
             p = urlparse(proxy)
             proxy_server = p.hostname
             proxy_port = p.port
+            proxy_username = p.username
+            proxy_password = p.password
 
-        return proxy_server, proxy_port
+        if proxy_username and proxy_password:
+            username = unquote(proxy_username)
+            password = unquote(proxy_password)
+            proxy_auth = utils.basic_auth(username, password)
+
+        return proxy_server, proxy_port, proxy_auth
 
     def _get_ssl_context(self):
         """
@@ -123,7 +135,7 @@ class Stream:
         port = self._port
         headers = self._headers
         ssl_enabled = self._ssl_enabled
-        proxy_server, proxy_port = self._get_proxy_config()
+        proxy_server, proxy_port, proxy_auth = self._get_proxy_config()
 
         if (proxy_server and proxy_port):
             if ssl_enabled:
@@ -135,7 +147,12 @@ class Stream:
                 self._conn = http_client.HTTPConnection(
                     proxy_server, proxy_port
                 )
-            self._conn.set_tunnel(server, port)
+
+            tunnel_headers = None
+            if proxy_auth:
+                tunnel_headers = {'Proxy-Authorization': proxy_auth}
+
+            self._conn.set_tunnel(server, port, headers=tunnel_headers)
         else:
             if ssl_enabled:
                 context = self._get_ssl_context()
