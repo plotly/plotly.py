@@ -69,13 +69,6 @@ class ScatterglValidator(_plotly_utils.basevalidators.CompoundValidator):
             hoverlabel
                 plotly.graph_objs.scattergl.Hoverlabel instance
                 or dict with compatible properties
-            hoveron
-                Do the hover effects highlight individual
-                points (markers or line points) or do they
-                highlight filled regions? If the fill is
-                *toself* or *tonext* and there are no markers
-                or text, then the default is *fills*, otherwise
-                it is *points*.
             hovertext
                 Sets hover text elements associated with each
                 (x,y) pair. If a single string, the same string

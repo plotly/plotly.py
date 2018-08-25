@@ -91,6 +91,48 @@ class Scatterpolar(BaseTraceType):
     def customdatasrc(self, val):
         self['customdatasrc'] = val
 
+    # dr
+    # --
+    @property
+    def dr(self):
+        """
+        Sets the r coordinate step.
+    
+        The 'dr' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self['dr']
+
+    @dr.setter
+    def dr(self, val):
+        self['dr'] = val
+
+    # dtheta
+    # ------
+    @property
+    def dtheta(self):
+        """
+        Sets the theta coordinate step. By default, the `dtheta` step
+        equals the subplot's period divided by the length of the `r`
+        coordinates.
+    
+        The 'dtheta' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self['dtheta']
+
+    @dtheta.setter
+    def dtheta(self, val):
+        self['dtheta'] = val
+
     # fill
     # ----
     @property
@@ -680,6 +722,27 @@ class Scatterpolar(BaseTraceType):
     def r(self, val):
         self['r'] = val
 
+    # r0
+    # --
+    @property
+    def r0(self):
+        """
+        Alternate to `r`. Builds a linear space of r coordinates. Use
+        with `dr` where `r0` is the starting coordinate and `dr` the
+        step.
+    
+        The 'r0' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['r0']
+
+    @r0.setter
+    def r0(self, val):
+        self['r0'] = val
+
     # rsrc
     # ----
     @property
@@ -1000,6 +1063,27 @@ class Scatterpolar(BaseTraceType):
     def theta(self, val):
         self['theta'] = val
 
+    # theta0
+    # ------
+    @property
+    def theta0(self):
+        """
+        Alternate to `theta`. Builds a linear space of theta
+        coordinates. Use with `dtheta` where `theta0` is the starting
+        coordinate and `dtheta` the step.
+    
+        The 'theta0' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['theta0']
+
+    @theta0.setter
+    def theta0(self, val):
+        self['theta0'] = val
+
     # thetasrc
     # --------
     @property
@@ -1147,6 +1231,12 @@ class Scatterpolar(BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
+        dr
+            Sets the r coordinate step.
+        dtheta
+            Sets the theta coordinate step. By default, the
+            `dtheta` step equals the subplot's period divided by
+            the length of the `r` coordinates.
         fill
             Sets the area to fill with a solid color. Use with
             `fillcolor` if not *none*. scatterpolar has a subset of
@@ -1217,6 +1307,10 @@ class Scatterpolar(BaseTraceType):
             Sets the opacity of the trace.
         r
             Sets the radial coordinates
+        r0
+            Alternate to `r`. Builds a linear space of r
+            coordinates. Use with `dr` where `r0` is the starting
+            coordinate and `dr` the step.
         rsrc
             Sets the source reference on plot.ly for  r .
         selected
@@ -1260,6 +1354,10 @@ class Scatterpolar(BaseTraceType):
             Sets the source reference on plot.ly for  text .
         theta
             Sets the angular coordinates
+        theta0
+            Alternate to `theta`. Builds a linear space of theta
+            coordinates. Use with `dtheta` where `theta0` is the
+            starting coordinate and `dtheta` the step.
         thetasrc
             Sets the source reference on plot.ly for  theta .
         thetaunit
@@ -1284,6 +1382,8 @@ class Scatterpolar(BaseTraceType):
         connectgaps=None,
         customdata=None,
         customdatasrc=None,
+        dr=None,
+        dtheta=None,
         fill=None,
         fillcolor=None,
         hoverinfo=None,
@@ -1301,6 +1401,7 @@ class Scatterpolar(BaseTraceType):
         name=None,
         opacity=None,
         r=None,
+        r0=None,
         rsrc=None,
         selected=None,
         selectedpoints=None,
@@ -1313,6 +1414,7 @@ class Scatterpolar(BaseTraceType):
         textpositionsrc=None,
         textsrc=None,
         theta=None,
+        theta0=None,
         thetasrc=None,
         thetaunit=None,
         uid=None,
@@ -1352,6 +1454,12 @@ class Scatterpolar(BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
+        dr
+            Sets the r coordinate step.
+        dtheta
+            Sets the theta coordinate step. By default, the
+            `dtheta` step equals the subplot's period divided by
+            the length of the `r` coordinates.
         fill
             Sets the area to fill with a solid color. Use with
             `fillcolor` if not *none*. scatterpolar has a subset of
@@ -1422,6 +1530,10 @@ class Scatterpolar(BaseTraceType):
             Sets the opacity of the trace.
         r
             Sets the radial coordinates
+        r0
+            Alternate to `r`. Builds a linear space of r
+            coordinates. Use with `dr` where `r0` is the starting
+            coordinate and `dr` the step.
         rsrc
             Sets the source reference on plot.ly for  r .
         selected
@@ -1465,6 +1577,10 @@ class Scatterpolar(BaseTraceType):
             Sets the source reference on plot.ly for  text .
         theta
             Sets the angular coordinates
+        theta0
+            Alternate to `theta`. Builds a linear space of theta
+            coordinates. Use with `dtheta` where `theta0` is the
+            starting coordinate and `dtheta` the step.
         thetasrc
             Sets the source reference on plot.ly for  theta .
         thetaunit
@@ -1514,6 +1630,8 @@ an instance of plotly.graph_objs.Scatterpolar"""
         self._validators['customdata'] = v_scatterpolar.CustomdataValidator()
         self._validators['customdatasrc'
                         ] = v_scatterpolar.CustomdatasrcValidator()
+        self._validators['dr'] = v_scatterpolar.DrValidator()
+        self._validators['dtheta'] = v_scatterpolar.DthetaValidator()
         self._validators['fill'] = v_scatterpolar.FillValidator()
         self._validators['fillcolor'] = v_scatterpolar.FillcolorValidator()
         self._validators['hoverinfo'] = v_scatterpolar.HoverinfoValidator()
@@ -1533,6 +1651,7 @@ an instance of plotly.graph_objs.Scatterpolar"""
         self._validators['name'] = v_scatterpolar.NameValidator()
         self._validators['opacity'] = v_scatterpolar.OpacityValidator()
         self._validators['r'] = v_scatterpolar.RValidator()
+        self._validators['r0'] = v_scatterpolar.R0Validator()
         self._validators['rsrc'] = v_scatterpolar.RsrcValidator()
         self._validators['selected'] = v_scatterpolar.SelectedValidator()
         self._validators['selectedpoints'
@@ -1548,6 +1667,7 @@ an instance of plotly.graph_objs.Scatterpolar"""
                         ] = v_scatterpolar.TextpositionsrcValidator()
         self._validators['textsrc'] = v_scatterpolar.TextsrcValidator()
         self._validators['theta'] = v_scatterpolar.ThetaValidator()
+        self._validators['theta0'] = v_scatterpolar.Theta0Validator()
         self._validators['thetasrc'] = v_scatterpolar.ThetasrcValidator()
         self._validators['thetaunit'] = v_scatterpolar.ThetaunitValidator()
         self._validators['uid'] = v_scatterpolar.UidValidator()
@@ -1564,6 +1684,10 @@ an instance of plotly.graph_objs.Scatterpolar"""
         self.customdata = customdata if customdata is not None else _v
         _v = arg.pop('customdatasrc', None)
         self.customdatasrc = customdatasrc if customdatasrc is not None else _v
+        _v = arg.pop('dr', None)
+        self.dr = dr if dr is not None else _v
+        _v = arg.pop('dtheta', None)
+        self.dtheta = dtheta if dtheta is not None else _v
         _v = arg.pop('fill', None)
         self.fill = fill if fill is not None else _v
         _v = arg.pop('fillcolor', None)
@@ -1598,6 +1722,8 @@ an instance of plotly.graph_objs.Scatterpolar"""
         self.opacity = opacity if opacity is not None else _v
         _v = arg.pop('r', None)
         self.r = r if r is not None else _v
+        _v = arg.pop('r0', None)
+        self.r0 = r0 if r0 is not None else _v
         _v = arg.pop('rsrc', None)
         self.rsrc = rsrc if rsrc is not None else _v
         _v = arg.pop('selected', None)
@@ -1622,6 +1748,8 @@ an instance of plotly.graph_objs.Scatterpolar"""
         self.textsrc = textsrc if textsrc is not None else _v
         _v = arg.pop('theta', None)
         self.theta = theta if theta is not None else _v
+        _v = arg.pop('theta0', None)
+        self.theta0 = theta0 if theta0 is not None else _v
         _v = arg.pop('thetasrc', None)
         self.thetasrc = thetasrc if thetasrc is not None else _v
         _v = arg.pop('thetaunit', None)

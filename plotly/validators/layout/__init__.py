@@ -19,6 +19,7 @@ from ._scene import SceneValidator
 from ._radialaxis import RadialAxisValidator
 from ._polar import PolarValidator
 from ._plot_bgcolor import PlotBgcolorValidator
+from ._piecolorway import PiecolorwayValidator
 from ._paper_bgcolor import PaperBgcolorValidator
 from ._orientation import OrientationValidator
 from ._margin import MarginValidator
@@ -35,6 +36,7 @@ from ._height import HeightValidator
 from ._grid import GridValidator
 from ._geo import GeoValidator
 from ._font import FontValidator
+from ._extendpiecolors import ExtendpiecolorsValidator
 from ._dragmode import DragmodeValidator
 from ._direction import DirectionValidator
 from ._datarevision import DatarevisionValidator

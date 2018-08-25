@@ -125,13 +125,11 @@ class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 *hovertext* is not set, these elements will be
                 seen in the hover labels.
             textfont
-                Sets the text font.
+                plotly.graph_objs.scatter3d.Textfont instance
+                or dict with compatible properties
             textposition
                 Sets the positions of the `text` elements with
                 respects to the (x,y) coordinates.
-            textpositionsrc
-                Sets the source reference on plot.ly for
-                textposition .
             textsrc
                 Sets the source reference on plot.ly for  text
                 .

@@ -592,10 +592,6 @@ class Scatter3d(BaseTraceType):
                     numerical array. If true, `line.cmin` will
                     correspond to the last color in the array and
                     `line.cmax` will correspond to the first color.
-                showscale
-                    Determines whether or not a colorbar is
-                    displayed for this trace. Has an effect only if
-                    in `line.color`is set to a numerical array.
                 width
                     Sets the line width (in px).
 
@@ -1054,8 +1050,6 @@ class Scatter3d(BaseTraceType):
     @property
     def textfont(self):
         """
-        Sets the text font.
-    
         The 'textfont' property is an instance of Textfont
         that may be specified as:
           - An instance of plotly.graph_objs.scatter3d.Textfont
@@ -1085,9 +1079,6 @@ class Scatter3d(BaseTraceType):
                     Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
                     Standard TT*, *Open Sans*, *Overpass*, *PT Sans
                     Narrow*, *Raleway*, *Times New Roman*.
-                familysrc
-                    Sets the source reference on plot.ly for
-                    family .
                 size
     
                 sizesrc
@@ -1117,37 +1108,16 @@ class Scatter3d(BaseTraceType):
                 ['top left', 'top center', 'top right', 'middle left',
                 'middle center', 'middle right', 'bottom left', 'bottom
                 center', 'bottom right']
-          - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any
         """
         return self['textposition']
 
     @textposition.setter
     def textposition(self, val):
         self['textposition'] = val
-
-    # textpositionsrc
-    # ---------------
-    @property
-    def textpositionsrc(self):
-        """
-        Sets the source reference on plot.ly for  textposition .
-    
-        The 'textpositionsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self['textpositionsrc']
-
-    @textpositionsrc.setter
-    def textpositionsrc(self, val):
-        self['textpositionsrc'] = val
 
     # textsrc
     # -------
@@ -1523,13 +1493,11 @@ class Scatter3d(BaseTraceType):
             flag and *hovertext* is not set, these elements will be
             seen in the hover labels.
         textfont
-            Sets the text font.
+            plotly.graph_objs.scatter3d.Textfont instance or dict
+            with compatible properties
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.
-        textpositionsrc
-            Sets the source reference on plot.ly for  textposition
-            .
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
@@ -1591,7 +1559,6 @@ class Scatter3d(BaseTraceType):
         text=None,
         textfont=None,
         textposition=None,
-        textpositionsrc=None,
         textsrc=None,
         uid=None,
         visible=None,
@@ -1724,13 +1691,11 @@ class Scatter3d(BaseTraceType):
             flag and *hovertext* is not set, these elements will be
             seen in the hover labels.
         textfont
-            Sets the text font.
+            plotly.graph_objs.scatter3d.Textfont instance or dict
+            with compatible properties
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.
-        textpositionsrc
-            Sets the source reference on plot.ly for  textposition
-            .
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
@@ -1818,8 +1783,6 @@ an instance of plotly.graph_objs.Scatter3d"""
         self._validators['text'] = v_scatter3d.TextValidator()
         self._validators['textfont'] = v_scatter3d.TextfontValidator()
         self._validators['textposition'] = v_scatter3d.TextpositionValidator()
-        self._validators['textpositionsrc'
-                        ] = v_scatter3d.TextpositionsrcValidator()
         self._validators['textsrc'] = v_scatter3d.TextsrcValidator()
         self._validators['uid'] = v_scatter3d.UidValidator()
         self._validators['visible'] = v_scatter3d.VisibleValidator()
@@ -1893,8 +1856,6 @@ an instance of plotly.graph_objs.Scatter3d"""
         self.textfont = textfont if textfont is not None else _v
         _v = arg.pop('textposition', None)
         self.textposition = textposition if textposition is not None else _v
-        _v = arg.pop('textpositionsrc', None)
-        self.textpositionsrc = textpositionsrc if textpositionsrc is not None else _v
         _v = arg.pop('textsrc', None)
         self.textsrc = textsrc if textsrc is not None else _v
         _v = arg.pop('uid', None)
