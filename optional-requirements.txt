@@ -15,6 +15,10 @@ numpy
 coverage==4.3.1
 mock==2.0.0
 nose==1.3.3
+pytest==3.5.1
+
+## orca ##
+psutil
 
 ## codegen dependencies ##
 yapf
@@ -37,5 +41,5 @@ pyshp
 geopandas
 shapely
 
-# ipyplotly integration
-pil
+# image uri conversion
+pillow
