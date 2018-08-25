@@ -1266,7 +1266,22 @@ with the following error:
             err_message += """
 Try setting the `validate` argument to True to check for errors in the
 figure specification"""
-        elif (response.status_code == 530 and format == 'eps'):
+        elif response.status_code == 525:
+            any_mapbox = any([trace.get('type', None) == 'scattermapbox'
+                              for trace in fig_dict.get('data', [])])
+            if any_mapbox and config.mapbox_access_token is None:
+                err_message += """
+Exporting scattermapbox traces requires a mapbox access token.
+Create a token in your mapbox account and then set it using:
+
+>>> plotly.io.orca.config.mapbox_access_token = 'pk.abc...'
+
+If you would like this token to be applied automatically in 
+future sessions, then save your orca configuration as follows:
+
+>>> plotly.io.orca.config.save()
+"""
+        elif response.status_code == 530 and format == 'eps':
             err_message += """
 Exporting to EPS format requires the poppler library.  You can install
 poppler on MacOS or Linux with:
