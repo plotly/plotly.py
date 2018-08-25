@@ -1,12 +1,15 @@
 import _plotly_utils.basevalidators
 
 
-class TextpositionsrcValidator(_plotly_utils.basevalidators.SrcValidator):
+class SizesrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(
-        self, plotly_name='textpositionsrc', parent_name='scatter3d', **kwargs
+        self,
+        plotly_name='sizesrc',
+        parent_name='scatterpolargl.textfont',
+        **kwargs
     ):
-        super(TextpositionsrcValidator, self).__init__(
+        super(SizesrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type='none',

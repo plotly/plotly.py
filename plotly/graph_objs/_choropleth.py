@@ -273,7 +273,7 @@ class Choropleth(BaseTraceType):
           - One of the following named colorscales:
                 ['Greys', 'YlGnBu', 'Greens', 'YlOrRd', 'Bluered', 'RdBu',
                 'Reds', 'Blues', 'Picnic', 'Rainbow', 'Portland', 'Jet',
-                'Hot', 'Blackbody', 'Earth', 'Electric', 'Viridis']
+                'Hot', 'Blackbody', 'Earth', 'Electric', 'Viridis', 'Cividis']
 
         Returns
         -------

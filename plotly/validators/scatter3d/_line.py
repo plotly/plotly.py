@@ -72,10 +72,6 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numerical array. If true, `line.cmin` will
                 correspond to the last color in the array and
                 `line.cmax` will correspond to the first color.
-            showscale
-                Determines whether or not a colorbar is
-                displayed for this trace. Has an effect only if
-                in `line.color`is set to a numerical array.
             width
                 Sets the line width (in px).""",
             **kwargs

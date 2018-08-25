@@ -9,7 +9,7 @@ class TextpositionValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         super(TextpositionValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=True,
+            array_ok=False,
             edit_type='calc',
             role='style',
             values=[
