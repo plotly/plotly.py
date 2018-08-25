@@ -41,5 +41,5 @@ pyshp
 geopandas
 shapely
 
-# ipyplotly integration
+# image uri conversion
 pillow

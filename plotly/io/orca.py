@@ -3,6 +3,5 @@ from ._orca import (
     shutdown_server,
     validate_executable,
     reset_status,
-    valid_formats,
     config,
     status)

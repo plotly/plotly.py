@@ -36,5 +36,5 @@ build
 dist
 plotly.egg-info/
 
-plotly/tests/test_orca/images/failed
-plotly/tests/test_orca/images/tmp
+plotly/tests/test_orca/images/*/failed
+plotly/tests/test_orca/images/*/tmp

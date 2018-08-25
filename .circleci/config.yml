@@ -260,7 +260,7 @@ jobs:
             pytest plotly/tests/test_orca
 
       - store_artifacts:
-            path: plotly/tests/test_orca/images/failed
+            path: plotly/tests/test_orca/images/linux/failed
 
   "python-3-5-orca":
     docker:
@@ -290,7 +290,7 @@ jobs:
             pytest plotly/tests/test_orca
 
       - store_artifacts:
-            path: plotly/tests/test_orca/images/failed
+            path: plotly/tests/test_orca/images/linux/failed
 
   "python-3-7-orca":
     docker:
