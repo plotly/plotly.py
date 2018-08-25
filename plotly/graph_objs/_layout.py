@@ -643,6 +643,32 @@ class Layout(BaseLayoutType):
     def dragmode(self, val):
         self['dragmode'] = val
 
+    # extendpiecolors
+    # ---------------
+    @property
+    def extendpiecolors(self):
+        """
+        If `true`, the pie slice colors (whether given by `piecolorway`
+        or inherited from `colorway`) will be extended to three times
+        its original length by first repeating every color 20% lighter
+        then each color 20% darker. This is intended to reduce the
+        likelihood of reusing the same color when you have many slices,
+        but you can set `false` to disable. Colors provided in the
+        trace, using `marker.colors`, are never extended.
+    
+        The 'extendpiecolors' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self['extendpiecolors']
+
+    @extendpiecolors.setter
+    def extendpiecolors(self, val):
+        self['extendpiecolors'] = val
+
     # font
     # ----
     @property
@@ -1395,6 +1421,30 @@ class Layout(BaseLayoutType):
     def paper_bgcolor(self, val):
         self['paper_bgcolor'] = val
 
+    # piecolorway
+    # -----------
+    @property
+    def piecolorway(self):
+        """
+        Sets the default pie slice colors. Defaults to the main
+        `colorway` used for trace colors. If you specify a new list
+        here it can still be extended with lighter and darker colors,
+        see `extendpiecolors`.
+    
+        The 'piecolorway' property is a colorlist that may be specified
+        as a tuple, list, one-dimensional numpy array, or pandas Series of valid
+        color strings
+
+        Returns
+        -------
+        list
+        """
+        return self['piecolorway']
+
+    @piecolorway.setter
+    def piecolorway(self, val):
+        self['piecolorway'] = val
+
     # plot_bgcolor
     # ------------
     @property
@@ -1848,7 +1898,11 @@ class Layout(BaseLayoutType):
     @property
     def showlegend(self):
         """
-        Determines whether or not a legend is drawn.
+        Determines whether or not a legend is drawn. Default is `true`
+        if there is a trace to show and any of these: a) Two or more
+        traces would by default be shown in the legend. b) One pie
+        trace is shown in the legend. c) One trace is explicitly given
+        with `showlegend: true`.
     
         The 'showlegend' property must be specified as a bool
         (either True, or False)
@@ -3172,6 +3226,15 @@ class Layout(BaseLayoutType):
             Determines the mode of drag interactions. *select* and
             *lasso* apply only to scatter traces with markers or
             text. *orbit* and *turntable* apply only to 3D scenes.
+        extendpiecolors
+            If `true`, the pie slice colors (whether given by
+            `piecolorway` or inherited from `colorway`) will be
+            extended to three times its original length by first
+            repeating every color 20% lighter then each color 20%
+            darker. This is intended to reduce the likelihood of
+            reusing the same color when you have many slices, but
+            you can set `false` to disable. Colors provided in the
+            trace, using `marker.colors`, are never extended.
         font
             Sets the global font. Note that fonts used in traces
             and other layout components inherit from the global
@@ -3226,6 +3289,11 @@ class Layout(BaseLayoutType):
             given angle.
         paper_bgcolor
             Sets the color of paper where the graph is drawn.
+        piecolorway
+            Sets the default pie slice colors. Defaults to the main
+            `colorway` used for trace colors. If you specify a new
+            list here it can still be extended with lighter and
+            darker colors, see `extendpiecolors`.
         plot_bgcolor
             Sets the color of plotting area in-between x and y
             axes.
@@ -3253,7 +3321,11 @@ class Layout(BaseLayoutType):
             plotly.graph_objs.layout.Shape instance or dict with
             compatible properties
         showlegend
-            Determines whether or not a legend is drawn.
+            Determines whether or not a legend is drawn. Default is
+            `true` if there is a trace to show and any of these: a)
+            Two or more traces would by default be shown in the
+            legend. b) One pie trace is shown in the legend. c) One
+            trace is explicitly given with `showlegend: true`.
         sliders
             plotly.graph_objs.layout.Slider instance or dict with
             compatible properties
@@ -3336,6 +3408,7 @@ class Layout(BaseLayoutType):
         datarevision=None,
         direction=None,
         dragmode=None,
+        extendpiecolors=None,
         font=None,
         geo=None,
         grid=None,
@@ -3352,6 +3425,7 @@ class Layout(BaseLayoutType):
         margin=None,
         orientation=None,
         paper_bgcolor=None,
+        piecolorway=None,
         plot_bgcolor=None,
         polar=None,
         radialaxis=None,
@@ -3451,6 +3525,15 @@ class Layout(BaseLayoutType):
             Determines the mode of drag interactions. *select* and
             *lasso* apply only to scatter traces with markers or
             text. *orbit* and *turntable* apply only to 3D scenes.
+        extendpiecolors
+            If `true`, the pie slice colors (whether given by
+            `piecolorway` or inherited from `colorway`) will be
+            extended to three times its original length by first
+            repeating every color 20% lighter then each color 20%
+            darker. This is intended to reduce the likelihood of
+            reusing the same color when you have many slices, but
+            you can set `false` to disable. Colors provided in the
+            trace, using `marker.colors`, are never extended.
         font
             Sets the global font. Note that fonts used in traces
             and other layout components inherit from the global
@@ -3505,6 +3588,11 @@ class Layout(BaseLayoutType):
             given angle.
         paper_bgcolor
             Sets the color of paper where the graph is drawn.
+        piecolorway
+            Sets the default pie slice colors. Defaults to the main
+            `colorway` used for trace colors. If you specify a new
+            list here it can still be extended with lighter and
+            darker colors, see `extendpiecolors`.
         plot_bgcolor
             Sets the color of plotting area in-between x and y
             axes.
@@ -3532,7 +3620,11 @@ class Layout(BaseLayoutType):
             plotly.graph_objs.layout.Shape instance or dict with
             compatible properties
         showlegend
-            Determines whether or not a legend is drawn.
+            Determines whether or not a legend is drawn. Default is
+            `true` if there is a trace to show and any of these: a)
+            Two or more traces would by default be shown in the
+            legend. b) One pie trace is shown in the legend. c) One
+            trace is explicitly given with `showlegend: true`.
         sliders
             plotly.graph_objs.layout.Slider instance or dict with
             compatible properties
@@ -3639,6 +3731,8 @@ an instance of plotly.graph_objs.Layout"""
         self._validators['datarevision'] = v_layout.DatarevisionValidator()
         self._validators['direction'] = v_layout.DirectionValidator()
         self._validators['dragmode'] = v_layout.DragmodeValidator()
+        self._validators['extendpiecolors'
+                        ] = v_layout.ExtendpiecolorsValidator()
         self._validators['font'] = v_layout.FontValidator()
         self._validators['geo'] = v_layout.GeoValidator()
         self._validators['grid'] = v_layout.GridValidator()
@@ -3656,6 +3750,7 @@ an instance of plotly.graph_objs.Layout"""
         self._validators['margin'] = v_layout.MarginValidator()
         self._validators['orientation'] = v_layout.OrientationValidator()
         self._validators['paper_bgcolor'] = v_layout.PaperBgcolorValidator()
+        self._validators['piecolorway'] = v_layout.PiecolorwayValidator()
         self._validators['plot_bgcolor'] = v_layout.PlotBgcolorValidator()
         self._validators['polar'] = v_layout.PolarValidator()
         self._validators['radialaxis'] = v_layout.RadialAxisValidator()
@@ -3711,6 +3806,8 @@ an instance of plotly.graph_objs.Layout"""
         self.direction = direction if direction is not None else _v
         _v = arg.pop('dragmode', None)
         self.dragmode = dragmode if dragmode is not None else _v
+        _v = arg.pop('extendpiecolors', None)
+        self.extendpiecolors = extendpiecolors if extendpiecolors is not None else _v
         _v = arg.pop('font', None)
         self.font = font if font is not None else _v
         _v = arg.pop('geo', None)
@@ -3743,6 +3840,8 @@ an instance of plotly.graph_objs.Layout"""
         self.orientation = orientation if orientation is not None else _v
         _v = arg.pop('paper_bgcolor', None)
         self.paper_bgcolor = paper_bgcolor if paper_bgcolor is not None else _v
+        _v = arg.pop('piecolorway', None)
+        self.piecolorway = piecolorway if piecolorway is not None else _v
         _v = arg.pop('plot_bgcolor', None)
         self.plot_bgcolor = plot_bgcolor if plot_bgcolor is not None else _v
         _v = arg.pop('polar', None)

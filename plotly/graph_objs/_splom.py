@@ -87,6 +87,9 @@ class Splom(BaseTraceType):
     
             Supported dict properties:
                 
+                axis
+                    plotly.graph_objs.splom.dimension.Axis instance
+                    or dict with compatible properties
                 label
                     Sets the label corresponding to this splom
                     dimension.

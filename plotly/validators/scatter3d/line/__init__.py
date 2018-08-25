@@ -1,5 +1,4 @@
 from ._width import WidthValidator
-from ._showscale import ShowscaleValidator
 from ._reversescale import ReversescaleValidator
 from ._dash import DashValidator
 from ._colorsrc import ColorsrcValidator

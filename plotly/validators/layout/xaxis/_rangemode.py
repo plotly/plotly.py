@@ -10,7 +10,7 @@ class RangemodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type='plot',
-            role='style',
+            role='info',
             values=['normal', 'tozero', 'nonnegative'],
             **kwargs
         )

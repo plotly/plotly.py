@@ -85,6 +85,17 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 *select* and *lasso* apply only to scatter
                 traces with markers or text. *orbit* and
                 *turntable* apply only to 3D scenes.
+            extendpiecolors
+                If `true`, the pie slice colors (whether given
+                by `piecolorway` or inherited from `colorway`)
+                will be extended to three times its original
+                length by first repeating every color 20%
+                lighter then each color 20% darker. This is
+                intended to reduce the likelihood of reusing
+                the same color when you have many slices, but
+                you can set `false` to disable. Colors provided
+                in the trace, using `marker.colors`, are never
+                extended.
             font
                 Sets the global font. Note that fonts used in
                 traces and other layout components inherit from
@@ -142,6 +153,12 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             paper_bgcolor
                 Sets the color of paper where the graph is
                 drawn.
+            piecolorway
+                Sets the default pie slice colors. Defaults to
+                the main `colorway` used for trace colors. If
+                you specify a new list here it can still be
+                extended with lighter and darker colors, see
+                `extendpiecolors`.
             plot_bgcolor
                 Sets the color of plotting area in-between x
                 and y axes.
@@ -171,6 +188,11 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 with compatible properties
             showlegend
                 Determines whether or not a legend is drawn.
+                Default is `true` if there is a trace to show
+                and any of these: a) Two or more traces would
+                by default be shown in the legend. b) One pie
+                trace is shown in the legend. c) One trace is
+                explicitly given with `showlegend: true`.
             sliders
                 plotly.graph_objs.layout.Slider instance or
                 dict with compatible properties

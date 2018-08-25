@@ -8,4 +8,5 @@ from plotly.graph_objs.splom import marker
 from ._hoverlabel import Hoverlabel
 from plotly.graph_objs.splom import hoverlabel
 from ._dimension import Dimension
+from plotly.graph_objs.splom import dimension
 from ._diagonal import Diagonal

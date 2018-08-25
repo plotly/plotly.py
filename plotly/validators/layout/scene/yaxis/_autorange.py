@@ -14,7 +14,7 @@ class AutorangeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             parent_name=parent_name,
             edit_type='plot',
             implied_edits={},
-            role='style',
+            role='info',
             values=[True, False, 'reversed'],
             **kwargs
         )

@@ -10,7 +10,6 @@ from ._x import XValidator
 from ._visible import VisibleValidator
 from ._uid import UidValidator
 from ._textsrc import TextsrcValidator
-from ._textpositionsrc import TextpositionsrcValidator
 from ._textposition import TextpositionValidator
 from ._textfont import TextfontValidator
 from ._text import TextValidator

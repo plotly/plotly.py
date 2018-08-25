@@ -459,31 +459,6 @@ class Scattergl(BaseTraceType):
     def hoverlabel(self, val):
         self['hoverlabel'] = val
 
-    # hoveron
-    # -------
-    @property
-    def hoveron(self):
-        """
-        Do the hover effects highlight individual points (markers or
-        line points) or do they highlight filled regions? If the fill
-        is *toself* or *tonext* and there are no markers or text, then
-        the default is *fills*, otherwise it is *points*.
-    
-        The 'hoveron' property is a flaglist and may be specified
-        as a string containing:
-          - Any combination of ['points', 'fills'] joined with '+' characters
-            (e.g. 'points+fills')
-
-        Returns
-        -------
-        Any
-        """
-        return self['hoveron']
-
-    @hoveron.setter
-    def hoveron(self, val):
-        self['hoveron'] = val
-
     # hovertext
     # ---------
     @property
@@ -1431,12 +1406,6 @@ class Scattergl(BaseTraceType):
         hoverlabel
             plotly.graph_objs.scattergl.Hoverlabel instance or dict
             with compatible properties
-        hoveron
-            Do the hover effects highlight individual points
-            (markers or line points) or do they highlight filled
-            regions? If the fill is *toself* or *tonext* and there
-            are no markers or text, then the default is *fills*,
-            otherwise it is *points*.
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -1558,7 +1527,6 @@ class Scattergl(BaseTraceType):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
-        hoveron=None,
         hovertext=None,
         hovertextsrc=None,
         ids=None,
@@ -1656,12 +1624,6 @@ class Scattergl(BaseTraceType):
         hoverlabel
             plotly.graph_objs.scattergl.Hoverlabel instance or dict
             with compatible properties
-        hoveron
-            Do the hover effects highlight individual points
-            (markers or line points) or do they highlight filled
-            regions? If the fill is *toself* or *tonext* and there
-            are no markers or text, then the default is *fills*,
-            otherwise it is *points*.
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -1808,7 +1770,6 @@ an instance of plotly.graph_objs.Scattergl"""
         self._validators['hoverinfo'] = v_scattergl.HoverinfoValidator()
         self._validators['hoverinfosrc'] = v_scattergl.HoverinfosrcValidator()
         self._validators['hoverlabel'] = v_scattergl.HoverlabelValidator()
-        self._validators['hoveron'] = v_scattergl.HoveronValidator()
         self._validators['hovertext'] = v_scattergl.HovertextValidator()
         self._validators['hovertextsrc'] = v_scattergl.HovertextsrcValidator()
         self._validators['ids'] = v_scattergl.IdsValidator()
@@ -1870,8 +1831,6 @@ an instance of plotly.graph_objs.Scattergl"""
         self.hoverinfosrc = hoverinfosrc if hoverinfosrc is not None else _v
         _v = arg.pop('hoverlabel', None)
         self.hoverlabel = hoverlabel if hoverlabel is not None else _v
-        _v = arg.pop('hoveron', None)
-        self.hoveron = hoveron if hoveron is not None else _v
         _v = arg.pop('hovertext', None)
         self.hovertext = hovertext if hovertext is not None else _v
         _v = arg.pop('hovertextsrc', None)

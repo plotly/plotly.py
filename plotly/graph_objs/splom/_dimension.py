@@ -4,6 +4,35 @@ import copy
 
 class Dimension(BaseTraceHierarchyType):
 
+    # axis
+    # ----
+    @property
+    def axis(self):
+        """
+        The 'axis' property is an instance of Axis
+        that may be specified as:
+          - An instance of plotly.graph_objs.splom.dimension.Axis
+          - A dict of string/value properties that will be passed
+            to the Axis constructor
+    
+            Supported dict properties:
+                
+                type
+                    Sets the axis type for this dimension's
+                    generated x and y axes. Note that the axis
+                    `type` values set in layout take precedence
+                    over this attribute.
+
+        Returns
+        -------
+        plotly.graph_objs.splom.dimension.Axis
+        """
+        return self['axis']
+
+    @axis.setter
+    def axis(self, val):
+        self['axis'] = val
+
     # label
     # -----
     @property
@@ -153,6 +182,9 @@ class Dimension(BaseTraceHierarchyType):
     @property
     def _prop_descriptions(self):
         return """\
+        axis
+            plotly.graph_objs.splom.dimension.Axis instance or dict
+            with compatible properties
         label
             Sets the label corresponding to this splom dimension.
         name
@@ -188,6 +220,7 @@ class Dimension(BaseTraceHierarchyType):
     def __init__(
         self,
         arg=None,
+        axis=None,
         label=None,
         name=None,
         templateitemname=None,
@@ -204,6 +237,9 @@ class Dimension(BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.splom.Dimension
+        axis
+            plotly.graph_objs.splom.dimension.Axis instance or dict
+            with compatible properties
         label
             Sets the label corresponding to this splom dimension.
         name
@@ -263,6 +299,7 @@ an instance of plotly.graph_objs.splom.Dimension"""
 
         # Initialize validators
         # ---------------------
+        self._validators['axis'] = v_dimension.AxisValidator()
         self._validators['label'] = v_dimension.LabelValidator()
         self._validators['name'] = v_dimension.NameValidator()
         self._validators['templateitemname'
@@ -273,6 +310,8 @@ an instance of plotly.graph_objs.splom.Dimension"""
 
         # Populate data dict with properties
         # ----------------------------------
+        _v = arg.pop('axis', None)
+        self.axis = axis if axis is not None else _v
         _v = arg.pop('label', None)
         self.label = label if label is not None else _v
         _v = arg.pop('name', None)

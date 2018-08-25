@@ -30,7 +30,6 @@ from ._idssrc import IdssrcValidator
 from ._ids import IdsValidator
 from ._hovertextsrc import HovertextsrcValidator
 from ._hovertext import HovertextValidator
-from ._hoveron import HoveronValidator
 from ._hoverlabel import HoverlabelValidator
 from ._hoverinfosrc import HoverinfosrcValidator
 from ._hoverinfo import HoverinfoValidator

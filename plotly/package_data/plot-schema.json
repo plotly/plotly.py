@@ -145,13 +145,12 @@
                 ],
                 "flags": [
                     "calc",
-                    "calcIfAutorange",
                     "clearAxisTypes",
                     "plot",
                     "style",
                     "colorbars"
                 ],
-                "description": "trace attributes should include an `editType` string matching this flaglist. *calc* is the most extensive: a full `Plotly.plot` starting by clearing `gd.calcdata` to force it to be regenerated *calcIfAutorange* does a full `Plotly.plot`, but only clears and redoes `gd.calcdata` if there is at least one autoranged axis. *clearAxisTypes* resets the types of the axes this trace is on, because new data could cause the automatic axis type detection to change. Log type will not be cleared, as that is never automatically chosen so must have been user-specified. *plot* calls `Plotly.plot` but without first clearing `gd.calcdata`. *style* only calls `module.style` for all trace modules and redraws the legend. *colorbars* only redraws colorbars."
+                "description": "trace attributes should include an `editType` string matching this flaglist. *calc* is the most extensive: a full `Plotly.plot` starting by clearing `gd.calcdata` to force it to be regenerated *clearAxisTypes* resets the types of the axes this trace is on, because new data could cause the automatic axis type detection to change. Log type will not be cleared, as that is never automatically chosen so must have been user-specified. *plot* calls `Plotly.plot` but without first clearing `gd.calcdata`. *style* only calls `module.style` for all trace modules and redraws the legend. *colorbars* only redraws colorbars."
             },
             "layout": {
                 "valType": "flaglist",
@@ -160,7 +159,6 @@
                 ],
                 "flags": [
                     "calc",
-                    "calcIfAutorange",
                     "plot",
                     "legend",
                     "ticks",
@@ -170,7 +168,7 @@
                     "camera",
                     "arraydraw"
                 ],
-                "description": "layout attributes should include an `editType` string matching this flaglist. *calc* is the most extensive: a full `Plotly.plot` starting by clearing `gd.calcdata` to force it to be regenerated *calcIfAutorange* does a full `Plotly.plot`, but only clears and redoes `gd.calcdata` if there is at least one autoranged axis. *plot* calls `Plotly.plot` but without first clearing `gd.calcdata`. *legend* only redraws the legend. *ticks* only redraws axis ticks, labels, and gridlines. *axrange* minimal sequence when updating axis ranges. *layoutstyle* reapplies global and SVG cartesian axis styles. *modebar* just updates the modebar. *camera* just updates the camera settings for gl3d scenes. *arraydraw* allows component arrays to invoke the redraw routines just for the component(s) that changed."
+                "description": "layout attributes should include an `editType` string matching this flaglist. *calc* is the most extensive: a full `Plotly.plot` starting by clearing `gd.calcdata` to force it to be regenerated *plot* calls `Plotly.plot` but without first clearing `gd.calcdata`. *legend* only redraws the legend. *ticks* only redraws axis ticks, labels, and gridlines. *axrange* minimal sequence when updating axis ranges. *layoutstyle* reapplies global and SVG cartesian axis styles. *modebar* just updates the modebar. *camera* just updates the camera settings for gl3d scenes. *arraydraw* allows component arrays to invoke the redraw routines just for the component(s) that changed."
             }
         },
         "impliedEdits": {
@@ -878,7 +876,7 @@
                         "dflt": 6,
                         "arrayOk": true,
                         "role": "style",
-                        "editType": "calcIfAutorange",
+                        "editType": "calc",
                         "description": "Sets the marker size (in px)."
                     },
                     "maxdisplayed": {
@@ -3930,13 +3928,13 @@
                     "max": 1,
                     "dflt": 0.5,
                     "role": "style",
-                    "editType": "calcIfAutorange",
+                    "editType": "calc",
                     "description": "Sets the width of the whiskers relative to the box' width. For example, with 1, the whiskers are as wide as the box(es)."
                 },
                 "notched": {
                     "valType": "boolean",
                     "role": "style",
-                    "editType": "calcIfAutorange",
+                    "editType": "calc",
                     "description": "Determines whether or not notches should be drawn."
                 },
                 "notchwidth": {
@@ -3945,7 +3943,7 @@
                     "max": 0.5,
                     "dflt": 0.25,
                     "role": "style",
-                    "editType": "calcIfAutorange",
+                    "editType": "calc",
                     "description": "Sets the width of the notches relative to the box' width. For example, with 0, the notches are as wide as the box(es)."
                 },
                 "boxpoints": {
@@ -3958,7 +3956,7 @@
                     ],
                     "dflt": "outliers",
                     "role": "style",
-                    "editType": "calcIfAutorange",
+                    "editType": "calc",
                     "description": "If *outliers*, only the sample points lying outside the whiskers are shown If *suspectedoutliers*, the outlier points are shown and points either less than 4*Q1-3*Q3 or greater than 4*Q3-3*Q1 are highlighted (see `outliercolor`) If *all*, all sample points are shown If *false*, only the box(es) are shown with no sample points"
                 },
                 "boxmean": {
@@ -3970,7 +3968,7 @@
                     ],
                     "dflt": false,
                     "role": "style",
-                    "editType": "calcIfAutorange",
+                    "editType": "calc",
                     "description": "If *true*, the mean of the box(es)' underlying distribution is drawn as a dashed line inside the box(es). If *sd* the standard deviation is also drawn."
                 },
                 "jitter": {
@@ -3978,7 +3976,7 @@
                     "min": 0,
                     "max": 1,
                     "role": "style",
-                    "editType": "calcIfAutorange",
+                    "editType": "calc",
                     "description": "Sets the amount of jitter in the sample points drawn. If *0*, the sample points align along the distribution axis. If *1*, the sample points are drawn in a random jitter of width equal to the width of the box(es)."
                 },
                 "pointpos": {
@@ -3986,7 +3984,7 @@
                     "min": -2,
                     "max": 2,
                     "role": "style",
-                    "editType": "calcIfAutorange",
+                    "editType": "calc",
                     "description": "Sets the position of the sample points in relation to the box(es). If *0*, the sample points are places over the center of the box(es). Positive (negative) values correspond to positions to the right (left) for vertical boxes and above (below) for horizontal boxes"
                 },
                 "orientation": {
@@ -4317,7 +4315,7 @@
                         "dflt": 6,
                         "arrayOk": false,
                         "role": "style",
-                        "editType": "calcIfAutorange",
+                        "editType": "calc",
                         "description": "Sets the marker size (in px)."
                     },
                     "color": {
@@ -9838,6 +9836,19 @@
                     "editType": "calc",
                     "role": "data"
                 },
+                "piecolorway": {
+                    "valType": "colorlist",
+                    "role": "style",
+                    "editType": "calc",
+                    "description": "Sets the default pie slice colors. Defaults to the main `colorway` used for trace colors. If you specify a new list here it can still be extended with lighter and darker colors, see `extendpiecolors`."
+                },
+                "extendpiecolors": {
+                    "valType": "boolean",
+                    "dflt": true,
+                    "role": "style",
+                    "editType": "calc",
+                    "description": "If `true`, the pie slice colors (whether given by `piecolorway` or inherited from `colorway`) will be extended to three times its original length by first repeating every color 20% lighter then each color 20% darker. This is intended to reduce the likelihood of reusing the same color when you have many slices, but you can set `false` to disable. Colors provided in the trace, using `marker.colors`, are never extended."
+                },
                 "hiddenlabelssrc": {
                     "valType": "string",
                     "role": "info",
@@ -11654,7 +11665,7 @@
                         "dflt": 6,
                         "arrayOk": true,
                         "role": "style",
-                        "editType": "calcIfAutorange",
+                        "editType": "calc",
                         "description": "Sets the marker size (in px)."
                     },
                     "sizeref": {
@@ -12891,7 +12902,7 @@
                     ],
                     "dflt": "outliers",
                     "role": "style",
-                    "editType": "calcIfAutorange",
+                    "editType": "calc",
                     "description": "If *outliers*, only the sample points lying outside the whiskers are shown If *suspectedoutliers*, the outlier points are shown and points either less than 4*Q1-3*Q3 or greater than 4*Q3-3*Q1 are highlighted (see `outliercolor`) If *all*, all sample points are shown If *false*, only the violins are shown with no sample points"
                 },
                 "jitter": {
@@ -12899,7 +12910,7 @@
                     "min": 0,
                     "max": 1,
                     "role": "style",
-                    "editType": "calcIfAutorange",
+                    "editType": "calc",
                     "description": "Sets the amount of jitter in the sample points drawn. If *0*, the sample points align along the distribution axis. If *1*, the sample points are drawn in a random jitter of width equal to the width of the violins."
                 },
                 "pointpos": {
@@ -12907,7 +12918,7 @@
                     "min": -2,
                     "max": 2,
                     "role": "style",
-                    "editType": "calcIfAutorange",
+                    "editType": "calc",
                     "description": "Sets the position of the sample points in relation to the violins. If *0*, the sample points are places over the center of the violins. Positive (negative) values correspond to positions to the right (left) for vertical violins and above (below) for horizontal violins."
                 },
                 "marker": {
@@ -13228,7 +13239,7 @@
                         "dflt": 6,
                         "arrayOk": false,
                         "role": "style",
-                        "editType": "calcIfAutorange",
+                        "editType": "calc",
                         "description": "Sets the marker size (in px)."
                     },
                     "color": {
@@ -13980,13 +13991,6 @@
                         "editType": "calc",
                         "description": "Reverses the color mapping if true. Has an effect only if in `line.color`is set to a numerical array. If true, `line.cmin` will correspond to the last color in the array and `line.cmax` will correspond to the first color."
                     },
-                    "showscale": {
-                        "valType": "boolean",
-                        "role": "info",
-                        "dflt": false,
-                        "editType": "calc",
-                        "description": "Determines whether or not a colorbar is displayed for this trace. Has an effect only if in `line.color`is set to a numerical array."
-                    },
                     "editType": "calc",
                     "role": "object",
                     "colorsrc": {
@@ -14686,19 +14690,16 @@
                         "bottom right"
                     ],
                     "dflt": "top center",
-                    "arrayOk": true,
+                    "arrayOk": false,
                     "role": "style",
                     "editType": "calc",
                     "description": "Sets the positions of the `text` elements with respects to the (x,y) coordinates."
                 },
                 "textfont": {
-                    "family": {
-                        "valType": "string",
+                    "color": {
+                        "valType": "color",
                         "role": "style",
-                        "noBlank": true,
-                        "strict": true,
                         "editType": "calc",
-                        "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
                         "arrayOk": true
                     },
                     "size": {
@@ -14708,31 +14709,27 @@
                         "editType": "calc",
                         "arrayOk": true
                     },
-                    "color": {
-                        "valType": "color",
+                    "family": {
+                        "valType": "string",
                         "role": "style",
+                        "noBlank": true,
+                        "strict": true,
                         "editType": "calc",
-                        "arrayOk": true
+                        "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                        "arrayOk": false
                     },
                     "editType": "calc",
-                    "description": "Sets the text font.",
                     "role": "object",
-                    "familysrc": {
+                    "colorsrc": {
                         "valType": "string",
                         "role": "info",
-                        "description": "Sets the source reference on plot.ly for  family .",
+                        "description": "Sets the source reference on plot.ly for  color .",
                         "editType": "none"
                     },
                     "sizesrc": {
                         "valType": "string",
                         "role": "info",
                         "description": "Sets the source reference on plot.ly for  size .",
-                        "editType": "none"
-                    },
-                    "colorsrc": {
-                        "valType": "string",
-                        "role": "info",
-                        "description": "Sets the source reference on plot.ly for  color .",
                         "editType": "none"
                     }
                 },
@@ -15207,12 +15204,6 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  hovertext .",
-                    "editType": "none"
-                },
-                "textpositionsrc": {
-                    "valType": "string",
-                    "role": "info",
-                    "description": "Sets the source reference on plot.ly for  textposition .",
                     "editType": "none"
                 }
             }
@@ -23276,16 +23267,6 @@
                     "editType": "calc",
                     "description": "Sets the fill color. Defaults to a half-transparent variant of the line color, marker color, or marker line color, whichever is available."
                 },
-                "hoveron": {
-                    "valType": "flaglist",
-                    "flags": [
-                        "points",
-                        "fills"
-                    ],
-                    "role": "info",
-                    "editType": "calc",
-                    "description": "Do the hover effects highlight individual points (markers or line points) or do they highlight filled regions? If the fill is *toself* or *tonext* and there are no markers or text, then the default is *fills*, otherwise it is *points*."
-                },
                 "selected": {
                     "marker": {
                         "opacity": {
@@ -23936,6 +23917,22 @@
                                 "role": "data",
                                 "editType": "calc+clearAxisTypes",
                                 "description": "Sets the dimension values to be plotted."
+                            },
+                            "axis": {
+                                "type": {
+                                    "valType": "enumerated",
+                                    "values": [
+                                        "linear",
+                                        "log",
+                                        "date",
+                                        "category"
+                                    ],
+                                    "role": "info",
+                                    "editType": "calc+clearAxisTypes",
+                                    "description": "Sets the axis type for this dimension's generated x and y axes. Note that the axis `type` values set in layout take precedence over this attribute."
+                                },
+                                "editType": "calc+clearAxisTypes",
+                                "role": "object"
                             },
                             "editType": "calc+clearAxisTypes",
                             "name": {
@@ -31747,7 +31744,7 @@
                         "dflt": 6,
                         "arrayOk": true,
                         "role": "style",
-                        "editType": "calcIfAutorange",
+                        "editType": "calc",
                         "description": "Sets the marker size (in px)."
                     },
                     "sizeref": {
@@ -34084,7 +34081,7 @@
                     "max": 0.5,
                     "dflt": 0.3,
                     "role": "style",
-                    "editType": "calcIfAutorange",
+                    "editType": "calc",
                     "description": "Sets the width of the open/close tick marks relative to the *x* minimal interval."
                 },
                 "xcalendar": {
@@ -34506,7 +34503,7 @@
                     "max": 1,
                     "dflt": 0,
                     "role": "style",
-                    "editType": "calcIfAutorange",
+                    "editType": "calc",
                     "description": "Sets the width of the whiskers relative to the box' width. For example, with 1, the whiskers are as wide as the box(es)."
                 },
                 "xcalendar": {
@@ -34871,6 +34868,33 @@
                     "editType": "calc+clearAxisTypes",
                     "description": "Sets the angular coordinates",
                     "role": "data"
+                },
+                "r0": {
+                    "valType": "any",
+                    "dflt": 0,
+                    "role": "info",
+                    "editType": "calc+clearAxisTypes",
+                    "description": "Alternate to `r`. Builds a linear space of r coordinates. Use with `dr` where `r0` is the starting coordinate and `dr` the step."
+                },
+                "dr": {
+                    "valType": "number",
+                    "dflt": 1,
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Sets the r coordinate step."
+                },
+                "theta0": {
+                    "valType": "any",
+                    "dflt": 0,
+                    "role": "info",
+                    "editType": "calc+clearAxisTypes",
+                    "description": "Alternate to `theta`. Builds a linear space of theta coordinates. Use with `dtheta` where `theta0` is the starting coordinate and `dtheta` the step."
+                },
+                "dtheta": {
+                    "valType": "number",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Sets the theta coordinate step. By default, the `dtheta` step equals the subplot's period divided by the length of the `r` coordinates."
                 },
                 "thetaunit": {
                     "valType": "enumerated",
@@ -35270,7 +35294,7 @@
                         "dflt": 6,
                         "arrayOk": true,
                         "role": "style",
-                        "editType": "calcIfAutorange",
+                        "editType": "calc",
                         "description": "Sets the marker size (in px)."
                     },
                     "maxdisplayed": {
@@ -36440,6 +36464,33 @@
                     "description": "Sets the angular coordinates",
                     "role": "data"
                 },
+                "r0": {
+                    "valType": "any",
+                    "dflt": 0,
+                    "role": "info",
+                    "editType": "calc+clearAxisTypes",
+                    "description": "Alternate to `r`. Builds a linear space of r coordinates. Use with `dr` where `r0` is the starting coordinate and `dr` the step."
+                },
+                "dr": {
+                    "valType": "number",
+                    "dflt": 1,
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Sets the r coordinate step."
+                },
+                "theta0": {
+                    "valType": "any",
+                    "dflt": 0,
+                    "role": "info",
+                    "editType": "calc+clearAxisTypes",
+                    "description": "Alternate to `theta`. Builds a linear space of theta coordinates. Use with `dtheta` where `theta0` is the starting coordinate and `dtheta` the step."
+                },
+                "dtheta": {
+                    "valType": "number",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Sets the theta coordinate step. By default, the `dtheta` step equals the subplot's period divided by the length of the `r` coordinates."
+                },
                 "thetaunit": {
                     "valType": "enumerated",
                     "values": [
@@ -36459,6 +36510,14 @@
                     "arrayOk": true,
                     "editType": "calc",
                     "description": "Sets text elements associated with each (x,y) pair. If a single string, the same string appears over all the data points. If an array of string, the items are mapped in order to the this trace's (x,y) coordinates. If trace `hoverinfo` contains a *text* flag and *hovertext* is not set, these elements will be seen in the hover labels."
+                },
+                "hovertext": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "arrayOk": true,
+                    "editType": "style",
+                    "description": "Sets hover text elements associated with each (x,y) pair. If a single string, the same string appears over all the data points. If an array of string, the items are mapped in order to the this trace's (x,y) coordinates. To be seen, trace `hoverinfo` must contain a *text* flag."
                 },
                 "line": {
                     "color": {
@@ -37486,15 +37545,69 @@
                     "editType": "calc",
                     "description": "Sets the fill color. Defaults to a half-transparent variant of the line color, marker color, or marker line color, whichever is available."
                 },
-                "hoveron": {
-                    "valType": "flaglist",
-                    "flags": [
-                        "points",
-                        "fills"
+                "textposition": {
+                    "valType": "enumerated",
+                    "values": [
+                        "top left",
+                        "top center",
+                        "top right",
+                        "middle left",
+                        "middle center",
+                        "middle right",
+                        "bottom left",
+                        "bottom center",
+                        "bottom right"
                     ],
-                    "role": "info",
-                    "editType": "style",
-                    "description": "Do the hover effects highlight individual points (markers or line points) or do they highlight filled regions? If the fill is *toself* or *tonext* and there are no markers or text, then the default is *fills*, otherwise it is *points*."
+                    "dflt": "middle center",
+                    "arrayOk": true,
+                    "role": "style",
+                    "editType": "calc",
+                    "description": "Sets the positions of the `text` elements with respects to the (x,y) coordinates."
+                },
+                "textfont": {
+                    "family": {
+                        "valType": "string",
+                        "role": "style",
+                        "noBlank": true,
+                        "strict": true,
+                        "editType": "calc",
+                        "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                        "arrayOk": true
+                    },
+                    "size": {
+                        "valType": "number",
+                        "role": "style",
+                        "min": 1,
+                        "editType": "calc",
+                        "arrayOk": true
+                    },
+                    "color": {
+                        "valType": "color",
+                        "role": "style",
+                        "editType": "calc",
+                        "arrayOk": true
+                    },
+                    "editType": "calc",
+                    "description": "Sets the text font.",
+                    "role": "object",
+                    "familysrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on plot.ly for  family .",
+                        "editType": "none"
+                    },
+                    "sizesrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on plot.ly for  size .",
+                        "editType": "none"
+                    },
+                    "colorsrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on plot.ly for  color .",
+                        "editType": "none"
+                    }
                 },
                 "selected": {
                     "marker": {
@@ -37615,6 +37728,18 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  text .",
+                    "editType": "none"
+                },
+                "hovertextsrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertext .",
+                    "editType": "none"
+                },
+                "textpositionsrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  textposition .",
                     "editType": "none"
                 }
             }
@@ -37853,7 +37978,7 @@
                         "dflt": 6,
                         "arrayOk": true,
                         "role": "style",
-                        "editType": "calcIfAutorange",
+                        "editType": "calc",
                         "description": "Sets the marker size (in px)."
                     },
                     "symbol": {
@@ -38382,7 +38507,7 @@
                 "valType": "boolean",
                 "role": "info",
                 "editType": "legend",
-                "description": "Determines whether or not a legend is drawn."
+                "description": "Determines whether or not a legend is drawn. Default is `true` if there is a trace to show and any of these: a) Two or more traces would by default be shown in the legend. b) One pie trace is shown in the legend. c) One trace is explicitly given with `showlegend: true`."
             },
             "colorway": {
                 "valType": "colorlist",
@@ -38792,8 +38917,8 @@
                         "reversed"
                     ],
                     "dflt": true,
-                    "role": "style",
-                    "editType": "calc",
+                    "role": "info",
+                    "editType": "axrange",
                     "impliedEdits": {},
                     "description": "Determines whether or not the range of this axis is computed in relation to the input data. See `rangemode` for more info. If `range` is provided, then `autorange` is set to *false*."
                 },
@@ -38805,7 +38930,7 @@
                         "nonnegative"
                     ],
                     "dflt": "normal",
-                    "role": "style",
+                    "role": "info",
                     "editType": "plot",
                     "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*`, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data."
                 },
@@ -39230,7 +39355,7 @@
                     "valType": "boolean",
                     "dflt": false,
                     "role": "style",
-                    "editType": "layoutstyle",
+                    "editType": "ticks+layoutstyle",
                     "description": "Determines whether or not a line bounding this axis is drawn."
                 },
                 "linecolor": {
@@ -39790,8 +39915,8 @@
                         "reversed"
                     ],
                     "dflt": true,
-                    "role": "style",
-                    "editType": "calc",
+                    "role": "info",
+                    "editType": "axrange",
                     "impliedEdits": {},
                     "description": "Determines whether or not the range of this axis is computed in relation to the input data. See `rangemode` for more info. If `range` is provided, then `autorange` is set to *false*."
                 },
@@ -39803,7 +39928,7 @@
                         "nonnegative"
                     ],
                     "dflt": "normal",
-                    "role": "style",
+                    "role": "info",
                     "editType": "plot",
                     "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*`, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data."
                 },
@@ -40228,7 +40353,7 @@
                     "valType": "boolean",
                     "dflt": false,
                     "role": "style",
-                    "editType": "layoutstyle",
+                    "editType": "ticks+layoutstyle",
                     "description": "Determines whether or not a line bounding this axis is drawn."
                 },
                 "linecolor": {
@@ -41998,7 +42123,7 @@
                             "reversed"
                         ],
                         "dflt": true,
-                        "role": "style",
+                        "role": "info",
                         "editType": "plot",
                         "impliedEdits": {},
                         "description": "Determines whether or not the range of this axis is computed in relation to the input data. See `rangemode` for more info. If `range` is provided, then `autorange` is set to *false*."
@@ -42011,7 +42136,7 @@
                             "nonnegative"
                         ],
                         "dflt": "normal",
-                        "role": "style",
+                        "role": "info",
                         "editType": "plot",
                         "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*`, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data."
                     },
@@ -42561,7 +42686,7 @@
                             "reversed"
                         ],
                         "dflt": true,
-                        "role": "style",
+                        "role": "info",
                         "editType": "plot",
                         "impliedEdits": {},
                         "description": "Determines whether or not the range of this axis is computed in relation to the input data. See `rangemode` for more info. If `range` is provided, then `autorange` is set to *false*."
@@ -42574,7 +42699,7 @@
                             "nonnegative"
                         ],
                         "dflt": "normal",
-                        "role": "style",
+                        "role": "info",
                         "editType": "plot",
                         "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*`, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data."
                     },
@@ -43124,7 +43249,7 @@
                             "reversed"
                         ],
                         "dflt": true,
-                        "role": "style",
+                        "role": "info",
                         "editType": "plot",
                         "impliedEdits": {},
                         "description": "Determines whether or not the range of this axis is computed in relation to the input data. See `rangemode` for more info. If `range` is provided, then `autorange` is set to *false*."
@@ -43137,7 +43262,7 @@
                             "nonnegative"
                         ],
                         "dflt": "normal",
-                        "role": "style",
+                        "role": "info",
                         "editType": "plot",
                         "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*`, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data."
                     },
@@ -44854,8 +44979,8 @@
                             "reversed"
                         ],
                         "dflt": true,
-                        "role": "style",
-                        "editType": "calc",
+                        "role": "info",
+                        "editType": "axrange",
                         "impliedEdits": {},
                         "description": "Determines whether or not the range of this axis is computed in relation to the input data. See `rangemode` for more info. If `range` is provided, then `autorange` is set to *false*."
                     },
@@ -46117,20 +46242,20 @@
                             "valType": "boolean",
                             "role": "info",
                             "dflt": true,
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "Determines whether or not this annotation is visible."
                         },
                         "text": {
                             "valType": "string",
                             "role": "info",
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "Sets the text associated with this annotation. Plotly uses a subset of HTML tags to do things like newline (<br>), bold (<b></b>), italics (<i></i>), hyperlinks (<a href='...'></a>). Tags <em>, <sup>, <sub> <span> are also supported."
                         },
                         "textangle": {
                             "valType": "angle",
                             "dflt": 0,
                             "role": "style",
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "Sets the angle at which the `text` is drawn with respect to the horizontal."
                         },
                         "font": {
@@ -46139,21 +46264,21 @@
                                 "role": "style",
                                 "noBlank": true,
                                 "strict": true,
-                                "editType": "calcIfAutorange+arraydraw",
+                                "editType": "calc+arraydraw",
                                 "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*."
                             },
                             "size": {
                                 "valType": "number",
                                 "role": "style",
                                 "min": 1,
-                                "editType": "calcIfAutorange+arraydraw"
+                                "editType": "calc+arraydraw"
                             },
                             "color": {
                                 "valType": "color",
                                 "role": "style",
                                 "editType": "arraydraw"
                             },
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "Sets the annotation text font.",
                             "role": "object"
                         },
@@ -46162,7 +46287,7 @@
                             "min": 1,
                             "dflt": null,
                             "role": "style",
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "Sets an explicit width for the text box. null (default) lets the text set the box width. Wider text will be clipped. There is no automatic wrapping; use <br> to start a new line."
                         },
                         "height": {
@@ -46170,7 +46295,7 @@
                             "min": 1,
                             "dflt": null,
                             "role": "style",
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "Sets an explicit height for the text box. null (default) lets the text set the box height. Taller text will be clipped."
                         },
                         "opacity": {
@@ -46225,7 +46350,7 @@
                             "min": 0,
                             "dflt": 1,
                             "role": "style",
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "Sets the padding (in px) between the `text` and the enclosing border."
                         },
                         "borderwidth": {
@@ -46233,14 +46358,14 @@
                             "min": 0,
                             "dflt": 1,
                             "role": "style",
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "Sets the width (in px) of the border enclosing the annotation `text`."
                         },
                         "showarrow": {
                             "valType": "boolean",
                             "dflt": true,
                             "role": "style",
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "Determines whether or not the annotation is drawn with an arrow. If *true*, `text` is placed near the arrow's tail. If *false*, `text` lines up with the `x` and `y` provided."
                         },
                         "arrowcolor": {
@@ -46286,7 +46411,7 @@
                             "min": 0.3,
                             "dflt": 1,
                             "role": "style",
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "Sets the size of the end annotation arrow head, relative to `arrowwidth`. A value of 1 (default) gives a head about 3x as wide as the line."
                         },
                         "startarrowsize": {
@@ -46294,14 +46419,14 @@
                             "min": 0.3,
                             "dflt": 1,
                             "role": "style",
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "Sets the size of the start annotation arrow head, relative to `arrowwidth`. A value of 1 (default) gives a head about 3x as wide as the line."
                         },
                         "arrowwidth": {
                             "valType": "number",
                             "min": 0.1,
                             "role": "style",
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "Sets the width (in px) of annotation arrow line."
                         },
                         "standoff": {
@@ -46309,7 +46434,7 @@
                             "min": 0,
                             "dflt": 0,
                             "role": "style",
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "Sets a distance, in pixels, to move the end arrowhead away from the position it is pointing at, for example to point at the edge of a marker independent of zoom. Note that this shortens the arrow from the `ax` / `ay` vector, in contrast to `xshift` / `yshift` which moves everything by this amount."
                         },
                         "startstandoff": {
@@ -46317,19 +46442,19 @@
                             "min": 0,
                             "dflt": 0,
                             "role": "style",
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "Sets a distance, in pixels, to move the start arrowhead away from the position it is pointing at, for example to point at the edge of a marker independent of zoom. Note that this shortens the arrow from the `ax` / `ay` vector, in contrast to `xshift` / `yshift` which moves everything by this amount."
                         },
                         "ax": {
                             "valType": "any",
                             "role": "info",
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "Sets the x component of the arrow tail about the arrow head. If `axref` is `pixel`, a positive (negative)  component corresponds to an arrow pointing from right to left (left to right). If `axref` is an axis, this is an absolute value on that axis, like `x`, NOT a relative value."
                         },
                         "ay": {
                             "valType": "any",
                             "role": "info",
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "Sets the y component of the arrow tail about the arrow head. If `ayref` is `pixel`, a positive (negative)  component corresponds to an arrow pointing from bottom to top (top to bottom). If `ayref` is an axis, this is an absolute value on that axis, like `y`, NOT a relative value."
                         },
                         "axref": {
@@ -46367,7 +46492,7 @@
                         "x": {
                             "valType": "any",
                             "role": "info",
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "Sets the annotation's x position. If the axis `type` is *log*, then you must take the log of your desired range. If the axis `type` is *date*, it should be date strings, like date data, though Date objects and unix milliseconds will be accepted and converted to strings. If the axis `type` is *category*, it should be numbers, using the scale where each category is assigned a serial number from zero in the order it appears."
                         },
                         "xanchor": {
@@ -46380,14 +46505,14 @@
                             ],
                             "dflt": "auto",
                             "role": "info",
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "Sets the text box's horizontal position anchor This anchor binds the `x` position to the *left*, *center* or *right* of the annotation. For example, if `x` is set to 1, `xref` to *paper* and `xanchor` to *right* then the right-most portion of the annotation lines up with the right-most edge of the plotting area. If *auto*, the anchor is equivalent to *center* for data-referenced annotations or if there is an arrow, whereas for paper-referenced with no arrow, the anchor picked corresponds to the closest side."
                         },
                         "xshift": {
                             "valType": "number",
                             "dflt": 0,
                             "role": "style",
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "Shifts the position of the whole annotation and arrow to the right (positive) or left (negative) by this many pixels."
                         },
                         "yref": {
@@ -46403,7 +46528,7 @@
                         "y": {
                             "valType": "any",
                             "role": "info",
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "Sets the annotation's y position. If the axis `type` is *log*, then you must take the log of your desired range. If the axis `type` is *date*, it should be date strings, like date data, though Date objects and unix milliseconds will be accepted and converted to strings. If the axis `type` is *category*, it should be numbers, using the scale where each category is assigned a serial number from zero in the order it appears."
                         },
                         "yanchor": {
@@ -46416,14 +46541,14 @@
                             ],
                             "dflt": "auto",
                             "role": "info",
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "Sets the text box's vertical position anchor This anchor binds the `y` position to the *top*, *middle* or *bottom* of the annotation. For example, if `y` is set to 1, `yref` to *paper* and `yanchor` to *top* then the top-most portion of the annotation lines up with the top-most edge of the plotting area. If *auto*, the anchor is equivalent to *middle* for data-referenced annotations or if there is an arrow, whereas for paper-referenced with no arrow, the anchor picked corresponds to the closest side."
                         },
                         "yshift": {
                             "valType": "number",
                             "dflt": 0,
                             "role": "style",
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "Shifts the position of the whole annotation and arrow up (positive) or down (negative) by this many pixels."
                         },
                         "clicktoshow": {
@@ -46535,7 +46660,7 @@
                             "valType": "boolean",
                             "role": "info",
                             "dflt": true,
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "Determines whether or not this shape is visible."
                         },
                         "type": {
@@ -46547,7 +46672,7 @@
                                 "line"
                             ],
                             "role": "info",
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "Specifies the shape type to be drawn. If *line*, a line is drawn from (`x0`,`y0`) to (`x1`,`y1`) with respect to the axes' sizing mode. If *circle*, a circle is drawn from ((`x0`+`x1`)/2, (`y0`+`y1`)/2)) with radius (|(`x0`+`x1`)/2 - `x0`|, |(`y0`+`y1`)/2 -`y0`)|) with respect to the axes' sizing mode. If *rect*, a rectangle is drawn linking (`x0`,`y0`), (`x1`,`y0`), (`x1`,`y1`), (`x0`,`y1`), (`x0`,`y0`) with respect to the axes' sizing mode. If *path*, draw a custom SVG path using `path`. with respect to the axes' sizing mode."
                         },
                         "layer": {
@@ -46579,25 +46704,25 @@
                             ],
                             "dflt": "scaled",
                             "role": "info",
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "Sets the shapes's sizing mode along the x axis. If set to *scaled*, `x0`, `x1` and x coordinates within `path` refer to data values on the x axis or a fraction of the plot area's width (`xref` set to *paper*). If set to *pixel*, `xanchor` specifies the x position in terms of data or plot fraction but `x0`, `x1` and x coordinates within `path` are pixels relative to `xanchor`. This way, the shape can have a fixed width while maintaining a position relative to data or plot fraction."
                         },
                         "xanchor": {
                             "valType": "any",
                             "role": "info",
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "Only relevant in conjunction with `xsizemode` set to *pixel*. Specifies the anchor point on the x axis to which `x0`, `x1` and x coordinates within `path` are relative to. E.g. useful to attach a pixel sized shape to a certain data value. No effect when `xsizemode` not set to *pixel*."
                         },
                         "x0": {
                             "valType": "any",
                             "role": "info",
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "Sets the shape's starting x position. See `type` and `xsizemode` for more info."
                         },
                         "x1": {
                             "valType": "any",
                             "role": "info",
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "Sets the shape's end x position. See `type` and `xsizemode` for more info."
                         },
                         "yref": {
@@ -46618,31 +46743,31 @@
                             ],
                             "dflt": "scaled",
                             "role": "info",
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "Sets the shapes's sizing mode along the y axis. If set to *scaled*, `y0`, `y1` and y coordinates within `path` refer to data values on the y axis or a fraction of the plot area's height (`yref` set to *paper*). If set to *pixel*, `yanchor` specifies the y position in terms of data or plot fraction but `y0`, `y1` and y coordinates within `path` are pixels relative to `yanchor`. This way, the shape can have a fixed height while maintaining a position relative to data or plot fraction."
                         },
                         "yanchor": {
                             "valType": "any",
                             "role": "info",
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "Only relevant in conjunction with `ysizemode` set to *pixel*. Specifies the anchor point on the y axis to which `y0`, `y1` and y coordinates within `path` are relative to. E.g. useful to attach a pixel sized shape to a certain data value. No effect when `ysizemode` not set to *pixel*."
                         },
                         "y0": {
                             "valType": "any",
                             "role": "info",
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "Sets the shape's starting y position. See `type` and `ysizemode` for more info."
                         },
                         "y1": {
                             "valType": "any",
                             "role": "info",
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "Sets the shape's end y position. See `type` and `ysizemode` for more info."
                         },
                         "path": {
                             "valType": "string",
                             "role": "info",
-                            "editType": "calcIfAutorange+arraydraw",
+                            "editType": "calc+arraydraw",
                             "description": "For `type` *path* - a valid SVG path with the pixel values replaced by data values in `xsizemode`/`ysizemode` being *scaled* and taken unmodified as pixels relative to `xanchor` and `yanchor` in case of *pixel* size mode. There are a few restrictions / quirks only absolute instructions, not relative. So the allowed segments are: M, L, H, V, Q, C, T, S, and Z arcs (A) are not allowed because radius rx and ry are relative. In the future we could consider supporting relative commands, but we would have to decide on how to handle date and log axes. Note that even as is, Q and C Bezier paths that are smooth on linear axes may not be smooth on log, and vice versa. no chained \"polybezier\" commands - specify the segment type for each one. On category axes, values are numbers scaled to the serial numbers of categories because using the categories themselves there would be no way to describe fractional positions On data axes: because space and T are both normal components of path strings, we can't use either to separate date from time parts. Therefore we'll use underscore for this purpose: 2015-02-21_13:45:56.789"
                         },
                         "opacity": {
@@ -46666,7 +46791,7 @@
                                 "min": 0,
                                 "dflt": 2,
                                 "role": "style",
-                                "editType": "calcIfAutorange+arraydraw",
+                                "editType": "calc+arraydraw",
                                 "description": "Sets the line width (in px)."
                             },
                             "dash": {
@@ -46685,7 +46810,7 @@
                                 "description": "Sets the dash style of lines. Set to a dash type string (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or *longdashdot*) or a dash length list in px (eg *5px,10px,2px,2px*)."
                             },
                             "role": "object",
-                            "editType": "calcIfAutorange+arraydraw"
+                            "editType": "calc+arraydraw"
                         },
                         "fillcolor": {
                             "valType": "color",

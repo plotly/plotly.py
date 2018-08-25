@@ -125,6 +125,17 @@ class FigureWidget(BaseFigureWidget):
                         *select* and *lasso* apply only to scatter
                         traces with markers or text. *orbit* and
                         *turntable* apply only to 3D scenes.
+                    extendpiecolors
+                        If `true`, the pie slice colors (whether given
+                        by `piecolorway` or inherited from `colorway`)
+                        will be extended to three times its original
+                        length by first repeating every color 20%
+                        lighter then each color 20% darker. This is
+                        intended to reduce the likelihood of reusing
+                        the same color when you have many slices, but
+                        you can set `false` to disable. Colors provided
+                        in the trace, using `marker.colors`, are never
+                        extended.
                     font
                         Sets the global font. Note that fonts used in
                         traces and other layout components inherit from
@@ -182,6 +193,12 @@ class FigureWidget(BaseFigureWidget):
                     paper_bgcolor
                         Sets the color of paper where the graph is
                         drawn.
+                    piecolorway
+                        Sets the default pie slice colors. Defaults to
+                        the main `colorway` used for trace colors. If
+                        you specify a new list here it can still be
+                        extended with lighter and darker colors, see
+                        `extendpiecolors`.
                     plot_bgcolor
                         Sets the color of plotting area in-between x
                         and y axes.
@@ -211,6 +228,11 @@ class FigureWidget(BaseFigureWidget):
                         with compatible properties
                     showlegend
                         Determines whether or not a legend is drawn.
+                        Default is `true` if there is a trace to show
+                        and any of these: a) Two or more traces would
+                        by default be shown in the legend. b) One pie
+                        trace is shown in the legend. c) One trace is
+                        explicitly given with `showlegend: true`.
                     sliders
                         plotly.graph_objs.layout.Slider instance or
                         dict with compatible properties
@@ -5738,7 +5760,6 @@ class FigureWidget(BaseFigureWidget):
         text=None,
         textfont=None,
         textposition=None,
-        textpositionsrc=None,
         textsrc=None,
         uid=None,
         visible=None,
@@ -5870,13 +5891,11 @@ class FigureWidget(BaseFigureWidget):
             flag and *hovertext* is not set, these elements will be
             seen in the hover labels.
         textfont
-            Sets the text font.
+            plotly.graph_objs.scatter3d.Textfont instance or dict
+            with compatible properties
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.
-        textpositionsrc
-            Sets the source reference on plot.ly for  textposition
-            .
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
@@ -5947,7 +5966,6 @@ class FigureWidget(BaseFigureWidget):
             text=text,
             textfont=textfont,
             textposition=textposition,
-            textpositionsrc=textpositionsrc,
             textsrc=textsrc,
             uid=uid,
             visible=visible,
@@ -6466,7 +6484,6 @@ class FigureWidget(BaseFigureWidget):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
-        hoveron=None,
         hovertext=None,
         hovertextsrc=None,
         ids=None,
@@ -6563,12 +6580,6 @@ class FigureWidget(BaseFigureWidget):
         hoverlabel
             plotly.graph_objs.scattergl.Hoverlabel instance or dict
             with compatible properties
-        hoveron
-            Do the hover effects highlight individual points
-            (markers or line points) or do they highlight filled
-            regions? If the fill is *toself* or *tonext* and there
-            are no markers or text, then the default is *fills*,
-            otherwise it is *points*.
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -6699,7 +6710,6 @@ class FigureWidget(BaseFigureWidget):
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
-            hoveron=hoveron,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
             ids=ids,
@@ -6962,6 +6972,8 @@ class FigureWidget(BaseFigureWidget):
         connectgaps=None,
         customdata=None,
         customdatasrc=None,
+        dr=None,
+        dtheta=None,
         fill=None,
         fillcolor=None,
         hoverinfo=None,
@@ -6979,6 +6991,7 @@ class FigureWidget(BaseFigureWidget):
         name=None,
         opacity=None,
         r=None,
+        r0=None,
         rsrc=None,
         selected=None,
         selectedpoints=None,
@@ -6991,6 +7004,7 @@ class FigureWidget(BaseFigureWidget):
         textpositionsrc=None,
         textsrc=None,
         theta=None,
+        theta0=None,
         thetasrc=None,
         thetaunit=None,
         uid=None,
@@ -7029,6 +7043,12 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
+        dr
+            Sets the r coordinate step.
+        dtheta
+            Sets the theta coordinate step. By default, the
+            `dtheta` step equals the subplot's period divided by
+            the length of the `r` coordinates.
         fill
             Sets the area to fill with a solid color. Use with
             `fillcolor` if not *none*. scatterpolar has a subset of
@@ -7099,6 +7119,10 @@ class FigureWidget(BaseFigureWidget):
             Sets the opacity of the trace.
         r
             Sets the radial coordinates
+        r0
+            Alternate to `r`. Builds a linear space of r
+            coordinates. Use with `dr` where `r0` is the starting
+            coordinate and `dr` the step.
         rsrc
             Sets the source reference on plot.ly for  r .
         selected
@@ -7142,6 +7166,10 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on plot.ly for  text .
         theta
             Sets the angular coordinates
+        theta0
+            Alternate to `theta`. Builds a linear space of theta
+            coordinates. Use with `dtheta` where `theta0` is the
+            starting coordinate and `dtheta` the step.
         thetasrc
             Sets the source reference on plot.ly for  theta .
         thetaunit
@@ -7175,6 +7203,8 @@ class FigureWidget(BaseFigureWidget):
             connectgaps=connectgaps,
             customdata=customdata,
             customdatasrc=customdatasrc,
+            dr=dr,
+            dtheta=dtheta,
             fill=fill,
             fillcolor=fillcolor,
             hoverinfo=hoverinfo,
@@ -7192,6 +7222,7 @@ class FigureWidget(BaseFigureWidget):
             name=name,
             opacity=opacity,
             r=r,
+            r0=r0,
             rsrc=rsrc,
             selected=selected,
             selectedpoints=selectedpoints,
@@ -7204,6 +7235,7 @@ class FigureWidget(BaseFigureWidget):
             textpositionsrc=textpositionsrc,
             textsrc=textsrc,
             theta=theta,
+            theta0=theta0,
             thetasrc=thetasrc,
             thetaunit=thetaunit,
             uid=uid,
@@ -7218,12 +7250,15 @@ class FigureWidget(BaseFigureWidget):
         connectgaps=None,
         customdata=None,
         customdatasrc=None,
+        dr=None,
+        dtheta=None,
         fill=None,
         fillcolor=None,
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
-        hoveron=None,
+        hovertext=None,
+        hovertextsrc=None,
         ids=None,
         idssrc=None,
         legendgroup=None,
@@ -7233,6 +7268,7 @@ class FigureWidget(BaseFigureWidget):
         name=None,
         opacity=None,
         r=None,
+        r0=None,
         rsrc=None,
         selected=None,
         selectedpoints=None,
@@ -7240,8 +7276,12 @@ class FigureWidget(BaseFigureWidget):
         stream=None,
         subplot=None,
         text=None,
+        textfont=None,
+        textposition=None,
+        textpositionsrc=None,
         textsrc=None,
         theta=None,
+        theta0=None,
         thetasrc=None,
         thetaunit=None,
         uid=None,
@@ -7273,6 +7313,12 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
+        dr
+            Sets the r coordinate step.
+        dtheta
+            Sets the theta coordinate step. By default, the
+            `dtheta` step equals the subplot's period divided by
+            the length of the `r` coordinates.
         fill
             Sets the area to fill with a solid color. Use with
             `fillcolor` if not *none*. *tozerox* and *tozeroy* fill
@@ -7303,12 +7349,15 @@ class FigureWidget(BaseFigureWidget):
         hoverlabel
             plotly.graph_objs.scatterpolargl.Hoverlabel instance or
             dict with compatible properties
-        hoveron
-            Do the hover effects highlight individual points
-            (markers or line points) or do they highlight filled
-            regions? If the fill is *toself* or *tonext* and there
-            are no markers or text, then the default is *fills*,
-            otherwise it is *points*.
+        hovertext
+            Sets hover text elements associated with each (x,y)
+            pair. If a single string, the same string appears over
+            all the data points. If an array of string, the items
+            are mapped in order to the this trace's (x,y)
+            coordinates. To be seen, trace `hoverinfo` must contain
+            a *text* flag.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -7339,6 +7388,10 @@ class FigureWidget(BaseFigureWidget):
             Sets the opacity of the trace.
         r
             Sets the radial coordinates
+        r0
+            Alternate to `r`. Builds a linear space of r
+            coordinates. Use with `dr` where `r0` is the starting
+            coordinate and `dr` the step.
         rsrc
             Sets the source reference on plot.ly for  r .
         selected
@@ -7370,10 +7423,22 @@ class FigureWidget(BaseFigureWidget):
             If trace `hoverinfo` contains a *text* flag and
             *hovertext* is not set, these elements will be seen in
             the hover labels.
+        textfont
+            Sets the text font.
+        textposition
+            Sets the positions of the `text` elements with respects
+            to the (x,y) coordinates.
+        textpositionsrc
+            Sets the source reference on plot.ly for  textposition
+            .
         textsrc
             Sets the source reference on plot.ly for  text .
         theta
             Sets the angular coordinates
+        theta0
+            Alternate to `theta`. Builds a linear space of theta
+            coordinates. Use with `dtheta` where `theta0` is the
+            starting coordinate and `dtheta` the step.
         thetasrc
             Sets the source reference on plot.ly for  theta .
         thetaunit
@@ -7406,12 +7471,15 @@ class FigureWidget(BaseFigureWidget):
             connectgaps=connectgaps,
             customdata=customdata,
             customdatasrc=customdatasrc,
+            dr=dr,
+            dtheta=dtheta,
             fill=fill,
             fillcolor=fillcolor,
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
-            hoveron=hoveron,
+            hovertext=hovertext,
+            hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
@@ -7421,6 +7489,7 @@ class FigureWidget(BaseFigureWidget):
             name=name,
             opacity=opacity,
             r=r,
+            r0=r0,
             rsrc=rsrc,
             selected=selected,
             selectedpoints=selectedpoints,
@@ -7428,8 +7497,12 @@ class FigureWidget(BaseFigureWidget):
             stream=stream,
             subplot=subplot,
             text=text,
+            textfont=textfont,
+            textposition=textposition,
+            textpositionsrc=textpositionsrc,
             textsrc=textsrc,
             theta=theta,
+            theta0=theta0,
             thetasrc=thetasrc,
             thetaunit=thetaunit,
             uid=uid,

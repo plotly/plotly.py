@@ -3,6 +3,7 @@ from ._unselected import UnselectedValidator
 from ._uid import UidValidator
 from ._thetaunit import ThetaunitValidator
 from ._thetasrc import ThetasrcValidator
+from ._theta0 import Theta0Validator
 from ._theta import ThetaValidator
 from ._textsrc import TextsrcValidator
 from ._textpositionsrc import TextpositionsrcValidator
@@ -15,6 +16,7 @@ from ._showlegend import ShowlegendValidator
 from ._selectedpoints import SelectedpointsValidator
 from ._selected import SelectedValidator
 from ._rsrc import RsrcValidator
+from ._r0 import R0Validator
 from ._r import RValidator
 from ._opacity import OpacityValidator
 from ._name import NameValidator
@@ -32,6 +34,8 @@ from ._hoverinfosrc import HoverinfosrcValidator
 from ._hoverinfo import HoverinfoValidator
 from ._fillcolor import FillcolorValidator
 from ._fill import FillValidator
+from ._dtheta import DthetaValidator
+from ._dr import DrValidator
 from ._customdatasrc import CustomdatasrcValidator
 from ._customdata import CustomdataValidator
 from ._connectgaps import ConnectgapsValidator

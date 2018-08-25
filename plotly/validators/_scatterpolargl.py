@@ -22,6 +22,12 @@ class ScatterpolarglValidator(_plotly_utils.basevalidators.CompoundValidator):
             customdatasrc
                 Sets the source reference on plot.ly for
                 customdata .
+            dr
+                Sets the r coordinate step.
+            dtheta
+                Sets the theta coordinate step. By default, the
+                `dtheta` step equals the subplot's period
+                divided by the length of the `r` coordinates.
             fill
                 Sets the area to fill with a solid color. Use
                 with `fillcolor` if not *none*. *tozerox* and
@@ -57,13 +63,16 @@ class ScatterpolarglValidator(_plotly_utils.basevalidators.CompoundValidator):
             hoverlabel
                 plotly.graph_objs.scatterpolargl.Hoverlabel
                 instance or dict with compatible properties
-            hoveron
-                Do the hover effects highlight individual
-                points (markers or line points) or do they
-                highlight filled regions? If the fill is
-                *toself* or *tonext* and there are no markers
-                or text, then the default is *fills*, otherwise
-                it is *points*.
+            hovertext
+                Sets hover text elements associated with each
+                (x,y) pair. If a single string, the same string
+                appears over all the data points. If an array
+                of string, the items are mapped in order to the
+                this trace's (x,y) coordinates. To be seen,
+                trace `hoverinfo` must contain a *text* flag.
+            hovertextsrc
+                Sets the source reference on plot.ly for
+                hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -96,6 +105,10 @@ class ScatterpolarglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the opacity of the trace.
             r
                 Sets the radial coordinates
+            r0
+                Alternate to `r`. Builds a linear space of r
+                coordinates. Use with `dr` where `r0` is the
+                starting coordinate and `dr` the step.
             rsrc
                 Sets the source reference on plot.ly for  r .
             selected
@@ -131,11 +144,24 @@ class ScatterpolarglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `hoverinfo` contains a *text* flag and
                 *hovertext* is not set, these elements will be
                 seen in the hover labels.
+            textfont
+                Sets the text font.
+            textposition
+                Sets the positions of the `text` elements with
+                respects to the (x,y) coordinates.
+            textpositionsrc
+                Sets the source reference on plot.ly for
+                textposition .
             textsrc
                 Sets the source reference on plot.ly for  text
                 .
             theta
                 Sets the angular coordinates
+            theta0
+                Alternate to `theta`. Builds a linear space of
+                theta coordinates. Use with `dtheta` where
+                `theta0` is the starting coordinate and
+                `dtheta` the step.
             thetasrc
                 Sets the source reference on plot.ly for  theta
                 .

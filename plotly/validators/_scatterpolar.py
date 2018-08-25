@@ -28,6 +28,12 @@ class ScatterpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
             customdatasrc
                 Sets the source reference on plot.ly for
                 customdata .
+            dr
+                Sets the r coordinate step.
+            dtheta
+                Sets the theta coordinate step. By default, the
+                `dtheta` step equals the subplot's period
+                divided by the length of the `r` coordinates.
             fill
                 Sets the area to fill with a solid color. Use
                 with `fillcolor` if not *none*. scatterpolar
@@ -106,6 +112,10 @@ class ScatterpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the opacity of the trace.
             r
                 Sets the radial coordinates
+            r0
+                Alternate to `r`. Builds a linear space of r
+                coordinates. Use with `dr` where `r0` is the
+                starting coordinate and `dr` the step.
             rsrc
                 Sets the source reference on plot.ly for  r .
             selected
@@ -154,6 +164,11 @@ class ScatterpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 .
             theta
                 Sets the angular coordinates
+            theta0
+                Alternate to `theta`. Builds a linear space of
+                theta coordinates. Use with `dtheta` where
+                `theta0` is the starting coordinate and
+                `dtheta` the step.
             thetasrc
                 Sets the source reference on plot.ly for  theta
                 .
