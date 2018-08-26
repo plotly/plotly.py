@@ -378,6 +378,35 @@ cd ./js
 npm publish --access public
 ```
 
+#### Publishing to the plotly conda channel
+After publishing to PyPI, update the `set version`  number to match the PyPI
+version.
+
+Compute the new SHA256 hash from the `sdist` package in the local
+`dist/` directory.
+
+```
+$ shasum -a 256 dist/plotly-X.Y.Z.tar.gz
+cd301fff6...
+```
+
+Make sure you have the `conda-build` and `anaconda-client` packages installed
+and then perform the conda build. 
+
+```
+$ conda build recipe/
+```
+
+When conda-build returns successfully it will display the path to the new
+package.
+
+Next run `anaconda login` and enter the credentials for the plotly anaconda
+channel.
+
+Then run `anaconda upload /path/to/plotly-X.Y.Z.tar.bz2`
+
+Run `anaconda logout` 
+
 #### Post announcement
 Post a simple announcement to the Plotly Python forum, with links to the
 README installation instructions and to the CHANGELOG.
