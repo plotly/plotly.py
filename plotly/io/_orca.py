@@ -922,21 +922,29 @@ valid plotly orca executable.
         executable=executable,
         instructions=install_location_instructions)
 
-    try:
-        help_result = subprocess.check_output([executable, '--help'])
-    except subprocess.CalledProcessError as err:
+    # ### Run with Popen so we get access to stdout and stderr
+    p = subprocess.Popen(
+        [executable, '--help'],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE)
 
+    help_result, help_error = p.communicate()
+
+    if p.returncode != 0:
         raise ValueError(invalid_executable_msg + """
 Here is the error that was returned by the command
     $ {executable} --help
 
+[Return code: {returncode}]
 {err_msg}
-""".format(executable=executable, err_msg=str(err)))
+        """.format(executable=executable,
+                   err_msg=help_error,
+                   returncode=p.returncode))
 
     if not help_result:
         raise ValueError(invalid_executable_msg + """
 The error encountered is that no output was returned by the command
-    $ {executable} --help  
+    $ {executable} --help
 """.format(executable=executable))
 
     if ("Plotly's image-exporting utilities" not in
@@ -950,21 +958,29 @@ The error encountered is that unexpected output was returned by the command
 
     # Get orca version
     # ----------------
-    try:
-        orca_version = subprocess.check_output([executable, '--version'])
-    except subprocess.CalledProcessError as err:
+    # ### Run with Popen so we get access to stdout and stderr
+    p = subprocess.Popen(
+        [executable, '--version'],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE)
+
+    version_result, version_error = p.communicate()
+
+    if p.returncode != 0:
         raise ValueError(invalid_executable_msg + """
 An error occurred while trying to get the version of the orca executable.
-Here is the command that plotly.py ran to request the version:
-
+Here is the command that plotly.py ran to request the version
     $ {executable} --version
-    
+
 This command returned the following error:
 
+[Return code: {returncode}]
 {err_msg}
-""".format(executable=executable, err_msg=str(err)))
+        """.format(executable=executable,
+                   err_msg=version_error,
+                   returncode=p.returncode))
 
-    if not orca_version:
+    if not version_result:
         raise ValueError(invalid_executable_msg + """
 The error encountered is that no version was reported by the orca executable.
 Here is the command that plotly.py ran to request the version:
@@ -972,10 +988,10 @@ Here is the command that plotly.py ran to request the version:
     $ {executable} --version  
 """.format(executable=executable))
     else:
-        orca_version = orca_version.decode()
+        version_result = version_result.decode()
 
     status._props['executable'] = executable
-    status._props['version'] = orca_version.strip()
+    status._props['version'] = version_result.strip()
     status._props['state'] = 'validated'
 
 
