@@ -1030,18 +1030,28 @@ def shutdown_server():
                 # process. This prevents any zombie processes from being
                 # left over, and it saves us from needing to write
                 # OS-specific process management code here.
+
                 parent = psutil.Process(orca_state['proc'].pid)
                 for child in parent.children(recursive=True):
-                    child.terminate()
+                    try:
+                        child.terminate()
+                    except:
+                        # We tried, move on
+                        pass
 
-                # Kill parent process
-                orca_state['proc'].terminate()
+                try:
+                    # Kill parent process
+                    orca_state['proc'].terminate()
 
-                # Retrieve standard out and standard error to avoid warnings
-                output, err = orca_state['proc'].communicate()
+                    # Retrieve standard out and standard error to avoid
+                    # warnings
+                    output, err = orca_state['proc'].communicate()
 
-                # Wait for the process to shutdown
-                child_status = orca_state['proc'].wait()
+                    # Wait for the process to shutdown
+                    child_status = orca_state['proc'].wait()
+                except:
+                    # We tried, move on
+                    pass
 
                 # Update our internal process management state
                 orca_state['proc'] = None
