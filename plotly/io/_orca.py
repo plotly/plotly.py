@@ -887,7 +887,8 @@ will be applied automatically in future sessions. You can do this as follows:
     >>> plotly.io.orca.config.save() 
 
 If you're still having trouble, feel free to ask for help on the forums at
-https://community.plot.ly/c/api/python"""
+https://community.plot.ly/c/api/python
+"""
 
     # Try to find an executable
     # -------------------------
@@ -914,50 +915,96 @@ Searched for executable '{executable}' on the following path:
     # ---------------------------------------------------
     invalid_executable_msg = """
 The orca executable is required in order to export figures as static images,
-but the executable that was found at '{executable}' does not seem to be a
-valid plotly orca executable.
+but the executable that was found at '{executable}'
+does not seem to be a valid plotly orca executable. Please refer to the end of
+this message for details on what went wrong.
 
 {instructions}""".format(
         executable=executable,
         instructions=install_location_instructions)
 
-    try:
-        help_result = subprocess.check_output([executable, '--help'])
-    except subprocess.CalledProcessError:
-        raise ValueError(invalid_executable_msg)
+    # ### Run with Popen so we get access to stdout and stderr
+    p = subprocess.Popen(
+        [executable, '--help'],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE)
+
+    help_result, help_error = p.communicate()
+
+    if p.returncode != 0:
+        err_msg = invalid_executable_msg + """
+Here is the error that was returned by the command
+    $ {executable} --help
+
+[Return code: {returncode}]
+{err_msg}
+""".format(executable=executable,
+           err_msg=help_error.decode('utf-8'),
+           returncode=p.returncode)
+
+        # Check for Linux without X installed.
+        if (sys.platform.startswith('linux') and
+            not os.environ.get('DISPLAY')):
+
+            err_msg += """\
+Note: When used on Linux, orca requires an X11 display server, but none was
+detected. Please install X11, or configure your system with Xvfb. See
+the orca README (https://github.com/plotly/orca) for instructions on using
+orca with Xvfb.
+"""
+        raise ValueError(err_msg)
 
     if not help_result:
-        raise ValueError(invalid_executable_msg)
+        raise ValueError(invalid_executable_msg + """
+The error encountered is that no output was returned by the command
+    $ {executable} --help
+""".format(executable=executable))
 
     if ("Plotly's image-exporting utilities" not in
             help_result.decode('utf-8')):
-        raise ValueError(invalid_executable_msg)
+        raise ValueError(invalid_executable_msg + """
+The error encountered is that unexpected output was returned by the command
+    $ {executable} --help
+
+{help_result}
+""".format(executable=executable, help_result=help_result))
 
     # Get orca version
     # ----------------
-    try:
-        orca_version = subprocess.check_output([executable, '--version'])
-    except subprocess.CalledProcessError:
-        raise ValueError("""
+    # ### Run with Popen so we get access to stdout and stderr
+    p = subprocess.Popen(
+        [executable, '--version'],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE)
+
+    version_result, version_error = p.communicate()
+
+    if p.returncode != 0:
+        raise ValueError(invalid_executable_msg + """
 An error occurred while trying to get the version of the orca executable.
-Here is the command that plotly.py ran to request the version:
-
+Here is the command that plotly.py ran to request the version
     $ {executable} --version
-""".format(executable=executable))
 
-    if not orca_version:
-        raise ValueError("""
-No version was reported by the orca executable.      
+This command returned the following error:
 
+[Return code: {returncode}]
+{err_msg}
+        """.format(executable=executable,
+                   err_msg=version_error.decode('utf-8'),
+                   returncode=p.returncode))
+
+    if not version_result:
+        raise ValueError(invalid_executable_msg + """
+The error encountered is that no version was reported by the orca executable.
 Here is the command that plotly.py ran to request the version:
 
     $ {executable} --version  
 """.format(executable=executable))
     else:
-        orca_version = orca_version.decode()
+        version_result = version_result.decode()
 
     status._props['executable'] = executable
-    status._props['version'] = orca_version.strip()
+    status._props['version'] = version_result.strip()
     status._props['state'] = 'validated'
 
 
@@ -1012,18 +1059,28 @@ def shutdown_server():
                 # process. This prevents any zombie processes from being
                 # left over, and it saves us from needing to write
                 # OS-specific process management code here.
+
                 parent = psutil.Process(orca_state['proc'].pid)
                 for child in parent.children(recursive=True):
-                    child.terminate()
+                    try:
+                        child.terminate()
+                    except:
+                        # We tried, move on
+                        pass
 
-                # Kill parent process
-                orca_state['proc'].terminate()
+                try:
+                    # Kill parent process
+                    orca_state['proc'].terminate()
 
-                # Retrieve standard out and standard error to avoid warnings
-                output, err = orca_state['proc'].communicate()
+                    # Retrieve standard out and standard error to avoid
+                    # warnings
+                    output, err = orca_state['proc'].communicate()
 
-                # Wait for the process to shutdown
-                child_status = orca_state['proc'].wait()
+                    # Wait for the process to shutdown
+                    child_status = orca_state['proc'].wait()
+                except:
+                    # We tried, move on
+                    pass
 
                 # Update our internal process management state
                 orca_state['proc'] = None
