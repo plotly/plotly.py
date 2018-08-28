@@ -915,8 +915,9 @@ Searched for executable '{executable}' on the following path:
     # ---------------------------------------------------
     invalid_executable_msg = """
 The orca executable is required in order to export figures as static images,
-but the executable that was found at '{executable}' does not seem to be a
-valid plotly orca executable.
+but the executable that was found at '{executable}'
+does not seem to be a valid plotly orca executable. Please refer to the end of
+this message for details on what went wrong.
 
 {instructions}""".format(
         executable=executable,
