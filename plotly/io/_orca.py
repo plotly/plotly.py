@@ -947,8 +947,10 @@ Here is the error that was returned by the command
             not os.environ.get('DISPLAY')):
 
             err_msg += """\
-Note: when used on Linux orca requires an X11 display server, but none was
-detected. Please install x11, or configure your system with Xvfb.
+Note: When used on Linux, orca requires an X11 display server, but none was
+detected. Please install X11, or configure your system with Xvfb. See
+the orca README (https://github.com/plotly/orca) for instructions on using
+orca with Xvfb.
 """
         raise ValueError(err_msg)
 
