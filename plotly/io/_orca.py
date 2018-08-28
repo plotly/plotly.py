@@ -938,7 +938,7 @@ Here is the error that was returned by the command
 [Return code: {returncode}]
 {err_msg}
         """.format(executable=executable,
-                   err_msg=help_error,
+                   err_msg=help_error.decode('utf-8'),
                    returncode=p.returncode))
 
     if not help_result:
@@ -977,7 +977,7 @@ This command returned the following error:
 [Return code: {returncode}]
 {err_msg}
         """.format(executable=executable,
-                   err_msg=version_error,
+                   err_msg=version_error.decode('utf-8'),
                    returncode=p.returncode))
 
     if not version_result:
