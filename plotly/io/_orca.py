@@ -932,15 +932,25 @@ this message for details on what went wrong.
     help_result, help_error = p.communicate()
 
     if p.returncode != 0:
-        raise ValueError(invalid_executable_msg + """
+        err_msg = invalid_executable_msg + """
 Here is the error that was returned by the command
     $ {executable} --help
 
 [Return code: {returncode}]
 {err_msg}
-        """.format(executable=executable,
-                   err_msg=help_error.decode('utf-8'),
-                   returncode=p.returncode))
+""".format(executable=executable,
+           err_msg=help_error.decode('utf-8'),
+           returncode=p.returncode)
+
+        # Check for Linux without X installed.
+        if (sys.platform.startswith('linux') and
+            not os.environ.get('DISPLAY')):
+
+            err_msg += """
+Note: when used on Linux orca requires an X11 display server, but none was
+detected. Please install x11, or configure your system with Xvfb.
+"""
+        raise ValueError(err_msg)
 
     if not help_result:
         raise ValueError(invalid_executable_msg + """
