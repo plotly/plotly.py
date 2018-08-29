@@ -11,7 +11,7 @@ DEPRECATED_DATATYPES = {
          'new': ['Scatter', 'Bar', 'Area', 'Histogram', 'etc.']},
     'Annotations':
         {'base_type': list,
-         'new': ['layout', 'layout.scene']},
+         'new': ['layout.Annotation', 'layout.scene.Annotation']},
     'Frames':
         {'base_type': list,
          'new': ['Frame']},
