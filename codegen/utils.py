@@ -141,6 +141,22 @@ CUSTOM_VALIDATOR_DATATYPES = {
     'frame.layout': 'plotly.validators.LayoutValidator'
 }
 
+# Add custom dash validators
+CUSTOM_VALIDATOR_DATATYPES.update(
+    {prop: '_plotly_utils.basevalidators.DashValidator'
+     for prop in [
+         'scatter.line.dash',
+         'histogram2dcontour.line.dash',
+         'scattergeo.line.dash',
+         'scatterpolar.line.dash',
+         'ohlc.line.dash',
+         'ohlc.decreasing.line.dash',
+         'ohlc.increasing.line.dash',
+         'contourcarpet.line.dash',
+         'contour.line.dash',
+         'scatterternary.line.dash',
+         'scattercarpet.line.dash']})
+
 # Mapping from property string (as found in plot-schema.json) to a custom
 # class name. If not included here, names are converted to TitleCase and
 # underscores are removed.
