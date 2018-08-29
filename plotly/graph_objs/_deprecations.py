@@ -45,8 +45,8 @@ class Annotations(list):
     """
     plotly.graph_objs.Annotations is deprecated.
 Please replace it with a list or tuple of instances of the following types
-  - plotly.graph_objs.layout.Annotations
-  - plotly.graph_objs.layout.scene.Annotations
+  - plotly.graph_objs.layout.Annotation
+  - plotly.graph_objs.layout.scene.Annotation
 
     """
 
@@ -54,15 +54,15 @@ Please replace it with a list or tuple of instances of the following types
         """
         plotly.graph_objs.Annotations is deprecated.
 Please replace it with a list or tuple of instances of the following types
-  - plotly.graph_objs.layout.Annotations
-  - plotly.graph_objs.layout.scene.Annotations
+  - plotly.graph_objs.layout.Annotation
+  - plotly.graph_objs.layout.scene.Annotation
 
         """
         warnings.warn(
             """plotly.graph_objs.Annotations is deprecated.
 Please replace it with a list or tuple of instances of the following types
-  - plotly.graph_objs.layout.Annotations
-  - plotly.graph_objs.layout.scene.Annotations
+  - plotly.graph_objs.layout.Annotation
+  - plotly.graph_objs.layout.scene.Annotation
 """, DeprecationWarning
         )
         super(Annotations, self).__init__(*args, **kwargs)
