@@ -911,6 +911,13 @@ Searched for executable '{executable}' on the following path:
             formatted_path=formatted_path,
             instructions=install_location_instructions))
 
+    # Clear NODE_OPTIONS environment variable
+    # ---------------------------------------
+    # When this variable is set, orca <v1.2 will have a segmentation fault
+    # due to an electron bug.
+    # See: https://github.com/electron/electron/issues/12695
+    os.environ.pop('NODE_OPTIONS', None)
+
     # Run executable with --help and see if it's our orca
     # ---------------------------------------------------
     invalid_executable_msg = """
