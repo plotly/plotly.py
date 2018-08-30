@@ -25,7 +25,7 @@ class Stream:
         self._ssl_verification_enabled = ssl_verification_enabled
         self._connect()
 
-    def write(self, data, reconnect_on=('', 200, )):
+    def write(self, data, reconnect_on=('', 200, 502)):
         ''' Send `data` to the server in chunk-encoded form.
         Check the connection before writing and reconnect
         if disconnected and if the response status code is in `reconnect_on`.
