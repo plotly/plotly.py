@@ -89,24 +89,6 @@ class TestStreaming(PlotlyTestCase):
         my_stream.close()
 
     @attr('slow')
-    def test_stream_validate_data(self):
-        with self.assertRaises(ValueError):
-            py.sign_in(un, ak)
-            my_stream = py.Stream(tk)
-            my_stream.open()
-            my_stream.write(dict(x=[1], y=[10], z=[1]))  # assumes scatter...
-            my_stream.close()
-
-    @attr('slow')
-    def test_stream_validate_layout(self):
-        with self.assertRaises(ValueError):
-            py.sign_in(un, ak)
-            my_stream = py.Stream(tk)
-            my_stream.open()
-            my_stream.write(Scatter(x=[1], y=[10]), layout=Layout(legend=True))
-            my_stream.close()
-
-    @attr('slow')
     def test_stream_unstreamable(self):
 
         # even though `name` isn't streamable, we don't validate it --> pass
