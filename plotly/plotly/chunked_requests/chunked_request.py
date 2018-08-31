@@ -94,10 +94,13 @@ class Stream:
         ssl_enabled = self._ssl_enabled
 
         if ssl_enabled:
-            proxy = os.environ.get("https_proxy")
+            proxy = (os.environ.get("https_proxy") or
+                     os.environ.get("HTTPS_PROXY"))
         else:
-            proxy = os.environ.get("http_proxy")
-        no_proxy = os.environ.get("no_proxy")
+            proxy = (os.environ.get("http_proxy") or
+                     os.environ.get("HTTP_PROXY"))
+
+        no_proxy = os.environ.get("no_proxy") or os.environ.get("NO_PROXY")
         no_proxy_url = no_proxy and self._server in no_proxy
 
         if proxy and not no_proxy_url:
