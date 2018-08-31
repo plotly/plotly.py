@@ -111,8 +111,18 @@ def get_headers():
     return headers
 
 
-@retry(wait_random_min=100, wait_random_max=1000, wait_exponential_max=10000,
-       stop_max_delay=120000)
+def should_retry(exception):
+    if isinstance(exception, exceptions.PlotlyRequestError):
+        if (isinstance(exception.status_code, int) and
+                500 <= exception.status_code < 600):
+            # Retry on 5XX errors.
+            return True
+
+    return False
+
+
+@retry(wait_exponential_multiplier=1000, wait_exponential_max=16000,
+       stop_max_delay=180000, retry_on_exception=should_retry)
 def request(method, url, **kwargs):
     """
     Central place to make any api v2 api request.

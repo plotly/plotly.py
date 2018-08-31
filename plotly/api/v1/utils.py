@@ -2,9 +2,11 @@ from __future__ import absolute_import
 
 import requests
 from requests.exceptions import RequestException
+from retrying import retry
 
 from plotly import config, exceptions
 from plotly.api.utils import basic_auth
+from plotly.api.v2.utils import should_retry
 
 
 def validate_response(response):
@@ -59,6 +61,8 @@ def get_headers():
     return headers
 
 
+@retry(wait_exponential_multiplier=1000, wait_exponential_max=16000,
+       stop_max_delay=180000, retry_on_exception=should_retry)
 def request(method, url, **kwargs):
     """
     Central place to make any v1 api request.
