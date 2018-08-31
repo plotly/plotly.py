@@ -578,7 +578,7 @@ class Stream:
 
         return streaming_specs
 
-    def heartbeat(self, reconnect_on=(200, '', 408)):
+    def heartbeat(self, reconnect_on=(200, '', 408, 502)):
         """
         Keep stream alive. Streams will close after ~1 min of inactivity.
 
@@ -616,7 +616,7 @@ class Stream:
         self._stream = chunked_requests.Stream(**streaming_specs)
 
     def write(self, trace, layout=None,
-              reconnect_on=(200, '', 408)):
+              reconnect_on=(200, '', 408, 502)):
         """
         Write to an open stream.
 
