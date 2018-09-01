@@ -509,6 +509,9 @@ class Stream:
     """
     Interface to Plotly's real-time graphing API.
 
+    NOTE: Streaming is no longer supported in Plotly Cloud.
+    Streaming is still available as part of Plotly On-Premises.
+
     Initialize a Stream object with a stream_id
     found in {plotly_domain}/settings.
     Real-time graphs are initialized with a call to `plot` that embeds
@@ -624,25 +627,31 @@ class Stream:
         you can 'write' to it in real time.
 
         positional arguments:
-        trace - A valid plotly trace object (e.g., Scatter, Heatmap, etc.).
-                Not all keys in these are `stremable` run help(Obj) on the type
-                of trace your trying to stream, for each valid key, if the key
-                is streamable, it will say 'streamable = True'. Trace objects
-                must be dictionary-like.
+        trace - A dict of properties to stream
+                Some valid keys for trace dictionaries:
+                    'x', 'y', 'text', 'z', 'marker', 'line'
 
         keyword arguments:
-        layout (default=None) - A valid Layout object
+        layout (default=None) - A valid Layout object or dict with
+                                compatible properties
                                 Run help(plotly.graph_objs.Layout)
 
-        Some valid keys for trace dictionaries:
-            'x', 'y', 'text', 'z', 'marker', 'line'
-
         Examples:
-        >>> write(dict(x=1, y=2))  # assumes 'scatter' type
-        >>> write(Bar(x=[1, 2, 3], y=[10, 20, 30]))
-        >>> write(Scatter(x=1, y=2, text='scatter text'))
-        >>> write(Scatter(x=1, y=3, marker=Marker(color='blue')))
-        >>> write(Heatmap(z=[[1, 2, 3], [4, 5, 6]]))
+
+        Append a point to a scatter trace
+        >>> write(dict(x=1, y=2))
+
+        Overwrite the x and y properties of a scatter trace
+        >>> write(dict(x=[1, 2, 3], y=[10, 20, 30]))
+
+        Append a point to a scatter trace and set the points text value
+        >>> write(dict(x=1, y=2, text='scatter text'))
+
+        Append a point to a scatter trace and set the points color
+        >>> write(dict(x=1, y=3, marker=go.Marker(color='blue')))
+
+        Set a new z value array for a Heatmap trace
+        >>> write(dict(z=[[1, 2, 3], [4, 5, 6]]))
 
         The connection to plotly's servers is checked before writing
         and reconnected if disconnected and if the response status code
@@ -650,48 +659,17 @@ class Stream:
 
         For more help, see: `help(plotly.plotly.Stream)`
         or see examples and tutorials here:
-        http://nbviewer.ipython.org/github/plotly/python-user-guide/blob/master/s7_streaming/s7_streaming.ipynb
 
         """
-        # always bypass validation in here as
-        # now automatically done
-        validate = False
 
         # Convert trace objects to dictionaries
         if isinstance(trace, BaseTraceType):
-            trace = trace.to_plotly_json()
+            stream_object = trace.to_plotly_json()
+        else:
+            stream_object = copy.deepcopy(trace)
 
-        stream_object = dict()
-        stream_object.update(trace)
-        if 'type' not in stream_object:
-            # tests if Scatter contains invalid kwargs
-            dummy_obj = copy.deepcopy(Scatter(**stream_object))
-            stream_object = Scatter(**stream_object)
-            stream_object['type'] = 'scatter'
-
-        # TODO: remove this validation as now it's
-        # done automatically
-        if validate:
-            try:
-                tools.validate(stream_object, stream_object['type'])
-            except exceptions.PlotlyError as err:
-                raise exceptions.PlotlyError(
-                    "Part of the data object with type, '{0}', is invalid. "
-                    "This will default to 'scatter' if you do not supply a "
-                    "'type'. If you do not want to validate your data objects "
-                    "when streaming, you can set 'validate=False' in the call "
-                    "to 'your_stream.write()'. Here's why the object is "
-                    "invalid:\n\n{1}".format(stream_object['type'], err)
-                )
-            if layout is not None:
-                try:
-                    tools.validate(layout, 'Layout')
-                except exceptions.PlotlyError as err:
-                    raise exceptions.PlotlyError(
-                        "Your layout kwarg was invalid. "
-                        "Here's why:\n\n{0}".format(err)
-                    )
-        del stream_object['type']
+        # Remove 'type' if present since this trace type cannot be changed
+        stream_object.pop('type', None)
 
         if layout is not None:
             stream_object.update(dict(layout=layout))
