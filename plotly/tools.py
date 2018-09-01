@@ -431,13 +431,12 @@ def mpl_to_plotly(fig, resize=False, strip_style=False, verbose=False):
     this step manually by NOT running this fuction and entereing the following:
 
     ===========================================================================
-    from mplexporter import Exporter
-    from mplexporter.renderers import PlotlyRenderer
+    from plotly.matplotlylib import mplexporter, PlotlyRenderer
 
     # create an mpl figure and store it under a varialble 'fig'
 
     renderer = PlotlyRenderer()
-    exporter = Exporter(renderer)
+    exporter = mplexporter.Exporter(renderer)
     exporter.run(fig)
     ===========================================================================
 
