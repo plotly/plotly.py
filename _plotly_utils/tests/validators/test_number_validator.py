@@ -3,7 +3,7 @@ from pytest import approx
 
 from _plotly_utils.basevalidators import NumberValidator
 import numpy as np
-
+import pandas as pd
 
 # Fixtures
 # --------
@@ -119,10 +119,12 @@ def test_acceptance_aok_list(val, validator_aok):
 @pytest.mark.parametrize('val,expected',
                          [([1.0, 0], (1.0, 0)),
                           (np.array([1, -1]), np.array([1.0, -1.0])),
+                          (pd.Series([1, -1]), np.array([1.0, -1.0])),
+                          (pd.Index([1, -1]), np.array([1.0, -1.0])),
                           ((-0.1234, 0, -1), (-0.1234, 0.0, -1.0))])
 def test_coercion_aok_list(val, expected, validator_aok):
     v = validator_aok.validate_coerce(val)
-    if isinstance(val, np.ndarray):
+    if isinstance(val, (np.ndarray, pd.Series, pd.Index)):
         assert v.dtype == 'float'
         assert np.array_equal(v, expected)
     else:
