@@ -3,6 +3,7 @@ from __future__ import absolute_import
 from plotly import exceptions, optional_imports
 from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
+from plotly.validators.heatmap import ColorscaleValidator
 
 # Optional imports, may be None for users that only use our core functionality.
 np = optional_imports.get_module('numpy')
@@ -86,6 +87,11 @@ def create_annotated_heatmap(z, x=None, y=None, annotation_text=None,
     # Avoiding mutables in the call signature
     font_colors = font_colors if font_colors is not None else []
     validate_annotated_heatmap(z, x, y, annotation_text)
+
+    # validate colorscale
+    colorscale_validator = ColorscaleValidator()
+    colorscale = colorscale_validator.validate_coerce(colorscale)
+
     annotations = _AnnotatedHeatmap(z, x, y, annotation_text,
                                     colorscale, font_colors, reversescale,
                                     **kwargs).make_annotations()
@@ -110,6 +116,15 @@ def create_annotated_heatmap(z, x=None, y=None, annotation_text=None,
     data = [trace]
 
     return graph_objs.Figure(data=data, layout=layout)
+
+
+def to_rgb_color_list(color_str, default):
+    if 'rgb' in color_str:
+        return [int(v) for v in color_str.strip('rgb()').split(',')]
+    elif '#' in color_str:
+        return utils.hex_to_rgb(color_str)
+    else:
+        return default
 
 
 class _AnnotatedHeatmap(object):
@@ -155,7 +170,7 @@ class _AnnotatedHeatmap(object):
         colorscales = ['Greys', 'Greens', 'Blues',
                        'YIGnBu', 'YIOrRd', 'RdBu',
                        'Picnic', 'Jet', 'Hot', 'Blackbody',
-                       'Earth', 'Electric', 'Viridis']
+                       'Earth', 'Electric', 'Viridis', 'Cividis']
         # Plotly colorscales ranging from a darker shade to a lighter shade
         colorscales_reverse = ['Reds']
         if self.font_colors:
@@ -174,17 +189,11 @@ class _AnnotatedHeatmap(object):
             min_text_color = '#000000'
             max_text_color = '#FFFFFF'
         elif isinstance(self.colorscale, list):
-            if 'rgb' in self.colorscale[0][1]:
-                min_col = map(int,
-                              self.colorscale[0][1].strip('rgb()').split(','))
-                max_col = map(int,
-                              self.colorscale[-1][1].strip('rgb()').split(','))
-            elif '#' in self.colorscale[0][1]:
-                    min_col = utils.hex_to_rgb(self.colorscale[0][1])
-                    max_col = utils.hex_to_rgb(self.colorscale[-1][1])
-            else:
-                min_col = [255, 255, 255]
-                max_col = [255, 255, 255]
+
+            min_col = to_rgb_color_list(self.colorscale[0][1],
+                                        [255, 255, 255])
+            max_col = to_rgb_color_list(self.colorscale[-1][1],
+                                        [255, 255, 255])
 
             if (min_col[0]*0.299 + min_col[1]*0.587 + min_col[2]*0.114) > 186:
                 min_text_color = '#000000'
