@@ -192,12 +192,6 @@ def test_description_aok(validator_aok):
     assert 'A list or array of any of the above' in desc
 
 
-def test_description_aok(validator_colorscale):
-    desc = validator_colorscale.description()
-    assert 'A number that will be interpreted as a color' in desc
-    assert 'A list or array of any of the above' not in desc
-
-
 def test_description_aok_colorscale(validator_aok_colorscale):
     desc = validator_aok_colorscale.description()
     assert 'A number that will be interpreted as a color' in desc
