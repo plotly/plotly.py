@@ -175,8 +175,11 @@ def _plot_html(figure_or_data, config, validate, default_width,
     jlayout = _json.dumps(figure.get('layout', {}),
                           cls=utils.PlotlyJSONEncoder)
 
-    jframes = _json.dumps(figure.get('frames', []),
-                          cls=utils.PlotlyJSONEncoder)
+    if figure.get('frames', None):
+        jframes = _json.dumps(figure.get('frames', []),
+                              cls=utils.PlotlyJSONEncoder)
+    else:
+        jframes = None
 
     configkeys = (
         'staticPlot',
