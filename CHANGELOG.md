@@ -2,6 +2,55 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.2.0] - 2018-09-??
+This release introduces the long-anticipated ability to programmatically
+export figures as high quality raster and vector static images.
+
+### JupyterLab Versions
+For use with JupyterLab, the following versions of the following packages
+must be installed:
+
+TODO:
+
+### Added
+ - Updated plotly.js to version 1.40.1, which introduces the following features:
+    - Allow contour, contourcarpet and histogram2dcontour to have corresponding legend items using showlegend
+    ([plotly/plotly.js#2891](https://github.com/plotly/plotly.js/pull/2891),
+    [plotly/plotly.js#2914](https://github.com/plotly/plotly.js/pull/2914))
+    - Add scatterpolar and scatterpolargl attributes r0, dr, theta0 and dtheta
+    ([plotly/plotly.js#2895](https://github.com/plotly/plotly.js/pull/2895))
+    - Add layout attributes piecolorway and extendpiecolors for more control over pie colors
+    ([plotly/plotly.js#2870](https://github.com/plotly/plotly.js/pull/2870))
+    - Add splom attribute dimensions[i].axis.type to easily override axis type in splom-generated axes
+    ([plotly/plotly.js#2899](https://github.com/plotly/plotly.js/pull/2870))
+    - Add support for on-graph text in scatterpolargl traces
+    ([plotly/plotly.js#2895](https://github.com/plotly/plotly.js/pull/2895))
+    - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1400----2018-08-16)
+    for bug fixes and more information.
+ - Offline static image export support with the new `to_image` and `write_image`
+ function in the new `plotly.io` package ([#1120](https://github.com/plotly/plotly.py/pull/1120))
+ - Support for displaying `FigureWidget` instances in static contexts (e.g. nbviewer) just like the built-in ipywidgets ([#1117](https://github.com/plotly/plotly.py/pull/1117))
+ - Full integration of the Cividis colorscale ([#883](https://github.com/plotly/plotly.py/pull/883))
+ - Conda recipe that will be used to publish official packages to the [plotly
+ anaconda channel](https://anaconda.org/plotly/).  The README now includes conda
+ installation instructions, and going forward conda packages will be
+ released on the same day as the corresponding pip packages. 
+ ([72ad0e4](https://github.com/plotly/plotly.py/commit/72ad0e4bf54bb8a06445d2ca55488ffc11c836a7))
+ 
+### Updated
+ - Show traces at the top of the Gantt chart's colorbar [#1110](https://github.com/plotly/plotly.py/pull/1110)
+ - More robust and specific logic for retrying requests to the plot.ly cloud service ([#1146](https://github.com/plotly/plotly.py/pull/1146))
+ - Significantly improved validation performance for numeric pandas `Series` objects ([#1149](https://github.com/plotly/plotly.py/pull/1149))
+ - Support basic authentication when using the streaming API behind a proxy server ([#1133](https://github.com/plotly/plotly.py/pull/1133))
+
+### Fixed
+ - Incorrect deprecation warning for deprecated `plotly.graph_objs.Annotations` class ([#1138](https://github.com/plotly/plotly.py/pull/1138))
+ - Validators for `dash` properties (e.g. `scatter.line.dash`) incorrectly rejected dash length lists ([#1136](https://github.com/plotly/plotly.py/pull/1136))
+ - Annotated heatmap error when custom colorscale was specified ([#1151](https://github.com/plotly/plotly.py/pull/1151))
+ - Harmless JavaScript console error when opening an html file produced by `plotly.offline.plot` ([#1152](https://github.com/plotly/plotly.py/pull/1152))
+ - Incorrect validation errors when writing data to the streaming API ([#1145](https://github.com/plotly/plotly.py/pull/1145))
+ 
+
 ## [3.1.1] - 2018-08-10
 This release is a minor bug-fix update to version 3.1.0
 
