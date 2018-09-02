@@ -4,6 +4,7 @@ import pytest
 from pytest import approx
 from _plotly_utils.basevalidators import IntegerValidator
 import numpy as np
+import pandas as pd
 
 
 # ### Fixtures ###
@@ -121,16 +122,19 @@ def test_acceptance_aok_list(val, validator_aok):
                          [([1, 0], (1, 0)),
                           ((1, -1), (1, -1)),
                           (np.array([-1, 0, 5.0], dtype='int16'), [-1, 0, 5]),
-                          (np.array([1, 0], dtype=np.int64), [1, 0])])
+                          (np.array([1, 0], dtype=np.int64), [1, 0]),
+                          (pd.Series([1, 0], dtype=np.int64), [1, 0]),
+                          (pd.Index([1, 0], dtype=np.int64), [1, 0])])
 def test_coercion_aok_list(val, expected, validator_aok):
     v = validator_aok.validate_coerce(val)
-    if isinstance(val, np.ndarray):
+    if isinstance(val, (np.ndarray, pd.Series, pd.Index)):
         assert v.dtype == np.int32
         assert np.array_equal(validator_aok.present(v),
                               np.array(expected, dtype=np.int32))
     else:
         assert isinstance(v, list)
         assert validator_aok.present(v) == expected
+
 
 # ### Rejection ###
 #
