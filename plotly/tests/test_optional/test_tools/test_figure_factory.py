@@ -822,16 +822,14 @@ class TestAnnotatedHeatmap(TestCase, NumpyTestUtilsMixin):
 
         z = [[1, 0], [.25, .75], [.45, .5]]
         text = [['first', 'second'], ['third', 'fourth'], ['fifth', 'sixth']]
-        a = ff.create_annotated_heatmap(z, x=['A', 'B'],
-                                                       y=['One', 'Two',
-                                                          'Three'],
-                                                       annotation_text=text,
-                                                       colorscale=[[0,
-                                                                    '#ffffff'],
-                                                                   [1,
-                                                                    '#e6005a']]
-                                                       )
-        expected_a = {'data': [{'colorscale': [[0, '#ffffff'], [1, '#e6005a']],
+        a = ff.create_annotated_heatmap(z,
+                                        x=['A', 'B'],
+                                        y=['One', 'Two', 'Three'],
+                                        annotation_text=text,
+                                        colorscale=[[0, 'rgb(255,255,255)'],
+                                                    [1, '#e6005a']])
+        expected_a = {'data': [{'colorscale':
+                                    [[0, 'rgb(255,255,255)'], [1, '#e6005a']],
                                 'showscale': False,
                                 'type': 'heatmap',
                                 'x': ['A', 'B'],
