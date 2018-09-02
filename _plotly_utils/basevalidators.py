@@ -83,11 +83,20 @@ def copy_to_readonly_numpy_array(v, dtype=None, force_numeric=False):
     # u: unsigned int, i: signed int, f: float
     numeric_kinds = ['u', 'i', 'f']
 
+    # Unwrap data types that have a `values` property that might be a numpy
+    # array. If this values property is a numeric numpy array then we
+    # can take the fast path below
+    if pd and isinstance(v, (pd.Series, pd.Index)):
+        v = v.values
+
     if not isinstance(v, np.ndarray):
         v_list = [to_scalar_or_list(e) for e in v]
         new_v = np.array(v_list, order='C', dtype=dtype)
     elif v.dtype.kind in numeric_kinds:
-        new_v = np.ascontiguousarray(v.astype(dtype))
+        if dtype:
+            new_v = np.ascontiguousarray(v.astype(dtype))
+        else:
+            new_v = np.ascontiguousarray(v)
     else:
         new_v = v.copy()
 
