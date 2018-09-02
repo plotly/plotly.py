@@ -93,7 +93,10 @@ def copy_to_readonly_numpy_array(v, dtype=None, force_numeric=False):
         v_list = [to_scalar_or_list(e) for e in v]
         new_v = np.array(v_list, order='C', dtype=dtype)
     elif v.dtype.kind in numeric_kinds:
-        new_v = np.ascontiguousarray(v.astype(dtype))
+        if dtype:
+            new_v = np.ascontiguousarray(v.astype(dtype))
+        else:
+            new_v = np.ascontiguousarray(v)
     else:
         new_v = v.copy()
 
