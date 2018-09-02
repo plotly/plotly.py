@@ -174,9 +174,12 @@ def _plot_html(figure_or_data, config, validate, default_width,
     jdata = _json.dumps(figure.get('data', []), cls=utils.PlotlyJSONEncoder)
     jlayout = _json.dumps(figure.get('layout', {}),
                           cls=utils.PlotlyJSONEncoder)
-    if 'frames' in figure_or_data:
-        jframes = _json.dumps(figure.get('frames', {}),
+
+    if figure.get('frames', None):
+        jframes = _json.dumps(figure.get('frames', []),
                               cls=utils.PlotlyJSONEncoder)
+    else:
+        jframes = None
 
     configkeys = (
         'staticPlot',
@@ -229,7 +232,7 @@ def _plot_html(figure_or_data, config, validate, default_width,
         config['linkText'] = link_text
         jconfig = jconfig.replace('Export to plot.ly', link_text)
 
-    if 'frames' in figure_or_data:
+    if jframes:
         script = '''
         Plotly.plot(
             '{id}',
