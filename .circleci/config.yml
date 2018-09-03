@@ -333,20 +333,22 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - conda-37-v1-{{ checksum ".circleci/create_conda_optional_env.sh" }}
+            - conda_and_build-v1{{ checksum ".circleci/install_miniconda_and_build_.sh" }}
       - run:
           name: Create conda environment
-          command: .circleci/create_conda_optional_env.sh
+          command: .circleci/install_miniconda_and_build_.sh
 
       - run:
           name: Build conda package
           command: |
             . /home/circleci/miniconda/etc/profile.d/conda.sh
+            conda activate
             conda build --python $PYTHON_VERSION recipe/
       - run:
           name: Convert package
           command: |
             . /home/circleci/miniconda/etc/profile.d/conda.sh
+            conda activate
             mkdir -p ./conda_packages/linux-64/
             mv /home/circleci/miniconda/conda-bld/plotly-*.tar.bz2 ./conda_packages/linux-64/
             conda convert -p osx-64 conda_packages/linux-64/plotly-*.tar.bz2 -o ./conda_packages/
@@ -370,7 +372,7 @@ workflows:
 #      - "python-3.4-core"
 #      - "python-3.5-core"
 #      - "python-3.6-core"
-      - "python-3.7-core"
+#      - "python-3.7-core"
 #      - "python-2.7-optional"
 #      - "python-3.4-optional"
 #      - "python-3.5-optional"
@@ -382,7 +384,5 @@ workflows:
 #      - "python-3.7-plot_ly"
 #      - "python-2-7-orca"
 #      - "python-3-5-orca"
-      - "python-3-7-orca"
-      - "python-3-7-conda":
-          requires:
-            - python-3-7-orca
+#      - "python-3-7-orca"
+      - "python-3-7-conda"
