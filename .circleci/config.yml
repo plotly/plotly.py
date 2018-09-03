@@ -355,15 +355,17 @@ jobs:
             . /home/circleci/miniconda/etc/profile.d/conda.sh
             conda activate
             mkdir -p ./conda_packages/linux-64/
-            mv /home/circleci/miniconda/conda-bld/linux-64/plotly-*.tar.bz2 ./conda_packages/linux-64/
-            conda convert -p osx-64 conda_packages/linux-64/plotly-*.tar.bz2 -o ./conda_packages/
-            conda convert -p win-64 conda_packages/linux-64/plotly-*.tar.bz2 -o ./conda_packages/
+            mv /home/circleci/miniconda/conda-bld/linux-64/plotly-*.tar.bz2 ./conda_packages_${PYTHON_VERSION}/linux-64/
+            conda convert -p linux-32 conda_packages/linux-64/plotly-*.tar.bz2 -o ./conda_packages_${PYTHON_VERSION}/
+            conda convert -p osx-64 conda_packages/linux-64/plotly-*.tar.bz2 -o ./conda_packages_${PYTHON_VERSION}/
+            conda convert -p win-64 conda_packages/linux-64/plotly-*.tar.bz2 -o ./conda_packages_${PYTHON_VERSION}/
+            conda convert -p win-32 conda_packages/linux-64/plotly-*.tar.bz2 -o ./conda_packages_${PYTHON_VERSION}/
 
       - run:
           name: Zip up packages
           command: |
             mkdir artifacts
-            zip -r artifacts/conda_packages_${PYTHON_VERSION}.zip ./conda_packages/
+            zip -r artifacts/conda_packages_${PYTHON_VERSION}.zip ./conda_packages_${PYTHON_VERSION}/
 
       - store_artifacts:
           path: artifacts
