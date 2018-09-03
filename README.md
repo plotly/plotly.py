@@ -10,7 +10,8 @@ import plotly.graph_objs as go
 fig = go.FigureWidget()
 # Display an empty figure
 fig
-
+```
+```python
 # Add a scatter chart
 fig.add_scatter(y=[2, 1, 4, 3])
 # Add a bar chart
