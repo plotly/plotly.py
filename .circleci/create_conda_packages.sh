@@ -9,7 +9,7 @@ conda build --python $PYTHON_VERSION recipe/
 
 # Convert to other architectures
 mkdir -p ./conda_packages_${PYTHON_VERSION}/linux-64/
-mv /opt/conda/conda-bld/linux-64/plotly-*.tar.bz2 ./conda_packages_${PYTHON_VERSION}/linux-64/
+cp /opt/conda/conda-bld/linux-64/plotly-*.tar.bz2 ./conda_packages_${PYTHON_VERSION}/linux-64/
 conda convert -p linux-32 ./conda_packages_${PYTHON_VERSION}/linux-64/plotly-*.tar.bz2 -o ./conda_packages_${PYTHON_VERSION}/
 conda convert -p osx-64 ./conda_packages_${PYTHON_VERSION}/linux-64/plotly-*.tar.bz2 -o ./conda_packages_${PYTHON_VERSION}/
 conda convert -p win-64 ./conda_packages_${PYTHON_VERSION}/linux-64/plotly-*.tar.bz2 -o ./conda_packages_${PYTHON_VERSION}/
