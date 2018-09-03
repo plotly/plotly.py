@@ -325,48 +325,15 @@ jobs:
 
   "python-3-7-conda":
     docker:
-      - image: circleci/node:10.9-stretch-browsers
+      - image: continuumio/miniconda3:4.5.4
         environment:
           PYTHON_VERSION: 3.7
 
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - conda_and_build-v1{{ checksum ".circleci/install_miniconda_and_build_.sh" }}
       - run:
-          name: Create conda environment
-          command: .circleci/install_miniconda_and_build_.sh
-
-      - save_cache:
-          key: conda_and_build-v1{{ checksum ".circleci/install_miniconda_and_build_.sh" }}
-          paths:
-            - /home/circleci/miniconda/
-
-      - run:
-          name: Build conda package
-          command: |
-            . /home/circleci/miniconda/etc/profile.d/conda.sh
-            conda activate
-            conda build --python $PYTHON_VERSION recipe/
-      - run:
-          name: Convert package
-          command: |
-            . /home/circleci/miniconda/etc/profile.d/conda.sh
-            conda activate
-            mkdir -p ./conda_packages/linux-64/
-            mv /home/circleci/miniconda/conda-bld/linux-64/plotly-*.tar.bz2 ./conda_packages_${PYTHON_VERSION}/linux-64/
-            conda convert -p linux-32 conda_packages/linux-64/plotly-*.tar.bz2 -o ./conda_packages_${PYTHON_VERSION}/
-            conda convert -p osx-64 conda_packages/linux-64/plotly-*.tar.bz2 -o ./conda_packages_${PYTHON_VERSION}/
-            conda convert -p win-64 conda_packages/linux-64/plotly-*.tar.bz2 -o ./conda_packages_${PYTHON_VERSION}/
-            conda convert -p win-32 conda_packages/linux-64/plotly-*.tar.bz2 -o ./conda_packages_${PYTHON_VERSION}/
-
-      - run:
-          name: Zip up packages
-          command: |
-            mkdir artifacts
-            zip -r artifacts/conda_packages_${PYTHON_VERSION}.zip ./conda_packages_${PYTHON_VERSION}/
-
+          name: Create packages
+          command: .circleci/create_conda_packages.sh
       - store_artifacts:
           path: artifacts
 
