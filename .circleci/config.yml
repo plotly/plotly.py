@@ -355,7 +355,7 @@ jobs:
             . /home/circleci/miniconda/etc/profile.d/conda.sh
             conda activate
             mkdir -p ./conda_packages/linux-64/
-            mv /home/circleci/miniconda/conda-bld/plotly-*.tar.bz2 ./conda_packages/linux-64/
+            mv /home/circleci/miniconda/conda-bld/linux-64/plotly-*.tar.bz2 ./conda_packages/linux-64/
             conda convert -p osx-64 conda_packages/linux-64/plotly-*.tar.bz2 -o ./conda_packages/
             conda convert -p win-64 conda_packages/linux-64/plotly-*.tar.bz2 -o ./conda_packages/
 
