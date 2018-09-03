@@ -338,6 +338,11 @@ jobs:
           name: Create conda environment
           command: .circleci/install_miniconda_and_build_.sh
 
+      - save_cache:
+          key: conda_and_build-v1{{ checksum ".circleci/install_miniconda_and_build_.sh" }}
+          paths:
+            - /home/circleci/miniconda/
+
       - run:
           name: Build conda package
           command: |
