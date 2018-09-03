@@ -384,6 +384,7 @@ workflows:
   version: 2
   build:
     jobs:
+
 #      - "python-2.7-core"
 #      - "python-3.4-core"
 #      - "python-3.5-core"
@@ -403,7 +404,7 @@ workflows:
 #      - "python-3-7-orca"
 
       - "python-2-7-conda":
-        - filters:
+          filters:
             branches:
               only:
                 - master
@@ -411,7 +412,7 @@ workflows:
                 - conda_build_updates
 
       - "python-3-5-conda":
-        - filters:
+          filters:
             branches:
               only:
                 - master
@@ -420,7 +421,7 @@ workflows:
       - "python-3-6-conda"
 
       - "python-3-7-conda":
-        - filters:
+          filters:
             branches:
               only:
                 - master
