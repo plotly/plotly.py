@@ -323,6 +323,48 @@ jobs:
             path: plotly/tests/test_orca/images/linux/failed
 
 
+  "python-2-7-conda":
+    docker:
+      - image: continuumio/miniconda3:4.5.4
+        environment:
+          PYTHON_VERSION: 2.7
+
+    steps:
+      - checkout
+      - run:
+          name: Create packages
+          command: .circleci/create_conda_packages.sh
+      - store_artifacts:
+          path: artifacts
+
+  "python-3-5-conda":
+    docker:
+      - image: continuumio/miniconda3:4.5.4
+        environment:
+          PYTHON_VERSION: 3.5
+
+    steps:
+      - checkout
+      - run:
+          name: Create packages
+          command: .circleci/create_conda_packages.sh
+      - store_artifacts:
+          path: artifacts
+
+  "python-3-6-conda":
+    docker:
+      - image: continuumio/miniconda3:4.5.4
+        environment:
+          PYTHON_VERSION: 3.5
+
+    steps:
+      - checkout
+      - run:
+          name: Create packages
+          command: .circleci/create_conda_packages.sh
+      - store_artifacts:
+          path: artifacts
+
   "python-3-7-conda":
     docker:
       - image: continuumio/miniconda3:4.5.4
@@ -359,4 +401,7 @@ workflows:
 #      - "python-2-7-orca"
 #      - "python-3-5-orca"
 #      - "python-3-7-orca"
+      - "python-2-7-conda"
+      - "python-3-5-conda"
+      - "python-3-6-conda"
       - "python-3-7-conda"
