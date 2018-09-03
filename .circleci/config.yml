@@ -370,7 +370,7 @@ workflows:
 #      - "python-3.4-core"
 #      - "python-3.5-core"
 #      - "python-3.6-core"
-#      - "python-3.7-core"
+      - "python-3.7-core"
 #      - "python-2.7-optional"
 #      - "python-3.4-optional"
 #      - "python-3.5-optional"
@@ -384,5 +384,5 @@ workflows:
 #      - "python-3-5-orca"
       - "python-3-7-orca"
       - "python-3-7-conda":
-        requires:
-          - python-3-7-orca
+          requires:
+            - python-3-7-orca
