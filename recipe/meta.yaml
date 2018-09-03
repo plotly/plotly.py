@@ -26,9 +26,9 @@ requirements:
     - retrying >=1.3.3
     - six
 
-test:
-  imports:
-    - plotly
+#test:
+#  imports:
+#    - plotly
 
 about:
   home: https://plot.ly/python/
