@@ -11,5 +11,5 @@ if [ ! -d $HOME/miniconda/ ]; then
 
     # Create environment
     # PYTHON_VERSION=3.6
-    $HOME/miniconda/bin/conda install conda-build
+    $HOME/miniconda/bin/conda install conda-build conda-verify
 fi
