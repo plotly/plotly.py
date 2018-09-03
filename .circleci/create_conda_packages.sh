@@ -1,5 +1,5 @@
 # Install zip
-sudo apt-get install -y zip
+apt-get install -y zip
 
 # Install conda dependencies
 conda install -y conda-build conda-verify
