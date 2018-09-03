@@ -50,24 +50,48 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 ***
 
 ## Installation of plotly.py Version 3
-To install plotly.py and enable Jupyter or Jupyter Lab support, run:
-```
-pip install plotly==3.1.1
-pip install "notebook>=5.3" "ipywidgets>=7.2"  # only necessary for Jupyter Notebook environments
-```
 
-If you're using older versions of `notebook` or `ipywidgets` you may need to manually activate the widget extensions (this should not be needed for `notebook>=5.3` and `ipywidgets>=7.2`)
-
+### Base installation
+plotly.py may be installed using pip...
 ```
-jupyter nbextension enable --py widgetsnbextension --sys-prefix
-jupyter nbextension enable --py plotlywidget --sys-prefix
+pip install plotly==3.2.0
 ```
 
-In addition, to add JupyterLab support run the following commands
+or conda.
+```
+conda install -c plotly plotly=3.2.0
+```
+
+### Jupyter Notebook Support
+For use in the Jupyter Notebook, install the `notebook` and `ipywidgets`
+packages using pip...
 
 ```
-pip install jupyterlab==0.33
+pip install "notebook>=5.3" "ipywidgets>=7.2"
+```
 
+of conda.
+
+```
+conda install "notebook>=5.3" "ipywidgets>=7.2"
+```
+
+### JupyterLab Support
+For use in JupyterLab, install the `jupyterlab` and `ipywidgets`
+packages using pip... 
+
+```
+pip install jupyterlab==0.33 "ipywidgets>=7.2"
+```
+
+of conda.
+
+```
+conda install jupyterlab==0.33 "ipywidgets>=7.2"
+```
+
+Then run the following commands to install the required JupyterLab extensions:
+```
 # Avoid "JavaScript heap out of memory" errors during extension installation
 # (OS X/Linux)
 export NODE_OPTIONS=--max-old-space-size=4096
@@ -87,6 +111,25 @@ jupyter labextension install @jupyterlab/plotly-extension@0.16  --no-build
 jupyter lab build
 ```
 
+### Static Image Export
+plotly.py supports static image export using the `to_image` and `write_image`
+functions in the `plotly.io` package. This functionality requires the
+installation of the plotly [orca](TODO) command line utility and the
+[`psutil`](TODO) Python package.
+
+These dependencies can both be installed using conda:
+```
+conda install -c plotly plotly-conda psutil
+```
+
+Or, `psutil` can be installed using pip...
+```
+pip install psutil
+```
+
+and orca can be installed according to the instructions in the [orca README](TODO).
+
+## Migration
 If you're migrating from plotly.py version 2, please check out the [migration guide](migration-guide.md)
 
 ## Copyright and Licenses
