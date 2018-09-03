@@ -418,7 +418,12 @@ workflows:
                 - master
                 - /release_.*/
 
-      - "python-3-6-conda"
+      - "python-3-6-conda":
+          filters:
+            branches:
+              only:
+                - master
+                - /release_.*/
 
       - "python-3-7-conda":
           filters:
