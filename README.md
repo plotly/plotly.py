@@ -50,9 +50,8 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 
 ***
 
-## Installation of plotly.py Version 3
+## Installation
 
-### Base installation
 plotly.py may be installed using pip...
 ```
 pip install plotly==3.2.0
