@@ -402,32 +402,32 @@ workflows:
 #      - "python-3-5-orca"
 #      - "python-3-7-orca"
 
-      - "python-2-7-conda"
-        filters:
-          branches:
-            only:
-              - master
-              - /release_.*/
-              - conda_build_updates
+      - "python-2-7-conda":
+        - filters:
+            branches:
+              only:
+                - master
+                - /release_.*/
+                - conda_build_updates
 
-      - "python-3-5-conda"
-        filters:
-          branches:
-            only:
-              - master
-              - /release_.*/
+      - "python-3-5-conda":
+        - filters:
+            branches:
+              only:
+                - master
+                - /release_.*/
 
-      - "python-3-6-conda"
-        filters:
-          branches:
-            only:
-              - master
-              - /release_.*/
+      - "python-3-6-conda":
+        - filters:
+            branches:
+              only:
+                - master
+                - /release_.*/
 
-      - "python-3-7-conda"
-        filters:
-          branches:
-            only:
-              - master
-              - /release_.*/
-              - conda_build_updates
+      - "python-3-7-conda":
+        - filters:
+            branches:
+              only:
+                - master
+                - /release_.*/
+                - conda_build_updates
