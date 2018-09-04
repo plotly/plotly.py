@@ -449,7 +449,6 @@ workflows:
           requires:
             - python-3.7-core
             - python-3.7-plot_ly
-#            - python-3.7-optional
             - python-3-7-orca
 
           filters:
