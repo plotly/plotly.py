@@ -13,6 +13,7 @@ class FillValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs="""
             outlinecolor
                 Sets the fill outline color. Has an effect only
-                when `type` is set to *fill*.""",
+                when `type` is set to "fill".
+""",
             **kwargs
         )

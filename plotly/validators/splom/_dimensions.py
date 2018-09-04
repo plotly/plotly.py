@@ -47,6 +47,7 @@ class DimensionsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 Determines whether or not this dimension is
                 shown on the graph. Note that even visible
                 false dimension contribute to the default grid
-                generate by this splom trace.""",
+                generate by this splom trace.
+""",
             **kwargs
         )

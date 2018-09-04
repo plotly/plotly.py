@@ -45,21 +45,21 @@ class ErrorXValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines the rule used to generate the error
                 bars. If *constant`, the bar lengths are of a
                 constant value. Set this constant in `value`.
-                If *percent*, the bar lengths correspond to a
+                If "percent", the bar lengths correspond to a
                 percentage of underlying data. Set this
-                percentage in `value`. If *sqrt*, the bar
+                percentage in `value`. If "sqrt", the bar
                 lengths correspond to the sqaure of the
-                underlying data. If *array*, the bar lengths
+                underlying data. If "array", the bar lengths
                 are set with data set `array`.
             value
                 Sets the value of either the percentage (if
-                `type` is set to *percent*) or the constant (if
-                `type` is set to *constant*) corresponding to
+                `type` is set to "percent") or the constant (if
+                `type` is set to "constant") corresponding to
                 the lengths of the error bars.
             valueminus
                 Sets the value of either the percentage (if
-                `type` is set to *percent*) or the constant (if
-                `type` is set to *constant*) corresponding to
+                `type` is set to "percent") or the constant (if
+                `type` is set to "constant") corresponding to
                 the lengths of the error bars in the bottom
                 (left) direction for vertical (horizontal) bars
             visible
@@ -67,6 +67,7 @@ class ErrorXValidator(_plotly_utils.basevalidators.CompoundValidator):
                 bars is visible.
             width
                 Sets the width (in px) of the cross-bar at both
-                ends of the error bars.""",
+                ends of the error bars.
+""",
             **kwargs
         )

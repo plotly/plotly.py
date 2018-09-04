@@ -51,7 +51,7 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
-                selection events. Note that, *scatter* traces
+                selection events. Note that, "scatter" traces
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
@@ -101,9 +101,9 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color.
             scene
                 Sets a reference between this trace's 3D
-                coordinate system and a 3D scene. If *scene*
+                coordinate system and a 3D scene. If "scene"
                 (the default value), the (x,y,z) coordinates
-                refer to `layout.scene`. If *scene2*, the
+                refer to `layout.scene`. If "scene2", the
                 (x,y,z) coordinates refer to `layout.scene2`,
                 and so on.
             selectedpoints
@@ -134,7 +134,7 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 dict with compatible properties
             text
                 Sets a text element associated with this trace.
-                If trace `hoverinfo` contains a *text* flag,
+                If trace `hoverinfo` contains a "text" flag,
                 this text element will be seen in all hover
                 labels. Note that streamtube traces do not
                 support array `text` values.
@@ -148,7 +148,7 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the y components of the vector field.
             visible
                 Determines whether or not this trace is
-                visible. If *legendonly*, the trace is not
+                visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
             vsrc
@@ -168,6 +168,7 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
             z
                 Sets the z coordinates of the vector field.
             zsrc
-                Sets the source reference on plot.ly for  z .""",
+                Sets the source reference on plot.ly for  z .
+""",
             **kwargs
         )

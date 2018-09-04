@@ -21,11 +21,11 @@ class LayersValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 instance or dict with compatible properties
             color
                 Sets the primary layer color. If `type` is
-                *circle*, color corresponds to the circle color
-                If `type` is *line*, color corresponds to the
-                line color If `type` is *fill*, color
+                "circle", color corresponds to the circle color
+                If `type` is "line", color corresponds to the
+                line color If `type` is "fill", color
                 corresponds to the fill color If `type` is
-                *symbol*, color corresponds to the icon color
+                "symbol", color corresponds to the icon color
             fill
                 plotly.graph_objs.layout.mapbox.layer.Fill
                 instance or dict with compatible properties
@@ -47,15 +47,15 @@ class LayersValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
             source
                 Sets the source data for this layer. Source can
                 be either a URL, a geojson object (with
-                `sourcetype` set to *geojson*) or an array of
-                tile URLS (with `sourcetype` set to *vector*).
+                `sourcetype` set to "geojson") or an array of
+                tile URLS (with `sourcetype` set to "vector").
             sourcelayer
                 Specifies the layer to use from a vector tile
-                source. Required for *vector* source type that
+                source. Required for "vector" source type that
                 supports multiple layers.
             sourcetype
                 Sets the source type for this layer. Support
-                for *raster*, *image* and *video* source types
+                for "raster", "image" and "video" source types
                 is coming soon.
             symbol
                 plotly.graph_objs.layout.mapbox.layer.Symbol
@@ -72,11 +72,12 @@ class LayersValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 matching item, this item will be hidden unless
                 you explicitly show it with `visible: true`.
             type
-                Sets the layer type. Support for *raster*,
-                *background* types is coming soon. Note that
-                *line* and *fill* are not compatible with Point
+                Sets the layer type. Support for "raster",
+                "background" types is coming soon. Note that
+                "line" and "fill" are not compatible with Point
                 GeoJSON geometries.
             visible
-                Determines whether this layer is displayed""",
+                Determines whether this layer is displayed
+""",
             **kwargs
         )

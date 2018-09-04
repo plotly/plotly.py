@@ -39,6 +39,7 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 characters and add an ellipsis.
             namelengthsrc
                 Sets the source reference on plot.ly for
-                namelength .""",
+                namelength .
+""",
             **kwargs
         )

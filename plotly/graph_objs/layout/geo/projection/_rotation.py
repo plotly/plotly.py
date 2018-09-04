@@ -50,8 +50,8 @@ class Rotation(BaseLayoutHierarchyType):
     @property
     def roll(self):
         """
-        Roll the map (in degrees) For example, a roll of *180* makes
-        the map appear upside down.
+        Roll the map (in degrees) For example, a roll of 180 makes the
+        map appear upside down.
     
         The 'roll' property is a number and may be specified as:
           - An int or float
@@ -83,7 +83,7 @@ class Rotation(BaseLayoutHierarchyType):
             Rotates the map along parallels (in degrees East).
             Defaults to the center of the `lonaxis.range` values.
         roll
-            Roll the map (in degrees) For example, a roll of *180*
+            Roll the map (in degrees) For example, a roll of 180
             makes the map appear upside down.
         """
 
@@ -103,7 +103,7 @@ class Rotation(BaseLayoutHierarchyType):
             Rotates the map along parallels (in degrees East).
             Defaults to the center of the `lonaxis.range` values.
         roll
-            Roll the map (in degrees) For example, a roll of *180*
+            Roll the map (in degrees) For example, a roll of 180
             makes the map appear upside down.
 
         Returns

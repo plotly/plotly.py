@@ -11,6 +11,7 @@ class SelectedValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs="""
             marker
                 plotly.graph_objs.violin.selected.Marker
-                instance or dict with compatible properties""",
+                instance or dict with compatible properties
+""",
             **kwargs
         )

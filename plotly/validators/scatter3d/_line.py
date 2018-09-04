@@ -73,6 +73,7 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 correspond to the last color in the array and
                 `line.cmax` will correspond to the first color.
             width
-                Sets the line width (in px).""",
+                Sets the line width (in px).
+""",
             **kwargs
         )

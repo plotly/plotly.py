@@ -20,6 +20,7 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 each sector.
             widthsrc
                 Sets the source reference on plot.ly for  width
-                .""",
+                .
+""",
             **kwargs
         )

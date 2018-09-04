@@ -13,6 +13,7 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs="""
             width
                 Sets the line width. Has an effect only when
-                `type` is set to *line*.""",
+                `type` is set to "line".
+""",
             **kwargs
         )

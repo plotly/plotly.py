@@ -12,7 +12,7 @@ class PointcloudValidator(_plotly_utils.basevalidators.CompoundValidator):
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
-                selection events. Note that, *scatter* traces
+                selection events. Note that, "scatter" traces
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
@@ -84,8 +84,8 @@ class PointcloudValidator(_plotly_utils.basevalidators.CompoundValidator):
                 appears over all the data points. If an array
                 of string, the items are mapped in order to the
                 this trace's (x,y) coordinates. If trace
-                `hoverinfo` contains a *text* flag and
-                *hovertext* is not set, these elements will be
+                `hoverinfo` contains a "text" flag and
+                "hovertext" is not set, these elements will be
                 seen in the hover labels.
             textsrc
                 Sets the source reference on plot.ly for  text
@@ -94,16 +94,16 @@ class PointcloudValidator(_plotly_utils.basevalidators.CompoundValidator):
 
             visible
                 Determines whether or not this trace is
-                visible. If *legendonly*, the trace is not
+                visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
             x
                 Sets the x coordinates.
             xaxis
                 Sets a reference between this trace's x
-                coordinates and a 2D cartesian x axis. If *x*
+                coordinates and a 2D cartesian x axis. If "x"
                 (the default value), the x coordinates refer to
-                `layout.xaxis`. If *x2*, the x coordinates
+                `layout.xaxis`. If "x2", the x coordinates
                 refer to `layout.xaxis2`, and so on.
             xbounds
                 Specify `xbounds` in the shape of `[xMin, xMax]
@@ -127,9 +127,9 @@ class PointcloudValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the y coordinates.
             yaxis
                 Sets a reference between this trace's y
-                coordinates and a 2D cartesian y axis. If *y*
+                coordinates and a 2D cartesian y axis. If "y"
                 (the default value), the y coordinates refer to
-                `layout.yaxis`. If *y2*, the y coordinates
+                `layout.yaxis`. If "y2", the y coordinates
                 refer to `layout.yaxis2`, and so on.
             ybounds
                 Specify `ybounds` in the shape of `[yMin, yMax]
@@ -140,6 +140,7 @@ class PointcloudValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 ybounds .
             ysrc
-                Sets the source reference on plot.ly for  y .""",
+                Sets the source reference on plot.ly for  y .
+""",
             **kwargs
         )

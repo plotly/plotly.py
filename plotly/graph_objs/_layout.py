@@ -103,7 +103,7 @@ class Layout(BaseLayoutType):
                     Indicates in what terms the tail of the
                     annotation (ax,ay)  is specified. If `pixel`,
                     `ax` is a relative offset in pixels  from `x`.
-                    If set to an x axis id (e.g. *x* or *x2*), `ax`
+                    If set to an x axis id (e.g. "x" or "x2"), `ax`
                     is  specified in the same terms as that axis.
                     This is useful  for trendline annotations which
                     should continue to indicate  the correct trend
@@ -120,7 +120,7 @@ class Layout(BaseLayoutType):
                     Indicates in what terms the tail of the
                     annotation (ax,ay)  is specified. If `pixel`,
                     `ay` is a relative offset in pixels  from `y`.
-                    If set to a y axis id (e.g. *y* or *y2*), `ay`
+                    If set to a y axis id (e.g. "y" or "y2"), `ay`
                     is  specified in the same terms as that axis.
                     This is useful  for trendline annotations which
                     should continue to indicate  the correct trend
@@ -141,7 +141,7 @@ class Layout(BaseLayoutType):
                     captures mouse move and click events, or allows
                     those events to pass through to data points in
                     the plot that may be behind the annotation. By
-                    default `captureevents` is *false* unless
+                    default `captureevents` is False unless
                     `hovertext` is provided. If you use the event
                     `plotly_clickannotation` without `hovertext`
                     you must explicitly enable `captureevents`.
@@ -150,10 +150,10 @@ class Layout(BaseLayoutType):
                     plot. If you click a data point that exactly
                     matches the `x` and `y` values of this
                     annotation, and it is hidden (visible: false),
-                    it will appear. In *onoff* mode, you must click
+                    it will appear. In "onoff" mode, you must click
                     the same point again to make it disappear, so
                     if you click multiple points, you can show
-                    multiple annotations. In *onout* mode, a click
+                    multiple annotations. In "onout" mode, a click
                     anywhere else in the plot (on another data
                     point or not) will hide this annotation. If you
                     need to show/hide this annotation in response
@@ -190,9 +190,9 @@ class Layout(BaseLayoutType):
                     arrow).
                 showarrow
                     Determines whether or not the annotation is
-                    drawn with an arrow. If *true*, `text` is
-                    placed near the arrow's tail. If *false*,
-                    `text` lines up with the `x` and `y` provided.
+                    drawn with an arrow. If True, `text` is placed
+                    near the arrow's tail. If False, `text` lines
+                    up with the `x` and `y` provided.
                 standoff
                     Sets a distance, in pixels, to move the end
                     arrowhead away from the position it is pointing
@@ -253,24 +253,24 @@ class Layout(BaseLayoutType):
                     line.
                 x
                     Sets the annotation's x position. If the axis
-                    `type` is *log*, then you must take the log of
+                    `type` is "log", then you must take the log of
                     your desired range. If the axis `type` is
-                    *date*, it should be date strings, like date
+                    "date", it should be date strings, like date
                     data, though Date objects and unix milliseconds
                     will be accepted and converted to strings. If
-                    the axis `type` is *category*, it should be
+                    the axis `type` is "category", it should be
                     numbers, using the scale where each category is
                     assigned a serial number from zero in the order
                     it appears.
                 xanchor
                     Sets the text box's horizontal position anchor
                     This anchor binds the `x` position to the
-                    *left*, *center* or *right* of the annotation.
+                    "left", "center" or "right" of the annotation.
                     For example, if `x` is set to 1, `xref` to
-                    *paper* and `xanchor` to *right* then the
+                    "paper" and `xanchor` to "right" then the
                     right-most portion of the annotation lines up
                     with the right-most edge of the plotting area.
-                    If *auto*, the anchor is equivalent to *center*
+                    If "auto", the anchor is equivalent to "center"
                     for data-referenced annotations or if there is
                     an arrow, whereas for paper-referenced with no
                     arrow, the anchor picked corresponds to the
@@ -281,9 +281,9 @@ class Layout(BaseLayoutType):
                     the annotation's `x` value.
                 xref
                     Sets the annotation's x coordinate axis. If set
-                    to an x axis id (e.g. *x* or *x2*), the `x`
+                    to an x axis id (e.g. "x" or "x2"), the `x`
                     position refers to an x coordinate If set to
-                    *paper*, the `x` position refers to the
+                    "paper", the `x` position refers to the
                     distance from the left side of the plotting
                     area in normalized coordinates where 0 (1)
                     corresponds to the left (right) side.
@@ -293,24 +293,24 @@ class Layout(BaseLayoutType):
                     (negative) by this many pixels.
                 y
                     Sets the annotation's y position. If the axis
-                    `type` is *log*, then you must take the log of
+                    `type` is "log", then you must take the log of
                     your desired range. If the axis `type` is
-                    *date*, it should be date strings, like date
+                    "date", it should be date strings, like date
                     data, though Date objects and unix milliseconds
                     will be accepted and converted to strings. If
-                    the axis `type` is *category*, it should be
+                    the axis `type` is "category", it should be
                     numbers, using the scale where each category is
                     assigned a serial number from zero in the order
                     it appears.
                 yanchor
                     Sets the text box's vertical position anchor
                     This anchor binds the `y` position to the
-                    *top*, *middle* or *bottom* of the annotation.
+                    "top", "middle" or "bottom" of the annotation.
                     For example, if `y` is set to 1, `yref` to
-                    *paper* and `yanchor` to *top* then the top-
+                    "paper" and `yanchor` to "top" then the top-
                     most portion of the annotation lines up with
                     the top-most edge of the plotting area. If
-                    *auto*, the anchor is equivalent to *middle*
+                    "auto", the anchor is equivalent to "middle"
                     for data-referenced annotations or if there is
                     an arrow, whereas for paper-referenced with no
                     arrow, the anchor picked corresponds to the
@@ -321,9 +321,9 @@ class Layout(BaseLayoutType):
                     the annotation's `y` value.
                 yref
                     Sets the annotation's y coordinate axis. If set
-                    to an y axis id (e.g. *y* or *y2*), the `y`
+                    to an y axis id (e.g. "y" or "y2"), the `y`
                     position refers to an y coordinate If set to
-                    *paper*, the `y` position refers to the
+                    "paper", the `y` position refers to the
                     distance from the bottom of the plotting area
                     in normalized coordinates where 0 (1)
                     corresponds to the bottom (top).
@@ -414,13 +414,13 @@ class Layout(BaseLayoutType):
     def barmode(self):
         """
         Determines how bars at the same location coordinate are
-        displayed on the graph. With *stack*, the bars are stacked on
-        top of one another With *relative*, the bars are stacked on top
+        displayed on the graph. With "stack", the bars are stacked on
+        top of one another With "relative", the bars are stacked on top
         of one another, with negative values below the axis, positive
-        values above With *group*, the bars are plotted next to one
-        another centered around the shared location. With *overlay*,
+        values above With "group", the bars are plotted next to one
+        another centered around the shared location. With "overlay",
         the bars are plotted over one another, you might need to an
-        *opacity* to see multiple bars.
+        "opacity" to see multiple bars.
     
         The 'barmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -442,9 +442,9 @@ class Layout(BaseLayoutType):
     def barnorm(self):
         """
         Sets the normalization for bar traces on the graph. With
-        *fraction*, the value of each bar is divide by the sum of the
-        values at the location coordinate. With *percent*, the results
-        form *fraction* are presented in percents.
+        "fraction", the value of each bar is divide by the sum of the
+        values at the location coordinate. With "percent", the results
+        form "fraction" are presented in percents.
     
         The 'barnorm' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -508,10 +508,10 @@ class Layout(BaseLayoutType):
     def boxmode(self):
         """
         Determines how boxes at the same location coordinate are
-        displayed on the graph. If *group*, the boxes are plotted next
+        displayed on the graph. If "group", the boxes are plotted next
         to one another centered around the shared location. If
-        *overlay*, the boxes are plotted over one another, you might
-        need to set *opacity* to see them multiple boxes.
+        "overlay", the boxes are plotted over one another, you might
+        need to set "opacity" to see them multiple boxes.
     
         The 'boxmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -625,9 +625,9 @@ class Layout(BaseLayoutType):
     @property
     def dragmode(self):
         """
-        Determines the mode of drag interactions. *select* and *lasso*
-        apply only to scatter traces with markers or text. *orbit* and
-        *turntable* apply only to 3D scenes.
+        Determines the mode of drag interactions. "select" and "lasso"
+        apply only to scatter traces with markers or text. "orbit" and
+        "turntable" apply only to 3D scenes.
     
         The 'dragmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -698,11 +698,11 @@ class Layout(BaseLayoutType):
                     system. The plotly service (at https://plot.ly
                     or on-premise) generates images on a server,
                     where only a select number of fonts are
-                    installed and supported. These include *Arial*,
-                    *Balto*, *Courier New*, *Droid Sans*,, *Droid
-                    Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
-                    Standard TT*, *Open Sans*, *Overpass*, *PT Sans
-                    Narrow*, *Raleway*, *Times New Roman*.
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
                 size
 
         Returns
@@ -839,8 +839,8 @@ class Layout(BaseLayoutType):
                     If no `subplots`, `xaxes`, or `yaxes` are given
                     but we do have `rows` and `columns`, we can
                     generate defaults using consecutive axis IDs,
-                    in two ways: *coupled* gives one x axis per
-                    column and one y axis per row. *independent*
+                    in two ways: "coupled" gives one x axis per
+                    column and one y axis per row. "independent"
                     uses a new xy pair for each cell, left-to-right
                     across each row then iterating rows according
                     to `roworder`.
@@ -859,7 +859,7 @@ class Layout(BaseLayoutType):
                     Used for freeform grids, where some axes may be
                     shared across subplots but others are not. Each
                     entry should be a cartesian subplot id, like
-                    *xy* or *x3y2*, or ** to leave that cell empty.
+                    "xy" or "x3y2", or ** to leave that cell empty.
                     You may reuse x axes within the same column,
                     and y axes within the same row. Non-cartesian
                     subplots and traces that support `domain` can
@@ -868,7 +868,7 @@ class Layout(BaseLayoutType):
                 xaxes
                     Used with `yaxes` when the x and y axes are
                     shared across columns and rows. Each entry
-                    should be an x axis id like *x*, *x2*, etc., or
+                    should be an x axis id like "x", "x2", etc., or
                     ** to not put an x axis in that column. Entries
                     other than ** must be unique. Ignored if
                     `subplots` is present. If missing but `yaxes`
@@ -880,14 +880,14 @@ class Layout(BaseLayoutType):
                     grids and 0.2 for independent grids.
                 xside
                     Sets where the x axis labels and titles go.
-                    *bottom* means the very bottom of the grid.
+                    "bottom" means the very bottom of the grid.
                     *bottom plot* is the lowest plot that each x
-                    axis is used in. *top* and *top plot* are
+                    axis is used in. "top" and *top plot* are
                     similar.
                 yaxes
                     Used with `yaxes` when the x and y axes are
                     shared across columns and rows. Each entry
-                    should be an y axis id like *y*, *y2*, etc., or
+                    should be an y axis id like "y", "y2", etc., or
                     ** to not put a y axis in that row. Entries
                     other than ** must be unique. Ignored if
                     `subplots` is present. If missing but `xaxes`
@@ -899,9 +899,9 @@ class Layout(BaseLayoutType):
                     and 0.3 for independent grids.
                 yside
                     Sets where the y axis labels and titles go.
-                    *left* means the very left edge of the grid.
+                    "left" means the very left edge of the grid.
                     *left plot* is the leftmost plot that each y
-                    axis is used in. *right* and *right plot* are
+                    axis is used in. "right" and *right plot* are
                     similar.
 
         Returns
@@ -1157,12 +1157,12 @@ class Layout(BaseLayoutType):
                     Sets the anchor for the x position
                 xref
                     Sets the images's x coordinate axis. If set to
-                    a x axis id (e.g. *x* or *x2*), the `x`
+                    a x axis id (e.g. "x" or "x2"), the `x`
                     position refers to an x data coordinate If set
-                    to *paper*, the `x` position refers to the
+                    to "paper", the `x` position refers to the
                     distance from the left of plot in normalized
-                    coordinates where *0* (*1*) corresponds to the
-                    left (right).
+                    coordinates where 0 (1) corresponds to the left
+                    (right).
                 y
                     Sets the image's y position. When `yref` is set
                     to `paper`, units are sized relative to the
@@ -1171,12 +1171,12 @@ class Layout(BaseLayoutType):
                     Sets the anchor for the y position.
                 yref
                     Sets the images's y coordinate axis. If set to
-                    a y axis id (e.g. *y* or *y2*), the `y`
+                    a y axis id (e.g. "y" or "y2"), the `y`
                     position refers to a y data coordinate. If set
-                    to *paper*, the `y` position refers to the
+                    to "paper", the `y` position refers to the
                     distance from the bottom of the plot in
-                    normalized coordinates where *0* (*1*)
-                    corresponds to the bottom (top).
+                    normalized coordinates where 0 (1) corresponds
+                    to the bottom (top).
 
         Returns
         -------
@@ -1218,28 +1218,28 @@ class Layout(BaseLayoutType):
                     between legend groups.
                 traceorder
                     Determines the order at which the legend items
-                    are displayed. If *normal*, the items are
+                    are displayed. If "normal", the items are
                     displayed top-to-bottom in the same order as
-                    the input data. If *reversed*, the items are
-                    displayed in the opposite order as *normal*. If
-                    *grouped*, the items are displayed in groups
+                    the input data. If "reversed", the items are
+                    displayed in the opposite order as "normal". If
+                    "grouped", the items are displayed in groups
                     (when a trace `legendgroup` is provided). if
-                    *grouped+reversed*, the items are displayed in
-                    the opposite order as *grouped*.
+                    "grouped+reversed", the items are displayed in
+                    the opposite order as "grouped".
                 x
                     Sets the x position (in normalized coordinates)
                     of the legend.
                 xanchor
                     Sets the legend's horizontal position anchor.
                     This anchor binds the `x` position to the
-                    *left*, *center* or *right* of the legend.
+                    "left", "center" or "right" of the legend.
                 y
                     Sets the y position (in normalized coordinates)
                     of the legend.
                 yanchor
                     Sets the legend's vertical position anchor This
-                    anchor binds the `y` position to the *top*,
-                    *middle* or *bottom* of the legend.
+                    anchor binds the `y` position to the "top",
+                    "middle" or "bottom" of the legend.
 
         Returns
         -------
@@ -1283,7 +1283,7 @@ class Layout(BaseLayoutType):
                     or dict with compatible properties
                 pitch
                     Sets the pitch angle of the map (in degrees,
-                    where *0* means perpendicular to the surface of
+                    where 0 means perpendicular to the surface of
                     the map).
                 style
                     Sets the Mapbox map style. Either input one of
@@ -1527,12 +1527,12 @@ class Layout(BaseLayoutType):
                     or dict with compatible properties
                 gridshape
                     Determines if the radial axis grid lines and
-                    angular axis line are drawn as *circular*
-                    sectors or as *linear* (polygon) sectors. Has
+                    angular axis line are drawn as "circular"
+                    sectors or as "linear" (polygon) sectors. Has
                     an effect only when the angular axis has `type`
-                    *category*. Note that `radialaxis.angle` is
+                    "category". Note that `radialaxis.angle` is
                     snapped to the angle of the closest vertex when
-                    `gridshape` is *circular* (so that radial axis
+                    `gridshape` is "circular" (so that radial axis
                     scale is the same as the data scale).
                 radialaxis
                     plotly.graph_objs.layout.polar.RadialAxis
@@ -1541,8 +1541,8 @@ class Layout(BaseLayoutType):
                     Sets angular span of this polar subplot with
                     two angles (in degrees). Sector are assumed to
                     be spanned in the counterclockwise direction
-                    with *0* corresponding to rightmost limit of
-                    the polar subplot.
+                    with 0 corresponding to rightmost limit of the
+                    polar subplot.
 
         Returns
         -------
@@ -1627,17 +1627,17 @@ class Layout(BaseLayoutType):
                     plotly.graph_objs.layout.scene.Annotation
                     instance or dict with compatible properties
                 aspectmode
-                    If *cube*, this scene's axes are drawn as a
+                    If "cube", this scene's axes are drawn as a
                     cube, regardless of the axes' ranges. If
-                    *data*, this scene's axes are drawn in
-                    proportion with the axes' ranges. If *manual*,
+                    "data", this scene's axes are drawn in
+                    proportion with the axes' ranges. If "manual",
                     this scene's axes are drawn in proportion with
-                    the input of *aspectratio* (the default
-                    behavior if *aspectratio* is provided). If
-                    *auto*, this scene's axes are drawn using the
-                    results of *data* except when one axis is more
+                    the input of "aspectratio" (the default
+                    behavior if "aspectratio" is provided). If
+                    "auto", this scene's axes are drawn using the
+                    results of "data" except when one axis is more
                     than four times the size of the two others,
-                    where in that case the results of *cube* are
+                    where in that case the results of "cube" are
                     used.
                 aspectratio
                     Sets this scene's axis aspectratio.
@@ -1706,7 +1706,7 @@ class Layout(BaseLayoutType):
         """
         Sets the decimal and thousand separators. For example, *. *
         puts a '.' before decimals and a space between thousands. In
-        English locales, dflt is *.,* but other locales may alter this
+        English locales, dflt is ".," but other locales may alter this
         default.
     
         The 'separators' property is a string and must be specified as:
@@ -1757,11 +1757,11 @@ class Layout(BaseLayoutType):
                 opacity
                     Sets the opacity of the shape.
                 path
-                    For `type` *path* - a valid SVG path with the
+                    For `type` "path" - a valid SVG path with the
                     pixel values replaced by data values in
-                    `xsizemode`/`ysizemode` being *scaled* and
+                    `xsizemode`/`ysizemode` being "scaled" and
                     taken unmodified as pixels relative to
-                    `xanchor` and `yanchor` in case of *pixel* size
+                    `xanchor` and `yanchor` in case of "pixel" size
                     mode. There are a few restrictions / quirks
                     only absolute instructions, not relative. So
                     the allowed segments are: M, L, H, V, Q, C, T,
@@ -1795,16 +1795,16 @@ class Layout(BaseLayoutType):
                     you explicitly show it with `visible: true`.
                 type
                     Specifies the shape type to be drawn. If
-                    *line*, a line is drawn from (`x0`,`y0`) to
+                    "line", a line is drawn from (`x0`,`y0`) to
                     (`x1`,`y1`) with respect to the axes' sizing
-                    mode. If *circle*, a circle is drawn from
+                    mode. If "circle", a circle is drawn from
                     ((`x0`+`x1`)/2, (`y0`+`y1`)/2)) with radius
                     (|(`x0`+`x1`)/2 - `x0`|, |(`y0`+`y1`)/2
                     -`y0`)|) with respect to the axes' sizing mode.
-                    If *rect*, a rectangle is drawn linking
+                    If "rect", a rectangle is drawn linking
                     (`x0`,`y0`), (`x1`,`y0`), (`x1`,`y1`),
                     (`x0`,`y1`), (`x0`,`y0`) with respect to the
-                    axes' sizing mode. If *path*, draw a custom SVG
+                    axes' sizing mode. If "path", draw a custom SVG
                     path using `path`. with respect to the axes'
                     sizing mode.
                 visible
@@ -1818,31 +1818,31 @@ class Layout(BaseLayoutType):
                     `xsizemode` for more info.
                 xanchor
                     Only relevant in conjunction with `xsizemode`
-                    set to *pixel*. Specifies the anchor point on
+                    set to "pixel". Specifies the anchor point on
                     the x axis to which `x0`, `x1` and x
                     coordinates within `path` are relative to. E.g.
                     useful to attach a pixel sized shape to a
                     certain data value. No effect when `xsizemode`
-                    not set to *pixel*.
+                    not set to "pixel".
                 xref
                     Sets the shape's x coordinate axis. If set to
-                    an x axis id (e.g. *x* or *x2*), the `x`
+                    an x axis id (e.g. "x" or "x2"), the `x`
                     position refers to an x coordinate. If set to
-                    *paper*, the `x` position refers to the
+                    "paper", the `x` position refers to the
                     distance from the left side of the plotting
-                    area in normalized coordinates where *0* (*1*)
+                    area in normalized coordinates where 0 (1)
                     corresponds to the left (right) side. If the
-                    axis `type` is *log*, then you must take the
+                    axis `type` is "log", then you must take the
                     log of your desired range. If the axis `type`
-                    is *date*, then you must convert the date to
+                    is "date", then you must convert the date to
                     unix time in milliseconds.
                 xsizemode
                     Sets the shapes's sizing mode along the x axis.
-                    If set to *scaled*, `x0`, `x1` and x
+                    If set to "scaled", `x0`, `x1` and x
                     coordinates within `path` refer to data values
                     on the x axis or a fraction of the plot area's
-                    width (`xref` set to *paper*). If set to
-                    *pixel*, `xanchor` specifies the x position in
+                    width (`xref` set to "paper"). If set to
+                    "pixel", `xanchor` specifies the x position in
                     terms of data or plot fraction but `x0`, `x1`
                     and x coordinates within `path` are pixels
                     relative to `xanchor`. This way, the shape can
@@ -1856,27 +1856,27 @@ class Layout(BaseLayoutType):
                     `ysizemode` for more info.
                 yanchor
                     Only relevant in conjunction with `ysizemode`
-                    set to *pixel*. Specifies the anchor point on
+                    set to "pixel". Specifies the anchor point on
                     the y axis to which `y0`, `y1` and y
                     coordinates within `path` are relative to. E.g.
                     useful to attach a pixel sized shape to a
                     certain data value. No effect when `ysizemode`
-                    not set to *pixel*.
+                    not set to "pixel".
                 yref
                     Sets the annotation's y coordinate axis. If set
-                    to an y axis id (e.g. *y* or *y2*), the `y`
+                    to an y axis id (e.g. "y" or "y2"), the `y`
                     position refers to an y coordinate If set to
-                    *paper*, the `y` position refers to the
+                    "paper", the `y` position refers to the
                     distance from the bottom of the plotting area
-                    in normalized coordinates where *0* (*1*)
+                    in normalized coordinates where 0 (1)
                     corresponds to the bottom (top).
                 ysizemode
                     Sets the shapes's sizing mode along the y axis.
-                    If set to *scaled*, `y0`, `y1` and y
+                    If set to "scaled", `y0`, `y1` and y
                     coordinates within `path` refer to data values
                     on the y axis or a fraction of the plot area's
-                    height (`yref` set to *paper*). If set to
-                    *pixel*, `yanchor` specifies the y position in
+                    height (`yref` set to "paper"). If set to
+                    "pixel", `yanchor` specifies the y position in
                     terms of data or plot fraction but `y0`, `y1`
                     and y coordinates within `path` are pixels
                     relative to `yanchor`. This way, the shape can
@@ -1956,7 +1956,7 @@ class Layout(BaseLayoutType):
                     padding on both ends.
                 lenmode
                     Determines whether this slider length is set in
-                    units of plot *fraction* or in *pixels. Use
+                    units of plot "fraction" or in *pixels. Use
                     `len` to set the value.
                 minorticklen
                     Sets the length in pixels of minor step tick
@@ -2007,15 +2007,15 @@ class Layout(BaseLayoutType):
                 xanchor
                     Sets the slider's horizontal position anchor.
                     This anchor binds the `x` position to the
-                    *left*, *center* or *right* of the range
+                    "left", "center" or "right" of the range
                     selector.
                 y
                     Sets the y position (in normalized coordinates)
                     of the slider.
                 yanchor
                     Sets the slider's vertical position anchor This
-                    anchor binds the `y` position to the *top*,
-                    *middle* or *bottom* of the range selector.
+                    anchor binds the `y` position to the "top",
+                    "middle" or "bottom" of the range selector.
 
         Returns
         -------
@@ -2178,11 +2178,11 @@ class Layout(BaseLayoutType):
                     system. The plotly service (at https://plot.ly
                     or on-premise) generates images on a server,
                     where only a select number of fonts are
-                    installed and supported. These include *Arial*,
-                    *Balto*, *Courier New*, *Droid Sans*,, *Droid
-                    Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
-                    Standard TT*, *Open Sans*, *Overpass*, *PT Sans
-                    Narrow*, *Raleway*, *Times New Roman*.
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
                 size
 
         Returns
@@ -2271,7 +2271,7 @@ class Layout(BaseLayoutType):
                 xanchor
                     Sets the update menu's horizontal position
                     anchor. This anchor binds the `x` position to
-                    the *left*, *center* or *right* of the range
+                    the "left", "center" or "right" of the range
                     selector.
                 y
                     Sets the y position (in normalized coordinates)
@@ -2279,7 +2279,7 @@ class Layout(BaseLayoutType):
                 yanchor
                     Sets the update menu's vertical position anchor
                     This anchor binds the `y` position to the
-                    *top*, *middle* or *bottom* of the range
+                    "top", "middle" or "bottom" of the range
                     selector.
 
         Returns
@@ -2340,10 +2340,10 @@ class Layout(BaseLayoutType):
     def violinmode(self):
         """
         Determines how violins at the same location coordinate are
-        displayed on the graph. If *group*, the violins are plotted
+        displayed on the graph. If "group", the violins are plotted
         next to one another centered around the shared location. If
-        *overlay*, the violins are plotted over one another, you might
-        need to set *opacity* to see them multiple violins.
+        "overlay", the violins are plotted over one another, you might
+        need to set "opacity" to see them multiple violins.
     
         The 'violinmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -2396,7 +2396,7 @@ class Layout(BaseLayoutType):
                     If set to an opposite-letter axis id (e.g.
                     `x2`, `y`), this axis is bound to the
                     corresponding opposite-letter axis. If set to
-                    *free*, this axis' position is determined by
+                    "free", this axis' position is determined by
                     `position`.
                 automargin
                     Determines whether long tick labels
@@ -2405,7 +2405,7 @@ class Layout(BaseLayoutType):
                     Determines whether or not the range of this
                     axis is computed in relation to the input data.
                     See `rangemode` for more info. If `range` is
-                    provided, then `autorange` is set to *false*.
+                    provided, then `autorange` is set to False.
                 calendar
                     Sets the calendar system to use for `range` and
                     `tick0` if this is a date axis. This does not
@@ -2415,24 +2415,24 @@ class Layout(BaseLayoutType):
                 categoryarray
                     Sets the order in which categories on this axis
                     appear. Only has an effect if `categoryorder`
-                    is set to *array*. Used with `categoryorder`.
+                    is set to "array". Used with `categoryorder`.
                 categoryarraysrc
                     Sets the source reference on plot.ly for
                     categoryarray .
                 categoryorder
                     Specifies the ordering logic for the case of
                     categorical variables. By default, plotly uses
-                    *trace*, which specifies the order that is
+                    "trace", which specifies the order that is
                     present in the data supplied. Set
                     `categoryorder` to *category ascending* or
                     *category descending* if order should be
                     determined by the alphanumerical order of the
-                    category names. Set `categoryorder` to *array*
+                    category names. Set `categoryorder` to "array"
                     to derive the ordering from the attribute
                     `categoryarray`. If a category is not found in
                     the `categoryarray` array, the sorting behavior
                     for that attribute will be identical to the
-                    *trace* mode. The unspecified categories will
+                    "trace" mode. The unspecified categories will
                     follow the categories in `categoryarray`.
                 color
                     Sets default for all colors associated with
@@ -2444,54 +2444,54 @@ class Layout(BaseLayoutType):
                     If this axis needs to be compressed (either due
                     to its own `scaleanchor` and `scaleratio` or
                     those of the other axis), determines how that
-                    happens: by increasing the *range* (default),
-                    or by decreasing the *domain*.
+                    happens: by increasing the "range" (default),
+                    or by decreasing the "domain".
                 constraintoward
                     If this axis needs to be compressed (either due
                     to its own `scaleanchor` and `scaleratio` or
                     those of the other axis), determines which
                     direction we push the originally specified plot
-                    area. Options are *left*, *center* (default),
-                    and *right* for x axes, and *top*, *middle*
-                    (default), and *bottom* for y axes.
+                    area. Options are "left", "center" (default),
+                    and "right" for x axes, and "top", "middle"
+                    (default), and "bottom" for y axes.
                 domain
                     Sets the domain of this axis (in plot
                     fraction).
                 dtick
                     Sets the step in-between ticks on this axis.
                     Use with `tick0`. Must be a positive number, or
-                    special strings available to *log* and *date*
-                    axes. If the axis `type` is *log*, then ticks
+                    special strings available to "log" and "date"
+                    axes. If the axis `type` is "log", then ticks
                     are set every 10^(n*dtick) where n is the tick
                     number. For example, to set a tick mark at 1,
                     10, 100, 1000, ... set dtick to 1. To set tick
                     marks at 1, 100, 10000, ... set dtick to 2. To
                     set tick marks at 1, 5, 25, 125, 625, 3125, ...
-                    set dtick to log_10(5), or 0.69897000433. *log*
-                    has several special values; *L<f>*, where `f`
+                    set dtick to log_10(5), or 0.69897000433. "log"
+                    has several special values; "L<f>", where `f`
                     is a positive number, gives ticks linearly
                     spaced in value (but not position). For example
-                    `tick0` = 0.1, `dtick` = *L0.5* will put ticks
+                    `tick0` = 0.1, `dtick` = "L0.5" will put ticks
                     at 0.1, 0.6, 1.1, 1.6 etc. To show powers of 10
-                    plus small digits between, use *D1* (all
-                    digits) or *D2* (only 2 and 5). `tick0` is
-                    ignored for *D1* and *D2*. If the axis `type`
-                    is *date*, then you must convert the time to
+                    plus small digits between, use "D1" (all
+                    digits) or "D2" (only 2 and 5). `tick0` is
+                    ignored for "D1" and "D2". If the axis `type`
+                    is "date", then you must convert the time to
                     milliseconds. For example, to set the interval
                     between ticks to one day, set `dtick` to
-                    86400000.0. *date* also has special values
-                    *M<n>* gives ticks spaced by a number of
+                    86400000.0. "date" also has special values
+                    "M<n>" gives ticks spaced by a number of
                     months. `n` must be a positive integer. To set
                     ticks on the 15th of every third month, set
-                    `tick0` to *2000-01-15* and `dtick` to *M3*. To
-                    set ticks every 4 years, set `dtick` to *M48*
+                    `tick0` to "2000-01-15" and `dtick` to "M3". To
+                    set ticks every 4 years, set `dtick` to "M48"
                 exponentformat
                     Determines a formatting rule for the tick
                     exponents. For example, consider the number
-                    1,000,000,000. If *none*, it appears as
-                    1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If
-                    *power*, 1x10^9 (with 9 in a super script). If
-                    *SI*, 1G. If *B*, 1B.
+                    1,000,000,000. If "none", it appears as
+                    1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
+                    "power", 1x10^9 (with 9 in a super script). If
+                    "SI", 1G. If "B", 1B.
                 fixedrange
                     Determines whether or not this axis is zoom-
                     able. If true, then zoom is disabled.
@@ -2507,11 +2507,11 @@ class Layout(BaseLayoutType):
                     ME.md#locale_format And for dates see:
                     https://github.com/d3/d3-time-
                     format/blob/master/README.md#locale_format We
-                    add one item to d3's date formatter: *%{n}f*
+                    add one item to d3's date formatter: "%{n}f"
                     for fractional seconds with n digits. For
                     example, *2016-10-13 09:15:23.456* with
-                    tickformat *%H~%M~%S.%2f* would display
-                    *09~15~23.46*
+                    tickformat "%H~%M~%S.%2f" would display
+                    "09~15~23.46"
                 layer
                     Sets the layer on which this axis is displayed.
                     If *above traces*, this axis is displayed above
@@ -2519,7 +2519,7 @@ class Layout(BaseLayoutType):
                     this axis is displayed below all the subplot's
                     traces, but above the grid lines. Useful when
                     used together with scatter-like traces with
-                    `cliponaxis` set to *false* to show markers
+                    `cliponaxis` set to False to show markers
                     and/or text nodes above this axis.
                 linecolor
                     Sets the axis line color.
@@ -2528,44 +2528,44 @@ class Layout(BaseLayoutType):
                 mirror
                     Determines if the axis lines or/and ticks are
                     mirrored to the opposite side of the plotting
-                    area. If *true*, the axis lines are mirrored.
-                    If *ticks*, the axis lines and ticks are
-                    mirrored. If *false*, mirroring is disable. If
-                    *all*, axis lines are mirrored on all shared-
-                    axes subplots. If *allticks*, axis lines and
-                    ticks are mirrored on all shared-axes subplots.
+                    area. If True, the axis lines are mirrored. If
+                    "ticks", the axis lines and ticks are mirrored.
+                    If False, mirroring is disable. If "all", axis
+                    lines are mirrored on all shared-axes subplots.
+                    If "allticks", axis lines and ticks are
+                    mirrored on all shared-axes subplots.
                 nticks
                     Specifies the maximum number of ticks for the
                     particular axis. The actual number of ticks
                     will be chosen automatically to be less than or
                     equal to `nticks`. Has an effect only if
-                    `tickmode` is set to *auto*.
+                    `tickmode` is set to "auto".
                 overlaying
                     If set a same-letter axis id, this axis is
                     overlaid on top of the corresponding same-
-                    letter axis. If *false*, this axis does not
+                    letter axis. If False, this axis does not
                     overlay any same-letter axes.
                 position
                     Sets the position of this axis in the plotting
                     space (in normalized coordinates). Only has an
-                    effect if `anchor` is set to *free*.
+                    effect if `anchor` is set to "free".
                 range
                     Sets the range of this axis. If the axis `type`
-                    is *log*, then you must take the log of your
+                    is "log", then you must take the log of your
                     desired range (e.g. to set the range from 1 to
                     100, set the range from 0 to 2). If the axis
-                    `type` is *date*, it should be date strings,
+                    `type` is "date", it should be date strings,
                     like date data, though Date objects and unix
                     milliseconds will be accepted and converted to
-                    strings. If the axis `type` is *category*, it
+                    strings. If the axis `type` is "category", it
                     should be numbers, using the scale where each
                     category is assigned a serial number from zero
                     in the order it appears.
                 rangemode
-                    If *normal*, the range is computed in relation
+                    If "normal", the range is computed in relation
                     to the extrema of the input data. If *tozero*`,
                     the range extends to 0, regardless of the input
-                    data If *nonnegative*, the range is non-
+                    data If "nonnegative", the range is non-
                     negative, regardless of the input data.
                 rangeselector
                     plotly.graph_objs.layout.xaxis.Rangeselector
@@ -2606,15 +2606,15 @@ class Layout(BaseLayoutType):
                 separatethousands
                     If "true", even 4-digit integers are separated
                 showexponent
-                    If *all*, all exponents are shown besides their
-                    significands. If *first*, only the exponent of
-                    the first tick is shown. If *last*, only the
-                    exponent of the last tick is shown. If *none*,
+                    If "all", all exponents are shown besides their
+                    significands. If "first", only the exponent of
+                    the first tick is shown. If "last", only the
+                    exponent of the last tick is shown. If "none",
                     no exponents appear.
                 showgrid
                     Determines whether or not grid lines are drawn.
-                    If *true*, the grid lines are drawn at every
-                    tick mark.
+                    If True, the grid lines are drawn at every tick
+                    mark.
                 showline
                     Determines whether or not a line bounding this
                     axis is drawn.
@@ -2626,32 +2626,32 @@ class Layout(BaseLayoutType):
                     Determines whether or not the tick labels are
                     drawn.
                 showtickprefix
-                    If *all*, all tick labels are displayed with a
-                    prefix. If *first*, only the first tick is
-                    displayed with a prefix. If *last*, only the
+                    If "all", all tick labels are displayed with a
+                    prefix. If "first", only the first tick is
+                    displayed with a prefix. If "last", only the
                     last tick is displayed with a suffix. If
-                    *none*, tick prefixes are hidden.
+                    "none", tick prefixes are hidden.
                 showticksuffix
                     Same as `showtickprefix` but for tick suffixes.
                 side
                     Determines whether a x (y) axis is positioned
-                    at the *bottom* (*left*) or *top* (*right*) of
+                    at the "bottom" ("left") or "top" ("right") of
                     the plotting area.
                 spikecolor
                     Sets the spike color. If undefined, will use
                     the series color
                 spikedash
                     Sets the dash style of lines. Set to a dash
-                    type string (*solid*, *dot*, *dash*,
-                    *longdash*, *dashdot*, or *longdashdot*) or a
-                    dash length list in px (eg *5px,10px,2px,2px*).
+                    type string ("solid", "dot", "dash",
+                    "longdash", "dashdot", or "longdashdot") or a
+                    dash length list in px (eg "5px,10px,2px,2px").
                 spikemode
                     Determines the drawing mode for the spike line
-                    If *toaxis*, the line is drawn from the data
+                    If "toaxis", the line is drawn from the data
                     point to the axis the  series is plotted on. If
-                    *across*, the line is drawn across the entire
-                    plot area, and supercedes *toaxis*. If
-                    *marker*, then a marker dot is drawn on the
+                    "across", the line is drawn across the entire
+                    plot area, and supercedes "toaxis". If
+                    "marker", then a marker dot is drawn on the
                     axis the series is plotted on
                 spikesnap
                     Determines whether spikelines are stuck to the
@@ -2661,13 +2661,13 @@ class Layout(BaseLayoutType):
                 tick0
                     Sets the placement of the first tick on this
                     axis. Use with `dtick`. If the axis `type` is
-                    *log*, then you must take the log of your
+                    "log", then you must take the log of your
                     starting tick (e.g. to set the starting tick to
                     100, set the `tick0` to 2) except when
                     `dtick`=*L<f>* (see `dtick` for more info). If
-                    the axis `type` is *date*, it should be a date
+                    the axis `type` is "date", it should be a date
                     string, like date data. If the axis `type` is
-                    *category*, it should be a number, using the
+                    "category", it should be a number, using the
                     scale where each category is assigned a serial
                     number from zero in the order it appears.
                 tickangle
@@ -2686,40 +2686,40 @@ class Layout(BaseLayoutType):
                     ME.md#locale_format And for dates see:
                     https://github.com/d3/d3-time-
                     format/blob/master/README.md#locale_format We
-                    add one item to d3's date formatter: *%{n}f*
+                    add one item to d3's date formatter: "%{n}f"
                     for fractional seconds with n digits. For
                     example, *2016-10-13 09:15:23.456* with
-                    tickformat *%H~%M~%S.%2f* would display
-                    *09~15~23.46*
+                    tickformat "%H~%M~%S.%2f" would display
+                    "09~15~23.46"
                 tickformatstops
                     plotly.graph_objs.layout.xaxis.Tickformatstop
                     instance or dict with compatible properties
                 ticklen
                     Sets the tick length (in px).
                 tickmode
-                    Sets the tick mode for this axis. If *auto*,
+                    Sets the tick mode for this axis. If "auto",
                     the number of ticks is set via `nticks`. If
-                    *linear*, the placement of the ticks is
+                    "linear", the placement of the ticks is
                     determined by a starting position `tick0` and a
-                    tick step `dtick` (*linear* is the default
+                    tick step `dtick` ("linear" is the default
                     value if `tick0` and `dtick` are provided). If
-                    *array*, the placement of the ticks is set via
+                    "array", the placement of the ticks is set via
                     `tickvals` and the tick text is `ticktext`.
-                    (*array* is the default value if `tickvals` is
+                    ("array" is the default value if `tickvals` is
                     provided).
                 tickprefix
                     Sets a tick label prefix.
                 ticks
                     Determines whether ticks are drawn or not. If
                     **, this axis' ticks are not drawn. If
-                    *outside* (*inside*), this axis' are drawn
+                    "outside" ("inside"), this axis' are drawn
                     outside (inside) the axis lines.
                 ticksuffix
                     Sets a tick label suffix.
                 ticktext
                     Sets the text displayed at the ticks position
                     via `tickvals`. Only has an effect if
-                    `tickmode` is set to *array*. Used with
+                    `tickmode` is set to "array". Used with
                     `tickvals`.
                 ticktextsrc
                     Sets the source reference on plot.ly for
@@ -2727,7 +2727,7 @@ class Layout(BaseLayoutType):
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
-                    to *array*. Used with `ticktext`.
+                    to "array". Used with `ticktext`.
                 tickvalssrc
                     Sets the source reference on plot.ly for
                     tickvals .
@@ -2749,7 +2749,7 @@ class Layout(BaseLayoutType):
                     axis, otherwise false
                 zeroline
                     Determines whether or not a line is drawn at
-                    along the 0 value of this axis. If *true*, the
+                    along the 0 value of this axis. If True, the
                     zero line is drawn on top of the grid lines.
                 zerolinecolor
                     Sets the line color of the zero line.
@@ -2783,7 +2783,7 @@ class Layout(BaseLayoutType):
                     If set to an opposite-letter axis id (e.g.
                     `x2`, `y`), this axis is bound to the
                     corresponding opposite-letter axis. If set to
-                    *free*, this axis' position is determined by
+                    "free", this axis' position is determined by
                     `position`.
                 automargin
                     Determines whether long tick labels
@@ -2792,7 +2792,7 @@ class Layout(BaseLayoutType):
                     Determines whether or not the range of this
                     axis is computed in relation to the input data.
                     See `rangemode` for more info. If `range` is
-                    provided, then `autorange` is set to *false*.
+                    provided, then `autorange` is set to False.
                 calendar
                     Sets the calendar system to use for `range` and
                     `tick0` if this is a date axis. This does not
@@ -2802,24 +2802,24 @@ class Layout(BaseLayoutType):
                 categoryarray
                     Sets the order in which categories on this axis
                     appear. Only has an effect if `categoryorder`
-                    is set to *array*. Used with `categoryorder`.
+                    is set to "array". Used with `categoryorder`.
                 categoryarraysrc
                     Sets the source reference on plot.ly for
                     categoryarray .
                 categoryorder
                     Specifies the ordering logic for the case of
                     categorical variables. By default, plotly uses
-                    *trace*, which specifies the order that is
+                    "trace", which specifies the order that is
                     present in the data supplied. Set
                     `categoryorder` to *category ascending* or
                     *category descending* if order should be
                     determined by the alphanumerical order of the
-                    category names. Set `categoryorder` to *array*
+                    category names. Set `categoryorder` to "array"
                     to derive the ordering from the attribute
                     `categoryarray`. If a category is not found in
                     the `categoryarray` array, the sorting behavior
                     for that attribute will be identical to the
-                    *trace* mode. The unspecified categories will
+                    "trace" mode. The unspecified categories will
                     follow the categories in `categoryarray`.
                 color
                     Sets default for all colors associated with
@@ -2831,54 +2831,54 @@ class Layout(BaseLayoutType):
                     If this axis needs to be compressed (either due
                     to its own `scaleanchor` and `scaleratio` or
                     those of the other axis), determines how that
-                    happens: by increasing the *range* (default),
-                    or by decreasing the *domain*.
+                    happens: by increasing the "range" (default),
+                    or by decreasing the "domain".
                 constraintoward
                     If this axis needs to be compressed (either due
                     to its own `scaleanchor` and `scaleratio` or
                     those of the other axis), determines which
                     direction we push the originally specified plot
-                    area. Options are *left*, *center* (default),
-                    and *right* for x axes, and *top*, *middle*
-                    (default), and *bottom* for y axes.
+                    area. Options are "left", "center" (default),
+                    and "right" for x axes, and "top", "middle"
+                    (default), and "bottom" for y axes.
                 domain
                     Sets the domain of this axis (in plot
                     fraction).
                 dtick
                     Sets the step in-between ticks on this axis.
                     Use with `tick0`. Must be a positive number, or
-                    special strings available to *log* and *date*
-                    axes. If the axis `type` is *log*, then ticks
+                    special strings available to "log" and "date"
+                    axes. If the axis `type` is "log", then ticks
                     are set every 10^(n*dtick) where n is the tick
                     number. For example, to set a tick mark at 1,
                     10, 100, 1000, ... set dtick to 1. To set tick
                     marks at 1, 100, 10000, ... set dtick to 2. To
                     set tick marks at 1, 5, 25, 125, 625, 3125, ...
-                    set dtick to log_10(5), or 0.69897000433. *log*
-                    has several special values; *L<f>*, where `f`
+                    set dtick to log_10(5), or 0.69897000433. "log"
+                    has several special values; "L<f>", where `f`
                     is a positive number, gives ticks linearly
                     spaced in value (but not position). For example
-                    `tick0` = 0.1, `dtick` = *L0.5* will put ticks
+                    `tick0` = 0.1, `dtick` = "L0.5" will put ticks
                     at 0.1, 0.6, 1.1, 1.6 etc. To show powers of 10
-                    plus small digits between, use *D1* (all
-                    digits) or *D2* (only 2 and 5). `tick0` is
-                    ignored for *D1* and *D2*. If the axis `type`
-                    is *date*, then you must convert the time to
+                    plus small digits between, use "D1" (all
+                    digits) or "D2" (only 2 and 5). `tick0` is
+                    ignored for "D1" and "D2". If the axis `type`
+                    is "date", then you must convert the time to
                     milliseconds. For example, to set the interval
                     between ticks to one day, set `dtick` to
-                    86400000.0. *date* also has special values
-                    *M<n>* gives ticks spaced by a number of
+                    86400000.0. "date" also has special values
+                    "M<n>" gives ticks spaced by a number of
                     months. `n` must be a positive integer. To set
                     ticks on the 15th of every third month, set
-                    `tick0` to *2000-01-15* and `dtick` to *M3*. To
-                    set ticks every 4 years, set `dtick` to *M48*
+                    `tick0` to "2000-01-15" and `dtick` to "M3". To
+                    set ticks every 4 years, set `dtick` to "M48"
                 exponentformat
                     Determines a formatting rule for the tick
                     exponents. For example, consider the number
-                    1,000,000,000. If *none*, it appears as
-                    1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If
-                    *power*, 1x10^9 (with 9 in a super script). If
-                    *SI*, 1G. If *B*, 1B.
+                    1,000,000,000. If "none", it appears as
+                    1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
+                    "power", 1x10^9 (with 9 in a super script). If
+                    "SI", 1G. If "B", 1B.
                 fixedrange
                     Determines whether or not this axis is zoom-
                     able. If true, then zoom is disabled.
@@ -2894,11 +2894,11 @@ class Layout(BaseLayoutType):
                     ME.md#locale_format And for dates see:
                     https://github.com/d3/d3-time-
                     format/blob/master/README.md#locale_format We
-                    add one item to d3's date formatter: *%{n}f*
+                    add one item to d3's date formatter: "%{n}f"
                     for fractional seconds with n digits. For
                     example, *2016-10-13 09:15:23.456* with
-                    tickformat *%H~%M~%S.%2f* would display
-                    *09~15~23.46*
+                    tickformat "%H~%M~%S.%2f" would display
+                    "09~15~23.46"
                 layer
                     Sets the layer on which this axis is displayed.
                     If *above traces*, this axis is displayed above
@@ -2906,7 +2906,7 @@ class Layout(BaseLayoutType):
                     this axis is displayed below all the subplot's
                     traces, but above the grid lines. Useful when
                     used together with scatter-like traces with
-                    `cliponaxis` set to *false* to show markers
+                    `cliponaxis` set to False to show markers
                     and/or text nodes above this axis.
                 linecolor
                     Sets the axis line color.
@@ -2915,44 +2915,44 @@ class Layout(BaseLayoutType):
                 mirror
                     Determines if the axis lines or/and ticks are
                     mirrored to the opposite side of the plotting
-                    area. If *true*, the axis lines are mirrored.
-                    If *ticks*, the axis lines and ticks are
-                    mirrored. If *false*, mirroring is disable. If
-                    *all*, axis lines are mirrored on all shared-
-                    axes subplots. If *allticks*, axis lines and
-                    ticks are mirrored on all shared-axes subplots.
+                    area. If True, the axis lines are mirrored. If
+                    "ticks", the axis lines and ticks are mirrored.
+                    If False, mirroring is disable. If "all", axis
+                    lines are mirrored on all shared-axes subplots.
+                    If "allticks", axis lines and ticks are
+                    mirrored on all shared-axes subplots.
                 nticks
                     Specifies the maximum number of ticks for the
                     particular axis. The actual number of ticks
                     will be chosen automatically to be less than or
                     equal to `nticks`. Has an effect only if
-                    `tickmode` is set to *auto*.
+                    `tickmode` is set to "auto".
                 overlaying
                     If set a same-letter axis id, this axis is
                     overlaid on top of the corresponding same-
-                    letter axis. If *false*, this axis does not
+                    letter axis. If False, this axis does not
                     overlay any same-letter axes.
                 position
                     Sets the position of this axis in the plotting
                     space (in normalized coordinates). Only has an
-                    effect if `anchor` is set to *free*.
+                    effect if `anchor` is set to "free".
                 range
                     Sets the range of this axis. If the axis `type`
-                    is *log*, then you must take the log of your
+                    is "log", then you must take the log of your
                     desired range (e.g. to set the range from 1 to
                     100, set the range from 0 to 2). If the axis
-                    `type` is *date*, it should be date strings,
+                    `type` is "date", it should be date strings,
                     like date data, though Date objects and unix
                     milliseconds will be accepted and converted to
-                    strings. If the axis `type` is *category*, it
+                    strings. If the axis `type` is "category", it
                     should be numbers, using the scale where each
                     category is assigned a serial number from zero
                     in the order it appears.
                 rangemode
-                    If *normal*, the range is computed in relation
+                    If "normal", the range is computed in relation
                     to the extrema of the input data. If *tozero*`,
                     the range extends to 0, regardless of the input
-                    data If *nonnegative*, the range is non-
+                    data If "nonnegative", the range is non-
                     negative, regardless of the input data.
                 scaleanchor
                     If set to another axis id (e.g. `x2`, `y`), the
@@ -2987,15 +2987,15 @@ class Layout(BaseLayoutType):
                 separatethousands
                     If "true", even 4-digit integers are separated
                 showexponent
-                    If *all*, all exponents are shown besides their
-                    significands. If *first*, only the exponent of
-                    the first tick is shown. If *last*, only the
-                    exponent of the last tick is shown. If *none*,
+                    If "all", all exponents are shown besides their
+                    significands. If "first", only the exponent of
+                    the first tick is shown. If "last", only the
+                    exponent of the last tick is shown. If "none",
                     no exponents appear.
                 showgrid
                     Determines whether or not grid lines are drawn.
-                    If *true*, the grid lines are drawn at every
-                    tick mark.
+                    If True, the grid lines are drawn at every tick
+                    mark.
                 showline
                     Determines whether or not a line bounding this
                     axis is drawn.
@@ -3007,32 +3007,32 @@ class Layout(BaseLayoutType):
                     Determines whether or not the tick labels are
                     drawn.
                 showtickprefix
-                    If *all*, all tick labels are displayed with a
-                    prefix. If *first*, only the first tick is
-                    displayed with a prefix. If *last*, only the
+                    If "all", all tick labels are displayed with a
+                    prefix. If "first", only the first tick is
+                    displayed with a prefix. If "last", only the
                     last tick is displayed with a suffix. If
-                    *none*, tick prefixes are hidden.
+                    "none", tick prefixes are hidden.
                 showticksuffix
                     Same as `showtickprefix` but for tick suffixes.
                 side
                     Determines whether a x (y) axis is positioned
-                    at the *bottom* (*left*) or *top* (*right*) of
+                    at the "bottom" ("left") or "top" ("right") of
                     the plotting area.
                 spikecolor
                     Sets the spike color. If undefined, will use
                     the series color
                 spikedash
                     Sets the dash style of lines. Set to a dash
-                    type string (*solid*, *dot*, *dash*,
-                    *longdash*, *dashdot*, or *longdashdot*) or a
-                    dash length list in px (eg *5px,10px,2px,2px*).
+                    type string ("solid", "dot", "dash",
+                    "longdash", "dashdot", or "longdashdot") or a
+                    dash length list in px (eg "5px,10px,2px,2px").
                 spikemode
                     Determines the drawing mode for the spike line
-                    If *toaxis*, the line is drawn from the data
+                    If "toaxis", the line is drawn from the data
                     point to the axis the  series is plotted on. If
-                    *across*, the line is drawn across the entire
-                    plot area, and supercedes *toaxis*. If
-                    *marker*, then a marker dot is drawn on the
+                    "across", the line is drawn across the entire
+                    plot area, and supercedes "toaxis". If
+                    "marker", then a marker dot is drawn on the
                     axis the series is plotted on
                 spikesnap
                     Determines whether spikelines are stuck to the
@@ -3042,13 +3042,13 @@ class Layout(BaseLayoutType):
                 tick0
                     Sets the placement of the first tick on this
                     axis. Use with `dtick`. If the axis `type` is
-                    *log*, then you must take the log of your
+                    "log", then you must take the log of your
                     starting tick (e.g. to set the starting tick to
                     100, set the `tick0` to 2) except when
                     `dtick`=*L<f>* (see `dtick` for more info). If
-                    the axis `type` is *date*, it should be a date
+                    the axis `type` is "date", it should be a date
                     string, like date data. If the axis `type` is
-                    *category*, it should be a number, using the
+                    "category", it should be a number, using the
                     scale where each category is assigned a serial
                     number from zero in the order it appears.
                 tickangle
@@ -3067,40 +3067,40 @@ class Layout(BaseLayoutType):
                     ME.md#locale_format And for dates see:
                     https://github.com/d3/d3-time-
                     format/blob/master/README.md#locale_format We
-                    add one item to d3's date formatter: *%{n}f*
+                    add one item to d3's date formatter: "%{n}f"
                     for fractional seconds with n digits. For
                     example, *2016-10-13 09:15:23.456* with
-                    tickformat *%H~%M~%S.%2f* would display
-                    *09~15~23.46*
+                    tickformat "%H~%M~%S.%2f" would display
+                    "09~15~23.46"
                 tickformatstops
                     plotly.graph_objs.layout.yaxis.Tickformatstop
                     instance or dict with compatible properties
                 ticklen
                     Sets the tick length (in px).
                 tickmode
-                    Sets the tick mode for this axis. If *auto*,
+                    Sets the tick mode for this axis. If "auto",
                     the number of ticks is set via `nticks`. If
-                    *linear*, the placement of the ticks is
+                    "linear", the placement of the ticks is
                     determined by a starting position `tick0` and a
-                    tick step `dtick` (*linear* is the default
+                    tick step `dtick` ("linear" is the default
                     value if `tick0` and `dtick` are provided). If
-                    *array*, the placement of the ticks is set via
+                    "array", the placement of the ticks is set via
                     `tickvals` and the tick text is `ticktext`.
-                    (*array* is the default value if `tickvals` is
+                    ("array" is the default value if `tickvals` is
                     provided).
                 tickprefix
                     Sets a tick label prefix.
                 ticks
                     Determines whether ticks are drawn or not. If
                     **, this axis' ticks are not drawn. If
-                    *outside* (*inside*), this axis' are drawn
+                    "outside" ("inside"), this axis' are drawn
                     outside (inside) the axis lines.
                 ticksuffix
                     Sets a tick label suffix.
                 ticktext
                     Sets the text displayed at the ticks position
                     via `tickvals`. Only has an effect if
-                    `tickmode` is set to *array*. Used with
+                    `tickmode` is set to "array". Used with
                     `tickvals`.
                 ticktextsrc
                     Sets the source reference on plot.ly for
@@ -3108,7 +3108,7 @@ class Layout(BaseLayoutType):
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
-                    to *array*. Used with `ticktext`.
+                    to "array". Used with `ticktext`.
                 tickvalssrc
                     Sets the source reference on plot.ly for
                     tickvals .
@@ -3130,7 +3130,7 @@ class Layout(BaseLayoutType):
                     axis, otherwise false
                 zeroline
                     Determines whether or not a line is drawn at
-                    along the 0 value of this axis. If *true*, the
+                    along the 0 value of this axis. If True, the
                     zero line is drawn on top of the grid lines.
                 zerolinecolor
                     Sets the line color of the zero line.
@@ -3178,19 +3178,19 @@ class Layout(BaseLayoutType):
             same location coordinate.
         barmode
             Determines how bars at the same location coordinate are
-            displayed on the graph. With *stack*, the bars are
-            stacked on top of one another With *relative*, the bars
+            displayed on the graph. With "stack", the bars are
+            stacked on top of one another With "relative", the bars
             are stacked on top of one another, with negative values
-            below the axis, positive values above With *group*, the
+            below the axis, positive values above With "group", the
             bars are plotted next to one another centered around
-            the shared location. With *overlay*, the bars are
+            the shared location. With "overlay", the bars are
             plotted over one another, you might need to an
-            *opacity* to see multiple bars.
+            "opacity" to see multiple bars.
         barnorm
             Sets the normalization for bar traces on the graph.
-            With *fraction*, the value of each bar is divide by the
+            With "fraction", the value of each bar is divide by the
             sum of the values at the location coordinate. With
-            *percent*, the results form *fraction* are presented in
+            "percent", the results form "fraction" are presented in
             percents.
         boxgap
             Sets the gap (in plot fraction) between boxes of
@@ -3200,10 +3200,10 @@ class Layout(BaseLayoutType):
             same location coordinate.
         boxmode
             Determines how boxes at the same location coordinate
-            are displayed on the graph. If *group*, the boxes are
+            are displayed on the graph. If "group", the boxes are
             plotted next to one another centered around the shared
-            location. If *overlay*, the boxes are plotted over one
-            another, you might need to set *opacity* to see them
+            location. If "overlay", the boxes are plotted over one
+            another, you might need to set "opacity" to see them
             multiple boxes.
         calendar
             Sets the default calendar system to use for
@@ -3223,9 +3223,9 @@ class Layout(BaseLayoutType):
             For polar plots only. Sets the direction corresponding
             to positive angles.
         dragmode
-            Determines the mode of drag interactions. *select* and
-            *lasso* apply only to scatter traces with markers or
-            text. *orbit* and *turntable* apply only to 3D scenes.
+            Determines the mode of drag interactions. "select" and
+            "lasso" apply only to scatter traces with markers or
+            text. "orbit" and "turntable" apply only to 3D scenes.
         extendpiecolors
             If `true`, the pie slice colors (whether given by
             `piecolorway` or inherited from `colorway`) will be
@@ -3315,7 +3315,7 @@ class Layout(BaseLayoutType):
         separators
             Sets the decimal and thousand separators. For example,
             *. * puts a '.' before decimals and a space between
-            thousands. In English locales, dflt is *.,* but other
+            thousands. In English locales, dflt is ".," but other
             locales may alter this default.
         shapes
             plotly.graph_objs.layout.Shape instance or dict with
@@ -3375,10 +3375,10 @@ class Layout(BaseLayoutType):
             same location coordinate.
         violinmode
             Determines how violins at the same location coordinate
-            are displayed on the graph. If *group*, the violins are
+            are displayed on the graph. If "group", the violins are
             plotted next to one another centered around the shared
-            location. If *overlay*, the violins are plotted over
-            one another, you might need to set *opacity* to see
+            location. If "overlay", the violins are plotted over
+            one another, you might need to set "opacity" to see
             them multiple violins.
         width
             Sets the plot's width (in px).
@@ -3477,19 +3477,19 @@ class Layout(BaseLayoutType):
             same location coordinate.
         barmode
             Determines how bars at the same location coordinate are
-            displayed on the graph. With *stack*, the bars are
-            stacked on top of one another With *relative*, the bars
+            displayed on the graph. With "stack", the bars are
+            stacked on top of one another With "relative", the bars
             are stacked on top of one another, with negative values
-            below the axis, positive values above With *group*, the
+            below the axis, positive values above With "group", the
             bars are plotted next to one another centered around
-            the shared location. With *overlay*, the bars are
+            the shared location. With "overlay", the bars are
             plotted over one another, you might need to an
-            *opacity* to see multiple bars.
+            "opacity" to see multiple bars.
         barnorm
             Sets the normalization for bar traces on the graph.
-            With *fraction*, the value of each bar is divide by the
+            With "fraction", the value of each bar is divide by the
             sum of the values at the location coordinate. With
-            *percent*, the results form *fraction* are presented in
+            "percent", the results form "fraction" are presented in
             percents.
         boxgap
             Sets the gap (in plot fraction) between boxes of
@@ -3499,10 +3499,10 @@ class Layout(BaseLayoutType):
             same location coordinate.
         boxmode
             Determines how boxes at the same location coordinate
-            are displayed on the graph. If *group*, the boxes are
+            are displayed on the graph. If "group", the boxes are
             plotted next to one another centered around the shared
-            location. If *overlay*, the boxes are plotted over one
-            another, you might need to set *opacity* to see them
+            location. If "overlay", the boxes are plotted over one
+            another, you might need to set "opacity" to see them
             multiple boxes.
         calendar
             Sets the default calendar system to use for
@@ -3522,9 +3522,9 @@ class Layout(BaseLayoutType):
             For polar plots only. Sets the direction corresponding
             to positive angles.
         dragmode
-            Determines the mode of drag interactions. *select* and
-            *lasso* apply only to scatter traces with markers or
-            text. *orbit* and *turntable* apply only to 3D scenes.
+            Determines the mode of drag interactions. "select" and
+            "lasso" apply only to scatter traces with markers or
+            text. "orbit" and "turntable" apply only to 3D scenes.
         extendpiecolors
             If `true`, the pie slice colors (whether given by
             `piecolorway` or inherited from `colorway`) will be
@@ -3614,7 +3614,7 @@ class Layout(BaseLayoutType):
         separators
             Sets the decimal and thousand separators. For example,
             *. * puts a '.' before decimals and a space between
-            thousands. In English locales, dflt is *.,* but other
+            thousands. In English locales, dflt is ".," but other
             locales may alter this default.
         shapes
             plotly.graph_objs.layout.Shape instance or dict with
@@ -3674,10 +3674,10 @@ class Layout(BaseLayoutType):
             same location coordinate.
         violinmode
             Determines how violins at the same location coordinate
-            are displayed on the graph. If *group*, the violins are
+            are displayed on the graph. If "group", the violins are
             plotted next to one another centered around the shared
-            location. If *overlay*, the violins are plotted over
-            one another, you might need to set *opacity* to see
+            location. If "overlay", the violins are plotted over
+            one another, you might need to set "opacity" to see
             them multiple violins.
         width
             Sets the plot's width (in px).

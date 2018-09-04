@@ -16,7 +16,7 @@ class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
-                selection events. Note that, *scatter* traces
+                selection events. Note that, "scatter" traces
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
@@ -49,7 +49,7 @@ class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 appears over all the data points. If an array
                 of string, the items are mapped in order to the
                 this trace's (x,y,z) coordinates. To be seen,
-                trace `hoverinfo` must contain a *text* flag.
+                trace `hoverinfo` must contain a "text" flag.
             hovertextsrc
                 Sets the source reference on plot.ly for
                 hovertext .
@@ -72,12 +72,12 @@ class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 dict with compatible properties
             mode
                 Determines the drawing mode for this scatter
-                trace. If the provided `mode` includes *text*
+                trace. If the provided `mode` includes "text"
                 then the `text` elements appear at the
                 coordinates. Otherwise, the `text` elements
                 appear on hover. If there are less than 20
-                points, then the default is *lines+markers*.
-                Otherwise, *lines*.
+                points, then the default is "lines+markers".
+                Otherwise, "lines".
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -88,9 +88,9 @@ class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 or dict with compatible properties
             scene
                 Sets a reference between this trace's 3D
-                coordinate system and a 3D scene. If *scene*
+                coordinate system and a 3D scene. If "scene"
                 (the default value), the (x,y,z) coordinates
-                refer to `layout.scene`. If *scene2*, the
+                refer to `layout.scene`. If "scene2", the
                 (x,y,z) coordinates refer to `layout.scene2`,
                 and so on.
             selectedpoints
@@ -109,10 +109,10 @@ class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 plotly.graph_objs.scatter3d.Stream instance or
                 dict with compatible properties
             surfaceaxis
-                If *-1*, the scatter points are not fill with a
-                surface If *0*, *1*, *2*, the scatter points
-                are filled with a Delaunay surface about the x,
-                y, z respectively.
+                If "-1", the scatter points are not fill with a
+                surface If 0, 1, 2, the scatter points are
+                filled with a Delaunay surface about the x, y,
+                z respectively.
             surfacecolor
                 Sets the surface fill color.
             text
@@ -121,8 +121,8 @@ class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 appears over all the data points. If an array
                 of string, the items are mapped in order to the
                 this trace's (x,y,z) coordinates. If trace
-                `hoverinfo` contains a *text* flag and
-                *hovertext* is not set, these elements will be
+                `hoverinfo` contains a "text" flag and
+                "hovertext" is not set, these elements will be
                 seen in the hover labels.
             textfont
                 plotly.graph_objs.scatter3d.Textfont instance
@@ -137,7 +137,7 @@ class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
 
             visible
                 Determines whether or not this trace is
-                visible. If *legendonly*, the trace is not
+                visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
             x
@@ -160,6 +160,7 @@ class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the calendar system to use with `z` date
                 data.
             zsrc
-                Sets the source reference on plot.ly for  z .""",
+                Sets the source reference on plot.ly for  z .
+""",
             **kwargs
         )

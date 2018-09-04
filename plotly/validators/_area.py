@@ -12,7 +12,7 @@ class AreaValidator(_plotly_utils.basevalidators.CompoundValidator):
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
-                selection events. Note that, *scatter* traces
+                selection events. Note that, "scatter" traces
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
@@ -51,7 +51,7 @@ class AreaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the opacity of the trace.
             r
                 For legacy polar chart only.Please switch to
-                *scatterpolar* trace type.Sets the radial
+                "scatterpolar" trace type.Sets the radial
                 coordinates.
             rsrc
                 Sets the source reference on plot.ly for  r .
@@ -72,7 +72,7 @@ class AreaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 with compatible properties
             t
                 For legacy polar chart only.Please switch to
-                *scatterpolar* trace type.Sets the angular
+                "scatterpolar" trace type.Sets the angular
                 coordinates.
             tsrc
                 Sets the source reference on plot.ly for  t .
@@ -80,8 +80,9 @@ class AreaValidator(_plotly_utils.basevalidators.CompoundValidator):
 
             visible
                 Determines whether or not this trace is
-                visible. If *legendonly*, the trace is not
+                visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
-                (provided that the legend itself is visible).""",
+                (provided that the legend itself is visible).
+""",
             **kwargs
         )

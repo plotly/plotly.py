@@ -17,23 +17,21 @@ class ProjectValidator(_plotly_utils.basevalidators.CompoundValidator):
             x
                 Determines whether or not these contour lines
                 are projected on the x plane. If `highlight` is
-                set to *true* (the default), the projected
-                lines are shown on hover. If `show` is set to
-                *true*, the projected lines are shown in
-                permanence.
+                set to True (the default), the projected lines
+                are shown on hover. If `show` is set to True,
+                the projected lines are shown in permanence.
             y
                 Determines whether or not these contour lines
                 are projected on the y plane. If `highlight` is
-                set to *true* (the default), the projected
-                lines are shown on hover. If `show` is set to
-                *true*, the projected lines are shown in
-                permanence.
+                set to True (the default), the projected lines
+                are shown on hover. If `show` is set to True,
+                the projected lines are shown in permanence.
             z
                 Determines whether or not these contour lines
                 are projected on the z plane. If `highlight` is
-                set to *true* (the default), the projected
-                lines are shown on hover. If `show` is set to
-                *true*, the projected lines are shown in
-                permanence.""",
+                set to True (the default), the projected lines
+                are shown on hover. If `show` is set to True,
+                the projected lines are shown in permanence.
+""",
             **kwargs
         )

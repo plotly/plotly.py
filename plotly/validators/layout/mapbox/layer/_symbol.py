@@ -19,14 +19,15 @@ class SymbolValidator(_plotly_utils.basevalidators.CompoundValidator):
                 https://www.mapbox.com/maki-icons/
             iconsize
                 Sets the symbol icon size. Has an effect only
-                when `type` is set to *symbol*.
+                when `type` is set to "symbol".
             text
                 Sets the symbol text.
             textfont
                 Sets the icon text font. Has an effect only
-                when `type` is set to *symbol*.
+                when `type` is set to "symbol".
             textposition
                 Sets the positions of the `text` elements with
-                respects to the (x,y) coordinates.""",
+                respects to the (x,y) coordinates.
+""",
             **kwargs
         )

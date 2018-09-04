@@ -291,11 +291,11 @@ class Slider(BaseLayoutHierarchyType):
                     system. The plotly service (at https://plot.ly
                     or on-premise) generates images on a server,
                     where only a select number of fonts are
-                    installed and supported. These include *Arial*,
-                    *Balto*, *Courier New*, *Droid Sans*,, *Droid
-                    Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
-                    Standard TT*, *Open Sans*, *Overpass*, *PT Sans
-                    Narrow*, *Raleway*, *Times New Roman*.
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
                 size
 
         Returns
@@ -336,7 +336,7 @@ class Slider(BaseLayoutHierarchyType):
     def lenmode(self):
         """
         Determines whether this slider length is set in units of plot
-        *fraction* or in *pixels. Use `len` to set the value.
+        "fraction" or in *pixels. Use `len` to set the value.
     
         The 'lenmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -714,7 +714,7 @@ class Slider(BaseLayoutHierarchyType):
     def xanchor(self):
         """
         Sets the slider's horizontal position anchor. This anchor binds
-        the `x` position to the *left*, *center* or *right* of the
+        the `x` position to the "left", "center" or "right" of the
         range selector.
     
         The 'xanchor' property is an enumeration that may be specified as:
@@ -757,7 +757,7 @@ class Slider(BaseLayoutHierarchyType):
     def yanchor(self):
         """
         Sets the slider's vertical position anchor This anchor binds
-        the `y` position to the *top*, *middle* or *bottom* of the
+        the `y` position to the "top", "middle" or "bottom" of the
         range selector.
     
         The 'yanchor' property is an enumeration that may be specified as:
@@ -809,7 +809,7 @@ class Slider(BaseLayoutHierarchyType):
             this length minus the padding on both ends.
         lenmode
             Determines whether this slider length is set in units
-            of plot *fraction* or in *pixels. Use `len` to set the
+            of plot "fraction" or in *pixels. Use `len` to set the
             value.
         minorticklen
             Sets the length in pixels of minor step tick marks
@@ -854,15 +854,15 @@ class Slider(BaseLayoutHierarchyType):
             slider.
         xanchor
             Sets the slider's horizontal position anchor. This
-            anchor binds the `x` position to the *left*, *center*
-            or *right* of the range selector.
+            anchor binds the `x` position to the "left", "center"
+            or "right" of the range selector.
         y
             Sets the y position (in normalized coordinates) of the
             slider.
         yanchor
             Sets the slider's vertical position anchor This anchor
-            binds the `y` position to the *top*, *middle* or
-            *bottom* of the range selector.
+            binds the `y` position to the "top", "middle" or
+            "bottom" of the range selector.
         """
 
     def __init__(
@@ -925,7 +925,7 @@ class Slider(BaseLayoutHierarchyType):
             this length minus the padding on both ends.
         lenmode
             Determines whether this slider length is set in units
-            of plot *fraction* or in *pixels. Use `len` to set the
+            of plot "fraction" or in *pixels. Use `len` to set the
             value.
         minorticklen
             Sets the length in pixels of minor step tick marks
@@ -970,15 +970,15 @@ class Slider(BaseLayoutHierarchyType):
             slider.
         xanchor
             Sets the slider's horizontal position anchor. This
-            anchor binds the `x` position to the *left*, *center*
-            or *right* of the range selector.
+            anchor binds the `x` position to the "left", "center"
+            or "right" of the range selector.
         y
             Sets the y position (in normalized coordinates) of the
             slider.
         yanchor
             Sets the slider's vertical position anchor This anchor
-            binds the `y` position to the *top*, *middle* or
-            *bottom* of the range selector.
+            binds the `y` position to the "top", "middle" or
+            "bottom" of the range selector.
 
         Returns
         -------

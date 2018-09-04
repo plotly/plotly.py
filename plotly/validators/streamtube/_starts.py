@@ -25,6 +25,7 @@ class StartsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the z components of the starting position
                 of the streamtubes
             zsrc
-                Sets the source reference on plot.ly for  z .""",
+                Sets the source reference on plot.ly for  z .
+""",
             **kwargs
         )

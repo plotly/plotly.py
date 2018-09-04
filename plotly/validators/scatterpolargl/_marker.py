@@ -108,13 +108,14 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 .
             symbol
                 Sets the marker symbol type. Adding 100 is
-                equivalent to appending *-open* to a symbol
+                equivalent to appending "-open" to a symbol
                 name. Adding 200 is equivalent to appending
-                *-dot* to a symbol name. Adding 300 is
-                equivalent to appending *-open-dot* or *dot-
-                open* to a symbol name.
+                "-dot" to a symbol name. Adding 300 is
+                equivalent to appending "-open-dot" or "dot-
+                open" to a symbol name.
             symbolsrc
                 Sets the source reference on plot.ly for
-                symbol .""",
+                symbol .
+""",
             **kwargs
         )

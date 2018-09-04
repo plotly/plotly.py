@@ -11,7 +11,7 @@ class Area(BaseTraceType):
         """
         Assigns extra data each datum. This may be useful when
         listening to hover, click and selection events. Note that,
-        *scatter* traces also appends customdata items in the markers
+        "scatter" traces also appends customdata items in the markers
         DOM elements
     
         The 'customdata' property is an array that may be specified as a tuple,
@@ -242,11 +242,11 @@ class Area(BaseTraceType):
                     .
                 symbol
                     Sets the marker symbol type. Adding 100 is
-                    equivalent to appending *-open* to a symbol
+                    equivalent to appending "-open" to a symbol
                     name. Adding 200 is equivalent to appending
-                    *-dot* to a symbol name. Adding 300 is
-                    equivalent to appending *-open-dot* or *dot-
-                    open* to a symbol name.
+                    "-dot" to a symbol name. Adding 300 is
+                    equivalent to appending "-open-dot" or "dot-
+                    open" to a symbol name.
                 symbolsrc
                     Sets the source reference on plot.ly for
                     symbol .
@@ -308,7 +308,7 @@ class Area(BaseTraceType):
     @property
     def r(self):
         """
-        For legacy polar chart only.Please switch to *scatterpolar*
+        For legacy polar chart only.Please switch to "scatterpolar"
         trace type.Sets the radial coordinates.
     
         The 'r' property is an array that may be specified as a tuple,
@@ -405,7 +405,7 @@ class Area(BaseTraceType):
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
-                    `maxpoints` is set to *50*, only the newest 50
+                    `maxpoints` is set to 50, only the newest 50
                     points will be displayed on the plot.
                 token
                     The stream id number links a data trace on a
@@ -427,7 +427,7 @@ class Area(BaseTraceType):
     @property
     def t(self):
         """
-        For legacy polar chart only.Please switch to *scatterpolar*
+        For legacy polar chart only.Please switch to "scatterpolar"
         trace type.Sets the angular coordinates.
     
         The 't' property is an array that may be specified as a tuple,
@@ -488,7 +488,7 @@ class Area(BaseTraceType):
     def visible(self):
         """
         Determines whether or not this trace is visible. If
-        *legendonly*, the trace is not drawn, but can appear as a
+        "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
     
         The 'visible' property is an enumeration that may be specified as:
@@ -525,7 +525,7 @@ class Area(BaseTraceType):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -559,7 +559,7 @@ class Area(BaseTraceType):
             Sets the opacity of the trace.
         r
             For legacy polar chart only.Please switch to
-            *scatterpolar* trace type.Sets the radial coordinates.
+            "scatterpolar" trace type.Sets the radial coordinates.
         rsrc
             Sets the source reference on plot.ly for  r .
         selectedpoints
@@ -577,14 +577,14 @@ class Area(BaseTraceType):
             compatible properties
         t
             For legacy polar chart only.Please switch to
-            *scatterpolar* trace type.Sets the angular coordinates.
+            "scatterpolar" trace type.Sets the angular coordinates.
         tsrc
             Sets the source reference on plot.ly for  t .
         uid
 
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         """
@@ -625,7 +625,7 @@ class Area(BaseTraceType):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -659,7 +659,7 @@ class Area(BaseTraceType):
             Sets the opacity of the trace.
         r
             For legacy polar chart only.Please switch to
-            *scatterpolar* trace type.Sets the radial coordinates.
+            "scatterpolar" trace type.Sets the radial coordinates.
         rsrc
             Sets the source reference on plot.ly for  r .
         selectedpoints
@@ -677,14 +677,14 @@ class Area(BaseTraceType):
             compatible properties
         t
             For legacy polar chart only.Please switch to
-            *scatterpolar* trace type.Sets the angular coordinates.
+            "scatterpolar" trace type.Sets the angular coordinates.
         tsrc
             Sets the source reference on plot.ly for  t .
         uid
 
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
 

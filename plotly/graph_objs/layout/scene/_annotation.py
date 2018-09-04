@@ -383,7 +383,7 @@ class Annotation(BaseLayoutHierarchyType):
         Determines whether the annotation text box captures mouse move
         and click events, or allows those events to pass through to
         data points in the plot that may be behind the annotation. By
-        default `captureevents` is *false* unless `hovertext` is
+        default `captureevents` is False unless `hovertext` is
         provided. If you use the event `plotly_clickannotation` without
         `hovertext` you must explicitly enable `captureevents`.
     
@@ -428,11 +428,11 @@ class Annotation(BaseLayoutHierarchyType):
                     system. The plotly service (at https://plot.ly
                     or on-premise) generates images on a server,
                     where only a select number of fonts are
-                    installed and supported. These include *Arial*,
-                    *Balto*, *Courier New*, *Droid Sans*,, *Droid
-                    Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
-                    Standard TT*, *Open Sans*, *Overpass*, *PT Sans
-                    Narrow*, *Raleway*, *Times New Roman*.
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
                 size
 
         Returns
@@ -577,8 +577,8 @@ class Annotation(BaseLayoutHierarchyType):
     def showarrow(self):
         """
         Determines whether or not the annotation is drawn with an
-        arrow. If *true*, `text` is placed near the arrow's tail. If
-        *false*, `text` lines up with the `x` and `y` provided.
+        arrow. If True, `text` is placed near the arrow's tail. If
+        False, `text` lines up with the `x` and `y` provided.
     
         The 'showarrow' property must be specified as a bool
         (either True, or False)
@@ -849,11 +849,11 @@ class Annotation(BaseLayoutHierarchyType):
     def xanchor(self):
         """
         Sets the text box's horizontal position anchor This anchor
-        binds the `x` position to the *left*, *center* or *right* of
+        binds the `x` position to the "left", "center" or "right" of
         the annotation. For example, if `x` is set to 1, `xref` to
-        *paper* and `xanchor` to *right* then the right-most portion of
+        "paper" and `xanchor` to "right" then the right-most portion of
         the annotation lines up with the right-most edge of the
-        plotting area. If *auto*, the anchor is equivalent to *center*
+        plotting area. If "auto", the anchor is equivalent to "center"
         for data-referenced annotations or if there is an arrow,
         whereas for paper-referenced with no arrow, the anchor picked
         corresponds to the closest side.
@@ -918,11 +918,11 @@ class Annotation(BaseLayoutHierarchyType):
     def yanchor(self):
         """
         Sets the text box's vertical position anchor This anchor binds
-        the `y` position to the *top*, *middle* or *bottom* of the
-        annotation. For example, if `y` is set to 1, `yref` to *paper*
-        and `yanchor` to *top* then the top-most portion of the
+        the `y` position to the "top", "middle" or "bottom" of the
+        annotation. For example, if `y` is set to 1, `yref` to "paper"
+        and `yanchor` to "top" then the top-most portion of the
         annotation lines up with the top-most edge of the plotting
-        area. If *auto*, the anchor is equivalent to *middle* for data-
+        area. If "auto", the anchor is equivalent to "middle" for data-
         referenced annotations or if there is an arrow, whereas for
         paper-referenced with no arrow, the anchor picked corresponds
         to the closest side.
@@ -1032,7 +1032,7 @@ class Annotation(BaseLayoutHierarchyType):
             mouse move and click events, or allows those events to
             pass through to data points in the plot that may be
             behind the annotation. By default `captureevents` is
-            *false* unless `hovertext` is provided. If you use the
+            False unless `hovertext` is provided. If you use the
             event `plotly_clickannotation` without `hovertext` you
             must explicitly enable `captureevents`.
         font
@@ -1060,8 +1060,8 @@ class Annotation(BaseLayoutHierarchyType):
             Sets the opacity of the annotation (text + arrow).
         showarrow
             Determines whether or not the annotation is drawn with
-            an arrow. If *true*, `text` is placed near the arrow's
-            tail. If *false*, `text` lines up with the `x` and `y`
+            an arrow. If True, `text` is placed near the arrow's
+            tail. If False, `text` lines up with the `x` and `y`
             provided.
         standoff
             Sets a distance, in pixels, to move the end arrowhead
@@ -1117,12 +1117,12 @@ class Annotation(BaseLayoutHierarchyType):
             Sets the annotation's x position.
         xanchor
             Sets the text box's horizontal position anchor This
-            anchor binds the `x` position to the *left*, *center*
-            or *right* of the annotation. For example, if `x` is
-            set to 1, `xref` to *paper* and `xanchor` to *right*
+            anchor binds the `x` position to the "left", "center"
+            or "right" of the annotation. For example, if `x` is
+            set to 1, `xref` to "paper" and `xanchor` to "right"
             then the right-most portion of the annotation lines up
             with the right-most edge of the plotting area. If
-            *auto*, the anchor is equivalent to *center* for data-
+            "auto", the anchor is equivalent to "center" for data-
             referenced annotations or if there is an arrow, whereas
             for paper-referenced with no arrow, the anchor picked
             corresponds to the closest side.
@@ -1134,12 +1134,12 @@ class Annotation(BaseLayoutHierarchyType):
             Sets the annotation's y position.
         yanchor
             Sets the text box's vertical position anchor This
-            anchor binds the `y` position to the *top*, *middle* or
-            *bottom* of the annotation. For example, if `y` is set
-            to 1, `yref` to *paper* and `yanchor` to *top* then the
+            anchor binds the `y` position to the "top", "middle" or
+            "bottom" of the annotation. For example, if `y` is set
+            to 1, `yref` to "paper" and `yanchor` to "top" then the
             top-most portion of the annotation lines up with the
-            top-most edge of the plotting area. If *auto*, the
-            anchor is equivalent to *middle* for data-referenced
+            top-most edge of the plotting area. If "auto", the
+            anchor is equivalent to "middle" for data-referenced
             annotations or if there is an arrow, whereas for paper-
             referenced with no arrow, the anchor picked corresponds
             to the closest side.
@@ -1241,7 +1241,7 @@ class Annotation(BaseLayoutHierarchyType):
             mouse move and click events, or allows those events to
             pass through to data points in the plot that may be
             behind the annotation. By default `captureevents` is
-            *false* unless `hovertext` is provided. If you use the
+            False unless `hovertext` is provided. If you use the
             event `plotly_clickannotation` without `hovertext` you
             must explicitly enable `captureevents`.
         font
@@ -1269,8 +1269,8 @@ class Annotation(BaseLayoutHierarchyType):
             Sets the opacity of the annotation (text + arrow).
         showarrow
             Determines whether or not the annotation is drawn with
-            an arrow. If *true*, `text` is placed near the arrow's
-            tail. If *false*, `text` lines up with the `x` and `y`
+            an arrow. If True, `text` is placed near the arrow's
+            tail. If False, `text` lines up with the `x` and `y`
             provided.
         standoff
             Sets a distance, in pixels, to move the end arrowhead
@@ -1326,12 +1326,12 @@ class Annotation(BaseLayoutHierarchyType):
             Sets the annotation's x position.
         xanchor
             Sets the text box's horizontal position anchor This
-            anchor binds the `x` position to the *left*, *center*
-            or *right* of the annotation. For example, if `x` is
-            set to 1, `xref` to *paper* and `xanchor` to *right*
+            anchor binds the `x` position to the "left", "center"
+            or "right" of the annotation. For example, if `x` is
+            set to 1, `xref` to "paper" and `xanchor` to "right"
             then the right-most portion of the annotation lines up
             with the right-most edge of the plotting area. If
-            *auto*, the anchor is equivalent to *center* for data-
+            "auto", the anchor is equivalent to "center" for data-
             referenced annotations or if there is an arrow, whereas
             for paper-referenced with no arrow, the anchor picked
             corresponds to the closest side.
@@ -1343,12 +1343,12 @@ class Annotation(BaseLayoutHierarchyType):
             Sets the annotation's y position.
         yanchor
             Sets the text box's vertical position anchor This
-            anchor binds the `y` position to the *top*, *middle* or
-            *bottom* of the annotation. For example, if `y` is set
-            to 1, `yref` to *paper* and `yanchor` to *top* then the
+            anchor binds the `y` position to the "top", "middle" or
+            "bottom" of the annotation. For example, if `y` is set
+            to 1, `yref` to "paper" and `yanchor` to "top" then the
             top-most portion of the annotation lines up with the
-            top-most edge of the plotting area. If *auto*, the
-            anchor is equivalent to *middle* for data-referenced
+            top-most edge of the plotting area. If "auto", the
+            anchor is equivalent to "middle" for data-referenced
             annotations or if there is an arrow, whereas for paper-
             referenced with no arrow, the anchor picked corresponds
             to the closest side.

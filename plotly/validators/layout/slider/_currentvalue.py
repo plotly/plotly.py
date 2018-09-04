@@ -30,6 +30,7 @@ class CurrentvalueValidator(_plotly_utils.basevalidators.CompoundValidator):
                 slider.
             xanchor
                 The alignment of the value readout relative to
-                the length of the slider.""",
+                the length of the slider.
+""",
             **kwargs
         )

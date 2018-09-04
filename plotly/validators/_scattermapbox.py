@@ -16,7 +16,7 @@ class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
-                selection events. Note that, *scatter* traces
+                selection events. Note that, "scatter" traces
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
@@ -24,7 +24,7 @@ class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 customdata .
             fill
                 Sets the area to fill with a solid color. Use
-                with `fillcolor` if not *none*. *toself*
+                with `fillcolor` if not "none". "toself"
                 connects the endpoints of the trace (or each
                 segment of the trace if it has gaps) into a
                 closed shape.
@@ -52,7 +52,7 @@ class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 array of string, the items are mapped in order
                 to the this trace's (lon,lat) coordinates. To
                 be seen, trace `hoverinfo` must contain a
-                *text* flag.
+                "text" flag.
             hovertextsrc
                 Sets the source reference on plot.ly for
                 hovertext .
@@ -85,7 +85,7 @@ class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 or dict with compatible properties
             mode
                 Determines the drawing mode for this scatter
-                trace. If the provided `mode` includes *text*
+                trace. If the provided `mode` includes "text"
                 then the `text` elements appear at the
                 coordinates. Otherwise, the `text` elements
                 appear on hover.
@@ -114,9 +114,9 @@ class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 or dict with compatible properties
             subplot
                 Sets a reference between this trace's data
-                coordinates and a mapbox subplot. If *mapbox*
+                coordinates and a mapbox subplot. If "mapbox"
                 (the default value), the data refer to
-                `layout.mapbox`. If *mapbox2*, the data refer
+                `layout.mapbox`. If "mapbox2", the data refer
                 to `layout.mapbox2`, and so on.
             text
                 Sets text elements associated with each
@@ -124,12 +124,12 @@ class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 string appears over all the data points. If an
                 array of string, the items are mapped in order
                 to the this trace's (lon,lat) coordinates. If
-                trace `hoverinfo` contains a *text* flag and
-                *hovertext* is not set, these elements will be
+                trace `hoverinfo` contains a "text" flag and
+                "hovertext" is not set, these elements will be
                 seen in the hover labels.
             textfont
                 Sets the icon text font. Has an effect only
-                when `type` is set to *symbol*.
+                when `type` is set to "symbol".
             textposition
                 Sets the positions of the `text` elements with
                 respects to the (x,y) coordinates.
@@ -143,8 +143,9 @@ class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 instance or dict with compatible properties
             visible
                 Determines whether or not this trace is
-                visible. If *legendonly*, the trace is not
+                visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
-                (provided that the legend itself is visible).""",
+                (provided that the legend itself is visible).
+""",
             **kwargs
         )

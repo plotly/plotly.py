@@ -10,9 +10,9 @@ class Line(BaseTraceHierarchyType):
     def dash(self):
         """
         Sets the dash style of lines. Set to a dash type string
-        (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or
-        *longdashdot*) or a dash length list in px (eg
-        *5px,10px,2px,2px*). Note that this style setting can also be
+        ("solid", "dot", "dash", "longdash", "dashdot", or
+        "longdashdot") or a dash length list in px (eg
+        "5px,10px,2px,2px"). Note that this style setting can also be
         set per direction via `increasing.line.dash` and
         `decreasing.line.dash`.
     
@@ -67,9 +67,9 @@ class Line(BaseTraceHierarchyType):
         return """\
         dash
             Sets the dash style of lines. Set to a dash type string
-            (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or
-            *longdashdot*) or a dash length list in px (eg
-            *5px,10px,2px,2px*). Note that this style setting can
+            ("solid", "dot", "dash", "longdash", "dashdot", or
+            "longdashdot") or a dash length list in px (eg
+            "5px,10px,2px,2px"). Note that this style setting can
             also be set per direction via `increasing.line.dash`
             and `decreasing.line.dash`.
         width
@@ -89,9 +89,9 @@ class Line(BaseTraceHierarchyType):
             an instance of plotly.graph_objs.ohlc.Line
         dash
             Sets the dash style of lines. Set to a dash type string
-            (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or
-            *longdashdot*) or a dash length list in px (eg
-            *5px,10px,2px,2px*). Note that this style setting can
+            ("solid", "dot", "dash", "longdash", "dashdot", or
+            "longdashdot") or a dash length list in px (eg
+            "5px,10px,2px,2px"). Note that this style setting can
             also be set per direction via `increasing.line.dash`
             and `decreasing.line.dash`.
         width

@@ -32,7 +32,7 @@ class Symbol(BaseLayoutHierarchyType):
     def iconsize(self):
         """
         Sets the symbol icon size. Has an effect only when `type` is
-        set to *symbol*.
+        set to "symbol".
     
         The 'iconsize' property is a number and may be specified as:
           - An int or float
@@ -74,7 +74,7 @@ class Symbol(BaseLayoutHierarchyType):
     def textfont(self):
         """
         Sets the icon text font. Has an effect only when `type` is set
-        to *symbol*.
+        to "symbol".
     
         The 'textfont' property is an instance of Textfont
         that may be specified as:
@@ -97,11 +97,11 @@ class Symbol(BaseLayoutHierarchyType):
                     system. The plotly service (at https://plot.ly
                     or on-premise) generates images on a server,
                     where only a select number of fonts are
-                    installed and supported. These include *Arial*,
-                    *Balto*, *Courier New*, *Droid Sans*,, *Droid
-                    Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
-                    Standard TT*, *Open Sans*, *Overpass*, *PT Sans
-                    Narrow*, *Raleway*, *Times New Roman*.
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
                 size
 
         Returns
@@ -154,12 +154,12 @@ class Symbol(BaseLayoutHierarchyType):
             https://www.mapbox.com/maki-icons/
         iconsize
             Sets the symbol icon size. Has an effect only when
-            `type` is set to *symbol*.
+            `type` is set to "symbol".
         text
             Sets the symbol text.
         textfont
             Sets the icon text font. Has an effect only when `type`
-            is set to *symbol*.
+            is set to "symbol".
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.
@@ -189,12 +189,12 @@ class Symbol(BaseLayoutHierarchyType):
             https://www.mapbox.com/maki-icons/
         iconsize
             Sets the symbol icon size. Has an effect only when
-            `type` is set to *symbol*.
+            `type` is set to "symbol".
         text
             Sets the symbol text.
         textfont
             Sets the icon text font. Has an effect only when `type`
-            is set to *symbol*.
+            is set to "symbol".
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.

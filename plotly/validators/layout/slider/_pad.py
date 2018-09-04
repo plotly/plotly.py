@@ -22,6 +22,7 @@ class PadValidator(_plotly_utils.basevalidators.CompoundValidator):
                 of the component.
             t
                 The amount of padding (in px) along the top of
-                the component.""",
+                the component.
+""",
             **kwargs
         )

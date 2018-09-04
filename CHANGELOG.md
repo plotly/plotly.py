@@ -55,6 +55,7 @@ must be installed:
 ### Updated
  - Show traces at the top of the Gantt chart's colorbar ([#1110](https://github.com/plotly/plotly.py/pull/1110))
  - Significantly improved validation performance for numeric pandas `Series` objects ([#1149](https://github.com/plotly/plotly.py/pull/1149))
+ - Specialize auto-generated docstrings for Python syntax
  - More robust and specific logic for retrying requests to the plot.ly cloud service ([#1146](https://github.com/plotly/plotly.py/pull/1146))
  - Support basic authentication when using the streaming API behind a proxy server ([#1133](https://github.com/plotly/plotly.py/pull/1133))
 

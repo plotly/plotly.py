@@ -10,8 +10,8 @@ class Bar(BaseTraceType):
     def base(self):
         """
         Sets where the bar base is drawn (in position axis units). In
-        *stack* or *relative* barmode, traces that set *base* will be
-        excluded and drawn in *overlay* mode instead.
+        "stack" or "relative" barmode, traces that set "base" will be
+        excluded and drawn in "overlay" mode instead.
     
         The 'base' property accepts values of any type
 
@@ -97,7 +97,7 @@ class Bar(BaseTraceType):
         """
         Assigns extra data each datum. This may be useful when
         listening to hover, click and selection events. Note that,
-        *scatter* traces also appends customdata items in the markers
+        "scatter" traces also appends customdata items in the markers
         DOM elements
     
         The 'customdata' property is an array that may be specified as a tuple,
@@ -220,21 +220,21 @@ class Bar(BaseTraceType):
                     Determines the rule used to generate the error
                     bars. If *constant`, the bar lengths are of a
                     constant value. Set this constant in `value`.
-                    If *percent*, the bar lengths correspond to a
+                    If "percent", the bar lengths correspond to a
                     percentage of underlying data. Set this
-                    percentage in `value`. If *sqrt*, the bar
+                    percentage in `value`. If "sqrt", the bar
                     lengths correspond to the sqaure of the
-                    underlying data. If *array*, the bar lengths
+                    underlying data. If "array", the bar lengths
                     are set with data set `array`.
                 value
                     Sets the value of either the percentage (if
-                    `type` is set to *percent*) or the constant (if
-                    `type` is set to *constant*) corresponding to
+                    `type` is set to "percent") or the constant (if
+                    `type` is set to "constant") corresponding to
                     the lengths of the error bars.
                 valueminus
                     Sets the value of either the percentage (if
-                    `type` is set to *percent*) or the constant (if
-                    `type` is set to *constant*) corresponding to
+                    `type` is set to "percent") or the constant (if
+                    `type` is set to "constant") corresponding to
                     the lengths of the error bars in the bottom
                     (left) direction for vertical (horizontal) bars
                 visible
@@ -299,21 +299,21 @@ class Bar(BaseTraceType):
                     Determines the rule used to generate the error
                     bars. If *constant`, the bar lengths are of a
                     constant value. Set this constant in `value`.
-                    If *percent*, the bar lengths correspond to a
+                    If "percent", the bar lengths correspond to a
                     percentage of underlying data. Set this
-                    percentage in `value`. If *sqrt*, the bar
+                    percentage in `value`. If "sqrt", the bar
                     lengths correspond to the sqaure of the
-                    underlying data. If *array*, the bar lengths
+                    underlying data. If "array", the bar lengths
                     are set with data set `array`.
                 value
                     Sets the value of either the percentage (if
-                    `type` is set to *percent*) or the constant (if
-                    `type` is set to *constant*) corresponding to
+                    `type` is set to "percent") or the constant (if
+                    `type` is set to "constant") corresponding to
                     the lengths of the error bars.
                 valueminus
                     Sets the value of either the percentage (if
-                    `type` is set to *percent*) or the constant (if
-                    `type` is set to *constant*) corresponding to
+                    `type` is set to "percent") or the constant (if
+                    `type` is set to "constant") corresponding to
                     the lengths of the error bars in the bottom
                     (left) direction for vertical (horizontal) bars
                 visible
@@ -438,7 +438,7 @@ class Bar(BaseTraceType):
         single string, the same string appears over all the data
         points. If an array of string, the items are mapped in order to
         the this trace's (x,y) coordinates. To be seen, trace
-        `hoverinfo` must contain a *text* flag.
+        `hoverinfo` must contain a "text" flag.
     
         The 'hovertext' property is a string and must be specified as:
           - A string
@@ -548,11 +548,11 @@ class Bar(BaseTraceType):
                     system. The plotly service (at https://plot.ly
                     or on-premise) generates images on a server,
                     where only a select number of fonts are
-                    installed and supported. These include *Arial*,
-                    *Balto*, *Courier New*, *Droid Sans*,, *Droid
-                    Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
-                    Standard TT*, *Open Sans*, *Overpass*, *PT Sans
-                    Narrow*, *Raleway*, *Times New Roman*.
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
                 familysrc
                     Sets the source reference on plot.ly for
                     family .
@@ -724,8 +724,8 @@ class Bar(BaseTraceType):
     def offset(self):
         """
         Shifts the position where the bar is drawn (in position axis
-        units). In *group* barmode, traces that set *offset* will be
-        excluded and drawn in *overlay* mode instead.
+        units). In "group" barmode, traces that set "offset" will be
+        excluded and drawn in "overlay" mode instead.
     
         The 'offset' property is a number and may be specified as:
           - An int or float
@@ -786,7 +786,7 @@ class Bar(BaseTraceType):
     @property
     def orientation(self):
         """
-        Sets the orientation of the bars. With *v* (*h*), the value of
+        Sets the orientation of the bars. With "v" ("h"), the value of
         the each bar spans along the vertical (horizontal).
     
         The 'orientation' property is an enumeration that may be specified as:
@@ -834,11 +834,11 @@ class Bar(BaseTraceType):
                     system. The plotly service (at https://plot.ly
                     or on-premise) generates images on a server,
                     where only a select number of fonts are
-                    installed and supported. These include *Arial*,
-                    *Balto*, *Courier New*, *Droid Sans*,, *Droid
-                    Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
-                    Standard TT*, *Open Sans*, *Overpass*, *PT Sans
-                    Narrow*, *Raleway*, *Times New Roman*.
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
                 familysrc
                     Sets the source reference on plot.ly for
                     family .
@@ -863,7 +863,7 @@ class Bar(BaseTraceType):
     @property
     def r(self):
         """
-        For legacy polar chart only.Please switch to *scatterpolar*
+        For legacy polar chart only.Please switch to "scatterpolar"
         trace type.Sets the radial coordinates.
     
         The 'r' property is an array that may be specified as a tuple,
@@ -990,7 +990,7 @@ class Bar(BaseTraceType):
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
-                    `maxpoints` is set to *50*, only the newest 50
+                    `maxpoints` is set to 50, only the newest 50
                     points will be displayed on the plot.
                 token
                     The stream id number links a data trace on a
@@ -1012,7 +1012,7 @@ class Bar(BaseTraceType):
     @property
     def t(self):
         """
-        For legacy polar chart only.Please switch to *scatterpolar*
+        For legacy polar chart only.Please switch to "scatterpolar"
         trace type.Sets the angular coordinates.
     
         The 't' property is an array that may be specified as a tuple,
@@ -1037,7 +1037,7 @@ class Bar(BaseTraceType):
         string, the same string appears over all the data points. If an
         array of string, the items are mapped in order to the this
         trace's (x,y) coordinates. If trace `hoverinfo` contains a
-        *text* flag and *hovertext* is not set, these elements will be
+        "text" flag and "hovertext" is not set, these elements will be
         seen in the hover labels.
     
         The 'text' property is a string and must be specified as:
@@ -1086,11 +1086,11 @@ class Bar(BaseTraceType):
                     system. The plotly service (at https://plot.ly
                     or on-premise) generates images on a server,
                     where only a select number of fonts are
-                    installed and supported. These include *Arial*,
-                    *Balto*, *Courier New*, *Droid Sans*,, *Droid
-                    Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
-                    Standard TT*, *Open Sans*, *Overpass*, *PT Sans
-                    Narrow*, *Raleway*, *Times New Roman*.
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
                 familysrc
                     Sets the source reference on plot.ly for
                     family .
@@ -1115,10 +1115,10 @@ class Bar(BaseTraceType):
     @property
     def textposition(self):
         """
-        Specifies the location of the `text`. *inside* positions `text`
+        Specifies the location of the `text`. "inside" positions `text`
         inside, next to the bar end (rotated and scaled if needed).
-        *outside* positions `text` outside, next to the bar end (scaled
-        if needed). *auto* positions `text` inside or outside so that
+        "outside" positions `text` outside, next to the bar end (scaled
+        if needed). "auto" positions `text` inside or outside so that
         `text` size is maximized.
     
         The 'textposition' property is an enumeration that may be specified as:
@@ -1251,7 +1251,7 @@ class Bar(BaseTraceType):
     def visible(self):
         """
         Determines whether or not this trace is visible. If
-        *legendonly*, the trace is not drawn, but can appear as a
+        "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
     
         The 'visible' property is an enumeration that may be specified as:
@@ -1356,8 +1356,8 @@ class Bar(BaseTraceType):
     def xaxis(self):
         """
         Sets a reference between this trace's x coordinates and a 2D
-        cartesian x axis. If *x* (the default value), the x coordinates
-        refer to `layout.xaxis`. If *x2*, the x coordinates refer to
+        cartesian x axis. If "x" (the default value), the x coordinates
+        refer to `layout.xaxis`. If "x2", the x coordinates refer to
         `layout.xaxis2`, and so on.
     
         The 'xaxis' property is an identifier of a particular
@@ -1466,8 +1466,8 @@ class Bar(BaseTraceType):
     def yaxis(self):
         """
         Sets a reference between this trace's y coordinates and a 2D
-        cartesian y axis. If *y* (the default value), the y coordinates
-        refer to `layout.yaxis`. If *y2*, the y coordinates refer to
+        cartesian y axis. If "y" (the default value), the y coordinates
+        refer to `layout.yaxis`. If "y2", the y coordinates refer to
         `layout.yaxis2`, and so on.
     
         The 'yaxis' property is an identifier of a particular
@@ -1548,8 +1548,8 @@ class Bar(BaseTraceType):
         return """\
         base
             Sets where the bar base is drawn (in position axis
-            units). In *stack* or *relative* barmode, traces that
-            set *base* will be excluded and drawn in *overlay* mode
+            units). In "stack" or "relative" barmode, traces that
+            set "base" will be excluded and drawn in "overlay" mode
             instead.
         basesrc
             Sets the source reference on plot.ly for  base .
@@ -1564,7 +1564,7 @@ class Bar(BaseTraceType):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -1594,7 +1594,7 @@ class Bar(BaseTraceType):
             all the data points. If an array of string, the items
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
-            a *text* flag.
+            a "text" flag.
         hovertextsrc
             Sets the source reference on plot.ly for  hovertext .
         ids
@@ -1617,22 +1617,22 @@ class Bar(BaseTraceType):
             legend item and on hover.
         offset
             Shifts the position where the bar is drawn (in position
-            axis units). In *group* barmode, traces that set
-            *offset* will be excluded and drawn in *overlay* mode
+            axis units). In "group" barmode, traces that set
+            "offset" will be excluded and drawn in "overlay" mode
             instead.
         offsetsrc
             Sets the source reference on plot.ly for  offset .
         opacity
             Sets the opacity of the trace.
         orientation
-            Sets the orientation of the bars. With *v* (*h*), the
+            Sets the orientation of the bars. With "v" ("h"), the
             value of the each bar spans along the vertical
             (horizontal).
         outsidetextfont
             Sets the font used for `text` lying outside the bar.
         r
             For legacy polar chart only.Please switch to
-            *scatterpolar* trace type.Sets the radial coordinates.
+            "scatterpolar" trace type.Sets the radial coordinates.
         rsrc
             Sets the source reference on plot.ly for  r .
         selected
@@ -1653,22 +1653,22 @@ class Bar(BaseTraceType):
             compatible properties
         t
             For legacy polar chart only.Please switch to
-            *scatterpolar* trace type.Sets the angular coordinates.
+            "scatterpolar" trace type.Sets the angular coordinates.
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the
             data points. If an array of string, the items are
             mapped in order to the this trace's (x,y) coordinates.
-            If trace `hoverinfo` contains a *text* flag and
-            *hovertext* is not set, these elements will be seen in
+            If trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
             the hover labels.
         textfont
             Sets the font used for `text`.
         textposition
-            Specifies the location of the `text`. *inside*
+            Specifies the location of the `text`. "inside"
             positions `text` inside, next to the bar end (rotated
-            and scaled if needed). *outside* positions `text`
-            outside, next to the bar end (scaled if needed). *auto*
+            and scaled if needed). "outside" positions `text`
+            outside, next to the bar end (scaled if needed). "auto"
             positions `text` inside or outside so that `text` size
             is maximized.
         textpositionsrc
@@ -1685,7 +1685,7 @@ class Bar(BaseTraceType):
             compatible properties
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         width
@@ -1700,8 +1700,8 @@ class Bar(BaseTraceType):
             coordinate and `dx` the step.
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
@@ -1715,8 +1715,8 @@ class Bar(BaseTraceType):
             coordinate and `dy` the step.
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
@@ -1787,8 +1787,8 @@ class Bar(BaseTraceType):
         Construct a new Bar object
         
         The data visualized by the span of the bars is set in `y` if
-        `orientation` is set th *v* (the default) and the labels are
-        set in `x`. By setting `orientation` to *h*, the roles are
+        `orientation` is set th "v" (the default) and the labels are
+        set in `x`. By setting `orientation` to "h", the roles are
         interchanged.
 
         Parameters
@@ -1798,8 +1798,8 @@ class Bar(BaseTraceType):
             an instance of plotly.graph_objs.Bar
         base
             Sets where the bar base is drawn (in position axis
-            units). In *stack* or *relative* barmode, traces that
-            set *base* will be excluded and drawn in *overlay* mode
+            units). In "stack" or "relative" barmode, traces that
+            set "base" will be excluded and drawn in "overlay" mode
             instead.
         basesrc
             Sets the source reference on plot.ly for  base .
@@ -1814,7 +1814,7 @@ class Bar(BaseTraceType):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -1844,7 +1844,7 @@ class Bar(BaseTraceType):
             all the data points. If an array of string, the items
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
-            a *text* flag.
+            a "text" flag.
         hovertextsrc
             Sets the source reference on plot.ly for  hovertext .
         ids
@@ -1867,22 +1867,22 @@ class Bar(BaseTraceType):
             legend item and on hover.
         offset
             Shifts the position where the bar is drawn (in position
-            axis units). In *group* barmode, traces that set
-            *offset* will be excluded and drawn in *overlay* mode
+            axis units). In "group" barmode, traces that set
+            "offset" will be excluded and drawn in "overlay" mode
             instead.
         offsetsrc
             Sets the source reference on plot.ly for  offset .
         opacity
             Sets the opacity of the trace.
         orientation
-            Sets the orientation of the bars. With *v* (*h*), the
+            Sets the orientation of the bars. With "v" ("h"), the
             value of the each bar spans along the vertical
             (horizontal).
         outsidetextfont
             Sets the font used for `text` lying outside the bar.
         r
             For legacy polar chart only.Please switch to
-            *scatterpolar* trace type.Sets the radial coordinates.
+            "scatterpolar" trace type.Sets the radial coordinates.
         rsrc
             Sets the source reference on plot.ly for  r .
         selected
@@ -1903,22 +1903,22 @@ class Bar(BaseTraceType):
             compatible properties
         t
             For legacy polar chart only.Please switch to
-            *scatterpolar* trace type.Sets the angular coordinates.
+            "scatterpolar" trace type.Sets the angular coordinates.
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the
             data points. If an array of string, the items are
             mapped in order to the this trace's (x,y) coordinates.
-            If trace `hoverinfo` contains a *text* flag and
-            *hovertext* is not set, these elements will be seen in
+            If trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
             the hover labels.
         textfont
             Sets the font used for `text`.
         textposition
-            Specifies the location of the `text`. *inside*
+            Specifies the location of the `text`. "inside"
             positions `text` inside, next to the bar end (rotated
-            and scaled if needed). *outside* positions `text`
-            outside, next to the bar end (scaled if needed). *auto*
+            and scaled if needed). "outside" positions `text`
+            outside, next to the bar end (scaled if needed). "auto"
             positions `text` inside or outside so that `text` size
             is maximized.
         textpositionsrc
@@ -1935,7 +1935,7 @@ class Bar(BaseTraceType):
             compatible properties
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         width
@@ -1950,8 +1950,8 @@ class Bar(BaseTraceType):
             coordinate and `dx` the step.
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
@@ -1965,8 +1965,8 @@ class Bar(BaseTraceType):
             coordinate and `dy` the step.
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.

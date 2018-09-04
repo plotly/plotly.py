@@ -56,7 +56,7 @@ class AnnotationsValidator(
                 captures mouse move and click events, or allows
                 those events to pass through to data points in
                 the plot that may be behind the annotation. By
-                default `captureevents` is *false* unless
+                default `captureevents` is False unless
                 `hovertext` is provided. If you use the event
                 `plotly_clickannotation` without `hovertext`
                 you must explicitly enable `captureevents`.
@@ -89,9 +89,9 @@ class AnnotationsValidator(
                 arrow).
             showarrow
                 Determines whether or not the annotation is
-                drawn with an arrow. If *true*, `text` is
-                placed near the arrow's tail. If *false*,
-                `text` lines up with the `x` and `y` provided.
+                drawn with an arrow. If True, `text` is placed
+                near the arrow's tail. If False, `text` lines
+                up with the `x` and `y` provided.
             standoff
                 Sets a distance, in pixels, to move the end
                 arrowhead away from the position it is pointing
@@ -155,12 +155,12 @@ class AnnotationsValidator(
             xanchor
                 Sets the text box's horizontal position anchor
                 This anchor binds the `x` position to the
-                *left*, *center* or *right* of the annotation.
+                "left", "center" or "right" of the annotation.
                 For example, if `x` is set to 1, `xref` to
-                *paper* and `xanchor` to *right* then the
+                "paper" and `xanchor` to "right" then the
                 right-most portion of the annotation lines up
                 with the right-most edge of the plotting area.
-                If *auto*, the anchor is equivalent to *center*
+                If "auto", the anchor is equivalent to "center"
                 for data-referenced annotations or if there is
                 an arrow, whereas for paper-referenced with no
                 arrow, the anchor picked corresponds to the
@@ -174,12 +174,12 @@ class AnnotationsValidator(
             yanchor
                 Sets the text box's vertical position anchor
                 This anchor binds the `y` position to the
-                *top*, *middle* or *bottom* of the annotation.
+                "top", "middle" or "bottom" of the annotation.
                 For example, if `y` is set to 1, `yref` to
-                *paper* and `yanchor` to *top* then the top-
+                "paper" and `yanchor` to "top" then the top-
                 most portion of the annotation lines up with
                 the top-most edge of the plotting area. If
-                *auto*, the anchor is equivalent to *middle*
+                "auto", the anchor is equivalent to "middle"
                 for data-referenced annotations or if there is
                 an arrow, whereas for paper-referenced with no
                 arrow, the anchor picked corresponds to the
@@ -189,6 +189,7 @@ class AnnotationsValidator(
                 arrow up (positive) or down (negative) by this
                 many pixels.
             z
-                Sets the annotation's z position.""",
+                Sets the annotation's z position.
+""",
             **kwargs
         )

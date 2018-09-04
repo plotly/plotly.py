@@ -42,6 +42,7 @@ class RadialAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 radial axis.
             visible
                 Determines whether or not this axis will be
-                visible.""",
+                visible.
+""",
             **kwargs
         )

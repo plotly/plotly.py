@@ -70,9 +70,9 @@ class Contourcarpet(BaseTraceType):
     @property
     def atype(self):
         """
-        If *array*, the heatmap's x coordinates are given by *x* (the
-        default behavior when `x` is provided). If *scaled*, the
-        heatmap's x coordinates are given by *x0* and *dx* (the default
+        If "array", the heatmap's x coordinates are given by "x" (the
+        default behavior when `x` is provided). If "scaled", the
+        heatmap's x coordinates are given by "x0" and "dx" (the default
         behavior when `x` is not provided).
     
         The 'atype' property is an enumeration that may be specified as:
@@ -120,8 +120,8 @@ class Contourcarpet(BaseTraceType):
     def autocontour(self):
         """
         Determines whether or not the contour level attributes are
-        picked by an algorithm. If *true*, the number of contour levels
-        can be set in `ncontours`. If *false*, set the contour level
+        picked by an algorithm. If True, the number of contour levels
+        can be set in `ncontours`. If False, set the contour level
         attributes in `contours`.
     
         The 'autocontour' property must be specified as a bool
@@ -203,9 +203,9 @@ class Contourcarpet(BaseTraceType):
     @property
     def btype(self):
         """
-        If *array*, the heatmap's y coordinates are given by *y* (the
-        default behavior when `y` is provided) If *scaled*, the
-        heatmap's y coordinates are given by *y0* and *dy* (the default
+        If "array", the heatmap's y coordinates are given by "y" (the
+        default behavior when `y` is provided) If "scaled", the
+        heatmap's y coordinates are given by "y0" and "dy" (the default
         behavior when `y` is not provided)
     
         The 'btype' property is an enumeration that may be specified as:
@@ -267,38 +267,38 @@ class Contourcarpet(BaseTraceType):
                 dtick
                     Sets the step in-between ticks on this axis.
                     Use with `tick0`. Must be a positive number, or
-                    special strings available to *log* and *date*
-                    axes. If the axis `type` is *log*, then ticks
+                    special strings available to "log" and "date"
+                    axes. If the axis `type` is "log", then ticks
                     are set every 10^(n*dtick) where n is the tick
                     number. For example, to set a tick mark at 1,
                     10, 100, 1000, ... set dtick to 1. To set tick
                     marks at 1, 100, 10000, ... set dtick to 2. To
                     set tick marks at 1, 5, 25, 125, 625, 3125, ...
-                    set dtick to log_10(5), or 0.69897000433. *log*
-                    has several special values; *L<f>*, where `f`
+                    set dtick to log_10(5), or 0.69897000433. "log"
+                    has several special values; "L<f>", where `f`
                     is a positive number, gives ticks linearly
                     spaced in value (but not position). For example
-                    `tick0` = 0.1, `dtick` = *L0.5* will put ticks
+                    `tick0` = 0.1, `dtick` = "L0.5" will put ticks
                     at 0.1, 0.6, 1.1, 1.6 etc. To show powers of 10
-                    plus small digits between, use *D1* (all
-                    digits) or *D2* (only 2 and 5). `tick0` is
-                    ignored for *D1* and *D2*. If the axis `type`
-                    is *date*, then you must convert the time to
+                    plus small digits between, use "D1" (all
+                    digits) or "D2" (only 2 and 5). `tick0` is
+                    ignored for "D1" and "D2". If the axis `type`
+                    is "date", then you must convert the time to
                     milliseconds. For example, to set the interval
                     between ticks to one day, set `dtick` to
-                    86400000.0. *date* also has special values
-                    *M<n>* gives ticks spaced by a number of
+                    86400000.0. "date" also has special values
+                    "M<n>" gives ticks spaced by a number of
                     months. `n` must be a positive integer. To set
                     ticks on the 15th of every third month, set
-                    `tick0` to *2000-01-15* and `dtick` to *M3*. To
-                    set ticks every 4 years, set `dtick` to *M48*
+                    `tick0` to "2000-01-15" and `dtick` to "M3". To
+                    set ticks every 4 years, set `dtick` to "M48"
                 exponentformat
                     Determines a formatting rule for the tick
                     exponents. For example, consider the number
-                    1,000,000,000. If *none*, it appears as
-                    1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If
-                    *power*, 1x10^9 (with 9 in a super script). If
-                    *SI*, 1G. If *B*, 1B.
+                    1,000,000,000. If "none", it appears as
+                    1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
+                    "power", 1x10^9 (with 9 in a super script). If
+                    "SI", 1G. If "B", 1B.
                 len
                     Sets the length of the color bar This measure
                     excludes the padding of both ends. That is, the
@@ -307,14 +307,14 @@ class Contourcarpet(BaseTraceType):
                 lenmode
                     Determines whether this color bar's length
                     (i.e. the measure in the color variation
-                    direction) is set in units of plot *fraction*
+                    direction) is set in units of plot "fraction"
                     or in *pixels. Use `len` to set the value.
                 nticks
                     Specifies the maximum number of ticks for the
                     particular axis. The actual number of ticks
                     will be chosen automatically to be less than or
                     equal to `nticks`. Has an effect only if
-                    `tickmode` is set to *auto*.
+                    `tickmode` is set to "auto".
                 outlinecolor
                     Sets the axis line color.
                 outlinewidth
@@ -322,20 +322,20 @@ class Contourcarpet(BaseTraceType):
                 separatethousands
                     If "true", even 4-digit integers are separated
                 showexponent
-                    If *all*, all exponents are shown besides their
-                    significands. If *first*, only the exponent of
-                    the first tick is shown. If *last*, only the
-                    exponent of the last tick is shown. If *none*,
+                    If "all", all exponents are shown besides their
+                    significands. If "first", only the exponent of
+                    the first tick is shown. If "last", only the
+                    exponent of the last tick is shown. If "none",
                     no exponents appear.
                 showticklabels
                     Determines whether or not the tick labels are
                     drawn.
                 showtickprefix
-                    If *all*, all tick labels are displayed with a
-                    prefix. If *first*, only the first tick is
-                    displayed with a prefix. If *last*, only the
+                    If "all", all tick labels are displayed with a
+                    prefix. If "first", only the first tick is
+                    displayed with a prefix. If "last", only the
                     last tick is displayed with a suffix. If
-                    *none*, tick prefixes are hidden.
+                    "none", tick prefixes are hidden.
                 showticksuffix
                     Same as `showtickprefix` but for tick suffixes.
                 thickness
@@ -345,19 +345,19 @@ class Contourcarpet(BaseTraceType):
                 thicknessmode
                     Determines whether this color bar's thickness
                     (i.e. the measure in the constant color
-                    direction) is set in units of plot *fraction*
-                    or in *pixels*. Use `thickness` to set the
+                    direction) is set in units of plot "fraction"
+                    or in "pixels". Use `thickness` to set the
                     value.
                 tick0
                     Sets the placement of the first tick on this
                     axis. Use with `dtick`. If the axis `type` is
-                    *log*, then you must take the log of your
+                    "log", then you must take the log of your
                     starting tick (e.g. to set the starting tick to
                     100, set the `tick0` to 2) except when
                     `dtick`=*L<f>* (see `dtick` for more info). If
-                    the axis `type` is *date*, it should be a date
+                    the axis `type` is "date", it should be a date
                     string, like date data. If the axis `type` is
-                    *category*, it should be a number, using the
+                    "category", it should be a number, using the
                     scale where each category is assigned a serial
                     number from zero in the order it appears.
                 tickangle
@@ -376,11 +376,11 @@ class Contourcarpet(BaseTraceType):
                     ME.md#locale_format And for dates see:
                     https://github.com/d3/d3-time-
                     format/blob/master/README.md#locale_format We
-                    add one item to d3's date formatter: *%{n}f*
+                    add one item to d3's date formatter: "%{n}f"
                     for fractional seconds with n digits. For
                     example, *2016-10-13 09:15:23.456* with
-                    tickformat *%H~%M~%S.%2f* would display
-                    *09~15~23.46*
+                    tickformat "%H~%M~%S.%2f" would display
+                    "09~15~23.46"
                 tickformatstops
                     plotly.graph_objs.contourcarpet.colorbar.Tickfo
                     rmatstop instance or dict with compatible
@@ -388,29 +388,29 @@ class Contourcarpet(BaseTraceType):
                 ticklen
                     Sets the tick length (in px).
                 tickmode
-                    Sets the tick mode for this axis. If *auto*,
+                    Sets the tick mode for this axis. If "auto",
                     the number of ticks is set via `nticks`. If
-                    *linear*, the placement of the ticks is
+                    "linear", the placement of the ticks is
                     determined by a starting position `tick0` and a
-                    tick step `dtick` (*linear* is the default
+                    tick step `dtick` ("linear" is the default
                     value if `tick0` and `dtick` are provided). If
-                    *array*, the placement of the ticks is set via
+                    "array", the placement of the ticks is set via
                     `tickvals` and the tick text is `ticktext`.
-                    (*array* is the default value if `tickvals` is
+                    ("array" is the default value if `tickvals` is
                     provided).
                 tickprefix
                     Sets a tick label prefix.
                 ticks
                     Determines whether ticks are drawn or not. If
                     **, this axis' ticks are not drawn. If
-                    *outside* (*inside*), this axis' are drawn
+                    "outside" ("inside"), this axis' are drawn
                     outside (inside) the axis lines.
                 ticksuffix
                     Sets a tick label suffix.
                 ticktext
                     Sets the text displayed at the ticks position
                     via `tickvals`. Only has an effect if
-                    `tickmode` is set to *array*. Used with
+                    `tickmode` is set to "array". Used with
                     `tickvals`.
                 ticktextsrc
                     Sets the source reference on plot.ly for
@@ -418,7 +418,7 @@ class Contourcarpet(BaseTraceType):
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
-                    to *array*. Used with `ticktext`.
+                    to "array". Used with `ticktext`.
                 tickvalssrc
                     Sets the source reference on plot.ly for
                     tickvals .
@@ -437,7 +437,7 @@ class Contourcarpet(BaseTraceType):
                 xanchor
                     Sets this color bar's horizontal position
                     anchor. This anchor binds the `x` position to
-                    the *left*, *center* or *right* of the color
+                    the "left", "center" or "right" of the color
                     bar.
                 xpad
                     Sets the amount of padding (in px) along the x
@@ -448,7 +448,7 @@ class Contourcarpet(BaseTraceType):
                 yanchor
                     Sets this color bar's vertical position anchor
                     This anchor binds the `y` position to the
-                    *top*, *middle* or *bottom* of the color bar.
+                    "top", "middle" or "bottom" of the color bar.
                 ypad
                     Sets the amount of padding (in px) along the y
                     direction.
@@ -515,10 +515,10 @@ class Contourcarpet(BaseTraceType):
                 
                 coloring
                     Determines the coloring method showing the
-                    contour values. If *fill*, coloring is done
-                    evenly between each contour level If *lines*,
+                    contour values. If "fill", coloring is done
+                    evenly between each contour level If "lines",
                     coloring is done on the contour lines. If
-                    *none*, no coloring is applied on this trace.
+                    "none", no coloring is applied on this trace.
                 end
                     Sets the end contour level value. Must be more
                     than `contours.start`
@@ -533,12 +533,12 @@ class Contourcarpet(BaseTraceType):
                     to Python, see: https://github.com/d3/d3-format
                     /blob/master/README.md#locale_format.
                 operation
-                    Sets the constraint operation. *=* keeps
-                    regions equal to `value` *<* and *<=* keep
-                    regions less than `value` *>* and *>=* keep
-                    regions greater than `value` *[]*, *()*, *[)*,
-                    and *(]* keep regions inside `value[0]` to
-                    `value[1]` *][*, *)(*, *](*, *)[* keep regions
+                    Sets the constraint operation. "=" keeps
+                    regions equal to `value` "<" and "<=" keep
+                    regions less than `value` ">" and ">=" keep
+                    regions greater than `value` "[]", "()", "[)",
+                    and "(]" keep regions inside `value[0]` to
+                    `value[1]` "][", ")(", "](", ")[" keep regions
                     outside `value[0]` to value[1]` Open vs. closed
                     intervals make no difference to constraint
                     display, but all versions are allowed for
@@ -549,7 +549,7 @@ class Contourcarpet(BaseTraceType):
                 showlines
                     Determines whether or not the contour lines are
                     drawn. Has an effect only if
-                    `contours.coloring` is set to *fill*.
+                    `contours.coloring` is set to "fill".
                 size
                     Sets the step between each contour level. Must
                     be positive.
@@ -566,10 +566,10 @@ class Contourcarpet(BaseTraceType):
                 value
                     Sets the value or values of the constraint
                     boundary. When `operation` is set to one of the
-                    comparison values (=,<,>=,>,<=) *value* is
+                    comparison values (=,<,>=,>,<=) "value" is
                     expected to be a number. When `operation` is
                     set to one of the interval values
-                    ([],(),[),(],][,)(,](,)[) *value* is expected
+                    ([],(),[),(],][,)(,](,)[) "value" is expected
                     to be an array of two numbers where the first
                     is the lower bound and the second is the upper
                     bound.
@@ -591,7 +591,7 @@ class Contourcarpet(BaseTraceType):
         """
         Assigns extra data each datum. This may be useful when
         listening to hover, click and selection events. Note that,
-        *scatter* traces also appends customdata items in the markers
+        "scatter" traces also appends customdata items in the markers
         DOM elements
     
         The 'customdata' property is an array that may be specified as a tuple,
@@ -672,7 +672,7 @@ class Contourcarpet(BaseTraceType):
     @property
     def fillcolor(self):
         """
-        Sets the fill color if `contours.type` is *constraint*.
+        Sets the fill color if `contours.type` is "constraint".
         Defaults to a half-transparent variant of the line color,
         marker color, or marker line color, whichever is available.
     
@@ -906,15 +906,15 @@ class Contourcarpet(BaseTraceType):
                 
                 color
                     Sets the color of the contour level. Has no if
-                    `contours.coloring` is set to *lines*.
+                    `contours.coloring` is set to "lines".
                 dash
                     Sets the dash style of lines. Set to a dash
-                    type string (*solid*, *dot*, *dash*,
-                    *longdash*, *dashdot*, or *longdashdot*) or a
-                    dash length list in px (eg *5px,10px,2px,2px*).
+                    type string ("solid", "dot", "dash",
+                    "longdash", "dashdot", or "longdashdot") or a
+                    dash length list in px (eg "5px,10px,2px,2px").
                 smoothing
                     Sets the amount of smoothing for the contour
-                    lines, where *0* corresponds to no smoothing.
+                    lines, where 0 corresponds to no smoothing.
                 width
                     Sets the line width (in px).
 
@@ -958,7 +958,7 @@ class Contourcarpet(BaseTraceType):
         Sets the maximum number of contour levels. The actual number of
         contours will be chosen automatically to be less than or equal
         to the value of `ncontours`. Has an effect only if
-        `autocontour` is *true* or if `contours.size` is missing.
+        `autocontour` is True or if `contours.size` is missing.
     
         The 'ncontours' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
@@ -1098,7 +1098,7 @@ class Contourcarpet(BaseTraceType):
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
-                    `maxpoints` is set to *50*, only the newest 50
+                    `maxpoints` is set to 50, only the newest 50
                     points will be displayed on the plot.
                 token
                     The stream id number links a data trace on a
@@ -1200,7 +1200,7 @@ class Contourcarpet(BaseTraceType):
     def visible(self):
         """
         Determines whether or not this trace is visible. If
-        *legendonly*, the trace is not drawn, but can appear as a
+        "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
     
         The 'visible' property is an enumeration that may be specified as:
@@ -1223,8 +1223,8 @@ class Contourcarpet(BaseTraceType):
     def xaxis(self):
         """
         Sets a reference between this trace's x coordinates and a 2D
-        cartesian x axis. If *x* (the default value), the x coordinates
-        refer to `layout.xaxis`. If *x2*, the x coordinates refer to
+        cartesian x axis. If "x" (the default value), the x coordinates
+        refer to `layout.xaxis`. If "x2", the x coordinates refer to
         `layout.xaxis2`, and so on.
     
         The 'xaxis' property is an identifier of a particular
@@ -1248,8 +1248,8 @@ class Contourcarpet(BaseTraceType):
     def yaxis(self):
         """
         Sets a reference between this trace's y coordinates and a 2D
-        cartesian y axis. If *y* (the default value), the y coordinates
-        refer to `layout.yaxis`. If *y2*, the y coordinates refer to
+        cartesian y axis. If "y" (the default value), the y coordinates
+        refer to `layout.yaxis`. If "y2", the y coordinates refer to
         `layout.yaxis2`, and so on.
     
         The 'yaxis' property is an identifier of a particular
@@ -1398,10 +1398,10 @@ class Contourcarpet(BaseTraceType):
         asrc
             Sets the source reference on plot.ly for  a .
         atype
-            If *array*, the heatmap's x coordinates are given by
-            *x* (the default behavior when `x` is provided). If
-            *scaled*, the heatmap's x coordinates are given by *x0*
-            and *dx* (the default behavior when `x` is not
+            If "array", the heatmap's x coordinates are given by
+            "x" (the default behavior when `x` is provided). If
+            "scaled", the heatmap's x coordinates are given by "x0"
+            and "dx" (the default behavior when `x` is not
             provided).
         autocolorscale
             Determines whether the colorscale is a default palette
@@ -1412,9 +1412,9 @@ class Contourcarpet(BaseTraceType):
             array are all positive, all negative or mixed.
         autocontour
             Determines whether or not the contour level attributes
-            are picked by an algorithm. If *true*, the number of
-            contour levels can be set in `ncontours`. If *false*,
-            set the contour level attributes in `contours`.
+            are picked by an algorithm. If True, the number of
+            contour levels can be set in `ncontours`. If False, set
+            the contour level attributes in `contours`.
         b
             Sets the y coordinates.
         b0
@@ -1424,10 +1424,10 @@ class Contourcarpet(BaseTraceType):
         bsrc
             Sets the source reference on plot.ly for  b .
         btype
-            If *array*, the heatmap's y coordinates are given by
-            *y* (the default behavior when `y` is provided) If
-            *scaled*, the heatmap's y coordinates are given by *y0*
-            and *dy* (the default behavior when `y` is not
+            If "array", the heatmap's y coordinates are given by
+            "y" (the default behavior when `y` is provided) If
+            "scaled", the heatmap's y coordinates are given by "y0"
+            and "dy" (the default behavior when `y` is not
             provided)
         carpet
             The `carpet` of the carpet axes on which this contour
@@ -1453,7 +1453,7 @@ class Contourcarpet(BaseTraceType):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -1462,7 +1462,7 @@ class Contourcarpet(BaseTraceType):
         db
             Sets the y coordinate step. See `y0` for more info.
         fillcolor
-            Sets the fill color if `contours.type` is *constraint*.
+            Sets the fill color if `contours.type` is "constraint".
             Defaults to a half-transparent variant of the line
             color, marker color, or marker line color, whichever is
             available.
@@ -1496,7 +1496,7 @@ class Contourcarpet(BaseTraceType):
             Sets the maximum number of contour levels. The actual
             number of contours will be chosen automatically to be
             less than or equal to the value of `ncontours`. Has an
-            effect only if `autocontour` is *true* or if
+            effect only if `autocontour` is True or if
             `contours.size` is missing.
         opacity
             Sets the opacity of the trace.
@@ -1530,18 +1530,18 @@ class Contourcarpet(BaseTraceType):
 
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         z
             Sets the z data.
@@ -1634,10 +1634,10 @@ class Contourcarpet(BaseTraceType):
         asrc
             Sets the source reference on plot.ly for  a .
         atype
-            If *array*, the heatmap's x coordinates are given by
-            *x* (the default behavior when `x` is provided). If
-            *scaled*, the heatmap's x coordinates are given by *x0*
-            and *dx* (the default behavior when `x` is not
+            If "array", the heatmap's x coordinates are given by
+            "x" (the default behavior when `x` is provided). If
+            "scaled", the heatmap's x coordinates are given by "x0"
+            and "dx" (the default behavior when `x` is not
             provided).
         autocolorscale
             Determines whether the colorscale is a default palette
@@ -1648,9 +1648,9 @@ class Contourcarpet(BaseTraceType):
             array are all positive, all negative or mixed.
         autocontour
             Determines whether or not the contour level attributes
-            are picked by an algorithm. If *true*, the number of
-            contour levels can be set in `ncontours`. If *false*,
-            set the contour level attributes in `contours`.
+            are picked by an algorithm. If True, the number of
+            contour levels can be set in `ncontours`. If False, set
+            the contour level attributes in `contours`.
         b
             Sets the y coordinates.
         b0
@@ -1660,10 +1660,10 @@ class Contourcarpet(BaseTraceType):
         bsrc
             Sets the source reference on plot.ly for  b .
         btype
-            If *array*, the heatmap's y coordinates are given by
-            *y* (the default behavior when `y` is provided) If
-            *scaled*, the heatmap's y coordinates are given by *y0*
-            and *dy* (the default behavior when `y` is not
+            If "array", the heatmap's y coordinates are given by
+            "y" (the default behavior when `y` is provided) If
+            "scaled", the heatmap's y coordinates are given by "y0"
+            and "dy" (the default behavior when `y` is not
             provided)
         carpet
             The `carpet` of the carpet axes on which this contour
@@ -1689,7 +1689,7 @@ class Contourcarpet(BaseTraceType):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -1698,7 +1698,7 @@ class Contourcarpet(BaseTraceType):
         db
             Sets the y coordinate step. See `y0` for more info.
         fillcolor
-            Sets the fill color if `contours.type` is *constraint*.
+            Sets the fill color if `contours.type` is "constraint".
             Defaults to a half-transparent variant of the line
             color, marker color, or marker line color, whichever is
             available.
@@ -1732,7 +1732,7 @@ class Contourcarpet(BaseTraceType):
             Sets the maximum number of contour levels. The actual
             number of contours will be chosen automatically to be
             less than or equal to the value of `ncontours`. Has an
-            effect only if `autocontour` is *true* or if
+            effect only if `autocontour` is True or if
             `contours.size` is missing.
         opacity
             Sets the opacity of the trace.
@@ -1766,18 +1766,18 @@ class Contourcarpet(BaseTraceType):
 
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         z
             Sets the z data.

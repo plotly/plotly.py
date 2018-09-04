@@ -83,6 +83,7 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the marker points.
             widthsrc
                 Sets the source reference on plot.ly for  width
-                .""",
+                .
+""",
             **kwargs
         )

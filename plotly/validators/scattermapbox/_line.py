@@ -14,6 +14,7 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
             color
                 Sets the line color.
             width
-                Sets the line width (in px).""",
+                Sets the line width (in px).
+""",
             **kwargs
         )

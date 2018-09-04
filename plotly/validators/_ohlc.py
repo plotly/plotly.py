@@ -17,7 +17,7 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
-                selection events. Note that, *scatter* traces
+                selection events. Note that, "scatter" traces
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
@@ -100,12 +100,12 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
                 .
             tickwidth
                 Sets the width of the open/close tick marks
-                relative to the *x* minimal interval.
+                relative to the "x" minimal interval.
             uid
 
             visible
                 Determines whether or not this trace is
-                visible. If *legendonly*, the trace is not
+                visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
             x
@@ -113,9 +113,9 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
                 coordinate will be generated.
             xaxis
                 Sets a reference between this trace's x
-                coordinates and a 2D cartesian x axis. If *x*
+                coordinates and a 2D cartesian x axis. If "x"
                 (the default value), the x coordinates refer to
-                `layout.xaxis`. If *x2*, the x coordinates
+                `layout.xaxis`. If "x2", the x coordinates
                 refer to `layout.xaxis2`, and so on.
             xcalendar
                 Sets the calendar system to use with `x` date
@@ -124,9 +124,10 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  x .
             yaxis
                 Sets a reference between this trace's y
-                coordinates and a 2D cartesian y axis. If *y*
+                coordinates and a 2D cartesian y axis. If "y"
                 (the default value), the y coordinates refer to
-                `layout.yaxis`. If *y2*, the y coordinates
-                refer to `layout.yaxis2`, and so on.""",
+                `layout.yaxis`. If "y2", the y coordinates
+                refer to `layout.yaxis2`, and so on.
+""",
             **kwargs
         )

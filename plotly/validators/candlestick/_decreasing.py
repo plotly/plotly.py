@@ -18,6 +18,7 @@ class DecreasingValidator(_plotly_utils.basevalidators.CompoundValidator):
                 available.
             line
                 plotly.graph_objs.candlestick.decreasing.Line
-                instance or dict with compatible properties""",
+                instance or dict with compatible properties
+""",
             **kwargs
         )

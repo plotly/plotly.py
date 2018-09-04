@@ -13,6 +13,7 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the color of line bounding the box(es).
             width
                 Sets the width (in px) of line bounding the
-                box(es).""",
+                box(es).
+""",
             **kwargs
         )

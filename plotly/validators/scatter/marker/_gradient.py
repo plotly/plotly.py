@@ -23,6 +23,7 @@ class GradientValidator(_plotly_utils.basevalidators.CompoundValidator):
                 markers
             typesrc
                 Sets the source reference on plot.ly for  type
-                .""",
+                .
+""",
             **kwargs
         )

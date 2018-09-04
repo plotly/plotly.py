@@ -20,6 +20,7 @@ class DomainValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (in plot fraction).
             y
                 Sets the vertical domain of this sankey trace
-                (in plot fraction).""",
+                (in plot fraction).
+""",
             **kwargs
         )

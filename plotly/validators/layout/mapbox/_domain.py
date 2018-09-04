@@ -23,6 +23,7 @@ class DomainValidator(_plotly_utils.basevalidators.CompoundValidator):
                 subplot (in plot fraction).
             y
                 Sets the vertical domain of this mapbox subplot
-                (in plot fraction).""",
+                (in plot fraction).
+""",
             **kwargs
         )

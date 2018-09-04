@@ -49,7 +49,7 @@ class Histogram2dValidator(_plotly_utils.basevalidators.CompoundValidator):
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
-                selection events. Note that, *scatter* traces
+                selection events. Note that, "scatter" traces
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
@@ -57,10 +57,10 @@ class Histogram2dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 customdata .
             histfunc
                 Specifies the binning function used for this
-                histogram trace. If *count*, the histogram
+                histogram trace. If "count", the histogram
                 values are computed by counting the number of
-                values lying inside each bin. If *sum*, *avg*,
-                *min*, *max*, the histogram values are computed
+                values lying inside each bin. If "sum", "avg",
+                "min", "max", the histogram values are computed
                 using the sum, the average, the minimum or the
                 maximum of the values lying inside each bin
                 respectively.
@@ -69,11 +69,11 @@ class Histogram2dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 this histogram trace. If **, the span of each
                 bar corresponds to the number of occurrences
                 (i.e. the number of data points lying inside
-                the bins). If *percent* / *probability*, the
+                the bins). If "percent" / "probability", the
                 span of each bar corresponds to the percentage
                 / fraction of occurrences with respect to the
                 total number of sample points (here, the sum of
-                all bin HEIGHTS equals 100% / 1). If *density*,
+                all bin HEIGHTS equals 100% / 1). If "density",
                 the span of each bar corresponds to the number
                 of occurrences in a bin divided by the size of
                 the bin interval (here, the sum of all bin
@@ -152,7 +152,7 @@ class Histogram2dValidator(_plotly_utils.basevalidators.CompoundValidator):
 
             visible
                 Determines whether or not this trace is
-                visible. If *legendonly*, the trace is not
+                visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
             x
@@ -160,9 +160,9 @@ class Histogram2dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 axis.
             xaxis
                 Sets a reference between this trace's x
-                coordinates and a 2D cartesian x axis. If *x*
+                coordinates and a 2D cartesian x axis. If "x"
                 (the default value), the x coordinates refer to
-                `layout.xaxis`. If *x2*, the x coordinates
+                `layout.xaxis`. If "x2", the x coordinates
                 refer to `layout.xaxis2`, and so on.
             xbins
                 plotly.graph_objs.histogram2d.XBins instance or
@@ -180,9 +180,9 @@ class Histogram2dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 axis.
             yaxis
                 Sets a reference between this trace's y
-                coordinates and a 2D cartesian y axis. If *y*
+                coordinates and a 2D cartesian y axis. If "y"
                 (the default value), the y coordinates refer to
-                `layout.yaxis`. If *y2*, the y coordinates
+                `layout.yaxis`. If "y2", the y coordinates
                 refer to `layout.yaxis2`, and so on.
             ybins
                 plotly.graph_objs.histogram2d.YBins instance or
@@ -221,6 +221,7 @@ class Histogram2dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Picks a smoothing algorithm use to smooth `z`
                 data.
             zsrc
-                Sets the source reference on plot.ly for  z .""",
+                Sets the source reference on plot.ly for  z .
+""",
             **kwargs
         )

@@ -77,7 +77,7 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 instance or dict with compatible properties
             maxdisplayed
                 Sets a maximum number of points to be drawn on
-                the graph. *0* corresponds to no limit.
+                the graph. 0 corresponds to no limit.
             opacity
                 Sets the marker opacity.
             opacitysrc
@@ -114,13 +114,14 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 .
             symbol
                 Sets the marker symbol type. Adding 100 is
-                equivalent to appending *-open* to a symbol
+                equivalent to appending "-open" to a symbol
                 name. Adding 200 is equivalent to appending
-                *-dot* to a symbol name. Adding 300 is
-                equivalent to appending *-open-dot* or *dot-
-                open* to a symbol name.
+                "-dot" to a symbol name. Adding 300 is
+                equivalent to appending "-open-dot" or "dot-
+                open" to a symbol name.
             symbolsrc
                 Sets the source reference on plot.ly for
-                symbol .""",
+                symbol .
+""",
             **kwargs
         )

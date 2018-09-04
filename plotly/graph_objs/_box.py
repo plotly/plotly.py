@@ -9,8 +9,8 @@ class Box(BaseTraceType):
     @property
     def boxmean(self):
         """
-        If *true*, the mean of the box(es)' underlying distribution is
-        drawn as a dashed line inside the box(es). If *sd* the standard
+        If True, the mean of the box(es)' underlying distribution is
+        drawn as a dashed line inside the box(es). If "sd" the standard
         deviation is also drawn.
     
         The 'boxmean' property is an enumeration that may be specified as:
@@ -32,11 +32,11 @@ class Box(BaseTraceType):
     @property
     def boxpoints(self):
         """
-        If *outliers*, only the sample points lying outside the
-        whiskers are shown If *suspectedoutliers*, the outlier points
+        If "outliers", only the sample points lying outside the
+        whiskers are shown If "suspectedoutliers", the outlier points
         are shown and points either less than 4*Q1-3*Q3 or greater than
-        4*Q3-3*Q1 are highlighted (see `outliercolor`) If *all*, all
-        sample points are shown If *false*, only the box(es) are shown
+        4*Q3-3*Q1 are highlighted (see `outliercolor`) If "all", all
+        sample points are shown If False, only the box(es) are shown
         with no sample points
     
         The 'boxpoints' property is an enumeration that may be specified as:
@@ -60,7 +60,7 @@ class Box(BaseTraceType):
         """
         Assigns extra data each datum. This may be useful when
         listening to hover, click and selection events. Note that,
-        *scatter* traces also appends customdata items in the markers
+        "scatter" traces also appends customdata items in the markers
         DOM elements
     
         The 'customdata' property is an array that may be specified as a tuple,
@@ -323,10 +323,10 @@ class Box(BaseTraceType):
     @property
     def jitter(self):
         """
-        Sets the amount of jitter in the sample points drawn. If *0*,
-        the sample points align along the distribution axis. If *1*,
-        the sample points are drawn in a random jitter of width equal
-        to the width of the box(es).
+        Sets the amount of jitter in the sample points drawn. If 0, the
+        sample points align along the distribution axis. If 1, the
+        sample points are drawn in a random jitter of width equal to
+        the width of the box(es).
     
         The 'jitter' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
@@ -423,11 +423,11 @@ class Box(BaseTraceType):
                     Sets the marker size (in px).
                 symbol
                     Sets the marker symbol type. Adding 100 is
-                    equivalent to appending *-open* to a symbol
+                    equivalent to appending "-open" to a symbol
                     name. Adding 200 is equivalent to appending
-                    *-dot* to a symbol name. Adding 300 is
-                    equivalent to appending *-open-dot* or *dot-
-                    open* to a symbol name.
+                    "-dot" to a symbol name. Adding 300 is
+                    equivalent to appending "-open-dot" or "dot-
+                    open" to a symbol name.
 
         Returns
         -------
@@ -529,7 +529,7 @@ class Box(BaseTraceType):
     @property
     def orientation(self):
         """
-        Sets the orientation of the box(es). If *v* (*h*), the
+        Sets the orientation of the box(es). If "v" ("h"), the
         distribution is visualized along the vertical (horizontal).
     
         The 'orientation' property is an enumeration that may be specified as:
@@ -552,10 +552,10 @@ class Box(BaseTraceType):
     def pointpos(self):
         """
         Sets the position of the sample points in relation to the
-        box(es). If *0*, the sample points are places over the center
-        of the box(es). Positive (negative) values correspond to
-        positions to the right (left) for vertical boxes and above
-        (below) for horizontal boxes
+        box(es). If 0, the sample points are places over the center of
+        the box(es). Positive (negative) values correspond to positions
+        to the right (left) for vertical boxes and above (below) for
+        horizontal boxes
     
         The 'pointpos' property is a number and may be specified as:
           - An int or float in the interval [-2, 2]
@@ -658,7 +658,7 @@ class Box(BaseTraceType):
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
-                    `maxpoints` is set to *50*, only the newest 50
+                    `maxpoints` is set to 50, only the newest 50
                     points will be displayed on the plot.
                 token
                     The stream id number links a data trace on a
@@ -684,7 +684,7 @@ class Box(BaseTraceType):
         single string, the same string appears over all the data
         points. If an array of string, the items are mapped in order to
         the this trace's (x,y) coordinates. To be seen, trace
-        `hoverinfo` must contain a *text* flag.
+        `hoverinfo` must contain a "text" flag.
     
         The 'text' property is a string and must be specified as:
           - A string
@@ -773,7 +773,7 @@ class Box(BaseTraceType):
     def visible(self):
         """
         Determines whether or not this trace is visible. If
-        *legendonly*, the trace is not drawn, but can appear as a
+        "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
     
         The 'visible' property is an enumeration that may be specified as:
@@ -857,8 +857,8 @@ class Box(BaseTraceType):
     def xaxis(self):
         """
         Sets a reference between this trace's x coordinates and a 2D
-        cartesian x axis. If *x* (the default value), the x coordinates
-        refer to `layout.xaxis`. If *x2*, the x coordinates refer to
+        cartesian x axis. If "x" (the default value), the x coordinates
+        refer to `layout.xaxis`. If "x2", the x coordinates refer to
         `layout.xaxis2`, and so on.
     
         The 'xaxis' property is an identifier of a particular
@@ -966,8 +966,8 @@ class Box(BaseTraceType):
     def yaxis(self):
         """
         Sets a reference between this trace's y coordinates and a 2D
-        cartesian y axis. If *y* (the default value), the y coordinates
-        refer to `layout.yaxis`. If *y2*, the y coordinates refer to
+        cartesian y axis. If "y" (the default value), the y coordinates
+        refer to `layout.yaxis`. If "y2", the y coordinates refer to
         `layout.yaxis2`, and so on.
     
         The 'yaxis' property is an identifier of a particular
@@ -1047,21 +1047,21 @@ class Box(BaseTraceType):
     def _prop_descriptions(self):
         return """\
         boxmean
-            If *true*, the mean of the box(es)' underlying
+            If True, the mean of the box(es)' underlying
             distribution is drawn as a dashed line inside the
-            box(es). If *sd* the standard deviation is also drawn.
+            box(es). If "sd" the standard deviation is also drawn.
         boxpoints
-            If *outliers*, only the sample points lying outside the
-            whiskers are shown If *suspectedoutliers*, the outlier
+            If "outliers", only the sample points lying outside the
+            whiskers are shown If "suspectedoutliers", the outlier
             points are shown and points either less than 4*Q1-3*Q3
             or greater than 4*Q3-3*Q1 are highlighted (see
-            `outliercolor`) If *all*, all sample points are shown
-            If *false*, only the box(es) are shown with no sample
+            `outliercolor`) If "all", all sample points are shown
+            If False, only the box(es) are shown with no sample
             points
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -1090,8 +1090,8 @@ class Box(BaseTraceType):
             Sets the source reference on plot.ly for  ids .
         jitter
             Sets the amount of jitter in the sample points drawn.
-            If *0*, the sample points align along the distribution
-            axis. If *1*, the sample points are drawn in a random
+            If 0, the sample points align along the distribution
+            axis. If 1, the sample points are drawn in a random
             jitter of width equal to the width of the box(es).
         legendgroup
             Sets the legend group for this trace. Traces part of
@@ -1118,12 +1118,12 @@ class Box(BaseTraceType):
         opacity
             Sets the opacity of the trace.
         orientation
-            Sets the orientation of the box(es). If *v* (*h*), the
+            Sets the orientation of the box(es). If "v" ("h"), the
             distribution is visualized along the vertical
             (horizontal).
         pointpos
             Sets the position of the sample points in relation to
-            the box(es). If *0*, the sample points are places over
+            the box(es). If 0, the sample points are places over
             the center of the box(es). Positive (negative) values
             correspond to positions to the right (left) for
             vertical boxes and above (below) for horizontal boxes
@@ -1149,7 +1149,7 @@ class Box(BaseTraceType):
             all the data points. If an array of string, the items
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
-            a *text* flag.
+            a "text" flag.
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
@@ -1159,7 +1159,7 @@ class Box(BaseTraceType):
             compatible properties
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         whiskerwidth
@@ -1174,8 +1174,8 @@ class Box(BaseTraceType):
             info.
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
@@ -1189,8 +1189,8 @@ class Box(BaseTraceType):
             info.
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
@@ -1249,13 +1249,13 @@ class Box(BaseTraceType):
         
         In vertical (horizontal) box plots, statistics are computed
         using `y` (`x`) values. By supplying an `x` (`y`) array, one
-        box per distinct x (y) value is drawn If no `x` (`y`) {array}
-        is provided, a single box is drawn. That box position is then
+        box per distinct x (y) value is drawn If no `x` (`y`) list is
+        provided, a single box is drawn. That box position is then
         positioned with with `name` or with `x0` (`y0`) if provided.
         Each box spans from quartile 1 (Q1) to quartile 3 (Q3). The
         second quartile (Q2) is marked by a line inside the box. By
         default, the whiskers correspond to the box' edges +/- 1.5
-        times the interquartile range (IQR = Q3-Q1), see *boxpoints*
+        times the interquartile range (IQR = Q3-Q1), see "boxpoints"
         for other options.
 
         Parameters
@@ -1264,21 +1264,21 @@ class Box(BaseTraceType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.Box
         boxmean
-            If *true*, the mean of the box(es)' underlying
+            If True, the mean of the box(es)' underlying
             distribution is drawn as a dashed line inside the
-            box(es). If *sd* the standard deviation is also drawn.
+            box(es). If "sd" the standard deviation is also drawn.
         boxpoints
-            If *outliers*, only the sample points lying outside the
-            whiskers are shown If *suspectedoutliers*, the outlier
+            If "outliers", only the sample points lying outside the
+            whiskers are shown If "suspectedoutliers", the outlier
             points are shown and points either less than 4*Q1-3*Q3
             or greater than 4*Q3-3*Q1 are highlighted (see
-            `outliercolor`) If *all*, all sample points are shown
-            If *false*, only the box(es) are shown with no sample
+            `outliercolor`) If "all", all sample points are shown
+            If False, only the box(es) are shown with no sample
             points
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -1307,8 +1307,8 @@ class Box(BaseTraceType):
             Sets the source reference on plot.ly for  ids .
         jitter
             Sets the amount of jitter in the sample points drawn.
-            If *0*, the sample points align along the distribution
-            axis. If *1*, the sample points are drawn in a random
+            If 0, the sample points align along the distribution
+            axis. If 1, the sample points are drawn in a random
             jitter of width equal to the width of the box(es).
         legendgroup
             Sets the legend group for this trace. Traces part of
@@ -1335,12 +1335,12 @@ class Box(BaseTraceType):
         opacity
             Sets the opacity of the trace.
         orientation
-            Sets the orientation of the box(es). If *v* (*h*), the
+            Sets the orientation of the box(es). If "v" ("h"), the
             distribution is visualized along the vertical
             (horizontal).
         pointpos
             Sets the position of the sample points in relation to
-            the box(es). If *0*, the sample points are places over
+            the box(es). If 0, the sample points are places over
             the center of the box(es). Positive (negative) values
             correspond to positions to the right (left) for
             vertical boxes and above (below) for horizontal boxes
@@ -1366,7 +1366,7 @@ class Box(BaseTraceType):
             all the data points. If an array of string, the items
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
-            a *text* flag.
+            a "text" flag.
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
@@ -1376,7 +1376,7 @@ class Box(BaseTraceType):
             compatible properties
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         whiskerwidth
@@ -1391,8 +1391,8 @@ class Box(BaseTraceType):
             info.
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
@@ -1406,8 +1406,8 @@ class Box(BaseTraceType):
             info.
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.

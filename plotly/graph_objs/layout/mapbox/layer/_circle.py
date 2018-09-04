@@ -10,7 +10,7 @@ class Circle(BaseLayoutHierarchyType):
     def radius(self):
         """
         Sets the circle radius. Has an effect only when `type` is set
-        to *circle*.
+        to "circle".
     
         The 'radius' property is a number and may be specified as:
           - An int or float
@@ -38,7 +38,7 @@ class Circle(BaseLayoutHierarchyType):
         return """\
         radius
             Sets the circle radius. Has an effect only when `type`
-            is set to *circle*.
+            is set to "circle".
         """
 
     def __init__(self, arg=None, radius=None, **kwargs):
@@ -53,7 +53,7 @@ class Circle(BaseLayoutHierarchyType):
             plotly.graph_objs.layout.mapbox.layer.Circle
         radius
             Sets the circle radius. Has an effect only when `type`
-            is set to *circle*.
+            is set to "circle".
 
         Returns
         -------

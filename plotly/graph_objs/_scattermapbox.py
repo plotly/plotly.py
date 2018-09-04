@@ -32,7 +32,7 @@ class Scattermapbox(BaseTraceType):
         """
         Assigns extra data each datum. This may be useful when
         listening to hover, click and selection events. Note that,
-        *scatter* traces also appends customdata items in the markers
+        "scatter" traces also appends customdata items in the markers
         DOM elements
     
         The 'customdata' property is an array that may be specified as a tuple,
@@ -74,7 +74,7 @@ class Scattermapbox(BaseTraceType):
     def fill(self):
         """
         Sets the area to fill with a solid color. Use with `fillcolor`
-        if not *none*. *toself* connects the endpoints of the trace (or
+        if not "none". "toself" connects the endpoints of the trace (or
         each segment of the trace if it has gaps) into a closed shape.
     
         The 'fill' property is an enumeration that may be specified as:
@@ -257,7 +257,7 @@ class Scattermapbox(BaseTraceType):
         a single string, the same string appears over all the data
         points. If an array of string, the items are mapped in order to
         the this trace's (lon,lat) coordinates. To be seen, trace
-        `hoverinfo` must contain a *text* flag.
+        `hoverinfo` must contain a "text" flag.
     
         The 'hovertext' property is a string and must be specified as:
           - A string
@@ -576,7 +576,7 @@ class Scattermapbox(BaseTraceType):
                     Sets the marker symbol. Full list:
                     https://www.mapbox.com/maki-icons/ Note that
                     the array `marker.color` and `marker.size` are
-                    only available for *circle* symbols.
+                    only available for "circle" symbols.
                 symbolsrc
                     Sets the source reference on plot.ly for
                     symbol .
@@ -597,7 +597,7 @@ class Scattermapbox(BaseTraceType):
     def mode(self):
         """
         Determines the drawing mode for this scatter trace. If the
-        provided `mode` includes *text* then the `text` elements appear
+        provided `mode` includes "text" then the `text` elements appear
         at the coordinates. Otherwise, the `text` elements appear on
         hover.
     
@@ -747,7 +747,7 @@ class Scattermapbox(BaseTraceType):
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
-                    `maxpoints` is set to *50*, only the newest 50
+                    `maxpoints` is set to 50, only the newest 50
                     points will be displayed on the plot.
                 token
                     The stream id number links a data trace on a
@@ -770,8 +770,8 @@ class Scattermapbox(BaseTraceType):
     def subplot(self):
         """
         Sets a reference between this trace's data coordinates and a
-        mapbox subplot. If *mapbox* (the default value), the data refer
-        to `layout.mapbox`. If *mapbox2*, the data refer to
+        mapbox subplot. If "mapbox" (the default value), the data refer
+        to `layout.mapbox`. If "mapbox2", the data refer to
         `layout.mapbox2`, and so on.
     
         The 'subplot' property is an identifier of a particular
@@ -798,7 +798,7 @@ class Scattermapbox(BaseTraceType):
         single string, the same string appears over all the data
         points. If an array of string, the items are mapped in order to
         the this trace's (lon,lat) coordinates. If trace `hoverinfo`
-        contains a *text* flag and *hovertext* is not set, these
+        contains a "text" flag and "hovertext" is not set, these
         elements will be seen in the hover labels.
     
         The 'text' property is a string and must be specified as:
@@ -822,7 +822,7 @@ class Scattermapbox(BaseTraceType):
     def textfont(self):
         """
         Sets the icon text font. Has an effect only when `type` is set
-        to *symbol*.
+        to "symbol".
     
         The 'textfont' property is an instance of Textfont
         that may be specified as:
@@ -845,11 +845,11 @@ class Scattermapbox(BaseTraceType):
                     system. The plotly service (at https://plot.ly
                     or on-premise) generates images on a server,
                     where only a select number of fonts are
-                    installed and supported. These include *Arial*,
-                    *Balto*, *Courier New*, *Droid Sans*,, *Droid
-                    Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
-                    Standard TT*, *Open Sans*, *Overpass*, *PT Sans
-                    Narrow*, *Raleway*, *Times New Roman*.
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
                 size
 
         Returns
@@ -958,7 +958,7 @@ class Scattermapbox(BaseTraceType):
     def visible(self):
         """
         Determines whether or not this trace is visible. If
-        *legendonly*, the trace is not drawn, but can appear as a
+        "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
     
         The 'visible' property is an enumeration that may be specified as:
@@ -998,13 +998,13 @@ class Scattermapbox(BaseTraceType):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
         fill
             Sets the area to fill with a solid color. Use with
-            `fillcolor` if not *none*. *toself* connects the
+            `fillcolor` if not "none". "toself" connects the
             endpoints of the trace (or each segment of the trace if
             it has gaps) into a closed shape.
         fillcolor
@@ -1027,7 +1027,7 @@ class Scattermapbox(BaseTraceType):
             all the data points. If an array of string, the items
             are mapped in order to the this trace's (lon,lat)
             coordinates. To be seen, trace `hoverinfo` must contain
-            a *text* flag.
+            a "text" flag.
         hovertextsrc
             Sets the source reference on plot.ly for  hovertext .
         ids
@@ -1056,7 +1056,7 @@ class Scattermapbox(BaseTraceType):
             with compatible properties
         mode
             Determines the drawing mode for this scatter trace. If
-            the provided `mode` includes *text* then the `text`
+            the provided `mode` includes "text" then the `text`
             elements appear at the coordinates. Otherwise, the
             `text` elements appear on hover.
         name
@@ -1082,20 +1082,20 @@ class Scattermapbox(BaseTraceType):
             with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
-            and a mapbox subplot. If *mapbox* (the default value),
-            the data refer to `layout.mapbox`. If *mapbox2*, the
+            and a mapbox subplot. If "mapbox" (the default value),
+            the data refer to `layout.mapbox`. If "mapbox2", the
             data refer to `layout.mapbox2`, and so on.
         text
             Sets text elements associated with each (lon,lat) pair
             If a single string, the same string appears over all
             the data points. If an array of string, the items are
             mapped in order to the this trace's (lon,lat)
-            coordinates. If trace `hoverinfo` contains a *text*
-            flag and *hovertext* is not set, these elements will be
+            coordinates. If trace `hoverinfo` contains a "text"
+            flag and "hovertext" is not set, these elements will be
             seen in the hover labels.
         textfont
             Sets the icon text font. Has an effect only when `type`
-            is set to *symbol*.
+            is set to "symbol".
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.
@@ -1108,7 +1108,7 @@ class Scattermapbox(BaseTraceType):
             dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         """
@@ -1170,13 +1170,13 @@ class Scattermapbox(BaseTraceType):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
         fill
             Sets the area to fill with a solid color. Use with
-            `fillcolor` if not *none*. *toself* connects the
+            `fillcolor` if not "none". "toself" connects the
             endpoints of the trace (or each segment of the trace if
             it has gaps) into a closed shape.
         fillcolor
@@ -1199,7 +1199,7 @@ class Scattermapbox(BaseTraceType):
             all the data points. If an array of string, the items
             are mapped in order to the this trace's (lon,lat)
             coordinates. To be seen, trace `hoverinfo` must contain
-            a *text* flag.
+            a "text" flag.
         hovertextsrc
             Sets the source reference on plot.ly for  hovertext .
         ids
@@ -1228,7 +1228,7 @@ class Scattermapbox(BaseTraceType):
             with compatible properties
         mode
             Determines the drawing mode for this scatter trace. If
-            the provided `mode` includes *text* then the `text`
+            the provided `mode` includes "text" then the `text`
             elements appear at the coordinates. Otherwise, the
             `text` elements appear on hover.
         name
@@ -1254,20 +1254,20 @@ class Scattermapbox(BaseTraceType):
             with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
-            and a mapbox subplot. If *mapbox* (the default value),
-            the data refer to `layout.mapbox`. If *mapbox2*, the
+            and a mapbox subplot. If "mapbox" (the default value),
+            the data refer to `layout.mapbox`. If "mapbox2", the
             data refer to `layout.mapbox2`, and so on.
         text
             Sets text elements associated with each (lon,lat) pair
             If a single string, the same string appears over all
             the data points. If an array of string, the items are
             mapped in order to the this trace's (lon,lat)
-            coordinates. If trace `hoverinfo` contains a *text*
-            flag and *hovertext* is not set, these elements will be
+            coordinates. If trace `hoverinfo` contains a "text"
+            flag and "hovertext" is not set, these elements will be
             seen in the hover labels.
         textfont
             Sets the icon text font. Has an effect only when `type`
-            is set to *symbol*.
+            is set to "symbol".
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.
@@ -1280,7 +1280,7 @@ class Scattermapbox(BaseTraceType):
             dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
 

@@ -16,6 +16,7 @@ class UpValidator(_plotly_utils.basevalidators.CompoundValidator):
             y
 
             z
+
 """,
             **kwargs
         )

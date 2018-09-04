@@ -31,6 +31,7 @@ class FramesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 A label by which to identify the frame
             traces
                 A list of trace indices that identify the
-                respective traces in the data attribute""",
+                respective traces in the data attribute
+""",
             **kwargs
         )

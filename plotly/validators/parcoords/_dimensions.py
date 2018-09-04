@@ -57,7 +57,7 @@ class DimensionsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
             ticktext
                 Sets the text displayed at the ticks position
                 via `tickvals`. Only has an effect if
-                `tickmode` is set to *array*. Used with
+                `tickmode` is set to "array". Used with
                 `tickvals`.
             ticktextsrc
                 Sets the source reference on plot.ly for
@@ -65,7 +65,7 @@ class DimensionsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
             tickvals
                 Sets the values at which ticks on this axis
                 appear. Only has an effect if `tickmode` is set
-                to *array*. Used with `ticktext`.
+                to "array". Used with `ticktext`.
             tickvalssrc
                 Sets the source reference on plot.ly for
                 tickvals .
@@ -81,6 +81,7 @@ class DimensionsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 values .
             visible
                 Shows the dimension when set to `true` (the
-                default). Hides the dimension for `false`.""",
+                default). Hides the dimension for `false`.
+""",
             **kwargs
         )

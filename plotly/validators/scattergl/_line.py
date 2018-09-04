@@ -14,6 +14,7 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
             dash
                 Sets the style of the lines.
             width
-                Sets the line width (in px).""",
+                Sets the line width (in px).
+""",
             **kwargs
         )
