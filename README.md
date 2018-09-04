@@ -119,7 +119,7 @@ installation of the plotly [orca](TODO) command line utility and the
 
 These dependencies can both be installed using conda:
 ```
-conda install -c plotly plotly-conda psutil
+conda install -c plotly plotly-orca psutil
 ```
 
 Or, `psutil` can be installed using pip...
