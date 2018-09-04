@@ -305,6 +305,51 @@ npm publish --access public --tag next
 The `--tag next` part ensures that users won't install this version unless
 they explicitly ask for the version or for the version wtih the `next` tag.
 
+#### Publish release candidate to plotly anaconda channel
+Conda packages are built automatically on circleci for each push where all
+tests pass on `master` and `release_` branches.
+
+Conda packages for Python X.Y are included as "artifacts" of the circleci
+job named `python-X-Y-conda`.
+
+First download the artifacts for each Python version: 
+ - Click the "Details" button next to check named " ci/circleci: python-X-Y-conda". This will take you to the circleci dashboard for that job.
+ - Click on the "Artifacts" tab, and expend the directory tree to root/project/artifacts/conda_packages_X.Y.zip.
+ - Click to download this zip file.
+
+Then unzip all of the artifact zip files into the same directory. You should
+end up with a directory structure like
+ - /path/to/packages
+   - conda_packages_2_7
+     - win-64
+       - plotly-X.Y.Z-py27_0.tar.bz2
+     - win-32
+       - plotly-X.Y.Z-py27_0.tar.bz2
+     - linux-64
+       - plotly-X.Y.Z-py27_0.tar.bz2
+     - ...
+   - conda_packages_3_5
+     - win-64
+       - plotly-X.Y.Z-py35_0.tar.bz2
+     - ...
+   - conda_packages_3_6
+     - ...
+   - conda_packages_3_7
+     - ...
+
+Next run `anaconda login` and enter the credentials for the plotly anaconda
+channel.
+          
+Then upload artifacts to the anaconda channel using the test label. Using the test
+label will ensure that people will only download the release candidate version
+if they explicitly request it.
+
+```
+$ anaconda upload --label test /path/to/packages/conda_packages_*/*/plotly-*.tar.bz2 
+```
+
+Then logout with `anaconda logout` 
+
 #### Manually test the release candidate
 Create a fresh virtual environment (or conda environment) and install
 the release candidate by following the new `README.md` instructions,
@@ -341,8 +386,8 @@ release candidate suffix from the following version strings:
 Make sure the integration tests are passing on the release branch, then merge
 it into master on GitHub.
 
-Update your local master, tag this merge commit as `vX.Y.Z`
-(e.g. `v3.1.1`), and push the tag.
+Make sure tests also pass on master, then update your local master,
+tag this merge commit as `vX.Y.Z` (e.g. `v3.1.1`), and push the tag.
 
 ```bash
 (plotly.py) $ git checkout master
@@ -379,33 +424,25 @@ npm publish --access public
 ```
 
 #### Publishing to the plotly conda channel
-After publishing to PyPI, update the `set version`  number to match the PyPI
-version.
+Follow the anaconda upload instructions as described for the release candidate
+above, except:
 
-Compute the new SHA256 hash from the `sdist` package in the local
-`dist/` directory.
-
+ - Download the package artifacts from the circleci jobs that ran against
+   master.
+ - Do not include the `--label test` argument when uploading
+ 
 ```
-$ shasum -a 256 dist/plotly-X.Y.Z.tar.gz
-cd301fff6...
-```
-
-Make sure you have the `conda-build` and `anaconda-client` packages installed
-and then perform the conda build. 
-
-```
-$ conda build recipe/
+$ anaconda upload /path/to/packages/conda_packages_*/*/plotly-*.tar.bz2 
 ```
 
-When conda-build returns successfully it will display the path to the new
-package.
+#### Add GitHub Release entry
+Go to https://github.com/plotly/plotly.py/releases and "Draft a new release"
 
-Next run `anaconda login` and enter the credentials for the plotly anaconda
-channel.
+Enter the vX.Y.Z tag
 
-Then run `anaconda upload /path/to/plotly-X.Y.Z.tar.bz2`
+Make "Release title" the same string as the tag.
 
-Run `anaconda logout` 
+Copy changelog section for this version as the "Describe this release"
 
 #### Post announcement
 Post a simple announcement to the Plotly Python forum, with links to the
