@@ -2,7 +2,7 @@ version: 2
 
 jobs:
   # Core
-  "python-2.7-core":
+  python-2.7-core:
     docker:
       - image: circleci/python:2.7-stretch-node-browsers
         environment:
@@ -18,7 +18,7 @@ jobs:
           command: 'tox -e py27-core'
           no_output_timeout: 20m
 
-  "python-3.4-core":
+  python-3.4-core:
     docker:
       - image: circleci/python:3.4-stretch-node-browsers
         environment:
@@ -34,7 +34,7 @@ jobs:
           command: 'tox -e py34-core'
           no_output_timeout: 20m
 
-  "python-3.5-core":
+  python-3.5-core:
     docker:
       - image: circleci/python:3.5-stretch-node-browsers
         environment:
@@ -50,7 +50,7 @@ jobs:
           command: 'tox -e py35-core'
           no_output_timeout: 20m
 
-  "python-3.6-core":
+  python-3.6-core:
     docker:
       - image: circleci/python:3.6-stretch-node-browsers
         environment:
@@ -66,7 +66,7 @@ jobs:
           command: 'tox -e py36-core'
           no_output_timeout: 20m
 
-  "python-3.7-core":
+  python-3.7-core:
     docker:
       - image: circleci/python:3.7-stretch-node-browsers
         environment:
@@ -83,7 +83,7 @@ jobs:
           no_output_timeout: 20m
 
   # Optional
-  "python-2.7-optional":
+  python-2.7-optional:
     docker:
       - image: circleci/python:2.7-stretch-node-browsers
         environment:
@@ -103,7 +103,7 @@ jobs:
           command: 'tox -e py27-optional'
           no_output_timeout: 20m
 
-  "python-3.4-optional":
+  python-3.4-optional:
     docker:
       - image: circleci/python:3.4-stretch-node-browsers
         environment:
@@ -123,7 +123,7 @@ jobs:
           command: 'tox -e py34-optional'
           no_output_timeout: 20m
 
-  "python-3.5-optional":
+  python-3.5-optional:
     docker:
       - image: circleci/python:3.5-stretch-node-browsers
         environment:
@@ -143,7 +143,7 @@ jobs:
           command: 'tox -e py35-optional'
           no_output_timeout: 20m
 
-  "python-3.6-optional":
+  python-3.6-optional:
     docker:
       - image: circleci/python:3.6-stretch-node-browsers
         environment:
@@ -163,7 +163,7 @@ jobs:
           command: 'tox -e py36-optional'
           no_output_timeout: 20m
 
-  "python-3.7-optional":
+  python-3.7-optional:
     docker:
       - image: circleci/python:3.7-stretch-node-browsers
         environment:
@@ -184,7 +184,7 @@ jobs:
           no_output_timeout: 20m
 
   # Plot.ly
-  "python-2.7-plot_ly":
+  python-2.7-plot_ly:
     docker:
       - image: circleci/python:2.7-stretch-node-browsers
         environment:
@@ -200,7 +200,7 @@ jobs:
           command: 'tox -e py27-plot_ly'
           no_output_timeout: 20m
 
-  "python-3.4-plot_ly":
+  python-3.4-plot_ly:
     docker:
       - image: circleci/python:3.4-stretch-node-browsers
         environment:
@@ -216,7 +216,7 @@ jobs:
           command: 'tox -e py34-plot_ly'
           no_output_timeout: 20m
 
-  "python-3.7-plot_ly":
+  python-3.7-plot_ly:
     docker:
       - image: circleci/python:3.7-stretch-node-browsers
         environment:
@@ -232,7 +232,7 @@ jobs:
           command: 'tox -e py37-plot_ly'
           no_output_timeout: 20m
 
-  "python-2-7-orca":
+  python-2-7-orca:
     docker:
       - image: circleci/node:10.9-stretch-browsers
         environment:
@@ -262,7 +262,7 @@ jobs:
       - store_artifacts:
             path: plotly/tests/test_orca/images/linux/failed
 
-  "python-3-5-orca":
+  python-3-5-orca:
     docker:
       - image: circleci/node:10.9-stretch-browsers
         environment:
@@ -292,7 +292,7 @@ jobs:
       - store_artifacts:
             path: plotly/tests/test_orca/images/linux/failed
 
-  "python-3-7-orca":
+  python-3-7-orca:
     docker:
       - image: circleci/node:10.9-stretch-browsers
         environment:
@@ -322,24 +322,139 @@ jobs:
       - store_artifacts:
             path: plotly/tests/test_orca/images/linux/failed
 
+
+  python-2-7-conda:
+    docker:
+      - image: continuumio/miniconda3:4.5.4
+        environment:
+          PYTHON_VERSION: 2.7
+
+    steps:
+      - checkout
+      - run:
+          name: Create packages
+          command: .circleci/create_conda_packages.sh
+      - store_artifacts:
+          path: artifacts
+
+  python-3-5-conda:
+    docker:
+      - image: continuumio/miniconda3:4.5.4
+        environment:
+          PYTHON_VERSION: 3.5
+
+    steps:
+      - checkout
+      - run:
+          name: Create packages
+          command: .circleci/create_conda_packages.sh
+      - store_artifacts:
+          path: artifacts
+
+  python-3-6-conda:
+    docker:
+      - image: continuumio/miniconda3:4.5.4
+        environment:
+          PYTHON_VERSION: 3.6
+
+    steps:
+      - checkout
+      - run:
+          name: Create packages
+          command: .circleci/create_conda_packages.sh
+      - store_artifacts:
+          path: artifacts
+
+  python-3-7-conda:
+    docker:
+      - image: continuumio/miniconda3:4.5.4
+        environment:
+          PYTHON_VERSION: 3.7
+
+    steps:
+      - checkout
+      - run:
+          name: Create packages
+          command: .circleci/create_conda_packages.sh
+      - store_artifacts:
+          path: artifacts
+
+
 workflows:
   version: 2
   build:
     jobs:
-      - "python-2.7-core"
-      - "python-3.4-core"
-      - "python-3.5-core"
-      - "python-3.6-core"
-      - "python-3.7-core"
-      - "python-2.7-optional"
-      - "python-3.4-optional"
-      - "python-3.5-optional"
-      - "python-3.6-optional"
+
+      - python-2.7-core
+      - python-3.4-core
+      - python-3.5-core
+      - python-3.6-core
+      - python-3.7-core
+      - python-2.7-optional
+      - python-3.4-optional
+      - python-3.5-optional
+      - python-3.6-optional
       # 3.7 optional disabled due to current shapely incompatibility
-      # - "python-3.7-optional"
-      - "python-2.7-plot_ly"
-      - "python-3.4-plot_ly"
-      - "python-3.7-plot_ly"
-      - "python-2-7-orca"
-      - "python-3-5-orca"
-      - "python-3-7-orca"
+      # - python-3.7-optional
+      - python-2.7-plot_ly
+      - python-3.4-plot_ly
+      - python-3.7-plot_ly
+      - python-2-7-orca
+      - python-3-5-orca
+      - python-3-7-orca
+
+      - python-2-7-conda:
+          requires:
+            - python-2.7-core
+            - python-2.7-optional
+            - python-2.7-plot_ly
+            - python-2-7-orca
+
+          filters:
+            branches:
+              only:
+                - master
+                - /release_.*/
+                - /conda_build_.*/
+
+      - python-3-5-conda:
+          requires:
+            - python-3.5-core
+            - python-3.5-optional
+#            - python-3.5-plot_ly
+            - python-3-5-orca
+
+          filters:
+            branches:
+              only:
+                - master
+                - /release_.*/
+                - /conda_build_.*/
+
+      - python-3-6-conda:
+          requires:
+            - python-3.6-core
+            - python-3.6-optional
+#            - python-3.6-plot_ly
+#            - python-3-6-orca
+
+          filters:
+            branches:
+              only:
+                - master
+                - /release_.*/
+                - /conda_build_.*/
+
+      - python-3-7-conda:
+          requires:
+            - python-3.7-core
+#            - python-3.7-optional
+            - python-3.7-plot_ly
+            - python-3-7-orca
+
+          filters:
+            branches:
+              only:
+                - master
+                - /release_.*/
+                - /conda_build_.*/
