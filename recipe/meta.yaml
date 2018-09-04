@@ -1,22 +1,22 @@
-{% set version = "3.2.0a2" %}
+{% set data = load_setup_py_data() %}
+{% set version = data.get('version') %}
 
 package:
   name: plotly
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/p/plotly/plotly-{{ version }}.tar.gz
-  sha256: cd301fff68f8d375503754780e3df22f31a3c8cea26fe08046e6222ae15ae9db
+  path: ../
 
 build:
   number: 0
-  noarch: python
   script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
 
 requirements:
   build:
     - python
     - pip
+    - nodejs
   run:
     - python
     - setuptools

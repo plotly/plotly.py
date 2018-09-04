@@ -22,9 +22,6 @@ plotly/presentation_objs/
 
 js/node_modules/
 
-# Compiled javascript
-plotlywidget/static/
-
 .pytest_cache
 
 # virtual envs
