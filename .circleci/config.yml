@@ -436,7 +436,7 @@ workflows:
             - python-3.6-core
             - python-3.6-optional
 #            - python-3.6-plot_ly
-            - python-3-6-orca
+#            - python-3-6-orca
 
           filters:
             branches:
