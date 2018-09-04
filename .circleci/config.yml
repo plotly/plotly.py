@@ -415,7 +415,7 @@ workflows:
               only:
                 - master
                 - /release_.*/
-                - /conda_build_.*/
+                - conda_build_updates
 
       - "python-3-5-conda":
           requires:
@@ -448,7 +448,6 @@ workflows:
       - "python-3-7-conda":
           requires:
             - python-3.7-core
-#            - python-3.7-optional
             - python-3.7-plot_ly
             - python-3-7-orca
 
@@ -457,4 +456,4 @@ workflows:
               only:
                 - master
                 - /release_.*/
-                - conda_build_updates
+                - /conda_build_.*/
