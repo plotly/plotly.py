@@ -417,20 +417,20 @@ workflows:
                 - /release_.*/
                 - /conda_build_.*/
 
-#      - python-3-5-conda:
-#          requires:
-#            - python-3.5-core
-#            - python-3.5-optional
-#            - python-3.5-plot_ly
-#            - python-3-5-orca
-#
-#          filters:
-#            branches:
-#              only:
-#                - master
-#                - /release_.*/
-#                - /conda_build_.*/
-#
+      - python-3-5-conda:
+          requires:
+            - python-3.5-core
+            - python-3.5-optional
+            - python-3.5-plot_ly
+            - python-3-5-orca
+
+          filters:
+            branches:
+              only:
+                - master
+                - /release_.*/
+                - /conda_build_.*/
+
 #      - python-3-6-conda:
 #          requires:
 #            - python-3.6-core
