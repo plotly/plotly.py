@@ -54,12 +54,12 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 
 plotly.py may be installed using pip...
 ```
-pip install plotly==3.2.0
+pip install plotly==3.2.0rc1
 ```
 
 or conda.
 ```
-conda install -c plotly plotly=3.2.0
+conda install -c plotly/label/test plotly=3.2.0rc1
 ```
 
 ### Jupyter Notebook Support
@@ -81,13 +81,13 @@ For use in JupyterLab, install the `jupyterlab` and `ipywidgets`
 packages using pip... 
 
 ```
-pip install jupyterlab==0.33 "ipywidgets>=7.2"
+pip install jupyterlab==0.34 "ipywidgets>=7.2"
 ```
 
 of conda.
 
 ```
-conda install jupyterlab==0.33 "ipywidgets>=7.2"
+conda install jupyterlab==0.34 "ipywidgets>=7.2"
 ```
 
 Then run the following commands to install the required JupyterLab extensions:
@@ -99,13 +99,13 @@ export NODE_OPTIONS=--max-old-space-size=4096
 set NODE_OPTIONS=--max-old-space-size=4096
 
 # Jupyter widgets extension
-jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.36 --no-build
+jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.37 --no-build
 
 # FigureWidget support
-jupyter labextension install plotlywidget@0.2.1  --no-build
+jupyter labextension install plotlywidget@0.3.0-rc.1  --no-build
 
 # offline iplot support
-jupyter labextension install @jupyterlab/plotly-extension@0.16  --no-build
+jupyter labextension install @jupyterlab/plotly-extension@0.17  --no-build
 
 # Build extensions (must be done to activate extensions since --no-build is used above)
 jupyter lab build
