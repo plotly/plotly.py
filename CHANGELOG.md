@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [3.2.0] - 2018-09-??
+## [3.2.0] - 2018-09-05
 This release introduces the long-anticipated ability to programmatically
 export figures as high quality static images in both raster and vector
 formats.
