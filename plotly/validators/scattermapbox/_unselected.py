@@ -13,6 +13,7 @@ class UnselectedValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs="""
             marker
                 plotly.graph_objs.scattermapbox.unselected.Mark
-                er instance or dict with compatible properties""",
+                er instance or dict with compatible properties
+""",
             **kwargs
         )

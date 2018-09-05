@@ -39,6 +39,7 @@ class AngularAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 angular axis.
             visible
                 Determines whether or not this axis will be
-                visible.""",
+                visible.
+""",
             **kwargs
         )

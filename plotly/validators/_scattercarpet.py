@@ -38,7 +38,7 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
-                selection events. Note that, *scatter* traces
+                selection events. Note that, "scatter" traces
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
@@ -46,15 +46,15 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 customdata .
             fill
                 Sets the area to fill with a solid color. Use
-                with `fillcolor` if not *none*. scatterternary
+                with `fillcolor` if not "none". scatterternary
                 has a subset of the options available to
-                scatter. *toself* connects the endpoints of the
+                scatter. "toself" connects the endpoints of the
                 trace (or each segment of the trace if it has
-                gaps) into a closed shape. *tonext* fills the
+                gaps) into a closed shape. "tonext" fills the
                 space between two traces if one completely
                 encloses the other (eg consecutive contour
-                lines), and behaves like *toself* if there is
-                no trace before it. *tonext* should not be used
+                lines), and behaves like "toself" if there is
+                no trace before it. "tonext" should not be used
                 if one trace does not enclose the other.
             fillcolor
                 Sets the fill color. Defaults to a half-
@@ -77,9 +77,9 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Do the hover effects highlight individual
                 points (markers or line points) or do they
                 highlight filled regions? If the fill is
-                *toself* or *tonext* and there are no markers
-                or text, then the default is *fills*, otherwise
-                it is *points*.
+                "toself" or "tonext" and there are no markers
+                or text, then the default is "fills", otherwise
+                it is "points".
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -99,12 +99,12 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 or dict with compatible properties
             mode
                 Determines the drawing mode for this scatter
-                trace. If the provided `mode` includes *text*
+                trace. If the provided `mode` includes "text"
                 then the `text` elements appear at the
                 coordinates. Otherwise, the `text` elements
                 appear on hover. If there are less than 20
-                points, then the default is *lines+markers*.
-                Otherwise, *lines*.
+                points, then the default is "lines+markers".
+                Otherwise, "lines".
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -152,20 +152,21 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 instance or dict with compatible properties
             visible
                 Determines whether or not this trace is
-                visible. If *legendonly*, the trace is not
+                visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
             xaxis
                 Sets a reference between this trace's x
-                coordinates and a 2D cartesian x axis. If *x*
+                coordinates and a 2D cartesian x axis. If "x"
                 (the default value), the x coordinates refer to
-                `layout.xaxis`. If *x2*, the x coordinates
+                `layout.xaxis`. If "x2", the x coordinates
                 refer to `layout.xaxis2`, and so on.
             yaxis
                 Sets a reference between this trace's y
-                coordinates and a 2D cartesian y axis. If *y*
+                coordinates and a 2D cartesian y axis. If "y"
                 (the default value), the y coordinates refer to
-                `layout.yaxis`. If *y2*, the y coordinates
-                refer to `layout.yaxis2`, and so on.""",
+                `layout.yaxis`. If "y2", the y coordinates
+                refer to `layout.yaxis2`, and so on.
+""",
             **kwargs
         )

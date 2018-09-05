@@ -11,7 +11,7 @@ class Rangeslider(BaseLayoutHierarchyType):
         """
         Determines whether or not the range slider range is computed in
         relation to the input data. If `range` is provided, then
-        `autorange` is set to *false*.
+        `autorange` is set to False.
     
         The 'autorange' property must be specified as a bool
         (either True, or False)
@@ -171,11 +171,11 @@ class Rangeslider(BaseLayoutHierarchyType):
     def range(self):
         """
         Sets the range of the range slider. If not set, defaults to the
-        full xaxis range. If the axis `type` is *log*, then you must
+        full xaxis range. If the axis `type` is "log", then you must
         take the log of your desired range. If the axis `type` is
-        *date*, it should be date strings, like date data, though Date
+        "date", it should be date strings, like date data, though Date
         objects and unix milliseconds will be accepted and converted to
-        strings. If the axis `type` is *category*, it should be
+        strings. If the axis `type` is "category", it should be
         numbers, using the scale where each category is assigned a
         serial number from zero in the order it appears.
     
@@ -257,8 +257,8 @@ class Rangeslider(BaseLayoutHierarchyType):
                     Determines whether or not the range of this
                     axis in the rangeslider use the same value than
                     in the main plot when zooming in/out. If
-                    *auto*, the autorange will be used. If *fixed*,
-                    the `range` is used. If *match*, the current
+                    "auto", the autorange will be used. If "fixed",
+                    the `range` is used. If "match", the current
                     range of the corresponding y-axis on the main
                     subplot is used.
 
@@ -286,7 +286,7 @@ class Rangeslider(BaseLayoutHierarchyType):
         autorange
             Determines whether or not the range slider range is
             computed in relation to the input data. If `range` is
-            provided, then `autorange` is set to *false*.
+            provided, then `autorange` is set to False.
         bgcolor
             Sets the background color of the range slider.
         bordercolor
@@ -296,11 +296,11 @@ class Rangeslider(BaseLayoutHierarchyType):
         range
             Sets the range of the range slider. If not set,
             defaults to the full xaxis range. If the axis `type` is
-            *log*, then you must take the log of your desired
-            range. If the axis `type` is *date*, it should be date
+            "log", then you must take the log of your desired
+            range. If the axis `type` is "date", it should be date
             strings, like date data, though Date objects and unix
             milliseconds will be accepted and converted to strings.
-            If the axis `type` is *category*, it should be numbers,
+            If the axis `type` is "category", it should be numbers,
             using the scale where each category is assigned a
             serial number from zero in the order it appears.
         thickness
@@ -340,7 +340,7 @@ class Rangeslider(BaseLayoutHierarchyType):
         autorange
             Determines whether or not the range slider range is
             computed in relation to the input data. If `range` is
-            provided, then `autorange` is set to *false*.
+            provided, then `autorange` is set to False.
         bgcolor
             Sets the background color of the range slider.
         bordercolor
@@ -350,11 +350,11 @@ class Rangeslider(BaseLayoutHierarchyType):
         range
             Sets the range of the range slider. If not set,
             defaults to the full xaxis range. If the axis `type` is
-            *log*, then you must take the log of your desired
-            range. If the axis `type` is *date*, it should be date
+            "log", then you must take the log of your desired
+            range. If the axis `type` is "date", it should be date
             strings, like date data, though Date objects and unix
             milliseconds will be accepted and converted to strings.
-            If the axis `type` is *category*, it should be numbers,
+            If the axis `type` is "category", it should be numbers,
             using the scale where each category is assigned a
             serial number from zero in the order it appears.
         thickness

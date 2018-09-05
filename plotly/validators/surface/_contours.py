@@ -19,6 +19,7 @@ class ContoursValidator(_plotly_utils.basevalidators.CompoundValidator):
                 or dict with compatible properties
             z
                 plotly.graph_objs.surface.contours.Z instance
-                or dict with compatible properties""",
+                or dict with compatible properties
+""",
             **kwargs
         )

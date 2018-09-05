@@ -71,8 +71,8 @@ class Grid(BaseLayoutHierarchyType):
         """
         If no `subplots`, `xaxes`, or `yaxes` are given but we do have
         `rows` and `columns`, we can generate defaults using
-        consecutive axis IDs, in two ways: *coupled* gives one x axis
-        per column and one y axis per row. *independent* uses a new xy
+        consecutive axis IDs, in two ways: "coupled" gives one x axis
+        per column and one y axis per row. "independent" uses a new xy
         pair for each cell, left-to-right across each row then
         iterating rows according to `roworder`.
     
@@ -143,7 +143,7 @@ class Grid(BaseLayoutHierarchyType):
         """
         Used for freeform grids, where some axes may be shared across
         subplots but others are not. Each entry should be a cartesian
-        subplot id, like *xy* or *x3y2*, or ** to leave that cell
+        subplot id, like "xy" or "x3y2", or ** to leave that cell
         empty. You may reuse x axes within the same column, and y axes
         within the same row. Non-cartesian subplots and traces that
         support `domain` can place themselves in this grid separately
@@ -174,8 +174,8 @@ class Grid(BaseLayoutHierarchyType):
     def xaxes(self):
         """
         Used with `yaxes` when the x and y axes are shared across
-        columns and rows. Each entry should be an x axis id like *x*,
-        *x2*, etc., or ** to not put an x axis in that column. Entries
+        columns and rows. Each entry should be an x axis id like "x",
+        "x2", etc., or ** to not put an x axis in that column. Entries
         other than ** must be unique. Ignored if `subplots` is present.
         If missing but `yaxes` is present, will generate consecutive
         IDs.
@@ -226,9 +226,9 @@ class Grid(BaseLayoutHierarchyType):
     @property
     def xside(self):
         """
-        Sets where the x axis labels and titles go. *bottom* means the
+        Sets where the x axis labels and titles go. "bottom" means the
         very bottom of the grid. *bottom plot* is the lowest plot that
-        each x axis is used in. *top* and *top plot* are similar.
+        each x axis is used in. "top" and *top plot* are similar.
     
         The 'xside' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -250,8 +250,8 @@ class Grid(BaseLayoutHierarchyType):
     def yaxes(self):
         """
         Used with `yaxes` when the x and y axes are shared across
-        columns and rows. Each entry should be an y axis id like *y*,
-        *y2*, etc., or ** to not put a y axis in that row. Entries
+        columns and rows. Each entry should be an y axis id like "y",
+        "y2", etc., or ** to not put a y axis in that row. Entries
         other than ** must be unique. Ignored if `subplots` is present.
         If missing but `xaxes` is present, will generate consecutive
         IDs.
@@ -302,9 +302,9 @@ class Grid(BaseLayoutHierarchyType):
     @property
     def yside(self):
         """
-        Sets where the y axis labels and titles go. *left* means the
+        Sets where the y axis labels and titles go. "left" means the
         very left edge of the grid. *left plot* is the leftmost plot
-        that each y axis is used in. *right* and *right plot* are
+        that each y axis is used in. "right" and *right plot* are
         similar.
     
         The 'yside' property is an enumeration that may be specified as:
@@ -345,9 +345,9 @@ class Grid(BaseLayoutHierarchyType):
         pattern
             If no `subplots`, `xaxes`, or `yaxes` are given but we
             do have `rows` and `columns`, we can generate defaults
-            using consecutive axis IDs, in two ways: *coupled*
+            using consecutive axis IDs, in two ways: "coupled"
             gives one x axis per column and one y axis per row.
-            *independent* uses a new xy pair for each cell, left-
+            "independent" uses a new xy pair for each cell, left-
             to-right across each row then iterating rows according
             to `roworder`.
         roworder
@@ -362,7 +362,7 @@ class Grid(BaseLayoutHierarchyType):
         subplots
             Used for freeform grids, where some axes may be shared
             across subplots but others are not. Each entry should
-            be a cartesian subplot id, like *xy* or *x3y2*, or **
+            be a cartesian subplot id, like "xy" or "x3y2", or **
             to leave that cell empty. You may reuse x axes within
             the same column, and y axes within the same row. Non-
             cartesian subplots and traces that support `domain` can
@@ -371,7 +371,7 @@ class Grid(BaseLayoutHierarchyType):
         xaxes
             Used with `yaxes` when the x and y axes are shared
             across columns and rows. Each entry should be an x axis
-            id like *x*, *x2*, etc., or ** to not put an x axis in
+            id like "x", "x2", etc., or ** to not put an x axis in
             that column. Entries other than ** must be unique.
             Ignored if `subplots` is present. If missing but
             `yaxes` is present, will generate consecutive IDs.
@@ -381,14 +381,14 @@ class Grid(BaseLayoutHierarchyType):
             Defaults to 0.1 for coupled-axes grids and 0.2 for
             independent grids.
         xside
-            Sets where the x axis labels and titles go. *bottom*
+            Sets where the x axis labels and titles go. "bottom"
             means the very bottom of the grid. *bottom plot* is the
-            lowest plot that each x axis is used in. *top* and *top
+            lowest plot that each x axis is used in. "top" and *top
             plot* are similar.
         yaxes
             Used with `yaxes` when the x and y axes are shared
             across columns and rows. Each entry should be an y axis
-            id like *y*, *y2*, etc., or ** to not put a y axis in
+            id like "y", "y2", etc., or ** to not put a y axis in
             that row. Entries other than ** must be unique. Ignored
             if `subplots` is present. If missing but `xaxes` is
             present, will generate consecutive IDs.
@@ -398,9 +398,9 @@ class Grid(BaseLayoutHierarchyType):
             Defaults to 0.1 for coupled-axes grids and 0.3 for
             independent grids.
         yside
-            Sets where the y axis labels and titles go. *left*
+            Sets where the y axis labels and titles go. "left"
             means the very left edge of the grid. *left plot* is
-            the leftmost plot that each y axis is used in. *right*
+            the leftmost plot that each y axis is used in. "right"
             and *right plot* are similar.
         """
 
@@ -442,9 +442,9 @@ class Grid(BaseLayoutHierarchyType):
         pattern
             If no `subplots`, `xaxes`, or `yaxes` are given but we
             do have `rows` and `columns`, we can generate defaults
-            using consecutive axis IDs, in two ways: *coupled*
+            using consecutive axis IDs, in two ways: "coupled"
             gives one x axis per column and one y axis per row.
-            *independent* uses a new xy pair for each cell, left-
+            "independent" uses a new xy pair for each cell, left-
             to-right across each row then iterating rows according
             to `roworder`.
         roworder
@@ -459,7 +459,7 @@ class Grid(BaseLayoutHierarchyType):
         subplots
             Used for freeform grids, where some axes may be shared
             across subplots but others are not. Each entry should
-            be a cartesian subplot id, like *xy* or *x3y2*, or **
+            be a cartesian subplot id, like "xy" or "x3y2", or **
             to leave that cell empty. You may reuse x axes within
             the same column, and y axes within the same row. Non-
             cartesian subplots and traces that support `domain` can
@@ -468,7 +468,7 @@ class Grid(BaseLayoutHierarchyType):
         xaxes
             Used with `yaxes` when the x and y axes are shared
             across columns and rows. Each entry should be an x axis
-            id like *x*, *x2*, etc., or ** to not put an x axis in
+            id like "x", "x2", etc., or ** to not put an x axis in
             that column. Entries other than ** must be unique.
             Ignored if `subplots` is present. If missing but
             `yaxes` is present, will generate consecutive IDs.
@@ -478,14 +478,14 @@ class Grid(BaseLayoutHierarchyType):
             Defaults to 0.1 for coupled-axes grids and 0.2 for
             independent grids.
         xside
-            Sets where the x axis labels and titles go. *bottom*
+            Sets where the x axis labels and titles go. "bottom"
             means the very bottom of the grid. *bottom plot* is the
-            lowest plot that each x axis is used in. *top* and *top
+            lowest plot that each x axis is used in. "top" and *top
             plot* are similar.
         yaxes
             Used with `yaxes` when the x and y axes are shared
             across columns and rows. Each entry should be an y axis
-            id like *y*, *y2*, etc., or ** to not put a y axis in
+            id like "y", "y2", etc., or ** to not put a y axis in
             that row. Entries other than ** must be unique. Ignored
             if `subplots` is present. If missing but `xaxes` is
             present, will generate consecutive IDs.
@@ -495,9 +495,9 @@ class Grid(BaseLayoutHierarchyType):
             Defaults to 0.1 for coupled-axes grids and 0.3 for
             independent grids.
         yside
-            Sets where the y axis labels and titles go. *left*
+            Sets where the y axis labels and titles go. "left"
             means the very left edge of the grid. *left plot* is
-            the leftmost plot that each y axis is used in. *right*
+            the leftmost plot that each y axis is used in. "right"
             and *right plot* are similar.
 
         Returns

@@ -15,6 +15,7 @@ class AxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the axis type for this dimension's
                 generated x and y axes. Note that the axis
                 `type` values set in layout take precedence
-                over this attribute.""",
+                over this attribute.
+""",
             **kwargs
         )

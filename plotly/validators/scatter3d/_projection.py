@@ -19,6 +19,7 @@ class ProjectionValidator(_plotly_utils.basevalidators.CompoundValidator):
                 instance or dict with compatible properties
             z
                 plotly.graph_objs.scatter3d.projection.Z
-                instance or dict with compatible properties""",
+                instance or dict with compatible properties
+""",
             **kwargs
         )

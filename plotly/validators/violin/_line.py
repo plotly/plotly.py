@@ -13,6 +13,7 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the color of line bounding the violin(s).
             width
                 Sets the width (in px) of line bounding the
-                violin(s).""",
+                violin(s).
+""",
             **kwargs
         )

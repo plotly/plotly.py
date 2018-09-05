@@ -13,11 +13,11 @@ class ContoursValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs="""
             coloring
                 Determines the coloring method showing the
-                contour values. If *fill*, coloring is done
-                evenly between each contour level If *heatmap*,
+                contour values. If "fill", coloring is done
+                evenly between each contour level If "heatmap",
                 a heatmap gradient coloring is applied between
-                each contour level. If *lines*, coloring is
-                done on the contour lines. If *none*, no
+                each contour level. If "lines", coloring is
+                done on the contour lines. If "none", no
                 coloring is applied on this trace.
             end
                 Sets the end contour level value. Must be more
@@ -33,12 +33,12 @@ class ContoursValidator(_plotly_utils.basevalidators.CompoundValidator):
                 to Python, see: https://github.com/d3/d3-format
                 /blob/master/README.md#locale_format.
             operation
-                Sets the constraint operation. *=* keeps
-                regions equal to `value` *<* and *<=* keep
-                regions less than `value` *>* and *>=* keep
-                regions greater than `value` *[]*, *()*, *[)*,
-                and *(]* keep regions inside `value[0]` to
-                `value[1]` *][*, *)(*, *](*, *)[* keep regions
+                Sets the constraint operation. "=" keeps
+                regions equal to `value` "<" and "<=" keep
+                regions less than `value` ">" and ">=" keep
+                regions greater than `value` "[]", "()", "[)",
+                and "(]" keep regions inside `value[0]` to
+                `value[1]` "][", ")(", "](", ")[" keep regions
                 outside `value[0]` to value[1]` Open vs. closed
                 intervals make no difference to constraint
                 display, but all versions are allowed for
@@ -49,7 +49,7 @@ class ContoursValidator(_plotly_utils.basevalidators.CompoundValidator):
             showlines
                 Determines whether or not the contour lines are
                 drawn. Has an effect only if
-                `contours.coloring` is set to *fill*.
+                `contours.coloring` is set to "fill".
             size
                 Sets the step between each contour level. Must
                 be positive.
@@ -66,12 +66,13 @@ class ContoursValidator(_plotly_utils.basevalidators.CompoundValidator):
             value
                 Sets the value or values of the constraint
                 boundary. When `operation` is set to one of the
-                comparison values (=,<,>=,>,<=) *value* is
+                comparison values (=,<,>=,>,<=) "value" is
                 expected to be a number. When `operation` is
                 set to one of the interval values
-                ([],(),[),(],][,)(,](,)[) *value* is expected
+                ([],(),[),(],][,)(,](,)[) "value" is expected
                 to be an array of two numbers where the first
                 is the lower bound and the second is the upper
-                bound.""",
+                bound.
+""",
             **kwargs
         )

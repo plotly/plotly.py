@@ -40,6 +40,7 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
             sizemin
                 Sets the minimum size (in px) of the rendered
                 marker points, effective when the `pointcloud`
-                shows a million or more points.""",
+                shows a million or more points.
+""",
             **kwargs
         )

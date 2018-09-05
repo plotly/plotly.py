@@ -14,11 +14,12 @@ class StreamValidator(_plotly_utils.basevalidators.CompoundValidator):
             maxpoints
                 Sets the maximum number of points to keep on
                 the plots from an incoming stream. If
-                `maxpoints` is set to *50*, only the newest 50
+                `maxpoints` is set to 50, only the newest 50
                 points will be displayed on the plot.
             token
                 The stream id number links a data trace on a
                 plot with a stream. See
-                https://plot.ly/settings for more details.""",
+                https://plot.ly/settings for more details.
+""",
             **kwargs
         )

@@ -29,10 +29,11 @@ class YValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not contour lines about
                 the y dimension are drawn.
             usecolormap
-                An alternate to *color*. Determines whether or
+                An alternate to "color". Determines whether or
                 not the contour lines are colored using the
-                trace *colorscale*.
+                trace "colorscale".
             width
-                Sets the width of the contour lines.""",
+                Sets the width of the contour lines.
+""",
             **kwargs
         )

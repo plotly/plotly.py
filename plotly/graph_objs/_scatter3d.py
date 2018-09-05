@@ -32,7 +32,7 @@ class Scatter3d(BaseTraceType):
         """
         Assigns extra data each datum. This may be useful when
         listening to hover, click and selection events. Note that,
-        *scatter* traces also appends customdata items in the markers
+        "scatter" traces also appends customdata items in the markers
         DOM elements
     
         The 'customdata' property is an array that may be specified as a tuple,
@@ -115,21 +115,21 @@ class Scatter3d(BaseTraceType):
                     Determines the rule used to generate the error
                     bars. If *constant`, the bar lengths are of a
                     constant value. Set this constant in `value`.
-                    If *percent*, the bar lengths correspond to a
+                    If "percent", the bar lengths correspond to a
                     percentage of underlying data. Set this
-                    percentage in `value`. If *sqrt*, the bar
+                    percentage in `value`. If "sqrt", the bar
                     lengths correspond to the sqaure of the
-                    underlying data. If *array*, the bar lengths
+                    underlying data. If "array", the bar lengths
                     are set with data set `array`.
                 value
                     Sets the value of either the percentage (if
-                    `type` is set to *percent*) or the constant (if
-                    `type` is set to *constant*) corresponding to
+                    `type` is set to "percent") or the constant (if
+                    `type` is set to "constant") corresponding to
                     the lengths of the error bars.
                 valueminus
                     Sets the value of either the percentage (if
-                    `type` is set to *percent*) or the constant (if
-                    `type` is set to *constant*) corresponding to
+                    `type` is set to "percent") or the constant (if
+                    `type` is set to "constant") corresponding to
                     the lengths of the error bars in the bottom
                     (left) direction for vertical (horizontal) bars
                 visible
@@ -196,21 +196,21 @@ class Scatter3d(BaseTraceType):
                     Determines the rule used to generate the error
                     bars. If *constant`, the bar lengths are of a
                     constant value. Set this constant in `value`.
-                    If *percent*, the bar lengths correspond to a
+                    If "percent", the bar lengths correspond to a
                     percentage of underlying data. Set this
-                    percentage in `value`. If *sqrt*, the bar
+                    percentage in `value`. If "sqrt", the bar
                     lengths correspond to the sqaure of the
-                    underlying data. If *array*, the bar lengths
+                    underlying data. If "array", the bar lengths
                     are set with data set `array`.
                 value
                     Sets the value of either the percentage (if
-                    `type` is set to *percent*) or the constant (if
-                    `type` is set to *constant*) corresponding to
+                    `type` is set to "percent") or the constant (if
+                    `type` is set to "constant") corresponding to
                     the lengths of the error bars.
                 valueminus
                     Sets the value of either the percentage (if
-                    `type` is set to *percent*) or the constant (if
-                    `type` is set to *constant*) corresponding to
+                    `type` is set to "percent") or the constant (if
+                    `type` is set to "constant") corresponding to
                     the lengths of the error bars in the bottom
                     (left) direction for vertical (horizontal) bars
                 visible
@@ -275,21 +275,21 @@ class Scatter3d(BaseTraceType):
                     Determines the rule used to generate the error
                     bars. If *constant`, the bar lengths are of a
                     constant value. Set this constant in `value`.
-                    If *percent*, the bar lengths correspond to a
+                    If "percent", the bar lengths correspond to a
                     percentage of underlying data. Set this
-                    percentage in `value`. If *sqrt*, the bar
+                    percentage in `value`. If "sqrt", the bar
                     lengths correspond to the sqaure of the
-                    underlying data. If *array*, the bar lengths
+                    underlying data. If "array", the bar lengths
                     are set with data set `array`.
                 value
                     Sets the value of either the percentage (if
-                    `type` is set to *percent*) or the constant (if
-                    `type` is set to *constant*) corresponding to
+                    `type` is set to "percent") or the constant (if
+                    `type` is set to "constant") corresponding to
                     the lengths of the error bars.
                 valueminus
                     Sets the value of either the percentage (if
-                    `type` is set to *percent*) or the constant (if
-                    `type` is set to *constant*) corresponding to
+                    `type` is set to "percent") or the constant (if
+                    `type` is set to "constant") corresponding to
                     the lengths of the error bars in the bottom
                     (left) direction for vertical (horizontal) bars
                 visible
@@ -414,7 +414,7 @@ class Scatter3d(BaseTraceType):
         single string, the same string appears over all the data
         points. If an array of string, the items are mapped in order to
         the this trace's (x,y,z) coordinates. To be seen, trace
-        `hoverinfo` must contain a *text* flag.
+        `hoverinfo` must contain a "text" flag.
     
         The 'hovertext' property is a string and must be specified as:
           - A string
@@ -684,7 +684,7 @@ class Scatter3d(BaseTraceType):
                     opacity for scatter3d traces must be a scalar
                     value for performance reasons. To set a
                     blending opacity value (i.e. which is not
-                    transparent), set *marker.color* to an rgba
+                    transparent), set "marker.color" to an rgba
                     color and use its alpha channel.
                 reversescale
                     Reverses the color mapping if true. Has an
@@ -737,10 +737,10 @@ class Scatter3d(BaseTraceType):
     def mode(self):
         """
         Determines the drawing mode for this scatter trace. If the
-        provided `mode` includes *text* then the `text` elements appear
+        provided `mode` includes "text" then the `text` elements appear
         at the coordinates. Otherwise, the `text` elements appear on
         hover. If there are less than 20 points, then the default is
-        *lines+markers*. Otherwise, *lines*.
+        "lines+markers". Otherwise, "lines".
     
         The 'mode' property is a flaglist and may be specified
         as a string containing:
@@ -839,8 +839,8 @@ class Scatter3d(BaseTraceType):
     def scene(self):
         """
         Sets a reference between this trace's 3D coordinate system and
-        a 3D scene. If *scene* (the default value), the (x,y,z)
-        coordinates refer to `layout.scene`. If *scene2*, the (x,y,z)
+        a 3D scene. If "scene" (the default value), the (x,y,z)
+        coordinates refer to `layout.scene`. If "scene2", the (x,y,z)
         coordinates refer to `layout.scene2`, and so on.
     
         The 'scene' property is an identifier of a particular
@@ -919,7 +919,7 @@ class Scatter3d(BaseTraceType):
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
-                    `maxpoints` is set to *50*, only the newest 50
+                    `maxpoints` is set to 50, only the newest 50
                     points will be displayed on the plot.
                 token
                     The stream id number links a data trace on a
@@ -941,8 +941,8 @@ class Scatter3d(BaseTraceType):
     @property
     def surfaceaxis(self):
         """
-        If *-1*, the scatter points are not fill with a surface If *0*,
-        *1*, *2*, the scatter points are filled with a Delaunay surface
+        If "-1", the scatter points are not fill with a surface If 0,
+        1, 2, the scatter points are filled with a Delaunay surface
         about the x, y, z respectively.
     
         The 'surfaceaxis' property is an enumeration that may be specified as:
@@ -1027,7 +1027,7 @@ class Scatter3d(BaseTraceType):
         single string, the same string appears over all the data
         points. If an array of string, the items are mapped in order to
         the this trace's (x,y,z) coordinates. If trace `hoverinfo`
-        contains a *text* flag and *hovertext* is not set, these
+        contains a "text" flag and "hovertext" is not set, these
         elements will be seen in the hover labels.
     
         The 'text' property is a string and must be specified as:
@@ -1074,11 +1074,11 @@ class Scatter3d(BaseTraceType):
                     system. The plotly service (at https://plot.ly
                     or on-premise) generates images on a server,
                     where only a select number of fonts are
-                    installed and supported. These include *Arial*,
-                    *Balto*, *Courier New*, *Droid Sans*,, *Droid
-                    Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
-                    Standard TT*, *Open Sans*, *Overpass*, *PT Sans
-                    Narrow*, *Raleway*, *Times New Roman*.
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
                 size
     
                 sizesrc
@@ -1164,7 +1164,7 @@ class Scatter3d(BaseTraceType):
     def visible(self):
         """
         Determines whether or not this trace is visible. If
-        *legendonly*, the trace is not drawn, but can appear as a
+        "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
     
         The 'visible' property is an enumeration that may be specified as:
@@ -1396,7 +1396,7 @@ class Scatter3d(BaseTraceType):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -1425,7 +1425,7 @@ class Scatter3d(BaseTraceType):
             over all the data points. If an array of string, the
             items are mapped in order to the this trace's (x,y,z)
             coordinates. To be seen, trace `hoverinfo` must contain
-            a *text* flag.
+            a "text" flag.
         hovertextsrc
             Sets the source reference on plot.ly for  hovertext .
         ids
@@ -1446,11 +1446,11 @@ class Scatter3d(BaseTraceType):
             with compatible properties
         mode
             Determines the drawing mode for this scatter trace. If
-            the provided `mode` includes *text* then the `text`
+            the provided `mode` includes "text" then the `text`
             elements appear at the coordinates. Otherwise, the
             `text` elements appear on hover. If there are less than
-            20 points, then the default is *lines+markers*.
-            Otherwise, *lines*.
+            20 points, then the default is "lines+markers".
+            Otherwise, "lines".
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -1461,9 +1461,9 @@ class Scatter3d(BaseTraceType):
             with compatible properties
         scene
             Sets a reference between this trace's 3D coordinate
-            system and a 3D scene. If *scene* (the default value),
+            system and a 3D scene. If "scene" (the default value),
             the (x,y,z) coordinates refer to `layout.scene`. If
-            *scene2*, the (x,y,z) coordinates refer to
+            "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
         selectedpoints
             Array containing integer indices of selected points.
@@ -1479,8 +1479,8 @@ class Scatter3d(BaseTraceType):
             plotly.graph_objs.scatter3d.Stream instance or dict
             with compatible properties
         surfaceaxis
-            If *-1*, the scatter points are not fill with a surface
-            If *0*, *1*, *2*, the scatter points are filled with a
+            If "-1", the scatter points are not fill with a surface
+            If 0, 1, 2, the scatter points are filled with a
             Delaunay surface about the x, y, z respectively.
         surfacecolor
             Sets the surface fill color.
@@ -1489,8 +1489,8 @@ class Scatter3d(BaseTraceType):
             triplet. If a single string, the same string appears
             over all the data points. If an array of string, the
             items are mapped in order to the this trace's (x,y,z)
-            coordinates. If trace `hoverinfo` contains a *text*
-            flag and *hovertext* is not set, these elements will be
+            coordinates. If trace `hoverinfo` contains a "text"
+            flag and "hovertext" is not set, these elements will be
             seen in the hover labels.
         textfont
             plotly.graph_objs.scatter3d.Textfont instance or dict
@@ -1504,7 +1504,7 @@ class Scatter3d(BaseTraceType):
 
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         x
@@ -1594,7 +1594,7 @@ class Scatter3d(BaseTraceType):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -1623,7 +1623,7 @@ class Scatter3d(BaseTraceType):
             over all the data points. If an array of string, the
             items are mapped in order to the this trace's (x,y,z)
             coordinates. To be seen, trace `hoverinfo` must contain
-            a *text* flag.
+            a "text" flag.
         hovertextsrc
             Sets the source reference on plot.ly for  hovertext .
         ids
@@ -1644,11 +1644,11 @@ class Scatter3d(BaseTraceType):
             with compatible properties
         mode
             Determines the drawing mode for this scatter trace. If
-            the provided `mode` includes *text* then the `text`
+            the provided `mode` includes "text" then the `text`
             elements appear at the coordinates. Otherwise, the
             `text` elements appear on hover. If there are less than
-            20 points, then the default is *lines+markers*.
-            Otherwise, *lines*.
+            20 points, then the default is "lines+markers".
+            Otherwise, "lines".
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -1659,9 +1659,9 @@ class Scatter3d(BaseTraceType):
             with compatible properties
         scene
             Sets a reference between this trace's 3D coordinate
-            system and a 3D scene. If *scene* (the default value),
+            system and a 3D scene. If "scene" (the default value),
             the (x,y,z) coordinates refer to `layout.scene`. If
-            *scene2*, the (x,y,z) coordinates refer to
+            "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
         selectedpoints
             Array containing integer indices of selected points.
@@ -1677,8 +1677,8 @@ class Scatter3d(BaseTraceType):
             plotly.graph_objs.scatter3d.Stream instance or dict
             with compatible properties
         surfaceaxis
-            If *-1*, the scatter points are not fill with a surface
-            If *0*, *1*, *2*, the scatter points are filled with a
+            If "-1", the scatter points are not fill with a surface
+            If 0, 1, 2, the scatter points are filled with a
             Delaunay surface about the x, y, z respectively.
         surfacecolor
             Sets the surface fill color.
@@ -1687,8 +1687,8 @@ class Scatter3d(BaseTraceType):
             triplet. If a single string, the same string appears
             over all the data points. If an array of string, the
             items are mapped in order to the this trace's (x,y,z)
-            coordinates. If trace `hoverinfo` contains a *text*
-            flag and *hovertext* is not set, these elements will be
+            coordinates. If trace `hoverinfo` contains a "text"
+            flag and "hovertext" is not set, these elements will be
             seen in the hover labels.
         textfont
             plotly.graph_objs.scatter3d.Textfont instance or dict
@@ -1702,7 +1702,7 @@ class Scatter3d(BaseTraceType):
 
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         x

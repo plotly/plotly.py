@@ -19,10 +19,11 @@ class ProjectionValidator(_plotly_utils.basevalidators.CompoundValidator):
                 plotly.graph_objs.layout.geo.projection.Rotatio
                 n instance or dict with compatible properties
             scale
-                Zooms in or out on the map view. A scale of *1*
+                Zooms in or out on the map view. A scale of 1
                 corresponds to the largest zoom level that fits
                 the map's lon and lat ranges.
             type
-                Sets the projection type.""",
+                Sets the projection type.
+""",
             **kwargs
         )

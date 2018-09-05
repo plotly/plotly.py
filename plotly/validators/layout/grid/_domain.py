@@ -20,6 +20,7 @@ class DomainValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the vertical domain of this grid subplot
                 (in plot fraction). The first and last cells
                 end exactly at the domain edges, with no grout
-                around the edges.""",
+                around the edges.
+""",
             **kwargs
         )

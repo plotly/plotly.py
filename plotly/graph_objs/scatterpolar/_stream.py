@@ -10,7 +10,7 @@ class Stream(BaseTraceHierarchyType):
     def maxpoints(self):
         """
         Sets the maximum number of points to keep on the plots from an
-        incoming stream. If `maxpoints` is set to *50*, only the newest
+        incoming stream. If `maxpoints` is set to 50, only the newest
         50 points will be displayed on the plot.
     
         The 'maxpoints' property is a number and may be specified as:
@@ -60,7 +60,7 @@ class Stream(BaseTraceHierarchyType):
         return """\
         maxpoints
             Sets the maximum number of points to keep on the plots
-            from an incoming stream. If `maxpoints` is set to *50*,
+            from an incoming stream. If `maxpoints` is set to 50,
             only the newest 50 points will be displayed on the
             plot.
         token
@@ -80,7 +80,7 @@ class Stream(BaseTraceHierarchyType):
             an instance of plotly.graph_objs.scatterpolar.Stream
         maxpoints
             Sets the maximum number of points to keep on the plots
-            from an incoming stream. If `maxpoints` is set to *50*,
+            from an incoming stream. If `maxpoints` is set to 50,
             only the newest 50 points will be displayed on the
             plot.
         token

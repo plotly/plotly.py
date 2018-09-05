@@ -35,10 +35,10 @@ class Histogram2dContourValidator(
                 array are all positive, all negative or mixed.
             autocontour
                 Determines whether or not the contour level
-                attributes are picked by an algorithm. If
-                *true*, the number of contour levels can be set
-                in `ncontours`. If *false*, set the contour
-                level attributes in `contours`.
+                attributes are picked by an algorithm. If True,
+                the number of contour levels can be set in
+                `ncontours`. If False, set the contour level
+                attributes in `contours`.
             colorbar
                 plotly.graph_objs.histogram2dcontour.ColorBar
                 instance or dict with compatible properties
@@ -62,7 +62,7 @@ class Histogram2dContourValidator(
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
-                selection events. Note that, *scatter* traces
+                selection events. Note that, "scatter" traces
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
@@ -70,10 +70,10 @@ class Histogram2dContourValidator(
                 customdata .
             histfunc
                 Specifies the binning function used for this
-                histogram trace. If *count*, the histogram
+                histogram trace. If "count", the histogram
                 values are computed by counting the number of
-                values lying inside each bin. If *sum*, *avg*,
-                *min*, *max*, the histogram values are computed
+                values lying inside each bin. If "sum", "avg",
+                "min", "max", the histogram values are computed
                 using the sum, the average, the minimum or the
                 maximum of the values lying inside each bin
                 respectively.
@@ -82,11 +82,11 @@ class Histogram2dContourValidator(
                 this histogram trace. If **, the span of each
                 bar corresponds to the number of occurrences
                 (i.e. the number of data points lying inside
-                the bins). If *percent* / *probability*, the
+                the bins). If "percent" / "probability", the
                 span of each bar corresponds to the percentage
                 / fraction of occurrences with respect to the
                 total number of sample points (here, the sum of
-                all bin HEIGHTS equals 100% / 1). If *density*,
+                all bin HEIGHTS equals 100% / 1). If "density",
                 the span of each bar corresponds to the number
                 of occurrences in a bin divided by the size of
                 the bin interval (here, the sum of all bin
@@ -144,8 +144,8 @@ class Histogram2dContourValidator(
                 actual number of contours will be chosen
                 automatically to be less than or equal to the
                 value of `ncontours`. Has an effect only if
-                `autocontour` is *true* or if `contours.size`
-                is missing.
+                `autocontour` is True or if `contours.size` is
+                missing.
             opacity
                 Sets the opacity of the trace.
             reversescale
@@ -175,7 +175,7 @@ class Histogram2dContourValidator(
 
             visible
                 Determines whether or not this trace is
-                visible. If *legendonly*, the trace is not
+                visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
             x
@@ -183,9 +183,9 @@ class Histogram2dContourValidator(
                 axis.
             xaxis
                 Sets a reference between this trace's x
-                coordinates and a 2D cartesian x axis. If *x*
+                coordinates and a 2D cartesian x axis. If "x"
                 (the default value), the x coordinates refer to
-                `layout.xaxis`. If *x2*, the x coordinates
+                `layout.xaxis`. If "x2", the x coordinates
                 refer to `layout.xaxis2`, and so on.
             xbins
                 plotly.graph_objs.histogram2dcontour.XBins
@@ -200,9 +200,9 @@ class Histogram2dContourValidator(
                 axis.
             yaxis
                 Sets a reference between this trace's y
-                coordinates and a 2D cartesian y axis. If *y*
+                coordinates and a 2D cartesian y axis. If "y"
                 (the default value), the y coordinates refer to
-                `layout.yaxis`. If *y2*, the y coordinates
+                `layout.yaxis`. If "y2", the y coordinates
                 refer to `layout.yaxis2`, and so on.
             ybins
                 plotly.graph_objs.histogram2dcontour.YBins
@@ -235,6 +235,7 @@ class Histogram2dContourValidator(
                 should have the same units as in `z` and if
                 set, `zmax` must be set as well.
             zsrc
-                Sets the source reference on plot.ly for  z .""",
+                Sets the source reference on plot.ly for  z .
+""",
             **kwargs
         )

@@ -31,6 +31,7 @@ class NodeValidator(_plotly_utils.basevalidators.CompoundValidator):
             pad
                 Sets the padding (in px) between the `nodes`.
             thickness
-                Sets the thickness (in px) of the `nodes`.""",
+                Sets the thickness (in px) of the `nodes`.
+""",
             **kwargs
         )

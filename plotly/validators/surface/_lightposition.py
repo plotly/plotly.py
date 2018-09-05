@@ -19,6 +19,7 @@ class LightpositionValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for each vertex.
             z
                 Numeric vector, representing the Z coordinate
-                for each vertex.""",
+                for each vertex.
+""",
             **kwargs
         )

@@ -23,6 +23,7 @@ class DomainValidator(_plotly_utils.basevalidators.CompoundValidator):
                 subplot (in plot fraction).
             y
                 Sets the vertical domain of this ternary
-                subplot (in plot fraction).""",
+                subplot (in plot fraction).
+""",
             **kwargs
         )

@@ -16,6 +16,7 @@ class UnselectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 r instance or dict with compatible properties
             textfont
                 plotly.graph_objs.scatterpolar.unselected.Textf
-                ont instance or dict with compatible properties""",
+                ont instance or dict with compatible properties
+""",
             **kwargs
         )

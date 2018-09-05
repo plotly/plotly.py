@@ -13,17 +13,17 @@ class SceneValidator(_plotly_utils.basevalidators.CompoundValidator):
                 plotly.graph_objs.layout.scene.Annotation
                 instance or dict with compatible properties
             aspectmode
-                If *cube*, this scene's axes are drawn as a
+                If "cube", this scene's axes are drawn as a
                 cube, regardless of the axes' ranges. If
-                *data*, this scene's axes are drawn in
-                proportion with the axes' ranges. If *manual*,
+                "data", this scene's axes are drawn in
+                proportion with the axes' ranges. If "manual",
                 this scene's axes are drawn in proportion with
-                the input of *aspectratio* (the default
-                behavior if *aspectratio* is provided). If
-                *auto*, this scene's axes are drawn using the
-                results of *data* except when one axis is more
+                the input of "aspectratio" (the default
+                behavior if "aspectratio" is provided). If
+                "auto", this scene's axes are drawn using the
+                results of "data" except when one axis is more
                 than four times the size of the two others,
-                where in that case the results of *cube* are
+                where in that case the results of "cube" are
                 used.
             aspectratio
                 Sets this scene's axis aspectratio.
@@ -49,6 +49,7 @@ class SceneValidator(_plotly_utils.basevalidators.CompoundValidator):
                 or dict with compatible properties
             zaxis
                 plotly.graph_objs.layout.scene.ZAxis instance
-                or dict with compatible properties""",
+                or dict with compatible properties
+""",
             **kwargs
         )

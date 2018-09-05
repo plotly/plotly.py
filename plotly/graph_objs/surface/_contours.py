@@ -35,9 +35,9 @@ class Contours(BaseTraceHierarchyType):
                     Determines whether or not contour lines about
                     the x dimension are drawn.
                 usecolormap
-                    An alternate to *color*. Determines whether or
+                    An alternate to "color". Determines whether or
                     not the contour lines are colored using the
-                    trace *colorscale*.
+                    trace "colorscale".
                 width
                     Sets the width of the contour lines.
 
@@ -82,9 +82,9 @@ class Contours(BaseTraceHierarchyType):
                     Determines whether or not contour lines about
                     the y dimension are drawn.
                 usecolormap
-                    An alternate to *color*. Determines whether or
+                    An alternate to "color". Determines whether or
                     not the contour lines are colored using the
-                    trace *colorscale*.
+                    trace "colorscale".
                 width
                     Sets the width of the contour lines.
 
@@ -129,9 +129,9 @@ class Contours(BaseTraceHierarchyType):
                     Determines whether or not contour lines about
                     the z dimension are drawn.
                 usecolormap
-                    An alternate to *color*. Determines whether or
+                    An alternate to "color". Determines whether or
                     not the contour lines are colored using the
-                    trace *colorscale*.
+                    trace "colorscale".
                 width
                     Sets the width of the contour lines.
 

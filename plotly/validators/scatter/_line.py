@@ -13,11 +13,11 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the line color.
             dash
                 Sets the dash style of lines. Set to a dash
-                type string (*solid*, *dot*, *dash*,
-                *longdash*, *dashdot*, or *longdashdot*) or a
-                dash length list in px (eg *5px,10px,2px,2px*).
+                type string ("solid", "dot", "dash",
+                "longdash", "dashdot", or "longdashdot") or a
+                dash length list in px (eg "5px,10px,2px,2px").
             shape
-                Determines the line shape. With *spline* the
+                Determines the line shape. With "spline" the
                 lines are drawn using spline interpolation. The
                 other available values correspond to step-wise
                 line shapes.
@@ -29,10 +29,11 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 unaffected.
             smoothing
                 Has an effect only if `shape` is set to
-                *spline* Sets the amount of smoothing. *0*
+                "spline" Sets the amount of smoothing. 0
                 corresponds to no smoothing (equivalent to a
-                *linear* shape).
+                "linear" shape).
             width
-                Sets the line width (in px).""",
+                Sets the line width (in px).
+""",
             **kwargs
         )

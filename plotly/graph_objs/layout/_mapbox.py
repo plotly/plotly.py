@@ -137,11 +137,11 @@ class Mapbox(BaseLayoutHierarchyType):
                     instance or dict with compatible properties
                 color
                     Sets the primary layer color. If `type` is
-                    *circle*, color corresponds to the circle color
-                    If `type` is *line*, color corresponds to the
-                    line color If `type` is *fill*, color
+                    "circle", color corresponds to the circle color
+                    If `type` is "line", color corresponds to the
+                    line color If `type` is "fill", color
                     corresponds to the fill color If `type` is
-                    *symbol*, color corresponds to the icon color
+                    "symbol", color corresponds to the icon color
                 fill
                     plotly.graph_objs.layout.mapbox.layer.Fill
                     instance or dict with compatible properties
@@ -163,15 +163,15 @@ class Mapbox(BaseLayoutHierarchyType):
                 source
                     Sets the source data for this layer. Source can
                     be either a URL, a geojson object (with
-                    `sourcetype` set to *geojson*) or an array of
-                    tile URLS (with `sourcetype` set to *vector*).
+                    `sourcetype` set to "geojson") or an array of
+                    tile URLS (with `sourcetype` set to "vector").
                 sourcelayer
                     Specifies the layer to use from a vector tile
-                    source. Required for *vector* source type that
+                    source. Required for "vector" source type that
                     supports multiple layers.
                 sourcetype
                     Sets the source type for this layer. Support
-                    for *raster*, *image* and *video* source types
+                    for "raster", "image" and "video" source types
                     is coming soon.
                 symbol
                     plotly.graph_objs.layout.mapbox.layer.Symbol
@@ -188,9 +188,9 @@ class Mapbox(BaseLayoutHierarchyType):
                     matching item, this item will be hidden unless
                     you explicitly show it with `visible: true`.
                 type
-                    Sets the layer type. Support for *raster*,
-                    *background* types is coming soon. Note that
-                    *line* and *fill* are not compatible with Point
+                    Sets the layer type. Support for "raster",
+                    "background" types is coming soon. Note that
+                    "line" and "fill" are not compatible with Point
                     GeoJSON geometries.
                 visible
                     Determines whether this layer is displayed
@@ -210,7 +210,7 @@ class Mapbox(BaseLayoutHierarchyType):
     @property
     def pitch(self):
         """
-        Sets the pitch angle of the map (in degrees, where *0* means
+        Sets the pitch angle of the map (in degrees, where 0 means
         perpendicular to the surface of the map).
     
         The 'pitch' property is a number and may be specified as:
@@ -295,7 +295,7 @@ class Mapbox(BaseLayoutHierarchyType):
             plotly.graph_objs.layout.mapbox.Layer instance or dict
             with compatible properties
         pitch
-            Sets the pitch angle of the map (in degrees, where *0*
+            Sets the pitch angle of the map (in degrees, where 0
             means perpendicular to the surface of the map).
         style
             Sets the Mapbox map style. Either input one of the
@@ -343,7 +343,7 @@ class Mapbox(BaseLayoutHierarchyType):
             plotly.graph_objs.layout.mapbox.Layer instance or dict
             with compatible properties
         pitch
-            Sets the pitch angle of the map (in degrees, where *0*
+            Sets the pitch angle of the map (in degrees, where 0
             means perpendicular to the surface of the map).
         style
             Sets the Mapbox map style. Either input one of the

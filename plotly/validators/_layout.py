@@ -31,21 +31,21 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             barmode
                 Determines how bars at the same location
                 coordinate are displayed on the graph. With
-                *stack*, the bars are stacked on top of one
-                another With *relative*, the bars are stacked
+                "stack", the bars are stacked on top of one
+                another With "relative", the bars are stacked
                 on top of one another, with negative values
                 below the axis, positive values above With
-                *group*, the bars are plotted next to one
+                "group", the bars are plotted next to one
                 another centered around the shared location.
-                With *overlay*, the bars are plotted over one
-                another, you might need to an *opacity* to see
+                With "overlay", the bars are plotted over one
+                another, you might need to an "opacity" to see
                 multiple bars.
             barnorm
                 Sets the normalization for bar traces on the
-                graph. With *fraction*, the value of each bar
+                graph. With "fraction", the value of each bar
                 is divide by the sum of the values at the
-                location coordinate. With *percent*, the
-                results form *fraction* are presented in
+                location coordinate. With "percent", the
+                results form "fraction" are presented in
                 percents.
             boxgap
                 Sets the gap (in plot fraction) between boxes
@@ -56,10 +56,10 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             boxmode
                 Determines how boxes at the same location
                 coordinate are displayed on the graph. If
-                *group*, the boxes are plotted next to one
+                "group", the boxes are plotted next to one
                 another centered around the shared location. If
-                *overlay*, the boxes are plotted over one
-                another, you might need to set *opacity* to see
+                "overlay", the boxes are plotted over one
+                another, you might need to set "opacity" to see
                 them multiple boxes.
             calendar
                 Sets the default calendar system to use for
@@ -82,9 +82,9 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 corresponding to positive angles.
             dragmode
                 Determines the mode of drag interactions.
-                *select* and *lasso* apply only to scatter
-                traces with markers or text. *orbit* and
-                *turntable* apply only to 3D scenes.
+                "select" and "lasso" apply only to scatter
+                traces with markers or text. "orbit" and
+                "turntable" apply only to 3D scenes.
             extendpiecolors
                 If `true`, the pie slice colors (whether given
                 by `piecolorway` or inherited from `colorway`)
@@ -181,7 +181,7 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the decimal and thousand separators. For
                 example, *. * puts a '.' before decimals and a
                 space between thousands. In English locales,
-                dflt is *.,* but other locales may alter this
+                dflt is ".," but other locales may alter this
                 default.
             shapes
                 plotly.graph_objs.layout.Shape instance or dict
@@ -247,10 +247,10 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             violinmode
                 Determines how violins at the same location
                 coordinate are displayed on the graph. If
-                *group*, the violins are plotted next to one
+                "group", the violins are plotted next to one
                 another centered around the shared location. If
-                *overlay*, the violins are plotted over one
-                another, you might need to set *opacity* to see
+                "overlay", the violins are plotted over one
+                another, you might need to set "opacity" to see
                 them multiple violins.
             width
                 Sets the plot's width (in px).
@@ -259,6 +259,7 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 with compatible properties
             yaxis
                 plotly.graph_objs.layout.YAxis instance or dict
-                with compatible properties""",
+                with compatible properties
+""",
             **kwargs
         )

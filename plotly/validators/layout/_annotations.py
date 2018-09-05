@@ -46,7 +46,7 @@ class AnnotationsValidator(
                 Indicates in what terms the tail of the
                 annotation (ax,ay)  is specified. If `pixel`,
                 `ax` is a relative offset in pixels  from `x`.
-                If set to an x axis id (e.g. *x* or *x2*), `ax`
+                If set to an x axis id (e.g. "x" or "x2"), `ax`
                 is  specified in the same terms as that axis.
                 This is useful  for trendline annotations which
                 should continue to indicate  the correct trend
@@ -63,7 +63,7 @@ class AnnotationsValidator(
                 Indicates in what terms the tail of the
                 annotation (ax,ay)  is specified. If `pixel`,
                 `ay` is a relative offset in pixels  from `y`.
-                If set to a y axis id (e.g. *y* or *y2*), `ay`
+                If set to a y axis id (e.g. "y" or "y2"), `ay`
                 is  specified in the same terms as that axis.
                 This is useful  for trendline annotations which
                 should continue to indicate  the correct trend
@@ -84,7 +84,7 @@ class AnnotationsValidator(
                 captures mouse move and click events, or allows
                 those events to pass through to data points in
                 the plot that may be behind the annotation. By
-                default `captureevents` is *false* unless
+                default `captureevents` is False unless
                 `hovertext` is provided. If you use the event
                 `plotly_clickannotation` without `hovertext`
                 you must explicitly enable `captureevents`.
@@ -93,10 +93,10 @@ class AnnotationsValidator(
                 plot. If you click a data point that exactly
                 matches the `x` and `y` values of this
                 annotation, and it is hidden (visible: false),
-                it will appear. In *onoff* mode, you must click
+                it will appear. In "onoff" mode, you must click
                 the same point again to make it disappear, so
                 if you click multiple points, you can show
-                multiple annotations. In *onout* mode, a click
+                multiple annotations. In "onout" mode, a click
                 anywhere else in the plot (on another data
                 point or not) will hide this annotation. If you
                 need to show/hide this annotation in response
@@ -133,9 +133,9 @@ class AnnotationsValidator(
                 arrow).
             showarrow
                 Determines whether or not the annotation is
-                drawn with an arrow. If *true*, `text` is
-                placed near the arrow's tail. If *false*,
-                `text` lines up with the `x` and `y` provided.
+                drawn with an arrow. If True, `text` is placed
+                near the arrow's tail. If False, `text` lines
+                up with the `x` and `y` provided.
             standoff
                 Sets a distance, in pixels, to move the end
                 arrowhead away from the position it is pointing
@@ -196,24 +196,24 @@ class AnnotationsValidator(
                 line.
             x
                 Sets the annotation's x position. If the axis
-                `type` is *log*, then you must take the log of
+                `type` is "log", then you must take the log of
                 your desired range. If the axis `type` is
-                *date*, it should be date strings, like date
+                "date", it should be date strings, like date
                 data, though Date objects and unix milliseconds
                 will be accepted and converted to strings. If
-                the axis `type` is *category*, it should be
+                the axis `type` is "category", it should be
                 numbers, using the scale where each category is
                 assigned a serial number from zero in the order
                 it appears.
             xanchor
                 Sets the text box's horizontal position anchor
                 This anchor binds the `x` position to the
-                *left*, *center* or *right* of the annotation.
+                "left", "center" or "right" of the annotation.
                 For example, if `x` is set to 1, `xref` to
-                *paper* and `xanchor` to *right* then the
+                "paper" and `xanchor` to "right" then the
                 right-most portion of the annotation lines up
                 with the right-most edge of the plotting area.
-                If *auto*, the anchor is equivalent to *center*
+                If "auto", the anchor is equivalent to "center"
                 for data-referenced annotations or if there is
                 an arrow, whereas for paper-referenced with no
                 arrow, the anchor picked corresponds to the
@@ -224,9 +224,9 @@ class AnnotationsValidator(
                 the annotation's `x` value.
             xref
                 Sets the annotation's x coordinate axis. If set
-                to an x axis id (e.g. *x* or *x2*), the `x`
+                to an x axis id (e.g. "x" or "x2"), the `x`
                 position refers to an x coordinate If set to
-                *paper*, the `x` position refers to the
+                "paper", the `x` position refers to the
                 distance from the left side of the plotting
                 area in normalized coordinates where 0 (1)
                 corresponds to the left (right) side.
@@ -236,24 +236,24 @@ class AnnotationsValidator(
                 (negative) by this many pixels.
             y
                 Sets the annotation's y position. If the axis
-                `type` is *log*, then you must take the log of
+                `type` is "log", then you must take the log of
                 your desired range. If the axis `type` is
-                *date*, it should be date strings, like date
+                "date", it should be date strings, like date
                 data, though Date objects and unix milliseconds
                 will be accepted and converted to strings. If
-                the axis `type` is *category*, it should be
+                the axis `type` is "category", it should be
                 numbers, using the scale where each category is
                 assigned a serial number from zero in the order
                 it appears.
             yanchor
                 Sets the text box's vertical position anchor
                 This anchor binds the `y` position to the
-                *top*, *middle* or *bottom* of the annotation.
+                "top", "middle" or "bottom" of the annotation.
                 For example, if `y` is set to 1, `yref` to
-                *paper* and `yanchor` to *top* then the top-
+                "paper" and `yanchor` to "top" then the top-
                 most portion of the annotation lines up with
                 the top-most edge of the plotting area. If
-                *auto*, the anchor is equivalent to *middle*
+                "auto", the anchor is equivalent to "middle"
                 for data-referenced annotations or if there is
                 an arrow, whereas for paper-referenced with no
                 arrow, the anchor picked corresponds to the
@@ -264,15 +264,16 @@ class AnnotationsValidator(
                 the annotation's `y` value.
             yref
                 Sets the annotation's y coordinate axis. If set
-                to an y axis id (e.g. *y* or *y2*), the `y`
+                to an y axis id (e.g. "y" or "y2"), the `y`
                 position refers to an y coordinate If set to
-                *paper*, the `y` position refers to the
+                "paper", the `y` position refers to the
                 distance from the bottom of the plotting area
                 in normalized coordinates where 0 (1)
                 corresponds to the bottom (top).
             yshift
                 Shifts the position of the whole annotation and
                 arrow up (positive) or down (negative) by this
-                many pixels.""",
+                many pixels.
+""",
             **kwargs
         )

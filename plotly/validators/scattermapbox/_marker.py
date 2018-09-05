@@ -107,9 +107,10 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the marker symbol. Full list:
                 https://www.mapbox.com/maki-icons/ Note that
                 the array `marker.color` and `marker.size` are
-                only available for *circle* symbols.
+                only available for "circle" symbols.
             symbolsrc
                 Sets the source reference on plot.ly for
-                symbol .""",
+                symbol .
+""",
             **kwargs
         )

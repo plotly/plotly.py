@@ -16,6 +16,7 @@ class CenterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 degrees North).
             lon
                 Sets the longitude of the center of the map (in
-                degrees East).""",
+                degrees East).
+""",
             **kwargs
         )

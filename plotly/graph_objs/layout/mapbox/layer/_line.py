@@ -10,7 +10,7 @@ class Line(BaseLayoutHierarchyType):
     def width(self):
         """
         Sets the line width. Has an effect only when `type` is set to
-        *line*.
+        "line".
     
         The 'width' property is a number and may be specified as:
           - An int or float
@@ -38,7 +38,7 @@ class Line(BaseLayoutHierarchyType):
         return """\
         width
             Sets the line width. Has an effect only when `type` is
-            set to *line*.
+            set to "line".
         """
 
     def __init__(self, arg=None, width=None, **kwargs):
@@ -53,7 +53,7 @@ class Line(BaseLayoutHierarchyType):
             plotly.graph_objs.layout.mapbox.layer.Line
         width
             Sets the line width. Has an effect only when `type` is
-            set to *line*.
+            set to "line".
 
         Returns
         -------

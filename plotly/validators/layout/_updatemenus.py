@@ -76,7 +76,7 @@ class UpdatemenusValidator(
             xanchor
                 Sets the update menu's horizontal position
                 anchor. This anchor binds the `x` position to
-                the *left*, *center* or *right* of the range
+                the "left", "center" or "right" of the range
                 selector.
             y
                 Sets the y position (in normalized coordinates)
@@ -84,7 +84,8 @@ class UpdatemenusValidator(
             yanchor
                 Sets the update menu's vertical position anchor
                 This anchor binds the `y` position to the
-                *top*, *middle* or *bottom* of the range
-                selector.""",
+                "top", "middle" or "bottom" of the range
+                selector.
+""",
             **kwargs
         )

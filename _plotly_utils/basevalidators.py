@@ -96,7 +96,7 @@ def copy_to_readonly_numpy_array(v, dtype=None, force_numeric=False):
         if dtype:
             new_v = np.ascontiguousarray(v.astype(dtype))
         else:
-            new_v = np.ascontiguousarray(v)
+            new_v = np.ascontiguousarray(v.copy())
     else:
         new_v = v.copy()
 

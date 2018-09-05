@@ -30,11 +30,11 @@ class ShapesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
             opacity
                 Sets the opacity of the shape.
             path
-                For `type` *path* - a valid SVG path with the
+                For `type` "path" - a valid SVG path with the
                 pixel values replaced by data values in
-                `xsizemode`/`ysizemode` being *scaled* and
+                `xsizemode`/`ysizemode` being "scaled" and
                 taken unmodified as pixels relative to
-                `xanchor` and `yanchor` in case of *pixel* size
+                `xanchor` and `yanchor` in case of "pixel" size
                 mode. There are a few restrictions / quirks
                 only absolute instructions, not relative. So
                 the allowed segments are: M, L, H, V, Q, C, T,
@@ -68,16 +68,16 @@ class ShapesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 you explicitly show it with `visible: true`.
             type
                 Specifies the shape type to be drawn. If
-                *line*, a line is drawn from (`x0`,`y0`) to
+                "line", a line is drawn from (`x0`,`y0`) to
                 (`x1`,`y1`) with respect to the axes' sizing
-                mode. If *circle*, a circle is drawn from
+                mode. If "circle", a circle is drawn from
                 ((`x0`+`x1`)/2, (`y0`+`y1`)/2)) with radius
                 (|(`x0`+`x1`)/2 - `x0`|, |(`y0`+`y1`)/2
                 -`y0`)|) with respect to the axes' sizing mode.
-                If *rect*, a rectangle is drawn linking
+                If "rect", a rectangle is drawn linking
                 (`x0`,`y0`), (`x1`,`y0`), (`x1`,`y1`),
                 (`x0`,`y1`), (`x0`,`y0`) with respect to the
-                axes' sizing mode. If *path*, draw a custom SVG
+                axes' sizing mode. If "path", draw a custom SVG
                 path using `path`. with respect to the axes'
                 sizing mode.
             visible
@@ -91,31 +91,31 @@ class ShapesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 `xsizemode` for more info.
             xanchor
                 Only relevant in conjunction with `xsizemode`
-                set to *pixel*. Specifies the anchor point on
+                set to "pixel". Specifies the anchor point on
                 the x axis to which `x0`, `x1` and x
                 coordinates within `path` are relative to. E.g.
                 useful to attach a pixel sized shape to a
                 certain data value. No effect when `xsizemode`
-                not set to *pixel*.
+                not set to "pixel".
             xref
                 Sets the shape's x coordinate axis. If set to
-                an x axis id (e.g. *x* or *x2*), the `x`
+                an x axis id (e.g. "x" or "x2"), the `x`
                 position refers to an x coordinate. If set to
-                *paper*, the `x` position refers to the
+                "paper", the `x` position refers to the
                 distance from the left side of the plotting
-                area in normalized coordinates where *0* (*1*)
+                area in normalized coordinates where 0 (1)
                 corresponds to the left (right) side. If the
-                axis `type` is *log*, then you must take the
+                axis `type` is "log", then you must take the
                 log of your desired range. If the axis `type`
-                is *date*, then you must convert the date to
+                is "date", then you must convert the date to
                 unix time in milliseconds.
             xsizemode
                 Sets the shapes's sizing mode along the x axis.
-                If set to *scaled*, `x0`, `x1` and x
+                If set to "scaled", `x0`, `x1` and x
                 coordinates within `path` refer to data values
                 on the x axis or a fraction of the plot area's
-                width (`xref` set to *paper*). If set to
-                *pixel*, `xanchor` specifies the x position in
+                width (`xref` set to "paper"). If set to
+                "pixel", `xanchor` specifies the x position in
                 terms of data or plot fraction but `x0`, `x1`
                 and x coordinates within `path` are pixels
                 relative to `xanchor`. This way, the shape can
@@ -129,31 +129,32 @@ class ShapesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 `ysizemode` for more info.
             yanchor
                 Only relevant in conjunction with `ysizemode`
-                set to *pixel*. Specifies the anchor point on
+                set to "pixel". Specifies the anchor point on
                 the y axis to which `y0`, `y1` and y
                 coordinates within `path` are relative to. E.g.
                 useful to attach a pixel sized shape to a
                 certain data value. No effect when `ysizemode`
-                not set to *pixel*.
+                not set to "pixel".
             yref
                 Sets the annotation's y coordinate axis. If set
-                to an y axis id (e.g. *y* or *y2*), the `y`
+                to an y axis id (e.g. "y" or "y2"), the `y`
                 position refers to an y coordinate If set to
-                *paper*, the `y` position refers to the
+                "paper", the `y` position refers to the
                 distance from the bottom of the plotting area
-                in normalized coordinates where *0* (*1*)
+                in normalized coordinates where 0 (1)
                 corresponds to the bottom (top).
             ysizemode
                 Sets the shapes's sizing mode along the y axis.
-                If set to *scaled*, `y0`, `y1` and y
+                If set to "scaled", `y0`, `y1` and y
                 coordinates within `path` refer to data values
                 on the y axis or a fraction of the plot area's
-                height (`yref` set to *paper*). If set to
-                *pixel*, `yanchor` specifies the y position in
+                height (`yref` set to "paper"). If set to
+                "pixel", `yanchor` specifies the y position in
                 terms of data or plot fraction but `y0`, `y1`
                 and y coordinates within `path` are pixels
                 relative to `yanchor`. This way, the shape can
                 have a fixed height while maintaining a
-                position relative to data or plot fraction.""",
+                position relative to data or plot fraction.
+""",
             **kwargs
         )

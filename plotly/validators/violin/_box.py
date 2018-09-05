@@ -20,6 +20,7 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
             width
                 Sets the width of the inner box plots relative
                 to the violins' width. For example, with 1, the
-                inner box plots are as wide as the violins.""",
+                inner box plots are as wide as the violins.
+""",
             **kwargs
         )

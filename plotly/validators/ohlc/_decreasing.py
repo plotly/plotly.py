@@ -11,6 +11,7 @@ class DecreasingValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs="""
             line
                 plotly.graph_objs.ohlc.decreasing.Line instance
-                or dict with compatible properties""",
+                or dict with compatible properties
+""",
             **kwargs
         )

@@ -175,9 +175,9 @@ class Marker(BaseTraceHierarchyType):
     def symbol(self):
         """
         Sets the marker symbol type. Adding 100 is equivalent to
-        appending *-open* to a symbol name. Adding 200 is equivalent to
-        appending *-dot* to a symbol name. Adding 300 is equivalent to
-        appending *-open-dot* or *dot-open* to a symbol name.
+        appending "-open" to a symbol name. Adding 200 is equivalent to
+        appending "-dot" to a symbol name. Adding 300 is equivalent to
+        appending "-open-dot" or "dot-open" to a symbol name.
     
         The 'symbol' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -303,10 +303,10 @@ class Marker(BaseTraceHierarchyType):
             Sets the source reference on plot.ly for  size .
         symbol
             Sets the marker symbol type. Adding 100 is equivalent
-            to appending *-open* to a symbol name. Adding 200 is
-            equivalent to appending *-dot* to a symbol name. Adding
-            300 is equivalent to appending *-open-dot* or *dot-
-            open* to a symbol name.
+            to appending "-open" to a symbol name. Adding 200 is
+            equivalent to appending "-dot" to a symbol name. Adding
+            300 is equivalent to appending "-open-dot" or "dot-
+            open" to a symbol name.
         symbolsrc
             Sets the source reference on plot.ly for  symbol .
         """
@@ -350,10 +350,10 @@ class Marker(BaseTraceHierarchyType):
             Sets the source reference on plot.ly for  size .
         symbol
             Sets the marker symbol type. Adding 100 is equivalent
-            to appending *-open* to a symbol name. Adding 200 is
-            equivalent to appending *-dot* to a symbol name. Adding
-            300 is equivalent to appending *-open-dot* or *dot-
-            open* to a symbol name.
+            to appending "-open" to a symbol name. Adding 200 is
+            equivalent to appending "-dot" to a symbol name. Adding
+            300 is equivalent to appending "-open-dot" or "dot-
+            open" to a symbol name.
         symbolsrc
             Sets the source reference on plot.ly for  symbol .
 

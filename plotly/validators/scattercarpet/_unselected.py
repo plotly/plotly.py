@@ -17,6 +17,7 @@ class UnselectedValidator(_plotly_utils.basevalidators.CompoundValidator):
             textfont
                 plotly.graph_objs.scattercarpet.unselected.Text
                 font instance or dict with compatible
-                properties""",
+                properties
+""",
             **kwargs
         )

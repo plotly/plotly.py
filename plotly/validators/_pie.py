@@ -12,7 +12,7 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
-                selection events. Note that, *scatter* traces
+                selection events. Note that, "scatter" traces
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
@@ -48,7 +48,7 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 appears for all data points. If an array of
                 string, the items are mapped in order of this
                 trace's sectors. To be seen, trace `hoverinfo`
-                must contain a *text* flag.
+                must contain a "text" flag.
             hovertextsrc
                 Sets the source reference on plot.ly for
                 hovertext .
@@ -128,10 +128,10 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 with compatible properties
             text
                 Sets text elements associated with each sector.
-                If trace `textinfo` contains a *text* flag,
+                If trace `textinfo` contains a "text" flag,
                 these elements will seen on the chart. If trace
-                `hoverinfo` contains a *text* flag and
-                *hovertext* is not set, these elements will be
+                `hoverinfo` contains a "text" flag and
+                "hovertext" is not set, these elements will be
                 seen in the hover labels.
             textfont
                 Sets the font used for `textinfo`.
@@ -157,8 +157,9 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 values .
             visible
                 Determines whether or not this trace is
-                visible. If *legendonly*, the trace is not
+                visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
-                (provided that the legend itself is visible).""",
+                (provided that the legend itself is visible).
+""",
             **kwargs
         )

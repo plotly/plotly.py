@@ -149,24 +149,24 @@ class ColorBar(BaseTraceHierarchyType):
         """
         Sets the step in-between ticks on this axis. Use with `tick0`.
         Must be a positive number, or special strings available to
-        *log* and *date* axes. If the axis `type` is *log*, then ticks
+        "log" and "date" axes. If the axis `type` is "log", then ticks
         are set every 10^(n*dtick) where n is the tick number. For
         example, to set a tick mark at 1, 10, 100, 1000, ... set dtick
         to 1. To set tick marks at 1, 100, 10000, ... set dtick to 2.
         To set tick marks at 1, 5, 25, 125, 625, 3125, ... set dtick to
-        log_10(5), or 0.69897000433. *log* has several special values;
-        *L<f>*, where `f` is a positive number, gives ticks linearly
+        log_10(5), or 0.69897000433. "log" has several special values;
+        "L<f>", where `f` is a positive number, gives ticks linearly
         spaced in value (but not position). For example `tick0` = 0.1,
-        `dtick` = *L0.5* will put ticks at 0.1, 0.6, 1.1, 1.6 etc. To
-        show powers of 10 plus small digits between, use *D1* (all
-        digits) or *D2* (only 2 and 5). `tick0` is ignored for *D1* and
-        *D2*. If the axis `type` is *date*, then you must convert the
+        `dtick` = "L0.5" will put ticks at 0.1, 0.6, 1.1, 1.6 etc. To
+        show powers of 10 plus small digits between, use "D1" (all
+        digits) or "D2" (only 2 and 5). `tick0` is ignored for "D1" and
+        "D2". If the axis `type` is "date", then you must convert the
         time to milliseconds. For example, to set the interval between
-        ticks to one day, set `dtick` to 86400000.0. *date* also has
-        special values *M<n>* gives ticks spaced by a number of months.
+        ticks to one day, set `dtick` to 86400000.0. "date" also has
+        special values "M<n>" gives ticks spaced by a number of months.
         `n` must be a positive integer. To set ticks on the 15th of
-        every third month, set `tick0` to *2000-01-15* and `dtick` to
-        *M3*. To set ticks every 4 years, set `dtick` to *M48*
+        every third month, set `tick0` to "2000-01-15" and `dtick` to
+        "M3". To set ticks every 4 years, set `dtick` to "M48"
     
         The 'dtick' property accepts values of any type
 
@@ -186,10 +186,10 @@ class ColorBar(BaseTraceHierarchyType):
     def exponentformat(self):
         """
         Determines a formatting rule for the tick exponents. For
-        example, consider the number 1,000,000,000. If *none*, it
-        appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If
-        *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If
-        *B*, 1B.
+        example, consider the number 1,000,000,000. If "none", it
+        appears as 1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
+        "power", 1x10^9 (with 9 in a super script). If "SI", 1G. If
+        "B", 1B.
     
         The 'exponentformat' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -234,7 +234,7 @@ class ColorBar(BaseTraceHierarchyType):
         """
         Determines whether this color bar's length (i.e. the measure in
         the color variation direction) is set in units of plot
-        *fraction* or in *pixels. Use `len` to set the value.
+        "fraction" or in *pixels. Use `len` to set the value.
     
         The 'lenmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -258,7 +258,7 @@ class ColorBar(BaseTraceHierarchyType):
         Specifies the maximum number of ticks for the particular axis.
         The actual number of ticks will be chosen automatically to be
         less than or equal to `nticks`. Has an effect only if
-        `tickmode` is set to *auto*.
+        `tickmode` is set to "auto".
     
         The 'nticks' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
@@ -378,9 +378,9 @@ class ColorBar(BaseTraceHierarchyType):
     @property
     def showexponent(self):
         """
-        If *all*, all exponents are shown besides their significands.
-        If *first*, only the exponent of the first tick is shown. If
-        *last*, only the exponent of the last tick is shown. If *none*,
+        If "all", all exponents are shown besides their significands.
+        If "first", only the exponent of the first tick is shown. If
+        "last", only the exponent of the last tick is shown. If "none",
         no exponents appear.
     
         The 'showexponent' property is an enumeration that may be specified as:
@@ -422,10 +422,10 @@ class ColorBar(BaseTraceHierarchyType):
     @property
     def showtickprefix(self):
         """
-        If *all*, all tick labels are displayed with a prefix. If
-        *first*, only the first tick is displayed with a prefix. If
-        *last*, only the last tick is displayed with a suffix. If
-        *none*, tick prefixes are hidden.
+        If "all", all tick labels are displayed with a prefix. If
+        "first", only the first tick is displayed with a prefix. If
+        "last", only the last tick is displayed with a suffix. If
+        "none", tick prefixes are hidden.
     
         The 'showtickprefix' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -490,7 +490,7 @@ class ColorBar(BaseTraceHierarchyType):
         """
         Determines whether this color bar's thickness (i.e. the measure
         in the constant color direction) is set in units of plot
-        *fraction* or in *pixels*. Use `thickness` to set the value.
+        "fraction" or in "pixels". Use `thickness` to set the value.
     
         The 'thicknessmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -512,12 +512,12 @@ class ColorBar(BaseTraceHierarchyType):
     def tick0(self):
         """
         Sets the placement of the first tick on this axis. Use with
-        `dtick`. If the axis `type` is *log*, then you must take the
+        `dtick`. If the axis `type` is "log", then you must take the
         log of your starting tick (e.g. to set the starting tick to
         100, set the `tick0` to 2) except when `dtick`=*L<f>* (see
-        `dtick` for more info). If the axis `type` is *date*, it should
+        `dtick` for more info). If the axis `type` is "date", it should
         be a date string, like date data. If the axis `type` is
-        *category*, it should be a number, using the scale where each
+        "category", it should be a number, using the scale where each
         category is assigned a serial number from zero in the order it
         appears.
     
@@ -644,11 +644,11 @@ class ColorBar(BaseTraceHierarchyType):
                     system. The plotly service (at https://plot.ly
                     or on-premise) generates images on a server,
                     where only a select number of fonts are
-                    installed and supported. These include *Arial*,
-                    *Balto*, *Courier New*, *Droid Sans*,, *Droid
-                    Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
-                    Standard TT*, *Open Sans*, *Overpass*, *PT Sans
-                    Narrow*, *Raleway*, *Times New Roman*.
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
                 size
 
         Returns
@@ -672,9 +672,9 @@ class ColorBar(BaseTraceHierarchyType):
         E.md#locale_format And for dates see:
         https://github.com/d3/d3-time-
         format/blob/master/README.md#locale_format We add one item to
-        d3's date formatter: *%{n}f* for fractional seconds with n
+        d3's date formatter: "%{n}f" for fractional seconds with n
         digits. For example, *2016-10-13 09:15:23.456* with tickformat
-        *%H~%M~%S.%2f* would display *09~15~23.46*
+        "%H~%M~%S.%2f" would display "09~15~23.46"
     
         The 'tickformat' property is a string and must be specified as:
           - A string
@@ -704,10 +704,10 @@ class ColorBar(BaseTraceHierarchyType):
             Supported dict properties:
                 
                 dtickrange
-                    range [*min*, *max*], where *min*, *max* -
+                    range [*min*, *max*], where "min", "max" -
                     dtick values which describe some zoom level, it
-                    is possible to omit *min* or *max* value by
-                    passing *null*
+                    is possible to omit "min" or "max" value by
+                    passing "null"
                 enabled
                     Determines whether or not this stop is used. If
                     `false`, this stop is ignored even within its
@@ -735,7 +735,7 @@ class ColorBar(BaseTraceHierarchyType):
                     you explicitly show it with `visible: true`.
                 value
                     string - dtickformat for described zoom level,
-                    the same as *tickformat*
+                    the same as "tickformat"
 
         Returns
         -------
@@ -772,12 +772,12 @@ class ColorBar(BaseTraceHierarchyType):
     @property
     def tickmode(self):
         """
-        Sets the tick mode for this axis. If *auto*, the number of
-        ticks is set via `nticks`. If *linear*, the placement of the
+        Sets the tick mode for this axis. If "auto", the number of
+        ticks is set via `nticks`. If "linear", the placement of the
         ticks is determined by a starting position `tick0` and a tick
-        step `dtick` (*linear* is the default value if `tick0` and
-        `dtick` are provided). If *array*, the placement of the ticks
-        is set via `tickvals` and the tick text is `ticktext`. (*array*
+        step `dtick` ("linear" is the default value if `tick0` and
+        `dtick` are provided). If "array", the placement of the ticks
+        is set via `tickvals` and the tick text is `ticktext`. ("array"
         is the default value if `tickvals` is provided).
     
         The 'tickmode' property is an enumeration that may be specified as:
@@ -821,7 +821,7 @@ class ColorBar(BaseTraceHierarchyType):
     def ticks(self):
         """
         Determines whether ticks are drawn or not. If **, this axis'
-        ticks are not drawn. If *outside* (*inside*), this axis' are
+        ticks are not drawn. If "outside" ("inside"), this axis' are
         drawn outside (inside) the axis lines.
     
         The 'ticks' property is an enumeration that may be specified as:
@@ -865,7 +865,7 @@ class ColorBar(BaseTraceHierarchyType):
     def ticktext(self):
         """
         Sets the text displayed at the ticks position via `tickvals`.
-        Only has an effect if `tickmode` is set to *array*. Used with
+        Only has an effect if `tickmode` is set to "array". Used with
         `tickvals`.
     
         The 'ticktext' property is an array that may be specified as a tuple,
@@ -907,7 +907,7 @@ class ColorBar(BaseTraceHierarchyType):
     def tickvals(self):
         """
         Sets the values at which ticks on this axis appear. Only has an
-        effect if `tickmode` is set to *array*. Used with `ticktext`.
+        effect if `tickmode` is set to "array". Used with `ticktext`.
     
         The 'tickvals' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
@@ -1011,11 +1011,11 @@ class ColorBar(BaseTraceHierarchyType):
                     system. The plotly service (at https://plot.ly
                     or on-premise) generates images on a server,
                     where only a select number of fonts are
-                    installed and supported. These include *Arial*,
-                    *Balto*, *Courier New*, *Droid Sans*,, *Droid
-                    Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
-                    Standard TT*, *Open Sans*, *Overpass*, *PT Sans
-                    Narrow*, *Raleway*, *Times New Roman*.
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
                 size
 
         Returns
@@ -1076,7 +1076,7 @@ class ColorBar(BaseTraceHierarchyType):
     def xanchor(self):
         """
         Sets this color bar's horizontal position anchor. This anchor
-        binds the `x` position to the *left*, *center* or *right* of
+        binds the `x` position to the "left", "center" or "right" of
         the color bar.
     
         The 'xanchor' property is an enumeration that may be specified as:
@@ -1139,7 +1139,7 @@ class ColorBar(BaseTraceHierarchyType):
     def yanchor(self):
         """
         Sets this color bar's vertical position anchor This anchor
-        binds the `y` position to the *top*, *middle* or *bottom* of
+        binds the `y` position to the "top", "middle" or "bottom" of
         the color bar.
     
         The 'yanchor' property is an enumeration that may be specified as:
@@ -1197,33 +1197,33 @@ class ColorBar(BaseTraceHierarchyType):
         dtick
             Sets the step in-between ticks on this axis. Use with
             `tick0`. Must be a positive number, or special strings
-            available to *log* and *date* axes. If the axis `type`
-            is *log*, then ticks are set every 10^(n*dtick) where n
+            available to "log" and "date" axes. If the axis `type`
+            is "log", then ticks are set every 10^(n*dtick) where n
             is the tick number. For example, to set a tick mark at
             1, 10, 100, 1000, ... set dtick to 1. To set tick marks
             at 1, 100, 10000, ... set dtick to 2. To set tick marks
             at 1, 5, 25, 125, 625, 3125, ... set dtick to
-            log_10(5), or 0.69897000433. *log* has several special
-            values; *L<f>*, where `f` is a positive number, gives
+            log_10(5), or 0.69897000433. "log" has several special
+            values; "L<f>", where `f` is a positive number, gives
             ticks linearly spaced in value (but not position). For
-            example `tick0` = 0.1, `dtick` = *L0.5* will put ticks
+            example `tick0` = 0.1, `dtick` = "L0.5" will put ticks
             at 0.1, 0.6, 1.1, 1.6 etc. To show powers of 10 plus
-            small digits between, use *D1* (all digits) or *D2*
-            (only 2 and 5). `tick0` is ignored for *D1* and *D2*.
-            If the axis `type` is *date*, then you must convert the
+            small digits between, use "D1" (all digits) or "D2"
+            (only 2 and 5). `tick0` is ignored for "D1" and "D2".
+            If the axis `type` is "date", then you must convert the
             time to milliseconds. For example, to set the interval
             between ticks to one day, set `dtick` to 86400000.0.
-            *date* also has special values *M<n>* gives ticks
+            "date" also has special values "M<n>" gives ticks
             spaced by a number of months. `n` must be a positive
             integer. To set ticks on the 15th of every third month,
-            set `tick0` to *2000-01-15* and `dtick` to *M3*. To set
-            ticks every 4 years, set `dtick` to *M48*
+            set `tick0` to "2000-01-15" and `dtick` to "M3". To set
+            ticks every 4 years, set `dtick` to "M48"
         exponentformat
             Determines a formatting rule for the tick exponents.
             For example, consider the number 1,000,000,000. If
-            *none*, it appears as 1,000,000,000. If *e*, 1e+9. If
-            *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super
-            script). If *SI*, 1G. If *B*, 1B.
+            "none", it appears as 1,000,000,000. If "e", 1e+9. If
+            "E", 1E+9. If "power", 1x10^9 (with 9 in a super
+            script). If "SI", 1G. If "B", 1B.
         len
             Sets the length of the color bar This measure excludes
             the padding of both ends. That is, the color bar length
@@ -1231,14 +1231,14 @@ class ColorBar(BaseTraceHierarchyType):
         lenmode
             Determines whether this color bar's length (i.e. the
             measure in the color variation direction) is set in
-            units of plot *fraction* or in *pixels. Use `len` to
+            units of plot "fraction" or in *pixels. Use `len` to
             set the value.
         nticks
             Specifies the maximum number of ticks for the
             particular axis. The actual number of ticks will be
             chosen automatically to be less than or equal to
             `nticks`. Has an effect only if `tickmode` is set to
-            *auto*.
+            "auto".
         outlinecolor
             Sets the axis line color.
         outlinewidth
@@ -1246,17 +1246,17 @@ class ColorBar(BaseTraceHierarchyType):
         separatethousands
             If "true", even 4-digit integers are separated
         showexponent
-            If *all*, all exponents are shown besides their
-            significands. If *first*, only the exponent of the
-            first tick is shown. If *last*, only the exponent of
-            the last tick is shown. If *none*, no exponents appear.
+            If "all", all exponents are shown besides their
+            significands. If "first", only the exponent of the
+            first tick is shown. If "last", only the exponent of
+            the last tick is shown. If "none", no exponents appear.
         showticklabels
             Determines whether or not the tick labels are drawn.
         showtickprefix
-            If *all*, all tick labels are displayed with a prefix.
-            If *first*, only the first tick is displayed with a
-            prefix. If *last*, only the last tick is displayed with
-            a suffix. If *none*, tick prefixes are hidden.
+            If "all", all tick labels are displayed with a prefix.
+            If "first", only the first tick is displayed with a
+            prefix. If "last", only the last tick is displayed with
+            a suffix. If "none", tick prefixes are hidden.
         showticksuffix
             Same as `showtickprefix` but for tick suffixes.
         thickness
@@ -1265,16 +1265,16 @@ class ColorBar(BaseTraceHierarchyType):
         thicknessmode
             Determines whether this color bar's thickness (i.e. the
             measure in the constant color direction) is set in
-            units of plot *fraction* or in *pixels*. Use
+            units of plot "fraction" or in "pixels". Use
             `thickness` to set the value.
         tick0
             Sets the placement of the first tick on this axis. Use
-            with `dtick`. If the axis `type` is *log*, then you
+            with `dtick`. If the axis `type` is "log", then you
             must take the log of your starting tick (e.g. to set
             the starting tick to 100, set the `tick0` to 2) except
             when `dtick`=*L<f>* (see `dtick` for more info). If the
-            axis `type` is *date*, it should be a date string, like
-            date data. If the axis `type` is *category*, it should
+            axis `type` is "date", it should be a date string, like
+            date data. If the axis `type` is "category", it should
             be a number, using the scale where each category is
             assigned a serial number from zero in the order it
             appears.
@@ -1293,41 +1293,41 @@ class ColorBar(BaseTraceHierarchyType):
             at/blob/master/README.md#locale_format And for dates
             see: https://github.com/d3/d3-time-
             format/blob/master/README.md#locale_format We add one
-            item to d3's date formatter: *%{n}f* for fractional
+            item to d3's date formatter: "%{n}f" for fractional
             seconds with n digits. For example, *2016-10-13
-            09:15:23.456* with tickformat *%H~%M~%S.%2f* would
-            display *09~15~23.46*
+            09:15:23.456* with tickformat "%H~%M~%S.%2f" would
+            display "09~15~23.46"
         tickformatstops
             plotly.graph_objs.choropleth.colorbar.Tickformatstop
             instance or dict with compatible properties
         ticklen
             Sets the tick length (in px).
         tickmode
-            Sets the tick mode for this axis. If *auto*, the number
-            of ticks is set via `nticks`. If *linear*, the
+            Sets the tick mode for this axis. If "auto", the number
+            of ticks is set via `nticks`. If "linear", the
             placement of the ticks is determined by a starting
-            position `tick0` and a tick step `dtick` (*linear* is
+            position `tick0` and a tick step `dtick` ("linear" is
             the default value if `tick0` and `dtick` are provided).
-            If *array*, the placement of the ticks is set via
-            `tickvals` and the tick text is `ticktext`. (*array* is
+            If "array", the placement of the ticks is set via
+            `tickvals` and the tick text is `ticktext`. ("array" is
             the default value if `tickvals` is provided).
         tickprefix
             Sets a tick label prefix.
         ticks
             Determines whether ticks are drawn or not. If **, this
-            axis' ticks are not drawn. If *outside* (*inside*),
+            axis' ticks are not drawn. If "outside" ("inside"),
             this axis' are drawn outside (inside) the axis lines.
         ticksuffix
             Sets a tick label suffix.
         ticktext
             Sets the text displayed at the ticks position via
             `tickvals`. Only has an effect if `tickmode` is set to
-            *array*. Used with `tickvals`.
+            "array". Used with `tickvals`.
         ticktextsrc
             Sets the source reference on plot.ly for  ticktext .
         tickvals
             Sets the values at which ticks on this axis appear.
-            Only has an effect if `tickmode` is set to *array*.
+            Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
         tickvalssrc
             Sets the source reference on plot.ly for  tickvals .
@@ -1345,8 +1345,8 @@ class ColorBar(BaseTraceHierarchyType):
             fraction).
         xanchor
             Sets this color bar's horizontal position anchor. This
-            anchor binds the `x` position to the *left*, *center*
-            or *right* of the color bar.
+            anchor binds the `x` position to the "left", "center"
+            or "right" of the color bar.
         xpad
             Sets the amount of padding (in px) along the x
             direction.
@@ -1355,8 +1355,8 @@ class ColorBar(BaseTraceHierarchyType):
             fraction).
         yanchor
             Sets this color bar's vertical position anchor This
-            anchor binds the `y` position to the *top*, *middle* or
-            *bottom* of the color bar.
+            anchor binds the `y` position to the "top", "middle" or
+            "bottom" of the color bar.
         ypad
             Sets the amount of padding (in px) along the y
             direction.
@@ -1427,33 +1427,33 @@ class ColorBar(BaseTraceHierarchyType):
         dtick
             Sets the step in-between ticks on this axis. Use with
             `tick0`. Must be a positive number, or special strings
-            available to *log* and *date* axes. If the axis `type`
-            is *log*, then ticks are set every 10^(n*dtick) where n
+            available to "log" and "date" axes. If the axis `type`
+            is "log", then ticks are set every 10^(n*dtick) where n
             is the tick number. For example, to set a tick mark at
             1, 10, 100, 1000, ... set dtick to 1. To set tick marks
             at 1, 100, 10000, ... set dtick to 2. To set tick marks
             at 1, 5, 25, 125, 625, 3125, ... set dtick to
-            log_10(5), or 0.69897000433. *log* has several special
-            values; *L<f>*, where `f` is a positive number, gives
+            log_10(5), or 0.69897000433. "log" has several special
+            values; "L<f>", where `f` is a positive number, gives
             ticks linearly spaced in value (but not position). For
-            example `tick0` = 0.1, `dtick` = *L0.5* will put ticks
+            example `tick0` = 0.1, `dtick` = "L0.5" will put ticks
             at 0.1, 0.6, 1.1, 1.6 etc. To show powers of 10 plus
-            small digits between, use *D1* (all digits) or *D2*
-            (only 2 and 5). `tick0` is ignored for *D1* and *D2*.
-            If the axis `type` is *date*, then you must convert the
+            small digits between, use "D1" (all digits) or "D2"
+            (only 2 and 5). `tick0` is ignored for "D1" and "D2".
+            If the axis `type` is "date", then you must convert the
             time to milliseconds. For example, to set the interval
             between ticks to one day, set `dtick` to 86400000.0.
-            *date* also has special values *M<n>* gives ticks
+            "date" also has special values "M<n>" gives ticks
             spaced by a number of months. `n` must be a positive
             integer. To set ticks on the 15th of every third month,
-            set `tick0` to *2000-01-15* and `dtick` to *M3*. To set
-            ticks every 4 years, set `dtick` to *M48*
+            set `tick0` to "2000-01-15" and `dtick` to "M3". To set
+            ticks every 4 years, set `dtick` to "M48"
         exponentformat
             Determines a formatting rule for the tick exponents.
             For example, consider the number 1,000,000,000. If
-            *none*, it appears as 1,000,000,000. If *e*, 1e+9. If
-            *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super
-            script). If *SI*, 1G. If *B*, 1B.
+            "none", it appears as 1,000,000,000. If "e", 1e+9. If
+            "E", 1E+9. If "power", 1x10^9 (with 9 in a super
+            script). If "SI", 1G. If "B", 1B.
         len
             Sets the length of the color bar This measure excludes
             the padding of both ends. That is, the color bar length
@@ -1461,14 +1461,14 @@ class ColorBar(BaseTraceHierarchyType):
         lenmode
             Determines whether this color bar's length (i.e. the
             measure in the color variation direction) is set in
-            units of plot *fraction* or in *pixels. Use `len` to
+            units of plot "fraction" or in *pixels. Use `len` to
             set the value.
         nticks
             Specifies the maximum number of ticks for the
             particular axis. The actual number of ticks will be
             chosen automatically to be less than or equal to
             `nticks`. Has an effect only if `tickmode` is set to
-            *auto*.
+            "auto".
         outlinecolor
             Sets the axis line color.
         outlinewidth
@@ -1476,17 +1476,17 @@ class ColorBar(BaseTraceHierarchyType):
         separatethousands
             If "true", even 4-digit integers are separated
         showexponent
-            If *all*, all exponents are shown besides their
-            significands. If *first*, only the exponent of the
-            first tick is shown. If *last*, only the exponent of
-            the last tick is shown. If *none*, no exponents appear.
+            If "all", all exponents are shown besides their
+            significands. If "first", only the exponent of the
+            first tick is shown. If "last", only the exponent of
+            the last tick is shown. If "none", no exponents appear.
         showticklabels
             Determines whether or not the tick labels are drawn.
         showtickprefix
-            If *all*, all tick labels are displayed with a prefix.
-            If *first*, only the first tick is displayed with a
-            prefix. If *last*, only the last tick is displayed with
-            a suffix. If *none*, tick prefixes are hidden.
+            If "all", all tick labels are displayed with a prefix.
+            If "first", only the first tick is displayed with a
+            prefix. If "last", only the last tick is displayed with
+            a suffix. If "none", tick prefixes are hidden.
         showticksuffix
             Same as `showtickprefix` but for tick suffixes.
         thickness
@@ -1495,16 +1495,16 @@ class ColorBar(BaseTraceHierarchyType):
         thicknessmode
             Determines whether this color bar's thickness (i.e. the
             measure in the constant color direction) is set in
-            units of plot *fraction* or in *pixels*. Use
+            units of plot "fraction" or in "pixels". Use
             `thickness` to set the value.
         tick0
             Sets the placement of the first tick on this axis. Use
-            with `dtick`. If the axis `type` is *log*, then you
+            with `dtick`. If the axis `type` is "log", then you
             must take the log of your starting tick (e.g. to set
             the starting tick to 100, set the `tick0` to 2) except
             when `dtick`=*L<f>* (see `dtick` for more info). If the
-            axis `type` is *date*, it should be a date string, like
-            date data. If the axis `type` is *category*, it should
+            axis `type` is "date", it should be a date string, like
+            date data. If the axis `type` is "category", it should
             be a number, using the scale where each category is
             assigned a serial number from zero in the order it
             appears.
@@ -1523,41 +1523,41 @@ class ColorBar(BaseTraceHierarchyType):
             at/blob/master/README.md#locale_format And for dates
             see: https://github.com/d3/d3-time-
             format/blob/master/README.md#locale_format We add one
-            item to d3's date formatter: *%{n}f* for fractional
+            item to d3's date formatter: "%{n}f" for fractional
             seconds with n digits. For example, *2016-10-13
-            09:15:23.456* with tickformat *%H~%M~%S.%2f* would
-            display *09~15~23.46*
+            09:15:23.456* with tickformat "%H~%M~%S.%2f" would
+            display "09~15~23.46"
         tickformatstops
             plotly.graph_objs.choropleth.colorbar.Tickformatstop
             instance or dict with compatible properties
         ticklen
             Sets the tick length (in px).
         tickmode
-            Sets the tick mode for this axis. If *auto*, the number
-            of ticks is set via `nticks`. If *linear*, the
+            Sets the tick mode for this axis. If "auto", the number
+            of ticks is set via `nticks`. If "linear", the
             placement of the ticks is determined by a starting
-            position `tick0` and a tick step `dtick` (*linear* is
+            position `tick0` and a tick step `dtick` ("linear" is
             the default value if `tick0` and `dtick` are provided).
-            If *array*, the placement of the ticks is set via
-            `tickvals` and the tick text is `ticktext`. (*array* is
+            If "array", the placement of the ticks is set via
+            `tickvals` and the tick text is `ticktext`. ("array" is
             the default value if `tickvals` is provided).
         tickprefix
             Sets a tick label prefix.
         ticks
             Determines whether ticks are drawn or not. If **, this
-            axis' ticks are not drawn. If *outside* (*inside*),
+            axis' ticks are not drawn. If "outside" ("inside"),
             this axis' are drawn outside (inside) the axis lines.
         ticksuffix
             Sets a tick label suffix.
         ticktext
             Sets the text displayed at the ticks position via
             `tickvals`. Only has an effect if `tickmode` is set to
-            *array*. Used with `tickvals`.
+            "array". Used with `tickvals`.
         ticktextsrc
             Sets the source reference on plot.ly for  ticktext .
         tickvals
             Sets the values at which ticks on this axis appear.
-            Only has an effect if `tickmode` is set to *array*.
+            Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
         tickvalssrc
             Sets the source reference on plot.ly for  tickvals .
@@ -1575,8 +1575,8 @@ class ColorBar(BaseTraceHierarchyType):
             fraction).
         xanchor
             Sets this color bar's horizontal position anchor. This
-            anchor binds the `x` position to the *left*, *center*
-            or *right* of the color bar.
+            anchor binds the `x` position to the "left", "center"
+            or "right" of the color bar.
         xpad
             Sets the amount of padding (in px) along the x
             direction.
@@ -1585,8 +1585,8 @@ class ColorBar(BaseTraceHierarchyType):
             fraction).
         yanchor
             Sets this color bar's vertical position anchor This
-            anchor binds the `y` position to the *top*, *middle* or
-            *bottom* of the color bar.
+            anchor binds the `y` position to the "top", "middle" or
+            "bottom" of the color bar.
         ypad
             Sets the amount of padding (in px) along the y
             direction.

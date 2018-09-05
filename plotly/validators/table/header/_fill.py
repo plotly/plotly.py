@@ -16,6 +16,7 @@ class FillValidator(_plotly_utils.basevalidators.CompoundValidator):
                 specific color or an array of colors.
             colorsrc
                 Sets the source reference on plot.ly for  color
-                .""",
+                .
+""",
             **kwargs
         )

@@ -76,6 +76,7 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
             showscale
                 Determines whether or not a colorbar is
                 displayed for this trace. Has an effect only if
-                in `line.color`is set to a numerical array.""",
+                in `line.color`is set to a numerical array.
+""",
             **kwargs
         )

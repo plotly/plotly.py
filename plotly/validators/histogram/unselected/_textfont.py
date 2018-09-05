@@ -16,6 +16,7 @@ class TextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs="""
             color
                 Sets the text font color of unselected points,
-                applied only when a selection exists.""",
+                applied only when a selection exists.
+""",
             **kwargs
         )

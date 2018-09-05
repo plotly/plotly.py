@@ -16,6 +16,7 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
             opacity
                 Sets the marker opacity of selected points.
             size
-                Sets the marker size of selected points.""",
+                Sets the marker size of selected points.
+""",
             **kwargs
         )

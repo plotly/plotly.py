@@ -19,6 +19,7 @@ class MeanlineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 line is drawn from one side of the violin to
                 other.
             width
-                Sets the mean line width.""",
+                Sets the mean line width.
+""",
             **kwargs
         )

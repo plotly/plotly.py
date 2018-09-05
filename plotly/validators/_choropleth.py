@@ -37,7 +37,7 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
-                selection events. Note that, *scatter* traces
+                selection events. Note that, "scatter" traces
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
@@ -46,8 +46,8 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
             geo
                 Sets a reference between this trace's
                 geospatial coordinates and a geographic map. If
-                *geo* (the default value), the geospatial
-                coordinates refer to `layout.geo`. If *geo2*,
+                "geo" (the default value), the geospatial
+                coordinates refer to `layout.geo`. If "geo2",
                 the geospatial coordinates refer to
                 `layout.geo2`, and so on.
             hoverinfo
@@ -129,7 +129,7 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
                 instance or dict with compatible properties
             visible
                 Determines whether or not this trace is
-                visible. If *legendonly*, the trace is not
+                visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
             z
@@ -149,6 +149,7 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
                 should have the same units as in `z` and if
                 set, `zmax` must be set as well.
             zsrc
-                Sets the source reference on plot.ly for  z .""",
+                Sets the source reference on plot.ly for  z .
+""",
             **kwargs
         )

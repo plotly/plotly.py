@@ -53,7 +53,7 @@ class Aaxis(BaseTraceHierarchyType):
         """
         Determines whether or not the range of this axis is computed in
         relation to the input data. See `rangemode` for more info. If
-        `range` is provided, then `autorange` is set to *false*.
+        `range` is provided, then `autorange` is set to False.
     
         The 'autorange' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -75,7 +75,7 @@ class Aaxis(BaseTraceHierarchyType):
     def categoryarray(self):
         """
         Sets the order in which categories on this axis appear. Only
-        has an effect if `categoryorder` is set to *array*. Used with
+        has an effect if `categoryorder` is set to "array". Used with
         `categoryorder`.
     
         The 'categoryarray' property is an array that may be specified as a tuple,
@@ -117,14 +117,14 @@ class Aaxis(BaseTraceHierarchyType):
     def categoryorder(self):
         """
         Specifies the ordering logic for the case of categorical
-        variables. By default, plotly uses *trace*, which specifies the
+        variables. By default, plotly uses "trace", which specifies the
         order that is present in the data supplied. Set `categoryorder`
         to *category ascending* or *category descending* if order
         should be determined by the alphanumerical order of the
-        category names. Set `categoryorder` to *array* to derive the
+        category names. Set `categoryorder` to "array" to derive the
         ordering from the attribute `categoryarray`. If a category is
         not found in the `categoryarray` array, the sorting behavior
-        for that attribute will be identical to the *trace* mode. The
+        for that attribute will be identical to the "trace" mode. The
         unspecified categories will follow the categories in
         `categoryarray`.
     
@@ -250,7 +250,7 @@ class Aaxis(BaseTraceHierarchyType):
     def endline(self):
         """
         Determines whether or not a line is drawn at along the final
-        value of this axis. If *true*, the end line is drawn on top of
+        value of this axis. If True, the end line is drawn on top of
         the grid lines.
     
         The 'endline' property must be specified as a bool
@@ -351,10 +351,10 @@ class Aaxis(BaseTraceHierarchyType):
     def exponentformat(self):
         """
         Determines a formatting rule for the tick exponents. For
-        example, consider the number 1,000,000,000. If *none*, it
-        appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If
-        *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If
-        *B*, 1B.
+        example, consider the number 1,000,000,000. If "none", it
+        appears as 1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
+        "power", 1x10^9 (with 9 in a super script). If "SI", 1G. If
+        "B", 1B.
     
         The 'exponentformat' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -719,7 +719,7 @@ class Aaxis(BaseTraceHierarchyType):
         Specifies the maximum number of ticks for the particular axis.
         The actual number of ticks will be chosen automatically to be
         less than or equal to `nticks`. Has an effect only if
-        `tickmode` is set to *auto*.
+        `tickmode` is set to "auto".
     
         The 'nticks' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
@@ -740,12 +740,12 @@ class Aaxis(BaseTraceHierarchyType):
     @property
     def range(self):
         """
-        Sets the range of this axis. If the axis `type` is *log*, then
+        Sets the range of this axis. If the axis `type` is "log", then
         you must take the log of your desired range (e.g. to set the
         range from 1 to 100, set the range from 0 to 2). If the axis
-        `type` is *date*, it should be date strings, like date data,
+        `type` is "date", it should be date strings, like date data,
         though Date objects and unix milliseconds will be accepted and
-        converted to strings. If the axis `type` is *category*, it
+        converted to strings. If the axis `type` is "category", it
         should be numbers, using the scale where each category is
         assigned a serial number from zero in the order it appears.
     
@@ -770,9 +770,9 @@ class Aaxis(BaseTraceHierarchyType):
     @property
     def rangemode(self):
         """
-        If *normal*, the range is computed in relation to the extrema
+        If "normal", the range is computed in relation to the extrema
         of the input data. If *tozero*`, the range extends to 0,
-        regardless of the input data If *nonnegative*, the range is
+        regardless of the input data If "nonnegative", the range is
         non-negative, regardless of the input data.
     
         The 'rangemode' property is an enumeration that may be specified as:
@@ -814,9 +814,9 @@ class Aaxis(BaseTraceHierarchyType):
     @property
     def showexponent(self):
         """
-        If *all*, all exponents are shown besides their significands.
-        If *first*, only the exponent of the first tick is shown. If
-        *last*, only the exponent of the last tick is shown. If *none*,
+        If "all", all exponents are shown besides their significands.
+        If "first", only the exponent of the first tick is shown. If
+        "last", only the exponent of the last tick is shown. If "none",
         no exponents appear.
     
         The 'showexponent' property is an enumeration that may be specified as:
@@ -838,7 +838,7 @@ class Aaxis(BaseTraceHierarchyType):
     @property
     def showgrid(self):
         """
-        Determines whether or not grid lines are drawn. If *true*, the
+        Determines whether or not grid lines are drawn. If True, the
         grid lines are drawn at every tick mark.
     
         The 'showgrid' property must be specified as a bool
@@ -901,10 +901,10 @@ class Aaxis(BaseTraceHierarchyType):
     @property
     def showtickprefix(self):
         """
-        If *all*, all tick labels are displayed with a prefix. If
-        *first*, only the first tick is displayed with a prefix. If
-        *last*, only the last tick is displayed with a suffix. If
-        *none*, tick prefixes are hidden.
+        If "all", all tick labels are displayed with a prefix. If
+        "first", only the first tick is displayed with a prefix. If
+        "last", only the last tick is displayed with a suffix. If
+        "none", tick prefixes are hidden.
     
         The 'showtickprefix' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -965,8 +965,8 @@ class Aaxis(BaseTraceHierarchyType):
     def startline(self):
         """
         Determines whether or not a line is drawn at along the starting
-        value of this axis. If *true*, the start line is drawn on top
-        of the grid lines.
+        value of this axis. If True, the start line is drawn on top of
+        the grid lines.
     
         The 'startline' property must be specified as a bool
         (either True, or False)
@@ -1132,11 +1132,11 @@ class Aaxis(BaseTraceHierarchyType):
                     system. The plotly service (at https://plot.ly
                     or on-premise) generates images on a server,
                     where only a select number of fonts are
-                    installed and supported. These include *Arial*,
-                    *Balto*, *Courier New*, *Droid Sans*,, *Droid
-                    Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
-                    Standard TT*, *Open Sans*, *Overpass*, *PT Sans
-                    Narrow*, *Raleway*, *Times New Roman*.
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
                 size
 
         Returns
@@ -1160,9 +1160,9 @@ class Aaxis(BaseTraceHierarchyType):
         E.md#locale_format And for dates see:
         https://github.com/d3/d3-time-
         format/blob/master/README.md#locale_format We add one item to
-        d3's date formatter: *%{n}f* for fractional seconds with n
+        d3's date formatter: "%{n}f" for fractional seconds with n
         digits. For example, *2016-10-13 09:15:23.456* with tickformat
-        *%H~%M~%S.%2f* would display *09~15~23.46*
+        "%H~%M~%S.%2f" would display "09~15~23.46"
     
         The 'tickformat' property is a string and must be specified as:
           - A string
@@ -1192,10 +1192,10 @@ class Aaxis(BaseTraceHierarchyType):
             Supported dict properties:
                 
                 dtickrange
-                    range [*min*, *max*], where *min*, *max* -
+                    range [*min*, *max*], where "min", "max" -
                     dtick values which describe some zoom level, it
-                    is possible to omit *min* or *max* value by
-                    passing *null*
+                    is possible to omit "min" or "max" value by
+                    passing "null"
                 enabled
                     Determines whether or not this stop is used. If
                     `false`, this stop is ignored even within its
@@ -1223,7 +1223,7 @@ class Aaxis(BaseTraceHierarchyType):
                     you explicitly show it with `visible: true`.
                 value
                     string - dtickformat for described zoom level,
-                    the same as *tickformat*
+                    the same as "tickformat"
 
         Returns
         -------
@@ -1302,7 +1302,7 @@ class Aaxis(BaseTraceHierarchyType):
     def ticktext(self):
         """
         Sets the text displayed at the ticks position via `tickvals`.
-        Only has an effect if `tickmode` is set to *array*. Used with
+        Only has an effect if `tickmode` is set to "array". Used with
         `tickvals`.
     
         The 'ticktext' property is an array that may be specified as a tuple,
@@ -1344,7 +1344,7 @@ class Aaxis(BaseTraceHierarchyType):
     def tickvals(self):
         """
         Sets the values at which ticks on this axis appear. Only has an
-        effect if `tickmode` is set to *array*. Used with `ticktext`.
+        effect if `tickmode` is set to "array". Used with `ticktext`.
     
         The 'tickvals' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
@@ -1428,11 +1428,11 @@ class Aaxis(BaseTraceHierarchyType):
                     system. The plotly service (at https://plot.ly
                     or on-premise) generates images on a server,
                     where only a select number of fonts are
-                    installed and supported. These include *Arial*,
-                    *Balto*, *Courier New*, *Droid Sans*,, *Droid
-                    Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
-                    Standard TT*, *Open Sans*, *Overpass*, *PT Sans
-                    Narrow*, *Raleway*, *Times New Roman*.
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
                 size
 
         Returns
@@ -1508,26 +1508,26 @@ class Aaxis(BaseTraceHierarchyType):
             Determines whether or not the range of this axis is
             computed in relation to the input data. See `rangemode`
             for more info. If `range` is provided, then `autorange`
-            is set to *false*.
+            is set to False.
         categoryarray
             Sets the order in which categories on this axis appear.
             Only has an effect if `categoryorder` is set to
-            *array*. Used with `categoryorder`.
+            "array". Used with `categoryorder`.
         categoryarraysrc
             Sets the source reference on plot.ly for  categoryarray
             .
         categoryorder
             Specifies the ordering logic for the case of
-            categorical variables. By default, plotly uses *trace*,
+            categorical variables. By default, plotly uses "trace",
             which specifies the order that is present in the data
             supplied. Set `categoryorder` to *category ascending*
             or *category descending* if order should be determined
             by the alphanumerical order of the category names. Set
-            `categoryorder` to *array* to derive the ordering from
+            `categoryorder` to "array" to derive the ordering from
             the attribute `categoryarray`. If a category is not
             found in the `categoryarray` array, the sorting
             behavior for that attribute will be identical to the
-            *trace* mode. The unspecified categories will follow
+            "trace" mode. The unspecified categories will follow
             the categories in `categoryarray`.
         cheatertype
 
@@ -1540,7 +1540,7 @@ class Aaxis(BaseTraceHierarchyType):
             The stride between grid lines along the axis
         endline
             Determines whether or not a line is drawn at along the
-            final value of this axis. If *true*, the end line is
+            final value of this axis. If True, the end line is
             drawn on top of the grid lines.
         endlinecolor
             Sets the line color of the end line.
@@ -1549,9 +1549,9 @@ class Aaxis(BaseTraceHierarchyType):
         exponentformat
             Determines a formatting rule for the tick exponents.
             For example, consider the number 1,000,000,000. If
-            *none*, it appears as 1,000,000,000. If *e*, 1e+9. If
-            *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super
-            script). If *SI*, 1G. If *B*, 1B.
+            "none", it appears as 1,000,000,000. If "e", 1e+9. If
+            "E", 1E+9. If "power", 1x10^9 (with 9 in a super
+            script). If "SI", 1G. If "B", 1B.
         fixedrange
             Determines whether or not this axis is zoom-able. If
             true, then zoom is disabled.
@@ -1580,34 +1580,34 @@ class Aaxis(BaseTraceHierarchyType):
             particular axis. The actual number of ticks will be
             chosen automatically to be less than or equal to
             `nticks`. Has an effect only if `tickmode` is set to
-            *auto*.
+            "auto".
         range
             Sets the range of this axis. If the axis `type` is
-            *log*, then you must take the log of your desired range
+            "log", then you must take the log of your desired range
             (e.g. to set the range from 1 to 100, set the range
-            from 0 to 2). If the axis `type` is *date*, it should
+            from 0 to 2). If the axis `type` is "date", it should
             be date strings, like date data, though Date objects
             and unix milliseconds will be accepted and converted to
-            strings. If the axis `type` is *category*, it should be
+            strings. If the axis `type` is "category", it should be
             numbers, using the scale where each category is
             assigned a serial number from zero in the order it
             appears.
         rangemode
-            If *normal*, the range is computed in relation to the
+            If "normal", the range is computed in relation to the
             extrema of the input data. If *tozero*`, the range
             extends to 0, regardless of the input data If
-            *nonnegative*, the range is non-negative, regardless of
+            "nonnegative", the range is non-negative, regardless of
             the input data.
         separatethousands
             If "true", even 4-digit integers are separated
         showexponent
-            If *all*, all exponents are shown besides their
-            significands. If *first*, only the exponent of the
-            first tick is shown. If *last*, only the exponent of
-            the last tick is shown. If *none*, no exponents appear.
+            If "all", all exponents are shown besides their
+            significands. If "first", only the exponent of the
+            first tick is shown. If "last", only the exponent of
+            the last tick is shown. If "none", no exponents appear.
         showgrid
             Determines whether or not grid lines are drawn. If
-            *true*, the grid lines are drawn at every tick mark.
+            True, the grid lines are drawn at every tick mark.
         showline
             Determines whether or not a line bounding this axis is
             drawn.
@@ -1615,18 +1615,18 @@ class Aaxis(BaseTraceHierarchyType):
             Determines whether axis labels are drawn on the low
             side, the high side, both, or neither side of the axis.
         showtickprefix
-            If *all*, all tick labels are displayed with a prefix.
-            If *first*, only the first tick is displayed with a
-            prefix. If *last*, only the last tick is displayed with
-            a suffix. If *none*, tick prefixes are hidden.
+            If "all", all tick labels are displayed with a prefix.
+            If "first", only the first tick is displayed with a
+            prefix. If "last", only the last tick is displayed with
+            a suffix. If "none", tick prefixes are hidden.
         showticksuffix
             Same as `showtickprefix` but for tick suffixes.
         smoothing
 
         startline
             Determines whether or not a line is drawn at along the
-            starting value of this axis. If *true*, the start line
-            is drawn on top of the grid lines.
+            starting value of this axis. If True, the start line is
+            drawn on top of the grid lines.
         startlinecolor
             Sets the line color of the start line.
         startlinewidth
@@ -1646,10 +1646,10 @@ class Aaxis(BaseTraceHierarchyType):
             at/blob/master/README.md#locale_format And for dates
             see: https://github.com/d3/d3-time-
             format/blob/master/README.md#locale_format We add one
-            item to d3's date formatter: *%{n}f* for fractional
+            item to d3's date formatter: "%{n}f" for fractional
             seconds with n digits. For example, *2016-10-13
-            09:15:23.456* with tickformat *%H~%M~%S.%2f* would
-            display *09~15~23.46*
+            09:15:23.456* with tickformat "%H~%M~%S.%2f" would
+            display "09~15~23.46"
         tickformatstops
             plotly.graph_objs.carpet.aaxis.Tickformatstop instance
             or dict with compatible properties
@@ -1662,12 +1662,12 @@ class Aaxis(BaseTraceHierarchyType):
         ticktext
             Sets the text displayed at the ticks position via
             `tickvals`. Only has an effect if `tickmode` is set to
-            *array*. Used with `tickvals`.
+            "array". Used with `tickvals`.
         ticktextsrc
             Sets the source reference on plot.ly for  ticktext .
         tickvals
             Sets the values at which ticks on this axis appear.
-            Only has an effect if `tickmode` is set to *array*.
+            Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
         tickvalssrc
             Sets the source reference on plot.ly for  tickvals .
@@ -1759,26 +1759,26 @@ class Aaxis(BaseTraceHierarchyType):
             Determines whether or not the range of this axis is
             computed in relation to the input data. See `rangemode`
             for more info. If `range` is provided, then `autorange`
-            is set to *false*.
+            is set to False.
         categoryarray
             Sets the order in which categories on this axis appear.
             Only has an effect if `categoryorder` is set to
-            *array*. Used with `categoryorder`.
+            "array". Used with `categoryorder`.
         categoryarraysrc
             Sets the source reference on plot.ly for  categoryarray
             .
         categoryorder
             Specifies the ordering logic for the case of
-            categorical variables. By default, plotly uses *trace*,
+            categorical variables. By default, plotly uses "trace",
             which specifies the order that is present in the data
             supplied. Set `categoryorder` to *category ascending*
             or *category descending* if order should be determined
             by the alphanumerical order of the category names. Set
-            `categoryorder` to *array* to derive the ordering from
+            `categoryorder` to "array" to derive the ordering from
             the attribute `categoryarray`. If a category is not
             found in the `categoryarray` array, the sorting
             behavior for that attribute will be identical to the
-            *trace* mode. The unspecified categories will follow
+            "trace" mode. The unspecified categories will follow
             the categories in `categoryarray`.
         cheatertype
 
@@ -1791,7 +1791,7 @@ class Aaxis(BaseTraceHierarchyType):
             The stride between grid lines along the axis
         endline
             Determines whether or not a line is drawn at along the
-            final value of this axis. If *true*, the end line is
+            final value of this axis. If True, the end line is
             drawn on top of the grid lines.
         endlinecolor
             Sets the line color of the end line.
@@ -1800,9 +1800,9 @@ class Aaxis(BaseTraceHierarchyType):
         exponentformat
             Determines a formatting rule for the tick exponents.
             For example, consider the number 1,000,000,000. If
-            *none*, it appears as 1,000,000,000. If *e*, 1e+9. If
-            *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super
-            script). If *SI*, 1G. If *B*, 1B.
+            "none", it appears as 1,000,000,000. If "e", 1e+9. If
+            "E", 1E+9. If "power", 1x10^9 (with 9 in a super
+            script). If "SI", 1G. If "B", 1B.
         fixedrange
             Determines whether or not this axis is zoom-able. If
             true, then zoom is disabled.
@@ -1831,34 +1831,34 @@ class Aaxis(BaseTraceHierarchyType):
             particular axis. The actual number of ticks will be
             chosen automatically to be less than or equal to
             `nticks`. Has an effect only if `tickmode` is set to
-            *auto*.
+            "auto".
         range
             Sets the range of this axis. If the axis `type` is
-            *log*, then you must take the log of your desired range
+            "log", then you must take the log of your desired range
             (e.g. to set the range from 1 to 100, set the range
-            from 0 to 2). If the axis `type` is *date*, it should
+            from 0 to 2). If the axis `type` is "date", it should
             be date strings, like date data, though Date objects
             and unix milliseconds will be accepted and converted to
-            strings. If the axis `type` is *category*, it should be
+            strings. If the axis `type` is "category", it should be
             numbers, using the scale where each category is
             assigned a serial number from zero in the order it
             appears.
         rangemode
-            If *normal*, the range is computed in relation to the
+            If "normal", the range is computed in relation to the
             extrema of the input data. If *tozero*`, the range
             extends to 0, regardless of the input data If
-            *nonnegative*, the range is non-negative, regardless of
+            "nonnegative", the range is non-negative, regardless of
             the input data.
         separatethousands
             If "true", even 4-digit integers are separated
         showexponent
-            If *all*, all exponents are shown besides their
-            significands. If *first*, only the exponent of the
-            first tick is shown. If *last*, only the exponent of
-            the last tick is shown. If *none*, no exponents appear.
+            If "all", all exponents are shown besides their
+            significands. If "first", only the exponent of the
+            first tick is shown. If "last", only the exponent of
+            the last tick is shown. If "none", no exponents appear.
         showgrid
             Determines whether or not grid lines are drawn. If
-            *true*, the grid lines are drawn at every tick mark.
+            True, the grid lines are drawn at every tick mark.
         showline
             Determines whether or not a line bounding this axis is
             drawn.
@@ -1866,18 +1866,18 @@ class Aaxis(BaseTraceHierarchyType):
             Determines whether axis labels are drawn on the low
             side, the high side, both, or neither side of the axis.
         showtickprefix
-            If *all*, all tick labels are displayed with a prefix.
-            If *first*, only the first tick is displayed with a
-            prefix. If *last*, only the last tick is displayed with
-            a suffix. If *none*, tick prefixes are hidden.
+            If "all", all tick labels are displayed with a prefix.
+            If "first", only the first tick is displayed with a
+            prefix. If "last", only the last tick is displayed with
+            a suffix. If "none", tick prefixes are hidden.
         showticksuffix
             Same as `showtickprefix` but for tick suffixes.
         smoothing
 
         startline
             Determines whether or not a line is drawn at along the
-            starting value of this axis. If *true*, the start line
-            is drawn on top of the grid lines.
+            starting value of this axis. If True, the start line is
+            drawn on top of the grid lines.
         startlinecolor
             Sets the line color of the start line.
         startlinewidth
@@ -1897,10 +1897,10 @@ class Aaxis(BaseTraceHierarchyType):
             at/blob/master/README.md#locale_format And for dates
             see: https://github.com/d3/d3-time-
             format/blob/master/README.md#locale_format We add one
-            item to d3's date formatter: *%{n}f* for fractional
+            item to d3's date formatter: "%{n}f" for fractional
             seconds with n digits. For example, *2016-10-13
-            09:15:23.456* with tickformat *%H~%M~%S.%2f* would
-            display *09~15~23.46*
+            09:15:23.456* with tickformat "%H~%M~%S.%2f" would
+            display "09~15~23.46"
         tickformatstops
             plotly.graph_objs.carpet.aaxis.Tickformatstop instance
             or dict with compatible properties
@@ -1913,12 +1913,12 @@ class Aaxis(BaseTraceHierarchyType):
         ticktext
             Sets the text displayed at the ticks position via
             `tickvals`. Only has an effect if `tickmode` is set to
-            *array*. Used with `tickvals`.
+            "array". Used with `tickvals`.
         ticktextsrc
             Sets the source reference on plot.ly for  ticktext .
         tickvals
             Sets the values at which ticks on this axis appear.
-            Only has an effect if `tickmode` is set to *array*.
+            Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
         tickvalssrc
             Sets the source reference on plot.ly for  tickvals .

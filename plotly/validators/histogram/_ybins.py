@@ -14,6 +14,7 @@ class YBinsValidator(_plotly_utils.basevalidators.CompoundValidator):
             size
                 Sets the step in-between value each y axis bin.
             start
-                Sets the starting value for the y axis bins.""",
+                Sets the starting value for the y axis bins.
+""",
             **kwargs
         )

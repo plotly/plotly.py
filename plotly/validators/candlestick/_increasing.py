@@ -18,6 +18,7 @@ class IncreasingValidator(_plotly_utils.basevalidators.CompoundValidator):
                 available.
             line
                 plotly.graph_objs.candlestick.increasing.Line
-                instance or dict with compatible properties""",
+                instance or dict with compatible properties
+""",
             **kwargs
         )

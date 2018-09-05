@@ -67,28 +67,28 @@ class Carpet(BaseTraceType):
                     Determines whether or not the range of this
                     axis is computed in relation to the input data.
                     See `rangemode` for more info. If `range` is
-                    provided, then `autorange` is set to *false*.
+                    provided, then `autorange` is set to False.
                 categoryarray
                     Sets the order in which categories on this axis
                     appear. Only has an effect if `categoryorder`
-                    is set to *array*. Used with `categoryorder`.
+                    is set to "array". Used with `categoryorder`.
                 categoryarraysrc
                     Sets the source reference on plot.ly for
                     categoryarray .
                 categoryorder
                     Specifies the ordering logic for the case of
                     categorical variables. By default, plotly uses
-                    *trace*, which specifies the order that is
+                    "trace", which specifies the order that is
                     present in the data supplied. Set
                     `categoryorder` to *category ascending* or
                     *category descending* if order should be
                     determined by the alphanumerical order of the
-                    category names. Set `categoryorder` to *array*
+                    category names. Set `categoryorder` to "array"
                     to derive the ordering from the attribute
                     `categoryarray`. If a category is not found in
                     the `categoryarray` array, the sorting behavior
                     for that attribute will be identical to the
-                    *trace* mode. The unspecified categories will
+                    "trace" mode. The unspecified categories will
                     follow the categories in `categoryarray`.
                 cheatertype
     
@@ -102,7 +102,7 @@ class Carpet(BaseTraceType):
                     The stride between grid lines along the axis
                 endline
                     Determines whether or not a line is drawn at
-                    along the final value of this axis. If *true*,
+                    along the final value of this axis. If True,
                     the end line is drawn on top of the grid lines.
                 endlinecolor
                     Sets the line color of the end line.
@@ -111,10 +111,10 @@ class Carpet(BaseTraceType):
                 exponentformat
                     Determines a formatting rule for the tick
                     exponents. For example, consider the number
-                    1,000,000,000. If *none*, it appears as
-                    1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If
-                    *power*, 1x10^9 (with 9 in a super script). If
-                    *SI*, 1G. If *B*, 1B.
+                    1,000,000,000. If "none", it appears as
+                    1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
+                    "power", 1x10^9 (with 9 in a super script). If
+                    "SI", 1G. If "B", 1B.
                 fixedrange
                     Determines whether or not this axis is zoom-
                     able. If true, then zoom is disabled.
@@ -144,37 +144,37 @@ class Carpet(BaseTraceType):
                     particular axis. The actual number of ticks
                     will be chosen automatically to be less than or
                     equal to `nticks`. Has an effect only if
-                    `tickmode` is set to *auto*.
+                    `tickmode` is set to "auto".
                 range
                     Sets the range of this axis. If the axis `type`
-                    is *log*, then you must take the log of your
+                    is "log", then you must take the log of your
                     desired range (e.g. to set the range from 1 to
                     100, set the range from 0 to 2). If the axis
-                    `type` is *date*, it should be date strings,
+                    `type` is "date", it should be date strings,
                     like date data, though Date objects and unix
                     milliseconds will be accepted and converted to
-                    strings. If the axis `type` is *category*, it
+                    strings. If the axis `type` is "category", it
                     should be numbers, using the scale where each
                     category is assigned a serial number from zero
                     in the order it appears.
                 rangemode
-                    If *normal*, the range is computed in relation
+                    If "normal", the range is computed in relation
                     to the extrema of the input data. If *tozero*`,
                     the range extends to 0, regardless of the input
-                    data If *nonnegative*, the range is non-
+                    data If "nonnegative", the range is non-
                     negative, regardless of the input data.
                 separatethousands
                     If "true", even 4-digit integers are separated
                 showexponent
-                    If *all*, all exponents are shown besides their
-                    significands. If *first*, only the exponent of
-                    the first tick is shown. If *last*, only the
-                    exponent of the last tick is shown. If *none*,
+                    If "all", all exponents are shown besides their
+                    significands. If "first", only the exponent of
+                    the first tick is shown. If "last", only the
+                    exponent of the last tick is shown. If "none",
                     no exponents appear.
                 showgrid
                     Determines whether or not grid lines are drawn.
-                    If *true*, the grid lines are drawn at every
-                    tick mark.
+                    If True, the grid lines are drawn at every tick
+                    mark.
                 showline
                     Determines whether or not a line bounding this
                     axis is drawn.
@@ -183,20 +183,20 @@ class Carpet(BaseTraceType):
                     low side, the high side, both, or neither side
                     of the axis.
                 showtickprefix
-                    If *all*, all tick labels are displayed with a
-                    prefix. If *first*, only the first tick is
-                    displayed with a prefix. If *last*, only the
+                    If "all", all tick labels are displayed with a
+                    prefix. If "first", only the first tick is
+                    displayed with a prefix. If "last", only the
                     last tick is displayed with a suffix. If
-                    *none*, tick prefixes are hidden.
+                    "none", tick prefixes are hidden.
                 showticksuffix
                     Same as `showtickprefix` but for tick suffixes.
                 smoothing
     
                 startline
                     Determines whether or not a line is drawn at
-                    along the starting value of this axis. If
-                    *true*, the start line is drawn on top of the
-                    grid lines.
+                    along the starting value of this axis. If True,
+                    the start line is drawn on top of the grid
+                    lines.
                 startlinecolor
                     Sets the line color of the start line.
                 startlinewidth
@@ -217,11 +217,11 @@ class Carpet(BaseTraceType):
                     ME.md#locale_format And for dates see:
                     https://github.com/d3/d3-time-
                     format/blob/master/README.md#locale_format We
-                    add one item to d3's date formatter: *%{n}f*
+                    add one item to d3's date formatter: "%{n}f"
                     for fractional seconds with n digits. For
                     example, *2016-10-13 09:15:23.456* with
-                    tickformat *%H~%M~%S.%2f* would display
-                    *09~15~23.46*
+                    tickformat "%H~%M~%S.%2f" would display
+                    "09~15~23.46"
                 tickformatstops
                     plotly.graph_objs.carpet.aaxis.Tickformatstop
                     instance or dict with compatible properties
@@ -234,7 +234,7 @@ class Carpet(BaseTraceType):
                 ticktext
                     Sets the text displayed at the ticks position
                     via `tickvals`. Only has an effect if
-                    `tickmode` is set to *array*. Used with
+                    `tickmode` is set to "array". Used with
                     `tickvals`.
                 ticktextsrc
                     Sets the source reference on plot.ly for
@@ -242,7 +242,7 @@ class Carpet(BaseTraceType):
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
-                    to *array*. Used with `ticktext`.
+                    to "array". Used with `ticktext`.
                 tickvalssrc
                     Sets the source reference on plot.ly for
                     tickvals .
@@ -352,28 +352,28 @@ class Carpet(BaseTraceType):
                     Determines whether or not the range of this
                     axis is computed in relation to the input data.
                     See `rangemode` for more info. If `range` is
-                    provided, then `autorange` is set to *false*.
+                    provided, then `autorange` is set to False.
                 categoryarray
                     Sets the order in which categories on this axis
                     appear. Only has an effect if `categoryorder`
-                    is set to *array*. Used with `categoryorder`.
+                    is set to "array". Used with `categoryorder`.
                 categoryarraysrc
                     Sets the source reference on plot.ly for
                     categoryarray .
                 categoryorder
                     Specifies the ordering logic for the case of
                     categorical variables. By default, plotly uses
-                    *trace*, which specifies the order that is
+                    "trace", which specifies the order that is
                     present in the data supplied. Set
                     `categoryorder` to *category ascending* or
                     *category descending* if order should be
                     determined by the alphanumerical order of the
-                    category names. Set `categoryorder` to *array*
+                    category names. Set `categoryorder` to "array"
                     to derive the ordering from the attribute
                     `categoryarray`. If a category is not found in
                     the `categoryarray` array, the sorting behavior
                     for that attribute will be identical to the
-                    *trace* mode. The unspecified categories will
+                    "trace" mode. The unspecified categories will
                     follow the categories in `categoryarray`.
                 cheatertype
     
@@ -387,7 +387,7 @@ class Carpet(BaseTraceType):
                     The stride between grid lines along the axis
                 endline
                     Determines whether or not a line is drawn at
-                    along the final value of this axis. If *true*,
+                    along the final value of this axis. If True,
                     the end line is drawn on top of the grid lines.
                 endlinecolor
                     Sets the line color of the end line.
@@ -396,10 +396,10 @@ class Carpet(BaseTraceType):
                 exponentformat
                     Determines a formatting rule for the tick
                     exponents. For example, consider the number
-                    1,000,000,000. If *none*, it appears as
-                    1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If
-                    *power*, 1x10^9 (with 9 in a super script). If
-                    *SI*, 1G. If *B*, 1B.
+                    1,000,000,000. If "none", it appears as
+                    1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
+                    "power", 1x10^9 (with 9 in a super script). If
+                    "SI", 1G. If "B", 1B.
                 fixedrange
                     Determines whether or not this axis is zoom-
                     able. If true, then zoom is disabled.
@@ -429,37 +429,37 @@ class Carpet(BaseTraceType):
                     particular axis. The actual number of ticks
                     will be chosen automatically to be less than or
                     equal to `nticks`. Has an effect only if
-                    `tickmode` is set to *auto*.
+                    `tickmode` is set to "auto".
                 range
                     Sets the range of this axis. If the axis `type`
-                    is *log*, then you must take the log of your
+                    is "log", then you must take the log of your
                     desired range (e.g. to set the range from 1 to
                     100, set the range from 0 to 2). If the axis
-                    `type` is *date*, it should be date strings,
+                    `type` is "date", it should be date strings,
                     like date data, though Date objects and unix
                     milliseconds will be accepted and converted to
-                    strings. If the axis `type` is *category*, it
+                    strings. If the axis `type` is "category", it
                     should be numbers, using the scale where each
                     category is assigned a serial number from zero
                     in the order it appears.
                 rangemode
-                    If *normal*, the range is computed in relation
+                    If "normal", the range is computed in relation
                     to the extrema of the input data. If *tozero*`,
                     the range extends to 0, regardless of the input
-                    data If *nonnegative*, the range is non-
+                    data If "nonnegative", the range is non-
                     negative, regardless of the input data.
                 separatethousands
                     If "true", even 4-digit integers are separated
                 showexponent
-                    If *all*, all exponents are shown besides their
-                    significands. If *first*, only the exponent of
-                    the first tick is shown. If *last*, only the
-                    exponent of the last tick is shown. If *none*,
+                    If "all", all exponents are shown besides their
+                    significands. If "first", only the exponent of
+                    the first tick is shown. If "last", only the
+                    exponent of the last tick is shown. If "none",
                     no exponents appear.
                 showgrid
                     Determines whether or not grid lines are drawn.
-                    If *true*, the grid lines are drawn at every
-                    tick mark.
+                    If True, the grid lines are drawn at every tick
+                    mark.
                 showline
                     Determines whether or not a line bounding this
                     axis is drawn.
@@ -468,20 +468,20 @@ class Carpet(BaseTraceType):
                     low side, the high side, both, or neither side
                     of the axis.
                 showtickprefix
-                    If *all*, all tick labels are displayed with a
-                    prefix. If *first*, only the first tick is
-                    displayed with a prefix. If *last*, only the
+                    If "all", all tick labels are displayed with a
+                    prefix. If "first", only the first tick is
+                    displayed with a prefix. If "last", only the
                     last tick is displayed with a suffix. If
-                    *none*, tick prefixes are hidden.
+                    "none", tick prefixes are hidden.
                 showticksuffix
                     Same as `showtickprefix` but for tick suffixes.
                 smoothing
     
                 startline
                     Determines whether or not a line is drawn at
-                    along the starting value of this axis. If
-                    *true*, the start line is drawn on top of the
-                    grid lines.
+                    along the starting value of this axis. If True,
+                    the start line is drawn on top of the grid
+                    lines.
                 startlinecolor
                     Sets the line color of the start line.
                 startlinewidth
@@ -502,11 +502,11 @@ class Carpet(BaseTraceType):
                     ME.md#locale_format And for dates see:
                     https://github.com/d3/d3-time-
                     format/blob/master/README.md#locale_format We
-                    add one item to d3's date formatter: *%{n}f*
+                    add one item to d3's date formatter: "%{n}f"
                     for fractional seconds with n digits. For
                     example, *2016-10-13 09:15:23.456* with
-                    tickformat *%H~%M~%S.%2f* would display
-                    *09~15~23.46*
+                    tickformat "%H~%M~%S.%2f" would display
+                    "09~15~23.46"
                 tickformatstops
                     plotly.graph_objs.carpet.baxis.Tickformatstop
                     instance or dict with compatible properties
@@ -519,7 +519,7 @@ class Carpet(BaseTraceType):
                 ticktext
                     Sets the text displayed at the ticks position
                     via `tickvals`. Only has an effect if
-                    `tickmode` is set to *array*. Used with
+                    `tickmode` is set to "array". Used with
                     `tickvals`.
                 ticktextsrc
                     Sets the source reference on plot.ly for
@@ -527,7 +527,7 @@ class Carpet(BaseTraceType):
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
-                    to *array*. Used with `ticktext`.
+                    to "array". Used with `ticktext`.
                 tickvalssrc
                     Sets the source reference on plot.ly for
                     tickvals .
@@ -687,7 +687,7 @@ class Carpet(BaseTraceType):
         """
         Assigns extra data each datum. This may be useful when
         listening to hover, click and selection events. Note that,
-        *scatter* traces also appends customdata items in the markers
+        "scatter" traces also appends customdata items in the markers
         DOM elements
     
         The 'customdata' property is an array that may be specified as a tuple,
@@ -791,11 +791,11 @@ class Carpet(BaseTraceType):
                     system. The plotly service (at https://plot.ly
                     or on-premise) generates images on a server,
                     where only a select number of fonts are
-                    installed and supported. These include *Arial*,
-                    *Balto*, *Courier New*, *Droid Sans*,, *Droid
-                    Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
-                    Standard TT*, *Open Sans*, *Overpass*, *PT Sans
-                    Narrow*, *Raleway*, *Times New Roman*.
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
                 size
 
         Returns
@@ -1072,7 +1072,7 @@ class Carpet(BaseTraceType):
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
-                    `maxpoints` is set to *50*, only the newest 50
+                    `maxpoints` is set to 50, only the newest 50
                     points will be displayed on the plot.
                 token
                     The stream id number links a data trace on a
@@ -1114,7 +1114,7 @@ class Carpet(BaseTraceType):
     def visible(self):
         """
         Determines whether or not this trace is visible. If
-        *legendonly*, the trace is not drawn, but can appear as a
+        "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
     
         The 'visible' property is an enumeration that may be specified as:
@@ -1159,8 +1159,8 @@ class Carpet(BaseTraceType):
     def xaxis(self):
         """
         Sets a reference between this trace's x coordinates and a 2D
-        cartesian x axis. If *x* (the default value), the x coordinates
-        refer to `layout.xaxis`. If *x2*, the x coordinates refer to
+        cartesian x axis. If "x" (the default value), the x coordinates
+        refer to `layout.xaxis`. If "x2", the x coordinates refer to
         `layout.xaxis2`, and so on.
     
         The 'xaxis' property is an identifier of a particular
@@ -1224,8 +1224,8 @@ class Carpet(BaseTraceType):
     def yaxis(self):
         """
         Sets a reference between this trace's y coordinates and a 2D
-        cartesian y axis. If *y* (the default value), the y coordinates
-        refer to `layout.yaxis`. If *y2*, the y coordinates refer to
+        cartesian y axis. If "y" (the default value), the y coordinates
+        refer to `layout.yaxis`. If "y2", the y coordinates refer to
         `layout.yaxis2`, and so on.
     
         The 'yaxis' property is an identifier of a particular
@@ -1319,7 +1319,7 @@ class Carpet(BaseTraceType):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -1372,7 +1372,7 @@ class Carpet(BaseTraceType):
 
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         x
@@ -1381,8 +1381,8 @@ class Carpet(BaseTraceType):
             xaxis is hidden by default.
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xsrc
             Sets the source reference on plot.ly for  x .
@@ -1391,8 +1391,8 @@ class Carpet(BaseTraceType):
             point.
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ysrc
             Sets the source reference on plot.ly for  y .
@@ -1492,7 +1492,7 @@ class Carpet(BaseTraceType):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -1545,7 +1545,7 @@ class Carpet(BaseTraceType):
 
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         x
@@ -1554,8 +1554,8 @@ class Carpet(BaseTraceType):
             xaxis is hidden by default.
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xsrc
             Sets the source reference on plot.ly for  x .
@@ -1564,8 +1564,8 @@ class Carpet(BaseTraceType):
             point.
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ysrc
             Sets the source reference on plot.ly for  y .

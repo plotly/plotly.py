@@ -16,7 +16,7 @@ class ScatterglValidator(_plotly_utils.basevalidators.CompoundValidator):
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
-                selection events. Note that, *scatter* traces
+                selection events. Note that, "scatter" traces
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
@@ -36,21 +36,21 @@ class ScatterglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 dict with compatible properties
             fill
                 Sets the area to fill with a solid color. Use
-                with `fillcolor` if not *none*. *tozerox* and
-                *tozeroy* fill to x=0 and y=0 respectively.
-                *tonextx* and *tonexty* fill between the
+                with `fillcolor` if not "none". "tozerox" and
+                "tozeroy" fill to x=0 and y=0 respectively.
+                "tonextx" and "tonexty" fill between the
                 endpoints of this trace and the endpoints of
                 the trace before it, connecting those endpoints
                 with straight lines (to make a stacked area
                 graph); if there is no trace before it, they
-                behave like *tozerox* and *tozeroy*. *toself*
+                behave like "tozerox" and "tozeroy". "toself"
                 connects the endpoints of the trace (or each
                 segment of the trace if it has gaps) into a
-                closed shape. *tonext* fills the space between
+                closed shape. "tonext" fills the space between
                 two traces if one completely encloses the other
                 (eg consecutive contour lines), and behaves
-                like *toself* if there is no trace before it.
-                *tonext* should not be used if one trace does
+                like "toself" if there is no trace before it.
+                "tonext" should not be used if one trace does
                 not enclose the other.
             fillcolor
                 Sets the fill color. Defaults to a half-
@@ -75,7 +75,7 @@ class ScatterglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 appears over all the data points. If an array
                 of string, the items are mapped in order to the
                 this trace's (x,y) coordinates. To be seen,
-                trace `hoverinfo` must contain a *text* flag.
+                trace `hoverinfo` must contain a "text" flag.
             hovertextsrc
                 Sets the source reference on plot.ly for
                 hovertext .
@@ -147,7 +147,7 @@ class ScatterglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 or dict with compatible properties
             visible
                 Determines whether or not this trace is
-                visible. If *legendonly*, the trace is not
+                visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
             x
@@ -158,9 +158,9 @@ class ScatterglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 starting coordinate and `dx` the step.
             xaxis
                 Sets a reference between this trace's x
-                coordinates and a 2D cartesian x axis. If *x*
+                coordinates and a 2D cartesian x axis. If "x"
                 (the default value), the x coordinates refer to
-                `layout.xaxis`. If *x2*, the x coordinates
+                `layout.xaxis`. If "x2", the x coordinates
                 refer to `layout.xaxis2`, and so on.
             xcalendar
                 Sets the calendar system to use with `x` date
@@ -175,14 +175,15 @@ class ScatterglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 starting coordinate and `dy` the step.
             yaxis
                 Sets a reference between this trace's y
-                coordinates and a 2D cartesian y axis. If *y*
+                coordinates and a 2D cartesian y axis. If "y"
                 (the default value), the y coordinates refer to
-                `layout.yaxis`. If *y2*, the y coordinates
+                `layout.yaxis`. If "y2", the y coordinates
                 refer to `layout.yaxis2`, and so on.
             ycalendar
                 Sets the calendar system to use with `y` date
                 data.
             ysrc
-                Sets the source reference on plot.ly for  y .""",
+                Sets the source reference on plot.ly for  y .
+""",
             **kwargs
         )

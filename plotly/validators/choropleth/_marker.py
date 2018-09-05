@@ -18,6 +18,7 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the opacity of the locations.
             opacitysrc
                 Sets the source reference on plot.ly for
-                opacity .""",
+                opacity .
+""",
             **kwargs
         )

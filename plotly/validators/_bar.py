@@ -11,9 +11,9 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs="""
             base
                 Sets where the bar base is drawn (in position
-                axis units). In *stack* or *relative* barmode,
-                traces that set *base* will be excluded and
-                drawn in *overlay* mode instead.
+                axis units). In "stack" or "relative" barmode,
+                traces that set "base" will be excluded and
+                drawn in "overlay" mode instead.
             basesrc
                 Sets the source reference on plot.ly for  base
                 .
@@ -29,7 +29,7 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
-                selection events. Note that, *scatter* traces
+                selection events. Note that, "scatter" traces
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
@@ -65,7 +65,7 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 appears over all the data points. If an array
                 of string, the items are mapped in order to the
                 this trace's (x,y) coordinates. To be seen,
-                trace `hoverinfo` must contain a *text* flag.
+                trace `hoverinfo` must contain a "text" flag.
             hovertextsrc
                 Sets the source reference on plot.ly for
                 hovertext .
@@ -91,24 +91,24 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the legend item and on hover.
             offset
                 Shifts the position where the bar is drawn (in
-                position axis units). In *group* barmode,
-                traces that set *offset* will be excluded and
-                drawn in *overlay* mode instead.
+                position axis units). In "group" barmode,
+                traces that set "offset" will be excluded and
+                drawn in "overlay" mode instead.
             offsetsrc
                 Sets the source reference on plot.ly for
                 offset .
             opacity
                 Sets the opacity of the trace.
             orientation
-                Sets the orientation of the bars. With *v*
-                (*h*), the value of the each bar spans along
+                Sets the orientation of the bars. With "v"
+                ("h"), the value of the each bar spans along
                 the vertical (horizontal).
             outsidetextfont
                 Sets the font used for `text` lying outside the
                 bar.
             r
                 For legacy polar chart only.Please switch to
-                *scatterpolar* trace type.Sets the radial
+                "scatterpolar" trace type.Sets the radial
                 coordinates.
             rsrc
                 Sets the source reference on plot.ly for  r .
@@ -132,7 +132,7 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 with compatible properties
             t
                 For legacy polar chart only.Please switch to
-                *scatterpolar* trace type.Sets the angular
+                "scatterpolar" trace type.Sets the angular
                 coordinates.
             text
                 Sets text elements associated with each (x,y)
@@ -140,17 +140,17 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 appears over all the data points. If an array
                 of string, the items are mapped in order to the
                 this trace's (x,y) coordinates. If trace
-                `hoverinfo` contains a *text* flag and
-                *hovertext* is not set, these elements will be
+                `hoverinfo` contains a "text" flag and
+                "hovertext" is not set, these elements will be
                 seen in the hover labels.
             textfont
                 Sets the font used for `text`.
             textposition
-                Specifies the location of the `text`. *inside*
+                Specifies the location of the `text`. "inside"
                 positions `text` inside, next to the bar end
-                (rotated and scaled if needed). *outside*
+                (rotated and scaled if needed). "outside"
                 positions `text` outside, next to the bar end
-                (scaled if needed). *auto* positions `text`
+                (scaled if needed). "auto" positions `text`
                 inside or outside so that `text` size is
                 maximized.
             textpositionsrc
@@ -168,7 +168,7 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 dict with compatible properties
             visible
                 Determines whether or not this trace is
-                visible. If *legendonly*, the trace is not
+                visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
             width
@@ -184,9 +184,9 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 starting coordinate and `dx` the step.
             xaxis
                 Sets a reference between this trace's x
-                coordinates and a 2D cartesian x axis. If *x*
+                coordinates and a 2D cartesian x axis. If "x"
                 (the default value), the x coordinates refer to
-                `layout.xaxis`. If *x2*, the x coordinates
+                `layout.xaxis`. If "x2", the x coordinates
                 refer to `layout.xaxis2`, and so on.
             xcalendar
                 Sets the calendar system to use with `x` date
@@ -201,14 +201,15 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 starting coordinate and `dy` the step.
             yaxis
                 Sets a reference between this trace's y
-                coordinates and a 2D cartesian y axis. If *y*
+                coordinates and a 2D cartesian y axis. If "y"
                 (the default value), the y coordinates refer to
-                `layout.yaxis`. If *y2*, the y coordinates
+                `layout.yaxis`. If "y2", the y coordinates
                 refer to `layout.yaxis2`, and so on.
             ycalendar
                 Sets the calendar system to use with `y` date
                 data.
             ysrc
-                Sets the source reference on plot.ly for  y .""",
+                Sets the source reference on plot.ly for  y .
+""",
             **kwargs
         )

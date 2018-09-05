@@ -49,7 +49,7 @@ class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundValidator):
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
-                selection events. Note that, *scatter* traces
+                selection events. Note that, "scatter" traces
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
@@ -57,15 +57,15 @@ class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundValidator):
                 customdata .
             fill
                 Sets the area to fill with a solid color. Use
-                with `fillcolor` if not *none*. scatterternary
+                with `fillcolor` if not "none". scatterternary
                 has a subset of the options available to
-                scatter. *toself* connects the endpoints of the
+                scatter. "toself" connects the endpoints of the
                 trace (or each segment of the trace if it has
-                gaps) into a closed shape. *tonext* fills the
+                gaps) into a closed shape. "tonext" fills the
                 space between two traces if one completely
                 encloses the other (eg consecutive contour
-                lines), and behaves like *toself* if there is
-                no trace before it. *tonext* should not be used
+                lines), and behaves like "toself" if there is
+                no trace before it. "tonext" should not be used
                 if one trace does not enclose the other.
             fillcolor
                 Sets the fill color. Defaults to a half-
@@ -88,16 +88,16 @@ class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Do the hover effects highlight individual
                 points (markers or line points) or do they
                 highlight filled regions? If the fill is
-                *toself* or *tonext* and there are no markers
-                or text, then the default is *fills*, otherwise
-                it is *points*.
+                "toself" or "tonext" and there are no markers
+                or text, then the default is "fills", otherwise
+                it is "points".
             hovertext
                 Sets hover text elements associated with each
                 (a,b,c) point. If a single string, the same
                 string appears over all the data points. If an
                 array of strings, the items are mapped in order
                 to the the data points in (a,b,c). To be seen,
-                trace `hoverinfo` must contain a *text* flag.
+                trace `hoverinfo` must contain a "text" flag.
             hovertextsrc
                 Sets the source reference on plot.ly for
                 hovertext .
@@ -120,12 +120,12 @@ class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundValidator):
                 instance or dict with compatible properties
             mode
                 Determines the drawing mode for this scatter
-                trace. If the provided `mode` includes *text*
+                trace. If the provided `mode` includes "text"
                 then the `text` elements appear at the
                 coordinates. Otherwise, the `text` elements
                 appear on hover. If there are less than 20
-                points, then the default is *lines+markers*.
-                Otherwise, *lines*.
+                points, then the default is "lines+markers".
+                Otherwise, "lines".
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -151,9 +151,9 @@ class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundValidator):
                 instance or dict with compatible properties
             subplot
                 Sets a reference between this trace's data
-                coordinates and a ternary subplot. If *ternary*
+                coordinates and a ternary subplot. If "ternary"
                 (the default value), the data refer to
-                `layout.ternary`. If *ternary2*, the data refer
+                `layout.ternary`. If "ternary2", the data refer
                 to `layout.ternary2`, and so on.
             sum
                 The number each triplet should sum to, if only
@@ -168,8 +168,8 @@ class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundValidator):
                 appears over all the data points. If an array
                 of strings, the items are mapped in order to
                 the the data points in (a,b,c). If trace
-                `hoverinfo` contains a *text* flag and
-                *hovertext* is not set, these elements will be
+                `hoverinfo` contains a "text" flag and
+                "hovertext" is not set, these elements will be
                 seen in the hover labels.
             textfont
                 Sets the text font.
@@ -189,8 +189,9 @@ class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundValidator):
                 instance or dict with compatible properties
             visible
                 Determines whether or not this trace is
-                visible. If *legendonly*, the trace is not
+                visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
-                (provided that the legend itself is visible).""",
+                (provided that the legend itself is visible).
+""",
             **kwargs
         )

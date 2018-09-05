@@ -23,6 +23,7 @@ class DomainValidator(_plotly_utils.basevalidators.CompoundValidator):
                 trace (in plot fraction).
             y
                 Sets the vertical domain of this parcoords
-                trace (in plot fraction).""",
+                trace (in plot fraction).
+""",
             **kwargs
         )

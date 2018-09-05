@@ -26,6 +26,7 @@ class LataxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 map.
             tick0
                 Sets the graticule's starting tick
-                longitude/latitude.""",
+                longitude/latitude.
+""",
             **kwargs
         )

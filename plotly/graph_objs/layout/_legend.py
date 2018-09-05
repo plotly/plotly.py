@@ -170,11 +170,11 @@ class Legend(BaseLayoutHierarchyType):
                     system. The plotly service (at https://plot.ly
                     or on-premise) generates images on a server,
                     where only a select number of fonts are
-                    installed and supported. These include *Arial*,
-                    *Balto*, *Courier New*, *Droid Sans*,, *Droid
-                    Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
-                    Standard TT*, *Open Sans*, *Overpass*, *PT Sans
-                    Narrow*, *Raleway*, *Times New Roman*.
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
                 size
 
         Returns
@@ -235,12 +235,12 @@ class Legend(BaseLayoutHierarchyType):
     def traceorder(self):
         """
         Determines the order at which the legend items are displayed.
-        If *normal*, the items are displayed top-to-bottom in the same
-        order as the input data. If *reversed*, the items are displayed
-        in the opposite order as *normal*. If *grouped*, the items are
+        If "normal", the items are displayed top-to-bottom in the same
+        order as the input data. If "reversed", the items are displayed
+        in the opposite order as "normal". If "grouped", the items are
         displayed in groups (when a trace `legendgroup` is provided).
-        if *grouped+reversed*, the items are displayed in the opposite
-        order as *grouped*.
+        if "grouped+reversed", the items are displayed in the opposite
+        order as "grouped".
     
         The 'traceorder' property is a flaglist and may be specified
         as a string containing:
@@ -284,7 +284,7 @@ class Legend(BaseLayoutHierarchyType):
     def xanchor(self):
         """
         Sets the legend's horizontal position anchor. This anchor binds
-        the `x` position to the *left*, *center* or *right* of the
+        the `x` position to the "left", "center" or "right" of the
         legend.
     
         The 'xanchor' property is an enumeration that may be specified as:
@@ -327,7 +327,7 @@ class Legend(BaseLayoutHierarchyType):
     def yanchor(self):
         """
         Sets the legend's vertical position anchor This anchor binds
-        the `y` position to the *top*, *middle* or *bottom* of the
+        the `y` position to the "top", "middle" or "bottom" of the
         legend.
     
         The 'yanchor' property is an enumeration that may be specified as:
@@ -371,27 +371,27 @@ class Legend(BaseLayoutHierarchyType):
             legend groups.
         traceorder
             Determines the order at which the legend items are
-            displayed. If *normal*, the items are displayed top-to-
+            displayed. If "normal", the items are displayed top-to-
             bottom in the same order as the input data. If
-            *reversed*, the items are displayed in the opposite
-            order as *normal*. If *grouped*, the items are
+            "reversed", the items are displayed in the opposite
+            order as "normal". If "grouped", the items are
             displayed in groups (when a trace `legendgroup` is
-            provided). if *grouped+reversed*, the items are
-            displayed in the opposite order as *grouped*.
+            provided). if "grouped+reversed", the items are
+            displayed in the opposite order as "grouped".
         x
             Sets the x position (in normalized coordinates) of the
             legend.
         xanchor
             Sets the legend's horizontal position anchor. This
-            anchor binds the `x` position to the *left*, *center*
-            or *right* of the legend.
+            anchor binds the `x` position to the "left", "center"
+            or "right" of the legend.
         y
             Sets the y position (in normalized coordinates) of the
             legend.
         yanchor
             Sets the legend's vertical position anchor This anchor
-            binds the `y` position to the *top*, *middle* or
-            *bottom* of the legend.
+            binds the `y` position to the "top", "middle" or
+            "bottom" of the legend.
         """
 
     def __init__(
@@ -434,27 +434,27 @@ class Legend(BaseLayoutHierarchyType):
             legend groups.
         traceorder
             Determines the order at which the legend items are
-            displayed. If *normal*, the items are displayed top-to-
+            displayed. If "normal", the items are displayed top-to-
             bottom in the same order as the input data. If
-            *reversed*, the items are displayed in the opposite
-            order as *normal*. If *grouped*, the items are
+            "reversed", the items are displayed in the opposite
+            order as "normal". If "grouped", the items are
             displayed in groups (when a trace `legendgroup` is
-            provided). if *grouped+reversed*, the items are
-            displayed in the opposite order as *grouped*.
+            provided). if "grouped+reversed", the items are
+            displayed in the opposite order as "grouped".
         x
             Sets the x position (in normalized coordinates) of the
             legend.
         xanchor
             Sets the legend's horizontal position anchor. This
-            anchor binds the `x` position to the *left*, *center*
-            or *right* of the legend.
+            anchor binds the `x` position to the "left", "center"
+            or "right" of the legend.
         y
             Sets the y position (in normalized coordinates) of the
             legend.
         yanchor
             Sets the legend's vertical position anchor This anchor
-            binds the `y` position to the *top*, *middle* or
-            *bottom* of the legend.
+            binds the `y` position to the "top", "middle" or
+            "bottom" of the legend.
 
         Returns
         -------

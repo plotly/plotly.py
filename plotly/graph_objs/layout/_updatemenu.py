@@ -287,11 +287,11 @@ class Updatemenu(BaseLayoutHierarchyType):
                     system. The plotly service (at https://plot.ly
                     or on-premise) generates images on a server,
                     where only a select number of fonts are
-                    installed and supported. These include *Arial*,
-                    *Balto*, *Courier New*, *Droid Sans*,, *Droid
-                    Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
-                    Standard TT*, *Open Sans*, *Overpass*, *PT Sans
-                    Narrow*, *Raleway*, *Times New Roman*.
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
                 size
 
         Returns
@@ -487,7 +487,7 @@ class Updatemenu(BaseLayoutHierarchyType):
     def xanchor(self):
         """
         Sets the update menu's horizontal position anchor. This anchor
-        binds the `x` position to the *left*, *center* or *right* of
+        binds the `x` position to the "left", "center" or "right" of
         the range selector.
     
         The 'xanchor' property is an enumeration that may be specified as:
@@ -531,7 +531,7 @@ class Updatemenu(BaseLayoutHierarchyType):
     def yanchor(self):
         """
         Sets the update menu's vertical position anchor This anchor
-        binds the `y` position to the *top*, *middle* or *bottom* of
+        binds the `y` position to the "top", "middle" or "bottom" of
         the range selector.
     
         The 'yanchor' property is an enumeration that may be specified as:
@@ -615,15 +615,15 @@ class Updatemenu(BaseLayoutHierarchyType):
             update menu.
         xanchor
             Sets the update menu's horizontal position anchor. This
-            anchor binds the `x` position to the *left*, *center*
-            or *right* of the range selector.
+            anchor binds the `x` position to the "left", "center"
+            or "right" of the range selector.
         y
             Sets the y position (in normalized coordinates) of the
             update menu.
         yanchor
             Sets the update menu's vertical position anchor This
-            anchor binds the `y` position to the *top*, *middle* or
-            *bottom* of the range selector.
+            anchor binds the `y` position to the "top", "middle" or
+            "bottom" of the range selector.
         """
 
     def __init__(
@@ -712,15 +712,15 @@ class Updatemenu(BaseLayoutHierarchyType):
             update menu.
         xanchor
             Sets the update menu's horizontal position anchor. This
-            anchor binds the `x` position to the *left*, *center*
-            or *right* of the range selector.
+            anchor binds the `x` position to the "left", "center"
+            or "right" of the range selector.
         y
             Sets the y position (in normalized coordinates) of the
             update menu.
         yanchor
             Sets the update menu's vertical position anchor This
-            anchor binds the `y` position to the *top*, *middle* or
-            *bottom* of the range selector.
+            anchor binds the `y` position to the "top", "middle" or
+            "bottom" of the range selector.
 
         Returns
         -------

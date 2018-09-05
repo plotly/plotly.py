@@ -25,6 +25,7 @@ class TernaryValidator(_plotly_utils.basevalidators.CompoundValidator):
                 instance or dict with compatible properties
             sum
                 The number each triplet should sum to, and the
-                maximum range of each axis""",
+                maximum range of each axis
+""",
             **kwargs
         )

@@ -101,9 +101,9 @@ class Shape(BaseLayoutHierarchyType):
                     Sets the line color.
                 dash
                     Sets the dash style of lines. Set to a dash
-                    type string (*solid*, *dot*, *dash*,
-                    *longdash*, *dashdot*, or *longdashdot*) or a
-                    dash length list in px (eg *5px,10px,2px,2px*).
+                    type string ("solid", "dot", "dash",
+                    "longdash", "dashdot", or "longdashdot") or a
+                    dash length list in px (eg "5px,10px,2px,2px").
                 width
                     Sets the line width (in px).
 
@@ -169,10 +169,10 @@ class Shape(BaseLayoutHierarchyType):
     @property
     def path(self):
         """
-        For `type` *path* - a valid SVG path with the pixel values
+        For `type` "path" - a valid SVG path with the pixel values
         replaced by data values in `xsizemode`/`ysizemode` being
-        *scaled* and taken unmodified as pixels relative to `xanchor`
-        and `yanchor` in case of *pixel* size mode. There are a few
+        "scaled" and taken unmodified as pixels relative to `xanchor`
+        and `yanchor` in case of "pixel" size mode. There are a few
         restrictions / quirks only absolute instructions, not relative.
         So the allowed segments are: M, L, H, V, Q, C, T, S, and Z arcs
         (A) are not allowed because radius rx and ry are relative. In
@@ -236,14 +236,14 @@ class Shape(BaseLayoutHierarchyType):
     @property
     def type(self):
         """
-        Specifies the shape type to be drawn. If *line*, a line is
+        Specifies the shape type to be drawn. If "line", a line is
         drawn from (`x0`,`y0`) to (`x1`,`y1`) with respect to the axes'
-        sizing mode. If *circle*, a circle is drawn from
+        sizing mode. If "circle", a circle is drawn from
         ((`x0`+`x1`)/2, (`y0`+`y1`)/2)) with radius (|(`x0`+`x1`)/2 -
         `x0`|, |(`y0`+`y1`)/2 -`y0`)|) with respect to the axes' sizing
-        mode. If *rect*, a rectangle is drawn linking (`x0`,`y0`),
+        mode. If "rect", a rectangle is drawn linking (`x0`,`y0`),
         (`x1`,`y0`), (`x1`,`y1`), (`x0`,`y1`), (`x0`,`y0`) with respect
-        to the axes' sizing mode. If *path*, draw a custom SVG path
+        to the axes' sizing mode. If "path", draw a custom SVG path
         using `path`. with respect to the axes' sizing mode.
     
         The 'type' property is an enumeration that may be specified as:
@@ -325,11 +325,11 @@ class Shape(BaseLayoutHierarchyType):
     @property
     def xanchor(self):
         """
-        Only relevant in conjunction with `xsizemode` set to *pixel*.
+        Only relevant in conjunction with `xsizemode` set to "pixel".
         Specifies the anchor point on the x axis to which `x0`, `x1`
         and x coordinates within `path` are relative to. E.g. useful to
         attach a pixel sized shape to a certain data value. No effect
-        when `xsizemode` not set to *pixel*.
+        when `xsizemode` not set to "pixel".
     
         The 'xanchor' property accepts values of any type
 
@@ -349,13 +349,13 @@ class Shape(BaseLayoutHierarchyType):
     def xref(self):
         """
         Sets the shape's x coordinate axis. If set to an x axis id
-        (e.g. *x* or *x2*), the `x` position refers to an x coordinate.
-        If set to *paper*, the `x` position refers to the distance from
+        (e.g. "x" or "x2"), the `x` position refers to an x coordinate.
+        If set to "paper", the `x` position refers to the distance from
         the left side of the plotting area in normalized coordinates
-        where *0* (*1*) corresponds to the left (right) side. If the
-        axis `type` is *log*, then you must take the log of your
-        desired range. If the axis `type` is *date*, then you must
-        convert the date to unix time in milliseconds.
+        where 0 (1) corresponds to the left (right) side. If the axis
+        `type` is "log", then you must take the log of your desired
+        range. If the axis `type` is "date", then you must convert the
+        date to unix time in milliseconds.
     
         The 'xref' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -379,9 +379,9 @@ class Shape(BaseLayoutHierarchyType):
     def xsizemode(self):
         """
         Sets the shapes's sizing mode along the x axis. If set to
-        *scaled*, `x0`, `x1` and x coordinates within `path` refer to
+        "scaled", `x0`, `x1` and x coordinates within `path` refer to
         data values on the x axis or a fraction of the plot area's
-        width (`xref` set to *paper*). If set to *pixel*, `xanchor`
+        width (`xref` set to "paper"). If set to "pixel", `xanchor`
         specifies the x position in terms of data or plot fraction but
         `x0`, `x1` and x coordinates within `path` are pixels relative
         to `xanchor`. This way, the shape can have a fixed width while
@@ -446,11 +446,11 @@ class Shape(BaseLayoutHierarchyType):
     @property
     def yanchor(self):
         """
-        Only relevant in conjunction with `ysizemode` set to *pixel*.
+        Only relevant in conjunction with `ysizemode` set to "pixel".
         Specifies the anchor point on the y axis to which `y0`, `y1`
         and y coordinates within `path` are relative to. E.g. useful to
         attach a pixel sized shape to a certain data value. No effect
-        when `ysizemode` not set to *pixel*.
+        when `ysizemode` not set to "pixel".
     
         The 'yanchor' property accepts values of any type
 
@@ -470,10 +470,10 @@ class Shape(BaseLayoutHierarchyType):
     def yref(self):
         """
         Sets the annotation's y coordinate axis. If set to an y axis id
-        (e.g. *y* or *y2*), the `y` position refers to an y coordinate
-        If set to *paper*, the `y` position refers to the distance from
+        (e.g. "y" or "y2"), the `y` position refers to an y coordinate
+        If set to "paper", the `y` position refers to the distance from
         the bottom of the plotting area in normalized coordinates where
-        *0* (*1*) corresponds to the bottom (top).
+        0 (1) corresponds to the bottom (top).
     
         The 'yref' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -497,9 +497,9 @@ class Shape(BaseLayoutHierarchyType):
     def ysizemode(self):
         """
         Sets the shapes's sizing mode along the y axis. If set to
-        *scaled*, `y0`, `y1` and y coordinates within `path` refer to
+        "scaled", `y0`, `y1` and y coordinates within `path` refer to
         data values on the y axis or a fraction of the plot area's
-        height (`yref` set to *paper*). If set to *pixel*, `yanchor`
+        height (`yref` set to "paper"). If set to "pixel", `yanchor`
         specifies the y position in terms of data or plot fraction but
         `y0`, `y1` and y coordinates within `path` are pixels relative
         to `yanchor`. This way, the shape can have a fixed height while
@@ -550,11 +550,11 @@ class Shape(BaseLayoutHierarchyType):
         opacity
             Sets the opacity of the shape.
         path
-            For `type` *path* - a valid SVG path with the pixel
+            For `type` "path" - a valid SVG path with the pixel
             values replaced by data values in
-            `xsizemode`/`ysizemode` being *scaled* and taken
+            `xsizemode`/`ysizemode` being "scaled" and taken
             unmodified as pixels relative to `xanchor` and
-            `yanchor` in case of *pixel* size mode. There are a few
+            `yanchor` in case of "pixel" size mode. There are a few
             restrictions / quirks only absolute instructions, not
             relative. So the allowed segments are: M, L, H, V, Q,
             C, T, S, and Z arcs (A) are not allowed because radius
@@ -583,15 +583,15 @@ class Shape(BaseLayoutHierarchyType):
             matching item, this item will be hidden unless you
             explicitly show it with `visible: true`.
         type
-            Specifies the shape type to be drawn. If *line*, a line
+            Specifies the shape type to be drawn. If "line", a line
             is drawn from (`x0`,`y0`) to (`x1`,`y1`) with respect
-            to the axes' sizing mode. If *circle*, a circle is
+            to the axes' sizing mode. If "circle", a circle is
             drawn from ((`x0`+`x1`)/2, (`y0`+`y1`)/2)) with radius
             (|(`x0`+`x1`)/2 - `x0`|, |(`y0`+`y1`)/2 -`y0`)|) with
-            respect to the axes' sizing mode. If *rect*, a
+            respect to the axes' sizing mode. If "rect", a
             rectangle is drawn linking (`x0`,`y0`), (`x1`,`y0`),
             (`x1`,`y1`), (`x0`,`y1`), (`x0`,`y0`) with respect to
-            the axes' sizing mode. If *path*, draw a custom SVG
+            the axes' sizing mode. If "path", draw a custom SVG
             path using `path`. with respect to the axes' sizing
             mode.
         visible
@@ -604,27 +604,27 @@ class Shape(BaseLayoutHierarchyType):
             `xsizemode` for more info.
         xanchor
             Only relevant in conjunction with `xsizemode` set to
-            *pixel*. Specifies the anchor point on the x axis to
+            "pixel". Specifies the anchor point on the x axis to
             which `x0`, `x1` and x coordinates within `path` are
             relative to. E.g. useful to attach a pixel sized shape
             to a certain data value. No effect when `xsizemode` not
-            set to *pixel*.
+            set to "pixel".
         xref
             Sets the shape's x coordinate axis. If set to an x axis
-            id (e.g. *x* or *x2*), the `x` position refers to an x
-            coordinate. If set to *paper*, the `x` position refers
+            id (e.g. "x" or "x2"), the `x` position refers to an x
+            coordinate. If set to "paper", the `x` position refers
             to the distance from the left side of the plotting area
-            in normalized coordinates where *0* (*1*) corresponds
-            to the left (right) side. If the axis `type` is *log*,
+            in normalized coordinates where 0 (1) corresponds to
+            the left (right) side. If the axis `type` is "log",
             then you must take the log of your desired range. If
-            the axis `type` is *date*, then you must convert the
+            the axis `type` is "date", then you must convert the
             date to unix time in milliseconds.
         xsizemode
             Sets the shapes's sizing mode along the x axis. If set
-            to *scaled*, `x0`, `x1` and x coordinates within `path`
+            to "scaled", `x0`, `x1` and x coordinates within `path`
             refer to data values on the x axis or a fraction of the
-            plot area's width (`xref` set to *paper*). If set to
-            *pixel*, `xanchor` specifies the x position in terms of
+            plot area's width (`xref` set to "paper"). If set to
+            "pixel", `xanchor` specifies the x position in terms of
             data or plot fraction but `x0`, `x1` and x coordinates
             within `path` are pixels relative to `xanchor`. This
             way, the shape can have a fixed width while maintaining
@@ -637,24 +637,24 @@ class Shape(BaseLayoutHierarchyType):
             `ysizemode` for more info.
         yanchor
             Only relevant in conjunction with `ysizemode` set to
-            *pixel*. Specifies the anchor point on the y axis to
+            "pixel". Specifies the anchor point on the y axis to
             which `y0`, `y1` and y coordinates within `path` are
             relative to. E.g. useful to attach a pixel sized shape
             to a certain data value. No effect when `ysizemode` not
-            set to *pixel*.
+            set to "pixel".
         yref
             Sets the annotation's y coordinate axis. If set to an y
-            axis id (e.g. *y* or *y2*), the `y` position refers to
-            an y coordinate If set to *paper*, the `y` position
+            axis id (e.g. "y" or "y2"), the `y` position refers to
+            an y coordinate If set to "paper", the `y` position
             refers to the distance from the bottom of the plotting
-            area in normalized coordinates where *0* (*1*)
-            corresponds to the bottom (top).
+            area in normalized coordinates where 0 (1) corresponds
+            to the bottom (top).
         ysizemode
             Sets the shapes's sizing mode along the y axis. If set
-            to *scaled*, `y0`, `y1` and y coordinates within `path`
+            to "scaled", `y0`, `y1` and y coordinates within `path`
             refer to data values on the y axis or a fraction of the
-            plot area's height (`yref` set to *paper*). If set to
-            *pixel*, `yanchor` specifies the y position in terms of
+            plot area's height (`yref` set to "paper"). If set to
+            "pixel", `yanchor` specifies the y position in terms of
             data or plot fraction but `y0`, `y1` and y coordinates
             within `path` are pixels relative to `yanchor`. This
             way, the shape can have a fixed height while
@@ -714,11 +714,11 @@ class Shape(BaseLayoutHierarchyType):
         opacity
             Sets the opacity of the shape.
         path
-            For `type` *path* - a valid SVG path with the pixel
+            For `type` "path" - a valid SVG path with the pixel
             values replaced by data values in
-            `xsizemode`/`ysizemode` being *scaled* and taken
+            `xsizemode`/`ysizemode` being "scaled" and taken
             unmodified as pixels relative to `xanchor` and
-            `yanchor` in case of *pixel* size mode. There are a few
+            `yanchor` in case of "pixel" size mode. There are a few
             restrictions / quirks only absolute instructions, not
             relative. So the allowed segments are: M, L, H, V, Q,
             C, T, S, and Z arcs (A) are not allowed because radius
@@ -747,15 +747,15 @@ class Shape(BaseLayoutHierarchyType):
             matching item, this item will be hidden unless you
             explicitly show it with `visible: true`.
         type
-            Specifies the shape type to be drawn. If *line*, a line
+            Specifies the shape type to be drawn. If "line", a line
             is drawn from (`x0`,`y0`) to (`x1`,`y1`) with respect
-            to the axes' sizing mode. If *circle*, a circle is
+            to the axes' sizing mode. If "circle", a circle is
             drawn from ((`x0`+`x1`)/2, (`y0`+`y1`)/2)) with radius
             (|(`x0`+`x1`)/2 - `x0`|, |(`y0`+`y1`)/2 -`y0`)|) with
-            respect to the axes' sizing mode. If *rect*, a
+            respect to the axes' sizing mode. If "rect", a
             rectangle is drawn linking (`x0`,`y0`), (`x1`,`y0`),
             (`x1`,`y1`), (`x0`,`y1`), (`x0`,`y0`) with respect to
-            the axes' sizing mode. If *path*, draw a custom SVG
+            the axes' sizing mode. If "path", draw a custom SVG
             path using `path`. with respect to the axes' sizing
             mode.
         visible
@@ -768,27 +768,27 @@ class Shape(BaseLayoutHierarchyType):
             `xsizemode` for more info.
         xanchor
             Only relevant in conjunction with `xsizemode` set to
-            *pixel*. Specifies the anchor point on the x axis to
+            "pixel". Specifies the anchor point on the x axis to
             which `x0`, `x1` and x coordinates within `path` are
             relative to. E.g. useful to attach a pixel sized shape
             to a certain data value. No effect when `xsizemode` not
-            set to *pixel*.
+            set to "pixel".
         xref
             Sets the shape's x coordinate axis. If set to an x axis
-            id (e.g. *x* or *x2*), the `x` position refers to an x
-            coordinate. If set to *paper*, the `x` position refers
+            id (e.g. "x" or "x2"), the `x` position refers to an x
+            coordinate. If set to "paper", the `x` position refers
             to the distance from the left side of the plotting area
-            in normalized coordinates where *0* (*1*) corresponds
-            to the left (right) side. If the axis `type` is *log*,
+            in normalized coordinates where 0 (1) corresponds to
+            the left (right) side. If the axis `type` is "log",
             then you must take the log of your desired range. If
-            the axis `type` is *date*, then you must convert the
+            the axis `type` is "date", then you must convert the
             date to unix time in milliseconds.
         xsizemode
             Sets the shapes's sizing mode along the x axis. If set
-            to *scaled*, `x0`, `x1` and x coordinates within `path`
+            to "scaled", `x0`, `x1` and x coordinates within `path`
             refer to data values on the x axis or a fraction of the
-            plot area's width (`xref` set to *paper*). If set to
-            *pixel*, `xanchor` specifies the x position in terms of
+            plot area's width (`xref` set to "paper"). If set to
+            "pixel", `xanchor` specifies the x position in terms of
             data or plot fraction but `x0`, `x1` and x coordinates
             within `path` are pixels relative to `xanchor`. This
             way, the shape can have a fixed width while maintaining
@@ -801,24 +801,24 @@ class Shape(BaseLayoutHierarchyType):
             `ysizemode` for more info.
         yanchor
             Only relevant in conjunction with `ysizemode` set to
-            *pixel*. Specifies the anchor point on the y axis to
+            "pixel". Specifies the anchor point on the y axis to
             which `y0`, `y1` and y coordinates within `path` are
             relative to. E.g. useful to attach a pixel sized shape
             to a certain data value. No effect when `ysizemode` not
-            set to *pixel*.
+            set to "pixel".
         yref
             Sets the annotation's y coordinate axis. If set to an y
-            axis id (e.g. *y* or *y2*), the `y` position refers to
-            an y coordinate If set to *paper*, the `y` position
+            axis id (e.g. "y" or "y2"), the `y` position refers to
+            an y coordinate If set to "paper", the `y` position
             refers to the distance from the bottom of the plotting
-            area in normalized coordinates where *0* (*1*)
-            corresponds to the bottom (top).
+            area in normalized coordinates where 0 (1) corresponds
+            to the bottom (top).
         ysizemode
             Sets the shapes's sizing mode along the y axis. If set
-            to *scaled*, `y0`, `y1` and y coordinates within `path`
+            to "scaled", `y0`, `y1` and y coordinates within `path`
             refer to data values on the y axis or a fraction of the
-            plot area's height (`yref` set to *paper*). If set to
-            *pixel*, `yanchor` specifies the y position in terms of
+            plot area's height (`yref` set to "paper"). If set to
+            "pixel", `yanchor` specifies the y position in terms of
             data or plot fraction but `y0`, `y1` and y coordinates
             within `path` are pixels relative to `yanchor`. This
             way, the shape can have a fixed height while

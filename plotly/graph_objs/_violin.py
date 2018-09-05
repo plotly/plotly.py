@@ -69,7 +69,7 @@ class Violin(BaseTraceType):
         """
         Assigns extra data each datum. This may be useful when
         listening to hover, click and selection events. Note that,
-        *scatter* traces also appends customdata items in the markers
+        "scatter" traces also appends customdata items in the markers
         DOM elements
     
         The 'customdata' property is an array that may be specified as a tuple,
@@ -334,10 +334,10 @@ class Violin(BaseTraceType):
     @property
     def jitter(self):
         """
-        Sets the amount of jitter in the sample points drawn. If *0*,
-        the sample points align along the distribution axis. If *1*,
-        the sample points are drawn in a random jitter of width equal
-        to the width of the violins.
+        Sets the amount of jitter in the sample points drawn. If 0, the
+        sample points align along the distribution axis. If 1, the
+        sample points are drawn in a random jitter of width equal to
+        the width of the violins.
     
         The 'jitter' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
@@ -434,11 +434,11 @@ class Violin(BaseTraceType):
                     Sets the marker size (in px).
                 symbol
                     Sets the marker symbol type. Adding 100 is
-                    equivalent to appending *-open* to a symbol
+                    equivalent to appending "-open" to a symbol
                     name. Adding 200 is equivalent to appending
-                    *-dot* to a symbol name. Adding 300 is
-                    equivalent to appending *-open-dot* or *dot-
-                    open* to a symbol name.
+                    "-dot" to a symbol name. Adding 300 is
+                    equivalent to appending "-open-dot" or "dot-
+                    open" to a symbol name.
 
         Returns
         -------
@@ -534,7 +534,7 @@ class Violin(BaseTraceType):
     @property
     def orientation(self):
         """
-        Sets the orientation of the violin(s). If *v* (*h*), the
+        Sets the orientation of the violin(s). If "v" ("h"), the
         distribution is visualized along the vertical (horizontal).
     
         The 'orientation' property is an enumeration that may be specified as:
@@ -557,10 +557,10 @@ class Violin(BaseTraceType):
     def pointpos(self):
         """
         Sets the position of the sample points in relation to the
-        violins. If *0*, the sample points are places over the center
-        of the violins. Positive (negative) values correspond to
-        positions to the right (left) for vertical violins and above
-        (below) for horizontal violins.
+        violins. If 0, the sample points are places over the center of
+        the violins. Positive (negative) values correspond to positions
+        to the right (left) for vertical violins and above (below) for
+        horizontal violins.
     
         The 'pointpos' property is a number and may be specified as:
           - An int or float in the interval [-2, 2]
@@ -580,11 +580,11 @@ class Violin(BaseTraceType):
     @property
     def points(self):
         """
-        If *outliers*, only the sample points lying outside the
-        whiskers are shown If *suspectedoutliers*, the outlier points
+        If "outliers", only the sample points lying outside the
+        whiskers are shown If "suspectedoutliers", the outlier points
         are shown and points either less than 4*Q1-3*Q3 or greater than
-        4*Q3-3*Q1 are highlighted (see `outliercolor`) If *all*, all
-        sample points are shown If *false*, only the violins are shown
+        4*Q3-3*Q1 are highlighted (see `outliercolor`) If "all", all
+        sample points are shown If False, only the violins are shown
         with no sample points
     
         The 'points' property is an enumeration that may be specified as:
@@ -630,7 +630,7 @@ class Violin(BaseTraceType):
     def scalemode(self):
         """
         Sets the metric by which the width of each violin is
-        determined.*width* means each violin has the same (max)
+        determined."width" means each violin has the same (max)
         width*count* means the violins are scaled by the number of
         sample points makingup each violin.
     
@@ -727,8 +727,8 @@ class Violin(BaseTraceType):
         """
         Determines on which side of the position value the density
         function making up one half of a violin is plotted. Useful when
-        comparing two violin traces under *overlay* mode, where one
-        trace has `side` set to *positive* and the other to *negative*.
+        comparing two violin traces under "overlay" mode, where one
+        trace has `side` set to "positive" and the other to "negative".
     
         The 'side' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -751,7 +751,7 @@ class Violin(BaseTraceType):
         """
         Sets the span in data space for which the density function will
         be computed. Has an effect only when `spanmode` is set to
-        *manual*.
+        "manual".
     
         The 'span' property is an info array that may be specified as a
         list or tuple of 2 elements where:
@@ -775,11 +775,11 @@ class Violin(BaseTraceType):
     def spanmode(self):
         """
         Sets the method by which the span in data space where the
-        density function will be computed. *soft* means the span goes
+        density function will be computed. "soft" means the span goes
         from the sample's minimum value minus two bandwidths to the
-        sample's maximum value plus two bandwidths. *hard* means the
+        sample's maximum value plus two bandwidths. "hard" means the
         span goes from the sample's minimum to its maximum value. For
-        custom span settings, use mode *manual* and fill in the `span`
+        custom span settings, use mode "manual" and fill in the `span`
         attribute.
     
         The 'spanmode' property is an enumeration that may be specified as:
@@ -812,7 +812,7 @@ class Violin(BaseTraceType):
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
-                    `maxpoints` is set to *50*, only the newest 50
+                    `maxpoints` is set to 50, only the newest 50
                     points will be displayed on the plot.
                 token
                     The stream id number links a data trace on a
@@ -838,7 +838,7 @@ class Violin(BaseTraceType):
         single string, the same string appears over all the data
         points. If an array of string, the items are mapped in order to
         the this trace's (x,y) coordinates. To be seen, trace
-        `hoverinfo` must contain a *text* flag.
+        `hoverinfo` must contain a "text" flag.
     
         The 'text' property is a string and must be specified as:
           - A string
@@ -927,7 +927,7 @@ class Violin(BaseTraceType):
     def visible(self):
         """
         Determines whether or not this trace is visible. If
-        *legendonly*, the trace is not drawn, but can appear as a
+        "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
     
         The 'visible' property is an enumeration that may be specified as:
@@ -990,8 +990,8 @@ class Violin(BaseTraceType):
     def xaxis(self):
         """
         Sets a reference between this trace's x coordinates and a 2D
-        cartesian x axis. If *x* (the default value), the x coordinates
-        refer to `layout.xaxis`. If *x2*, the x coordinates refer to
+        cartesian x axis. If "x" (the default value), the x coordinates
+        refer to `layout.xaxis`. If "x2", the x coordinates refer to
         `layout.xaxis2`, and so on.
     
         The 'xaxis' property is an identifier of a particular
@@ -1075,8 +1075,8 @@ class Violin(BaseTraceType):
     def yaxis(self):
         """
         Sets a reference between this trace's y coordinates and a 2D
-        cartesian y axis. If *y* (the default value), the y coordinates
-        refer to `layout.yaxis`. If *y2*, the y coordinates refer to
+        cartesian y axis. If "y" (the default value), the y coordinates
+        refer to `layout.yaxis`. If "y2", the y coordinates refer to
         `layout.yaxis2`, and so on.
     
         The 'yaxis' property is an identifier of a particular
@@ -1141,7 +1141,7 @@ class Violin(BaseTraceType):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -1171,8 +1171,8 @@ class Violin(BaseTraceType):
             Sets the source reference on plot.ly for  ids .
         jitter
             Sets the amount of jitter in the sample points drawn.
-            If *0*, the sample points align along the distribution
-            axis. If *1*, the sample points are drawn in a random
+            If 0, the sample points align along the distribution
+            axis. If 1, the sample points are drawn in a random
             jitter of width equal to the width of the violins.
         legendgroup
             Sets the legend group for this trace. Traces part of
@@ -1196,23 +1196,23 @@ class Violin(BaseTraceType):
         opacity
             Sets the opacity of the trace.
         orientation
-            Sets the orientation of the violin(s). If *v* (*h*),
+            Sets the orientation of the violin(s). If "v" ("h"),
             the distribution is visualized along the vertical
             (horizontal).
         pointpos
             Sets the position of the sample points in relation to
-            the violins. If *0*, the sample points are places over
+            the violins. If 0, the sample points are places over
             the center of the violins. Positive (negative) values
             correspond to positions to the right (left) for
             vertical violins and above (below) for horizontal
             violins.
         points
-            If *outliers*, only the sample points lying outside the
-            whiskers are shown If *suspectedoutliers*, the outlier
+            If "outliers", only the sample points lying outside the
+            whiskers are shown If "suspectedoutliers", the outlier
             points are shown and points either less than 4*Q1-3*Q3
             or greater than 4*Q3-3*Q1 are highlighted (see
-            `outliercolor`) If *all*, all sample points are shown
-            If *false*, only the violins are shown with no sample
+            `outliercolor`) If "all", all sample points are shown
+            If False, only the violins are shown with no sample
             points
         scalegroup
             If there are multiple violins that should be sized
@@ -1221,7 +1221,7 @@ class Violin(BaseTraceType):
             every trace in the same group.
         scalemode
             Sets the metric by which the width of each violin is
-            determined.*width* means each violin has the same (max)
+            determined."width" means each violin has the same (max)
             width*count* means the violins are scaled by the number
             of sample points makingup each violin.
         selected
@@ -1241,20 +1241,20 @@ class Violin(BaseTraceType):
             Determines on which side of the position value the
             density function making up one half of a violin is
             plotted. Useful when comparing two violin traces under
-            *overlay* mode, where one trace has `side` set to
-            *positive* and the other to *negative*.
+            "overlay" mode, where one trace has `side` set to
+            "positive" and the other to "negative".
         span
             Sets the span in data space for which the density
             function will be computed. Has an effect only when
-            `spanmode` is set to *manual*.
+            `spanmode` is set to "manual".
         spanmode
             Sets the method by which the span in data space where
-            the density function will be computed. *soft* means the
+            the density function will be computed. "soft" means the
             span goes from the sample's minimum value minus two
             bandwidths to the sample's maximum value plus two
-            bandwidths. *hard* means the span goes from the
+            bandwidths. "hard" means the span goes from the
             sample's minimum to its maximum value. For custom span
-            settings, use mode *manual* and fill in the `span`
+            settings, use mode "manual" and fill in the `span`
             attribute.
         stream
             plotly.graph_objs.violin.Stream instance or dict with
@@ -1265,7 +1265,7 @@ class Violin(BaseTraceType):
             all the data points. If an array of string, the items
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
-            a *text* flag.
+            a "text" flag.
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
@@ -1275,7 +1275,7 @@ class Violin(BaseTraceType):
             with compatible properties
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         x
@@ -1286,8 +1286,8 @@ class Violin(BaseTraceType):
             info.
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xsrc
             Sets the source reference on plot.ly for  x .
@@ -1299,8 +1299,8 @@ class Violin(BaseTraceType):
             info.
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ysrc
             Sets the source reference on plot.ly for  y .
@@ -1359,10 +1359,10 @@ class Violin(BaseTraceType):
         
         In vertical (horizontal) violin plots, statistics are computed
         using `y` (`x`) values. By supplying an `x` (`y`) array, one
-        violin per distinct x (y) value is drawn If no `x` (`y`)
-        {array} is provided, a single violin is drawn. That violin
-        position is then positioned with with `name` or with `x0`
-        (`y0`) if provided.
+        violin per distinct x (y) value is drawn If no `x` (`y`) list
+        is provided, a single violin is drawn. That violin position is
+        then positioned with with `name` or with `x0` (`y0`) if
+        provided.
 
         Parameters
         ----------
@@ -1379,7 +1379,7 @@ class Violin(BaseTraceType):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -1409,8 +1409,8 @@ class Violin(BaseTraceType):
             Sets the source reference on plot.ly for  ids .
         jitter
             Sets the amount of jitter in the sample points drawn.
-            If *0*, the sample points align along the distribution
-            axis. If *1*, the sample points are drawn in a random
+            If 0, the sample points align along the distribution
+            axis. If 1, the sample points are drawn in a random
             jitter of width equal to the width of the violins.
         legendgroup
             Sets the legend group for this trace. Traces part of
@@ -1434,23 +1434,23 @@ class Violin(BaseTraceType):
         opacity
             Sets the opacity of the trace.
         orientation
-            Sets the orientation of the violin(s). If *v* (*h*),
+            Sets the orientation of the violin(s). If "v" ("h"),
             the distribution is visualized along the vertical
             (horizontal).
         pointpos
             Sets the position of the sample points in relation to
-            the violins. If *0*, the sample points are places over
+            the violins. If 0, the sample points are places over
             the center of the violins. Positive (negative) values
             correspond to positions to the right (left) for
             vertical violins and above (below) for horizontal
             violins.
         points
-            If *outliers*, only the sample points lying outside the
-            whiskers are shown If *suspectedoutliers*, the outlier
+            If "outliers", only the sample points lying outside the
+            whiskers are shown If "suspectedoutliers", the outlier
             points are shown and points either less than 4*Q1-3*Q3
             or greater than 4*Q3-3*Q1 are highlighted (see
-            `outliercolor`) If *all*, all sample points are shown
-            If *false*, only the violins are shown with no sample
+            `outliercolor`) If "all", all sample points are shown
+            If False, only the violins are shown with no sample
             points
         scalegroup
             If there are multiple violins that should be sized
@@ -1459,7 +1459,7 @@ class Violin(BaseTraceType):
             every trace in the same group.
         scalemode
             Sets the metric by which the width of each violin is
-            determined.*width* means each violin has the same (max)
+            determined."width" means each violin has the same (max)
             width*count* means the violins are scaled by the number
             of sample points makingup each violin.
         selected
@@ -1479,20 +1479,20 @@ class Violin(BaseTraceType):
             Determines on which side of the position value the
             density function making up one half of a violin is
             plotted. Useful when comparing two violin traces under
-            *overlay* mode, where one trace has `side` set to
-            *positive* and the other to *negative*.
+            "overlay" mode, where one trace has `side` set to
+            "positive" and the other to "negative".
         span
             Sets the span in data space for which the density
             function will be computed. Has an effect only when
-            `spanmode` is set to *manual*.
+            `spanmode` is set to "manual".
         spanmode
             Sets the method by which the span in data space where
-            the density function will be computed. *soft* means the
+            the density function will be computed. "soft" means the
             span goes from the sample's minimum value minus two
             bandwidths to the sample's maximum value plus two
-            bandwidths. *hard* means the span goes from the
+            bandwidths. "hard" means the span goes from the
             sample's minimum to its maximum value. For custom span
-            settings, use mode *manual* and fill in the `span`
+            settings, use mode "manual" and fill in the `span`
             attribute.
         stream
             plotly.graph_objs.violin.Stream instance or dict with
@@ -1503,7 +1503,7 @@ class Violin(BaseTraceType):
             all the data points. If an array of string, the items
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
-            a *text* flag.
+            a "text" flag.
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
@@ -1513,7 +1513,7 @@ class Violin(BaseTraceType):
             with compatible properties
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         x
@@ -1524,8 +1524,8 @@ class Violin(BaseTraceType):
             info.
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xsrc
             Sets the source reference on plot.ly for  x .
@@ -1537,8 +1537,8 @@ class Violin(BaseTraceType):
             info.
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ysrc
             Sets the source reference on plot.ly for  y .

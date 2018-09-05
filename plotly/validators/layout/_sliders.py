@@ -35,7 +35,7 @@ class SlidersValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 padding on both ends.
             lenmode
                 Determines whether this slider length is set in
-                units of plot *fraction* or in *pixels. Use
+                units of plot "fraction" or in *pixels. Use
                 `len` to set the value.
             minorticklen
                 Sets the length in pixels of minor step tick
@@ -86,14 +86,15 @@ class SlidersValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
             xanchor
                 Sets the slider's horizontal position anchor.
                 This anchor binds the `x` position to the
-                *left*, *center* or *right* of the range
+                "left", "center" or "right" of the range
                 selector.
             y
                 Sets the y position (in normalized coordinates)
                 of the slider.
             yanchor
                 Sets the slider's vertical position anchor This
-                anchor binds the `y` position to the *top*,
-                *middle* or *bottom* of the range selector.""",
+                anchor binds the `y` position to the "top",
+                "middle" or "bottom" of the range selector.
+""",
             **kwargs
         )

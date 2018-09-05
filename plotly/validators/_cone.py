@@ -11,7 +11,7 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs="""
             anchor
                 Sets the cones' anchor with respect to their
-                x/y/z positions. Note that *cm* denote the
+                x/y/z positions. Note that "cm" denote the
                 cone's center of mass which corresponds to 1/4
                 from the tail to tip.
             autocolorscale
@@ -56,7 +56,7 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
-                selection events. Note that, *scatter* traces
+                selection events. Note that, "scatter" traces
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
@@ -103,9 +103,9 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color.
             scene
                 Sets a reference between this trace's 3D
-                coordinate system and a 3D scene. If *scene*
+                coordinate system and a 3D scene. If "scene"
                 (the default value), the (x,y,z) coordinates
-                refer to `layout.scene`. If *scene2*, the
+                refer to `layout.scene`. If "scene2", the
                 (x,y,z) coordinates refer to `layout.scene2`,
                 and so on.
             selectedpoints
@@ -125,9 +125,9 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 displayed for this trace.
             sizemode
                 Determines whether `sizeref` is set as a
-                *scaled* (i.e unitless) scalar (normalized by
+                "scaled" (i.e unitless) scalar (normalized by
                 the max u/v/w norm in the vector field) or as
-                *absolute* value (in the same units as the
+                "absolute" value (in the same units as the
                 vector field).
             sizeref
                 Adjusts the cone size scaling. The size of the
@@ -138,9 +138,9 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 x/y/z positions at the average velocity of
                 those two successive positions. All cones in a
                 given trace use the same factor. With
-                `sizemode` set to *scaled*, `sizeref` is
-                unitless, its default value is *0.5* With
-                `sizemode` set to *absolute*, `sizeref` has the
+                `sizemode` set to "scaled", `sizeref` is
+                unitless, its default value is 0.5 With
+                `sizemode` set to "absolute", `sizeref` has the
                 same units as the u/v/w vector field, its the
                 default value is half the sample's maximum
                 vector norm.
@@ -149,8 +149,8 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 with compatible properties
             text
                 Sets the text elements associated with the
-                cones. If trace `hoverinfo` contains a *text*
-                flag and *hovertext* is not set, these elements
+                cones. If trace `hoverinfo` contains a "text"
+                flag and "hovertext" is not set, these elements
                 will be seen in the hover labels.
             textsrc
                 Sets the source reference on plot.ly for  text
@@ -165,7 +165,7 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the y components of the vector field.
             visible
                 Determines whether or not this trace is
-                visible. If *legendonly*, the trace is not
+                visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
             vsrc
@@ -188,6 +188,7 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the z coordinates of the vector field and
                 of the displayed cones.
             zsrc
-                Sets the source reference on plot.ly for  z .""",
+                Sets the source reference on plot.ly for  z .
+""",
             **kwargs
         )

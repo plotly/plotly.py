@@ -11,6 +11,7 @@ class DiagonalValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs="""
             visible
                 Determines whether or not subplots on the
-                diagonal are displayed.""",
+                diagonal are displayed.
+""",
             **kwargs
         )

@@ -10,23 +10,23 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_class_str='Box',
             data_docs="""
             boxmean
-                If *true*, the mean of the box(es)' underlying
+                If True, the mean of the box(es)' underlying
                 distribution is drawn as a dashed line inside
-                the box(es). If *sd* the standard deviation is
+                the box(es). If "sd" the standard deviation is
                 also drawn.
             boxpoints
-                If *outliers*, only the sample points lying
+                If "outliers", only the sample points lying
                 outside the whiskers are shown If
-                *suspectedoutliers*, the outlier points are
+                "suspectedoutliers", the outlier points are
                 shown and points either less than 4*Q1-3*Q3 or
                 greater than 4*Q3-3*Q1 are highlighted (see
-                `outliercolor`) If *all*, all sample points are
-                shown If *false*, only the box(es) are shown
-                with no sample points
+                `outliercolor`) If "all", all sample points are
+                shown If False, only the box(es) are shown with
+                no sample points
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
-                selection events. Note that, *scatter* traces
+                selection events. Note that, "scatter" traces
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
@@ -61,10 +61,10 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  ids .
             jitter
                 Sets the amount of jitter in the sample points
-                drawn. If *0*, the sample points align along
-                the distribution axis. If *1*, the sample
-                points are drawn in a random jitter of width
-                equal to the width of the box(es).
+                drawn. If 0, the sample points align along the
+                distribution axis. If 1, the sample points are
+                drawn in a random jitter of width equal to the
+                width of the box(es).
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -92,12 +92,12 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
             opacity
                 Sets the opacity of the trace.
             orientation
-                Sets the orientation of the box(es). If *v*
-                (*h*), the distribution is visualized along the
+                Sets the orientation of the box(es). If "v"
+                ("h"), the distribution is visualized along the
                 vertical (horizontal).
             pointpos
                 Sets the position of the sample points in
-                relation to the box(es). If *0*, the sample
+                relation to the box(es). If 0, the sample
                 points are places over the center of the
                 box(es). Positive (negative) values correspond
                 to positions to the right (left) for vertical
@@ -126,7 +126,7 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 string appears over all the data points. If an
                 array of string, the items are mapped in order
                 to the this trace's (x,y) coordinates. To be
-                seen, trace `hoverinfo` must contain a *text*
+                seen, trace `hoverinfo` must contain a "text"
                 flag.
             textsrc
                 Sets the source reference on plot.ly for  text
@@ -138,7 +138,7 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 dict with compatible properties
             visible
                 Determines whether or not this trace is
-                visible. If *legendonly*, the trace is not
+                visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
             whiskerwidth
@@ -153,9 +153,9 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for more info.
             xaxis
                 Sets a reference between this trace's x
-                coordinates and a 2D cartesian x axis. If *x*
+                coordinates and a 2D cartesian x axis. If "x"
                 (the default value), the x coordinates refer to
-                `layout.xaxis`. If *x2*, the x coordinates
+                `layout.xaxis`. If "x2", the x coordinates
                 refer to `layout.xaxis2`, and so on.
             xcalendar
                 Sets the calendar system to use with `x` date
@@ -170,14 +170,15 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for more info.
             yaxis
                 Sets a reference between this trace's y
-                coordinates and a 2D cartesian y axis. If *y*
+                coordinates and a 2D cartesian y axis. If "y"
                 (the default value), the y coordinates refer to
-                `layout.yaxis`. If *y2*, the y coordinates
+                `layout.yaxis`. If "y2", the y coordinates
                 refer to `layout.yaxis2`, and so on.
             ycalendar
                 Sets the calendar system to use with `y` date
                 data.
             ysrc
-                Sets the source reference on plot.ly for  y .""",
+                Sets the source reference on plot.ly for  y .
+""",
             **kwargs
         )

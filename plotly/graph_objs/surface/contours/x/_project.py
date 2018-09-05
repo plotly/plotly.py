@@ -10,8 +10,8 @@ class Project(BaseTraceHierarchyType):
     def x(self):
         """
         Determines whether or not these contour lines are projected on
-        the x plane. If `highlight` is set to *true* (the default), the
-        projected lines are shown on hover. If `show` is set to *true*,
+        the x plane. If `highlight` is set to True (the default), the
+        projected lines are shown on hover. If `show` is set to True,
         the projected lines are shown in permanence.
     
         The 'x' property must be specified as a bool
@@ -33,8 +33,8 @@ class Project(BaseTraceHierarchyType):
     def y(self):
         """
         Determines whether or not these contour lines are projected on
-        the y plane. If `highlight` is set to *true* (the default), the
-        projected lines are shown on hover. If `show` is set to *true*,
+        the y plane. If `highlight` is set to True (the default), the
+        projected lines are shown on hover. If `show` is set to True,
         the projected lines are shown in permanence.
     
         The 'y' property must be specified as a bool
@@ -56,8 +56,8 @@ class Project(BaseTraceHierarchyType):
     def z(self):
         """
         Determines whether or not these contour lines are projected on
-        the z plane. If `highlight` is set to *true* (the default), the
-        projected lines are shown on hover. If `show` is set to *true*,
+        the z plane. If `highlight` is set to True (the default), the
+        projected lines are shown on hover. If `show` is set to True,
         the projected lines are shown in permanence.
     
         The 'z' property must be specified as a bool
@@ -86,22 +86,22 @@ class Project(BaseTraceHierarchyType):
         return """\
         x
             Determines whether or not these contour lines are
-            projected on the x plane. If `highlight` is set to
-            *true* (the default), the projected lines are shown on
-            hover. If `show` is set to *true*, the projected lines
-            are shown in permanence.
+            projected on the x plane. If `highlight` is set to True
+            (the default), the projected lines are shown on hover.
+            If `show` is set to True, the projected lines are shown
+            in permanence.
         y
             Determines whether or not these contour lines are
-            projected on the y plane. If `highlight` is set to
-            *true* (the default), the projected lines are shown on
-            hover. If `show` is set to *true*, the projected lines
-            are shown in permanence.
+            projected on the y plane. If `highlight` is set to True
+            (the default), the projected lines are shown on hover.
+            If `show` is set to True, the projected lines are shown
+            in permanence.
         z
             Determines whether or not these contour lines are
-            projected on the z plane. If `highlight` is set to
-            *true* (the default), the projected lines are shown on
-            hover. If `show` is set to *true*, the projected lines
-            are shown in permanence.
+            projected on the z plane. If `highlight` is set to True
+            (the default), the projected lines are shown on hover.
+            If `show` is set to True, the projected lines are shown
+            in permanence.
         """
 
     def __init__(self, arg=None, x=None, y=None, z=None, **kwargs):
@@ -116,22 +116,22 @@ class Project(BaseTraceHierarchyType):
             plotly.graph_objs.surface.contours.x.Project
         x
             Determines whether or not these contour lines are
-            projected on the x plane. If `highlight` is set to
-            *true* (the default), the projected lines are shown on
-            hover. If `show` is set to *true*, the projected lines
-            are shown in permanence.
+            projected on the x plane. If `highlight` is set to True
+            (the default), the projected lines are shown on hover.
+            If `show` is set to True, the projected lines are shown
+            in permanence.
         y
             Determines whether or not these contour lines are
-            projected on the y plane. If `highlight` is set to
-            *true* (the default), the projected lines are shown on
-            hover. If `show` is set to *true*, the projected lines
-            are shown in permanence.
+            projected on the y plane. If `highlight` is set to True
+            (the default), the projected lines are shown on hover.
+            If `show` is set to True, the projected lines are shown
+            in permanence.
         z
             Determines whether or not these contour lines are
-            projected on the z plane. If `highlight` is set to
-            *true* (the default), the projected lines are shown on
-            hover. If `show` is set to *true*, the projected lines
-            are shown in permanence.
+            projected on the z plane. If `highlight` is set to True
+            (the default), the projected lines are shown on hover.
+            If `show` is set to True, the projected lines are shown
+            in permanence.
 
         Returns
         -------

@@ -14,6 +14,7 @@ class SelectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 or dict with compatible properties
             textfont
                 plotly.graph_objs.bar.selected.Textfont
-                instance or dict with compatible properties""",
+                instance or dict with compatible properties
+""",
             **kwargs
         )

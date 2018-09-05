@@ -77,6 +77,7 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 first color.
             width
                 Sets the width (in px) of the lines bounding
-                the marker points.""",
+                the marker points.
+""",
             **kwargs
         )

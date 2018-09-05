@@ -57,6 +57,7 @@ class ButtonsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 you explicitly show it with `visible: true`.
             visible
                 Determines whether or not this button is
-                visible.""",
+                visible.
+""",
             **kwargs
         )

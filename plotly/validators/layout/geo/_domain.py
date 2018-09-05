@@ -36,6 +36,7 @@ class DomainValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (in plot fraction). Note that geo subplots are
                 constrained by domain. In general, when
                 `projection.scale` is set to 1. a map will fit
-                either its x or y domain, but not both.""",
+                either its x or y domain, but not both.
+""",
             **kwargs
         )

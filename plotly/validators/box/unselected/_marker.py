@@ -19,6 +19,7 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 applied only when a selection exists.
             size
                 Sets the marker size of unselected points,
-                applied only when a selection exists.""",
+                applied only when a selection exists.
+""",
             **kwargs
         )

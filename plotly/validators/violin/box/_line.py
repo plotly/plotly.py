@@ -12,6 +12,7 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
             color
                 Sets the inner box plot bounding line color.
             width
-                Sets the inner box plot bounding line width.""",
+                Sets the inner box plot bounding line width.
+""",
             **kwargs
         )

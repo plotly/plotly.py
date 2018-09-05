@@ -179,24 +179,21 @@ class Y(BaseTraceHierarchyType):
                 x
                     Determines whether or not these contour lines
                     are projected on the x plane. If `highlight` is
-                    set to *true* (the default), the projected
-                    lines are shown on hover. If `show` is set to
-                    *true*, the projected lines are shown in
-                    permanence.
+                    set to True (the default), the projected lines
+                    are shown on hover. If `show` is set to True,
+                    the projected lines are shown in permanence.
                 y
                     Determines whether or not these contour lines
                     are projected on the y plane. If `highlight` is
-                    set to *true* (the default), the projected
-                    lines are shown on hover. If `show` is set to
-                    *true*, the projected lines are shown in
-                    permanence.
+                    set to True (the default), the projected lines
+                    are shown on hover. If `show` is set to True,
+                    the projected lines are shown in permanence.
                 z
                     Determines whether or not these contour lines
                     are projected on the z plane. If `highlight` is
-                    set to *true* (the default), the projected
-                    lines are shown on hover. If `show` is set to
-                    *true*, the projected lines are shown in
-                    permanence.
+                    set to True (the default), the projected lines
+                    are shown on hover. If `show` is set to True,
+                    the projected lines are shown in permanence.
 
         Returns
         -------
@@ -234,8 +231,8 @@ class Y(BaseTraceHierarchyType):
     @property
     def usecolormap(self):
         """
-        An alternate to *color*. Determines whether or not the contour
-        lines are colored using the trace *colorscale*.
+        An alternate to "color". Determines whether or not the contour
+        lines are colored using the trace "colorscale".
     
         The 'usecolormap' property must be specified as a bool
         (either True, or False)
@@ -297,8 +294,8 @@ class Y(BaseTraceHierarchyType):
             Determines whether or not contour lines about the y
             dimension are drawn.
         usecolormap
-            An alternate to *color*. Determines whether or not the
-            contour lines are colored using the trace *colorscale*.
+            An alternate to "color". Determines whether or not the
+            contour lines are colored using the trace "colorscale".
         width
             Sets the width of the contour lines.
         """
@@ -340,8 +337,8 @@ class Y(BaseTraceHierarchyType):
             Determines whether or not contour lines about the y
             dimension are drawn.
         usecolormap
-            An alternate to *color*. Determines whether or not the
-            contour lines are colored using the trace *colorscale*.
+            An alternate to "color". Determines whether or not the
+            contour lines are colored using the trace "colorscale".
         width
             Sets the width of the contour lines.
 

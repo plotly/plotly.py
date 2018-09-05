@@ -57,6 +57,7 @@ class HeaderValidator(_plotly_utils.basevalidators.CompoundValidator):
                 number or a string.
             valuessrc
                 Sets the source reference on plot.ly for
-                values .""",
+                values .
+""",
             **kwargs
         )

@@ -15,6 +15,7 @@ class TransitionValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the duration of the slider transition
             easing
                 Sets the easing function of the slider
-                transition""",
+                transition
+""",
             **kwargs
         )

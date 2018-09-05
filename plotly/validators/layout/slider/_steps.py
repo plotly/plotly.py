@@ -61,6 +61,7 @@ class StepsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 the slider label if not provided.
             visible
                 Determines whether or not this step is included
-                in the slider.""",
+                in the slider.
+""",
             **kwargs
         )

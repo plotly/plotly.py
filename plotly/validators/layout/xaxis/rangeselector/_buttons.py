@@ -34,16 +34,16 @@ class ButtonsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 The unit of measurement that the `count` value
                 will set the range by.
             stepmode
-                Sets the range update mode. If *backward*, the
+                Sets the range update mode. If "backward", the
                 range update shifts the start of range back
-                *count* times *step* milliseconds. If *todate*,
+                "count" times "step" milliseconds. If "todate",
                 the range update shifts the start of range back
-                to the first timestamp from *count* times
-                *step* milliseconds back. For example, with
-                `step` set to *year* and `count` set to *1* the
+                to the first timestamp from "count" times
+                "step" milliseconds back. For example, with
+                `step` set to "year" and `count` set to 1 the
                 range update shifts the start of the range back
                 to January 01 of the current year. Month and
-                year *todate* are currently available only for
+                year "todate" are currently available only for
                 the built-in (Gregorian) calendar.
             templateitemname
                 Used to refer to a named item in this array in
@@ -58,6 +58,7 @@ class ButtonsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 you explicitly show it with `visible: true`.
             visible
                 Determines whether or not this button is
-                visible.""",
+                visible.
+""",
             **kwargs
         )

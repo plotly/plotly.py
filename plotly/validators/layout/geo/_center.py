@@ -21,6 +21,7 @@ class CenterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 default, the map's longitude center lies at the
                 middle of the longitude range for scoped
                 projection and above `projection.rotation.lon`
-                otherwise.""",
+                otherwise.
+""",
             **kwargs
         )

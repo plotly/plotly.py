@@ -12,7 +12,7 @@ class SplomValidator(_plotly_utils.basevalidators.CompoundValidator):
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
-                selection events. Note that, *scatter* traces
+                selection events. Note that, "scatter" traces
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
@@ -96,7 +96,7 @@ class SplomValidator(_plotly_utils.basevalidators.CompoundValidator):
                 dict with compatible properties
             visible
                 Determines whether or not this trace is
-                visible. If *legendonly*, the trace is not
+                visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
             xaxes
@@ -108,6 +108,7 @@ class SplomValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the list of y axes corresponding to this
                 splom trace. By default, a splom will match the
                 first N yaxes where N is the number of input
-                dimensions.""",
+                dimensions.
+""",
             **kwargs
         )

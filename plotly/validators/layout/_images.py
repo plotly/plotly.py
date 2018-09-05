@@ -66,12 +66,12 @@ class ImagesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 Sets the anchor for the x position
             xref
                 Sets the images's x coordinate axis. If set to
-                a x axis id (e.g. *x* or *x2*), the `x`
+                a x axis id (e.g. "x" or "x2"), the `x`
                 position refers to an x data coordinate If set
-                to *paper*, the `x` position refers to the
+                to "paper", the `x` position refers to the
                 distance from the left of plot in normalized
-                coordinates where *0* (*1*) corresponds to the
-                left (right).
+                coordinates where 0 (1) corresponds to the left
+                (right).
             y
                 Sets the image's y position. When `yref` is set
                 to `paper`, units are sized relative to the
@@ -80,11 +80,12 @@ class ImagesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 Sets the anchor for the y position.
             yref
                 Sets the images's y coordinate axis. If set to
-                a y axis id (e.g. *y* or *y2*), the `y`
+                a y axis id (e.g. "y" or "y2"), the `y`
                 position refers to a y data coordinate. If set
-                to *paper*, the `y` position refers to the
+                to "paper", the `y` position refers to the
                 distance from the bottom of the plot in
-                normalized coordinates where *0* (*1*)
-                corresponds to the bottom (top).""",
+                normalized coordinates where 0 (1) corresponds
+                to the bottom (top).
+""",
             **kwargs
         )

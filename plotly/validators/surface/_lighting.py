@@ -28,6 +28,7 @@ class LightingValidator(_plotly_utils.basevalidators.CompoundValidator):
                 shine.
             specular
                 Represents the level that incident rays are
-                reflected in a single direction, causing shine.""",
+                reflected in a single direction, causing shine.
+""",
             **kwargs
         )

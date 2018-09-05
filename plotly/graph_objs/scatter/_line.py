@@ -69,9 +69,9 @@ class Line(BaseTraceHierarchyType):
     def dash(self):
         """
         Sets the dash style of lines. Set to a dash type string
-        (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or
-        *longdashdot*) or a dash length list in px (eg
-        *5px,10px,2px,2px*).
+        ("solid", "dot", "dash", "longdash", "dashdot", or
+        "longdashdot") or a dash length list in px (eg
+        "5px,10px,2px,2px").
     
         The 'dash' property is an enumeration that may be specified as:
           - One of the following dash styles:
@@ -94,7 +94,7 @@ class Line(BaseTraceHierarchyType):
     @property
     def shape(self):
         """
-        Determines the line shape. With *spline* the lines are drawn
+        Determines the line shape. With "spline" the lines are drawn
         using spline interpolation. The other available values
         correspond to step-wise line shapes.
     
@@ -140,9 +140,9 @@ class Line(BaseTraceHierarchyType):
     @property
     def smoothing(self):
         """
-        Has an effect only if `shape` is set to *spline* Sets the
-        amount of smoothing. *0* corresponds to no smoothing
-        (equivalent to a *linear* shape).
+        Has an effect only if `shape` is set to "spline" Sets the
+        amount of smoothing. 0 corresponds to no smoothing (equivalent
+        to a "linear" shape).
     
         The 'smoothing' property is a number and may be specified as:
           - An int or float in the interval [0, 1.3]
@@ -192,11 +192,11 @@ class Line(BaseTraceHierarchyType):
             Sets the line color.
         dash
             Sets the dash style of lines. Set to a dash type string
-            (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or
-            *longdashdot*) or a dash length list in px (eg
-            *5px,10px,2px,2px*).
+            ("solid", "dot", "dash", "longdash", "dashdot", or
+            "longdashdot") or a dash length list in px (eg
+            "5px,10px,2px,2px").
         shape
-            Determines the line shape. With *spline* the lines are
+            Determines the line shape. With "spline" the lines are
             drawn using spline interpolation. The other available
             values correspond to step-wise line shapes.
         simplify
@@ -205,9 +205,9 @@ class Line(BaseTraceHierarchyType):
             disable this so that the number of points along the
             resulting SVG path is unaffected.
         smoothing
-            Has an effect only if `shape` is set to *spline* Sets
-            the amount of smoothing. *0* corresponds to no
-            smoothing (equivalent to a *linear* shape).
+            Has an effect only if `shape` is set to "spline" Sets
+            the amount of smoothing. 0 corresponds to no smoothing
+            (equivalent to a "linear" shape).
         width
             Sets the line width (in px).
         """
@@ -235,11 +235,11 @@ class Line(BaseTraceHierarchyType):
             Sets the line color.
         dash
             Sets the dash style of lines. Set to a dash type string
-            (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or
-            *longdashdot*) or a dash length list in px (eg
-            *5px,10px,2px,2px*).
+            ("solid", "dot", "dash", "longdash", "dashdot", or
+            "longdashdot") or a dash length list in px (eg
+            "5px,10px,2px,2px").
         shape
-            Determines the line shape. With *spline* the lines are
+            Determines the line shape. With "spline" the lines are
             drawn using spline interpolation. The other available
             values correspond to step-wise line shapes.
         simplify
@@ -248,9 +248,9 @@ class Line(BaseTraceHierarchyType):
             disable this so that the number of points along the
             resulting SVG path is unaffected.
         smoothing
-            Has an effect only if `shape` is set to *spline* Sets
-            the amount of smoothing. *0* corresponds to no
-            smoothing (equivalent to a *linear* shape).
+            Has an effect only if `shape` is set to "spline" Sets
+            the amount of smoothing. 0 corresponds to no smoothing
+            (equivalent to a "linear" shape).
         width
             Sets the line width (in px).
 

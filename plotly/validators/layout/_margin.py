@@ -21,6 +21,7 @@ class MarginValidator(_plotly_utils.basevalidators.CompoundValidator):
             r
                 Sets the right margin (in px).
             t
-                Sets the top margin (in px).""",
+                Sets the top margin (in px).
+""",
             **kwargs
         )

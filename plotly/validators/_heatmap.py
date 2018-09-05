@@ -40,7 +40,7 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
-                selection events. Note that, *scatter* traces
+                selection events. Note that, "scatter" traces
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
@@ -115,7 +115,7 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
 
             visible
                 Determines whether or not this trace is
-                visible. If *legendonly*, the trace is not
+                visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
             x
@@ -126,9 +126,9 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 starting coordinate and `dx` the step.
             xaxis
                 Sets a reference between this trace's x
-                coordinates and a 2D cartesian x axis. If *x*
+                coordinates and a 2D cartesian x axis. If "x"
                 (the default value), the x coordinates refer to
-                `layout.xaxis`. If *x2*, the x coordinates
+                `layout.xaxis`. If "x2", the x coordinates
                 refer to `layout.xaxis2`, and so on.
             xcalendar
                 Sets the calendar system to use with `x` date
@@ -139,10 +139,10 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
             xsrc
                 Sets the source reference on plot.ly for  x .
             xtype
-                If *array*, the heatmap's x coordinates are
-                given by *x* (the default behavior when `x` is
-                provided). If *scaled*, the heatmap's x
-                coordinates are given by *x0* and *dx* (the
+                If "array", the heatmap's x coordinates are
+                given by "x" (the default behavior when `x` is
+                provided). If "scaled", the heatmap's x
+                coordinates are given by "x0" and "dx" (the
                 default behavior when `x` is not provided).
             y
                 Sets the y coordinates.
@@ -152,9 +152,9 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 starting coordinate and `dy` the step.
             yaxis
                 Sets a reference between this trace's y
-                coordinates and a 2D cartesian y axis. If *y*
+                coordinates and a 2D cartesian y axis. If "y"
                 (the default value), the y coordinates refer to
-                `layout.yaxis`. If *y2*, the y coordinates
+                `layout.yaxis`. If "y2", the y coordinates
                 refer to `layout.yaxis2`, and so on.
             ycalendar
                 Sets the calendar system to use with `y` date
@@ -165,10 +165,10 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
             ysrc
                 Sets the source reference on plot.ly for  y .
             ytype
-                If *array*, the heatmap's y coordinates are
-                given by *y* (the default behavior when `y` is
-                provided) If *scaled*, the heatmap's y
-                coordinates are given by *y0* and *dy* (the
+                If "array", the heatmap's y coordinates are
+                given by "y" (the default behavior when `y` is
+                provided) If "scaled", the heatmap's y
+                coordinates are given by "y0" and "dy" (the
                 default behavior when `y` is not provided)
             z
                 Sets the z data.
@@ -196,6 +196,7 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Picks a smoothing algorithm use to smooth `z`
                 data.
             zsrc
-                Sets the source reference on plot.ly for  z .""",
+                Sets the source reference on plot.ly for  z .
+""",
             **kwargs
         )

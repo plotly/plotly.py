@@ -16,6 +16,7 @@ class SelectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 instance or dict with compatible properties
             textfont
                 plotly.graph_objs.histogram.selected.Textfont
-                instance or dict with compatible properties""",
+                instance or dict with compatible properties
+""",
             **kwargs
         )

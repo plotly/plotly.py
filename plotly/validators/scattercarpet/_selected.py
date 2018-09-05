@@ -16,6 +16,7 @@ class SelectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 instance or dict with compatible properties
             textfont
                 plotly.graph_objs.scattercarpet.selected.Textfo
-                nt instance or dict with compatible properties""",
+                nt instance or dict with compatible properties
+""",
             **kwargs
         )

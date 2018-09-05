@@ -251,10 +251,10 @@ class ErrorX(BaseTraceHierarchyType):
         """
         Determines the rule used to generate the error bars. If
         *constant`, the bar lengths are of a constant value. Set this
-        constant in `value`. If *percent*, the bar lengths correspond
+        constant in `value`. If "percent", the bar lengths correspond
         to a percentage of underlying data. Set this percentage in
-        `value`. If *sqrt*, the bar lengths correspond to the sqaure of
-        the underlying data. If *array*, the bar lengths are set with
+        `value`. If "sqrt", the bar lengths correspond to the sqaure of
+        the underlying data. If "array", the bar lengths are set with
         data set `array`.
     
         The 'type' property is an enumeration that may be specified as:
@@ -277,7 +277,7 @@ class ErrorX(BaseTraceHierarchyType):
     def value(self):
         """
         Sets the value of either the percentage (if `type` is set to
-        *percent*) or the constant (if `type` is set to *constant*)
+        "percent") or the constant (if `type` is set to "constant")
         corresponding to the lengths of the error bars.
     
         The 'value' property is a number and may be specified as:
@@ -299,7 +299,7 @@ class ErrorX(BaseTraceHierarchyType):
     def valueminus(self):
         """
         Sets the value of either the percentage (if `type` is set to
-        *percent*) or the constant (if `type` is set to *constant*)
+        "percent") or the constant (if `type` is set to "constant")
         corresponding to the lengths of the error bars in the bottom
         (left) direction for vertical (horizontal) bars
     
@@ -398,21 +398,21 @@ class ErrorX(BaseTraceHierarchyType):
         type
             Determines the rule used to generate the error bars. If
             *constant`, the bar lengths are of a constant value.
-            Set this constant in `value`. If *percent*, the bar
+            Set this constant in `value`. If "percent", the bar
             lengths correspond to a percentage of underlying data.
-            Set this percentage in `value`. If *sqrt*, the bar
+            Set this percentage in `value`. If "sqrt", the bar
             lengths correspond to the sqaure of the underlying
-            data. If *array*, the bar lengths are set with data set
+            data. If "array", the bar lengths are set with data set
             `array`.
         value
             Sets the value of either the percentage (if `type` is
-            set to *percent*) or the constant (if `type` is set to
-            *constant*) corresponding to the lengths of the error
+            set to "percent") or the constant (if `type` is set to
+            "constant") corresponding to the lengths of the error
             bars.
         valueminus
             Sets the value of either the percentage (if `type` is
-            set to *percent*) or the constant (if `type` is set to
-            *constant*) corresponding to the lengths of the error
+            set to "percent") or the constant (if `type` is set to
+            "constant") corresponding to the lengths of the error
             bars in the bottom (left) direction for vertical
             (horizontal) bars
         visible
@@ -481,21 +481,21 @@ class ErrorX(BaseTraceHierarchyType):
         type
             Determines the rule used to generate the error bars. If
             *constant`, the bar lengths are of a constant value.
-            Set this constant in `value`. If *percent*, the bar
+            Set this constant in `value`. If "percent", the bar
             lengths correspond to a percentage of underlying data.
-            Set this percentage in `value`. If *sqrt*, the bar
+            Set this percentage in `value`. If "sqrt", the bar
             lengths correspond to the sqaure of the underlying
-            data. If *array*, the bar lengths are set with data set
+            data. If "array", the bar lengths are set with data set
             `array`.
         value
             Sets the value of either the percentage (if `type` is
-            set to *percent*) or the constant (if `type` is set to
-            *constant*) corresponding to the lengths of the error
+            set to "percent") or the constant (if `type` is set to
+            "constant") corresponding to the lengths of the error
             bars.
         valueminus
             Sets the value of either the percentage (if `type` is
-            set to *percent*) or the constant (if `type` is set to
-            *constant*) corresponding to the lengths of the error
+            set to "percent") or the constant (if `type` is set to
+            "constant") corresponding to the lengths of the error
             bars in the bottom (left) direction for vertical
             (horizontal) bars
         visible

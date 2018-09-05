@@ -9,9 +9,9 @@ class Tickformatstop(BaseLayoutHierarchyType):
     @property
     def dtickrange(self):
         """
-        range [*min*, *max*], where *min*, *max* - dtick values which
-        describe some zoom level, it is possible to omit *min* or *max*
-        value by passing *null*
+        range [*min*, *max*], where "min", "max" - dtick values which
+        describe some zoom level, it is possible to omit "min" or "max"
+        value by passing "null"
     
         The 'dtickrange' property is an info array that may be specified as a
         list or tuple of 2 elements where:
@@ -111,7 +111,7 @@ class Tickformatstop(BaseLayoutHierarchyType):
     def value(self):
         """
         string - dtickformat for described zoom level, the same as
-        *tickformat*
+        "tickformat"
     
         The 'value' property is a string and must be specified as:
           - A string
@@ -139,9 +139,9 @@ class Tickformatstop(BaseLayoutHierarchyType):
     def _prop_descriptions(self):
         return """\
         dtickrange
-            range [*min*, *max*], where *min*, *max* - dtick values
+            range [*min*, *max*], where "min", "max" - dtick values
             which describe some zoom level, it is possible to omit
-            *min* or *max* value by passing *null*
+            "min" or "max" value by passing "null"
         enabled
             Determines whether or not this stop is used. If
             `false`, this stop is ignored even within its
@@ -167,7 +167,7 @@ class Tickformatstop(BaseLayoutHierarchyType):
             explicitly show it with `visible: true`.
         value
             string - dtickformat for described zoom level, the same
-            as *tickformat*
+            as "tickformat"
         """
 
     def __init__(
@@ -190,9 +190,9 @@ class Tickformatstop(BaseLayoutHierarchyType):
             an instance of
             plotly.graph_objs.layout.yaxis.Tickformatstop
         dtickrange
-            range [*min*, *max*], where *min*, *max* - dtick values
+            range [*min*, *max*], where "min", "max" - dtick values
             which describe some zoom level, it is possible to omit
-            *min* or *max* value by passing *null*
+            "min" or "max" value by passing "null"
         enabled
             Determines whether or not this stop is used. If
             `false`, this stop is ignored even within its
@@ -218,7 +218,7 @@ class Tickformatstop(BaseLayoutHierarchyType):
             explicitly show it with `visible: true`.
         value
             string - dtickformat for described zoom level, the same
-            as *tickformat*
+            as "tickformat"
 
         Returns
         -------

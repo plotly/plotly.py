@@ -16,6 +16,7 @@ class CircleValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs="""
             radius
                 Sets the circle radius. Has an effect only when
-                `type` is set to *circle*.""",
+                `type` is set to "circle".
+""",
             **kwargs
         )

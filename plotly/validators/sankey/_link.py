@@ -43,6 +43,7 @@ class LinkValidator(_plotly_utils.basevalidators.CompoundValidator):
                 value.
             valuesrc
                 Sets the source reference on plot.ly for  value
-                .""",
+                .
+""",
             **kwargs
         )

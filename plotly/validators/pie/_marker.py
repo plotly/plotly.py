@@ -18,6 +18,7 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 colors .
             line
                 plotly.graph_objs.pie.marker.Line instance or
-                dict with compatible properties""",
+                dict with compatible properties
+""",
             **kwargs
         )

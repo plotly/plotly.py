@@ -14,6 +14,7 @@ class XBinsValidator(_plotly_utils.basevalidators.CompoundValidator):
             size
                 Sets the step in-between value each x axis bin.
             start
-                Sets the starting value for the x axis bins.""",
+                Sets the starting value for the x axis bins.
+""",
             **kwargs
         )

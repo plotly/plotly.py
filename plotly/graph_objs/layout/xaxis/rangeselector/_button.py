@@ -101,15 +101,15 @@ class Button(BaseLayoutHierarchyType):
     @property
     def stepmode(self):
         """
-        Sets the range update mode. If *backward*, the range update
-        shifts the start of range back *count* times *step*
-        milliseconds. If *todate*, the range update shifts the start of
-        range back to the first timestamp from *count* times *step*
-        milliseconds back. For example, with `step` set to *year* and
-        `count` set to *1* the range update shifts the start of the
-        range back to January 01 of the current year. Month and year
-        *todate* are currently available only for the built-in
-        (Gregorian) calendar.
+        Sets the range update mode. If "backward", the range update
+        shifts the start of range back "count" times "step"
+        milliseconds. If "todate", the range update shifts the start of
+        range back to the first timestamp from "count" times "step"
+        milliseconds back. For example, with `step` set to "year" and
+        `count` set to 1 the range update shifts the start of the range
+        back to January 01 of the current year. Month and year "todate"
+        are currently available only for the built-in (Gregorian)
+        calendar.
     
         The 'stepmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -202,15 +202,15 @@ class Button(BaseLayoutHierarchyType):
             The unit of measurement that the `count` value will set
             the range by.
         stepmode
-            Sets the range update mode. If *backward*, the range
-            update shifts the start of range back *count* times
-            *step* milliseconds. If *todate*, the range update
+            Sets the range update mode. If "backward", the range
+            update shifts the start of range back "count" times
+            "step" milliseconds. If "todate", the range update
             shifts the start of range back to the first timestamp
-            from *count* times *step* milliseconds back. For
-            example, with `step` set to *year* and `count` set to
-            *1* the range update shifts the start of the range back
-            to January 01 of the current year. Month and year
-            *todate* are currently available only for the built-in
+            from "count" times "step" milliseconds back. For
+            example, with `step` set to "year" and `count` set to 1
+            the range update shifts the start of the range back to
+            January 01 of the current year. Month and year "todate"
+            are currently available only for the built-in
             (Gregorian) calendar.
         templateitemname
             Used to refer to a named item in this array in the
@@ -268,15 +268,15 @@ class Button(BaseLayoutHierarchyType):
             The unit of measurement that the `count` value will set
             the range by.
         stepmode
-            Sets the range update mode. If *backward*, the range
-            update shifts the start of range back *count* times
-            *step* milliseconds. If *todate*, the range update
+            Sets the range update mode. If "backward", the range
+            update shifts the start of range back "count" times
+            "step" milliseconds. If "todate", the range update
             shifts the start of range back to the first timestamp
-            from *count* times *step* milliseconds back. For
-            example, with `step` set to *year* and `count` set to
-            *1* the range update shifts the start of the range back
-            to January 01 of the current year. Month and year
-            *todate* are currently available only for the built-in
+            from "count" times "step" milliseconds back. For
+            example, with `step` set to "year" and `count` set to 1
+            the range update shifts the start of the range back to
+            January 01 of the current year. Month and year "todate"
+            are currently available only for the built-in
             (Gregorian) calendar.
         templateitemname
             Used to refer to a named item in this array in the

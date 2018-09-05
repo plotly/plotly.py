@@ -203,7 +203,7 @@ class Annotation(BaseLayoutHierarchyType):
         """
         Indicates in what terms the tail of the annotation (ax,ay)  is
         specified. If `pixel`, `ax` is a relative offset in pixels
-        from `x`. If set to an x axis id (e.g. *x* or *x2*), `ax` is
+        from `x`. If set to an x axis id (e.g. "x" or "x2"), `ax` is
         specified in the same terms as that axis. This is useful  for
         trendline annotations which should continue to indicate  the
         correct trend when zoomed.
@@ -254,7 +254,7 @@ class Annotation(BaseLayoutHierarchyType):
         """
         Indicates in what terms the tail of the annotation (ax,ay)  is
         specified. If `pixel`, `ay` is a relative offset in pixels
-        from `y`. If set to a y axis id (e.g. *y* or *y2*), `ay` is
+        from `y`. If set to a y axis id (e.g. "y" or "y2"), `ay` is
         specified in the same terms as that axis. This is useful  for
         trendline annotations which should continue to indicate  the
         correct trend when zoomed.
@@ -443,7 +443,7 @@ class Annotation(BaseLayoutHierarchyType):
         Determines whether the annotation text box captures mouse move
         and click events, or allows those events to pass through to
         data points in the plot that may be behind the annotation. By
-        default `captureevents` is *false* unless `hovertext` is
+        default `captureevents` is False unless `hovertext` is
         provided. If you use the event `plotly_clickannotation` without
         `hovertext` you must explicitly enable `captureevents`.
     
@@ -468,9 +468,9 @@ class Annotation(BaseLayoutHierarchyType):
         Makes this annotation respond to clicks on the plot. If you
         click a data point that exactly matches the `x` and `y` values
         of this annotation, and it is hidden (visible: false), it will
-        appear. In *onoff* mode, you must click the same point again to
+        appear. In "onoff" mode, you must click the same point again to
         make it disappear, so if you click multiple points, you can
-        show multiple annotations. In *onout* mode, a click anywhere
+        show multiple annotations. In "onout" mode, a click anywhere
         else in the plot (on another data point or not) will hide this
         annotation. If you need to show/hide this annotation in
         response to different `x` or `y` values, you can set `xclick`
@@ -520,11 +520,11 @@ class Annotation(BaseLayoutHierarchyType):
                     system. The plotly service (at https://plot.ly
                     or on-premise) generates images on a server,
                     where only a select number of fonts are
-                    installed and supported. These include *Arial*,
-                    *Balto*, *Courier New*, *Droid Sans*,, *Droid
-                    Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
-                    Standard TT*, *Open Sans*, *Overpass*, *PT Sans
-                    Narrow*, *Raleway*, *Times New Roman*.
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
                 size
 
         Returns
@@ -669,8 +669,8 @@ class Annotation(BaseLayoutHierarchyType):
     def showarrow(self):
         """
         Determines whether or not the annotation is drawn with an
-        arrow. If *true*, `text` is placed near the arrow's tail. If
-        *false*, `text` lines up with the `x` and `y` provided.
+        arrow. If True, `text` is placed near the arrow's tail. If
+        False, `text` lines up with the `x` and `y` provided.
     
         The 'showarrow' property must be specified as a bool
         (either True, or False)
@@ -921,11 +921,11 @@ class Annotation(BaseLayoutHierarchyType):
     @property
     def x(self):
         """
-        Sets the annotation's x position. If the axis `type` is *log*,
+        Sets the annotation's x position. If the axis `type` is "log",
         then you must take the log of your desired range. If the axis
-        `type` is *date*, it should be date strings, like date data,
+        `type` is "date", it should be date strings, like date data,
         though Date objects and unix milliseconds will be accepted and
-        converted to strings. If the axis `type` is *category*, it
+        converted to strings. If the axis `type` is "category", it
         should be numbers, using the scale where each category is
         assigned a serial number from zero in the order it appears.
     
@@ -947,11 +947,11 @@ class Annotation(BaseLayoutHierarchyType):
     def xanchor(self):
         """
         Sets the text box's horizontal position anchor This anchor
-        binds the `x` position to the *left*, *center* or *right* of
+        binds the `x` position to the "left", "center" or "right" of
         the annotation. For example, if `x` is set to 1, `xref` to
-        *paper* and `xanchor` to *right* then the right-most portion of
+        "paper" and `xanchor` to "right" then the right-most portion of
         the annotation lines up with the right-most edge of the
-        plotting area. If *auto*, the anchor is equivalent to *center*
+        plotting area. If "auto", the anchor is equivalent to "center"
         for data-referenced annotations or if there is an arrow,
         whereas for paper-referenced with no arrow, the anchor picked
         corresponds to the closest side.
@@ -996,8 +996,8 @@ class Annotation(BaseLayoutHierarchyType):
     def xref(self):
         """
         Sets the annotation's x coordinate axis. If set to an x axis id
-        (e.g. *x* or *x2*), the `x` position refers to an x coordinate
-        If set to *paper*, the `x` position refers to the distance from
+        (e.g. "x" or "x2"), the `x` position refers to an x coordinate
+        If set to "paper", the `x` position refers to the distance from
         the left side of the plotting area in normalized coordinates
         where 0 (1) corresponds to the left (right) side.
     
@@ -1043,11 +1043,11 @@ class Annotation(BaseLayoutHierarchyType):
     @property
     def y(self):
         """
-        Sets the annotation's y position. If the axis `type` is *log*,
+        Sets the annotation's y position. If the axis `type` is "log",
         then you must take the log of your desired range. If the axis
-        `type` is *date*, it should be date strings, like date data,
+        `type` is "date", it should be date strings, like date data,
         though Date objects and unix milliseconds will be accepted and
-        converted to strings. If the axis `type` is *category*, it
+        converted to strings. If the axis `type` is "category", it
         should be numbers, using the scale where each category is
         assigned a serial number from zero in the order it appears.
     
@@ -1069,11 +1069,11 @@ class Annotation(BaseLayoutHierarchyType):
     def yanchor(self):
         """
         Sets the text box's vertical position anchor This anchor binds
-        the `y` position to the *top*, *middle* or *bottom* of the
-        annotation. For example, if `y` is set to 1, `yref` to *paper*
-        and `yanchor` to *top* then the top-most portion of the
+        the `y` position to the "top", "middle" or "bottom" of the
+        annotation. For example, if `y` is set to 1, `yref` to "paper"
+        and `yanchor` to "top" then the top-most portion of the
         annotation lines up with the top-most edge of the plotting
-        area. If *auto*, the anchor is equivalent to *middle* for data-
+        area. If "auto", the anchor is equivalent to "middle" for data-
         referenced annotations or if there is an arrow, whereas for
         paper-referenced with no arrow, the anchor picked corresponds
         to the closest side.
@@ -1118,8 +1118,8 @@ class Annotation(BaseLayoutHierarchyType):
     def yref(self):
         """
         Sets the annotation's y coordinate axis. If set to an y axis id
-        (e.g. *y* or *y2*), the `y` position refers to an y coordinate
-        If set to *paper*, the `y` position refers to the distance from
+        (e.g. "y" or "y2"), the `y` position refers to an y coordinate
+        If set to "paper", the `y` position refers to the distance from
         the bottom of the plotting area in normalized coordinates where
         0 (1) corresponds to the bottom (top).
     
@@ -1200,7 +1200,7 @@ class Annotation(BaseLayoutHierarchyType):
             Indicates in what terms the tail of the annotation
             (ax,ay)  is specified. If `pixel`, `ax` is a relative
             offset in pixels  from `x`. If set to an x axis id
-            (e.g. *x* or *x2*), `ax` is  specified in the same
+            (e.g. "x" or "x2"), `ax` is  specified in the same
             terms as that axis. This is useful  for trendline
             annotations which should continue to indicate  the
             correct trend when zoomed.
@@ -1215,7 +1215,7 @@ class Annotation(BaseLayoutHierarchyType):
             Indicates in what terms the tail of the annotation
             (ax,ay)  is specified. If `pixel`, `ay` is a relative
             offset in pixels  from `y`. If set to a y axis id (e.g.
-            *y* or *y2*), `ay` is  specified in the same terms as
+            "y" or "y2"), `ay` is  specified in the same terms as
             that axis. This is useful  for trendline annotations
             which should continue to indicate  the correct trend
             when zoomed.
@@ -1235,17 +1235,17 @@ class Annotation(BaseLayoutHierarchyType):
             mouse move and click events, or allows those events to
             pass through to data points in the plot that may be
             behind the annotation. By default `captureevents` is
-            *false* unless `hovertext` is provided. If you use the
+            False unless `hovertext` is provided. If you use the
             event `plotly_clickannotation` without `hovertext` you
             must explicitly enable `captureevents`.
         clicktoshow
             Makes this annotation respond to clicks on the plot. If
             you click a data point that exactly matches the `x` and
             `y` values of this annotation, and it is hidden
-            (visible: false), it will appear. In *onoff* mode, you
+            (visible: false), it will appear. In "onoff" mode, you
             must click the same point again to make it disappear,
             so if you click multiple points, you can show multiple
-            annotations. In *onout* mode, a click anywhere else in
+            annotations. In "onout" mode, a click anywhere else in
             the plot (on another data point or not) will hide this
             annotation. If you need to show/hide this annotation in
             response to different `x` or `y` values, you can set
@@ -1277,8 +1277,8 @@ class Annotation(BaseLayoutHierarchyType):
             Sets the opacity of the annotation (text + arrow).
         showarrow
             Determines whether or not the annotation is drawn with
-            an arrow. If *true*, `text` is placed near the arrow's
-            tail. If *false*, `text` lines up with the `x` and `y`
+            an arrow. If True, `text` is placed near the arrow's
+            tail. If False, `text` lines up with the `x` and `y`
             provided.
         standoff
             Sets a distance, in pixels, to move the end arrowhead
@@ -1332,21 +1332,21 @@ class Annotation(BaseLayoutHierarchyType):
             start a new line.
         x
             Sets the annotation's x position. If the axis `type` is
-            *log*, then you must take the log of your desired
-            range. If the axis `type` is *date*, it should be date
+            "log", then you must take the log of your desired
+            range. If the axis `type` is "date", it should be date
             strings, like date data, though Date objects and unix
             milliseconds will be accepted and converted to strings.
-            If the axis `type` is *category*, it should be numbers,
+            If the axis `type` is "category", it should be numbers,
             using the scale where each category is assigned a
             serial number from zero in the order it appears.
         xanchor
             Sets the text box's horizontal position anchor This
-            anchor binds the `x` position to the *left*, *center*
-            or *right* of the annotation. For example, if `x` is
-            set to 1, `xref` to *paper* and `xanchor` to *right*
+            anchor binds the `x` position to the "left", "center"
+            or "right" of the annotation. For example, if `x` is
+            set to 1, `xref` to "paper" and `xanchor` to "right"
             then the right-most portion of the annotation lines up
             with the right-most edge of the plotting area. If
-            *auto*, the anchor is equivalent to *center* for data-
+            "auto", the anchor is equivalent to "center" for data-
             referenced annotations or if there is an arrow, whereas
             for paper-referenced with no arrow, the anchor picked
             corresponds to the closest side.
@@ -1356,8 +1356,8 @@ class Annotation(BaseLayoutHierarchyType):
             value.
         xref
             Sets the annotation's x coordinate axis. If set to an x
-            axis id (e.g. *x* or *x2*), the `x` position refers to
-            an x coordinate If set to *paper*, the `x` position
+            axis id (e.g. "x" or "x2"), the `x` position refers to
+            an x coordinate If set to "paper", the `x` position
             refers to the distance from the left side of the
             plotting area in normalized coordinates where 0 (1)
             corresponds to the left (right) side.
@@ -1367,21 +1367,21 @@ class Annotation(BaseLayoutHierarchyType):
             pixels.
         y
             Sets the annotation's y position. If the axis `type` is
-            *log*, then you must take the log of your desired
-            range. If the axis `type` is *date*, it should be date
+            "log", then you must take the log of your desired
+            range. If the axis `type` is "date", it should be date
             strings, like date data, though Date objects and unix
             milliseconds will be accepted and converted to strings.
-            If the axis `type` is *category*, it should be numbers,
+            If the axis `type` is "category", it should be numbers,
             using the scale where each category is assigned a
             serial number from zero in the order it appears.
         yanchor
             Sets the text box's vertical position anchor This
-            anchor binds the `y` position to the *top*, *middle* or
-            *bottom* of the annotation. For example, if `y` is set
-            to 1, `yref` to *paper* and `yanchor` to *top* then the
+            anchor binds the `y` position to the "top", "middle" or
+            "bottom" of the annotation. For example, if `y` is set
+            to 1, `yref` to "paper" and `yanchor` to "top" then the
             top-most portion of the annotation lines up with the
-            top-most edge of the plotting area. If *auto*, the
-            anchor is equivalent to *middle* for data-referenced
+            top-most edge of the plotting area. If "auto", the
+            anchor is equivalent to "middle" for data-referenced
             annotations or if there is an arrow, whereas for paper-
             referenced with no arrow, the anchor picked corresponds
             to the closest side.
@@ -1391,8 +1391,8 @@ class Annotation(BaseLayoutHierarchyType):
             value.
         yref
             Sets the annotation's y coordinate axis. If set to an y
-            axis id (e.g. *y* or *y2*), the `y` position refers to
-            an y coordinate If set to *paper*, the `y` position
+            axis id (e.g. "y" or "y2"), the `y` position refers to
+            an y coordinate If set to "paper", the `y` position
             refers to the distance from the bottom of the plotting
             area in normalized coordinates where 0 (1) corresponds
             to the bottom (top).
@@ -1486,7 +1486,7 @@ class Annotation(BaseLayoutHierarchyType):
             Indicates in what terms the tail of the annotation
             (ax,ay)  is specified. If `pixel`, `ax` is a relative
             offset in pixels  from `x`. If set to an x axis id
-            (e.g. *x* or *x2*), `ax` is  specified in the same
+            (e.g. "x" or "x2"), `ax` is  specified in the same
             terms as that axis. This is useful  for trendline
             annotations which should continue to indicate  the
             correct trend when zoomed.
@@ -1501,7 +1501,7 @@ class Annotation(BaseLayoutHierarchyType):
             Indicates in what terms the tail of the annotation
             (ax,ay)  is specified. If `pixel`, `ay` is a relative
             offset in pixels  from `y`. If set to a y axis id (e.g.
-            *y* or *y2*), `ay` is  specified in the same terms as
+            "y" or "y2"), `ay` is  specified in the same terms as
             that axis. This is useful  for trendline annotations
             which should continue to indicate  the correct trend
             when zoomed.
@@ -1521,17 +1521,17 @@ class Annotation(BaseLayoutHierarchyType):
             mouse move and click events, or allows those events to
             pass through to data points in the plot that may be
             behind the annotation. By default `captureevents` is
-            *false* unless `hovertext` is provided. If you use the
+            False unless `hovertext` is provided. If you use the
             event `plotly_clickannotation` without `hovertext` you
             must explicitly enable `captureevents`.
         clicktoshow
             Makes this annotation respond to clicks on the plot. If
             you click a data point that exactly matches the `x` and
             `y` values of this annotation, and it is hidden
-            (visible: false), it will appear. In *onoff* mode, you
+            (visible: false), it will appear. In "onoff" mode, you
             must click the same point again to make it disappear,
             so if you click multiple points, you can show multiple
-            annotations. In *onout* mode, a click anywhere else in
+            annotations. In "onout" mode, a click anywhere else in
             the plot (on another data point or not) will hide this
             annotation. If you need to show/hide this annotation in
             response to different `x` or `y` values, you can set
@@ -1563,8 +1563,8 @@ class Annotation(BaseLayoutHierarchyType):
             Sets the opacity of the annotation (text + arrow).
         showarrow
             Determines whether or not the annotation is drawn with
-            an arrow. If *true*, `text` is placed near the arrow's
-            tail. If *false*, `text` lines up with the `x` and `y`
+            an arrow. If True, `text` is placed near the arrow's
+            tail. If False, `text` lines up with the `x` and `y`
             provided.
         standoff
             Sets a distance, in pixels, to move the end arrowhead
@@ -1618,21 +1618,21 @@ class Annotation(BaseLayoutHierarchyType):
             start a new line.
         x
             Sets the annotation's x position. If the axis `type` is
-            *log*, then you must take the log of your desired
-            range. If the axis `type` is *date*, it should be date
+            "log", then you must take the log of your desired
+            range. If the axis `type` is "date", it should be date
             strings, like date data, though Date objects and unix
             milliseconds will be accepted and converted to strings.
-            If the axis `type` is *category*, it should be numbers,
+            If the axis `type` is "category", it should be numbers,
             using the scale where each category is assigned a
             serial number from zero in the order it appears.
         xanchor
             Sets the text box's horizontal position anchor This
-            anchor binds the `x` position to the *left*, *center*
-            or *right* of the annotation. For example, if `x` is
-            set to 1, `xref` to *paper* and `xanchor` to *right*
+            anchor binds the `x` position to the "left", "center"
+            or "right" of the annotation. For example, if `x` is
+            set to 1, `xref` to "paper" and `xanchor` to "right"
             then the right-most portion of the annotation lines up
             with the right-most edge of the plotting area. If
-            *auto*, the anchor is equivalent to *center* for data-
+            "auto", the anchor is equivalent to "center" for data-
             referenced annotations or if there is an arrow, whereas
             for paper-referenced with no arrow, the anchor picked
             corresponds to the closest side.
@@ -1642,8 +1642,8 @@ class Annotation(BaseLayoutHierarchyType):
             value.
         xref
             Sets the annotation's x coordinate axis. If set to an x
-            axis id (e.g. *x* or *x2*), the `x` position refers to
-            an x coordinate If set to *paper*, the `x` position
+            axis id (e.g. "x" or "x2"), the `x` position refers to
+            an x coordinate If set to "paper", the `x` position
             refers to the distance from the left side of the
             plotting area in normalized coordinates where 0 (1)
             corresponds to the left (right) side.
@@ -1653,21 +1653,21 @@ class Annotation(BaseLayoutHierarchyType):
             pixels.
         y
             Sets the annotation's y position. If the axis `type` is
-            *log*, then you must take the log of your desired
-            range. If the axis `type` is *date*, it should be date
+            "log", then you must take the log of your desired
+            range. If the axis `type` is "date", it should be date
             strings, like date data, though Date objects and unix
             milliseconds will be accepted and converted to strings.
-            If the axis `type` is *category*, it should be numbers,
+            If the axis `type` is "category", it should be numbers,
             using the scale where each category is assigned a
             serial number from zero in the order it appears.
         yanchor
             Sets the text box's vertical position anchor This
-            anchor binds the `y` position to the *top*, *middle* or
-            *bottom* of the annotation. For example, if `y` is set
-            to 1, `yref` to *paper* and `yanchor` to *top* then the
+            anchor binds the `y` position to the "top", "middle" or
+            "bottom" of the annotation. For example, if `y` is set
+            to 1, `yref` to "paper" and `yanchor` to "top" then the
             top-most portion of the annotation lines up with the
-            top-most edge of the plotting area. If *auto*, the
-            anchor is equivalent to *middle* for data-referenced
+            top-most edge of the plotting area. If "auto", the
+            anchor is equivalent to "middle" for data-referenced
             annotations or if there is an arrow, whereas for paper-
             referenced with no arrow, the anchor picked corresponds
             to the closest side.
@@ -1677,8 +1677,8 @@ class Annotation(BaseLayoutHierarchyType):
             value.
         yref
             Sets the annotation's y coordinate axis. If set to an y
-            axis id (e.g. *y* or *y2*), the `y` position refers to
-            an y coordinate If set to *paper*, the `y` position
+            axis id (e.g. "y" or "y2"), the `y` position refers to
+            an y coordinate If set to "paper", the `y` position
             refers to the distance from the bottom of the plotting
             area in normalized coordinates where 0 (1) corresponds
             to the bottom (top).

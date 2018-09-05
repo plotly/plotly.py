@@ -15,6 +15,7 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the aggregation data.
             colorsrc
                 Sets the source reference on plot.ly for  color
-                .""",
+                .
+""",
             **kwargs
         )

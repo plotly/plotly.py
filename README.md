@@ -2,7 +2,7 @@
 
 ## Quickstart
 
-`pip install plotly`
+`pip install plotly "notebook>=5.3" "ipywidgets>=7.2"`
 
 Inside [Jupyter notebook](https://jupyter.org/install):
 ```python
@@ -10,7 +10,8 @@ import plotly.graph_objs as go
 fig = go.FigureWidget()
 # Display an empty figure
 fig
-
+```
+```python
 # Add a scatter chart
 fig.add_scatter(y=[2, 1, 4, 3])
 # Add a bar chart
@@ -49,25 +50,48 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 
 ***
 
-## Installation of plotly.py Version 3
-To install plotly.py and enable Jupyter or Jupyter Lab support, run:
-```
-pip install plotly==3.1.1
-pip install "notebook>=5.3" "ipywidgets>=7.2"  # only necessary for Jupyter Notebook environments
-```
+## Installation
 
-If you're using older versions of `notebook` or `ipywidgets` you may need to manually activate the widget extensions (this should not be needed for `notebook>=5.3` and `ipywidgets>=7.2`)
-
+plotly.py may be installed using pip...
 ```
-jupyter nbextension enable --py widgetsnbextension --sys-prefix
-jupyter nbextension enable --py plotlywidget --sys-prefix
+pip install plotly==3.2.0
 ```
 
-In addition, to add JupyterLab support run the following commands
+or conda.
+```
+conda install -c plotly plotly=3.2.0
+```
+
+### Jupyter Notebook Support
+For use in the Jupyter Notebook, install the `notebook` and `ipywidgets`
+packages using pip...
 
 ```
-pip install jupyterlab==0.33
+pip install "notebook>=5.3" "ipywidgets>=7.2"
+```
 
+of conda.
+
+```
+conda install "notebook>=5.3" "ipywidgets>=7.2"
+```
+
+### JupyterLab Support
+For use in JupyterLab, install the `jupyterlab` and `ipywidgets`
+packages using pip... 
+
+```
+pip install jupyterlab==0.34 "ipywidgets>=7.2"
+```
+
+of conda.
+
+```
+conda install jupyterlab=0.34 "ipywidgets>=7.2"
+```
+
+Then run the following commands to install the required JupyterLab extensions:
+```
 # Avoid "JavaScript heap out of memory" errors during extension installation
 # (OS X/Linux)
 export NODE_OPTIONS=--max-old-space-size=4096
@@ -75,18 +99,43 @@ export NODE_OPTIONS=--max-old-space-size=4096
 set NODE_OPTIONS=--max-old-space-size=4096
 
 # Jupyter widgets extension
-jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.36 --no-build
+jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.37 --no-build
 
 # FigureWidget support
-jupyter labextension install plotlywidget@0.2.1  --no-build
+jupyter labextension install plotlywidget@0.3.0  --no-build
 
 # offline iplot support
-jupyter labextension install @jupyterlab/plotly-extension@0.16  --no-build
+jupyter labextension install @jupyterlab/plotly-extension@0.17  --no-build
 
 # Build extensions (must be done to activate extensions since --no-build is used above)
 jupyter lab build
+
+# Unset NODE_OPTIONS environment variable
+# (OS X/Linux)
+unset NODE_OPTIONS
+# (Windows)
+set NODE_OPTIONS=
 ```
 
+### Static Image Export
+plotly.py supports static image export using the `to_image` and `write_image`
+functions in the `plotly.io` package. This functionality requires the
+installation of the plotly [orca](https://github.com/plotly/orca) command line utility and the
+[`psutil`](https://github.com/giampaolo/psutil) Python package.
+
+These dependencies can both be installed using conda:
+```
+conda install -c plotly plotly-orca psutil
+```
+
+Or, `psutil` can be installed using pip...
+```
+pip install psutil
+```
+
+and orca can be installed according to the instructions in the [orca README](https://github.com/plotly/orca).
+
+## Migration
 If you're migrating from plotly.py version 2, please check out the [migration guide](migration-guide.md)
 
 ## Copyright and Licenses

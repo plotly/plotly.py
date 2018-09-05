@@ -69,9 +69,9 @@ class Line(BaseLayoutHierarchyType):
     def dash(self):
         """
         Sets the dash style of lines. Set to a dash type string
-        (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or
-        *longdashdot*) or a dash length list in px (eg
-        *5px,10px,2px,2px*).
+        ("solid", "dot", "dash", "longdash", "dashdot", or
+        "longdashdot") or a dash length list in px (eg
+        "5px,10px,2px,2px").
     
         The 'dash' property is a string and must be specified as:
           - One of the following strings:
@@ -124,9 +124,9 @@ class Line(BaseLayoutHierarchyType):
             Sets the line color.
         dash
             Sets the dash style of lines. Set to a dash type string
-            (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or
-            *longdashdot*) or a dash length list in px (eg
-            *5px,10px,2px,2px*).
+            ("solid", "dot", "dash", "longdash", "dashdot", or
+            "longdashdot") or a dash length list in px (eg
+            "5px,10px,2px,2px").
         width
             Sets the line width (in px).
         """
@@ -144,9 +144,9 @@ class Line(BaseLayoutHierarchyType):
             Sets the line color.
         dash
             Sets the dash style of lines. Set to a dash type string
-            (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or
-            *longdashdot*) or a dash length list in px (eg
-            *5px,10px,2px,2px*).
+            ("solid", "dot", "dash", "longdash", "dashdot", or
+            "longdashdot") or a dash length list in px (eg
+            "5px,10px,2px,2px").
         width
             Sets the line width (in px).
 

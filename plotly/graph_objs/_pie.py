@@ -11,7 +11,7 @@ class Pie(BaseTraceType):
         """
         Assigns extra data each datum. This may be useful when
         listening to hover, click and selection events. Note that,
-        *scatter* traces also appends customdata items in the markers
+        "scatter" traces also appends customdata items in the markers
         DOM elements
     
         The 'customdata' property is an array that may be specified as a tuple,
@@ -251,7 +251,7 @@ class Pie(BaseTraceType):
         single string, the same string appears for all data points. If
         an array of string, the items are mapped in order of this
         trace's sectors. To be seen, trace `hoverinfo` must contain a
-        *text* flag.
+        "text" flag.
     
         The 'hovertext' property is a string and must be specified as:
           - A string
@@ -358,11 +358,11 @@ class Pie(BaseTraceType):
                     system. The plotly service (at https://plot.ly
                     or on-premise) generates images on a server,
                     where only a select number of fonts are
-                    installed and supported. These include *Arial*,
-                    *Balto*, *Courier New*, *Droid Sans*,, *Droid
-                    Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
-                    Standard TT*, *Open Sans*, *Overpass*, *PT Sans
-                    Narrow*, *Raleway*, *Times New Roman*.
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
                 size
 
         Returns
@@ -568,11 +568,11 @@ class Pie(BaseTraceType):
                     system. The plotly service (at https://plot.ly
                     or on-premise) generates images on a server,
                     where only a select number of fonts are
-                    installed and supported. These include *Arial*,
-                    *Balto*, *Courier New*, *Droid Sans*,, *Droid
-                    Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
-                    Standard TT*, *Open Sans*, *Overpass*, *PT Sans
-                    Narrow*, *Raleway*, *Times New Roman*.
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
                 size
 
         Returns
@@ -755,7 +755,7 @@ class Pie(BaseTraceType):
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
-                    `maxpoints` is set to *50*, only the newest 50
+                    `maxpoints` is set to 50, only the newest 50
                     points will be displayed on the plot.
                 token
                     The stream id number links a data trace on a
@@ -778,9 +778,9 @@ class Pie(BaseTraceType):
     def text(self):
         """
         Sets text elements associated with each sector. If trace
-        `textinfo` contains a *text* flag, these elements will seen on
-        the chart. If trace `hoverinfo` contains a *text* flag and
-        *hovertext* is not set, these elements will be seen in the
+        `textinfo` contains a "text" flag, these elements will seen on
+        the chart. If trace `hoverinfo` contains a "text" flag and
+        "hovertext" is not set, these elements will be seen in the
         hover labels.
     
         The 'text' property is an array that may be specified as a tuple,
@@ -824,11 +824,11 @@ class Pie(BaseTraceType):
                     system. The plotly service (at https://plot.ly
                     or on-premise) generates images on a server,
                     where only a select number of fonts are
-                    installed and supported. These include *Arial*,
-                    *Balto*, *Courier New*, *Droid Sans*,, *Droid
-                    Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
-                    Standard TT*, *Open Sans*, *Overpass*, *PT Sans
-                    Narrow*, *Raleway*, *Times New Roman*.
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
                 size
 
         Returns
@@ -992,7 +992,7 @@ class Pie(BaseTraceType):
     def visible(self):
         """
         Determines whether or not this trace is visible. If
-        *legendonly*, the trace is not drawn, but can appear as a
+        "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
     
         The 'visible' property is an enumeration that may be specified as:
@@ -1029,7 +1029,7 @@ class Pie(BaseTraceType):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -1059,7 +1059,7 @@ class Pie(BaseTraceType):
             If a single string, the same string appears for all
             data points. If an array of string, the items are
             mapped in order of this trace's sectors. To be seen,
-            trace `hoverinfo` must contain a *text* flag.
+            trace `hoverinfo` must contain a "text" flag.
         hovertextsrc
             Sets the source reference on plot.ly for  hovertext .
         ids
@@ -1130,9 +1130,9 @@ class Pie(BaseTraceType):
             compatible properties
         text
             Sets text elements associated with each sector. If
-            trace `textinfo` contains a *text* flag, these elements
+            trace `textinfo` contains a "text" flag, these elements
             will seen on the chart. If trace `hoverinfo` contains a
-            *text* flag and *hovertext* is not set, these elements
+            "text" flag and "hovertext" is not set, these elements
             will be seen in the hover labels.
         textfont
             Sets the font used for `textinfo`.
@@ -1154,7 +1154,7 @@ class Pie(BaseTraceType):
             Sets the source reference on plot.ly for  values .
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         """
@@ -1219,7 +1219,7 @@ class Pie(BaseTraceType):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -1249,7 +1249,7 @@ class Pie(BaseTraceType):
             If a single string, the same string appears for all
             data points. If an array of string, the items are
             mapped in order of this trace's sectors. To be seen,
-            trace `hoverinfo` must contain a *text* flag.
+            trace `hoverinfo` must contain a "text" flag.
         hovertextsrc
             Sets the source reference on plot.ly for  hovertext .
         ids
@@ -1320,9 +1320,9 @@ class Pie(BaseTraceType):
             compatible properties
         text
             Sets text elements associated with each sector. If
-            trace `textinfo` contains a *text* flag, these elements
+            trace `textinfo` contains a "text" flag, these elements
             will seen on the chart. If trace `hoverinfo` contains a
-            *text* flag and *hovertext* is not set, these elements
+            "text" flag and "hovertext" is not set, these elements
             will be seen in the hover labels.
         textfont
             Sets the font used for `textinfo`.
@@ -1344,7 +1344,7 @@ class Pie(BaseTraceType):
             Sets the source reference on plot.ly for  values .
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
 
