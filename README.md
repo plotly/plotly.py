@@ -114,8 +114,8 @@ jupyter lab build
 ### Static Image Export
 plotly.py supports static image export using the `to_image` and `write_image`
 functions in the `plotly.io` package. This functionality requires the
-installation of the plotly [orca](TODO) command line utility and the
-[`psutil`](TODO) Python package.
+installation of the plotly [orca](https://github.com/plotly/orca) command line utility and the
+[`psutil`](https://github.com/giampaolo/psutil) Python package.
 
 These dependencies can both be installed using conda:
 ```
@@ -127,7 +127,7 @@ Or, `psutil` can be installed using pip...
 pip install psutil
 ```
 
-and orca can be installed according to the instructions in the [orca README](TODO).
+and orca can be installed according to the instructions in the [orca README](https://github.com/plotly/orca).
 
 ## Migration
 If you're migrating from plotly.py version 2, please check out the [migration guide](migration-guide.md)

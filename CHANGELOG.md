@@ -11,16 +11,16 @@ formats.
 For use with JupyterLab, the following versions of the following packages
 must be installed:
 
-- Python Packages
+ - Python Packages
    - plotly==3.2.0
    - ipywidgets>=7.2
    - notebook>=5.3
-   - jupyterlab==0.XX.?  # TODO: what's latest conda version
+   - jupyterlab==0.34
    
  - JupyterLab Extensions
    - plotlywidget@0.3.0
-   - @jupyter-widgets/jupyterlab-manager@0.XX
-   - @jupyterlab/plotly-extension@0.XX
+   - @jupyter-widgets/jupyterlab-manager@0.37
+   - @jupyterlab/plotly-extension@0.17
 
 ### Added
  - plotly.js version 1.40.1, which introduces the following features:
@@ -39,9 +39,12 @@ must be installed:
       for bug fixes and more information.
  - Support for offline static image export with the `to_image` and `write_image`
    functions in the new `plotly.io` package ([#1120](https://github.com/plotly/plotly.py/pull/1120)).
-    - Note: Image export requires the plotly [orca](TODO) command line utility and the [`psutil`](TODO) Python package.
- - New documentation sections covering [Static Image Export](TODO) and [Orca Management](TODO) 
- - Support for displaying `FigureWidget` instances in static contexts (e.g. [nbviewer](TODO)) just like the built-in ipywidgets
+    - Note: Image export requires the plotly [orca](https://github.com/plotly/orca)
+      command line utility and the [`psutil`](https://github.com/giampaolo/psutil) Python package.
+ - New documentation sections covering [Static Image Export](https://plot.ly/python/static-image-export/)
+   and [Orca Management](https://plot.ly/python/orca-management/) 
+ - Support for displaying `FigureWidget` instances in static contexts
+   (e.g. [nbviewer](http://nbviewer.jupyter.org/)) just like the built-in ipywidgets
  ([#1117](https://github.com/plotly/plotly.py/pull/1117))
  - Full integration of the Cividis colorscale ([#883](https://github.com/plotly/plotly.py/pull/883))
  - conda packaging
@@ -50,7 +53,7 @@ must be installed:
      ([72ad0e4](https://github.com/plotly/plotly.py/commit/72ad0e4bf54bb8a06445d2ca55488ffc11c836a7))
    - The [`README`](README.md) now includes conda installation instructions alongside the pip instructions. 
    - In addition to the existing installation approaches, orca is now also available as a
-     [conda package](TODO) from the plotly anaconda channel.
+     [conda package](https://anaconda.org/plotly/plotly-orca) from the plotly anaconda channel.
  
 ### Updated
  - Show traces at the top of the Gantt chart's colorbar ([#1110](https://github.com/plotly/plotly.py/pull/1110))
