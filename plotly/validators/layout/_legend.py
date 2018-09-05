@@ -26,27 +26,28 @@ class LegendValidator(_plotly_utils.basevalidators.CompoundValidator):
                 between legend groups.
             traceorder
                 Determines the order at which the legend items
-                are displayed. If *normal*, the items are
+                are displayed. If "normal", the items are
                 displayed top-to-bottom in the same order as
-                the input data. If *reversed*, the items are
-                displayed in the opposite order as *normal*. If
-                *grouped*, the items are displayed in groups
+                the input data. If "reversed", the items are
+                displayed in the opposite order as "normal". If
+                "grouped", the items are displayed in groups
                 (when a trace `legendgroup` is provided). if
-                *grouped+reversed*, the items are displayed in
-                the opposite order as *grouped*.
+                "grouped+reversed", the items are displayed in
+                the opposite order as "grouped".
             x
                 Sets the x position (in normalized coordinates)
                 of the legend.
             xanchor
                 Sets the legend's horizontal position anchor.
                 This anchor binds the `x` position to the
-                *left*, *center* or *right* of the legend.
+                "left", "center" or "right" of the legend.
             y
                 Sets the y position (in normalized coordinates)
                 of the legend.
             yanchor
                 Sets the legend's vertical position anchor This
-                anchor binds the `y` position to the *top*,
-                *middle* or *bottom* of the legend.""",
+                anchor binds the `y` position to the "top",
+                "middle" or "bottom" of the legend.
+""",
             **kwargs
         )

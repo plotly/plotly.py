@@ -119,38 +119,38 @@ class Surface(BaseTraceType):
                 dtick
                     Sets the step in-between ticks on this axis.
                     Use with `tick0`. Must be a positive number, or
-                    special strings available to *log* and *date*
-                    axes. If the axis `type` is *log*, then ticks
+                    special strings available to "log" and "date"
+                    axes. If the axis `type` is "log", then ticks
                     are set every 10^(n*dtick) where n is the tick
                     number. For example, to set a tick mark at 1,
                     10, 100, 1000, ... set dtick to 1. To set tick
                     marks at 1, 100, 10000, ... set dtick to 2. To
                     set tick marks at 1, 5, 25, 125, 625, 3125, ...
-                    set dtick to log_10(5), or 0.69897000433. *log*
-                    has several special values; *L<f>*, where `f`
+                    set dtick to log_10(5), or 0.69897000433. "log"
+                    has several special values; "L<f>", where `f`
                     is a positive number, gives ticks linearly
                     spaced in value (but not position). For example
-                    `tick0` = 0.1, `dtick` = *L0.5* will put ticks
+                    `tick0` = 0.1, `dtick` = "L0.5" will put ticks
                     at 0.1, 0.6, 1.1, 1.6 etc. To show powers of 10
-                    plus small digits between, use *D1* (all
-                    digits) or *D2* (only 2 and 5). `tick0` is
-                    ignored for *D1* and *D2*. If the axis `type`
-                    is *date*, then you must convert the time to
+                    plus small digits between, use "D1" (all
+                    digits) or "D2" (only 2 and 5). `tick0` is
+                    ignored for "D1" and "D2". If the axis `type`
+                    is "date", then you must convert the time to
                     milliseconds. For example, to set the interval
                     between ticks to one day, set `dtick` to
-                    86400000.0. *date* also has special values
-                    *M<n>* gives ticks spaced by a number of
+                    86400000.0. "date" also has special values
+                    "M<n>" gives ticks spaced by a number of
                     months. `n` must be a positive integer. To set
                     ticks on the 15th of every third month, set
-                    `tick0` to *2000-01-15* and `dtick` to *M3*. To
-                    set ticks every 4 years, set `dtick` to *M48*
+                    `tick0` to "2000-01-15" and `dtick` to "M3". To
+                    set ticks every 4 years, set `dtick` to "M48"
                 exponentformat
                     Determines a formatting rule for the tick
                     exponents. For example, consider the number
-                    1,000,000,000. If *none*, it appears as
-                    1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If
-                    *power*, 1x10^9 (with 9 in a super script). If
-                    *SI*, 1G. If *B*, 1B.
+                    1,000,000,000. If "none", it appears as
+                    1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
+                    "power", 1x10^9 (with 9 in a super script). If
+                    "SI", 1G. If "B", 1B.
                 len
                     Sets the length of the color bar This measure
                     excludes the padding of both ends. That is, the
@@ -159,14 +159,14 @@ class Surface(BaseTraceType):
                 lenmode
                     Determines whether this color bar's length
                     (i.e. the measure in the color variation
-                    direction) is set in units of plot *fraction*
+                    direction) is set in units of plot "fraction"
                     or in *pixels. Use `len` to set the value.
                 nticks
                     Specifies the maximum number of ticks for the
                     particular axis. The actual number of ticks
                     will be chosen automatically to be less than or
                     equal to `nticks`. Has an effect only if
-                    `tickmode` is set to *auto*.
+                    `tickmode` is set to "auto".
                 outlinecolor
                     Sets the axis line color.
                 outlinewidth
@@ -174,20 +174,20 @@ class Surface(BaseTraceType):
                 separatethousands
                     If "true", even 4-digit integers are separated
                 showexponent
-                    If *all*, all exponents are shown besides their
-                    significands. If *first*, only the exponent of
-                    the first tick is shown. If *last*, only the
-                    exponent of the last tick is shown. If *none*,
+                    If "all", all exponents are shown besides their
+                    significands. If "first", only the exponent of
+                    the first tick is shown. If "last", only the
+                    exponent of the last tick is shown. If "none",
                     no exponents appear.
                 showticklabels
                     Determines whether or not the tick labels are
                     drawn.
                 showtickprefix
-                    If *all*, all tick labels are displayed with a
-                    prefix. If *first*, only the first tick is
-                    displayed with a prefix. If *last*, only the
+                    If "all", all tick labels are displayed with a
+                    prefix. If "first", only the first tick is
+                    displayed with a prefix. If "last", only the
                     last tick is displayed with a suffix. If
-                    *none*, tick prefixes are hidden.
+                    "none", tick prefixes are hidden.
                 showticksuffix
                     Same as `showtickprefix` but for tick suffixes.
                 thickness
@@ -197,19 +197,19 @@ class Surface(BaseTraceType):
                 thicknessmode
                     Determines whether this color bar's thickness
                     (i.e. the measure in the constant color
-                    direction) is set in units of plot *fraction*
-                    or in *pixels*. Use `thickness` to set the
+                    direction) is set in units of plot "fraction"
+                    or in "pixels". Use `thickness` to set the
                     value.
                 tick0
                     Sets the placement of the first tick on this
                     axis. Use with `dtick`. If the axis `type` is
-                    *log*, then you must take the log of your
+                    "log", then you must take the log of your
                     starting tick (e.g. to set the starting tick to
                     100, set the `tick0` to 2) except when
                     `dtick`=*L<f>* (see `dtick` for more info). If
-                    the axis `type` is *date*, it should be a date
+                    the axis `type` is "date", it should be a date
                     string, like date data. If the axis `type` is
-                    *category*, it should be a number, using the
+                    "category", it should be a number, using the
                     scale where each category is assigned a serial
                     number from zero in the order it appears.
                 tickangle
@@ -228,40 +228,40 @@ class Surface(BaseTraceType):
                     ME.md#locale_format And for dates see:
                     https://github.com/d3/d3-time-
                     format/blob/master/README.md#locale_format We
-                    add one item to d3's date formatter: *%{n}f*
+                    add one item to d3's date formatter: "%{n}f"
                     for fractional seconds with n digits. For
                     example, *2016-10-13 09:15:23.456* with
-                    tickformat *%H~%M~%S.%2f* would display
-                    *09~15~23.46*
+                    tickformat "%H~%M~%S.%2f" would display
+                    "09~15~23.46"
                 tickformatstops
                     plotly.graph_objs.surface.colorbar.Tickformatst
                     op instance or dict with compatible properties
                 ticklen
                     Sets the tick length (in px).
                 tickmode
-                    Sets the tick mode for this axis. If *auto*,
+                    Sets the tick mode for this axis. If "auto",
                     the number of ticks is set via `nticks`. If
-                    *linear*, the placement of the ticks is
+                    "linear", the placement of the ticks is
                     determined by a starting position `tick0` and a
-                    tick step `dtick` (*linear* is the default
+                    tick step `dtick` ("linear" is the default
                     value if `tick0` and `dtick` are provided). If
-                    *array*, the placement of the ticks is set via
+                    "array", the placement of the ticks is set via
                     `tickvals` and the tick text is `ticktext`.
-                    (*array* is the default value if `tickvals` is
+                    ("array" is the default value if `tickvals` is
                     provided).
                 tickprefix
                     Sets a tick label prefix.
                 ticks
                     Determines whether ticks are drawn or not. If
                     **, this axis' ticks are not drawn. If
-                    *outside* (*inside*), this axis' are drawn
+                    "outside" ("inside"), this axis' are drawn
                     outside (inside) the axis lines.
                 ticksuffix
                     Sets a tick label suffix.
                 ticktext
                     Sets the text displayed at the ticks position
                     via `tickvals`. Only has an effect if
-                    `tickmode` is set to *array*. Used with
+                    `tickmode` is set to "array". Used with
                     `tickvals`.
                 ticktextsrc
                     Sets the source reference on plot.ly for
@@ -269,7 +269,7 @@ class Surface(BaseTraceType):
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
-                    to *array*. Used with `ticktext`.
+                    to "array". Used with `ticktext`.
                 tickvalssrc
                     Sets the source reference on plot.ly for
                     tickvals .
@@ -288,7 +288,7 @@ class Surface(BaseTraceType):
                 xanchor
                     Sets this color bar's horizontal position
                     anchor. This anchor binds the `x` position to
-                    the *left*, *center* or *right* of the color
+                    the "left", "center" or "right" of the color
                     bar.
                 xpad
                     Sets the amount of padding (in px) along the x
@@ -299,7 +299,7 @@ class Surface(BaseTraceType):
                 yanchor
                     Sets this color bar's vertical position anchor
                     This anchor binds the `y` position to the
-                    *top*, *middle* or *bottom* of the color bar.
+                    "top", "middle" or "bottom" of the color bar.
                 ypad
                     Sets the amount of padding (in px) along the y
                     direction.
@@ -391,7 +391,7 @@ class Surface(BaseTraceType):
         """
         Assigns extra data each datum. This may be useful when
         listening to hover, click and selection events. Note that,
-        *scatter* traces also appends customdata items in the markers
+        "scatter" traces also appends customdata items in the markers
         DOM elements
     
         The 'customdata' property is an array that may be specified as a tuple,
@@ -433,8 +433,8 @@ class Surface(BaseTraceType):
     def hidesurface(self):
         """
         Determines whether or not a surface is drawn. For example, set
-        `hidesurface` to *false* `contours.x.show` to *true* and
-        `contours.y.show` to *true* to draw a wire frame plot.
+        `hidesurface` to False `contours.x.show` to True and
+        `contours.y.show` to True to draw a wire frame plot.
     
         The 'hidesurface' property must be specified as a bool
         (either True, or False)
@@ -755,8 +755,8 @@ class Surface(BaseTraceType):
     def scene(self):
         """
         Sets a reference between this trace's 3D coordinate system and
-        a 3D scene. If *scene* (the default value), the (x,y,z)
-        coordinates refer to `layout.scene`. If *scene2*, the (x,y,z)
+        a 3D scene. If "scene" (the default value), the (x,y,z)
+        coordinates refer to `layout.scene`. If "scene2", the (x,y,z)
         coordinates refer to `layout.scene2`, and so on.
     
         The 'scene' property is an identifier of a particular
@@ -856,7 +856,7 @@ class Surface(BaseTraceType):
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
-                    `maxpoints` is set to *50*, only the newest 50
+                    `maxpoints` is set to 50, only the newest 50
                     points will be displayed on the plot.
                 token
                     The stream id number links a data trace on a
@@ -920,7 +920,7 @@ class Surface(BaseTraceType):
     def text(self):
         """
         Sets the text elements associated with each z value. If trace
-        `hoverinfo` contains a *text* flag and *hovertext* is not set,
+        `hoverinfo` contains a "text" flag and "hovertext" is not set,
         these elements will be seen in the hover labels.
     
         The 'text' property is a string and must be specified as:
@@ -983,7 +983,7 @@ class Surface(BaseTraceType):
     def visible(self):
         """
         Determines whether or not this trace is visible. If
-        *legendonly*, the trace is not drawn, but can appear as a
+        "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
     
         The 'visible' property is an enumeration that may be specified as:
@@ -1250,15 +1250,15 @@ class Surface(BaseTraceType):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
         hidesurface
             Determines whether or not a surface is drawn. For
-            example, set `hidesurface` to *false* `contours.x.show`
-            to *true* and `contours.y.show` to *true* to draw a
-            wire frame plot.
+            example, set `hidesurface` to False `contours.x.show`
+            to True and `contours.y.show` to True to draw a wire
+            frame plot.
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -1296,9 +1296,9 @@ class Surface(BaseTraceType):
             `cmax` will correspond to the first color.
         scene
             Sets a reference between this trace's 3D coordinate
-            system and a 3D scene. If *scene* (the default value),
+            system and a 3D scene. If "scene" (the default value),
             the (x,y,z) coordinates refer to `layout.scene`. If
-            *scene2*, the (x,y,z) coordinates refer to
+            "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
         selectedpoints
             Array containing integer indices of selected points.
@@ -1324,8 +1324,8 @@ class Surface(BaseTraceType):
             .
         text
             Sets the text elements associated with each z value. If
-            trace `hoverinfo` contains a *text* flag and
-            *hovertext* is not set, these elements will be seen in
+            trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
             the hover labels.
         textsrc
             Sets the source reference on plot.ly for  text .
@@ -1333,7 +1333,7 @@ class Surface(BaseTraceType):
 
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         x
@@ -1406,14 +1406,14 @@ class Surface(BaseTraceType):
         Construct a new Surface object
         
         The data the describes the coordinates of the surface is set in
-        `z`. Data in `z` should be a {2D array}. Coordinates in `x` and
-        `y` can either be 1D {arrays} or {2D arrays} (e.g. to graph
+        `z`. Data in `z` should be a 2D list. Coordinates in `x` and
+        `y` can either be 1D lists or 2D lists (e.g. to graph
         parametric surfaces). If not provided in `x` and `y`, the x and
         y coordinates are assumed to be linear starting at 0 with a
         unit step. The color scale corresponds to the `z` values by
         default. For custom color scales, use `surfacecolor` which
-        should be a {2D array}, where its bounds can be controlled
-        using `cmin` and `cmax`.
+        should be a 2D list, where its bounds can be controlled using
+        `cmin` and `cmax`.
 
         Parameters
         ----------
@@ -1461,15 +1461,15 @@ class Surface(BaseTraceType):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
         hidesurface
             Determines whether or not a surface is drawn. For
-            example, set `hidesurface` to *false* `contours.x.show`
-            to *true* and `contours.y.show` to *true* to draw a
-            wire frame plot.
+            example, set `hidesurface` to False `contours.x.show`
+            to True and `contours.y.show` to True to draw a wire
+            frame plot.
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -1507,9 +1507,9 @@ class Surface(BaseTraceType):
             `cmax` will correspond to the first color.
         scene
             Sets a reference between this trace's 3D coordinate
-            system and a 3D scene. If *scene* (the default value),
+            system and a 3D scene. If "scene" (the default value),
             the (x,y,z) coordinates refer to `layout.scene`. If
-            *scene2*, the (x,y,z) coordinates refer to
+            "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
         selectedpoints
             Array containing integer indices of selected points.
@@ -1535,8 +1535,8 @@ class Surface(BaseTraceType):
             .
         text
             Sets the text elements associated with each z value. If
-            trace `hoverinfo` contains a *text* flag and
-            *hovertext* is not set, these elements will be seen in
+            trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
             the hover labels.
         textsrc
             Sets the source reference on plot.ly for  text .
@@ -1544,7 +1544,7 @@ class Surface(BaseTraceType):
 
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         x

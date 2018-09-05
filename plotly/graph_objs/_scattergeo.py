@@ -32,7 +32,7 @@ class Scattergeo(BaseTraceType):
         """
         Assigns extra data each datum. This may be useful when
         listening to hover, click and selection events. Note that,
-        *scatter* traces also appends customdata items in the markers
+        "scatter" traces also appends customdata items in the markers
         DOM elements
     
         The 'customdata' property is an array that may be specified as a tuple,
@@ -74,7 +74,7 @@ class Scattergeo(BaseTraceType):
     def fill(self):
         """
         Sets the area to fill with a solid color. Use with `fillcolor`
-        if not *none*. *toself* connects the endpoints of the trace (or
+        if not "none". "toself" connects the endpoints of the trace (or
         each segment of the trace if it has gaps) into a closed shape.
     
         The 'fill' property is an enumeration that may be specified as:
@@ -158,8 +158,8 @@ class Scattergeo(BaseTraceType):
     def geo(self):
         """
         Sets a reference between this trace's geospatial coordinates
-        and a geographic map. If *geo* (the default value), the
-        geospatial coordinates refer to `layout.geo`. If *geo2*, the
+        and a geographic map. If "geo" (the default value), the
+        geospatial coordinates refer to `layout.geo`. If "geo2", the
         geospatial coordinates refer to `layout.geo2`, and so on.
     
         The 'geo' property is an identifier of a particular
@@ -283,7 +283,7 @@ class Scattergeo(BaseTraceType):
         appears over all the data points. If an array of string, the
         items are mapped in order to the this trace's (lon,lat) or
         `locations` coordinates. To be seen, trace `hoverinfo` must
-        contain a *text* flag.
+        contain a "text" flag.
     
         The 'hovertext' property is a string and must be specified as:
           - A string
@@ -442,9 +442,9 @@ class Scattergeo(BaseTraceType):
                     Sets the line color.
                 dash
                     Sets the dash style of lines. Set to a dash
-                    type string (*solid*, *dot*, *dash*,
-                    *longdash*, *dashdot*, or *longdashdot*) or a
-                    dash length list in px (eg *5px,10px,2px,2px*).
+                    type string ("solid", "dot", "dash",
+                    "longdash", "dashdot", or "longdashdot") or a
+                    dash length list in px (eg "5px,10px,2px,2px").
                 width
                     Sets the line width (in px).
 
@@ -675,11 +675,11 @@ class Scattergeo(BaseTraceType):
                     .
                 symbol
                     Sets the marker symbol type. Adding 100 is
-                    equivalent to appending *-open* to a symbol
+                    equivalent to appending "-open" to a symbol
                     name. Adding 200 is equivalent to appending
-                    *-dot* to a symbol name. Adding 300 is
-                    equivalent to appending *-open-dot* or *dot-
-                    open* to a symbol name.
+                    "-dot" to a symbol name. Adding 300 is
+                    equivalent to appending "-open-dot" or "dot-
+                    open" to a symbol name.
                 symbolsrc
                     Sets the source reference on plot.ly for
                     symbol .
@@ -700,10 +700,10 @@ class Scattergeo(BaseTraceType):
     def mode(self):
         """
         Determines the drawing mode for this scatter trace. If the
-        provided `mode` includes *text* then the `text` elements appear
+        provided `mode` includes "text" then the `text` elements appear
         at the coordinates. Otherwise, the `text` elements appear on
         hover. If there are less than 20 points, then the default is
-        *lines+markers*. Otherwise, *lines*.
+        "lines+markers". Otherwise, "lines".
     
         The 'mode' property is a flaglist and may be specified
         as a string containing:
@@ -854,7 +854,7 @@ class Scattergeo(BaseTraceType):
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
-                    `maxpoints` is set to *50*, only the newest 50
+                    `maxpoints` is set to 50, only the newest 50
                     points will be displayed on the plot.
                 token
                     The stream id number links a data trace on a
@@ -880,8 +880,8 @@ class Scattergeo(BaseTraceType):
         in `locations`. If a single string, the same string appears
         over all the data points. If an array of string, the items are
         mapped in order to the this trace's (lon,lat) or `locations`
-        coordinates. If trace `hoverinfo` contains a *text* flag and
-        *hovertext* is not set, these elements will be seen in the
+        coordinates. If trace `hoverinfo` contains a "text" flag and
+        "hovertext" is not set, these elements will be seen in the
         hover labels.
     
         The 'text' property is a string and must be specified as:
@@ -930,11 +930,11 @@ class Scattergeo(BaseTraceType):
                     system. The plotly service (at https://plot.ly
                     or on-premise) generates images on a server,
                     where only a select number of fonts are
-                    installed and supported. These include *Arial*,
-                    *Balto*, *Courier New*, *Droid Sans*,, *Droid
-                    Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
-                    Standard TT*, *Open Sans*, *Overpass*, *PT Sans
-                    Narrow*, *Raleway*, *Times New Roman*.
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
                 familysrc
                     Sets the source reference on plot.ly for
                     family .
@@ -1074,7 +1074,7 @@ class Scattergeo(BaseTraceType):
     def visible(self):
         """
         Determines whether or not this trace is visible. If
-        *legendonly*, the trace is not drawn, but can appear as a
+        "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
     
         The 'visible' property is an enumeration that may be specified as:
@@ -1114,13 +1114,13 @@ class Scattergeo(BaseTraceType):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
         fill
             Sets the area to fill with a solid color. Use with
-            `fillcolor` if not *none*. *toself* connects the
+            `fillcolor` if not "none". "toself" connects the
             endpoints of the trace (or each segment of the trace if
             it has gaps) into a closed shape.
         fillcolor
@@ -1129,9 +1129,9 @@ class Scattergeo(BaseTraceType):
             color, whichever is available.
         geo
             Sets a reference between this trace's geospatial
-            coordinates and a geographic map. If *geo* (the default
+            coordinates and a geographic map. If "geo" (the default
             value), the geospatial coordinates refer to
-            `layout.geo`. If *geo2*, the geospatial coordinates
+            `layout.geo`. If "geo2", the geospatial coordinates
             refer to `layout.geo2`, and so on.
         hoverinfo
             Determines which trace information appear on hover. If
@@ -1149,7 +1149,7 @@ class Scattergeo(BaseTraceType):
             same string appears over all the data points. If an
             array of string, the items are mapped in order to the
             this trace's (lon,lat) or `locations` coordinates. To
-            be seen, trace `hoverinfo` must contain a *text* flag.
+            be seen, trace `hoverinfo` must contain a "text" flag.
         hovertextsrc
             Sets the source reference on plot.ly for  hovertext .
         ids
@@ -1187,11 +1187,11 @@ class Scattergeo(BaseTraceType):
             with compatible properties
         mode
             Determines the drawing mode for this scatter trace. If
-            the provided `mode` includes *text* then the `text`
+            the provided `mode` includes "text" then the `text`
             elements appear at the coordinates. Otherwise, the
             `text` elements appear on hover. If there are less than
-            20 points, then the default is *lines+markers*.
-            Otherwise, *lines*.
+            20 points, then the default is "lines+markers".
+            Otherwise, "lines".
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -1219,7 +1219,7 @@ class Scattergeo(BaseTraceType):
             string appears over all the data points. If an array of
             string, the items are mapped in order to the this
             trace's (lon,lat) or `locations` coordinates. If trace
-            `hoverinfo` contains a *text* flag and *hovertext* is
+            `hoverinfo` contains a "text" flag and "hovertext" is
             not set, these elements will be seen in the hover
             labels.
         textfont
@@ -1239,7 +1239,7 @@ class Scattergeo(BaseTraceType):
             dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         """
@@ -1306,13 +1306,13 @@ class Scattergeo(BaseTraceType):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
         fill
             Sets the area to fill with a solid color. Use with
-            `fillcolor` if not *none*. *toself* connects the
+            `fillcolor` if not "none". "toself" connects the
             endpoints of the trace (or each segment of the trace if
             it has gaps) into a closed shape.
         fillcolor
@@ -1321,9 +1321,9 @@ class Scattergeo(BaseTraceType):
             color, whichever is available.
         geo
             Sets a reference between this trace's geospatial
-            coordinates and a geographic map. If *geo* (the default
+            coordinates and a geographic map. If "geo" (the default
             value), the geospatial coordinates refer to
-            `layout.geo`. If *geo2*, the geospatial coordinates
+            `layout.geo`. If "geo2", the geospatial coordinates
             refer to `layout.geo2`, and so on.
         hoverinfo
             Determines which trace information appear on hover. If
@@ -1341,7 +1341,7 @@ class Scattergeo(BaseTraceType):
             same string appears over all the data points. If an
             array of string, the items are mapped in order to the
             this trace's (lon,lat) or `locations` coordinates. To
-            be seen, trace `hoverinfo` must contain a *text* flag.
+            be seen, trace `hoverinfo` must contain a "text" flag.
         hovertextsrc
             Sets the source reference on plot.ly for  hovertext .
         ids
@@ -1379,11 +1379,11 @@ class Scattergeo(BaseTraceType):
             with compatible properties
         mode
             Determines the drawing mode for this scatter trace. If
-            the provided `mode` includes *text* then the `text`
+            the provided `mode` includes "text" then the `text`
             elements appear at the coordinates. Otherwise, the
             `text` elements appear on hover. If there are less than
-            20 points, then the default is *lines+markers*.
-            Otherwise, *lines*.
+            20 points, then the default is "lines+markers".
+            Otherwise, "lines".
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -1411,7 +1411,7 @@ class Scattergeo(BaseTraceType):
             string appears over all the data points. If an array of
             string, the items are mapped in order to the this
             trace's (lon,lat) or `locations` coordinates. If trace
-            `hoverinfo` contains a *text* flag and *hovertext* is
+            `hoverinfo` contains a "text" flag and "hovertext" is
             not set, these elements will be seen in the hover
             labels.
         textfont
@@ -1431,7 +1431,7 @@ class Scattergeo(BaseTraceType):
             dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
 

@@ -80,6 +80,7 @@ class GeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the color of the subunits boundaries.
             subunitwidth
                 Sets the stroke width (in px) of the subunits
-                boundaries.""",
+                boundaries.
+""",
             **kwargs
         )

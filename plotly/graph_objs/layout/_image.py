@@ -263,10 +263,10 @@ class Image(BaseLayoutHierarchyType):
     def xref(self):
         """
         Sets the images's x coordinate axis. If set to a x axis id
-        (e.g. *x* or *x2*), the `x` position refers to an x data
-        coordinate If set to *paper*, the `x` position refers to the
+        (e.g. "x" or "x2"), the `x` position refers to an x data
+        coordinate If set to "paper", the `x` position refers to the
         distance from the left of plot in normalized coordinates where
-        *0* (*1*) corresponds to the left (right).
+        0 (1) corresponds to the left (right).
     
         The 'xref' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -332,10 +332,10 @@ class Image(BaseLayoutHierarchyType):
     def yref(self):
         """
         Sets the images's y coordinate axis. If set to a y axis id
-        (e.g. *y* or *y2*), the `y` position refers to a y data
-        coordinate. If set to *paper*, the `y` position refers to the
+        (e.g. "y" or "y2"), the `y` position refers to a y data
+        coordinate. If set to "paper", the `y` position refers to the
         distance from the bottom of the plot in normalized coordinates
-        where *0* (*1*) corresponds to the bottom (top).
+        where 0 (1) corresponds to the bottom (top).
     
         The 'yref' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -415,11 +415,11 @@ class Image(BaseLayoutHierarchyType):
             Sets the anchor for the x position
         xref
             Sets the images's x coordinate axis. If set to a x axis
-            id (e.g. *x* or *x2*), the `x` position refers to an x
-            data coordinate If set to *paper*, the `x` position
+            id (e.g. "x" or "x2"), the `x` position refers to an x
+            data coordinate If set to "paper", the `x` position
             refers to the distance from the left of plot in
-            normalized coordinates where *0* (*1*) corresponds to
-            the left (right).
+            normalized coordinates where 0 (1) corresponds to the
+            left (right).
         y
             Sets the image's y position. When `yref` is set to
             `paper`, units are sized relative to the plot height.
@@ -428,11 +428,11 @@ class Image(BaseLayoutHierarchyType):
             Sets the anchor for the y position.
         yref
             Sets the images's y coordinate axis. If set to a y axis
-            id (e.g. *y* or *y2*), the `y` position refers to a y
-            data coordinate. If set to *paper*, the `y` position
+            id (e.g. "y" or "y2"), the `y` position refers to a y
+            data coordinate. If set to "paper", the `y` position
             refers to the distance from the bottom of the plot in
-            normalized coordinates where *0* (*1*) corresponds to
-            the bottom (top).
+            normalized coordinates where 0 (1) corresponds to the
+            bottom (top).
         """
 
     def __init__(
@@ -514,11 +514,11 @@ class Image(BaseLayoutHierarchyType):
             Sets the anchor for the x position
         xref
             Sets the images's x coordinate axis. If set to a x axis
-            id (e.g. *x* or *x2*), the `x` position refers to an x
-            data coordinate If set to *paper*, the `x` position
+            id (e.g. "x" or "x2"), the `x` position refers to an x
+            data coordinate If set to "paper", the `x` position
             refers to the distance from the left of plot in
-            normalized coordinates where *0* (*1*) corresponds to
-            the left (right).
+            normalized coordinates where 0 (1) corresponds to the
+            left (right).
         y
             Sets the image's y position. When `yref` is set to
             `paper`, units are sized relative to the plot height.
@@ -527,11 +527,11 @@ class Image(BaseLayoutHierarchyType):
             Sets the anchor for the y position.
         yref
             Sets the images's y coordinate axis. If set to a y axis
-            id (e.g. *y* or *y2*), the `y` position refers to a y
-            data coordinate. If set to *paper*, the `y` position
+            id (e.g. "y" or "y2"), the `y` position refers to a y
+            data coordinate. If set to "paper", the `y` position
             refers to the distance from the bottom of the plot in
-            normalized coordinates where *0* (*1*) corresponds to
-            the bottom (top).
+            normalized coordinates where 0 (1) corresponds to the
+            bottom (top).
 
         Returns
         -------

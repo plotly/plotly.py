@@ -16,7 +16,7 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
-                selection events. Note that, *scatter* traces
+                selection events. Note that, "scatter" traces
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
@@ -24,7 +24,7 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 customdata .
             fill
                 Sets the area to fill with a solid color. Use
-                with `fillcolor` if not *none*. *toself*
+                with `fillcolor` if not "none". "toself"
                 connects the endpoints of the trace (or each
                 segment of the trace if it has gaps) into a
                 closed shape.
@@ -36,8 +36,8 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
             geo
                 Sets a reference between this trace's
                 geospatial coordinates and a geographic map. If
-                *geo* (the default value), the geospatial
-                coordinates refer to `layout.geo`. If *geo2*,
+                "geo" (the default value), the geospatial
+                coordinates refer to `layout.geo`. If "geo2",
                 the geospatial coordinates refer to
                 `layout.geo2`, and so on.
             hoverinfo
@@ -59,7 +59,7 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the data points. If an array of string, the
                 items are mapped in order to the this trace's
                 (lon,lat) or `locations` coordinates. To be
-                seen, trace `hoverinfo` must contain a *text*
+                seen, trace `hoverinfo` must contain a "text"
                 flag.
             hovertextsrc
                 Sets the source reference on plot.ly for
@@ -104,12 +104,12 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 dict with compatible properties
             mode
                 Determines the drawing mode for this scatter
-                trace. If the provided `mode` includes *text*
+                trace. If the provided `mode` includes "text"
                 then the `text` elements appear at the
                 coordinates. Otherwise, the `text` elements
                 appear on hover. If there are less than 20
-                points, then the default is *lines+markers*.
-                Otherwise, *lines*.
+                points, then the default is "lines+markers".
+                Otherwise, "lines".
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -140,8 +140,8 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the data points. If an array of string, the
                 items are mapped in order to the this trace's
                 (lon,lat) or `locations` coordinates. If trace
-                `hoverinfo` contains a *text* flag and
-                *hovertext* is not set, these elements will be
+                `hoverinfo` contains a "text" flag and
+                "hovertext" is not set, these elements will be
                 seen in the hover labels.
             textfont
                 Sets the text font.
@@ -161,8 +161,9 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 instance or dict with compatible properties
             visible
                 Determines whether or not this trace is
-                visible. If *legendonly*, the trace is not
+                visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
-                (provided that the legend itself is visible).""",
+                (provided that the legend itself is visible).
+""",
             **kwargs
         )

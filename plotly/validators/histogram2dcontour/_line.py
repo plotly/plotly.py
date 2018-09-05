@@ -14,16 +14,17 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
             color
                 Sets the color of the contour level. Has no
                 effect if `contours.coloring` is set to
-                *lines*.
+                "lines".
             dash
                 Sets the dash style of lines. Set to a dash
-                type string (*solid*, *dot*, *dash*,
-                *longdash*, *dashdot*, or *longdashdot*) or a
-                dash length list in px (eg *5px,10px,2px,2px*).
+                type string ("solid", "dot", "dash",
+                "longdash", "dashdot", or "longdashdot") or a
+                dash length list in px (eg "5px,10px,2px,2px").
             smoothing
                 Sets the amount of smoothing for the contour
-                lines, where *0* corresponds to no smoothing.
+                lines, where 0 corresponds to no smoothing.
             width
-                Sets the line width (in px).""",
+                Sets the line width (in px).
+""",
             **kwargs
         )

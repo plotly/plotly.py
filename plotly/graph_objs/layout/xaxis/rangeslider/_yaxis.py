@@ -34,8 +34,8 @@ class YAxis(BaseLayoutHierarchyType):
         """
         Determines whether or not the range of this axis in the
         rangeslider use the same value than in the main plot when
-        zooming in/out. If *auto*, the autorange will be used. If
-        *fixed*, the `range` is used. If *match*, the current range of
+        zooming in/out. If "auto", the autorange will be used. If
+        "fixed", the `range` is used. If "match", the current range of
         the corresponding y-axis on the main subplot is used.
     
         The 'rangemode' property is an enumeration that may be specified as:
@@ -68,8 +68,8 @@ class YAxis(BaseLayoutHierarchyType):
         rangemode
             Determines whether or not the range of this axis in the
             rangeslider use the same value than in the main plot
-            when zooming in/out. If *auto*, the autorange will be
-            used. If *fixed*, the `range` is used. If *match*, the
+            when zooming in/out. If "auto", the autorange will be
+            used. If "fixed", the `range` is used. If "match", the
             current range of the corresponding y-axis on the main
             subplot is used.
         """
@@ -89,8 +89,8 @@ class YAxis(BaseLayoutHierarchyType):
         rangemode
             Determines whether or not the range of this axis in the
             rangeslider use the same value than in the main plot
-            when zooming in/out. If *auto*, the autorange will be
-            used. If *fixed*, the `range` is used. If *match*, the
+            when zooming in/out. If "auto", the autorange will be
+            used. If "fixed", the `range` is used. If "match", the
             current range of the corresponding y-axis on the main
             subplot is used.
 

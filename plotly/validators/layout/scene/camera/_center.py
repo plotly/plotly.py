@@ -19,6 +19,7 @@ class CenterValidator(_plotly_utils.basevalidators.CompoundValidator):
             y
 
             z
+
 """,
             **kwargs
         )

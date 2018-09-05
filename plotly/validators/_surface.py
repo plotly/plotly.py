@@ -54,7 +54,7 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
-                selection events. Note that, *scatter* traces
+                selection events. Note that, "scatter" traces
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
@@ -62,10 +62,9 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 customdata .
             hidesurface
                 Determines whether or not a surface is drawn.
-                For example, set `hidesurface` to *false*
-                `contours.x.show` to *true* and
-                `contours.y.show` to *true* to draw a wire
-                frame plot.
+                For example, set `hidesurface` to False
+                `contours.x.show` to True and `contours.y.show`
+                to True to draw a wire frame plot.
             hoverinfo
                 Determines which trace information appear on
                 hover. If `none` or `skip` are set, no
@@ -107,9 +106,9 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color.
             scene
                 Sets a reference between this trace's 3D
-                coordinate system and a 3D scene. If *scene*
+                coordinate system and a 3D scene. If "scene"
                 (the default value), the (x,y,z) coordinates
-                refer to `layout.scene`. If *scene2*, the
+                refer to `layout.scene`. If "scene2", the
                 (x,y,z) coordinates refer to `layout.scene2`,
                 and so on.
             selectedpoints
@@ -138,8 +137,8 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 surfacecolor .
             text
                 Sets the text elements associated with each z
-                value. If trace `hoverinfo` contains a *text*
-                flag and *hovertext* is not set, these elements
+                value. If trace `hoverinfo` contains a "text"
+                flag and "hovertext" is not set, these elements
                 will be seen in the hover labels.
             textsrc
                 Sets the source reference on plot.ly for  text
@@ -148,7 +147,7 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
 
             visible
                 Determines whether or not this trace is
-                visible. If *legendonly*, the trace is not
+                visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
             x
@@ -171,6 +170,7 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the calendar system to use with `z` date
                 data.
             zsrc
-                Sets the source reference on plot.ly for  z .""",
+                Sets the source reference on plot.ly for  z .
+""",
             **kwargs
         )

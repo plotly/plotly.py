@@ -15,6 +15,7 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets whether or not dynamic contours are shown
                 on hover
             width
-                Sets the width of the contour lines.""",
+                Sets the width of the contour lines.
+""",
             **kwargs
         )

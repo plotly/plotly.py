@@ -74,10 +74,10 @@ class Textfont(BaseLayoutHierarchyType):
         the system. The plotly service (at https://plot.ly or on-
         premise) generates images on a server, where only a select
         number of fonts are installed and supported. These include
-        *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*,
-        *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open
-        Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New
-        Roman*.
+        "Arial", "Balto", "Courier New", "Droid Sans",, "Droid Serif",
+        "Droid Sans Mono", "Gravitas One", "Old Standard TT", "Open
+        Sans", "Overpass", "PT Sans Narrow", "Raleway", "Times New
+        Roman".
     
         The 'family' property is a string and must be specified as:
           - A non-empty string
@@ -133,10 +133,10 @@ class Textfont(BaseLayoutHierarchyType):
             plotly service (at https://plot.ly or on-premise)
             generates images on a server, where only a select
             number of fonts are installed and supported. These
-            include *Arial*, *Balto*, *Courier New*, *Droid Sans*,,
-            *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
-            Standard TT*, *Open Sans*, *Overpass*, *PT Sans
-            Narrow*, *Raleway*, *Times New Roman*.
+            include "Arial", "Balto", "Courier New", "Droid Sans",,
+            "Droid Serif", "Droid Sans Mono", "Gravitas One", "Old
+            Standard TT", "Open Sans", "Overpass", "PT Sans
+            Narrow", "Raleway", "Times New Roman".
         size
 
         """
@@ -146,7 +146,7 @@ class Textfont(BaseLayoutHierarchyType):
         Construct a new Textfont object
         
         Sets the icon text font. Has an effect only when `type` is set
-        to *symbol*.
+        to "symbol".
 
         Parameters
         ----------
@@ -166,10 +166,10 @@ class Textfont(BaseLayoutHierarchyType):
             plotly service (at https://plot.ly or on-premise)
             generates images on a server, where only a select
             number of fonts are installed and supported. These
-            include *Arial*, *Balto*, *Courier New*, *Droid Sans*,,
-            *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
-            Standard TT*, *Open Sans*, *Overpass*, *PT Sans
-            Narrow*, *Raleway*, *Times New Roman*.
+            include "Arial", "Balto", "Courier New", "Droid Sans",,
+            "Droid Serif", "Droid Sans Mono", "Gravitas One", "Old
+            Standard TT", "Open Sans", "Overpass", "PT Sans
+            Narrow", "Raleway", "Times New Roman".
         size
 
 

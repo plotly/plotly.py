@@ -67,26 +67,26 @@ class Histogram(BaseTraceType):
                     Only applies if cumulative is enabled. Sets
                     whether the current bin is included, excluded,
                     or has half of its value included in the
-                    current cumulative value. *include* is the
+                    current cumulative value. "include" is the
                     default for compatibility with various other
                     tools, however it introduces a half-bin bias to
-                    the results. *exclude* makes the opposite half-
-                    bin bias, and *half* removes it.
+                    the results. "exclude" makes the opposite half-
+                    bin bias, and "half" removes it.
                 direction
                     Only applies if cumulative is enabled. If
-                    *increasing* (default) we sum all prior bins,
+                    "increasing" (default) we sum all prior bins,
                     so the result increases from left to right. If
-                    *decreasing* we sum later bins so the result
+                    "decreasing" we sum later bins so the result
                     decreases from left to right.
                 enabled
                     If true, display the cumulative distribution by
                     summing the binned values. Use the `direction`
                     and `centralbin` attributes to tune the
                     accumulation method. Note: in this mode, the
-                    *density* `histnorm` settings behave the same
-                    as their equivalents without *density*: ** and
-                    *density* both rise to the number of data
-                    points, and *probability* and *probability
+                    "density" `histnorm` settings behave the same
+                    as their equivalents without "density": ** and
+                    "density" both rise to the number of data
+                    points, and "probability" and *probability
                     density* both rise to the number of sample
                     points.
 
@@ -107,7 +107,7 @@ class Histogram(BaseTraceType):
         """
         Assigns extra data each datum. This may be useful when
         listening to hover, click and selection events. Note that,
-        *scatter* traces also appends customdata items in the markers
+        "scatter" traces also appends customdata items in the markers
         DOM elements
     
         The 'customdata' property is an array that may be specified as a tuple,
@@ -190,21 +190,21 @@ class Histogram(BaseTraceType):
                     Determines the rule used to generate the error
                     bars. If *constant`, the bar lengths are of a
                     constant value. Set this constant in `value`.
-                    If *percent*, the bar lengths correspond to a
+                    If "percent", the bar lengths correspond to a
                     percentage of underlying data. Set this
-                    percentage in `value`. If *sqrt*, the bar
+                    percentage in `value`. If "sqrt", the bar
                     lengths correspond to the sqaure of the
-                    underlying data. If *array*, the bar lengths
+                    underlying data. If "array", the bar lengths
                     are set with data set `array`.
                 value
                     Sets the value of either the percentage (if
-                    `type` is set to *percent*) or the constant (if
-                    `type` is set to *constant*) corresponding to
+                    `type` is set to "percent") or the constant (if
+                    `type` is set to "constant") corresponding to
                     the lengths of the error bars.
                 valueminus
                     Sets the value of either the percentage (if
-                    `type` is set to *percent*) or the constant (if
-                    `type` is set to *constant*) corresponding to
+                    `type` is set to "percent") or the constant (if
+                    `type` is set to "constant") corresponding to
                     the lengths of the error bars in the bottom
                     (left) direction for vertical (horizontal) bars
                 visible
@@ -269,21 +269,21 @@ class Histogram(BaseTraceType):
                     Determines the rule used to generate the error
                     bars. If *constant`, the bar lengths are of a
                     constant value. Set this constant in `value`.
-                    If *percent*, the bar lengths correspond to a
+                    If "percent", the bar lengths correspond to a
                     percentage of underlying data. Set this
-                    percentage in `value`. If *sqrt*, the bar
+                    percentage in `value`. If "sqrt", the bar
                     lengths correspond to the sqaure of the
-                    underlying data. If *array*, the bar lengths
+                    underlying data. If "array", the bar lengths
                     are set with data set `array`.
                 value
                     Sets the value of either the percentage (if
-                    `type` is set to *percent*) or the constant (if
-                    `type` is set to *constant*) corresponding to
+                    `type` is set to "percent") or the constant (if
+                    `type` is set to "constant") corresponding to
                     the lengths of the error bars.
                 valueminus
                     Sets the value of either the percentage (if
-                    `type` is set to *percent*) or the constant (if
-                    `type` is set to *constant*) corresponding to
+                    `type` is set to "percent") or the constant (if
+                    `type` is set to "constant") corresponding to
                     the lengths of the error bars in the bottom
                     (left) direction for vertical (horizontal) bars
                 visible
@@ -309,9 +309,9 @@ class Histogram(BaseTraceType):
     def histfunc(self):
         """
         Specifies the binning function used for this histogram trace.
-        If *count*, the histogram values are computed by counting the
-        number of values lying inside each bin. If *sum*, *avg*, *min*,
-        *max*, the histogram values are computed using the sum, the
+        If "count", the histogram values are computed by counting the
+        number of values lying inside each bin. If "sum", "avg", "min",
+        "max", the histogram values are computed using the sum, the
         average, the minimum or the maximum of the values lying inside
         each bin respectively.
     
@@ -337,10 +337,10 @@ class Histogram(BaseTraceType):
         Specifies the type of normalization used for this histogram
         trace. If **, the span of each bar corresponds to the number of
         occurrences (i.e. the number of data points lying inside the
-        bins). If *percent* / *probability*, the span of each bar
+        bins). If "percent" / "probability", the span of each bar
         corresponds to the percentage / fraction of occurrences with
         respect to the total number of sample points (here, the sum of
-        all bin HEIGHTS equals 100% / 1). If *density*, the span of
+        all bin HEIGHTS equals 100% / 1). If "density", the span of
         each bar corresponds to the number of occurrences in a bin
         divided by the size of the bin interval (here, the sum of all
         bin AREAS equals the total number of sample points). If
@@ -720,7 +720,7 @@ class Histogram(BaseTraceType):
     @property
     def orientation(self):
         """
-        Sets the orientation of the bars. With *v* (*h*), the value of
+        Sets the orientation of the bars. With "v" ("h"), the value of
         the each bar spans along the vertical (horizontal).
     
         The 'orientation' property is an enumeration that may be specified as:
@@ -828,7 +828,7 @@ class Histogram(BaseTraceType):
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
-                    `maxpoints` is set to *50*, only the newest 50
+                    `maxpoints` is set to 50, only the newest 50
                     points will be displayed on the plot.
                 token
                     The stream id number links a data trace on a
@@ -854,7 +854,7 @@ class Histogram(BaseTraceType):
         string, the same string appears over all the data points. If an
         array of string, the items are mapped in order to the this
         trace's (x,y) coordinates. If trace `hoverinfo` contains a
-        *text* flag and *hovertext* is not set, these elements will be
+        "text" flag and "hovertext" is not set, these elements will be
         seen in the hover labels.
     
         The 'text' property is a string and must be specified as:
@@ -947,7 +947,7 @@ class Histogram(BaseTraceType):
     def visible(self):
         """
         Determines whether or not this trace is visible. If
-        *legendonly*, the trace is not drawn, but can appear as a
+        "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
     
         The 'visible' property is an enumeration that may be specified as:
@@ -990,8 +990,8 @@ class Histogram(BaseTraceType):
     def xaxis(self):
         """
         Sets a reference between this trace's x coordinates and a 2D
-        cartesian x axis. If *x* (the default value), the x coordinates
-        refer to `layout.xaxis`. If *x2*, the x coordinates refer to
+        cartesian x axis. If "x" (the default value), the x coordinates
+        refer to `layout.xaxis`. If "x2", the x coordinates refer to
         `layout.xaxis2`, and so on.
     
         The 'xaxis' property is an identifier of a particular
@@ -1109,8 +1109,8 @@ class Histogram(BaseTraceType):
     def yaxis(self):
         """
         Sets a reference between this trace's y coordinates and a 2D
-        cartesian y axis. If *y* (the default value), the y coordinates
-        refer to `layout.yaxis`. If *y2*, the y coordinates refer to
+        cartesian y axis. If "y" (the default value), the y coordinates
+        refer to `layout.yaxis`. If "y2", the y coordinates refer to
         `layout.yaxis2`, and so on.
     
         The 'yaxis' property is an identifier of a particular
@@ -1235,7 +1235,7 @@ class Histogram(BaseTraceType):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -1247,9 +1247,9 @@ class Histogram(BaseTraceType):
             with compatible properties
         histfunc
             Specifies the binning function used for this histogram
-            trace. If *count*, the histogram values are computed by
+            trace. If "count", the histogram values are computed by
             counting the number of values lying inside each bin. If
-            *sum*, *avg*, *min*, *max*, the histogram values are
+            "sum", "avg", "min", "max", the histogram values are
             computed using the sum, the average, the minimum or the
             maximum of the values lying inside each bin
             respectively.
@@ -1258,11 +1258,11 @@ class Histogram(BaseTraceType):
             histogram trace. If **, the span of each bar
             corresponds to the number of occurrences (i.e. the
             number of data points lying inside the bins). If
-            *percent* / *probability*, the span of each bar
+            "percent" / "probability", the span of each bar
             corresponds to the percentage / fraction of occurrences
             with respect to the total number of sample points
             (here, the sum of all bin HEIGHTS equals 100% / 1). If
-            *density*, the span of each bar corresponds to the
+            "density", the span of each bar corresponds to the
             number of occurrences in a bin divided by the size of
             the bin interval (here, the sum of all bin AREAS equals
             the total number of sample points). If *probability
@@ -1309,7 +1309,7 @@ class Histogram(BaseTraceType):
         opacity
             Sets the opacity of the trace.
         orientation
-            Sets the orientation of the bars. With *v* (*h*), the
+            Sets the orientation of the bars. With "v" ("h"), the
             value of the each bar spans along the vertical
             (horizontal).
         selected
@@ -1333,8 +1333,8 @@ class Histogram(BaseTraceType):
             a single string, the same string appears over all the
             data points. If an array of string, the items are
             mapped in order to the this trace's (x,y) coordinates.
-            If trace `hoverinfo` contains a *text* flag and
-            *hovertext* is not set, these elements will be seen in
+            If trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
             the hover labels.
         textsrc
             Sets the source reference on plot.ly for  text .
@@ -1345,15 +1345,15 @@ class Histogram(BaseTraceType):
             with compatible properties
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         x
             Sets the sample data to be binned on the x axis.
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xbins
             plotly.graph_objs.histogram.XBins instance or dict with
@@ -1366,8 +1366,8 @@ class Histogram(BaseTraceType):
             Sets the sample data to be binned on the y axis.
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ybins
             plotly.graph_objs.histogram.YBins instance or dict with
@@ -1453,7 +1453,7 @@ class Histogram(BaseTraceType):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -1465,9 +1465,9 @@ class Histogram(BaseTraceType):
             with compatible properties
         histfunc
             Specifies the binning function used for this histogram
-            trace. If *count*, the histogram values are computed by
+            trace. If "count", the histogram values are computed by
             counting the number of values lying inside each bin. If
-            *sum*, *avg*, *min*, *max*, the histogram values are
+            "sum", "avg", "min", "max", the histogram values are
             computed using the sum, the average, the minimum or the
             maximum of the values lying inside each bin
             respectively.
@@ -1476,11 +1476,11 @@ class Histogram(BaseTraceType):
             histogram trace. If **, the span of each bar
             corresponds to the number of occurrences (i.e. the
             number of data points lying inside the bins). If
-            *percent* / *probability*, the span of each bar
+            "percent" / "probability", the span of each bar
             corresponds to the percentage / fraction of occurrences
             with respect to the total number of sample points
             (here, the sum of all bin HEIGHTS equals 100% / 1). If
-            *density*, the span of each bar corresponds to the
+            "density", the span of each bar corresponds to the
             number of occurrences in a bin divided by the size of
             the bin interval (here, the sum of all bin AREAS equals
             the total number of sample points). If *probability
@@ -1527,7 +1527,7 @@ class Histogram(BaseTraceType):
         opacity
             Sets the opacity of the trace.
         orientation
-            Sets the orientation of the bars. With *v* (*h*), the
+            Sets the orientation of the bars. With "v" ("h"), the
             value of the each bar spans along the vertical
             (horizontal).
         selected
@@ -1551,8 +1551,8 @@ class Histogram(BaseTraceType):
             a single string, the same string appears over all the
             data points. If an array of string, the items are
             mapped in order to the this trace's (x,y) coordinates.
-            If trace `hoverinfo` contains a *text* flag and
-            *hovertext* is not set, these elements will be seen in
+            If trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
             the hover labels.
         textsrc
             Sets the source reference on plot.ly for  text .
@@ -1563,15 +1563,15 @@ class Histogram(BaseTraceType):
             with compatible properties
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         x
             Sets the sample data to be binned on the x axis.
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xbins
             plotly.graph_objs.histogram.XBins instance or dict with
@@ -1584,8 +1584,8 @@ class Histogram(BaseTraceType):
             Sets the sample data to be binned on the y axis.
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ybins
             plotly.graph_objs.histogram.YBins instance or dict with

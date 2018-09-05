@@ -20,6 +20,7 @@ class DomainValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (in plot fraction).
             y
                 Sets the vertical domain of this pie trace (in
-                plot fraction).""",
+                plot fraction).
+""",
             **kwargs
         )

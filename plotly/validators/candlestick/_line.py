@@ -16,6 +16,7 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 box(es). Note that this style setting can also
                 be set per direction via
                 `increasing.line.width` and
-                `decreasing.line.width`.""",
+                `decreasing.line.width`.
+""",
             **kwargs
         )

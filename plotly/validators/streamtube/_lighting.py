@@ -34,6 +34,7 @@ class LightingValidator(_plotly_utils.basevalidators.CompoundValidator):
                 reflected in a single direction, causing shine.
             vertexnormalsepsilon
                 Epsilon for vertex normals calculation avoids
-                math issues arising from degenerate geometry.""",
+                math issues arising from degenerate geometry.
+""",
             **kwargs
         )

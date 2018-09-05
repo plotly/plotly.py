@@ -18,6 +18,7 @@ class ZValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the projection marker points.
             show
                 Sets whether or not projections are shown along
-                the z axis.""",
+                the z axis.
+""",
             **kwargs
         )

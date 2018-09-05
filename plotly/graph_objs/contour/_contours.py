@@ -10,10 +10,10 @@ class Contours(BaseTraceHierarchyType):
     def coloring(self):
         """
         Determines the coloring method showing the contour values. If
-        *fill*, coloring is done evenly between each contour level If
-        *heatmap*, a heatmap gradient coloring is applied between each
-        contour level. If *lines*, coloring is done on the contour
-        lines. If *none*, no coloring is applied on this trace.
+        "fill", coloring is done evenly between each contour level If
+        "heatmap", a heatmap gradient coloring is applied between each
+        contour level. If "lines", coloring is done on the contour
+        lines. If "none", no coloring is applied on this trace.
     
         The 'coloring' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -80,11 +80,11 @@ class Contours(BaseTraceHierarchyType):
                     system. The plotly service (at https://plot.ly
                     or on-premise) generates images on a server,
                     where only a select number of fonts are
-                    installed and supported. These include *Arial*,
-                    *Balto*, *Courier New*, *Droid Sans*,, *Droid
-                    Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
-                    Standard TT*, *Open Sans*, *Overpass*, *PT Sans
-                    Narrow*, *Raleway*, *Times New Roman*.
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
                 size
 
         Returns
@@ -125,11 +125,11 @@ class Contours(BaseTraceHierarchyType):
     @property
     def operation(self):
         """
-        Sets the constraint operation. *=* keeps regions equal to
-        `value` *<* and *<=* keep regions less than `value` *>* and
-        *>=* keep regions greater than `value` *[]*, *()*, *[)*, and
-        *(]* keep regions inside `value[0]` to `value[1]` *][*, *)(*,
-        *](*, *)[* keep regions outside `value[0]` to value[1]` Open
+        Sets the constraint operation. "=" keeps regions equal to
+        `value` "<" and "<=" keep regions less than `value` ">" and
+        ">=" keep regions greater than `value` "[]", "()", "[)", and
+        "(]" keep regions inside `value[0]` to `value[1]` "][", ")(",
+        "](", ")[" keep regions outside `value[0]` to value[1]` Open
         vs. closed intervals make no difference to constraint display,
         but all versions are allowed for consistency with filter
         transforms.
@@ -176,7 +176,7 @@ class Contours(BaseTraceHierarchyType):
     def showlines(self):
         """
         Determines whether or not the contour lines are drawn. Has an
-        effect only if `contours.coloring` is set to *fill*.
+        effect only if `contours.coloring` is set to "fill".
     
         The 'showlines' property must be specified as a bool
         (either True, or False)
@@ -263,9 +263,9 @@ class Contours(BaseTraceHierarchyType):
         """
         Sets the value or values of the constraint boundary. When
         `operation` is set to one of the comparison values
-        (=,<,>=,>,<=) *value* is expected to be a number. When
+        (=,<,>=,>,<=) "value" is expected to be a number. When
         `operation` is set to one of the interval values
-        ([],(),[),(],][,)(,](,)[) *value* is expected to be an array of
+        ([],(),[),(],][,)(,](,)[) "value" is expected to be an array of
         two numbers where the first is the lower bound and the second
         is the upper bound.
     
@@ -294,10 +294,10 @@ class Contours(BaseTraceHierarchyType):
         return """\
         coloring
             Determines the coloring method showing the contour
-            values. If *fill*, coloring is done evenly between each
-            contour level If *heatmap*, a heatmap gradient coloring
-            is applied between each contour level. If *lines*,
-            coloring is done on the contour lines. If *none*, no
+            values. If "fill", coloring is done evenly between each
+            contour level If "heatmap", a heatmap gradient coloring
+            is applied between each contour level. If "lines",
+            coloring is done on the contour lines. If "none", no
             coloring is applied on this trace.
         end
             Sets the end contour level value. Must be more than
@@ -312,11 +312,11 @@ class Contours(BaseTraceHierarchyType):
             Python, see: https://github.com/d3/d3-format/blob/maste
             r/README.md#locale_format.
         operation
-            Sets the constraint operation. *=* keeps regions equal
-            to `value` *<* and *<=* keep regions less than `value`
-            *>* and *>=* keep regions greater than `value` *[]*,
-            *()*, *[)*, and *(]* keep regions inside `value[0]` to
-            `value[1]` *][*, *)(*, *](*, *)[* keep regions outside
+            Sets the constraint operation. "=" keeps regions equal
+            to `value` "<" and "<=" keep regions less than `value`
+            ">" and ">=" keep regions greater than `value` "[]",
+            "()", "[)", and "(]" keep regions inside `value[0]` to
+            `value[1]` "][", ")(", "](", ")[" keep regions outside
             `value[0]` to value[1]` Open vs. closed intervals make
             no difference to constraint display, but all versions
             are allowed for consistency with filter transforms.
@@ -326,7 +326,7 @@ class Contours(BaseTraceHierarchyType):
         showlines
             Determines whether or not the contour lines are drawn.
             Has an effect only if `contours.coloring` is set to
-            *fill*.
+            "fill".
         size
             Sets the step between each contour level. Must be
             positive.
@@ -342,9 +342,9 @@ class Contours(BaseTraceHierarchyType):
         value
             Sets the value or values of the constraint boundary.
             When `operation` is set to one of the comparison values
-            (=,<,>=,>,<=) *value* is expected to be a number. When
+            (=,<,>=,>,<=) "value" is expected to be a number. When
             `operation` is set to one of the interval values
-            ([],(),[),(],][,)(,](,)[) *value* is expected to be an
+            ([],(),[),(],][,)(,](,)[) "value" is expected to be an
             array of two numbers where the first is the lower bound
             and the second is the upper bound.
         """
@@ -375,10 +375,10 @@ class Contours(BaseTraceHierarchyType):
             an instance of plotly.graph_objs.contour.Contours
         coloring
             Determines the coloring method showing the contour
-            values. If *fill*, coloring is done evenly between each
-            contour level If *heatmap*, a heatmap gradient coloring
-            is applied between each contour level. If *lines*,
-            coloring is done on the contour lines. If *none*, no
+            values. If "fill", coloring is done evenly between each
+            contour level If "heatmap", a heatmap gradient coloring
+            is applied between each contour level. If "lines",
+            coloring is done on the contour lines. If "none", no
             coloring is applied on this trace.
         end
             Sets the end contour level value. Must be more than
@@ -393,11 +393,11 @@ class Contours(BaseTraceHierarchyType):
             Python, see: https://github.com/d3/d3-format/blob/maste
             r/README.md#locale_format.
         operation
-            Sets the constraint operation. *=* keeps regions equal
-            to `value` *<* and *<=* keep regions less than `value`
-            *>* and *>=* keep regions greater than `value` *[]*,
-            *()*, *[)*, and *(]* keep regions inside `value[0]` to
-            `value[1]` *][*, *)(*, *](*, *)[* keep regions outside
+            Sets the constraint operation. "=" keeps regions equal
+            to `value` "<" and "<=" keep regions less than `value`
+            ">" and ">=" keep regions greater than `value` "[]",
+            "()", "[)", and "(]" keep regions inside `value[0]` to
+            `value[1]` "][", ")(", "](", ")[" keep regions outside
             `value[0]` to value[1]` Open vs. closed intervals make
             no difference to constraint display, but all versions
             are allowed for consistency with filter transforms.
@@ -407,7 +407,7 @@ class Contours(BaseTraceHierarchyType):
         showlines
             Determines whether or not the contour lines are drawn.
             Has an effect only if `contours.coloring` is set to
-            *fill*.
+            "fill".
         size
             Sets the step between each contour level. Must be
             positive.
@@ -423,9 +423,9 @@ class Contours(BaseTraceHierarchyType):
         value
             Sets the value or values of the constraint boundary.
             When `operation` is set to one of the comparison values
-            (=,<,>=,>,<=) *value* is expected to be a number. When
+            (=,<,>=,>,<=) "value" is expected to be a number. When
             `operation` is set to one of the interval values
-            ([],(),[),(],][,)(,](,)[) *value* is expected to be an
+            ([],(),[),(],][,)(,](,)[) "value" is expected to be an
             array of two numbers where the first is the lower bound
             and the second is the upper bound.
 

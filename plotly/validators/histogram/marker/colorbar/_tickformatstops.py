@@ -17,10 +17,10 @@ class TickformatstopsValidator(
             data_class_str='Tickformatstop',
             data_docs="""
             dtickrange
-                range [*min*, *max*], where *min*, *max* -
+                range [*min*, *max*], where "min", "max" -
                 dtick values which describe some zoom level, it
-                is possible to omit *min* or *max* value by
-                passing *null*
+                is possible to omit "min" or "max" value by
+                passing "null"
             enabled
                 Determines whether or not this stop is used. If
                 `false`, this stop is ignored even within its
@@ -48,6 +48,7 @@ class TickformatstopsValidator(
                 you explicitly show it with `visible: true`.
             value
                 string - dtickformat for described zoom level,
-                the same as *tickformat*""",
+                the same as "tickformat"
+""",
             **kwargs
         )

@@ -71,21 +71,21 @@ class FigureWidget(BaseFigureWidget):
                     barmode
                         Determines how bars at the same location
                         coordinate are displayed on the graph. With
-                        *stack*, the bars are stacked on top of one
-                        another With *relative*, the bars are stacked
+                        "stack", the bars are stacked on top of one
+                        another With "relative", the bars are stacked
                         on top of one another, with negative values
                         below the axis, positive values above With
-                        *group*, the bars are plotted next to one
+                        "group", the bars are plotted next to one
                         another centered around the shared location.
-                        With *overlay*, the bars are plotted over one
-                        another, you might need to an *opacity* to see
+                        With "overlay", the bars are plotted over one
+                        another, you might need to an "opacity" to see
                         multiple bars.
                     barnorm
                         Sets the normalization for bar traces on the
-                        graph. With *fraction*, the value of each bar
+                        graph. With "fraction", the value of each bar
                         is divide by the sum of the values at the
-                        location coordinate. With *percent*, the
-                        results form *fraction* are presented in
+                        location coordinate. With "percent", the
+                        results form "fraction" are presented in
                         percents.
                     boxgap
                         Sets the gap (in plot fraction) between boxes
@@ -96,10 +96,10 @@ class FigureWidget(BaseFigureWidget):
                     boxmode
                         Determines how boxes at the same location
                         coordinate are displayed on the graph. If
-                        *group*, the boxes are plotted next to one
+                        "group", the boxes are plotted next to one
                         another centered around the shared location. If
-                        *overlay*, the boxes are plotted over one
-                        another, you might need to set *opacity* to see
+                        "overlay", the boxes are plotted over one
+                        another, you might need to set "opacity" to see
                         them multiple boxes.
                     calendar
                         Sets the default calendar system to use for
@@ -122,9 +122,9 @@ class FigureWidget(BaseFigureWidget):
                         corresponding to positive angles.
                     dragmode
                         Determines the mode of drag interactions.
-                        *select* and *lasso* apply only to scatter
-                        traces with markers or text. *orbit* and
-                        *turntable* apply only to 3D scenes.
+                        "select" and "lasso" apply only to scatter
+                        traces with markers or text. "orbit" and
+                        "turntable" apply only to 3D scenes.
                     extendpiecolors
                         If `true`, the pie slice colors (whether given
                         by `piecolorway` or inherited from `colorway`)
@@ -221,7 +221,7 @@ class FigureWidget(BaseFigureWidget):
                         Sets the decimal and thousand separators. For
                         example, *. * puts a '.' before decimals and a
                         space between thousands. In English locales,
-                        dflt is *.,* but other locales may alter this
+                        dflt is ".," but other locales may alter this
                         default.
                     shapes
                         plotly.graph_objs.layout.Shape instance or dict
@@ -287,10 +287,10 @@ class FigureWidget(BaseFigureWidget):
                     violinmode
                         Determines how violins at the same location
                         coordinate are displayed on the graph. If
-                        *group*, the violins are plotted next to one
+                        "group", the violins are plotted next to one
                         another centered around the shared location. If
-                        *overlay*, the violins are plotted over one
-                        another, you might need to set *opacity* to see
+                        "overlay", the violins are plotted over one
+                        another, you might need to set "opacity" to see
                         them multiple violins.
                     width
                         Sets the plot's width (in px).
@@ -369,7 +369,7 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -403,7 +403,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the opacity of the trace.
         r
             For legacy polar chart only.Please switch to
-            *scatterpolar* trace type.Sets the radial coordinates.
+            "scatterpolar" trace type.Sets the radial coordinates.
         rsrc
             Sets the source reference on plot.ly for  r .
         selectedpoints
@@ -421,14 +421,14 @@ class FigureWidget(BaseFigureWidget):
             compatible properties
         t
             For legacy polar chart only.Please switch to
-            *scatterpolar* trace type.Sets the angular coordinates.
+            "scatterpolar" trace type.Sets the angular coordinates.
         tsrc
             Sets the source reference on plot.ly for  t .
         uid
 
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         row : int or None (default)
@@ -533,16 +533,16 @@ class FigureWidget(BaseFigureWidget):
         Add a new Bar trace
         
         The data visualized by the span of the bars is set in `y` if
-        `orientation` is set th *v* (the default) and the labels are
-        set in `x`. By setting `orientation` to *h*, the roles are
+        `orientation` is set th "v" (the default) and the labels are
+        set in `x`. By setting `orientation` to "h", the roles are
         interchanged.
 
         Parameters
         ----------
         base
             Sets where the bar base is drawn (in position axis
-            units). In *stack* or *relative* barmode, traces that
-            set *base* will be excluded and drawn in *overlay* mode
+            units). In "stack" or "relative" barmode, traces that
+            set "base" will be excluded and drawn in "overlay" mode
             instead.
         basesrc
             Sets the source reference on plot.ly for  base .
@@ -557,7 +557,7 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -587,7 +587,7 @@ class FigureWidget(BaseFigureWidget):
             all the data points. If an array of string, the items
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
-            a *text* flag.
+            a "text" flag.
         hovertextsrc
             Sets the source reference on plot.ly for  hovertext .
         ids
@@ -610,22 +610,22 @@ class FigureWidget(BaseFigureWidget):
             legend item and on hover.
         offset
             Shifts the position where the bar is drawn (in position
-            axis units). In *group* barmode, traces that set
-            *offset* will be excluded and drawn in *overlay* mode
+            axis units). In "group" barmode, traces that set
+            "offset" will be excluded and drawn in "overlay" mode
             instead.
         offsetsrc
             Sets the source reference on plot.ly for  offset .
         opacity
             Sets the opacity of the trace.
         orientation
-            Sets the orientation of the bars. With *v* (*h*), the
+            Sets the orientation of the bars. With "v" ("h"), the
             value of the each bar spans along the vertical
             (horizontal).
         outsidetextfont
             Sets the font used for `text` lying outside the bar.
         r
             For legacy polar chart only.Please switch to
-            *scatterpolar* trace type.Sets the radial coordinates.
+            "scatterpolar" trace type.Sets the radial coordinates.
         rsrc
             Sets the source reference on plot.ly for  r .
         selected
@@ -646,22 +646,22 @@ class FigureWidget(BaseFigureWidget):
             compatible properties
         t
             For legacy polar chart only.Please switch to
-            *scatterpolar* trace type.Sets the angular coordinates.
+            "scatterpolar" trace type.Sets the angular coordinates.
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the
             data points. If an array of string, the items are
             mapped in order to the this trace's (x,y) coordinates.
-            If trace `hoverinfo` contains a *text* flag and
-            *hovertext* is not set, these elements will be seen in
+            If trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
             the hover labels.
         textfont
             Sets the font used for `text`.
         textposition
-            Specifies the location of the `text`. *inside*
+            Specifies the location of the `text`. "inside"
             positions `text` inside, next to the bar end (rotated
-            and scaled if needed). *outside* positions `text`
-            outside, next to the bar end (scaled if needed). *auto*
+            and scaled if needed). "outside" positions `text`
+            outside, next to the bar end (scaled if needed). "auto"
             positions `text` inside or outside so that `text` size
             is maximized.
         textpositionsrc
@@ -678,7 +678,7 @@ class FigureWidget(BaseFigureWidget):
             compatible properties
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         width
@@ -693,8 +693,8 @@ class FigureWidget(BaseFigureWidget):
             coordinate and `dx` the step.
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
@@ -708,8 +708,8 @@ class FigureWidget(BaseFigureWidget):
             coordinate and `dy` the step.
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
@@ -839,33 +839,33 @@ class FigureWidget(BaseFigureWidget):
         
         In vertical (horizontal) box plots, statistics are computed
         using `y` (`x`) values. By supplying an `x` (`y`) array, one
-        box per distinct x (y) value is drawn If no `x` (`y`) {array}
-        is provided, a single box is drawn. That box position is then
+        box per distinct x (y) value is drawn If no `x` (`y`) list is
+        provided, a single box is drawn. That box position is then
         positioned with with `name` or with `x0` (`y0`) if provided.
         Each box spans from quartile 1 (Q1) to quartile 3 (Q3). The
         second quartile (Q2) is marked by a line inside the box. By
         default, the whiskers correspond to the box' edges +/- 1.5
-        times the interquartile range (IQR = Q3-Q1), see *boxpoints*
+        times the interquartile range (IQR = Q3-Q1), see "boxpoints"
         for other options.
 
         Parameters
         ----------
         boxmean
-            If *true*, the mean of the box(es)' underlying
+            If True, the mean of the box(es)' underlying
             distribution is drawn as a dashed line inside the
-            box(es). If *sd* the standard deviation is also drawn.
+            box(es). If "sd" the standard deviation is also drawn.
         boxpoints
-            If *outliers*, only the sample points lying outside the
-            whiskers are shown If *suspectedoutliers*, the outlier
+            If "outliers", only the sample points lying outside the
+            whiskers are shown If "suspectedoutliers", the outlier
             points are shown and points either less than 4*Q1-3*Q3
             or greater than 4*Q3-3*Q1 are highlighted (see
-            `outliercolor`) If *all*, all sample points are shown
-            If *false*, only the box(es) are shown with no sample
+            `outliercolor`) If "all", all sample points are shown
+            If False, only the box(es) are shown with no sample
             points
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -894,8 +894,8 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on plot.ly for  ids .
         jitter
             Sets the amount of jitter in the sample points drawn.
-            If *0*, the sample points align along the distribution
-            axis. If *1*, the sample points are drawn in a random
+            If 0, the sample points align along the distribution
+            axis. If 1, the sample points are drawn in a random
             jitter of width equal to the width of the box(es).
         legendgroup
             Sets the legend group for this trace. Traces part of
@@ -922,12 +922,12 @@ class FigureWidget(BaseFigureWidget):
         opacity
             Sets the opacity of the trace.
         orientation
-            Sets the orientation of the box(es). If *v* (*h*), the
+            Sets the orientation of the box(es). If "v" ("h"), the
             distribution is visualized along the vertical
             (horizontal).
         pointpos
             Sets the position of the sample points in relation to
-            the box(es). If *0*, the sample points are places over
+            the box(es). If 0, the sample points are places over
             the center of the box(es). Positive (negative) values
             correspond to positions to the right (left) for
             vertical boxes and above (below) for horizontal boxes
@@ -953,7 +953,7 @@ class FigureWidget(BaseFigureWidget):
             all the data points. If an array of string, the items
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
-            a *text* flag.
+            a "text" flag.
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
@@ -963,7 +963,7 @@ class FigureWidget(BaseFigureWidget):
             compatible properties
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         whiskerwidth
@@ -978,8 +978,8 @@ class FigureWidget(BaseFigureWidget):
             info.
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
@@ -993,8 +993,8 @@ class FigureWidget(BaseFigureWidget):
             info.
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
@@ -1120,7 +1120,7 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -1194,7 +1194,7 @@ class FigureWidget(BaseFigureWidget):
 
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         whiskerwidth
@@ -1206,8 +1206,8 @@ class FigureWidget(BaseFigureWidget):
             will be generated.
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
@@ -1215,8 +1215,8 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on plot.ly for  x .
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         row : int or None (default)
             Subplot row index (starting from 1) for the trace to be
@@ -1362,7 +1362,7 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -1415,7 +1415,7 @@ class FigureWidget(BaseFigureWidget):
 
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         x
@@ -1424,8 +1424,8 @@ class FigureWidget(BaseFigureWidget):
             xaxis is hidden by default.
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xsrc
             Sets the source reference on plot.ly for  x .
@@ -1434,8 +1434,8 @@ class FigureWidget(BaseFigureWidget):
             point.
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ysrc
             Sets the source reference on plot.ly for  y .
@@ -1566,15 +1566,15 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
         geo
             Sets a reference between this trace's geospatial
-            coordinates and a geographic map. If *geo* (the default
+            coordinates and a geographic map. If "geo" (the default
             value), the geospatial coordinates refer to
-            `layout.geo`. If *geo2*, the geospatial coordinates
+            `layout.geo`. If "geo2", the geospatial coordinates
             refer to `layout.geo2`, and so on.
         hoverinfo
             Determines which trace information appear on hover. If
@@ -1646,7 +1646,7 @@ class FigureWidget(BaseFigureWidget):
             dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         z
@@ -1779,7 +1779,7 @@ class FigureWidget(BaseFigureWidget):
         ----------
         anchor
             Sets the cones' anchor with respect to their x/y/z
-            positions. Note that *cm* denote the cone's center of
+            positions. Note that "cm" denote the cone's center of
             mass which corresponds to 1/4 from the tail to tip.
         autocolorscale
             Determines whether the colorscale is a default palette
@@ -1819,7 +1819,7 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -1860,9 +1860,9 @@ class FigureWidget(BaseFigureWidget):
             `cmax` will correspond to the first color.
         scene
             Sets a reference between this trace's 3D coordinate
-            system and a 3D scene. If *scene* (the default value),
+            system and a 3D scene. If "scene" (the default value),
             the (x,y,z) coordinates refer to `layout.scene`. If
-            *scene2*, the (x,y,z) coordinates refer to
+            "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
         selectedpoints
             Array containing integer indices of selected points.
@@ -1878,9 +1878,9 @@ class FigureWidget(BaseFigureWidget):
             Determines whether or not a colorbar is displayed for
             this trace.
         sizemode
-            Determines whether `sizeref` is set as a *scaled* (i.e
+            Determines whether `sizeref` is set as a "scaled" (i.e
             unitless) scalar (normalized by the max u/v/w norm in
-            the vector field) or as *absolute* value (in the same
+            the vector field) or as "absolute" value (in the same
             units as the vector field).
         sizeref
             Adjusts the cone size scaling. The size of the cones is
@@ -1890,8 +1890,8 @@ class FigureWidget(BaseFigureWidget):
             successive x/y/z positions at the average velocity of
             those two successive positions. All cones in a given
             trace use the same factor. With `sizemode` set to
-            *scaled*, `sizeref` is unitless, its default value is
-            *0.5* With `sizemode` set to *absolute*, `sizeref` has
+            "scaled", `sizeref` is unitless, its default value is
+            0.5 With `sizemode` set to "absolute", `sizeref` has
             the same units as the u/v/w vector field, its the
             default value is half the sample's maximum vector norm.
         stream
@@ -1899,8 +1899,8 @@ class FigureWidget(BaseFigureWidget):
             compatible properties
         text
             Sets the text elements associated with the cones. If
-            trace `hoverinfo` contains a *text* flag and
-            *hovertext* is not set, these elements will be seen in
+            trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
             the hover labels.
         textsrc
             Sets the source reference on plot.ly for  text .
@@ -1914,7 +1914,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the y components of the vector field.
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         vsrc
@@ -2058,12 +2058,12 @@ class FigureWidget(BaseFigureWidget):
         Add a new Contour trace
         
         The data from which contour lines are computed is set in `z`.
-        Data in `z` must be a {2D array} of numbers. Say that `z` has N
+        Data in `z` must be a 2D list of numbers. Say that `z` has N
         rows and M columns, then by default, these N rows correspond to
         N y coordinates (set in `y` or auto-generated) and the M
         columns correspond to M x coordinates (set in `x` or auto-
-        generated). By setting `transpose` to *true*, the above
-        behavior is flipped.
+        generated). By setting `transpose` to True, the above behavior
+        is flipped.
 
         Parameters
         ----------
@@ -2076,9 +2076,9 @@ class FigureWidget(BaseFigureWidget):
             array are all positive, all negative or mixed.
         autocontour
             Determines whether or not the contour level attributes
-            are picked by an algorithm. If *true*, the number of
-            contour levels can be set in `ncontours`. If *false*,
-            set the contour level attributes in `contours`.
+            are picked by an algorithm. If True, the number of
+            contour levels can be set in `ncontours`. If False, set
+            the contour level attributes in `contours`.
         colorbar
             plotly.graph_objs.contour.ColorBar instance or dict
             with compatible properties
@@ -2103,7 +2103,7 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -2112,7 +2112,7 @@ class FigureWidget(BaseFigureWidget):
         dy
             Sets the y coordinate step. See `y0` for more info.
         fillcolor
-            Sets the fill color if `contours.type` is *constraint*.
+            Sets the fill color if `contours.type` is "constraint".
             Defaults to a half-transparent variant of the line
             color, marker color, or marker line color, whichever is
             available.
@@ -2146,7 +2146,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the maximum number of contour levels. The actual
             number of contours will be chosen automatically to be
             less than or equal to the value of `ncontours`. Has an
-            effect only if `autocontour` is *true* or if
+            effect only if `autocontour` is True or if
             `contours.size` is missing.
         opacity
             Sets the opacity of the trace.
@@ -2180,7 +2180,7 @@ class FigureWidget(BaseFigureWidget):
 
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         x
@@ -2191,18 +2191,18 @@ class FigureWidget(BaseFigureWidget):
             coordinate and `dx` the step.
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
         xsrc
             Sets the source reference on plot.ly for  x .
         xtype
-            If *array*, the heatmap's x coordinates are given by
-            *x* (the default behavior when `x` is provided). If
-            *scaled*, the heatmap's x coordinates are given by *x0*
-            and *dx* (the default behavior when `x` is not
+            If "array", the heatmap's x coordinates are given by
+            "x" (the default behavior when `x` is provided). If
+            "scaled", the heatmap's x coordinates are given by "x0"
+            and "dx" (the default behavior when `x` is not
             provided).
         y
             Sets the y coordinates.
@@ -2212,18 +2212,18 @@ class FigureWidget(BaseFigureWidget):
             coordinate and `dy` the step.
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
         ysrc
             Sets the source reference on plot.ly for  y .
         ytype
-            If *array*, the heatmap's y coordinates are given by
-            *y* (the default behavior when `y` is provided) If
-            *scaled*, the heatmap's y coordinates are given by *y0*
-            and *dy* (the default behavior when `y` is not
+            If "array", the heatmap's y coordinates are given by
+            "y" (the default behavior when `y` is provided) If
+            "scaled", the heatmap's y coordinates are given by "y0"
+            and "dy" (the default behavior when `y` is not
             provided)
         z
             Sets the z data.
@@ -2384,10 +2384,10 @@ class FigureWidget(BaseFigureWidget):
         asrc
             Sets the source reference on plot.ly for  a .
         atype
-            If *array*, the heatmap's x coordinates are given by
-            *x* (the default behavior when `x` is provided). If
-            *scaled*, the heatmap's x coordinates are given by *x0*
-            and *dx* (the default behavior when `x` is not
+            If "array", the heatmap's x coordinates are given by
+            "x" (the default behavior when `x` is provided). If
+            "scaled", the heatmap's x coordinates are given by "x0"
+            and "dx" (the default behavior when `x` is not
             provided).
         autocolorscale
             Determines whether the colorscale is a default palette
@@ -2398,9 +2398,9 @@ class FigureWidget(BaseFigureWidget):
             array are all positive, all negative or mixed.
         autocontour
             Determines whether or not the contour level attributes
-            are picked by an algorithm. If *true*, the number of
-            contour levels can be set in `ncontours`. If *false*,
-            set the contour level attributes in `contours`.
+            are picked by an algorithm. If True, the number of
+            contour levels can be set in `ncontours`. If False, set
+            the contour level attributes in `contours`.
         b
             Sets the y coordinates.
         b0
@@ -2410,10 +2410,10 @@ class FigureWidget(BaseFigureWidget):
         bsrc
             Sets the source reference on plot.ly for  b .
         btype
-            If *array*, the heatmap's y coordinates are given by
-            *y* (the default behavior when `y` is provided) If
-            *scaled*, the heatmap's y coordinates are given by *y0*
-            and *dy* (the default behavior when `y` is not
+            If "array", the heatmap's y coordinates are given by
+            "y" (the default behavior when `y` is provided) If
+            "scaled", the heatmap's y coordinates are given by "y0"
+            and "dy" (the default behavior when `y` is not
             provided)
         carpet
             The `carpet` of the carpet axes on which this contour
@@ -2439,7 +2439,7 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -2448,7 +2448,7 @@ class FigureWidget(BaseFigureWidget):
         db
             Sets the y coordinate step. See `y0` for more info.
         fillcolor
-            Sets the fill color if `contours.type` is *constraint*.
+            Sets the fill color if `contours.type` is "constraint".
             Defaults to a half-transparent variant of the line
             color, marker color, or marker line color, whichever is
             available.
@@ -2482,7 +2482,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the maximum number of contour levels. The actual
             number of contours will be chosen automatically to be
             less than or equal to the value of `ncontours`. Has an
-            effect only if `autocontour` is *true* or if
+            effect only if `autocontour` is True or if
             `contours.size` is missing.
         opacity
             Sets the opacity of the trace.
@@ -2516,18 +2516,18 @@ class FigureWidget(BaseFigureWidget):
 
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         z
             Sets the z data.
@@ -2667,12 +2667,12 @@ class FigureWidget(BaseFigureWidget):
         Add a new Heatmap trace
         
         The data that describes the heatmap value-to-color mapping is
-        set in `z`. Data in `z` can either be a {2D array} of values
+        set in `z`. Data in `z` can either be a 2D list of values
         (ragged or not) or a 1D array of values. In the case where `z`
-        is a {2D array}, say that `z` has N rows and M columns. Then,
-        by default, the resulting heatmap will have N partitions along
-        the y axis and M partitions along the x axis. In other words,
-        the i-th row/ j-th column cell in `z` is mapped to the i-th
+        is a 2D list, say that `z` has N rows and M columns. Then, by
+        default, the resulting heatmap will have N partitions along the
+        y axis and M partitions along the x axis. In other words, the
+        i-th row/ j-th column cell in `z` is mapped to the i-th
         partition of the y axis (starting from the bottom of the plot)
         and the j-th partition of the x-axis (starting from the left of
         the plot). This behavior can be flipped by using `transpose`.
@@ -2680,8 +2680,8 @@ class FigureWidget(BaseFigureWidget):
         elements. If M (N), then the coordinates correspond to the
         center of the heatmap cells and the cells have equal width. If
         M+1 (N+1), then the coordinates correspond to the edges of the
-        heatmap cells. In the case where `z` is a 1D {array}, the x and
-        y coordinates must be provided in `x` and `y` respectively to
+        heatmap cells. In the case where `z` is a 1D list, the x and y
+        coordinates must be provided in `x` and `y` respectively to
         form data triplets.
 
         Parameters
@@ -2714,7 +2714,7 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -2777,7 +2777,7 @@ class FigureWidget(BaseFigureWidget):
 
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         x
@@ -2788,8 +2788,8 @@ class FigureWidget(BaseFigureWidget):
             coordinate and `dx` the step.
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
@@ -2798,10 +2798,10 @@ class FigureWidget(BaseFigureWidget):
         xsrc
             Sets the source reference on plot.ly for  x .
         xtype
-            If *array*, the heatmap's x coordinates are given by
-            *x* (the default behavior when `x` is provided). If
-            *scaled*, the heatmap's x coordinates are given by *x0*
-            and *dx* (the default behavior when `x` is not
+            If "array", the heatmap's x coordinates are given by
+            "x" (the default behavior when `x` is provided). If
+            "scaled", the heatmap's x coordinates are given by "x0"
+            and "dx" (the default behavior when `x` is not
             provided).
         y
             Sets the y coordinates.
@@ -2811,8 +2811,8 @@ class FigureWidget(BaseFigureWidget):
             coordinate and `dy` the step.
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
@@ -2821,10 +2821,10 @@ class FigureWidget(BaseFigureWidget):
         ysrc
             Sets the source reference on plot.ly for  y .
         ytype
-            If *array*, the heatmap's y coordinates are given by
-            *y* (the default behavior when `y` is provided) If
-            *scaled*, the heatmap's y coordinates are given by *y0*
-            and *dy* (the default behavior when `y` is not
+            If "array", the heatmap's y coordinates are given by
+            "y" (the default behavior when `y` is provided) If
+            "scaled", the heatmap's y coordinates are given by "y0"
+            and "dy" (the default behavior when `y` is not
             provided)
         z
             Sets the z data.
@@ -2993,7 +2993,7 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -3056,7 +3056,7 @@ class FigureWidget(BaseFigureWidget):
 
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         x
@@ -3067,16 +3067,16 @@ class FigureWidget(BaseFigureWidget):
             coordinate and `dx` the step.
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xsrc
             Sets the source reference on plot.ly for  x .
         xtype
-            If *array*, the heatmap's x coordinates are given by
-            *x* (the default behavior when `x` is provided). If
-            *scaled*, the heatmap's x coordinates are given by *x0*
-            and *dx* (the default behavior when `x` is not
+            If "array", the heatmap's x coordinates are given by
+            "x" (the default behavior when `x` is provided). If
+            "scaled", the heatmap's x coordinates are given by "x0"
+            and "dx" (the default behavior when `x` is not
             provided).
         y
             Sets the y coordinates.
@@ -3086,16 +3086,16 @@ class FigureWidget(BaseFigureWidget):
             coordinate and `dy` the step.
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ysrc
             Sets the source reference on plot.ly for  y .
         ytype
-            If *array*, the heatmap's y coordinates are given by
-            *y* (the default behavior when `y` is provided) If
-            *scaled*, the heatmap's y coordinates are given by *y0*
-            and *dy* (the default behavior when `y` is not
+            If "array", the heatmap's y coordinates are given by
+            "y" (the default behavior when `y` is provided) If
+            "scaled", the heatmap's y coordinates are given by "y0"
+            and "dy" (the default behavior when `y` is not
             provided)
         z
             Sets the z data.
@@ -3245,7 +3245,7 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -3257,9 +3257,9 @@ class FigureWidget(BaseFigureWidget):
             with compatible properties
         histfunc
             Specifies the binning function used for this histogram
-            trace. If *count*, the histogram values are computed by
+            trace. If "count", the histogram values are computed by
             counting the number of values lying inside each bin. If
-            *sum*, *avg*, *min*, *max*, the histogram values are
+            "sum", "avg", "min", "max", the histogram values are
             computed using the sum, the average, the minimum or the
             maximum of the values lying inside each bin
             respectively.
@@ -3268,11 +3268,11 @@ class FigureWidget(BaseFigureWidget):
             histogram trace. If **, the span of each bar
             corresponds to the number of occurrences (i.e. the
             number of data points lying inside the bins). If
-            *percent* / *probability*, the span of each bar
+            "percent" / "probability", the span of each bar
             corresponds to the percentage / fraction of occurrences
             with respect to the total number of sample points
             (here, the sum of all bin HEIGHTS equals 100% / 1). If
-            *density*, the span of each bar corresponds to the
+            "density", the span of each bar corresponds to the
             number of occurrences in a bin divided by the size of
             the bin interval (here, the sum of all bin AREAS equals
             the total number of sample points). If *probability
@@ -3319,7 +3319,7 @@ class FigureWidget(BaseFigureWidget):
         opacity
             Sets the opacity of the trace.
         orientation
-            Sets the orientation of the bars. With *v* (*h*), the
+            Sets the orientation of the bars. With "v" ("h"), the
             value of the each bar spans along the vertical
             (horizontal).
         selected
@@ -3343,8 +3343,8 @@ class FigureWidget(BaseFigureWidget):
             a single string, the same string appears over all the
             data points. If an array of string, the items are
             mapped in order to the this trace's (x,y) coordinates.
-            If trace `hoverinfo` contains a *text* flag and
-            *hovertext* is not set, these elements will be seen in
+            If trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
             the hover labels.
         textsrc
             Sets the source reference on plot.ly for  text .
@@ -3355,15 +3355,15 @@ class FigureWidget(BaseFigureWidget):
             with compatible properties
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         x
             Sets the sample data to be binned on the x axis.
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xbins
             plotly.graph_objs.histogram.XBins instance or dict with
@@ -3376,8 +3376,8 @@ class FigureWidget(BaseFigureWidget):
             Sets the sample data to be binned on the y axis.
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ybins
             plotly.graph_objs.histogram.YBins instance or dict with
@@ -3543,15 +3543,15 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
         histfunc
             Specifies the binning function used for this histogram
-            trace. If *count*, the histogram values are computed by
+            trace. If "count", the histogram values are computed by
             counting the number of values lying inside each bin. If
-            *sum*, *avg*, *min*, *max*, the histogram values are
+            "sum", "avg", "min", "max", the histogram values are
             computed using the sum, the average, the minimum or the
             maximum of the values lying inside each bin
             respectively.
@@ -3560,11 +3560,11 @@ class FigureWidget(BaseFigureWidget):
             histogram trace. If **, the span of each bar
             corresponds to the number of occurrences (i.e. the
             number of data points lying inside the bins). If
-            *percent* / *probability*, the span of each bar
+            "percent" / "probability", the span of each bar
             corresponds to the percentage / fraction of occurrences
             with respect to the total number of sample points
             (here, the sum of all bin HEIGHTS equals 100% / 1). If
-            *density*, the span of each bar corresponds to the
+            "density", the span of each bar corresponds to the
             number of occurrences in a bin divided by the size of
             the bin interval (here, the sum of all bin AREAS equals
             the total number of sample points). If *probability
@@ -3634,15 +3634,15 @@ class FigureWidget(BaseFigureWidget):
 
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         x
             Sets the sample data to be binned on the x axis.
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xbins
             plotly.graph_objs.histogram2d.XBins instance or dict
@@ -3657,8 +3657,8 @@ class FigureWidget(BaseFigureWidget):
             Sets the sample data to be binned on the y axis.
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ybins
             plotly.graph_objs.histogram2d.YBins instance or dict
@@ -3841,9 +3841,9 @@ class FigureWidget(BaseFigureWidget):
             array are all positive, all negative or mixed.
         autocontour
             Determines whether or not the contour level attributes
-            are picked by an algorithm. If *true*, the number of
-            contour levels can be set in `ncontours`. If *false*,
-            set the contour level attributes in `contours`.
+            are picked by an algorithm. If True, the number of
+            contour levels can be set in `ncontours`. If False, set
+            the contour level attributes in `contours`.
         colorbar
             plotly.graph_objs.histogram2dcontour.ColorBar instance
             or dict with compatible properties
@@ -3865,15 +3865,15 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
         histfunc
             Specifies the binning function used for this histogram
-            trace. If *count*, the histogram values are computed by
+            trace. If "count", the histogram values are computed by
             counting the number of values lying inside each bin. If
-            *sum*, *avg*, *min*, *max*, the histogram values are
+            "sum", "avg", "min", "max", the histogram values are
             computed using the sum, the average, the minimum or the
             maximum of the values lying inside each bin
             respectively.
@@ -3882,11 +3882,11 @@ class FigureWidget(BaseFigureWidget):
             histogram trace. If **, the span of each bar
             corresponds to the number of occurrences (i.e. the
             number of data points lying inside the bins). If
-            *percent* / *probability*, the span of each bar
+            "percent" / "probability", the span of each bar
             corresponds to the percentage / fraction of occurrences
             with respect to the total number of sample points
             (here, the sum of all bin HEIGHTS equals 100% / 1). If
-            *density*, the span of each bar corresponds to the
+            "density", the span of each bar corresponds to the
             number of occurrences in a bin divided by the size of
             the bin interval (here, the sum of all bin AREAS equals
             the total number of sample points). If *probability
@@ -3937,7 +3937,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the maximum number of contour levels. The actual
             number of contours will be chosen automatically to be
             less than or equal to the value of `ncontours`. Has an
-            effect only if `autocontour` is *true* or if
+            effect only if `autocontour` is True or if
             `contours.size` is missing.
         opacity
             Sets the opacity of the trace.
@@ -3965,15 +3965,15 @@ class FigureWidget(BaseFigureWidget):
 
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         x
             Sets the sample data to be binned on the x axis.
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xbins
             plotly.graph_objs.histogram2dcontour.XBins instance or
@@ -3986,8 +3986,8 @@ class FigureWidget(BaseFigureWidget):
             Sets the sample data to be binned on the y axis.
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ybins
             plotly.graph_objs.histogram2dcontour.YBins instance or
@@ -4158,20 +4158,20 @@ class FigureWidget(BaseFigureWidget):
             from the set of vertices (points) represented by the
             `x`, `y` and `z` arrays, if the `i`, `j`, `k` arrays
             are not supplied. For general use of `mesh3d` it is
-            preferred that `i`, `j`, `k` are supplied. If *-1*,
+            preferred that `i`, `j`, `k` are supplied. If "-1",
             Delaunay triangulation is used, which is mainly
             suitable if the mesh is a single, more or less layer
             surface that is perpendicular to `delaunayaxis`. In
             case the `delaunayaxis` intersects the mesh surface at
             more than one point it will result triangles that are
-            very long in the dimension of `delaunayaxis`. If *>0*,
+            very long in the dimension of `delaunayaxis`. If ">0",
             the alpha-shape algorithm is used. In this case, the
             positive `alphahull` value signals the use of the
             alpha-shape algorithm, _and_ its value acts as the
-            parameter for the mesh fitting. If *0*,  the convex-
-            hull algorithm is used. It is suitable for convex
-            bodies or if the intention is to enclose the `x`, `y`
-            and `z` point set into a convex hull.
+            parameter for the mesh fitting. If 0,  the convex-hull
+            algorithm is used. It is suitable for convex bodies or
+            if the intention is to enclose the `x`, `y` and `z`
+            point set into a convex hull.
         autocolorscale
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
@@ -4215,7 +4215,7 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -4226,8 +4226,8 @@ class FigureWidget(BaseFigureWidget):
             not provided and `alphahull` is set to indicate
             Delaunay triangulation.
         facecolor
-            Sets the color of each face Overrides *color* and
-            *vertexcolor*.
+            Sets the color of each face Overrides "color" and
+            "vertexcolor".
         facecolorsrc
             Sets the source reference on plot.ly for  facecolor .
         flatshading
@@ -4247,7 +4247,7 @@ class FigureWidget(BaseFigureWidget):
         i
             A vector of vertex indices, i.e. integer values between
             0 and the length of the vertex vectors, representing
-            the *first* vertex of a triangle. For example, `{i[m],
+            the "first" vertex of a triangle. For example, `{i[m],
             j[m], k[m]}` together represent face m (triangle m) in
             the mesh, where `i[m] = n` points to the triplet
             `{x[n], y[n], z[n]}` in the vertex arrays. Therefore,
@@ -4269,7 +4269,7 @@ class FigureWidget(BaseFigureWidget):
         j
             A vector of vertex indices, i.e. integer values between
             0 and the length of the vertex vectors, representing
-            the *second* vertex of a triangle. For example, `{i[m],
+            the "second" vertex of a triangle. For example, `{i[m],
             j[m], k[m]}`  together represent face m (triangle m) in
             the mesh, where `j[m] = n` points to the triplet
             `{x[n], y[n], z[n]}` in the vertex arrays. Therefore,
@@ -4280,7 +4280,7 @@ class FigureWidget(BaseFigureWidget):
         k
             A vector of vertex indices, i.e. integer values between
             0 and the length of the vertex vectors, representing
-            the *third* vertex of a triangle. For example, `{i[m],
+            the "third" vertex of a triangle. For example, `{i[m],
             j[m], k[m]}` together represent face m (triangle m) in
             the mesh, where `k[m] = n` points to the triplet
             `{x[n], y[n], z[n]}` in the vertex arrays. Therefore,
@@ -4309,9 +4309,9 @@ class FigureWidget(BaseFigureWidget):
             `cmax` will correspond to the first color.
         scene
             Sets a reference between this trace's 3D coordinate
-            system and a 3D scene. If *scene* (the default value),
+            system and a 3D scene. If "scene" (the default value),
             the (x,y,z) coordinates refer to `layout.scene`. If
-            *scene2*, the (x,y,z) coordinates refer to
+            "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
         selectedpoints
             Array containing integer indices of selected points.
@@ -4331,20 +4331,20 @@ class FigureWidget(BaseFigureWidget):
             compatible properties
         text
             Sets the text elements associated with the vertices. If
-            trace `hoverinfo` contains a *text* flag and
-            *hovertext* is not set, these elements will be seen in
+            trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
             the hover labels.
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
 
         vertexcolor
-            Sets the color of each vertex Overrides *color*.
+            Sets the color of each vertex Overrides "color".
         vertexcolorsrc
             Sets the source reference on plot.ly for  vertexcolor .
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         x
@@ -4504,7 +4504,7 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -4576,12 +4576,12 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on plot.ly for  text .
         tickwidth
             Sets the width of the open/close tick marks relative to
-            the *x* minimal interval.
+            the "x" minimal interval.
         uid
 
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         x
@@ -4589,8 +4589,8 @@ class FigureWidget(BaseFigureWidget):
             will be generated.
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
@@ -4598,8 +4598,8 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on plot.ly for  x .
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         row : int or None (default)
             Subplot row index (starting from 1) for the trace to be
@@ -4692,7 +4692,7 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -4753,7 +4753,7 @@ class FigureWidget(BaseFigureWidget):
 
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         row : int or None (default)
@@ -4853,7 +4853,7 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -4883,7 +4883,7 @@ class FigureWidget(BaseFigureWidget):
             If a single string, the same string appears for all
             data points. If an array of string, the items are
             mapped in order of this trace's sectors. To be seen,
-            trace `hoverinfo` must contain a *text* flag.
+            trace `hoverinfo` must contain a "text" flag.
         hovertextsrc
             Sets the source reference on plot.ly for  hovertext .
         ids
@@ -4954,9 +4954,9 @@ class FigureWidget(BaseFigureWidget):
             compatible properties
         text
             Sets text elements associated with each sector. If
-            trace `textinfo` contains a *text* flag, these elements
+            trace `textinfo` contains a "text" flag, these elements
             will seen on the chart. If trace `hoverinfo` contains a
-            *text* flag and *hovertext* is not set, these elements
+            "text" flag and "hovertext" is not set, these elements
             will be seen in the hover labels.
         textfont
             Sets the font used for `textinfo`.
@@ -4978,7 +4978,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on plot.ly for  values .
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         row : int or None (default)
@@ -5088,7 +5088,7 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -5149,8 +5149,8 @@ class FigureWidget(BaseFigureWidget):
             a single string, the same string appears over all the
             data points. If an array of string, the items are
             mapped in order to the this trace's (x,y) coordinates.
-            If trace `hoverinfo` contains a *text* flag and
-            *hovertext* is not set, these elements will be seen in
+            If trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
             the hover labels.
         textsrc
             Sets the source reference on plot.ly for  text .
@@ -5158,15 +5158,15 @@ class FigureWidget(BaseFigureWidget):
 
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         x
             Sets the x coordinates.
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xbounds
             Specify `xbounds` in the shape of `[xMin, xMax] to
@@ -5188,8 +5188,8 @@ class FigureWidget(BaseFigureWidget):
             Sets the y coordinates.
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ybounds
             Specify `ybounds` in the shape of `[yMin, yMax] to
@@ -5300,7 +5300,7 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -5366,7 +5366,7 @@ class FigureWidget(BaseFigureWidget):
             value.
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         row : int or None (default)
@@ -5490,7 +5490,7 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -5506,18 +5506,18 @@ class FigureWidget(BaseFigureWidget):
             compatible properties
         fill
             Sets the area to fill with a solid color. Use with
-            `fillcolor` if not *none*. *tozerox* and *tozeroy* fill
-            to x=0 and y=0 respectively. *tonextx* and *tonexty*
+            `fillcolor` if not "none". "tozerox" and "tozeroy" fill
+            to x=0 and y=0 respectively. "tonextx" and "tonexty"
             fill between the endpoints of this trace and the
             endpoints of the trace before it, connecting those
             endpoints with straight lines (to make a stacked area
             graph); if there is no trace before it, they behave
-            like *tozerox* and *tozeroy*. *toself* connects the
+            like "tozerox" and "tozeroy". "toself" connects the
             endpoints of the trace (or each segment of the trace if
-            it has gaps) into a closed shape. *tonext* fills the
+            it has gaps) into a closed shape. "tonext" fills the
             space between two traces if one completely encloses the
             other (eg consecutive contour lines), and behaves like
-            *toself* if there is no trace before it. *tonext*
+            "toself" if there is no trace before it. "tonext"
             should not be used if one trace does not enclose the
             other.
         fillcolor
@@ -5537,16 +5537,16 @@ class FigureWidget(BaseFigureWidget):
         hoveron
             Do the hover effects highlight individual points
             (markers or line points) or do they highlight filled
-            regions? If the fill is *toself* or *tonext* and there
-            are no markers or text, then the default is *fills*,
-            otherwise it is *points*.
+            regions? If the fill is "toself" or "tonext" and there
+            are no markers or text, then the default is "fills",
+            otherwise it is "points".
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
             all the data points. If an array of string, the items
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
-            a *text* flag.
+            a "text" flag.
         hovertextsrc
             Sets the source reference on plot.ly for  hovertext .
         ids
@@ -5567,11 +5567,11 @@ class FigureWidget(BaseFigureWidget):
             compatible properties
         mode
             Determines the drawing mode for this scatter trace. If
-            the provided `mode` includes *text* then the `text`
+            the provided `mode` includes "text" then the `text`
             elements appear at the coordinates. Otherwise, the
             `text` elements appear on hover. If there are less than
-            20 points, then the default is *lines+markers*.
-            Otherwise, *lines*.
+            20 points, then the default is "lines+markers".
+            Otherwise, "lines".
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -5579,7 +5579,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the opacity of the trace.
         r
             For legacy polar chart only.Please switch to
-            *scatterpolar* trace type.Sets the radial coordinates.
+            "scatterpolar" trace type.Sets the radial coordinates.
         rsrc
             Sets the source reference on plot.ly for  r .
         selected
@@ -5600,14 +5600,14 @@ class FigureWidget(BaseFigureWidget):
             compatible properties
         t
             For legacy polar chart only.Please switch to
-            *scatterpolar* trace type.Sets the angular coordinates.
+            "scatterpolar" trace type.Sets the angular coordinates.
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the
             data points. If an array of string, the items are
             mapped in order to the this trace's (x,y) coordinates.
-            If trace `hoverinfo` contains a *text* flag and
-            *hovertext* is not set, these elements will be seen in
+            If trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
             the hover labels.
         textfont
             Sets the text font.
@@ -5628,7 +5628,7 @@ class FigureWidget(BaseFigureWidget):
             with compatible properties
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         x
@@ -5639,8 +5639,8 @@ class FigureWidget(BaseFigureWidget):
             coordinate and `dx` the step.
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
@@ -5654,8 +5654,8 @@ class FigureWidget(BaseFigureWidget):
             coordinate and `dy` the step.
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
@@ -5794,7 +5794,7 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -5823,7 +5823,7 @@ class FigureWidget(BaseFigureWidget):
             over all the data points. If an array of string, the
             items are mapped in order to the this trace's (x,y,z)
             coordinates. To be seen, trace `hoverinfo` must contain
-            a *text* flag.
+            a "text" flag.
         hovertextsrc
             Sets the source reference on plot.ly for  hovertext .
         ids
@@ -5844,11 +5844,11 @@ class FigureWidget(BaseFigureWidget):
             with compatible properties
         mode
             Determines the drawing mode for this scatter trace. If
-            the provided `mode` includes *text* then the `text`
+            the provided `mode` includes "text" then the `text`
             elements appear at the coordinates. Otherwise, the
             `text` elements appear on hover. If there are less than
-            20 points, then the default is *lines+markers*.
-            Otherwise, *lines*.
+            20 points, then the default is "lines+markers".
+            Otherwise, "lines".
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -5859,9 +5859,9 @@ class FigureWidget(BaseFigureWidget):
             with compatible properties
         scene
             Sets a reference between this trace's 3D coordinate
-            system and a 3D scene. If *scene* (the default value),
+            system and a 3D scene. If "scene" (the default value),
             the (x,y,z) coordinates refer to `layout.scene`. If
-            *scene2*, the (x,y,z) coordinates refer to
+            "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
         selectedpoints
             Array containing integer indices of selected points.
@@ -5877,8 +5877,8 @@ class FigureWidget(BaseFigureWidget):
             plotly.graph_objs.scatter3d.Stream instance or dict
             with compatible properties
         surfaceaxis
-            If *-1*, the scatter points are not fill with a surface
-            If *0*, *1*, *2*, the scatter points are filled with a
+            If "-1", the scatter points are not fill with a surface
+            If 0, 1, 2, the scatter points are filled with a
             Delaunay surface about the x, y, z respectively.
         surfacecolor
             Sets the surface fill color.
@@ -5887,8 +5887,8 @@ class FigureWidget(BaseFigureWidget):
             triplet. If a single string, the same string appears
             over all the data points. If an array of string, the
             items are mapped in order to the this trace's (x,y,z)
-            coordinates. If trace `hoverinfo` contains a *text*
-            flag and *hovertext* is not set, these elements will be
+            coordinates. If trace `hoverinfo` contains a "text"
+            flag and "hovertext" is not set, these elements will be
             seen in the hover labels.
         textfont
             plotly.graph_objs.scatter3d.Textfont instance or dict
@@ -5902,7 +5902,7 @@ class FigureWidget(BaseFigureWidget):
 
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         x
@@ -6058,20 +6058,20 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
         fill
             Sets the area to fill with a solid color. Use with
-            `fillcolor` if not *none*. scatterternary has a subset
-            of the options available to scatter. *toself* connects
+            `fillcolor` if not "none". scatterternary has a subset
+            of the options available to scatter. "toself" connects
             the endpoints of the trace (or each segment of the
-            trace if it has gaps) into a closed shape. *tonext*
+            trace if it has gaps) into a closed shape. "tonext"
             fills the space between two traces if one completely
             encloses the other (eg consecutive contour lines), and
-            behaves like *toself* if there is no trace before it.
-            *tonext* should not be used if one trace does not
+            behaves like "toself" if there is no trace before it.
+            "tonext" should not be used if one trace does not
             enclose the other.
         fillcolor
             Sets the fill color. Defaults to a half-transparent
@@ -6090,9 +6090,9 @@ class FigureWidget(BaseFigureWidget):
         hoveron
             Do the hover effects highlight individual points
             (markers or line points) or do they highlight filled
-            regions? If the fill is *toself* or *tonext* and there
-            are no markers or text, then the default is *fills*,
-            otherwise it is *points*.
+            regions? If the fill is "toself" or "tonext" and there
+            are no markers or text, then the default is "fills",
+            otherwise it is "points".
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -6111,11 +6111,11 @@ class FigureWidget(BaseFigureWidget):
             with compatible properties
         mode
             Determines the drawing mode for this scatter trace. If
-            the provided `mode` includes *text* then the `text`
+            the provided `mode` includes "text" then the `text`
             elements appear at the coordinates. Otherwise, the
             `text` elements appear on hover. If there are less than
-            20 points, then the default is *lines+markers*.
-            Otherwise, *lines*.
+            20 points, then the default is "lines+markers".
+            Otherwise, "lines".
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -6159,18 +6159,18 @@ class FigureWidget(BaseFigureWidget):
             dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         row : int or None (default)
             Subplot row index (starting from 1) for the trace to be
@@ -6286,13 +6286,13 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
         fill
             Sets the area to fill with a solid color. Use with
-            `fillcolor` if not *none*. *toself* connects the
+            `fillcolor` if not "none". "toself" connects the
             endpoints of the trace (or each segment of the trace if
             it has gaps) into a closed shape.
         fillcolor
@@ -6301,9 +6301,9 @@ class FigureWidget(BaseFigureWidget):
             color, whichever is available.
         geo
             Sets a reference between this trace's geospatial
-            coordinates and a geographic map. If *geo* (the default
+            coordinates and a geographic map. If "geo" (the default
             value), the geospatial coordinates refer to
-            `layout.geo`. If *geo2*, the geospatial coordinates
+            `layout.geo`. If "geo2", the geospatial coordinates
             refer to `layout.geo2`, and so on.
         hoverinfo
             Determines which trace information appear on hover. If
@@ -6321,7 +6321,7 @@ class FigureWidget(BaseFigureWidget):
             same string appears over all the data points. If an
             array of string, the items are mapped in order to the
             this trace's (lon,lat) or `locations` coordinates. To
-            be seen, trace `hoverinfo` must contain a *text* flag.
+            be seen, trace `hoverinfo` must contain a "text" flag.
         hovertextsrc
             Sets the source reference on plot.ly for  hovertext .
         ids
@@ -6359,11 +6359,11 @@ class FigureWidget(BaseFigureWidget):
             with compatible properties
         mode
             Determines the drawing mode for this scatter trace. If
-            the provided `mode` includes *text* then the `text`
+            the provided `mode` includes "text" then the `text`
             elements appear at the coordinates. Otherwise, the
             `text` elements appear on hover. If there are less than
-            20 points, then the default is *lines+markers*.
-            Otherwise, *lines*.
+            20 points, then the default is "lines+markers".
+            Otherwise, "lines".
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -6391,7 +6391,7 @@ class FigureWidget(BaseFigureWidget):
             string appears over all the data points. If an array of
             string, the items are mapped in order to the this
             trace's (lon,lat) or `locations` coordinates. If trace
-            `hoverinfo` contains a *text* flag and *hovertext* is
+            `hoverinfo` contains a "text" flag and "hovertext" is
             not set, these elements will be seen in the hover
             labels.
         textfont
@@ -6411,7 +6411,7 @@ class FigureWidget(BaseFigureWidget):
             dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         row : int or None (default)
@@ -6536,7 +6536,7 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -6552,18 +6552,18 @@ class FigureWidget(BaseFigureWidget):
             with compatible properties
         fill
             Sets the area to fill with a solid color. Use with
-            `fillcolor` if not *none*. *tozerox* and *tozeroy* fill
-            to x=0 and y=0 respectively. *tonextx* and *tonexty*
+            `fillcolor` if not "none". "tozerox" and "tozeroy" fill
+            to x=0 and y=0 respectively. "tonextx" and "tonexty"
             fill between the endpoints of this trace and the
             endpoints of the trace before it, connecting those
             endpoints with straight lines (to make a stacked area
             graph); if there is no trace before it, they behave
-            like *tozerox* and *tozeroy*. *toself* connects the
+            like "tozerox" and "tozeroy". "toself" connects the
             endpoints of the trace (or each segment of the trace if
-            it has gaps) into a closed shape. *tonext* fills the
+            it has gaps) into a closed shape. "tonext" fills the
             space between two traces if one completely encloses the
             other (eg consecutive contour lines), and behaves like
-            *toself* if there is no trace before it. *tonext*
+            "toself" if there is no trace before it. "tonext"
             should not be used if one trace does not enclose the
             other.
         fillcolor
@@ -6586,7 +6586,7 @@ class FigureWidget(BaseFigureWidget):
             all the data points. If an array of string, the items
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
-            a *text* flag.
+            a "text" flag.
         hovertextsrc
             Sets the source reference on plot.ly for  hovertext .
         ids
@@ -6651,7 +6651,7 @@ class FigureWidget(BaseFigureWidget):
             with compatible properties
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         x
@@ -6662,8 +6662,8 @@ class FigureWidget(BaseFigureWidget):
             coordinate and `dx` the step.
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
@@ -6677,8 +6677,8 @@ class FigureWidget(BaseFigureWidget):
             coordinate and `dy` the step.
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
@@ -6801,13 +6801,13 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
         fill
             Sets the area to fill with a solid color. Use with
-            `fillcolor` if not *none*. *toself* connects the
+            `fillcolor` if not "none". "toself" connects the
             endpoints of the trace (or each segment of the trace if
             it has gaps) into a closed shape.
         fillcolor
@@ -6830,7 +6830,7 @@ class FigureWidget(BaseFigureWidget):
             all the data points. If an array of string, the items
             are mapped in order to the this trace's (lon,lat)
             coordinates. To be seen, trace `hoverinfo` must contain
-            a *text* flag.
+            a "text" flag.
         hovertextsrc
             Sets the source reference on plot.ly for  hovertext .
         ids
@@ -6859,7 +6859,7 @@ class FigureWidget(BaseFigureWidget):
             with compatible properties
         mode
             Determines the drawing mode for this scatter trace. If
-            the provided `mode` includes *text* then the `text`
+            the provided `mode` includes "text" then the `text`
             elements appear at the coordinates. Otherwise, the
             `text` elements appear on hover.
         name
@@ -6885,20 +6885,20 @@ class FigureWidget(BaseFigureWidget):
             with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
-            and a mapbox subplot. If *mapbox* (the default value),
-            the data refer to `layout.mapbox`. If *mapbox2*, the
+            and a mapbox subplot. If "mapbox" (the default value),
+            the data refer to `layout.mapbox`. If "mapbox2", the
             data refer to `layout.mapbox2`, and so on.
         text
             Sets text elements associated with each (lon,lat) pair
             If a single string, the same string appears over all
             the data points. If an array of string, the items are
             mapped in order to the this trace's (lon,lat)
-            coordinates. If trace `hoverinfo` contains a *text*
-            flag and *hovertext* is not set, these elements will be
+            coordinates. If trace `hoverinfo` contains a "text"
+            flag and "hovertext" is not set, these elements will be
             seen in the hover labels.
         textfont
             Sets the icon text font. Has an effect only when `type`
-            is set to *symbol*.
+            is set to "symbol".
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.
@@ -6911,7 +6911,7 @@ class FigureWidget(BaseFigureWidget):
             dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         row : int or None (default)
@@ -7039,7 +7039,7 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -7051,13 +7051,13 @@ class FigureWidget(BaseFigureWidget):
             the length of the `r` coordinates.
         fill
             Sets the area to fill with a solid color. Use with
-            `fillcolor` if not *none*. scatterpolar has a subset of
-            the options available to scatter. *toself* connects the
+            `fillcolor` if not "none". scatterpolar has a subset of
+            the options available to scatter. "toself" connects the
             endpoints of the trace (or each segment of the trace if
-            it has gaps) into a closed shape. *tonext* fills the
+            it has gaps) into a closed shape. "tonext" fills the
             space between two traces if one completely encloses the
             other (eg consecutive contour lines), and behaves like
-            *toself* if there is no trace before it. *tonext*
+            "toself" if there is no trace before it. "tonext"
             should not be used if one trace does not enclose the
             other.
         fillcolor
@@ -7077,16 +7077,16 @@ class FigureWidget(BaseFigureWidget):
         hoveron
             Do the hover effects highlight individual points
             (markers or line points) or do they highlight filled
-            regions? If the fill is *toself* or *tonext* and there
-            are no markers or text, then the default is *fills*,
-            otherwise it is *points*.
+            regions? If the fill is "toself" or "tonext" and there
+            are no markers or text, then the default is "fills",
+            otherwise it is "points".
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
             all the data points. If an array of string, the items
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
-            a *text* flag.
+            a "text" flag.
         hovertextsrc
             Sets the source reference on plot.ly for  hovertext .
         ids
@@ -7107,11 +7107,11 @@ class FigureWidget(BaseFigureWidget):
             with compatible properties
         mode
             Determines the drawing mode for this scatter trace. If
-            the provided `mode` includes *text* then the `text`
+            the provided `mode` includes "text" then the `text`
             elements appear at the coordinates. Otherwise, the
             `text` elements appear on hover. If there are less than
-            20 points, then the default is *lines+markers*.
-            Otherwise, *lines*.
+            20 points, then the default is "lines+markers".
+            Otherwise, "lines".
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -7143,16 +7143,16 @@ class FigureWidget(BaseFigureWidget):
             with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
-            and a polar subplot. If *polar* (the default value),
-            the data refer to `layout.polar`. If *polar2*, the data
+            and a polar subplot. If "polar" (the default value),
+            the data refer to `layout.polar`. If "polar2", the data
             refer to `layout.polar2`, and so on.
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the
             data points. If an array of string, the items are
             mapped in order to the this trace's (x,y) coordinates.
-            If trace `hoverinfo` contains a *text* flag and
-            *hovertext* is not set, these elements will be seen in
+            If trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
             the hover labels.
         textfont
             Sets the text font.
@@ -7173,8 +7173,8 @@ class FigureWidget(BaseFigureWidget):
         thetasrc
             Sets the source reference on plot.ly for  theta .
         thetaunit
-            Sets the unit of input *theta* values. Has an effect
-            only when on *linear* angular axes.
+            Sets the unit of input "theta" values. Has an effect
+            only when on "linear" angular axes.
         uid
 
         unselected
@@ -7182,7 +7182,7 @@ class FigureWidget(BaseFigureWidget):
             dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         row : int or None (default)
@@ -7309,7 +7309,7 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -7321,18 +7321,18 @@ class FigureWidget(BaseFigureWidget):
             the length of the `r` coordinates.
         fill
             Sets the area to fill with a solid color. Use with
-            `fillcolor` if not *none*. *tozerox* and *tozeroy* fill
-            to x=0 and y=0 respectively. *tonextx* and *tonexty*
+            `fillcolor` if not "none". "tozerox" and "tozeroy" fill
+            to x=0 and y=0 respectively. "tonextx" and "tonexty"
             fill between the endpoints of this trace and the
             endpoints of the trace before it, connecting those
             endpoints with straight lines (to make a stacked area
             graph); if there is no trace before it, they behave
-            like *tozerox* and *tozeroy*. *toself* connects the
+            like "tozerox" and "tozeroy". "toself" connects the
             endpoints of the trace (or each segment of the trace if
-            it has gaps) into a closed shape. *tonext* fills the
+            it has gaps) into a closed shape. "tonext" fills the
             space between two traces if one completely encloses the
             other (eg consecutive contour lines), and behaves like
-            *toself* if there is no trace before it. *tonext*
+            "toself" if there is no trace before it. "tonext"
             should not be used if one trace does not enclose the
             other.
         fillcolor
@@ -7355,7 +7355,7 @@ class FigureWidget(BaseFigureWidget):
             all the data points. If an array of string, the items
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
-            a *text* flag.
+            a "text" flag.
         hovertextsrc
             Sets the source reference on plot.ly for  hovertext .
         ids
@@ -7376,11 +7376,11 @@ class FigureWidget(BaseFigureWidget):
             dict with compatible properties
         mode
             Determines the drawing mode for this scatter trace. If
-            the provided `mode` includes *text* then the `text`
+            the provided `mode` includes "text" then the `text`
             elements appear at the coordinates. Otherwise, the
             `text` elements appear on hover. If there are less than
-            20 points, then the default is *lines+markers*.
-            Otherwise, *lines*.
+            20 points, then the default is "lines+markers".
+            Otherwise, "lines".
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -7412,16 +7412,16 @@ class FigureWidget(BaseFigureWidget):
             dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
-            and a polar subplot. If *polar* (the default value),
-            the data refer to `layout.polar`. If *polar2*, the data
+            and a polar subplot. If "polar" (the default value),
+            the data refer to `layout.polar`. If "polar2", the data
             refer to `layout.polar2`, and so on.
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the
             data points. If an array of string, the items are
             mapped in order to the this trace's (x,y) coordinates.
-            If trace `hoverinfo` contains a *text* flag and
-            *hovertext* is not set, these elements will be seen in
+            If trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
             the hover labels.
         textfont
             Sets the text font.
@@ -7442,8 +7442,8 @@ class FigureWidget(BaseFigureWidget):
         thetasrc
             Sets the source reference on plot.ly for  theta .
         thetaunit
-            Sets the unit of input *theta* values. Has an effect
-            only when on *linear* angular axes.
+            Sets the unit of input "theta" values. Has an effect
+            only when on "linear" angular axes.
         uid
 
         unselected
@@ -7451,7 +7451,7 @@ class FigureWidget(BaseFigureWidget):
             dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         row : int or None (default)
@@ -7561,7 +7561,7 @@ class FigureWidget(BaseFigureWidget):
         """
         Add a new Scatterternary trace
         
-        Provides similar functionality to the *scatter* type but on a
+        Provides similar functionality to the "scatter" type but on a
         ternary phase diagram. The data is provided by at least two
         arrays out of `a`, `b`, `c` triplets.
 
@@ -7603,20 +7603,20 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
         fill
             Sets the area to fill with a solid color. Use with
-            `fillcolor` if not *none*. scatterternary has a subset
-            of the options available to scatter. *toself* connects
+            `fillcolor` if not "none". scatterternary has a subset
+            of the options available to scatter. "toself" connects
             the endpoints of the trace (or each segment of the
-            trace if it has gaps) into a closed shape. *tonext*
+            trace if it has gaps) into a closed shape. "tonext"
             fills the space between two traces if one completely
             encloses the other (eg consecutive contour lines), and
-            behaves like *toself* if there is no trace before it.
-            *tonext* should not be used if one trace does not
+            behaves like "toself" if there is no trace before it.
+            "tonext" should not be used if one trace does not
             enclose the other.
         fillcolor
             Sets the fill color. Defaults to a half-transparent
@@ -7635,15 +7635,15 @@ class FigureWidget(BaseFigureWidget):
         hoveron
             Do the hover effects highlight individual points
             (markers or line points) or do they highlight filled
-            regions? If the fill is *toself* or *tonext* and there
-            are no markers or text, then the default is *fills*,
-            otherwise it is *points*.
+            regions? If the fill is "toself" or "tonext" and there
+            are no markers or text, then the default is "fills",
+            otherwise it is "points".
         hovertext
             Sets hover text elements associated with each (a,b,c)
             point. If a single string, the same string appears over
             all the data points. If an array of strings, the items
             are mapped in order to the the data points in (a,b,c).
-            To be seen, trace `hoverinfo` must contain a *text*
+            To be seen, trace `hoverinfo` must contain a "text"
             flag.
         hovertextsrc
             Sets the source reference on plot.ly for  hovertext .
@@ -7665,11 +7665,11 @@ class FigureWidget(BaseFigureWidget):
             dict with compatible properties
         mode
             Determines the drawing mode for this scatter trace. If
-            the provided `mode` includes *text* then the `text`
+            the provided `mode` includes "text" then the `text`
             elements appear at the coordinates. Otherwise, the
             `text` elements appear on hover. If there are less than
-            20 points, then the default is *lines+markers*.
-            Otherwise, *lines*.
+            20 points, then the default is "lines+markers".
+            Otherwise, "lines".
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -7693,9 +7693,9 @@ class FigureWidget(BaseFigureWidget):
             dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
-            and a ternary subplot. If *ternary* (the default
+            and a ternary subplot. If "ternary" (the default
             value), the data refer to `layout.ternary`. If
-            *ternary2*, the data refer to `layout.ternary2`, and so
+            "ternary2", the data refer to `layout.ternary2`, and so
             on.
         sum
             The number each triplet should sum to, if only two of
@@ -7708,8 +7708,8 @@ class FigureWidget(BaseFigureWidget):
             If a single string, the same string appears over all
             the data points. If an array of strings, the items are
             mapped in order to the the data points in (a,b,c). If
-            trace `hoverinfo` contains a *text* flag and
-            *hovertext* is not set, these elements will be seen in
+            trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
             the hover labels.
         textfont
             Sets the text font.
@@ -7728,7 +7728,7 @@ class FigureWidget(BaseFigureWidget):
             dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         row : int or None (default)
@@ -7837,7 +7837,7 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -7912,7 +7912,7 @@ class FigureWidget(BaseFigureWidget):
             with compatible properties
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         xaxes
@@ -8066,7 +8066,7 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -8110,9 +8110,9 @@ class FigureWidget(BaseFigureWidget):
             `cmax` will correspond to the first color.
         scene
             Sets a reference between this trace's 3D coordinate
-            system and a 3D scene. If *scene* (the default value),
+            system and a 3D scene. If "scene" (the default value),
             the (x,y,z) coordinates refer to `layout.scene`. If
-            *scene2*, the (x,y,z) coordinates refer to
+            "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
         selectedpoints
             Array containing integer indices of selected points.
@@ -8139,7 +8139,7 @@ class FigureWidget(BaseFigureWidget):
             with compatible properties
         text
             Sets a text element associated with this trace. If
-            trace `hoverinfo` contains a *text* flag, this text
+            trace `hoverinfo` contains a "text" flag, this text
             element will be seen in all hover labels. Note that
             streamtube traces do not support array `text` values.
         u
@@ -8152,7 +8152,7 @@ class FigureWidget(BaseFigureWidget):
             Sets the y components of the vector field.
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         vsrc
@@ -8284,14 +8284,14 @@ class FigureWidget(BaseFigureWidget):
         Add a new Surface trace
         
         The data the describes the coordinates of the surface is set in
-        `z`. Data in `z` should be a {2D array}. Coordinates in `x` and
-        `y` can either be 1D {arrays} or {2D arrays} (e.g. to graph
+        `z`. Data in `z` should be a 2D list. Coordinates in `x` and
+        `y` can either be 1D lists or 2D lists (e.g. to graph
         parametric surfaces). If not provided in `x` and `y`, the x and
         y coordinates are assumed to be linear starting at 0 with a
         unit step. The color scale corresponds to the `z` values by
         default. For custom color scales, use `surfacecolor` which
-        should be a {2D array}, where its bounds can be controlled
-        using `cmin` and `cmax`.
+        should be a 2D list, where its bounds can be controlled using
+        `cmin` and `cmax`.
 
         Parameters
         ----------
@@ -8336,15 +8336,15 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
         hidesurface
             Determines whether or not a surface is drawn. For
-            example, set `hidesurface` to *false* `contours.x.show`
-            to *true* and `contours.y.show` to *true* to draw a
-            wire frame plot.
+            example, set `hidesurface` to False `contours.x.show`
+            to True and `contours.y.show` to True to draw a wire
+            frame plot.
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -8382,9 +8382,9 @@ class FigureWidget(BaseFigureWidget):
             `cmax` will correspond to the first color.
         scene
             Sets a reference between this trace's 3D coordinate
-            system and a 3D scene. If *scene* (the default value),
+            system and a 3D scene. If "scene" (the default value),
             the (x,y,z) coordinates refer to `layout.scene`. If
-            *scene2*, the (x,y,z) coordinates refer to
+            "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
         selectedpoints
             Array containing integer indices of selected points.
@@ -8410,8 +8410,8 @@ class FigureWidget(BaseFigureWidget):
             .
         text
             Sets the text elements associated with each z value. If
-            trace `hoverinfo` contains a *text* flag and
-            *hovertext* is not set, these elements will be seen in
+            trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
             the hover labels.
         textsrc
             Sets the source reference on plot.ly for  text .
@@ -8419,7 +8419,7 @@ class FigureWidget(BaseFigureWidget):
 
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         x
@@ -8557,7 +8557,7 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -8609,7 +8609,7 @@ class FigureWidget(BaseFigureWidget):
 
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         row : int or None (default)
@@ -8706,10 +8706,10 @@ class FigureWidget(BaseFigureWidget):
         
         In vertical (horizontal) violin plots, statistics are computed
         using `y` (`x`) values. By supplying an `x` (`y`) array, one
-        violin per distinct x (y) value is drawn If no `x` (`y`)
-        {array} is provided, a single violin is drawn. That violin
-        position is then positioned with with `name` or with `x0`
-        (`y0`) if provided.
+        violin per distinct x (y) value is drawn If no `x` (`y`) list
+        is provided, a single violin is drawn. That violin position is
+        then positioned with with `name` or with `x0` (`y0`) if
+        provided.
 
         Parameters
         ----------
@@ -8723,7 +8723,7 @@ class FigureWidget(BaseFigureWidget):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -8753,8 +8753,8 @@ class FigureWidget(BaseFigureWidget):
             Sets the source reference on plot.ly for  ids .
         jitter
             Sets the amount of jitter in the sample points drawn.
-            If *0*, the sample points align along the distribution
-            axis. If *1*, the sample points are drawn in a random
+            If 0, the sample points align along the distribution
+            axis. If 1, the sample points are drawn in a random
             jitter of width equal to the width of the violins.
         legendgroup
             Sets the legend group for this trace. Traces part of
@@ -8778,23 +8778,23 @@ class FigureWidget(BaseFigureWidget):
         opacity
             Sets the opacity of the trace.
         orientation
-            Sets the orientation of the violin(s). If *v* (*h*),
+            Sets the orientation of the violin(s). If "v" ("h"),
             the distribution is visualized along the vertical
             (horizontal).
         pointpos
             Sets the position of the sample points in relation to
-            the violins. If *0*, the sample points are places over
+            the violins. If 0, the sample points are places over
             the center of the violins. Positive (negative) values
             correspond to positions to the right (left) for
             vertical violins and above (below) for horizontal
             violins.
         points
-            If *outliers*, only the sample points lying outside the
-            whiskers are shown If *suspectedoutliers*, the outlier
+            If "outliers", only the sample points lying outside the
+            whiskers are shown If "suspectedoutliers", the outlier
             points are shown and points either less than 4*Q1-3*Q3
             or greater than 4*Q3-3*Q1 are highlighted (see
-            `outliercolor`) If *all*, all sample points are shown
-            If *false*, only the violins are shown with no sample
+            `outliercolor`) If "all", all sample points are shown
+            If False, only the violins are shown with no sample
             points
         scalegroup
             If there are multiple violins that should be sized
@@ -8803,7 +8803,7 @@ class FigureWidget(BaseFigureWidget):
             every trace in the same group.
         scalemode
             Sets the metric by which the width of each violin is
-            determined.*width* means each violin has the same (max)
+            determined."width" means each violin has the same (max)
             width*count* means the violins are scaled by the number
             of sample points makingup each violin.
         selected
@@ -8823,20 +8823,20 @@ class FigureWidget(BaseFigureWidget):
             Determines on which side of the position value the
             density function making up one half of a violin is
             plotted. Useful when comparing two violin traces under
-            *overlay* mode, where one trace has `side` set to
-            *positive* and the other to *negative*.
+            "overlay" mode, where one trace has `side` set to
+            "positive" and the other to "negative".
         span
             Sets the span in data space for which the density
             function will be computed. Has an effect only when
-            `spanmode` is set to *manual*.
+            `spanmode` is set to "manual".
         spanmode
             Sets the method by which the span in data space where
-            the density function will be computed. *soft* means the
+            the density function will be computed. "soft" means the
             span goes from the sample's minimum value minus two
             bandwidths to the sample's maximum value plus two
-            bandwidths. *hard* means the span goes from the
+            bandwidths. "hard" means the span goes from the
             sample's minimum to its maximum value. For custom span
-            settings, use mode *manual* and fill in the `span`
+            settings, use mode "manual" and fill in the `span`
             attribute.
         stream
             plotly.graph_objs.violin.Stream instance or dict with
@@ -8847,7 +8847,7 @@ class FigureWidget(BaseFigureWidget):
             all the data points. If an array of string, the items
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
-            a *text* flag.
+            a "text" flag.
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
@@ -8857,7 +8857,7 @@ class FigureWidget(BaseFigureWidget):
             with compatible properties
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         x
@@ -8868,8 +8868,8 @@ class FigureWidget(BaseFigureWidget):
             info.
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xsrc
             Sets the source reference on plot.ly for  x .
@@ -8881,8 +8881,8 @@ class FigureWidget(BaseFigureWidget):
             info.
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ysrc
             Sets the source reference on plot.ly for  y .

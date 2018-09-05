@@ -23,6 +23,7 @@ class RotationValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `lonaxis.range` values.
             roll
                 Roll the map (in degrees) For example, a roll
-                of *180* makes the map appear upside down.""",
+                of 180 makes the map appear upside down.
+""",
             **kwargs
         )

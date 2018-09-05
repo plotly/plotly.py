@@ -11,7 +11,7 @@ class YAxis(BaseLayoutHierarchyType):
         """
         If set to an opposite-letter axis id (e.g. `x2`, `y`), this
         axis is bound to the corresponding opposite-letter axis. If set
-        to *free*, this axis' position is determined by `position`.
+        to "free", this axis' position is determined by `position`.
     
         The 'anchor' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -57,7 +57,7 @@ class YAxis(BaseLayoutHierarchyType):
         """
         Determines whether or not the range of this axis is computed in
         relation to the input data. See `rangemode` for more info. If
-        `range` is provided, then `autorange` is set to *false*.
+        `range` is provided, then `autorange` is set to False.
     
         The 'autorange' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -106,7 +106,7 @@ class YAxis(BaseLayoutHierarchyType):
     def categoryarray(self):
         """
         Sets the order in which categories on this axis appear. Only
-        has an effect if `categoryorder` is set to *array*. Used with
+        has an effect if `categoryorder` is set to "array". Used with
         `categoryorder`.
     
         The 'categoryarray' property is an array that may be specified as a tuple,
@@ -148,14 +148,14 @@ class YAxis(BaseLayoutHierarchyType):
     def categoryorder(self):
         """
         Specifies the ordering logic for the case of categorical
-        variables. By default, plotly uses *trace*, which specifies the
+        variables. By default, plotly uses "trace", which specifies the
         order that is present in the data supplied. Set `categoryorder`
         to *category ascending* or *category descending* if order
         should be determined by the alphanumerical order of the
-        category names. Set `categoryorder` to *array* to derive the
+        category names. Set `categoryorder` to "array" to derive the
         ordering from the attribute `categoryarray`. If a category is
         not found in the `categoryarray` array, the sorting behavior
-        for that attribute will be identical to the *trace* mode. The
+        for that attribute will be identical to the "trace" mode. The
         unspecified categories will follow the categories in
         `categoryarray`.
     
@@ -243,8 +243,8 @@ class YAxis(BaseLayoutHierarchyType):
         """
         If this axis needs to be compressed (either due to its own
         `scaleanchor` and `scaleratio` or those of the other axis),
-        determines how that happens: by increasing the *range*
-        (default), or by decreasing the *domain*.
+        determines how that happens: by increasing the "range"
+        (default), or by decreasing the "domain".
     
         The 'constrain' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -268,8 +268,8 @@ class YAxis(BaseLayoutHierarchyType):
         If this axis needs to be compressed (either due to its own
         `scaleanchor` and `scaleratio` or those of the other axis),
         determines which direction we push the originally specified
-        plot area. Options are *left*, *center* (default), and *right*
-        for x axes, and *top*, *middle* (default), and *bottom* for y
+        plot area. Options are "left", "center" (default), and "right"
+        for x axes, and "top", "middle" (default), and "bottom" for y
         axes.
     
         The 'constraintoward' property is an enumeration that may be specified as:
@@ -318,24 +318,24 @@ class YAxis(BaseLayoutHierarchyType):
         """
         Sets the step in-between ticks on this axis. Use with `tick0`.
         Must be a positive number, or special strings available to
-        *log* and *date* axes. If the axis `type` is *log*, then ticks
+        "log" and "date" axes. If the axis `type` is "log", then ticks
         are set every 10^(n*dtick) where n is the tick number. For
         example, to set a tick mark at 1, 10, 100, 1000, ... set dtick
         to 1. To set tick marks at 1, 100, 10000, ... set dtick to 2.
         To set tick marks at 1, 5, 25, 125, 625, 3125, ... set dtick to
-        log_10(5), or 0.69897000433. *log* has several special values;
-        *L<f>*, where `f` is a positive number, gives ticks linearly
+        log_10(5), or 0.69897000433. "log" has several special values;
+        "L<f>", where `f` is a positive number, gives ticks linearly
         spaced in value (but not position). For example `tick0` = 0.1,
-        `dtick` = *L0.5* will put ticks at 0.1, 0.6, 1.1, 1.6 etc. To
-        show powers of 10 plus small digits between, use *D1* (all
-        digits) or *D2* (only 2 and 5). `tick0` is ignored for *D1* and
-        *D2*. If the axis `type` is *date*, then you must convert the
+        `dtick` = "L0.5" will put ticks at 0.1, 0.6, 1.1, 1.6 etc. To
+        show powers of 10 plus small digits between, use "D1" (all
+        digits) or "D2" (only 2 and 5). `tick0` is ignored for "D1" and
+        "D2". If the axis `type` is "date", then you must convert the
         time to milliseconds. For example, to set the interval between
-        ticks to one day, set `dtick` to 86400000.0. *date* also has
-        special values *M<n>* gives ticks spaced by a number of months.
+        ticks to one day, set `dtick` to 86400000.0. "date" also has
+        special values "M<n>" gives ticks spaced by a number of months.
         `n` must be a positive integer. To set ticks on the 15th of
-        every third month, set `tick0` to *2000-01-15* and `dtick` to
-        *M3*. To set ticks every 4 years, set `dtick` to *M48*
+        every third month, set `tick0` to "2000-01-15" and `dtick` to
+        "M3". To set ticks every 4 years, set `dtick` to "M48"
     
         The 'dtick' property accepts values of any type
 
@@ -355,10 +355,10 @@ class YAxis(BaseLayoutHierarchyType):
     def exponentformat(self):
         """
         Determines a formatting rule for the tick exponents. For
-        example, consider the number 1,000,000,000. If *none*, it
-        appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If
-        *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If
-        *B*, 1B.
+        example, consider the number 1,000,000,000. If "none", it
+        appears as 1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
+        "power", 1x10^9 (with 9 in a super script). If "SI", 1G. If
+        "B", 1B.
     
         The 'exponentformat' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -485,9 +485,9 @@ class YAxis(BaseLayoutHierarchyType):
         E.md#locale_format And for dates see:
         https://github.com/d3/d3-time-
         format/blob/master/README.md#locale_format We add one item to
-        d3's date formatter: *%{n}f* for fractional seconds with n
+        d3's date formatter: "%{n}f" for fractional seconds with n
         digits. For example, *2016-10-13 09:15:23.456* with tickformat
-        *%H~%M~%S.%2f* would display *09~15~23.46*
+        "%H~%M~%S.%2f" would display "09~15~23.46"
     
         The 'hoverformat' property is a string and must be specified as:
           - A string
@@ -513,7 +513,7 @@ class YAxis(BaseLayoutHierarchyType):
         If *below traces*, this axis is displayed below all the
         subplot's traces, but above the grid lines. Useful when used
         together with scatter-like traces with `cliponaxis` set to
-        *false* to show markers and/or text nodes above this axis.
+        False to show markers and/or text nodes above this axis.
     
         The 'layer' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -614,11 +614,11 @@ class YAxis(BaseLayoutHierarchyType):
     def mirror(self):
         """
         Determines if the axis lines or/and ticks are mirrored to the
-        opposite side of the plotting area. If *true*, the axis lines
-        are mirrored. If *ticks*, the axis lines and ticks are
-        mirrored. If *false*, mirroring is disable. If *all*, axis
-        lines are mirrored on all shared-axes subplots. If *allticks*,
-        axis lines and ticks are mirrored on all shared-axes subplots.
+        opposite side of the plotting area. If True, the axis lines are
+        mirrored. If "ticks", the axis lines and ticks are mirrored. If
+        False, mirroring is disable. If "all", axis lines are mirrored
+        on all shared-axes subplots. If "allticks", axis lines and
+        ticks are mirrored on all shared-axes subplots.
     
         The 'mirror' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -642,7 +642,7 @@ class YAxis(BaseLayoutHierarchyType):
         Specifies the maximum number of ticks for the particular axis.
         The actual number of ticks will be chosen automatically to be
         less than or equal to `nticks`. Has an effect only if
-        `tickmode` is set to *auto*.
+        `tickmode` is set to "auto".
     
         The 'nticks' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
@@ -664,7 +664,7 @@ class YAxis(BaseLayoutHierarchyType):
     def overlaying(self):
         """
         If set a same-letter axis id, this axis is overlaid on top of
-        the corresponding same-letter axis. If *false*, this axis does
+        the corresponding same-letter axis. If False, this axis does
         not overlay any same-letter axes.
     
         The 'overlaying' property is an enumeration that may be specified as:
@@ -690,7 +690,7 @@ class YAxis(BaseLayoutHierarchyType):
         """
         Sets the position of this axis in the plotting space (in
         normalized coordinates). Only has an effect if `anchor` is set
-        to *free*.
+        to "free".
     
         The 'position' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
@@ -710,12 +710,12 @@ class YAxis(BaseLayoutHierarchyType):
     @property
     def range(self):
         """
-        Sets the range of this axis. If the axis `type` is *log*, then
+        Sets the range of this axis. If the axis `type` is "log", then
         you must take the log of your desired range (e.g. to set the
         range from 1 to 100, set the range from 0 to 2). If the axis
-        `type` is *date*, it should be date strings, like date data,
+        `type` is "date", it should be date strings, like date data,
         though Date objects and unix milliseconds will be accepted and
-        converted to strings. If the axis `type` is *category*, it
+        converted to strings. If the axis `type` is "category", it
         should be numbers, using the scale where each category is
         assigned a serial number from zero in the order it appears.
     
@@ -740,9 +740,9 @@ class YAxis(BaseLayoutHierarchyType):
     @property
     def rangemode(self):
         """
-        If *normal*, the range is computed in relation to the extrema
+        If "normal", the range is computed in relation to the extrema
         of the input data. If *tozero*`, the range extends to 0,
-        regardless of the input data If *nonnegative*, the range is
+        regardless of the input data If "nonnegative", the range is
         non-negative, regardless of the input data.
     
         The 'rangemode' property is an enumeration that may be specified as:
@@ -843,9 +843,9 @@ class YAxis(BaseLayoutHierarchyType):
     @property
     def showexponent(self):
         """
-        If *all*, all exponents are shown besides their significands.
-        If *first*, only the exponent of the first tick is shown. If
-        *last*, only the exponent of the last tick is shown. If *none*,
+        If "all", all exponents are shown besides their significands.
+        If "first", only the exponent of the first tick is shown. If
+        "last", only the exponent of the last tick is shown. If "none",
         no exponents appear.
     
         The 'showexponent' property is an enumeration that may be specified as:
@@ -867,7 +867,7 @@ class YAxis(BaseLayoutHierarchyType):
     @property
     def showgrid(self):
         """
-        Determines whether or not grid lines are drawn. If *true*, the
+        Determines whether or not grid lines are drawn. If True, the
         grid lines are drawn at every tick mark.
     
         The 'showgrid' property must be specified as a bool
@@ -950,10 +950,10 @@ class YAxis(BaseLayoutHierarchyType):
     @property
     def showtickprefix(self):
         """
-        If *all*, all tick labels are displayed with a prefix. If
-        *first*, only the first tick is displayed with a prefix. If
-        *last*, only the last tick is displayed with a suffix. If
-        *none*, tick prefixes are hidden.
+        If "all", all tick labels are displayed with a prefix. If
+        "first", only the first tick is displayed with a prefix. If
+        "last", only the last tick is displayed with a suffix. If
+        "none", tick prefixes are hidden.
     
         The 'showtickprefix' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -995,8 +995,8 @@ class YAxis(BaseLayoutHierarchyType):
     @property
     def side(self):
         """
-        Determines whether a x (y) axis is positioned at the *bottom*
-        (*left*) or *top* (*right*) of the plotting area.
+        Determines whether a x (y) axis is positioned at the "bottom"
+        ("left") or "top" ("right") of the plotting area.
     
         The 'side' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -1077,9 +1077,9 @@ class YAxis(BaseLayoutHierarchyType):
     def spikedash(self):
         """
         Sets the dash style of lines. Set to a dash type string
-        (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or
-        *longdashdot*) or a dash length list in px (eg
-        *5px,10px,2px,2px*).
+        ("solid", "dot", "dash", "longdash", "dashdot", or
+        "longdashdot") or a dash length list in px (eg
+        "5px,10px,2px,2px").
     
         The 'spikedash' property is a string and must be specified as:
           - One of the following strings:
@@ -1102,10 +1102,10 @@ class YAxis(BaseLayoutHierarchyType):
     @property
     def spikemode(self):
         """
-        Determines the drawing mode for the spike line If *toaxis*, the
+        Determines the drawing mode for the spike line If "toaxis", the
         line is drawn from the data point to the axis the  series is
-        plotted on. If *across*, the line is drawn across the entire
-        plot area, and supercedes *toaxis*. If *marker*, then a marker
+        plotted on. If "across", the line is drawn across the entire
+        plot area, and supercedes "toaxis". If "marker", then a marker
         dot is drawn on the axis the series is plotted on
     
         The 'spikemode' property is a flaglist and may be specified
@@ -1171,12 +1171,12 @@ class YAxis(BaseLayoutHierarchyType):
     def tick0(self):
         """
         Sets the placement of the first tick on this axis. Use with
-        `dtick`. If the axis `type` is *log*, then you must take the
+        `dtick`. If the axis `type` is "log", then you must take the
         log of your starting tick (e.g. to set the starting tick to
         100, set the `tick0` to 2) except when `dtick`=*L<f>* (see
-        `dtick` for more info). If the axis `type` is *date*, it should
+        `dtick` for more info). If the axis `type` is "date", it should
         be a date string, like date data. If the axis `type` is
-        *category*, it should be a number, using the scale where each
+        "category", it should be a number, using the scale where each
         category is assigned a serial number from zero in the order it
         appears.
     
@@ -1303,11 +1303,11 @@ class YAxis(BaseLayoutHierarchyType):
                     system. The plotly service (at https://plot.ly
                     or on-premise) generates images on a server,
                     where only a select number of fonts are
-                    installed and supported. These include *Arial*,
-                    *Balto*, *Courier New*, *Droid Sans*,, *Droid
-                    Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
-                    Standard TT*, *Open Sans*, *Overpass*, *PT Sans
-                    Narrow*, *Raleway*, *Times New Roman*.
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
                 size
 
         Returns
@@ -1331,9 +1331,9 @@ class YAxis(BaseLayoutHierarchyType):
         E.md#locale_format And for dates see:
         https://github.com/d3/d3-time-
         format/blob/master/README.md#locale_format We add one item to
-        d3's date formatter: *%{n}f* for fractional seconds with n
+        d3's date formatter: "%{n}f" for fractional seconds with n
         digits. For example, *2016-10-13 09:15:23.456* with tickformat
-        *%H~%M~%S.%2f* would display *09~15~23.46*
+        "%H~%M~%S.%2f" would display "09~15~23.46"
     
         The 'tickformat' property is a string and must be specified as:
           - A string
@@ -1363,10 +1363,10 @@ class YAxis(BaseLayoutHierarchyType):
             Supported dict properties:
                 
                 dtickrange
-                    range [*min*, *max*], where *min*, *max* -
+                    range [*min*, *max*], where "min", "max" -
                     dtick values which describe some zoom level, it
-                    is possible to omit *min* or *max* value by
-                    passing *null*
+                    is possible to omit "min" or "max" value by
+                    passing "null"
                 enabled
                     Determines whether or not this stop is used. If
                     `false`, this stop is ignored even within its
@@ -1394,7 +1394,7 @@ class YAxis(BaseLayoutHierarchyType):
                     you explicitly show it with `visible: true`.
                 value
                     string - dtickformat for described zoom level,
-                    the same as *tickformat*
+                    the same as "tickformat"
 
         Returns
         -------
@@ -1431,12 +1431,12 @@ class YAxis(BaseLayoutHierarchyType):
     @property
     def tickmode(self):
         """
-        Sets the tick mode for this axis. If *auto*, the number of
-        ticks is set via `nticks`. If *linear*, the placement of the
+        Sets the tick mode for this axis. If "auto", the number of
+        ticks is set via `nticks`. If "linear", the placement of the
         ticks is determined by a starting position `tick0` and a tick
-        step `dtick` (*linear* is the default value if `tick0` and
-        `dtick` are provided). If *array*, the placement of the ticks
-        is set via `tickvals` and the tick text is `ticktext`. (*array*
+        step `dtick` ("linear" is the default value if `tick0` and
+        `dtick` are provided). If "array", the placement of the ticks
+        is set via `tickvals` and the tick text is `ticktext`. ("array"
         is the default value if `tickvals` is provided).
     
         The 'tickmode' property is an enumeration that may be specified as:
@@ -1480,7 +1480,7 @@ class YAxis(BaseLayoutHierarchyType):
     def ticks(self):
         """
         Determines whether ticks are drawn or not. If **, this axis'
-        ticks are not drawn. If *outside* (*inside*), this axis' are
+        ticks are not drawn. If "outside" ("inside"), this axis' are
         drawn outside (inside) the axis lines.
     
         The 'ticks' property is an enumeration that may be specified as:
@@ -1524,7 +1524,7 @@ class YAxis(BaseLayoutHierarchyType):
     def ticktext(self):
         """
         Sets the text displayed at the ticks position via `tickvals`.
-        Only has an effect if `tickmode` is set to *array*. Used with
+        Only has an effect if `tickmode` is set to "array". Used with
         `tickvals`.
     
         The 'ticktext' property is an array that may be specified as a tuple,
@@ -1566,7 +1566,7 @@ class YAxis(BaseLayoutHierarchyType):
     def tickvals(self):
         """
         Sets the values at which ticks on this axis appear. Only has an
-        effect if `tickmode` is set to *array*. Used with `ticktext`.
+        effect if `tickmode` is set to "array". Used with `ticktext`.
     
         The 'tickvals' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
@@ -1670,11 +1670,11 @@ class YAxis(BaseLayoutHierarchyType):
                     system. The plotly service (at https://plot.ly
                     or on-premise) generates images on a server,
                     where only a select number of fonts are
-                    installed and supported. These include *Arial*,
-                    *Balto*, *Courier New*, *Droid Sans*,, *Droid
-                    Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
-                    Standard TT*, *Open Sans*, *Overpass*, *PT Sans
-                    Narrow*, *Raleway*, *Times New Roman*.
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
                 size
 
         Returns
@@ -1738,7 +1738,7 @@ class YAxis(BaseLayoutHierarchyType):
     def zeroline(self):
         """
         Determines whether or not a line is drawn at along the 0 value
-        of this axis. If *true*, the zero line is drawn on top of the
+        of this axis. If True, the zero line is drawn on top of the
         grid lines.
     
         The 'zeroline' property must be specified as a bool
@@ -1847,7 +1847,7 @@ class YAxis(BaseLayoutHierarchyType):
         anchor
             If set to an opposite-letter axis id (e.g. `x2`, `y`),
             this axis is bound to the corresponding opposite-letter
-            axis. If set to *free*, this axis' position is
+            axis. If set to "free", this axis' position is
             determined by `position`.
         automargin
             Determines whether long tick labels automatically grow
@@ -1856,7 +1856,7 @@ class YAxis(BaseLayoutHierarchyType):
             Determines whether or not the range of this axis is
             computed in relation to the input data. See `rangemode`
             for more info. If `range` is provided, then `autorange`
-            is set to *false*.
+            is set to False.
         calendar
             Sets the calendar system to use for `range` and `tick0`
             if this is a date axis. This does not set the calendar
@@ -1865,22 +1865,22 @@ class YAxis(BaseLayoutHierarchyType):
         categoryarray
             Sets the order in which categories on this axis appear.
             Only has an effect if `categoryorder` is set to
-            *array*. Used with `categoryorder`.
+            "array". Used with `categoryorder`.
         categoryarraysrc
             Sets the source reference on plot.ly for  categoryarray
             .
         categoryorder
             Specifies the ordering logic for the case of
-            categorical variables. By default, plotly uses *trace*,
+            categorical variables. By default, plotly uses "trace",
             which specifies the order that is present in the data
             supplied. Set `categoryorder` to *category ascending*
             or *category descending* if order should be determined
             by the alphanumerical order of the category names. Set
-            `categoryorder` to *array* to derive the ordering from
+            `categoryorder` to "array" to derive the ordering from
             the attribute `categoryarray`. If a category is not
             found in the `categoryarray` array, the sorting
             behavior for that attribute will be identical to the
-            *trace* mode. The unspecified categories will follow
+            "trace" mode. The unspecified categories will follow
             the categories in `categoryarray`.
         color
             Sets default for all colors associated with this axis
@@ -1891,46 +1891,46 @@ class YAxis(BaseLayoutHierarchyType):
             If this axis needs to be compressed (either due to its
             own `scaleanchor` and `scaleratio` or those of the
             other axis), determines how that happens: by increasing
-            the *range* (default), or by decreasing the *domain*.
+            the "range" (default), or by decreasing the "domain".
         constraintoward
             If this axis needs to be compressed (either due to its
             own `scaleanchor` and `scaleratio` or those of the
             other axis), determines which direction we push the
-            originally specified plot area. Options are *left*,
-            *center* (default), and *right* for x axes, and *top*,
-            *middle* (default), and *bottom* for y axes.
+            originally specified plot area. Options are "left",
+            "center" (default), and "right" for x axes, and "top",
+            "middle" (default), and "bottom" for y axes.
         domain
             Sets the domain of this axis (in plot fraction).
         dtick
             Sets the step in-between ticks on this axis. Use with
             `tick0`. Must be a positive number, or special strings
-            available to *log* and *date* axes. If the axis `type`
-            is *log*, then ticks are set every 10^(n*dtick) where n
+            available to "log" and "date" axes. If the axis `type`
+            is "log", then ticks are set every 10^(n*dtick) where n
             is the tick number. For example, to set a tick mark at
             1, 10, 100, 1000, ... set dtick to 1. To set tick marks
             at 1, 100, 10000, ... set dtick to 2. To set tick marks
             at 1, 5, 25, 125, 625, 3125, ... set dtick to
-            log_10(5), or 0.69897000433. *log* has several special
-            values; *L<f>*, where `f` is a positive number, gives
+            log_10(5), or 0.69897000433. "log" has several special
+            values; "L<f>", where `f` is a positive number, gives
             ticks linearly spaced in value (but not position). For
-            example `tick0` = 0.1, `dtick` = *L0.5* will put ticks
+            example `tick0` = 0.1, `dtick` = "L0.5" will put ticks
             at 0.1, 0.6, 1.1, 1.6 etc. To show powers of 10 plus
-            small digits between, use *D1* (all digits) or *D2*
-            (only 2 and 5). `tick0` is ignored for *D1* and *D2*.
-            If the axis `type` is *date*, then you must convert the
+            small digits between, use "D1" (all digits) or "D2"
+            (only 2 and 5). `tick0` is ignored for "D1" and "D2".
+            If the axis `type` is "date", then you must convert the
             time to milliseconds. For example, to set the interval
             between ticks to one day, set `dtick` to 86400000.0.
-            *date* also has special values *M<n>* gives ticks
+            "date" also has special values "M<n>" gives ticks
             spaced by a number of months. `n` must be a positive
             integer. To set ticks on the 15th of every third month,
-            set `tick0` to *2000-01-15* and `dtick` to *M3*. To set
-            ticks every 4 years, set `dtick` to *M48*
+            set `tick0` to "2000-01-15" and `dtick` to "M3". To set
+            ticks every 4 years, set `dtick` to "M48"
         exponentformat
             Determines a formatting rule for the tick exponents.
             For example, consider the number 1,000,000,000. If
-            *none*, it appears as 1,000,000,000. If *e*, 1e+9. If
-            *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super
-            script). If *SI*, 1G. If *B*, 1B.
+            "none", it appears as 1,000,000,000. If "e", 1e+9. If
+            "E", 1E+9. If "power", 1x10^9 (with 9 in a super
+            script). If "SI", 1G. If "B", 1B.
         fixedrange
             Determines whether or not this axis is zoom-able. If
             true, then zoom is disabled.
@@ -1945,17 +1945,17 @@ class YAxis(BaseLayoutHierarchyType):
             at/blob/master/README.md#locale_format And for dates
             see: https://github.com/d3/d3-time-
             format/blob/master/README.md#locale_format We add one
-            item to d3's date formatter: *%{n}f* for fractional
+            item to d3's date formatter: "%{n}f" for fractional
             seconds with n digits. For example, *2016-10-13
-            09:15:23.456* with tickformat *%H~%M~%S.%2f* would
-            display *09~15~23.46*
+            09:15:23.456* with tickformat "%H~%M~%S.%2f" would
+            display "09~15~23.46"
         layer
             Sets the layer on which this axis is displayed. If
             *above traces*, this axis is displayed above all the
             subplot's traces If *below traces*, this axis is
             displayed below all the subplot's traces, but above the
             grid lines. Useful when used together with scatter-like
-            traces with `cliponaxis` set to *false* to show markers
+            traces with `cliponaxis` set to False to show markers
             and/or text nodes above this axis.
         linecolor
             Sets the axis line color.
@@ -1963,42 +1963,42 @@ class YAxis(BaseLayoutHierarchyType):
             Sets the width (in px) of the axis line.
         mirror
             Determines if the axis lines or/and ticks are mirrored
-            to the opposite side of the plotting area. If *true*,
-            the axis lines are mirrored. If *ticks*, the axis lines
-            and ticks are mirrored. If *false*, mirroring is
-            disable. If *all*, axis lines are mirrored on all
-            shared-axes subplots. If *allticks*, axis lines and
-            ticks are mirrored on all shared-axes subplots.
+            to the opposite side of the plotting area. If True, the
+            axis lines are mirrored. If "ticks", the axis lines and
+            ticks are mirrored. If False, mirroring is disable. If
+            "all", axis lines are mirrored on all shared-axes
+            subplots. If "allticks", axis lines and ticks are
+            mirrored on all shared-axes subplots.
         nticks
             Specifies the maximum number of ticks for the
             particular axis. The actual number of ticks will be
             chosen automatically to be less than or equal to
             `nticks`. Has an effect only if `tickmode` is set to
-            *auto*.
+            "auto".
         overlaying
             If set a same-letter axis id, this axis is overlaid on
-            top of the corresponding same-letter axis. If *false*,
+            top of the corresponding same-letter axis. If False,
             this axis does not overlay any same-letter axes.
         position
             Sets the position of this axis in the plotting space
             (in normalized coordinates). Only has an effect if
-            `anchor` is set to *free*.
+            `anchor` is set to "free".
         range
             Sets the range of this axis. If the axis `type` is
-            *log*, then you must take the log of your desired range
+            "log", then you must take the log of your desired range
             (e.g. to set the range from 1 to 100, set the range
-            from 0 to 2). If the axis `type` is *date*, it should
+            from 0 to 2). If the axis `type` is "date", it should
             be date strings, like date data, though Date objects
             and unix milliseconds will be accepted and converted to
-            strings. If the axis `type` is *category*, it should be
+            strings. If the axis `type` is "category", it should be
             numbers, using the scale where each category is
             assigned a serial number from zero in the order it
             appears.
         rangemode
-            If *normal*, the range is computed in relation to the
+            If "normal", the range is computed in relation to the
             extrema of the input data. If *tozero*`, the range
             extends to 0, regardless of the input data If
-            *nonnegative*, the range is non-negative, regardless of
+            "nonnegative", the range is non-negative, regardless of
             the input data.
         scaleanchor
             If set to another axis id (e.g. `x2`, `y`), the range
@@ -2029,13 +2029,13 @@ class YAxis(BaseLayoutHierarchyType):
         separatethousands
             If "true", even 4-digit integers are separated
         showexponent
-            If *all*, all exponents are shown besides their
-            significands. If *first*, only the exponent of the
-            first tick is shown. If *last*, only the exponent of
-            the last tick is shown. If *none*, no exponents appear.
+            If "all", all exponents are shown besides their
+            significands. If "first", only the exponent of the
+            first tick is shown. If "last", only the exponent of
+            the last tick is shown. If "none", no exponents appear.
         showgrid
             Determines whether or not grid lines are drawn. If
-            *true*, the grid lines are drawn at every tick mark.
+            True, the grid lines are drawn at every tick mark.
         showline
             Determines whether or not a line bounding this axis is
             drawn.
@@ -2046,30 +2046,30 @@ class YAxis(BaseLayoutHierarchyType):
         showticklabels
             Determines whether or not the tick labels are drawn.
         showtickprefix
-            If *all*, all tick labels are displayed with a prefix.
-            If *first*, only the first tick is displayed with a
-            prefix. If *last*, only the last tick is displayed with
-            a suffix. If *none*, tick prefixes are hidden.
+            If "all", all tick labels are displayed with a prefix.
+            If "first", only the first tick is displayed with a
+            prefix. If "last", only the last tick is displayed with
+            a suffix. If "none", tick prefixes are hidden.
         showticksuffix
             Same as `showtickprefix` but for tick suffixes.
         side
             Determines whether a x (y) axis is positioned at the
-            *bottom* (*left*) or *top* (*right*) of the plotting
+            "bottom" ("left") or "top" ("right") of the plotting
             area.
         spikecolor
             Sets the spike color. If undefined, will use the series
             color
         spikedash
             Sets the dash style of lines. Set to a dash type string
-            (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or
-            *longdashdot*) or a dash length list in px (eg
-            *5px,10px,2px,2px*).
+            ("solid", "dot", "dash", "longdash", "dashdot", or
+            "longdashdot") or a dash length list in px (eg
+            "5px,10px,2px,2px").
         spikemode
             Determines the drawing mode for the spike line If
-            *toaxis*, the line is drawn from the data point to the
-            axis the  series is plotted on. If *across*, the line
+            "toaxis", the line is drawn from the data point to the
+            axis the  series is plotted on. If "across", the line
             is drawn across the entire plot area, and supercedes
-            *toaxis*. If *marker*, then a marker dot is drawn on
+            "toaxis". If "marker", then a marker dot is drawn on
             the axis the series is plotted on
         spikesnap
             Determines whether spikelines are stuck to the cursor
@@ -2078,12 +2078,12 @@ class YAxis(BaseLayoutHierarchyType):
             Sets the width (in px) of the zero line.
         tick0
             Sets the placement of the first tick on this axis. Use
-            with `dtick`. If the axis `type` is *log*, then you
+            with `dtick`. If the axis `type` is "log", then you
             must take the log of your starting tick (e.g. to set
             the starting tick to 100, set the `tick0` to 2) except
             when `dtick`=*L<f>* (see `dtick` for more info). If the
-            axis `type` is *date*, it should be a date string, like
-            date data. If the axis `type` is *category*, it should
+            axis `type` is "date", it should be a date string, like
+            date data. If the axis `type` is "category", it should
             be a number, using the scale where each category is
             assigned a serial number from zero in the order it
             appears.
@@ -2102,41 +2102,41 @@ class YAxis(BaseLayoutHierarchyType):
             at/blob/master/README.md#locale_format And for dates
             see: https://github.com/d3/d3-time-
             format/blob/master/README.md#locale_format We add one
-            item to d3's date formatter: *%{n}f* for fractional
+            item to d3's date formatter: "%{n}f" for fractional
             seconds with n digits. For example, *2016-10-13
-            09:15:23.456* with tickformat *%H~%M~%S.%2f* would
-            display *09~15~23.46*
+            09:15:23.456* with tickformat "%H~%M~%S.%2f" would
+            display "09~15~23.46"
         tickformatstops
             plotly.graph_objs.layout.yaxis.Tickformatstop instance
             or dict with compatible properties
         ticklen
             Sets the tick length (in px).
         tickmode
-            Sets the tick mode for this axis. If *auto*, the number
-            of ticks is set via `nticks`. If *linear*, the
+            Sets the tick mode for this axis. If "auto", the number
+            of ticks is set via `nticks`. If "linear", the
             placement of the ticks is determined by a starting
-            position `tick0` and a tick step `dtick` (*linear* is
+            position `tick0` and a tick step `dtick` ("linear" is
             the default value if `tick0` and `dtick` are provided).
-            If *array*, the placement of the ticks is set via
-            `tickvals` and the tick text is `ticktext`. (*array* is
+            If "array", the placement of the ticks is set via
+            `tickvals` and the tick text is `ticktext`. ("array" is
             the default value if `tickvals` is provided).
         tickprefix
             Sets a tick label prefix.
         ticks
             Determines whether ticks are drawn or not. If **, this
-            axis' ticks are not drawn. If *outside* (*inside*),
+            axis' ticks are not drawn. If "outside" ("inside"),
             this axis' are drawn outside (inside) the axis lines.
         ticksuffix
             Sets a tick label suffix.
         ticktext
             Sets the text displayed at the ticks position via
             `tickvals`. Only has an effect if `tickmode` is set to
-            *array*. Used with `tickvals`.
+            "array". Used with `tickvals`.
         ticktextsrc
             Sets the source reference on plot.ly for  ticktext .
         tickvals
             Sets the values at which ticks on this axis appear.
-            Only has an effect if `tickmode` is set to *array*.
+            Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
         tickvalssrc
             Sets the source reference on plot.ly for  tickvals .
@@ -2156,7 +2156,7 @@ class YAxis(BaseLayoutHierarchyType):
             cheater plot is present on the axis, otherwise false
         zeroline
             Determines whether or not a line is drawn at along the
-            0 value of this axis. If *true*, the zero line is drawn
+            0 value of this axis. If True, the zero line is drawn
             on top of the grid lines.
         zerolinecolor
             Sets the line color of the zero line.
@@ -2245,7 +2245,7 @@ class YAxis(BaseLayoutHierarchyType):
         anchor
             If set to an opposite-letter axis id (e.g. `x2`, `y`),
             this axis is bound to the corresponding opposite-letter
-            axis. If set to *free*, this axis' position is
+            axis. If set to "free", this axis' position is
             determined by `position`.
         automargin
             Determines whether long tick labels automatically grow
@@ -2254,7 +2254,7 @@ class YAxis(BaseLayoutHierarchyType):
             Determines whether or not the range of this axis is
             computed in relation to the input data. See `rangemode`
             for more info. If `range` is provided, then `autorange`
-            is set to *false*.
+            is set to False.
         calendar
             Sets the calendar system to use for `range` and `tick0`
             if this is a date axis. This does not set the calendar
@@ -2263,22 +2263,22 @@ class YAxis(BaseLayoutHierarchyType):
         categoryarray
             Sets the order in which categories on this axis appear.
             Only has an effect if `categoryorder` is set to
-            *array*. Used with `categoryorder`.
+            "array". Used with `categoryorder`.
         categoryarraysrc
             Sets the source reference on plot.ly for  categoryarray
             .
         categoryorder
             Specifies the ordering logic for the case of
-            categorical variables. By default, plotly uses *trace*,
+            categorical variables. By default, plotly uses "trace",
             which specifies the order that is present in the data
             supplied. Set `categoryorder` to *category ascending*
             or *category descending* if order should be determined
             by the alphanumerical order of the category names. Set
-            `categoryorder` to *array* to derive the ordering from
+            `categoryorder` to "array" to derive the ordering from
             the attribute `categoryarray`. If a category is not
             found in the `categoryarray` array, the sorting
             behavior for that attribute will be identical to the
-            *trace* mode. The unspecified categories will follow
+            "trace" mode. The unspecified categories will follow
             the categories in `categoryarray`.
         color
             Sets default for all colors associated with this axis
@@ -2289,46 +2289,46 @@ class YAxis(BaseLayoutHierarchyType):
             If this axis needs to be compressed (either due to its
             own `scaleanchor` and `scaleratio` or those of the
             other axis), determines how that happens: by increasing
-            the *range* (default), or by decreasing the *domain*.
+            the "range" (default), or by decreasing the "domain".
         constraintoward
             If this axis needs to be compressed (either due to its
             own `scaleanchor` and `scaleratio` or those of the
             other axis), determines which direction we push the
-            originally specified plot area. Options are *left*,
-            *center* (default), and *right* for x axes, and *top*,
-            *middle* (default), and *bottom* for y axes.
+            originally specified plot area. Options are "left",
+            "center" (default), and "right" for x axes, and "top",
+            "middle" (default), and "bottom" for y axes.
         domain
             Sets the domain of this axis (in plot fraction).
         dtick
             Sets the step in-between ticks on this axis. Use with
             `tick0`. Must be a positive number, or special strings
-            available to *log* and *date* axes. If the axis `type`
-            is *log*, then ticks are set every 10^(n*dtick) where n
+            available to "log" and "date" axes. If the axis `type`
+            is "log", then ticks are set every 10^(n*dtick) where n
             is the tick number. For example, to set a tick mark at
             1, 10, 100, 1000, ... set dtick to 1. To set tick marks
             at 1, 100, 10000, ... set dtick to 2. To set tick marks
             at 1, 5, 25, 125, 625, 3125, ... set dtick to
-            log_10(5), or 0.69897000433. *log* has several special
-            values; *L<f>*, where `f` is a positive number, gives
+            log_10(5), or 0.69897000433. "log" has several special
+            values; "L<f>", where `f` is a positive number, gives
             ticks linearly spaced in value (but not position). For
-            example `tick0` = 0.1, `dtick` = *L0.5* will put ticks
+            example `tick0` = 0.1, `dtick` = "L0.5" will put ticks
             at 0.1, 0.6, 1.1, 1.6 etc. To show powers of 10 plus
-            small digits between, use *D1* (all digits) or *D2*
-            (only 2 and 5). `tick0` is ignored for *D1* and *D2*.
-            If the axis `type` is *date*, then you must convert the
+            small digits between, use "D1" (all digits) or "D2"
+            (only 2 and 5). `tick0` is ignored for "D1" and "D2".
+            If the axis `type` is "date", then you must convert the
             time to milliseconds. For example, to set the interval
             between ticks to one day, set `dtick` to 86400000.0.
-            *date* also has special values *M<n>* gives ticks
+            "date" also has special values "M<n>" gives ticks
             spaced by a number of months. `n` must be a positive
             integer. To set ticks on the 15th of every third month,
-            set `tick0` to *2000-01-15* and `dtick` to *M3*. To set
-            ticks every 4 years, set `dtick` to *M48*
+            set `tick0` to "2000-01-15" and `dtick` to "M3". To set
+            ticks every 4 years, set `dtick` to "M48"
         exponentformat
             Determines a formatting rule for the tick exponents.
             For example, consider the number 1,000,000,000. If
-            *none*, it appears as 1,000,000,000. If *e*, 1e+9. If
-            *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super
-            script). If *SI*, 1G. If *B*, 1B.
+            "none", it appears as 1,000,000,000. If "e", 1e+9. If
+            "E", 1E+9. If "power", 1x10^9 (with 9 in a super
+            script). If "SI", 1G. If "B", 1B.
         fixedrange
             Determines whether or not this axis is zoom-able. If
             true, then zoom is disabled.
@@ -2343,17 +2343,17 @@ class YAxis(BaseLayoutHierarchyType):
             at/blob/master/README.md#locale_format And for dates
             see: https://github.com/d3/d3-time-
             format/blob/master/README.md#locale_format We add one
-            item to d3's date formatter: *%{n}f* for fractional
+            item to d3's date formatter: "%{n}f" for fractional
             seconds with n digits. For example, *2016-10-13
-            09:15:23.456* with tickformat *%H~%M~%S.%2f* would
-            display *09~15~23.46*
+            09:15:23.456* with tickformat "%H~%M~%S.%2f" would
+            display "09~15~23.46"
         layer
             Sets the layer on which this axis is displayed. If
             *above traces*, this axis is displayed above all the
             subplot's traces If *below traces*, this axis is
             displayed below all the subplot's traces, but above the
             grid lines. Useful when used together with scatter-like
-            traces with `cliponaxis` set to *false* to show markers
+            traces with `cliponaxis` set to False to show markers
             and/or text nodes above this axis.
         linecolor
             Sets the axis line color.
@@ -2361,42 +2361,42 @@ class YAxis(BaseLayoutHierarchyType):
             Sets the width (in px) of the axis line.
         mirror
             Determines if the axis lines or/and ticks are mirrored
-            to the opposite side of the plotting area. If *true*,
-            the axis lines are mirrored. If *ticks*, the axis lines
-            and ticks are mirrored. If *false*, mirroring is
-            disable. If *all*, axis lines are mirrored on all
-            shared-axes subplots. If *allticks*, axis lines and
-            ticks are mirrored on all shared-axes subplots.
+            to the opposite side of the plotting area. If True, the
+            axis lines are mirrored. If "ticks", the axis lines and
+            ticks are mirrored. If False, mirroring is disable. If
+            "all", axis lines are mirrored on all shared-axes
+            subplots. If "allticks", axis lines and ticks are
+            mirrored on all shared-axes subplots.
         nticks
             Specifies the maximum number of ticks for the
             particular axis. The actual number of ticks will be
             chosen automatically to be less than or equal to
             `nticks`. Has an effect only if `tickmode` is set to
-            *auto*.
+            "auto".
         overlaying
             If set a same-letter axis id, this axis is overlaid on
-            top of the corresponding same-letter axis. If *false*,
+            top of the corresponding same-letter axis. If False,
             this axis does not overlay any same-letter axes.
         position
             Sets the position of this axis in the plotting space
             (in normalized coordinates). Only has an effect if
-            `anchor` is set to *free*.
+            `anchor` is set to "free".
         range
             Sets the range of this axis. If the axis `type` is
-            *log*, then you must take the log of your desired range
+            "log", then you must take the log of your desired range
             (e.g. to set the range from 1 to 100, set the range
-            from 0 to 2). If the axis `type` is *date*, it should
+            from 0 to 2). If the axis `type` is "date", it should
             be date strings, like date data, though Date objects
             and unix milliseconds will be accepted and converted to
-            strings. If the axis `type` is *category*, it should be
+            strings. If the axis `type` is "category", it should be
             numbers, using the scale where each category is
             assigned a serial number from zero in the order it
             appears.
         rangemode
-            If *normal*, the range is computed in relation to the
+            If "normal", the range is computed in relation to the
             extrema of the input data. If *tozero*`, the range
             extends to 0, regardless of the input data If
-            *nonnegative*, the range is non-negative, regardless of
+            "nonnegative", the range is non-negative, regardless of
             the input data.
         scaleanchor
             If set to another axis id (e.g. `x2`, `y`), the range
@@ -2427,13 +2427,13 @@ class YAxis(BaseLayoutHierarchyType):
         separatethousands
             If "true", even 4-digit integers are separated
         showexponent
-            If *all*, all exponents are shown besides their
-            significands. If *first*, only the exponent of the
-            first tick is shown. If *last*, only the exponent of
-            the last tick is shown. If *none*, no exponents appear.
+            If "all", all exponents are shown besides their
+            significands. If "first", only the exponent of the
+            first tick is shown. If "last", only the exponent of
+            the last tick is shown. If "none", no exponents appear.
         showgrid
             Determines whether or not grid lines are drawn. If
-            *true*, the grid lines are drawn at every tick mark.
+            True, the grid lines are drawn at every tick mark.
         showline
             Determines whether or not a line bounding this axis is
             drawn.
@@ -2444,30 +2444,30 @@ class YAxis(BaseLayoutHierarchyType):
         showticklabels
             Determines whether or not the tick labels are drawn.
         showtickprefix
-            If *all*, all tick labels are displayed with a prefix.
-            If *first*, only the first tick is displayed with a
-            prefix. If *last*, only the last tick is displayed with
-            a suffix. If *none*, tick prefixes are hidden.
+            If "all", all tick labels are displayed with a prefix.
+            If "first", only the first tick is displayed with a
+            prefix. If "last", only the last tick is displayed with
+            a suffix. If "none", tick prefixes are hidden.
         showticksuffix
             Same as `showtickprefix` but for tick suffixes.
         side
             Determines whether a x (y) axis is positioned at the
-            *bottom* (*left*) or *top* (*right*) of the plotting
+            "bottom" ("left") or "top" ("right") of the plotting
             area.
         spikecolor
             Sets the spike color. If undefined, will use the series
             color
         spikedash
             Sets the dash style of lines. Set to a dash type string
-            (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or
-            *longdashdot*) or a dash length list in px (eg
-            *5px,10px,2px,2px*).
+            ("solid", "dot", "dash", "longdash", "dashdot", or
+            "longdashdot") or a dash length list in px (eg
+            "5px,10px,2px,2px").
         spikemode
             Determines the drawing mode for the spike line If
-            *toaxis*, the line is drawn from the data point to the
-            axis the  series is plotted on. If *across*, the line
+            "toaxis", the line is drawn from the data point to the
+            axis the  series is plotted on. If "across", the line
             is drawn across the entire plot area, and supercedes
-            *toaxis*. If *marker*, then a marker dot is drawn on
+            "toaxis". If "marker", then a marker dot is drawn on
             the axis the series is plotted on
         spikesnap
             Determines whether spikelines are stuck to the cursor
@@ -2476,12 +2476,12 @@ class YAxis(BaseLayoutHierarchyType):
             Sets the width (in px) of the zero line.
         tick0
             Sets the placement of the first tick on this axis. Use
-            with `dtick`. If the axis `type` is *log*, then you
+            with `dtick`. If the axis `type` is "log", then you
             must take the log of your starting tick (e.g. to set
             the starting tick to 100, set the `tick0` to 2) except
             when `dtick`=*L<f>* (see `dtick` for more info). If the
-            axis `type` is *date*, it should be a date string, like
-            date data. If the axis `type` is *category*, it should
+            axis `type` is "date", it should be a date string, like
+            date data. If the axis `type` is "category", it should
             be a number, using the scale where each category is
             assigned a serial number from zero in the order it
             appears.
@@ -2500,41 +2500,41 @@ class YAxis(BaseLayoutHierarchyType):
             at/blob/master/README.md#locale_format And for dates
             see: https://github.com/d3/d3-time-
             format/blob/master/README.md#locale_format We add one
-            item to d3's date formatter: *%{n}f* for fractional
+            item to d3's date formatter: "%{n}f" for fractional
             seconds with n digits. For example, *2016-10-13
-            09:15:23.456* with tickformat *%H~%M~%S.%2f* would
-            display *09~15~23.46*
+            09:15:23.456* with tickformat "%H~%M~%S.%2f" would
+            display "09~15~23.46"
         tickformatstops
             plotly.graph_objs.layout.yaxis.Tickformatstop instance
             or dict with compatible properties
         ticklen
             Sets the tick length (in px).
         tickmode
-            Sets the tick mode for this axis. If *auto*, the number
-            of ticks is set via `nticks`. If *linear*, the
+            Sets the tick mode for this axis. If "auto", the number
+            of ticks is set via `nticks`. If "linear", the
             placement of the ticks is determined by a starting
-            position `tick0` and a tick step `dtick` (*linear* is
+            position `tick0` and a tick step `dtick` ("linear" is
             the default value if `tick0` and `dtick` are provided).
-            If *array*, the placement of the ticks is set via
-            `tickvals` and the tick text is `ticktext`. (*array* is
+            If "array", the placement of the ticks is set via
+            `tickvals` and the tick text is `ticktext`. ("array" is
             the default value if `tickvals` is provided).
         tickprefix
             Sets a tick label prefix.
         ticks
             Determines whether ticks are drawn or not. If **, this
-            axis' ticks are not drawn. If *outside* (*inside*),
+            axis' ticks are not drawn. If "outside" ("inside"),
             this axis' are drawn outside (inside) the axis lines.
         ticksuffix
             Sets a tick label suffix.
         ticktext
             Sets the text displayed at the ticks position via
             `tickvals`. Only has an effect if `tickmode` is set to
-            *array*. Used with `tickvals`.
+            "array". Used with `tickvals`.
         ticktextsrc
             Sets the source reference on plot.ly for  ticktext .
         tickvals
             Sets the values at which ticks on this axis appear.
-            Only has an effect if `tickmode` is set to *array*.
+            Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
         tickvalssrc
             Sets the source reference on plot.ly for  tickvals .
@@ -2554,7 +2554,7 @@ class YAxis(BaseLayoutHierarchyType):
             cheater plot is present on the axis, otherwise false
         zeroline
             Determines whether or not a line is drawn at along the
-            0 value of this axis. If *true*, the zero line is drawn
+            0 value of this axis. If True, the zero line is drawn
             on top of the grid lines.
         zerolinecolor
             Sets the line color of the zero line.

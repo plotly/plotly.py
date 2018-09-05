@@ -52,7 +52,7 @@ class Projection(BaseLayoutHierarchyType):
                     `lonaxis.range` values.
                 roll
                     Roll the map (in degrees) For example, a roll
-                    of *180* makes the map appear upside down.
+                    of 180 makes the map appear upside down.
 
         Returns
         -------
@@ -69,7 +69,7 @@ class Projection(BaseLayoutHierarchyType):
     @property
     def scale(self):
         """
-        Zooms in or out on the map view. A scale of *1* corresponds to
+        Zooms in or out on the map view. A scale of 1 corresponds to
         the largest zoom level that fits the map's lon and lat ranges.
     
         The 'scale' property is a number and may be specified as:
@@ -130,7 +130,7 @@ class Projection(BaseLayoutHierarchyType):
             plotly.graph_objs.layout.geo.projection.Rotation
             instance or dict with compatible properties
         scale
-            Zooms in or out on the map view. A scale of *1*
+            Zooms in or out on the map view. A scale of 1
             corresponds to the largest zoom level that fits the
             map's lon and lat ranges.
         type
@@ -161,7 +161,7 @@ class Projection(BaseLayoutHierarchyType):
             plotly.graph_objs.layout.geo.projection.Rotation
             instance or dict with compatible properties
         scale
-            Zooms in or out on the map view. A scale of *1*
+            Zooms in or out on the map view. A scale of 1
             corresponds to the largest zoom level that fits the
             map's lon and lat ranges.
         type

@@ -25,6 +25,7 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
             font
                 Sets the hover label text font. By default uses
                 the global hover font and size, with color from
-                `hoverlabel.bordercolor`.""",
+                `hoverlabel.bordercolor`.
+""",
             **kwargs
         )

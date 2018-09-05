@@ -22,7 +22,7 @@ class SankeyValidator(_plotly_utils.basevalidators.CompoundValidator):
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
-                selection events. Note that, *scatter* traces
+                selection events. Note that, "scatter" traces
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
@@ -95,8 +95,9 @@ class SankeyValidator(_plotly_utils.basevalidators.CompoundValidator):
                 necessary from the value.
             visible
                 Determines whether or not this trace is
-                visible. If *legendonly*, the trace is not
+                visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
-                (provided that the legend itself is visible).""",
+                (provided that the legend itself is visible).
+""",
             **kwargs
         )

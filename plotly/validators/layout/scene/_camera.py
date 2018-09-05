@@ -26,6 +26,7 @@ class CameraValidator(_plotly_utils.basevalidators.CompoundValidator):
                 vector. This vector determines the up direction
                 of this scene with respect to the page. The
                 default is *{x: 0, y: 0, z: 1}* which means
-                that the z axis points up.""",
+                that the z axis points up.
+""",
             **kwargs
         )

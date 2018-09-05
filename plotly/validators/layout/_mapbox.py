@@ -28,13 +28,14 @@ class MapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 or dict with compatible properties
             pitch
                 Sets the pitch angle of the map (in degrees,
-                where *0* means perpendicular to the surface of
+                where 0 means perpendicular to the surface of
                 the map).
             style
                 Sets the Mapbox map style. Either input one of
                 the default Mapbox style names or the URL to a
                 custom style or a valid Mapbox style JSON.
             zoom
-                Sets the zoom level of the map.""",
+                Sets the zoom level of the map.
+""",
             **kwargs
         )

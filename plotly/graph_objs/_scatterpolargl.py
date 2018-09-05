@@ -32,7 +32,7 @@ class Scatterpolargl(BaseTraceType):
         """
         Assigns extra data each datum. This may be useful when
         listening to hover, click and selection events. Note that,
-        *scatter* traces also appends customdata items in the markers
+        "scatter" traces also appends customdata items in the markers
         DOM elements
     
         The 'customdata' property is an array that may be specified as a tuple,
@@ -116,17 +116,17 @@ class Scatterpolargl(BaseTraceType):
     def fill(self):
         """
         Sets the area to fill with a solid color. Use with `fillcolor`
-        if not *none*. *tozerox* and *tozeroy* fill to x=0 and y=0
-        respectively. *tonextx* and *tonexty* fill between the
+        if not "none". "tozerox" and "tozeroy" fill to x=0 and y=0
+        respectively. "tonextx" and "tonexty" fill between the
         endpoints of this trace and the endpoints of the trace before
         it, connecting those endpoints with straight lines (to make a
         stacked area graph); if there is no trace before it, they
-        behave like *tozerox* and *tozeroy*. *toself* connects the
+        behave like "tozerox" and "tozeroy". "toself" connects the
         endpoints of the trace (or each segment of the trace if it has
-        gaps) into a closed shape. *tonext* fills the space between two
+        gaps) into a closed shape. "tonext" fills the space between two
         traces if one completely encloses the other (eg consecutive
-        contour lines), and behaves like *toself* if there is no trace
-        before it. *tonext* should not be used if one trace does not
+        contour lines), and behaves like "toself" if there is no trace
+        before it. "tonext" should not be used if one trace does not
         enclose the other.
     
         The 'fill' property is an enumeration that may be specified as:
@@ -310,7 +310,7 @@ class Scatterpolargl(BaseTraceType):
         single string, the same string appears over all the data
         points. If an array of string, the items are mapped in order to
         the this trace's (x,y) coordinates. To be seen, trace
-        `hoverinfo` must contain a *text* flag.
+        `hoverinfo` must contain a "text" flag.
     
         The 'hovertext' property is a string and must be specified as:
           - A string
@@ -552,11 +552,11 @@ class Scatterpolargl(BaseTraceType):
                     .
                 symbol
                     Sets the marker symbol type. Adding 100 is
-                    equivalent to appending *-open* to a symbol
+                    equivalent to appending "-open" to a symbol
                     name. Adding 200 is equivalent to appending
-                    *-dot* to a symbol name. Adding 300 is
-                    equivalent to appending *-open-dot* or *dot-
-                    open* to a symbol name.
+                    "-dot" to a symbol name. Adding 300 is
+                    equivalent to appending "-open-dot" or "dot-
+                    open" to a symbol name.
                 symbolsrc
                     Sets the source reference on plot.ly for
                     symbol .
@@ -577,10 +577,10 @@ class Scatterpolargl(BaseTraceType):
     def mode(self):
         """
         Determines the drawing mode for this scatter trace. If the
-        provided `mode` includes *text* then the `text` elements appear
+        provided `mode` includes "text" then the `text` elements appear
         at the coordinates. Otherwise, the `text` elements appear on
         hover. If there are less than 20 points, then the default is
-        *lines+markers*. Otherwise, *lines*.
+        "lines+markers". Otherwise, "lines".
     
         The 'mode' property is a flaglist and may be specified
         as a string containing:
@@ -792,7 +792,7 @@ class Scatterpolargl(BaseTraceType):
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
-                    `maxpoints` is set to *50*, only the newest 50
+                    `maxpoints` is set to 50, only the newest 50
                     points will be displayed on the plot.
                 token
                     The stream id number links a data trace on a
@@ -815,8 +815,8 @@ class Scatterpolargl(BaseTraceType):
     def subplot(self):
         """
         Sets a reference between this trace's data coordinates and a
-        polar subplot. If *polar* (the default value), the data refer
-        to `layout.polar`. If *polar2*, the data refer to
+        polar subplot. If "polar" (the default value), the data refer
+        to `layout.polar`. If "polar2", the data refer to
         `layout.polar2`, and so on.
     
         The 'subplot' property is an identifier of a particular
@@ -843,7 +843,7 @@ class Scatterpolargl(BaseTraceType):
         string, the same string appears over all the data points. If an
         array of string, the items are mapped in order to the this
         trace's (x,y) coordinates. If trace `hoverinfo` contains a
-        *text* flag and *hovertext* is not set, these elements will be
+        "text" flag and "hovertext" is not set, these elements will be
         seen in the hover labels.
     
         The 'text' property is a string and must be specified as:
@@ -892,11 +892,11 @@ class Scatterpolargl(BaseTraceType):
                     system. The plotly service (at https://plot.ly
                     or on-premise) generates images on a server,
                     where only a select number of fonts are
-                    installed and supported. These include *Arial*,
-                    *Balto*, *Courier New*, *Droid Sans*,, *Droid
-                    Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
-                    Standard TT*, *Open Sans*, *Overpass*, *PT Sans
-                    Narrow*, *Raleway*, *Times New Roman*.
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
                 familysrc
                     Sets the source reference on plot.ly for
                     family .
@@ -1047,8 +1047,8 @@ class Scatterpolargl(BaseTraceType):
     @property
     def thetaunit(self):
         """
-        Sets the unit of input *theta* values. Has an effect only when
-        on *linear* angular axes.
+        Sets the unit of input "theta" values. Has an effect only when
+        on "linear" angular axes.
     
         The 'thetaunit' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -1120,7 +1120,7 @@ class Scatterpolargl(BaseTraceType):
     def visible(self):
         """
         Determines whether or not this trace is visible. If
-        *legendonly*, the trace is not drawn, but can appear as a
+        "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
     
         The 'visible' property is an enumeration that may be specified as:
@@ -1160,7 +1160,7 @@ class Scatterpolargl(BaseTraceType):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -1172,18 +1172,18 @@ class Scatterpolargl(BaseTraceType):
             the length of the `r` coordinates.
         fill
             Sets the area to fill with a solid color. Use with
-            `fillcolor` if not *none*. *tozerox* and *tozeroy* fill
-            to x=0 and y=0 respectively. *tonextx* and *tonexty*
+            `fillcolor` if not "none". "tozerox" and "tozeroy" fill
+            to x=0 and y=0 respectively. "tonextx" and "tonexty"
             fill between the endpoints of this trace and the
             endpoints of the trace before it, connecting those
             endpoints with straight lines (to make a stacked area
             graph); if there is no trace before it, they behave
-            like *tozerox* and *tozeroy*. *toself* connects the
+            like "tozerox" and "tozeroy". "toself" connects the
             endpoints of the trace (or each segment of the trace if
-            it has gaps) into a closed shape. *tonext* fills the
+            it has gaps) into a closed shape. "tonext" fills the
             space between two traces if one completely encloses the
             other (eg consecutive contour lines), and behaves like
-            *toself* if there is no trace before it. *tonext*
+            "toself" if there is no trace before it. "tonext"
             should not be used if one trace does not enclose the
             other.
         fillcolor
@@ -1206,7 +1206,7 @@ class Scatterpolargl(BaseTraceType):
             all the data points. If an array of string, the items
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
-            a *text* flag.
+            a "text" flag.
         hovertextsrc
             Sets the source reference on plot.ly for  hovertext .
         ids
@@ -1227,11 +1227,11 @@ class Scatterpolargl(BaseTraceType):
             dict with compatible properties
         mode
             Determines the drawing mode for this scatter trace. If
-            the provided `mode` includes *text* then the `text`
+            the provided `mode` includes "text" then the `text`
             elements appear at the coordinates. Otherwise, the
             `text` elements appear on hover. If there are less than
-            20 points, then the default is *lines+markers*.
-            Otherwise, *lines*.
+            20 points, then the default is "lines+markers".
+            Otherwise, "lines".
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -1263,16 +1263,16 @@ class Scatterpolargl(BaseTraceType):
             dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
-            and a polar subplot. If *polar* (the default value),
-            the data refer to `layout.polar`. If *polar2*, the data
+            and a polar subplot. If "polar" (the default value),
+            the data refer to `layout.polar`. If "polar2", the data
             refer to `layout.polar2`, and so on.
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the
             data points. If an array of string, the items are
             mapped in order to the this trace's (x,y) coordinates.
-            If trace `hoverinfo` contains a *text* flag and
-            *hovertext* is not set, these elements will be seen in
+            If trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
             the hover labels.
         textfont
             Sets the text font.
@@ -1293,8 +1293,8 @@ class Scatterpolargl(BaseTraceType):
         thetasrc
             Sets the source reference on plot.ly for  theta .
         thetaunit
-            Sets the unit of input *theta* values. Has an effect
-            only when on *linear* angular axes.
+            Sets the unit of input "theta" values. Has an effect
+            only when on "linear" angular axes.
         uid
 
         unselected
@@ -1302,7 +1302,7 @@ class Scatterpolargl(BaseTraceType):
             dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         """
@@ -1373,7 +1373,7 @@ class Scatterpolargl(BaseTraceType):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -1385,18 +1385,18 @@ class Scatterpolargl(BaseTraceType):
             the length of the `r` coordinates.
         fill
             Sets the area to fill with a solid color. Use with
-            `fillcolor` if not *none*. *tozerox* and *tozeroy* fill
-            to x=0 and y=0 respectively. *tonextx* and *tonexty*
+            `fillcolor` if not "none". "tozerox" and "tozeroy" fill
+            to x=0 and y=0 respectively. "tonextx" and "tonexty"
             fill between the endpoints of this trace and the
             endpoints of the trace before it, connecting those
             endpoints with straight lines (to make a stacked area
             graph); if there is no trace before it, they behave
-            like *tozerox* and *tozeroy*. *toself* connects the
+            like "tozerox" and "tozeroy". "toself" connects the
             endpoints of the trace (or each segment of the trace if
-            it has gaps) into a closed shape. *tonext* fills the
+            it has gaps) into a closed shape. "tonext" fills the
             space between two traces if one completely encloses the
             other (eg consecutive contour lines), and behaves like
-            *toself* if there is no trace before it. *tonext*
+            "toself" if there is no trace before it. "tonext"
             should not be used if one trace does not enclose the
             other.
         fillcolor
@@ -1419,7 +1419,7 @@ class Scatterpolargl(BaseTraceType):
             all the data points. If an array of string, the items
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
-            a *text* flag.
+            a "text" flag.
         hovertextsrc
             Sets the source reference on plot.ly for  hovertext .
         ids
@@ -1440,11 +1440,11 @@ class Scatterpolargl(BaseTraceType):
             dict with compatible properties
         mode
             Determines the drawing mode for this scatter trace. If
-            the provided `mode` includes *text* then the `text`
+            the provided `mode` includes "text" then the `text`
             elements appear at the coordinates. Otherwise, the
             `text` elements appear on hover. If there are less than
-            20 points, then the default is *lines+markers*.
-            Otherwise, *lines*.
+            20 points, then the default is "lines+markers".
+            Otherwise, "lines".
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -1476,16 +1476,16 @@ class Scatterpolargl(BaseTraceType):
             dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
-            and a polar subplot. If *polar* (the default value),
-            the data refer to `layout.polar`. If *polar2*, the data
+            and a polar subplot. If "polar" (the default value),
+            the data refer to `layout.polar`. If "polar2", the data
             refer to `layout.polar2`, and so on.
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the
             data points. If an array of string, the items are
             mapped in order to the this trace's (x,y) coordinates.
-            If trace `hoverinfo` contains a *text* flag and
-            *hovertext* is not set, these elements will be seen in
+            If trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
             the hover labels.
         textfont
             Sets the text font.
@@ -1506,8 +1506,8 @@ class Scatterpolargl(BaseTraceType):
         thetasrc
             Sets the source reference on plot.ly for  theta .
         thetaunit
-            Sets the unit of input *theta* values. Has an effect
-            only when on *linear* angular axes.
+            Sets the unit of input "theta" values. Has an effect
+            only when on "linear" angular axes.
         uid
 
         unselected
@@ -1515,7 +1515,7 @@ class Scatterpolargl(BaseTraceType):
             dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
 

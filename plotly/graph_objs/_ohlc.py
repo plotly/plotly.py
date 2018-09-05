@@ -51,7 +51,7 @@ class Ohlc(BaseTraceType):
         """
         Assigns extra data each datum. This may be useful when
         listening to hover, click and selection events. Note that,
-        *scatter* traces also appends customdata items in the markers
+        "scatter" traces also appends customdata items in the markers
         DOM elements
     
         The 'customdata' property is an array that may be specified as a tuple,
@@ -357,9 +357,9 @@ class Ohlc(BaseTraceType):
                 
                 dash
                     Sets the dash style of lines. Set to a dash
-                    type string (*solid*, *dot*, *dash*,
-                    *longdash*, *dashdot*, or *longdashdot*) or a
-                    dash length list in px (eg *5px,10px,2px,2px*).
+                    type string ("solid", "dot", "dash",
+                    "longdash", "dashdot", or "longdashdot") or a
+                    dash length list in px (eg "5px,10px,2px,2px").
                     Note that this style setting can also be set
                     per direction via `increasing.line.dash` and
                     `decreasing.line.dash`.
@@ -562,7 +562,7 @@ class Ohlc(BaseTraceType):
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
-                    `maxpoints` is set to *50*, only the newest 50
+                    `maxpoints` is set to 50, only the newest 50
                     points will be displayed on the plot.
                 token
                     The stream id number links a data trace on a
@@ -629,7 +629,7 @@ class Ohlc(BaseTraceType):
     @property
     def tickwidth(self):
         """
-        Sets the width of the open/close tick marks relative to the *x*
+        Sets the width of the open/close tick marks relative to the "x"
         minimal interval.
     
         The 'tickwidth' property is a number and may be specified as:
@@ -670,7 +670,7 @@ class Ohlc(BaseTraceType):
     def visible(self):
         """
         Determines whether or not this trace is visible. If
-        *legendonly*, the trace is not drawn, but can appear as a
+        "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
     
         The 'visible' property is an enumeration that may be specified as:
@@ -714,8 +714,8 @@ class Ohlc(BaseTraceType):
     def xaxis(self):
         """
         Sets a reference between this trace's x coordinates and a 2D
-        cartesian x axis. If *x* (the default value), the x coordinates
-        refer to `layout.xaxis`. If *x2*, the x coordinates refer to
+        cartesian x axis. If "x" (the default value), the x coordinates
+        refer to `layout.xaxis`. If "x2", the x coordinates refer to
         `layout.xaxis2`, and so on.
     
         The 'xaxis' property is an identifier of a particular
@@ -783,8 +783,8 @@ class Ohlc(BaseTraceType):
     def yaxis(self):
         """
         Sets a reference between this trace's y coordinates and a 2D
-        cartesian y axis. If *y* (the default value), the y coordinates
-        refer to `layout.yaxis`. If *y2*, the y coordinates refer to
+        cartesian y axis. If "y" (the default value), the y coordinates
+        refer to `layout.yaxis`. If "y2", the y coordinates refer to
         `layout.yaxis2`, and so on.
     
         The 'yaxis' property is an identifier of a particular
@@ -826,7 +826,7 @@ class Ohlc(BaseTraceType):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -898,12 +898,12 @@ class Ohlc(BaseTraceType):
             Sets the source reference on plot.ly for  text .
         tickwidth
             Sets the width of the open/close tick marks relative to
-            the *x* minimal interval.
+            the "x" minimal interval.
         uid
 
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         x
@@ -911,8 +911,8 @@ class Ohlc(BaseTraceType):
             will be generated.
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
@@ -920,8 +920,8 @@ class Ohlc(BaseTraceType):
             Sets the source reference on plot.ly for  x .
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         """
 
@@ -988,7 +988,7 @@ class Ohlc(BaseTraceType):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -1060,12 +1060,12 @@ class Ohlc(BaseTraceType):
             Sets the source reference on plot.ly for  text .
         tickwidth
             Sets the width of the open/close tick marks relative to
-            the *x* minimal interval.
+            the "x" minimal interval.
         uid
 
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         x
@@ -1073,8 +1073,8 @@ class Ohlc(BaseTraceType):
             will be generated.
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
@@ -1082,8 +1082,8 @@ class Ohlc(BaseTraceType):
             Sets the source reference on plot.ly for  x .
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
 
         Returns

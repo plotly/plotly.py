@@ -19,10 +19,10 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
                 array are all positive, all negative or mixed.
             autocontour
                 Determines whether or not the contour level
-                attributes are picked by an algorithm. If
-                *true*, the number of contour levels can be set
-                in `ncontours`. If *false*, set the contour
-                level attributes in `contours`.
+                attributes are picked by an algorithm. If True,
+                the number of contour levels can be set in
+                `ncontours`. If False, set the contour level
+                attributes in `contours`.
             colorbar
                 plotly.graph_objs.contour.ColorBar instance or
                 dict with compatible properties
@@ -49,7 +49,7 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
-                selection events. Note that, *scatter* traces
+                selection events. Note that, "scatter" traces
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
@@ -63,7 +63,7 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
                 info.
             fillcolor
                 Sets the fill color if `contours.type` is
-                *constraint*. Defaults to a half-transparent
+                "constraint". Defaults to a half-transparent
                 variant of the line color, marker color, or
                 marker line color, whichever is available.
             hoverinfo
@@ -100,8 +100,8 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
                 actual number of contours will be chosen
                 automatically to be less than or equal to the
                 value of `ncontours`. Has an effect only if
-                `autocontour` is *true* or if `contours.size`
-                is missing.
+                `autocontour` is True or if `contours.size` is
+                missing.
             opacity
                 Sets the opacity of the trace.
             reversescale
@@ -139,7 +139,7 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
 
             visible
                 Determines whether or not this trace is
-                visible. If *legendonly*, the trace is not
+                visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
             x
@@ -150,9 +150,9 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
                 starting coordinate and `dx` the step.
             xaxis
                 Sets a reference between this trace's x
-                coordinates and a 2D cartesian x axis. If *x*
+                coordinates and a 2D cartesian x axis. If "x"
                 (the default value), the x coordinates refer to
-                `layout.xaxis`. If *x2*, the x coordinates
+                `layout.xaxis`. If "x2", the x coordinates
                 refer to `layout.xaxis2`, and so on.
             xcalendar
                 Sets the calendar system to use with `x` date
@@ -160,10 +160,10 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
             xsrc
                 Sets the source reference on plot.ly for  x .
             xtype
-                If *array*, the heatmap's x coordinates are
-                given by *x* (the default behavior when `x` is
-                provided). If *scaled*, the heatmap's x
-                coordinates are given by *x0* and *dx* (the
+                If "array", the heatmap's x coordinates are
+                given by "x" (the default behavior when `x` is
+                provided). If "scaled", the heatmap's x
+                coordinates are given by "x0" and "dx" (the
                 default behavior when `x` is not provided).
             y
                 Sets the y coordinates.
@@ -173,9 +173,9 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
                 starting coordinate and `dy` the step.
             yaxis
                 Sets a reference between this trace's y
-                coordinates and a 2D cartesian y axis. If *y*
+                coordinates and a 2D cartesian y axis. If "y"
                 (the default value), the y coordinates refer to
-                `layout.yaxis`. If *y2*, the y coordinates
+                `layout.yaxis`. If "y2", the y coordinates
                 refer to `layout.yaxis2`, and so on.
             ycalendar
                 Sets the calendar system to use with `y` date
@@ -183,10 +183,10 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
             ysrc
                 Sets the source reference on plot.ly for  y .
             ytype
-                If *array*, the heatmap's y coordinates are
-                given by *y* (the default behavior when `y` is
-                provided) If *scaled*, the heatmap's y
-                coordinates are given by *y0* and *dy* (the
+                If "array", the heatmap's y coordinates are
+                given by "y" (the default behavior when `y` is
+                provided) If "scaled", the heatmap's y
+                coordinates are given by "y0" and "dy" (the
                 default behavior when `y` is not provided)
             z
                 Sets the z data.
@@ -211,6 +211,7 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
                 should have the same units as in `z` and if
                 set, `zmax` must be set as well.
             zsrc
-                Sets the source reference on plot.ly for  z .""",
+                Sets the source reference on plot.ly for  z .
+""",
             **kwargs
         )

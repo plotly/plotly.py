@@ -18,6 +18,7 @@ class BorderValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the stroke color. It accepts a specific
                 color. If the color is not fully opaque and
                 there are hundreds of thousands of points, it
-                may cause slower zooming and panning.""",
+                may cause slower zooming and panning.
+""",
             **kwargs
         )

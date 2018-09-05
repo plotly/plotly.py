@@ -24,12 +24,13 @@ class TitlefontValidator(_plotly_utils.basevalidators.CompoundValidator):
                 system. The plotly service (at https://plot.ly
                 or on-premise) generates images on a server,
                 where only a select number of fonts are
-                installed and supported. These include *Arial*,
-                *Balto*, *Courier New*, *Droid Sans*,, *Droid
-                Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
-                Standard TT*, *Open Sans*, *Overpass*, *PT Sans
-                Narrow*, *Raleway*, *Times New Roman*.
+                installed and supported. These include "Arial",
+                "Balto", "Courier New", "Droid Sans",, "Droid
+                Serif", "Droid Sans Mono", "Gravitas One", "Old
+                Standard TT", "Open Sans", "Overpass", "PT Sans
+                Narrow", "Raleway", "Times New Roman".
             size
+
 """,
             **kwargs
         )

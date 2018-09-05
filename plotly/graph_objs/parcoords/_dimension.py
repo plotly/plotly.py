@@ -185,7 +185,7 @@ class Dimension(BaseTraceHierarchyType):
     def ticktext(self):
         """
         Sets the text displayed at the ticks position via `tickvals`.
-        Only has an effect if `tickmode` is set to *array*. Used with
+        Only has an effect if `tickmode` is set to "array". Used with
         `tickvals`.
     
         The 'ticktext' property is an array that may be specified as a tuple,
@@ -227,7 +227,7 @@ class Dimension(BaseTraceHierarchyType):
     def tickvals(self):
         """
         Sets the values at which ticks on this axis appear. Only has an
-        effect if `tickmode` is set to *array*. Used with `ticktext`.
+        effect if `tickmode` is set to "array". Used with `ticktext`.
     
         The 'tickvals' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
@@ -381,12 +381,12 @@ class Dimension(BaseTraceHierarchyType):
         ticktext
             Sets the text displayed at the ticks position via
             `tickvals`. Only has an effect if `tickmode` is set to
-            *array*. Used with `tickvals`.
+            "array". Used with `tickvals`.
         ticktextsrc
             Sets the source reference on plot.ly for  ticktext .
         tickvals
             Sets the values at which ticks on this axis appear.
-            Only has an effect if `tickmode` is set to *array*.
+            Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
         tickvalssrc
             Sets the source reference on plot.ly for  tickvals .
@@ -477,12 +477,12 @@ class Dimension(BaseTraceHierarchyType):
         ticktext
             Sets the text displayed at the ticks position via
             `tickvals`. Only has an effect if `tickmode` is set to
-            *array*. Used with `tickvals`.
+            "array". Used with `tickvals`.
         ticktextsrc
             Sets the source reference on plot.ly for  ticktext .
         tickvals
             Sets the values at which ticks on this axis appear.
-            Only has an effect if `tickmode` is set to *array*.
+            Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
         tickvalssrc
             Sets the source reference on plot.ly for  tickvals .

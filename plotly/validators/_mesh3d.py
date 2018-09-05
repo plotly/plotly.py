@@ -15,7 +15,7 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 represented by the `x`, `y` and `z` arrays, if
                 the `i`, `j`, `k` arrays are not supplied. For
                 general use of `mesh3d` it is preferred that
-                `i`, `j`, `k` are supplied. If *-1*, Delaunay
+                `i`, `j`, `k` are supplied. If "-1", Delaunay
                 triangulation is used, which is mainly suitable
                 if the mesh is a single, more or less layer
                 surface that is perpendicular to
@@ -23,14 +23,14 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 intersects the mesh surface at more than one
                 point it will result triangles that are very
                 long in the dimension of `delaunayaxis`. If
-                *>0*, the alpha-shape algorithm is used. In
+                ">0", the alpha-shape algorithm is used. In
                 this case, the positive `alphahull` value
                 signals the use of the alpha-shape algorithm,
                 _and_ its value acts as the parameter for the
-                mesh fitting. If *0*,  the convex-hull
-                algorithm is used. It is suitable for convex
-                bodies or if the intention is to enclose the
-                `x`, `y` and `z` point set into a convex hull.
+                mesh fitting. If 0,  the convex-hull algorithm
+                is used. It is suitable for convex bodies or if
+                the intention is to enclose the `x`, `y` and
+                `z` point set into a convex hull.
             autocolorscale
                 Determines whether the colorscale is a default
                 palette (`autocolorscale: true`) or the palette
@@ -78,7 +78,7 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
-                selection events. Note that, *scatter* traces
+                selection events. Note that, "scatter" traces
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
@@ -91,8 +91,8 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `k` are not provided and `alphahull` is set to
                 indicate Delaunay triangulation.
             facecolor
-                Sets the color of each face Overrides *color*
-                and *vertexcolor*.
+                Sets the color of each face Overrides "color"
+                and "vertexcolor".
             facecolorsrc
                 Sets the source reference on plot.ly for
                 facecolor .
@@ -115,7 +115,7 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
             i
                 A vector of vertex indices, i.e. integer values
                 between 0 and the length of the vertex vectors,
-                representing the *first* vertex of a triangle.
+                representing the "first" vertex of a triangle.
                 For example, `{i[m], j[m], k[m]}` together
                 represent face m (triangle m) in the mesh,
                 where `i[m] = n` points to the triplet `{x[n],
@@ -140,7 +140,7 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
             j
                 A vector of vertex indices, i.e. integer values
                 between 0 and the length of the vertex vectors,
-                representing the *second* vertex of a triangle.
+                representing the "second" vertex of a triangle.
                 For example, `{i[m], j[m], k[m]}`  together
                 represent face m (triangle m) in the mesh,
                 where `j[m] = n` points to the triplet `{x[n],
@@ -153,7 +153,7 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
             k
                 A vector of vertex indices, i.e. integer values
                 between 0 and the length of the vertex vectors,
-                representing the *third* vertex of a triangle.
+                representing the "third" vertex of a triangle.
                 For example, `{i[m], j[m], k[m]}` together
                 represent face m (triangle m) in the mesh,
                 where `k[m] = n` points to the triplet  `{x[n],
@@ -184,9 +184,9 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color.
             scene
                 Sets a reference between this trace's 3D
-                coordinate system and a 3D scene. If *scene*
+                coordinate system and a 3D scene. If "scene"
                 (the default value), the (x,y,z) coordinates
-                refer to `layout.scene`. If *scene2*, the
+                refer to `layout.scene`. If "scene2", the
                 (x,y,z) coordinates refer to `layout.scene2`,
                 and so on.
             selectedpoints
@@ -210,7 +210,7 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
             text
                 Sets the text elements associated with the
                 vertices. If trace `hoverinfo` contains a
-                *text* flag and *hovertext* is not set, these
+                "text" flag and "hovertext" is not set, these
                 elements will be seen in the hover labels.
             textsrc
                 Sets the source reference on plot.ly for  text
@@ -219,13 +219,13 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
 
             vertexcolor
                 Sets the color of each vertex Overrides
-                *color*.
+                "color".
             vertexcolorsrc
                 Sets the source reference on plot.ly for
                 vertexcolor .
             visible
                 Determines whether or not this trace is
-                visible. If *legendonly*, the trace is not
+                visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
             x
@@ -257,6 +257,7 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the calendar system to use with `z` date
                 data.
             zsrc
-                Sets the source reference on plot.ly for  z .""",
+                Sets the source reference on plot.ly for  z .
+""",
             **kwargs
         )

@@ -85,6 +85,7 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
             showscale
                 Determines whether or not a colorbar is
                 displayed for this trace. Has an effect only if
-                in `marker.color`is set to a numerical array.""",
+                in `marker.color`is set to a numerical array.
+""",
             **kwargs
         )

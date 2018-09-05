@@ -29,6 +29,7 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 whole name if it is less than that many
                 characters, but if it is longer, will truncate
                 to `namelength - 3` characters and add an
-                ellipsis.""",
+                ellipsis.
+""",
             **kwargs
         )

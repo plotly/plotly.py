@@ -77,7 +77,7 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 opacity for scatter3d traces must be a scalar
                 value for performance reasons. To set a
                 blending opacity value (i.e. which is not
-                transparent), set *marker.color* to an rgba
+                transparent), set "marker.color" to an rgba
                 color and use its alpha channel.
             reversescale
                 Reverses the color mapping if true. Has an
@@ -112,6 +112,7 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the marker symbol type.
             symbolsrc
                 Sets the source reference on plot.ly for
-                symbol .""",
+                symbol .
+""",
             **kwargs
         )

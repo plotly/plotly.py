@@ -37,14 +37,14 @@ class RangeselectorValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not this range selector
                 is visible. Note that range selectors are only
                 available for x axes of `type` set to or auto-
-                typed to *date*.
+                typed to "date".
             x
                 Sets the x position (in normalized coordinates)
                 of the range selector.
             xanchor
                 Sets the range selector's horizontal position
                 anchor. This anchor binds the `x` position to
-                the *left*, *center* or *right* of the range
+                the "left", "center" or "right" of the range
                 selector.
             y
                 Sets the y position (in normalized coordinates)
@@ -52,7 +52,8 @@ class RangeselectorValidator(_plotly_utils.basevalidators.CompoundValidator):
             yanchor
                 Sets the range selector's vertical position
                 anchor This anchor binds the `y` position to
-                the *top*, *middle* or *bottom* of the range
-                selector.""",
+                the "top", "middle" or "bottom" of the range
+                selector.
+""",
             **kwargs
         )

@@ -19,7 +19,7 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
-                selection events. Note that, *scatter* traces
+                selection events. Note that, "scatter" traces
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
@@ -55,10 +55,10 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  ids .
             jitter
                 Sets the amount of jitter in the sample points
-                drawn. If *0*, the sample points align along
-                the distribution axis. If *1*, the sample
-                points are drawn in a random jitter of width
-                equal to the width of the violins.
+                drawn. If 0, the sample points align along the
+                distribution axis. If 1, the sample points are
+                drawn in a random jitter of width equal to the
+                width of the violins.
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -82,26 +82,26 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
             opacity
                 Sets the opacity of the trace.
             orientation
-                Sets the orientation of the violin(s). If *v*
-                (*h*), the distribution is visualized along the
+                Sets the orientation of the violin(s). If "v"
+                ("h"), the distribution is visualized along the
                 vertical (horizontal).
             pointpos
                 Sets the position of the sample points in
-                relation to the violins. If *0*, the sample
+                relation to the violins. If 0, the sample
                 points are places over the center of the
                 violins. Positive (negative) values correspond
                 to positions to the right (left) for vertical
                 violins and above (below) for horizontal
                 violins.
             points
-                If *outliers*, only the sample points lying
+                If "outliers", only the sample points lying
                 outside the whiskers are shown If
-                *suspectedoutliers*, the outlier points are
+                "suspectedoutliers", the outlier points are
                 shown and points either less than 4*Q1-3*Q3 or
                 greater than 4*Q3-3*Q1 are highlighted (see
-                `outliercolor`) If *all*, all sample points are
-                shown If *false*, only the violins are shown
-                with no sample points
+                `outliercolor`) If "all", all sample points are
+                shown If False, only the violins are shown with
+                no sample points
             scalegroup
                 If there are multiple violins that should be
                 sized according to to some metric (see
@@ -110,7 +110,7 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the same group.
             scalemode
                 Sets the metric by which the width of each
-                violin is determined.*width* means each violin
+                violin is determined."width" means each violin
                 has the same (max) width*count* means the
                 violins are scaled by the number of sample
                 points makingup each violin.
@@ -133,22 +133,22 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines on which side of the position value
                 the density function making up one half of a
                 violin is plotted. Useful when comparing two
-                violin traces under *overlay* mode, where one
-                trace has `side` set to *positive* and the
-                other to *negative*.
+                violin traces under "overlay" mode, where one
+                trace has `side` set to "positive" and the
+                other to "negative".
             span
                 Sets the span in data space for which the
                 density function will be computed. Has an
-                effect only when `spanmode` is set to *manual*.
+                effect only when `spanmode` is set to "manual".
             spanmode
                 Sets the method by which the span in data space
                 where the density function will be computed.
-                *soft* means the span goes from the sample's
+                "soft" means the span goes from the sample's
                 minimum value minus two bandwidths to the
                 sample's maximum value plus two bandwidths.
-                *hard* means the span goes from the sample's
+                "hard" means the span goes from the sample's
                 minimum to its maximum value. For custom span
-                settings, use mode *manual* and fill in the
+                settings, use mode "manual" and fill in the
                 `span` attribute.
             stream
                 plotly.graph_objs.violin.Stream instance or
@@ -159,7 +159,7 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 string appears over all the data points. If an
                 array of string, the items are mapped in order
                 to the this trace's (x,y) coordinates. To be
-                seen, trace `hoverinfo` must contain a *text*
+                seen, trace `hoverinfo` must contain a "text"
                 flag.
             textsrc
                 Sets the source reference on plot.ly for  text
@@ -171,7 +171,7 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 dict with compatible properties
             visible
                 Determines whether or not this trace is
-                visible. If *legendonly*, the trace is not
+                visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
             x
@@ -182,9 +182,9 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for more info.
             xaxis
                 Sets a reference between this trace's x
-                coordinates and a 2D cartesian x axis. If *x*
+                coordinates and a 2D cartesian x axis. If "x"
                 (the default value), the x coordinates refer to
-                `layout.xaxis`. If *x2*, the x coordinates
+                `layout.xaxis`. If "x2", the x coordinates
                 refer to `layout.xaxis2`, and so on.
             xsrc
                 Sets the source reference on plot.ly for  x .
@@ -196,11 +196,12 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for more info.
             yaxis
                 Sets a reference between this trace's y
-                coordinates and a 2D cartesian y axis. If *y*
+                coordinates and a 2D cartesian y axis. If "y"
                 (the default value), the y coordinates refer to
-                `layout.yaxis`. If *y2*, the y coordinates
+                `layout.yaxis`. If "y2", the y coordinates
                 refer to `layout.yaxis2`, and so on.
             ysrc
-                Sets the source reference on plot.ly for  y .""",
+                Sets the source reference on plot.ly for  y .
+""",
             **kwargs
         )

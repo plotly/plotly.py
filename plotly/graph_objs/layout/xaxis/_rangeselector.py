@@ -238,16 +238,16 @@ class Rangeselector(BaseLayoutHierarchyType):
                     The unit of measurement that the `count` value
                     will set the range by.
                 stepmode
-                    Sets the range update mode. If *backward*, the
+                    Sets the range update mode. If "backward", the
                     range update shifts the start of range back
-                    *count* times *step* milliseconds. If *todate*,
+                    "count" times "step" milliseconds. If "todate",
                     the range update shifts the start of range back
-                    to the first timestamp from *count* times
-                    *step* milliseconds back. For example, with
-                    `step` set to *year* and `count` set to *1* the
+                    to the first timestamp from "count" times
+                    "step" milliseconds back. For example, with
+                    `step` set to "year" and `count` set to 1 the
                     range update shifts the start of the range back
                     to January 01 of the current year. Month and
-                    year *todate* are currently available only for
+                    year "todate" are currently available only for
                     the built-in (Gregorian) calendar.
                 templateitemname
                     Used to refer to a named item in this array in
@@ -302,11 +302,11 @@ class Rangeselector(BaseLayoutHierarchyType):
                     system. The plotly service (at https://plot.ly
                     or on-premise) generates images on a server,
                     where only a select number of fonts are
-                    installed and supported. These include *Arial*,
-                    *Balto*, *Courier New*, *Droid Sans*,, *Droid
-                    Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
-                    Standard TT*, *Open Sans*, *Overpass*, *PT Sans
-                    Narrow*, *Raleway*, *Times New Roman*.
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
                 size
 
         Returns
@@ -326,7 +326,7 @@ class Rangeselector(BaseLayoutHierarchyType):
         """
         Determines whether or not this range selector is visible. Note
         that range selectors are only available for x axes of `type`
-        set to or auto-typed to *date*.
+        set to or auto-typed to "date".
     
         The 'visible' property must be specified as a bool
         (either True, or False)
@@ -368,8 +368,8 @@ class Rangeselector(BaseLayoutHierarchyType):
     def xanchor(self):
         """
         Sets the range selector's horizontal position anchor. This
-        anchor binds the `x` position to the *left*, *center* or
-        *right* of the range selector.
+        anchor binds the `x` position to the "left", "center" or
+        "right" of the range selector.
     
         The 'xanchor' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -412,7 +412,7 @@ class Rangeselector(BaseLayoutHierarchyType):
     def yanchor(self):
         """
         Sets the range selector's vertical position anchor This anchor
-        binds the `y` position to the *top*, *middle* or *bottom* of
+        binds the `y` position to the "top", "middle" or "bottom" of
         the range selector.
     
         The 'yanchor' property is an enumeration that may be specified as:
@@ -460,21 +460,21 @@ class Rangeselector(BaseLayoutHierarchyType):
         visible
             Determines whether or not this range selector is
             visible. Note that range selectors are only available
-            for x axes of `type` set to or auto-typed to *date*.
+            for x axes of `type` set to or auto-typed to "date".
         x
             Sets the x position (in normalized coordinates) of the
             range selector.
         xanchor
             Sets the range selector's horizontal position anchor.
-            This anchor binds the `x` position to the *left*,
-            *center* or *right* of the range selector.
+            This anchor binds the `x` position to the "left",
+            "center" or "right" of the range selector.
         y
             Sets the y position (in normalized coordinates) of the
             range selector.
         yanchor
             Sets the range selector's vertical position anchor This
-            anchor binds the `y` position to the *top*, *middle* or
-            *bottom* of the range selector.
+            anchor binds the `y` position to the "top", "middle" or
+            "bottom" of the range selector.
         """
 
     def __init__(
@@ -522,21 +522,21 @@ class Rangeselector(BaseLayoutHierarchyType):
         visible
             Determines whether or not this range selector is
             visible. Note that range selectors are only available
-            for x axes of `type` set to or auto-typed to *date*.
+            for x axes of `type` set to or auto-typed to "date".
         x
             Sets the x position (in normalized coordinates) of the
             range selector.
         xanchor
             Sets the range selector's horizontal position anchor.
-            This anchor binds the `x` position to the *left*,
-            *center* or *right* of the range selector.
+            This anchor binds the `x` position to the "left",
+            "center" or "right" of the range selector.
         y
             Sets the y position (in normalized coordinates) of the
             range selector.
         yanchor
             Sets the range selector's vertical position anchor This
-            anchor binds the `y` position to the *top*, *middle* or
-            *bottom* of the range selector.
+            anchor binds the `y` position to the "top", "middle" or
+            "bottom" of the range selector.
 
         Returns
         -------

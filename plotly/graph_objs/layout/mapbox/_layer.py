@@ -42,7 +42,7 @@ class Layer(BaseLayoutHierarchyType):
                 
                 radius
                     Sets the circle radius. Has an effect only when
-                    `type` is set to *circle*.
+                    `type` is set to "circle".
 
         Returns
         -------
@@ -59,10 +59,10 @@ class Layer(BaseLayoutHierarchyType):
     @property
     def color(self):
         """
-        Sets the primary layer color. If `type` is *circle*, color
-        corresponds to the circle color If `type` is *line*, color
-        corresponds to the line color If `type` is *fill*, color
-        corresponds to the fill color If `type` is *symbol*, color
+        Sets the primary layer color. If `type` is "circle", color
+        corresponds to the circle color If `type` is "line", color
+        corresponds to the line color If `type` is "fill", color
+        corresponds to the fill color If `type` is "symbol", color
         corresponds to the icon color
     
         The 'color' property is a color and may be specified as:
@@ -132,7 +132,7 @@ class Layer(BaseLayoutHierarchyType):
                 
                 outlinecolor
                     Sets the fill outline color. Has an effect only
-                    when `type` is set to *fill*.
+                    when `type` is set to "fill".
 
         Returns
         -------
@@ -159,7 +159,7 @@ class Layer(BaseLayoutHierarchyType):
                 
                 width
                     Sets the line width. Has an effect only when
-                    `type` is set to *line*.
+                    `type` is set to "line".
 
         Returns
         -------
@@ -224,8 +224,8 @@ class Layer(BaseLayoutHierarchyType):
     def source(self):
         """
         Sets the source data for this layer. Source can be either a
-        URL, a geojson object (with `sourcetype` set to *geojson*) or
-        an array of tile URLS (with `sourcetype` set to *vector*).
+        URL, a geojson object (with `sourcetype` set to "geojson") or
+        an array of tile URLS (with `sourcetype` set to "vector").
     
         The 'source' property accepts values of any type
 
@@ -245,7 +245,7 @@ class Layer(BaseLayoutHierarchyType):
     def sourcelayer(self):
         """
         Specifies the layer to use from a vector tile source. Required
-        for *vector* source type that supports multiple layers.
+        for "vector" source type that supports multiple layers.
     
         The 'sourcelayer' property is a string and must be specified as:
           - A string
@@ -266,8 +266,8 @@ class Layer(BaseLayoutHierarchyType):
     @property
     def sourcetype(self):
         """
-        Sets the source type for this layer. Support for *raster*,
-        *image* and *video* source types is coming soon.
+        Sets the source type for this layer. Support for "raster",
+        "image" and "video" source types is coming soon.
     
         The 'sourcetype' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -301,12 +301,12 @@ class Layer(BaseLayoutHierarchyType):
                     https://www.mapbox.com/maki-icons/
                 iconsize
                     Sets the symbol icon size. Has an effect only
-                    when `type` is set to *symbol*.
+                    when `type` is set to "symbol".
                 text
                     Sets the symbol text.
                 textfont
                     Sets the icon text font. Has an effect only
-                    when `type` is set to *symbol*.
+                    when `type` is set to "symbol".
                 textposition
                     Sets the positions of the `text` elements with
                     respects to the (x,y) coordinates.
@@ -354,8 +354,8 @@ class Layer(BaseLayoutHierarchyType):
     @property
     def type(self):
         """
-        Sets the layer type. Support for *raster*, *background* types
-        is coming soon. Note that *line* and *fill* are not compatible
+        Sets the layer type. Support for "raster", "background" types
+        is coming soon. Note that "line" and "fill" are not compatible
         with Point GeoJSON geometries.
     
         The 'type' property is an enumeration that may be specified as:
@@ -411,11 +411,11 @@ class Layer(BaseLayoutHierarchyType):
             plotly.graph_objs.layout.mapbox.layer.Circle instance
             or dict with compatible properties
         color
-            Sets the primary layer color. If `type` is *circle*,
+            Sets the primary layer color. If `type` is "circle",
             color corresponds to the circle color If `type` is
-            *line*, color corresponds to the line color If `type`
-            is *fill*, color corresponds to the fill color If
-            `type` is *symbol*, color corresponds to the icon color
+            "line", color corresponds to the line color If `type`
+            is "fill", color corresponds to the fill color If
+            `type` is "symbol", color corresponds to the icon color
         fill
             plotly.graph_objs.layout.mapbox.layer.Fill instance or
             dict with compatible properties
@@ -436,15 +436,15 @@ class Layer(BaseLayoutHierarchyType):
         source
             Sets the source data for this layer. Source can be
             either a URL, a geojson object (with `sourcetype` set
-            to *geojson*) or an array of tile URLS (with
-            `sourcetype` set to *vector*).
+            to "geojson") or an array of tile URLS (with
+            `sourcetype` set to "vector").
         sourcelayer
             Specifies the layer to use from a vector tile source.
-            Required for *vector* source type that supports
+            Required for "vector" source type that supports
             multiple layers.
         sourcetype
             Sets the source type for this layer. Support for
-            *raster*, *image* and *video* source types is coming
+            "raster", "image" and "video" source types is coming
             soon.
         symbol
             plotly.graph_objs.layout.mapbox.layer.Symbol instance
@@ -460,8 +460,8 @@ class Layer(BaseLayoutHierarchyType):
             matching item, this item will be hidden unless you
             explicitly show it with `visible: true`.
         type
-            Sets the layer type. Support for *raster*, *background*
-            types is coming soon. Note that *line* and *fill* are
+            Sets the layer type. Support for "raster", "background"
+            types is coming soon. Note that "line" and "fill" are
             not compatible with Point GeoJSON geometries.
         visible
             Determines whether this layer is displayed
@@ -502,11 +502,11 @@ class Layer(BaseLayoutHierarchyType):
             plotly.graph_objs.layout.mapbox.layer.Circle instance
             or dict with compatible properties
         color
-            Sets the primary layer color. If `type` is *circle*,
+            Sets the primary layer color. If `type` is "circle",
             color corresponds to the circle color If `type` is
-            *line*, color corresponds to the line color If `type`
-            is *fill*, color corresponds to the fill color If
-            `type` is *symbol*, color corresponds to the icon color
+            "line", color corresponds to the line color If `type`
+            is "fill", color corresponds to the fill color If
+            `type` is "symbol", color corresponds to the icon color
         fill
             plotly.graph_objs.layout.mapbox.layer.Fill instance or
             dict with compatible properties
@@ -527,15 +527,15 @@ class Layer(BaseLayoutHierarchyType):
         source
             Sets the source data for this layer. Source can be
             either a URL, a geojson object (with `sourcetype` set
-            to *geojson*) or an array of tile URLS (with
-            `sourcetype` set to *vector*).
+            to "geojson") or an array of tile URLS (with
+            `sourcetype` set to "vector").
         sourcelayer
             Specifies the layer to use from a vector tile source.
-            Required for *vector* source type that supports
+            Required for "vector" source type that supports
             multiple layers.
         sourcetype
             Sets the source type for this layer. Support for
-            *raster*, *image* and *video* source types is coming
+            "raster", "image" and "video" source types is coming
             soon.
         symbol
             plotly.graph_objs.layout.mapbox.layer.Symbol instance
@@ -551,8 +551,8 @@ class Layer(BaseLayoutHierarchyType):
             matching item, this item will be hidden unless you
             explicitly show it with `visible: true`.
         type
-            Sets the layer type. Support for *raster*, *background*
-            types is coming soon. Note that *line* and *fill* are
+            Sets the layer type. Support for "raster", "background"
+            types is coming soon. Note that "line" and "fill" are
             not compatible with Point GeoJSON geometries.
         visible
             Determines whether this layer is displayed

@@ -5,6 +5,7 @@ from collections import ChainMap
 from importlib import import_module
 from io import StringIO
 from typing import List
+import re
 
 from yapf.yapflib.yapf_api import FormatCode
 
@@ -130,6 +131,42 @@ def write_init_py(pkg_root, path_parts, import_pairs):
     # ----------
     filepath = opath.join(pkg_root, *path_parts, '__init__.py')
     format_and_write_source_py(init_source, filepath)
+
+
+def format_description(desc):
+
+    # Remove surrounding *s from numbers
+    desc = re.sub('(^|[\s(,.:])\*([\d.]+)\*([\s),.:]|$)', r'\1\2\3', desc)
+
+    # replace *true* with True
+    desc = desc.replace("*true*", "True")
+    desc = desc.replace("*false*", "False")
+
+    # Replace *word* with "word"
+    desc = re.sub('(^|[\s(,.:])\*(\S+)\*([\s),.:]|$)', r'\1"\2"\3', desc)
+
+    # Special case strings that don't satisfy regex above
+    other_strings = ['Courier New', 'Droid Sans', 'Droid Serif',
+                     'Droid Sans Mono', 'Gravitas One', 'Old Standard TT',
+                     'Open Sans', 'PT Sans Narrow', 'Times New Roman']
+
+    for s in other_strings:
+        desc = desc.replace("*%s*" % s, '"%s"' % s)
+
+    # Replace {array} with list
+    desc = desc.replace("an {array}", "a list")
+    desc = desc.replace("{array}", "list")
+
+    # Replace {arrays} with lists
+    desc = desc.replace("{arrays}", "lists")
+
+    # replace {2D array} with 2D list
+    desc = desc.replace("{2D array}", "2D list")
+
+    # replace {2D arrays} with 2D lists
+    desc = desc.replace("{2D arrays}", "2D lists")
+
+    return desc
 
 
 # Constants
@@ -412,7 +449,7 @@ class PlotlyNode:
             params['data_docs'] = (
                     '\"\"\"' +
                     self.get_constructor_params_docstring() +
-                    '\"\"\"')
+                    '\n\"\"\"')
         else:
             assert self.is_simple
 
@@ -936,7 +973,7 @@ class TraceNode(PlotlyNode):
         if isinstance(desc, list):
             desc = ''.join(desc)
 
-        return desc
+        return format_description(desc)
 
 
 class LayoutNode(PlotlyNode):
@@ -986,7 +1023,7 @@ class LayoutNode(PlotlyNode):
         desc = self.node_data.get('description', '')
         if isinstance(desc, list):
             desc = ''.join(desc)
-        return desc
+        return format_description(desc)
 
     # Raw data
     # --------
@@ -1036,7 +1073,7 @@ class FrameNode(PlotlyNode):
         desc = self.node_data.get('description', '')
         if isinstance(desc, list):
             desc = ''.join(desc)
-        return desc
+        return format_description(desc)
 
     # Raw data
     # --------

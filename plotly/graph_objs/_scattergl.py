@@ -32,7 +32,7 @@ class Scattergl(BaseTraceType):
         """
         Assigns extra data each datum. This may be useful when
         listening to hover, click and selection events. Note that,
-        *scatter* traces also appends customdata items in the markers
+        "scatter" traces also appends customdata items in the markers
         DOM elements
     
         The 'customdata' property is an array that may be specified as a tuple,
@@ -155,21 +155,21 @@ class Scattergl(BaseTraceType):
                     Determines the rule used to generate the error
                     bars. If *constant`, the bar lengths are of a
                     constant value. Set this constant in `value`.
-                    If *percent*, the bar lengths correspond to a
+                    If "percent", the bar lengths correspond to a
                     percentage of underlying data. Set this
-                    percentage in `value`. If *sqrt*, the bar
+                    percentage in `value`. If "sqrt", the bar
                     lengths correspond to the sqaure of the
-                    underlying data. If *array*, the bar lengths
+                    underlying data. If "array", the bar lengths
                     are set with data set `array`.
                 value
                     Sets the value of either the percentage (if
-                    `type` is set to *percent*) or the constant (if
-                    `type` is set to *constant*) corresponding to
+                    `type` is set to "percent") or the constant (if
+                    `type` is set to "constant") corresponding to
                     the lengths of the error bars.
                 valueminus
                     Sets the value of either the percentage (if
-                    `type` is set to *percent*) or the constant (if
-                    `type` is set to *constant*) corresponding to
+                    `type` is set to "percent") or the constant (if
+                    `type` is set to "constant") corresponding to
                     the lengths of the error bars in the bottom
                     (left) direction for vertical (horizontal) bars
                 visible
@@ -234,21 +234,21 @@ class Scattergl(BaseTraceType):
                     Determines the rule used to generate the error
                     bars. If *constant`, the bar lengths are of a
                     constant value. Set this constant in `value`.
-                    If *percent*, the bar lengths correspond to a
+                    If "percent", the bar lengths correspond to a
                     percentage of underlying data. Set this
-                    percentage in `value`. If *sqrt*, the bar
+                    percentage in `value`. If "sqrt", the bar
                     lengths correspond to the sqaure of the
-                    underlying data. If *array*, the bar lengths
+                    underlying data. If "array", the bar lengths
                     are set with data set `array`.
                 value
                     Sets the value of either the percentage (if
-                    `type` is set to *percent*) or the constant (if
-                    `type` is set to *constant*) corresponding to
+                    `type` is set to "percent") or the constant (if
+                    `type` is set to "constant") corresponding to
                     the lengths of the error bars.
                 valueminus
                     Sets the value of either the percentage (if
-                    `type` is set to *percent*) or the constant (if
-                    `type` is set to *constant*) corresponding to
+                    `type` is set to "percent") or the constant (if
+                    `type` is set to "constant") corresponding to
                     the lengths of the error bars in the bottom
                     (left) direction for vertical (horizontal) bars
                 visible
@@ -274,17 +274,17 @@ class Scattergl(BaseTraceType):
     def fill(self):
         """
         Sets the area to fill with a solid color. Use with `fillcolor`
-        if not *none*. *tozerox* and *tozeroy* fill to x=0 and y=0
-        respectively. *tonextx* and *tonexty* fill between the
+        if not "none". "tozerox" and "tozeroy" fill to x=0 and y=0
+        respectively. "tonextx" and "tonexty" fill between the
         endpoints of this trace and the endpoints of the trace before
         it, connecting those endpoints with straight lines (to make a
         stacked area graph); if there is no trace before it, they
-        behave like *tozerox* and *tozeroy*. *toself* connects the
+        behave like "tozerox" and "tozeroy". "toself" connects the
         endpoints of the trace (or each segment of the trace if it has
-        gaps) into a closed shape. *tonext* fills the space between two
+        gaps) into a closed shape. "tonext" fills the space between two
         traces if one completely encloses the other (eg consecutive
-        contour lines), and behaves like *toself* if there is no trace
-        before it. *tonext* should not be used if one trace does not
+        contour lines), and behaves like "toself" if there is no trace
+        before it. "tonext" should not be used if one trace does not
         enclose the other.
     
         The 'fill' property is an enumeration that may be specified as:
@@ -468,7 +468,7 @@ class Scattergl(BaseTraceType):
         single string, the same string appears over all the data
         points. If an array of string, the items are mapped in order to
         the this trace's (x,y) coordinates. To be seen, trace
-        `hoverinfo` must contain a *text* flag.
+        `hoverinfo` must contain a "text" flag.
     
         The 'hovertext' property is a string and must be specified as:
           - A string
@@ -710,11 +710,11 @@ class Scattergl(BaseTraceType):
                     .
                 symbol
                     Sets the marker symbol type. Adding 100 is
-                    equivalent to appending *-open* to a symbol
+                    equivalent to appending "-open" to a symbol
                     name. Adding 200 is equivalent to appending
-                    *-dot* to a symbol name. Adding 300 is
-                    equivalent to appending *-open-dot* or *dot-
-                    open* to a symbol name.
+                    "-dot" to a symbol name. Adding 300 is
+                    equivalent to appending "-open-dot" or "dot-
+                    open" to a symbol name.
                 symbolsrc
                     Sets the source reference on plot.ly for
                     symbol .
@@ -885,7 +885,7 @@ class Scattergl(BaseTraceType):
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
-                    `maxpoints` is set to *50*, only the newest 50
+                    `maxpoints` is set to 50, only the newest 50
                     points will be displayed on the plot.
                 token
                     The stream id number links a data trace on a
@@ -958,11 +958,11 @@ class Scattergl(BaseTraceType):
                     system. The plotly service (at https://plot.ly
                     or on-premise) generates images on a server,
                     where only a select number of fonts are
-                    installed and supported. These include *Arial*,
-                    *Balto*, *Courier New*, *Droid Sans*,, *Droid
-                    Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
-                    Standard TT*, *Open Sans*, *Overpass*, *PT Sans
-                    Narrow*, *Raleway*, *Times New Roman*.
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
                 familysrc
                     Sets the source reference on plot.ly for
                     family .
@@ -1102,7 +1102,7 @@ class Scattergl(BaseTraceType):
     def visible(self):
         """
         Determines whether or not this trace is visible. If
-        *legendonly*, the trace is not drawn, but can appear as a
+        "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
     
         The 'visible' property is an enumeration that may be specified as:
@@ -1166,8 +1166,8 @@ class Scattergl(BaseTraceType):
     def xaxis(self):
         """
         Sets a reference between this trace's x coordinates and a 2D
-        cartesian x axis. If *x* (the default value), the x coordinates
-        refer to `layout.xaxis`. If *x2*, the x coordinates refer to
+        cartesian x axis. If "x" (the default value), the x coordinates
+        refer to `layout.xaxis`. If "x2", the x coordinates refer to
         `layout.xaxis2`, and so on.
     
         The 'xaxis' property is an identifier of a particular
@@ -1276,8 +1276,8 @@ class Scattergl(BaseTraceType):
     def yaxis(self):
         """
         Sets a reference between this trace's y coordinates and a 2D
-        cartesian y axis. If *y* (the default value), the y coordinates
-        refer to `layout.yaxis`. If *y2*, the y coordinates refer to
+        cartesian y axis. If "y" (the default value), the y coordinates
+        refer to `layout.yaxis`. If "y2", the y coordinates refer to
         `layout.yaxis2`, and so on.
     
         The 'yaxis' property is an identifier of a particular
@@ -1362,7 +1362,7 @@ class Scattergl(BaseTraceType):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -1378,18 +1378,18 @@ class Scattergl(BaseTraceType):
             with compatible properties
         fill
             Sets the area to fill with a solid color. Use with
-            `fillcolor` if not *none*. *tozerox* and *tozeroy* fill
-            to x=0 and y=0 respectively. *tonextx* and *tonexty*
+            `fillcolor` if not "none". "tozerox" and "tozeroy" fill
+            to x=0 and y=0 respectively. "tonextx" and "tonexty"
             fill between the endpoints of this trace and the
             endpoints of the trace before it, connecting those
             endpoints with straight lines (to make a stacked area
             graph); if there is no trace before it, they behave
-            like *tozerox* and *tozeroy*. *toself* connects the
+            like "tozerox" and "tozeroy". "toself" connects the
             endpoints of the trace (or each segment of the trace if
-            it has gaps) into a closed shape. *tonext* fills the
+            it has gaps) into a closed shape. "tonext" fills the
             space between two traces if one completely encloses the
             other (eg consecutive contour lines), and behaves like
-            *toself* if there is no trace before it. *tonext*
+            "toself" if there is no trace before it. "tonext"
             should not be used if one trace does not enclose the
             other.
         fillcolor
@@ -1412,7 +1412,7 @@ class Scattergl(BaseTraceType):
             all the data points. If an array of string, the items
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
-            a *text* flag.
+            a "text" flag.
         hovertextsrc
             Sets the source reference on plot.ly for  hovertext .
         ids
@@ -1477,7 +1477,7 @@ class Scattergl(BaseTraceType):
             with compatible properties
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         x
@@ -1488,8 +1488,8 @@ class Scattergl(BaseTraceType):
             coordinate and `dx` the step.
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
@@ -1503,8 +1503,8 @@ class Scattergl(BaseTraceType):
             coordinate and `dy` the step.
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
@@ -1580,7 +1580,7 @@ class Scattergl(BaseTraceType):
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
-            that, *scatter* traces also appends customdata items in
+            that, "scatter" traces also appends customdata items in
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
@@ -1596,18 +1596,18 @@ class Scattergl(BaseTraceType):
             with compatible properties
         fill
             Sets the area to fill with a solid color. Use with
-            `fillcolor` if not *none*. *tozerox* and *tozeroy* fill
-            to x=0 and y=0 respectively. *tonextx* and *tonexty*
+            `fillcolor` if not "none". "tozerox" and "tozeroy" fill
+            to x=0 and y=0 respectively. "tonextx" and "tonexty"
             fill between the endpoints of this trace and the
             endpoints of the trace before it, connecting those
             endpoints with straight lines (to make a stacked area
             graph); if there is no trace before it, they behave
-            like *tozerox* and *tozeroy*. *toself* connects the
+            like "tozerox" and "tozeroy". "toself" connects the
             endpoints of the trace (or each segment of the trace if
-            it has gaps) into a closed shape. *tonext* fills the
+            it has gaps) into a closed shape. "tonext" fills the
             space between two traces if one completely encloses the
             other (eg consecutive contour lines), and behaves like
-            *toself* if there is no trace before it. *tonext*
+            "toself" if there is no trace before it. "tonext"
             should not be used if one trace does not enclose the
             other.
         fillcolor
@@ -1630,7 +1630,7 @@ class Scattergl(BaseTraceType):
             all the data points. If an array of string, the items
             are mapped in order to the this trace's (x,y)
             coordinates. To be seen, trace `hoverinfo` must contain
-            a *text* flag.
+            a "text" flag.
         hovertextsrc
             Sets the source reference on plot.ly for  hovertext .
         ids
@@ -1695,7 +1695,7 @@ class Scattergl(BaseTraceType):
             with compatible properties
         visible
             Determines whether or not this trace is visible. If
-            *legendonly*, the trace is not drawn, but can appear as
+            "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
         x
@@ -1706,8 +1706,8 @@ class Scattergl(BaseTraceType):
             coordinate and `dx` the step.
         xaxis
             Sets a reference between this trace's x coordinates and
-            a 2D cartesian x axis. If *x* (the default value), the
-            x coordinates refer to `layout.xaxis`. If *x2*, the x
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
@@ -1721,8 +1721,8 @@ class Scattergl(BaseTraceType):
             coordinate and `dy` the step.
         yaxis
             Sets a reference between this trace's y coordinates and
-            a 2D cartesian y axis. If *y* (the default value), the
-            y coordinates refer to `layout.yaxis`. If *y2*, the y
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
