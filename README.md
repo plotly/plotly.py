@@ -109,6 +109,12 @@ jupyter labextension install @jupyterlab/plotly-extension@0.17  --no-build
 
 # Build extensions (must be done to activate extensions since --no-build is used above)
 jupyter lab build
+
+# Unset NODE_OPTIONS environment variable
+# (OS X/Linux)
+unset NODE_OPTIONS
+# (Windows)
+set NODE_OPTIONS=
 ```
 
 ### Static Image Export
