@@ -128,6 +128,10 @@ constructor must be a dict or
 an instance of plotly.graph_objs.scatter3d.projection.Z"""
             )
 
+        # Handle skip_invalid
+        # -------------------
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+
         # Import validators
         # -----------------
         from plotly.validators.scatter3d.projection import (z as v_z)
@@ -150,3 +154,7 @@ an instance of plotly.graph_objs.scatter3d.projection.Z"""
         # Process unknown kwargs
         # ----------------------
         self._process_kwargs(**dict(arg, **kwargs))
+
+        # Reset skip_invalid
+        # ------------------
+        self._skip_invalid = False

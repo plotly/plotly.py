@@ -1869,18 +1869,21 @@ class CompoundValidator(BaseValidator):
 
         return desc
 
-    def validate_coerce(self, v):
+    def validate_coerce(self, v, skip_invalid=False):
         if v is None:
             v = self.data_class()
 
         elif isinstance(v, dict):
-            v = self.data_class(**v)
+            v = self.data_class(skip_invalid=skip_invalid, **v)
 
         elif isinstance(v, self.data_class):
             # Copy object
-            v = self.data_class(**v.to_plotly_json())
+            v = self.data_class(v)
         else:
-            self.raise_invalid_val(v)
+            if skip_invalid:
+                v = self.data_class()
+            else:
+                self.raise_invalid_val(v)
 
         v._plotly_name = self.plotly_name
         return v
@@ -1927,7 +1930,7 @@ class CompoundArrayValidator(BaseValidator):
 
         return self._data_class
 
-    def validate_coerce(self, v):
+    def validate_coerce(self, v, skip_invalid=False):
 
         if v is None:
             v = []
@@ -1937,19 +1940,26 @@ class CompoundArrayValidator(BaseValidator):
             invalid_els = []
             for v_el in v:
                 if isinstance(v_el, self.data_class):
-                    res.append(v_el)
+                    res.append(self.data_class(v_el))
                 elif isinstance(v_el, dict):
-                    res.append(self.data_class(**v_el))
+                    res.append(self.data_class(skip_invalid=skip_invalid,
+                                               **v_el))
                 else:
-                    res.append(None)
-                    invalid_els.append(v_el)
+                    if skip_invalid:
+                        res.append(self.data_class())
+                    else:
+                        res.append(None)
+                        invalid_els.append(v_el)
 
             if invalid_els:
                 self.raise_invalid_elements(invalid_els)
 
             v = to_scalar_or_list(res)
         else:
-            self.raise_invalid_val(v)
+            if skip_invalid:
+                v = []
+            else:
+                self.raise_invalid_val(v)
 
         return v
 
@@ -2011,7 +2021,7 @@ class BaseDataValidator(BaseValidator):
 
         return self._class_map
 
-    def validate_coerce(self, v):
+    def validate_coerce(self, v, skip_invalid=False):
 
         # Import Histogram2dcontour, this is the deprecated name of the
         # Histogram2dContour trace.
@@ -2041,14 +2051,26 @@ class BaseDataValidator(BaseValidator):
                         trace_type = 'scatter'
 
                     if trace_type not in self.class_map:
-                        res.append(None)
-                        invalid_els.append(v_el)
+                        if skip_invalid:
+                            # Treat as scatter trace
+                            trace = self.class_map['scatter'](
+                                skip_invalid=skip_invalid, **v_copy)
+                            res.append(trace)
+                        else:
+                            res.append(None)
+                            invalid_els.append(v_el)
                     else:
-                        trace = self.class_map[trace_type](**v_copy)
+                        trace = self.class_map[trace_type](
+                            skip_invalid=skip_invalid, **v_copy)
                         res.append(trace)
                 else:
-                    res.append(None)
-                    invalid_els.append(v_el)
+                    if skip_invalid:
+                        # Add empty scatter trace
+                        trace = self.class_map['scatter']()
+                        res.append(trace)
+                    else:
+                        res.append(None)
+                        invalid_els.append(v_el)
 
             if invalid_els:
                 self.raise_invalid_elements(invalid_els)
@@ -2061,6 +2083,9 @@ class BaseDataValidator(BaseValidator):
                     trace.uid = str(uuid.uuid1())
 
         else:
-            self.raise_invalid_val(v)
+            if skip_invalid:
+                v = []
+            else:
+                self.raise_invalid_val(v)
 
         return v

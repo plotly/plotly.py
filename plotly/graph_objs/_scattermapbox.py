@@ -1306,6 +1306,10 @@ constructor must be a dict or
 an instance of plotly.graph_objs.Scattermapbox"""
             )
 
+        # Handle skip_invalid
+        # -------------------
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+
         # Import validators
         # -----------------
         from plotly.validators import (scattermapbox as v_scattermapbox)
@@ -1438,3 +1442,7 @@ an instance of plotly.graph_objs.Scattermapbox"""
         # Process unknown kwargs
         # ----------------------
         self._process_kwargs(**dict(arg, **kwargs))
+
+        # Reset skip_invalid
+        # ------------------
+        self._skip_invalid = False

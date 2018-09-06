@@ -2202,6 +2202,11 @@ class BasePlotlyType(object):
         kwargs : dict
             Invalid props/values to raise on
         """
+        # ### _skip_invalid ##
+        # If True, then invalid properties should be skipped, if False then
+        # invalid properties will result in an exception
+        self._skip_invalid = False
+
         # Validate inputs
         # ---------------
         self._process_kwargs(**kwargs)
@@ -2252,7 +2257,8 @@ class BasePlotlyType(object):
         """
         Process any extra kwargs that are not predefined as constructor params
         """
-        self._raise_on_invalid_property_error(*kwargs.keys())
+        if not self._skip_invalid:
+            self._raise_on_invalid_property_error(*kwargs.keys())
 
     @property
     def plotly_name(self):
@@ -2903,7 +2909,13 @@ class BasePlotlyType(object):
         # Import value
         # ------------
         validator = self._validators.get(prop)
-        val = validator.validate_coerce(val)
+        try:
+            val = validator.validate_coerce(val)
+        except ValueError as err:
+            if self._skip_invalid:
+                return
+            else:
+                raise err
 
         # val is None
         # -----------
@@ -2962,7 +2974,7 @@ class BasePlotlyType(object):
         # ------------
         validator = self._validators.get(prop)
         # type: BasePlotlyType
-        val = validator.validate_coerce(val)
+        val = validator.validate_coerce(val, skip_invalid=self._skip_invalid)
 
         # Save deep copies of current and new states
         # ------------------------------------------
@@ -3036,7 +3048,7 @@ class BasePlotlyType(object):
         # ------------
         validator = self._validators.get(prop)
         # type: Tuple[BasePlotlyType]
-        val = validator.validate_coerce(val)
+        val = validator.validate_coerce(val, skip_invalid=self._skip_invalid)
 
         # Save deep copies of current and new states
         # ------------------------------------------

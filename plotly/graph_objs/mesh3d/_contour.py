@@ -160,6 +160,10 @@ constructor must be a dict or
 an instance of plotly.graph_objs.mesh3d.Contour"""
             )
 
+        # Handle skip_invalid
+        # -------------------
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+
         # Import validators
         # -----------------
         from plotly.validators.mesh3d import (contour as v_contour)
@@ -182,3 +186,7 @@ an instance of plotly.graph_objs.mesh3d.Contour"""
         # Process unknown kwargs
         # ----------------------
         self._process_kwargs(**dict(arg, **kwargs))
+
+        # Reset skip_invalid
+        # ------------------
+        self._skip_invalid = False
