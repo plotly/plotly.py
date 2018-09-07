@@ -39,7 +39,11 @@ class BaseFigure(object):
 
     # Constructor
     # -----------
-    def __init__(self, data=None, layout_plotly=None, frames=None):
+    def __init__(self,
+                 data=None,
+                 layout_plotly=None,
+                 frames=None,
+                 skip_invalid=False):
         """
         Construct a BaseFigure object
 
@@ -72,6 +76,17 @@ class BaseFigure(object):
 
             If the `data` property is a BaseFigure instance, or a dict that
             contains a 'frames' key, then this property is ignored.
+
+        skip_invalid: bool
+            If True, invalid properties in the figure specification will be
+            skipped silently. If False (default) invalid properties in the
+            figure specification will result in a ValueError
+
+        Raises
+        ------
+        ValueError
+            if a property in the specification of data, layout, or frames
+            is invalid AND skip_invalid is False
         """
         super(BaseFigure, self).__init__()
 
@@ -113,7 +128,8 @@ class BaseFigure(object):
         self._data_validator = DataValidator(set_uid=True)
 
         # ### Import traces ###
-        data = self._data_validator.validate_coerce(data)
+        data = self._data_validator.validate_coerce(data,
+                                                    skip_invalid=skip_invalid)
 
         # ### Save tuple of trace objects ###
         self._data_objs = data
@@ -154,7 +170,8 @@ class BaseFigure(object):
         self._layout_validator = LayoutValidator()
 
         # ### Import Layout ###
-        self._layout_obj = self._layout_validator.validate_coerce(layout)
+        self._layout_obj = self._layout_validator.validate_coerce(
+            layout, skip_invalid=skip_invalid)
 
         # ### Import clone of layout properties ###
         self._layout = deepcopy(self._layout_obj._props)
@@ -175,7 +192,8 @@ class BaseFigure(object):
         self._frames_validator = FramesValidator()
 
         # ### Import frames ###
-        self._frame_objs = self._frames_validator.validate_coerce(frames)
+        self._frame_objs = self._frames_validator.validate_coerce(
+            frames, skip_invalid=skip_invalid)
 
         # Note: Because frames are not currently supported in the widget
         # context, we don't need to follow the pattern above and create

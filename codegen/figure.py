@@ -67,7 +67,8 @@ class {fig_classname}({base_classname}):\n""")
     frames_description = reindent_validator_description(frame_validator, 8)
 
     buffer.write(f"""
-    def __init__(self, data=None, layout=None, frames=None):
+    def __init__(self, data=None, layout=None,
+                 frames=None, skip_invalid=False):
         \"\"\"
         Create a new {fig_classname} instance
         
@@ -75,12 +76,26 @@ class {fig_classname}({base_classname}):\n""")
         ----------
         data
             {data_description}
+            
         layout
             {layout_description}
+            
         frames
             {frames_description}
+            
+        skip_invalid: bool
+            If True, invalid properties in the figure specification will be
+            skipped silently. If False (default) invalid properties in the
+            figure specification will result in a ValueError
+
+        Raises
+        ------
+        ValueError
+            if a property in the specification of data, layout, or frames
+            is invalid AND skip_invalid is False
         \"\"\"
-        super({fig_classname} ,self).__init__(data, layout, frames)
+        super({fig_classname} ,self).__init__(data, layout,
+                                              frames, skip_invalid)
     """)
 
     # ### add_trace methods for each trace type ###
