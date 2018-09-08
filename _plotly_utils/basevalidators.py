@@ -75,14 +75,6 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
 
     assert np is not None
 
-    # Copy to numpy array and handle dtype param
-    # ------------------------------------------
-    # If dtype was not specified then it will be passed to the numpy array
-    # constructor as None and the data type will be inferred automatically
-
-    # TODO: support datetime dtype here and in widget serialization
-    # u: unsigned int, i: signed int, f: float
-
     # ### Process kind ###
     if not kind:
         kind = ()
@@ -91,25 +83,22 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
 
     first_kind = kind[0] if kind else None
 
+    # u: unsigned int, i: signed int, f: float
     numeric_kinds = {'u', 'i', 'f'}
     kind_default_dtypes = {
         'u': 'uint32', 'i': 'int32', 'f': 'float64', 'O': 'object'}
 
-    # Unwrap data types that have a `values` property that might be a numpy
-    # array. If this values property is a numeric numpy array then we
-    # can take the fast path below
-    #
-    # Use date_series.to_pydatetime()
-    #
+    # Handle pandas Series and Index objects
     if pd and isinstance(v, (pd.Series, pd.Index)):
         if v.dtype.kind in numeric_kinds:
             # Get the numeric numpy array so we use fast path below
             v = v.values
         elif v.dtype.kind == 'M':
-            # Convert datetime Series/Index to numpy array of datetime's
+            # Convert datetime Series/Index to numpy array of datetimes
             if isinstance(v, pd.Series):
                 v = v.dt.to_pydatetime()
             else:
+                # DatetimeIndex
                 v = v.to_pydatetime()
 
     if not isinstance(v, np.ndarray):
@@ -124,7 +113,7 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
     elif v.dtype.kind in numeric_kinds:
         # v is a homogenous numeric array
         if kind and v.dtype.kind not in kind:
-            # Kind(s) were specified and this array doens't match
+            # Kind(s) were specified and this array doesn't match
             # Convert to the default dtype for the first kind
             dtype = kind_default_dtypes.get(first_kind, None)
             new_v = np.ascontiguousarray(v.astype(dtype))
