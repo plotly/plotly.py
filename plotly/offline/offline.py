@@ -485,8 +485,20 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
             '</script>'
         ).format(id=plotdivid)
 
+    mathjax_path = ('https://cdnjs.cloudflare.com/ajax/libs/mathjax/'
+                    '2.7.5/MathJax.js')
     if output_type == 'file':
         with open(filename, 'w') as f:
+
+            include_mathjax = True
+
+            if include_mathjax:
+                mathjax_script = ''.join([
+                    '<script type="text/javascript"'
+                    'src="%s?config=TeX-AMS-MML_SVG">' % mathjax_path,
+                    '</script>',
+                ])
+
             if include_plotlyjs:
                 plotly_js_script = ''.join([
                     '<script type="text/javascript">',
@@ -516,6 +528,7 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                 '<html>',
                 '<head><meta charset="utf-8" /></head>',
                 '<body>',
+                mathjax_script,
                 plotly_js_script,
                 plot_html,
                 resize_script,
