@@ -84,7 +84,7 @@ class FigureTest(TestCase):
                                 ]))])
 
         expected = OrderedDict([('data', []),
-                                ('layout', {}),
+                                ('layout', OrderedDict()),
                                 ('frames', [OrderedDict(),
                                             expected_frame])])
 
