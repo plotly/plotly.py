@@ -1565,6 +1565,10 @@ constructor must be a dict or
 an instance of plotly.graph_objs.Violin"""
             )
 
+        # Handle skip_invalid
+        # -------------------
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+
         # Import validators
         # -----------------
         from plotly.validators import (violin as v_violin)
@@ -1715,3 +1719,7 @@ an instance of plotly.graph_objs.Violin"""
         # Process unknown kwargs
         # ----------------------
         self._process_kwargs(**dict(arg, **kwargs))
+
+        # Reset skip_invalid
+        # ------------------
+        self._skip_invalid = False

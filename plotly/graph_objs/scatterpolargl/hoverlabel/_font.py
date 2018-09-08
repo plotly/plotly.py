@@ -279,6 +279,10 @@ constructor must be a dict or
 an instance of plotly.graph_objs.scatterpolargl.hoverlabel.Font"""
             )
 
+        # Handle skip_invalid
+        # -------------------
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+
         # Import validators
         # -----------------
         from plotly.validators.scatterpolargl.hoverlabel import (
@@ -312,3 +316,7 @@ an instance of plotly.graph_objs.scatterpolargl.hoverlabel.Font"""
         # Process unknown kwargs
         # ----------------------
         self._process_kwargs(**dict(arg, **kwargs))
+
+        # Reset skip_invalid
+        # ------------------
+        self._skip_invalid = False

@@ -173,6 +173,10 @@ constructor must be a dict or
 an instance of plotly.graph_objs.violin.Meanline"""
             )
 
+        # Handle skip_invalid
+        # -------------------
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+
         # Import validators
         # -----------------
         from plotly.validators.violin import (meanline as v_meanline)
@@ -195,3 +199,7 @@ an instance of plotly.graph_objs.violin.Meanline"""
         # Process unknown kwargs
         # ----------------------
         self._process_kwargs(**dict(arg, **kwargs))
+
+        # Reset skip_invalid
+        # ------------------
+        self._skip_invalid = False

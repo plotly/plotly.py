@@ -402,6 +402,10 @@ constructor must be a dict or
 an instance of plotly.graph_objs.sankey.Link"""
             )
 
+        # Handle skip_invalid
+        # -------------------
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+
         # Import validators
         # -----------------
         from plotly.validators.sankey import (link as v_link)
@@ -448,3 +452,7 @@ an instance of plotly.graph_objs.sankey.Link"""
         # Process unknown kwargs
         # ----------------------
         self._process_kwargs(**dict(arg, **kwargs))
+
+        # Reset skip_invalid
+        # ------------------
+        self._skip_invalid = False

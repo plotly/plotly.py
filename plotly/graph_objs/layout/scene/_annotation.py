@@ -1380,6 +1380,10 @@ constructor must be a dict or
 an instance of plotly.graph_objs.layout.scene.Annotation"""
             )
 
+        # Handle skip_invalid
+        # -------------------
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+
         # Import validators
         # -----------------
         from plotly.validators.layout.scene import (annotation as v_annotation)
@@ -1509,3 +1513,7 @@ an instance of plotly.graph_objs.layout.scene.Annotation"""
         # Process unknown kwargs
         # ----------------------
         self._process_kwargs(**dict(arg, **kwargs))
+
+        # Reset skip_invalid
+        # ------------------
+        self._skip_invalid = False

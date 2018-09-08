@@ -89,3 +89,20 @@ def test_rejection_value(validator):
     assert ("Invalid property specified for object of type "
             "plotly.graph_objs.layout.Image" in
             str(validation_failure.value))
+
+
+def test_skip_invalid(validator):
+    val = [dict(opacity='bad_opacity',
+                x=23,
+                sizex=120),
+           dict(x=99,
+                bogus={'a': 23},
+                sizey=300)]
+
+    expected = [dict(x=23,
+                     sizex=120),
+                dict(x=99,
+                     sizey=300)]
+
+    res = validator.validate_coerce(val, skip_invalid=True)
+    assert [el.to_plotly_json() for el in res] == expected

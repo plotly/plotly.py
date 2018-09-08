@@ -39,7 +39,11 @@ class BaseFigure(object):
 
     # Constructor
     # -----------
-    def __init__(self, data=None, layout_plotly=None, frames=None):
+    def __init__(self,
+                 data=None,
+                 layout_plotly=None,
+                 frames=None,
+                 skip_invalid=False):
         """
         Construct a BaseFigure object
 
@@ -72,6 +76,17 @@ class BaseFigure(object):
 
             If the `data` property is a BaseFigure instance, or a dict that
             contains a 'frames' key, then this property is ignored.
+
+        skip_invalid: bool
+            If True, invalid properties in the figure specification will be
+            skipped silently. If False (default) invalid properties in the
+            figure specification will result in a ValueError
+
+        Raises
+        ------
+        ValueError
+            if a property in the specification of data, layout, or frames
+            is invalid AND skip_invalid is False
         """
         super(BaseFigure, self).__init__()
 
@@ -113,7 +128,8 @@ class BaseFigure(object):
         self._data_validator = DataValidator(set_uid=True)
 
         # ### Import traces ###
-        data = self._data_validator.validate_coerce(data)
+        data = self._data_validator.validate_coerce(data,
+                                                    skip_invalid=skip_invalid)
 
         # ### Save tuple of trace objects ###
         self._data_objs = data
@@ -154,7 +170,8 @@ class BaseFigure(object):
         self._layout_validator = LayoutValidator()
 
         # ### Import Layout ###
-        self._layout_obj = self._layout_validator.validate_coerce(layout)
+        self._layout_obj = self._layout_validator.validate_coerce(
+            layout, skip_invalid=skip_invalid)
 
         # ### Import clone of layout properties ###
         self._layout = deepcopy(self._layout_obj._props)
@@ -175,7 +192,8 @@ class BaseFigure(object):
         self._frames_validator = FramesValidator()
 
         # ### Import frames ###
-        self._frame_objs = self._frames_validator.validate_coerce(frames)
+        self._frame_objs = self._frames_validator.validate_coerce(
+            frames, skip_invalid=skip_invalid)
 
         # Note: Because frames are not currently supported in the widget
         # context, we don't need to follow the pattern above and create
@@ -2202,6 +2220,11 @@ class BasePlotlyType(object):
         kwargs : dict
             Invalid props/values to raise on
         """
+        # ### _skip_invalid ##
+        # If True, then invalid properties should be skipped, if False then
+        # invalid properties will result in an exception
+        self._skip_invalid = False
+
         # Validate inputs
         # ---------------
         self._process_kwargs(**kwargs)
@@ -2252,7 +2275,8 @@ class BasePlotlyType(object):
         """
         Process any extra kwargs that are not predefined as constructor params
         """
-        self._raise_on_invalid_property_error(*kwargs.keys())
+        if not self._skip_invalid:
+            self._raise_on_invalid_property_error(*kwargs.keys())
 
     @property
     def plotly_name(self):
@@ -2903,7 +2927,13 @@ class BasePlotlyType(object):
         # Import value
         # ------------
         validator = self._validators.get(prop)
-        val = validator.validate_coerce(val)
+        try:
+            val = validator.validate_coerce(val)
+        except ValueError as err:
+            if self._skip_invalid:
+                return
+            else:
+                raise err
 
         # val is None
         # -----------
@@ -2962,7 +2992,7 @@ class BasePlotlyType(object):
         # ------------
         validator = self._validators.get(prop)
         # type: BasePlotlyType
-        val = validator.validate_coerce(val)
+        val = validator.validate_coerce(val, skip_invalid=self._skip_invalid)
 
         # Save deep copies of current and new states
         # ------------------------------------------
@@ -3036,7 +3066,7 @@ class BasePlotlyType(object):
         # ------------
         validator = self._validators.get(prop)
         # type: Tuple[BasePlotlyType]
-        val = validator.validate_coerce(val)
+        val = validator.validate_coerce(val, skip_invalid=self._skip_invalid)
 
         # Save deep copies of current and new states
         # ------------------------------------------

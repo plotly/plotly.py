@@ -367,6 +367,10 @@ constructor must be a dict or
 an instance of plotly.graph_objs.scatterternary.Hoverlabel"""
             )
 
+        # Handle skip_invalid
+        # -------------------
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+
         # Import validators
         # -----------------
         from plotly.validators.scatterternary import (
@@ -405,3 +409,7 @@ an instance of plotly.graph_objs.scatterternary.Hoverlabel"""
         # Process unknown kwargs
         # ----------------------
         self._process_kwargs(**dict(arg, **kwargs))
+
+        # Reset skip_invalid
+        # ------------------
+        self._skip_invalid = False

@@ -142,6 +142,10 @@ constructor must be a dict or
 an instance of plotly.graph_objs.bar.unselected.Marker"""
             )
 
+        # Handle skip_invalid
+        # -------------------
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+
         # Import validators
         # -----------------
         from plotly.validators.bar.unselected import (marker as v_marker)
@@ -161,3 +165,7 @@ an instance of plotly.graph_objs.bar.unselected.Marker"""
         # Process unknown kwargs
         # ----------------------
         self._process_kwargs(**dict(arg, **kwargs))
+
+        # Reset skip_invalid
+        # ------------------
+        self._skip_invalid = False

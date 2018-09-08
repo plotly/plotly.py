@@ -119,6 +119,10 @@ constructor must be a dict or
 an instance of plotly.graph_objs.histogram2dcontour.XBins"""
             )
 
+        # Handle skip_invalid
+        # -------------------
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+
         # Import validators
         # -----------------
         from plotly.validators.histogram2dcontour import (xbins as v_xbins)
@@ -141,3 +145,7 @@ an instance of plotly.graph_objs.histogram2dcontour.XBins"""
         # Process unknown kwargs
         # ----------------------
         self._process_kwargs(**dict(arg, **kwargs))
+
+        # Reset skip_invalid
+        # ------------------
+        self._skip_invalid = False

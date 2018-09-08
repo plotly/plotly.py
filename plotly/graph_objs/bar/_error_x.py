@@ -527,6 +527,10 @@ constructor must be a dict or
 an instance of plotly.graph_objs.bar.ErrorX"""
             )
 
+        # Handle skip_invalid
+        # -------------------
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+
         # Import validators
         # -----------------
         from plotly.validators.bar import (error_x as v_error_x)
@@ -585,3 +589,7 @@ an instance of plotly.graph_objs.bar.ErrorX"""
         # Process unknown kwargs
         # ----------------------
         self._process_kwargs(**dict(arg, **kwargs))
+
+        # Reset skip_invalid
+        # ------------------
+        self._skip_invalid = False

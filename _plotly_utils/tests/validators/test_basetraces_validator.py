@@ -2,16 +2,26 @@ import pytest
 from _plotly_utils.basevalidators import BaseDataValidator
 from plotly.graph_objs import Scatter, Bar, Box
 
+
 # Fixtures
 # --------
 @pytest.fixture()
 def validator():
     return BaseDataValidator(class_strs_map={'scatter': 'Scatter',
-                                        'bar': 'Bar',
-                                        'box': 'Box'},
+                                             'bar': 'Bar',
+                                             'box': 'Box'},
                              plotly_name='prop',
                              parent_name='parent',
                              set_uid=True)
+
+@pytest.fixture()
+def validator_nouid():
+    return BaseDataValidator(class_strs_map={'scatter': 'Scatter',
+                                             'bar': 'Bar',
+                                             'box': 'Box'},
+                             plotly_name='prop',
+                             parent_name='parent',
+                             set_uid=False)
 
 
 # Tests
@@ -104,3 +114,30 @@ def test_rejection_element_tracetype(validator):
         validator.validate_coerce(val)
 
     assert "Invalid element(s)" in str(validation_failure.value)
+
+
+def test_skip_invalid(validator_nouid):
+    val = (dict(type='scatter',
+                mode='lines',
+                marker={'color': 'green',
+                        'bogus': 23},
+                line='bad_value'),
+           dict(type='box',
+                fillcolor='yellow',
+                bogus=111),
+           dict(type='bogus',
+                mode='lines+markers',
+                x=[2, 1, 3]))
+
+    expected = [dict(type='scatter',
+                     mode='lines',
+                     marker={'color': 'green'}),
+                dict(type='box',
+                     fillcolor='yellow'),
+                dict(type='scatter',
+                     mode='lines+markers',
+                     x=[2, 1, 3])]
+
+    res = validator_nouid.validate_coerce(val, skip_invalid=True)
+
+    assert [el.to_plotly_json() for el in res] == expected
