@@ -530,33 +530,33 @@ an instance of plotly.graph_objs.table.Header"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('align', None)
-        self.align = align if align is not None else _v
+        self['align'] = align if align is not None else _v
         _v = arg.pop('alignsrc', None)
-        self.alignsrc = alignsrc if alignsrc is not None else _v
+        self['alignsrc'] = alignsrc if alignsrc is not None else _v
         _v = arg.pop('fill', None)
-        self.fill = fill if fill is not None else _v
+        self['fill'] = fill if fill is not None else _v
         _v = arg.pop('font', None)
-        self.font = font if font is not None else _v
+        self['font'] = font if font is not None else _v
         _v = arg.pop('format', None)
-        self.format = format if format is not None else _v
+        self['format'] = format if format is not None else _v
         _v = arg.pop('formatsrc', None)
-        self.formatsrc = formatsrc if formatsrc is not None else _v
+        self['formatsrc'] = formatsrc if formatsrc is not None else _v
         _v = arg.pop('height', None)
-        self.height = height if height is not None else _v
+        self['height'] = height if height is not None else _v
         _v = arg.pop('line', None)
-        self.line = line if line is not None else _v
+        self['line'] = line if line is not None else _v
         _v = arg.pop('prefix', None)
-        self.prefix = prefix if prefix is not None else _v
+        self['prefix'] = prefix if prefix is not None else _v
         _v = arg.pop('prefixsrc', None)
-        self.prefixsrc = prefixsrc if prefixsrc is not None else _v
+        self['prefixsrc'] = prefixsrc if prefixsrc is not None else _v
         _v = arg.pop('suffix', None)
-        self.suffix = suffix if suffix is not None else _v
+        self['suffix'] = suffix if suffix is not None else _v
         _v = arg.pop('suffixsrc', None)
-        self.suffixsrc = suffixsrc if suffixsrc is not None else _v
+        self['suffixsrc'] = suffixsrc if suffixsrc is not None else _v
         _v = arg.pop('values', None)
-        self.values = values if values is not None else _v
+        self['values'] = values if values is not None else _v
         _v = arg.pop('valuessrc', None)
-        self.valuessrc = valuessrc if valuessrc is not None else _v
+        self['valuessrc'] = valuessrc if valuessrc is not None else _v
 
         # Process unknown kwargs
         # ----------------------

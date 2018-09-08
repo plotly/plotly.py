@@ -396,21 +396,21 @@ an instance of plotly.graph_objs.layout.Mapbox"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('accesstoken', None)
-        self.accesstoken = accesstoken if accesstoken is not None else _v
+        self['accesstoken'] = accesstoken if accesstoken is not None else _v
         _v = arg.pop('bearing', None)
-        self.bearing = bearing if bearing is not None else _v
+        self['bearing'] = bearing if bearing is not None else _v
         _v = arg.pop('center', None)
-        self.center = center if center is not None else _v
+        self['center'] = center if center is not None else _v
         _v = arg.pop('domain', None)
-        self.domain = domain if domain is not None else _v
+        self['domain'] = domain if domain is not None else _v
         _v = arg.pop('layers', None)
-        self.layers = layers if layers is not None else _v
+        self['layers'] = layers if layers is not None else _v
         _v = arg.pop('pitch', None)
-        self.pitch = pitch if pitch is not None else _v
+        self['pitch'] = pitch if pitch is not None else _v
         _v = arg.pop('style', None)
-        self.style = style if style is not None else _v
+        self['style'] = style if style is not None else _v
         _v = arg.pop('zoom', None)
-        self.zoom = zoom if zoom is not None else _v
+        self['zoom'] = zoom if zoom is not None else _v
 
         # Process unknown kwargs
         # ----------------------

@@ -145,11 +145,11 @@ an instance of plotly.graph_objs.scatter3d.projection.X"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('opacity', None)
-        self.opacity = opacity if opacity is not None else _v
+        self['opacity'] = opacity if opacity is not None else _v
         _v = arg.pop('scale', None)
-        self.scale = scale if scale is not None else _v
+        self['scale'] = scale if scale is not None else _v
         _v = arg.pop('show', None)
-        self.show = show if show is not None else _v
+        self['show'] = show if show is not None else _v
 
         # Process unknown kwargs
         # ----------------------

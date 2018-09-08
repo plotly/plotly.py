@@ -295,13 +295,13 @@ an instance of plotly.graph_objs.layout.Hoverlabel"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('bgcolor', None)
-        self.bgcolor = bgcolor if bgcolor is not None else _v
+        self['bgcolor'] = bgcolor if bgcolor is not None else _v
         _v = arg.pop('bordercolor', None)
-        self.bordercolor = bordercolor if bordercolor is not None else _v
+        self['bordercolor'] = bordercolor if bordercolor is not None else _v
         _v = arg.pop('font', None)
-        self.font = font if font is not None else _v
+        self['font'] = font if font is not None else _v
         _v = arg.pop('namelength', None)
-        self.namelength = namelength if namelength is not None else _v
+        self['namelength'] = namelength if namelength is not None else _v
 
         # Process unknown kwargs
         # ----------------------

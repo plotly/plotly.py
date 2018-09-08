@@ -1298,63 +1298,67 @@ an instance of plotly.graph_objs.layout.Geo"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('bgcolor', None)
-        self.bgcolor = bgcolor if bgcolor is not None else _v
+        self['bgcolor'] = bgcolor if bgcolor is not None else _v
         _v = arg.pop('center', None)
-        self.center = center if center is not None else _v
+        self['center'] = center if center is not None else _v
         _v = arg.pop('coastlinecolor', None)
-        self.coastlinecolor = coastlinecolor if coastlinecolor is not None else _v
+        self['coastlinecolor'
+            ] = coastlinecolor if coastlinecolor is not None else _v
         _v = arg.pop('coastlinewidth', None)
-        self.coastlinewidth = coastlinewidth if coastlinewidth is not None else _v
+        self['coastlinewidth'
+            ] = coastlinewidth if coastlinewidth is not None else _v
         _v = arg.pop('countrycolor', None)
-        self.countrycolor = countrycolor if countrycolor is not None else _v
+        self['countrycolor'] = countrycolor if countrycolor is not None else _v
         _v = arg.pop('countrywidth', None)
-        self.countrywidth = countrywidth if countrywidth is not None else _v
+        self['countrywidth'] = countrywidth if countrywidth is not None else _v
         _v = arg.pop('domain', None)
-        self.domain = domain if domain is not None else _v
+        self['domain'] = domain if domain is not None else _v
         _v = arg.pop('framecolor', None)
-        self.framecolor = framecolor if framecolor is not None else _v
+        self['framecolor'] = framecolor if framecolor is not None else _v
         _v = arg.pop('framewidth', None)
-        self.framewidth = framewidth if framewidth is not None else _v
+        self['framewidth'] = framewidth if framewidth is not None else _v
         _v = arg.pop('lakecolor', None)
-        self.lakecolor = lakecolor if lakecolor is not None else _v
+        self['lakecolor'] = lakecolor if lakecolor is not None else _v
         _v = arg.pop('landcolor', None)
-        self.landcolor = landcolor if landcolor is not None else _v
+        self['landcolor'] = landcolor if landcolor is not None else _v
         _v = arg.pop('lataxis', None)
-        self.lataxis = lataxis if lataxis is not None else _v
+        self['lataxis'] = lataxis if lataxis is not None else _v
         _v = arg.pop('lonaxis', None)
-        self.lonaxis = lonaxis if lonaxis is not None else _v
+        self['lonaxis'] = lonaxis if lonaxis is not None else _v
         _v = arg.pop('oceancolor', None)
-        self.oceancolor = oceancolor if oceancolor is not None else _v
+        self['oceancolor'] = oceancolor if oceancolor is not None else _v
         _v = arg.pop('projection', None)
-        self.projection = projection if projection is not None else _v
+        self['projection'] = projection if projection is not None else _v
         _v = arg.pop('resolution', None)
-        self.resolution = resolution if resolution is not None else _v
+        self['resolution'] = resolution if resolution is not None else _v
         _v = arg.pop('rivercolor', None)
-        self.rivercolor = rivercolor if rivercolor is not None else _v
+        self['rivercolor'] = rivercolor if rivercolor is not None else _v
         _v = arg.pop('riverwidth', None)
-        self.riverwidth = riverwidth if riverwidth is not None else _v
+        self['riverwidth'] = riverwidth if riverwidth is not None else _v
         _v = arg.pop('scope', None)
-        self.scope = scope if scope is not None else _v
+        self['scope'] = scope if scope is not None else _v
         _v = arg.pop('showcoastlines', None)
-        self.showcoastlines = showcoastlines if showcoastlines is not None else _v
+        self['showcoastlines'
+            ] = showcoastlines if showcoastlines is not None else _v
         _v = arg.pop('showcountries', None)
-        self.showcountries = showcountries if showcountries is not None else _v
+        self['showcountries'
+            ] = showcountries if showcountries is not None else _v
         _v = arg.pop('showframe', None)
-        self.showframe = showframe if showframe is not None else _v
+        self['showframe'] = showframe if showframe is not None else _v
         _v = arg.pop('showlakes', None)
-        self.showlakes = showlakes if showlakes is not None else _v
+        self['showlakes'] = showlakes if showlakes is not None else _v
         _v = arg.pop('showland', None)
-        self.showland = showland if showland is not None else _v
+        self['showland'] = showland if showland is not None else _v
         _v = arg.pop('showocean', None)
-        self.showocean = showocean if showocean is not None else _v
+        self['showocean'] = showocean if showocean is not None else _v
         _v = arg.pop('showrivers', None)
-        self.showrivers = showrivers if showrivers is not None else _v
+        self['showrivers'] = showrivers if showrivers is not None else _v
         _v = arg.pop('showsubunits', None)
-        self.showsubunits = showsubunits if showsubunits is not None else _v
+        self['showsubunits'] = showsubunits if showsubunits is not None else _v
         _v = arg.pop('subunitcolor', None)
-        self.subunitcolor = subunitcolor if subunitcolor is not None else _v
+        self['subunitcolor'] = subunitcolor if subunitcolor is not None else _v
         _v = arg.pop('subunitwidth', None)
-        self.subunitwidth = subunitwidth if subunitwidth is not None else _v
+        self['subunitwidth'] = subunitwidth if subunitwidth is not None else _v
 
         # Process unknown kwargs
         # ----------------------

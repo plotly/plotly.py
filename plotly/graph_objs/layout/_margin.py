@@ -224,17 +224,17 @@ an instance of plotly.graph_objs.layout.Margin"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('autoexpand', None)
-        self.autoexpand = autoexpand if autoexpand is not None else _v
+        self['autoexpand'] = autoexpand if autoexpand is not None else _v
         _v = arg.pop('b', None)
-        self.b = b if b is not None else _v
+        self['b'] = b if b is not None else _v
         _v = arg.pop('l', None)
-        self.l = l if l is not None else _v
+        self['l'] = l if l is not None else _v
         _v = arg.pop('pad', None)
-        self.pad = pad if pad is not None else _v
+        self['pad'] = pad if pad is not None else _v
         _v = arg.pop('r', None)
-        self.r = r if r is not None else _v
+        self['r'] = r if r is not None else _v
         _v = arg.pop('t', None)
-        self.t = t if t is not None else _v
+        self['t'] = t if t is not None else _v
 
         # Process unknown kwargs
         # ----------------------

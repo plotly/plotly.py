@@ -232,17 +232,17 @@ an instance of plotly.graph_objs.streamtube.Starts"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('x', None)
-        self.x = x if x is not None else _v
+        self['x'] = x if x is not None else _v
         _v = arg.pop('xsrc', None)
-        self.xsrc = xsrc if xsrc is not None else _v
+        self['xsrc'] = xsrc if xsrc is not None else _v
         _v = arg.pop('y', None)
-        self.y = y if y is not None else _v
+        self['y'] = y if y is not None else _v
         _v = arg.pop('ysrc', None)
-        self.ysrc = ysrc if ysrc is not None else _v
+        self['ysrc'] = ysrc if ysrc is not None else _v
         _v = arg.pop('z', None)
-        self.z = z if z is not None else _v
+        self['z'] = z if z is not None else _v
         _v = arg.pop('zsrc', None)
-        self.zsrc = zsrc if zsrc is not None else _v
+        self['zsrc'] = zsrc if zsrc is not None else _v
 
         # Process unknown kwargs
         # ----------------------

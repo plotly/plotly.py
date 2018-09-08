@@ -386,21 +386,23 @@ an instance of plotly.graph_objs.surface.contours.X"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('color', None)
-        self.color = color if color is not None else _v
+        self['color'] = color if color is not None else _v
         _v = arg.pop('highlight', None)
-        self.highlight = highlight if highlight is not None else _v
+        self['highlight'] = highlight if highlight is not None else _v
         _v = arg.pop('highlightcolor', None)
-        self.highlightcolor = highlightcolor if highlightcolor is not None else _v
+        self['highlightcolor'
+            ] = highlightcolor if highlightcolor is not None else _v
         _v = arg.pop('highlightwidth', None)
-        self.highlightwidth = highlightwidth if highlightwidth is not None else _v
+        self['highlightwidth'
+            ] = highlightwidth if highlightwidth is not None else _v
         _v = arg.pop('project', None)
-        self.project = project if project is not None else _v
+        self['project'] = project if project is not None else _v
         _v = arg.pop('show', None)
-        self.show = show if show is not None else _v
+        self['show'] = show if show is not None else _v
         _v = arg.pop('usecolormap', None)
-        self.usecolormap = usecolormap if usecolormap is not None else _v
+        self['usecolormap'] = usecolormap if usecolormap is not None else _v
         _v = arg.pop('width', None)
-        self.width = width if width is not None else _v
+        self['width'] = width if width is not None else _v
 
         # Process unknown kwargs
         # ----------------------

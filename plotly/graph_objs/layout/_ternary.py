@@ -866,17 +866,17 @@ an instance of plotly.graph_objs.layout.Ternary"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('aaxis', None)
-        self.aaxis = aaxis if aaxis is not None else _v
+        self['aaxis'] = aaxis if aaxis is not None else _v
         _v = arg.pop('baxis', None)
-        self.baxis = baxis if baxis is not None else _v
+        self['baxis'] = baxis if baxis is not None else _v
         _v = arg.pop('bgcolor', None)
-        self.bgcolor = bgcolor if bgcolor is not None else _v
+        self['bgcolor'] = bgcolor if bgcolor is not None else _v
         _v = arg.pop('caxis', None)
-        self.caxis = caxis if caxis is not None else _v
+        self['caxis'] = caxis if caxis is not None else _v
         _v = arg.pop('domain', None)
-        self.domain = domain if domain is not None else _v
+        self['domain'] = domain if domain is not None else _v
         _v = arg.pop('sum', None)
-        self.sum = sum if sum is not None else _v
+        self['sum'] = sum if sum is not None else _v
 
         # Process unknown kwargs
         # ----------------------

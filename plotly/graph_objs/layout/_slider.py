@@ -1040,51 +1040,53 @@ an instance of plotly.graph_objs.layout.Slider"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('active', None)
-        self.active = active if active is not None else _v
+        self['active'] = active if active is not None else _v
         _v = arg.pop('activebgcolor', None)
-        self.activebgcolor = activebgcolor if activebgcolor is not None else _v
+        self['activebgcolor'
+            ] = activebgcolor if activebgcolor is not None else _v
         _v = arg.pop('bgcolor', None)
-        self.bgcolor = bgcolor if bgcolor is not None else _v
+        self['bgcolor'] = bgcolor if bgcolor is not None else _v
         _v = arg.pop('bordercolor', None)
-        self.bordercolor = bordercolor if bordercolor is not None else _v
+        self['bordercolor'] = bordercolor if bordercolor is not None else _v
         _v = arg.pop('borderwidth', None)
-        self.borderwidth = borderwidth if borderwidth is not None else _v
+        self['borderwidth'] = borderwidth if borderwidth is not None else _v
         _v = arg.pop('currentvalue', None)
-        self.currentvalue = currentvalue if currentvalue is not None else _v
+        self['currentvalue'] = currentvalue if currentvalue is not None else _v
         _v = arg.pop('font', None)
-        self.font = font if font is not None else _v
+        self['font'] = font if font is not None else _v
         _v = arg.pop('len', None)
-        self.len = len if len is not None else _v
+        self['len'] = len if len is not None else _v
         _v = arg.pop('lenmode', None)
-        self.lenmode = lenmode if lenmode is not None else _v
+        self['lenmode'] = lenmode if lenmode is not None else _v
         _v = arg.pop('minorticklen', None)
-        self.minorticklen = minorticklen if minorticklen is not None else _v
+        self['minorticklen'] = minorticklen if minorticklen is not None else _v
         _v = arg.pop('name', None)
-        self.name = name if name is not None else _v
+        self['name'] = name if name is not None else _v
         _v = arg.pop('pad', None)
-        self.pad = pad if pad is not None else _v
+        self['pad'] = pad if pad is not None else _v
         _v = arg.pop('steps', None)
-        self.steps = steps if steps is not None else _v
+        self['steps'] = steps if steps is not None else _v
         _v = arg.pop('templateitemname', None)
-        self.templateitemname = templateitemname if templateitemname is not None else _v
+        self['templateitemname'
+            ] = templateitemname if templateitemname is not None else _v
         _v = arg.pop('tickcolor', None)
-        self.tickcolor = tickcolor if tickcolor is not None else _v
+        self['tickcolor'] = tickcolor if tickcolor is not None else _v
         _v = arg.pop('ticklen', None)
-        self.ticklen = ticklen if ticklen is not None else _v
+        self['ticklen'] = ticklen if ticklen is not None else _v
         _v = arg.pop('tickwidth', None)
-        self.tickwidth = tickwidth if tickwidth is not None else _v
+        self['tickwidth'] = tickwidth if tickwidth is not None else _v
         _v = arg.pop('transition', None)
-        self.transition = transition if transition is not None else _v
+        self['transition'] = transition if transition is not None else _v
         _v = arg.pop('visible', None)
-        self.visible = visible if visible is not None else _v
+        self['visible'] = visible if visible is not None else _v
         _v = arg.pop('x', None)
-        self.x = x if x is not None else _v
+        self['x'] = x if x is not None else _v
         _v = arg.pop('xanchor', None)
-        self.xanchor = xanchor if xanchor is not None else _v
+        self['xanchor'] = xanchor if xanchor is not None else _v
         _v = arg.pop('y', None)
-        self.y = y if y is not None else _v
+        self['y'] = y if y is not None else _v
         _v = arg.pop('yanchor', None)
-        self.yanchor = yanchor if yanchor is not None else _v
+        self['yanchor'] = yanchor if yanchor is not None else _v
 
         # Process unknown kwargs
         # ----------------------

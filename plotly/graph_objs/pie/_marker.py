@@ -164,11 +164,11 @@ an instance of plotly.graph_objs.pie.Marker"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('colors', None)
-        self.colors = colors if colors is not None else _v
+        self['colors'] = colors if colors is not None else _v
         _v = arg.pop('colorssrc', None)
-        self.colorssrc = colorssrc if colorssrc is not None else _v
+        self['colorssrc'] = colorssrc if colorssrc is not None else _v
         _v = arg.pop('line', None)
-        self.line = line if line is not None else _v
+        self['line'] = line if line is not None else _v
 
         # Process unknown kwargs
         # ----------------------
