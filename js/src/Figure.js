@@ -4,6 +4,17 @@ var Plotly = require("plotly.js/dist/plotly");
 var PlotlyIndex = require("plotly.js/src/lib/index");
 var semver_range = "^" + require("../package.json").version;
 
+window.MathJax = {
+  jax: ["input/TeX","input/MathML","output/SVG", "output/PreviewHTML"],
+  extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js", "fast-preview.js", "AssistiveMML.js", "a11y/accessibility-menu.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+  }
+}
+
+var MathJax = require("mathjax");
+
+
 // Model
 // =====
 /**
@@ -701,6 +712,13 @@ var FigureView = widgets.DOMWidgetView.extend({
     perform_render: function() {
 
         var that = this;
+
+        // MathJax
+        console.log(['MathJax', MathJax, MathJax.isReady]);
+        // console.log(MathJax);
+        // console.log(MathJax.Config);
+        // MathJax.Hub.Config({ SVG: { font: "STIX-Web" }, displayAlign: "center" });
+        // MathJax.Hub.Queue(["setRenderer", MathJax.Hub, "SVG"]);
 
         // Wire up message property callbacks
         // ----------------------------------
