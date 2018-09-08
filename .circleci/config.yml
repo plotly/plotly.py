@@ -334,6 +334,7 @@ jobs:
       - run:
           name: Create packages
           command: .circleci/create_conda_packages.sh
+          no_output_timeout: 20m
       - store_artifacts:
           path: artifacts
 
@@ -348,6 +349,7 @@ jobs:
       - run:
           name: Create packages
           command: .circleci/create_conda_packages.sh
+          no_output_timeout: 20m
       - store_artifacts:
           path: artifacts
 
@@ -362,6 +364,7 @@ jobs:
       - run:
           name: Create packages
           command: .circleci/create_conda_packages.sh
+          no_output_timeout: 20m
       - store_artifacts:
           path: artifacts
 
@@ -376,6 +379,7 @@ jobs:
       - run:
           name: Create packages
           command: .circleci/create_conda_packages.sh
+          no_output_timeout: 20m
       - store_artifacts:
           path: artifacts
 
