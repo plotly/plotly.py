@@ -11,7 +11,9 @@ from plotly.graph_objs import (
 
 class FigureWidget(BaseFigureWidget):
 
-    def __init__(self, data=None, layout=None, frames=None):
+    def __init__(
+        self, data=None, layout=None, frames=None, skip_invalid=False
+    ):
         """
         Create a new FigureWidget instance
         
@@ -40,6 +42,7 @@ class FigureWidget(BaseFigureWidget):
                   the specified trace type
         
                 (e.g. [{'type': 'scatter', ...}, {'type': 'bar, ...}])
+            
         layout
             The 'layout' property is an instance of Layout
             that may be specified as:
@@ -300,6 +303,7 @@ class FigureWidget(BaseFigureWidget):
                     yaxis
                         plotly.graph_objs.layout.YAxis instance or dict
                         with compatible properties
+            
         frames
             The 'frames' property is a tuple of instances of
             Frame that may be specified as:
@@ -332,8 +336,19 @@ class FigureWidget(BaseFigureWidget):
                     traces
                         A list of trace indices that identify the
                         respective traces in the data attribute
+            
+        skip_invalid: bool
+            If True, invalid properties in the figure specification will be
+            skipped silently. If False (default) invalid properties in the
+            figure specification will result in a ValueError
+
+        Raises
+        ------
+        ValueError
+            if a property in the specification of data, layout, or frames
+            is invalid AND skip_invalid is False
         """
-        super(FigureWidget, self).__init__(data, layout, frames)
+        super(FigureWidget, self).__init__(data, layout, frames, skip_invalid)
 
     def add_area(
         self,

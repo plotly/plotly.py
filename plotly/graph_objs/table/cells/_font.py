@@ -276,6 +276,10 @@ constructor must be a dict or
 an instance of plotly.graph_objs.table.cells.Font"""
             )
 
+        # Handle skip_invalid
+        # -------------------
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+
         # Import validators
         # -----------------
         from plotly.validators.table.cells import (font as v_font)
@@ -307,3 +311,7 @@ an instance of plotly.graph_objs.table.cells.Font"""
         # Process unknown kwargs
         # ----------------------
         self._process_kwargs(**dict(arg, **kwargs))
+
+        # Reset skip_invalid
+        # ------------------
+        self._skip_invalid = False

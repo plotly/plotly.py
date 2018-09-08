@@ -1614,6 +1614,10 @@ constructor must be a dict or
 an instance of plotly.graph_objs.parcoords.line.ColorBar"""
             )
 
+        # Handle skip_invalid
+        # -------------------
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+
         # Import validators
         # -----------------
         from plotly.validators.parcoords.line import (colorbar as v_colorbar)
@@ -1759,3 +1763,7 @@ an instance of plotly.graph_objs.parcoords.line.ColorBar"""
         # Process unknown kwargs
         # ----------------------
         self._process_kwargs(**dict(arg, **kwargs))
+
+        # Reset skip_invalid
+        # ------------------
+        self._skip_invalid = False

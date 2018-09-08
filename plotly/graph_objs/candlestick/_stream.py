@@ -110,6 +110,10 @@ constructor must be a dict or
 an instance of plotly.graph_objs.candlestick.Stream"""
             )
 
+        # Handle skip_invalid
+        # -------------------
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+
         # Import validators
         # -----------------
         from plotly.validators.candlestick import (stream as v_stream)
@@ -129,3 +133,7 @@ an instance of plotly.graph_objs.candlestick.Stream"""
         # Process unknown kwargs
         # ----------------------
         self._process_kwargs(**dict(arg, **kwargs))
+
+        # Reset skip_invalid
+        # ------------------
+        self._skip_invalid = False

@@ -120,6 +120,10 @@ constructor must be a dict or
 an instance of plotly.graph_objs.layout.scene.camera.Up"""
             )
 
+        # Handle skip_invalid
+        # -------------------
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+
         # Import validators
         # -----------------
         from plotly.validators.layout.scene.camera import (up as v_up)
@@ -142,3 +146,7 @@ an instance of plotly.graph_objs.layout.scene.camera.Up"""
         # Process unknown kwargs
         # ----------------------
         self._process_kwargs(**dict(arg, **kwargs))
+
+        # Reset skip_invalid
+        # ------------------
+        self._skip_invalid = False

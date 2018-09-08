@@ -137,6 +137,10 @@ constructor must be a dict or
 an instance of plotly.graph_objs.candlestick.decreasing.Line"""
             )
 
+        # Handle skip_invalid
+        # -------------------
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+
         # Import validators
         # -----------------
         from plotly.validators.candlestick.decreasing import (line as v_line)
@@ -156,3 +160,7 @@ an instance of plotly.graph_objs.candlestick.decreasing.Line"""
         # Process unknown kwargs
         # ----------------------
         self._process_kwargs(**dict(arg, **kwargs))
+
+        # Reset skip_invalid
+        # ------------------
+        self._skip_invalid = False

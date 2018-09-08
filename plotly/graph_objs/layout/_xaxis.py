@@ -2718,6 +2718,10 @@ constructor must be a dict or
 an instance of plotly.graph_objs.layout.XAxis"""
             )
 
+        # Handle skip_invalid
+        # -------------------
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+
         # Import validators
         # -----------------
         from plotly.validators.layout import (xaxis as v_xaxis)
@@ -2936,3 +2940,7 @@ an instance of plotly.graph_objs.layout.XAxis"""
         # Process unknown kwargs
         # ----------------------
         self._process_kwargs(**dict(arg, **kwargs))
+
+        # Reset skip_invalid
+        # ------------------
+        self._skip_invalid = False

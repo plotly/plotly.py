@@ -221,6 +221,10 @@ The first argument to the {class_name}
 constructor must be a dict or 
 an instance of {class_name}\"\"\")
 
+        # Handle skip_invalid
+        # -------------------
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        
         # Import validators
         # -----------------
         from plotly.validators{node.parent_dotpath_str} import (
@@ -266,6 +270,10 @@ LiteralValidator(plotly_name='{lit_name}',\
         # Process unknown kwargs
         # ----------------------
         self._process_kwargs(**dict(arg, **kwargs))
+        
+        # Reset skip_invalid
+        # ------------------
+        self._skip_invalid = False
     """)
 
     # Return source string

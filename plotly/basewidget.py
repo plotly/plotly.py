@@ -116,7 +116,8 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
     def __init__(self,
                  data=None,
                  layout=None,
-                 frames=None):
+                 frames=None,
+                 skip_invalid=False):
 
         # Call superclass constructors
         # ----------------------------
@@ -125,7 +126,8 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         # ipywidgets class
         super(BaseFigureWidget, self).__init__(data=data,
                                                layout_plotly=layout,
-                                               frames=frames)
+                                               frames=frames,
+                                               skip_invalid=skip_invalid)
 
         # Validate Frames
         # ---------------
