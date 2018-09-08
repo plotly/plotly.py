@@ -2066,6 +2066,54 @@ Invalid property path '{key_path_str}' for layout
         """
         return self.to_dict()
 
+    @staticmethod
+    def _to_ordered_dict(d, skip_uid=False):
+        """
+        Static helper for converting dict or list to structure of ordered
+        dictionaries
+        """
+        if isinstance(d, dict):
+            # d is a dict
+            result = collections.OrderedDict()
+            for key in sorted(d.keys()):
+                if skip_uid and key == 'uid':
+                    continue
+                else:
+                    result[key] = BaseFigure._to_ordered_dict(
+                        d[key], skip_uid=skip_uid)
+
+        elif isinstance(d, list) and d and isinstance(d[0], dict):
+            # d is a list of dicts
+            result = [BaseFigure._to_ordered_dict(el, skip_uid=skip_uid)
+                      for el in d]
+        else:
+            result = d
+
+        return result
+
+    def to_ordered_dict(self, skip_uid=True):
+
+        # Initialize resulting OrderedDict
+        # --------------------------------
+        result = collections.OrderedDict()
+
+        # Handle data
+        # -----------
+        result['data'] = BaseFigure._to_ordered_dict(self._data,
+                                                     skip_uid=skip_uid)
+
+        # Handle layout
+        # -------------
+        result['layout'] = BaseFigure._to_ordered_dict(self._layout)
+
+        # Handle frames
+        # -------------
+        if self._frame_objs:
+            frames_props = [frame._props for frame in self._frame_objs]
+            result['frames'] = BaseFigure._to_ordered_dict(frames_props)
+
+        return result
+
     # Static helpers
     # --------------
     @staticmethod
