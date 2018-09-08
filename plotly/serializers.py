@@ -2,6 +2,7 @@ from .basedatatypes import Undefined
 from .optional_imports import get_module
 np = get_module('numpy')
 
+
 def _py_to_js(v, widget_manager):
     """
     Python -> Javascript ipywidget serializer
@@ -38,12 +39,18 @@ def _py_to_js(v, widget_manager):
     elif np is not None and isinstance(v, np.ndarray):
         # Convert 1D numpy arrays with numeric types to memoryviews with
         # datatype and shape metadata.
-        if v.ndim == 1 and v.dtype.kind in ['u', 'i', 'f']:
+        if (v.ndim == 1 and
+                v.dtype.kind in ['u', 'i', 'f'] and
+                v.dtype != 'int64' and
+                v.dtype != 'uint64'):
+
+            # We have a numpy array the we can directly map to a JavaScript
+            # Typed array
             return {'buffer': memoryview(v),
                     'dtype': str(v.dtype),
                     'shape': v.shape}
         else:
-            # Convert all other numpy to lists
+            # Convert all other numpy arrays to lists
             return v.tolist()
 
     # Handle Undefined

@@ -52,7 +52,7 @@ def to_scalar_or_list(v):
         return v
 
 
-def copy_to_readonly_numpy_array(v, dtype=None, force_numeric=False):
+def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
     """
     Convert an array-like value into a read-only numpy array
 
@@ -60,9 +60,10 @@ def copy_to_readonly_numpy_array(v, dtype=None, force_numeric=False):
     ----------
     v : array like
         Array like value (list, tuple, numpy array, pandas series, etc.)
-    dtype : str
-        If specified, the numpy dtype that the array should be forced to
-        have. If not specified then let numpy infer the datatype
+    kind : str or tuple of str
+        If specified, the numpy dtype kind (or kinds) that the array should
+        have, or be converted to if possible.
+        If not specified then let numpy infer the datatype
     force_numeric : bool
         If true, raise an exception if the resulting numpy array does not
         have a numeric dtype (i.e. dtype.kind not in ['u', 'i', 'f'])
@@ -74,30 +75,53 @@ def copy_to_readonly_numpy_array(v, dtype=None, force_numeric=False):
 
     assert np is not None
 
-    # Copy to numpy array and handle dtype param
-    # ------------------------------------------
-    # If dtype was not specified then it will be passed to the numpy array
-    # constructor as None and the data type will be inferred automatically
+    # ### Process kind ###
+    if not kind:
+        kind = ()
+    elif isinstance(kind, string_types):
+        kind = (kind,)
 
-    # TODO: support datetime dtype here and in widget serialization
+    first_kind = kind[0] if kind else None
+
     # u: unsigned int, i: signed int, f: float
-    numeric_kinds = ['u', 'i', 'f']
+    numeric_kinds = {'u', 'i', 'f'}
+    kind_default_dtypes = {
+        'u': 'uint32', 'i': 'int32', 'f': 'float64', 'O': 'object'}
 
-    # Unwrap data types that have a `values` property that might be a numpy
-    # array. If this values property is a numeric numpy array then we
-    # can take the fast path below
+    # Handle pandas Series and Index objects
     if pd and isinstance(v, (pd.Series, pd.Index)):
-        v = v.values
+        if v.dtype.kind in numeric_kinds:
+            # Get the numeric numpy array so we use fast path below
+            v = v.values
+        elif v.dtype.kind == 'M':
+            # Convert datetime Series/Index to numpy array of datetimes
+            if isinstance(v, pd.Series):
+                v = v.dt.to_pydatetime()
+            else:
+                # DatetimeIndex
+                v = v.to_pydatetime()
 
     if not isinstance(v, np.ndarray):
+        # v is not homogenous array
         v_list = [to_scalar_or_list(e) for e in v]
+
+        # Lookup dtype for requested kind, if any
+        dtype = kind_default_dtypes.get(first_kind, None)
+
+        # construct new array from list
         new_v = np.array(v_list, order='C', dtype=dtype)
     elif v.dtype.kind in numeric_kinds:
-        if dtype:
+        # v is a homogenous numeric array
+        if kind and v.dtype.kind not in kind:
+            # Kind(s) were specified and this array doesn't match
+            # Convert to the default dtype for the first kind
+            dtype = kind_default_dtypes.get(first_kind, None)
             new_v = np.ascontiguousarray(v.astype(dtype))
         else:
+            # Either no kind was requested or requested kind is satisfied
             new_v = np.ascontiguousarray(v.copy())
     else:
+        # v is a non-numeric homogenous array
         new_v = v.copy()
 
     # Handle force numeric param
@@ -106,7 +130,7 @@ def copy_to_readonly_numpy_array(v, dtype=None, force_numeric=False):
         raise ValueError('Input value is not numeric and'
                          'force_numeric parameter set to True')
 
-    if dtype != 'unicode':
+    if 'U' not in kind:
         # Force non-numeric arrays to have object type
         # --------------------------------------------
         # Here we make sure that non-numeric arrays have the object
@@ -115,12 +139,6 @@ def copy_to_readonly_numpy_array(v, dtype=None, force_numeric=False):
         # '<U21'
         if new_v.dtype.kind not in ['u', 'i', 'f', 'O']:
             new_v = np.array(v, dtype='object')
-
-    # Convert int64 arrays to int32
-    # -----------------------------
-    # JavaScript doesn't support int64 typed arrays
-    if new_v.dtype == 'int64':
-        new_v = new_v.astype('int32')
 
     # Set new array to be read-only
     # -----------------------------
@@ -749,10 +767,13 @@ class IntegerValidator(BaseValidator):
             # Pass None through
             pass
         elif self.array_ok and is_homogeneous_array(v):
-            if v.dtype.kind not in ['i', 'u']:
-                self.raise_invalid_val(v)
 
-            v_array = copy_to_readonly_numpy_array(v, dtype='int32')
+            v_array = copy_to_readonly_numpy_array(v,
+                                                   kind=('i', 'u'),
+                                                   force_numeric=True)
+
+            if v_array.dtype.kind not in ['i', 'u']:
+                self.raise_invalid_val(v)
 
             # Check min/max
             if self.has_min_max:
@@ -875,7 +896,7 @@ class StringValidator(BaseValidator):
 
             if is_homogeneous_array(v):
                 # If not strict, let numpy cast elements to strings
-                v = copy_to_readonly_numpy_array(v, dtype='unicode')
+                v = copy_to_readonly_numpy_array(v, kind='U')
 
                 # Check no_blank
                 if self.no_blank:
@@ -1057,10 +1078,10 @@ class ColorValidator(BaseValidator):
                 # ### Check that elements have valid colors types ###
                 elif self.numbers_allowed() or invalid_els:
                     v = copy_to_readonly_numpy_array(
-                        validated_v, dtype='object')
+                        validated_v, kind='O')
                 else:
                     v = copy_to_readonly_numpy_array(
-                        validated_v, dtype='unicode')
+                        validated_v, kind='U')
         elif self.array_ok and is_simple_array(v):
             validated_v = [
                 self.validate_coerce(e, should_raise=False)
@@ -1509,7 +1530,7 @@ class FlaglistValidator(BaseValidator):
                 self.raise_invalid_elements(invalid_els)
 
             if is_homogeneous_array(v):
-                v = copy_to_readonly_numpy_array(validated_v, dtype='unicode')
+                v = copy_to_readonly_numpy_array(validated_v, kind='U')
             else:
                 v = to_scalar_or_list(v)
         else:
@@ -1559,7 +1580,7 @@ class AnyValidator(BaseValidator):
             # Pass None through
             pass
         elif self.array_ok and is_homogeneous_array(v):
-            v = copy_to_readonly_numpy_array(v, dtype='object')
+            v = copy_to_readonly_numpy_array(v, kind='O')
         elif self.array_ok and is_simple_array(v):
             v = to_scalar_or_list(v)
         return v

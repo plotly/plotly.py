@@ -2981,7 +2981,7 @@ class BasePlotlyType(object):
         # ------------------
         if not self._in_batch_mode:
             if not new_dict_val:
-                if prop in self._props:
+                if self._props and prop in self._props:
                     self._props.pop(prop)
             else:
                 self._init_props()
@@ -3055,7 +3055,7 @@ class BasePlotlyType(object):
         # ------------------
         if not self._in_batch_mode:
             if not new_dict_vals:
-                if prop in self._props:
+                if self._props and prop in self._props:
                     self._props.pop(prop)
             else:
                 self._init_props()
