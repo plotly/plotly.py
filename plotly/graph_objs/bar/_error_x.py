@@ -552,35 +552,37 @@ an instance of plotly.graph_objs.bar.ErrorX"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('array', None)
-        self.array = array if array is not None else _v
+        self['array'] = array if array is not None else _v
         _v = arg.pop('arrayminus', None)
-        self.arrayminus = arrayminus if arrayminus is not None else _v
+        self['arrayminus'] = arrayminus if arrayminus is not None else _v
         _v = arg.pop('arrayminussrc', None)
-        self.arrayminussrc = arrayminussrc if arrayminussrc is not None else _v
+        self['arrayminussrc'
+            ] = arrayminussrc if arrayminussrc is not None else _v
         _v = arg.pop('arraysrc', None)
-        self.arraysrc = arraysrc if arraysrc is not None else _v
+        self['arraysrc'] = arraysrc if arraysrc is not None else _v
         _v = arg.pop('color', None)
-        self.color = color if color is not None else _v
+        self['color'] = color if color is not None else _v
         _v = arg.pop('copy_ystyle', None)
-        self.copy_ystyle = copy_ystyle if copy_ystyle is not None else _v
+        self['copy_ystyle'] = copy_ystyle if copy_ystyle is not None else _v
         _v = arg.pop('symmetric', None)
-        self.symmetric = symmetric if symmetric is not None else _v
+        self['symmetric'] = symmetric if symmetric is not None else _v
         _v = arg.pop('thickness', None)
-        self.thickness = thickness if thickness is not None else _v
+        self['thickness'] = thickness if thickness is not None else _v
         _v = arg.pop('traceref', None)
-        self.traceref = traceref if traceref is not None else _v
+        self['traceref'] = traceref if traceref is not None else _v
         _v = arg.pop('tracerefminus', None)
-        self.tracerefminus = tracerefminus if tracerefminus is not None else _v
+        self['tracerefminus'
+            ] = tracerefminus if tracerefminus is not None else _v
         _v = arg.pop('type', None)
-        self.type = type if type is not None else _v
+        self['type'] = type if type is not None else _v
         _v = arg.pop('value', None)
-        self.value = value if value is not None else _v
+        self['value'] = value if value is not None else _v
         _v = arg.pop('valueminus', None)
-        self.valueminus = valueminus if valueminus is not None else _v
+        self['valueminus'] = valueminus if valueminus is not None else _v
         _v = arg.pop('visible', None)
-        self.visible = visible if visible is not None else _v
+        self['visible'] = visible if visible is not None else _v
         _v = arg.pop('width', None)
-        self.width = width if width is not None else _v
+        self['width'] = width if width is not None else _v
 
         # Process unknown kwargs
         # ----------------------

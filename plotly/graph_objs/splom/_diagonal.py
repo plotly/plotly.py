@@ -87,7 +87,7 @@ an instance of plotly.graph_objs.splom.Diagonal"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('visible', None)
-        self.visible = visible if visible is not None else _v
+        self['visible'] = visible if visible is not None else _v
 
         # Process unknown kwargs
         # ----------------------

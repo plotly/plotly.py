@@ -130,9 +130,9 @@ an instance of plotly.graph_objs.histogram.Unselected"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('marker', None)
-        self.marker = marker if marker is not None else _v
+        self['marker'] = marker if marker is not None else _v
         _v = arg.pop('textfont', None)
-        self.textfont = textfont if textfont is not None else _v
+        self['textfont'] = textfont if textfont is not None else _v
 
         # Process unknown kwargs
         # ----------------------

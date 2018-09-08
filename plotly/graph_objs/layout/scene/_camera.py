@@ -190,11 +190,11 @@ an instance of plotly.graph_objs.layout.scene.Camera"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('center', None)
-        self.center = center if center is not None else _v
+        self['center'] = center if center is not None else _v
         _v = arg.pop('eye', None)
-        self.eye = eye if eye is not None else _v
+        self['eye'] = eye if eye is not None else _v
         _v = arg.pop('up', None)
-        self.up = up if up is not None else _v
+        self['up'] = up if up is not None else _v
 
         # Process unknown kwargs
         # ----------------------

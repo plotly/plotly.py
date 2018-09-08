@@ -483,25 +483,26 @@ an instance of plotly.graph_objs.scatter3d.Line"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('autocolorscale', None)
-        self.autocolorscale = autocolorscale if autocolorscale is not None else _v
+        self['autocolorscale'
+            ] = autocolorscale if autocolorscale is not None else _v
         _v = arg.pop('cauto', None)
-        self.cauto = cauto if cauto is not None else _v
+        self['cauto'] = cauto if cauto is not None else _v
         _v = arg.pop('cmax', None)
-        self.cmax = cmax if cmax is not None else _v
+        self['cmax'] = cmax if cmax is not None else _v
         _v = arg.pop('cmin', None)
-        self.cmin = cmin if cmin is not None else _v
+        self['cmin'] = cmin if cmin is not None else _v
         _v = arg.pop('color', None)
-        self.color = color if color is not None else _v
+        self['color'] = color if color is not None else _v
         _v = arg.pop('colorscale', None)
-        self.colorscale = colorscale if colorscale is not None else _v
+        self['colorscale'] = colorscale if colorscale is not None else _v
         _v = arg.pop('colorsrc', None)
-        self.colorsrc = colorsrc if colorsrc is not None else _v
+        self['colorsrc'] = colorsrc if colorsrc is not None else _v
         _v = arg.pop('dash', None)
-        self.dash = dash if dash is not None else _v
+        self['dash'] = dash if dash is not None else _v
         _v = arg.pop('reversescale', None)
-        self.reversescale = reversescale if reversescale is not None else _v
+        self['reversescale'] = reversescale if reversescale is not None else _v
         _v = arg.pop('width', None)
-        self.width = width if width is not None else _v
+        self['width'] = width if width is not None else _v
 
         # Process unknown kwargs
         # ----------------------

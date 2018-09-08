@@ -772,39 +772,40 @@ an instance of plotly.graph_objs.layout.Updatemenu"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('active', None)
-        self.active = active if active is not None else _v
+        self['active'] = active if active is not None else _v
         _v = arg.pop('bgcolor', None)
-        self.bgcolor = bgcolor if bgcolor is not None else _v
+        self['bgcolor'] = bgcolor if bgcolor is not None else _v
         _v = arg.pop('bordercolor', None)
-        self.bordercolor = bordercolor if bordercolor is not None else _v
+        self['bordercolor'] = bordercolor if bordercolor is not None else _v
         _v = arg.pop('borderwidth', None)
-        self.borderwidth = borderwidth if borderwidth is not None else _v
+        self['borderwidth'] = borderwidth if borderwidth is not None else _v
         _v = arg.pop('buttons', None)
-        self.buttons = buttons if buttons is not None else _v
+        self['buttons'] = buttons if buttons is not None else _v
         _v = arg.pop('direction', None)
-        self.direction = direction if direction is not None else _v
+        self['direction'] = direction if direction is not None else _v
         _v = arg.pop('font', None)
-        self.font = font if font is not None else _v
+        self['font'] = font if font is not None else _v
         _v = arg.pop('name', None)
-        self.name = name if name is not None else _v
+        self['name'] = name if name is not None else _v
         _v = arg.pop('pad', None)
-        self.pad = pad if pad is not None else _v
+        self['pad'] = pad if pad is not None else _v
         _v = arg.pop('showactive', None)
-        self.showactive = showactive if showactive is not None else _v
+        self['showactive'] = showactive if showactive is not None else _v
         _v = arg.pop('templateitemname', None)
-        self.templateitemname = templateitemname if templateitemname is not None else _v
+        self['templateitemname'
+            ] = templateitemname if templateitemname is not None else _v
         _v = arg.pop('type', None)
-        self.type = type if type is not None else _v
+        self['type'] = type if type is not None else _v
         _v = arg.pop('visible', None)
-        self.visible = visible if visible is not None else _v
+        self['visible'] = visible if visible is not None else _v
         _v = arg.pop('x', None)
-        self.x = x if x is not None else _v
+        self['x'] = x if x is not None else _v
         _v = arg.pop('xanchor', None)
-        self.xanchor = xanchor if xanchor is not None else _v
+        self['xanchor'] = xanchor if xanchor is not None else _v
         _v = arg.pop('y', None)
-        self.y = y if y is not None else _v
+        self['y'] = y if y is not None else _v
         _v = arg.pop('yanchor', None)
-        self.yanchor = yanchor if yanchor is not None else _v
+        self['yanchor'] = yanchor if yanchor is not None else _v
 
         # Process unknown kwargs
         # ----------------------

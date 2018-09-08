@@ -93,7 +93,7 @@ an instance of plotly.graph_objs.choropleth.Unselected"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('marker', None)
-        self.marker = marker if marker is not None else _v
+        self['marker'] = marker if marker is not None else _v
 
         # Process unknown kwargs
         # ----------------------

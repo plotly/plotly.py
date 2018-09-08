@@ -160,9 +160,9 @@ an instance of plotly.graph_objs.pointcloud.marker.Border"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('arearatio', None)
-        self.arearatio = arearatio if arearatio is not None else _v
+        self['arearatio'] = arearatio if arearatio is not None else _v
         _v = arg.pop('color', None)
-        self.color = color if color is not None else _v
+        self['color'] = color if color is not None else _v
 
         # Process unknown kwargs
         # ----------------------

@@ -266,17 +266,17 @@ an instance of plotly.graph_objs.layout.geo.Lataxis"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('dtick', None)
-        self.dtick = dtick if dtick is not None else _v
+        self['dtick'] = dtick if dtick is not None else _v
         _v = arg.pop('gridcolor', None)
-        self.gridcolor = gridcolor if gridcolor is not None else _v
+        self['gridcolor'] = gridcolor if gridcolor is not None else _v
         _v = arg.pop('gridwidth', None)
-        self.gridwidth = gridwidth if gridwidth is not None else _v
+        self['gridwidth'] = gridwidth if gridwidth is not None else _v
         _v = arg.pop('range', None)
-        self.range = range if range is not None else _v
+        self['range'] = range if range is not None else _v
         _v = arg.pop('showgrid', None)
-        self.showgrid = showgrid if showgrid is not None else _v
+        self['showgrid'] = showgrid if showgrid is not None else _v
         _v = arg.pop('tick0', None)
-        self.tick0 = tick0 if tick0 is not None else _v
+        self['tick0'] = tick0 if tick0 is not None else _v
 
         # Process unknown kwargs
         # ----------------------

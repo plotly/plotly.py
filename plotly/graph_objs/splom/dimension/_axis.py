@@ -91,7 +91,7 @@ an instance of plotly.graph_objs.splom.dimension.Axis"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('type', None)
-        self.type = type if type is not None else _v
+        self['type'] = type if type is not None else _v
 
         # Process unknown kwargs
         # ----------------------

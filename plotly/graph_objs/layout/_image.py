@@ -581,35 +581,36 @@ an instance of plotly.graph_objs.layout.Image"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('layer', None)
-        self.layer = layer if layer is not None else _v
+        self['layer'] = layer if layer is not None else _v
         _v = arg.pop('name', None)
-        self.name = name if name is not None else _v
+        self['name'] = name if name is not None else _v
         _v = arg.pop('opacity', None)
-        self.opacity = opacity if opacity is not None else _v
+        self['opacity'] = opacity if opacity is not None else _v
         _v = arg.pop('sizex', None)
-        self.sizex = sizex if sizex is not None else _v
+        self['sizex'] = sizex if sizex is not None else _v
         _v = arg.pop('sizey', None)
-        self.sizey = sizey if sizey is not None else _v
+        self['sizey'] = sizey if sizey is not None else _v
         _v = arg.pop('sizing', None)
-        self.sizing = sizing if sizing is not None else _v
+        self['sizing'] = sizing if sizing is not None else _v
         _v = arg.pop('source', None)
-        self.source = source if source is not None else _v
+        self['source'] = source if source is not None else _v
         _v = arg.pop('templateitemname', None)
-        self.templateitemname = templateitemname if templateitemname is not None else _v
+        self['templateitemname'
+            ] = templateitemname if templateitemname is not None else _v
         _v = arg.pop('visible', None)
-        self.visible = visible if visible is not None else _v
+        self['visible'] = visible if visible is not None else _v
         _v = arg.pop('x', None)
-        self.x = x if x is not None else _v
+        self['x'] = x if x is not None else _v
         _v = arg.pop('xanchor', None)
-        self.xanchor = xanchor if xanchor is not None else _v
+        self['xanchor'] = xanchor if xanchor is not None else _v
         _v = arg.pop('xref', None)
-        self.xref = xref if xref is not None else _v
+        self['xref'] = xref if xref is not None else _v
         _v = arg.pop('y', None)
-        self.y = y if y is not None else _v
+        self['y'] = y if y is not None else _v
         _v = arg.pop('yanchor', None)
-        self.yanchor = yanchor if yanchor is not None else _v
+        self['yanchor'] = yanchor if yanchor is not None else _v
         _v = arg.pop('yref', None)
-        self.yref = yref if yref is not None else _v
+        self['yref'] = yref if yref is not None else _v
 
         # Process unknown kwargs
         # ----------------------

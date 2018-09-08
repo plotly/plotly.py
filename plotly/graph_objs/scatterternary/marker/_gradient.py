@@ -217,13 +217,13 @@ an instance of plotly.graph_objs.scatterternary.marker.Gradient"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('color', None)
-        self.color = color if color is not None else _v
+        self['color'] = color if color is not None else _v
         _v = arg.pop('colorsrc', None)
-        self.colorsrc = colorsrc if colorsrc is not None else _v
+        self['colorsrc'] = colorsrc if colorsrc is not None else _v
         _v = arg.pop('type', None)
-        self.type = type if type is not None else _v
+        self['type'] = type if type is not None else _v
         _v = arg.pop('typesrc', None)
-        self.typesrc = typesrc if typesrc is not None else _v
+        self['typesrc'] = typesrc if typesrc is not None else _v
 
         # Process unknown kwargs
         # ----------------------

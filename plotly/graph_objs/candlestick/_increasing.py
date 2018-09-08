@@ -165,9 +165,9 @@ an instance of plotly.graph_objs.candlestick.Increasing"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('fillcolor', None)
-        self.fillcolor = fillcolor if fillcolor is not None else _v
+        self['fillcolor'] = fillcolor if fillcolor is not None else _v
         _v = arg.pop('line', None)
-        self.line = line if line is not None else _v
+        self['line'] = line if line is not None else _v
 
         # Process unknown kwargs
         # ----------------------

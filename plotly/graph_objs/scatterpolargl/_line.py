@@ -175,11 +175,11 @@ an instance of plotly.graph_objs.scatterpolargl.Line"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('color', None)
-        self.color = color if color is not None else _v
+        self['color'] = color if color is not None else _v
         _v = arg.pop('dash', None)
-        self.dash = dash if dash is not None else _v
+        self['dash'] = dash if dash is not None else _v
         _v = arg.pop('width', None)
-        self.width = width if width is not None else _v
+        self['width'] = width if width is not None else _v
 
         # Process unknown kwargs
         # ----------------------

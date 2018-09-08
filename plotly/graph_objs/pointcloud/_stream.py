@@ -122,9 +122,9 @@ an instance of plotly.graph_objs.pointcloud.Stream"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('maxpoints', None)
-        self.maxpoints = maxpoints if maxpoints is not None else _v
+        self['maxpoints'] = maxpoints if maxpoints is not None else _v
         _v = arg.pop('token', None)
-        self.token = token if token is not None else _v
+        self['token'] = token if token is not None else _v
 
         # Process unknown kwargs
         # ----------------------

@@ -189,11 +189,11 @@ an instance of plotly.graph_objs.histogram.Cumulative"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('currentbin', None)
-        self.currentbin = currentbin if currentbin is not None else _v
+        self['currentbin'] = currentbin if currentbin is not None else _v
         _v = arg.pop('direction', None)
-        self.direction = direction if direction is not None else _v
+        self['direction'] = direction if direction is not None else _v
         _v = arg.pop('enabled', None)
-        self.enabled = enabled if enabled is not None else _v
+        self['enabled'] = enabled if enabled is not None else _v
 
         # Process unknown kwargs
         # ----------------------

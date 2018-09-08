@@ -367,21 +367,22 @@ an instance of plotly.graph_objs.layout.slider.Step"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('args', None)
-        self.args = args if args is not None else _v
+        self['args'] = args if args is not None else _v
         _v = arg.pop('execute', None)
-        self.execute = execute if execute is not None else _v
+        self['execute'] = execute if execute is not None else _v
         _v = arg.pop('label', None)
-        self.label = label if label is not None else _v
+        self['label'] = label if label is not None else _v
         _v = arg.pop('method', None)
-        self.method = method if method is not None else _v
+        self['method'] = method if method is not None else _v
         _v = arg.pop('name', None)
-        self.name = name if name is not None else _v
+        self['name'] = name if name is not None else _v
         _v = arg.pop('templateitemname', None)
-        self.templateitemname = templateitemname if templateitemname is not None else _v
+        self['templateitemname'
+            ] = templateitemname if templateitemname is not None else _v
         _v = arg.pop('value', None)
-        self.value = value if value is not None else _v
+        self['value'] = value if value is not None else _v
         _v = arg.pop('visible', None)
-        self.visible = visible if visible is not None else _v
+        self['visible'] = visible if visible is not None else _v
 
         # Process unknown kwargs
         # ----------------------

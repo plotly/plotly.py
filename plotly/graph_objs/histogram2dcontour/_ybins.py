@@ -132,11 +132,11 @@ an instance of plotly.graph_objs.histogram2dcontour.YBins"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('end', None)
-        self.end = end if end is not None else _v
+        self['end'] = end if end is not None else _v
         _v = arg.pop('size', None)
-        self.size = size if size is not None else _v
+        self['size'] = size if size is not None else _v
         _v = arg.pop('start', None)
-        self.start = start if start is not None else _v
+        self['start'] = start if start is not None else _v
 
         # Process unknown kwargs
         # ----------------------
