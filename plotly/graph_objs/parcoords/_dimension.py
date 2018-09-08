@@ -550,33 +550,35 @@ an instance of plotly.graph_objs.parcoords.Dimension"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('constraintrange', None)
-        self.constraintrange = constraintrange if constraintrange is not None else _v
+        self['constraintrange'
+            ] = constraintrange if constraintrange is not None else _v
         _v = arg.pop('label', None)
-        self.label = label if label is not None else _v
+        self['label'] = label if label is not None else _v
         _v = arg.pop('multiselect', None)
-        self.multiselect = multiselect if multiselect is not None else _v
+        self['multiselect'] = multiselect if multiselect is not None else _v
         _v = arg.pop('name', None)
-        self.name = name if name is not None else _v
+        self['name'] = name if name is not None else _v
         _v = arg.pop('range', None)
-        self.range = range if range is not None else _v
+        self['range'] = range if range is not None else _v
         _v = arg.pop('templateitemname', None)
-        self.templateitemname = templateitemname if templateitemname is not None else _v
+        self['templateitemname'
+            ] = templateitemname if templateitemname is not None else _v
         _v = arg.pop('tickformat', None)
-        self.tickformat = tickformat if tickformat is not None else _v
+        self['tickformat'] = tickformat if tickformat is not None else _v
         _v = arg.pop('ticktext', None)
-        self.ticktext = ticktext if ticktext is not None else _v
+        self['ticktext'] = ticktext if ticktext is not None else _v
         _v = arg.pop('ticktextsrc', None)
-        self.ticktextsrc = ticktextsrc if ticktextsrc is not None else _v
+        self['ticktextsrc'] = ticktextsrc if ticktextsrc is not None else _v
         _v = arg.pop('tickvals', None)
-        self.tickvals = tickvals if tickvals is not None else _v
+        self['tickvals'] = tickvals if tickvals is not None else _v
         _v = arg.pop('tickvalssrc', None)
-        self.tickvalssrc = tickvalssrc if tickvalssrc is not None else _v
+        self['tickvalssrc'] = tickvalssrc if tickvalssrc is not None else _v
         _v = arg.pop('values', None)
-        self.values = values if values is not None else _v
+        self['values'] = values if values is not None else _v
         _v = arg.pop('valuessrc', None)
-        self.valuessrc = valuessrc if valuessrc is not None else _v
+        self['valuessrc'] = valuessrc if valuessrc is not None else _v
         _v = arg.pop('visible', None)
-        self.visible = visible if visible is not None else _v
+        self['visible'] = visible if visible is not None else _v
 
         # Process unknown kwargs
         # ----------------------

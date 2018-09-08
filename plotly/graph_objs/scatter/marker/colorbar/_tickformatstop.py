@@ -264,15 +264,16 @@ an instance of plotly.graph_objs.scatter.marker.colorbar.Tickformatstop"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('dtickrange', None)
-        self.dtickrange = dtickrange if dtickrange is not None else _v
+        self['dtickrange'] = dtickrange if dtickrange is not None else _v
         _v = arg.pop('enabled', None)
-        self.enabled = enabled if enabled is not None else _v
+        self['enabled'] = enabled if enabled is not None else _v
         _v = arg.pop('name', None)
-        self.name = name if name is not None else _v
+        self['name'] = name if name is not None else _v
         _v = arg.pop('templateitemname', None)
-        self.templateitemname = templateitemname if templateitemname is not None else _v
+        self['templateitemname'
+            ] = templateitemname if templateitemname is not None else _v
         _v = arg.pop('value', None)
-        self.value = value if value is not None else _v
+        self['value'] = value if value is not None else _v
 
         # Process unknown kwargs
         # ----------------------

@@ -983,47 +983,49 @@ an instance of plotly.graph_objs.Parcoords"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('customdata', None)
-        self.customdata = customdata if customdata is not None else _v
+        self['customdata'] = customdata if customdata is not None else _v
         _v = arg.pop('customdatasrc', None)
-        self.customdatasrc = customdatasrc if customdatasrc is not None else _v
+        self['customdatasrc'
+            ] = customdatasrc if customdatasrc is not None else _v
         _v = arg.pop('dimensions', None)
-        self.dimensions = dimensions if dimensions is not None else _v
+        self['dimensions'] = dimensions if dimensions is not None else _v
         _v = arg.pop('domain', None)
-        self.domain = domain if domain is not None else _v
+        self['domain'] = domain if domain is not None else _v
         _v = arg.pop('hoverinfo', None)
-        self.hoverinfo = hoverinfo if hoverinfo is not None else _v
+        self['hoverinfo'] = hoverinfo if hoverinfo is not None else _v
         _v = arg.pop('hoverinfosrc', None)
-        self.hoverinfosrc = hoverinfosrc if hoverinfosrc is not None else _v
+        self['hoverinfosrc'] = hoverinfosrc if hoverinfosrc is not None else _v
         _v = arg.pop('hoverlabel', None)
-        self.hoverlabel = hoverlabel if hoverlabel is not None else _v
+        self['hoverlabel'] = hoverlabel if hoverlabel is not None else _v
         _v = arg.pop('ids', None)
-        self.ids = ids if ids is not None else _v
+        self['ids'] = ids if ids is not None else _v
         _v = arg.pop('idssrc', None)
-        self.idssrc = idssrc if idssrc is not None else _v
+        self['idssrc'] = idssrc if idssrc is not None else _v
         _v = arg.pop('labelfont', None)
-        self.labelfont = labelfont if labelfont is not None else _v
+        self['labelfont'] = labelfont if labelfont is not None else _v
         _v = arg.pop('legendgroup', None)
-        self.legendgroup = legendgroup if legendgroup is not None else _v
+        self['legendgroup'] = legendgroup if legendgroup is not None else _v
         _v = arg.pop('line', None)
-        self.line = line if line is not None else _v
+        self['line'] = line if line is not None else _v
         _v = arg.pop('name', None)
-        self.name = name if name is not None else _v
+        self['name'] = name if name is not None else _v
         _v = arg.pop('opacity', None)
-        self.opacity = opacity if opacity is not None else _v
+        self['opacity'] = opacity if opacity is not None else _v
         _v = arg.pop('rangefont', None)
-        self.rangefont = rangefont if rangefont is not None else _v
+        self['rangefont'] = rangefont if rangefont is not None else _v
         _v = arg.pop('selectedpoints', None)
-        self.selectedpoints = selectedpoints if selectedpoints is not None else _v
+        self['selectedpoints'
+            ] = selectedpoints if selectedpoints is not None else _v
         _v = arg.pop('showlegend', None)
-        self.showlegend = showlegend if showlegend is not None else _v
+        self['showlegend'] = showlegend if showlegend is not None else _v
         _v = arg.pop('stream', None)
-        self.stream = stream if stream is not None else _v
+        self['stream'] = stream if stream is not None else _v
         _v = arg.pop('tickfont', None)
-        self.tickfont = tickfont if tickfont is not None else _v
+        self['tickfont'] = tickfont if tickfont is not None else _v
         _v = arg.pop('uid', None)
-        self.uid = uid if uid is not None else _v
+        self['uid'] = uid if uid is not None else _v
         _v = arg.pop('visible', None)
-        self.visible = visible if visible is not None else _v
+        self['visible'] = visible if visible is not None else _v
 
         # Read-only literals
         # ------------------

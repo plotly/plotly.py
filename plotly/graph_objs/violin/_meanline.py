@@ -190,11 +190,11 @@ an instance of plotly.graph_objs.violin.Meanline"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('color', None)
-        self.color = color if color is not None else _v
+        self['color'] = color if color is not None else _v
         _v = arg.pop('visible', None)
-        self.visible = visible if visible is not None else _v
+        self['visible'] = visible if visible is not None else _v
         _v = arg.pop('width', None)
-        self.width = width if width is not None else _v
+        self['width'] = width if width is not None else _v
 
         # Process unknown kwargs
         # ----------------------

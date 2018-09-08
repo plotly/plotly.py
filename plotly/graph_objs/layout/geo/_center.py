@@ -128,9 +128,9 @@ an instance of plotly.graph_objs.layout.geo.Center"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('lat', None)
-        self.lat = lat if lat is not None else _v
+        self['lat'] = lat if lat is not None else _v
         _v = arg.pop('lon', None)
-        self.lon = lon if lon is not None else _v
+        self['lon'] = lon if lon is not None else _v
 
         # Process unknown kwargs
         # ----------------------

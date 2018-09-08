@@ -904,49 +904,53 @@ an instance of plotly.graph_objs.Table"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('cells', None)
-        self.cells = cells if cells is not None else _v
+        self['cells'] = cells if cells is not None else _v
         _v = arg.pop('columnorder', None)
-        self.columnorder = columnorder if columnorder is not None else _v
+        self['columnorder'] = columnorder if columnorder is not None else _v
         _v = arg.pop('columnordersrc', None)
-        self.columnordersrc = columnordersrc if columnordersrc is not None else _v
+        self['columnordersrc'
+            ] = columnordersrc if columnordersrc is not None else _v
         _v = arg.pop('columnwidth', None)
-        self.columnwidth = columnwidth if columnwidth is not None else _v
+        self['columnwidth'] = columnwidth if columnwidth is not None else _v
         _v = arg.pop('columnwidthsrc', None)
-        self.columnwidthsrc = columnwidthsrc if columnwidthsrc is not None else _v
+        self['columnwidthsrc'
+            ] = columnwidthsrc if columnwidthsrc is not None else _v
         _v = arg.pop('customdata', None)
-        self.customdata = customdata if customdata is not None else _v
+        self['customdata'] = customdata if customdata is not None else _v
         _v = arg.pop('customdatasrc', None)
-        self.customdatasrc = customdatasrc if customdatasrc is not None else _v
+        self['customdatasrc'
+            ] = customdatasrc if customdatasrc is not None else _v
         _v = arg.pop('domain', None)
-        self.domain = domain if domain is not None else _v
+        self['domain'] = domain if domain is not None else _v
         _v = arg.pop('header', None)
-        self.header = header if header is not None else _v
+        self['header'] = header if header is not None else _v
         _v = arg.pop('hoverinfo', None)
-        self.hoverinfo = hoverinfo if hoverinfo is not None else _v
+        self['hoverinfo'] = hoverinfo if hoverinfo is not None else _v
         _v = arg.pop('hoverinfosrc', None)
-        self.hoverinfosrc = hoverinfosrc if hoverinfosrc is not None else _v
+        self['hoverinfosrc'] = hoverinfosrc if hoverinfosrc is not None else _v
         _v = arg.pop('hoverlabel', None)
-        self.hoverlabel = hoverlabel if hoverlabel is not None else _v
+        self['hoverlabel'] = hoverlabel if hoverlabel is not None else _v
         _v = arg.pop('ids', None)
-        self.ids = ids if ids is not None else _v
+        self['ids'] = ids if ids is not None else _v
         _v = arg.pop('idssrc', None)
-        self.idssrc = idssrc if idssrc is not None else _v
+        self['idssrc'] = idssrc if idssrc is not None else _v
         _v = arg.pop('legendgroup', None)
-        self.legendgroup = legendgroup if legendgroup is not None else _v
+        self['legendgroup'] = legendgroup if legendgroup is not None else _v
         _v = arg.pop('name', None)
-        self.name = name if name is not None else _v
+        self['name'] = name if name is not None else _v
         _v = arg.pop('opacity', None)
-        self.opacity = opacity if opacity is not None else _v
+        self['opacity'] = opacity if opacity is not None else _v
         _v = arg.pop('selectedpoints', None)
-        self.selectedpoints = selectedpoints if selectedpoints is not None else _v
+        self['selectedpoints'
+            ] = selectedpoints if selectedpoints is not None else _v
         _v = arg.pop('showlegend', None)
-        self.showlegend = showlegend if showlegend is not None else _v
+        self['showlegend'] = showlegend if showlegend is not None else _v
         _v = arg.pop('stream', None)
-        self.stream = stream if stream is not None else _v
+        self['stream'] = stream if stream is not None else _v
         _v = arg.pop('uid', None)
-        self.uid = uid if uid is not None else _v
+        self['uid'] = uid if uid is not None else _v
         _v = arg.pop('visible', None)
-        self.visible = visible if visible is not None else _v
+        self['visible'] = visible if visible is not None else _v
 
         # Read-only literals
         # ------------------

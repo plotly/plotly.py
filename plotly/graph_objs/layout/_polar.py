@@ -811,17 +811,17 @@ an instance of plotly.graph_objs.layout.Polar"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('angularaxis', None)
-        self.angularaxis = angularaxis if angularaxis is not None else _v
+        self['angularaxis'] = angularaxis if angularaxis is not None else _v
         _v = arg.pop('bgcolor', None)
-        self.bgcolor = bgcolor if bgcolor is not None else _v
+        self['bgcolor'] = bgcolor if bgcolor is not None else _v
         _v = arg.pop('domain', None)
-        self.domain = domain if domain is not None else _v
+        self['domain'] = domain if domain is not None else _v
         _v = arg.pop('gridshape', None)
-        self.gridshape = gridshape if gridshape is not None else _v
+        self['gridshape'] = gridshape if gridshape is not None else _v
         _v = arg.pop('radialaxis', None)
-        self.radialaxis = radialaxis if radialaxis is not None else _v
+        self['radialaxis'] = radialaxis if radialaxis is not None else _v
         _v = arg.pop('sector', None)
-        self.sector = sector if sector is not None else _v
+        self['sector'] = sector if sector is not None else _v
 
         # Process unknown kwargs
         # ----------------------

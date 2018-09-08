@@ -207,13 +207,13 @@ an instance of plotly.graph_objs.layout.geo.Projection"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('parallels', None)
-        self.parallels = parallels if parallels is not None else _v
+        self['parallels'] = parallels if parallels is not None else _v
         _v = arg.pop('rotation', None)
-        self.rotation = rotation if rotation is not None else _v
+        self['rotation'] = rotation if rotation is not None else _v
         _v = arg.pop('scale', None)
-        self.scale = scale if scale is not None else _v
+        self['scale'] = scale if scale is not None else _v
         _v = arg.pop('type', None)
-        self.type = type if type is not None else _v
+        self['type'] = type if type is not None else _v
 
         # Process unknown kwargs
         # ----------------------

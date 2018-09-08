@@ -315,19 +315,20 @@ an instance of plotly.graph_objs.splom.Dimension"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('axis', None)
-        self.axis = axis if axis is not None else _v
+        self['axis'] = axis if axis is not None else _v
         _v = arg.pop('label', None)
-        self.label = label if label is not None else _v
+        self['label'] = label if label is not None else _v
         _v = arg.pop('name', None)
-        self.name = name if name is not None else _v
+        self['name'] = name if name is not None else _v
         _v = arg.pop('templateitemname', None)
-        self.templateitemname = templateitemname if templateitemname is not None else _v
+        self['templateitemname'
+            ] = templateitemname if templateitemname is not None else _v
         _v = arg.pop('values', None)
-        self.values = values if values is not None else _v
+        self['values'] = values if values is not None else _v
         _v = arg.pop('valuessrc', None)
-        self.valuessrc = valuessrc if valuessrc is not None else _v
+        self['valuessrc'] = valuessrc if valuessrc is not None else _v
         _v = arg.pop('visible', None)
-        self.visible = visible if visible is not None else _v
+        self['visible'] = visible if visible is not None else _v
 
         # Process unknown kwargs
         # ----------------------

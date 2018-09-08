@@ -337,19 +337,20 @@ an instance of plotly.graph_objs.layout.xaxis.rangeselector.Button"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('count', None)
-        self.count = count if count is not None else _v
+        self['count'] = count if count is not None else _v
         _v = arg.pop('label', None)
-        self.label = label if label is not None else _v
+        self['label'] = label if label is not None else _v
         _v = arg.pop('name', None)
-        self.name = name if name is not None else _v
+        self['name'] = name if name is not None else _v
         _v = arg.pop('step', None)
-        self.step = step if step is not None else _v
+        self['step'] = step if step is not None else _v
         _v = arg.pop('stepmode', None)
-        self.stepmode = stepmode if stepmode is not None else _v
+        self['stepmode'] = stepmode if stepmode is not None else _v
         _v = arg.pop('templateitemname', None)
-        self.templateitemname = templateitemname if templateitemname is not None else _v
+        self['templateitemname'
+            ] = templateitemname if templateitemname is not None else _v
         _v = arg.pop('visible', None)
-        self.visible = visible if visible is not None else _v
+        self['visible'] = visible if visible is not None else _v
 
         # Process unknown kwargs
         # ----------------------

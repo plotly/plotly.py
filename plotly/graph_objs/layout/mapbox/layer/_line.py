@@ -92,7 +92,7 @@ an instance of plotly.graph_objs.layout.mapbox.layer.Line"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('width', None)
-        self.width = width if width is not None else _v
+        self['width'] = width if width is not None else _v
 
         # Process unknown kwargs
         # ----------------------

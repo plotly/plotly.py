@@ -419,27 +419,29 @@ an instance of plotly.graph_objs.layout.RadialAxis"""
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('domain', None)
-        self.domain = domain if domain is not None else _v
+        self['domain'] = domain if domain is not None else _v
         _v = arg.pop('endpadding', None)
-        self.endpadding = endpadding if endpadding is not None else _v
+        self['endpadding'] = endpadding if endpadding is not None else _v
         _v = arg.pop('orientation', None)
-        self.orientation = orientation if orientation is not None else _v
+        self['orientation'] = orientation if orientation is not None else _v
         _v = arg.pop('range', None)
-        self.range = range if range is not None else _v
+        self['range'] = range if range is not None else _v
         _v = arg.pop('showline', None)
-        self.showline = showline if showline is not None else _v
+        self['showline'] = showline if showline is not None else _v
         _v = arg.pop('showticklabels', None)
-        self.showticklabels = showticklabels if showticklabels is not None else _v
+        self['showticklabels'
+            ] = showticklabels if showticklabels is not None else _v
         _v = arg.pop('tickcolor', None)
-        self.tickcolor = tickcolor if tickcolor is not None else _v
+        self['tickcolor'] = tickcolor if tickcolor is not None else _v
         _v = arg.pop('ticklen', None)
-        self.ticklen = ticklen if ticklen is not None else _v
+        self['ticklen'] = ticklen if ticklen is not None else _v
         _v = arg.pop('tickorientation', None)
-        self.tickorientation = tickorientation if tickorientation is not None else _v
+        self['tickorientation'
+            ] = tickorientation if tickorientation is not None else _v
         _v = arg.pop('ticksuffix', None)
-        self.ticksuffix = ticksuffix if ticksuffix is not None else _v
+        self['ticksuffix'] = ticksuffix if ticksuffix is not None else _v
         _v = arg.pop('visible', None)
-        self.visible = visible if visible is not None else _v
+        self['visible'] = visible if visible is not None else _v
 
         # Process unknown kwargs
         # ----------------------
