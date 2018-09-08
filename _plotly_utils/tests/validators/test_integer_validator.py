@@ -128,7 +128,7 @@ def test_acceptance_aok_list(val, validator_aok):
 def test_coercion_aok_list(val, expected, validator_aok):
     v = validator_aok.validate_coerce(val)
     if isinstance(val, (np.ndarray, pd.Series, pd.Index)):
-        assert v.dtype == np.int32
+        assert v.dtype == val.dtype
         assert np.array_equal(validator_aok.present(v),
                               np.array(expected, dtype=np.int32))
     else:
