@@ -108,37 +108,48 @@ def init_notebook_mode(connected=False):
 
     global __PLOTLY_OFFLINE_INITIALIZED
 
+    mathjax_config = """
+    MathJax.Hub.Config({
+        SVG: {font: "STIX-Web"},
+        displayAlign: "center"});"""
+
     if connected:
         # Inject plotly.js into the output cell
-        script_inject = (
-            ''
-            '<script>'
-            'requirejs.config({'
-            'paths: { '
-            # Note we omit the extension .js because require will include it.
-            '\'plotly\': [\'https://cdn.plot.ly/plotly-latest.min\']},'
-            '});'
-            'if(!window.Plotly) {{'
-            'require([\'plotly\'],'
-            'function(plotly) {window.Plotly=plotly;});'
-            '}}'
-            '</script>'
-        )
+        #
+        # Note we omit the extension .js in requirejs.config
+        # because require will include it.
+        script_inject = """
+<script>
+    requirejs.config(
+        {{paths: {{'plotly': ['https://cdn.plot.ly/plotly-latest.min']}}}});
+    
+{mathjax_config}
+        
+    if(!window.Plotly) {{
+        require(['plotly'], function(plotly) {{
+            window.Plotly=plotly;
+        }});
+    }}
+</script> 
+""".format(mathjax_config=mathjax_config)
+
     else:
         # Inject plotly.js into the output cell
-        script_inject = (
-            ''
-            '<script type=\'text/javascript\'>'
-            'if(!window.Plotly){{'
-            'define(\'plotly\', function(require, exports, module) {{'
-            '{script}'
-            '}});'
-            'require([\'plotly\'], function(Plotly) {{'
-            'window.Plotly = Plotly;'
-            '}});'
-            '}}'
-            '</script>'
-            '').format(script=get_plotlyjs())
+        script_inject = """
+<script type='text/javascript'>
+
+{mathjax_config}
+            
+    if(!window.Plotly){{
+        define('plotly', function(require, exports, module) {{
+            {script}
+        }});
+        require(['plotly'], function(Plotly) {{
+            window.Plotly = Plotly;
+        }});
+    }}
+</script>
+""".format(script=get_plotlyjs(), mathjax_config=mathjax_config)
 
     display_bundle = {
         'text/html': script_inject,
@@ -149,7 +160,7 @@ def init_notebook_mode(connected=False):
 
 
 def _plot_html(figure_or_data, config, validate, default_width,
-               default_height, global_requirejs):
+               default_height, global_requirejs, mathjax_notebook=False):
 
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
 
@@ -232,30 +243,60 @@ def _plot_html(figure_or_data, config, validate, default_width,
         config['linkText'] = link_text
         jconfig = jconfig.replace('Export to plot.ly', link_text)
 
+    if mathjax_notebook:
+        # Construct JavaScript snippets to configure MathJax for Plotly.js,
+        # and then reconfigure it for the notebook once Plotly.js is finished.
+        mathjax_pre = """\
+                MathJax.Hub.Queue(
+                    ["setRenderer", MathJax.Hub, "SVG"]);"""
+
+        mathjax_post = """\
+                    MathJax.Hub.Queue(
+                        ["setRenderer", MathJax.Hub, "HTML-CSS"]);"""
+    else:
+        mathjax_pre = ''
+        mathjax_post = ''
+
     if jframes:
-        script = '''
-        Plotly.plot(
+        script = """
+{mathjax_pre}
+                
+        Plotly.newPlot(
             '{id}',
             {data},
             {layout},
             {config}
-        ).then(function () {add_frames}).then(function(){animate})
-        '''.format(
+        ).then(function () {{ 
+            return Plotly.addFrames('{id}', {frames})
+        }}
+        ).then(function() {{
+            Plotly.animate('{id}').then(function() {{
+{mathjax_post}
+        }})}})
+        """.format(
+            mathjax_pre=mathjax_pre,
             id=plotdivid,
             data=jdata,
             layout=jlayout,
             config=jconfig,
-            add_frames="{" + "return Plotly.addFrames('{id}',{frames}".format(
-                id=plotdivid, frames=jframes
-            ) + ");}",
-            animate="{" + "Plotly.animate('{id}');".format(id=plotdivid) + "}"
+            frames=jframes,
+            mathjax_post=mathjax_post
         )
     else:
-        script = 'Plotly.newPlot("{id}", {data}, {layout}, {config})'.format(
+
+        script = """
+{mathjax_pre}
+                
+        Plotly.newPlot(
+            "{id}", {data}, {layout}, {config}).then(function() {{
+{mathjax_post}
+            }})""".format(
+            mathjax_pre=mathjax_pre,
             id=plotdivid,
             data=jdata,
             layout=jlayout,
-            config=jconfig)
+            config=jconfig,
+            mathjax_post=mathjax_post)
 
     optional_line1 = ('require(["plotly"], function(Plotly) {{ '
                       if global_requirejs else '')
@@ -356,8 +397,8 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
 
     if __PLOTLY_OFFLINE_INITIALIZED:
         plot_html, plotdivid, width, height = _plot_html(
-            figure_or_data, config, validate, '100%', 525, True
-        )
+            figure_or_data, config, validate, '100%', 525, True,
+            mathjax_notebook=True)
         display_bundle['text/html'] = plot_html
         display_bundle['text/vnd.plotly.v1+html'] = plot_html
 
