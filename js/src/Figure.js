@@ -681,12 +681,13 @@ var FigureModel = widgets.DOMWidgetModel.extend({
 
 // View
 // ====
+var default_renderer;
+
 function mathjax_init() {
     if (window.MathJax) {
         // MathJax loaded
         MathJax.Hub.Config({
             SVG: {font: "STIX-Web"},
-            displayAlign: "center"
         });
     }
 }
@@ -694,14 +695,20 @@ function mathjax_init() {
 function mathjax_pre() {
     if (window.MathJax) {
         // MathJax loaded
+
+        // Save off original renderer so we can restore it after we're done
+        default_renderer = MathJax.Hub.config.menuSettings.renderer;
         MathJax.Hub.Queue(["setRenderer", MathJax.Hub, "SVG"]);
+
     }
 }
 
 function mathjax_post() {
     if (window.MathJax) {
         // MathJax loaded
-        MathJax.Hub.Queue(["setRenderer", MathJax.Hub, "HTML-CSS"]);
+
+        // Restore original renderer
+        MathJax.Hub.Queue(["setRenderer", MathJax.Hub, default_renderer]);
     }
 }
 
