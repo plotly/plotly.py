@@ -4,16 +4,6 @@ var Plotly = require("plotly.js/dist/plotly");
 var PlotlyIndex = require("plotly.js/src/lib/index");
 var semver_range = "^" + require("../package.json").version;
 
-window.MathJax = {
-  jax: ["input/TeX","input/MathML","output/SVG", "output/PreviewHTML"],
-  extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js", "fast-preview.js", "AssistiveMML.js", "a11y/accessibility-menu.js"],
-  TeX: {
-    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
-  }
-}
-
-var MathJax = require("mathjax");
-
 
 // Model
 // =====
@@ -691,6 +681,30 @@ var FigureModel = widgets.DOMWidgetModel.extend({
 
 // View
 // ====
+function mathjax_init() {
+    if (window.MathJax) {
+        // MathJax loaded
+        MathJax.Hub.Config({
+            SVG: {font: "STIX-Web"},
+            displayAlign: "center"
+        });
+    }
+}
+
+function mathjax_pre() {
+    if (window.MathJax) {
+        // MathJax loaded
+        MathJax.Hub.Queue(["setRenderer", MathJax.Hub, "SVG"]);
+    }
+}
+
+function mathjax_post() {
+    if (window.MathJax) {
+        // MathJax loaded
+        MathJax.Hub.Queue(["setRenderer", MathJax.Hub, "HTML-CSS"]);
+    }
+}
+
 /**
  * A FigureView manages the visual presentation of a single Plotly.js
  * figure for a single notebook output cell. Each FigureView has a
@@ -713,12 +727,7 @@ var FigureView = widgets.DOMWidgetView.extend({
 
         var that = this;
 
-        // MathJax
-        console.log(['MathJax', MathJax, MathJax.isReady]);
-        // console.log(MathJax);
-        // console.log(MathJax.Config);
-        // MathJax.Hub.Config({ SVG: { font: "STIX-Web" }, displayAlign: "center" });
-        // MathJax.Hub.Queue(["setRenderer", MathJax.Hub, "SVG"]);
+        mathjax_init();
 
         // Wire up message property callbacks
         // ----------------------------------
@@ -759,6 +768,8 @@ var FigureView = widgets.DOMWidgetView.extend({
         var initialTraces = _.cloneDeep(this.model.get("_data"));
         var initialLayout = _.cloneDeep(this.model.get("_layout"));
 
+        mathjax_pre();
+
         Plotly.newPlot(that.el, initialTraces, initialLayout).then(
             function () {
 
@@ -769,6 +780,8 @@ var FigureView = widgets.DOMWidgetView.extend({
 
                 // ### Send layout delta ###
                 that._sendLayoutDelta(layout_edit_id);
+
+                mathjax_post();
 
                 // Wire up plotly event callbacks
                 that.el.on("plotly_restyle",
@@ -1275,6 +1288,7 @@ var FigureView = widgets.DOMWidgetView.extend({
                 msgData.restyle_traces);
 
             restyleData["_doNotReportToPy"] = true;
+
             Plotly.restyle(this.el, restyleData, traceIndexes);
 
             // ### Send trace deltas ###
@@ -1325,7 +1339,8 @@ var FigureView = widgets.DOMWidgetView.extend({
                 msgData.style_traces);
 
             style["_doNotReportToPy"] = true;
-                Plotly.update(this.el, style, layout, traceIndexes);
+
+            Plotly.update(this.el, style, layout, traceIndexes);
 
             // ### Send trace deltas ###
             // We create an array of deltas corresponding to the updated
