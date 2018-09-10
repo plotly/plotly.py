@@ -59,7 +59,7 @@ pip install plotly==3.2.1rc1
 
 or conda.
 ```
-conda install -c plotly plotly=3.2.1rc1
+conda install -c plotly/label/test plotly=3.2.1rc1
 ```
 
 ### Jupyter Notebook Support
