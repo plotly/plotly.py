@@ -54,7 +54,7 @@ This release introduces the long-anticipated ability to programmatically
 export figures as high quality static images in both raster and vector
 formats.
 
-### JupyterLab Versions
+### JupyterLab Versions (Python 3.5+)
 For use with JupyterLab, the following versions of the following packages
 must be installed:
 
