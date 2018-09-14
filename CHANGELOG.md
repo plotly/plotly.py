@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [3.2.1] - 2018-09-??
+## [3.2.1] - 2018-09-14
 This is a patch release that fixes a few bugs and reintroduces a few
 version 2 features that were not supported in version 3.
 
