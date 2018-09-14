@@ -76,7 +76,7 @@ or conda.
 conda install "notebook>=5.3" "ipywidgets>=7.2"
 ```
 
-### JupyterLab Support
+### JupyterLab Support (Python 3.5+)
 For use in JupyterLab, install the `jupyterlab` and `ipywidgets`
 packages using pip... 
 
