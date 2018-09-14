@@ -2,6 +2,53 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.2.1] - 2018-09-14
+This is a patch release that fixes a few bugs and reintroduces a few
+version 2 features that were not supported in version 3.
+
+The bundled version of plotly.js remains at 1.40.1
+
+### JupyterLab Versions
+For use with JupyterLab, the following versions of the following packages
+must be installed:
+
+ - Python Packages
+   - plotly==3.2.1
+   - ipywidgets>=7.2
+   - notebook>=5.3
+   - jupyterlab==0.34
+   
+ - JupyterLab Extensions
+   - plotlywidget@0.3.0
+   - @jupyter-widgets/jupyterlab-manager@0.37
+   - @jupyterlab/plotly-extension@0.17
+
+### Added
+ - An optional `skip_invalid` argument has been added to the `Figure` and
+  `FigureWidget` constructors. By default, `skip_invalid` is `False` and invalid
+  figure properties will result in an exception (this is identical to the
+  previous behavior).  When `skip_invalid` is set to `True`, invalid properties
+  will instead be silently ignored. This argument replaces the `_raise`
+  argument that was available in version 2, and makes it possible to import
+  figure definitions from different plotly versions, where incompatible
+  properties are ignored rather than causing an exception.
+ - A `to_ordered_dict` method has been added to the `Figure` and `FigureWidget`
+  classes. This method returns a representation of the figure as a nested
+  structure of `OrdererdDict` and `list` instances where the keys in each
+  `OrderedDict` are sorted alphabetically.  This method replaces the
+  `get_ordered` method that was available in version 2, and makes it possible
+  to traverse the nested structure of a figure in a deterministic order.
+
+### Fixed
+ - Pandas `Series` and `Index` objects storing `datetime` values were
+   incorrectly cast to numeric arrays
+   ([plotly/plotly.py#1160](https://github.com/plotly/plotly.py/issues/1160),
+    [plotly/plotly.py#1163](https://github.com/plotly/plotly.py/pull/1163))
+ - Numpy arrays with `uint64` datatype caused a `FigureWidget` error,
+   and no figure was displayed
+   ([plotly/plotly.py#1155](https://github.com/plotly/plotly.py/issues/1155),
+    [plotly/plotly.py#1163](https://github.com/plotly/plotly.py/pull/1163))
+
 ## [3.2.0] - 2018-09-05
 This release introduces the long-anticipated ability to programmatically
 export figures as high quality static images in both raster and vector

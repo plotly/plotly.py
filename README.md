@@ -54,12 +54,12 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 
 plotly.py may be installed using pip...
 ```
-pip install plotly==3.2.0
+pip install plotly==3.2.1
 ```
 
 or conda.
 ```
-conda install -c plotly plotly=3.2.0
+conda install -c plotly plotly=3.2.1
 ```
 
 ### Jupyter Notebook Support
@@ -70,13 +70,13 @@ packages using pip...
 pip install "notebook>=5.3" "ipywidgets>=7.2"
 ```
 
-of conda.
+or conda.
 
 ```
 conda install "notebook>=5.3" "ipywidgets>=7.2"
 ```
 
-### JupyterLab Support
+### JupyterLab Support (Python 3.5+)
 For use in JupyterLab, install the `jupyterlab` and `ipywidgets`
 packages using pip... 
 
@@ -84,7 +84,7 @@ packages using pip...
 pip install jupyterlab==0.34 "ipywidgets>=7.2"
 ```
 
-of conda.
+or conda.
 
 ```
 conda install jupyterlab=0.34 "ipywidgets>=7.2"
