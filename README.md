@@ -70,7 +70,7 @@ packages using pip...
 pip install "notebook>=5.3" "ipywidgets>=7.2"
 ```
 
-of conda.
+or conda.
 
 ```
 conda install "notebook>=5.3" "ipywidgets>=7.2"
@@ -84,7 +84,7 @@ packages using pip...
 pip install jupyterlab==0.34 "ipywidgets>=7.2"
 ```
 
-of conda.
+or conda.
 
 ```
 conda install jupyterlab=0.34 "ipywidgets>=7.2"
