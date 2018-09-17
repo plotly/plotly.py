@@ -1,11 +1,10 @@
 import os
+from stat import ST_MODE, S_IWUSR, S_IRUSR
 
 # file structure
 PLOTLY_DIR = os.path.join(os.path.expanduser("~"), ".plotly")
 CREDENTIALS_FILE = os.path.join(PLOTLY_DIR, ".credentials")
 CONFIG_FILE = os.path.join(PLOTLY_DIR, ".config")
-TEST_DIR = os.path.join(os.path.expanduser("~"), ".test")
-TEST_FILE = os.path.join(PLOTLY_DIR, ".permission_test")
 
 # this sets both the DEFAULTS and the TYPES for these files
 FILE_CONTENT = {CREDENTIALS_FILE: {'username': '',
@@ -25,14 +24,9 @@ FILE_CONTENT = {CREDENTIALS_FILE: {'username': '',
 
 def _permissions():
     try:
-        os.mkdir(TEST_DIR)
-        os.rmdir(TEST_DIR)
         if not os.path.exists(PLOTLY_DIR):
             os.mkdir(PLOTLY_DIR)
-        with open(TEST_FILE, 'w') as f:
-            f.write('testing\n')
-        os.remove(TEST_FILE)
-        return True
+        return os.stat(PLOTLY_DIR)[ST_MODE] & (S_IWUSR | S_IRUSR) == (S_IWUSR | S_IRUSR)
     except:
         return False
 
