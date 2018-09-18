@@ -140,7 +140,10 @@ class _Dendrogram(object):
         for i in range(len(yvals_flat)):
             if yvals_flat[i] == 0.0 and xvals_flat[i] not in self.zero_vals:
                 self.zero_vals.append(xvals_flat[i])
-
+        if len(self.zero_vals) > len(yvals) + 1:
+            l_border = int(min(self.zero_vals))
+            r_border = int(max(self.zero_vals))
+            self.zero_vals = [v for v in range(l_border,r_border + 1, int((r_border-l_border) / len(yvals)))]
         self.zero_vals.sort()
 
         self.layout = self.set_figure_layout(width, height)
