@@ -90,14 +90,15 @@ def create_dendrogram(X, orientation="bottom", labels=None,
                              distfun=distfun, linkagefun=linkagefun,
                              hovertext=hovertext)
 
-    return graph_objs.Figure(data=dendrogram.data, layout=dendrogram.layout)
+    return graph_objs.Figure(data=dendrogram.data,
+                             layout=dendrogram.layout)
 
 
 class _Dendrogram(object):
     """Refer to FigureFactory.create_dendrogram() for docstring."""
 
     def __init__(self, X, orientation='bottom', labels=None, colorscale=None,
-                 width="100%", height="100%", xaxis='xaxis', yaxis='yaxis',
+                 width=np.inf, height=np.inf, xaxis='xaxis', yaxis='yaxis',
                  distfun=None,
                  linkagefun=lambda x: sch.linkage(x, 'complete'),
                  hovertext=None):
@@ -126,7 +127,7 @@ class _Dendrogram(object):
         (dd_traces, xvals, yvals,
             ordered_labels, leaves) = self.get_dendrogram_traces(X, colorscale,
                                                                  distfun,
-                                                                 linkagefun, 
+                                                                 linkagefun,
                                                                  hovertext)
 
         self.labels = ordered_labels
@@ -146,7 +147,7 @@ class _Dendrogram(object):
         self.zero_vals.sort()
 
         self.layout = self.set_figure_layout(width, height)
-        self.data = graph_objs.Data(dd_traces)
+        self.data = dd_traces
 
     def get_color_dict(self, colorscale):
         """
@@ -290,11 +291,12 @@ class _Dendrogram(object):
             hovertext_label = None
             if hovertext:
                 hovertext_label = hovertext[i]
-            trace = graph_objs.Scatter(
+            trace = dict(
+                type='scatter',
                 x=np.multiply(self.sign[self.xaxis], xs),
                 y=np.multiply(self.sign[self.yaxis], ys),
                 mode='lines',
-                marker=graph_objs.Marker(color=colors[color_key]),
+                marker=dict(color=colors[color_key]),
                 text=hovertext_label,
                 hoverinfo='text'
             )

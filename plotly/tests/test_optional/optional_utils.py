@@ -6,6 +6,8 @@ from plotly import optional_imports
 from plotly.tests.utils import is_num_list
 from plotly.utils import get_by_path, node_generator
 
+import copy
+
 matplotlylib = optional_imports.get_module('plotly.matplotlylib')
 
 if matplotlylib:
@@ -18,6 +20,7 @@ if matplotlylib:
 def run_fig(fig):
     renderer = PlotlyRenderer()
     exporter = Exporter(renderer)
+    print(exporter)
     exporter.run(fig)
     return renderer
 
@@ -28,6 +31,36 @@ class NumpyTestUtilsMixin(object):
     def _format_path(self, path):
         str_path = [repr(p) for p in path]
         return '[' + ']['.join(sp for sp in str_path) + ']'
+
+    def assert_fig_equal(self, d1, d2, msg=None, ignore=['uid']):
+        """
+        Helper function for assert_dict_equal
+
+        By defualt removes uid from d1 and/or d2 if present
+        then calls assert_dict_equal.
+
+        :param (list|tuple) ignore: sequence of key names as
+            strings that are removed from both d1 and d2 if
+            they exist
+        """
+        # deep copy d1 and d2
+        if 'to_plotly_json' in dir(d1):
+            d1_copy = copy.deepcopy(d1.to_plotly_json())
+        else:
+            d1_copy = copy.deepcopy(d1)
+
+        if 'to_plotly_json' in dir(d2):
+            d2_copy = copy.deepcopy(d2.to_plotly_json())
+        else:
+            d2_copy = copy.deepcopy(d2)
+
+        for key in ignore:
+            if key in d1_copy.keys():
+                del d1_copy[key]
+            if key in d2_copy.keys():
+                del d2_copy[key]
+
+        self.assert_dict_equal(d1_copy, d2_copy, msg=None)
 
     def assert_dict_equal(self, d1, d2, msg=None):
         """

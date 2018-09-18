@@ -18,18 +18,60 @@ tuple - A tuple color is a 3-tuple of the form (a,b,c) where a, b and c are
 floats between 0 and 1 inclusive.
 
 -----
-Types of colormap:
+Colormaps and Colorscales:
+A colormap or a colorscale is a correspondence between values - Pythonic
+objects such as strings and floats - to colors.
+
 There are typically two main types of colormaps that exist: numerical and
 categorical colormaps.
 
-Numerical colormaps are used when a the coloring column being used takes a
-spectrum of values or numbers. Alternatively, a categorical colormap is used
-to assign a specific value in a color column to a specific color everytime it
-appears in the plot at hand. For instance, a column of strings in a dataframe
-would naturally use a categorical colormap. You can choose however to use a
-categorical colormap with a column of numbers. Be careful though, as if you
-have a large set of unique numbers in your column you'll get a lot of colors.
+Numerical:
+----------
+Numerical colormaps are used when the coloring column being used takes a
+spectrum of values or numbers.
 
+A classic example from the Plotly library:
+```
+rainbow_colorscale =  [
+    [0, 'rgb(150,0,90)'], [0.125, 'rgb(0,0,200)'],
+    [0.25, 'rgb(0,25,255)'], [0.375, 'rgb(0,152,255)'],
+    [0.5, 'rgb(44,255,150)'], [0.625, 'rgb(151,255,0)'],
+    [0.75, 'rgb(255,234,0)'], [0.875, 'rgb(255,111,0)'],
+    [1, 'rgb(255,0,0)']
+]
+```
+
+Notice that this colorscale is a list of lists with each inner list containing
+a number and a color. These left hand numbers in the nested lists go from 0 to
+1, and they are like pointers tell you when a number is mapped to a specific
+color.
+
+If you have a column of numbers `col_num` that you want to plot, and you know
+
+```
+min(col_num) = 0
+max(col_num) = 100
+```
+
+then if you pull out the number `12.5` in the list and want to figure out what
+color the corresponding chart element (bar, scatter plot, etc) is going to be,
+you'll figure out that proportionally 12.5 to 100 is the same as 0.125 to 1.
+So, the point will be mapped to 'rgb(0,0,200)'.
+
+All other colors between the pinned values in a colorscale are linearly
+interpolated.
+
+Categorical:
+------------
+Alternatively, a categorical colormap is used to assign a specific value in a
+color column to a specific color everytime it appears in the dataset.
+
+A column of strings in a panadas.dataframe that is chosen to serve as the
+color index would naturally use a categorical colormap. However, you can
+choose to use a categorical colormap with a column of numbers.
+
+Be careful! If you have a lot of unique numbers in your color column you will
+end up with a colormap that is massive and may slow down graphing performance.
 """
 from __future__ import absolute_import
 
@@ -160,7 +202,20 @@ PLOTLY_SCALES = {
         [0.7529411764705882, '#5ec962'], [0.8156862745098039, '#84d44b'],
         [0.8784313725490196, '#addc30'], [0.9411764705882353, '#d8e219'],
         [1, '#fde725']
+    ],
+    
+    'Cividis': [
+        [0.000000, 'rgb(0,32,76)'], [0.058824, 'rgb(0,42,102)'], 
+        [0.117647, 'rgb(0,52,110)'], [0.176471, 'rgb(39,63,108)'], 
+        [0.235294, 'rgb(60,74,107)'], [0.294118, 'rgb(76,85,107)'], 
+        [0.352941, 'rgb(91,95,109)'], [0.411765, 'rgb(104,106,112)'], 
+        [0.470588, 'rgb(117,117,117)'], [0.529412, 'rgb(131,129,120)'], 
+        [0.588235, 'rgb(146,140,120)'], [0.647059, 'rgb(161,152,118)'], 
+        [0.705882, 'rgb(176,165,114)'], [0.764706, 'rgb(192,177,109)'], 
+        [0.823529, 'rgb(209,191,102)'], [0.882353, 'rgb(225,204,92)'], 
+        [0.941176, 'rgb(243,219,79)'], [1.000000, 'rgb(255,233,69)']
     ]
+    
 }
 
 

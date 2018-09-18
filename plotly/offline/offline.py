@@ -150,16 +150,8 @@ def init_notebook_mode(connected=False):
 
 def _plot_html(figure_or_data, config, validate, default_width,
                default_height, global_requirejs):
-    # force no validation if frames is in the call
-    # TODO - add validation for frames in call - #605
-    if 'frames' in figure_or_data:
-        figure = tools.return_figure_from_figure_or_data(
-            figure_or_data, False
-        )
-    else:
-        figure = tools.return_figure_from_figure_or_data(
-            figure_or_data, validate
-        )
+
+    figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
 
     width = figure.get('layout', {}).get('width', default_width)
     height = figure.get('layout', {}).get('height', default_height)
@@ -182,18 +174,27 @@ def _plot_html(figure_or_data, config, validate, default_width,
     jdata = _json.dumps(figure.get('data', []), cls=utils.PlotlyJSONEncoder)
     jlayout = _json.dumps(figure.get('layout', {}),
                           cls=utils.PlotlyJSONEncoder)
-    if 'frames' in figure_or_data:
-        jframes = _json.dumps(figure.get('frames', {}),
+
+    if figure.get('frames', None):
+        jframes = _json.dumps(figure.get('frames', []),
                               cls=utils.PlotlyJSONEncoder)
+    else:
+        jframes = None
 
     configkeys = (
+        'staticPlot',
+        'plotlyServerURL',
         'editable',
+        'edits',
         'autosizable',
+        'queueLength',
         'fillFrame',
         'frameMargins',
         'scrollZoom',
         'doubleClick',
         'showTips',
+        'showAxisDragHandles',
+        'showAxisRangeEntryBoxes',
         'showLink',
         'sendData',
         'linkText',
@@ -202,10 +203,16 @@ def _plot_html(figure_or_data, config, validate, default_width,
         'modeBarButtonsToRemove',
         'modeBarButtonsToAdd',
         'modeBarButtons',
+        'toImageButtonOptions',
         'displaylogo',
         'plotGlPixelRatio',
         'setBackground',
-        'topojsonURL'
+        'topojsonURL',
+        'mapboxAccessToken',
+        'logging',
+        'globalTransforms',
+        'locale',
+        'locales',
     )
 
     config_clean = dict((k, config[k]) for k in configkeys if k in config)
@@ -225,7 +232,7 @@ def _plot_html(figure_or_data, config, validate, default_width,
         config['linkText'] = link_text
         jconfig = jconfig.replace('Export to plot.ly', link_text)
 
-    if 'frames' in figure_or_data:
+    if jframes:
         script = '''
         Plotly.plot(
             '{id}',

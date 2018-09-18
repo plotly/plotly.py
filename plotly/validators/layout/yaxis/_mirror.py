@@ -1,0 +1,16 @@
+import _plotly_utils.basevalidators
+
+
+class MirrorValidator(_plotly_utils.basevalidators.EnumeratedValidator):
+
+    def __init__(
+        self, plotly_name='mirror', parent_name='layout.yaxis', **kwargs
+    ):
+        super(MirrorValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type='ticks+layoutstyle',
+            role='style',
+            values=[True, 'ticks', False, 'all', 'allticks'],
+            **kwargs
+        )

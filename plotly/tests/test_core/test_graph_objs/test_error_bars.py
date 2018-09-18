@@ -41,6 +41,5 @@ def test_instantiate_error_y():
            width=5)
 
 
-@raises(PlotlyDictKeyError)
 def test_key_error():
-    ErrorX(value=0.1, typ='percent', color='red')
+    assert ErrorX(value=0.1, typ='percent', color='red') == {'color': 'red', 'typ': 'percent', 'value': 0.1}

@@ -96,20 +96,23 @@ class TestJSONEncoder(TestCase):
         res = utils.PlotlyJSONEncoder.encode_as_numpy(np.ma.core.masked)
         self.assertTrue(math.isnan(res))
 
-    def test_encode_as_datetime(self):
+    def test_encode_valid_datetime(self):
 
         # should *fail* without 'utcoffset' and 'isoformat' and '__sub__' attrs
-        non_datetimes = [datetime.date(2013, 10, 1), 'noon', 56, '00:00:00']
+        #non_datetimes = [datetime.date(2013, 10, 1), 'noon', 56, '00:00:00']
+        non_datetimes = [datetime.date(2013, 10, 1)]
         for obj in non_datetimes:
             self.assertRaises(utils.NotEncodable,
                               utils.PlotlyJSONEncoder.encode_as_datetime, obj)
 
+    def test_encode_as_datetime(self):
         # should succeed with 'utcoffset', 'isoformat' and '__sub__' attrs
         res = utils.PlotlyJSONEncoder.encode_as_datetime(
             datetime.datetime(2013, 10, 1)
         )
         self.assertEqual(res, '2013-10-01')
 
+    def test_encode_as_datetime_with_microsecond(self):
         # should not include extraneous microsecond info if DNE
         res = utils.PlotlyJSONEncoder.encode_as_datetime(
             datetime.datetime(2013, 10, 1, microsecond=0)
@@ -122,6 +125,7 @@ class TestJSONEncoder(TestCase):
         )
         self.assertEqual(res, '2013-10-01 00:00:00.000010')
 
+    def test_encode_as_datetime_with_localized_tz(self):
         # should convert tzinfo to utc. Note that in october, we're in EDT!
         # therefore the 4 hour difference is correct.
         naive_datetime = datetime.datetime(2013, 10, 1)
@@ -144,7 +148,6 @@ class TestJSONEncoder(TestCase):
         self.assertEqual(res, '2013-10-01')
 
         # should also work with a date time without a utc offset!
-        # TODO: is this OK? We could raise errors after checking isinstance...
         res = utils.PlotlyJSONEncoder.encode_as_date(
             datetime.datetime(2013, 10, 1, microsecond=10)
         )
@@ -155,7 +158,7 @@ class TestJSONEncoder(TestCase):
         # should work with decimal values
         res = utils.PlotlyJSONEncoder.encode_as_decimal(decimal.Decimal(1.023452))
 
-        self.assertAlmostEqual(res, 1.023452) # Checks upto 7 decimal places
+        self.assertAlmostEqual(res, 1.023452)  # Checks upto 7 decimal places
         self.assertIsInstance(res, float)
 
 ## JSON encoding
@@ -212,9 +215,17 @@ def test_figure_json_encoding():
     _json.dumps(figure, cls=utils.PlotlyJSONEncoder, sort_keys=True)
 
     # Test data wasn't mutated
-    assert(bool(np.asarray(np_list ==
-                np.array([1, 2, 3, np.NaN,
-                          np.NAN, np.Inf, dt(2014, 1, 5)])).all()))
+    np_array = np.array(
+        [1, 2, 3, np.NaN, np.NAN, np.Inf, dt(2014, 1, 5)]
+    )
+    for k in range(len(np_array)):
+        if k in [3, 4]:
+            # check NaN
+            assert np.isnan(np_list[k]) and np.isnan(np_array[k])
+        else:
+            # non-NaN
+            assert np_list[k] == np_array[k]
+
     assert(set(data[0]['z']) ==
            set([1, 'A', dt(2014, 1, 5), dt(2014, 1, 5, 1, 1, 1),
                 dt(2014, 1, 5, 1, 1, 1, 1)]))
@@ -233,6 +244,8 @@ def test_datetime_json_encoding():
 
 def test_pandas_json_encoding():
     j1 = _json.dumps(df['col 1'], cls=utils.PlotlyJSONEncoder)
+    print(j1)
+    print('\n')
     assert(j1 == '[1, 2, 3, "2014-01-05", null, null, null]')
 
     # Test that data wasn't mutated
@@ -266,32 +279,33 @@ def test_numpy_masked_json_encoding():
     assert(j1 == '[1, 2, null]')
 
 
-@attr('matplotlib')
-def test_masked_constants_example():
-    # example from: https://gist.github.com/tschaume/d123d56bf586276adb98
-    data = {
-        'esN': [0, 1, 2, 3],
-        'ewe_is0': [-398.11901997, -398.11902774,
-                    -398.11897111, -398.11882215],
-        'ewe_is1': [-398.11793027, -398.11792966, -398.11786308, None],
-        'ewe_is2': [-398.11397008, -398.11396421, None, None]
-    }
-    df = pd.DataFrame.from_dict(data)
+if matplotlylib:
+    @attr('matplotlib')
+    def test_masked_constants_example():
+        # example from: https://gist.github.com/tschaume/d123d56bf586276adb98
+        data = {
+            'esN': [0, 1, 2, 3],
+            'ewe_is0': [-398.11901997, -398.11902774,
+                        -398.11897111, -398.11882215],
+            'ewe_is1': [-398.11793027, -398.11792966, -398.11786308, None],
+            'ewe_is2': [-398.11397008, -398.11396421, None, None]
+        }
+        df = pd.DataFrame.from_dict(data)
 
-    plotopts = {'x': 'esN', 'marker': 'o'}
-    fig, ax = plt.subplots(1, 1)
-    df.plot(ax=ax, **plotopts)
+        plotopts = {'x': 'esN'}
+        fig, ax = plt.subplots(1, 1)
+        df.plot(ax=ax, **plotopts)
 
-    renderer = PlotlyRenderer()
-    Exporter(renderer).run(fig)
+        renderer = PlotlyRenderer()
+        Exporter(renderer).run(fig)
 
-    _json.dumps(renderer.plotly_fig, cls=utils.PlotlyJSONEncoder)
+        _json.dumps(renderer.plotly_fig, cls=utils.PlotlyJSONEncoder)
 
-    jy = _json.dumps(renderer.plotly_fig['data'][1]['y'],
-                    cls=utils.PlotlyJSONEncoder)
-    print(jy)
-    array = _json.loads(jy)
-    assert(array == [-398.11793027, -398.11792966, -398.11786308, None])
+        jy = _json.dumps(renderer.plotly_fig['data'][1]['y'],
+                         cls=utils.PlotlyJSONEncoder)
+        print(jy)
+        array = _json.loads(jy)
+        assert(array == [-398.11793027, -398.11792966, -398.11786308, None])
 
 
 def test_numpy_dates():
