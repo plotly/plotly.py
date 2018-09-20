@@ -1,6 +1,6 @@
 import plotly
 from plotly.basedatatypes import BaseFigure
-from plotly.graph_objs import Figure, FigureWidget
+import plotly.graph_objs as go
 
 
 def validate_coerce_fig_to_dict(fig, validate):
@@ -20,10 +20,11 @@ The fig parameter must be a dict or Figure.
 
 
 def validate_coerce_output_type(output_type):
-    if output_type == 'Figure' or output_type == Figure:
-        cls = Figure
-    elif output_type == 'FigureWidget' or output_type == FigureWidget:
-        cls = FigureWidget
+    if output_type == 'Figure' or output_type == go.Figure:
+        cls = go.Figure
+    elif (output_type == 'FigureWidget' or
+          (hasattr(go, 'FigureWidget') and output_type == go.FigureWidget)):
+        cls = go.FigureWidget
     else:
         raise ValueError("""
 Invalid output type: {output_type}
