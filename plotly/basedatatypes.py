@@ -99,8 +99,9 @@ class BaseFigure(object):
         # ------------------
         # These properties are used by the tools.make_subplots logic.
         # We initialize them to None here, before checking if the input data
-        # object is a BaseFigure, in which case we bring over the _grid*
-        # properties of the input BaseFigure
+        # object is a BaseFigure, or a dict with _grid_str and _grid_ref
+        # properties, in which case we bring over the _grid* properties of
+        # the input
         self._grid_str = None
         self._grid_ref = None
 
@@ -116,6 +117,12 @@ class BaseFigure(object):
 
         elif (isinstance(data, dict)
               and ('data' in data or 'layout' in data or 'frames' in data)):
+
+            # Bring over subplot fields
+            self._grid_str = data.get('_grid_str', None)
+            self._grid_ref = data.get('_grid_ref', None)
+
+            # Extract data, layout, and frames
             data, layout, frames = (data.get('data', None),
                                     data.get('layout', None),
                                     data.get('frames', None))
@@ -230,6 +237,17 @@ class BaseFigure(object):
 
     # Magic Methods
     # -------------
+    def __reduce__(self):
+        """
+        Custom implementation of reduce is used to support deep copying
+        and pickling
+        """
+        props = self.to_dict()
+        props['_grid_str'] = self._grid_str
+        props['_grid_ref'] = self._grid_ref
+        return (self.__class__,
+                (props,))
+
     def __setitem__(self, prop, value):
 
         # Normalize prop
@@ -2594,6 +2612,15 @@ class BasePlotlyType(object):
 
     # Magic Methods
     # -------------
+    def __reduce__(self):
+        """
+        Custom implementation of reduce is used to support deep copying
+        and pickling
+        """
+        props = self.to_plotly_json()
+        return (self.__class__,
+                (props,))
+
     def __getitem__(self, prop):
         """
         Get item or nested item from object
