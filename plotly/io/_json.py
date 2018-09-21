@@ -109,12 +109,15 @@ def from_json(value, output_type='Figure', skip_invalid=False):
     ----------
     value: str
         String containing the JSON representation of a figure
+
     output_type: type or str (default 'Figure')
         The output figure type or type name.
-        One of:  graph_objs.Figure, 'Figure,
+        One of:  graph_objs.Figure, 'Figure',
                  graph_objs.FigureWidget, 'FigureWidget'
+
     skip_invalid: bool (default False)
-        False if invalid figure properties should result in an exception
+        False if invalid figure properties should result in an exception.
+        True if invalid figure properties should be silently ignored.
 
     Raises
     ------
@@ -162,10 +165,12 @@ def read_json(file, output_type='Figure', skip_invalid=False):
 
     output_type: type or str (default 'Figure')
         The output figure type or type name.
-        One of:  graph_objs.Figure, 'Figure,
+        One of:  graph_objs.Figure, 'Figure',
                  graph_objs.FigureWidget, 'FigureWidget'
+
     skip_invalid: bool (default False)
-        False if invalid figure properties should result in an exception
+        False if invalid figure properties should result in an exception.
+        True if invalid figure properties should be silently ignored.
 
     Returns
     -------

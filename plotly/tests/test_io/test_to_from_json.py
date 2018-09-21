@@ -13,6 +13,7 @@ else:
     from mock import MagicMock
     from backports import tempfile
 
+
 # fixtures
 # --------
 @pytest.fixture
