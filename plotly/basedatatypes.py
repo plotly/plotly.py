@@ -3623,7 +3623,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         Custom __getattr__ that handles dynamic subplot properties
         """
         prop = self._strip_subplot_suffix_of_1(prop)
-        if prop in self._subplotid_props:
+        if prop != '_subplotid_props' and prop in self._subplotid_props:
             validator = self._validators[prop]
             return validator.present(self._compound_props[prop])
         else:
