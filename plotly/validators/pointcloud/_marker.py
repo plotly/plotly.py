@@ -9,8 +9,9 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(MarkerValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Marker',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Marker'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             blend
                 Determines if colors are blended together for a
                 translucency effect in case `opacity` is
@@ -41,6 +42,7 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the minimum size (in px) of the rendered
                 marker points, effective when the `pointcloud`
                 shows a million or more points.
-""",
+"""
+            ),
             **kwargs
         )

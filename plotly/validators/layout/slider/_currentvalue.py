@@ -12,8 +12,9 @@ class CurrentvalueValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(CurrentvalueValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Currentvalue',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Currentvalue'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             font
                 Sets the font of the current value label text.
             offset
@@ -31,6 +32,7 @@ class CurrentvalueValidator(_plotly_utils.basevalidators.CompoundValidator):
             xanchor
                 The alignment of the value readout relative to
                 the length of the slider.
-""",
+"""
+            ),
             **kwargs
         )

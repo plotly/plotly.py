@@ -9,8 +9,9 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(HoverlabelValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Hoverlabel',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Hoverlabel'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             bgcolor
                 Sets the background color of all hover labels
                 on graph
@@ -30,6 +31,7 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 characters, but if it is longer, will truncate
                 to `namelength - 3` characters and add an
                 ellipsis.
-""",
+"""
+            ),
             **kwargs
         )

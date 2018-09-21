@@ -9,8 +9,9 @@ class AngularAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(AngularAxisValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='AngularAxis',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'AngularAxis'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             categoryarray
                 Sets the order in which categories on this axis
                 appear. Only has an effect if `categoryorder`
@@ -242,6 +243,7 @@ class AngularAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 preserving interaction like dragging. Default
                 is true when a cheater plot is present on the
                 axis, otherwise false
-""",
+"""
+            ),
             **kwargs
         )

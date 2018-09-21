@@ -7,6 +7,6 @@ class DataValidator(plotly.validators.DataValidator):
         super(DataValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            role='object',
+            role=kwargs.pop('role', 'object'),
             **kwargs
         )

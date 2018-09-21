@@ -12,8 +12,8 @@ class LenmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         super(LenmodeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type='colorbars',
-            role='info',
-            values=['fraction', 'pixels'],
+            edit_type=kwargs.pop('edit_type', 'colorbars'),
+            role=kwargs.pop('role', 'info'),
+            values=kwargs.pop('values', ['fraction', 'pixels']),
             **kwargs
         )

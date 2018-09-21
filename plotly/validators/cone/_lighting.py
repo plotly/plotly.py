@@ -7,8 +7,9 @@ class LightingValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(LightingValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Lighting',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Lighting'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             ambient
                 Ambient light increases overall color
                 visibility but can wash out the image.
@@ -33,6 +34,7 @@ class LightingValidator(_plotly_utils.basevalidators.CompoundValidator):
             vertexnormalsepsilon
                 Epsilon for vertex normals calculation avoids
                 math issues arising from degenerate geometry.
-""",
+"""
+            ),
             **kwargs
         )

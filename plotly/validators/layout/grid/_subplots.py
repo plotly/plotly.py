@@ -9,15 +9,19 @@ class SubplotsValidator(_plotly_utils.basevalidators.InfoArrayValidator):
         super(SubplotsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            dimensions=2,
-            edit_type='plot',
-            free_length=True,
-            items={
-                'valType': 'enumerated',
-                'values':
-                ['/^x([2-9]|[1-9][0-9]+)?y([2-9]|[1-9][0-9]+)?$/', ''],
-                'editType': 'plot'
-            },
-            role='info',
+            dimensions=kwargs.pop('dimensions', 2),
+            edit_type=kwargs.pop('edit_type', 'plot'),
+            free_length=kwargs.pop('free_length', True),
+            items=kwargs.pop(
+                'items', {
+                    'valType':
+                    'enumerated',
+                    'values':
+                    ['/^x([2-9]|[1-9][0-9]+)?y([2-9]|[1-9][0-9]+)?$/', ''],
+                    'editType':
+                    'plot'
+                }
+            ),
+            role=kwargs.pop('role', 'info'),
             **kwargs
         )

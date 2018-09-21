@@ -7,8 +7,9 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(OhlcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Ohlc',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Ohlc'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             close
                 Sets the close values.
             closesrc
@@ -128,6 +129,7 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (the default value), the y coordinates refer to
                 `layout.yaxis`. If "y2", the y coordinates
                 refer to `layout.yaxis2`, and so on.
-""",
+"""
+            ),
             **kwargs
         )

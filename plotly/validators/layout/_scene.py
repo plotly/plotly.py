@@ -7,8 +7,9 @@ class SceneValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(SceneValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Scene',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Scene'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             annotations
                 plotly.graph_objs.layout.scene.Annotation
                 instance or dict with compatible properties
@@ -50,6 +51,7 @@ class SceneValidator(_plotly_utils.basevalidators.CompoundValidator):
             zaxis
                 plotly.graph_objs.layout.scene.ZAxis instance
                 or dict with compatible properties
-""",
+"""
+            ),
             **kwargs
         )

@@ -7,8 +7,9 @@ class ImagesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
         super(ImagesValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Image',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Image'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             layer
                 Specifies whether images are drawn below or
                 above traces. When `xref` and `yref` are both
@@ -86,6 +87,7 @@ class ImagesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 distance from the bottom of the plot in
                 normalized coordinates where 0 (1) corresponds
                 to the bottom (top).
-""",
+"""
+            ),
             **kwargs
         )

@@ -9,8 +9,9 @@ class RadialAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(RadialAxisValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='RadialAxis',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'RadialAxis'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             domain
                 Polar chart subplots are not supported yet.
                 This key has currently no effect.
@@ -43,6 +44,7 @@ class RadialAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
             visible
                 Determines whether or not this axis will be
                 visible.
-""",
+"""
+            ),
             **kwargs
         )

@@ -12,7 +12,7 @@ class TicktextValidator(_plotly_utils.basevalidators.DataArrayValidator):
         super(TicktextValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type='plot',
-            role='data',
+            edit_type=kwargs.pop('edit_type', 'plot'),
+            role=kwargs.pop('role', 'data'),
             **kwargs
         )

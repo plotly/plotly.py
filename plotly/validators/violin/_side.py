@@ -7,8 +7,8 @@ class SideValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         super(SideValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type='plot',
-            role='info',
-            values=['both', 'positive', 'negative'],
+            edit_type=kwargs.pop('edit_type', 'plot'),
+            role=kwargs.pop('role', 'info'),
+            values=kwargs.pop('values', ['both', 'positive', 'negative']),
             **kwargs
         )

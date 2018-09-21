@@ -7,11 +7,13 @@ class DecreasingValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(DecreasingValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Decreasing',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Decreasing'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             line
                 plotly.graph_objs.ohlc.decreasing.Line instance
                 or dict with compatible properties
-""",
+"""
+            ),
             **kwargs
         )

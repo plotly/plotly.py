@@ -12,16 +12,18 @@ class TypeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         super(TypeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type='plot',
-            role='info',
-            values=[
-                'equirectangular', 'mercator', 'orthographic', 'natural earth',
-                'kavrayskiy7', 'miller', 'robinson', 'eckert4',
-                'azimuthal equal area', 'azimuthal equidistant',
-                'conic equal area', 'conic conformal', 'conic equidistant',
-                'gnomonic', 'stereographic', 'mollweide', 'hammer',
-                'transverse mercator', 'albers usa', 'winkel tripel', 'aitoff',
-                'sinusoidal'
-            ],
+            edit_type=kwargs.pop('edit_type', 'plot'),
+            role=kwargs.pop('role', 'info'),
+            values=kwargs.pop(
+                'values', [
+                    'equirectangular', 'mercator', 'orthographic',
+                    'natural earth', 'kavrayskiy7', 'miller', 'robinson',
+                    'eckert4', 'azimuthal equal area', 'azimuthal equidistant',
+                    'conic equal area', 'conic conformal', 'conic equidistant',
+                    'gnomonic', 'stereographic', 'mollweide', 'hammer',
+                    'transverse mercator', 'albers usa', 'winkel tripel',
+                    'aitoff', 'sinusoidal'
+                ]
+            ),
             **kwargs
         )

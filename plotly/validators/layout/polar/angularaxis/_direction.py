@@ -12,8 +12,8 @@ class DirectionValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         super(DirectionValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type='calc',
-            role='info',
-            values=['counterclockwise', 'clockwise'],
+            edit_type=kwargs.pop('edit_type', 'calc'),
+            role=kwargs.pop('role', 'info'),
+            values=kwargs.pop('values', ['counterclockwise', 'clockwise']),
             **kwargs
         )

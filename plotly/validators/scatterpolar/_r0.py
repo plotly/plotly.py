@@ -7,7 +7,7 @@ class R0Validator(_plotly_utils.basevalidators.AnyValidator):
         super(R0Validator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type='calc+clearAxisTypes',
-            role='info',
+            edit_type=kwargs.pop('edit_type', 'calc+clearAxisTypes'),
+            role=kwargs.pop('role', 'info'),
             **kwargs
         )

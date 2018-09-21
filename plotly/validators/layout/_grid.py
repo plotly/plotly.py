@@ -7,8 +7,9 @@ class GridValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(GridValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Grid',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Grid'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             columns
                 The number of columns in the grid. If you
                 provide a 2D `subplots` array, the length of
@@ -88,6 +89,7 @@ class GridValidator(_plotly_utils.basevalidators.CompoundValidator):
                 *left plot* is the leftmost plot that each y
                 axis is used in. "right" and *right plot* are
                 similar.
-""",
+"""
+            ),
             **kwargs
         )

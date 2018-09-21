@@ -9,8 +9,9 @@ class DimensionsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
         super(DimensionsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Dimension',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Dimension'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             axis
                 plotly.graph_objs.splom.dimension.Axis instance
                 or dict with compatible properties
@@ -48,6 +49,7 @@ class DimensionsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 shown on the graph. Note that even visible
                 false dimension contribute to the default grid
                 generate by this splom trace.
-""",
+"""
+            ),
             **kwargs
         )

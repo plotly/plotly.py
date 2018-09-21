@@ -63,7 +63,7 @@ class {class_name}({superclass_name}):
             continue
 
         buffer.write(f""",
-                 {attr_name}={attr_val}""")
+                 {attr_name}=kwargs.pop('{attr_name}', {attr_val})""")
 
     buffer.write(f""",
         **kwargs""")

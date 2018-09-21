@@ -9,8 +9,9 @@ class BorderValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(BorderValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Border',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Border'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             arearatio
                 Specifies what fraction of the marker area is
                 covered with the border.
@@ -19,6 +20,7 @@ class BorderValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color. If the color is not fully opaque and
                 there are hundreds of thousands of points, it
                 may cause slower zooming and panning.
-""",
+"""
+            ),
             **kwargs
         )

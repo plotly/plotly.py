@@ -7,6 +7,6 @@ class TracesValidator(_plotly_utils.basevalidators.AnyValidator):
         super(TracesValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            role='info',
+            role=kwargs.pop('role', 'info'),
             **kwargs
         )
