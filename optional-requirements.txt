@@ -34,6 +34,7 @@ pandas
 scipy
 
 ## jupyter ##
+nbformat>=4.2
 jupyter
 ipykernel
 
