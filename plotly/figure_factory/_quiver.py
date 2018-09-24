@@ -21,6 +21,9 @@ def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
     :param (float in [0,1]) arrow_scale: value multiplied to length of barb
         to get length of arrowhead. Default = .3
     :param (angle in radians) angle: angle of arrowhead. Default = pi/9
+    :param (positive float) angle: the ratio between the scale of the y-axis 
+        and the scale of the x-axis (scale_y / scale_x). Default = None, the
+        scale ratio is not fixed.
     :param kwargs: kwargs passed through plotly.graph_objs.Scatter
         for more information on valid kwargs call
         help(plotly.graph_objs.Scatter)
