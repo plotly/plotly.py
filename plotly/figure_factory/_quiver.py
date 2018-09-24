@@ -86,6 +86,29 @@ def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
     # Plot
     py.plot(fig, filename='quiver')
     ```
+
+    Example 4: Forcing a fix scale ratio to maintain the arrow length
+    ```
+    import plotly.plotly as py
+    from plotly.figure_factory import create_quiver
+
+    import numpy as np
+
+    # Add data
+    x,y = np.meshgrid(np.arange(0.5, 3.5, .5), np.arange(0.5, 4.5, .5))
+    u = x
+    v = y
+    angle = np.arctan(v / u)
+    norm = 0.25
+    u = norm * np.cos(angle)
+    v = norm * np.sin(angle)
+
+    # Create quiver with a fix scale ratio
+    fig = create_quiver(x, y, u, v, scale = 1, scaleratio = 0.5)
+
+    # Plot
+    py.plot(fig, filename='quiver')
+    ```
     """
     utils.validate_equal_length(x, y, u, v)
     utils.validate_positive_scalars(arrow_scale=arrow_scale, scale=scale)
