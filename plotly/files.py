@@ -36,7 +36,7 @@ def _permissions():
 _file_permissions = None
 
 
-def check_file_permissions():
+def ensure_writable_plotly_dir():
     # Cache permissions status
     global _file_permissions
     if _file_permissions is None:

@@ -15,7 +15,7 @@ import six
 
 from plotly import exceptions, optional_imports, session, utils
 from plotly.files import (CONFIG_FILE, CREDENTIALS_FILE, FILE_CONTENT,
-                          check_file_permissions)
+                          ensure_writable_plotly_dir)
 
 DEFAULT_PLOTLY_COLORS = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
                          'rgb(44, 160, 44)', 'rgb(214, 39, 40)',
@@ -78,7 +78,7 @@ def ensure_local_plotly_files():
     If the config or credential files aren't filled out, then write them
     to the disk.
     """
-    if check_file_permissions():
+    if ensure_writable_plotly_dir():
         for fn in [CREDENTIALS_FILE, CONFIG_FILE]:
             utils.ensure_file_exists(fn)
             contents = utils.load_json_dict(fn)
@@ -124,7 +124,7 @@ def set_credentials_file(username=None,
     :param (str) proxy_password: The pw associated with your Proxy un
 
     """
-    if not check_file_permissions():
+    if not ensure_writable_plotly_dir():
         raise exceptions.PlotlyError("You don't have proper file permissions "
                                      "to run this function.")
     ensure_local_plotly_files()  # make sure what's there is OK
@@ -187,7 +187,7 @@ def set_config_file(plotly_domain=None,
     :param (bool) world_readable: True = public, False = private
 
     """
-    if not check_file_permissions():
+    if not ensure_writable_plotly_dir():
         raise exceptions.PlotlyError("You don't have proper file permissions "
                                      "to run this function.")
     ensure_local_plotly_files()  # make sure what's there is OK
