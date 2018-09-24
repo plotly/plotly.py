@@ -12,6 +12,7 @@ from __future__ import absolute_import
 import warnings
 
 import six
+import copy
 
 from plotly import exceptions, optional_imports, session, utils
 from plotly.files import (CONFIG_FILE, CREDENTIALS_FILE, FILE_CONTENT,
@@ -156,7 +157,7 @@ def get_credentials_file(*args):
     credentials = utils.load_json_dict(CREDENTIALS_FILE, *args)
     if not credentials:
         # Credentials could not be read, use defaults
-        credentials = FILE_CONTENT[CREDENTIALS_FILE]
+        credentials = copy.copy(FILE_CONTENT[CREDENTIALS_FILE])
 
     return credentials
 
@@ -253,7 +254,7 @@ def get_config_file(*args):
     config = utils.load_json_dict(CONFIG_FILE, *args)
     if not config:
         # Config could not be read, use defaults
-        config = FILE_CONTENT[CONFIG_FILE]
+        config = copy.copy(FILE_CONTENT[CONFIG_FILE])
 
     return config
 
