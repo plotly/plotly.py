@@ -33,8 +33,12 @@ def _permissions():
         return False
 
 
-_file_permissions = _permissions()
+_file_permissions = None
 
 
 def check_file_permissions():
+    # Cache permissions status
+    global _file_permissions
+    if _file_permissions is None:
+        _file_permissions = _permissions()
     return _file_permissions

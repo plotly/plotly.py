@@ -152,11 +152,13 @@ def get_credentials_file(*args):
         get_credentials_file('username')
 
     """
-    if check_file_permissions():
-        ensure_local_plotly_files()  # make sure what's there is OK
-        return utils.load_json_dict(CREDENTIALS_FILE, *args)
-    else:
-        return FILE_CONTENT[CREDENTIALS_FILE]
+    # Read credentials from file if possible
+    credentials = utils.load_json_dict(CREDENTIALS_FILE, *args)
+    if not credentials:
+        # Credentials could not be read, use defaults
+        credentials = FILE_CONTENT[CREDENTIALS_FILE]
+
+    return credentials
 
 
 def reset_credentials_file():
@@ -247,11 +249,13 @@ def get_config_file(*args):
         get_config_file('plotly_domain')
 
     """
-    if check_file_permissions():
-        ensure_local_plotly_files()  # make sure what's there is OK
-        return utils.load_json_dict(CONFIG_FILE, *args)
-    else:
-        return FILE_CONTENT[CONFIG_FILE]
+    # Read config from file if possible
+    config = utils.load_json_dict(CONFIG_FILE, *args)
+    if not config:
+        # Config could not be read, use defaults
+        config = FILE_CONTENT[CONFIG_FILE]
+
+    return config
 
 
 def reset_config_file():
