@@ -220,7 +220,7 @@ class _Quiver(object):
         # Get barb lengths(default arrow length = 30% barb length)
         barb_len = [None] * len(self.x)
         for index in range(len(barb_len)):
-            barb_len[index] = math.hypot(dif_x[index], dif_y[index])
+            barb_len[index] = math.hypot(dif_x[index] / self.scaleratio, dif_y[index])
 
         # Make arrow lengths
         arrow_len = [None] * len(self.x)
@@ -229,7 +229,7 @@ class _Quiver(object):
         # Get barb angles
         barb_ang = [None] * len(self.x)
         for index in range(len(barb_ang)):
-            barb_ang[index] = math.atan2(dif_y[index], dif_x[index])
+            barb_ang[index] = math.atan2(dif_y[index], dif_x[index] / self.scaleratio)
 
         # Set angles to create arrow
         ang1 = [i + self.angle for i in barb_ang]
@@ -257,9 +257,9 @@ class _Quiver(object):
 
         # Set coordinates to create arrow
         for index in range(len(self.end_x)):
-            point1_x = [i - j for i, j in zip(self.end_x, seg1_x)]
+            point1_x = [i - j * self.scaleratio for i, j in zip(self.end_x, seg1_x)]
             point1_y = [i - j for i, j in zip(self.end_y, seg1_y)]
-            point2_x = [i - j for i, j in zip(self.end_x, seg2_x)]
+            point2_x = [i - j * self.scaleratio for i, j in zip(self.end_x, seg2_x)]
             point2_y = [i - j for i, j in zip(self.end_y, seg2_y)]
 
         # Combine lists to create arrow
