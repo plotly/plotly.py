@@ -8,7 +8,7 @@ from plotly.figure_factory import utils
 
 
 def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
-                  angle=math.pi / 9, **kwargs):
+                  angle=math.pi / 9, returnAsFigureWidget = False, **kwargs):
     """
     Returns data for a quiver plot.
 
@@ -98,8 +98,15 @@ def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
     data = [quiver]
     layout = graph_objs.Layout(hovermode='closest')
 
-    return graph_objs.Figure(data=data, layout=layout)
+    if returnAsFigureWidget:
+        return graph_objs.Figure(data=data, layout=layout)
+    else:
+        f = graph_objs.FigureWidget(data=data, layout=layout)
+        f.layout.on_change(update_quiver, 'xaxis.range', 'yaxis.range', 'width', 'height')
+        return f
 
+def update_quiver(layout):
+    print("Inside callback function")
 
 class _Quiver(object):
     """
