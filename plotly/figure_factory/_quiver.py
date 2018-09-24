@@ -8,7 +8,7 @@ from plotly.figure_factory import utils
 
 
 def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
-                  angle=math.pi / 9, scaleratio = 1, 
+                  angle=math.pi / 9, scaleratio = None, 
                   returnAsFigureWidget = False, **kwargs):
     """
     Returns data for a quiver plot.
@@ -88,29 +88,40 @@ def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
     utils.validate_equal_length(x, y, u, v)
     utils.validate_positive_scalars(arrow_scale=arrow_scale, scale=scale)
 
-    barb_x, barb_y = _Quiver(x, y, u, v, scale,
-                             arrow_scale, angle, scaleratio).get_barbs()
-    arrow_x, arrow_y = _Quiver(x, y, u, v, scale,
-                               arrow_scale, angle, scaleratio).get_quiver_arrows()
+    if scaleratio is None:
+        barb_x, barb_y = _Quiver(x, y, u, v, scale,
+                                arrow_scale, angle).get_barbs()
+        arrow_x, arrow_y = _Quiver(x, y, u, v, scale,
+                                arrow_scale, angle).get_quiver_arrows()
+    else:
+        barb_x, barb_y = _Quiver(x, y, u, v, scale,
+                                arrow_scale, angle, scaleratio).get_barbs()
+        arrow_x, arrow_y = _Quiver(x, y, u, v, scale,
+                                arrow_scale, angle, scaleratio).get_quiver_arrows()        
+        
     quiver = graph_objs.Scatter(x=barb_x + arrow_x,
                                 y=barb_y + arrow_y,
                                 mode='lines', **kwargs)
 
     data = [quiver]
-    layout = graph_objs.Layout(
-        hovermode='closest',
-        yaxis=dict(
-            scaleratio = scaleratio,
-            scaleanchor = "x"
+
+    if scaleratio is None:
+        layout = graph_objs.Layout(hovermode='closest')
+    else:
+        layout = graph_objs.Layout(
+            hovermode='closest',
+            yaxis=dict(
+                scaleratio = scaleratio,
+                scaleanchor = "x"
+                )
             )
-        )
 
     if returnAsFigureWidget:
-        return graph_objs.Figure(data=data, layout=layout)
-    else:
         f = graph_objs.FigureWidget(data=data, layout=layout)
         f.layout.on_change(update_quiver, 'xaxis.range', 'yaxis.range', 'width', 'height')
         return f
+    else:
+        return graph_objs.Figure(data=data, layout=layout)
 
 def update_quiver(layout):
     print("Inside callback function")
