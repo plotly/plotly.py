@@ -1,7 +1,9 @@
 import os
 
 # file structure
-PLOTLY_DIR = os.environ.get("PLOTLY_DIR", os.path.join(os.path.expanduser("~"), ".plotly"))
+PLOTLY_DIR = os.environ.get("PLOTLY_DIR",
+                            os.path.join(os.path.expanduser("~"), ".plotly"))
+
 CREDENTIALS_FILE = os.path.join(PLOTLY_DIR, ".credentials")
 CONFIG_FILE = os.path.join(PLOTLY_DIR, ".config")
 TEST_FILE = os.path.join(PLOTLY_DIR, ".permission_test")
@@ -20,6 +22,7 @@ FILE_CONTENT = {CREDENTIALS_FILE: {'username': '',
                               'world_readable': True,
                               'sharing': 'public',
                               'auto_open': True}}
+
 
 def _permissions():
     try:
