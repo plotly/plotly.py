@@ -5,7 +5,6 @@ A module to test functionality related to *using* the graph reference.
 from __future__ import absolute_import
 
 import os
-from pkg_resources import resource_string
 from unittest import TestCase
 
 from nose.plugins.attrib import attr

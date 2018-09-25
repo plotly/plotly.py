@@ -4,7 +4,7 @@ Module to allow Plotly graphs to interact with IPython widgets.
 """
 import uuid
 from collections import deque
-from pkg_resources import resource_string
+import pkgutil
 
 from requests.compat import json as _json
 
@@ -20,8 +20,9 @@ from plotly.graph_objs import Figure
 # Load JS widget code
 # No officially recommended way to do this in any other way
 # http://mail.scipy.org/pipermail/ipython-dev/2014-April/013835.html
-js_widget_code = resource_string('plotly',
-                                 'package_data/graphWidget.js').decode('utf-8')
+js_widget_code = pkgutil.get_data('plotly',
+                                  'package_data/graphWidget.js'
+                                  ).decode('utf-8')
 
 display(Javascript(js_widget_code))
 
