@@ -21,31 +21,43 @@ class Layout(BaseLayoutType):
                     Polar chart subplots are not supported yet.
                     This key has currently no effect.
                 endpadding
-    
+                    Legacy polar charts are deprecated! Please
+                    switch to "polar" subplots.
                 range
-                    Defines the start and end point of this angular
-                    axis.
+                    Legacy polar charts are deprecated! Please
+                    switch to "polar" subplots. Defines the start
+                    and end point of this angular axis.
                 showline
-                    Determines whether or not the line bounding
-                    this angular axis will be shown on the figure.
+                    Legacy polar charts are deprecated! Please
+                    switch to "polar" subplots. Determines whether
+                    or not the line bounding this angular axis will
+                    be shown on the figure.
                 showticklabels
-                    Determines whether or not the angular axis
-                    ticks will feature tick labels.
+                    Legacy polar charts are deprecated! Please
+                    switch to "polar" subplots. Determines whether
+                    or not the angular axis ticks will feature tick
+                    labels.
                 tickcolor
-                    Sets the color of the tick lines on this
-                    angular axis.
+                    Legacy polar charts are deprecated! Please
+                    switch to "polar" subplots. Sets the color of
+                    the tick lines on this angular axis.
                 ticklen
-                    Sets the length of the tick lines on this
-                    angular axis.
+                    Legacy polar charts are deprecated! Please
+                    switch to "polar" subplots. Sets the length of
+                    the tick lines on this angular axis.
                 tickorientation
-                    Sets the orientation (from the paper
-                    perspective) of the angular axis tick labels.
+                    Legacy polar charts are deprecated! Please
+                    switch to "polar" subplots. Sets the
+                    orientation (from the paper perspective) of the
+                    angular axis tick labels.
                 ticksuffix
-                    Sets the length of the tick lines on this
-                    angular axis.
+                    Legacy polar charts are deprecated! Please
+                    switch to "polar" subplots. Sets the length of
+                    the tick lines on this angular axis.
                 visible
-                    Determines whether or not this axis will be
-                    visible.
+                    Legacy polar charts are deprecated! Please
+                    switch to "polar" subplots. Determines whether
+                    or not this axis will be visible.
 
         Returns
         -------
@@ -442,9 +454,9 @@ class Layout(BaseLayoutType):
     def barnorm(self):
         """
         Sets the normalization for bar traces on the graph. With
-        "fraction", the value of each bar is divide by the sum of the
-        values at the location coordinate. With "percent", the results
-        form "fraction" are presented in percents.
+        "fraction", the value of each bar is divided by the sum of all
+        values at that location coordinate. "percent" is the same but
+        multiplied by 100 to show percentages.
     
         The 'barnorm' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -552,6 +564,41 @@ class Layout(BaseLayoutType):
     def calendar(self, val):
         self['calendar'] = val
 
+    # clickmode
+    # ---------
+    @property
+    def clickmode(self):
+        """
+        Determines the mode of single click interactions. "event" is
+        the default value and emits the `plotly_click` event. In
+        addition this mode emits the `plotly_selected` event in drag
+        modes "lasso" and "select", but with no event data attached
+        (kept for compatibility reasons). The "select" flag enables
+        selecting single data points via click. This mode also supports
+        persistent selections, meaning that pressing Shift while
+        clicking, adds to / subtracts from an existing selection.
+        "select" with `hovermode`: "x" can be confusing, consider
+        explicitly setting `hovermode`: "closest" when using this
+        feature. Selection events are sent accordingly as long as
+        "event" flag is set as well. When the "event" flag is missing,
+        `plotly_click` and `plotly_selected` events are not fired.
+    
+        The 'clickmode' property is a flaglist and may be specified
+        as a string containing:
+          - Any combination of ['event', 'select'] joined with '+' characters
+            (e.g. 'event+select')
+            OR exactly one of ['none'] (e.g. 'none')
+
+        Returns
+        -------
+        Any
+        """
+        return self['clickmode']
+
+    @clickmode.setter
+    def clickmode(self, val):
+        self['clickmode'] = val
+
     # colorway
     # --------
     @property
@@ -603,8 +650,9 @@ class Layout(BaseLayoutType):
     @property
     def direction(self):
         """
-        For polar plots only. Sets the direction corresponding to
-        positive angles.
+        Legacy polar charts are deprecated! Please switch to "polar"
+        subplots. Sets the direction corresponding to positive angles
+        in legacy polar charts.
     
         The 'direction' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -1071,7 +1119,12 @@ class Layout(BaseLayoutType):
     @property
     def hovermode(self):
         """
-        Determines the mode of hover interactions.
+        Determines the mode of hover interactions. If `clickmode`
+        includes the "select" flag, `hovermode` defaults to "closest".
+        If `clickmode` lacks the "select" flag, it defaults to "x" or
+        "y" (depending on the trace's `orientation` value) for plots
+        based on cartesian coordinates. For anything else the default
+        value is "closest".
     
         The 'hovermode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -1344,8 +1397,9 @@ class Layout(BaseLayoutType):
     @property
     def orientation(self):
         """
-        For polar plots only. Rotates the entire polar by the given
-        angle.
+        Legacy polar charts are deprecated! Please switch to "polar"
+        subplots. Rotates the entire polar by the given angle in legacy
+        polar charts.
     
         The 'orientation' property is a angle (in degrees) that may be
         specified as a number between -180 and 180. Numeric values outside this
@@ -1534,6 +1588,9 @@ class Layout(BaseLayoutType):
                     snapped to the angle of the closest vertex when
                     `gridshape` is "circular" (so that radial axis
                     scale is the same as the data scale).
+                hole
+                    Sets the fraction of the radius to cut out of
+                    the polar subplot.
                 radialaxis
                     plotly.graph_objs.layout.polar.RadialAxis
                     instance or dict with compatible properties
@@ -1571,34 +1628,48 @@ class Layout(BaseLayoutType):
                     Polar chart subplots are not supported yet.
                     This key has currently no effect.
                 endpadding
-    
+                    Legacy polar charts are deprecated! Please
+                    switch to "polar" subplots.
                 orientation
-                    Sets the orientation (an angle with respect to
-                    the origin) of the radial axis.
+                    Legacy polar charts are deprecated! Please
+                    switch to "polar" subplots. Sets the
+                    orientation (an angle with respect to the
+                    origin) of the radial axis.
                 range
-                    Defines the start and end point of this radial
-                    axis.
+                    Legacy polar charts are deprecated! Please
+                    switch to "polar" subplots. Defines the start
+                    and end point of this radial axis.
                 showline
-                    Determines whether or not the line bounding
-                    this radial axis will be shown on the figure.
+                    Legacy polar charts are deprecated! Please
+                    switch to "polar" subplots. Determines whether
+                    or not the line bounding this radial axis will
+                    be shown on the figure.
                 showticklabels
-                    Determines whether or not the radial axis ticks
-                    will feature tick labels.
+                    Legacy polar charts are deprecated! Please
+                    switch to "polar" subplots. Determines whether
+                    or not the radial axis ticks will feature tick
+                    labels.
                 tickcolor
-                    Sets the color of the tick lines on this radial
-                    axis.
+                    Legacy polar charts are deprecated! Please
+                    switch to "polar" subplots. Sets the color of
+                    the tick lines on this radial axis.
                 ticklen
-                    Sets the length of the tick lines on this
-                    radial axis.
+                    Legacy polar charts are deprecated! Please
+                    switch to "polar" subplots. Sets the length of
+                    the tick lines on this radial axis.
                 tickorientation
-                    Sets the orientation (from the paper
-                    perspective) of the radial axis tick labels.
+                    Legacy polar charts are deprecated! Please
+                    switch to "polar" subplots. Sets the
+                    orientation (from the paper perspective) of the
+                    radial axis tick labels.
                 ticksuffix
-                    Sets the length of the tick lines on this
-                    radial axis.
+                    Legacy polar charts are deprecated! Please
+                    switch to "polar" subplots. Sets the length of
+                    the tick lines on this radial axis.
                 visible
-                    Determines whether or not this axis will be
-                    visible.
+                    Legacy polar charts are deprecated! Please
+                    switch to "polar" subplots. Determines whether
+                    or not this axis will be visible.
 
         Returns
         -------
@@ -2566,7 +2637,8 @@ class Layout(BaseLayoutType):
                     to the extrema of the input data. If *tozero*`,
                     the range extends to 0, regardless of the input
                     data If "nonnegative", the range is non-
-                    negative, regardless of the input data.
+                    negative, regardless of the input data. Applies
+                    only to linear axes.
                 rangeselector
                     plotly.graph_objs.layout.xaxis.Rangeselector
                     instance or dict with compatible properties
@@ -2953,7 +3025,8 @@ class Layout(BaseLayoutType):
                     to the extrema of the input data. If *tozero*`,
                     the range extends to 0, regardless of the input
                     data If "nonnegative", the range is non-
-                    negative, regardless of the input data.
+                    negative, regardless of the input data. Applies
+                    only to linear axes.
                 scaleanchor
                     If set to another axis id (e.g. `x2`, `y`), the
                     range of this axis changes together with the
@@ -3188,10 +3261,10 @@ class Layout(BaseLayoutType):
             "opacity" to see multiple bars.
         barnorm
             Sets the normalization for bar traces on the graph.
-            With "fraction", the value of each bar is divide by the
-            sum of the values at the location coordinate. With
-            "percent", the results form "fraction" are presented in
-            percents.
+            With "fraction", the value of each bar is divided by
+            the sum of all values at that location coordinate.
+            "percent" is the same but multiplied by 100 to show
+            percentages.
         boxgap
             Sets the gap (in plot fraction) between boxes of
             adjacent location coordinates.
@@ -3208,6 +3281,22 @@ class Layout(BaseLayoutType):
         calendar
             Sets the default calendar system to use for
             interpreting and displaying dates throughout the plot.
+        clickmode
+            Determines the mode of single click interactions.
+            "event" is the default value and emits the
+            `plotly_click` event. In addition this mode emits the
+            `plotly_selected` event in drag modes "lasso" and
+            "select", but with no event data attached (kept for
+            compatibility reasons). The "select" flag enables
+            selecting single data points via click. This mode also
+            supports persistent selections, meaning that pressing
+            Shift while clicking, adds to / subtracts from an
+            existing selection. "select" with `hovermode`: "x" can
+            be confusing, consider explicitly setting `hovermode`:
+            "closest" when using this feature. Selection events are
+            sent accordingly as long as "event" flag is set as
+            well. When the "event" flag is missing, `plotly_click`
+            and `plotly_selected` events are not fired.
         colorway
             Sets the default trace colors.
         datarevision
@@ -3220,8 +3309,9 @@ class Layout(BaseLayoutType):
             different identity from its predecessor contains new
             data.
         direction
-            For polar plots only. Sets the direction corresponding
-            to positive angles.
+            Legacy polar charts are deprecated! Please switch to
+            "polar" subplots. Sets the direction corresponding to
+            positive angles in legacy polar charts.
         dragmode
             Determines the mode of drag interactions. "select" and
             "lasso" apply only to scatter traces with markers or
@@ -3271,7 +3361,13 @@ class Layout(BaseLayoutType):
             plotly.graph_objs.layout.Hoverlabel instance or dict
             with compatible properties
         hovermode
-            Determines the mode of hover interactions.
+            Determines the mode of hover interactions. If
+            `clickmode` includes the "select" flag, `hovermode`
+            defaults to "closest". If `clickmode` lacks the
+            "select" flag, it defaults to "x" or "y" (depending on
+            the trace's `orientation` value) for plots based on
+            cartesian coordinates. For anything else the default
+            value is "closest".
         images
             plotly.graph_objs.layout.Image instance or dict with
             compatible properties
@@ -3285,8 +3381,9 @@ class Layout(BaseLayoutType):
             plotly.graph_objs.layout.Margin instance or dict with
             compatible properties
         orientation
-            For polar plots only. Rotates the entire polar by the
-            given angle.
+            Legacy polar charts are deprecated! Please switch to
+            "polar" subplots. Rotates the entire polar by the given
+            angle in legacy polar charts.
         paper_bgcolor
             Sets the color of paper where the graph is drawn.
         piecolorway
@@ -3404,6 +3501,7 @@ class Layout(BaseLayoutType):
         boxgroupgap=None,
         boxmode=None,
         calendar=None,
+        clickmode=None,
         colorway=None,
         datarevision=None,
         direction=None,
@@ -3487,10 +3585,10 @@ class Layout(BaseLayoutType):
             "opacity" to see multiple bars.
         barnorm
             Sets the normalization for bar traces on the graph.
-            With "fraction", the value of each bar is divide by the
-            sum of the values at the location coordinate. With
-            "percent", the results form "fraction" are presented in
-            percents.
+            With "fraction", the value of each bar is divided by
+            the sum of all values at that location coordinate.
+            "percent" is the same but multiplied by 100 to show
+            percentages.
         boxgap
             Sets the gap (in plot fraction) between boxes of
             adjacent location coordinates.
@@ -3507,6 +3605,22 @@ class Layout(BaseLayoutType):
         calendar
             Sets the default calendar system to use for
             interpreting and displaying dates throughout the plot.
+        clickmode
+            Determines the mode of single click interactions.
+            "event" is the default value and emits the
+            `plotly_click` event. In addition this mode emits the
+            `plotly_selected` event in drag modes "lasso" and
+            "select", but with no event data attached (kept for
+            compatibility reasons). The "select" flag enables
+            selecting single data points via click. This mode also
+            supports persistent selections, meaning that pressing
+            Shift while clicking, adds to / subtracts from an
+            existing selection. "select" with `hovermode`: "x" can
+            be confusing, consider explicitly setting `hovermode`:
+            "closest" when using this feature. Selection events are
+            sent accordingly as long as "event" flag is set as
+            well. When the "event" flag is missing, `plotly_click`
+            and `plotly_selected` events are not fired.
         colorway
             Sets the default trace colors.
         datarevision
@@ -3519,8 +3633,9 @@ class Layout(BaseLayoutType):
             different identity from its predecessor contains new
             data.
         direction
-            For polar plots only. Sets the direction corresponding
-            to positive angles.
+            Legacy polar charts are deprecated! Please switch to
+            "polar" subplots. Sets the direction corresponding to
+            positive angles in legacy polar charts.
         dragmode
             Determines the mode of drag interactions. "select" and
             "lasso" apply only to scatter traces with markers or
@@ -3570,7 +3685,13 @@ class Layout(BaseLayoutType):
             plotly.graph_objs.layout.Hoverlabel instance or dict
             with compatible properties
         hovermode
-            Determines the mode of hover interactions.
+            Determines the mode of hover interactions. If
+            `clickmode` includes the "select" flag, `hovermode`
+            defaults to "closest". If `clickmode` lacks the
+            "select" flag, it defaults to "x" or "y" (depending on
+            the trace's `orientation` value) for plots based on
+            cartesian coordinates. For anything else the default
+            value is "closest".
         images
             plotly.graph_objs.layout.Image instance or dict with
             compatible properties
@@ -3584,8 +3705,9 @@ class Layout(BaseLayoutType):
             plotly.graph_objs.layout.Margin instance or dict with
             compatible properties
         orientation
-            For polar plots only. Rotates the entire polar by the
-            given angle.
+            Legacy polar charts are deprecated! Please switch to
+            "polar" subplots. Rotates the entire polar by the given
+            angle in legacy polar charts.
         paper_bgcolor
             Sets the color of paper where the graph is drawn.
         piecolorway
@@ -3731,6 +3853,7 @@ an instance of plotly.graph_objs.Layout"""
         self._validators['boxgroupgap'] = v_layout.BoxgroupgapValidator()
         self._validators['boxmode'] = v_layout.BoxmodeValidator()
         self._validators['calendar'] = v_layout.CalendarValidator()
+        self._validators['clickmode'] = v_layout.ClickmodeValidator()
         self._validators['colorway'] = v_layout.ColorwayValidator()
         self._validators['datarevision'] = v_layout.DatarevisionValidator()
         self._validators['direction'] = v_layout.DirectionValidator()
@@ -3802,6 +3925,8 @@ an instance of plotly.graph_objs.Layout"""
         self['boxmode'] = boxmode if boxmode is not None else _v
         _v = arg.pop('calendar', None)
         self['calendar'] = calendar if calendar is not None else _v
+        _v = arg.pop('clickmode', None)
+        self['clickmode'] = clickmode if clickmode is not None else _v
         _v = arg.pop('colorway', None)
         self['colorway'] = colorway if colorway is not None else _v
         _v = arg.pop('datarevision', None)

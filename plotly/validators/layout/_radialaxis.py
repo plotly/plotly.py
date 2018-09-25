@@ -16,34 +16,48 @@ class RadialAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Polar chart subplots are not supported yet.
                 This key has currently no effect.
             endpadding
-
+                Legacy polar charts are deprecated! Please
+                switch to "polar" subplots.
             orientation
-                Sets the orientation (an angle with respect to
-                the origin) of the radial axis.
+                Legacy polar charts are deprecated! Please
+                switch to "polar" subplots. Sets the
+                orientation (an angle with respect to the
+                origin) of the radial axis.
             range
-                Defines the start and end point of this radial
-                axis.
+                Legacy polar charts are deprecated! Please
+                switch to "polar" subplots. Defines the start
+                and end point of this radial axis.
             showline
-                Determines whether or not the line bounding
-                this radial axis will be shown on the figure.
+                Legacy polar charts are deprecated! Please
+                switch to "polar" subplots. Determines whether
+                or not the line bounding this radial axis will
+                be shown on the figure.
             showticklabels
-                Determines whether or not the radial axis ticks
-                will feature tick labels.
+                Legacy polar charts are deprecated! Please
+                switch to "polar" subplots. Determines whether
+                or not the radial axis ticks will feature tick
+                labels.
             tickcolor
-                Sets the color of the tick lines on this radial
-                axis.
+                Legacy polar charts are deprecated! Please
+                switch to "polar" subplots. Sets the color of
+                the tick lines on this radial axis.
             ticklen
-                Sets the length of the tick lines on this
-                radial axis.
+                Legacy polar charts are deprecated! Please
+                switch to "polar" subplots. Sets the length of
+                the tick lines on this radial axis.
             tickorientation
-                Sets the orientation (from the paper
-                perspective) of the radial axis tick labels.
+                Legacy polar charts are deprecated! Please
+                switch to "polar" subplots. Sets the
+                orientation (from the paper perspective) of the
+                radial axis tick labels.
             ticksuffix
-                Sets the length of the tick lines on this
-                radial axis.
+                Legacy polar charts are deprecated! Please
+                switch to "polar" subplots. Sets the length of
+                the tick lines on this radial axis.
             visible
-                Determines whether or not this axis will be
-                visible.
+                Legacy polar charts are deprecated! Please
+                switch to "polar" subplots. Determines whether
+                or not this axis will be visible.
 """
             ),
             **kwargs

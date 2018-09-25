@@ -184,7 +184,8 @@ class YAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 to the extrema of the input data. If *tozero*`,
                 the range extends to 0, regardless of the input
                 data If "nonnegative", the range is non-
-                negative, regardless of the input data.
+                negative, regardless of the input data. Applies
+                only to linear axes.
             scaleanchor
                 If set to another axis id (e.g. `x2`, `y`), the
                 range of this axis changes together with the

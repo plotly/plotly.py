@@ -743,7 +743,8 @@ class YAxis(BaseLayoutHierarchyType):
         If "normal", the range is computed in relation to the extrema
         of the input data. If *tozero*`, the range extends to 0,
         regardless of the input data If "nonnegative", the range is
-        non-negative, regardless of the input data.
+        non-negative, regardless of the input data. Applies only to
+        linear axes.
     
         The 'rangemode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -1999,7 +2000,7 @@ class YAxis(BaseLayoutHierarchyType):
             extrema of the input data. If *tozero*`, the range
             extends to 0, regardless of the input data If
             "nonnegative", the range is non-negative, regardless of
-            the input data.
+            the input data. Applies only to linear axes.
         scaleanchor
             If set to another axis id (e.g. `x2`, `y`), the range
             of this axis changes together with the range of the
@@ -2397,7 +2398,7 @@ class YAxis(BaseLayoutHierarchyType):
             extrema of the input data. If *tozero*`, the range
             extends to 0, regardless of the input data If
             "nonnegative", the range is non-negative, regardless of
-            the input data.
+            the input data. Applies only to linear axes.
         scaleanchor
             If set to another axis id (e.g. `x2`, `y`), the range
             of this axis changes together with the range of the

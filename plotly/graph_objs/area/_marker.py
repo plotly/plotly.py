@@ -9,9 +9,10 @@ class Marker(BaseTraceHierarchyType):
     @property
     def color(self):
         """
-        Sets themarkercolor. It accepts either a specific color or an
-        array of numbers that are mapped to the colorscale relative to
-        the max and min values of the array or relative to
+        Area traces are deprecated! Please switch to the "barpolar"
+        trace type. Sets themarkercolor. It accepts either a specific
+        color or an array of numbers that are mapped to the colorscale
+        relative to the max and min values of the array or relative to
         `marker.cmin` and `marker.cmax` if set.
     
         The 'color' property is a color and may be specified as:
@@ -92,7 +93,8 @@ class Marker(BaseTraceHierarchyType):
     @property
     def opacity(self):
         """
-        Sets the marker opacity.
+        Area traces are deprecated! Please switch to the "barpolar"
+        trace type. Sets the marker opacity.
     
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
@@ -133,7 +135,8 @@ class Marker(BaseTraceHierarchyType):
     @property
     def size(self):
         """
-        Sets the marker size (in px).
+        Area traces are deprecated! Please switch to the "barpolar"
+        trace type. Sets the marker size (in px).
     
         The 'size' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
@@ -174,10 +177,12 @@ class Marker(BaseTraceHierarchyType):
     @property
     def symbol(self):
         """
-        Sets the marker symbol type. Adding 100 is equivalent to
-        appending "-open" to a symbol name. Adding 200 is equivalent to
-        appending "-dot" to a symbol name. Adding 300 is equivalent to
-        appending "-open-dot" or "dot-open" to a symbol name.
+        Area traces are deprecated! Please switch to the "barpolar"
+        trace type. Sets the marker symbol type. Adding 100 is
+        equivalent to appending "-open" to a symbol name. Adding 200 is
+        equivalent to appending "-dot" to a symbol name. Adding 300 is
+        equivalent to appending "-open-dot" or "dot-open" to a symbol
+        name.
     
         The 'symbol' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -286,27 +291,31 @@ class Marker(BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         color
-            Sets themarkercolor. It accepts either a specific color
-            or an array of numbers that are mapped to the
-            colorscale relative to the max and min values of the
-            array or relative to `marker.cmin` and `marker.cmax` if
-            set.
+            Area traces are deprecated! Please switch to the
+            "barpolar" trace type. Sets themarkercolor. It accepts
+            either a specific color or an array of numbers that are
+            mapped to the colorscale relative to the max and min
+            values of the array or relative to `marker.cmin` and
+            `marker.cmax` if set.
         colorsrc
             Sets the source reference on plot.ly for  color .
         opacity
-            Sets the marker opacity.
+            Area traces are deprecated! Please switch to the
+            "barpolar" trace type. Sets the marker opacity.
         opacitysrc
             Sets the source reference on plot.ly for  opacity .
         size
-            Sets the marker size (in px).
+            Area traces are deprecated! Please switch to the
+            "barpolar" trace type. Sets the marker size (in px).
         sizesrc
             Sets the source reference on plot.ly for  size .
         symbol
-            Sets the marker symbol type. Adding 100 is equivalent
-            to appending "-open" to a symbol name. Adding 200 is
-            equivalent to appending "-dot" to a symbol name. Adding
-            300 is equivalent to appending "-open-dot" or "dot-
-            open" to a symbol name.
+            Area traces are deprecated! Please switch to the
+            "barpolar" trace type. Sets the marker symbol type.
+            Adding 100 is equivalent to appending "-open" to a
+            symbol name. Adding 200 is equivalent to appending
+            "-dot" to a symbol name. Adding 300 is equivalent to
+            appending "-open-dot" or "dot-open" to a symbol name.
         symbolsrc
             Sets the source reference on plot.ly for  symbol .
         """
@@ -333,27 +342,31 @@ class Marker(BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.area.Marker
         color
-            Sets themarkercolor. It accepts either a specific color
-            or an array of numbers that are mapped to the
-            colorscale relative to the max and min values of the
-            array or relative to `marker.cmin` and `marker.cmax` if
-            set.
+            Area traces are deprecated! Please switch to the
+            "barpolar" trace type. Sets themarkercolor. It accepts
+            either a specific color or an array of numbers that are
+            mapped to the colorscale relative to the max and min
+            values of the array or relative to `marker.cmin` and
+            `marker.cmax` if set.
         colorsrc
             Sets the source reference on plot.ly for  color .
         opacity
-            Sets the marker opacity.
+            Area traces are deprecated! Please switch to the
+            "barpolar" trace type. Sets the marker opacity.
         opacitysrc
             Sets the source reference on plot.ly for  opacity .
         size
-            Sets the marker size (in px).
+            Area traces are deprecated! Please switch to the
+            "barpolar" trace type. Sets the marker size (in px).
         sizesrc
             Sets the source reference on plot.ly for  size .
         symbol
-            Sets the marker symbol type. Adding 100 is equivalent
-            to appending "-open" to a symbol name. Adding 200 is
-            equivalent to appending "-dot" to a symbol name. Adding
-            300 is equivalent to appending "-open-dot" or "dot-
-            open" to a symbol name.
+            Area traces are deprecated! Please switch to the
+            "barpolar" trace type. Sets the marker symbol type.
+            Adding 100 is equivalent to appending "-open" to a
+            symbol name. Adding 200 is equivalent to appending
+            "-dot" to a symbol name. Adding 300 is equivalent to
+            appending "-open-dot" or "dot-open" to a symbol name.
         symbolsrc
             Sets the source reference on plot.ly for  symbol .
 

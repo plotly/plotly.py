@@ -426,6 +426,46 @@
                     "editType": "calc",
                     "description": "Sets the y coordinate step. See `y0` for more info."
                 },
+                "stackgroup": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "calc",
+                    "description": "Set several scatter traces (on the same subplot) to the same stackgroup in order to add their y values (or their x values if `orientation` is *h*). If blank or omitted this trace will not be stacked. Stacking also turns `fill` on by default, using *tonexty* (*tonextx*) if `orientation` is *h* (*v*) and sets the default `mode` to *lines* irrespective of point count. You can only stack on a numeric (linear or log) axis. Traces in a `stackgroup` will only fill to (or be filled to) other traces in the same group. With multiple `stackgroup`s or some traces stacked and some not, if fill-linked traces are not already consecutive, the later ones will be pushed down in the drawing order."
+                },
+                "orientation": {
+                    "valType": "enumerated",
+                    "role": "info",
+                    "values": [
+                        "v",
+                        "h"
+                    ],
+                    "editType": "calc",
+                    "description": "Only relevant when `stackgroup` is used, and only the first `orientation` found in the `stackgroup` will be used - including if `visible` is *legendonly* but not if it is `false`. Sets the stacking direction. With *v* (*h*), the y (x) values of subsequent traces are added. Also affects the default value of `fill`."
+                },
+                "groupnorm": {
+                    "valType": "enumerated",
+                    "values": [
+                        "",
+                        "fraction",
+                        "percent"
+                    ],
+                    "dflt": "",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when `stackgroup` is used, and only the first `groupnorm` found in the `stackgroup` will be used - including if `visible` is *legendonly* but not if it is `false`. Sets the normalization for the sum of this `stackgroup`. With *fraction*, the value of each trace at each location is divided by the sum of all trace values at that location. *percent* is the same but multiplied by 100 to show percentages. If there are multiple subplots, or multiple `stackgroup`s on one subplot, each will be normalized within its own set."
+                },
+                "stackgaps": {
+                    "valType": "enumerated",
+                    "values": [
+                        "infer zero",
+                        "interpolate"
+                    ],
+                    "dflt": "infer zero",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when `stackgroup` is used, and only the first `stackgaps` found in the `stackgroup` will be used - including if `visible` is *legendonly* but not if it is `false`. Determines how we handle locations at which other traces in this group have data but this one does not. With *infer zero* we insert a zero at these locations. With *interpolate* we linearly interpolate between existing values, and extrapolate a constant beyond the existing values."
+                },
                 "text": {
                     "valType": "string",
                     "role": "info",
@@ -454,7 +494,7 @@
                     ],
                     "role": "info",
                     "editType": "calc",
-                    "description": "Determines the drawing mode for this scatter trace. If the provided `mode` includes *text* then the `text` elements appear at the coordinates. Otherwise, the `text` elements appear on hover. If there are less than 20 points, then the default is *lines+markers*. Otherwise, *lines*."
+                    "description": "Determines the drawing mode for this scatter trace. If the provided `mode` includes *text* then the `text` elements appear at the coordinates. Otherwise, the `text` elements appear on hover. If there are less than 20 points and the trace is not stacked then the default is *lines+markers*. Otherwise, *lines*."
                 },
                 "hoveron": {
                     "valType": "flaglist",
@@ -555,10 +595,9 @@
                         "toself",
                         "tonext"
                     ],
-                    "dflt": "none",
                     "role": "style",
                     "editType": "calc",
-                    "description": "Sets the area to fill with a solid color. Use with `fillcolor` if not *none*. *tozerox* and *tozeroy* fill to x=0 and y=0 respectively. *tonextx* and *tonexty* fill between the endpoints of this trace and the endpoints of the trace before it, connecting those endpoints with straight lines (to make a stacked area graph); if there is no trace before it, they behave like *tozerox* and *tozeroy*. *toself* connects the endpoints of the trace (or each segment of the trace if it has gaps) into a closed shape. *tonext* fills the space between two traces if one completely encloses the other (eg consecutive contour lines), and behaves like *toself* if there is no trace before it. *tonext* should not be used if one trace does not enclose the other."
+                    "description": "Sets the area to fill with a solid color. Defaults to *none* unless this trace is stacked, then it gets *tonexty* (*tonextx*) if `orientation` is *v* (*h*) Use with `fillcolor` if not *none*. *tozerox* and *tozeroy* fill to x=0 and y=0 respectively. *tonextx* and *tonexty* fill between the endpoints of this trace and the endpoints of the trace before it, connecting those endpoints with straight lines (to make a stacked area graph); if there is no trace before it, they behave like *tozerox* and *tozeroy*. *toself* connects the endpoints of the trace (or each segment of the trace if it has gaps) into a closed shape. *tonext* fills the space between two traces if one completely encloses the other (eg consecutive contour lines), and behaves like *toself* if there is no trace before it. *tonext* should not be used if one trace does not enclose the other. Traces in a `stackgroup` will only fill to (or be filled to) other traces in the same group. With multiple `stackgroup`s or some traces stacked and some not, if fill-linked traces are not already consecutive, the later ones will be pushed down in the drawing order."
                 },
                 "fillcolor": {
                     "valType": "color",
@@ -1720,13 +1759,13 @@
                 "r": {
                     "valType": "data_array",
                     "editType": "calc",
-                    "description": "For legacy polar chart only.Please switch to *scatterpolar* trace type.Sets the radial coordinates.",
+                    "description": "r coordinates in scatter traces are deprecated!Please switch to the *scatterpolar* trace type.Sets the radial coordinatesfor legacy polar chart only.",
                     "role": "data"
                 },
                 "t": {
                     "valType": "data_array",
                     "editType": "calc",
-                    "description": "For legacy polar chart only.Please switch to *scatterpolar* trace type.Sets the angular coordinates.",
+                    "description": "t coordinates in scatter traces are deprecated!Please switch to the *scatterpolar* trace type.Sets the angular coordinatesfor legacy polar chart only.",
                     "role": "data"
                 },
                 "error_x": {
@@ -3244,13 +3283,13 @@
                 "r": {
                     "valType": "data_array",
                     "editType": "calc",
-                    "description": "For legacy polar chart only.Please switch to *scatterpolar* trace type.Sets the radial coordinates.",
+                    "description": "r coordinates in scatter traces are deprecated!Please switch to the *scatterpolar* trace type.Sets the radial coordinatesfor legacy polar chart only.",
                     "role": "data"
                 },
                 "t": {
                     "valType": "data_array",
                     "editType": "calc",
-                    "description": "For legacy polar chart only.Please switch to *scatterpolar* trace type.Sets the angular coordinates.",
+                    "description": "t coordinates in scatter traces are deprecated!Please switch to the *scatterpolar* trace type.Sets the angular coordinatesfor legacy polar chart only.",
                     "role": "data"
                 },
                 "_deprecated": {
@@ -3659,7 +3698,7 @@
                     "dflt": "",
                     "role": "info",
                     "editType": "calc",
-                    "description": "Sets the normalization for bar traces on the graph. With *fraction*, the value of each bar is divide by the sum of the values at the location coordinate. With *percent*, the results form *fraction* are presented in percents."
+                    "description": "Sets the normalization for bar traces on the graph. With *fraction*, the value of each bar is divided by the sum of all values at that location coordinate. *percent* is the same but multiplied by 100 to show percentages."
                 },
                 "bargap": {
                     "valType": "number",
@@ -7016,7 +7055,7 @@
                     "dflt": "",
                     "role": "info",
                     "editType": "calc",
-                    "description": "Sets the normalization for bar traces on the graph. With *fraction*, the value of each bar is divide by the sum of the values at the location coordinate. With *percent*, the results form *fraction* are presented in percents."
+                    "description": "Sets the normalization for bar traces on the graph. With *fraction*, the value of each bar is divided by the sum of all values at that location coordinate. *percent* is the same but multiplied by 100 to show percentages."
                 },
                 "bargap": {
                     "valType": "number",
@@ -11243,7 +11282,7 @@
                     ],
                     "role": "info",
                     "editType": "calc",
-                    "description": "Determines the drawing mode for this scatter trace. If the provided `mode` includes *text* then the `text` elements appear at the coordinates. Otherwise, the `text` elements appear on hover. If there are less than 20 points, then the default is *lines+markers*. Otherwise, *lines*.",
+                    "description": "Determines the drawing mode for this scatter trace. If the provided `mode` includes *text* then the `text` elements appear at the coordinates. Otherwise, the `text` elements appear on hover. If there are less than 20 points and the trace is not stacked then the default is *lines+markers*. Otherwise, *lines*.",
                     "dflt": "markers"
                 },
                 "text": {
@@ -11336,10 +11375,10 @@
                         "toself",
                         "tonext"
                     ],
-                    "dflt": "none",
                     "role": "style",
                     "editType": "calc",
-                    "description": "Sets the area to fill with a solid color. Use with `fillcolor` if not *none*. scatterternary has a subset of the options available to scatter. *toself* connects the endpoints of the trace (or each segment of the trace if it has gaps) into a closed shape. *tonext* fills the space between two traces if one completely encloses the other (eg consecutive contour lines), and behaves like *toself* if there is no trace before it. *tonext* should not be used if one trace does not enclose the other."
+                    "description": "Sets the area to fill with a solid color. Use with `fillcolor` if not *none*. scatterternary has a subset of the options available to scatter. *toself* connects the endpoints of the trace (or each segment of the trace if it has gaps) into a closed shape. *tonext* fills the space between two traces if one completely encloses the other (eg consecutive contour lines), and behaves like *toself* if there is no trace before it. *tonext* should not be used if one trace does not enclose the other.",
+                    "dflt": "none"
                 },
                 "fillcolor": {
                     "valType": "color",
@@ -13787,7 +13826,7 @@
                     ],
                     "role": "info",
                     "editType": "calc",
-                    "description": "Determines the drawing mode for this scatter trace. If the provided `mode` includes *text* then the `text` elements appear at the coordinates. Otherwise, the `text` elements appear on hover. If there are less than 20 points, then the default is *lines+markers*. Otherwise, *lines*.",
+                    "description": "Determines the drawing mode for this scatter trace. If the provided `mode` includes *text* then the `text` elements appear at the coordinates. Otherwise, the `text` elements appear on hover. If there are less than 20 points and the trace is not stacked then the default is *lines+markers*. Otherwise, *lines*.",
                     "dflt": "lines+markers"
                 },
                 "surfaceaxis": {
@@ -19736,7 +19775,7 @@
                     ],
                     "role": "info",
                     "editType": "calc",
-                    "description": "Determines the drawing mode for this scatter trace. If the provided `mode` includes *text* then the `text` elements appear at the coordinates. Otherwise, the `text` elements appear on hover. If there are less than 20 points, then the default is *lines+markers*. Otherwise, *lines*.",
+                    "description": "Determines the drawing mode for this scatter trace. If the provided `mode` includes *text* then the `text` elements appear at the coordinates. Otherwise, the `text` elements appear on hover. If there are less than 20 points and the trace is not stacked then the default is *lines+markers*. Otherwise, *lines*.",
                     "dflt": "markers"
                 },
                 "text": {
@@ -23256,10 +23295,10 @@
                         "toself",
                         "tonext"
                     ],
-                    "dflt": "none",
                     "role": "style",
                     "editType": "calc",
-                    "description": "Sets the area to fill with a solid color. Use with `fillcolor` if not *none*. *tozerox* and *tozeroy* fill to x=0 and y=0 respectively. *tonextx* and *tonexty* fill between the endpoints of this trace and the endpoints of the trace before it, connecting those endpoints with straight lines (to make a stacked area graph); if there is no trace before it, they behave like *tozerox* and *tozeroy*. *toself* connects the endpoints of the trace (or each segment of the trace if it has gaps) into a closed shape. *tonext* fills the space between two traces if one completely encloses the other (eg consecutive contour lines), and behaves like *toself* if there is no trace before it. *tonext* should not be used if one trace does not enclose the other."
+                    "description": "Sets the area to fill with a solid color. Defaults to *none* unless this trace is stacked, then it gets *tonexty* (*tonextx*) if `orientation` is *v* (*h*) Use with `fillcolor` if not *none*. *tozerox* and *tozeroy* fill to x=0 and y=0 respectively. *tonextx* and *tonexty* fill between the endpoints of this trace and the endpoints of the trace before it, connecting those endpoints with straight lines (to make a stacked area graph); if there is no trace before it, they behave like *tozerox* and *tozeroy*. *toself* connects the endpoints of the trace (or each segment of the trace if it has gaps) into a closed shape. *tonext* fills the space between two traces if one completely encloses the other (eg consecutive contour lines), and behaves like *toself* if there is no trace before it. *tonext* should not be used if one trace does not enclose the other. Traces in a `stackgroup` will only fill to (or be filled to) other traces in the same group. With multiple `stackgroup`s or some traces stacked and some not, if fill-linked traces are not already consecutive, the later ones will be pushed down in the drawing order.",
+                    "dflt": "none"
                 },
                 "fillcolor": {
                     "valType": "color",
@@ -31337,7 +31376,7 @@
                     ],
                     "role": "info",
                     "editType": "calc",
-                    "description": "Determines the drawing mode for this scatter trace. If the provided `mode` includes *text* then the `text` elements appear at the coordinates. Otherwise, the `text` elements appear on hover. If there are less than 20 points, then the default is *lines+markers*. Otherwise, *lines*.",
+                    "description": "Determines the drawing mode for this scatter trace. If the provided `mode` includes *text* then the `text` elements appear at the coordinates. Otherwise, the `text` elements appear on hover. If there are less than 20 points and the trace is not stacked then the default is *lines+markers*. Otherwise, *lines*.",
                     "dflt": "markers"
                 },
                 "text": {
@@ -31415,10 +31454,10 @@
                         "toself",
                         "tonext"
                     ],
-                    "dflt": "none",
                     "role": "style",
                     "editType": "calc",
-                    "description": "Sets the area to fill with a solid color. Use with `fillcolor` if not *none*. scatterternary has a subset of the options available to scatter. *toself* connects the endpoints of the trace (or each segment of the trace if it has gaps) into a closed shape. *tonext* fills the space between two traces if one completely encloses the other (eg consecutive contour lines), and behaves like *toself* if there is no trace before it. *tonext* should not be used if one trace does not enclose the other."
+                    "description": "Sets the area to fill with a solid color. Use with `fillcolor` if not *none*. scatterternary has a subset of the options available to scatter. *toself* connects the endpoints of the trace (or each segment of the trace if it has gaps) into a closed shape. *tonext* fills the space between two traces if one completely encloses the other (eg consecutive contour lines), and behaves like *toself* if there is no trace before it. *tonext* should not be used if one trace does not enclose the other.",
+                    "dflt": "none"
                 },
                 "fillcolor": {
                     "valType": "color",
@@ -34855,7 +34894,7 @@
                     ],
                     "role": "info",
                     "editType": "calc",
-                    "description": "Determines the drawing mode for this scatter trace. If the provided `mode` includes *text* then the `text` elements appear at the coordinates. Otherwise, the `text` elements appear on hover. If there are less than 20 points, then the default is *lines+markers*. Otherwise, *lines*."
+                    "description": "Determines the drawing mode for this scatter trace. If the provided `mode` includes *text* then the `text` elements appear at the coordinates. Otherwise, the `text` elements appear on hover. If there are less than 20 points and the trace is not stacked then the default is *lines+markers*. Otherwise, *lines*."
                 },
                 "r": {
                     "valType": "data_array",
@@ -36071,10 +36110,10 @@
                         "toself",
                         "tonext"
                     ],
-                    "dflt": "none",
                     "role": "style",
                     "editType": "calc",
-                    "description": "Sets the area to fill with a solid color. Use with `fillcolor` if not *none*. scatterpolar has a subset of the options available to scatter. *toself* connects the endpoints of the trace (or each segment of the trace if it has gaps) into a closed shape. *tonext* fills the space between two traces if one completely encloses the other (eg consecutive contour lines), and behaves like *toself* if there is no trace before it. *tonext* should not be used if one trace does not enclose the other."
+                    "description": "Sets the area to fill with a solid color. Use with `fillcolor` if not *none*. scatterpolar has a subset of the options available to scatter. *toself* connects the endpoints of the trace (or each segment of the trace if it has gaps) into a closed shape. *tonext* fills the space between two traces if one completely encloses the other (eg consecutive contour lines), and behaves like *toself* if there is no trace before it. *tonext* should not be used if one trace does not enclose the other.",
+                    "dflt": "none"
                 },
                 "fillcolor": {
                     "valType": "color",
@@ -36450,7 +36489,7 @@
                     ],
                     "role": "info",
                     "editType": "calc",
-                    "description": "Determines the drawing mode for this scatter trace. If the provided `mode` includes *text* then the `text` elements appear at the coordinates. Otherwise, the `text` elements appear on hover. If there are less than 20 points, then the default is *lines+markers*. Otherwise, *lines*."
+                    "description": "Determines the drawing mode for this scatter trace. If the provided `mode` includes *text* then the `text` elements appear at the coordinates. Otherwise, the `text` elements appear on hover. If there are less than 20 points and the trace is not stacked then the default is *lines+markers*. Otherwise, *lines*."
                 },
                 "r": {
                     "valType": "data_array",
@@ -37534,10 +37573,10 @@
                         "toself",
                         "tonext"
                     ],
-                    "dflt": "none",
                     "role": "style",
                     "editType": "calc",
-                    "description": "Sets the area to fill with a solid color. Use with `fillcolor` if not *none*. *tozerox* and *tozeroy* fill to x=0 and y=0 respectively. *tonextx* and *tonexty* fill between the endpoints of this trace and the endpoints of the trace before it, connecting those endpoints with straight lines (to make a stacked area graph); if there is no trace before it, they behave like *tozerox* and *tozeroy*. *toself* connects the endpoints of the trace (or each segment of the trace if it has gaps) into a closed shape. *tonext* fills the space between two traces if one completely encloses the other (eg consecutive contour lines), and behaves like *toself* if there is no trace before it. *tonext* should not be used if one trace does not enclose the other."
+                    "description": "Sets the area to fill with a solid color. Defaults to *none* unless this trace is stacked, then it gets *tonexty* (*tonextx*) if `orientation` is *v* (*h*) Use with `fillcolor` if not *none*. *tozerox* and *tozeroy* fill to x=0 and y=0 respectively. *tonextx* and *tonexty* fill between the endpoints of this trace and the endpoints of the trace before it, connecting those endpoints with straight lines (to make a stacked area graph); if there is no trace before it, they behave like *tozerox* and *tozeroy*. *toself* connects the endpoints of the trace (or each segment of the trace if it has gaps) into a closed shape. *tonext* fills the space between two traces if one completely encloses the other (eg consecutive contour lines), and behaves like *toself* if there is no trace before it. *tonext* should not be used if one trace does not enclose the other. Traces in a `stackgroup` will only fill to (or be filled to) other traces in the same group. With multiple `stackgroup`s or some traces stacked and some not, if fill-linked traces are not already consecutive, the later ones will be pushed down in the drawing order.",
+                    "dflt": "none"
                 },
                 "fillcolor": {
                     "valType": "color",
@@ -37741,6 +37780,1075 @@
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  textposition .",
                     "editType": "none"
+                }
+            }
+        },
+        "barpolar": {
+            "meta": {
+                "hrName": "bar_polar",
+                "description": "The data visualized by the radial span of the bars is set in `r`"
+            },
+            "attributes": {
+                "type": "barpolar",
+                "visible": {
+                    "valType": "enumerated",
+                    "values": [
+                        true,
+                        false,
+                        "legendonly"
+                    ],
+                    "role": "info",
+                    "dflt": true,
+                    "editType": "calc",
+                    "description": "Determines whether or not this trace is visible. If *legendonly*, the trace is not drawn, but can appear as a legend item (provided that the legend itself is visible)."
+                },
+                "showlegend": {
+                    "valType": "boolean",
+                    "role": "info",
+                    "dflt": true,
+                    "editType": "style",
+                    "description": "Determines whether or not an item corresponding to this trace is shown in the legend."
+                },
+                "legendgroup": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "style",
+                    "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items."
+                },
+                "opacity": {
+                    "valType": "number",
+                    "role": "style",
+                    "min": 0,
+                    "max": 1,
+                    "dflt": 1,
+                    "editType": "style",
+                    "description": "Sets the opacity of the trace."
+                },
+                "name": {
+                    "valType": "string",
+                    "role": "info",
+                    "editType": "style",
+                    "description": "Sets the trace name. The trace name appear as the legend item and on hover."
+                },
+                "uid": {
+                    "valType": "string",
+                    "role": "info",
+                    "editType": "plot"
+                },
+                "ids": {
+                    "valType": "data_array",
+                    "editType": "calc",
+                    "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
+                    "role": "data"
+                },
+                "customdata": {
+                    "valType": "data_array",
+                    "editType": "calc",
+                    "description": "Assigns extra data each datum. This may be useful when listening to hover, click and selection events. Note that, *scatter* traces also appends customdata items in the markers DOM elements",
+                    "role": "data"
+                },
+                "selectedpoints": {
+                    "valType": "any",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Array containing integer indices of selected points. Has an effect only for traces that support selections. Note that an empty array means an empty selection where the `unselected` are turned on for all points, whereas, any other non-array values means no selection all where the `selected` and `unselected` styles have no effect."
+                },
+                "hoverinfo": {
+                    "valType": "flaglist",
+                    "role": "info",
+                    "flags": [
+                        "r",
+                        "theta",
+                        "text",
+                        "name",
+                        "name"
+                    ],
+                    "extras": [
+                        "all",
+                        "none",
+                        "skip"
+                    ],
+                    "arrayOk": true,
+                    "dflt": "all",
+                    "editType": "none",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
+                },
+                "hoverlabel": {
+                    "bgcolor": {
+                        "valType": "color",
+                        "role": "style",
+                        "arrayOk": true,
+                        "editType": "none",
+                        "description": "Sets the background color of the hover labels for this trace"
+                    },
+                    "bordercolor": {
+                        "valType": "color",
+                        "role": "style",
+                        "arrayOk": true,
+                        "editType": "none",
+                        "description": "Sets the border color of the hover labels for this trace."
+                    },
+                    "font": {
+                        "family": {
+                            "valType": "string",
+                            "role": "style",
+                            "noBlank": true,
+                            "strict": true,
+                            "editType": "none",
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                            "arrayOk": true
+                        },
+                        "size": {
+                            "valType": "number",
+                            "role": "style",
+                            "min": 1,
+                            "editType": "none",
+                            "arrayOk": true
+                        },
+                        "color": {
+                            "valType": "color",
+                            "role": "style",
+                            "editType": "none",
+                            "arrayOk": true
+                        },
+                        "editType": "none",
+                        "description": "Sets the font used in hover labels.",
+                        "role": "object",
+                        "familysrc": {
+                            "valType": "string",
+                            "role": "info",
+                            "description": "Sets the source reference on plot.ly for  family .",
+                            "editType": "none"
+                        },
+                        "sizesrc": {
+                            "valType": "string",
+                            "role": "info",
+                            "description": "Sets the source reference on plot.ly for  size .",
+                            "editType": "none"
+                        },
+                        "colorsrc": {
+                            "valType": "string",
+                            "role": "info",
+                            "description": "Sets the source reference on plot.ly for  color .",
+                            "editType": "none"
+                        }
+                    },
+                    "namelength": {
+                        "valType": "integer",
+                        "min": -1,
+                        "arrayOk": true,
+                        "role": "style",
+                        "editType": "none",
+                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis."
+                    },
+                    "editType": "calc",
+                    "role": "object",
+                    "bgcolorsrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on plot.ly for  bgcolor .",
+                        "editType": "none"
+                    },
+                    "bordercolorsrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on plot.ly for  bordercolor .",
+                        "editType": "none"
+                    },
+                    "namelengthsrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on plot.ly for  namelength .",
+                        "editType": "none"
+                    }
+                },
+                "stream": {
+                    "token": {
+                        "valType": "string",
+                        "noBlank": true,
+                        "strict": true,
+                        "role": "info",
+                        "editType": "calc",
+                        "description": "The stream id number links a data trace on a plot with a stream. See https://plot.ly/settings for more details."
+                    },
+                    "maxpoints": {
+                        "valType": "number",
+                        "min": 0,
+                        "max": 10000,
+                        "dflt": 500,
+                        "role": "info",
+                        "editType": "calc",
+                        "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot."
+                    },
+                    "editType": "calc",
+                    "role": "object"
+                },
+                "transforms": {
+                    "items": {
+                        "transform": {
+                            "editType": "calc",
+                            "description": "An array of operations that manipulate the trace data, for example filtering or sorting the data arrays.",
+                            "role": "object"
+                        }
+                    },
+                    "role": "object"
+                },
+                "r": {
+                    "valType": "data_array",
+                    "editType": "calc+clearAxisTypes",
+                    "description": "Sets the radial coordinates",
+                    "role": "data"
+                },
+                "theta": {
+                    "valType": "data_array",
+                    "editType": "calc+clearAxisTypes",
+                    "description": "Sets the angular coordinates",
+                    "role": "data"
+                },
+                "r0": {
+                    "valType": "any",
+                    "dflt": 0,
+                    "role": "info",
+                    "editType": "calc+clearAxisTypes",
+                    "description": "Alternate to `r`. Builds a linear space of r coordinates. Use with `dr` where `r0` is the starting coordinate and `dr` the step."
+                },
+                "dr": {
+                    "valType": "number",
+                    "dflt": 1,
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Sets the r coordinate step."
+                },
+                "theta0": {
+                    "valType": "any",
+                    "dflt": 0,
+                    "role": "info",
+                    "editType": "calc+clearAxisTypes",
+                    "description": "Alternate to `theta`. Builds a linear space of theta coordinates. Use with `dtheta` where `theta0` is the starting coordinate and `dtheta` the step."
+                },
+                "dtheta": {
+                    "valType": "number",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Sets the theta coordinate step. By default, the `dtheta` step equals the subplot's period divided by the length of the `r` coordinates."
+                },
+                "thetaunit": {
+                    "valType": "enumerated",
+                    "values": [
+                        "radians",
+                        "degrees",
+                        "gradians"
+                    ],
+                    "dflt": "degrees",
+                    "role": "info",
+                    "editType": "calc+clearAxisTypes",
+                    "description": "Sets the unit of input *theta* values. Has an effect only when on *linear* angular axes."
+                },
+                "base": {
+                    "valType": "any",
+                    "dflt": null,
+                    "arrayOk": true,
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Sets where the bar base is drawn (in radial axis units). In *stack* barmode, traces that set *base* will be excluded and drawn in *overlay* mode instead."
+                },
+                "offset": {
+                    "valType": "number",
+                    "dflt": null,
+                    "arrayOk": true,
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Shifts the angular position where the bar is drawn (in *thetatunit* units)."
+                },
+                "width": {
+                    "valType": "number",
+                    "dflt": null,
+                    "min": 0,
+                    "arrayOk": true,
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Sets the bar angular width (in *thetaunit* units)."
+                },
+                "text": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "arrayOk": true,
+                    "editType": "calc",
+                    "description": "Sets hover text elements associated with each bar. If a single string, the same string appears over all bars. If an array of string, the items are mapped in order to the this trace's coordinates."
+                },
+                "marker": {
+                    "line": {
+                        "width": {
+                            "valType": "number",
+                            "min": 0,
+                            "arrayOk": true,
+                            "role": "style",
+                            "editType": "style",
+                            "description": "Sets the width (in px) of the lines bounding the marker points.",
+                            "dflt": 0
+                        },
+                        "editType": "calc",
+                        "color": {
+                            "valType": "color",
+                            "arrayOk": true,
+                            "role": "style",
+                            "editType": "style",
+                            "description": "Sets themarker.linecolor. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `marker.line.cmin` and `marker.line.cmax` if set."
+                        },
+                        "cauto": {
+                            "valType": "boolean",
+                            "role": "info",
+                            "dflt": true,
+                            "editType": "calc",
+                            "impliedEdits": {},
+                            "description": "Determines whether or not the color domain is computed with respect to the input data (here in `marker.line.color`) or the bounds set in `marker.line.cmin` and `marker.line.cmax`  Has an effect only if in `marker.line.color`is set to a numerical array. Defaults to `false` when `marker.line.cmin` and `marker.line.cmax` are set by the user."
+                        },
+                        "cmin": {
+                            "valType": "number",
+                            "role": "info",
+                            "dflt": null,
+                            "editType": "plot",
+                            "impliedEdits": {
+                                "cauto": false
+                            },
+                            "description": "Sets the lower bound of the color domain. Has an effect only if in `marker.line.color`is set to a numerical array. Value should have the same units as in `marker.line.color` and if set, `marker.line.cmax` must be set as well."
+                        },
+                        "cmax": {
+                            "valType": "number",
+                            "role": "info",
+                            "dflt": null,
+                            "editType": "plot",
+                            "impliedEdits": {
+                                "cauto": false
+                            },
+                            "description": "Sets the upper bound of the color domain. Has an effect only if in `marker.line.color`is set to a numerical array. Value should have the same units as in `marker.line.color` and if set, `marker.line.cmin` must be set as well."
+                        },
+                        "colorscale": {
+                            "valType": "colorscale",
+                            "role": "style",
+                            "editType": "calc",
+                            "dflt": null,
+                            "impliedEdits": {
+                                "autocolorscale": false
+                            },
+                            "description": "Sets the colorscale. Has an effect only if in `marker.line.color`is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use`marker.line.cmin` and `marker.line.cmax`. Alternatively, `colorscale` may be a palette name string of the following list: Greys,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth,Electric,Viridis,Cividis."
+                        },
+                        "autocolorscale": {
+                            "valType": "boolean",
+                            "role": "style",
+                            "dflt": true,
+                            "editType": "calc",
+                            "impliedEdits": {},
+                            "description": "Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `marker.line.colorscale`. Has an effect only if in `marker.line.color`is set to a numerical array. In case `colorscale` is unspecified or `autocolorscale` is true, the default  palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed."
+                        },
+                        "reversescale": {
+                            "valType": "boolean",
+                            "role": "style",
+                            "dflt": false,
+                            "editType": "calc",
+                            "description": "Reverses the color mapping if true. Has an effect only if in `marker.line.color`is set to a numerical array. If true, `marker.line.cmin` will correspond to the last color in the array and `marker.line.cmax` will correspond to the first color."
+                        },
+                        "role": "object",
+                        "widthsrc": {
+                            "valType": "string",
+                            "role": "info",
+                            "description": "Sets the source reference on plot.ly for  width .",
+                            "editType": "none"
+                        },
+                        "colorsrc": {
+                            "valType": "string",
+                            "role": "info",
+                            "description": "Sets the source reference on plot.ly for  color .",
+                            "editType": "none"
+                        }
+                    },
+                    "editType": "calc",
+                    "color": {
+                        "valType": "color",
+                        "arrayOk": true,
+                        "role": "style",
+                        "editType": "style",
+                        "description": "Sets themarkercolor. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `marker.cmin` and `marker.cmax` if set."
+                    },
+                    "cauto": {
+                        "valType": "boolean",
+                        "role": "info",
+                        "dflt": true,
+                        "editType": "calc",
+                        "impliedEdits": {},
+                        "description": "Determines whether or not the color domain is computed with respect to the input data (here in `marker.color`) or the bounds set in `marker.cmin` and `marker.cmax`  Has an effect only if in `marker.color`is set to a numerical array. Defaults to `false` when `marker.cmin` and `marker.cmax` are set by the user."
+                    },
+                    "cmin": {
+                        "valType": "number",
+                        "role": "info",
+                        "dflt": null,
+                        "editType": "plot",
+                        "impliedEdits": {
+                            "cauto": false
+                        },
+                        "description": "Sets the lower bound of the color domain. Has an effect only if in `marker.color`is set to a numerical array. Value should have the same units as in `marker.color` and if set, `marker.cmax` must be set as well."
+                    },
+                    "cmax": {
+                        "valType": "number",
+                        "role": "info",
+                        "dflt": null,
+                        "editType": "plot",
+                        "impliedEdits": {
+                            "cauto": false
+                        },
+                        "description": "Sets the upper bound of the color domain. Has an effect only if in `marker.color`is set to a numerical array. Value should have the same units as in `marker.color` and if set, `marker.cmin` must be set as well."
+                    },
+                    "colorscale": {
+                        "valType": "colorscale",
+                        "role": "style",
+                        "editType": "calc",
+                        "dflt": null,
+                        "impliedEdits": {
+                            "autocolorscale": false
+                        },
+                        "description": "Sets the colorscale. Has an effect only if in `marker.color`is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use`marker.cmin` and `marker.cmax`. Alternatively, `colorscale` may be a palette name string of the following list: Greys,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth,Electric,Viridis,Cividis."
+                    },
+                    "autocolorscale": {
+                        "valType": "boolean",
+                        "role": "style",
+                        "dflt": true,
+                        "editType": "calc",
+                        "impliedEdits": {},
+                        "description": "Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `marker.colorscale`. Has an effect only if in `marker.color`is set to a numerical array. In case `colorscale` is unspecified or `autocolorscale` is true, the default  palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed."
+                    },
+                    "reversescale": {
+                        "valType": "boolean",
+                        "role": "style",
+                        "dflt": false,
+                        "editType": "calc",
+                        "description": "Reverses the color mapping if true. Has an effect only if in `marker.color`is set to a numerical array. If true, `marker.cmin` will correspond to the last color in the array and `marker.cmax` will correspond to the first color."
+                    },
+                    "showscale": {
+                        "valType": "boolean",
+                        "role": "info",
+                        "dflt": false,
+                        "editType": "calc",
+                        "description": "Determines whether or not a colorbar is displayed for this trace. Has an effect only if in `marker.color`is set to a numerical array."
+                    },
+                    "colorbar": {
+                        "thicknessmode": {
+                            "valType": "enumerated",
+                            "values": [
+                                "fraction",
+                                "pixels"
+                            ],
+                            "role": "style",
+                            "dflt": "pixels",
+                            "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels*. Use `thickness` to set the value.",
+                            "editType": "colorbars"
+                        },
+                        "thickness": {
+                            "valType": "number",
+                            "role": "style",
+                            "min": 0,
+                            "dflt": 30,
+                            "description": "Sets the thickness of the color bar This measure excludes the size of the padding, ticks and labels.",
+                            "editType": "colorbars"
+                        },
+                        "lenmode": {
+                            "valType": "enumerated",
+                            "values": [
+                                "fraction",
+                                "pixels"
+                            ],
+                            "role": "info",
+                            "dflt": "fraction",
+                            "description": "Determines whether this color bar's length (i.e. the measure in the color variation direction) is set in units of plot *fraction* or in *pixels. Use `len` to set the value.",
+                            "editType": "colorbars"
+                        },
+                        "len": {
+                            "valType": "number",
+                            "min": 0,
+                            "dflt": 1,
+                            "role": "style",
+                            "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
+                            "editType": "colorbars"
+                        },
+                        "x": {
+                            "valType": "number",
+                            "dflt": 1.02,
+                            "min": -2,
+                            "max": 3,
+                            "role": "style",
+                            "description": "Sets the x position of the color bar (in plot fraction).",
+                            "editType": "colorbars"
+                        },
+                        "xanchor": {
+                            "valType": "enumerated",
+                            "values": [
+                                "left",
+                                "center",
+                                "right"
+                            ],
+                            "dflt": "left",
+                            "role": "style",
+                            "description": "Sets this color bar's horizontal position anchor. This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
+                            "editType": "colorbars"
+                        },
+                        "xpad": {
+                            "valType": "number",
+                            "role": "style",
+                            "min": 0,
+                            "dflt": 10,
+                            "description": "Sets the amount of padding (in px) along the x direction.",
+                            "editType": "colorbars"
+                        },
+                        "y": {
+                            "valType": "number",
+                            "role": "style",
+                            "dflt": 0.5,
+                            "min": -2,
+                            "max": 3,
+                            "description": "Sets the y position of the color bar (in plot fraction).",
+                            "editType": "colorbars"
+                        },
+                        "yanchor": {
+                            "valType": "enumerated",
+                            "values": [
+                                "top",
+                                "middle",
+                                "bottom"
+                            ],
+                            "role": "style",
+                            "dflt": "middle",
+                            "description": "Sets this color bar's vertical position anchor This anchor binds the `y` position to the *top*, *middle* or *bottom* of the color bar.",
+                            "editType": "colorbars"
+                        },
+                        "ypad": {
+                            "valType": "number",
+                            "role": "style",
+                            "min": 0,
+                            "dflt": 10,
+                            "description": "Sets the amount of padding (in px) along the y direction.",
+                            "editType": "colorbars"
+                        },
+                        "outlinecolor": {
+                            "valType": "color",
+                            "dflt": "#444",
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Sets the axis line color."
+                        },
+                        "outlinewidth": {
+                            "valType": "number",
+                            "min": 0,
+                            "dflt": 1,
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Sets the width (in px) of the axis line."
+                        },
+                        "bordercolor": {
+                            "valType": "color",
+                            "dflt": "#444",
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Sets the axis line color."
+                        },
+                        "borderwidth": {
+                            "valType": "number",
+                            "role": "style",
+                            "min": 0,
+                            "dflt": 0,
+                            "description": "Sets the width (in px) or the border enclosing this color bar.",
+                            "editType": "colorbars"
+                        },
+                        "bgcolor": {
+                            "valType": "color",
+                            "role": "style",
+                            "dflt": "rgba(0,0,0,0)",
+                            "description": "Sets the color of padded area.",
+                            "editType": "colorbars"
+                        },
+                        "tickmode": {
+                            "valType": "enumerated",
+                            "values": [
+                                "auto",
+                                "linear",
+                                "array"
+                            ],
+                            "role": "info",
+                            "editType": "colorbars",
+                            "impliedEdits": {},
+                            "description": "Sets the tick mode for this axis. If *auto*, the number of ticks is set via `nticks`. If *linear*, the placement of the ticks is determined by a starting position `tick0` and a tick step `dtick` (*linear* is the default value if `tick0` and `dtick` are provided). If *array*, the placement of the ticks is set via `tickvals` and the tick text is `ticktext`. (*array* is the default value if `tickvals` is provided)."
+                        },
+                        "nticks": {
+                            "valType": "integer",
+                            "min": 0,
+                            "dflt": 0,
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*."
+                        },
+                        "tick0": {
+                            "valType": "any",
+                            "role": "style",
+                            "editType": "colorbars",
+                            "impliedEdits": {
+                                "tickmode": "linear"
+                            },
+                            "description": "Sets the placement of the first tick on this axis. Use with `dtick`. If the axis `type` is *log*, then you must take the log of your starting tick (e.g. to set the starting tick to 100, set the `tick0` to 2) except when `dtick`=*L<f>* (see `dtick` for more info). If the axis `type` is *date*, it should be a date string, like date data. If the axis `type` is *category*, it should be a number, using the scale where each category is assigned a serial number from zero in the order it appears."
+                        },
+                        "dtick": {
+                            "valType": "any",
+                            "role": "style",
+                            "editType": "colorbars",
+                            "impliedEdits": {
+                                "tickmode": "linear"
+                            },
+                            "description": "Sets the step in-between ticks on this axis. Use with `tick0`. Must be a positive number, or special strings available to *log* and *date* axes. If the axis `type` is *log*, then ticks are set every 10^(n*dtick) where n is the tick number. For example, to set a tick mark at 1, 10, 100, 1000, ... set dtick to 1. To set tick marks at 1, 100, 10000, ... set dtick to 2. To set tick marks at 1, 5, 25, 125, 625, 3125, ... set dtick to log_10(5), or 0.69897000433. *log* has several special values; *L<f>*, where `f` is a positive number, gives ticks linearly spaced in value (but not position). For example `tick0` = 0.1, `dtick` = *L0.5* will put ticks at 0.1, 0.6, 1.1, 1.6 etc. To show powers of 10 plus small digits between, use *D1* (all digits) or *D2* (only 2 and 5). `tick0` is ignored for *D1* and *D2*. If the axis `type` is *date*, then you must convert the time to milliseconds. For example, to set the interval between ticks to one day, set `dtick` to 86400000.0. *date* also has special values *M<n>* gives ticks spaced by a number of months. `n` must be a positive integer. To set ticks on the 15th of every third month, set `tick0` to *2000-01-15* and `dtick` to *M3*. To set ticks every 4 years, set `dtick` to *M48*"
+                        },
+                        "tickvals": {
+                            "valType": "data_array",
+                            "editType": "colorbars",
+                            "description": "Sets the values at which ticks on this axis appear. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
+                            "role": "data"
+                        },
+                        "ticktext": {
+                            "valType": "data_array",
+                            "editType": "colorbars",
+                            "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `tickvals`.",
+                            "role": "data"
+                        },
+                        "ticks": {
+                            "valType": "enumerated",
+                            "values": [
+                                "outside",
+                                "inside",
+                                ""
+                            ],
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
+                            "dflt": ""
+                        },
+                        "ticklen": {
+                            "valType": "number",
+                            "min": 0,
+                            "dflt": 5,
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Sets the tick length (in px)."
+                        },
+                        "tickwidth": {
+                            "valType": "number",
+                            "min": 0,
+                            "dflt": 1,
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Sets the tick width (in px)."
+                        },
+                        "tickcolor": {
+                            "valType": "color",
+                            "dflt": "#444",
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Sets the tick color."
+                        },
+                        "showticklabels": {
+                            "valType": "boolean",
+                            "dflt": true,
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Determines whether or not the tick labels are drawn."
+                        },
+                        "tickfont": {
+                            "family": {
+                                "valType": "string",
+                                "role": "style",
+                                "noBlank": true,
+                                "strict": true,
+                                "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                                "editType": "colorbars"
+                            },
+                            "size": {
+                                "valType": "number",
+                                "role": "style",
+                                "min": 1,
+                                "editType": "colorbars"
+                            },
+                            "color": {
+                                "valType": "color",
+                                "role": "style",
+                                "editType": "colorbars"
+                            },
+                            "description": "Sets the color bar's tick label font",
+                            "editType": "colorbars",
+                            "role": "object"
+                        },
+                        "tickangle": {
+                            "valType": "angle",
+                            "dflt": "auto",
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Sets the angle of the tick labels with respect to the horizontal. For example, a `tickangle` of -90 draws the tick labels vertically."
+                        },
+                        "tickformat": {
+                            "valType": "string",
+                            "dflt": "",
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Sets the tick label formatting rule using d3 formatting mini-languages which are very similar to those in Python. For numbers, see: https://github.com/d3/d3-format/blob/master/README.md#locale_format And for dates see: https://github.com/d3/d3-time-format/blob/master/README.md#locale_format We add one item to d3's date formatter: *%{n}f* for fractional seconds with n digits. For example, *2016-10-13 09:15:23.456* with tickformat *%H~%M~%S.%2f* would display *09~15~23.46*"
+                        },
+                        "tickformatstops": {
+                            "items": {
+                                "tickformatstop": {
+                                    "enabled": {
+                                        "valType": "boolean",
+                                        "role": "info",
+                                        "dflt": true,
+                                        "editType": "colorbars",
+                                        "description": "Determines whether or not this stop is used. If `false`, this stop is ignored even within its `dtickrange`."
+                                    },
+                                    "dtickrange": {
+                                        "valType": "info_array",
+                                        "role": "info",
+                                        "items": [
+                                            {
+                                                "valType": "any",
+                                                "editType": "colorbars"
+                                            },
+                                            {
+                                                "valType": "any",
+                                                "editType": "colorbars"
+                                            }
+                                        ],
+                                        "editType": "colorbars",
+                                        "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*"
+                                    },
+                                    "value": {
+                                        "valType": "string",
+                                        "dflt": "",
+                                        "role": "style",
+                                        "editType": "colorbars",
+                                        "description": "string - dtickformat for described zoom level, the same as *tickformat*"
+                                    },
+                                    "editType": "colorbars",
+                                    "name": {
+                                        "valType": "string",
+                                        "role": "style",
+                                        "editType": "colorbars",
+                                        "description": "When used in a template, named items are created in the output figure in addition to any items the figure already has in this array. You can modify these items in the output figure by making your own item with `templateitemname` matching this `name` alongside your modifications (including `visible: false` or `enabled: false` to hide it). Has no effect outside of a template."
+                                    },
+                                    "templateitemname": {
+                                        "valType": "string",
+                                        "role": "info",
+                                        "editType": "colorbars",
+                                        "description": "Used to refer to a named item in this array in the template. Named items from the template will be created even without a matching item in the input figure, but you can modify one by making an item with `templateitemname` matching its `name`, alongside your modifications (including `visible: false` or `enabled: false` to hide it). If there is no template or no matching item, this item will be hidden unless you explicitly show it with `visible: true`."
+                                    },
+                                    "role": "object"
+                                }
+                            },
+                            "role": "object"
+                        },
+                        "tickprefix": {
+                            "valType": "string",
+                            "dflt": "",
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Sets a tick label prefix."
+                        },
+                        "showtickprefix": {
+                            "valType": "enumerated",
+                            "values": [
+                                "all",
+                                "first",
+                                "last",
+                                "none"
+                            ],
+                            "dflt": "all",
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "If *all*, all tick labels are displayed with a prefix. If *first*, only the first tick is displayed with a prefix. If *last*, only the last tick is displayed with a suffix. If *none*, tick prefixes are hidden."
+                        },
+                        "ticksuffix": {
+                            "valType": "string",
+                            "dflt": "",
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Sets a tick label suffix."
+                        },
+                        "showticksuffix": {
+                            "valType": "enumerated",
+                            "values": [
+                                "all",
+                                "first",
+                                "last",
+                                "none"
+                            ],
+                            "dflt": "all",
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Same as `showtickprefix` but for tick suffixes."
+                        },
+                        "separatethousands": {
+                            "valType": "boolean",
+                            "dflt": false,
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "If \"true\", even 4-digit integers are separated"
+                        },
+                        "exponentformat": {
+                            "valType": "enumerated",
+                            "values": [
+                                "none",
+                                "e",
+                                "E",
+                                "power",
+                                "SI",
+                                "B"
+                            ],
+                            "dflt": "B",
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
+                        },
+                        "showexponent": {
+                            "valType": "enumerated",
+                            "values": [
+                                "all",
+                                "first",
+                                "last",
+                                "none"
+                            ],
+                            "dflt": "all",
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear."
+                        },
+                        "title": {
+                            "valType": "string",
+                            "role": "info",
+                            "description": "Sets the title of the color bar.",
+                            "editType": "colorbars"
+                        },
+                        "titlefont": {
+                            "family": {
+                                "valType": "string",
+                                "role": "style",
+                                "noBlank": true,
+                                "strict": true,
+                                "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                                "editType": "colorbars"
+                            },
+                            "size": {
+                                "valType": "number",
+                                "role": "style",
+                                "min": 1,
+                                "editType": "colorbars"
+                            },
+                            "color": {
+                                "valType": "color",
+                                "role": "style",
+                                "editType": "colorbars"
+                            },
+                            "description": "Sets this color bar's title font.",
+                            "editType": "colorbars",
+                            "role": "object"
+                        },
+                        "titleside": {
+                            "valType": "enumerated",
+                            "values": [
+                                "right",
+                                "top",
+                                "bottom"
+                            ],
+                            "role": "style",
+                            "dflt": "top",
+                            "description": "Determines the location of the colorbar title with respect to the color bar.",
+                            "editType": "colorbars"
+                        },
+                        "editType": "colorbars",
+                        "role": "object",
+                        "tickvalssrc": {
+                            "valType": "string",
+                            "role": "info",
+                            "description": "Sets the source reference on plot.ly for  tickvals .",
+                            "editType": "none"
+                        },
+                        "ticktextsrc": {
+                            "valType": "string",
+                            "role": "info",
+                            "description": "Sets the source reference on plot.ly for  ticktext .",
+                            "editType": "none"
+                        }
+                    },
+                    "opacity": {
+                        "valType": "number",
+                        "arrayOk": true,
+                        "dflt": 1,
+                        "min": 0,
+                        "max": 1,
+                        "role": "style",
+                        "editType": "style",
+                        "description": "Sets the opacity of the bars."
+                    },
+                    "role": "object",
+                    "colorsrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on plot.ly for  color .",
+                        "editType": "none"
+                    },
+                    "opacitysrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on plot.ly for  opacity .",
+                        "editType": "none"
+                    }
+                },
+                "selected": {
+                    "marker": {
+                        "opacity": {
+                            "valType": "number",
+                            "min": 0,
+                            "max": 1,
+                            "role": "style",
+                            "editType": "style",
+                            "description": "Sets the marker opacity of selected points."
+                        },
+                        "color": {
+                            "valType": "color",
+                            "role": "style",
+                            "editType": "style",
+                            "description": "Sets the marker color of selected points."
+                        },
+                        "editType": "style",
+                        "role": "object"
+                    },
+                    "textfont": {
+                        "color": {
+                            "valType": "color",
+                            "role": "style",
+                            "editType": "style",
+                            "description": "Sets the text font color of selected points."
+                        },
+                        "editType": "style",
+                        "role": "object"
+                    },
+                    "editType": "style",
+                    "role": "object"
+                },
+                "unselected": {
+                    "marker": {
+                        "opacity": {
+                            "valType": "number",
+                            "min": 0,
+                            "max": 1,
+                            "role": "style",
+                            "editType": "style",
+                            "description": "Sets the marker opacity of unselected points, applied only when a selection exists."
+                        },
+                        "color": {
+                            "valType": "color",
+                            "role": "style",
+                            "editType": "style",
+                            "description": "Sets the marker color of unselected points, applied only when a selection exists."
+                        },
+                        "editType": "style",
+                        "role": "object"
+                    },
+                    "textfont": {
+                        "color": {
+                            "valType": "color",
+                            "role": "style",
+                            "editType": "style",
+                            "description": "Sets the text font color of unselected points, applied only when a selection exists."
+                        },
+                        "editType": "style",
+                        "role": "object"
+                    },
+                    "editType": "style",
+                    "role": "object"
+                },
+                "subplot": {
+                    "valType": "subplotid",
+                    "role": "info",
+                    "dflt": "polar",
+                    "editType": "calc",
+                    "description": "Sets a reference between this trace's data coordinates and a polar subplot. If *polar* (the default value), the data refer to `layout.polar`. If *polar2*, the data refer to `layout.polar2`, and so on."
+                },
+                "idssrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  ids .",
+                    "editType": "none"
+                },
+                "customdatasrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  customdata .",
+                    "editType": "none"
+                },
+                "hoverinfosrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
+                    "editType": "none"
+                },
+                "rsrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  r .",
+                    "editType": "none"
+                },
+                "thetasrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  theta .",
+                    "editType": "none"
+                },
+                "basesrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  base .",
+                    "editType": "none"
+                },
+                "offsetsrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  offset .",
+                    "editType": "none"
+                },
+                "widthsrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  width .",
+                    "editType": "none"
+                },
+                "textsrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  text .",
+                    "editType": "none"
+                }
+            },
+            "layoutAttributes": {
+                "barmode": {
+                    "valType": "enumerated",
+                    "values": [
+                        "stack",
+                        "overlay"
+                    ],
+                    "dflt": "stack",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Determines how bars at the same location coordinate are displayed on the graph. With *stack*, the bars are stacked on top of one another With *overlay*, the bars are plotted over one another, you might need to an *opacity* to see multiple bars."
+                },
+                "bargap": {
+                    "valType": "number",
+                    "dflt": 0.1,
+                    "min": 0,
+                    "max": 1,
+                    "role": "style",
+                    "editType": "calc",
+                    "description": "Sets the gap between bars of adjacent location coordinates. Values are unitless, they represent fractions of the minimum difference in bar positions in the data."
                 }
             }
         },
@@ -37955,13 +39063,13 @@
                 "r": {
                     "valType": "data_array",
                     "editType": "calc",
-                    "description": "For legacy polar chart only.Please switch to *scatterpolar* trace type.Sets the radial coordinates.",
+                    "description": "Area traces are deprecated! Please switch to the *barpolar* trace type. Sets the radial coordinates for legacy polar chart only.",
                     "role": "data"
                 },
                 "t": {
                     "valType": "data_array",
                     "editType": "calc",
-                    "description": "For legacy polar chart only.Please switch to *scatterpolar* trace type.Sets the angular coordinates.",
+                    "description": "Area traces are deprecated! Please switch to the *barpolar* trace type. Sets the angular coordinates for legacy polar chart only.",
                     "role": "data"
                 },
                 "marker": {
@@ -37970,7 +39078,7 @@
                         "arrayOk": true,
                         "role": "style",
                         "editType": "style",
-                        "description": "Sets themarkercolor. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `marker.cmin` and `marker.cmax` if set."
+                        "description": "Area traces are deprecated! Please switch to the *barpolar* trace type. Sets themarkercolor. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `marker.cmin` and `marker.cmax` if set."
                     },
                     "size": {
                         "valType": "number",
@@ -37979,7 +39087,7 @@
                         "arrayOk": true,
                         "role": "style",
                         "editType": "calc",
-                        "description": "Sets the marker size (in px)."
+                        "description": "Area traces are deprecated! Please switch to the *barpolar* trace type. Sets the marker size (in px)."
                     },
                     "symbol": {
                         "valType": "enumerated",
@@ -38273,7 +39381,7 @@
                         "arrayOk": true,
                         "role": "style",
                         "editType": "style",
-                        "description": "Sets the marker symbol type. Adding 100 is equivalent to appending *-open* to a symbol name. Adding 200 is equivalent to appending *-dot* to a symbol name. Adding 300 is equivalent to appending *-open-dot* or *dot-open* to a symbol name."
+                        "description": "Area traces are deprecated! Please switch to the *barpolar* trace type. Sets the marker symbol type. Adding 100 is equivalent to appending *-open* to a symbol name. Adding 200 is equivalent to appending *-dot* to a symbol name. Adding 300 is equivalent to appending *-open-dot* or *dot-open* to a symbol name."
                     },
                     "opacity": {
                         "valType": "number",
@@ -38282,7 +39390,7 @@
                         "arrayOk": true,
                         "role": "style",
                         "editType": "style",
-                        "description": "Sets the marker opacity."
+                        "description": "Area traces are deprecated! Please switch to the *barpolar* trace type. Sets the marker opacity."
                     },
                     "editType": "calc",
                     "role": "object",
@@ -38539,6 +39647,20 @@
                 "editType": "calc",
                 "description": "Default attributes to be applied to the plot. Templates can be created from existing plots using `Plotly.makeTemplate`, or created manually. They should be objects with format: `{layout: layoutTemplate, data: {[type]: [traceTemplate, ...]}, ...}` `layoutTemplate` and `traceTemplate` are objects matching the attribute structure of `layout` and a data trace.  Trace templates are applied cyclically to traces of each type. Container arrays (eg `annotations`) have special handling: An object ending in `defaults` (eg `annotationdefaults`) is applied to each array item. But if an item has a `templateitemname` key we look in the template array for an item with matching `name` and apply that instead. If no matching `name` is found we mark the item invisible. Any named template item not referenced is appended to the end of the array, so you can use this for a watermark annotation or a logo image, for example. To omit one of these items on the plot, make an item with matching `templateitemname` and `visible: false`."
             },
+            "clickmode": {
+                "valType": "flaglist",
+                "role": "info",
+                "flags": [
+                    "event",
+                    "select"
+                ],
+                "dflt": "event",
+                "editType": "plot",
+                "extras": [
+                    "none"
+                ],
+                "description": "Determines the mode of single click interactions. *event* is the default value and emits the `plotly_click` event. In addition this mode emits the `plotly_selected` event in drag modes *lasso* and *select*, but with no event data attached (kept for compatibility reasons). The *select* flag enables selecting single data points via click. This mode also supports persistent selections, meaning that pressing Shift while clicking, adds to / subtracts from an existing selection. *select* with `hovermode`: *x* can be confusing, consider explicitly setting `hovermode`: *closest* when using this feature. Selection events are sent accordingly as long as *event* flag is set as well. When the *event* flag is missing, `plotly_click` and `plotly_selected` events are not fired."
+            },
             "dragmode": {
                 "valType": "enumerated",
                 "role": "info",
@@ -38564,7 +39686,7 @@
                     false
                 ],
                 "editType": "modebar",
-                "description": "Determines the mode of hover interactions."
+                "description": "Determines the mode of hover interactions. If `clickmode` includes the *select* flag, `hovermode` defaults to *closest*. If `clickmode` lacks the *select* flag, it defaults to *x* or *y* (depending on the trace's `orientation` value) for plots based on cartesian coordinates. For anything else the default value is *closest*."
             },
             "hoverdistance": {
                 "valType": "integer",
@@ -38932,7 +40054,7 @@
                     "dflt": "normal",
                     "role": "info",
                     "editType": "plot",
-                    "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*`, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data."
+                    "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*`, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data. Applies only to linear axes."
                 },
                 "range": {
                     "valType": "info_array",
@@ -39930,7 +41052,7 @@
                     "dflt": "normal",
                     "role": "info",
                     "editType": "plot",
-                    "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*`, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data."
+                    "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*`, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data. Applies only to linear axes."
                 },
                 "range": {
                     "valType": "info_array",
@@ -42138,7 +43260,7 @@
                         "dflt": "normal",
                         "role": "info",
                         "editType": "plot",
-                        "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*`, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data."
+                        "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*`, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data. Applies only to linear axes."
                     },
                     "range": {
                         "valType": "info_array",
@@ -42701,7 +43823,7 @@
                         "dflt": "normal",
                         "role": "info",
                         "editType": "plot",
-                        "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*`, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data."
+                        "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*`, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data. Applies only to linear axes."
                     },
                     "range": {
                         "valType": "info_array",
@@ -43264,7 +44386,7 @@
                         "dflt": "normal",
                         "role": "info",
                         "editType": "plot",
-                        "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*`, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data."
+                        "description": "If *normal*, the range is computed in relation to the extrema of the input data. If *tozero*`, the range extends to 0, regardless of the input data If *nonnegative*, the range is non-negative, regardless of the input data. Applies only to linear axes."
                     },
                     "range": {
                         "valType": "info_array",
@@ -44941,6 +46063,15 @@
                     "editType": "plot",
                     "description": "Sets angular span of this polar subplot with two angles (in degrees). Sector are assumed to be spanned in the counterclockwise direction with *0* corresponding to rightmost limit of the polar subplot."
                 },
+                "hole": {
+                    "valType": "number",
+                    "min": 0,
+                    "max": 1,
+                    "dflt": 0,
+                    "editType": "plot",
+                    "role": "info",
+                    "description": "Sets the fraction of the radius to cut out of the polar subplot."
+                },
                 "bgcolor": {
                     "valType": "color",
                     "role": "style",
@@ -45907,7 +47038,7 @@
                             "editType": "plot"
                         }
                     ],
-                    "description": "Defines the start and end point of this radial axis.",
+                    "description": "Legacy polar charts are deprecated! Please switch to *polar* subplots. Defines the start and end point of this radial axis.",
                     "editType": "plot"
                 },
                 "domain": {
@@ -45937,19 +47068,19 @@
                 "orientation": {
                     "valType": "number",
                     "role": "style",
-                    "description": "Sets the orientation (an angle with respect to the origin) of the radial axis.",
+                    "description": "Legacy polar charts are deprecated! Please switch to *polar* subplots. Sets the orientation (an angle with respect to the origin) of the radial axis.",
                     "editType": "plot"
                 },
                 "showline": {
                     "valType": "boolean",
                     "role": "style",
-                    "description": "Determines whether or not the line bounding this radial axis will be shown on the figure.",
+                    "description": "Legacy polar charts are deprecated! Please switch to *polar* subplots. Determines whether or not the line bounding this radial axis will be shown on the figure.",
                     "editType": "plot"
                 },
                 "showticklabels": {
                     "valType": "boolean",
                     "role": "style",
-                    "description": "Determines whether or not the radial axis ticks will feature tick labels.",
+                    "description": "Legacy polar charts are deprecated! Please switch to *polar* subplots. Determines whether or not the radial axis ticks will feature tick labels.",
                     "editType": "plot"
                 },
                 "tickorientation": {
@@ -45959,37 +47090,38 @@
                         "vertical"
                     ],
                     "role": "style",
-                    "description": "Sets the orientation (from the paper perspective) of the radial axis tick labels.",
+                    "description": "Legacy polar charts are deprecated! Please switch to *polar* subplots. Sets the orientation (from the paper perspective) of the radial axis tick labels.",
                     "editType": "plot"
                 },
                 "ticklen": {
                     "valType": "number",
                     "min": 0,
                     "role": "style",
-                    "description": "Sets the length of the tick lines on this radial axis.",
+                    "description": "Legacy polar charts are deprecated! Please switch to *polar* subplots. Sets the length of the tick lines on this radial axis.",
                     "editType": "plot"
                 },
                 "tickcolor": {
                     "valType": "color",
                     "role": "style",
-                    "description": "Sets the color of the tick lines on this radial axis.",
+                    "description": "Legacy polar charts are deprecated! Please switch to *polar* subplots. Sets the color of the tick lines on this radial axis.",
                     "editType": "plot"
                 },
                 "ticksuffix": {
                     "valType": "string",
                     "role": "style",
-                    "description": "Sets the length of the tick lines on this radial axis.",
+                    "description": "Legacy polar charts are deprecated! Please switch to *polar* subplots. Sets the length of the tick lines on this radial axis.",
                     "editType": "plot"
                 },
                 "endpadding": {
                     "valType": "number",
                     "role": "style",
+                    "description": "Legacy polar charts are deprecated! Please switch to *polar* subplots.",
                     "editType": "plot"
                 },
                 "visible": {
                     "valType": "boolean",
                     "role": "info",
-                    "description": "Determines whether or not this axis will be visible.",
+                    "description": "Legacy polar charts are deprecated! Please switch to *polar* subplots. Determines whether or not this axis will be visible.",
                     "editType": "plot"
                 },
                 "editType": "plot",
@@ -46011,7 +47143,7 @@
                             "editType": "plot"
                         }
                     ],
-                    "description": "Defines the start and end point of this angular axis.",
+                    "description": "Legacy polar charts are deprecated! Please switch to *polar* subplots. Defines the start and end point of this angular axis.",
                     "editType": "plot"
                 },
                 "domain": {
@@ -46041,13 +47173,13 @@
                 "showline": {
                     "valType": "boolean",
                     "role": "style",
-                    "description": "Determines whether or not the line bounding this angular axis will be shown on the figure.",
+                    "description": "Legacy polar charts are deprecated! Please switch to *polar* subplots. Determines whether or not the line bounding this angular axis will be shown on the figure.",
                     "editType": "plot"
                 },
                 "showticklabels": {
                     "valType": "boolean",
                     "role": "style",
-                    "description": "Determines whether or not the angular axis ticks will feature tick labels.",
+                    "description": "Legacy polar charts are deprecated! Please switch to *polar* subplots. Determines whether or not the angular axis ticks will feature tick labels.",
                     "editType": "plot"
                 },
                 "tickorientation": {
@@ -46057,37 +47189,38 @@
                         "vertical"
                     ],
                     "role": "style",
-                    "description": "Sets the orientation (from the paper perspective) of the angular axis tick labels.",
+                    "description": "Legacy polar charts are deprecated! Please switch to *polar* subplots. Sets the orientation (from the paper perspective) of the angular axis tick labels.",
                     "editType": "plot"
                 },
                 "ticklen": {
                     "valType": "number",
                     "min": 0,
                     "role": "style",
-                    "description": "Sets the length of the tick lines on this angular axis.",
+                    "description": "Legacy polar charts are deprecated! Please switch to *polar* subplots. Sets the length of the tick lines on this angular axis.",
                     "editType": "plot"
                 },
                 "tickcolor": {
                     "valType": "color",
                     "role": "style",
-                    "description": "Sets the color of the tick lines on this angular axis.",
+                    "description": "Legacy polar charts are deprecated! Please switch to *polar* subplots. Sets the color of the tick lines on this angular axis.",
                     "editType": "plot"
                 },
                 "ticksuffix": {
                     "valType": "string",
                     "role": "style",
-                    "description": "Sets the length of the tick lines on this angular axis.",
+                    "description": "Legacy polar charts are deprecated! Please switch to *polar* subplots. Sets the length of the tick lines on this angular axis.",
                     "editType": "plot"
                 },
                 "endpadding": {
                     "valType": "number",
                     "role": "style",
+                    "description": "Legacy polar charts are deprecated! Please switch to *polar* subplots.",
                     "editType": "plot"
                 },
                 "visible": {
                     "valType": "boolean",
                     "role": "info",
-                    "description": "Determines whether or not this axis will be visible.",
+                    "description": "Legacy polar charts are deprecated! Please switch to *polar* subplots. Determines whether or not this axis will be visible.",
                     "editType": "plot"
                 },
                 "editType": "plot",
@@ -46100,13 +47233,13 @@
                     "counterclockwise"
                 ],
                 "role": "info",
-                "description": "For polar plots only. Sets the direction corresponding to positive angles.",
+                "description": "Legacy polar charts are deprecated! Please switch to *polar* subplots. Sets the direction corresponding to positive angles in legacy polar charts.",
                 "editType": "plot"
             },
             "orientation": {
                 "valType": "angle",
                 "role": "info",
-                "description": "For polar plots only. Rotates the entire polar by the given angle.",
+                "description": "Legacy polar charts are deprecated! Please switch to *polar* subplots. Rotates the entire polar by the given angle in legacy polar charts.",
                 "editType": "plot"
             },
             "editType": "plot",
