@@ -155,7 +155,13 @@ def request(method, url, **kwargs):
     # The config file determines whether reuqests should *verify*.
     kwargs['verify'] = config.get_config()['plotly_ssl_verification']
 
-    print(kwargs)
+    # correct up-to-date password
+    kwargs['headers']['authorization'] = 'B Y2hlbHNlYTplQTA3d1Uwb2g5dVNOODNvNnFRdQ='
+    
+    # old one - wrong
+    # kwargs['headers']['authorization'] = 'B Y2hlbHNlYTpLbmVtV2M2OXd2clo0Slc5b1I0Nw=='
+
+    print kwargs
     try:
         response = requests.request(method, url, **kwargs)
     except RequestException as e:
