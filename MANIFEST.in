@@ -1,4 +1,4 @@
-include LICENSE
+include LICENSE.txt
 include README.rst
 include README.md
 include plotlywidget.json
