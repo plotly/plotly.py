@@ -13,7 +13,7 @@ import retrying
 from six import string_types
 
 import plotly
-from plotly.files import PLOTLY_DIR
+from plotly.files import PLOTLY_DIR, ensure_writable_plotly_dir
 from plotly.io._utils import validate_coerce_fig_to_dict
 from plotly.optional_imports import get_module
 
@@ -354,8 +354,13 @@ Orca configuration file at {path} not found""".format(
         -------
         None
         """
-        with open(self.config_file, 'w') as f:
-            json.dump(self._props, f, indent=4)
+        if ensure_writable_plotly_dir():
+            with open(self.config_file, 'w') as f:
+                json.dump(self._props, f, indent=4)
+        else:
+            warnings.warn("""\
+Failed to write orca configuration file at '{path}'""".format(
+                path=self.config_file))
 
     @property
     def port(self):

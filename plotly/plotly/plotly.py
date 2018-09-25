@@ -57,9 +57,6 @@ SHARING_ERROR_MSG = (
     "'secret'."
 )
 
-# test file permissions and make sure nothing is corrupted
-tools.ensure_local_plotly_files()
-
 
 # don't break backwards compatibility
 def sign_in(username, api_key, **kwargs):

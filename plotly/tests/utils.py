@@ -36,16 +36,14 @@ class PlotlyTestCase(TestCase):
         self.restore_session()
 
     def stash_files(self):
-        if files.check_file_permissions():
-            self._credentials = utils.load_json_dict(files.CREDENTIALS_FILE)
-            self._config = utils.load_json_dict(files.CONFIG_FILE)
+        self._credentials = utils.load_json_dict(files.CREDENTIALS_FILE)
+        self._config = utils.load_json_dict(files.CONFIG_FILE)
 
     def restore_files(self):
-        if files.check_file_permissions():
-            if self._credentials is not None:
-                utils.save_json_dict(files.CREDENTIALS_FILE, self._credentials)
-            if self._config is not None:
-                utils.save_json_dict(files.CONFIG_FILE, self._config)
+        if self._credentials and files.ensure_writable_plotly_dir():
+            utils.save_json_dict(files.CREDENTIALS_FILE, self._credentials)
+        if self._config and files.ensure_writable_plotly_dir():
+            utils.save_json_dict(files.CONFIG_FILE, self._config)
 
     def stash_session(self):
         self._session = copy.deepcopy(session._session)
