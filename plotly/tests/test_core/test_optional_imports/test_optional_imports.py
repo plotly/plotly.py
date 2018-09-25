@@ -3,11 +3,6 @@ import sys
 from unittest import TestCase
 from plotly.optional_imports import get_module
 
-if sys.version_info.major == 3 and sys.version_info.minor >= 4:
-    import unittest.mock as mock
-else:
-    import mock
-
 
 class OptionalImportsTest(TestCase):
 
