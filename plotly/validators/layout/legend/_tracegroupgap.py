@@ -12,8 +12,8 @@ class TracegroupgapValidator(_plotly_utils.basevalidators.NumberValidator):
         super(TracegroupgapValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type='legend',
-            min=0,
-            role='style',
+            edit_type=kwargs.pop('edit_type', 'legend'),
+            min=kwargs.pop('min', 0),
+            role=kwargs.pop('role', 'style'),
             **kwargs
         )

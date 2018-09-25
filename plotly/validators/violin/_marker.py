@@ -7,8 +7,9 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(MarkerValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Marker',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Marker'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             color
                 Sets themarkercolor. It accepts either a
                 specific color or an array of numbers that are
@@ -31,6 +32,7 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "-dot" to a symbol name. Adding 300 is
                 equivalent to appending "-open-dot" or "dot-
                 open" to a symbol name.
-""",
+"""
+            ),
             **kwargs
         )

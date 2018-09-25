@@ -9,8 +9,9 @@ class DimensionsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
         super(DimensionsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Dimension',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Dimension'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             constraintrange
                 The domain range to which the filter on the
                 dimension is constrained. Must be an array of
@@ -82,6 +83,7 @@ class DimensionsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
             visible
                 Shows the dimension when set to `true` (the
                 default). Hides the dimension for `false`.
-""",
+"""
+            ),
             **kwargs
         )

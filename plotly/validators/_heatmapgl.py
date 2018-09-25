@@ -7,8 +7,9 @@ class HeatmapglValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(HeatmapglValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Heatmapgl',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Heatmapgl'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             autocolorscale
                 Determines whether the colorscale is a default
                 palette (`autocolorscale: true`) or the palette
@@ -173,6 +174,7 @@ class HeatmapglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 set, `zmax` must be set as well.
             zsrc
                 Sets the source reference on plot.ly for  z .
-""",
+"""
+            ),
             **kwargs
         )

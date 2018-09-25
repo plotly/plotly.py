@@ -9,8 +9,9 @@ class PadValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(PadValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Pad',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Pad'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             b
                 The amount of padding (in px) along the bottom
                 of the component.
@@ -23,6 +24,7 @@ class PadValidator(_plotly_utils.basevalidators.CompoundValidator):
             t
                 The amount of padding (in px) along the top of
                 the component.
-""",
+"""
+            ),
             **kwargs
         )

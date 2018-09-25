@@ -9,7 +9,7 @@ class AyValidator(_plotly_utils.basevalidators.AnyValidator):
         super(AyValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type='calc+arraydraw',
-            role='info',
+            edit_type=kwargs.pop('edit_type', 'calc+arraydraw'),
+            role=kwargs.pop('role', 'info'),
             **kwargs
         )

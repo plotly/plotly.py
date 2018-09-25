@@ -7,8 +7,9 @@ class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(ScatterternaryValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Scatterternary',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Scatterternary'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             a
                 Sets the quantity of component `a` in each data
                 point. If `a`, `b`, and `c` are all provided,
@@ -192,6 +193,7 @@ class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundValidator):
                 visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
-""",
+"""
+            ),
             **kwargs
         )

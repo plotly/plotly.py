@@ -9,8 +9,9 @@ class ButtonsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
         super(ButtonsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Button',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Button'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             args
                 Sets the arguments values to be passed to the
                 Plotly method set in `method` on click.
@@ -58,6 +59,7 @@ class ButtonsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
             visible
                 Determines whether or not this button is
                 visible.
-""",
+"""
+            ),
             **kwargs
         )

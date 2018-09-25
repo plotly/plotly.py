@@ -7,8 +7,9 @@ class ShapesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
         super(ShapesValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Shape',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Shape'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             fillcolor
                 Sets the color filling the shape's interior.
             layer
@@ -155,6 +156,7 @@ class ShapesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 relative to `yanchor`. This way, the shape can
                 have a fixed height while maintaining a
                 position relative to data or plot fraction.
-""",
+"""
+            ),
             **kwargs
         )

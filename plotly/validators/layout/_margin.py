@@ -7,8 +7,9 @@ class MarginValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(MarginValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Margin',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Margin'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             autoexpand
 
             b
@@ -22,6 +23,7 @@ class MarginValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the right margin (in px).
             t
                 Sets the top margin (in px).
-""",
+"""
+            ),
             **kwargs
         )

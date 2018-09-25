@@ -7,8 +7,9 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(BoxValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Box',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Box'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             boxmean
                 If True, the mean of the box(es)' underlying
                 distribution is drawn as a dashed line inside
@@ -179,6 +180,7 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 data.
             ysrc
                 Sets the source reference on plot.ly for  y .
-""",
+"""
+            ),
             **kwargs
         )

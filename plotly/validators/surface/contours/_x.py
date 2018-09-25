@@ -9,8 +9,9 @@ class XValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(XValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='X',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'X'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             color
                 Sets the color of the contour lines.
             highlight
@@ -34,6 +35,7 @@ class XValidator(_plotly_utils.basevalidators.CompoundValidator):
                 trace "colorscale".
             width
                 Sets the width of the contour lines.
-""",
+"""
+            ),
             **kwargs
         )

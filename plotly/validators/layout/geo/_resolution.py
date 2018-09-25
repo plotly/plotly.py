@@ -9,9 +9,9 @@ class ResolutionValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         super(ResolutionValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            coerce_number=True,
-            edit_type='plot',
-            role='info',
-            values=[110, 50],
+            coerce_number=kwargs.pop('coerce_number', True),
+            edit_type=kwargs.pop('edit_type', 'plot'),
+            role=kwargs.pop('role', 'info'),
+            values=kwargs.pop('values', [110, 50]),
             **kwargs
         )

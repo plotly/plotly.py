@@ -9,8 +9,9 @@ class UnselectedValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(UnselectedValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Unselected',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Unselected'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             marker
                 plotly.graph_objs.scattercarpet.unselected.Mark
                 er instance or dict with compatible properties
@@ -18,6 +19,7 @@ class UnselectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 plotly.graph_objs.scattercarpet.unselected.Text
                 font instance or dict with compatible
                 properties
-""",
+"""
+            ),
             **kwargs
         )

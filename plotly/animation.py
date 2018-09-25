@@ -3,9 +3,10 @@ from _plotly_utils.basevalidators import EnumeratedValidator, NumberValidator
 
 class EasingValidator(EnumeratedValidator):
 
-    def __init__(self, plotly_name='easing'):
-        super(EasingValidator, self).__init__(plotly_name=plotly_name,
-                         parent_name='batch_animate',
+    def __init__(self, plotly_name='easing', parent_name='batch_animate', **_):
+        super(EasingValidator, self).__init__(
+                         plotly_name=plotly_name,
+                         parent_name=parent_name,
                          values=[
                              "linear",
                              "quad",

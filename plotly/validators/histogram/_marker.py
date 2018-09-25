@@ -9,8 +9,9 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(MarkerValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Marker',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Marker'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             autocolorscale
                 Determines whether the colorscale is a default
                 palette (`autocolorscale: true`) or the palette
@@ -88,6 +89,7 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not a colorbar is
                 displayed for this trace. Has an effect only if
                 in `marker.color`is set to a numerical array.
-""",
+"""
+            ),
             **kwargs
         )

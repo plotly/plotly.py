@@ -9,8 +9,8 @@ class SpikemodeValidator(_plotly_utils.basevalidators.FlaglistValidator):
         super(SpikemodeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type='none',
-            flags=['toaxis', 'across', 'marker'],
-            role='style',
+            edit_type=kwargs.pop('edit_type', 'none'),
+            flags=kwargs.pop('flags', ['toaxis', 'across', 'marker']),
+            role=kwargs.pop('role', 'style'),
             **kwargs
         )

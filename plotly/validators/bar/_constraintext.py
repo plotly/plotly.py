@@ -9,8 +9,8 @@ class ConstraintextValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         super(ConstraintextValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type='calc',
-            role='info',
-            values=['inside', 'outside', 'both', 'none'],
+            edit_type=kwargs.pop('edit_type', 'calc'),
+            role=kwargs.pop('role', 'info'),
+            values=kwargs.pop('values', ['inside', 'outside', 'both', 'none']),
             **kwargs
         )

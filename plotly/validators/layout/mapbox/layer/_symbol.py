@@ -12,8 +12,9 @@ class SymbolValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(SymbolValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Symbol',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Symbol'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             icon
                 Sets the symbol icon image. Full list:
                 https://www.mapbox.com/maki-icons/
@@ -28,6 +29,7 @@ class SymbolValidator(_plotly_utils.basevalidators.CompoundValidator):
             textposition
                 Sets the positions of the `text` elements with
                 respects to the (x,y) coordinates.
-""",
+"""
+            ),
             **kwargs
         )

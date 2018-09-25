@@ -7,8 +7,8 @@ class XValidator(_plotly_utils.basevalidators.DataArrayValidator):
         super(XValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type='calc',
-            implied_edits={'xtype': 'array'},
-            role='data',
+            edit_type=kwargs.pop('edit_type', 'calc'),
+            implied_edits=kwargs.pop('implied_edits', {'xtype': 'array'}),
+            role=kwargs.pop('role', 'data'),
             **kwargs
         )

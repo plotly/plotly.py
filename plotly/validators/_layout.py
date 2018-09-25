@@ -7,8 +7,9 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(LayoutValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Layout',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Layout'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             angularaxis
                 plotly.graph_objs.layout.AngularAxis instance
                 or dict with compatible properties
@@ -260,6 +261,7 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             yaxis
                 plotly.graph_objs.layout.YAxis instance or dict
                 with compatible properties
-""",
+"""
+            ),
             **kwargs
         )

@@ -9,8 +9,8 @@ class YanchorValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         super(YanchorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type='calc+arraydraw',
-            role='info',
-            values=['auto', 'top', 'middle', 'bottom'],
+            edit_type=kwargs.pop('edit_type', 'calc+arraydraw'),
+            role=kwargs.pop('role', 'info'),
+            values=kwargs.pop('values', ['auto', 'top', 'middle', 'bottom']),
             **kwargs
         )

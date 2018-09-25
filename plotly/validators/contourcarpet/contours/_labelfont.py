@@ -12,8 +12,9 @@ class LabelfontValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(LabelfontValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Labelfont',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Labelfont'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             color
 
             family
@@ -34,6 +35,7 @@ class LabelfontValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Narrow", "Raleway", "Times New Roman".
             size
 
-""",
+"""
+            ),
             **kwargs
         )

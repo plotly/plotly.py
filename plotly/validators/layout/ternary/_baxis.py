@@ -9,8 +9,9 @@ class BaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(BaxisValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Baxis',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Baxis'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             color
                 Sets default for all colors associated with
                 this axis all at once: line, font, tick, and
@@ -199,6 +200,7 @@ class BaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the title of this axis.
             titlefont
                 Sets this axis' title font.
-""",
+"""
+            ),
             **kwargs
         )

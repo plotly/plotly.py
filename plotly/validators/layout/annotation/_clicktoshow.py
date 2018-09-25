@@ -12,8 +12,8 @@ class ClicktoshowValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         super(ClicktoshowValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type='arraydraw',
-            role='style',
-            values=[False, 'onoff', 'onout'],
+            edit_type=kwargs.pop('edit_type', 'arraydraw'),
+            role=kwargs.pop('role', 'style'),
+            values=kwargs.pop('values', [False, 'onoff', 'onout']),
             **kwargs
         )

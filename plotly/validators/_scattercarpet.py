@@ -7,8 +7,9 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(ScattercarpetValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Scattercarpet',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Scattercarpet'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             a
                 Sets the quantity of component `a` in each data
                 point. If `a`, `b`, and `c` are all provided,
@@ -167,6 +168,7 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (the default value), the y coordinates refer to
                 `layout.yaxis`. If "y2", the y coordinates
                 refer to `layout.yaxis2`, and so on.
-""",
+"""
+            ),
             **kwargs
         )

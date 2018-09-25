@@ -9,8 +9,9 @@ class LataxisValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(LataxisValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Lataxis',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Lataxis'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             dtick
                 Sets the graticule's longitude/latitude tick
                 step.
@@ -27,6 +28,7 @@ class LataxisValidator(_plotly_utils.basevalidators.CompoundValidator):
             tick0
                 Sets the graticule's starting tick
                 longitude/latitude.
-""",
+"""
+            ),
             **kwargs
         )
