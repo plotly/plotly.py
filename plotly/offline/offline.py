@@ -8,7 +8,7 @@ from __future__ import absolute_import
 import os
 import uuid
 import warnings
-from pkg_resources import resource_string
+import pkgutil
 import time
 import webbrowser
 
@@ -38,7 +38,7 @@ def download_plotlyjs(download_url):
 
 def get_plotlyjs():
     path = os.path.join('package_data', 'plotly.min.js')
-    plotlyjs = resource_string('plotly', path).decode('utf-8')
+    plotlyjs = pkgutil.get_data('plotly', path).decode('utf-8')
     return plotlyjs
 
 def get_image_download_script(caller):
