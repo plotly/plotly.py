@@ -12,8 +12,8 @@ class TitlesideValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         super(TitlesideValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type='calc',
-            role='style',
-            values=['right', 'top', 'bottom'],
+            edit_type=kwargs.pop('edit_type', 'calc'),
+            role=kwargs.pop('role', 'style'),
+            values=kwargs.pop('values', ['right', 'top', 'bottom']),
             **kwargs
         )

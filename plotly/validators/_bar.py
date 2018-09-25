@@ -7,8 +7,9 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(BarValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Bar',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Bar'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             base
                 Sets where the bar base is drawn (in position
                 axis units). In "stack" or "relative" barmode,
@@ -210,6 +211,7 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 data.
             ysrc
                 Sets the source reference on plot.ly for  y .
-""",
+"""
+            ),
             **kwargs
         )

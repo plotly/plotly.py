@@ -9,8 +9,9 @@ class RadialAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(RadialAxisValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='RadialAxis',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'RadialAxis'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             angle
                 Sets the angle (in degrees) from which the
                 radial axis is drawn. Note that by default,
@@ -266,6 +267,7 @@ class RadialAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 preserving interaction like dragging. Default
                 is true when a cheater plot is present on the
                 axis, otherwise false
-""",
+"""
+            ),
             **kwargs
         )

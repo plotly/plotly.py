@@ -7,8 +7,9 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(ViolinValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Violin',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Violin'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             bandwidth
                 Sets the bandwidth used to compute the kernel
                 density estimate. By default, the bandwidth is
@@ -202,6 +203,7 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 refer to `layout.yaxis2`, and so on.
             ysrc
                 Sets the source reference on plot.ly for  y .
-""",
+"""
+            ),
             **kwargs
         )

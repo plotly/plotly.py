@@ -7,8 +7,9 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(Mesh3dValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Mesh3d',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Mesh3d'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             alphahull
                 Determines how the mesh surface triangles are
                 derived from the set of vertices (points)
@@ -258,6 +259,7 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 data.
             zsrc
                 Sets the source reference on plot.ly for  z .
-""",
+"""
+            ),
             **kwargs
         )

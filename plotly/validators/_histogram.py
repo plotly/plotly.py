@@ -7,8 +7,9 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(HistogramValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Histogram',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Histogram'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             autobinx
                 Determines whether or not the x axis bin
                 attributes are picked by an algorithm. Note
@@ -187,6 +188,7 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 data.
             ysrc
                 Sets the source reference on plot.ly for  y .
-""",
+"""
+            ),
             **kwargs
         )

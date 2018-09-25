@@ -9,9 +9,9 @@ class AspectmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         super(AspectmodeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type='plot',
-            implied_edits={},
-            role='info',
-            values=['auto', 'cube', 'data', 'manual'],
+            edit_type=kwargs.pop('edit_type', 'plot'),
+            implied_edits=kwargs.pop('implied_edits', {}),
+            role=kwargs.pop('role', 'info'),
+            values=kwargs.pop('values', ['auto', 'cube', 'data', 'manual']),
             **kwargs
         )

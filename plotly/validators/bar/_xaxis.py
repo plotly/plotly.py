@@ -7,8 +7,8 @@ class XAxisValidator(_plotly_utils.basevalidators.SubplotidValidator):
         super(XAxisValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            dflt='x',
-            edit_type='calc+clearAxisTypes',
-            role='info',
+            dflt=kwargs.pop('dflt', 'x'),
+            edit_type=kwargs.pop('edit_type', 'calc+clearAxisTypes'),
+            role=kwargs.pop('role', 'info'),
             **kwargs
         )

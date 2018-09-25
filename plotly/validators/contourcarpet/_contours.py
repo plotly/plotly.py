@@ -9,8 +9,9 @@ class ContoursValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(ContoursValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Contours',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Contours'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             coloring
                 Determines the coloring method showing the
                 contour values. If "fill", coloring is done
@@ -71,6 +72,7 @@ class ContoursValidator(_plotly_utils.basevalidators.CompoundValidator):
                 to be an array of two numbers where the first
                 is the lower bound and the second is the upper
                 bound.
-""",
+"""
+            ),
             **kwargs
         )

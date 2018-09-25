@@ -7,8 +7,9 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(LineValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Line',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Line'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             color
                 Sets the line color.
             dash
@@ -18,6 +19,7 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 dash length list in px (eg "5px,10px,2px,2px").
             width
                 Sets the line width (in px).
-""",
+"""
+            ),
             **kwargs
         )

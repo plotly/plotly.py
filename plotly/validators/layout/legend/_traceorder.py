@@ -9,9 +9,9 @@ class TraceorderValidator(_plotly_utils.basevalidators.FlaglistValidator):
         super(TraceorderValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type='legend',
-            extras=['normal'],
-            flags=['reversed', 'grouped'],
-            role='style',
+            edit_type=kwargs.pop('edit_type', 'legend'),
+            extras=kwargs.pop('extras', ['normal']),
+            flags=kwargs.pop('flags', ['reversed', 'grouped']),
+            role=kwargs.pop('role', 'style'),
             **kwargs
         )

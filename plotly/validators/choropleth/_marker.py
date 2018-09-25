@@ -9,8 +9,9 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(MarkerValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Marker',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Marker'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             line
                 plotly.graph_objs.choropleth.marker.Line
                 instance or dict with compatible properties
@@ -19,6 +20,7 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
             opacitysrc
                 Sets the source reference on plot.ly for
                 opacity .
-""",
+"""
+            ),
             **kwargs
         )

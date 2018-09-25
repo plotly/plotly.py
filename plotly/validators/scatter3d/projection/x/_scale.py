@@ -12,9 +12,9 @@ class ScaleValidator(_plotly_utils.basevalidators.NumberValidator):
         super(ScaleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type='calc',
-            max=10,
-            min=0,
-            role='style',
+            edit_type=kwargs.pop('edit_type', 'calc'),
+            max=kwargs.pop('max', 10),
+            min=kwargs.pop('min', 0),
+            role=kwargs.pop('role', 'style'),
             **kwargs
         )

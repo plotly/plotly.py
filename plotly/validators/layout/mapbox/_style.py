@@ -9,11 +9,13 @@ class StyleValidator(_plotly_utils.basevalidators.AnyValidator):
         super(StyleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type='plot',
-            role='style',
-            values=[
-                'basic', 'streets', 'outdoors', 'light', 'dark', 'satellite',
-                'satellite-streets'
-            ],
+            edit_type=kwargs.pop('edit_type', 'plot'),
+            role=kwargs.pop('role', 'style'),
+            values=kwargs.pop(
+                'values', [
+                    'basic', 'streets', 'outdoors', 'light', 'dark',
+                    'satellite', 'satellite-streets'
+                ]
+            ),
             **kwargs
         )

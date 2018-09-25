@@ -3,6 +3,7 @@ import numbers
 import textwrap
 import uuid
 from importlib import import_module
+import copy
 
 import io
 from copy import deepcopy
@@ -373,6 +374,7 @@ class EnumeratedValidator(BaseValidator):
         self.array_ok = array_ok
         # coerce_number is rarely used and not implemented
         self.coerce_number = coerce_number
+        self.kwargs = kwargs
 
         # Handle regular expressions
         # --------------------------
@@ -397,6 +399,17 @@ class EnumeratedValidator(BaseValidator):
             else:
                 self.val_regexs.append(None)
                 self.regex_replacements.append(None)
+
+    def __deepcopy__(self, memodict={}):
+        """
+        A custom deepcopy method is needed here because compiled regex
+        objects don't support deepcopy
+        """
+        cls = self.__class__
+        return cls(
+            self.plotly_name,
+            self.parent_name,
+            values=self.values)
 
     @staticmethod
     def build_regex_replacement(regex_str):

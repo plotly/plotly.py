@@ -9,8 +9,9 @@ class YValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(YValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Y',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Y'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             opacity
                 Sets the projection color.
             scale
@@ -19,6 +20,7 @@ class YValidator(_plotly_utils.basevalidators.CompoundValidator):
             show
                 Sets whether or not projections are shown along
                 the y axis.
-""",
+"""
+            ),
             **kwargs
         )

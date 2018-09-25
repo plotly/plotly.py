@@ -9,8 +9,9 @@ class StartsValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(StartsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Starts',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Starts'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             x
                 Sets the x components of the starting position
                 of the streamtubes
@@ -26,6 +27,7 @@ class StartsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 of the streamtubes
             zsrc
                 Sets the source reference on plot.ly for  z .
-""",
+"""
+            ),
             **kwargs
         )

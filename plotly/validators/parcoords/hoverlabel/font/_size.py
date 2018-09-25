@@ -12,9 +12,9 @@ class SizeValidator(_plotly_utils.basevalidators.NumberValidator):
         super(SizeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=True,
-            edit_type='none',
-            min=1,
-            role='style',
+            array_ok=kwargs.pop('array_ok', True),
+            edit_type=kwargs.pop('edit_type', 'none'),
+            min=kwargs.pop('min', 1),
+            role=kwargs.pop('role', 'style'),
             **kwargs
         )

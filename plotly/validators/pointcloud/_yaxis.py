@@ -9,8 +9,8 @@ class YAxisValidator(_plotly_utils.basevalidators.SubplotidValidator):
         super(YAxisValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            dflt='y',
-            edit_type='calc+clearAxisTypes',
-            role='info',
+            dflt=kwargs.pop('dflt', 'y'),
+            edit_type=kwargs.pop('edit_type', 'calc+clearAxisTypes'),
+            role=kwargs.pop('role', 'info'),
             **kwargs
         )

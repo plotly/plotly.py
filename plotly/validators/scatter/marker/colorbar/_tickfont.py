@@ -12,8 +12,9 @@ class TickfontValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(TickfontValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Tickfont',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Tickfont'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             color
 
             family
@@ -34,6 +35,7 @@ class TickfontValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Narrow", "Raleway", "Times New Roman".
             size
 
-""",
+"""
+            ),
             **kwargs
         )

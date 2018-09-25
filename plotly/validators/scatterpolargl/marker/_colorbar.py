@@ -12,8 +12,9 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(ColorBarValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='ColorBar',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'ColorBar'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             bgcolor
                 Sets the color of padded area.
             bordercolor
@@ -209,6 +210,7 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
             ypad
                 Sets the amount of padding (in px) along the y
                 direction.
-""",
+"""
+            ),
             **kwargs
         )

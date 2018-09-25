@@ -7,8 +7,9 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(PieValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Pie',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Pie'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -160,6 +161,7 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
-""",
+"""
+            ),
             **kwargs
         )

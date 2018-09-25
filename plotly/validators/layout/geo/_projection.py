@@ -9,8 +9,9 @@ class ProjectionValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(ProjectionValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Projection',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Projection'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             parallels
                 For conic projection types only. Sets the
                 parallels (tangent, secant) where the cone
@@ -24,6 +25,7 @@ class ProjectionValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the map's lon and lat ranges.
             type
                 Sets the projection type.
-""",
+"""
+            ),
             **kwargs
         )

@@ -7,8 +7,9 @@ class LegendValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(LegendValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Legend',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Legend'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             bgcolor
                 Sets the legend background color.
             bordercolor
@@ -48,6 +49,7 @@ class LegendValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the legend's vertical position anchor This
                 anchor binds the `y` position to the "top",
                 "middle" or "bottom" of the legend.
-""",
+"""
+            ),
             **kwargs
         )

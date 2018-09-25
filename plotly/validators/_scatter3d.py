@@ -7,8 +7,9 @@ class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(Scatter3dValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Scatter3d',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Scatter3d'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             connectgaps
                 Determines whether or not gaps (i.e. {nan} or
                 missing values) in the provided data arrays are
@@ -161,6 +162,7 @@ class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 data.
             zsrc
                 Sets the source reference on plot.ly for  z .
-""",
+"""
+            ),
             **kwargs
         )

@@ -9,8 +9,9 @@ class GradientValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(GradientValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Gradient',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Gradient'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             color
                 Sets the final color of the gradient fill: the
                 center color for radial, the right for
@@ -24,6 +25,7 @@ class GradientValidator(_plotly_utils.basevalidators.CompoundValidator):
             typesrc
                 Sets the source reference on plot.ly for  type
                 .
-""",
+"""
+            ),
             **kwargs
         )

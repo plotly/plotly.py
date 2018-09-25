@@ -9,8 +9,9 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(HoverlabelValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Hoverlabel',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Hoverlabel'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             bgcolor
                 Sets the background color of the hover labels
                 for this trace
@@ -37,6 +38,7 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
             namelengthsrc
                 Sets the source reference on plot.ly for
                 namelength .
-""",
+"""
+            ),
             **kwargs
         )

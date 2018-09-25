@@ -9,8 +9,9 @@ class ContoursValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(ContoursValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Contours',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Contours'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             x
                 plotly.graph_objs.surface.contours.X instance
                 or dict with compatible properties
@@ -20,6 +21,7 @@ class ContoursValidator(_plotly_utils.basevalidators.CompoundValidator):
             z
                 plotly.graph_objs.surface.contours.Z instance
                 or dict with compatible properties
-""",
+"""
+            ),
             **kwargs
         )

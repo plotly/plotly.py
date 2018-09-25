@@ -7,8 +7,9 @@ class NodeValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(NodeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Node',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Node'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             color
                 Sets the `node` color. It can be a single
                 value, or an array for specifying color for
@@ -32,6 +33,7 @@ class NodeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the padding (in px) between the `nodes`.
             thickness
                 Sets the thickness (in px) of the `nodes`.
-""",
+"""
+            ),
             **kwargs
         )

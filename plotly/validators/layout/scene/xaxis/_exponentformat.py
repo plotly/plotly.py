@@ -14,8 +14,10 @@ class ExponentformatValidator(
         super(ExponentformatValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type='plot',
-            role='style',
-            values=['none', 'e', 'E', 'power', 'SI', 'B'],
+            edit_type=kwargs.pop('edit_type', 'plot'),
+            role=kwargs.pop('role', 'style'),
+            values=kwargs.pop(
+                'values', ['none', 'e', 'E', 'power', 'SI', 'B']
+            ),
             **kwargs
         )

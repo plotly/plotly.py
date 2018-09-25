@@ -11,8 +11,9 @@ class AnnotationsValidator(
         super(AnnotationsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Annotation',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Annotation'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             align
                 Sets the horizontal alignment of the `text`
                 within the box. Has an effect only if `text`
@@ -190,6 +191,7 @@ class AnnotationsValidator(
                 many pixels.
             z
                 Sets the annotation's z position.
-""",
+"""
+            ),
             **kwargs
         )

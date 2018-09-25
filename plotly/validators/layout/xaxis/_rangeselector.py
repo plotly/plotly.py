@@ -12,8 +12,9 @@ class RangeselectorValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(RangeselectorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Rangeselector',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Rangeselector'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             activecolor
                 Sets the background color of the active range
                 selector button.
@@ -54,6 +55,7 @@ class RangeselectorValidator(_plotly_utils.basevalidators.CompoundValidator):
                 anchor This anchor binds the `y` position to
                 the "top", "middle" or "bottom" of the range
                 selector.
-""",
+"""
+            ),
             **kwargs
         )

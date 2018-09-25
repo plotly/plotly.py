@@ -9,13 +9,15 @@ class YaxesValidator(_plotly_utils.basevalidators.InfoArrayValidator):
         super(YaxesValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type='plot',
-            free_length=True,
-            items={
-                'valType': 'enumerated',
-                'values': ['/^y([2-9]|[1-9][0-9]+)?$/', ''],
-                'editType': 'plot'
-            },
-            role='info',
+            edit_type=kwargs.pop('edit_type', 'plot'),
+            free_length=kwargs.pop('free_length', True),
+            items=kwargs.pop(
+                'items', {
+                    'valType': 'enumerated',
+                    'values': ['/^y([2-9]|[1-9][0-9]+)?$/', ''],
+                    'editType': 'plot'
+                }
+            ),
+            role=kwargs.pop('role', 'info'),
             **kwargs
         )

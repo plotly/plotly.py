@@ -7,8 +7,9 @@ class PointcloudValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(PointcloudValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Pointcloud',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Pointcloud'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -141,6 +142,7 @@ class PointcloudValidator(_plotly_utils.basevalidators.CompoundValidator):
                 ybounds .
             ysrc
                 Sets the source reference on plot.ly for  y .
-""",
+"""
+            ),
             **kwargs
         )

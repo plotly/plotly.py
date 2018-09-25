@@ -9,10 +9,11 @@ class SpikedashValidator(_plotly_utils.basevalidators.StringValidator):
         super(SpikedashValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type='none',
-            role='style',
-            values=[
-                'solid', 'dot', 'dash', 'longdash', 'dashdot', 'longdashdot'
-            ],
+            edit_type=kwargs.pop('edit_type', 'none'),
+            role=kwargs.pop('role', 'style'),
+            values=kwargs.pop(
+                'values',
+                ['solid', 'dot', 'dash', 'longdash', 'dashdot', 'longdashdot']
+            ),
             **kwargs
         )

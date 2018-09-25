@@ -9,8 +9,9 @@ class TextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(TextfontValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Textfont',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Textfont'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             color
 
             colorsrc
@@ -40,6 +41,7 @@ class TextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
             sizesrc
                 Sets the source reference on plot.ly for  size
                 .
-""",
+"""
+            ),
             **kwargs
         )

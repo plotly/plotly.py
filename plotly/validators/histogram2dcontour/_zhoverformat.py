@@ -12,7 +12,7 @@ class ZhoverformatValidator(_plotly_utils.basevalidators.StringValidator):
         super(ZhoverformatValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type='none',
-            role='style',
+            edit_type=kwargs.pop('edit_type', 'none'),
+            role=kwargs.pop('role', 'style'),
             **kwargs
         )

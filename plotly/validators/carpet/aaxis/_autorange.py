@@ -9,8 +9,8 @@ class AutorangeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         super(AutorangeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type='calc',
-            role='style',
-            values=[True, False, 'reversed'],
+            edit_type=kwargs.pop('edit_type', 'calc'),
+            role=kwargs.pop('role', 'style'),
+            values=kwargs.pop('values', [True, False, 'reversed']),
             **kwargs
         )

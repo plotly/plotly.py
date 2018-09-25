@@ -7,8 +7,9 @@ class LinkValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(LinkValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Link',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Link'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             color
                 Sets the `link` color. It can be a single
                 value, or an array for specifying color for
@@ -44,6 +45,7 @@ class LinkValidator(_plotly_utils.basevalidators.CompoundValidator):
             valuesrc
                 Sets the source reference on plot.ly for  value
                 .
-""",
+"""
+            ),
             **kwargs
         )

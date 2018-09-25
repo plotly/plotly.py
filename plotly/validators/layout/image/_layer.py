@@ -9,8 +9,8 @@ class LayerValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         super(LayerValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type='arraydraw',
-            role='info',
-            values=['below', 'above'],
+            edit_type=kwargs.pop('edit_type', 'arraydraw'),
+            role=kwargs.pop('role', 'info'),
+            values=kwargs.pop('values', ['below', 'above']),
             **kwargs
         )

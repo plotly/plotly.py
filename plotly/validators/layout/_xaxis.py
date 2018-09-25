@@ -7,8 +7,9 @@ class XAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(XAxisValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='XAxis',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'XAxis'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             anchor
                 If set to an opposite-letter axis id (e.g.
                 `x2`, `y`), this axis is bound to the
@@ -372,6 +373,7 @@ class XAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the line color of the zero line.
             zerolinewidth
                 Sets the width (in px) of the zero line.
-""",
+"""
+            ),
             **kwargs
         )

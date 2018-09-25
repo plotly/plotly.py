@@ -7,8 +7,9 @@ class ContourcarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(ContourcarpetValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Contourcarpet',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Contourcarpet'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             a
                 Sets the x coordinates.
             a0
@@ -200,6 +201,7 @@ class ContourcarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 set, `zmax` must be set as well.
             zsrc
                 Sets the source reference on plot.ly for  z .
-""",
+"""
+            ),
             **kwargs
         )

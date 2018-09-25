@@ -12,16 +12,18 @@ class ParallelsValidator(_plotly_utils.basevalidators.InfoArrayValidator):
         super(ParallelsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type='plot',
-            items=[
-                {
-                    'valType': 'number',
-                    'editType': 'plot'
-                }, {
-                    'valType': 'number',
-                    'editType': 'plot'
-                }
-            ],
-            role='info',
+            edit_type=kwargs.pop('edit_type', 'plot'),
+            items=kwargs.pop(
+                'items', [
+                    {
+                        'valType': 'number',
+                        'editType': 'plot'
+                    }, {
+                        'valType': 'number',
+                        'editType': 'plot'
+                    }
+                ]
+            ),
+            role=kwargs.pop('role', 'info'),
             **kwargs
         )

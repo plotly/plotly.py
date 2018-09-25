@@ -7,8 +7,9 @@ class MapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(MapboxValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Mapbox',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Mapbox'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             accesstoken
                 Sets the mapbox access token to be used for
                 this mapbox map. Alternatively, the mapbox
@@ -36,6 +37,7 @@ class MapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 custom style or a valid Mapbox style JSON.
             zoom
                 Sets the zoom level of the map.
-""",
+"""
+            ),
             **kwargs
         )

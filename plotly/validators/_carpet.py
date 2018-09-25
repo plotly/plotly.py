@@ -7,8 +7,9 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(CarpetValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Carpet',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Carpet'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             a
                 An array containing values of the first
                 parameter value
@@ -139,6 +140,7 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 refer to `layout.yaxis2`, and so on.
             ysrc
                 Sets the source reference on plot.ly for  y .
-""",
+"""
+            ),
             **kwargs
         )

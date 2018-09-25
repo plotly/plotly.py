@@ -9,7 +9,7 @@ class BordercolorValidator(_plotly_utils.basevalidators.ColorValidator):
         super(BordercolorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type='colorbars',
-            role='style',
+            edit_type=kwargs.pop('edit_type', 'colorbars'),
+            role=kwargs.pop('role', 'style'),
             **kwargs
         )

@@ -7,8 +7,9 @@ class SplomValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(SplomValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Splom',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Splom'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -109,6 +110,7 @@ class SplomValidator(_plotly_utils.basevalidators.CompoundValidator):
                 splom trace. By default, a splom will match the
                 first N yaxes where N is the number of input
                 dimensions.
-""",
+"""
+            ),
             **kwargs
         )

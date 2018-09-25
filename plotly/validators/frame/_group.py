@@ -7,6 +7,6 @@ class GroupValidator(_plotly_utils.basevalidators.StringValidator):
         super(GroupValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            role='info',
+            role=kwargs.pop('role', 'info'),
             **kwargs
         )

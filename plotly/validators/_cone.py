@@ -7,8 +7,9 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(ConeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Cone',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Cone'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             anchor
                 Sets the cones' anchor with respect to their
                 x/y/z positions. Note that "cm" denote the
@@ -189,6 +190,7 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 of the displayed cones.
             zsrc
                 Sets the source reference on plot.ly for  z .
-""",
+"""
+            ),
             **kwargs
         )

@@ -9,7 +9,7 @@ class ShowlineValidator(_plotly_utils.basevalidators.BooleanValidator):
         super(ShowlineValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type='ticks+layoutstyle',
-            role='style',
+            edit_type=kwargs.pop('edit_type', 'ticks+layoutstyle'),
+            role=kwargs.pop('role', 'style'),
             **kwargs
         )

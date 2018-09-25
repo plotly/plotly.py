@@ -7,8 +7,9 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(SurfaceValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Surface',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Surface'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             autocolorscale
                 Determines whether the colorscale is a default
                 palette (`autocolorscale: true`) or the palette
@@ -171,6 +172,7 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 data.
             zsrc
                 Sets the source reference on plot.ly for  z .
-""",
+"""
+            ),
             **kwargs
         )

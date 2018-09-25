@@ -7,8 +7,9 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(ScatterValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Scatter',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Scatter'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             cliponaxis
                 Determines whether or not markers and text
                 nodes are clipped about the subplot axes. To
@@ -216,6 +217,7 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 data.
             ysrc
                 Sets the source reference on plot.ly for  y .
-""",
+"""
+            ),
             **kwargs
         )

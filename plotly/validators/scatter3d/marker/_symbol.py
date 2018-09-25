@@ -9,12 +9,14 @@ class SymbolValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         super(SymbolValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=True,
-            edit_type='calc',
-            role='style',
-            values=[
-                'circle', 'circle-open', 'square', 'square-open', 'diamond',
-                'diamond-open', 'cross', 'x'
-            ],
+            array_ok=kwargs.pop('array_ok', True),
+            edit_type=kwargs.pop('edit_type', 'calc'),
+            role=kwargs.pop('role', 'style'),
+            values=kwargs.pop(
+                'values', [
+                    'circle', 'circle-open', 'square', 'square-open',
+                    'diamond', 'diamond-open', 'cross', 'x'
+                ]
+            ),
             **kwargs
         )

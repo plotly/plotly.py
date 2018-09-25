@@ -7,8 +7,9 @@ class PolarValidator(_plotly_utils.basevalidators.CompoundValidator):
         super(PolarValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str='Polar',
-            data_docs="""
+            data_class_str=kwargs.pop('data_class_str', 'Polar'),
+            data_docs=kwargs.pop(
+                'data_docs', """
             angularaxis
                 plotly.graph_objs.layout.polar.AngularAxis
                 instance or dict with compatible properties
@@ -35,6 +36,7 @@ class PolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 be spanned in the counterclockwise direction
                 with 0 corresponding to rightmost limit of the
                 polar subplot.
-""",
+"""
+            ),
             **kwargs
         )
