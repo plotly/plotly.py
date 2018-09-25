@@ -141,8 +141,20 @@ class _Dendrogram(object):
             if yvals_flat[i] == 0.0 and xvals_flat[i] not in self.zero_vals:
                 self.zero_vals.append(xvals_flat[i])
 
-        self.zero_vals.sort()
+        if len(self.zero_vals) > len(yvals) + 1:
+            # If the length of zero_vals is larger than the length of yvals,
+            # it means that there are wrong vals because of the identicial samples.
+            # Three and more identicial samples will make the yvals of spliting center into 0 and it will \
+            # accidentally take it as leaves.
+            l_border = int(min(self.zero_vals))
+            r_border = int(max(self.zero_vals))
+            correct_leaves_pos = range(l_border,
+                                       r_border + 1,
+                                       int((r_border - l_border) / len(yvals)))
+            # Regenerating the leaves pos from the self.zero_vals with equally intervals.
+            self.zero_vals = [v for v in correct_leaves_pos]
 
+        self.zero_vals.sort()
         self.layout = self.set_figure_layout(width, height)
         self.data = dd_traces
 

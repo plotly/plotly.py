@@ -777,6 +777,15 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
         self.assert_fig_equal(dendro['data'][1], expected_dendro['data'][1])
         self.assert_fig_equal(dendro['data'][2], expected_dendro['data'][2])
 
+    def test_dendrogram_ticklabels(self):
+        X = np.array([[1, 2, 3, 4], [1, 2, 3, 4], [1, 3, 5, 6], [1, 4, 2, 3]])
+        dendro = ff.create_dendrogram(X=X)
+
+        expected_ticktext = ['2', '3', '0', '1']
+        expected_tickvals = [5, 15, 25, 35]
+
+        self.assertEqual(len(dendro.layout.xaxis.ticktext), 4)
+        self.assertEqual(len(dendro.layout.xaxis.tickvals), 4)
 
 class TestTrisurf(NumpyTestUtilsMixin, TestCase):
 
