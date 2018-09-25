@@ -12,10 +12,11 @@ from __future__ import absolute_import
 import warnings
 
 import six
+import copy
 
 from plotly import exceptions, optional_imports, session, utils
 from plotly.files import (CONFIG_FILE, CREDENTIALS_FILE, FILE_CONTENT,
-                          check_file_permissions)
+                          ensure_writable_plotly_dir)
 
 DEFAULT_PLOTLY_COLORS = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
                          'rgb(44, 160, 44)', 'rgb(214, 39, 40)',
@@ -78,7 +79,7 @@ def ensure_local_plotly_files():
     If the config or credential files aren't filled out, then write them
     to the disk.
     """
-    if check_file_permissions():
+    if ensure_writable_plotly_dir():
         for fn in [CREDENTIALS_FILE, CONFIG_FILE]:
             utils.ensure_file_exists(fn)
             contents = utils.load_json_dict(fn)
@@ -124,7 +125,7 @@ def set_credentials_file(username=None,
     :param (str) proxy_password: The pw associated with your Proxy un
 
     """
-    if not check_file_permissions():
+    if not ensure_writable_plotly_dir():
         raise exceptions.PlotlyError("You don't have proper file permissions "
                                      "to run this function.")
     ensure_local_plotly_files()  # make sure what's there is OK
@@ -152,11 +153,13 @@ def get_credentials_file(*args):
         get_credentials_file('username')
 
     """
-    if check_file_permissions():
-        ensure_local_plotly_files()  # make sure what's there is OK
-        return utils.load_json_dict(CREDENTIALS_FILE, *args)
-    else:
-        return FILE_CONTENT[CREDENTIALS_FILE]
+    # Read credentials from file if possible
+    credentials = utils.load_json_dict(CREDENTIALS_FILE, *args)
+    if not credentials:
+        # Credentials could not be read, use defaults
+        credentials = copy.copy(FILE_CONTENT[CREDENTIALS_FILE])
+
+    return credentials
 
 
 def reset_credentials_file():
@@ -185,7 +188,7 @@ def set_config_file(plotly_domain=None,
     :param (bool) world_readable: True = public, False = private
 
     """
-    if not check_file_permissions():
+    if not ensure_writable_plotly_dir():
         raise exceptions.PlotlyError("You don't have proper file permissions "
                                      "to run this function.")
     ensure_local_plotly_files()  # make sure what's there is OK
@@ -247,11 +250,13 @@ def get_config_file(*args):
         get_config_file('plotly_domain')
 
     """
-    if check_file_permissions():
-        ensure_local_plotly_files()  # make sure what's there is OK
-        return utils.load_json_dict(CONFIG_FILE, *args)
-    else:
-        return FILE_CONTENT[CONFIG_FILE]
+    # Read config from file if possible
+    config = utils.load_json_dict(CONFIG_FILE, *args)
+    if not config:
+        # Config could not be read, use defaults
+        config = copy.copy(FILE_CONTENT[CONFIG_FILE])
+
+    return config
 
 
 def reset_config_file():

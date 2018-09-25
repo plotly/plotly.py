@@ -1,10 +1,11 @@
 import os
 
 # file structure
-PLOTLY_DIR = os.path.join(os.path.expanduser("~"), ".plotly")
+PLOTLY_DIR = os.environ.get("PLOTLY_DIR",
+                            os.path.join(os.path.expanduser("~"), ".plotly"))
+
 CREDENTIALS_FILE = os.path.join(PLOTLY_DIR, ".credentials")
 CONFIG_FILE = os.path.join(PLOTLY_DIR, ".config")
-TEST_DIR = os.path.join(os.path.expanduser("~"), ".test")
 TEST_FILE = os.path.join(PLOTLY_DIR, ".permission_test")
 
 # this sets both the DEFAULTS and the TYPES for these files
@@ -25,8 +26,6 @@ FILE_CONTENT = {CREDENTIALS_FILE: {'username': '',
 
 def _permissions():
     try:
-        os.mkdir(TEST_DIR)
-        os.rmdir(TEST_DIR)
         if not os.path.exists(PLOTLY_DIR):
             os.mkdir(PLOTLY_DIR)
         with open(TEST_FILE, 'w') as f:
@@ -37,8 +36,12 @@ def _permissions():
         return False
 
 
-_file_permissions = _permissions()
+_file_permissions = None
 
 
-def check_file_permissions():
+def ensure_writable_plotly_dir():
+    # Cache permissions status
+    global _file_permissions
+    if _file_permissions is None:
+        _file_permissions = _permissions()
     return _file_permissions

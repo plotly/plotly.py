@@ -98,7 +98,7 @@ class GetFigureTest(PlotlyTestCase):
         py.get_figure('PlotlyImageTest', str(file_id), raw=True)
 
 
-class TestBytesVStrings(TestCase):
+class TestBytesVStrings(PlotlyTestCase):
 
     @skipIf(not six.PY3, 'Decoding and missing escapes only seen in PY3')
     def test_proper_escaping(self):
