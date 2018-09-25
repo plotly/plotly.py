@@ -13,8 +13,8 @@ import retrying
 from six import string_types
 
 import plotly
-from plotly.basedatatypes import BaseFigure
 from plotly.files import PLOTLY_DIR
+from plotly.io._utils import validate_coerce_fig_to_dict
 from plotly.optional_imports import get_module
 
 psutil = get_module('psutil')
@@ -1281,18 +1281,7 @@ def to_image(fig,
 
     # Validate figure
     # ---------------
-    if isinstance(fig, BaseFigure):
-        fig_dict = fig.to_plotly_json()
-    elif isinstance(fig, dict):
-        if validate:
-            # This will raise an exception if fig is not a valid plotly figure
-            fig_dict = plotly.graph_objs.Figure(fig).to_plotly_json()
-        else:
-            fig_dict = fig
-    else:
-        raise ValueError("""
-The fig parameter must be a dict or Figure.
-    Received value of type {typ}: {v}""".format(typ=type(fig), v=fig))
+    fig_dict = validate_coerce_fig_to_dict(fig, validate)
 
     # Request image from server
     # -------------------------
