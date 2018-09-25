@@ -6,7 +6,7 @@ from __future__ import absolute_import
 
 import os
 import re
-from pkg_resources import resource_string
+import pkgutil
 
 import six
 from requests.compat import json as _json
@@ -69,7 +69,7 @@ def get_graph_reference():
 
     """
     path = os.path.join('package_data', 'plot-schema.json')
-    s = resource_string('plotly', path).decode('utf-8')
+    s = pkgutil.get_data('plotly', path).decode('utf-8')
     graph_reference = utils.decode_unicode(_json.loads(s))
 
     # TODO: Patch in frames info until it hits streambed. See #659
