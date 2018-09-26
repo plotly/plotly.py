@@ -8,7 +8,7 @@ from plotly.figure_factory import utils
 
 
 def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
-                  angle=math.pi / 9, scaleratio = None, **kwargs):
+                  angle=math.pi / 9, scaleratio=None, **kwargs):
     """
     Returns data for a quiver plot.
 
@@ -21,7 +21,7 @@ def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
     :param (float in [0,1]) arrow_scale: value multiplied to length of barb
         to get length of arrowhead. Default = .3
     :param (angle in radians) angle: angle of arrowhead. Default = pi/9
-    :param (positive float) angle: the ratio between the scale of the y-axis 
+    :param (positive float) scaleratio: the ratio between the scale of the y-axis
         and the scale of the x-axis (scale_y / scale_x). Default = None, the
         scale ratio is not fixed.
     :param kwargs: kwargs passed through plotly.graph_objs.Scatter
@@ -78,7 +78,7 @@ def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
 
     # Create quiver
     fig = create_quiver(x, y, u, v, scale=.2, arrow_scale=.3, angle=math.pi/6,
-                        name='Wind Velocity', line=Line(width=1))
+                        name='Wind Velocity', line=dict(width=1))
 
     # Add title to layout
     fig['layout'].update(title='Quiver Plot')
@@ -145,7 +145,7 @@ class _Quiver(object):
     Refer to FigureFactory.create_quiver() for docstring
     """
     def __init__(self, x, y, u, v,
-                 scale, arrow_scale, angle, scaleratio = 1, **kwargs):
+                 scale, arrow_scale, angle, scaleratio=1, **kwargs):
         try:
             x = utils.flatten(x)
         except exceptions.PlotlyError:
@@ -228,7 +228,7 @@ class _Quiver(object):
             point1, endpoint, point2 y_values separated by a None to create
             the barb of the arrow.
         """
-        dif_x = [i - j for i, j in zip(self.end_x, self.x)] 
+        dif_x = [i - j for i, j in zip(self.end_x, self.x)]
         dif_y = [i - j for i, j in zip(self.end_y, self.y)]
 
         # Get barb lengths(default arrow length = 30% barb length)
