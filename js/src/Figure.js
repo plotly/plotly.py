@@ -870,7 +870,7 @@ var FigureView = widgets.DOMWidgetView.extend({
      *
      */
     getFullData: function () {
-        return _.mergeWith(this.el._fullData, this.el.data,
+        return _.mergeWith({}, this.el._fullData, this.el.data,
             fullMergeCustomizer)
     },
 
@@ -881,7 +881,7 @@ var FigureView = widgets.DOMWidgetView.extend({
      * necessary
      */
     getFullLayout: function () {
-        return _.mergeWith(this.el._fullLayout, this.el.layout,
+        return _.mergeWith({}, this.el._fullLayout, this.el.layout,
             fullMergeCustomizer);
     },
 
@@ -1836,8 +1836,10 @@ function createDeltaObject(fullObj, removeObj) {
                     // the special case handling of this method
                     res[p] = createDeltaObject(fullVal, {});
 
-                } else if (fullVal !== undefined) {
-                    // No recursion necessary, Just keep value from fullObj
+                } else if (fullVal !== undefined &&
+                    typeof fullVal !== 'function') {
+                    // No recursion necessary, Just keep value from fullObj.
+                    // But skip values with function type
                     res[p] = fullVal;
                 }
             }
