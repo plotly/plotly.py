@@ -2857,3 +2857,43 @@ class TestChoropleth(NumpyTestUtilsMixin, TestCase):
             ]
 
             self.assertEqual(fig['data'][2]['x'][:50], exp_fig_head)
+
+class TestQuiver(TestCase):
+
+    def test_scaleratio_param(self):
+        x,y = np.meshgrid(np.arange(0.5, 3.5, .5), np.arange(0.5, 4.5, .5))
+        u = x
+        v = y
+        angle = np.arctan(v / u)
+        norm = 0.25
+        u = norm * np.cos(angle)
+        v = norm * np.sin(angle)
+        fig = ff.create_quiver(x, y, u, v, scale = 1, scaleratio = 0.5)
+
+        exp_fig_head = [(
+            0.5, 
+            0.5883883476483185, 
+            None,
+            1.0, 
+            1.1118033988749896, 
+            None, 
+            1.5, 
+            1.6185854122563141, 
+            None, 
+            2.0),
+            (0.5,
+            0.6767766952966369,
+            None,
+            0.5, 
+            0.6118033988749895, 
+            None, 
+            0.5, 
+            0.5790569415042095, 
+            None, 
+            0.5)]
+
+        fig_head = [fig['data'][0]['x'][:10], fig['data'][0]['y'][:10]]
+
+        self.assertEqual(fig_head, exp_fig_head)
+
+
