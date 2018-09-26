@@ -9,6 +9,7 @@ class DataValidator(_plotly_utils.basevalidators.BaseDataValidator):
             class_strs_map={
                 'area': 'Area',
                 'bar': 'Bar',
+                'barpolar': 'Barpolar',
                 'box': 'Box',
                 'candlestick': 'Candlestick',
                 'carpet': 'Carpet',

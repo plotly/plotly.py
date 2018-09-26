@@ -381,6 +381,27 @@ class Polar(BaseLayoutHierarchyType):
     def gridshape(self, val):
         self['gridshape'] = val
 
+    # hole
+    # ----
+    @property
+    def hole(self):
+        """
+        Sets the fraction of the radius to cut out of the polar
+        subplot.
+    
+        The 'hole' property is a number and may be specified as:
+          - An int or float in the interval [0, 1]
+
+        Returns
+        -------
+        int|float
+        """
+        return self['hole']
+
+    @hole.setter
+    def hole(self, val):
+        self['hole'] = val
+
     # radialaxis
     # ----------
     @property
@@ -715,6 +736,9 @@ class Polar(BaseLayoutHierarchyType):
             `radialaxis.angle` is snapped to the angle of the
             closest vertex when `gridshape` is "circular" (so that
             radial axis scale is the same as the data scale).
+        hole
+            Sets the fraction of the radius to cut out of the polar
+            subplot.
         radialaxis
             plotly.graph_objs.layout.polar.RadialAxis instance or
             dict with compatible properties
@@ -732,6 +756,7 @@ class Polar(BaseLayoutHierarchyType):
         bgcolor=None,
         domain=None,
         gridshape=None,
+        hole=None,
         radialaxis=None,
         sector=None,
         **kwargs
@@ -760,6 +785,9 @@ class Polar(BaseLayoutHierarchyType):
             `radialaxis.angle` is snapped to the angle of the
             closest vertex when `gridshape` is "circular" (so that
             radial axis scale is the same as the data scale).
+        hole
+            Sets the fraction of the radius to cut out of the polar
+            subplot.
         radialaxis
             plotly.graph_objs.layout.polar.RadialAxis instance or
             dict with compatible properties
@@ -805,6 +833,7 @@ an instance of plotly.graph_objs.layout.Polar"""
         self._validators['bgcolor'] = v_polar.BgcolorValidator()
         self._validators['domain'] = v_polar.DomainValidator()
         self._validators['gridshape'] = v_polar.GridshapeValidator()
+        self._validators['hole'] = v_polar.HoleValidator()
         self._validators['radialaxis'] = v_polar.RadialAxisValidator()
         self._validators['sector'] = v_polar.SectorValidator()
 
@@ -818,6 +847,8 @@ an instance of plotly.graph_objs.layout.Polar"""
         self['domain'] = domain if domain is not None else _v
         _v = arg.pop('gridshape', None)
         self['gridshape'] = gridshape if gridshape is not None else _v
+        _v = arg.pop('hole', None)
+        self['hole'] = hole if hole is not None else _v
         _v = arg.pop('radialaxis', None)
         self['radialaxis'] = radialaxis if radialaxis is not None else _v
         _v = arg.pop('sector', None)

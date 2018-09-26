@@ -19,11 +19,14 @@ from ._textfont import TextfontValidator
 from ._text import TextValidator
 from ._t import TValidator
 from ._stream import StreamValidator
+from ._stackgroup import StackgroupValidator
+from ._stackgaps import StackgapsValidator
 from ._showlegend import ShowlegendValidator
 from ._selectedpoints import SelectedpointsValidator
 from ._selected import SelectedValidator
 from ._rsrc import RsrcValidator
 from ._r import RValidator
+from ._orientation import OrientationValidator
 from ._opacity import OpacityValidator
 from ._name import NameValidator
 from ._mode import ModeValidator
@@ -38,6 +41,7 @@ from ._hoveron import HoveronValidator
 from ._hoverlabel import HoverlabelValidator
 from ._hoverinfosrc import HoverinfosrcValidator
 from ._hoverinfo import HoverinfoValidator
+from ._groupnorm import GroupnormValidator
 from ._fillcolor import FillcolorValidator
 from ._fill import FillValidator
 from ._error_y import ErrorYValidator

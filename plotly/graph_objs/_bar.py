@@ -863,8 +863,9 @@ class Bar(BaseTraceType):
     @property
     def r(self):
         """
-        For legacy polar chart only.Please switch to "scatterpolar"
-        trace type.Sets the radial coordinates.
+        r coordinates in scatter traces are deprecated!Please switch to
+        the "scatterpolar" trace type.Sets the radial coordinatesfor
+        legacy polar chart only.
     
         The 'r' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
@@ -1012,8 +1013,9 @@ class Bar(BaseTraceType):
     @property
     def t(self):
         """
-        For legacy polar chart only.Please switch to "scatterpolar"
-        trace type.Sets the angular coordinates.
+        t coordinates in scatter traces are deprecated!Please switch to
+        the "scatterpolar" trace type.Sets the angular coordinatesfor
+        legacy polar chart only.
     
         The 't' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
@@ -1631,8 +1633,9 @@ class Bar(BaseTraceType):
         outsidetextfont
             Sets the font used for `text` lying outside the bar.
         r
-            For legacy polar chart only.Please switch to
-            "scatterpolar" trace type.Sets the radial coordinates.
+            r coordinates in scatter traces are deprecated!Please
+            switch to the "scatterpolar" trace type.Sets the radial
+            coordinatesfor legacy polar chart only.
         rsrc
             Sets the source reference on plot.ly for  r .
         selected
@@ -1652,8 +1655,9 @@ class Bar(BaseTraceType):
             plotly.graph_objs.bar.Stream instance or dict with
             compatible properties
         t
-            For legacy polar chart only.Please switch to
-            "scatterpolar" trace type.Sets the angular coordinates.
+            t coordinates in scatter traces are deprecated!Please
+            switch to the "scatterpolar" trace type.Sets the
+            angular coordinatesfor legacy polar chart only.
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the
@@ -1881,8 +1885,9 @@ class Bar(BaseTraceType):
         outsidetextfont
             Sets the font used for `text` lying outside the bar.
         r
-            For legacy polar chart only.Please switch to
-            "scatterpolar" trace type.Sets the radial coordinates.
+            r coordinates in scatter traces are deprecated!Please
+            switch to the "scatterpolar" trace type.Sets the radial
+            coordinatesfor legacy polar chart only.
         rsrc
             Sets the source reference on plot.ly for  r .
         selected
@@ -1902,8 +1907,9 @@ class Bar(BaseTraceType):
             plotly.graph_objs.bar.Stream instance or dict with
             compatible properties
         t
-            For legacy polar chart only.Please switch to
-            "scatterpolar" trace type.Sets the angular coordinates.
+            t coordinates in scatter traces are deprecated!Please
+            switch to the "scatterpolar" trace type.Sets the
+            angular coordinatesfor legacy polar chart only.
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the

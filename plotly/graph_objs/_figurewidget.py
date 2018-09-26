@@ -1,6 +1,6 @@
 from plotly.basewidget import BaseFigureWidget
 from plotly.graph_objs import (
-    Area, Bar, Box, Candlestick, Carpet, Choropleth, Cone, Contour,
+    Area, Bar, Barpolar, Box, Candlestick, Carpet, Choropleth, Cone, Contour,
     Contourcarpet, Heatmap, Heatmapgl, Histogram, Histogram2d,
     Histogram2dContour, Mesh3d, Ohlc, Parcoords, Pie, Pointcloud, Sankey,
     Scatter, Scatter3d, Scattercarpet, Scattergeo, Scattergl, Scattermapbox,
@@ -26,10 +26,10 @@ class FigureWidget(BaseFigureWidget):
                 (e.g. [Scatter(...), Bar(...)])
               - A list or tuple of dicts of string/value properties where:
                 - The 'type' property specifies the trace type
-                    One of: ['area', 'bar', 'box', 'candlestick', 'carpet',
-                             'choropleth', 'cone', 'contour',
-                             'contourcarpet', 'heatmap', 'heatmapgl',
-                             'histogram', 'histogram2d',
+                    One of: ['area', 'bar', 'barpolar', 'box',
+                             'candlestick', 'carpet', 'choropleth', 'cone',
+                             'contour', 'contourcarpet', 'heatmap',
+                             'heatmapgl', 'histogram', 'histogram2d',
                              'histogram2dcontour', 'mesh3d', 'ohlc',
                              'parcoords', 'pie', 'pointcloud', 'sankey',
                              'scatter', 'scatter3d', 'scattercarpet',
@@ -86,10 +86,9 @@ class FigureWidget(BaseFigureWidget):
                     barnorm
                         Sets the normalization for bar traces on the
                         graph. With "fraction", the value of each bar
-                        is divide by the sum of the values at the
-                        location coordinate. With "percent", the
-                        results form "fraction" are presented in
-                        percents.
+                        is divided by the sum of all values at that
+                        location coordinate. "percent" is the same but
+                        multiplied by 100 to show percentages.
                     boxgap
                         Sets the gap (in plot fraction) between boxes
                         of adjacent location coordinates.
@@ -108,6 +107,25 @@ class FigureWidget(BaseFigureWidget):
                         Sets the default calendar system to use for
                         interpreting and displaying dates throughout
                         the plot.
+                    clickmode
+                        Determines the mode of single click
+                        interactions. "event" is the default value and
+                        emits the `plotly_click` event. In addition
+                        this mode emits the `plotly_selected` event in
+                        drag modes "lasso" and "select", but with no
+                        event data attached (kept for compatibility
+                        reasons). The "select" flag enables selecting
+                        single data points via click. This mode also
+                        supports persistent selections, meaning that
+                        pressing Shift while clicking, adds to /
+                        subtracts from an existing selection. "select"
+                        with `hovermode`: "x" can be confusing,
+                        consider explicitly setting `hovermode`:
+                        "closest" when using this feature. Selection
+                        events are sent accordingly as long as "event"
+                        flag is set as well. When the "event" flag is
+                        missing, `plotly_click` and `plotly_selected`
+                        events are not fired.
                     colorway
                         Sets the default trace colors.
                     datarevision
@@ -121,8 +139,10 @@ class FigureWidget(BaseFigureWidget):
                         with a different identity from its predecessor
                         contains new data.
                     direction
-                        For polar plots only. Sets the direction
-                        corresponding to positive angles.
+                        Legacy polar charts are deprecated! Please
+                        switch to "polar" subplots. Sets the direction
+                        corresponding to positive angles in legacy
+                        polar charts.
                     dragmode
                         Determines the mode of drag interactions.
                         "select" and "lasso" apply only to scatter
@@ -177,7 +197,14 @@ class FigureWidget(BaseFigureWidget):
                         plotly.graph_objs.layout.Hoverlabel instance or
                         dict with compatible properties
                     hovermode
-                        Determines the mode of hover interactions.
+                        Determines the mode of hover interactions. If
+                        `clickmode` includes the "select" flag,
+                        `hovermode` defaults to "closest". If
+                        `clickmode` lacks the "select" flag, it
+                        defaults to "x" or "y" (depending on the
+                        trace's `orientation` value) for plots based on
+                        cartesian coordinates. For anything else the
+                        default value is "closest".
                     images
                         plotly.graph_objs.layout.Image instance or dict
                         with compatible properties
@@ -191,8 +218,10 @@ class FigureWidget(BaseFigureWidget):
                         plotly.graph_objs.layout.Margin instance or
                         dict with compatible properties
                     orientation
-                        For polar plots only. Rotates the entire polar
-                        by the given angle.
+                        Legacy polar charts are deprecated! Please
+                        switch to "polar" subplots. Rotates the entire
+                        polar by the given angle in legacy polar
+                        charts.
                     paper_bgcolor
                         Sets the color of paper where the graph is
                         drawn.
@@ -417,8 +446,9 @@ class FigureWidget(BaseFigureWidget):
         opacity
             Sets the opacity of the trace.
         r
-            For legacy polar chart only.Please switch to
-            "scatterpolar" trace type.Sets the radial coordinates.
+            Area traces are deprecated! Please switch to the
+            "barpolar" trace type. Sets the radial coordinates for
+            legacy polar chart only.
         rsrc
             Sets the source reference on plot.ly for  r .
         selectedpoints
@@ -435,8 +465,9 @@ class FigureWidget(BaseFigureWidget):
             plotly.graph_objs.area.Stream instance or dict with
             compatible properties
         t
-            For legacy polar chart only.Please switch to
-            "scatterpolar" trace type.Sets the angular coordinates.
+            Area traces are deprecated! Please switch to the
+            "barpolar" trace type. Sets the angular coordinates for
+            legacy polar chart only.
         tsrc
             Sets the source reference on plot.ly for  t .
         uid
@@ -639,8 +670,9 @@ class FigureWidget(BaseFigureWidget):
         outsidetextfont
             Sets the font used for `text` lying outside the bar.
         r
-            For legacy polar chart only.Please switch to
-            "scatterpolar" trace type.Sets the radial coordinates.
+            r coordinates in scatter traces are deprecated!Please
+            switch to the "scatterpolar" trace type.Sets the radial
+            coordinatesfor legacy polar chart only.
         rsrc
             Sets the source reference on plot.ly for  r .
         selected
@@ -660,8 +692,9 @@ class FigureWidget(BaseFigureWidget):
             plotly.graph_objs.bar.Stream instance or dict with
             compatible properties
         t
-            For legacy polar chart only.Please switch to
-            "scatterpolar" trace type.Sets the angular coordinates.
+            t coordinates in scatter traces are deprecated!Please
+            switch to the "scatterpolar" trace type.Sets the
+            angular coordinatesfor legacy polar chart only.
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the
@@ -798,6 +831,223 @@ class FigureWidget(BaseFigureWidget):
             yaxis=yaxis,
             ycalendar=ycalendar,
             ysrc=ysrc,
+            **kwargs
+        )
+        return self.add_trace(new_trace, row=row, col=col)
+
+    def add_barpolar(
+        self,
+        base=None,
+        basesrc=None,
+        customdata=None,
+        customdatasrc=None,
+        dr=None,
+        dtheta=None,
+        hoverinfo=None,
+        hoverinfosrc=None,
+        hoverlabel=None,
+        ids=None,
+        idssrc=None,
+        legendgroup=None,
+        marker=None,
+        name=None,
+        offset=None,
+        offsetsrc=None,
+        opacity=None,
+        r=None,
+        r0=None,
+        rsrc=None,
+        selected=None,
+        selectedpoints=None,
+        showlegend=None,
+        stream=None,
+        subplot=None,
+        text=None,
+        textsrc=None,
+        theta=None,
+        theta0=None,
+        thetasrc=None,
+        thetaunit=None,
+        uid=None,
+        unselected=None,
+        visible=None,
+        width=None,
+        widthsrc=None,
+        row=None,
+        col=None,
+        **kwargs
+    ):
+        """
+        Add a new Barpolar trace
+        
+        The data visualized by the radial span of the bars is set in
+        `r`
+
+        Parameters
+        ----------
+        base
+            Sets where the bar base is drawn (in radial axis
+            units). In "stack" barmode, traces that set "base" will
+            be excluded and drawn in "overlay" mode instead.
+        basesrc
+            Sets the source reference on plot.ly for  base .
+        customdata
+            Assigns extra data each datum. This may be useful when
+            listening to hover, click and selection events. Note
+            that, "scatter" traces also appends customdata items in
+            the markers DOM elements
+        customdatasrc
+            Sets the source reference on plot.ly for  customdata .
+        dr
+            Sets the r coordinate step.
+        dtheta
+            Sets the theta coordinate step. By default, the
+            `dtheta` step equals the subplot's period divided by
+            the length of the `r` coordinates.
+        hoverinfo
+            Determines which trace information appear on hover. If
+            `none` or `skip` are set, no information is displayed
+            upon hovering. But, if `none` is set, click and hover
+            events are still fired.
+        hoverinfosrc
+            Sets the source reference on plot.ly for  hoverinfo .
+        hoverlabel
+            plotly.graph_objs.barpolar.Hoverlabel instance or dict
+            with compatible properties
+        ids
+            Assigns id labels to each datum. These ids for object
+            constancy of data points during animation. Should be an
+            array of strings, not numbers or any other type.
+        idssrc
+            Sets the source reference on plot.ly for  ids .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
+        marker
+            plotly.graph_objs.barpolar.Marker instance or dict with
+            compatible properties
+        name
+            Sets the trace name. The trace name appear as the
+            legend item and on hover.
+        offset
+            Shifts the angular position where the bar is drawn (in
+            "thetatunit" units).
+        offsetsrc
+            Sets the source reference on plot.ly for  offset .
+        opacity
+            Sets the opacity of the trace.
+        r
+            Sets the radial coordinates
+        r0
+            Alternate to `r`. Builds a linear space of r
+            coordinates. Use with `dr` where `r0` is the starting
+            coordinate and `dr` the step.
+        rsrc
+            Sets the source reference on plot.ly for  r .
+        selected
+            plotly.graph_objs.barpolar.Selected instance or dict
+            with compatible properties
+        selectedpoints
+            Array containing integer indices of selected points.
+            Has an effect only for traces that support selections.
+            Note that an empty array means an empty selection where
+            the `unselected` are turned on for all points, whereas,
+            any other non-array values means no selection all where
+            the `selected` and `unselected` styles have no effect.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
+        stream
+            plotly.graph_objs.barpolar.Stream instance or dict with
+            compatible properties
+        subplot
+            Sets a reference between this trace's data coordinates
+            and a polar subplot. If "polar" (the default value),
+            the data refer to `layout.polar`. If "polar2", the data
+            refer to `layout.polar2`, and so on.
+        text
+            Sets hover text elements associated with each bar. If a
+            single string, the same string appears over all bars.
+            If an array of string, the items are mapped in order to
+            the this trace's coordinates.
+        textsrc
+            Sets the source reference on plot.ly for  text .
+        theta
+            Sets the angular coordinates
+        theta0
+            Alternate to `theta`. Builds a linear space of theta
+            coordinates. Use with `dtheta` where `theta0` is the
+            starting coordinate and `dtheta` the step.
+        thetasrc
+            Sets the source reference on plot.ly for  theta .
+        thetaunit
+            Sets the unit of input "theta" values. Has an effect
+            only when on "linear" angular axes.
+        uid
+
+        unselected
+            plotly.graph_objs.barpolar.Unselected instance or dict
+            with compatible properties
+        visible
+            Determines whether or not this trace is visible. If
+            "legendonly", the trace is not drawn, but can appear as
+            a legend item (provided that the legend itself is
+            visible).
+        width
+            Sets the bar angular width (in "thetaunit" units).
+        widthsrc
+            Sets the source reference on plot.ly for  width .
+        row : int or None (default)
+            Subplot row index (starting from 1) for the trace to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`
+        col : int or None (default)
+            Subplot col index (starting from 1) for the trace to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`
+
+        Returns
+        -------
+        Barpolar
+        """
+        new_trace = Barpolar(
+            base=base,
+            basesrc=basesrc,
+            customdata=customdata,
+            customdatasrc=customdatasrc,
+            dr=dr,
+            dtheta=dtheta,
+            hoverinfo=hoverinfo,
+            hoverinfosrc=hoverinfosrc,
+            hoverlabel=hoverlabel,
+            ids=ids,
+            idssrc=idssrc,
+            legendgroup=legendgroup,
+            marker=marker,
+            name=name,
+            offset=offset,
+            offsetsrc=offsetsrc,
+            opacity=opacity,
+            r=r,
+            r0=r0,
+            rsrc=rsrc,
+            selected=selected,
+            selectedpoints=selectedpoints,
+            showlegend=showlegend,
+            stream=stream,
+            subplot=subplot,
+            text=text,
+            textsrc=textsrc,
+            theta=theta,
+            theta0=theta0,
+            thetasrc=thetasrc,
+            thetaunit=thetaunit,
+            uid=uid,
+            unselected=unselected,
+            visible=visible,
+            width=width,
+            widthsrc=widthsrc,
             **kwargs
         )
         return self.add_trace(new_trace, row=row, col=col)
@@ -5437,6 +5687,7 @@ class FigureWidget(BaseFigureWidget):
         error_y=None,
         fill=None,
         fillcolor=None,
+        groupnorm=None,
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
@@ -5451,11 +5702,14 @@ class FigureWidget(BaseFigureWidget):
         mode=None,
         name=None,
         opacity=None,
+        orientation=None,
         r=None,
         rsrc=None,
         selected=None,
         selectedpoints=None,
         showlegend=None,
+        stackgaps=None,
+        stackgroup=None,
         stream=None,
         t=None,
         text=None,
@@ -5520,11 +5774,13 @@ class FigureWidget(BaseFigureWidget):
             plotly.graph_objs.scatter.ErrorY instance or dict with
             compatible properties
         fill
-            Sets the area to fill with a solid color. Use with
-            `fillcolor` if not "none". "tozerox" and "tozeroy" fill
-            to x=0 and y=0 respectively. "tonextx" and "tonexty"
-            fill between the endpoints of this trace and the
-            endpoints of the trace before it, connecting those
+            Sets the area to fill with a solid color. Defaults to
+            "none" unless this trace is stacked, then it gets
+            "tonexty" ("tonextx") if `orientation` is "v" ("h") Use
+            with `fillcolor` if not "none". "tozerox" and "tozeroy"
+            fill to x=0 and y=0 respectively. "tonextx" and
+            "tonexty" fill between the endpoints of this trace and
+            the endpoints of the trace before it, connecting those
             endpoints with straight lines (to make a stacked area
             graph); if there is no trace before it, they behave
             like "tozerox" and "tozeroy". "toself" connects the
@@ -5534,11 +5790,27 @@ class FigureWidget(BaseFigureWidget):
             other (eg consecutive contour lines), and behaves like
             "toself" if there is no trace before it. "tonext"
             should not be used if one trace does not enclose the
-            other.
+            other. Traces in a `stackgroup` will only fill to (or
+            be filled to) other traces in the same group. With
+            multiple `stackgroup`s or some traces stacked and some
+            not, if fill-linked traces are not already consecutive,
+            the later ones will be pushed down in the drawing
+            order.
         fillcolor
             Sets the fill color. Defaults to a half-transparent
             variant of the line color, marker color, or marker line
             color, whichever is available.
+        groupnorm
+            Only relevant when `stackgroup` is used, and only the
+            first `groupnorm` found in the `stackgroup` will be
+            used - including if `visible` is "legendonly" but not
+            if it is `false`. Sets the normalization for the sum of
+            this `stackgroup`. With "fraction", the value of each
+            trace at each location is divided by the sum of all
+            trace values at that location. "percent" is the same
+            but multiplied by 100 to show percentages. If there are
+            multiple subplots, or multiple `stackgroup`s on one
+            subplot, each will be normalized within its own set.
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -5585,16 +5857,24 @@ class FigureWidget(BaseFigureWidget):
             the provided `mode` includes "text" then the `text`
             elements appear at the coordinates. Otherwise, the
             `text` elements appear on hover. If there are less than
-            20 points, then the default is "lines+markers".
-            Otherwise, "lines".
+            20 points and the trace is not stacked then the default
+            is "lines+markers". Otherwise, "lines".
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
+        orientation
+            Only relevant when `stackgroup` is used, and only the
+            first `orientation` found in the `stackgroup` will be
+            used - including if `visible` is "legendonly" but not
+            if it is `false`. Sets the stacking direction. With "v"
+            ("h"), the y (x) values of subsequent traces are added.
+            Also affects the default value of `fill`.
         r
-            For legacy polar chart only.Please switch to
-            "scatterpolar" trace type.Sets the radial coordinates.
+            r coordinates in scatter traces are deprecated!Please
+            switch to the "scatterpolar" trace type.Sets the radial
+            coordinatesfor legacy polar chart only.
         rsrc
             Sets the source reference on plot.ly for  r .
         selected
@@ -5610,12 +5890,37 @@ class FigureWidget(BaseFigureWidget):
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
+        stackgaps
+            Only relevant when `stackgroup` is used, and only the
+            first `stackgaps` found in the `stackgroup` will be
+            used - including if `visible` is "legendonly" but not
+            if it is `false`. Determines how we handle locations at
+            which other traces in this group have data but this one
+            does not. With *infer zero* we insert a zero at these
+            locations. With "interpolate" we linearly interpolate
+            between existing values, and extrapolate a constant
+            beyond the existing values.
+        stackgroup
+            Set several scatter traces (on the same subplot) to the
+            same stackgroup in order to add their y values (or
+            their x values if `orientation` is "h"). If blank or
+            omitted this trace will not be stacked. Stacking also
+            turns `fill` on by default, using "tonexty" ("tonextx")
+            if `orientation` is "h" ("v") and sets the default
+            `mode` to "lines" irrespective of point count. You can
+            only stack on a numeric (linear or log) axis. Traces in
+            a `stackgroup` will only fill to (or be filled to)
+            other traces in the same group. With multiple
+            `stackgroup`s or some traces stacked and some not, if
+            fill-linked traces are not already consecutive, the
+            later ones will be pushed down in the drawing order.
         stream
             plotly.graph_objs.scatter.Stream instance or dict with
             compatible properties
         t
-            For legacy polar chart only.Please switch to
-            "scatterpolar" trace type.Sets the angular coordinates.
+            t coordinates in scatter traces are deprecated!Please
+            switch to the "scatterpolar" trace type.Sets the
+            angular coordinatesfor legacy polar chart only.
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the
@@ -5700,6 +6005,7 @@ class FigureWidget(BaseFigureWidget):
             error_y=error_y,
             fill=fill,
             fillcolor=fillcolor,
+            groupnorm=groupnorm,
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
@@ -5714,11 +6020,14 @@ class FigureWidget(BaseFigureWidget):
             mode=mode,
             name=name,
             opacity=opacity,
+            orientation=orientation,
             r=r,
             rsrc=rsrc,
             selected=selected,
             selectedpoints=selectedpoints,
             showlegend=showlegend,
+            stackgaps=stackgaps,
+            stackgroup=stackgroup,
             stream=stream,
             t=t,
             text=text,
@@ -5862,8 +6171,8 @@ class FigureWidget(BaseFigureWidget):
             the provided `mode` includes "text" then the `text`
             elements appear at the coordinates. Otherwise, the
             `text` elements appear on hover. If there are less than
-            20 points, then the default is "lines+markers".
-            Otherwise, "lines".
+            20 points and the trace is not stacked then the default
+            is "lines+markers". Otherwise, "lines".
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -6129,8 +6438,8 @@ class FigureWidget(BaseFigureWidget):
             the provided `mode` includes "text" then the `text`
             elements appear at the coordinates. Otherwise, the
             `text` elements appear on hover. If there are less than
-            20 points, then the default is "lines+markers".
-            Otherwise, "lines".
+            20 points and the trace is not stacked then the default
+            is "lines+markers". Otherwise, "lines".
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -6377,8 +6686,8 @@ class FigureWidget(BaseFigureWidget):
             the provided `mode` includes "text" then the `text`
             elements appear at the coordinates. Otherwise, the
             `text` elements appear on hover. If there are less than
-            20 points, then the default is "lines+markers".
-            Otherwise, "lines".
+            20 points and the trace is not stacked then the default
+            is "lines+markers". Otherwise, "lines".
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -6566,11 +6875,13 @@ class FigureWidget(BaseFigureWidget):
             plotly.graph_objs.scattergl.ErrorY instance or dict
             with compatible properties
         fill
-            Sets the area to fill with a solid color. Use with
-            `fillcolor` if not "none". "tozerox" and "tozeroy" fill
-            to x=0 and y=0 respectively. "tonextx" and "tonexty"
-            fill between the endpoints of this trace and the
-            endpoints of the trace before it, connecting those
+            Sets the area to fill with a solid color. Defaults to
+            "none" unless this trace is stacked, then it gets
+            "tonexty" ("tonextx") if `orientation` is "v" ("h") Use
+            with `fillcolor` if not "none". "tozerox" and "tozeroy"
+            fill to x=0 and y=0 respectively. "tonextx" and
+            "tonexty" fill between the endpoints of this trace and
+            the endpoints of the trace before it, connecting those
             endpoints with straight lines (to make a stacked area
             graph); if there is no trace before it, they behave
             like "tozerox" and "tozeroy". "toself" connects the
@@ -6580,7 +6891,12 @@ class FigureWidget(BaseFigureWidget):
             other (eg consecutive contour lines), and behaves like
             "toself" if there is no trace before it. "tonext"
             should not be used if one trace does not enclose the
-            other.
+            other. Traces in a `stackgroup` will only fill to (or
+            be filled to) other traces in the same group. With
+            multiple `stackgroup`s or some traces stacked and some
+            not, if fill-linked traces are not already consecutive,
+            the later ones will be pushed down in the drawing
+            order.
         fillcolor
             Sets the fill color. Defaults to a half-transparent
             variant of the line color, marker color, or marker line
@@ -7125,8 +7441,8 @@ class FigureWidget(BaseFigureWidget):
             the provided `mode` includes "text" then the `text`
             elements appear at the coordinates. Otherwise, the
             `text` elements appear on hover. If there are less than
-            20 points, then the default is "lines+markers".
-            Otherwise, "lines".
+            20 points and the trace is not stacked then the default
+            is "lines+markers". Otherwise, "lines".
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -7335,11 +7651,13 @@ class FigureWidget(BaseFigureWidget):
             `dtheta` step equals the subplot's period divided by
             the length of the `r` coordinates.
         fill
-            Sets the area to fill with a solid color. Use with
-            `fillcolor` if not "none". "tozerox" and "tozeroy" fill
-            to x=0 and y=0 respectively. "tonextx" and "tonexty"
-            fill between the endpoints of this trace and the
-            endpoints of the trace before it, connecting those
+            Sets the area to fill with a solid color. Defaults to
+            "none" unless this trace is stacked, then it gets
+            "tonexty" ("tonextx") if `orientation` is "v" ("h") Use
+            with `fillcolor` if not "none". "tozerox" and "tozeroy"
+            fill to x=0 and y=0 respectively. "tonextx" and
+            "tonexty" fill between the endpoints of this trace and
+            the endpoints of the trace before it, connecting those
             endpoints with straight lines (to make a stacked area
             graph); if there is no trace before it, they behave
             like "tozerox" and "tozeroy". "toself" connects the
@@ -7349,7 +7667,12 @@ class FigureWidget(BaseFigureWidget):
             other (eg consecutive contour lines), and behaves like
             "toself" if there is no trace before it. "tonext"
             should not be used if one trace does not enclose the
-            other.
+            other. Traces in a `stackgroup` will only fill to (or
+            be filled to) other traces in the same group. With
+            multiple `stackgroup`s or some traces stacked and some
+            not, if fill-linked traces are not already consecutive,
+            the later ones will be pushed down in the drawing
+            order.
         fillcolor
             Sets the fill color. Defaults to a half-transparent
             variant of the line color, marker color, or marker line
@@ -7394,8 +7717,8 @@ class FigureWidget(BaseFigureWidget):
             the provided `mode` includes "text" then the `text`
             elements appear at the coordinates. Otherwise, the
             `text` elements appear on hover. If there are less than
-            20 points, then the default is "lines+markers".
-            Otherwise, "lines".
+            20 points and the trace is not stacked then the default
+            is "lines+markers". Otherwise, "lines".
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -7683,8 +8006,8 @@ class FigureWidget(BaseFigureWidget):
             the provided `mode` includes "text" then the `text`
             elements appear at the coordinates. Otherwise, the
             `text` elements appear on hover. If there are less than
-            20 points, then the default is "lines+markers".
-            Otherwise, "lines".
+            20 points and the trace is not stacked then the default
+            is "lines+markers". Otherwise, "lines".
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.

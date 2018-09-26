@@ -104,8 +104,8 @@ class ScatterpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 then the `text` elements appear at the
                 coordinates. Otherwise, the `text` elements
                 appear on hover. If there are less than 20
-                points, then the default is "lines+markers".
-                Otherwise, "lines".
+                points and the trace is not stacked then the
+                default is "lines+markers". Otherwise, "lines".
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.

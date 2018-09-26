@@ -108,9 +108,10 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the font used for `text` lying outside the
                 bar.
             r
-                For legacy polar chart only.Please switch to
-                "scatterpolar" trace type.Sets the radial
-                coordinates.
+                r coordinates in scatter traces are
+                deprecated!Please switch to the "scatterpolar"
+                trace type.Sets the radial coordinatesfor
+                legacy polar chart only.
             rsrc
                 Sets the source reference on plot.ly for  r .
             selected
@@ -132,9 +133,10 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 plotly.graph_objs.bar.Stream instance or dict
                 with compatible properties
             t
-                For legacy polar chart only.Please switch to
-                "scatterpolar" trace type.Sets the angular
-                coordinates.
+                t coordinates in scatter traces are
+                deprecated!Please switch to the "scatterpolar"
+                trace type.Sets the angular coordinatesfor
+                legacy polar chart only.
             text
                 Sets text elements associated with each (x,y)
                 pair. If a single string, the same string

@@ -41,6 +41,7 @@ from ._dragmode import DragmodeValidator
 from ._direction import DirectionValidator
 from ._datarevision import DatarevisionValidator
 from ._colorway import ColorwayValidator
+from ._clickmode import ClickmodeValidator
 from ._calendar import CalendarValidator
 from ._boxmode import BoxmodeValidator
 from ._boxgroupgap import BoxgroupgapValidator

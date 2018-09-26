@@ -62,6 +62,8 @@ from ._candlestick import Candlestick
 from plotly.graph_objs import candlestick
 from ._box import Box
 from plotly.graph_objs import box
+from ._barpolar import Barpolar
+from plotly.graph_objs import barpolar
 from ._bar import Bar
 from plotly.graph_objs import bar
 from ._area import Area

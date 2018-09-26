@@ -587,7 +587,8 @@ class XAxis(BaseLayoutHierarchyType):
         If "normal", the range is computed in relation to the extrema
         of the input data. If *tozero*`, the range extends to 0,
         regardless of the input data If "nonnegative", the range is
-        non-negative, regardless of the input data.
+        non-negative, regardless of the input data. Applies only to
+        linear axes.
     
         The 'rangemode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -1709,7 +1710,7 @@ class XAxis(BaseLayoutHierarchyType):
             extrema of the input data. If *tozero*`, the range
             extends to 0, regardless of the input data If
             "nonnegative", the range is non-negative, regardless of
-            the input data.
+            the input data. Applies only to linear axes.
         separatethousands
             If "true", even 4-digit integers are separated
         showaxeslabels
@@ -2019,7 +2020,7 @@ class XAxis(BaseLayoutHierarchyType):
             extrema of the input data. If *tozero*`, the range
             extends to 0, regardless of the input data If
             "nonnegative", the range is non-negative, regardless of
-            the input data.
+            the input data. Applies only to linear axes.
         separatethousands
             If "true", even 4-digit integers are separated
         showaxeslabels

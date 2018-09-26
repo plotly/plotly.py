@@ -51,9 +51,9 @@ class AreaValidator(_plotly_utils.basevalidators.CompoundValidator):
             opacity
                 Sets the opacity of the trace.
             r
-                For legacy polar chart only.Please switch to
-                "scatterpolar" trace type.Sets the radial
-                coordinates.
+                Area traces are deprecated! Please switch to
+                the "barpolar" trace type. Sets the radial
+                coordinates for legacy polar chart only.
             rsrc
                 Sets the source reference on plot.ly for  r .
             selectedpoints
@@ -72,9 +72,9 @@ class AreaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 plotly.graph_objs.area.Stream instance or dict
                 with compatible properties
             t
-                For legacy polar chart only.Please switch to
-                "scatterpolar" trace type.Sets the angular
-                coordinates.
+                Area traces are deprecated! Please switch to
+                the "barpolar" trace type. Sets the angular
+                coordinates for legacy polar chart only.
             tsrc
                 Sets the source reference on plot.ly for  t .
             uid
