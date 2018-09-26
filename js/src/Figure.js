@@ -870,7 +870,7 @@ var FigureView = widgets.DOMWidgetView.extend({
      *
      */
     getFullData: function () {
-        return _.mergeWith(this.el._fullData, this.el.data,
+        return _.mergeWith({}, this.el._fullData, this.el.data,
             fullMergeCustomizer)
     },
 
@@ -881,7 +881,7 @@ var FigureView = widgets.DOMWidgetView.extend({
      * necessary
      */
     getFullLayout: function () {
-        return _.mergeWith(this.el._fullLayout, this.el.layout,
+        return _.mergeWith({}, this.el._fullLayout, this.el.layout,
             fullMergeCustomizer);
     },
 
