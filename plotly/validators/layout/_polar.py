@@ -27,6 +27,9 @@ class PolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 snapped to the angle of the closest vertex when
                 `gridshape` is "circular" (so that radial axis
                 scale is the same as the data scale).
+            hole
+                Sets the fraction of the radius to cut out of
+                the polar subplot.
             radialaxis
                 plotly.graph_objs.layout.polar.RadialAxis
                 instance or dict with compatible properties

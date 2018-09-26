@@ -296,7 +296,9 @@ class Scatter(BaseTraceType):
     @property
     def fill(self):
         """
-        Sets the area to fill with a solid color. Use with `fillcolor`
+        Sets the area to fill with a solid color. Defaults to "none"
+        unless this trace is stacked, then it gets "tonexty"
+        ("tonextx") if `orientation` is "v" ("h") Use with `fillcolor`
         if not "none". "tozerox" and "tozeroy" fill to x=0 and y=0
         respectively. "tonextx" and "tonexty" fill between the
         endpoints of this trace and the endpoints of the trace before
@@ -308,7 +310,11 @@ class Scatter(BaseTraceType):
         traces if one completely encloses the other (eg consecutive
         contour lines), and behaves like "toself" if there is no trace
         before it. "tonext" should not be used if one trace does not
-        enclose the other.
+        enclose the other. Traces in a `stackgroup` will only fill to
+        (or be filled to) other traces in the same group. With multiple
+        `stackgroup`s or some traces stacked and some not, if fill-
+        linked traces are not already consecutive, the later ones will
+        be pushed down in the drawing order.
     
         The 'fill' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -385,6 +391,35 @@ class Scatter(BaseTraceType):
     @fillcolor.setter
     def fillcolor(self, val):
         self['fillcolor'] = val
+
+    # groupnorm
+    # ---------
+    @property
+    def groupnorm(self):
+        """
+        Only relevant when `stackgroup` is used, and only the first
+        `groupnorm` found in the `stackgroup` will be used - including
+        if `visible` is "legendonly" but not if it is `false`. Sets the
+        normalization for the sum of this `stackgroup`. With
+        "fraction", the value of each trace at each location is divided
+        by the sum of all trace values at that location. "percent" is
+        the same but multiplied by 100 to show percentages. If there
+        are multiple subplots, or multiple `stackgroup`s on one
+        subplot, each will be normalized within its own set.
+    
+        The 'groupnorm' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['', 'fraction', 'percent']
+
+        Returns
+        -------
+        Any
+        """
+        return self['groupnorm']
+
+    @groupnorm.setter
+    def groupnorm(self, val):
+        self['groupnorm'] = val
 
     # hoverinfo
     # ---------
@@ -810,8 +845,9 @@ class Scatter(BaseTraceType):
         Determines the drawing mode for this scatter trace. If the
         provided `mode` includes "text" then the `text` elements appear
         at the coordinates. Otherwise, the `text` elements appear on
-        hover. If there are less than 20 points, then the default is
-        "lines+markers". Otherwise, "lines".
+        hover. If there are less than 20 points and the trace is not
+        stacked then the default is "lines+markers". Otherwise,
+        "lines".
     
         The 'mode' property is a flaglist and may be specified
         as a string containing:
@@ -871,13 +907,40 @@ class Scatter(BaseTraceType):
     def opacity(self, val):
         self['opacity'] = val
 
+    # orientation
+    # -----------
+    @property
+    def orientation(self):
+        """
+        Only relevant when `stackgroup` is used, and only the first
+        `orientation` found in the `stackgroup` will be used -
+        including if `visible` is "legendonly" but not if it is
+        `false`. Sets the stacking direction. With "v" ("h"), the y (x)
+        values of subsequent traces are added. Also affects the default
+        value of `fill`.
+    
+        The 'orientation' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['v', 'h']
+
+        Returns
+        -------
+        Any
+        """
+        return self['orientation']
+
+    @orientation.setter
+    def orientation(self, val):
+        self['orientation'] = val
+
     # r
     # -
     @property
     def r(self):
         """
-        For legacy polar chart only.Please switch to "scatterpolar"
-        trace type.Sets the radial coordinates.
+        r coordinates in scatter traces are deprecated!Please switch to
+        the "scatterpolar" trace type.Sets the radial coordinatesfor
+        legacy polar chart only.
     
         The 'r' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
@@ -987,6 +1050,66 @@ class Scatter(BaseTraceType):
     def showlegend(self, val):
         self['showlegend'] = val
 
+    # stackgaps
+    # ---------
+    @property
+    def stackgaps(self):
+        """
+        Only relevant when `stackgroup` is used, and only the first
+        `stackgaps` found in the `stackgroup` will be used - including
+        if `visible` is "legendonly" but not if it is `false`.
+        Determines how we handle locations at which other traces in
+        this group have data but this one does not. With *infer zero*
+        we insert a zero at these locations. With "interpolate" we
+        linearly interpolate between existing values, and extrapolate a
+        constant beyond the existing values.
+    
+        The 'stackgaps' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['infer zero', 'interpolate']
+
+        Returns
+        -------
+        Any
+        """
+        return self['stackgaps']
+
+    @stackgaps.setter
+    def stackgaps(self, val):
+        self['stackgaps'] = val
+
+    # stackgroup
+    # ----------
+    @property
+    def stackgroup(self):
+        """
+        Set several scatter traces (on the same subplot) to the same
+        stackgroup in order to add their y values (or their x values if
+        `orientation` is "h"). If blank or omitted this trace will not
+        be stacked. Stacking also turns `fill` on by default, using
+        "tonexty" ("tonextx") if `orientation` is "h" ("v") and sets
+        the default `mode` to "lines" irrespective of point count. You
+        can only stack on a numeric (linear or log) axis. Traces in a
+        `stackgroup` will only fill to (or be filled to) other traces
+        in the same group. With multiple `stackgroup`s or some traces
+        stacked and some not, if fill-linked traces are not already
+        consecutive, the later ones will be pushed down in the drawing
+        order.
+    
+        The 'stackgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['stackgroup']
+
+    @stackgroup.setter
+    def stackgroup(self, val):
+        self['stackgroup'] = val
+
     # stream
     # ------
     @property
@@ -1025,8 +1148,9 @@ class Scatter(BaseTraceType):
     @property
     def t(self):
         """
-        For legacy polar chart only.Please switch to "scatterpolar"
-        trace type.Sets the angular coordinates.
+        t coordinates in scatter traces are deprecated!Please switch to
+        the "scatterpolar" trace type.Sets the angular coordinatesfor
+        legacy polar chart only.
     
         The 't' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
@@ -1544,11 +1668,13 @@ class Scatter(BaseTraceType):
             plotly.graph_objs.scatter.ErrorY instance or dict with
             compatible properties
         fill
-            Sets the area to fill with a solid color. Use with
-            `fillcolor` if not "none". "tozerox" and "tozeroy" fill
-            to x=0 and y=0 respectively. "tonextx" and "tonexty"
-            fill between the endpoints of this trace and the
-            endpoints of the trace before it, connecting those
+            Sets the area to fill with a solid color. Defaults to
+            "none" unless this trace is stacked, then it gets
+            "tonexty" ("tonextx") if `orientation` is "v" ("h") Use
+            with `fillcolor` if not "none". "tozerox" and "tozeroy"
+            fill to x=0 and y=0 respectively. "tonextx" and
+            "tonexty" fill between the endpoints of this trace and
+            the endpoints of the trace before it, connecting those
             endpoints with straight lines (to make a stacked area
             graph); if there is no trace before it, they behave
             like "tozerox" and "tozeroy". "toself" connects the
@@ -1558,11 +1684,27 @@ class Scatter(BaseTraceType):
             other (eg consecutive contour lines), and behaves like
             "toself" if there is no trace before it. "tonext"
             should not be used if one trace does not enclose the
-            other.
+            other. Traces in a `stackgroup` will only fill to (or
+            be filled to) other traces in the same group. With
+            multiple `stackgroup`s or some traces stacked and some
+            not, if fill-linked traces are not already consecutive,
+            the later ones will be pushed down in the drawing
+            order.
         fillcolor
             Sets the fill color. Defaults to a half-transparent
             variant of the line color, marker color, or marker line
             color, whichever is available.
+        groupnorm
+            Only relevant when `stackgroup` is used, and only the
+            first `groupnorm` found in the `stackgroup` will be
+            used - including if `visible` is "legendonly" but not
+            if it is `false`. Sets the normalization for the sum of
+            this `stackgroup`. With "fraction", the value of each
+            trace at each location is divided by the sum of all
+            trace values at that location. "percent" is the same
+            but multiplied by 100 to show percentages. If there are
+            multiple subplots, or multiple `stackgroup`s on one
+            subplot, each will be normalized within its own set.
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -1609,16 +1751,24 @@ class Scatter(BaseTraceType):
             the provided `mode` includes "text" then the `text`
             elements appear at the coordinates. Otherwise, the
             `text` elements appear on hover. If there are less than
-            20 points, then the default is "lines+markers".
-            Otherwise, "lines".
+            20 points and the trace is not stacked then the default
+            is "lines+markers". Otherwise, "lines".
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
+        orientation
+            Only relevant when `stackgroup` is used, and only the
+            first `orientation` found in the `stackgroup` will be
+            used - including if `visible` is "legendonly" but not
+            if it is `false`. Sets the stacking direction. With "v"
+            ("h"), the y (x) values of subsequent traces are added.
+            Also affects the default value of `fill`.
         r
-            For legacy polar chart only.Please switch to
-            "scatterpolar" trace type.Sets the radial coordinates.
+            r coordinates in scatter traces are deprecated!Please
+            switch to the "scatterpolar" trace type.Sets the radial
+            coordinatesfor legacy polar chart only.
         rsrc
             Sets the source reference on plot.ly for  r .
         selected
@@ -1634,12 +1784,37 @@ class Scatter(BaseTraceType):
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
+        stackgaps
+            Only relevant when `stackgroup` is used, and only the
+            first `stackgaps` found in the `stackgroup` will be
+            used - including if `visible` is "legendonly" but not
+            if it is `false`. Determines how we handle locations at
+            which other traces in this group have data but this one
+            does not. With *infer zero* we insert a zero at these
+            locations. With "interpolate" we linearly interpolate
+            between existing values, and extrapolate a constant
+            beyond the existing values.
+        stackgroup
+            Set several scatter traces (on the same subplot) to the
+            same stackgroup in order to add their y values (or
+            their x values if `orientation` is "h"). If blank or
+            omitted this trace will not be stacked. Stacking also
+            turns `fill` on by default, using "tonexty" ("tonextx")
+            if `orientation` is "h" ("v") and sets the default
+            `mode` to "lines" irrespective of point count. You can
+            only stack on a numeric (linear or log) axis. Traces in
+            a `stackgroup` will only fill to (or be filled to)
+            other traces in the same group. With multiple
+            `stackgroup`s or some traces stacked and some not, if
+            fill-linked traces are not already consecutive, the
+            later ones will be pushed down in the drawing order.
         stream
             plotly.graph_objs.scatter.Stream instance or dict with
             compatible properties
         t
-            For legacy polar chart only.Please switch to
-            "scatterpolar" trace type.Sets the angular coordinates.
+            t coordinates in scatter traces are deprecated!Please
+            switch to the "scatterpolar" trace type.Sets the
+            angular coordinatesfor legacy polar chart only.
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the
@@ -1715,6 +1890,7 @@ class Scatter(BaseTraceType):
         error_y=None,
         fill=None,
         fillcolor=None,
+        groupnorm=None,
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
@@ -1729,11 +1905,14 @@ class Scatter(BaseTraceType):
         mode=None,
         name=None,
         opacity=None,
+        orientation=None,
         r=None,
         rsrc=None,
         selected=None,
         selectedpoints=None,
         showlegend=None,
+        stackgaps=None,
+        stackgroup=None,
         stream=None,
         t=None,
         text=None,
@@ -1799,11 +1978,13 @@ class Scatter(BaseTraceType):
             plotly.graph_objs.scatter.ErrorY instance or dict with
             compatible properties
         fill
-            Sets the area to fill with a solid color. Use with
-            `fillcolor` if not "none". "tozerox" and "tozeroy" fill
-            to x=0 and y=0 respectively. "tonextx" and "tonexty"
-            fill between the endpoints of this trace and the
-            endpoints of the trace before it, connecting those
+            Sets the area to fill with a solid color. Defaults to
+            "none" unless this trace is stacked, then it gets
+            "tonexty" ("tonextx") if `orientation` is "v" ("h") Use
+            with `fillcolor` if not "none". "tozerox" and "tozeroy"
+            fill to x=0 and y=0 respectively. "tonextx" and
+            "tonexty" fill between the endpoints of this trace and
+            the endpoints of the trace before it, connecting those
             endpoints with straight lines (to make a stacked area
             graph); if there is no trace before it, they behave
             like "tozerox" and "tozeroy". "toself" connects the
@@ -1813,11 +1994,27 @@ class Scatter(BaseTraceType):
             other (eg consecutive contour lines), and behaves like
             "toself" if there is no trace before it. "tonext"
             should not be used if one trace does not enclose the
-            other.
+            other. Traces in a `stackgroup` will only fill to (or
+            be filled to) other traces in the same group. With
+            multiple `stackgroup`s or some traces stacked and some
+            not, if fill-linked traces are not already consecutive,
+            the later ones will be pushed down in the drawing
+            order.
         fillcolor
             Sets the fill color. Defaults to a half-transparent
             variant of the line color, marker color, or marker line
             color, whichever is available.
+        groupnorm
+            Only relevant when `stackgroup` is used, and only the
+            first `groupnorm` found in the `stackgroup` will be
+            used - including if `visible` is "legendonly" but not
+            if it is `false`. Sets the normalization for the sum of
+            this `stackgroup`. With "fraction", the value of each
+            trace at each location is divided by the sum of all
+            trace values at that location. "percent" is the same
+            but multiplied by 100 to show percentages. If there are
+            multiple subplots, or multiple `stackgroup`s on one
+            subplot, each will be normalized within its own set.
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -1864,16 +2061,24 @@ class Scatter(BaseTraceType):
             the provided `mode` includes "text" then the `text`
             elements appear at the coordinates. Otherwise, the
             `text` elements appear on hover. If there are less than
-            20 points, then the default is "lines+markers".
-            Otherwise, "lines".
+            20 points and the trace is not stacked then the default
+            is "lines+markers". Otherwise, "lines".
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
+        orientation
+            Only relevant when `stackgroup` is used, and only the
+            first `orientation` found in the `stackgroup` will be
+            used - including if `visible` is "legendonly" but not
+            if it is `false`. Sets the stacking direction. With "v"
+            ("h"), the y (x) values of subsequent traces are added.
+            Also affects the default value of `fill`.
         r
-            For legacy polar chart only.Please switch to
-            "scatterpolar" trace type.Sets the radial coordinates.
+            r coordinates in scatter traces are deprecated!Please
+            switch to the "scatterpolar" trace type.Sets the radial
+            coordinatesfor legacy polar chart only.
         rsrc
             Sets the source reference on plot.ly for  r .
         selected
@@ -1889,12 +2094,37 @@ class Scatter(BaseTraceType):
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
+        stackgaps
+            Only relevant when `stackgroup` is used, and only the
+            first `stackgaps` found in the `stackgroup` will be
+            used - including if `visible` is "legendonly" but not
+            if it is `false`. Determines how we handle locations at
+            which other traces in this group have data but this one
+            does not. With *infer zero* we insert a zero at these
+            locations. With "interpolate" we linearly interpolate
+            between existing values, and extrapolate a constant
+            beyond the existing values.
+        stackgroup
+            Set several scatter traces (on the same subplot) to the
+            same stackgroup in order to add their y values (or
+            their x values if `orientation` is "h"). If blank or
+            omitted this trace will not be stacked. Stacking also
+            turns `fill` on by default, using "tonexty" ("tonextx")
+            if `orientation` is "h" ("v") and sets the default
+            `mode` to "lines" irrespective of point count. You can
+            only stack on a numeric (linear or log) axis. Traces in
+            a `stackgroup` will only fill to (or be filled to)
+            other traces in the same group. With multiple
+            `stackgroup`s or some traces stacked and some not, if
+            fill-linked traces are not already consecutive, the
+            later ones will be pushed down in the drawing order.
         stream
             plotly.graph_objs.scatter.Stream instance or dict with
             compatible properties
         t
-            For legacy polar chart only.Please switch to
-            "scatterpolar" trace type.Sets the angular coordinates.
+            t coordinates in scatter traces are deprecated!Please
+            switch to the "scatterpolar" trace type.Sets the
+            angular coordinatesfor legacy polar chart only.
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the
@@ -1998,6 +2228,7 @@ an instance of plotly.graph_objs.Scatter"""
         self._validators['error_y'] = v_scatter.ErrorYValidator()
         self._validators['fill'] = v_scatter.FillValidator()
         self._validators['fillcolor'] = v_scatter.FillcolorValidator()
+        self._validators['groupnorm'] = v_scatter.GroupnormValidator()
         self._validators['hoverinfo'] = v_scatter.HoverinfoValidator()
         self._validators['hoverinfosrc'] = v_scatter.HoverinfosrcValidator()
         self._validators['hoverlabel'] = v_scatter.HoverlabelValidator()
@@ -2012,12 +2243,15 @@ an instance of plotly.graph_objs.Scatter"""
         self._validators['mode'] = v_scatter.ModeValidator()
         self._validators['name'] = v_scatter.NameValidator()
         self._validators['opacity'] = v_scatter.OpacityValidator()
+        self._validators['orientation'] = v_scatter.OrientationValidator()
         self._validators['r'] = v_scatter.RValidator()
         self._validators['rsrc'] = v_scatter.RsrcValidator()
         self._validators['selected'] = v_scatter.SelectedValidator()
         self._validators['selectedpoints'
                         ] = v_scatter.SelectedpointsValidator()
         self._validators['showlegend'] = v_scatter.ShowlegendValidator()
+        self._validators['stackgaps'] = v_scatter.StackgapsValidator()
+        self._validators['stackgroup'] = v_scatter.StackgroupValidator()
         self._validators['stream'] = v_scatter.StreamValidator()
         self._validators['t'] = v_scatter.TValidator()
         self._validators['text'] = v_scatter.TextValidator()
@@ -2064,6 +2298,8 @@ an instance of plotly.graph_objs.Scatter"""
         self['fill'] = fill if fill is not None else _v
         _v = arg.pop('fillcolor', None)
         self['fillcolor'] = fillcolor if fillcolor is not None else _v
+        _v = arg.pop('groupnorm', None)
+        self['groupnorm'] = groupnorm if groupnorm is not None else _v
         _v = arg.pop('hoverinfo', None)
         self['hoverinfo'] = hoverinfo if hoverinfo is not None else _v
         _v = arg.pop('hoverinfosrc', None)
@@ -2092,6 +2328,8 @@ an instance of plotly.graph_objs.Scatter"""
         self['name'] = name if name is not None else _v
         _v = arg.pop('opacity', None)
         self['opacity'] = opacity if opacity is not None else _v
+        _v = arg.pop('orientation', None)
+        self['orientation'] = orientation if orientation is not None else _v
         _v = arg.pop('r', None)
         self['r'] = r if r is not None else _v
         _v = arg.pop('rsrc', None)
@@ -2103,6 +2341,10 @@ an instance of plotly.graph_objs.Scatter"""
             ] = selectedpoints if selectedpoints is not None else _v
         _v = arg.pop('showlegend', None)
         self['showlegend'] = showlegend if showlegend is not None else _v
+        _v = arg.pop('stackgaps', None)
+        self['stackgaps'] = stackgaps if stackgaps is not None else _v
+        _v = arg.pop('stackgroup', None)
+        self['stackgroup'] = stackgroup if stackgroup is not None else _v
         _v = arg.pop('stream', None)
         self['stream'] = stream if stream is not None else _v
         _v = arg.pop('t', None)

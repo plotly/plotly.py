@@ -141,7 +141,8 @@ class ZAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 to the extrema of the input data. If *tozero*`,
                 the range extends to 0, regardless of the input
                 data If "nonnegative", the range is non-
-                negative, regardless of the input data.
+                negative, regardless of the input data. Applies
+                only to linear axes.
             separatethousands
                 If "true", even 4-digit integers are separated
             showaxeslabels

@@ -222,31 +222,38 @@ class Area(BaseTraceType):
             Supported dict properties:
                 
                 color
-                    Sets themarkercolor. It accepts either a
-                    specific color or an array of numbers that are
-                    mapped to the colorscale relative to the max
-                    and min values of the array or relative to
-                    `marker.cmin` and `marker.cmax` if set.
+                    Area traces are deprecated! Please switch to
+                    the "barpolar" trace type. Sets themarkercolor.
+                    It accepts either a specific color or an array
+                    of numbers that are mapped to the colorscale
+                    relative to the max and min values of the array
+                    or relative to `marker.cmin` and `marker.cmax`
+                    if set.
                 colorsrc
                     Sets the source reference on plot.ly for  color
                     .
                 opacity
-                    Sets the marker opacity.
+                    Area traces are deprecated! Please switch to
+                    the "barpolar" trace type. Sets the marker
+                    opacity.
                 opacitysrc
                     Sets the source reference on plot.ly for
                     opacity .
                 size
-                    Sets the marker size (in px).
+                    Area traces are deprecated! Please switch to
+                    the "barpolar" trace type. Sets the marker size
+                    (in px).
                 sizesrc
                     Sets the source reference on plot.ly for  size
                     .
                 symbol
-                    Sets the marker symbol type. Adding 100 is
-                    equivalent to appending "-open" to a symbol
-                    name. Adding 200 is equivalent to appending
-                    "-dot" to a symbol name. Adding 300 is
-                    equivalent to appending "-open-dot" or "dot-
-                    open" to a symbol name.
+                    Area traces are deprecated! Please switch to
+                    the "barpolar" trace type. Sets the marker
+                    symbol type. Adding 100 is equivalent to
+                    appending "-open" to a symbol name. Adding 200
+                    is equivalent to appending "-dot" to a symbol
+                    name. Adding 300 is equivalent to appending
+                    "-open-dot" or "dot-open" to a symbol name.
                 symbolsrc
                     Sets the source reference on plot.ly for
                     symbol .
@@ -308,8 +315,9 @@ class Area(BaseTraceType):
     @property
     def r(self):
         """
-        For legacy polar chart only.Please switch to "scatterpolar"
-        trace type.Sets the radial coordinates.
+        Area traces are deprecated! Please switch to the "barpolar"
+        trace type. Sets the radial coordinates for legacy polar chart
+        only.
     
         The 'r' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
@@ -427,8 +435,9 @@ class Area(BaseTraceType):
     @property
     def t(self):
         """
-        For legacy polar chart only.Please switch to "scatterpolar"
-        trace type.Sets the angular coordinates.
+        Area traces are deprecated! Please switch to the "barpolar"
+        trace type. Sets the angular coordinates for legacy polar chart
+        only.
     
         The 't' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
@@ -558,8 +567,9 @@ class Area(BaseTraceType):
         opacity
             Sets the opacity of the trace.
         r
-            For legacy polar chart only.Please switch to
-            "scatterpolar" trace type.Sets the radial coordinates.
+            Area traces are deprecated! Please switch to the
+            "barpolar" trace type. Sets the radial coordinates for
+            legacy polar chart only.
         rsrc
             Sets the source reference on plot.ly for  r .
         selectedpoints
@@ -576,8 +586,9 @@ class Area(BaseTraceType):
             plotly.graph_objs.area.Stream instance or dict with
             compatible properties
         t
-            For legacy polar chart only.Please switch to
-            "scatterpolar" trace type.Sets the angular coordinates.
+            Area traces are deprecated! Please switch to the
+            "barpolar" trace type. Sets the angular coordinates for
+            legacy polar chart only.
         tsrc
             Sets the source reference on plot.ly for  t .
         uid
@@ -658,8 +669,9 @@ class Area(BaseTraceType):
         opacity
             Sets the opacity of the trace.
         r
-            For legacy polar chart only.Please switch to
-            "scatterpolar" trace type.Sets the radial coordinates.
+            Area traces are deprecated! Please switch to the
+            "barpolar" trace type. Sets the radial coordinates for
+            legacy polar chart only.
         rsrc
             Sets the source reference on plot.ly for  r .
         selectedpoints
@@ -676,8 +688,9 @@ class Area(BaseTraceType):
             plotly.graph_objs.area.Stream instance or dict with
             compatible properties
         t
-            For legacy polar chart only.Please switch to
-            "scatterpolar" trace type.Sets the angular coordinates.
+            Area traces are deprecated! Please switch to the
+            "barpolar" trace type. Sets the angular coordinates for
+            legacy polar chart only.
         tsrc
             Sets the source reference on plot.ly for  t .
         uid

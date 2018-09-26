@@ -35,6 +35,9 @@ class AngularAxis(BaseLayoutHierarchyType):
     @property
     def endpadding(self):
         """
+        Legacy polar charts are deprecated! Please switch to "polar"
+        subplots.
+    
         The 'endpadding' property is a number and may be specified as:
           - An int or float
 
@@ -53,7 +56,8 @@ class AngularAxis(BaseLayoutHierarchyType):
     @property
     def range(self):
         """
-        Defines the start and end point of this angular axis.
+        Legacy polar charts are deprecated! Please switch to "polar"
+        subplots. Defines the start and end point of this angular axis.
     
         The 'range' property is an info array that may be specified as a
         list or tuple of 2 elements where:
@@ -78,8 +82,9 @@ class AngularAxis(BaseLayoutHierarchyType):
     @property
     def showline(self):
         """
-        Determines whether or not the line bounding this angular axis
-        will be shown on the figure.
+        Legacy polar charts are deprecated! Please switch to "polar"
+        subplots. Determines whether or not the line bounding this
+        angular axis will be shown on the figure.
     
         The 'showline' property must be specified as a bool
         (either True, or False)
@@ -99,8 +104,9 @@ class AngularAxis(BaseLayoutHierarchyType):
     @property
     def showticklabels(self):
         """
-        Determines whether or not the angular axis ticks will feature
-        tick labels.
+        Legacy polar charts are deprecated! Please switch to "polar"
+        subplots. Determines whether or not the angular axis ticks will
+        feature tick labels.
     
         The 'showticklabels' property must be specified as a bool
         (either True, or False)
@@ -120,7 +126,9 @@ class AngularAxis(BaseLayoutHierarchyType):
     @property
     def tickcolor(self):
         """
-        Sets the color of the tick lines on this angular axis.
+        Legacy polar charts are deprecated! Please switch to "polar"
+        subplots. Sets the color of the tick lines on this angular
+        axis.
     
         The 'tickcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
@@ -179,7 +187,9 @@ class AngularAxis(BaseLayoutHierarchyType):
     @property
     def ticklen(self):
         """
-        Sets the length of the tick lines on this angular axis.
+        Legacy polar charts are deprecated! Please switch to "polar"
+        subplots. Sets the length of the tick lines on this angular
+        axis.
     
         The 'ticklen' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
@@ -199,8 +209,9 @@ class AngularAxis(BaseLayoutHierarchyType):
     @property
     def tickorientation(self):
         """
-        Sets the orientation (from the paper perspective) of the
-        angular axis tick labels.
+        Legacy polar charts are deprecated! Please switch to "polar"
+        subplots. Sets the orientation (from the paper perspective) of
+        the angular axis tick labels.
     
         The 'tickorientation' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -221,7 +232,9 @@ class AngularAxis(BaseLayoutHierarchyType):
     @property
     def ticksuffix(self):
         """
-        Sets the length of the tick lines on this angular axis.
+        Legacy polar charts are deprecated! Please switch to "polar"
+        subplots. Sets the length of the tick lines on this angular
+        axis.
     
         The 'ticksuffix' property is a string and must be specified as:
           - A string
@@ -242,7 +255,8 @@ class AngularAxis(BaseLayoutHierarchyType):
     @property
     def visible(self):
         """
-        Determines whether or not this axis will be visible.
+        Legacy polar charts are deprecated! Please switch to "polar"
+        subplots. Determines whether or not this axis will be visible.
     
         The 'visible' property must be specified as a bool
         (either True, or False)
@@ -272,26 +286,40 @@ class AngularAxis(BaseLayoutHierarchyType):
             Polar chart subplots are not supported yet. This key
             has currently no effect.
         endpadding
-
+            Legacy polar charts are deprecated! Please switch to
+            "polar" subplots.
         range
-            Defines the start and end point of this angular axis.
+            Legacy polar charts are deprecated! Please switch to
+            "polar" subplots. Defines the start and end point of
+            this angular axis.
         showline
-            Determines whether or not the line bounding this
-            angular axis will be shown on the figure.
+            Legacy polar charts are deprecated! Please switch to
+            "polar" subplots. Determines whether or not the line
+            bounding this angular axis will be shown on the figure.
         showticklabels
-            Determines whether or not the angular axis ticks will
-            feature tick labels.
+            Legacy polar charts are deprecated! Please switch to
+            "polar" subplots. Determines whether or not the angular
+            axis ticks will feature tick labels.
         tickcolor
-            Sets the color of the tick lines on this angular axis.
+            Legacy polar charts are deprecated! Please switch to
+            "polar" subplots. Sets the color of the tick lines on
+            this angular axis.
         ticklen
-            Sets the length of the tick lines on this angular axis.
+            Legacy polar charts are deprecated! Please switch to
+            "polar" subplots. Sets the length of the tick lines on
+            this angular axis.
         tickorientation
-            Sets the orientation (from the paper perspective) of
-            the angular axis tick labels.
+            Legacy polar charts are deprecated! Please switch to
+            "polar" subplots. Sets the orientation (from the paper
+            perspective) of the angular axis tick labels.
         ticksuffix
-            Sets the length of the tick lines on this angular axis.
+            Legacy polar charts are deprecated! Please switch to
+            "polar" subplots. Sets the length of the tick lines on
+            this angular axis.
         visible
-            Determines whether or not this axis will be visible.
+            Legacy polar charts are deprecated! Please switch to
+            "polar" subplots. Determines whether or not this axis
+            will be visible.
         """
 
     def __init__(
@@ -321,26 +349,40 @@ class AngularAxis(BaseLayoutHierarchyType):
             Polar chart subplots are not supported yet. This key
             has currently no effect.
         endpadding
-
+            Legacy polar charts are deprecated! Please switch to
+            "polar" subplots.
         range
-            Defines the start and end point of this angular axis.
+            Legacy polar charts are deprecated! Please switch to
+            "polar" subplots. Defines the start and end point of
+            this angular axis.
         showline
-            Determines whether or not the line bounding this
-            angular axis will be shown on the figure.
+            Legacy polar charts are deprecated! Please switch to
+            "polar" subplots. Determines whether or not the line
+            bounding this angular axis will be shown on the figure.
         showticklabels
-            Determines whether or not the angular axis ticks will
-            feature tick labels.
+            Legacy polar charts are deprecated! Please switch to
+            "polar" subplots. Determines whether or not the angular
+            axis ticks will feature tick labels.
         tickcolor
-            Sets the color of the tick lines on this angular axis.
+            Legacy polar charts are deprecated! Please switch to
+            "polar" subplots. Sets the color of the tick lines on
+            this angular axis.
         ticklen
-            Sets the length of the tick lines on this angular axis.
+            Legacy polar charts are deprecated! Please switch to
+            "polar" subplots. Sets the length of the tick lines on
+            this angular axis.
         tickorientation
-            Sets the orientation (from the paper perspective) of
-            the angular axis tick labels.
+            Legacy polar charts are deprecated! Please switch to
+            "polar" subplots. Sets the orientation (from the paper
+            perspective) of the angular axis tick labels.
         ticksuffix
-            Sets the length of the tick lines on this angular axis.
+            Legacy polar charts are deprecated! Please switch to
+            "polar" subplots. Sets the length of the tick lines on
+            this angular axis.
         visible
-            Determines whether or not this axis will be visible.
+            Legacy polar charts are deprecated! Please switch to
+            "polar" subplots. Determines whether or not this axis
+            will be visible.
 
         Returns
         -------

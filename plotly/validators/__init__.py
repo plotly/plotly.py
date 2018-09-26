@@ -30,6 +30,7 @@ from ._choropleth import ChoroplethValidator
 from ._carpet import CarpetValidator
 from ._candlestick import CandlestickValidator
 from ._box import BoxValidator
+from ._barpolar import BarpolarValidator
 from ._bar import BarValidator
 from ._area import AreaValidator
 from ._layout import LayoutValidator

@@ -44,10 +44,9 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             barnorm
                 Sets the normalization for bar traces on the
                 graph. With "fraction", the value of each bar
-                is divide by the sum of the values at the
-                location coordinate. With "percent", the
-                results form "fraction" are presented in
-                percents.
+                is divided by the sum of all values at that
+                location coordinate. "percent" is the same but
+                multiplied by 100 to show percentages.
             boxgap
                 Sets the gap (in plot fraction) between boxes
                 of adjacent location coordinates.
@@ -66,6 +65,25 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the default calendar system to use for
                 interpreting and displaying dates throughout
                 the plot.
+            clickmode
+                Determines the mode of single click
+                interactions. "event" is the default value and
+                emits the `plotly_click` event. In addition
+                this mode emits the `plotly_selected` event in
+                drag modes "lasso" and "select", but with no
+                event data attached (kept for compatibility
+                reasons). The "select" flag enables selecting
+                single data points via click. This mode also
+                supports persistent selections, meaning that
+                pressing Shift while clicking, adds to /
+                subtracts from an existing selection. "select"
+                with `hovermode`: "x" can be confusing,
+                consider explicitly setting `hovermode`:
+                "closest" when using this feature. Selection
+                events are sent accordingly as long as "event"
+                flag is set as well. When the "event" flag is
+                missing, `plotly_click` and `plotly_selected`
+                events are not fired.
             colorway
                 Sets the default trace colors.
             datarevision
@@ -79,8 +97,10 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 with a different identity from its predecessor
                 contains new data.
             direction
-                For polar plots only. Sets the direction
-                corresponding to positive angles.
+                Legacy polar charts are deprecated! Please
+                switch to "polar" subplots. Sets the direction
+                corresponding to positive angles in legacy
+                polar charts.
             dragmode
                 Determines the mode of drag interactions.
                 "select" and "lasso" apply only to scatter
@@ -135,7 +155,14 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 plotly.graph_objs.layout.Hoverlabel instance or
                 dict with compatible properties
             hovermode
-                Determines the mode of hover interactions.
+                Determines the mode of hover interactions. If
+                `clickmode` includes the "select" flag,
+                `hovermode` defaults to "closest". If
+                `clickmode` lacks the "select" flag, it
+                defaults to "x" or "y" (depending on the
+                trace's `orientation` value) for plots based on
+                cartesian coordinates. For anything else the
+                default value is "closest".
             images
                 plotly.graph_objs.layout.Image instance or dict
                 with compatible properties
@@ -149,8 +176,10 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 plotly.graph_objs.layout.Margin instance or
                 dict with compatible properties
             orientation
-                For polar plots only. Rotates the entire polar
-                by the given angle.
+                Legacy polar charts are deprecated! Please
+                switch to "polar" subplots. Rotates the entire
+                polar by the given angle in legacy polar
+                charts.
             paper_bgcolor
                 Sets the color of paper where the graph is
                 drawn.

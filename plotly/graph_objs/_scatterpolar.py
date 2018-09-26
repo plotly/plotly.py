@@ -641,8 +641,9 @@ class Scatterpolar(BaseTraceType):
         Determines the drawing mode for this scatter trace. If the
         provided `mode` includes "text" then the `text` elements appear
         at the coordinates. Otherwise, the `text` elements appear on
-        hover. If there are less than 20 points, then the default is
-        "lines+markers". Otherwise, "lines".
+        hover. If there are less than 20 points and the trace is not
+        stacked then the default is "lines+markers". Otherwise,
+        "lines".
     
         The 'mode' property is a flaglist and may be specified
         as a string containing:
@@ -1298,8 +1299,8 @@ class Scatterpolar(BaseTraceType):
             the provided `mode` includes "text" then the `text`
             elements appear at the coordinates. Otherwise, the
             `text` elements appear on hover. If there are less than
-            20 points, then the default is "lines+markers".
-            Otherwise, "lines".
+            20 points and the trace is not stacked then the default
+            is "lines+markers". Otherwise, "lines".
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -1521,8 +1522,8 @@ class Scatterpolar(BaseTraceType):
             the provided `mode` includes "text" then the `text`
             elements appear at the coordinates. Otherwise, the
             `text` elements appear on hover. If there are less than
-            20 points, then the default is "lines+markers".
-            Otherwise, "lines".
+            20 points and the trace is not stacked then the default
+            is "lines+markers". Otherwise, "lines".
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
