@@ -1836,8 +1836,10 @@ function createDeltaObject(fullObj, removeObj) {
                     // the special case handling of this method
                     res[p] = createDeltaObject(fullVal, {});
 
-                } else if (fullVal !== undefined) {
-                    // No recursion necessary, Just keep value from fullObj
+                } else if (fullVal !== undefined &&
+                    typeof fullVal !== 'function') {
+                    // No recursion necessary, Just keep value from fullObj.
+                    // But skip values with function type
                     res[p] = fullVal;
                 }
             }
