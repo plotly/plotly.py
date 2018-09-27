@@ -13,6 +13,18 @@ class PolarValidator(_plotly_utils.basevalidators.CompoundValidator):
             angularaxis
                 plotly.graph_objs.layout.polar.AngularAxis
                 instance or dict with compatible properties
+            bargap
+                Sets the gap between bars of adjacent location
+                coordinates. Values are unitless, they
+                represent fractions of the minimum difference
+                in bar positions in the data.
+            barmode
+                Determines how bars at the same location
+                coordinate are displayed on the graph. With
+                "stack", the bars are stacked on top of one
+                another With "overlay", the bars are plotted
+                over one another, you might need to an
+                "opacity" to see multiple bars.
             bgcolor
                 Set the background color of the subplot
             domain
