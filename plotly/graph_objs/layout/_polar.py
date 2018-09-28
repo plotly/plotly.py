@@ -259,6 +259,53 @@ class Polar(BaseLayoutHierarchyType):
     def angularaxis(self, val):
         self['angularaxis'] = val
 
+    # bargap
+    # ------
+    @property
+    def bargap(self):
+        """
+        Sets the gap between bars of adjacent location coordinates.
+        Values are unitless, they represent fractions of the minimum
+        difference in bar positions in the data.
+    
+        The 'bargap' property is a number and may be specified as:
+          - An int or float in the interval [0, 1]
+
+        Returns
+        -------
+        int|float
+        """
+        return self['bargap']
+
+    @bargap.setter
+    def bargap(self, val):
+        self['bargap'] = val
+
+    # barmode
+    # -------
+    @property
+    def barmode(self):
+        """
+        Determines how bars at the same location coordinate are
+        displayed on the graph. With "stack", the bars are stacked on
+        top of one another With "overlay", the bars are plotted over
+        one another, you might need to an "opacity" to see multiple
+        bars.
+    
+        The 'barmode' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['stack', 'overlay']
+
+        Returns
+        -------
+        Any
+        """
+        return self['barmode']
+
+    @barmode.setter
+    def barmode(self, val):
+        self['barmode'] = val
+
     # bgcolor
     # -------
     @property
@@ -723,6 +770,17 @@ class Polar(BaseLayoutHierarchyType):
         angularaxis
             plotly.graph_objs.layout.polar.AngularAxis instance or
             dict with compatible properties
+        bargap
+            Sets the gap between bars of adjacent location
+            coordinates. Values are unitless, they represent
+            fractions of the minimum difference in bar positions in
+            the data.
+        barmode
+            Determines how bars at the same location coordinate are
+            displayed on the graph. With "stack", the bars are
+            stacked on top of one another With "overlay", the bars
+            are plotted over one another, you might need to an
+            "opacity" to see multiple bars.
         bgcolor
             Set the background color of the subplot
         domain
@@ -753,6 +811,8 @@ class Polar(BaseLayoutHierarchyType):
         self,
         arg=None,
         angularaxis=None,
+        bargap=None,
+        barmode=None,
         bgcolor=None,
         domain=None,
         gridshape=None,
@@ -772,6 +832,17 @@ class Polar(BaseLayoutHierarchyType):
         angularaxis
             plotly.graph_objs.layout.polar.AngularAxis instance or
             dict with compatible properties
+        bargap
+            Sets the gap between bars of adjacent location
+            coordinates. Values are unitless, they represent
+            fractions of the minimum difference in bar positions in
+            the data.
+        barmode
+            Determines how bars at the same location coordinate are
+            displayed on the graph. With "stack", the bars are
+            stacked on top of one another With "overlay", the bars
+            are plotted over one another, you might need to an
+            "opacity" to see multiple bars.
         bgcolor
             Set the background color of the subplot
         domain
@@ -830,6 +901,8 @@ an instance of plotly.graph_objs.layout.Polar"""
         # Initialize validators
         # ---------------------
         self._validators['angularaxis'] = v_polar.AngularAxisValidator()
+        self._validators['bargap'] = v_polar.BargapValidator()
+        self._validators['barmode'] = v_polar.BarmodeValidator()
         self._validators['bgcolor'] = v_polar.BgcolorValidator()
         self._validators['domain'] = v_polar.DomainValidator()
         self._validators['gridshape'] = v_polar.GridshapeValidator()
@@ -841,6 +914,10 @@ an instance of plotly.graph_objs.layout.Polar"""
         # ----------------------------------
         _v = arg.pop('angularaxis', None)
         self['angularaxis'] = angularaxis if angularaxis is not None else _v
+        _v = arg.pop('bargap', None)
+        self['bargap'] = bargap if bargap is not None else _v
+        _v = arg.pop('barmode', None)
+        self['barmode'] = barmode if barmode is not None else _v
         _v = arg.pop('bgcolor', None)
         self['bgcolor'] = bgcolor if bgcolor is not None else _v
         _v = arg.pop('domain', None)

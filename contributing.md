@@ -290,7 +290,7 @@ And, you'll need the credentials file `~/.pypirc`. Request access from
 ```bash
 (plotly.py) $ git checkout release_X.Y.Z
 (plotly.py) $ git stash
-(plotly.py) $ python setup.py sdist
+(plotly.py) $ python setup.py sdist bdist_wheel
 (plotly.py) $ twine upload dist/plotly-X.Y.Zrc1*
 ```
 

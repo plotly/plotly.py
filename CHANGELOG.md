@@ -2,6 +2,72 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.3.0] - 2018-09-28
+
+### Updated
+ - Updated Plotly.js to version 1.41.3.  Select highlights included below, see
+ [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1413----2018-09-25)
+ for more information.
+ - Do not create or check permissions on the `~/.plotly` configuration
+ directory until a configuration write operation is performed
+ ([#1195](https://github.com/plotly/plotly.py/pull/1195)). This change
+ avoids some concurrency problems associated with running many instances of
+ plotly.py simultaneously
+ ([#1068](https://github.com/plotly/plotly.py/issues/1068)).
+ 
+### Added
+ - Enable selection by clicking on points via new layout attribute `clickmode` and flag `'select'`
+ ([#2944](https://github.com/plotly/plotly.js/pull/2944))
+ - Added stacked area charts via new attributes `stackgroup` and `stackgaps` in scatter traces
+ ([#2960](https://github.com/plotly/plotly.js/pull/2960))
+ - Added `barpolar` trace type - which replace and augment area traces
+ ([#2954](https://github.com/plotly/plotly.js/pull/2954))
+ - Added `polar.hole` layout parameter to punch hole at the middle of polar
+ subplot offsetting the start of the radial range
+ ([#2977](https://github.com/plotly/plotly.js/pull/2977), [#2996](https://github.com/plotly/plotly.js/pull/2996))
+ - Figures may now be easily converted to and from JSON using the new
+ `to_json`, `from_json`, `read_json`, and `write_json` functions in the
+ `plotly.io` package
+ ([#1188](https://github.com/plotly/plotly.py/pull/1188))
+ - Figures and graph objects now support `deepcopy` and `pickle` operations
+ ([#1191](https://github.com/plotly/plotly.py/pull/1191))
+ - The location of the `"~/.plotly"` settings directory may now be customized
+ using the `PLOTLY_DIR` environment variable
+ ([#1195](https://github.com/plotly/plotly.py/pull/1195))
+ - Added optional `scaleratio` argument to the `create_quiver` figure factory.
+ When specified, the axes are restricted to this ratio and the quiver arrows
+ are computed to have consistent lengths across angles.
+ ([#1197](https://github.com/plotly/plotly.py/pull/1197))
+ 
+### Fixed
+ - Replace use of `pkg_resources.resource_string` with `pkgutil.get_data` to
+ improve compatibility with `cx_Freeze`
+ ([#1201](https://github.com/plotly/plotly.py/pull/1201))
+ - An exception is no longer raised when an optional dependency raises an
+ exception on import.  The exception is logged and plotly.py continues as if
+ the dependency were not installed
+ ([#1192](https://github.com/plotly/plotly.py/pull/1192))
+ - Fixed invalid dendrogram axis labels when the points being clustered contain
+ duplicate values
+ ([#1186](https://github.com/plotly/plotly.py/pull/1186))
+ - Added missing LICENSE.txt file to PyPI source distribution
+ ([#765](https://github.com/plotly/plotly.py/issues/765))
+
+### JupyterLab Versions
+For use with JupyterLab, the following versions of the following packages
+must be installed:
+
+ - Python Packages
+   - plotly==3.3.0
+   - ipywidgets>=7.2
+   - notebook>=5.3
+   - jupyterlab==0.34
+   
+ - JupyterLab Extensions
+   - plotlywidget@0.4.0
+   - @jupyter-widgets/jupyterlab-manager@0.37
+   - @jupyterlab/plotly-extension@0.17
+
 ## [3.2.1] - 2018-09-14
 This is a patch release that fixes a few bugs and reintroduces a few
 version 2 features that were not supported in version 3.
