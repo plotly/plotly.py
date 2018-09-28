@@ -990,7 +990,11 @@ class LayoutNode(PlotlyNode):
         # Get list of additional layout properties for each trace
         trace_layouts = [
             plotly_schema['traces'][trace].get('layoutAttributes', {})
-            for trace in plotly_schema['traces']]
+            for trace in plotly_schema['traces'] if trace != 'barpolar']
+
+        extra_polar_nodes = (plotly_schema['traces']['barpolar']
+                             .get('layoutAttributes', {}))
+        layout['polar'].update(extra_polar_nodes)
 
         # Chain together into layout_data
         self.layout_data = ChainMap(layout, *trace_layouts)
