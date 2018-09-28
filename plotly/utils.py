@@ -24,7 +24,7 @@ from requests.compat import json as _json
 
 from plotly.optional_imports import get_module
 
-from . exceptions import PlotlyError
+from plotly.exceptions import PlotlyError
 
 # Optional imports, may be None for users that only use our core functionality.
 numpy = get_module('numpy')
