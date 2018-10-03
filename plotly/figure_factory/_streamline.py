@@ -354,6 +354,7 @@ class _Streamline(object):
         dif_x = arrow_end_x - arrow_start_x
         dif_y = arrow_end_y - arrow_start_y
 
+        np.seterr(divide='ignore', invalid='ignore')
         streamline_ang = np.arctan(dif_y / dif_x)
 
         ang1 = streamline_ang + (self.angle)
