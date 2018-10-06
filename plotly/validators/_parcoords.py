@@ -23,6 +23,9 @@ class ParcoordsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 The dimensions (variables) of the parallel
                 coordinates chart. 2..60 dimensions are
                 supported.
+            dimensiondefaults
+                plotly.graph_objs.parcoords.Dimension instance
+                or dict with compatible properties
             domain
                 plotly.graph_objs.parcoords.Domain instance or
                 dict with compatible properties

@@ -787,7 +787,16 @@ class PlotlyNode:
         nodes = []
         for n in self.children:
             if n.is_array:
+                # Add array element node
                 nodes.append(n.children[0].children[0])
+
+                # Add elementdefaults node. Require parent_path_parts not
+                # empty to avoid creating defaults classes for traces
+                if (n.parent_path_parts and
+                        n.parent_path_parts != ('layout', 'template', 'data')):
+
+                    nodes.append(ElementDefaultsNode(n, self.plotly_schema))
+
             elif n.is_datatype:
                 nodes.append(n)
 
@@ -898,7 +907,11 @@ class PlotlyNode:
             if node.plotly_name and not node.is_array:
                 nodes.append(node)
 
-            nodes_to_process.extend(node.child_compound_datatypes)
+            non_defaults_compound_children = [
+                node for node in node.child_compound_datatypes
+                if not isinstance(node, ElementDefaultsNode)]
+
+            nodes_to_process.extend(non_defaults_compound_children)
 
         return nodes
 
@@ -1101,3 +1114,52 @@ class FrameNode(PlotlyNode):
             node_data = node_data[prop_name]
 
         return node_data
+
+
+class ElementDefaultsNode(PlotlyNode):
+
+    def __init__(self, array_node, plotly_schema):
+        """
+
+        Parameters
+        ----------
+        array_node: PlotlyNode
+        """
+        super().__init__(plotly_schema,
+                         node_path=array_node.node_path,
+                         parent=array_node.parent)
+
+        assert array_node.is_array
+        self.array_node = array_node
+        self.element_node = array_node.children[0].children[0]
+
+    @property
+    def node_data(self):
+        return {}
+
+    @property
+    def description(self):
+        return ''
+
+    @property
+    def name_base_datatype(self):
+        return self.element_node.name_base_datatype
+
+    @property
+    def root_name(self):
+        return self.array_node.root_name
+
+    @property
+    def plotly_name(self):
+        return self.element_node.plotly_name + 'defaults'
+
+    @property
+    def name_datatype_class(self):
+        """
+        Name of the Python datatype class representing this node
+
+        Returns
+        -------
+        str
+        """
+        return self.element_node.name_datatype_class

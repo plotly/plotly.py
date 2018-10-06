@@ -137,6 +137,9 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickformatstops
                 plotly.graph_objs.mesh3d.colorbar.Tickformatsto
                 p instance or dict with compatible properties
+            tickformatstopdefaults
+                plotly.graph_objs.mesh3d.colorbar.Tickformatsto
+                p instance or dict with compatible properties
             ticklen
                 Sets the tick length (in px).
             tickmode

@@ -16,6 +16,9 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             annotations
                 plotly.graph_objs.layout.Annotation instance or
                 dict with compatible properties
+            annotationdefaults
+                plotly.graph_objs.layout.Annotation instance or
+                dict with compatible properties
             autosize
                 Determines whether or not a layout width or
                 height that has been left undefined by the user
@@ -166,6 +169,9 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             images
                 plotly.graph_objs.layout.Image instance or dict
                 with compatible properties
+            imagedefaults
+                plotly.graph_objs.layout.Image instance or dict
+                with compatible properties
             legend
                 plotly.graph_objs.layout.Legend instance or
                 dict with compatible properties
@@ -216,6 +222,9 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             shapes
                 plotly.graph_objs.layout.Shape instance or dict
                 with compatible properties
+            shapedefaults
+                plotly.graph_objs.layout.Shape instance or dict
+                with compatible properties
             showlegend
                 Determines whether or not a legend is drawn.
                 Default is `true` if there is a trace to show
@@ -224,6 +233,9 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 trace is shown in the legend. c) One trace is
                 explicitly given with `showlegend: true`.
             sliders
+                plotly.graph_objs.layout.Slider instance or
+                dict with compatible properties
+            sliderdefaults
                 plotly.graph_objs.layout.Slider instance or
                 dict with compatible properties
             spikedistance
@@ -245,6 +257,9 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             titlefont
                 Sets the title font.
             updatemenus
+                plotly.graph_objs.layout.Updatemenu instance or
+                dict with compatible properties
+            updatemenudefaults
                 plotly.graph_objs.layout.Updatemenu instance or
                 dict with compatible properties
             violingap

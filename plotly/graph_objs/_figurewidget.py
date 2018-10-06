@@ -58,6 +58,9 @@ class FigureWidget(BaseFigureWidget):
                     annotations
                         plotly.graph_objs.layout.Annotation instance or
                         dict with compatible properties
+                    annotationdefaults
+                        plotly.graph_objs.layout.Annotation instance or
+                        dict with compatible properties
                     autosize
                         Determines whether or not a layout width or
                         height that has been left undefined by the user
@@ -208,6 +211,9 @@ class FigureWidget(BaseFigureWidget):
                     images
                         plotly.graph_objs.layout.Image instance or dict
                         with compatible properties
+                    imagedefaults
+                        plotly.graph_objs.layout.Image instance or dict
+                        with compatible properties
                     legend
                         plotly.graph_objs.layout.Legend instance or
                         dict with compatible properties
@@ -258,6 +264,9 @@ class FigureWidget(BaseFigureWidget):
                     shapes
                         plotly.graph_objs.layout.Shape instance or dict
                         with compatible properties
+                    shapedefaults
+                        plotly.graph_objs.layout.Shape instance or dict
+                        with compatible properties
                     showlegend
                         Determines whether or not a legend is drawn.
                         Default is `true` if there is a trace to show
@@ -266,6 +275,9 @@ class FigureWidget(BaseFigureWidget):
                         trace is shown in the legend. c) One trace is
                         explicitly given with `showlegend: true`.
                     sliders
+                        plotly.graph_objs.layout.Slider instance or
+                        dict with compatible properties
+                    sliderdefaults
                         plotly.graph_objs.layout.Slider instance or
                         dict with compatible properties
                     spikedistance
@@ -287,6 +299,9 @@ class FigureWidget(BaseFigureWidget):
                     titlefont
                         Sets the title font.
                     updatemenus
+                        plotly.graph_objs.layout.Updatemenu instance or
+                        dict with compatible properties
+                    updatemenudefaults
                         plotly.graph_objs.layout.Updatemenu instance or
                         dict with compatible properties
                     violingap
@@ -4902,6 +4917,7 @@ class FigureWidget(BaseFigureWidget):
         customdata=None,
         customdatasrc=None,
         dimensions=None,
+        dimensiondefaults=None,
         domain=None,
         hoverinfo=None,
         hoverinfosrc=None,
@@ -4943,6 +4959,9 @@ class FigureWidget(BaseFigureWidget):
         dimensions
             The dimensions (variables) of the parallel coordinates
             chart. 2..60 dimensions are supported.
+        dimensiondefaults
+            plotly.graph_objs.parcoords.Dimension instance or dict
+            with compatible properties
         domain
             plotly.graph_objs.parcoords.Domain instance or dict
             with compatible properties
@@ -5017,6 +5036,7 @@ class FigureWidget(BaseFigureWidget):
             customdata=customdata,
             customdatasrc=customdatasrc,
             dimensions=dimensions,
+            dimensiondefaults=dimensiondefaults,
             domain=domain,
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
@@ -8112,6 +8132,7 @@ class FigureWidget(BaseFigureWidget):
         customdatasrc=None,
         diagonal=None,
         dimensions=None,
+        dimensiondefaults=None,
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
@@ -8162,6 +8183,9 @@ class FigureWidget(BaseFigureWidget):
             plotly.graph_objs.splom.Diagonal instance or dict with
             compatible properties
         dimensions
+            plotly.graph_objs.splom.Dimension instance or dict with
+            compatible properties
+        dimensiondefaults
             plotly.graph_objs.splom.Dimension instance or dict with
             compatible properties
         hoverinfo
@@ -8258,6 +8282,7 @@ class FigureWidget(BaseFigureWidget):
             customdatasrc=customdatasrc,
             diagonal=diagonal,
             dimensions=dimensions,
+            dimensiondefaults=dimensiondefaults,
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,

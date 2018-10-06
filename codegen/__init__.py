@@ -8,7 +8,7 @@ from codegen.compatibility import (write_deprecated_datatypes,
                                    DEPRECATED_DATATYPES)
 from codegen.figure import write_figure_classes
 from codegen.utils import (TraceNode, PlotlyNode, LayoutNode, FrameNode,
-                           write_init_py)
+                           write_init_py, ElementDefaultsNode)
 from codegen.validators import (write_validator_py,
                                 write_data_validator_py,
                                 get_data_validator_instance)
@@ -28,9 +28,10 @@ def preprocess_schema(plotly_schema):
     Central location to make changes to schema before it's seen by the
     PlotlyNode classes
     """
-    layout = plotly_schema['layout']['layoutAttributes']
 
-    template_description = layout['template']['description']
+    # Update template
+    # ---------------
+    layout = plotly_schema['layout']['layoutAttributes']
 
     # Create codegen-friendly template scheme
     template = {
@@ -112,7 +113,8 @@ def perform_codegen():
                           all_frame_nodes)
 
     all_compound_nodes = [node for node in all_datatype_nodes
-                          if node.is_compound]
+                          if node.is_compound and
+                          not isinstance(node, ElementDefaultsNode)]
 
     # Write out validators
     # --------------------

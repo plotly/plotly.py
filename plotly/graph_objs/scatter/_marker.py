@@ -307,6 +307,10 @@ class Marker(BaseTraceHierarchyType):
                     plotly.graph_objs.scatter.marker.colorbar.Tickf
                     ormatstop instance or dict with compatible
                     properties
+                tickformatstopdefaults
+                    plotly.graph_objs.scatter.marker.colorbar.Tickf
+                    ormatstop instance or dict with compatible
+                    properties
                 ticklen
                     Sets the tick length (in px).
                 tickmode

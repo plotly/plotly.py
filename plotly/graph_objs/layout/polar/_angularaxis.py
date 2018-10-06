@@ -922,6 +922,29 @@ class AngularAxis(BaseLayoutHierarchyType):
     def tickformatstops(self, val):
         self['tickformatstops'] = val
 
+    # tickformatstopdefaults
+    # ----------------------
+    @property
+    def tickformatstopdefaults(self):
+        """
+        The 'tickformatstopdefaults' property is an instance of Tickformatstop
+        that may be specified as:
+          - An instance of plotly.graph_objs.layout.polar.angularaxis.Tickformatstop
+          - A dict of string/value properties that will be passed
+            to the Tickformatstop constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        plotly.graph_objs.layout.polar.angularaxis.Tickformatstop
+        """
+        return self['tickformatstopdefaults']
+
+    @tickformatstopdefaults.setter
+    def tickformatstopdefaults(self, val):
+        self['tickformatstopdefaults'] = val
+
     # ticklen
     # -------
     @property
@@ -1353,6 +1376,9 @@ class AngularAxis(BaseLayoutHierarchyType):
         tickformatstops
             plotly.graph_objs.layout.polar.angularaxis.Tickformatst
             op instance or dict with compatible properties
+        tickformatstopdefaults
+            plotly.graph_objs.layout.polar.angularaxis.Tickformatst
+            op instance or dict with compatible properties
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -1430,6 +1456,7 @@ class AngularAxis(BaseLayoutHierarchyType):
         tickfont=None,
         tickformat=None,
         tickformatstops=None,
+        tickformatstopdefaults=None,
         ticklen=None,
         tickmode=None,
         tickprefix=None,
@@ -1612,6 +1639,9 @@ class AngularAxis(BaseLayoutHierarchyType):
         tickformatstops
             plotly.graph_objs.layout.polar.angularaxis.Tickformatst
             op instance or dict with compatible properties
+        tickformatstopdefaults
+            plotly.graph_objs.layout.polar.angularaxis.Tickformatst
+            op instance or dict with compatible properties
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -1729,6 +1759,8 @@ an instance of plotly.graph_objs.layout.polar.AngularAxis"""
         self._validators['tickformat'] = v_angularaxis.TickformatValidator()
         self._validators['tickformatstops'
                         ] = v_angularaxis.TickformatstopsValidator()
+        self._validators['tickformatstopdefaults'
+                        ] = v_angularaxis.TickformatstopValidator()
         self._validators['ticklen'] = v_angularaxis.TicklenValidator()
         self._validators['tickmode'] = v_angularaxis.TickmodeValidator()
         self._validators['tickprefix'] = v_angularaxis.TickprefixValidator()
@@ -1813,6 +1845,10 @@ an instance of plotly.graph_objs.layout.polar.AngularAxis"""
         _v = arg.pop('tickformatstops', None)
         self['tickformatstops'
             ] = tickformatstops if tickformatstops is not None else _v
+        _v = arg.pop('tickformatstopdefaults', None)
+        self[
+            'tickformatstopdefaults'
+        ] = tickformatstopdefaults if tickformatstopdefaults is not None else _v
         _v = arg.pop('ticklen', None)
         self['ticklen'] = ticklen if ticklen is not None else _v
         _v = arg.pop('tickmode', None)

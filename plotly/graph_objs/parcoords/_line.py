@@ -306,6 +306,10 @@ class Line(BaseTraceHierarchyType):
                     plotly.graph_objs.parcoords.line.colorbar.Tickf
                     ormatstop instance or dict with compatible
                     properties
+                tickformatstopdefaults
+                    plotly.graph_objs.parcoords.line.colorbar.Tickf
+                    ormatstop instance or dict with compatible
+                    properties
                 ticklen
                     Sets the tick length (in px).
                 tickmode

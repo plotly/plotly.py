@@ -198,6 +198,10 @@ class Polar(BaseLayoutHierarchyType):
                     plotly.graph_objs.layout.polar.angularaxis.Tick
                     formatstop instance or dict with compatible
                     properties
+                tickformatstopdefaults
+                    plotly.graph_objs.layout.polar.angularaxis.Tick
+                    formatstop instance or dict with compatible
+                    properties
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -661,6 +665,10 @@ class Polar(BaseLayoutHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
+                    plotly.graph_objs.layout.polar.radialaxis.Tickf
+                    ormatstop instance or dict with compatible
+                    properties
+                tickformatstopdefaults
                     plotly.graph_objs.layout.polar.radialaxis.Tickf
                     ormatstop instance or dict with compatible
                     properties

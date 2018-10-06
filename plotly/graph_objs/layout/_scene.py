@@ -205,6 +205,29 @@ class Scene(BaseLayoutHierarchyType):
     def annotations(self, val):
         self['annotations'] = val
 
+    # annotationdefaults
+    # ------------------
+    @property
+    def annotationdefaults(self):
+        """
+        The 'annotationdefaults' property is an instance of Annotation
+        that may be specified as:
+          - An instance of plotly.graph_objs.layout.scene.Annotation
+          - A dict of string/value properties that will be passed
+            to the Annotation constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        plotly.graph_objs.layout.scene.Annotation
+        """
+        return self['annotationdefaults']
+
+    @annotationdefaults.setter
+    def annotationdefaults(self, val):
+        self['annotationdefaults'] = val
+
     # aspectmode
     # ----------
     @property
@@ -663,6 +686,10 @@ class Scene(BaseLayoutHierarchyType):
                     plotly.graph_objs.layout.scene.xaxis.Tickformat
                     stop instance or dict with compatible
                     properties
+                tickformatstopdefaults
+                    plotly.graph_objs.layout.scene.xaxis.Tickformat
+                    stop instance or dict with compatible
+                    properties
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -955,6 +982,10 @@ class Scene(BaseLayoutHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
+                    plotly.graph_objs.layout.scene.yaxis.Tickformat
+                    stop instance or dict with compatible
+                    properties
+                tickformatstopdefaults
                     plotly.graph_objs.layout.scene.yaxis.Tickformat
                     stop instance or dict with compatible
                     properties
@@ -1253,6 +1284,10 @@ class Scene(BaseLayoutHierarchyType):
                     plotly.graph_objs.layout.scene.zaxis.Tickformat
                     stop instance or dict with compatible
                     properties
+                tickformatstopdefaults
+                    plotly.graph_objs.layout.scene.zaxis.Tickformat
+                    stop instance or dict with compatible
+                    properties
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -1339,6 +1374,9 @@ class Scene(BaseLayoutHierarchyType):
         annotations
             plotly.graph_objs.layout.scene.Annotation instance or
             dict with compatible properties
+        annotationdefaults
+            plotly.graph_objs.layout.scene.Annotation instance or
+            dict with compatible properties
         aspectmode
             If "cube", this scene's axes are drawn as a cube,
             regardless of the axes' ranges. If "data", this scene's
@@ -1381,6 +1419,7 @@ class Scene(BaseLayoutHierarchyType):
         self,
         arg=None,
         annotations=None,
+        annotationdefaults=None,
         aspectmode=None,
         aspectratio=None,
         bgcolor=None,
@@ -1402,6 +1441,9 @@ class Scene(BaseLayoutHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.layout.Scene
         annotations
+            plotly.graph_objs.layout.scene.Annotation instance or
+            dict with compatible properties
+        annotationdefaults
             plotly.graph_objs.layout.scene.Annotation instance or
             dict with compatible properties
         aspectmode
@@ -1474,6 +1516,7 @@ an instance of plotly.graph_objs.layout.Scene"""
         # Initialize validators
         # ---------------------
         self._validators['annotations'] = v_scene.AnnotationsValidator()
+        self._validators['annotationdefaults'] = v_scene.AnnotationValidator()
         self._validators['aspectmode'] = v_scene.AspectmodeValidator()
         self._validators['aspectratio'] = v_scene.AspectratioValidator()
         self._validators['bgcolor'] = v_scene.BgcolorValidator()
@@ -1489,6 +1532,9 @@ an instance of plotly.graph_objs.layout.Scene"""
         # ----------------------------------
         _v = arg.pop('annotations', None)
         self['annotations'] = annotations if annotations is not None else _v
+        _v = arg.pop('annotationdefaults', None)
+        self['annotationdefaults'
+            ] = annotationdefaults if annotationdefaults is not None else _v
         _v = arg.pop('aspectmode', None)
         self['aspectmode'] = aspectmode if aspectmode is not None else _v
         _v = arg.pop('aspectratio', None)

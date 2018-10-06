@@ -225,6 +225,9 @@ class Carpet(BaseTraceType):
                 tickformatstops
                     plotly.graph_objs.carpet.aaxis.Tickformatstop
                     instance or dict with compatible properties
+                tickformatstopdefaults
+                    plotly.graph_objs.carpet.aaxis.Tickformatstop
+                    instance or dict with compatible properties
                 tickmode
     
                 tickprefix
@@ -508,6 +511,9 @@ class Carpet(BaseTraceType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
+                    plotly.graph_objs.carpet.baxis.Tickformatstop
+                    instance or dict with compatible properties
+                tickformatstopdefaults
                     plotly.graph_objs.carpet.baxis.Tickformatstop
                     instance or dict with compatible properties
                 tickmode

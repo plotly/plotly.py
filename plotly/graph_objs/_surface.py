@@ -236,6 +236,9 @@ class Surface(BaseTraceType):
                 tickformatstops
                     plotly.graph_objs.surface.colorbar.Tickformatst
                     op instance or dict with compatible properties
+                tickformatstopdefaults
+                    plotly.graph_objs.surface.colorbar.Tickformatst
+                    op instance or dict with compatible properties
                 ticklen
                     Sets the tick length (in px).
                 tickmode

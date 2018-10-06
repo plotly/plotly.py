@@ -162,6 +162,10 @@ class Ternary(BaseLayoutHierarchyType):
                     plotly.graph_objs.layout.ternary.aaxis.Tickform
                     atstop instance or dict with compatible
                     properties
+                tickformatstopdefaults
+                    plotly.graph_objs.layout.ternary.aaxis.Tickform
+                    atstop instance or dict with compatible
+                    properties
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -371,6 +375,10 @@ class Ternary(BaseLayoutHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
+                    plotly.graph_objs.layout.ternary.baxis.Tickform
+                    atstop instance or dict with compatible
+                    properties
+                tickformatstopdefaults
                     plotly.graph_objs.layout.ternary.baxis.Tickform
                     atstop instance or dict with compatible
                     properties
@@ -642,6 +650,10 @@ class Ternary(BaseLayoutHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
+                    plotly.graph_objs.layout.ternary.caxis.Tickform
+                    atstop instance or dict with compatible
+                    properties
+                tickformatstopdefaults
                     plotly.graph_objs.layout.ternary.caxis.Tickform
                     atstop instance or dict with compatible
                     properties

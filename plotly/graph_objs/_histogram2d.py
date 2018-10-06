@@ -216,6 +216,10 @@ class Histogram2d(BaseTraceType):
                     plotly.graph_objs.histogram2d.colorbar.Tickform
                     atstop instance or dict with compatible
                     properties
+                tickformatstopdefaults
+                    plotly.graph_objs.histogram2d.colorbar.Tickform
+                    atstop instance or dict with compatible
+                    properties
                 ticklen
                     Sets the tick length (in px).
                 tickmode

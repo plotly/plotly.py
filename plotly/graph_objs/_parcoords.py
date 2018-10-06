@@ -145,6 +145,29 @@ class Parcoords(BaseTraceType):
     def dimensions(self, val):
         self['dimensions'] = val
 
+    # dimensiondefaults
+    # -----------------
+    @property
+    def dimensiondefaults(self):
+        """
+        The 'dimensiondefaults' property is an instance of Dimension
+        that may be specified as:
+          - An instance of plotly.graph_objs.parcoords.Dimension
+          - A dict of string/value properties that will be passed
+            to the Dimension constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        plotly.graph_objs.parcoords.Dimension
+        """
+        return self['dimensiondefaults']
+
+    @dimensiondefaults.setter
+    def dimensiondefaults(self, val):
+        self['dimensiondefaults'] = val
+
     # domain
     # ------
     @property
@@ -759,6 +782,9 @@ class Parcoords(BaseTraceType):
         dimensions
             The dimensions (variables) of the parallel coordinates
             chart. 2..60 dimensions are supported.
+        dimensiondefaults
+            plotly.graph_objs.parcoords.Dimension instance or dict
+            with compatible properties
         domain
             plotly.graph_objs.parcoords.Domain instance or dict
             with compatible properties
@@ -824,6 +850,7 @@ class Parcoords(BaseTraceType):
         customdata=None,
         customdatasrc=None,
         dimensions=None,
+        dimensiondefaults=None,
         domain=None,
         hoverinfo=None,
         hoverinfosrc=None,
@@ -866,6 +893,9 @@ class Parcoords(BaseTraceType):
         dimensions
             The dimensions (variables) of the parallel coordinates
             chart. 2..60 dimensions are supported.
+        dimensiondefaults
+            plotly.graph_objs.parcoords.Dimension instance or dict
+            with compatible properties
         domain
             plotly.graph_objs.parcoords.Domain instance or dict
             with compatible properties
@@ -960,6 +990,8 @@ an instance of plotly.graph_objs.Parcoords"""
         self._validators['customdatasrc'
                         ] = v_parcoords.CustomdatasrcValidator()
         self._validators['dimensions'] = v_parcoords.DimensionsValidator()
+        self._validators['dimensiondefaults'
+                        ] = v_parcoords.DimensionValidator()
         self._validators['domain'] = v_parcoords.DomainValidator()
         self._validators['hoverinfo'] = v_parcoords.HoverinfoValidator()
         self._validators['hoverinfosrc'] = v_parcoords.HoverinfosrcValidator()
@@ -989,6 +1021,9 @@ an instance of plotly.graph_objs.Parcoords"""
             ] = customdatasrc if customdatasrc is not None else _v
         _v = arg.pop('dimensions', None)
         self['dimensions'] = dimensions if dimensions is not None else _v
+        _v = arg.pop('dimensiondefaults', None)
+        self['dimensiondefaults'
+            ] = dimensiondefaults if dimensiondefaults is not None else _v
         _v = arg.pop('domain', None)
         self['domain'] = domain if domain is not None else _v
         _v = arg.pop('hoverinfo', None)

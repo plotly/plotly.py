@@ -1235,6 +1235,29 @@ class Aaxis(BaseTraceHierarchyType):
     def tickformatstops(self, val):
         self['tickformatstops'] = val
 
+    # tickformatstopdefaults
+    # ----------------------
+    @property
+    def tickformatstopdefaults(self):
+        """
+        The 'tickformatstopdefaults' property is an instance of Tickformatstop
+        that may be specified as:
+          - An instance of plotly.graph_objs.carpet.aaxis.Tickformatstop
+          - A dict of string/value properties that will be passed
+            to the Tickformatstop constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        plotly.graph_objs.carpet.aaxis.Tickformatstop
+        """
+        return self['tickformatstopdefaults']
+
+    @tickformatstopdefaults.setter
+    def tickformatstopdefaults(self, val):
+        self['tickformatstopdefaults'] = val
+
     # tickmode
     # --------
     @property
@@ -1653,6 +1676,9 @@ class Aaxis(BaseTraceHierarchyType):
         tickformatstops
             plotly.graph_objs.carpet.aaxis.Tickformatstop instance
             or dict with compatible properties
+        tickformatstopdefaults
+            plotly.graph_objs.carpet.aaxis.Tickformatstop instance
+            or dict with compatible properties
         tickmode
 
         tickprefix
@@ -1730,6 +1756,7 @@ class Aaxis(BaseTraceHierarchyType):
         tickfont=None,
         tickformat=None,
         tickformatstops=None,
+        tickformatstopdefaults=None,
         tickmode=None,
         tickprefix=None,
         ticksuffix=None,
@@ -1904,6 +1931,9 @@ class Aaxis(BaseTraceHierarchyType):
         tickformatstops
             plotly.graph_objs.carpet.aaxis.Tickformatstop instance
             or dict with compatible properties
+        tickformatstopdefaults
+            plotly.graph_objs.carpet.aaxis.Tickformatstop instance
+            or dict with compatible properties
         tickmode
 
         tickprefix
@@ -2012,6 +2042,8 @@ an instance of plotly.graph_objs.carpet.Aaxis"""
         self._validators['tickformat'] = v_aaxis.TickformatValidator()
         self._validators['tickformatstops'
                         ] = v_aaxis.TickformatstopsValidator()
+        self._validators['tickformatstopdefaults'
+                        ] = v_aaxis.TickformatstopValidator()
         self._validators['tickmode'] = v_aaxis.TickmodeValidator()
         self._validators['tickprefix'] = v_aaxis.TickprefixValidator()
         self._validators['ticksuffix'] = v_aaxis.TicksuffixValidator()
@@ -2126,6 +2158,10 @@ an instance of plotly.graph_objs.carpet.Aaxis"""
         _v = arg.pop('tickformatstops', None)
         self['tickformatstops'
             ] = tickformatstops if tickformatstops is not None else _v
+        _v = arg.pop('tickformatstopdefaults', None)
+        self[
+            'tickformatstopdefaults'
+        ] = tickformatstopdefaults if tickformatstopdefaults is not None else _v
         _v = arg.pop('tickmode', None)
         self['tickmode'] = tickmode if tickmode is not None else _v
         _v = arg.pop('tickprefix', None)

@@ -354,6 +354,29 @@ class Layout(BaseLayoutType):
     def annotations(self, val):
         self['annotations'] = val
 
+    # annotationdefaults
+    # ------------------
+    @property
+    def annotationdefaults(self):
+        """
+        The 'annotationdefaults' property is an instance of Annotation
+        that may be specified as:
+          - An instance of plotly.graph_objs.layout.Annotation
+          - A dict of string/value properties that will be passed
+            to the Annotation constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        plotly.graph_objs.layout.Annotation
+        """
+        return self['annotationdefaults']
+
+    @annotationdefaults.setter
+    def annotationdefaults(self, val):
+        self['annotationdefaults'] = val
+
     # autosize
     # --------
     @property
@@ -1241,6 +1264,29 @@ class Layout(BaseLayoutType):
     def images(self, val):
         self['images'] = val
 
+    # imagedefaults
+    # -------------
+    @property
+    def imagedefaults(self):
+        """
+        The 'imagedefaults' property is an instance of Image
+        that may be specified as:
+          - An instance of plotly.graph_objs.layout.Image
+          - A dict of string/value properties that will be passed
+            to the Image constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        plotly.graph_objs.layout.Image
+        """
+        return self['imagedefaults']
+
+    @imagedefaults.setter
+    def imagedefaults(self, val):
+        self['imagedefaults'] = val
+
     # legend
     # ------
     @property
@@ -1332,6 +1378,9 @@ class Layout(BaseLayoutType):
                     plotly.graph_objs.layout.mapbox.Domain instance
                     or dict with compatible properties
                 layers
+                    plotly.graph_objs.layout.mapbox.Layer instance
+                    or dict with compatible properties
+                layerdefaults
                     plotly.graph_objs.layout.mapbox.Layer instance
                     or dict with compatible properties
                 pitch
@@ -1709,6 +1758,9 @@ class Layout(BaseLayoutType):
                 annotations
                     plotly.graph_objs.layout.scene.Annotation
                     instance or dict with compatible properties
+                annotationdefaults
+                    plotly.graph_objs.layout.scene.Annotation
+                    instance or dict with compatible properties
                 aspectmode
                     If "cube", this scene's axes are drawn as a
                     cube, regardless of the axes' ranges. If
@@ -1976,6 +2028,29 @@ class Layout(BaseLayoutType):
     def shapes(self, val):
         self['shapes'] = val
 
+    # shapedefaults
+    # -------------
+    @property
+    def shapedefaults(self):
+        """
+        The 'shapedefaults' property is an instance of Shape
+        that may be specified as:
+          - An instance of plotly.graph_objs.layout.Shape
+          - A dict of string/value properties that will be passed
+            to the Shape constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        plotly.graph_objs.layout.Shape
+        """
+        return self['shapedefaults']
+
+    @shapedefaults.setter
+    def shapedefaults(self, val):
+        self['shapedefaults'] = val
+
     # showlegend
     # ----------
     @property
@@ -2060,6 +2135,9 @@ class Layout(BaseLayoutType):
                 steps
                     plotly.graph_objs.layout.slider.Step instance
                     or dict with compatible properties
+                stepdefaults
+                    plotly.graph_objs.layout.slider.Step instance
+                    or dict with compatible properties
                 templateitemname
                     Used to refer to a named item in this array in
                     the template. Named items from the template
@@ -2109,6 +2187,29 @@ class Layout(BaseLayoutType):
     @sliders.setter
     def sliders(self, val):
         self['sliders'] = val
+
+    # sliderdefaults
+    # --------------
+    @property
+    def sliderdefaults(self):
+        """
+        The 'sliderdefaults' property is an instance of Slider
+        that may be specified as:
+          - An instance of plotly.graph_objs.layout.Slider
+          - A dict of string/value properties that will be passed
+            to the Slider constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        plotly.graph_objs.layout.Slider
+        """
+        return self['sliderdefaults']
+
+    @sliderdefaults.setter
+    def sliderdefaults(self, val):
+        self['sliderdefaults'] = val
 
     # spikedistance
     # -------------
@@ -2300,6 +2401,9 @@ class Layout(BaseLayoutType):
                 buttons
                     plotly.graph_objs.layout.updatemenu.Button
                     instance or dict with compatible properties
+                buttondefaults
+                    plotly.graph_objs.layout.updatemenu.Button
+                    instance or dict with compatible properties
                 direction
                     Determines the direction in which the buttons
                     are laid out, whether in a dropdown menu or a
@@ -2368,6 +2472,29 @@ class Layout(BaseLayoutType):
     @updatemenus.setter
     def updatemenus(self, val):
         self['updatemenus'] = val
+
+    # updatemenudefaults
+    # ------------------
+    @property
+    def updatemenudefaults(self):
+        """
+        The 'updatemenudefaults' property is an instance of Updatemenu
+        that may be specified as:
+          - An instance of plotly.graph_objs.layout.Updatemenu
+          - A dict of string/value properties that will be passed
+            to the Updatemenu constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        plotly.graph_objs.layout.Updatemenu
+        """
+        return self['updatemenudefaults']
+
+    @updatemenudefaults.setter
+    def updatemenudefaults(self, val):
+        self['updatemenudefaults'] = val
 
     # violingap
     # ---------
@@ -2772,6 +2899,9 @@ class Layout(BaseLayoutType):
                 tickformatstops
                     plotly.graph_objs.layout.xaxis.Tickformatstop
                     instance or dict with compatible properties
+                tickformatstopdefaults
+                    plotly.graph_objs.layout.xaxis.Tickformatstop
+                    instance or dict with compatible properties
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -3154,6 +3284,9 @@ class Layout(BaseLayoutType):
                 tickformatstops
                     plotly.graph_objs.layout.yaxis.Tickformatstop
                     instance or dict with compatible properties
+                tickformatstopdefaults
+                    plotly.graph_objs.layout.yaxis.Tickformatstop
+                    instance or dict with compatible properties
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -3243,310 +3376,7 @@ class Layout(BaseLayoutType):
         annotations
             plotly.graph_objs.layout.Annotation instance or dict
             with compatible properties
-        autosize
-            Determines whether or not a layout width or height that
-            has been left undefined by the user is initialized on
-            each relayout. Note that, regardless of this attribute,
-            an undefined layout width or height is always
-            initialized on the first call to plot.
-        bargap
-            Sets the gap (in plot fraction) between bars of
-            adjacent location coordinates.
-        bargroupgap
-            Sets the gap (in plot fraction) between bars of the
-            same location coordinate.
-        barmode
-            Determines how bars at the same location coordinate are
-            displayed on the graph. With "stack", the bars are
-            stacked on top of one another With "relative", the bars
-            are stacked on top of one another, with negative values
-            below the axis, positive values above With "group", the
-            bars are plotted next to one another centered around
-            the shared location. With "overlay", the bars are
-            plotted over one another, you might need to an
-            "opacity" to see multiple bars.
-        barnorm
-            Sets the normalization for bar traces on the graph.
-            With "fraction", the value of each bar is divided by
-            the sum of all values at that location coordinate.
-            "percent" is the same but multiplied by 100 to show
-            percentages.
-        boxgap
-            Sets the gap (in plot fraction) between boxes of
-            adjacent location coordinates.
-        boxgroupgap
-            Sets the gap (in plot fraction) between boxes of the
-            same location coordinate.
-        boxmode
-            Determines how boxes at the same location coordinate
-            are displayed on the graph. If "group", the boxes are
-            plotted next to one another centered around the shared
-            location. If "overlay", the boxes are plotted over one
-            another, you might need to set "opacity" to see them
-            multiple boxes.
-        calendar
-            Sets the default calendar system to use for
-            interpreting and displaying dates throughout the plot.
-        clickmode
-            Determines the mode of single click interactions.
-            "event" is the default value and emits the
-            `plotly_click` event. In addition this mode emits the
-            `plotly_selected` event in drag modes "lasso" and
-            "select", but with no event data attached (kept for
-            compatibility reasons). The "select" flag enables
-            selecting single data points via click. This mode also
-            supports persistent selections, meaning that pressing
-            Shift while clicking, adds to / subtracts from an
-            existing selection. "select" with `hovermode`: "x" can
-            be confusing, consider explicitly setting `hovermode`:
-            "closest" when using this feature. Selection events are
-            sent accordingly as long as "event" flag is set as
-            well. When the "event" flag is missing, `plotly_click`
-            and `plotly_selected` events are not fired.
-        colorway
-            Sets the default trace colors.
-        datarevision
-            If provided, a changed value tells `Plotly.react` that
-            one or more data arrays has changed. This way you can
-            modify arrays in-place rather than making a complete
-            new copy for an incremental change. If NOT provided,
-            `Plotly.react` assumes that data arrays are being
-            treated as immutable, thus any data array with a
-            different identity from its predecessor contains new
-            data.
-        direction
-            Legacy polar charts are deprecated! Please switch to
-            "polar" subplots. Sets the direction corresponding to
-            positive angles in legacy polar charts.
-        dragmode
-            Determines the mode of drag interactions. "select" and
-            "lasso" apply only to scatter traces with markers or
-            text. "orbit" and "turntable" apply only to 3D scenes.
-        extendpiecolors
-            If `true`, the pie slice colors (whether given by
-            `piecolorway` or inherited from `colorway`) will be
-            extended to three times its original length by first
-            repeating every color 20% lighter then each color 20%
-            darker. This is intended to reduce the likelihood of
-            reusing the same color when you have many slices, but
-            you can set `false` to disable. Colors provided in the
-            trace, using `marker.colors`, are never extended.
-        font
-            Sets the global font. Note that fonts used in traces
-            and other layout components inherit from the global
-            font.
-        geo
-            plotly.graph_objs.layout.Geo instance or dict with
-            compatible properties
-        grid
-            plotly.graph_objs.layout.Grid instance or dict with
-            compatible properties
-        height
-            Sets the plot's height (in px).
-        hiddenlabels
-
-        hiddenlabelssrc
-            Sets the source reference on plot.ly for  hiddenlabels
-            .
-        hidesources
-            Determines whether or not a text link citing the data
-            source is placed at the bottom-right cored of the
-            figure. Has only an effect only on graphs that have
-            been generated via forked graphs from the plotly
-            service (at https://plot.ly or on-premise).
-        hoverdistance
-            Sets the default distance (in pixels) to look for data
-            to add hover labels (-1 means no cutoff, 0 means no
-            looking for data). This is only a real distance for
-            hovering on point-like objects, like scatter points.
-            For area-like objects (bars, scatter fills, etc)
-            hovering is on inside the area and off outside, but
-            these objects will not supersede hover on point-like
-            objects in case of conflict.
-        hoverlabel
-            plotly.graph_objs.layout.Hoverlabel instance or dict
-            with compatible properties
-        hovermode
-            Determines the mode of hover interactions. If
-            `clickmode` includes the "select" flag, `hovermode`
-            defaults to "closest". If `clickmode` lacks the
-            "select" flag, it defaults to "x" or "y" (depending on
-            the trace's `orientation` value) for plots based on
-            cartesian coordinates. For anything else the default
-            value is "closest".
-        images
-            plotly.graph_objs.layout.Image instance or dict with
-            compatible properties
-        legend
-            plotly.graph_objs.layout.Legend instance or dict with
-            compatible properties
-        mapbox
-            plotly.graph_objs.layout.Mapbox instance or dict with
-            compatible properties
-        margin
-            plotly.graph_objs.layout.Margin instance or dict with
-            compatible properties
-        orientation
-            Legacy polar charts are deprecated! Please switch to
-            "polar" subplots. Rotates the entire polar by the given
-            angle in legacy polar charts.
-        paper_bgcolor
-            Sets the color of paper where the graph is drawn.
-        piecolorway
-            Sets the default pie slice colors. Defaults to the main
-            `colorway` used for trace colors. If you specify a new
-            list here it can still be extended with lighter and
-            darker colors, see `extendpiecolors`.
-        plot_bgcolor
-            Sets the color of plotting area in-between x and y
-            axes.
-        polar
-            plotly.graph_objs.layout.Polar instance or dict with
-            compatible properties
-        radialaxis
-            plotly.graph_objs.layout.RadialAxis instance or dict
-            with compatible properties
-        scene
-            plotly.graph_objs.layout.Scene instance or dict with
-            compatible properties
-        selectdirection
-            When "dragmode" is set to "select", this limits the
-            selection of the drag to horizontal, vertical or
-            diagonal. "h" only allows horizontal selection, "v"
-            only vertical, "d" only diagonal and "any" sets no
-            limit.
-        separators
-            Sets the decimal and thousand separators. For example,
-            *. * puts a '.' before decimals and a space between
-            thousands. In English locales, dflt is ".," but other
-            locales may alter this default.
-        shapes
-            plotly.graph_objs.layout.Shape instance or dict with
-            compatible properties
-        showlegend
-            Determines whether or not a legend is drawn. Default is
-            `true` if there is a trace to show and any of these: a)
-            Two or more traces would by default be shown in the
-            legend. b) One pie trace is shown in the legend. c) One
-            trace is explicitly given with `showlegend: true`.
-        sliders
-            plotly.graph_objs.layout.Slider instance or dict with
-            compatible properties
-        spikedistance
-            Sets the default distance (in pixels) to look for data
-            to draw spikelines to (-1 means no cutoff, 0 means no
-            looking for data). As with hoverdistance, distance does
-            not apply to area-like objects. In addition, some
-            objects can be hovered on but will not generate
-            spikelines, such as scatter fills.
-        template
-            plotly.graph_objs.layout.Template instance or dict with
-            compatible properties
-        ternary
-            plotly.graph_objs.layout.Ternary instance or dict with
-            compatible properties
-        title
-            Sets the plot's title.
-        titlefont
-            Sets the title font.
-        updatemenus
-            plotly.graph_objs.layout.Updatemenu instance or dict
-            with compatible properties
-        violingap
-            Sets the gap (in plot fraction) between violins of
-            adjacent location coordinates.
-        violingroupgap
-            Sets the gap (in plot fraction) between violins of the
-            same location coordinate.
-        violinmode
-            Determines how violins at the same location coordinate
-            are displayed on the graph. If "group", the violins are
-            plotted next to one another centered around the shared
-            location. If "overlay", the violins are plotted over
-            one another, you might need to set "opacity" to see
-            them multiple violins.
-        width
-            Sets the plot's width (in px).
-        xaxis
-            plotly.graph_objs.layout.XAxis instance or dict with
-            compatible properties
-        yaxis
-            plotly.graph_objs.layout.YAxis instance or dict with
-            compatible properties
-        """
-
-    def __init__(
-        self,
-        arg=None,
-        angularaxis=None,
-        annotations=None,
-        autosize=None,
-        bargap=None,
-        bargroupgap=None,
-        barmode=None,
-        barnorm=None,
-        boxgap=None,
-        boxgroupgap=None,
-        boxmode=None,
-        calendar=None,
-        clickmode=None,
-        colorway=None,
-        datarevision=None,
-        direction=None,
-        dragmode=None,
-        extendpiecolors=None,
-        font=None,
-        geo=None,
-        grid=None,
-        height=None,
-        hiddenlabels=None,
-        hiddenlabelssrc=None,
-        hidesources=None,
-        hoverdistance=None,
-        hoverlabel=None,
-        hovermode=None,
-        images=None,
-        legend=None,
-        mapbox=None,
-        margin=None,
-        orientation=None,
-        paper_bgcolor=None,
-        piecolorway=None,
-        plot_bgcolor=None,
-        polar=None,
-        radialaxis=None,
-        scene=None,
-        selectdirection=None,
-        separators=None,
-        shapes=None,
-        showlegend=None,
-        sliders=None,
-        spikedistance=None,
-        template=None,
-        ternary=None,
-        title=None,
-        titlefont=None,
-        updatemenus=None,
-        violingap=None,
-        violingroupgap=None,
-        violinmode=None,
-        width=None,
-        xaxis=None,
-        yaxis=None,
-        **kwargs
-    ):
-        """
-        Construct a new Layout object
-        
-        Parameters
-        ----------
-        arg
-            dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.Layout
-        angularaxis
-            plotly.graph_objs.layout.AngularAxis instance or dict
-            with compatible properties
-        annotations
+        annotationdefaults
             plotly.graph_objs.layout.Annotation instance or dict
             with compatible properties
         autosize
@@ -3683,6 +3513,9 @@ class Layout(BaseLayoutType):
         images
             plotly.graph_objs.layout.Image instance or dict with
             compatible properties
+        imagedefaults
+            plotly.graph_objs.layout.Image instance or dict with
+            compatible properties
         legend
             plotly.graph_objs.layout.Legend instance or dict with
             compatible properties
@@ -3729,6 +3562,9 @@ class Layout(BaseLayoutType):
         shapes
             plotly.graph_objs.layout.Shape instance or dict with
             compatible properties
+        shapedefaults
+            plotly.graph_objs.layout.Shape instance or dict with
+            compatible properties
         showlegend
             Determines whether or not a legend is drawn. Default is
             `true` if there is a trace to show and any of these: a)
@@ -3736,6 +3572,9 @@ class Layout(BaseLayoutType):
             legend. b) One pie trace is shown in the legend. c) One
             trace is explicitly given with `showlegend: true`.
         sliders
+            plotly.graph_objs.layout.Slider instance or dict with
+            compatible properties
+        sliderdefaults
             plotly.graph_objs.layout.Slider instance or dict with
             compatible properties
         spikedistance
@@ -3756,6 +3595,335 @@ class Layout(BaseLayoutType):
         titlefont
             Sets the title font.
         updatemenus
+            plotly.graph_objs.layout.Updatemenu instance or dict
+            with compatible properties
+        updatemenudefaults
+            plotly.graph_objs.layout.Updatemenu instance or dict
+            with compatible properties
+        violingap
+            Sets the gap (in plot fraction) between violins of
+            adjacent location coordinates.
+        violingroupgap
+            Sets the gap (in plot fraction) between violins of the
+            same location coordinate.
+        violinmode
+            Determines how violins at the same location coordinate
+            are displayed on the graph. If "group", the violins are
+            plotted next to one another centered around the shared
+            location. If "overlay", the violins are plotted over
+            one another, you might need to set "opacity" to see
+            them multiple violins.
+        width
+            Sets the plot's width (in px).
+        xaxis
+            plotly.graph_objs.layout.XAxis instance or dict with
+            compatible properties
+        yaxis
+            plotly.graph_objs.layout.YAxis instance or dict with
+            compatible properties
+        """
+
+    def __init__(
+        self,
+        arg=None,
+        angularaxis=None,
+        annotations=None,
+        annotationdefaults=None,
+        autosize=None,
+        bargap=None,
+        bargroupgap=None,
+        barmode=None,
+        barnorm=None,
+        boxgap=None,
+        boxgroupgap=None,
+        boxmode=None,
+        calendar=None,
+        clickmode=None,
+        colorway=None,
+        datarevision=None,
+        direction=None,
+        dragmode=None,
+        extendpiecolors=None,
+        font=None,
+        geo=None,
+        grid=None,
+        height=None,
+        hiddenlabels=None,
+        hiddenlabelssrc=None,
+        hidesources=None,
+        hoverdistance=None,
+        hoverlabel=None,
+        hovermode=None,
+        images=None,
+        imagedefaults=None,
+        legend=None,
+        mapbox=None,
+        margin=None,
+        orientation=None,
+        paper_bgcolor=None,
+        piecolorway=None,
+        plot_bgcolor=None,
+        polar=None,
+        radialaxis=None,
+        scene=None,
+        selectdirection=None,
+        separators=None,
+        shapes=None,
+        shapedefaults=None,
+        showlegend=None,
+        sliders=None,
+        sliderdefaults=None,
+        spikedistance=None,
+        template=None,
+        ternary=None,
+        title=None,
+        titlefont=None,
+        updatemenus=None,
+        updatemenudefaults=None,
+        violingap=None,
+        violingroupgap=None,
+        violinmode=None,
+        width=None,
+        xaxis=None,
+        yaxis=None,
+        **kwargs
+    ):
+        """
+        Construct a new Layout object
+        
+        Parameters
+        ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Layout
+        angularaxis
+            plotly.graph_objs.layout.AngularAxis instance or dict
+            with compatible properties
+        annotations
+            plotly.graph_objs.layout.Annotation instance or dict
+            with compatible properties
+        annotationdefaults
+            plotly.graph_objs.layout.Annotation instance or dict
+            with compatible properties
+        autosize
+            Determines whether or not a layout width or height that
+            has been left undefined by the user is initialized on
+            each relayout. Note that, regardless of this attribute,
+            an undefined layout width or height is always
+            initialized on the first call to plot.
+        bargap
+            Sets the gap (in plot fraction) between bars of
+            adjacent location coordinates.
+        bargroupgap
+            Sets the gap (in plot fraction) between bars of the
+            same location coordinate.
+        barmode
+            Determines how bars at the same location coordinate are
+            displayed on the graph. With "stack", the bars are
+            stacked on top of one another With "relative", the bars
+            are stacked on top of one another, with negative values
+            below the axis, positive values above With "group", the
+            bars are plotted next to one another centered around
+            the shared location. With "overlay", the bars are
+            plotted over one another, you might need to an
+            "opacity" to see multiple bars.
+        barnorm
+            Sets the normalization for bar traces on the graph.
+            With "fraction", the value of each bar is divided by
+            the sum of all values at that location coordinate.
+            "percent" is the same but multiplied by 100 to show
+            percentages.
+        boxgap
+            Sets the gap (in plot fraction) between boxes of
+            adjacent location coordinates.
+        boxgroupgap
+            Sets the gap (in plot fraction) between boxes of the
+            same location coordinate.
+        boxmode
+            Determines how boxes at the same location coordinate
+            are displayed on the graph. If "group", the boxes are
+            plotted next to one another centered around the shared
+            location. If "overlay", the boxes are plotted over one
+            another, you might need to set "opacity" to see them
+            multiple boxes.
+        calendar
+            Sets the default calendar system to use for
+            interpreting and displaying dates throughout the plot.
+        clickmode
+            Determines the mode of single click interactions.
+            "event" is the default value and emits the
+            `plotly_click` event. In addition this mode emits the
+            `plotly_selected` event in drag modes "lasso" and
+            "select", but with no event data attached (kept for
+            compatibility reasons). The "select" flag enables
+            selecting single data points via click. This mode also
+            supports persistent selections, meaning that pressing
+            Shift while clicking, adds to / subtracts from an
+            existing selection. "select" with `hovermode`: "x" can
+            be confusing, consider explicitly setting `hovermode`:
+            "closest" when using this feature. Selection events are
+            sent accordingly as long as "event" flag is set as
+            well. When the "event" flag is missing, `plotly_click`
+            and `plotly_selected` events are not fired.
+        colorway
+            Sets the default trace colors.
+        datarevision
+            If provided, a changed value tells `Plotly.react` that
+            one or more data arrays has changed. This way you can
+            modify arrays in-place rather than making a complete
+            new copy for an incremental change. If NOT provided,
+            `Plotly.react` assumes that data arrays are being
+            treated as immutable, thus any data array with a
+            different identity from its predecessor contains new
+            data.
+        direction
+            Legacy polar charts are deprecated! Please switch to
+            "polar" subplots. Sets the direction corresponding to
+            positive angles in legacy polar charts.
+        dragmode
+            Determines the mode of drag interactions. "select" and
+            "lasso" apply only to scatter traces with markers or
+            text. "orbit" and "turntable" apply only to 3D scenes.
+        extendpiecolors
+            If `true`, the pie slice colors (whether given by
+            `piecolorway` or inherited from `colorway`) will be
+            extended to three times its original length by first
+            repeating every color 20% lighter then each color 20%
+            darker. This is intended to reduce the likelihood of
+            reusing the same color when you have many slices, but
+            you can set `false` to disable. Colors provided in the
+            trace, using `marker.colors`, are never extended.
+        font
+            Sets the global font. Note that fonts used in traces
+            and other layout components inherit from the global
+            font.
+        geo
+            plotly.graph_objs.layout.Geo instance or dict with
+            compatible properties
+        grid
+            plotly.graph_objs.layout.Grid instance or dict with
+            compatible properties
+        height
+            Sets the plot's height (in px).
+        hiddenlabels
+
+        hiddenlabelssrc
+            Sets the source reference on plot.ly for  hiddenlabels
+            .
+        hidesources
+            Determines whether or not a text link citing the data
+            source is placed at the bottom-right cored of the
+            figure. Has only an effect only on graphs that have
+            been generated via forked graphs from the plotly
+            service (at https://plot.ly or on-premise).
+        hoverdistance
+            Sets the default distance (in pixels) to look for data
+            to add hover labels (-1 means no cutoff, 0 means no
+            looking for data). This is only a real distance for
+            hovering on point-like objects, like scatter points.
+            For area-like objects (bars, scatter fills, etc)
+            hovering is on inside the area and off outside, but
+            these objects will not supersede hover on point-like
+            objects in case of conflict.
+        hoverlabel
+            plotly.graph_objs.layout.Hoverlabel instance or dict
+            with compatible properties
+        hovermode
+            Determines the mode of hover interactions. If
+            `clickmode` includes the "select" flag, `hovermode`
+            defaults to "closest". If `clickmode` lacks the
+            "select" flag, it defaults to "x" or "y" (depending on
+            the trace's `orientation` value) for plots based on
+            cartesian coordinates. For anything else the default
+            value is "closest".
+        images
+            plotly.graph_objs.layout.Image instance or dict with
+            compatible properties
+        imagedefaults
+            plotly.graph_objs.layout.Image instance or dict with
+            compatible properties
+        legend
+            plotly.graph_objs.layout.Legend instance or dict with
+            compatible properties
+        mapbox
+            plotly.graph_objs.layout.Mapbox instance or dict with
+            compatible properties
+        margin
+            plotly.graph_objs.layout.Margin instance or dict with
+            compatible properties
+        orientation
+            Legacy polar charts are deprecated! Please switch to
+            "polar" subplots. Rotates the entire polar by the given
+            angle in legacy polar charts.
+        paper_bgcolor
+            Sets the color of paper where the graph is drawn.
+        piecolorway
+            Sets the default pie slice colors. Defaults to the main
+            `colorway` used for trace colors. If you specify a new
+            list here it can still be extended with lighter and
+            darker colors, see `extendpiecolors`.
+        plot_bgcolor
+            Sets the color of plotting area in-between x and y
+            axes.
+        polar
+            plotly.graph_objs.layout.Polar instance or dict with
+            compatible properties
+        radialaxis
+            plotly.graph_objs.layout.RadialAxis instance or dict
+            with compatible properties
+        scene
+            plotly.graph_objs.layout.Scene instance or dict with
+            compatible properties
+        selectdirection
+            When "dragmode" is set to "select", this limits the
+            selection of the drag to horizontal, vertical or
+            diagonal. "h" only allows horizontal selection, "v"
+            only vertical, "d" only diagonal and "any" sets no
+            limit.
+        separators
+            Sets the decimal and thousand separators. For example,
+            *. * puts a '.' before decimals and a space between
+            thousands. In English locales, dflt is ".," but other
+            locales may alter this default.
+        shapes
+            plotly.graph_objs.layout.Shape instance or dict with
+            compatible properties
+        shapedefaults
+            plotly.graph_objs.layout.Shape instance or dict with
+            compatible properties
+        showlegend
+            Determines whether or not a legend is drawn. Default is
+            `true` if there is a trace to show and any of these: a)
+            Two or more traces would by default be shown in the
+            legend. b) One pie trace is shown in the legend. c) One
+            trace is explicitly given with `showlegend: true`.
+        sliders
+            plotly.graph_objs.layout.Slider instance or dict with
+            compatible properties
+        sliderdefaults
+            plotly.graph_objs.layout.Slider instance or dict with
+            compatible properties
+        spikedistance
+            Sets the default distance (in pixels) to look for data
+            to draw spikelines to (-1 means no cutoff, 0 means no
+            looking for data). As with hoverdistance, distance does
+            not apply to area-like objects. In addition, some
+            objects can be hovered on but will not generate
+            spikelines, such as scatter fills.
+        template
+            plotly.graph_objs.layout.Template instance or dict with
+            compatible properties
+        ternary
+            plotly.graph_objs.layout.Ternary instance or dict with
+            compatible properties
+        title
+            Sets the plot's title.
+        titlefont
+            Sets the title font.
+        updatemenus
+            plotly.graph_objs.layout.Updatemenu instance or dict
+            with compatible properties
+        updatemenudefaults
             plotly.graph_objs.layout.Updatemenu instance or dict
             with compatible properties
         violingap
@@ -3814,6 +3982,7 @@ an instance of plotly.graph_objs.Layout"""
         # ---------------------
         self._validators['angularaxis'] = v_layout.AngularAxisValidator()
         self._validators['annotations'] = v_layout.AnnotationsValidator()
+        self._validators['annotationdefaults'] = v_layout.AnnotationValidator()
         self._validators['autosize'] = v_layout.AutosizeValidator()
         self._validators['bargap'] = v_layout.BargapValidator()
         self._validators['bargroupgap'] = v_layout.BargroupgapValidator()
@@ -3842,6 +4011,7 @@ an instance of plotly.graph_objs.Layout"""
         self._validators['hoverlabel'] = v_layout.HoverlabelValidator()
         self._validators['hovermode'] = v_layout.HovermodeValidator()
         self._validators['images'] = v_layout.ImagesValidator()
+        self._validators['imagedefaults'] = v_layout.ImageValidator()
         self._validators['legend'] = v_layout.LegendValidator()
         self._validators['mapbox'] = v_layout.MapboxValidator()
         self._validators['margin'] = v_layout.MarginValidator()
@@ -3856,14 +4026,17 @@ an instance of plotly.graph_objs.Layout"""
                         ] = v_layout.SelectdirectionValidator()
         self._validators['separators'] = v_layout.SeparatorsValidator()
         self._validators['shapes'] = v_layout.ShapesValidator()
+        self._validators['shapedefaults'] = v_layout.ShapeValidator()
         self._validators['showlegend'] = v_layout.ShowlegendValidator()
         self._validators['sliders'] = v_layout.SlidersValidator()
+        self._validators['sliderdefaults'] = v_layout.SliderValidator()
         self._validators['spikedistance'] = v_layout.SpikedistanceValidator()
         self._validators['template'] = v_layout.TemplateValidator()
         self._validators['ternary'] = v_layout.TernaryValidator()
         self._validators['title'] = v_layout.TitleValidator()
         self._validators['titlefont'] = v_layout.TitlefontValidator()
         self._validators['updatemenus'] = v_layout.UpdatemenusValidator()
+        self._validators['updatemenudefaults'] = v_layout.UpdatemenuValidator()
         self._validators['violingap'] = v_layout.ViolingapValidator()
         self._validators['violingroupgap'] = v_layout.ViolingroupgapValidator()
         self._validators['violinmode'] = v_layout.ViolinmodeValidator()
@@ -3877,6 +4050,9 @@ an instance of plotly.graph_objs.Layout"""
         self['angularaxis'] = angularaxis if angularaxis is not None else _v
         _v = arg.pop('annotations', None)
         self['annotations'] = annotations if annotations is not None else _v
+        _v = arg.pop('annotationdefaults', None)
+        self['annotationdefaults'
+            ] = annotationdefaults if annotationdefaults is not None else _v
         _v = arg.pop('autosize', None)
         self['autosize'] = autosize if autosize is not None else _v
         _v = arg.pop('bargap', None)
@@ -3932,6 +4108,9 @@ an instance of plotly.graph_objs.Layout"""
         self['hovermode'] = hovermode if hovermode is not None else _v
         _v = arg.pop('images', None)
         self['images'] = images if images is not None else _v
+        _v = arg.pop('imagedefaults', None)
+        self['imagedefaults'
+            ] = imagedefaults if imagedefaults is not None else _v
         _v = arg.pop('legend', None)
         self['legend'] = legend if legend is not None else _v
         _v = arg.pop('mapbox', None)
@@ -3960,10 +4139,16 @@ an instance of plotly.graph_objs.Layout"""
         self['separators'] = separators if separators is not None else _v
         _v = arg.pop('shapes', None)
         self['shapes'] = shapes if shapes is not None else _v
+        _v = arg.pop('shapedefaults', None)
+        self['shapedefaults'
+            ] = shapedefaults if shapedefaults is not None else _v
         _v = arg.pop('showlegend', None)
         self['showlegend'] = showlegend if showlegend is not None else _v
         _v = arg.pop('sliders', None)
         self['sliders'] = sliders if sliders is not None else _v
+        _v = arg.pop('sliderdefaults', None)
+        self['sliderdefaults'
+            ] = sliderdefaults if sliderdefaults is not None else _v
         _v = arg.pop('spikedistance', None)
         self['spikedistance'
             ] = spikedistance if spikedistance is not None else _v
@@ -3979,6 +4164,9 @@ an instance of plotly.graph_objs.Layout"""
         self['titlefont'] = titlefont if titlefont is not None else _v
         _v = arg.pop('updatemenus', None)
         self['updatemenus'] = updatemenus if updatemenus is not None else _v
+        _v = arg.pop('updatemenudefaults', None)
+        self['updatemenudefaults'
+            ] = updatemenudefaults if updatemenudefaults is not None else _v
         _v = arg.pop('violingap', None)
         self['violingap'] = violingap if violingap is not None else _v
         _v = arg.pop('violingroupgap', None)

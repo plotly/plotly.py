@@ -239,6 +239,10 @@ class Histogram2dContour(BaseTraceType):
                     plotly.graph_objs.histogram2dcontour.colorbar.T
                     ickformatstop instance or dict with compatible
                     properties
+                tickformatstopdefaults
+                    plotly.graph_objs.histogram2dcontour.colorbar.T
+                    ickformatstop instance or dict with compatible
+                    properties
                 ticklen
                     Sets the tick length (in px).
                 tickmode

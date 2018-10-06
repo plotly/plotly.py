@@ -176,6 +176,9 @@ class BaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickformatstops
                 plotly.graph_objs.carpet.baxis.Tickformatstop
                 instance or dict with compatible properties
+            tickformatstopdefaults
+                plotly.graph_objs.carpet.baxis.Tickformatstop
+                instance or dict with compatible properties
             tickmode
 
             tickprefix

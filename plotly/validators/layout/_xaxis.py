@@ -313,6 +313,9 @@ class XAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickformatstops
                 plotly.graph_objs.layout.xaxis.Tickformatstop
                 instance or dict with compatible properties
+            tickformatstopdefaults
+                plotly.graph_objs.layout.xaxis.Tickformatstop
+                instance or dict with compatible properties
             ticklen
                 Sets the tick length (in px).
             tickmode

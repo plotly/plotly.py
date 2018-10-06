@@ -27,6 +27,9 @@ class MapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
             layers
                 plotly.graph_objs.layout.mapbox.Layer instance
                 or dict with compatible properties
+            layerdefaults
+                plotly.graph_objs.layout.mapbox.Layer instance
+                or dict with compatible properties
             pitch
                 Sets the pitch angle of the map (in degrees,
                 where 0 means perpendicular to the surface of
