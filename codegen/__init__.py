@@ -13,6 +13,7 @@ from codegen.validators import (write_validator_py,
                                 write_data_validator_py,
                                 get_data_validator_instance)
 
+
 # Import notes
 # ------------
 # Nothing from the plotly/ package should be imported during code
@@ -22,6 +23,32 @@ from codegen.validators import (write_validator_py,
 # codegen/ package, and helpers used both during code generation and at
 # runtime should reside in the _plotly_utils/ package.
 # ----------------------------------------------------------------------------
+def preprocess_schema(plotly_schema):
+    """
+    Central location to make changes to schema before it's seen by the
+    PlotlyNode classes
+    """
+    layout = plotly_schema['layout']['layoutAttributes']
+
+    template_description = layout['template']['description']
+
+    # Create codegen-friendly template scheme
+    template = {
+        "data": {
+            trace + 's': {
+                'items': {
+                    trace: {
+                    },
+                },
+                "role": "object"
+            }
+            for trace in plotly_schema['traces']
+        },
+        "layout": {
+        }
+    }
+
+    layout['template'] = template
 
 
 def perform_codegen():
@@ -51,6 +78,10 @@ def perform_codegen():
     # ------------------
     with open('plotly/package_data/plot-schema.json', 'r') as f:
         plotly_schema = json.load(f)
+
+    # Preprocess Schema
+    # -----------------
+    preprocess_schema(plotly_schema)
 
     # Build node lists
     # ----------------

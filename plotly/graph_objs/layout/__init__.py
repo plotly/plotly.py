@@ -7,6 +7,8 @@ from plotly.graph_objs.layout import updatemenu
 from ._titlefont import Titlefont
 from ._ternary import Ternary
 from plotly.graph_objs.layout import ternary
+from ._template import Template
+from plotly.graph_objs.layout import template
 from ._slider import Slider
 from plotly.graph_objs.layout import slider
 from ._shape import Shape

@@ -257,9 +257,14 @@ class PlotlyNode:
         # Note the node_data is a property that must be computed by the
         # subclass based on plotly_schema and node_path
         if isinstance(self.node_data, dict_like):
+            childs_parent = (
+                parent
+                if self.node_path and self.node_path[-1] == 'items'
+                else self)
+
             self._children = [self.__class__(self.plotly_schema,
                                              node_path=self.node_path + (c,),
-                                             parent=self)
+                                             parent=childs_parent)
                               for c in self.node_data if c and c[0] != '_']
 
             # Sort by plotly name
@@ -387,7 +392,15 @@ class PlotlyNode:
         -------
         str
         """
-        return self.plotly_name + ('s' if self.is_array_element else '')
+
+        return self.plotly_name + (
+            's' if self.is_array_element and
+                   # Don't add 's' to layout.template.data.scatter etc.
+                   not (self.parent and
+                        self.parent.parent and
+                        self.parent.parent.parent and
+                        self.parent.parent.parent.name_property == 'template')
+            else '')
 
     @property
     def name_validator_class(self) -> str:
@@ -600,8 +613,8 @@ class PlotlyNode:
         -------
         bool
         """
-        if self.parent and self.parent.parent:
-            return self.parent.parent.is_array
+        if self.parent:
+            return self.parent.is_array
         else:
             return False
 

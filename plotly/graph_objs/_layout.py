@@ -2140,30 +2140,24 @@ class Layout(BaseLayoutType):
     @property
     def template(self):
         """
-        Default attributes to be applied to the plot. Templates can be
-        created from existing plots using `Plotly.makeTemplate`, or
-        created manually. They should be objects with format: `{layout:
-        layoutTemplate, data: {[type]: [traceTemplate, ...]}, ...}`
-        `layoutTemplate` and `traceTemplate` are objects matching the
-        attribute structure of `layout` and a data trace.  Trace
-        templates are applied cyclically to traces of each type.
-        Container arrays (eg `annotations`) have special handling: An
-        object ending in `defaults` (eg `annotationdefaults`) is
-        applied to each array item. But if an item has a
-        `templateitemname` key we look in the template array for an
-        item with matching `name` and apply that instead. If no
-        matching `name` is found we mark the item invisible. Any named
-        template item not referenced is appended to the end of the
-        array, so you can use this for a watermark annotation or a logo
-        image, for example. To omit one of these items on the plot,
-        make an item with matching `templateitemname` and `visible:
-        false`.
+        The 'template' property is an instance of Template
+        that may be specified as:
+          - An instance of plotly.graph_objs.layout.Template
+          - A dict of string/value properties that will be passed
+            to the Template constructor
     
-        The 'template' property accepts values of any type
+            Supported dict properties:
+                
+                data
+                    plotly.graph_objs.layout.template.Data instance
+                    or dict with compatible properties
+                layout
+                    plotly.graph_objs.layout.template.Layout
+                    instance or dict with compatible properties
 
         Returns
         -------
-        Any
+        plotly.graph_objs.layout.Template
         """
         return self['template']
 
@@ -3446,26 +3440,8 @@ class Layout(BaseLayoutType):
             objects can be hovered on but will not generate
             spikelines, such as scatter fills.
         template
-            Default attributes to be applied to the plot. Templates
-            can be created from existing plots using
-            `Plotly.makeTemplate`, or created manually. They should
-            be objects with format: `{layout: layoutTemplate, data:
-            {[type]: [traceTemplate, ...]}, ...}` `layoutTemplate`
-            and `traceTemplate` are objects matching the attribute
-            structure of `layout` and a data trace.  Trace
-            templates are applied cyclically to traces of each
-            type. Container arrays (eg `annotations`) have special
-            handling: An object ending in `defaults` (eg
-            `annotationdefaults`) is applied to each array item.
-            But if an item has a `templateitemname` key we look in
-            the template array for an item with matching `name` and
-            apply that instead. If no matching `name` is found we
-            mark the item invisible. Any named template item not
-            referenced is appended to the end of the array, so you
-            can use this for a watermark annotation or a logo
-            image, for example. To omit one of these items on the
-            plot, make an item with matching `templateitemname` and
-            `visible: false`.
+            plotly.graph_objs.layout.Template instance or dict with
+            compatible properties
         ternary
             plotly.graph_objs.layout.Ternary instance or dict with
             compatible properties
@@ -3770,26 +3746,8 @@ class Layout(BaseLayoutType):
             objects can be hovered on but will not generate
             spikelines, such as scatter fills.
         template
-            Default attributes to be applied to the plot. Templates
-            can be created from existing plots using
-            `Plotly.makeTemplate`, or created manually. They should
-            be objects with format: `{layout: layoutTemplate, data:
-            {[type]: [traceTemplate, ...]}, ...}` `layoutTemplate`
-            and `traceTemplate` are objects matching the attribute
-            structure of `layout` and a data trace.  Trace
-            templates are applied cyclically to traces of each
-            type. Container arrays (eg `annotations`) have special
-            handling: An object ending in `defaults` (eg
-            `annotationdefaults`) is applied to each array item.
-            But if an item has a `templateitemname` key we look in
-            the template array for an item with matching `name` and
-            apply that instead. If no matching `name` is found we
-            mark the item invisible. Any named template item not
-            referenced is appended to the end of the array, so you
-            can use this for a watermark annotation or a logo
-            image, for example. To omit one of these items on the
-            plot, make an item with matching `templateitemname` and
-            `visible: false`.
+            plotly.graph_objs.layout.Template instance or dict with
+            compatible properties
         ternary
             plotly.graph_objs.layout.Ternary instance or dict with
             compatible properties
@@ -4010,7 +3968,9 @@ an instance of plotly.graph_objs.Layout"""
         self['spikedistance'
             ] = spikedistance if spikedistance is not None else _v
         _v = arg.pop('template', None)
-        self['template'] = template if template is not None else _v
+        _v = template if template is not None else _v
+        if _v is not None:
+            self['template'] = _v
         _v = arg.pop('ternary', None)
         self['ternary'] = ternary if ternary is not None else _v
         _v = arg.pop('title', None)

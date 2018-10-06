@@ -66,6 +66,18 @@ def build_datatype_py(node):
     # ---------------
     assert node.is_compound
 
+    # Handle template traces
+    # ----------------------
+    # We want template trace/layout classes like
+    # plotly.graph_objs.layout.template.data.Scatter to map to the
+    # corresponding trace/layout class (e.g. plotly.graph_objs.Scatter).
+    # So rather than generate a class definition, we just import the
+    # corresponding trace/layout class
+    if node.parent_path_str == 'layout.template.data':
+        return f"from plotly.graph_objs import {node.name_datatype_class}"
+    elif node.path_str == 'layout.template.layout':
+        return "from plotly.graph_objs import Layout"
+
     # Extract node properties
     # -----------------------
     undercase = node.name_undercase
@@ -244,7 +256,17 @@ an instance of {class_name}\"\"\")
         # ----------------------------------""")
     for subtype_node in subtype_nodes:
         name_prop = subtype_node.name_property
-        buffer.write(f"""
+        if name_prop == 'template':
+            # Special handling for layout.template to avoid infinite
+            # recursion.  Only initialize layout.template object if non-None
+            # value specified
+            buffer.write(f"""
+        _v = arg.pop('{name_prop}', None)
+        _v = {name_prop} if {name_prop} is not None else _v
+        if _v is not None:
+            self['{name_prop}'] = _v""")
+        else:
+            buffer.write(f"""
         _v = arg.pop('{name_prop}', None)
         self['{name_prop}'] = {name_prop} \
 if {name_prop} is not None else _v""")
