@@ -174,6 +174,7 @@ def format_description(desc):
 # Mapping from full property paths to custom validator classes
 CUSTOM_VALIDATOR_DATATYPES = {
     'layout.image.source': '_plotly_utils.basevalidators.ImageUriValidator',
+    'layout.template': '_plotly_utils.basevalidators.BaseTemplateValidator',
     'frame.data': 'plotly.validators.DataValidator',
     'frame.layout': 'plotly.validators.LayoutValidator'
 }

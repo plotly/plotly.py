@@ -2123,3 +2123,34 @@ class BaseDataValidator(BaseValidator):
                 self.raise_invalid_val(v)
 
         return v
+
+
+class BaseTemplateValidator(CompoundValidator):
+
+    def __init__(self,
+                 plotly_name,
+                 parent_name,
+                 data_class_str,
+                 data_docs,
+                 **kwargs):
+
+        super(BaseTemplateValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            data_class_str=data_class_str,
+            data_docs=data_docs,
+            **kwargs
+        )
+
+    def validate_coerce(self, v, skip_invalid=False):
+        import plotly.io as pio
+
+        try:
+            if v in pio.templates:
+                return pio.templates[v]
+        except TypeError:
+            # v is un-hashable
+            pass
+
+        return super(BaseTemplateValidator, self).validate_coerce(
+            v, skip_invalid=skip_invalid)

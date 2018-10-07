@@ -235,6 +235,14 @@ class BaseFigure(object):
         self._animation_duration_validator = animation.DurationValidator()
         self._animation_easing_validator = animation.EasingValidator()
 
+        # Template
+        # --------
+        # ### Check for default template ###
+        import plotly.io as pio
+        if (self._layout_obj.template is None and
+                pio.templates.default is not None):
+            self._layout_obj.template = pio.templates.default
+
     # Magic Methods
     # -------------
     def __reduce__(self):
