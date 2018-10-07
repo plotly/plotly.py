@@ -989,6 +989,10 @@ class RadialAxis(BaseLayoutHierarchyType):
     @property
     def tickformatstopdefaults(self):
         """
+        When used in a template (as layout.template.layout.polar.radial
+        axis.tickformatstopdefaults), sets the default property values
+        to use for elements of layout.polar.radialaxis.tickformatstops
+    
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
           - An instance of plotly.graph_objs.layout.polar.radialaxis.Tickformatstop
@@ -1524,8 +1528,10 @@ class RadialAxis(BaseLayoutHierarchyType):
             plotly.graph_objs.layout.polar.radialaxis.Tickformatsto
             p instance or dict with compatible properties
         tickformatstopdefaults
-            plotly.graph_objs.layout.polar.radialaxis.Tickformatsto
-            p instance or dict with compatible properties
+            When used in a template (as layout.template.layout.pola
+            r.radialaxis.tickformatstopdefaults), sets the default
+            property values to use for elements of
+            layout.polar.radialaxis.tickformatstops
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -1814,8 +1820,10 @@ class RadialAxis(BaseLayoutHierarchyType):
             plotly.graph_objs.layout.polar.radialaxis.Tickformatsto
             p instance or dict with compatible properties
         tickformatstopdefaults
-            plotly.graph_objs.layout.polar.radialaxis.Tickformatsto
-            p instance or dict with compatible properties
+            When used in a template (as layout.template.layout.pola
+            r.radialaxis.tickformatstopdefaults), sets the default
+            property values to use for elements of
+            layout.polar.radialaxis.tickformatstops
         ticklen
             Sets the tick length (in px).
         tickmode

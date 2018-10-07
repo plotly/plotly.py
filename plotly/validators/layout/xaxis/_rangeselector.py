@@ -32,9 +32,10 @@ class RangeselectorValidator(_plotly_utils.basevalidators.CompoundValidator):
                 default, a range selector comes with no
                 buttons.
             buttondefaults
-                plotly.graph_objs.layout.xaxis.rangeselector.Bu
-                tton instance or dict with compatible
-                properties
+                When used in a template (as layout.template.lay
+                out.xaxis.rangeselector.buttondefaults), sets
+                the default property values to use for elements
+                of layout.xaxis.rangeselector.buttons
             font
                 Sets the font of the range selector button
                 text.

@@ -158,9 +158,10 @@ class CaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 atstop instance or dict with compatible
                 properties
             tickformatstopdefaults
-                plotly.graph_objs.layout.ternary.caxis.Tickform
-                atstop instance or dict with compatible
-                properties
+                When used in a template (as layout.template.lay
+                out.ternary.caxis.tickformatstopdefaults), sets
+                the default property values to use for elements
+                of layout.ternary.caxis.tickformatstops
             ticklen
                 Sets the tick length (in px).
             tickmode

@@ -752,6 +752,11 @@ class ColorBar(BaseTraceHierarchyType):
     @property
     def tickformatstopdefaults(self):
         """
+        When used in a template (as layout.template.data.scatter3d.mark
+        er.colorbar.tickformatstopdefaults), sets the default property
+        values to use for elements of
+        scatter3d.marker.colorbar.tickformatstops
+    
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
           - An instance of plotly.graph_objs.scatter3d.marker.colorbar.Tickformatstop
@@ -1324,8 +1329,10 @@ class ColorBar(BaseTraceHierarchyType):
             plotly.graph_objs.scatter3d.marker.colorbar.Tickformats
             top instance or dict with compatible properties
         tickformatstopdefaults
-            plotly.graph_objs.scatter3d.marker.colorbar.Tickformats
-            top instance or dict with compatible properties
+            When used in a template (as layout.template.data.scatte
+            r3d.marker.colorbar.tickformatstopdefaults), sets the
+            default property values to use for elements of
+            scatter3d.marker.colorbar.tickformatstops
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -1559,8 +1566,10 @@ class ColorBar(BaseTraceHierarchyType):
             plotly.graph_objs.scatter3d.marker.colorbar.Tickformats
             top instance or dict with compatible properties
         tickformatstopdefaults
-            plotly.graph_objs.scatter3d.marker.colorbar.Tickformats
-            top instance or dict with compatible properties
+            When used in a template (as layout.template.data.scatte
+            r3d.marker.colorbar.tickformatstopdefaults), sets the
+            default property values to use for elements of
+            scatter3d.marker.colorbar.tickformatstops
         ticklen
             Sets the tick length (in px).
         tickmode

@@ -752,6 +752,11 @@ class ColorBar(BaseTraceHierarchyType):
     @property
     def tickformatstopdefaults(self):
         """
+        When used in a template (as layout.template.data.parcoords.line
+        .colorbar.tickformatstopdefaults), sets the default property
+        values to use for elements of
+        parcoords.line.colorbar.tickformatstops
+    
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
           - An instance of plotly.graph_objs.parcoords.line.colorbar.Tickformatstop
@@ -1324,8 +1329,10 @@ class ColorBar(BaseTraceHierarchyType):
             plotly.graph_objs.parcoords.line.colorbar.Tickformatsto
             p instance or dict with compatible properties
         tickformatstopdefaults
-            plotly.graph_objs.parcoords.line.colorbar.Tickformatsto
-            p instance or dict with compatible properties
+            When used in a template (as layout.template.data.parcoo
+            rds.line.colorbar.tickformatstopdefaults), sets the
+            default property values to use for elements of
+            parcoords.line.colorbar.tickformatstops
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -1559,8 +1566,10 @@ class ColorBar(BaseTraceHierarchyType):
             plotly.graph_objs.parcoords.line.colorbar.Tickformatsto
             p instance or dict with compatible properties
         tickformatstopdefaults
-            plotly.graph_objs.parcoords.line.colorbar.Tickformatsto
-            p instance or dict with compatible properties
+            When used in a template (as layout.template.data.parcoo
+            rds.line.colorbar.tickformatstopdefaults), sets the
+            default property values to use for elements of
+            parcoords.line.colorbar.tickformatstops
         ticklen
             Sets the tick length (in px).
         tickmode

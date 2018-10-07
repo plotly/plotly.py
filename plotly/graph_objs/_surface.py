@@ -237,8 +237,10 @@ class Surface(BaseTraceType):
                     plotly.graph_objs.surface.colorbar.Tickformatst
                     op instance or dict with compatible properties
                 tickformatstopdefaults
-                    plotly.graph_objs.surface.colorbar.Tickformatst
-                    op instance or dict with compatible properties
+                    When used in a template (as layout.template.dat
+                    a.surface.colorbar.tickformatstopdefaults),
+                    sets the default property values to use for
+                    elements of surface.colorbar.tickformatstops
                 ticklen
                     Sets the tick length (in px).
                 tickmode

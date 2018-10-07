@@ -238,9 +238,10 @@ class Streamtube(BaseTraceType):
                     tstop instance or dict with compatible
                     properties
                 tickformatstopdefaults
-                    plotly.graph_objs.streamtube.colorbar.Tickforma
-                    tstop instance or dict with compatible
-                    properties
+                    When used in a template (as layout.template.dat
+                    a.streamtube.colorbar.tickformatstopdefaults),
+                    sets the default property values to use for
+                    elements of streamtube.colorbar.tickformatstops
                 ticklen
                     Sets the tick length (in px).
                 tickmode

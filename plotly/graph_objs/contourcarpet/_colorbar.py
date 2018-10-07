@@ -752,6 +752,11 @@ class ColorBar(BaseTraceHierarchyType):
     @property
     def tickformatstopdefaults(self):
         """
+        When used in a template (as layout.template.data.contourcarpet.
+        colorbar.tickformatstopdefaults), sets the default property
+        values to use for elements of
+        contourcarpet.colorbar.tickformatstops
+    
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
           - An instance of plotly.graph_objs.contourcarpet.colorbar.Tickformatstop
@@ -1324,8 +1329,10 @@ class ColorBar(BaseTraceHierarchyType):
             plotly.graph_objs.contourcarpet.colorbar.Tickformatstop
             instance or dict with compatible properties
         tickformatstopdefaults
-            plotly.graph_objs.contourcarpet.colorbar.Tickformatstop
-            instance or dict with compatible properties
+            When used in a template (as layout.template.data.contou
+            rcarpet.colorbar.tickformatstopdefaults), sets the
+            default property values to use for elements of
+            contourcarpet.colorbar.tickformatstops
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -1558,8 +1565,10 @@ class ColorBar(BaseTraceHierarchyType):
             plotly.graph_objs.contourcarpet.colorbar.Tickformatstop
             instance or dict with compatible properties
         tickformatstopdefaults
-            plotly.graph_objs.contourcarpet.colorbar.Tickformatstop
-            instance or dict with compatible properties
+            When used in a template (as layout.template.data.contou
+            rcarpet.colorbar.tickformatstopdefaults), sets the
+            default property values to use for elements of
+            contourcarpet.colorbar.tickformatstops
         ticklen
             Sets the tick length (in px).
         tickmode

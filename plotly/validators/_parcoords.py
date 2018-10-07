@@ -24,8 +24,10 @@ class ParcoordsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 coordinates chart. 2..60 dimensions are
                 supported.
             dimensiondefaults
-                plotly.graph_objs.parcoords.Dimension instance
-                or dict with compatible properties
+                When used in a template (as layout.template.dat
+                a.parcoords.dimensiondefaults), sets the
+                default property values to use for elements of
+                parcoords.dimensions
             domain
                 plotly.graph_objs.parcoords.Domain instance or
                 dict with compatible properties

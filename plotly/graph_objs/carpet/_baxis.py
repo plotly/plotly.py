@@ -1240,6 +1240,11 @@ class Baxis(BaseTraceHierarchyType):
     @property
     def tickformatstopdefaults(self):
         """
+        When used in a template (as
+        layout.template.data.carpet.baxis.tickformatstopdefaults), sets
+        the default property values to use for elements of
+        carpet.baxis.tickformatstops
+    
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
           - An instance of plotly.graph_objs.carpet.baxis.Tickformatstop
@@ -1677,8 +1682,10 @@ class Baxis(BaseTraceHierarchyType):
             plotly.graph_objs.carpet.baxis.Tickformatstop instance
             or dict with compatible properties
         tickformatstopdefaults
-            plotly.graph_objs.carpet.baxis.Tickformatstop instance
-            or dict with compatible properties
+            When used in a template (as layout.template.data.carpet
+            .baxis.tickformatstopdefaults), sets the default
+            property values to use for elements of
+            carpet.baxis.tickformatstops
         tickmode
 
         tickprefix
@@ -1932,8 +1939,10 @@ class Baxis(BaseTraceHierarchyType):
             plotly.graph_objs.carpet.baxis.Tickformatstop instance
             or dict with compatible properties
         tickformatstopdefaults
-            plotly.graph_objs.carpet.baxis.Tickformatstop instance
-            or dict with compatible properties
+            When used in a template (as layout.template.data.carpet
+            .baxis.tickformatstopdefaults), sets the default
+            property values to use for elements of
+            carpet.baxis.tickformatstops
         tickmode
 
         tickprefix

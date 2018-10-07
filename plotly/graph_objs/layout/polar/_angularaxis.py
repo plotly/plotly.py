@@ -927,6 +927,10 @@ class AngularAxis(BaseLayoutHierarchyType):
     @property
     def tickformatstopdefaults(self):
         """
+        When used in a template (as layout.template.layout.polar.angula
+        raxis.tickformatstopdefaults), sets the default property values
+        to use for elements of layout.polar.angularaxis.tickformatstops
+    
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
           - An instance of plotly.graph_objs.layout.polar.angularaxis.Tickformatstop
@@ -1377,8 +1381,10 @@ class AngularAxis(BaseLayoutHierarchyType):
             plotly.graph_objs.layout.polar.angularaxis.Tickformatst
             op instance or dict with compatible properties
         tickformatstopdefaults
-            plotly.graph_objs.layout.polar.angularaxis.Tickformatst
-            op instance or dict with compatible properties
+            When used in a template (as layout.template.layout.pola
+            r.angularaxis.tickformatstopdefaults), sets the default
+            property values to use for elements of
+            layout.polar.angularaxis.tickformatstops
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -1640,8 +1646,10 @@ class AngularAxis(BaseLayoutHierarchyType):
             plotly.graph_objs.layout.polar.angularaxis.Tickformatst
             op instance or dict with compatible properties
         tickformatstopdefaults
-            plotly.graph_objs.layout.polar.angularaxis.Tickformatst
-            op instance or dict with compatible properties
+            When used in a template (as layout.template.layout.pola
+            r.angularaxis.tickformatstopdefaults), sets the default
+            property values to use for elements of
+            layout.polar.angularaxis.tickformatstops
         ticklen
             Sets the tick length (in px).
         tickmode

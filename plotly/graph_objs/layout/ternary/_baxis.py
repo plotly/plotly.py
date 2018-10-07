@@ -784,6 +784,11 @@ class Baxis(BaseLayoutHierarchyType):
     @property
     def tickformatstopdefaults(self):
         """
+        When used in a template (as
+        layout.template.layout.ternary.baxis.tickformatstopdefaults),
+        sets the default property values to use for elements of
+        layout.ternary.baxis.tickformatstops
+    
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
           - An instance of plotly.graph_objs.layout.ternary.baxis.Tickformatstop
@@ -1223,8 +1228,10 @@ class Baxis(BaseLayoutHierarchyType):
             plotly.graph_objs.layout.ternary.baxis.Tickformatstop
             instance or dict with compatible properties
         tickformatstopdefaults
-            plotly.graph_objs.layout.ternary.baxis.Tickformatstop
-            instance or dict with compatible properties
+            When used in a template (as layout.template.layout.tern
+            ary.baxis.tickformatstopdefaults), sets the default
+            property values to use for elements of
+            layout.ternary.baxis.tickformatstops
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -1443,8 +1450,10 @@ class Baxis(BaseLayoutHierarchyType):
             plotly.graph_objs.layout.ternary.baxis.Tickformatstop
             instance or dict with compatible properties
         tickformatstopdefaults
-            plotly.graph_objs.layout.ternary.baxis.Tickformatstop
-            instance or dict with compatible properties
+            When used in a template (as layout.template.layout.tern
+            ary.baxis.tickformatstopdefaults), sets the default
+            property values to use for elements of
+            layout.ternary.baxis.tickformatstops
         ticklen
             Sets the tick length (in px).
         tickmode

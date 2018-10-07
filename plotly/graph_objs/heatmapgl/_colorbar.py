@@ -752,6 +752,10 @@ class ColorBar(BaseTraceHierarchyType):
     @property
     def tickformatstopdefaults(self):
         """
+        When used in a template (as layout.template.data.heatmapgl.colo
+        rbar.tickformatstopdefaults), sets the default property values
+        to use for elements of heatmapgl.colorbar.tickformatstops
+    
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
           - An instance of plotly.graph_objs.heatmapgl.colorbar.Tickformatstop
@@ -1324,8 +1328,10 @@ class ColorBar(BaseTraceHierarchyType):
             plotly.graph_objs.heatmapgl.colorbar.Tickformatstop
             instance or dict with compatible properties
         tickformatstopdefaults
-            plotly.graph_objs.heatmapgl.colorbar.Tickformatstop
-            instance or dict with compatible properties
+            When used in a template (as layout.template.data.heatma
+            pgl.colorbar.tickformatstopdefaults), sets the default
+            property values to use for elements of
+            heatmapgl.colorbar.tickformatstops
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -1558,8 +1564,10 @@ class ColorBar(BaseTraceHierarchyType):
             plotly.graph_objs.heatmapgl.colorbar.Tickformatstop
             instance or dict with compatible properties
         tickformatstopdefaults
-            plotly.graph_objs.heatmapgl.colorbar.Tickformatstop
-            instance or dict with compatible properties
+            When used in a template (as layout.template.data.heatma
+            pgl.colorbar.tickformatstopdefaults), sets the default
+            property values to use for elements of
+            heatmapgl.colorbar.tickformatstops
         ticklen
             Sets the tick length (in px).
         tickmode

@@ -140,6 +140,10 @@ class Splom(BaseTraceType):
     @property
     def dimensiondefaults(self):
         """
+        When used in a template (as
+        layout.template.data.splom.dimensiondefaults), sets the default
+        property values to use for elements of splom.dimensions
+    
         The 'dimensiondefaults' property is an instance of Dimension
         that may be specified as:
           - An instance of plotly.graph_objs.splom.Dimension
@@ -836,8 +840,10 @@ class Splom(BaseTraceType):
             plotly.graph_objs.splom.Dimension instance or dict with
             compatible properties
         dimensiondefaults
-            plotly.graph_objs.splom.Dimension instance or dict with
-            compatible properties
+            When used in a template (as
+            layout.template.data.splom.dimensiondefaults), sets the
+            default property values to use for elements of
+            splom.dimensions
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -978,8 +984,10 @@ class Splom(BaseTraceType):
             plotly.graph_objs.splom.Dimension instance or dict with
             compatible properties
         dimensiondefaults
-            plotly.graph_objs.splom.Dimension instance or dict with
-            compatible properties
+            When used in a template (as
+            layout.template.data.splom.dimensiondefaults), sets the
+            default property values to use for elements of
+            splom.dimensions
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed

@@ -1120,6 +1120,9 @@ class ElementDefaultsNode(PlotlyNode):
 
     def __init__(self, array_node, plotly_schema):
         """
+        Create node that represents element defaults properties
+        (e.g. layout.annotationdefaults).  Construct as a wrapper around the
+        corresponding array property node (e.g. layout.annotations)
 
         Parameters
         ----------
@@ -1139,7 +1142,23 @@ class ElementDefaultsNode(PlotlyNode):
 
     @property
     def description(self):
-        return ''
+        array_property_path = (self.parent_path_str +
+                               '.' + self.array_node.name_property)
+
+        if isinstance(self.array_node, TraceNode):
+            data_path = 'data.'
+        else:
+            data_path = ''
+
+        defaults_property_path = ('layout.template.' +
+                                  data_path +
+                                  self.parent_path_str +
+                                  '.' + self.plotly_name)
+        return f"""\
+When used in a template
+(as {defaults_property_path}),
+sets the default property values to use for elements
+of {array_property_path}"""
 
     @property
     def name_base_datatype(self):
@@ -1155,11 +1174,4 @@ class ElementDefaultsNode(PlotlyNode):
 
     @property
     def name_datatype_class(self):
-        """
-        Name of the Python datatype class representing this node
-
-        Returns
-        -------
-        str
-        """
         return self.element_node.name_datatype_class

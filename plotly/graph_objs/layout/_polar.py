@@ -199,9 +199,11 @@ class Polar(BaseLayoutHierarchyType):
                     formatstop instance or dict with compatible
                     properties
                 tickformatstopdefaults
-                    plotly.graph_objs.layout.polar.angularaxis.Tick
-                    formatstop instance or dict with compatible
-                    properties
+                    When used in a template (as layout.template.lay
+                    out.polar.angularaxis.tickformatstopdefaults),
+                    sets the default property values to use for
+                    elements of
+                    layout.polar.angularaxis.tickformatstops
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -669,9 +671,11 @@ class Polar(BaseLayoutHierarchyType):
                     ormatstop instance or dict with compatible
                     properties
                 tickformatstopdefaults
-                    plotly.graph_objs.layout.polar.radialaxis.Tickf
-                    ormatstop instance or dict with compatible
-                    properties
+                    When used in a template (as layout.template.lay
+                    out.polar.radialaxis.tickformatstopdefaults),
+                    sets the default property values to use for
+                    elements of
+                    layout.polar.radialaxis.tickformatstops
                 ticklen
                     Sets the tick length (in px).
                 tickmode

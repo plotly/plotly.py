@@ -308,9 +308,11 @@ class Marker(BaseTraceHierarchyType):
                     r.Tickformatstop instance or dict with
                     compatible properties
                 tickformatstopdefaults
-                    plotly.graph_objs.scatterternary.marker.colorba
-                    r.Tickformatstop instance or dict with
-                    compatible properties
+                    When used in a template (as layout.template.dat
+                    a.scatterternary.marker.colorbar.tickformatstop
+                    defaults), sets the default property values to
+                    use for elements of
+                    scatterternary.marker.colorbar.tickformatstops
                 ticklen
                     Sets the tick length (in px).
                 tickmode

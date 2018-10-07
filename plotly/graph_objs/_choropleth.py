@@ -171,9 +171,10 @@ class Choropleth(BaseTraceType):
                     tstop instance or dict with compatible
                     properties
                 tickformatstopdefaults
-                    plotly.graph_objs.choropleth.colorbar.Tickforma
-                    tstop instance or dict with compatible
-                    properties
+                    When used in a template (as layout.template.dat
+                    a.choropleth.colorbar.tickformatstopdefaults),
+                    sets the default property values to use for
+                    elements of choropleth.colorbar.tickformatstops
                 ticklen
                     Sets the tick length (in px).
                 tickmode

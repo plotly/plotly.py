@@ -210,6 +210,10 @@ class Mapbox(BaseLayoutHierarchyType):
     @property
     def layerdefaults(self):
         """
+        When used in a template (as
+        layout.template.layout.mapbox.layerdefaults), sets the default
+        property values to use for elements of layout.mapbox.layers
+    
         The 'layerdefaults' property is an instance of Layer
         that may be specified as:
           - An instance of plotly.graph_objs.layout.mapbox.Layer
@@ -318,8 +322,10 @@ class Mapbox(BaseLayoutHierarchyType):
             plotly.graph_objs.layout.mapbox.Layer instance or dict
             with compatible properties
         layerdefaults
-            plotly.graph_objs.layout.mapbox.Layer instance or dict
-            with compatible properties
+            When used in a template (as
+            layout.template.layout.mapbox.layerdefaults), sets the
+            default property values to use for elements of
+            layout.mapbox.layers
         pitch
             Sets the pitch angle of the map (in degrees, where 0
             means perpendicular to the surface of the map).
@@ -370,8 +376,10 @@ class Mapbox(BaseLayoutHierarchyType):
             plotly.graph_objs.layout.mapbox.Layer instance or dict
             with compatible properties
         layerdefaults
-            plotly.graph_objs.layout.mapbox.Layer instance or dict
-            with compatible properties
+            When used in a template (as
+            layout.template.layout.mapbox.layerdefaults), sets the
+            default property values to use for elements of
+            layout.mapbox.layers
         pitch
             Sets the pitch angle of the map (in degrees, where 0
             means perpendicular to the surface of the map).

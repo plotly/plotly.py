@@ -223,9 +223,10 @@ class ZAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 stop instance or dict with compatible
                 properties
             tickformatstopdefaults
-                plotly.graph_objs.layout.scene.zaxis.Tickformat
-                stop instance or dict with compatible
-                properties
+                When used in a template (as layout.template.lay
+                out.scene.zaxis.tickformatstopdefaults), sets
+                the default property values to use for elements
+                of layout.scene.zaxis.tickformatstops
             ticklen
                 Sets the tick length (in px).
             tickmode

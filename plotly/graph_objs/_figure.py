@@ -59,8 +59,10 @@ class Figure(BaseFigure):
                         plotly.graph_objs.layout.Annotation instance or
                         dict with compatible properties
                     annotationdefaults
-                        plotly.graph_objs.layout.Annotation instance or
-                        dict with compatible properties
+                        When used in a template (as
+                        layout.template.layout.annotationdefaults),
+                        sets the default property values to use for
+                        elements of layout.annotations
                     autosize
                         Determines whether or not a layout width or
                         height that has been left undefined by the user
@@ -212,8 +214,10 @@ class Figure(BaseFigure):
                         plotly.graph_objs.layout.Image instance or dict
                         with compatible properties
                     imagedefaults
-                        plotly.graph_objs.layout.Image instance or dict
-                        with compatible properties
+                        When used in a template (as
+                        layout.template.layout.imagedefaults), sets the
+                        default property values to use for elements of
+                        layout.images
                     legend
                         plotly.graph_objs.layout.Legend instance or
                         dict with compatible properties
@@ -265,8 +269,10 @@ class Figure(BaseFigure):
                         plotly.graph_objs.layout.Shape instance or dict
                         with compatible properties
                     shapedefaults
-                        plotly.graph_objs.layout.Shape instance or dict
-                        with compatible properties
+                        When used in a template (as
+                        layout.template.layout.shapedefaults), sets the
+                        default property values to use for elements of
+                        layout.shapes
                     showlegend
                         Determines whether or not a legend is drawn.
                         Default is `true` if there is a trace to show
@@ -278,8 +284,10 @@ class Figure(BaseFigure):
                         plotly.graph_objs.layout.Slider instance or
                         dict with compatible properties
                     sliderdefaults
-                        plotly.graph_objs.layout.Slider instance or
-                        dict with compatible properties
+                        When used in a template (as
+                        layout.template.layout.sliderdefaults), sets
+                        the default property values to use for elements
+                        of layout.sliders
                     spikedistance
                         Sets the default distance (in pixels) to look
                         for data to draw spikelines to (-1 means no
@@ -289,8 +297,32 @@ class Figure(BaseFigure):
                         hovered on but will not generate spikelines,
                         such as scatter fills.
                     template
-                        plotly.graph_objs.layout.Template instance or
-                        dict with compatible properties
+                        Default attributes to be applied to the plot.
+                        This should be a dict with format: `{'layout':
+                        layoutTemplate, 'data': {trace_type:
+                        [traceTemplate, ...], ...}}` where
+                        `layoutTemplate` is a dict matching the
+                        structure of `figure.layout` and
+                        `traceTemplate` is a dict matching the
+                        structure of the trace with type `trace_type`
+                        (e.g. 'scatter'). Alternatively, this may be
+                        specified as an instance of
+                        plotly.graph_objs.layout.Template.  Trace
+                        templates are applied cyclically to traces of
+                        each type. Container arrays (eg `annotations`)
+                        have special handling: An object ending in
+                        `defaults` (eg `annotationdefaults`) is applied
+                        to each array item. But if an item has a
+                        `templateitemname` key we look in the template
+                        array for an item with matching `name` and
+                        apply that instead. If no matching `name` is
+                        found we mark the item invisible. Any named
+                        template item not referenced is appended to the
+                        end of the array, so this can be used to add a
+                        watermark annotation or a logo image, for
+                        example. To omit one of these items on the
+                        plot, make an item with matching
+                        `templateitemname` and `visible: false`.
                     ternary
                         plotly.graph_objs.layout.Ternary instance or
                         dict with compatible properties
@@ -302,8 +334,10 @@ class Figure(BaseFigure):
                         plotly.graph_objs.layout.Updatemenu instance or
                         dict with compatible properties
                     updatemenudefaults
-                        plotly.graph_objs.layout.Updatemenu instance or
-                        dict with compatible properties
+                        When used in a template (as
+                        layout.template.layout.updatemenudefaults),
+                        sets the default property values to use for
+                        elements of layout.updatemenus
                     violingap
                         Sets the gap (in plot fraction) between violins
                         of adjacent location coordinates.
@@ -4960,8 +4994,10 @@ class Figure(BaseFigure):
             The dimensions (variables) of the parallel coordinates
             chart. 2..60 dimensions are supported.
         dimensiondefaults
-            plotly.graph_objs.parcoords.Dimension instance or dict
-            with compatible properties
+            When used in a template (as
+            layout.template.data.parcoords.dimensiondefaults), sets
+            the default property values to use for elements of
+            parcoords.dimensions
         domain
             plotly.graph_objs.parcoords.Domain instance or dict
             with compatible properties
@@ -8186,8 +8222,10 @@ class Figure(BaseFigure):
             plotly.graph_objs.splom.Dimension instance or dict with
             compatible properties
         dimensiondefaults
-            plotly.graph_objs.splom.Dimension instance or dict with
-            compatible properties
+            When used in a template (as
+            layout.template.data.splom.dimensiondefaults), sets the
+            default property values to use for elements of
+            splom.dimensions
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed

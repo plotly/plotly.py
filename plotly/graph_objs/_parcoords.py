@@ -150,6 +150,11 @@ class Parcoords(BaseTraceType):
     @property
     def dimensiondefaults(self):
         """
+        When used in a template (as
+        layout.template.data.parcoords.dimensiondefaults), sets the
+        default property values to use for elements of
+        parcoords.dimensions
+    
         The 'dimensiondefaults' property is an instance of Dimension
         that may be specified as:
           - An instance of plotly.graph_objs.parcoords.Dimension
@@ -783,8 +788,10 @@ class Parcoords(BaseTraceType):
             The dimensions (variables) of the parallel coordinates
             chart. 2..60 dimensions are supported.
         dimensiondefaults
-            plotly.graph_objs.parcoords.Dimension instance or dict
-            with compatible properties
+            When used in a template (as
+            layout.template.data.parcoords.dimensiondefaults), sets
+            the default property values to use for elements of
+            parcoords.dimensions
         domain
             plotly.graph_objs.parcoords.Domain instance or dict
             with compatible properties
@@ -894,8 +901,10 @@ class Parcoords(BaseTraceType):
             The dimensions (variables) of the parallel coordinates
             chart. 2..60 dimensions are supported.
         dimensiondefaults
-            plotly.graph_objs.parcoords.Dimension instance or dict
-            with compatible properties
+            When used in a template (as
+            layout.template.data.parcoords.dimensiondefaults), sets
+            the default property values to use for elements of
+            parcoords.dimensions
         domain
             plotly.graph_objs.parcoords.Domain instance or dict
             with compatible properties

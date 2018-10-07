@@ -1161,6 +1161,11 @@ class XAxis(BaseLayoutHierarchyType):
     @property
     def tickformatstopdefaults(self):
         """
+        When used in a template (as
+        layout.template.layout.scene.xaxis.tickformatstopdefaults),
+        sets the default property values to use for elements of
+        layout.scene.xaxis.tickformatstops
+    
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
           - An instance of plotly.graph_objs.layout.scene.xaxis.Tickformatstop
@@ -1806,8 +1811,10 @@ class XAxis(BaseLayoutHierarchyType):
             plotly.graph_objs.layout.scene.xaxis.Tickformatstop
             instance or dict with compatible properties
         tickformatstopdefaults
-            plotly.graph_objs.layout.scene.xaxis.Tickformatstop
-            instance or dict with compatible properties
+            When used in a template (as layout.template.layout.scen
+            e.xaxis.tickformatstopdefaults), sets the default
+            property values to use for elements of
+            layout.scene.xaxis.tickformatstops
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -2120,8 +2127,10 @@ class XAxis(BaseLayoutHierarchyType):
             plotly.graph_objs.layout.scene.xaxis.Tickformatstop
             instance or dict with compatible properties
         tickformatstopdefaults
-            plotly.graph_objs.layout.scene.xaxis.Tickformatstop
-            instance or dict with compatible properties
+            When used in a template (as layout.template.layout.scen
+            e.xaxis.tickformatstopdefaults), sets the default
+            property values to use for elements of
+            layout.scene.xaxis.tickformatstops
         ticklen
             Sets the tick length (in px).
         tickmode

@@ -226,8 +226,10 @@ class Carpet(BaseTraceType):
                     plotly.graph_objs.carpet.aaxis.Tickformatstop
                     instance or dict with compatible properties
                 tickformatstopdefaults
-                    plotly.graph_objs.carpet.aaxis.Tickformatstop
-                    instance or dict with compatible properties
+                    When used in a template (as layout.template.dat
+                    a.carpet.aaxis.tickformatstopdefaults), sets
+                    the default property values to use for elements
+                    of carpet.aaxis.tickformatstops
                 tickmode
     
                 tickprefix
@@ -514,8 +516,10 @@ class Carpet(BaseTraceType):
                     plotly.graph_objs.carpet.baxis.Tickformatstop
                     instance or dict with compatible properties
                 tickformatstopdefaults
-                    plotly.graph_objs.carpet.baxis.Tickformatstop
-                    instance or dict with compatible properties
+                    When used in a template (as layout.template.dat
+                    a.carpet.baxis.tickformatstopdefaults), sets
+                    the default property values to use for elements
+                    of carpet.baxis.tickformatstops
                 tickmode
     
                 tickprefix

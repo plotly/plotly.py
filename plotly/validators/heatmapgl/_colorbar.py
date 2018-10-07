@@ -141,9 +141,10 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 stop instance or dict with compatible
                 properties
             tickformatstopdefaults
-                plotly.graph_objs.heatmapgl.colorbar.Tickformat
-                stop instance or dict with compatible
-                properties
+                When used in a template (as layout.template.dat
+                a.heatmapgl.colorbar.tickformatstopdefaults),
+                sets the default property values to use for
+                elements of heatmapgl.colorbar.tickformatstops
             ticklen
                 Sets the tick length (in px).
             tickmode

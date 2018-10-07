@@ -1161,6 +1161,11 @@ class ZAxis(BaseLayoutHierarchyType):
     @property
     def tickformatstopdefaults(self):
         """
+        When used in a template (as
+        layout.template.layout.scene.zaxis.tickformatstopdefaults),
+        sets the default property values to use for elements of
+        layout.scene.zaxis.tickformatstops
+    
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
           - An instance of plotly.graph_objs.layout.scene.zaxis.Tickformatstop
@@ -1806,8 +1811,10 @@ class ZAxis(BaseLayoutHierarchyType):
             plotly.graph_objs.layout.scene.zaxis.Tickformatstop
             instance or dict with compatible properties
         tickformatstopdefaults
-            plotly.graph_objs.layout.scene.zaxis.Tickformatstop
-            instance or dict with compatible properties
+            When used in a template (as layout.template.layout.scen
+            e.zaxis.tickformatstopdefaults), sets the default
+            property values to use for elements of
+            layout.scene.zaxis.tickformatstops
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -2120,8 +2127,10 @@ class ZAxis(BaseLayoutHierarchyType):
             plotly.graph_objs.layout.scene.zaxis.Tickformatstop
             instance or dict with compatible properties
         tickformatstopdefaults
-            plotly.graph_objs.layout.scene.zaxis.Tickformatstop
-            instance or dict with compatible properties
+            When used in a template (as layout.template.layout.scen
+            e.zaxis.tickformatstopdefaults), sets the default
+            property values to use for elements of
+            layout.scene.zaxis.tickformatstops
         ticklen
             Sets the tick length (in px).
         tickmode

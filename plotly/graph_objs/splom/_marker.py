@@ -308,9 +308,11 @@ class Marker(BaseTraceHierarchyType):
                     matstop instance or dict with compatible
                     properties
                 tickformatstopdefaults
-                    plotly.graph_objs.splom.marker.colorbar.Tickfor
-                    matstop instance or dict with compatible
-                    properties
+                    When used in a template (as layout.template.dat
+                    a.splom.marker.colorbar.tickformatstopdefaults)
+                    , sets the default property values to use for
+                    elements of
+                    splom.marker.colorbar.tickformatstops
                 ticklen
                     Sets the tick length (in px).
                 tickmode

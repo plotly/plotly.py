@@ -210,6 +210,11 @@ class Scene(BaseLayoutHierarchyType):
     @property
     def annotationdefaults(self):
         """
+        When used in a template (as
+        layout.template.layout.scene.annotationdefaults), sets the
+        default property values to use for elements of
+        layout.scene.annotations
+    
         The 'annotationdefaults' property is an instance of Annotation
         that may be specified as:
           - An instance of plotly.graph_objs.layout.scene.Annotation
@@ -687,9 +692,10 @@ class Scene(BaseLayoutHierarchyType):
                     stop instance or dict with compatible
                     properties
                 tickformatstopdefaults
-                    plotly.graph_objs.layout.scene.xaxis.Tickformat
-                    stop instance or dict with compatible
-                    properties
+                    When used in a template (as layout.template.lay
+                    out.scene.xaxis.tickformatstopdefaults), sets
+                    the default property values to use for elements
+                    of layout.scene.xaxis.tickformatstops
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -986,9 +992,10 @@ class Scene(BaseLayoutHierarchyType):
                     stop instance or dict with compatible
                     properties
                 tickformatstopdefaults
-                    plotly.graph_objs.layout.scene.yaxis.Tickformat
-                    stop instance or dict with compatible
-                    properties
+                    When used in a template (as layout.template.lay
+                    out.scene.yaxis.tickformatstopdefaults), sets
+                    the default property values to use for elements
+                    of layout.scene.yaxis.tickformatstops
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -1285,9 +1292,10 @@ class Scene(BaseLayoutHierarchyType):
                     stop instance or dict with compatible
                     properties
                 tickformatstopdefaults
-                    plotly.graph_objs.layout.scene.zaxis.Tickformat
-                    stop instance or dict with compatible
-                    properties
+                    When used in a template (as layout.template.lay
+                    out.scene.zaxis.tickformatstopdefaults), sets
+                    the default property values to use for elements
+                    of layout.scene.zaxis.tickformatstops
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -1375,8 +1383,10 @@ class Scene(BaseLayoutHierarchyType):
             plotly.graph_objs.layout.scene.Annotation instance or
             dict with compatible properties
         annotationdefaults
-            plotly.graph_objs.layout.scene.Annotation instance or
-            dict with compatible properties
+            When used in a template (as
+            layout.template.layout.scene.annotationdefaults), sets
+            the default property values to use for elements of
+            layout.scene.annotations
         aspectmode
             If "cube", this scene's axes are drawn as a cube,
             regardless of the axes' ranges. If "data", this scene's
@@ -1444,8 +1454,10 @@ class Scene(BaseLayoutHierarchyType):
             plotly.graph_objs.layout.scene.Annotation instance or
             dict with compatible properties
         annotationdefaults
-            plotly.graph_objs.layout.scene.Annotation instance or
-            dict with compatible properties
+            When used in a template (as
+            layout.template.layout.scene.annotationdefaults), sets
+            the default property values to use for elements of
+            layout.scene.annotations
         aspectmode
             If "cube", this scene's axes are drawn as a cube,
             regardless of the axes' ranges. If "data", this scene's

@@ -58,8 +58,10 @@ class SlidersValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 plotly.graph_objs.layout.slider.Step instance
                 or dict with compatible properties
             stepdefaults
-                plotly.graph_objs.layout.slider.Step instance
-                or dict with compatible properties
+                When used in a template (as
+                layout.template.layout.slider.stepdefaults),
+                sets the default property values to use for
+                elements of layout.slider.steps
             templateitemname
                 Used to refer to a named item in this array in
                 the template. Named items from the template

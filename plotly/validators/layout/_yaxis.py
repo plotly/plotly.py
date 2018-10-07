@@ -308,8 +308,10 @@ class YAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 plotly.graph_objs.layout.yaxis.Tickformatstop
                 instance or dict with compatible properties
             tickformatstopdefaults
-                plotly.graph_objs.layout.yaxis.Tickformatstop
-                instance or dict with compatible properties
+                When used in a template (as layout.template.lay
+                out.yaxis.tickformatstopdefaults), sets the
+                default property values to use for elements of
+                layout.yaxis.tickformatstops
             ticklen
                 Sets the tick length (in px).
             tickmode

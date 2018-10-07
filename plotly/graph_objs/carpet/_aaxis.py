@@ -1240,6 +1240,11 @@ class Aaxis(BaseTraceHierarchyType):
     @property
     def tickformatstopdefaults(self):
         """
+        When used in a template (as
+        layout.template.data.carpet.aaxis.tickformatstopdefaults), sets
+        the default property values to use for elements of
+        carpet.aaxis.tickformatstops
+    
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
           - An instance of plotly.graph_objs.carpet.aaxis.Tickformatstop
@@ -1677,8 +1682,10 @@ class Aaxis(BaseTraceHierarchyType):
             plotly.graph_objs.carpet.aaxis.Tickformatstop instance
             or dict with compatible properties
         tickformatstopdefaults
-            plotly.graph_objs.carpet.aaxis.Tickformatstop instance
-            or dict with compatible properties
+            When used in a template (as layout.template.data.carpet
+            .aaxis.tickformatstopdefaults), sets the default
+            property values to use for elements of
+            carpet.aaxis.tickformatstops
         tickmode
 
         tickprefix
@@ -1932,8 +1939,10 @@ class Aaxis(BaseTraceHierarchyType):
             plotly.graph_objs.carpet.aaxis.Tickformatstop instance
             or dict with compatible properties
         tickformatstopdefaults
-            plotly.graph_objs.carpet.aaxis.Tickformatstop instance
-            or dict with compatible properties
+            When used in a template (as layout.template.data.carpet
+            .aaxis.tickformatstopdefaults), sets the default
+            property values to use for elements of
+            carpet.aaxis.tickformatstops
         tickmode
 
         tickprefix

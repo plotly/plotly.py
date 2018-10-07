@@ -30,8 +30,10 @@ class UpdatemenusValidator(
                 plotly.graph_objs.layout.updatemenu.Button
                 instance or dict with compatible properties
             buttondefaults
-                plotly.graph_objs.layout.updatemenu.Button
-                instance or dict with compatible properties
+                When used in a template (as layout.template.lay
+                out.updatemenu.buttondefaults), sets the
+                default property values to use for elements of
+                layout.updatemenu.buttons
             direction
                 Determines the direction in which the buttons
                 are laid out, whether in a dropdown menu or a

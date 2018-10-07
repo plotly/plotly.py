@@ -752,6 +752,10 @@ class ColorBar(BaseTraceHierarchyType):
     @property
     def tickformatstopdefaults(self):
         """
+        When used in a template (as layout.template.data.streamtube.col
+        orbar.tickformatstopdefaults), sets the default property values
+        to use for elements of streamtube.colorbar.tickformatstops
+    
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
           - An instance of plotly.graph_objs.streamtube.colorbar.Tickformatstop
@@ -1324,8 +1328,10 @@ class ColorBar(BaseTraceHierarchyType):
             plotly.graph_objs.streamtube.colorbar.Tickformatstop
             instance or dict with compatible properties
         tickformatstopdefaults
-            plotly.graph_objs.streamtube.colorbar.Tickformatstop
-            instance or dict with compatible properties
+            When used in a template (as layout.template.data.stream
+            tube.colorbar.tickformatstopdefaults), sets the default
+            property values to use for elements of
+            streamtube.colorbar.tickformatstops
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -1558,8 +1564,10 @@ class ColorBar(BaseTraceHierarchyType):
             plotly.graph_objs.streamtube.colorbar.Tickformatstop
             instance or dict with compatible properties
         tickformatstopdefaults
-            plotly.graph_objs.streamtube.colorbar.Tickformatstop
-            instance or dict with compatible properties
+            When used in a template (as layout.template.data.stream
+            tube.colorbar.tickformatstopdefaults), sets the default
+            property values to use for elements of
+            streamtube.colorbar.tickformatstops
         ticklen
             Sets the tick length (in px).
         tickmode
