@@ -33,7 +33,12 @@ class TemplatesConfig(object):
         self._templates[key] = self._validator.validate_coerce(value)
 
     def __delitem__(self, key):
+        # Remove template
         del self._templates[key]
+
+        # Check if we need to remove it as the default
+        if self._default == key:
+            self._default = None
 
     def keys(self):
         return self._templates.keys()
