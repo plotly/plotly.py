@@ -2107,6 +2107,7 @@ an instance of plotly.graph_objs.Histogram2dContour"""
             parent_name='histogram2dcontour',
             val='histogram2dcontour'
         )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

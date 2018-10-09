@@ -1660,6 +1660,7 @@ an instance of plotly.graph_objs.Heatmapgl"""
         self._validators['type'] = LiteralValidator(
             plotly_name='type', parent_name='heatmapgl', val='heatmapgl'
         )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

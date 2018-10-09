@@ -1078,6 +1078,7 @@ an instance of plotly.graph_objs.Parcoords"""
         self._validators['type'] = LiteralValidator(
             plotly_name='type', parent_name='parcoords', val='parcoords'
         )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

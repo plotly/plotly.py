@@ -1996,6 +1996,7 @@ an instance of plotly.graph_objs.Contourcarpet"""
             parent_name='contourcarpet',
             val='contourcarpet'
         )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

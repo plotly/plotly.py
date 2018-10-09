@@ -206,6 +206,7 @@ class BaseValidator(object):
         self.parent_name = parent_name
         self.plotly_name = plotly_name
         self.role = role
+        self.array_ok = False
 
     def description(self):
         """
@@ -321,6 +322,8 @@ class DataArrayValidator(BaseValidator):
     def __init__(self, plotly_name, parent_name, **kwargs):
         super(DataArrayValidator, self).__init__(
             plotly_name=plotly_name, parent_name=parent_name, **kwargs)
+
+        self.array_ok = True
 
     def description(self):
         return ("""\
@@ -1908,7 +1911,7 @@ class CompoundValidator(BaseValidator):
             v = self.data_class()
 
         elif isinstance(v, dict):
-            v = self.data_class(skip_invalid=skip_invalid, **v)
+            v = self.data_class(v, skip_invalid=skip_invalid)
 
         elif isinstance(v, self.data_class):
             # Copy object
@@ -1976,8 +1979,8 @@ class CompoundArrayValidator(BaseValidator):
                 if isinstance(v_el, self.data_class):
                     res.append(self.data_class(v_el))
                 elif isinstance(v_el, dict):
-                    res.append(self.data_class(skip_invalid=skip_invalid,
-                                               **v_el))
+                    res.append(self.data_class(v_el,
+                                               skip_invalid=skip_invalid))
                 else:
                     if skip_invalid:
                         res.append(self.data_class())

@@ -2284,6 +2284,7 @@ an instance of plotly.graph_objs.Mesh3d"""
         self._validators['type'] = LiteralValidator(
             plotly_name='type', parent_name='mesh3d', val='mesh3d'
         )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

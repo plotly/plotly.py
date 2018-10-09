@@ -1730,6 +1730,7 @@ an instance of plotly.graph_objs.Carpet"""
         self._validators['type'] = LiteralValidator(
             plotly_name='type', parent_name='carpet', val='carpet'
         )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

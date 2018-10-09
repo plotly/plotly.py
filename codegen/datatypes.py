@@ -286,7 +286,8 @@ if {name_prop} is not None else _v""")
         self._props['{lit_name}'] = {lit_val}
         self._validators['{lit_name}'] =\
 LiteralValidator(plotly_name='{lit_name}',\
-    parent_name='{lit_parent}', val={lit_val})""")
+    parent_name='{lit_parent}', val={lit_val})
+        arg.pop('{lit_name}', None)""")
 
     buffer.write(f"""
     

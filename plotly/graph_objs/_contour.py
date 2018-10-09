@@ -2094,6 +2094,7 @@ an instance of plotly.graph_objs.Contour"""
         self._validators['type'] = LiteralValidator(
             plotly_name='type', parent_name='contour', val='contour'
         )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

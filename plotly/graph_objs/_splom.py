@@ -1194,6 +1194,7 @@ an instance of plotly.graph_objs.Splom"""
         self._validators['type'] = LiteralValidator(
             plotly_name='type', parent_name='splom', val='splom'
         )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

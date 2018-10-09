@@ -1956,6 +1956,7 @@ an instance of plotly.graph_objs.Histogram2d"""
         self._validators['type'] = LiteralValidator(
             plotly_name='type', parent_name='histogram2d', val='histogram2d'
         )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

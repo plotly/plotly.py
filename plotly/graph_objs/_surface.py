@@ -1745,6 +1745,7 @@ an instance of plotly.graph_objs.Surface"""
         self._validators['type'] = LiteralValidator(
             plotly_name='type', parent_name='surface', val='surface'
         )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------
