@@ -1,9 +1,13 @@
+from math import gcd
+
 from plotly.validators.layout import TemplateValidator
+from plotly.graph_objs.layout import Template
 from _plotly_utils.basevalidators import (
     CompoundValidator, CompoundArrayValidator, is_array)
 
 import textwrap
 import copy
+from functools import reduce
 
 
 # Templates configuration class
@@ -125,6 +129,38 @@ Templates configuration
         ))
         return available
 
+    def merge_templates(self, *args):
+        if args:
+            return reduce(self._merge_2_templates, args)
+        else:
+            return Template()
+
+    def _merge_2_templates(self, template1, template2):
+        # Validate/copy input templates
+        result = self._validator.validate_coerce(template1)
+        other = self._validator.validate_coerce(template2)
+
+        # Cycle traces
+        for trace_type in result.data:
+            result_traces = result.data[trace_type]
+            other_traces = other.data[trace_type]
+
+            if result_traces and other_traces:
+                lcm = (len(result_traces) * len(other_traces) //
+                       gcd(len(result_traces), len(other_traces)))
+
+                # Cycle result traces
+                result.data[trace_type] = result_traces * (
+                        lcm // len(result_traces))
+
+                # Cycle other traces
+                other.data[trace_type] = other_traces * (
+                    lcm // len(other_traces))
+
+        # Perform update
+        result.update(other)
+
+        return result
 
 # Make config a singleton object
 # ------------------------------
@@ -195,7 +231,6 @@ def walk_push_to_template(fig_obj, template_obj, skip):
             except ValueError:
                 # Property cannot be set to None, move on.
                 pass
-
 
 
 def to_templated(fig, skip=('title', 'text')):

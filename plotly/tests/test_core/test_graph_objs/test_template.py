@@ -350,3 +350,94 @@ class TestToTemplated(TestCase):
 
         self.assertEqual(pio.to_json(templated_fig),
                          pio.to_json(expected_fig))
+
+
+class TestMergeTemplates(TestCase):
+
+    def setUp(self):
+        self.template1 = go.layout.Template(
+            layout={'font': {'size': 20, 'family': 'Rockwell'}},
+            data={
+                'scatter': [go.Scatter(line={'dash': 'solid'}),
+                            go.Scatter(line={'dash': 'dot'})],
+                'bar': [go.Bar(marker={'opacity': 0.7}),
+                        go.Bar(marker={'opacity': 0.4})],
+                'parcoords': [
+                    go.Parcoords(dimensiondefaults={'multiselect': True})
+                ]
+                # no 'scattergl'
+            }
+        )
+
+        self.template2 = go.layout.Template(
+            layout={'paper_bgcolor': 'green',
+                    'font': {'size': 14, 'color': 'yellow'}},
+            data={
+                'scatter': [go.Scatter(marker={'color': 'red'}),
+                            go.Scatter(marker={'color': 'green'}),
+                            go.Scatter(marker={'color': 'blue'})],
+                # no 'bar'
+                'parcoords': [
+                    go.Parcoords(line={'colorscale': 'Viridis'}),
+                    go.Parcoords(line={'colorscale': 'Blues'})
+                ],
+                'scattergl': [go.Scattergl(hoverinfo='x+y')]
+            }
+        )
+
+        self.expected1_2 = go.layout.Template(
+            layout={'paper_bgcolor': 'green',
+                    'font': {'size': 14,
+                             'color': 'yellow',
+                             'family': 'Rockwell'}},
+            data={
+                'scatter': [
+                    go.Scatter(marker={'color': 'red'},
+                               line={'dash': 'solid'}),
+                    go.Scatter(marker={'color': 'green'},
+                               line={'dash': 'dot'}),
+                    go.Scatter(marker={'color': 'blue'},
+                               line={'dash': 'solid'}),
+                    go.Scatter(marker={'color': 'red'},
+                               line={'dash': 'dot'}),
+                    go.Scatter(marker={'color': 'green'},
+                               line={'dash': 'solid'}),
+                    go.Scatter(marker={'color': 'blue'},
+                               line={'dash': 'dot'}),
+                ],
+                'bar': [go.Bar(marker={'opacity': 0.7}),
+                        go.Bar(marker={'opacity': 0.4})],
+                'parcoords': [
+                    go.Parcoords(dimensiondefaults={'multiselect': True},
+                                 line={'colorscale': 'Viridis'}),
+                    go.Parcoords(dimensiondefaults={'multiselect': True},
+                                 line={'colorscale': 'Blues'})
+                ],
+                'scattergl': [go.Scattergl(hoverinfo='x+y')]
+            }
+        )
+
+    def test_merge_0(self):
+        self.assertEqual(pio.templates.merge_templates(),
+                         go.layout.Template())
+
+    def test_merge_1(self):
+        self.assertEqual(pio.templates.merge_templates(self.template1),
+                         self.template1)
+
+    def test_merge_2(self):
+        result = pio.templates.merge_templates(self.template1, self.template2)
+        expected = self.expected1_2
+
+        self.assertEqual(result, expected)
+
+    def test_merge_3(self):
+        template3 = go.layout.Template(layout={'margin': {'l': 0, 'r': 0}})
+        result = pio.templates.merge_templates(
+            self.template1,
+            self.template2,
+            template3)
+
+        expected = self.expected1_2
+        expected.update(template3)
+        self.assertEqual(result, expected)
