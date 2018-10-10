@@ -94,16 +94,12 @@ class TemplatesConfig(object):
 
     @default.setter
     def default(self, value):
-        if value is not None and value not in self._templates:
-            raise ValueError("""
-Cannot set default template to {value}
-because there is no template registered with this name.
 
-    Available templates:
-{available}""".format(
-                value=repr(value),
-                available=self._available_templates_str()))
-
+        # Validate value
+        # Could be a Template object, the key of a registered template,
+        # Or a string containing the names of multiple templates joined on
+        # '+' characters
+        self._validator.validate_coerce(value)
         self._default = value
 
     def __repr__(self):
@@ -161,6 +157,7 @@ Templates configuration
         result.update(other)
 
         return result
+
 
 # Make config a singleton object
 # ------------------------------

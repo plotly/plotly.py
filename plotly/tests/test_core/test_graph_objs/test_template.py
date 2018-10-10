@@ -1,4 +1,6 @@
 from __future__ import absolute_import
+
+import copy
 from unittest import TestCase
 from nose.tools import raises
 
@@ -355,6 +357,7 @@ class TestToTemplated(TestCase):
 class TestMergeTemplates(TestCase):
 
     def setUp(self):
+
         self.template1 = go.layout.Template(
             layout={'font': {'size': 20, 'family': 'Rockwell'}},
             data={
@@ -368,6 +371,8 @@ class TestMergeTemplates(TestCase):
                 # no 'scattergl'
             }
         )
+        pio.templates['template1'] = self.template1
+        self.template1_orig = copy.deepcopy(self.template1)
 
         self.template2 = go.layout.Template(
             layout={'paper_bgcolor': 'green',
@@ -384,6 +389,8 @@ class TestMergeTemplates(TestCase):
                 'scattergl': [go.Scattergl(hoverinfo='x+y')]
             }
         )
+        pio.templates['template2'] = self.template2
+        self.template2_orig = copy.deepcopy(self.template2)
 
         self.expected1_2 = go.layout.Template(
             layout={'paper_bgcolor': 'green',
@@ -431,6 +438,10 @@ class TestMergeTemplates(TestCase):
 
         self.assertEqual(result, expected)
 
+        # Make sure input templates weren't modified
+        self.assertEqual(self.template1, self.template1_orig)
+        self.assertEqual(self.template2, self.template2_orig)
+
     def test_merge_3(self):
         template3 = go.layout.Template(layout={'margin': {'l': 0, 'r': 0}})
         result = pio.templates.merge_templates(
@@ -441,3 +452,19 @@ class TestMergeTemplates(TestCase):
         expected = self.expected1_2
         expected.update(template3)
         self.assertEqual(result, expected)
+
+        # Make sure input templates weren't modified
+        self.assertEqual(self.template1, self.template1_orig)
+        self.assertEqual(self.template2, self.template2_orig)
+
+    def test_merge_by_flaglist_string(self):
+        layout = go.Layout()
+        layout.template = 'template1+template2'
+        result = layout.template
+        expected = self.expected1_2
+
+        self.assertEqual(result, expected)
+
+        # Make sure input templates weren't modified
+        self.assertEqual(self.template1, self.template1_orig)
+        self.assertEqual(self.template2, self.template2_orig)

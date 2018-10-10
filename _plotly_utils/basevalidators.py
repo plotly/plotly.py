@@ -2148,9 +2148,22 @@ class BaseTemplateValidator(CompoundValidator):
     def validate_coerce(self, v, skip_invalid=False):
         import plotly.io as pio
 
+        # TODO: add custom description that includes available templates
+        # Move _templates to _plotly_utils so that it's available during
+        # codegen
+
         try:
+            # Check if v is a template identifier
+            # (could be any hashable object)
             if v in pio.templates:
-                return pio.templates[v]
+                return copy.deepcopy(pio.templates[v])
+            # Otherwise, if v is a string, check to see if it consists of
+            # multiple template names joined on '+' characters
+            elif isinstance(v, string_types):
+                template_names = v.split('+')
+                if all([name in pio.templates for name in template_names]):
+                    return pio.templates.merge_templates(*template_names)
+
         except TypeError:
             # v is un-hashable
             pass
