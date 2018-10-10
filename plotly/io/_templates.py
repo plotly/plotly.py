@@ -1,5 +1,7 @@
 from math import gcd
 
+from plotly.basedatatypes import BaseFigure
+from plotly.graph_objs import Figure
 from plotly.validators.layout import TemplateValidator
 from plotly.graph_objs.layout import Template
 from _plotly_utils.basevalidators import (
@@ -126,12 +128,52 @@ Templates configuration
         return available
 
     def merge_templates(self, *args):
+        """
+        Merge a collection of templates into a single combined template.
+        Templates are process from left to right so if multiple templates
+        specify the same propery, the right-most template will take
+        precedence.
+
+        Parameters
+        ----------
+        args: list of Template
+            Zero or more template objects (or dicts with compatible properties)
+
+        Returns
+        -------
+        template:
+            A combined template object
+
+        Examples
+        --------
+        >>> pio.templates.merge_templates(
+        ...     go.layout.Template(layout={'font': {'size': 20}}),
+        ...     go.layout.Template(data={'scatter': [{'mode': 'markers'}]}),
+        ...     go.layout.Template(layout={'font': {'family': 'Courier'}}))
+        layout.Template({
+            'data': {'scatter': [{'mode': 'markers', 'type': 'scatter'}]},
+            'layout': {'font': {'family': 'Courier', 'size': 20}}
+        })
+        """
         if args:
             return reduce(self._merge_2_templates, args)
         else:
             return Template()
 
     def _merge_2_templates(self, template1, template2):
+        """
+        Helper function for merge_templates that merges exactly two templates
+
+        Parameters
+        ----------
+        template1: Template
+        template2: Template
+
+        Returns
+        -------
+        Template:
+            merged template
+        """
         # Validate/copy input templates
         result = self._validator.validate_coerce(template1)
         other = self._validator.validate_coerce(template2)
@@ -169,6 +211,7 @@ del TemplatesConfig
 # ------------------
 def walk_push_to_template(fig_obj, template_obj, skip):
     """
+    Move style properties from fig_obj to template_obj.
 
     Parameters
     ----------
@@ -232,18 +275,96 @@ def walk_push_to_template(fig_obj, template_obj, skip):
 
 def to_templated(fig, skip=('title', 'text')):
     """
+    Return a copy of a figure where all styling properties have been moved
+    into the figure's template.  The template property of the resulting figure
+    may then be used to set the default styling of other figures.
 
     Parameters
     ----------
-    fig: plotly.basedatatypes.BaseFigure
+    fig
+        Figure object or dict representing a figure
     skip
-        collection of names of properties to skip when moving properties to
-        the template.
+        A collection of names of properties to skip when moving properties to
+        the template. Defaults to ('title', 'text') so that the text
+        of figure titles, axis titles, and annotations does not become part of
+        the template
+
+    Examples
+    --------
+    Imports
+    >>> import plotly.graph_objs as go
+    >>> import plotly.io as pio
+
+    Construct a figure with large courier text
+    >>> fig = go.Figure(layout={'title': 'Figure Title',
+    ...                         'font': {'size': 20, 'family': 'Courier'}})
+    >>> fig
+    Figure({
+        'data': [],
+        'layout': {'title': 'Figure Title',
+                   'font': {'family': 'Courier', 'size': 20}}
+    })
+
+    Convert to a figure with a template. Note how the 'font' properties have
+    been moved into the template property.
+    >>> templated_fig = pio.to_templated(fig)
+    >>> templated_fig
+    Figure({
+        'data': [],
+        'layout': {'title': 'Figure Title',
+                   'template': {'layout': {'font': {'family': 'Courier',
+                                                    'size': 20}}}}
+    })
+
+    Next create a new figure with this template
+
+    >>> fig2 = go.Figure(layout={
+    ...     'title': 'Figure 2 Title',
+    ...     'template': templated_fig.layout.template})
+    >>> fig2
+    Figure({
+        'data': [],
+        'layout': {'title': 'Figure 2 Title',
+                   'template': {'layout': {'font': {'family': 'Courier',
+                                                    'size': 20}}}}
+    })
+
+    The default font in fig2 will now be size 20 Courier.
+
+    Next, register as a named template...
+    >>> pio.templates['large_courier'] = templated_fig.layout.template
+
+    and specify this template by name when constructing a figure.
+
+    >>> go.Figure(layout={
+    ...     'title': 'Figure 3 Title',
+    ...     'template': 'large_courier'})
+    Figure({
+        'data': [],
+        'layout': {'title': 'Figure 3 Title',
+                   'template': {'layout': {'font': {'family': 'Courier',
+                                                    'size': 20}}}}
+    })
+
+    Finally, set this as the default template to be applied to all new figures
+
+    >>> pio.templates.default = 'large_courier'
+    >>> go.Figure(layout={'title': 'Figure 4 Title'})
+    Figure({
+        'data': [],
+        'layout': {'title': 'Figure 4 Title',
+                   'template': {'layout': {'font': {'family': 'Courier',
+                                                    'size': 20}}}}
+    })
 
     Returns
     -------
-
+    figure
     """
+
+    # process fig
+    if not isinstance(fig, BaseFigure):
+        fig = Figure(fig)
 
     # Process skip
     if not skip:
@@ -254,7 +375,7 @@ def to_templated(fig, skip=('title', 'text')):
     # Always skip uids
     skip.add('uid')
 
-    # Initialize templated figure with copy of input current figure
+    # Initialize templated figure with deep copy of input figure
     templated_fig = copy.deepcopy(fig)
 
     # Initialize template object
