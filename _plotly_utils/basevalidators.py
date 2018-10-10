@@ -2145,12 +2145,23 @@ class BaseTemplateValidator(CompoundValidator):
             **kwargs
         )
 
+    def description(self):
+        compound_description = super(BaseTemplateValidator, self).description()
+        compound_description += """
+      - The name of a registered template where current registered templates
+        are stored in the plotly.io.templates configuration object. The names
+        of all registered templates can be retrieved with:
+            >>> import plotly.io as pio
+            >>> list(pio.templates)
+      - A string containing multiple registered template names, joined on '+'
+        characters (e.g. 'template1+template2'). In this case the resulting
+        template is computed by merging together the collection of registered 
+        templates"""
+
+        return compound_description
+
     def validate_coerce(self, v, skip_invalid=False):
         import plotly.io as pio
-
-        # TODO: add custom description that includes available templates
-        # Move _templates to _plotly_utils so that it's available during
-        # codegen
 
         try:
             # Check if v is a template identifier
