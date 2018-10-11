@@ -8,8 +8,17 @@ from _plotly_utils.basevalidators import (
     CompoundValidator, CompoundArrayValidator, is_array)
 
 import textwrap
+import pkgutil
+
 import copy
+import os
+import json
 from functools import reduce
+
+
+# Create Lazy sentinal object to indicate that a template should be loaded
+# on-demand from package_data
+Lazy = object()
 
 
 # Templates configuration class
@@ -22,6 +31,12 @@ class TemplatesConfig(object):
 
         # Initialize properties dict
         self._templates = {}
+
+        # Initialize built-in templates
+        default_templates = ['ggplot2']
+        for template_name in default_templates:
+            self._templates[template_name] = Lazy
+
         self._validator = TemplateValidator()
         self._default = None
 
@@ -37,7 +52,16 @@ class TemplatesConfig(object):
         return iter(self._templates)
 
     def __getitem__(self, item):
-        return self._templates[item]
+        template = self._templates[item]
+        if template is Lazy:
+            # Load template from package data
+            path = os.path.join('package_data', 'templates', item + '.json')
+            template_str = pkgutil.get_data('plotly', path).decode('utf-8')
+            template_dict = json.loads(template_str)
+            template = Template(template_dict)
+            self._templates[item] = template
+
+        return template
 
     def __setitem__(self, key, value):
         self._templates[key] = self._validator.validate_coerce(value)
