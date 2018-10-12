@@ -1,10 +1,12 @@
-from templategen.ggplot2 import generate_ggplot2_template
 from plotly.utils import PlotlyJSONEncoder
 import json
+from templategen.definitions import builders
 
 if __name__ == '__main__':
 
-    # ggplot2
-    template = generate_ggplot2_template()
-    with open('plotly/package_data/templates/ggplot2.json', 'w') as f:
-        plotly_schema = json.dump(template, f, cls=PlotlyJSONEncoder)
+    for template_name in builders:
+        template = builders[template_name]()
+
+        with open('plotly/package_data/templates/%s.json' % template_name,
+                  'w') as f:
+            plotly_schema = json.dump(template, f, cls=PlotlyJSONEncoder)

@@ -33,7 +33,8 @@ class TemplatesConfig(object):
         self._templates = {}
 
         # Initialize built-in templates
-        default_templates = ['ggplot2']
+        default_templates = ['ggplot2', 'seaborn']
+
         for template_name in default_templates:
             self._templates[template_name] = Lazy
 
