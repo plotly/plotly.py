@@ -1,3 +1,4 @@
+from plotly.graph_objs.layout import Template
 from templategen.utils import initialize_template
 from .utils.colors import colors
 import colorcet as cc
@@ -461,3 +462,40 @@ def plotly_dark():
 
 
 builders['plotly_dark'] = plotly_dark
+
+
+def presentation():
+    """
+    Template the increases the size of text and markers/lines for certain
+    trace types
+    """
+
+    # Create blank template
+    template = Template()
+
+    # Increase global font size by 1.5x (12->18)
+    template.layout.font.size = 18
+
+    # Set automargin to true in case we need to adjust margins for
+    # larger font size
+    template.layout.xaxis.automargin = True
+    template.layout.yaxis.automargin = True
+
+    # Increase scatter markers and lines by 1.5x
+    opts = {'marker': {'size': 9}, 'line': {'width': 3}}
+    template.data.scatter = [opts]
+    template.data.scattergl = [opts]
+    template.data.scatter3d = [opts]
+    template.data.scatterpolar = [opts]
+    template.data.scatterpolargl = [opts]
+    template.data.scatterternary = [opts]
+    template.data.scattergeo = [opts]
+
+    # Increase default height of table cells
+    template.data.table = [{'header': {'height': 36},
+                            'cells': {'height': 30}}]
+
+    return template
+
+
+builders['presentation'] = presentation
