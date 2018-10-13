@@ -194,9 +194,10 @@ plotly_clrs = {
     'Sienna': '#EF553B'
 }
 
+bmw_subset = cc.b_linear_bmw_5_95_c86[50:230]
 linear_bmw_5_95_c86_n256 = [
-    [i/255, clr] for i, clr in enumerate(cc.b_linear_bmw_5_95_c86)
-    if i % 16 == 0 or i == 255]
+    [i/(len(bmw_subset)-1), clr] for i, clr in enumerate(bmw_subset)
+    if i % 16 == 0 or i == (len(bmw_subset)-1)]
 
 jupyterlab_output_clr = 'rgb(17,17,17)'
 

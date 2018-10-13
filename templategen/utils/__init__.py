@@ -38,6 +38,7 @@ def set_all_colorscales(template, colorscale):
             parent = trace[parent_path[1:]]
             if 'colorscale' in parent:
                 parent.colorscale = colorscale
+                parent.autocolorscale = False
 
 
 def set_all_colorbars(template, colorbar):
