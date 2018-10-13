@@ -34,7 +34,7 @@ class TemplatesConfig(object):
 
         # Initialize built-in templates
         default_templates = ['ggplot2', 'seaborn',
-                             'plotly_light', 'plotly_light2',
+                             'plotly', 'plotly_white',
                              'plotly_dark']
 
         for template_name in default_templates:

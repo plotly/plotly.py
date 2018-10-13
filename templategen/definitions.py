@@ -195,12 +195,13 @@ plotly_clrs = {
 }
 
 linear_bmw_5_95_c86_n256 = [
-    [i/255, clr] for i, clr in enumerate(cc.b_linear_bmw_5_95_c86)]
+    [i/255, clr] for i, clr in enumerate(cc.b_linear_bmw_5_95_c86)
+    if i % 16 == 0 or i == 255]
 
 jupyterlab_output_clr = 'rgb(17,17,17)'
 
 
-def plotly_light():
+def plotly():
     # Define colors
     # -------------
     colorscale = linear_bmw_5_95_c86_n256
@@ -278,10 +279,10 @@ def plotly_light():
     return template
 
 
-builders['plotly_light'] = plotly_light
+builders['plotly'] = plotly
 
 
-def plotly_light2():
+def plotly_white():
     # Define colors
     # -------------
     colorscale = linear_bmw_5_95_c86_n256
@@ -367,7 +368,7 @@ def plotly_light2():
     return template
 
 
-builders['plotly_light2'] = plotly_light2
+builders['plotly_white'] = plotly_white
 
 
 def plotly_dark():
