@@ -127,6 +127,7 @@ def initialize_template(annotation_defaults,
     template.layout.annotationdefaults = annotation_defaults
 
     # Geo
+    template.layout.geo.bgcolor = paper_clr
     template.layout.geo.landcolor = panel_background_clr
     template.layout.geo.subunitcolor = panel_grid_clr
     template.layout.geo.showland = True
