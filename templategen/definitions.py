@@ -19,7 +19,7 @@ def ggplot2():
     colorscale = [[0, 'rgb(20,44,66)'], [1, 'rgb(90,179,244)']]
 
     # Hue cycle for 3 categories
-    colorway = ['#F8766D', '#00BA38', '#619CFF']
+    colorway = ["#F8766D", "#A3A500", "#00BF7D", "#00B0F6", "#E76BF3"]
 
     # Set colorbar_common
     # Note the light inward ticks in
