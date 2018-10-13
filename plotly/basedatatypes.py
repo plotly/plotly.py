@@ -371,8 +371,13 @@ class BaseFigure(object):
         Customize Figure representation when displayed in the
         terminal/notebook
         """
+        props = self.to_plotly_json()
+        template_props = props.get('layout', {}).get('template', {})
+        if template_props:
+            props['layout']['template'] = '...'
+
         repr_str = BasePlotlyType._build_repr_for_class(
-            props=self.to_plotly_json(),
+            props=props,
             class_name=self.__class__.__name__)
 
         return repr_str
