@@ -251,7 +251,7 @@ def plotly_light():
     template = initialize_template(
         paper_clr='white',
         font_clr=plotly_clrs['Rhino Core'],
-        panel_background_clr=plotly_clrs['Rhino Light 2'],
+        panel_background_clr=plotly_clrs['Rhino Light 1'],
         panel_grid_clr='white',
         axis_ticks_clr=plotly_clrs['Rhino Core'],
         zerolinecolor_clr='white',
@@ -399,91 +399,6 @@ def plotly_dark():
     # Common axis common properties
     axis_common = dict(
         showgrid=True,
-        gridcolor=plotly_clrs['Rhino Medium 2'],
-        linecolor=plotly_clrs['Rhino Medium 2'],
-        ticks='')
-
-    # semi-transparent black and no outline
-    annotation_clr = plotly_clrs['Rhino Dark']
-    shape_defaults = dict(
-        fillcolor=annotation_clr,
-        line={'width': 0},
-        opacity=0.4)
-
-    # Remove arrow head and make line thinner
-    annotation_defaults = {
-        'arrowcolor': annotation_clr,
-        'arrowhead': 0,
-        'arrowwidth': 1
-
-    }
-
-    template = initialize_template(
-        paper_clr=plotly_clrs['Rhino Core'],
-        font_clr=plotly_clrs['Rhino Light 4'],
-        panel_background_clr=plotly_clrs['Rhino Light 2'],
-        panel_grid_clr=plotly_clrs['Rhino Core'],
-        axis_ticks_clr=plotly_clrs['Rhino Core'],
-        zerolinecolor_clr=plotly_clrs['Rhino Medium 2'],
-        table_cell_clr=plotly_clrs['Rhino Light 2'],
-        table_header_clr=plotly_clrs['Rhino Medium 2'],
-        table_line_clr=plotly_clrs['Rhino Medium 2'],
-        colorway=colorway,
-        colorbar_common=colorbar_common,
-        colorscale=colorscale,
-        axis_common=axis_common,
-        annotation_defaults=annotation_defaults,
-        shape_defaults=shape_defaults
-    )
-
-    # disable vertical grid lines in 2D cartesian x-axis
-    template.layout.xaxis.showgrid = False
-
-    # Increase grid width for 3d plots
-    template.layout.scene.xaxis.gridwidth = 2
-    template.layout.scene.yaxis.gridwidth = 2
-    template.layout.scene.zaxis.gridwidth = 2
-
-    # Set table font colors back to dark
-    template.data.table[0].header.font.color = plotly_clrs['Rhino Core']
-    template.data.table[0].cells.font.color = plotly_clrs['Rhino Core']
-
-    # Set table header font color to white
-    return template
-
-
-builders['plotly_dark'] = plotly_dark
-
-
-def plotly_dark2():
-    # Define colors
-    # -------------
-    colorscale = linear_bmw_5_95_c86_n256
-
-    # Hue cycle for 3 categories
-    #
-    # Created with:
-    # import seaborn as sns
-    # sns.set()
-    # [f'rgb({int(r*255)},{int(g*255)},{int(b*255)})'
-    #  for r, g, b in sns.color_palette()]
-    colorway = [
-        plotly_clrs['Cornflower'],
-        plotly_clrs['Sienna'],
-        plotly_clrs['Emerald'],
-        plotly_clrs['Lavender Shade'],
-        plotly_clrs['Aqua Shade'],
-        plotly_clrs['Lavender']
-    ]
-
-    # Set colorbar_common
-    colorbar_common = dict(
-        outlinewidth=0,
-        ticks='')
-
-    # Common axis common properties
-    axis_common = dict(
-        showgrid=True,
         gridcolor=plotly_clrs['Rhino Dark'],
         linecolor=plotly_clrs['Rhino Dark'],
         ticks='')
@@ -543,4 +458,4 @@ def plotly_dark2():
     return template
 
 
-builders['plotly_dark2'] = plotly_dark2
+builders['plotly_dark'] = plotly_dark
