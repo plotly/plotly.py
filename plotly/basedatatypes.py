@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 import collections
 import re
 import six
@@ -19,7 +21,6 @@ from .callbacks import (Points, BoxSelector, LassoSelector,
                         InputDeviceState)
 from .utils import ElidedPrettyPrinter
 from .validators import (DataValidator, LayoutValidator, FramesValidator)
-
 
 # Optional imports
 # ----------------
