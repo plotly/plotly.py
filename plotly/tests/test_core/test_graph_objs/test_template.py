@@ -161,7 +161,7 @@ class TemplateTest(TestCase):
         self.assertFalse(42 in pio.templates)
 
     def test_template_iter(self):
-        self.assertEqual(set(pio.templates), {'test_template'})
+        self.assertIn('test_template', set(pio.templates))
 
 
 class TestToTemplated(TestCase):

@@ -1,5 +1,3 @@
-from math import gcd
-
 from plotly.basedatatypes import BaseFigure
 from plotly.graph_objs import Figure
 from plotly.validators.layout import TemplateValidator
@@ -15,6 +13,11 @@ import os
 import json
 from functools import reduce
 
+try:
+    from math import gcd
+except ImportError:
+    # Python 2
+    from fractions import gcd
 
 # Create Lazy sentinal object to indicate that a template should be loaded
 # on-demand from package_data
