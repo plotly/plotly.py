@@ -499,3 +499,21 @@ def presentation():
 
 
 builders['presentation'] = presentation
+
+
+def xgrid():
+    """
+    Tempalate to enable x-grid by default (this is not enabled by defualt in
+    the plotly_* templates)
+    Returns
+    -------
+
+    """
+    # Create blank template
+    template = Template()
+    template.layout.xaxis.showgrid = True
+
+    return template
+
+
+builders['xgrid'] = xgrid
