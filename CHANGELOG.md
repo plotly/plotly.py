@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.3.1] - Unreleased
+- `plotly.figure_factory.utils.validate_dataframe` and `plotly.figure_factory.utils.validate_index` now do not produce error when validating `pandas.DataFrames` and `pandas.Series` with any index.
+
 ## [3.3.0] - 2018-09-28
 
 ### Updated
@@ -311,7 +314,6 @@ Please see the [migration guid](migration-guide.md) for a full list of the chang
 
 ## [2.5.0] - 2018-03-12
 ### Fixed
-- `plotly.figure_factory.utils.validate_dataframe` and `plotly.figure_factory.utils.validate_index` now do not produce error when validating `pandas.DataFrames` and `pandas.Series` with any index.
 - `import plotly.figure_factory` does not fail if `pandas` is not installed. See  https://github.com/plotly/plotly.py/pull/958
 ### Added
 - New parameter `fill_percent` to the `.insert` method for the dashboards API. You can now insert a box into the dashboard layout and specify what proportion of the original container box it will occupy. Run `help(plotly.dashboard_objs.Dashboard.insert)` for more information on `fill_percent`.
