@@ -12,10 +12,11 @@ from __future__ import absolute_import
 import warnings
 
 import six
+import copy
 
 from plotly import exceptions, optional_imports, session, utils
 from plotly.files import (CONFIG_FILE, CREDENTIALS_FILE, FILE_CONTENT,
-                          check_file_permissions)
+                          ensure_writable_plotly_dir)
 
 DEFAULT_PLOTLY_COLORS = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
                          'rgb(44, 160, 44)', 'rgb(214, 39, 40)',
@@ -57,7 +58,6 @@ def warning_on_one_line(message, category, filename, lineno,
 warnings.formatwarning = warning_on_one_line
 
 ipython_core_display = optional_imports.get_module('IPython.core.display')
-matplotlylib = optional_imports.get_module('plotly.matplotlylib')
 sage_salvus = optional_imports.get_module('sage_salvus')
 
 
@@ -79,7 +79,7 @@ def ensure_local_plotly_files():
     If the config or credential files aren't filled out, then write them
     to the disk.
     """
-    if check_file_permissions():
+    if ensure_writable_plotly_dir():
         for fn in [CREDENTIALS_FILE, CONFIG_FILE]:
             utils.ensure_file_exists(fn)
             contents = utils.load_json_dict(fn)
@@ -92,9 +92,9 @@ def ensure_local_plotly_files():
             for key in contents_keys:
                 if key not in FILE_CONTENT[fn]:
                     del contents[key]
-            # save only if contents has changed. 
+            # save only if contents has changed.
             # This is to avoid .credentials or .config file to be overwritten randomly,
-            # which we constantly keep experiencing 
+            # which we constantly keep experiencing
             # (sync issues? the file might be locked for writing by other process in file._permissions)
             if contents_orig.keys() != contents.keys():
                 utils.save_json_dict(fn, contents)
@@ -125,7 +125,7 @@ def set_credentials_file(username=None,
     :param (str) proxy_password: The pw associated with your Proxy un
 
     """
-    if not check_file_permissions():
+    if not ensure_writable_plotly_dir():
         raise exceptions.PlotlyError("You don't have proper file permissions "
                                      "to run this function.")
     ensure_local_plotly_files()  # make sure what's there is OK
@@ -153,11 +153,13 @@ def get_credentials_file(*args):
         get_credentials_file('username')
 
     """
-    if check_file_permissions():
-        ensure_local_plotly_files()  # make sure what's there is OK
-        return utils.load_json_dict(CREDENTIALS_FILE, *args)
-    else:
-        return FILE_CONTENT[CREDENTIALS_FILE]
+    # Read credentials from file if possible
+    credentials = utils.load_json_dict(CREDENTIALS_FILE, *args)
+    if not credentials:
+        # Credentials could not be read, use defaults
+        credentials = copy.copy(FILE_CONTENT[CREDENTIALS_FILE])
+
+    return credentials
 
 
 def reset_credentials_file():
@@ -186,12 +188,13 @@ def set_config_file(plotly_domain=None,
     :param (bool) world_readable: True = public, False = private
 
     """
-    if not check_file_permissions():
+    if not ensure_writable_plotly_dir():
         raise exceptions.PlotlyError("You don't have proper file permissions "
                                      "to run this function.")
     ensure_local_plotly_files()  # make sure what's there is OK
     utils.validate_world_readable_and_sharing_settings({
         'sharing': sharing, 'world_readable': world_readable})
+
     settings = get_config_file()
     if isinstance(plotly_domain, six.string_types):
         settings['plotly_domain'] = plotly_domain
@@ -218,6 +221,11 @@ def set_config_file(plotly_domain=None,
     elif auto_open is not None:
         raise TypeError('auto_open should be a boolean')
 
+    # validate plotly_domain and plotly_api_domain
+    utils.validate_plotly_domains(
+        {'plotly_domain': plotly_domain, 'plotly_api_domain': plotly_api_domain}
+    )
+
     if isinstance(world_readable, bool):
         settings['world_readable'] = world_readable
         settings.pop('sharing')
@@ -242,11 +250,13 @@ def get_config_file(*args):
         get_config_file('plotly_domain')
 
     """
-    if check_file_permissions():
-        ensure_local_plotly_files()  # make sure what's there is OK
-        return utils.load_json_dict(CONFIG_FILE, *args)
-    else:
-        return FILE_CONTENT[CONFIG_FILE]
+    # Read config from file if possible
+    config = utils.load_json_dict(CONFIG_FILE, *args)
+    if not config:
+        # Config could not be read, use defaults
+        config = copy.copy(FILE_CONTENT[CONFIG_FILE])
+
+    return config
 
 
 def reset_config_file():
@@ -426,13 +436,12 @@ def mpl_to_plotly(fig, resize=False, strip_style=False, verbose=False):
     this step manually by NOT running this fuction and entereing the following:
 
     ===========================================================================
-    from mplexporter import Exporter
-    from mplexporter.renderers import PlotlyRenderer
+    from plotly.matplotlylib import mplexporter, PlotlyRenderer
 
     # create an mpl figure and store it under a varialble 'fig'
 
     renderer = PlotlyRenderer()
-    exporter = Exporter(renderer)
+    exporter = mplexporter.Exporter(renderer)
     exporter.run(fig)
     ===========================================================================
 
@@ -454,6 +463,7 @@ def mpl_to_plotly(fig, resize=False, strip_style=False, verbose=False):
     {plotly_domain}/python/getting-started
 
     """
+    matplotlylib = optional_imports.get_module('plotly.matplotlylib')
     if matplotlylib:
         renderer = matplotlylib.PlotlyRenderer()
         matplotlylib.Exporter(renderer).run(fig)
@@ -562,9 +572,9 @@ def get_subplots(rows=1, columns=1, print_grid=False, **kwargs):
             y_start = (plot_height + vertical_spacing) * rrr
             y_end = y_start + plot_height
 
-            xaxis = graph_objs.XAxis(domain=[x_start, x_end], anchor=x_anchor)
+            xaxis = dict(domain=[x_start, x_end], anchor=x_anchor)
             fig['layout'][xaxis_name] = xaxis
-            yaxis = graph_objs.YAxis(domain=[y_start, y_end], anchor=y_anchor)
+            yaxis = dict(domain=[y_start, y_end], anchor=y_anchor)
             fig['layout'][yaxis_name] = yaxis
             plot_num += 1
 
@@ -1074,7 +1084,11 @@ def make_subplots(rows=1, cols=1,
     # Function pasting x/y domains in layout object (2d case)
     def _add_domain(layout, x_or_y, label, domain, anchor, position):
         name = label[0] + 'axis' + label[1:]
-        axis = {'domain': domain}
+
+        # Clamp domain elements between [0, 1].
+        # This is only needed to combat numerical precision errors
+        # See GH1031
+        axis = {'domain': [max(0.0, domain[0]), min(1.0, domain[1])]}
         if anchor:
             axis['anchor'] = anchor
         if isinstance(position, float):
@@ -1084,7 +1098,9 @@ def make_subplots(rows=1, cols=1,
 
     # Function pasting x/y domains in layout object (3d case)
     def _add_domain_is_3d(layout, s_label, x_domain, y_domain):
-        scene = graph_objs.Scene(domain={'x': x_domain, 'y': y_domain})
+        scene = dict(
+            domain={'x': [max(0.0, x_domain[0]), min(1.0, x_domain[1])],
+                    'y': [max(0.0, y_domain[0]), min(1.0, y_domain[1])]})
         layout[s_label] = scene
 
     x_cnt = y_cnt = s_cnt = 1  # subplot axis/scene counters
@@ -1333,7 +1349,7 @@ def make_subplots(rows=1, cols=1,
                                 'yref': 'paper',
                                 'text': subplot_titles[index],
                                 'showarrow': False,
-                                'font': graph_objs.Font(size=16),
+                                'font': dict(size=16),
                                 'xanchor': 'center',
                                 'yanchor': 'bottom'
                                 })
@@ -1351,11 +1367,12 @@ def make_subplots(rows=1, cols=1,
     return fig
 
 
-def get_valid_graph_obj(obj, obj_type=None):
-    """Returns a new graph object that won't raise.
+def get_graph_obj(obj, obj_type=None):
+    """Returns a new graph object.
 
-    CAREFUL: this will *silently* strip out invalid pieces of the object.
-
+    OLD FUNCTION: this will *silently* strip out invalid pieces of the object.
+    NEW FUNCTION: no striping of invalid pieces anymore - only raises error
+        on unrecognized graph_objs
     """
     # TODO: Deprecate or move. #283
     from plotly.graph_objs import graph_objs
@@ -1365,7 +1382,7 @@ def get_valid_graph_obj(obj, obj_type=None):
         raise exceptions.PlotlyError(
             "'{}' is not a recognized graph_obj.".format(obj_type)
         )
-    return cls(obj, _raise=False)
+    return cls(obj)
 
 
 def validate(obj, obj_type):
@@ -1385,7 +1402,8 @@ def validate(obj, obj_type):
 
     try:
         cls = getattr(graph_objs, obj_type)
-    except AttributeError:
+    #except AttributeError:
+    except ValueError:
         raise exceptions.PlotlyError(
             "'{0}' is not a recognizable graph_obj.".
             format(obj_type))
@@ -1439,19 +1457,26 @@ if ipython_core_display:
 
 
 def return_figure_from_figure_or_data(figure_or_data, validate_figure):
-    from plotly.graph_objs import graph_objs
+    from plotly.graph_objs import Figure
+    from plotly.basedatatypes import BaseFigure
+
+    validated = False
     if isinstance(figure_or_data, dict):
         figure = figure_or_data
     elif isinstance(figure_or_data, list):
         figure = {'data': figure_or_data}
+    elif isinstance(figure_or_data, BaseFigure):
+        figure = figure_or_data.to_dict()
+        validated = True
     else:
         raise exceptions.PlotlyError("The `figure_or_data` positional "
-                                     "argument must be either "
-                                     "`dict`-like or `list`-like.")
-    if validate_figure:
+                                     "argument must be "
+                                     "`dict`-like, `list`-like, or an instance of plotly.graph_objs.Figure")
+
+    if validate_figure and not validated:
 
         try:
-            graph_objs.Figure(figure)
+            figure = Figure(**figure).to_dict()
         except exceptions.PlotlyError as err:
             raise exceptions.PlotlyError("Invalid 'figure_or_data' argument. "
                                          "Plotly will not be able to properly "

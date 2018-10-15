@@ -23,18 +23,21 @@ def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
     abs_file_path = os.path.realpath(__file__)
     abs_dir_path = os.path.dirname(abs_file_path)
 
-    abs_plotly_dir_path = abs_dir_path[:abs_dir_path.find('/figure_factory')]
-    abs_package_data_dir_path = abs_plotly_dir_path + '/package_data/'
+    abs_plotly_dir_path = os.path.dirname(abs_dir_path)
+
+    abs_package_data_dir_path = os.path.join(abs_plotly_dir_path,
+                                             'package_data')
 
     shape_pre2010 = 'gz_2010_us_050_00_500k.shp'
-    shape_pre2010 = abs_package_data_dir_path + shape_pre2010
+    shape_pre2010 =  os.path.join(abs_package_data_dir_path, shape_pre2010)
+
     df_shape_pre2010 = gp.read_file(shape_pre2010)
     df_shape_pre2010['FIPS'] = (df_shape_pre2010['STATE'] +
                                 df_shape_pre2010['COUNTY'])
     df_shape_pre2010['FIPS'] = pd.to_numeric(df_shape_pre2010['FIPS'])
 
     states_path = 'cb_2016_us_state_500k.shp'
-    states_path = abs_package_data_dir_path + states_path
+    states_path =  os.path.join(abs_package_data_dir_path, states_path)
 
     # state df
     df_state = gp.read_file(states_path)
@@ -46,7 +49,7 @@ def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
                  'cb_2016_us_county_500k.shx']
 
     for j in range(len(filenames)):
-        filenames[j] = abs_package_data_dir_path + filenames[j]
+        filenames[j] = os.path.join(abs_package_data_dir_path, filenames[j])
 
     dbf = io.open(filenames[0], 'rb')
     shp = io.open(filenames[1], 'rb')
@@ -560,11 +563,22 @@ def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
     if not gp or not shapefile or not shapely:
         raise ImportError(
             "geopandas, pyshp and shapely must be installed for this figure "
-            "factory.\n\nRun the following commands in the terminal to "
-            "ensure that the correct versions of the modules are installed:\n"
-            "`pip install geopandas==0.3.0`\n"
-            "`pip install pyshp==1.2.10`\n"
-            "`pip install shapely==1.6.3`\n"
+            "factory.\n\nRun the following commands to install the correct "
+            "versions of the following modules:\n\n"
+            "```\n"
+            "pip install geopandas==0.3.0\n"
+            "pip install pyshp==1.2.10\n"
+            "pip install shapely==1.6.3\n"
+            "```\n"
+            "If you are using Windows, follow this post to properly "
+            "install geopandas and dependencies:"
+            "http://geoffboeing.com/2014/09/using-geopandas-windows/\n\n"
+            "If you are using Anaconda, do not use PIP to install the "
+            "packages above. Instead use conda to install them:\n\n"
+            "```\n"
+            "conda install plotly\n"
+            "conda install geopandas\n"
+            "```"
         )
 
     df, df_state = _create_us_counties_df(st_to_state_name_dict,

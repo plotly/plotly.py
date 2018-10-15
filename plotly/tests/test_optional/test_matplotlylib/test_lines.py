@@ -3,7 +3,7 @@ from __future__ import absolute_import
 from nose.plugins.attrib import attr
 
 from plotly import optional_imports
-from plotly.tests.utils import compare_dict
+from plotly.tests.utils import compare_dict, strip_dict_params
 from plotly.tests.test_optional.optional_utils import run_fig
 from plotly.tests.test_optional.test_matplotlylib.data.lines import *
 
@@ -23,7 +23,9 @@ def test_simple_line():
     ax.plot(D['x1'], D['y1'], label='simple')
     renderer = run_fig(fig)
     for data_no, data_dict in enumerate(renderer.plotly_fig['data']):
-        equivalent, msg = compare_dict(data_dict, SIMPLE_LINE['data'][data_no])
+        d1, d2 = strip_dict_params(data_dict, SIMPLE_LINE['data'][data_no], ignore=['uid'])
+
+        equivalent, msg = compare_dict(d1, d2)
         assert equivalent, msg
     equivalent, msg = compare_dict(renderer.plotly_fig['layout'],
                                    SIMPLE_LINE['layout'])
@@ -40,9 +42,11 @@ def test_complicated_line():
     ax.plot(D['x2'], D['y2'], '--r', linewidth=2, alpha=.8, label='four')
     renderer = run_fig(fig)
     for data_no, data_dict in enumerate(renderer.plotly_fig['data']):
-        equivalent, msg = compare_dict(data_dict,
-                                       COMPLICATED_LINE['data'][data_no])
+        d1, d2 = strip_dict_params(data_dict, COMPLICATED_LINE['data'][data_no], ignore=['uid'])
+
+        equivalent, msg = compare_dict(d1, d2)
         assert equivalent, msg
+
     equivalent, msg = compare_dict(renderer.plotly_fig['layout'],
                                    COMPLICATED_LINE['layout'])
     assert equivalent, msg
