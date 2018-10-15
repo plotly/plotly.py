@@ -2,6 +2,7 @@ from __future__ import absolute_import
 
 import collections
 import decimal
+from numbers import Number
 
 from plotly import exceptions
 
@@ -36,8 +37,9 @@ PLOTLY_SCALES = {
 
 
 def is_sequence(obj):
+    # TODO: this functions returns False if obj is pandas Series
     return (isinstance(obj, collections.Sequence) and
-            not isinstance(obj, str))
+        not isinstance(obj, str))
 
 
 def validate_index(index_vals):
@@ -47,13 +49,13 @@ def validate_index(index_vals):
     :raises: (PlotlyError) If there are any two items in the list whose
         types differ
     """
-    from numbers import Number
     error = False
-    if isinstance(index_vals, (list, tuple)):
-        first_item = index_vals[0]
-    else:
-        # assume pandas Series
+    if hasattr(index_vals, 'iloc'):
+        # TODO: condition if index_vals is pandas DataFrame
         first_item = index_vals.iloc[0]
+    else:
+        first_item = index_vals[0]
+
     if isinstance(first_item, Number):
         if not all(isinstance(item, Number) for item in index_vals):
             error = True
@@ -77,7 +79,6 @@ def validate_dataframe(array):
         types differ
     """
     # works with list of lists and/or dataframes
-    from numbers import Number
     error = False
     if isinstance(array, (list, tuple)):
         for v in array:
@@ -289,7 +290,6 @@ def color_parser(colors, function):
     - rgb string, hex string or tuple
 
     """
-    from numbers import Number
     if isinstance(colors, str):
         return function(colors)
 
@@ -310,7 +310,6 @@ def validate_colors(colors, colortype='tuple'):
     """
     Validates color(s) and returns a list of color(s) of a specified type
     """
-    from numbers import Number
     if colors is None:
         colors = DEFAULT_PLOTLY_COLORS
 
