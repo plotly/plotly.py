@@ -69,6 +69,11 @@ def ggplot2():
         shape_defaults=shape_defaults
     )
 
+    # Increase grid width for 3d plots
+    template.layout.scene.xaxis.gridwidth = 2
+    template.layout.scene.yaxis.gridwidth = 2
+    template.layout.scene.zaxis.gridwidth = 2
+
     return template
 
 
@@ -166,6 +171,11 @@ def seaborn():
         annotation_defaults=annotation_defaults,
         shape_defaults=shape_defaults
     )
+
+    # Increase grid width for 3d plots
+    template.layout.scene.xaxis.gridwidth = 2
+    template.layout.scene.yaxis.gridwidth = 2
+    template.layout.scene.zaxis.gridwidth = 2
 
     # Set table header font color to white
     return template
@@ -269,9 +279,6 @@ def plotly():
         shape_defaults=shape_defaults
     )
 
-    # disable vertical grid lines in 2D cartesian x-axis
-    template.layout.xaxis.showgrid = False
-
     # Increase grid width for 3d plots
     template.layout.scene.xaxis.gridwidth = 2
     template.layout.scene.yaxis.gridwidth = 2
@@ -349,9 +356,6 @@ def plotly_white():
         annotation_defaults=annotation_defaults,
         shape_defaults=shape_defaults
     )
-
-    # disable vertical grid lines in 2D cartesian x-axis
-    template.layout.xaxis.showgrid = False
 
     # Increase grid width for 3d plots
     opts = dict(gridwidth=2, gridcolor=plotly_clrs['Rhino Light 1'])
@@ -439,9 +443,6 @@ def plotly_dark():
         shape_defaults=shape_defaults
     )
 
-    # disable vertical grid lines in 2D cartesian x-axis
-    template.layout.xaxis.showgrid = False
-
     # Increase grid width for 3d plots
     template.layout.scene.xaxis.gridwidth = 2
     template.layout.scene.yaxis.gridwidth = 2
@@ -501,19 +502,15 @@ def presentation():
 builders['presentation'] = presentation
 
 
-def xgrid():
+def xgridoff():
     """
-    Tempalate to enable x-grid by default (this is not enabled by defualt in
-    the plotly_* templates)
-    Returns
-    -------
-
+    Tempalate to disable x-grid by default
     """
     # Create blank template
     template = Template()
-    template.layout.xaxis.showgrid = True
+    template.layout.xaxis.showgrid = False
 
     return template
 
 
-builders['xgrid'] = xgrid
+builders['xgridoff'] = xgridoff
