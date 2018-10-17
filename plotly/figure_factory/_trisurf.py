@@ -160,16 +160,16 @@ def trisurf(x, y, z, simplices, show_colorbar, edges_color, scale,
                 color=[min_mean_dists, max_mean_dists],
                 colorscale=colorscale,
                 showscale=True),
-            hoverinfo='None',
+            hoverinfo='none',
             showlegend=False
         )
 
     # the triangle sides are not plotted
     if plot_edges is False:
         if mean_dists_are_numbers and show_colorbar is True:
-            return graph_objs.Data([triangles, colorbar])
+            return [triangles, colorbar]
         else:
-            return graph_objs.Data([triangles])
+            return [triangles]
 
     # define the lists x_edge, y_edge and z_edge, of x, y, resp z
     # coordinates of edge end points for each triangle
@@ -206,7 +206,7 @@ def trisurf(x, y, z, simplices, show_colorbar, edges_color, scale,
     # define the lines for plotting
     lines = graph_objs.Scatter3d(
         x=x_edge, y=y_edge, z=z_edge, mode='lines',
-        line=graph_objs.Line(
+        line=graph_objs.scatter3d.Line(
             color=edges_color,
             width=1.5
         ),
@@ -214,9 +214,9 @@ def trisurf(x, y, z, simplices, show_colorbar, edges_color, scale,
     )
 
     if mean_dists_are_numbers and show_colorbar is True:
-        return graph_objs.Data([triangles, lines, colorbar])
+        return [triangles, lines, colorbar]
     else:
-        return graph_objs.Data([triangles, lines])
+        return [triangles, lines]
 
 
 def create_trisurf(x, y, z, simplices, colormap=None, show_colorbar=True,
@@ -474,10 +474,10 @@ def create_trisurf(x, y, z, simplices, colormap=None, show_colorbar=True,
         title=title,
         width=width,
         height=height,
-        scene=graph_objs.Scene(
-            xaxis=graph_objs.XAxis(axis),
-            yaxis=graph_objs.YAxis(axis),
-            zaxis=graph_objs.ZAxis(axis),
+        scene=graph_objs.layout.Scene(
+            xaxis=graph_objs.layout.scene.XAxis(**axis),
+            yaxis=graph_objs.layout.scene.YAxis(**axis),
+            zaxis=graph_objs.layout.scene.ZAxis(**axis),
             aspectratio=dict(
                 x=aspectratio['x'],
                 y=aspectratio['y'],

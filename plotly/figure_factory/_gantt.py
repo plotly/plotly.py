@@ -502,6 +502,7 @@ def gantt_dict(chart, colors, title, index_col, show_colorbar, bar_width,
         entry = dict(
             x=[tasks[index]['x0'], tasks[index]['x1']],
             y=[groupID, groupID],
+            showlegend=False,
             name='',
             marker={'color': 'white'}
         )

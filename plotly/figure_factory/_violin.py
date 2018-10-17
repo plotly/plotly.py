@@ -56,7 +56,7 @@ def make_half_violin(x, y, fillcolor='#1f77b4', linecolor='rgb(0, 0, 0)'):
         text=text,
         fill='tonextx',
         fillcolor=fillcolor,
-        line=graph_objs.Line(width=0.5, color=linecolor, shape='spline'),
+        line=graph_objs.scatter.Line(width=0.5, color=linecolor, shape='spline'),
         hoverinfo='text',
         opacity=0.5
     )
@@ -69,7 +69,7 @@ def make_violin_rugplot(vals, pdf_max, distance, color='#1f77b4'):
     return graph_objs.Scatter(
         y=vals,
         x=[-pdf_max-distance]*len(vals),
-        marker=graph_objs.Marker(
+        marker=graph_objs.scatter.Marker(
             color=color,
             symbol='line-ew-open'
         ),
@@ -89,8 +89,8 @@ def make_non_outlier_interval(d1, d2):
         y=[d1, d2],
         name='',
         mode='lines',
-        line=graph_objs.Line(width=1.5,
-                             color='rgb(0,0,0)')
+        line=graph_objs.scatter.Line(width=1.5,
+                                     color='rgb(0,0,0)')
     )
 
 
@@ -104,7 +104,7 @@ def make_quartiles(q1, q3):
         text=['lower-quartile: ' + '{:0.2f}'.format(q1),
               'upper-quartile: ' + '{:0.2f}'.format(q3)],
         mode='lines',
-        line=graph_objs.Line(
+        line=graph_objs.scatter.Line(
             width=4,
             color='rgb(0,0,0)'
         ),
@@ -131,7 +131,7 @@ def make_XAxis(xaxis_title, xaxis_range):
     """
     Makes the x-axis for a violin plot.
     """
-    xaxis = graph_objs.XAxis(title=xaxis_title,
+    xaxis = graph_objs.layout.XAxis(title=xaxis_title,
                              range=xaxis_range,
                              showgrid=False,
                              zeroline=False,
@@ -146,7 +146,7 @@ def make_YAxis(yaxis_title):
     """
     Makes the y-axis for a violin plot.
     """
-    yaxis = graph_objs.YAxis(title=yaxis_title,
+    yaxis = graph_objs.layout.YAxis(title=yaxis_title,
                              showticklabels=True,
                              autorange=True,
                              ticklen=4,
@@ -577,7 +577,7 @@ def create_violin(data, data_header=None, group_header=None, colors=None,
         layout = graph_objs.Layout(
             title=title,
             autosize=False,
-            font=graph_objs.Font(size=11),
+            font=graph_objs.layout.Font(size=11),
             height=height,
             showlegend=False,
             width=width,
@@ -589,7 +589,7 @@ def create_violin(data, data_header=None, group_header=None, colors=None,
                                     showticklabels=False,
                                     ticks=''))
 
-        fig = graph_objs.Figure(data=graph_objs.Data(plot_data),
+        fig = graph_objs.Figure(data=plot_data,
                                 layout=layout)
 
         return fig

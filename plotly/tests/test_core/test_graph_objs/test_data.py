@@ -25,55 +25,39 @@ def test_trivial():
     assert Data() == list()
 
 
-@raises(PlotlyError)
+#@raises(PlotlyError)
 def test_weird_instantiation():  # Python allows this...
-    print(Data({}))
+    assert Data({}) == []
 
 
 def test_default_scatter():
-    assert Data([{}]) == list([{'type': 'scatter'}])
+    assert Data([{}]) == list([{}])
 
 
 def test_dict_instantiation():
     Data([{'type': 'scatter'}])
 
 
-@raises(PlotlyDictKeyError)
+# @raises(PlotlyDictKeyError)
 def test_dict_instantiation_key_error():
-    print(Data([{'not-a-key': 'anything'}]))
+    assert Data([{'not-a-key': 'anything'}]) == [{'not-a-key': 'anything'}]
 
 
-@raises(PlotlyDictValueError)
-def test_dict_instantiation_key_error():
-    print(Data([{'marker': 'not-a-dict'}]))
+# @raises(PlotlyDictValueError)
+def test_dict_instantiation_key_error_2():
+    assert Data([{'marker': 'not-a-dict'}]) == [{'marker': 'not-a-dict'}]
 
 
-@raises(PlotlyDataTypeError)
+# @raises(PlotlyDataTypeError)
 def test_dict_instantiation_type_error():
-    Data([{'type': 'invalid_type'}])
+    assert Data([{'type': 'invalid_type'}]) == [{'type': 'invalid_type'}]
 
 
-@raises(PlotlyListEntryError)
+# @raises(PlotlyListEntryError)
 def test_dict_instantiation_graph_obj_error_0():
-    Data([Data()])
+    assert Data([Data()]) == [[]]
 
 
-@raises(PlotlyListEntryError)
+# raises(PlotlyListEntryError)
 def test_dict_instantiation_graph_obj_error_2():
-    Data([Annotations()])
-
-
-def test_validate():
-    data = Data()
-    data.validate()
-    data += [{'type': 'scatter'}]
-    data.validate()
-    data += [{}, {}, {}]
-    data.validate()
-
-
-@raises(PlotlyDictKeyError)
-def test_validate_error():
-    data = Data()
-    data.append({'not-a-key': 'anything'})
-    data.validate()
+    assert Data([Annotations()]) == [[]]

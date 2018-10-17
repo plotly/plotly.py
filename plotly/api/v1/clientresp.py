@@ -25,7 +25,7 @@ def clientresp(data, **kwargs):
     dumps_kwargs = {'sort_keys': True, 'cls': utils.PlotlyJSONEncoder}
 
     payload = {
-        'platform': 'python', 'version': version.__version__,
+        'platform': 'python', 'version': version.stable_semver(),
         'args': _json.dumps(data, **dumps_kwargs),
         'un': creds['username'], 'key': creds['api_key'], 'origin': 'plot',
         'kwargs': _json.dumps(kwargs, **dumps_kwargs)

@@ -4,7 +4,11 @@ from nose.tools import raises
 
 from plotly.graph_objs import (Data, Figure, Layout, Scatter, Scatter3d, Scene,
                                XAxis, YAxis)
+from plotly.tests.utils import strip_dict_params
+
 import plotly.tools as tls
+
+import copy
 
 
 @raises(Exception)
@@ -99,7 +103,12 @@ def test_append_scatter():
     trace = Scatter(x=[1, 2, 3], y=[2, 3, 4])
     fig = tls.make_subplots(rows=2, cols=3)
     fig.append_trace(trace, 2, 2)
-    assert fig == expected
+
+    d1, d2 = strip_dict_params(fig['data'][0], expected['data'][0])
+    assert d1 == d2
+
+    d1, d2 = strip_dict_params(fig['layout'], expected['layout'])
+    assert d1 == d2
 
 
 @raises(Exception)
@@ -150,7 +159,15 @@ def test_append_scatter3d():
     trace = Scatter3d(x=[1, 2, 3], y=[2, 3, 4], z=[1, 2, 3])
     fig.append_trace(trace, 1, 1)
     fig.append_trace(trace, 2, 1)
-    assert fig == expected
+
+    d1, d2 = strip_dict_params(fig['data'][0], expected['data'][0])
+    assert d1 == d2
+
+    d1, d2 = strip_dict_params(fig['data'][1], expected['data'][1])
+    assert d1 == d2
+
+    d1, d2 = strip_dict_params(fig['layout'], expected['layout'])
+    assert d1 == d2
 
 
 @raises(Exception)

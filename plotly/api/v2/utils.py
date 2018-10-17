@@ -3,7 +3,7 @@ from __future__ import absolute_import
 import requests
 from requests.compat import json as _json
 from requests.exceptions import RequestException
-
+from retrying import retry
 from plotly import config, exceptions, version, utils
 from plotly.api.utils import basic_auth
 
@@ -93,7 +93,7 @@ def get_headers():
     creds = config.get_credentials()
 
     headers = {
-        'plotly-client-platform': 'python {}'.format(version.__version__),
+        'plotly-client-platform': 'python {}'.format(version.stable_semver()),
         'content-type': 'application/json'
     }
 
@@ -111,6 +111,20 @@ def get_headers():
     return headers
 
 
+def should_retry(exception):
+    if isinstance(exception, exceptions.PlotlyRequestError):
+        if (isinstance(exception.status_code, int) and
+                500 <= exception.status_code < 600):
+            # Retry on 5XX errors.
+            return True
+        elif 'Uh oh, an error occurred' in exception.message:
+            return True
+
+    return False
+
+
+@retry(wait_exponential_multiplier=1000, wait_exponential_max=16000,
+       stop_max_delay=180000, retry_on_exception=should_retry)
 def request(method, url, **kwargs):
     """
     Central place to make any api v2 api request.

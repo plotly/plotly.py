@@ -8,6 +8,7 @@ with the matplotlylib package.
 """
 from __future__ import absolute_import
 
+import six
 import warnings
 
 import plotly.graph_objs as go
@@ -83,7 +84,7 @@ class PlotlyRenderer(Renderer):
             autosize=False,
             hovermode='closest')
         self.mpl_x_bounds, self.mpl_y_bounds = mpltools.get_axes_bounds(fig)
-        margin = go.Margin(
+        margin = go.layout.Margin(
             l=int(self.mpl_x_bounds[0] * self.plotly_fig['layout']['width']),
             r=int(
                 (1-self.mpl_x_bounds[1]) * self.plotly_fig['layout']['width']),
@@ -106,7 +107,6 @@ class PlotlyRenderer(Renderer):
         fig -- a matplotlib.figure.Figure object.
 
         """
-        self.plotly_fig.force_clean()
         self.plotly_fig['layout']['showlegend'] = False
         self.msg += "Closing figure\n"
 
@@ -148,11 +148,11 @@ class PlotlyRenderer(Renderer):
         self.current_bars = []
         self.axis_ct += 1
         # set defaults in axes
-        xaxis = go.XAxis(
+        xaxis = go.layout.XAxis(
             anchor='y{0}'.format(self.axis_ct),
             zeroline=False,
             ticks='inside')
-        yaxis = go.YAxis(
+        yaxis = go.layout.YAxis(
             anchor='x{0}'.format(self.axis_ct),
             zeroline=False,
             ticks='inside')
@@ -178,8 +178,10 @@ class PlotlyRenderer(Renderer):
         self.plotly_fig['layout']['yaxis{0}'.format(self.axis_ct)] = yaxis
 
         # let all subsequent dates be handled properly if required
-        if xaxis.get('type') == 'date':
+
+        if 'type' in dir(xaxis) and xaxis['type'] == 'date':
             self.x_is_mpl_date = True
+
 
     def close_axes(self, ax):
         """Close the axes object and clean up.
@@ -283,12 +285,12 @@ class PlotlyRenderer(Renderer):
             xaxis='x{0}'.format(self.axis_ct),
             yaxis='y{0}'.format(self.axis_ct),
             opacity=trace[0]['alpha'],  # TODO: get all alphas if array?
-            marker=go.Marker(
+            marker=go.bar.Marker(
                 color=trace[0]['facecolor'],  # TODO: get all
-                line=go.Line(width=trace[0]['edgewidth'])))  # TODO ditto
+                line=dict(width=trace[0]['edgewidth'])))  # TODO ditto
         if len(bar['x']) > 1:
             self.msg += "    Heck yeah, I drew that bar chart\n"
-            self.plotly_fig['data'] += bar,
+            self.plotly_fig.add_trace(bar),
             if bar_gap is not None:
                 self.plotly_fig['layout']['bargap'] = bar_gap
         else:
@@ -344,18 +346,20 @@ class PlotlyRenderer(Renderer):
             color = \
                 mpltools.merge_color_and_opacity(props['linestyle']['color'],
                                                  props['linestyle']['alpha'])
-            line = go.Line(
+
+            #print(mpltools.convert_dash(props['linestyle']['dasharray']))
+            line = go.scatter.Line(
                 color=color,
                 width=props['linestyle']['linewidth'],
                 dash=mpltools.convert_dash(props['linestyle']['dasharray'])
             )
         if props['markerstyle']:
-            marker = go.Marker(
+            marker = go.scatter.Marker(
                 opacity=props['markerstyle']['alpha'],
                 color=props['markerstyle']['facecolor'],
                 symbol=mpltools.convert_symbol(props['markerstyle']['marker']),
                 size=props['markerstyle']['markersize'],
-                line=go.Line(
+                line=dict(
                     color=props['markerstyle']['edgecolor'],
                     width=props['markerstyle']['edgewidth']
                 )
@@ -363,7 +367,9 @@ class PlotlyRenderer(Renderer):
         if props['coordinates'] == 'data':
             marked_line = go.Scatter(
                 mode=mode,
-                name=props['label'],
+                name=(str(props['label']) if
+                      isinstance(props['label'], six.string_types) else
+                      props['label']),
                 x=[xy_pair[0] for xy_pair in props['data']],
                 y=[xy_pair[1] for xy_pair in props['data']],
                 xaxis='x{0}'.format(self.axis_ct),
@@ -376,7 +382,7 @@ class PlotlyRenderer(Renderer):
                 marked_line['x'] = mpltools.mpl_dates_to_datestrings(
                     marked_line['x'], formatter
                 )
-            self.plotly_fig['data'] += marked_line,
+            self.plotly_fig.add_trace(marked_line),
             self.msg += "    Heck yeah, I drew that line\n"
         else:
             self.msg += "    Line didn't have 'data' coordinates, " \
@@ -524,7 +530,7 @@ class PlotlyRenderer(Renderer):
         if not align:
             align = props['style']['halign']  # mpl default
         if 'annotations' not in self.plotly_fig['layout']:
-            self.plotly_fig['layout']['annotations'] = go.Annotations()
+            self.plotly_fig['layout']['annotations'] = []
         if props['text_type'] == 'xlabel':
             self.msg += "      Text object is an xlabel\n"
             self.draw_xlabel(**props)
@@ -570,8 +576,10 @@ class PlotlyRenderer(Renderer):
                     yref = 'paper'
                 xanchor = props['style']['halign']  # no difference here!
                 yanchor = mpltools.convert_va(props['style']['valign'])
-            annotation = go.Annotation(
-                text=props['text'],
+            annotation = go.layout.Annotation(
+                text=(str(props['text']) if
+                      isinstance(props['text'], six.string_types) else
+                      props['text']),
                 opacity=props['style']['alpha'],
                 x=x,
                 y=y,
@@ -581,7 +589,7 @@ class PlotlyRenderer(Renderer):
                 xanchor=xanchor,
                 yanchor=yanchor,
                 showarrow=False,  # change this later?
-                font=go.Font(
+                font=go.layout.annotation.Font(
                     color=props['style']['color'],
                     size=props['style']['fontsize']
                 )
@@ -623,9 +631,9 @@ class PlotlyRenderer(Renderer):
                 'position'])
             x, y = mpltools.display_to_paper(x_px, y_px,
                                              self.plotly_fig['layout'])
-            annotation = go.Annotation(
+            annotation = go.layout.Annotation(
                 text=props['text'],
-                font=go.Font(
+                font=go.layout.annotation.Font(
                     color=props['style']['color'],
                     size=props['style']['fontsize']
                 ),
@@ -642,7 +650,7 @@ class PlotlyRenderer(Renderer):
             self.msg += "          Only one subplot found, adding as a " \
                         "plotly title\n"
             self.plotly_fig['layout']['title'] = props['text']
-            titlefont = go.Font(
+            titlefont = dict(
                 size=props['style']['fontsize'],
                 color=props['style']['color']
             )
@@ -673,8 +681,8 @@ class PlotlyRenderer(Renderer):
         """
         self.msg += "        Adding xlabel\n"
         axis_key = 'xaxis{0}'.format(self.axis_ct)
-        self.plotly_fig['layout'][axis_key]['title'] = props['text']
-        titlefont = go.Font(
+        self.plotly_fig['layout'][axis_key]['title'] = str(props['text'])
+        titlefont = dict(
             size=props['style']['fontsize'],
             color=props['style']['color'])
         self.plotly_fig['layout'][axis_key]['titlefont'] = titlefont
@@ -705,7 +713,7 @@ class PlotlyRenderer(Renderer):
         self.msg += "        Adding ylabel\n"
         axis_key = 'yaxis{0}'.format(self.axis_ct)
         self.plotly_fig['layout'][axis_key]['title'] = props['text']
-        titlefont = go.Font(
+        titlefont = dict(
             size=props['style']['fontsize'],
             color=props['style']['color'])
         self.plotly_fig['layout'][axis_key]['titlefont'] = titlefont
@@ -723,7 +731,7 @@ class PlotlyRenderer(Renderer):
         for key in ['width', 'height', 'autosize', 'margin']:
             try:
                 del self.plotly_fig['layout'][key]
-            except KeyError:
+            except (KeyError, AttributeError):
                 pass
 
     def strip_style(self):

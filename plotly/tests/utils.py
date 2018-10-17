@@ -36,16 +36,14 @@ class PlotlyTestCase(TestCase):
         self.restore_session()
 
     def stash_files(self):
-        if files.check_file_permissions():
-            self._credentials = utils.load_json_dict(files.CREDENTIALS_FILE)
-            self._config = utils.load_json_dict(files.CONFIG_FILE)
+        self._credentials = utils.load_json_dict(files.CREDENTIALS_FILE)
+        self._config = utils.load_json_dict(files.CONFIG_FILE)
 
     def restore_files(self):
-        if files.check_file_permissions():
-            if self._credentials is not None:
-                utils.save_json_dict(files.CREDENTIALS_FILE, self._credentials)
-            if self._config is not None:
-                utils.save_json_dict(files.CONFIG_FILE, self._config)
+        if self._credentials and files.ensure_writable_plotly_dir():
+            utils.save_json_dict(files.CREDENTIALS_FILE, self._credentials)
+        if self._config and files.ensure_writable_plotly_dir():
+            utils.save_json_dict(files.CONFIG_FILE, self._config)
 
     def stash_session(self):
         self._session = copy.deepcopy(session._session)
@@ -83,6 +81,38 @@ def compare_dict(dict1, dict2, equivalent=True, msg='', tol=10e-8):
         if not equivalent:
             return False, "['{0}']".format(key) + msg
     return equivalent, msg
+
+
+def strip_dict_params(d1, d2, ignore=['uid']):
+    """
+    Helper function for assert_dict_equal
+
+    Nearly duplicate of assert_fig_equal in plotly/tests/test_optional/optional_utils.py
+    Removes `ignore` params from d1 and/or d2 if they exist
+    then returns stripped dictionaries
+
+    :param (list|tuple) ignore: sequence of key names as
+        strings that are removed from both d1 and d2 if
+        they exist
+    """
+    # deep copy d1 and d2
+    if 'to_plotly_json' in dir(d1):
+        d1_copy = copy.deepcopy(d1.to_plotly_json())
+    else:
+        d1_copy = copy.deepcopy(d1)
+
+    if 'to_plotly_json' in dir(d2):
+        d2_copy = copy.deepcopy(d2.to_plotly_json())
+    else:
+        d2_copy = copy.deepcopy(d2)
+
+    for key in ignore:
+        if key in d1_copy.keys():
+            del d1_copy[key]
+        if key in d2_copy.keys():
+            del d2_copy[key]
+
+    return d1_copy, d2_copy
 
 
 def comp_nums(num1, num2, tol=10e-8):
