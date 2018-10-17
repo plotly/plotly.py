@@ -209,7 +209,7 @@ class Contour(BaseTraceType):
                     Sets a tick label prefix.
                 ticks
                     Determines whether ticks are drawn or not. If
-                    **, this axis' ticks are not drawn. If
+                    "", this axis' ticks are not drawn. If
                     "outside" ("inside"), this axis' are drawn
                     outside (inside) the axis lines.
                 ticksuffix

@@ -15,12 +15,18 @@ class Dimension(BaseTraceHierarchyType):
         you may give an array of arrays, where each inner array is
         `[fromValue, toValue]`.
     
-        The 'constraintrange' property is an info array that may be specified as a
-        list or tuple of up to 2 elements where:
+        The 'constraintrange' property is an info array that may be specified as:
     
+        * a list or tuple of 2 elements where:
     (0) The 'constraintrange[0]' property is a number and may be specified as:
           - An int or float
     (1) The 'constraintrange[1]' property is a number and may be specified as:
+          - An int or float
+    
+        * a 2D list where:
+    (0) The 'constraintrange[i][0]' property is a number and may be specified as:
+          - An int or float
+    (1) The 'constraintrange[i][1]' property is a number and may be specified as:
           - An int or float
 
         Returns
@@ -110,9 +116,9 @@ class Dimension(BaseTraceHierarchyType):
         Defaults to the `values` extent. Must be an array of
         `[fromValue, toValue]` with finite numbers as elements.
     
-        The 'range' property is an info array that may be specified as a
-        list or tuple of 2 elements where:
+        The 'range' property is an info array that may be specified as:
     
+        * a list or tuple of 2 elements where:
     (0) The 'range[0]' property is a number and may be specified as:
           - An int or float
     (1) The 'range[1]' property is a number and may be specified as:

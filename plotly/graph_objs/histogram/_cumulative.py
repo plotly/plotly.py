@@ -63,7 +63,7 @@ class Cumulative(BaseTraceHierarchyType):
         binned values. Use the `direction` and `centralbin` attributes
         to tune the accumulation method. Note: in this mode, the
         "density" `histnorm` settings behave the same as their
-        equivalents without "density": ** and "density" both rise to
+        equivalents without "density": "" and "density" both rise to
         the number of data points, and "probability" and *probability
         density* both rise to the number of sample points.
     
@@ -109,7 +109,7 @@ class Cumulative(BaseTraceHierarchyType):
             the binned values. Use the `direction` and `centralbin`
             attributes to tune the accumulation method. Note: in
             this mode, the "density" `histnorm` settings behave the
-            same as their equivalents without "density": ** and
+            same as their equivalents without "density": "" and
             "density" both rise to the number of data points, and
             "probability" and *probability density* both rise to
             the number of sample points.
@@ -149,7 +149,7 @@ class Cumulative(BaseTraceHierarchyType):
             the binned values. Use the `direction` and `centralbin`
             attributes to tune the accumulation method. Note: in
             this mode, the "density" `histnorm` settings behave the
-            same as their equivalents without "density": ** and
+            same as their equivalents without "density": "" and
             "density" both rise to the number of data points, and
             "probability" and *probability density* both rise to
             the number of sample points.

@@ -753,9 +753,9 @@ class Violin(BaseTraceType):
         be computed. Has an effect only when `spanmode` is set to
         "manual".
     
-        The 'span' property is an info array that may be specified as a
-        list or tuple of 2 elements where:
+        The 'span' property is an info array that may be specified as:
     
+        * a list or tuple of 2 elements where:
     (0) The 'span[0]' property accepts values of any type
     (1) The 'span[1]' property accepts values of any type
 

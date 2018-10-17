@@ -256,7 +256,7 @@ class Histogram2dContour(BaseTraceType):
                     Sets a tick label prefix.
                 ticks
                     Determines whether ticks are drawn or not. If
-                    **, this axis' ticks are not drawn. If
+                    "", this axis' ticks are not drawn. If
                     "outside" ("inside"), this axis' are drawn
                     outside (inside) the axis lines.
                 ticksuffix
@@ -515,7 +515,7 @@ class Histogram2dContour(BaseTraceType):
     def histnorm(self):
         """
         Specifies the type of normalization used for this histogram
-        trace. If **, the span of each bar corresponds to the number of
+        trace. If "", the span of each bar corresponds to the number of
         occurrences (i.e. the number of data points lying inside the
         bins). If "percent" / "probability", the span of each bar
         corresponds to the percentage / fraction of occurrences with
@@ -1488,7 +1488,7 @@ class Histogram2dContour(BaseTraceType):
             respectively.
         histnorm
             Specifies the type of normalization used for this
-            histogram trace. If **, the span of each bar
+            histogram trace. If "", the span of each bar
             corresponds to the number of occurrences (i.e. the
             number of data points lying inside the bins). If
             "percent" / "probability", the span of each bar
@@ -1753,7 +1753,7 @@ class Histogram2dContour(BaseTraceType):
             respectively.
         histnorm
             Specifies the type of normalization used for this
-            histogram trace. If **, the span of each bar
+            histogram trace. If "", the span of each bar
             corresponds to the number of occurrences (i.e. the
             number of data points lying inside the bins). If
             "percent" / "probability", the span of each bar

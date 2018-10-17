@@ -563,9 +563,9 @@ class XAxis(BaseLayoutHierarchyType):
         should be numbers, using the scale where each category is
         assigned a serial number from zero in the order it appears.
     
-        The 'range' property is an info array that may be specified as a
-        list or tuple of 2 elements where:
+        The 'range' property is an info array that may be specified as:
     
+        * a list or tuple of 2 elements where:
     (0) The 'range[0]' property accepts values of any type
     (1) The 'range[1]' property accepts values of any type
 
@@ -1229,7 +1229,7 @@ class XAxis(BaseLayoutHierarchyType):
     @property
     def ticks(self):
         """
-        Determines whether ticks are drawn or not. If **, this axis'
+        Determines whether ticks are drawn or not. If "", this axis'
         ticks are not drawn. If "outside" ("inside"), this axis' are
         drawn outside (inside) the axis lines.
     
@@ -1796,7 +1796,7 @@ class XAxis(BaseLayoutHierarchyType):
         tickprefix
             Sets a tick label prefix.
         ticks
-            Determines whether ticks are drawn or not. If **, this
+            Determines whether ticks are drawn or not. If "", this
             axis' ticks are not drawn. If "outside" ("inside"),
             this axis' are drawn outside (inside) the axis lines.
         ticksuffix
@@ -2106,7 +2106,7 @@ class XAxis(BaseLayoutHierarchyType):
         tickprefix
             Sets a tick label prefix.
         ticks
-            Determines whether ticks are drawn or not. If **, this
+            Determines whether ticks are drawn or not. If "", this
             axis' ticks are not drawn. If "outside" ("inside"),
             this axis' are drawn outside (inside) the axis lines.
         ticksuffix
