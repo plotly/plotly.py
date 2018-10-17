@@ -1611,7 +1611,8 @@ class InfoArrayValidator(BaseValidator):
             ],
             "otherOpts": [
                 "dflt",
-                "freeLength"
+                "freeLength",
+                "dimensions"
             ]
         }
     """
@@ -1621,10 +1622,14 @@ class InfoArrayValidator(BaseValidator):
                  parent_name,
                  items,
                  free_length=None,
+                 dimensions=None,
                  **kwargs):
         super(InfoArrayValidator, self).__init__(
             plotly_name=plotly_name, parent_name=parent_name, **kwargs)
+
         self.items = items
+        self.dimensions = dimensions if dimensions else 1
+        self.free_length = free_length
 
         # Instantiate validators for each info array element
         self.item_validators = []
@@ -1637,21 +1642,86 @@ class InfoArrayValidator(BaseValidator):
                 item, element_name, parent_name)
             self.item_validators.append(item_validator)
 
-        self.free_length = free_length
-
     def description(self):
-        upto = ' up to' if self.free_length else ''
+
+        # Cases
+        #  1) self.items is array, self.dimensions is 1
+        #       a) free_length=True
+        #       b) free_length=False
+        #  2) self.items is array, self.dimensions is 2
+        #     (requires free_length=True)
+        #  3) self.items is scalar (requires free_length=True)
+        #       a) dimensions=1
+        #       b) dimensions=2
+        #
+        # dimensions can be set to '1-2' to indicate the both are accepted
+        #
         desc = """\
-    The '{plotly_name}' property is an info array that may be specified as a
-    list or tuple of{upto} {N} elements where:
-""".format(plotly_name=self.plotly_name,
-           upto=upto,
+    The '{plotly_name}' property is an info array that may be specified as:\
+""".format(plotly_name=self.plotly_name)
+
+        if isinstance(self.items, list):
+            # ### Case 1 ###
+            if self.dimensions in (1, '1-2'):
+                upto = (' up to'
+                        if self.free_length and self.dimensions == 1
+                        else '')
+                desc += """
+
+    * a list or tuple of{upto} {N} elements where:\
+""".format(upto=upto,
            N=len(self.item_validators))
 
-        for i, item_validator in enumerate(self.item_validators):
-            el_desc = item_validator.description().strip()
-            desc = desc + """
+                for i, item_validator in enumerate(self.item_validators):
+                    el_desc = item_validator.description().strip()
+                    desc = desc + """
 ({i}) {el_desc}""".format(i=i, el_desc=el_desc)
+
+            # ### Case 2 ###
+            if self.dimensions in ('1-2', 2):
+                assert self.free_length
+
+                desc += """
+
+    * a 2D list where:"""
+                for i, item_validator in enumerate(self.item_validators):
+                    # Update name for 2d
+                    orig_name = item_validator.plotly_name
+                    item_validator.plotly_name = "{name}[i][{i}]".format(
+                        name=self.plotly_name, i=i)
+
+                    el_desc = item_validator.description().strip()
+                    desc = desc + """
+({i}) {el_desc}""".format(i=i, el_desc=el_desc)
+                    item_validator.plotly_name = orig_name
+        else:
+            # ### Case 3 ###
+            assert self.free_length
+            item_validator = self.item_validators[0]
+            orig_name = item_validator.plotly_name
+
+            if self.dimensions in (1, '1-2'):
+                item_validator.plotly_name = "{name}[i]".format(
+                    name=self.plotly_name)
+
+                el_desc = item_validator.description().strip()
+
+                desc += """
+    * a list of elements where:
+      {el_desc}
+""".format(el_desc=el_desc)
+
+            if self.dimensions in ('1-2', 2):
+                item_validator.plotly_name = "{name}[i][j]".format(
+                    name=self.plotly_name)
+
+                el_desc = item_validator.description().strip()
+                desc += """
+    * a 2D list where:
+      {el_desc}
+""".format(el_desc=el_desc)
+
+            item_validator.plotly_name = orig_name
 
         return desc
 

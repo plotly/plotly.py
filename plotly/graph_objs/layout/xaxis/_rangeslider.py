@@ -179,9 +179,9 @@ class Rangeslider(BaseLayoutHierarchyType):
         numbers, using the scale where each category is assigned a
         serial number from zero in the order it appears.
     
-        The 'range' property is an info array that may be specified as a
-        list or tuple of 2 elements where:
+        The 'range' property is an info array that may be specified as:
     
+        * a list or tuple of 2 elements where:
     (0) The 'range[0]' property accepts values of any type
     (1) The 'range[1]' property accepts values of any type
 
