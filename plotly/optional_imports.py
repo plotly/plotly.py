@@ -5,7 +5,9 @@ Stand-alone module to provide information about whether optional deps exist.
 from __future__ import absolute_import
 
 from importlib import import_module
+import logging
 
+logger = logging.getLogger(__name__)
 _not_importable = set()
 
 
@@ -23,3 +25,7 @@ def get_module(name):
             return import_module(name)
         except ImportError:
             _not_importable.add(name)
+        except Exception as e:
+            _not_importable.add(name)
+            msg = "Error importing optional module {}".format(name)
+            logger.exception(msg)

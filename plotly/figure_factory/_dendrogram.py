@@ -17,7 +17,7 @@ scs = optional_imports.get_module('scipy.spatial')
 def create_dendrogram(X, orientation="bottom", labels=None,
                       colorscale=None, distfun=None,
                       linkagefun=lambda x: sch.linkage(x, 'complete'),
-                      hovertext=None):
+                      hovertext=None, color_threshold=None):
     """
     BETA function that returns a dendrogram Plotly figure object.
 
@@ -28,10 +28,10 @@ def create_dendrogram(X, orientation="bottom", labels=None,
     :param (function) distfun: Function to compute the pairwise distance from
                                the observations
     :param (function) linkagefun: Function to compute the linkage matrix from
-                                  the pairwise distances
+                               the pairwise distances
     :param (list[list]) hovertext: List of hovertext for constituent traces of dendrogram
-
-        clusters
+                               clusters
+    :param (double) color_threshold: Value at which the separation of clusters will be made
 
     Example 1: Simple bottom oriented dendrogram
     ```
@@ -88,19 +88,20 @@ def create_dendrogram(X, orientation="bottom", labels=None,
 
     dendrogram = _Dendrogram(X, orientation, labels, colorscale,
                              distfun=distfun, linkagefun=linkagefun,
-                             hovertext=hovertext)
+                             hovertext=hovertext, color_threshold=color_threshold)
 
-    return graph_objs.Figure(data=dendrogram.data, layout=dendrogram.layout)
+    return graph_objs.Figure(data=dendrogram.data,
+                             layout=dendrogram.layout)
 
 
 class _Dendrogram(object):
     """Refer to FigureFactory.create_dendrogram() for docstring."""
 
     def __init__(self, X, orientation='bottom', labels=None, colorscale=None,
-                 width="100%", height="100%", xaxis='xaxis', yaxis='yaxis',
+                 width=np.inf, height=np.inf, xaxis='xaxis', yaxis='yaxis',
                  distfun=None,
                  linkagefun=lambda x: sch.linkage(x, 'complete'),
-                 hovertext=None):
+                 hovertext=None, color_threshold=None):
         self.orientation = orientation
         self.labels = labels
         self.xaxis = xaxis
@@ -126,8 +127,9 @@ class _Dendrogram(object):
         (dd_traces, xvals, yvals,
             ordered_labels, leaves) = self.get_dendrogram_traces(X, colorscale,
                                                                  distfun,
-                                                                 linkagefun, 
-                                                                 hovertext)
+                                                                 linkagefun,
+                                                                 hovertext,
+                                                                 color_threshold)
 
         self.labels = ordered_labels
         self.leaves = leaves
@@ -140,10 +142,22 @@ class _Dendrogram(object):
             if yvals_flat[i] == 0.0 and xvals_flat[i] not in self.zero_vals:
                 self.zero_vals.append(xvals_flat[i])
 
-        self.zero_vals.sort()
+        if len(self.zero_vals) > len(yvals) + 1:
+            # If the length of zero_vals is larger than the length of yvals,
+            # it means that there are wrong vals because of the identicial samples.
+            # Three and more identicial samples will make the yvals of spliting center into 0 and it will \
+            # accidentally take it as leaves.
+            l_border = int(min(self.zero_vals))
+            r_border = int(max(self.zero_vals))
+            correct_leaves_pos = range(l_border,
+                                       r_border + 1,
+                                       int((r_border - l_border) / len(yvals)))
+            # Regenerating the leaves pos from the self.zero_vals with equally intervals.
+            self.zero_vals = [v for v in correct_leaves_pos]
 
+        self.zero_vals.sort()
         self.layout = self.set_figure_layout(width, height)
-        self.data = graph_objs.Data(dd_traces)
+        self.data = dd_traces
 
     def get_color_dict(self, colorscale):
         """
@@ -236,7 +250,7 @@ class _Dendrogram(object):
 
         return self.layout
 
-    def get_dendrogram_traces(self, X, colorscale, distfun, linkagefun, hovertext):
+    def get_dendrogram_traces(self, X, colorscale, distfun, linkagefun, hovertext, color_threshold):
         """
         Calculates all the elements needed for plotting a dendrogram.
 
@@ -261,7 +275,8 @@ class _Dendrogram(object):
         d = distfun(X)
         Z = linkagefun(d)
         P = sch.dendrogram(Z, orientation=self.orientation,
-                           labels=self.labels, no_plot=True)
+                           labels=self.labels, no_plot=True,
+                           color_threshold=color_threshold)
 
         icoord = scp.array(P['icoord'])
         dcoord = scp.array(P['dcoord'])
@@ -287,11 +302,12 @@ class _Dendrogram(object):
             hovertext_label = None
             if hovertext:
                 hovertext_label = hovertext[i]
-            trace = graph_objs.Scatter(
+            trace = dict(
+                type='scatter',
                 x=np.multiply(self.sign[self.xaxis], xs),
                 y=np.multiply(self.sign[self.yaxis], ys),
                 mode='lines',
-                marker=graph_objs.Marker(color=colors[color_key]),
+                marker=dict(color=colors[color_key]),
                 text=hovertext_label,
                 hoverinfo='text'
             )

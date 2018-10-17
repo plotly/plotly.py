@@ -57,7 +57,7 @@ def convert_dash(mpl_dash):
     """Convert mpl line symbol to plotly line symbol and return symbol."""
     if mpl_dash in DASH_MAP:
         return DASH_MAP[mpl_dash]
-    else:       
+    else:
         dash_array = mpl_dash.split(',')
 
         if (len(dash_array) < 2):
@@ -70,8 +70,18 @@ def convert_dash(mpl_dash):
 
         # If we can't find the dash pattern in the map, convert it
         # into custom values in px, e.g. '7,5' -> '7px,5px'
-        dashpx=','.join([x + 'px' for x in dash_array])
+        dashpx = ','.join([x + 'px' for x in dash_array])
+
+        # TODO: rewrite the convert_dash code
+        # only strings 'solid', 'dashed', etc allowed
+        if dashpx == '7.4px,3.2px':
+            dashpx = 'dashed'
+        elif dashpx == '12.8px,3.2px,2.0px,3.2px':
+            dashpx = 'dashdot'
+        elif dashpx == '2.0px,3.3px':
+            dashpx = 'dotted'
         return dashpx
+
 
 def convert_path(path):
     verts = path[0]  # may use this later
@@ -92,7 +102,7 @@ def convert_symbol(mpl_symbol):
     elif mpl_symbol in SYMBOL_MAP:
         return SYMBOL_MAP[mpl_symbol]
     else:
-        return 'dot'  # default
+        return 'circle'  # default
 
 
 def hex_to_rgb(value):
@@ -443,13 +453,13 @@ def prep_ticks(ax, index, ax_type, props):
         else:
             axis_dict['tick0'] = tick0
             axis_dict['dtick'] = dtick
-            axis_dict['tickmode'] = False
+            axis_dict['tickmode'] = None
     elif scale == 'log':
         try:
             axis_dict['tick0'] = props['axes'][index]['tickvalues'][0]
             axis_dict['dtick'] = props['axes'][index]['tickvalues'][1] - \
                             props['axes'][index]['tickvalues'][0]
-            axis_dict['tickmode'] = False
+            axis_dict['tickmode'] = None
         except (IndexError, TypeError):
             axis_dict = dict(nticks=props['axes'][index]['nticks'])
         base = axis.get_transform().base
@@ -544,13 +554,14 @@ def mpl_dates_to_datestrings(dates, mpl_formatter):
                    for date in dates]
     return time_stings
 
-
+# dashed is dash in matplotlib
 DASH_MAP = {
     '10,0': 'solid',
     '6,6': 'dash',
-    '2,2': 'dot',
+    '2,2': 'circle',
     '4,4,2,4': 'dashdot',
-    'none': 'solid'
+    'none': 'solid',
+    '7.4,3.2': 'dash',
 }
 
 PATH_MAP = {
@@ -567,7 +578,7 @@ PATH_MAP = {
 }
 
 SYMBOL_MAP = {
-    'o': 'dot',
+    'o': 'circle',
     'v': 'triangle-down',
     '^': 'triangle-up',
     '<': 'triangle-left',
@@ -575,7 +586,7 @@ SYMBOL_MAP = {
     's': 'square',
     '+': 'cross',
     'x': 'x',
-    '*': 'x',  # no star yet in plotly!!
+    '*': 'star',
     'D': 'diamond',
     'd': 'diamond',
 }

@@ -8,7 +8,7 @@ from plotly.figure_factory import utils
 
 
 def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
-                  angle=math.pi / 9, **kwargs):
+                  angle=math.pi / 9, scaleratio=None, **kwargs):
     """
     Returns data for a quiver plot.
 
@@ -21,6 +21,9 @@ def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
     :param (float in [0,1]) arrow_scale: value multiplied to length of barb
         to get length of arrowhead. Default = .3
     :param (angle in radians) angle: angle of arrowhead. Default = pi/9
+    :param (positive float) scaleratio: the ratio between the scale of the y-axis
+        and the scale of the x-axis (scale_y / scale_x). Default = None, the
+        scale ratio is not fixed.
     :param kwargs: kwargs passed through plotly.graph_objs.Scatter
         for more information on valid kwargs call
         help(plotly.graph_objs.Scatter)
@@ -75,10 +78,33 @@ def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
 
     # Create quiver
     fig = create_quiver(x, y, u, v, scale=.2, arrow_scale=.3, angle=math.pi/6,
-                        name='Wind Velocity', line=Line(width=1))
+                        name='Wind Velocity', line=dict(width=1))
 
     # Add title to layout
     fig['layout'].update(title='Quiver Plot')
+
+    # Plot
+    py.plot(fig, filename='quiver')
+    ```
+
+    Example 4: Forcing a fix scale ratio to maintain the arrow length
+    ```
+    import plotly.plotly as py
+    from plotly.figure_factory import create_quiver
+
+    import numpy as np
+
+    # Add data
+    x,y = np.meshgrid(np.arange(0.5, 3.5, .5), np.arange(0.5, 4.5, .5))
+    u = x
+    v = y
+    angle = np.arctan(v / u)
+    norm = 0.25
+    u = norm * np.cos(angle)
+    v = norm * np.sin(angle)
+
+    # Create quiver with a fix scale ratio
+    fig = create_quiver(x, y, u, v, scale = 1, scaleratio = 0.5)
 
     # Plot
     py.plot(fig, filename='quiver')
@@ -87,26 +113,39 @@ def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
     utils.validate_equal_length(x, y, u, v)
     utils.validate_positive_scalars(arrow_scale=arrow_scale, scale=scale)
 
-    barb_x, barb_y = _Quiver(x, y, u, v, scale,
-                             arrow_scale, angle).get_barbs()
-    arrow_x, arrow_y = _Quiver(x, y, u, v, scale,
-                               arrow_scale, angle).get_quiver_arrows()
-    quiver = graph_objs.Scatter(x=barb_x + arrow_x,
+    if scaleratio is None:
+        quiver_obj = _Quiver(x, y, u, v, scale, arrow_scale, angle)
+    else:
+        quiver_obj = _Quiver(x, y, u, v, scale, arrow_scale, angle, scaleratio)
+
+    barb_x, barb_y = quiver_obj.get_barbs()
+    arrow_x, arrow_y = quiver_obj.get_quiver_arrows()       
+        
+    quiver_plot = graph_objs.Scatter(x=barb_x + arrow_x,
                                 y=barb_y + arrow_y,
                                 mode='lines', **kwargs)
 
-    data = [quiver]
-    layout = graph_objs.Layout(hovermode='closest')
+    data = [quiver_plot]
+
+    if scaleratio is None:
+        layout = graph_objs.Layout(hovermode='closest')
+    else:
+        layout = graph_objs.Layout(
+            hovermode='closest',
+            yaxis=dict(
+                scaleratio = scaleratio,
+                scaleanchor = "x"
+                )
+            )
 
     return graph_objs.Figure(data=data, layout=layout)
-
 
 class _Quiver(object):
     """
     Refer to FigureFactory.create_quiver() for docstring
     """
     def __init__(self, x, y, u, v,
-                 scale, arrow_scale, angle, **kwargs):
+                 scale, arrow_scale, angle, scaleratio=1, **kwargs):
         try:
             x = utils.flatten(x)
         except exceptions.PlotlyError:
@@ -132,6 +171,7 @@ class _Quiver(object):
         self.u = u
         self.v = v
         self.scale = scale
+        self.scaleratio = scaleratio
         self.arrow_scale = arrow_scale
         self.angle = angle
         self.end_x = []
@@ -148,7 +188,7 @@ class _Quiver(object):
         endpoints of the arrows so a smaller scale value will
         result in less overlap of arrows.
         """
-        self.u = [i * self.scale for i in self.u]
+        self.u = [i * self.scale * self.scaleratio for i in self.u]
         self.v = [i * self.scale for i in self.v]
 
     def get_barbs(self):
@@ -194,7 +234,7 @@ class _Quiver(object):
         # Get barb lengths(default arrow length = 30% barb length)
         barb_len = [None] * len(self.x)
         for index in range(len(barb_len)):
-            barb_len[index] = math.hypot(dif_x[index], dif_y[index])
+            barb_len[index] = math.hypot(dif_x[index] / self.scaleratio, dif_y[index])
 
         # Make arrow lengths
         arrow_len = [None] * len(self.x)
@@ -203,7 +243,7 @@ class _Quiver(object):
         # Get barb angles
         barb_ang = [None] * len(self.x)
         for index in range(len(barb_ang)):
-            barb_ang[index] = math.atan2(dif_y[index], dif_x[index])
+            barb_ang[index] = math.atan2(dif_y[index], dif_x[index] / self.scaleratio)
 
         # Set angles to create arrow
         ang1 = [i + self.angle for i in barb_ang]
@@ -231,9 +271,9 @@ class _Quiver(object):
 
         # Set coordinates to create arrow
         for index in range(len(self.end_x)):
-            point1_x = [i - j for i, j in zip(self.end_x, seg1_x)]
+            point1_x = [i - j * self.scaleratio for i, j in zip(self.end_x, seg1_x)]
             point1_y = [i - j for i, j in zip(self.end_y, seg1_y)]
-            point2_x = [i - j for i, j in zip(self.end_x, seg2_x)]
+            point2_x = [i - j * self.scaleratio for i, j in zip(self.end_x, seg2_x)]
             point2_y = [i - j for i, j in zip(self.end_y, seg2_y)]
 
         # Combine lists to create arrow

@@ -2,9 +2,295 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [2.7.1] - [UNRELEASED]
+## [3.3.0] - 2018-09-28
+
 ### Updated
-- error message for `plotly.figure_factory.create_choropleth` is now helpful to Anaconda users who do not have the correct modules installed for the County Choropleth figure factory.
+ - Updated Plotly.js to version 1.41.3.  Select highlights included below, see
+ [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1413----2018-09-25)
+ for more information.
+ - Do not create or check permissions on the `~/.plotly` configuration
+ directory until a configuration write operation is performed
+ ([#1195](https://github.com/plotly/plotly.py/pull/1195)). This change
+ avoids some concurrency problems associated with running many instances of
+ plotly.py simultaneously
+ ([#1068](https://github.com/plotly/plotly.py/issues/1068)).
+ 
+### Added
+ - Enable selection by clicking on points via new layout attribute `clickmode` and flag `'select'`
+ ([#2944](https://github.com/plotly/plotly.js/pull/2944))
+ - Added stacked area charts via new attributes `stackgroup` and `stackgaps` in scatter traces
+ ([#2960](https://github.com/plotly/plotly.js/pull/2960))
+ - Added `barpolar` trace type - which replace and augment area traces
+ ([#2954](https://github.com/plotly/plotly.js/pull/2954))
+ - Added `polar.hole` layout parameter to punch hole at the middle of polar
+ subplot offsetting the start of the radial range
+ ([#2977](https://github.com/plotly/plotly.js/pull/2977), [#2996](https://github.com/plotly/plotly.js/pull/2996))
+ - Figures may now be easily converted to and from JSON using the new
+ `to_json`, `from_json`, `read_json`, and `write_json` functions in the
+ `plotly.io` package
+ ([#1188](https://github.com/plotly/plotly.py/pull/1188))
+ - Figures and graph objects now support `deepcopy` and `pickle` operations
+ ([#1191](https://github.com/plotly/plotly.py/pull/1191))
+ - The location of the `"~/.plotly"` settings directory may now be customized
+ using the `PLOTLY_DIR` environment variable
+ ([#1195](https://github.com/plotly/plotly.py/pull/1195))
+ - Added optional `scaleratio` argument to the `create_quiver` figure factory.
+ When specified, the axes are restricted to this ratio and the quiver arrows
+ are computed to have consistent lengths across angles.
+ ([#1197](https://github.com/plotly/plotly.py/pull/1197))
+ 
+### Fixed
+ - Replace use of `pkg_resources.resource_string` with `pkgutil.get_data` to
+ improve compatibility with `cx_Freeze`
+ ([#1201](https://github.com/plotly/plotly.py/pull/1201))
+ - An exception is no longer raised when an optional dependency raises an
+ exception on import.  The exception is logged and plotly.py continues as if
+ the dependency were not installed
+ ([#1192](https://github.com/plotly/plotly.py/pull/1192))
+ - Fixed invalid dendrogram axis labels when the points being clustered contain
+ duplicate values
+ ([#1186](https://github.com/plotly/plotly.py/pull/1186))
+ - Added missing LICENSE.txt file to PyPI source distribution
+ ([#765](https://github.com/plotly/plotly.py/issues/765))
+
+### JupyterLab Versions
+For use with JupyterLab, the following versions of the following packages
+must be installed:
+
+ - Python Packages
+   - plotly==3.3.0
+   - ipywidgets>=7.2
+   - notebook>=5.3
+   - jupyterlab==0.34
+   
+ - JupyterLab Extensions
+   - plotlywidget@0.4.0
+   - @jupyter-widgets/jupyterlab-manager@0.37
+   - @jupyterlab/plotly-extension@0.17
+
+## [3.2.1] - 2018-09-14
+This is a patch release that fixes a few bugs and reintroduces a few
+version 2 features that were not supported in version 3.
+
+The bundled version of plotly.js remains at 1.40.1
+
+### JupyterLab Versions
+For use with JupyterLab, the following versions of the following packages
+must be installed:
+
+ - Python Packages
+   - plotly==3.2.1
+   - ipywidgets>=7.2
+   - notebook>=5.3
+   - jupyterlab==0.34
+   
+ - JupyterLab Extensions
+   - plotlywidget@0.3.0
+   - @jupyter-widgets/jupyterlab-manager@0.37
+   - @jupyterlab/plotly-extension@0.17
+
+### Added
+ - An optional `skip_invalid` argument has been added to the `Figure` and
+  `FigureWidget` constructors. By default, `skip_invalid` is `False` and invalid
+  figure properties will result in an exception (this is identical to the
+  previous behavior).  When `skip_invalid` is set to `True`, invalid properties
+  will instead be silently ignored. This argument replaces the `_raise`
+  argument that was available in version 2, and makes it possible to import
+  figure definitions from different plotly versions, where incompatible
+  properties are ignored rather than causing an exception.
+ - A `to_ordered_dict` method has been added to the `Figure` and `FigureWidget`
+  classes. This method returns a representation of the figure as a nested
+  structure of `OrdererdDict` and `list` instances where the keys in each
+  `OrderedDict` are sorted alphabetically.  This method replaces the
+  `get_ordered` method that was available in version 2, and makes it possible
+  to traverse the nested structure of a figure in a deterministic order.
+
+### Fixed
+ - Pandas `Series` and `Index` objects storing `datetime` values were
+   incorrectly cast to numeric arrays
+   ([plotly/plotly.py#1160](https://github.com/plotly/plotly.py/issues/1160),
+    [plotly/plotly.py#1163](https://github.com/plotly/plotly.py/pull/1163))
+ - Numpy arrays with `uint64` datatype caused a `FigureWidget` error,
+   and no figure was displayed
+   ([plotly/plotly.py#1155](https://github.com/plotly/plotly.py/issues/1155),
+    [plotly/plotly.py#1163](https://github.com/plotly/plotly.py/pull/1163))
+
+## [3.2.0] - 2018-09-05
+This release introduces the long-anticipated ability to programmatically
+export figures as high quality static images in both raster and vector
+formats.
+
+### JupyterLab Versions (Python 3.5+)
+For use with JupyterLab, the following versions of the following packages
+must be installed:
+
+ - Python Packages
+   - plotly==3.2.0
+   - ipywidgets>=7.2
+   - notebook>=5.3
+   - jupyterlab==0.34
+   
+ - JupyterLab Extensions
+   - plotlywidget@0.3.0
+   - @jupyter-widgets/jupyterlab-manager@0.37
+   - @jupyterlab/plotly-extension@0.17
+
+### Added
+ - plotly.js version 1.40.1, which introduces the following features:
+    - Allow `contour`, `contourcarpet` and `histogram2dcontour` to have corresponding legend items using `showlegend`
+      ([plotly/plotly.js#2891](https://github.com/plotly/plotly.js/pull/2891),
+      [plotly/plotly.js#2914](https://github.com/plotly/plotly.js/pull/2914))
+    - Add scatterpolar and scatterpolargl attributes `r0`, `dr`, `theta0` and `dtheta`
+      ([plotly/plotly.js#2895](https://github.com/plotly/plotly.js/pull/2895))
+    - Add layout attributes `piecolorway` and `extendpiecolors` for more control over pie colors
+      ([plotly/plotly.js#2870](https://github.com/plotly/plotly.js/pull/2870))
+    - Add `splom` attribute `dimensions[i].axis.type` to easily override axis type in splom-generated axes
+      ([plotly/plotly.js#2899](https://github.com/plotly/plotly.js/pull/2870))
+    - Add support for on-graph text in `scatterpolargl` traces
+      ([plotly/plotly.js#2895](https://github.com/plotly/plotly.js/pull/2895))
+    - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1400----2018-08-16)
+      for bug fixes and more information.
+ - Support for offline static image export with the `to_image` and `write_image`
+   functions in the new `plotly.io` package ([#1120](https://github.com/plotly/plotly.py/pull/1120)).
+    - Note: Image export requires the plotly [orca](https://github.com/plotly/orca)
+      command line utility and the [`psutil`](https://github.com/giampaolo/psutil) Python package.
+ - New documentation sections covering [Static Image Export](https://plot.ly/python/static-image-export/)
+   and [Orca Management](https://plot.ly/python/orca-management/) 
+ - Support for displaying `FigureWidget` instances in static contexts
+   (e.g. [nbviewer](http://nbviewer.jupyter.org/)) just like the built-in ipywidgets
+ ([#1117](https://github.com/plotly/plotly.py/pull/1117))
+ - Full integration of the Cividis colorscale ([#883](https://github.com/plotly/plotly.py/pull/883))
+ - conda packaging
+   - From here forward, new versions of plotly.py will be published to the [plotly anaconda channel](https://anaconda.org/plotly/)
+     on the same day they are published to PyPI.
+     ([72ad0e4](https://github.com/plotly/plotly.py/commit/72ad0e4bf54bb8a06445d2ca55488ffc11c836a7))
+   - The [`README`](README.md) now includes conda installation instructions alongside the pip instructions. 
+   - In addition to the existing installation approaches, orca is now also available as a
+     [conda package](https://anaconda.org/plotly/plotly-orca) from the plotly anaconda channel.
+ 
+### Updated
+ - Show traces at the top of the Gantt chart's colorbar ([#1110](https://github.com/plotly/plotly.py/pull/1110))
+ - Significantly improved validation performance for numeric pandas `Series` objects ([#1149](https://github.com/plotly/plotly.py/pull/1149))
+ - Specialize auto-generated docstrings for Python syntax
+ - More robust and specific logic for retrying requests to the plot.ly cloud service ([#1146](https://github.com/plotly/plotly.py/pull/1146))
+ - Support basic authentication when using the streaming API behind a proxy server ([#1133](https://github.com/plotly/plotly.py/pull/1133))
+
+### Fixed
+ - Validators for `dash` properties (e.g. `scatter.line.dash`) incorrectly rejected dash length lists ([#1136](https://github.com/plotly/plotly.py/pull/1136))
+ - Annotated heatmap error when custom colorscale was specified ([#1151](https://github.com/plotly/plotly.py/pull/1151))
+ - Incorrect deprecation warning for deprecated `plotly.graph_objs.Annotations` class ([#1138](https://github.com/plotly/plotly.py/pull/1138))
+ - Harmless JavaScript console error when opening an html file produced by `plotly.offline.plot` ([#1152](https://github.com/plotly/plotly.py/pull/1152))
+ - Incorrect validation errors when writing data to the streaming API ([#1145](https://github.com/plotly/plotly.py/pull/1145))
+ 
+
+## [3.1.1] - 2018-08-10
+This release is a minor bug-fix update to version 3.1.0
+
+### JupyterLab Versions
+For use with JupyterLab, the following versions of the following packages
+must be installed:
+
+ - Python Packages
+   - plotly==3.1.1
+   - ipywidgets>=7.2
+   - notebook>=5.3
+   - jupyterlab==0.33
+   
+ - JupyterLab Extensions
+   - plotlywidget@0.2.1
+   - @jupyter-widgets/jupyterlab-manager@0.36
+   - @jupyterlab/plotly-extension@0.16
+
+### Updated
+ - Updated plotly.js to version 1.39.4.
+   - This is a bug-fix release of plotly.js
+   - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1394----2018-08-02) for more information
+
+### Fixed
+ - Fixed error in validation of configkeys
+   [plotly/plotly.js#1065](https://github.com/plotly/plotly.py/pull/1065)
+ - Fixed error in presentation of named colorscales
+   [plotly/plotly.js#1089](https://github.com/plotly/plotly.py/pull/1089)
+ - Fixed numerical precision error when using `plotly.tools.make_subplots`
+   to create figures with a large number of subplots
+   [plotly/plotly.js#1091](https://github.com/plotly/plotly.py/pull/1091)
+ - Fixed problem that prevented the use of the `.update` method to initialize
+   an array property (e.g. `layout.shapes`)
+   [plotly/plotly.js#1091](https://github.com/plotly/plotly.py/pull/1092)
+ - Fixed `FigureWidget` problem causing scroll zoom on 3D plots to stutter
+   [plotly/plotly.js#1094](https://github.com/plotly/plotly.py/pull/1094) 
+ - Fixed invalid `tickmode` property in `matplotlylib`
+   [plotly/plotly.js#1101](https://github.com/plotly/plotly.py/pull/1101)
+
+## [3.1.0] - 2018-07-20
+
+### JupyterLab Versions
+For use with JupyterLab, the following versions of the following packages
+must be installed. See [README.md](README.md) for instructions.
+
+ - Python Packages
+   - plotly==3.1.0
+   - ipywidgets>=7.2
+   - notebook>=5.3
+   - jupyterlab==0.32.1
+   
+ - JupyterLab Extensions
+   - plotlywidget@0.2.0
+   - @jupyter-widgets/jupyterlab-manager@0.35
+   - @jupyterlab/plotly-extension@0.16
+
+### Updated
+ - Updated Plotly.js to version 1.39.2
+ - See highlights below
+ - See [the plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1392----2018-07-16) for more information.
+   
+### Added
+ - Added 3D streamtube traces
+   [plotly/plotly.js#2658](https://github.com/plotly/plotly.js/pull/2658)
+ - Added support for on-graph text in scattergl traces
+ - Added gridshape attribute to polar subplots with values 'circular' (the default) and 'linear' (to draw polygon grids)
+   [plotly/plotly.js#2739](https://github.com/plotly/plotly.js/pull/2739)
+
+## [3.0.2] - 2018-07-17
+This is a minor bug-fix release to 3.0.0
+
+### JupyterLab plotlywidget version: 0.1.1
+
+### Plotly.js version: 1.38.3
+
+### Fixed
+ - Several errors related to numbered subplot labels (e.g. xaxis2, polar3, etc.)
+   [GH1057](https://github.com/plotly/plotly.py/pull/1057)
+ - Error where the `v` property was ignored in `cone` traces
+   [GH1060](https://github.com/plotly/plotly.py/pull/1060)
+ - Assorted performance improvements when constructing graph objects
+   [GH1061](https://github.com/plotly/plotly.py/pull/1061)
+   
+## [3.0.1] - 2018-07-17 [YANKED]
+Note: This release's installation was broken. It has been removed from PyPI
+
+## [3.0.0] - 2018-07-05
+
+This is a major version with many exciting updates. See the [Introducing plotly.py 3.0.0](https://medium.com/@plotlygraphs/introducing-plotly-py-3-0-0-7bb1333f69c6) post for more information.
+
+### JupyterLab plotlywidget version: 0.1.1
+
+### Plotly.js version: 1.38.3
+
+### Added
+- Full Jupyter ipywidgets integration with the new `graph_objs.FigureWidget` class
+- `FigureWidget` figures can be updated interactively using property assignment syntax
+- The full trace and layout API is generated from the plotly schema to provide a great experience for interactive use in the notebook
+- Support for setting array properties as numpy arrays. When numpy arrays are used, ipywidgets binary serialization protocol is used to avoid converting these to JSON strings.
+- Context manager API for animation. Run `help(go.Figure().batch_animate)` for the full doc string.
+- Perform automatic retries when communicating with plot.ly services. This introduces a new required dependency on the [retrying](https://pypi.org/project/retrying/) library.
+- Improved data validation covering the full API with clear, informative error messages. This means that incorrect properties and/or values now always raise a `ValueError` with a description of the error, the invalid property, and the available properties on the level that it was placed in the graph object. Eg. `go.Scatter(foo=123)` raises a validation error. See https://plot.ly/python/reference/ for a reference to all valid properties and values in the Python API.
+- Error message for `plotly.figure_factory.create_choropleth` is now helpful to Anaconda users who do not have the correct modules installed for the County Choropleth figure factory.
+
+### Changed / Deprecated
+Please see the [migration guid](migration-guide.md) for a full list of the changes and deprecations in version 3.0.0
+
+
 
 ## [2.7.0] - 2018-05-23
 ### Updated
