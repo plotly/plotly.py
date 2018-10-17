@@ -46,7 +46,7 @@ def test_validator_rejection_any2_type(val, validator_any2):
     with pytest.raises(ValueError) as validation_failure:
         validator_any2.validate_coerce(val)
 
-    assert 'must be a list or tuple.' in str(validation_failure.value)
+    assert 'Invalid value' in str(validation_failure.value)
 
 
 # ### Rejection by length ###
@@ -80,7 +80,7 @@ def test_validator_rejection_number3_length(val, validator_number3):
     with pytest.raises(ValueError) as validation_failure:
         validator_number3.validate_coerce(val)
 
-    assert 'must be a list or tuple of length 3.' in str(validation_failure.value)
+    assert 'Invalid value' in str(validation_failure.value)
 
 
 # ### Rejection by element type ###
@@ -89,11 +89,11 @@ def test_validator_rejection_number3_length(val, validator_number3):
     ((0.1, set(), 0.99), 1),
     ([[], '2', {}], 0)
 ])
-def test_validator_rejection_number3_length(val, first_invalid_ind, validator_number3):
+def test_validator_rejection_number3_element_type(val, first_invalid_ind, validator_number3):
     with pytest.raises(ValueError) as validation_failure:
         validator_number3.validate_coerce(val)
 
-    assert 'The prop[%d] property of parent must be a number.' % first_invalid_ind in str(validation_failure.value)
+    assert 'Invalid value' in str(validation_failure.value)
 
 
 # ### Rejection by element value ###
@@ -103,12 +103,11 @@ def test_validator_rejection_number3_length(val, first_invalid_ind, validator_nu
     ((0.1, -0.4, 0.99), 1),
     ([-1, 1, 0], 0)
 ])
-def test_validator_rejection_number3_length(val, first_invalid_ind, validator_number3):
+def test_validator_rejection_number3_element_value(val, first_invalid_ind, validator_number3):
     with pytest.raises(ValueError) as validation_failure:
         validator_number3.validate_coerce(val)
 
-    assert ('The prop[%d] property of parent must be in the range [0, 1]' % first_invalid_ind
-            in str(validation_failure.value))
+    assert ('in the interval [0, 1]' in str(validation_failure.value))
 
 
 # Number3 Tests (free_length=True)
@@ -130,7 +129,7 @@ def test_validator_acceptance_number3_free(val, validator_number3_free):
 @pytest.mark.parametrize('val', [
     'Not a list', 123, set(), {}
 ])
-def test_validator_rejection_any2_type(val, validator_number3_free):
+def test_validator_rejection_number3_free_element_type(val, validator_number3_free):
     with pytest.raises(ValueError) as validation_failure:
         validator_number3_free.validate_coerce(val)
 
@@ -154,7 +153,7 @@ def test_validator_rejection_number3_free_length(val, validator_number3_free):
     ((0.1, set()), 1),
     ([[]], 0)
 ])
-def test_validator_rejection_number3_length(val, first_invalid_ind, validator_number3_free):
+def test_validator_rejection_number3_free_element_value(val, first_invalid_ind, validator_number3_free):
     with pytest.raises(ValueError) as validation_failure:
         validator_number3_free.validate_coerce(val)
 
