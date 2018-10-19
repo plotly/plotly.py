@@ -220,7 +220,7 @@ class BaseValidator(object):
         """
         raise NotImplementedError()
 
-    def raise_invalid_val(self, v):
+    def raise_invalid_val(self, v, name=None):
         """
         Helper method to raise an informative exception when an invalid
         value is passed to the validate_coerce method.
@@ -229,6 +229,9 @@ class BaseValidator(object):
         ----------
         v :
             Value that was input to validate_coerce and could not be coerced
+        name : str or None
+            Property name to use in error message, if None (default) use the
+            plotly_name property
         Raises
         -------
         ValueError
@@ -238,7 +241,7 @@ class BaseValidator(object):
         Received value: {v}
 
 {valid_clr_desc}""".format(
-            name=self.plotly_name,
+            name=name if name else self.plotly_name,
             pname=self.parent_name,
             typ=type_str(v),
             v=repr(v),
@@ -1740,19 +1743,95 @@ class InfoArrayValidator(BaseValidator):
         return validator_class(
             plotly_name=plotly_name, parent_name=parent_name, **kwargs)
 
+    def validator_coerce_1d_array(self, row, row_ind):
+        """
+        Helper to perform validate_coerce on the elements of a list that has
+        already been confirmed to contain the same number of elements as
+        there are items.
+
+        This method updates the row elements in place
+        """
+        for c, validator in enumerate(self.item_validators):
+            orig_name = validator.plotly_name
+            validator.plotly_name = "{name}[{r}][{c}]".format(
+                name=self.plotly_name, r=row_ind, c=c)
+            try:
+                row[c] = validator.validate_coerce(row[c])
+            finally:
+                validator.plotly_name = orig_name
+
     def validate_coerce(self, v):
         if v is None:
             # Pass None through
-            pass
+            return None
         elif not is_array(v):
             self.raise_invalid_val(v)
+
+        # Save off original v value to use in error reporting
+        orig_v = v
+
+        # Convert everything into nested lists
+        # This way we don't need to worry about nested numpy arrays
+        v = to_scalar_or_list(v)
+
+        is_v_2d = v and is_array(v[0])
+
+        if is_v_2d:
+            if self.dimensions == 1:
+                self.raise_invalid_val(orig_v)
+            else:  # self.dimensions is '1-2' or 2
+                if is_array(self.items):
+                    # e.g. parcoords.dimensions.constraintrange
+                    # check that all items are there for each nested element
+                    for i, row in enumerate(v):
+                        # Check row length
+                        if not is_array(row) or len(row) != len(self.items):
+                            self.raise_invalid_val(
+                                orig_v[i], '{name}[{i}]'.format(
+                                    i=i,
+                                    name=self.plotly_name))
+
+                        self.validator_coerce_1d_array(row, i)
+                else:
+                    # e.g. layout.grid.subplots
+                    # check that all elements match individual validator
+                    validator = self.item_validators[0]
+                    for i, row in enumerate(v):
+                        if not is_array(row):
+                            self.raise_invalid_val(
+                                orig_v[i], '{name}[{i}]'.format(
+                                    i=i,
+                                    name=self.plotly_name))
+
+                        for j, el in enumerate(row):
+                            orig_name = validator.plotly_name
+                            validator.plotly_name = "{name}[{i}][{j}]".format(
+                                name=self.plotly_name, i=i, j=j)
+                            try:
+                                row[j] = validator.validate_coerce(el)
+                            finally:
+                                validator.plotly_name = orig_name
+        elif v and self.dimensions == 2:
+            self.raise_invalid_val(
+                orig_v[0], '{name}[0]'.format(name=self.plotly_name))
+        elif not is_array(self.items):
+            # e.g. layout.grid.xaxes
+            validator = self.item_validators[0]
+            for i, el in enumerate(v):
+                orig_name = validator.plotly_name
+                validator.plotly_name = "{name}[{i}]".format(
+                    name=self.plotly_name, i=i)
+                try:
+                    v[i] = validator.validate_coerce(el)
+                finally:
+                    validator.plotly_name = orig_name
+
         elif not self.free_length and len(v) != len(self.item_validators):
-            self.raise_invalid_val(v)
+            self.raise_invalid_val(orig_v)
         elif self.free_length and len(v) > len(self.item_validators):
-            self.raise_invalid_val(v)
+            self.raise_invalid_val(orig_v)
         else:
             # We have an array of the correct length
-            v = to_scalar_or_list(v)
             for i, (el, validator) in enumerate(zip(v, self.item_validators)):
                 # Validate coerce elements
                 v[i] = validator.validate_coerce(el)
@@ -1763,13 +1842,28 @@ class InfoArrayValidator(BaseValidator):
         if v is None:
             return None
         else:
-            # Call present on each of the item validators
-            for i, (el, validator) in enumerate(zip(v, self.item_validators)):
-                # Validate coerce elements
-                v[i] = validator.present(el)
+            if (self.dimensions == 2 or
+                    self.dimensions == '1-2' and v and is_array(v[0])):
 
-            # Return tuple form of
-            return tuple(v)
+                # 2D case
+                v = copy.deepcopy(v)
+                for row in v:
+                    for i, (el, validator) in enumerate(
+                            zip(row, self.item_validators)):
+                        row[i] = validator.present(el)
+
+                return tuple(tuple(row) for row in v)
+            else:
+                # 1D case
+                v = copy.copy(v)
+                # Call present on each of the item validators
+                for i, (el, validator) in enumerate(
+                        zip(v, self.item_validators)):
+                    # Validate coerce elements
+                    v[i] = validator.present(el)
+
+                # Return tuple form of
+                return tuple(v)
 
 
 class LiteralValidator(BaseValidator):
