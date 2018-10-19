@@ -916,7 +916,7 @@ class StringValidator(BaseValidator):
             if self.values and v not in self.values:
                 self.raise_invalid_val(v)
 
-        return v
+        return (v)
 
 
 class ColorValidator(BaseValidator):
@@ -1071,7 +1071,7 @@ class ColorValidator(BaseValidator):
 
             v = validated_v
 
-        return v
+        return (v)
 
     def find_invalid_els(self, orig, validated, invalid_els=None):
         """
@@ -1138,7 +1138,7 @@ class ColorValidator(BaseValidator):
                 return v
             elif v_normalized in ColorValidator.named_colors:
                 # Valid named color (e.g. 'coral')
-                return v
+                return (v)
             else:
                 # Not a valid color
                 return None
@@ -1187,7 +1187,7 @@ class ColorlistValidator(BaseValidator):
             v = to_scalar_or_list(v)
         else:
             self.raise_invalid_val(v)
-        return v
+        return (v)
 
 
 class ColorscaleValidator(BaseValidator):
