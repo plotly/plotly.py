@@ -41,6 +41,7 @@ def get_plotlyjs():
     plotlyjs = pkgutil.get_data('plotly', path).decode('utf-8')
     return plotlyjs
 
+
 def get_image_download_script(caller):
     """
     This function will return a script that will download an image of a Plotly

@@ -134,6 +134,7 @@ class _Table(object):
     """
     Refer to TraceFactory.create_table() for docstring
     """
+
     def __init__(self, table_text, colorscale, font_colors, index,
                  index_title, annotation_offset, **kwargs):
         if pd and isinstance(table_text, pd.DataFrame):

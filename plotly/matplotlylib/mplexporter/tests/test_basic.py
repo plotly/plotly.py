@@ -178,6 +178,7 @@ def test_legend():
                          closing figure
                          """)
 
+
 def test_legend_dots():
     fig, ax = plt.subplots()
     ax.plot([1,2,3], label='label')
@@ -200,8 +201,9 @@ def test_legend_dots():
                          closing figure
                          """)
 
+
 def test_blended():
     fig, ax = plt.subplots()
     ax.axvline(0)
     assert_warns(UserWarning, fake_renderer_output, fig, FakeRenderer)
-    
+

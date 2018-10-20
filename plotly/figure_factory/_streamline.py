@@ -141,6 +141,7 @@ class _Streamline(object):
     """
     Refer to FigureFactory.create_streamline() for docstring
     """
+
     def __init__(self, x, y, u, v,
                  density, angle,
                  arrow_scale, **kwargs):
@@ -358,7 +359,6 @@ class _Streamline(object):
         np.seterr(divide='ignore', invalid='ignore')
         streamline_ang = np.arctan(dif_y / dif_x)
         np.seterr(**orig_err)
-
 
         ang1 = streamline_ang + (self.angle)
         ang2 = streamline_ang - (self.angle)

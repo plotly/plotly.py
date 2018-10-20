@@ -234,6 +234,7 @@ class _Candlestick(object):
     """
     Refer to FigureFactory.create_candlestick() for docstring.
     """
+
     def __init__(self, open, high, low, close, dates, **kwargs):
         self.open = open
         self.high = high

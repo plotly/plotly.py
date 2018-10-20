@@ -33,6 +33,7 @@ def many_to_one(input_dict):
                 for keys, val in input_dict.items()
                 for key in keys)
 
+
 LINESTYLES = many_to_one({('solid', '-', (None, None)): "10,0",
                           ('dashed', '--'): "6,6",
                           ('dotted', ':'): "2,2",
@@ -324,7 +325,7 @@ def get_legend_properties(ax, legend):
     handles, labels = ax.get_legend_handles_labels()
     visible = legend.get_visible()
     return {'handles': handles, 'labels': labels, 'visible': visible}
-    
+
 
 def image_to_base64(image):
     """

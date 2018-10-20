@@ -19,6 +19,8 @@ from plotly.matplotlylib import mpltools
 # Warning format
 def warning_on_one_line(msg, category, filename, lineno, file=None, line=None):
     return '%s:%s: %s:\n\n%s\n\n' % (filename, lineno, category.__name__, msg)
+
+
 warnings.formatwarning = warning_on_one_line
 
 
@@ -40,6 +42,7 @@ class PlotlyRenderer(Renderer):
     exporter.run(fig)  # ... et voila
 
     """
+
     def __init__(self):
         """Initialize PlotlyRenderer obj.
 
@@ -181,7 +184,6 @@ class PlotlyRenderer(Renderer):
 
         if 'type' in dir(xaxis) and xaxis['type'] == 'date':
             self.x_is_mpl_date = True
-
 
     def close_axes(self, ax):
         """Close the axes object and clean up.
@@ -347,7 +349,7 @@ class PlotlyRenderer(Renderer):
                 mpltools.merge_color_and_opacity(props['linestyle']['color'],
                                                  props['linestyle']['alpha'])
 
-            #print(mpltools.convert_dash(props['linestyle']['dasharray']))
+            # print(mpltools.convert_dash(props['linestyle']['dasharray']))
             line = go.scatter.Line(
                 color=color,
                 width=props['linestyle']['linewidth'],

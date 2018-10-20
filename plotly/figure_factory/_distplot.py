@@ -237,6 +237,7 @@ class _Distplot(object):
     """
     Refer to TraceFactory.create_distplot() for docstring
     """
+
     def __init__(self, hist_data, histnorm, group_labels,
                  bin_size, curve_type, colors,
                  rug_text, show_hist, show_curve):

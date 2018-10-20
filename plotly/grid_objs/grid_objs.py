@@ -52,6 +52,7 @@ class Column(object):
     py.plot([trace], filename='graph from grid')
     ```
     """
+
     def __init__(self, data, name):
         """
         Initialize a Plotly column with `data` and `name`.
@@ -121,6 +122,7 @@ class Grid(MutableSequence):
     py.plot([trace], filename='graph from grid')
     ```
     """
+
     def __init__(self, columns_or_json, fid=None):
         """
         Initialize a grid with an iterable of `plotly.grid_objs.Column`

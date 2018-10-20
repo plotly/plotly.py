@@ -32,7 +32,7 @@ pandas = get_module('pandas')
 sage_all = get_module('sage.all')
 
 
-### incase people are using threading, we lock file reads
+# incase people are using threading, we lock file reads
 lock = threading.Lock()
 
 PY36 = (
@@ -145,6 +145,7 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
     version.
 
     """
+
     def coerce_to_strict(self, const):
         """
         This is used to ultimately *encode* into strict JSON, see `encode`
@@ -378,7 +379,7 @@ def get_first_duplicate(items):
     return None
 
 
-### source key
+# source key
 def is_source_key(key):
     src_regex = re.compile(r'.+src$')
     if src_regex.match(key) is not None:
@@ -441,7 +442,7 @@ def get_by_path(obj, path):
     return obj
 
 
-### validation
+# validation
 def validate_world_readable_and_sharing_settings(option_set):
     if ('world_readable' in option_set and
         option_set['world_readable'] is True and
@@ -581,6 +582,7 @@ class ElidedWrapper(object):
     __repr__() that may be elided and is suitable for use during pretty
     printing
     """
+
     def __init__(self, v, threshold, indent):
         self.v = v
         self.indent = indent
@@ -643,6 +645,7 @@ class ElidedPrettyPrinter(PrettyPrinter):
     """
     PrettyPrinter subclass that elides long lists/arrays/strings
     """
+
     def __init__(self, *args, **kwargs):
         self.threshold = kwargs.pop('threshold', 200)
         PrettyPrinter.__init__(self, *args, **kwargs)

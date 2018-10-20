@@ -386,6 +386,7 @@ def validate_colors_dict(colors, colortype='tuple'):
 
     return colors
 
+
 def colorscale_to_colors(colorscale):
     """
     Extracts the colors from colorscale as a list
@@ -437,7 +438,7 @@ def validate_scale_values(scale):
 def validate_colorscale(colorscale):
     """Validate the structure, scale values and colors of colorscale."""
     if not isinstance(colorscale, list):
-        #TODO Write tests for these exceptions
+        # TODO Write tests for these exceptions
         raise exceptions.PlotlyError("A valid colorscale must be a list.")
     if not all(isinstance(innerlist, list) for innerlist in colorscale):
         raise exceptions.PlotlyError(

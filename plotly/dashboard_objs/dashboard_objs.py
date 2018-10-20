@@ -45,6 +45,7 @@ def _box(fileId='', shareKey=None, title=''):
     }
     return box
 
+
 def _container(box_1=None, box_2=None,
                size=50, sizeUnit='%',
                direction='vertical'):
@@ -63,6 +64,7 @@ def _container(box_1=None, box_2=None,
     }
 
     return container
+
 
 dashboard_html = ("""
 <!DOCTYPE HTML>
@@ -218,6 +220,7 @@ class Dashboard(dict):
     # my_dboard.get_preview()
     ```
     """
+
     def __init__(self, content=None):
         if content is None:
             content = {}

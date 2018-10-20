@@ -131,6 +131,7 @@ class _AnnotatedHeatmap(object):
     """
     Refer to TraceFactory.create_annotated_heatmap() for docstring
     """
+
     def __init__(self, z, x, y, annotation_text, colorscale,
                  font_colors, reversescale, **kwargs):
 

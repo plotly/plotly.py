@@ -55,6 +55,8 @@ def warning_on_one_line(message, category, filename, lineno,
                         file=None, line=None):
     return '%s:%s: %s:\n\n%s\n\n' % (filename, lineno, category.__name__,
                                      message)
+
+
 warnings.formatwarning = warning_on_one_line
 
 ipython_core_display = optional_imports.get_module('IPython.core.display')
@@ -1402,7 +1404,7 @@ def validate(obj, obj_type):
 
     try:
         cls = getattr(graph_objs, obj_type)
-    #except AttributeError:
+    # except AttributeError:
     except ValueError:
         raise exceptions.PlotlyError(
             "'{0}' is not a recognizable graph_obj.".
@@ -1447,6 +1449,7 @@ if ipython_core_display:
         object can provide alternate representations.
 
         """
+
         def __init__(self, url, width, height):
             self.resource = url
             self.embed_code = get_embed(url, width=width, height=height)
@@ -1495,6 +1498,7 @@ def return_figure_from_figure_or_data(figure_or_data, validate_figure):
             )
 
     return figure
+
 
 # Default colours for finance charts
 _DEFAULT_INCREASING_COLOR = '#3D9970'  # http://clrs.cc

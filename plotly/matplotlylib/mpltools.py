@@ -314,6 +314,7 @@ def convert_path_array(path_array):
     else:
         return symbols
 
+
 def convert_linewidth_array(width_array):
     if len(width_array) == 1:
         return width_array[0]
@@ -361,6 +362,7 @@ def get_rect_ymax(data):
     """Find maximum y value from four (x,y) vertices."""
     return max(data[0][1], data[1][1], data[2][1], data[3][1])
 
+
 def get_spine_visible(ax, spine_key):
     """Return some spine parameters for the spine, `spine_key`."""
     spine = ax.spines[spine_key]
@@ -377,7 +379,7 @@ def get_spine_visible(ax, spine_key):
     elif not ax_frame_on and not spine_frame_like:
         return True  # we've already checked for that it's visible.
     else:
-        return False # oh man, and i thought we exhausted the options...
+        return False  # oh man, and i thought we exhausted the options...
 
 
 def is_bar(bar_containers, **props):
@@ -415,6 +417,7 @@ def make_bar(**props):
         'zorder': props['style']['zorder']
     }
 
+
 def prep_ticks(ax, index, ax_type, props):
     """Prepare axis obj belonging to axes obj.
 
@@ -431,7 +434,7 @@ def prep_ticks(ax, index, ax_type, props):
     elif ax_type == 'y':
         axis = ax.get_yaxis()
     else:
-        return dict() # whoops!
+        return dict()  # whoops!
 
     scale = props['axes'][index]['scale']
     if scale == 'linear':
@@ -553,6 +556,7 @@ def mpl_dates_to_datestrings(dates, mpl_formatter):
     time_stings = [' '.join(date.isoformat().split('+')[0].split('T'))
                    for date in dates]
     return time_stings
+
 
 # dashed is dash in matplotlib
 DASH_MAP = {

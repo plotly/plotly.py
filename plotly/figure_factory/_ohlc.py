@@ -289,6 +289,7 @@ class _OHLC(object):
     """
     Refer to FigureFactory.create_ohlc_increase() for docstring.
     """
+
     def __init__(self, open, high, low, close, dates, **kwargs):
         self.open = open
         self.high = high

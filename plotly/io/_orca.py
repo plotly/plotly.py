@@ -213,6 +213,7 @@ class OrcaConfig(object):
     directory using the `save` method, in which case they are automatically
     restored in future sessions.
     """
+
     def __init__(self):
 
         # Initialize properties dict
