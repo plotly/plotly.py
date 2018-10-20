@@ -204,4 +204,4 @@ def test_blended():
     fig, ax = plt.subplots()
     ax.axvline(0)
     assert_warns(UserWarning, fake_renderer_output, fig, FakeRenderer)
-
+    

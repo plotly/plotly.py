@@ -324,7 +324,7 @@ def get_legend_properties(ax, legend):
     handles, labels = ax.get_legend_handles_labels()
     visible = legend.get_visible()
     return {'handles': handles, 'labels': labels, 'visible': visible}
-
+    
 
 def image_to_base64(image):
     """
