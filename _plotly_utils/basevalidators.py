@@ -2117,7 +2117,7 @@ class BaseDataValidator(BaseValidator):
             # Set new UIDs
             if self.set_uid:
                 for trace in v:
-                    trace.uid = str(uuid.uuid1())
+                    trace.uid = str(uuid.uuid4())
 
         else:
             if skip_invalid:
