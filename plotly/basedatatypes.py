@@ -240,9 +240,11 @@ class BaseFigure(object):
         # --------
         # ### Check for default template ###
         import plotly.io as pio
-        if (self._layout_obj.template is None and
-                pio.templates.default is not None):
-            self._layout_obj.template = pio.templates.default
+        if self._layout_obj.template is None:
+            if pio.templates.default is not None:
+                self._layout_obj.template = pio.templates.default
+            else:
+                self._layout_obj.template = {}
 
     # Magic Methods
     # -------------

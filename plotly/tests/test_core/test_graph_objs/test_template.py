@@ -26,7 +26,7 @@ class TemplateTest(TestCase):
     # -------------------------
     def test_starts_as_none(self):
         fig = go.Figure()
-        self.assertIsNone(fig.layout.template)
+        self.assertEqual(fig.layout.template, go.layout.Template())
 
     def test_init_in_figure_constructor(self):
         fig = go.Figure(layout={
@@ -127,7 +127,7 @@ class TemplateTest(TestCase):
 
     def test_template_as_name_assignment(self):
         fig = go.Figure()
-        self.assertIsNone(fig.layout.template)
+        self.assertEqual(fig.layout.template, go.layout.Template())
 
         fig.layout.template = 'test_template'
         self.assertEqual(fig.layout.template, pio.templates['test_template'])
