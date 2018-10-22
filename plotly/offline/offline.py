@@ -358,8 +358,12 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         plot_html, plotdivid, width, height = _plot_html(
             figure_or_data, config, validate, '100%', 525, True
         )
-        display_bundle['text/html'] = plot_html
-        display_bundle['text/vnd.plotly.v1+html'] = plot_html
+        resize_script = ''
+        if width == '100%' or height == '100%':
+            resize_script = _build_resize_script(plotdivid)
+
+        display_bundle['text/html'] = plot_html + resize_script
+        display_bundle['text/vnd.plotly.v1+html'] = plot_html + resize_script
 
     ipython_display.display(display_bundle, raw=True)
 
@@ -387,6 +391,17 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         time.sleep(1)
         # inject code to download an image of the plot
         ipython_display.display(ipython_display.HTML(script))
+
+
+def _build_resize_script(plotdivid):
+    resize_script = (
+        ''
+        '<script type="text/javascript">'
+        'window.addEventListener("resize", function(){{'
+        'Plotly.Plots.resize(document.getElementById("{id}"));}});'
+        '</script>'
+    ).format(id=plotdivid)
+    return resize_script
 
 
 def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
@@ -477,13 +492,7 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
 
     resize_script = ''
     if width == '100%' or height == '100%':
-        resize_script = (
-            ''
-            '<script type="text/javascript">'
-            'window.addEventListener("resize", function(){{'
-            'Plotly.Plots.resize(document.getElementById("{id}"));}});'
-            '</script>'
-        ).format(id=plotdivid)
+        resize_script = _build_resize_script(plotdivid)
 
     if output_type == 'file':
         with open(filename, 'w') as f:
