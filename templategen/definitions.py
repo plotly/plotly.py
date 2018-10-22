@@ -205,6 +205,16 @@ plotly_clrs = {
     'Sienna': '#EF553B'
 }
 
+# ## Add interpolated theme colors
+#
+# Interpolate from Rhino Dark to 0.5 of the way toward Black
+# https://meyerweb.com/eric/tools/color-blend/#506784:000000:1:hex
+plotly_clrs['Rhino Darker'] = '#283442'
+
+# https://meyerweb.com/eric/tools/color-blend/#DFE8F3:EBF0F8:1:hex
+plotly_clrs['Rhino Light 1.5'] = '#E5ECF6'
+
+
 bmw_subset = cc.b_linear_bmw_5_95_c86[50:230]
 linear_bmw_5_95_c86_n256 = [
     [i/(len(bmw_subset)-1), clr] for i, clr in enumerate(bmw_subset)
@@ -241,7 +251,6 @@ def plotly():
 
     # Common axis common properties
     axis_common = dict(
-        showgrid=True,
         gridcolor='white',
         linecolor='white',
         ticks='')
@@ -264,7 +273,7 @@ def plotly():
     template = initialize_template(
         paper_clr='white',
         font_clr=plotly_clrs['Rhino Core'],
-        panel_background_clr=plotly_clrs['Rhino Light 1'],
+        panel_background_clr=plotly_clrs['Rhino Light 1.5'],
         panel_grid_clr='white',
         axis_ticks_clr=plotly_clrs['Rhino Core'],
         zerolinecolor_clr='white',
@@ -319,7 +328,6 @@ def plotly_white():
 
     # Common axis common properties
     axis_common = dict(
-        showgrid=True,
         gridcolor=plotly_clrs['Rhino Light 2'],
         linecolor=plotly_clrs['Rhino Light 2'],
         ticks='')
@@ -404,10 +412,10 @@ def plotly_dark():
         ticks='')
 
     # Common axis common properties
+    grid_color = plotly_clrs['Rhino Dark']
     axis_common = dict(
-        showgrid=True,
-        gridcolor=plotly_clrs['Rhino Dark'],
-        linecolor=plotly_clrs['Rhino Dark'],
+        gridcolor=grid_color,
+        linecolor=grid_color,
         ticks='')
 
     # semi-transparent black and no outline
@@ -422,14 +430,13 @@ def plotly_dark():
         'arrowcolor': annotation_clr,
         'arrowhead': 0,
         'arrowwidth': 1
-
     }
 
     template = initialize_template(
         paper_clr=jupyterlab_output_clr,
         font_clr=plotly_clrs['Rhino Light 4'],
         panel_background_clr=jupyterlab_output_clr,
-        panel_grid_clr=plotly_clrs['Rhino Medium 1'],
+        panel_grid_clr=grid_color,
         axis_ticks_clr=plotly_clrs['Rhino Medium 1'],
         zerolinecolor_clr=plotly_clrs['Rhino Medium 2'],
         table_cell_clr=plotly_clrs['Rhino Dark'],
@@ -457,6 +464,10 @@ def plotly_dark():
     template.layout.sliderdefaults.borderwidth = 1
     template.layout.sliderdefaults.bordercolor = 'rgb(17,17,17)'
     template.layout.sliderdefaults.tickwidth = 0
+
+    # Darken cartesian grid lines a little more
+    template.layout.xaxis.gridcolor = plotly_clrs['Rhino Darker']
+    template.layout.yaxis.gridcolor = plotly_clrs['Rhino Darker']
 
     # Set table header font color to white
     return template
