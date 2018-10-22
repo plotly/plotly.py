@@ -74,6 +74,12 @@ def test_validator_acceptance_any2(val, validator_any2):
     assert validator_any2.present(coerce_val) == tuple(val)
 
 
+def test_validator_acceptance_any2_none(validator_any2):
+    coerce_val = validator_any2.validate_coerce(None)
+    assert coerce_val is None
+    assert validator_any2.present(coerce_val) is None
+
+
 # ### Rejection by type ###
 @pytest.mark.parametrize('val', [
     'Not a list', 123, set(), {}
