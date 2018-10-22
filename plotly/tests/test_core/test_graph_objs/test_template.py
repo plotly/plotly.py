@@ -24,7 +24,7 @@ class TemplateTest(TestCase):
 
     # template graph_objs tests
     # -------------------------
-    def test_starts_as_none(self):
+    def test_starts_as_empty(self):
         fig = go.Figure()
         self.assertEqual(fig.layout.template, go.layout.Template())
 
@@ -44,7 +44,6 @@ class TemplateTest(TestCase):
     def test_init_in_property_assignment(self):
         fig = go.Figure()
 
-        fig.layout.template = {}
         fig.layout.template = go.layout.Template(
             layout={'title': 'Hello, world'})
 
@@ -76,7 +75,6 @@ class TemplateTest(TestCase):
     def test_defaults_in_property_assignment(self):
         fig = go.Figure()
 
-        fig.layout.template = {}
         fig.layout.template.layout.sliderdefaults = \
             go.layout.Slider(bgcolor='green')
 
@@ -186,8 +184,7 @@ class TestToTemplated(TestCase):
                                 'title': 'Hello'})
         templated_fig = pio.to_templated(fig, skip=None)
 
-        # Note that properties named 'title' are not moved to template by
-        # default
+        # With skip=None properties named 'title' should be moved to template
         expected_fig = go.Figure(layout={
             'template': {'layout': {'font': {'family': 'Courier New'},
                                     'paper_bgcolor': 'yellow',

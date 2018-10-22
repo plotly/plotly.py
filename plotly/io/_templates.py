@@ -410,10 +410,6 @@ def to_templated(fig, skip=('title', 'text')):
     # Initialize templated figure with deep copy of input figure
     templated_fig = copy.deepcopy(fig)
 
-    # Initialize template object
-    if templated_fig.layout.template is None:
-        templated_fig.layout.template = {}
-
     # Handle layout
     walk_push_to_template(templated_fig.layout,
                           templated_fig.layout.template.layout,

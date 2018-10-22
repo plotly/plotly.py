@@ -19,7 +19,7 @@ def ggplot2():
     # https://ggplot2.tidyverse.org/reference/scale_colour_continuous.html
     colorscale = [[0, 'rgb(20,44,66)'], [1, 'rgb(90,179,244)']]
 
-    # Hue cycle for 3 categories
+    # Hue cycle for 5 categories
     colorway = ["#F8766D", "#A3A500", "#00BF7D", "#00B0F6", "#E76BF3"]
 
     # Set colorbar_common
@@ -214,7 +214,10 @@ plotly_clrs['Rhino Darker'] = '#283442'
 # https://meyerweb.com/eric/tools/color-blend/#DFE8F3:EBF0F8:1:hex
 plotly_clrs['Rhino Light 1.5'] = '#E5ECF6'
 
-
+# Perceptually uniform colorscale that matches brand colors really well.
+# Trim the upper and lower ends so that it doesn't go so close to black and
+# white.  This makes the scale more visible on both white and black
+# backgrounds
 bmw_subset = cc.b_linear_bmw_5_95_c86[50:230]
 linear_bmw_5_95_c86_n256 = [
     [i/(len(bmw_subset)-1), clr] for i, clr in enumerate(bmw_subset)
@@ -228,13 +231,6 @@ def plotly():
     # -------------
     colorscale = linear_bmw_5_95_c86_n256
 
-    # Hue cycle for 3 categories
-    #
-    # Created with:
-    # import seaborn as sns
-    # sns.set()
-    # [f'rgb({int(r*255)},{int(g*255)},{int(b*255)})'
-    #  for r, g, b in sns.color_palette()]
     colorway = [
         plotly_clrs['Cornflower'],
         plotly_clrs['Sienna'],
@@ -305,13 +301,6 @@ def plotly_white():
     # -------------
     colorscale = linear_bmw_5_95_c86_n256
 
-    # Hue cycle for 3 categories
-    #
-    # Created with:
-    # import seaborn as sns
-    # sns.set()
-    # [f'rgb({int(r*255)},{int(g*255)},{int(b*255)})'
-    #  for r, g, b in sns.color_palette()]
     colorway = [
         plotly_clrs['Cornflower'],
         plotly_clrs['Sienna'],
@@ -390,13 +379,6 @@ def plotly_dark():
     # -------------
     colorscale = linear_bmw_5_95_c86_n256
 
-    # Hue cycle for 3 categories
-    #
-    # Created with:
-    # import seaborn as sns
-    # sns.set()
-    # [f'rgb({int(r*255)},{int(g*255)},{int(b*255)})'
-    #  for r, g, b in sns.color_palette()]
     colorway = [
         plotly_clrs['Cornflower'],
         plotly_clrs['Sienna'],
@@ -478,7 +460,7 @@ builders['plotly_dark'] = plotly_dark
 
 def presentation():
     """
-    Template the increases the size of text and markers/lines for certain
+    Template that increases the size of text and markers/lines for certain
     trace types
     """
 
