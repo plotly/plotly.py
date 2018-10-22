@@ -541,7 +541,12 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                 '</div>',
             ])
         else:
-            return plot_html
+            return ''.join([
+                '<div>',
+                plot_html,
+                resize_script,
+                '</div>',
+            ])
 
 
 def plot_mpl(mpl_fig, resize=False, strip_style=False,
