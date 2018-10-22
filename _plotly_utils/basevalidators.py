@@ -220,7 +220,7 @@ class BaseValidator(object):
         """
         raise NotImplementedError()
 
-    def raise_invalid_val(self, v, name=None):
+    def raise_invalid_val(self, v, inds=None):
         """
         Helper method to raise an informative exception when an invalid
         value is passed to the validate_coerce method.
@@ -229,19 +229,25 @@ class BaseValidator(object):
         ----------
         v :
             Value that was input to validate_coerce and could not be coerced
-        name : str or None
-            Property name to use in error message, if None (default) use the
-            plotly_name property
+        inds: list of int or None (default)
+            Indexes to display after property name. e.g. if self.plotly_name
+            is 'prop' and inds=[2, 1] then the name in the validation error
+            message will be 'prop[2][1]`
         Raises
         -------
         ValueError
         """
+        name = self.plotly_name
+        if inds:
+            for i in inds:
+                name += '[' + str(i) + ']'
+
         raise ValueError("""
     Invalid value of type {typ} received for the '{name}' property of {pname}
         Received value: {v}
 
 {valid_clr_desc}""".format(
-            name=name if name else self.plotly_name,
+            name=name,
             pname=self.parent_name,
             typ=type_str(v),
             v=repr(v),
@@ -1743,22 +1749,45 @@ class InfoArrayValidator(BaseValidator):
         return validator_class(
             plotly_name=plotly_name, parent_name=parent_name, **kwargs)
 
-    def validator_coerce_1d_array(self, row, row_ind):
+    def validate_element_with_indexed_name(self, val, validator, inds):
         """
-        Helper to perform validate_coerce on the elements of a list that has
-        already been confirmed to contain the same number of elements as
-        there are items.
+        Helper to add indexes to a validator's name, call validate_coerce on
+        a value, then restore the original validator name.
 
-        This method updates the row elements in place
+        This makes sure that if a validation error message is raised, the
+        property name the user sees includes the index(es) of the offending
+        element.
+
+        Parameters
+        ----------
+        val:
+            A value to be validated
+        validator
+            A validator
+        inds
+            List of one or more non-negative integers that represent the
+            nested index of the value being validated
+        Returns
+        -------
+        val
+            validated value
+
+        Raises
+        ------
+        ValueError
+            if val fails validation
         """
-        for c, validator in enumerate(self.item_validators):
-            orig_name = validator.plotly_name
-            validator.plotly_name = "{name}[{r}][{c}]".format(
-                name=self.plotly_name, r=row_ind, c=c)
-            try:
-                row[c] = validator.validate_coerce(row[c])
-            finally:
-                validator.plotly_name = orig_name
+        orig_name = validator.plotly_name
+        new_name = self.plotly_name
+        for i in inds:
+            new_name += '[' + str(i) + ']'
+        validator.plotly_name = new_name
+        try:
+            val = validator.validate_coerce(val)
+        finally:
+            validator.plotly_name = orig_name
+
+        return val
 
     def validate_coerce(self, v):
         if v is None:
@@ -1781,57 +1810,45 @@ class InfoArrayValidator(BaseValidator):
                 self.raise_invalid_val(orig_v)
             else:  # self.dimensions is '1-2' or 2
                 if is_array(self.items):
-                    # e.g. parcoords.dimensions.constraintrange
+                    # e.g. 2D list as parcoords.dimensions.constraintrange
                     # check that all items are there for each nested element
                     for i, row in enumerate(v):
                         # Check row length
                         if not is_array(row) or len(row) != len(self.items):
-                            self.raise_invalid_val(
-                                orig_v[i], '{name}[{i}]'.format(
-                                    i=i,
-                                    name=self.plotly_name))
+                            self.raise_invalid_val(orig_v[i], [i])
 
-                        self.validator_coerce_1d_array(row, i)
+                        for j, validator in enumerate(self.item_validators):
+                            row[j] = self.validate_element_with_indexed_name(
+                                v[i][j], validator, [i, j])
                 else:
-                    # e.g. layout.grid.subplots
+                    # e.g. 2D list as layout.grid.subplots
                     # check that all elements match individual validator
                     validator = self.item_validators[0]
                     for i, row in enumerate(v):
                         if not is_array(row):
-                            self.raise_invalid_val(
-                                orig_v[i], '{name}[{i}]'.format(
-                                    i=i,
-                                    name=self.plotly_name))
+                            self.raise_invalid_val(orig_v[i], [i])
 
                         for j, el in enumerate(row):
-                            orig_name = validator.plotly_name
-                            validator.plotly_name = "{name}[{i}][{j}]".format(
-                                name=self.plotly_name, i=i, j=j)
-                            try:
-                                row[j] = validator.validate_coerce(el)
-                            finally:
-                                validator.plotly_name = orig_name
+                            row[j] = self.validate_element_with_indexed_name(
+                                el, validator, [i, j])
         elif v and self.dimensions == 2:
-            self.raise_invalid_val(
-                orig_v[0], '{name}[0]'.format(name=self.plotly_name))
+            # e.g. 1D list passed as layout.grid.subplots
+            self.raise_invalid_val(orig_v[0], [0])
         elif not is_array(self.items):
-            # e.g. layout.grid.xaxes
+            # e.g. 1D list passed as layout.grid.xaxes
             validator = self.item_validators[0]
             for i, el in enumerate(v):
-                orig_name = validator.plotly_name
-                validator.plotly_name = "{name}[{i}]".format(
-                    name=self.plotly_name, i=i)
-                try:
-                    v[i] = validator.validate_coerce(el)
-                finally:
-                    validator.plotly_name = orig_name
+                v[i] = self.validate_element_with_indexed_name(
+                    el, validator, [i])
 
         elif not self.free_length and len(v) != len(self.item_validators):
+            # e.g. 3 element list as layout.xaxis.range
             self.raise_invalid_val(orig_v)
         elif self.free_length and len(v) > len(self.item_validators):
+            # e.g. 4 element list as layout.updatemenu.button.args
             self.raise_invalid_val(orig_v)
         else:
-            # We have an array of the correct length
+            # We have a 1D array of the correct length
             for i, (el, validator) in enumerate(zip(v, self.item_validators)):
                 # Validate coerce elements
                 v[i] = validator.validate_coerce(el)
