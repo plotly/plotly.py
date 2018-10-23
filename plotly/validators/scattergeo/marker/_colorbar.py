@@ -143,6 +143,12 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 plotly.graph_objs.scattergeo.marker.colorbar.Ti
                 ckformatstop instance or dict with compatible
                 properties
+            tickformatstopdefaults
+                When used in a template (as layout.template.dat
+                a.scattergeo.marker.colorbar.tickformatstopdefa
+                ults), sets the default property values to use
+                for elements of
+                scattergeo.marker.colorbar.tickformatstops
             ticklen
                 Sets the tick length (in px).
             tickmode

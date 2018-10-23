@@ -1776,6 +1776,7 @@ an instance of plotly.graph_objs.Scatterpolar"""
         self._validators['type'] = LiteralValidator(
             plotly_name='type', parent_name='scatterpolar', val='scatterpolar'
         )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

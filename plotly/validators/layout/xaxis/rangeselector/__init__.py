@@ -4,6 +4,7 @@ from ._xanchor import XanchorValidator
 from ._x import XValidator
 from ._visible import VisibleValidator
 from ._font import FontValidator
+from ._buttondefaults import ButtonValidator
 from ._buttons import ButtonsValidator
 from ._borderwidth import BorderwidthValidator
 from ._bordercolor import BordercolorValidator

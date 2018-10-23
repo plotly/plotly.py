@@ -214,6 +214,12 @@ class RadialAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 plotly.graph_objs.layout.polar.radialaxis.Tickf
                 ormatstop instance or dict with compatible
                 properties
+            tickformatstopdefaults
+                When used in a template (as layout.template.lay
+                out.polar.radialaxis.tickformatstopdefaults),
+                sets the default property values to use for
+                elements of
+                layout.polar.radialaxis.tickformatstops
             ticklen
                 Sets the tick length (in px).
             tickmode

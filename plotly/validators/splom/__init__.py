@@ -20,6 +20,7 @@ from ._ids import IdsValidator
 from ._hoverlabel import HoverlabelValidator
 from ._hoverinfosrc import HoverinfosrcValidator
 from ._hoverinfo import HoverinfoValidator
+from ._dimensiondefaults import DimensionValidator
 from ._dimensions import DimensionsValidator
 from ._diagonal import DiagonalValidator
 from ._customdatasrc import CustomdatasrcValidator

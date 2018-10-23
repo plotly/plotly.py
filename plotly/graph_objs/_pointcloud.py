@@ -1215,6 +1215,7 @@ an instance of plotly.graph_objs.Pointcloud"""
         self._validators['type'] = LiteralValidator(
             plotly_name='type', parent_name='pointcloud', val='pointcloud'
         )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

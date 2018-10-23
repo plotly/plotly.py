@@ -354,6 +354,33 @@ class Layout(BaseLayoutType):
     def annotations(self, val):
         self['annotations'] = val
 
+    # annotationdefaults
+    # ------------------
+    @property
+    def annotationdefaults(self):
+        """
+        When used in a template (as
+        layout.template.layout.annotationdefaults), sets the default
+        property values to use for elements of layout.annotations
+    
+        The 'annotationdefaults' property is an instance of Annotation
+        that may be specified as:
+          - An instance of plotly.graph_objs.layout.Annotation
+          - A dict of string/value properties that will be passed
+            to the Annotation constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        plotly.graph_objs.layout.Annotation
+        """
+        return self['annotationdefaults']
+
+    @annotationdefaults.setter
+    def annotationdefaults(self, val):
+        self['annotationdefaults'] = val
+
     # autosize
     # --------
     @property
@@ -1241,6 +1268,33 @@ class Layout(BaseLayoutType):
     def images(self, val):
         self['images'] = val
 
+    # imagedefaults
+    # -------------
+    @property
+    def imagedefaults(self):
+        """
+        When used in a template (as
+        layout.template.layout.imagedefaults), sets the default
+        property values to use for elements of layout.images
+    
+        The 'imagedefaults' property is an instance of Image
+        that may be specified as:
+          - An instance of plotly.graph_objs.layout.Image
+          - A dict of string/value properties that will be passed
+            to the Image constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        plotly.graph_objs.layout.Image
+        """
+        return self['imagedefaults']
+
+    @imagedefaults.setter
+    def imagedefaults(self, val):
+        self['imagedefaults'] = val
+
     # legend
     # ------
     @property
@@ -1334,6 +1388,11 @@ class Layout(BaseLayoutType):
                 layers
                     plotly.graph_objs.layout.mapbox.Layer instance
                     or dict with compatible properties
+                layerdefaults
+                    When used in a template (as
+                    layout.template.layout.mapbox.layerdefaults),
+                    sets the default property values to use for
+                    elements of layout.mapbox.layers
                 pitch
                     Sets the pitch angle of the map (in degrees,
                     where 0 means perpendicular to the surface of
@@ -1709,6 +1768,11 @@ class Layout(BaseLayoutType):
                 annotations
                     plotly.graph_objs.layout.scene.Annotation
                     instance or dict with compatible properties
+                annotationdefaults
+                    When used in a template (as layout.template.lay
+                    out.scene.annotationdefaults), sets the default
+                    property values to use for elements of
+                    layout.scene.annotations
                 aspectmode
                     If "cube", this scene's axes are drawn as a
                     cube, regardless of the axes' ranges. If
@@ -1976,6 +2040,33 @@ class Layout(BaseLayoutType):
     def shapes(self, val):
         self['shapes'] = val
 
+    # shapedefaults
+    # -------------
+    @property
+    def shapedefaults(self):
+        """
+        When used in a template (as
+        layout.template.layout.shapedefaults), sets the default
+        property values to use for elements of layout.shapes
+    
+        The 'shapedefaults' property is an instance of Shape
+        that may be specified as:
+          - An instance of plotly.graph_objs.layout.Shape
+          - A dict of string/value properties that will be passed
+            to the Shape constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        plotly.graph_objs.layout.Shape
+        """
+        return self['shapedefaults']
+
+    @shapedefaults.setter
+    def shapedefaults(self, val):
+        self['shapedefaults'] = val
+
     # showlegend
     # ----------
     @property
@@ -2060,6 +2151,11 @@ class Layout(BaseLayoutType):
                 steps
                     plotly.graph_objs.layout.slider.Step instance
                     or dict with compatible properties
+                stepdefaults
+                    When used in a template (as
+                    layout.template.layout.slider.stepdefaults),
+                    sets the default property values to use for
+                    elements of layout.slider.steps
                 templateitemname
                     Used to refer to a named item in this array in
                     the template. Named items from the template
@@ -2110,6 +2206,33 @@ class Layout(BaseLayoutType):
     def sliders(self, val):
         self['sliders'] = val
 
+    # sliderdefaults
+    # --------------
+    @property
+    def sliderdefaults(self):
+        """
+        When used in a template (as
+        layout.template.layout.sliderdefaults), sets the default
+        property values to use for elements of layout.sliders
+    
+        The 'sliderdefaults' property is an instance of Slider
+        that may be specified as:
+          - An instance of plotly.graph_objs.layout.Slider
+          - A dict of string/value properties that will be passed
+            to the Slider constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        plotly.graph_objs.layout.Slider
+        """
+        return self['sliderdefaults']
+
+    @sliderdefaults.setter
+    def sliderdefaults(self, val):
+        self['sliderdefaults'] = val
+
     # spikedistance
     # -------------
     @property
@@ -2140,30 +2263,54 @@ class Layout(BaseLayoutType):
     @property
     def template(self):
         """
-        Default attributes to be applied to the plot. Templates can be
-        created from existing plots using `Plotly.makeTemplate`, or
-        created manually. They should be objects with format: `{layout:
-        layoutTemplate, data: {[type]: [traceTemplate, ...]}, ...}`
-        `layoutTemplate` and `traceTemplate` are objects matching the
-        attribute structure of `layout` and a data trace.  Trace
-        templates are applied cyclically to traces of each type.
-        Container arrays (eg `annotations`) have special handling: An
-        object ending in `defaults` (eg `annotationdefaults`) is
-        applied to each array item. But if an item has a
-        `templateitemname` key we look in the template array for an
-        item with matching `name` and apply that instead. If no
-        matching `name` is found we mark the item invisible. Any named
-        template item not referenced is appended to the end of the
-        array, so you can use this for a watermark annotation or a logo
-        image, for example. To omit one of these items on the plot,
-        make an item with matching `templateitemname` and `visible:
-        false`.
+        Default attributes to be applied to the plot. This should be a
+        dict with format: `{'layout': layoutTemplate, 'data':
+        {trace_type: [traceTemplate, ...], ...}}` where
+        `layoutTemplate` is a dict matching the structure of
+        `figure.layout` and `traceTemplate` is a dict matching the
+        structure of the trace with type `trace_type` (e.g. 'scatter').
+        Alternatively, this may be specified as an instance of
+        plotly.graph_objs.layout.Template.  Trace templates are applied
+        cyclically to traces of each type. Container arrays (eg
+        `annotations`) have special handling: An object ending in
+        `defaults` (eg `annotationdefaults`) is applied to each array
+        item. But if an item has a `templateitemname` key we look in
+        the template array for an item with matching `name` and apply
+        that instead. If no matching `name` is found we mark the item
+        invisible. Any named template item not referenced is appended
+        to the end of the array, so this can be used to add a watermark
+        annotation or a logo image, for example. To omit one of these
+        items on the plot, make an item with matching
+        `templateitemname` and `visible: false`.
     
-        The 'template' property accepts values of any type
+        The 'template' property is an instance of Template
+        that may be specified as:
+          - An instance of plotly.graph_objs.layout.Template
+          - A dict of string/value properties that will be passed
+            to the Template constructor
+    
+            Supported dict properties:
+                
+                data
+                    plotly.graph_objs.layout.template.Data instance
+                    or dict with compatible properties
+                layout
+                    plotly.graph_objs.layout.template.Layout
+                    instance or dict with compatible properties
+    
+          - The name of a registered template where current registered templates
+            are stored in the plotly.io.templates configuration object. The names
+            of all registered templates can be retrieved with:
+                >>> import plotly.io as pio
+                >>> list(pio.templates)
+          - A string containing multiple registered template names, joined on '+'
+            characters (e.g. 'template1+template2'). In this case the resulting
+            template is computed by merging together the collection of registered 
+            templates
 
         Returns
         -------
-        Any
+        plotly.graph_objs.layout.Template
         """
         return self['template']
 
@@ -2306,6 +2453,11 @@ class Layout(BaseLayoutType):
                 buttons
                     plotly.graph_objs.layout.updatemenu.Button
                     instance or dict with compatible properties
+                buttondefaults
+                    When used in a template (as layout.template.lay
+                    out.updatemenu.buttondefaults), sets the
+                    default property values to use for elements of
+                    layout.updatemenu.buttons
                 direction
                     Determines the direction in which the buttons
                     are laid out, whether in a dropdown menu or a
@@ -2374,6 +2526,33 @@ class Layout(BaseLayoutType):
     @updatemenus.setter
     def updatemenus(self, val):
         self['updatemenus'] = val
+
+    # updatemenudefaults
+    # ------------------
+    @property
+    def updatemenudefaults(self):
+        """
+        When used in a template (as
+        layout.template.layout.updatemenudefaults), sets the default
+        property values to use for elements of layout.updatemenus
+    
+        The 'updatemenudefaults' property is an instance of Updatemenu
+        that may be specified as:
+          - An instance of plotly.graph_objs.layout.Updatemenu
+          - A dict of string/value properties that will be passed
+            to the Updatemenu constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        plotly.graph_objs.layout.Updatemenu
+        """
+        return self['updatemenudefaults']
+
+    @updatemenudefaults.setter
+    def updatemenudefaults(self, val):
+        self['updatemenudefaults'] = val
 
     # violingap
     # ---------
@@ -2778,6 +2957,11 @@ class Layout(BaseLayoutType):
                 tickformatstops
                     plotly.graph_objs.layout.xaxis.Tickformatstop
                     instance or dict with compatible properties
+                tickformatstopdefaults
+                    When used in a template (as layout.template.lay
+                    out.xaxis.tickformatstopdefaults), sets the
+                    default property values to use for elements of
+                    layout.xaxis.tickformatstops
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -3160,6 +3344,11 @@ class Layout(BaseLayoutType):
                 tickformatstops
                     plotly.graph_objs.layout.yaxis.Tickformatstop
                     instance or dict with compatible properties
+                tickformatstopdefaults
+                    When used in a template (as layout.template.lay
+                    out.yaxis.tickformatstopdefaults), sets the
+                    default property values to use for elements of
+                    layout.yaxis.tickformatstops
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -3249,6 +3438,11 @@ class Layout(BaseLayoutType):
         annotations
             plotly.graph_objs.layout.Annotation instance or dict
             with compatible properties
+        annotationdefaults
+            When used in a template (as
+            layout.template.layout.annotationdefaults), sets the
+            default property values to use for elements of
+            layout.annotations
         autosize
             Determines whether or not a layout width or height that
             has been left undefined by the user is initialized on
@@ -3383,6 +3577,10 @@ class Layout(BaseLayoutType):
         images
             plotly.graph_objs.layout.Image instance or dict with
             compatible properties
+        imagedefaults
+            When used in a template (as
+            layout.template.layout.imagedefaults), sets the default
+            property values to use for elements of layout.images
         legend
             plotly.graph_objs.layout.Legend instance or dict with
             compatible properties
@@ -3429,6 +3627,10 @@ class Layout(BaseLayoutType):
         shapes
             plotly.graph_objs.layout.Shape instance or dict with
             compatible properties
+        shapedefaults
+            When used in a template (as
+            layout.template.layout.shapedefaults), sets the default
+            property values to use for elements of layout.shapes
         showlegend
             Determines whether or not a legend is drawn. Default is
             `true` if there is a trace to show and any of these: a)
@@ -3438,6 +3640,11 @@ class Layout(BaseLayoutType):
         sliders
             plotly.graph_objs.layout.Slider instance or dict with
             compatible properties
+        sliderdefaults
+            When used in a template (as
+            layout.template.layout.sliderdefaults), sets the
+            default property values to use for elements of
+            layout.sliders
         spikedistance
             Sets the default distance (in pixels) to look for data
             to draw spikelines to (-1 means no cutoff, 0 means no
@@ -3446,26 +3653,28 @@ class Layout(BaseLayoutType):
             objects can be hovered on but will not generate
             spikelines, such as scatter fills.
         template
-            Default attributes to be applied to the plot. Templates
-            can be created from existing plots using
-            `Plotly.makeTemplate`, or created manually. They should
-            be objects with format: `{layout: layoutTemplate, data:
-            {[type]: [traceTemplate, ...]}, ...}` `layoutTemplate`
-            and `traceTemplate` are objects matching the attribute
-            structure of `layout` and a data trace.  Trace
-            templates are applied cyclically to traces of each
-            type. Container arrays (eg `annotations`) have special
-            handling: An object ending in `defaults` (eg
-            `annotationdefaults`) is applied to each array item.
-            But if an item has a `templateitemname` key we look in
-            the template array for an item with matching `name` and
-            apply that instead. If no matching `name` is found we
-            mark the item invisible. Any named template item not
-            referenced is appended to the end of the array, so you
-            can use this for a watermark annotation or a logo
-            image, for example. To omit one of these items on the
-            plot, make an item with matching `templateitemname` and
-            `visible: false`.
+            Default attributes to be applied to the plot. This
+            should be a dict with format: `{'layout':
+            layoutTemplate, 'data': {trace_type: [traceTemplate,
+            ...], ...}}` where `layoutTemplate` is a dict matching
+            the structure of `figure.layout` and `traceTemplate` is
+            a dict matching the structure of the trace with type
+            `trace_type` (e.g. 'scatter'). Alternatively, this may
+            be specified as an instance of
+            plotly.graph_objs.layout.Template.  Trace templates are
+            applied cyclically to traces of each type. Container
+            arrays (eg `annotations`) have special handling: An
+            object ending in `defaults` (eg `annotationdefaults`)
+            is applied to each array item. But if an item has a
+            `templateitemname` key we look in the template array
+            for an item with matching `name` and apply that
+            instead. If no matching `name` is found we mark the
+            item invisible. Any named template item not referenced
+            is appended to the end of the array, so this can be
+            used to add a watermark annotation or a logo image, for
+            example. To omit one of these items on the plot, make
+            an item with matching `templateitemname` and `visible:
+            false`.
         ternary
             plotly.graph_objs.layout.Ternary instance or dict with
             compatible properties
@@ -3476,6 +3685,11 @@ class Layout(BaseLayoutType):
         updatemenus
             plotly.graph_objs.layout.Updatemenu instance or dict
             with compatible properties
+        updatemenudefaults
+            When used in a template (as
+            layout.template.layout.updatemenudefaults), sets the
+            default property values to use for elements of
+            layout.updatemenus
         violingap
             Sets the gap (in plot fraction) between violins of
             adjacent location coordinates.
@@ -3504,6 +3718,7 @@ class Layout(BaseLayoutType):
         arg=None,
         angularaxis=None,
         annotations=None,
+        annotationdefaults=None,
         autosize=None,
         bargap=None,
         bargroupgap=None,
@@ -3530,6 +3745,7 @@ class Layout(BaseLayoutType):
         hoverlabel=None,
         hovermode=None,
         images=None,
+        imagedefaults=None,
         legend=None,
         mapbox=None,
         margin=None,
@@ -3543,14 +3759,17 @@ class Layout(BaseLayoutType):
         selectdirection=None,
         separators=None,
         shapes=None,
+        shapedefaults=None,
         showlegend=None,
         sliders=None,
+        sliderdefaults=None,
         spikedistance=None,
         template=None,
         ternary=None,
         title=None,
         titlefont=None,
         updatemenus=None,
+        updatemenudefaults=None,
         violingap=None,
         violingroupgap=None,
         violinmode=None,
@@ -3573,6 +3792,11 @@ class Layout(BaseLayoutType):
         annotations
             plotly.graph_objs.layout.Annotation instance or dict
             with compatible properties
+        annotationdefaults
+            When used in a template (as
+            layout.template.layout.annotationdefaults), sets the
+            default property values to use for elements of
+            layout.annotations
         autosize
             Determines whether or not a layout width or height that
             has been left undefined by the user is initialized on
@@ -3707,6 +3931,10 @@ class Layout(BaseLayoutType):
         images
             plotly.graph_objs.layout.Image instance or dict with
             compatible properties
+        imagedefaults
+            When used in a template (as
+            layout.template.layout.imagedefaults), sets the default
+            property values to use for elements of layout.images
         legend
             plotly.graph_objs.layout.Legend instance or dict with
             compatible properties
@@ -3753,6 +3981,10 @@ class Layout(BaseLayoutType):
         shapes
             plotly.graph_objs.layout.Shape instance or dict with
             compatible properties
+        shapedefaults
+            When used in a template (as
+            layout.template.layout.shapedefaults), sets the default
+            property values to use for elements of layout.shapes
         showlegend
             Determines whether or not a legend is drawn. Default is
             `true` if there is a trace to show and any of these: a)
@@ -3762,6 +3994,11 @@ class Layout(BaseLayoutType):
         sliders
             plotly.graph_objs.layout.Slider instance or dict with
             compatible properties
+        sliderdefaults
+            When used in a template (as
+            layout.template.layout.sliderdefaults), sets the
+            default property values to use for elements of
+            layout.sliders
         spikedistance
             Sets the default distance (in pixels) to look for data
             to draw spikelines to (-1 means no cutoff, 0 means no
@@ -3770,26 +4007,28 @@ class Layout(BaseLayoutType):
             objects can be hovered on but will not generate
             spikelines, such as scatter fills.
         template
-            Default attributes to be applied to the plot. Templates
-            can be created from existing plots using
-            `Plotly.makeTemplate`, or created manually. They should
-            be objects with format: `{layout: layoutTemplate, data:
-            {[type]: [traceTemplate, ...]}, ...}` `layoutTemplate`
-            and `traceTemplate` are objects matching the attribute
-            structure of `layout` and a data trace.  Trace
-            templates are applied cyclically to traces of each
-            type. Container arrays (eg `annotations`) have special
-            handling: An object ending in `defaults` (eg
-            `annotationdefaults`) is applied to each array item.
-            But if an item has a `templateitemname` key we look in
-            the template array for an item with matching `name` and
-            apply that instead. If no matching `name` is found we
-            mark the item invisible. Any named template item not
-            referenced is appended to the end of the array, so you
-            can use this for a watermark annotation or a logo
-            image, for example. To omit one of these items on the
-            plot, make an item with matching `templateitemname` and
-            `visible: false`.
+            Default attributes to be applied to the plot. This
+            should be a dict with format: `{'layout':
+            layoutTemplate, 'data': {trace_type: [traceTemplate,
+            ...], ...}}` where `layoutTemplate` is a dict matching
+            the structure of `figure.layout` and `traceTemplate` is
+            a dict matching the structure of the trace with type
+            `trace_type` (e.g. 'scatter'). Alternatively, this may
+            be specified as an instance of
+            plotly.graph_objs.layout.Template.  Trace templates are
+            applied cyclically to traces of each type. Container
+            arrays (eg `annotations`) have special handling: An
+            object ending in `defaults` (eg `annotationdefaults`)
+            is applied to each array item. But if an item has a
+            `templateitemname` key we look in the template array
+            for an item with matching `name` and apply that
+            instead. If no matching `name` is found we mark the
+            item invisible. Any named template item not referenced
+            is appended to the end of the array, so this can be
+            used to add a watermark annotation or a logo image, for
+            example. To omit one of these items on the plot, make
+            an item with matching `templateitemname` and `visible:
+            false`.
         ternary
             plotly.graph_objs.layout.Ternary instance or dict with
             compatible properties
@@ -3800,6 +4039,11 @@ class Layout(BaseLayoutType):
         updatemenus
             plotly.graph_objs.layout.Updatemenu instance or dict
             with compatible properties
+        updatemenudefaults
+            When used in a template (as
+            layout.template.layout.updatemenudefaults), sets the
+            default property values to use for elements of
+            layout.updatemenus
         violingap
             Sets the gap (in plot fraction) between violins of
             adjacent location coordinates.
@@ -3856,6 +4100,7 @@ an instance of plotly.graph_objs.Layout"""
         # ---------------------
         self._validators['angularaxis'] = v_layout.AngularAxisValidator()
         self._validators['annotations'] = v_layout.AnnotationsValidator()
+        self._validators['annotationdefaults'] = v_layout.AnnotationValidator()
         self._validators['autosize'] = v_layout.AutosizeValidator()
         self._validators['bargap'] = v_layout.BargapValidator()
         self._validators['bargroupgap'] = v_layout.BargroupgapValidator()
@@ -3884,6 +4129,7 @@ an instance of plotly.graph_objs.Layout"""
         self._validators['hoverlabel'] = v_layout.HoverlabelValidator()
         self._validators['hovermode'] = v_layout.HovermodeValidator()
         self._validators['images'] = v_layout.ImagesValidator()
+        self._validators['imagedefaults'] = v_layout.ImageValidator()
         self._validators['legend'] = v_layout.LegendValidator()
         self._validators['mapbox'] = v_layout.MapboxValidator()
         self._validators['margin'] = v_layout.MarginValidator()
@@ -3898,14 +4144,17 @@ an instance of plotly.graph_objs.Layout"""
                         ] = v_layout.SelectdirectionValidator()
         self._validators['separators'] = v_layout.SeparatorsValidator()
         self._validators['shapes'] = v_layout.ShapesValidator()
+        self._validators['shapedefaults'] = v_layout.ShapeValidator()
         self._validators['showlegend'] = v_layout.ShowlegendValidator()
         self._validators['sliders'] = v_layout.SlidersValidator()
+        self._validators['sliderdefaults'] = v_layout.SliderValidator()
         self._validators['spikedistance'] = v_layout.SpikedistanceValidator()
         self._validators['template'] = v_layout.TemplateValidator()
         self._validators['ternary'] = v_layout.TernaryValidator()
         self._validators['title'] = v_layout.TitleValidator()
         self._validators['titlefont'] = v_layout.TitlefontValidator()
         self._validators['updatemenus'] = v_layout.UpdatemenusValidator()
+        self._validators['updatemenudefaults'] = v_layout.UpdatemenuValidator()
         self._validators['violingap'] = v_layout.ViolingapValidator()
         self._validators['violingroupgap'] = v_layout.ViolingroupgapValidator()
         self._validators['violinmode'] = v_layout.ViolinmodeValidator()
@@ -3919,6 +4168,9 @@ an instance of plotly.graph_objs.Layout"""
         self['angularaxis'] = angularaxis if angularaxis is not None else _v
         _v = arg.pop('annotations', None)
         self['annotations'] = annotations if annotations is not None else _v
+        _v = arg.pop('annotationdefaults', None)
+        self['annotationdefaults'
+            ] = annotationdefaults if annotationdefaults is not None else _v
         _v = arg.pop('autosize', None)
         self['autosize'] = autosize if autosize is not None else _v
         _v = arg.pop('bargap', None)
@@ -3974,6 +4226,9 @@ an instance of plotly.graph_objs.Layout"""
         self['hovermode'] = hovermode if hovermode is not None else _v
         _v = arg.pop('images', None)
         self['images'] = images if images is not None else _v
+        _v = arg.pop('imagedefaults', None)
+        self['imagedefaults'
+            ] = imagedefaults if imagedefaults is not None else _v
         _v = arg.pop('legend', None)
         self['legend'] = legend if legend is not None else _v
         _v = arg.pop('mapbox', None)
@@ -4002,15 +4257,23 @@ an instance of plotly.graph_objs.Layout"""
         self['separators'] = separators if separators is not None else _v
         _v = arg.pop('shapes', None)
         self['shapes'] = shapes if shapes is not None else _v
+        _v = arg.pop('shapedefaults', None)
+        self['shapedefaults'
+            ] = shapedefaults if shapedefaults is not None else _v
         _v = arg.pop('showlegend', None)
         self['showlegend'] = showlegend if showlegend is not None else _v
         _v = arg.pop('sliders', None)
         self['sliders'] = sliders if sliders is not None else _v
+        _v = arg.pop('sliderdefaults', None)
+        self['sliderdefaults'
+            ] = sliderdefaults if sliderdefaults is not None else _v
         _v = arg.pop('spikedistance', None)
         self['spikedistance'
             ] = spikedistance if spikedistance is not None else _v
         _v = arg.pop('template', None)
-        self['template'] = template if template is not None else _v
+        _v = template if template is not None else _v
+        if _v is not None:
+            self['template'] = _v
         _v = arg.pop('ternary', None)
         self['ternary'] = ternary if ternary is not None else _v
         _v = arg.pop('title', None)
@@ -4019,6 +4282,9 @@ an instance of plotly.graph_objs.Layout"""
         self['titlefont'] = titlefont if titlefont is not None else _v
         _v = arg.pop('updatemenus', None)
         self['updatemenus'] = updatemenus if updatemenus is not None else _v
+        _v = arg.pop('updatemenudefaults', None)
+        self['updatemenudefaults'
+            ] = updatemenudefaults if updatemenudefaults is not None else _v
         _v = arg.pop('violingap', None)
         self['violingap'] = violingap if violingap is not None else _v
         _v = arg.pop('violingroupgap', None)

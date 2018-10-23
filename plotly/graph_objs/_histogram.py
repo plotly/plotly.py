@@ -1762,6 +1762,7 @@ an instance of plotly.graph_objs.Histogram"""
         self._validators['type'] = LiteralValidator(
             plotly_name='type', parent_name='histogram', val='histogram'
         )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

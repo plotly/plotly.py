@@ -59,6 +59,38 @@ class TestRelayoutMessage(TestCase):
         self.figure._send_relayout_msg.assert_called_once_with(
             {'updatemenus.1.buttons.0.method': 'restyle'})
 
+    def test_property_assignment_template(self):
+        # Initialize template object
+        self.figure.layout.template = {'layout': {
+            'xaxis': {'title': 'x-label'}}}
+        self.figure._send_relayout_msg.assert_called_with(
+            {'template': {'layout': {'xaxis': {'title': 'x-label'}}}})
+
+        # template layout property
+        self.figure.layout.template.layout.title = 'Template Title'
+        self.figure._send_relayout_msg.assert_called_with(
+            {'template.layout.title': 'Template Title'})
+
+        # template add trace
+        self.figure.layout.template.data = {'bar': [
+            {'marker': {'color': 'blue'}},
+            {'marker': {'color': 'yellow'}}]}
+
+        self.figure._send_relayout_msg.assert_called_with(
+            {'template.data': {'bar': [
+                {'type': 'bar', 'marker': {'color': 'blue'}},
+                {'type': 'bar', 'marker': {'color': 'yellow'}}]}})
+
+        # template set trace property
+        self.figure.layout.template.data.bar[1].marker.opacity = 0.5
+        self.figure._send_relayout_msg.assert_called_with(
+            {'template.data.bar.1.marker.opacity': 0.5})
+
+        # Set elementdefaults property
+        self.figure.layout.template.layout.imagedefaults.sizex = 300
+        self.figure._send_relayout_msg.assert_called_with(
+            {'template.layout.imagedefaults.sizex': 300})
+
     def test_plotly_relayout_toplevel(self):
         self.figure.plotly_relayout({'title': 'hello'})
         self.figure._send_relayout_msg.assert_called_once_with(

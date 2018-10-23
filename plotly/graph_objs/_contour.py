@@ -192,6 +192,11 @@ class Contour(BaseTraceType):
                 tickformatstops
                     plotly.graph_objs.contour.colorbar.Tickformatst
                     op instance or dict with compatible properties
+                tickformatstopdefaults
+                    When used in a template (as layout.template.dat
+                    a.contour.colorbar.tickformatstopdefaults),
+                    sets the default property values to use for
+                    elements of contour.colorbar.tickformatstops
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -2089,6 +2094,7 @@ an instance of plotly.graph_objs.Contour"""
         self._validators['type'] = LiteralValidator(
             plotly_name='type', parent_name='contour', val='contour'
         )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

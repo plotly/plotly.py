@@ -806,6 +806,7 @@ an instance of plotly.graph_objs.Area"""
         self._validators['type'] = LiteralValidator(
             plotly_name='type', parent_name='area', val='area'
         )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

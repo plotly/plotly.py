@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 from six import string_types
 import json
 
@@ -42,7 +44,7 @@ def to_json(fig,
     # ----------------
     if remove_uids:
         for trace in fig_dict.get('data', []):
-            trace.pop('uid')
+            trace.pop('uid', None)
 
     # Dump to a JSON string and return
     # --------------------------------

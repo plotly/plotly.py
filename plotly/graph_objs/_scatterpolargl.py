@@ -1716,6 +1716,7 @@ an instance of plotly.graph_objs.Scatterpolargl"""
             parent_name='scatterpolargl',
             val='scatterpolargl'
         )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

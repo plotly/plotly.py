@@ -8,4 +8,5 @@ from ._camera import CameraValidator
 from ._bgcolor import BgcolorValidator
 from ._aspectratio import AspectratioValidator
 from ._aspectmode import AspectmodeValidator
+from ._annotationdefaults import AnnotationValidator
 from ._annotations import AnnotationsValidator

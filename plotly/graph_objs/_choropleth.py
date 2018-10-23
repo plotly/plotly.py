@@ -170,6 +170,11 @@ class Choropleth(BaseTraceType):
                     plotly.graph_objs.choropleth.colorbar.Tickforma
                     tstop instance or dict with compatible
                     properties
+                tickformatstopdefaults
+                    When used in a template (as layout.template.dat
+                    a.choropleth.colorbar.tickformatstopdefaults),
+                    sets the default property values to use for
+                    elements of choropleth.colorbar.tickformatstops
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -1487,6 +1492,7 @@ an instance of plotly.graph_objs.Choropleth"""
         self._validators['type'] = LiteralValidator(
             plotly_name='type', parent_name='choropleth', val='choropleth'
         )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

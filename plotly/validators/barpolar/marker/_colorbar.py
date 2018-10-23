@@ -140,6 +140,12 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 plotly.graph_objs.barpolar.marker.colorbar.Tick
                 formatstop instance or dict with compatible
                 properties
+            tickformatstopdefaults
+                When used in a template (as layout.template.dat
+                a.barpolar.marker.colorbar.tickformatstopdefaul
+                ts), sets the default property values to use
+                for elements of
+                barpolar.marker.colorbar.tickformatstops
             ticklen
                 Sets the tick length (in px).
             tickmode

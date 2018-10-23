@@ -1717,6 +1717,7 @@ an instance of plotly.graph_objs.Violin"""
         self._validators['type'] = LiteralValidator(
             plotly_name='type', parent_name='violin', val='violin'
         )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

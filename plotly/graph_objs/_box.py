@@ -1582,6 +1582,7 @@ an instance of plotly.graph_objs.Box"""
         self._validators['type'] = LiteralValidator(
             plotly_name='type', parent_name='box', val='box'
         )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

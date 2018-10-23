@@ -157,6 +157,11 @@ class BaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 plotly.graph_objs.layout.ternary.baxis.Tickform
                 atstop instance or dict with compatible
                 properties
+            tickformatstopdefaults
+                When used in a template (as layout.template.lay
+                out.ternary.baxis.tickformatstopdefaults), sets
+                the default property values to use for elements
+                of layout.ternary.baxis.tickformatstops
             ticklen
                 Sets the tick length (in px).
             tickmode

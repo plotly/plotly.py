@@ -259,6 +259,11 @@ class Cone(BaseTraceType):
                 tickformatstops
                     plotly.graph_objs.cone.colorbar.Tickformatstop
                     instance or dict with compatible properties
+                tickformatstopdefaults
+                    When used in a template (as layout.template.dat
+                    a.cone.colorbar.tickformatstopdefaults), sets
+                    the default property values to use for elements
+                    of cone.colorbar.tickformatstops
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -1808,6 +1813,7 @@ an instance of plotly.graph_objs.Cone"""
         self._validators['type'] = LiteralValidator(
             plotly_name='type', parent_name='cone', val='cone'
         )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

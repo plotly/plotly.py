@@ -274,6 +274,34 @@ class Rangeselector(BaseLayoutHierarchyType):
     def buttons(self, val):
         self['buttons'] = val
 
+    # buttondefaults
+    # --------------
+    @property
+    def buttondefaults(self):
+        """
+        When used in a template (as
+        layout.template.layout.xaxis.rangeselector.buttondefaults),
+        sets the default property values to use for elements of
+        layout.xaxis.rangeselector.buttons
+    
+        The 'buttondefaults' property is an instance of Button
+        that may be specified as:
+          - An instance of plotly.graph_objs.layout.xaxis.rangeselector.Button
+          - A dict of string/value properties that will be passed
+            to the Button constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        plotly.graph_objs.layout.xaxis.rangeselector.Button
+        """
+        return self['buttondefaults']
+
+    @buttondefaults.setter
+    def buttondefaults(self, val):
+        self['buttondefaults'] = val
+
     # font
     # ----
     @property
@@ -455,6 +483,11 @@ class Rangeselector(BaseLayoutHierarchyType):
         buttons
             Sets the specifications for each buttons. By default, a
             range selector comes with no buttons.
+        buttondefaults
+            When used in a template (as layout.template.layout.xaxi
+            s.rangeselector.buttondefaults), sets the default
+            property values to use for elements of
+            layout.xaxis.rangeselector.buttons
         font
             Sets the font of the range selector button text.
         visible
@@ -485,6 +518,7 @@ class Rangeselector(BaseLayoutHierarchyType):
         bordercolor=None,
         borderwidth=None,
         buttons=None,
+        buttondefaults=None,
         font=None,
         visible=None,
         x=None,
@@ -517,6 +551,11 @@ class Rangeselector(BaseLayoutHierarchyType):
         buttons
             Sets the specifications for each buttons. By default, a
             range selector comes with no buttons.
+        buttondefaults
+            When used in a template (as layout.template.layout.xaxi
+            s.rangeselector.buttondefaults), sets the default
+            property values to use for elements of
+            layout.xaxis.rangeselector.buttons
         font
             Sets the font of the range selector button text.
         visible
@@ -580,6 +619,7 @@ an instance of plotly.graph_objs.layout.xaxis.Rangeselector"""
         self._validators['borderwidth'
                         ] = v_rangeselector.BorderwidthValidator()
         self._validators['buttons'] = v_rangeselector.ButtonsValidator()
+        self._validators['buttondefaults'] = v_rangeselector.ButtonValidator()
         self._validators['font'] = v_rangeselector.FontValidator()
         self._validators['visible'] = v_rangeselector.VisibleValidator()
         self._validators['x'] = v_rangeselector.XValidator()
@@ -599,6 +639,9 @@ an instance of plotly.graph_objs.layout.xaxis.Rangeselector"""
         self['borderwidth'] = borderwidth if borderwidth is not None else _v
         _v = arg.pop('buttons', None)
         self['buttons'] = buttons if buttons is not None else _v
+        _v = arg.pop('buttondefaults', None)
+        self['buttondefaults'
+            ] = buttondefaults if buttondefaults is not None else _v
         _v = arg.pop('font', None)
         self['font'] = font if font is not None else _v
         _v = arg.pop('visible', None)

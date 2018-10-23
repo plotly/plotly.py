@@ -959,6 +959,7 @@ an instance of plotly.graph_objs.Table"""
         self._validators['type'] = LiteralValidator(
             plotly_name='type', parent_name='table', val='table'
         )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

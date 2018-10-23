@@ -140,6 +140,12 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 plotly.graph_objs.contourcarpet.colorbar.Tickfo
                 rmatstop instance or dict with compatible
                 properties
+            tickformatstopdefaults
+                When used in a template (as layout.template.dat
+                a.contourcarpet.colorbar.tickformatstopdefaults
+                ), sets the default property values to use for
+                elements of
+                contourcarpet.colorbar.tickformatstops
             ticklen
                 Sets the tick length (in px).
             tickmode

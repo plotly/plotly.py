@@ -332,6 +332,11 @@ class Mesh3d(BaseTraceType):
                 tickformatstops
                     plotly.graph_objs.mesh3d.colorbar.Tickformatsto
                     p instance or dict with compatible properties
+                tickformatstopdefaults
+                    When used in a template (as layout.template.dat
+                    a.mesh3d.colorbar.tickformatstopdefaults), sets
+                    the default property values to use for elements
+                    of mesh3d.colorbar.tickformatstops
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -2279,6 +2284,7 @@ an instance of plotly.graph_objs.Mesh3d"""
         self._validators['type'] = LiteralValidator(
             plotly_name='type', parent_name='mesh3d', val='mesh3d'
         )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

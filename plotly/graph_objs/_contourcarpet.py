@@ -385,6 +385,12 @@ class Contourcarpet(BaseTraceType):
                     plotly.graph_objs.contourcarpet.colorbar.Tickfo
                     rmatstop instance or dict with compatible
                     properties
+                tickformatstopdefaults
+                    When used in a template (as layout.template.dat
+                    a.contourcarpet.colorbar.tickformatstopdefaults
+                    ), sets the default property values to use for
+                    elements of
+                    contourcarpet.colorbar.tickformatstops
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -1990,6 +1996,7 @@ an instance of plotly.graph_objs.Contourcarpet"""
             parent_name='contourcarpet',
             val='contourcarpet'
         )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

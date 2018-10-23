@@ -1599,6 +1599,7 @@ an instance of plotly.graph_objs.Scattergeo"""
         self._validators['type'] = LiteralValidator(
             plotly_name='type', parent_name='scattergeo', val='scattergeo'
         )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

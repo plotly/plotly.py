@@ -1440,6 +1440,7 @@ an instance of plotly.graph_objs.Scattermapbox"""
             parent_name='scattermapbox',
             val='scattermapbox'
         )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

@@ -10,6 +10,7 @@ from ._pad import PadValidator
 from ._name import NameValidator
 from ._font import FontValidator
 from ._direction import DirectionValidator
+from ._buttondefaults import ButtonValidator
 from ._buttons import ButtonsValidator
 from ._borderwidth import BorderwidthValidator
 from ._bordercolor import BordercolorValidator

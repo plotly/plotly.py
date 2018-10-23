@@ -176,6 +176,11 @@ class AaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickformatstops
                 plotly.graph_objs.carpet.aaxis.Tickformatstop
                 instance or dict with compatible properties
+            tickformatstopdefaults
+                When used in a template (as layout.template.dat
+                a.carpet.aaxis.tickformatstopdefaults), sets
+                the default property values to use for elements
+                of carpet.aaxis.tickformatstops
             tickmode
 
             tickprefix

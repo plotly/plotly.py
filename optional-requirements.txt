@@ -24,6 +24,9 @@ psutil
 ## codegen dependencies ##
 yapf
 
+## template generation ##
+colorcet
+
 ## ipython ##
 ipython
 

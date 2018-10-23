@@ -16,6 +16,7 @@ from ._hoverlabel import HoverlabelValidator
 from ._hoverinfosrc import HoverinfosrcValidator
 from ._hoverinfo import HoverinfoValidator
 from ._domain import DomainValidator
+from ._dimensiondefaults import DimensionValidator
 from ._dimensions import DimensionsValidator
 from ._customdatasrc import CustomdatasrcValidator
 from ._customdata import CustomdataValidator

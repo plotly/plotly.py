@@ -1592,6 +1592,7 @@ an instance of plotly.graph_objs.Scattercarpet"""
             parent_name='scattercarpet',
             val='scattercarpet'
         )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

@@ -206,6 +206,7 @@ class BaseValidator(object):
         self.parent_name = parent_name
         self.plotly_name = plotly_name
         self.role = role
+        self.array_ok = False
 
     def description(self):
         """
@@ -321,6 +322,8 @@ class DataArrayValidator(BaseValidator):
     def __init__(self, plotly_name, parent_name, **kwargs):
         super(DataArrayValidator, self).__init__(
             plotly_name=plotly_name, parent_name=parent_name, **kwargs)
+
+        self.array_ok = True
 
     def description(self):
         return ("""\
@@ -1908,7 +1911,7 @@ class CompoundValidator(BaseValidator):
             v = self.data_class()
 
         elif isinstance(v, dict):
-            v = self.data_class(skip_invalid=skip_invalid, **v)
+            v = self.data_class(v, skip_invalid=skip_invalid)
 
         elif isinstance(v, self.data_class):
             # Copy object
@@ -1976,8 +1979,8 @@ class CompoundArrayValidator(BaseValidator):
                 if isinstance(v_el, self.data_class):
                     res.append(self.data_class(v_el))
                 elif isinstance(v_el, dict):
-                    res.append(self.data_class(skip_invalid=skip_invalid,
-                                               **v_el))
+                    res.append(self.data_class(v_el,
+                                               skip_invalid=skip_invalid))
                 else:
                     if skip_invalid:
                         res.append(self.data_class())
@@ -2123,3 +2126,58 @@ class BaseDataValidator(BaseValidator):
                 self.raise_invalid_val(v)
 
         return v
+
+
+class BaseTemplateValidator(CompoundValidator):
+
+    def __init__(self,
+                 plotly_name,
+                 parent_name,
+                 data_class_str,
+                 data_docs,
+                 **kwargs):
+
+        super(BaseTemplateValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            data_class_str=data_class_str,
+            data_docs=data_docs,
+            **kwargs
+        )
+
+    def description(self):
+        compound_description = super(BaseTemplateValidator, self).description()
+        compound_description += """
+      - The name of a registered template where current registered templates
+        are stored in the plotly.io.templates configuration object. The names
+        of all registered templates can be retrieved with:
+            >>> import plotly.io as pio
+            >>> list(pio.templates)
+      - A string containing multiple registered template names, joined on '+'
+        characters (e.g. 'template1+template2'). In this case the resulting
+        template is computed by merging together the collection of registered 
+        templates"""
+
+        return compound_description
+
+    def validate_coerce(self, v, skip_invalid=False):
+        import plotly.io as pio
+
+        try:
+            # Check if v is a template identifier
+            # (could be any hashable object)
+            if v in pio.templates:
+                return copy.deepcopy(pio.templates[v])
+            # Otherwise, if v is a string, check to see if it consists of
+            # multiple template names joined on '+' characters
+            elif isinstance(v, string_types):
+                template_names = v.split('+')
+                if all([name in pio.templates for name in template_names]):
+                    return pio.templates.merge_templates(*template_names)
+
+        except TypeError:
+            # v is un-hashable
+            pass
+
+        return super(BaseTemplateValidator, self).validate_coerce(
+            v, skip_invalid=skip_invalid)

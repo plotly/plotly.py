@@ -140,6 +140,12 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 plotly.graph_objs.histogram2d.colorbar.Tickform
                 atstop instance or dict with compatible
                 properties
+            tickformatstopdefaults
+                When used in a template (as layout.template.dat
+                a.histogram2d.colorbar.tickformatstopdefaults),
+                sets the default property values to use for
+                elements of
+                histogram2d.colorbar.tickformatstops
             ticklen
                 Sets the tick length (in px).
             tickmode
