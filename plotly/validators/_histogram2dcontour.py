@@ -80,7 +80,7 @@ class Histogram2dContourValidator(
                 respectively.
             histnorm
                 Specifies the type of normalization used for
-                this histogram trace. If **, the span of each
+                this histogram trace. If "", the span of each
                 bar corresponds to the number of occurrences
                 (i.e. the number of data points lying inside
                 the bins). If "percent" / "probability", the

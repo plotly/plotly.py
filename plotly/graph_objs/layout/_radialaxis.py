@@ -12,9 +12,9 @@ class RadialAxis(BaseLayoutHierarchyType):
         Polar chart subplots are not supported yet. This key has
         currently no effect.
     
-        The 'domain' property is an info array that may be specified as a
-        list or tuple of 2 elements where:
+        The 'domain' property is an info array that may be specified as:
     
+        * a list or tuple of 2 elements where:
     (0) The 'domain[0]' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
     (1) The 'domain[1]' property is a number and may be specified as:
@@ -81,9 +81,9 @@ class RadialAxis(BaseLayoutHierarchyType):
         Legacy polar charts are deprecated! Please switch to "polar"
         subplots. Defines the start and end point of this radial axis.
     
-        The 'range' property is an info array that may be specified as a
-        list or tuple of 2 elements where:
+        The 'range' property is an info array that may be specified as:
     
+        * a list or tuple of 2 elements where:
     (0) The 'range[0]' property is a number and may be specified as:
           - An int or float
     (1) The 'range[1]' property is a number and may be specified as:

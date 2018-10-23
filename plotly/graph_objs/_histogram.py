@@ -84,7 +84,7 @@ class Histogram(BaseTraceType):
                     and `centralbin` attributes to tune the
                     accumulation method. Note: in this mode, the
                     "density" `histnorm` settings behave the same
-                    as their equivalents without "density": ** and
+                    as their equivalents without "density": "" and
                     "density" both rise to the number of data
                     points, and "probability" and *probability
                     density* both rise to the number of sample
@@ -335,7 +335,7 @@ class Histogram(BaseTraceType):
     def histnorm(self):
         """
         Specifies the type of normalization used for this histogram
-        trace. If **, the span of each bar corresponds to the number of
+        trace. If "", the span of each bar corresponds to the number of
         occurrences (i.e. the number of data points lying inside the
         bins). If "percent" / "probability", the span of each bar
         corresponds to the percentage / fraction of occurrences with
@@ -1255,7 +1255,7 @@ class Histogram(BaseTraceType):
             respectively.
         histnorm
             Specifies the type of normalization used for this
-            histogram trace. If **, the span of each bar
+            histogram trace. If "", the span of each bar
             corresponds to the number of occurrences (i.e. the
             number of data points lying inside the bins). If
             "percent" / "probability", the span of each bar
@@ -1473,7 +1473,7 @@ class Histogram(BaseTraceType):
             respectively.
         histnorm
             Specifies the type of normalization used for this
-            histogram trace. If **, the span of each bar
+            histogram trace. If "", the span of each bar
             corresponds to the number of occurrences (i.e. the
             number of data points lying inside the bins). If
             "percent" / "probability", the span of each bar
