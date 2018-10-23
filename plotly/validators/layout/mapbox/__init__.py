@@ -1,6 +1,7 @@
 from ._zoom import ZoomValidator
 from ._style import StyleValidator
 from ._pitch import PitchValidator
+from ._layerdefaults import LayerValidator
 from ._layers import LayersValidator
 from ._domain import DomainValidator
 from ._center import CenterValidator

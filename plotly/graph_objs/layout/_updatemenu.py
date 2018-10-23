@@ -235,6 +235,34 @@ class Updatemenu(BaseLayoutHierarchyType):
     def buttons(self, val):
         self['buttons'] = val
 
+    # buttondefaults
+    # --------------
+    @property
+    def buttondefaults(self):
+        """
+        When used in a template (as
+        layout.template.layout.updatemenu.buttondefaults), sets the
+        default property values to use for elements of
+        layout.updatemenu.buttons
+    
+        The 'buttondefaults' property is an instance of Button
+        that may be specified as:
+          - An instance of plotly.graph_objs.layout.updatemenu.Button
+          - A dict of string/value properties that will be passed
+            to the Button constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        plotly.graph_objs.layout.updatemenu.Button
+        """
+        return self['buttondefaults']
+
+    @buttondefaults.setter
+    def buttondefaults(self, val):
+        self['buttondefaults'] = val
+
     # direction
     # ---------
     @property
@@ -572,6 +600,11 @@ class Updatemenu(BaseLayoutHierarchyType):
         buttons
             plotly.graph_objs.layout.updatemenu.Button instance or
             dict with compatible properties
+        buttondefaults
+            When used in a template (as
+            layout.template.layout.updatemenu.buttondefaults), sets
+            the default property values to use for elements of
+            layout.updatemenu.buttons
         direction
             Determines the direction in which the buttons are laid
             out, whether in a dropdown menu or a row/column of
@@ -634,6 +667,7 @@ class Updatemenu(BaseLayoutHierarchyType):
         bordercolor=None,
         borderwidth=None,
         buttons=None,
+        buttondefaults=None,
         direction=None,
         font=None,
         name=None,
@@ -669,6 +703,11 @@ class Updatemenu(BaseLayoutHierarchyType):
         buttons
             plotly.graph_objs.layout.updatemenu.Button instance or
             dict with compatible properties
+        buttondefaults
+            When used in a template (as
+            layout.template.layout.updatemenu.buttondefaults), sets
+            the default property values to use for elements of
+            layout.updatemenu.buttons
         direction
             Determines the direction in which the buttons are laid
             out, whether in a dropdown menu or a row/column of
@@ -759,6 +798,7 @@ an instance of plotly.graph_objs.layout.Updatemenu"""
         self._validators['bordercolor'] = v_updatemenu.BordercolorValidator()
         self._validators['borderwidth'] = v_updatemenu.BorderwidthValidator()
         self._validators['buttons'] = v_updatemenu.ButtonsValidator()
+        self._validators['buttondefaults'] = v_updatemenu.ButtonValidator()
         self._validators['direction'] = v_updatemenu.DirectionValidator()
         self._validators['font'] = v_updatemenu.FontValidator()
         self._validators['name'] = v_updatemenu.NameValidator()
@@ -785,6 +825,9 @@ an instance of plotly.graph_objs.layout.Updatemenu"""
         self['borderwidth'] = borderwidth if borderwidth is not None else _v
         _v = arg.pop('buttons', None)
         self['buttons'] = buttons if buttons is not None else _v
+        _v = arg.pop('buttondefaults', None)
+        self['buttondefaults'
+            ] = buttondefaults if buttondefaults is not None else _v
         _v = arg.pop('direction', None)
         self['direction'] = direction if direction is not None else _v
         _v = arg.pop('font', None)

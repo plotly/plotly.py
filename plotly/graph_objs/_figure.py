@@ -58,6 +58,11 @@ class Figure(BaseFigure):
                     annotations
                         plotly.graph_objs.layout.Annotation instance or
                         dict with compatible properties
+                    annotationdefaults
+                        When used in a template (as
+                        layout.template.layout.annotationdefaults),
+                        sets the default property values to use for
+                        elements of layout.annotations
                     autosize
                         Determines whether or not a layout width or
                         height that has been left undefined by the user
@@ -208,6 +213,11 @@ class Figure(BaseFigure):
                     images
                         plotly.graph_objs.layout.Image instance or dict
                         with compatible properties
+                    imagedefaults
+                        When used in a template (as
+                        layout.template.layout.imagedefaults), sets the
+                        default property values to use for elements of
+                        layout.images
                     legend
                         plotly.graph_objs.layout.Legend instance or
                         dict with compatible properties
@@ -258,6 +268,11 @@ class Figure(BaseFigure):
                     shapes
                         plotly.graph_objs.layout.Shape instance or dict
                         with compatible properties
+                    shapedefaults
+                        When used in a template (as
+                        layout.template.layout.shapedefaults), sets the
+                        default property values to use for elements of
+                        layout.shapes
                     showlegend
                         Determines whether or not a legend is drawn.
                         Default is `true` if there is a trace to show
@@ -268,6 +283,11 @@ class Figure(BaseFigure):
                     sliders
                         plotly.graph_objs.layout.Slider instance or
                         dict with compatible properties
+                    sliderdefaults
+                        When used in a template (as
+                        layout.template.layout.sliderdefaults), sets
+                        the default property values to use for elements
+                        of layout.sliders
                     spikedistance
                         Sets the default distance (in pixels) to look
                         for data to draw spikelines to (-1 means no
@@ -278,24 +298,27 @@ class Figure(BaseFigure):
                         such as scatter fills.
                     template
                         Default attributes to be applied to the plot.
-                        Templates can be created from existing plots
-                        using `Plotly.makeTemplate`, or created
-                        manually. They should be objects with format:
-                        `{layout: layoutTemplate, data: {[type]:
-                        [traceTemplate, ...]}, ...}` `layoutTemplate`
-                        and `traceTemplate` are objects matching the
-                        attribute structure of `layout` and a data
-                        trace.  Trace templates are applied cyclically
-                        to traces of each type. Container arrays (eg
-                        `annotations`) have special handling: An object
-                        ending in `defaults` (eg `annotationdefaults`)
-                        is applied to each array item. But if an item
-                        has a `templateitemname` key we look in the
-                        template array for an item with matching `name`
-                        and apply that instead. If no matching `name`
-                        is found we mark the item invisible. Any named
+                        This should be a dict with format: `{'layout':
+                        layoutTemplate, 'data': {trace_type:
+                        [traceTemplate, ...], ...}}` where
+                        `layoutTemplate` is a dict matching the
+                        structure of `figure.layout` and
+                        `traceTemplate` is a dict matching the
+                        structure of the trace with type `trace_type`
+                        (e.g. 'scatter'). Alternatively, this may be
+                        specified as an instance of
+                        plotly.graph_objs.layout.Template.  Trace
+                        templates are applied cyclically to traces of
+                        each type. Container arrays (eg `annotations`)
+                        have special handling: An object ending in
+                        `defaults` (eg `annotationdefaults`) is applied
+                        to each array item. But if an item has a
+                        `templateitemname` key we look in the template
+                        array for an item with matching `name` and
+                        apply that instead. If no matching `name` is
+                        found we mark the item invisible. Any named
                         template item not referenced is appended to the
-                        end of the array, so you can use this for a
+                        end of the array, so this can be used to add a
                         watermark annotation or a logo image, for
                         example. To omit one of these items on the
                         plot, make an item with matching
@@ -310,6 +333,11 @@ class Figure(BaseFigure):
                     updatemenus
                         plotly.graph_objs.layout.Updatemenu instance or
                         dict with compatible properties
+                    updatemenudefaults
+                        When used in a template (as
+                        layout.template.layout.updatemenudefaults),
+                        sets the default property values to use for
+                        elements of layout.updatemenus
                     violingap
                         Sets the gap (in plot fraction) between violins
                         of adjacent location coordinates.
@@ -4923,6 +4951,7 @@ class Figure(BaseFigure):
         customdata=None,
         customdatasrc=None,
         dimensions=None,
+        dimensiondefaults=None,
         domain=None,
         hoverinfo=None,
         hoverinfosrc=None,
@@ -4964,6 +4993,11 @@ class Figure(BaseFigure):
         dimensions
             The dimensions (variables) of the parallel coordinates
             chart. 2..60 dimensions are supported.
+        dimensiondefaults
+            When used in a template (as
+            layout.template.data.parcoords.dimensiondefaults), sets
+            the default property values to use for elements of
+            parcoords.dimensions
         domain
             plotly.graph_objs.parcoords.Domain instance or dict
             with compatible properties
@@ -5038,6 +5072,7 @@ class Figure(BaseFigure):
             customdata=customdata,
             customdatasrc=customdatasrc,
             dimensions=dimensions,
+            dimensiondefaults=dimensiondefaults,
             domain=domain,
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
@@ -8133,6 +8168,7 @@ class Figure(BaseFigure):
         customdatasrc=None,
         diagonal=None,
         dimensions=None,
+        dimensiondefaults=None,
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
@@ -8185,6 +8221,11 @@ class Figure(BaseFigure):
         dimensions
             plotly.graph_objs.splom.Dimension instance or dict with
             compatible properties
+        dimensiondefaults
+            When used in a template (as
+            layout.template.data.splom.dimensiondefaults), sets the
+            default property values to use for elements of
+            splom.dimensions
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -8279,6 +8320,7 @@ class Figure(BaseFigure):
             customdatasrc=customdatasrc,
             diagonal=diagonal,
             dimensions=dimensions,
+            dimensiondefaults=dimensiondefaults,
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,

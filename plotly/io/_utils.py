@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 import plotly
 from plotly.basedatatypes import BaseFigure
 import plotly.graph_objs as go

@@ -8,10 +8,11 @@ from codegen.compatibility import (write_deprecated_datatypes,
                                    DEPRECATED_DATATYPES)
 from codegen.figure import write_figure_classes
 from codegen.utils import (TraceNode, PlotlyNode, LayoutNode, FrameNode,
-                           write_init_py)
+                           write_init_py, ElementDefaultsNode)
 from codegen.validators import (write_validator_py,
                                 write_data_validator_py,
                                 get_data_validator_instance)
+
 
 # Import notes
 # ------------
@@ -22,6 +23,52 @@ from codegen.validators import (write_validator_py,
 # codegen/ package, and helpers used both during code generation and at
 # runtime should reside in the _plotly_utils/ package.
 # ----------------------------------------------------------------------------
+def preprocess_schema(plotly_schema):
+    """
+    Central location to make changes to schema before it's seen by the
+    PlotlyNode classes
+    """
+
+    # Update template
+    # ---------------
+    layout = plotly_schema['layout']['layoutAttributes']
+
+    # Create codegen-friendly template scheme
+    template = {
+        "data": {
+            trace + 's': {
+                'items': {
+                    trace: {
+                    },
+                },
+                "role": "object"
+            }
+            for trace in plotly_schema['traces']
+        },
+        "layout": {
+        },
+        "description": """\
+Default attributes to be applied to the plot.
+This should be a dict with format: `{'layout': layoutTemplate, 'data':
+{trace_type: [traceTemplate, ...], ...}}` where `layoutTemplate` is a dict
+matching the structure of `figure.layout` and `traceTemplate` is a dict
+matching the structure of the trace with type `trace_type` (e.g. 'scatter').
+Alternatively, this may be specified as an instance of
+plotly.graph_objs.layout.Template.
+
+Trace templates are applied cyclically to
+traces of each type. Container arrays (eg `annotations`) have special
+handling: An object ending in `defaults` (eg `annotationdefaults`) is
+applied to each array item. But if an item has a `templateitemname`
+key we look in the template array for an item with matching `name` and
+apply that instead. If no matching `name` is found we mark the item
+invisible. Any named template item not referenced is appended to the
+end of the array, so this can be used to add a watermark annotation or a
+logo image, for example. To omit one of these items on the plot, make
+an item with matching `templateitemname` and `visible: false`."""
+    }
+
+    layout['template'] = template
 
 
 def perform_codegen():
@@ -52,6 +99,10 @@ def perform_codegen():
     with open('plotly/package_data/plot-schema.json', 'r') as f:
         plotly_schema = json.load(f)
 
+    # Preprocess Schema
+    # -----------------
+    preprocess_schema(plotly_schema)
+
     # Build node lists
     # ----------------
     # ### TraceNode ###
@@ -81,7 +132,8 @@ def perform_codegen():
                           all_frame_nodes)
 
     all_compound_nodes = [node for node in all_datatype_nodes
-                          if node.is_compound]
+                          if node.is_compound and
+                          not isinstance(node, ElementDefaultsNode)]
 
     # Write out validators
     # --------------------

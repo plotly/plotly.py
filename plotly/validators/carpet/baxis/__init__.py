@@ -9,6 +9,7 @@ from ._ticktext import TicktextValidator
 from ._ticksuffix import TicksuffixValidator
 from ._tickprefix import TickprefixValidator
 from ._tickmode import TickmodeValidator
+from ._tickformatstopdefaults import TickformatstopValidator
 from ._tickformatstops import TickformatstopsValidator
 from ._tickformat import TickformatValidator
 from ._tickfont import TickfontValidator

@@ -1748,6 +1748,7 @@ an instance of plotly.graph_objs.Scatterternary"""
             parent_name='scatterternary',
             val='scatterternary'
         )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------
