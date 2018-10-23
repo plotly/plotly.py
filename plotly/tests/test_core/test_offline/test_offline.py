@@ -21,7 +21,19 @@ fig = {
     )
 }
 
+
+resize_code_strings = [
+            'window.addEventListener("resize", ',
+            'Plotly.Plots.resize('
+        ]
+
+
 PLOTLYJS = plotly.offline.offline.get_plotlyjs()
+
+cdn_script = ('<script src="https://cdn.plot.ly/plotly-latest.min.js">'
+              '</script>')
+
+directory_script = '<script src="plotly.min.js"></script>'
 
 
 class PlotlyOfflineBaseTestCase(TestCase):
@@ -29,6 +41,9 @@ class PlotlyOfflineBaseTestCase(TestCase):
         # Some offline tests produce an html file. Make sure we clean up :)
         try:
             os.remove('temp-plot.html')
+            # Some tests that produce temp-plot.html
+            # also produce plotly.min.js
+            os.remove('plotly.min.js')
         except OSError:
             pass
 
@@ -64,10 +79,142 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
         # and it's an <html> doc
         self.assertTrue(html.startswith('<html>') and html.endswith('</html>'))
 
-    def test_including_plotlyjs(self):
-        html = self._read_html(plotly.offline.plot(fig, include_plotlyjs=False,
-                                                   auto_open=False))
-        self.assertNotIn(PLOTLYJS, html)
+    def test_including_plotlyjs_truthy_html(self):
+        # For backwards compatibility all truthy values that aren't otherwise
+        # recognized are considered true
+        for include_plotlyjs in [True, 34, 'non-empty-str']:
+            html = self._read_html(plotly.offline.plot(
+                fig,
+                include_plotlyjs=include_plotlyjs,
+                output_type='file',
+                auto_open=False))
+            self.assertIn(PLOTLYJS, html)
+            self.assertNotIn(cdn_script, html)
+            self.assertNotIn(directory_script, html)
+
+    def test_including_plotlyjs_truthy_div(self):
+        # For backwards compatibility all truthy values that aren't otherwise
+        # recognized are considered true
+        for include_plotlyjs in [True, 34, 'non-empty-str']:
+            html = plotly.offline.plot(
+                fig,
+                include_plotlyjs=include_plotlyjs,
+                output_type='div')
+            self.assertIn(PLOTLYJS, html)
+            self.assertNotIn(cdn_script, html)
+            self.assertNotIn(directory_script, html)
+
+    def test_including_plotlyjs_false_html(self):
+        # For backwards compatibility all truthy values that aren't otherwise
+        # recognized are considered true
+        for include_plotlyjs in [False, 0, '']:
+            html = self._read_html(plotly.offline.plot(
+                fig,
+                include_plotlyjs=include_plotlyjs,
+                output_type='file',
+                auto_open=False))
+            self.assertNotIn(PLOTLYJS, html)
+            self.assertNotIn(cdn_script, html)
+            self.assertNotIn(directory_script, html)
+
+    def test_including_plotlyjs_false_div(self):
+        for include_plotlyjs in [False, 0, '']:
+            html = plotly.offline.plot(
+                fig,
+                include_plotlyjs=include_plotlyjs,
+                output_type='div')
+            self.assertNotIn(PLOTLYJS, html)
+            self.assertNotIn(cdn_script, html)
+            self.assertNotIn(directory_script, html)
+
+    def test_including_plotlyjs_cdn_html(self):
+        for include_plotlyjs in ['cdn', 'CDN', 'Cdn']:
+            html = self._read_html(plotly.offline.plot(
+                fig,
+                include_plotlyjs=include_plotlyjs,
+                output_type='file',
+                auto_open=False))
+            self.assertNotIn(PLOTLYJS, html)
+            self.assertIn(cdn_script, html)
+            self.assertNotIn(directory_script, html)
+
+    def test_including_plotlyjs_cdn_div(self):
+        for include_plotlyjs in ['cdn', 'CDN', 'Cdn']:
+            html = plotly.offline.plot(
+                fig,
+                include_plotlyjs=include_plotlyjs,
+                output_type='div')
+            self.assertNotIn(PLOTLYJS, html)
+            self.assertIn(cdn_script, html)
+            self.assertNotIn(directory_script, html)
+
+    def test_including_plotlyjs_directory_html(self):
+        self.assertFalse(os.path.exists('plotly.min.js'))
+
+        for include_plotlyjs in ['directory', 'Directory', 'DIRECTORY']:
+            html = self._read_html(plotly.offline.plot(
+                fig,
+                include_plotlyjs=include_plotlyjs,
+                auto_open=False))
+            self.assertNotIn(PLOTLYJS, html)
+            self.assertNotIn(cdn_script, html)
+            self.assertIn(directory_script, html)
+
+        # plot creates plotly.min.js in the output directory
+        self.assertTrue(os.path.exists('plotly.min.js'))
+        with open('plotly.min.js', 'r') as f:
+            self.assertEqual(f.read(), PLOTLYJS)
+
+    def test_including_plotlyjs_directory_div(self):
+        self.assertFalse(os.path.exists('plotly.min.js'))
+
+        for include_plotlyjs in ['directory', 'Directory', 'DIRECTORY']:
+            html = plotly.offline.plot(
+                fig,
+                include_plotlyjs=include_plotlyjs,
+                output_type='div',
+                auto_open=False)
+
+            self.assertNotIn(PLOTLYJS, html)
+            self.assertNotIn(cdn_script, html)
+            self.assertIn(directory_script, html)
+
+        # plot does NOT create a plotly.min.js file in the output directory
+        # when output_type is div
+        self.assertFalse(os.path.exists('plotly.min.js'))
+
+    def test_including_plotlyjs_path_html(self):
+        for include_plotlyjs in [
+            ('https://cdnjs.cloudflare.com/ajax/libs/plotly.js/1.40.1/'
+             'plotly.min.js'),
+                'subpath/to/plotly.min.js',
+                'something.js']:
+
+            html = self._read_html(plotly.offline.plot(
+                fig,
+                include_plotlyjs=include_plotlyjs,
+                output_type='file',
+                auto_open=False))
+            self.assertNotIn(PLOTLYJS, html)
+            self.assertNotIn(cdn_script, html)
+            self.assertNotIn(directory_script, html)
+            self.assertIn(include_plotlyjs, html)
+
+    def test_including_plotlyjs_path_div(self):
+        for include_plotlyjs in [
+            ('https://cdnjs.cloudflare.com/ajax/libs/plotly.js/1.40.1/'
+             'plotly.min.js'),
+                'subpath/to/plotly.min.js',
+                'something.js']:
+
+            html = plotly.offline.plot(
+                fig,
+                include_plotlyjs=include_plotlyjs,
+                output_type='div')
+            self.assertNotIn(PLOTLYJS, html)
+            self.assertNotIn(cdn_script, html)
+            self.assertNotIn(directory_script, html)
+            self.assertIn(include_plotlyjs, html)
 
     def test_div_output(self):
         html = plotly.offline.plot(fig, output_type='div', auto_open=False)
@@ -77,10 +224,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
         self.assertTrue(html.startswith('<div>') and html.endswith('</div>'))
 
     def test_autoresizing(self):
-        resize_code_strings = [
-            'window.addEventListener("resize", ',
-            'Plotly.Plots.resize('
-        ]
+
         # If width or height wasn't specified, then we add a window resizer
         html = self._read_html(plotly.offline.plot(fig, auto_open=False))
         for resize_code_string in resize_code_strings:
@@ -93,6 +237,28 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
                 'width': 500, 'height': 500
             }
         }, auto_open=False))
+        for resize_code_string in resize_code_strings:
+            self.assertNotIn(resize_code_string, html)
+
+    def test_autoresizing_div(self):
+
+        # If width or height wasn't specified, then we add a window resizer
+        for include_plotlyjs in [True, False, 'cdn', 'directory']:
+            html = plotly.offline.plot(fig,
+                                       output_type='div',
+                                       include_plotlyjs=include_plotlyjs)
+
+            for resize_code_string in resize_code_strings:
+                self.assertIn(resize_code_string, html)
+
+        # If width or height was specified, then we don't resize
+        html = plotly.offline.plot({
+            'data': fig['data'],
+            'layout': {
+                'width': 500, 'height': 500
+            }
+        }, output_type='div')
+
         for resize_code_string in resize_code_strings:
             self.assertNotIn(resize_code_string, html)
 
