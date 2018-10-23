@@ -239,12 +239,8 @@ class BaseFigure(object):
         # Template
         # --------
         # ### Check for default template ###
-        import plotly.io as pio
-        if self._layout_obj.template is None:
-            if pio.templates.default is not None:
-                self._layout_obj.template = pio.templates.default
-            else:
-                self._layout_obj.template = {}
+        self._initialize_layout_template()
+
 
     # Magic Methods
     # -------------
@@ -1341,6 +1337,14 @@ Please use the add_trace method with the row and col parameters.
 
     # Layout
     # ------
+    def _initialize_layout_template(self):
+        import plotly.io as pio
+        if self._layout_obj.template is None:
+            if pio.templates.default is not None:
+                self._layout_obj.template = pio.templates.default
+            else:
+                self._layout_obj.template = {}
+
     @property
     def layout(self):
         """
@@ -1373,6 +1377,10 @@ Please use the add_trace method with the row and col parameters.
         new_layout._parent = self
         new_layout._orphan_props.clear()
         self._layout_obj = new_layout
+
+        # Initialize template object
+        # --------------------------
+        self._initialize_layout_template()
 
         # Notify JS side
         self._send_relayout_msg(new_layout_data)
