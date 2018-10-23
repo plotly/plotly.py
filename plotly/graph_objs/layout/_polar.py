@@ -221,7 +221,7 @@ class Polar(BaseLayoutHierarchyType):
                     Sets a tick label prefix.
                 ticks
                     Determines whether ticks are drawn or not. If
-                    **, this axis' ticks are not drawn. If
+                    "", this axis' ticks are not drawn. If
                     "outside" ("inside"), this axis' are drawn
                     outside (inside) the axis lines.
                 ticksuffix
@@ -693,7 +693,7 @@ class Polar(BaseLayoutHierarchyType):
                     Sets a tick label prefix.
                 ticks
                     Determines whether ticks are drawn or not. If
-                    **, this axis' ticks are not drawn. If
+                    "", this axis' ticks are not drawn. If
                     "outside" ("inside"), this axis' are drawn
                     outside (inside) the axis lines.
                 ticksuffix
@@ -750,9 +750,9 @@ class Polar(BaseLayoutHierarchyType):
         counterclockwise direction with 0 corresponding to rightmost
         limit of the polar subplot.
     
-        The 'sector' property is an info array that may be specified as a
-        list or tuple of 2 elements where:
+        The 'sector' property is an info array that may be specified as:
     
+        * a list or tuple of 2 elements where:
     (0) The 'sector[0]' property is a number and may be specified as:
           - An int or float
     (1) The 'sector[1]' property is a number and may be specified as:

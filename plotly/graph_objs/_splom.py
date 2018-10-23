@@ -764,10 +764,9 @@ class Splom(BaseTraceType):
         default, a splom will match the first N xaxes where N is the
         number of input dimensions.
     
-        The 'xaxes' property is an info array that may be specified as a
-        list or tuple of up to 1 elements where:
-    
-    (0) The 'xaxes[0]' property is an identifier of a particular
+        The 'xaxes' property is an info array that may be specified as:
+        * a list of elements where:
+          The 'xaxes[i]' property is an identifier of a particular
         subplot, of type 'x', that may be specified as the string 'x'
         optionally followed by an integer >= 1
         (e.g. 'x', 'x1', 'x2', 'x3', etc.)
@@ -791,10 +790,9 @@ class Splom(BaseTraceType):
         default, a splom will match the first N yaxes where N is the
         number of input dimensions.
     
-        The 'yaxes' property is an info array that may be specified as a
-        list or tuple of up to 1 elements where:
-    
-    (0) The 'yaxes[0]' property is an identifier of a particular
+        The 'yaxes' property is an info array that may be specified as:
+        * a list of elements where:
+          The 'yaxes[i]' property is an identifier of a particular
         subplot, of type 'y', that may be specified as the string 'y'
         optionally followed by an integer >= 1
         (e.g. 'y', 'y1', 'y2', 'y3', etc.)

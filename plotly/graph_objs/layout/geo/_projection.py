@@ -12,9 +12,9 @@ class Projection(BaseLayoutHierarchyType):
         For conic projection types only. Sets the parallels (tangent,
         secant) where the cone intersects the sphere.
     
-        The 'parallels' property is an info array that may be specified as a
-        list or tuple of 2 elements where:
+        The 'parallels' property is an info array that may be specified as:
     
+        * a list or tuple of 2 elements where:
     (0) The 'parallels[0]' property is a number and may be specified as:
           - An int or float
     (1) The 'parallels[1]' property is a number and may be specified as:

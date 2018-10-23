@@ -143,16 +143,15 @@ class Grid(BaseLayoutHierarchyType):
         """
         Used for freeform grids, where some axes may be shared across
         subplots but others are not. Each entry should be a cartesian
-        subplot id, like "xy" or "x3y2", or ** to leave that cell
+        subplot id, like "xy" or "x3y2", or "" to leave that cell
         empty. You may reuse x axes within the same column, and y axes
         within the same row. Non-cartesian subplots and traces that
         support `domain` can place themselves in this grid separately
         using the `gridcell` attribute.
     
-        The 'subplots' property is an info array that may be specified as a
-        list or tuple of up to 1 elements where:
-    
-    (0) The 'subplots[0]' property is an enumeration that may be specified as:
+        The 'subplots' property is an info array that may be specified as:
+        * a 2D list where:
+          The 'subplots[i][j]' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['']
           - A string that matches one of the following regular expressions:
@@ -175,15 +174,14 @@ class Grid(BaseLayoutHierarchyType):
         """
         Used with `yaxes` when the x and y axes are shared across
         columns and rows. Each entry should be an x axis id like "x",
-        "x2", etc., or ** to not put an x axis in that column. Entries
-        other than ** must be unique. Ignored if `subplots` is present.
+        "x2", etc., or "" to not put an x axis in that column. Entries
+        other than "" must be unique. Ignored if `subplots` is present.
         If missing but `yaxes` is present, will generate consecutive
         IDs.
     
-        The 'xaxes' property is an info array that may be specified as a
-        list or tuple of up to 1 elements where:
-    
-    (0) The 'xaxes[0]' property is an enumeration that may be specified as:
+        The 'xaxes' property is an info array that may be specified as:
+        * a list of elements where:
+          The 'xaxes[i]' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['']
           - A string that matches one of the following regular expressions:
@@ -227,8 +225,8 @@ class Grid(BaseLayoutHierarchyType):
     def xside(self):
         """
         Sets where the x axis labels and titles go. "bottom" means the
-        very bottom of the grid. *bottom plot* is the lowest plot that
-        each x axis is used in. "top" and *top plot* are similar.
+        very bottom of the grid. "bottom plot" is the lowest plot that
+        each x axis is used in. "top" and "top plot" are similar.
     
         The 'xside' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -251,15 +249,14 @@ class Grid(BaseLayoutHierarchyType):
         """
         Used with `yaxes` when the x and y axes are shared across
         columns and rows. Each entry should be an y axis id like "y",
-        "y2", etc., or ** to not put a y axis in that row. Entries
-        other than ** must be unique. Ignored if `subplots` is present.
+        "y2", etc., or "" to not put a y axis in that row. Entries
+        other than "" must be unique. Ignored if `subplots` is present.
         If missing but `xaxes` is present, will generate consecutive
         IDs.
     
-        The 'yaxes' property is an info array that may be specified as a
-        list or tuple of up to 1 elements where:
-    
-    (0) The 'yaxes[0]' property is an enumeration that may be specified as:
+        The 'yaxes' property is an info array that may be specified as:
+        * a list of elements where:
+          The 'yaxes[i]' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['']
           - A string that matches one of the following regular expressions:
@@ -362,7 +359,7 @@ class Grid(BaseLayoutHierarchyType):
         subplots
             Used for freeform grids, where some axes may be shared
             across subplots but others are not. Each entry should
-            be a cartesian subplot id, like "xy" or "x3y2", or **
+            be a cartesian subplot id, like "xy" or "x3y2", or ""
             to leave that cell empty. You may reuse x axes within
             the same column, and y axes within the same row. Non-
             cartesian subplots and traces that support `domain` can
@@ -371,8 +368,8 @@ class Grid(BaseLayoutHierarchyType):
         xaxes
             Used with `yaxes` when the x and y axes are shared
             across columns and rows. Each entry should be an x axis
-            id like "x", "x2", etc., or ** to not put an x axis in
-            that column. Entries other than ** must be unique.
+            id like "x", "x2", etc., or "" to not put an x axis in
+            that column. Entries other than "" must be unique.
             Ignored if `subplots` is present. If missing but
             `yaxes` is present, will generate consecutive IDs.
         xgap
@@ -382,14 +379,14 @@ class Grid(BaseLayoutHierarchyType):
             independent grids.
         xside
             Sets where the x axis labels and titles go. "bottom"
-            means the very bottom of the grid. *bottom plot* is the
-            lowest plot that each x axis is used in. "top" and *top
-            plot* are similar.
+            means the very bottom of the grid. "bottom plot" is the
+            lowest plot that each x axis is used in. "top" and "top
+            plot" are similar.
         yaxes
             Used with `yaxes` when the x and y axes are shared
             across columns and rows. Each entry should be an y axis
-            id like "y", "y2", etc., or ** to not put a y axis in
-            that row. Entries other than ** must be unique. Ignored
+            id like "y", "y2", etc., or "" to not put a y axis in
+            that row. Entries other than "" must be unique. Ignored
             if `subplots` is present. If missing but `xaxes` is
             present, will generate consecutive IDs.
         ygap
@@ -459,7 +456,7 @@ class Grid(BaseLayoutHierarchyType):
         subplots
             Used for freeform grids, where some axes may be shared
             across subplots but others are not. Each entry should
-            be a cartesian subplot id, like "xy" or "x3y2", or **
+            be a cartesian subplot id, like "xy" or "x3y2", or ""
             to leave that cell empty. You may reuse x axes within
             the same column, and y axes within the same row. Non-
             cartesian subplots and traces that support `domain` can
@@ -468,8 +465,8 @@ class Grid(BaseLayoutHierarchyType):
         xaxes
             Used with `yaxes` when the x and y axes are shared
             across columns and rows. Each entry should be an x axis
-            id like "x", "x2", etc., or ** to not put an x axis in
-            that column. Entries other than ** must be unique.
+            id like "x", "x2", etc., or "" to not put an x axis in
+            that column. Entries other than "" must be unique.
             Ignored if `subplots` is present. If missing but
             `yaxes` is present, will generate consecutive IDs.
         xgap
@@ -479,14 +476,14 @@ class Grid(BaseLayoutHierarchyType):
             independent grids.
         xside
             Sets where the x axis labels and titles go. "bottom"
-            means the very bottom of the grid. *bottom plot* is the
-            lowest plot that each x axis is used in. "top" and *top
-            plot* are similar.
+            means the very bottom of the grid. "bottom plot" is the
+            lowest plot that each x axis is used in. "top" and "top
+            plot" are similar.
         yaxes
             Used with `yaxes` when the x and y axes are shared
             across columns and rows. Each entry should be an y axis
-            id like "y", "y2", etc., or ** to not put a y axis in
-            that row. Entries other than ** must be unique. Ignored
+            id like "y", "y2", etc., or "" to not put a y axis in
+            that row. Entries other than "" must be unique. Ignored
             if `subplots` is present. If missing but `xaxes` is
             present, will generate consecutive IDs.
         ygap

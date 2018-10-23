@@ -847,7 +847,7 @@ class ColorBar(BaseTraceHierarchyType):
     @property
     def ticks(self):
         """
-        Determines whether ticks are drawn or not. If **, this axis'
+        Determines whether ticks are drawn or not. If "", this axis'
         ticks are not drawn. If "outside" ("inside"), this axis' are
         drawn outside (inside) the axis lines.
     
@@ -1346,7 +1346,7 @@ class ColorBar(BaseTraceHierarchyType):
         tickprefix
             Sets a tick label prefix.
         ticks
-            Determines whether ticks are drawn or not. If **, this
+            Determines whether ticks are drawn or not. If "", this
             axis' ticks are not drawn. If "outside" ("inside"),
             this axis' are drawn outside (inside) the axis lines.
         ticksuffix
@@ -1582,7 +1582,7 @@ class ColorBar(BaseTraceHierarchyType):
         tickprefix
             Sets a tick label prefix.
         ticks
-            Determines whether ticks are drawn or not. If **, this
+            Determines whether ticks are drawn or not. If "", this
             axis' ticks are not drawn. If "outside" ("inside"),
             this axis' are drawn outside (inside) the axis lines.
         ticksuffix

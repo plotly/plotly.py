@@ -111,9 +111,9 @@ class Lonaxis(BaseLayoutHierarchyType):
         Sets the range of this axis (in degrees), sets the map's
         clipped coordinates.
     
-        The 'range' property is an info array that may be specified as a
-        list or tuple of 2 elements where:
+        The 'range' property is an info array that may be specified as:
     
+        * a list or tuple of 2 elements where:
     (0) The 'range[0]' property is a number and may be specified as:
           - An int or float
     (1) The 'range[1]' property is a number and may be specified as:

@@ -33,7 +33,7 @@ class CumulativeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 and `centralbin` attributes to tune the
                 accumulation method. Note: in this mode, the
                 "density" `histnorm` settings behave the same
-                as their equivalents without "density": ** and
+                as their equivalents without "density": "" and
                 "density" both rise to the number of data
                 points, and "probability" and *probability
                 density* both rise to the number of sample

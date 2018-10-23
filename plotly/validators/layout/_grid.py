@@ -45,7 +45,7 @@ class GridValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Used for freeform grids, where some axes may be
                 shared across subplots but others are not. Each
                 entry should be a cartesian subplot id, like
-                "xy" or "x3y2", or ** to leave that cell empty.
+                "xy" or "x3y2", or "" to leave that cell empty.
                 You may reuse x axes within the same column,
                 and y axes within the same row. Non-cartesian
                 subplots and traces that support `domain` can
@@ -55,8 +55,8 @@ class GridValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Used with `yaxes` when the x and y axes are
                 shared across columns and rows. Each entry
                 should be an x axis id like "x", "x2", etc., or
-                ** to not put an x axis in that column. Entries
-                other than ** must be unique. Ignored if
+                "" to not put an x axis in that column. Entries
+                other than "" must be unique. Ignored if
                 `subplots` is present. If missing but `yaxes`
                 is present, will generate consecutive IDs.
             xgap
@@ -67,15 +67,15 @@ class GridValidator(_plotly_utils.basevalidators.CompoundValidator):
             xside
                 Sets where the x axis labels and titles go.
                 "bottom" means the very bottom of the grid.
-                *bottom plot* is the lowest plot that each x
-                axis is used in. "top" and *top plot* are
+                "bottom plot" is the lowest plot that each x
+                axis is used in. "top" and "top plot" are
                 similar.
             yaxes
                 Used with `yaxes` when the x and y axes are
                 shared across columns and rows. Each entry
                 should be an y axis id like "y", "y2", etc., or
-                ** to not put a y axis in that row. Entries
-                other than ** must be unique. Ignored if
+                "" to not put a y axis in that row. Entries
+                other than "" must be unique. Ignored if
                 `subplots` is present. If missing but `xaxes`
                 is present, will generate consecutive IDs.
             ygap

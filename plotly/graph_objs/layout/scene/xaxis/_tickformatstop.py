@@ -13,9 +13,9 @@ class Tickformatstop(BaseLayoutHierarchyType):
         describe some zoom level, it is possible to omit "min" or "max"
         value by passing "null"
     
-        The 'dtickrange' property is an info array that may be specified as a
-        list or tuple of 2 elements where:
+        The 'dtickrange' property is an info array that may be specified as:
     
+        * a list or tuple of 2 elements where:
     (0) The 'dtickrange[0]' property accepts values of any type
     (1) The 'dtickrange[1]' property accepts values of any type
 

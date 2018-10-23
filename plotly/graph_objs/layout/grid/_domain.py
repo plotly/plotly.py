@@ -13,9 +13,9 @@ class Domain(BaseLayoutHierarchyType):
         fraction). The first and last cells end exactly at the domain
         edges, with no grout around the edges.
     
-        The 'x' property is an info array that may be specified as a
-        list or tuple of 2 elements where:
+        The 'x' property is an info array that may be specified as:
     
+        * a list or tuple of 2 elements where:
     (0) The 'x[0]' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
     (1) The 'x[1]' property is a number and may be specified as:
@@ -40,9 +40,9 @@ class Domain(BaseLayoutHierarchyType):
         fraction). The first and last cells end exactly at the domain
         edges, with no grout around the edges.
     
-        The 'y' property is an info array that may be specified as a
-        list or tuple of 2 elements where:
+        The 'y' property is an info array that may be specified as:
     
+        * a list or tuple of 2 elements where:
     (0) The 'y[0]' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
     (1) The 'y[1]' property is a number and may be specified as:

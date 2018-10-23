@@ -146,9 +146,10 @@ def format_description(desc):
     desc = re.sub('(^|[\s(,.:])\*(\S+)\*([\s),.:]|$)', r'\1"\2"\3', desc)
 
     # Special case strings that don't satisfy regex above
-    other_strings = ['Courier New', 'Droid Sans', 'Droid Serif',
+    other_strings = ['', 'Courier New', 'Droid Sans', 'Droid Serif',
                      'Droid Sans Mono', 'Gravitas One', 'Old Standard TT',
-                     'Open Sans', 'PT Sans Narrow', 'Times New Roman']
+                     'Open Sans', 'PT Sans Narrow', 'Times New Roman',
+                     'bottom plot', 'top plot']
 
     for s in other_strings:
         desc = desc.replace("*%s*" % s, '"%s"' % s)
