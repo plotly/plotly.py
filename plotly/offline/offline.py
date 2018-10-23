@@ -12,6 +12,7 @@ import pkgutil
 import time
 import webbrowser
 
+import six
 from requests.compat import json as _json
 
 import plotly
@@ -358,8 +359,12 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         plot_html, plotdivid, width, height = _plot_html(
             figure_or_data, config, validate, '100%', 525, True
         )
-        display_bundle['text/html'] = plot_html
-        display_bundle['text/vnd.plotly.v1+html'] = plot_html
+        resize_script = ''
+        if width == '100%' or height == '100%':
+            resize_script = _build_resize_script(plotdivid)
+
+        display_bundle['text/html'] = plot_html + resize_script
+        display_bundle['text/vnd.plotly.v1+html'] = plot_html + resize_script
 
     ipython_display.display(display_bundle, raw=True)
 
@@ -387,6 +392,16 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         time.sleep(1)
         # inject code to download an image of the plot
         ipython_display.display(ipython_display.HTML(script))
+
+
+def _build_resize_script(plotdivid):
+    resize_script = (
+        '<script type="text/javascript">'
+        'window.addEventListener("resize", function(){{'
+        'Plotly.Plots.resize(document.getElementById("{id}"));}});'
+        '</script>'
+    ).format(id=plotdivid)
+    return resize_script
 
 
 def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
@@ -433,10 +448,41 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         in a standalone HTML file.
         Use 'div' if you are embedding these graphs in an HTML file with
         other graphs or HTML markup, like a HTML report or an website.
-    include_plotlyjs (default=True) -- If True, include the plotly.js
-        source code in the output file or string.
-        Set as False if your HTML file already contains a copy of the plotly.js
+    include_plotlyjs (True | False | 'cdn' | 'directory' | path - default=True)
+        Specifies how the plotly.js library is included in the output html
+        file or div string.
+
+        If True, a script tag containing the plotly.js source code (~3MB)
+        is included in the output.  HTML files generated with this option are
+        fully self-contained and can be used offline.
+
+        If 'cdn', a script tag that references the plotly.js CDN is included
+        in the output. HTML files generated with this option are about 3MB
+        smaller than those generated with include_plotlyjs=True, but they
+        require an active internet connection in order to load the plotly.js
         library.
+
+        If 'directory', a script tag is included that references an external
+        plotly.min.js bundle that is assumed to reside in the same
+        directory as the HTML file.  If output_type='file' then the
+        plotly.min.js bundle is copied into the directory of the resulting
+        HTML file. If a file named plotly.min.js already exists in the output
+        directory then this file is left unmodified and no copy is performed.
+        HTML files generated with this option can be used offline, but they
+        require a copy of the plotly.min.js bundle in the same directory.
+        This option is useful when many figures will be saved as HTML files in
+        the same directory because the plotly.js source code will be included
+        only once per output directory, rather than once per output file.
+
+        If a string that ends in '.js', a script tag is included that
+        references the specified path. This approach can be used to point
+        the resulting HTML file to an alternative CDN.
+
+        If False, no script tag referencing plotly.js is included. This is
+        useful when output_type='div' and the resulting div string will be
+        placed inside an HTML document that already loads plotly.js.  This
+        option is not advised when output_type='file' as it will result in
+        a non-functional html file.
     filename (default='temp-plot.html') -- The local filename to save the
         outputted chart to. If the filename already exists, it will be
         overwritten. This argument only applies if `output_type` is 'file'.
@@ -477,25 +523,31 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
 
     resize_script = ''
     if width == '100%' or height == '100%':
-        resize_script = (
-            ''
-            '<script type="text/javascript">'
-            'window.addEventListener("resize", function(){{'
-            'Plotly.Plots.resize(document.getElementById("{id}"));}});'
-            '</script>'
-        ).format(id=plotdivid)
+        resize_script = _build_resize_script(plotdivid)
+
+    if isinstance(include_plotlyjs, six.string_types):
+        include_plotlyjs = include_plotlyjs.lower()
+
+    if include_plotlyjs == 'cdn':
+        plotly_js_script = """\
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>"""
+    elif include_plotlyjs == 'directory':
+        plotly_js_script = '<script src="plotly.min.js"></script>'
+    elif (isinstance(include_plotlyjs, six.string_types) and
+          include_plotlyjs.endswith('.js')):
+        plotly_js_script = '<script src="{url}"></script>'.format(
+            url=include_plotlyjs)
+    elif include_plotlyjs:
+        plotly_js_script = ''.join([
+            '<script type="text/javascript">',
+            get_plotlyjs(),
+            '</script>',
+        ])
+    else:
+        plotly_js_script = ''
 
     if output_type == 'file':
         with open(filename, 'w') as f:
-            if include_plotlyjs:
-                plotly_js_script = ''.join([
-                    '<script type="text/javascript">',
-                    get_plotlyjs(),
-                    '</script>',
-                ])
-            else:
-                plotly_js_script = ''
-
             if image:
                 if image not in __IMAGE_FORMATS:
                     raise ValueError('The image parameter must be one of the '
@@ -523,6 +575,15 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                 '</body>',
                 '</html>']))
 
+        # Check if we should copy plotly.min.js to output directory
+        if include_plotlyjs == 'directory':
+            bundle_path = os.path.join(
+                os.path.dirname(filename), 'plotly.min.js')
+
+            if not os.path.exists(bundle_path):
+                with open(bundle_path, 'w') as f:
+                    f.write(get_plotlyjs())
+
         url = 'file://' + os.path.abspath(filename)
         if auto_open:
             webbrowser.open(url)
@@ -530,18 +591,14 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         return url
 
     elif output_type == 'div':
-        if include_plotlyjs:
-            return ''.join([
+
+        return ''.join([
                 '<div>',
-                '<script type="text/javascript">',
-                get_plotlyjs(),
-                '</script>',
+                plotly_js_script,
                 plot_html,
                 resize_script,
                 '</div>',
             ])
-        else:
-            return plot_html
 
 
 def plot_mpl(mpl_fig, resize=False, strip_style=False,
