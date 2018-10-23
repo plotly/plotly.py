@@ -289,6 +289,10 @@ def plotly():
     template.layout.scene.yaxis.gridwidth = 2
     template.layout.scene.zaxis.gridwidth = 2
 
+    # Increase width of cartesian zero lines
+    template.layout.xaxis.zerolinewidth = 2
+    template.layout.yaxis.zerolinewidth = 2
+
     # Set table header font color to white
     return template
 
@@ -342,7 +346,7 @@ def plotly_white():
         panel_background_clr='white',
         panel_grid_clr=plotly_clrs['Rhino Medium 2'],
         axis_ticks_clr=plotly_clrs['Rhino Core'],
-        zerolinecolor_clr=plotly_clrs['Rhino Medium 1'],
+        zerolinecolor_clr=plotly_clrs['Rhino Light 2'],
         table_cell_clr=plotly_clrs['Rhino Light 2'],
         table_header_clr=plotly_clrs['Rhino Medium 2'],
         table_line_clr='white',
@@ -366,6 +370,10 @@ def plotly_white():
     template.layout.ternary.aaxis.update(opts)
     template.layout.ternary.baxis.update(opts)
     template.layout.ternary.caxis.update(opts)
+
+    # Increase width of cartesian zero lines
+    template.layout.xaxis.zerolinewidth = 2
+    template.layout.yaxis.zerolinewidth = 2
 
     # Set table header font color to white
     return template
@@ -450,6 +458,12 @@ def plotly_dark():
     # Darken cartesian grid lines a little more
     template.layout.xaxis.gridcolor = plotly_clrs['Rhino Darker']
     template.layout.yaxis.gridcolor = plotly_clrs['Rhino Darker']
+
+    # Increase width of cartesian zero lines
+    template.layout.xaxis.zerolinecolor = plotly_clrs['Rhino Darker']
+    template.layout.yaxis.zerolinecolor = plotly_clrs['Rhino Darker']
+    template.layout.xaxis.zerolinewidth = 2
+    template.layout.yaxis.zerolinewidth = 2
 
     # Set table header font color to white
     return template
