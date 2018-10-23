@@ -169,6 +169,11 @@ class Heatmap(BaseTraceType):
                 tickformatstops
                     plotly.graph_objs.heatmap.colorbar.Tickformatst
                     op instance or dict with compatible properties
+                tickformatstopdefaults
+                    When used in a template (as layout.template.dat
+                    a.heatmap.colorbar.tickformatstopdefaults),
+                    sets the default property values to use for
+                    elements of heatmap.colorbar.tickformatstops
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -1886,6 +1891,7 @@ an instance of plotly.graph_objs.Heatmap"""
         self._validators['type'] = LiteralValidator(
             plotly_name='type', parent_name='heatmap', val='heatmap'
         )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

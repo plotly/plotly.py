@@ -135,6 +135,33 @@ class Splom(BaseTraceType):
     def dimensions(self, val):
         self['dimensions'] = val
 
+    # dimensiondefaults
+    # -----------------
+    @property
+    def dimensiondefaults(self):
+        """
+        When used in a template (as
+        layout.template.data.splom.dimensiondefaults), sets the default
+        property values to use for elements of splom.dimensions
+    
+        The 'dimensiondefaults' property is an instance of Dimension
+        that may be specified as:
+          - An instance of plotly.graph_objs.splom.Dimension
+          - A dict of string/value properties that will be passed
+            to the Dimension constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        plotly.graph_objs.splom.Dimension
+        """
+        return self['dimensiondefaults']
+
+    @dimensiondefaults.setter
+    def dimensiondefaults(self, val):
+        self['dimensiondefaults'] = val
+
     # hoverinfo
     # ---------
     @property
@@ -812,6 +839,11 @@ class Splom(BaseTraceType):
         dimensions
             plotly.graph_objs.splom.Dimension instance or dict with
             compatible properties
+        dimensiondefaults
+            When used in a template (as
+            layout.template.data.splom.dimensiondefaults), sets the
+            default property values to use for elements of
+            splom.dimensions
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -897,6 +929,7 @@ class Splom(BaseTraceType):
         customdatasrc=None,
         diagonal=None,
         dimensions=None,
+        dimensiondefaults=None,
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
@@ -950,6 +983,11 @@ class Splom(BaseTraceType):
         dimensions
             plotly.graph_objs.splom.Dimension instance or dict with
             compatible properties
+        dimensiondefaults
+            When used in a template (as
+            layout.template.data.splom.dimensiondefaults), sets the
+            default property values to use for elements of
+            splom.dimensions
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -1063,6 +1101,7 @@ an instance of plotly.graph_objs.Splom"""
         self._validators['customdatasrc'] = v_splom.CustomdatasrcValidator()
         self._validators['diagonal'] = v_splom.DiagonalValidator()
         self._validators['dimensions'] = v_splom.DimensionsValidator()
+        self._validators['dimensiondefaults'] = v_splom.DimensionValidator()
         self._validators['hoverinfo'] = v_splom.HoverinfoValidator()
         self._validators['hoverinfosrc'] = v_splom.HoverinfosrcValidator()
         self._validators['hoverlabel'] = v_splom.HoverlabelValidator()
@@ -1097,6 +1136,9 @@ an instance of plotly.graph_objs.Splom"""
         self['diagonal'] = diagonal if diagonal is not None else _v
         _v = arg.pop('dimensions', None)
         self['dimensions'] = dimensions if dimensions is not None else _v
+        _v = arg.pop('dimensiondefaults', None)
+        self['dimensiondefaults'
+            ] = dimensiondefaults if dimensiondefaults is not None else _v
         _v = arg.pop('hoverinfo', None)
         self['hoverinfo'] = hoverinfo if hoverinfo is not None else _v
         _v = arg.pop('hoverinfosrc', None)
@@ -1152,6 +1194,7 @@ an instance of plotly.graph_objs.Splom"""
         self._validators['type'] = LiteralValidator(
             plotly_name='type', parent_name='splom', val='splom'
         )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

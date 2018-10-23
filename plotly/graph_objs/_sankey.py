@@ -989,6 +989,7 @@ an instance of plotly.graph_objs.Sankey"""
         self._validators['type'] = LiteralValidator(
             plotly_name='type', parent_name='sankey', val='sankey'
         )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------

@@ -1363,6 +1363,7 @@ an instance of plotly.graph_objs.Barpolar"""
         self._validators['type'] = LiteralValidator(
             plotly_name='type', parent_name='barpolar', val='barpolar'
         )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------
