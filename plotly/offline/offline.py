@@ -449,7 +449,7 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         in a standalone HTML file.
         Use 'div' if you are embedding these graphs in an HTML file with
         other graphs or HTML markup, like a HTML report or an website.
-    include_plotlyjs (True | False | 'cdn' | 'directory' - default=True) --
+    include_plotlyjs (True | False | 'cdn' | 'directory' | path - default=True)
         Specifies how the plotly.js library is included in the output html
         file or div string.
 
@@ -474,6 +474,10 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         This option is useful when many figures will be saved as HTML files in
         the same directory because the plotly.js source code will be included
         only once per output directory, rather than once per output file.
+
+        If a string that ends in '.js', a script tag is included that
+        references the specified path. This approach can be used to point
+        the resulting HTML file to an alternative CDN.
 
         If False, no script tag referencing plotly.js is included. This is
         useful when output_type='div' and the resulting div string will be
@@ -530,6 +534,10 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>"""
     elif include_plotlyjs == 'directory':
         plotly_js_script = '<script src="plotly.min.js"></script>'
+    elif (isinstance(include_plotlyjs, six.string_types) and
+          include_plotlyjs.endswith('.js')):
+        plotly_js_script = '<script src="{url}"></script>'.format(
+            url=include_plotlyjs)
     elif include_plotlyjs:
         plotly_js_script = ''.join([
             '<script type="text/javascript">',

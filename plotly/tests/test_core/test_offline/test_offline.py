@@ -183,6 +183,39 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
         # when output_type is div
         self.assertFalse(os.path.exists('plotly.min.js'))
 
+    def test_including_plotlyjs_path_html(self):
+        for include_plotlyjs in [
+            ('https://cdnjs.cloudflare.com/ajax/libs/plotly.js/1.40.1/'
+             'plotly.min.js'),
+                'subpath/to/plotly.min.js',
+                'something.js']:
+
+            html = self._read_html(plotly.offline.plot(
+                fig,
+                include_plotlyjs=include_plotlyjs,
+                output_type='file',
+                auto_open=False))
+            self.assertNotIn(PLOTLYJS, html)
+            self.assertNotIn(cdn_script, html)
+            self.assertNotIn(directory_script, html)
+            self.assertIn(include_plotlyjs, html)
+
+    def test_including_plotlyjs_path_div(self):
+        for include_plotlyjs in [
+            ('https://cdnjs.cloudflare.com/ajax/libs/plotly.js/1.40.1/'
+             'plotly.min.js'),
+                'subpath/to/plotly.min.js',
+                'something.js']:
+
+            html = plotly.offline.plot(
+                fig,
+                include_plotlyjs=include_plotlyjs,
+                output_type='div')
+            self.assertNotIn(PLOTLYJS, html)
+            self.assertNotIn(cdn_script, html)
+            self.assertNotIn(directory_script, html)
+            self.assertIn(include_plotlyjs, html)
+
     def test_div_output(self):
         html = plotly.offline.plot(fig, output_type='div', auto_open=False)
 
