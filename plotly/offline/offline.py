@@ -406,7 +406,8 @@ def _build_resize_script(plotdivid):
 
 def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
          validate=True, output_type='file', include_plotlyjs=True,
-         filename='temp-plot.html', auto_open=True, image=None,
+         include_mathjax=False, filename='temp-plot.html',
+         auto_open=True, image=None,
          image_filename='plot_image', image_width=800, image_height=600,
          config=None):
     """ Create a plotly graph locally as an HTML document or string.
@@ -483,6 +484,22 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         placed inside an HTML document that already loads plotly.js.  This
         option is not advised when output_type='file' as it will result in
         a non-functional html file.
+    include_mathjax (False | 'cdn' | path - default=False) --
+        Specifies how the MathJax.js library is included in the output html
+        file or div string.  MathJax is required in order to display labels
+        with LaTeX typesetting.
+
+        If False, no script tag referencing MathJax.js will be included in the
+        output. HTML files generated with this option will not be able to
+        display LaTeX typesetting.
+
+        If 'cdn', a script tag that references a MathJax CDN location will be
+        included in the output.  HTML files generated with this option will be
+        able to display LaTeX typesetting as long as they have internet access.
+
+        If a string that ends in '.js', a script tag is included that
+        references the specified path. This approach can be used to point the
+        resulting HTML file to an alternative CDN.
     filename (default='temp-plot.html') -- The local filename to save the
         outputted chart to. If the filename already exists, it will be
         overwritten. This argument only applies if `output_type` is 'file'.
@@ -521,30 +538,65 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         figure_or_data, config, validate,
         '100%', '100%', global_requirejs=False)
 
+    # Build resize_script
     resize_script = ''
     if width == '100%' or height == '100%':
         resize_script = _build_resize_script(plotdivid)
 
+    # Build script to set global PlotlyConfig object. This must execute before
+    # plotly.js is loaded.
+    window_plotly_config = """\
+<script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>"""
+
+    # Process include_plotlyjs and build plotly_js_script
     if isinstance(include_plotlyjs, six.string_types):
+        include_plotlyjs_orig = include_plotlyjs
         include_plotlyjs = include_plotlyjs.lower()
 
     if include_plotlyjs == 'cdn':
-        plotly_js_script = """\
+        plotly_js_script = window_plotly_config + """\
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>"""
     elif include_plotlyjs == 'directory':
-        plotly_js_script = '<script src="plotly.min.js"></script>'
+        plotly_js_script = (window_plotly_config +
+                            '<script src="plotly.min.js"></script>')
     elif (isinstance(include_plotlyjs, six.string_types) and
           include_plotlyjs.endswith('.js')):
-        plotly_js_script = '<script src="{url}"></script>'.format(
-            url=include_plotlyjs)
+        plotly_js_script = (window_plotly_config +
+                            '<script src="{url}"></script>'.format(
+                                url=include_plotlyjs_orig))
     elif include_plotlyjs:
         plotly_js_script = ''.join([
+            window_plotly_config,
             '<script type="text/javascript">',
             get_plotlyjs(),
             '</script>',
         ])
     else:
         plotly_js_script = ''
+
+    # Process include_mathjax and build mathjax_script
+    if isinstance(include_mathjax, six.string_types):
+        include_mathjax_orig = include_mathjax
+        include_mathjax = include_mathjax.lower()
+
+    if include_mathjax == 'cdn':
+        mathjax_script = (
+            '<script src="{url}?config=TeX-AMS-MML_SVG"></script>'.format(
+                url=('https://cdnjs.cloudflare.com'
+                     '/ajax/libs/mathjax/2.7.5/MathJax.js')))
+    elif (isinstance(include_mathjax, six.string_types) and
+          include_mathjax.endswith('.js')):
+        mathjax_script = '<script src="{url}"></script>'.format(
+            url=include_mathjax_orig)
+    elif not include_mathjax:
+        mathjax_script = ''
+    else:
+        raise ValueError("""\
+Invalid value of type {typ} received as the include_mathjax argument
+    Received value: {val}
+
+include_mathjax may be specified as False, 'cdn', or a string ending with '.js' 
+""".format(typ=type(include_mathjax), val=include_mathjax))
 
     if output_type == 'file':
         with open(filename, 'w') as f:
@@ -568,6 +620,7 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                 '<html>',
                 '<head><meta charset="utf-8" /></head>',
                 '<body>',
+                mathjax_script,
                 plotly_js_script,
                 plot_html,
                 resize_script,
@@ -594,6 +647,7 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
 
         return ''.join([
                 '<div>',
+                mathjax_script,
                 plotly_js_script,
                 plot_html,
                 resize_script,
