@@ -41,7 +41,7 @@ class PlotlyOfflineBaseTestCase(TestCase):
         # Some offline tests produce an html file. Make sure we clean up :)
         try:
             os.remove('temp-plot.html')
-            # Some tests that produce temp-plot.html]
+            # Some tests that produce temp-plot.html
             # also produce plotly.min.js
             os.remove('plotly.min.js')
         except OSError:

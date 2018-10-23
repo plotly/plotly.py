@@ -396,7 +396,6 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
 
 def _build_resize_script(plotdivid):
     resize_script = (
-        ''
         '<script type="text/javascript">'
         'window.addEventListener("resize", function(){{'
         'Plotly.Plots.resize(document.getElementById("{id}"));}});'
