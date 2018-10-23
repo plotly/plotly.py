@@ -174,6 +174,7 @@ def format_description(desc):
 # Mapping from full property paths to custom validator classes
 CUSTOM_VALIDATOR_DATATYPES = {
     'layout.image.source': '_plotly_utils.basevalidators.ImageUriValidator',
+    'layout.template': '_plotly_utils.basevalidators.BaseTemplateValidator',
     'frame.data': 'plotly.validators.DataValidator',
     'frame.layout': 'plotly.validators.LayoutValidator'
 }
@@ -257,9 +258,14 @@ class PlotlyNode:
         # Note the node_data is a property that must be computed by the
         # subclass based on plotly_schema and node_path
         if isinstance(self.node_data, dict_like):
+            childs_parent = (
+                parent
+                if self.node_path and self.node_path[-1] == 'items'
+                else self)
+
             self._children = [self.__class__(self.plotly_schema,
                                              node_path=self.node_path + (c,),
-                                             parent=self)
+                                             parent=childs_parent)
                               for c in self.node_data if c and c[0] != '_']
 
             # Sort by plotly name
@@ -387,7 +393,15 @@ class PlotlyNode:
         -------
         str
         """
-        return self.plotly_name + ('s' if self.is_array_element else '')
+
+        return self.plotly_name + (
+            's' if self.is_array_element and
+                   # Don't add 's' to layout.template.data.scatter etc.
+                   not (self.parent and
+                        self.parent.parent and
+                        self.parent.parent.parent and
+                        self.parent.parent.parent.name_property == 'template')
+            else '')
 
     @property
     def name_validator_class(self) -> str:
@@ -600,8 +614,8 @@ class PlotlyNode:
         -------
         bool
         """
-        if self.parent and self.parent.parent:
-            return self.parent.parent.is_array
+        if self.parent:
+            return self.parent.is_array
         else:
             return False
 
@@ -774,7 +788,16 @@ class PlotlyNode:
         nodes = []
         for n in self.children:
             if n.is_array:
+                # Add array element node
                 nodes.append(n.children[0].children[0])
+
+                # Add elementdefaults node. Require parent_path_parts not
+                # empty to avoid creating defaults classes for traces
+                if (n.parent_path_parts and
+                        n.parent_path_parts != ('layout', 'template', 'data')):
+
+                    nodes.append(ElementDefaultsNode(n, self.plotly_schema))
+
             elif n.is_datatype:
                 nodes.append(n)
 
@@ -885,7 +908,11 @@ class PlotlyNode:
             if node.plotly_name and not node.is_array:
                 nodes.append(node)
 
-            nodes_to_process.extend(node.child_compound_datatypes)
+            non_defaults_compound_children = [
+                node for node in node.child_compound_datatypes
+                if not isinstance(node, ElementDefaultsNode)]
+
+            nodes_to_process.extend(non_defaults_compound_children)
 
         return nodes
 
@@ -1088,3 +1115,64 @@ class FrameNode(PlotlyNode):
             node_data = node_data[prop_name]
 
         return node_data
+
+
+class ElementDefaultsNode(PlotlyNode):
+
+    def __init__(self, array_node, plotly_schema):
+        """
+        Create node that represents element defaults properties
+        (e.g. layout.annotationdefaults).  Construct as a wrapper around the
+        corresponding array property node (e.g. layout.annotations)
+
+        Parameters
+        ----------
+        array_node: PlotlyNode
+        """
+        super().__init__(plotly_schema,
+                         node_path=array_node.node_path,
+                         parent=array_node.parent)
+
+        assert array_node.is_array
+        self.array_node = array_node
+        self.element_node = array_node.children[0].children[0]
+
+    @property
+    def node_data(self):
+        return {}
+
+    @property
+    def description(self):
+        array_property_path = (self.parent_path_str +
+                               '.' + self.array_node.name_property)
+
+        if isinstance(self.array_node, TraceNode):
+            data_path = 'data.'
+        else:
+            data_path = ''
+
+        defaults_property_path = ('layout.template.' +
+                                  data_path +
+                                  self.parent_path_str +
+                                  '.' + self.plotly_name)
+        return f"""\
+When used in a template
+(as {defaults_property_path}),
+sets the default property values to use for elements
+of {array_property_path}"""
+
+    @property
+    def name_base_datatype(self):
+        return self.element_node.name_base_datatype
+
+    @property
+    def root_name(self):
+        return self.array_node.root_name
+
+    @property
+    def plotly_name(self):
+        return self.element_node.plotly_name + 'defaults'
+
+    @property
+    def name_datatype_class(self):
+        return self.element_node.name_datatype_class

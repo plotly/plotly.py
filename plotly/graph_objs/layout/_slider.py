@@ -512,6 +512,33 @@ class Slider(BaseLayoutHierarchyType):
     def steps(self, val):
         self['steps'] = val
 
+    # stepdefaults
+    # ------------
+    @property
+    def stepdefaults(self):
+        """
+        When used in a template (as
+        layout.template.layout.slider.stepdefaults), sets the default
+        property values to use for elements of layout.slider.steps
+    
+        The 'stepdefaults' property is an instance of Step
+        that may be specified as:
+          - An instance of plotly.graph_objs.layout.slider.Step
+          - A dict of string/value properties that will be passed
+            to the Step constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        plotly.graph_objs.layout.slider.Step
+        """
+        return self['stepdefaults']
+
+    @stepdefaults.setter
+    def stepdefaults(self, val):
+        self['stepdefaults'] = val
+
     # templateitemname
     # ----------------
     @property
@@ -828,6 +855,11 @@ class Slider(BaseLayoutHierarchyType):
         steps
             plotly.graph_objs.layout.slider.Step instance or dict
             with compatible properties
+        stepdefaults
+            When used in a template (as
+            layout.template.layout.slider.stepdefaults), sets the
+            default property values to use for elements of
+            layout.slider.steps
         templateitemname
             Used to refer to a named item in this array in the
             template. Named items from the template will be created
@@ -881,6 +913,7 @@ class Slider(BaseLayoutHierarchyType):
         name=None,
         pad=None,
         steps=None,
+        stepdefaults=None,
         templateitemname=None,
         tickcolor=None,
         ticklen=None,
@@ -944,6 +977,11 @@ class Slider(BaseLayoutHierarchyType):
         steps
             plotly.graph_objs.layout.slider.Step instance or dict
             with compatible properties
+        stepdefaults
+            When used in a template (as
+            layout.template.layout.slider.stepdefaults), sets the
+            default property values to use for elements of
+            layout.slider.steps
         templateitemname
             Used to refer to a named item in this array in the
             template. Named items from the template will be created
@@ -1025,6 +1063,7 @@ an instance of plotly.graph_objs.layout.Slider"""
         self._validators['name'] = v_slider.NameValidator()
         self._validators['pad'] = v_slider.PadValidator()
         self._validators['steps'] = v_slider.StepsValidator()
+        self._validators['stepdefaults'] = v_slider.StepValidator()
         self._validators['templateitemname'
                         ] = v_slider.TemplateitemnameValidator()
         self._validators['tickcolor'] = v_slider.TickcolorValidator()
@@ -1066,6 +1105,8 @@ an instance of plotly.graph_objs.layout.Slider"""
         self['pad'] = pad if pad is not None else _v
         _v = arg.pop('steps', None)
         self['steps'] = steps if steps is not None else _v
+        _v = arg.pop('stepdefaults', None)
+        self['stepdefaults'] = stepdefaults if stepdefaults is not None else _v
         _v = arg.pop('templateitemname', None)
         self['templateitemname'
             ] = templateitemname if templateitemname is not None else _v

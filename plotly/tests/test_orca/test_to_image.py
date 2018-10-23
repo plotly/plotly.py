@@ -28,7 +28,7 @@ else:
 failed_dir = images_dir + 'failed/'
 tmp_dir = images_dir + 'tmp/'
 # These formats are deterministic. PDF and svg don't seem to be
-image_formats = ['png', 'jpg', 'jpeg', 'webp', 'eps']
+image_formats = ['eps']
 topo_df = pd.read_csv('plotly/tests/test_orca/resources/2011_us_ag_exports.csv')
 
 # Fixtures
@@ -260,12 +260,12 @@ def test_write_image_string_bad_extension_override(fig1):
     file_name = 'fig1.bogus'
     tmp_path = tmp_dir + file_name
 
-    pio.write_image(fig1, tmp_path, format='jpg', width=700, height=500)
+    pio.write_image(fig1, tmp_path, format='eps', width=700, height=500)
 
     with open(tmp_path, 'rb') as f:
         written_bytes = f.read()
 
-    with open(images_dir + 'fig1.jpg', 'rb') as f:
+    with open(images_dir + 'fig1.eps', 'rb') as f:
         expected_bytes = f.read()
 
     assert written_bytes == expected_bytes

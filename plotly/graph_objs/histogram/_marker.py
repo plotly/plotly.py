@@ -307,6 +307,12 @@ class Marker(BaseTraceHierarchyType):
                     plotly.graph_objs.histogram.marker.colorbar.Tic
                     kformatstop instance or dict with compatible
                     properties
+                tickformatstopdefaults
+                    When used in a template (as layout.template.dat
+                    a.histogram.marker.colorbar.tickformatstopdefau
+                    lts), sets the default property values to use
+                    for elements of
+                    histogram.marker.colorbar.tickformatstops
                 ticklen
                     Sets the tick length (in px).
                 tickmode

@@ -8,6 +8,7 @@ from ._tickwidth import TickwidthValidator
 from ._ticklen import TicklenValidator
 from ._tickcolor import TickcolorValidator
 from ._templateitemname import TemplateitemnameValidator
+from ._stepdefaults import StepValidator
 from ._steps import StepsValidator
 from ._pad import PadValidator
 from ._name import NameValidator

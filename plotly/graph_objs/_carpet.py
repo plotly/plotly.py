@@ -225,6 +225,11 @@ class Carpet(BaseTraceType):
                 tickformatstops
                     plotly.graph_objs.carpet.aaxis.Tickformatstop
                     instance or dict with compatible properties
+                tickformatstopdefaults
+                    When used in a template (as layout.template.dat
+                    a.carpet.aaxis.tickformatstopdefaults), sets
+                    the default property values to use for elements
+                    of carpet.aaxis.tickformatstops
                 tickmode
     
                 tickprefix
@@ -510,6 +515,11 @@ class Carpet(BaseTraceType):
                 tickformatstops
                     plotly.graph_objs.carpet.baxis.Tickformatstop
                     instance or dict with compatible properties
+                tickformatstopdefaults
+                    When used in a template (as layout.template.dat
+                    a.carpet.baxis.tickformatstopdefaults), sets
+                    the default property values to use for elements
+                    of carpet.baxis.tickformatstops
                 tickmode
     
                 tickprefix
@@ -1720,6 +1730,7 @@ an instance of plotly.graph_objs.Carpet"""
         self._validators['type'] = LiteralValidator(
             plotly_name='type', parent_name='carpet', val='carpet'
         )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------
