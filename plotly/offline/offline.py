@@ -424,10 +424,9 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
 
 def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
          validate=True, output_type='file', include_plotlyjs=True,
-         include_mathjax=False, filename='temp-plot.html',
-         auto_open=True, image=None,
+         filename='temp-plot.html', auto_open=True, image=None,
          image_filename='plot_image', image_width=800, image_height=600,
-         config=None):
+         config=None, include_mathjax=False):
     """ Create a plotly graph locally as an HTML document or string.
 
     Example:
@@ -502,22 +501,6 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         placed inside an HTML document that already loads plotly.js.  This
         option is not advised when output_type='file' as it will result in
         a non-functional html file.
-    include_mathjax (False | 'cdn' | path - default=False) --
-        Specifies how the MathJax.js library is included in the output html
-        file or div string.  MathJax is required in order to display labels
-        with LaTeX typesetting.
-
-        If False, no script tag referencing MathJax.js will be included in the
-        output. HTML files generated with this option will not be able to
-        display LaTeX typesetting.
-
-        If 'cdn', a script tag that references a MathJax CDN location will be
-        included in the output.  HTML files generated with this option will be
-        able to display LaTeX typesetting as long as they have internet access.
-
-        If a string that ends in '.js', a script tag is included that
-        references the specified path. This approach can be used to point the
-        resulting HTML file to an alternative CDN.
     filename (default='temp-plot.html') -- The local filename to save the
         outputted chart to. If the filename already exists, it will be
         overwritten. This argument only applies if `output_type` is 'file'.
@@ -537,6 +520,22 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     config (default=None) -- Plot view options dictionary. Keyword arguments
         `show_link` and `link_text` set the associated options in this
         dictionary if it doesn't contain them already.
+    include_mathjax (False | 'cdn' | path - default=False) --
+        Specifies how the MathJax.js library is included in the output html
+        file or div string.  MathJax is required in order to display labels
+        with LaTeX typesetting.
+
+        If False, no script tag referencing MathJax.js will be included in the
+        output. HTML files generated with this option will not be able to
+        display LaTeX typesetting.
+
+        If 'cdn', a script tag that references a MathJax CDN location will be
+        included in the output.  HTML files generated with this option will be
+        able to display LaTeX typesetting as long as they have internet access.
+
+        If a string that ends in '.js', a script tag is included that
+        references the specified path. This approach can be used to point the
+        resulting HTML file to an alternative CDN.
     """
     if output_type not in ['div', 'file']:
         raise ValueError(
