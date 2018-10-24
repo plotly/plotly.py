@@ -29,7 +29,8 @@ resize_code_strings = [
 
 
 plotly_config_script = """\
-<script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>"""
+<script type="text/javascript">\
+window.PlotlyConfig = {MathJaxConfig: 'local'};</script>"""
 
 PLOTLYJS = plotly.offline.offline.get_plotlyjs()
 

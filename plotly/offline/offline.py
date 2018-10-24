@@ -42,6 +42,29 @@ def get_plotlyjs():
     plotlyjs = pkgutil.get_data('plotly', path).decode('utf-8')
     return plotlyjs
 
+
+def _build_resize_script(plotdivid):
+    resize_script = (
+        '<script type="text/javascript">'
+        'window.addEventListener("resize", function(){{'
+        'Plotly.Plots.resize(document.getElementById("{id}"));}});'
+        '</script>'
+    ).format(id=plotdivid)
+    return resize_script
+
+
+# Build script to set global PlotlyConfig object. This must execute before
+# plotly.js is loaded.
+_window_plotly_config = """\
+<script type="text/javascript">\
+window.PlotlyConfig = {MathJaxConfig: 'local'};\
+</script>"""
+
+_mathjax_config = """\
+<script type="text/javascript">\
+if (window.MathJax) {MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}\
+</script>"""
+
 def get_image_download_script(caller):
     """
     This function will return a script that will download an image of a Plotly
@@ -112,7 +135,8 @@ def init_notebook_mode(connected=False):
     if connected:
         # Inject plotly.js into the output cell
         script_inject = (
-            ''
+            '{win_config}'
+            '{mathjax_config}'
             '<script>'
             'requirejs.config({'
             'paths: { '
@@ -124,11 +148,13 @@ def init_notebook_mode(connected=False):
             'function(plotly) {window.Plotly=plotly;});'
             '}}'
             '</script>'
-        )
+        ).format(win_config=_window_plotly_config,
+                 mathjax_config=_mathjax_config)
     else:
         # Inject plotly.js into the output cell
         script_inject = (
-            ''
+            '{win_config}'
+            '{mathjax_config}'
             '<script type=\'text/javascript\'>'
             'if(!window.Plotly){{'
             'define(\'plotly\', function(require, exports, module) {{'
@@ -139,7 +165,9 @@ def init_notebook_mode(connected=False):
             '}});'
             '}}'
             '</script>'
-            '').format(script=get_plotlyjs())
+            '').format(script=get_plotlyjs(),
+                       win_config=_window_plotly_config,
+                       mathjax_config=_mathjax_config)
 
     display_bundle = {
         'text/html': script_inject,
@@ -394,16 +422,6 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         ipython_display.display(ipython_display.HTML(script))
 
 
-def _build_resize_script(plotdivid):
-    resize_script = (
-        '<script type="text/javascript">'
-        'window.addEventListener("resize", function(){{'
-        'Plotly.Plots.resize(document.getElementById("{id}"));}});'
-        '</script>'
-    ).format(id=plotdivid)
-    return resize_script
-
-
 def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
          validate=True, output_type='file', include_plotlyjs=True,
          include_mathjax=False, filename='temp-plot.html',
@@ -543,30 +561,25 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     if width == '100%' or height == '100%':
         resize_script = _build_resize_script(plotdivid)
 
-    # Build script to set global PlotlyConfig object. This must execute before
-    # plotly.js is loaded.
-    window_plotly_config = """\
-<script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>"""
-
     # Process include_plotlyjs and build plotly_js_script
+    include_plotlyjs_orig = include_plotlyjs
     if isinstance(include_plotlyjs, six.string_types):
-        include_plotlyjs_orig = include_plotlyjs
         include_plotlyjs = include_plotlyjs.lower()
 
     if include_plotlyjs == 'cdn':
-        plotly_js_script = window_plotly_config + """\
+        plotly_js_script = _window_plotly_config + """\
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>"""
     elif include_plotlyjs == 'directory':
-        plotly_js_script = (window_plotly_config +
+        plotly_js_script = (_window_plotly_config +
                             '<script src="plotly.min.js"></script>')
     elif (isinstance(include_plotlyjs, six.string_types) and
           include_plotlyjs.endswith('.js')):
-        plotly_js_script = (window_plotly_config +
+        plotly_js_script = (_window_plotly_config +
                             '<script src="{url}"></script>'.format(
                                 url=include_plotlyjs_orig))
     elif include_plotlyjs:
         plotly_js_script = ''.join([
-            window_plotly_config,
+            _window_plotly_config,
             '<script type="text/javascript">',
             get_plotlyjs(),
             '</script>',
@@ -575,8 +588,8 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         plotly_js_script = ''
 
     # Process include_mathjax and build mathjax_script
+    include_mathjax_orig = include_mathjax
     if isinstance(include_mathjax, six.string_types):
-        include_mathjax_orig = include_mathjax
         include_mathjax = include_mathjax.lower()
 
     if include_mathjax == 'cdn':
