@@ -1327,8 +1327,8 @@ def make_subplots(rows=1, cols=1,
     # If shared_axes is True the domin of each subplot is not returned so the
     # title position must be calculated for each subplot
     else:
-        x_dom = [layout[k]['domain'] for k in layout if 'xaxis' in k]
-        y_dom = [layout[k]['domain'] for k in layout if 'yaxis' in k]
+        x_dom = [layout[k]['domain'] for k in sorted(layout.to_plotly_json().keys()) if 'xaxis' in k]
+        y_dom = [layout[k]['domain'] for k in sorted(layout.to_plotly_json().keys()) if 'yaxis' in k]
         for index in range(cols):
             subtitle_pos_x = []
             for x_domains in x_dom:
