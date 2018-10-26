@@ -1946,7 +1946,7 @@ class TestMakeSubplots(TestCase):
             layout=Layout(
                 annotations=Annotations([
                     Annotation(
-                        x=0.22499999999999998,
+                        x=0.225,
                         y=1.0,
                         xref='paper',
                         yref='paper',
@@ -1957,7 +1957,7 @@ class TestMakeSubplots(TestCase):
                         yanchor='bottom'
                     ),
                     Annotation(
-                        x=0.7749999999999999,
+                        x=0.775,
                         y=1.0,
                         xref='paper',
                         yref='paper',
@@ -1968,7 +1968,7 @@ class TestMakeSubplots(TestCase):
                         yanchor='bottom'
                     ),
                     Annotation(
-                        x=0.22499999999999998,
+                        x=0.225,
                         y=0.375,
                         xref='paper',
                         yref='paper',
@@ -1979,7 +1979,7 @@ class TestMakeSubplots(TestCase):
                         yanchor='bottom'
                     ),
                     Annotation(
-                        x=0.7749999999999999,
+                        x=0.775,
                         y=0.375,
                         xref='paper',
                         yref='paper',
@@ -2010,6 +2010,7 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
+
         fig = tls.make_subplots(rows=2, cols=2,
                                 subplot_titles=('Title 1', 'Title 2',
                                                 'Title 3', 'Title 4'),
@@ -2155,3 +2156,57 @@ class TestMakeSubplots(TestCase):
         fig = tls.make_subplots(100, 1,
                                 vertical_spacing=v_space,
                                 specs=[[{'is_3d': True}] for _ in range(100)])
+
+    def test_row_width_and_column_width(self):
+
+        expected = Figure({
+            'data': [],
+            'layout': {'annotations': [{'font': {'size': 16},
+                                        'showarrow': False,
+                                        'text': 'Title 1',
+                                        'x': 0.405,
+                                        'xanchor': 'center',
+                                        'xref': 'paper',
+                                        'y': 1.0,
+                                        'yanchor': 'bottom',
+                                        'yref': 'paper'},
+                                       {'font': {'size': 16},
+                                        'showarrow': False,
+                                        'text': 'Title 2',
+                                        'x': 0.9550000000000001,
+                                        'xanchor': 'center',
+                                        'xref': 'paper',
+                                        'y': 1.0,
+                                        'yanchor': 'bottom',
+                                        'yref': 'paper'},
+                                       {'font': {'size': 16},
+                                        'showarrow': False,
+                                        'text': 'Title 3',
+                                        'x': 0.405,
+                                        'xanchor': 'center',
+                                        'xref': 'paper',
+                                        'y': 0.1875,
+                                        'yanchor': 'bottom',
+                                        'yref': 'paper'},
+                                       {'font': {'size': 16},
+                                        'showarrow': False,
+                                        'text': 'Title 4',
+                                        'x': 0.9550000000000001,
+                                        'xanchor': 'center',
+                                        'xref': 'paper',
+                                        'y': 0.1875,
+                                        'yanchor': 'bottom',
+                                        'yref': 'paper'}],
+                       'xaxis': {'anchor': 'y', 'domain': [0.0, 0.81]},
+                       'xaxis2': {'anchor': 'y2', 'domain': [0.91, 1.0]},
+                       'xaxis3': {'anchor': 'y3', 'domain': [0.0, 0.81]},
+                       'xaxis4': {'anchor': 'y4', 'domain': [0.91, 1.0]},
+                       'yaxis': {'anchor': 'x', 'domain': [0.4375, 1.0]},
+                       'yaxis2': {'anchor': 'x2', 'domain': [0.4375, 1.0]},
+                       'yaxis3': {'anchor': 'x3', 'domain': [0.0, 0.1875]},
+                       'yaxis4': {'anchor': 'x4', 'domain': [0.0, 0.1875]}}
+        })
+        fig = tls.make_subplots(rows=2, cols=2,
+                                subplot_titles=('Title 1', 'Title 2', 'Title 3', 'Title 4'),
+                                row_width=[1, 3], column_width=[9, 1])
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
