@@ -1001,7 +1001,6 @@ def make_subplots(rows=1, cols=1,
             ) for c in col_seq
         ] for r in row_seq
     ]
-
     # [grid_ref] Initialize the grid and insets' axis-reference lists
     grid_ref = [[None for c in range(cols)] for r in range(rows)]
     insets_ref = [None for inset in range(len(insets))] if insets else None
@@ -1080,6 +1079,7 @@ def make_subplots(rows=1, cols=1,
         return x_anchor, y_anchor
 
     list_of_domains = []  # added for subplot titles
+    list_of_domains_complete = []  # hold onto every domain used, even if shared axes
 
     # Function pasting x/y domains in layout object (2d case)
     def _add_domain(layout, x_or_y, label, domain, anchor, position):
@@ -1323,20 +1323,33 @@ def make_subplots(rows=1, cols=1,
             subtitle_pos_x.append(sum(x_domains) / 2)
         for y_domains in y_dom:
             subtitle_pos_y.append(y_domains[1])
+
     # If shared_axes is True the domin of each subplot is not returned so the
     # title position must be calculated for each subplot
     else:
-        subtitle_pos_x = [None] * cols
-        subtitle_pos_y = [None] * rows
-        delt_x = (x_e - x_s)
+        x_dom = [layout[k]['domain'] for k in layout if 'xaxis' in k]
+        y_dom = [layout[k]['domain'] for k in layout if 'yaxis' in k]
         for index in range(cols):
-            subtitle_pos_x[index] = ((delt_x / 2) +
-                                     ((delt_x + horizontal_spacing) * index))
-        subtitle_pos_x *= rows
-        for index in range(rows):
-            subtitle_pos_y[index] = (1 - ((y_e + vertical_spacing) * index))
-        subtitle_pos_y *= cols
-        subtitle_pos_y = sorted(subtitle_pos_y, reverse=True)
+            subtitle_pos_x = []
+            for x_domains in x_dom:
+                subtitle_pos_x.append(sum(x_domains) / 2)
+            subtitle_pos_x *= rows
+
+        if shared_yaxes:
+            for index in range(rows):
+                subtitle_pos_y = []
+                for y_domain in y_dom:
+                    subtitle_pos_y.append(y_domain[1])
+                subtitle_pos_y *= cols
+            subtitle_pos_y = sorted(subtitle_pos_y, reverse=True)
+
+        else:
+            for index in range(rows):
+                subtitle_pos_y = []
+                for y_domain in y_dom:
+                    subtitle_pos_y.append(y_domain[1])
+            subtitle_pos_y = sorted(subtitle_pos_y, reverse=True)
+            subtitle_pos_y *= cols
 
     plot_titles = []
     for index in range(len(subplot_titles)):
