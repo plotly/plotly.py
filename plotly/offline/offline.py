@@ -18,6 +18,7 @@ from requests.compat import json as _json
 import plotly
 from plotly import optional_imports, tools, utils
 from plotly.exceptions import PlotlyError
+from ._plotlyjs_version import __plotlyjs_version__
 
 ipython = optional_imports.get_module('IPython')
 ipython_display = optional_imports.get_module('IPython.display')
@@ -35,6 +36,18 @@ def download_plotlyjs(download_url):
         longer necessary to download this bundle separately.
     ''', DeprecationWarning)
     pass
+
+
+def get_plotlyjs_version():
+    """
+    Returns the version of plotly.js that is bundled with plotly.py.
+
+    Returns
+    -------
+    str
+        Plotly.js version string
+    """
+    return __plotlyjs_version__
 
 
 def get_plotlyjs():
@@ -83,6 +96,7 @@ def get_plotlyjs():
     path = os.path.join('package_data', 'plotly.min.js')
     plotlyjs = pkgutil.get_data('plotly', path).decode('utf-8')
     return plotlyjs
+
 
 def get_image_download_script(caller):
     """
