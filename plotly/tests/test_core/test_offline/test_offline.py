@@ -28,7 +28,7 @@ resize_code_strings = [
         ]
 
 
-PLOTLYJS = plotly.offline.offline.get_plotlyjs()
+PLOTLYJS = plotly.offline.get_plotlyjs()
 
 cdn_script = ('<script src="https://cdn.plot.ly/plotly-latest.min.js">'
               '</script>')
