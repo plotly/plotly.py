@@ -266,6 +266,27 @@ class Hoverlabel(BaseTraceHierarchyType):
     def namelengthsrc(self, val):
         self['namelengthsrc'] = val
 
+    # split
+    # -----
+    @property
+    def split(self):
+        """
+        Show hover information (open, close, high, low) in separate
+        labels.
+    
+        The 'split' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self['split']
+
+    @split.setter
+    def split(self, val):
+        self['split'] = val
+
     # property parent name
     # --------------------
     @property
@@ -299,6 +320,9 @@ class Hoverlabel(BaseTraceHierarchyType):
             and add an ellipsis.
         namelengthsrc
             Sets the source reference on plot.ly for  namelength .
+        split
+            Show hover information (open, close, high, low) in
+            separate labels.
         """
 
     def __init__(
@@ -311,6 +335,7 @@ class Hoverlabel(BaseTraceHierarchyType):
         font=None,
         namelength=None,
         namelengthsrc=None,
+        split=None,
         **kwargs
     ):
         """
@@ -343,6 +368,9 @@ class Hoverlabel(BaseTraceHierarchyType):
             and add an ellipsis.
         namelengthsrc
             Sets the source reference on plot.ly for  namelength .
+        split
+            Show hover information (open, close, high, low) in
+            separate labels.
 
         Returns
         -------
@@ -385,6 +413,7 @@ an instance of plotly.graph_objs.ohlc.Hoverlabel"""
         self._validators['namelength'] = v_hoverlabel.NamelengthValidator()
         self._validators['namelengthsrc'
                         ] = v_hoverlabel.NamelengthsrcValidator()
+        self._validators['split'] = v_hoverlabel.SplitValidator()
 
         # Populate data dict with properties
         # ----------------------------------
@@ -404,6 +433,8 @@ an instance of plotly.graph_objs.ohlc.Hoverlabel"""
         _v = arg.pop('namelengthsrc', None)
         self['namelengthsrc'
             ] = namelengthsrc if namelengthsrc is not None else _v
+        _v = arg.pop('split', None)
+        self['split'] = split if split is not None else _v
 
         # Process unknown kwargs
         # ----------------------

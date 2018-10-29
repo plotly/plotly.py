@@ -85,6 +85,28 @@ class Line(BaseTraceHierarchyType):
     def dash(self, val):
         self['dash'] = val
 
+    # shape
+    # -----
+    @property
+    def shape(self):
+        """
+        Determines the line shape. The values correspond to step-wise
+        line shapes.
+    
+        The 'shape' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['linear', 'hv', 'vh', 'hvh', 'vhv']
+
+        Returns
+        -------
+        Any
+        """
+        return self['shape']
+
+    @shape.setter
+    def shape(self, val):
+        self['shape'] = val
+
     # width
     # -----
     @property
@@ -120,11 +142,22 @@ class Line(BaseTraceHierarchyType):
             Sets the line color.
         dash
             Sets the style of the lines.
+        shape
+            Determines the line shape. The values correspond to
+            step-wise line shapes.
         width
             Sets the line width (in px).
         """
 
-    def __init__(self, arg=None, color=None, dash=None, width=None, **kwargs):
+    def __init__(
+        self,
+        arg=None,
+        color=None,
+        dash=None,
+        shape=None,
+        width=None,
+        **kwargs
+    ):
         """
         Construct a new Line object
         
@@ -137,6 +170,9 @@ class Line(BaseTraceHierarchyType):
             Sets the line color.
         dash
             Sets the style of the lines.
+        shape
+            Determines the line shape. The values correspond to
+            step-wise line shapes.
         width
             Sets the line width (in px).
 
@@ -174,6 +210,7 @@ an instance of plotly.graph_objs.scatterpolargl.Line"""
         # ---------------------
         self._validators['color'] = v_line.ColorValidator()
         self._validators['dash'] = v_line.DashValidator()
+        self._validators['shape'] = v_line.ShapeValidator()
         self._validators['width'] = v_line.WidthValidator()
 
         # Populate data dict with properties
@@ -182,6 +219,8 @@ an instance of plotly.graph_objs.scatterpolargl.Line"""
         self['color'] = color if color is not None else _v
         _v = arg.pop('dash', None)
         self['dash'] = dash if dash is not None else _v
+        _v = arg.pop('shape', None)
+        self['shape'] = shape if shape is not None else _v
         _v = arg.pop('width', None)
         self['width'] = width if width is not None else _v
 

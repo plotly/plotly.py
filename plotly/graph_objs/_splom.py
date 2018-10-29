@@ -760,9 +760,12 @@ class Splom(BaseTraceType):
     @property
     def xaxes(self):
         """
-        Sets the list of x axes corresponding to this splom trace. By
-        default, a splom will match the first N xaxes where N is the
-        number of input dimensions.
+        Sets the list of x axes corresponding to dimensions of this
+        splom trace. By default, a splom will match the first N xaxes
+        where N is the number of input dimensions. Note that, in case
+        where `diagonal.visible` is false and `showupperhalf` or
+        `showlowerhalf` is false, this splom trace will generate one
+        less x-axis and one less y-axis.
     
         The 'xaxes' property is an info array that may be specified as:
         * a list of elements where:
@@ -786,9 +789,12 @@ class Splom(BaseTraceType):
     @property
     def yaxes(self):
         """
-        Sets the list of y axes corresponding to this splom trace. By
-        default, a splom will match the first N yaxes where N is the
-        number of input dimensions.
+        Sets the list of y axes corresponding to dimensions of this
+        splom trace. By default, a splom will match the first N yaxes
+        where N is the number of input dimensions. Note that, in case
+        where `diagonal.visible` is false and `showupperhalf` or
+        `showlowerhalf` is false, this splom trace will generate one
+        less x-axis and one less y-axis.
     
         The 'yaxes' property is an info array that may be specified as:
         * a list of elements where:
@@ -911,13 +917,21 @@ class Splom(BaseTraceType):
             a legend item (provided that the legend itself is
             visible).
         xaxes
-            Sets the list of x axes corresponding to this splom
-            trace. By default, a splom will match the first N xaxes
-            where N is the number of input dimensions.
+            Sets the list of x axes corresponding to dimensions of
+            this splom trace. By default, a splom will match the
+            first N xaxes where N is the number of input
+            dimensions. Note that, in case where `diagonal.visible`
+            is false and `showupperhalf` or `showlowerhalf` is
+            false, this splom trace will generate one less x-axis
+            and one less y-axis.
         yaxes
-            Sets the list of y axes corresponding to this splom
-            trace. By default, a splom will match the first N yaxes
-            where N is the number of input dimensions.
+            Sets the list of y axes corresponding to dimensions of
+            this splom trace. By default, a splom will match the
+            first N yaxes where N is the number of input
+            dimensions. Note that, in case where `diagonal.visible`
+            is false and `showupperhalf` or `showlowerhalf` is
+            false, this splom trace will generate one less x-axis
+            and one less y-axis.
         """
 
     def __init__(
@@ -1055,13 +1069,21 @@ class Splom(BaseTraceType):
             a legend item (provided that the legend itself is
             visible).
         xaxes
-            Sets the list of x axes corresponding to this splom
-            trace. By default, a splom will match the first N xaxes
-            where N is the number of input dimensions.
+            Sets the list of x axes corresponding to dimensions of
+            this splom trace. By default, a splom will match the
+            first N xaxes where N is the number of input
+            dimensions. Note that, in case where `diagonal.visible`
+            is false and `showupperhalf` or `showlowerhalf` is
+            false, this splom trace will generate one less x-axis
+            and one less y-axis.
         yaxes
-            Sets the list of y axes corresponding to this splom
-            trace. By default, a splom will match the first N yaxes
-            where N is the number of input dimensions.
+            Sets the list of y axes corresponding to dimensions of
+            this splom trace. By default, a splom will match the
+            first N yaxes where N is the number of input
+            dimensions. Note that, in case where `diagonal.visible`
+            is false and `showupperhalf` or `showlowerhalf` is
+            false, this splom trace will generate one less x-axis
+            and one less y-axis.
 
         Returns
         -------

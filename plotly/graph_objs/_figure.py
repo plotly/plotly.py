@@ -2,10 +2,10 @@ from plotly.basedatatypes import BaseFigure
 from plotly.graph_objs import (
     Area, Bar, Barpolar, Box, Candlestick, Carpet, Choropleth, Cone, Contour,
     Contourcarpet, Heatmap, Heatmapgl, Histogram, Histogram2d,
-    Histogram2dContour, Mesh3d, Ohlc, Parcoords, Pie, Pointcloud, Sankey,
-    Scatter, Scatter3d, Scattercarpet, Scattergeo, Scattergl, Scattermapbox,
-    Scatterpolar, Scatterpolargl, Scatterternary, Splom, Streamtube, Surface,
-    Table, Violin
+    Histogram2dContour, Mesh3d, Ohlc, Parcats, Parcoords, Pie, Pointcloud,
+    Sankey, Scatter, Scatter3d, Scattercarpet, Scattergeo, Scattergl,
+    Scattermapbox, Scatterpolar, Scatterpolargl, Scatterternary, Splom,
+    Streamtube, Surface, Table, Violin
 )
 
 
@@ -31,12 +31,12 @@ class Figure(BaseFigure):
                              'contour', 'contourcarpet', 'heatmap',
                              'heatmapgl', 'histogram', 'histogram2d',
                              'histogram2dcontour', 'mesh3d', 'ohlc',
-                             'parcoords', 'pie', 'pointcloud', 'sankey',
-                             'scatter', 'scatter3d', 'scattercarpet',
-                             'scattergeo', 'scattergl', 'scattermapbox',
-                             'scatterpolar', 'scatterpolargl',
-                             'scatterternary', 'splom', 'streamtube',
-                             'surface', 'table', 'violin']
+                             'parcats', 'parcoords', 'pie', 'pointcloud',
+                             'sankey', 'scatter', 'scatter3d',
+                             'scattercarpet', 'scattergeo', 'scattergl',
+                             'scattermapbox', 'scatterpolar',
+                             'scatterpolargl', 'scatterternary', 'splom',
+                             'streamtube', 'surface', 'table', 'violin']
         
                 - All remaining properties are passed to the constructor of
                   the specified trace type
@@ -226,6 +226,9 @@ class Figure(BaseFigure):
                         dict with compatible properties
                     margin
                         plotly.graph_objs.layout.Margin instance or
+                        dict with compatible properties
+                    modebar
+                        plotly.graph_objs.layout.Modebar instance or
                         dict with compatible properties
                     orientation
                         Legacy polar charts are deprecated! Please
@@ -737,9 +740,11 @@ class Figure(BaseFigure):
             Specifies the location of the `text`. "inside"
             positions `text` inside, next to the bar end (rotated
             and scaled if needed). "outside" positions `text`
-            outside, next to the bar end (scaled if needed). "auto"
-            positions `text` inside or outside so that `text` size
-            is maximized.
+            outside, next to the bar end (scaled if needed), unless
+            there is another bar stacked on this one, then the text
+            gets pushed inside. "auto" tries to position `text`
+            inside the bar, but if the bar is too small and no bar
+            is stacked on this one the text is moved outside.
         textpositionsrc
             Sets the source reference on plot.ly for  textposition
             .
@@ -3523,15 +3528,17 @@ class Figure(BaseFigure):
         Parameters
         ----------
         autobinx
-            Determines whether or not the x axis bin attributes are
-            picked by an algorithm. Note that this should be set to
-            false if you want to manually set the number of bins
-            using the attributes in xbins.
+            Obsolete: since v1.42 each bin attribute is auto-
+            determined separately and `autobinx` is not needed.
+            However, we accept `autobinx: true` or `false` and will
+            update `xbins` accordingly before deleting `autobinx`
+            from the trace.
         autobiny
-            Determines whether or not the y axis bin attributes are
-            picked by an algorithm. Note that this should be set to
-            false if you want to manually set the number of bins
-            using the attributes in ybins.
+            Obsolete: since v1.42 each bin attribute is auto-
+            determined separately and `autobiny` is not needed.
+            However, we accept `autobiny: true` or `false` and will
+            update `ybins` accordingly before deleting `autobiny`
+            from the trace.
         cumulative
             plotly.graph_objs.histogram.Cumulative instance or dict
             with compatible properties
@@ -3603,12 +3610,14 @@ class Figure(BaseFigure):
             Specifies the maximum number of desired bins. This
             value will be used in an algorithm that will decide the
             optimal bin size such that the histogram best
-            visualizes the distribution of the data.
+            visualizes the distribution of the data. Ignored if
+            `xbins.size` is provided.
         nbinsy
             Specifies the maximum number of desired bins. This
             value will be used in an algorithm that will decide the
             optimal bin size such that the histogram best
-            visualizes the distribution of the data.
+            visualizes the distribution of the data. Ignored if
+            `ybins.size` is provided.
         opacity
             Sets the opacity of the trace.
         orientation
@@ -3802,15 +3811,17 @@ class Figure(BaseFigure):
         Parameters
         ----------
         autobinx
-            Determines whether or not the x axis bin attributes are
-            picked by an algorithm. Note that this should be set to
-            false if you want to manually set the number of bins
-            using the attributes in xbins.
+            Obsolete: since v1.42 each bin attribute is auto-
+            determined separately and `autobinx` is not needed.
+            However, we accept `autobinx: true` or `false` and will
+            update `xbins` accordingly before deleting `autobinx`
+            from the trace.
         autobiny
-            Determines whether or not the y axis bin attributes are
-            picked by an algorithm. Note that this should be set to
-            false if you want to manually set the number of bins
-            using the attributes in ybins.
+            Obsolete: since v1.42 each bin attribute is auto-
+            determined separately and `autobiny` is not needed.
+            However, we accept `autobiny: true` or `false` and will
+            update `ybins` accordingly before deleting `autobiny`
+            from the trace.
         autocolorscale
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
@@ -3895,12 +3906,14 @@ class Figure(BaseFigure):
             Specifies the maximum number of desired bins. This
             value will be used in an algorithm that will decide the
             optimal bin size such that the histogram best
-            visualizes the distribution of the data.
+            visualizes the distribution of the data. Ignored if
+            `xbins.size` is provided.
         nbinsy
             Specifies the maximum number of desired bins. This
             value will be used in an algorithm that will decide the
             optimal bin size such that the histogram best
-            visualizes the distribution of the data.
+            visualizes the distribution of the data. Ignored if
+            `ybins.size` is provided.
         opacity
             Sets the opacity of the trace.
         reversescale
@@ -4116,15 +4129,17 @@ class Figure(BaseFigure):
         Parameters
         ----------
         autobinx
-            Determines whether or not the x axis bin attributes are
-            picked by an algorithm. Note that this should be set to
-            false if you want to manually set the number of bins
-            using the attributes in xbins.
+            Obsolete: since v1.42 each bin attribute is auto-
+            determined separately and `autobinx` is not needed.
+            However, we accept `autobinx: true` or `false` and will
+            update `xbins` accordingly before deleting `autobinx`
+            from the trace.
         autobiny
-            Determines whether or not the y axis bin attributes are
-            picked by an algorithm. Note that this should be set to
-            false if you want to manually set the number of bins
-            using the attributes in ybins.
+            Obsolete: since v1.42 each bin attribute is auto-
+            determined separately and `autobiny` is not needed.
+            However, we accept `autobiny: true` or `false` and will
+            update `ybins` accordingly before deleting `autobiny`
+            from the trace.
         autocolorscale
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
@@ -4220,12 +4235,14 @@ class Figure(BaseFigure):
             Specifies the maximum number of desired bins. This
             value will be used in an algorithm that will decide the
             optimal bin size such that the histogram best
-            visualizes the distribution of the data.
+            visualizes the distribution of the data. Ignored if
+            `xbins.size` is provided.
         nbinsy
             Specifies the maximum number of desired bins. This
             value will be used in an algorithm that will decide the
             optimal bin size such that the histogram best
-            visualizes the distribution of the data.
+            visualizes the distribution of the data. Ignored if
+            `ybins.size` is provided.
         ncontours
             Sets the maximum number of contour levels. The actual
             number of contours will be chosen automatically to be
@@ -4946,6 +4963,140 @@ class Figure(BaseFigure):
         )
         return self.add_trace(new_trace, row=row, col=col)
 
+    def add_parcats(
+        self,
+        arrangement=None,
+        bundlecolors=None,
+        counts=None,
+        countssrc=None,
+        dimensions=None,
+        dimensiondefaults=None,
+        domain=None,
+        hoverinfo=None,
+        hoverinfosrc=None,
+        hoveron=None,
+        labelfont=None,
+        line=None,
+        name=None,
+        sortpaths=None,
+        stream=None,
+        tickfont=None,
+        uid=None,
+        visible=None,
+        row=None,
+        col=None,
+        **kwargs
+    ):
+        """
+        Add a new Parcats trace
+        
+        Parallel categories diagram for multidimensional categorical
+        data.
+
+        Parameters
+        ----------
+        arrangement
+            Sets the drag interaction mode for categories and
+            dimensions. If `perpendicular`, the categories can only
+            move along a line perpendicular to the paths. If
+            `freeform`, the categories can freely move on the
+            plane. If `fixed`, the categories and dimensions are
+            stationary.
+        bundlecolors
+            Sort paths so that like colors are bundled together
+            within each category.
+        counts
+            The number of observations represented by each state.
+            Defaults to 1 so that each state represents one
+            observation
+        countssrc
+            Sets the source reference on plot.ly for  counts .
+        dimensions
+            The dimensions (variables) of the parallel categories
+            diagram.
+        dimensiondefaults
+            When used in a template (as
+            layout.template.data.parcats.dimensiondefaults), sets
+            the default property values to use for elements of
+            parcats.dimensions
+        domain
+            plotly.graph_objs.parcats.Domain instance or dict with
+            compatible properties
+        hoverinfo
+            Determines which trace information appear on hover. If
+            `none` or `skip` are set, no information is displayed
+            upon hovering. But, if `none` is set, click and hover
+            events are still fired.
+        hoverinfosrc
+            Sets the source reference on plot.ly for  hoverinfo .
+        hoveron
+            Sets the hover interaction mode for the parcats
+            diagram. If `category`, hover interaction take place
+            per category. If `color`, hover interactions take place
+            per color per category. If `dimension`, hover
+            interactions take place across all categories per
+            dimension.
+        labelfont
+            Sets the font for the `dimension` labels.
+        line
+            plotly.graph_objs.parcats.Line instance or dict with
+            compatible properties
+        name
+            Sets the trace name. The trace name appear as the
+            legend item and on hover.
+        sortpaths
+            Sets the path sorting algorithm. If `forward`, sort
+            paths based on dimension categories from left to right.
+            If `backward`, sort paths based on dimensions
+            categories from right to left.
+        stream
+            plotly.graph_objs.parcats.Stream instance or dict with
+            compatible properties
+        tickfont
+            Sets the font for the `category` labels.
+        uid
+
+        visible
+            Determines whether or not this trace is visible. If
+            "legendonly", the trace is not drawn, but can appear as
+            a legend item (provided that the legend itself is
+            visible).
+        row : int or None (default)
+            Subplot row index (starting from 1) for the trace to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`
+        col : int or None (default)
+            Subplot col index (starting from 1) for the trace to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`
+
+        Returns
+        -------
+        Parcats
+        """
+        new_trace = Parcats(
+            arrangement=arrangement,
+            bundlecolors=bundlecolors,
+            counts=counts,
+            countssrc=countssrc,
+            dimensions=dimensions,
+            dimensiondefaults=dimensiondefaults,
+            domain=domain,
+            hoverinfo=hoverinfo,
+            hoverinfosrc=hoverinfosrc,
+            hoveron=hoveron,
+            labelfont=labelfont,
+            line=line,
+            name=name,
+            sortpaths=sortpaths,
+            stream=stream,
+            tickfont=tickfont,
+            uid=uid,
+            visible=visible,
+            **kwargs
+        )
+        return self.add_trace(new_trace, row=row, col=col)
+
     def add_parcoords(
         self,
         customdata=None,
@@ -5133,6 +5284,9 @@ class Figure(BaseFigure):
         textposition=None,
         textpositionsrc=None,
         textsrc=None,
+        title=None,
+        titlefont=None,
+        titleposition=None,
         uid=None,
         values=None,
         valuessrc=None,
@@ -5255,9 +5409,9 @@ class Figure(BaseFigure):
         text
             Sets text elements associated with each sector. If
             trace `textinfo` contains a "text" flag, these elements
-            will seen on the chart. If trace `hoverinfo` contains a
-            "text" flag and "hovertext" is not set, these elements
-            will be seen in the hover labels.
+            will be seen on the chart. If trace `hoverinfo`
+            contains a "text" flag and "hovertext" is not set,
+            these elements will be seen in the hover labels.
         textfont
             Sets the font used for `textinfo`.
         textinfo
@@ -5269,6 +5423,13 @@ class Figure(BaseFigure):
             .
         textsrc
             Sets the source reference on plot.ly for  text .
+        title
+            Sets the title of the pie chart. If it is empty, no
+            title is displayed.
+        titlefont
+            Sets the font used for `title`.
+        titleposition
+            Specifies the location of the `title`.
         uid
 
         values
@@ -5331,6 +5492,9 @@ class Figure(BaseFigure):
             textposition=textposition,
             textpositionsrc=textpositionsrc,
             textsrc=textsrc,
+            title=title,
+            titlefont=titlefont,
+            titleposition=titleposition,
             uid=uid,
             values=values,
             valuessrc=valuessrc,
@@ -5557,7 +5721,6 @@ class Figure(BaseFigure):
         customdatasrc=None,
         domain=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         ids=None,
         idssrc=None,
@@ -5611,9 +5774,9 @@ class Figure(BaseFigure):
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
-            events are still fired.
-        hoverinfosrc
-            Sets the source reference on plot.ly for  hoverinfo .
+            events are still fired. Note that this attribute is
+            superseded by `node.hoverinfo` and `node.hoverinfo` for
+            nodes and links respectively.
         hoverlabel
             plotly.graph_objs.sankey.Hoverlabel instance or dict
             with compatible properties
@@ -5688,7 +5851,6 @@ class Figure(BaseFigure):
             customdatasrc=customdatasrc,
             domain=domain,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             ids=ids,
             idssrc=idssrc,
@@ -6995,11 +7157,13 @@ class Figure(BaseFigure):
             plotly.graph_objs.scattergl.Stream instance or dict
             with compatible properties
         text
-            Sets text elements associated with each (x,y) pair to
-            appear on hover. If a single string, the same string
-            appears over all the data points. If an array of
-            string, the items are mapped in order to the this
-            trace's (x,y) coordinates.
+            Sets text elements associated with each (x,y) pair. If
+            a single string, the same string appears over all the
+            data points. If an array of string, the items are
+            mapped in order to the this trace's (x,y) coordinates.
+            If trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
+            the hover labels.
         textfont
             Sets the text font.
         textposition
@@ -8295,13 +8459,21 @@ class Figure(BaseFigure):
             a legend item (provided that the legend itself is
             visible).
         xaxes
-            Sets the list of x axes corresponding to this splom
-            trace. By default, a splom will match the first N xaxes
-            where N is the number of input dimensions.
+            Sets the list of x axes corresponding to dimensions of
+            this splom trace. By default, a splom will match the
+            first N xaxes where N is the number of input
+            dimensions. Note that, in case where `diagonal.visible`
+            is false and `showupperhalf` or `showlowerhalf` is
+            false, this splom trace will generate one less x-axis
+            and one less y-axis.
         yaxes
-            Sets the list of y axes corresponding to this splom
-            trace. By default, a splom will match the first N yaxes
-            where N is the number of input dimensions.
+            Sets the list of y axes corresponding to dimensions of
+            this splom trace. By default, a splom will match the
+            first N yaxes where N is the number of input
+            dimensions. Note that, in case where `diagonal.visible`
+            is false and `showupperhalf` or `showlowerhalf` is
+            false, this splom trace will generate one less x-axis
+            and one less y-axis.
         row : int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using

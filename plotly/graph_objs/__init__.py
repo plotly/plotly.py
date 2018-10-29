@@ -34,6 +34,8 @@ from ._pie import Pie
 from plotly.graph_objs import pie
 from ._parcoords import Parcoords
 from plotly.graph_objs import parcoords
+from ._parcats import Parcats
+from plotly.graph_objs import parcats
 from ._ohlc import Ohlc
 from plotly.graph_objs import ohlc
 from ._mesh3d import Mesh3d

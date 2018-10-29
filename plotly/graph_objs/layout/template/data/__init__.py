@@ -16,6 +16,7 @@ from ._sankey import Sankey
 from ._pointcloud import Pointcloud
 from ._pie import Pie
 from ._parcoords import Parcoords
+from ._parcats import Parcats
 from ._ohlc import Ohlc
 from ._mesh3d import Mesh3d
 from ._histogram import Histogram

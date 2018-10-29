@@ -118,43 +118,24 @@ class Sankey(BaseTraceType):
         Determines which trace information appear on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
+        Note that this attribute is superseded by `node.hoverinfo` and
+        `node.hoverinfo` for nodes and links respectively.
     
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['label', 'text', 'value', 'percent', 'name'] joined with '+' characters
-            (e.g. 'label+text')
+          - Any combination of ['x', 'y', 'z', 'text', 'name'] joined with '+' characters
+            (e.g. 'x+y')
             OR exactly one of ['all', 'none', 'skip'] (e.g. 'skip')
-          - A list or array of the above
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any
         """
         return self['hoverinfo']
 
     @hoverinfo.setter
     def hoverinfo(self, val):
         self['hoverinfo'] = val
-
-    # hoverinfosrc
-    # ------------
-    @property
-    def hoverinfosrc(self):
-        """
-        Sets the source reference on plot.ly for  hoverinfo .
-    
-        The 'hoverinfosrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self['hoverinfosrc']
-
-    @hoverinfosrc.setter
-    def hoverinfosrc(self, val):
-        self['hoverinfosrc'] = val
 
     # hoverlabel
     # ----------
@@ -295,6 +276,15 @@ class Sankey(BaseTraceType):
                 colorsrc
                     Sets the source reference on plot.ly for  color
                     .
+                hoverinfo
+                    Determines which trace information appear when
+                    hovering links. If `none` or `skip` are set, no
+                    information is displayed upon hovering. But, if
+                    `none` is set, click and hover events are still
+                    fired.
+                hoverlabel
+                    plotly.graph_objs.sankey.link.Hoverlabel
+                    instance or dict with compatible properties
                 label
                     The shown name of the link.
                 labelsrc
@@ -380,6 +370,15 @@ class Sankey(BaseTraceType):
                 colorsrc
                     Sets the source reference on plot.ly for  color
                     .
+                hoverinfo
+                    Determines which trace information appear when
+                    hovering nodes. If `none` or `skip` are set, no
+                    information is displayed upon hovering. But, if
+                    `none` is set, click and hover events are still
+                    fired.
+                hoverlabel
+                    plotly.graph_objs.sankey.node.Hoverlabel
+                    instance or dict with compatible properties
                 label
                     The shown name of the node.
                 labelsrc
@@ -693,9 +692,9 @@ class Sankey(BaseTraceType):
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
-            events are still fired.
-        hoverinfosrc
-            Sets the source reference on plot.ly for  hoverinfo .
+            events are still fired. Note that this attribute is
+            superseded by `node.hoverinfo` and `node.hoverinfo` for
+            nodes and links respectively.
         hoverlabel
             plotly.graph_objs.sankey.Hoverlabel instance or dict
             with compatible properties
@@ -761,7 +760,6 @@ class Sankey(BaseTraceType):
         customdatasrc=None,
         domain=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoverlabel=None,
         ids=None,
         idssrc=None,
@@ -816,9 +814,9 @@ class Sankey(BaseTraceType):
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
-            events are still fired.
-        hoverinfosrc
-            Sets the source reference on plot.ly for  hoverinfo .
+            events are still fired. Note that this attribute is
+            superseded by `node.hoverinfo` and `node.hoverinfo` for
+            nodes and links respectively.
         hoverlabel
             plotly.graph_objs.sankey.Hoverlabel instance or dict
             with compatible properties
@@ -912,7 +910,6 @@ an instance of plotly.graph_objs.Sankey"""
         self._validators['customdatasrc'] = v_sankey.CustomdatasrcValidator()
         self._validators['domain'] = v_sankey.DomainValidator()
         self._validators['hoverinfo'] = v_sankey.HoverinfoValidator()
-        self._validators['hoverinfosrc'] = v_sankey.HoverinfosrcValidator()
         self._validators['hoverlabel'] = v_sankey.HoverlabelValidator()
         self._validators['ids'] = v_sankey.IdsValidator()
         self._validators['idssrc'] = v_sankey.IdssrcValidator()
@@ -944,8 +941,6 @@ an instance of plotly.graph_objs.Sankey"""
         self['domain'] = domain if domain is not None else _v
         _v = arg.pop('hoverinfo', None)
         self['hoverinfo'] = hoverinfo if hoverinfo is not None else _v
-        _v = arg.pop('hoverinfosrc', None)
-        self['hoverinfosrc'] = hoverinfosrc if hoverinfosrc is not None else _v
         _v = arg.pop('hoverlabel', None)
         self['hoverlabel'] = hoverlabel if hoverlabel is not None else _v
         _v = arg.pop('ids', None)

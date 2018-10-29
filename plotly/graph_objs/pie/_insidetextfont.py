@@ -50,16 +50,37 @@ class Insidetextfont(BaseTraceHierarchyType):
                 steelblue, tan, teal, thistle, tomato, turquoise,
                 violet, wheat, white, whitesmoke, yellow,
                 yellowgreen
+          - A list or array of any of the above
 
         Returns
         -------
-        str
+        str|numpy.ndarray
         """
         return self['color']
 
     @color.setter
     def color(self, val):
         self['color'] = val
+
+    # colorsrc
+    # --------
+    @property
+    def colorsrc(self):
+        """
+        Sets the source reference on plot.ly for  color .
+    
+        The 'colorsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['colorsrc']
+
+    @colorsrc.setter
+    def colorsrc(self, val):
+        self['colorsrc'] = val
 
     # family
     # ------
@@ -81,16 +102,37 @@ class Insidetextfont(BaseTraceHierarchyType):
     
         The 'family' property is a string and must be specified as:
           - A non-empty string
+          - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
-        str
+        str|numpy.ndarray
         """
         return self['family']
 
     @family.setter
     def family(self, val):
         self['family'] = val
+
+    # familysrc
+    # ---------
+    @property
+    def familysrc(self):
+        """
+        Sets the source reference on plot.ly for  family .
+    
+        The 'familysrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['familysrc']
+
+    @familysrc.setter
+    def familysrc(self, val):
+        self['familysrc'] = val
 
     # size
     # ----
@@ -99,16 +141,37 @@ class Insidetextfont(BaseTraceHierarchyType):
         """
         The 'size' property is a number and may be specified as:
           - An int or float in the interval [1, inf]
+          - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
-        int|float
+        int|float|numpy.ndarray
         """
         return self['size']
 
     @size.setter
     def size(self, val):
         self['size'] = val
+
+    # sizesrc
+    # -------
+    @property
+    def sizesrc(self):
+        """
+        Sets the source reference on plot.ly for  size .
+    
+        The 'sizesrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['sizesrc']
+
+    @sizesrc.setter
+    def sizesrc(self, val):
+        self['sizesrc'] = val
 
     # property parent name
     # --------------------
@@ -123,6 +186,8 @@ class Insidetextfont(BaseTraceHierarchyType):
         return """\
         color
 
+        colorsrc
+            Sets the source reference on plot.ly for  color .
         family
             HTML font family - the typeface that will be applied by
             the web browser. The web browser will only be able to
@@ -137,11 +202,25 @@ class Insidetextfont(BaseTraceHierarchyType):
             "Droid Serif", "Droid Sans Mono", "Gravitas One", "Old
             Standard TT", "Open Sans", "Overpass", "PT Sans
             Narrow", "Raleway", "Times New Roman".
+        familysrc
+            Sets the source reference on plot.ly for  family .
         size
 
+        sizesrc
+            Sets the source reference on plot.ly for  size .
         """
 
-    def __init__(self, arg=None, color=None, family=None, size=None, **kwargs):
+    def __init__(
+        self,
+        arg=None,
+        color=None,
+        colorsrc=None,
+        family=None,
+        familysrc=None,
+        size=None,
+        sizesrc=None,
+        **kwargs
+    ):
         """
         Construct a new Insidetextfont object
         
@@ -154,6 +233,8 @@ class Insidetextfont(BaseTraceHierarchyType):
             an instance of plotly.graph_objs.pie.Insidetextfont
         color
 
+        colorsrc
+            Sets the source reference on plot.ly for  color .
         family
             HTML font family - the typeface that will be applied by
             the web browser. The web browser will only be able to
@@ -168,8 +249,12 @@ class Insidetextfont(BaseTraceHierarchyType):
             "Droid Serif", "Droid Sans Mono", "Gravitas One", "Old
             Standard TT", "Open Sans", "Overpass", "PT Sans
             Narrow", "Raleway", "Times New Roman".
+        familysrc
+            Sets the source reference on plot.ly for  family .
         size
 
+        sizesrc
+            Sets the source reference on plot.ly for  size .
 
         Returns
         -------
@@ -204,17 +289,26 @@ an instance of plotly.graph_objs.pie.Insidetextfont"""
         # Initialize validators
         # ---------------------
         self._validators['color'] = v_insidetextfont.ColorValidator()
+        self._validators['colorsrc'] = v_insidetextfont.ColorsrcValidator()
         self._validators['family'] = v_insidetextfont.FamilyValidator()
+        self._validators['familysrc'] = v_insidetextfont.FamilysrcValidator()
         self._validators['size'] = v_insidetextfont.SizeValidator()
+        self._validators['sizesrc'] = v_insidetextfont.SizesrcValidator()
 
         # Populate data dict with properties
         # ----------------------------------
         _v = arg.pop('color', None)
         self['color'] = color if color is not None else _v
+        _v = arg.pop('colorsrc', None)
+        self['colorsrc'] = colorsrc if colorsrc is not None else _v
         _v = arg.pop('family', None)
         self['family'] = family if family is not None else _v
+        _v = arg.pop('familysrc', None)
+        self['familysrc'] = familysrc if familysrc is not None else _v
         _v = arg.pop('size', None)
         self['size'] = size if size is not None else _v
+        _v = arg.pop('sizesrc', None)
+        self['sizesrc'] = sizesrc if sizesrc is not None else _v
 
         # Process unknown kwargs
         # ----------------------
