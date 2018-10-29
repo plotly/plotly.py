@@ -2017,7 +2017,6 @@ class TestMakeSubplots(TestCase):
                                 shared_xaxes=True, shared_yaxes=True)
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
-
     def test_subplot_titles_irregular_layout(self):
         # make a title for each subplot when the layout is irregular:
         expected = Figure(
@@ -2210,3 +2209,58 @@ class TestMakeSubplots(TestCase):
                                 subplot_titles=('Title 1', 'Title 2', 'Title 3', 'Title 4'),
                                 row_width=[1, 3], column_width=[9, 1])
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
+
+    def test_row_width_and_shared_yaxes(self):
+
+        expected = Figure({
+            'data': [],
+            'layout': {'annotations': [{'font': {'size': 16},
+                                        'showarrow': False,
+                                        'text': 'Title 1',
+                                        'x': 0.225,
+                                        'xanchor': 'center',
+                                        'xref': 'paper',
+                                        'y': 1.0,
+                                        'yanchor': 'bottom',
+                                        'yref': 'paper'},
+                                       {'font': {'size': 16},
+                                        'showarrow': False,
+                                        'text': 'Title 2',
+                                        'x': 0.775,
+                                        'xanchor': 'center',
+                                        'xref': 'paper',
+                                        'y': 1.0,
+                                        'yanchor': 'bottom',
+                                        'yref': 'paper'},
+                                       {'font': {'size': 16},
+                                        'showarrow': False,
+                                        'text': 'Title 3',
+                                        'x': 0.225,
+                                        'xanchor': 'center',
+                                        'xref': 'paper',
+                                        'y': 0.1875,
+                                        'yanchor': 'bottom',
+                                        'yref': 'paper'},
+                                       {'font': {'size': 16},
+                                        'showarrow': False,
+                                        'text': 'Title 4',
+                                        'x': 0.775,
+                                        'xanchor': 'center',
+                                        'xref': 'paper',
+                                        'y': 0.1875,
+                                        'yanchor': 'bottom',
+                                        'yref': 'paper'}],
+                       'xaxis': {'anchor': 'y', 'domain': [0.0, 0.45]},
+                       'xaxis2': {'anchor': 'free', 'domain': [0.55, 1.0], 'position': 0.4375},
+                       'xaxis3': {'anchor': 'y2', 'domain': [0.0, 0.45]},
+                       'xaxis4': {'anchor': 'free', 'domain': [0.55, 1.0], 'position': 0.0},
+                       'yaxis': {'anchor': 'x', 'domain': [0.4375, 1.0]},
+                       'yaxis2': {'anchor': 'x3', 'domain': [0.0, 0.1875]}}
+        })
+
+        fig = tls.make_subplots(rows=2, cols=2, row_width=[1, 3], shared_yaxes=True,
+                                subplot_titles=('Title 1', 'Title 2', 'Title 3', 'Title 4'))
+
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
+
+    # def test_row_width_and_shared_yaxes(self):

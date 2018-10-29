@@ -13,6 +13,7 @@ import warnings
 
 import six
 import copy
+import re
 
 from plotly import exceptions, optional_imports, session, utils
 from plotly.files import (CONFIG_FILE, CREDENTIALS_FILE, FILE_CONTENT,
@@ -1079,7 +1080,6 @@ def make_subplots(rows=1, cols=1,
         return x_anchor, y_anchor
 
     list_of_domains = []  # added for subplot titles
-    list_of_domains_complete = []  # hold onto every domain used, even if shared axes
 
     # Function pasting x/y domains in layout object (2d case)
     def _add_domain(layout, x_or_y, label, domain, anchor, position):
@@ -1327,8 +1327,24 @@ def make_subplots(rows=1, cols=1,
     # If shared_axes is True the domin of each subplot is not returned so the
     # title position must be calculated for each subplot
     else:
-        x_dom = [layout[k]['domain'] for k in sorted(layout.to_plotly_json().keys()) if 'xaxis' in k]
-        y_dom = [layout[k]['domain'] for k in sorted(layout.to_plotly_json().keys()) if 'yaxis' in k]
+        x_dom_vals = [k for k in layout.to_plotly_json().keys() if 'xaxis' in k]
+        y_dom_vals = [k for k in layout.to_plotly_json().keys() if 'yaxis' in k]
+
+        # sort xaxis and yaxis layout keys
+        r = re.compile('\d+')
+
+        def key_func(m):
+            try:
+                return int(r.search(m).group(0))
+            except AttributeError:
+                return 0
+
+        xaxies_labels_sorted = sorted(x_dom_vals, key=key_func)
+        yaxies_labels_sorted = sorted(y_dom_vals, key=key_func)
+
+        x_dom = [layout[k]['domain'] for k in xaxies_labels_sorted]
+        y_dom = [layout[k]['domain'] for k in yaxies_labels_sorted]
+
         for index in range(cols):
             subtitle_pos_x = []
             for x_domains in x_dom:
@@ -1336,6 +1352,7 @@ def make_subplots(rows=1, cols=1,
             subtitle_pos_x *= rows
 
         if shared_yaxes:
+            print 'the place to be'
             for index in range(rows):
                 subtitle_pos_y = []
                 for y_domain in y_dom:
