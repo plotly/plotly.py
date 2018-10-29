@@ -21,6 +21,15 @@ class NodeValidator(_plotly_utils.basevalidators.CompoundValidator):
             colorsrc
                 Sets the source reference on plot.ly for  color
                 .
+            hoverinfo
+                Determines which trace information appear when
+                hovering nodes. If `none` or `skip` are set, no
+                information is displayed upon hovering. But, if
+                `none` is set, click and hover events are still
+                fired.
+            hoverlabel
+                plotly.graph_objs.sankey.node.Hoverlabel
+                instance or dict with compatible properties
             label
                 The shown name of the node.
             labelsrc

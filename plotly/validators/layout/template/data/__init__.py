@@ -16,6 +16,7 @@ from ._sankey import SankeysValidator
 from ._pointcloud import PointcloudsValidator
 from ._pie import PiesValidator
 from ._parcoords import ParcoordssValidator
+from ._parcats import ParcatssValidator
 from ._ohlc import OhlcsValidator
 from ._mesh3d import Mesh3dsValidator
 from ._histogram import HistogramsValidator

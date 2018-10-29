@@ -10,7 +10,7 @@ class OpacityValidator(_plotly_utils.basevalidators.NumberValidator):
             plotly_name=plotly_name,
             parent_name=parent_name,
             array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'calc'),
+            edit_type=kwargs.pop('edit_type', 'style'),
             max=kwargs.pop('max', 1),
             min=kwargs.pop('min', 0),
             role=kwargs.pop('role', 'style'),

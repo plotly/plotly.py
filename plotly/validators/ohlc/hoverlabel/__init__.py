@@ -1,3 +1,4 @@
+from ._split import SplitValidator
 from ._namelengthsrc import NamelengthsrcValidator
 from ._namelength import NamelengthValidator
 from ._font import FontValidator
