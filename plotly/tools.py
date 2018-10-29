@@ -1352,7 +1352,6 @@ def make_subplots(rows=1, cols=1,
             subtitle_pos_x *= rows
 
         if shared_yaxes:
-            print 'the place to be'
             for index in range(rows):
                 subtitle_pos_y = []
                 for y_domain in y_dom:
