@@ -15,7 +15,6 @@ from ._legendgroup import LegendgroupValidator
 from ._idssrc import IdssrcValidator
 from ._ids import IdsValidator
 from ._hoverlabel import HoverlabelValidator
-from ._hoverinfosrc import HoverinfosrcValidator
 from ._hoverinfo import HoverinfoValidator
 from ._domain import DomainValidator
 from ._customdatasrc import CustomdatasrcValidator

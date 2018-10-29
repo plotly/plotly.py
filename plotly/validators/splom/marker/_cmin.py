@@ -9,7 +9,7 @@ class CminValidator(_plotly_utils.basevalidators.NumberValidator):
         super(CminValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
+            edit_type=kwargs.pop('edit_type', 'style'),
             implied_edits=kwargs.pop('implied_edits', {'cauto': False}),
             role=kwargs.pop('role', 'info'),
             **kwargs

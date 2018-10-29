@@ -130,8 +130,8 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
             text
                 Sets text elements associated with each sector.
                 If trace `textinfo` contains a "text" flag,
-                these elements will seen on the chart. If trace
-                `hoverinfo` contains a "text" flag and
+                these elements will be seen on the chart. If
+                trace `hoverinfo` contains a "text" flag and
                 "hovertext" is not set, these elements will be
                 seen in the hover labels.
             textfont
@@ -147,6 +147,13 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
             textsrc
                 Sets the source reference on plot.ly for  text
                 .
+            title
+                Sets the title of the pie chart. If it is
+                empty, no title is displayed.
+            titlefont
+                Sets the font used for `title`.
+            titleposition
+                Specifies the location of the `title`.
             uid
 
             values

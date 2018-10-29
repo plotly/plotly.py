@@ -185,6 +185,9 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             margin
                 plotly.graph_objs.layout.Margin instance or
                 dict with compatible properties
+            modebar
+                plotly.graph_objs.layout.Modebar instance or
+                dict with compatible properties
             orientation
                 Legacy polar charts are deprecated! Please
                 switch to "polar" subplots. Rotates the entire

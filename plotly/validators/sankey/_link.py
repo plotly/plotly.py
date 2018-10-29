@@ -19,6 +19,15 @@ class LinkValidator(_plotly_utils.basevalidators.CompoundValidator):
             colorsrc
                 Sets the source reference on plot.ly for  color
                 .
+            hoverinfo
+                Determines which trace information appear when
+                hovering links. If `none` or `skip` are set, no
+                information is displayed upon hovering. But, if
+                `none` is set, click and hover events are still
+                fired.
+            hoverlabel
+                plotly.graph_objs.sankey.link.Hoverlabel
+                instance or dict with compatible properties
             label
                 The shown name of the link.
             labelsrc

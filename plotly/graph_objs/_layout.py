@@ -1451,6 +1451,39 @@ class Layout(BaseLayoutType):
     def margin(self, val):
         self['margin'] = val
 
+    # modebar
+    # -------
+    @property
+    def modebar(self):
+        """
+        The 'modebar' property is an instance of Modebar
+        that may be specified as:
+          - An instance of plotly.graph_objs.layout.Modebar
+          - A dict of string/value properties that will be passed
+            to the Modebar constructor
+    
+            Supported dict properties:
+                
+                activecolor
+                    Sets the color of the active or hovered on
+                    icons in the modebar.
+                bgcolor
+                    Sets the background color of the modebar.
+                color
+                    Sets the color of the icons in the modebar.
+                orientation
+                    Sets the orientation of the modebar.
+
+        Returns
+        -------
+        plotly.graph_objs.layout.Modebar
+        """
+        return self['modebar']
+
+    @modebar.setter
+    def modebar(self, val):
+        self['modebar'] = val
+
     # orientation
     # -----------
     @property
@@ -2805,8 +2838,11 @@ class Layout(BaseLayoutType):
                 overlaying
                     If set a same-letter axis id, this axis is
                     overlaid on top of the corresponding same-
-                    letter axis. If False, this axis does not
-                    overlay any same-letter axes.
+                    letter axis, with traces and axes visible for
+                    both axes. If False, this axis does not overlay
+                    any same-letter axes. In this case, for axes
+                    with overlapping domains only the highest-
+                    numbered axis will be visible.
                 position
                     Sets the position of this axis in the plotting
                     space (in normalized coordinates). Only has an
@@ -3198,8 +3234,11 @@ class Layout(BaseLayoutType):
                 overlaying
                     If set a same-letter axis id, this axis is
                     overlaid on top of the corresponding same-
-                    letter axis. If False, this axis does not
-                    overlay any same-letter axes.
+                    letter axis, with traces and axes visible for
+                    both axes. If False, this axis does not overlay
+                    any same-letter axes. In this case, for axes
+                    with overlapping domains only the highest-
+                    numbered axis will be visible.
                 position
                     Sets the position of this axis in the plotting
                     space (in normalized coordinates). Only has an
@@ -3590,6 +3629,9 @@ class Layout(BaseLayoutType):
         margin
             plotly.graph_objs.layout.Margin instance or dict with
             compatible properties
+        modebar
+            plotly.graph_objs.layout.Modebar instance or dict with
+            compatible properties
         orientation
             Legacy polar charts are deprecated! Please switch to
             "polar" subplots. Rotates the entire polar by the given
@@ -3749,6 +3791,7 @@ class Layout(BaseLayoutType):
         legend=None,
         mapbox=None,
         margin=None,
+        modebar=None,
         orientation=None,
         paper_bgcolor=None,
         piecolorway=None,
@@ -3944,6 +3987,9 @@ class Layout(BaseLayoutType):
         margin
             plotly.graph_objs.layout.Margin instance or dict with
             compatible properties
+        modebar
+            plotly.graph_objs.layout.Modebar instance or dict with
+            compatible properties
         orientation
             Legacy polar charts are deprecated! Please switch to
             "polar" subplots. Rotates the entire polar by the given
@@ -4133,6 +4179,7 @@ an instance of plotly.graph_objs.Layout"""
         self._validators['legend'] = v_layout.LegendValidator()
         self._validators['mapbox'] = v_layout.MapboxValidator()
         self._validators['margin'] = v_layout.MarginValidator()
+        self._validators['modebar'] = v_layout.ModebarValidator()
         self._validators['orientation'] = v_layout.OrientationValidator()
         self._validators['paper_bgcolor'] = v_layout.PaperBgcolorValidator()
         self._validators['piecolorway'] = v_layout.PiecolorwayValidator()
@@ -4235,6 +4282,8 @@ an instance of plotly.graph_objs.Layout"""
         self['mapbox'] = mapbox if mapbox is not None else _v
         _v = arg.pop('margin', None)
         self['margin'] = margin if margin is not None else _v
+        _v = arg.pop('modebar', None)
+        self['modebar'] = modebar if modebar is not None else _v
         _v = arg.pop('orientation', None)
         self['orientation'] = orientation if orientation is not None else _v
         _v = arg.pop('paper_bgcolor', None)

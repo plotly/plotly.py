@@ -14,6 +14,9 @@ class OutsidetextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
                 'data_docs', """
             color
 
+            colorsrc
+                Sets the source reference on plot.ly for  color
+                .
             family
                 HTML font family - the typeface that will be
                 applied by the web browser. The web browser
@@ -30,8 +33,14 @@ class OutsidetextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Serif", "Droid Sans Mono", "Gravitas One", "Old
                 Standard TT", "Open Sans", "Overpass", "PT Sans
                 Narrow", "Raleway", "Times New Roman".
+            familysrc
+                Sets the source reference on plot.ly for
+                family .
             size
 
+            sizesrc
+                Sets the source reference on plot.ly for  size
+                .
 """
             ),
             **kwargs

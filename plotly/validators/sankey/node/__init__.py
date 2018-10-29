@@ -3,5 +3,7 @@ from ._pad import PadValidator
 from ._line import LineValidator
 from ._labelsrc import LabelsrcValidator
 from ._label import LabelValidator
+from ._hoverlabel import HoverlabelValidator
+from ._hoverinfo import HoverinfoValidator
 from ._colorsrc import ColorsrcValidator
 from ._color import ColorValidator

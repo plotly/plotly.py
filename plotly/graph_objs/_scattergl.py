@@ -593,6 +593,9 @@ class Scattergl(BaseTraceType):
                     Sets the line color.
                 dash
                     Sets the style of the lines.
+                shape
+                    Determines the line shape. The values
+                    correspond to step-wise line shapes.
                 width
                     Sets the line width (in px).
 
@@ -913,10 +916,12 @@ class Scattergl(BaseTraceType):
     @property
     def text(self):
         """
-        Sets text elements associated with each (x,y) pair to appear on
-        hover. If a single string, the same string appears over all the
-        data points. If an array of string, the items are mapped in
-        order to the this trace's (x,y) coordinates.
+        Sets text elements associated with each (x,y) pair. If a single
+        string, the same string appears over all the data points. If an
+        array of string, the items are mapped in order to the this
+        trace's (x,y) coordinates. If trace `hoverinfo` contains a
+        "text" flag and "hovertext" is not set, these elements will be
+        seen in the hover labels.
     
         The 'text' property is a string and must be specified as:
           - A string
@@ -1468,11 +1473,13 @@ class Scattergl(BaseTraceType):
             plotly.graph_objs.scattergl.Stream instance or dict
             with compatible properties
         text
-            Sets text elements associated with each (x,y) pair to
-            appear on hover. If a single string, the same string
-            appears over all the data points. If an array of
-            string, the items are mapped in order to the this
-            trace's (x,y) coordinates.
+            Sets text elements associated with each (x,y) pair. If
+            a single string, the same string appears over all the
+            data points. If an array of string, the items are
+            mapped in order to the this trace's (x,y) coordinates.
+            If trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
+            the hover labels.
         textfont
             Sets the text font.
         textposition
@@ -1693,11 +1700,13 @@ class Scattergl(BaseTraceType):
             plotly.graph_objs.scattergl.Stream instance or dict
             with compatible properties
         text
-            Sets text elements associated with each (x,y) pair to
-            appear on hover. If a single string, the same string
-            appears over all the data points. If an array of
-            string, the items are mapped in order to the this
-            trace's (x,y) coordinates.
+            Sets text elements associated with each (x,y) pair. If
+            a single string, the same string appears over all the
+            data points. If an array of string, the items are
+            mapped in order to the this trace's (x,y) coordinates.
+            If trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
+            the hover labels.
         textfont
             Sets the text font.
         textposition

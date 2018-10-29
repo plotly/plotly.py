@@ -89,6 +89,80 @@ class Node(BaseTraceHierarchyType):
     def colorsrc(self, val):
         self['colorsrc'] = val
 
+    # hoverinfo
+    # ---------
+    @property
+    def hoverinfo(self):
+        """
+        Determines which trace information appear when hovering nodes.
+        If `none` or `skip` are set, no information is displayed upon
+        hovering. But, if `none` is set, click and hover events are
+        still fired.
+    
+        The 'hoverinfo' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['all', 'none', 'skip']
+
+        Returns
+        -------
+        Any
+        """
+        return self['hoverinfo']
+
+    @hoverinfo.setter
+    def hoverinfo(self, val):
+        self['hoverinfo'] = val
+
+    # hoverlabel
+    # ----------
+    @property
+    def hoverlabel(self):
+        """
+        The 'hoverlabel' property is an instance of Hoverlabel
+        that may be specified as:
+          - An instance of plotly.graph_objs.sankey.node.Hoverlabel
+          - A dict of string/value properties that will be passed
+            to the Hoverlabel constructor
+    
+            Supported dict properties:
+                
+                bgcolor
+                    Sets the background color of the hover labels
+                    for this trace
+                bgcolorsrc
+                    Sets the source reference on plot.ly for
+                    bgcolor .
+                bordercolor
+                    Sets the border color of the hover labels for
+                    this trace.
+                bordercolorsrc
+                    Sets the source reference on plot.ly for
+                    bordercolor .
+                font
+                    Sets the font used in hover labels.
+                namelength
+                    Sets the length (in number of characters) of
+                    the trace name in the hover labels for this
+                    trace. -1 shows the whole name regardless of
+                    length. 0-3 shows the first 0-3 characters, and
+                    an integer >3 will show the whole name if it is
+                    less than that many characters, but if it is
+                    longer, will truncate to `namelength - 3`
+                    characters and add an ellipsis.
+                namelengthsrc
+                    Sets the source reference on plot.ly for
+                    namelength .
+
+        Returns
+        -------
+        plotly.graph_objs.sankey.node.Hoverlabel
+        """
+        return self['hoverlabel']
+
+    @hoverlabel.setter
+    def hoverlabel(self, val):
+        self['hoverlabel'] = val
+
     # label
     # -----
     @property
@@ -225,6 +299,14 @@ class Node(BaseTraceHierarchyType):
             allow some visibility of what is beneath the node.
         colorsrc
             Sets the source reference on plot.ly for  color .
+        hoverinfo
+            Determines which trace information appear when hovering
+            nodes. If `none` or `skip` are set, no information is
+            displayed upon hovering. But, if `none` is set, click
+            and hover events are still fired.
+        hoverlabel
+            plotly.graph_objs.sankey.node.Hoverlabel instance or
+            dict with compatible properties
         label
             The shown name of the node.
         labelsrc
@@ -243,6 +325,8 @@ class Node(BaseTraceHierarchyType):
         arg=None,
         color=None,
         colorsrc=None,
+        hoverinfo=None,
+        hoverlabel=None,
         label=None,
         labelsrc=None,
         line=None,
@@ -269,6 +353,14 @@ class Node(BaseTraceHierarchyType):
             allow some visibility of what is beneath the node.
         colorsrc
             Sets the source reference on plot.ly for  color .
+        hoverinfo
+            Determines which trace information appear when hovering
+            nodes. If `none` or `skip` are set, no information is
+            displayed upon hovering. But, if `none` is set, click
+            and hover events are still fired.
+        hoverlabel
+            plotly.graph_objs.sankey.node.Hoverlabel instance or
+            dict with compatible properties
         label
             The shown name of the node.
         labelsrc
@@ -315,6 +407,8 @@ an instance of plotly.graph_objs.sankey.Node"""
         # ---------------------
         self._validators['color'] = v_node.ColorValidator()
         self._validators['colorsrc'] = v_node.ColorsrcValidator()
+        self._validators['hoverinfo'] = v_node.HoverinfoValidator()
+        self._validators['hoverlabel'] = v_node.HoverlabelValidator()
         self._validators['label'] = v_node.LabelValidator()
         self._validators['labelsrc'] = v_node.LabelsrcValidator()
         self._validators['line'] = v_node.LineValidator()
@@ -327,6 +421,10 @@ an instance of plotly.graph_objs.sankey.Node"""
         self['color'] = color if color is not None else _v
         _v = arg.pop('colorsrc', None)
         self['colorsrc'] = colorsrc if colorsrc is not None else _v
+        _v = arg.pop('hoverinfo', None)
+        self['hoverinfo'] = hoverinfo if hoverinfo is not None else _v
+        _v = arg.pop('hoverlabel', None)
+        self['hoverlabel'] = hoverlabel if hoverlabel is not None else _v
         _v = arg.pop('label', None)
         self['label'] = label if label is not None else _v
         _v = arg.pop('labelsrc', None)

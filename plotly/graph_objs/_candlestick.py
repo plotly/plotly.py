@@ -244,6 +244,9 @@ class Candlestick(BaseTraceType):
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
+                split
+                    Show hover information (open, close, high, low)
+                    in separate labels.
 
         Returns
         -------

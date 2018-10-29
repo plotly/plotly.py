@@ -37,10 +37,9 @@ class SankeyValidator(_plotly_utils.basevalidators.CompoundValidator):
                 hover. If `none` or `skip` are set, no
                 information is displayed upon hovering. But, if
                 `none` is set, click and hover events are still
-                fired.
-            hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                fired. Note that this attribute is superseded
+                by `node.hoverinfo` and `node.hoverinfo` for
+                nodes and links respectively.
             hoverlabel
                 plotly.graph_objs.sankey.Hoverlabel instance or
                 dict with compatible properties

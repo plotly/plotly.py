@@ -664,8 +664,10 @@ class XAxis(BaseLayoutHierarchyType):
     def overlaying(self):
         """
         If set a same-letter axis id, this axis is overlaid on top of
-        the corresponding same-letter axis. If False, this axis does
-        not overlay any same-letter axes.
+        the corresponding same-letter axis, with traces and axes
+        visible for both axes. If False, this axis does not overlay any
+        same-letter axes. In this case, for axes with overlapping
+        domains only the highest-numbered axis will be visible.
     
         The 'overlaying' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -2132,8 +2134,11 @@ class XAxis(BaseLayoutHierarchyType):
             "auto".
         overlaying
             If set a same-letter axis id, this axis is overlaid on
-            top of the corresponding same-letter axis. If False,
-            this axis does not overlay any same-letter axes.
+            top of the corresponding same-letter axis, with traces
+            and axes visible for both axes. If False, this axis
+            does not overlay any same-letter axes. In this case,
+            for axes with overlapping domains only the highest-
+            numbered axis will be visible.
         position
             Sets the position of this axis in the plotting space
             (in normalized coordinates). Only has an effect if
@@ -2544,8 +2549,11 @@ class XAxis(BaseLayoutHierarchyType):
             "auto".
         overlaying
             If set a same-letter axis id, this axis is overlaid on
-            top of the corresponding same-letter axis. If False,
-            this axis does not overlay any same-letter axes.
+            top of the corresponding same-letter axis, with traces
+            and axes visible for both axes. If False, this axis
+            does not overlay any same-letter axes. In this case,
+            for axes with overlapping domains only the highest-
+            numbered axis will be visible.
         position
             Sets the position of this axis in the plotting space
             (in normalized coordinates). Only has an effect if

@@ -18,6 +18,7 @@ from plotly.graph_objs.layout import scene
 from ._radialaxis import RadialAxis
 from ._polar import Polar
 from plotly.graph_objs.layout import polar
+from ._modebar import Modebar
 from ._margin import Margin
 from ._mapbox import Mapbox
 from plotly.graph_objs.layout import mapbox

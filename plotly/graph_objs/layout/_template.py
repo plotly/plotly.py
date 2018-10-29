@@ -70,6 +70,9 @@ class Template(BaseLayoutHierarchyType):
                 ohlc
                     plotly.graph_objs.layout.template.data.Ohlc
                     instance or dict with compatible properties
+                parcats
+                    plotly.graph_objs.layout.template.data.Parcats
+                    instance or dict with compatible properties
                 parcoords
                     plotly.graph_objs.layout.template.data.Parcoord
                     s instance or dict with compatible properties

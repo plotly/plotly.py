@@ -161,8 +161,11 @@ class YAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
             overlaying
                 If set a same-letter axis id, this axis is
                 overlaid on top of the corresponding same-
-                letter axis. If False, this axis does not
-                overlay any same-letter axes.
+                letter axis, with traces and axes visible for
+                both axes. If False, this axis does not overlay
+                any same-letter axes. In this case, for axes
+                with overlapping domains only the highest-
+                numbered axis will be visible.
             position
                 Sets the position of this axis in the plotting
                 space (in normalized coordinates). Only has an

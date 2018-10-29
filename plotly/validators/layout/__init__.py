@@ -25,6 +25,7 @@ from ._plot_bgcolor import PlotBgcolorValidator
 from ._piecolorway import PiecolorwayValidator
 from ._paper_bgcolor import PaperBgcolorValidator
 from ._orientation import OrientationValidator
+from ._modebar import ModebarValidator
 from ._margin import MarginValidator
 from ._mapbox import MapboxValidator
 from ._legend import LegendValidator

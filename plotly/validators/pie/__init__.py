@@ -2,6 +2,9 @@ from ._visible import VisibleValidator
 from ._valuessrc import ValuessrcValidator
 from ._values import ValuesValidator
 from ._uid import UidValidator
+from ._titleposition import TitlepositionValidator
+from ._titlefont import TitlefontValidator
+from ._title import TitleValidator
 from ._textsrc import TextsrcValidator
 from ._textpositionsrc import TextpositionsrcValidator
 from ._textposition import TextpositionValidator

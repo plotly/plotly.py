@@ -347,6 +347,9 @@ class Pie(BaseTraceType):
                 
                 color
     
+                colorsrc
+                    Sets the source reference on plot.ly for  color
+                    .
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -363,7 +366,14 @@ class Pie(BaseTraceType):
                     Serif", "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                familysrc
+                    Sets the source reference on plot.ly for
+                    family .
                 size
+    
+                sizesrc
+                    Sets the source reference on plot.ly for  size
+                    .
 
         Returns
         -------
@@ -557,6 +567,9 @@ class Pie(BaseTraceType):
                 
                 color
     
+                colorsrc
+                    Sets the source reference on plot.ly for  color
+                    .
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -573,7 +586,14 @@ class Pie(BaseTraceType):
                     Serif", "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                familysrc
+                    Sets the source reference on plot.ly for
+                    family .
                 size
+    
+                sizesrc
+                    Sets the source reference on plot.ly for  size
+                    .
 
         Returns
         -------
@@ -778,8 +798,8 @@ class Pie(BaseTraceType):
     def text(self):
         """
         Sets text elements associated with each sector. If trace
-        `textinfo` contains a "text" flag, these elements will seen on
-        the chart. If trace `hoverinfo` contains a "text" flag and
+        `textinfo` contains a "text" flag, these elements will be seen
+        on the chart. If trace `hoverinfo` contains a "text" flag and
         "hovertext" is not set, these elements will be seen in the
         hover labels.
     
@@ -813,6 +833,9 @@ class Pie(BaseTraceType):
                 
                 color
     
+                colorsrc
+                    Sets the source reference on plot.ly for  color
+                    .
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -829,7 +852,14 @@ class Pie(BaseTraceType):
                     Serif", "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
+                familysrc
+                    Sets the source reference on plot.ly for
+                    family .
                 size
+    
+                sizesrc
+                    Sets the source reference on plot.ly for  size
+                    .
 
         Returns
         -------
@@ -925,6 +955,105 @@ class Pie(BaseTraceType):
     @textsrc.setter
     def textsrc(self, val):
         self['textsrc'] = val
+
+    # title
+    # -----
+    @property
+    def title(self):
+        """
+        Sets the title of the pie chart. If it is empty, no title is
+        displayed.
+    
+        The 'title' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['title']
+
+    @title.setter
+    def title(self, val):
+        self['title'] = val
+
+    # titlefont
+    # ---------
+    @property
+    def titlefont(self):
+        """
+        Sets the font used for `title`.
+    
+        The 'titlefont' property is an instance of Titlefont
+        that may be specified as:
+          - An instance of plotly.graph_objs.pie.Titlefont
+          - A dict of string/value properties that will be passed
+            to the Titlefont constructor
+    
+            Supported dict properties:
+                
+                color
+    
+                colorsrc
+                    Sets the source reference on plot.ly for  color
+                    .
+                family
+                    HTML font family - the typeface that will be
+                    applied by the web browser. The web browser
+                    will only be able to apply a font if it is
+                    available on the system which it operates.
+                    Provide multiple font families, separated by
+                    commas, to indicate the preference in which to
+                    apply fonts if they aren't available on the
+                    system. The plotly service (at https://plot.ly
+                    or on-premise) generates images on a server,
+                    where only a select number of fonts are
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
+                familysrc
+                    Sets the source reference on plot.ly for
+                    family .
+                size
+    
+                sizesrc
+                    Sets the source reference on plot.ly for  size
+                    .
+
+        Returns
+        -------
+        plotly.graph_objs.pie.Titlefont
+        """
+        return self['titlefont']
+
+    @titlefont.setter
+    def titlefont(self, val):
+        self['titlefont'] = val
+
+    # titleposition
+    # -------------
+    @property
+    def titleposition(self):
+        """
+        Specifies the location of the `title`.
+    
+        The 'titleposition' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['top left', 'top center', 'top right', 'middle center',
+                'bottom left', 'bottom center', 'bottom right']
+
+        Returns
+        -------
+        Any
+        """
+        return self['titleposition']
+
+    @titleposition.setter
+    def titleposition(self, val):
+        self['titleposition'] = val
 
     # uid
     # ---
@@ -1131,9 +1260,9 @@ class Pie(BaseTraceType):
         text
             Sets text elements associated with each sector. If
             trace `textinfo` contains a "text" flag, these elements
-            will seen on the chart. If trace `hoverinfo` contains a
-            "text" flag and "hovertext" is not set, these elements
-            will be seen in the hover labels.
+            will be seen on the chart. If trace `hoverinfo`
+            contains a "text" flag and "hovertext" is not set,
+            these elements will be seen in the hover labels.
         textfont
             Sets the font used for `textinfo`.
         textinfo
@@ -1145,6 +1274,13 @@ class Pie(BaseTraceType):
             .
         textsrc
             Sets the source reference on plot.ly for  text .
+        title
+            Sets the title of the pie chart. If it is empty, no
+            title is displayed.
+        titlefont
+            Sets the font used for `title`.
+        titleposition
+            Specifies the location of the `title`.
         uid
 
         values
@@ -1198,6 +1334,9 @@ class Pie(BaseTraceType):
         textposition=None,
         textpositionsrc=None,
         textsrc=None,
+        title=None,
+        titlefont=None,
+        titleposition=None,
         uid=None,
         values=None,
         valuessrc=None,
@@ -1321,9 +1460,9 @@ class Pie(BaseTraceType):
         text
             Sets text elements associated with each sector. If
             trace `textinfo` contains a "text" flag, these elements
-            will seen on the chart. If trace `hoverinfo` contains a
-            "text" flag and "hovertext" is not set, these elements
-            will be seen in the hover labels.
+            will be seen on the chart. If trace `hoverinfo`
+            contains a "text" flag and "hovertext" is not set,
+            these elements will be seen in the hover labels.
         textfont
             Sets the font used for `textinfo`.
         textinfo
@@ -1335,6 +1474,13 @@ class Pie(BaseTraceType):
             .
         textsrc
             Sets the source reference on plot.ly for  text .
+        title
+            Sets the title of the pie chart. If it is empty, no
+            title is displayed.
+        titlefont
+            Sets the font used for `title`.
+        titleposition
+            Specifies the location of the `title`.
         uid
 
         values
@@ -1416,6 +1562,9 @@ an instance of plotly.graph_objs.Pie"""
         self._validators['textposition'] = v_pie.TextpositionValidator()
         self._validators['textpositionsrc'] = v_pie.TextpositionsrcValidator()
         self._validators['textsrc'] = v_pie.TextsrcValidator()
+        self._validators['title'] = v_pie.TitleValidator()
+        self._validators['titlefont'] = v_pie.TitlefontValidator()
+        self._validators['titleposition'] = v_pie.TitlepositionValidator()
         self._validators['uid'] = v_pie.UidValidator()
         self._validators['values'] = v_pie.ValuesValidator()
         self._validators['valuessrc'] = v_pie.ValuessrcValidator()
@@ -1500,6 +1649,13 @@ an instance of plotly.graph_objs.Pie"""
             ] = textpositionsrc if textpositionsrc is not None else _v
         _v = arg.pop('textsrc', None)
         self['textsrc'] = textsrc if textsrc is not None else _v
+        _v = arg.pop('title', None)
+        self['title'] = title if title is not None else _v
+        _v = arg.pop('titlefont', None)
+        self['titlefont'] = titlefont if titlefont is not None else _v
+        _v = arg.pop('titleposition', None)
+        self['titleposition'
+            ] = titleposition if titleposition is not None else _v
         _v = arg.pop('uid', None)
         self['uid'] = uid if uid is not None else _v
         _v = arg.pop('values', None)
