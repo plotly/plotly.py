@@ -10,6 +10,7 @@ from unittest import TestCase
 from requests.compat import json as _json
 
 import plotly
+import json
 
 
 fig = {
@@ -28,7 +29,7 @@ resize_code_strings = [
         ]
 
 
-PLOTLYJS = plotly.offline.offline.get_plotlyjs()
+PLOTLYJS = plotly.offline.get_plotlyjs()
 
 cdn_script = ('<script src="https://cdn.plot.ly/plotly-latest.min.js">'
               '</script>')
@@ -270,3 +271,11 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
         self.assertIn('"linkText": "Plotly rocks!"', html)
         self.assertIn('"showLink": true', html)
         self.assertIn('"editable": true', html)
+
+    def test_plotlyjs_version(self):
+        with open('js/package.json', 'rt') as f:
+            package_json = json.load(f)
+            expected_version = package_json['dependencies']['plotly.js']
+
+        self.assertEqual(expected_version,
+                         plotly.offline.get_plotlyjs_version())
