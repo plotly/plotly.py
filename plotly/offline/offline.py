@@ -98,6 +98,34 @@ def get_plotlyjs():
     return plotlyjs
 
 
+def _build_resize_script(plotdivid):
+    resize_script = (
+        '<script type="text/javascript">'
+        'window.addEventListener("resize", function(){{'
+        'Plotly.Plots.resize(document.getElementById("{id}"));}});'
+        '</script>'
+    ).format(id=plotdivid)
+    return resize_script
+
+
+def _build_mathjax_script(url):
+    return ('<script src="{url}?config=TeX-AMS-MML_SVG"></script>'
+            .format(url=url))
+
+
+# Build script to set global PlotlyConfig object. This must execute before
+# plotly.js is loaded.
+_window_plotly_config = """\
+<script type="text/javascript">\
+window.PlotlyConfig = {MathJaxConfig: 'local'};\
+</script>"""
+
+_mathjax_config = """\
+<script type="text/javascript">\
+if (window.MathJax) {MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}\
+</script>"""
+
+
 def get_image_download_script(caller):
     """
     This function will return a script that will download an image of a Plotly
@@ -168,23 +196,26 @@ def init_notebook_mode(connected=False):
     if connected:
         # Inject plotly.js into the output cell
         script_inject = (
-            ''
+            '{win_config}'
+            '{mathjax_config}'
             '<script>'
-            'requirejs.config({'
-            'paths: { '
+            'requirejs.config({{'
+            'paths: {{ '
             # Note we omit the extension .js because require will include it.
-            '\'plotly\': [\'https://cdn.plot.ly/plotly-latest.min\']},'
-            '});'
+            '\'plotly\': [\'https://cdn.plot.ly/plotly-latest.min\']}},'
+            '}});'
             'if(!window.Plotly) {{'
             'require([\'plotly\'],'
-            'function(plotly) {window.Plotly=plotly;});'
+            'function(plotly) {{window.Plotly=plotly;}});'
             '}}'
             '</script>'
-        )
+        ).format(win_config=_window_plotly_config,
+                 mathjax_config=_mathjax_config)
     else:
         # Inject plotly.js into the output cell
         script_inject = (
-            ''
+            '{win_config}'
+            '{mathjax_config}'
             '<script type=\'text/javascript\'>'
             'if(!window.Plotly){{'
             'define(\'plotly\', function(require, exports, module) {{'
@@ -195,7 +226,9 @@ def init_notebook_mode(connected=False):
             '}});'
             '}}'
             '</script>'
-            '').format(script=get_plotlyjs())
+            '').format(script=get_plotlyjs(),
+                       win_config=_window_plotly_config,
+                       mathjax_config=_mathjax_config)
 
     display_bundle = {
         'text/html': script_inject,
@@ -450,21 +483,11 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         ipython_display.display(ipython_display.HTML(script))
 
 
-def _build_resize_script(plotdivid):
-    resize_script = (
-        '<script type="text/javascript">'
-        'window.addEventListener("resize", function(){{'
-        'Plotly.Plots.resize(document.getElementById("{id}"));}});'
-        '</script>'
-    ).format(id=plotdivid)
-    return resize_script
-
-
 def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
          validate=True, output_type='file', include_plotlyjs=True,
          filename='temp-plot.html', auto_open=True, image=None,
          image_filename='plot_image', image_width=800, image_height=600,
-         config=None):
+         config=None, include_mathjax=False):
     """ Create a plotly graph locally as an HTML document or string.
 
     Example:
@@ -558,6 +581,22 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     config (default=None) -- Plot view options dictionary. Keyword arguments
         `show_link` and `link_text` set the associated options in this
         dictionary if it doesn't contain them already.
+    include_mathjax (False | 'cdn' | path - default=False) --
+        Specifies how the MathJax.js library is included in the output html
+        file or div string.  MathJax is required in order to display labels
+        with LaTeX typesetting.
+
+        If False, no script tag referencing MathJax.js will be included in the
+        output. HTML files generated with this option will not be able to
+        display LaTeX typesetting.
+
+        If 'cdn', a script tag that references a MathJax CDN location will be
+        included in the output.  HTML files generated with this option will be
+        able to display LaTeX typesetting as long as they have internet access.
+
+        If a string that ends in '.js', a script tag is included that
+        references the specified path. This approach can be used to point the
+        resulting HTML file to an alternative CDN.
     """
     if output_type not in ['div', 'file']:
         raise ValueError(
@@ -577,30 +616,59 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         figure_or_data, config, validate,
         '100%', '100%', global_requirejs=False)
 
+    # Build resize_script
     resize_script = ''
     if width == '100%' or height == '100%':
         resize_script = _build_resize_script(plotdivid)
 
+    # Process include_plotlyjs and build plotly_js_script
+    include_plotlyjs_orig = include_plotlyjs
     if isinstance(include_plotlyjs, six.string_types):
         include_plotlyjs = include_plotlyjs.lower()
 
     if include_plotlyjs == 'cdn':
-        plotly_js_script = """\
+        plotly_js_script = _window_plotly_config + """\
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>"""
     elif include_plotlyjs == 'directory':
-        plotly_js_script = '<script src="plotly.min.js"></script>'
+        plotly_js_script = (_window_plotly_config +
+                            '<script src="plotly.min.js"></script>')
     elif (isinstance(include_plotlyjs, six.string_types) and
           include_plotlyjs.endswith('.js')):
-        plotly_js_script = '<script src="{url}"></script>'.format(
-            url=include_plotlyjs)
+        plotly_js_script = (_window_plotly_config +
+                            '<script src="{url}"></script>'.format(
+                                url=include_plotlyjs_orig))
     elif include_plotlyjs:
         plotly_js_script = ''.join([
+            _window_plotly_config,
             '<script type="text/javascript">',
             get_plotlyjs(),
             '</script>',
         ])
     else:
         plotly_js_script = ''
+
+    # Process include_mathjax and build mathjax_script
+    include_mathjax_orig = include_mathjax
+    if isinstance(include_mathjax, six.string_types):
+        include_mathjax = include_mathjax.lower()
+
+    if include_mathjax == 'cdn':
+        mathjax_script = _build_mathjax_script(
+            url=('https://cdnjs.cloudflare.com' 
+                 '/ajax/libs/mathjax/2.7.5/MathJax.js')) + _mathjax_config
+    elif (isinstance(include_mathjax, six.string_types) and
+          include_mathjax.endswith('.js')):
+        mathjax_script = _build_mathjax_script(
+            url=include_mathjax_orig) + _mathjax_config
+    elif not include_mathjax:
+        mathjax_script = ''
+    else:
+        raise ValueError("""\
+Invalid value of type {typ} received as the include_mathjax argument
+    Received value: {val}
+
+include_mathjax may be specified as False, 'cdn', or a string ending with '.js' 
+""".format(typ=type(include_mathjax), val=repr(include_mathjax)))
 
     if output_type == 'file':
         with open(filename, 'w') as f:
@@ -624,6 +692,7 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                 '<html>',
                 '<head><meta charset="utf-8" /></head>',
                 '<body>',
+                mathjax_script,
                 plotly_js_script,
                 plot_html,
                 resize_script,
@@ -650,6 +719,7 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
 
         return ''.join([
                 '<div>',
+                mathjax_script,
                 plotly_js_script,
                 plot_html,
                 resize_script,

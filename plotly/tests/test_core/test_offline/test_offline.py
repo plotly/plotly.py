@@ -31,10 +31,25 @@ resize_code_strings = [
 
 PLOTLYJS = plotly.offline.get_plotlyjs()
 
+plotly_config_script = """\
+<script type="text/javascript">\
+window.PlotlyConfig = {MathJaxConfig: 'local'};</script>"""
+
 cdn_script = ('<script src="https://cdn.plot.ly/plotly-latest.min.js">'
               '</script>')
 
 directory_script = '<script src="plotly.min.js"></script>'
+
+
+mathjax_cdn = ('https://cdnjs.cloudflare.com'
+               '/ajax/libs/mathjax/2.7.5/MathJax.js')
+
+mathjax_config_str = '?config=TeX-AMS-MML_SVG'
+
+mathjax_cdn_script = ('<script src="{cdn}{config}"></script>'
+                      .format(cdn=mathjax_cdn, config=mathjax_config_str))
+
+mathjax_font = 'STIX-Web'
 
 
 class PlotlyOfflineBaseTestCase(TestCase):
@@ -76,6 +91,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
 
         self.assertTrue(x_data in html and y_data in html)  # data in there
         self.assertIn(layout_json, html)       # so is layout
+        self.assertIn(plotly_config_script, html) # so is config
         self.assertIn(PLOTLYJS, html)          # and the source code
         # and it's an <html> doc
         self.assertTrue(html.startswith('<html>') and html.endswith('</html>'))
@@ -89,6 +105,8 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
                 include_plotlyjs=include_plotlyjs,
                 output_type='file',
                 auto_open=False))
+
+            self.assertIn(plotly_config_script, html)
             self.assertIn(PLOTLYJS, html)
             self.assertNotIn(cdn_script, html)
             self.assertNotIn(directory_script, html)
@@ -101,6 +119,8 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
                 fig,
                 include_plotlyjs=include_plotlyjs,
                 output_type='div')
+
+            self.assertIn(plotly_config_script, html)
             self.assertIn(PLOTLYJS, html)
             self.assertNotIn(cdn_script, html)
             self.assertNotIn(directory_script, html)
@@ -114,6 +134,8 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
                 include_plotlyjs=include_plotlyjs,
                 output_type='file',
                 auto_open=False))
+
+            self.assertNotIn(plotly_config_script, html)
             self.assertNotIn(PLOTLYJS, html)
             self.assertNotIn(cdn_script, html)
             self.assertNotIn(directory_script, html)
@@ -124,6 +146,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
                 fig,
                 include_plotlyjs=include_plotlyjs,
                 output_type='div')
+            self.assertNotIn(plotly_config_script, html)
             self.assertNotIn(PLOTLYJS, html)
             self.assertNotIn(cdn_script, html)
             self.assertNotIn(directory_script, html)
@@ -135,6 +158,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
                 include_plotlyjs=include_plotlyjs,
                 output_type='file',
                 auto_open=False))
+            self.assertIn(plotly_config_script, html)
             self.assertNotIn(PLOTLYJS, html)
             self.assertIn(cdn_script, html)
             self.assertNotIn(directory_script, html)
@@ -145,6 +169,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
                 fig,
                 include_plotlyjs=include_plotlyjs,
                 output_type='div')
+            self.assertIn(plotly_config_script, html)
             self.assertNotIn(PLOTLYJS, html)
             self.assertIn(cdn_script, html)
             self.assertNotIn(directory_script, html)
@@ -157,6 +182,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
                 fig,
                 include_plotlyjs=include_plotlyjs,
                 auto_open=False))
+            self.assertIn(plotly_config_script, html)
             self.assertNotIn(PLOTLYJS, html)
             self.assertNotIn(cdn_script, html)
             self.assertIn(directory_script, html)
@@ -176,6 +202,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
                 output_type='div',
                 auto_open=False)
 
+            self.assertIn(plotly_config_script, html)
             self.assertNotIn(PLOTLYJS, html)
             self.assertNotIn(cdn_script, html)
             self.assertIn(directory_script, html)
@@ -279,3 +306,76 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
 
         self.assertEqual(expected_version,
                          plotly.offline.get_plotlyjs_version())
+
+    def test_include_mathjax_false_html(self):
+        html = self._read_html(plotly.offline.plot(
+            fig,
+            include_mathjax=False,
+            output_type='file',
+            auto_open=False))
+
+        self.assertIn(plotly_config_script, html)
+        self.assertIn(PLOTLYJS, html)
+        self.assertNotIn(mathjax_cdn_script, html)
+        self.assertNotIn(mathjax_font, html)
+
+    def test_include_mathjax_false_div(self):
+        html = plotly.offline.plot(
+            fig,
+            include_mathjax=False,
+            output_type='div')
+
+        self.assertIn(plotly_config_script, html)
+        self.assertIn(PLOTLYJS, html)
+        self.assertNotIn(mathjax_cdn_script, html)
+        self.assertNotIn(mathjax_font, html)
+
+    def test_include_mathjax_cdn_html(self):
+        html = self._read_html(plotly.offline.plot(
+            fig,
+            include_mathjax='cdn',
+            output_type='file',
+            auto_open=False))
+
+        self.assertIn(plotly_config_script, html)
+        self.assertIn(PLOTLYJS, html)
+        self.assertIn(mathjax_cdn_script, html)
+        self.assertIn(mathjax_font, html)
+
+    def test_include_mathjax_cdn_div(self):
+        html = plotly.offline.plot(
+            fig,
+            include_mathjax='cdn',
+            output_type='div')
+
+        self.assertIn(plotly_config_script, html)
+        self.assertIn(PLOTLYJS, html)
+        self.assertIn(mathjax_cdn_script, html)
+        self.assertIn(mathjax_font, html)
+
+    def test_include_mathjax_path_html(self):
+        other_cdn = 'http://another/cdn/MathJax.js'
+        html = self._read_html(plotly.offline.plot(
+            fig,
+            include_mathjax=other_cdn,
+            output_type='file',
+            auto_open=False))
+
+        self.assertIn(plotly_config_script, html)
+        self.assertIn(PLOTLYJS, html)
+        self.assertNotIn(mathjax_cdn_script, html)
+        self.assertIn(other_cdn+mathjax_config_str, html)
+        self.assertIn(mathjax_font, html)
+
+    def test_include_mathjax_path_div(self):
+        other_cdn = 'http://another/cdn/MathJax.js'
+        html = plotly.offline.plot(
+            fig,
+            include_mathjax=other_cdn,
+            output_type='div')
+
+        self.assertIn(plotly_config_script, html)
+        self.assertIn(PLOTLYJS, html)
+        self.assertNotIn(mathjax_cdn_script, html)
+        self.assertIn(other_cdn+mathjax_config_str, html)
+        self.assertIn(mathjax_font, html)
