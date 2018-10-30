@@ -1,5 +1,7 @@
 var widgets = require("@jupyter-widgets/base");
 var _ = require("lodash");
+
+window.PlotlyConfig = {MathJaxConfig: 'local'};
 var Plotly = require("plotly.js/dist/plotly");
 var PlotlyIndex = require("plotly.js/src/lib/index");
 var semver_range = "^" + require("../package.json").version;
@@ -719,6 +721,12 @@ var FigureView = widgets.DOMWidgetView.extend({
             this.do_update, this);
         this.model.on("change:_py2js_animate",
             this.do_animate, this);
+
+        // MathJax configuration
+        // ---------------------
+        if (window.MathJax) {
+            MathJax.Hub.Config({SVG: {font: "STIX-Web"}});
+        }
 
         // Get message ids
         // ---------------------
