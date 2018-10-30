@@ -205,6 +205,10 @@ class _AnnotatedHeatmap(object):
             max_col = to_rgb_color_list(self.colorscale[-1][1],
                                         [255, 255, 255])
 
+            # swap min/max colors if reverse scale
+            if self.reversescale:
+                min_col, max_col = max_col, min_col
+
             if should_use_black_text(min_col):
                 min_text_color = black
             else:
