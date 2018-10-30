@@ -10,7 +10,7 @@ class SymbolValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             plotly_name=plotly_name,
             parent_name=parent_name,
             array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'calc'),
+            edit_type=kwargs.pop('edit_type', 'style'),
             role=kwargs.pop('role', 'style'),
             values=kwargs.pop(
                 'values', [

@@ -395,6 +395,29 @@ class Data(BaseLayoutHierarchyType):
     def ohlc(self, val):
         self['ohlc'] = val
 
+    # parcats
+    # -------
+    @property
+    def parcats(self):
+        """
+        The 'parcats' property is a tuple of instances of
+        Parcats that may be specified as:
+          - A list or tuple of instances of plotly.graph_objs.layout.template.data.Parcats
+          - A list or tuple of dicts of string/value properties that
+            will be passed to the Parcats constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        tuple[plotly.graph_objs.layout.template.data.Parcats]
+        """
+        return self['parcats']
+
+    @parcats.setter
+    def parcats(self, val):
+        self['parcats'] = val
+
     # parcoords
     # ---------
     @property
@@ -871,6 +894,9 @@ class Data(BaseLayoutHierarchyType):
         ohlc
             plotly.graph_objs.layout.template.data.Ohlc instance or
             dict with compatible properties
+        parcats
+            plotly.graph_objs.layout.template.data.Parcats instance
+            or dict with compatible properties
         parcoords
             plotly.graph_objs.layout.template.data.Parcoords
             instance or dict with compatible properties
@@ -947,6 +973,7 @@ class Data(BaseLayoutHierarchyType):
         histogram=None,
         mesh3d=None,
         ohlc=None,
+        parcats=None,
         parcoords=None,
         pie=None,
         pointcloud=None,
@@ -1026,6 +1053,9 @@ class Data(BaseLayoutHierarchyType):
         ohlc
             plotly.graph_objs.layout.template.data.Ohlc instance or
             dict with compatible properties
+        parcats
+            plotly.graph_objs.layout.template.data.Parcats instance
+            or dict with compatible properties
         parcoords
             plotly.graph_objs.layout.template.data.Parcoords
             instance or dict with compatible properties
@@ -1131,6 +1161,7 @@ an instance of plotly.graph_objs.layout.template.Data"""
         self._validators['histogram'] = v_data.HistogramsValidator()
         self._validators['mesh3d'] = v_data.Mesh3dsValidator()
         self._validators['ohlc'] = v_data.OhlcsValidator()
+        self._validators['parcats'] = v_data.ParcatssValidator()
         self._validators['parcoords'] = v_data.ParcoordssValidator()
         self._validators['pie'] = v_data.PiesValidator()
         self._validators['pointcloud'] = v_data.PointcloudsValidator()
@@ -1188,6 +1219,8 @@ an instance of plotly.graph_objs.layout.template.Data"""
         self['mesh3d'] = mesh3d if mesh3d is not None else _v
         _v = arg.pop('ohlc', None)
         self['ohlc'] = ohlc if ohlc is not None else _v
+        _v = arg.pop('parcats', None)
+        self['parcats'] = parcats if parcats is not None else _v
         _v = arg.pop('parcoords', None)
         self['parcoords'] = parcoords if parcoords is not None else _v
         _v = arg.pop('pie', None)

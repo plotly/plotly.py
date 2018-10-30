@@ -148,9 +148,10 @@
                     "clearAxisTypes",
                     "plot",
                     "style",
+                    "markerSize",
                     "colorbars"
                 ],
-                "description": "trace attributes should include an `editType` string matching this flaglist. *calc* is the most extensive: a full `Plotly.plot` starting by clearing `gd.calcdata` to force it to be regenerated *clearAxisTypes* resets the types of the axes this trace is on, because new data could cause the automatic axis type detection to change. Log type will not be cleared, as that is never automatically chosen so must have been user-specified. *plot* calls `Plotly.plot` but without first clearing `gd.calcdata`. *style* only calls `module.style` for all trace modules and redraws the legend. *colorbars* only redraws colorbars."
+                "description": "trace attributes should include an `editType` string matching this flaglist. *calc* is the most extensive: a full `Plotly.plot` starting by clearing `gd.calcdata` to force it to be regenerated *clearAxisTypes* resets the types of the axes this trace is on, because new data could cause the automatic axis type detection to change. Log type will not be cleared, as that is never automatically chosen so must have been user-specified. *plot* calls `Plotly.plot` but without first clearing `gd.calcdata`. *style* only calls `module.style` (or module.editStyle) for all trace modules and redraws the legend. *markerSize* is like *style*, but propagate axis-range changes due to scatter `marker.size` *colorbars* only redraws colorbars."
             },
             "layout": {
                 "valType": "flaglist",
@@ -2399,7 +2400,7 @@
                     "dflt": "none",
                     "arrayOk": true,
                     "editType": "calc",
-                    "description": "Specifies the location of the `text`. *inside* positions `text` inside, next to the bar end (rotated and scaled if needed). *outside* positions `text` outside, next to the bar end (scaled if needed). *auto* positions `text` inside or outside so that `text` size is maximized."
+                    "description": "Specifies the location of the `text`. *inside* positions `text` inside, next to the bar end (rotated and scaled if needed). *outside* positions `text` outside, next to the bar end (scaled if needed), unless there is another bar stacked on this one, then the text gets pushed inside. *auto* tries to position `text` inside the bar, but if the bar is too small and no bar is stacked on this one the text is moved outside."
                 },
                 "textfont": {
                     "family": {
@@ -5894,67 +5895,35 @@
                     "editType": "calc",
                     "role": "object"
                 },
-                "autobinx": {
-                    "valType": "boolean",
-                    "dflt": null,
-                    "role": "style",
-                    "editType": "calc",
-                    "impliedEdits": {},
-                    "description": "Determines whether or not the x axis bin attributes are picked by an algorithm. Note that this should be set to false if you want to manually set the number of bins using the attributes in xbins."
-                },
                 "nbinsx": {
                     "valType": "integer",
                     "min": 0,
                     "dflt": 0,
                     "role": "style",
                     "editType": "calc",
-                    "description": "Specifies the maximum number of desired bins. This value will be used in an algorithm that will decide the optimal bin size such that the histogram best visualizes the distribution of the data."
+                    "description": "Specifies the maximum number of desired bins. This value will be used in an algorithm that will decide the optimal bin size such that the histogram best visualizes the distribution of the data. Ignored if `xbins.size` is provided."
                 },
                 "xbins": {
                     "start": {
                         "valType": "any",
-                        "dflt": null,
                         "role": "style",
                         "editType": "calc",
-                        "impliedEdits": {
-                            "^autobinx": false
-                        },
-                        "description": "Sets the starting value for the x axis bins."
+                        "description": "Sets the starting value for the x axis bins. Defaults to the minimum data value, shifted down if necessary to make nice round values and to remove ambiguous bin edges. For example, if most of the data is integers we shift the bin edges 0.5 down, so a `size` of 5 would have a default `start` of -0.5, so it is clear that 0-4 are in the first bin, 5-9 in the second, but continuous data gets a start of 0 and bins [0,5), [5,10) etc. Dates behave similarly, and `start` should be a date string. For category data, `start` is based on the category serial numbers, and defaults to -0.5. If multiple non-overlaying histograms share a subplot, the first explicit `start` is used exactly and all others are shifted down (if necessary) to differ from that one by an integer number of bins."
                     },
                     "end": {
                         "valType": "any",
-                        "dflt": null,
                         "role": "style",
                         "editType": "calc",
-                        "impliedEdits": {
-                            "^autobinx": false
-                        },
-                        "description": "Sets the end value for the x axis bins."
+                        "description": "Sets the end value for the x axis bins. The last bin may not end exactly at this value, we increment the bin edge by `size` from `start` until we reach or exceed `end`. Defaults to the maximum data value. Like `start`, for dates use a date string, and for category data `end` is based on the category serial numbers."
                     },
                     "size": {
                         "valType": "any",
-                        "dflt": null,
                         "role": "style",
                         "editType": "calc",
-                        "impliedEdits": {
-                            "^autobinx": false
-                        },
-                        "description": "Sets the step in-between value each x axis bin."
+                        "description": "Sets the size of each x axis bin. Default behavior: If `nbinsx` is 0 or omitted, we choose a nice round bin size such that the number of bins is about the same as the typical number of samples in each bin. If `nbinsx` is provided, we choose a nice round bin size giving no more than that many bins. For date data, use milliseconds or *M<n>* for months, as in `axis.dtick`. For category data, the number of categories to bin together (always defaults to 1). If multiple non-overlaying histograms share a subplot, the first explicit `size` is used and all others discarded. If no `size` is provided,the sample data from all traces is combined to determine `size` as described above."
                     },
                     "editType": "calc",
-                    "impliedEdits": {
-                        "autobinx": false,
-                        "role": "object"
-                    },
                     "role": "object"
-                },
-                "autobiny": {
-                    "valType": "boolean",
-                    "dflt": null,
-                    "role": "style",
-                    "editType": "calc",
-                    "impliedEdits": {},
-                    "description": "Determines whether or not the y axis bin attributes are picked by an algorithm. Note that this should be set to false if you want to manually set the number of bins using the attributes in ybins."
                 },
                 "nbinsy": {
                     "valType": "integer",
@@ -5962,45 +5931,44 @@
                     "dflt": 0,
                     "role": "style",
                     "editType": "calc",
-                    "description": "Specifies the maximum number of desired bins. This value will be used in an algorithm that will decide the optimal bin size such that the histogram best visualizes the distribution of the data."
+                    "description": "Specifies the maximum number of desired bins. This value will be used in an algorithm that will decide the optimal bin size such that the histogram best visualizes the distribution of the data. Ignored if `ybins.size` is provided."
                 },
                 "ybins": {
                     "start": {
                         "valType": "any",
-                        "dflt": null,
                         "role": "style",
                         "editType": "calc",
-                        "impliedEdits": {
-                            "^autobiny": false
-                        },
-                        "description": "Sets the starting value for the y axis bins."
+                        "description": "Sets the starting value for the y axis bins. Defaults to the minimum data value, shifted down if necessary to make nice round values and to remove ambiguous bin edges. For example, if most of the data is integers we shift the bin edges 0.5 down, so a `size` of 5 would have a default `start` of -0.5, so it is clear that 0-4 are in the first bin, 5-9 in the second, but continuous data gets a start of 0 and bins [0,5), [5,10) etc. Dates behave similarly, and `start` should be a date string. For category data, `start` is based on the category serial numbers, and defaults to -0.5. If multiple non-overlaying histograms share a subplot, the first explicit `start` is used exactly and all others are shifted down (if necessary) to differ from that one by an integer number of bins."
                     },
                     "end": {
                         "valType": "any",
-                        "dflt": null,
                         "role": "style",
                         "editType": "calc",
-                        "impliedEdits": {
-                            "^autobiny": false
-                        },
-                        "description": "Sets the end value for the y axis bins."
+                        "description": "Sets the end value for the y axis bins. The last bin may not end exactly at this value, we increment the bin edge by `size` from `start` until we reach or exceed `end`. Defaults to the maximum data value. Like `start`, for dates use a date string, and for category data `end` is based on the category serial numbers."
                     },
                     "size": {
                         "valType": "any",
-                        "dflt": null,
                         "role": "style",
                         "editType": "calc",
-                        "impliedEdits": {
-                            "^autobiny": false
-                        },
-                        "description": "Sets the step in-between value each y axis bin."
+                        "description": "Sets the size of each y axis bin. Default behavior: If `nbinsy` is 0 or omitted, we choose a nice round bin size such that the number of bins is about the same as the typical number of samples in each bin. If `nbinsy` is provided, we choose a nice round bin size giving no more than that many bins. For date data, use milliseconds or *M<n>* for months, as in `axis.dtick`. For category data, the number of categories to bin together (always defaults to 1). If multiple non-overlaying histograms share a subplot, the first explicit `size` is used and all others discarded. If no `size` is provided,the sample data from all traces is combined to determine `size` as described above."
                     },
                     "editType": "calc",
-                    "impliedEdits": {
-                        "autobiny": false,
-                        "role": "object"
-                    },
                     "role": "object"
+                },
+                "autobinx": {
+                    "valType": "boolean",
+                    "dflt": null,
+                    "role": "style",
+                    "editType": "calc",
+                    "description": "Obsolete: since v1.42 each bin attribute is auto-determined separately and `autobinx` is not needed. However, we accept `autobinx: true` or `false` and will update `xbins` accordingly before deleting `autobinx` from the trace."
+                },
+                "autobiny": {
+                    "valType": "boolean",
+                    "dflt": null,
+                    "role": "style",
+                    "editType": "calc",
+                    "impliedEdits": {},
+                    "description": "Obsolete: since v1.42 each bin attribute is auto-determined separately and `autobiny` is not needed. However, we accept `autobiny: true` or `false` and will update `ybins` accordingly before deleting `autobiny` from the trace."
                 },
                 "marker": {
                     "line": {
@@ -7349,67 +7317,35 @@
                     "editType": "calc",
                     "description": "Specifies the binning function used for this histogram trace. If *count*, the histogram values are computed by counting the number of values lying inside each bin. If *sum*, *avg*, *min*, *max*, the histogram values are computed using the sum, the average, the minimum or the maximum of the values lying inside each bin respectively."
                 },
-                "autobinx": {
-                    "valType": "boolean",
-                    "dflt": null,
-                    "role": "style",
-                    "editType": "calc",
-                    "impliedEdits": {},
-                    "description": "Determines whether or not the x axis bin attributes are picked by an algorithm. Note that this should be set to false if you want to manually set the number of bins using the attributes in xbins."
-                },
                 "nbinsx": {
                     "valType": "integer",
                     "min": 0,
                     "dflt": 0,
                     "role": "style",
                     "editType": "calc",
-                    "description": "Specifies the maximum number of desired bins. This value will be used in an algorithm that will decide the optimal bin size such that the histogram best visualizes the distribution of the data."
+                    "description": "Specifies the maximum number of desired bins. This value will be used in an algorithm that will decide the optimal bin size such that the histogram best visualizes the distribution of the data. Ignored if `xbins.size` is provided."
                 },
                 "xbins": {
                     "start": {
                         "valType": "any",
-                        "dflt": null,
                         "role": "style",
                         "editType": "calc",
-                        "impliedEdits": {
-                            "^autobinx": false
-                        },
-                        "description": "Sets the starting value for the x axis bins."
+                        "description": "Sets the starting value for the x axis bins. Defaults to the minimum data value, shifted down if necessary to make nice round values and to remove ambiguous bin edges. For example, if most of the data is integers we shift the bin edges 0.5 down, so a `size` of 5 would have a default `start` of -0.5, so it is clear that 0-4 are in the first bin, 5-9 in the second, but continuous data gets a start of 0 and bins [0,5), [5,10) etc. Dates behave similarly, and `start` should be a date string. For category data, `start` is based on the category serial numbers, and defaults to -0.5. "
                     },
                     "end": {
                         "valType": "any",
-                        "dflt": null,
                         "role": "style",
                         "editType": "calc",
-                        "impliedEdits": {
-                            "^autobinx": false
-                        },
-                        "description": "Sets the end value for the x axis bins."
+                        "description": "Sets the end value for the x axis bins. The last bin may not end exactly at this value, we increment the bin edge by `size` from `start` until we reach or exceed `end`. Defaults to the maximum data value. Like `start`, for dates use a date string, and for category data `end` is based on the category serial numbers."
                     },
                     "size": {
                         "valType": "any",
-                        "dflt": null,
                         "role": "style",
                         "editType": "calc",
-                        "impliedEdits": {
-                            "^autobinx": false
-                        },
-                        "description": "Sets the step in-between value each x axis bin."
+                        "description": "Sets the size of each x axis bin. Default behavior: If `nbinsx` is 0 or omitted, we choose a nice round bin size such that the number of bins is about the same as the typical number of samples in each bin. If `nbinsx` is provided, we choose a nice round bin size giving no more than that many bins. For date data, use milliseconds or *M<n>* for months, as in `axis.dtick`. For category data, the number of categories to bin together (always defaults to 1). "
                     },
                     "editType": "calc",
-                    "impliedEdits": {
-                        "autobinx": false,
-                        "role": "object"
-                    },
                     "role": "object"
-                },
-                "autobiny": {
-                    "valType": "boolean",
-                    "dflt": null,
-                    "role": "style",
-                    "editType": "calc",
-                    "impliedEdits": {},
-                    "description": "Determines whether or not the y axis bin attributes are picked by an algorithm. Note that this should be set to false if you want to manually set the number of bins using the attributes in ybins."
                 },
                 "nbinsy": {
                     "valType": "integer",
@@ -7417,45 +7353,44 @@
                     "dflt": 0,
                     "role": "style",
                     "editType": "calc",
-                    "description": "Specifies the maximum number of desired bins. This value will be used in an algorithm that will decide the optimal bin size such that the histogram best visualizes the distribution of the data."
+                    "description": "Specifies the maximum number of desired bins. This value will be used in an algorithm that will decide the optimal bin size such that the histogram best visualizes the distribution of the data. Ignored if `ybins.size` is provided."
                 },
                 "ybins": {
                     "start": {
                         "valType": "any",
-                        "dflt": null,
                         "role": "style",
                         "editType": "calc",
-                        "impliedEdits": {
-                            "^autobiny": false
-                        },
-                        "description": "Sets the starting value for the y axis bins."
+                        "description": "Sets the starting value for the y axis bins. Defaults to the minimum data value, shifted down if necessary to make nice round values and to remove ambiguous bin edges. For example, if most of the data is integers we shift the bin edges 0.5 down, so a `size` of 5 would have a default `start` of -0.5, so it is clear that 0-4 are in the first bin, 5-9 in the second, but continuous data gets a start of 0 and bins [0,5), [5,10) etc. Dates behave similarly, and `start` should be a date string. For category data, `start` is based on the category serial numbers, and defaults to -0.5. "
                     },
                     "end": {
                         "valType": "any",
-                        "dflt": null,
                         "role": "style",
                         "editType": "calc",
-                        "impliedEdits": {
-                            "^autobiny": false
-                        },
-                        "description": "Sets the end value for the y axis bins."
+                        "description": "Sets the end value for the y axis bins. The last bin may not end exactly at this value, we increment the bin edge by `size` from `start` until we reach or exceed `end`. Defaults to the maximum data value. Like `start`, for dates use a date string, and for category data `end` is based on the category serial numbers."
                     },
                     "size": {
                         "valType": "any",
-                        "dflt": null,
                         "role": "style",
                         "editType": "calc",
-                        "impliedEdits": {
-                            "^autobiny": false
-                        },
-                        "description": "Sets the step in-between value each y axis bin."
+                        "description": "Sets the size of each y axis bin. Default behavior: If `nbinsy` is 0 or omitted, we choose a nice round bin size such that the number of bins is about the same as the typical number of samples in each bin. If `nbinsy` is provided, we choose a nice round bin size giving no more than that many bins. For date data, use milliseconds or *M<n>* for months, as in `axis.dtick`. For category data, the number of categories to bin together (always defaults to 1). "
                     },
                     "editType": "calc",
-                    "impliedEdits": {
-                        "autobiny": false,
-                        "role": "object"
-                    },
                     "role": "object"
+                },
+                "autobinx": {
+                    "valType": "boolean",
+                    "dflt": null,
+                    "role": "style",
+                    "editType": "calc",
+                    "description": "Obsolete: since v1.42 each bin attribute is auto-determined separately and `autobinx` is not needed. However, we accept `autobinx: true` or `false` and will update `xbins` accordingly before deleting `autobinx` from the trace."
+                },
+                "autobiny": {
+                    "valType": "boolean",
+                    "dflt": null,
+                    "role": "style",
+                    "editType": "calc",
+                    "impliedEdits": {},
+                    "description": "Obsolete: since v1.42 each bin attribute is auto-determined separately and `autobiny` is not needed. However, we accept `autobiny: true` or `false` and will update `ybins` accordingly before deleting `autobiny` from the trace."
                 },
                 "xgap": {
                     "valType": "number",
@@ -8374,67 +8309,35 @@
                     "editType": "calc",
                     "description": "Specifies the binning function used for this histogram trace. If *count*, the histogram values are computed by counting the number of values lying inside each bin. If *sum*, *avg*, *min*, *max*, the histogram values are computed using the sum, the average, the minimum or the maximum of the values lying inside each bin respectively."
                 },
-                "autobinx": {
-                    "valType": "boolean",
-                    "dflt": null,
-                    "role": "style",
-                    "editType": "calc",
-                    "impliedEdits": {},
-                    "description": "Determines whether or not the x axis bin attributes are picked by an algorithm. Note that this should be set to false if you want to manually set the number of bins using the attributes in xbins."
-                },
                 "nbinsx": {
                     "valType": "integer",
                     "min": 0,
                     "dflt": 0,
                     "role": "style",
                     "editType": "calc",
-                    "description": "Specifies the maximum number of desired bins. This value will be used in an algorithm that will decide the optimal bin size such that the histogram best visualizes the distribution of the data."
+                    "description": "Specifies the maximum number of desired bins. This value will be used in an algorithm that will decide the optimal bin size such that the histogram best visualizes the distribution of the data. Ignored if `xbins.size` is provided."
                 },
                 "xbins": {
                     "start": {
                         "valType": "any",
-                        "dflt": null,
                         "role": "style",
                         "editType": "calc",
-                        "impliedEdits": {
-                            "^autobinx": false
-                        },
-                        "description": "Sets the starting value for the x axis bins."
+                        "description": "Sets the starting value for the x axis bins. Defaults to the minimum data value, shifted down if necessary to make nice round values and to remove ambiguous bin edges. For example, if most of the data is integers we shift the bin edges 0.5 down, so a `size` of 5 would have a default `start` of -0.5, so it is clear that 0-4 are in the first bin, 5-9 in the second, but continuous data gets a start of 0 and bins [0,5), [5,10) etc. Dates behave similarly, and `start` should be a date string. For category data, `start` is based on the category serial numbers, and defaults to -0.5. "
                     },
                     "end": {
                         "valType": "any",
-                        "dflt": null,
                         "role": "style",
                         "editType": "calc",
-                        "impliedEdits": {
-                            "^autobinx": false
-                        },
-                        "description": "Sets the end value for the x axis bins."
+                        "description": "Sets the end value for the x axis bins. The last bin may not end exactly at this value, we increment the bin edge by `size` from `start` until we reach or exceed `end`. Defaults to the maximum data value. Like `start`, for dates use a date string, and for category data `end` is based on the category serial numbers."
                     },
                     "size": {
                         "valType": "any",
-                        "dflt": null,
                         "role": "style",
                         "editType": "calc",
-                        "impliedEdits": {
-                            "^autobinx": false
-                        },
-                        "description": "Sets the step in-between value each x axis bin."
+                        "description": "Sets the size of each x axis bin. Default behavior: If `nbinsx` is 0 or omitted, we choose a nice round bin size such that the number of bins is about the same as the typical number of samples in each bin. If `nbinsx` is provided, we choose a nice round bin size giving no more than that many bins. For date data, use milliseconds or *M<n>* for months, as in `axis.dtick`. For category data, the number of categories to bin together (always defaults to 1). "
                     },
                     "editType": "calc",
-                    "impliedEdits": {
-                        "autobinx": false,
-                        "role": "object"
-                    },
                     "role": "object"
-                },
-                "autobiny": {
-                    "valType": "boolean",
-                    "dflt": null,
-                    "role": "style",
-                    "editType": "calc",
-                    "impliedEdits": {},
-                    "description": "Determines whether or not the y axis bin attributes are picked by an algorithm. Note that this should be set to false if you want to manually set the number of bins using the attributes in ybins."
                 },
                 "nbinsy": {
                     "valType": "integer",
@@ -8442,45 +8345,44 @@
                     "dflt": 0,
                     "role": "style",
                     "editType": "calc",
-                    "description": "Specifies the maximum number of desired bins. This value will be used in an algorithm that will decide the optimal bin size such that the histogram best visualizes the distribution of the data."
+                    "description": "Specifies the maximum number of desired bins. This value will be used in an algorithm that will decide the optimal bin size such that the histogram best visualizes the distribution of the data. Ignored if `ybins.size` is provided."
                 },
                 "ybins": {
                     "start": {
                         "valType": "any",
-                        "dflt": null,
                         "role": "style",
                         "editType": "calc",
-                        "impliedEdits": {
-                            "^autobiny": false
-                        },
-                        "description": "Sets the starting value for the y axis bins."
+                        "description": "Sets the starting value for the y axis bins. Defaults to the minimum data value, shifted down if necessary to make nice round values and to remove ambiguous bin edges. For example, if most of the data is integers we shift the bin edges 0.5 down, so a `size` of 5 would have a default `start` of -0.5, so it is clear that 0-4 are in the first bin, 5-9 in the second, but continuous data gets a start of 0 and bins [0,5), [5,10) etc. Dates behave similarly, and `start` should be a date string. For category data, `start` is based on the category serial numbers, and defaults to -0.5. "
                     },
                     "end": {
                         "valType": "any",
-                        "dflt": null,
                         "role": "style",
                         "editType": "calc",
-                        "impliedEdits": {
-                            "^autobiny": false
-                        },
-                        "description": "Sets the end value for the y axis bins."
+                        "description": "Sets the end value for the y axis bins. The last bin may not end exactly at this value, we increment the bin edge by `size` from `start` until we reach or exceed `end`. Defaults to the maximum data value. Like `start`, for dates use a date string, and for category data `end` is based on the category serial numbers."
                     },
                     "size": {
                         "valType": "any",
-                        "dflt": null,
                         "role": "style",
                         "editType": "calc",
-                        "impliedEdits": {
-                            "^autobiny": false
-                        },
-                        "description": "Sets the step in-between value each y axis bin."
+                        "description": "Sets the size of each y axis bin. Default behavior: If `nbinsy` is 0 or omitted, we choose a nice round bin size such that the number of bins is about the same as the typical number of samples in each bin. If `nbinsy` is provided, we choose a nice round bin size giving no more than that many bins. For date data, use milliseconds or *M<n>* for months, as in `axis.dtick`. For category data, the number of categories to bin together (always defaults to 1). "
                     },
                     "editType": "calc",
-                    "impliedEdits": {
-                        "autobiny": false,
-                        "role": "object"
-                    },
                     "role": "object"
+                },
+                "autobinx": {
+                    "valType": "boolean",
+                    "dflt": null,
+                    "role": "style",
+                    "editType": "calc",
+                    "description": "Obsolete: since v1.42 each bin attribute is auto-determined separately and `autobinx` is not needed. However, we accept `autobinx: true` or `false` and will update `xbins` accordingly before deleting `autobinx` from the trace."
+                },
+                "autobiny": {
+                    "valType": "boolean",
+                    "dflt": null,
+                    "role": "style",
+                    "editType": "calc",
+                    "impliedEdits": {},
+                    "description": "Obsolete: since v1.42 each bin attribute is auto-determined separately and `autobiny` is not needed. However, we accept `autobiny: true` or `false` and will update `ybins` accordingly before deleting `autobiny` from the trace."
                 },
                 "autocontour": {
                     "valType": "boolean",
@@ -9581,7 +9483,7 @@
                 "text": {
                     "valType": "data_array",
                     "editType": "calc",
-                    "description": "Sets text elements associated with each sector. If trace `textinfo` contains a *text* flag, these elements will seen on the chart. If trace `hoverinfo` contains a *text* flag and *hovertext* is not set, these elements will be seen in the hover labels.",
+                    "description": "Sets text elements associated with each sector. If trace `textinfo` contains a *text* flag, these elements will be seen on the chart. If trace `hoverinfo` contains a *text* flag and *hovertext* is not set, these elements will be seen in the hover labels.",
                     "role": "data"
                 },
                 "hovertext": {
@@ -9635,22 +9537,43 @@
                         "noBlank": true,
                         "strict": true,
                         "editType": "calc",
-                        "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*."
+                        "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                        "arrayOk": true
                     },
                     "size": {
                         "valType": "number",
                         "role": "style",
                         "min": 1,
-                        "editType": "calc"
+                        "editType": "calc",
+                        "arrayOk": true
                     },
                     "color": {
                         "valType": "color",
                         "role": "style",
-                        "editType": "style"
+                        "editType": "style",
+                        "arrayOk": true
                     },
                     "editType": "calc",
                     "description": "Sets the font used for `textinfo`.",
-                    "role": "object"
+                    "role": "object",
+                    "familysrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on plot.ly for  family .",
+                        "editType": "none"
+                    },
+                    "sizesrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on plot.ly for  size .",
+                        "editType": "none"
+                    },
+                    "colorsrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on plot.ly for  color .",
+                        "editType": "none"
+                    }
                 },
                 "insidetextfont": {
                     "family": {
@@ -9659,22 +9582,43 @@
                         "noBlank": true,
                         "strict": true,
                         "editType": "calc",
-                        "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*."
+                        "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                        "arrayOk": true
                     },
                     "size": {
                         "valType": "number",
                         "role": "style",
                         "min": 1,
-                        "editType": "calc"
+                        "editType": "calc",
+                        "arrayOk": true
                     },
                     "color": {
                         "valType": "color",
                         "role": "style",
-                        "editType": "style"
+                        "editType": "style",
+                        "arrayOk": true
                     },
                     "editType": "calc",
                     "description": "Sets the font used for `textinfo` lying inside the pie.",
-                    "role": "object"
+                    "role": "object",
+                    "familysrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on plot.ly for  family .",
+                        "editType": "none"
+                    },
+                    "sizesrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on plot.ly for  size .",
+                        "editType": "none"
+                    },
+                    "colorsrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on plot.ly for  color .",
+                        "editType": "none"
+                    }
                 },
                 "outsidetextfont": {
                     "family": {
@@ -9683,22 +9627,110 @@
                         "noBlank": true,
                         "strict": true,
                         "editType": "calc",
-                        "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*."
+                        "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                        "arrayOk": true
                     },
                     "size": {
                         "valType": "number",
                         "role": "style",
                         "min": 1,
-                        "editType": "calc"
+                        "editType": "calc",
+                        "arrayOk": true
                     },
                     "color": {
                         "valType": "color",
                         "role": "style",
-                        "editType": "style"
+                        "editType": "style",
+                        "arrayOk": true
                     },
                     "editType": "calc",
                     "description": "Sets the font used for `textinfo` lying outside the pie.",
-                    "role": "object"
+                    "role": "object",
+                    "familysrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on plot.ly for  family .",
+                        "editType": "none"
+                    },
+                    "sizesrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on plot.ly for  size .",
+                        "editType": "none"
+                    },
+                    "colorsrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on plot.ly for  color .",
+                        "editType": "none"
+                    }
+                },
+                "title": {
+                    "valType": "string",
+                    "dflt": "",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Sets the title of the pie chart. If it is empty, no title is displayed."
+                },
+                "titleposition": {
+                    "valType": "enumerated",
+                    "values": [
+                        "top left",
+                        "top center",
+                        "top right",
+                        "middle center",
+                        "bottom left",
+                        "bottom center",
+                        "bottom right"
+                    ],
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Specifies the location of the `title`."
+                },
+                "titlefont": {
+                    "family": {
+                        "valType": "string",
+                        "role": "style",
+                        "noBlank": true,
+                        "strict": true,
+                        "editType": "calc",
+                        "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                        "arrayOk": true
+                    },
+                    "size": {
+                        "valType": "number",
+                        "role": "style",
+                        "min": 1,
+                        "editType": "calc",
+                        "arrayOk": true
+                    },
+                    "color": {
+                        "valType": "color",
+                        "role": "style",
+                        "editType": "style",
+                        "arrayOk": true
+                    },
+                    "editType": "calc",
+                    "description": "Sets the font used for `title`.",
+                    "role": "object",
+                    "familysrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on plot.ly for  family .",
+                        "editType": "none"
+                    },
+                    "sizesrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on plot.ly for  size .",
+                        "editType": "none"
+                    },
+                    "colorsrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on plot.ly for  color .",
+                        "editType": "none"
+                    }
                 },
                 "domain": {
                     "x": {
@@ -22192,7 +22224,7 @@
                     "dflt": "",
                     "arrayOk": true,
                     "editType": "calc",
-                    "description": "Sets text elements associated with each (x,y) pair to appear on hover. If a single string, the same string appears over all the data points. If an array of string, the items are mapped in order to the this trace's (x,y) coordinates."
+                    "description": "Sets text elements associated with each (x,y) pair. If a single string, the same string appears over all the data points. If an array of string, the items are mapped in order to the this trace's (x,y) coordinates. If trace `hoverinfo` contains a *text* flag and *hovertext* is not set, these elements will be seen in the hover labels."
                 },
                 "hovertext": {
                     "valType": "string",
@@ -22294,6 +22326,20 @@
                         "role": "style",
                         "editType": "calc",
                         "description": "Sets the line width (in px)."
+                    },
+                    "shape": {
+                        "valType": "enumerated",
+                        "values": [
+                            "linear",
+                            "hv",
+                            "vh",
+                            "hvh",
+                            "vhv"
+                        ],
+                        "dflt": "linear",
+                        "role": "style",
+                        "editType": "calc",
+                        "description": "Determines the line shape. The values correspond to step-wise line shapes."
                     },
                     "dash": {
                         "valType": "enumerated",
@@ -24010,7 +24056,7 @@
                         "valType": "color",
                         "arrayOk": true,
                         "role": "style",
-                        "editType": "calc",
+                        "editType": "style",
                         "description": "Sets themarkercolor. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `marker.cmin` and `marker.cmax` if set."
                     },
                     "cauto": {
@@ -24025,7 +24071,7 @@
                         "valType": "number",
                         "role": "info",
                         "dflt": null,
-                        "editType": "calc",
+                        "editType": "style",
                         "impliedEdits": {
                             "cauto": false
                         },
@@ -24035,7 +24081,7 @@
                         "valType": "number",
                         "role": "info",
                         "dflt": null,
-                        "editType": "calc",
+                        "editType": "style",
                         "impliedEdits": {
                             "cauto": false
                         },
@@ -24364,7 +24410,7 @@
                         "dflt": "circle",
                         "arrayOk": true,
                         "role": "style",
-                        "editType": "calc",
+                        "editType": "style",
                         "description": "Sets the marker symbol type. Adding 100 is equivalent to appending *-open* to a symbol name. Adding 200 is equivalent to appending *-dot* to a symbol name. Adding 300 is equivalent to appending *-open-dot* or *dot-open* to a symbol name."
                     },
                     "size": {
@@ -24373,7 +24419,7 @@
                         "dflt": 6,
                         "arrayOk": true,
                         "role": "style",
-                        "editType": "calc",
+                        "editType": "markerSize",
                         "description": "Sets the marker size (in px)."
                     },
                     "sizeref": {
@@ -24408,7 +24454,7 @@
                         "max": 1,
                         "arrayOk": true,
                         "role": "style",
-                        "editType": "calc",
+                        "editType": "style",
                         "description": "Sets the marker opacity."
                     },
                     "colorbar": {
@@ -24421,7 +24467,7 @@
                             "role": "style",
                             "dflt": "pixels",
                             "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels*. Use `thickness` to set the value.",
-                            "editType": "calc"
+                            "editType": "colorbars"
                         },
                         "thickness": {
                             "valType": "number",
@@ -24429,7 +24475,7 @@
                             "min": 0,
                             "dflt": 30,
                             "description": "Sets the thickness of the color bar This measure excludes the size of the padding, ticks and labels.",
-                            "editType": "calc"
+                            "editType": "colorbars"
                         },
                         "lenmode": {
                             "valType": "enumerated",
@@ -24440,7 +24486,7 @@
                             "role": "info",
                             "dflt": "fraction",
                             "description": "Determines whether this color bar's length (i.e. the measure in the color variation direction) is set in units of plot *fraction* or in *pixels. Use `len` to set the value.",
-                            "editType": "calc"
+                            "editType": "colorbars"
                         },
                         "len": {
                             "valType": "number",
@@ -24448,7 +24494,7 @@
                             "dflt": 1,
                             "role": "style",
                             "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
-                            "editType": "calc"
+                            "editType": "colorbars"
                         },
                         "x": {
                             "valType": "number",
@@ -24457,7 +24503,7 @@
                             "max": 3,
                             "role": "style",
                             "description": "Sets the x position of the color bar (in plot fraction).",
-                            "editType": "calc"
+                            "editType": "colorbars"
                         },
                         "xanchor": {
                             "valType": "enumerated",
@@ -24469,7 +24515,7 @@
                             "dflt": "left",
                             "role": "style",
                             "description": "Sets this color bar's horizontal position anchor. This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
-                            "editType": "calc"
+                            "editType": "colorbars"
                         },
                         "xpad": {
                             "valType": "number",
@@ -24477,7 +24523,7 @@
                             "min": 0,
                             "dflt": 10,
                             "description": "Sets the amount of padding (in px) along the x direction.",
-                            "editType": "calc"
+                            "editType": "colorbars"
                         },
                         "y": {
                             "valType": "number",
@@ -24486,7 +24532,7 @@
                             "min": -2,
                             "max": 3,
                             "description": "Sets the y position of the color bar (in plot fraction).",
-                            "editType": "calc"
+                            "editType": "colorbars"
                         },
                         "yanchor": {
                             "valType": "enumerated",
@@ -24498,7 +24544,7 @@
                             "role": "style",
                             "dflt": "middle",
                             "description": "Sets this color bar's vertical position anchor This anchor binds the `y` position to the *top*, *middle* or *bottom* of the color bar.",
-                            "editType": "calc"
+                            "editType": "colorbars"
                         },
                         "ypad": {
                             "valType": "number",
@@ -24506,13 +24552,13 @@
                             "min": 0,
                             "dflt": 10,
                             "description": "Sets the amount of padding (in px) along the y direction.",
-                            "editType": "calc"
+                            "editType": "colorbars"
                         },
                         "outlinecolor": {
                             "valType": "color",
                             "dflt": "#444",
                             "role": "style",
-                            "editType": "calc",
+                            "editType": "colorbars",
                             "description": "Sets the axis line color."
                         },
                         "outlinewidth": {
@@ -24520,14 +24566,14 @@
                             "min": 0,
                             "dflt": 1,
                             "role": "style",
-                            "editType": "calc",
+                            "editType": "colorbars",
                             "description": "Sets the width (in px) of the axis line."
                         },
                         "bordercolor": {
                             "valType": "color",
                             "dflt": "#444",
                             "role": "style",
-                            "editType": "calc",
+                            "editType": "colorbars",
                             "description": "Sets the axis line color."
                         },
                         "borderwidth": {
@@ -24536,14 +24582,14 @@
                             "min": 0,
                             "dflt": 0,
                             "description": "Sets the width (in px) or the border enclosing this color bar.",
-                            "editType": "calc"
+                            "editType": "colorbars"
                         },
                         "bgcolor": {
                             "valType": "color",
                             "role": "style",
                             "dflt": "rgba(0,0,0,0)",
                             "description": "Sets the color of padded area.",
-                            "editType": "calc"
+                            "editType": "colorbars"
                         },
                         "tickmode": {
                             "valType": "enumerated",
@@ -24553,7 +24599,7 @@
                                 "array"
                             ],
                             "role": "info",
-                            "editType": "calc",
+                            "editType": "colorbars",
                             "impliedEdits": {},
                             "description": "Sets the tick mode for this axis. If *auto*, the number of ticks is set via `nticks`. If *linear*, the placement of the ticks is determined by a starting position `tick0` and a tick step `dtick` (*linear* is the default value if `tick0` and `dtick` are provided). If *array*, the placement of the ticks is set via `tickvals` and the tick text is `ticktext`. (*array* is the default value if `tickvals` is provided)."
                         },
@@ -24562,13 +24608,13 @@
                             "min": 0,
                             "dflt": 0,
                             "role": "style",
-                            "editType": "calc",
+                            "editType": "colorbars",
                             "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*."
                         },
                         "tick0": {
                             "valType": "any",
                             "role": "style",
-                            "editType": "calc",
+                            "editType": "colorbars",
                             "impliedEdits": {
                                 "tickmode": "linear"
                             },
@@ -24577,7 +24623,7 @@
                         "dtick": {
                             "valType": "any",
                             "role": "style",
-                            "editType": "calc",
+                            "editType": "colorbars",
                             "impliedEdits": {
                                 "tickmode": "linear"
                             },
@@ -24585,13 +24631,13 @@
                         },
                         "tickvals": {
                             "valType": "data_array",
-                            "editType": "calc",
+                            "editType": "colorbars",
                             "description": "Sets the values at which ticks on this axis appear. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
                             "role": "data"
                         },
                         "ticktext": {
                             "valType": "data_array",
-                            "editType": "calc",
+                            "editType": "colorbars",
                             "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `tickvals`.",
                             "role": "data"
                         },
@@ -24603,7 +24649,7 @@
                                 ""
                             ],
                             "role": "style",
-                            "editType": "calc",
+                            "editType": "colorbars",
                             "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                             "dflt": ""
                         },
@@ -24612,7 +24658,7 @@
                             "min": 0,
                             "dflt": 5,
                             "role": "style",
-                            "editType": "calc",
+                            "editType": "colorbars",
                             "description": "Sets the tick length (in px)."
                         },
                         "tickwidth": {
@@ -24620,21 +24666,21 @@
                             "min": 0,
                             "dflt": 1,
                             "role": "style",
-                            "editType": "calc",
+                            "editType": "colorbars",
                             "description": "Sets the tick width (in px)."
                         },
                         "tickcolor": {
                             "valType": "color",
                             "dflt": "#444",
                             "role": "style",
-                            "editType": "calc",
+                            "editType": "colorbars",
                             "description": "Sets the tick color."
                         },
                         "showticklabels": {
                             "valType": "boolean",
                             "dflt": true,
                             "role": "style",
-                            "editType": "calc",
+                            "editType": "colorbars",
                             "description": "Determines whether or not the tick labels are drawn."
                         },
                         "tickfont": {
@@ -24644,35 +24690,35 @@
                                 "noBlank": true,
                                 "strict": true,
                                 "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
-                                "editType": "calc"
+                                "editType": "colorbars"
                             },
                             "size": {
                                 "valType": "number",
                                 "role": "style",
                                 "min": 1,
-                                "editType": "calc"
+                                "editType": "colorbars"
                             },
                             "color": {
                                 "valType": "color",
                                 "role": "style",
-                                "editType": "calc"
+                                "editType": "colorbars"
                             },
                             "description": "Sets the color bar's tick label font",
-                            "editType": "calc",
+                            "editType": "colorbars",
                             "role": "object"
                         },
                         "tickangle": {
                             "valType": "angle",
                             "dflt": "auto",
                             "role": "style",
-                            "editType": "calc",
+                            "editType": "colorbars",
                             "description": "Sets the angle of the tick labels with respect to the horizontal. For example, a `tickangle` of -90 draws the tick labels vertically."
                         },
                         "tickformat": {
                             "valType": "string",
                             "dflt": "",
                             "role": "style",
-                            "editType": "calc",
+                            "editType": "colorbars",
                             "description": "Sets the tick label formatting rule using d3 formatting mini-languages which are very similar to those in Python. For numbers, see: https://github.com/d3/d3-format/blob/master/README.md#locale_format And for dates see: https://github.com/d3/d3-time-format/blob/master/README.md#locale_format We add one item to d3's date formatter: *%{n}f* for fractional seconds with n digits. For example, *2016-10-13 09:15:23.456* with tickformat *%H~%M~%S.%2f* would display *09~15~23.46*"
                         },
                         "tickformatstops": {
@@ -24682,7 +24728,7 @@
                                         "valType": "boolean",
                                         "role": "info",
                                         "dflt": true,
-                                        "editType": "calc",
+                                        "editType": "colorbars",
                                         "description": "Determines whether or not this stop is used. If `false`, this stop is ignored even within its `dtickrange`."
                                     },
                                     "dtickrange": {
@@ -24691,34 +24737,34 @@
                                         "items": [
                                             {
                                                 "valType": "any",
-                                                "editType": "calc"
+                                                "editType": "colorbars"
                                             },
                                             {
                                                 "valType": "any",
-                                                "editType": "calc"
+                                                "editType": "colorbars"
                                             }
                                         ],
-                                        "editType": "calc",
+                                        "editType": "colorbars",
                                         "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*"
                                     },
                                     "value": {
                                         "valType": "string",
                                         "dflt": "",
                                         "role": "style",
-                                        "editType": "calc",
+                                        "editType": "colorbars",
                                         "description": "string - dtickformat for described zoom level, the same as *tickformat*"
                                     },
-                                    "editType": "calc",
+                                    "editType": "colorbars",
                                     "name": {
                                         "valType": "string",
                                         "role": "style",
-                                        "editType": "calc",
+                                        "editType": "colorbars",
                                         "description": "When used in a template, named items are created in the output figure in addition to any items the figure already has in this array. You can modify these items in the output figure by making your own item with `templateitemname` matching this `name` alongside your modifications (including `visible: false` or `enabled: false` to hide it). Has no effect outside of a template."
                                     },
                                     "templateitemname": {
                                         "valType": "string",
                                         "role": "info",
-                                        "editType": "calc",
+                                        "editType": "colorbars",
                                         "description": "Used to refer to a named item in this array in the template. Named items from the template will be created even without a matching item in the input figure, but you can modify one by making an item with `templateitemname` matching its `name`, alongside your modifications (including `visible: false` or `enabled: false` to hide it). If there is no template or no matching item, this item will be hidden unless you explicitly show it with `visible: true`."
                                     },
                                     "role": "object"
@@ -24730,7 +24776,7 @@
                             "valType": "string",
                             "dflt": "",
                             "role": "style",
-                            "editType": "calc",
+                            "editType": "colorbars",
                             "description": "Sets a tick label prefix."
                         },
                         "showtickprefix": {
@@ -24743,14 +24789,14 @@
                             ],
                             "dflt": "all",
                             "role": "style",
-                            "editType": "calc",
+                            "editType": "colorbars",
                             "description": "If *all*, all tick labels are displayed with a prefix. If *first*, only the first tick is displayed with a prefix. If *last*, only the last tick is displayed with a suffix. If *none*, tick prefixes are hidden."
                         },
                         "ticksuffix": {
                             "valType": "string",
                             "dflt": "",
                             "role": "style",
-                            "editType": "calc",
+                            "editType": "colorbars",
                             "description": "Sets a tick label suffix."
                         },
                         "showticksuffix": {
@@ -24763,14 +24809,14 @@
                             ],
                             "dflt": "all",
                             "role": "style",
-                            "editType": "calc",
+                            "editType": "colorbars",
                             "description": "Same as `showtickprefix` but for tick suffixes."
                         },
                         "separatethousands": {
                             "valType": "boolean",
                             "dflt": false,
                             "role": "style",
-                            "editType": "calc",
+                            "editType": "colorbars",
                             "description": "If \"true\", even 4-digit integers are separated"
                         },
                         "exponentformat": {
@@ -24785,7 +24831,7 @@
                             ],
                             "dflt": "B",
                             "role": "style",
-                            "editType": "calc",
+                            "editType": "colorbars",
                             "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
                         },
                         "showexponent": {
@@ -24798,14 +24844,14 @@
                             ],
                             "dflt": "all",
                             "role": "style",
-                            "editType": "calc",
+                            "editType": "colorbars",
                             "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear."
                         },
                         "title": {
                             "valType": "string",
                             "role": "info",
                             "description": "Sets the title of the color bar.",
-                            "editType": "calc"
+                            "editType": "colorbars"
                         },
                         "titlefont": {
                             "family": {
@@ -24814,21 +24860,21 @@
                                 "noBlank": true,
                                 "strict": true,
                                 "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
-                                "editType": "calc"
+                                "editType": "colorbars"
                             },
                             "size": {
                                 "valType": "number",
                                 "role": "style",
                                 "min": 1,
-                                "editType": "calc"
+                                "editType": "colorbars"
                             },
                             "color": {
                                 "valType": "color",
                                 "role": "style",
-                                "editType": "calc"
+                                "editType": "colorbars"
                             },
                             "description": "Sets this color bar's title font.",
-                            "editType": "calc",
+                            "editType": "colorbars",
                             "role": "object"
                         },
                         "titleside": {
@@ -24841,9 +24887,9 @@
                             "role": "style",
                             "dflt": "top",
                             "description": "Determines the location of the colorbar title with respect to the color bar.",
-                            "editType": "calc"
+                            "editType": "colorbars"
                         },
-                        "editType": "calc",
+                        "editType": "colorbars",
                         "role": "object",
                         "tickvalssrc": {
                             "valType": "string",
@@ -24979,7 +25025,7 @@
                         "regex": "/^x([2-9]|[1-9][0-9]+)?$/",
                         "editType": "plot"
                     },
-                    "description": "Sets the list of x axes corresponding to this splom trace. By default, a splom will match the first N xaxes where N is the number of input dimensions."
+                    "description": "Sets the list of x axes corresponding to dimensions of this splom trace. By default, a splom will match the first N xaxes where N is the number of input dimensions. Note that, in case where `diagonal.visible` is false and `showupperhalf` or `showlowerhalf` is false, this splom trace will generate one less x-axis and one less y-axis."
                 },
                 "yaxes": {
                     "valType": "info_array",
@@ -24991,7 +25037,7 @@
                         "regex": "/^y([2-9]|[1-9][0-9]+)?$/",
                         "editType": "plot"
                     },
-                    "description": "Sets the list of y axes corresponding to this splom trace. By default, a splom will match the first N yaxes where N is the number of input dimensions."
+                    "description": "Sets the list of y axes corresponding to dimensions of this splom trace. By default, a splom will match the first N yaxes where N is the number of input dimensions. Note that, in case where `diagonal.visible` is false and `showupperhalf` or `showlowerhalf` is false, this splom trace will generate one less x-axis and one less y-axis."
                 },
                 "diagonal": {
                     "visible": {
@@ -27451,6 +27497,881 @@
                 }
             }
         },
+        "parcats": {
+            "meta": {
+                "description": "Parallel categories diagram for multidimensional categorical data."
+            },
+            "attributes": {
+                "type": "parcats",
+                "visible": {
+                    "valType": "enumerated",
+                    "values": [
+                        true,
+                        false,
+                        "legendonly"
+                    ],
+                    "role": "info",
+                    "dflt": true,
+                    "editType": "calc",
+                    "description": "Determines whether or not this trace is visible. If *legendonly*, the trace is not drawn, but can appear as a legend item (provided that the legend itself is visible)."
+                },
+                "name": {
+                    "valType": "string",
+                    "role": "info",
+                    "editType": "style",
+                    "description": "Sets the trace name. The trace name appear as the legend item and on hover."
+                },
+                "uid": {
+                    "valType": "string",
+                    "role": "info",
+                    "editType": "plot"
+                },
+                "hoverinfo": {
+                    "valType": "flaglist",
+                    "role": "info",
+                    "flags": [
+                        "count",
+                        "probability",
+                        "z",
+                        "text",
+                        "name"
+                    ],
+                    "extras": [
+                        "all",
+                        "none",
+                        "skip"
+                    ],
+                    "arrayOk": true,
+                    "dflt": "all",
+                    "editType": "plot",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
+                },
+                "stream": {
+                    "token": {
+                        "valType": "string",
+                        "noBlank": true,
+                        "strict": true,
+                        "role": "info",
+                        "editType": "calc",
+                        "description": "The stream id number links a data trace on a plot with a stream. See https://plot.ly/settings for more details."
+                    },
+                    "maxpoints": {
+                        "valType": "number",
+                        "min": 0,
+                        "max": 10000,
+                        "dflt": 500,
+                        "role": "info",
+                        "editType": "calc",
+                        "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot."
+                    },
+                    "editType": "calc",
+                    "role": "object"
+                },
+                "transforms": {
+                    "items": {
+                        "transform": {
+                            "editType": "calc",
+                            "description": "An array of operations that manipulate the trace data, for example filtering or sorting the data arrays.",
+                            "role": "object"
+                        }
+                    },
+                    "role": "object"
+                },
+                "domain": {
+                    "x": {
+                        "valType": "info_array",
+                        "role": "info",
+                        "editType": "calc",
+                        "items": [
+                            {
+                                "valType": "number",
+                                "min": 0,
+                                "max": 1,
+                                "editType": "calc"
+                            },
+                            {
+                                "valType": "number",
+                                "min": 0,
+                                "max": 1,
+                                "editType": "calc"
+                            }
+                        ],
+                        "dflt": [
+                            0,
+                            1
+                        ],
+                        "description": "Sets the horizontal domain of this parcats trace (in plot fraction)."
+                    },
+                    "y": {
+                        "valType": "info_array",
+                        "role": "info",
+                        "editType": "calc",
+                        "items": [
+                            {
+                                "valType": "number",
+                                "min": 0,
+                                "max": 1,
+                                "editType": "calc"
+                            },
+                            {
+                                "valType": "number",
+                                "min": 0,
+                                "max": 1,
+                                "editType": "calc"
+                            }
+                        ],
+                        "dflt": [
+                            0,
+                            1
+                        ],
+                        "description": "Sets the vertical domain of this parcats trace (in plot fraction)."
+                    },
+                    "editType": "calc",
+                    "row": {
+                        "valType": "integer",
+                        "min": 0,
+                        "dflt": 0,
+                        "role": "info",
+                        "editType": "calc",
+                        "description": "If there is a layout grid, use the domain for this row in the grid for this parcats trace ."
+                    },
+                    "column": {
+                        "valType": "integer",
+                        "min": 0,
+                        "dflt": 0,
+                        "role": "info",
+                        "editType": "calc",
+                        "description": "If there is a layout grid, use the domain for this column in the grid for this parcats trace ."
+                    },
+                    "role": "object"
+                },
+                "hoveron": {
+                    "valType": "enumerated",
+                    "values": [
+                        "category",
+                        "color",
+                        "dimension"
+                    ],
+                    "dflt": "category",
+                    "role": "info",
+                    "editType": "plot",
+                    "description": "Sets the hover interaction mode for the parcats diagram. If `category`, hover interaction take place per category. If `color`, hover interactions take place per color per category. If `dimension`, hover interactions take place across all categories per dimension."
+                },
+                "arrangement": {
+                    "valType": "enumerated",
+                    "values": [
+                        "perpendicular",
+                        "freeform",
+                        "fixed"
+                    ],
+                    "dflt": "perpendicular",
+                    "role": "style",
+                    "editType": "plot",
+                    "description": "Sets the drag interaction mode for categories and dimensions. If `perpendicular`, the categories can only move along a line perpendicular to the paths. If `freeform`, the categories can freely move on the plane. If `fixed`, the categories and dimensions are stationary."
+                },
+                "bundlecolors": {
+                    "valType": "boolean",
+                    "dflt": true,
+                    "role": "info",
+                    "editType": "plot",
+                    "description": "Sort paths so that like colors are bundled together within each category."
+                },
+                "sortpaths": {
+                    "valType": "enumerated",
+                    "values": [
+                        "forward",
+                        "backward"
+                    ],
+                    "dflt": "forward",
+                    "role": "info",
+                    "editType": "plot",
+                    "description": "Sets the path sorting algorithm. If `forward`, sort paths based on dimension categories from left to right. If `backward`, sort paths based on dimensions categories from right to left."
+                },
+                "labelfont": {
+                    "family": {
+                        "valType": "string",
+                        "role": "style",
+                        "noBlank": true,
+                        "strict": true,
+                        "editType": "calc",
+                        "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*."
+                    },
+                    "size": {
+                        "valType": "number",
+                        "role": "style",
+                        "min": 1,
+                        "editType": "calc"
+                    },
+                    "color": {
+                        "valType": "color",
+                        "role": "style",
+                        "editType": "calc"
+                    },
+                    "editType": "calc",
+                    "description": "Sets the font for the `dimension` labels.",
+                    "role": "object"
+                },
+                "tickfont": {
+                    "family": {
+                        "valType": "string",
+                        "role": "style",
+                        "noBlank": true,
+                        "strict": true,
+                        "editType": "calc",
+                        "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*."
+                    },
+                    "size": {
+                        "valType": "number",
+                        "role": "style",
+                        "min": 1,
+                        "editType": "calc"
+                    },
+                    "color": {
+                        "valType": "color",
+                        "role": "style",
+                        "editType": "calc"
+                    },
+                    "editType": "calc",
+                    "description": "Sets the font for the `category` labels.",
+                    "role": "object"
+                },
+                "dimensions": {
+                    "items": {
+                        "dimension": {
+                            "label": {
+                                "valType": "string",
+                                "role": "info",
+                                "editType": "calc",
+                                "description": "The shown name of the dimension."
+                            },
+                            "categoryorder": {
+                                "valType": "enumerated",
+                                "values": [
+                                    "trace",
+                                    "category ascending",
+                                    "category descending",
+                                    "array"
+                                ],
+                                "dflt": "trace",
+                                "role": "info",
+                                "editType": "calc",
+                                "description": "Specifies the ordering logic for the categories in the dimension. By default, plotly uses *trace*, which specifies the order that is present in the data supplied. Set `categoryorder` to *category ascending* or *category descending* if order should be determined by the alphanumerical order of the category names. Set `categoryorder` to *array* to derive the ordering from the attribute `categoryarray`. If a category is not found in the `categoryarray` array, the sorting behavior for that attribute will be identical to the *trace* mode. The unspecified categories will follow the categories in `categoryarray`."
+                            },
+                            "categoryarray": {
+                                "valType": "data_array",
+                                "role": "data",
+                                "editType": "calc",
+                                "description": "Sets the order in which categories in this dimension appear. Only has an effect if `categoryorder` is set to *array*. Used with `categoryorder`."
+                            },
+                            "ticktext": {
+                                "valType": "data_array",
+                                "role": "data",
+                                "editType": "calc",
+                                "description": "Sets alternative tick labels for the categories in this dimension. Only has an effect if `categoryorder` is set to *array*. Should be an array the same length as `categoryarray` Used with `categoryorder`."
+                            },
+                            "values": {
+                                "valType": "data_array",
+                                "role": "data",
+                                "dflt": [],
+                                "editType": "calc",
+                                "description": "Dimension values. `values[n]` represents the category value of the `n`th point in the dataset, therefore the `values` vector for all dimensions must be the same (longer vectors will be truncated)."
+                            },
+                            "displayindex": {
+                                "valType": "integer",
+                                "role": "info",
+                                "editType": "calc",
+                                "description": "The display index of dimension, from left to right, zero indexed, defaults to dimension index."
+                            },
+                            "editType": "calc",
+                            "description": "The dimensions (variables) of the parallel categories diagram.",
+                            "visible": {
+                                "valType": "boolean",
+                                "dflt": true,
+                                "role": "info",
+                                "editType": "calc",
+                                "description": "Shows the dimension when set to `true` (the default). Hides the dimension for `false`."
+                            },
+                            "role": "object",
+                            "categoryarraysrc": {
+                                "valType": "string",
+                                "role": "info",
+                                "description": "Sets the source reference on plot.ly for  categoryarray .",
+                                "editType": "none"
+                            },
+                            "ticktextsrc": {
+                                "valType": "string",
+                                "role": "info",
+                                "description": "Sets the source reference on plot.ly for  ticktext .",
+                                "editType": "none"
+                            },
+                            "valuessrc": {
+                                "valType": "string",
+                                "role": "info",
+                                "description": "Sets the source reference on plot.ly for  values .",
+                                "editType": "none"
+                            }
+                        }
+                    },
+                    "role": "object"
+                },
+                "line": {
+                    "editType": "calc",
+                    "color": {
+                        "valType": "color",
+                        "arrayOk": true,
+                        "role": "style",
+                        "editType": "style",
+                        "description": "Sets thelinecolor. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `line.cmin` and `line.cmax` if set."
+                    },
+                    "cauto": {
+                        "valType": "boolean",
+                        "role": "info",
+                        "dflt": true,
+                        "editType": "calc",
+                        "impliedEdits": {},
+                        "description": "Determines whether or not the color domain is computed with respect to the input data (here in `line.color`) or the bounds set in `line.cmin` and `line.cmax`  Has an effect only if in `line.color`is set to a numerical array. Defaults to `false` when `line.cmin` and `line.cmax` are set by the user."
+                    },
+                    "cmin": {
+                        "valType": "number",
+                        "role": "info",
+                        "dflt": null,
+                        "editType": "plot",
+                        "impliedEdits": {
+                            "cauto": false
+                        },
+                        "description": "Sets the lower bound of the color domain. Has an effect only if in `line.color`is set to a numerical array. Value should have the same units as in `line.color` and if set, `line.cmax` must be set as well."
+                    },
+                    "cmax": {
+                        "valType": "number",
+                        "role": "info",
+                        "dflt": null,
+                        "editType": "plot",
+                        "impliedEdits": {
+                            "cauto": false
+                        },
+                        "description": "Sets the upper bound of the color domain. Has an effect only if in `line.color`is set to a numerical array. Value should have the same units as in `line.color` and if set, `line.cmin` must be set as well."
+                    },
+                    "colorscale": {
+                        "valType": "colorscale",
+                        "role": "style",
+                        "editType": "calc",
+                        "dflt": null,
+                        "impliedEdits": {
+                            "autocolorscale": false
+                        },
+                        "description": "Sets the colorscale. Has an effect only if in `line.color`is set to a numerical array. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use`line.cmin` and `line.cmax`. Alternatively, `colorscale` may be a palette name string of the following list: Greys,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth,Electric,Viridis,Cividis."
+                    },
+                    "autocolorscale": {
+                        "valType": "boolean",
+                        "role": "style",
+                        "dflt": true,
+                        "editType": "calc",
+                        "impliedEdits": {},
+                        "description": "Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `line.colorscale`. Has an effect only if in `line.color`is set to a numerical array. In case `colorscale` is unspecified or `autocolorscale` is true, the default  palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed."
+                    },
+                    "reversescale": {
+                        "valType": "boolean",
+                        "role": "style",
+                        "dflt": false,
+                        "editType": "calc",
+                        "description": "Reverses the color mapping if true. Has an effect only if in `line.color`is set to a numerical array. If true, `line.cmin` will correspond to the last color in the array and `line.cmax` will correspond to the first color."
+                    },
+                    "showscale": {
+                        "valType": "boolean",
+                        "role": "info",
+                        "dflt": false,
+                        "editType": "calc",
+                        "description": "Determines whether or not a colorbar is displayed for this trace. Has an effect only if in `line.color`is set to a numerical array."
+                    },
+                    "colorbar": {
+                        "thicknessmode": {
+                            "valType": "enumerated",
+                            "values": [
+                                "fraction",
+                                "pixels"
+                            ],
+                            "role": "style",
+                            "dflt": "pixels",
+                            "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels*. Use `thickness` to set the value.",
+                            "editType": "colorbars"
+                        },
+                        "thickness": {
+                            "valType": "number",
+                            "role": "style",
+                            "min": 0,
+                            "dflt": 30,
+                            "description": "Sets the thickness of the color bar This measure excludes the size of the padding, ticks and labels.",
+                            "editType": "colorbars"
+                        },
+                        "lenmode": {
+                            "valType": "enumerated",
+                            "values": [
+                                "fraction",
+                                "pixels"
+                            ],
+                            "role": "info",
+                            "dflt": "fraction",
+                            "description": "Determines whether this color bar's length (i.e. the measure in the color variation direction) is set in units of plot *fraction* or in *pixels. Use `len` to set the value.",
+                            "editType": "colorbars"
+                        },
+                        "len": {
+                            "valType": "number",
+                            "min": 0,
+                            "dflt": 1,
+                            "role": "style",
+                            "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
+                            "editType": "colorbars"
+                        },
+                        "x": {
+                            "valType": "number",
+                            "dflt": 1.02,
+                            "min": -2,
+                            "max": 3,
+                            "role": "style",
+                            "description": "Sets the x position of the color bar (in plot fraction).",
+                            "editType": "colorbars"
+                        },
+                        "xanchor": {
+                            "valType": "enumerated",
+                            "values": [
+                                "left",
+                                "center",
+                                "right"
+                            ],
+                            "dflt": "left",
+                            "role": "style",
+                            "description": "Sets this color bar's horizontal position anchor. This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
+                            "editType": "colorbars"
+                        },
+                        "xpad": {
+                            "valType": "number",
+                            "role": "style",
+                            "min": 0,
+                            "dflt": 10,
+                            "description": "Sets the amount of padding (in px) along the x direction.",
+                            "editType": "colorbars"
+                        },
+                        "y": {
+                            "valType": "number",
+                            "role": "style",
+                            "dflt": 0.5,
+                            "min": -2,
+                            "max": 3,
+                            "description": "Sets the y position of the color bar (in plot fraction).",
+                            "editType": "colorbars"
+                        },
+                        "yanchor": {
+                            "valType": "enumerated",
+                            "values": [
+                                "top",
+                                "middle",
+                                "bottom"
+                            ],
+                            "role": "style",
+                            "dflt": "middle",
+                            "description": "Sets this color bar's vertical position anchor This anchor binds the `y` position to the *top*, *middle* or *bottom* of the color bar.",
+                            "editType": "colorbars"
+                        },
+                        "ypad": {
+                            "valType": "number",
+                            "role": "style",
+                            "min": 0,
+                            "dflt": 10,
+                            "description": "Sets the amount of padding (in px) along the y direction.",
+                            "editType": "colorbars"
+                        },
+                        "outlinecolor": {
+                            "valType": "color",
+                            "dflt": "#444",
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Sets the axis line color."
+                        },
+                        "outlinewidth": {
+                            "valType": "number",
+                            "min": 0,
+                            "dflt": 1,
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Sets the width (in px) of the axis line."
+                        },
+                        "bordercolor": {
+                            "valType": "color",
+                            "dflt": "#444",
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Sets the axis line color."
+                        },
+                        "borderwidth": {
+                            "valType": "number",
+                            "role": "style",
+                            "min": 0,
+                            "dflt": 0,
+                            "description": "Sets the width (in px) or the border enclosing this color bar.",
+                            "editType": "colorbars"
+                        },
+                        "bgcolor": {
+                            "valType": "color",
+                            "role": "style",
+                            "dflt": "rgba(0,0,0,0)",
+                            "description": "Sets the color of padded area.",
+                            "editType": "colorbars"
+                        },
+                        "tickmode": {
+                            "valType": "enumerated",
+                            "values": [
+                                "auto",
+                                "linear",
+                                "array"
+                            ],
+                            "role": "info",
+                            "editType": "colorbars",
+                            "impliedEdits": {},
+                            "description": "Sets the tick mode for this axis. If *auto*, the number of ticks is set via `nticks`. If *linear*, the placement of the ticks is determined by a starting position `tick0` and a tick step `dtick` (*linear* is the default value if `tick0` and `dtick` are provided). If *array*, the placement of the ticks is set via `tickvals` and the tick text is `ticktext`. (*array* is the default value if `tickvals` is provided)."
+                        },
+                        "nticks": {
+                            "valType": "integer",
+                            "min": 0,
+                            "dflt": 0,
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*."
+                        },
+                        "tick0": {
+                            "valType": "any",
+                            "role": "style",
+                            "editType": "colorbars",
+                            "impliedEdits": {
+                                "tickmode": "linear"
+                            },
+                            "description": "Sets the placement of the first tick on this axis. Use with `dtick`. If the axis `type` is *log*, then you must take the log of your starting tick (e.g. to set the starting tick to 100, set the `tick0` to 2) except when `dtick`=*L<f>* (see `dtick` for more info). If the axis `type` is *date*, it should be a date string, like date data. If the axis `type` is *category*, it should be a number, using the scale where each category is assigned a serial number from zero in the order it appears."
+                        },
+                        "dtick": {
+                            "valType": "any",
+                            "role": "style",
+                            "editType": "colorbars",
+                            "impliedEdits": {
+                                "tickmode": "linear"
+                            },
+                            "description": "Sets the step in-between ticks on this axis. Use with `tick0`. Must be a positive number, or special strings available to *log* and *date* axes. If the axis `type` is *log*, then ticks are set every 10^(n*dtick) where n is the tick number. For example, to set a tick mark at 1, 10, 100, 1000, ... set dtick to 1. To set tick marks at 1, 100, 10000, ... set dtick to 2. To set tick marks at 1, 5, 25, 125, 625, 3125, ... set dtick to log_10(5), or 0.69897000433. *log* has several special values; *L<f>*, where `f` is a positive number, gives ticks linearly spaced in value (but not position). For example `tick0` = 0.1, `dtick` = *L0.5* will put ticks at 0.1, 0.6, 1.1, 1.6 etc. To show powers of 10 plus small digits between, use *D1* (all digits) or *D2* (only 2 and 5). `tick0` is ignored for *D1* and *D2*. If the axis `type` is *date*, then you must convert the time to milliseconds. For example, to set the interval between ticks to one day, set `dtick` to 86400000.0. *date* also has special values *M<n>* gives ticks spaced by a number of months. `n` must be a positive integer. To set ticks on the 15th of every third month, set `tick0` to *2000-01-15* and `dtick` to *M3*. To set ticks every 4 years, set `dtick` to *M48*"
+                        },
+                        "tickvals": {
+                            "valType": "data_array",
+                            "editType": "colorbars",
+                            "description": "Sets the values at which ticks on this axis appear. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
+                            "role": "data"
+                        },
+                        "ticktext": {
+                            "valType": "data_array",
+                            "editType": "colorbars",
+                            "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `tickvals`.",
+                            "role": "data"
+                        },
+                        "ticks": {
+                            "valType": "enumerated",
+                            "values": [
+                                "outside",
+                                "inside",
+                                ""
+                            ],
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
+                            "dflt": ""
+                        },
+                        "ticklen": {
+                            "valType": "number",
+                            "min": 0,
+                            "dflt": 5,
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Sets the tick length (in px)."
+                        },
+                        "tickwidth": {
+                            "valType": "number",
+                            "min": 0,
+                            "dflt": 1,
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Sets the tick width (in px)."
+                        },
+                        "tickcolor": {
+                            "valType": "color",
+                            "dflt": "#444",
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Sets the tick color."
+                        },
+                        "showticklabels": {
+                            "valType": "boolean",
+                            "dflt": true,
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Determines whether or not the tick labels are drawn."
+                        },
+                        "tickfont": {
+                            "family": {
+                                "valType": "string",
+                                "role": "style",
+                                "noBlank": true,
+                                "strict": true,
+                                "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                                "editType": "colorbars"
+                            },
+                            "size": {
+                                "valType": "number",
+                                "role": "style",
+                                "min": 1,
+                                "editType": "colorbars"
+                            },
+                            "color": {
+                                "valType": "color",
+                                "role": "style",
+                                "editType": "colorbars"
+                            },
+                            "description": "Sets the color bar's tick label font",
+                            "editType": "colorbars",
+                            "role": "object"
+                        },
+                        "tickangle": {
+                            "valType": "angle",
+                            "dflt": "auto",
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Sets the angle of the tick labels with respect to the horizontal. For example, a `tickangle` of -90 draws the tick labels vertically."
+                        },
+                        "tickformat": {
+                            "valType": "string",
+                            "dflt": "",
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Sets the tick label formatting rule using d3 formatting mini-languages which are very similar to those in Python. For numbers, see: https://github.com/d3/d3-format/blob/master/README.md#locale_format And for dates see: https://github.com/d3/d3-time-format/blob/master/README.md#locale_format We add one item to d3's date formatter: *%{n}f* for fractional seconds with n digits. For example, *2016-10-13 09:15:23.456* with tickformat *%H~%M~%S.%2f* would display *09~15~23.46*"
+                        },
+                        "tickformatstops": {
+                            "items": {
+                                "tickformatstop": {
+                                    "enabled": {
+                                        "valType": "boolean",
+                                        "role": "info",
+                                        "dflt": true,
+                                        "editType": "colorbars",
+                                        "description": "Determines whether or not this stop is used. If `false`, this stop is ignored even within its `dtickrange`."
+                                    },
+                                    "dtickrange": {
+                                        "valType": "info_array",
+                                        "role": "info",
+                                        "items": [
+                                            {
+                                                "valType": "any",
+                                                "editType": "colorbars"
+                                            },
+                                            {
+                                                "valType": "any",
+                                                "editType": "colorbars"
+                                            }
+                                        ],
+                                        "editType": "colorbars",
+                                        "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*"
+                                    },
+                                    "value": {
+                                        "valType": "string",
+                                        "dflt": "",
+                                        "role": "style",
+                                        "editType": "colorbars",
+                                        "description": "string - dtickformat for described zoom level, the same as *tickformat*"
+                                    },
+                                    "editType": "colorbars",
+                                    "name": {
+                                        "valType": "string",
+                                        "role": "style",
+                                        "editType": "colorbars",
+                                        "description": "When used in a template, named items are created in the output figure in addition to any items the figure already has in this array. You can modify these items in the output figure by making your own item with `templateitemname` matching this `name` alongside your modifications (including `visible: false` or `enabled: false` to hide it). Has no effect outside of a template."
+                                    },
+                                    "templateitemname": {
+                                        "valType": "string",
+                                        "role": "info",
+                                        "editType": "colorbars",
+                                        "description": "Used to refer to a named item in this array in the template. Named items from the template will be created even without a matching item in the input figure, but you can modify one by making an item with `templateitemname` matching its `name`, alongside your modifications (including `visible: false` or `enabled: false` to hide it). If there is no template or no matching item, this item will be hidden unless you explicitly show it with `visible: true`."
+                                    },
+                                    "role": "object"
+                                }
+                            },
+                            "role": "object"
+                        },
+                        "tickprefix": {
+                            "valType": "string",
+                            "dflt": "",
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Sets a tick label prefix."
+                        },
+                        "showtickprefix": {
+                            "valType": "enumerated",
+                            "values": [
+                                "all",
+                                "first",
+                                "last",
+                                "none"
+                            ],
+                            "dflt": "all",
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "If *all*, all tick labels are displayed with a prefix. If *first*, only the first tick is displayed with a prefix. If *last*, only the last tick is displayed with a suffix. If *none*, tick prefixes are hidden."
+                        },
+                        "ticksuffix": {
+                            "valType": "string",
+                            "dflt": "",
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Sets a tick label suffix."
+                        },
+                        "showticksuffix": {
+                            "valType": "enumerated",
+                            "values": [
+                                "all",
+                                "first",
+                                "last",
+                                "none"
+                            ],
+                            "dflt": "all",
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Same as `showtickprefix` but for tick suffixes."
+                        },
+                        "separatethousands": {
+                            "valType": "boolean",
+                            "dflt": false,
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "If \"true\", even 4-digit integers are separated"
+                        },
+                        "exponentformat": {
+                            "valType": "enumerated",
+                            "values": [
+                                "none",
+                                "e",
+                                "E",
+                                "power",
+                                "SI",
+                                "B"
+                            ],
+                            "dflt": "B",
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
+                        },
+                        "showexponent": {
+                            "valType": "enumerated",
+                            "values": [
+                                "all",
+                                "first",
+                                "last",
+                                "none"
+                            ],
+                            "dflt": "all",
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear."
+                        },
+                        "title": {
+                            "valType": "string",
+                            "role": "info",
+                            "description": "Sets the title of the color bar.",
+                            "editType": "colorbars"
+                        },
+                        "titlefont": {
+                            "family": {
+                                "valType": "string",
+                                "role": "style",
+                                "noBlank": true,
+                                "strict": true,
+                                "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                                "editType": "colorbars"
+                            },
+                            "size": {
+                                "valType": "number",
+                                "role": "style",
+                                "min": 1,
+                                "editType": "colorbars"
+                            },
+                            "color": {
+                                "valType": "color",
+                                "role": "style",
+                                "editType": "colorbars"
+                            },
+                            "description": "Sets this color bar's title font.",
+                            "editType": "colorbars",
+                            "role": "object"
+                        },
+                        "titleside": {
+                            "valType": "enumerated",
+                            "values": [
+                                "right",
+                                "top",
+                                "bottom"
+                            ],
+                            "role": "style",
+                            "dflt": "top",
+                            "description": "Determines the location of the colorbar title with respect to the color bar.",
+                            "editType": "colorbars"
+                        },
+                        "editType": "colorbars",
+                        "role": "object",
+                        "tickvalssrc": {
+                            "valType": "string",
+                            "role": "info",
+                            "description": "Sets the source reference on plot.ly for  tickvals .",
+                            "editType": "none"
+                        },
+                        "ticktextsrc": {
+                            "valType": "string",
+                            "role": "info",
+                            "description": "Sets the source reference on plot.ly for  ticktext .",
+                            "editType": "none"
+                        }
+                    },
+                    "shape": {
+                        "valType": "enumerated",
+                        "values": [
+                            "linear",
+                            "hspline"
+                        ],
+                        "dflt": "linear",
+                        "role": "info",
+                        "editType": "plot",
+                        "description": "Sets the shape of the paths. If `linear`, paths are composed of straight lines. If `hspline`, paths are composed of horizontal curved splines"
+                    },
+                    "role": "object",
+                    "colorsrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on plot.ly for  color .",
+                        "editType": "none"
+                    }
+                },
+                "counts": {
+                    "valType": "number",
+                    "min": 0,
+                    "dflt": 1,
+                    "arrayOk": true,
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "The number of observations represented by each state. Defaults to 1 so that each state represents one observation"
+                },
+                "hoverinfosrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
+                    "editType": "none"
+                },
+                "countssrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  counts .",
+                    "editType": "none"
+                }
+            }
+        },
         "scattermapbox": {
             "meta": {
                 "hrName": "scatter_mapbox",
@@ -28568,10 +29489,10 @@
                     "valType": "flaglist",
                     "role": "info",
                     "flags": [
-                        "label",
+                        "x",
+                        "y",
+                        "z",
                         "text",
-                        "value",
-                        "percent",
                         "name"
                     ],
                     "extras": [
@@ -28579,10 +29500,10 @@
                         "none",
                         "skip"
                     ],
-                    "arrayOk": true,
+                    "arrayOk": false,
                     "dflt": "all",
                     "editType": "calc",
-                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired. Note that this attribute is superseded by `node.hoverinfo` and `node.hoverinfo` for nodes and links respectively."
                 },
                 "hoverlabel": {
                     "bgcolor": {
@@ -28900,6 +29821,107 @@
                         "description": "Sets the thickness (in px) of the `nodes`.",
                         "editType": "calc"
                     },
+                    "hoverinfo": {
+                        "valType": "enumerated",
+                        "values": [
+                            "all",
+                            "none",
+                            "skip"
+                        ],
+                        "dflt": "all",
+                        "role": "info",
+                        "description": "Determines which trace information appear when hovering nodes. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
+                        "editType": "calc"
+                    },
+                    "hoverlabel": {
+                        "bgcolor": {
+                            "valType": "color",
+                            "role": "style",
+                            "arrayOk": true,
+                            "editType": "calc",
+                            "description": "Sets the background color of the hover labels for this trace"
+                        },
+                        "bordercolor": {
+                            "valType": "color",
+                            "role": "style",
+                            "arrayOk": true,
+                            "editType": "calc",
+                            "description": "Sets the border color of the hover labels for this trace."
+                        },
+                        "font": {
+                            "family": {
+                                "valType": "string",
+                                "role": "style",
+                                "noBlank": true,
+                                "strict": true,
+                                "editType": "calc",
+                                "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                                "arrayOk": true
+                            },
+                            "size": {
+                                "valType": "number",
+                                "role": "style",
+                                "min": 1,
+                                "editType": "calc",
+                                "arrayOk": true
+                            },
+                            "color": {
+                                "valType": "color",
+                                "role": "style",
+                                "editType": "calc",
+                                "arrayOk": true
+                            },
+                            "editType": "calc",
+                            "description": "Sets the font used in hover labels.",
+                            "role": "object",
+                            "familysrc": {
+                                "valType": "string",
+                                "role": "info",
+                                "description": "Sets the source reference on plot.ly for  family .",
+                                "editType": "none"
+                            },
+                            "sizesrc": {
+                                "valType": "string",
+                                "role": "info",
+                                "description": "Sets the source reference on plot.ly for  size .",
+                                "editType": "none"
+                            },
+                            "colorsrc": {
+                                "valType": "string",
+                                "role": "info",
+                                "description": "Sets the source reference on plot.ly for  color .",
+                                "editType": "none"
+                            }
+                        },
+                        "namelength": {
+                            "valType": "integer",
+                            "min": -1,
+                            "arrayOk": true,
+                            "role": "style",
+                            "editType": "calc",
+                            "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis."
+                        },
+                        "editType": "calc",
+                        "role": "object",
+                        "bgcolorsrc": {
+                            "valType": "string",
+                            "role": "info",
+                            "description": "Sets the source reference on plot.ly for  bgcolor .",
+                            "editType": "none"
+                        },
+                        "bordercolorsrc": {
+                            "valType": "string",
+                            "role": "info",
+                            "description": "Sets the source reference on plot.ly for  bordercolor .",
+                            "editType": "none"
+                        },
+                        "namelengthsrc": {
+                            "valType": "string",
+                            "role": "info",
+                            "description": "Sets the source reference on plot.ly for  namelength .",
+                            "editType": "none"
+                        }
+                    },
                     "description": "The nodes of the Sankey plot.",
                     "editType": "calc",
                     "role": "object",
@@ -28985,6 +30007,107 @@
                         "description": "A numeric value representing the flow volume value.",
                         "editType": "calc"
                     },
+                    "hoverinfo": {
+                        "valType": "enumerated",
+                        "values": [
+                            "all",
+                            "none",
+                            "skip"
+                        ],
+                        "dflt": "all",
+                        "role": "info",
+                        "description": "Determines which trace information appear when hovering links. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired.",
+                        "editType": "calc"
+                    },
+                    "hoverlabel": {
+                        "bgcolor": {
+                            "valType": "color",
+                            "role": "style",
+                            "arrayOk": true,
+                            "editType": "calc",
+                            "description": "Sets the background color of the hover labels for this trace"
+                        },
+                        "bordercolor": {
+                            "valType": "color",
+                            "role": "style",
+                            "arrayOk": true,
+                            "editType": "calc",
+                            "description": "Sets the border color of the hover labels for this trace."
+                        },
+                        "font": {
+                            "family": {
+                                "valType": "string",
+                                "role": "style",
+                                "noBlank": true,
+                                "strict": true,
+                                "editType": "calc",
+                                "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                                "arrayOk": true
+                            },
+                            "size": {
+                                "valType": "number",
+                                "role": "style",
+                                "min": 1,
+                                "editType": "calc",
+                                "arrayOk": true
+                            },
+                            "color": {
+                                "valType": "color",
+                                "role": "style",
+                                "editType": "calc",
+                                "arrayOk": true
+                            },
+                            "editType": "calc",
+                            "description": "Sets the font used in hover labels.",
+                            "role": "object",
+                            "familysrc": {
+                                "valType": "string",
+                                "role": "info",
+                                "description": "Sets the source reference on plot.ly for  family .",
+                                "editType": "none"
+                            },
+                            "sizesrc": {
+                                "valType": "string",
+                                "role": "info",
+                                "description": "Sets the source reference on plot.ly for  size .",
+                                "editType": "none"
+                            },
+                            "colorsrc": {
+                                "valType": "string",
+                                "role": "info",
+                                "description": "Sets the source reference on plot.ly for  color .",
+                                "editType": "none"
+                            }
+                        },
+                        "namelength": {
+                            "valType": "integer",
+                            "min": -1,
+                            "arrayOk": true,
+                            "role": "style",
+                            "editType": "calc",
+                            "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis."
+                        },
+                        "editType": "calc",
+                        "role": "object",
+                        "bgcolorsrc": {
+                            "valType": "string",
+                            "role": "info",
+                            "description": "Sets the source reference on plot.ly for  bgcolor .",
+                            "editType": "none"
+                        },
+                        "bordercolorsrc": {
+                            "valType": "string",
+                            "role": "info",
+                            "description": "Sets the source reference on plot.ly for  bordercolor .",
+                            "editType": "none"
+                        },
+                        "namelengthsrc": {
+                            "valType": "string",
+                            "role": "info",
+                            "description": "Sets the source reference on plot.ly for  namelength .",
+                            "editType": "none"
+                        }
+                    },
                     "description": "The links of the Sankey plot.",
                     "editType": "calc",
                     "role": "object",
@@ -29029,12 +30152,6 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  customdata .",
-                    "editType": "none"
-                },
-                "hoverinfosrc": {
-                    "valType": "string",
-                    "role": "info",
-                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
                     "editType": "none"
                 }
             }
@@ -33922,6 +35039,13 @@
                         "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis."
                     },
                     "editType": "calc",
+                    "split": {
+                        "valType": "boolean",
+                        "role": "info",
+                        "dflt": false,
+                        "editType": "style",
+                        "description": "Show hover information (open, close, high, low) in separate labels."
+                    },
                     "role": "object",
                     "bgcolorsrc": {
                         "valType": "string",
@@ -34377,6 +35501,13 @@
                         "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis."
                     },
                     "editType": "calc",
+                    "split": {
+                        "valType": "boolean",
+                        "role": "info",
+                        "dflt": false,
+                        "editType": "style",
+                        "description": "Show hover information (open, close, high, low) in separate labels."
+                    },
                     "role": "object",
                     "bgcolorsrc": {
                         "valType": "string",
@@ -36572,6 +37703,20 @@
                         "role": "style",
                         "editType": "calc",
                         "description": "Sets the line width (in px)."
+                    },
+                    "shape": {
+                        "valType": "enumerated",
+                        "values": [
+                            "linear",
+                            "hv",
+                            "vh",
+                            "hvh",
+                            "vhv"
+                        ],
+                        "dflt": "linear",
+                        "role": "style",
+                        "editType": "calc",
+                        "description": "Determines the line shape. The values correspond to step-wise line shapes."
                     },
                     "dash": {
                         "valType": "enumerated",
@@ -39647,6 +40792,39 @@
                 "editType": "calc",
                 "description": "Default attributes to be applied to the plot. Templates can be created from existing plots using `Plotly.makeTemplate`, or created manually. They should be objects with format: `{layout: layoutTemplate, data: {[type]: [traceTemplate, ...]}, ...}` `layoutTemplate` and `traceTemplate` are objects matching the attribute structure of `layout` and a data trace.  Trace templates are applied cyclically to traces of each type. Container arrays (eg `annotations`) have special handling: An object ending in `defaults` (eg `annotationdefaults`) is applied to each array item. But if an item has a `templateitemname` key we look in the template array for an item with matching `name` and apply that instead. If no matching `name` is found we mark the item invisible. Any named template item not referenced is appended to the end of the array, so you can use this for a watermark annotation or a logo image, for example. To omit one of these items on the plot, make an item with matching `templateitemname` and `visible: false`."
             },
+            "modebar": {
+                "orientation": {
+                    "valType": "enumerated",
+                    "values": [
+                        "v",
+                        "h"
+                    ],
+                    "dflt": "h",
+                    "role": "info",
+                    "editType": "modebar",
+                    "description": "Sets the orientation of the modebar."
+                },
+                "bgcolor": {
+                    "valType": "color",
+                    "role": "style",
+                    "editType": "modebar",
+                    "description": "Sets the background color of the modebar."
+                },
+                "color": {
+                    "valType": "color",
+                    "role": "style",
+                    "editType": "modebar",
+                    "description": "Sets the color of the icons in the modebar."
+                },
+                "activecolor": {
+                    "valType": "color",
+                    "role": "style",
+                    "editType": "modebar",
+                    "description": "Sets the color of the active or hovered on icons in the modebar."
+                },
+                "editType": "modebar",
+                "role": "object"
+            },
             "clickmode": {
                 "valType": "flaglist",
                 "role": "info",
@@ -40568,7 +41746,7 @@
                     ],
                     "role": "info",
                     "editType": "plot",
-                    "description": "If set a same-letter axis id, this axis is overlaid on top of the corresponding same-letter axis. If *false*, this axis does not overlay any same-letter axes."
+                    "description": "If set a same-letter axis id, this axis is overlaid on top of the corresponding same-letter axis, with traces and axes visible for both axes. If *false*, this axis does not overlay any same-letter axes. In this case, for axes with overlapping domains only the highest-numbered axis will be visible."
                 },
                 "layer": {
                     "valType": "enumerated",
@@ -41566,7 +42744,7 @@
                     ],
                     "role": "info",
                     "editType": "plot",
-                    "description": "If set a same-letter axis id, this axis is overlaid on top of the corresponding same-letter axis. If *false*, this axis does not overlay any same-letter axes."
+                    "description": "If set a same-letter axis id, this axis is overlaid on top of the corresponding same-letter axis, with traces and axes visible for both axes. If *false*, this axis does not overlay any same-letter axes. In this case, for axes with overlapping domains only the highest-numbered axis will be visible."
                 },
                 "layer": {
                     "valType": "enumerated",
@@ -46111,7 +47289,7 @@
                         ],
                         "dflt": true,
                         "role": "info",
-                        "editType": "axrange",
+                        "editType": "plot",
                         "impliedEdits": {},
                         "description": "Determines whether or not the range of this axis is computed in relation to the input data. See `rangemode` for more info. If `range` is provided, then `autorange` is set to *false*."
                     },
@@ -46133,20 +47311,20 @@
                         "items": [
                             {
                                 "valType": "any",
-                                "editType": "axrange",
+                                "editType": "plot",
                                 "impliedEdits": {
                                     "^autorange": false
                                 }
                             },
                             {
                                 "valType": "any",
-                                "editType": "axrange",
+                                "editType": "plot",
                                 "impliedEdits": {
                                     "^autorange": false
                                 }
                             }
                         ],
-                        "editType": "axrange",
+                        "editType": "plot",
                         "impliedEdits": {
                             "autorange": false
                         },

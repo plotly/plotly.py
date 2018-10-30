@@ -15,17 +15,17 @@ class Histogram2dContourValidator(
             data_docs=kwargs.pop(
                 'data_docs', """
             autobinx
-                Determines whether or not the x axis bin
-                attributes are picked by an algorithm. Note
-                that this should be set to false if you want to
-                manually set the number of bins using the
-                attributes in xbins.
+                Obsolete: since v1.42 each bin attribute is
+                auto-determined separately and `autobinx` is
+                not needed. However, we accept `autobinx: true`
+                or `false` and will update `xbins` accordingly
+                before deleting `autobinx` from the trace.
             autobiny
-                Determines whether or not the y axis bin
-                attributes are picked by an algorithm. Note
-                that this should be set to false if you want to
-                manually set the number of bins using the
-                attributes in ybins.
+                Obsolete: since v1.42 each bin attribute is
+                auto-determined separately and `autobiny` is
+                not needed. However, we accept `autobiny: true`
+                or `false` and will update `ybins` accordingly
+                before deleting `autobiny` from the trace.
             autocolorscale
                 Determines whether the colorscale is a default
                 palette (`autocolorscale: true`) or the palette
@@ -133,13 +133,13 @@ class Histogram2dContourValidator(
                 This value will be used in an algorithm that
                 will decide the optimal bin size such that the
                 histogram best visualizes the distribution of
-                the data.
+                the data. Ignored if `xbins.size` is provided.
             nbinsy
                 Specifies the maximum number of desired bins.
                 This value will be used in an algorithm that
                 will decide the optimal bin size such that the
                 histogram best visualizes the distribution of
-                the data.
+                the data. Ignored if `ybins.size` is provided.
             ncontours
                 Sets the maximum number of contour levels. The
                 actual number of contours will be chosen

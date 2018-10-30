@@ -1,3 +1,4 @@
+from ._titlefont import Titlefont
 from ._textfont import Textfont
 from ._stream import Stream
 from ._outsidetextfont import Outsidetextfont
