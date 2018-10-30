@@ -24,7 +24,7 @@ test('should inject raw plotly.js code into DOM', function(t) {
     nodes = Array.prototype.slice.call(nodes, 0, 10);
 
     var results = nodes.filter(function(node) {
-        return node.innerHTML.substr(0, 19) === 'if(!window._Plotly){';
+        return node.innerHTML.substr(0, 20) === 'if(!window._Plotly){';
     });
 
     t.equal(results.length, 1);
