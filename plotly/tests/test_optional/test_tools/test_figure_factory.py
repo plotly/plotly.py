@@ -756,6 +756,7 @@ class TestAnnotatedHeatmap(TestCase, NumpyTestUtilsMixin):
         expected_a_heat = {
             'data': [{'colorscale': 'RdBu',
                       'showscale': False,
+                      'reversescale': False,
                       'type': 'heatmap',
                       'z': [[1, 0, 0.5], [0.25, 0.75, 0.45]]}],
             'layout': {'annotations': [{'font': {'color': '#000000'},
@@ -831,6 +832,7 @@ class TestAnnotatedHeatmap(TestCase, NumpyTestUtilsMixin):
         expected_a = {'data': [{'colorscale':
                                     [[0, 'rgb(255,255,255)'], [1, '#e6005a']],
                                 'showscale': False,
+                                'reversescale': False,
                                 'type': 'heatmap',
                                 'x': ['A', 'B'],
                                 'y': ['One', 'Two', 'Three'],
