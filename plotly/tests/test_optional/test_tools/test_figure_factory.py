@@ -756,6 +756,7 @@ class TestAnnotatedHeatmap(TestCase, NumpyTestUtilsMixin):
         expected_a_heat = {
             'data': [{'colorscale': 'RdBu',
                       'showscale': False,
+                      'reversescale': False,
                       'type': 'heatmap',
                       'z': [[1, 0, 0.5], [0.25, 0.75, 0.45]]}],
             'layout': {'annotations': [{'font': {'color': '#000000'},
@@ -831,6 +832,7 @@ class TestAnnotatedHeatmap(TestCase, NumpyTestUtilsMixin):
         expected_a = {'data': [{'colorscale':
                                     [[0, 'rgb(255,255,255)'], [1, '#e6005a']],
                                 'showscale': False,
+                                'reversescale': False,
                                 'type': 'heatmap',
                                 'x': ['A', 'B'],
                                 'y': ['One', 'Two', 'Three'],
@@ -883,6 +885,85 @@ class TestAnnotatedHeatmap(TestCase, NumpyTestUtilsMixin):
                                            'ticks': ''},
                                  'yaxis': {'dtick': 1, 'ticks': '',
                                            'ticksuffix': '  '}}}
+        self.assert_fig_equal(
+            a['data'][0],
+            expected_a['data'][0],
+        )
+
+        self.assert_fig_equal(a['layout'],
+                              expected_a['layout'])
+
+    def test_annotated_heatmap_reversescale(self):
+
+        # we should be able to create an annotated heatmap with x and y axes
+        # lables, a defined colorscale, and supplied text.
+
+        z = [[1, 0], [.25, .75], [.45, .5]]
+        text = [['first', 'second'], ['third', 'fourth'], ['fifth', 'sixth']]
+        a = ff.create_annotated_heatmap(z,
+                                        x=['A', 'B'],
+                                        y=['One', 'Two', 'Three'],
+                                        annotation_text=text,
+                                        reversescale=True,
+                                        colorscale=[[0, 'rgb(255,255,255)'],
+                                                    [1, '#e6005a']])
+        expected_a = {'data': [{'colorscale':
+                                    [[0, 'rgb(255,255,255)'], [1, '#e6005a']],
+                                'showscale': False,
+                                'reversescale': True,
+                                'type': 'heatmap',
+                                'x': ['A', 'B'],
+                                'y': ['One', 'Two', 'Three'],
+                                'z': [[1, 0], [0.25, 0.75], [0.45, 0.5]]}],
+                      'layout': {'annotations': [
+                          {'font': {'color': '#000000'},
+                           'showarrow': False,
+                           'text': 'first',
+                           'x': 'A',
+                           'xref': 'x',
+                           'y': 'One',
+                           'yref': 'y'},
+                          {'font': {'color': '#FFFFFF'},
+                           'showarrow': False,
+                           'text': 'second',
+                           'x': 'B',
+                           'xref': 'x',
+                           'y': 'One',
+                           'yref': 'y'},
+                          {'font': {'color': '#FFFFFF'},
+                           'showarrow': False,
+                           'text': 'third',
+                           'x': 'A',
+                           'xref': 'x',
+                           'y': 'Two',
+                           'yref': 'y'},
+                          {'font': {'color': '#000000'},
+                           'showarrow': False,
+                           'text': 'fourth',
+                           'x': 'B',
+                           'xref': 'x',
+                           'y': 'Two',
+                           'yref': 'y'},
+                          {'font': {'color': '#FFFFFF'},
+                           'showarrow': False,
+                           'text': 'fifth',
+                           'x': 'A',
+                           'xref': 'x',
+                           'y': 'Three',
+                           'yref': 'y'},
+                          {'font': {'color': '#FFFFFF'},
+                           'showarrow': False,
+                           'text': 'sixth',
+                           'x': 'B',
+                           'xref': 'x',
+                           'y': 'Three',
+                           'yref': 'y'}],
+                          'xaxis': {'dtick': 1,
+                                    'gridcolor': 'rgb(0, 0, 0)',
+                                    'side': 'top',
+                                    'ticks': ''},
+                          'yaxis': {'dtick': 1, 'ticks': '',
+                                    'ticksuffix': '  '}}}
         self.assert_fig_equal(
             a['data'][0],
             expected_a['data'][0],

@@ -64,6 +64,7 @@ def create_annotated_heatmap(z, x=None, y=None, annotation_text=None,
         defined, the colors are defined logically as black or white
         depending on the heatmap's colorscale.
     :param (bool) showscale: Display colorscale. Default = False
+    :param (bool) reversescale: Reverse colorscale. Default = False
     :param kwargs: kwargs passed through plotly.graph_objs.Heatmap.
         These kwargs describe other attributes about the annotated Heatmap
         trace such as the colorscale. For more information on valid kwargs
@@ -98,14 +99,14 @@ def create_annotated_heatmap(z, x=None, y=None, annotation_text=None,
 
     if x or y:
         trace = dict(type='heatmap', z=z, x=x, y=y, colorscale=colorscale,
-                     showscale=showscale, **kwargs)
+                     showscale=showscale, reversescale=reversescale, **kwargs)
         layout = dict(annotations=annotations,
                       xaxis=dict(ticks='', dtick=1, side='top',
                                  gridcolor='rgb(0, 0, 0)'),
                       yaxis=dict(ticks='', dtick=1, ticksuffix='  '))
     else:
         trace = dict(type='heatmap', z=z, colorscale=colorscale,
-                     showscale=showscale, **kwargs)
+                     showscale=showscale, reversescale=reversescale, **kwargs)
         layout = dict(annotations=annotations,
                       xaxis=dict(ticks='', side='top',
                                  gridcolor='rgb(0, 0, 0)',
@@ -125,6 +126,12 @@ def to_rgb_color_list(color_str, default):
         return utils.hex_to_rgb(color_str)
     else:
         return default
+
+
+def should_use_black_text(background_color):
+    return (background_color[0] * 0.299 +
+            background_color[1] * 0.587 +
+            background_color[2] * 0.114) > 186
 
 
 class _AnnotatedHeatmap(object):
@@ -173,21 +180,24 @@ class _AnnotatedHeatmap(object):
                        'Earth', 'Electric', 'Viridis', 'Cividis']
         # Plotly colorscales ranging from a darker shade to a lighter shade
         colorscales_reverse = ['Reds']
+
+        white = '#FFFFFF'
+        black = '#000000'
         if self.font_colors:
             min_text_color = self.font_colors[0]
             max_text_color = self.font_colors[-1]
         elif self.colorscale in colorscales and self.reversescale:
-            min_text_color = '#000000'
-            max_text_color = '#FFFFFF'
+            min_text_color = black
+            max_text_color = white
         elif self.colorscale in colorscales:
-            min_text_color = '#FFFFFF'
-            max_text_color = '#000000'
+            min_text_color = white
+            max_text_color = black
         elif self.colorscale in colorscales_reverse and self.reversescale:
-            min_text_color = '#FFFFFF'
-            max_text_color = '#000000'
+            min_text_color = white
+            max_text_color = black
         elif self.colorscale in colorscales_reverse:
-            min_text_color = '#000000'
-            max_text_color = '#FFFFFF'
+            min_text_color = black
+            max_text_color = white
         elif isinstance(self.colorscale, list):
 
             min_col = to_rgb_color_list(self.colorscale[0][1],
@@ -195,17 +205,22 @@ class _AnnotatedHeatmap(object):
             max_col = to_rgb_color_list(self.colorscale[-1][1],
                                         [255, 255, 255])
 
-            if (min_col[0]*0.299 + min_col[1]*0.587 + min_col[2]*0.114) > 186:
-                min_text_color = '#000000'
+            # swap min/max colors if reverse scale
+            if self.reversescale:
+                min_col, max_col = max_col, min_col
+
+            if should_use_black_text(min_col):
+                min_text_color = black
             else:
-                min_text_color = '#FFFFFF'
-            if (max_col[0]*0.299 + max_col[1]*0.587 + max_col[2]*0.114) > 186:
-                max_text_color = '#000000'
+                min_text_color = white
+
+            if should_use_black_text(max_col):
+                max_text_color = black
             else:
-                max_text_color = '#FFFFFF'
+                max_text_color = white
         else:
-            min_text_color = '#000000'
-            max_text_color = '#000000'
+            min_text_color = black
+            max_text_color = black
         return min_text_color, max_text_color
 
     def get_z_mid(self):
