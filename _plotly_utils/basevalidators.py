@@ -938,7 +938,10 @@ class StringValidator(BaseValidator):
 
             elif is_simple_array(v):
                 if not self.strict:
-                    v = [str(e) for e in v]
+                    # Convert all elements other than None to strings
+                    # Leave None as is, Plotly.js will decide how to handle
+                    # these null values.
+                    v = [str(e) if e is not None else None for e in v]
 
                 # Check no_blank
                 if self.no_blank:
