@@ -13,6 +13,7 @@ import warnings
 
 import six
 import copy
+import re
 
 from plotly import exceptions, optional_imports, session, utils
 from plotly.files import (CONFIG_FILE, CREDENTIALS_FILE, FILE_CONTENT,
@@ -1001,7 +1002,6 @@ def make_subplots(rows=1, cols=1,
             ) for c in col_seq
         ] for r in row_seq
     ]
-
     # [grid_ref] Initialize the grid and insets' axis-reference lists
     grid_ref = [[None for c in range(cols)] for r in range(rows)]
     insets_ref = [None for inset in range(len(insets))] if insets else None
@@ -1323,20 +1323,49 @@ def make_subplots(rows=1, cols=1,
             subtitle_pos_x.append(sum(x_domains) / 2)
         for y_domains in y_dom:
             subtitle_pos_y.append(y_domains[1])
+
     # If shared_axes is True the domin of each subplot is not returned so the
     # title position must be calculated for each subplot
     else:
-        subtitle_pos_x = [None] * cols
-        subtitle_pos_y = [None] * rows
-        delt_x = (x_e - x_s)
+        x_dom_vals = [k for k in layout.to_plotly_json().keys() if 'xaxis' in k]
+        y_dom_vals = [k for k in layout.to_plotly_json().keys() if 'yaxis' in k]
+
+        # sort xaxis and yaxis layout keys
+        r = re.compile('\d+')
+
+        def key_func(m):
+            try:
+                return int(r.search(m).group(0))
+            except AttributeError:
+                return 0
+
+        xaxies_labels_sorted = sorted(x_dom_vals, key=key_func)
+        yaxies_labels_sorted = sorted(y_dom_vals, key=key_func)
+
+        x_dom = [layout[k]['domain'] for k in xaxies_labels_sorted]
+        y_dom = [layout[k]['domain'] for k in yaxies_labels_sorted]
+
         for index in range(cols):
-            subtitle_pos_x[index] = ((delt_x / 2) +
-                                     ((delt_x + horizontal_spacing) * index))
-        subtitle_pos_x *= rows
-        for index in range(rows):
-            subtitle_pos_y[index] = (1 - ((y_e + vertical_spacing) * index))
-        subtitle_pos_y *= cols
-        subtitle_pos_y = sorted(subtitle_pos_y, reverse=True)
+            subtitle_pos_x = []
+            for x_domains in x_dom:
+                subtitle_pos_x.append(sum(x_domains) / 2)
+            subtitle_pos_x *= rows
+
+        if shared_yaxes:
+            for index in range(rows):
+                subtitle_pos_y = []
+                for y_domain in y_dom:
+                    subtitle_pos_y.append(y_domain[1])
+                subtitle_pos_y *= cols
+            subtitle_pos_y = sorted(subtitle_pos_y, reverse=True)
+
+        else:
+            for index in range(rows):
+                subtitle_pos_y = []
+                for y_domain in y_dom:
+                    subtitle_pos_y.append(y_domain[1])
+            subtitle_pos_y = sorted(subtitle_pos_y, reverse=True)
+            subtitle_pos_y *= cols
 
     plot_titles = []
     for index in range(len(subplot_titles)):
