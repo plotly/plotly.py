@@ -27,8 +27,12 @@ def validator_strict():
 
 @pytest.fixture
 def validator_aok():
-    return StringValidator('prop', 'parent', array_ok=True, strict=True)
+    return StringValidator('prop', 'parent', array_ok=True, strict=False)
 
+
+@pytest.fixture
+def validator_aok_strict():
+    return StringValidator('prop', 'parent', array_ok=True, strict=True)
 
 @pytest.fixture
 def validator_aok_values():
@@ -127,7 +131,8 @@ def test_acceptance_aok_scalars(val, validator_aok):
                          ['foo',
                           ['foo'],
                           np.array(['BAR', ''], dtype='object'),
-                          ['baz', 'baz', 'baz']])
+                          ['baz', 'baz', 'baz'],
+                          ['foo', None, 'bar']])
 def test_acceptance_aok_list(val, validator_aok):
     coerce_val = validator_aok.validate_coerce(val)
     if isinstance(val, np.ndarray):
@@ -143,16 +148,19 @@ def test_acceptance_aok_list(val, validator_aok):
 # ### Rejection by type ###
 @pytest.mark.parametrize('val',
                          [['foo', ()], ['foo', 3, 4], [3, 2, 1]])
-def test_rejection_aok(val, validator_aok):
+def test_rejection_aok(val, validator_aok_strict):
     with pytest.raises(ValueError) as validation_failure:
-        validator_aok.validate_coerce(val)
+        validator_aok_strict.validate_coerce(val)
 
     assert 'Invalid element(s)' in str(validation_failure.value)
 
 
 # ### Rejection by value ###
 @pytest.mark.parametrize('val',
-                         [['foo', 'bar'], ['3', '4'], ['BAR', 'BAR', 'hello!']])
+                         [['foo', 'bar'],
+                          ['3', '4'],
+                          ['BAR', 'BAR', 'hello!'],
+                          ['foo', None]])
 def test_rejection_aok_values(val, validator_aok_values):
     with pytest.raises(ValueError) as validation_failure:
         validator_aok_values.validate_coerce(val)
