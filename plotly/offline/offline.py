@@ -108,6 +108,11 @@ def _build_resize_script(plotdivid):
     return resize_script
 
 
+def _build_mathjax_script(url):
+    return ('<script src="{url}?config=TeX-AMS-MML_SVG"></script>'
+            .format(url=url))
+
+
 # Build script to set global PlotlyConfig object. This must execute before
 # plotly.js is loaded.
 _window_plotly_config = """\
@@ -648,14 +653,13 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         include_mathjax = include_mathjax.lower()
 
     if include_mathjax == 'cdn':
-        mathjax_script = (
-            '<script src="{url}?config=TeX-AMS-MML_SVG"></script>'.format(
-                url=('https://cdnjs.cloudflare.com'
-                     '/ajax/libs/mathjax/2.7.5/MathJax.js')))
+        mathjax_script = _build_mathjax_script(
+            url=('https://cdnjs.cloudflare.com' 
+                 '/ajax/libs/mathjax/2.7.5/MathJax.js')) + _mathjax_config
     elif (isinstance(include_mathjax, six.string_types) and
           include_mathjax.endswith('.js')):
-        mathjax_script = '<script src="{url}"></script>'.format(
-            url=include_mathjax_orig)
+        mathjax_script = _build_mathjax_script(
+            url=include_mathjax_orig) + _mathjax_config
     elif not include_mathjax:
         mathjax_script = ''
     else:
@@ -664,7 +668,7 @@ Invalid value of type {typ} received as the include_mathjax argument
     Received value: {val}
 
 include_mathjax may be specified as False, 'cdn', or a string ending with '.js' 
-""".format(typ=type(include_mathjax), val=include_mathjax))
+""".format(typ=type(include_mathjax), val=repr(include_mathjax)))
 
     if output_type == 'file':
         with open(filename, 'w') as f:

@@ -44,8 +44,12 @@ directory_script = '<script src="plotly.min.js"></script>'
 mathjax_cdn = ('https://cdnjs.cloudflare.com'
                '/ajax/libs/mathjax/2.7.5/MathJax.js')
 
-mathjax_cdn_script = ('<script src="%s?config=TeX-AMS-MML_SVG"></script>' %
-                      mathjax_cdn)
+mathjax_config_str = '?config=TeX-AMS-MML_SVG'
+
+mathjax_cdn_script = ('<script src="{cdn}{config}"></script>'
+                      .format(cdn=mathjax_cdn, config=mathjax_config_str))
+
+mathjax_font = 'STIX-Web'
 
 
 class PlotlyOfflineBaseTestCase(TestCase):
@@ -313,6 +317,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
         self.assertIn(plotly_config_script, html)
         self.assertIn(PLOTLYJS, html)
         self.assertNotIn(mathjax_cdn_script, html)
+        self.assertNotIn(mathjax_font, html)
 
     def test_include_mathjax_false_div(self):
         html = plotly.offline.plot(
@@ -323,6 +328,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
         self.assertIn(plotly_config_script, html)
         self.assertIn(PLOTLYJS, html)
         self.assertNotIn(mathjax_cdn_script, html)
+        self.assertNotIn(mathjax_font, html)
 
     def test_include_mathjax_cdn_html(self):
         html = self._read_html(plotly.offline.plot(
@@ -334,6 +340,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
         self.assertIn(plotly_config_script, html)
         self.assertIn(PLOTLYJS, html)
         self.assertIn(mathjax_cdn_script, html)
+        self.assertIn(mathjax_font, html)
 
     def test_include_mathjax_cdn_div(self):
         html = plotly.offline.plot(
@@ -344,6 +351,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
         self.assertIn(plotly_config_script, html)
         self.assertIn(PLOTLYJS, html)
         self.assertIn(mathjax_cdn_script, html)
+        self.assertIn(mathjax_font, html)
 
     def test_include_mathjax_path_html(self):
         other_cdn = 'http://another/cdn/MathJax.js'
@@ -356,7 +364,8 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
         self.assertIn(plotly_config_script, html)
         self.assertIn(PLOTLYJS, html)
         self.assertNotIn(mathjax_cdn_script, html)
-        self.assertIn(other_cdn, html)
+        self.assertIn(other_cdn+mathjax_config_str, html)
+        self.assertIn(mathjax_font, html)
 
     def test_include_mathjax_path_div(self):
         other_cdn = 'http://another/cdn/MathJax.js'
@@ -368,4 +377,5 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
         self.assertIn(plotly_config_script, html)
         self.assertIn(PLOTLYJS, html)
         self.assertNotIn(mathjax_cdn_script, html)
-        self.assertIn(other_cdn, html)
+        self.assertIn(other_cdn+mathjax_config_str, html)
+        self.assertIn(mathjax_font, html)
