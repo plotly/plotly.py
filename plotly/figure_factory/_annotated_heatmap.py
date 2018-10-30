@@ -128,6 +128,12 @@ def to_rgb_color_list(color_str, default):
         return default
 
 
+def should_use_black_text(background_color):
+    return (background_color[0] * 0.299 +
+            background_color[1] * 0.587 +
+            background_color[2] * 0.114) > 186
+
+
 class _AnnotatedHeatmap(object):
     """
     Refer to TraceFactory.create_annotated_heatmap() for docstring
@@ -174,21 +180,24 @@ class _AnnotatedHeatmap(object):
                        'Earth', 'Electric', 'Viridis', 'Cividis']
         # Plotly colorscales ranging from a darker shade to a lighter shade
         colorscales_reverse = ['Reds']
+
+        white = '#FFFFFF'
+        black = '#000000'
         if self.font_colors:
             min_text_color = self.font_colors[0]
             max_text_color = self.font_colors[-1]
         elif self.colorscale in colorscales and self.reversescale:
-            min_text_color = '#000000'
-            max_text_color = '#FFFFFF'
+            min_text_color = black
+            max_text_color = white
         elif self.colorscale in colorscales:
-            min_text_color = '#FFFFFF'
-            max_text_color = '#000000'
+            min_text_color = white
+            max_text_color = black
         elif self.colorscale in colorscales_reverse and self.reversescale:
-            min_text_color = '#FFFFFF'
-            max_text_color = '#000000'
+            min_text_color = white
+            max_text_color = black
         elif self.colorscale in colorscales_reverse:
-            min_text_color = '#000000'
-            max_text_color = '#FFFFFF'
+            min_text_color = black
+            max_text_color = white
         elif isinstance(self.colorscale, list):
 
             min_col = to_rgb_color_list(self.colorscale[0][1],
@@ -196,17 +205,18 @@ class _AnnotatedHeatmap(object):
             max_col = to_rgb_color_list(self.colorscale[-1][1],
                                         [255, 255, 255])
 
-            if (min_col[0]*0.299 + min_col[1]*0.587 + min_col[2]*0.114) > 186:
-                min_text_color = '#000000'
+            if should_use_black_text(min_col):
+                min_text_color = black
             else:
-                min_text_color = '#FFFFFF'
-            if (max_col[0]*0.299 + max_col[1]*0.587 + max_col[2]*0.114) > 186:
-                max_text_color = '#000000'
+                min_text_color = white
+
+            if should_use_black_text(max_col):
+                max_text_color = black
             else:
-                max_text_color = '#FFFFFF'
+                max_text_color = white
         else:
-            min_text_color = '#000000'
-            max_text_color = '#000000'
+            min_text_color = black
+            max_text_color = black
         return min_text_color, max_text_color
 
     def get_z_mid(self):
