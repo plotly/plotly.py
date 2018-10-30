@@ -64,6 +64,7 @@ def create_annotated_heatmap(z, x=None, y=None, annotation_text=None,
         defined, the colors are defined logically as black or white
         depending on the heatmap's colorscale.
     :param (bool) showscale: Display colorscale. Default = False
+    :param (bool) reversescale: Reverse colorscale. Default = False
     :param kwargs: kwargs passed through plotly.graph_objs.Heatmap.
         These kwargs describe other attributes about the annotated Heatmap
         trace such as the colorscale. For more information on valid kwargs
@@ -98,14 +99,14 @@ def create_annotated_heatmap(z, x=None, y=None, annotation_text=None,
 
     if x or y:
         trace = dict(type='heatmap', z=z, x=x, y=y, colorscale=colorscale,
-                     showscale=showscale, **kwargs)
+                     showscale=showscale, reversescale=reversescale, **kwargs)
         layout = dict(annotations=annotations,
                       xaxis=dict(ticks='', dtick=1, side='top',
                                  gridcolor='rgb(0, 0, 0)'),
                       yaxis=dict(ticks='', dtick=1, ticksuffix='  '))
     else:
         trace = dict(type='heatmap', z=z, colorscale=colorscale,
-                     showscale=showscale, **kwargs)
+                     showscale=showscale, reversescale=reversescale, **kwargs)
         layout = dict(annotations=annotations,
                       xaxis=dict(ticks='', side='top',
                                  gridcolor='rgb(0, 0, 0)',
