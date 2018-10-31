@@ -3761,12 +3761,6 @@
                     "editType": "style",
                     "description": "Sets the opacity of the trace."
                 },
-                "name": {
-                    "valType": "string",
-                    "role": "info",
-                    "editType": "calc+clearAxisTypes",
-                    "description": "Sets the trace name. The trace name appear as the legend item and on hover. For box traces, the name will also be used for the position coordinate, if `x` and `x0` (`y` and `y0` if horizontal) are missing and the position axis is categorical"
-                },
                 "uid": {
                     "valType": "string",
                     "role": "info",
@@ -3953,6 +3947,12 @@
                     "role": "info",
                     "editType": "calc+clearAxisTypes",
                     "description": "Sets the y coordinate of the box. See overview for more info."
+                },
+                "name": {
+                    "valType": "string",
+                    "role": "info",
+                    "editType": "calc+clearAxisTypes",
+                    "description": "Sets the trace name. The trace name appear as the legend item and on hover. For box traces, the name will also be used for the position coordinate, if `x` and `x0` (`y` and `y0` if horizontal) are missing and the position axis is categorical"
                 },
                 "text": {
                     "valType": "string",
@@ -4827,16 +4827,6 @@
                         "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot."
                     },
                     "editType": "calc",
-                    "role": "object"
-                },
-                "transforms": {
-                    "items": {
-                        "transform": {
-                            "editType": "calc",
-                            "description": "An array of operations that manipulate the trace data, for example filtering or sorting the data arrays.",
-                            "role": "object"
-                        }
-                    },
                     "role": "object"
                 },
                 "z": {
@@ -9265,26 +9255,6 @@
                     "editType": "calc",
                     "description": "Array containing integer indices of selected points. Has an effect only for traces that support selections. Note that an empty array means an empty selection where the `unselected` are turned on for all points, whereas, any other non-array values means no selection all where the `selected` and `unselected` styles have no effect."
                 },
-                "hoverinfo": {
-                    "valType": "flaglist",
-                    "role": "info",
-                    "flags": [
-                        "label",
-                        "text",
-                        "value",
-                        "percent",
-                        "name"
-                    ],
-                    "extras": [
-                        "all",
-                        "none",
-                        "skip"
-                    ],
-                    "arrayOk": true,
-                    "dflt": "all",
-                    "editType": "none",
-                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
-                },
                 "hoverlabel": {
                     "bgcolor": {
                         "valType": "color",
@@ -9515,6 +9485,26 @@
                     ],
                     "editType": "calc",
                     "description": "Determines which trace information appear on the graph."
+                },
+                "hoverinfo": {
+                    "valType": "flaglist",
+                    "role": "info",
+                    "flags": [
+                        "label",
+                        "text",
+                        "value",
+                        "percent",
+                        "name"
+                    ],
+                    "extras": [
+                        "all",
+                        "none",
+                        "skip"
+                    ],
+                    "arrayOk": true,
+                    "dflt": "all",
+                    "editType": "none",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
                 },
                 "textposition": {
                     "valType": "enumerated",
@@ -9858,12 +9848,6 @@
                     "description": "Sets the source reference on plot.ly for  customdata .",
                     "editType": "none"
                 },
-                "hoverinfosrc": {
-                    "valType": "string",
-                    "role": "info",
-                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
-                    "editType": "none"
-                },
                 "labelssrc": {
                     "valType": "string",
                     "role": "info",
@@ -9886,6 +9870,12 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  hovertext .",
+                    "editType": "none"
+                },
+                "hoverinfosrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
                     "editType": "none"
                 },
                 "textpositionsrc": {
@@ -11135,26 +11125,6 @@
                     "role": "info",
                     "editType": "calc",
                     "description": "Array containing integer indices of selected points. Has an effect only for traces that support selections. Note that an empty array means an empty selection where the `unselected` are turned on for all points, whereas, any other non-array values means no selection all where the `selected` and `unselected` styles have no effect."
-                },
-                "hoverinfo": {
-                    "valType": "flaglist",
-                    "role": "info",
-                    "flags": [
-                        "a",
-                        "b",
-                        "c",
-                        "text",
-                        "name"
-                    ],
-                    "extras": [
-                        "all",
-                        "none",
-                        "skip"
-                    ],
-                    "arrayOk": true,
-                    "dflt": "all",
-                    "editType": "none",
-                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
                 },
                 "hoverlabel": {
                     "bgcolor": {
@@ -12569,6 +12539,26 @@
                     "editType": "style",
                     "role": "object"
                 },
+                "hoverinfo": {
+                    "valType": "flaglist",
+                    "role": "info",
+                    "flags": [
+                        "a",
+                        "b",
+                        "c",
+                        "text",
+                        "name"
+                    ],
+                    "extras": [
+                        "all",
+                        "none",
+                        "skip"
+                    ],
+                    "arrayOk": true,
+                    "dflt": "all",
+                    "editType": "none",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
+                },
                 "hoveron": {
                     "valType": "flaglist",
                     "flags": [
@@ -12596,12 +12586,6 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  customdata .",
-                    "editType": "none"
-                },
-                "hoverinfosrc": {
-                    "valType": "string",
-                    "role": "info",
-                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
                     "editType": "none"
                 },
                 "asrc": {
@@ -12638,6 +12622,12 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  textposition .",
+                    "editType": "none"
+                },
+                "hoverinfosrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
                     "editType": "none"
                 }
             }
@@ -12682,12 +12672,6 @@
                     "dflt": 1,
                     "editType": "style",
                     "description": "Sets the opacity of the trace."
-                },
-                "name": {
-                    "valType": "string",
-                    "role": "info",
-                    "editType": "calc+clearAxisTypes",
-                    "description": "Sets the trace name. The trace name appear as the legend item and on hover. For box traces, the name will also be used for the position coordinate, if `x` and `x0` (`y` and `y0` if horizontal) are missing and the position axis is categorical"
                 },
                 "uid": {
                     "valType": "string",
@@ -12875,6 +12859,12 @@
                     "role": "info",
                     "editType": "calc+clearAxisTypes",
                     "description": "Sets the y coordinate of the box. See overview for more info."
+                },
+                "name": {
+                    "valType": "string",
+                    "role": "info",
+                    "editType": "calc+clearAxisTypes",
+                    "description": "Sets the trace name. The trace name appear as the legend item and on hover. For box traces, the name will also be used for the position coordinate, if `x` and `x0` (`y` and `y0` if horizontal) are missing and the position axis is categorical"
                 },
                 "orientation": {
                     "valType": "enumerated",
@@ -13671,26 +13661,6 @@
                     "role": "info",
                     "editType": "calc",
                     "description": "Array containing integer indices of selected points. Has an effect only for traces that support selections. Note that an empty array means an empty selection where the `unselected` are turned on for all points, whereas, any other non-array values means no selection all where the `selected` and `unselected` styles have no effect."
-                },
-                "hoverinfo": {
-                    "valType": "flaglist",
-                    "role": "info",
-                    "flags": [
-                        "x",
-                        "y",
-                        "z",
-                        "text",
-                        "name"
-                    ],
-                    "extras": [
-                        "all",
-                        "none",
-                        "skip"
-                    ],
-                    "arrayOk": true,
-                    "dflt": "all",
-                    "editType": "calc",
-                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
                 },
                 "hoverlabel": {
                     "bgcolor": {
@@ -14804,6 +14774,26 @@
                         "editType": "none"
                     }
                 },
+                "hoverinfo": {
+                    "valType": "flaglist",
+                    "role": "info",
+                    "flags": [
+                        "x",
+                        "y",
+                        "z",
+                        "text",
+                        "name"
+                    ],
+                    "extras": [
+                        "all",
+                        "none",
+                        "skip"
+                    ],
+                    "arrayOk": true,
+                    "dflt": "all",
+                    "editType": "calc",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
+                },
                 "error_x": {
                     "visible": {
                         "valType": "boolean",
@@ -15241,12 +15231,6 @@
                     "description": "Sets the source reference on plot.ly for  customdata .",
                     "editType": "none"
                 },
-                "hoverinfosrc": {
-                    "valType": "string",
-                    "role": "info",
-                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
-                    "editType": "none"
-                },
                 "xsrc": {
                     "valType": "string",
                     "role": "info",
@@ -15275,6 +15259,12 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  hovertext .",
+                    "editType": "none"
+                },
+                "hoverinfosrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
                     "editType": "none"
                 }
             }
@@ -15311,15 +15301,6 @@
                     "editType": "style",
                     "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items."
                 },
-                "opacity": {
-                    "valType": "number",
-                    "role": "style",
-                    "min": 0,
-                    "max": 1,
-                    "dflt": 1,
-                    "editType": "calc",
-                    "description": "Sets the opacity of the surface."
-                },
                 "name": {
                     "valType": "string",
                     "role": "info",
@@ -15348,26 +15329,6 @@
                     "role": "info",
                     "editType": "calc",
                     "description": "Array containing integer indices of selected points. Has an effect only for traces that support selections. Note that an empty array means an empty selection where the `unselected` are turned on for all points, whereas, any other non-array values means no selection all where the `selected` and `unselected` styles have no effect."
-                },
-                "hoverinfo": {
-                    "valType": "flaglist",
-                    "role": "info",
-                    "flags": [
-                        "x",
-                        "y",
-                        "z",
-                        "text",
-                        "name"
-                    ],
-                    "extras": [
-                        "all",
-                        "none",
-                        "skip"
-                    ],
-                    "arrayOk": true,
-                    "dflt": "all",
-                    "editType": "calc",
-                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
                 },
                 "hoverlabel": {
                     "bgcolor": {
@@ -15477,16 +15438,6 @@
                         "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot."
                     },
                     "editType": "calc",
-                    "role": "object"
-                },
-                "transforms": {
-                    "items": {
-                        "transform": {
-                            "editType": "calc",
-                            "description": "An array of operations that manipulate the trace data, for example filtering or sorting the data arrays.",
-                            "role": "object"
-                        }
-                    },
                     "role": "object"
                 },
                 "z": {
@@ -16365,6 +16316,15 @@
                     "editType": "calc",
                     "role": "object"
                 },
+                "opacity": {
+                    "valType": "number",
+                    "role": "style",
+                    "min": 0,
+                    "max": 1,
+                    "dflt": 1,
+                    "description": "Sets the opacity of the surface.",
+                    "editType": "calc"
+                },
                 "_deprecated": {
                     "zauto": {
                         "description": "Obsolete. Use `cauto` instead.",
@@ -16378,6 +16338,26 @@
                         "description": "Obsolete. Use `cmax` instead.",
                         "editType": "calc"
                     }
+                },
+                "hoverinfo": {
+                    "valType": "flaglist",
+                    "role": "info",
+                    "flags": [
+                        "x",
+                        "y",
+                        "z",
+                        "text",
+                        "name"
+                    ],
+                    "extras": [
+                        "all",
+                        "none",
+                        "skip"
+                    ],
+                    "arrayOk": true,
+                    "dflt": "all",
+                    "editType": "calc",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
                 },
                 "xcalendar": {
                     "valType": "enumerated",
@@ -16473,12 +16453,6 @@
                     "description": "Sets the source reference on plot.ly for  customdata .",
                     "editType": "none"
                 },
-                "hoverinfosrc": {
-                    "valType": "string",
-                    "role": "info",
-                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
-                    "editType": "none"
-                },
                 "zsrc": {
                     "valType": "string",
                     "role": "info",
@@ -16507,6 +16481,12 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  surfacecolor .",
+                    "editType": "none"
+                },
+                "hoverinfosrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
                     "editType": "none"
                 }
             }
@@ -16543,15 +16523,6 @@
                     "editType": "style",
                     "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items."
                 },
-                "opacity": {
-                    "valType": "number",
-                    "role": "style",
-                    "min": 0,
-                    "max": 1,
-                    "dflt": 1,
-                    "editType": "calc",
-                    "description": "Sets the opacity of the surface."
-                },
                 "name": {
                     "valType": "string",
                     "role": "info",
@@ -16580,26 +16551,6 @@
                     "role": "info",
                     "editType": "calc",
                     "description": "Array containing integer indices of selected points. Has an effect only for traces that support selections. Note that an empty array means an empty selection where the `unselected` are turned on for all points, whereas, any other non-array values means no selection all where the `selected` and `unselected` styles have no effect."
-                },
-                "hoverinfo": {
-                    "valType": "flaglist",
-                    "role": "info",
-                    "flags": [
-                        "x",
-                        "y",
-                        "z",
-                        "text",
-                        "name"
-                    ],
-                    "extras": [
-                        "all",
-                        "none",
-                        "skip"
-                    ],
-                    "arrayOk": true,
-                    "dflt": "all",
-                    "editType": "calc",
-                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
                 },
                 "hoverlabel": {
                     "bgcolor": {
@@ -16709,16 +16660,6 @@
                         "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot."
                     },
                     "editType": "calc",
-                    "role": "object"
-                },
-                "transforms": {
-                    "items": {
-                        "transform": {
-                            "editType": "calc",
-                            "description": "An array of operations that manipulate the trace data, for example filtering or sorting the data arrays.",
-                            "role": "object"
-                        }
-                    },
                     "role": "object"
                 },
                 "x": {
@@ -17315,6 +17256,15 @@
                         "editType": "none"
                     }
                 },
+                "opacity": {
+                    "valType": "number",
+                    "role": "style",
+                    "min": 0,
+                    "max": 1,
+                    "dflt": 1,
+                    "description": "Sets the opacity of the surface.",
+                    "editType": "calc"
+                },
                 "flatshading": {
                     "valType": "boolean",
                     "role": "style",
@@ -17447,6 +17397,26 @@
                     },
                     "role": "object"
                 },
+                "hoverinfo": {
+                    "valType": "flaglist",
+                    "role": "info",
+                    "flags": [
+                        "x",
+                        "y",
+                        "z",
+                        "text",
+                        "name"
+                    ],
+                    "extras": [
+                        "all",
+                        "none",
+                        "skip"
+                    ],
+                    "arrayOk": true,
+                    "dflt": "all",
+                    "editType": "calc",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
+                },
                 "xcalendar": {
                     "valType": "enumerated",
                     "values": [
@@ -17541,12 +17511,6 @@
                     "description": "Sets the source reference on plot.ly for  customdata .",
                     "editType": "none"
                 },
-                "hoverinfosrc": {
-                    "valType": "string",
-                    "role": "info",
-                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
-                    "editType": "none"
-                },
                 "xsrc": {
                     "valType": "string",
                     "role": "info",
@@ -17606,6 +17570,12 @@
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  facecolor .",
                     "editType": "none"
+                },
+                "hoverinfosrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
+                    "editType": "none"
                 }
             }
         },
@@ -17641,15 +17611,6 @@
                     "editType": "style",
                     "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items."
                 },
-                "opacity": {
-                    "valType": "number",
-                    "role": "style",
-                    "min": 0,
-                    "max": 1,
-                    "dflt": 1,
-                    "editType": "calc",
-                    "description": "Sets the opacity of the surface."
-                },
                 "name": {
                     "valType": "string",
                     "role": "info",
@@ -17678,30 +17639,6 @@
                     "role": "info",
                     "editType": "calc",
                     "description": "Array containing integer indices of selected points. Has an effect only for traces that support selections. Note that an empty array means an empty selection where the `unselected` are turned on for all points, whereas, any other non-array values means no selection all where the `selected` and `unselected` styles have no effect."
-                },
-                "hoverinfo": {
-                    "valType": "flaglist",
-                    "role": "info",
-                    "flags": [
-                        "x",
-                        "y",
-                        "z",
-                        "u",
-                        "v",
-                        "w",
-                        "norm",
-                        "text",
-                        "name"
-                    ],
-                    "extras": [
-                        "all",
-                        "none",
-                        "skip"
-                    ],
-                    "arrayOk": true,
-                    "dflt": "x+y+z+norm+text+name",
-                    "editType": "calc",
-                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
                 },
                 "hoverlabel": {
                     "bgcolor": {
@@ -17811,16 +17748,6 @@
                         "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot."
                     },
                     "editType": "calc",
-                    "role": "object"
-                },
-                "transforms": {
-                    "items": {
-                        "transform": {
-                            "editType": "calc",
-                            "description": "An array of operations that manipulate the trace data, for example filtering or sorting the data arrays.",
-                            "role": "object"
-                        }
-                    },
                     "role": "object"
                 },
                 "x": {
@@ -18405,6 +18332,15 @@
                         "editType": "none"
                     }
                 },
+                "opacity": {
+                    "valType": "number",
+                    "role": "style",
+                    "min": 0,
+                    "max": 1,
+                    "dflt": 1,
+                    "description": "Sets the opacity of the surface.",
+                    "editType": "calc"
+                },
                 "lightposition": {
                     "x": {
                         "valType": "number",
@@ -18503,6 +18439,30 @@
                     },
                     "role": "object"
                 },
+                "hoverinfo": {
+                    "valType": "flaglist",
+                    "role": "info",
+                    "flags": [
+                        "x",
+                        "y",
+                        "z",
+                        "u",
+                        "v",
+                        "w",
+                        "norm",
+                        "text",
+                        "name"
+                    ],
+                    "extras": [
+                        "all",
+                        "none",
+                        "skip"
+                    ],
+                    "arrayOk": true,
+                    "dflt": "x+y+z+norm+text+name",
+                    "editType": "calc",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
+                },
                 "scene": {
                     "valType": "subplotid",
                     "role": "info",
@@ -18520,12 +18480,6 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  customdata .",
-                    "editType": "none"
-                },
-                "hoverinfosrc": {
-                    "valType": "string",
-                    "role": "info",
-                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
                     "editType": "none"
                 },
                 "xsrc": {
@@ -18569,6 +18523,12 @@
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  text .",
                     "editType": "none"
+                },
+                "hoverinfosrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
+                    "editType": "none"
                 }
             }
         },
@@ -18604,15 +18564,6 @@
                     "editType": "style",
                     "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items."
                 },
-                "opacity": {
-                    "valType": "number",
-                    "role": "style",
-                    "min": 0,
-                    "max": 1,
-                    "dflt": 1,
-                    "editType": "calc",
-                    "description": "Sets the opacity of the surface."
-                },
                 "name": {
                     "valType": "string",
                     "role": "info",
@@ -18641,31 +18592,6 @@
                     "role": "info",
                     "editType": "calc",
                     "description": "Array containing integer indices of selected points. Has an effect only for traces that support selections. Note that an empty array means an empty selection where the `unselected` are turned on for all points, whereas, any other non-array values means no selection all where the `selected` and `unselected` styles have no effect."
-                },
-                "hoverinfo": {
-                    "valType": "flaglist",
-                    "role": "info",
-                    "flags": [
-                        "x",
-                        "y",
-                        "z",
-                        "u",
-                        "v",
-                        "w",
-                        "norm",
-                        "divergence",
-                        "text",
-                        "name"
-                    ],
-                    "extras": [
-                        "all",
-                        "none",
-                        "skip"
-                    ],
-                    "arrayOk": true,
-                    "dflt": "x+y+z+norm+text+name",
-                    "editType": "calc",
-                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
                 },
                 "hoverlabel": {
                     "bgcolor": {
@@ -18775,16 +18701,6 @@
                         "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot."
                     },
                     "editType": "calc",
-                    "role": "object"
-                },
-                "transforms": {
-                    "items": {
-                        "transform": {
-                            "editType": "calc",
-                            "description": "An array of operations that manipulate the trace data, for example filtering or sorting the data arrays.",
-                            "role": "object"
-                        }
-                    },
                     "role": "object"
                 },
                 "x": {
@@ -19393,6 +19309,15 @@
                         "editType": "none"
                     }
                 },
+                "opacity": {
+                    "valType": "number",
+                    "role": "style",
+                    "min": 0,
+                    "max": 1,
+                    "dflt": 1,
+                    "description": "Sets the opacity of the surface.",
+                    "editType": "calc"
+                },
                 "lightposition": {
                     "x": {
                         "valType": "number",
@@ -19491,6 +19416,31 @@
                     },
                     "role": "object"
                 },
+                "hoverinfo": {
+                    "valType": "flaglist",
+                    "role": "info",
+                    "flags": [
+                        "x",
+                        "y",
+                        "z",
+                        "u",
+                        "v",
+                        "w",
+                        "norm",
+                        "divergence",
+                        "text",
+                        "name"
+                    ],
+                    "extras": [
+                        "all",
+                        "none",
+                        "skip"
+                    ],
+                    "arrayOk": true,
+                    "dflt": "x+y+z+norm+text+name",
+                    "editType": "calc",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
+                },
                 "scene": {
                     "valType": "subplotid",
                     "role": "info",
@@ -19508,12 +19458,6 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  customdata .",
-                    "editType": "none"
-                },
-                "hoverinfosrc": {
-                    "valType": "string",
-                    "role": "info",
-                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
                     "editType": "none"
                 },
                 "xsrc": {
@@ -19550,6 +19494,12 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  w .",
+                    "editType": "none"
+                },
+                "hoverinfosrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
                     "editType": "none"
                 }
             }
@@ -19624,26 +19574,6 @@
                     "role": "info",
                     "editType": "calc",
                     "description": "Array containing integer indices of selected points. Has an effect only for traces that support selections. Note that an empty array means an empty selection where the `unselected` are turned on for all points, whereas, any other non-array values means no selection all where the `selected` and `unselected` styles have no effect."
-                },
-                "hoverinfo": {
-                    "valType": "flaglist",
-                    "role": "info",
-                    "flags": [
-                        "lon",
-                        "lat",
-                        "location",
-                        "text",
-                        "name"
-                    ],
-                    "extras": [
-                        "all",
-                        "none",
-                        "skip"
-                    ],
-                    "arrayOk": true,
-                    "dflt": "all",
-                    "editType": "calc",
-                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
                 },
                 "hoverlabel": {
                     "bgcolor": {
@@ -21026,6 +20956,26 @@
                     "editType": "calc",
                     "role": "object"
                 },
+                "hoverinfo": {
+                    "valType": "flaglist",
+                    "role": "info",
+                    "flags": [
+                        "lon",
+                        "lat",
+                        "location",
+                        "text",
+                        "name"
+                    ],
+                    "extras": [
+                        "all",
+                        "none",
+                        "skip"
+                    ],
+                    "arrayOk": true,
+                    "dflt": "all",
+                    "editType": "calc",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
+                },
                 "geo": {
                     "valType": "subplotid",
                     "role": "info",
@@ -21043,12 +20993,6 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  customdata .",
-                    "editType": "none"
-                },
-                "hoverinfosrc": {
-                    "valType": "string",
-                    "role": "info",
-                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
                     "editType": "none"
                 },
                 "lonsrc": {
@@ -21085,6 +21029,12 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  textposition .",
+                    "editType": "none"
+                },
+                "hoverinfosrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
                     "editType": "none"
                 }
             }
@@ -21158,26 +21108,6 @@
                     "role": "info",
                     "editType": "calc",
                     "description": "Array containing integer indices of selected points. Has an effect only for traces that support selections. Note that an empty array means an empty selection where the `unselected` are turned on for all points, whereas, any other non-array values means no selection all where the `selected` and `unselected` styles have no effect."
-                },
-                "hoverinfo": {
-                    "valType": "flaglist",
-                    "role": "info",
-                    "flags": [
-                        "location",
-                        "z",
-                        "text",
-                        "name",
-                        "name"
-                    ],
-                    "extras": [
-                        "all",
-                        "none",
-                        "skip"
-                    ],
-                    "arrayOk": true,
-                    "dflt": "all",
-                    "editType": "calc",
-                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
                 },
                 "hoverlabel": {
                     "bgcolor": {
@@ -21414,6 +21344,25 @@
                     },
                     "editType": "plot",
                     "role": "object"
+                },
+                "hoverinfo": {
+                    "valType": "flaglist",
+                    "role": "info",
+                    "flags": [
+                        "location",
+                        "z",
+                        "text",
+                        "name"
+                    ],
+                    "extras": [
+                        "all",
+                        "none",
+                        "skip"
+                    ],
+                    "arrayOk": true,
+                    "dflt": "all",
+                    "editType": "calc",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
                 },
                 "zauto": {
                     "valType": "boolean",
@@ -21941,12 +21890,6 @@
                     "description": "Sets the source reference on plot.ly for  customdata .",
                     "editType": "none"
                 },
-                "hoverinfosrc": {
-                    "valType": "string",
-                    "role": "info",
-                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
-                    "editType": "none"
-                },
                 "locationssrc": {
                     "valType": "string",
                     "role": "info",
@@ -21963,6 +21906,12 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  text .",
+                    "editType": "none"
+                },
+                "hoverinfosrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
                     "editType": "none"
                 }
             }
@@ -21999,15 +21948,6 @@
                     "dflt": "",
                     "editType": "style",
                     "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items."
-                },
-                "opacity": {
-                    "valType": "number",
-                    "role": "style",
-                    "min": 0,
-                    "max": 1,
-                    "dflt": 1,
-                    "editType": "calc",
-                    "description": "Sets the opacity of the trace."
                 },
                 "name": {
                     "valType": "string",
@@ -23430,6 +23370,15 @@
                     "editType": "calc",
                     "role": "object"
                 },
+                "opacity": {
+                    "valType": "number",
+                    "role": "style",
+                    "min": 0,
+                    "max": 1,
+                    "dflt": 1,
+                    "editType": "calc",
+                    "description": "Sets the opacity of the trace."
+                },
                 "error_x": {
                     "visible": {
                         "valType": "boolean",
@@ -23802,15 +23751,6 @@
                     "dflt": "",
                     "editType": "style",
                     "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items."
-                },
-                "opacity": {
-                    "valType": "number",
-                    "role": "style",
-                    "min": 0,
-                    "max": 1,
-                    "dflt": 1,
-                    "editType": "calc",
-                    "description": "Sets the opacity of the trace."
                 },
                 "name": {
                     "valType": "string",
@@ -25122,6 +25062,15 @@
                     "editType": "calc",
                     "role": "object"
                 },
+                "opacity": {
+                    "valType": "number",
+                    "role": "style",
+                    "min": 0,
+                    "max": 1,
+                    "dflt": 1,
+                    "editType": "calc",
+                    "description": "Sets the opacity of the trace."
+                },
                 "idssrc": {
                     "valType": "string",
                     "role": "info",
@@ -25346,16 +25295,6 @@
                         "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot."
                     },
                     "editType": "calc",
-                    "role": "object"
-                },
-                "transforms": {
-                    "items": {
-                        "transform": {
-                            "editType": "calc",
-                            "description": "An array of operations that manipulate the trace data, for example filtering or sorting the data arrays.",
-                            "role": "object"
-                        }
-                    },
                     "role": "object"
                 },
                 "x": {
@@ -26505,95 +26444,6 @@
                     "editType": "none",
                     "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
                 },
-                "hoverlabel": {
-                    "bgcolor": {
-                        "valType": "color",
-                        "role": "style",
-                        "arrayOk": true,
-                        "editType": "none",
-                        "description": "Sets the background color of the hover labels for this trace"
-                    },
-                    "bordercolor": {
-                        "valType": "color",
-                        "role": "style",
-                        "arrayOk": true,
-                        "editType": "none",
-                        "description": "Sets the border color of the hover labels for this trace."
-                    },
-                    "font": {
-                        "family": {
-                            "valType": "string",
-                            "role": "style",
-                            "noBlank": true,
-                            "strict": true,
-                            "editType": "none",
-                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
-                            "arrayOk": true
-                        },
-                        "size": {
-                            "valType": "number",
-                            "role": "style",
-                            "min": 1,
-                            "editType": "none",
-                            "arrayOk": true
-                        },
-                        "color": {
-                            "valType": "color",
-                            "role": "style",
-                            "editType": "none",
-                            "arrayOk": true
-                        },
-                        "editType": "none",
-                        "description": "Sets the font used in hover labels.",
-                        "role": "object",
-                        "familysrc": {
-                            "valType": "string",
-                            "role": "info",
-                            "description": "Sets the source reference on plot.ly for  family .",
-                            "editType": "none"
-                        },
-                        "sizesrc": {
-                            "valType": "string",
-                            "role": "info",
-                            "description": "Sets the source reference on plot.ly for  size .",
-                            "editType": "none"
-                        },
-                        "colorsrc": {
-                            "valType": "string",
-                            "role": "info",
-                            "description": "Sets the source reference on plot.ly for  color .",
-                            "editType": "none"
-                        }
-                    },
-                    "namelength": {
-                        "valType": "integer",
-                        "min": -1,
-                        "arrayOk": true,
-                        "role": "style",
-                        "editType": "none",
-                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis."
-                    },
-                    "editType": "calc",
-                    "role": "object",
-                    "bgcolorsrc": {
-                        "valType": "string",
-                        "role": "info",
-                        "description": "Sets the source reference on plot.ly for  bgcolor .",
-                        "editType": "none"
-                    },
-                    "bordercolorsrc": {
-                        "valType": "string",
-                        "role": "info",
-                        "description": "Sets the source reference on plot.ly for  bordercolor .",
-                        "editType": "none"
-                    },
-                    "namelengthsrc": {
-                        "valType": "string",
-                        "role": "info",
-                        "description": "Sets the source reference on plot.ly for  namelength .",
-                        "editType": "none"
-                    }
-                },
                 "stream": {
                     "token": {
                         "valType": "string",
@@ -27526,26 +27376,6 @@
                     "role": "info",
                     "editType": "plot"
                 },
-                "hoverinfo": {
-                    "valType": "flaglist",
-                    "role": "info",
-                    "flags": [
-                        "count",
-                        "probability",
-                        "z",
-                        "text",
-                        "name"
-                    ],
-                    "extras": [
-                        "all",
-                        "none",
-                        "skip"
-                    ],
-                    "arrayOk": true,
-                    "dflt": "all",
-                    "editType": "plot",
-                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
-                },
                 "stream": {
                     "token": {
                         "valType": "string",
@@ -27644,6 +27474,23 @@
                         "description": "If there is a layout grid, use the domain for this column in the grid for this parcats trace ."
                     },
                     "role": "object"
+                },
+                "hoverinfo": {
+                    "valType": "flaglist",
+                    "role": "info",
+                    "flags": [
+                        "count",
+                        "probability"
+                    ],
+                    "extras": [
+                        "all",
+                        "none",
+                        "skip"
+                    ],
+                    "arrayOk": true,
+                    "dflt": "all",
+                    "editType": "plot",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
                 },
                 "hoveron": {
                     "valType": "enumerated",
@@ -28442,26 +28289,6 @@
                     "role": "info",
                     "editType": "calc",
                     "description": "Array containing integer indices of selected points. Has an effect only for traces that support selections. Note that an empty array means an empty selection where the `unselected` are turned on for all points, whereas, any other non-array values means no selection all where the `selected` and `unselected` styles have no effect."
-                },
-                "hoverinfo": {
-                    "valType": "flaglist",
-                    "role": "info",
-                    "flags": [
-                        "lon",
-                        "lat",
-                        "text",
-                        "name",
-                        "name"
-                    ],
-                    "extras": [
-                        "all",
-                        "none",
-                        "skip"
-                    ],
-                    "arrayOk": true,
-                    "dflt": "all",
-                    "editType": "calc",
-                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
                 },
                 "hoverlabel": {
                     "bgcolor": {
@@ -29364,6 +29191,25 @@
                     "editType": "calc",
                     "role": "object"
                 },
+                "hoverinfo": {
+                    "valType": "flaglist",
+                    "role": "info",
+                    "flags": [
+                        "lon",
+                        "lat",
+                        "text",
+                        "name"
+                    ],
+                    "extras": [
+                        "all",
+                        "none",
+                        "skip"
+                    ],
+                    "arrayOk": true,
+                    "dflt": "all",
+                    "editType": "calc",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
+                },
                 "subplot": {
                     "valType": "subplotid",
                     "role": "info",
@@ -29381,12 +29227,6 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  customdata .",
-                    "editType": "none"
-                },
-                "hoverinfosrc": {
-                    "valType": "string",
-                    "role": "info",
-                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
                     "editType": "none"
                 },
                 "lonsrc": {
@@ -29411,6 +29251,12 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  hovertext .",
+                    "editType": "none"
+                },
+                "hoverinfosrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
                     "editType": "none"
                 }
             }
@@ -29485,16 +29331,31 @@
                     "editType": "calc",
                     "description": "Array containing integer indices of selected points. Has an effect only for traces that support selections. Note that an empty array means an empty selection where the `unselected` are turned on for all points, whereas, any other non-array values means no selection all where the `selected` and `unselected` styles have no effect."
                 },
+                "stream": {
+                    "token": {
+                        "valType": "string",
+                        "noBlank": true,
+                        "strict": true,
+                        "role": "info",
+                        "editType": "calc",
+                        "description": "The stream id number links a data trace on a plot with a stream. See https://plot.ly/settings for more details."
+                    },
+                    "maxpoints": {
+                        "valType": "number",
+                        "min": 0,
+                        "max": 10000,
+                        "dflt": 500,
+                        "role": "info",
+                        "editType": "calc",
+                        "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot."
+                    },
+                    "editType": "calc",
+                    "role": "object"
+                },
                 "hoverinfo": {
                     "valType": "flaglist",
                     "role": "info",
-                    "flags": [
-                        "x",
-                        "y",
-                        "z",
-                        "text",
-                        "name"
-                    ],
+                    "flags": [],
                     "extras": [
                         "all",
                         "none",
@@ -29593,37 +29454,6 @@
                         "description": "Sets the source reference on plot.ly for  namelength .",
                         "editType": "none"
                     }
-                },
-                "stream": {
-                    "token": {
-                        "valType": "string",
-                        "noBlank": true,
-                        "strict": true,
-                        "role": "info",
-                        "editType": "calc",
-                        "description": "The stream id number links a data trace on a plot with a stream. See https://plot.ly/settings for more details."
-                    },
-                    "maxpoints": {
-                        "valType": "number",
-                        "min": 0,
-                        "max": 10000,
-                        "dflt": 500,
-                        "role": "info",
-                        "editType": "calc",
-                        "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot."
-                    },
-                    "editType": "calc",
-                    "role": "object"
-                },
-                "transforms": {
-                    "items": {
-                        "transform": {
-                            "editType": "calc",
-                            "description": "An array of operations that manipulate the trace data, for example filtering or sorting the data arrays.",
-                            "role": "object"
-                        }
-                    },
-                    "role": "object"
                 },
                 "domain": {
                     "x": {
@@ -30356,16 +30186,6 @@
                     "editType": "calc",
                     "role": "object"
                 },
-                "transforms": {
-                    "items": {
-                        "transform": {
-                            "editType": "calc",
-                            "description": "An array of operations that manipulate the trace data, for example filtering or sorting the data arrays.",
-                            "role": "object"
-                        }
-                    },
-                    "role": "object"
-                },
                 "domain": {
                     "x": {
                         "valType": "info_array",
@@ -31033,16 +30853,6 @@
                         "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot."
                     },
                     "editType": "calc",
-                    "role": "object"
-                },
-                "transforms": {
-                    "items": {
-                        "transform": {
-                            "editType": "calc",
-                            "description": "An array of operations that manipulate the trace data, for example filtering or sorting the data arrays.",
-                            "role": "object"
-                        }
-                    },
                     "role": "object"
                 },
                 "carpet": {
@@ -32322,26 +32132,6 @@
                     "role": "info",
                     "editType": "calc",
                     "description": "Array containing integer indices of selected points. Has an effect only for traces that support selections. Note that an empty array means an empty selection where the `unselected` are turned on for all points, whereas, any other non-array values means no selection all where the `selected` and `unselected` styles have no effect."
-                },
-                "hoverinfo": {
-                    "valType": "flaglist",
-                    "role": "info",
-                    "flags": [
-                        "a",
-                        "b",
-                        "text",
-                        "name",
-                        "name"
-                    ],
-                    "extras": [
-                        "all",
-                        "none",
-                        "skip"
-                    ],
-                    "arrayOk": true,
-                    "dflt": "all",
-                    "editType": "none",
-                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
                 },
                 "hoverlabel": {
                     "bgcolor": {
@@ -33733,6 +33523,25 @@
                     "editType": "style",
                     "role": "object"
                 },
+                "hoverinfo": {
+                    "valType": "flaglist",
+                    "role": "info",
+                    "flags": [
+                        "a",
+                        "b",
+                        "text",
+                        "name"
+                    ],
+                    "extras": [
+                        "all",
+                        "none",
+                        "skip"
+                    ],
+                    "arrayOk": true,
+                    "dflt": "all",
+                    "editType": "none",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
+                },
                 "hoveron": {
                     "valType": "flaglist",
                     "flags": [
@@ -33769,12 +33578,6 @@
                     "description": "Sets the source reference on plot.ly for  customdata .",
                     "editType": "none"
                 },
-                "hoverinfosrc": {
-                    "valType": "string",
-                    "role": "info",
-                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
-                    "editType": "none"
-                },
                 "asrc": {
                     "valType": "string",
                     "role": "info",
@@ -33797,6 +33600,12 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  textposition .",
+                    "editType": "none"
+                },
+                "hoverinfosrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
                     "editType": "none"
                 }
             }
@@ -34000,16 +33809,6 @@
                         "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot."
                     },
                     "editType": "calc",
-                    "role": "object"
-                },
-                "transforms": {
-                    "items": {
-                        "transform": {
-                            "editType": "calc",
-                            "description": "An array of operations that manipulate the trace data, for example filtering or sorting the data arrays.",
-                            "role": "object"
-                        }
-                    },
                     "role": "object"
                 },
                 "carpet": {
@@ -34970,102 +34769,6 @@
                     "editType": "none",
                     "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
                 },
-                "hoverlabel": {
-                    "bgcolor": {
-                        "valType": "color",
-                        "role": "style",
-                        "arrayOk": true,
-                        "editType": "none",
-                        "description": "Sets the background color of the hover labels for this trace"
-                    },
-                    "bordercolor": {
-                        "valType": "color",
-                        "role": "style",
-                        "arrayOk": true,
-                        "editType": "none",
-                        "description": "Sets the border color of the hover labels for this trace."
-                    },
-                    "font": {
-                        "family": {
-                            "valType": "string",
-                            "role": "style",
-                            "noBlank": true,
-                            "strict": true,
-                            "editType": "none",
-                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
-                            "arrayOk": true
-                        },
-                        "size": {
-                            "valType": "number",
-                            "role": "style",
-                            "min": 1,
-                            "editType": "none",
-                            "arrayOk": true
-                        },
-                        "color": {
-                            "valType": "color",
-                            "role": "style",
-                            "editType": "none",
-                            "arrayOk": true
-                        },
-                        "editType": "none",
-                        "description": "Sets the font used in hover labels.",
-                        "role": "object",
-                        "familysrc": {
-                            "valType": "string",
-                            "role": "info",
-                            "description": "Sets the source reference on plot.ly for  family .",
-                            "editType": "none"
-                        },
-                        "sizesrc": {
-                            "valType": "string",
-                            "role": "info",
-                            "description": "Sets the source reference on plot.ly for  size .",
-                            "editType": "none"
-                        },
-                        "colorsrc": {
-                            "valType": "string",
-                            "role": "info",
-                            "description": "Sets the source reference on plot.ly for  color .",
-                            "editType": "none"
-                        }
-                    },
-                    "namelength": {
-                        "valType": "integer",
-                        "min": -1,
-                        "arrayOk": true,
-                        "role": "style",
-                        "editType": "none",
-                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis."
-                    },
-                    "editType": "calc",
-                    "split": {
-                        "valType": "boolean",
-                        "role": "info",
-                        "dflt": false,
-                        "editType": "style",
-                        "description": "Show hover information (open, close, high, low) in separate labels."
-                    },
-                    "role": "object",
-                    "bgcolorsrc": {
-                        "valType": "string",
-                        "role": "info",
-                        "description": "Sets the source reference on plot.ly for  bgcolor .",
-                        "editType": "none"
-                    },
-                    "bordercolorsrc": {
-                        "valType": "string",
-                        "role": "info",
-                        "description": "Sets the source reference on plot.ly for  bordercolor .",
-                        "editType": "none"
-                    },
-                    "namelengthsrc": {
-                        "valType": "string",
-                        "role": "info",
-                        "description": "Sets the source reference on plot.ly for  namelength .",
-                        "editType": "none"
-                    }
-                },
                 "stream": {
                     "token": {
                         "valType": "string",
@@ -35246,6 +34949,102 @@
                     "role": "style",
                     "editType": "calc",
                     "description": "Sets the width of the open/close tick marks relative to the *x* minimal interval."
+                },
+                "hoverlabel": {
+                    "bgcolor": {
+                        "valType": "color",
+                        "role": "style",
+                        "arrayOk": true,
+                        "editType": "none",
+                        "description": "Sets the background color of the hover labels for this trace"
+                    },
+                    "bordercolor": {
+                        "valType": "color",
+                        "role": "style",
+                        "arrayOk": true,
+                        "editType": "none",
+                        "description": "Sets the border color of the hover labels for this trace."
+                    },
+                    "font": {
+                        "family": {
+                            "valType": "string",
+                            "role": "style",
+                            "noBlank": true,
+                            "strict": true,
+                            "editType": "none",
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                            "arrayOk": true
+                        },
+                        "size": {
+                            "valType": "number",
+                            "role": "style",
+                            "min": 1,
+                            "editType": "none",
+                            "arrayOk": true
+                        },
+                        "color": {
+                            "valType": "color",
+                            "role": "style",
+                            "editType": "none",
+                            "arrayOk": true
+                        },
+                        "editType": "none",
+                        "description": "Sets the font used in hover labels.",
+                        "role": "object",
+                        "familysrc": {
+                            "valType": "string",
+                            "role": "info",
+                            "description": "Sets the source reference on plot.ly for  family .",
+                            "editType": "none"
+                        },
+                        "sizesrc": {
+                            "valType": "string",
+                            "role": "info",
+                            "description": "Sets the source reference on plot.ly for  size .",
+                            "editType": "none"
+                        },
+                        "colorsrc": {
+                            "valType": "string",
+                            "role": "info",
+                            "description": "Sets the source reference on plot.ly for  color .",
+                            "editType": "none"
+                        }
+                    },
+                    "namelength": {
+                        "valType": "integer",
+                        "min": -1,
+                        "arrayOk": true,
+                        "role": "style",
+                        "editType": "none",
+                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis."
+                    },
+                    "editType": "calc",
+                    "split": {
+                        "valType": "boolean",
+                        "role": "info",
+                        "dflt": false,
+                        "editType": "style",
+                        "description": "Show hover information (open, close, high, low) in separate labels."
+                    },
+                    "role": "object",
+                    "bgcolorsrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on plot.ly for  bgcolor .",
+                        "editType": "none"
+                    },
+                    "bordercolorsrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on plot.ly for  bordercolor .",
+                        "editType": "none"
+                    },
+                    "namelengthsrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on plot.ly for  namelength .",
+                        "editType": "none"
+                    }
                 },
                 "xcalendar": {
                     "valType": "enumerated",
@@ -35432,102 +35231,6 @@
                     "editType": "none",
                     "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
                 },
-                "hoverlabel": {
-                    "bgcolor": {
-                        "valType": "color",
-                        "role": "style",
-                        "arrayOk": true,
-                        "editType": "none",
-                        "description": "Sets the background color of the hover labels for this trace"
-                    },
-                    "bordercolor": {
-                        "valType": "color",
-                        "role": "style",
-                        "arrayOk": true,
-                        "editType": "none",
-                        "description": "Sets the border color of the hover labels for this trace."
-                    },
-                    "font": {
-                        "family": {
-                            "valType": "string",
-                            "role": "style",
-                            "noBlank": true,
-                            "strict": true,
-                            "editType": "none",
-                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
-                            "arrayOk": true
-                        },
-                        "size": {
-                            "valType": "number",
-                            "role": "style",
-                            "min": 1,
-                            "editType": "none",
-                            "arrayOk": true
-                        },
-                        "color": {
-                            "valType": "color",
-                            "role": "style",
-                            "editType": "none",
-                            "arrayOk": true
-                        },
-                        "editType": "none",
-                        "description": "Sets the font used in hover labels.",
-                        "role": "object",
-                        "familysrc": {
-                            "valType": "string",
-                            "role": "info",
-                            "description": "Sets the source reference on plot.ly for  family .",
-                            "editType": "none"
-                        },
-                        "sizesrc": {
-                            "valType": "string",
-                            "role": "info",
-                            "description": "Sets the source reference on plot.ly for  size .",
-                            "editType": "none"
-                        },
-                        "colorsrc": {
-                            "valType": "string",
-                            "role": "info",
-                            "description": "Sets the source reference on plot.ly for  color .",
-                            "editType": "none"
-                        }
-                    },
-                    "namelength": {
-                        "valType": "integer",
-                        "min": -1,
-                        "arrayOk": true,
-                        "role": "style",
-                        "editType": "none",
-                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis."
-                    },
-                    "editType": "calc",
-                    "split": {
-                        "valType": "boolean",
-                        "role": "info",
-                        "dflt": false,
-                        "editType": "style",
-                        "description": "Show hover information (open, close, high, low) in separate labels."
-                    },
-                    "role": "object",
-                    "bgcolorsrc": {
-                        "valType": "string",
-                        "role": "info",
-                        "description": "Sets the source reference on plot.ly for  bgcolor .",
-                        "editType": "none"
-                    },
-                    "bordercolorsrc": {
-                        "valType": "string",
-                        "role": "info",
-                        "description": "Sets the source reference on plot.ly for  bordercolor .",
-                        "editType": "none"
-                    },
-                    "namelengthsrc": {
-                        "valType": "string",
-                        "role": "info",
-                        "description": "Sets the source reference on plot.ly for  namelength .",
-                        "editType": "none"
-                    }
-                },
                 "stream": {
                     "token": {
                         "valType": "string",
@@ -35675,6 +35378,102 @@
                     "role": "style",
                     "editType": "calc",
                     "description": "Sets the width of the whiskers relative to the box' width. For example, with 1, the whiskers are as wide as the box(es)."
+                },
+                "hoverlabel": {
+                    "bgcolor": {
+                        "valType": "color",
+                        "role": "style",
+                        "arrayOk": true,
+                        "editType": "none",
+                        "description": "Sets the background color of the hover labels for this trace"
+                    },
+                    "bordercolor": {
+                        "valType": "color",
+                        "role": "style",
+                        "arrayOk": true,
+                        "editType": "none",
+                        "description": "Sets the border color of the hover labels for this trace."
+                    },
+                    "font": {
+                        "family": {
+                            "valType": "string",
+                            "role": "style",
+                            "noBlank": true,
+                            "strict": true,
+                            "editType": "none",
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                            "arrayOk": true
+                        },
+                        "size": {
+                            "valType": "number",
+                            "role": "style",
+                            "min": 1,
+                            "editType": "none",
+                            "arrayOk": true
+                        },
+                        "color": {
+                            "valType": "color",
+                            "role": "style",
+                            "editType": "none",
+                            "arrayOk": true
+                        },
+                        "editType": "none",
+                        "description": "Sets the font used in hover labels.",
+                        "role": "object",
+                        "familysrc": {
+                            "valType": "string",
+                            "role": "info",
+                            "description": "Sets the source reference on plot.ly for  family .",
+                            "editType": "none"
+                        },
+                        "sizesrc": {
+                            "valType": "string",
+                            "role": "info",
+                            "description": "Sets the source reference on plot.ly for  size .",
+                            "editType": "none"
+                        },
+                        "colorsrc": {
+                            "valType": "string",
+                            "role": "info",
+                            "description": "Sets the source reference on plot.ly for  color .",
+                            "editType": "none"
+                        }
+                    },
+                    "namelength": {
+                        "valType": "integer",
+                        "min": -1,
+                        "arrayOk": true,
+                        "role": "style",
+                        "editType": "none",
+                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis."
+                    },
+                    "editType": "calc",
+                    "split": {
+                        "valType": "boolean",
+                        "role": "info",
+                        "dflt": false,
+                        "editType": "style",
+                        "description": "Show hover information (open, close, high, low) in separate labels."
+                    },
+                    "role": "object",
+                    "bgcolorsrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on plot.ly for  bgcolor .",
+                        "editType": "none"
+                    },
+                    "bordercolorsrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on plot.ly for  bordercolor .",
+                        "editType": "none"
+                    },
+                    "namelengthsrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on plot.ly for  namelength .",
+                        "editType": "none"
+                    }
                 },
                 "xcalendar": {
                     "valType": "enumerated",
@@ -35872,26 +35671,6 @@
                     "role": "info",
                     "editType": "calc",
                     "description": "Array containing integer indices of selected points. Has an effect only for traces that support selections. Note that an empty array means an empty selection where the `unselected` are turned on for all points, whereas, any other non-array values means no selection all where the `selected` and `unselected` styles have no effect."
-                },
-                "hoverinfo": {
-                    "valType": "flaglist",
-                    "role": "info",
-                    "flags": [
-                        "r",
-                        "theta",
-                        "text",
-                        "name",
-                        "name"
-                    ],
-                    "extras": [
-                        "all",
-                        "none",
-                        "skip"
-                    ],
-                    "arrayOk": true,
-                    "dflt": "all",
-                    "editType": "none",
-                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
                 },
                 "hoverlabel": {
                     "bgcolor": {
@@ -37252,6 +37031,25 @@
                     "editType": "style",
                     "description": "Sets the fill color. Defaults to a half-transparent variant of the line color, marker color, or marker line color, whichever is available."
                 },
+                "hoverinfo": {
+                    "valType": "flaglist",
+                    "role": "info",
+                    "flags": [
+                        "r",
+                        "theta",
+                        "text",
+                        "name"
+                    ],
+                    "extras": [
+                        "all",
+                        "none",
+                        "skip"
+                    ],
+                    "arrayOk": true,
+                    "dflt": "all",
+                    "editType": "none",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
+                },
                 "hoveron": {
                     "valType": "flaglist",
                     "flags": [
@@ -37359,12 +37157,6 @@
                     "description": "Sets the source reference on plot.ly for  customdata .",
                     "editType": "none"
                 },
-                "hoverinfosrc": {
-                    "valType": "string",
-                    "role": "info",
-                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
-                    "editType": "none"
-                },
                 "rsrc": {
                     "valType": "string",
                     "role": "info",
@@ -37393,6 +37185,12 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  textposition .",
+                    "editType": "none"
+                },
+                "hoverinfosrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
                     "editType": "none"
                 }
             }
@@ -37467,26 +37265,6 @@
                     "role": "info",
                     "editType": "calc",
                     "description": "Array containing integer indices of selected points. Has an effect only for traces that support selections. Note that an empty array means an empty selection where the `unselected` are turned on for all points, whereas, any other non-array values means no selection all where the `selected` and `unselected` styles have no effect."
-                },
-                "hoverinfo": {
-                    "valType": "flaglist",
-                    "role": "info",
-                    "flags": [
-                        "r",
-                        "theta",
-                        "text",
-                        "name",
-                        "name"
-                    ],
-                    "extras": [
-                        "all",
-                        "none",
-                        "skip"
-                    ],
-                    "arrayOk": true,
-                    "dflt": "all",
-                    "editType": "none",
-                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
                 },
                 "hoverlabel": {
                     "bgcolor": {
@@ -38793,6 +38571,25 @@
                         "editType": "none"
                     }
                 },
+                "hoverinfo": {
+                    "valType": "flaglist",
+                    "role": "info",
+                    "flags": [
+                        "r",
+                        "theta",
+                        "text",
+                        "name"
+                    ],
+                    "extras": [
+                        "all",
+                        "none",
+                        "skip"
+                    ],
+                    "arrayOk": true,
+                    "dflt": "all",
+                    "editType": "none",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
+                },
                 "selected": {
                     "marker": {
                         "opacity": {
@@ -38890,12 +38687,6 @@
                     "description": "Sets the source reference on plot.ly for  customdata .",
                     "editType": "none"
                 },
-                "hoverinfosrc": {
-                    "valType": "string",
-                    "role": "info",
-                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
-                    "editType": "none"
-                },
                 "rsrc": {
                     "valType": "string",
                     "role": "info",
@@ -38924,6 +38715,12 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  textposition .",
+                    "editType": "none"
+                },
+                "hoverinfosrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
                     "editType": "none"
                 }
             }
@@ -38998,26 +38795,6 @@
                     "role": "info",
                     "editType": "calc",
                     "description": "Array containing integer indices of selected points. Has an effect only for traces that support selections. Note that an empty array means an empty selection where the `unselected` are turned on for all points, whereas, any other non-array values means no selection all where the `selected` and `unselected` styles have no effect."
-                },
-                "hoverinfo": {
-                    "valType": "flaglist",
-                    "role": "info",
-                    "flags": [
-                        "r",
-                        "theta",
-                        "text",
-                        "name",
-                        "name"
-                    ],
-                    "extras": [
-                        "all",
-                        "none",
-                        "skip"
-                    ],
-                    "arrayOk": true,
-                    "dflt": "all",
-                    "editType": "none",
-                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
                 },
                 "hoverlabel": {
                     "bgcolor": {
@@ -39848,6 +39625,25 @@
                         "editType": "none"
                     }
                 },
+                "hoverinfo": {
+                    "valType": "flaglist",
+                    "role": "info",
+                    "flags": [
+                        "r",
+                        "theta",
+                        "text",
+                        "name"
+                    ],
+                    "extras": [
+                        "all",
+                        "none",
+                        "skip"
+                    ],
+                    "arrayOk": true,
+                    "dflt": "all",
+                    "editType": "none",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
+                },
                 "selected": {
                     "marker": {
                         "opacity": {
@@ -39931,12 +39727,6 @@
                     "description": "Sets the source reference on plot.ly for  customdata .",
                     "editType": "none"
                 },
-                "hoverinfosrc": {
-                    "valType": "string",
-                    "role": "info",
-                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
-                    "editType": "none"
-                },
                 "rsrc": {
                     "valType": "string",
                     "role": "info",
@@ -39971,6 +39761,12 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  text .",
+                    "editType": "none"
+                },
+                "hoverinfosrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
                     "editType": "none"
                 }
             },

@@ -40,9 +40,6 @@ class ParcoordsValidator(_plotly_utils.basevalidators.CompoundValidator):
             hoverinfosrc
                 Sets the source reference on plot.ly for
                 hoverinfo .
-            hoverlabel
-                plotly.graph_objs.parcoords.Hoverlabel instance
-                or dict with compatible properties
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
