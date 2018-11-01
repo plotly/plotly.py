@@ -2,6 +2,142 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.4.0] - ????
+
+### Updated
+ - Updated Plotly.js to version 1.42.1. Select highlights included below, see
+ the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1421----2018-10-31)
+ for more information.
+ 
+### Added
+ - Default figure properties may now be customized using figure
+ templates (themes) and 7 new predefined templates are bundled with
+ plotly.py
+ ([#1224](https://github.com/plotly/plotly.py/pull/1224))
+ - Added Parallel Categories (`parcats`) trace type for the visualization
+ of multi-dimensional categorical datasets
+ ([plotly/plotly.js#2963](https://github.com/plotly/plotly.js/pull/2963))
+ - Added LaTeX typesetting support for figures displayed in the Jupyter
+ Notebook using `plotly.offline.iplot` and `plotly.graph_objs.FigureWidget`
+ ([#1243](https://github.com/plotly/plotly.py/pull/1243))
+ - Added `include_mathjax` argument to `plotly.offline.plot` to support
+ the creation of HTML files with LaTeX typesetting
+ ([#1243](https://github.com/plotly/plotly.py/pull/1243))
+ - Added new `plotly.offline.get_plotlyjs` function that returns the
+ contents of the bundled plotly.js library as a string
+ ([#637](https://github.com/plotly/plotly.py/issues/637),
+  [#1246](https://github.com/plotly/plotly.py/pull/1246))
+ - Added new `plotly.offline.get_plotlyjs_version` function that returns
+ the version of the bundled plotly.js library
+ ([#1246](https://github.com/plotly/plotly.py/pull/1246))
+ - HTML div strings returned by `plotly.offline.plot` now contain logic
+ to automatically resize the figure responsively.  This logic was previously
+ only added for html files.
+ ([#1043](https://github.com/plotly/plotly.py/issues/1043),
+  [#1234](https://github.com/plotly/plotly.py/pull/1234))
+ - Figures displayed using `plotly.offline.iplot` in the classic Jupyter
+ Notebook will now resize responsively
+ ([#1234](https://github.com/plotly/plotly.py/pull/1234))
+ - Added `'cdn'`, `'directory'`, and path string `include_plotlyjs` options
+ in `plotly.offline.plot`
+ ([#1234](https://github.com/plotly/plotly.py/pull/1234))
+   - When `'cdn'`, the resulting html file/div includes a script tag reference
+   to the plotlyjs cdn.
+   - When `'directory'`, the resulting html file/div includes a script tag
+   reference to a plotly.min.js bundle in the same directory as the html file.
+   If `output_type` is `'file'` then this plotly.min.js bundle is created in
+   the output directory if it doesn't already exist.
+   - When a string ending with `'.js'`, the resulting html file/div includes
+   a script tag that references this exact path. This can be used to point
+   to a plotly.js bundle from an alternative CDN.
+ - Added a new `color_threshold` argument to the `create_dendrogram` figure
+ factory to control the dendrogram clustering cutoff
+ ([#995](https://github.com/plotly/plotly.py/issues/995),
+  [#1075](https://github.com/plotly/plotly.py/pull/1075),
+  [#1214](https://github.com/plotly/plotly.py/pull/1214))  
+ - Added support for `autorange='reversed'` in 3D axes 
+ ([#803](https://github.com/plotly/plotly.py/issues/803),
+  [plotly/plotly.js#3141](https://github.com/plotly/plotly.js/pull/3141))
+ - Added new gl3d tick and title auto-rotation algorithm that limits text
+ overlaps
+ ([plotly/plotly.js#3084](https://github.com/plotly/plotly.js/pull/3084),
+  [plotly/plotly.js#3131](https://github.com/plotly/plotly.js/pull/3131))
+ - Added `modebar` layout style attributes:
+ `orientation`, `bgcolor`, `color` and `activecolor`
+ ([plotly/plotly.js#3068](https://github.com/plotly/plotly.js/pull/3068),
+  [plotly/plotly.js#3091](https://github.com/plotly/plotly.js/pull/3091))
+ - Added `title`, `titleposition` and `titlefont` attributes to pie traces
+ ([plotly/plotly.js#2987](https://github.com/plotly/plotly.js/pull/2987))
+ - Added `hoverlabel.split` attribute to `ohlc` and `candlestick` traces to
+ split hover labels into multiple pieces
+ ([plotly/plotly.js#2959](https://github.com/plotly/plotly.js/pull/2959))
+ - Added support for `line.shape` values `'hv'`, `'vh'`, `'hvh'`
+ and `'vhv'` in `scattergl` traces
+ ([plotly/plotly.js#3087](https://github.com/plotly/plotly.js/pull/3087))
+ - Added trace, node and link `hoverinfo` for `sankey` traces
+ ([#3096](https://github.com/plotly/plotly.js/pull/3096),
+  [#3150](https://github.com/plotly/plotly.js/pull/3150))
+ - Added per-sector `textfont` settings in pie traces
+ ([#3130](https://github.com/plotly/plotly.js/pull/3130))
+ 
+ 
+### Changed
+ - Use new Plotly logo in "Produced with Plotly" modebar button
+ ([plotly/plotly.js#3068](https://github.com/plotly/plotly.js/pull/3068))
+
+
+### Fixed
+ - Plotly's use of MathJax for LaTeX typesetting no longer interferes with
+ the Jupyter Notebook's use of MathJax
+ ([#445](https://github.com/plotly/plotly.py/issues/445), 
+  [#360](https://github.com/plotly/plotly.py/issues/360))
+ - Fixed several issues with the use of `reversescale=True` in the
+ `create_annotated_heatmap` figure factory
+ ([#1251](https://github.com/plotly/plotly.py/pull/1251))
+ - Fixed case where `plotly.offline.iplot` would fail to render in the classic
+ Jupyter Notebook if the notebook contained a Markdown headline with the text
+ "Plotly"
+ ([#816](https://github.com/plotly/plotly.py/issues/816))
+ - `None` values in a `scatter.hovertext` list are now omitted from the 
+ hover label rather than being displayed as the string `"None"`
+ ([#1244](https://github.com/plotly/plotly.py/issues/1244))
+ - Subplot titles created by `plotly.tools.make_subplots` are now positioned
+ properly when custom `row_width`/`column_width` arguments are specified
+ ([#1229](https://github.com/plotly/plotly.py/issues/1229))
+ - The `bar.width` property may now be specified as a numpy array or a pandas
+ series
+ ([#1231](https://github.com/plotly/plotly.py/issues/1231), 
+ [plotly/plotly.js#3169](https://github.com/plotly/plotly.js/pull/3169))
+ - Error bars are now scaled correctly for logarithmic `scatter3d` traces
+ ([#1139](https://github.com/plotly/plotly.py/issues/1139))
+ - Use `uuid.uuid4` rather than `uuid.uuid1` to work around an upstream
+ Python bug
+  ([#1235](https://github.com/plotly/plotly.py/issues/1235),
+   [#1236](https://github.com/plotly/plotly.py/pull/1236))
+ - The `layout.grid.subplots` property may now be specified as a 2D list of 
+ subplot identifiers
+ ([#1220](https://github.com/plotly/plotly.py/issues/1220),
+  [#1240](https://github.com/plotly/plotly.py/pull/1240))
+ - Fixed `scatter3d` text alignment
+ ([#1055](https://github.com/plotly/plotly.py/issues/1055),
+  [plotly/plotly.js#3180](https://github.com/plotly/plotly.js/pull/3180))
+ 
+
+### JupyterLab Versions
+For use with JupyterLab, the following versions of the following packages
+must be installed:
+
+ - Python Packages
+   - plotly==3.4.0
+   - ipywidgets>=7.2
+   - notebook>=5.3
+   - jupyterlab==0.35
+   
+ - JupyterLab Extensions
+   - plotlywidget@0.5.0
+   - @jupyter-widgets/jupyterlab-manager@0.38
+   - @jupyterlab/plotly-extension@0.18
+
 ## [3.3.0] - 2018-09-28
 
 ### Updated
