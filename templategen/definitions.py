@@ -465,6 +465,11 @@ def plotly_dark():
     template.layout.xaxis.zerolinewidth = 2
     template.layout.yaxis.zerolinewidth = 2
 
+    # Set marker outline color
+    opts = {'marker': {'line': {'color': plotly_clrs['Rhino Darker']}}}
+    template.data.scatter = [opts]
+    template.data.scattergl = [opts]
+
     # Set table header font color to white
     return template
 
