@@ -2,11 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [3.4.0] - ????
+## [3.4.0] - 2018-11-02
 
 ### Updated
- - Updated Plotly.js to version 1.42.1. Select highlights included below, see
- the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1421----2018-10-31)
+ - Updated Plotly.js to version 1.42.2. Select highlights included below, see
+ the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1422----2018-11-01)
  for more information.
  
 ### Added
