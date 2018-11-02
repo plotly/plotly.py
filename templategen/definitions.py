@@ -29,7 +29,6 @@ def ggplot2():
         outlinewidth=0,
         tickcolor=colors['gray93'],
         ticks='inside',
-        len=0.2,
         ticklen=6)
 
     # Common axis common properties
@@ -464,6 +463,11 @@ def plotly_dark():
     template.layout.yaxis.zerolinecolor = plotly_clrs['Rhino Darker']
     template.layout.xaxis.zerolinewidth = 2
     template.layout.yaxis.zerolinewidth = 2
+
+    # Set marker outline color
+    opts = {'marker': {'line': {'color': plotly_clrs['Rhino Darker']}}}
+    template.data.scatter = [opts]
+    template.data.scattergl = [opts]
 
     # Set table header font color to white
     return template

@@ -12,7 +12,6 @@ from ._legendgroup import LegendgroupValidator
 from ._labelfont import LabelfontValidator
 from ._idssrc import IdssrcValidator
 from ._ids import IdsValidator
-from ._hoverlabel import HoverlabelValidator
 from ._hoverinfosrc import HoverinfosrcValidator
 from ._hoverinfo import HoverinfoValidator
 from ._domain import DomainValidator
