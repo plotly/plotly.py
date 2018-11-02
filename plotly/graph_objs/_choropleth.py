@@ -369,7 +369,7 @@ class Choropleth(BaseTraceType):
     
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['location', 'z', 'text', 'name', 'name'] joined with '+' characters
+          - Any combination of ['location', 'z', 'text', 'name'] joined with '+' characters
             (e.g. 'location+z')
             OR exactly one of ['all', 'none', 'skip'] (e.g. 'skip')
           - A list or array of the above

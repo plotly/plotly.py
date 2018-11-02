@@ -5106,7 +5106,6 @@ class FigureWidget(BaseFigureWidget):
         domain=None,
         hoverinfo=None,
         hoverinfosrc=None,
-        hoverlabel=None,
         ids=None,
         idssrc=None,
         labelfont=None,
@@ -5159,9 +5158,6 @@ class FigureWidget(BaseFigureWidget):
             events are still fired.
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
-        hoverlabel
-            plotly.graph_objs.parcoords.Hoverlabel instance or dict
-            with compatible properties
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -5227,7 +5223,6 @@ class FigureWidget(BaseFigureWidget):
             domain=domain,
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
-            hoverlabel=hoverlabel,
             ids=ids,
             idssrc=idssrc,
             labelfont=labelfont,

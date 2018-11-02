@@ -123,8 +123,8 @@ class Sankey(BaseTraceType):
     
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['x', 'y', 'z', 'text', 'name'] joined with '+' characters
-            (e.g. 'x+y')
+          - Any combination of [] joined with '+' characters
+            (e.g. '')
             OR exactly one of ['all', 'none', 'skip'] (e.g. 'skip')
 
         Returns

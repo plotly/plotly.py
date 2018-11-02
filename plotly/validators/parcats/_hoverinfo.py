@@ -12,9 +12,7 @@ class HoverinfoValidator(_plotly_utils.basevalidators.FlaglistValidator):
             array_ok=kwargs.pop('array_ok', True),
             edit_type=kwargs.pop('edit_type', 'plot'),
             extras=kwargs.pop('extras', ['all', 'none', 'skip']),
-            flags=kwargs.pop(
-                'flags', ['count', 'probability', 'z', 'text', 'name']
-            ),
+            flags=kwargs.pop('flags', ['count', 'probability']),
             role=kwargs.pop('role', 'info'),
             **kwargs
         )

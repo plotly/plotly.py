@@ -256,56 +256,6 @@ class Parcoords(BaseTraceType):
     def hoverinfosrc(self, val):
         self['hoverinfosrc'] = val
 
-    # hoverlabel
-    # ----------
-    @property
-    def hoverlabel(self):
-        """
-        The 'hoverlabel' property is an instance of Hoverlabel
-        that may be specified as:
-          - An instance of plotly.graph_objs.parcoords.Hoverlabel
-          - A dict of string/value properties that will be passed
-            to the Hoverlabel constructor
-    
-            Supported dict properties:
-                
-                bgcolor
-                    Sets the background color of the hover labels
-                    for this trace
-                bgcolorsrc
-                    Sets the source reference on plot.ly for
-                    bgcolor .
-                bordercolor
-                    Sets the border color of the hover labels for
-                    this trace.
-                bordercolorsrc
-                    Sets the source reference on plot.ly for
-                    bordercolor .
-                font
-                    Sets the font used in hover labels.
-                namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
-                namelengthsrc
-                    Sets the source reference on plot.ly for
-                    namelength .
-
-        Returns
-        -------
-        plotly.graph_objs.parcoords.Hoverlabel
-        """
-        return self['hoverlabel']
-
-    @hoverlabel.setter
-    def hoverlabel(self, val):
-        self['hoverlabel'] = val
-
     # ids
     # ---
     @property
@@ -802,9 +752,6 @@ class Parcoords(BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
-        hoverlabel
-            plotly.graph_objs.parcoords.Hoverlabel instance or dict
-            with compatible properties
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -861,7 +808,6 @@ class Parcoords(BaseTraceType):
         domain=None,
         hoverinfo=None,
         hoverinfosrc=None,
-        hoverlabel=None,
         ids=None,
         idssrc=None,
         labelfont=None,
@@ -915,9 +861,6 @@ class Parcoords(BaseTraceType):
             events are still fired.
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
-        hoverlabel
-            plotly.graph_objs.parcoords.Hoverlabel instance or dict
-            with compatible properties
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -1004,7 +947,6 @@ an instance of plotly.graph_objs.Parcoords"""
         self._validators['domain'] = v_parcoords.DomainValidator()
         self._validators['hoverinfo'] = v_parcoords.HoverinfoValidator()
         self._validators['hoverinfosrc'] = v_parcoords.HoverinfosrcValidator()
-        self._validators['hoverlabel'] = v_parcoords.HoverlabelValidator()
         self._validators['ids'] = v_parcoords.IdsValidator()
         self._validators['idssrc'] = v_parcoords.IdssrcValidator()
         self._validators['labelfont'] = v_parcoords.LabelfontValidator()
@@ -1039,8 +981,6 @@ an instance of plotly.graph_objs.Parcoords"""
         self['hoverinfo'] = hoverinfo if hoverinfo is not None else _v
         _v = arg.pop('hoverinfosrc', None)
         self['hoverinfosrc'] = hoverinfosrc if hoverinfosrc is not None else _v
-        _v = arg.pop('hoverlabel', None)
-        self['hoverlabel'] = hoverlabel if hoverlabel is not None else _v
         _v = arg.pop('ids', None)
         self['ids'] = ids if ids is not None else _v
         _v = arg.pop('idssrc', None)

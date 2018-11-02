@@ -278,7 +278,7 @@ class Scattercarpet(BaseTraceType):
     
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['a', 'b', 'text', 'name', 'name'] joined with '+' characters
+          - Any combination of ['a', 'b', 'text', 'name'] joined with '+' characters
             (e.g. 'a+b')
             OR exactly one of ['all', 'none', 'skip'] (e.g. 'skip')
           - A list or array of the above
