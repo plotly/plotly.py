@@ -29,7 +29,6 @@ def ggplot2():
         outlinewidth=0,
         tickcolor=colors['gray93'],
         ticks='inside',
-        len=0.2,
         ticklen=6)
 
     # Common axis common properties
