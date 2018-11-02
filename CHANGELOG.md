@@ -18,7 +18,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
  of multi-dimensional categorical datasets
  ([plotly/plotly.js#2963](https://github.com/plotly/plotly.js/pull/2963))
  - Added LaTeX typesetting support for figures displayed in the Jupyter
- Notebook using `plotly.offline.iplot` and `plotly.graph_objs.FigureWidget`
+ Notebook using `plotly.offline.iplot` and `plotly.graph_objs.FigureWidget`.
+ **Note:** There are still outstanding issues with MathJax rendering in FireFox,
+ but it is now working well in Chrome.
  ([#1243](https://github.com/plotly/plotly.py/pull/1243))
  - Added `include_mathjax` argument to `plotly.offline.plot` to support
  the creation of HTML files with LaTeX typesetting
