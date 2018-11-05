@@ -5,7 +5,7 @@ conda install -y conda-build conda-verify zip
 mkdir artifacts
 
 # Perform build
-conda build --python $PYTHON_VERSION recipe/ > conda-build.out.txt 2>&1
+conda build --python $PYTHON_VERSION recipe/ > artifacts/conda-build.out.txt 2>&1
 
 # Convert to other architectures
 mkdir -p ./conda_packages_${PYTHON_VERSION}/linux-64/
