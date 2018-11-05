@@ -98,13 +98,13 @@ def get_plotlyjs():
     return plotlyjs
 
 
-def _build_resize_script(plotdivid):
+def _build_resize_script(plotdivid, plotly_root='Plotly'):
     resize_script = (
         '<script type="text/javascript">'
         'window.addEventListener("resize", function(){{'
-        'Plotly.Plots.resize(document.getElementById("{id}"));}});'
+        '{plotly_root}.Plots.resize(document.getElementById("{id}"));}});'
         '</script>'
-    ).format(id=plotdivid)
+    ).format(plotly_root=plotly_root, id=plotdivid)
     return resize_script
 
 
@@ -450,7 +450,8 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         )
         resize_script = ''
         if width == '100%' or height == '100%':
-            resize_script = _build_resize_script(plotdivid)
+            resize_script = _build_resize_script(
+                plotdivid, 'window._Plotly')
 
         display_bundle['text/html'] = plot_html + resize_script
         display_bundle['text/vnd.plotly.v1+html'] = plot_html + resize_script
