@@ -2422,7 +2422,7 @@
                     "color": {
                         "valType": "color",
                         "role": "style",
-                        "editType": "calc",
+                        "editType": "style",
                         "arrayOk": true
                     },
                     "editType": "calc",
@@ -2467,7 +2467,7 @@
                     "color": {
                         "valType": "color",
                         "role": "style",
-                        "editType": "calc",
+                        "editType": "style",
                         "arrayOk": true
                     },
                     "editType": "calc",
@@ -2512,7 +2512,7 @@
                     "color": {
                         "valType": "color",
                         "role": "style",
-                        "editType": "calc",
+                        "editType": "style",
                         "arrayOk": true
                     },
                     "editType": "calc",
@@ -9540,7 +9540,7 @@
                     "color": {
                         "valType": "color",
                         "role": "style",
-                        "editType": "style",
+                        "editType": "plot",
                         "arrayOk": true
                     },
                     "editType": "calc",
@@ -9585,7 +9585,7 @@
                     "color": {
                         "valType": "color",
                         "role": "style",
-                        "editType": "style",
+                        "editType": "plot",
                         "arrayOk": true
                     },
                     "editType": "calc",
@@ -9630,7 +9630,7 @@
                     "color": {
                         "valType": "color",
                         "role": "style",
-                        "editType": "style",
+                        "editType": "plot",
                         "arrayOk": true
                     },
                     "editType": "calc",
@@ -9697,7 +9697,7 @@
                     "color": {
                         "valType": "color",
                         "role": "style",
-                        "editType": "style",
+                        "editType": "plot",
                         "arrayOk": true
                     },
                     "editType": "calc",
@@ -27487,7 +27487,7 @@
                         "none",
                         "skip"
                     ],
-                    "arrayOk": true,
+                    "arrayOk": false,
                     "dflt": "all",
                     "editType": "plot",
                     "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
@@ -28204,12 +28204,6 @@
                     "role": "info",
                     "editType": "calc",
                     "description": "The number of observations represented by each state. Defaults to 1 so that each state represents one observation"
-                },
-                "hoverinfosrc": {
-                    "valType": "string",
-                    "role": "info",
-                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
-                    "editType": "none"
                 },
                 "countssrc": {
                     "valType": "string",

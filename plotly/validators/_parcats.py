@@ -45,9 +45,6 @@ class ParcatsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 information is displayed upon hovering. But, if
                 `none` is set, click and hover events are still
                 fired.
-            hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
             hoveron
                 Sets the hover interaction mode for the parcats
                 diagram. If `category`, hover interaction take

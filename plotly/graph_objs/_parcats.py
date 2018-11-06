@@ -247,37 +247,16 @@ class Parcats(BaseTraceType):
           - Any combination of ['count', 'probability'] joined with '+' characters
             (e.g. 'count+probability')
             OR exactly one of ['all', 'none', 'skip'] (e.g. 'skip')
-          - A list or array of the above
 
         Returns
         -------
-        Any|numpy.ndarray
+        Any
         """
         return self['hoverinfo']
 
     @hoverinfo.setter
     def hoverinfo(self, val):
         self['hoverinfo'] = val
-
-    # hoverinfosrc
-    # ------------
-    @property
-    def hoverinfosrc(self):
-        """
-        Sets the source reference on plot.ly for  hoverinfo .
-    
-        The 'hoverinfosrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self['hoverinfosrc']
-
-    @hoverinfosrc.setter
-    def hoverinfosrc(self, val):
-        self['hoverinfosrc'] = val
 
     # hoveron
     # -------
@@ -659,8 +638,6 @@ class Parcats(BaseTraceType):
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on plot.ly for  hoverinfo .
         hoveron
             Sets the hover interaction mode for the parcats
             diagram. If `category`, hover interaction take place
@@ -706,7 +683,6 @@ class Parcats(BaseTraceType):
         dimensiondefaults=None,
         domain=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoveron=None,
         labelfont=None,
         line=None,
@@ -761,8 +737,6 @@ class Parcats(BaseTraceType):
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on plot.ly for  hoverinfo .
         hoveron
             Sets the hover interaction mode for the parcats
             diagram. If `category`, hover interaction take place
@@ -836,7 +810,6 @@ an instance of plotly.graph_objs.Parcats"""
         self._validators['dimensiondefaults'] = v_parcats.DimensionValidator()
         self._validators['domain'] = v_parcats.DomainValidator()
         self._validators['hoverinfo'] = v_parcats.HoverinfoValidator()
-        self._validators['hoverinfosrc'] = v_parcats.HoverinfosrcValidator()
         self._validators['hoveron'] = v_parcats.HoveronValidator()
         self._validators['labelfont'] = v_parcats.LabelfontValidator()
         self._validators['line'] = v_parcats.LineValidator()
@@ -866,8 +839,6 @@ an instance of plotly.graph_objs.Parcats"""
         self['domain'] = domain if domain is not None else _v
         _v = arg.pop('hoverinfo', None)
         self['hoverinfo'] = hoverinfo if hoverinfo is not None else _v
-        _v = arg.pop('hoverinfosrc', None)
-        self['hoverinfosrc'] = hoverinfosrc if hoverinfosrc is not None else _v
         _v = arg.pop('hoveron', None)
         self['hoveron'] = hoveron if hoveron is not None else _v
         _v = arg.pop('labelfont', None)
