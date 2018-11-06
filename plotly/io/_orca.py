@@ -1086,10 +1086,6 @@ def shutdown_server():
                     # Kill parent process
                     orca_state['proc'].terminate()
 
-                    # Retrieve standard out and standard error to avoid
-                    # warnings
-                    output, err = orca_state['proc'].communicate()
-
                     # Wait for the process to shutdown
                     child_status = orca_state['proc'].wait()
                 except:
@@ -1174,8 +1170,9 @@ Install using conda:
 
             # Create subprocess that launches the orca server on the
             # specified port.
+            DEVNULL = open(os.devnull, 'wb')
             orca_state['proc'] = subprocess.Popen(cmd_list,
-                                                  stdout=subprocess.PIPE)
+                                                  stdout=DEVNULL)
 
             # Update orca.status so the user has an accurate view
             # of the state of the orca server
