@@ -1808,10 +1808,7 @@ class InfoArrayValidator(BaseValidator):
 
         is_v_2d = v and is_array(v[0])
 
-        if is_v_2d:
-            if self.dimensions == 1:
-                self.raise_invalid_val(orig_v)
-            else:  # self.dimensions is '1-2' or 2
+        if is_v_2d and self.dimensions in ('1-2', 2):
                 if is_array(self.items):
                     # e.g. 2D list as parcoords.dimensions.constraintrange
                     # check that all items are there for each nested element
