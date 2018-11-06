@@ -1809,28 +1809,28 @@ class InfoArrayValidator(BaseValidator):
         is_v_2d = v and is_array(v[0])
 
         if is_v_2d and self.dimensions in ('1-2', 2):
-                if is_array(self.items):
-                    # e.g. 2D list as parcoords.dimensions.constraintrange
-                    # check that all items are there for each nested element
-                    for i, row in enumerate(v):
-                        # Check row length
-                        if not is_array(row) or len(row) != len(self.items):
-                            self.raise_invalid_val(orig_v[i], [i])
+            if is_array(self.items):
+                # e.g. 2D list as parcoords.dimensions.constraintrange
+                # check that all items are there for each nested element
+                for i, row in enumerate(v):
+                    # Check row length
+                    if not is_array(row) or len(row) != len(self.items):
+                        self.raise_invalid_val(orig_v[i], [i])
 
-                        for j, validator in enumerate(self.item_validators):
-                            row[j] = self.validate_element_with_indexed_name(
-                                v[i][j], validator, [i, j])
-                else:
-                    # e.g. 2D list as layout.grid.subplots
-                    # check that all elements match individual validator
-                    validator = self.item_validators[0]
-                    for i, row in enumerate(v):
-                        if not is_array(row):
-                            self.raise_invalid_val(orig_v[i], [i])
+                    for j, validator in enumerate(self.item_validators):
+                        row[j] = self.validate_element_with_indexed_name(
+                            v[i][j], validator, [i, j])
+            else:
+                # e.g. 2D list as layout.grid.subplots
+                # check that all elements match individual validator
+                validator = self.item_validators[0]
+                for i, row in enumerate(v):
+                    if not is_array(row):
+                        self.raise_invalid_val(orig_v[i], [i])
 
-                        for j, el in enumerate(row):
-                            row[j] = self.validate_element_with_indexed_name(
-                                el, validator, [i, j])
+                    for j, el in enumerate(row):
+                        row[j] = self.validate_element_with_indexed_name(
+                            el, validator, [i, j])
         elif v and self.dimensions == 2:
             # e.g. 1D list passed as layout.grid.subplots
             self.raise_invalid_val(orig_v[0], [0])
