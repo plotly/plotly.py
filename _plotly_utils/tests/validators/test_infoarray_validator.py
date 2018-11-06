@@ -27,6 +27,14 @@ def validator_number3_free():
 
 
 @pytest.fixture()
+def validator_any3_free():
+    return InfoArrayValidator('prop', 'parent', items=[
+        {'valType': 'any'},
+        {'valType': 'any'},
+        {'valType': 'any'}], free_length=True)
+
+
+@pytest.fixture()
 def validator_number2_2d():
     return InfoArrayValidator('prop', 'parent', items=[
         {'valType': 'number', 'min': 0, 'max': 1},
@@ -217,6 +225,27 @@ def test_validator_rejection_number3_free_element_value(val, first_invalid_ind, 
     assert ("Invalid value of type {typ} received for the 'prop[{first_invalid_ind}]' property of parent"
             .format(typ=type_str(val[first_invalid_ind]),
                     first_invalid_ind=first_invalid_ind)) in str(validation_failure.value)
+
+
+# Any3 Tests (free_length=True)
+# --------------------------------
+# ### Acceptance ###
+@pytest.mark.parametrize('val', [
+    [1, 0, 'Hello'],
+    (False, 0.99),
+    np.array([0.1, 0.99]),
+    [0], [],
+    [['a', 'list']],
+    [['a', 'list'], 0],
+    [0, ['a', 'list'], 1],
+])
+def test_validator_acceptance_any3_free(val, validator_any3_free):
+    coerce_val = validator_any3_free.validate_coerce(val)
+    assert coerce_val == list(val)
+
+    # Compute expected
+    expected = tuple(tuple(el) if isinstance(el, list) else el for el in val)
+    assert validator_any3_free.present(coerce_val) == expected
 
 
 # Number2 2D
