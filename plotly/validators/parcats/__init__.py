@@ -7,7 +7,6 @@ from ._name import NameValidator
 from ._line import LineValidator
 from ._labelfont import LabelfontValidator
 from ._hoveron import HoveronValidator
-from ._hoverinfosrc import HoverinfosrcValidator
 from ._hoverinfo import HoverinfoValidator
 from ._domain import DomainValidator
 from ._dimensiondefaults import DimensionValidator

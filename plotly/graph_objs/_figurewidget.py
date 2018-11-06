@@ -4973,7 +4973,6 @@ class FigureWidget(BaseFigureWidget):
         dimensiondefaults=None,
         domain=None,
         hoverinfo=None,
-        hoverinfosrc=None,
         hoveron=None,
         labelfont=None,
         line=None,
@@ -5027,8 +5026,6 @@ class FigureWidget(BaseFigureWidget):
             `none` or `skip` are set, no information is displayed
             upon hovering. But, if `none` is set, click and hover
             events are still fired.
-        hoverinfosrc
-            Sets the source reference on plot.ly for  hoverinfo .
         hoveron
             Sets the hover interaction mode for the parcats
             diagram. If `category`, hover interaction take place
@@ -5083,7 +5080,6 @@ class FigureWidget(BaseFigureWidget):
             dimensiondefaults=dimensiondefaults,
             domain=domain,
             hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
             hoveron=hoveron,
             labelfont=labelfont,
             line=line,
