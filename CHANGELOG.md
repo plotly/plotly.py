@@ -2,6 +2,26 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.4.1] - ????
+
+### Updated
+ - Updated Plotly.js to version 1.42.3. See the
+ [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1423----2018-11-06)
+ for more information.
+ 
+### Fixed
+ - Fixed histogram binning with pandas `Series` or numpy array
+ (regression introduced in 3.4.0)
+ ([#1257](https://github.com/plotly/plotly.py/issues/1257), 
+  [plotly/plotly.js#3211](https://github.com/plotly/plotly.js/pull/3211))
+ - Fixed incorrect validation error on the `args` property of
+  `layout.updatemenu.Button()` when value is a `list` that starts with a `list`
+  ([#1265](https://github.com/plotly/plotly.py/issues/1265))
+ - Fixed deadlock causing `plotly.io.write_image` to hang on Windows after
+ exporting more than ~25 images
+ ([#1255](https://github.com/plotly/plotly.py/issues/1255))
+
+
 ## [3.4.0] - 2018-11-02
 
 ### Updated
