@@ -2,10 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [3.4.1] - ????
+## [3.4.1] - 2018-11-09
 
 ### Updated
- - Updated Plotly.js to version 1.42.3. See the
+ - Updated Plotly.js to version 1.42.5. See the
  [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1423----2018-11-06)
  for more information.
  
@@ -20,7 +20,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
  - Fixed deadlock causing `plotly.io.write_image` to hang on Windows after
  exporting more than ~25 images
  ([#1255](https://github.com/plotly/plotly.py/issues/1255))
-
+ - Fixed plot display error for `scattergl` trace with `mode='lines'` and 
+ more than 100k points
+ ([#1271](https://github.com/plotly/plotly.py/issues/1271))
+ - Fixed responsive resizing error with `iplot` in the classic notebook
+ ([#1263](https://github.com/plotly/plotly.py/pull/1263))
 
 ## [3.4.0] - 2018-11-02
 
