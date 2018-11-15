@@ -969,6 +969,7 @@ def make_subplots(rows=1, cols=1,
     # set widths (with 'row_width')
     try:
         row_width = kwargs['row_width']
+        row_width.reverse()
         if not isinstance(row_width, list) or len(row_width) != rows:
             raise Exception(
                 "Keyword argument 'row_width' must be a list with {} "
