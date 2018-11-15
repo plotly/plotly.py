@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.4.2] - UNRELEASED
+
+### Fixed
+- `row_width` param in `plotly.tools.make_subplots` now adjusts the ranges of the xaxes intuitively from top to bottom rather than bottom to top.
+
 ## [3.4.1] - 2018-11-09
 
 ### Updated
