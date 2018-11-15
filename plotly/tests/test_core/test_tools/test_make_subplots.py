@@ -2184,7 +2184,7 @@ class TestMakeSubplots(TestCase):
                                         'x': 0.405,
                                         'xanchor': 'center',
                                         'xref': 'paper',
-                                        'y': 0.1875,
+                                        'y': 0.5625,
                                         'yanchor': 'bottom',
                                         'yref': 'paper'},
                                        {'font': {'size': 16},
@@ -2193,17 +2193,17 @@ class TestMakeSubplots(TestCase):
                                         'x': 0.9550000000000001,
                                         'xanchor': 'center',
                                         'xref': 'paper',
-                                        'y': 0.1875,
+                                        'y': 0.5625,
                                         'yanchor': 'bottom',
                                         'yref': 'paper'}],
                        'xaxis': {'anchor': 'y', 'domain': [0.0, 0.81]},
                        'xaxis2': {'anchor': 'y2', 'domain': [0.91, 1.0]},
                        'xaxis3': {'anchor': 'y3', 'domain': [0.0, 0.81]},
                        'xaxis4': {'anchor': 'y4', 'domain': [0.91, 1.0]},
-                       'yaxis': {'anchor': 'x', 'domain': [0.4375, 1.0]},
-                       'yaxis2': {'anchor': 'x2', 'domain': [0.4375, 1.0]},
-                       'yaxis3': {'anchor': 'x3', 'domain': [0.0, 0.1875]},
-                       'yaxis4': {'anchor': 'x4', 'domain': [0.0, 0.1875]}}
+                       'yaxis': {'anchor': 'x', 'domain': [0.8125, 1.0]},
+                       'yaxis2': {'anchor': 'x2', 'domain': [0.8125, 1.0]},
+                       'yaxis3': {'anchor': 'x3', 'domain': [0.0, 0.5625]},
+                       'yaxis4': {'anchor': 'x4', 'domain': [0.0, 0.5625]}}
         })
         fig = tls.make_subplots(rows=2, cols=2,
                                 subplot_titles=('Title 1', 'Title 2', 'Title 3', 'Title 4'),
@@ -2238,7 +2238,7 @@ class TestMakeSubplots(TestCase):
                                         'x': 0.225,
                                         'xanchor': 'center',
                                         'xref': 'paper',
-                                        'y': 0.1875,
+                                        'y': 0.5625,
                                         'yanchor': 'bottom',
                                         'yref': 'paper'},
                                        {'font': {'size': 16},
@@ -2247,17 +2247,16 @@ class TestMakeSubplots(TestCase):
                                         'x': 0.775,
                                         'xanchor': 'center',
                                         'xref': 'paper',
-                                        'y': 0.1875,
+                                        'y': 0.5625,
                                         'yanchor': 'bottom',
                                         'yref': 'paper'}],
                        'xaxis': {'anchor': 'y', 'domain': [0.0, 0.45]},
-                       'xaxis2': {'anchor': 'free', 'domain': [0.55, 1.0], 'position': 0.4375},
+                       'xaxis2': {'anchor': 'free', 'domain': [0.55, 1.0], 'position': 0.8125},
                        'xaxis3': {'anchor': 'y2', 'domain': [0.0, 0.45]},
                        'xaxis4': {'anchor': 'free', 'domain': [0.55, 1.0], 'position': 0.0},
-                       'yaxis': {'anchor': 'x', 'domain': [0.4375, 1.0]},
-                       'yaxis2': {'anchor': 'x3', 'domain': [0.0, 0.1875]}}
+                       'yaxis': {'anchor': 'x', 'domain': [0.8125, 1.0]},
+                       'yaxis2': {'anchor': 'x3', 'domain': [0.0, 0.5625]}}
         })
-
         fig = tls.make_subplots(rows=2, cols=2, row_width=[1, 3], shared_yaxes=True,
                                 subplot_titles=('Title 1', 'Title 2', 'Title 3', 'Title 4'))
 
