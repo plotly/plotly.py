@@ -114,6 +114,10 @@ def _build_mathjax_script(url):
 
 
 def _get_jconfig(config):
+    # TODO: The get_config 'source of truth' should
+    # really be somewhere other than plotly.plotly
+    config = config if config else plotly.plotly.get_config()
+
     configkeys = (
         'staticPlot',
         'plotlyServerURL',
