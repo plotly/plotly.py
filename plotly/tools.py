@@ -27,23 +27,6 @@ DEFAULT_PLOTLY_COLORS = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
 
 
 REQUIRED_GANTT_KEYS = ['Task', 'Start', 'Finish']
-PLOTLY_SCALES = {'Greys': ['rgb(0,0,0)', 'rgb(255,255,255)'],
-                 'YlGnBu': ['rgb(8,29,88)', 'rgb(255,255,217)'],
-                 'Greens': ['rgb(0,68,27)', 'rgb(247,252,245)'],
-                 'YlOrRd': ['rgb(128,0,38)', 'rgb(255,255,204)'],
-                 'Bluered': ['rgb(0,0,255)', 'rgb(255,0,0)'],
-                 'RdBu': ['rgb(5,10,172)', 'rgb(178,10,28)'],
-                 'Reds': ['rgb(220,220,220)', 'rgb(178,10,28)'],
-                 'Blues': ['rgb(5,10,172)', 'rgb(220,220,220)'],
-                 'Picnic': ['rgb(0,0,255)', 'rgb(255,0,0)'],
-                 'Rainbow': ['rgb(150,0,90)', 'rgb(255,0,0)'],
-                 'Portland': ['rgb(12,51,131)', 'rgb(217,30,30)'],
-                 'Jet': ['rgb(0,0,131)', 'rgb(128,0,0)'],
-                 'Hot': ['rgb(0,0,0)', 'rgb(255,255,255)'],
-                 'Blackbody': ['rgb(0,0,0)', 'rgb(160,200,255)'],
-                 'Earth': ['rgb(0,0,130)', 'rgb(255,255,255)'],
-                 'Electric': ['rgb(0,0,0)', 'rgb(255,250,220)'],
-                 'Viridis': ['rgb(68,1,84)', 'rgb(253,231,37)']}
 
 # color constants for violin plot
 DEFAULT_FILLCOLOR = '#1f77b4'

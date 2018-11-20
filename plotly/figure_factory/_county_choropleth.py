@@ -642,7 +642,7 @@ def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
     if not colorscale:
         colorscale = []
         viridis_colors = colors.colorscale_to_colors(
-            colors.PLOTLY_SCALES['Viridis']
+            utils.PLOTLY_SCALES['Viridis']
         )
         viridis_colors = colors.color_parser(
             viridis_colors, colors.hex_to_rgb
