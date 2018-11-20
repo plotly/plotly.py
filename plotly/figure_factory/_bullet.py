@@ -78,7 +78,7 @@ def _bullet(df, markers, measures, ranges, subtitles, titles, orientation,
     for row in range(num_of_lanes):
         # ranges bars
         for idx in range(len(df.iloc[row]['ranges'])):
-            inter_colors = colors.n_colors(
+            inter_colors = utils.n_colors(
                 range_colors[0], range_colors[1],
                 len(df.iloc[row]['ranges']), 'rgb'
             )
@@ -104,7 +104,7 @@ def _bullet(df, markers, measures, ranges, subtitles, titles, orientation,
 
         # measures bars
         for idx in range(len(df.iloc[row]['measures'])):
-            inter_colors = colors.n_colors(
+            inter_colors = utils.n_colors(
                 measure_colors[0], measure_colors[1],
                 len(df.iloc[row]['measures']), 'rgb'
             )

@@ -149,30 +149,39 @@ def find_intermediate_color(lowcolor, highcolor, intermed):
             lowcolor[2] + intermed * diff_2)
 
 
-def n_colors(lowcolor, highcolor, n_colors):
+def n_colors(lowcolor, highcolor, n_colors, colortype='tuple'):
     """
     Splits a low and high color into a list of n_colors colors in it
 
     Accepts two color tuples and returns a list of n_colors colors
     which form the intermediate colors between lowcolor and highcolor
-    from linearly interpolating through RGB space
-
+    from linearly interpolating through RGB space. If colortype is 'rgb'
+    the function will return a list of colors in the same form.
     """
+    if colortype == 'rgb':
+        # convert to tuple
+        lowcolor = unlabel_rgb(lowcolor)
+        highcolor = unlabel_rgb(highcolor)
+
     diff_0 = float(highcolor[0] - lowcolor[0])
     incr_0 = diff_0/(n_colors - 1)
     diff_1 = float(highcolor[1] - lowcolor[1])
     incr_1 = diff_1/(n_colors - 1)
     diff_2 = float(highcolor[2] - lowcolor[2])
     incr_2 = diff_2/(n_colors - 1)
-    color_tuples = []
+    list_of_colors = []
 
     for index in range(n_colors):
         new_tuple = (lowcolor[0] + (index * incr_0),
                      lowcolor[1] + (index * incr_1),
                      lowcolor[2] + (index * incr_2))
-        color_tuples.append(new_tuple)
+        list_of_colors.append(new_tuple)
 
-    return color_tuples
+    if colortype == 'rgb':
+        # back to an rgb string
+        list_of_colors = color_parser(list_of_colors, label_rgb)
+
+    return list_of_colors
 
 
 def label_rgb(colors):
