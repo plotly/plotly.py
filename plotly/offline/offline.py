@@ -167,6 +167,7 @@ def _get_jconfig(config):
             .replace('http://', '')
         link_text = clean_config['linkText'].replace('plot.ly', link_domain)
         clean_config['linkText'] = link_text
+        clean_config['plotlyServerURL'] = plotly_platform_url
 
     return clean_config
     
