@@ -674,7 +674,7 @@ def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
 
             # make R,G,B into int values
             float_color = colors.unlabel_rgb(float_color)
-            float_color = colors.unconvert_from_RGB_255(float_color)
+            float_color = utils.unconvert_from_RGB_255(float_color)
             int_rgb = colors.convert_to_RGB_255(float_color)
             int_rgb = colors.label_rgb(int_rgb)
 

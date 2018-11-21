@@ -2,6 +2,7 @@ from __future__ import absolute_import
 
 import collections
 import decimal
+import six
 
 from plotly import exceptions
 
@@ -355,7 +356,7 @@ def convert_to_RGB_255(colors):
     statistical analysis to avoid rounding bias
     """
     rgb_components = []
-
+    print colors
     for component in colors:
         rounded_num = decimal.Decimal(str(component*255.0)).quantize(
             decimal.Decimal('1'), rounding=decimal.ROUND_HALF_EVEN
@@ -414,6 +415,7 @@ def validate_colors(colors, colortype='tuple'):
     """
     Validates color(s) and returns a list of color(s) of a specified type
     """
+    print colors
     from numbers import Number
     if colors is None:
         colors = DEFAULT_PLOTLY_COLORS
@@ -462,7 +464,7 @@ def validate_colors(colors, colortype='tuple'):
                     )
             colors[j] = each_color
 
-    if colortype == 'rgb':
+    if colortype == 'rgb' and not isinstance(colors, six.string_types):
         for j, each_color in enumerate(colors):
             rgb_color = color_parser(each_color, convert_to_RGB_255)
             colors[j] = color_parser(rgb_color, label_rgb)
