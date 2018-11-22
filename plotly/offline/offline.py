@@ -113,6 +113,65 @@ def _build_mathjax_script(url):
             .format(url=url))
 
 
+def _get_jconfig(config):
+    # TODO: The get_config 'source of truth' should
+    # really be somewhere other than plotly.plotly
+    config = config if config else plotly.plotly.get_config()
+
+    configkeys = (
+        'staticPlot',
+        'plotlyServerURL',
+        'editable',
+        'edits',
+        'autosizable',
+        'queueLength',
+        'fillFrame',
+        'frameMargins',
+        'scrollZoom',
+        'doubleClick',
+        'showTips',
+        'showAxisDragHandles',
+        'showAxisRangeEntryBoxes',
+        'showLink',
+        'sendData',
+        'linkText',
+        'showSources',
+        'displayModeBar',
+        'modeBarButtonsToRemove',
+        'modeBarButtonsToAdd',
+        'modeBarButtons',
+        'toImageButtonOptions',
+        'displaylogo',
+        'plotGlPixelRatio',
+        'setBackground',
+        'topojsonURL',
+        'mapboxAccessToken',
+        'logging',
+        'globalTransforms',
+        'locale',
+        'locales',
+    )
+
+    clean_config = dict((k, config[k]) for k in configkeys if k in config)
+
+    # TODO: The get_config 'source of truth' should
+    # really be somewhere other than plotly.plotly
+    plotly_platform_url = plotly.plotly.get_config().get('plotly_domain',
+                                                         'https://plot.ly')
+
+    if (plotly_platform_url != 'https://plot.ly' and
+        clean_config['linkText'] == 'Export to plot.ly'):
+
+        link_domain = plotly_platform_url\
+            .replace('https://', '')\
+            .replace('http://', '')
+        link_text = clean_config['linkText'].replace('plot.ly', link_domain)
+        clean_config['linkText'] = link_text
+        clean_config['plotlyServerURL'] = plotly_platform_url
+
+    return clean_config
+    
+
 # Build script to set global PlotlyConfig object. This must execute before
 # plotly.js is loaded.
 _window_plotly_config = """\
@@ -271,56 +330,9 @@ def _plot_html(figure_or_data, config, validate, default_width,
     else:
         jframes = None
 
-    configkeys = (
-        'staticPlot',
-        'plotlyServerURL',
-        'editable',
-        'edits',
-        'autosizable',
-        'queueLength',
-        'fillFrame',
-        'frameMargins',
-        'scrollZoom',
-        'doubleClick',
-        'showTips',
-        'showAxisDragHandles',
-        'showAxisRangeEntryBoxes',
-        'showLink',
-        'sendData',
-        'linkText',
-        'showSources',
-        'displayModeBar',
-        'modeBarButtonsToRemove',
-        'modeBarButtonsToAdd',
-        'modeBarButtons',
-        'toImageButtonOptions',
-        'displaylogo',
-        'plotGlPixelRatio',
-        'setBackground',
-        'topojsonURL',
-        'mapboxAccessToken',
-        'logging',
-        'globalTransforms',
-        'locale',
-        'locales',
-    )
-
-    config_clean = dict((k, config[k]) for k in configkeys if k in config)
-    jconfig = _json.dumps(config_clean)
-
-    # TODO: The get_config 'source of truth' should
-    # really be somewhere other than plotly.plotly
+    jconfig = _json.dumps(_get_jconfig(config))
     plotly_platform_url = plotly.plotly.get_config().get('plotly_domain',
                                                          'https://plot.ly')
-    if (plotly_platform_url != 'https://plot.ly' and
-            config['linkText'] == 'Export to plot.ly'):
-
-        link_domain = plotly_platform_url\
-            .replace('https://', '')\
-            .replace('http://', '')
-        link_text = config['linkText'].replace('plot.ly', link_domain)
-        config['linkText'] = link_text
-        jconfig = jconfig.replace('Export to plot.ly', link_text)
 
     if jframes:
         script = '''
@@ -426,6 +438,8 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     config.setdefault('showLink', show_link)
     config.setdefault('linkText', link_text)
 
+    jconfig = _get_jconfig(config)
+
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
 
     # Though it can add quite a bit to the display-bundle size, we include
@@ -438,7 +452,7 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
     frames = _json.loads(_json.dumps(figure.get('frames', None),
                                      cls=plotly.utils.PlotlyJSONEncoder))
 
-    fig = {'data': data, 'layout': layout}
+    fig = {'data': data, 'layout': layout, 'config': jconfig}
     if frames:
         fig['frames'] = frames
 
