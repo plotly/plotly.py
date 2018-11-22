@@ -1,12 +1,12 @@
 from unittest import TestCase
 
 from nose.tools import raises
+import plotly.figure_factory.utils as utils
 import plotly.tools as tls
 from plotly.exceptions import PlotlyError
-import plotly.colors as colors
 
 
-class TestColors(TestCase):
+class TestFigureFactoryUtils(TestCase):
 
     def test_validate_colors(self):
 
@@ -16,7 +16,7 @@ class TestColors(TestCase):
         pattern = ("If your colors variable is a string, it must be a "
                    "Plotly scale, an rgb color or a hex color.")
 
-        self.assertRaisesRegexp(PlotlyError, pattern, colors.validate_colors,
+        self.assertRaisesRegexp(PlotlyError, pattern, utils.validate_colors,
                                 color_string)
 
         # test rgb color
@@ -25,7 +25,7 @@ class TestColors(TestCase):
         pattern2 = ("Whoops! The elements in your rgb colors tuples cannot "
                     "exceed 255.0.")
 
-        self.assertRaisesRegexp(PlotlyError, pattern2, colors.validate_colors,
+        self.assertRaisesRegexp(PlotlyError, pattern2, utils.validate_colors,
                                 color_string2)
 
         # test tuple color
@@ -34,7 +34,7 @@ class TestColors(TestCase):
         pattern3 = ("Whoops! The elements in your colors tuples cannot "
                     "exceed 1.0.")
 
-        self.assertRaisesRegexp(PlotlyError, pattern3, colors.validate_colors,
+        self.assertRaisesRegexp(PlotlyError, pattern3, utils.validate_colors,
                                 color_tuple)
 
     def test_convert_colors_to_same_type(self):
@@ -43,7 +43,7 @@ class TestColors(TestCase):
         color_tuple = ['#aaaaaa', '#bbbbbb', '#cccccc']
         scale = [0, 1]
 
-        self.assertRaises(PlotlyError, colors.convert_colors_to_same_type,
+        self.assertRaises(PlotlyError, utils.convert_colors_to_same_type,
                           color_tuple, scale=scale)
 
         # test colortype
@@ -54,7 +54,7 @@ class TestColors(TestCase):
                     "variable.")
 
         self.assertRaisesRegexp(PlotlyError, pattern2,
-                                colors.convert_colors_to_same_type,
+                                utils.convert_colors_to_same_type,
                                 color_tuple, colortype)
 
     def test_convert_dict_colors_to_same_type(self):
@@ -67,7 +67,7 @@ class TestColors(TestCase):
                    "variable.")
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                colors.convert_dict_colors_to_same_type,
+                                utils.convert_dict_colors_to_same_type,
                                 color_dict, colortype)
 
     def test_validate_scale_values(self):
@@ -79,7 +79,7 @@ class TestColors(TestCase):
                    "two values.")
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                colors.validate_scale_values,
+                                utils.validate_scale_values,
                                 scale)
 
         # test if first and last number is 0 and 1 respectively
@@ -89,7 +89,7 @@ class TestColors(TestCase):
                    "1.0 respectively.")
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                colors.validate_scale_values,
+                                utils.validate_scale_values,
                                 scale)
 
         # test numbers increase
@@ -99,7 +99,7 @@ class TestColors(TestCase):
                    "increasing sequence of numbers.")
 
         self.assertRaisesRegexp(PlotlyError, pattern,
-                                colors.validate_scale_values,
+                                utils.validate_scale_values,
                                 scale)
 
     def test_make_colorscale(self):
@@ -111,7 +111,7 @@ class TestColors(TestCase):
             "You must input a list of colors that has at least two colors."
         )
 
-        self.assertRaisesRegexp(PlotlyError, pattern, colors.make_colorscale,
+        self.assertRaisesRegexp(PlotlyError, pattern, utils.make_colorscale,
                                 color_list)
 
         # test length of colors and scale
@@ -120,5 +120,5 @@ class TestColors(TestCase):
 
         pattern2 = ("The length of colors and scale must be the same.")
 
-        self.assertRaisesRegexp(PlotlyError, pattern2, colors.make_colorscale,
+        self.assertRaisesRegexp(PlotlyError, pattern2, utils.make_colorscale,
                                 color_list2, scale)
