@@ -636,6 +636,41 @@ def convert_dict_colors_to_same_type(colors_dict, colortype='rgb'):
                                      'for your colortype variable.')
 
 
+def make_colorscale(colors, scale=None):
+    """
+    Makes a colorscale from a list of colors and a scale
+
+    Takes a list of colors and scales and constructs a colorscale based
+    on the colors in sequential order. If 'scale' is left empty, a linear-
+    interpolated colorscale will be generated. If 'scale' is a specificed
+    list, it must be the same legnth as colors and must contain all floats
+    For documentation regarding to the form of the output, see
+    https://plot.ly/python/reference/#mesh3d-colorscale
+
+    :param (list) colors: a list of single colors
+    """
+    colorscale = []
+
+    # validate minimum colors length of 2
+    if len(colors) < 2:
+        raise exceptions.PlotlyError('You must input a list of colors that '
+                                     'has at least two colors.')
+
+    if scale is None:
+        scale_incr = 1./(len(colors) - 1)
+        return [[i * scale_incr, color] for i, color in enumerate(colors)]
+
+    else:
+        if len(colors) != len(scale):
+            raise exceptions.PlotlyError('The length of colors and scale '
+                                         'must be the same.')
+
+        validate_scale_values(scale)
+
+        colorscale = [list(tup) for tup in zip(scale, colors)]
+        return colorscale
+
+
 def colorscale_to_colors(colorscale):
     """
     Extracts the colors from colorscale as a list
