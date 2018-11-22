@@ -149,7 +149,7 @@ def trisurf(x, y, z, simplices, show_colorbar, edges_color, scale,
     if mean_dists_are_numbers and show_colorbar is True:
         # make a colorscale from the colors
         colorscale = colors.make_colorscale(colormap, scale)
-        colorscale = colors.convert_colorscale_to_rgb(colorscale)
+        colorscale = utils.convert_colorscale_to_rgb(colorscale)
 
         colorbar = graph_objs.Scatter3d(
             x=x[:1],
