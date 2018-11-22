@@ -13,6 +13,26 @@ DEFAULT_PLOTLY_COLORS = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
                          'rgb(227, 119, 194)', 'rgb(127, 127, 127)',
                          'rgb(188, 189, 34)', 'rgb(23, 190, 207)']
 
+INCORRECT_PLOTLY_SCALES = {
+    'Blackbody': ['rgb(0,0,0)', 'rgb(160,200,255)'],
+    'Bluered': ['rgb(0,0,255)', 'rgb(255,0,0)'],
+    'Blues': ['rgb(220, 220, 220)', 'rgb(5, 10, 172)'],
+    'Earth': ['rgb(0,0,130)', 'rgb(255,255,255)'],
+    'Electric': ['rgb(0,0,0)', 'rgb(255,250,220)'],
+    'Greens': ['rgb(0,68,27)', 'rgb(247,252,245)'],
+    'Greys': ['rgb(0,0,0)', 'rgb(255,255,255)'],
+    'Hot': ['rgb(0,0,0)', 'rgb(255,255,255)'],
+    'Jet': ['rgb(0,0,131)', 'rgb(128,0,0)'],
+    'Picnic': ['rgb(0,0,255)', 'rgb(255,0,0)'],
+    'Portland': ['rgb(12,51,131)', 'rgb(217,30,30)'],
+    'Rainbow': ['rgb(150,0,90)', 'rgb(255,0,0)'],
+    'RdBu': ['rgb(5,10,172)', 'rgb(178,10,28)'],
+    'Reds': ['rgb(220,220,220)', 'rgb(178,10,28)'],
+    'Viridis': ['#440154', '#fde725'],
+    'YlGnBu': ['rgb(8,29,88)', 'rgb(255,255,217)'],
+    'YlOrRd': ['rgb(128,0,38)', 'rgb(255,255,204)']
+}
+
 PLOTLY_SCALES = {
     'Greys': [
         [0, 'rgb(0,0,0)'], [1, 'rgb(255,255,255)']
@@ -420,8 +440,8 @@ def validate_colors(colors, colortype='tuple'):
         colors = DEFAULT_PLOTLY_COLORS
 
     if isinstance(colors, str):
-        if colors in PLOTLY_SCALES:
-            colors = PLOTLY_SCALES[colors]
+        if colors in INCORRECT_PLOTLY_SCALES:
+            colors = INCORRECT_PLOTLY_SCALES[colors]
         elif 'rgb' in colors or '#' in colors:
             colors = [colors]
         else:
