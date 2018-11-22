@@ -36,6 +36,7 @@ var FigureModel = widgets.DOMWidgetModel.extend({
         // messages
         _data: [],
         _layout: {},
+        _config: {},
 
         // Python -> JS messages
         // ---------------------
@@ -748,8 +749,9 @@ var FigureView = widgets.DOMWidgetView.extend({
         // the model is not directly mutated by the Plotly.js library.
         var initialTraces = _.cloneDeep(this.model.get("_data"));
         var initialLayout = _.cloneDeep(this.model.get("_layout"));
+        var config = this.model.get("_config");
 
-        Plotly.newPlot(that.el, initialTraces, initialLayout).then(
+        Plotly.newPlot(that.el, initialTraces, initialLayout, config).then(
             function () {
 
                 // ### Send trace deltas ###
