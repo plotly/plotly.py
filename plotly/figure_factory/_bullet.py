@@ -318,7 +318,7 @@ def create_bullet(data, markers=None, measures=None, ranges=None,
                     "of two valid colors."
                 )
             colors.validate_colors(colors_list)
-            colors_list = colors.convert_colors_to_same_type(colors_list,
+            colors_list = utils.convert_colors_to_same_type(colors_list,
                                                              'rgb')[0]
 
     # default scatter options

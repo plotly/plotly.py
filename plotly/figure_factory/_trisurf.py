@@ -455,7 +455,7 @@ def create_trisurf(x, y, z, simplices, colormap=None, show_colorbar=True,
 
     # Validate colormap
     colors.validate_colors(colormap)
-    colormap, scale = colors.convert_colors_to_same_type(
+    colormap, scale = utils.convert_colors_to_same_type(
         colormap, colortype='tuple',
         return_default_colors=True, scale=scale
     )
