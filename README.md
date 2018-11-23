@@ -54,12 +54,12 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 
 plotly.py may be installed using pip...
 ```
-pip install plotly==3.4.1
+pip install plotly==3.4.2
 ```
 
 or conda.
 ```
-conda install -c plotly plotly=3.4.1
+conda install -c plotly plotly=3.4.2
 ```
 
 ### Jupyter Notebook Support
@@ -102,10 +102,10 @@ set NODE_OPTIONS=--max-old-space-size=4096
 jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.38 --no-build
 
 # FigureWidget support
-jupyter labextension install plotlywidget@0.5.1 --no-build
+jupyter labextension install plotlywidget@0.5.2 --no-build
 
 # offline iplot support
-jupyter labextension install @jupyterlab/plotly-extension@0.18 --no-build
+jupyter labextension install @jupyterlab/plotly-extension@0.18.1 --no-build
 
 # JupyterLab chart editor support (optional)
 jupyter labextension install jupyterlab-chart-editor@1.0 --no-build
