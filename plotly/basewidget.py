@@ -46,6 +46,7 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
     # using the relayout/restyle/update/etc. messages.
     _layout = Dict().tag(sync=True, **custom_serializers)
     _data = List().tag(sync=True, **custom_serializers)
+    _config = Dict().tag(sync=True, **custom_serializers)
 
     # ### Python -> JS message properties ###
     # These properties are used to send messages from Python to the
