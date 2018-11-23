@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 
-from plotly import colors, exceptions, optional_imports
+from plotly import exceptions, optional_imports
 from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
 

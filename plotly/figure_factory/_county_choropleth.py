@@ -1,4 +1,4 @@
-from plotly import colors, exceptions, optional_imports
+from plotly import exceptions, optional_imports
 
 from plotly.figure_factory import utils
 
