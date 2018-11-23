@@ -158,19 +158,18 @@ def _get_jconfig(config):
     # really be somewhere other than plotly.plotly
     plotly_platform_url = plotly.plotly.get_config().get('plotly_domain',
                                                          'https://plot.ly')
+    clean_config['plotlyServerURL'] = plotly_platform_url
 
     if (plotly_platform_url != 'https://plot.ly' and
-        clean_config['linkText'] == 'Export to plot.ly'):
-
+        clean_config.get('linkText', None) == 'Export to plot.ly'):
         link_domain = plotly_platform_url\
             .replace('https://', '')\
             .replace('http://', '')
         link_text = clean_config['linkText'].replace('plot.ly', link_domain)
         clean_config['linkText'] = link_text
-        clean_config['plotlyServerURL'] = plotly_platform_url
 
     return clean_config
-    
+
 
 # Build script to set global PlotlyConfig object. This must execute before
 # plotly.js is loaded.

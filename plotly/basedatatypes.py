@@ -9,6 +9,7 @@ from contextlib import contextmanager
 from copy import deepcopy, copy
 from pprint import PrettyPrinter
 
+from plotly.offline.offline import _get_jconfig
 from .optional_imports import get_module
 
 from . import offline as pyo
@@ -190,6 +191,16 @@ class BaseFigure(object):
         # ### Reparent layout object ###
         self._layout_obj._orphan_props.clear()
         self._layout_obj._parent = self
+
+        # Config
+        # ------
+        # Pass along default config to the front end. For now this just
+        # ensures that the plotly domain url gets passed to the front end.
+        # In the future we can extend this to allow the user to supply
+        # arbitrary config options like in plotly.offline.plot/iplot.  But
+        # this will require a fair amount of testing to determine which
+        # options are compatible with FigureWidget.
+        self._config = _get_jconfig(None)
 
         # Frames
         # ------
