@@ -8,6 +8,69 @@ from plotly.exceptions import PlotlyError
 
 class TestFigureFactoryUtils(TestCase):
 
+    def test_validate_index(self):
+        pattern = (
+            "Error in indexing column. "
+            "Make sure all entries of each "
+            "column are all numbers or "
+            "all strings."
+        )
+
+        self.assertRaisesRegexp(PlotlyError, pattern, utils.validate_index,
+                                [13, 'foo'])
+
+        self.assertRaisesRegexp(PlotlyError, pattern, utils.validate_index,
+                                ['number', 42])
+
+    def validate_dataframe(self):
+        pattern = (
+            "Error in dataframe. "
+            "Make sure all entries of "
+            "each column are either "
+            "numbers or strings."
+        )
+
+        df = [
+            [8, 'foo'],
+            ['amazing', 64]
+        ]
+
+        self.assertRaisesRegexp(PlotlyError, pattern, utils.validate_index, df)
+
+        df = [
+            ['amazing', 64],
+            [8, 'foo']
+        ]
+
+        self.assertRaisesRegexp(PlotlyError, pattern, utils.validate_index, df)
+
+
+    def validate_equal_length(self):
+        pattern = (
+            "Oops! Your data lists or ndarrays should be the same length."
+        )
+
+        self.assertRaisesRegexp(PlotlyError, pattern, utils.validate_index,
+                                (0,0,0), (0,0,0,0,0))
+
+
+    def test_validate_positive_scalars(self):
+        # only one negative number
+        self.assertRaises(ValueError, utils.validate_positive_scalars,
+                          number0=1, number1=0.001, number2=-2)
+
+        # TODO: fix so error is raised
+        # not a number
+        # self.assertRaises(TypeError, utils.validate_positive_scalars,
+        #                   number0=1, number1=0.001, number2="asd")
+
+    def test_flatten(self):
+
+        self.assertRaises(
+            PlotlyError, utils.flatten,
+            array=0 
+        )
+
     def test_validate_colors(self):
 
         # test string input
@@ -28,6 +91,15 @@ class TestFigureFactoryUtils(TestCase):
         self.assertRaisesRegexp(PlotlyError, pattern2, utils.validate_colors,
                                 color_string2)
 
+        # test dictionary
+        colors_dict = {
+            'apple': 'rgb(300, 0, 0)',
+            'pear': (0, 0.5, 1)
+        }
+
+        self.assertRaisesRegexp(PlotlyError, pattern2, utils.validate_colors_dict,
+                                colors_dict)
+
         # test tuple color
         color_tuple = (1, 1, 2)
 
@@ -36,6 +108,14 @@ class TestFigureFactoryUtils(TestCase):
 
         self.assertRaisesRegexp(PlotlyError, pattern3, utils.validate_colors,
                                 color_tuple)
+
+        colors_dict2 = {
+            'apple': 'rgb(255, 100, 50)',
+            'pear': (0, 0.5, 2)
+        }
+
+        self.assertRaisesRegexp(PlotlyError, pattern3, utils.validate_colors_dict,
+                                colors_dict2)
 
     def test_convert_colors_to_same_type(self):
 
@@ -122,3 +202,48 @@ class TestFigureFactoryUtils(TestCase):
 
         self.assertRaisesRegexp(PlotlyError, pattern2, utils.make_colorscale,
                                 color_list2, scale)
+
+
+    def test_endpts_to_intervals(self):
+
+        pattern = ("The intervals_endpts argument must "
+                   "be a list or tuple of a sequence "
+                   "of increasing numbers.")
+
+        endpts = 'foo'
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                utils.endpts_to_intervals, endpts)
+
+        endpts = ['foo']
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                utils.endpts_to_intervals, endpts)
+
+        endpts = [1, 0]
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                utils.endpts_to_intervals, endpts)
+
+    def test_validate_colorscale(self):
+
+        pattern = "A valid colorscale must be a list."
+
+        colorscale = 55
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                utils.validate_colorscale, colorscale)
+
+        pattern2 = "A valid colorscale must be a list of lists."
+
+        colorscale = [[], [], 'foo', []]
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                utils.validate_colorscale, colorscale)
+        
+    def test_list_of_options(self):
+
+        pattern = 'Your list or tuple must contain at least 2 items.'
+
+        self.assertRaisesRegexp(PlotlyError, pattern,
+                                utils.list_of_options, ['item #1'])
+
+
+
+
+

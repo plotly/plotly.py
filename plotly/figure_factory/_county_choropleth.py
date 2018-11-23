@@ -641,14 +641,14 @@ def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
 
     if not colorscale:
         colorscale = []
-        viridis_colors = colors.colorscale_to_colors(
+        viridis_colors = utils.colorscale_to_colors(
             utils.PLOTLY_SCALES['Viridis']
         )
-        viridis_colors = colors.color_parser(
-            viridis_colors, colors.hex_to_rgb
+        viridis_colors = utils.color_parser(
+            viridis_colors, utils.hex_to_rgb
         )
-        viridis_colors = colors.color_parser(
-            viridis_colors, colors.label_rgb
+        viridis_colors = utils.color_parser(
+            viridis_colors, utils.label_rgb
         )
         viri_len = len(viridis_colors) + 1
         viri_intervals = utils.endpts_to_intervals(
@@ -665,7 +665,7 @@ def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
             intermed = ((L - viri_intervals[idx][0]) /
                         (viri_intervals[idx][1] - viri_intervals[idx][0]))
 
-            float_color = colors.find_intermediate_color(
+            float_color = utils.find_intermediate_color(
                 viridis_colors[idx],
                 viridis_colors[idx],
                 intermed,
@@ -673,10 +673,10 @@ def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
             )
 
             # make R,G,B into int values
-            float_color = colors.unlabel_rgb(float_color)
+            float_color = utils.unlabel_rgb(float_color)
             float_color = utils.unconvert_from_RGB_255(float_color)
-            int_rgb = colors.convert_to_RGB_255(float_color)
-            int_rgb = colors.label_rgb(int_rgb)
+            int_rgb = utils.convert_to_RGB_255(float_color)
+            int_rgb = utils.label_rgb(int_rgb)
 
             colorscale.append(int_rgb)
 
