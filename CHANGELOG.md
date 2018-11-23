@@ -2,6 +2,18 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.4.2] - 2018-11-23
+
+### Fixed
+ - `config` options are now supported when using `plotly.offline.iplot` to
+ display a figure in JupyterLab. Requires version 0.18.1 of the 
+ `@jupyterlab/plotly-extension` extension.
+ ([#1281](https://github.com/plotly/plotly.py/pull/1281),
+ [jupyterlab/jupyter-renderers#168](https://github.com/jupyterlab/jupyter-renderers/pull/168))
+ - Custom `plotly_domain` values are now supported in FigureWidget in both
+ the classic notebook and JupyterLab
+ ([#1284](https://github.com/plotly/plotly.py/pull/1284)) 
+
 ## [3.4.1] - 2018-11-09
 
 ### Updated
