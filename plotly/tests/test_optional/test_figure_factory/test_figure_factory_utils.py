@@ -59,16 +59,11 @@ class TestFigureFactoryUtils(TestCase):
         self.assertRaises(ValueError, utils.validate_positive_scalars,
                           number0=1, number1=0.001, number2=-2)
 
-        # TODO: fix so error is raised
-        # not a number
-        # self.assertRaises(TypeError, utils.validate_positive_scalars,
-        #                   number0=1, number1=0.001, number2="asd")
-
     def test_flatten(self):
 
         self.assertRaises(
             PlotlyError, utils.flatten,
-            array=0 
+            array=0
         )
 
     def test_validate_colors(self):
