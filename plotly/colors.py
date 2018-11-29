@@ -2,7 +2,7 @@ from __future__ import absolute_import
 
 from numbers import Number
 
-from figure_factory.utils import (
+from .figure_factory.utils import (
 	DEFAULT_PLOTLY_COLORS, PLOTLY_SCALES, color_parser,
 	colorscale_to_colors,
  colorscale_to_scale,
