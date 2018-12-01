@@ -9,7 +9,7 @@
         </td>
     </tr>
     <tr>
-        <td>Monthly Downloads</td>
+        <td>PyPI Downloads</td>
         <td>
             <a href="https://pepy.tech/project/plotly"/>
             <img src="https://pepy.tech/badge/plotly/month"/>
