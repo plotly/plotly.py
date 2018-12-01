@@ -1,5 +1,29 @@
 # plotly.py
 
+<table>
+    <tr>
+        <td>Latest Release</td>
+        <td>
+            <a href="https://pypi.org/project/plotly/"/>
+            <img src="https://badge.fury.io/py/plotly.svg"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Monthly Downloads</td>
+        <td>
+            <a href="https://pepy.tech/project/plotly"/>
+            <img src="https://pepy.tech/badge/plotly/month"/>
+        </td>
+    </tr>
+    <tr>
+        <td>License</td>
+        <td>
+            <a href="https://opensource.org/licenses/MIT"/>
+            <img src="https://img.shields.io/badge/License-MIT-yellow.svg"/>
+        </td>
+    </tr>
+</table>
+
 ## Quickstart
 
 `pip install plotly "notebook>=5.3" "ipywidgets>=7.2"`
