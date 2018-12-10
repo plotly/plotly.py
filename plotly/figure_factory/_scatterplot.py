@@ -2,7 +2,7 @@ from __future__ import absolute_import
 
 import six
 
-from plotly import exceptions, optional_imports
+from plotly import colors, exceptions, optional_imports
 from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
 from plotly.tools import make_subplots
@@ -11,6 +11,53 @@ pd = optional_imports.get_module('pandas')
 
 DIAG_CHOICES = ['scatter', 'histogram', 'box']
 VALID_COLORMAP_TYPES = ['cat', 'seq']
+
+
+def endpts_to_intervals(endpts):
+    """
+    Returns a list of intervals for categorical colormaps
+
+    Accepts a list or tuple of sequentially increasing numbers and returns
+    a list representation of the mathematical intervals with these numbers
+    as endpoints. For example, [1, 6] returns [[-inf, 1], [1, 6], [6, inf]]
+
+    :raises: (PlotlyError) If input is not a list or tuple
+    :raises: (PlotlyError) If the input contains a string
+    :raises: (PlotlyError) If any number does not increase after the
+        previous one in the sequence
+    """
+    length = len(endpts)
+    # Check if endpts is a list or tuple
+    if not (isinstance(endpts, (tuple)) or isinstance(endpts, (list))):
+        raise exceptions.PlotlyError("The intervals_endpts argument must "
+                                     "be a list or tuple of a sequence "
+                                     "of increasing numbers.")
+    # Check if endpts contains only numbers
+    for item in endpts:
+        if isinstance(item, str):
+            raise exceptions.PlotlyError("The intervals_endpts argument "
+                                         "must be a list or tuple of a "
+                                         "sequence of increasing "
+                                         "numbers.")
+    # Check if numbers in endpts are increasing
+    for k in range(length - 1):
+        if endpts[k] >= endpts[k + 1]:
+            raise exceptions.PlotlyError("The intervals_endpts argument "
+                                         "must be a list or tuple of a "
+                                         "sequence of increasing "
+                                         "numbers.")
+    else:
+        intervals = []
+        # add -inf to intervals
+        intervals.append([float('-inf'), endpts[0]])
+        for k in range(length - 1):
+            interval = []
+            interval.append(endpts[k])
+            interval.append(endpts[k + 1])
+            intervals.append(interval)
+        # add +inf to intervals
+        intervals.append([endpts[length - 1], float('inf')])
+        return intervals
 
 
 def hide_tick_labels_from_box_subplots(fig):

@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 
-from plotly import exceptions, optional_imports
+from plotly import colors, exceptions, optional_imports
 from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
 
@@ -25,14 +25,14 @@ def map_face2color(face, colormap, scale, vmin, vmax):
     if len(colormap) == 1:
         # color each triangle face with the same color in colormap
         face_color = colormap[0]
-        face_color = utils.convert_to_RGB_255(face_color)
-        face_color = utils.label_rgb(face_color)
+        face_color = colors.convert_to_RGB_255(face_color)
+        face_color = colors.label_rgb(face_color)
         return face_color
     if face == vmax:
         # pick last color in colormap
         face_color = colormap[-1]
-        face_color = utils.convert_to_RGB_255(face_color)
-        face_color = utils.label_rgb(face_color)
+        face_color = colors.convert_to_RGB_255(face_color)
+        face_color = colors.label_rgb(face_color)
         return face_color
     else:
         if scale is None:
@@ -41,14 +41,14 @@ def map_face2color(face, colormap, scale, vmin, vmax):
             t = (face - vmin) / float((vmax - vmin))
             low_color_index = int(t / (1./(len(colormap) - 1)))
 
-            face_color = utils.find_intermediate_color(
+            face_color = colors.find_intermediate_color(
                 colormap[low_color_index],
                 colormap[low_color_index + 1],
                 t * (len(colormap) - 1) - low_color_index
             )
 
-            face_color = utils.convert_to_RGB_255(face_color)
-            face_color = utils.label_rgb(face_color)
+            face_color = colors.convert_to_RGB_255(face_color)
+            face_color = colors.label_rgb(face_color)
         else:
             # find the face color for a non-linearly interpolated scale
             t = (face - vmin) / float((vmax - vmin))
@@ -62,14 +62,14 @@ def map_face2color(face, colormap, scale, vmin, vmax):
             low_scale_val = scale[low_color_index]
             high_scale_val = scale[low_color_index + 1]
 
-            face_color = utils.find_intermediate_color(
+            face_color = colors.find_intermediate_color(
                 colormap[low_color_index],
                 colormap[low_color_index + 1],
                 (t - low_scale_val)/(high_scale_val - low_scale_val)
             )
 
-            face_color = utils.convert_to_RGB_255(face_color)
-            face_color = utils.label_rgb(face_color)
+            face_color = colors.convert_to_RGB_255(face_color)
+            face_color = colors.label_rgb(face_color)
         return face_color
 
 
@@ -103,12 +103,12 @@ def trisurf(x, y, z, simplices, show_colorbar, edges_color, scale,
         for index in range(len(color_func)):
             if isinstance(color_func[index], str):
                 if '#' in color_func[index]:
-                    foo = utils.hex_to_rgb(color_func[index])
-                    color_func[index] = utils.label_rgb(foo)
+                    foo = colors.hex_to_rgb(color_func[index])
+                    color_func[index] = colors.label_rgb(foo)
 
             if isinstance(color_func[index], tuple):
-                foo = utils.convert_to_RGB_255(color_func[index])
-                color_func[index] = utils.label_rgb(foo)
+                foo = colors.convert_to_RGB_255(color_func[index])
+                color_func[index] = colors.label_rgb(foo)
 
         mean_dists = np.asarray(color_func)
     else:
@@ -455,7 +455,7 @@ def create_trisurf(x, y, z, simplices, colormap=None, show_colorbar=True,
         aspectratio = {'x': 1, 'y': 1, 'z': 1}
 
     # Validate colormap
-    utils.validate_colors(colormap)
+    colors.validate_colors(colormap)
     colormap, scale = utils.convert_colors_to_same_type(
         colormap, colortype='tuple',
         return_default_colors=True, scale=scale

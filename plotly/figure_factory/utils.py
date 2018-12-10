@@ -1,81 +1,3 @@
-"""
-utils
-=====
-
-Utility functions for figure factory modules including functions for
-manipulating colors and arrays of colors.
-
-=====
-About Colors
-=====
-There are three basic types of color types: rgb, hex and tuple:
-
-rgb - An rgb color is a string of the form 'rgb(a,b,c)' where a, b and c are
-integers between 0 and 255 inclusive.
-
-hex - A hex color is a string of the form '#xxxxxx' where each x is a
-character that belongs to the set [0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f]. This is
-just the set of characters used in the hexadecimal numeric system.
-
-tuple - A tuple color is a 3-tuple of the form (a,b,c) where a, b and c are
-floats between 0 and 1 inclusive.
-
------
-Colormaps and Colorscales:
-A colormap or a colorscale is a correspondence between values - Pythonic
-objects such as strings and floats - to colors.
-
-There are typically two main types of colormaps that exist: numerical and
-categorical colormaps.
-
-Numerical:
-----------
-Numerical colormaps are used when the coloring column being used takes a
-spectrum of values or numbers.
-
-A classic example from the Plotly library:
-```
-rainbow_colorscale =  [
-    [0, 'rgb(150,0,90)'], [0.125, 'rgb(0,0,200)'],
-    [0.25, 'rgb(0,25,255)'], [0.375, 'rgb(0,152,255)'],
-    [0.5, 'rgb(44,255,150)'], [0.625, 'rgb(151,255,0)'],
-    [0.75, 'rgb(255,234,0)'], [0.875, 'rgb(255,111,0)'],
-    [1, 'rgb(255,0,0)']
-]
-```
-
-Notice that this colorscale is a list of lists with each inner list containing
-a number and a color. These left hand numbers in the nested lists go from 0 to
-1, and they are like pointers tell you when a number is mapped to a specific
-color.
-
-If you have a column of numbers `col_num` that you want to plot, and you know
-
-```
-min(col_num) = 0
-max(col_num) = 100
-```
-
-then if you pull out the number `12.5` in the list and want to figure out what
-color the corresponding chart element (bar, scatter plot, etc) is going to be,
-you'll figure out that proportionally 12.5 to 100 is the same as 0.125 to 1.
-So, the point will be mapped to 'rgb(0,0,200)'.
-
-All other colors between the pinned values in a colorscale are linearly
-interpolated.
-
-Categorical:
-------------
-Alternatively, a categorical colormap is used to assign a specific value in a
-color column to a specific color everytime it appears in the dataset.
-
-A column of strings in a panadas.dataframe that is chosen to serve as the
-color index would naturally use a categorical colormap. However, you can
-choose to use a categorical colormap with a column of numbers.
-
-Be careful! If you have a lot of unique numbers in your color column you will
-end up with a colormap that is massive and may slow down graphing performance.
-"""
 from __future__ import absolute_import
 
 import collections
@@ -319,37 +241,22 @@ def flatten(array):
                                      "entered as lists or ndarrays!")
 
 
-def find_intermediate_color(lowcolor, highcolor, intermed, colortype='tuple'):
+def find_intermediate_color(lowcolor, highcolor, intermed):
     """
     Returns the color at a given distance between two colors
 
     This function takes two color tuples, where each element is between 0
     and 1, along with a value 0 < intermed < 1 and returns a color that is
-    intermed-percent from lowcolor to highcolor. If colortype is set to 'rgb',
-    the function will automatically convert the rgb type to a tuple, find the
-    intermediate color and return it as an rgb color.
-    """
-    if colortype == 'rgb':
-        # convert to tuple color, eg. (1, 0.45, 0.7)
-        lowcolor = unlabel_rgb(lowcolor)
-        highcolor = unlabel_rgb(highcolor)
+    intermed-percent from lowcolor to highcolor
 
+    """
     diff_0 = float(highcolor[0] - lowcolor[0])
     diff_1 = float(highcolor[1] - lowcolor[1])
     diff_2 = float(highcolor[2] - lowcolor[2])
 
-    inter_med_tuple = (
-        lowcolor[0] + intermed * diff_0,
-        lowcolor[1] + intermed * diff_1,
-        lowcolor[2] + intermed * diff_2
-    )
-
-    if colortype == 'rgb':
-        # back to an rgb string, e.g. rgb(30, 20, 10)
-        inter_med_rgb = label_rgb(inter_med_tuple)
-        return inter_med_rgb
-
-    return inter_med_tuple
+    return (lowcolor[0] + intermed * diff_0,
+            lowcolor[1] + intermed * diff_1,
+            lowcolor[2] + intermed * diff_2)
 
 
 def n_colors(lowcolor, highcolor, n_colors, colortype='tuple'):
