@@ -28,6 +28,6 @@ Modules:
 
 from __future__ import absolute_import
 
-from plotly import (plotly, colors, dashboard_objs, graph_objs, grid_objs, tools,
+from plotly import (plotly, dashboard_objs, graph_objs, grid_objs, tools,
                     utils, session, offline, io)
 from plotly.version import __version__
