@@ -1,5 +1,7 @@
 from __future__ import absolute_import
 
+import six
+
 from plotly import colors, exceptions, optional_imports
 from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
@@ -1080,8 +1082,22 @@ def create_scatterplotmatrix(df, index=None, endpts=None, diag='scatter',
     # Validate colormap
     if isinstance(colormap, dict):
         colormap = utils.validate_colors_dict(colormap, 'rgb')
+    elif isinstance(colormap, six.string_types) and 'rgb' not in colormap and '#' not in colormap:
+        if colormap not in utils.PLOTLY_SCALES.keys():
+            raise exceptions.PlotlyError(
+                "If 'colormap' is a string, it must be the name "
+                "of a Plotly Colorscale. The available colorscale "
+                "names are {}".format(utils.PLOTLY_SCALES.keys())
+            )
+        else:
+            # TODO change below to allow the correct Plotly colorscale
+            colormap = utils.colorscale_to_colors(utils.PLOTLY_SCALES[colormap])
+            # keep only first and last item - fix later
+            colormap = [colormap[0]] + [colormap[-1]]
+        colormap = utils.validate_colors(colormap, 'rgb')
     else:
         colormap = utils.validate_colors(colormap, 'rgb')
+
 
     if not index:
         for name in df:
