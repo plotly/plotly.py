@@ -2,7 +2,8 @@ from __future__ import absolute_import
 
 import six
 
-from plotly import colors, exceptions, optional_imports
+from plotly import exceptions, optional_imports
+import plotly.colors as clrs
 from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
 from plotly.tools import make_subplots
@@ -388,9 +389,9 @@ def scatterplot_theme(dataframe, headers, diag, size, height, width, title,
 
         # Convert colormap to list of n RGB tuples
         if colormap_type == 'seq':
-            foo = colors.color_parser(colormap, colors.unlabel_rgb)
-            foo = utils.n_colors(foo[0], foo[1], n_colors_len)
-            theme = colors.color_parser(foo, colors.label_rgb)
+            foo = clrs.color_parser(colormap, clrs.unlabel_rgb)
+            foo = clrs.n_colors(foo[0], foo[1], n_colors_len)
+            theme = clrs.color_parser(foo, clrs.label_rgb)
 
         if colormap_type == 'cat':
             # leave list of colors the same way
@@ -558,9 +559,9 @@ def scatterplot_theme(dataframe, headers, diag, size, height, width, title,
 
             # Convert colormap to list of n RGB tuples
             if colormap_type == 'seq':
-                foo = colors.color_parser(colormap, colors.unlabel_rgb)
-                foo = utils.n_colors(foo[0], foo[1], len(intervals))
-                theme = colors.color_parser(foo, colors.label_rgb)
+                foo = clrs.color_parser(colormap, clrs.unlabel_rgb)
+                foo = clrs.n_colors(foo[0], foo[1], len(intervals))
+                theme = clrs.color_parser(foo, clrs.label_rgb)
 
             if colormap_type == 'cat':
                 # leave list of colors the same way
@@ -1081,22 +1082,22 @@ def create_scatterplotmatrix(df, index=None, endpts=None, diag='scatter',
 
     # Validate colormap
     if isinstance(colormap, dict):
-        colormap = utils.validate_colors_dict(colormap, 'rgb')
+        colormap = clrs.validate_colors_dict(colormap, 'rgb')
     elif isinstance(colormap, six.string_types) and 'rgb' not in colormap and '#' not in colormap:
-        if colormap not in utils.PLOTLY_SCALES.keys():
+        if colormap not in clrs.PLOTLY_SCALES.keys():
             raise exceptions.PlotlyError(
                 "If 'colormap' is a string, it must be the name "
                 "of a Plotly Colorscale. The available colorscale "
-                "names are {}".format(utils.PLOTLY_SCALES.keys())
+                "names are {}".format(clrs.PLOTLY_SCALES.keys())
             )
         else:
             # TODO change below to allow the correct Plotly colorscale
-            colormap = utils.colorscale_to_colors(utils.PLOTLY_SCALES[colormap])
+            colormap = clrs.colorscale_to_colors(clrs.PLOTLY_SCALES[colormap])
             # keep only first and last item - fix later
             colormap = [colormap[0]] + [colormap[-1]]
-        colormap = utils.validate_colors(colormap, 'rgb')
+        colormap = clrs.validate_colors(colormap, 'rgb')
     else:
-        colormap = utils.validate_colors(colormap, 'rgb')
+        colormap = clrs.validate_colors(colormap, 'rgb')
 
 
     if not index:

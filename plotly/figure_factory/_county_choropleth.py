@@ -1,4 +1,5 @@
-from plotly import colors, exceptions, optional_imports
+from plotly import exceptions, optional_imports
+import plotly.colors as clrs
 
 from plotly.figure_factory import utils
 
@@ -641,14 +642,14 @@ def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
 
     if not colorscale:
         colorscale = []
-        viridis_colors = colors.colorscale_to_colors(
-            colors.PLOTLY_SCALES['Viridis']
+        viridis_colors = clrs.colorscale_to_colors(
+            clrs.PLOTLY_SCALES['Viridis']
         )
-        viridis_colors = colors.color_parser(
-            viridis_colors, colors.hex_to_rgb
+        viridis_colors = clrs.color_parser(
+            viridis_colors, clrs.hex_to_rgb
         )
-        viridis_colors = colors.color_parser(
-            viridis_colors, colors.label_rgb
+        viridis_colors = clrs.color_parser(
+            viridis_colors, clrs.label_rgb
         )
         viri_len = len(viridis_colors) + 1
         viri_intervals = utils.endpts_to_intervals(
@@ -665,7 +666,7 @@ def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
             intermed = ((L - viri_intervals[idx][0]) /
                         (viri_intervals[idx][1] - viri_intervals[idx][0]))
 
-            float_color = colors.find_intermediate_color(
+            float_color = clrs.find_intermediate_color(
                 viridis_colors[idx],
                 viridis_colors[idx],
                 intermed,
@@ -673,10 +674,10 @@ def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
             )
 
             # make R,G,B into int values
-            float_color = colors.unlabel_rgb(float_color)
-            float_color = colors.unconvert_from_RGB_255(float_color)
-            int_rgb = colors.convert_to_RGB_255(float_color)
-            int_rgb = colors.label_rgb(int_rgb)
+            float_color = clrs.unlabel_rgb(float_color)
+            float_color = clrs.unconvert_from_RGB_255(float_color)
+            int_rgb = clrs.convert_to_RGB_255(float_color)
+            int_rgb = clrs.label_rgb(int_rgb)
 
             colorscale.append(int_rgb)
 

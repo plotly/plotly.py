@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 
 from plotly import exceptions, optional_imports
+import plotly.colors as clrs
 from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
 from plotly.validators.heatmap import ColorscaleValidator
@@ -123,7 +124,7 @@ def to_rgb_color_list(color_str, default):
     if 'rgb' in color_str:
         return [int(v) for v in color_str.strip('rgb()').split(',')]
     elif '#' in color_str:
-        return utils.hex_to_rgb(color_str)
+        return clrs.hex_to_rgb(color_str)
     else:
         return default
 
