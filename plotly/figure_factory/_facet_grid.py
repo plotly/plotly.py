@@ -878,7 +878,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
         if isinstance(df[color_name].iloc[0], str) or color_is_cat:
             show_legend = True
             if isinstance(colormap, dict):
-                utils.validate_colors_dict(colormap, 'rgb')
+                clrs.validate_colors_dict(colormap, 'rgb')
 
                 for val in df[color_name].unique():
                     if val not in colormap.keys():
@@ -907,7 +907,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
         elif isinstance(df[color_name].iloc[0], Number):
             if isinstance(colormap, dict):
                 show_legend = True
-                utils.validate_colors_dict(colormap, 'rgb')
+                clrs.validate_colors_dict(colormap, 'rgb')
 
                 for val in df[color_name].unique():
                     if val not in colormap.keys():
@@ -926,7 +926,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
 
             elif isinstance(colormap, list):
                 colorscale_list = colormap
-                utils.validate_colorscale(colorscale_list)
+                clrs.validate_colorscale(colorscale_list)
 
                 fig, annotations = _facet_grid_color_numerical(
                     df, x, y, facet_row, facet_col, color_name,
