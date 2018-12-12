@@ -13,15 +13,9 @@ import plotly.graph_objs as go
 pd = optional_imports.get_module('pandas')
 
 
-def is_sequence(obj):
-    return (isinstance(obj, collections.Sequence) and
-            not isinstance(obj, str))
-
-
 def _bullet(df, markers, measures, ranges, subtitles, titles, orientation,
             range_colors, measure_colors, horizontal_spacing,
             vertical_spacing, scatter_options, layout_options):
-
     num_of_lanes = len(df)
     num_of_rows = num_of_lanes if orientation == 'h' else 1
     num_of_cols = 1 if orientation == 'h' else num_of_lanes
@@ -262,7 +256,7 @@ def create_bullet(data, markers=None, measures=None, ranges=None,
             "'pandas' must be installed for this figure factory."
         )
 
-    if is_sequence(data):
+    if utils.is_sequence(data):
         if not all(isinstance(item, dict) for item in data):
             raise exceptions.PlotlyError(
                 'Every entry of the data argument list, tuple, etc must '
@@ -276,7 +270,7 @@ def create_bullet(data, markers=None, measures=None, ranges=None,
 
     # make DataFrame from data with correct column headers
     col_names = ['titles', 'subtitle', 'markers', 'measures', 'ranges']
-    if is_sequence(data):
+    if utils.is_sequence(data):
         df = pd.DataFrame(
             [
                 [d[titles] for d in data] if titles else [''] * len(data),
