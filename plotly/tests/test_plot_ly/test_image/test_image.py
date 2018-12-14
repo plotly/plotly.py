@@ -59,7 +59,7 @@ def _generate_image_save_as_saves_valid_image(image_format,
     return _test
 
 kwargs = {
-    'format': ['png', 'jpeg', 'pdf', 'svg'],
+    'format': ['png', 'jpeg', 'pdf', 'svg', 'emf'],
     'width': [None, 300],
     'height': [None, 300],
     'scale': [None, 5]
