@@ -115,7 +115,7 @@ def should_retry(exception):
     if isinstance(exception, exceptions.PlotlyRequestError):
         if (isinstance(exception.status_code, int) and
                 (500 <= exception.status_code < 600 or exception.status_code == 429)):
-            # Retry on 5XX errors.
+            # Retry on 5XX and 429 (image export throttling) errors.
             return True
         elif 'Uh oh, an error occurred' in exception.message:
             return True
