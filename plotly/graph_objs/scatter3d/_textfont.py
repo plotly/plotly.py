@@ -102,37 +102,16 @@ class Textfont(BaseTraceHierarchyType):
     
         The 'family' property is a string and must be specified as:
           - A non-empty string
-          - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
-        str|numpy.ndarray
+        str
         """
         return self['family']
 
     @family.setter
     def family(self, val):
         self['family'] = val
-
-    # familysrc
-    # ---------
-    @property
-    def familysrc(self):
-        """
-        Sets the source reference on plot.ly for  family .
-    
-        The 'familysrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self['familysrc']
-
-    @familysrc.setter
-    def familysrc(self, val):
-        self['familysrc'] = val
 
     # size
     # ----
@@ -202,8 +181,6 @@ class Textfont(BaseTraceHierarchyType):
             *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
             Standard TT*, *Open Sans*, *Overpass*, *PT Sans
             Narrow*, *Raleway*, *Times New Roman*.
-        familysrc
-            Sets the source reference on plot.ly for  family .
         size
 
         sizesrc
@@ -216,7 +193,6 @@ class Textfont(BaseTraceHierarchyType):
         color=None,
         colorsrc=None,
         family=None,
-        familysrc=None,
         size=None,
         sizesrc=None,
         **kwargs
@@ -224,8 +200,6 @@ class Textfont(BaseTraceHierarchyType):
         """
         Construct a new Textfont object
         
-        Sets the text font.
-
         Parameters
         ----------
         arg
@@ -249,8 +223,6 @@ class Textfont(BaseTraceHierarchyType):
             *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old
             Standard TT*, *Open Sans*, *Overpass*, *PT Sans
             Narrow*, *Raleway*, *Times New Roman*.
-        familysrc
-            Sets the source reference on plot.ly for  family .
         size
 
         sizesrc
@@ -287,7 +259,6 @@ an instance of plotly.graph_objs.scatter3d.Textfont"""
         self._validators['color'] = v_textfont.ColorValidator()
         self._validators['colorsrc'] = v_textfont.ColorsrcValidator()
         self._validators['family'] = v_textfont.FamilyValidator()
-        self._validators['familysrc'] = v_textfont.FamilysrcValidator()
         self._validators['size'] = v_textfont.SizeValidator()
         self._validators['sizesrc'] = v_textfont.SizesrcValidator()
 
@@ -299,8 +270,6 @@ an instance of plotly.graph_objs.scatter3d.Textfont"""
         self.colorsrc = colorsrc if colorsrc is not None else _v
         _v = arg.pop('family', None)
         self.family = family if family is not None else _v
-        _v = arg.pop('familysrc', None)
-        self.familysrc = familysrc if familysrc is not None else _v
         _v = arg.pop('size', None)
         self.size = size if size is not None else _v
         _v = arg.pop('sizesrc', None)

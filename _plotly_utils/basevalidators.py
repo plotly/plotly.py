@@ -1211,7 +1211,7 @@ class ColorscaleValidator(BaseValidator):
     named_colorscales = [
         'Greys', 'YlGnBu', 'Greens', 'YlOrRd', 'Bluered', 'RdBu', 'Reds',
         'Blues', 'Picnic', 'Rainbow', 'Portland', 'Jet', 'Hot', 'Blackbody',
-        'Earth', 'Electric', 'Viridis'
+        'Earth', 'Electric', 'Viridis', 'Cividis'
     ]
 
     def __init__(self, plotly_name, parent_name, **kwargs):
@@ -1229,7 +1229,7 @@ class ColorscaleValidator(BaseValidator):
       - One of the following named colorscales:
             ['Greys', 'YlGnBu', 'Greens', 'YlOrRd', 'Bluered', 'RdBu',
             'Reds', 'Blues', 'Picnic', 'Rainbow', 'Portland', 'Jet',
-            'Hot', 'Blackbody', 'Earth', 'Electric', 'Viridis']
+            'Hot', 'Blackbody', 'Earth', 'Electric', 'Viridis', 'Cividis']
         """.format(plotly_name=self.plotly_name)
 
         return desc
@@ -1274,9 +1274,11 @@ class ColorscaleValidator(BaseValidator):
         return v
 
     def present(self, v):
-        # Return tuple of tuples so that colorscale is immutable
+        # Return-type must be immutable
         if v is None:
             return None
+        elif isinstance(v, string_types):
+            return v
         else:
             return tuple([tuple(e) for e in v])
 
@@ -1673,6 +1675,82 @@ class LiteralValidator(BaseValidator):
             ))
         else:
             return v
+
+
+class DashValidator(EnumeratedValidator):
+    """
+    Special case validator for handling dash properties that may be specified
+    as lists of dash lengths.  These are not currently specified in the
+    schema.
+
+    "dash": {
+        "valType": "string",
+        "values": [
+            "solid",
+            "dot",
+            "dash",
+            "longdash",
+            "dashdot",
+            "longdashdot"
+        ],
+        "dflt": "solid",
+        "role": "style",
+        "editType": "style",
+        "description": "Sets the dash style of lines. Set to a dash type
+        string (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or
+        *longdashdot*) or a dash length list in px (eg *5px,10px,2px,2px*)."
+    },
+    """
+    def __init__(self,
+                 plotly_name,
+                 parent_name,
+                 values,
+                 **kwargs):
+
+        # Add regex to handle dash length lists
+        dash_list_regex = \
+            r"/^\d+(\.\d+)?(px|%)?((,|\s)\s*\d+(\.\d+)?(px|%)?)*$/"
+
+        values = values + [dash_list_regex]
+
+        # Call EnumeratedValidator superclass
+        super(DashValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            values=values, **kwargs)
+
+    def description(self):
+
+            # Separate regular values from regular expressions
+            enum_vals = []
+            enum_regexs = []
+            for v, regex in zip(self.values, self.val_regexs):
+                if regex is not None:
+                    enum_regexs.append(regex.pattern)
+                else:
+                    enum_vals.append(v)
+            desc = ("""\
+    The '{name}' property is an enumeration that may be specified as:"""
+                    .format(name=self.plotly_name))
+
+            if enum_vals:
+                enum_vals_str = '\n'.join(
+                    textwrap.wrap(
+                        repr(enum_vals),
+                        initial_indent=' ' * 12,
+                        subsequent_indent=' ' * 12,
+                        break_on_hyphens=False,
+                        width=80))
+
+                desc = desc + """
+      - One of the following dash styles:
+{enum_vals_str}""".format(enum_vals_str=enum_vals_str)
+
+            desc = desc + """
+      - A string containing a dash length list in pixels or percentages
+            (e.g. '5px 10px 2px 2px', '5, 10, 2, 2', '10% 20% 40%', etc.)
+"""
+            return desc
 
 
 class ImageUriValidator(BaseValidator):

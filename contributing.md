@@ -215,18 +215,153 @@ When you write a new test anywhere under the `tests` directory, if your PR gets 
 
 Test accounts include: `PythonTest`, `PlotlyImageTest`, and  `PlotlyStageTest`. 
 
-#### Publishing to Pip
+### Release process
 
-You'll need the credentials file `~/.pypirc`. Request access from @theengineear and @chriddyp. Then, from inside the repository:
+This is the release process for releasing `plotly.py` version `X.Y.Z` with
+`plotlywidget` version `A.B.C`.
+
+Note: The `plotlywidget` instructions must be followed if any change
+has been made in the `js/` directory source code, OR if the version of
+plotly.js has been updated.  If neither of these is the case, there's no need
+to increment the `plotlywidget` version or to publish a new version to npm.
+
+#### Create a release branch
+After all of the functionality for the release has been merged into master,
+create a branch named `release_X.Y.Z`. This branch will become the
+final version
+
+#### Bump to release candidate version
+Next increment the version of `plotly.py` to `X.Y.Zrc1`, and the version of
+`plotlywidget` to `A.B.C-rc.1`. In both cases `rc` is the semantic versioning
+code for Release Candidate. The number 1 means that this is the first release
+candidate, this number can be incremented if we need to publish multiple
+release candidates. Note that the `npm` suffix is `-rc.1` and the PyPI
+suffix is `rc1`.
+
+ - `plotly/version.py`:
+   + Update `__version__` to `X.Y.Zrc1`
+   + Update `__frontend_version__` to `^A.B.C-rc.1` (Note the `^` prefix)
+ - `js/package.json`
+   + Update `"version"` to `A.B.C-rc.1`
+ 
+Publishing `plotly.py` and `plotlywidget` as release candidates
+allows us to go through the publication process, and test that the
+installed packages work properly before general users will get them by
+default. It also gives us the opportunity to ask specific users to test
+that their bug reports are in fact resolved before we pull the trigger
+on the official release.
+
+#### Finalize changelog
+Review the contents of `CHANGELOG.md`. We try to follow the
+[keepachangelog](https://keepachangelog.com/en/1.0.0/) guidelines.  Make sure
+the changelog includes the version being published at the top, along with the
+expected publication date.
+
+Use the `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, and `Security`
+labels for all changes to plotly.py.  If the version of plotly.js has
+been updated, include this as the first `Updated` entry. Call out any
+noteable changes as sub-bullets (new trace types in particular), and provide
+a link to the plotly.js CHANGELOG.
+
+As the first entry in the changelog, include a `JupyterLab Versions` section.
+Here, document the versions of `plotlywidget`, 
+`@jupyter-widgets/jupyterlab-manager`, `jupyterlab`, and
+`@jupyterlab/plotly-extension` that are known to be compatible with this
+version of `plotly.py`.
+
+Note: Use the official (not release candidate) versions in the CHANGELOG.
+
+#### Update README.md installation instructions
+
+Update the installation instructions in the README to the new versions of all
+of the dependencies. Use the release candidate versions, this way we can point
+people to the README of the `release_X.Y.Z` as the instructions for trying out
+the release candidate.
+
+#### Publish release candidate to PyPI
+To upload to PyPI you'll also need to have `twine` installed:
+```bash
+(plotly.py) $ pip install twine
+```
+
+And, you'll need the credentials file `~/.pypirc`. Request access from
+@theengineear and @chriddyp. Then, from inside the repository:
+
+```bash
+(plotly.py) $ git checkout release_X.Y.Z
+(plotly.py) $ git stash
+(plotly.py) $ python setup.py sdist
+(plotly.py) $ twine upload dist/plotly-X.Y.Zrc1*
+```
+
+#### Publish release candidate of `plotlywidget` to NPM
+Now, publish the release candidate of the `plotlywidget` NPM package.
+
+```bash
+cd ./js
+npm publish --access public --tag next
+```
+
+The `--tag next` part ensures that users won't install this version unless
+they explicitly ask for the version or for the version wtih the `next` tag.
+
+#### Manually test the release candidate
+Create a fresh virtual environment (or conda environment) and install
+the release candidate by following the new `README.md` instructions,
+replacing `X.Y.Z` with `X.Y.Zrc1` and `A.B.C` with `A.B.C-rc.1`.
+
+In particular 
+ - `pip install plotly==X.Y.Z` -> `pip install plotly==X.Y.Zrc1`
+ - `jupyter labextension install plotlywidget@A.B.C` ->
+    `jupyter labextension install plotlywidget@A.B.C-rc.1`
+
+Run through the example notebooks at
+https://github.com/jonmmease/plotly_ipywidget_notebooks using the classic
+notebook and JupyterLab. Make sure `FigureWidget` objects are displayed as
+plotly figures, and make sure the in-place updates and callbacks work.
+
+If appropriate, ask users who have submitted bug reports or feature 
+requests that are resolved in this version to try out the release candidate.
+
+If problems are found in the release candidate, fix them on the release
+branch and then publish another release candidate with the candidate number
+incremented.
+
+#### Finalize versions
+When no problems are identified in the release candidate, remove the
+release candidate suffix from the following version strings:
+ 
+ - `plotly/version.py`:
+   + Update `__version__` to `X.Y.Z`
+   + Update `__frontend_version__` to `^A.B.C` (Note the `^` prefix)
+ - `js/package.json`
+   + Update `"version"` to `A.B.C`
+
+#### Merge release into master
+Make sure the integration tests are passing on the release branch, then merge
+it into master on GitHub.
+
+Update your local master, tag this merge commit as `vX.Y.Z`
+(e.g. `v3.1.1`), and push the tag.
 
 ```bash
 (plotly.py) $ git checkout master
 (plotly.py) $ git stash
 (plotly.py) $ git pull origin master
-(plotly.py) $ python setup.py sdist upload # upload to pip
+(plotly.py) $ git tag vX.Y.Z
+(plotly.py) $ git push origin vX.Y.Z
 ```
 
-After it has uploaded, move to another directly and double+triple check that you are able to upgrade ok:
+#### Publishing to Pip
+
+Publish the final version to PyPI
+
+```bash
+(plotly.py) $ python setup.py sdist bdist_wheel
+(plotly.py) $ twine upload dist/plotly-X.Y.Z*
+```
+
+After it has uploaded, move to another environment and double+triple check that you are able to upgrade ok:
 ```bash
 $ pip install plotly --upgrade
 ```
@@ -236,11 +371,45 @@ And ask one of your friends to do it too. Our tests should catch any issues, but
 <3 Team Plotly
 
 #### Publish widget library to npm
+Finally, publish the final version of the widget library to npm with:
 
 ```bash
 cd ./js
 npm publish --access public
 ```
+
+#### Publishing to the plotly conda channel
+After publishing to PyPI, update the `set version`  number to match the PyPI
+version.
+
+Compute the new SHA256 hash from the `sdist` package in the local
+`dist/` directory.
+
+```
+$ shasum -a 256 dist/plotly-X.Y.Z.tar.gz
+cd301fff6...
+```
+
+Make sure you have the `conda-build` and `anaconda-client` packages installed
+and then perform the conda build. 
+
+```
+$ conda build recipe/
+```
+
+When conda-build returns successfully it will display the path to the new
+package.
+
+Next run `anaconda login` and enter the credentials for the plotly anaconda
+channel.
+
+Then run `anaconda upload /path/to/plotly-X.Y.Z.tar.bz2`
+
+Run `anaconda logout` 
+
+#### Post announcement
+Post a simple announcement to the Plotly Python forum, with links to the
+README installation instructions and to the CHANGELOG.
 
 # Contributing to the Figure Factories
 If you are interested in contributing to the ever-growing Plotly figure factory library in Python, check out the [documentation](https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/README.md) to learn how.
