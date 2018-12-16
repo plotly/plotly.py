@@ -21,5 +21,9 @@ from . plotly import (
     grid_ops,
     meta_ops,
     file_ops,
-    get_config
+    get_config,
+    get_grid,
+    dashboard_ops,
+    create_animations,
+    icreate_animations
 )

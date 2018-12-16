@@ -2,45 +2,69 @@ machine:
 
   environment:
 
-    PLOTLY_PACKAGE_ROOT: /home/ubuntu/${CIRCLE_PROJECT_REPONAME}
     PLOTLY_CONFIG_DIR: ${HOME}/.plotly
-    PLOTLY_PYTHON_VERSIONS: 2.7.8 3.3.3 3.4.1
-    PLOTLY_CORE_REQUIREMENTS_FILE: ${PLOTLY_PACKAGE_ROOT}/requirements.txt
-    PLOTLY_OPTIONAL_REQUIREMENTS_FILE: ${PLOTLY_PACKAGE_ROOT}/optional-requirements.txt
+    TOX_TESTENV_PASSENV: PLOTLY_TOX_*
+    PLOTLY_TOX_PYTHON_27: /home/ubuntu/.pyenv/versions/2.7.10/bin/python2.7
+    PLOTLY_TOX_PYTHON_33: /home/ubuntu/.pyenv/versions/3.3.3/bin/python3.3
+    PLOTLY_TOX_PYTHON_34: /home/ubuntu/.pyenv/versions/3.4.3/bin/python3.4
+    PLOTLY_TOX_PYTHON_35: /home/ubuntu/.pyenv/versions/3.5.0/bin/python3.5
+    PLOTLY_JUPYTER_TEST_DIR: /home/ubuntu/${CIRCLE_PROJECT_REPONAME}/plotly/tests/test_optional/test_jupyter
+
+  node:
+    # use a pre-installed version of node so we don't need to download it.
+    version: 4.2.2
 
 dependencies:
 
   override:
 
-    # run all the pre-written installers (this will take a *while*)
-    - bash circle/setup.sh
-
-    # install testing tools for circle's version of things
-    - pip install nose coverage
+    # install everything tox knows about and the plotly package.
+    - pip install tox
+    - tox --notest
     - pip install -I .
 
     # we need to cd out of the project root to ensure the install worked
     - cd ~ && python -c "import plotly"
 
+    # install jupyter test JS requirements
+    - cd ${PLOTLY_JUPYTER_TEST_DIR} && npm i
+
   cache_directories:
 
-    - "~/.pyenv/versions"  # attempt to just cache installed pyenv things
+    # cache everything that tox installs for us.
+    - .tox
+    - ${PLOTLY_JUPYTER_TEST_DIR}/node_modules
 
 test:
 
   override:
 
-    # run test suite in all our python versions
-    - bash circle/test.sh
+    # let tox do its thing. matplotlib is broken at the moment.
+    - tox -- -a '!matplotlib'
+
+    # we setup tox to create coverage reports, move them to artifacts.
+    - mv ~/${CIRCLE_PROJECT_REPONAME}/.tox/coverage-reports ${CIRCLE_ARTIFACTS}
+
+    # import it once normally (ensures .plotly exists)
+    - python -c "import plotly"
 
     # test that it imports when you don't have write permissions
     - sudo chmod -R 444 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
 
     # test that giving back write permissions works again
-    # this also has to pass the test suite that follows
     - sudo chmod -R 777 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
 
-    # test core things in the general 2.7 version that circle has
-    - nosetests -x plotly/tests/test_core --with-coverage --cover-package=plotly
-    - mkdir "${CIRCLE_ARTIFACTS}/2.7" || true
-    - coverage html -d "${CIRCLE_ARTIFACTS}/2.7" --title=2.7
+    # test that figure_factory cannot be imported with only core requirements.
+    # since optional requirements is part of the test suite, we don't need to
+    # worry about testing that it *can* be imported in this case.
+    - $(! python -c "import plotly.figure_factory")
+
+    # test the distribution and a basic import
+    - rm -rf dist/ &&
+      python setup.py sdist &&
+      mkdir test_install &&
+      cd test_install &&
+      virtualenv venv &&
+      source venv/bin/activate &&
+      pip install ../dist/* &&
+      python -c "import plotly"

@@ -7,34 +7,25 @@ Low-level functionality NOT intended for users to EVER use.
 """
 from __future__ import absolute_import
 
-import json
 import os.path
 import re
 import sys
 import threading
+import decimal
+from collections import deque
 
 import pytz
+from decorator import decorator
+from requests.compat import json as _json
 
+from plotly.optional_imports import get_module
 
 from . exceptions import PlotlyError
 
-try:
-    import numpy
-    _numpy_imported = True
-except ImportError:
-    _numpy_imported = False
-
-try:
-    import pandas
-    _pandas_imported = True
-except ImportError:
-    _pandas_imported = False
-
-try:
-    import sage.all
-    _sage_imported = True
-except ImportError:
-    _sage_imported = False
+# Optional imports, may be None for users that only use our core functionality.
+numpy = get_module('numpy')
+pandas = get_module('pandas')
+sage_all = get_module('sage.all')
 
 
 ### incase people are using threading, we lock file reads
@@ -50,7 +41,7 @@ def load_json_dict(filename, *args):
         lock.acquire()
         with open(filename, "r") as f:
             try:
-                data = json.load(f)
+                data = _json.load(f)
                 if not isinstance(data, dict):
                     data = {}
             except:
@@ -65,7 +56,7 @@ def save_json_dict(filename, json_dict):
     """Save json to file. Error if path DNE, not a dict, or invalid json."""
     if isinstance(json_dict, dict):
         # this will raise a TypeError if something goes wrong
-        json_string = json.dumps(json_dict, indent=4)
+        json_string = _json.dumps(json_dict, indent=4)
         lock.acquire()
         with open(filename, "w") as f:
             f.write(json_string)
@@ -111,7 +102,7 @@ class NotEncodable(Exception):
     pass
 
 
-class PlotlyJSONEncoder(json.JSONEncoder):
+class PlotlyJSONEncoder(_json.JSONEncoder):
     """
     Meant to be passed as the `cls` kwarg to json.dumps(obj, cls=..)
 
@@ -148,7 +139,8 @@ class PlotlyJSONEncoder(json.JSONEncoder):
         #    1. `loads` to switch Infinity, -Infinity, NaN to None
         #    2. `dumps` again so you get 'null' instead of extended JSON
         try:
-            new_o = json.loads(encoded_o, parse_constant=self.coerce_to_strict)
+            new_o = _json.loads(encoded_o,
+                                parse_constant=self.coerce_to_strict)
         except ValueError:
 
             # invalid separators will fail here. raise a helpful exception
@@ -157,10 +149,10 @@ class PlotlyJSONEncoder(json.JSONEncoder):
                 "valid JSON separators?"
             )
         else:
-            return json.dumps(new_o, sort_keys=self.sort_keys,
-                              indent=self.indent,
-                              separators=(self.item_separator,
-                                          self.key_separator))
+            return _json.dumps(new_o, sort_keys=self.sort_keys,
+                               indent=self.indent,
+                               separators=(self.item_separator,
+                                           self.key_separator))
 
     def default(self, obj):
         """
@@ -201,14 +193,15 @@ class PlotlyJSONEncoder(json.JSONEncoder):
             self.encode_as_pandas,
             self.encode_as_datetime,
             self.encode_as_date,
-            self.encode_as_list  # because some values have `tolist` do last.
+            self.encode_as_list,  # because some values have `tolist` do last.
+            self.encode_as_decimal
         )
         for encoding_method in encoding_methods:
             try:
                 return encoding_method(obj)
             except NotEncodable:
                 pass
-        return json.JSONEncoder.default(self, obj)
+        return _json.JSONEncoder.default(self, obj)
 
     @staticmethod
     def encode_as_plotly(obj):
@@ -229,12 +222,12 @@ class PlotlyJSONEncoder(json.JSONEncoder):
     @staticmethod
     def encode_as_sage(obj):
         """Attempt to convert sage.all.RR to floats and sage.all.ZZ to ints"""
-        if not _sage_imported:
+        if not sage_all:
             raise NotEncodable
 
-        if obj in sage.all.RR:
+        if obj in sage_all.RR:
             return float(obj)
-        elif obj in sage.all.ZZ:
+        elif obj in sage_all.ZZ:
             return int(obj)
         else:
             raise NotEncodable
@@ -242,7 +235,7 @@ class PlotlyJSONEncoder(json.JSONEncoder):
     @staticmethod
     def encode_as_pandas(obj):
         """Attempt to convert pandas.NaT"""
-        if not _pandas_imported:
+        if not pandas:
             raise NotEncodable
 
         if obj is pandas.NaT:
@@ -253,7 +246,7 @@ class PlotlyJSONEncoder(json.JSONEncoder):
     @staticmethod
     def encode_as_numpy(obj):
         """Attempt to convert numpy.ma.core.masked"""
-        if not _numpy_imported:
+        if not numpy:
             raise NotEncodable
 
         if obj is numpy.ma.core.masked:
@@ -296,6 +289,13 @@ class PlotlyJSONEncoder(json.JSONEncoder):
         else:
             return iso_to_plotly_time_string(time_string)
 
+    @staticmethod
+    def encode_as_decimal(obj):
+        """Attempt to encode decimal by converting it to float"""
+        if isinstance(obj, decimal.Decimal):
+            return float(obj)
+        else:
+            raise NotEncodable
 
 ### unicode stuff ###
 def decode_unicode(coll):
@@ -446,3 +446,47 @@ def set_sharing_and_world_readable(option_set):
             option_set['world_readable'] = True
         else:
             option_set['world_readable'] = False
+
+
+def _default_memoize_key_function(*args, **kwargs):
+    """Factored out in case we want to allow callers to specify this func."""
+    if kwargs:
+        # frozenset is used to ensure hashability
+        return args, frozenset(kwargs.items())
+    else:
+        return args
+
+
+def memoize(maxsize=128):
+    """
+    Memoize a function by its arguments. Note, if the wrapped function returns
+    a mutable result, the caller is responsible for *not* mutating the result
+    as it will mutate the cache itself.
+
+    :param (int|None) maxsize: Limit the number of cached results. This is a
+                               simple way to prevent memory leaks. Setting this
+                               to `None` will remember *all* calls. The 128
+                               number is used for parity with the Python 3.2
+                               `functools.lru_cache` tool.
+
+    """
+    keys = deque()
+    cache = {}
+
+    def _memoize(*all_args, **kwargs):
+        func = all_args[0]
+        args = all_args[1:]
+        key = _default_memoize_key_function(*args, **kwargs)
+
+        if key in keys:
+            return cache[key]
+
+        if maxsize is not None and len(keys) == maxsize:
+            cache.pop(keys.pop())
+
+        result = func(*args, **kwargs)
+        keys.appendleft(key)
+        cache[key] = result
+        return result
+
+    return decorator(_memoize)
