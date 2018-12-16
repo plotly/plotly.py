@@ -2,13 +2,14 @@ from __future__ import absolute_import
 
 from nose.plugins.attrib import attr
 
-from plotly.tests.utils import compare_dict
+from plotly import optional_imports
+from plotly.tests.utils import compare_dict, strip_dict_params
 from plotly.tests.test_optional.optional_utils import run_fig
 from plotly.tests.test_optional.test_matplotlylib.data.subplots import *
 
-# TODO: matplotlib-build-wip
-from plotly.tools import _matplotlylib_imported
-if _matplotlylib_imported:
+matplotlylib = optional_imports.get_module('plotly.matplotlylib')
+
+if matplotlylib:
     import matplotlib
 
     # Force matplotlib to not use any Xwindows backend.
@@ -32,6 +33,12 @@ def test_blank_subplots():
     fig.add_subplot(gs[3, 5])
     gs.update(hspace=.6, wspace=.6)
     renderer = run_fig(fig)
+
+    for data_no, data_dict in enumerate(renderer.plotly_fig['data']):
+        d1, d2 = strip_dict_params(data_dict, BLANK_SUBPLOTS['data'][data_no],
+                                   ignore=['uid'])
+        equivalent, msg = compare_dict(d1, d2)
+
     equivalent, msg = compare_dict(renderer.plotly_fig['layout'],
                                    BLANK_SUBPLOTS['layout'])
     assert equivalent, msg

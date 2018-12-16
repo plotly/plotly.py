@@ -2,16 +2,17 @@ from __future__ import absolute_import
 
 from nose.plugins.attrib import attr
 
-# TODO: matplotlib-build-wip
-from plotly.tools import _matplotlylib_imported
+from plotly import optional_imports
 
-if _matplotlylib_imported:
+matplotlylib = optional_imports.get_module('plotly.matplotlylib')
+
+if matplotlylib:
     import matplotlib
     # Force matplotlib to not use any Xwindows backend.
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
 
-    from plotly.tests.utils import compare_dict
+    from plotly.tests.utils import compare_dict, strip_dict_params
     from plotly.tests.test_optional.optional_utils import run_fig
     from plotly.tests.test_optional.test_matplotlylib.data.annotations import *
 
@@ -31,8 +32,8 @@ def test_annotations():
             'bottom-right', transform=ax.transAxes, va='baseline', ha='right')
     renderer = run_fig(fig)
     for data_no, data_dict in enumerate(renderer.plotly_fig['data']):
-        equivalent, msg = compare_dict(data_dict,
-                                       ANNOTATIONS['data'][data_no])
+        d1, d2 = strip_dict_params(data_dict, ANNOTATIONS['data'][data_no], ignore=['uid'])
+        equivalent, msg = compare_dict(d1, d2)
         assert equivalent, msg
     for no, note in enumerate(renderer.plotly_fig['layout']['annotations']):
         equivalent, msg = compare_dict(note,

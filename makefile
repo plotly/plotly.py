@@ -17,13 +17,10 @@ setup_subs :
 	make sync_subs
 
 update_default_schema :
-	@echo "Making sure the default-schema.json file is up to date"
-	python -c "import json;\
-               from plotly.graph_reference import GRAPH_REFERENCE;\
-               f = open('plotly/graph_reference/default-schema.json', 'w');\
-               json.dump(GRAPH_REFERENCE, f, indent=4, sort_keys=True,\
-                   separators=(',', ': '));\
-               f.close()"
+	@echo "Updating plotly-schema"
+	python setup.py updateschema
+	@echo "Auto-generating graph objects based on updated schema."
+	python setup.py codegen
 
 install : sync_subs
 	@echo ""
@@ -59,14 +56,8 @@ pull_chunked : submodules/chunked_requests
 	cd submodules/chunked_requests; git pull origin master
 
 update_plotlyjs_for_offline :
-	@echo "Updating plotly.js for Offline Mode"
+	@echo "Updating plotly.js"
 	@echo "------------------"
-	python -c "import urllib2;\
-				cdn_url = 'https://cdn.plot.ly/plotly-latest.min.js';\
-				response = urllib2.urlopen(cdn_url);\
-				html = response.read();\
-				f = open('./plotly/offline/plotly.min.js', 'w');\
-    		 	f.write(html);\
-				f.close()"
+	python setup.py updateplotlyjs
 	@echo "---------------------------------"
 	@echo "Remember to update the CHANGELOG!"

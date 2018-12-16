@@ -10,13 +10,13 @@ from __future__ import absolute_import
 from nose.plugins.attrib import attr
 from nose.tools import raises
 
-from plotly import exceptions
+from plotly import exceptions, optional_imports
 from plotly.plotly import plotly as py
 from unittest import TestCase
 
-# TODO: matplotlib-build-wip
-from plotly.tools import _matplotlylib_imported
-if _matplotlylib_imported:
+matplotlylib = optional_imports.get_module('plotly.matplotlylib')
+
+if matplotlylib:
     import matplotlib
 
     # Force matplotlib to not use any Xwindows backend.
@@ -30,14 +30,14 @@ class PlotMPLTest(TestCase):
         py.sign_in('PlotlyImageTest', '786r5mecv0',
                    plotly_domain='https://plot.ly')
 
-    @raises(exceptions.PlotlyError)
+    @raises(exceptions.PlotlyGraphObjectError)
     def test_update_type_error(self):
         fig, ax = plt.subplots()
         ax.plot([1, 2, 3])
         update = []
         py.plot_mpl(fig, update=update, filename="nosetests", auto_open=False)
 
-    @raises(exceptions.PlotlyError)
+    @raises(KeyError)
     def test_update_validation_error(self):
         fig, ax = plt.subplots()
         ax.plot([1, 2, 3])
