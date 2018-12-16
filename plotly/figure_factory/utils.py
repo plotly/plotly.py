@@ -386,6 +386,7 @@ def validate_colors_dict(colors, colortype='tuple'):
 
     return colors
 
+
 def colorscale_to_colors(colorscale):
     """
     Extracts the colors from colorscale as a list
@@ -499,7 +500,7 @@ def endpts_to_intervals(endpts):
 
 def annotation_dict_for_label(text, lane, num_of_lanes, subplot_spacing,
                               row_col='col', flipped=True, right_side=True,
-                              text_color='#0f0f0f'):
+                              text_color='#0f0f0f', column_width=None):
     """
     Returns annotation dict for label of n labels of a 1xn or nx1 subplot.
 
@@ -515,29 +516,42 @@ def annotation_dict_for_label(text, lane, num_of_lanes, subplot_spacing,
         row_col='col'.
     :param (bool) right_side: only applicable if row_col is set to 'row'.
     :param (str) text_color: color of the text.
+    :param (list|tuple) column_width: a sequence of numbers that indicate the
+        proportions that each subplot lane (row/column) take relative to one
+        another.
     """
-    l = (1 - (num_of_lanes - 1) * subplot_spacing) / (num_of_lanes)
+    if not column_width:
+        column_width = [1.0] * num_of_lanes
+
+    cum_sum = float(sum(column_width))
+    len_without_spacing = (1.0 - (num_of_lanes - 1) * subplot_spacing)
+    lane_len = (len_without_spacing * (column_width[lane - 1] / cum_sum))
+    len_before_lane = (
+        len_without_spacing * (sum(column_width[:lane - 1]) / cum_sum) +
+        (lane - 1) * subplot_spacing
+    )
+
     if not flipped:
         xanchor = 'center'
         yanchor = 'middle'
         if row_col == 'col':
-            x = (lane - 1) * (l + subplot_spacing) + 0.5 * l
+            x = len_before_lane + 0.5 * lane_len
             y = 1.03
             textangle = 0
         elif row_col == 'row':
-            y = (lane - 1) * (l + subplot_spacing) + 0.5 * l
+            y = len_before_lane + 0.5 * lane_len
             x = 1.03
             textangle = 90
     else:
         if row_col == 'col':
             xanchor = 'center'
             yanchor = 'bottom'
-            x = (lane - 1) * (l + subplot_spacing) + 0.5 * l
+            x = len_before_lane + 0.5 * lane_len
             y = 1.0
             textangle = 270
         elif row_col == 'row':
             yanchor = 'middle'
-            y = (lane - 1) * (l + subplot_spacing) + 0.5 * l
+            y = len_before_lane + 0.5 * lane_len
             if right_side:
                 x = 1.0
                 xanchor = 'left'

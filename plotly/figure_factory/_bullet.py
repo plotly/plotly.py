@@ -12,6 +12,7 @@ import plotly.graph_objs as go
 pd = optional_imports.get_module('pandas')
 
 
+# TODO: replace by same function in plotly/figure_factory/utils.py
 def is_sequence(obj):
     return (isinstance(obj, collections.Sequence) and
             not isinstance(obj, str))
@@ -164,6 +165,7 @@ def _bullet(df, markers, measures, ranges, subtitles, titles, orientation,
     return fig
 
 
+# TODO: replace scatter_options with None in function signature
 def create_bullet(data, markers=None, measures=None, ranges=None,
                   subtitles=None, titles=None, orientation='h',
                   range_colors=('rgb(200, 200, 200)', 'rgb(245, 245, 245)'),

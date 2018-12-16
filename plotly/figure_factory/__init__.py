@@ -16,6 +16,7 @@ from plotly.figure_factory._gantt import create_gantt
 from plotly.figure_factory._ohlc import create_ohlc
 from plotly.figure_factory._quiver import create_quiver
 from plotly.figure_factory._scatterplot import create_scatterplotmatrix
+from plotly.figure_factory._sparkline import create_sparkline
 from plotly.figure_factory._streamline import create_streamline
 from plotly.figure_factory._table import create_table
 from plotly.figure_factory._trisurf import create_trisurf
