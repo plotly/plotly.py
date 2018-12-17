@@ -5,6 +5,13 @@ import decimal
 import six
 
 from plotly import exceptions
+from plotly.colors import (DEFAULT_PLOTLY_COLORS, PLOTLY_SCALES, color_parser,
+                           colorscale_to_colors, colorscale_to_scale,
+                           convert_to_RGB_255, find_intermediate_color,
+                           hex_to_rgb, label_rgb, n_colors,
+                           unconvert_from_RGB_255, unlabel_rgb,
+                           validate_colors, validate_colors_dict,
+                           validate_colorscale, validate_scale_values)
 
 
 def is_sequence(obj):
