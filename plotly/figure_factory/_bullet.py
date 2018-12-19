@@ -3,7 +3,8 @@ from __future__ import absolute_import
 import collections
 import math
 
-from plotly import colors, exceptions, optional_imports
+from plotly import exceptions, optional_imports
+import plotly.colors as clrs
 from plotly.figure_factory import utils
 
 import plotly
@@ -12,15 +13,9 @@ import plotly.graph_objs as go
 pd = optional_imports.get_module('pandas')
 
 
-def is_sequence(obj):
-    return (isinstance(obj, collections.Sequence) and
-            not isinstance(obj, str))
-
-
 def _bullet(df, markers, measures, ranges, subtitles, titles, orientation,
             range_colors, measure_colors, horizontal_spacing,
             vertical_spacing, scatter_options, layout_options):
-
     num_of_lanes = len(df)
     num_of_rows = num_of_lanes if orientation == 'h' else 1
     num_of_cols = 1 if orientation == 'h' else num_of_lanes
@@ -78,7 +73,7 @@ def _bullet(df, markers, measures, ranges, subtitles, titles, orientation,
     for row in range(num_of_lanes):
         # ranges bars
         for idx in range(len(df.iloc[row]['ranges'])):
-            inter_colors = colors.n_colors(
+            inter_colors = clrs.n_colors(
                 range_colors[0], range_colors[1],
                 len(df.iloc[row]['ranges']), 'rgb'
             )
@@ -104,7 +99,7 @@ def _bullet(df, markers, measures, ranges, subtitles, titles, orientation,
 
         # measures bars
         for idx in range(len(df.iloc[row]['measures'])):
-            inter_colors = colors.n_colors(
+            inter_colors = clrs.n_colors(
                 measure_colors[0], measure_colors[1],
                 len(df.iloc[row]['measures']), 'rgb'
             )
@@ -261,7 +256,7 @@ def create_bullet(data, markers=None, measures=None, ranges=None,
             "'pandas' must be installed for this figure factory."
         )
 
-    if is_sequence(data):
+    if utils.is_sequence(data):
         if not all(isinstance(item, dict) for item in data):
             raise exceptions.PlotlyError(
                 'Every entry of the data argument list, tuple, etc must '
@@ -275,7 +270,7 @@ def create_bullet(data, markers=None, measures=None, ranges=None,
 
     # make DataFrame from data with correct column headers
     col_names = ['titles', 'subtitle', 'markers', 'measures', 'ranges']
-    if is_sequence(data):
+    if utils.is_sequence(data):
         df = pd.DataFrame(
             [
                 [d[titles] for d in data] if titles else [''] * len(data),
@@ -317,8 +312,8 @@ def create_bullet(data, markers=None, measures=None, ranges=None,
                     "Both 'range_colors' or 'measure_colors' must be a list "
                     "of two valid colors."
                 )
-            colors.validate_colors(colors_list)
-            colors_list = colors.convert_colors_to_same_type(colors_list,
+            clrs.validate_colors(colors_list)
+            colors_list = clrs.convert_colors_to_same_type(colors_list,
                                                              'rgb')[0]
 
     # default scatter options

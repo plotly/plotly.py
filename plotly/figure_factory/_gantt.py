@@ -3,6 +3,7 @@ from __future__ import absolute_import
 from numbers import Number
 
 from plotly import exceptions, optional_imports
+import plotly.colors as clrs
 from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
 
@@ -245,20 +246,20 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
             tasks[index]['y1'] = groupID + bar_width
 
             # unlabel color
-            colors = utils.color_parser(colors, utils.unlabel_rgb)
+            colors = clrs.color_parser(colors, clrs.unlabel_rgb)
             lowcolor = colors[0]
             highcolor = colors[1]
 
             intermed = (chart[index][index_col]) / 100.0
-            intermed_color = utils.find_intermediate_color(
+            intermed_color = clrs.find_intermediate_color(
                 lowcolor, highcolor, intermed
             )
-            intermed_color = utils.color_parser(
-                intermed_color, utils.label_rgb
+            intermed_color = clrs.color_parser(
+                intermed_color, clrs.label_rgb
             )
             tasks[index]['fillcolor'] = intermed_color
             # relabel colors with 'rgb'
-            colors = utils.color_parser(colors, utils.label_rgb)
+            colors = clrs.color_parser(colors, clrs.label_rgb)
 
             # add a line for hover text and autorange
             entry = dict(
@@ -743,9 +744,9 @@ def create_gantt(df, colors=None, index_col=None, show_colorbar=False,
 
     # Validate colors
     if isinstance(colors, dict):
-        colors = utils.validate_colors_dict(colors, 'rgb')
+        colors = clrs.validate_colors_dict(colors, 'rgb')
     else:
-        colors = utils.validate_colors(colors, 'rgb')
+        colors = clrs.validate_colors(colors, 'rgb')
 
     if reverse_colors is True:
         colors.reverse()
