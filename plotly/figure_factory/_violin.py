@@ -3,6 +3,7 @@ from __future__ import absolute_import
 from numbers import Number
 
 from plotly import exceptions, optional_imports
+import plotly.colors as clrs
 from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
 from plotly.tools import make_subplots
@@ -285,8 +286,8 @@ def violin_colorscale(data, data_header, group_header, colors, use_colorscale,
                         print_grid=False)
 
     # prepare low and high color for colorscale
-    lowcolor = utils.color_parser(colors[0], utils.unlabel_rgb)
-    highcolor = utils.color_parser(colors[1], utils.unlabel_rgb)
+    lowcolor = clrs.color_parser(colors[0], clrs.unlabel_rgb)
+    highcolor = clrs.color_parser(colors[1], clrs.unlabel_rgb)
 
     # find min and max values in group_stats
     group_stats_values = []
@@ -301,7 +302,7 @@ def violin_colorscale(data, data_header, group_header, colors, use_colorscale,
 
         # find intermediate color from colorscale
         intermed = (group_stats[gr] - min_value) / (max_value - min_value)
-        intermed_color = utils.find_intermediate_color(
+        intermed_color = clrs.find_intermediate_color(
             lowcolor, highcolor, intermed
         )
 
@@ -545,9 +546,9 @@ def create_violin(data, data_header=None, group_header=None, colors=None,
 
     # Validate colors
     if isinstance(colors, dict):
-        valid_colors = utils.validate_colors_dict(colors, 'rgb')
+        valid_colors = clrs.validate_colors_dict(colors, 'rgb')
     else:
-        valid_colors = utils.validate_colors(colors, 'rgb')
+        valid_colors = clrs.validate_colors(colors, 'rgb')
 
     # validate data and choose plot type
     if group_header is None:

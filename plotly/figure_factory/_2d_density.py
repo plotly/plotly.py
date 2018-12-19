@@ -3,6 +3,7 @@ from __future__ import absolute_import
 from numbers import Number
 
 from plotly import exceptions
+import plotly.colors as clrs
 from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
 
@@ -100,12 +101,12 @@ def create_2d_density(x, y, colorscale='Earth', ncontours=20,
             "Both lists 'x' and 'y' must be the same length."
         )
 
-    colorscale = utils.validate_colors(colorscale, 'rgb')
+    colorscale = clrs.validate_colors(colorscale, 'rgb')
     colorscale = make_linear_colorscale(colorscale)
 
     # validate hist_color and point_color
-    hist_color = utils.validate_colors(hist_color, 'rgb')
-    point_color = utils.validate_colors(point_color, 'rgb')
+    hist_color = clrs.validate_colors(hist_color, 'rgb')
+    point_color = clrs.validate_colors(point_color, 'rgb')
 
     trace1 = graph_objs.Scatter(
         x=x, y=y, mode='markers', name='points',

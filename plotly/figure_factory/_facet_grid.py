@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 
-from plotly import colors, exceptions, optional_imports
+from plotly import exceptions, optional_imports
+import plotly.colors as clrs
 from plotly.figure_factory import utils
 from plotly.tools import make_subplots
 
@@ -877,7 +878,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
         if isinstance(df[color_name].iloc[0], str) or color_is_cat:
             show_legend = True
             if isinstance(colormap, dict):
-                utils.validate_colors_dict(colormap, 'rgb')
+                clrs.validate_colors_dict(colormap, 'rgb')
 
                 for val in df[color_name].unique():
                     if val not in colormap.keys():
@@ -888,7 +889,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
                         )
             else:
                 # use default plotly colors for dictionary
-                default_colors = utils.DEFAULT_PLOTLY_COLORS
+                default_colors = clrs.DEFAULT_PLOTLY_COLORS
                 colormap = {}
                 j = 0
                 for val in df[color_name].unique():
@@ -906,7 +907,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
         elif isinstance(df[color_name].iloc[0], Number):
             if isinstance(colormap, dict):
                 show_legend = True
-                utils.validate_colors_dict(colormap, 'rgb')
+                clrs.validate_colors_dict(colormap, 'rgb')
 
                 for val in df[color_name].unique():
                     if val not in colormap.keys():
@@ -925,7 +926,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
 
             elif isinstance(colormap, list):
                 colorscale_list = colormap
-                utils.validate_colorscale(colorscale_list)
+                clrs.validate_colorscale(colorscale_list)
 
                 fig, annotations = _facet_grid_color_numerical(
                     df, x, y, facet_row, facet_col, color_name,
@@ -935,13 +936,13 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
                     marker_color, kwargs_trace, kwargs_marker
                 )
             elif isinstance(colormap, str):
-                if colormap in colors.PLOTLY_SCALES.keys():
-                    colorscale_list = colors.PLOTLY_SCALES[colormap]
+                if colormap in clrs.PLOTLY_SCALES.keys():
+                    colorscale_list = clrs.PLOTLY_SCALES[colormap]
                 else:
                     raise exceptions.PlotlyError(
                         "If 'colormap' is a string, it must be the name "
                         "of a Plotly Colorscale. The available colorscale "
-                        "names are {}".format(colors.PLOTLY_SCALES.keys())
+                        "names are {}".format(clrs.PLOTLY_SCALES.keys())
                     )
                 fig, annotations = _facet_grid_color_numerical(
                     df, x, y, facet_row, facet_col, color_name,
@@ -951,7 +952,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
                     marker_color, kwargs_trace, kwargs_marker
                 )
             else:
-                colorscale_list = colors.PLOTLY_SCALES['Reds']
+                colorscale_list = clrs.PLOTLY_SCALES['Reds']
                 fig, annotations = _facet_grid_color_numerical(
                     df, x, y, facet_row, facet_col, color_name,
                     colorscale_list, num_of_rows, num_of_cols,

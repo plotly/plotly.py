@@ -77,6 +77,7 @@ from __future__ import absolute_import
 
 import decimal
 from numbers import Number
+import six
 
 from plotly import exceptions
 
@@ -203,19 +204,17 @@ PLOTLY_SCALES = {
         [0.8784313725490196, '#addc30'], [0.9411764705882353, '#d8e219'],
         [1, '#fde725']
     ],
-    
     'Cividis': [
-        [0.000000, 'rgb(0,32,76)'], [0.058824, 'rgb(0,42,102)'], 
-        [0.117647, 'rgb(0,52,110)'], [0.176471, 'rgb(39,63,108)'], 
-        [0.235294, 'rgb(60,74,107)'], [0.294118, 'rgb(76,85,107)'], 
-        [0.352941, 'rgb(91,95,109)'], [0.411765, 'rgb(104,106,112)'], 
-        [0.470588, 'rgb(117,117,117)'], [0.529412, 'rgb(131,129,120)'], 
-        [0.588235, 'rgb(146,140,120)'], [0.647059, 'rgb(161,152,118)'], 
-        [0.705882, 'rgb(176,165,114)'], [0.764706, 'rgb(192,177,109)'], 
-        [0.823529, 'rgb(209,191,102)'], [0.882353, 'rgb(225,204,92)'], 
+        [0.000000, 'rgb(0,32,76)'], [0.058824, 'rgb(0,42,102)'],
+        [0.117647, 'rgb(0,52,110)'], [0.176471, 'rgb(39,63,108)'],
+        [0.235294, 'rgb(60,74,107)'], [0.294118, 'rgb(76,85,107)'],
+        [0.352941, 'rgb(91,95,109)'], [0.411765, 'rgb(104,106,112)'],
+        [0.470588, 'rgb(117,117,117)'], [0.529412, 'rgb(131,129,120)'],
+        [0.588235, 'rgb(146,140,120)'], [0.647059, 'rgb(161,152,118)'],
+        [0.705882, 'rgb(176,165,114)'], [0.764706, 'rgb(192,177,109)'],
+        [0.823529, 'rgb(209,191,102)'], [0.882353, 'rgb(225,204,92)'],
         [0.941176, 'rgb(243,219,79)'], [1.000000, 'rgb(255,233,69)']
     ]
-    
 }
 
 
@@ -245,62 +244,105 @@ def color_parser(colors, function):
             return new_color_list
 
 
-def validate_colors(colors):
+def validate_colors(colors, colortype='tuple'):
     """
-    Validates color(s) and returns an error for invalid color(s)
-
-    :param (str|tuple|list) colors: either a plotly scale name, an rgb or hex
-        color, a color tuple or a list/tuple of colors
+    Validates color(s) and returns a list of color(s) of a specified type
     """
-    colors_list = []
+    from numbers import Number
+    if colors is None:
+        colors = DEFAULT_PLOTLY_COLORS
 
-    # if colors is a single color, put into colors_list
     if isinstance(colors, str):
         if colors in PLOTLY_SCALES:
-            return
+            colors_list = colorscale_to_colors(PLOTLY_SCALES[colors])
+            # TODO: fix _gantt.py/_scatter.py so that they can accept the
+            # actual colorscale and not just a list of the first and last
+            # color in the plotly colorscale. In resolving this issue we
+            # will be removing the immediate line below
+            colors = [colors_list[0]] + [colors_list[-1]]
         elif 'rgb' in colors or '#' in colors:
-            colors_list.append(colors)
+            colors = [colors]
         else:
             raise exceptions.PlotlyError(
-                'If your colors variable is a string, it must be a '
-                'Plotly scale, an rgb color or a hex color.'
-            )
+                "If your colors variable is a string, it must be a "
+                "Plotly scale, an rgb color or a hex color.")
 
     elif isinstance(colors, tuple):
         if isinstance(colors[0], Number):
-            colors_list = [colors]
+            colors = [colors]
         else:
-            colors_list = list(colors)
+            colors = list(colors)
 
-    if isinstance(colors, dict):
-        colors_list.extend(colors.values())
-
-    elif isinstance(colors, list):
-        colors_list = colors
-
-    # Validate colors in colors_list
-    for j, each_color in enumerate(colors_list):
+    # convert color elements in list to tuple color
+    for j, each_color in enumerate(colors):
         if 'rgb' in each_color:
-            each_color = color_parser(
-                each_color, unlabel_rgb
-            )
+            each_color = color_parser(each_color, unlabel_rgb)
             for value in each_color:
                 if value > 255.0:
                     raise exceptions.PlotlyError(
-                        'Whoops! The elements in your rgb colors '
-                        'tuples cannot exceed 255.0.'
+                        "Whoops! The elements in your rgb colors "
+                        "tuples cannot exceed 255.0."
                     )
-        elif '#' in each_color:
-            each_color = color_parser(
-                each_color, hex_to_rgb
-            )
-        elif isinstance(each_color, tuple):
+            each_color = color_parser(each_color, unconvert_from_RGB_255)
+            colors[j] = each_color
+
+        if '#' in each_color:
+            each_color = color_parser(each_color, hex_to_rgb)
+            each_color = color_parser(each_color, unconvert_from_RGB_255)
+
+            colors[j] = each_color
+
+        if isinstance(each_color, tuple):
             for value in each_color:
                 if value > 1.0:
                     raise exceptions.PlotlyError(
-                        'Whoops! The elements in your colors tuples '
-                        'cannot exceed 1.0.'
+                        "Whoops! The elements in your colors tuples "
+                        "cannot exceed 1.0."
                     )
+            colors[j] = each_color
+
+    if colortype == 'rgb' and not isinstance(colors, six.string_types):
+        for j, each_color in enumerate(colors):
+            rgb_color = color_parser(each_color, convert_to_RGB_255)
+            colors[j] = color_parser(rgb_color, label_rgb)
+
+    return colors
+
+
+def validate_colors_dict(colors, colortype='tuple'):
+    """
+    Validates dictioanry of color(s)
+    """
+    # validate each color element in the dictionary
+    for key in colors:
+        if 'rgb' in colors[key]:
+            colors[key] = color_parser(colors[key], unlabel_rgb)
+            for value in colors[key]:
+                if value > 255.0:
+                    raise exceptions.PlotlyError(
+                        "Whoops! The elements in your rgb colors "
+                        "tuples cannot exceed 255.0."
+                    )
+            colors[key] = color_parser(colors[key], unconvert_from_RGB_255)
+
+        if '#' in colors[key]:
+            colors[key] = color_parser(colors[key], hex_to_rgb)
+            colors[key] = color_parser(colors[key], unconvert_from_RGB_255)
+
+        if isinstance(colors[key], tuple):
+            for value in colors[key]:
+                if value > 1.0:
+                    raise exceptions.PlotlyError(
+                        "Whoops! The elements in your colors tuples "
+                        "cannot exceed 1.0."
+                    )
+
+    if colortype == 'rgb':
+        for key in colors:
+            colors[key] = color_parser(colors[key], convert_to_RGB_255)
+            colors[key] = color_parser(colors[key], label_rgb)
+
+    return colors
 
 
 def convert_colors_to_same_type(colors, colortype='rgb', scale=None,
@@ -324,7 +366,6 @@ def convert_colors_to_same_type(colors, colortype='rgb', scale=None,
     :rtype (tuple) (colors_list, scale) if scale is None in the function call,
         then scale will remain None in the returned tuple
     """
-    #if colors_list is None:
     colors_list = []
 
     if colors is None and return_default_colors is True:
@@ -460,6 +501,22 @@ def validate_scale_values(scale):
                 "'scale' must be a list that contains a strictly increasing "
                 "sequence of numbers."
             )
+
+
+def validate_colorscale(colorscale):
+    """Validate the structure, scale values and colors of colorscale."""
+    if not isinstance(colorscale, list):
+        # TODO Write tests for these exceptions
+        raise exceptions.PlotlyError("A valid colorscale must be a list.")
+    if not all(isinstance(innerlist, list) for innerlist in colorscale):
+        raise exceptions.PlotlyError(
+            "A valid colorscale must be a list of lists."
+        )
+    colorscale_colors = colorscale_to_colors(colorscale)
+    scale_values = colorscale_to_scale(colorscale)
+
+    validate_scale_values(scale_values)
+    validate_colors(colorscale_colors)
 
 
 def make_colorscale(colors, scale=None):
