@@ -203,12 +203,8 @@ class BaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 tickvals .
             title
-                Sets the title of this axis.
-            titlefont
-                Sets this axis' title font.
-            titleoffset
-                An additional amount by which to offset the
-                title from the tick labels, given in pixels
+                plotly.graph_objs.carpet.baxis.Title instance
+                or dict with compatible properties
             type
                 Sets the axis type. By default, plotly attempts
                 to determined the axis type by looking into the

@@ -249,6 +249,10 @@ class Polar(BaseLayoutHierarchyType):
                     value are shown. If *category, use `period` to
                     set the number of integer coordinates around
                     polar axis.
+                uirevision
+                    Controls persistence of user-driven changes in
+                    axis `rotation`. Defaults to
+                    `polar<N>.uirevision`.
                 visible
                     A single toggle to hide the axis while
                     preserving interaction like dragging. Default
@@ -716,14 +720,18 @@ class Polar(BaseLayoutHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    Sets the title of this axis.
-                titlefont
-                    Sets this axis' title font.
+                    plotly.graph_objs.layout.polar.radialaxis.Title
+                    instance or dict with compatible properties
                 type
                     Sets the axis type. By default, plotly attempts
                     to determined the axis type by looking into the
                     data of the traces that referenced the axis in
                     question.
+                uirevision
+                    Controls persistence of user-driven changes in
+                    axis `range`, `autorange`, `angle`, and `title`
+                    if in `editable: true` configuration. Defaults
+                    to `polar<N>.uirevision`.
                 visible
                     A single toggle to hide the axis while
                     preserving interaction like dragging. Default
@@ -767,6 +775,27 @@ class Polar(BaseLayoutHierarchyType):
     @sector.setter
     def sector(self, val):
         self['sector'] = val
+
+    # uirevision
+    # ----------
+    @property
+    def uirevision(self):
+        """
+        Controls persistence of user-driven changes in axis attributes,
+        if not overridden in the individual axes. Defaults to
+        `layout.uirevision`.
+    
+        The 'uirevision' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['uirevision']
+
+    @uirevision.setter
+    def uirevision(self, val):
+        self['uirevision'] = val
 
     # property parent name
     # --------------------
@@ -817,6 +846,10 @@ class Polar(BaseLayoutHierarchyType):
             (in degrees). Sector are assumed to be spanned in the
             counterclockwise direction with 0 corresponding to
             rightmost limit of the polar subplot.
+        uirevision
+            Controls persistence of user-driven changes in axis
+            attributes, if not overridden in the individual axes.
+            Defaults to `layout.uirevision`.
         """
 
     def __init__(
@@ -831,6 +864,7 @@ class Polar(BaseLayoutHierarchyType):
         hole=None,
         radialaxis=None,
         sector=None,
+        uirevision=None,
         **kwargs
     ):
         """
@@ -879,6 +913,10 @@ class Polar(BaseLayoutHierarchyType):
             (in degrees). Sector are assumed to be spanned in the
             counterclockwise direction with 0 corresponding to
             rightmost limit of the polar subplot.
+        uirevision
+            Controls persistence of user-driven changes in axis
+            attributes, if not overridden in the individual axes.
+            Defaults to `layout.uirevision`.
 
         Returns
         -------
@@ -921,6 +959,7 @@ an instance of plotly.graph_objs.layout.Polar"""
         self._validators['hole'] = v_polar.HoleValidator()
         self._validators['radialaxis'] = v_polar.RadialAxisValidator()
         self._validators['sector'] = v_polar.SectorValidator()
+        self._validators['uirevision'] = v_polar.UirevisionValidator()
 
         # Populate data dict with properties
         # ----------------------------------
@@ -942,6 +981,8 @@ an instance of plotly.graph_objs.layout.Polar"""
         self['radialaxis'] = radialaxis if radialaxis is not None else _v
         _v = arg.pop('sector', None)
         self['sector'] = sector if sector is not None else _v
+        _v = arg.pop('uirevision', None)
+        self['uirevision'] = uirevision if uirevision is not None else _v
 
         # Process unknown kwargs
         # ----------------------

@@ -285,6 +285,29 @@ class Sankey(BaseTraceType):
                 hoverlabel
                     plotly.graph_objs.sankey.link.Hoverlabel
                     instance or dict with compatible properties
+                hovertemplate
+                    Template string used for rendering the
+                    information that appear on hover box. Note that
+                    this will override `hoverinfo`. Variables are
+                    inserted using %{variable}, for example "y:
+                    %{y}". Numbers are formatted using d3-format's
+                    syntax %{variable:d3-format}, for example
+                    "Price: %{y:$.2f}". See https://github.com/d3/d
+                    3-format/blob/master/README.md#locale_format
+                    for details on the formatting syntax. The
+                    variables available in `hovertemplate` are the
+                    ones emitted as event data described at this
+                    link https://plot.ly/javascript/plotlyjs-
+                    events/#event-data. Additionally, every
+                    attributes that can be specified per-point (the
+                    ones that are `arrayOk: true`) are available.
+                    variables `value` and `label`. Anything
+                    contained in tag `<extra>` is displayed in the
+                    secondary box, for example
+                    "<extra>{fullData.name}</extra>".
+                hovertemplatesrc
+                    Sets the source reference on plot.ly for
+                    hovertemplate .
                 label
                     The shown name of the link.
                 labelsrc
@@ -379,6 +402,29 @@ class Sankey(BaseTraceType):
                 hoverlabel
                     plotly.graph_objs.sankey.node.Hoverlabel
                     instance or dict with compatible properties
+                hovertemplate
+                    Template string used for rendering the
+                    information that appear on hover box. Note that
+                    this will override `hoverinfo`. Variables are
+                    inserted using %{variable}, for example "y:
+                    %{y}". Numbers are formatted using d3-format's
+                    syntax %{variable:d3-format}, for example
+                    "Price: %{y:$.2f}". See https://github.com/d3/d
+                    3-format/blob/master/README.md#locale_format
+                    for details on the formatting syntax. The
+                    variables available in `hovertemplate` are the
+                    ones emitted as event data described at this
+                    link https://plot.ly/javascript/plotlyjs-
+                    events/#event-data. Additionally, every
+                    attributes that can be specified per-point (the
+                    ones that are `arrayOk: true`) are available.
+                    variables `value` and `label`. Anything
+                    contained in tag `<extra>` is displayed in the
+                    secondary box, for example
+                    "<extra>{fullData.name}</extra>".
+                hovertemplatesrc
+                    Sets the source reference on plot.ly for
+                    hovertemplate .
                 label
                     The shown name of the node.
                 labelsrc
@@ -585,6 +631,39 @@ class Sankey(BaseTraceType):
     def uid(self, val):
         self['uid'] = val
 
+    # uirevision
+    # ----------
+    @property
+    def uirevision(self):
+        """
+        Controls persistence of some user-driven changes to the trace:
+        `constraintrange` in `parcoords` traces, as well as some
+        `editable: true` modifications such as `name` and
+        `colorbar.title`. Defaults to `layout.uirevision`. Note that
+        other user-driven trace attribute changes are controlled by
+        `layout` attributes: `trace.visible` is controlled by
+        `layout.legend.uirevision`, `selectedpoints` is controlled by
+        `layout.selectionrevision`, and `colorbar.(x|y)` (accessible
+        with `config: {editable: true}`) is controlled by
+        `layout.editrevision`. Trace changes are tracked by `uid`,
+        which only falls back on trace index if no `uid` is provided.
+        So if your app can add/remove traces before the end of the
+        `data` array, such that the same trace has a different index,
+        you can still preserve user-driven changes if you give each
+        trace a `uid` that stays with it as it moves.
+    
+        The 'uirevision' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['uirevision']
+
+    @uirevision.setter
+    def uirevision(self, val):
+        self['uirevision'] = val
+
     # valueformat
     # -----------
     @property
@@ -736,6 +815,24 @@ class Sankey(BaseTraceType):
             Sets the font for node labels
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         valueformat
             Sets the value formatting rule using d3 formatting
             mini-language which is similar to those of Python. See 
@@ -774,6 +871,7 @@ class Sankey(BaseTraceType):
         stream=None,
         textfont=None,
         uid=None,
+        uirevision=None,
         valueformat=None,
         valuesuffix=None,
         visible=None,
@@ -858,6 +956,24 @@ class Sankey(BaseTraceType):
             Sets the font for node labels
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         valueformat
             Sets the value formatting rule using d3 formatting
             mini-language which is similar to those of Python. See 
@@ -924,6 +1040,7 @@ an instance of plotly.graph_objs.Sankey"""
         self._validators['stream'] = v_sankey.StreamValidator()
         self._validators['textfont'] = v_sankey.TextfontValidator()
         self._validators['uid'] = v_sankey.UidValidator()
+        self._validators['uirevision'] = v_sankey.UirevisionValidator()
         self._validators['valueformat'] = v_sankey.ValueformatValidator()
         self._validators['valuesuffix'] = v_sankey.ValuesuffixValidator()
         self._validators['visible'] = v_sankey.VisibleValidator()
@@ -970,6 +1087,8 @@ an instance of plotly.graph_objs.Sankey"""
         self['textfont'] = textfont if textfont is not None else _v
         _v = arg.pop('uid', None)
         self['uid'] = uid if uid is not None else _v
+        _v = arg.pop('uirevision', None)
+        self['uirevision'] = uirevision if uirevision is not None else _v
         _v = arg.pop('valueformat', None)
         self['valueformat'] = valueformat if valueformat is not None else _v
         _v = arg.pop('valuesuffix', None)

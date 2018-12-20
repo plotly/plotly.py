@@ -1231,66 +1231,34 @@ class RadialAxis(BaseLayoutHierarchyType):
     @property
     def title(self):
         """
-        Sets the title of this axis.
+        The 'title' property is an instance of Title
+        that may be specified as:
+          - An instance of plotly.graph_objs.layout.polar.radialaxis.Title
+          - A dict of string/value properties that will be passed
+            to the Title constructor
     
-        The 'title' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+            Supported dict properties:
+                
+                font
+                    Sets this axis' title font. Note that the
+                    title's font used to be customized by the now
+                    deprecated `titlefont` attribute.
+                text
+                    Sets the title of this axis. Note that before
+                    the existence of `title.text`, the title's
+                    contents used to be defined as the `title`
+                    attribute itself. This behavior has been
+                    deprecated.
 
         Returns
         -------
-        str
+        plotly.graph_objs.layout.polar.radialaxis.Title
         """
         return self['title']
 
     @title.setter
     def title(self, val):
         self['title'] = val
-
-    # titlefont
-    # ---------
-    @property
-    def titlefont(self):
-        """
-        Sets this axis' title font.
-    
-        The 'titlefont' property is an instance of Titlefont
-        that may be specified as:
-          - An instance of plotly.graph_objs.layout.polar.radialaxis.Titlefont
-          - A dict of string/value properties that will be passed
-            to the Titlefont constructor
-    
-            Supported dict properties:
-                
-                color
-    
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The plotly service (at https://plot.ly
-                    or on-premise) generates images on a server,
-                    where only a select number of fonts are
-                    installed and supported. These include "Arial",
-                    "Balto", "Courier New", "Droid Sans",, "Droid
-                    Serif", "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                size
-
-        Returns
-        -------
-        plotly.graph_objs.layout.polar.radialaxis.Titlefont
-        """
-        return self['titlefont']
-
-    @titlefont.setter
-    def titlefont(self, val):
-        self['titlefont'] = val
 
     # type
     # ----
@@ -1314,6 +1282,27 @@ class RadialAxis(BaseLayoutHierarchyType):
     @type.setter
     def type(self, val):
         self['type'] = val
+
+    # uirevision
+    # ----------
+    @property
+    def uirevision(self):
+        """
+        Controls persistence of user-driven changes in axis `range`,
+        `autorange`, `angle`, and `title` if in `editable: true`
+        configuration. Defaults to `polar<N>.uirevision`.
+    
+        The 'uirevision' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['uirevision']
+
+    @uirevision.setter
+    def uirevision(self, val):
+        self['uirevision'] = val
 
     # visible
     # -------
@@ -1566,13 +1555,17 @@ class RadialAxis(BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            Sets the title of this axis.
-        titlefont
-            Sets this axis' title font.
+            plotly.graph_objs.layout.polar.radialaxis.Title
+            instance or dict with compatible properties
         type
             Sets the axis type. By default, plotly attempts to
             determined the axis type by looking into the data of
             the traces that referenced the axis in question.
+        uirevision
+            Controls persistence of user-driven changes in axis
+            `range`, `autorange`, `angle`, and `title` if in
+            `editable: true` configuration. Defaults to
+            `polar<N>.uirevision`.
         visible
             A single toggle to hide the axis while preserving
             interaction like dragging. Default is true when a
@@ -1626,8 +1619,8 @@ class RadialAxis(BaseLayoutHierarchyType):
         tickvalssrc=None,
         tickwidth=None,
         title=None,
-        titlefont=None,
         type=None,
+        uirevision=None,
         visible=None,
         **kwargs
     ):
@@ -1858,13 +1851,17 @@ class RadialAxis(BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            Sets the title of this axis.
-        titlefont
-            Sets this axis' title font.
+            plotly.graph_objs.layout.polar.radialaxis.Title
+            instance or dict with compatible properties
         type
             Sets the axis type. By default, plotly attempts to
             determined the axis type by looking into the data of
             the traces that referenced the axis in question.
+        uirevision
+            Controls persistence of user-driven changes in axis
+            `range`, `autorange`, `angle`, and `title` if in
+            `editable: true` configuration. Defaults to
+            `polar<N>.uirevision`.
         visible
             A single toggle to hide the axis while preserving
             interaction like dragging. Default is true when a
@@ -1956,8 +1953,8 @@ an instance of plotly.graph_objs.layout.polar.RadialAxis"""
         self._validators['tickvalssrc'] = v_radialaxis.TickvalssrcValidator()
         self._validators['tickwidth'] = v_radialaxis.TickwidthValidator()
         self._validators['title'] = v_radialaxis.TitleValidator()
-        self._validators['titlefont'] = v_radialaxis.TitlefontValidator()
         self._validators['type'] = v_radialaxis.TypeValidator()
+        self._validators['uirevision'] = v_radialaxis.UirevisionValidator()
         self._validators['visible'] = v_radialaxis.VisibleValidator()
 
         # Populate data dict with properties
@@ -2061,10 +2058,10 @@ an instance of plotly.graph_objs.layout.polar.RadialAxis"""
         self['tickwidth'] = tickwidth if tickwidth is not None else _v
         _v = arg.pop('title', None)
         self['title'] = title if title is not None else _v
-        _v = arg.pop('titlefont', None)
-        self['titlefont'] = titlefont if titlefont is not None else _v
         _v = arg.pop('type', None)
         self['type'] = type if type is not None else _v
+        _v = arg.pop('uirevision', None)
+        self['uirevision'] = uirevision if uirevision is not None else _v
         _v = arg.pop('visible', None)
         self['visible'] = visible if visible is not None else _v
 

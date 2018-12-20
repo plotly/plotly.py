@@ -12,7 +12,8 @@ class TypeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop('edit_type', 'calc'),
             role=kwargs.pop('role', 'info'),
             values=kwargs.pop(
-                'values', ['-', 'linear', 'log', 'date', 'category']
+                'values',
+                ['-', 'linear', 'log', 'date', 'category', 'multicategory']
             ),
             **kwargs
         )

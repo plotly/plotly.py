@@ -1412,87 +1412,39 @@ class Baxis(BaseTraceHierarchyType):
     @property
     def title(self):
         """
-        Sets the title of this axis.
+        The 'title' property is an instance of Title
+        that may be specified as:
+          - An instance of plotly.graph_objs.carpet.baxis.Title
+          - A dict of string/value properties that will be passed
+            to the Title constructor
     
-        The 'title' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+            Supported dict properties:
+                
+                font
+                    Sets this axis' title font. Note that the
+                    title's font used to be set by the now
+                    deprecated `titlefont` attribute.
+                offset
+                    An additional amount by which to offset the
+                    title from the tick labels, given in pixels.
+                    Note that this used to be set by the now
+                    deprecated `titleoffset` attribute.
+                text
+                    Sets the title of this axis. Note that before
+                    the existence of `title.text`, the title's
+                    contents used to be defined as the `title`
+                    attribute itself. This behavior has been
+                    deprecated.
 
         Returns
         -------
-        str
+        plotly.graph_objs.carpet.baxis.Title
         """
         return self['title']
 
     @title.setter
     def title(self, val):
         self['title'] = val
-
-    # titlefont
-    # ---------
-    @property
-    def titlefont(self):
-        """
-        Sets this axis' title font.
-    
-        The 'titlefont' property is an instance of Titlefont
-        that may be specified as:
-          - An instance of plotly.graph_objs.carpet.baxis.Titlefont
-          - A dict of string/value properties that will be passed
-            to the Titlefont constructor
-    
-            Supported dict properties:
-                
-                color
-    
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The plotly service (at https://plot.ly
-                    or on-premise) generates images on a server,
-                    where only a select number of fonts are
-                    installed and supported. These include "Arial",
-                    "Balto", "Courier New", "Droid Sans",, "Droid
-                    Serif", "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                size
-
-        Returns
-        -------
-        plotly.graph_objs.carpet.baxis.Titlefont
-        """
-        return self['titlefont']
-
-    @titlefont.setter
-    def titlefont(self, val):
-        self['titlefont'] = val
-
-    # titleoffset
-    # -----------
-    @property
-    def titleoffset(self):
-        """
-        An additional amount by which to offset the title from the tick
-        labels, given in pixels
-    
-        The 'titleoffset' property is a number and may be specified as:
-          - An int or float
-
-        Returns
-        -------
-        int|float
-        """
-        return self['titleoffset']
-
-    @titleoffset.setter
-    def titleoffset(self, val):
-        self['titleoffset'] = val
 
     # type
     # ----
@@ -1705,12 +1657,8 @@ class Baxis(BaseTraceHierarchyType):
         tickvalssrc
             Sets the source reference on plot.ly for  tickvals .
         title
-            Sets the title of this axis.
-        titlefont
-            Sets this axis' title font.
-        titleoffset
-            An additional amount by which to offset the title from
-            the tick labels, given in pixels
+            plotly.graph_objs.carpet.baxis.Title instance or dict
+            with compatible properties
         type
             Sets the axis type. By default, plotly attempts to
             determined the axis type by looking into the data of
@@ -1772,8 +1720,6 @@ class Baxis(BaseTraceHierarchyType):
         tickvals=None,
         tickvalssrc=None,
         title=None,
-        titlefont=None,
-        titleoffset=None,
         type=None,
         **kwargs
     ):
@@ -1962,12 +1908,8 @@ class Baxis(BaseTraceHierarchyType):
         tickvalssrc
             Sets the source reference on plot.ly for  tickvals .
         title
-            Sets the title of this axis.
-        titlefont
-            Sets this axis' title font.
-        titleoffset
-            An additional amount by which to offset the title from
-            the tick labels, given in pixels
+            plotly.graph_objs.carpet.baxis.Title instance or dict
+            with compatible properties
         type
             Sets the axis type. By default, plotly attempts to
             determined the axis type by looking into the data of
@@ -2061,8 +2003,6 @@ an instance of plotly.graph_objs.carpet.Baxis"""
         self._validators['tickvals'] = v_baxis.TickvalsValidator()
         self._validators['tickvalssrc'] = v_baxis.TickvalssrcValidator()
         self._validators['title'] = v_baxis.TitleValidator()
-        self._validators['titlefont'] = v_baxis.TitlefontValidator()
-        self._validators['titleoffset'] = v_baxis.TitleoffsetValidator()
         self._validators['type'] = v_baxis.TypeValidator()
 
         # Populate data dict with properties
@@ -2187,10 +2127,6 @@ an instance of plotly.graph_objs.carpet.Baxis"""
         self['tickvalssrc'] = tickvalssrc if tickvalssrc is not None else _v
         _v = arg.pop('title', None)
         self['title'] = title if title is not None else _v
-        _v = arg.pop('titlefont', None)
-        self['titlefont'] = titlefont if titlefont is not None else _v
-        _v = arg.pop('titleoffset', None)
-        self['titleoffset'] = titleoffset if titleoffset is not None else _v
         _v = arg.pop('type', None)
         self['type'] = type if type is not None else _v
 

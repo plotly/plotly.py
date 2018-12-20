@@ -72,6 +72,12 @@ class YAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 area. Options are "left", "center" (default),
                 and "right" for x axes, and "top", "middle"
                 (default), and "bottom" for y axes.
+            dividercolor
+                Sets the color of the dividers Only has an
+                effect on "multicategory" axes.
+            dividerwidth
+                Sets the width (in px) of the dividers Only has
+                an effect on "multicategory" axes.
             domain
                 Sets the domain of this axis (in plot
                 fraction).
@@ -221,6 +227,10 @@ class YAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 horizontal.
             separatethousands
                 If "true", even 4-digit integers are separated
+            showdividers
+                Determines whether or not a dividers are drawn
+                between the category levels of this axis. Only
+                has an effect on "multicategory" axes.
             showexponent
                 If "all", all exponents are shown besides their
                 significands. If "first", only the exponent of
@@ -335,6 +345,13 @@ class YAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "", this axis' ticks are not drawn. If
                 "outside" ("inside"), this axis' are drawn
                 outside (inside) the axis lines.
+            tickson
+                Determines where ticks and grid lines are drawn
+                with respect to their corresponding tick
+                labels. Only has an effect for axes of `type`
+                "category" or "multicategory". When set to
+                "boundaries", ticks and grid lines are drawn
+                half a category to the left/bottom of labels.
             ticksuffix
                 Sets a tick label suffix.
             ticktext
@@ -355,14 +372,18 @@ class YAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickwidth
                 Sets the tick width (in px).
             title
-                Sets the title of this axis.
-            titlefont
-                Sets this axis' title font.
+                plotly.graph_objs.layout.yaxis.Title instance
+                or dict with compatible properties
             type
                 Sets the axis type. By default, plotly attempts
                 to determined the axis type by looking into the
                 data of the traces that referenced the axis in
                 question.
+            uirevision
+                Controls persistence of user-driven changes in
+                axis `range`, `autorange`, and `title` if in
+                `editable: true` configuration. Defaults to
+                `layout.uirevision`.
             visible
                 A single toggle to hide the axis while
                 preserving interaction like dragging. Default

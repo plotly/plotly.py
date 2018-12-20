@@ -17,6 +17,7 @@ from ._xaxis import XAxisValidator
 from ._x0 import X0Validator
 from ._x import XValidator
 from ._visible import VisibleValidator
+from ._uirevision import UirevisionValidator
 from ._uid import UidValidator
 from ._transpose import TransposeValidator
 from ._textsrc import TextsrcValidator

@@ -1027,15 +1027,28 @@ class Aaxis(BaseLayoutHierarchyType):
     @property
     def title(self):
         """
-        Sets the title of this axis.
+        The 'title' property is an instance of Title
+        that may be specified as:
+          - An instance of plotly.graph_objs.layout.ternary.aaxis.Title
+          - A dict of string/value properties that will be passed
+            to the Title constructor
     
-        The 'title' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+            Supported dict properties:
+                
+                font
+                    Sets this axis' title font. Note that the
+                    title's font used to be customized by the now
+                    deprecated `titlefont` attribute.
+                text
+                    Sets the title of this axis. Note that before
+                    the existence of `title.text`, the title's
+                    contents used to be defined as the `title`
+                    attribute itself. This behavior has been
+                    deprecated.
 
         Returns
         -------
-        str
+        plotly.graph_objs.layout.ternary.aaxis.Title
         """
         return self['title']
 
@@ -1043,50 +1056,26 @@ class Aaxis(BaseLayoutHierarchyType):
     def title(self, val):
         self['title'] = val
 
-    # titlefont
-    # ---------
+    # uirevision
+    # ----------
     @property
-    def titlefont(self):
+    def uirevision(self):
         """
-        Sets this axis' title font.
+        Controls persistence of user-driven changes in axis `min`, and
+        `title` if in `editable: true` configuration. Defaults to
+        `ternary<N>.uirevision`.
     
-        The 'titlefont' property is an instance of Titlefont
-        that may be specified as:
-          - An instance of plotly.graph_objs.layout.ternary.aaxis.Titlefont
-          - A dict of string/value properties that will be passed
-            to the Titlefont constructor
-    
-            Supported dict properties:
-                
-                color
-    
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The plotly service (at https://plot.ly
-                    or on-premise) generates images on a server,
-                    where only a select number of fonts are
-                    installed and supported. These include "Arial",
-                    "Balto", "Courier New", "Droid Sans",, "Droid
-                    Serif", "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                size
+        The 'uirevision' property accepts values of any type
 
         Returns
         -------
-        plotly.graph_objs.layout.ternary.aaxis.Titlefont
+        Any
         """
-        return self['titlefont']
+        return self['uirevision']
 
-    @titlefont.setter
-    def titlefont(self, val):
-        self['titlefont'] = val
+    @uirevision.setter
+    def uirevision(self, val):
+        self['uirevision'] = val
 
     # property parent name
     # --------------------
@@ -1266,9 +1255,12 @@ class Aaxis(BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            Sets the title of this axis.
-        titlefont
-            Sets this axis' title font.
+            plotly.graph_objs.layout.ternary.aaxis.Title instance
+            or dict with compatible properties
+        uirevision
+            Controls persistence of user-driven changes in axis
+            `min`, and `title` if in `editable: true`
+            configuration. Defaults to `ternary<N>.uirevision`.
         """
 
     def __init__(
@@ -1310,7 +1302,7 @@ class Aaxis(BaseLayoutHierarchyType):
         tickvalssrc=None,
         tickwidth=None,
         title=None,
-        titlefont=None,
+        uirevision=None,
         **kwargs
     ):
         """
@@ -1488,9 +1480,12 @@ class Aaxis(BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            Sets the title of this axis.
-        titlefont
-            Sets this axis' title font.
+            plotly.graph_objs.layout.ternary.aaxis.Title instance
+            or dict with compatible properties
+        uirevision
+            Controls persistence of user-driven changes in axis
+            `min`, and `title` if in `editable: true`
+            configuration. Defaults to `ternary<N>.uirevision`.
 
         Returns
         -------
@@ -1563,7 +1558,7 @@ an instance of plotly.graph_objs.layout.ternary.Aaxis"""
         self._validators['tickvalssrc'] = v_aaxis.TickvalssrcValidator()
         self._validators['tickwidth'] = v_aaxis.TickwidthValidator()
         self._validators['title'] = v_aaxis.TitleValidator()
-        self._validators['titlefont'] = v_aaxis.TitlefontValidator()
+        self._validators['uirevision'] = v_aaxis.UirevisionValidator()
 
         # Populate data dict with properties
         # ----------------------------------
@@ -1647,8 +1642,8 @@ an instance of plotly.graph_objs.layout.ternary.Aaxis"""
         self['tickwidth'] = tickwidth if tickwidth is not None else _v
         _v = arg.pop('title', None)
         self['title'] = title if title is not None else _v
-        _v = arg.pop('titlefont', None)
-        self['titlefont'] = titlefont if titlefont is not None else _v
+        _v = arg.pop('uirevision', None)
+        self['uirevision'] = uirevision if uirevision is not None else _v
 
         # Process unknown kwargs
         # ----------------------

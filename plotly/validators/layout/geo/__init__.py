@@ -1,3 +1,4 @@
+from ._uirevision import UirevisionValidator
 from ._subunitwidth import SubunitwidthValidator
 from ._subunitcolor import SubunitcolorValidator
 from ._showsubunits import ShowsubunitsValidator

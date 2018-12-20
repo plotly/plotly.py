@@ -207,9 +207,13 @@ class Ternary(BaseLayoutHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    Sets the title of this axis.
-                titlefont
-                    Sets this axis' title font.
+                    plotly.graph_objs.layout.ternary.aaxis.Title
+                    instance or dict with compatible properties
+                uirevision
+                    Controls persistence of user-driven changes in
+                    axis `min`, and `title` if in `editable: true`
+                    configuration. Defaults to
+                    `ternary<N>.uirevision`.
 
         Returns
         -------
@@ -424,9 +428,13 @@ class Ternary(BaseLayoutHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    Sets the title of this axis.
-                titlefont
-                    Sets this axis' title font.
+                    plotly.graph_objs.layout.ternary.baxis.Title
+                    instance or dict with compatible properties
+                uirevision
+                    Controls persistence of user-driven changes in
+                    axis `min`, and `title` if in `editable: true`
+                    configuration. Defaults to
+                    `ternary<N>.uirevision`.
 
         Returns
         -------
@@ -700,9 +708,13 @@ class Ternary(BaseLayoutHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    Sets the title of this axis.
-                titlefont
-                    Sets this axis' title font.
+                    plotly.graph_objs.layout.ternary.caxis.Title
+                    instance or dict with compatible properties
+                uirevision
+                    Controls persistence of user-driven changes in
+                    axis `min`, and `title` if in `editable: true`
+                    configuration. Defaults to
+                    `ternary<N>.uirevision`.
 
         Returns
         -------
@@ -772,6 +784,27 @@ class Ternary(BaseLayoutHierarchyType):
     def sum(self, val):
         self['sum'] = val
 
+    # uirevision
+    # ----------
+    @property
+    def uirevision(self):
+        """
+        Controls persistence of user-driven changes in axis `min` and
+        `title`, if not overridden in the individual axes. Defaults to
+        `layout.uirevision`.
+    
+        The 'uirevision' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['uirevision']
+
+    @uirevision.setter
+    def uirevision(self, val):
+        self['uirevision'] = val
+
     # property parent name
     # --------------------
     @property
@@ -800,6 +833,10 @@ class Ternary(BaseLayoutHierarchyType):
         sum
             The number each triplet should sum to, and the maximum
             range of each axis
+        uirevision
+            Controls persistence of user-driven changes in axis
+            `min` and `title`, if not overridden in the individual
+            axes. Defaults to `layout.uirevision`.
         """
 
     def __init__(
@@ -811,6 +848,7 @@ class Ternary(BaseLayoutHierarchyType):
         caxis=None,
         domain=None,
         sum=None,
+        uirevision=None,
         **kwargs
     ):
         """
@@ -838,6 +876,10 @@ class Ternary(BaseLayoutHierarchyType):
         sum
             The number each triplet should sum to, and the maximum
             range of each axis
+        uirevision
+            Controls persistence of user-driven changes in axis
+            `min` and `title`, if not overridden in the individual
+            axes. Defaults to `layout.uirevision`.
 
         Returns
         -------
@@ -877,6 +919,7 @@ an instance of plotly.graph_objs.layout.Ternary"""
         self._validators['caxis'] = v_ternary.CaxisValidator()
         self._validators['domain'] = v_ternary.DomainValidator()
         self._validators['sum'] = v_ternary.SumValidator()
+        self._validators['uirevision'] = v_ternary.UirevisionValidator()
 
         # Populate data dict with properties
         # ----------------------------------
@@ -892,6 +935,8 @@ an instance of plotly.graph_objs.layout.Ternary"""
         self['domain'] = domain if domain is not None else _v
         _v = arg.pop('sum', None)
         self['sum'] = sum if sum is not None else _v
+        _v = arg.pop('uirevision', None)
+        self['uirevision'] = uirevision if uirevision is not None else _v
 
         # Process unknown kwargs
         # ----------------------

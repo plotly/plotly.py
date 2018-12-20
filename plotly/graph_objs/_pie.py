@@ -242,6 +242,61 @@ class Pie(BaseTraceType):
     def hoverlabel(self, val):
         self['hoverlabel'] = val
 
+    # hovertemplate
+    # -------------
+    @property
+    def hovertemplate(self):
+        """
+        Template string used for rendering the information that appear
+        on hover box. Note that this will override `hoverinfo`.
+        Variables are inserted using %{variable}, for example "y:
+        %{y}". Numbers are formatted using d3-format's syntax
+        %{variable:d3-format}, for example "Price: %{y:$.2f}". See http
+        s://github.com/d3/d3-format/blob/master/README.md#locale_format
+        for details on the formatting syntax. The variables available
+        in `hovertemplate` are the ones emitted as event data described
+        at this link https://plot.ly/javascript/plotlyjs-events/#event-
+        data. Additionally, every attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        variables `label`, `color`, `value`, `percent` and `text`.
+        Anything contained in tag `<extra>` is displayed in the
+        secondary box, for example "<extra>{fullData.name}</extra>".
+    
+        The 'hovertemplate' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self['hovertemplate']
+
+    @hovertemplate.setter
+    def hovertemplate(self, val):
+        self['hovertemplate'] = val
+
+    # hovertemplatesrc
+    # ----------------
+    @property
+    def hovertemplatesrc(self):
+        """
+        Sets the source reference on plot.ly for  hovertemplate .
+    
+        The 'hovertemplatesrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hovertemplatesrc']
+
+    @hovertemplatesrc.setter
+    def hovertemplatesrc(self, val):
+        self['hovertemplatesrc'] = val
+
     # hovertext
     # ---------
     @property
@@ -961,99 +1016,39 @@ class Pie(BaseTraceType):
     @property
     def title(self):
         """
-        Sets the title of the pie chart. If it is empty, no title is
-        displayed.
+        The 'title' property is an instance of Title
+        that may be specified as:
+          - An instance of plotly.graph_objs.pie.Title
+          - A dict of string/value properties that will be passed
+            to the Title constructor
     
-        The 'title' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+            Supported dict properties:
+                
+                font
+                    Sets the font used for `title`. Note that the
+                    title's font used to be set by the now
+                    deprecated `titlefont` attribute.
+                position
+                    Specifies the location of the `title`. Note
+                    that the title's position used to be set by the
+                    now deprecated `titleposition` attribute.
+                text
+                    Sets the title of the pie chart. If it is
+                    empty, no title is displayed. Note that before
+                    the existence of `title.text`, the title's
+                    contents used to be defined as the `title`
+                    attribute itself. This behavior has been
+                    deprecated.
 
         Returns
         -------
-        str
+        plotly.graph_objs.pie.Title
         """
         return self['title']
 
     @title.setter
     def title(self, val):
         self['title'] = val
-
-    # titlefont
-    # ---------
-    @property
-    def titlefont(self):
-        """
-        Sets the font used for `title`.
-    
-        The 'titlefont' property is an instance of Titlefont
-        that may be specified as:
-          - An instance of plotly.graph_objs.pie.Titlefont
-          - A dict of string/value properties that will be passed
-            to the Titlefont constructor
-    
-            Supported dict properties:
-                
-                color
-    
-                colorsrc
-                    Sets the source reference on plot.ly for  color
-                    .
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The plotly service (at https://plot.ly
-                    or on-premise) generates images on a server,
-                    where only a select number of fonts are
-                    installed and supported. These include "Arial",
-                    "Balto", "Courier New", "Droid Sans",, "Droid
-                    Serif", "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                familysrc
-                    Sets the source reference on plot.ly for
-                    family .
-                size
-    
-                sizesrc
-                    Sets the source reference on plot.ly for  size
-                    .
-
-        Returns
-        -------
-        plotly.graph_objs.pie.Titlefont
-        """
-        return self['titlefont']
-
-    @titlefont.setter
-    def titlefont(self, val):
-        self['titlefont'] = val
-
-    # titleposition
-    # -------------
-    @property
-    def titleposition(self):
-        """
-        Specifies the location of the `title`.
-    
-        The 'titleposition' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['top left', 'top center', 'top right', 'middle center',
-                'bottom left', 'bottom center', 'bottom right']
-
-        Returns
-        -------
-        Any
-        """
-        return self['titleposition']
-
-    @titleposition.setter
-    def titleposition(self, val):
-        self['titleposition'] = val
 
     # uid
     # ---
@@ -1073,6 +1068,39 @@ class Pie(BaseTraceType):
     @uid.setter
     def uid(self, val):
         self['uid'] = val
+
+    # uirevision
+    # ----------
+    @property
+    def uirevision(self):
+        """
+        Controls persistence of some user-driven changes to the trace:
+        `constraintrange` in `parcoords` traces, as well as some
+        `editable: true` modifications such as `name` and
+        `colorbar.title`. Defaults to `layout.uirevision`. Note that
+        other user-driven trace attribute changes are controlled by
+        `layout` attributes: `trace.visible` is controlled by
+        `layout.legend.uirevision`, `selectedpoints` is controlled by
+        `layout.selectionrevision`, and `colorbar.(x|y)` (accessible
+        with `config: {editable: true}`) is controlled by
+        `layout.editrevision`. Trace changes are tracked by `uid`,
+        which only falls back on trace index if no `uid` is provided.
+        So if your app can add/remove traces before the end of the
+        `data` array, such that the same trace has a different index,
+        you can still preserve user-driven changes if you give each
+        trace a `uid` that stays with it as it moves.
+    
+        The 'uirevision' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['uirevision']
+
+    @uirevision.setter
+    def uirevision(self, val):
+        self['uirevision'] = val
 
     # values
     # ------
@@ -1183,6 +1211,27 @@ class Pie(BaseTraceType):
         hoverlabel
             plotly.graph_objs.pie.Hoverlabel instance or dict with
             compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available. variables `label`, `color`, `value`,
+            `percent` and `text`. Anything contained in tag
+            `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
         hovertext
             Sets hover text elements associated with each sector.
             If a single string, the same string appears for all
@@ -1275,14 +1324,28 @@ class Pie(BaseTraceType):
         textsrc
             Sets the source reference on plot.ly for  text .
         title
-            Sets the title of the pie chart. If it is empty, no
-            title is displayed.
-        titlefont
-            Sets the font used for `title`.
-        titleposition
-            Specifies the location of the `title`.
+            plotly.graph_objs.pie.Title instance or dict with
+            compatible properties
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         values
             Sets the values of the sectors of this pie chart. If
             omitted, we count occurrences of each label.
@@ -1307,6 +1370,8 @@ class Pie(BaseTraceType):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
         ids=None,
@@ -1335,9 +1400,8 @@ class Pie(BaseTraceType):
         textpositionsrc=None,
         textsrc=None,
         title=None,
-        titlefont=None,
-        titleposition=None,
         uid=None,
+        uirevision=None,
         values=None,
         valuessrc=None,
         visible=None,
@@ -1383,6 +1447,27 @@ class Pie(BaseTraceType):
         hoverlabel
             plotly.graph_objs.pie.Hoverlabel instance or dict with
             compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available. variables `label`, `color`, `value`,
+            `percent` and `text`. Anything contained in tag
+            `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
         hovertext
             Sets hover text elements associated with each sector.
             If a single string, the same string appears for all
@@ -1475,14 +1560,28 @@ class Pie(BaseTraceType):
         textsrc
             Sets the source reference on plot.ly for  text .
         title
-            Sets the title of the pie chart. If it is empty, no
-            title is displayed.
-        titlefont
-            Sets the font used for `title`.
-        titleposition
-            Specifies the location of the `title`.
+            plotly.graph_objs.pie.Title instance or dict with
+            compatible properties
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         values
             Sets the values of the sectors of this pie chart. If
             omitted, we count occurrences of each label.
@@ -1535,6 +1634,9 @@ an instance of plotly.graph_objs.Pie"""
         self._validators['hoverinfo'] = v_pie.HoverinfoValidator()
         self._validators['hoverinfosrc'] = v_pie.HoverinfosrcValidator()
         self._validators['hoverlabel'] = v_pie.HoverlabelValidator()
+        self._validators['hovertemplate'] = v_pie.HovertemplateValidator()
+        self._validators['hovertemplatesrc'
+                        ] = v_pie.HovertemplatesrcValidator()
         self._validators['hovertext'] = v_pie.HovertextValidator()
         self._validators['hovertextsrc'] = v_pie.HovertextsrcValidator()
         self._validators['ids'] = v_pie.IdsValidator()
@@ -1563,9 +1665,8 @@ an instance of plotly.graph_objs.Pie"""
         self._validators['textpositionsrc'] = v_pie.TextpositionsrcValidator()
         self._validators['textsrc'] = v_pie.TextsrcValidator()
         self._validators['title'] = v_pie.TitleValidator()
-        self._validators['titlefont'] = v_pie.TitlefontValidator()
-        self._validators['titleposition'] = v_pie.TitlepositionValidator()
         self._validators['uid'] = v_pie.UidValidator()
+        self._validators['uirevision'] = v_pie.UirevisionValidator()
         self._validators['values'] = v_pie.ValuesValidator()
         self._validators['valuessrc'] = v_pie.ValuessrcValidator()
         self._validators['visible'] = v_pie.VisibleValidator()
@@ -1591,6 +1692,12 @@ an instance of plotly.graph_objs.Pie"""
         self['hoverinfosrc'] = hoverinfosrc if hoverinfosrc is not None else _v
         _v = arg.pop('hoverlabel', None)
         self['hoverlabel'] = hoverlabel if hoverlabel is not None else _v
+        _v = arg.pop('hovertemplate', None)
+        self['hovertemplate'
+            ] = hovertemplate if hovertemplate is not None else _v
+        _v = arg.pop('hovertemplatesrc', None)
+        self['hovertemplatesrc'
+            ] = hovertemplatesrc if hovertemplatesrc is not None else _v
         _v = arg.pop('hovertext', None)
         self['hovertext'] = hovertext if hovertext is not None else _v
         _v = arg.pop('hovertextsrc', None)
@@ -1651,13 +1758,10 @@ an instance of plotly.graph_objs.Pie"""
         self['textsrc'] = textsrc if textsrc is not None else _v
         _v = arg.pop('title', None)
         self['title'] = title if title is not None else _v
-        _v = arg.pop('titlefont', None)
-        self['titlefont'] = titlefont if titlefont is not None else _v
-        _v = arg.pop('titleposition', None)
-        self['titleposition'
-            ] = titleposition if titleposition is not None else _v
         _v = arg.pop('uid', None)
         self['uid'] = uid if uid is not None else _v
+        _v = arg.pop('uirevision', None)
+        self['uirevision'] = uirevision if uirevision is not None else _v
         _v = arg.pop('values', None)
         self['values'] = values if values is not None else _v
         _v = arg.pop('valuessrc', None)

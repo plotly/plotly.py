@@ -267,9 +267,8 @@ class XAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickwidth
                 Sets the tick width (in px).
             title
-                Sets the title of this axis.
-            titlefont
-                Sets this axis' title font.
+                plotly.graph_objs.layout.scene.xaxis.Title
+                instance or dict with compatible properties
             type
                 Sets the axis type. By default, plotly attempts
                 to determined the axis type by looking into the

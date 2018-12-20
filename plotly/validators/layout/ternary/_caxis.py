@@ -202,9 +202,13 @@ class CaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickwidth
                 Sets the tick width (in px).
             title
-                Sets the title of this axis.
-            titlefont
-                Sets this axis' title font.
+                plotly.graph_objs.layout.ternary.caxis.Title
+                instance or dict with compatible properties
+            uirevision
+                Controls persistence of user-driven changes in
+                axis `min`, and `title` if in `editable: true`
+                configuration. Defaults to
+                `ternary<N>.uirevision`.
 """
             ),
             **kwargs

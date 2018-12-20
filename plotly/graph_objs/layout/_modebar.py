@@ -203,6 +203,28 @@ class Modebar(BaseLayoutHierarchyType):
     def orientation(self, val):
         self['orientation'] = val
 
+    # uirevision
+    # ----------
+    @property
+    def uirevision(self):
+        """
+        Controls persistence of user-driven changes related to the
+        modebar, including `hovermode`, `dragmode`, and `showspikes` at
+        both the root level and inside subplots. Defaults to
+        `layout.uirevision`.
+    
+        The 'uirevision' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['uirevision']
+
+    @uirevision.setter
+    def uirevision(self, val):
+        self['uirevision'] = val
+
     # property parent name
     # --------------------
     @property
@@ -223,6 +245,11 @@ class Modebar(BaseLayoutHierarchyType):
             Sets the color of the icons in the modebar.
         orientation
             Sets the orientation of the modebar.
+        uirevision
+            Controls persistence of user-driven changes related to
+            the modebar, including `hovermode`, `dragmode`, and
+            `showspikes` at both the root level and inside
+            subplots. Defaults to `layout.uirevision`.
         """
 
     def __init__(
@@ -232,6 +259,7 @@ class Modebar(BaseLayoutHierarchyType):
         bgcolor=None,
         color=None,
         orientation=None,
+        uirevision=None,
         **kwargs
     ):
         """
@@ -251,6 +279,11 @@ class Modebar(BaseLayoutHierarchyType):
             Sets the color of the icons in the modebar.
         orientation
             Sets the orientation of the modebar.
+        uirevision
+            Controls persistence of user-driven changes related to
+            the modebar, including `hovermode`, `dragmode`, and
+            `showspikes` at both the root level and inside
+            subplots. Defaults to `layout.uirevision`.
 
         Returns
         -------
@@ -288,6 +321,7 @@ an instance of plotly.graph_objs.layout.Modebar"""
         self._validators['bgcolor'] = v_modebar.BgcolorValidator()
         self._validators['color'] = v_modebar.ColorValidator()
         self._validators['orientation'] = v_modebar.OrientationValidator()
+        self._validators['uirevision'] = v_modebar.UirevisionValidator()
 
         # Populate data dict with properties
         # ----------------------------------
@@ -299,6 +333,8 @@ an instance of plotly.graph_objs.layout.Modebar"""
         self['color'] = color if color is not None else _v
         _v = arg.pop('orientation', None)
         self['orientation'] = orientation if orientation is not None else _v
+        _v = arg.pop('uirevision', None)
+        self['uirevision'] = uirevision if uirevision is not None else _v
 
         # Process unknown kwargs
         # ----------------------

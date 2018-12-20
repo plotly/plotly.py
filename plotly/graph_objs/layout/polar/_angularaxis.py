@@ -1188,6 +1188,26 @@ class AngularAxis(BaseLayoutHierarchyType):
     def type(self, val):
         self['type'] = val
 
+    # uirevision
+    # ----------
+    @property
+    def uirevision(self):
+        """
+        Controls persistence of user-driven changes in axis `rotation`.
+        Defaults to `polar<N>.uirevision`.
+    
+        The 'uirevision' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['uirevision']
+
+    @uirevision.setter
+    def uirevision(self, val):
+        self['uirevision'] = val
+
     # visible
     # -------
     @property
@@ -1423,6 +1443,9 @@ class AngularAxis(BaseLayoutHierarchyType):
             `thetaunit` to determine the unit in which axis value
             are shown. If *category, use `period` to set the number
             of integer coordinates around polar axis.
+        uirevision
+            Controls persistence of user-driven changes in axis
+            `rotation`. Defaults to `polar<N>.uirevision`.
         visible
             A single toggle to hide the axis while preserving
             interaction like dragging. Default is true when a
@@ -1474,6 +1497,7 @@ class AngularAxis(BaseLayoutHierarchyType):
         tickvalssrc=None,
         tickwidth=None,
         type=None,
+        uirevision=None,
         visible=None,
         **kwargs
     ):
@@ -1688,6 +1712,9 @@ class AngularAxis(BaseLayoutHierarchyType):
             `thetaunit` to determine the unit in which axis value
             are shown. If *category, use `period` to set the number
             of integer coordinates around polar axis.
+        uirevision
+            Controls persistence of user-driven changes in axis
+            `rotation`. Defaults to `polar<N>.uirevision`.
         visible
             A single toggle to hide the axis while preserving
             interaction like dragging. Default is true when a
@@ -1780,6 +1807,7 @@ an instance of plotly.graph_objs.layout.polar.AngularAxis"""
         self._validators['tickvalssrc'] = v_angularaxis.TickvalssrcValidator()
         self._validators['tickwidth'] = v_angularaxis.TickwidthValidator()
         self._validators['type'] = v_angularaxis.TypeValidator()
+        self._validators['uirevision'] = v_angularaxis.UirevisionValidator()
         self._validators['visible'] = v_angularaxis.VisibleValidator()
 
         # Populate data dict with properties
@@ -1879,6 +1907,8 @@ an instance of plotly.graph_objs.layout.polar.AngularAxis"""
         self['tickwidth'] = tickwidth if tickwidth is not None else _v
         _v = arg.pop('type', None)
         self['type'] = type if type is not None else _v
+        _v = arg.pop('uirevision', None)
+        self['uirevision'] = uirevision if uirevision is not None else _v
         _v = arg.pop('visible', None)
         self['visible'] = visible if visible is not None else _v
 

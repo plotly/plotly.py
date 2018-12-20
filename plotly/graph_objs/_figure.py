@@ -131,6 +131,9 @@ class Figure(BaseFigure):
                         flag is set as well. When the "event" flag is
                         missing, `plotly_click` and `plotly_selected`
                         events are not fired.
+                    colorscale
+                        plotly.graph_objs.layout.Colorscale instance or
+                        dict with compatible properties
                     colorway
                         Sets the default trace colors.
                     datarevision
@@ -153,6 +156,11 @@ class Figure(BaseFigure):
                         "select" and "lasso" apply only to scatter
                         traces with markers or text. "orbit" and
                         "turntable" apply only to 3D scenes.
+                    editrevision
+                        Controls persistence of user-driven changes in
+                        `editable: true` configuration, other than
+                        trace names and axis titles. Defaults to
+                        `layout.uirevision`.
                     extendpiecolors
                         If `true`, the pie slice colors (whether given
                         by `piecolorway` or inherited from `colorway`)
@@ -262,6 +270,9 @@ class Figure(BaseFigure):
                         vertical or diagonal. "h" only allows
                         horizontal selection, "v" only vertical, "d"
                         only diagonal and "any" sets no limit.
+                    selectionrevision
+                        Controls persistence of user-driven changes in
+                        selected points from all traces.
                     separators
                         Sets the decimal and thousand separators. For
                         example, *. * puts a '.' before decimals and a
@@ -330,9 +341,31 @@ class Figure(BaseFigure):
                         plotly.graph_objs.layout.Ternary instance or
                         dict with compatible properties
                     title
-                        Sets the plot's title.
-                    titlefont
-                        Sets the title font.
+                        plotly.graph_objs.layout.Title instance or dict
+                        with compatible properties
+                    uirevision
+                        Used to allow user interactions with the plot
+                        to persist after `Plotly.react` calls that are
+                        unaware of these interactions. If `uirevision`
+                        is omitted, or if it is given and it changed
+                        from the previous `Plotly.react` call, the
+                        exact new figure is used. If `uirevision` is
+                        truthy and did NOT change, any attribute that
+                        has been affected by user interactions and did
+                        not receive a different value in the new figure
+                        will keep the interaction value.
+                        `layout.uirevision` attribute serves as the
+                        default for `uirevision` attributes in various
+                        sub-containers. For finer control you can set
+                        these sub-attributes directly. For example, if
+                        your app separately controls the data on the x
+                        and y axes you might set
+                        `xaxis.uirevision=*time*` and
+                        `yaxis.uirevision=*cost*`. Then if only the y
+                        data is changed, you can update
+                        `yaxis.uirevision=*quantity*` and the y axis
+                        range will reset but the x axis range will
+                        retain any user-driven zoom.
                     updatemenus
                         plotly.graph_objs.layout.Updatemenu instance or
                         dict with compatible properties
@@ -431,6 +464,7 @@ class Figure(BaseFigure):
         t=None,
         tsrc=None,
         uid=None,
+        uirevision=None,
         visible=None,
         row=None,
         col=None,
@@ -503,6 +537,24 @@ class Figure(BaseFigure):
             Sets the source reference on plot.ly for  t .
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -541,6 +593,7 @@ class Figure(BaseFigure):
             t=t,
             tsrc=tsrc,
             uid=uid,
+            uirevision=uirevision,
             visible=visible,
             **kwargs
         )
@@ -561,6 +614,8 @@ class Figure(BaseFigure):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
         ids=None,
@@ -588,6 +643,7 @@ class Figure(BaseFigure):
         textsrc=None,
         tsrc=None,
         uid=None,
+        uirevision=None,
         unselected=None,
         visible=None,
         width=None,
@@ -658,6 +714,26 @@ class Figure(BaseFigure):
         hoverlabel
             plotly.graph_objs.bar.Hoverlabel instance or dict with
             compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -754,6 +830,24 @@ class Figure(BaseFigure):
             Sets the source reference on plot.ly for  t .
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         unselected
             plotly.graph_objs.bar.Unselected instance or dict with
             compatible properties
@@ -823,6 +917,8 @@ class Figure(BaseFigure):
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
+            hovertemplate=hovertemplate,
+            hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
             ids=ids,
@@ -850,6 +946,7 @@ class Figure(BaseFigure):
             textsrc=textsrc,
             tsrc=tsrc,
             uid=uid,
+            uirevision=uirevision,
             unselected=unselected,
             visible=visible,
             width=width,
@@ -902,6 +999,7 @@ class Figure(BaseFigure):
         thetasrc=None,
         thetaunit=None,
         uid=None,
+        uirevision=None,
         unselected=None,
         visible=None,
         width=None,
@@ -1019,6 +1117,24 @@ class Figure(BaseFigure):
             only when on "linear" angular axes.
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         unselected
             plotly.graph_objs.barpolar.Unselected instance or dict
             with compatible properties
@@ -1077,6 +1193,7 @@ class Figure(BaseFigure):
             thetasrc=thetasrc,
             thetaunit=thetaunit,
             uid=uid,
+            uirevision=uirevision,
             unselected=unselected,
             visible=visible,
             width=width,
@@ -1115,6 +1232,7 @@ class Figure(BaseFigure):
         text=None,
         textsrc=None,
         uid=None,
+        uirevision=None,
         unselected=None,
         visible=None,
         whiskerwidth=None,
@@ -1256,6 +1374,24 @@ class Figure(BaseFigure):
             Sets the source reference on plot.ly for  text .
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         unselected
             plotly.graph_objs.box.Unselected instance or dict with
             compatible properties
@@ -1340,6 +1476,7 @@ class Figure(BaseFigure):
             text=text,
             textsrc=textsrc,
             uid=uid,
+            uirevision=uirevision,
             unselected=unselected,
             visible=visible,
             whiskerwidth=whiskerwidth,
@@ -1386,6 +1523,7 @@ class Figure(BaseFigure):
         text=None,
         textsrc=None,
         uid=None,
+        uirevision=None,
         visible=None,
         whiskerwidth=None,
         x=None,
@@ -1490,6 +1628,24 @@ class Figure(BaseFigure):
             Sets the source reference on plot.ly for  text .
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -1557,6 +1713,7 @@ class Figure(BaseFigure):
             text=text,
             textsrc=textsrc,
             uid=uid,
+            uirevision=uirevision,
             visible=visible,
             whiskerwidth=whiskerwidth,
             x=x,
@@ -1598,6 +1755,7 @@ class Figure(BaseFigure):
         showlegend=None,
         stream=None,
         uid=None,
+        uirevision=None,
         visible=None,
         x=None,
         xaxis=None,
@@ -1711,6 +1869,24 @@ class Figure(BaseFigure):
             compatible properties
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -1779,6 +1955,7 @@ class Figure(BaseFigure):
             showlegend=showlegend,
             stream=stream,
             uid=uid,
+            uirevision=uirevision,
             visible=visible,
             x=x,
             xaxis=xaxis,
@@ -1819,6 +1996,7 @@ class Figure(BaseFigure):
         text=None,
         textsrc=None,
         uid=None,
+        uirevision=None,
         unselected=None,
         visible=None,
         z=None,
@@ -1939,6 +2117,24 @@ class Figure(BaseFigure):
             Sets the source reference on plot.ly for  text .
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         unselected
             plotly.graph_objs.choropleth.Unselected instance or
             dict with compatible properties
@@ -2005,6 +2201,7 @@ class Figure(BaseFigure):
             text=text,
             textsrc=textsrc,
             uid=uid,
+            uirevision=uirevision,
             unselected=unselected,
             visible=visible,
             z=z,
@@ -2049,6 +2246,7 @@ class Figure(BaseFigure):
         textsrc=None,
         u=None,
         uid=None,
+        uirevision=None,
         usrc=None,
         v=None,
         visible=None,
@@ -2206,6 +2404,24 @@ class Figure(BaseFigure):
             Sets the x components of the vector field.
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         usrc
             Sets the source reference on plot.ly for  u .
         v
@@ -2281,6 +2497,7 @@ class Figure(BaseFigure):
             textsrc=textsrc,
             u=u,
             uid=uid,
+            uirevision=uirevision,
             usrc=usrc,
             v=v,
             visible=visible,
@@ -2329,6 +2546,7 @@ class Figure(BaseFigure):
         textsrc=None,
         transpose=None,
         uid=None,
+        uirevision=None,
         visible=None,
         x=None,
         x0=None,
@@ -2476,6 +2694,24 @@ class Figure(BaseFigure):
             Transposes the z data.
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -2589,6 +2825,7 @@ class Figure(BaseFigure):
             textsrc=textsrc,
             transpose=transpose,
             uid=uid,
+            uirevision=uirevision,
             visible=visible,
             x=x,
             x0=x0,
@@ -2652,6 +2889,7 @@ class Figure(BaseFigure):
         textsrc=None,
         transpose=None,
         uid=None,
+        uirevision=None,
         visible=None,
         xaxis=None,
         yaxis=None,
@@ -2812,6 +3050,24 @@ class Figure(BaseFigure):
             Transposes the z data.
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -2896,6 +3152,7 @@ class Figure(BaseFigure):
             textsrc=textsrc,
             transpose=transpose,
             uid=uid,
+            uirevision=uirevision,
             visible=visible,
             xaxis=xaxis,
             yaxis=yaxis,
@@ -2935,6 +3192,7 @@ class Figure(BaseFigure):
         textsrc=None,
         transpose=None,
         uid=None,
+        uirevision=None,
         visible=None,
         x=None,
         x0=None,
@@ -3073,6 +3331,24 @@ class Figure(BaseFigure):
             Transposes the z data.
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -3187,6 +3463,7 @@ class Figure(BaseFigure):
             textsrc=textsrc,
             transpose=transpose,
             uid=uid,
+            uirevision=uirevision,
             visible=visible,
             x=x,
             x0=x0,
@@ -3239,6 +3516,7 @@ class Figure(BaseFigure):
         textsrc=None,
         transpose=None,
         uid=None,
+        uirevision=None,
         visible=None,
         x=None,
         x0=None,
@@ -3352,6 +3630,24 @@ class Figure(BaseFigure):
             Transposes the z data.
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -3450,6 +3746,7 @@ class Figure(BaseFigure):
             textsrc=textsrc,
             transpose=transpose,
             uid=uid,
+            uirevision=uirevision,
             visible=visible,
             x=x,
             x0=x0,
@@ -3484,6 +3781,8 @@ class Figure(BaseFigure):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
         ids=None,
         idssrc=None,
         legendgroup=None,
@@ -3500,6 +3799,7 @@ class Figure(BaseFigure):
         text=None,
         textsrc=None,
         uid=None,
+        uirevision=None,
         unselected=None,
         visible=None,
         x=None,
@@ -3590,6 +3890,26 @@ class Figure(BaseFigure):
         hoverlabel
             plotly.graph_objs.histogram.Hoverlabel instance or dict
             with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available. variable `binNumber` Anything contained in
+            tag `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -3652,6 +3972,24 @@ class Figure(BaseFigure):
             Sets the source reference on plot.ly for  text .
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         unselected
             plotly.graph_objs.histogram.Unselected instance or dict
             with compatible properties
@@ -3714,6 +4052,8 @@ class Figure(BaseFigure):
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
+            hovertemplate=hovertemplate,
+            hovertemplatesrc=hovertemplatesrc,
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
@@ -3730,6 +4070,7 @@ class Figure(BaseFigure):
             text=text,
             textsrc=textsrc,
             uid=uid,
+            uirevision=uirevision,
             unselected=unselected,
             visible=visible,
             x=x,
@@ -3774,6 +4115,7 @@ class Figure(BaseFigure):
         showscale=None,
         stream=None,
         uid=None,
+        uirevision=None,
         visible=None,
         x=None,
         xaxis=None,
@@ -3938,6 +4280,24 @@ class Figure(BaseFigure):
             with compatible properties
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -4039,6 +4399,7 @@ class Figure(BaseFigure):
             showscale=showscale,
             stream=stream,
             uid=uid,
+            uirevision=uirevision,
             visible=visible,
             x=x,
             xaxis=xaxis,
@@ -4095,6 +4456,7 @@ class Figure(BaseFigure):
         showscale=None,
         stream=None,
         uid=None,
+        uirevision=None,
         visible=None,
         x=None,
         xaxis=None,
@@ -4273,6 +4635,24 @@ class Figure(BaseFigure):
             dict with compatible properties
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -4372,6 +4752,7 @@ class Figure(BaseFigure):
             showscale=showscale,
             stream=stream,
             uid=uid,
+            uirevision=uirevision,
             visible=visible,
             x=x,
             xaxis=xaxis,
@@ -4437,6 +4818,7 @@ class Figure(BaseFigure):
         text=None,
         textsrc=None,
         uid=None,
+        uirevision=None,
         vertexcolor=None,
         vertexcolorsrc=None,
         visible=None,
@@ -4648,6 +5030,24 @@ class Figure(BaseFigure):
             Sets the source reference on plot.ly for  text .
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         vertexcolor
             Sets the color of each vertex Overrides "color".
         vertexcolorsrc
@@ -4737,6 +5137,7 @@ class Figure(BaseFigure):
             text=text,
             textsrc=textsrc,
             uid=uid,
+            uirevision=uirevision,
             vertexcolor=vertexcolor,
             vertexcolorsrc=vertexcolorsrc,
             visible=visible,
@@ -4783,6 +5184,7 @@ class Figure(BaseFigure):
         textsrc=None,
         tickwidth=None,
         uid=None,
+        uirevision=None,
         visible=None,
         x=None,
         xaxis=None,
@@ -4889,6 +5291,24 @@ class Figure(BaseFigure):
             the "x" minimal interval.
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -4953,6 +5373,7 @@ class Figure(BaseFigure):
             textsrc=textsrc,
             tickwidth=tickwidth,
             uid=uid,
+            uirevision=uirevision,
             visible=visible,
             x=x,
             xaxis=xaxis,
@@ -4981,6 +5402,7 @@ class Figure(BaseFigure):
         stream=None,
         tickfont=None,
         uid=None,
+        uirevision=None,
         visible=None,
         row=None,
         col=None,
@@ -5053,6 +5475,24 @@ class Figure(BaseFigure):
             Sets the font for the `category` labels.
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -5088,6 +5528,7 @@ class Figure(BaseFigure):
             stream=stream,
             tickfont=tickfont,
             uid=uid,
+            uirevision=uirevision,
             visible=visible,
             **kwargs
         )
@@ -5115,6 +5556,7 @@ class Figure(BaseFigure):
         stream=None,
         tickfont=None,
         uid=None,
+        uirevision=None,
         visible=None,
         row=None,
         col=None,
@@ -5193,6 +5635,24 @@ class Figure(BaseFigure):
             Sets the font for the `dimension` tick values.
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -5232,6 +5692,7 @@ class Figure(BaseFigure):
             stream=stream,
             tickfont=tickfont,
             uid=uid,
+            uirevision=uirevision,
             visible=visible,
             **kwargs
         )
@@ -5248,6 +5709,8 @@ class Figure(BaseFigure):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
         ids=None,
@@ -5276,9 +5739,8 @@ class Figure(BaseFigure):
         textpositionsrc=None,
         textsrc=None,
         title=None,
-        titlefont=None,
-        titleposition=None,
         uid=None,
+        uirevision=None,
         values=None,
         valuessrc=None,
         visible=None,
@@ -5323,6 +5785,27 @@ class Figure(BaseFigure):
         hoverlabel
             plotly.graph_objs.pie.Hoverlabel instance or dict with
             compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available. variables `label`, `color`, `value`,
+            `percent` and `text`. Anything contained in tag
+            `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
         hovertext
             Sets hover text elements associated with each sector.
             If a single string, the same string appears for all
@@ -5415,14 +5898,28 @@ class Figure(BaseFigure):
         textsrc
             Sets the source reference on plot.ly for  text .
         title
-            Sets the title of the pie chart. If it is empty, no
-            title is displayed.
-        titlefont
-            Sets the font used for `title`.
-        titleposition
-            Specifies the location of the `title`.
+            plotly.graph_objs.pie.Title instance or dict with
+            compatible properties
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         values
             Sets the values of the sectors of this pie chart. If
             omitted, we count occurrences of each label.
@@ -5456,6 +5953,8 @@ class Figure(BaseFigure):
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
+            hovertemplate=hovertemplate,
+            hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
             ids=ids,
@@ -5484,9 +5983,8 @@ class Figure(BaseFigure):
             textpositionsrc=textpositionsrc,
             textsrc=textsrc,
             title=title,
-            titlefont=titlefont,
-            titleposition=titleposition,
             uid=uid,
+            uirevision=uirevision,
             values=values,
             valuessrc=valuessrc,
             visible=visible,
@@ -5515,6 +6013,7 @@ class Figure(BaseFigure):
         text=None,
         textsrc=None,
         uid=None,
+        uirevision=None,
         visible=None,
         x=None,
         xaxis=None,
@@ -5611,6 +6110,24 @@ class Figure(BaseFigure):
             Sets the source reference on plot.ly for  text .
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -5688,6 +6205,7 @@ class Figure(BaseFigure):
             text=text,
             textsrc=textsrc,
             uid=uid,
+            uirevision=uirevision,
             visible=visible,
             x=x,
             xaxis=xaxis,
@@ -5726,6 +6244,7 @@ class Figure(BaseFigure):
         stream=None,
         textfont=None,
         uid=None,
+        uirevision=None,
         valueformat=None,
         valuesuffix=None,
         visible=None,
@@ -5809,6 +6328,24 @@ class Figure(BaseFigure):
             Sets the font for node labels
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         valueformat
             Sets the value formatting rule using d3 formatting
             mini-language which is similar to those of Python. See 
@@ -5856,6 +6393,7 @@ class Figure(BaseFigure):
             stream=stream,
             textfont=textfont,
             uid=uid,
+            uirevision=uirevision,
             valueformat=valueformat,
             valuesuffix=valuesuffix,
             visible=visible,
@@ -5880,6 +6418,8 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hoveron=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
         ids=None,
@@ -5907,6 +6447,7 @@ class Figure(BaseFigure):
         textsrc=None,
         tsrc=None,
         uid=None,
+        uirevision=None,
         unselected=None,
         visible=None,
         x=None,
@@ -6015,6 +6556,26 @@ class Figure(BaseFigure):
             regions? If the fill is "toself" or "tonext" and there
             are no markers or text, then the default is "fills",
             otherwise it is "points".
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -6131,6 +6692,24 @@ class Figure(BaseFigure):
             Sets the source reference on plot.ly for  t .
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         unselected
             plotly.graph_objs.scatter.Unselected instance or dict
             with compatible properties
@@ -6198,6 +6777,8 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hoveron=hoveron,
+            hovertemplate=hovertemplate,
+            hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
             ids=ids,
@@ -6225,6 +6806,7 @@ class Figure(BaseFigure):
             textsrc=textsrc,
             tsrc=tsrc,
             uid=uid,
+            uirevision=uirevision,
             unselected=unselected,
             visible=visible,
             x=x,
@@ -6272,8 +6854,10 @@ class Figure(BaseFigure):
         text=None,
         textfont=None,
         textposition=None,
+        textpositionsrc=None,
         textsrc=None,
         uid=None,
+        uirevision=None,
         visible=None,
         x=None,
         xcalendar=None,
@@ -6408,10 +6992,31 @@ class Figure(BaseFigure):
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.
+        textpositionsrc
+            Sets the source reference on plot.ly for  textposition
+            .
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -6478,8 +7083,10 @@ class Figure(BaseFigure):
             text=text,
             textfont=textfont,
             textposition=textposition,
+            textpositionsrc=textpositionsrc,
             textsrc=textsrc,
             uid=uid,
+            uirevision=uirevision,
             visible=visible,
             x=x,
             xcalendar=xcalendar,
@@ -6528,6 +7135,7 @@ class Figure(BaseFigure):
         textpositionsrc=None,
         textsrc=None,
         uid=None,
+        uirevision=None,
         unselected=None,
         visible=None,
         xaxis=None,
@@ -6666,6 +7274,24 @@ class Figure(BaseFigure):
             Sets the source reference on plot.ly for  text .
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         unselected
             plotly.graph_objs.scattercarpet.Unselected instance or
             dict with compatible properties
@@ -6730,6 +7356,7 @@ class Figure(BaseFigure):
             textpositionsrc=textpositionsrc,
             textsrc=textsrc,
             uid=uid,
+            uirevision=uirevision,
             unselected=unselected,
             visible=visible,
             xaxis=xaxis,
@@ -6776,6 +7403,7 @@ class Figure(BaseFigure):
         textpositionsrc=None,
         textsrc=None,
         uid=None,
+        uirevision=None,
         unselected=None,
         visible=None,
         row=None,
@@ -6918,6 +7546,24 @@ class Figure(BaseFigure):
             Sets the source reference on plot.ly for  text .
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         unselected
             plotly.graph_objs.scattergeo.Unselected instance or
             dict with compatible properties
@@ -6976,6 +7622,7 @@ class Figure(BaseFigure):
             textpositionsrc=textpositionsrc,
             textsrc=textsrc,
             uid=uid,
+            uirevision=uirevision,
             unselected=unselected,
             visible=visible,
             **kwargs
@@ -6996,6 +7643,8 @@ class Figure(BaseFigure):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
         ids=None,
@@ -7016,6 +7665,7 @@ class Figure(BaseFigure):
         textpositionsrc=None,
         textsrc=None,
         uid=None,
+        uirevision=None,
         unselected=None,
         visible=None,
         x=None,
@@ -7099,6 +7749,26 @@ class Figure(BaseFigure):
         hoverlabel
             plotly.graph_objs.scattergl.Hoverlabel instance or dict
             with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -7167,6 +7837,24 @@ class Figure(BaseFigure):
             Sets the source reference on plot.ly for  text .
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         unselected
             plotly.graph_objs.scattergl.Unselected instance or dict
             with compatible properties
@@ -7231,6 +7919,8 @@ class Figure(BaseFigure):
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
+            hovertemplate=hovertemplate,
+            hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
             ids=ids,
@@ -7251,6 +7941,7 @@ class Figure(BaseFigure):
             textpositionsrc=textpositionsrc,
             textsrc=textsrc,
             uid=uid,
+            uirevision=uirevision,
             unselected=unselected,
             visible=visible,
             x=x,
@@ -7301,6 +7992,7 @@ class Figure(BaseFigure):
         textposition=None,
         textsrc=None,
         uid=None,
+        uirevision=None,
         unselected=None,
         visible=None,
         row=None,
@@ -7427,6 +8119,24 @@ class Figure(BaseFigure):
             Sets the source reference on plot.ly for  text .
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         unselected
             plotly.graph_objs.scattermapbox.Unselected instance or
             dict with compatible properties
@@ -7481,6 +8191,7 @@ class Figure(BaseFigure):
             textposition=textposition,
             textsrc=textsrc,
             uid=uid,
+            uirevision=uirevision,
             unselected=unselected,
             visible=visible,
             **kwargs
@@ -7529,6 +8240,7 @@ class Figure(BaseFigure):
         thetasrc=None,
         thetaunit=None,
         uid=None,
+        uirevision=None,
         unselected=None,
         visible=None,
         row=None,
@@ -7698,6 +8410,24 @@ class Figure(BaseFigure):
             only when on "linear" angular axes.
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         unselected
             plotly.graph_objs.scatterpolar.Unselected instance or
             dict with compatible properties
@@ -7760,6 +8490,7 @@ class Figure(BaseFigure):
             thetasrc=thetasrc,
             thetaunit=thetaunit,
             uid=uid,
+            uirevision=uirevision,
             unselected=unselected,
             visible=visible,
             **kwargs
@@ -7806,6 +8537,7 @@ class Figure(BaseFigure):
         thetasrc=None,
         thetaunit=None,
         uid=None,
+        uirevision=None,
         unselected=None,
         visible=None,
         row=None,
@@ -7974,6 +8706,24 @@ class Figure(BaseFigure):
             only when on "linear" angular axes.
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         unselected
             plotly.graph_objs.scatterpolargl.Unselected instance or
             dict with compatible properties
@@ -8034,6 +8784,7 @@ class Figure(BaseFigure):
             thetasrc=thetasrc,
             thetaunit=thetaunit,
             uid=uid,
+            uirevision=uirevision,
             unselected=unselected,
             visible=visible,
             **kwargs
@@ -8080,6 +8831,7 @@ class Figure(BaseFigure):
         textpositionsrc=None,
         textsrc=None,
         uid=None,
+        uirevision=None,
         unselected=None,
         visible=None,
         row=None,
@@ -8251,6 +9003,24 @@ class Figure(BaseFigure):
             Sets the source reference on plot.ly for  text .
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         unselected
             plotly.graph_objs.scatterternary.Unselected instance or
             dict with compatible properties
@@ -8311,6 +9081,7 @@ class Figure(BaseFigure):
             textpositionsrc=textpositionsrc,
             textsrc=textsrc,
             uid=uid,
+            uirevision=uirevision,
             unselected=unselected,
             visible=visible,
             **kwargs
@@ -8342,6 +9113,7 @@ class Figure(BaseFigure):
         text=None,
         textsrc=None,
         uid=None,
+        uirevision=None,
         unselected=None,
         visible=None,
         xaxes=None,
@@ -8441,6 +9213,24 @@ class Figure(BaseFigure):
             Sets the source reference on plot.ly for  text .
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         unselected
             plotly.graph_objs.splom.Unselected instance or dict
             with compatible properties
@@ -8502,6 +9292,7 @@ class Figure(BaseFigure):
             text=text,
             textsrc=textsrc,
             uid=uid,
+            uirevision=uirevision,
             unselected=unselected,
             visible=visible,
             xaxes=xaxes,
@@ -8542,6 +9333,7 @@ class Figure(BaseFigure):
         text=None,
         u=None,
         uid=None,
+        uirevision=None,
         usrc=None,
         v=None,
         visible=None,
@@ -8689,6 +9481,24 @@ class Figure(BaseFigure):
             Sets the x components of the vector field.
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         usrc
             Sets the source reference on plot.ly for  u .
         v
@@ -8760,6 +9570,7 @@ class Figure(BaseFigure):
             text=text,
             u=u,
             uid=uid,
+            uirevision=uirevision,
             usrc=usrc,
             v=v,
             visible=visible,
@@ -8809,6 +9620,7 @@ class Figure(BaseFigure):
         text=None,
         textsrc=None,
         uid=None,
+        uirevision=None,
         visible=None,
         x=None,
         xcalendar=None,
@@ -8960,6 +9772,24 @@ class Figure(BaseFigure):
             Sets the source reference on plot.ly for  text .
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -9028,6 +9858,7 @@ class Figure(BaseFigure):
             text=text,
             textsrc=textsrc,
             uid=uid,
+            uirevision=uirevision,
             visible=visible,
             x=x,
             xcalendar=xcalendar,
@@ -9065,6 +9896,7 @@ class Figure(BaseFigure):
         showlegend=None,
         stream=None,
         uid=None,
+        uirevision=None,
         visible=None,
         row=None,
         col=None,
@@ -9150,6 +9982,24 @@ class Figure(BaseFigure):
             compatible properties
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -9190,6 +10040,7 @@ class Figure(BaseFigure):
             showlegend=showlegend,
             stream=stream,
             uid=uid,
+            uirevision=uirevision,
             visible=visible,
             **kwargs
         )
@@ -9230,6 +10081,7 @@ class Figure(BaseFigure):
         text=None,
         textsrc=None,
         uid=None,
+        uirevision=None,
         unselected=None,
         visible=None,
         x=None,
@@ -9395,6 +10247,24 @@ class Figure(BaseFigure):
             Sets the source reference on plot.ly for  text .
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         unselected
             plotly.graph_objs.violin.Unselected instance or dict
             with compatible properties
@@ -9476,6 +10346,7 @@ class Figure(BaseFigure):
             text=text,
             textsrc=textsrc,
             uid=uid,
+            uirevision=uirevision,
             unselected=unselected,
             visible=visible,
             x=x,

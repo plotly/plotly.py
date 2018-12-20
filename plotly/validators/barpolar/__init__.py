@@ -2,6 +2,7 @@ from ._widthsrc import WidthsrcValidator
 from ._width import WidthValidator
 from ._visible import VisibleValidator
 from ._unselected import UnselectedValidator
+from ._uirevision import UirevisionValidator
 from ._uid import UidValidator
 from ._thetaunit import ThetaunitValidator
 from ._thetasrc import ThetasrcValidator

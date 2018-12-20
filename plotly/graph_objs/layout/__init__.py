@@ -4,7 +4,8 @@ from ._xaxis import XAxis
 from plotly.graph_objs.layout import xaxis
 from ._updatemenu import Updatemenu
 from plotly.graph_objs.layout import updatemenu
-from ._titlefont import Titlefont
+from ._title import Title
+from plotly.graph_objs.layout import title
 from ._ternary import Ternary
 from plotly.graph_objs.layout import ternary
 from ._template import Template
@@ -32,6 +33,7 @@ from plotly.graph_objs.layout import grid
 from ._geo import Geo
 from plotly.graph_objs.layout import geo
 from ._font import Font
+from ._colorscale import Colorscale
 from ._annotation import Annotation
 from plotly.graph_objs.layout import annotation
 from ._angularaxis import AngularAxis

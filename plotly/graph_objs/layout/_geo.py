@@ -1043,6 +1043,26 @@ class Geo(BaseLayoutHierarchyType):
     def subunitwidth(self, val):
         self['subunitwidth'] = val
 
+    # uirevision
+    # ----------
+    @property
+    def uirevision(self):
+        """
+        Controls persistence of user-driven changes in the view
+        (projection and center). Defaults to `layout.uirevision`.
+    
+        The 'uirevision' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['uirevision']
+
+    @uirevision.setter
+    def uirevision(self, val):
+        self['uirevision'] = val
+
     # property parent name
     # --------------------
     @property
@@ -1121,6 +1141,10 @@ class Geo(BaseLayoutHierarchyType):
         subunitwidth
             Sets the stroke width (in px) of the subunits
             boundaries.
+        uirevision
+            Controls persistence of user-driven changes in the view
+            (projection and center). Defaults to
+            `layout.uirevision`.
         """
 
     def __init__(
@@ -1155,6 +1179,7 @@ class Geo(BaseLayoutHierarchyType):
         showsubunits=None,
         subunitcolor=None,
         subunitwidth=None,
+        uirevision=None,
         **kwargs
     ):
         """
@@ -1232,6 +1257,10 @@ class Geo(BaseLayoutHierarchyType):
         subunitwidth
             Sets the stroke width (in px) of the subunits
             boundaries.
+        uirevision
+            Controls persistence of user-driven changes in the view
+            (projection and center). Defaults to
+            `layout.uirevision`.
 
         Returns
         -------
@@ -1294,6 +1323,7 @@ an instance of plotly.graph_objs.layout.Geo"""
         self._validators['showsubunits'] = v_geo.ShowsubunitsValidator()
         self._validators['subunitcolor'] = v_geo.SubunitcolorValidator()
         self._validators['subunitwidth'] = v_geo.SubunitwidthValidator()
+        self._validators['uirevision'] = v_geo.UirevisionValidator()
 
         # Populate data dict with properties
         # ----------------------------------
@@ -1359,6 +1389,8 @@ an instance of plotly.graph_objs.layout.Geo"""
         self['subunitcolor'] = subunitcolor if subunitcolor is not None else _v
         _v = arg.pop('subunitwidth', None)
         self['subunitwidth'] = subunitwidth if subunitwidth is not None else _v
+        _v = arg.pop('uirevision', None)
+        self['uirevision'] = uirevision if uirevision is not None else _v
 
         # Process unknown kwargs
         # ----------------------

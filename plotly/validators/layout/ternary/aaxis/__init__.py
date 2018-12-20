@@ -1,4 +1,4 @@
-from ._titlefont import TitlefontValidator
+from ._uirevision import UirevisionValidator
 from ._title import TitleValidator
 from ._tickwidth import TickwidthValidator
 from ._tickvalssrc import TickvalssrcValidator

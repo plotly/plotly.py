@@ -1,4 +1,5 @@
-from ._titlefont import Titlefont
+from ._title import Title
+from plotly.graph_objs.pie import title
 from ._textfont import Textfont
 from ._stream import Stream
 from ._outsidetextfont import Outsidetextfont

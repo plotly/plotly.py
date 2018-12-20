@@ -353,12 +353,9 @@ class Marker(BaseTraceHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    Sets the title of the color bar.
-                titlefont
-                    Sets this color bar's title font.
-                titleside
-                    Determines the location of the colorbar title
-                    with respect to the color bar.
+                    plotly.graph_objs.scatterternary.marker.colorba
+                    r.Title instance or dict with compatible
+                    properties
                 x
                     Sets the x position of the color bar (in plot
                     fraction).

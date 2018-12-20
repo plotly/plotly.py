@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class TitleValidator(_plotly_utils.basevalidators.StringValidator):
+class TitleValidator(_plotly_utils.basevalidators.CompoundValidator):
 
     def __init__(
         self, plotly_name='title', parent_name='layout.xaxis', **kwargs
@@ -9,7 +9,20 @@ class TitleValidator(_plotly_utils.basevalidators.StringValidator):
         super(TitleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'ticks'),
-            role=kwargs.pop('role', 'info'),
+            data_class_str=kwargs.pop('data_class_str', 'Title'),
+            data_docs=kwargs.pop(
+                'data_docs', """
+            font
+                Sets this axis' title font. Note that the
+                title's font used to be customized by the now
+                deprecated `titlefont` attribute.
+            text
+                Sets the title of this axis. Note that before
+                the existence of `title.text`, the title's
+                contents used to be defined as the `title`
+                attribute itself. This behavior has been
+                deprecated.
+"""
+            ),
             **kwargs
         )

@@ -18,6 +18,7 @@ from ._xbins import XBinsValidator
 from ._xaxis import XAxisValidator
 from ._x import XValidator
 from ._visible import VisibleValidator
+from ._uirevision import UirevisionValidator
 from ._uid import UidValidator
 from ._stream import StreamValidator
 from ._showscale import ShowscaleValidator

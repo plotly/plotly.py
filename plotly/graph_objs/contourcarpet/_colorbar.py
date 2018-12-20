@@ -995,88 +995,39 @@ class ColorBar(BaseTraceHierarchyType):
     @property
     def title(self):
         """
-        Sets the title of the color bar.
+        The 'title' property is an instance of Title
+        that may be specified as:
+          - An instance of plotly.graph_objs.contourcarpet.colorbar.Title
+          - A dict of string/value properties that will be passed
+            to the Title constructor
     
-        The 'title' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+            Supported dict properties:
+                
+                font
+                    Sets this color bar's title font. Note that the
+                    title's font used to be set by the now
+                    deprecated `titlefont` attribute.
+                side
+                    Determines the location of color bar's title
+                    with respect to the color bar. Note that the
+                    title's location used to be set by the now
+                    deprecated `titleside` attribute.
+                text
+                    Sets the title of the color bar. Note that
+                    before the existence of `title.text`, the
+                    title's contents used to be defined as the
+                    `title` attribute itself. This behavior has
+                    been deprecated.
 
         Returns
         -------
-        str
+        plotly.graph_objs.contourcarpet.colorbar.Title
         """
         return self['title']
 
     @title.setter
     def title(self, val):
         self['title'] = val
-
-    # titlefont
-    # ---------
-    @property
-    def titlefont(self):
-        """
-        Sets this color bar's title font.
-    
-        The 'titlefont' property is an instance of Titlefont
-        that may be specified as:
-          - An instance of plotly.graph_objs.contourcarpet.colorbar.Titlefont
-          - A dict of string/value properties that will be passed
-            to the Titlefont constructor
-    
-            Supported dict properties:
-                
-                color
-    
-                family
-                    HTML font family - the typeface that will be
-                    applied by the web browser. The web browser
-                    will only be able to apply a font if it is
-                    available on the system which it operates.
-                    Provide multiple font families, separated by
-                    commas, to indicate the preference in which to
-                    apply fonts if they aren't available on the
-                    system. The plotly service (at https://plot.ly
-                    or on-premise) generates images on a server,
-                    where only a select number of fonts are
-                    installed and supported. These include "Arial",
-                    "Balto", "Courier New", "Droid Sans",, "Droid
-                    Serif", "Droid Sans Mono", "Gravitas One", "Old
-                    Standard TT", "Open Sans", "Overpass", "PT Sans
-                    Narrow", "Raleway", "Times New Roman".
-                size
-
-        Returns
-        -------
-        plotly.graph_objs.contourcarpet.colorbar.Titlefont
-        """
-        return self['titlefont']
-
-    @titlefont.setter
-    def titlefont(self, val):
-        self['titlefont'] = val
-
-    # titleside
-    # ---------
-    @property
-    def titleside(self):
-        """
-        Determines the location of the colorbar title with respect to
-        the color bar.
-    
-        The 'titleside' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['right', 'top', 'bottom']
-
-        Returns
-        -------
-        Any
-        """
-        return self['titleside']
-
-    @titleside.setter
-    def titleside(self, val):
-        self['titleside'] = val
 
     # x
     # -
@@ -1367,12 +1318,8 @@ class ColorBar(BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            Sets the title of the color bar.
-        titlefont
-            Sets this color bar's title font.
-        titleside
-            Determines the location of the colorbar title with
-            respect to the color bar.
+            plotly.graph_objs.contourcarpet.colorbar.Title instance
+            or dict with compatible properties
         x
             Sets the x position of the color bar (in plot
             fraction).
@@ -1433,8 +1380,6 @@ class ColorBar(BaseTraceHierarchyType):
         tickvalssrc=None,
         tickwidth=None,
         title=None,
-        titlefont=None,
-        titleside=None,
         x=None,
         xanchor=None,
         xpad=None,
@@ -1603,12 +1548,8 @@ class ColorBar(BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            Sets the title of the color bar.
-        titlefont
-            Sets this color bar's title font.
-        titleside
-            Determines the location of the colorbar title with
-            respect to the color bar.
+            plotly.graph_objs.contourcarpet.colorbar.Title instance
+            or dict with compatible properties
         x
             Sets the x position of the color bar (in plot
             fraction).
@@ -1704,8 +1645,6 @@ an instance of plotly.graph_objs.contourcarpet.ColorBar"""
         self._validators['tickvalssrc'] = v_colorbar.TickvalssrcValidator()
         self._validators['tickwidth'] = v_colorbar.TickwidthValidator()
         self._validators['title'] = v_colorbar.TitleValidator()
-        self._validators['titlefont'] = v_colorbar.TitlefontValidator()
-        self._validators['titleside'] = v_colorbar.TitlesideValidator()
         self._validators['x'] = v_colorbar.XValidator()
         self._validators['xanchor'] = v_colorbar.XanchorValidator()
         self._validators['xpad'] = v_colorbar.XpadValidator()
@@ -1794,10 +1733,6 @@ an instance of plotly.graph_objs.contourcarpet.ColorBar"""
         self['tickwidth'] = tickwidth if tickwidth is not None else _v
         _v = arg.pop('title', None)
         self['title'] = title if title is not None else _v
-        _v = arg.pop('titlefont', None)
-        self['titlefont'] = titlefont if titlefont is not None else _v
-        _v = arg.pop('titleside', None)
-        self['titleside'] = titleside if titleside is not None else _v
         _v = arg.pop('x', None)
         self['x'] = x if x is not None else _v
         _v = arg.pop('xanchor', None)
