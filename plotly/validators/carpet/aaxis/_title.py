@@ -1,7 +1,7 @@
 import _plotly_utils.basevalidators
 
 
-class TitleValidator(_plotly_utils.basevalidators.CompoundValidator):
+class TitleValidator(_plotly_utils.basevalidators.TitleValidator):
 
     def __init__(
         self, plotly_name='title', parent_name='carpet.aaxis', **kwargs

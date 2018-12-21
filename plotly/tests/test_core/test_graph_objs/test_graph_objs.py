@@ -23,6 +23,44 @@ class TestBackwardsCompat(TestCase):
         for class_name in OLD_CLASS_NAMES:
             self.assertIn(class_name, go.__dict__.keys())
 
+    def test_title_as_string_layout(self):
+        """
+        Prior to plotly.js 1.43.0 title properties were strings, in 1.43.0
+        these title properties became compound objects with a text property.
+
+        For backwards compatibility, we still need to support setting this
+        title object as a string or number
+        """
+        layout_title_parents = [
+            go.Layout(),
+            go.layout.XAxis(),
+            go.layout.YAxis(),
+            go.layout.ternary.Aaxis(),
+            go.layout.ternary.Baxis(),
+            go.layout.ternary.Caxis(),
+            go.layout.scene.XAxis(),
+            go.layout.scene.YAxis(),
+            go.layout.scene.ZAxis(),
+            go.layout.polar.RadialAxis(),
+            go.scatter.marker.ColorBar(),
+            go.cone.ColorBar()
+         ]
+
+        for obj in layout_title_parents:
+            obj.title = 'A title'
+
+            self.assertEqual(obj.title.text, 'A title')
+            self.assertEqual(obj.to_plotly_json(),
+                             {'title': {'text': 'A title'}})
+
+        # Pie
+        obj = go.Pie()
+        obj.title = 'A title'
+        self.assertEqual(obj.title.text, 'A title')
+        self.assertEqual(obj.to_plotly_json(),
+                         {'title': {'text': 'A title'},
+                          'type': 'pie'})
+
 
 class TestGraphObjs(TestCase):
 

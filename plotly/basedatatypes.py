@@ -3135,8 +3135,9 @@ class BasePlotlyType(object):
         # Reparent
         # --------
         # ### Reparent new value and clear orphan data ###
-        val._parent = self
-        val._orphan_props.clear()
+        if isinstance(val, BasePlotlyType):
+            val._parent = self
+            val._orphan_props.clear()
 
         # ### Unparent old value and update orphan data ###
         if curr_val is not None:

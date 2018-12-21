@@ -431,6 +431,8 @@ class PlotlyNode:
         elif self.plotly_name.endswith('src') and self.datatype == 'string':
             validator_base = (f"_plotly_utils.basevalidators."
                               f"SrcValidator")
+        elif self.plotly_name == 'title' and self.datatype == 'compound':
+            validator_base = "_plotly_utils.basevalidators.TitleValidator"
         else:
             datatype_title_case = self.datatype.title().replace('_', '')
             validator_base = (f"_plotly_utils.basevalidators."
