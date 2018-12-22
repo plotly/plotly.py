@@ -59,7 +59,7 @@ def _generate_image_save_as_saves_valid_image(image_format,
     return _test
 
 kwargs = {
-    'format': ['png', 'jpeg', 'pdf', 'svg'],
+    'format': ['png', 'jpeg', 'pdf', 'svg', 'emf'],
     'width': [None, 300],
     'height': [None, 300],
     'scale': [None, 5]
@@ -69,12 +69,6 @@ for args in itertools.product(kwargs['format'], kwargs['width'],
                               kwargs['height'], kwargs['scale']):
     for test_generator in [_generate_image_get_returns_valid_image_test,
                            _generate_image_save_as_saves_valid_image]:
-
-        if args[0] in ['jpeg', 'pdf', 'svg'] and args[3] is not None:
-            # Shouldn't need to skip these tests, the server should
-            # be responding with a 400 level error since scale isn't supported,
-            # but it doesn't yet, so just skip them
-            continue
 
         _test = test_generator(*args)
         arg_string = ', '.join([str(a) for a in args])
