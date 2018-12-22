@@ -712,7 +712,7 @@ class image:
                           describes a plotly figure.
                           Same argument used in `py.plot`, `py.iplot`,
                           see https://plot.ly/python for examples
-        - format: 'png', 'svg', 'jpeg', 'pdf'
+        - format: 'png', 'svg', 'jpeg', 'pdf', 'emf'
         - width: output width
         - height: output height
         - scale: Increase the resolution of the image by `scale`
@@ -730,7 +730,7 @@ class image:
         # TODO: format is a built-in name... we shouldn't really use it
         figure = tools.return_figure_from_figure_or_data(figure_or_data, True)
 
-        if format not in ['png', 'svg', 'jpeg', 'pdf']:
+        if format not in ['png', 'svg', 'jpeg', 'pdf', 'emf']:
             raise exceptions.PlotlyError(
                 "Invalid format. This version of your Plotly-Python "
                 "package currently only supports png, svg, jpeg, and pdf. "
@@ -760,7 +760,8 @@ class image:
         if ('content-type' in headers and
             headers['content-type'] in ['image/png', 'image/jpeg',
                                         'application/pdf',
-                                        'image/svg+xml']):
+                                        'image/svg+xml',
+                                        'image/emf']):
             return response.content
         elif ('content-type' in headers and
               'json' in headers['content-type']):
@@ -809,7 +810,7 @@ class image:
         """Save a image of the plot described by `figure_or_data` locally as
         `filename`.
 
-        Valid image formats are 'png', 'svg', 'jpeg', and 'pdf'.
+        Valid image formats are 'png', 'svg', 'jpeg', 'pdf' and 'emf'.
         The format is taken as the extension of the filename or as the
         supplied format.
 
@@ -819,7 +820,7 @@ class image:
                           Same argument used in `py.plot`, `py.iplot`,
                           see https://plot.ly/python for examples
         - filename: The filepath to save the image to
-        - format: 'png', 'svg', 'jpeg', 'pdf'
+        - format: 'png', 'svg', 'jpeg', 'pdf', 'emf'
         - width: output width
         - height: output height
         - scale: Increase the resolution of the image by `scale` amount
