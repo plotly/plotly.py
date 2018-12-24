@@ -1029,6 +1029,78 @@ class ColorBar(BaseTraceHierarchyType):
     def title(self, val):
         self['title'] = val
 
+    # titlefont
+    # ---------
+    @property
+    def titlefont(self):
+        """
+        Deprecated: Please use scatterpolar.marker.colorbar.title.font
+        instead. Sets this color bar's title font. Note that the
+        title's font used to be set by the now deprecated `titlefont`
+        attribute.
+    
+        The 'font' property is an instance of Font
+        that may be specified as:
+          - An instance of plotly.graph_objs.scatterpolar.marker.colorbar.title.Font
+          - A dict of string/value properties that will be passed
+            to the Font constructor
+    
+            Supported dict properties:
+                
+                color
+    
+                family
+                    HTML font family - the typeface that will be
+                    applied by the web browser. The web browser
+                    will only be able to apply a font if it is
+                    available on the system which it operates.
+                    Provide multiple font families, separated by
+                    commas, to indicate the preference in which to
+                    apply fonts if they aren't available on the
+                    system. The plotly service (at https://plot.ly
+                    or on-premise) generates images on a server,
+                    where only a select number of fonts are
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
+                size
+
+        Returns
+        -------
+        
+        """
+        return self['titlefont']
+
+    @titlefont.setter
+    def titlefont(self, val):
+        self['titlefont'] = val
+
+    # titleside
+    # ---------
+    @property
+    def titleside(self):
+        """
+        Deprecated: Please use scatterpolar.marker.colorbar.title.side
+        instead. Determines the location of color bar's title with
+        respect to the color bar. Note that the title's location used
+        to be set by the now deprecated `titleside` attribute.
+    
+        The 'side' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['right', 'top', 'bottom']
+
+        Returns
+        -------
+        
+        """
+        return self['titleside']
+
+    @titleside.setter
+    def titleside(self, val):
+        self['titleside'] = val
+
     # x
     # -
     @property
@@ -1320,6 +1392,19 @@ class ColorBar(BaseTraceHierarchyType):
         title
             plotly.graph_objs.scatterpolar.marker.colorbar.Title
             instance or dict with compatible properties
+        titlefont
+            Deprecated: Please use
+            scatterpolar.marker.colorbar.title.font instead. Sets
+            this color bar's title font. Note that the title's font
+            used to be set by the now deprecated `titlefont`
+            attribute.
+        titleside
+            Deprecated: Please use
+            scatterpolar.marker.colorbar.title.side instead.
+            Determines the location of color bar's title with
+            respect to the color bar. Note that the title's
+            location used to be set by the now deprecated
+            `titleside` attribute.
         x
             Sets the x position of the color bar (in plot
             fraction).
@@ -1341,6 +1426,11 @@ class ColorBar(BaseTraceHierarchyType):
             Sets the amount of padding (in px) along the y
             direction.
         """
+
+    mapped_properties = {
+        'titlefont': ('title', 'font'),
+        'titleside': ('title', 'side')
+    }
 
     def __init__(
         self,
@@ -1380,6 +1470,8 @@ class ColorBar(BaseTraceHierarchyType):
         tickvalssrc=None,
         tickwidth=None,
         title=None,
+        titlefont=None,
+        titleside=None,
         x=None,
         xanchor=None,
         xpad=None,
@@ -1551,6 +1643,19 @@ class ColorBar(BaseTraceHierarchyType):
         title
             plotly.graph_objs.scatterpolar.marker.colorbar.Title
             instance or dict with compatible properties
+        titlefont
+            Deprecated: Please use
+            scatterpolar.marker.colorbar.title.font instead. Sets
+            this color bar's title font. Note that the title's font
+            used to be set by the now deprecated `titlefont`
+            attribute.
+        titleside
+            Deprecated: Please use
+            scatterpolar.marker.colorbar.title.side instead.
+            Determines the location of color bar's title with
+            respect to the color bar. Note that the title's
+            location used to be set by the now deprecated
+            `titleside` attribute.
         x
             Sets the x position of the color bar (in plot
             fraction).
@@ -1736,6 +1841,10 @@ an instance of plotly.graph_objs.scatterpolar.marker.ColorBar"""
         self['tickwidth'] = tickwidth if tickwidth is not None else _v
         _v = arg.pop('title', None)
         self['title'] = title if title is not None else _v
+        _v = arg.pop('titlefont', None)
+        self['titlefont'] = titlefont if titlefont is not None else _v
+        _v = arg.pop('titleside', None)
+        self['titleside'] = titleside if titleside is not None else _v
         _v = arg.pop('x', None)
         self['x'] = x if x is not None else _v
         _v = arg.pop('xanchor', None)

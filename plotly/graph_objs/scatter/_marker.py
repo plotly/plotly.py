@@ -355,6 +355,19 @@ class Marker(BaseTraceHierarchyType):
                 title
                     plotly.graph_objs.scatter.marker.colorbar.Title
                     instance or dict with compatible properties
+                titlefont
+                    Deprecated: Please use
+                    scatter.marker.colorbar.title.font instead.
+                    Sets this color bar's title font. Note that the
+                    title's font used to be set by the now
+                    deprecated `titlefont` attribute.
+                titleside
+                    Deprecated: Please use
+                    scatter.marker.colorbar.title.side instead.
+                    Determines the location of color bar's title
+                    with respect to the color bar. Note that the
+                    title's location used to be set by the now
+                    deprecated `titleside` attribute.
                 x
                     Sets the x position of the color bar (in plot
                     fraction).

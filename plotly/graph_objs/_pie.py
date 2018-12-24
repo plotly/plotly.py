@@ -1050,6 +1050,87 @@ class Pie(BaseTraceType):
     def title(self, val):
         self['title'] = val
 
+    # titlefont
+    # ---------
+    @property
+    def titlefont(self):
+        """
+        Deprecated: Please use pie.title.font instead. Sets the font
+        used for `title`. Note that the title's font used to be set by
+        the now deprecated `titlefont` attribute.
+    
+        The 'font' property is an instance of Font
+        that may be specified as:
+          - An instance of plotly.graph_objs.pie.title.Font
+          - A dict of string/value properties that will be passed
+            to the Font constructor
+    
+            Supported dict properties:
+                
+                color
+    
+                colorsrc
+                    Sets the source reference on plot.ly for  color
+                    .
+                family
+                    HTML font family - the typeface that will be
+                    applied by the web browser. The web browser
+                    will only be able to apply a font if it is
+                    available on the system which it operates.
+                    Provide multiple font families, separated by
+                    commas, to indicate the preference in which to
+                    apply fonts if they aren't available on the
+                    system. The plotly service (at https://plot.ly
+                    or on-premise) generates images on a server,
+                    where only a select number of fonts are
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
+                familysrc
+                    Sets the source reference on plot.ly for
+                    family .
+                size
+    
+                sizesrc
+                    Sets the source reference on plot.ly for  size
+                    .
+
+        Returns
+        -------
+        
+        """
+        return self['titlefont']
+
+    @titlefont.setter
+    def titlefont(self, val):
+        self['titlefont'] = val
+
+    # titleposition
+    # -------------
+    @property
+    def titleposition(self):
+        """
+        Deprecated: Please use pie.title.position instead. Specifies
+        the location of the `title`. Note that the title's position
+        used to be set by the now deprecated `titleposition` attribute.
+    
+        The 'position' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['top left', 'top center', 'top right', 'middle center',
+                'bottom left', 'bottom center', 'bottom right']
+
+        Returns
+        -------
+        
+        """
+        return self['titleposition']
+
+    @titleposition.setter
+    def titleposition(self, val):
+        self['titleposition'] = val
+
     # uid
     # ---
     @property
@@ -1326,6 +1407,15 @@ class Pie(BaseTraceType):
         title
             plotly.graph_objs.pie.Title instance or dict with
             compatible properties
+        titlefont
+            Deprecated: Please use pie.title.font instead. Sets the
+            font used for `title`. Note that the title's font used
+            to be set by the now deprecated `titlefont` attribute.
+        titleposition
+            Deprecated: Please use pie.title.position instead.
+            Specifies the location of the `title`. Note that the
+            title's position used to be set by the now deprecated
+            `titleposition` attribute.
         uid
 
         uirevision
@@ -1357,6 +1447,11 @@ class Pie(BaseTraceType):
             a legend item (provided that the legend itself is
             visible).
         """
+
+    mapped_properties = {
+        'titlefont': ('title', 'font'),
+        'titleposition': ('title', 'position')
+    }
 
     def __init__(
         self,
@@ -1400,6 +1495,8 @@ class Pie(BaseTraceType):
         textpositionsrc=None,
         textsrc=None,
         title=None,
+        titlefont=None,
+        titleposition=None,
         uid=None,
         uirevision=None,
         values=None,
@@ -1562,6 +1659,15 @@ class Pie(BaseTraceType):
         title
             plotly.graph_objs.pie.Title instance or dict with
             compatible properties
+        titlefont
+            Deprecated: Please use pie.title.font instead. Sets the
+            font used for `title`. Note that the title's font used
+            to be set by the now deprecated `titlefont` attribute.
+        titleposition
+            Deprecated: Please use pie.title.position instead.
+            Specifies the location of the `title`. Note that the
+            title's position used to be set by the now deprecated
+            `titleposition` attribute.
         uid
 
         uirevision
@@ -1758,6 +1864,11 @@ an instance of plotly.graph_objs.Pie"""
         self['textsrc'] = textsrc if textsrc is not None else _v
         _v = arg.pop('title', None)
         self['title'] = title if title is not None else _v
+        _v = arg.pop('titlefont', None)
+        self['titlefont'] = titlefont if titlefont is not None else _v
+        _v = arg.pop('titleposition', None)
+        self['titleposition'
+            ] = titleposition if titleposition is not None else _v
         _v = arg.pop('uid', None)
         self['uid'] = uid if uid is not None else _v
         _v = arg.pop('uirevision', None)

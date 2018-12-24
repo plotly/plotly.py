@@ -217,6 +217,19 @@ class Choropleth(BaseTraceType):
                 title
                     plotly.graph_objs.choropleth.colorbar.Title
                     instance or dict with compatible properties
+                titlefont
+                    Deprecated: Please use
+                    choropleth.colorbar.title.font instead. Sets
+                    this color bar's title font. Note that the
+                    title's font used to be set by the now
+                    deprecated `titlefont` attribute.
+                titleside
+                    Deprecated: Please use
+                    choropleth.colorbar.title.side instead.
+                    Determines the location of color bar's title
+                    with respect to the color bar. Note that the
+                    title's location used to be set by the now
+                    deprecated `titleside` attribute.
                 x
                     Sets the x position of the color bar (in plot
                     fraction).

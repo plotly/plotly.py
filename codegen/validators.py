@@ -91,6 +91,12 @@ def write_validator_py(outdir,
     -------
     None
     """
+    if node.is_mapped:
+        # No validator written for mapped nodes
+        # e.g. no validator for layout.titlefont since ths is mapped to
+        # layout.title.font
+        return
+
     # Generate source code
     # --------------------
     validator_source = build_validator_py(node)

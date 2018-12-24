@@ -209,6 +209,12 @@ class Ternary(BaseLayoutHierarchyType):
                 title
                     plotly.graph_objs.layout.ternary.aaxis.Title
                     instance or dict with compatible properties
+                titlefont
+                    Deprecated: Please use
+                    layout.ternary.aaxis.title.font instead. Sets
+                    this axis' title font. Note that the title's
+                    font used to be customized by the now
+                    deprecated `titlefont` attribute.
                 uirevision
                     Controls persistence of user-driven changes in
                     axis `min`, and `title` if in `editable: true`
@@ -430,6 +436,12 @@ class Ternary(BaseLayoutHierarchyType):
                 title
                     plotly.graph_objs.layout.ternary.baxis.Title
                     instance or dict with compatible properties
+                titlefont
+                    Deprecated: Please use
+                    layout.ternary.baxis.title.font instead. Sets
+                    this axis' title font. Note that the title's
+                    font used to be customized by the now
+                    deprecated `titlefont` attribute.
                 uirevision
                     Controls persistence of user-driven changes in
                     axis `min`, and `title` if in `editable: true`
@@ -710,6 +722,12 @@ class Ternary(BaseLayoutHierarchyType):
                 title
                     plotly.graph_objs.layout.ternary.caxis.Title
                     instance or dict with compatible properties
+                titlefont
+                    Deprecated: Please use
+                    layout.ternary.caxis.title.font instead. Sets
+                    this axis' title font. Note that the title's
+                    font used to be customized by the now
+                    deprecated `titlefont` attribute.
                 uirevision
                     Controls persistence of user-driven changes in
                     axis `min`, and `title` if in `editable: true`

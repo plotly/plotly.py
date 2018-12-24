@@ -301,6 +301,11 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             title
                 plotly.graph_objs.layout.Title instance or dict
                 with compatible properties
+            titlefont
+                Deprecated: Please use layout.title.font
+                instead. Sets the title font. Note that the
+                title's font used to be customized by the now
+                deprecated `titlefont` attribute.
             uirevision
                 Used to allow user interactions with the plot
                 to persist after `Plotly.react` calls that are

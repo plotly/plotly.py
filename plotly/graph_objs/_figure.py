@@ -343,6 +343,11 @@ class Figure(BaseFigure):
                     title
                         plotly.graph_objs.layout.Title instance or dict
                         with compatible properties
+                    titlefont
+                        Deprecated: Please use layout.title.font
+                        instead. Sets the title font. Note that the
+                        title's font used to be customized by the now
+                        deprecated `titlefont` attribute.
                     uirevision
                         Used to allow user interactions with the plot
                         to persist after `Plotly.react` calls that are
@@ -5739,6 +5744,8 @@ class Figure(BaseFigure):
         textpositionsrc=None,
         textsrc=None,
         title=None,
+        titlefont=None,
+        titleposition=None,
         uid=None,
         uirevision=None,
         values=None,
@@ -5900,6 +5907,15 @@ class Figure(BaseFigure):
         title
             plotly.graph_objs.pie.Title instance or dict with
             compatible properties
+        titlefont
+            Deprecated: Please use pie.title.font instead. Sets the
+            font used for `title`. Note that the title's font used
+            to be set by the now deprecated `titlefont` attribute.
+        titleposition
+            Deprecated: Please use pie.title.position instead.
+            Specifies the location of the `title`. Note that the
+            title's position used to be set by the now deprecated
+            `titleposition` attribute.
         uid
 
         uirevision
@@ -5983,6 +5999,8 @@ class Figure(BaseFigure):
             textpositionsrc=textpositionsrc,
             textsrc=textsrc,
             title=title,
+            titlefont=titlefont,
+            titleposition=titleposition,
             uid=uid,
             uirevision=uirevision,
             values=values,

@@ -2581,6 +2581,53 @@ class Layout(BaseLayoutType):
     def title(self, val):
         self['title'] = val
 
+    # titlefont
+    # ---------
+    @property
+    def titlefont(self):
+        """
+        Deprecated: Please use layout.title.font instead. Sets the
+        title font. Note that the title's font used to be customized by
+        the now deprecated `titlefont` attribute.
+    
+        The 'font' property is an instance of Font
+        that may be specified as:
+          - An instance of plotly.graph_objs.layout.title.Font
+          - A dict of string/value properties that will be passed
+            to the Font constructor
+    
+            Supported dict properties:
+                
+                color
+    
+                family
+                    HTML font family - the typeface that will be
+                    applied by the web browser. The web browser
+                    will only be able to apply a font if it is
+                    available on the system which it operates.
+                    Provide multiple font families, separated by
+                    commas, to indicate the preference in which to
+                    apply fonts if they aren't available on the
+                    system. The plotly service (at https://plot.ly
+                    or on-premise) generates images on a server,
+                    where only a select number of fonts are
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
+                size
+
+        Returns
+        -------
+        
+        """
+        return self['titlefont']
+
+    @titlefont.setter
+    def titlefont(self, val):
+        self['titlefont'] = val
+
     # uirevision
     # ----------
     @property
@@ -3214,6 +3261,11 @@ class Layout(BaseLayoutType):
                 title
                     plotly.graph_objs.layout.xaxis.Title instance
                     or dict with compatible properties
+                titlefont
+                    Deprecated: Please use layout.xaxis.title.font
+                    instead. Sets this axis' title font. Note that
+                    the title's font used to be customized by the
+                    now deprecated `titlefont` attribute.
                 type
                     Sets the axis type. By default, plotly attempts
                     to determined the axis type by looking into the
@@ -3625,6 +3677,11 @@ class Layout(BaseLayoutType):
                 title
                     plotly.graph_objs.layout.yaxis.Title instance
                     or dict with compatible properties
+                titlefont
+                    Deprecated: Please use layout.yaxis.title.font
+                    instead. Sets this axis' title font. Note that
+                    the title's font used to be customized by the
+                    now deprecated `titlefont` attribute.
                 type
                     Sets the axis type. By default, plotly attempts
                     to determined the axis type by looking into the
@@ -3932,6 +3989,10 @@ class Layout(BaseLayoutType):
         title
             plotly.graph_objs.layout.Title instance or dict with
             compatible properties
+        titlefont
+            Deprecated: Please use layout.title.font instead. Sets
+            the title font. Note that the title's font used to be
+            customized by the now deprecated `titlefont` attribute.
         uirevision
             Used to allow user interactions with the plot to
             persist after `Plotly.react` calls that are unaware of
@@ -3981,6 +4042,8 @@ class Layout(BaseLayoutType):
             plotly.graph_objs.layout.YAxis instance or dict with
             compatible properties
         """
+
+    mapped_properties = {'titlefont': ('title', 'font')}
 
     def __init__(
         self,
@@ -4040,6 +4103,7 @@ class Layout(BaseLayoutType):
         template=None,
         ternary=None,
         title=None,
+        titlefont=None,
         uirevision=None,
         updatemenus=None,
         updatemenudefaults=None,
@@ -4321,6 +4385,10 @@ class Layout(BaseLayoutType):
         title
             plotly.graph_objs.layout.Title instance or dict with
             compatible properties
+        titlefont
+            Deprecated: Please use layout.title.font instead. Sets
+            the title font. Note that the title's font used to be
+            customized by the now deprecated `titlefont` attribute.
         uirevision
             Used to allow user interactions with the plot to
             persist after `Plotly.react` calls that are unaware of
@@ -4596,6 +4664,8 @@ an instance of plotly.graph_objs.Layout"""
         self['ternary'] = ternary if ternary is not None else _v
         _v = arg.pop('title', None)
         self['title'] = title if title is not None else _v
+        _v = arg.pop('titlefont', None)
+        self['titlefont'] = titlefont if titlefont is not None else _v
         _v = arg.pop('uirevision', None)
         self['uirevision'] = uirevision if uirevision is not None else _v
         _v = arg.pop('updatemenus', None)

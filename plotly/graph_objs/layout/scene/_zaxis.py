@@ -1433,6 +1433,53 @@ class ZAxis(BaseLayoutHierarchyType):
     def title(self, val):
         self['title'] = val
 
+    # titlefont
+    # ---------
+    @property
+    def titlefont(self):
+        """
+        Deprecated: Please use layout.scene.zaxis.title.font instead.
+        Sets this axis' title font. Note that the title's font used to
+        be customized by the now deprecated `titlefont` attribute.
+    
+        The 'font' property is an instance of Font
+        that may be specified as:
+          - An instance of plotly.graph_objs.layout.scene.zaxis.title.Font
+          - A dict of string/value properties that will be passed
+            to the Font constructor
+    
+            Supported dict properties:
+                
+                color
+    
+                family
+                    HTML font family - the typeface that will be
+                    applied by the web browser. The web browser
+                    will only be able to apply a font if it is
+                    available on the system which it operates.
+                    Provide multiple font families, separated by
+                    commas, to indicate the preference in which to
+                    apply fonts if they aren't available on the
+                    system. The plotly service (at https://plot.ly
+                    or on-premise) generates images on a server,
+                    where only a select number of fonts are
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
+                size
+
+        Returns
+        -------
+        
+        """
+        return self['titlefont']
+
+    @titlefont.setter
+    def titlefont(self, val):
+        self['titlefont'] = val
+
     # type
     # ----
     @property
@@ -1819,6 +1866,11 @@ class ZAxis(BaseLayoutHierarchyType):
         title
             plotly.graph_objs.layout.scene.zaxis.Title instance or
             dict with compatible properties
+        titlefont
+            Deprecated: Please use layout.scene.zaxis.title.font
+            instead. Sets this axis' title font. Note that the
+            title's font used to be customized by the now
+            deprecated `titlefont` attribute.
         type
             Sets the axis type. By default, plotly attempts to
             determined the axis type by looking into the data of
@@ -1836,6 +1888,8 @@ class ZAxis(BaseLayoutHierarchyType):
         zerolinewidth
             Sets the width (in px) of the zero line.
         """
+
+    mapped_properties = {'titlefont': ('title', 'font')}
 
     def __init__(
         self,
@@ -1889,6 +1943,7 @@ class ZAxis(BaseLayoutHierarchyType):
         tickvalssrc=None,
         tickwidth=None,
         title=None,
+        titlefont=None,
         type=None,
         visible=None,
         zeroline=None,
@@ -2133,6 +2188,11 @@ class ZAxis(BaseLayoutHierarchyType):
         title
             plotly.graph_objs.layout.scene.zaxis.Title instance or
             dict with compatible properties
+        titlefont
+            Deprecated: Please use layout.scene.zaxis.title.font
+            instead. Sets this axis' title font. Note that the
+            title's font used to be customized by the now
+            deprecated `titlefont` attribute.
         type
             Sets the axis type. By default, plotly attempts to
             determined the axis type by looking into the data of
@@ -2357,6 +2417,8 @@ an instance of plotly.graph_objs.layout.scene.ZAxis"""
         self['tickwidth'] = tickwidth if tickwidth is not None else _v
         _v = arg.pop('title', None)
         self['title'] = title if title is not None else _v
+        _v = arg.pop('titlefont', None)
+        self['titlefont'] = titlefont if titlefont is not None else _v
         _v = arg.pop('type', None)
         self['type'] = type if type is not None else _v
         _v = arg.pop('visible', None)

@@ -252,7 +252,6 @@ class BaseFigure(object):
         # ### Check for default template ###
         self._initialize_layout_template()
 
-
     # Magic Methods
     # -------------
     def __reduce__(self):
@@ -2310,6 +2309,11 @@ class BasePlotlyType(object):
     and frame object hierarchies
     """
 
+    # ### Mapped (deprecated) properties ###
+    # dict for deprecated property name (e.g. 'titlefont') to tuple
+    # of relative path to new property (e.g. ('title', 'font')
+    mapped_properties = {}
+
     def __init__(self, plotly_name, **kwargs):
         """
         Construct a new BasePlotlyType
@@ -2683,6 +2687,11 @@ class BasePlotlyType(object):
         # Convert into a property tuple
         prop = BaseFigure._str_to_dict_path(prop)
 
+        # Handle remapping
+        # ----------------
+        if prop and prop[0] in self.mapped_properties:
+            prop = self.mapped_properties[prop[0]] + prop[1:]
+
         # Handle scalar case
         # ------------------
         # e.g. ('foo',)
@@ -2736,10 +2745,14 @@ class BasePlotlyType(object):
         -------
         bool
         """
-        prop_tuple = BaseFigure._str_to_dict_path(prop)
+        prop = BaseFigure._str_to_dict_path(prop)
+
+        # Handle remapping
+        if prop and prop[0] in self.mapped_properties:
+            prop = self.mapped_properties[prop[0]] + prop[1:]
 
         obj = self
-        for p in prop_tuple:
+        for p in prop:
             if isinstance(p, int):
                 if isinstance(obj, tuple) and 0 <= p < len(obj):
                     obj = obj[p]
@@ -2780,6 +2793,11 @@ class BasePlotlyType(object):
         # -----------------
         if len(prop) == 0:
             raise KeyError(orig_prop)
+
+        # Handle remapping
+        # ----------------
+        if prop[0] in self.mapped_properties:
+            prop = self.mapped_properties[prop[0]] + prop[1:]
 
         # Handle scalar case
         # ------------------
@@ -2844,7 +2862,10 @@ class BasePlotlyType(object):
         """
         Return an iterator over the object's properties
         """
-        return iter(self._validators.keys())
+        res = list(self._validators.keys())
+        for prop in self.mapped_properties:
+            res.append(prop)
+        return iter(res)
 
     def __eq__(self, other):
         """
