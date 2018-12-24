@@ -106,7 +106,10 @@ class {datatype_class}({node.name_base_datatype}):\n""")
     # ### Property definitions ###
     child_datatype_nodes = node.child_datatypes
 
+    # Order so that mapped nodes come first, this way the unmapped properties
+    # take precedence
     subtype_nodes = child_datatype_nodes
+
     for subtype_node in subtype_nodes:
         if subtype_node.is_array_element:
             prop_type = (f"tuple[plotly.graph_objs{node.dotpath_str}." +
@@ -266,10 +269,13 @@ an instance of {class_name}\"\"\")
         # ----------------------------------""")
     for subtype_node in subtype_nodes:
         name_prop = subtype_node.name_property
-        if name_prop == 'template':
+        if name_prop == 'template' or subtype_node.is_mapped:
             # Special handling for layout.template to avoid infinite
             # recursion.  Only initialize layout.template object if non-None
-            # value specified
+            # value specified.
+            #
+            # Same special handling for mapped nodes (e.g. layout.titlefont)
+            # to keep them for overriding mapped property with None
             buffer.write(f"""
         _v = arg.pop('{name_prop}', None)
         _v = {name_prop} if {name_prop} is not None else _v

@@ -1836,9 +1836,13 @@ an instance of plotly.graph_objs.scatter.marker.ColorBar"""
         _v = arg.pop('title', None)
         self['title'] = title if title is not None else _v
         _v = arg.pop('titlefont', None)
-        self['titlefont'] = titlefont if titlefont is not None else _v
+        _v = titlefont if titlefont is not None else _v
+        if _v is not None:
+            self['titlefont'] = _v
         _v = arg.pop('titleside', None)
-        self['titleside'] = titleside if titleside is not None else _v
+        _v = titleside if titleside is not None else _v
+        if _v is not None:
+            self['titleside'] = _v
         _v = arg.pop('x', None)
         self['x'] = x if x is not None else _v
         _v = arg.pop('xanchor', None)

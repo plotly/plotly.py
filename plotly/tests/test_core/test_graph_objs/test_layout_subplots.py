@@ -37,13 +37,13 @@ class TestLayoutSubplots(TestCase):
         self.layout['xaxis2']
 
     def test_assign_subplots(self):
-        self.assertIsNone(self.layout.xaxis.title)
-        self.assertIsNone(self.layout.xaxis1.title)
+        self.assertIsNone(self.layout.xaxis.title.text)
+        self.assertIsNone(self.layout.xaxis1.title.text)
 
         title_str = 'xaxis title'
-        self.layout.xaxis.title = title_str
-        self.assertEqual(self.layout.xaxis.title, title_str)
-        self.assertEqual(self.layout.xaxis1.title, title_str)
+        self.layout.xaxis.title.text = title_str
+        self.assertEqual(self.layout.xaxis.title.text, title_str)
+        self.assertEqual(self.layout.xaxis1.title.text, title_str)
 
     def test_assign_subplot2(self):
         # Init xaxis2
@@ -148,20 +148,20 @@ class TestLayoutSubplots(TestCase):
         self.assertIsInstance(self.layout.polar8, go.layout.Polar)
 
     def test_subplot_1_in_constructor(self):
-        layout = go.Layout(xaxis1=go.layout.XAxis(title='xaxis 1'))
-        self.assertEqual(layout.xaxis1.title, 'xaxis 1')
+        layout = go.Layout(xaxis1=go.layout.XAxis(title={'text': 'xaxis 1'}))
+        self.assertEqual(layout.xaxis1.title.text, 'xaxis 1')
 
     def test_subplot_props_in_constructor(self):
-        layout = go.Layout(xaxis2=go.layout.XAxis(title='xaxis 2'),
-                           yaxis3=go.layout.YAxis(title='yaxis 3'),
+        layout = go.Layout(xaxis2=go.layout.XAxis(title={'text': 'xaxis 2'}),
+                           yaxis3=go.layout.YAxis(title={'text': 'yaxis 3'}),
                            geo4=go.layout.Geo(bgcolor='blue'),
                            ternary5=go.layout.Ternary(sum=120),
                            scene6=go.layout.Scene(dragmode='zoom'),
                            mapbox7=go.layout.Mapbox(zoom=2),
                            polar8=go.layout.Polar(sector=[0, 90]))
 
-        self.assertEqual(layout.xaxis2.title, 'xaxis 2')
-        self.assertEqual(layout.yaxis3.title, 'yaxis 3')
+        self.assertEqual(layout.xaxis2.title.text, 'xaxis 2')
+        self.assertEqual(layout.yaxis3.title.text, 'yaxis 3')
         self.assertEqual(layout.geo4.bgcolor, 'blue')
         self.assertEqual(layout.ternary5.sum, 120)
         self.assertEqual(layout.scene6.dragmode, 'zoom')
@@ -171,18 +171,18 @@ class TestLayoutSubplots(TestCase):
     def test_create_subplot_with_update(self):
 
         self.layout.update(
-            xaxis1=go.layout.XAxis(title='xaxis 1'),
-            xaxis2=go.layout.XAxis(title='xaxis 2'),
-            yaxis3=go.layout.YAxis(title='yaxis 3'),
+            xaxis1=go.layout.XAxis(title={'text': 'xaxis 1'}),
+            xaxis2=go.layout.XAxis(title={'text': 'xaxis 2'}),
+            yaxis3=go.layout.YAxis(title={'text': 'yaxis 3'}),
             geo4=go.layout.Geo(bgcolor='blue'),
             ternary5=go.layout.Ternary(sum=120),
             scene6=go.layout.Scene(dragmode='zoom'),
             mapbox7=go.layout.Mapbox(zoom=2),
             polar8=go.layout.Polar(sector=[0, 90]))
 
-        self.assertEqual(self.layout.xaxis1.title, 'xaxis 1')
-        self.assertEqual(self.layout.xaxis2.title, 'xaxis 2')
-        self.assertEqual(self.layout.yaxis3.title, 'yaxis 3')
+        self.assertEqual(self.layout.xaxis1.title.text, 'xaxis 1')
+        self.assertEqual(self.layout.xaxis2.title.text, 'xaxis 2')
+        self.assertEqual(self.layout.yaxis3.title.text, 'yaxis 3')
         self.assertEqual(self.layout.geo4.bgcolor, 'blue')
         self.assertEqual(self.layout.ternary5.sum, 120)
         self.assertEqual(self.layout.scene6.dragmode, 'zoom')
@@ -191,18 +191,18 @@ class TestLayoutSubplots(TestCase):
 
     def test_create_subplot_with_update_dict(self):
 
-        self.layout.update({'xaxis1': {'title': 'xaxis 1'},
-                            'xaxis2': {'title': 'xaxis 2'},
-                            'yaxis3': {'title': 'yaxis 3'},
+        self.layout.update({'xaxis1': {'title': {'text': 'xaxis 1'}},
+                            'xaxis2': {'title': {'text': 'xaxis 2'}},
+                            'yaxis3': {'title': {'text': 'yaxis 3'}},
                             'geo4': {'bgcolor': 'blue'},
                             'ternary5': {'sum': 120},
                             'scene6': {'dragmode': 'zoom'},
                             'mapbox7': {'zoom': 2},
                             'polar8': {'sector': [0, 90]}})
 
-        self.assertEqual(self.layout.xaxis1.title, 'xaxis 1')
-        self.assertEqual(self.layout.xaxis2.title, 'xaxis 2')
-        self.assertEqual(self.layout.yaxis3.title, 'yaxis 3')
+        self.assertEqual(self.layout.xaxis1.title.text, 'xaxis 1')
+        self.assertEqual(self.layout.xaxis2.title.text, 'xaxis 2')
+        self.assertEqual(self.layout.yaxis3.title.text, 'yaxis 3')
         self.assertEqual(self.layout.geo4.bgcolor, 'blue')
         self.assertEqual(self.layout.ternary5.sum, 120)
         self.assertEqual(self.layout.scene6.dragmode, 'zoom')

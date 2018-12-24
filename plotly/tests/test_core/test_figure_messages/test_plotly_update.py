@@ -36,7 +36,7 @@ class TestBatchUpdateMessage(TestCase):
             self.figure.layout.xaxis.range = [10, 20]
 
             # Assign frame property
-            self.figure.frames[0].layout.yaxis.title = 'f2'
+            self.figure.frames[0].layout.yaxis.title.text = 'f2'
 
             # Make sure that trace/layout assignments haven't been applied yet
             self.assertEqual(self.figure.data[0].marker.color, 'green')
@@ -44,7 +44,8 @@ class TestBatchUpdateMessage(TestCase):
             self.assertEqual(self.figure.layout.xaxis.range, (-1, 4))
 
             # Expect the frame update to be applied immediately
-            self.assertEqual(self.figure.frames[0].layout.yaxis.title, 'f2')
+            self.assertEqual(self.figure.frames[0].layout.yaxis.title.text,
+                             'f2')
 
         # Make sure that trace/layout assignments have been applied after
         # context exits

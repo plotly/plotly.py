@@ -1865,10 +1865,13 @@ an instance of plotly.graph_objs.Pie"""
         _v = arg.pop('title', None)
         self['title'] = title if title is not None else _v
         _v = arg.pop('titlefont', None)
-        self['titlefont'] = titlefont if titlefont is not None else _v
+        _v = titlefont if titlefont is not None else _v
+        if _v is not None:
+            self['titlefont'] = _v
         _v = arg.pop('titleposition', None)
-        self['titleposition'
-            ] = titleposition if titleposition is not None else _v
+        _v = titleposition if titleposition is not None else _v
+        if _v is not None:
+            self['titleposition'] = _v
         _v = arg.pop('uid', None)
         self['uid'] = uid if uid is not None else _v
         _v = arg.pop('uirevision', None)

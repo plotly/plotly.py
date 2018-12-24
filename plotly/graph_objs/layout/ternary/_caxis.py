@@ -1703,7 +1703,9 @@ an instance of plotly.graph_objs.layout.ternary.Caxis"""
         _v = arg.pop('title', None)
         self['title'] = title if title is not None else _v
         _v = arg.pop('titlefont', None)
-        self['titlefont'] = titlefont if titlefont is not None else _v
+        _v = titlefont if titlefont is not None else _v
+        if _v is not None:
+            self['titlefont'] = _v
         _v = arg.pop('uirevision', None)
         self['uirevision'] = uirevision if uirevision is not None else _v
 

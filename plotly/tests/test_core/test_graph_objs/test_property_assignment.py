@@ -27,8 +27,8 @@ class TestAssignmentPrimitive(TestCase):
         self.expected_nested = {
             'type': 'scatter',
             'name': 'scatter A',
-            'marker': {'colorbar': {'titlefont':
-                                    {'family': 'courier'}}}}
+            'marker': {'colorbar': {
+                'title': {'font': {'family': 'courier'}}}}}
 
     def test_toplevel_attr(self):
         assert self.scatter.fillcolor is None
@@ -54,33 +54,34 @@ class TestAssignmentPrimitive(TestCase):
         assert d1 == d2
 
     def test_nested_item(self):
-        assert (self.scatter['marker']['colorbar']['titlefont']['family']
+        assert (self.scatter['marker']['colorbar']['title']['font']['family']
                 is None)
-        self.scatter['marker']['colorbar']['titlefont']['family'] = 'courier'
-        assert (self.scatter['marker']['colorbar']['titlefont']['family']
+        self.scatter['marker']['colorbar']['title']['font']['family'] = \
+            'courier'
+        assert (self.scatter['marker']['colorbar']['title']['font']['family']
                 == 'courier')
         d1, d2 = strip_dict_params(self.scatter, self.expected_nested)
         assert d1 == d2
 
     def test_nested_item_dots(self):
-        assert self.scatter['marker.colorbar.titlefont.family'] is None
-        self.scatter['marker.colorbar.titlefont.family'] = 'courier'
-        assert self.scatter['marker.colorbar.titlefont.family'] == 'courier'
+        assert self.scatter['marker.colorbar.title.font.family'] is None
+        self.scatter['marker.colorbar.title.font.family'] = 'courier'
+        assert self.scatter['marker.colorbar.title.font.family'] == 'courier'
         d1, d2 = strip_dict_params(self.scatter, self.expected_nested)
         assert d1 == d2
 
     def test_nested_item_tuple(self):
-        assert self.scatter['marker.colorbar.titlefont.family'] is None
-        self.scatter[('marker', 'colorbar', 'titlefont', 'family')] = 'courier'
-        assert (self.scatter[('marker', 'colorbar', 'titlefont', 'family')]
+        assert self.scatter['marker.colorbar.title.font.family'] is None
+        self.scatter[('marker', 'colorbar', 'title.font', 'family')] = 'courier'
+        assert (self.scatter[('marker', 'colorbar', 'title.font', 'family')]
                 == 'courier')
         d1, d2 = strip_dict_params(self.scatter, self.expected_nested)
         assert d1 == d2
 
     def test_nested_update(self):
         self.scatter.update(
-            marker={'colorbar': {'titlefont': {'family': 'courier'}}})
-        assert (self.scatter[('marker', 'colorbar', 'titlefont', 'family')]
+            marker={'colorbar': {'title': {'font': {'family': 'courier'}}}})
+        assert (self.scatter[('marker', 'colorbar', 'title', 'font', 'family')]
                 == 'courier')
         d1, d2 = strip_dict_params(self.scatter, self.expected_nested)
         assert d1 == d2
@@ -238,14 +239,15 @@ class TestAssignmnetNone(TestCase):
         scatter = go.Scatter(name='scatter A',
                              y=[3, 2, 4],
                              marker={
-                                 'colorbar': {'titlefont':
-                                              {'family': 'courier'}}})
+                                 'colorbar': {
+                                     'title': {'font': {
+                                         'family': 'courier'}}}})
         expected = {
             'type': 'scatter',
             'name': 'scatter A',
             'y': [3, 2, 4],
-            'marker': {'colorbar': {'titlefont':
-                                    {'family': 'courier'}}}}
+            'marker': {'colorbar': {
+                'title': {'font': {'family': 'courier'}}}}}
 
         d1, d2 = strip_dict_params(scatter, expected)
         assert d1 == d2
@@ -266,8 +268,8 @@ class TestAssignmnetNone(TestCase):
         assert d1 == d2
 
         # Set compound properties to None
-        scatter[('marker', 'colorbar', 'titlefont')] = None
-        expected['marker']['colorbar'].pop('titlefont')
+        scatter[('marker', 'colorbar', 'title', 'font')] = None
+        expected['marker']['colorbar']['title'].pop('font')
         d1, d2 = strip_dict_params(scatter, expected)
         assert d1 == d2
 
