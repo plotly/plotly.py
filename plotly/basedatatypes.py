@@ -2312,7 +2312,7 @@ class BasePlotlyType(object):
     # ### Mapped (deprecated) properties ###
     # dict for deprecated property name (e.g. 'titlefont') to tuple
     # of relative path to new property (e.g. ('title', 'font')
-    mapped_properties = {}
+    _mapped_properties = {}
 
     def __init__(self, plotly_name, **kwargs):
         """
@@ -2689,8 +2689,8 @@ class BasePlotlyType(object):
 
         # Handle remapping
         # ----------------
-        if prop and prop[0] in self.mapped_properties:
-            prop = self.mapped_properties[prop[0]] + prop[1:]
+        if prop and prop[0] in self._mapped_properties:
+            prop = self._mapped_properties[prop[0]] + prop[1:]
 
         # Handle scalar case
         # ------------------
@@ -2748,8 +2748,8 @@ class BasePlotlyType(object):
         prop = BaseFigure._str_to_dict_path(prop)
 
         # Handle remapping
-        if prop and prop[0] in self.mapped_properties:
-            prop = self.mapped_properties[prop[0]] + prop[1:]
+        if prop and prop[0] in self._mapped_properties:
+            prop = self._mapped_properties[prop[0]] + prop[1:]
 
         obj = self
         for p in prop:
@@ -2796,8 +2796,8 @@ class BasePlotlyType(object):
 
         # Handle remapping
         # ----------------
-        if prop[0] in self.mapped_properties:
-            prop = self.mapped_properties[prop[0]] + prop[1:]
+        if prop[0] in self._mapped_properties:
+            prop = self._mapped_properties[prop[0]] + prop[1:]
 
         # Handle scalar case
         # ------------------
@@ -2863,7 +2863,7 @@ class BasePlotlyType(object):
         Return an iterator over the object's properties
         """
         res = list(self._validators.keys())
-        for prop in self.mapped_properties:
+        for prop in self._mapped_properties:
             res.append(prop)
         return iter(res)
 

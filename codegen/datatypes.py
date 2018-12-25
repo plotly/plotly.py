@@ -206,7 +206,7 @@ class {datatype_class}({node.name_base_datatype}):\n""")
     if mapped_properties:
         buffer.write(f"""
 
-    mapped_properties = {repr(mapped_properties)}""")
+    _mapped_properties = {repr(mapped_properties)}""")
 
     # ### Constructor ###
     buffer.write(f"""

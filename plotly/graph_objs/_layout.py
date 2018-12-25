@@ -4043,7 +4043,7 @@ class Layout(BaseLayoutType):
             compatible properties
         """
 
-    mapped_properties = {'titlefont': ('title', 'font')}
+    _mapped_properties = {'titlefont': ('title', 'font')}
 
     def __init__(
         self,

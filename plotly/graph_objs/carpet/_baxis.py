@@ -1746,7 +1746,7 @@ class Baxis(BaseTraceHierarchyType):
             the traces that referenced the axis in question.
         """
 
-    mapped_properties = {
+    _mapped_properties = {
         'titlefont': ('title', 'font'),
         'titleoffset': ('title', 'offset')
     }

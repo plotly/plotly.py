@@ -1889,7 +1889,7 @@ class XAxis(BaseLayoutHierarchyType):
             Sets the width (in px) of the zero line.
         """
 
-    mapped_properties = {'titlefont': ('title', 'font')}
+    _mapped_properties = {'titlefont': ('title', 'font')}
 
     def __init__(
         self,

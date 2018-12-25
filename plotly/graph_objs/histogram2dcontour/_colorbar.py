@@ -1427,7 +1427,7 @@ class ColorBar(BaseTraceHierarchyType):
             direction.
         """
 
-    mapped_properties = {
+    _mapped_properties = {
         'titlefont': ('title', 'font'),
         'titleside': ('title', 'side')
     }

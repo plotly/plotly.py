@@ -1448,7 +1448,7 @@ class Pie(BaseTraceType):
             visible).
         """
 
-    mapped_properties = {
+    _mapped_properties = {
         'titlefont': ('title', 'font'),
         'titleposition': ('title', 'position')
     }

@@ -1315,7 +1315,7 @@ class Baxis(BaseLayoutHierarchyType):
             configuration. Defaults to `ternary<N>.uirevision`.
         """
 
-    mapped_properties = {'titlefont': ('title', 'font')}
+    _mapped_properties = {'titlefont': ('title', 'font')}
 
     def __init__(
         self,
