@@ -294,6 +294,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
 
     def test_config(self):
         config = dict(linkText='Plotly rocks!',
+                      showLink=True,
                       editable=True)
         html = self._read_html(plotly.offline.plot(fig, config=config,
                                                    auto_open=False))
