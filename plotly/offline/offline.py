@@ -395,7 +395,7 @@ def _plot_html(figure_or_data, config, validate, default_width,
     return plotly_html_div, plotdivid, width, height
 
 
-def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
+def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
           validate=True, image=None, filename='plot_image', image_width=800,
           image_height=600, config=None):
     """
@@ -411,7 +411,7 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                       graph descriptions.
 
     Keyword arguments:
-    show_link (default=True) -- display a link in the bottom-right corner of
+    show_link (default=False) -- display a link in the bottom-right corner of
                                 of the chart that will export the chart to
                                 Plotly Cloud or Plotly Enterprise
     link_text (default='Export to plot.ly') -- the text of export link
@@ -511,7 +511,7 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         ipython_display.display(ipython_display.HTML(script))
 
 
-def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
+def plot(figure_or_data, show_link=False, link_text='Export to plot.ly',
          validate=True, output_type='file', include_plotlyjs=True,
          filename='temp-plot.html', auto_open=True, image=None,
          image_filename='plot_image', image_width=800, image_height=600,
@@ -537,7 +537,7 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                       graph descriptions.
 
     Keyword arguments:
-    show_link (default=True) -- display a link in the bottom-right corner of
+    show_link (default=False) -- display a link in the bottom-right corner of
         of the chart that will export the chart to Plotly Cloud or
         Plotly Enterprise
     link_text (default='Export to plot.ly') -- the text of export link
@@ -756,7 +756,7 @@ include_mathjax may be specified as False, 'cdn', or a string ending with '.js'
 
 
 def plot_mpl(mpl_fig, resize=False, strip_style=False,
-             verbose=False, show_link=True, link_text='Export to plot.ly',
+             verbose=False, show_link=False, link_text='Export to plot.ly',
              validate=True, output_type='file', include_plotlyjs=True,
              filename='temp-plot.html', auto_open=True,
              image=None, image_filename='plot_image',
@@ -776,7 +776,7 @@ def plot_mpl(mpl_fig, resize=False, strip_style=False,
     resize (default=False) -- allow plotly to choose the figure size.
     strip_style (default=False) -- allow plotly to choose style options.
     verbose (default=False) -- print message.
-    show_link (default=True) -- display a link in the bottom-right corner of
+    show_link (default=False) -- display a link in the bottom-right corner of
         of the chart that will export the chart to Plotly Cloud or
         Plotly Enterprise
     link_text (default='Export to plot.ly') -- the text of export link
@@ -838,7 +838,7 @@ def plot_mpl(mpl_fig, resize=False, strip_style=False,
 
 
 def iplot_mpl(mpl_fig, resize=False, strip_style=False,
-              verbose=False, show_link=True,
+              verbose=False, show_link=False,
               link_text='Export to plot.ly', validate=True,
               image=None, image_filename='plot_image',
               image_height=600, image_width=800):
@@ -861,7 +861,7 @@ def iplot_mpl(mpl_fig, resize=False, strip_style=False,
     resize (default=False) -- allow plotly to choose the figure size.
     strip_style (default=False) -- allow plotly to choose style options.
     verbose (default=False) -- print message.
-    show_link (default=True) -- display a link in the bottom-right corner of
+    show_link (default=False) -- display a link in the bottom-right corner of
                                 of the chart that will export the chart to
                                 Plotly Cloud or Plotly Enterprise
     link_text (default='Export to plot.ly') -- the text of export link
@@ -902,7 +902,7 @@ def iplot_mpl(mpl_fig, resize=False, strip_style=False,
 
 
 def enable_mpl_offline(resize=False, strip_style=False,
-                       verbose=False, show_link=True,
+                       verbose=False, show_link=False,
                        link_text='Export to plot.ly', validate=True):
     """
     Convert mpl plots to locally hosted HTML documents.
