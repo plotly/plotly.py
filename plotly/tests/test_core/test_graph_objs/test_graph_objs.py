@@ -53,6 +53,12 @@ class TestBackwardsCompat(TestCase):
             self.assertEqual(obj.to_plotly_json(),
                              {'title': {'text': 'A title'}})
 
+            # And update
+            obj.update(title='A title 2')
+            self.assertEqual(obj.title.text, 'A title 2')
+            self.assertEqual(obj.to_plotly_json(),
+                             {'title': {'text': 'A title 2'}})
+
         # Pie
         obj = go.Pie()
         obj.title = 'A title'

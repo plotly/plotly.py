@@ -55,4 +55,4 @@ class PlotMPLTest(TestCase):
         un = url.replace("https://plot.ly/~", "").split('/')[0]
         fid = url.replace("https://plot.ly/~", "").split('/')[1]
         pfig = py.get_figure(un, fid)
-        assert pfig['layout']['title'] == title
+        assert pfig['layout']['title']['text'] == title

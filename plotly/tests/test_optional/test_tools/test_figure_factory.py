@@ -1750,7 +1750,7 @@ class Test2D_Density(TestCase, NumpyTestUtilsMixin):
                        'hovermode': 'closest',
                        'margin': {'t': 50},
                        'showlegend': False,
-                       'title': '2D Density Plot',
+                       'title': {'text': '2D Density Plot'},
                        'width': 800,
                        'xaxis': {'domain': [0, 0.85],
                                  'showgrid': False,
