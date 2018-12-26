@@ -2248,7 +2248,8 @@ Invalid property path '{key_path_str}' for layout
                 val = update_obj[key]
                 validator = plotly_obj._get_prop_validator(key)
 
-                if isinstance(validator, CompoundValidator):
+                if (isinstance(validator, CompoundValidator) and
+                        isinstance(val, dict)):
 
                     # Update compound objects recursively
                     # plotly_obj[key].update(val)
