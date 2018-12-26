@@ -306,13 +306,13 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
         config = dict(bogus=42)
 
         def get_html():
-            return self._read_html(plotly.offline.plot(fig, config=config,
-                                                           auto_open=False))
-        if sys.version_info > (3, 3):
-            with self.assertWarnsRegex(UserWarning, "'bogus'"):
-                html = get_html()
-        else:
-            html = get_html()
+            return self._read_html(plotly.offline.plot(
+                fig, config=config, auto_open=False))
+
+        # Attempts to validate warning ran into
+        # https://bugs.python.org/issue29620, don't check warning for now.
+        # Revisit when we move to pytest
+        html = get_html()
 
         self.assertIn('"bogus": 42', html)
 
