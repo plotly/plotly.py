@@ -157,7 +157,7 @@ def _get_jconfig(config):
         bad_config = [k for k in config if k not in configkeys]
         if bad_config:
             warnings.warn("""
-Unrecognised config options supplied: {bad_config}"""
+Unrecognized config options supplied: {bad_config}"""
                           .format(bad_config=bad_config))
 
         clean_config = config
