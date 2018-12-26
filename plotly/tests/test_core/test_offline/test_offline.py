@@ -12,6 +12,8 @@ from requests.compat import json as _json
 import plotly
 import json
 
+import sys
+
 
 fig = {
     'data': [
@@ -298,6 +300,20 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
         self.assertIn('"linkText": "Plotly rocks!"', html)
         self.assertIn('"showLink": true', html)
         self.assertIn('"editable": true', html)
+
+    def test_config_bad_options(self):
+        config = dict(bogus=42)
+
+        def get_html():
+            return self._read_html(plotly.offline.plot(fig, config=config,
+                                                           auto_open=False))
+        if sys.version_info > (3, 3):
+            with self.assertWarnsRegex(UserWarning, "'bogus'"):
+                html = get_html()
+        else:
+            html = get_html()
+
+        self.assertIn('"bogus": 42', html)
 
     def test_plotlyjs_version(self):
         with open('js/package.json', 'rt') as f:

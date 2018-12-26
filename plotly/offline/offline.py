@@ -114,9 +114,6 @@ def _build_mathjax_script(url):
 
 
 def _get_jconfig(config):
-    # TODO: The get_config 'source of truth' should
-    # really be somewhere other than plotly.plotly
-    config = config if config else plotly.plotly.get_config()
 
     configkeys = (
         'staticPlot',
@@ -152,7 +149,21 @@ def _get_jconfig(config):
         'locales',
     )
 
-    clean_config = dict((k, config[k]) for k in configkeys if k in config)
+    if config and isinstance(config, dict):
+        # Warn user on unrecognised config options.  We make this a warning
+        # rather than an error since we don't have code generation logic in
+        # place yet to guarantee that the config options in plotly.py are up
+        # to date
+        bad_config = [k for k in config if k not in configkeys]
+        if bad_config:
+            warnings.warn("""
+Unrecognised config options supplied: {bad_config}"""
+                          .format(bad_config=bad_config))
+
+        clean_config = config
+    else:
+        config = plotly.plotly.get_config()
+        clean_config = dict((k, config[k]) for k in configkeys if k in config)
 
     # TODO: The get_config 'source of truth' should
     # really be somewhere other than plotly.plotly
