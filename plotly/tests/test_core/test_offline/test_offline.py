@@ -12,8 +12,6 @@ from requests.compat import json as _json
 import plotly
 import json
 
-import sys
-
 
 fig = {
     'data': [
