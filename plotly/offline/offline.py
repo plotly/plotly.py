@@ -153,7 +153,7 @@ def _get_jconfig(config):
     )
 
     if config and isinstance(config, dict):
-        # Warn user on unrecognised config options.  We make this a warning
+        # Warn user on unrecognized config options.  We make this a warning
         # rather than an error since we don't have code generation logic in
         # place yet to guarantee that the config options in plotly.py are up
         # to date
