@@ -431,6 +431,8 @@ class PlotlyNode:
         elif self.plotly_name.endswith('src') and self.datatype == 'string':
             validator_base = (f"_plotly_utils.basevalidators."
                               f"SrcValidator")
+        elif self.plotly_name == 'title' and self.datatype == 'compound':
+            validator_base = "_plotly_utils.basevalidators.TitleValidator"
         else:
             datatype_title_case = self.datatype.title().replace('_', '')
             validator_base = (f"_plotly_utils.basevalidators."
@@ -565,7 +567,7 @@ class PlotlyNode:
         bool
         """
         return (isinstance(self.node_data, dict_like) and
-                not self.is_simple and
+                not self.is_simple and not self.is_mapped and
                 self.plotly_name not in ('items', 'impliedEdits', 'transforms'))
 
     @property
@@ -629,7 +631,22 @@ class PlotlyNode:
         -------
         bool
         """
-        return self.is_simple or self.is_compound or self.is_array
+        return (self.is_simple
+                or self.is_compound
+                or self.is_array
+                or self.is_mapped)
+
+    @property
+    def is_mapped(self) -> bool:
+        """
+        Node represents a mapping from a deprecated property to a
+        normal property
+
+        Returns
+        -------
+        bool
+        """
+        return False
 
     # Node path
     # ---------
@@ -798,6 +815,29 @@ class PlotlyNode:
                         n.parent_path_parts != ('layout', 'template', 'data')):
 
                     nodes.append(ElementDefaultsNode(n, self.plotly_schema))
+            elif n.is_compound and n.plotly_name == 'title':
+                nodes.append(n)
+
+                # Remap deprecated title properties
+                deprecated_data = n.parent.node_data.get('_deprecated', {})
+                deprecated_title_prop_names = [
+                    p for p in deprecated_data
+                    if p.startswith('title') and p != 'title']
+                for prop_name in deprecated_title_prop_names:
+
+                    mapped_prop_name = prop_name.replace('title', '')
+
+                    mapped_prop_node = [
+                        title_prop for title_prop in n.child_datatypes
+                        if title_prop.plotly_name == mapped_prop_name][0]
+
+                    prop_parent = n.parent
+
+                    legacy_node = MappedPropNode(
+                        mapped_prop_node, prop_parent,
+                        prop_name, self.plotly_schema)
+
+                    nodes.append(legacy_node)
 
             elif n.is_datatype:
                 nodes.append(n)
@@ -1177,3 +1217,71 @@ of {array_property_path}"""
     @property
     def name_datatype_class(self):
         return self.element_node.name_datatype_class
+
+
+class MappedPropNode(PlotlyNode):
+
+    def __init__(self, mapped_prop_node, parent,
+                 prop_name, plotly_schema):
+        """
+        Create node that represents a legacy title property.
+        e.g. layout.titlefont.  These properties are now subproperties under
+        the sibling `title` property. e.g. layout.title.font.
+
+        Parameters
+        ----------
+        title_node: PlotlyNode
+        prop_name: str
+            The name of the propery (without the title prefix)
+            e.g. 'font' to represent the layout.titlefont property.
+        """
+        node_path = parent.node_path + (prop_name,)
+        super().__init__(plotly_schema,
+                         node_path=node_path,
+                         parent=parent)
+
+        self.mapped_prop_node = mapped_prop_node
+        self.prop_name = prop_name
+
+    @property
+    def node_data(self):
+        return {}
+
+    @property
+    def description(self):
+        res = f"""\
+Deprecated: Please use {self.mapped_prop_node.path_str} instead.
+""" + self.mapped_prop_node.description
+        return res
+
+    @property
+    def name_base_datatype(self):
+        return self.mapped_prop_node.description
+
+    @property
+    def root_name(self):
+        return self.parent.root_name
+
+    @property
+    def plotly_name(self):
+        return self.prop_name
+
+    @property
+    def name_datatype_class(self):
+        return self.mapped_prop_node.name_datatype_class
+
+    @property
+    def is_mapped(self):
+        return True
+
+    @property
+    def datatype(self):
+        return self.mapped_prop_node.datatype
+
+    def get_validator_instance(self):
+        return self.mapped_prop_node.get_validator_instance()
+
+    @property
+    def relative_path(self):
+        return (self.mapped_prop_node.parent.plotly_name,
+                self.mapped_prop_node.plotly_name)

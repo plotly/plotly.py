@@ -5,6 +5,7 @@ from ._xsrc import XsrcValidator
 from ._xaxis import XAxisValidator
 from ._x import XValidator
 from ._visible import VisibleValidator
+from ._uirevision import UirevisionValidator
 from ._uid import UidValidator
 from ._stream import StreamValidator
 from ._showlegend import ShowlegendValidator

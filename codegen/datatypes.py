@@ -115,6 +115,8 @@ class {datatype_class}({node.name_base_datatype}):\n""")
         elif subtype_node.is_compound:
             prop_type = (f"plotly.graph_objs{node.dotpath_str}." +
                          f"{subtype_node.name_datatype_class}")
+        elif subtype_node.is_mapped:
+            prop_type = ''
         else:
             prop_type = get_typing_type(
                 subtype_node.datatype, subtype_node.is_array_ok)
@@ -196,6 +198,13 @@ class {datatype_class}({node.name_base_datatype}):\n""")
     buffer.write(f"""
         \"\"\"""")
 
+    mapped_nodes = [n for n in subtype_nodes if n.is_mapped]
+    mapped_properties = {n.plotly_name: n.relative_path for n in mapped_nodes}
+    if mapped_properties:
+        buffer.write(f"""
+
+    _mapped_properties = {repr(mapped_properties)}""")
+
     # ### Constructor ###
     buffer.write(f"""
     def __init__(self""")
@@ -245,9 +254,10 @@ an instance of {class_name}\"\"\")
         # Initialize validators
         # ---------------------""")
     for subtype_node in subtype_nodes:
-        sub_name = subtype_node.name_property
-        sub_validator = subtype_node.name_validator_class
-        buffer.write(f"""
+        if not subtype_node.is_mapped:
+            sub_name = subtype_node.name_property
+            sub_validator = subtype_node.name_validator_class
+            buffer.write(f"""
         self._validators['{sub_name}'] = v_{undercase}.{sub_validator}()""")
 
     buffer.write(f"""
@@ -256,10 +266,13 @@ an instance of {class_name}\"\"\")
         # ----------------------------------""")
     for subtype_node in subtype_nodes:
         name_prop = subtype_node.name_property
-        if name_prop == 'template':
+        if name_prop == 'template' or subtype_node.is_mapped:
             # Special handling for layout.template to avoid infinite
             # recursion.  Only initialize layout.template object if non-None
-            # value specified
+            # value specified.
+            #
+            # Same special handling for mapped nodes (e.g. layout.titlefont)
+            # to keep them for overriding mapped property with None
             buffer.write(f"""
         _v = arg.pop('{name_prop}', None)
         _v = {name_prop} if {name_prop} is not None else _v

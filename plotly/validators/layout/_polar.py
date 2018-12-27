@@ -51,6 +51,11 @@ class PolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 be spanned in the counterclockwise direction
                 with 0 corresponding to rightmost limit of the
                 polar subplot.
+            uirevision
+                Controls persistence of user-driven changes in
+                axis attributes, if not overridden in the
+                individual axes. Defaults to
+                `layout.uirevision`.
 """
             ),
             **kwargs

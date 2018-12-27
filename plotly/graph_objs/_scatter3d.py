@@ -1109,16 +1109,37 @@ class Scatter3d(BaseTraceType):
                 ['top left', 'top center', 'top right', 'middle left',
                 'middle center', 'middle right', 'bottom left', 'bottom
                 center', 'bottom right']
+          - A tuple, list, or one-dimensional numpy array of the above
 
         Returns
         -------
-        Any
+        Any|numpy.ndarray
         """
         return self['textposition']
 
     @textposition.setter
     def textposition(self, val):
         self['textposition'] = val
+
+    # textpositionsrc
+    # ---------------
+    @property
+    def textpositionsrc(self):
+        """
+        Sets the source reference on plot.ly for  textposition .
+    
+        The 'textpositionsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['textpositionsrc']
+
+    @textpositionsrc.setter
+    def textpositionsrc(self, val):
+        self['textpositionsrc'] = val
 
     # textsrc
     # -------
@@ -1158,6 +1179,39 @@ class Scatter3d(BaseTraceType):
     @uid.setter
     def uid(self, val):
         self['uid'] = val
+
+    # uirevision
+    # ----------
+    @property
+    def uirevision(self):
+        """
+        Controls persistence of some user-driven changes to the trace:
+        `constraintrange` in `parcoords` traces, as well as some
+        `editable: true` modifications such as `name` and
+        `colorbar.title`. Defaults to `layout.uirevision`. Note that
+        other user-driven trace attribute changes are controlled by
+        `layout` attributes: `trace.visible` is controlled by
+        `layout.legend.uirevision`, `selectedpoints` is controlled by
+        `layout.selectionrevision`, and `colorbar.(x|y)` (accessible
+        with `config: {editable: true}`) is controlled by
+        `layout.editrevision`. Trace changes are tracked by `uid`,
+        which only falls back on trace index if no `uid` is provided.
+        So if your app can add/remove traces before the end of the
+        `data` array, such that the same trace has a different index,
+        you can still preserve user-driven changes if you give each
+        trace a `uid` that stays with it as it moves.
+    
+        The 'uirevision' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['uirevision']
+
+    @uirevision.setter
+    def uirevision(self, val):
+        self['uirevision'] = val
 
     # visible
     # -------
@@ -1499,10 +1553,31 @@ class Scatter3d(BaseTraceType):
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.
+        textpositionsrc
+            Sets the source reference on plot.ly for  textposition
+            .
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -1560,8 +1635,10 @@ class Scatter3d(BaseTraceType):
         text=None,
         textfont=None,
         textposition=None,
+        textpositionsrc=None,
         textsrc=None,
         uid=None,
+        uirevision=None,
         visible=None,
         x=None,
         xcalendar=None,
@@ -1697,10 +1774,31 @@ class Scatter3d(BaseTraceType):
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.
+        textpositionsrc
+            Sets the source reference on plot.ly for  textposition
+            .
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -1788,8 +1886,11 @@ an instance of plotly.graph_objs.Scatter3d"""
         self._validators['text'] = v_scatter3d.TextValidator()
         self._validators['textfont'] = v_scatter3d.TextfontValidator()
         self._validators['textposition'] = v_scatter3d.TextpositionValidator()
+        self._validators['textpositionsrc'
+                        ] = v_scatter3d.TextpositionsrcValidator()
         self._validators['textsrc'] = v_scatter3d.TextsrcValidator()
         self._validators['uid'] = v_scatter3d.UidValidator()
+        self._validators['uirevision'] = v_scatter3d.UirevisionValidator()
         self._validators['visible'] = v_scatter3d.VisibleValidator()
         self._validators['x'] = v_scatter3d.XValidator()
         self._validators['xcalendar'] = v_scatter3d.XcalendarValidator()
@@ -1863,10 +1964,15 @@ an instance of plotly.graph_objs.Scatter3d"""
         self['textfont'] = textfont if textfont is not None else _v
         _v = arg.pop('textposition', None)
         self['textposition'] = textposition if textposition is not None else _v
+        _v = arg.pop('textpositionsrc', None)
+        self['textpositionsrc'
+            ] = textpositionsrc if textpositionsrc is not None else _v
         _v = arg.pop('textsrc', None)
         self['textsrc'] = textsrc if textsrc is not None else _v
         _v = arg.pop('uid', None)
         self['uid'] = uid if uid is not None else _v
+        _v = arg.pop('uirevision', None)
+        self['uirevision'] = uirevision if uirevision is not None else _v
         _v = arg.pop('visible', None)
         self['visible'] = visible if visible is not None else _v
         _v = arg.pop('x', None)

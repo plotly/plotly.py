@@ -4,8 +4,6 @@ from ._y import YValidator
 from ._xpad import XpadValidator
 from ._xanchor import XanchorValidator
 from ._x import XValidator
-from ._titleside import TitlesideValidator
-from ._titlefont import TitlefontValidator
 from ._title import TitleValidator
 from ._tickwidth import TickwidthValidator
 from ._tickvalssrc import TickvalssrcValidator

@@ -82,6 +82,10 @@ class GeoValidator(_plotly_utils.basevalidators.CompoundValidator):
             subunitwidth
                 Sets the stroke width (in px) of the subunits
                 boundaries.
+            uirevision
+                Controls persistence of user-driven changes in
+                the view (projection and center). Defaults to
+                `layout.uirevision`.
 """
             ),
             **kwargs

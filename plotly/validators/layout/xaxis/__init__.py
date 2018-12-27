@@ -2,8 +2,8 @@ from ._zerolinewidth import ZerolinewidthValidator
 from ._zerolinecolor import ZerolinecolorValidator
 from ._zeroline import ZerolineValidator
 from ._visible import VisibleValidator
+from ._uirevision import UirevisionValidator
 from ._type import TypeValidator
-from ._titlefont import TitlefontValidator
 from ._title import TitleValidator
 from ._tickwidth import TickwidthValidator
 from ._tickvalssrc import TickvalssrcValidator
@@ -11,6 +11,7 @@ from ._tickvals import TickvalsValidator
 from ._ticktextsrc import TicktextsrcValidator
 from ._ticktext import TicktextValidator
 from ._ticksuffix import TicksuffixValidator
+from ._tickson import TicksonValidator
 from ._ticks import TicksValidator
 from ._tickprefix import TickprefixValidator
 from ._tickmode import TickmodeValidator
@@ -35,6 +36,7 @@ from ._showspikes import ShowspikesValidator
 from ._showline import ShowlineValidator
 from ._showgrid import ShowgridValidator
 from ._showexponent import ShowexponentValidator
+from ._showdividers import ShowdividersValidator
 from ._separatethousands import SeparatethousandsValidator
 from ._scaleratio import ScaleratioValidator
 from ._scaleanchor import ScaleanchorValidator
@@ -56,6 +58,8 @@ from ._fixedrange import FixedrangeValidator
 from ._exponentformat import ExponentformatValidator
 from ._dtick import DtickValidator
 from ._domain import DomainValidator
+from ._dividerwidth import DividerwidthValidator
+from ._dividercolor import DividercolorValidator
 from ._constraintoward import ConstraintowardValidator
 from ._constrain import ConstrainValidator
 from ._color import ColorValidator

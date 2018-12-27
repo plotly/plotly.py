@@ -50,7 +50,7 @@ class FigureTest(TestCase):
     def test_skip_invalid_property_name(self):
         fig = go.Figure(
             data=[{'type': 'bar', 'bogus': 123}],
-            layout={'bogus': 23, 'title': 'Figure title'},
+            layout={'bogus': 23, 'title': {'text': 'Figure title'}},
             frames=[{
                 'data': [{'type': 'bar', 'bogus': 123}],
                 'layout': {'bogus': 23, 'title': 'Figure title'},
@@ -66,11 +66,11 @@ class FigureTest(TestCase):
         self.assertEqual(fig_dict['data'],
                          [{'type': 'bar'}])
         self.assertEqual(fig_dict['layout'],
-                         {'title': 'Figure title'})
+                         {'title': {'text': 'Figure title'}})
         self.assertEqual(fig_dict['frames'],
                          [{
                              'data': [{'type': 'bar'}],
-                             'layout':  {'title': 'Figure title'}
+                             'layout':  {'title': {'text': 'Figure title'}}
                          }])
 
     def test_raises_invalid_property_value(self):
@@ -104,9 +104,10 @@ class FigureTest(TestCase):
         self.assertEqual(fig_dict['data'],
                          [{'type': 'bar'}])
         self.assertEqual(fig_dict['layout'],
-                         {'title': 'Figure title'})
+                         {'title': {'text': 'Figure title'}})
         self.assertEqual(fig_dict['frames'],
                          [{
                              'data': [{'type': 'bar'}],
-                             'layout':  {'title': 'Figure title'}
+                             'layout':
+                                 {'title': {'text': 'Figure title'}}
                          }])

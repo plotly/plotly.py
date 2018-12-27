@@ -19,14 +19,14 @@ class TestRelayoutMessage(TestCase):
         self.figure._send_relayout_msg = MagicMock()
 
     def test_property_assignment_toplevel(self):
-        self.figure.layout.title = 'hello'
+        self.figure.layout.title.text = 'hello'
         self.figure._send_relayout_msg.assert_called_once_with(
-            {'title': 'hello'})
+            {'title.text': 'hello'})
 
     def test_property_assignment_nested(self):
-        self.figure.layout.xaxis.titlefont.family = 'courier'
+        self.figure.layout.xaxis.title.font.family = 'courier'
         self.figure._send_relayout_msg.assert_called_once_with(
-            {'xaxis.titlefont.family': 'courier'})
+            {'xaxis.title.font.family': 'courier'})
 
     def test_property_assignment_nested_subplot2(self):
         # Initialize xaxis2
@@ -36,9 +36,9 @@ class TestRelayoutMessage(TestCase):
 
         # Reset mock and perform property assignment
         self.figure._send_relayout_msg = MagicMock()
-        self.figure.layout.xaxis2.titlefont.family = 'courier'
+        self.figure.layout.xaxis2.title.font.family = 'courier'
         self.figure._send_relayout_msg.assert_called_once_with(
-            {'xaxis2.titlefont.family': 'courier'})
+            {'xaxis2.title.font.family': 'courier'})
 
     def test_property_assignment_nested_array(self):
 
@@ -62,14 +62,15 @@ class TestRelayoutMessage(TestCase):
     def test_property_assignment_template(self):
         # Initialize template object
         self.figure.layout.template = {'layout': {
-            'xaxis': {'title': 'x-label'}}}
+            'xaxis': {'title': {'text': 'x-label'}}}}
         self.figure._send_relayout_msg.assert_called_with(
-            {'template': {'layout': {'xaxis': {'title': 'x-label'}}}})
+            {'template':
+                 {'layout': {'xaxis': {'title': {'text': 'x-label'}}}}})
 
         # template layout property
-        self.figure.layout.template.layout.title = 'Template Title'
+        self.figure.layout.template.layout.title.text = 'Template Title'
         self.figure._send_relayout_msg.assert_called_with(
-            {'template.layout.title': 'Template Title'})
+            {'template.layout.title.text': 'Template Title'})
 
         # template add trace
         self.figure.layout.template.data = {'bar': [
@@ -97,9 +98,9 @@ class TestRelayoutMessage(TestCase):
             {'title': 'hello'})
 
     def test_plotly_relayout_nested(self):
-        self.figure.plotly_relayout({'xaxis.titlefont.family': 'courier'})
+        self.figure.plotly_relayout({'xaxis.title.font.family': 'courier'})
         self.figure._send_relayout_msg.assert_called_once_with(
-            {'xaxis.titlefont.family': 'courier'})
+            {'xaxis.title.font.family': 'courier'})
 
     def test_plotly_relayout_nested_subplot2(self):
         # Initialize xaxis2
@@ -109,9 +110,9 @@ class TestRelayoutMessage(TestCase):
 
         # Reset mock and perform property assignment
         self.figure._send_relayout_msg = MagicMock()
-        self.figure.plotly_relayout({'xaxis2.titlefont.family': 'courier'})
+        self.figure.plotly_relayout({'xaxis2.title.font.family': 'courier'})
         self.figure._send_relayout_msg.assert_called_once_with(
-            {'xaxis2.titlefont.family': 'courier'})
+            {'xaxis2.title.font.family': 'courier'})
 
     def test_plotly_relayout_nested_array(self):
 

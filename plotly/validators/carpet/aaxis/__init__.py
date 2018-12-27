@@ -1,6 +1,4 @@
 from ._type import TypeValidator
-from ._titleoffset import TitleoffsetValidator
-from ._titlefont import TitlefontValidator
 from ._title import TitleValidator
 from ._tickvalssrc import TickvalssrcValidator
 from ._tickvals import TickvalsValidator

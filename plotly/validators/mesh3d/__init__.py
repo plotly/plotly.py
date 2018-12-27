@@ -10,6 +10,7 @@ from ._x import XValidator
 from ._visible import VisibleValidator
 from ._vertexcolorsrc import VertexcolorsrcValidator
 from ._vertexcolor import VertexcolorValidator
+from ._uirevision import UirevisionValidator
 from ._uid import UidValidator
 from ._textsrc import TextsrcValidator
 from ._text import TextValidator

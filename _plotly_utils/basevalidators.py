@@ -2107,6 +2107,23 @@ class CompoundValidator(BaseValidator):
         return v
 
 
+class TitleValidator(CompoundValidator):
+    """
+    This is a special validator to allow compound title properties
+    (e.g. layout.title, layout.xaxis.title, etc.) to be set as strings
+    or numbers.  These strings are mapped to the 'text' property of the
+    compound validator.
+    """
+    def __init__(self, *args, **kwargs):
+        super(TitleValidator, self).__init__(*args, **kwargs)
+
+    def validate_coerce(self, v, skip_invalid=False):
+        if isinstance(v, string_types + (int, float)):
+            v = {'text': v}
+        return super(TitleValidator, self).validate_coerce(
+            v, skip_invalid=skip_invalid)
+
+
 class CompoundArrayValidator(BaseValidator):
 
     def __init__(self, plotly_name, parent_name, data_class_str, data_docs,

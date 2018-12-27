@@ -43,6 +43,29 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
             hoverlabel
                 plotly.graph_objs.pie.Hoverlabel instance or
                 dict with compatible properties
+            hovertemplate
+                Template string used for rendering the
+                information that appear on hover box. Note that
+                this will override `hoverinfo`. Variables are
+                inserted using %{variable}, for example "y:
+                %{y}". Numbers are formatted using d3-format's
+                syntax %{variable:d3-format}, for example
+                "Price: %{y:$.2f}". See https://github.com/d3/d
+                3-format/blob/master/README.md#locale_format
+                for details on the formatting syntax. The
+                variables available in `hovertemplate` are the
+                ones emitted as event data described at this
+                link https://plot.ly/javascript/plotlyjs-
+                events/#event-data. Additionally, every
+                attributes that can be specified per-point (the
+                ones that are `arrayOk: true`) are available.
+                variables `label`, `color`, `value`, `percent`
+                and `text`. Anything contained in tag `<extra>`
+                is displayed in the secondary box, for example
+                "<extra>{fullData.name}</extra>".
+            hovertemplatesrc
+                Sets the source reference on plot.ly for
+                hovertemplate .
             hovertext
                 Sets hover text elements associated with each
                 sector. If a single string, the same string
@@ -148,14 +171,43 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  text
                 .
             title
-                Sets the title of the pie chart. If it is
-                empty, no title is displayed.
+                plotly.graph_objs.pie.Title instance or dict
+                with compatible properties
             titlefont
-                Sets the font used for `title`.
+                Deprecated: Please use pie.title.font instead.
+                Sets the font used for `title`. Note that the
+                title's font used to be set by the now
+                deprecated `titlefont` attribute.
             titleposition
-                Specifies the location of the `title`.
+                Deprecated: Please use pie.title.position
+                instead. Specifies the location of the `title`.
+                Note that the title's position used to be set
+                by the now deprecated `titleposition`
+                attribute.
             uid
 
+            uirevision
+                Controls persistence of some user-driven
+                changes to the trace: `constraintrange` in
+                `parcoords` traces, as well as some `editable:
+                true` modifications such as `name` and
+                `colorbar.title`. Defaults to
+                `layout.uirevision`. Note that other user-
+                driven trace attribute changes are controlled
+                by `layout` attributes: `trace.visible` is
+                controlled by `layout.legend.uirevision`,
+                `selectedpoints` is controlled by
+                `layout.selectionrevision`, and
+                `colorbar.(x|y)` (accessible with `config:
+                {editable: true}`) is controlled by
+                `layout.editrevision`. Trace changes are
+                tracked by `uid`, which only falls back on
+                trace index if no `uid` is provided. So if your
+                app can add/remove traces before the end of the
+                `data` array, such that the same trace has a
+                different index, you can still preserve user-
+                driven changes if you give each trace a `uid`
+                that stays with it as it moves.
             values
                 Sets the values of the sectors of this pie
                 chart. If omitted, we count occurrences of each

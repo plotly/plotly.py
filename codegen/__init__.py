@@ -187,6 +187,8 @@ def perform_codegen():
     # ### Write __init__.py files for each validator package ###
     path_to_validator_import_info = {}
     for node in all_datatype_nodes:
+        if node.is_mapped:
+            continue
         key = node.parent_path_parts
         path_to_validator_import_info.setdefault(key, []).append(
             (f"._{node.name_property}", node.name_validator_class)

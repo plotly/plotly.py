@@ -6,6 +6,7 @@ from ._z import ZValidator
 from ._yaxis import YAxisValidator
 from ._xaxis import XAxisValidator
 from ._visible import VisibleValidator
+from ._uirevision import UirevisionValidator
 from ._uid import UidValidator
 from ._transpose import TransposeValidator
 from ._textsrc import TextsrcValidator

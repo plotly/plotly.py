@@ -3,7 +3,6 @@ from ._zerolinecolor import ZerolinecolorValidator
 from ._zeroline import ZerolineValidator
 from ._visible import VisibleValidator
 from ._type import TypeValidator
-from ._titlefont import TitlefontValidator
 from ._title import TitleValidator
 from ._tickwidth import TickwidthValidator
 from ._tickvalssrc import TickvalssrcValidator

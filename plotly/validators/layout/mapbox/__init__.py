@@ -1,4 +1,5 @@
 from ._zoom import ZoomValidator
+from ._uirevision import UirevisionValidator
 from ._style import StyleValidator
 from ._pitch import PitchValidator
 from ._layerdefaults import LayerValidator

@@ -7,6 +7,8 @@ from ._source import SourceValidator
 from ._line import LineValidator
 from ._labelsrc import LabelsrcValidator
 from ._label import LabelValidator
+from ._hovertemplatesrc import HovertemplatesrcValidator
+from ._hovertemplate import HovertemplateValidator
 from ._hoverlabel import HoverlabelValidator
 from ._hoverinfo import HoverinfoValidator
 from ._colorsrc import ColorsrcValidator

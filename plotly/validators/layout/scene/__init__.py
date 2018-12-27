@@ -1,6 +1,7 @@
 from ._zaxis import ZAxisValidator
 from ._yaxis import YAxisValidator
 from ._xaxis import XAxisValidator
+from ._uirevision import UirevisionValidator
 from ._hovermode import HovermodeValidator
 from ._dragmode import DragmodeValidator
 from ._domain import DomainValidator

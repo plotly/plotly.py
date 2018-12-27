@@ -1,6 +1,7 @@
 from ._visible import VisibleValidator
 from ._valuesuffix import ValuesuffixValidator
 from ._valueformat import ValueformatValidator
+from ._uirevision import UirevisionValidator
 from ._uid import UidValidator
 from ._textfont import TextfontValidator
 from ._stream import StreamValidator

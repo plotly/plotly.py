@@ -252,7 +252,6 @@ class BaseFigure(object):
         # ### Check for default template ###
         self._initialize_layout_template()
 
-
     # Magic Methods
     # -------------
     def __reduce__(self):
@@ -2249,7 +2248,8 @@ Invalid property path '{key_path_str}' for layout
                 val = update_obj[key]
                 validator = plotly_obj._get_prop_validator(key)
 
-                if isinstance(validator, CompoundValidator):
+                if (isinstance(validator, CompoundValidator) and
+                        isinstance(val, dict)):
 
                     # Update compound objects recursively
                     # plotly_obj[key].update(val)
@@ -2309,6 +2309,11 @@ class BasePlotlyType(object):
     BasePlotlyType is the base class for all objects in the trace, layout,
     and frame object hierarchies
     """
+
+    # ### Mapped (deprecated) properties ###
+    # dict for deprecated property name (e.g. 'titlefont') to tuple
+    # of relative path to new property (e.g. ('title', 'font')
+    _mapped_properties = {}
 
     def __init__(self, plotly_name, **kwargs):
         """
@@ -2683,6 +2688,11 @@ class BasePlotlyType(object):
         # Convert into a property tuple
         prop = BaseFigure._str_to_dict_path(prop)
 
+        # Handle remapping
+        # ----------------
+        if prop and prop[0] in self._mapped_properties:
+            prop = self._mapped_properties[prop[0]] + prop[1:]
+
         # Handle scalar case
         # ------------------
         # e.g. ('foo',)
@@ -2736,10 +2746,14 @@ class BasePlotlyType(object):
         -------
         bool
         """
-        prop_tuple = BaseFigure._str_to_dict_path(prop)
+        prop = BaseFigure._str_to_dict_path(prop)
+
+        # Handle remapping
+        if prop and prop[0] in self._mapped_properties:
+            prop = self._mapped_properties[prop[0]] + prop[1:]
 
         obj = self
-        for p in prop_tuple:
+        for p in prop:
             if isinstance(p, int):
                 if isinstance(obj, tuple) and 0 <= p < len(obj):
                     obj = obj[p]
@@ -2780,6 +2794,11 @@ class BasePlotlyType(object):
         # -----------------
         if len(prop) == 0:
             raise KeyError(orig_prop)
+
+        # Handle remapping
+        # ----------------
+        if prop[0] in self._mapped_properties:
+            prop = self._mapped_properties[prop[0]] + prop[1:]
 
         # Handle scalar case
         # ------------------
@@ -2844,7 +2863,10 @@ class BasePlotlyType(object):
         """
         Return an iterator over the object's properties
         """
-        return iter(self._validators.keys())
+        res = list(self._validators.keys())
+        for prop in self._mapped_properties:
+            res.append(prop)
+        return iter(res)
 
     def __eq__(self, other):
         """
@@ -3135,8 +3157,9 @@ class BasePlotlyType(object):
         # Reparent
         # --------
         # ### Reparent new value and clear orphan data ###
-        val._parent = self
-        val._orphan_props.clear()
+        if isinstance(val, BasePlotlyType):
+            val._parent = self
+            val._orphan_props.clear()
 
         # ### Unparent old value and update orphan data ###
         if curr_val is not None:

@@ -10,8 +10,10 @@ class DragmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop('edit_type', 'modebar'),
             role=kwargs.pop('role', 'info'),
             values=kwargs.pop(
-                'values',
-                ['zoom', 'pan', 'select', 'lasso', 'orbit', 'turntable']
+                'values', [
+                    'zoom', 'pan', 'select', 'lasso', 'orbit', 'turntable',
+                    False
+                ]
             ),
             **kwargs
         )

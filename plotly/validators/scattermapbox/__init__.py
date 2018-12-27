@@ -1,5 +1,6 @@
 from ._visible import VisibleValidator
 from ._unselected import UnselectedValidator
+from ._uirevision import UirevisionValidator
 from ._uid import UidValidator
 from ._textsrc import TextsrcValidator
 from ._textposition import TextpositionValidator

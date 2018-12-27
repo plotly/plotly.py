@@ -286,6 +286,87 @@ class XAxis(BaseLayoutHierarchyType):
     def constraintoward(self, val):
         self['constraintoward'] = val
 
+    # dividercolor
+    # ------------
+    @property
+    def dividercolor(self):
+        """
+        Sets the color of the dividers Only has an effect on
+        "multicategory" axes.
+    
+        The 'dividercolor' property is a color and may be specified as:
+          - A hex string (e.g. '#ff0000')
+          - An rgb/rgba string (e.g. 'rgb(255,0,0)')
+          - An hsl/hsla string (e.g. 'hsl(0,100%,50%)')
+          - An hsv/hsva string (e.g. 'hsv(0,100%,100%)')
+          - A named CSS color:
+                aliceblue, antiquewhite, aqua, aquamarine, azure,
+                beige, bisque, black, blanchedalmond, blue,
+                blueviolet, brown, burlywood, cadetblue,
+                chartreuse, chocolate, coral, cornflowerblue,
+                cornsilk, crimson, cyan, darkblue, darkcyan,
+                darkgoldenrod, darkgray, darkgrey, darkgreen,
+                darkkhaki, darkmagenta, darkolivegreen, darkorange,
+                darkorchid, darkred, darksalmon, darkseagreen,
+                darkslateblue, darkslategray, darkslategrey,
+                darkturquoise, darkviolet, deeppink, deepskyblue,
+                dimgray, dimgrey, dodgerblue, firebrick,
+                floralwhite, forestgreen, fuchsia, gainsboro,
+                ghostwhite, gold, goldenrod, gray, grey, green,
+                greenyellow, honeydew, hotpink, indianred, indigo,
+                ivory, khaki, lavender, lavenderblush, lawngreen,
+                lemonchiffon, lightblue, lightcoral, lightcyan,
+                lightgoldenrodyellow, lightgray, lightgrey,
+                lightgreen, lightpink, lightsalmon, lightseagreen,
+                lightskyblue, lightslategray, lightslategrey,
+                lightsteelblue, lightyellow, lime, limegreen,
+                linen, magenta, maroon, mediumaquamarine,
+                mediumblue, mediumorchid, mediumpurple,
+                mediumseagreen, mediumslateblue, mediumspringgreen,
+                mediumturquoise, mediumvioletred, midnightblue,
+                mintcream, mistyrose, moccasin, navajowhite, navy,
+                oldlace, olive, olivedrab, orange, orangered,
+                orchid, palegoldenrod, palegreen, paleturquoise,
+                palevioletred, papayawhip, peachpuff, peru, pink,
+                plum, powderblue, purple, red, rosybrown,
+                royalblue, saddlebrown, salmon, sandybrown,
+                seagreen, seashell, sienna, silver, skyblue,
+                slateblue, slategray, slategrey, snow, springgreen,
+                steelblue, tan, teal, thistle, tomato, turquoise,
+                violet, wheat, white, whitesmoke, yellow,
+                yellowgreen
+
+        Returns
+        -------
+        str
+        """
+        return self['dividercolor']
+
+    @dividercolor.setter
+    def dividercolor(self, val):
+        self['dividercolor'] = val
+
+    # dividerwidth
+    # ------------
+    @property
+    def dividerwidth(self):
+        """
+        Sets the width (in px) of the dividers Only has an effect on
+        "multicategory" axes.
+    
+        The 'dividerwidth' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self['dividerwidth']
+
+    @dividerwidth.setter
+    def dividerwidth(self, val):
+        self['dividerwidth'] = val
+
     # domain
     # ------
     @property
@@ -966,6 +1047,28 @@ class XAxis(BaseLayoutHierarchyType):
     @separatethousands.setter
     def separatethousands(self, val):
         self['separatethousands'] = val
+
+    # showdividers
+    # ------------
+    @property
+    def showdividers(self):
+        """
+        Determines whether or not a dividers are drawn between the
+        category levels of this axis. Only has an effect on
+        "multicategory" axes.
+    
+        The 'showdividers' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self['showdividers']
+
+    @showdividers.setter
+    def showdividers(self, val):
+        self['showdividers'] = val
 
     # showexponent
     # ------------
@@ -1654,6 +1757,31 @@ class XAxis(BaseLayoutHierarchyType):
     def ticks(self, val):
         self['ticks'] = val
 
+    # tickson
+    # -------
+    @property
+    def tickson(self):
+        """
+        Determines where ticks and grid lines are drawn with respect to
+        their corresponding tick labels. Only has an effect for axes of
+        `type` "category" or "multicategory". When set to "boundaries",
+        ticks and grid lines are drawn half a category to the
+        left/bottom of labels.
+    
+        The 'tickson' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['labels', 'boundaries']
+
+        Returns
+        -------
+        Any
+        """
+        return self['tickson']
+
+    @tickson.setter
+    def tickson(self, val):
+        self['tickson'] = val
+
     # ticksuffix
     # ----------
     @property
@@ -1783,15 +1911,28 @@ class XAxis(BaseLayoutHierarchyType):
     @property
     def title(self):
         """
-        Sets the title of this axis.
+        The 'title' property is an instance of Title
+        that may be specified as:
+          - An instance of plotly.graph_objs.layout.xaxis.Title
+          - A dict of string/value properties that will be passed
+            to the Title constructor
     
-        The 'title' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+            Supported dict properties:
+                
+                font
+                    Sets this axis' title font. Note that the
+                    title's font used to be customized by the now
+                    deprecated `titlefont` attribute.
+                text
+                    Sets the title of this axis. Note that before
+                    the existence of `title.text`, the title's
+                    contents used to be defined as the `title`
+                    attribute itself. This behavior has been
+                    deprecated.
 
         Returns
         -------
-        str
+        plotly.graph_objs.layout.xaxis.Title
         """
         return self['title']
 
@@ -1804,13 +1945,15 @@ class XAxis(BaseLayoutHierarchyType):
     @property
     def titlefont(self):
         """
-        Sets this axis' title font.
+        Deprecated: Please use layout.xaxis.title.font instead. Sets
+        this axis' title font. Note that the title's font used to be
+        customized by the now deprecated `titlefont` attribute.
     
-        The 'titlefont' property is an instance of Titlefont
+        The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.xaxis.Titlefont
+          - An instance of plotly.graph_objs.layout.xaxis.title.Font
           - A dict of string/value properties that will be passed
-            to the Titlefont constructor
+            to the Font constructor
     
             Supported dict properties:
                 
@@ -1836,7 +1979,7 @@ class XAxis(BaseLayoutHierarchyType):
 
         Returns
         -------
-        plotly.graph_objs.layout.xaxis.Titlefont
+        
         """
         return self['titlefont']
 
@@ -1855,7 +1998,8 @@ class XAxis(BaseLayoutHierarchyType):
     
         The 'type' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                ['-', 'linear', 'log', 'date', 'category']
+                ['-', 'linear', 'log', 'date', 'category',
+                'multicategory']
 
         Returns
         -------
@@ -1866,6 +2010,27 @@ class XAxis(BaseLayoutHierarchyType):
     @type.setter
     def type(self, val):
         self['type'] = val
+
+    # uirevision
+    # ----------
+    @property
+    def uirevision(self):
+        """
+        Controls persistence of user-driven changes in axis `range`,
+        `autorange`, and `title` if in `editable: true` configuration.
+        Defaults to `layout.uirevision`.
+    
+        The 'uirevision' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['uirevision']
+
+    @uirevision.setter
+    def uirevision(self, val):
+        self['uirevision'] = val
 
     # visible
     # -------
@@ -2056,6 +2221,12 @@ class XAxis(BaseLayoutHierarchyType):
             originally specified plot area. Options are "left",
             "center" (default), and "right" for x axes, and "top",
             "middle" (default), and "bottom" for y axes.
+        dividercolor
+            Sets the color of the dividers Only has an effect on
+            "multicategory" axes.
+        dividerwidth
+            Sets the width (in px) of the dividers Only has an
+            effect on "multicategory" axes.
         domain
             Sets the domain of this axis (in plot fraction).
         dtick
@@ -2194,6 +2365,10 @@ class XAxis(BaseLayoutHierarchyType):
             horizontal.
         separatethousands
             If "true", even 4-digit integers are separated
+        showdividers
+            Determines whether or not a dividers are drawn between
+            the category levels of this axis. Only has an effect on
+            "multicategory" axes.
         showexponent
             If "all", all exponents are shown besides their
             significands. If "first", only the exponent of the
@@ -2297,6 +2472,13 @@ class XAxis(BaseLayoutHierarchyType):
             Determines whether ticks are drawn or not. If "", this
             axis' ticks are not drawn. If "outside" ("inside"),
             this axis' are drawn outside (inside) the axis lines.
+        tickson
+            Determines where ticks and grid lines are drawn with
+            respect to their corresponding tick labels. Only has an
+            effect for axes of `type` "category" or
+            "multicategory". When set to "boundaries", ticks and
+            grid lines are drawn half a category to the left/bottom
+            of labels.
         ticksuffix
             Sets a tick label suffix.
         ticktext
@@ -2314,13 +2496,21 @@ class XAxis(BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            Sets the title of this axis.
+            plotly.graph_objs.layout.xaxis.Title instance or dict
+            with compatible properties
         titlefont
-            Sets this axis' title font.
+            Deprecated: Please use layout.xaxis.title.font instead.
+            Sets this axis' title font. Note that the title's font
+            used to be customized by the now deprecated `titlefont`
+            attribute.
         type
             Sets the axis type. By default, plotly attempts to
             determined the axis type by looking into the data of
             the traces that referenced the axis in question.
+        uirevision
+            Controls persistence of user-driven changes in axis
+            `range`, `autorange`, and `title` if in `editable:
+            true` configuration. Defaults to `layout.uirevision`.
         visible
             A single toggle to hide the axis while preserving
             interaction like dragging. Default is true when a
@@ -2335,6 +2525,8 @@ class XAxis(BaseLayoutHierarchyType):
             Sets the width (in px) of the zero line.
         """
 
+    _mapped_properties = {'titlefont': ('title', 'font')}
+
     def __init__(
         self,
         arg=None,
@@ -2348,6 +2540,8 @@ class XAxis(BaseLayoutHierarchyType):
         color=None,
         constrain=None,
         constraintoward=None,
+        dividercolor=None,
+        dividerwidth=None,
         domain=None,
         dtick=None,
         exponentformat=None,
@@ -2369,6 +2563,7 @@ class XAxis(BaseLayoutHierarchyType):
         scaleanchor=None,
         scaleratio=None,
         separatethousands=None,
+        showdividers=None,
         showexponent=None,
         showgrid=None,
         showline=None,
@@ -2393,6 +2588,7 @@ class XAxis(BaseLayoutHierarchyType):
         tickmode=None,
         tickprefix=None,
         ticks=None,
+        tickson=None,
         ticksuffix=None,
         ticktext=None,
         ticktextsrc=None,
@@ -2402,6 +2598,7 @@ class XAxis(BaseLayoutHierarchyType):
         title=None,
         titlefont=None,
         type=None,
+        uirevision=None,
         visible=None,
         zeroline=None,
         zerolinecolor=None,
@@ -2471,6 +2668,12 @@ class XAxis(BaseLayoutHierarchyType):
             originally specified plot area. Options are "left",
             "center" (default), and "right" for x axes, and "top",
             "middle" (default), and "bottom" for y axes.
+        dividercolor
+            Sets the color of the dividers Only has an effect on
+            "multicategory" axes.
+        dividerwidth
+            Sets the width (in px) of the dividers Only has an
+            effect on "multicategory" axes.
         domain
             Sets the domain of this axis (in plot fraction).
         dtick
@@ -2609,6 +2812,10 @@ class XAxis(BaseLayoutHierarchyType):
             horizontal.
         separatethousands
             If "true", even 4-digit integers are separated
+        showdividers
+            Determines whether or not a dividers are drawn between
+            the category levels of this axis. Only has an effect on
+            "multicategory" axes.
         showexponent
             If "all", all exponents are shown besides their
             significands. If "first", only the exponent of the
@@ -2712,6 +2919,13 @@ class XAxis(BaseLayoutHierarchyType):
             Determines whether ticks are drawn or not. If "", this
             axis' ticks are not drawn. If "outside" ("inside"),
             this axis' are drawn outside (inside) the axis lines.
+        tickson
+            Determines where ticks and grid lines are drawn with
+            respect to their corresponding tick labels. Only has an
+            effect for axes of `type` "category" or
+            "multicategory". When set to "boundaries", ticks and
+            grid lines are drawn half a category to the left/bottom
+            of labels.
         ticksuffix
             Sets a tick label suffix.
         ticktext
@@ -2729,13 +2943,21 @@ class XAxis(BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            Sets the title of this axis.
+            plotly.graph_objs.layout.xaxis.Title instance or dict
+            with compatible properties
         titlefont
-            Sets this axis' title font.
+            Deprecated: Please use layout.xaxis.title.font instead.
+            Sets this axis' title font. Note that the title's font
+            used to be customized by the now deprecated `titlefont`
+            attribute.
         type
             Sets the axis type. By default, plotly attempts to
             determined the axis type by looking into the data of
             the traces that referenced the axis in question.
+        uirevision
+            Controls persistence of user-driven changes in axis
+            `range`, `autorange`, and `title` if in `editable:
+            true` configuration. Defaults to `layout.uirevision`.
         visible
             A single toggle to hide the axis while preserving
             interaction like dragging. Default is true when a
@@ -2793,6 +3015,8 @@ an instance of plotly.graph_objs.layout.XAxis"""
         self._validators['constrain'] = v_xaxis.ConstrainValidator()
         self._validators['constraintoward'
                         ] = v_xaxis.ConstraintowardValidator()
+        self._validators['dividercolor'] = v_xaxis.DividercolorValidator()
+        self._validators['dividerwidth'] = v_xaxis.DividerwidthValidator()
         self._validators['domain'] = v_xaxis.DomainValidator()
         self._validators['dtick'] = v_xaxis.DtickValidator()
         self._validators['exponentformat'] = v_xaxis.ExponentformatValidator()
@@ -2815,6 +3039,7 @@ an instance of plotly.graph_objs.layout.XAxis"""
         self._validators['scaleratio'] = v_xaxis.ScaleratioValidator()
         self._validators['separatethousands'
                         ] = v_xaxis.SeparatethousandsValidator()
+        self._validators['showdividers'] = v_xaxis.ShowdividersValidator()
         self._validators['showexponent'] = v_xaxis.ShowexponentValidator()
         self._validators['showgrid'] = v_xaxis.ShowgridValidator()
         self._validators['showline'] = v_xaxis.ShowlineValidator()
@@ -2841,6 +3066,7 @@ an instance of plotly.graph_objs.layout.XAxis"""
         self._validators['tickmode'] = v_xaxis.TickmodeValidator()
         self._validators['tickprefix'] = v_xaxis.TickprefixValidator()
         self._validators['ticks'] = v_xaxis.TicksValidator()
+        self._validators['tickson'] = v_xaxis.TicksonValidator()
         self._validators['ticksuffix'] = v_xaxis.TicksuffixValidator()
         self._validators['ticktext'] = v_xaxis.TicktextValidator()
         self._validators['ticktextsrc'] = v_xaxis.TicktextsrcValidator()
@@ -2848,8 +3074,8 @@ an instance of plotly.graph_objs.layout.XAxis"""
         self._validators['tickvalssrc'] = v_xaxis.TickvalssrcValidator()
         self._validators['tickwidth'] = v_xaxis.TickwidthValidator()
         self._validators['title'] = v_xaxis.TitleValidator()
-        self._validators['titlefont'] = v_xaxis.TitlefontValidator()
         self._validators['type'] = v_xaxis.TypeValidator()
+        self._validators['uirevision'] = v_xaxis.UirevisionValidator()
         self._validators['visible'] = v_xaxis.VisibleValidator()
         self._validators['zeroline'] = v_xaxis.ZerolineValidator()
         self._validators['zerolinecolor'] = v_xaxis.ZerolinecolorValidator()
@@ -2881,6 +3107,10 @@ an instance of plotly.graph_objs.layout.XAxis"""
         _v = arg.pop('constraintoward', None)
         self['constraintoward'
             ] = constraintoward if constraintoward is not None else _v
+        _v = arg.pop('dividercolor', None)
+        self['dividercolor'] = dividercolor if dividercolor is not None else _v
+        _v = arg.pop('dividerwidth', None)
+        self['dividerwidth'] = dividerwidth if dividerwidth is not None else _v
         _v = arg.pop('domain', None)
         self['domain'] = domain if domain is not None else _v
         _v = arg.pop('dtick', None)
@@ -2926,6 +3156,8 @@ an instance of plotly.graph_objs.layout.XAxis"""
         _v = arg.pop('separatethousands', None)
         self['separatethousands'
             ] = separatethousands if separatethousands is not None else _v
+        _v = arg.pop('showdividers', None)
+        self['showdividers'] = showdividers if showdividers is not None else _v
         _v = arg.pop('showexponent', None)
         self['showexponent'] = showexponent if showexponent is not None else _v
         _v = arg.pop('showgrid', None)
@@ -2981,6 +3213,8 @@ an instance of plotly.graph_objs.layout.XAxis"""
         self['tickprefix'] = tickprefix if tickprefix is not None else _v
         _v = arg.pop('ticks', None)
         self['ticks'] = ticks if ticks is not None else _v
+        _v = arg.pop('tickson', None)
+        self['tickson'] = tickson if tickson is not None else _v
         _v = arg.pop('ticksuffix', None)
         self['ticksuffix'] = ticksuffix if ticksuffix is not None else _v
         _v = arg.pop('ticktext', None)
@@ -2996,9 +3230,13 @@ an instance of plotly.graph_objs.layout.XAxis"""
         _v = arg.pop('title', None)
         self['title'] = title if title is not None else _v
         _v = arg.pop('titlefont', None)
-        self['titlefont'] = titlefont if titlefont is not None else _v
+        _v = titlefont if titlefont is not None else _v
+        if _v is not None:
+            self['titlefont'] = _v
         _v = arg.pop('type', None)
         self['type'] = type if type is not None else _v
+        _v = arg.pop('uirevision', None)
+        self['uirevision'] = uirevision if uirevision is not None else _v
         _v = arg.pop('visible', None)
         self['visible'] = visible if visible is not None else _v
         _v = arg.pop('zeroline', None)

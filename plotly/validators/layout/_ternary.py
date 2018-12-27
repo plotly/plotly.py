@@ -27,6 +27,11 @@ class TernaryValidator(_plotly_utils.basevalidators.CompoundValidator):
             sum
                 The number each triplet should sum to, and the
                 maximum range of each axis
+            uirevision
+                Controls persistence of user-driven changes in
+                axis `min` and `title`, if not overridden in
+                the individual axes. Defaults to
+                `layout.uirevision`.
 """
             ),
             **kwargs

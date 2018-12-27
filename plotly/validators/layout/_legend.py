@@ -35,6 +35,13 @@ class LegendValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (when a trace `legendgroup` is provided). if
                 "grouped+reversed", the items are displayed in
                 the opposite order as "grouped".
+            uirevision
+                Controls persistence of legend-driven changes
+                in trace and pie label visibility. Defaults to
+                `layout.uirevision`.
+            valign
+                Sets the vertical alignment of the symbols with
+                respect to their associated text.
             x
                 Sets the x position (in normalized coordinates)
                 of the legend.

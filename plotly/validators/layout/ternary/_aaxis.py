@@ -202,9 +202,19 @@ class AaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickwidth
                 Sets the tick width (in px).
             title
-                Sets the title of this axis.
+                plotly.graph_objs.layout.ternary.aaxis.Title
+                instance or dict with compatible properties
             titlefont
-                Sets this axis' title font.
+                Deprecated: Please use
+                layout.ternary.aaxis.title.font instead. Sets
+                this axis' title font. Note that the title's
+                font used to be customized by the now
+                deprecated `titlefont` attribute.
+            uirevision
+                Controls persistence of user-driven changes in
+                axis `min`, and `title` if in `editable: true`
+                configuration. Defaults to
+                `ternary<N>.uirevision`.
 """
             ),
             **kwargs

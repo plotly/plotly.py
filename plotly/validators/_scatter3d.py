@@ -131,11 +131,36 @@ class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
             textposition
                 Sets the positions of the `text` elements with
                 respects to the (x,y) coordinates.
+            textpositionsrc
+                Sets the source reference on plot.ly for
+                textposition .
             textsrc
                 Sets the source reference on plot.ly for  text
                 .
             uid
 
+            uirevision
+                Controls persistence of some user-driven
+                changes to the trace: `constraintrange` in
+                `parcoords` traces, as well as some `editable:
+                true` modifications such as `name` and
+                `colorbar.title`. Defaults to
+                `layout.uirevision`. Note that other user-
+                driven trace attribute changes are controlled
+                by `layout` attributes: `trace.visible` is
+                controlled by `layout.legend.uirevision`,
+                `selectedpoints` is controlled by
+                `layout.selectionrevision`, and
+                `colorbar.(x|y)` (accessible with `config:
+                {editable: true}`) is controlled by
+                `layout.editrevision`. Trace changes are
+                tracked by `uid`, which only falls back on
+                trace index if no `uid` is provided. So if your
+                app can add/remove traces before the end of the
+                `data` array, such that the same trace has a
+                different index, you can still preserve user-
+                driven changes if you give each trace a `uid`
+                that stays with it as it moves.
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not

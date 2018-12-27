@@ -40,6 +40,10 @@ class MapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the Mapbox map style. Either input one of
                 the default Mapbox style names or the URL to a
                 custom style or a valid Mapbox style JSON.
+            uirevision
+                Controls persistence of user-driven changes in
+                the view: `center`, `zoom`, `bearing`, `pitch`.
+                Defaults to `layout.uirevision`.
             zoom
                 Sets the zoom level of the map.
 """

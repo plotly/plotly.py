@@ -1,6 +1,6 @@
 from ._visible import VisibleValidator
+from ._uirevision import UirevisionValidator
 from ._type import TypeValidator
-from ._titlefont import TitlefontValidator
 from ._title import TitleValidator
 from ._tickwidth import TickwidthValidator
 from ._tickvalssrc import TickvalssrcValidator

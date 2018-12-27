@@ -6,7 +6,7 @@ from ._violingroupgap import ViolingroupgapValidator
 from ._violingap import ViolingapValidator
 from ._updatemenudefaults import UpdatemenuValidator
 from ._updatemenus import UpdatemenusValidator
-from ._titlefont import TitlefontValidator
+from ._uirevision import UirevisionValidator
 from ._title import TitleValidator
 from ._ternary import TernaryValidator
 from ._template import TemplateValidator
@@ -17,6 +17,7 @@ from ._showlegend import ShowlegendValidator
 from ._shapedefaults import ShapeValidator
 from ._shapes import ShapesValidator
 from ._separators import SeparatorsValidator
+from ._selectionrevision import SelectionrevisionValidator
 from ._selectdirection import SelectdirectionValidator
 from ._scene import SceneValidator
 from ._radialaxis import RadialAxisValidator
@@ -42,10 +43,12 @@ from ._grid import GridValidator
 from ._geo import GeoValidator
 from ._font import FontValidator
 from ._extendpiecolors import ExtendpiecolorsValidator
+from ._editrevision import EditrevisionValidator
 from ._dragmode import DragmodeValidator
 from ._direction import DirectionValidator
 from ._datarevision import DatarevisionValidator
 from ._colorway import ColorwayValidator
+from ._colorscale import ColorscaleValidator
 from ._clickmode import ClickmodeValidator
 from ._calendar import CalendarValidator
 from ._boxmode import BoxmodeValidator

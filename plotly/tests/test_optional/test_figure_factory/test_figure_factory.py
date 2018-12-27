@@ -165,7 +165,7 @@ class TestDistplot(NumpyTestUtilsMixin, TestCase):
                               'yaxis': {'anchor': 'free',
                                         'domain': [0.0, 1],
                                         'position': 0.0},
-                              'title': 'Dist Plot'}
+                              'title': {'text': 'Dist Plot'}}
         self.assert_fig_equal(dp['layout'], expected_dp_layout)
 
         expected_dp_data_hist_1 = {'autobinx': False,
@@ -223,7 +223,7 @@ class TestDistplot(NumpyTestUtilsMixin, TestCase):
         expected_dp_layout = {'barmode': 'overlay',
                               'hovermode': 'closest',
                               'legend': {'traceorder': 'reversed'},
-                              'title': 'Dist Plot',
+                              'title': {'text': 'Dist Plot'},
                               'xaxis': {'anchor': 'y2',
                                         'domain': [0.0, 1.0],
                                         'zeroline': False},
@@ -948,7 +948,7 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
                                            'gridcolor': 'rgb(255, 255, 255)',
                                            'showbackground': True,
                                            'zerolinecolor': 'rgb(255, 255, 255)'}},
-                       'title': 'Trisurf Plot',
+                       'title': {'text': 'Trisurf Plot'},
                        'width': 800}
         }
 
@@ -1227,7 +1227,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
                       'yaxis': 'y4'}],
             'layout': {'height': 1000,
                        'showlegend': True,
-                       'title': 'Scatterplot Matrix',
+                       'title': {'text': 'Scatterplot Matrix'},
                        'width': 1000,
                        'xaxis': {'anchor': 'y',
                                   'domain': [0.0, 0.45],
@@ -1236,19 +1236,19 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
                                   'domain': [0.55, 1.0]},
                        'xaxis3': {'anchor': 'y3',
                                   'domain': [0.0, 0.45],
-                                  'title': 'Numbers'},
+                                  'title': {'text': 'Numbers'}},
                        'xaxis4': {'anchor': 'y4',
                                   'domain': [0.55, 1.0],
                                   'showticklabels': False,
-                                  'title': 'Fruit'},
+                                  'title': {'text': 'Fruit'}},
                        'yaxis': {'anchor': 'x',
                                   'domain': [0.575, 1.0],
-                                  'title': 'Numbers'},
+                                  'title': {'text': 'Numbers'}},
                        'yaxis2': {'anchor': 'x2',
                                   'domain': [0.575, 1.0]},
                        'yaxis3': {'anchor': 'x3',
                                   'domain': [0.0, 0.425],
-                                  'title': 'Fruit'},
+                                  'title': {'text': 'Fruit'}},
                        'yaxis4': {'anchor': 'x4',
                                   'domain': [0.0, 0.425]}}
         }
@@ -1293,14 +1293,14 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
             'layout': {'barmode': 'stack',
                        'height': 1000,
                        'showlegend': True,
-                       'title': 'Scatterplot Matrix',
+                       'title': {'text': 'Scatterplot Matrix'},
                        'width': 1000,
                        'xaxis': {'anchor': 'y',
                                   'domain': [0.0, 1.0],
-                                  'title': 'Numbers'},
+                                  'title': {'text': 'Numbers'}},
                        'yaxis': {'anchor': 'x',
                                   'domain': [0.0, 1.0],
-                                  'title': 'Numbers'}}
+                                  'title': {'text': 'Numbers'}}}
         }
 
         self.assert_fig_equal(test_scatter_plot_matrix['data'][0],
@@ -1364,7 +1364,7 @@ class TestGantt(NumpyTestUtilsMixin, TestCase):
                                                    'y1': 1.2,
                                                    'yref': 'y'}],
                                        'showlegend': False,
-                                       'title': 'Gantt Chart',
+                                       'title': {'text':  'Gantt Chart'},
                                        'width': 900,
                                        'xaxis': {'rangeselector': {'buttons': [{'count': 7,
                                        'label': '1w',
@@ -1963,7 +1963,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
                        'height': 450,
                        'hovermode': 'closest',
                        'showlegend': False,
-                       'title': 'Violin and Rug Plot',
+                       'title': {'text': 'Violin and Rug Plot'},
                        'width': 600,
                        'xaxis': {'mirror': False,
                                  'range': [-0.65916964093970665,
@@ -1972,7 +1972,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
                                  'showline': False,
                                  'showticklabels': False,
                                  'ticks': '',
-                                 'title': '',
+                                 'title': {'text': ''},
                                  'zeroline': False},
                        'yaxis': {'autorange': True,
                                  'mirror': False,
@@ -1981,7 +1981,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
                                  'showticklabels': False,
                                  'ticklen': 4,
                                  'ticks': '',
-                                 'title': '',
+                                 'title': {'text': ''},
                                  'zeroline': False}}}
 
         # test both items in 'data'
@@ -2184,7 +2184,7 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
                'yanchor': 'top'},
               'paper_bgcolor': 'rgb(251, 251, 251)',
               'showlegend': False,
-              'title': '',
+              'title': {'text': ''},
               'width': 600,
               'xaxis': {'anchor': 'y',
                'domain': [0.0, 0.4925],

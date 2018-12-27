@@ -274,6 +274,27 @@ class Mapbox(BaseLayoutHierarchyType):
     def style(self, val):
         self['style'] = val
 
+    # uirevision
+    # ----------
+    @property
+    def uirevision(self):
+        """
+        Controls persistence of user-driven changes in the view:
+        `center`, `zoom`, `bearing`, `pitch`. Defaults to
+        `layout.uirevision`.
+    
+        The 'uirevision' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['uirevision']
+
+    @uirevision.setter
+    def uirevision(self, val):
+        self['uirevision'] = val
+
     # zoom
     # ----
     @property
@@ -333,6 +354,10 @@ class Mapbox(BaseLayoutHierarchyType):
             Sets the Mapbox map style. Either input one of the
             default Mapbox style names or the URL to a custom style
             or a valid Mapbox style JSON.
+        uirevision
+            Controls persistence of user-driven changes in the
+            view: `center`, `zoom`, `bearing`, `pitch`. Defaults to
+            `layout.uirevision`.
         zoom
             Sets the zoom level of the map.
         """
@@ -348,6 +373,7 @@ class Mapbox(BaseLayoutHierarchyType):
         layerdefaults=None,
         pitch=None,
         style=None,
+        uirevision=None,
         zoom=None,
         **kwargs
     ):
@@ -387,6 +413,10 @@ class Mapbox(BaseLayoutHierarchyType):
             Sets the Mapbox map style. Either input one of the
             default Mapbox style names or the URL to a custom style
             or a valid Mapbox style JSON.
+        uirevision
+            Controls persistence of user-driven changes in the
+            view: `center`, `zoom`, `bearing`, `pitch`. Defaults to
+            `layout.uirevision`.
         zoom
             Sets the zoom level of the map.
 
@@ -430,6 +460,7 @@ an instance of plotly.graph_objs.layout.Mapbox"""
         self._validators['layerdefaults'] = v_mapbox.LayerValidator()
         self._validators['pitch'] = v_mapbox.PitchValidator()
         self._validators['style'] = v_mapbox.StyleValidator()
+        self._validators['uirevision'] = v_mapbox.UirevisionValidator()
         self._validators['zoom'] = v_mapbox.ZoomValidator()
 
         # Populate data dict with properties
@@ -451,6 +482,8 @@ an instance of plotly.graph_objs.layout.Mapbox"""
         self['pitch'] = pitch if pitch is not None else _v
         _v = arg.pop('style', None)
         self['style'] = style if style is not None else _v
+        _v = arg.pop('uirevision', None)
+        self['uirevision'] = uirevision if uirevision is not None else _v
         _v = arg.pop('zoom', None)
         self['zoom'] = zoom if zoom is not None else _v
 

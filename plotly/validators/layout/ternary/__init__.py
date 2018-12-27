@@ -1,3 +1,4 @@
+from ._uirevision import UirevisionValidator
 from ._sum import SumValidator
 from ._domain import DomainValidator
 from ._caxis import CaxisValidator

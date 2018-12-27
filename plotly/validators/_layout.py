@@ -89,6 +89,9 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 flag is set as well. When the "event" flag is
                 missing, `plotly_click` and `plotly_selected`
                 events are not fired.
+            colorscale
+                plotly.graph_objs.layout.Colorscale instance or
+                dict with compatible properties
             colorway
                 Sets the default trace colors.
             datarevision
@@ -111,6 +114,11 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "select" and "lasso" apply only to scatter
                 traces with markers or text. "orbit" and
                 "turntable" apply only to 3D scenes.
+            editrevision
+                Controls persistence of user-driven changes in
+                `editable: true` configuration, other than
+                trace names and axis titles. Defaults to
+                `layout.uirevision`.
             extendpiecolors
                 If `true`, the pie slice colors (whether given
                 by `piecolorway` or inherited from `colorway`)
@@ -220,6 +228,9 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 vertical or diagonal. "h" only allows
                 horizontal selection, "v" only vertical, "d"
                 only diagonal and "any" sets no limit.
+            selectionrevision
+                Controls persistence of user-driven changes in
+                selected points from all traces.
             separators
                 Sets the decimal and thousand separators. For
                 example, *. * puts a '.' before decimals and a
@@ -288,9 +299,36 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 plotly.graph_objs.layout.Ternary instance or
                 dict with compatible properties
             title
-                Sets the plot's title.
+                plotly.graph_objs.layout.Title instance or dict
+                with compatible properties
             titlefont
-                Sets the title font.
+                Deprecated: Please use layout.title.font
+                instead. Sets the title font. Note that the
+                title's font used to be customized by the now
+                deprecated `titlefont` attribute.
+            uirevision
+                Used to allow user interactions with the plot
+                to persist after `Plotly.react` calls that are
+                unaware of these interactions. If `uirevision`
+                is omitted, or if it is given and it changed
+                from the previous `Plotly.react` call, the
+                exact new figure is used. If `uirevision` is
+                truthy and did NOT change, any attribute that
+                has been affected by user interactions and did
+                not receive a different value in the new figure
+                will keep the interaction value.
+                `layout.uirevision` attribute serves as the
+                default for `uirevision` attributes in various
+                sub-containers. For finer control you can set
+                these sub-attributes directly. For example, if
+                your app separately controls the data on the x
+                and y axes you might set
+                `xaxis.uirevision=*time*` and
+                `yaxis.uirevision=*cost*`. Then if only the y
+                data is changed, you can update
+                `yaxis.uirevision=*quantity*` and the y axis
+                range will reset but the x axis range will
+                retain any user-driven zoom.
             updatemenus
                 plotly.graph_objs.layout.Updatemenu instance or
                 dict with compatible properties

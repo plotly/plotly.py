@@ -195,7 +195,7 @@ class TestGetRole(TestCase):
             ('scatter', 'x', ('figure', 'data'), 'data'),
             ('scatter', 'marker', ('figure', 'data'), 'object'),
             ('marker', 'color', ('figure', 'data', 'scatter'), 'style'),
-            ('layout', 'title', ('figure', ), 'info'),
+            ('layout', 'margin', ('figure', ), 'object'),
             ('figure', 'data', (), 'object')
         ]
 

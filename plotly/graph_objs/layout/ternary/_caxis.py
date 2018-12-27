@@ -1027,15 +1027,28 @@ class Caxis(BaseLayoutHierarchyType):
     @property
     def title(self):
         """
-        Sets the title of this axis.
+        The 'title' property is an instance of Title
+        that may be specified as:
+          - An instance of plotly.graph_objs.layout.ternary.caxis.Title
+          - A dict of string/value properties that will be passed
+            to the Title constructor
     
-        The 'title' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+            Supported dict properties:
+                
+                font
+                    Sets this axis' title font. Note that the
+                    title's font used to be customized by the now
+                    deprecated `titlefont` attribute.
+                text
+                    Sets the title of this axis. Note that before
+                    the existence of `title.text`, the title's
+                    contents used to be defined as the `title`
+                    attribute itself. This behavior has been
+                    deprecated.
 
         Returns
         -------
-        str
+        plotly.graph_objs.layout.ternary.caxis.Title
         """
         return self['title']
 
@@ -1048,13 +1061,15 @@ class Caxis(BaseLayoutHierarchyType):
     @property
     def titlefont(self):
         """
-        Sets this axis' title font.
+        Deprecated: Please use layout.ternary.caxis.title.font instead.
+        Sets this axis' title font. Note that the title's font used to
+        be customized by the now deprecated `titlefont` attribute.
     
-        The 'titlefont' property is an instance of Titlefont
+        The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.ternary.caxis.Titlefont
+          - An instance of plotly.graph_objs.layout.ternary.caxis.title.Font
           - A dict of string/value properties that will be passed
-            to the Titlefont constructor
+            to the Font constructor
     
             Supported dict properties:
                 
@@ -1080,13 +1095,34 @@ class Caxis(BaseLayoutHierarchyType):
 
         Returns
         -------
-        plotly.graph_objs.layout.ternary.caxis.Titlefont
+        
         """
         return self['titlefont']
 
     @titlefont.setter
     def titlefont(self, val):
         self['titlefont'] = val
+
+    # uirevision
+    # ----------
+    @property
+    def uirevision(self):
+        """
+        Controls persistence of user-driven changes in axis `min`, and
+        `title` if in `editable: true` configuration. Defaults to
+        `ternary<N>.uirevision`.
+    
+        The 'uirevision' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['uirevision']
+
+    @uirevision.setter
+    def uirevision(self, val):
+        self['uirevision'] = val
 
     # property parent name
     # --------------------
@@ -1266,10 +1302,20 @@ class Caxis(BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            Sets the title of this axis.
+            plotly.graph_objs.layout.ternary.caxis.Title instance
+            or dict with compatible properties
         titlefont
-            Sets this axis' title font.
+            Deprecated: Please use layout.ternary.caxis.title.font
+            instead. Sets this axis' title font. Note that the
+            title's font used to be customized by the now
+            deprecated `titlefont` attribute.
+        uirevision
+            Controls persistence of user-driven changes in axis
+            `min`, and `title` if in `editable: true`
+            configuration. Defaults to `ternary<N>.uirevision`.
         """
+
+    _mapped_properties = {'titlefont': ('title', 'font')}
 
     def __init__(
         self,
@@ -1311,6 +1357,7 @@ class Caxis(BaseLayoutHierarchyType):
         tickwidth=None,
         title=None,
         titlefont=None,
+        uirevision=None,
         **kwargs
     ):
         """
@@ -1488,9 +1535,17 @@ class Caxis(BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            Sets the title of this axis.
+            plotly.graph_objs.layout.ternary.caxis.Title instance
+            or dict with compatible properties
         titlefont
-            Sets this axis' title font.
+            Deprecated: Please use layout.ternary.caxis.title.font
+            instead. Sets this axis' title font. Note that the
+            title's font used to be customized by the now
+            deprecated `titlefont` attribute.
+        uirevision
+            Controls persistence of user-driven changes in axis
+            `min`, and `title` if in `editable: true`
+            configuration. Defaults to `ternary<N>.uirevision`.
 
         Returns
         -------
@@ -1563,7 +1618,7 @@ an instance of plotly.graph_objs.layout.ternary.Caxis"""
         self._validators['tickvalssrc'] = v_caxis.TickvalssrcValidator()
         self._validators['tickwidth'] = v_caxis.TickwidthValidator()
         self._validators['title'] = v_caxis.TitleValidator()
-        self._validators['titlefont'] = v_caxis.TitlefontValidator()
+        self._validators['uirevision'] = v_caxis.UirevisionValidator()
 
         # Populate data dict with properties
         # ----------------------------------
@@ -1648,7 +1703,11 @@ an instance of plotly.graph_objs.layout.ternary.Caxis"""
         _v = arg.pop('title', None)
         self['title'] = title if title is not None else _v
         _v = arg.pop('titlefont', None)
-        self['titlefont'] = titlefont if titlefont is not None else _v
+        _v = titlefont if titlefont is not None else _v
+        if _v is not None:
+            self['titlefont'] = _v
+        _v = arg.pop('uirevision', None)
+        self['uirevision'] = uirevision if uirevision is not None else _v
 
         # Process unknown kwargs
         # ----------------------

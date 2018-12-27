@@ -58,9 +58,10 @@ class TestFigureProperties(TestCase):
         self.assertEqual(self.figure[('data', 0, 'marker', 'color')], 'red')
 
         # Frames
-        self.figure[('frames', 0, 'layout', 'yaxis', 'title')] = 'f2'
+        self.figure[('frames', 0, 'layout', 'yaxis', 'title', 'text')] = 'f2'
         self.assertEqual(
-            self.figure[('frames', 0, 'layout', 'yaxis', 'title')], 'f2')
+            self.figure[('frames', 0, 'layout', 'yaxis', 'title', 'text')],
+            'f2')
 
     def test_property_assignment_dots(self):
         # Layout
@@ -72,9 +73,9 @@ class TestFigureProperties(TestCase):
         self.assertEqual(self.figure['data[0].marker.color'], 'red')
 
         # Frames
-        self.figure['frames[0].layout.yaxis.title'] = 'f2'
+        self.figure['frames[0].layout.yaxis.title.text'] = 'f2'
         self.assertEqual(
-            self.figure['frames.0.layout.yaxis.title'], 'f2')
+            self.figure['frames.0.layout.yaxis.title.text'], 'f2')
 
     @raises(AttributeError)
     def test_access_invalid_attr(self):
@@ -145,20 +146,25 @@ class TestFigureProperties(TestCase):
 
     def test_update_frames(self):
         # Check initial frame axis title
-        self.assertEqual(self.figure.frames[0].layout.yaxis.title, 'f1')
+        self.assertEqual(self.figure.frames[0].layout.yaxis.title.text,
+                         'f1')
 
         # Update with dict kwarg
-        self.figure.update(frames={0: {'layout': {'yaxis': {'title': 'f2'}}}})
-        self.assertEqual(self.figure.frames[0].layout.yaxis.title, 'f2')
+        self.figure.update(frames={0: {
+            'layout': {'yaxis': {'title': {'text': 'f2'}}}}})
+        self.assertEqual(self.figure.frames[0].layout.yaxis.title.text, 'f2')
 
         # Update with list kwarg
-        self.figure.update(frames=[{'layout': {'yaxis': {'title': 'f3'}}}])
-        self.assertEqual(self.figure.frames[0].layout.yaxis.title, 'f3')
+        self.figure.update(frames=[{
+            'layout': {'yaxis': {'title': {'text': 'f3'}}}}])
+        self.assertEqual(self.figure.frames[0].layout.yaxis.title.text,
+                         'f3')
 
         # Update with dict
         self.figure.update({'frames':
-                            [{'layout': {'yaxis': {'title': 'f4'}}}]})
-        self.assertEqual(self.figure.frames[0].layout.yaxis.title, 'f4')
+                            [{'layout':
+                                  {'yaxis': {'title': {'text': 'f4'}}}}]})
+        self.assertEqual(self.figure.frames[0].layout.yaxis.title.text, 'f4')
 
     @raises(ValueError)
     def test_update_invalid_attr(self):

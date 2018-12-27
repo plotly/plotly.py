@@ -1,4 +1,5 @@
 from ._visible import VisibleValidator
+from ._uirevision import UirevisionValidator
 from ._uid import UidValidator
 from ._tsrc import TsrcValidator
 from ._t import TValidator
