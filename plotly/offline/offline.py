@@ -114,9 +114,6 @@ def _build_mathjax_script(url):
 
 
 def _get_jconfig(config):
-    # TODO: The get_config 'source of truth' should
-    # really be somewhere other than plotly.plotly
-    config = config if config else plotly.plotly.get_config()
 
     configkeys = (
         'staticPlot',
@@ -124,6 +121,7 @@ def _get_jconfig(config):
         'editable',
         'edits',
         'autosizable',
+        'responsive',
         'queueLength',
         'fillFrame',
         'frameMargins',
@@ -134,6 +132,7 @@ def _get_jconfig(config):
         'showAxisRangeEntryBoxes',
         'showLink',
         'sendData',
+        'showSendToCloud',
         'linkText',
         'showSources',
         'displayModeBar',
@@ -142,6 +141,7 @@ def _get_jconfig(config):
         'modeBarButtons',
         'toImageButtonOptions',
         'displaylogo',
+        'watermark',
         'plotGlPixelRatio',
         'setBackground',
         'topojsonURL',
@@ -152,7 +152,21 @@ def _get_jconfig(config):
         'locales',
     )
 
-    clean_config = dict((k, config[k]) for k in configkeys if k in config)
+    if config and isinstance(config, dict):
+        # Warn user on unrecognized config options.  We make this a warning
+        # rather than an error since we don't have code generation logic in
+        # place yet to guarantee that the config options in plotly.py are up
+        # to date
+        bad_config = [k for k in config if k not in configkeys]
+        if bad_config:
+            warnings.warn("""
+Unrecognized config options supplied: {bad_config}"""
+                          .format(bad_config=bad_config))
+
+        clean_config = config
+    else:
+        config = plotly.plotly.get_config()
+        clean_config = dict((k, config[k]) for k in configkeys if k in config)
 
     # TODO: The get_config 'source of truth' should
     # really be somewhere other than plotly.plotly
@@ -381,7 +395,7 @@ def _plot_html(figure_or_data, config, validate, default_width,
     return plotly_html_div, plotdivid, width, height
 
 
-def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
+def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
           validate=True, image=None, filename='plot_image', image_width=800,
           image_height=600, config=None):
     """
@@ -397,7 +411,7 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                       graph descriptions.
 
     Keyword arguments:
-    show_link (default=True) -- display a link in the bottom-right corner of
+    show_link (default=False) -- display a link in the bottom-right corner of
                                 of the chart that will export the chart to
                                 Plotly Cloud or Plotly Enterprise
     link_text (default='Export to plot.ly') -- the text of export link
@@ -497,7 +511,7 @@ def iplot(figure_or_data, show_link=True, link_text='Export to plot.ly',
         ipython_display.display(ipython_display.HTML(script))
 
 
-def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
+def plot(figure_or_data, show_link=False, link_text='Export to plot.ly',
          validate=True, output_type='file', include_plotlyjs=True,
          filename='temp-plot.html', auto_open=True, image=None,
          image_filename='plot_image', image_width=800, image_height=600,
@@ -523,7 +537,7 @@ def plot(figure_or_data, show_link=True, link_text='Export to plot.ly',
                       graph descriptions.
 
     Keyword arguments:
-    show_link (default=True) -- display a link in the bottom-right corner of
+    show_link (default=False) -- display a link in the bottom-right corner of
         of the chart that will export the chart to Plotly Cloud or
         Plotly Enterprise
     link_text (default='Export to plot.ly') -- the text of export link
@@ -742,7 +756,7 @@ include_mathjax may be specified as False, 'cdn', or a string ending with '.js'
 
 
 def plot_mpl(mpl_fig, resize=False, strip_style=False,
-             verbose=False, show_link=True, link_text='Export to plot.ly',
+             verbose=False, show_link=False, link_text='Export to plot.ly',
              validate=True, output_type='file', include_plotlyjs=True,
              filename='temp-plot.html', auto_open=True,
              image=None, image_filename='plot_image',
@@ -762,7 +776,7 @@ def plot_mpl(mpl_fig, resize=False, strip_style=False,
     resize (default=False) -- allow plotly to choose the figure size.
     strip_style (default=False) -- allow plotly to choose style options.
     verbose (default=False) -- print message.
-    show_link (default=True) -- display a link in the bottom-right corner of
+    show_link (default=False) -- display a link in the bottom-right corner of
         of the chart that will export the chart to Plotly Cloud or
         Plotly Enterprise
     link_text (default='Export to plot.ly') -- the text of export link
@@ -824,7 +838,7 @@ def plot_mpl(mpl_fig, resize=False, strip_style=False,
 
 
 def iplot_mpl(mpl_fig, resize=False, strip_style=False,
-              verbose=False, show_link=True,
+              verbose=False, show_link=False,
               link_text='Export to plot.ly', validate=True,
               image=None, image_filename='plot_image',
               image_height=600, image_width=800):
@@ -847,7 +861,7 @@ def iplot_mpl(mpl_fig, resize=False, strip_style=False,
     resize (default=False) -- allow plotly to choose the figure size.
     strip_style (default=False) -- allow plotly to choose style options.
     verbose (default=False) -- print message.
-    show_link (default=True) -- display a link in the bottom-right corner of
+    show_link (default=False) -- display a link in the bottom-right corner of
                                 of the chart that will export the chart to
                                 Plotly Cloud or Plotly Enterprise
     link_text (default='Export to plot.ly') -- the text of export link
@@ -888,7 +902,7 @@ def iplot_mpl(mpl_fig, resize=False, strip_style=False,
 
 
 def enable_mpl_offline(resize=False, strip_style=False,
-                       verbose=False, show_link=True,
+                       verbose=False, show_link=False,
                        link_text='Export to plot.ly', validate=True):
     """
     Convert mpl plots to locally hosted HTML documents.
