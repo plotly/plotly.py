@@ -283,3 +283,40 @@ def test_topojson_fig_to_image(topofig, format):
 def test_latex_fig_to_image(latexfig, format):
     img_bytes = pio.to_image(latexfig, format=format, width=700, height=500)
     assert_image_bytes(img_bytes, 'latexfig.' + format)
+
+
+# Environmnet variables
+# ---------------------
+def test_problematic_environment_variables(fig1, format):
+    pio.orca.config.restore_defaults(reset_server=True)
+
+    os.environ['NODE_OPTIONS'] = '--max-old-space-size=4096'
+    os.environ['ELECTRON_RUN_AS_NODE'] = '1'
+
+    # Do image export
+    img_bytes = pio.to_image(fig1, format=format, width=700, height=500)
+    assert_image_bytes(img_bytes, 'fig1.' + format)
+
+    # Check that environment variables were restored
+    assert os.environ['NODE_OPTIONS'] == '--max-old-space-size=4096'
+    assert os.environ['ELECTRON_RUN_AS_NODE'] == '1'
+
+
+# Invalid figure json
+# -------------------
+def test_invalid_figure_json():
+    # Do image export
+    bad_fig = {'foo': 'bar'}
+    with pytest.raises(ValueError) as err:
+        pio.to_image(bad_fig, format='png')
+
+    assert "Invalid value of type" in str(err.value)
+
+    with pytest.raises(ValueError) as err:
+        pio.to_image(bad_fig, format='png', validate=False)
+
+    assert ('The image request was rejected by the orca conversion utility'
+            in str(err.value))
+
+    assert ('400: invalid or malformed request syntax'
+            in str(err.value))
