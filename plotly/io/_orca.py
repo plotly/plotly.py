@@ -1218,7 +1218,7 @@ Install using conda:
             orca_state['shutdown_timer'] = t
 
 
-@retrying.retry(wait_random_min=5, wait_random_max=10, stop_max_delay=8000)
+@retrying.retry(wait_random_min=5, wait_random_max=10, stop_max_delay=30000)
 def request_image_with_retrying(**kwargs):
     """
     Helper method to perform an image request to a running orca server process
