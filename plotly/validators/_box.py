@@ -134,6 +134,28 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 .
             uid
 
+            uirevision
+                Controls persistence of some user-driven
+                changes to the trace: `constraintrange` in
+                `parcoords` traces, as well as some `editable:
+                true` modifications such as `name` and
+                `colorbar.title`. Defaults to
+                `layout.uirevision`. Note that other user-
+                driven trace attribute changes are controlled
+                by `layout` attributes: `trace.visible` is
+                controlled by `layout.legend.uirevision`,
+                `selectedpoints` is controlled by
+                `layout.selectionrevision`, and
+                `colorbar.(x|y)` (accessible with `config:
+                {editable: true}`) is controlled by
+                `layout.editrevision`. Trace changes are
+                tracked by `uid`, which only falls back on
+                trace index if no `uid` is provided. So if your
+                app can add/remove traces before the end of the
+                `data` array, such that the same trace has a
+                different index, you can still preserve user-
+                driven changes if you give each trace a `uid`
+                that stays with it as it moves.
             unselected
                 plotly.graph_objs.box.Unselected instance or
                 dict with compatible properties

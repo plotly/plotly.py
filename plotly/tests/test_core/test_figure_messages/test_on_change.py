@@ -109,17 +109,17 @@ class TestOnChangeCallbacks(TestCase):
         # under xaxis
         self.figure.layout.xaxis.on_change(fn_xaxis,
                                            'range',
-                                           'titlefont.family')
+                                           'title.font.family')
 
         # Register callback on xaxis object itself
         self.figure.layout.on_change(fn_layout, 'xaxis')
 
         # Assign a new xaxis range and titlefont.family
-        self.figure.layout.xaxis.titlefont.family = 'courier'
+        self.figure.layout.xaxis.title.font.family = 'courier'
 
         # Check that all callbacks were executed once
         fn_titlefont.assert_called_once_with(
-            self.figure.layout.xaxis.titlefont,
+            self.figure.layout.xaxis.title.font,
             'courier')
 
         fn_xaxis.assert_called_once_with(
@@ -129,7 +129,8 @@ class TestOnChangeCallbacks(TestCase):
 
         fn_layout.assert_called_once_with(
             self.figure.layout,
-            go.layout.XAxis(range=(-1, 4), titlefont={'family': 'courier'}))
+            go.layout.XAxis(range=(-1, 4),
+                            title={'font': {'family': 'courier'}}))
 
     def test_prop_callback_nested_arrays(self):
 

@@ -4,6 +4,7 @@ from ._xcalendar import XcalendarValidator
 from ._xaxis import XAxisValidator
 from ._x import XValidator
 from ._visible import VisibleValidator
+from ._uirevision import UirevisionValidator
 from ._uid import UidValidator
 from ._tickwidth import TickwidthValidator
 from ._textsrc import TextsrcValidator

@@ -30,31 +30,35 @@ class TemplateTest(TestCase):
 
     def test_init_in_figure_constructor(self):
         fig = go.Figure(layout={
-            'template': {'layout': {'title': 'Hello, world'}}})
+            'template': {'layout': {'title': {'text': 'Hello, world'}}}})
 
         self.assertEqual(fig.layout.template,
-                         go.layout.Template(layout={'title': 'Hello, world'}))
+                         go.layout.Template(layout={
+                             'title': {'text': 'Hello, world'}}))
 
         self.assertEqual(fig.to_dict(),
                          {'data': [],
                           'layout': {
                               'template': {
-                                  'layout': {'title': 'Hello, world'}}}})
+                                  'layout': {
+                                      'title': {'text': 'Hello, world'}}}}})
 
     def test_init_in_property_assignment(self):
         fig = go.Figure()
 
         fig.layout.template = go.layout.Template(
-            layout={'title': 'Hello, world'})
+            layout={'title': {'text': 'Hello, world'}})
 
         self.assertEqual(fig.layout.template,
-                         go.layout.Template(layout={'title': 'Hello, world'}))
+                         go.layout.Template(
+                             layout={'title': {'text': 'Hello, world'}}))
 
         self.assertEqual(fig.to_dict(),
                          {'data': [],
                           'layout': {
                               'template': {
-                                  'layout': {'title': 'Hello, world'}}}})
+                                  'layout': {
+                                      'title': {'text': 'Hello, world'}}}}})
 
     def test_defaults_in_constructor(self):
         fig = go.Figure(layout={

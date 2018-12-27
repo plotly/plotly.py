@@ -1,3 +1,4 @@
+from ._uirevision import UirevisionValidator
 from ._sector import SectorValidator
 from ._radialaxis import RadialAxisValidator
 from ._hole import HoleValidator

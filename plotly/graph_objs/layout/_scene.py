@@ -468,6 +468,26 @@ class Scene(BaseLayoutHierarchyType):
     def hovermode(self, val):
         self['hovermode'] = val
 
+    # uirevision
+    # ----------
+    @property
+    def uirevision(self):
+        """
+        Controls persistence of user-driven changes in camera
+        attributes. Defaults to `layout.uirevision`.
+    
+        The 'uirevision' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['uirevision']
+
+    @uirevision.setter
+    def uirevision(self, val):
+        self['uirevision'] = val
+
     # xaxis
     # -----
     @property
@@ -736,9 +756,14 @@ class Scene(BaseLayoutHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    Sets the title of this axis.
+                    plotly.graph_objs.layout.scene.xaxis.Title
+                    instance or dict with compatible properties
                 titlefont
-                    Sets this axis' title font.
+                    Deprecated: Please use
+                    layout.scene.xaxis.title.font instead. Sets
+                    this axis' title font. Note that the title's
+                    font used to be customized by the now
+                    deprecated `titlefont` attribute.
                 type
                     Sets the axis type. By default, plotly attempts
                     to determined the axis type by looking into the
@@ -1036,9 +1061,14 @@ class Scene(BaseLayoutHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    Sets the title of this axis.
+                    plotly.graph_objs.layout.scene.yaxis.Title
+                    instance or dict with compatible properties
                 titlefont
-                    Sets this axis' title font.
+                    Deprecated: Please use
+                    layout.scene.yaxis.title.font instead. Sets
+                    this axis' title font. Note that the title's
+                    font used to be customized by the now
+                    deprecated `titlefont` attribute.
                 type
                     Sets the axis type. By default, plotly attempts
                     to determined the axis type by looking into the
@@ -1336,9 +1366,14 @@ class Scene(BaseLayoutHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    Sets the title of this axis.
+                    plotly.graph_objs.layout.scene.zaxis.Title
+                    instance or dict with compatible properties
                 titlefont
-                    Sets this axis' title font.
+                    Deprecated: Please use
+                    layout.scene.zaxis.title.font instead. Sets
+                    this axis' title font. Note that the title's
+                    font used to be customized by the now
+                    deprecated `titlefont` attribute.
                 type
                     Sets the axis type. By default, plotly attempts
                     to determined the axis type by looking into the
@@ -1414,6 +1449,9 @@ class Scene(BaseLayoutHierarchyType):
         hovermode
             Determines the mode of hover interactions for this
             scene.
+        uirevision
+            Controls persistence of user-driven changes in camera
+            attributes. Defaults to `layout.uirevision`.
         xaxis
             plotly.graph_objs.layout.scene.XAxis instance or dict
             with compatible properties
@@ -1437,6 +1475,7 @@ class Scene(BaseLayoutHierarchyType):
         domain=None,
         dragmode=None,
         hovermode=None,
+        uirevision=None,
         xaxis=None,
         yaxis=None,
         zaxis=None,
@@ -1485,6 +1524,9 @@ class Scene(BaseLayoutHierarchyType):
         hovermode
             Determines the mode of hover interactions for this
             scene.
+        uirevision
+            Controls persistence of user-driven changes in camera
+            attributes. Defaults to `layout.uirevision`.
         xaxis
             plotly.graph_objs.layout.scene.XAxis instance or dict
             with compatible properties
@@ -1536,6 +1578,7 @@ an instance of plotly.graph_objs.layout.Scene"""
         self._validators['domain'] = v_scene.DomainValidator()
         self._validators['dragmode'] = v_scene.DragmodeValidator()
         self._validators['hovermode'] = v_scene.HovermodeValidator()
+        self._validators['uirevision'] = v_scene.UirevisionValidator()
         self._validators['xaxis'] = v_scene.XAxisValidator()
         self._validators['yaxis'] = v_scene.YAxisValidator()
         self._validators['zaxis'] = v_scene.ZAxisValidator()
@@ -1561,6 +1604,8 @@ an instance of plotly.graph_objs.layout.Scene"""
         self['dragmode'] = dragmode if dragmode is not None else _v
         _v = arg.pop('hovermode', None)
         self['hovermode'] = hovermode if hovermode is not None else _v
+        _v = arg.pop('uirevision', None)
+        self['uirevision'] = uirevision if uirevision is not None else _v
         _v = arg.pop('xaxis', None)
         self['xaxis'] = xaxis if xaxis is not None else _v
         _v = arg.pop('yaxis', None)

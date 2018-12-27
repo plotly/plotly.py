@@ -258,6 +258,48 @@ class Legend(BaseLayoutHierarchyType):
     def traceorder(self, val):
         self['traceorder'] = val
 
+    # uirevision
+    # ----------
+    @property
+    def uirevision(self):
+        """
+        Controls persistence of legend-driven changes in trace and pie
+        label visibility. Defaults to `layout.uirevision`.
+    
+        The 'uirevision' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['uirevision']
+
+    @uirevision.setter
+    def uirevision(self, val):
+        self['uirevision'] = val
+
+    # valign
+    # ------
+    @property
+    def valign(self):
+        """
+        Sets the vertical alignment of the symbols with respect to
+        their associated text.
+    
+        The 'valign' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['top', 'middle', 'bottom']
+
+        Returns
+        -------
+        Any
+        """
+        return self['valign']
+
+    @valign.setter
+    def valign(self, val):
+        self['valign'] = val
+
     # x
     # -
     @property
@@ -378,6 +420,13 @@ class Legend(BaseLayoutHierarchyType):
             displayed in groups (when a trace `legendgroup` is
             provided). if "grouped+reversed", the items are
             displayed in the opposite order as "grouped".
+        uirevision
+            Controls persistence of legend-driven changes in trace
+            and pie label visibility. Defaults to
+            `layout.uirevision`.
+        valign
+            Sets the vertical alignment of the symbols with respect
+            to their associated text.
         x
             Sets the x position (in normalized coordinates) of the
             legend.
@@ -404,6 +453,8 @@ class Legend(BaseLayoutHierarchyType):
         orientation=None,
         tracegroupgap=None,
         traceorder=None,
+        uirevision=None,
+        valign=None,
         x=None,
         xanchor=None,
         y=None,
@@ -441,6 +492,13 @@ class Legend(BaseLayoutHierarchyType):
             displayed in groups (when a trace `legendgroup` is
             provided). if "grouped+reversed", the items are
             displayed in the opposite order as "grouped".
+        uirevision
+            Controls persistence of legend-driven changes in trace
+            and pie label visibility. Defaults to
+            `layout.uirevision`.
+        valign
+            Sets the vertical alignment of the symbols with respect
+            to their associated text.
         x
             Sets the x position (in normalized coordinates) of the
             legend.
@@ -495,6 +553,8 @@ an instance of plotly.graph_objs.layout.Legend"""
         self._validators['orientation'] = v_legend.OrientationValidator()
         self._validators['tracegroupgap'] = v_legend.TracegroupgapValidator()
         self._validators['traceorder'] = v_legend.TraceorderValidator()
+        self._validators['uirevision'] = v_legend.UirevisionValidator()
+        self._validators['valign'] = v_legend.ValignValidator()
         self._validators['x'] = v_legend.XValidator()
         self._validators['xanchor'] = v_legend.XanchorValidator()
         self._validators['y'] = v_legend.YValidator()
@@ -517,6 +577,10 @@ an instance of plotly.graph_objs.layout.Legend"""
             ] = tracegroupgap if tracegroupgap is not None else _v
         _v = arg.pop('traceorder', None)
         self['traceorder'] = traceorder if traceorder is not None else _v
+        _v = arg.pop('uirevision', None)
+        self['uirevision'] = uirevision if uirevision is not None else _v
+        _v = arg.pop('valign', None)
+        self['valign'] = valign if valign is not None else _v
         _v = arg.pop('x', None)
         self['x'] = x if x is not None else _v
         _v = arg.pop('xanchor', None)

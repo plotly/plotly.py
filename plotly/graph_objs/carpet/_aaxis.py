@@ -1412,15 +1412,33 @@ class Aaxis(BaseTraceHierarchyType):
     @property
     def title(self):
         """
-        Sets the title of this axis.
+        The 'title' property is an instance of Title
+        that may be specified as:
+          - An instance of plotly.graph_objs.carpet.aaxis.Title
+          - A dict of string/value properties that will be passed
+            to the Title constructor
     
-        The 'title' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+            Supported dict properties:
+                
+                font
+                    Sets this axis' title font. Note that the
+                    title's font used to be set by the now
+                    deprecated `titlefont` attribute.
+                offset
+                    An additional amount by which to offset the
+                    title from the tick labels, given in pixels.
+                    Note that this used to be set by the now
+                    deprecated `titleoffset` attribute.
+                text
+                    Sets the title of this axis. Note that before
+                    the existence of `title.text`, the title's
+                    contents used to be defined as the `title`
+                    attribute itself. This behavior has been
+                    deprecated.
 
         Returns
         -------
-        str
+        plotly.graph_objs.carpet.aaxis.Title
         """
         return self['title']
 
@@ -1433,13 +1451,15 @@ class Aaxis(BaseTraceHierarchyType):
     @property
     def titlefont(self):
         """
-        Sets this axis' title font.
+        Deprecated: Please use carpet.aaxis.title.font instead. Sets
+        this axis' title font. Note that the title's font used to be
+        set by the now deprecated `titlefont` attribute.
     
-        The 'titlefont' property is an instance of Titlefont
+        The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.carpet.aaxis.Titlefont
+          - An instance of plotly.graph_objs.carpet.aaxis.title.Font
           - A dict of string/value properties that will be passed
-            to the Titlefont constructor
+            to the Font constructor
     
             Supported dict properties:
                 
@@ -1465,7 +1485,7 @@ class Aaxis(BaseTraceHierarchyType):
 
         Returns
         -------
-        plotly.graph_objs.carpet.aaxis.Titlefont
+        
         """
         return self['titlefont']
 
@@ -1478,15 +1498,17 @@ class Aaxis(BaseTraceHierarchyType):
     @property
     def titleoffset(self):
         """
-        An additional amount by which to offset the title from the tick
-        labels, given in pixels
+        Deprecated: Please use carpet.aaxis.title.offset instead. An
+        additional amount by which to offset the title from the tick
+        labels, given in pixels. Note that this used to be set by the
+        now deprecated `titleoffset` attribute.
     
-        The 'titleoffset' property is a number and may be specified as:
+        The 'offset' property is a number and may be specified as:
           - An int or float
 
         Returns
         -------
-        int|float
+        
         """
         return self['titleoffset']
 
@@ -1705,17 +1727,29 @@ class Aaxis(BaseTraceHierarchyType):
         tickvalssrc
             Sets the source reference on plot.ly for  tickvals .
         title
-            Sets the title of this axis.
+            plotly.graph_objs.carpet.aaxis.Title instance or dict
+            with compatible properties
         titlefont
-            Sets this axis' title font.
+            Deprecated: Please use carpet.aaxis.title.font instead.
+            Sets this axis' title font. Note that the title's font
+            used to be set by the now deprecated `titlefont`
+            attribute.
         titleoffset
-            An additional amount by which to offset the title from
-            the tick labels, given in pixels
+            Deprecated: Please use carpet.aaxis.title.offset
+            instead. An additional amount by which to offset the
+            title from the tick labels, given in pixels. Note that
+            this used to be set by the now deprecated `titleoffset`
+            attribute.
         type
             Sets the axis type. By default, plotly attempts to
             determined the axis type by looking into the data of
             the traces that referenced the axis in question.
         """
+
+    _mapped_properties = {
+        'titlefont': ('title', 'font'),
+        'titleoffset': ('title', 'offset')
+    }
 
     def __init__(
         self,
@@ -1962,12 +1996,19 @@ class Aaxis(BaseTraceHierarchyType):
         tickvalssrc
             Sets the source reference on plot.ly for  tickvals .
         title
-            Sets the title of this axis.
+            plotly.graph_objs.carpet.aaxis.Title instance or dict
+            with compatible properties
         titlefont
-            Sets this axis' title font.
+            Deprecated: Please use carpet.aaxis.title.font instead.
+            Sets this axis' title font. Note that the title's font
+            used to be set by the now deprecated `titlefont`
+            attribute.
         titleoffset
-            An additional amount by which to offset the title from
-            the tick labels, given in pixels
+            Deprecated: Please use carpet.aaxis.title.offset
+            instead. An additional amount by which to offset the
+            title from the tick labels, given in pixels. Note that
+            this used to be set by the now deprecated `titleoffset`
+            attribute.
         type
             Sets the axis type. By default, plotly attempts to
             determined the axis type by looking into the data of
@@ -2061,8 +2102,6 @@ an instance of plotly.graph_objs.carpet.Aaxis"""
         self._validators['tickvals'] = v_aaxis.TickvalsValidator()
         self._validators['tickvalssrc'] = v_aaxis.TickvalssrcValidator()
         self._validators['title'] = v_aaxis.TitleValidator()
-        self._validators['titlefont'] = v_aaxis.TitlefontValidator()
-        self._validators['titleoffset'] = v_aaxis.TitleoffsetValidator()
         self._validators['type'] = v_aaxis.TypeValidator()
 
         # Populate data dict with properties
@@ -2188,9 +2227,13 @@ an instance of plotly.graph_objs.carpet.Aaxis"""
         _v = arg.pop('title', None)
         self['title'] = title if title is not None else _v
         _v = arg.pop('titlefont', None)
-        self['titlefont'] = titlefont if titlefont is not None else _v
+        _v = titlefont if titlefont is not None else _v
+        if _v is not None:
+            self['titlefont'] = _v
         _v = arg.pop('titleoffset', None)
-        self['titleoffset'] = titleoffset if titleoffset is not None else _v
+        _v = titleoffset if titleoffset is not None else _v
+        if _v is not None:
+            self['titleoffset'] = _v
         _v = arg.pop('type', None)
         self['type'] = type if type is not None else _v
 

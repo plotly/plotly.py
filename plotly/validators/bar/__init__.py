@@ -12,6 +12,7 @@ from ._widthsrc import WidthsrcValidator
 from ._width import WidthValidator
 from ._visible import VisibleValidator
 from ._unselected import UnselectedValidator
+from ._uirevision import UirevisionValidator
 from ._uid import UidValidator
 from ._tsrc import TsrcValidator
 from ._textsrc import TextsrcValidator
@@ -39,6 +40,8 @@ from ._idssrc import IdssrcValidator
 from ._ids import IdsValidator
 from ._hovertextsrc import HovertextsrcValidator
 from ._hovertext import HovertextValidator
+from ._hovertemplatesrc import HovertemplatesrcValidator
+from ._hovertemplate import HovertemplateValidator
 from ._hoverlabel import HoverlabelValidator
 from ._hoverinfosrc import HoverinfosrcValidator
 from ._hoverinfo import HoverinfoValidator

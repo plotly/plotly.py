@@ -2,6 +2,8 @@ from ._yanchor import YanchorValidator
 from ._y import YValidator
 from ._xanchor import XanchorValidator
 from ._x import XValidator
+from ._valign import ValignValidator
+from ._uirevision import UirevisionValidator
 from ._traceorder import TraceorderValidator
 from ._tracegroupgap import TracegroupgapValidator
 from ._orientation import OrientationValidator

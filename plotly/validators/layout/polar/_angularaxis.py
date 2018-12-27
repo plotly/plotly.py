@@ -244,6 +244,10 @@ class AngularAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 value are shown. If *category, use `period` to
                 set the number of integer coordinates around
                 polar axis.
+            uirevision
+                Controls persistence of user-driven changes in
+                axis `rotation`. Defaults to
+                `polar<N>.uirevision`.
             visible
                 A single toggle to hide the axis while
                 preserving interaction like dragging. Default

@@ -10,6 +10,7 @@ from ._vsrc import VsrcValidator
 from ._visible import VisibleValidator
 from ._v import VValidator
 from ._usrc import UsrcValidator
+from ._uirevision import UirevisionValidator
 from ._uid import UidValidator
 from ._u import UValidator
 from ._textsrc import TextsrcValidator

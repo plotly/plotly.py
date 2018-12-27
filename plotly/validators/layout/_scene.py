@@ -47,6 +47,10 @@ class SceneValidator(_plotly_utils.basevalidators.CompoundValidator):
             hovermode
                 Determines the mode of hover interactions for
                 this scene.
+            uirevision
+                Controls persistence of user-driven changes in
+                camera attributes. Defaults to
+                `layout.uirevision`.
             xaxis
                 plotly.graph_objs.layout.scene.XAxis instance
                 or dict with compatible properties

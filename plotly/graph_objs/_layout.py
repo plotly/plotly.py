@@ -626,6 +626,42 @@ class Layout(BaseLayoutType):
     def clickmode(self, val):
         self['clickmode'] = val
 
+    # colorscale
+    # ----------
+    @property
+    def colorscale(self):
+        """
+        The 'colorscale' property is an instance of Colorscale
+        that may be specified as:
+          - An instance of plotly.graph_objs.layout.Colorscale
+          - A dict of string/value properties that will be passed
+            to the Colorscale constructor
+    
+            Supported dict properties:
+                
+                diverging
+                    Sets the default diverging colorscale. Note
+                    that `autocolorscale` must be true for this
+                    attribute to work.
+                sequential
+                    Sets the default sequential colorscale for
+                    positive values. Note that `autocolorscale`
+                    must be true for this attribute to work.
+                sequentialminus
+                    Sets the default sequential colorscale for
+                    negative values. Note that `autocolorscale`
+                    must be true for this attribute to work.
+
+        Returns
+        -------
+        plotly.graph_objs.layout.Colorscale
+        """
+        return self['colorscale']
+
+    @colorscale.setter
+    def colorscale(self, val):
+        self['colorscale'] = val
+
     # colorway
     # --------
     @property
@@ -706,7 +742,8 @@ class Layout(BaseLayoutType):
     
         The 'dragmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                ['zoom', 'pan', 'select', 'lasso', 'orbit', 'turntable']
+                ['zoom', 'pan', 'select', 'lasso', 'orbit', 'turntable',
+                False]
 
         Returns
         -------
@@ -717,6 +754,27 @@ class Layout(BaseLayoutType):
     @dragmode.setter
     def dragmode(self, val):
         self['dragmode'] = val
+
+    # editrevision
+    # ------------
+    @property
+    def editrevision(self):
+        """
+        Controls persistence of user-driven changes in `editable: true`
+        configuration, other than trace names and axis titles. Defaults
+        to `layout.uirevision`.
+    
+        The 'editrevision' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['editrevision']
+
+    @editrevision.setter
+    def editrevision(self, val):
+        self['editrevision'] = val
 
     # extendpiecolors
     # ---------------
@@ -875,6 +933,10 @@ class Layout(BaseLayoutType):
                 subunitwidth
                     Sets the stroke width (in px) of the subunits
                     boundaries.
+                uirevision
+                    Controls persistence of user-driven changes in
+                    the view (projection and center). Defaults to
+                    `layout.uirevision`.
 
         Returns
         -------
@@ -1333,6 +1395,13 @@ class Layout(BaseLayoutType):
                     (when a trace `legendgroup` is provided). if
                     "grouped+reversed", the items are displayed in
                     the opposite order as "grouped".
+                uirevision
+                    Controls persistence of legend-driven changes
+                    in trace and pie label visibility. Defaults to
+                    `layout.uirevision`.
+                valign
+                    Sets the vertical alignment of the symbols with
+                    respect to their associated text.
                 x
                     Sets the x position (in normalized coordinates)
                     of the legend.
@@ -1401,6 +1470,10 @@ class Layout(BaseLayoutType):
                     Sets the Mapbox map style. Either input one of
                     the default Mapbox style names or the URL to a
                     custom style or a valid Mapbox style JSON.
+                uirevision
+                    Controls persistence of user-driven changes in
+                    the view: `center`, `zoom`, `bearing`, `pitch`.
+                    Defaults to `layout.uirevision`.
                 zoom
                     Sets the zoom level of the map.
 
@@ -1473,6 +1546,12 @@ class Layout(BaseLayoutType):
                     Sets the color of the icons in the modebar.
                 orientation
                     Sets the orientation of the modebar.
+                uirevision
+                    Controls persistence of user-driven changes
+                    related to the modebar, including `hovermode`,
+                    `dragmode`, and `showspikes` at both the root
+                    level and inside subplots. Defaults to
+                    `layout.uirevision`.
 
         Returns
         -------
@@ -1704,6 +1783,11 @@ class Layout(BaseLayoutType):
                     be spanned in the counterclockwise direction
                     with 0 corresponding to rightmost limit of the
                     polar subplot.
+                uirevision
+                    Controls persistence of user-driven changes in
+                    axis attributes, if not overridden in the
+                    individual axes. Defaults to
+                    `layout.uirevision`.
 
         Returns
         -------
@@ -1835,6 +1919,10 @@ class Layout(BaseLayoutType):
                 hovermode
                     Determines the mode of hover interactions for
                     this scene.
+                uirevision
+                    Controls persistence of user-driven changes in
+                    camera attributes. Defaults to
+                    `layout.uirevision`.
                 xaxis
                     plotly.graph_objs.layout.scene.XAxis instance
                     or dict with compatible properties
@@ -1878,6 +1966,26 @@ class Layout(BaseLayoutType):
     @selectdirection.setter
     def selectdirection(self, val):
         self['selectdirection'] = val
+
+    # selectionrevision
+    # -----------------
+    @property
+    def selectionrevision(self):
+        """
+        Controls persistence of user-driven changes in selected points
+        from all traces.
+    
+        The 'selectionrevision' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['selectionrevision']
+
+    @selectionrevision.setter
+    def selectionrevision(self, val):
+        self['selectionrevision'] = val
 
     # separators
     # ----------
@@ -2381,6 +2489,11 @@ class Layout(BaseLayoutType):
                 sum
                     The number each triplet should sum to, and the
                     maximum range of each axis
+                uirevision
+                    Controls persistence of user-driven changes in
+                    axis `min` and `title`, if not overridden in
+                    the individual axes. Defaults to
+                    `layout.uirevision`.
 
         Returns
         -------
@@ -2397,15 +2510,70 @@ class Layout(BaseLayoutType):
     @property
     def title(self):
         """
-        Sets the plot's title.
+        The 'title' property is an instance of Title
+        that may be specified as:
+          - An instance of plotly.graph_objs.layout.Title
+          - A dict of string/value properties that will be passed
+            to the Title constructor
     
-        The 'title' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
+            Supported dict properties:
+                
+                font
+                    Sets the title font. Note that the title's font
+                    used to be customized by the now deprecated
+                    `titlefont` attribute.
+                pad
+                    Sets the padding of the title. Each padding
+                    value only applies when the corresponding
+                    `xanchor`/`yanchor` value is set accordingly.
+                    E.g. for left padding to take effect, `xanchor`
+                    must be set to "left". The same rule applies if
+                    `xanchor`/`yanchor` is determined
+                    automatically. Padding is muted if the
+                    respective anchor value is "middle*/*center".
+                text
+                    Sets the plot's title. Note that before the
+                    existence of `title.text`, the title's contents
+                    used to be defined as the `title` attribute
+                    itself. This behavior has been deprecated.
+                x
+                    Sets the x position with respect to `xref` in
+                    normalized coordinates from 0 (left) to 1
+                    (right).
+                xanchor
+                    Sets the title's horizontal alignment with
+                    respect to its x position. "left" means that
+                    the title starts at x, "right" means that the
+                    title ends at x and "center" means that the
+                    title's center is at x. "auto" divides `xref`
+                    by three and calculates the `xanchor` value
+                    automatically based on the value of `x`.
+                xref
+                    Sets the container `x` refers to. "container"
+                    spans the entire `width` of the plot. "paper"
+                    refers to the width of the plotting area only.
+                y
+                    Sets the y position with respect to `yref` in
+                    normalized coordinates from 0 (bottom) to 1
+                    (top). "auto" places the baseline of the title
+                    onto the vertical center of the top margin.
+                yanchor
+                    Sets the title's vertical alignment with
+                    respect to its y position. "top" means that the
+                    title's cap line is at y, "bottom" means that
+                    the title's baseline is at y and "middle" means
+                    that the title's midline is at y. "auto"
+                    divides `yref` by three and calculates the
+                    `yanchor` value automatically based on the
+                    value of `y`.
+                yref
+                    Sets the container `y` refers to. "container"
+                    spans the entire `height` of the plot. "paper"
+                    refers to the height of the plotting area only.
 
         Returns
         -------
-        str
+        plotly.graph_objs.layout.Title
         """
         return self['title']
 
@@ -2418,13 +2586,15 @@ class Layout(BaseLayoutType):
     @property
     def titlefont(self):
         """
-        Sets the title font.
+        Deprecated: Please use layout.title.font instead. Sets the
+        title font. Note that the title's font used to be customized by
+        the now deprecated `titlefont` attribute.
     
-        The 'titlefont' property is an instance of Titlefont
+        The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.Titlefont
+          - An instance of plotly.graph_objs.layout.title.Font
           - A dict of string/value properties that will be passed
-            to the Titlefont constructor
+            to the Font constructor
     
             Supported dict properties:
                 
@@ -2450,13 +2620,47 @@ class Layout(BaseLayoutType):
 
         Returns
         -------
-        plotly.graph_objs.layout.Titlefont
+        
         """
         return self['titlefont']
 
     @titlefont.setter
     def titlefont(self, val):
         self['titlefont'] = val
+
+    # uirevision
+    # ----------
+    @property
+    def uirevision(self):
+        """
+        Used to allow user interactions with the plot to persist after
+        `Plotly.react` calls that are unaware of these interactions. If
+        `uirevision` is omitted, or if it is given and it changed from
+        the previous `Plotly.react` call, the exact new figure is used.
+        If `uirevision` is truthy and did NOT change, any attribute
+        that has been affected by user interactions and did not receive
+        a different value in the new figure will keep the interaction
+        value. `layout.uirevision` attribute serves as the default for
+        `uirevision` attributes in various sub-containers. For finer
+        control you can set these sub-attributes directly. For example,
+        if your app separately controls the data on the x and y axes
+        you might set `xaxis.uirevision=*time*` and
+        `yaxis.uirevision=*cost*`. Then if only the y data is changed,
+        you can update `yaxis.uirevision=*quantity*` and the y axis
+        range will reset but the x axis range will retain any user-
+        driven zoom.
+    
+        The 'uirevision' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['uirevision']
+
+    @uirevision.setter
+    def uirevision(self, val):
+        self['uirevision'] = val
 
     # updatemenus
     # -----------
@@ -2749,6 +2953,12 @@ class Layout(BaseLayoutType):
                     area. Options are "left", "center" (default),
                     and "right" for x axes, and "top", "middle"
                     (default), and "bottom" for y axes.
+                dividercolor
+                    Sets the color of the dividers Only has an
+                    effect on "multicategory" axes.
+                dividerwidth
+                    Sets the width (in px) of the dividers Only has
+                    an effect on "multicategory" axes.
                 domain
                     Sets the domain of this axis (in plot
                     fraction).
@@ -2904,6 +3114,10 @@ class Layout(BaseLayoutType):
                     horizontal.
                 separatethousands
                     If "true", even 4-digit integers are separated
+                showdividers
+                    Determines whether or not a dividers are drawn
+                    between the category levels of this axis. Only
+                    has an effect on "multicategory" axes.
                 showexponent
                     If "all", all exponents are shown besides their
                     significands. If "first", only the exponent of
@@ -3018,6 +3232,13 @@ class Layout(BaseLayoutType):
                     "", this axis' ticks are not drawn. If
                     "outside" ("inside"), this axis' are drawn
                     outside (inside) the axis lines.
+                tickson
+                    Determines where ticks and grid lines are drawn
+                    with respect to their corresponding tick
+                    labels. Only has an effect for axes of `type`
+                    "category" or "multicategory". When set to
+                    "boundaries", ticks and grid lines are drawn
+                    half a category to the left/bottom of labels.
                 ticksuffix
                     Sets a tick label suffix.
                 ticktext
@@ -3038,14 +3259,23 @@ class Layout(BaseLayoutType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    Sets the title of this axis.
+                    plotly.graph_objs.layout.xaxis.Title instance
+                    or dict with compatible properties
                 titlefont
-                    Sets this axis' title font.
+                    Deprecated: Please use layout.xaxis.title.font
+                    instead. Sets this axis' title font. Note that
+                    the title's font used to be customized by the
+                    now deprecated `titlefont` attribute.
                 type
                     Sets the axis type. By default, plotly attempts
                     to determined the axis type by looking into the
                     data of the traces that referenced the axis in
                     question.
+                uirevision
+                    Controls persistence of user-driven changes in
+                    axis `range`, `autorange`, and `title` if in
+                    `editable: true` configuration. Defaults to
+                    `layout.uirevision`.
                 visible
                     A single toggle to hide the axis while
                     preserving interaction like dragging. Default
@@ -3145,6 +3375,12 @@ class Layout(BaseLayoutType):
                     area. Options are "left", "center" (default),
                     and "right" for x axes, and "top", "middle"
                     (default), and "bottom" for y axes.
+                dividercolor
+                    Sets the color of the dividers Only has an
+                    effect on "multicategory" axes.
+                dividerwidth
+                    Sets the width (in px) of the dividers Only has
+                    an effect on "multicategory" axes.
                 domain
                     Sets the domain of this axis (in plot
                     fraction).
@@ -3294,6 +3530,10 @@ class Layout(BaseLayoutType):
                     horizontal.
                 separatethousands
                     If "true", even 4-digit integers are separated
+                showdividers
+                    Determines whether or not a dividers are drawn
+                    between the category levels of this axis. Only
+                    has an effect on "multicategory" axes.
                 showexponent
                     If "all", all exponents are shown besides their
                     significands. If "first", only the exponent of
@@ -3408,6 +3648,13 @@ class Layout(BaseLayoutType):
                     "", this axis' ticks are not drawn. If
                     "outside" ("inside"), this axis' are drawn
                     outside (inside) the axis lines.
+                tickson
+                    Determines where ticks and grid lines are drawn
+                    with respect to their corresponding tick
+                    labels. Only has an effect for axes of `type`
+                    "category" or "multicategory". When set to
+                    "boundaries", ticks and grid lines are drawn
+                    half a category to the left/bottom of labels.
                 ticksuffix
                     Sets a tick label suffix.
                 ticktext
@@ -3428,14 +3675,23 @@ class Layout(BaseLayoutType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    Sets the title of this axis.
+                    plotly.graph_objs.layout.yaxis.Title instance
+                    or dict with compatible properties
                 titlefont
-                    Sets this axis' title font.
+                    Deprecated: Please use layout.yaxis.title.font
+                    instead. Sets this axis' title font. Note that
+                    the title's font used to be customized by the
+                    now deprecated `titlefont` attribute.
                 type
                     Sets the axis type. By default, plotly attempts
                     to determined the axis type by looking into the
                     data of the traces that referenced the axis in
                     question.
+                uirevision
+                    Controls persistence of user-driven changes in
+                    axis `range`, `autorange`, and `title` if in
+                    `editable: true` configuration. Defaults to
+                    `layout.uirevision`.
                 visible
                     A single toggle to hide the axis while
                     preserving interaction like dragging. Default
@@ -3542,6 +3798,9 @@ class Layout(BaseLayoutType):
             sent accordingly as long as "event" flag is set as
             well. When the "event" flag is missing, `plotly_click`
             and `plotly_selected` events are not fired.
+        colorscale
+            plotly.graph_objs.layout.Colorscale instance or dict
+            with compatible properties
         colorway
             Sets the default trace colors.
         datarevision
@@ -3561,6 +3820,10 @@ class Layout(BaseLayoutType):
             Determines the mode of drag interactions. "select" and
             "lasso" apply only to scatter traces with markers or
             text. "orbit" and "turntable" apply only to 3D scenes.
+        editrevision
+            Controls persistence of user-driven changes in
+            `editable: true` configuration, other than trace names
+            and axis titles. Defaults to `layout.uirevision`.
         extendpiecolors
             If `true`, the pie slice colors (whether given by
             `piecolorway` or inherited from `colorway`) will be
@@ -3661,6 +3924,9 @@ class Layout(BaseLayoutType):
             diagonal. "h" only allows horizontal selection, "v"
             only vertical, "d" only diagonal and "any" sets no
             limit.
+        selectionrevision
+            Controls persistence of user-driven changes in selected
+            points from all traces.
         separators
             Sets the decimal and thousand separators. For example,
             *. * puts a '.' before decimals and a space between
@@ -3721,9 +3987,31 @@ class Layout(BaseLayoutType):
             plotly.graph_objs.layout.Ternary instance or dict with
             compatible properties
         title
-            Sets the plot's title.
+            plotly.graph_objs.layout.Title instance or dict with
+            compatible properties
         titlefont
-            Sets the title font.
+            Deprecated: Please use layout.title.font instead. Sets
+            the title font. Note that the title's font used to be
+            customized by the now deprecated `titlefont` attribute.
+        uirevision
+            Used to allow user interactions with the plot to
+            persist after `Plotly.react` calls that are unaware of
+            these interactions. If `uirevision` is omitted, or if
+            it is given and it changed from the previous
+            `Plotly.react` call, the exact new figure is used. If
+            `uirevision` is truthy and did NOT change, any
+            attribute that has been affected by user interactions
+            and did not receive a different value in the new figure
+            will keep the interaction value. `layout.uirevision`
+            attribute serves as the default for `uirevision`
+            attributes in various sub-containers. For finer control
+            you can set these sub-attributes directly. For example,
+            if your app separately controls the data on the x and y
+            axes you might set `xaxis.uirevision=*time*` and
+            `yaxis.uirevision=*cost*`. Then if only the y data is
+            changed, you can update `yaxis.uirevision=*quantity*`
+            and the y axis range will reset but the x axis range
+            will retain any user-driven zoom.
         updatemenus
             plotly.graph_objs.layout.Updatemenu instance or dict
             with compatible properties
@@ -3755,6 +4043,8 @@ class Layout(BaseLayoutType):
             compatible properties
         """
 
+    _mapped_properties = {'titlefont': ('title', 'font')}
+
     def __init__(
         self,
         arg=None,
@@ -3771,10 +4061,12 @@ class Layout(BaseLayoutType):
         boxmode=None,
         calendar=None,
         clickmode=None,
+        colorscale=None,
         colorway=None,
         datarevision=None,
         direction=None,
         dragmode=None,
+        editrevision=None,
         extendpiecolors=None,
         font=None,
         geo=None,
@@ -3800,6 +4092,7 @@ class Layout(BaseLayoutType):
         radialaxis=None,
         scene=None,
         selectdirection=None,
+        selectionrevision=None,
         separators=None,
         shapes=None,
         shapedefaults=None,
@@ -3811,6 +4104,7 @@ class Layout(BaseLayoutType):
         ternary=None,
         title=None,
         titlefont=None,
+        uirevision=None,
         updatemenus=None,
         updatemenudefaults=None,
         violingap=None,
@@ -3900,6 +4194,9 @@ class Layout(BaseLayoutType):
             sent accordingly as long as "event" flag is set as
             well. When the "event" flag is missing, `plotly_click`
             and `plotly_selected` events are not fired.
+        colorscale
+            plotly.graph_objs.layout.Colorscale instance or dict
+            with compatible properties
         colorway
             Sets the default trace colors.
         datarevision
@@ -3919,6 +4216,10 @@ class Layout(BaseLayoutType):
             Determines the mode of drag interactions. "select" and
             "lasso" apply only to scatter traces with markers or
             text. "orbit" and "turntable" apply only to 3D scenes.
+        editrevision
+            Controls persistence of user-driven changes in
+            `editable: true` configuration, other than trace names
+            and axis titles. Defaults to `layout.uirevision`.
         extendpiecolors
             If `true`, the pie slice colors (whether given by
             `piecolorway` or inherited from `colorway`) will be
@@ -4019,6 +4320,9 @@ class Layout(BaseLayoutType):
             diagonal. "h" only allows horizontal selection, "v"
             only vertical, "d" only diagonal and "any" sets no
             limit.
+        selectionrevision
+            Controls persistence of user-driven changes in selected
+            points from all traces.
         separators
             Sets the decimal and thousand separators. For example,
             *. * puts a '.' before decimals and a space between
@@ -4079,9 +4383,31 @@ class Layout(BaseLayoutType):
             plotly.graph_objs.layout.Ternary instance or dict with
             compatible properties
         title
-            Sets the plot's title.
+            plotly.graph_objs.layout.Title instance or dict with
+            compatible properties
         titlefont
-            Sets the title font.
+            Deprecated: Please use layout.title.font instead. Sets
+            the title font. Note that the title's font used to be
+            customized by the now deprecated `titlefont` attribute.
+        uirevision
+            Used to allow user interactions with the plot to
+            persist after `Plotly.react` calls that are unaware of
+            these interactions. If `uirevision` is omitted, or if
+            it is given and it changed from the previous
+            `Plotly.react` call, the exact new figure is used. If
+            `uirevision` is truthy and did NOT change, any
+            attribute that has been affected by user interactions
+            and did not receive a different value in the new figure
+            will keep the interaction value. `layout.uirevision`
+            attribute serves as the default for `uirevision`
+            attributes in various sub-containers. For finer control
+            you can set these sub-attributes directly. For example,
+            if your app separately controls the data on the x and y
+            axes you might set `xaxis.uirevision=*time*` and
+            `yaxis.uirevision=*cost*`. Then if only the y data is
+            changed, you can update `yaxis.uirevision=*quantity*`
+            and the y axis range will reset but the x axis range
+            will retain any user-driven zoom.
         updatemenus
             plotly.graph_objs.layout.Updatemenu instance or dict
             with compatible properties
@@ -4157,10 +4483,12 @@ an instance of plotly.graph_objs.Layout"""
         self._validators['boxmode'] = v_layout.BoxmodeValidator()
         self._validators['calendar'] = v_layout.CalendarValidator()
         self._validators['clickmode'] = v_layout.ClickmodeValidator()
+        self._validators['colorscale'] = v_layout.ColorscaleValidator()
         self._validators['colorway'] = v_layout.ColorwayValidator()
         self._validators['datarevision'] = v_layout.DatarevisionValidator()
         self._validators['direction'] = v_layout.DirectionValidator()
         self._validators['dragmode'] = v_layout.DragmodeValidator()
+        self._validators['editrevision'] = v_layout.EditrevisionValidator()
         self._validators['extendpiecolors'
                         ] = v_layout.ExtendpiecolorsValidator()
         self._validators['font'] = v_layout.FontValidator()
@@ -4189,6 +4517,8 @@ an instance of plotly.graph_objs.Layout"""
         self._validators['scene'] = v_layout.SceneValidator()
         self._validators['selectdirection'
                         ] = v_layout.SelectdirectionValidator()
+        self._validators['selectionrevision'
+                        ] = v_layout.SelectionrevisionValidator()
         self._validators['separators'] = v_layout.SeparatorsValidator()
         self._validators['shapes'] = v_layout.ShapesValidator()
         self._validators['shapedefaults'] = v_layout.ShapeValidator()
@@ -4199,7 +4529,7 @@ an instance of plotly.graph_objs.Layout"""
         self._validators['template'] = v_layout.TemplateValidator()
         self._validators['ternary'] = v_layout.TernaryValidator()
         self._validators['title'] = v_layout.TitleValidator()
-        self._validators['titlefont'] = v_layout.TitlefontValidator()
+        self._validators['uirevision'] = v_layout.UirevisionValidator()
         self._validators['updatemenus'] = v_layout.UpdatemenusValidator()
         self._validators['updatemenudefaults'] = v_layout.UpdatemenuValidator()
         self._validators['violingap'] = v_layout.ViolingapValidator()
@@ -4238,6 +4568,8 @@ an instance of plotly.graph_objs.Layout"""
         self['calendar'] = calendar if calendar is not None else _v
         _v = arg.pop('clickmode', None)
         self['clickmode'] = clickmode if clickmode is not None else _v
+        _v = arg.pop('colorscale', None)
+        self['colorscale'] = colorscale if colorscale is not None else _v
         _v = arg.pop('colorway', None)
         self['colorway'] = colorway if colorway is not None else _v
         _v = arg.pop('datarevision', None)
@@ -4246,6 +4578,8 @@ an instance of plotly.graph_objs.Layout"""
         self['direction'] = direction if direction is not None else _v
         _v = arg.pop('dragmode', None)
         self['dragmode'] = dragmode if dragmode is not None else _v
+        _v = arg.pop('editrevision', None)
+        self['editrevision'] = editrevision if editrevision is not None else _v
         _v = arg.pop('extendpiecolors', None)
         self['extendpiecolors'
             ] = extendpiecolors if extendpiecolors is not None else _v
@@ -4302,6 +4636,9 @@ an instance of plotly.graph_objs.Layout"""
         _v = arg.pop('selectdirection', None)
         self['selectdirection'
             ] = selectdirection if selectdirection is not None else _v
+        _v = arg.pop('selectionrevision', None)
+        self['selectionrevision'
+            ] = selectionrevision if selectionrevision is not None else _v
         _v = arg.pop('separators', None)
         self['separators'] = separators if separators is not None else _v
         _v = arg.pop('shapes', None)
@@ -4328,7 +4665,11 @@ an instance of plotly.graph_objs.Layout"""
         _v = arg.pop('title', None)
         self['title'] = title if title is not None else _v
         _v = arg.pop('titlefont', None)
-        self['titlefont'] = titlefont if titlefont is not None else _v
+        _v = titlefont if titlefont is not None else _v
+        if _v is not None:
+            self['titlefont'] = _v
+        _v = arg.pop('uirevision', None)
+        self['uirevision'] = uirevision if uirevision is not None else _v
         _v = arg.pop('updatemenus', None)
         self['updatemenus'] = updatemenus if updatemenus is not None else _v
         _v = arg.pop('updatemenudefaults', None)

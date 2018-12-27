@@ -281,12 +281,21 @@ class Surface(BaseTraceType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    Sets the title of the color bar.
+                    plotly.graph_objs.surface.colorbar.Title
+                    instance or dict with compatible properties
                 titlefont
-                    Sets this color bar's title font.
+                    Deprecated: Please use
+                    surface.colorbar.title.font instead. Sets this
+                    color bar's title font. Note that the title's
+                    font used to be set by the now deprecated
+                    `titlefont` attribute.
                 titleside
-                    Determines the location of the colorbar title
-                    with respect to the color bar.
+                    Deprecated: Please use
+                    surface.colorbar.title.side instead. Determines
+                    the location of color bar's title with respect
+                    to the color bar. Note that the title's
+                    location used to be set by the now deprecated
+                    `titleside` attribute.
                 x
                     Sets the x position of the color bar (in plot
                     fraction).
@@ -982,6 +991,39 @@ class Surface(BaseTraceType):
     def uid(self, val):
         self['uid'] = val
 
+    # uirevision
+    # ----------
+    @property
+    def uirevision(self):
+        """
+        Controls persistence of some user-driven changes to the trace:
+        `constraintrange` in `parcoords` traces, as well as some
+        `editable: true` modifications such as `name` and
+        `colorbar.title`. Defaults to `layout.uirevision`. Note that
+        other user-driven trace attribute changes are controlled by
+        `layout` attributes: `trace.visible` is controlled by
+        `layout.legend.uirevision`, `selectedpoints` is controlled by
+        `layout.selectionrevision`, and `colorbar.(x|y)` (accessible
+        with `config: {editable: true}`) is controlled by
+        `layout.editrevision`. Trace changes are tracked by `uid`,
+        which only falls back on trace index if no `uid` is provided.
+        So if your app can add/remove traces before the end of the
+        `data` array, such that the same trace has a different index,
+        you can still preserve user-driven changes if you give each
+        trace a `uid` that stays with it as it moves.
+    
+        The 'uirevision' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['uirevision']
+
+    @uirevision.setter
+    def uirevision(self, val):
+        self['uirevision'] = val
+
     # visible
     # -------
     @property
@@ -1336,6 +1378,24 @@ class Surface(BaseTraceType):
             Sets the source reference on plot.ly for  text .
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -1395,6 +1455,7 @@ class Surface(BaseTraceType):
         text=None,
         textsrc=None,
         uid=None,
+        uirevision=None,
         visible=None,
         x=None,
         xcalendar=None,
@@ -1547,6 +1608,24 @@ class Surface(BaseTraceType):
             Sets the source reference on plot.ly for  text .
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -1637,6 +1716,7 @@ an instance of plotly.graph_objs.Surface"""
         self._validators['text'] = v_surface.TextValidator()
         self._validators['textsrc'] = v_surface.TextsrcValidator()
         self._validators['uid'] = v_surface.UidValidator()
+        self._validators['uirevision'] = v_surface.UirevisionValidator()
         self._validators['visible'] = v_surface.VisibleValidator()
         self._validators['x'] = v_surface.XValidator()
         self._validators['xcalendar'] = v_surface.XcalendarValidator()
@@ -1717,6 +1797,8 @@ an instance of plotly.graph_objs.Surface"""
         self['textsrc'] = textsrc if textsrc is not None else _v
         _v = arg.pop('uid', None)
         self['uid'] = uid if uid is not None else _v
+        _v = arg.pop('uirevision', None)
+        self['uirevision'] = uirevision if uirevision is not None else _v
         _v = arg.pop('visible', None)
         self['visible'] = visible if visible is not None else _v
         _v = arg.pop('x', None)

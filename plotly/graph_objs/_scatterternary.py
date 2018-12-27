@@ -1113,6 +1113,39 @@ class Scatterternary(BaseTraceType):
     def uid(self, val):
         self['uid'] = val
 
+    # uirevision
+    # ----------
+    @property
+    def uirevision(self):
+        """
+        Controls persistence of some user-driven changes to the trace:
+        `constraintrange` in `parcoords` traces, as well as some
+        `editable: true` modifications such as `name` and
+        `colorbar.title`. Defaults to `layout.uirevision`. Note that
+        other user-driven trace attribute changes are controlled by
+        `layout` attributes: `trace.visible` is controlled by
+        `layout.legend.uirevision`, `selectedpoints` is controlled by
+        `layout.selectionrevision`, and `colorbar.(x|y)` (accessible
+        with `config: {editable: true}`) is controlled by
+        `layout.editrevision`. Trace changes are tracked by `uid`,
+        which only falls back on trace index if no `uid` is provided.
+        So if your app can add/remove traces before the end of the
+        `data` array, such that the same trace has a different index,
+        you can still preserve user-driven changes if you give each
+        trace a `uid` that stays with it as it moves.
+    
+        The 'uirevision' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['uirevision']
+
+    @uirevision.setter
+    def uirevision(self, val):
+        self['uirevision'] = val
+
     # unselected
     # ----------
     @property
@@ -1340,6 +1373,24 @@ class Scatterternary(BaseTraceType):
             Sets the source reference on plot.ly for  text .
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         unselected
             plotly.graph_objs.scatterternary.Unselected instance or
             dict with compatible properties
@@ -1391,6 +1442,7 @@ class Scatterternary(BaseTraceType):
         textpositionsrc=None,
         textsrc=None,
         uid=None,
+        uirevision=None,
         unselected=None,
         visible=None,
         **kwargs
@@ -1563,6 +1615,24 @@ class Scatterternary(BaseTraceType):
             Sets the source reference on plot.ly for  text .
         uid
 
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
         unselected
             plotly.graph_objs.scatterternary.Unselected instance or
             dict with compatible properties
@@ -1650,6 +1720,7 @@ an instance of plotly.graph_objs.Scatterternary"""
                         ] = v_scatterternary.TextpositionsrcValidator()
         self._validators['textsrc'] = v_scatterternary.TextsrcValidator()
         self._validators['uid'] = v_scatterternary.UidValidator()
+        self._validators['uirevision'] = v_scatterternary.UirevisionValidator()
         self._validators['unselected'] = v_scatterternary.UnselectedValidator()
         self._validators['visible'] = v_scatterternary.VisibleValidator()
 
@@ -1734,6 +1805,8 @@ an instance of plotly.graph_objs.Scatterternary"""
         self['textsrc'] = textsrc if textsrc is not None else _v
         _v = arg.pop('uid', None)
         self['uid'] = uid if uid is not None else _v
+        _v = arg.pop('uirevision', None)
+        self['uirevision'] = uirevision if uirevision is not None else _v
         _v = arg.pop('unselected', None)
         self['unselected'] = unselected if unselected is not None else _v
         _v = arg.pop('visible', None)
