@@ -106,10 +106,7 @@ class {datatype_class}({node.name_base_datatype}):\n""")
     # ### Property definitions ###
     child_datatype_nodes = node.child_datatypes
 
-    # Order so that mapped nodes come first, this way the unmapped properties
-    # take precedence
     subtype_nodes = child_datatype_nodes
-
     for subtype_node in subtype_nodes:
         if subtype_node.is_array_element:
             prop_type = (f"tuple[plotly.graph_objs{node.dotpath_str}." +
