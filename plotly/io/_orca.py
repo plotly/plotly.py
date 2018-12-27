@@ -9,6 +9,7 @@ import sys
 import threading
 import warnings
 from copy import copy
+from contextlib import contextmanager
 
 import requests
 import retrying
@@ -836,6 +837,36 @@ status = OrcaStatus()
 del OrcaStatus
 
 
+@contextmanager
+def orca_env():
+    """
+    Context manager to clear and restore environment variables that are
+    problematic for orca to function properly
+
+    NODE_OPTIONS: When this variable is set, orca <v1.2 will have a
+    segmentation fault due to an electron bug.
+    See: https://github.com/electron/electron/issues/12695
+
+    ELECTRON_RUN_AS_NODE: When this environment variable is set the call
+    to orca is transformed into a call to nodejs.
+    See https://github.com/plotly/orca/issues/149#issuecomment-443506732
+    """
+    clear_env_vars = ['NODE_OPTIONS', 'ELECTRON_RUN_AS_NODE']
+    orig_env_vars = {}
+
+    try:
+        # Clear and save
+        orig_env_vars.update({
+            var: os.environ.pop(var)
+            for var in clear_env_vars
+            if var in os.environ})
+        yield
+    finally:
+        # Restore
+        for var, val in orig_env_vars.items():
+            os.environ[var] = val
+
+
 # Public orca server interaction functions
 # ----------------------------------------
 def validate_executable():
@@ -918,13 +949,6 @@ Searched for executable '{executable}' on the following path:
             formatted_path=formatted_path,
             instructions=install_location_instructions))
 
-    # Clear NODE_OPTIONS environment variable
-    # ---------------------------------------
-    # When this variable is set, orca <v1.2 will have a segmentation fault
-    # due to an electron bug.
-    # See: https://github.com/electron/electron/issues/12695
-    os.environ.pop('NODE_OPTIONS', None)
-
     # Run executable with --help and see if it's our orca
     # ---------------------------------------------------
     invalid_executable_msg = """
@@ -938,12 +962,13 @@ this message for details on what went wrong.
         instructions=install_location_instructions)
 
     # ### Run with Popen so we get access to stdout and stderr
-    p = subprocess.Popen(
-        [executable, '--help'],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE)
+    with orca_env():
+        p = subprocess.Popen(
+            [executable, '--help'],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE)
 
-    help_result, help_error = p.communicate()
+        help_result, help_error = p.communicate()
 
     if p.returncode != 0:
         err_msg = invalid_executable_msg + """
@@ -986,12 +1011,13 @@ The error encountered is that unexpected output was returned by the command
     # Get orca version
     # ----------------
     # ### Run with Popen so we get access to stdout and stderr
-    p = subprocess.Popen(
-        [executable, '--version'],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE)
+    with orca_env():
+        p = subprocess.Popen(
+            [executable, '--version'],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE)
 
-    version_result, version_error = p.communicate()
+        version_result, version_error = p.communicate()
 
     if p.returncode != 0:
         raise ValueError(invalid_executable_msg + """
@@ -1171,8 +1197,9 @@ Install using conda:
             # Create subprocess that launches the orca server on the
             # specified port.
             DEVNULL = open(os.devnull, 'wb')
-            orca_state['proc'] = subprocess.Popen(cmd_list,
-                                                  stdout=DEVNULL)
+            with orca_env():
+                orca_state['proc'] = subprocess.Popen(cmd_list,
+                                                      stdout=DEVNULL)
 
             # Update orca.status so the user has an accurate view
             # of the state of the orca server
@@ -1191,7 +1218,7 @@ Install using conda:
             orca_state['shutdown_timer'] = t
 
 
-@retrying.retry(wait_random_min=5, wait_random_max=10, stop_max_delay=8000)
+@retrying.retry(wait_random_min=5, wait_random_max=10, stop_max_delay=30000)
 def request_image_with_retrying(**kwargs):
     """
     Helper method to perform an image request to a running orca server process
