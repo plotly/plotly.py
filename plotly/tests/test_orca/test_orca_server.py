@@ -13,6 +13,10 @@ import pytest
 # --------
 @pytest.fixture()
 def setup():
+    # Set problematic environment variables
+    os.environ['NODE_OPTIONS'] = '--max-old-space-size=4096'
+    os.environ['ELECTRON_RUN_AS_NODE'] = '1'
+
     # Reset orca state
     pio.orca.reset_status()
     pio.orca.config.restore_defaults()
