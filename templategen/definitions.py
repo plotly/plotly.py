@@ -224,6 +224,20 @@ linear_bmw_5_95_c86_n256 = [
 
 jupyterlab_output_clr = 'rgb(17,17,17)'
 
+plotly_diverging = [
+        [0, '#8e0152'],
+        [0.1, '#c51b7d'],
+        [0.2, '#de77ae'],
+        [0.3, '#f1b6da'],
+        [0.4, '#fde0ef'],
+        [0.5, '#f7f7f7'],
+        [0.6, '#e6f5d0'],
+        [0.7, '#b8e186'],
+        [0.8, '#7fbc41'],
+        [0.9, '#4d9221'],
+        [1, '#276419'],
+]
+
 
 def plotly():
     # Define colors
@@ -278,6 +292,7 @@ def plotly():
         colorway=colorway,
         colorbar_common=colorbar_common,
         colorscale=colorscale,
+        colorscale_diverging=plotly_diverging,
         axis_common=axis_common,
         annotation_defaults=annotation_defaults,
         shape_defaults=shape_defaults
@@ -352,6 +367,7 @@ def plotly_white():
         colorway=colorway,
         colorbar_common=colorbar_common,
         colorscale=colorscale,
+        colorscale_diverging=plotly_diverging,
         axis_common=axis_common,
         annotation_defaults=annotation_defaults,
         shape_defaults=shape_defaults
@@ -434,6 +450,7 @@ def plotly_dark():
         colorway=colorway,
         colorbar_common=colorbar_common,
         colorscale=colorscale,
+        colorscale_diverging=plotly_diverging,
         axis_common=axis_common,
         annotation_defaults=annotation_defaults,
         shape_defaults=shape_defaults
@@ -487,11 +504,6 @@ def presentation():
 
     # Increase global font size by 1.5x (12->18)
     template.layout.font.size = 18
-
-    # Set automargin to true in case we need to adjust margins for
-    # larger font size
-    template.layout.xaxis.automargin = True
-    template.layout.yaxis.automargin = True
 
     # Increase scatter markers and lines by 1.5x
     opts = {'marker': {'size': 9}, 'line': {'width': 3}}
