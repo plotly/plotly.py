@@ -1,4 +1,6 @@
 import pytest
+from six import string_types
+
 from _plotly_utils.basevalidators import StringValidator
 import numpy as np
 
@@ -50,9 +52,10 @@ def validator_no_blanks_aok():
 # ### Acceptance ###
 @pytest.mark.parametrize('val',
                          ['bar', 234, np.nan,
-                          'HELLO!!!', 'world!@#$%^&*()', ''])
+                          'HELLO!!!', 'world!@#$%^&*()', '', u'\u03BC'])
 def test_acceptance(val, validator):
-    assert validator.validate_coerce(val) == str(val)
+    expected = str(val) if not isinstance(val, string_types) else val
+    assert validator.validate_coerce(val) == expected
 
 
 # ### Rejection by value ###
@@ -85,7 +88,7 @@ def test_rejection_values(val, validator_values):
 
 # ### No blanks ###
 @pytest.mark.parametrize('val',
-                         ['bar', 'HELLO!!!', 'world!@#$%^&*()'])
+                         ['bar', 'HELLO!!!', 'world!@#$%^&*()',  u'\u03BC'])
 def test_acceptance_no_blanks(val, validator_no_blanks):
     assert validator_no_blanks.validate_coerce(val) == val
 
@@ -103,7 +106,7 @@ def test_rejection_no_blanks(val, validator_no_blanks):
 # ------
 # ### Acceptance ###
 @pytest.mark.parametrize('val',
-                         ['bar', 'HELLO!!!', 'world!@#$%^&*()', ''])
+                         ['bar', 'HELLO!!!', 'world!@#$%^&*()', '', u'\u03BC'])
 def test_acceptance_strict(val, validator_strict):
     assert validator_strict.validate_coerce(val) == val
 
@@ -122,7 +125,7 @@ def test_rejection_strict(val, validator_strict):
 # --------
 # ### Acceptance ###
 @pytest.mark.parametrize('val',
-                         ['foo', 'BAR', '', 'baz'])
+                         ['foo', 'BAR', '', 'baz', u'\u03BC'])
 def test_acceptance_aok_scalars(val, validator_aok):
     assert validator_aok.validate_coerce(val) == val
 
@@ -130,9 +133,9 @@ def test_acceptance_aok_scalars(val, validator_aok):
 @pytest.mark.parametrize('val',
                          ['foo',
                           ['foo'],
-                          np.array(['BAR', ''], dtype='object'),
+                          np.array(['BAR', '', u'\u03BC'], dtype='object'),
                           ['baz', 'baz', 'baz'],
-                          ['foo', None, 'bar']])
+                          ['foo', None, 'bar', u'\u03BC']])
 def test_acceptance_aok_list(val, validator_aok):
     coerce_val = validator_aok.validate_coerce(val)
     if isinstance(val, np.ndarray):
@@ -173,7 +176,7 @@ def test_rejection_aok_values(val, validator_aok_values):
                          ['123',
                           ['bar', 'HELLO!!!'],
                           np.array(['bar', 'HELLO!!!'], dtype='object'),
-                          ['world!@#$%^&*()']])
+                          ['world!@#$%^&*()', u'\u03BC']])
 def test_acceptance_no_blanks_aok(val, validator_no_blanks_aok):
     coerce_val = validator_no_blanks_aok.validate_coerce(val)
     if isinstance(val, np.ndarray):

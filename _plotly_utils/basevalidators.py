@@ -874,6 +874,17 @@ class StringValidator(BaseValidator):
         self.array_ok = array_ok
         self.values = values
 
+    @staticmethod
+    def to_str_or_unicode_or_none(v):
+        """
+        Convert a value to a string if it's not None, a string,
+        or a unicode (on Python 2).
+        """
+        if v is None or isinstance(v, string_types):
+            return v
+        else:
+            return str(v)
+
     def description(self):
         desc = ("""\
     The '{plotly_name}' property is a string and must be specified as:"""
@@ -938,10 +949,8 @@ class StringValidator(BaseValidator):
 
             elif is_simple_array(v):
                 if not self.strict:
-                    # Convert all elements other than None to strings
-                    # Leave None as is, Plotly.js will decide how to handle
-                    # these null values.
-                    v = [str(e) if e is not None else None for e in v]
+                    v = [StringValidator.to_str_or_unicode_or_none(e)
+                         for e in v]
 
                 # Check no_blank
                 if self.no_blank:
@@ -962,11 +971,13 @@ class StringValidator(BaseValidator):
                 if not isinstance(v, string_types):
                     self.raise_invalid_val(v)
             else:
-                if not isinstance(v, string_types + (int, float)):
+                if isinstance(v, string_types):
+                    pass
+                elif isinstance(v, (int, float)):
+                    # Convert value to a string
+                    v = str(v)
+                else:
                     self.raise_invalid_val(v)
-
-                # Convert value to a string
-                v = str(v)
 
             if self.no_blank and len(v) == 0:
                 self.raise_invalid_val(v)
