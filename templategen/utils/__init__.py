@@ -29,18 +29,6 @@ colorscale_parent_paths = [
 ]
 
 
-def set_all_colorscales(template, colorscale):
-    for parent_path in colorscale_parent_paths:
-        if not template.data[parent_path[0]]:
-            template.data[parent_path[0]] = [{}]
-
-        for trace in template.data[parent_path[0]]:
-            parent = trace[parent_path[1:]]
-            if 'colorscale' in parent:
-                parent.colorscale = colorscale
-                parent.autocolorscale = False
-
-
 def set_all_colorbars(template, colorbar):
     for parent_path in colorscale_parent_paths:
         if not template.data[parent_path[0]]:
@@ -67,7 +55,9 @@ def initialize_template(annotation_defaults,
                         table_cell_clr,
                         table_header_clr,
                         table_line_clr,
-                        zerolinecolor_clr):
+                        zerolinecolor_clr,
+                        colorscale_minus=None,
+                        colorscale_diverging=None):
 
     # Initialize template
     # -------------------
@@ -84,13 +74,32 @@ def initialize_template(annotation_defaults,
     template.layout.plot_bgcolor = panel_background_clr
     template.layout.polar.bgcolor = panel_background_clr
     template.layout.ternary.bgcolor = panel_background_clr
-    set_all_colorscales(template, colorscale)
     set_all_colorbars(template, colorbar_common)
     cartesian_axis = dict(axis_common, zerolinecolor=zerolinecolor_clr)
+
+    # Colorscales
+    template.layout.colorscale.sequential = colorscale
+    if colorscale_minus is not None:
+        template.layout.colorscale.sequentialminus = colorscale_minus
+    else:
+        template.layout.colorscale.sequentialminus = colorscale
+
+    if colorscale_diverging is not None:
+        template.layout.colorscale.diverging = colorscale_diverging
+
+    template.data.heatmap[0].autocolorscale = True
+    template.data.histogram2d[0].autocolorscale = True
+    template.data.histogram2dcontour[0].autocolorscale = True
+    template.data.contour[0].autocolorscale = True
 
     # Cartesian
     template.layout.xaxis = cartesian_axis
     template.layout.yaxis = cartesian_axis
+
+    # Set automargin to true in case we need to adjust margins for
+    # larger font size
+    template.layout.xaxis.automargin = True
+    template.layout.yaxis.automargin = True
 
     # 3D
     axis_3d = dict(cartesian_axis)
