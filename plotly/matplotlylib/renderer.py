@@ -735,5 +735,4 @@ class PlotlyRenderer(Renderer):
                 pass
 
     def strip_style(self):
-        self.msg += "Stripping mpl style, deleting keys from data and layout\n"
-        self.plotly_fig.strip_style()
+        self.msg += "Stripping mpl style is no longer supported\n"
