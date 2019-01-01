@@ -15,10 +15,12 @@ class TestUpdateMethod(TestCase):
     def test_update_dict(self):
         title = 'this'
         fig = Figure()
-        fig.update(layout=Layout(title=title))
+        update_res1 = fig.update(layout=Layout(title=title))
         assert fig == Figure(layout=Layout(title=title))
-        fig['layout'].update(xaxis=XAxis())
+        update_res2 = fig['layout'].update(xaxis=XAxis())
         assert fig == Figure(layout=Layout(title=title, xaxis=XAxis()))
+        assert update_res1 is fig
+        assert update_res2 is fig.layout
 
 
     def test_update_list(self):
@@ -26,24 +28,27 @@ class TestUpdateMethod(TestCase):
         trace2 = Scatter(x=[1, 2, 3], y=[3, 2, 1])
         fig = Figure([trace1, trace2])
         update = dict(x=[2, 3, 4], y=[1, 2, 3])
-        fig.data[0].update(update)
-        fig.data[1].update(update)
+        update_res1 = fig.data[0].update(update)
+        update_res2 = fig.data[1].update(update)
 
         d1, d2 = strip_dict_params(fig.data[0], Scatter(x=[2, 3, 4], y=[1, 2, 3]))
         assert d1 == d2
         d1, d2 = strip_dict_params(fig.data[1], Scatter(x=[2, 3, 4], y=[1, 2, 3]))
         assert d1 == d2
+        assert update_res1 is fig.data[0]
+        assert update_res2 is fig.data[1]
 
 
     def test_update_dict_empty(self):
         trace1 = Scatter(x=[1, 2, 3], y=[2, 1, 2])
         trace2 = Scatter(x=[1, 2, 3], y=[3, 2, 1])
         fig = Figure([trace1, trace2])
-        fig.update({})
+        update_res = fig.update({})
         d1, d2 = strip_dict_params(fig.data[0], Scatter(x=[1, 2, 3], y=[2, 1, 2]))
         assert d1 == d2
         d1, d2 = strip_dict_params(fig.data[1], Scatter(x=[1, 2, 3], y=[3, 2, 1]))
         assert d1 == d2
+        assert update_res is fig
 
 
     def test_update_list_empty(self):

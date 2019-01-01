@@ -3023,6 +3023,8 @@ class BasePlotlyType(object):
             BaseFigure._perform_update(self, dict1)
             BaseFigure._perform_update(self, kwargs)
 
+        return self
+
     @property
     def _in_batch_mode(self):
         """
