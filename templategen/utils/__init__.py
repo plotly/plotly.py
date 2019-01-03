@@ -69,6 +69,9 @@ def initialize_template(annotation_defaults,
     # Set global font color
     template.layout.font.color = font_clr
 
+    # hovermode
+    template.layout.hovermode = 'closest'
+
     # Set background colors
     template.layout.paper_bgcolor = paper_clr
     template.layout.plot_bgcolor = panel_background_clr
