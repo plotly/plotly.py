@@ -298,6 +298,9 @@ def plotly():
         shape_defaults=shape_defaults
     )
 
+    # Left align title
+    template.layout.title.x = 0.05
+
     # Increase grid width for 3d plots
     template.layout.scene.xaxis.gridwidth = 2
     template.layout.scene.yaxis.gridwidth = 2
@@ -372,6 +375,9 @@ def plotly_white():
         annotation_defaults=annotation_defaults,
         shape_defaults=shape_defaults
     )
+
+    # Left align title
+    template.layout.title.x = 0.05
 
     # Increase grid width for 3d plots
     opts = dict(gridwidth=2, gridcolor=plotly_clrs['Rhino Light 1'])
@@ -455,6 +461,9 @@ def plotly_dark():
         annotation_defaults=annotation_defaults,
         shape_defaults=shape_defaults
     )
+
+    # Left align title
+    template.layout.title.x = 0.05
 
     # Increase grid width for 3d plots
     template.layout.scene.xaxis.gridwidth = 2
