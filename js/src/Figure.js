@@ -1573,8 +1573,11 @@ function isTypedArray(potentialTypedArray) {
  *
  * See: https://lodash.com/docs/latest#mergeWith
  */
-function fullMergeCustomizer(objValue, srcValue) {
-    if (isTypedArray(srcValue)) {
+function fullMergeCustomizer(objValue, srcValue, key) {
+    if (key[0] === '_') {
+        // Don't recurse into private properties
+        return null
+    } else if (isTypedArray(srcValue)) {
         // Return typed arrays directly, don't recurse inside
         return srcValue
     }
