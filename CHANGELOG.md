@@ -2,6 +2,62 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.5.0] - ???
+
+### Updated
+ - Updated Plotly.js to version 1.43.1. See the
+ [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1431----2018-12-21)
+ for more information.
+ 
+### Changed
+ - Plotly.js 1.43 converted `title` properties (e.g. `layout.title`) from
+ strings into compound objects that contain the text as the `text` property
+ along with new title placement attributes `x`, `y`, `xref`, `yref`, `xanchor`,
+ `yanchor` and `pad`. Plotly.py 3.5.0 follows the new schema, but still
+ supports specifying `title` as a string, in which case the string is assigned
+ to the `title.text` property
+ ([#1302](https://github.com/plotly/plotly.py/issues/1302))
+ - Plotly.js 1.43 also moved existing `title*` properties
+ (e.g. `layout.titlefont`) under the `title` object (e.g. `layout.title.font`).
+ Plotly.py 3.5.0 follows the new schema, but still
+ supports the legacy `title*` properties by mapping them to the corresponding
+ `title.*` property
+ ([#1302](https://github.com/plotly/plotly.py/issues/1302))
+ - The `update` method on `graph_objs` now returns the updated object in order
+ to support chaining multiple update operations together
+ ([#1379](https://github.com/plotly/plotly.py/issues/1379))
+ - The `show_link` option has been set to `False` by default in the offline
+ `plot` and `iplot` functions. Now that the "send data to cloud" button has
+ been disabled by default in plotly.js 1.43.0, no buttons/links will be
+ displayed by default that result in data being sent off of the local machine
+ ([#1304](https://github.com/plotly/plotly.py/issues/1304))
+ - `config` options that are not known by plotly.py result in a warning but are
+ still passed along to plotly.js. Prior to this change these unknown options
+ were dropped silently
+ ([#1290](https://github.com/plotly/plotly.py/issues/1290))
+ - Built-in themes now specify colorscales using the new global
+ `layout.colorscale` properties.  Previously the colorscales were defined for
+ each trace type individually. This reduces the size of the resulting theme
+ files 
+ ([#1303](https://github.com/plotly/plotly.py/issues/1303))
+ - Increased the maximum retry time of the orca integration from 8s to 30s
+ ([#1297](https://github.com/plotly/plotly.py/issues/1297))
+ 
+### Fixed
+ - Fixed `FigureWidget` performance regression that, when working with
+ large datasets, resulted in a slight freeze of the widget after user
+ interactions (pan, zoom, etc)
+ ([1305](https://github.com/plotly/plotly.py/issues/1305)) 
+ - Fix orca error when the `ELECTRON_RUN_AS_NODE` environment variable is set
+ ([#1293](https://github.com/plotly/plotly.py/issues/1293))
+ - The `'responsive'` config key was being silently blocked
+ ([#1290](https://github.com/plotly/plotly.py/issues/1290))
+ - Fixed error when using unicode characters in string properties on Python 2
+ ([#1289](https://github.com/plotly/plotly.py/issues/1289))
+ - Removed invalid calls to non-existent `validate` and `strip_style` `Figure`
+ methods in matplotlylib conversion logic 
+ ([#1128](https://github.com/plotly/plotly.py/issues/1128))
+ 
 ## [3.4.2] - 2018-11-23
 
 ### Fixed
