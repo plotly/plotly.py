@@ -393,7 +393,6 @@ var FigureModel = widgets.DOMWidgetModel.extend({
      */
     initialize: function() {
         FigureModel.__super__.initialize.apply(this, arguments);
-        console.log(["FigureModel: initialize"]);
 
         this.on("change:_data", this.do_data, this);
         this.on("change:_layout", this.do_layout, this);
@@ -441,12 +440,7 @@ var FigureModel = widgets.DOMWidgetModel.extend({
      * This should only happed on FigureModel initialization
      */
     do_data: function () {
-        console.log("Figure Model: do_data");
-        var data = this.get("_data");
 
-        if (data !== null) {
-            console.log(data);
-        }
     },
 
     /**
@@ -455,12 +449,7 @@ var FigureModel = widgets.DOMWidgetModel.extend({
      * This should only happed on FigureModel initialization
      */
     do_layout: function () {
-        console.log("Figure Model: do_layout");
-        var layout = this.get("_layout");
 
-        if (layout !== null) {
-            console.log(layout);
-        }
     },
 
     /**
@@ -468,13 +457,10 @@ var FigureModel = widgets.DOMWidgetModel.extend({
      */
     do_addTraces: function () {
         // add trace to plot
-        console.log("Figure Model: do_addTraces");
-
         /** @type {Py2JsAddTracesMsg} */
         var msgData = this.get("_py2js_addTraces");
 
         if (msgData !== null) {
-            console.log(msgData);
             var currentTraces = this.get("_data");
             var newTraces = msgData.trace_data;
             _.forEach(newTraces, function (newTrace) {
@@ -488,7 +474,6 @@ var FigureModel = widgets.DOMWidgetModel.extend({
      */
     do_deleteTraces: function () {
         // remove traces from plot
-        console.log("Figure Model: do_deleteTraces");
 
         /** @type {Py2JsDeleteTracesMsg} */
         var msgData = this.get("_py2js_deleteTraces");
@@ -509,12 +494,9 @@ var FigureModel = widgets.DOMWidgetModel.extend({
      * Handle moveTraces message
      */
     do_moveTraces: function () {
-        console.log("Figure Model: do_moveTraces");
 
         /** @type {Py2JsMoveTracesMsg} */
         var msgData = this.get("_py2js_moveTraces");
-
-        console.log("do_moveTraces");
 
         if (msgData !== null) {
             var tracesData = this.get("_data");
@@ -529,7 +511,6 @@ var FigureModel = widgets.DOMWidgetModel.extend({
      * Handle restyle message
      */
     do_restyle: function () {
-        console.log("FigureModel: do_restyle");
 
         /** @type {Py2JsRestyleMsg} */
         var msgData = this.get("_py2js_restyle");
@@ -545,15 +526,12 @@ var FigureModel = widgets.DOMWidgetModel.extend({
      * Handle relayout message
      */
     do_relayout: function () {
-        console.log("FigureModel: do_relayout");
 
         /** @type {Py2JsRelayoutMsg} */
         var msgData = this.get("_py2js_relayout");
 
         if (msgData !== null) {
-            console.log(msgData);
             performRelayoutLike(this.get("_layout"), msgData.relayout_data);
-            console.log(this.get("_layout"))
         }
     },
 
@@ -561,14 +539,11 @@ var FigureModel = widgets.DOMWidgetModel.extend({
      * Handle update message
      */
     do_update: function() {
-        console.log("FigureModel: do_update");
 
         /** @type {Py2JsUpdateMsg} */
         var msgData = this.get("_py2js_update");
 
         if (msgData !== null) {
-            console.log(msgData);
-
             var style = msgData.style_data;
             var layout = msgData.layout_data;
             var styleTraces = this._normalize_trace_indexes(
@@ -582,12 +557,10 @@ var FigureModel = widgets.DOMWidgetModel.extend({
      * Handle animate message
      */
     do_animate: function () {
-        console.log("FigureModel: do_animate");
 
         /** @type {Py2JsAnimateMsg} */
         var msgData = this.get("_py2js_animate");
         if (msgData !== null) {
-            console.log(msgData);
 
             var styles = msgData.style_data;
             var layout = msgData.layout_data;
@@ -609,19 +582,13 @@ var FigureModel = widgets.DOMWidgetModel.extend({
      * Handle removeLayoutProps message
      */
     do_removeLayoutProps: function () {
-        console.log("FigureModel:do_removeLayoutProps");
-
         /** @type {Py2JsRemoveLayoutPropsMsg} */
         var msgData = this.get("_py2js_removeLayoutProps");
 
         if (msgData !== null) {
-            console.log(this.get("_layout"));
-
             var keyPaths = msgData.remove_props;
             var layout = this.get("_layout");
             performRemoveProps(layout, keyPaths);
-
-            console.log(this.get("_layout"));
         }
     },
 
@@ -629,12 +596,9 @@ var FigureModel = widgets.DOMWidgetModel.extend({
      * Handle removeTraceProps message
      */
     do_removeTraceProps: function () {
-        console.log("FigureModel:do_removeTraceProps");
-
         /** @type {Py2JsRemoveTracePropsMsg} */
         var msgData = this.get("_py2js_removeTraceProps");
         if (msgData !== null) {
-            console.log(msgData);
             var keyPaths = msgData.remove_props;
             var traceIndex = msgData.remove_trace;
             var trace = this.get("_data")[traceIndex];
@@ -737,14 +701,9 @@ var FigureView = widgets.DOMWidgetView.extend({
         // Set view UID
         // ------------
         this.viewID = PlotlyIndex.randstr();
-        console.log("Created view with id: " + this.viewID);
 
         // Initialize Plotly.js figure
         // ---------------------------
-        console.log("render");
-        console.log(this.model.get("_data"));
-        console.log(this.model.get("_layout"));
-
         // We must clone the model's data and layout properties so that
         // the model is not directly mutated by the Plotly.js library.
         var initialTraces = _.cloneDeep(this.model.get("_data"));
@@ -833,7 +792,6 @@ var FigureView = widgets.DOMWidgetView.extend({
                 // Rendering actual figure in the after-attach event allows
                 // Plotly.js to size the figure to fill the available element
                 this.perform_render();
-                console.log([that.el._fullLayout.height, that.el._fullLayout.width]);
                 break;
             case 'resize':
                 this.autosizeFigure();
@@ -1031,10 +989,6 @@ var FigureView = widgets.DOMWidgetView.extend({
             source_view_id: this.viewID
         };
 
-        // Log message
-        console.log("plotly_restyle");
-        console.log(restyleMsg);
-
         this.model.set("_js2py_restyle", restyleMsg);
         this.touch();
     },
@@ -1060,10 +1014,6 @@ var FigureView = widgets.DOMWidgetView.extend({
             relayout_data: data,
             source_view_id: this.viewID
         };
-
-        // Log message
-        console.log("plotly_relayout");
-        console.log(relayoutMsg);
 
         this.model.set("_js2py_relayout", relayoutMsg);
         this.touch();
@@ -1095,9 +1045,6 @@ var FigureView = widgets.DOMWidgetView.extend({
         };
 
         // Log message
-        console.log("plotly_update");
-        console.log(updateMsg);
-
         this.model.set("_js2py_update", updateMsg);
         this.touch();
     },
@@ -1182,10 +1129,7 @@ var FigureView = widgets.DOMWidgetView.extend({
         /** @type {Py2JsAddTracesMsg} */
         var msgData = this.model.get("_py2js_addTraces");
 
-        console.log("Figure View: do_addTraces");
-
         if (msgData !== null) {
-            console.log(msgData);
 
             // Save off original number of traces
             var prevNumTraces = this.el.data.length;
@@ -1211,7 +1155,6 @@ var FigureView = widgets.DOMWidgetView.extend({
         /** @type {Py2JsDeleteTracesMsg} */
         var msgData = this.model.get("_py2js_deleteTraces");
 
-        console.log(["do_deleteTraces", msgData]);
         if (msgData  !== null){
             var delete_inds = msgData.delete_inds;
             var that = this;
@@ -1235,7 +1178,6 @@ var FigureView = widgets.DOMWidgetView.extend({
 
         /** @type {Py2JsMoveTracesMsg} */
         var msgData = this.model.get("_py2js_moveTraces");
-        console.log("do_moveTraces");
 
         if (msgData !== null){
             // Unpack message
@@ -1256,11 +1198,9 @@ var FigureView = widgets.DOMWidgetView.extend({
      * Handle Plotly.restyle request
      */
     do_restyle: function () {
-        console.log("do_restyle");
 
         /** @type {Py2JsRestyleMsg} */
         var msgData = this.model.get("_py2js_restyle");
-        console.log(msgData);
         if (msgData !== null) {
             var restyleData = msgData.restyle_data;
             var traceIndexes = this.model._normalize_trace_indexes(
@@ -1284,7 +1224,6 @@ var FigureView = widgets.DOMWidgetView.extend({
      * Handle Plotly.relayout request
      */
     do_relayout: function () {
-        console.log("FigureView: do_relayout");
 
         /** @type {Py2JsRelayoutMsg} */
         var msgData = this.model.get("_py2js_relayout");
@@ -1305,7 +1244,6 @@ var FigureView = widgets.DOMWidgetView.extend({
      * Handle Plotly.update request
      */
     do_update: function () {
-        console.log("FigureView: do_update");
 
         /** @type {Py2JsUpdateMsg} */
         var msgData = this.model.get("_py2js_update");
@@ -1334,7 +1272,6 @@ var FigureView = widgets.DOMWidgetView.extend({
      * Handle Plotly.animate request
      */
     do_animate: function() {
-        console.log("FigureView: do_animate");
 
         /** @type {Py2JsAnimateMsg} */
         var msgData = this.model.get("_py2js_animate");
@@ -1424,7 +1361,6 @@ var FigureView = widgets.DOMWidgetView.extend({
             trace_deltas: trace_deltas,
             trace_edit_id: trace_edit_id};
 
-        console.log(["traceDeltasMsg", traceDeltasMsg]);
         this.model.set("_js2py_traceDeltas", traceDeltasMsg);
         this.touch();
     }
@@ -1573,8 +1509,11 @@ function isTypedArray(potentialTypedArray) {
  *
  * See: https://lodash.com/docs/latest#mergeWith
  */
-function fullMergeCustomizer(objValue, srcValue) {
-    if (isTypedArray(srcValue)) {
+function fullMergeCustomizer(objValue, srcValue, key) {
+    if (key[0] === '_') {
+        // Don't recurse into private properties
+        return null
+    } else if (isTypedArray(srcValue)) {
         // Return typed arrays directly, don't recurse inside
         return srcValue
     }
