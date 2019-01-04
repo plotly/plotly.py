@@ -1,5 +1,5 @@
-__version__ = '3.4.2'
-__frontend_version__ = '^0.5.2'
+__version__ = '3.5.0'
+__frontend_version__ = '^0.6.0'
 
 
 def stable_semver():
