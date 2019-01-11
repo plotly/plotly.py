@@ -350,7 +350,14 @@ class DataArrayValidator(BaseValidator):
         elif is_simple_array(v):
             v = to_scalar_or_list(v)
         else:
-            self.raise_invalid_val(v)
+            # Try to coerce 'v' into an array. Useful if 'v' is a list-like object, such as a 
+            # PyTorch tensor, an xarray Dataframe, etc that knows how to turn itself into a Numpy array.
+            v_array = np.array(v)
+            # If np.array returns a scalar object, then it failed to coerce it to a list-like object.
+            if v_array.shape == ():
+                self.raise_invalid_val(v)
+            else:
+                return self.validate_coerce(v_array)
         return v
 
 
