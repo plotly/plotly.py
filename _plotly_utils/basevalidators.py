@@ -101,16 +101,19 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
             else:
                 # DatetimeIndex
                 v = v.to_pydatetime()
-
     if not isinstance(v, np.ndarray):
-        # v is not homogenous array
-        v_list = [to_scalar_or_list(e) for e in v]
+        # v has its own logic on how to convert itself into a numpy array
+        if is_numpy_convertable(v):
+            new_v = np.array(v)
+        else:
+            # v is not homogenous array
+            v_list = [to_scalar_or_list(e) for e in v]
 
-        # Lookup dtype for requested kind, if any
-        dtype = kind_default_dtypes.get(first_kind, None)
+            # Lookup dtype for requested kind, if any
+            dtype = kind_default_dtypes.get(first_kind, None)
 
-        # construct new array from list
-        new_v = np.array(v_list, order='C', dtype=dtype)
+            # construct new array from list
+            new_v = np.array(v_list, order='C', dtype=dtype)
     elif v.dtype.kind in numeric_kinds:
         # v is a homogenous numeric array
         if kind and v.dtype.kind not in kind:
@@ -148,11 +151,19 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
     return new_v
 
 
+def is_numpy_convertable(v):
+    """
+    Return whether a value is meaningfully convertable to a numpy array
+    via 'numpy.array'
+    """
+    return hasattr(v, '__array__') or hasattr(v, '__array_interface__')
+
+
 def is_homogeneous_array(v):
     """
     Return whether a value is considered to be a homogeneous array
     """
-    return ((np and isinstance(v, np.ndarray)) or
+    return ((np and (isinstance(v, np.ndarray) or is_numpy_convertable(v))) or
             (pd and isinstance(v, (pd.Series, pd.Index))))
 
 
@@ -350,14 +361,7 @@ class DataArrayValidator(BaseValidator):
         elif is_simple_array(v):
             v = to_scalar_or_list(v)
         else:
-            # Try to coerce 'v' into an array. Useful if 'v' is a list-like object, such as a 
-            # PyTorch tensor, an xarray Dataframe, etc that knows how to turn itself into a Numpy array.
-            v_array = np.array(v)
-            # If np.array returns a scalar object, then it failed to coerce it to a list-like object.
-            if v_array.shape == ():
-                self.raise_invalid_val(v)
-            else:
-                return self.validate_coerce(v_array)
+            self.raise_invalid_val(v)
         return v
 
 
