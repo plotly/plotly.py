@@ -156,13 +156,15 @@ def is_numpy_convertable(v):
     Return whether a value is meaningfully convertable to a numpy array
     via 'numpy.array'
     """
+    if np.isscalar(v):  # Scalar types like numpy.float64 shouldn't count as arrays
+        return False
     return hasattr(v, '__array__') or hasattr(v, '__array_interface__')
 
 
 def is_homogeneous_array(v):
     """
     Return whether a value is considered to be a homogeneous array
-    """
+    """    
     return ((np and (isinstance(v, np.ndarray) or is_numpy_convertable(v))) or
             (pd and isinstance(v, (pd.Series, pd.Index))))
 
