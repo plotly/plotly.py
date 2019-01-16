@@ -947,6 +947,7 @@ class StringValidator(BaseValidator):
             # Pass None through
             pass
         elif self.array_ok and is_array(v):
+
             # If strict, make sure all elements are strings.
             if self.strict:
                 invalid_els = [e for e in v if not isinstance(e, string_types)]
@@ -1123,9 +1124,9 @@ class ColorValidator(BaseValidator):
             v = copy_to_readonly_numpy_array(v)
             if (self.numbers_allowed() and
                     v.dtype.kind in ['u', 'i', 'f']):
-                    pass
                 # Numbers are allowed and we have an array of numbers.
                 # All good
+                pass
             else:
                 validated_v = [
                     self.validate_coerce(e, should_raise=False)
@@ -1579,6 +1580,7 @@ class FlaglistValidator(BaseValidator):
             # Pass None through
             pass
         elif self.array_ok and is_array(v):
+
             # Coerce individual strings
             validated_v = [self.vc_scalar(e) for e in v]
 
