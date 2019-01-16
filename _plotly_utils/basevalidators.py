@@ -43,12 +43,16 @@ def fullmatch(regex, string, flags=0):
 # Utility functions
 # -----------------
 def to_scalar_or_list(v):
+    if np.isscalar(v) and hasattr(v, 'item'):
+        return np.asscalar(v)
     if isinstance(v, (list, tuple)):
         return [to_scalar_or_list(e) for e in v]
     elif np and isinstance(v, np.ndarray):
         return [to_scalar_or_list(e) for e in v]
     elif pd and isinstance(v, (pd.Series, pd.Index)):
         return [to_scalar_or_list(e) for e in v]
+    elif is_numpy_convertable(v):
+        return to_scalar_or_list(np.array(v))
     else:
         return v
 
@@ -104,7 +108,7 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
     if not isinstance(v, np.ndarray):
         # v has its own logic on how to convert itself into a numpy array
         if is_numpy_convertable(v):
-            new_v = np.array(v)
+            return copy_to_readonly_numpy_array(np.array(v), kind=kind, force_numeric=force_numeric)
         else:
             # v is not homogenous array
             v_list = [to_scalar_or_list(e) for e in v]
@@ -156,8 +160,6 @@ def is_numpy_convertable(v):
     Return whether a value is meaningfully convertable to a numpy array
     via 'numpy.array'
     """
-    if np.isscalar(v):  # Scalar types like numpy.float64 shouldn't count as arrays
-        return False
     return hasattr(v, '__array__') or hasattr(v, '__array_interface__')
 
 
@@ -165,8 +167,17 @@ def is_homogeneous_array(v):
     """
     Return whether a value is considered to be a homogeneous array
     """    
-    return ((np and (isinstance(v, np.ndarray) or is_numpy_convertable(v))) or
-            (pd and isinstance(v, (pd.Series, pd.Index))))
+    if ((np and isinstance(v, np.ndarray) or
+        (pd and isinstance(v, (pd.Series, pd.Index))))):
+            return True
+    if is_numpy_convertable(v):
+        v_numpy = np.array(v)
+        # v is essentially a scalar and so shouldn't count as an array
+        if v_numpy.shape == ():
+            return False
+        else:
+            return True
+    return False
 
 
 def is_simple_array(v):
@@ -936,7 +947,6 @@ class StringValidator(BaseValidator):
             # Pass None through
             pass
         elif self.array_ok and is_array(v):
-
             # If strict, make sure all elements are strings.
             if self.strict:
                 invalid_els = [e for e in v if not isinstance(e, string_types)]
@@ -1110,13 +1120,12 @@ class ColorValidator(BaseValidator):
             # Pass None through
             pass
         elif self.array_ok and is_homogeneous_array(v):
-
-            v_array = copy_to_readonly_numpy_array(v)
+            v = copy_to_readonly_numpy_array(v)
             if (self.numbers_allowed() and
-                    v_array.dtype.kind in ['u', 'i', 'f']):
+                    v.dtype.kind in ['u', 'i', 'f']):
+                    pass
                 # Numbers are allowed and we have an array of numbers.
                 # All good
-                v = v_array
             else:
                 validated_v = [
                     self.validate_coerce(e, should_raise=False)
@@ -1570,7 +1579,6 @@ class FlaglistValidator(BaseValidator):
             # Pass None through
             pass
         elif self.array_ok and is_array(v):
-
             # Coerce individual strings
             validated_v = [self.vc_scalar(e) for e in v]
 
