@@ -43,7 +43,7 @@ def fullmatch(regex, string, flags=0):
 # Utility functions
 # -----------------
 def to_scalar_or_list(v):
-    if np.isscalar(v) and hasattr(v, 'item'):
+    if np and np.isscalar(v) and hasattr(v, 'item'):
         return np.asscalar(v)
     if isinstance(v, (list, tuple)):
         return [to_scalar_or_list(e) for e in v]
