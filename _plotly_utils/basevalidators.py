@@ -43,6 +43,16 @@ def fullmatch(regex, string, flags=0):
 # Utility functions
 # -----------------
 def to_scalar_or_list(v):
+    # Handle the case where 'v' is a non-native scalar-like type,
+    # such as numpy.float32. Without this case, the object might be
+    # considered numpy-convertable and therefore promoted to a
+    # 0-dimensional array, but we instead want it converted to a
+    # Python native scalar type ('float' in the example above).
+    # We explicitly check if is has the 'item' method, which conventionally
+    # converts these types to native scalars. This guards against 'v' already being
+    # a Python native scalar type since  `numpy.isscalar` would return
+    # True but `numpy.asscalar` will (oddly) raise an error is called with a
+    # a native Python scalar object.
     if np and np.isscalar(v) and hasattr(v, 'item'):
         return np.asscalar(v)
     if isinstance(v, (list, tuple)):
