@@ -256,7 +256,7 @@ def iplot_mpl(fig, resize=True, strip_style=False, update=None,
     """Replot a matplotlib figure with plotly in IPython.
 
     This function:
-    1. converts the mpl figure into JSON (run help(plolty.tools.mpl_to_plotly))
+    1. converts the mpl figure into JSON (run help(plotly.tools.mpl_to_plotly))
     2. makes a request to Plotly to save this figure in your account
     3. displays the image in your IPython output cell
 
@@ -288,7 +288,7 @@ def plot_mpl(fig, resize=True, strip_style=False, update=None, **plot_options):
     """Replot a matplotlib figure with plotly.
 
     This function:
-    1. converts the mpl figure into JSON (run help(plolty.tools.mpl_to_plotly))
+    1. converts the mpl figure into JSON (run help(plotly.tools.mpl_to_plotly))
     2. makes a request to Plotly to save this figure in your account
     3. opens your figure in a browser tab OR returns the unique figure url
 
