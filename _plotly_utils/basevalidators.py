@@ -43,12 +43,26 @@ def fullmatch(regex, string, flags=0):
 # Utility functions
 # -----------------
 def to_scalar_or_list(v):
+    # Handle the case where 'v' is a non-native scalar-like type,
+    # such as numpy.float32. Without this case, the object might be
+    # considered numpy-convertable and therefore promoted to a
+    # 0-dimensional array, but we instead want it converted to a
+    # Python native scalar type ('float' in the example above).
+    # We explicitly check if is has the 'item' method, which conventionally
+    # converts these types to native scalars. This guards against 'v' already being
+    # a Python native scalar type since  `numpy.isscalar` would return
+    # True but `numpy.asscalar` will (oddly) raise an error is called with a
+    # a native Python scalar object.
+    if np and np.isscalar(v) and hasattr(v, 'item'):
+        return np.asscalar(v)
     if isinstance(v, (list, tuple)):
         return [to_scalar_or_list(e) for e in v]
     elif np and isinstance(v, np.ndarray):
         return [to_scalar_or_list(e) for e in v]
     elif pd and isinstance(v, (pd.Series, pd.Index)):
         return [to_scalar_or_list(e) for e in v]
+    elif is_numpy_convertable(v):
+        return to_scalar_or_list(np.array(v))
     else:
         return v
 
@@ -101,16 +115,19 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
             else:
                 # DatetimeIndex
                 v = v.to_pydatetime()
-
     if not isinstance(v, np.ndarray):
-        # v is not homogenous array
-        v_list = [to_scalar_or_list(e) for e in v]
+        # v has its own logic on how to convert itself into a numpy array
+        if is_numpy_convertable(v):
+            return copy_to_readonly_numpy_array(np.array(v), kind=kind, force_numeric=force_numeric)
+        else:
+            # v is not homogenous array
+            v_list = [to_scalar_or_list(e) for e in v]
 
-        # Lookup dtype for requested kind, if any
-        dtype = kind_default_dtypes.get(first_kind, None)
+            # Lookup dtype for requested kind, if any
+            dtype = kind_default_dtypes.get(first_kind, None)
 
-        # construct new array from list
-        new_v = np.array(v_list, order='C', dtype=dtype)
+            # construct new array from list
+            new_v = np.array(v_list, order='C', dtype=dtype)
     elif v.dtype.kind in numeric_kinds:
         # v is a homogenous numeric array
         if kind and v.dtype.kind not in kind:
@@ -148,12 +165,29 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
     return new_v
 
 
+def is_numpy_convertable(v):
+    """
+    Return whether a value is meaningfully convertable to a numpy array
+    via 'numpy.array'
+    """
+    return hasattr(v, '__array__') or hasattr(v, '__array_interface__')
+
+
 def is_homogeneous_array(v):
     """
     Return whether a value is considered to be a homogeneous array
-    """
-    return ((np and isinstance(v, np.ndarray)) or
-            (pd and isinstance(v, (pd.Series, pd.Index))))
+    """    
+    if ((np and isinstance(v, np.ndarray) or
+        (pd and isinstance(v, (pd.Series, pd.Index))))):
+            return True
+    if is_numpy_convertable(v):
+        v_numpy = np.array(v)
+        # v is essentially a scalar and so shouldn't count as an array
+        if v_numpy.shape == ():
+            return False
+        else:
+            return True
+    return False
 
 
 def is_simple_array(v):
@@ -1097,13 +1131,12 @@ class ColorValidator(BaseValidator):
             # Pass None through
             pass
         elif self.array_ok and is_homogeneous_array(v):
-
-            v_array = copy_to_readonly_numpy_array(v)
+            v = copy_to_readonly_numpy_array(v)
             if (self.numbers_allowed() and
-                    v_array.dtype.kind in ['u', 'i', 'f']):
+                    v.dtype.kind in ['u', 'i', 'f']):
                 # Numbers are allowed and we have an array of numbers.
                 # All good
-                v = v_array
+                pass
             else:
                 validated_v = [
                     self.validate_coerce(e, should_raise=False)
