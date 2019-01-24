@@ -977,6 +977,9 @@ class Surface(BaseTraceType):
     @property
     def uid(self):
         """
+        Assign an id to this trace, Use this to provide object
+        constancy between traces during animations and transitions.
+    
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1377,7 +1380,9 @@ class Surface(BaseTraceType):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1607,7 +1612,9 @@ class Surface(BaseTraceType):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1682,8 +1689,8 @@ an instance of plotly.graph_objs.Surface"""
 
         # Initialize validators
         # ---------------------
-        self._validators['autocolorscale'
-                        ] = v_surface.AutocolorscaleValidator()
+        self._validators['autocolorscale'] = v_surface.AutocolorscaleValidator(
+        )
         self._validators['cauto'] = v_surface.CautoValidator()
         self._validators['cmax'] = v_surface.CmaxValidator()
         self._validators['cmin'] = v_surface.CminValidator()
@@ -1705,8 +1712,8 @@ an instance of plotly.graph_objs.Surface"""
         self._validators['opacity'] = v_surface.OpacityValidator()
         self._validators['reversescale'] = v_surface.ReversescaleValidator()
         self._validators['scene'] = v_surface.SceneValidator()
-        self._validators['selectedpoints'
-                        ] = v_surface.SelectedpointsValidator()
+        self._validators['selectedpoints'] = v_surface.SelectedpointsValidator(
+        )
         self._validators['showlegend'] = v_surface.ShowlegendValidator()
         self._validators['showscale'] = v_surface.ShowscaleValidator()
         self._validators['stream'] = v_surface.StreamValidator()

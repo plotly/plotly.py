@@ -1259,6 +1259,9 @@ class Bar(BaseTraceType):
     @property
     def uid(self):
         """
+        Assign an id to this trace, Use this to provide object
+        constancy between traces during animations and transitions.
+    
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1794,7 +1797,9 @@ class Bar(BaseTraceType):
         tsrc
             Sets the source reference on plot.ly for  t .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -2089,7 +2094,9 @@ class Bar(BaseTraceType):
         tsrc
             Sets the source reference on plot.ly for  t .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -2197,8 +2204,8 @@ an instance of plotly.graph_objs.Bar"""
         self._validators['hoverinfosrc'] = v_bar.HoverinfosrcValidator()
         self._validators['hoverlabel'] = v_bar.HoverlabelValidator()
         self._validators['hovertemplate'] = v_bar.HovertemplateValidator()
-        self._validators['hovertemplatesrc'
-                        ] = v_bar.HovertemplatesrcValidator()
+        self._validators['hovertemplatesrc'] = v_bar.HovertemplatesrcValidator(
+        )
         self._validators['hovertext'] = v_bar.HovertextValidator()
         self._validators['hovertextsrc'] = v_bar.HovertextsrcValidator()
         self._validators['ids'] = v_bar.IdsValidator()

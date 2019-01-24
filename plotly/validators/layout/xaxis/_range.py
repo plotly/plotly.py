@@ -9,6 +9,7 @@ class RangeValidator(_plotly_utils.basevalidators.InfoArrayValidator):
         super(RangeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
+            anim=kwargs.pop('anim', True),
             edit_type=kwargs.pop('edit_type', 'axrange'),
             implied_edits=kwargs.pop('implied_edits', {'autorange': False}),
             items=kwargs.pop(
@@ -18,13 +19,16 @@ class RangeValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                         'editType': 'axrange',
                         'impliedEdits': {
                             '^autorange': False
-                        }
-                    }, {
+                        },
+                        'anim': True
+                    },
+                    {
                         'valType': 'any',
                         'editType': 'axrange',
                         'impliedEdits': {
                             '^autorange': False
-                        }
+                        },
+                        'anim': True
                     }
                 ]
             ),

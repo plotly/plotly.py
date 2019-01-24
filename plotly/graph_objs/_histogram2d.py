@@ -855,6 +855,9 @@ class Histogram2d(BaseTraceType):
     @property
     def uid(self):
         """
+        Assign an id to this trace, Use this to provide object
+        constancy between traces during animations and transitions.
+    
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1552,7 +1555,9 @@ class Histogram2d(BaseTraceType):
             plotly.graph_objs.histogram2d.Stream instance or dict
             with compatible properties
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1828,7 +1833,9 @@ class Histogram2d(BaseTraceType):
             plotly.graph_objs.histogram2d.Stream instance or dict
             with compatible properties
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1953,8 +1960,8 @@ an instance of plotly.graph_objs.Histogram2d"""
         self._validators['histfunc'] = v_histogram2d.HistfuncValidator()
         self._validators['histnorm'] = v_histogram2d.HistnormValidator()
         self._validators['hoverinfo'] = v_histogram2d.HoverinfoValidator()
-        self._validators['hoverinfosrc'
-                        ] = v_histogram2d.HoverinfosrcValidator()
+        self._validators['hoverinfosrc'] = v_histogram2d.HoverinfosrcValidator(
+        )
         self._validators['hoverlabel'] = v_histogram2d.HoverlabelValidator()
         self._validators['ids'] = v_histogram2d.IdsValidator()
         self._validators['idssrc'] = v_histogram2d.IdssrcValidator()
@@ -1964,8 +1971,8 @@ an instance of plotly.graph_objs.Histogram2d"""
         self._validators['nbinsx'] = v_histogram2d.NbinsxValidator()
         self._validators['nbinsy'] = v_histogram2d.NbinsyValidator()
         self._validators['opacity'] = v_histogram2d.OpacityValidator()
-        self._validators['reversescale'
-                        ] = v_histogram2d.ReversescaleValidator()
+        self._validators['reversescale'] = v_histogram2d.ReversescaleValidator(
+        )
         self._validators['selectedpoints'
                         ] = v_histogram2d.SelectedpointsValidator()
         self._validators['showlegend'] = v_histogram2d.ShowlegendValidator()
@@ -1988,8 +1995,8 @@ an instance of plotly.graph_objs.Histogram2d"""
         self._validators['ysrc'] = v_histogram2d.YsrcValidator()
         self._validators['z'] = v_histogram2d.ZValidator()
         self._validators['zauto'] = v_histogram2d.ZautoValidator()
-        self._validators['zhoverformat'
-                        ] = v_histogram2d.ZhoverformatValidator()
+        self._validators['zhoverformat'] = v_histogram2d.ZhoverformatValidator(
+        )
         self._validators['zmax'] = v_histogram2d.ZmaxValidator()
         self._validators['zmin'] = v_histogram2d.ZminValidator()
         self._validators['zsmooth'] = v_histogram2d.ZsmoothValidator()

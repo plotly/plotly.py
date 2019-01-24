@@ -19,6 +19,7 @@ from ._parcoords import Parcoords
 from ._parcats import Parcats
 from ._ohlc import Ohlc
 from ._mesh3d import Mesh3d
+from ._isosurface import Isosurface
 from ._histogram import Histogram
 from ._histogram2d import Histogram2d
 from ._histogram2dcontour import Histogram2dContour

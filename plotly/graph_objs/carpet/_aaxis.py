@@ -2090,8 +2090,8 @@ an instance of plotly.graph_objs.carpet.Aaxis"""
         self._validators['tickangle'] = v_aaxis.TickangleValidator()
         self._validators['tickfont'] = v_aaxis.TickfontValidator()
         self._validators['tickformat'] = v_aaxis.TickformatValidator()
-        self._validators['tickformatstops'
-                        ] = v_aaxis.TickformatstopsValidator()
+        self._validators['tickformatstops'] = v_aaxis.TickformatstopsValidator(
+        )
         self._validators['tickformatstopdefaults'
                         ] = v_aaxis.TickformatstopValidator()
         self._validators['tickmode'] = v_aaxis.TickmodeValidator()

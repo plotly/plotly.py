@@ -8,6 +8,7 @@ from ._xcalendar import XcalendarValidator
 from ._xaxis import XAxisValidator
 from ._x0 import X0Validator
 from ._x import XValidator
+from ._width import WidthValidator
 from ._whiskerwidth import WhiskerwidthValidator
 from ._visible import VisibleValidator
 from ._unselected import UnselectedValidator

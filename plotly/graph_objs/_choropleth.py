@@ -463,6 +463,60 @@ class Choropleth(BaseTraceType):
     def hoverlabel(self, val):
         self['hoverlabel'] = val
 
+    # hovertemplate
+    # -------------
+    @property
+    def hovertemplate(self):
+        """
+        Template string used for rendering the information that appear
+        on hover box. Note that this will override `hoverinfo`.
+        Variables are inserted using %{variable}, for example "y:
+        %{y}". Numbers are formatted using d3-format's syntax
+        %{variable:d3-format}, for example "Price: %{y:$.2f}". See http
+        s://github.com/d3/d3-format/blob/master/README.md#locale_format
+        for details on the formatting syntax. The variables available
+        in `hovertemplate` are the ones emitted as event data described
+        at this link https://plot.ly/javascript/plotlyjs-events/#event-
+        data. Additionally, every attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        Anything contained in tag `<extra>` is displayed in the
+        secondary box, for example "<extra>{fullData.name}</extra>".
+    
+        The 'hovertemplate' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self['hovertemplate']
+
+    @hovertemplate.setter
+    def hovertemplate(self, val):
+        self['hovertemplate'] = val
+
+    # hovertemplatesrc
+    # ----------------
+    @property
+    def hovertemplatesrc(self):
+        """
+        Sets the source reference on plot.ly for  hovertemplate .
+    
+        The 'hovertemplatesrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hovertemplatesrc']
+
+    @hovertemplatesrc.setter
+    def hovertemplatesrc(self, val):
+        self['hovertemplatesrc'] = val
+
     # ids
     # ---
     @property
@@ -860,6 +914,9 @@ class Choropleth(BaseTraceType):
     @property
     def uid(self):
         """
+        Assign an id to this trace, Use this to provide object
+        constancy between traces during animations and transitions.
+    
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1124,6 +1181,26 @@ class Choropleth(BaseTraceType):
         hoverlabel
             plotly.graph_objs.choropleth.Hoverlabel instance or
             dict with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -1178,7 +1255,9 @@ class Choropleth(BaseTraceType):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1236,6 +1315,8 @@ class Choropleth(BaseTraceType):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
         ids=None,
         idssrc=None,
         legendgroup=None,
@@ -1321,6 +1402,26 @@ class Choropleth(BaseTraceType):
         hoverlabel
             plotly.graph_objs.choropleth.Hoverlabel instance or
             dict with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -1375,7 +1476,9 @@ class Choropleth(BaseTraceType):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1463,6 +1566,10 @@ an instance of plotly.graph_objs.Choropleth"""
         self._validators['hoverinfo'] = v_choropleth.HoverinfoValidator()
         self._validators['hoverinfosrc'] = v_choropleth.HoverinfosrcValidator()
         self._validators['hoverlabel'] = v_choropleth.HoverlabelValidator()
+        self._validators['hovertemplate'
+                        ] = v_choropleth.HovertemplateValidator()
+        self._validators['hovertemplatesrc'
+                        ] = v_choropleth.HovertemplatesrcValidator()
         self._validators['ids'] = v_choropleth.IdsValidator()
         self._validators['idssrc'] = v_choropleth.IdssrcValidator()
         self._validators['legendgroup'] = v_choropleth.LegendgroupValidator()
@@ -1513,6 +1620,12 @@ an instance of plotly.graph_objs.Choropleth"""
         self['hoverinfosrc'] = hoverinfosrc if hoverinfosrc is not None else _v
         _v = arg.pop('hoverlabel', None)
         self['hoverlabel'] = hoverlabel if hoverlabel is not None else _v
+        _v = arg.pop('hovertemplate', None)
+        self['hovertemplate'
+            ] = hovertemplate if hovertemplate is not None else _v
+        _v = arg.pop('hovertemplatesrc', None)
+        self['hovertemplatesrc'
+            ] = hovertemplatesrc if hovertemplatesrc is not None else _v
         _v = arg.pop('ids', None)
         self['ids'] = ids if ids is not None else _v
         _v = arg.pop('idssrc', None)

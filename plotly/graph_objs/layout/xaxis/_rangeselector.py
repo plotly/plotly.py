@@ -611,13 +611,13 @@ an instance of plotly.graph_objs.layout.xaxis.Rangeselector"""
 
         # Initialize validators
         # ---------------------
-        self._validators['activecolor'
-                        ] = v_rangeselector.ActivecolorValidator()
+        self._validators['activecolor'] = v_rangeselector.ActivecolorValidator(
+        )
         self._validators['bgcolor'] = v_rangeselector.BgcolorValidator()
-        self._validators['bordercolor'
-                        ] = v_rangeselector.BordercolorValidator()
-        self._validators['borderwidth'
-                        ] = v_rangeselector.BorderwidthValidator()
+        self._validators['bordercolor'] = v_rangeselector.BordercolorValidator(
+        )
+        self._validators['borderwidth'] = v_rangeselector.BorderwidthValidator(
+        )
         self._validators['buttons'] = v_rangeselector.ButtonsValidator()
         self._validators['buttondefaults'] = v_rangeselector.ButtonValidator()
         self._validators['font'] = v_rangeselector.FontValidator()

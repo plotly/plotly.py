@@ -2243,8 +2243,8 @@ an instance of plotly.graph_objs.layout.scene.XAxis"""
         # Initialize validators
         # ---------------------
         self._validators['autorange'] = v_xaxis.AutorangeValidator()
-        self._validators['backgroundcolor'
-                        ] = v_xaxis.BackgroundcolorValidator()
+        self._validators['backgroundcolor'] = v_xaxis.BackgroundcolorValidator(
+        )
         self._validators['calendar'] = v_xaxis.CalendarValidator()
         self._validators['categoryarray'] = v_xaxis.CategoryarrayValidator()
         self._validators['categoryarraysrc'
@@ -2281,8 +2281,8 @@ an instance of plotly.graph_objs.layout.scene.XAxis"""
         self._validators['tickcolor'] = v_xaxis.TickcolorValidator()
         self._validators['tickfont'] = v_xaxis.TickfontValidator()
         self._validators['tickformat'] = v_xaxis.TickformatValidator()
-        self._validators['tickformatstops'
-                        ] = v_xaxis.TickformatstopsValidator()
+        self._validators['tickformatstops'] = v_xaxis.TickformatstopsValidator(
+        )
         self._validators['tickformatstopdefaults'
                         ] = v_xaxis.TickformatstopValidator()
         self._validators['ticklen'] = v_xaxis.TicklenValidator()

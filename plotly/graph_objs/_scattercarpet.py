@@ -959,6 +959,9 @@ class Scattercarpet(BaseTraceType):
     @property
     def uid(self):
         """
+        Assign an id to this trace, Use this to provide object
+        constancy between traces during animations and transitions.
+    
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1248,7 +1251,9 @@ class Scattercarpet(BaseTraceType):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1461,7 +1466,9 @@ class Scattercarpet(BaseTraceType):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1536,8 +1543,8 @@ an instance of plotly.graph_objs.Scattercarpet"""
         self._validators['b'] = v_scattercarpet.BValidator()
         self._validators['bsrc'] = v_scattercarpet.BsrcValidator()
         self._validators['carpet'] = v_scattercarpet.CarpetValidator()
-        self._validators['connectgaps'
-                        ] = v_scattercarpet.ConnectgapsValidator()
+        self._validators['connectgaps'] = v_scattercarpet.ConnectgapsValidator(
+        )
         self._validators['customdata'] = v_scattercarpet.CustomdataValidator()
         self._validators['customdatasrc'
                         ] = v_scattercarpet.CustomdatasrcValidator()
@@ -1550,8 +1557,8 @@ an instance of plotly.graph_objs.Scattercarpet"""
         self._validators['hoveron'] = v_scattercarpet.HoveronValidator()
         self._validators['ids'] = v_scattercarpet.IdsValidator()
         self._validators['idssrc'] = v_scattercarpet.IdssrcValidator()
-        self._validators['legendgroup'
-                        ] = v_scattercarpet.LegendgroupValidator()
+        self._validators['legendgroup'] = v_scattercarpet.LegendgroupValidator(
+        )
         self._validators['line'] = v_scattercarpet.LineValidator()
         self._validators['marker'] = v_scattercarpet.MarkerValidator()
         self._validators['mode'] = v_scattercarpet.ModeValidator()
