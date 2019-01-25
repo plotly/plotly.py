@@ -133,7 +133,9 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  text
                 .
             uid
-
+                Assign an id to this trace, Use this to provide
+                object constancy between traces during
+                animations and transitions.
             uirevision
                 Controls persistence of some user-driven
                 changes to the trace: `constraintrange` in
@@ -168,6 +170,11 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the width of the whiskers relative to the
                 box' width. For example, with 1, the whiskers
                 are as wide as the box(es).
+            width
+                Sets the width of the box in data coordinate If
+                0 (default value) the width is automatically
+                selected based on the positions of other box
+                traces in the same subplot.
             x
                 Sets the x sample data or coordinates. See
                 overview for more info.

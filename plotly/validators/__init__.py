@@ -19,6 +19,7 @@ from ._parcoords import ParcoordsValidator
 from ._parcats import ParcatsValidator
 from ._ohlc import OhlcValidator
 from ._mesh3d import Mesh3dValidator
+from ._isosurface import IsosurfaceValidator
 from ._histogram2dcontour import Histogram2dContourValidator
 from ._histogram2d import Histogram2dValidator
 from ._histogram import HistogramValidator

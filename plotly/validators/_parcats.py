@@ -71,7 +71,9 @@ class ParcatsValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickfont
                 Sets the font for the `category` labels.
             uid
-
+                Assign an id to this trace, Use this to provide
+                object constancy between traces during
+                animations and transitions.
             uirevision
                 Controls persistence of some user-driven
                 changes to the trace: `constraintrange` in

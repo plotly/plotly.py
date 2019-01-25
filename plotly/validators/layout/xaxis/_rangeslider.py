@@ -22,7 +22,7 @@ class RangesliderValidator(_plotly_utils.basevalidators.CompoundValidator):
             bordercolor
                 Sets the border color of the range slider.
             borderwidth
-                Sets the border color of the range slider.
+                Sets the border width of the range slider.
             range
                 Sets the range of the range slider. If not set,
                 defaults to the full xaxis range. If the axis

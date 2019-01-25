@@ -505,7 +505,8 @@ class Layout(BaseLayoutType):
     def boxgap(self):
         """
         Sets the gap (in plot fraction) between boxes of adjacent
-        location coordinates.
+        location coordinates. Has no effect on traces that have "width"
+        set.
     
         The 'boxgap' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
@@ -526,7 +527,8 @@ class Layout(BaseLayoutType):
     def boxgroupgap(self):
         """
         Sets the gap (in plot fraction) between boxes of the same
-        location coordinate.
+        location coordinate. Has no effect on traces that have "width"
+        set.
     
         The 'boxgroupgap' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
@@ -550,7 +552,8 @@ class Layout(BaseLayoutType):
         displayed on the graph. If "group", the boxes are plotted next
         to one another centered around the shared location. If
         "overlay", the boxes are plotted over one another, you might
-        need to set "opacity" to see them multiple boxes.
+        need to set "opacity" to see them multiple boxes. Has no effect
+        on traces that have "width" set.
     
         The 'boxmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -1523,6 +1526,50 @@ class Layout(BaseLayoutType):
     @margin.setter
     def margin(self, val):
         self['margin'] = val
+
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information that can be used in various
+        `text` attributes. Attributes such as the graph, axis and
+        colorbar `title.text` and annotation `text` support `meta`. One
+        can access `meta` fields using template strings: `%{meta[i]}`
+        where `i` is the index of the `meta` item in question.
+    
+        The 'meta' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
 
     # modebar
     # -------
@@ -2628,6 +2675,42 @@ class Layout(BaseLayoutType):
     def titlefont(self, val):
         self['titlefont'] = val
 
+    # transition
+    # ----------
+    @property
+    def transition(self):
+        """
+        Sets transition options used during Plotly.react updates.
+    
+        The 'transition' property is an instance of Transition
+        that may be specified as:
+          - An instance of plotly.graph_objs.layout.Transition
+          - A dict of string/value properties that will be passed
+            to the Transition constructor
+    
+            Supported dict properties:
+                
+                duration
+                    The duration of the transition, in
+                    milliseconds. If equal to zero, updates are
+                    synchronous.
+                easing
+                    The easing function used for the transition
+                ordering
+                    Determines whether the figure's layout or
+                    traces smoothly transitions during updates that
+                    make both traces and layout change.
+
+        Returns
+        -------
+        plotly.graph_objs.layout.Transition
+        """
+        return self['transition']
+
+    @transition.setter
+    def transition(self, val):
+        self['transition'] = val
+
     # uirevision
     # ----------
     @property
@@ -2797,7 +2880,8 @@ class Layout(BaseLayoutType):
     def violingap(self):
         """
         Sets the gap (in plot fraction) between violins of adjacent
-        location coordinates.
+        location coordinates. Has no effect on traces that have "width"
+        set.
     
         The 'violingap' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
@@ -2818,7 +2902,8 @@ class Layout(BaseLayoutType):
     def violingroupgap(self):
         """
         Sets the gap (in plot fraction) between violins of the same
-        location coordinate.
+        location coordinate. Has no effect on traces that have "width"
+        set.
     
         The 'violingroupgap' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
@@ -2842,7 +2927,8 @@ class Layout(BaseLayoutType):
         displayed on the graph. If "group", the violins are plotted
         next to one another centered around the shared location. If
         "overlay", the violins are plotted over one another, you might
-        need to set "opacity" to see them multiple violins.
+        need to set "opacity" to see them multiple violins. Has no
+        effect on traces that have "width" set.
     
         The 'violinmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -3768,17 +3854,20 @@ class Layout(BaseLayoutType):
             percentages.
         boxgap
             Sets the gap (in plot fraction) between boxes of
-            adjacent location coordinates.
+            adjacent location coordinates. Has no effect on traces
+            that have "width" set.
         boxgroupgap
             Sets the gap (in plot fraction) between boxes of the
-            same location coordinate.
+            same location coordinate. Has no effect on traces that
+            have "width" set.
         boxmode
             Determines how boxes at the same location coordinate
             are displayed on the graph. If "group", the boxes are
             plotted next to one another centered around the shared
             location. If "overlay", the boxes are plotted over one
             another, you might need to set "opacity" to see them
-            multiple boxes.
+            multiple boxes. Has no effect on traces that have
+            "width" set.
         calendar
             Sets the default calendar system to use for
             interpreting and displaying dates throughout the plot.
@@ -3892,6 +3981,15 @@ class Layout(BaseLayoutType):
         margin
             plotly.graph_objs.layout.Margin instance or dict with
             compatible properties
+        meta
+            Assigns extra meta information that can be used in
+            various `text` attributes. Attributes such as the
+            graph, axis and colorbar `title.text` and annotation
+            `text` support `meta`. One can access `meta` fields
+            using template strings: `%{meta[i]}` where `i` is the
+            index of the `meta` item in question.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         modebar
             plotly.graph_objs.layout.Modebar instance or dict with
             compatible properties
@@ -3993,6 +4091,9 @@ class Layout(BaseLayoutType):
             Deprecated: Please use layout.title.font instead. Sets
             the title font. Note that the title's font used to be
             customized by the now deprecated `titlefont` attribute.
+        transition
+            Sets transition options used during Plotly.react
+            updates.
         uirevision
             Used to allow user interactions with the plot to
             persist after `Plotly.react` calls that are unaware of
@@ -4022,17 +4123,20 @@ class Layout(BaseLayoutType):
             layout.updatemenus
         violingap
             Sets the gap (in plot fraction) between violins of
-            adjacent location coordinates.
+            adjacent location coordinates. Has no effect on traces
+            that have "width" set.
         violingroupgap
             Sets the gap (in plot fraction) between violins of the
-            same location coordinate.
+            same location coordinate. Has no effect on traces that
+            have "width" set.
         violinmode
             Determines how violins at the same location coordinate
             are displayed on the graph. If "group", the violins are
             plotted next to one another centered around the shared
             location. If "overlay", the violins are plotted over
             one another, you might need to set "opacity" to see
-            them multiple violins.
+            them multiple violins. Has no effect on traces that
+            have "width" set.
         width
             Sets the plot's width (in px).
         xaxis
@@ -4083,6 +4187,8 @@ class Layout(BaseLayoutType):
         legend=None,
         mapbox=None,
         margin=None,
+        meta=None,
+        metasrc=None,
         modebar=None,
         orientation=None,
         paper_bgcolor=None,
@@ -4104,6 +4210,7 @@ class Layout(BaseLayoutType):
         ternary=None,
         title=None,
         titlefont=None,
+        transition=None,
         uirevision=None,
         updatemenus=None,
         updatemenudefaults=None,
@@ -4164,17 +4271,20 @@ class Layout(BaseLayoutType):
             percentages.
         boxgap
             Sets the gap (in plot fraction) between boxes of
-            adjacent location coordinates.
+            adjacent location coordinates. Has no effect on traces
+            that have "width" set.
         boxgroupgap
             Sets the gap (in plot fraction) between boxes of the
-            same location coordinate.
+            same location coordinate. Has no effect on traces that
+            have "width" set.
         boxmode
             Determines how boxes at the same location coordinate
             are displayed on the graph. If "group", the boxes are
             plotted next to one another centered around the shared
             location. If "overlay", the boxes are plotted over one
             another, you might need to set "opacity" to see them
-            multiple boxes.
+            multiple boxes. Has no effect on traces that have
+            "width" set.
         calendar
             Sets the default calendar system to use for
             interpreting and displaying dates throughout the plot.
@@ -4288,6 +4398,15 @@ class Layout(BaseLayoutType):
         margin
             plotly.graph_objs.layout.Margin instance or dict with
             compatible properties
+        meta
+            Assigns extra meta information that can be used in
+            various `text` attributes. Attributes such as the
+            graph, axis and colorbar `title.text` and annotation
+            `text` support `meta`. One can access `meta` fields
+            using template strings: `%{meta[i]}` where `i` is the
+            index of the `meta` item in question.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         modebar
             plotly.graph_objs.layout.Modebar instance or dict with
             compatible properties
@@ -4389,6 +4508,9 @@ class Layout(BaseLayoutType):
             Deprecated: Please use layout.title.font instead. Sets
             the title font. Note that the title's font used to be
             customized by the now deprecated `titlefont` attribute.
+        transition
+            Sets transition options used during Plotly.react
+            updates.
         uirevision
             Used to allow user interactions with the plot to
             persist after `Plotly.react` calls that are unaware of
@@ -4418,17 +4540,20 @@ class Layout(BaseLayoutType):
             layout.updatemenus
         violingap
             Sets the gap (in plot fraction) between violins of
-            adjacent location coordinates.
+            adjacent location coordinates. Has no effect on traces
+            that have "width" set.
         violingroupgap
             Sets the gap (in plot fraction) between violins of the
-            same location coordinate.
+            same location coordinate. Has no effect on traces that
+            have "width" set.
         violinmode
             Determines how violins at the same location coordinate
             are displayed on the graph. If "group", the violins are
             plotted next to one another centered around the shared
             location. If "overlay", the violins are plotted over
             one another, you might need to set "opacity" to see
-            them multiple violins.
+            them multiple violins. Has no effect on traces that
+            have "width" set.
         width
             Sets the plot's width (in px).
         xaxis
@@ -4507,6 +4632,8 @@ an instance of plotly.graph_objs.Layout"""
         self._validators['legend'] = v_layout.LegendValidator()
         self._validators['mapbox'] = v_layout.MapboxValidator()
         self._validators['margin'] = v_layout.MarginValidator()
+        self._validators['meta'] = v_layout.MetaValidator()
+        self._validators['metasrc'] = v_layout.MetasrcValidator()
         self._validators['modebar'] = v_layout.ModebarValidator()
         self._validators['orientation'] = v_layout.OrientationValidator()
         self._validators['paper_bgcolor'] = v_layout.PaperBgcolorValidator()
@@ -4529,6 +4656,7 @@ an instance of plotly.graph_objs.Layout"""
         self._validators['template'] = v_layout.TemplateValidator()
         self._validators['ternary'] = v_layout.TernaryValidator()
         self._validators['title'] = v_layout.TitleValidator()
+        self._validators['transition'] = v_layout.TransitionValidator()
         self._validators['uirevision'] = v_layout.UirevisionValidator()
         self._validators['updatemenus'] = v_layout.UpdatemenusValidator()
         self._validators['updatemenudefaults'] = v_layout.UpdatemenuValidator()
@@ -4616,6 +4744,10 @@ an instance of plotly.graph_objs.Layout"""
         self['mapbox'] = mapbox if mapbox is not None else _v
         _v = arg.pop('margin', None)
         self['margin'] = margin if margin is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('modebar', None)
         self['modebar'] = modebar if modebar is not None else _v
         _v = arg.pop('orientation', None)
@@ -4668,6 +4800,8 @@ an instance of plotly.graph_objs.Layout"""
         _v = titlefont if titlefont is not None else _v
         if _v is not None:
             self['titlefont'] = _v
+        _v = arg.pop('transition', None)
+        self['transition'] = transition if transition is not None else _v
         _v = arg.pop('uirevision', None)
         self['uirevision'] = uirevision if uirevision is not None else _v
         _v = arg.pop('updatemenus', None)

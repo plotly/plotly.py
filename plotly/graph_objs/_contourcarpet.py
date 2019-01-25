@@ -1195,6 +1195,9 @@ class Contourcarpet(BaseTraceType):
     @property
     def uid(self):
         """
+        Assign an id to this trace, Use this to provide object
+        constancy between traces during animations and transitions.
+    
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1575,7 +1578,9 @@ class Contourcarpet(BaseTraceType):
         transpose
             Transposes the z data.
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1830,7 +1835,9 @@ class Contourcarpet(BaseTraceType):
         transpose
             Transposes the z data.
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1920,8 +1927,8 @@ an instance of plotly.graph_objs.Contourcarpet"""
         self._validators['atype'] = v_contourcarpet.AtypeValidator()
         self._validators['autocolorscale'
                         ] = v_contourcarpet.AutocolorscaleValidator()
-        self._validators['autocontour'
-                        ] = v_contourcarpet.AutocontourValidator()
+        self._validators['autocontour'] = v_contourcarpet.AutocontourValidator(
+        )
         self._validators['b'] = v_contourcarpet.BValidator()
         self._validators['b0'] = v_contourcarpet.B0Validator()
         self._validators['bsrc'] = v_contourcarpet.BsrcValidator()
@@ -1942,8 +1949,8 @@ an instance of plotly.graph_objs.Contourcarpet"""
         self._validators['hoverlabel'] = v_contourcarpet.HoverlabelValidator()
         self._validators['ids'] = v_contourcarpet.IdsValidator()
         self._validators['idssrc'] = v_contourcarpet.IdssrcValidator()
-        self._validators['legendgroup'
-                        ] = v_contourcarpet.LegendgroupValidator()
+        self._validators['legendgroup'] = v_contourcarpet.LegendgroupValidator(
+        )
         self._validators['line'] = v_contourcarpet.LineValidator()
         self._validators['name'] = v_contourcarpet.NameValidator()
         self._validators['ncontours'] = v_contourcarpet.NcontoursValidator()

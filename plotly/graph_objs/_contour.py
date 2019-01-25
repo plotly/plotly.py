@@ -1025,6 +1025,9 @@ class Contour(BaseTraceType):
     @property
     def uid(self):
         """
+        Assign an id to this trace, Use this to provide object
+        constancy between traces during animations and transitions.
+    
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1618,7 +1621,9 @@ class Contour(BaseTraceType):
         transpose
             Transposes the z data.
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1889,7 +1894,9 @@ class Contour(BaseTraceType):
         transpose
             Transposes the z data.
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -2010,8 +2017,8 @@ an instance of plotly.graph_objs.Contour"""
 
         # Initialize validators
         # ---------------------
-        self._validators['autocolorscale'
-                        ] = v_contour.AutocolorscaleValidator()
+        self._validators['autocolorscale'] = v_contour.AutocolorscaleValidator(
+        )
         self._validators['autocontour'] = v_contour.AutocontourValidator()
         self._validators['colorbar'] = v_contour.ColorBarValidator()
         self._validators['colorscale'] = v_contour.ColorscaleValidator()
@@ -2033,8 +2040,8 @@ an instance of plotly.graph_objs.Contour"""
         self._validators['ncontours'] = v_contour.NcontoursValidator()
         self._validators['opacity'] = v_contour.OpacityValidator()
         self._validators['reversescale'] = v_contour.ReversescaleValidator()
-        self._validators['selectedpoints'
-                        ] = v_contour.SelectedpointsValidator()
+        self._validators['selectedpoints'] = v_contour.SelectedpointsValidator(
+        )
         self._validators['showlegend'] = v_contour.ShowlegendValidator()
         self._validators['showscale'] = v_contour.ShowscaleValidator()
         self._validators['stream'] = v_contour.StreamValidator()

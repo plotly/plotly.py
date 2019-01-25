@@ -1776,8 +1776,8 @@ an instance of plotly.graph_objs.layout.polar.AngularAxis"""
         self._validators['rotation'] = v_angularaxis.RotationValidator()
         self._validators['separatethousands'
                         ] = v_angularaxis.SeparatethousandsValidator()
-        self._validators['showexponent'
-                        ] = v_angularaxis.ShowexponentValidator()
+        self._validators['showexponent'] = v_angularaxis.ShowexponentValidator(
+        )
         self._validators['showgrid'] = v_angularaxis.ShowgridValidator()
         self._validators['showline'] = v_angularaxis.ShowlineValidator()
         self._validators['showticklabels'

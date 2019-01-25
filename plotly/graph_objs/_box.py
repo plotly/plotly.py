@@ -726,6 +726,9 @@ class Box(BaseTraceType):
     @property
     def uid(self):
         """
+        Assign an id to this trace, Use this to provide object
+        constancy between traces during animations and transitions.
+    
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -843,6 +846,28 @@ class Box(BaseTraceType):
     @whiskerwidth.setter
     def whiskerwidth(self, val):
         self['whiskerwidth'] = val
+
+    # width
+    # -----
+    @property
+    def width(self):
+        """
+        Sets the width of the box in data coordinate If 0 (default
+        value) the width is automatically selected based on the
+        positions of other box traces in the same subplot.
+    
+        The 'width' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self['width']
+
+    @width.setter
+    def width(self, val):
+        self['width'] = val
 
     # x
     # -
@@ -1186,7 +1211,9 @@ class Box(BaseTraceType):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1217,6 +1244,11 @@ class Box(BaseTraceType):
             Sets the width of the whiskers relative to the box'
             width. For example, with 1, the whiskers are as wide as
             the box(es).
+        width
+            Sets the width of the box in data coordinate If 0
+            (default value) the width is automatically selected
+            based on the positions of other box traces in the same
+            subplot.
         x
             Sets the x sample data or coordinates. See overview for
             more info.
@@ -1284,6 +1316,7 @@ class Box(BaseTraceType):
         unselected=None,
         visible=None,
         whiskerwidth=None,
+        width=None,
         x=None,
         x0=None,
         xaxis=None,
@@ -1422,7 +1455,9 @@ class Box(BaseTraceType):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1453,6 +1488,11 @@ class Box(BaseTraceType):
             Sets the width of the whiskers relative to the box'
             width. For example, with 1, the whiskers are as wide as
             the box(es).
+        width
+            Sets the width of the box in data coordinate If 0
+            (default value) the width is automatically selected
+            based on the positions of other box traces in the same
+            subplot.
         x
             Sets the x sample data or coordinates. See overview for
             more info.
@@ -1548,6 +1588,7 @@ an instance of plotly.graph_objs.Box"""
         self._validators['unselected'] = v_box.UnselectedValidator()
         self._validators['visible'] = v_box.VisibleValidator()
         self._validators['whiskerwidth'] = v_box.WhiskerwidthValidator()
+        self._validators['width'] = v_box.WidthValidator()
         self._validators['x'] = v_box.XValidator()
         self._validators['x0'] = v_box.X0Validator()
         self._validators['xaxis'] = v_box.XAxisValidator()
@@ -1627,6 +1668,8 @@ an instance of plotly.graph_objs.Box"""
         self['visible'] = visible if visible is not None else _v
         _v = arg.pop('whiskerwidth', None)
         self['whiskerwidth'] = whiskerwidth if whiskerwidth is not None else _v
+        _v = arg.pop('width', None)
+        self['width'] = width if width is not None else _v
         _v = arg.pop('x', None)
         self['x'] = x if x is not None else _v
         _v = arg.pop('x0', None)

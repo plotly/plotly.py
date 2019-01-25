@@ -1136,6 +1136,9 @@ class Pie(BaseTraceType):
     @property
     def uid(self):
         """
+        Assign an id to this trace, Use this to provide object
+        constancy between traces during animations and transitions.
+    
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1417,7 +1420,9 @@ class Pie(BaseTraceType):
             title's position used to be set by the now deprecated
             `titleposition` attribute.
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1669,7 +1674,9 @@ class Pie(BaseTraceType):
             title's position used to be set by the now deprecated
             `titleposition` attribute.
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1741,8 +1748,8 @@ an instance of plotly.graph_objs.Pie"""
         self._validators['hoverinfosrc'] = v_pie.HoverinfosrcValidator()
         self._validators['hoverlabel'] = v_pie.HoverlabelValidator()
         self._validators['hovertemplate'] = v_pie.HovertemplateValidator()
-        self._validators['hovertemplatesrc'
-                        ] = v_pie.HovertemplatesrcValidator()
+        self._validators['hovertemplatesrc'] = v_pie.HovertemplatesrcValidator(
+        )
         self._validators['hovertext'] = v_pie.HovertextValidator()
         self._validators['hovertextsrc'] = v_pie.HovertextsrcValidator()
         self._validators['ids'] = v_pie.IdsValidator()

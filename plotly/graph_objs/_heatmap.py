@@ -791,6 +791,9 @@ class Heatmap(BaseTraceType):
     @property
     def uid(self):
         """
+        Assign an id to this trace, Use this to provide object
+        constancy between traces during animations and transitions.
+    
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1423,7 +1426,9 @@ class Heatmap(BaseTraceType):
         transpose
             Transposes the z data.
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1686,7 +1691,9 @@ class Heatmap(BaseTraceType):
         transpose
             Transposes the z data.
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1813,8 +1820,8 @@ an instance of plotly.graph_objs.Heatmap"""
 
         # Initialize validators
         # ---------------------
-        self._validators['autocolorscale'
-                        ] = v_heatmap.AutocolorscaleValidator()
+        self._validators['autocolorscale'] = v_heatmap.AutocolorscaleValidator(
+        )
         self._validators['colorbar'] = v_heatmap.ColorBarValidator()
         self._validators['colorscale'] = v_heatmap.ColorscaleValidator()
         self._validators['connectgaps'] = v_heatmap.ConnectgapsValidator()
@@ -1831,8 +1838,8 @@ an instance of plotly.graph_objs.Heatmap"""
         self._validators['name'] = v_heatmap.NameValidator()
         self._validators['opacity'] = v_heatmap.OpacityValidator()
         self._validators['reversescale'] = v_heatmap.ReversescaleValidator()
-        self._validators['selectedpoints'
-                        ] = v_heatmap.SelectedpointsValidator()
+        self._validators['selectedpoints'] = v_heatmap.SelectedpointsValidator(
+        )
         self._validators['showlegend'] = v_heatmap.ShowlegendValidator()
         self._validators['showscale'] = v_heatmap.ShowscaleValidator()
         self._validators['stream'] = v_heatmap.StreamValidator()

@@ -2,10 +2,10 @@ from plotly.basedatatypes import BaseFigure
 from plotly.graph_objs import (
     Area, Bar, Barpolar, Box, Candlestick, Carpet, Choropleth, Cone, Contour,
     Contourcarpet, Heatmap, Heatmapgl, Histogram, Histogram2d,
-    Histogram2dContour, Mesh3d, Ohlc, Parcats, Parcoords, Pie, Pointcloud,
-    Sankey, Scatter, Scatter3d, Scattercarpet, Scattergeo, Scattergl,
-    Scattermapbox, Scatterpolar, Scatterpolargl, Scatterternary, Splom,
-    Streamtube, Surface, Table, Violin
+    Histogram2dContour, Isosurface, Mesh3d, Ohlc, Parcats, Parcoords, Pie,
+    Pointcloud, Sankey, Scatter, Scatter3d, Scattercarpet, Scattergeo,
+    Scattergl, Scattermapbox, Scatterpolar, Scatterpolargl, Scatterternary,
+    Splom, Streamtube, Surface, Table, Violin
 )
 
 
@@ -30,11 +30,11 @@ class Figure(BaseFigure):
                              'candlestick', 'carpet', 'choropleth', 'cone',
                              'contour', 'contourcarpet', 'heatmap',
                              'heatmapgl', 'histogram', 'histogram2d',
-                             'histogram2dcontour', 'mesh3d', 'ohlc',
-                             'parcats', 'parcoords', 'pie', 'pointcloud',
-                             'sankey', 'scatter', 'scatter3d',
-                             'scattercarpet', 'scattergeo', 'scattergl',
-                             'scattermapbox', 'scatterpolar',
+                             'histogram2dcontour', 'isosurface', 'mesh3d',
+                             'ohlc', 'parcats', 'parcoords', 'pie',
+                             'pointcloud', 'sankey', 'scatter',
+                             'scatter3d', 'scattercarpet', 'scattergeo',
+                             'scattergl', 'scattermapbox', 'scatterpolar',
                              'scatterpolargl', 'scatterternary', 'splom',
                              'streamtube', 'surface', 'table', 'violin']
         
@@ -96,10 +96,12 @@ class Figure(BaseFigure):
                         multiplied by 100 to show percentages.
                     boxgap
                         Sets the gap (in plot fraction) between boxes
-                        of adjacent location coordinates.
+                        of adjacent location coordinates. Has no effect
+                        on traces that have "width" set.
                     boxgroupgap
                         Sets the gap (in plot fraction) between boxes
-                        of the same location coordinate.
+                        of the same location coordinate. Has no effect
+                        on traces that have "width" set.
                     boxmode
                         Determines how boxes at the same location
                         coordinate are displayed on the graph. If
@@ -107,7 +109,8 @@ class Figure(BaseFigure):
                         another centered around the shared location. If
                         "overlay", the boxes are plotted over one
                         another, you might need to set "opacity" to see
-                        them multiple boxes.
+                        them multiple boxes. Has no effect on traces
+                        that have "width" set.
                     calendar
                         Sets the default calendar system to use for
                         interpreting and displaying dates throughout
@@ -235,6 +238,17 @@ class Figure(BaseFigure):
                     margin
                         plotly.graph_objs.layout.Margin instance or
                         dict with compatible properties
+                    meta
+                        Assigns extra meta information that can be used
+                        in various `text` attributes. Attributes such
+                        as the graph, axis and colorbar `title.text`
+                        and annotation `text` support `meta`. One can
+                        access `meta` fields using template strings:
+                        `%{meta[i]}` where `i` is the index of the
+                        `meta` item in question.
+                    metasrc
+                        Sets the source reference on plot.ly for  meta
+                        .
                     modebar
                         plotly.graph_objs.layout.Modebar instance or
                         dict with compatible properties
@@ -348,6 +362,9 @@ class Figure(BaseFigure):
                         instead. Sets the title font. Note that the
                         title's font used to be customized by the now
                         deprecated `titlefont` attribute.
+                    transition
+                        Sets transition options used during
+                        Plotly.react updates.
                     uirevision
                         Used to allow user interactions with the plot
                         to persist after `Plotly.react` calls that are
@@ -381,10 +398,12 @@ class Figure(BaseFigure):
                         elements of layout.updatemenus
                     violingap
                         Sets the gap (in plot fraction) between violins
-                        of adjacent location coordinates.
+                        of adjacent location coordinates. Has no effect
+                        on traces that have "width" set.
                     violingroupgap
                         Sets the gap (in plot fraction) between violins
-                        of the same location coordinate.
+                        of the same location coordinate. Has no effect
+                        on traces that have "width" set.
                     violinmode
                         Determines how violins at the same location
                         coordinate are displayed on the graph. If
@@ -392,7 +411,8 @@ class Figure(BaseFigure):
                         another centered around the shared location. If
                         "overlay", the violins are plotted over one
                         another, you might need to set "opacity" to see
-                        them multiple violins.
+                        them multiple violins. Has no effect on traces
+                        that have "width" set.
                     width
                         Sets the plot's width (in px).
                     xaxis
@@ -541,7 +561,9 @@ class Figure(BaseFigure):
         tsrc
             Sets the source reference on plot.ly for  t .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -834,7 +856,9 @@ class Figure(BaseFigure):
         tsrc
             Sets the source reference on plot.ly for  t .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -981,6 +1005,8 @@ class Figure(BaseFigure):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
         ids=None,
         idssrc=None,
         legendgroup=None,
@@ -1050,6 +1076,26 @@ class Figure(BaseFigure):
         hoverlabel
             plotly.graph_objs.barpolar.Hoverlabel instance or dict
             with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -1121,7 +1167,9 @@ class Figure(BaseFigure):
             Sets the unit of input "theta" values. Has an effect
             only when on "linear" angular axes.
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1175,6 +1223,8 @@ class Figure(BaseFigure):
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
+            hovertemplate=hovertemplate,
+            hovertemplatesrc=hovertemplatesrc,
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
@@ -1241,6 +1291,7 @@ class Figure(BaseFigure):
         unselected=None,
         visible=None,
         whiskerwidth=None,
+        width=None,
         x=None,
         x0=None,
         xaxis=None,
@@ -1378,7 +1429,9 @@ class Figure(BaseFigure):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1409,6 +1462,11 @@ class Figure(BaseFigure):
             Sets the width of the whiskers relative to the box'
             width. For example, with 1, the whiskers are as wide as
             the box(es).
+        width
+            Sets the width of the box in data coordinate If 0
+            (default value) the width is automatically selected
+            based on the positions of other box traces in the same
+            subplot.
         x
             Sets the x sample data or coordinates. See overview for
             more info.
@@ -1485,6 +1543,7 @@ class Figure(BaseFigure):
             unselected=unselected,
             visible=visible,
             whiskerwidth=whiskerwidth,
+            width=width,
             x=x,
             x0=x0,
             xaxis=xaxis,
@@ -1632,7 +1691,9 @@ class Figure(BaseFigure):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1873,7 +1934,9 @@ class Figure(BaseFigure):
             plotly.graph_objs.carpet.Stream instance or dict with
             compatible properties
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1983,6 +2046,8 @@ class Figure(BaseFigure):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
         ids=None,
         idssrc=None,
         legendgroup=None,
@@ -2067,6 +2132,26 @@ class Figure(BaseFigure):
         hoverlabel
             plotly.graph_objs.choropleth.Hoverlabel instance or
             dict with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -2121,7 +2206,9 @@ class Figure(BaseFigure):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -2188,6 +2275,8 @@ class Figure(BaseFigure):
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
+            hovertemplate=hovertemplate,
+            hovertemplatesrc=hovertemplatesrc,
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
@@ -2408,7 +2497,9 @@ class Figure(BaseFigure):
         u
             Sets the x components of the vector field.
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -2698,7 +2789,9 @@ class Figure(BaseFigure):
         transpose
             Transposes the z data.
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -3054,7 +3147,9 @@ class Figure(BaseFigure):
         transpose
             Transposes the z data.
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -3335,7 +3430,9 @@ class Figure(BaseFigure):
         transpose
             Transposes the z data.
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -3634,7 +3731,9 @@ class Figure(BaseFigure):
         transpose
             Transposes the z data.
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -3976,7 +4075,9 @@ class Figure(BaseFigure):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -4284,7 +4385,9 @@ class Figure(BaseFigure):
             plotly.graph_objs.histogram2d.Stream instance or dict
             with compatible properties
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -4639,7 +4742,9 @@ class Figure(BaseFigure):
             plotly.graph_objs.histogram2dcontour.Stream instance or
             dict with compatible properties
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -4774,6 +4879,304 @@ class Figure(BaseFigure):
             zhoverformat=zhoverformat,
             zmax=zmax,
             zmin=zmin,
+            zsrc=zsrc,
+            **kwargs
+        )
+        return self.add_trace(new_trace, row=row, col=col)
+
+    def add_isosurface(
+        self,
+        autocolorscale=None,
+        caps=None,
+        cauto=None,
+        cmax=None,
+        cmin=None,
+        colorbar=None,
+        colorscale=None,
+        contour=None,
+        customdata=None,
+        customdatasrc=None,
+        flatshading=None,
+        hoverinfo=None,
+        hoverinfosrc=None,
+        hoverlabel=None,
+        ids=None,
+        idssrc=None,
+        isomax=None,
+        isomin=None,
+        legendgroup=None,
+        lighting=None,
+        lightposition=None,
+        name=None,
+        opacity=None,
+        reversescale=None,
+        scene=None,
+        selectedpoints=None,
+        showlegend=None,
+        showscale=None,
+        slices=None,
+        spaceframe=None,
+        stream=None,
+        surface=None,
+        text=None,
+        textsrc=None,
+        uid=None,
+        uirevision=None,
+        value=None,
+        valuesrc=None,
+        visible=None,
+        x=None,
+        xsrc=None,
+        y=None,
+        ysrc=None,
+        z=None,
+        zsrc=None,
+        row=None,
+        col=None,
+        **kwargs
+    ):
+        """
+        Add a new Isosurface trace
+        
+        Draws isosurfaces between iso-min and iso-max values with
+        coordinates given by four 1-dimensional arrays containing the
+        `value`, `x`, `y` and `z` of every vertex of a uniform or non-
+        uniform 3-D grid. Horizontal or vertical slices, caps as well
+        as spaceframe between iso-min and iso-max values could also be
+        drawn using this trace.
+
+        Parameters
+        ----------
+        autocolorscale
+            Determines whether the colorscale is a default palette
+            (`autocolorscale: true`) or the palette determined by
+            `colorscale`. In case `colorscale` is unspecified or
+            `autocolorscale` is true, the default  palette will be
+            chosen according to whether numbers in the `color`
+            array are all positive, all negative or mixed.
+        caps
+            plotly.graph_objs.isosurface.Caps instance or dict with
+            compatible properties
+        cauto
+            Determines whether or not the color domain is computed
+            with respect to the input data (here `value`) or the
+            bounds set in `cmin` and `cmax`  Defaults to `false`
+            when `cmin` and `cmax` are set by the user.
+        cmax
+            Sets the upper bound of the color domain. Value should
+            have the same units as `value` and if set, `cmin` must
+            be set as well.
+        cmin
+            Sets the lower bound of the color domain. Value should
+            have the same units as `value` and if set, `cmax` must
+            be set as well.
+        colorbar
+            plotly.graph_objs.isosurface.ColorBar instance or dict
+            with compatible properties
+        colorscale
+            Sets the colorscale. The colorscale must be an array
+            containing arrays mapping a normalized value to an rgb,
+            rgba, hex, hsl, hsv, or named color string. At minimum,
+            a mapping for the lowest (0) and highest (1) values are
+            required. For example, `[[0, 'rgb(0,0,255)', [1,
+            'rgb(255,0,0)']]`. To control the bounds of the
+            colorscale in color space, use`cmin` and `cmax`.
+            Alternatively, `colorscale` may be a palette name
+            string of the following list: Greys,YlGnBu,Greens,YlOrR
+            d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
+            ot,Blackbody,Earth,Electric,Viridis,Cividis.
+        contour
+            plotly.graph_objs.isosurface.Contour instance or dict
+            with compatible properties
+        customdata
+            Assigns extra data each datum. This may be useful when
+            listening to hover, click and selection events. Note
+            that, "scatter" traces also appends customdata items in
+            the markers DOM elements
+        customdatasrc
+            Sets the source reference on plot.ly for  customdata .
+        flatshading
+            Determines whether or not normal smoothing is applied
+            to the isosurfaces, creating isosurfaces with an
+            angular, low-poly look via flat reflections.
+        hoverinfo
+            Determines which trace information appear on hover. If
+            `none` or `skip` are set, no information is displayed
+            upon hovering. But, if `none` is set, click and hover
+            events are still fired.
+        hoverinfosrc
+            Sets the source reference on plot.ly for  hoverinfo .
+        hoverlabel
+            plotly.graph_objs.isosurface.Hoverlabel instance or
+            dict with compatible properties
+        ids
+            Assigns id labels to each datum. These ids for object
+            constancy of data points during animation. Should be an
+            array of strings, not numbers or any other type.
+        idssrc
+            Sets the source reference on plot.ly for  ids .
+        isomax
+            Sets the maximum boundary for iso-surface plot.
+        isomin
+            Sets the minimum boundary for iso-surface plot.
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
+        lighting
+            plotly.graph_objs.isosurface.Lighting instance or dict
+            with compatible properties
+        lightposition
+            plotly.graph_objs.isosurface.Lightposition instance or
+            dict with compatible properties
+        name
+            Sets the trace name. The trace name appear as the
+            legend item and on hover.
+        opacity
+            Sets the opacity of the trace.
+        reversescale
+            Reverses the color mapping if true. If true, `cmin`
+            will correspond to the last color in the array and
+            `cmax` will correspond to the first color.
+        scene
+            Sets a reference between this trace's 3D coordinate
+            system and a 3D scene. If "scene" (the default value),
+            the (x,y,z) coordinates refer to `layout.scene`. If
+            "scene2", the (x,y,z) coordinates refer to
+            `layout.scene2`, and so on.
+        selectedpoints
+            Array containing integer indices of selected points.
+            Has an effect only for traces that support selections.
+            Note that an empty array means an empty selection where
+            the `unselected` are turned on for all points, whereas,
+            any other non-array values means no selection all where
+            the `selected` and `unselected` styles have no effect.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
+        showscale
+            Determines whether or not a colorbar is displayed for
+            this trace.
+        slices
+            plotly.graph_objs.isosurface.Slices instance or dict
+            with compatible properties
+        spaceframe
+            plotly.graph_objs.isosurface.Spaceframe instance or
+            dict with compatible properties
+        stream
+            plotly.graph_objs.isosurface.Stream instance or dict
+            with compatible properties
+        surface
+            plotly.graph_objs.isosurface.Surface instance or dict
+            with compatible properties
+        text
+            Sets the text elements associated with the vertices. If
+            trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
+            the hover labels.
+        textsrc
+            Sets the source reference on plot.ly for  text .
+        uid
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
+        value
+            Sets the 4th dimension (value) of the vertices.
+        valuesrc
+            Sets the source reference on plot.ly for  value .
+        visible
+            Determines whether or not this trace is visible. If
+            "legendonly", the trace is not drawn, but can appear as
+            a legend item (provided that the legend itself is
+            visible).
+        x
+            Sets the X coordinates of the vertices on X axis.
+        xsrc
+            Sets the source reference on plot.ly for  x .
+        y
+            Sets the Y coordinates of the vertices on Y axis.
+        ysrc
+            Sets the source reference on plot.ly for  y .
+        z
+            Sets the Z coordinates of the vertices on Z axis.
+        zsrc
+            Sets the source reference on plot.ly for  z .
+        row : int or None (default)
+            Subplot row index (starting from 1) for the trace to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`
+        col : int or None (default)
+            Subplot col index (starting from 1) for the trace to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`
+
+        Returns
+        -------
+        Isosurface
+        """
+        new_trace = Isosurface(
+            autocolorscale=autocolorscale,
+            caps=caps,
+            cauto=cauto,
+            cmax=cmax,
+            cmin=cmin,
+            colorbar=colorbar,
+            colorscale=colorscale,
+            contour=contour,
+            customdata=customdata,
+            customdatasrc=customdatasrc,
+            flatshading=flatshading,
+            hoverinfo=hoverinfo,
+            hoverinfosrc=hoverinfosrc,
+            hoverlabel=hoverlabel,
+            ids=ids,
+            idssrc=idssrc,
+            isomax=isomax,
+            isomin=isomin,
+            legendgroup=legendgroup,
+            lighting=lighting,
+            lightposition=lightposition,
+            name=name,
+            opacity=opacity,
+            reversescale=reversescale,
+            scene=scene,
+            selectedpoints=selectedpoints,
+            showlegend=showlegend,
+            showscale=showscale,
+            slices=slices,
+            spaceframe=spaceframe,
+            stream=stream,
+            surface=surface,
+            text=text,
+            textsrc=textsrc,
+            uid=uid,
+            uirevision=uirevision,
+            value=value,
+            valuesrc=valuesrc,
+            visible=visible,
+            x=x,
+            xsrc=xsrc,
+            y=y,
+            ysrc=ysrc,
+            z=z,
             zsrc=zsrc,
             **kwargs
         )
@@ -5034,7 +5437,9 @@ class Figure(BaseFigure):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -5295,7 +5700,9 @@ class Figure(BaseFigure):
             Sets the width of the open/close tick marks relative to
             the "x" minimal interval.
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -5479,7 +5886,9 @@ class Figure(BaseFigure):
         tickfont
             Sets the font for the `category` labels.
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -5639,7 +6048,9 @@ class Figure(BaseFigure):
         tickfont
             Sets the font for the `dimension` tick values.
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -5917,7 +6328,9 @@ class Figure(BaseFigure):
             title's position used to be set by the now deprecated
             `titleposition` attribute.
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -6127,7 +6540,9 @@ class Figure(BaseFigure):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -6345,7 +6760,9 @@ class Figure(BaseFigure):
         textfont
             Sets the font for node labels
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -6709,7 +7126,9 @@ class Figure(BaseFigure):
         tsrc
             Sets the source reference on plot.ly for  t .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -7016,7 +7435,9 @@ class Figure(BaseFigure):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -7291,7 +7712,9 @@ class Figure(BaseFigure):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -7394,6 +7817,8 @@ class Figure(BaseFigure):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
         ids=None,
@@ -7473,6 +7898,26 @@ class Figure(BaseFigure):
         hoverlabel
             plotly.graph_objs.scattergeo.Hoverlabel instance or
             dict with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
         hovertext
             Sets hover text elements associated with each (lon,lat)
             pair or item in `locations`. If a single string, the
@@ -7563,7 +8008,9 @@ class Figure(BaseFigure):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -7613,6 +8060,8 @@ class Figure(BaseFigure):
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
+            hovertemplate=hovertemplate,
+            hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
             ids=ids,
@@ -7854,7 +8303,9 @@ class Figure(BaseFigure):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -7986,6 +8437,8 @@ class Figure(BaseFigure):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
         ids=None,
@@ -8055,6 +8508,26 @@ class Figure(BaseFigure):
         hoverlabel
             plotly.graph_objs.scattermapbox.Hoverlabel instance or
             dict with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
         hovertext
             Sets hover text elements associated with each (lon,lat)
             pair If a single string, the same string appears over
@@ -8136,7 +8609,9 @@ class Figure(BaseFigure):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -8185,6 +8660,8 @@ class Figure(BaseFigure):
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
+            hovertemplate=hovertemplate,
+            hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
             ids=ids,
@@ -8230,6 +8707,8 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hoveron=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
         ids=None,
@@ -8331,6 +8810,26 @@ class Figure(BaseFigure):
             regions? If the fill is "toself" or "tonext" and there
             are no markers or text, then the default is "fills",
             otherwise it is "points".
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -8427,7 +8926,9 @@ class Figure(BaseFigure):
             Sets the unit of input "theta" values. Has an effect
             only when on "linear" angular axes.
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -8480,6 +8981,8 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hoveron=hoveron,
+            hovertemplate=hovertemplate,
+            hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
             ids=ids,
@@ -8527,6 +9030,8 @@ class Figure(BaseFigure):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
         ids=None,
@@ -8627,6 +9132,26 @@ class Figure(BaseFigure):
         hoverlabel
             plotly.graph_objs.scatterpolargl.Hoverlabel instance or
             dict with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
         hovertext
             Sets hover text elements associated with each (x,y)
             pair. If a single string, the same string appears over
@@ -8723,7 +9248,9 @@ class Figure(BaseFigure):
             Sets the unit of input "theta" values. Has an effect
             only when on "linear" angular axes.
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -8774,6 +9301,8 @@ class Figure(BaseFigure):
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
+            hovertemplate=hovertemplate,
+            hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
             ids=ids,
@@ -8827,6 +9356,8 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hoveron=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
         ids=None,
@@ -8936,6 +9467,26 @@ class Figure(BaseFigure):
             regions? If the fill is "toself" or "tonext" and there
             are no markers or text, then the default is "fills",
             otherwise it is "points".
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
         hovertext
             Sets hover text elements associated with each (a,b,c)
             point. If a single string, the same string appears over
@@ -9020,7 +9571,9 @@ class Figure(BaseFigure):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -9077,6 +9630,8 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hoveron=hoveron,
+            hovertemplate=hovertemplate,
+            hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
             ids=ids,
@@ -9230,7 +9785,9 @@ class Figure(BaseFigure):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -9498,7 +10055,9 @@ class Figure(BaseFigure):
         u
             Sets the x components of the vector field.
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -9789,7 +10348,9 @@ class Figure(BaseFigure):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -9999,7 +10560,9 @@ class Figure(BaseFigure):
             plotly.graph_objs.table.Stream instance or dict with
             compatible properties
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -10102,6 +10665,7 @@ class Figure(BaseFigure):
         uirevision=None,
         unselected=None,
         visible=None,
+        width=None,
         x=None,
         x0=None,
         xaxis=None,
@@ -10264,7 +10828,9 @@ class Figure(BaseFigure):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -10291,6 +10857,11 @@ class Figure(BaseFigure):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
+        width
+            Sets the width of the violin in data coordinates. If 0
+            (default value) the width is automatically selected
+            based on the positions of other violin traces in the
+            same subplot.
         x
             Sets the x sample data or coordinates. See overview for
             more info.
@@ -10367,6 +10938,7 @@ class Figure(BaseFigure):
             uirevision=uirevision,
             unselected=unselected,
             visible=visible,
+            width=width,
             x=x,
             x0=x0,
             xaxis=xaxis,

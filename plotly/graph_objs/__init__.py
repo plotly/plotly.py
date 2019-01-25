@@ -40,6 +40,8 @@ from ._ohlc import Ohlc
 from plotly.graph_objs import ohlc
 from ._mesh3d import Mesh3d
 from plotly.graph_objs import mesh3d
+from ._isosurface import Isosurface
+from plotly.graph_objs import isosurface
 from ._histogram2dcontour import Histogram2dContour
 from plotly.graph_objs import histogram2dcontour
 from ._histogram2d import Histogram2d

@@ -1603,8 +1603,8 @@ an instance of plotly.graph_objs.layout.ternary.Caxis"""
         self._validators['tickcolor'] = v_caxis.TickcolorValidator()
         self._validators['tickfont'] = v_caxis.TickfontValidator()
         self._validators['tickformat'] = v_caxis.TickformatValidator()
-        self._validators['tickformatstops'
-                        ] = v_caxis.TickformatstopsValidator()
+        self._validators['tickformatstops'] = v_caxis.TickformatstopsValidator(
+        )
         self._validators['tickformatstopdefaults'
                         ] = v_caxis.TickformatstopValidator()
         self._validators['ticklen'] = v_caxis.TicklenValidator()

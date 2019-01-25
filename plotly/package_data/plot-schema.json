@@ -227,11 +227,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -396,6 +399,7 @@
                 "x": {
                     "valType": "data_array",
                     "editType": "calc+clearAxisTypes",
+                    "anim": true,
                     "description": "Sets the x coordinates.",
                     "role": "data"
                 },
@@ -404,6 +408,7 @@
                     "dflt": 0,
                     "role": "info",
                     "editType": "calc+clearAxisTypes",
+                    "anim": true,
                     "description": "Alternate to `x`. Builds a linear space of x coordinates. Use with `dx` where `x0` is the starting coordinate and `dx` the step."
                 },
                 "dx": {
@@ -411,11 +416,13 @@
                     "dflt": 1,
                     "role": "info",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Sets the x coordinate step. See `x0` for more info."
                 },
                 "y": {
                     "valType": "data_array",
                     "editType": "calc+clearAxisTypes",
+                    "anim": true,
                     "description": "Sets the y coordinates.",
                     "role": "data"
                 },
@@ -424,6 +431,7 @@
                     "dflt": 0,
                     "role": "info",
                     "editType": "calc+clearAxisTypes",
+                    "anim": true,
                     "description": "Alternate to `y`. Builds a linear space of y coordinates. Use with `dy` where `y0` is the starting coordinate and `dy` the step."
                 },
                 "dy": {
@@ -431,6 +439,7 @@
                     "dflt": 1,
                     "role": "info",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Sets the y coordinate step. See `y0` for more info."
                 },
                 "stackgroup": {
@@ -526,6 +535,7 @@
                         "valType": "color",
                         "role": "style",
                         "editType": "style",
+                        "anim": true,
                         "description": "Sets the line color."
                     },
                     "width": {
@@ -534,6 +544,7 @@
                         "dflt": 2,
                         "role": "style",
                         "editType": "style",
+                        "anim": true,
                         "description": "Sets the line width (in px)."
                     },
                     "shape": {
@@ -618,6 +629,7 @@
                     "valType": "color",
                     "role": "style",
                     "editType": "style",
+                    "anim": true,
                     "description": "Sets the fill color. Defaults to a half-transparent variant of the line color, marker color, or marker line color, whichever is available."
                 },
                 "marker": {
@@ -922,6 +934,7 @@
                         "arrayOk": true,
                         "role": "style",
                         "editType": "style",
+                        "anim": true,
                         "description": "Sets the marker opacity."
                     },
                     "size": {
@@ -931,6 +944,7 @@
                         "arrayOk": true,
                         "role": "style",
                         "editType": "calc",
+                        "anim": true,
                         "description": "Sets the marker size (in px)."
                     },
                     "maxdisplayed": {
@@ -1468,6 +1482,7 @@
                             "arrayOk": true,
                             "role": "style",
                             "editType": "style",
+                            "anim": true,
                             "description": "Sets the width (in px) of the lines bounding the marker points."
                         },
                         "editType": "calc",
@@ -1476,7 +1491,8 @@
                             "arrayOk": true,
                             "role": "style",
                             "editType": "style",
-                            "description": "Sets themarker.linecolor. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `marker.line.cmin` and `marker.line.cmax` if set."
+                            "description": "Sets themarker.linecolor. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `marker.line.cmin` and `marker.line.cmax` if set.",
+                            "anim": true
                         },
                         "cauto": {
                             "valType": "boolean",
@@ -1588,7 +1604,8 @@
                         "arrayOk": true,
                         "role": "style",
                         "editType": "style",
-                        "description": "Sets themarkercolor. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `marker.cmin` and `marker.cmax` if set."
+                        "description": "Sets themarkercolor. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `marker.cmin` and `marker.cmax` if set.",
+                        "anim": true
                     },
                     "cauto": {
                         "valType": "boolean",
@@ -2239,11 +2256,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -2408,6 +2428,7 @@
                 "x": {
                     "valType": "data_array",
                     "editType": "calc+clearAxisTypes",
+                    "anim": true,
                     "description": "Sets the x coordinates.",
                     "role": "data"
                 },
@@ -2416,6 +2437,7 @@
                     "dflt": 0,
                     "role": "info",
                     "editType": "calc+clearAxisTypes",
+                    "anim": true,
                     "description": "Alternate to `x`. Builds a linear space of x coordinates. Use with `dx` where `x0` is the starting coordinate and `dx` the step."
                 },
                 "dx": {
@@ -2423,11 +2445,13 @@
                     "dflt": 1,
                     "role": "info",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Sets the x coordinate step. See `x0` for more info."
                 },
                 "y": {
                     "valType": "data_array",
                     "editType": "calc+clearAxisTypes",
+                    "anim": true,
                     "description": "Sets the y coordinates.",
                     "role": "data"
                 },
@@ -2436,6 +2460,7 @@
                     "dflt": 0,
                     "role": "info",
                     "editType": "calc+clearAxisTypes",
+                    "anim": true,
                     "description": "Alternate to `y`. Builds a linear space of y coordinates. Use with `dy` where `y0` is the starting coordinate and `dy` the step."
                 },
                 "dy": {
@@ -2443,6 +2468,7 @@
                     "dflt": 1,
                     "role": "info",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Sets the y coordinate step. See `y0` for more info."
                 },
                 "text": {
@@ -2681,6 +2707,7 @@
                             "arrayOk": true,
                             "role": "style",
                             "editType": "style",
+                            "anim": true,
                             "description": "Sets the width (in px) of the lines bounding the marker points.",
                             "dflt": 0
                         },
@@ -3898,11 +3925,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -4176,6 +4206,14 @@
                     "role": "style",
                     "editType": "calc+clearAxisTypes",
                     "description": "Sets the orientation of the box(es). If *v* (*h*), the distribution is visualized along the vertical (horizontal)."
+                },
+                "width": {
+                    "valType": "number",
+                    "min": 0,
+                    "role": "info",
+                    "dflt": 0,
+                    "editType": "calc",
+                    "description": "Sets the width of the box in data coordinate If *0* (default value) the width is automatically selected based on the positions of other box traces in the same subplot."
                 },
                 "marker": {
                     "outliercolor": {
@@ -4486,6 +4524,7 @@
                         "arrayOk": false,
                         "role": "style",
                         "editType": "style",
+                        "anim": true,
                         "description": "Sets the marker opacity.",
                         "dflt": 1
                     },
@@ -4496,6 +4535,7 @@
                         "arrayOk": false,
                         "role": "style",
                         "editType": "calc",
+                        "anim": true,
                         "description": "Sets the marker size (in px)."
                     },
                     "color": {
@@ -4503,7 +4543,8 @@
                         "arrayOk": false,
                         "role": "style",
                         "editType": "style",
-                        "description": "Sets themarkercolor. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `marker.cmin` and `marker.cmax` if set."
+                        "description": "Sets themarkercolor. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `marker.cmin` and `marker.cmax` if set.",
+                        "anim": true
                     },
                     "line": {
                         "color": {
@@ -4512,6 +4553,7 @@
                             "role": "style",
                             "editType": "style",
                             "description": "Sets themarker.linecolor. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `marker.line.cmin` and `marker.line.cmax` if set.",
+                            "anim": true,
                             "dflt": "#444"
                         },
                         "width": {
@@ -4520,6 +4562,7 @@
                             "arrayOk": false,
                             "role": "style",
                             "editType": "style",
+                            "anim": true,
                             "description": "Sets the width (in px) of the lines bounding the marker points.",
                             "dflt": 0
                         },
@@ -4565,6 +4608,7 @@
                     "valType": "color",
                     "role": "style",
                     "editType": "style",
+                    "anim": true,
                     "description": "Sets the fill color. Defaults to a half-transparent variant of the line color, marker color, or marker line color, whichever is available."
                 },
                 "selected": {
@@ -4747,7 +4791,7 @@
                     "dflt": "overlay",
                     "role": "info",
                     "editType": "calc",
-                    "description": "Determines how boxes at the same location coordinate are displayed on the graph. If *group*, the boxes are plotted next to one another centered around the shared location. If *overlay*, the boxes are plotted over one another, you might need to set *opacity* to see them multiple boxes."
+                    "description": "Determines how boxes at the same location coordinate are displayed on the graph. If *group*, the boxes are plotted next to one another centered around the shared location. If *overlay*, the boxes are plotted over one another, you might need to set *opacity* to see them multiple boxes. Has no effect on traces that have *width* set."
                 },
                 "boxgap": {
                     "valType": "number",
@@ -4756,7 +4800,7 @@
                     "dflt": 0.3,
                     "role": "style",
                     "editType": "calc",
-                    "description": "Sets the gap (in plot fraction) between boxes of adjacent location coordinates."
+                    "description": "Sets the gap (in plot fraction) between boxes of adjacent location coordinates. Has no effect on traces that have *width* set."
                 },
                 "boxgroupgap": {
                     "valType": "number",
@@ -4765,7 +4809,7 @@
                     "dflt": 0.3,
                     "role": "style",
                     "editType": "calc",
-                    "description": "Sets the gap (in plot fraction) between boxes of the same location coordinate."
+                    "description": "Sets the gap (in plot fraction) between boxes of the same location coordinate. Has no effect on traces that have *width* set."
                 }
             }
         },
@@ -4819,11 +4863,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -4984,6 +5031,7 @@
                 "x": {
                     "valType": "data_array",
                     "editType": "calc+clearAxisTypes",
+                    "anim": true,
                     "description": "Sets the x coordinates.",
                     "impliedEdits": {
                         "xtype": "array"
@@ -4995,6 +5043,7 @@
                     "dflt": 0,
                     "role": "info",
                     "editType": "calc+clearAxisTypes",
+                    "anim": true,
                     "description": "Alternate to `x`. Builds a linear space of x coordinates. Use with `dx` where `x0` is the starting coordinate and `dx` the step.",
                     "impliedEdits": {
                         "xtype": "scaled"
@@ -5005,6 +5054,7 @@
                     "dflt": 1,
                     "role": "info",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Sets the x coordinate step. See `x0` for more info.",
                     "impliedEdits": {
                         "xtype": "scaled"
@@ -5013,6 +5063,7 @@
                 "y": {
                     "valType": "data_array",
                     "editType": "calc+clearAxisTypes",
+                    "anim": true,
                     "description": "Sets the y coordinates.",
                     "impliedEdits": {
                         "ytype": "array"
@@ -5024,6 +5075,7 @@
                     "dflt": 0,
                     "role": "info",
                     "editType": "calc+clearAxisTypes",
+                    "anim": true,
                     "description": "Alternate to `y`. Builds a linear space of y coordinates. Use with `dy` where `y0` is the starting coordinate and `dy` the step.",
                     "impliedEdits": {
                         "ytype": "scaled"
@@ -5034,6 +5086,7 @@
                     "dflt": 1,
                     "role": "info",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Sets the y coordinate step. See `y0` for more info.",
                     "impliedEdits": {
                         "ytype": "scaled"
@@ -5826,11 +5879,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -6174,6 +6230,7 @@
                             "arrayOk": true,
                             "role": "style",
                             "editType": "style",
+                            "anim": true,
                             "description": "Sets the width (in px) of the lines bounding the marker points.",
                             "dflt": 0
                         },
@@ -7344,11 +7401,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -8388,11 +8448,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -8848,6 +8911,7 @@
                         "valType": "color",
                         "role": "style",
                         "editType": "style+colorbars",
+                        "anim": true,
                         "description": "Sets the color of the contour level. Has no effect if `contours.coloring` is set to *lines*."
                     },
                     "width": {
@@ -8856,6 +8920,7 @@
                         "dflt": 2,
                         "role": "style",
                         "editType": "style+colorbars",
+                        "anim": true,
                         "description": "Sets the line width (in px)."
                     },
                     "dash": {
@@ -9598,11 +9663,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -10405,11 +10473,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -10580,6 +10651,7 @@
                 "x": {
                     "valType": "data_array",
                     "editType": "calc+clearAxisTypes",
+                    "anim": true,
                     "description": "Sets the x coordinates.",
                     "impliedEdits": {
                         "xtype": "array"
@@ -10591,6 +10663,7 @@
                     "dflt": 0,
                     "role": "info",
                     "editType": "calc+clearAxisTypes",
+                    "anim": true,
                     "description": "Alternate to `x`. Builds a linear space of x coordinates. Use with `dx` where `x0` is the starting coordinate and `dx` the step.",
                     "impliedEdits": {
                         "xtype": "scaled"
@@ -10601,6 +10674,7 @@
                     "dflt": 1,
                     "role": "info",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Sets the x coordinate step. See `x0` for more info.",
                     "impliedEdits": {
                         "xtype": "scaled"
@@ -10609,6 +10683,7 @@
                 "y": {
                     "valType": "data_array",
                     "editType": "calc+clearAxisTypes",
+                    "anim": true,
                     "description": "Sets the y coordinates.",
                     "impliedEdits": {
                         "ytype": "array"
@@ -10620,6 +10695,7 @@
                     "dflt": 0,
                     "role": "info",
                     "editType": "calc+clearAxisTypes",
+                    "anim": true,
                     "description": "Alternate to `y`. Builds a linear space of y coordinates. Use with `dy` where `y0` is the starting coordinate and `dy` the step.",
                     "impliedEdits": {
                         "ytype": "scaled"
@@ -10630,6 +10706,7 @@
                     "dflt": 1,
                     "role": "info",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Sets the y coordinate step. See `y0` for more info.",
                     "impliedEdits": {
                         "ytype": "scaled"
@@ -10846,6 +10923,7 @@
                         "valType": "color",
                         "role": "style",
                         "editType": "style+colorbars",
+                        "anim": true,
                         "description": "Sets the color of the contour level. Has no effect if `contours.coloring` is set to *lines*."
                     },
                     "width": {
@@ -10854,6 +10932,7 @@
                         "dflt": 2,
                         "role": "style",
                         "editType": "style+colorbars",
+                        "anim": true,
                         "description": "Sets the line width (in px)."
                     },
                     "dash": {
@@ -11596,11 +11675,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -11804,6 +11886,7 @@
                         "valType": "color",
                         "role": "style",
                         "editType": "style",
+                        "anim": true,
                         "description": "Sets the line color."
                     },
                     "width": {
@@ -11812,6 +11895,7 @@
                         "dflt": 2,
                         "role": "style",
                         "editType": "style",
+                        "anim": true,
                         "description": "Sets the line width (in px)."
                     },
                     "dash": {
@@ -11882,6 +11966,7 @@
                     "valType": "color",
                     "role": "style",
                     "editType": "style",
+                    "anim": true,
                     "description": "Sets the fill color. Defaults to a half-transparent variant of the line color, marker color, or marker line color, whichever is available."
                 },
                 "marker": {
@@ -12186,6 +12271,7 @@
                         "arrayOk": true,
                         "role": "style",
                         "editType": "style",
+                        "anim": true,
                         "description": "Sets the marker opacity."
                     },
                     "maxdisplayed": {
@@ -12203,6 +12289,7 @@
                         "arrayOk": true,
                         "role": "style",
                         "editType": "calc",
+                        "anim": true,
                         "description": "Sets the marker size (in px)."
                     },
                     "sizeref": {
@@ -12238,6 +12325,7 @@
                             "arrayOk": true,
                             "role": "style",
                             "editType": "style",
+                            "anim": true,
                             "description": "Sets the width (in px) of the lines bounding the marker points."
                         },
                         "editType": "calc",
@@ -13112,6 +13200,14 @@
                     "editType": "style",
                     "description": "Do the hover effects highlight individual points (markers or line points) or do they highlight filled regions? If the fill is *toself* or *tonext* and there are no markers or text, then the default is *fills*, otherwise it is *points*."
                 },
+                "hovertemplate": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "arrayOk": true,
+                    "editType": "none",
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\"."
+                },
                 "subplot": {
                     "valType": "subplotid",
                     "role": "info",
@@ -13172,6 +13268,12 @@
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  hoverinfo .",
                     "editType": "none"
+                },
+                "hovertemplatesrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertemplate .",
+                    "editType": "none"
                 }
             }
         },
@@ -13219,11 +13321,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -13500,6 +13605,7 @@
                     "valType": "color",
                     "role": "style",
                     "editType": "style",
+                    "anim": true,
                     "description": "Sets the fill color. Defaults to a half-transparent variant of the line color, marker color, or marker line color, whichever is available."
                 },
                 "points": {
@@ -13530,6 +13636,14 @@
                     "role": "style",
                     "editType": "calc",
                     "description": "Sets the position of the sample points in relation to the violins. If *0*, the sample points are places over the center of the violins. Positive (negative) values correspond to positions to the right (left) for vertical violins and above (below) for horizontal violins."
+                },
+                "width": {
+                    "valType": "number",
+                    "min": 0,
+                    "role": "info",
+                    "dflt": 0,
+                    "editType": "calc",
+                    "description": "Sets the width of the violin in data coordinates. If *0* (default value) the width is automatically selected based on the positions of other violin traces in the same subplot."
                 },
                 "marker": {
                     "outliercolor": {
@@ -13840,6 +13954,7 @@
                         "arrayOk": false,
                         "role": "style",
                         "editType": "style",
+                        "anim": true,
                         "description": "Sets the marker opacity.",
                         "dflt": 1
                     },
@@ -13850,6 +13965,7 @@
                         "arrayOk": false,
                         "role": "style",
                         "editType": "calc",
+                        "anim": true,
                         "description": "Sets the marker size (in px)."
                     },
                     "color": {
@@ -13857,7 +13973,8 @@
                         "arrayOk": false,
                         "role": "style",
                         "editType": "style",
-                        "description": "Sets themarkercolor. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `marker.cmin` and `marker.cmax` if set."
+                        "description": "Sets themarkercolor. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `marker.cmin` and `marker.cmax` if set.",
+                        "anim": true
                     },
                     "line": {
                         "color": {
@@ -13866,6 +13983,7 @@
                             "role": "style",
                             "editType": "style",
                             "description": "Sets themarker.linecolor. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `marker.line.cmin` and `marker.line.cmax` if set.",
+                            "anim": true,
                             "dflt": "#444"
                         },
                         "width": {
@@ -13874,6 +13992,7 @@
                             "arrayOk": false,
                             "role": "style",
                             "editType": "style",
+                            "anim": true,
                             "description": "Sets the width (in px) of the lines bounding the marker points.",
                             "dflt": 0
                         },
@@ -13981,7 +14100,7 @@
                     ],
                     "dflt": "both",
                     "role": "info",
-                    "editType": "plot",
+                    "editType": "calc",
                     "description": "Determines on which side of the position value the density function making up one half of a violin is plotted. Useful when comparing two violin traces under *overlay* mode, where one trace has `side` set to *positive* and the other to *negative*."
                 },
                 "selected": {
@@ -14118,7 +14237,7 @@
                     "dflt": "overlay",
                     "role": "info",
                     "editType": "calc",
-                    "description": "Determines how violins at the same location coordinate are displayed on the graph. If *group*, the violins are plotted next to one another centered around the shared location. If *overlay*, the violins are plotted over one another, you might need to set *opacity* to see them multiple violins."
+                    "description": "Determines how violins at the same location coordinate are displayed on the graph. If *group*, the violins are plotted next to one another centered around the shared location. If *overlay*, the violins are plotted over one another, you might need to set *opacity* to see them multiple violins. Has no effect on traces that have *width* set."
                 },
                 "violingap": {
                     "valType": "number",
@@ -14127,7 +14246,7 @@
                     "dflt": 0.3,
                     "role": "style",
                     "editType": "calc",
-                    "description": "Sets the gap (in plot fraction) between violins of adjacent location coordinates."
+                    "description": "Sets the gap (in plot fraction) between violins of adjacent location coordinates. Has no effect on traces that have *width* set."
                 },
                 "violingroupgap": {
                     "valType": "number",
@@ -14136,7 +14255,7 @@
                     "dflt": 0.3,
                     "role": "style",
                     "editType": "calc",
-                    "description": "Sets the gap (in plot fraction) between violins of the same location coordinate."
+                    "description": "Sets the gap (in plot fraction) between violins of the same location coordinate. Has no effect on traces that have *width* set."
                 }
             }
         },
@@ -14191,11 +14310,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -14340,12 +14462,14 @@
                 "x": {
                     "valType": "data_array",
                     "editType": "calc+clearAxisTypes",
+                    "anim": true,
                     "description": "Sets the x coordinates.",
                     "role": "data"
                 },
                 "y": {
                     "valType": "data_array",
                     "editType": "calc+clearAxisTypes",
+                    "anim": true,
                     "description": "Sets the y coordinates.",
                     "role": "data"
                 },
@@ -14510,6 +14634,7 @@
                         "dflt": 2,
                         "role": "style",
                         "editType": "calc",
+                        "anim": true,
                         "description": "Sets the line width (in px)."
                     },
                     "dash": {
@@ -14587,6 +14712,13 @@
                         "editType": "calc",
                         "description": "Reverses the color mapping if true. Has an effect only if in `line.color`is set to a numerical array. If true, `line.cmin` will correspond to the last color in the array and `line.cmax` will correspond to the first color."
                     },
+                    "showscale": {
+                        "valType": "boolean",
+                        "role": "info",
+                        "dflt": false,
+                        "editType": "calc",
+                        "description": "Determines whether or not a colorbar is displayed for this trace. Has an effect only if in `line.color`is set to a numerical array."
+                    },
                     "editType": "calc",
                     "role": "object",
                     "colorsrc": {
@@ -14622,6 +14754,7 @@
                         "arrayOk": true,
                         "role": "style",
                         "editType": "calc",
+                        "anim": true,
                         "description": "Sets the marker size (in px)."
                     },
                     "sizeref": {
@@ -14657,6 +14790,7 @@
                         "arrayOk": false,
                         "role": "style",
                         "editType": "calc",
+                        "anim": true,
                         "description": "Sets the marker opacity. Note that the marker opacity for scatter3d traces must be a scalar value for performance reasons. To set a blending opacity value (i.e. which is not transparent), set *marker.color* to an rgba color and use its alpha channel."
                     },
                     "colorbar": {
@@ -15160,6 +15294,7 @@
                             "arrayOk": false,
                             "role": "style",
                             "editType": "calc",
+                            "anim": true,
                             "description": "Sets the width (in px) of the lines bounding the marker points."
                         },
                         "color": {
@@ -15918,11 +16053,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -17152,6 +17290,1236 @@
                 }
             }
         },
+        "isosurface": {
+            "meta": {
+                "description": "Draws isosurfaces between iso-min and iso-max values with coordinates given by four 1-dimensional arrays containing the `value`, `x`, `y` and `z` of every vertex of a uniform or non-uniform 3-D grid. Horizontal or vertical slices, caps as well as spaceframe between iso-min and iso-max values could also be drawn using this trace."
+            },
+            "attributes": {
+                "type": "isosurface",
+                "visible": {
+                    "valType": "enumerated",
+                    "values": [
+                        true,
+                        false,
+                        "legendonly"
+                    ],
+                    "role": "info",
+                    "dflt": true,
+                    "editType": "calc",
+                    "description": "Determines whether or not this trace is visible. If *legendonly*, the trace is not drawn, but can appear as a legend item (provided that the legend itself is visible)."
+                },
+                "showlegend": {
+                    "valType": "boolean",
+                    "role": "info",
+                    "dflt": true,
+                    "editType": "style",
+                    "description": "Determines whether or not an item corresponding to this trace is shown in the legend."
+                },
+                "legendgroup": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "style",
+                    "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items."
+                },
+                "opacity": {
+                    "valType": "number",
+                    "role": "style",
+                    "min": 0,
+                    "max": 1,
+                    "dflt": 1,
+                    "editType": "style",
+                    "description": "Sets the opacity of the trace."
+                },
+                "name": {
+                    "valType": "string",
+                    "role": "info",
+                    "editType": "style",
+                    "description": "Sets the trace name. The trace name appear as the legend item and on hover."
+                },
+                "uid": {
+                    "valType": "string",
+                    "role": "info",
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
+                },
+                "ids": {
+                    "valType": "data_array",
+                    "editType": "calc",
+                    "anim": true,
+                    "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
+                    "role": "data"
+                },
+                "customdata": {
+                    "valType": "data_array",
+                    "editType": "calc",
+                    "description": "Assigns extra data each datum. This may be useful when listening to hover, click and selection events. Note that, *scatter* traces also appends customdata items in the markers DOM elements",
+                    "role": "data"
+                },
+                "selectedpoints": {
+                    "valType": "any",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Array containing integer indices of selected points. Has an effect only for traces that support selections. Note that an empty array means an empty selection where the `unselected` are turned on for all points, whereas, any other non-array values means no selection all where the `selected` and `unselected` styles have no effect."
+                },
+                "hoverlabel": {
+                    "bgcolor": {
+                        "valType": "color",
+                        "role": "style",
+                        "arrayOk": true,
+                        "editType": "none",
+                        "description": "Sets the background color of the hover labels for this trace"
+                    },
+                    "bordercolor": {
+                        "valType": "color",
+                        "role": "style",
+                        "arrayOk": true,
+                        "editType": "none",
+                        "description": "Sets the border color of the hover labels for this trace."
+                    },
+                    "font": {
+                        "family": {
+                            "valType": "string",
+                            "role": "style",
+                            "noBlank": true,
+                            "strict": true,
+                            "editType": "none",
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                            "arrayOk": true
+                        },
+                        "size": {
+                            "valType": "number",
+                            "role": "style",
+                            "min": 1,
+                            "editType": "none",
+                            "arrayOk": true
+                        },
+                        "color": {
+                            "valType": "color",
+                            "role": "style",
+                            "editType": "none",
+                            "arrayOk": true
+                        },
+                        "editType": "none",
+                        "description": "Sets the font used in hover labels.",
+                        "role": "object",
+                        "familysrc": {
+                            "valType": "string",
+                            "role": "info",
+                            "description": "Sets the source reference on plot.ly for  family .",
+                            "editType": "none"
+                        },
+                        "sizesrc": {
+                            "valType": "string",
+                            "role": "info",
+                            "description": "Sets the source reference on plot.ly for  size .",
+                            "editType": "none"
+                        },
+                        "colorsrc": {
+                            "valType": "string",
+                            "role": "info",
+                            "description": "Sets the source reference on plot.ly for  color .",
+                            "editType": "none"
+                        }
+                    },
+                    "namelength": {
+                        "valType": "integer",
+                        "min": -1,
+                        "arrayOk": true,
+                        "role": "style",
+                        "editType": "none",
+                        "description": "Sets the length (in number of characters) of the trace name in the hover labels for this trace. -1 shows the whole name regardless of length. 0-3 shows the first 0-3 characters, and an integer >3 will show the whole name if it is less than that many characters, but if it is longer, will truncate to `namelength - 3` characters and add an ellipsis."
+                    },
+                    "editType": "calc",
+                    "role": "object",
+                    "bgcolorsrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on plot.ly for  bgcolor .",
+                        "editType": "none"
+                    },
+                    "bordercolorsrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on plot.ly for  bordercolor .",
+                        "editType": "none"
+                    },
+                    "namelengthsrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on plot.ly for  namelength .",
+                        "editType": "none"
+                    }
+                },
+                "stream": {
+                    "token": {
+                        "valType": "string",
+                        "noBlank": true,
+                        "strict": true,
+                        "role": "info",
+                        "editType": "calc",
+                        "description": "The stream id number links a data trace on a plot with a stream. See https://plot.ly/settings for more details."
+                    },
+                    "maxpoints": {
+                        "valType": "number",
+                        "min": 0,
+                        "max": 10000,
+                        "dflt": 500,
+                        "role": "info",
+                        "editType": "calc",
+                        "description": "Sets the maximum number of points to keep on the plots from an incoming stream. If `maxpoints` is set to *50*, only the newest 50 points will be displayed on the plot."
+                    },
+                    "editType": "calc",
+                    "role": "object"
+                },
+                "uirevision": {
+                    "valType": "any",
+                    "role": "info",
+                    "editType": "none",
+                    "description": "Controls persistence of some user-driven changes to the trace: `constraintrange` in `parcoords` traces, as well as some `editable: true` modifications such as `name` and `colorbar.title`. Defaults to `layout.uirevision`. Note that other user-driven trace attribute changes are controlled by `layout` attributes: `trace.visible` is controlled by `layout.legend.uirevision`, `selectedpoints` is controlled by `layout.selectionrevision`, and `colorbar.(x|y)` (accessible with `config: {editable: true}`) is controlled by `layout.editrevision`. Trace changes are tracked by `uid`, which only falls back on trace index if no `uid` is provided. So if your app can add/remove traces before the end of the `data` array, such that the same trace has a different index, you can still preserve user-driven changes if you give each trace a `uid` that stays with it as it moves."
+                },
+                "x": {
+                    "valType": "data_array",
+                    "role": "data",
+                    "description": "Sets the X coordinates of the vertices on X axis.",
+                    "editType": "calc+clearAxisTypes"
+                },
+                "y": {
+                    "valType": "data_array",
+                    "role": "data",
+                    "description": "Sets the Y coordinates of the vertices on Y axis.",
+                    "editType": "calc+clearAxisTypes"
+                },
+                "z": {
+                    "valType": "data_array",
+                    "role": "data",
+                    "description": "Sets the Z coordinates of the vertices on Z axis.",
+                    "editType": "calc+clearAxisTypes"
+                },
+                "value": {
+                    "valType": "data_array",
+                    "role": "data",
+                    "description": "Sets the 4th dimension (value) of the vertices.",
+                    "editType": "calc+clearAxisTypes"
+                },
+                "isomin": {
+                    "valType": "number",
+                    "role": "info",
+                    "description": "Sets the minimum boundary for iso-surface plot.",
+                    "editType": "calc"
+                },
+                "isomax": {
+                    "valType": "number",
+                    "role": "info",
+                    "description": "Sets the maximum boundary for iso-surface plot.",
+                    "editType": "calc"
+                },
+                "surface": {
+                    "show": {
+                        "valType": "boolean",
+                        "role": "info",
+                        "dflt": true,
+                        "description": "Hides/displays surfaces between minimum and maximum iso-values.",
+                        "editType": "calc"
+                    },
+                    "count": {
+                        "valType": "integer",
+                        "role": "info",
+                        "dflt": 2,
+                        "min": 1,
+                        "description": "Sets the number of iso-surfaces between minimum and maximum iso-values. By default this value is 2 meaning that only minimum and maximum surfaces would be drawn.",
+                        "editType": "calc"
+                    },
+                    "fill": {
+                        "valType": "number",
+                        "role": "style",
+                        "min": 0,
+                        "max": 1,
+                        "dflt": 1,
+                        "description": "Sets the fill ratio of the iso-surface. The default fill value of the surface is 1 meaning that they are entirely shaded. On the other hand Applying a `fill` ratio less than one would allow the creation of openings parallel to the edges.",
+                        "editType": "calc"
+                    },
+                    "pattern": {
+                        "valType": "flaglist",
+                        "flags": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E"
+                        ],
+                        "extras": [
+                            "all",
+                            "odd",
+                            "even"
+                        ],
+                        "dflt": "all",
+                        "role": "style",
+                        "description": "Sets the surface pattern of the iso-surface 3-D sections. The default pattern of the surface is `all` meaning that the rest of surface elements would be shaded. The check options (either 1 or 2) could be used to draw half of the squares on the surface. Using various combinations of capital `A`, `B`, `C`, `D` and `E` may also be used to reduce the number of triangles on the iso-surfaces and creating other patterns of interest.",
+                        "editType": "calc"
+                    },
+                    "editType": "calc",
+                    "role": "object"
+                },
+                "spaceframe": {
+                    "show": {
+                        "valType": "boolean",
+                        "role": "info",
+                        "dflt": false,
+                        "description": "Displays/hides tetrahedron shapes between minimum and maximum iso-values. Often useful when either caps or surfaces are disabled or filled with values less than 1.",
+                        "editType": "calc"
+                    },
+                    "fill": {
+                        "valType": "number",
+                        "role": "style",
+                        "min": 0,
+                        "max": 1,
+                        "dflt": 0.15,
+                        "description": "Sets the fill ratio of the `spaceframe` elements. The default fill value is 0.15 meaning that only 15% of the area of every faces of tetras would be shaded. Applying a greater `fill` ratio would allow the creation of stronger elements or could be sued to have entirely closed areas (in case of using 1).",
+                        "editType": "calc"
+                    },
+                    "editType": "calc",
+                    "role": "object"
+                },
+                "slices": {
+                    "x": {
+                        "show": {
+                            "valType": "boolean",
+                            "role": "info",
+                            "dflt": false,
+                            "description": "Determines whether or not slice planes about the x dimension are drawn.",
+                            "editType": "calc"
+                        },
+                        "locations": {
+                            "valType": "data_array",
+                            "dflt": [],
+                            "role": "data",
+                            "description": "Specifies the location(s) of slices on the axis. When not locations specified slices would be created for all points of the axis x except start and end.",
+                            "editType": "calc"
+                        },
+                        "fill": {
+                            "valType": "number",
+                            "role": "style",
+                            "min": 0,
+                            "max": 1,
+                            "dflt": 1,
+                            "description": "Sets the fill ratio of the `slices`. The default fill value of the `slices` is 1 meaning that they are entirely shaded. On the other hand Applying a `fill` ratio less than one would allow the creation of openings parallel to the edges.",
+                            "editType": "calc"
+                        },
+                        "editType": "calc",
+                        "role": "object",
+                        "locationssrc": {
+                            "valType": "string",
+                            "role": "info",
+                            "description": "Sets the source reference on plot.ly for  locations .",
+                            "editType": "none"
+                        }
+                    },
+                    "y": {
+                        "show": {
+                            "valType": "boolean",
+                            "role": "info",
+                            "dflt": false,
+                            "description": "Determines whether or not slice planes about the y dimension are drawn.",
+                            "editType": "calc"
+                        },
+                        "locations": {
+                            "valType": "data_array",
+                            "dflt": [],
+                            "role": "data",
+                            "description": "Specifies the location(s) of slices on the axis. When not locations specified slices would be created for all points of the axis y except start and end.",
+                            "editType": "calc"
+                        },
+                        "fill": {
+                            "valType": "number",
+                            "role": "style",
+                            "min": 0,
+                            "max": 1,
+                            "dflt": 1,
+                            "description": "Sets the fill ratio of the `slices`. The default fill value of the `slices` is 1 meaning that they are entirely shaded. On the other hand Applying a `fill` ratio less than one would allow the creation of openings parallel to the edges.",
+                            "editType": "calc"
+                        },
+                        "editType": "calc",
+                        "role": "object",
+                        "locationssrc": {
+                            "valType": "string",
+                            "role": "info",
+                            "description": "Sets the source reference on plot.ly for  locations .",
+                            "editType": "none"
+                        }
+                    },
+                    "z": {
+                        "show": {
+                            "valType": "boolean",
+                            "role": "info",
+                            "dflt": false,
+                            "description": "Determines whether or not slice planes about the z dimension are drawn.",
+                            "editType": "calc"
+                        },
+                        "locations": {
+                            "valType": "data_array",
+                            "dflt": [],
+                            "role": "data",
+                            "description": "Specifies the location(s) of slices on the axis. When not locations specified slices would be created for all points of the axis z except start and end.",
+                            "editType": "calc"
+                        },
+                        "fill": {
+                            "valType": "number",
+                            "role": "style",
+                            "min": 0,
+                            "max": 1,
+                            "dflt": 1,
+                            "description": "Sets the fill ratio of the `slices`. The default fill value of the `slices` is 1 meaning that they are entirely shaded. On the other hand Applying a `fill` ratio less than one would allow the creation of openings parallel to the edges.",
+                            "editType": "calc"
+                        },
+                        "editType": "calc",
+                        "role": "object",
+                        "locationssrc": {
+                            "valType": "string",
+                            "role": "info",
+                            "description": "Sets the source reference on plot.ly for  locations .",
+                            "editType": "none"
+                        }
+                    },
+                    "editType": "calc",
+                    "role": "object"
+                },
+                "caps": {
+                    "x": {
+                        "show": {
+                            "valType": "boolean",
+                            "role": "info",
+                            "dflt": true,
+                            "description": "Sets the fill ratio of the `slices`. The default fill value of the x `slices` is 1 meaning that they are entirely shaded. On the other hand Applying a `fill` ratio less than one would allow the creation of openings parallel to the edges.",
+                            "editType": "calc"
+                        },
+                        "fill": {
+                            "valType": "number",
+                            "role": "style",
+                            "min": 0,
+                            "max": 1,
+                            "dflt": 1,
+                            "description": "Sets the fill ratio of the `caps`. The default fill value of the `caps` is 1 meaning that they are entirely shaded. On the other hand Applying a `fill` ratio less than one would allow the creation of openings parallel to the edges.",
+                            "editType": "calc"
+                        },
+                        "editType": "calc",
+                        "role": "object"
+                    },
+                    "y": {
+                        "show": {
+                            "valType": "boolean",
+                            "role": "info",
+                            "dflt": true,
+                            "description": "Sets the fill ratio of the `slices`. The default fill value of the y `slices` is 1 meaning that they are entirely shaded. On the other hand Applying a `fill` ratio less than one would allow the creation of openings parallel to the edges.",
+                            "editType": "calc"
+                        },
+                        "fill": {
+                            "valType": "number",
+                            "role": "style",
+                            "min": 0,
+                            "max": 1,
+                            "dflt": 1,
+                            "description": "Sets the fill ratio of the `caps`. The default fill value of the `caps` is 1 meaning that they are entirely shaded. On the other hand Applying a `fill` ratio less than one would allow the creation of openings parallel to the edges.",
+                            "editType": "calc"
+                        },
+                        "editType": "calc",
+                        "role": "object"
+                    },
+                    "z": {
+                        "show": {
+                            "valType": "boolean",
+                            "role": "info",
+                            "dflt": true,
+                            "description": "Sets the fill ratio of the `slices`. The default fill value of the z `slices` is 1 meaning that they are entirely shaded. On the other hand Applying a `fill` ratio less than one would allow the creation of openings parallel to the edges.",
+                            "editType": "calc"
+                        },
+                        "fill": {
+                            "valType": "number",
+                            "role": "style",
+                            "min": 0,
+                            "max": 1,
+                            "dflt": 1,
+                            "description": "Sets the fill ratio of the `caps`. The default fill value of the `caps` is 1 meaning that they are entirely shaded. On the other hand Applying a `fill` ratio less than one would allow the creation of openings parallel to the edges.",
+                            "editType": "calc"
+                        },
+                        "editType": "calc",
+                        "role": "object"
+                    },
+                    "editType": "calc",
+                    "role": "object"
+                },
+                "text": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "arrayOk": true,
+                    "description": "Sets the text elements associated with the vertices. If trace `hoverinfo` contains a *text* flag and *hovertext* is not set, these elements will be seen in the hover labels.",
+                    "editType": "calc"
+                },
+                "cauto": {
+                    "valType": "boolean",
+                    "role": "info",
+                    "dflt": true,
+                    "editType": "calc",
+                    "impliedEdits": {},
+                    "description": "Determines whether or not the color domain is computed with respect to the input data (here `value`) or the bounds set in `cmin` and `cmax`  Defaults to `false` when `cmin` and `cmax` are set by the user."
+                },
+                "cmin": {
+                    "valType": "number",
+                    "role": "info",
+                    "dflt": null,
+                    "editType": "calc",
+                    "impliedEdits": {
+                        "cauto": false
+                    },
+                    "description": "Sets the lower bound of the color domain. Value should have the same units as `value` and if set, `cmax` must be set as well."
+                },
+                "cmax": {
+                    "valType": "number",
+                    "role": "info",
+                    "dflt": null,
+                    "editType": "calc",
+                    "impliedEdits": {
+                        "cauto": false
+                    },
+                    "description": "Sets the upper bound of the color domain. Value should have the same units as `value` and if set, `cmin` must be set as well."
+                },
+                "colorscale": {
+                    "valType": "colorscale",
+                    "role": "style",
+                    "editType": "calc",
+                    "dflt": null,
+                    "impliedEdits": {
+                        "autocolorscale": false
+                    },
+                    "description": "Sets the colorscale. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use`cmin` and `cmax`. Alternatively, `colorscale` may be a palette name string of the following list: Greys,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth,Electric,Viridis,Cividis."
+                },
+                "autocolorscale": {
+                    "valType": "boolean",
+                    "role": "style",
+                    "dflt": true,
+                    "editType": "calc",
+                    "impliedEdits": {},
+                    "description": "Determines whether the colorscale is a default palette (`autocolorscale: true`) or the palette determined by `colorscale`. In case `colorscale` is unspecified or `autocolorscale` is true, the default  palette will be chosen according to whether numbers in the `color` array are all positive, all negative or mixed."
+                },
+                "reversescale": {
+                    "valType": "boolean",
+                    "role": "style",
+                    "dflt": false,
+                    "editType": "calc",
+                    "description": "Reverses the color mapping if true. If true, `cmin` will correspond to the last color in the array and `cmax` will correspond to the first color."
+                },
+                "showscale": {
+                    "valType": "boolean",
+                    "role": "info",
+                    "dflt": true,
+                    "editType": "calc",
+                    "description": "Determines whether or not a colorbar is displayed for this trace."
+                },
+                "colorbar": {
+                    "thicknessmode": {
+                        "valType": "enumerated",
+                        "values": [
+                            "fraction",
+                            "pixels"
+                        ],
+                        "role": "style",
+                        "dflt": "pixels",
+                        "description": "Determines whether this color bar's thickness (i.e. the measure in the constant color direction) is set in units of plot *fraction* or in *pixels*. Use `thickness` to set the value.",
+                        "editType": "calc"
+                    },
+                    "thickness": {
+                        "valType": "number",
+                        "role": "style",
+                        "min": 0,
+                        "dflt": 30,
+                        "description": "Sets the thickness of the color bar This measure excludes the size of the padding, ticks and labels.",
+                        "editType": "calc"
+                    },
+                    "lenmode": {
+                        "valType": "enumerated",
+                        "values": [
+                            "fraction",
+                            "pixels"
+                        ],
+                        "role": "info",
+                        "dflt": "fraction",
+                        "description": "Determines whether this color bar's length (i.e. the measure in the color variation direction) is set in units of plot *fraction* or in *pixels. Use `len` to set the value.",
+                        "editType": "calc"
+                    },
+                    "len": {
+                        "valType": "number",
+                        "min": 0,
+                        "dflt": 1,
+                        "role": "style",
+                        "description": "Sets the length of the color bar This measure excludes the padding of both ends. That is, the color bar length is this length minus the padding on both ends.",
+                        "editType": "calc"
+                    },
+                    "x": {
+                        "valType": "number",
+                        "dflt": 1.02,
+                        "min": -2,
+                        "max": 3,
+                        "role": "style",
+                        "description": "Sets the x position of the color bar (in plot fraction).",
+                        "editType": "calc"
+                    },
+                    "xanchor": {
+                        "valType": "enumerated",
+                        "values": [
+                            "left",
+                            "center",
+                            "right"
+                        ],
+                        "dflt": "left",
+                        "role": "style",
+                        "description": "Sets this color bar's horizontal position anchor. This anchor binds the `x` position to the *left*, *center* or *right* of the color bar.",
+                        "editType": "calc"
+                    },
+                    "xpad": {
+                        "valType": "number",
+                        "role": "style",
+                        "min": 0,
+                        "dflt": 10,
+                        "description": "Sets the amount of padding (in px) along the x direction.",
+                        "editType": "calc"
+                    },
+                    "y": {
+                        "valType": "number",
+                        "role": "style",
+                        "dflt": 0.5,
+                        "min": -2,
+                        "max": 3,
+                        "description": "Sets the y position of the color bar (in plot fraction).",
+                        "editType": "calc"
+                    },
+                    "yanchor": {
+                        "valType": "enumerated",
+                        "values": [
+                            "top",
+                            "middle",
+                            "bottom"
+                        ],
+                        "role": "style",
+                        "dflt": "middle",
+                        "description": "Sets this color bar's vertical position anchor This anchor binds the `y` position to the *top*, *middle* or *bottom* of the color bar.",
+                        "editType": "calc"
+                    },
+                    "ypad": {
+                        "valType": "number",
+                        "role": "style",
+                        "min": 0,
+                        "dflt": 10,
+                        "description": "Sets the amount of padding (in px) along the y direction.",
+                        "editType": "calc"
+                    },
+                    "outlinecolor": {
+                        "valType": "color",
+                        "dflt": "#444",
+                        "role": "style",
+                        "editType": "calc",
+                        "description": "Sets the axis line color."
+                    },
+                    "outlinewidth": {
+                        "valType": "number",
+                        "min": 0,
+                        "dflt": 1,
+                        "role": "style",
+                        "editType": "calc",
+                        "description": "Sets the width (in px) of the axis line."
+                    },
+                    "bordercolor": {
+                        "valType": "color",
+                        "dflt": "#444",
+                        "role": "style",
+                        "editType": "calc",
+                        "description": "Sets the axis line color."
+                    },
+                    "borderwidth": {
+                        "valType": "number",
+                        "role": "style",
+                        "min": 0,
+                        "dflt": 0,
+                        "description": "Sets the width (in px) or the border enclosing this color bar.",
+                        "editType": "calc"
+                    },
+                    "bgcolor": {
+                        "valType": "color",
+                        "role": "style",
+                        "dflt": "rgba(0,0,0,0)",
+                        "description": "Sets the color of padded area.",
+                        "editType": "calc"
+                    },
+                    "tickmode": {
+                        "valType": "enumerated",
+                        "values": [
+                            "auto",
+                            "linear",
+                            "array"
+                        ],
+                        "role": "info",
+                        "editType": "calc",
+                        "impliedEdits": {},
+                        "description": "Sets the tick mode for this axis. If *auto*, the number of ticks is set via `nticks`. If *linear*, the placement of the ticks is determined by a starting position `tick0` and a tick step `dtick` (*linear* is the default value if `tick0` and `dtick` are provided). If *array*, the placement of the ticks is set via `tickvals` and the tick text is `ticktext`. (*array* is the default value if `tickvals` is provided)."
+                    },
+                    "nticks": {
+                        "valType": "integer",
+                        "min": 0,
+                        "dflt": 0,
+                        "role": "style",
+                        "editType": "calc",
+                        "description": "Specifies the maximum number of ticks for the particular axis. The actual number of ticks will be chosen automatically to be less than or equal to `nticks`. Has an effect only if `tickmode` is set to *auto*."
+                    },
+                    "tick0": {
+                        "valType": "any",
+                        "role": "style",
+                        "editType": "calc",
+                        "impliedEdits": {
+                            "tickmode": "linear"
+                        },
+                        "description": "Sets the placement of the first tick on this axis. Use with `dtick`. If the axis `type` is *log*, then you must take the log of your starting tick (e.g. to set the starting tick to 100, set the `tick0` to 2) except when `dtick`=*L<f>* (see `dtick` for more info). If the axis `type` is *date*, it should be a date string, like date data. If the axis `type` is *category*, it should be a number, using the scale where each category is assigned a serial number from zero in the order it appears."
+                    },
+                    "dtick": {
+                        "valType": "any",
+                        "role": "style",
+                        "editType": "calc",
+                        "impliedEdits": {
+                            "tickmode": "linear"
+                        },
+                        "description": "Sets the step in-between ticks on this axis. Use with `tick0`. Must be a positive number, or special strings available to *log* and *date* axes. If the axis `type` is *log*, then ticks are set every 10^(n*dtick) where n is the tick number. For example, to set a tick mark at 1, 10, 100, 1000, ... set dtick to 1. To set tick marks at 1, 100, 10000, ... set dtick to 2. To set tick marks at 1, 5, 25, 125, 625, 3125, ... set dtick to log_10(5), or 0.69897000433. *log* has several special values; *L<f>*, where `f` is a positive number, gives ticks linearly spaced in value (but not position). For example `tick0` = 0.1, `dtick` = *L0.5* will put ticks at 0.1, 0.6, 1.1, 1.6 etc. To show powers of 10 plus small digits between, use *D1* (all digits) or *D2* (only 2 and 5). `tick0` is ignored for *D1* and *D2*. If the axis `type` is *date*, then you must convert the time to milliseconds. For example, to set the interval between ticks to one day, set `dtick` to 86400000.0. *date* also has special values *M<n>* gives ticks spaced by a number of months. `n` must be a positive integer. To set ticks on the 15th of every third month, set `tick0` to *2000-01-15* and `dtick` to *M3*. To set ticks every 4 years, set `dtick` to *M48*"
+                    },
+                    "tickvals": {
+                        "valType": "data_array",
+                        "editType": "calc",
+                        "description": "Sets the values at which ticks on this axis appear. Only has an effect if `tickmode` is set to *array*. Used with `ticktext`.",
+                        "role": "data"
+                    },
+                    "ticktext": {
+                        "valType": "data_array",
+                        "editType": "calc",
+                        "description": "Sets the text displayed at the ticks position via `tickvals`. Only has an effect if `tickmode` is set to *array*. Used with `tickvals`.",
+                        "role": "data"
+                    },
+                    "ticks": {
+                        "valType": "enumerated",
+                        "values": [
+                            "outside",
+                            "inside",
+                            ""
+                        ],
+                        "role": "style",
+                        "editType": "calc",
+                        "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
+                        "dflt": ""
+                    },
+                    "ticklen": {
+                        "valType": "number",
+                        "min": 0,
+                        "dflt": 5,
+                        "role": "style",
+                        "editType": "calc",
+                        "description": "Sets the tick length (in px)."
+                    },
+                    "tickwidth": {
+                        "valType": "number",
+                        "min": 0,
+                        "dflt": 1,
+                        "role": "style",
+                        "editType": "calc",
+                        "description": "Sets the tick width (in px)."
+                    },
+                    "tickcolor": {
+                        "valType": "color",
+                        "dflt": "#444",
+                        "role": "style",
+                        "editType": "calc",
+                        "description": "Sets the tick color."
+                    },
+                    "showticklabels": {
+                        "valType": "boolean",
+                        "dflt": true,
+                        "role": "style",
+                        "editType": "calc",
+                        "description": "Determines whether or not the tick labels are drawn."
+                    },
+                    "tickfont": {
+                        "family": {
+                            "valType": "string",
+                            "role": "style",
+                            "noBlank": true,
+                            "strict": true,
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                            "editType": "calc"
+                        },
+                        "size": {
+                            "valType": "number",
+                            "role": "style",
+                            "min": 1,
+                            "editType": "calc"
+                        },
+                        "color": {
+                            "valType": "color",
+                            "role": "style",
+                            "editType": "calc"
+                        },
+                        "description": "Sets the color bar's tick label font",
+                        "editType": "calc",
+                        "role": "object"
+                    },
+                    "tickangle": {
+                        "valType": "angle",
+                        "dflt": "auto",
+                        "role": "style",
+                        "editType": "calc",
+                        "description": "Sets the angle of the tick labels with respect to the horizontal. For example, a `tickangle` of -90 draws the tick labels vertically."
+                    },
+                    "tickformat": {
+                        "valType": "string",
+                        "dflt": "",
+                        "role": "style",
+                        "editType": "calc",
+                        "description": "Sets the tick label formatting rule using d3 formatting mini-languages which are very similar to those in Python. For numbers, see: https://github.com/d3/d3-format/blob/master/README.md#locale_format And for dates see: https://github.com/d3/d3-time-format/blob/master/README.md#locale_format We add one item to d3's date formatter: *%{n}f* for fractional seconds with n digits. For example, *2016-10-13 09:15:23.456* with tickformat *%H~%M~%S.%2f* would display *09~15~23.46*"
+                    },
+                    "tickformatstops": {
+                        "items": {
+                            "tickformatstop": {
+                                "enabled": {
+                                    "valType": "boolean",
+                                    "role": "info",
+                                    "dflt": true,
+                                    "editType": "calc",
+                                    "description": "Determines whether or not this stop is used. If `false`, this stop is ignored even within its `dtickrange`."
+                                },
+                                "dtickrange": {
+                                    "valType": "info_array",
+                                    "role": "info",
+                                    "items": [
+                                        {
+                                            "valType": "any",
+                                            "editType": "calc"
+                                        },
+                                        {
+                                            "valType": "any",
+                                            "editType": "calc"
+                                        }
+                                    ],
+                                    "editType": "calc",
+                                    "description": "range [*min*, *max*], where *min*, *max* - dtick values which describe some zoom level, it is possible to omit *min* or *max* value by passing *null*"
+                                },
+                                "value": {
+                                    "valType": "string",
+                                    "dflt": "",
+                                    "role": "style",
+                                    "editType": "calc",
+                                    "description": "string - dtickformat for described zoom level, the same as *tickformat*"
+                                },
+                                "editType": "calc",
+                                "name": {
+                                    "valType": "string",
+                                    "role": "style",
+                                    "editType": "calc",
+                                    "description": "When used in a template, named items are created in the output figure in addition to any items the figure already has in this array. You can modify these items in the output figure by making your own item with `templateitemname` matching this `name` alongside your modifications (including `visible: false` or `enabled: false` to hide it). Has no effect outside of a template."
+                                },
+                                "templateitemname": {
+                                    "valType": "string",
+                                    "role": "info",
+                                    "editType": "calc",
+                                    "description": "Used to refer to a named item in this array in the template. Named items from the template will be created even without a matching item in the input figure, but you can modify one by making an item with `templateitemname` matching its `name`, alongside your modifications (including `visible: false` or `enabled: false` to hide it). If there is no template or no matching item, this item will be hidden unless you explicitly show it with `visible: true`."
+                                },
+                                "role": "object"
+                            }
+                        },
+                        "role": "object"
+                    },
+                    "tickprefix": {
+                        "valType": "string",
+                        "dflt": "",
+                        "role": "style",
+                        "editType": "calc",
+                        "description": "Sets a tick label prefix."
+                    },
+                    "showtickprefix": {
+                        "valType": "enumerated",
+                        "values": [
+                            "all",
+                            "first",
+                            "last",
+                            "none"
+                        ],
+                        "dflt": "all",
+                        "role": "style",
+                        "editType": "calc",
+                        "description": "If *all*, all tick labels are displayed with a prefix. If *first*, only the first tick is displayed with a prefix. If *last*, only the last tick is displayed with a suffix. If *none*, tick prefixes are hidden."
+                    },
+                    "ticksuffix": {
+                        "valType": "string",
+                        "dflt": "",
+                        "role": "style",
+                        "editType": "calc",
+                        "description": "Sets a tick label suffix."
+                    },
+                    "showticksuffix": {
+                        "valType": "enumerated",
+                        "values": [
+                            "all",
+                            "first",
+                            "last",
+                            "none"
+                        ],
+                        "dflt": "all",
+                        "role": "style",
+                        "editType": "calc",
+                        "description": "Same as `showtickprefix` but for tick suffixes."
+                    },
+                    "separatethousands": {
+                        "valType": "boolean",
+                        "dflt": false,
+                        "role": "style",
+                        "editType": "calc",
+                        "description": "If \"true\", even 4-digit integers are separated"
+                    },
+                    "exponentformat": {
+                        "valType": "enumerated",
+                        "values": [
+                            "none",
+                            "e",
+                            "E",
+                            "power",
+                            "SI",
+                            "B"
+                        ],
+                        "dflt": "B",
+                        "role": "style",
+                        "editType": "calc",
+                        "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
+                    },
+                    "showexponent": {
+                        "valType": "enumerated",
+                        "values": [
+                            "all",
+                            "first",
+                            "last",
+                            "none"
+                        ],
+                        "dflt": "all",
+                        "role": "style",
+                        "editType": "calc",
+                        "description": "If *all*, all exponents are shown besides their significands. If *first*, only the exponent of the first tick is shown. If *last*, only the exponent of the last tick is shown. If *none*, no exponents appear."
+                    },
+                    "title": {
+                        "text": {
+                            "valType": "string",
+                            "role": "info",
+                            "description": "Sets the title of the color bar. Note that before the existence of `title.text`, the title's contents used to be defined as the `title` attribute itself. This behavior has been deprecated.",
+                            "editType": "calc"
+                        },
+                        "font": {
+                            "family": {
+                                "valType": "string",
+                                "role": "style",
+                                "noBlank": true,
+                                "strict": true,
+                                "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                                "editType": "calc"
+                            },
+                            "size": {
+                                "valType": "number",
+                                "role": "style",
+                                "min": 1,
+                                "editType": "calc"
+                            },
+                            "color": {
+                                "valType": "color",
+                                "role": "style",
+                                "editType": "calc"
+                            },
+                            "description": "Sets this color bar's title font. Note that the title's font used to be set by the now deprecated `titlefont` attribute.",
+                            "editType": "calc",
+                            "role": "object"
+                        },
+                        "side": {
+                            "valType": "enumerated",
+                            "values": [
+                                "right",
+                                "top",
+                                "bottom"
+                            ],
+                            "role": "style",
+                            "dflt": "top",
+                            "description": "Determines the location of color bar's title with respect to the color bar. Note that the title's location used to be set by the now deprecated `titleside` attribute.",
+                            "editType": "calc"
+                        },
+                        "editType": "calc",
+                        "role": "object"
+                    },
+                    "_deprecated": {
+                        "title": {
+                            "valType": "string",
+                            "role": "info",
+                            "description": "Deprecated in favor of color bar's `title.text`. Note that value of color bar's `title` is no longer a simple *string* but a set of sub-attributes.",
+                            "editType": "calc"
+                        },
+                        "titlefont": {
+                            "family": {
+                                "valType": "string",
+                                "role": "style",
+                                "noBlank": true,
+                                "strict": true,
+                                "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*.",
+                                "editType": "calc"
+                            },
+                            "size": {
+                                "valType": "number",
+                                "role": "style",
+                                "min": 1,
+                                "editType": "calc"
+                            },
+                            "color": {
+                                "valType": "color",
+                                "role": "style",
+                                "editType": "calc"
+                            },
+                            "description": "Deprecated in favor of color bar's `title.font`.",
+                            "editType": "calc"
+                        },
+                        "titleside": {
+                            "valType": "enumerated",
+                            "values": [
+                                "right",
+                                "top",
+                                "bottom"
+                            ],
+                            "role": "style",
+                            "dflt": "top",
+                            "description": "Deprecated in favor of color bar's `title.side`.",
+                            "editType": "calc"
+                        }
+                    },
+                    "editType": "calc",
+                    "role": "object",
+                    "tickvalssrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on plot.ly for  tickvals .",
+                        "editType": "none"
+                    },
+                    "ticktextsrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on plot.ly for  ticktext .",
+                        "editType": "none"
+                    }
+                },
+                "flatshading": {
+                    "valType": "boolean",
+                    "role": "style",
+                    "dflt": false,
+                    "description": "Determines whether or not normal smoothing is applied to the isosurfaces, creating isosurfaces with an angular, low-poly look via flat reflections.",
+                    "editType": "calc"
+                },
+                "contour": {
+                    "show": {
+                        "valType": "boolean",
+                        "role": "info",
+                        "dflt": false,
+                        "description": "Sets whether or not dynamic contours are shown on hover. Contours are more useful when hovering on caps and slices.",
+                        "editType": "calc"
+                    },
+                    "color": {
+                        "valType": "color",
+                        "role": "style",
+                        "dflt": "#444",
+                        "description": "Sets the color of the contour lines.",
+                        "editType": "calc"
+                    },
+                    "width": {
+                        "valType": "number",
+                        "role": "style",
+                        "min": 1,
+                        "max": 16,
+                        "dflt": 2,
+                        "description": "Sets the width of the contour lines.",
+                        "editType": "calc"
+                    },
+                    "editType": "calc",
+                    "role": "object"
+                },
+                "lightposition": {
+                    "x": {
+                        "valType": "number",
+                        "role": "style",
+                        "min": -100000,
+                        "max": 100000,
+                        "dflt": 100000,
+                        "description": "Numeric vector, representing the X coordinate for each vertex.",
+                        "editType": "calc"
+                    },
+                    "y": {
+                        "valType": "number",
+                        "role": "style",
+                        "min": -100000,
+                        "max": 100000,
+                        "dflt": 100000,
+                        "description": "Numeric vector, representing the Y coordinate for each vertex.",
+                        "editType": "calc"
+                    },
+                    "z": {
+                        "valType": "number",
+                        "role": "style",
+                        "min": -100000,
+                        "max": 100000,
+                        "dflt": 0,
+                        "description": "Numeric vector, representing the Z coordinate for each vertex.",
+                        "editType": "calc"
+                    },
+                    "editType": "calc",
+                    "role": "object"
+                },
+                "lighting": {
+                    "vertexnormalsepsilon": {
+                        "valType": "number",
+                        "role": "style",
+                        "min": 0,
+                        "max": 1,
+                        "dflt": 1e-12,
+                        "editType": "calc",
+                        "description": "Epsilon for vertex normals calculation avoids math issues arising from degenerate geometry."
+                    },
+                    "facenormalsepsilon": {
+                        "valType": "number",
+                        "role": "style",
+                        "min": 0,
+                        "max": 1,
+                        "dflt": 0.000001,
+                        "editType": "calc",
+                        "description": "Epsilon for face normals calculation avoids math issues arising from degenerate geometry."
+                    },
+                    "editType": "calc",
+                    "ambient": {
+                        "valType": "number",
+                        "role": "style",
+                        "min": 0,
+                        "max": 1,
+                        "dflt": 0.8,
+                        "description": "Ambient light increases overall color visibility but can wash out the image.",
+                        "editType": "calc"
+                    },
+                    "diffuse": {
+                        "valType": "number",
+                        "role": "style",
+                        "min": 0,
+                        "max": 1,
+                        "dflt": 0.8,
+                        "description": "Represents the extent that incident rays are reflected in a range of angles.",
+                        "editType": "calc"
+                    },
+                    "specular": {
+                        "valType": "number",
+                        "role": "style",
+                        "min": 0,
+                        "max": 2,
+                        "dflt": 0.05,
+                        "description": "Represents the level that incident rays are reflected in a single direction, causing shine.",
+                        "editType": "calc"
+                    },
+                    "roughness": {
+                        "valType": "number",
+                        "role": "style",
+                        "min": 0,
+                        "max": 1,
+                        "dflt": 0.5,
+                        "description": "Alters specular reflection; the rougher the surface, the wider and less contrasty the shine.",
+                        "editType": "calc"
+                    },
+                    "fresnel": {
+                        "valType": "number",
+                        "role": "style",
+                        "min": 0,
+                        "max": 5,
+                        "dflt": 0.2,
+                        "description": "Represents the reflectance as a dependency of the viewing angle; e.g. paper is reflective when viewing it from the edge of the paper (almost 90 degrees), causing shine.",
+                        "editType": "calc"
+                    },
+                    "role": "object"
+                },
+                "hoverinfo": {
+                    "valType": "flaglist",
+                    "role": "info",
+                    "flags": [
+                        "x",
+                        "y",
+                        "z",
+                        "text",
+                        "name"
+                    ],
+                    "extras": [
+                        "all",
+                        "none",
+                        "skip"
+                    ],
+                    "arrayOk": true,
+                    "dflt": "all",
+                    "editType": "calc",
+                    "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
+                },
+                "scene": {
+                    "valType": "subplotid",
+                    "role": "info",
+                    "dflt": "scene",
+                    "editType": "calc+clearAxisTypes",
+                    "description": "Sets a reference between this trace's 3D coordinate system and a 3D scene. If *scene* (the default value), the (x,y,z) coordinates refer to `layout.scene`. If *scene2*, the (x,y,z) coordinates refer to `layout.scene2`, and so on."
+                },
+                "idssrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  ids .",
+                    "editType": "none"
+                },
+                "customdatasrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  customdata .",
+                    "editType": "none"
+                },
+                "xsrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  x .",
+                    "editType": "none"
+                },
+                "ysrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  y .",
+                    "editType": "none"
+                },
+                "zsrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  z .",
+                    "editType": "none"
+                },
+                "valuesrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  value .",
+                    "editType": "none"
+                },
+                "textsrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  text .",
+                    "editType": "none"
+                },
+                "hoverinfosrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hoverinfo .",
+                    "editType": "none"
+                }
+            }
+        },
         "mesh3d": {
             "meta": {
                 "description": "Draws sets of triangles with coordinates given by three 1-dimensional arrays in `x`, `y`, `z` and (1) a sets of `i`, `j`, `k` indices (2) Delaunay triangulation or (3) the Alpha-shape algorithm or (4) the Convex-hull algorithm"
@@ -17193,11 +18561,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -18334,11 +19705,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -19340,11 +20714,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -20375,11 +21752,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -20651,6 +22031,7 @@
                         "valType": "color",
                         "role": "style",
                         "editType": "calc",
+                        "anim": true,
                         "description": "Sets the line color."
                     },
                     "width": {
@@ -20659,6 +22040,7 @@
                         "dflt": 2,
                         "role": "style",
                         "editType": "calc",
+                        "anim": true,
                         "description": "Sets the line width (in px)."
                     },
                     "dash": {
@@ -20988,6 +22370,7 @@
                         "arrayOk": true,
                         "role": "style",
                         "editType": "calc",
+                        "anim": true,
                         "description": "Sets the marker opacity."
                     },
                     "size": {
@@ -20997,6 +22380,7 @@
                         "arrayOk": true,
                         "role": "style",
                         "editType": "calc",
+                        "anim": true,
                         "description": "Sets the marker size (in px)."
                     },
                     "sizeref": {
@@ -21526,6 +22910,7 @@
                             "arrayOk": true,
                             "role": "style",
                             "editType": "calc",
+                            "anim": true,
                             "description": "Sets the width (in px) of the lines bounding the marker points."
                         },
                         "color": {
@@ -21749,6 +23134,7 @@
                     "valType": "color",
                     "role": "style",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Sets the fill color. Defaults to a half-transparent variant of the line color, marker color, or marker line color, whichever is available."
                 },
                 "selected": {
@@ -21849,6 +23235,14 @@
                     "editType": "calc",
                     "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
                 },
+                "hovertemplate": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "arrayOk": true,
+                    "editType": "calc",
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\"."
+                },
                 "geo": {
                     "valType": "subplotid",
                     "role": "info",
@@ -21909,6 +23303,12 @@
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  hoverinfo .",
                     "editType": "none"
+                },
+                "hovertemplatesrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertemplate .",
+                    "editType": "none"
                 }
             }
         },
@@ -21962,11 +23362,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -22155,6 +23558,7 @@
                             "arrayOk": true,
                             "role": "style",
                             "editType": "calc",
+                            "anim": true,
                             "description": "Sets the width (in px) of the lines bounding the marker points.",
                             "dflt": 1
                         },
@@ -22242,6 +23646,14 @@
                     "dflt": "all",
                     "editType": "calc",
                     "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
+                },
+                "hovertemplate": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "arrayOk": true,
+                    "editType": "none",
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\"."
                 },
                 "zauto": {
                     "valType": "boolean",
@@ -22839,6 +24251,12 @@
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  hoverinfo .",
                     "editType": "none"
+                },
+                "hovertemplatesrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertemplate .",
+                    "editType": "none"
                 }
             }
         },
@@ -22884,11 +24302,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -23053,6 +24474,7 @@
                 "x": {
                     "valType": "data_array",
                     "editType": "calc+clearAxisTypes",
+                    "anim": true,
                     "description": "Sets the x coordinates.",
                     "role": "data"
                 },
@@ -23061,6 +24483,7 @@
                     "dflt": 0,
                     "role": "info",
                     "editType": "calc+clearAxisTypes",
+                    "anim": true,
                     "description": "Alternate to `x`. Builds a linear space of x coordinates. Use with `dx` where `x0` is the starting coordinate and `dx` the step."
                 },
                 "dx": {
@@ -23068,11 +24491,13 @@
                     "dflt": 1,
                     "role": "info",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Sets the x coordinate step. See `x0` for more info."
                 },
                 "y": {
                     "valType": "data_array",
                     "editType": "calc+clearAxisTypes",
+                    "anim": true,
                     "description": "Sets the y coordinates.",
                     "role": "data"
                 },
@@ -23081,6 +24506,7 @@
                     "dflt": 0,
                     "role": "info",
                     "editType": "calc+clearAxisTypes",
+                    "anim": true,
                     "description": "Alternate to `y`. Builds a linear space of y coordinates. Use with `dy` where `y0` is the starting coordinate and `dy` the step."
                 },
                 "dy": {
@@ -23088,6 +24514,7 @@
                     "dflt": 1,
                     "role": "info",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Sets the y coordinate step. See `y0` for more info."
                 },
                 "text": {
@@ -23189,6 +24616,7 @@
                         "valType": "color",
                         "role": "style",
                         "editType": "calc",
+                        "anim": true,
                         "description": "Sets the line color."
                     },
                     "width": {
@@ -23197,6 +24625,7 @@
                         "dflt": 2,
                         "role": "style",
                         "editType": "calc",
+                        "anim": true,
                         "description": "Sets the line width (in px)."
                     },
                     "shape": {
@@ -23600,6 +25029,7 @@
                         "arrayOk": true,
                         "role": "style",
                         "editType": "calc",
+                        "anim": true,
                         "description": "Sets the marker size (in px)."
                     },
                     "sizeref": {
@@ -23635,6 +25065,7 @@
                         "arrayOk": true,
                         "role": "style",
                         "editType": "calc",
+                        "anim": true,
                         "description": "Sets the marker opacity."
                     },
                     "colorbar": {
@@ -24198,6 +25629,7 @@
                             "arrayOk": true,
                             "role": "style",
                             "editType": "calc",
+                            "anim": true,
                             "description": "Sets the width (in px) of the lines bounding the marker points."
                         },
                         "editType": "calc",
@@ -24269,6 +25701,7 @@
                     "valType": "color",
                     "role": "style",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Sets the fill color. Defaults to a half-transparent variant of the line color, marker color, or marker line color, whichever is available."
                 },
                 "selected": {
@@ -24754,11 +26187,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -25359,6 +26795,7 @@
                         "arrayOk": true,
                         "role": "style",
                         "editType": "markerSize",
+                        "anim": true,
                         "description": "Sets the marker size (in px)."
                     },
                     "sizeref": {
@@ -25394,6 +26831,7 @@
                         "arrayOk": true,
                         "role": "style",
                         "editType": "style",
+                        "anim": true,
                         "description": "Sets the marker opacity."
                     },
                     "colorbar": {
@@ -25957,6 +27395,7 @@
                             "arrayOk": true,
                             "role": "style",
                             "editType": "calc",
+                            "anim": true,
                             "description": "Sets the width (in px) of the lines bounding the marker points."
                         },
                         "editType": "calc",
@@ -26193,11 +27632,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -26352,12 +27794,14 @@
                 "x": {
                     "valType": "data_array",
                     "editType": "calc+clearAxisTypes",
+                    "anim": true,
                     "description": "Sets the x coordinates.",
                     "role": "data"
                 },
                 "y": {
                     "valType": "data_array",
                     "editType": "calc+clearAxisTypes",
+                    "anim": true,
                     "description": "Sets the y coordinates.",
                     "role": "data"
                 },
@@ -26584,11 +28028,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -26759,6 +28206,7 @@
                 "x": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Sets the x coordinates.",
                     "impliedEdits": {
                         "xtype": "array"
@@ -26770,6 +28218,7 @@
                     "dflt": 0,
                     "role": "info",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Alternate to `x`. Builds a linear space of x coordinates. Use with `dx` where `x0` is the starting coordinate and `dx` the step.",
                     "impliedEdits": {
                         "xtype": "scaled"
@@ -26780,6 +28229,7 @@
                     "dflt": 1,
                     "role": "info",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Sets the x coordinate step. See `x0` for more info.",
                     "impliedEdits": {
                         "xtype": "scaled"
@@ -26788,6 +28238,7 @@
                 "y": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Sets the y coordinates.",
                     "impliedEdits": {
                         "ytype": "array"
@@ -26799,6 +28250,7 @@
                     "dflt": 0,
                     "role": "info",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Alternate to `y`. Builds a linear space of y coordinates. Use with `dy` where `y0` is the starting coordinate and `dy` the step.",
                     "impliedEdits": {
                         "ytype": "scaled"
@@ -26809,6 +28261,7 @@
                     "dflt": 1,
                     "role": "info",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Sets the y coordinate step. See `y0` for more info.",
                     "impliedEdits": {
                         "ytype": "scaled"
@@ -27509,11 +28962,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -28532,7 +29988,9 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "stream": {
                     "token": {
@@ -29475,11 +30933,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -29669,6 +31130,7 @@
                         "valType": "color",
                         "role": "style",
                         "editType": "calc",
+                        "anim": true,
                         "description": "Sets the line color."
                     },
                     "width": {
@@ -29677,6 +31139,7 @@
                         "dflt": 2,
                         "role": "style",
                         "editType": "calc",
+                        "anim": true,
                         "description": "Sets the line width (in px)."
                     },
                     "editType": "calc",
@@ -29705,6 +31168,7 @@
                         "arrayOk": true,
                         "role": "style",
                         "editType": "calc",
+                        "anim": true,
                         "description": "Sets the marker opacity."
                     },
                     "size": {
@@ -29714,6 +31178,7 @@
                         "arrayOk": true,
                         "role": "style",
                         "editType": "calc",
+                        "anim": true,
                         "description": "Sets the marker size (in px)."
                     },
                     "sizeref": {
@@ -30345,6 +31810,7 @@
                     "valType": "color",
                     "role": "style",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Sets the fill color. Defaults to a half-transparent variant of the line color, marker color, or marker line color, whichever is available."
                 },
                 "textfont": {
@@ -30468,6 +31934,14 @@
                     "editType": "calc",
                     "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
                 },
+                "hovertemplate": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "arrayOk": true,
+                    "editType": "calc",
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\"."
+                },
                 "subplot": {
                     "valType": "subplotid",
                     "role": "info",
@@ -30515,6 +31989,12 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  hoverinfo .",
+                    "editType": "none"
+                },
+                "hovertemplatesrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertemplate .",
                     "editType": "none"
                 }
             }
@@ -30569,11 +32049,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -31328,11 +32811,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -32003,11 +33489,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -33503,11 +34992,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -33695,6 +35187,7 @@
                         "valType": "color",
                         "role": "style",
                         "editType": "style",
+                        "anim": true,
                         "description": "Sets the line color."
                     },
                     "width": {
@@ -33703,6 +35196,7 @@
                         "dflt": 2,
                         "role": "style",
                         "editType": "style",
+                        "anim": true,
                         "description": "Sets the line width (in px)."
                     },
                     "dash": {
@@ -33766,6 +35260,7 @@
                     "valType": "color",
                     "role": "style",
                     "editType": "style",
+                    "anim": true,
                     "description": "Sets the fill color. Defaults to a half-transparent variant of the line color, marker color, or marker line color, whichever is available."
                 },
                 "marker": {
@@ -34070,6 +35565,7 @@
                         "arrayOk": true,
                         "role": "style",
                         "editType": "style",
+                        "anim": true,
                         "description": "Sets the marker opacity."
                     },
                     "maxdisplayed": {
@@ -34087,6 +35583,7 @@
                         "arrayOk": true,
                         "role": "style",
                         "editType": "calc",
+                        "anim": true,
                         "description": "Sets the marker size (in px)."
                     },
                     "sizeref": {
@@ -34122,6 +35619,7 @@
                             "arrayOk": true,
                             "role": "style",
                             "editType": "style",
+                            "anim": true,
                             "description": "Sets the width (in px) of the lines bounding the marker points."
                         },
                         "editType": "calc",
@@ -35104,11 +36602,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -35275,6 +36776,7 @@
                 "a": {
                     "valType": "data_array",
                     "editType": "calc+clearAxisTypes",
+                    "anim": true,
                     "description": "Sets the x coordinates.",
                     "impliedEdits": {
                         "xtype": "array"
@@ -35286,6 +36788,7 @@
                     "dflt": 0,
                     "role": "info",
                     "editType": "calc+clearAxisTypes",
+                    "anim": true,
                     "description": "Alternate to `x`. Builds a linear space of x coordinates. Use with `dx` where `x0` is the starting coordinate and `dx` the step.",
                     "impliedEdits": {
                         "xtype": "scaled"
@@ -35296,6 +36799,7 @@
                     "dflt": 1,
                     "role": "info",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Sets the x coordinate step. See `x0` for more info.",
                     "impliedEdits": {
                         "xtype": "scaled"
@@ -35304,6 +36808,7 @@
                 "b": {
                     "valType": "data_array",
                     "editType": "calc+clearAxisTypes",
+                    "anim": true,
                     "description": "Sets the y coordinates.",
                     "impliedEdits": {
                         "ytype": "array"
@@ -35315,6 +36820,7 @@
                     "dflt": 0,
                     "role": "info",
                     "editType": "calc+clearAxisTypes",
+                    "anim": true,
                     "description": "Alternate to `y`. Builds a linear space of y coordinates. Use with `dy` where `y0` is the starting coordinate and `dy` the step.",
                     "impliedEdits": {
                         "ytype": "scaled"
@@ -35325,6 +36831,7 @@
                     "dflt": 1,
                     "role": "info",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Sets the y coordinate step. See `y0` for more info.",
                     "impliedEdits": {
                         "ytype": "scaled"
@@ -35526,6 +37033,7 @@
                         "valType": "color",
                         "role": "style",
                         "editType": "style",
+                        "anim": true,
                         "description": "Sets the color of the contour level. Has no if `contours.coloring` is set to *lines*."
                     },
                     "width": {
@@ -35534,6 +37042,7 @@
                         "dflt": 2,
                         "role": "style",
                         "editType": "style",
+                        "anim": true,
                         "description": "Sets the line width (in px)."
                     },
                     "dash": {
@@ -36225,11 +37734,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -36339,6 +37851,7 @@
                         "dflt": 2,
                         "role": "style",
                         "editType": "style",
+                        "anim": true,
                         "description": "[object Object] Note that this style setting can also be set per direction via `increasing.line.width` and `decreasing.line.width`."
                     },
                     "dash": {
@@ -36365,6 +37878,7 @@
                             "valType": "color",
                             "role": "style",
                             "editType": "style",
+                            "anim": true,
                             "description": "Sets the line color.",
                             "dflt": "#3D9970"
                         },
@@ -36374,6 +37888,7 @@
                             "dflt": 2,
                             "role": "style",
                             "editType": "style",
+                            "anim": true,
                             "description": "Sets the line width (in px)."
                         },
                         "dash": {
@@ -36403,6 +37918,7 @@
                             "valType": "color",
                             "role": "style",
                             "editType": "style",
+                            "anim": true,
                             "description": "Sets the line color.",
                             "dflt": "#FF4136"
                         },
@@ -36412,6 +37928,7 @@
                             "dflt": 2,
                             "role": "style",
                             "editType": "style",
+                            "anim": true,
                             "description": "Sets the line width (in px)."
                         },
                         "dash": {
@@ -36693,11 +38210,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -36836,6 +38356,7 @@
                         "valType": "color",
                         "role": "style",
                         "editType": "style",
+                        "anim": true,
                         "description": "Sets the fill color. Defaults to a half-transparent variant of the line color, marker color, or marker line color, whichever is available."
                     },
                     "editType": "style",
@@ -36865,6 +38386,7 @@
                         "valType": "color",
                         "role": "style",
                         "editType": "style",
+                        "anim": true,
                         "description": "Sets the fill color. Defaults to a half-transparent variant of the line color, marker color, or marker line color, whichever is available."
                     },
                     "editType": "style",
@@ -37087,7 +38609,7 @@
                     "dflt": "overlay",
                     "role": "info",
                     "editType": "calc",
-                    "description": "Determines how boxes at the same location coordinate are displayed on the graph. If *group*, the boxes are plotted next to one another centered around the shared location. If *overlay*, the boxes are plotted over one another, you might need to set *opacity* to see them multiple boxes."
+                    "description": "Determines how boxes at the same location coordinate are displayed on the graph. If *group*, the boxes are plotted next to one another centered around the shared location. If *overlay*, the boxes are plotted over one another, you might need to set *opacity* to see them multiple boxes. Has no effect on traces that have *width* set."
                 },
                 "boxgap": {
                     "valType": "number",
@@ -37096,7 +38618,7 @@
                     "dflt": 0.3,
                     "role": "style",
                     "editType": "calc",
-                    "description": "Sets the gap (in plot fraction) between boxes of adjacent location coordinates."
+                    "description": "Sets the gap (in plot fraction) between boxes of adjacent location coordinates. Has no effect on traces that have *width* set."
                 },
                 "boxgroupgap": {
                     "valType": "number",
@@ -37105,7 +38627,7 @@
                     "dflt": 0.3,
                     "role": "style",
                     "editType": "calc",
-                    "description": "Sets the gap (in plot fraction) between boxes of the same location coordinate."
+                    "description": "Sets the gap (in plot fraction) between boxes of the same location coordinate. Has no effect on traces that have *width* set."
                 }
             }
         },
@@ -37160,11 +38682,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -37392,6 +38917,7 @@
                         "valType": "color",
                         "role": "style",
                         "editType": "style",
+                        "anim": true,
                         "description": "Sets the line color."
                     },
                     "width": {
@@ -37400,6 +38926,7 @@
                         "dflt": 2,
                         "role": "style",
                         "editType": "style",
+                        "anim": true,
                         "description": "Sets the line width (in px)."
                     },
                     "dash": {
@@ -37749,6 +39276,7 @@
                         "arrayOk": true,
                         "role": "style",
                         "editType": "style",
+                        "anim": true,
                         "description": "Sets the marker opacity."
                     },
                     "size": {
@@ -37758,6 +39286,7 @@
                         "arrayOk": true,
                         "role": "style",
                         "editType": "calc",
+                        "anim": true,
                         "description": "Sets the marker size (in px)."
                     },
                     "maxdisplayed": {
@@ -38295,6 +39824,7 @@
                             "arrayOk": true,
                             "role": "style",
                             "editType": "style",
+                            "anim": true,
                             "description": "Sets the width (in px) of the lines bounding the marker points."
                         },
                         "editType": "calc",
@@ -38303,7 +39833,8 @@
                             "arrayOk": true,
                             "role": "style",
                             "editType": "style",
-                            "description": "Sets themarker.linecolor. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `marker.line.cmin` and `marker.line.cmax` if set."
+                            "description": "Sets themarker.linecolor. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `marker.line.cmin` and `marker.line.cmax` if set.",
+                            "anim": true
                         },
                         "cauto": {
                             "valType": "boolean",
@@ -38415,7 +39946,8 @@
                         "arrayOk": true,
                         "role": "style",
                         "editType": "style",
-                        "description": "Sets themarkercolor. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `marker.cmin` and `marker.cmax` if set."
+                        "description": "Sets themarkercolor. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `marker.cmin` and `marker.cmax` if set.",
+                        "anim": true
                     },
                     "cauto": {
                         "valType": "boolean",
@@ -38590,6 +40122,7 @@
                     "valType": "color",
                     "role": "style",
                     "editType": "style",
+                    "anim": true,
                     "description": "Sets the fill color. Defaults to a half-transparent variant of the line color, marker color, or marker line color, whichever is available."
                 },
                 "hoverinfo": {
@@ -38620,6 +40153,14 @@
                     "role": "info",
                     "editType": "style",
                     "description": "Do the hover effects highlight individual points (markers or line points) or do they highlight filled regions? If the fill is *toself* or *tonext* and there are no markers or text, then the default is *fills*, otherwise it is *points*."
+                },
+                "hovertemplate": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "arrayOk": true,
+                    "editType": "none",
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\"."
                 },
                 "selected": {
                     "marker": {
@@ -38753,6 +40294,12 @@
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  hoverinfo .",
                     "editType": "none"
+                },
+                "hovertemplatesrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertemplate .",
+                    "editType": "none"
                 }
             }
         },
@@ -38807,11 +40354,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -39034,11 +40584,20 @@
                     "editType": "style",
                     "description": "Sets hover text elements associated with each (x,y) pair. If a single string, the same string appears over all the data points. If an array of string, the items are mapped in order to the this trace's (x,y) coordinates. To be seen, trace `hoverinfo` must contain a *text* flag."
                 },
+                "hovertemplate": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "arrayOk": true,
+                    "editType": "none",
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\"."
+                },
                 "line": {
                     "color": {
                         "valType": "color",
                         "role": "style",
                         "editType": "calc",
+                        "anim": true,
                         "description": "Sets the line color."
                     },
                     "width": {
@@ -39047,6 +40606,7 @@
                         "dflt": 2,
                         "role": "style",
                         "editType": "calc",
+                        "anim": true,
                         "description": "Sets the line width (in px)."
                     },
                     "shape": {
@@ -39457,6 +41017,7 @@
                         "arrayOk": true,
                         "role": "style",
                         "editType": "calc",
+                        "anim": true,
                         "description": "Sets the marker size (in px)."
                     },
                     "sizeref": {
@@ -39492,6 +41053,7 @@
                         "arrayOk": true,
                         "role": "style",
                         "editType": "calc",
+                        "anim": true,
                         "description": "Sets the marker opacity."
                     },
                     "colorbar": {
@@ -40055,6 +41617,7 @@
                             "arrayOk": true,
                             "role": "style",
                             "editType": "calc",
+                            "anim": true,
                             "description": "Sets the width (in px) of the lines bounding the marker points."
                         },
                         "editType": "calc",
@@ -40119,6 +41682,7 @@
                     "valType": "color",
                     "role": "style",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Sets the fill color. Defaults to a half-transparent variant of the line color, marker color, or marker line color, whichever is available."
                 },
                 "textposition": {
@@ -40325,6 +41889,12 @@
                     "description": "Sets the source reference on plot.ly for  hovertext .",
                     "editType": "none"
                 },
+                "hovertemplatesrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertemplate .",
+                    "editType": "none"
+                },
                 "textpositionsrc": {
                     "valType": "string",
                     "role": "info",
@@ -40390,11 +41960,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -40628,6 +42201,7 @@
                             "arrayOk": true,
                             "role": "style",
                             "editType": "style",
+                            "anim": true,
                             "description": "Sets the width (in px) of the lines bounding the marker points.",
                             "dflt": 0
                         },
@@ -41311,6 +42885,14 @@
                     "editType": "none",
                     "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
                 },
+                "hovertemplate": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "arrayOk": true,
+                    "editType": "none",
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\"."
+                },
                 "selected": {
                     "marker": {
                         "opacity": {
@@ -41435,6 +43017,12 @@
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  hoverinfo .",
                     "editType": "none"
+                },
+                "hovertemplatesrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertemplate .",
+                    "editType": "none"
                 }
             },
             "layoutAttributes": {
@@ -41508,11 +43096,14 @@
                 "uid": {
                     "valType": "string",
                     "role": "info",
-                    "editType": "plot"
+                    "editType": "plot",
+                    "anim": true,
+                    "description": "Assign an id to this trace, Use this to provide object constancy between traces during animations and transitions."
                 },
                 "ids": {
                     "valType": "data_array",
                     "editType": "calc",
+                    "anim": true,
                     "description": "Assigns id labels to each datum. These ids for object constancy of data points during animation. Should be an array of strings, not numbers or any other type.",
                     "role": "data"
                 },
@@ -41692,7 +43283,8 @@
                         "arrayOk": true,
                         "role": "style",
                         "editType": "style",
-                        "description": "Area traces are deprecated! Please switch to the *barpolar* trace type. Sets themarkercolor. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `marker.cmin` and `marker.cmax` if set."
+                        "description": "Area traces are deprecated! Please switch to the *barpolar* trace type. Sets themarkercolor. It accepts either a specific color or an array of numbers that are mapped to the colorscale relative to the max and min values of the array or relative to `marker.cmin` and `marker.cmax` if set.",
+                        "anim": true
                     },
                     "size": {
                         "valType": "number",
@@ -41701,6 +43293,7 @@
                         "arrayOk": true,
                         "role": "style",
                         "editType": "calc",
+                        "anim": true,
                         "description": "Area traces are deprecated! Please switch to the *barpolar* trace type. Sets the marker size (in px)."
                     },
                     "symbol": {
@@ -42004,6 +43597,7 @@
                         "arrayOk": true,
                         "role": "style",
                         "editType": "style",
+                        "anim": true,
                         "description": "Area traces are deprecated! Please switch to the *barpolar* trace type. Sets the marker opacity."
                     },
                     "editType": "calc",
@@ -42513,6 +44107,81 @@
                 "editType": "modebar",
                 "role": "object"
             },
+            "meta": {
+                "valType": "data_array",
+                "editType": "plot",
+                "description": "Assigns extra meta information that can be used in various `text` attributes. Attributes such as the graph, axis and colorbar `title.text` and annotation `text` support `meta`. One can access `meta` fields using template strings: `%{meta[i]}` where `i` is the index of the `meta` item in question.",
+                "role": "data"
+            },
+            "transition": {
+                "duration": {
+                    "valType": "number",
+                    "role": "info",
+                    "min": 0,
+                    "dflt": 500,
+                    "editType": "none",
+                    "description": "The duration of the transition, in milliseconds. If equal to zero, updates are synchronous."
+                },
+                "easing": {
+                    "valType": "enumerated",
+                    "dflt": "cubic-in-out",
+                    "values": [
+                        "linear",
+                        "quad",
+                        "cubic",
+                        "sin",
+                        "exp",
+                        "circle",
+                        "elastic",
+                        "back",
+                        "bounce",
+                        "linear-in",
+                        "quad-in",
+                        "cubic-in",
+                        "sin-in",
+                        "exp-in",
+                        "circle-in",
+                        "elastic-in",
+                        "back-in",
+                        "bounce-in",
+                        "linear-out",
+                        "quad-out",
+                        "cubic-out",
+                        "sin-out",
+                        "exp-out",
+                        "circle-out",
+                        "elastic-out",
+                        "back-out",
+                        "bounce-out",
+                        "linear-in-out",
+                        "quad-in-out",
+                        "cubic-in-out",
+                        "sin-in-out",
+                        "exp-in-out",
+                        "circle-in-out",
+                        "elastic-in-out",
+                        "back-in-out",
+                        "bounce-in-out"
+                    ],
+                    "role": "info",
+                    "editType": "none",
+                    "description": "The easing function used for the transition"
+                },
+                "ordering": {
+                    "valType": "enumerated",
+                    "values": [
+                        "layout first",
+                        "traces first"
+                    ],
+                    "dflt": "layout first",
+                    "role": "info",
+                    "editType": "none",
+                    "description": "Determines whether the figure's layout or traces smoothly transitions during updates that make both traces and layout change."
+                },
+                "description": "Sets transition options used during Plotly.react updates.",
+                "editType": "none",
+                "role": "object"
+            },
             "_deprecated": {
                 "title": {
                     "valType": "string",
@@ -42968,20 +44637,23 @@
                             "editType": "axrange",
                             "impliedEdits": {
                                 "^autorange": false
-                            }
+                            },
+                            "anim": true
                         },
                         {
                             "valType": "any",
                             "editType": "axrange",
                             "impliedEdits": {
                                 "^autorange": false
-                            }
+                            },
+                            "anim": true
                         }
                     ],
                     "editType": "axrange",
                     "impliedEdits": {
                         "autorange": false
                     },
+                    "anim": true,
                     "description": "Sets the range of this axis. If the axis `type` is *log*, then you must take the log of your desired range (e.g. to set the range from 1 to 100, set the range from 0 to 2). If the axis `type` is *date*, it should be date strings, like date data, though Date objects and unix milliseconds will be accepted and converted to strings. If the axis `type` is *category*, it should be numbers, using the scale where each category is assigned a serial number from zero in the order it appears."
                 },
                 "fixedrange": {
@@ -43633,7 +45305,7 @@
                         "min": 0,
                         "role": "style",
                         "editType": "plot",
-                        "description": "Sets the border color of the range slider."
+                        "description": "Sets the border width of the range slider."
                     },
                     "autorange": {
                         "valType": "boolean",
@@ -44038,20 +45710,23 @@
                             "editType": "axrange",
                             "impliedEdits": {
                                 "^autorange": false
-                            }
+                            },
+                            "anim": true
                         },
                         {
                             "valType": "any",
                             "editType": "axrange",
                             "impliedEdits": {
                                 "^autorange": false
-                            }
+                            },
+                            "anim": true
                         }
                     ],
                     "editType": "axrange",
                     "impliedEdits": {
                         "autorange": false
                     },
+                    "anim": true,
                     "description": "Sets the range of this axis. If the axis `type` is *log*, then you must take the log of your desired range (e.g. to set the range from 1 to 100, set the range from 0 to 2). If the axis `type` is *date*, it should be date strings, like date data, though Date objects and unix milliseconds will be accepted and converted to strings. If the axis `type` is *category*, it should be numbers, using the scale where each category is assigned a serial number from zero in the order it appears."
                 },
                 "fixedrange": {
@@ -46460,6 +48135,7 @@
                         "impliedEdits": {
                             "autorange": false
                         },
+                        "anim": false,
                         "description": "Sets the range of this axis. If the axis `type` is *log*, then you must take the log of your desired range (e.g. to set the range from 1 to 100, set the range from 0 to 2). If the axis `type` is *date*, it should be date strings, like date data, though Date objects and unix milliseconds will be accepted and converted to strings. If the axis `type` is *category*, it should be numbers, using the scale where each category is assigned a serial number from zero in the order it appears."
                     },
                     "tickmode": {
@@ -47058,6 +48734,7 @@
                         "impliedEdits": {
                             "autorange": false
                         },
+                        "anim": false,
                         "description": "Sets the range of this axis. If the axis `type` is *log*, then you must take the log of your desired range (e.g. to set the range from 1 to 100, set the range from 0 to 2). If the axis `type` is *date*, it should be date strings, like date data, though Date objects and unix milliseconds will be accepted and converted to strings. If the axis `type` is *category*, it should be numbers, using the scale where each category is assigned a serial number from zero in the order it appears."
                     },
                     "tickmode": {
@@ -47656,6 +49333,7 @@
                         "impliedEdits": {
                             "autorange": false
                         },
+                        "anim": false,
                         "description": "Sets the range of this axis. If the axis `type` is *log*, then you must take the log of your desired range (e.g. to set the range from 1 to 100, set the range from 0 to 2). If the axis `type` is *date*, it should be date strings, like date data, though Date objects and unix milliseconds will be accepted and converted to strings. If the axis `type` is *category*, it should be numbers, using the scale where each category is assigned a serial number from zero in the order it appears."
                     },
                     "tickmode": {
@@ -49443,6 +51121,7 @@
                         "impliedEdits": {
                             "autorange": false
                         },
+                        "anim": true,
                         "description": "Sets the range of this axis. If the axis `type` is *log*, then you must take the log of your desired range (e.g. to set the range from 1 to 100, set the range from 0 to 2). If the axis `type` is *date*, it should be date strings, like date data, though Date objects and unix milliseconds will be accepted and converted to strings. If the axis `type` is *category*, it should be numbers, using the scale where each category is assigned a serial number from zero in the order it appears."
                     },
                     "categoryorder": {
@@ -51281,6 +52960,7 @@
                                 "valType": "color",
                                 "role": "style",
                                 "editType": "arraydraw",
+                                "anim": true,
                                 "description": "Sets the line color."
                             },
                             "width": {
@@ -51289,6 +52969,7 @@
                                 "dflt": 2,
                                 "role": "style",
                                 "editType": "calc+arraydraw",
+                                "anim": true,
                                 "description": "Sets the line width (in px)."
                             },
                             "dash": {
@@ -52161,6 +53842,12 @@
                     }
                 },
                 "role": "object"
+            },
+            "metasrc": {
+                "valType": "string",
+                "role": "info",
+                "description": "Sets the source reference on plot.ly for  meta .",
+                "editType": "none"
             }
         }
     },
@@ -52547,6 +54234,7 @@
                 "role": "info",
                 "min": 0,
                 "dflt": 500,
+                "editType": "none",
                 "description": "The duration of the transition, in milliseconds. If equal to zero, updates are synchronous."
             },
             "easing": {
@@ -52591,9 +54279,269 @@
                     "bounce-in-out"
                 ],
                 "role": "info",
+                "editType": "none",
                 "description": "The easing function used for the transition"
             },
+            "ordering": {
+                "valType": "enumerated",
+                "values": [
+                    "layout first",
+                    "traces first"
+                ],
+                "dflt": "layout first",
+                "role": "info",
+                "editType": "none",
+                "description": "Determines whether the figure's layout or traces smoothly transitions during updates that make both traces and layout change."
+            },
             "role": "object"
+        }
+    },
+    "config": {
+        "staticPlot": {
+            "valType": "boolean",
+            "dflt": false,
+            "description": "Determines whether the graphs are interactive or not. If *false*, no interactivity, for export or image generation."
+        },
+        "plotlyServerURL": {
+            "valType": "string",
+            "dflt": "https://plot.ly",
+            "description": "Sets base URL for the 'Edit in Chart Studio' (aka sendDataToCloud) mode bar button and the showLink/sendData on-graph link"
+        },
+        "editable": {
+            "valType": "boolean",
+            "dflt": false,
+            "description": "Determines whether the graph is editable or not. Sets all pieces of `edits` unless a separate `edits` config item overrides individual parts."
+        },
+        "edits": {
+            "annotationPosition": {
+                "valType": "boolean",
+                "dflt": false,
+                "description": "Determines if the main anchor of the annotation is editable. The main anchor corresponds to the text (if no arrow) or the arrow (which drags the whole thing leaving the arrow length & direction unchanged)."
+            },
+            "annotationTail": {
+                "valType": "boolean",
+                "dflt": false,
+                "description": "Has only an effect for annotations with arrows. Enables changing the length and direction of the arrow."
+            },
+            "annotationText": {
+                "valType": "boolean",
+                "dflt": false,
+                "description": "Enables editing annotation text."
+            },
+            "axisTitleText": {
+                "valType": "boolean",
+                "dflt": false,
+                "description": "Enables editing axis title text."
+            },
+            "colorbarPosition": {
+                "valType": "boolean",
+                "dflt": false,
+                "description": "Enables moving colorbars."
+            },
+            "colorbarTitleText": {
+                "valType": "boolean",
+                "dflt": false,
+                "description": "Enables editing colorbar title text."
+            },
+            "legendPosition": {
+                "valType": "boolean",
+                "dflt": false,
+                "description": "Enables moving the legend."
+            },
+            "legendText": {
+                "valType": "boolean",
+                "dflt": false,
+                "description": "Enables editing the trace name fields from the legend"
+            },
+            "shapePosition": {
+                "valType": "boolean",
+                "dflt": false,
+                "description": "Enables moving shapes."
+            },
+            "titleText": {
+                "valType": "boolean",
+                "dflt": false,
+                "description": "Enables editing the global layout title."
+            },
+            "role": "object"
+        },
+        "autosizable": {
+            "valType": "boolean",
+            "dflt": false,
+            "description": "Determines whether the graphs are plotted with respect to layout.autosize:true and infer its container size."
+        },
+        "responsive": {
+            "valType": "boolean",
+            "dflt": false,
+            "description": "Determines whether to change the layout size when window is resized. In v2, this option will be removed and will always be true."
+        },
+        "fillFrame": {
+            "valType": "boolean",
+            "dflt": false,
+            "description": "When `layout.autosize` is turned on, determines whether the graph fills the container (the default) or the screen (if set to *true*)."
+        },
+        "frameMargins": {
+            "valType": "number",
+            "dflt": 0,
+            "min": 0,
+            "max": 0.5,
+            "description": "When `layout.autosize` is turned on, set the frame margins in fraction of the graph size."
+        },
+        "scrollZoom": {
+            "valType": "flaglist",
+            "flags": [
+                "cartesian",
+                "gl3d",
+                "geo",
+                "mapbox"
+            ],
+            "extras": [
+                true,
+                false
+            ],
+            "dflt": "gl3d+geo+mapbox",
+            "description": "Determines whether mouse wheel or two-finger scroll zooms is enable. Turned on by default for gl3d, geo and mapbox subplots (as these subplot types do not have zoombox via pan), but turned off by default for cartesian subplots. Set `scrollZoom` to *false* to disable scrolling for all subplots."
+        },
+        "doubleClick": {
+            "valType": "enumerated",
+            "values": [
+                false,
+                "reset",
+                "autosize",
+                "reset+autosize"
+            ],
+            "dflt": "reset+autosize",
+            "description": "Sets the double click interaction mode. Has an effect only in cartesian plots. If *false*, double click is disable. If *reset*, double click resets the axis ranges to their initial values. If *autosize*, double click set the axis ranges to their autorange values. If *reset+autosize*, the odd double clicks resets the axis ranges to their initial values and even double clicks set the axis ranges to their autorange values."
+        },
+        "showAxisDragHandles": {
+            "valType": "boolean",
+            "dflt": true,
+            "description": "Set to *false* to omit cartesian axis pan/zoom drag handles."
+        },
+        "showAxisRangeEntryBoxes": {
+            "valType": "boolean",
+            "dflt": true,
+            "description": "Set to *false* to omit direct range entry at the pan/zoom drag points, note that `showAxisDragHandles` must be enabled to have an effect."
+        },
+        "showTips": {
+            "valType": "boolean",
+            "dflt": true,
+            "description": "Determines whether or not tips are shown while interacting with the resulting graphs."
+        },
+        "showLink": {
+            "valType": "boolean",
+            "dflt": false,
+            "description": "Determines whether a link to plot.ly is displayed at the bottom right corner of resulting graphs. Use with `sendData` and `linkText`."
+        },
+        "linkText": {
+            "valType": "string",
+            "dflt": "Edit chart",
+            "noBlank": true,
+            "description": "Sets the text appearing in the `showLink` link."
+        },
+        "sendData": {
+            "valType": "boolean",
+            "dflt": true,
+            "description": "If *showLink* is true, does it contain data just link to a plot.ly file?"
+        },
+        "showSources": {
+            "valType": "any",
+            "dflt": false,
+            "description": "Adds a source-displaying function to show sources on the resulting graphs."
+        },
+        "displayModeBar": {
+            "valType": "enumerated",
+            "values": [
+                "hover",
+                true,
+                false
+            ],
+            "dflt": "hover",
+            "description": "Determines the mode bar display mode. If *true*, the mode bar is always visible. If *false*, the mode bar is always hidden. If *hover*, the mode bar is visible while the mouse cursor is on the graph container."
+        },
+        "showSendToCloud": {
+            "valType": "boolean",
+            "dflt": false,
+            "description": "Should we include a ModeBar button, labeled \"Edit in Chart Studio\", that sends this chart to plot.ly or another plotly server as specified by `plotlyServerURL` for editing, export, etc? Prior to version 1.43.0 this button was included by default, now it is opt-in using this flag. Note that this button can (depending on `plotlyServerURL`) send your data to an external server. However that server does not persist your data until you arrive at the Chart Studio and explicitly click \"Save\"."
+        },
+        "modeBarButtonsToRemove": {
+            "valType": "any",
+            "dflt": [],
+            "description": "Remove mode bar buttons by name. See ./components/modebar/buttons.js for the list of names."
+        },
+        "modeBarButtonsToAdd": {
+            "valType": "any",
+            "dflt": [],
+            "description": "Add mode bar button using config objects See ./components/modebar/buttons.js for list of arguments."
+        },
+        "modeBarButtons": {
+            "valType": "any",
+            "dflt": false,
+            "description": "Define fully custom mode bar buttons as nested array, where the outer arrays represents button groups, and the inner arrays have buttons config objects or names of default buttons See ./components/modebar/buttons.js for more info."
+        },
+        "toImageButtonOptions": {
+            "valType": "any",
+            "dflt": {},
+            "description": "Statically override options for toImage modebar button allowed keys are format, filename, width, height, scale see ../components/modebar/buttons.js"
+        },
+        "displaylogo": {
+            "valType": "boolean",
+            "dflt": true,
+            "description": "Determines whether or not the plotly logo is displayed on the end of the mode bar."
+        },
+        "watermark": {
+            "valType": "boolean",
+            "dflt": false,
+            "description": "watermark the images with the company's logo"
+        },
+        "plotGlPixelRatio": {
+            "valType": "number",
+            "dflt": 2,
+            "min": 1,
+            "max": 4,
+            "description": "Set the pixel ratio during WebGL image export. This config option was formerly named `plot3dPixelRatio` which is now deprecated."
+        },
+        "setBackground": {
+            "valType": "any",
+            "dflt": "transparent",
+            "description": "Set function to add the background color (i.e. `layout.paper_color`) to a different container. This function take the graph div as first argument and the current background color as second argument. Alternatively, set to string *opaque* to ensure there is white behind it."
+        },
+        "topojsonURL": {
+            "valType": "string",
+            "noBlank": true,
+            "dflt": "https://cdn.plot.ly/",
+            "description": "Set the URL to topojson used in geo charts. By default, the topojson files are fetched from cdn.plot.ly. For example, set this option to: <path-to-plotly.js>/dist/topojson/ to render geographical feature using the topojson files that ship with the plotly.js module."
+        },
+        "mapboxAccessToken": {
+            "valType": "string",
+            "dflt": null,
+            "description": "Mapbox access token (required to plot mapbox trace types) If using an Mapbox Atlas server, set this option to '' so that plotly.js won't attempt to authenticate to the public Mapbox server."
+        },
+        "logging": {
+            "valType": "boolean",
+            "dflt": 1,
+            "description": "Turn all console logging on or off (errors will be thrown) This should ONLY be set via Plotly.setPlotConfig Available levels: 0: no logs 1: warnings and errors, but not informational messages 2: verbose logs"
+        },
+        "queueLength": {
+            "valType": "integer",
+            "min": 0,
+            "dflt": 0,
+            "description": "Sets the length of the undo/redo queue."
+        },
+        "globalTransforms": {
+            "valType": "any",
+            "dflt": [],
+            "description": "Set global transform to be applied to all traces with no specification needed"
+        },
+        "locale": {
+            "valType": "string",
+            "dflt": "en-US",
+            "description": "Which localization should we use? Should be a string like 'en' or 'en-US'."
+        },
+        "locales": {
+            "valType": "any",
+            "dflt": {},
+            "description": "Localization definitions Locales can be provided either here (specific to one chart) or globally by registering them as modules. Should be an object of objects {locale: {dictionary: {...}, format: {...}}} {   da: {       dictionary: {'Reset axes': 'Nulstil aksler', ...},       format: {months: [...], shortMonths: [...]}   },   ... } All parts are optional. When looking for translation or format fields, we look first for an exact match in a config locale, then in a registered module. If those fail, we strip off any regionalization ('en-US' -> 'en') and try each (config, registry) again. The final fallback for translation is untranslated (which is US English) and for formats is the base English (the only consequence being the last fallback date format %x is DD/MM/YYYY instead of MM/DD/YYYY). Currently `grouping` and `currency` are ignored for our automatic number formatting, but can be used in custom formats."
         }
     }
 }

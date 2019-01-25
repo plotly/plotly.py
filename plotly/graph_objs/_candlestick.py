@@ -635,6 +635,9 @@ class Candlestick(BaseTraceType):
     @property
     def uid(self):
         """
+        Assign an id to this trace, Use this to provide object
+        constancy between traces during animations and transitions.
+    
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -936,7 +939,9 @@ class Candlestick(BaseTraceType):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1118,7 +1123,9 @@ class Candlestick(BaseTraceType):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1205,8 +1212,8 @@ an instance of plotly.graph_objs.Candlestick"""
         self._validators['high'] = v_candlestick.HighValidator()
         self._validators['highsrc'] = v_candlestick.HighsrcValidator()
         self._validators['hoverinfo'] = v_candlestick.HoverinfoValidator()
-        self._validators['hoverinfosrc'
-                        ] = v_candlestick.HoverinfosrcValidator()
+        self._validators['hoverinfosrc'] = v_candlestick.HoverinfosrcValidator(
+        )
         self._validators['hoverlabel'] = v_candlestick.HoverlabelValidator()
         self._validators['ids'] = v_candlestick.IdsValidator()
         self._validators['idssrc'] = v_candlestick.IdssrcValidator()
@@ -1228,8 +1235,8 @@ an instance of plotly.graph_objs.Candlestick"""
         self._validators['uid'] = v_candlestick.UidValidator()
         self._validators['uirevision'] = v_candlestick.UirevisionValidator()
         self._validators['visible'] = v_candlestick.VisibleValidator()
-        self._validators['whiskerwidth'
-                        ] = v_candlestick.WhiskerwidthValidator()
+        self._validators['whiskerwidth'] = v_candlestick.WhiskerwidthValidator(
+        )
         self._validators['x'] = v_candlestick.XValidator()
         self._validators['xaxis'] = v_candlestick.XAxisValidator()
         self._validators['xcalendar'] = v_candlestick.XcalendarValidator()
