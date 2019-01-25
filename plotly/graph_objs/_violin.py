@@ -880,6 +880,9 @@ class Violin(BaseTraceType):
     @property
     def uid(self):
         """
+        Assign an id to this trace, Use this to provide object
+        constancy between traces during animations and transitions.
+    
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -976,6 +979,28 @@ class Violin(BaseTraceType):
     @visible.setter
     def visible(self, val):
         self['visible'] = val
+
+    # width
+    # -----
+    @property
+    def width(self):
+        """
+        Sets the width of the violin in data coordinates. If 0 (default
+        value) the width is automatically selected based on the
+        positions of other violin traces in the same subplot.
+    
+        The 'width' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self['width']
+
+    @width.setter
+    def width(self, val):
+        self['width'] = val
 
     # x
     # -
@@ -1302,7 +1327,9 @@ class Violin(BaseTraceType):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1329,6 +1356,11 @@ class Violin(BaseTraceType):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
+        width
+            Sets the width of the violin in data coordinates. If 0
+            (default value) the width is automatically selected
+            based on the positions of other violin traces in the
+            same subplot.
         x
             Sets the x sample data or coordinates. See overview for
             more info.
@@ -1396,6 +1428,7 @@ class Violin(BaseTraceType):
         uirevision=None,
         unselected=None,
         visible=None,
+        width=None,
         x=None,
         x0=None,
         xaxis=None,
@@ -1559,7 +1592,9 @@ class Violin(BaseTraceType):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1586,6 +1621,11 @@ class Violin(BaseTraceType):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
+        width
+            Sets the width of the violin in data coordinates. If 0
+            (default value) the width is automatically selected
+            based on the positions of other violin traces in the
+            same subplot.
         x
             Sets the x sample data or coordinates. See overview for
             more info.
@@ -1681,6 +1721,7 @@ an instance of plotly.graph_objs.Violin"""
         self._validators['uirevision'] = v_violin.UirevisionValidator()
         self._validators['unselected'] = v_violin.UnselectedValidator()
         self._validators['visible'] = v_violin.VisibleValidator()
+        self._validators['width'] = v_violin.WidthValidator()
         self._validators['x'] = v_violin.XValidator()
         self._validators['x0'] = v_violin.X0Validator()
         self._validators['xaxis'] = v_violin.XAxisValidator()
@@ -1766,6 +1807,8 @@ an instance of plotly.graph_objs.Violin"""
         self['unselected'] = unselected if unselected is not None else _v
         _v = arg.pop('visible', None)
         self['visible'] = visible if visible is not None else _v
+        _v = arg.pop('width', None)
+        self['width'] = width if width is not None else _v
         _v = arg.pop('x', None)
         self['x'] = x if x is not None else _v
         _v = arg.pop('x0', None)

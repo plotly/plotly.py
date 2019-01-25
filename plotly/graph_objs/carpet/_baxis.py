@@ -2090,8 +2090,8 @@ an instance of plotly.graph_objs.carpet.Baxis"""
         self._validators['tickangle'] = v_baxis.TickangleValidator()
         self._validators['tickfont'] = v_baxis.TickfontValidator()
         self._validators['tickformat'] = v_baxis.TickformatValidator()
-        self._validators['tickformatstops'
-                        ] = v_baxis.TickformatstopsValidator()
+        self._validators['tickformatstops'] = v_baxis.TickformatstopsValidator(
+        )
         self._validators['tickformatstopdefaults'
                         ] = v_baxis.TickformatstopValidator()
         self._validators['tickmode'] = v_baxis.TickmodeValidator()

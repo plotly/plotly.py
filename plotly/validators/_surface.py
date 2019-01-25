@@ -145,7 +145,9 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  text
                 .
             uid
-
+                Assign an id to this trace, Use this to provide
+                object constancy between traces during
+                animations and transitions.
             uirevision
                 Controls persistence of some user-driven
                 changes to the trace: `constraintrange` in

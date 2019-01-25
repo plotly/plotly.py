@@ -54,10 +54,12 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 multiplied by 100 to show percentages.
             boxgap
                 Sets the gap (in plot fraction) between boxes
-                of adjacent location coordinates.
+                of adjacent location coordinates. Has no effect
+                on traces that have "width" set.
             boxgroupgap
                 Sets the gap (in plot fraction) between boxes
-                of the same location coordinate.
+                of the same location coordinate. Has no effect
+                on traces that have "width" set.
             boxmode
                 Determines how boxes at the same location
                 coordinate are displayed on the graph. If
@@ -65,7 +67,8 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 another centered around the shared location. If
                 "overlay", the boxes are plotted over one
                 another, you might need to set "opacity" to see
-                them multiple boxes.
+                them multiple boxes. Has no effect on traces
+                that have "width" set.
             calendar
                 Sets the default calendar system to use for
                 interpreting and displaying dates throughout
@@ -193,6 +196,17 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             margin
                 plotly.graph_objs.layout.Margin instance or
                 dict with compatible properties
+            meta
+                Assigns extra meta information that can be used
+                in various `text` attributes. Attributes such
+                as the graph, axis and colorbar `title.text`
+                and annotation `text` support `meta`. One can
+                access `meta` fields using template strings:
+                `%{meta[i]}` where `i` is the index of the
+                `meta` item in question.
+            metasrc
+                Sets the source reference on plot.ly for  meta
+                .
             modebar
                 plotly.graph_objs.layout.Modebar instance or
                 dict with compatible properties
@@ -306,6 +320,9 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 instead. Sets the title font. Note that the
                 title's font used to be customized by the now
                 deprecated `titlefont` attribute.
+            transition
+                Sets transition options used during
+                Plotly.react updates.
             uirevision
                 Used to allow user interactions with the plot
                 to persist after `Plotly.react` calls that are
@@ -339,10 +356,12 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 elements of layout.updatemenus
             violingap
                 Sets the gap (in plot fraction) between violins
-                of adjacent location coordinates.
+                of adjacent location coordinates. Has no effect
+                on traces that have "width" set.
             violingroupgap
                 Sets the gap (in plot fraction) between violins
-                of the same location coordinate.
+                of the same location coordinate. Has no effect
+                on traces that have "width" set.
             violinmode
                 Determines how violins at the same location
                 coordinate are displayed on the graph. If
@@ -350,7 +369,8 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 another centered around the shared location. If
                 "overlay", the violins are plotted over one
                 another, you might need to set "opacity" to see
-                them multiple violins.
+                them multiple violins. Has no effect on traces
+                that have "width" set.
             width
                 Sets the plot's width (in px).
             xaxis

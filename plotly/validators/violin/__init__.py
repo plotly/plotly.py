@@ -6,6 +6,7 @@ from ._xsrc import XsrcValidator
 from ._xaxis import XAxisValidator
 from ._x0 import X0Validator
 from ._x import XValidator
+from ._width import WidthValidator
 from ._visible import VisibleValidator
 from ._unselected import UnselectedValidator
 from ._uirevision import UirevisionValidator

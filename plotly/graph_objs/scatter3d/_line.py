@@ -268,6 +268,28 @@ class Line(BaseTraceHierarchyType):
     def reversescale(self, val):
         self['reversescale'] = val
 
+    # showscale
+    # ---------
+    @property
+    def showscale(self):
+        """
+        Determines whether or not a colorbar is displayed for this
+        trace. Has an effect only if in `line.color`is set to a
+        numerical array.
+    
+        The 'showscale' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self['showscale']
+
+    @showscale.setter
+    def showscale(self, val):
+        self['showscale'] = val
+
     # width
     # -----
     @property
@@ -355,6 +377,10 @@ class Line(BaseTraceHierarchyType):
             `line.cmin` will correspond to the last color in the
             array and `line.cmax` will correspond to the first
             color.
+        showscale
+            Determines whether or not a colorbar is displayed for
+            this trace. Has an effect only if in `line.color`is set
+            to a numerical array.
         width
             Sets the line width (in px).
         """
@@ -371,6 +397,7 @@ class Line(BaseTraceHierarchyType):
         colorsrc=None,
         dash=None,
         reversescale=None,
+        showscale=None,
         width=None,
         **kwargs
     ):
@@ -438,6 +465,10 @@ class Line(BaseTraceHierarchyType):
             `line.cmin` will correspond to the last color in the
             array and `line.cmax` will correspond to the first
             color.
+        showscale
+            Determines whether or not a colorbar is displayed for
+            this trace. Has an effect only if in `line.color`is set
+            to a numerical array.
         width
             Sets the line width (in px).
 
@@ -482,6 +513,7 @@ an instance of plotly.graph_objs.scatter3d.Line"""
         self._validators['colorsrc'] = v_line.ColorsrcValidator()
         self._validators['dash'] = v_line.DashValidator()
         self._validators['reversescale'] = v_line.ReversescaleValidator()
+        self._validators['showscale'] = v_line.ShowscaleValidator()
         self._validators['width'] = v_line.WidthValidator()
 
         # Populate data dict with properties
@@ -505,6 +537,8 @@ an instance of plotly.graph_objs.scatter3d.Line"""
         self['dash'] = dash if dash is not None else _v
         _v = arg.pop('reversescale', None)
         self['reversescale'] = reversescale if reversescale is not None else _v
+        _v = arg.pop('showscale', None)
+        self['showscale'] = showscale if showscale is not None else _v
         _v = arg.pop('width', None)
         self['width'] = width if width is not None else _v
 

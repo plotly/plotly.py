@@ -110,7 +110,9 @@ class HeatmapglValidator(_plotly_utils.basevalidators.CompoundValidator):
             transpose
                 Transposes the z data.
             uid
-
+                Assign an id to this trace, Use this to provide
+                object constancy between traces during
+                animations and transitions.
             uirevision
                 Controls persistence of some user-driven
                 changes to the trace: `constraintrange` in

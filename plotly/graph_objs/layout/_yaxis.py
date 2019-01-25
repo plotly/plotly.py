@@ -2873,8 +2873,8 @@ an instance of plotly.graph_objs.layout.YAxis"""
         self._validators['categoryorder'] = v_yaxis.CategoryorderValidator()
         self._validators['color'] = v_yaxis.ColorValidator()
         self._validators['constrain'] = v_yaxis.ConstrainValidator()
-        self._validators['constraintoward'
-                        ] = v_yaxis.ConstraintowardValidator()
+        self._validators['constraintoward'] = v_yaxis.ConstraintowardValidator(
+        )
         self._validators['dividercolor'] = v_yaxis.DividercolorValidator()
         self._validators['dividerwidth'] = v_yaxis.DividerwidthValidator()
         self._validators['domain'] = v_yaxis.DomainValidator()
@@ -2916,8 +2916,8 @@ an instance of plotly.graph_objs.layout.YAxis"""
         self._validators['tickcolor'] = v_yaxis.TickcolorValidator()
         self._validators['tickfont'] = v_yaxis.TickfontValidator()
         self._validators['tickformat'] = v_yaxis.TickformatValidator()
-        self._validators['tickformatstops'
-                        ] = v_yaxis.TickformatstopsValidator()
+        self._validators['tickformatstops'] = v_yaxis.TickformatstopsValidator(
+        )
         self._validators['tickformatstopdefaults'
                         ] = v_yaxis.TickformatstopValidator()
         self._validators['ticklen'] = v_yaxis.TicklenValidator()

@@ -382,12 +382,12 @@ an instance of plotly.graph_objs.parcats.Dimension"""
 
         # Initialize validators
         # ---------------------
-        self._validators['categoryarray'
-                        ] = v_dimension.CategoryarrayValidator()
+        self._validators['categoryarray'] = v_dimension.CategoryarrayValidator(
+        )
         self._validators['categoryarraysrc'
                         ] = v_dimension.CategoryarraysrcValidator()
-        self._validators['categoryorder'
-                        ] = v_dimension.CategoryorderValidator()
+        self._validators['categoryorder'] = v_dimension.CategoryorderValidator(
+        )
         self._validators['displayindex'] = v_dimension.DisplayindexValidator()
         self._validators['label'] = v_dimension.LabelValidator()
         self._validators['ticktext'] = v_dimension.TicktextValidator()

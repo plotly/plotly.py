@@ -7,6 +7,7 @@ from ._violingap import ViolingapValidator
 from ._updatemenudefaults import UpdatemenuValidator
 from ._updatemenus import UpdatemenusValidator
 from ._uirevision import UirevisionValidator
+from ._transition import TransitionValidator
 from ._title import TitleValidator
 from ._ternary import TernaryValidator
 from ._template import TemplateValidator
@@ -27,6 +28,8 @@ from ._piecolorway import PiecolorwayValidator
 from ._paper_bgcolor import PaperBgcolorValidator
 from ._orientation import OrientationValidator
 from ._modebar import ModebarValidator
+from ._metasrc import MetasrcValidator
+from ._meta import MetaValidator
 from ._margin import MarginValidator
 from ._mapbox import MapboxValidator
 from ._legend import LegendValidator

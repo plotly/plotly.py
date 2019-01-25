@@ -673,6 +673,9 @@ class Parcoords(BaseTraceType):
     @property
     def uid(self):
         """
+        Assign an id to this trace, Use this to provide object
+        constancy between traces during animations and transitions.
+    
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -823,7 +826,9 @@ class Parcoords(BaseTraceType):
         tickfont
             Sets the font for the `dimension` tick values.
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -951,7 +956,9 @@ class Parcoords(BaseTraceType):
         tickfont
             Sets the font for the `dimension` tick values.
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1009,11 +1016,11 @@ an instance of plotly.graph_objs.Parcoords"""
         # Initialize validators
         # ---------------------
         self._validators['customdata'] = v_parcoords.CustomdataValidator()
-        self._validators['customdatasrc'
-                        ] = v_parcoords.CustomdatasrcValidator()
+        self._validators['customdatasrc'] = v_parcoords.CustomdatasrcValidator(
+        )
         self._validators['dimensions'] = v_parcoords.DimensionsValidator()
-        self._validators['dimensiondefaults'
-                        ] = v_parcoords.DimensionValidator()
+        self._validators['dimensiondefaults'] = v_parcoords.DimensionValidator(
+        )
         self._validators['domain'] = v_parcoords.DomainValidator()
         self._validators['hoverinfo'] = v_parcoords.HoverinfoValidator()
         self._validators['hoverinfosrc'] = v_parcoords.HoverinfosrcValidator()

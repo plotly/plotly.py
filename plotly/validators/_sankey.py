@@ -83,7 +83,9 @@ class SankeyValidator(_plotly_utils.basevalidators.CompoundValidator):
             textfont
                 Sets the font for node labels
             uid
-
+                Assign an id to this trace, Use this to provide
+                object constancy between traces during
+                animations and transitions.
             uirevision
                 Controls persistence of some user-driven
                 changes to the trace: `constraintrange` in

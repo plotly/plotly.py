@@ -166,7 +166,9 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  text
                 .
             uid
-
+                Assign an id to this trace, Use this to provide
+                object constancy between traces during
+                animations and transitions.
             uirevision
                 Controls persistence of some user-driven
                 changes to the trace: `constraintrange` in
@@ -197,6 +199,11 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
+            width
+                Sets the width of the violin in data
+                coordinates. If 0 (default value) the width is
+                automatically selected based on the positions
+                of other violin traces in the same subplot.
             x
                 Sets the x sample data or coordinates. See
                 overview for more info.

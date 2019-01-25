@@ -349,6 +349,29 @@ class Data(BaseLayoutHierarchyType):
     def histogram(self, val):
         self['histogram'] = val
 
+    # isosurface
+    # ----------
+    @property
+    def isosurface(self):
+        """
+        The 'isosurface' property is a tuple of instances of
+        Isosurface that may be specified as:
+          - A list or tuple of instances of plotly.graph_objs.layout.template.data.Isosurface
+          - A list or tuple of dicts of string/value properties that
+            will be passed to the Isosurface constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        tuple[plotly.graph_objs.layout.template.data.Isosurface]
+        """
+        return self['isosurface']
+
+    @isosurface.setter
+    def isosurface(self, val):
+        self['isosurface'] = val
+
     # mesh3d
     # ------
     @property
@@ -888,6 +911,9 @@ class Data(BaseLayoutHierarchyType):
         histogram
             plotly.graph_objs.layout.template.data.Histogram
             instance or dict with compatible properties
+        isosurface
+            plotly.graph_objs.layout.template.data.Isosurface
+            instance or dict with compatible properties
         mesh3d
             plotly.graph_objs.layout.template.data.Mesh3d instance
             or dict with compatible properties
@@ -971,6 +997,7 @@ class Data(BaseLayoutHierarchyType):
         histogram2dcontour=None,
         histogram2d=None,
         histogram=None,
+        isosurface=None,
         mesh3d=None,
         ohlc=None,
         parcats=None,
@@ -1046,6 +1073,9 @@ class Data(BaseLayoutHierarchyType):
             instance or dict with compatible properties
         histogram
             plotly.graph_objs.layout.template.data.Histogram
+            instance or dict with compatible properties
+        isosurface
+            plotly.graph_objs.layout.template.data.Isosurface
             instance or dict with compatible properties
         mesh3d
             plotly.graph_objs.layout.template.data.Mesh3d instance
@@ -1159,6 +1189,7 @@ an instance of plotly.graph_objs.layout.template.Data"""
                         ] = v_data.Histogram2dContoursValidator()
         self._validators['histogram2d'] = v_data.Histogram2dsValidator()
         self._validators['histogram'] = v_data.HistogramsValidator()
+        self._validators['isosurface'] = v_data.IsosurfacesValidator()
         self._validators['mesh3d'] = v_data.Mesh3dsValidator()
         self._validators['ohlc'] = v_data.OhlcsValidator()
         self._validators['parcats'] = v_data.ParcatssValidator()
@@ -1215,6 +1246,8 @@ an instance of plotly.graph_objs.layout.template.Data"""
         self['histogram2d'] = histogram2d if histogram2d is not None else _v
         _v = arg.pop('histogram', None)
         self['histogram'] = histogram if histogram is not None else _v
+        _v = arg.pop('isosurface', None)
+        self['isosurface'] = isosurface if isosurface is not None else _v
         _v = arg.pop('mesh3d', None)
         self['mesh3d'] = mesh3d if mesh3d is not None else _v
         _v = arg.pop('ohlc', None)

@@ -592,6 +592,10 @@ class Scatter3d(BaseTraceType):
                     numerical array. If true, `line.cmin` will
                     correspond to the last color in the array and
                     `line.cmax` will correspond to the first color.
+                showscale
+                    Determines whether or not a colorbar is
+                    displayed for this trace. Has an effect only if
+                    in `line.color`is set to a numerical array.
                 width
                     Sets the line width (in px).
 
@@ -1166,6 +1170,9 @@ class Scatter3d(BaseTraceType):
     @property
     def uid(self):
         """
+        Assign an id to this trace, Use this to provide object
+        constancy between traces during animations and transitions.
+    
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1559,7 +1566,9 @@ class Scatter3d(BaseTraceType):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1780,7 +1789,9 @@ class Scatter3d(BaseTraceType):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1857,8 +1868,8 @@ an instance of plotly.graph_objs.Scatter3d"""
         # ---------------------
         self._validators['connectgaps'] = v_scatter3d.ConnectgapsValidator()
         self._validators['customdata'] = v_scatter3d.CustomdataValidator()
-        self._validators['customdatasrc'
-                        ] = v_scatter3d.CustomdatasrcValidator()
+        self._validators['customdatasrc'] = v_scatter3d.CustomdatasrcValidator(
+        )
         self._validators['error_x'] = v_scatter3d.ErrorXValidator()
         self._validators['error_y'] = v_scatter3d.ErrorYValidator()
         self._validators['error_z'] = v_scatter3d.ErrorZValidator()

@@ -1120,6 +1120,9 @@ class Carpet(BaseTraceType):
     @property
     def uid(self):
         """
+        Assign an id to this trace, Use this to provide object
+        constancy between traces during animations and transitions.
+    
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1428,7 +1431,9 @@ class Carpet(BaseTraceType):
             plotly.graph_objs.carpet.Stream instance or dict with
             compatible properties
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1620,7 +1625,9 @@ class Carpet(BaseTraceType):
             plotly.graph_objs.carpet.Stream instance or dict with
             compatible properties
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well

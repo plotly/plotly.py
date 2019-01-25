@@ -4,6 +4,7 @@ from ._xaxis import XAxis
 from plotly.graph_objs.layout import xaxis
 from ._updatemenu import Updatemenu
 from plotly.graph_objs.layout import updatemenu
+from ._transition import Transition
 from ._title import Title
 from plotly.graph_objs.layout import title
 from ._ternary import Ternary

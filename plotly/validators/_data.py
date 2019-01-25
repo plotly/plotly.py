@@ -22,6 +22,7 @@ class DataValidator(_plotly_utils.basevalidators.BaseDataValidator):
                 'histogram': 'Histogram',
                 'histogram2d': 'Histogram2d',
                 'histogram2dcontour': 'Histogram2dContour',
+                'isosurface': 'Isosurface',
                 'mesh3d': 'Mesh3d',
                 'ohlc': 'Ohlc',
                 'parcats': 'Parcats',

@@ -64,6 +64,9 @@ class Template(BaseLayoutHierarchyType):
                 histogram
                     plotly.graph_objs.layout.template.data.Histogra
                     m instance or dict with compatible properties
+                isosurface
+                    plotly.graph_objs.layout.template.data.Isosurfa
+                    ce instance or dict with compatible properties
                 mesh3d
                     plotly.graph_objs.layout.template.data.Mesh3d
                     instance or dict with compatible properties

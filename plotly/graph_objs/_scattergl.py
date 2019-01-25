@@ -1117,6 +1117,9 @@ class Scattergl(BaseTraceType):
     @property
     def uid(self):
         """
+        Assign an id to this trace, Use this to provide object
+        constancy between traces during animations and transitions.
+    
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1598,7 +1601,9 @@ class Scattergl(BaseTraceType):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1866,7 +1871,9 @@ class Scattergl(BaseTraceType):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1958,8 +1965,8 @@ an instance of plotly.graph_objs.Scattergl"""
         # ---------------------
         self._validators['connectgaps'] = v_scattergl.ConnectgapsValidator()
         self._validators['customdata'] = v_scattergl.CustomdataValidator()
-        self._validators['customdatasrc'
-                        ] = v_scattergl.CustomdatasrcValidator()
+        self._validators['customdatasrc'] = v_scattergl.CustomdatasrcValidator(
+        )
         self._validators['dx'] = v_scattergl.DxValidator()
         self._validators['dy'] = v_scattergl.DyValidator()
         self._validators['error_x'] = v_scattergl.ErrorXValidator()
@@ -1969,8 +1976,8 @@ an instance of plotly.graph_objs.Scattergl"""
         self._validators['hoverinfo'] = v_scattergl.HoverinfoValidator()
         self._validators['hoverinfosrc'] = v_scattergl.HoverinfosrcValidator()
         self._validators['hoverlabel'] = v_scattergl.HoverlabelValidator()
-        self._validators['hovertemplate'
-                        ] = v_scattergl.HovertemplateValidator()
+        self._validators['hovertemplate'] = v_scattergl.HovertemplateValidator(
+        )
         self._validators['hovertemplatesrc'
                         ] = v_scattergl.HovertemplatesrcValidator()
         self._validators['hovertext'] = v_scattergl.HovertextValidator()

@@ -771,6 +771,9 @@ class Heatmapgl(BaseTraceType):
     @property
     def uid(self):
         """
+        Assign an id to this trace, Use this to provide object
+        constancy between traces during animations and transitions.
+    
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1268,7 +1271,9 @@ class Heatmapgl(BaseTraceType):
         transpose
             Transposes the z data.
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1490,7 +1495,9 @@ class Heatmapgl(BaseTraceType):
         transpose
             Transposes the z data.
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1607,8 +1614,8 @@ an instance of plotly.graph_objs.Heatmapgl"""
         self._validators['colorbar'] = v_heatmapgl.ColorBarValidator()
         self._validators['colorscale'] = v_heatmapgl.ColorscaleValidator()
         self._validators['customdata'] = v_heatmapgl.CustomdataValidator()
-        self._validators['customdatasrc'
-                        ] = v_heatmapgl.CustomdatasrcValidator()
+        self._validators['customdatasrc'] = v_heatmapgl.CustomdatasrcValidator(
+        )
         self._validators['dx'] = v_heatmapgl.DxValidator()
         self._validators['dy'] = v_heatmapgl.DyValidator()
         self._validators['hoverinfo'] = v_heatmapgl.HoverinfoValidator()

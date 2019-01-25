@@ -952,6 +952,9 @@ class Histogram(BaseTraceType):
     @property
     def uid(self):
         """
+        Assign an id to this trace, Use this to provide object
+        constancy between traces during animations and transitions.
+    
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1527,7 +1530,9 @@ class Histogram(BaseTraceType):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1790,7 +1795,9 @@ class Histogram(BaseTraceType):
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -1882,8 +1889,8 @@ an instance of plotly.graph_objs.Histogram"""
         self._validators['autobiny'] = v_histogram.AutobinyValidator()
         self._validators['cumulative'] = v_histogram.CumulativeValidator()
         self._validators['customdata'] = v_histogram.CustomdataValidator()
-        self._validators['customdatasrc'
-                        ] = v_histogram.CustomdatasrcValidator()
+        self._validators['customdatasrc'] = v_histogram.CustomdatasrcValidator(
+        )
         self._validators['error_x'] = v_histogram.ErrorXValidator()
         self._validators['error_y'] = v_histogram.ErrorYValidator()
         self._validators['histfunc'] = v_histogram.HistfuncValidator()
@@ -1891,8 +1898,8 @@ an instance of plotly.graph_objs.Histogram"""
         self._validators['hoverinfo'] = v_histogram.HoverinfoValidator()
         self._validators['hoverinfosrc'] = v_histogram.HoverinfosrcValidator()
         self._validators['hoverlabel'] = v_histogram.HoverlabelValidator()
-        self._validators['hovertemplate'
-                        ] = v_histogram.HovertemplateValidator()
+        self._validators['hovertemplate'] = v_histogram.HovertemplateValidator(
+        )
         self._validators['hovertemplatesrc'
                         ] = v_histogram.HovertemplatesrcValidator()
         self._validators['ids'] = v_histogram.IdsValidator()

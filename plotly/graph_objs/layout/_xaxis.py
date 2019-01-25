@@ -935,7 +935,7 @@ class XAxis(BaseLayoutHierarchyType):
                 bordercolor
                     Sets the border color of the range slider.
                 borderwidth
-                    Sets the border color of the range slider.
+                    Sets the border width of the range slider.
                 range
                     Sets the range of the range slider. If not set,
                     defaults to the full xaxis range. If the axis
@@ -3013,8 +3013,8 @@ an instance of plotly.graph_objs.layout.XAxis"""
         self._validators['categoryorder'] = v_xaxis.CategoryorderValidator()
         self._validators['color'] = v_xaxis.ColorValidator()
         self._validators['constrain'] = v_xaxis.ConstrainValidator()
-        self._validators['constraintoward'
-                        ] = v_xaxis.ConstraintowardValidator()
+        self._validators['constraintoward'] = v_xaxis.ConstraintowardValidator(
+        )
         self._validators['dividercolor'] = v_xaxis.DividercolorValidator()
         self._validators['dividerwidth'] = v_xaxis.DividerwidthValidator()
         self._validators['domain'] = v_xaxis.DomainValidator()
@@ -3058,8 +3058,8 @@ an instance of plotly.graph_objs.layout.XAxis"""
         self._validators['tickcolor'] = v_xaxis.TickcolorValidator()
         self._validators['tickfont'] = v_xaxis.TickfontValidator()
         self._validators['tickformat'] = v_xaxis.TickformatValidator()
-        self._validators['tickformatstops'
-                        ] = v_xaxis.TickformatstopsValidator()
+        self._validators['tickformatstops'] = v_xaxis.TickformatstopsValidator(
+        )
         self._validators['tickformatstopdefaults'
                         ] = v_xaxis.TickformatstopValidator()
         self._validators['ticklen'] = v_xaxis.TicklenValidator()

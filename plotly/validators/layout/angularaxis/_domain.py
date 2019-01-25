@@ -17,7 +17,8 @@ class DomainValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                         'min': 0,
                         'max': 1,
                         'editType': 'plot'
-                    }, {
+                    },
+                    {
                         'valType': 'number',
                         'min': 0,
                         'max': 1,

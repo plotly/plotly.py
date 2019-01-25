@@ -1391,6 +1391,9 @@ class Scatter(BaseTraceType):
     @property
     def uid(self):
         """
+        Assign an id to this trace, Use this to provide object
+        constancy between traces during animations and transitions.
+    
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1943,7 +1946,9 @@ class Scatter(BaseTraceType):
         tsrc
             Sets the source reference on plot.ly for  t .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -2294,7 +2299,9 @@ class Scatter(BaseTraceType):
         tsrc
             Sets the source reference on plot.ly for  t .
         uid
-
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
         uirevision
             Controls persistence of some user-driven changes to the
             trace: `constraintrange` in `parcoords` traces, as well
@@ -2416,8 +2423,8 @@ an instance of plotly.graph_objs.Scatter"""
         self._validators['r'] = v_scatter.RValidator()
         self._validators['rsrc'] = v_scatter.RsrcValidator()
         self._validators['selected'] = v_scatter.SelectedValidator()
-        self._validators['selectedpoints'
-                        ] = v_scatter.SelectedpointsValidator()
+        self._validators['selectedpoints'] = v_scatter.SelectedpointsValidator(
+        )
         self._validators['showlegend'] = v_scatter.ShowlegendValidator()
         self._validators['stackgaps'] = v_scatter.StackgapsValidator()
         self._validators['stackgroup'] = v_scatter.StackgroupValidator()
