@@ -18,29 +18,33 @@ from matplotlib.transforms import Affine2D
 from matplotlib import ticker
 
 
-def color_to_hex(color):
-    """Convert matplotlib color code to hex color code"""
+def export_color(color):
+    """Convert matplotlib color code to hex color or RGBA color"""
     if color is None or colorConverter.to_rgba(color)[3] == 0:
         return 'none'
-    else:
+    elif colorConverter.to_rgba(color)[3] == 1:
         rgb = colorConverter.to_rgb(color)
         return '#{0:02X}{1:02X}{2:02X}'.format(*(int(255 * c) for c in rgb))
+    else:
+        c = colorConverter.to_rgba(color)
+        return "rgba(" + ", ".join(str(int(np.round(val * 255)))
+                                        for val in c[:3])+', '+str(c[3])+")"
 
 
-def many_to_one(input_dict):
+def _many_to_one(input_dict):
     """Convert a many-to-one mapping to a one-to-one mapping"""
     return dict((key, val)
                 for keys, val in input_dict.items()
                 for key in keys)
 
-LINESTYLES = many_to_one({('solid', '-', (None, None)): "10,0",
-                          ('dashed', '--'): "6,6",
-                          ('dotted', ':'): "2,2",
-                          ('dashdot', '-.'): "4,4,2,4",
-                          ('', ' ', 'None', 'none'): "none"})
+LINESTYLES = _many_to_one({('solid', '-', (None, None)): 'none',
+                           ('dashed', '--'): "6,6",
+                           ('dotted', ':'): "2,2",
+                           ('dashdot', '-.'): "4,4,2,4",
+                           ('', ' ', 'None', 'none'): None})
 
 
-def get_dasharray(obj, i=None):
+def get_dasharray(obj):
     """Get an SVG dash array for the given matplotlib linestyle
 
     Parameters
@@ -48,7 +52,6 @@ def get_dasharray(obj, i=None):
     obj : matplotlib object
         The matplotlib line or path object, which must have a get_linestyle()
         method which returns a valid matplotlib line code
-    i : integer (optional)
 
     Returns
     -------
@@ -59,14 +62,11 @@ def get_dasharray(obj, i=None):
         return ','.join(map(str, obj._dashSeq))
     else:
         ls = obj.get_linestyle()
-        if i is not None:
-            ls = ls[i]
-
-        dasharray = LINESTYLES.get(ls, None)
-        if dasharray is None:
-            warnings.warn("dash style '{0}' not understood: "
-                          "defaulting to solid.".format(ls))
-            dasharray = LINESTYLES['-']
+        dasharray = LINESTYLES.get(ls, 'not found')
+        if dasharray == 'not found':
+            warnings.warn("line style '{0}' not understood: "
+                          "defaulting to solid line.".format(ls))
+            dasharray = LINESTYLES['solid']
         return dasharray
 
 
@@ -121,9 +121,9 @@ def get_path_style(path, fill=True):
     style['alpha'] = path.get_alpha()
     if style['alpha'] is None:
         style['alpha'] = 1
-    style['edgecolor'] = color_to_hex(path.get_edgecolor())
+    style['edgecolor'] = export_color(path.get_edgecolor())
     if fill:
-        style['facecolor'] = color_to_hex(path.get_facecolor())
+        style['facecolor'] = export_color(path.get_facecolor())
     else:
         style['facecolor'] = 'none'
     style['edgewidth'] = path.get_linewidth()
@@ -138,10 +138,11 @@ def get_line_style(line):
     style['alpha'] = line.get_alpha()
     if style['alpha'] is None:
         style['alpha'] = 1
-    style['color'] = color_to_hex(line.get_color())
+    style['color'] = export_color(line.get_color())
     style['linewidth'] = line.get_linewidth()
     style['dasharray'] = get_dasharray(line)
     style['zorder'] = line.get_zorder()
+    style['drawstyle'] = line.get_drawstyle()
     return style
 
 
@@ -152,8 +153,8 @@ def get_marker_style(line):
     if style['alpha'] is None:
         style['alpha'] = 1
 
-    style['facecolor'] = color_to_hex(line.get_markerfacecolor())
-    style['edgecolor'] = color_to_hex(line.get_markeredgecolor())
+    style['facecolor'] = export_color(line.get_markerfacecolor())
+    style['edgecolor'] = export_color(line.get_markeredgecolor())
     style['edgewidth'] = line.get_markeredgewidth()
 
     style['marker'] = line.get_marker()
@@ -175,9 +176,10 @@ def get_text_style(text):
     if style['alpha'] is None:
         style['alpha'] = 1
     style['fontsize'] = text.get_size()
-    style['color'] = color_to_hex(text.get_color())
+    style['color'] = export_color(text.get_color())
     style['halign'] = text.get_horizontalalignment()  # left, center, right
     style['valign'] = text.get_verticalalignment()  # baseline, center, top
+    style['malign'] = text._multialignment # text alignment when '\n' in text
     style['rotation'] = text.get_rotation()
     style['zorder'] = text.get_zorder()
     return style
@@ -213,6 +215,8 @@ def get_axis_properties(axis):
     formatter = axis.get_major_formatter()
     if isinstance(formatter, ticker.NullFormatter):
         props['tickformat'] = ""
+    elif isinstance(formatter, ticker.FixedFormatter):
+        props['tickformat'] = list(formatter.seq)
     elif not any(label.get_visible() for label in axis.get_ticklabels()):
         props['tickformat'] = ""
     else:
@@ -231,13 +235,16 @@ def get_axis_properties(axis):
     # Get associated grid
     props['grid'] = get_grid_style(axis)
 
+    # get axis visibility
+    props['visible'] = axis.get_visible()
+
     return props
 
 
 def get_grid_style(axis):
     gridlines = axis.get_gridlines()
     if axis._gridOnMajor and len(gridlines) > 0:
-        color = color_to_hex(gridlines[0].get_color())
+        color = export_color(gridlines[0].get_color())
         alpha = gridlines[0].get_alpha()
         dasharray = get_dasharray(gridlines[0])
         return dict(gridOn=True,
@@ -245,7 +252,7 @@ def get_grid_style(axis):
                     dasharray=dasharray,
                     alpha=alpha)
     else:
-        return {"gridOn":False}
+        return {"gridOn": False}
 
 
 def get_figure_properties(fig):
@@ -255,12 +262,13 @@ def get_figure_properties(fig):
 
 
 def get_axes_properties(ax):
-    props = {'axesbg': color_to_hex(ax.patch.get_facecolor()),
+    props = {'axesbg': export_color(ax.patch.get_facecolor()),
              'axesbgalpha': ax.patch.get_alpha(),
              'bounds': ax.get_position().bounds,
              'dynamic': ax.get_navigate(),
              'axison': ax.axison,
              'frame_on': ax.get_frame_on(),
+             'patch_visible':ax.patch.get_visible(),
              'axes': [get_axis_properties(ax.xaxis),
                       get_axis_properties(ax.yaxis)]}
 
@@ -293,7 +301,7 @@ def get_axes_properties(ax):
 
         if scale not in ['date', 'linear', 'log']:
             raise ValueError("Unknown axis scale: "
-                             "{0}".format(axis[axname].get_scale()))
+                             "{0}".format(axis.get_scale()))
 
         props[axname + 'scale'] = scale
         props[axname + 'lim'] = lim
@@ -324,7 +332,7 @@ def get_legend_properties(ax, legend):
     handles, labels = ax.get_legend_handles_labels()
     visible = legend.get_visible()
     return {'handles': handles, 'labels': labels, 'visible': visible}
-    
+
 
 def image_to_base64(image):
     """
