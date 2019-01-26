@@ -773,7 +773,7 @@ class TestAnnotatedHeatmap(TestCase, NumpyTestUtilsMixin):
                                         'xref': 'x',
                                         'y': 0,
                                         'yref': 'y'},
-                                       {'font': {'color': '#FFFFFF'},
+                                       {'font': {'color': '#000000'},
                                         'showarrow': False,
                                         'text': '0.5',
                                         'x': 2,
@@ -872,7 +872,7 @@ class TestAnnotatedHeatmap(TestCase, NumpyTestUtilsMixin):
                                   'xref': 'x',
                                   'y': 'Three',
                                   'yref': 'y'},
-                                 {'font': {'color': '#000000'},
+                                 {'font': {'color': '#FFFFFF'},
                                   'showarrow': False,
                                   'text': 'sixth',
                                   'x': 'B',
@@ -951,7 +951,7 @@ class TestAnnotatedHeatmap(TestCase, NumpyTestUtilsMixin):
                            'xref': 'x',
                            'y': 'Three',
                            'yref': 'y'},
-                          {'font': {'color': '#FFFFFF'},
+                          {'font': {'color': '#000000'},
                            'showarrow': False,
                            'text': 'sixth',
                            'x': 'B',
@@ -971,6 +971,91 @@ class TestAnnotatedHeatmap(TestCase, NumpyTestUtilsMixin):
 
         self.assert_fig_equal(a['layout'],
                               expected_a['layout'])
+
+    def test_bug_1300(self):
+        # https://github.com/plotly/plotly.py/issues/1300
+        sub_z = [
+            [0.1, 0.0, 0.0],
+            [0.0, 1.0, 0.1]]
+
+        # sub_z = sub_z.tolist()
+
+        # Standard scale direction
+        fig = ff.create_annotated_heatmap(
+            sub_z, colorscale='Greens', showscale=True, reversescale=True)
+
+        expected = graph_objs.Figure({
+            'data': [{'colorscale': 'Greens',
+                      'reversescale': True,
+                      'showscale': True,
+                      'type': 'heatmap',
+                      'uid': 'baeae9f0-d650-4507-99ba-97226bb8fe6c',
+                      'z': [[0.1, 0., 0.],
+                            [0.,  1., 0.1]]}],
+            'layout': {
+                'annotations': [
+                    {'font': {'color': '#000000'},
+                     'showarrow': False,
+                     'text': '0.1',
+                     'x': 0,
+                     'xref': 'x',
+                     'y': 0,
+                     'yref': 'y'},
+                    {'font': {'color': '#000000'},
+                     'showarrow': False,
+                     'text': '0.0',
+                     'x': 1,
+                     'xref': 'x',
+                     'y': 0,
+                     'yref': 'y'},
+                    {'font': {'color': '#000000'},
+                     'showarrow': False,
+                     'text': '0.0',
+                     'x': 2,
+                     'xref': 'x',
+                     'y': 0,
+                     'yref': 'y'},
+                    {'font': {'color': '#000000'},
+                     'showarrow': False,
+                     'text': '0.0',
+                     'x': 0,
+                     'xref': 'x',
+                     'y': 1,
+                     'yref': 'y'},
+                    {'font': {'color': '#FFFFFF'},
+                     'showarrow': False,
+                     'text': '1.0',
+                     'x': 1,
+                     'xref': 'x',
+                     'y': 1,
+                     'yref': 'y'},
+                    {'font': {'color': '#000000'},
+                     'showarrow': False,
+                     'text': '0.1',
+                     'x': 2,
+                     'xref': 'x',
+                     'y': 1,
+                     'yref': 'y'}
+                ],
+                'xaxis': {
+                    'gridcolor': 'rgb(0, 0, 0)',
+                    'showticklabels': False,
+                    'side': 'top',
+                    'ticks': ''},
+                'yaxis': {
+                    'showticklabels': False,
+                    'ticks': '',
+                    'ticksuffix': '  '}}
+        })
+
+        # Remove uids
+        for trace in fig.data:
+            trace.update(uid=None)
+        for trace in expected.data:
+            trace.update(uid=None)
+
+        # Perform comparison
+        self.assert_fig_equal(fig, expected)
 
 
 class TestTable(TestCase, NumpyTestUtilsMixin):
