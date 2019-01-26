@@ -59,6 +59,14 @@ class TestBackwardsCompat(TestCase):
             self.assertEqual(obj.to_plotly_json(),
                              {'title': {'text': 'A title 2'}})
 
+            # Update titlefont
+            obj.update(titlefont={'size': 23})
+            self.assertEqual(obj.title.font.size, 23)
+            self.assertEqual(obj.to_plotly_json(),
+                             {'title':
+                                  {'text': 'A title 2',
+                                   'font': {'size': 23}}})
+
         # Pie
         obj = go.Pie()
         obj.title = 'A title'
@@ -66,6 +74,22 @@ class TestBackwardsCompat(TestCase):
         self.assertEqual(obj.to_plotly_json(),
                          {'title': {'text': 'A title'},
                           'type': 'pie'})
+
+        # And update
+        obj.update(title='A title 2')
+        self.assertEqual(obj.title.text, 'A title 2')
+        self.assertEqual(obj.to_plotly_json(),
+                         {'type': 'pie',
+                          'title': {'text': 'A title 2'}})
+
+        # Update titlefont
+        obj.update(titlefont={'size': 23})
+        self.assertEqual(obj.title.font.size, 23)
+        self.assertEqual(obj.to_plotly_json(),
+                         {'type': 'pie',
+                          'title':
+                              {'text': 'A title 2',
+                               'font': {'size': 23}}})
 
     def test_legacy_title_props_remapped(self):
 
