@@ -13,10 +13,6 @@ from plotly import optional_imports
 matplotlylib = optional_imports.get_module('plotly.matplotlylib')
 
 if matplotlylib:
-    import matplotlib
-
-    # Force matplotlib to not use any Xwindows backend.
-    matplotlib.use('Agg')
     from matplotlib.dates import date2num
     import matplotlib.pyplot as plt
 
