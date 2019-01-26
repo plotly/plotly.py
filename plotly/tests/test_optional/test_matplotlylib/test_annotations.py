@@ -7,9 +7,6 @@ from plotly import optional_imports
 matplotlylib = optional_imports.get_module('plotly.matplotlylib')
 
 if matplotlylib:
-    import matplotlib
-    # Force matplotlib to not use any Xwindows backend.
-    matplotlib.use('Agg')
     import matplotlib.pyplot as plt
 
     from plotly.tests.utils import compare_dict, strip_dict_params

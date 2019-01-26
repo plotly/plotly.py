@@ -10,7 +10,7 @@ from . import utils
 
 import matplotlib
 from matplotlib import transforms, collections
-
+from matplotlib.backends.backend_agg import FigureCanvasAgg
 
 class Exporter(object):
     """Matplotlib Exporter
@@ -42,6 +42,8 @@ class Exporter(object):
         """
         # Calling savefig executes the draw() command, putting elements
         # in the correct place.
+        if fig.canvas is None:
+            canvas = FigureCanvasAgg(fig)
         fig.savefig(io.BytesIO(), format='png', dpi=fig.dpi)
         if self.close_mpl:
             import matplotlib.pyplot as plt
@@ -157,13 +159,16 @@ class Exporter(object):
             # force a large zorder so it appears on top
             child.set_zorder(1E6 + child.get_zorder())
 
+            # reorder border box to make sure marks are visible
+            if isinstance(child, matplotlib.patches.FancyBboxPatch):
+                child.set_zorder(child.get_zorder()-1)
+
             try:
                 # What kind of object...
                 if isinstance(child, matplotlib.patches.Patch):
                     self.draw_patch(ax, child, force_trans=ax.transAxes)
                 elif isinstance(child, matplotlib.text.Text):
-                    if not (child is legend.get_children()[-1]
-                            and child.get_text() == 'None'):
+                    if child.get_text() != 'None':
                         self.draw_text(ax, child, force_trans=ax.transAxes)
                 elif isinstance(child, matplotlib.lines.Line2D):
                     self.draw_line(ax, child, force_trans=ax.transAxes)
@@ -181,7 +186,8 @@ class Exporter(object):
                                                    ax, line.get_xydata(),
                                                    force_trans=force_trans)
         linestyle = utils.get_line_style(line)
-        if linestyle['dasharray'] in ['None', 'none', None]:
+        if (linestyle['dasharray'] is None
+                and linestyle['drawstyle'] == 'default'):
             linestyle = None
         markerstyle = utils.get_marker_style(line)
         if (markerstyle['marker'] in ['None', 'none', None]

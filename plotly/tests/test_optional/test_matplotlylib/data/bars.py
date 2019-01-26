@@ -155,7 +155,7 @@ H_AND_V_BARS = go.Figure(
                 line=dict(
                     width=1.0
                 ),
-                color='#008000'
+                color='rgba(0, 128, 0, 0.5)'
             ),
             opacity=0.5,
             xaxis='x1',
@@ -169,7 +169,7 @@ H_AND_V_BARS = go.Figure(
                 line=dict(
                     width=1.0
                 ),
-                color='#FF0000'
+                color='rgba(255, 0, 0, 0.5)'
             ),
             opacity=0.5,
             xaxis='x1',

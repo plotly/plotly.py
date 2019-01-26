@@ -1,8 +1,10 @@
 import warnings
 import itertools
 from contextlib import contextmanager
+from distutils.version import LooseVersion
 
 import numpy as np
+import matplotlib as mpl
 from matplotlib import transforms
 
 from .. import utils
@@ -189,8 +191,11 @@ class Renderer(object):
         """Build an iterator over the elements of the path collection"""
         N = max(len(paths), len(offsets))
 
-        if not path_transforms:
-            path_transforms = [np.eye(3)]
+        # Before mpl 1.4.0, path_transform can be a false-y value, not a valid
+        # transformation matrix.
+        if LooseVersion(mpl.__version__) < LooseVersion('1.4.0'):
+            if path_transforms is None:
+                path_transforms = [np.eye(3)]
 
         edgecolor = styles['edgecolor']
         if np.size(edgecolor) == 0:
@@ -260,8 +265,8 @@ class Renderer(object):
             # This is a hack:
             if path_coordinates == "figure":
                 path_coordinates = "points"
-            style = {"edgecolor": utils.color_to_hex(ec),
-                     "facecolor": utils.color_to_hex(fc),
+            style = {"edgecolor": utils.export_color(ec),
+                     "facecolor": utils.export_color(fc),
                      "edgewidth": lw,
                      "dasharray": "10,0",
                      "alpha": styles['alpha'],

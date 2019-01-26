@@ -9,10 +9,6 @@ from plotly.tests.test_optional.test_matplotlylib.data.data import *
 matplotlylib = optional_imports.get_module('plotly.matplotlylib')
 
 if matplotlylib:
-    import matplotlib
-
-    # Force matplotlib to not use any Xwindows backend.
-    matplotlib.use('Agg')
     import matplotlib.pyplot as plt
 
 
