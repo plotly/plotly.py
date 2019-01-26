@@ -238,20 +238,23 @@ plotly_diverging = [
         [1, '#276419'],
 ]
 
-
-def plotly():
-    # Define colors
-    # -------------
-    colorscale = linear_bmw_5_95_c86_n256
-
-    colorway = [
+plotly_colorway = [
         plotly_clrs['Cornflower'],
         plotly_clrs['Sienna'],
         plotly_clrs['Emerald'],
         plotly_clrs['Lavender Shade'],
         plotly_clrs['Aqua Shade'],
-        plotly_clrs['Lavender']
-    ]
+        plotly_clrs['Lavender'],
+        '#FECB52',
+        '#FFA15A',
+        '#FF6692',
+        '#B6E880'
+]
+
+def plotly():
+    # Define colors
+    # -------------
+    colorscale = linear_bmw_5_95_c86_n256
 
     # Set colorbar_common
     colorbar_common = dict(
@@ -289,7 +292,7 @@ def plotly():
         table_cell_clr=plotly_clrs['Rhino Light 2'],
         table_header_clr=plotly_clrs['Rhino Medium 2'],
         table_line_clr='white',
-        colorway=colorway,
+        colorway=plotly_colorway,
         colorbar_common=colorbar_common,
         colorscale=colorscale,
         colorscale_diverging=plotly_diverging,
@@ -310,6 +313,9 @@ def plotly():
     template.layout.xaxis.zerolinewidth = 2
     template.layout.yaxis.zerolinewidth = 2
 
+    # Mapbox light style
+    template.layout.mapbox.style = 'light'
+
     # Set table header font color to white
     return template
 
@@ -321,15 +327,6 @@ def plotly_white():
     # Define colors
     # -------------
     colorscale = linear_bmw_5_95_c86_n256
-
-    colorway = [
-        plotly_clrs['Cornflower'],
-        plotly_clrs['Sienna'],
-        plotly_clrs['Emerald'],
-        plotly_clrs['Lavender Shade'],
-        plotly_clrs['Aqua Shade'],
-        plotly_clrs['Lavender']
-    ]
 
     # Set colorbar_common
     colorbar_common = dict(
@@ -367,7 +364,7 @@ def plotly_white():
         table_cell_clr=plotly_clrs['Rhino Light 2'],
         table_header_clr=plotly_clrs['Rhino Medium 2'],
         table_line_clr='white',
-        colorway=colorway,
+        colorway=plotly_colorway,
         colorbar_common=colorbar_common,
         colorscale=colorscale,
         colorscale_diverging=plotly_diverging,
@@ -396,6 +393,9 @@ def plotly_white():
     template.layout.xaxis.zerolinewidth = 2
     template.layout.yaxis.zerolinewidth = 2
 
+    # Mapbox light style
+    template.layout.mapbox.style = 'light'
+
     # Set table header font color to white
     return template
 
@@ -407,15 +407,6 @@ def plotly_dark():
     # Define colors
     # -------------
     colorscale = linear_bmw_5_95_c86_n256
-
-    colorway = [
-        plotly_clrs['Cornflower'],
-        plotly_clrs['Sienna'],
-        plotly_clrs['Emerald'],
-        plotly_clrs['Lavender Shade'],
-        plotly_clrs['Aqua Shade'],
-        plotly_clrs['Lavender']
-    ]
 
     # Set colorbar_common
     colorbar_common = dict(
@@ -453,7 +444,7 @@ def plotly_dark():
         table_cell_clr=plotly_clrs['Rhino Dark'],
         table_header_clr=plotly_clrs['Rhino Core'],
         table_line_clr=jupyterlab_output_clr,
-        colorway=colorway,
+        colorway=plotly_colorway,
         colorbar_common=colorbar_common,
         colorscale=colorscale,
         colorscale_diverging=plotly_diverging,
@@ -489,6 +480,9 @@ def plotly_dark():
     template.layout.yaxis.zerolinecolor = plotly_clrs['Rhino Darker']
     template.layout.xaxis.zerolinewidth = 2
     template.layout.yaxis.zerolinewidth = 2
+
+    # Mapbox light style
+    template.layout.mapbox.style = 'dark'
 
     # Set marker outline color
     opts = {'marker': {'line': {'color': plotly_clrs['Rhino Darker']}}}
