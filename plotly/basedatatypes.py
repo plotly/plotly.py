@@ -2619,7 +2619,19 @@ class BasePlotlyType(object):
         -------
         BaseValidator
         """
-        return self._validators[prop]
+
+        # Handle remapping
+        # ----------------
+        if prop in self._mapped_properties:
+            prop_path = self._mapped_properties[prop]
+            plotly_obj = self[prop_path[:-1]]
+            prop = prop_path[-1]
+        else:
+            plotly_obj = self
+
+        # Return validator
+        # ----------------
+        return plotly_obj._validators[prop]
 
     @property
     def parent(self):
