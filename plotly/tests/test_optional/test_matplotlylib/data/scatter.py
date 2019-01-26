@@ -143,7 +143,7 @@ DOUBLE_SCATTER = go.Figure(
         ),
         yaxis1=go.layout.YAxis(
             domain=[0.0, 1.0],
-            range=[-1.588616071428572, 9.5198093820861693],
+            range=[-1.5886160714285715, 9.5198093820861693],
             type='linear',
             showline=True,
             ticks='inside',
