@@ -2858,6 +2858,7 @@ class TestChoropleth(NumpyTestUtilsMixin, TestCase):
 
             self.assertEqual(fig['data'][2]['x'][:50], exp_fig_head)
 
+
 class TestQuiver(TestCase):
 
     def test_scaleratio_param(self):
@@ -2897,3 +2898,16 @@ class TestQuiver(TestCase):
         self.assertEqual(fig_head, exp_fig_head)
 
 
+class TestTernarycontour(NumpyTestUtilsMixin, TestCase):
+
+
+    def test_simple_ternary_contour(self):
+        a, b = np.mgrid[0:1:20j, 0:1:20j]
+        a = a.ravel()
+        b = b.ravel()
+        c = 1 - a - b
+        z = a * b * c
+        fig = ff.create_ternarycontour(np.stack((a, b, c)), z)
+        fig2 = ff.create_ternarycontour(np.stack((a, b)), z)
+        np.testing.assert_array_equal(fig2['data'][0]['z'],
+                                      fig['data'][0]['z'])
