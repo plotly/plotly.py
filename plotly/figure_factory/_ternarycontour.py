@@ -22,10 +22,10 @@ def _pl_deep():
 def _transform_barycentric_cartesian():
     """
     Returns the transformation matrix from barycentric to cartesian
-    coordinates and conversely
+    coordinates and conversely.
     """
     # reference triangle
-    tri_verts = np.array([[0.5, np.sqrt(3)/2], [0, 0], [1, 0]])
+    tri_verts = np.array([[0.5, np.sqrt(3) / 2], [0, 0], [1, 0]])
     M = np.array([tri_verts[:, 0], tri_verts[:, 1], np.ones(3)])
     return M, np.linalg.inv(M)
 
@@ -37,8 +37,43 @@ def _contour_trace(x, y, z, tooltip, colorscale='Viridis',
                    fontsize=12):
     """
     Contour trace in Cartesian coordinates.
+
+    Parameters
+    ==========
+
+    x, y : array-like
+        Cartesian coordinates
+    z : array-like
+        Field to be represented as contours.
+    tooltip : list of str
+        Annotations to show on hover.
+    colorscale : str o array, optional
+        Colorscale to use for contours
+    reversescale : bool
+        Reverses the color mapping if true. If true, `zmin`
+        will correspond to the last color in the array and
+        `zmax` will correspond to the first color.
+    showscale : bool
+        If True, a colorbar showing the color scale is displayed.
+    linewidth : int
+        Line width of contours
+    linecolor : color string
+        Color on contours
+    smoothing : bool
+        If True, contours are smoothed.
+    coloring : None or 'lines'
+        How to display contour. Filled contours if None, lines if ``lines``.
+    showlabels : bool, default False
+        For line contours (coloring='lines'), the value of the contour is
+        displayed if showlabels is True.
+    colorscale : None or array-like
+        Colorscale of the contours.
+    fontcolor : color str
+        Color of contour labels.
+    fontsize : int
+        Font size of contour labels.
     """
-    if showlabels and coloring is not 'lines':
+    if showlabels and (coloring is not 'lines'):
         msg = """`showlabels` was set to True, but labels can only be
                  displayed for `coloring='lines'`"""
         warnings.warn(msg)
@@ -66,9 +101,13 @@ def _contour_trace(x, y, z, tooltip, colorscale='Viridis',
 
 def barycentric_ticks(side):
     """
-    side 0, 1 or  2; side j has 0 in the  j^th position of barycentric
-    coords of tick origin
-    returns the list of tick origin barycentric coords
+    Barycentric coordinates of ticks locations.
+
+    Parameters
+    ==========
+    side : 0, 1 or  2
+        side j has 0 in the  j^th position of barycentric coords of tick
+        origin.
     """
     p = 10
     if side == 0:  # where a=0
@@ -77,65 +116,106 @@ def barycentric_ticks(side):
         return np.array([(i/p, 0, 1-i/p) for i in range(2, p, 2)])
     elif side == 2:  # c=0
         return (np.array([(i/p, j/p, 0)
-                        for i in range(p-2, 0, -2)
-                        for j in range(p-i, -1, -1) if i+j == p]))
+                          for i in range(p - 2, 0, -2)
+                          for j in range(p - i, -1, -1) if i + j == p]))
     else:
         raise ValueError('The side can be only 0, 1, 2')
 
 
-def _cart_coord_ticks(t=0.01):
+def _side_coord_ticks(side, t=0.01):
     """
-    side 0, 1 or 2
-    each tick segment is parameterized as (x(s), y(s)), s in [0, t]
-    M is the transformation matrix from barycentric to cartesian coords
-    xt, yt are the lists of x, resp y-coords of tick segments
-    posx, posy are the lists of ticklabel positions for side 0, 1, 2 
-    (concatenated)
+    Cartesian coordinates of ticks loactions for one side (0, 1, 2) 
+    of ternary diagram.
+
+    Parameters
+    ==========
+
+    side : int, 0, 1 or 2
+        Index of side
+    t : float, default 0.01
+        Length of tick
+
+    Returns
+    =======
+    xt, yt : lists
+        Lists of x, resp y-coords of tick segments
+    posx, posy : lists
+        Lists of ticklabel positions
     """
     M, invM = _transform_barycentric_cartesian()
+    baryc = barycentric_ticks(side)
+    xy1 = np.dot(M, baryc.T)
+    xs, ys = xy1[:2]
     x_ticks, y_ticks, posx, posy = [], [], [], []
-    # Side 0 
-    baryc = barycentric_ticks(0)
-    xy1 = np.dot(M, baryc.T)
-    xs, ys = xy1[:2]
-    for i in range(4):
-        x_ticks.extend([xs[i], xs[i]+t, None])
-        y_ticks.extend([ys[i], ys[i]-np.sqrt(3)*t, None])
-    posx.extend([xs[i]+t for i in range(4)])
-    posy.extend([ys[i]-np.sqrt(3)*t for i in range(4)])
-    # Side 1
-    baryc = barycentric_ticks(1)
-    xy1 = np.dot(M, baryc.T)
-    xs, ys = xy1[:2]
-    for i in range(4):
-        x_ticks.extend([xs[i], xs[i]+t, None])
-        y_ticks.extend([ys[i], ys[i]+np.sqrt(3)*t, None])
-    posx.extend([xs[i]+t for i in range(4)])
-    posy.extend([ys[i]+np.sqrt(3)*t for i in range(4)])
-    # Side 2
-    baryc = barycentric_ticks(2)
-    xy1 = np.dot(M, baryc.T)
-    xs, ys = xy1[:2]
-    for i in range(4):
-        x_ticks.extend([xs[i], xs[i]-2*t, None])
-        y_ticks.extend([ys[i], ys[i], None])
-    posx.extend([xs[i]-2*t for i in range(4)])
-    posy.extend([ys[i] for i in range(4)])
+    if side == 0:
+        for i in range(4):
+            x_ticks.extend([xs[i], xs[i]+t, None])
+            y_ticks.extend([ys[i], ys[i]-np.sqrt(3)*t, None])
+        posx.extend([xs[i]+t for i in range(4)])
+        posy.extend([ys[i]-np.sqrt(3)*t for i in range(4)])
+    elif side == 1:
+        for i in range(4):
+            x_ticks.extend([xs[i], xs[i]+t, None])
+            y_ticks.extend([ys[i], ys[i]+np.sqrt(3)*t, None])
+        posx.extend([xs[i]+t for i in range(4)])
+        posy.extend([ys[i]+np.sqrt(3)*t for i in range(4)])
+    elif side == 2:
+        for i in range(4):
+            x_ticks.extend([xs[i], xs[i]-2*t, None])
+            y_ticks.extend([ys[i], ys[i], None])
+        posx.extend([xs[i]-2*t for i in range(4)])
+        posy.extend([ys[i] for i in range(4)])
+    else:
+        raise ValueError('Side can be only 0, 1, 2')
     return x_ticks, y_ticks, posx, posy
 
 
-def _set_ticklabels(annotations, posx, posy, proportion=True):
+def _cart_coord_ticks(t=0.01):
     """
-    annotations: list of annotations previously defined in layout definition
-    as a dict, not as an instance of go.Layout
-    posx, posy:  lists containing ticklabel position coordinates
-    proportion - boolean; True when ticklabels are 0.2, 0.4, ...
-    False when they are 20%, 40%...
+    Cartesian coordinates of ticks loactions.
+
+    Parameters
+    ==========
+
+    t : float, default 0.01
+        Length of tick
+
+    Returns
+    =======
+    xt, yt : lists
+        Lists of x, resp y-coords of tick segments (all sides concatenated).
+    posx, posy : lists
+        Lists of ticklabel positions (all sides concatenated).
+    """
+    x_ticks, y_ticks, posx, posy = [], [], [], []
+    for side in range(3):
+        xt, yt, px, py = _side_coord_ticks(side, t)
+        x_ticks.extend(xt)
+        y_ticks.extend(yt)
+        posx.extend(px)
+        posy.extend(py)
+    return x_ticks, y_ticks, posx, posy
+
+
+def _set_ticklabels(annotations, posx, posy, proportions=True):
+    """
+
+    Parameters
+    ==========
+
+    annotations : list
+        List of annotations previously defined in layout definition
+        as a dict, not as an instance of go.Layout.
+    posx, posy:  lists
+        Lists containing ticklabel position coordinates
+    proportions : bool
+        True when ticklabels are 0.2, 0.4, ... False when they are
+        20%, 40%...
     """
     if not isinstance(annotations, list):
         raise ValueError('annotations should be a list')
 
-    ticklabel = [0.8, 0.6, 0.4, 0.2] if proportion \
+    ticklabel = [0.8, 0.6, 0.4, 0.2] if proportions \
                                      else ['80%', '60%', '40%', '20%']
 
     # Annotations for ticklabels on side 0
@@ -171,7 +251,17 @@ def _set_ticklabels(annotations, posx, posy, proportion=True):
 
 
 def _styling_traces_ternary(x_ticks, y_ticks):
-    # Outer triangle
+    """
+    Traces for outer triangle of ternary plot, and corresponding ticks.
+
+    Parameters
+    ==========
+
+    x_ticks : array_like, 1D
+        x Cartesian coordinate of ticks
+    y_ticks : array_like, 1D
+        y Cartesian coordinate of ticks
+    """
     side_trace = dict(type='scatter',
                       x=[0.5, 0, 1, 0.5],
                       y=[np.sqrt(3)/2, 0, 0, np.sqrt(3)/2],
@@ -190,11 +280,34 @@ def _styling_traces_ternary(x_ticks, y_ticks):
 
 
 def _ternary_layout(title='Ternary contour plot', width=550, height=525,
-                   fontfamily='Balto, sans-serif', lfontsize=14,
-                   plot_bgcolor='rgb(240,240,240)',
-                   pole_labels=['a', 'b', 'c'], v_fontsize=14):
+                    fontfamily='Balto, sans-serif', colorbar_fontsize=14,
+                    plot_bgcolor='rgb(240,240,240)',
+                    pole_labels=['a', 'b', 'c'], label_fontsize=16):
+    """
+    Layout of ternary contour plot, to be passed to ``go.FigureWidget``
+    object.
+
+    Parameters
+    ==========
+    title : str or None
+        Title of ternary plot
+    width : int
+        Figure width.
+    height : int
+        Figure height.
+    fontfamily : str
+        Family of fonts
+    colorbar_fontsize : int
+        Font size of colorbar.
+    plot_bgcolor :
+        color of figure background
+    pole_labels : str, default ['a', 'b', 'c']
+        Names of the three poles of the triangle.
+    label_fontsize : int
+        Font size of pole labels.
+    """
     return dict(title=title,
-                font=dict(family=fontfamily, size=lfontsize),
+                font=dict(family=fontfamily, size=colorbar_fontsize),
                 width=width, height=height,
                 xaxis=dict(visible=False),
                 yaxis=dict(visible=False),
@@ -208,7 +321,7 @@ def _ternary_layout(title='Ternary contour plot', width=550, height=525,
                                   align='center',
                                   xanchor='center',
                                   yanchor='bottom',
-                                  font=dict(size=v_fontsize)),
+                                  font=dict(size=label_fontsize)),
                              dict(showarrow=False,
                                   text=pole_labels[1],
                                   x=0,
@@ -216,7 +329,7 @@ def _ternary_layout(title='Ternary contour plot', width=550, height=525,
                                   align='left',
                                   xanchor='right',
                                   yanchor='top',
-                                  font=dict(size=v_fontsize)),
+                                  font=dict(size=label_fontsize)),
                              dict(showarrow=False,
                                   text=pole_labels[2],
                                   x=1,
@@ -224,11 +337,29 @@ def _ternary_layout(title='Ternary contour plot', width=550, height=525,
                                   align='right',
                                   xanchor='left',
                                   yanchor='top',
-                                  font=dict(size=v_fontsize))
+                                  font=dict(size=label_fontsize))
                              ])
 
 
 def _tooltip(N, bar_coords, grid_z, xy1, mode='proportions'):
+    """
+    Tooltip annotations to be displayed on hover.
+
+    Parameters
+    ==========
+
+    N : int
+        Number of annotations along each axis.
+    bar_coords : array-like
+        Barycentric coordinates.
+    grid_z : array
+        Values (e.g. elevation values) at barycentric coordinates.
+    xy1 : array-like
+        Cartesian coordinates.
+    mode : str, 'proportions' or 'percents'
+        Coordinates inside the ternary plot can be displayed either as
+        proportions (adding up to 1) or as percents (adding up to 100).
+    """
     if mode == 'proportions':
         tooltip = [
         ['a: %.2f' % round(bar_coords[0][i, j], 2) +
@@ -255,7 +386,7 @@ def _tooltip(N, bar_coords, grid_z, xy1, mode='proportions'):
 
 def _prepare_barycentric_coord(b_coords):
     """
-    check ternary data and return the right barycentric coordinates
+    Check ternary coordinates and return the right barycentric coordinates.
     """
     if not isinstance(b_coords, (list, np.ndarray)):
         raise ValueError('Data  should be either an array of shape (n,m), or a list of n m-lists, m=2 or 3')
@@ -272,6 +403,21 @@ def _prepare_barycentric_coord(b_coords):
 
 
 def _compute_grid(coordinates, values, tooltip_mode):
+    """
+    Compute interpolation of data points on regular grid in Cartesian
+    coordinates.
+
+    Parameters
+    ==========
+
+    coordinates : array-like
+        Barycentric coordinates of data points.
+    values : 1-d array-like
+        Data points, field to be represented as contours.
+    tooltip_mode : str, 'proportions' or 'percents'
+        Coordinates inside the ternary plot can be displayed either as
+        proportions (adding up to 1) or as percents (adding up to 100).
+    """
     A, B, C = _prepare_barycentric_coord(coordinates)
     M, invM = _transform_barycentric_cartesian()
     cartes_coord_points = np.einsum('ik, kj -> ij', M, np.stack((A, B, C)))
@@ -312,9 +458,9 @@ def create_ternarycontour(coordinates, values, pole_labels=['a', 'b', 'c'],
 
     coordinates : list or ndarray
         Barycentric coordinates of shape (2, N) or (3, N) where N is the
-        number of points.
+        number of data points.
     values : array-like
-        Field to be represented as contours.
+        Data points of field to be represented as contours.
     pole_labels : str, default ['a', 'b', 'c']
         Names of the three poles of the triangle.
     tooltip_mode : str, 'proportions' or 'percents'
@@ -369,7 +515,6 @@ def create_ternarycontour(coordinates, values, pole_labels=['a', 'b', 'c'],
                                    showlabels=True)
 
     """
-    M, invM = _transform_barycentric_cartesian()
     grid_z, gr_x, gr_y, tooltip = _compute_grid(coordinates, values,
                                                 tooltip_mode)
 
@@ -380,7 +525,7 @@ def create_ternarycontour(coordinates, values, pole_labels=['a', 'b', 'c'],
                              plot_bgcolor=plot_bgcolor)
 
     annotations = _set_ticklabels(layout['annotations'], posx, posy,
-                                  proportion=True)
+                                  proportions=True)
     if colorscale is None:
         colorscale = _pl_deep()
 
