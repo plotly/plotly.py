@@ -140,7 +140,7 @@ def _set_ticklabels(annotations, posx, posy, proportion=True):
 
     # Annotations for ticklabels on side 0
     annotations.extend([dict(showarrow=False,
-                             text=f'{ticklabel[j]}',
+                             text=str(ticklabel[j]),
                              x=posx[j],
                              y=posy[j],
                              align='center',
@@ -150,7 +150,7 @@ def _set_ticklabels(annotations, posx, posy, proportion=True):
 
     # Annotations for ticklabels on side 1
     annotations.extend([dict(showarrow=False,
-                             text=f'{ticklabel[j]}',
+                             text=str(ticklabel[j]),
                              x=posx[j+4],
                              y=posy[j+4],
                              align='center',
@@ -160,7 +160,7 @@ def _set_ticklabels(annotations, posx, posy, proportion=True):
 
     # Annotations for ticklabels on side 2
     annotations.extend([dict(showarrow=False,
-                             text=f'{ticklabel[j]}',
+                             text=str(ticklabel[j]),
                              x=posx[j+8],
                              y=posy[j+8],
                              align='center',
