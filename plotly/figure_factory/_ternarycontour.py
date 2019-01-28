@@ -231,18 +231,22 @@ def _ternary_layout(title='Ternary contour plot', width=550, height=525,
 def _tooltip(N, bar_coords, grid_z, xy1, mode='proportions'):
     if mode == 'proportions':
         tooltip = [
-        [f'a: {round(bar_coords[0][i,j], 2)}<br>b: {round(bar_coords[1][i,j], 2)}' +
-        f'<br>c: {round(1-round(bar_coords[0][i,j], 2) - round(bar_coords[1][i,j], 2), 2)}' +
-        f'<br>z: {round(grid_z[i,j],2)}'
+        ['a: %.2f' % round(bar_coords[0][i, j], 2) +
+         '<br>b: %.2f' % round(bar_coords[1][i, j], 2) +
+         '<br>c: %.2f' % (round(1-round(bar_coords[0][i, j], 2) -
+                          round(bar_coords[1][i, j], 2), 2)) +
+         '<br>z: %.2f' % round(grid_z[i, j], 2)
         if ~np.isnan(xy1[0][i, j]) else '' for j in range(N)]
                                            for i in range(N)]
     elif mode == 'percents':
         tooltip = [
-        [f'a: {int(100*bar_coords[0][i,j]+0.5)}<br>b: {int(100*bar_coords[1][i,j]+0.5)}' +
-        f'<br>c: {100-int(100*bar_coords[0][i,j]+0.5) -int(100*bar_coords[1][i,j]+0.5)}' +
-        f'<br>z: {round(grid_z[i,j],2)}'
-        if ~np.isnan(xy1[0][i, j]) else '' for j in range(N)]
-                                           for i in range(N)]
+        ['a: %d' % int(100*bar_coords[0][i, j] + 0.5) +
+         '<br>b: %d' % int(100*bar_coords[1][i, j] + 0.5) +
+         '<br>c: %d' % (100-int(100*bar_coords[0][i, j] + 0.5) -
+                        int(100*bar_coords[1][i, j] + 0.5)) +
+         '<br>z: %.2f' % round(grid_z[i, j], 2)
+         if ~np.isnan(xy1[0][i, j]) else '' for j in range(N)]
+                                            for i in range(N)]
     else:
         raise ValueError("""tooltip mode must be either "proportions" or
                           "percents".""")
