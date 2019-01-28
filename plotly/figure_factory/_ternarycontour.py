@@ -444,7 +444,7 @@ def _compute_grid(coordinates, values, tooltip_mode):
 
 
 def create_ternarycontour(coordinates, values, pole_labels=['a', 'b', 'c'],
-                          tooltip_mode='proportion', width=500, height=500,
+                          tooltip_mode='proportions', width=500, height=500,
                           showscale=False, coloring=None,
                           showlabels=False, colorscale=None,
                           plot_bgcolor='rgb(240,240,240)',
