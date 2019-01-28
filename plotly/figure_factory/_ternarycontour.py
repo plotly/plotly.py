@@ -434,8 +434,7 @@ def _compute_grid(coordinates, values, tooltip_mode):
                            np.stack((grid_x, grid_y, np.ones(grid_x.shape))))
     # invalidate the points outside of the reference triangle
     bar_coords[np.where(bar_coords < 0)] = None
-    # recompute back the cartesian coordinates of bar_coords with
-    # invalid positions
+    # recompute back cartesian coordinates with invalid positions
     xy1 = np.einsum('ik, kmn -> imn', M, bar_coords)
     is_nan = np.where(np.isnan(xy1[0]))
     grid_z[is_nan] = None
