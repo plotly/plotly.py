@@ -2900,14 +2900,77 @@ class TestQuiver(TestCase):
 
 class TestTernarycontour(NumpyTestUtilsMixin, TestCase):
 
-
-    def test_simple_ternary_contour(self):
+    def test_wrong_coordinates(self):
         a, b = np.mgrid[0:1:20j, 0:1:20j]
         a = a.ravel()
         b = b.ravel()
+        z = a * b
+        with self.assertRaises(ValueError,
+                        msg='Barycentric coordinates should be positive.'):
+            _ = ff.create_ternarycontour(np.stack((a, b)), z)
+        mask = a + b < 1.
+        a = a[mask]
+        b = b[mask]
+        with self.assertRaises(ValueError):
+            _ = ff.create_ternarycontour(np.stack((a, b, a, b)), z)
+        with self.assertRaises(ValueError,
+                msg='different number of values and points'):
+            _ = ff.create_ternarycontour(np.stack((a, b, 1 - a - b)),
+                                         np.concatenate((z, [1])))
+        # Different sums for different points
+        c = a
+        with self.assertRaises(ValueError):
+            _ = ff.create_ternarycontour(np.stack((a, b, c)), z)
+        # Sum of coordinates is different from one but is equal
+        # for all points.
+        with self.assertRaises(ValueError):
+            _ = ff.create_ternarycontour(np.stack((a, b, 2 - a - b)), z)
+
+
+    def test_tooltip(self):
+        a, b = np.mgrid[0:1:20j, 0:1:20j]
+        mask = a + b < 1.
+        a = a[mask].ravel()
+        b = b[mask].ravel()
+        c = 1 - a - b
+        z = a * b * c
+        fig = ff.create_ternarycontour(np.stack((a, b, c)), z,
+                                       tooltip_mode='percents')
+        fig = ff.create_ternarycontour(np.stack((a, b, c)), z,
+                                       tooltip_mode='percent')
+
+        with self.assertRaises(ValueError):
+            fig = ff.create_ternarycontour(np.stack((a, b, c)), z,
+                                           tooltip_mode='wrong_mode')
+
+
+    def test_simple_ternary_contour(self):
+        a, b = np.mgrid[0:1:20j, 0:1:20j]
+        mask = a + b < 1.
+        a = a[mask].ravel()
+        b = b[mask].ravel()
         c = 1 - a - b
         z = a * b * c
         fig = ff.create_ternarycontour(np.stack((a, b, c)), z)
         fig2 = ff.create_ternarycontour(np.stack((a, b)), z)
         np.testing.assert_array_equal(fig2['data'][0]['z'],
                                       fig['data'][0]['z'])
+
+
+    def test_contour_attributes(self):
+        a, b = np.mgrid[0:1:20j, 0:1:20j]
+        mask = a + b < 1.
+        a = a[mask].ravel()
+        b = b[mask].ravel()
+        c = 1 - a - b
+        z = a * b * c
+        contour_dict = {'ncontours': 10,
+                        'showscale': True,
+                        'reversescale': False}
+
+
+        fig = ff.create_ternarycontour(np.stack((a, b, c)), z, **contour_dict)
+        for key, value in contour_dict.items():
+            assert fig['data'][0][key] == value
+
+

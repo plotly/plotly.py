@@ -30,7 +30,7 @@ def _transform_barycentric_cartesian():
     return M, np.linalg.inv(M)
 
 
-def _contour_trace(x, y, z, tooltip, colorscale='Viridis',
+def _contour_trace(x, y, z, tooltip, ncontours=None, colorscale='Viridis',
                    reversescale=False, showscale=False, linewidth=0.5,
                    linecolor='rgb(150,150,150)', smoothing=False,
                    coloring=None, showlabels=False, fontcolor='blue',
@@ -47,6 +47,8 @@ def _contour_trace(x, y, z, tooltip, colorscale='Viridis',
         Field to be represented as contours.
     tooltip : list of str
         Annotations to show on hover.
+    ncontours : int or None
+        Number of contours to display (determined automatically if None).
     colorscale : str o array, optional
         Colorscale to use for contours
     reversescale : bool
@@ -82,6 +84,7 @@ def _contour_trace(x, y, z, tooltip, colorscale='Viridis',
                   x=x, y=y, z=z,
                   text=tooltip,
                   hoverinfo='text',
+                  ncontours=ncontours,
                   colorscale=colorscale,
                   reversescale=reversescale,
                   showscale=showscale,
@@ -360,7 +363,7 @@ def _tooltip(N, bar_coords, grid_z, xy1, mode='proportions'):
         Coordinates inside the ternary plot can be displayed either as
         proportions (adding up to 1) or as percents (adding up to 100).
     """
-    if mode == 'proportions':
+    if mode == 'proportions' or mode == 'proportion':
         tooltip = [
         ['a: %.2f' % round(bar_coords[0][i, j], 2) +
          '<br>b: %.2f' % round(bar_coords[1][i, j], 2) +
@@ -369,7 +372,7 @@ def _tooltip(N, bar_coords, grid_z, xy1, mode='proportions'):
          '<br>z: %.2f' % round(grid_z[i, j], 2)
         if ~np.isnan(xy1[0][i, j]) else '' for j in range(N)]
                                            for i in range(N)]
-    elif mode == 'percents':
+    elif mode == 'percents' or mode == 'percent':
         tooltip = [
         ['a: %d' % int(100*bar_coords[0][i, j] + 0.5) +
          '<br>b: %d' % int(100*bar_coords[1][i, j] + 0.5) +
@@ -395,10 +398,12 @@ def _prepare_barycentric_coord(b_coords):
         raise ValueError('A point should have  2 (a, b) or 3 (a, b, c)  barycentric coordinates')
     if ((len(b_coords) == 3) and
          not np.allclose(b_coords.sum(axis=0), 1, rtol=0.01)):
-        msg = "The sum of coordinates is not one for all data points"
-        warnings.warn(msg)
+        msg = "The sum of coordinates should be one for all data points"
+        raise ValueError(msg)
     A, B = b_coords[:2]
     C = 1 - (A + B)
+    if np.any(np.stack((A, B, C)) < 0):
+        raise ValueError('Barycentric coordinates should be positive.')
     return A, B, C
 
 
@@ -444,8 +449,10 @@ def _compute_grid(coordinates, values, tooltip_mode):
 
 def create_ternarycontour(coordinates, values, pole_labels=['a', 'b', 'c'],
                           tooltip_mode='proportions', width=500, height=500,
+                          ncontours=None,
                           showscale=False, coloring=None,
                           showlabels=False, colorscale=None,
+                          reversescale=False,
                           plot_bgcolor='rgb(240,240,240)',
                           title=None,
                           smoothing=False):
@@ -457,7 +464,8 @@ def create_ternarycontour(coordinates, values, pole_labels=['a', 'b', 'c'],
 
     coordinates : list or ndarray
         Barycentric coordinates of shape (2, N) or (3, N) where N is the
-        number of data points.
+        number of data points. The sum of the 3 coordinates is expected
+        to be 1 for all data points.
     values : array-like
         Data points of field to be represented as contours.
     pole_labels : str, default ['a', 'b', 'c']
@@ -469,6 +477,8 @@ def create_ternarycontour(coordinates, values, pole_labels=['a', 'b', 'c'],
         Figure width.
     height : int
         Figure height.
+    ncontours : int or None
+        Number of contours to display (determined automatically if None).
     showscale : bool, default False
         If True, a colorbar showing the color scale is displayed.
     coloring : None or 'lines'
@@ -478,6 +488,10 @@ def create_ternarycontour(coordinates, values, pole_labels=['a', 'b', 'c'],
         displayed if showlabels is True.
     colorscale : None or array-like
         colorscale of the contours.
+    reversescale : bool
+        Reverses the color mapping if true. If true, `zmin`
+        will correspond to the last color in the array and
+        `zmax` will correspond to the first color.
     plot_bgcolor :
         color of figure background
     title : str or None
@@ -529,9 +543,11 @@ def create_ternarycontour(coordinates, values, pole_labels=['a', 'b', 'c'],
         colorscale = _pl_deep()
 
     contour_trace = _contour_trace(gr_x, gr_y, grid_z, tooltip,
+                                   ncontours=ncontours,
                                    showscale=showscale,
                                    showlabels=showlabels,
-                                   colorscale=colorscale, reversescale=True,
+                                   colorscale=colorscale, 
+                                   reversescale=reversescale,
                                    coloring=coloring,
                                    smoothing=smoothing)
     side_trace, tick_trace = _styling_traces_ternary(x_ticks, y_ticks)
