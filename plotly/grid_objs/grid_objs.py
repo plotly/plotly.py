@@ -5,7 +5,7 @@ grid_objs
 """
 from __future__ import absolute_import
 
-from collections import MutableSequence
+from collections.abc import MutableSequence
 
 from requests.compat import json as _json
 
