@@ -506,8 +506,9 @@ def create_ternarycontour(coordinates, values, pole_labels=['a', 'b', 'c'],
 
     # Define coordinates
     a, b = np.mgrid[0:1:20j, 0:1:20j]
-    a = a.ravel()
-    b = b.ravel()
+    mask = a + b <= 1
+    a = a[mask].ravel()
+    b = b[mask].ravel()
     c = 1 - a - b
     # Values to be displayed as contours
     z = a * b * c
