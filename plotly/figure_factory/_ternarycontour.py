@@ -552,7 +552,7 @@ def create_ternarycontour(coordinates, values, pole_labels=['a', 'b', 'c'],
                                    coloring=coloring,
                                    smoothing=smoothing)
     side_trace, tick_trace = _styling_traces_ternary(x_ticks, y_ticks)
-    fig = go.FigureWidget(data=[contour_trace,  tick_trace, side_trace],
-                          layout=layout)
+    fig = go.Figure(data=[contour_trace,  tick_trace, side_trace],
+                    layout=layout)
     fig.layout.annotations = annotations
     return fig
