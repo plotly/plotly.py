@@ -429,7 +429,8 @@ def _compute_grid(coordinates, values, tooltip_mode):
     xx, yy = cartes_coord_points[:2]
     x_min, x_max = xx.min(), xx.max()
     y_min, y_max = yy.min(), yy.max()
-    n_interp = max(100, int(np.sqrt(len(values))))
+    # n_interp = max(100, int(np.sqrt(len(values))))
+    n_interp = 20
     gr_x = np.linspace(x_min, x_max, n_interp)
     gr_y = np.linspace(y_min, y_max, n_interp)
     grid_x, grid_y = np.meshgrid(gr_x, gr_y)
@@ -438,11 +439,11 @@ def _compute_grid(coordinates, values, tooltip_mode):
     bar_coords = np.einsum('ik, kmn -> imn', invM,
                            np.stack((grid_x, grid_y, np.ones(grid_x.shape))))
     # invalidate the points outside of the reference triangle
-    bar_coords[np.where(bar_coords < 0)] = None
+    bar_coords[np.where(bar_coords < 0)] = 0  # None
     # recompute back cartesian coordinates with invalid positions
     xy1 = np.einsum('ik, kmn -> imn', M, bar_coords)
     is_nan = np.where(np.isnan(xy1[0]))
-    grid_z[is_nan] = None
+    grid_z[is_nan] = 0  # None
     tooltip = _tooltip(n_interp, bar_coords, grid_z, xy1, tooltip_mode)
     return grid_z, gr_x, gr_y, tooltip
 
@@ -552,7 +553,7 @@ def create_ternarycontour(coordinates, values, pole_labels=['a', 'b', 'c'],
                                    coloring=coloring,
                                    smoothing=smoothing)
     side_trace, tick_trace = _styling_traces_ternary(x_ticks, y_ticks)
-    fig = go.FigureWidget(data=[contour_trace,  tick_trace, side_trace],
-                          layout=layout)
+    fig = go.Figure(data=[contour_trace,  tick_trace, side_trace],
+                    layout=layout)
     fig.layout.annotations = annotations
     return fig
