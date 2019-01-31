@@ -1,8 +1,11 @@
 from __future__ import absolute_import
+import warnings
 import numpy as np
 from scipy.interpolate import griddata
+from skimage import measure
+import plotly.colors as clrs
 from plotly.graph_objs import graph_objs as go
-import warnings
+from plotly import exceptions
 
 
 def _pl_deep():
@@ -30,11 +33,41 @@ def _transform_barycentric_cartesian():
     return M, np.linalg.inv(M)
 
 
-def _contour_trace(x, y, z, tooltip, ncontours=None, colorscale='Viridis',
-                   reversescale=False, showscale=False, linewidth=0.5,
-                   linecolor='rgb(150,150,150)', smoothing=False,
-                   coloring=None, showlabels=False, fontcolor='blue',
-                   fontsize=12):
+def _colors(ncontours, colormap=None):
+    if isinstance(colormap, str):
+        if colormap in clrs.PLOTLY_SCALES.keys():
+            cmap = clrs.PLOTLY_SCALES[colormap]
+        else:
+            raise exceptions.PlotlyError(
+                "If 'colormap' is a string, it must be the name "
+                "of a Plotly Colorscale. The available colorscale "
+                "names are {}".format(clrs.PLOTLY_SCALES.keys()))
+    elif isinstance(colormap, dict):
+        cmap = colormap
+        clrs.validate_colors_dict(cmap, 'rgb')
+    else:
+        raise ValueError("""Colormap has to be a dictionary or a valid
+                         Plotly colormap string""")
+    values = np.linspace(0, 1, ncontours)
+    keys = np.array([pair[0] for pair in cmap])
+    cols = np.array([pair[1] for pair in cmap])
+    inds = np.searchsorted(keys, values)
+    colors = [cols[0]]
+    for ind, val in zip(inds[1:], values[1:]):
+        key1, key2 = keys[ind - 1], keys[ind]
+        interm = (val - key1) / (key2 - key1)
+        col = clrs.find_intermediate_color(cols[ind - 1],
+                                           cols[ind], interm, colortype='rgb')
+        colors.append(col)
+    return colors
+
+
+
+
+
+def _contour_trace(x, y, z, ncontours=None, 
+                   colorscale='Electric',
+                   linecolor='rgb(150,150,150)'):
     """
     Contour trace in Cartesian coordinates.
 
@@ -45,61 +78,42 @@ def _contour_trace(x, y, z, tooltip, ncontours=None, colorscale='Viridis',
         Cartesian coordinates
     z : array-like
         Field to be represented as contours.
-    tooltip : list of str
-        Annotations to show on hover.
-    ncontours : int or None
-        Number of contours to display (determined automatically if None).
-    colorscale : str o array, optional
-        Colorscale to use for contours
-    reversescale : bool
-        Reverses the color mapping if true. If true, `zmin`
-        will correspond to the last color in the array and
-        `zmax` will correspond to the first color.
-    showscale : bool
-        If True, a colorbar showing the color scale is displayed.
-    linewidth : int
-        Line width of contours
-    linecolor : color string
-        Color on contours
-    smoothing : bool
-        If True, contours are smoothed.
-    coloring : None or 'lines'
-        How to display contour. Filled contours if None, lines if ``lines``.
-    showlabels : bool, default False
-        For line contours (coloring='lines'), the value of the contour is
-        displayed if showlabels is True.
-    colorscale : None or array-like
-        Colorscale of the contours.
-    fontcolor : color str
-        Color of contour labels.
-    fontsize : int
-        Font size of contour labels.
     """
-    if showlabels and (coloring is not 'lines'):
-        msg = """`showlabels` was set to True, but labels can only be
-                 displayed for `coloring='lines'`"""
-        warnings.warn(msg)
+    if ncontours is None:
+        ncontours = 5
+    colors = _colors(ncontours, colorscale)
+    traces = []
+    mask_nan = np.isnan(z)
+    mask_ok = np.logical_not(mask_nan)
+    values = np.linspace(z[mask_ok].min(), z[mask_ok].max(), 
+                            ncontours + 2)[1:-1]
+    M, invM = _transform_barycentric_cartesian()
+    dx = 1./x.size
+    dy = 1./y.size
+    zz = np.copy(z)
+    zz[np.isnan(z)] = (z[mask_ok].min()
+            - 10. * (z[mask_ok].max() - z[mask_ok].min()))
+    for i, val in enumerate(values):
+        contour_level = measure.find_contours(zz, val)
+        for contour in contour_level:
+            yy, xx = contour.T
+            bar_coords = np.dot(invM,
+                        np.stack((dx * xx, dy * yy, np.ones(xx.shape))))
+            a = bar_coords[0]
+            b = bar_coords[1]
+            c = bar_coords[2]
+            trace = dict(
+                type='scatterternary', text=val,
+                a=a, b=b, c=c, mode='lines',
+                line=dict(color=colors[i], shape='spline'),
+                fill='toself',
+                showlegend=True,
+                name=str(val),
+                # fillcolor = colors_iterator.next()
+            )
+            traces.append(trace)
+    return traces
 
-    c_dict = dict(type='contour',
-                  x=x, y=y, z=z,
-                  text=tooltip,
-                  hoverinfo='text',
-                  ncontours=ncontours,
-                  colorscale=colorscale,
-                  reversescale=reversescale,
-                  showscale=showscale,
-                  line=dict(width=linewidth, color=linecolor,
-                            smoothing=smoothing),
-                  colorbar=dict(thickness=20, ticklen=4)
-                  )
-    if coloring == 'lines':
-        contours = dict(coloring=coloring,
-                        showlabels=showlabels)
-        if showlabels:
-            contours.update(labelfont=dict(size=fontsize,
-                                           color=fontcolor,))
-        c_dict.update(contours=contours)
-    return go.Contour(c_dict)
 
 
 def barycentric_ticks(side):
@@ -534,25 +548,27 @@ def create_ternarycontour(coordinates, values, pole_labels=['a', 'b', 'c'],
 
     x_ticks, y_ticks, posx, posy = _cart_coord_ticks(t=0.01)
 
-    layout = _ternary_layout(pole_labels=pole_labels,
-                             width=width, height=height, title=title,
-                             plot_bgcolor=plot_bgcolor)
+    #layout = _ternary_layout(pole_labels=pole_labels,
+    #                         width=width, height=height, title=title,
+    #                         plot_bgcolor=plot_bgcolor)
 
-    annotations = _set_ticklabels(layout['annotations'], posx, posy,
-                                  proportions=True)
+    layout = {'title': 'Ternary Scatter Plot',
+              'ternary':{'sum':1,
+                         'aaxis':{'title': pole_labels[0], 
+                                  'min': 0.01, 'linewidth':2,
+                                  'ticks':'outside' },
+        'baxis':{'title': pole_labels[1], 'min': 0.01, 'linewidth':2, 'ticks':'outside' },
+        'caxis':{'title': pole_labels[2], 'min': 0.01, 'linewidth':2, 'ticks':'outside' }
+            },
+            'showlegend': True
+                }
+    #annotations = _set_ticklabels(layout['annotations'], posx, posy,
+    #                              proportions=True)
     if colorscale is None:
         colorscale = _pl_deep()
 
-    contour_trace = _contour_trace(gr_x, gr_y, grid_z, tooltip,
+    contour_trace = _contour_trace(gr_x, gr_y, grid_z,
                                    ncontours=ncontours,
-                                   showscale=showscale,
-                                   showlabels=showlabels,
-                                   colorscale=colorscale, 
-                                   reversescale=reversescale,
-                                   coloring=coloring,
-                                   smoothing=smoothing)
-    side_trace, tick_trace = _styling_traces_ternary(x_ticks, y_ticks)
-    fig = go.Figure(data=[contour_trace,  tick_trace, side_trace],
-                    layout=layout)
-    fig.layout.annotations = annotations
+                                   colorscale=colorscale)
+    fig = go.Figure(data=contour_trace, layout=layout)
     return fig
