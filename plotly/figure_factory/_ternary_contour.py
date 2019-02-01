@@ -448,15 +448,15 @@ def _compute_grid(coordinates, values, tooltip_mode):
     return grid_z, gr_x, gr_y, tooltip
 
 
-def create_ternarycontour(coordinates, values, pole_labels=['a', 'b', 'c'],
-                          tooltip_mode='proportions', width=500, height=500,
-                          ncontours=None,
-                          showscale=False, coloring=None,
-                          showlabels=False, colorscale=None,
-                          reversescale=False,
-                          plot_bgcolor='rgb(240,240,240)',
-                          title=None,
-                          smoothing=False):
+def create_ternary_contour(coordinates, values, pole_labels=['a', 'b', 'c'],
+                           tooltip_mode='proportions', width=500, height=500,
+                           ncontours=None,
+                           showscale=False, coloring=None,
+                           showlabels=False, colorscale=None,
+                           reversescale=False,
+                           plot_bgcolor='rgb(240,240,240)',
+                           title=None,
+                           smoothing=False):
     """
     Ternary contour plot.
 
@@ -513,20 +513,20 @@ def create_ternarycontour(coordinates, values, pole_labels=['a', 'b', 'c'],
     c = 1 - a - b
     # Values to be displayed as contours
     z = a * b * c
-    fig = ff.create_ternarycontour(np.stack((a, b, c)), z)
+    fig = ff.create_ternary_contour(np.stack((a, b, c)), z)
 
     It is also possible to give only two barycentric coordinates for each
     point, since the sum of the three coordinates is one:
 
-    fig = ff.create_ternarycontour(np.stack((a, b)), z)
+    fig = ff.create_ternary_contour(np.stack((a, b)), z)
 
     Example 2: ternary contour plot with line contours
 
-    fig = ff.create_ternarycontour(np.stack((a, b)), z, coloring='lines')
+    fig = ff.create_ternary_contour(np.stack((a, b)), z, coloring='lines')
 
     Labels of contour plots can be displayed on the contours:
 
-    fig = ff.create_ternarycontour(np.stack((a, b)), z, coloring='lines',
+    fig = ff.create_ternary_contour(np.stack((a, b)), z, coloring='lines',
                                    showlabels=True)
 
     """

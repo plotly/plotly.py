@@ -2907,24 +2907,24 @@ class TestTernarycontour(NumpyTestUtilsMixin, TestCase):
         z = a * b
         with self.assertRaises(ValueError,
                         msg='Barycentric coordinates should be positive.'):
-            _ = ff.create_ternarycontour(np.stack((a, b)), z)
+            _ = ff.create_ternary_contour(np.stack((a, b)), z)
         mask = a + b < 1.
         a = a[mask]
         b = b[mask]
         with self.assertRaises(ValueError):
-            _ = ff.create_ternarycontour(np.stack((a, b, a, b)), z)
+            _ = ff.create_ternary_contour(np.stack((a, b, a, b)), z)
         with self.assertRaises(ValueError,
                 msg='different number of values and points'):
-            _ = ff.create_ternarycontour(np.stack((a, b, 1 - a - b)),
-                                         np.concatenate((z, [1])))
+            _ = ff.create_ternary_contour(np.stack((a, b, 1 - a - b)),
+                                          np.concatenate((z, [1])))
         # Different sums for different points
         c = a
         with self.assertRaises(ValueError):
-            _ = ff.create_ternarycontour(np.stack((a, b, c)), z)
+            _ = ff.create_ternary_contour(np.stack((a, b, c)), z)
         # Sum of coordinates is different from one but is equal
         # for all points.
         with self.assertRaises(ValueError):
-            _ = ff.create_ternarycontour(np.stack((a, b, 2 - a - b)), z)
+            _ = ff.create_ternary_contour(np.stack((a, b, 2 - a - b)), z)
 
 
     def test_tooltip(self):
@@ -2934,14 +2934,14 @@ class TestTernarycontour(NumpyTestUtilsMixin, TestCase):
         b = b[mask].ravel()
         c = 1 - a - b
         z = a * b * c
-        fig = ff.create_ternarycontour(np.stack((a, b, c)), z,
-                                       tooltip_mode='percents')
-        fig = ff.create_ternarycontour(np.stack((a, b, c)), z,
-                                       tooltip_mode='percent')
+        fig = ff.create_ternary_contour(np.stack((a, b, c)), z,
+                                        tooltip_mode='percents')
+        fig = ff.create_ternary_contour(np.stack((a, b, c)), z,
+                                        tooltip_mode='percent')
 
         with self.assertRaises(ValueError):
-            fig = ff.create_ternarycontour(np.stack((a, b, c)), z,
-                                           tooltip_mode='wrong_mode')
+            fig = ff.create_ternary_contour(np.stack((a, b, c)), z,
+                                            tooltip_mode='wrong_mode')
 
 
     def test_simple_ternary_contour(self):
@@ -2951,8 +2951,8 @@ class TestTernarycontour(NumpyTestUtilsMixin, TestCase):
         b = b[mask].ravel()
         c = 1 - a - b
         z = a * b * c
-        fig = ff.create_ternarycontour(np.stack((a, b, c)), z)
-        fig2 = ff.create_ternarycontour(np.stack((a, b)), z)
+        fig = ff.create_ternary_contour(np.stack((a, b, c)), z)
+        fig2 = ff.create_ternary_contour(np.stack((a, b)), z)
         np.testing.assert_array_equal(fig2['data'][0]['z'],
                                       fig['data'][0]['z'])
 
@@ -2969,7 +2969,7 @@ class TestTernarycontour(NumpyTestUtilsMixin, TestCase):
                         'reversescale': False}
 
 
-        fig = ff.create_ternarycontour(np.stack((a, b, c)), z, **contour_dict)
+        fig = ff.create_ternary_contour(np.stack((a, b, c)), z, **contour_dict)
         for key, value in contour_dict.items():
             assert fig['data'][0][key] == value
 
