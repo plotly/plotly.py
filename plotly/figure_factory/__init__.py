@@ -18,6 +18,7 @@ from plotly.figure_factory._quiver import create_quiver
 from plotly.figure_factory._scatterplot import create_scatterplotmatrix
 from plotly.figure_factory._streamline import create_streamline
 from plotly.figure_factory._table import create_table
+from plotly.figure_factory._ternary_contour import create_ternary_contour
 from plotly.figure_factory._trisurf import create_trisurf
 from plotly.figure_factory._violin import create_violin
 if optional_imports.get_module('pandas') is not None:

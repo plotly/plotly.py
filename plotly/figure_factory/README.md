@@ -142,6 +142,10 @@ It is often not a good idea to put all your code into your `create_foo()` functi
 
 It is best to make all other functions besides `create_foo()` secret so a user cannot access them. This is done by placing a `_` before the name of the function, so `_aux_func()` for example.
 
+6. Tests
+
+Add unit tests in 
+`plotly/tests/test_optional/test_figure_factory/test_figure_factory.py`.
 
 ## Create a Pull Request
 
