@@ -1,11 +1,12 @@
 from __future__ import absolute_import
 import warnings
-import numpy as np
-from scipy.interpolate import griddata
-from skimage import measure
 import plotly.colors as clrs
 from plotly.graph_objs import graph_objs as go
-from plotly import exceptions
+from plotly import exceptions, optional_imports
+
+np = optional_imports.get_module('numpy')
+sk = optional_imports.get_module('skimage')
+scipy_interp = optional_imports.get_module('scipy.interpolate')
 
 
 def _pl_deep():
@@ -20,6 +21,69 @@ def _pl_deep():
             [0.8, 'rgb(65, 64, 123)'],
             [0.9, 'rgb(55, 44, 80)'],
             [1.0, 'rgb(39, 26, 44)']]
+
+
+def replace_zero_coords(ternary_data, delta=0.001):
+    """Replaces zero ternary coordinates with delta
+    and normalize the new triplets (a, b, c); implements a method
+    by J. A. Martin-Fernandez,  C. Barcelo-Vidal, V. Pawlowsky-Glahn,
+    Dealing with zeros and missing values in compositional data sets
+    using nonparametric imputation,
+    Mathematical Geology  35 (2003), pp 253-278
+    """
+    # ternary_data: array (n, 3)
+    # delta:  small float (close to zero)
+    #Returns a new data set of normalized ternary coords
+
+    ternary_data = central_proj(ternary_data)
+    bool_array = (ternary_data == 0)
+
+    n_comp = ternary_data.shape[-1]
+    info_row_zero = bool_array.sum(axis=-1, keepdims=True)
+
+    if delta is None:
+        delta = 0.001
+    unity_complement = 1 -  delta * info_row_zero
+    if np.any(unity_complement) < 0:
+        raise ValueError('Your  delta led to negative ternary coords.Set a smaller delta')
+    ternary_data = np.where(bool_array, delta, unity_complement * ternary_data)
+    return ternary_data.squeeze()
+
+
+def dir_ilr(barycentric):  #ilr: S^2 ---> R^2 identified to x_1+x2+x3=0 in R^3
+    barycentric = np.asarray(barycentric)
+    if barycentric.shape[-1] != 3:
+        raise ValueError(f'barycentric coordinates are 3 floats, not {barycentric.shape[-1]}')
+    if len(barycentric.shape) == 1:
+        barycentric = barycentric.reshape(1,3)
+    x0 = np.log(barycentric[:,0]/barycentric[:,1]) / np.sqrt(2)
+    x1 = np.log(barycentric[:,0]*barycentric[:,1]/barycentric[:, 2]**2) / np.sqrt(6)
+    ilr_tdata = np.stack((x0,x1)).T
+    return ilr_tdata if  barycentric.shape[0] > 1 else ilr_tdata.squeeze()
+
+
+def ilr_inverse (x): #ilr: R^2 -->S^2 (2 simplex)
+    #x an n  list of 2-lists or an array of shape (n,2),
+    # implementation of a method presented in:
+    # An algebraic method to compute isometric logratio transformation and back transformation of compositional data
+    # Jarauta-Bragulat, E.; Buenestado, P.; Hervada-Sala, C.
+    # in Proc of the Annual Conf of the Intl Assoc for Math Geology, 2003, pp 31-30
+    #x should ne an array of shape (n,2)
+    x = np.array(x)
+    if x.shape[-1] != 2:
+        raise ValueError(f'your data must be 2d points, not {x.shape[-1]}-points')
+    if len(x.shape) == 1:
+        x = x.reshape(1, 2)
+    matrix = np.array([[ 0.5,  1 ,  1. ],
+                       [-0.5,  1 ,  1. ],
+                       [ 0. ,  0. ,  1. ]])
+    s = np.sqrt(2)/2
+    t = np.sqrt(3/2)
+    Sk = np.einsum('ik, kj -> ij', np.array([[s, t],[-s, t]]), x.T)
+    Z = -np.log(1+np.exp(Sk).sum(axis=0))
+    log_barycentric = np.einsum('ik, kj -> ij', matrix, np.stack((2*s*x[:, 0], t*x[:, 1], Z)))
+    iilr_tdata = np.exp(log_barycentric).T
+    return iilr_tdata if x.shape[0] > 1 else iilr_tdata.squeeze()
 
 
 def _transform_barycentric_cartesian():
@@ -62,12 +126,9 @@ def _colors(ncontours, colormap=None):
     return colors
 
 
-
-
-
 def _contour_trace(x, y, z, ncontours=None, 
                    colorscale='Electric',
-                   linecolor='rgb(150,150,150)'):
+                   linecolor='rgb(150,150,150)', interp_mode='cartesian'):
     """
     Contour trace in Cartesian coordinates.
 
@@ -88,17 +149,22 @@ def _contour_trace(x, y, z, ncontours=None,
     values = np.linspace(z[mask_ok].min(), z[mask_ok].max(), 
                             ncontours + 2)[1:-1]
     M, invM = _transform_barycentric_cartesian()
-    dx = 1./x.size
-    dy = 1./y.size
+    dx = (x.max() - x.min())/x.size
+    dy = (y.max() - y.min())/y.size
     zz = np.copy(z)
     zz[np.isnan(z)] = (z[mask_ok].min()
             - 10. * (z[mask_ok].max() - z[mask_ok].min()))
     for i, val in enumerate(values):
-        contour_level = measure.find_contours(zz, val)
+        contour_level = sk.measure.find_contours(zz, val)
+        # stop
         for contour in contour_level:
             yy, xx = contour.T
-            bar_coords = np.dot(invM,
+            if interp_mode == 'cartesian':
+                bar_coords = np.dot(invM,
                         np.stack((dx * xx, dy * yy, np.ones(xx.shape))))
+            elif interp_mode == 'ilr':
+                bar_coords = ilr_inverse(np.stack((dx * xx + x.min(),
+                                                   dy * yy + y.min())).T).T
             a = bar_coords[0]
             b = bar_coords[1]
             c = bar_coords[2]
@@ -324,6 +390,20 @@ def _ternary_layout(title='Ternary contour plot', width=550, height=525,
         Font size of pole labels.
     """
     return dict(title=title,
+                ternary=dict(sum=1,
+                             aaxis=dict(title=pole_labels[0],
+                                        min=0.01, linewidth=2,
+                                        ticks='outside'),
+                             baxis=dict(title=pole_labels[1],
+                                        min=0.01, linewidth=2,
+                                        ticks='outside'),
+                             caxis=dict(title=pole_labels[2],
+                                        min=0.01, linewidth=2,
+                                        ticks='outside')),
+                showlegend=True
+                )
+
+    return dict(title=title,
                 font=dict(family=fontfamily, size=colorbar_fontsize),
                 width=width, height=height,
                 xaxis=dict(visible=False),
@@ -421,7 +501,31 @@ def _prepare_barycentric_coord(b_coords):
     return A, B, C
 
 
-def _compute_grid(coordinates, values, tooltip_mode):
+def central_proj(mdata):
+
+    #array of shape(n,3) or a n-list of 3-lists of positive numbers,
+    #returns for each row [a, b, c]--> np.array([a,b,c])/(a+b+c)
+
+    mdata=np.asarray(mdata)
+    if mdata.ndim > 2:
+        raise ValueError("this function requires 2d arrays")
+    if mdata.shape[-1] != 3:
+        raise ValueError('data must have 3 coordinates')
+
+    if mdata.ndim == 1:
+         mdata = np.atleast_2d(mdata)
+
+    if np.any(mdata < 0):
+        raise ValueError("Data should be positive")
+
+    if np.all(mdata == 0, axis=1).sum() > 0:
+        raise ValueError("this projection can be applied only to non zero triplets")
+    barycentric = mdata / mdata.sum(axis=1, keepdims=True)
+    return barycentric.squeeze()
+
+
+
+def _compute_grid(coordinates, values, tooltip_mode, interp_mode='cartesian'):
     """
     Compute interpolation of data points on regular grid in Cartesian
     coordinates.
@@ -438,27 +542,24 @@ def _compute_grid(coordinates, values, tooltip_mode):
         proportions (adding up to 1) or as percents (adding up to 100).
     """
     A, B, C = _prepare_barycentric_coord(coordinates)
-    M, invM = _transform_barycentric_cartesian()
-    cartes_coord_points = np.einsum('ik, kj -> ij', M, np.stack((A, B, C)))
-    xx, yy = cartes_coord_points[:2]
+    if interp_mode == 'cartesian':
+        M, invM = _transform_barycentric_cartesian()
+        coord_points = np.einsum('ik, kj -> ij', M, np.stack((A, B, C)))
+    elif interp_mode == 'ilr':
+        mdata = replace_zero_coords(np.stack((A, B, C)).T)
+        coord_points = dir_ilr(mdata).T
+    else:
+        raise ValueError("interp_mode should be cartesian or ilr")
+    xx, yy = coord_points[:2]
     x_min, x_max = xx.min(), xx.max()
     y_min, y_max = yy.min(), yy.max()
-    n_interp = max(100, int(np.sqrt(len(values))))
+    n_interp = max(400, int(np.sqrt(len(values))))
     gr_x = np.linspace(x_min, x_max, n_interp)
     gr_y = np.linspace(y_min, y_max, n_interp)
     grid_x, grid_y = np.meshgrid(gr_x, gr_y)
-    grid_z = griddata(cartes_coord_points[:2].T, values, (grid_x, grid_y),
-                      method='cubic')
-    bar_coords = np.einsum('ik, kmn -> imn', invM,
-                           np.stack((grid_x, grid_y, np.ones(grid_x.shape))))
-    # invalidate the points outside of the reference triangle
-    bar_coords[np.where(bar_coords < 0)] = None
-    # recompute back cartesian coordinates with invalid positions
-    xy1 = np.einsum('ik, kmn -> imn', M, bar_coords)
-    is_nan = np.where(np.isnan(xy1[0]))
-    grid_z[is_nan] = None
-    tooltip = _tooltip(n_interp, bar_coords, grid_z, xy1, tooltip_mode)
-    return grid_z, gr_x, gr_y, tooltip
+    grid_z = scipy_interp.griddata(coord_points[:2].T, values, (grid_x, grid_y),
+                    method='cubic')
+    return grid_z, gr_x, gr_y
 
 
 def create_ternarycontour(coordinates, values, pole_labels=['a', 'b', 'c'],
@@ -469,7 +570,8 @@ def create_ternarycontour(coordinates, values, pole_labels=['a', 'b', 'c'],
                           reversescale=False,
                           plot_bgcolor='rgb(240,240,240)',
                           title=None,
-                          smoothing=False):
+                          smoothing=False,
+                          interp_mode='cartesian'):
     """
     Ternary contour plot.
 
@@ -543,25 +645,15 @@ def create_ternarycontour(coordinates, values, pole_labels=['a', 'b', 'c'],
                                    showlabels=True)
 
     """
-    grid_z, gr_x, gr_y, tooltip = _compute_grid(coordinates, values,
-                                                tooltip_mode)
+    grid_z, gr_x, gr_y = _compute_grid(coordinates, values,
+                                                tooltip_mode, 
+                                                interp_mode=interp_mode)
 
-    x_ticks, y_ticks, posx, posy = _cart_coord_ticks(t=0.01)
+    #x_ticks, y_ticks, posx, posy = _cart_coord_ticks(t=0.01)
 
-    #layout = _ternary_layout(pole_labels=pole_labels,
-    #                         width=width, height=height, title=title,
-    #                         plot_bgcolor=plot_bgcolor)
-
-    layout = {'title': 'Ternary Scatter Plot',
-              'ternary':{'sum':1,
-                         'aaxis':{'title': pole_labels[0], 
-                                  'min': 0.01, 'linewidth':2,
-                                  'ticks':'outside' },
-        'baxis':{'title': pole_labels[1], 'min': 0.01, 'linewidth':2, 'ticks':'outside' },
-        'caxis':{'title': pole_labels[2], 'min': 0.01, 'linewidth':2, 'ticks':'outside' }
-            },
-            'showlegend': True
-                }
+    layout = _ternary_layout(pole_labels=pole_labels,
+                             width=width, height=height, title=title,
+                             plot_bgcolor=plot_bgcolor)
     #annotations = _set_ticklabels(layout['annotations'], posx, posy,
     #                              proportions=True)
     if colorscale is None:
@@ -569,6 +661,7 @@ def create_ternarycontour(coordinates, values, pole_labels=['a', 'b', 'c'],
 
     contour_trace = _contour_trace(gr_x, gr_y, grid_z,
                                    ncontours=ncontours,
-                                   colorscale=colorscale)
+                                   colorscale=colorscale,
+                                   interp_mode=interp_mode)
     fig = go.Figure(data=contour_trace, layout=layout)
     return fig
