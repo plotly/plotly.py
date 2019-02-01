@@ -1,6 +1,6 @@
 {
   "name": "plotlywidget",
-  "version": "0.7.0-rc.1",
+  "version": "0.7.0",
   "description": "The plotly.py ipywidgets library",
   "author": "The plotly.py team",
   "license": "MIT",
@@ -31,7 +31,7 @@
     "ify-loader": "^1.1.0"
   },
   "dependencies": {
-    "plotly.js": "1.44.0",
+    "plotly.js": "1.44.1",
     "@jupyter-widgets/base": "^1.0.0",
     "lodash": "^4.17.4"
   },
