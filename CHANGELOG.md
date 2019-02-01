@@ -13,6 +13,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
  - Add isosurface gl3d trace type
  ([plotly/plotly.js#3438](https://github.com/plotly/plotly.js/pull/3438))
+ - Preview of ternary contour figure factory
+ ([#1413](https://github.com/plotly/plotly.py/pull/1413)). Special thanks to
+ [@emmanuelle](https://github.com/emmanuelle) for this contribution!
  - Add support for `line.color` colorbars for scatter3d traces
  ([#1085](https://github.com/plotly/plotly.py/issues/1085),
  [plotly/plotly.js#3384](https://github.com/plotly/plotly.js/pull/3384))
@@ -38,6 +41,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
  ([#1300](https://github.com/plotly/plotly.py/issues/1300))
  - Fix `update` method with legacy `title*` properties
  ([#1403](https://github.com/plotly/plotly.py/issues/1403))
+ - Fix deprecation warnings on Python 3.7 and ipywidgets > 7.0
+ ([#1417](https://github.com/plotly/plotly.py/pull/1417)). Special thanks to
+ [@Juanlu001](https://github.com/Juanlu001) for this contribution!
  
  
 ## [3.5.0] - 2019-01-04
