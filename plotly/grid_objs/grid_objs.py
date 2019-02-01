@@ -5,7 +5,10 @@ grid_objs
 """
 from __future__ import absolute_import
 
-from collections import MutableSequence
+try:
+    from collections.abc import MutableSequence
+except ImportError:
+    from collections import MutableSequence
 
 from requests.compat import json as _json
 

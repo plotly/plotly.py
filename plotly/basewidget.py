@@ -15,7 +15,7 @@ from .callbacks import (BoxSelector, LassoSelector,
 from .serializers import custom_serializers
 from .version import __frontend_version__
 
-@widgets.register()
+@widgets.register
 class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
     """
     Base class for FigureWidget. The FigureWidget class is code-generated as a
