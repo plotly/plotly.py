@@ -31,9 +31,9 @@ def _transform_barycentric_cartesian():
 
 
 def _contour_trace(x, y, z, tooltip, ncontours=None, colorscale='Viridis',
-                   reversescale=False, showscale=False, linewidth=0.5,
-                   linecolor='rgb(150,150,150)', smoothing=False,
-                   coloring=None, showlabels=False, fontcolor='blue',
+                   showscale=False, linewidth=0.5,
+                   linecolor='rgb(150,150,150)',
+                   coloring=None, fontcolor='blue',
                    fontsize=12):
     """
     Contour trace in Cartesian coordinates.
@@ -51,23 +51,14 @@ def _contour_trace(x, y, z, tooltip, ncontours=None, colorscale='Viridis',
         Number of contours to display (determined automatically if None).
     colorscale : str o array, optional
         Colorscale to use for contours
-    reversescale : bool
-        Reverses the color mapping if true. If true, `zmin`
-        will correspond to the last color in the array and
-        `zmax` will correspond to the first color.
     showscale : bool
         If True, a colorbar showing the color scale is displayed.
     linewidth : int
         Line width of contours
     linecolor : color string
         Color on contours
-    smoothing : bool
-        If True, contours are smoothed.
     coloring : None or 'lines'
         How to display contour. Filled contours if None, lines if ``lines``.
-    showlabels : bool, default False
-        For line contours (coloring='lines'), the value of the contour is
-        displayed if showlabels is True.
     colorscale : None or array-like
         Colorscale of the contours.
     fontcolor : color str
@@ -75,10 +66,6 @@ def _contour_trace(x, y, z, tooltip, ncontours=None, colorscale='Viridis',
     fontsize : int
         Font size of contour labels.
     """
-    if showlabels and (coloring is not 'lines'):
-        msg = """`showlabels` was set to True, but labels can only be
-                 displayed for `coloring='lines'`"""
-        warnings.warn(msg)
 
     c_dict = dict(type='contour',
                   x=x, y=y, z=z,
@@ -86,18 +73,12 @@ def _contour_trace(x, y, z, tooltip, ncontours=None, colorscale='Viridis',
                   hoverinfo='text',
                   ncontours=ncontours,
                   colorscale=colorscale,
-                  reversescale=reversescale,
                   showscale=showscale,
-                  line=dict(width=linewidth, color=linecolor,
-                            smoothing=smoothing),
+                  line=dict(width=linewidth, color=linecolor),
                   colorbar=dict(thickness=20, ticklen=4)
                   )
     if coloring == 'lines':
-        contours = dict(coloring=coloring,
-                        showlabels=showlabels)
-        if showlabels:
-            contours.update(labelfont=dict(size=fontsize,
-                                           color=fontcolor,))
+        contours = dict(coloring=coloring)
         c_dict.update(contours=contours)
     return go.Contour(c_dict)
 
@@ -451,12 +432,11 @@ def _compute_grid(coordinates, values, tooltip_mode):
 def create_ternary_contour(coordinates, values, pole_labels=['a', 'b', 'c'],
                            tooltip_mode='proportions', width=500, height=500,
                            ncontours=None,
-                           showscale=False, coloring=None,
-                           showlabels=False, colorscale=None,
-                           reversescale=False,
+                           showscale=False,
+                           coloring=None,
+                           colorscale=None,
                            plot_bgcolor='rgb(240,240,240)',
-                           title=None,
-                           smoothing=False):
+                           title=None):
     """
     Ternary contour plot.
 
@@ -484,21 +464,12 @@ def create_ternary_contour(coordinates, values, pole_labels=['a', 'b', 'c'],
         If True, a colorbar showing the color scale is displayed.
     coloring : None or 'lines'
         How to display contour. Filled contours if None, lines if ``lines``.
-    showlabels : bool, default False
-        For line contours (coloring='lines'), the value of the contour is
-        displayed if showlabels is True.
     colorscale : None or array-like
         colorscale of the contours.
-    reversescale : bool
-        Reverses the color mapping if true. If true, `zmin`
-        will correspond to the last color in the array and
-        `zmax` will correspond to the first color.
     plot_bgcolor :
         color of figure background
     title : str or None
         Title of ternary plot
-    smoothing : bool
-        If True, contours are smoothed.
 
     Examples
     ========
@@ -523,12 +494,6 @@ def create_ternary_contour(coordinates, values, pole_labels=['a', 'b', 'c'],
     Example 2: ternary contour plot with line contours
 
     fig = ff.create_ternary_contour(np.stack((a, b)), z, coloring='lines')
-
-    Labels of contour plots can be displayed on the contours:
-
-    fig = ff.create_ternary_contour(np.stack((a, b)), z, coloring='lines',
-                                   showlabels=True)
-
     """
     grid_z, gr_x, gr_y, tooltip = _compute_grid(coordinates, values,
                                                 tooltip_mode)
@@ -547,11 +512,8 @@ def create_ternary_contour(coordinates, values, pole_labels=['a', 'b', 'c'],
     contour_trace = _contour_trace(gr_x, gr_y, grid_z, tooltip,
                                    ncontours=ncontours,
                                    showscale=showscale,
-                                   showlabels=showlabels,
-                                   colorscale=colorscale, 
-                                   reversescale=reversescale,
-                                   coloring=coloring,
-                                   smoothing=smoothing)
+                                   colorscale=colorscale,
+                                   coloring=coloring)
     side_trace, tick_trace = _styling_traces_ternary(x_ticks, y_ticks)
     fig = go.Figure(data=[contour_trace,  tick_trace, side_trace],
                     layout=layout)

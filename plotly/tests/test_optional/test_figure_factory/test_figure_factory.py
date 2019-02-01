@@ -2965,12 +2965,8 @@ class TestTernarycontour(NumpyTestUtilsMixin, TestCase):
         c = 1 - a - b
         z = a * b * c
         contour_dict = {'ncontours': 10,
-                        'showscale': True,
-                        'reversescale': False}
-
+                        'showscale': True}
 
         fig = ff.create_ternary_contour(np.stack((a, b, c)), z, **contour_dict)
         for key, value in contour_dict.items():
             assert fig['data'][0][key] == value
-
-
