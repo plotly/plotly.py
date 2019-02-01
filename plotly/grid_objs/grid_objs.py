@@ -7,7 +7,7 @@ from __future__ import absolute_import
 
 try:
     from collections.abc import MutableSequence
-except ModuleNotFoundError:
+except ImportError:
     from collections import MutableSequence
 
 from requests.compat import json as _json
