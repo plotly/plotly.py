@@ -1,5 +1,4 @@
 from __future__ import absolute_import
-import warnings
 import plotly.colors as clrs
 from plotly.graph_objs import graph_objs as go
 from plotly import exceptions, optional_imports
@@ -9,60 +8,53 @@ sk = optional_imports.get_module('skimage')
 scipy_interp = optional_imports.get_module('scipy.interpolate')
 
 
-def _pl_deep():
-    return [[0.0, 'rgb(253, 253, 204)'],
-            [0.1, 'rgb(201, 235, 177)'],
-            [0.2, 'rgb(145, 216, 163)'],
-            [0.3, 'rgb(102, 194, 163)'],
-            [0.4, 'rgb(81, 168, 162)'],
-            [0.5, 'rgb(72, 141, 157)'],
-            [0.6, 'rgb(64, 117, 152)'],
-            [0.7, 'rgb(61, 90, 146)'],
-            [0.8, 'rgb(65, 64, 123)'],
-            [0.9, 'rgb(55, 44, 80)'],
-            [1.0, 'rgb(39, 26, 44)']]
+def _replace_zero_coords(ternary_data, delta=0.0005):
+    """
+    Replaces zero ternary coordinates with delta and normalize the new
+    triplets (a, b, c).
 
+    Parameters
+    ----------
 
-def replace_zero_coords(ternary_data, delta=0.001):
-    """Replaces zero ternary coordinates with delta
-    and normalize the new triplets (a, b, c); implements a method
+    ternary_data : ndarray of shape (N, 3)
+
+    delta : float
+        Small float to regularize logarithm.
+
+    Notes
+    -----
+    Implements a method
     by J. A. Martin-Fernandez,  C. Barcelo-Vidal, V. Pawlowsky-Glahn,
     Dealing with zeros and missing values in compositional data sets
-    using nonparametric imputation,
-    Mathematical Geology  35 (2003), pp 253-278
+    using nonparametric imputation, Mathematical Geology 35 (2003),
+    pp 253-278.
     """
-    # ternary_data: array (n, 3)
-    # delta:  small float (close to zero)
-    #Returns a new data set of normalized ternary coords
-
-    ternary_data = central_proj(ternary_data)
-    bool_array = (ternary_data == 0)
-
-    n_comp = ternary_data.shape[-1]
-    info_row_zero = bool_array.sum(axis=-1, keepdims=True)
+    zero_mask = (ternary_data == 0)
+    info_row_zero = zero_mask.sum(axis=-1, keepdims=True)
 
     if delta is None:
         delta = 0.001
-    unity_complement = 1 -  delta * info_row_zero
+    unity_complement = 1 - delta * info_row_zero
     if np.any(unity_complement) < 0:
-        raise ValueError('Your  delta led to negative ternary coords.Set a smaller delta')
-    ternary_data = np.where(bool_array, delta, unity_complement * ternary_data)
+        raise ValueError('The provided value of delta led to negative'
+                         'ternary coords.Set a smaller delta')
+    ternary_data = np.where(zero_mask, delta, unity_complement * ternary_data)
     return ternary_data.squeeze()
 
 
-def dir_ilr(barycentric):  #ilr: S^2 ---> R^2 identified to x_1+x2+x3=0 in R^3
+def _ilr_transform(barycentric):
+    """
+
+    """
     barycentric = np.asarray(barycentric)
-    if barycentric.shape[-1] != 3:
-        raise ValueError(f'barycentric coordinates are 3 floats, not {barycentric.shape[-1]}')
-    if len(barycentric.shape) == 1:
-        barycentric = barycentric.reshape(1,3)
-    x0 = np.log(barycentric[:,0]/barycentric[:,1]) / np.sqrt(2)
-    x1 = np.log(barycentric[:,0]*barycentric[:,1]/barycentric[:, 2]**2) / np.sqrt(6)
-    ilr_tdata = np.stack((x0,x1)).T
-    return ilr_tdata if  barycentric.shape[0] > 1 else ilr_tdata.squeeze()
+    x0 = np.log(barycentric[0] / barycentric[1]) / np.sqrt(2)
+    x1 = 1. / np.sqrt(6) * np.log(barycentric[0] * barycentric[1] /
+                                  barycentric[2] ** 2)
+    ilr_tdata = np.stack((x0, x1))
+    return ilr_tdata
 
 
-def ilr_inverse (x): #ilr: R^2 -->S^2 (2 simplex)
+def _ilr_inverse(x): #ilr: R^2 -->S^2 (2 simplex)
     #x an n  list of 2-lists or an array of shape (n,2),
     # implementation of a method presented in:
     # An algebraic method to compute isometric logratio transformation and back transformation of compositional data
@@ -98,37 +90,35 @@ def _transform_barycentric_cartesian():
 
 
 def _colors(ncontours, colormap=None):
-    if isinstance(colormap, str):
-        if colormap in clrs.PLOTLY_SCALES.keys():
-            cmap = clrs.PLOTLY_SCALES[colormap]
-        else:
-            raise exceptions.PlotlyError(
-                "If 'colormap' is a string, it must be the name "
-                "of a Plotly Colorscale. The available colorscale "
-                "names are {}".format(clrs.PLOTLY_SCALES.keys()))
-    elif isinstance(colormap, dict):
-        cmap = colormap
-        clrs.validate_colors_dict(cmap, 'rgb')
+    if colormap in clrs.PLOTLY_SCALES.keys():
+        #cmap = clrs.validate_colors(colormap, colortype='rgb')
+        cmap = clrs.PLOTLY_SCALES[colormap]
     else:
-        raise ValueError("""Colormap has to be a dictionary or a valid
-                         Plotly colormap string""")
+        raise exceptions.PlotlyError(
+                "Colorscale must be a valid Plotly Colorscale."
+                "The available colorscale names are {}".format(
+                    clrs.PLOTLY_SCALES.keys()))
     values = np.linspace(0, 1, ncontours)
     keys = np.array([pair[0] for pair in cmap])
     cols = np.array([pair[1] for pair in cmap])
     inds = np.searchsorted(keys, values)
+    if '#'in cols[0]:
+        cols = [clrs.label_rgb(clrs.hex_to_rgb(col)) for col in cols]
     colors = [cols[0]]
     for ind, val in zip(inds[1:], values[1:]):
         key1, key2 = keys[ind - 1], keys[ind]
         interm = (val - key1) / (key2 - key1)
         col = clrs.find_intermediate_color(cols[ind - 1],
-                                           cols[ind], interm, colortype='rgb')
+                                           cols[ind], interm,
+                                           colortype='rgb')
         colors.append(col)
     return colors
 
 
-def _contour_trace(x, y, z, ncontours=None, 
+def _contour_trace(x, y, z, ncontours=None,
                    colorscale='Electric',
-                   linecolor='rgb(150,150,150)', interp_mode='cartesian'):
+                   linecolor='rgb(150,150,150)', interp_mode='cartesian',
+                   coloring=None):
     """
     Contour trace in Cartesian coordinates.
 
@@ -163,203 +153,25 @@ def _contour_trace(x, y, z, ncontours=None,
                 bar_coords = np.dot(invM,
                         np.stack((dx * xx, dy * yy, np.ones(xx.shape))))
             elif interp_mode == 'ilr':
-                bar_coords = ilr_inverse(np.stack((dx * xx + x.min(),
-                                                   dy * yy + y.min())).T).T
-            a = bar_coords[0]
-            b = bar_coords[1]
-            c = bar_coords[2]
+                bar_coords = _ilr_inverse(np.stack((dx * xx + x.min(),
+                                                    dy * yy + y.min())).T).T
+            a, b, c = bar_coords
+            tooltip = _tooltip(a, b, c, val)
+            _col = colors[i] if coloring == 'lines' else linecolor
             trace = dict(
-                type='scatterternary', text=val,
+                type='scatterternary', text=tooltip,
                 a=a, b=b, c=c, mode='lines',
-                line=dict(color=colors[i], shape='spline'),
+                line=dict(color=_col, shape='spline', width=1),
                 fill='toself',
+                fillcolor=colors[i],
+                hoverinfo='text',
                 showlegend=True,
-                name=str(val),
-                # fillcolor = colors_iterator.next()
+                name='%.2f' % val
             )
+            if coloring == 'lines':
+                trace['fill'] = None
             traces.append(trace)
     return traces
-
-
-
-def barycentric_ticks(side):
-    """
-    Barycentric coordinates of ticks locations.
-
-    Parameters
-    ==========
-    side : 0, 1 or  2
-        side j has 0 in the  j^th position of barycentric coords of tick
-        origin.
-    """
-    p = 10
-    if side == 0:  # where a=0
-        return np.array([(0, j/p, 1-j/p) for j in range(p - 2, 0, -2)])
-    elif side == 1:  # b=0
-        return np.array([(i/p, 0, 1-i/p) for i in range(2, p, 2)])
-    elif side == 2:  # c=0
-        return (np.array([(i/p, j/p, 0)
-                          for i in range(p - 2, 0, -2)
-                          for j in range(p - i, -1, -1) if i + j == p]))
-    else:
-        raise ValueError('The side can be only 0, 1, 2')
-
-
-def _side_coord_ticks(side, t=0.01):
-    """
-    Cartesian coordinates of ticks loactions for one side (0, 1, 2) 
-    of ternary diagram.
-
-    Parameters
-    ==========
-
-    side : int, 0, 1 or 2
-        Index of side
-    t : float, default 0.01
-        Length of tick
-
-    Returns
-    =======
-    xt, yt : lists
-        Lists of x, resp y-coords of tick segments
-    posx, posy : lists
-        Lists of ticklabel positions
-    """
-    M, invM = _transform_barycentric_cartesian()
-    baryc = barycentric_ticks(side)
-    xy1 = np.dot(M, baryc.T)
-    xs, ys = xy1[:2]
-    x_ticks, y_ticks, posx, posy = [], [], [], []
-    if side == 0:
-        for i in range(4):
-            x_ticks.extend([xs[i], xs[i]+t, None])
-            y_ticks.extend([ys[i], ys[i]-np.sqrt(3)*t, None])
-        posx.extend([xs[i]+t for i in range(4)])
-        posy.extend([ys[i]-np.sqrt(3)*t for i in range(4)])
-    elif side == 1:
-        for i in range(4):
-            x_ticks.extend([xs[i], xs[i]+t, None])
-            y_ticks.extend([ys[i], ys[i]+np.sqrt(3)*t, None])
-        posx.extend([xs[i]+t for i in range(4)])
-        posy.extend([ys[i]+np.sqrt(3)*t for i in range(4)])
-    elif side == 2:
-        for i in range(4):
-            x_ticks.extend([xs[i], xs[i]-2*t, None])
-            y_ticks.extend([ys[i], ys[i], None])
-        posx.extend([xs[i]-2*t for i in range(4)])
-        posy.extend([ys[i] for i in range(4)])
-    else:
-        raise ValueError('Side can be only 0, 1, 2')
-    return x_ticks, y_ticks, posx, posy
-
-
-def _cart_coord_ticks(t=0.01):
-    """
-    Cartesian coordinates of ticks loactions.
-
-    Parameters
-    ==========
-
-    t : float, default 0.01
-        Length of tick
-
-    Returns
-    =======
-    xt, yt : lists
-        Lists of x, resp y-coords of tick segments (all sides concatenated).
-    posx, posy : lists
-        Lists of ticklabel positions (all sides concatenated).
-    """
-    x_ticks, y_ticks, posx, posy = [], [], [], []
-    for side in range(3):
-        xt, yt, px, py = _side_coord_ticks(side, t)
-        x_ticks.extend(xt)
-        y_ticks.extend(yt)
-        posx.extend(px)
-        posy.extend(py)
-    return x_ticks, y_ticks, posx, posy
-
-
-def _set_ticklabels(annotations, posx, posy, proportions=True):
-    """
-
-    Parameters
-    ==========
-
-    annotations : list
-        List of annotations previously defined in layout definition
-        as a dict, not as an instance of go.Layout.
-    posx, posy:  lists
-        Lists containing ticklabel position coordinates
-    proportions : bool
-        True when ticklabels are 0.2, 0.4, ... False when they are
-        20%, 40%...
-    """
-    if not isinstance(annotations, list):
-        raise ValueError('annotations should be a list')
-
-    ticklabel = [0.8, 0.6, 0.4, 0.2] if proportions \
-                                     else ['80%', '60%', '40%', '20%']
-
-    # Annotations for ticklabels on side 0
-    annotations.extend([dict(showarrow=False,
-                             text=str(ticklabel[j]),
-                             x=posx[j],
-                             y=posy[j],
-                             align='center',
-                             xanchor='center',
-                             yanchor='top',
-                             font=dict(size=12)) for j in range(4)])
-
-    # Annotations for ticklabels on side 1
-    annotations.extend([dict(showarrow=False,
-                             text=str(ticklabel[j]),
-                             x=posx[j+4],
-                             y=posy[j+4],
-                             align='center',
-                             xanchor='left',
-                             yanchor='middle',
-                             font=dict(size=12)) for j in range(4)])
-
-    # Annotations for ticklabels on side 2
-    annotations.extend([dict(showarrow=False,
-                             text=str(ticklabel[j]),
-                             x=posx[j+8],
-                             y=posy[j+8],
-                             align='center',
-                             xanchor='right',
-                             yanchor='middle',
-                             font=dict(size=12)) for j in range(4)])
-    return annotations
-
-
-def _styling_traces_ternary(x_ticks, y_ticks):
-    """
-    Traces for outer triangle of ternary plot, and corresponding ticks.
-
-    Parameters
-    ==========
-
-    x_ticks : array_like, 1D
-        x Cartesian coordinate of ticks
-    y_ticks : array_like, 1D
-        y Cartesian coordinate of ticks
-    """
-    side_trace = dict(type='scatter',
-                      x=[0.5, 0, 1, 0.5],
-                      y=[np.sqrt(3)/2, 0, 0, np.sqrt(3)/2],
-                      mode='lines',
-                      line=dict(width=2, color='#444444'),
-                      hoverinfo='none')
-
-    tick_trace = dict(type='scatter',
-                      x=x_ticks,
-                      y=y_ticks,
-                      mode='lines',
-                      line=dict(width=1, color='#444444'),
-                      hoverinfo='none')
-
-    return side_trace, tick_trace
 
 
 def _ternary_layout(title='Ternary contour plot', width=550, height=525,
@@ -390,6 +202,9 @@ def _ternary_layout(title='Ternary contour plot', width=550, height=525,
         Font size of pole labels.
     """
     return dict(title=title,
+                width=width, height=height,
+                font=dict(family=fontfamily, size=colorbar_fontsize),
+                plot_bgcolor=plot_bgcolor,
                 ternary=dict(sum=1,
                              aaxis=dict(title=pole_labels[0],
                                         min=0.01, linewidth=2,
@@ -400,45 +215,11 @@ def _ternary_layout(title='Ternary contour plot', width=550, height=525,
                              caxis=dict(title=pole_labels[2],
                                         min=0.01, linewidth=2,
                                         ticks='outside')),
-                showlegend=True
+                showlegend=False,
                 )
 
-    return dict(title=title,
-                font=dict(family=fontfamily, size=colorbar_fontsize),
-                width=width, height=height,
-                xaxis=dict(visible=False),
-                yaxis=dict(visible=False),
-                plot_bgcolor=plot_bgcolor,
-                showlegend=False,
-                # annotations for strings placed at the triangle vertices
-                annotations=[dict(showarrow=False,
-                                  text=pole_labels[0],
-                                  x=0.5,
-                                  y=np.sqrt(3)/2,
-                                  align='center',
-                                  xanchor='center',
-                                  yanchor='bottom',
-                                  font=dict(size=label_fontsize)),
-                             dict(showarrow=False,
-                                  text=pole_labels[1],
-                                  x=0,
-                                  y=0,
-                                  align='left',
-                                  xanchor='right',
-                                  yanchor='top',
-                                  font=dict(size=label_fontsize)),
-                             dict(showarrow=False,
-                                  text=pole_labels[2],
-                                  x=1,
-                                  y=0,
-                                  align='right',
-                                  xanchor='left',
-                                  yanchor='top',
-                                  font=dict(size=label_fontsize))
-                             ])
 
-
-def _tooltip(N, bar_coords, grid_z, xy1, mode='proportions'):
+def _tooltip(a, b, c, z, mode='proportions'):
     """
     Tooltip annotations to be displayed on hover.
 
@@ -457,24 +238,21 @@ def _tooltip(N, bar_coords, grid_z, xy1, mode='proportions'):
         Coordinates inside the ternary plot can be displayed either as
         proportions (adding up to 1) or as percents (adding up to 100).
     """
+    N = len(a)
+    if np.isscalar(z):
+        z = z * np.ones(N)
     if mode == 'proportions' or mode == 'proportion':
         tooltip = [
-        ['a: %.2f' % round(bar_coords[0][i, j], 2) +
-         '<br>b: %.2f' % round(bar_coords[1][i, j], 2) +
-         '<br>c: %.2f' % (round(1-round(bar_coords[0][i, j], 2) -
-                          round(bar_coords[1][i, j], 2), 2)) +
-         '<br>z: %.2f' % round(grid_z[i, j], 2)
-        if ~np.isnan(xy1[0][i, j]) else '' for j in range(N)]
-                                           for i in range(N)]
+         'a: %.2f' % round(a[i], 2) +
+         '<br>b: %.2f' % round(b[i], 2) +
+         '<br>c: %.2f' % round(c[i], 2) +
+         '<br>z: %.2f' % round(z[i], 2) for i in range(N)]
     elif mode == 'percents' or mode == 'percent':
         tooltip = [
-        ['a: %d' % int(100*bar_coords[0][i, j] + 0.5) +
-         '<br>b: %d' % int(100*bar_coords[1][i, j] + 0.5) +
-         '<br>c: %d' % (100-int(100*bar_coords[0][i, j] + 0.5) -
-                        int(100*bar_coords[1][i, j] + 0.5)) +
-         '<br>z: %.2f' % round(grid_z[i, j], 2)
-         if ~np.isnan(xy1[0][i, j]) else '' for j in range(N)]
-                                            for i in range(N)]
+         'a: %d' % int(100 * a[i] + 0.5) +
+         '<br>b: %d' % int(100 * b[i] + 0.5) +
+         '<br>c: %d' % int(100 * c[i] + 0.5) +
+         '<br>z: %.2f' % round(z[i], 2) for i in range(N)]
     else:
         raise ValueError("""tooltip mode must be either "proportions" or
                           "percents".""")
@@ -501,7 +279,7 @@ def _prepare_barycentric_coord(b_coords):
     return A, B, C
 
 
-def central_proj(mdata):
+def _central_proj(mdata):
 
     #array of shape(n,3) or a n-list of 3-lists of positive numbers,
     #returns for each row [a, b, c]--> np.array([a,b,c])/(a+b+c)
@@ -546,8 +324,8 @@ def _compute_grid(coordinates, values, tooltip_mode, interp_mode='cartesian'):
         M, invM = _transform_barycentric_cartesian()
         coord_points = np.einsum('ik, kj -> ij', M, np.stack((A, B, C)))
     elif interp_mode == 'ilr':
-        mdata = replace_zero_coords(np.stack((A, B, C)).T)
-        coord_points = dir_ilr(mdata).T
+        mdata = _replace_zero_coords(np.stack((A, B, C)).T)
+        coord_points = _ilr_transform(mdata.T)
     else:
         raise ValueError("interp_mode should be cartesian or ilr")
     xx, yy = coord_points[:2]
@@ -557,8 +335,9 @@ def _compute_grid(coordinates, values, tooltip_mode, interp_mode='cartesian'):
     gr_x = np.linspace(x_min, x_max, n_interp)
     gr_y = np.linspace(y_min, y_max, n_interp)
     grid_x, grid_y = np.meshgrid(gr_x, gr_y)
-    grid_z = scipy_interp.griddata(coord_points[:2].T, values, (grid_x, grid_y),
-                    method='cubic')
+    grid_z = scipy_interp.griddata(coord_points[:2].T, values,
+                                   (grid_x, grid_y),
+                                   method='cubic')
     return grid_z, gr_x, gr_y
 
 
@@ -566,12 +345,12 @@ def create_ternarycontour(coordinates, values, pole_labels=['a', 'b', 'c'],
                           tooltip_mode='proportions', width=500, height=500,
                           ncontours=None,
                           showscale=False, coloring=None,
-                          showlabels=False, colorscale=None,
+                          colorscale='Greens',
                           reversescale=False,
                           plot_bgcolor='rgb(240,240,240)',
                           title=None,
-                          smoothing=False,
-                          interp_mode='cartesian'):
+                          interp_mode='ilr',
+                          showmarkers=False):
     """
     Ternary contour plot.
 
@@ -646,22 +425,38 @@ def create_ternarycontour(coordinates, values, pole_labels=['a', 'b', 'c'],
 
     """
     grid_z, gr_x, gr_y = _compute_grid(coordinates, values,
-                                                tooltip_mode, 
-                                                interp_mode=interp_mode)
-
-    #x_ticks, y_ticks, posx, posy = _cart_coord_ticks(t=0.01)
+                                       tooltip_mode,
+                                       interp_mode=interp_mode)
 
     layout = _ternary_layout(pole_labels=pole_labels,
                              width=width, height=height, title=title,
                              plot_bgcolor=plot_bgcolor)
-    #annotations = _set_ticklabels(layout['annotations'], posx, posy,
-    #                              proportions=True)
-    if colorscale is None:
-        colorscale = _pl_deep()
 
     contour_trace = _contour_trace(gr_x, gr_y, grid_z,
                                    ncontours=ncontours,
                                    colorscale=colorscale,
-                                   interp_mode=interp_mode)
+                                   interp_mode=interp_mode,
+                                   coloring=coloring)
     fig = go.Figure(data=contour_trace, layout=layout)
+
+    if showmarkers:
+        a, b, c = coordinates
+        tooltip = _tooltip(a, b, c, values)
+        fig.add_scatterternary(a=a, b=b, c=c,
+                               mode='markers',
+                               marker={'color': values,
+                                       'colorscale': colorscale},
+                               text=tooltip,
+                               hoverinfo='text')
+    if showscale:
+        colorbar = dict({'type': 'scatterternary',
+                         'a': [None], 'b': [None],
+                         'c': [None],
+                         'marker': {'cmin': values.min(),
+                                    'cmax': values.max(),
+                                    'colorscale': colorscale,
+                                    'showscale': True},
+                         'mode': 'markers'})
+        fig.add_trace(colorbar)
+
     return fig
