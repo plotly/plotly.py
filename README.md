@@ -83,7 +83,7 @@ pip install plotly==3.6.0
 
 or conda.
 ```
-conda install -c plotly/label/test plotly=3.6.0
+conda install -c plotly plotly=3.6.0
 ```
 
 ### Jupyter Notebook Support
