@@ -4,8 +4,93 @@ from plotly.graph_objs import graph_objs as go
 from plotly import exceptions, optional_imports
 
 np = optional_imports.get_module('numpy')
-sk = optional_imports.get_module('skimage')
+sk_measure = optional_imports.get_module('skimage.measure')
 scipy_interp = optional_imports.get_module('scipy.interpolate')
+
+
+# ----------- Layout and tooltip ------------------------------
+
+
+def _ternary_layout(title='Ternary contour plot', width=550, height=525,
+                    fontfamily='Balto, sans-serif',
+                    plot_bgcolor='rgb(240,240,240)',
+                    pole_labels=['a', 'b', 'c'], label_fontsize=16):
+    """
+    Layout of ternary contour plot, to be passed to ``go.FigureWidget``
+    object.
+
+    Parameters
+    ==========
+    title : str or None
+        Title of ternary plot
+    width : int
+        Figure width.
+    height : int
+        Figure height.
+    fontfamily : str
+        Family of fonts
+    plot_bgcolor :
+        color of figure background
+    pole_labels : str, default ['a', 'b', 'c']
+        Names of the three poles of the triangle.
+    label_fontsize : int
+        Font size of pole labels.
+    """
+    return dict(title=title,
+                width=width, height=height,
+                font=dict(family=fontfamily),
+                plot_bgcolor=plot_bgcolor,
+                ternary=dict(sum=1,
+                             aaxis=dict(title=dict(text=pole_labels[0],
+                                            font=dict(size=label_fontsize)),
+                                        min=0.01, linewidth=2,
+                                        ticks='outside'),
+                             baxis=dict(title=dict(text=pole_labels[1],
+                                            font=dict(size=label_fontsize)),
+                                        min=0.01, linewidth=2,
+                                        ticks='outside'),
+                             caxis=dict(title=dict(text=pole_labels[2],
+                                            font=dict(size=label_fontsize)),
+                                        min=0.01, linewidth=2,
+                                        ticks='outside')),
+                showlegend=False,
+               )
+
+
+def _tooltip(a, b, c, z, mode='proportions'):
+    """
+    Tooltip annotations to be displayed on hover.
+
+    Parameters
+    ==========
+
+    a, b, c : 1-D array-like 
+        Barycentric coordinates.
+    z : 1-D array
+        Values (e.g. elevation values) at barycentric coordinates.
+    mode : str, 'proportions' or 'percents'
+        Coordinates inside the ternary plot can be displayed either as
+        proportions (adding up to 1) or as percents (adding up to 100).
+    """
+    N = len(a)
+    if np.isscalar(z):
+        z = z * np.ones(N)
+    if mode == 'proportions' or mode == 'proportion':
+        tooltip = ['a: %.2f' % round(a[i], 2) +
+                   '<br>b: %.2f' % round(b[i], 2) +
+                   '<br>c: %.2f' % round(c[i], 2) +
+                   '<br>z: %.2f' % round(z[i], 2) for i in range(N)]
+    elif mode == 'percents' or mode == 'percent':
+        tooltip = ['a: %d' % int(100 * a[i] + 0.5) +
+                   '<br>b: %d' % int(100 * b[i] + 0.5) +
+                   '<br>c: %d' % int(100 * c[i] + 0.5) +
+                   '<br>z: %.2f' % round(z[i], 2) for i in range(N)]
+    else:
+        raise ValueError("""tooltip mode must be either "proportions" or
+                          "percents".""")
+    return tooltip
+
+# ------------- Transformations of coordinates -------------------
 
 
 def _replace_zero_coords(ternary_data, delta=0.0005):
@@ -107,6 +192,78 @@ def _transform_barycentric_cartesian():
     return M, np.linalg.inv(M)
 
 
+def _prepare_barycentric_coord(b_coords):
+    """
+    Check ternary coordinates and return the right barycentric coordinates.
+    """
+    if not isinstance(b_coords, (list, np.ndarray)):
+        raise ValueError('Data  should be either an array of shape (n,m),'
+                         'or a list of n m-lists, m=2 or 3')
+    b_coords = np.asarray(b_coords)
+    if b_coords.shape[0] not in (2, 3):
+        raise ValueError('A point should have  2 (a, b) or 3 (a, b, c)'
+                         'barycentric coordinates')
+    if ((len(b_coords) == 3) and
+         not np.allclose(b_coords.sum(axis=0), 1, rtol=0.01) and
+         not np.allclose(b_coords.sum(axis=0), 100, rtol=0.01)):
+        msg = "The sum of coordinates should be 1 or 100 for all data points"
+        raise ValueError(msg)
+
+    if len(b_coords) == 2:
+        A, B = b_coords
+        C = 1 - (A + B)
+    else:
+        A, B, C = b_coords / b_coords.sum(axis=0)
+    if np.any(np.stack((A, B, C)) < 0):
+        raise ValueError('Barycentric coordinates should be positive.')
+    return np.stack((A, B, C))
+
+
+def _compute_grid(coordinates, values, interp_mode='ilr'):
+    """
+    Transform data points with Cartesian or ILR mapping, then Compute
+    interpolation on a regular grid.
+
+    Parameters
+    ==========
+
+    coordinates : array-like
+        Barycentric coordinates of data points.
+    values : 1-d array-like
+        Data points, field to be represented as contours.
+    interp_mode : 'ilr' (default) or 'cartesian'
+        Defines how data are interpolated to compute contours.
+    """
+    if interp_mode == 'cartesian':
+        M, invM = _transform_barycentric_cartesian()
+        coord_points = np.einsum('ik, kj -> ij', M, coordinates)
+    elif interp_mode == 'ilr':
+        coordinates = _replace_zero_coords(coordinates)
+        coord_points = _ilr_transform(coordinates)
+    else:
+        raise ValueError("interp_mode should be cartesian or ilr")
+    xx, yy = coord_points[:2]
+    x_min, x_max = xx.min(), xx.max()
+    y_min, y_max = yy.min(), yy.max()
+    n_interp = max(200, int(np.sqrt(len(values))))
+    gr_x = np.linspace(x_min, x_max, n_interp)
+    gr_y = np.linspace(y_min, y_max, n_interp)
+    grid_x, grid_y = np.meshgrid(gr_x, gr_y)
+    # We use cubic interpolation, except outside of the convex hull
+    # of data points where we use nearest neighbor values.
+    grid_z = scipy_interp.griddata(coord_points[:2].T, values,
+                                   (grid_x, grid_y),
+                                   method='cubic')
+    grid_z_other = scipy_interp.griddata(coord_points[:2].T, values,
+                                         (grid_x, grid_y),
+                                         method='nearest')
+    mask_nan = np.isnan(grid_z)
+    grid_z[mask_nan] = grid_z_other[mask_nan]
+    return grid_z, gr_x, gr_y
+
+# ----------------------- Contour traces ----------------------
+
+
 def _colors(ncontours, colormap=None):
     """
     Return a list of ``ncontours`` colors from the ``colormap`` colorscale.
@@ -134,6 +291,10 @@ def _colors(ncontours, colormap=None):
                                            colortype='rgb')
         colors.append(col)
     return colors
+
+
+def _is_invalid_contour(x, y):
+    return (np.all(np.abs(x - x[0]) < 2) and np.all(np.abs(y - y[0]) < 2))
 
 
 def _contour_trace(x, y, z, ncontours=None,
@@ -183,13 +344,13 @@ def _contour_trace(x, y, z, ncontours=None,
     M, invM = _transform_barycentric_cartesian()
     dx = (x.max() - x.min()) / x.size
     dy = (y.max() - y.min()) / y.size
-    zz = np.copy(z)
-    zz[np.isnan(z)] = (z[mask_ok].min()
-            - 10. * (z[mask_ok].max() - z[mask_ok].min()))
     for i, val in enumerate(values):
-        contour_level = sk.measure.find_contours(zz, val)
+        contour_level = sk_measure.find_contours(z, val)
+        fill = 'toself'
         for contour in contour_level: # several closed contours for 1 value
             y_contour, x_contour = contour.T
+            if _is_invalid_contour(x_contour, y_contour):
+                continue
             if interp_mode == 'cartesian':
                 bar_coords = np.dot(invM,
                                     np.stack((dx * x_contour,
@@ -208,7 +369,7 @@ def _contour_trace(x, y, z, ncontours=None,
                 type='scatterternary', text=tooltip,
                 a=a, b=b, c=c, mode='lines',
                 line=dict(color=_col, shape='spline', width=1),
-                fill='toself',
+                fill=fill,
                 fillcolor=colors[i],
                 hoverinfo='text',
                 showlegend=True,
@@ -219,153 +380,13 @@ def _contour_trace(x, y, z, ncontours=None,
             traces.append(trace)
     return traces
 
-
-def _ternary_layout(title='Ternary contour plot', width=550, height=525,
-                    fontfamily='Balto, sans-serif',
-                    plot_bgcolor='rgb(240,240,240)',
-                    pole_labels=['a', 'b', 'c'], label_fontsize=16):
-    """
-    Layout of ternary contour plot, to be passed to ``go.FigureWidget``
-    object.
-
-    Parameters
-    ==========
-    title : str or None
-        Title of ternary plot
-    width : int
-        Figure width.
-    height : int
-        Figure height.
-    fontfamily : str
-        Family of fonts
-    plot_bgcolor :
-        color of figure background
-    pole_labels : str, default ['a', 'b', 'c']
-        Names of the three poles of the triangle.
-    label_fontsize : int
-        Font size of pole labels.
-    """
-    return dict(title=title,
-                width=width, height=height,
-                font=dict(family=fontfamily),
-                plot_bgcolor=plot_bgcolor,
-                ternary=dict(sum=1,
-                             aaxis=dict(title=dict(text=pole_labels[0],
-                                            font=dict(size=label_fontsize)),
-                                        min=0.01, linewidth=2,
-                                        ticks='outside'),
-                             baxis=dict(title=dict(text=pole_labels[1],
-                                            font=dict(size=label_fontsize)),
-                                        min=0.01, linewidth=2,
-                                        ticks='outside'),
-                             caxis=dict(title=dict(text=pole_labels[2],
-                                            font=dict(size=label_fontsize)),
-                                        min=0.01, linewidth=2,
-                                        ticks='outside')),
-                showlegend=False,
-               )
-
-
-def _tooltip(a, b, c, z, mode='proportions'):
-    """
-    Tooltip annotations to be displayed on hover.
-
-    Parameters
-    ==========
-
-    a, b, c : 1-D array-like 
-        Barycentric coordinates.
-    z : 1-D array
-        Values (e.g. elevation values) at barycentric coordinates.
-    mode : str, 'proportions' or 'percents'
-        Coordinates inside the ternary plot can be displayed either as
-        proportions (adding up to 1) or as percents (adding up to 100).
-    """
-    N = len(a)
-    if np.isscalar(z):
-        z = z * np.ones(N)
-    if mode == 'proportions' or mode == 'proportion':
-        tooltip = ['a: %.2f' % round(a[i], 2) +
-                   '<br>b: %.2f' % round(b[i], 2) +
-                   '<br>c: %.2f' % round(c[i], 2) +
-                   '<br>z: %.2f' % round(z[i], 2) for i in range(N)]
-    elif mode == 'percents' or mode == 'percent':
-        tooltip = ['a: %d' % int(100 * a[i] + 0.5) +
-                   '<br>b: %d' % int(100 * b[i] + 0.5) +
-                   '<br>c: %d' % int(100 * c[i] + 0.5) +
-                   '<br>z: %.2f' % round(z[i], 2) for i in range(N)]
-    else:
-        raise ValueError("""tooltip mode must be either "proportions" or
-                          "percents".""")
-    return tooltip
-
-
-def _prepare_barycentric_coord(b_coords):
-    """
-    Check ternary coordinates and return the right barycentric coordinates.
-    """
-    if not isinstance(b_coords, (list, np.ndarray)):
-        raise ValueError('Data  should be either an array of shape (n,m), or a list of n m-lists, m=2 or 3')
-    b_coords = np.asarray(b_coords)
-    if b_coords.shape[0] not in (2, 3):
-        raise ValueError('A point should have  2 (a, b) or 3 (a, b, c)  barycentric coordinates')
-    if ((len(b_coords) == 3) and
-         not np.allclose(b_coords.sum(axis=0), 1, rtol=0.01) and
-         not np.allclose(b_coords.sum(axis=0), 100, rtol=0.01)):
-        msg = "The sum of coordinates should be 1 or 100 for all data points"
-        raise ValueError(msg)
-
-    if len(b_coords) == 2:
-        A, B = b_coords
-        C = 1 - (A + B)
-    else:
-        A, B, C = b_coords / b_coords.sum(axis=0)
-    if np.any(np.stack((A, B, C)) < 0):
-        raise ValueError('Barycentric coordinates should be positive.')
-    return np.stack((A, B, C))
-
-
-def _compute_grid(coordinates, values, interp_mode='ilr'):
-    """
-    Transform data points with Cartesian or ILR mapping, then Compute
-    interpolation on a regular grid.
-
-    Parameters
-    ==========
-
-    coordinates : array-like
-        Barycentric coordinates of data points.
-    values : 1-d array-like
-        Data points, field to be represented as contours.
-    interp_mode : 'ilr' (default) or 'cartesian'
-        Defines how data are interpolated to compute contours.
-    """
-    if interp_mode == 'cartesian':
-        M, invM = _transform_barycentric_cartesian()
-        coord_points = np.einsum('ik, kj -> ij', M, coordinates)
-    elif interp_mode == 'ilr':
-        coordinates = _replace_zero_coords(coordinates)
-        coord_points = _ilr_transform(coordinates)
-    else:
-        raise ValueError("interp_mode should be cartesian or ilr")
-    xx, yy = coord_points[:2]
-    x_min, x_max = xx.min(), xx.max()
-    y_min, y_max = yy.min(), yy.max()
-    n_interp = max(200, int(np.sqrt(len(values))))
-    gr_x = np.linspace(x_min, x_max, n_interp)
-    gr_y = np.linspace(y_min, y_max, n_interp)
-    grid_x, grid_y = np.meshgrid(gr_x, gr_y)
-    grid_z = scipy_interp.griddata(coord_points[:2].T, values,
-                                   (grid_x, grid_y),
-                                   method='cubic')
-    return grid_z, gr_x, gr_y
-
+# -------------------- Figure Factory for ternary contour -------------
 
 def create_ternary_contour(coordinates, values, pole_labels=['a', 'b', 'c'],
                            tooltip_mode='proportions', width=500, height=500,
                            ncontours=None,
                            showscale=False, coloring=None,
-                           colorscale='BlueRed',
+                           colorscale='Bluered',
                            linecolor=None,
                            plot_bgcolor='rgb(240,240,240)',
                            title=None,
