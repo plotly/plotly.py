@@ -13,6 +13,7 @@ import pandas as pd
 shapely = optional_imports.get_module('shapely')
 shapefile = optional_imports.get_module('shapefile')
 gp = optional_imports.get_module('geopandas')
+sk_measure = optional_imports.get_module('skimage.measure')
 
 
 class TestDistplot(NumpyTestUtilsMixin, TestCase):
