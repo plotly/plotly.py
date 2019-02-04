@@ -82,6 +82,8 @@ try:
     from distutils.version import LooseVersion
     if LooseVersion(ipywidgets.__version__) >= LooseVersion('7.0.0'):
         from ._figurewidget import FigureWidget
+    del LooseVersion
+    del ipywidgets
 except ImportError:
     pass
 from ._deprecations import (
