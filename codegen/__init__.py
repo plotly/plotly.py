@@ -235,10 +235,13 @@ def perform_codegen():
     optional_figure_widget_import = """
 try:
     import ipywidgets
-    from ._figurewidget import FigureWidget
+    from distutils.version import LooseVersion
+    if LooseVersion(ipywidgets.__version__) >= LooseVersion('7.0.0'):
+        from ._figurewidget import FigureWidget
+    del LooseVersion
+    del ipywidgets
 except ImportError:
     pass
-
 """
     root_datatype_imports.append(optional_figure_widget_import)
 
