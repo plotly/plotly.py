@@ -2,8 +2,8 @@ from __future__ import absolute_import
 from plotly import optional_imports
 from plotly.graph_objs import graph_objs as go
 
+import numpy as np
 interpolate = optional_imports.get_module('scipy.interpolate')
-np = optional_imports.get_module('numpy')
 
 
 def _pl_deep():
@@ -496,10 +496,6 @@ def create_ternary_contour(coordinates, values, pole_labels=['a', 'b', 'c'],
 
     fig = ff.create_ternary_contour(np.stack((a, b)), z, coloring='lines')
     """
-    if np is None:
-        raise ImportError("""\
-The create_ternary_contour figure factory requires the numpy package""")
-
     if interpolate is None:
         raise ImportError("""\
 The create_ternary_contour figure factory requires the scipy package""")
