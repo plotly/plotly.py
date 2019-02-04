@@ -2,6 +2,10 @@ from __future__ import absolute_import
 import plotly.colors as clrs
 from plotly.graph_objs import graph_objs as go
 from plotly import exceptions, optional_imports
+from plotly import optional_imports
+from plotly.graph_objs import graph_objs as go
+
+interpolate = optional_imports.get_module('scipy.interpolate')
 
 np = optional_imports.get_module('numpy')
 sk_measure = optional_imports.get_module('skimage.measure')
@@ -382,6 +386,7 @@ def _contour_trace(x, y, z, ncontours=None,
 
 # -------------------- Figure Factory for ternary contour -------------
 
+
 def create_ternary_contour(coordinates, values, pole_labels=['a', 'b', 'c'],
                            tooltip_mode='proportions', width=500, height=500,
                            ncontours=None,
@@ -482,6 +487,9 @@ def create_ternary_contour(coordinates, values, pole_labels=['a', 'b', 'c'],
                                    title='Ternary plot',
                                    pole_labels=['clay', 'quartz', 'fledspar'])
     """
+    if interpolate is None:
+        raise ImportError("""\
+    The create_ternary_contour figure factory requires the scipy package""")
     if colorscale is None:
         showscale = False
     coordinates = _prepare_barycentric_coord(coordinates)
