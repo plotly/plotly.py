@@ -3,7 +3,11 @@ from __future__ import absolute_import
 from plotly import optional_imports
 
 # Require that numpy exists for figure_factory
-import numpy
+np = optional_imports.get_module('numpy')
+if np is None:
+    raise ImportError("""\
+The figure factory module requires the numpy package""")
+
 
 from plotly.figure_factory._2d_density import create_2d_density
 from plotly.figure_factory._annotated_heatmap import create_annotated_heatmap
