@@ -1,8 +1,9 @@
 from __future__ import absolute_import
-import numpy as np
-from scipy.interpolate import griddata
+from plotly import optional_imports
 from plotly.graph_objs import graph_objs as go
-import warnings
+
+interpolate = optional_imports.get_module('scipy.interpolate')
+np = optional_imports.get_module('numpy')
 
 
 def _pl_deep():
@@ -415,8 +416,8 @@ def _compute_grid(coordinates, values, tooltip_mode):
     gr_x = np.linspace(x_min, x_max, n_interp)
     gr_y = np.linspace(y_min, y_max, n_interp)
     grid_x, grid_y = np.meshgrid(gr_x, gr_y)
-    grid_z = griddata(cartes_coord_points[:2].T, values, (grid_x, grid_y),
-                      method='cubic')
+    grid_z = interpolate.griddata(
+        cartes_coord_points[:2].T, values, (grid_x, grid_y), method='cubic')
     bar_coords = np.einsum('ik, kmn -> imn', invM,
                            np.stack((grid_x, grid_y, np.ones(grid_x.shape))))
     # invalidate the points outside of the reference triangle
@@ -495,6 +496,14 @@ def create_ternary_contour(coordinates, values, pole_labels=['a', 'b', 'c'],
 
     fig = ff.create_ternary_contour(np.stack((a, b)), z, coloring='lines')
     """
+    if np is None:
+        raise ImportError("""\
+The create_ternary_contour figure factory requires the numpy package""")
+
+    if interpolate is None:
+        raise ImportError("""\
+The create_ternary_contour figure factory requires the scipy package""")
+
     grid_z, gr_x, gr_y, tooltip = _compute_grid(coordinates, values,
                                                 tooltip_mode)
 
