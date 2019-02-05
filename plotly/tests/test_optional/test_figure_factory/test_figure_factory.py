@@ -2955,30 +2955,5 @@ class TestTernarycontour(NumpyTestUtilsMixin, TestCase):
         fig = ff.create_ternary_contour(np.stack((a, b, c)), z)
         fig2 = ff.create_ternary_contour(np.stack((a, b)), z)
         np.testing.assert_array_almost_equal(fig2['data'][0]['a'],
-                                             fig['data'][0]['a'], 
+                                             fig['data'][0]['a'],
                                              decimal=3)
-
-
-    def test_optional_arguments(self):
-        a, b = np.mgrid[0:1:20j, 0:1:20j]
-        mask = a + b <= 1.
-        a = a[mask].ravel()
-        b = b[mask].ravel()
-        c = 1 - a - b
-        z = a * b * c
-        ncontours = 7
-        args = [dict(showmarkers=False, showscale=False),
-                dict(showmarkers=True, showscale=False),
-                dict(showmarkers=False, showscale=True),
-                dict(showmarkers=True, showscale=True)]
-
-        for arg_set in args:
-            fig = ff.create_ternary_contour(np.stack((a, b, c)), z,
-                                            interp_mode='cartesian',
-                                            ncontours=ncontours,
-                                            **arg_set)
-            print(len(fig.data))
-            assert (len(fig.data) == ncontours + arg_set['showmarkers'] +
-                                                 arg_set['showscale'])
-
-

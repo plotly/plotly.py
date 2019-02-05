@@ -5,8 +5,6 @@ from plotly import exceptions, optional_imports
 from plotly import optional_imports
 from plotly.graph_objs import graph_objs as go
 
-interpolate = optional_imports.get_module('scipy.interpolate')
-
 np = optional_imports.get_module('numpy')
 sk_measure = optional_imports.get_module('skimage.measure')
 scipy_interp = optional_imports.get_module('scipy.interpolate')
@@ -304,7 +302,8 @@ def _is_invalid_contour(x, y):
 def _contour_trace(x, y, z, ncontours=None,
                    colorscale='Electric',
                    linecolor='rgb(150,150,150)', interp_mode='llr',
-                   coloring=None, tooltip_mode='proportions'):
+                   coloring=None, tooltip_mode='proportions',
+                   v_min=0, v_max=1, fill_mode='toself'):
     """
     Contour trace in Cartesian coordinates.
 
@@ -331,6 +330,10 @@ def _contour_trace(x, y, z, ncontours=None,
     tooltip_mode : str, 'proportions' or 'percents'
         Coordinates inside the ternary plot can be displayed either as
         proportions (adding up to 1) or as percents (adding up to 100).
+    vmin, vmax : float
+        Bounds of interval of values used for the colorspace
+    fill_mode : 'toself' or 'tonext'
+        Mode used for filling contours when coloring=None
     """
     if ncontours is None:
         ncontours = 5
@@ -341,16 +344,12 @@ def _contour_trace(x, y, z, ncontours=None,
     else:
         colors = [linecolor] * ncontours
     traces = []
-    mask_nan = np.isnan(z)
-    mask_ok = np.logical_not(mask_nan)
-    values = np.linspace(z[mask_ok].min(), z[mask_ok].max(),
-                         ncontours + 2)[1:-1]
+    values = np.linspace(v_min, v_max, ncontours)
     M, invM = _transform_barycentric_cartesian()
     dx = (x.max() - x.min()) / x.size
     dy = (y.max() - y.min()) / y.size
     for i, val in enumerate(values):
         contour_level = sk_measure.find_contours(z, val)
-        fill = 'toself'
         for contour in contour_level: # several closed contours for 1 value
             y_contour, x_contour = contour.T
             if _is_invalid_contour(x_contour, y_contour):
@@ -373,7 +372,7 @@ def _contour_trace(x, y, z, ncontours=None,
                 type='scatterternary', text=tooltip,
                 a=a, b=b, c=c, mode='lines',
                 line=dict(color=_col, shape='spline', width=1),
-                fill=fill,
+                fill=fill_mode,
                 fillcolor=colors[i],
                 hoverinfo='text',
                 showlegend=True,
@@ -397,7 +396,8 @@ def create_ternary_contour(coordinates, values, pole_labels=['a', 'b', 'c'],
                            title=None,
                            interp_mode='ilr',
                            showmarkers=False,
-                           label_fontsize=16):
+                           label_fontsize=16,
+                           fill_mode='toself'):
     """
     Ternary contour plot.
 
@@ -446,6 +446,8 @@ def create_ternary_contour(coordinates, values, pole_labels=['a', 'b', 'c'],
         superimposed on contours, using the same colorscale.
     label_fontsize : int
         Font size of pole labels.
+    fill_mode : 'toself' or 'tonext'
+        Mode used for filling contours when coloring=None
 
     Examples
     ========
@@ -487,12 +489,17 @@ def create_ternary_contour(coordinates, values, pole_labels=['a', 'b', 'c'],
                                    title='Ternary plot',
                                    pole_labels=['clay', 'quartz', 'fledspar'])
     """
-    if interpolate is None:
+    if scipy_interp is None:
         raise ImportError("""\
     The create_ternary_contour figure factory requires the scipy package""")
+    if sk_measure is None:
+        raise ImportError("""\
+    The create_ternary_contour figure factory requires the scikit-image
+    package""")
     if colorscale is None:
         showscale = False
     coordinates = _prepare_barycentric_coord(coordinates)
+    v_min, v_max = values.min(), values.max()
     grid_z, gr_x, gr_y = _compute_grid(coordinates, values,
                                        interp_mode=interp_mode)
 
@@ -507,7 +514,10 @@ def create_ternary_contour(coordinates, values, pole_labels=['a', 'b', 'c'],
                                    linecolor=linecolor,
                                    interp_mode=interp_mode,
                                    coloring=coloring,
-                                   tooltip_mode=tooltip_mode)
+                                   tooltip_mode=tooltip_mode,
+                                   v_min=v_min,
+                                   v_max=v_max,
+                                   fill_mode=fill_mode)
     fig = go.Figure(data=contour_trace, layout=layout)
 
     if showmarkers:
