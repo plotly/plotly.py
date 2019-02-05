@@ -344,10 +344,11 @@ def _contour_trace(x, y, z, ncontours=None,
     else:
         colors = [linecolor] * ncontours
     traces = []
-    values = np.linspace(v_min, v_max, ncontours)
+    values = np.linspace(v_min, v_max, ncontours + 2)[1:-1]
     M, invM = _transform_barycentric_cartesian()
     dx = (x.max() - x.min()) / x.size
     dy = (y.max() - y.min()) / y.size
+    #stop
     for i, val in enumerate(values):
         contour_level = sk_measure.find_contours(z, val)
         for contour in contour_level: # several closed contours for 1 value
