@@ -265,6 +265,10 @@ def _compute_grid(coordinates, values, interp_mode='ilr'):
 
 # ----------------------- Contour traces ----------------------
 
+def _polygon_area(x, y):
+    return (0.5 * np.abs(np.dot(x, np.roll(y, 1))
+            - np.dot(y, np.roll(x, 1))))
+
 
 def _colors(ncontours, colormap=None):
     """
@@ -348,40 +352,50 @@ def _contour_trace(x, y, z, ncontours=None,
     M, invM = _transform_barycentric_cartesian()
     dx = (x.max() - x.min()) / x.size
     dy = (y.max() - y.min()) / y.size
-    #stop
+    all_contours, all_values, all_areas, all_colors = [], [], [], []
+
     for i, val in enumerate(values):
         contour_level = sk_measure.find_contours(z, val)
-        for contour in contour_level: # several closed contours for 1 value
-            y_contour, x_contour = contour.T
-            if _is_invalid_contour(x_contour, y_contour):
-                continue
-            if interp_mode == 'cartesian':
-                bar_coords = np.dot(invM,
-                                    np.stack((dx * x_contour,
-                                              dy * y_contour,
-                                              np.ones(x_contour.shape))))
-            elif interp_mode == 'ilr':
-                bar_coords = _ilr_inverse(np.stack((dx * x_contour + x.min(),
-                                                    dy * y_contour +
-                                                    y.min())))
-            a, b, c = bar_coords
-            tooltip = _tooltip(a, b, c, val, mode=tooltip_mode)
+        all_contours.extend(contour_level)
+        all_values.extend([val] * len(contour_level))
+        all_areas.extend([_polygon_area(contour.T[1], contour.T[0])
+                          for contour in contour_level])
+        all_colors.extend([colors[i]] * len(contour_level))
 
-            _col = colors[i] if coloring == 'lines' else linecolor
+    # Now sort contours by decreasing area
+    order = np.argsort(all_areas)[::-1]
+    for index in order:
+        y_contour, x_contour = all_contours[index].T
+        val = all_values[index]
+        if _is_invalid_contour(x_contour, y_contour):
+            continue
+        if interp_mode == 'cartesian':
+            bar_coords = np.dot(invM,
+                                np.stack((dx * x_contour,
+                                            dy * y_contour,
+                                            np.ones(x_contour.shape))))
+        elif interp_mode == 'ilr':
+            bar_coords = _ilr_inverse(np.stack((dx * x_contour + x.min(),
+                                                dy * y_contour +
+                                                y.min())))
+        a, b, c = bar_coords
+        tooltip = _tooltip(a, b, c, val, mode=tooltip_mode)
 
-            trace = dict(
-                type='scatterternary', text=tooltip,
-                a=a, b=b, c=c, mode='lines',
-                line=dict(color=_col, shape='spline', width=1),
-                fill=fill_mode,
-                fillcolor=colors[i],
-                hoverinfo='text',
-                showlegend=True,
-                name='%.2f' % val
-            )
-            if coloring == 'lines':
-                trace['fill'] = None
-            traces.append(trace)
+        _col = all_colors[index] if coloring == 'lines' else linecolor
+
+        trace = dict(
+            type='scatterternary', text=tooltip,
+            a=a, b=b, c=c, mode='lines',
+            line=dict(color=_col, shape='spline', width=1),
+            fill='toself',
+            fillcolor=all_colors[index],
+            hoverinfo='text',
+            showlegend=True,
+            name='%.2f' % val
+        )
+        if coloring == 'lines':
+            trace['fill'] = None
+        traces.append(trace)
     return traces
 
 # -------------------- Figure Factory for ternary contour -------------
