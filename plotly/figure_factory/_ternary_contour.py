@@ -259,8 +259,8 @@ def _compute_grid(coordinates, values, interp_mode='ilr'):
     grid_z_other = scipy_interp.griddata(coord_points[:2].T, values,
                                          (grid_x, grid_y),
                                          method='nearest')
-    mask_nan = np.isnan(grid_z)
-    grid_z[mask_nan] = grid_z_other[mask_nan]
+    #mask_nan = np.isnan(grid_z)
+    #grid_z[mask_nan] = grid_z_other[mask_nan]
     return grid_z, gr_x, gr_y
 
 # ----------------------- Contour traces ----------------------
@@ -342,20 +342,25 @@ def _contour_trace(x, y, z, ncontours=None,
     if ncontours is None:
         ncontours = 5
     if colorscale is not None:
-        colors = _colors(ncontours, colorscale)
+        colors = _colors(ncontours + 2, colorscale)
+        color_min, color_max = colors[0], colors[-1]
+        colors = colors[1:-1]
     if linecolor is None:
         linecolor = 'rgb(150, 150, 150)'
     else:
         colors = [linecolor] * ncontours
     traces = []
-    values = np.linspace(v_min, v_max, ncontours + 2)[1:-1]
+    values = np.linspace(v_min, v_max, ncontours + 2)[2:-2]
     M, invM = _transform_barycentric_cartesian()
     dx = (x.max() - x.min()) / x.size
     dy = (y.max() - y.min()) / y.size
     all_contours, all_values, all_areas, all_colors = [], [], [], []
-
+    mask_nan = np.isnan(z)
+    z_max = z[np.logical_not(mask_nan)].max()
+    zz = np.copy(z)
+    zz[mask_nan] = 2 * z_max
     for i, val in enumerate(values):
-        contour_level = sk_measure.find_contours(z, val)
+        contour_level = sk_measure.find_contours(zz, val)
         all_contours.extend(contour_level)
         all_values.extend([val] * len(contour_level))
         all_areas.extend([_polygon_area(contour.T[1], contour.T[0])
@@ -364,6 +369,18 @@ def _contour_trace(x, y, z, ncontours=None,
 
     # Now sort contours by decreasing area
     order = np.argsort(all_areas)[::-1]
+    outer_contour = z.shape[0] * np.array([[0, 0, 1], [0, 1, 0.5]]).T
+    all_contours = [outer_contour] + all_contours
+    if all_values[order[0]] == values[0]:
+        all_values = [v_min] + all_values
+        all_colors = [color_min] + all_colors
+    elif all_values[order[0]] == values[-1]:
+        all_values = [v_max] + all_values
+        all_colors = [color_max] + all_colors
+    else:
+        print("problem!!!")
+    all_areas = [0] + all_areas
+    order = np.concatenate(([0], order + 1))
     for index in order:
         y_contour, x_contour = all_contours[index].T
         val = all_values[index]
@@ -378,7 +395,12 @@ def _contour_trace(x, y, z, ncontours=None,
             bar_coords = _ilr_inverse(np.stack((dx * x_contour + x.min(),
                                                 dy * y_contour +
                                                 y.min())))
-        a, b, c = bar_coords
+        if index == 0:
+            a = np.array([1, 0, 0])
+            b = np.array([0, 1, 0])
+            c = np.array([0, 0, 1])
+        else:
+            a, b, c = bar_coords
         tooltip = _tooltip(a, b, c, val, mode=tooltip_mode)
 
         _col = all_colors[index] if coloring == 'lines' else linecolor
