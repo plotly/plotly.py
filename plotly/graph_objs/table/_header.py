@@ -64,7 +64,8 @@ class Header(BaseTraceHierarchyType):
                 
                 color
                     Sets the cell fill color. It accepts either a
-                    specific color or an array of colors.
+                    specific color or an array of colors or a 2D
+                    array of colors.
                 colorsrc
                     Sets the source reference on plot.ly for  color
                     .

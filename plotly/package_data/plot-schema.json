@@ -33139,7 +33139,7 @@
                             "arrayOk": true,
                             "dflt": "white",
                             "role": "style",
-                            "description": "Sets the cell fill color. It accepts either a specific color or an array of colors.",
+                            "description": "Sets the cell fill color. It accepts either a specific color or an array of colors or a 2D array of colors.",
                             "editType": "calc"
                         },
                         "editType": "calc",
@@ -33316,7 +33316,7 @@
                             "arrayOk": true,
                             "role": "style",
                             "dflt": "white",
-                            "description": "Sets the cell fill color. It accepts either a specific color or an array of colors.",
+                            "description": "Sets the cell fill color. It accepts either a specific color or an array of colors or a 2D array of colors.",
                             "editType": "calc"
                         },
                         "editType": "calc",
