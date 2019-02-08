@@ -2,6 +2,28 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.6.1] - 2019-02-08
+
+### Updated
+ - Updated Plotly.js to version 1.44.3. See the
+ [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1443----2019-02-06)
+ for more information.
+ 
+### Fixed
+ - Crash on import when ipywidgets < 7 installed
+ ([#1425](https://github.com/plotly/plotly.py/pull/1425))
+ - Made `scipy` an optional import for the ternary contour figure factory
+ ([#1423](https://github.com/plotly/plotly.py/pull/1423))
+ - Eliminated use of deprecated `numpy.asscalar` function 
+ ([#1428](https://github.com/plotly/plotly.py/pull/1428))
+
+
+### Updated
+ - Updated Plotly.js to version 1.44.1. Select highlights included below.
+ See the
+ [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1441----2019-01-24)
+ for more information.
+
 ## [3.6.0] - 2019-02-01
 
 ### Updated

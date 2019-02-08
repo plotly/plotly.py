@@ -10,7 +10,7 @@ class Fill(BaseTraceHierarchyType):
     def color(self):
         """
         Sets the cell fill color. It accepts either a specific color or
-        an array of colors.
+        an array of colors or a 2D array of colors.
     
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
@@ -98,7 +98,7 @@ class Fill(BaseTraceHierarchyType):
         return """\
         color
             Sets the cell fill color. It accepts either a specific
-            color or an array of colors.
+            color or an array of colors or a 2D array of colors.
         colorsrc
             Sets the source reference on plot.ly for  color .
         """
@@ -114,7 +114,7 @@ class Fill(BaseTraceHierarchyType):
             an instance of plotly.graph_objs.table.cells.Fill
         color
             Sets the cell fill color. It accepts either a specific
-            color or an array of colors.
+            color or an array of colors or a 2D array of colors.
         colorsrc
             Sets the source reference on plot.ly for  color .
 
