@@ -49,12 +49,9 @@ def to_scalar_or_list(v):
     # 0-dimensional array, but we instead want it converted to a
     # Python native scalar type ('float' in the example above).
     # We explicitly check if is has the 'item' method, which conventionally
-    # converts these types to native scalars. This guards against 'v' already being
-    # a Python native scalar type since  `numpy.isscalar` would return
-    # True but `numpy.asscalar` will (oddly) raise an error is called with a
-    # a native Python scalar object.
+    # converts these types to native scalars.
     if np and np.isscalar(v) and hasattr(v, 'item'):
-        return np.asscalar(v)
+        return v.item()
     if isinstance(v, (list, tuple)):
         return [to_scalar_or_list(e) for e in v]
     elif np and isinstance(v, np.ndarray):
