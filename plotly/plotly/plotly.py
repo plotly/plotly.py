@@ -884,6 +884,20 @@ class file_ops:
         response = v2.folders.create({'path': folder_path})
         return response.status_code
 
+    @classmethod
+    def ensure_dirs(cls, folder_path):
+        """
+        Create folder(s) if they don't exist, but unlike mkdirs, doesn't
+        raise an error if folder path already exist
+        """
+        try:
+            cls.mkdirs(folder_path)
+        except exceptions.PlotlyRequestError as e:
+            if 'already exists' in e.message:
+                pass
+            else:
+                raise e
+
 
 class grid_ops:
     """
@@ -990,11 +1004,10 @@ class grid_ops:
 
             paths = filename.split('/')
             parent_path = '/'.join(paths[0:-1])
-
             filename = paths[-1]
 
             if parent_path != '':
-                file_ops.mkdirs(parent_path)
+                file_ops.ensure_dirs(parent_path)
         else:
             # Create anonymous grid name
             filename = 'grid_' + str(uuid.uuid4())[:13]
@@ -1401,7 +1414,11 @@ def _create_or_update(data, filetype):
     api_module = getattr(v2, filetype + 's')
 
     # lookup if pre-existing filename already exists
-    filename = data['filename']
+    if 'parent_path' in data:
+        filename = data['parent_path'] + '/' + data['filename']
+    else:
+        filename = data['filename']
+
     try:
         lookup_res = v2.files.lookup(filename)
         matching_file = json.loads(lookup_res.content)
@@ -1934,30 +1951,39 @@ def create_animations(figure, filename=None, sharing='public', auto_open=True):
     py.create_animations(figure, 'growing_circles')
     ```
     """
-    body = {
+    payload = {
         'figure': figure,
         'world_readable': True
     }
 
     # set filename if specified
     if filename:
-        # warn user that creating folders isn't support in this version
-        if '/' in filename:
-            warnings.warn(
-                "This BETA version of 'create_animations' does not support "
-                "automatic folder creation. This means a filename of the form "
-                "'name1/name2' will just create the plot with that name only."
-            )
-        body['filename'] = filename
+        # Strip trailing slash
+        if filename[-1] == '/':
+            filename = filename[0:-1]
+
+        # split off any parent directory
+        paths = filename.split('/')
+        parent_path = '/'.join(paths[0:-1])
+        filename = paths[-1]
+
+        # Create parent directory
+        if parent_path != '':
+            file_ops.ensure_dirs(parent_path)
+            payload['parent_path'] = parent_path
+    else:
+        parent_path = ''
+
+    payload['filename'] = filename
 
     # set sharing
     if sharing == 'public':
-        body['world_readable'] = True
+        payload['world_readable'] = True
     elif sharing == 'private':
-        body['world_readable'] = False
+        payload['world_readable'] = False
     elif sharing == 'secret':
-        body['world_readable'] = False
-        body['share_key_enabled'] = True
+        payload['world_readable'] = False
+        payload['share_key_enabled'] = True
     else:
         raise exceptions.PlotlyError(
             SHARING_ERROR_MSG
@@ -1966,14 +1992,21 @@ def create_animations(figure, filename=None, sharing='public', auto_open=True):
     # Extract grid
     figure, grid = _extract_grid_from_fig_like(figure)
     if len(grid) > 0:
+        if not filename:
+            grid_filename = None
+        elif parent_path:
+            grid_filename = parent_path + '/' + filename + '_grid'
+        else:
+            grid_filename = filename + '_grid'
+
         grid_ops.upload(grid=grid,
-                        filename=filename + '_grid' if filename else None,
-                        world_readable=body['world_readable'],
+                        filename=grid_filename,
+                        world_readable=payload['world_readable'],
                         auto_open=False)
         _set_grid_column_references(figure, grid)
-        body['figure'] = figure
+        payload['figure'] = figure
 
-    file_info = _create_or_update(body, 'plot')
+    file_info = _create_or_update(payload, 'plot')
 
     if sharing == 'secret':
         web_url = (file_info['web_url'][:-1] +
