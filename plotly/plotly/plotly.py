@@ -20,6 +20,7 @@ import copy
 import json
 import os
 import time
+import uuid
 import warnings
 import webbrowser
 
@@ -27,14 +28,16 @@ import six
 import six.moves
 from requests.compat import json as _json
 
+from _plotly_utils.basevalidators import CompoundValidator, \
+    CompoundArrayValidator
 from plotly import exceptions, files, session, tools, utils
 from plotly.api import v1, v2
 from plotly.basedatatypes import BaseTraceType, BaseFigure, BaseLayoutType
 from plotly.plotly import chunked_requests
 
-from plotly.graph_objs import Scatter
+from plotly.graph_objs import Figure
 
-from plotly.grid_objs import Grid, Column
+from plotly.grid_objs import Grid
 from plotly.dashboard_objs import dashboard_objs as dashboard
 
 # This is imported like this for backwards compat. Careful if changing.
@@ -919,7 +922,7 @@ class grid_ops:
         )
 
     @classmethod
-    def upload(cls, grid, filename,
+    def upload(cls, grid, filename=None,
                world_readable=True, auto_open=True, meta=None):
         """
         Upload a grid to your Plotly account with the specified filename.
@@ -933,7 +936,8 @@ class grid_ops:
                         separated by backslashes (`/`).
                         If a grid, plot, or folder already exists with the same
                         filename, a `plotly.exceptions.RequestError` will be
-                        thrown with status_code 409
+                        thrown with status_code 409.  If filename is None,
+                        and randomly generated filename will be used.
 
         Optional keyword arguments:
             - world_readable (default=True): make this grid publically (True)
@@ -980,16 +984,21 @@ class grid_ops:
 
         """
         # Make a folder path
-        if filename[-1] == '/':
-            filename = filename[0:-1]
+        if filename:
+            if filename[-1] == '/':
+                filename = filename[0:-1]
 
-        paths = filename.split('/')
-        parent_path = '/'.join(paths[0:-1])
+            paths = filename.split('/')
+            parent_path = '/'.join(paths[0:-1])
 
-        filename = paths[-1]
+            filename = paths[-1]
 
-        if parent_path != '':
-            file_ops.mkdirs(parent_path)
+            if parent_path != '':
+                file_ops.mkdirs(parent_path)
+        else:
+            # Create anonymous grid name
+            filename = 'grid_' + str(uuid.uuid4())[:13]
+            parent_path = ''
 
         # transmorgify grid object into plotly's format
         grid_json = grid._to_plotly_grid_json()
@@ -1607,6 +1616,145 @@ class presentation_ops:
         return url
 
 
+def _extract_grid_graph_obj(obj_dict, reference_obj, grid, path):
+    """
+    Extract inline data arrays from a graph_obj instance and place them in
+    a grid
+
+    Parameters
+    ----------
+    obj_dict: dict
+        dict representing a graph object that may contain inline arrays
+    reference_obj: BasePlotlyType
+        An empty instance of a `graph_obj` with type corresponding to obj_dict
+    grid: Grid
+        Grid to extract data arrays too
+    path: str
+        Path string of the location of `obj_dict` in the figure
+
+    Returns
+    -------
+    None
+        Function modifies obj_dict and grid in-place
+    """
+
+    from plotly.grid_objs import Column
+
+    for prop in list(obj_dict.keys()):
+        propsrc = '{}src'.format(prop)
+        if propsrc in reference_obj:
+            column = Column(obj_dict[prop], path + prop)
+            grid.append(column)
+            obj_dict[propsrc] = 'TBD'
+            del obj_dict[prop]
+
+        elif prop in reference_obj:
+            prop_validator = reference_obj._validators[prop]
+            if isinstance(prop_validator, CompoundValidator):
+                # Recurse on compound child
+                _extract_grid_graph_obj(
+                    obj_dict[prop],
+                    reference_obj[prop],
+                    grid,
+                    '{path}{prop}.'.format(path=path, prop=prop))
+
+            elif isinstance(prop_validator, CompoundArrayValidator):
+                # Recurse on elements of object arary
+                reference_element = prop_validator.validate_coerce([{}])[0]
+                for i, element_dict in enumerate(obj_dict[prop]):
+                    _extract_grid_graph_obj(
+                        element_dict,
+                        reference_element,
+                        grid,
+                        '{path}{prop}.i.'.format(path=path, prop=prop, i=i)
+                    )
+
+
+def _extract_grid_from_fig_like(fig, grid=None, path=''):
+    """
+    Extract inline data arrays from a figure and place them in a grid
+
+    Parameters
+    ----------
+    fig: dict
+         A dict representing a figure or a frame
+    grid: Grid or None (default None)
+        The grid to place the extracted columns in. If None, a new grid will
+        be constructed
+    path: str (default '')
+        Parent path, set to `frames` for use with frame objects
+    Returns
+    -------
+    (dict, Grid)
+        * dict: Figure dict with data arrays removed
+        * Grid: Grid object containing one column for each removed data array.
+                Columns are named with the path the corresponding data array
+                (e.g. 'data.0.marker.size')
+    """
+
+    if grid is None:
+        # If not grid, this is top-level call so deep copy figure
+        copy_fig = True
+        grid = Grid([])
+    else:
+        # Grid passed in so this is recursive call, don't copy figure
+        copy_fig = False
+
+    if isinstance(fig, BaseFigure):
+        fig_dict = fig.to_dict()
+    elif isinstance(fig, dict):
+        fig_dict = copy.deepcopy(fig) if copy_fig else fig
+    else:
+        raise ValueError('Invalid figure type {}'.format(type(fig)))
+
+    # Process traces
+    reference_fig = Figure()
+    reference_traces = {}
+    for i, trace_dict in enumerate(fig_dict.get('data', [])):
+        trace_type = trace_dict.get('type', 'scatter')
+        if trace_type not in reference_traces:
+            reference_traces[trace_type] = reference_fig.add_trace(
+                {'type': trace_type})
+
+        reference_trace = reference_traces[trace_type]
+        _extract_grid_graph_obj(
+            trace_dict, reference_trace, grid, path + 'data.{}.'.format(i))
+
+    # Process frames
+    if 'frames' in fig_dict:
+        for i, frame_dict in enumerate(fig_dict['frames']):
+            _extract_grid_from_fig_like(
+                frame_dict, grid, 'frames.{}.'.format(i))
+
+    return fig_dict, grid
+
+
+def _set_grid_column_references(figure, grid):
+    """
+    Populate *src columns in a figure from uploaded grid
+
+    Parameters
+    ----------
+    figure: dict
+        Figure dict that previously had inline data arrays extracted
+    grid: Grid
+        Grid that was created by extracting inline data arrays from figure
+        using the _extract_grid_from_fig_like function
+
+    Returns
+    -------
+    None
+        Function modifies figure in-place
+    """
+    for col in grid:
+        prop_path = BaseFigure._str_to_dict_path(col.name)
+        prop_parent = figure
+        for prop in prop_path[:-1]:
+            prop_parent = prop_parent[prop]
+
+        prop_parent[prop_path[-1] + 'src'] = col.id
+
+
 def create_animations(figure, filename=None, sharing='public', auto_open=True):
     """
     BETA function that creates plots with animations via `frames`.
@@ -1801,6 +1949,16 @@ def create_animations(figure, filename=None, sharing='public', auto_open=True):
         raise exceptions.PlotlyError(
             SHARING_ERROR_MSG
         )
+
+    # Extract grid
+    figure, grid = _extract_grid_from_fig_like(figure)
+    if len(grid) > 0:
+        grid_ops.upload(grid=grid,
+                        filename=filename + '_grid' if filename else None,
+                        world_readable=body['world_readable'],
+                        auto_open=False)
+        _set_grid_column_references(figure, grid)
+        body['figure'] = figure
 
     response = v2.plots.create(body)
     parsed_content = response.json()
