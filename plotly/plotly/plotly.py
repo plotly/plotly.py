@@ -1658,16 +1658,20 @@ def _extract_grid_graph_obj(obj_dict, reference_obj, grid, path):
                     grid,
                     '{path}{prop}.'.format(path=path, prop=prop))
 
-            elif isinstance(prop_validator, CompoundArrayValidator):
-                # Recurse on elements of object arary
-                reference_element = prop_validator.validate_coerce([{}])[0]
-                for i, element_dict in enumerate(obj_dict[prop]):
-                    _extract_grid_graph_obj(
-                        element_dict,
-                        reference_element,
-                        grid,
-                        '{path}{prop}.i.'.format(path=path, prop=prop, i=i)
-                    )
+            # Chart studio doesn't handle links to columns inside object
+            # arrays, so we don't extract them for now.  Logic below works
+            # and should be reinstated if chart studio gets this capability
+            # 
+            # elif isinstance(prop_validator, CompoundArrayValidator):
+            #     # Recurse on elements of object arary
+            #     reference_element = prop_validator.validate_coerce([{}])[0]
+            #     for i, element_dict in enumerate(obj_dict[prop]):
+            #         _extract_grid_graph_obj(
+            #             element_dict,
+            #             reference_element,
+            #             grid,
+            #             '{path}{prop}.{i}.'.format(path=path, prop=prop, i=i)
+            #         )
 
 
 def _extract_grid_from_fig_like(fig, grid=None, path=''):
@@ -1959,6 +1963,7 @@ def create_animations(figure, filename=None, sharing='public', auto_open=True):
                         auto_open=False)
         _set_grid_column_references(figure, grid)
         body['figure'] = figure
+        print(figure)
 
     response = v2.plots.create(body)
     parsed_content = response.json()
