@@ -28,8 +28,7 @@ import six
 import six.moves
 from requests.compat import json as _json
 
-from _plotly_utils.basevalidators import CompoundValidator, \
-    CompoundArrayValidator
+from _plotly_utils.basevalidators import CompoundValidator
 from plotly import exceptions, files, session, tools, utils
 from plotly.api import v1, v2
 from plotly.basedatatypes import BaseTraceType, BaseFigure, BaseLayoutType
