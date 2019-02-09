@@ -1014,12 +1014,11 @@ class grid_ops:
         if parent_path != '':
             payload['parent_path'] = parent_path
 
-        response = v2.grids.create(payload)
+        file_info = _create_or_update(payload, 'grid')
 
-        parsed_content = response.json()
-        cols = parsed_content['file']['cols']
-        fid = parsed_content['file']['fid']
-        web_url = parsed_content['file']['web_url']
+        cols = file_info['cols']
+        fid = file_info['fid']
+        web_url = file_info['web_url']
 
         # mutate the grid columns with the id's returned from the server
         cls._fill_in_response_column_ids(grid, cols, fid)
@@ -1382,6 +1381,59 @@ def get_grid(grid_url, raw=False):
     return Grid(parsed_content, fid)
 
 
+def _create_or_update(data, filetype):
+    """
+    Create or update (if file exists) and grid, plot, spectacle, or dashboard
+    object
+
+    Parameters
+    ----------
+    data: dict
+        update/create API payload
+    filetype: str
+        One of 'plot', 'grid', 'spectacle_presentation', or 'dashboard'
+
+    Returns
+    -------
+    dict
+        File info from API response
+    """
+    api_module = getattr(v2, filetype + 's')
+
+    # lookup if pre-existing filename already exists
+    filename = data['filename']
+    try:
+        lookup_res = v2.files.lookup(filename)
+        matching_file = json.loads(lookup_res.content)
+
+        if matching_file['filetype'] == filetype:
+            fid = matching_file['fid']
+            res = api_module.update(fid, data)
+        else:
+            raise exceptions.PlotlyError("""
+'{filename}' is already a {other_filetype} in your account. 
+While you can overwrite {filetype}s with the same name, you can't overwrite
+files with a different type. Try deleting '{filename}' in your account or
+changing the filename.""".format(
+                    filename=filename,
+                    filetype=filetype,
+                    other_filetype=matching_file['filetype']
+                )
+            )
+
+    except exceptions.PlotlyRequestError:
+        res = api_module.create(data)
+
+    # Check response
+    res.raise_for_status()
+
+    # Get resulting file content
+    file_info = res.json()
+    file_info = file_info.get('file', file_info)
+
+    return file_info
+
+
 class dashboard_ops:
     """
     Interface to Plotly's Dashboards API.
@@ -1462,37 +1514,15 @@ class dashboard_ops:
             'world_readable': world_readable
         }
 
-        # lookup if pre-existing filename already exists
-        try:
-            lookup_res = v2.files.lookup(filename)
-            matching_file = json.loads(lookup_res.content)
+        file_info = _create_or_update(data, 'dashboard')
 
-            if matching_file['filetype'] == 'dashboard':
-                old_fid = matching_file['fid']
-                res = v2.dashboards.update(old_fid, data)
-            else:
-                raise exceptions.PlotlyError(
-                    "'{filename}' is already a {filetype} in your account. "
-                    "While you can overwrite dashboards with the same name, "
-                    "you can't change overwrite files with a different type. "
-                    "Try deleting '{filename}' in your account or changing "
-                    "the filename.".format(
-                        filename=filename,
-                        filetype=matching_file['filetype']
-                    )
-                )
-
-        except exceptions.PlotlyRequestError:
-            res = v2.dashboards.create(data)
-        res.raise_for_status()
-
-        url = res.json()['web_url']
+        url = file_info['web_url']
 
         if sharing == 'secret':
             url = add_share_key_to_url(url)
 
         if auto_open:
-            webbrowser.open_new(res.json()['web_url'])
+            webbrowser.open_new(file_info['web_url'])
 
         return url
 
@@ -1582,36 +1612,15 @@ class presentation_ops:
             'world_readable': world_readable
         }
 
-        # lookup if pre-existing filename already exists
-        try:
-            lookup_res = v2.files.lookup(filename)
-            lookup_res.raise_for_status()
-            matching_file = json.loads(lookup_res.content)
+        file_info = _create_or_update(data, 'spectacle_presentation')
 
-            if matching_file['filetype'] != 'spectacle_presentation':
-                raise exceptions.PlotlyError(
-                    "'{filename}' is already a {filetype} in your account. "
-                    "You can't overwrite a file that is not a spectacle_"
-                    "presentation. Please pick another filename.".format(
-                        filename=filename,
-                        filetype=matching_file['filetype']
-                    )
-                )
-            else:
-                old_fid = matching_file['fid']
-                res = v2.spectacle_presentations.update(old_fid, data)
-
-        except exceptions.PlotlyRequestError:
-            res = v2.spectacle_presentations.create(data)
-        res.raise_for_status()
-
-        url = res.json()['web_url']
+        url = file_info['web_url']
 
         if sharing == 'secret':
             url = add_share_key_to_url(url)
 
         if auto_open:
-            webbrowser.open_new(res.json()['web_url'])
+            webbrowser.open_new(file_info['web_url'])
 
         return url
 
@@ -1661,7 +1670,7 @@ def _extract_grid_graph_obj(obj_dict, reference_obj, grid, path):
             # Chart studio doesn't handle links to columns inside object
             # arrays, so we don't extract them for now.  Logic below works
             # and should be reinstated if chart studio gets this capability
-            # 
+            #
             # elif isinstance(prop_validator, CompoundArrayValidator):
             #     # Recurse on elements of object arary
             #     reference_element = prop_validator.validate_coerce([{}])[0]
@@ -1963,16 +1972,14 @@ def create_animations(figure, filename=None, sharing='public', auto_open=True):
                         auto_open=False)
         _set_grid_column_references(figure, grid)
         body['figure'] = figure
-        print(figure)
 
-    response = v2.plots.create(body)
-    parsed_content = response.json()
+    file_info = _create_or_update(body, 'plot')
 
     if sharing == 'secret':
-        web_url = (parsed_content['file']['web_url'][:-1] +
-                   '?share_key=' + parsed_content['file']['share_key'])
+        web_url = (file_info['web_url'][:-1] +
+                   '?share_key=' + file_info['share_key'])
     else:
-        web_url = parsed_content['file']['web_url']
+        web_url = file_info['web_url']
 
     if auto_open:
         _open_url(web_url)
