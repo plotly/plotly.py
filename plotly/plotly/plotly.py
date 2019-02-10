@@ -1992,7 +1992,7 @@ def create_animations(figure, filename=None, sharing='public', auto_open=True):
 
     # Extract grid
     figure, grid = _extract_grid_from_fig_like(figure)
-    print(grid)
+
     if len(grid) > 0:
         if not filename:
             grid_filename = None
