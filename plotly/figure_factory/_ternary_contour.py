@@ -299,15 +299,79 @@ def _colors(ncontours, colormap=None):
     return colors
 
 
-def _is_invalid_contour(x, y):
-    return (np.all(np.abs(x - x[0]) < 2) and np.all(np.abs(y - y[0]) < 2))
+def _is_invalid_contour(x, y, a, b, c):
+    """
+    Utility function for _contour_trace
+    """
+    too_small = (np.all(np.abs(x - x[0]) < 2) and 
+                 np.all(np.abs(y - y[0]) < 2))
+    ternary = np.stack((a, b, c))
+    is_neg = np.any(ternary < 0, axis=0).mean()
+    return too_small or is_neg > 0.5
+
+
+
+
+def _extract_contours(im, values, colors):
+    """
+    Utility function for _contour_trace
+    """
+    mask_nan = np.isnan(im)
+    im_min, im_max = (im[np.logical_not(mask_nan)].min(),
+                      im[np.logical_not(mask_nan)].max())
+    zz_min = np.copy(im)
+    zz_min[mask_nan] = 2 * im_min
+    zz_max = np.copy(im)
+    zz_max[mask_nan] = 2 * im_max
+    all_contours1, all_values1, all_areas1, all_colors1 = [], [], [], []
+    all_contours2, all_values2, all_areas2, all_colors2 = [], [], [], []
+    for i, val in enumerate(values):
+        contour_level1 = sk_measure.find_contours(zz_min, val)
+        contour_level2 = sk_measure.find_contours(zz_max, val)
+        all_contours1.extend(contour_level1)
+        all_contours2.extend(contour_level2)
+        all_values1.extend([val] * len(contour_level1))
+        all_values2.extend([val] * len(contour_level2))
+        all_areas1.extend([_polygon_area(contour.T[1], contour.T[0])
+                          for contour in contour_level1])
+        all_areas2.extend([_polygon_area(contour.T[1], contour.T[0])
+                          for contour in contour_level2])
+        all_colors1.extend([colors[i]] * len(contour_level1))
+        all_colors2.extend([colors[i]] * len(contour_level2))
+    if len(all_contours1) <= len(all_contours2):
+        return all_contours1, all_values1, all_areas1, all_colors1
+    else:
+        return all_contours2, all_values2, all_areas2, all_colors2
+
+
+def _add_outer_contour(all_contours, all_values, all_areas, all_colors,
+                    values, val_outer, v_min, v_max,
+                    colors, color_min, color_max):
+    """
+    Utility function for _contour_trace
+    """
+    outer_contour = 20 * np.array([[0, 0, 1], [0, 1, 0.5]]).T
+    all_contours = [outer_contour] + all_contours
+    values = np.concatenate(([np.nan], values, [np.nan]))
+    colors = np.concatenate(([color_min], colors, [color_max]))
+    index = np.nonzero(values == val_outer)[0][0]
+    if index < len(values)/2:
+        index -= 1
+    else:
+        index += 1
+    all_colors = [colors[index]] + all_colors
+    all_values = [values[index]] + all_values
+    all_areas = [0] + all_areas
+    return all_contours, all_values, all_areas, all_colors
+
+
 
 
 def _contour_trace(x, y, z, ncontours=None,
                    colorscale='Electric',
                    linecolor='rgb(150,150,150)', interp_mode='llr',
                    coloring=None, tooltip_mode='proportions',
-                   v_min=0, v_max=1, fill_mode='toself'):
+                   v_min=0, v_max=1):
     """
     Contour trace in Cartesian coordinates.
 
@@ -336,56 +400,42 @@ def _contour_trace(x, y, z, ncontours=None,
         proportions (adding up to 1) or as percents (adding up to 100).
     vmin, vmax : float
         Bounds of interval of values used for the colorspace
-    fill_mode : 'toself' or 'tonext'
-        Mode used for filling contours when coloring=None
     """
-    if ncontours is None:
-        ncontours = 5
+    # Prepare colors
     if colorscale is not None:
         colors = _colors(ncontours + 2, colorscale)
         color_min, color_max = colors[0], colors[-1]
         colors = colors[1:-1]
+
     if linecolor is None:
         linecolor = 'rgb(150, 150, 150)'
     else:
         colors = [linecolor] * ncontours
-    traces = []
+
     values = np.linspace(v_min, v_max, ncontours + 2)[2:-2]
-    M, invM = _transform_barycentric_cartesian()
     dx = (x.max() - x.min()) / x.size
     dy = (y.max() - y.min()) / y.size
-    all_contours, all_values, all_areas, all_colors = [], [], [], []
-    mask_nan = np.isnan(z)
-    z_max = z[np.logical_not(mask_nan)].max()
-    zz = np.copy(z)
-    zz[mask_nan] = 2 * z_max
-    for i, val in enumerate(values):
-        contour_level = sk_measure.find_contours(zz, val)
-        all_contours.extend(contour_level)
-        all_values.extend([val] * len(contour_level))
-        all_areas.extend([_polygon_area(contour.T[1], contour.T[0])
-                          for contour in contour_level])
-        all_colors.extend([colors[i]] * len(contour_level))
+
+    # Retrieve all contours
+    all_contours, all_values, all_areas, all_colors = _extract_contours(
+                                                     z, values, colors)
 
     # Now sort contours by decreasing area
     order = np.argsort(all_areas)[::-1]
-    outer_contour = z.shape[0] * np.array([[0, 0, 1], [0, 1, 0.5]]).T
-    all_contours = [outer_contour] + all_contours
-    if all_values[order[0]] == values[0]:
-        all_values = [v_min] + all_values
-        all_colors = [color_min] + all_colors
-    elif all_values[order[0]] == values[-1]:
-        all_values = [v_max] + all_values
-        all_colors = [color_max] + all_colors
-    else:
-        print("problem!!!")
-    all_areas = [0] + all_areas
+
+    # Add Outer contour
+    all_contours, all_values, all_areas, all_colors = _add_outer_contour(
+         all_contours, all_values, all_areas, all_colors,
+         values, all_values[order[0]], v_min, v_max,
+         colors, color_min, color_max)
     order = np.concatenate(([0], order + 1))
+
+    # Compute traces, in the order of decreasing area
+    traces = []
+    M, invM = _transform_barycentric_cartesian()
     for index in order:
         y_contour, x_contour = all_contours[index].T
         val = all_values[index]
-        if _is_invalid_contour(x_contour, y_contour):
-            continue
         if interp_mode == 'cartesian':
             bar_coords = np.dot(invM,
                                 np.stack((dx * x_contour,
@@ -395,29 +445,30 @@ def _contour_trace(x, y, z, ncontours=None,
             bar_coords = _ilr_inverse(np.stack((dx * x_contour + x.min(),
                                                 dy * y_contour +
                                                 y.min())))
-        if index == 0:
+        if index == 0:  # outer triangle
             a = np.array([1, 0, 0])
             b = np.array([0, 1, 0])
             c = np.array([0, 0, 1])
         else:
             a, b, c = bar_coords
+        if _is_invalid_contour(x_contour, y_contour, a, b, c):
+            print("invalid!")
+            continue
         tooltip = _tooltip(a, b, c, val, mode=tooltip_mode)
 
         _col = all_colors[index] if coloring == 'lines' else linecolor
-
         trace = dict(
             type='scatterternary', text=tooltip,
             a=a, b=b, c=c, mode='lines',
             line=dict(color=_col, shape='spline', width=1),
-            fill='toself',
-            fillcolor=all_colors[index],
-            hoverinfo='text',
-            showlegend=True,
-            name='%.2f' % val
+            fill='toself', fillcolor=all_colors[index],
+            hoverinfo='text', showlegend=True,
+            name='%.3f' % val
         )
         if coloring == 'lines':
             trace['fill'] = None
         traces.append(trace)
+
     return traces
 
 # -------------------- Figure Factory for ternary contour -------------
@@ -483,8 +534,6 @@ def create_ternary_contour(coordinates, values, pole_labels=['a', 'b', 'c'],
         superimposed on contours, using the same colorscale.
     label_fontsize : int
         Font size of pole labels.
-    fill_mode : 'toself' or 'tonext'
-        Mode used for filling contours when coloring=None
 
     Examples
     ========
@@ -535,6 +584,8 @@ def create_ternary_contour(coordinates, values, pole_labels=['a', 'b', 'c'],
     package""")
     if colorscale is None:
         showscale = False
+    if ncontours is None:
+        ncontours = 5
     coordinates = _prepare_barycentric_coord(coordinates)
     v_min, v_max = values.min(), values.max()
     grid_z, gr_x, gr_y = _compute_grid(coordinates, values,
@@ -553,8 +604,8 @@ def create_ternary_contour(coordinates, values, pole_labels=['a', 'b', 'c'],
                                    coloring=coloring,
                                    tooltip_mode=tooltip_mode,
                                    v_min=v_min,
-                                   v_max=v_max,
-                                   fill_mode=fill_mode)
+                                   v_max=v_max)
+
     fig = go.Figure(data=contour_trace, layout=layout)
 
     if showmarkers:
