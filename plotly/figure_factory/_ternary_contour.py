@@ -265,6 +265,7 @@ def _compute_grid(coordinates, values, interp_mode='ilr'):
 
 # ----------------------- Contour traces ----------------------
 
+
 def _polygon_area(x, y):
     return (0.5 * np.abs(np.dot(x, np.roll(y, 1))
             - np.dot(y, np.roll(x, 1))))
@@ -299,22 +300,34 @@ def _colors(ncontours, colormap=None):
     return colors
 
 
-def _is_invalid_contour(x, y, a, b, c):
+def _is_invalid_contour(x, y):
     """
     Utility function for _contour_trace
+
+    Contours with an area of the order as 1 pixel are considered spurious.
     """
-    too_small = (np.all(np.abs(x - x[0]) < 2) and 
+    too_small = (np.all(np.abs(x - x[0]) < 2) and
                  np.all(np.abs(y - y[0]) < 2))
-    ternary = np.stack((a, b, c))
-    is_neg = np.any(ternary < 0, axis=0).mean()
-    return too_small or is_neg > 0.5
-
-
+    return too_small
 
 
 def _extract_contours(im, values, colors):
     """
-    Utility function for _contour_trace
+    Utility function for _contour_trace.
+
+    In ``im`` only one part of the domain has valid values (corresponding
+    to a subdomain where barycentric coordinates are well defined). When
+    computing contours, we need to assign values outside of this domain.
+    We can choose a value either smaller than all the values inside the
+    valid domain, or larger. This value must be chose with caution so that
+    no spurious contours are added. For example, if the boundary of the valid
+    domain has large values and the outer value is set to a small one, all
+    intermediate contours will be added at the boundary.
+
+    Therefore, we compute the two sets of contours (with an outer value
+    smaller of larger than all values in the valid domain), and choose
+    the value resulting in a smaller total number of contours. There might
+    be a faster way to do this, but it works...
     """
     mask_nan = np.isnan(im)
     im_min, im_max = (im[np.logical_not(mask_nan)].min(),
@@ -333,9 +346,9 @@ def _extract_contours(im, values, colors):
         all_values1.extend([val] * len(contour_level1))
         all_values2.extend([val] * len(contour_level2))
         all_areas1.extend([_polygon_area(contour.T[1], contour.T[0])
-                          for contour in contour_level1])
+                           for contour in contour_level1])
         all_areas2.extend([_polygon_area(contour.T[1], contour.T[0])
-                          for contour in contour_level2])
+                           for contour in contour_level2])
         all_colors1.extend([colors[i]] * len(contour_level1))
         all_colors2.extend([colors[i]] * len(contour_level2))
     if len(all_contours1) <= len(all_contours2):
@@ -349,10 +362,22 @@ def _add_outer_contour(all_contours, all_values, all_areas, all_colors,
                     colors, color_min, color_max):
     """
     Utility function for _contour_trace
+
+    Adds the background color to fill gaps outside of computed contours.
+
+    To compute the background color, the color of the contour with largest
+    area (``val_outer``) is used. As background color, we choose the next
+    color value in the direction of the extrema of the colormap.
+
+    Then we add information for the outer contour for the different lists
+    provided as arguments.
     """
+    #  The exact value of outer contour is not used when defining the trace
     outer_contour = 20 * np.array([[0, 0, 1], [0, 1, 0.5]]).T
     all_contours = [outer_contour] + all_contours
-    values = np.concatenate(([np.nan], values, [np.nan]))
+    delta_values = np.diff(values)[0]
+    values = np.concatenate(([values[0] - delta_values], values,
+                             [values[-1] + delta_values]))
     colors = np.concatenate(([color_min], colors, [color_max]))
     index = np.nonzero(values == val_outer)[0][0]
     if index < len(values)/2:
@@ -363,8 +388,6 @@ def _add_outer_contour(all_contours, all_values, all_areas, all_colors,
     all_values = [values[index]] + all_values
     all_areas = [0] + all_areas
     return all_contours, all_values, all_areas, all_colors
-
-
 
 
 def _contour_trace(x, y, z, ncontours=None,
@@ -400,21 +423,28 @@ def _contour_trace(x, y, z, ncontours=None,
         proportions (adding up to 1) or as percents (adding up to 100).
     vmin, vmax : float
         Bounds of interval of values used for the colorspace
+
+    Notes
+    =====
     """
     # Prepare colors
     if colorscale is not None:
+        # We do not take extrema, for example for one single contour
+        # the color will be the middle point of the colormap
         colors = _colors(ncontours + 2, colorscale)
         color_min, color_max = colors[0], colors[-1]
         colors = colors[1:-1]
 
+    # Color of line contours
     if linecolor is None:
         linecolor = 'rgb(150, 150, 150)'
     else:
         colors = [linecolor] * ncontours
 
-    values = np.linspace(v_min, v_max, ncontours + 2)[2:-2]
-    dx = (x.max() - x.min()) / x.size
-    dy = (y.max() - y.min()) / y.size
+    # Values used for contours, extrema are not used
+    # For example for a binary array [0, 1], the value of
+    # the contour for ncontours=1 is 0.5.
+    values = np.linspace(v_min, v_max, ncontours + 2)[1:-1]
 
     # Retrieve all contours
     all_contours, all_values, all_areas, all_colors = _extract_contours(
@@ -423,7 +453,7 @@ def _contour_trace(x, y, z, ncontours=None,
     # Now sort contours by decreasing area
     order = np.argsort(all_areas)[::-1]
 
-    # Add Outer contour
+    # Add outer contour
     all_contours, all_values, all_areas, all_colors = _add_outer_contour(
          all_contours, all_values, all_areas, all_colors,
          values, all_values[order[0]], v_min, v_max,
@@ -433,6 +463,8 @@ def _contour_trace(x, y, z, ncontours=None,
     # Compute traces, in the order of decreasing area
     traces = []
     M, invM = _transform_barycentric_cartesian()
+    dx = (x.max() - x.min()) / x.size
+    dy = (y.max() - y.min()) / y.size
     for index in order:
         y_contour, x_contour = all_contours[index].T
         val = all_values[index]
@@ -451,8 +483,7 @@ def _contour_trace(x, y, z, ncontours=None,
             c = np.array([0, 0, 1])
         else:
             a, b, c = bar_coords
-        if _is_invalid_contour(x_contour, y_contour, a, b, c):
-            print("invalid!")
+        if _is_invalid_contour(x_contour, y_contour):
             continue
         tooltip = _tooltip(a, b, c, val, mode=tooltip_mode)
 
@@ -484,8 +515,7 @@ def create_ternary_contour(coordinates, values, pole_labels=['a', 'b', 'c'],
                            title=None,
                            interp_mode='ilr',
                            showmarkers=False,
-                           label_fontsize=16,
-                           fill_mode='toself'):
+                           label_fontsize=16):
     """
     Ternary contour plot.
 
