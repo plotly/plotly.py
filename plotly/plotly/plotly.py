@@ -16,6 +16,7 @@ and ploty's servers.
 """
 from __future__ import absolute_import
 
+import base64
 import copy
 import json
 import os
@@ -996,6 +997,11 @@ class grid_ops:
         ```
 
         """
+        # transmorgify grid object into plotly's format
+        grid_json = grid._to_plotly_grid_json()
+        if meta is not None:
+            grid_json['metadata'] = meta
+
         # Make a folder path
         if filename:
             if filename[-1] == '/':
@@ -1009,13 +1015,12 @@ class grid_ops:
                 file_ops.ensure_dirs(parent_path)
         else:
             # Create anonymous grid name
-            filename = 'grid_' + str(uuid.uuid4())[:13]
+            hash_val = hash(json.dumps(grid_json, sort_keys=True))
+            id = base64.urlsafe_b64encode(str(hash_val).encode('utf8'))
+            id_str = id.decode(encoding='utf8').replace('=', '')
+            filename = 'grid_' + id_str
+            # filename = 'grid_' + str(hash_val)
             parent_path = ''
-
-        # transmorgify grid object into plotly's format
-        grid_json = grid._to_plotly_grid_json()
-        if meta is not None:
-            grid_json['metadata'] = meta
 
         payload = {
             'filename': filename,
