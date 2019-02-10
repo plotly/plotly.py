@@ -1416,17 +1416,19 @@ def _create_or_update(data, filetype):
     if 'parent_path' in data:
         filename = data['parent_path'] + '/' + data['filename']
     else:
-        filename = data['filename']
+        filename = data.get('filename', None)
 
-    try:
-        lookup_res = v2.files.lookup(filename)
-        matching_file = json.loads(lookup_res.content)
+    if filename:
+        try:
+            print(filename)
+            lookup_res = v2.files.lookup(filename)
+            matching_file = json.loads(lookup_res.content)
 
-        if matching_file['filetype'] == filetype:
-            fid = matching_file['fid']
-            res = api_module.update(fid, data)
-        else:
-            raise exceptions.PlotlyError("""
+            if matching_file['filetype'] == filetype:
+                fid = matching_file['fid']
+                res = api_module.update(fid, data)
+            else:
+                raise exceptions.PlotlyError("""
 '{filename}' is already a {other_filetype} in your account. 
 While you can overwrite {filetype}s with the same name, you can't overwrite
 files with a different type. Try deleting '{filename}' in your account or
@@ -1434,10 +1436,12 @@ changing the filename.""".format(
                     filename=filename,
                     filetype=filetype,
                     other_filetype=matching_file['filetype']
+                    )
                 )
-            )
 
-    except exceptions.PlotlyRequestError:
+        except exceptions.PlotlyRequestError:
+            res = api_module.create(data)
+    else:
         res = api_module.create(data)
 
     # Check response
@@ -1972,10 +1976,10 @@ def create_animations(figure, filename=None, sharing='public', auto_open=True):
         if parent_path != '':
             file_ops.ensure_dirs(parent_path)
             payload['parent_path'] = parent_path
+
+        payload['filename'] = filename
     else:
         parent_path = ''
-
-    payload['filename'] = filename
 
     # set sharing
     if sharing == 'public':
