@@ -28,7 +28,7 @@ import six
 import six.moves
 from requests.compat import json as _json
 
-from _plotly_utils.basevalidators import CompoundValidator
+from _plotly_utils.basevalidators import CompoundValidator, is_array
 from plotly import exceptions, files, session, tools, utils
 from plotly.api import v1, v2
 from plotly.basedatatypes import BaseTraceType, BaseFigure, BaseLayoutType
@@ -1668,10 +1668,12 @@ def _extract_grid_graph_obj(obj_dict, reference_obj, grid, path):
     for prop in list(obj_dict.keys()):
         propsrc = '{}src'.format(prop)
         if propsrc in reference_obj:
-            column = Column(obj_dict[prop], path + prop)
-            grid.append(column)
-            obj_dict[propsrc] = 'TBD'
-            del obj_dict[prop]
+            val = obj_dict[prop]
+            if is_array(val):
+                column = Column(val, path + prop)
+                grid.append(column)
+                obj_dict[propsrc] = 'TBD'
+                del obj_dict[prop]
 
         elif prop in reference_obj:
             prop_validator = reference_obj._validators[prop]
@@ -1990,6 +1992,7 @@ def create_animations(figure, filename=None, sharing='public', auto_open=True):
 
     # Extract grid
     figure, grid = _extract_grid_from_fig_like(figure)
+    print(grid)
     if len(grid) > 0:
         if not filename:
             grid_filename = None
