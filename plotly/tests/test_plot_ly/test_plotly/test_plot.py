@@ -11,6 +11,7 @@ import requests
 import six
 import sys
 from requests.compat import json as _json
+import warnings
 
 from nose.plugins.attrib import attr
 
@@ -157,6 +158,46 @@ class TestPlot(PlotlyTestCase):
         expected_plot_option_logic = {'filename': 'test',
                                       'auto_open': True,
                                       'fileopt': 'overwrite',
+                                      'validate': True,
+                                      'world_readable': False,
+                                      'sharing': 'private'}
+        self.assertEqual(plot_option_logic, expected_plot_option_logic)
+
+    def test_plot_option_fileopt_deprecations(self):
+        # If filename is not given and fileopt is not 'new',
+        # raise a deprecation warning
+        kwargs = {'auto_open': True,
+                  'fileopt': 'overwrite',
+                  'validate': True,
+                  'sharing': 'private'}
+
+        with warnings.catch_warnings(record=True) as w:
+            plot_option_logic = py._plot_option_logic(kwargs)
+            assert w[0].category == DeprecationWarning
+
+        expected_plot_option_logic = {'filename': 'plot from API',
+                                      'auto_open': True,
+                                      'fileopt': 'overwrite',
+                                      'validate': True,
+                                      'world_readable': False,
+                                      'sharing': 'private'}
+        self.assertEqual(plot_option_logic, expected_plot_option_logic)
+
+        # If filename is given and fileopt is not 'overwrite',
+        # raise a depreacation warning
+        kwargs = {'filename': 'test',
+                  'auto_open': True,
+                  'fileopt': 'append',
+                  'validate': True,
+                  'sharing': 'private'}
+
+        with warnings.catch_warnings(record=True) as w:
+            plot_option_logic = py._plot_option_logic(kwargs)
+            assert w[0].category == DeprecationWarning
+
+        expected_plot_option_logic = {'filename': 'test',
+                                      'auto_open': True,
+                                      'fileopt': 'append',
                                       'validate': True,
                                       'world_readable': False,
                                       'sharing': 'private'}

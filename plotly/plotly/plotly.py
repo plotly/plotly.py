@@ -55,6 +55,10 @@ DEFAULT_PLOT_OPTIONS = {
     'sharing': files.FILE_CONTENT[files.CONFIG_FILE]['sharing']
 }
 
+warnings.filterwarnings(
+    'default', r'The fileopt parameter is deprecated .*', DeprecationWarning
+)
+
 SHARING_ERROR_MSG = (
     "Whoops, sharing can only be set to either 'public', 'private', or "
     "'secret'."
@@ -74,7 +78,7 @@ def sign_in(username, api_key, **kwargs):
 update_plot_options = session.update_session_plot_options
 
 
-def _plot_option_logic(plot_options_from_call_signature):
+def _plot_option_logic(plot_options_from_args):
     """
     Given some plot_options as part of a plot call, decide on final options.
     Precedence:
@@ -87,10 +91,21 @@ def _plot_option_logic(plot_options_from_call_signature):
     default_plot_options = copy.deepcopy(DEFAULT_PLOT_OPTIONS)
     file_options = tools.get_config_file()
     session_options = session.get_session_plot_options()
-    plot_options_from_call_signature = copy.deepcopy(plot_options_from_call_signature)
+    plot_options_from_args = copy.deepcopy(plot_options_from_args)
+
+    # fileopt deprecation warnings
+    fileopt_warning = ('The fileopt parameter is deprecated '
+                       'and will be removed in plotly.py version 4')
+    if ('filename' in plot_options_from_args and
+            plot_options_from_args.get('fileopt', 'overwrite') != 'overwrite'):
+        warnings.warn(fileopt_warning, DeprecationWarning)
+
+    if ('filename' not in plot_options_from_args and
+            plot_options_from_args.get('fileopt', 'new') != 'new'):
+        warnings.warn(fileopt_warning, DeprecationWarning)
 
     # Validate options and fill in defaults w world_readable and sharing
-    for option_set in [plot_options_from_call_signature,
+    for option_set in [plot_options_from_args,
                        session_options, file_options]:
         utils.validate_world_readable_and_sharing_settings(option_set)
         utils.set_sharing_and_world_readable(option_set)
@@ -104,7 +119,7 @@ def _plot_option_logic(plot_options_from_call_signature):
     user_plot_options.update(default_plot_options)
     user_plot_options.update(file_options)
     user_plot_options.update(session_options)
-    user_plot_options.update(plot_options_from_call_signature)
+    user_plot_options.update(plot_options_from_args)
     user_plot_options = {k: v for k, v in user_plot_options.items()
                          if k in default_plot_options}
 
@@ -1425,7 +1440,6 @@ def _create_or_update(data, filetype):
 
     if filename:
         try:
-            print(filename)
             lookup_res = v2.files.lookup(filename)
             matching_file = json.loads(lookup_res.content)
 
