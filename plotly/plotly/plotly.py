@@ -16,10 +16,12 @@ and ploty's servers.
 """
 from __future__ import absolute_import
 
+import base64
 import copy
 import json
 import os
 import time
+import uuid
 import warnings
 import webbrowser
 
@@ -27,14 +29,15 @@ import six
 import six.moves
 from requests.compat import json as _json
 
+from _plotly_utils.basevalidators import CompoundValidator, is_array
 from plotly import exceptions, files, session, tools, utils
 from plotly.api import v1, v2
 from plotly.basedatatypes import BaseTraceType, BaseFigure, BaseLayoutType
 from plotly.plotly import chunked_requests
 
-from plotly.graph_objs import Scatter
+from plotly.graph_objs import Figure
 
-from plotly.grid_objs import Grid, Column
+from plotly.grid_objs import Grid
 from plotly.dashboard_objs import dashboard_objs as dashboard
 
 # This is imported like this for backwards compat. Careful if changing.
@@ -51,6 +54,10 @@ DEFAULT_PLOT_OPTIONS = {
     'validate': True,
     'sharing': files.FILE_CONTENT[files.CONFIG_FILE]['sharing']
 }
+
+warnings.filterwarnings(
+    'default', r'The fileopt parameter is deprecated .*', DeprecationWarning
+)
 
 SHARING_ERROR_MSG = (
     "Whoops, sharing can only be set to either 'public', 'private', or "
@@ -71,7 +78,7 @@ def sign_in(username, api_key, **kwargs):
 update_plot_options = session.update_session_plot_options
 
 
-def _plot_option_logic(plot_options_from_call_signature):
+def _plot_option_logic(plot_options_from_args):
     """
     Given some plot_options as part of a plot call, decide on final options.
     Precedence:
@@ -84,10 +91,21 @@ def _plot_option_logic(plot_options_from_call_signature):
     default_plot_options = copy.deepcopy(DEFAULT_PLOT_OPTIONS)
     file_options = tools.get_config_file()
     session_options = session.get_session_plot_options()
-    plot_options_from_call_signature = copy.deepcopy(plot_options_from_call_signature)
+    plot_options_from_args = copy.deepcopy(plot_options_from_args)
+
+    # fileopt deprecation warnings
+    fileopt_warning = ('The fileopt parameter is deprecated '
+                       'and will be removed in plotly.py version 4')
+    if ('filename' in plot_options_from_args and
+            plot_options_from_args.get('fileopt', 'overwrite') != 'overwrite'):
+        warnings.warn(fileopt_warning, DeprecationWarning)
+
+    if ('filename' not in plot_options_from_args and
+            plot_options_from_args.get('fileopt', 'new') != 'new'):
+        warnings.warn(fileopt_warning, DeprecationWarning)
 
     # Validate options and fill in defaults w world_readable and sharing
-    for option_set in [plot_options_from_call_signature,
+    for option_set in [plot_options_from_args,
                        session_options, file_options]:
         utils.validate_world_readable_and_sharing_settings(option_set)
         utils.set_sharing_and_world_readable(option_set)
@@ -101,7 +119,7 @@ def _plot_option_logic(plot_options_from_call_signature):
     user_plot_options.update(default_plot_options)
     user_plot_options.update(file_options)
     user_plot_options.update(session_options)
-    user_plot_options.update(plot_options_from_call_signature)
+    user_plot_options.update(plot_options_from_args)
     user_plot_options = {k: v for k, v in user_plot_options.items()
                          if k in default_plot_options}
 
@@ -881,6 +899,20 @@ class file_ops:
         response = v2.folders.create({'path': folder_path})
         return response.status_code
 
+    @classmethod
+    def ensure_dirs(cls, folder_path):
+        """
+        Create folder(s) if they don't exist, but unlike mkdirs, doesn't
+        raise an error if folder path already exist
+        """
+        try:
+            cls.mkdirs(folder_path)
+        except exceptions.PlotlyRequestError as e:
+            if 'already exists' in e.message:
+                pass
+            else:
+                raise e
+
 
 class grid_ops:
     """
@@ -919,7 +951,7 @@ class grid_ops:
         )
 
     @classmethod
-    def upload(cls, grid, filename,
+    def upload(cls, grid, filename=None,
                world_readable=True, auto_open=True, meta=None):
         """
         Upload a grid to your Plotly account with the specified filename.
@@ -933,7 +965,8 @@ class grid_ops:
                         separated by backslashes (`/`).
                         If a grid, plot, or folder already exists with the same
                         filename, a `plotly.exceptions.RequestError` will be
-                        thrown with status_code 409
+                        thrown with status_code 409.  If filename is None,
+                        and randomly generated filename will be used.
 
         Optional keyword arguments:
             - world_readable (default=True): make this grid publically (True)
@@ -979,22 +1012,30 @@ class grid_ops:
         ```
 
         """
-        # Make a folder path
-        if filename[-1] == '/':
-            filename = filename[0:-1]
-
-        paths = filename.split('/')
-        parent_path = '/'.join(paths[0:-1])
-
-        filename = paths[-1]
-
-        if parent_path != '':
-            file_ops.mkdirs(parent_path)
-
         # transmorgify grid object into plotly's format
         grid_json = grid._to_plotly_grid_json()
         if meta is not None:
             grid_json['metadata'] = meta
+
+        # Make a folder path
+        if filename:
+            if filename[-1] == '/':
+                filename = filename[0:-1]
+
+            paths = filename.split('/')
+            parent_path = '/'.join(paths[0:-1])
+            filename = paths[-1]
+
+            if parent_path != '':
+                file_ops.ensure_dirs(parent_path)
+        else:
+            # Create anonymous grid name
+            hash_val = hash(json.dumps(grid_json, sort_keys=True))
+            id = base64.urlsafe_b64encode(str(hash_val).encode('utf8'))
+            id_str = id.decode(encoding='utf8').replace('=', '')
+            filename = 'grid_' + id_str
+            # filename = 'grid_' + str(hash_val)
+            parent_path = ''
 
         payload = {
             'filename': filename,
@@ -1005,12 +1046,11 @@ class grid_ops:
         if parent_path != '':
             payload['parent_path'] = parent_path
 
-        response = v2.grids.create(payload)
+        file_info = _create_or_update(payload, 'grid')
 
-        parsed_content = response.json()
-        cols = parsed_content['file']['cols']
-        fid = parsed_content['file']['fid']
-        web_url = parsed_content['file']['web_url']
+        cols = file_info['cols']
+        fid = file_info['fid']
+        web_url = file_info['web_url']
 
         # mutate the grid columns with the id's returned from the server
         cls._fill_in_response_column_ids(grid, cols, fid)
@@ -1373,6 +1413,66 @@ def get_grid(grid_url, raw=False):
     return Grid(parsed_content, fid)
 
 
+def _create_or_update(data, filetype):
+    """
+    Create or update (if file exists) and grid, plot, spectacle, or dashboard
+    object
+
+    Parameters
+    ----------
+    data: dict
+        update/create API payload
+    filetype: str
+        One of 'plot', 'grid', 'spectacle_presentation', or 'dashboard'
+
+    Returns
+    -------
+    dict
+        File info from API response
+    """
+    api_module = getattr(v2, filetype + 's')
+
+    # lookup if pre-existing filename already exists
+    if 'parent_path' in data:
+        filename = data['parent_path'] + '/' + data['filename']
+    else:
+        filename = data.get('filename', None)
+
+    if filename:
+        try:
+            lookup_res = v2.files.lookup(filename)
+            matching_file = json.loads(lookup_res.content)
+
+            if matching_file['filetype'] == filetype:
+                fid = matching_file['fid']
+                res = api_module.update(fid, data)
+            else:
+                raise exceptions.PlotlyError("""
+'{filename}' is already a {other_filetype} in your account. 
+While you can overwrite {filetype}s with the same name, you can't overwrite
+files with a different type. Try deleting '{filename}' in your account or
+changing the filename.""".format(
+                    filename=filename,
+                    filetype=filetype,
+                    other_filetype=matching_file['filetype']
+                    )
+                )
+
+        except exceptions.PlotlyRequestError:
+            res = api_module.create(data)
+    else:
+        res = api_module.create(data)
+
+    # Check response
+    res.raise_for_status()
+
+    # Get resulting file content
+    file_info = res.json()
+    file_info = file_info.get('file', file_info)
+
+    return file_info
+
+
 class dashboard_ops:
     """
     Interface to Plotly's Dashboards API.
@@ -1453,37 +1553,15 @@ class dashboard_ops:
             'world_readable': world_readable
         }
 
-        # lookup if pre-existing filename already exists
-        try:
-            lookup_res = v2.files.lookup(filename)
-            matching_file = json.loads(lookup_res.content)
+        file_info = _create_or_update(data, 'dashboard')
 
-            if matching_file['filetype'] == 'dashboard':
-                old_fid = matching_file['fid']
-                res = v2.dashboards.update(old_fid, data)
-            else:
-                raise exceptions.PlotlyError(
-                    "'{filename}' is already a {filetype} in your account. "
-                    "While you can overwrite dashboards with the same name, "
-                    "you can't change overwrite files with a different type. "
-                    "Try deleting '{filename}' in your account or changing "
-                    "the filename.".format(
-                        filename=filename,
-                        filetype=matching_file['filetype']
-                    )
-                )
-
-        except exceptions.PlotlyRequestError:
-            res = v2.dashboards.create(data)
-        res.raise_for_status()
-
-        url = res.json()['web_url']
+        url = file_info['web_url']
 
         if sharing == 'secret':
             url = add_share_key_to_url(url)
 
         if auto_open:
-            webbrowser.open_new(res.json()['web_url'])
+            webbrowser.open_new(file_info['web_url'])
 
         return url
 
@@ -1573,38 +1651,162 @@ class presentation_ops:
             'world_readable': world_readable
         }
 
-        # lookup if pre-existing filename already exists
-        try:
-            lookup_res = v2.files.lookup(filename)
-            lookup_res.raise_for_status()
-            matching_file = json.loads(lookup_res.content)
+        file_info = _create_or_update(data, 'spectacle_presentation')
 
-            if matching_file['filetype'] != 'spectacle_presentation':
-                raise exceptions.PlotlyError(
-                    "'{filename}' is already a {filetype} in your account. "
-                    "You can't overwrite a file that is not a spectacle_"
-                    "presentation. Please pick another filename.".format(
-                        filename=filename,
-                        filetype=matching_file['filetype']
-                    )
-                )
-            else:
-                old_fid = matching_file['fid']
-                res = v2.spectacle_presentations.update(old_fid, data)
-
-        except exceptions.PlotlyRequestError:
-            res = v2.spectacle_presentations.create(data)
-        res.raise_for_status()
-
-        url = res.json()['web_url']
+        url = file_info['web_url']
 
         if sharing == 'secret':
             url = add_share_key_to_url(url)
 
         if auto_open:
-            webbrowser.open_new(res.json()['web_url'])
+            webbrowser.open_new(file_info['web_url'])
 
         return url
+
+
+def _extract_grid_graph_obj(obj_dict, reference_obj, grid, path):
+    """
+    Extract inline data arrays from a graph_obj instance and place them in
+    a grid
+
+    Parameters
+    ----------
+    obj_dict: dict
+        dict representing a graph object that may contain inline arrays
+    reference_obj: BasePlotlyType
+        An empty instance of a `graph_obj` with type corresponding to obj_dict
+    grid: Grid
+        Grid to extract data arrays too
+    path: str
+        Path string of the location of `obj_dict` in the figure
+
+    Returns
+    -------
+    None
+        Function modifies obj_dict and grid in-place
+    """
+
+    from plotly.grid_objs import Column
+
+    for prop in list(obj_dict.keys()):
+        propsrc = '{}src'.format(prop)
+        if propsrc in reference_obj:
+            val = obj_dict[prop]
+            if is_array(val):
+                column = Column(val, path + prop)
+                grid.append(column)
+                obj_dict[propsrc] = 'TBD'
+                del obj_dict[prop]
+
+        elif prop in reference_obj:
+            prop_validator = reference_obj._validators[prop]
+            if isinstance(prop_validator, CompoundValidator):
+                # Recurse on compound child
+                _extract_grid_graph_obj(
+                    obj_dict[prop],
+                    reference_obj[prop],
+                    grid,
+                    '{path}{prop}.'.format(path=path, prop=prop))
+
+            # Chart studio doesn't handle links to columns inside object
+            # arrays, so we don't extract them for now.  Logic below works
+            # and should be reinstated if chart studio gets this capability
+            #
+            # elif isinstance(prop_validator, CompoundArrayValidator):
+            #     # Recurse on elements of object arary
+            #     reference_element = prop_validator.validate_coerce([{}])[0]
+            #     for i, element_dict in enumerate(obj_dict[prop]):
+            #         _extract_grid_graph_obj(
+            #             element_dict,
+            #             reference_element,
+            #             grid,
+            #             '{path}{prop}.{i}.'.format(path=path, prop=prop, i=i)
+            #         )
+
+
+def _extract_grid_from_fig_like(fig, grid=None, path=''):
+    """
+    Extract inline data arrays from a figure and place them in a grid
+
+    Parameters
+    ----------
+    fig: dict
+         A dict representing a figure or a frame
+    grid: Grid or None (default None)
+        The grid to place the extracted columns in. If None, a new grid will
+        be constructed
+    path: str (default '')
+        Parent path, set to `frames` for use with frame objects
+    Returns
+    -------
+    (dict, Grid)
+        * dict: Figure dict with data arrays removed
+        * Grid: Grid object containing one column for each removed data array.
+                Columns are named with the path the corresponding data array
+                (e.g. 'data.0.marker.size')
+    """
+
+    if grid is None:
+        # If not grid, this is top-level call so deep copy figure
+        copy_fig = True
+        grid = Grid([])
+    else:
+        # Grid passed in so this is recursive call, don't copy figure
+        copy_fig = False
+
+    if isinstance(fig, BaseFigure):
+        fig_dict = fig.to_dict()
+    elif isinstance(fig, dict):
+        fig_dict = copy.deepcopy(fig) if copy_fig else fig
+    else:
+        raise ValueError('Invalid figure type {}'.format(type(fig)))
+
+    # Process traces
+    reference_fig = Figure()
+    reference_traces = {}
+    for i, trace_dict in enumerate(fig_dict.get('data', [])):
+        trace_type = trace_dict.get('type', 'scatter')
+        if trace_type not in reference_traces:
+            reference_traces[trace_type] = reference_fig.add_trace(
+                {'type': trace_type})
+
+        reference_trace = reference_traces[trace_type]
+        _extract_grid_graph_obj(
+            trace_dict, reference_trace, grid, path + 'data.{}.'.format(i))
+
+    # Process frames
+    if 'frames' in fig_dict:
+        for i, frame_dict in enumerate(fig_dict['frames']):
+            _extract_grid_from_fig_like(
+                frame_dict, grid, 'frames.{}.'.format(i))
+
+    return fig_dict, grid
+
+
+def _set_grid_column_references(figure, grid):
+    """
+    Populate *src columns in a figure from uploaded grid
+
+    Parameters
+    ----------
+    figure: dict
+        Figure dict that previously had inline data arrays extracted
+    grid: Grid
+        Grid that was created by extracting inline data arrays from figure
+        using the _extract_grid_from_fig_like function
+
+    Returns
+    -------
+    None
+        Function modifies figure in-place
+    """
+    for col in grid:
+        prop_path = BaseFigure._str_to_dict_path(col.name)
+        prop_parent = figure
+        for prop in prop_path[:-1]:
+            prop_parent = prop_parent[prop]
+
+        prop_parent[prop_path[-1] + 'src'] = col.id
 
 
 def create_animations(figure, filename=None, sharing='public', auto_open=True):
@@ -1773,43 +1975,69 @@ def create_animations(figure, filename=None, sharing='public', auto_open=True):
     py.create_animations(figure, 'growing_circles')
     ```
     """
-    body = {
+    payload = {
         'figure': figure,
         'world_readable': True
     }
 
     # set filename if specified
     if filename:
-        # warn user that creating folders isn't support in this version
-        if '/' in filename:
-            warnings.warn(
-                "This BETA version of 'create_animations' does not support "
-                "automatic folder creation. This means a filename of the form "
-                "'name1/name2' will just create the plot with that name only."
-            )
-        body['filename'] = filename
+        # Strip trailing slash
+        if filename[-1] == '/':
+            filename = filename[0:-1]
+
+        # split off any parent directory
+        paths = filename.split('/')
+        parent_path = '/'.join(paths[0:-1])
+        filename = paths[-1]
+
+        # Create parent directory
+        if parent_path != '':
+            file_ops.ensure_dirs(parent_path)
+            payload['parent_path'] = parent_path
+
+        payload['filename'] = filename
+    else:
+        parent_path = ''
 
     # set sharing
     if sharing == 'public':
-        body['world_readable'] = True
+        payload['world_readable'] = True
     elif sharing == 'private':
-        body['world_readable'] = False
+        payload['world_readable'] = False
     elif sharing == 'secret':
-        body['world_readable'] = False
-        body['share_key_enabled'] = True
+        payload['world_readable'] = False
+        payload['share_key_enabled'] = True
     else:
         raise exceptions.PlotlyError(
             SHARING_ERROR_MSG
         )
 
-    response = v2.plots.create(body)
-    parsed_content = response.json()
+    # Extract grid
+    figure, grid = _extract_grid_from_fig_like(figure)
+
+    if len(grid) > 0:
+        if not filename:
+            grid_filename = None
+        elif parent_path:
+            grid_filename = parent_path + '/' + filename + '_grid'
+        else:
+            grid_filename = filename + '_grid'
+
+        grid_ops.upload(grid=grid,
+                        filename=grid_filename,
+                        world_readable=payload['world_readable'],
+                        auto_open=False)
+        _set_grid_column_references(figure, grid)
+        payload['figure'] = figure
+
+    file_info = _create_or_update(payload, 'plot')
 
     if sharing == 'secret':
-        web_url = (parsed_content['file']['web_url'][:-1] +
-                   '?share_key=' + parsed_content['file']['share_key'])
+        web_url = (file_info['web_url'][:-1] +
+                   '?share_key=' + file_info['share_key'])
     else:
-        web_url = parsed_content['file']['web_url']
+        web_url = file_info['web_url']
 
     if auto_open:
         _open_url(web_url)
