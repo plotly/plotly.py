@@ -164,6 +164,10 @@ class TestPlot(PlotlyTestCase):
         self.assertEqual(plot_option_logic, expected_plot_option_logic)
 
     def test_plot_option_fileopt_deprecations(self):
+
+        # Make sure DeprecationWarnings aren't filtered out by nose
+        warnings.filterwarnings('default', category=DeprecationWarning)
+
         # If filename is not given and fileopt is not 'new',
         # raise a deprecation warning
         kwargs = {'auto_open': True,
