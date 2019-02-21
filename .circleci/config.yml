@@ -383,82 +383,137 @@ jobs:
       - store_artifacts:
           path: artifacts
 
+  plotlyjs_dev_build:
+    docker:
+      - image: circleci/python:3.7-stretch-node-browsers
+        environment:
+          PLOTLY_TOX_PYTHON_37: python3.7
+          LC_ALL: en_US.UTF-8
+          LANG: en_US.UTF-8
+
+    steps:
+      - checkout
+      - run:
+          name: Install tox
+          command: 'sudo pip install tox requests yapf pytz decorator retrying'
+      - run:
+          name: Update plotlywidget version
+          command: 'python setup.py updateplotlywidgetversion'
+      - run:
+          name: Update plotly.js to dev
+          command: 'python setup.py updateplotlyjsdev'
+      - run:
+          name: Test with tox
+          command: 'tox -e py37-core'
+          no_output_timeout: 20m
+      - run:
+          name: Commit
+          command: |
+            sudo mkdir /dist
+            git config --global user.email "you@example.com"
+            git config --global user.name "Your Name"
+            git add -A
+            git commit -m "Codegen"
+            git format-patch -n HEAD^
+            sudo cp *.patch /dist
+          when: always
+      - run:
+          name: Build source distribution package
+          command: |
+            python setup.py sdist
+            sudo cp dist/* /dist
+          when: always
+      - run:
+          name: npm-pack widget
+          command: |
+            cd js/
+            npm install webpack
+            npm pack
+            sudo cp ./plotlywidget* /dist
+          when: always
+      - store_artifacts:
+          path: /dist
+
 
 workflows:
   version: 2
-  build:
+  nightly:
     jobs:
+      - plotlyjs_dev_build
 
-      - python-2.7-core
-      - python-3.4-core
-      - python-3.5-core
-      - python-3.6-core
-      - python-3.7-core
-      - python-2.7-optional
-      - python-3.4-optional
-      - python-3.5-optional
-      - python-3.6-optional
-      # 3.7 optional disabled due to current shapely incompatibility
-      # - python-3.7-optional
-      - python-2.7-plot_ly
-      - python-3.4-plot_ly
-      - python-3.7-plot_ly
-      - python-2-7-orca
-      - python-3-5-orca
-      - python-3-7-orca
-
-      - python-2-7-conda:
-          requires:
-            - python-2.7-core
-            - python-2.7-optional
-            - python-2.7-plot_ly
-            - python-2-7-orca
-
-          filters:
-            branches:
-              only:
-                - master
-                - /release_.*/
-                - /conda_build_.*/
-
-      - python-3-5-conda:
-          requires:
-            - python-3.5-core
-            - python-3.5-optional
-#            - python-3.5-plot_ly
-            - python-3-5-orca
-
-          filters:
-            branches:
-              only:
-                - master
-                - /release_.*/
-                - /conda_build_.*/
-
-      - python-3-6-conda:
-          requires:
-            - python-3.6-core
-            - python-3.6-optional
-#            - python-3.6-plot_ly
-#            - python-3-6-orca
-
-          filters:
-            branches:
-              only:
-                - master
-                - /release_.*/
-                - /conda_build_.*/
-
-      - python-3-7-conda:
-          requires:
-            - python-3.7-core
-#            - python-3.7-optional
-            - python-3.7-plot_ly
-            - python-3-7-orca
-
-          filters:
-            branches:
-              only:
-                - master
-                - /release_.*/
-                - /conda_build_.*/
+#  build:
+#    jobs:
+#
+#      - python-2.7-core
+#      - python-3.4-core
+#      - python-3.5-core
+#      - python-3.6-core
+#      - python-3.7-core
+#      - python-2.7-optional
+#      - python-3.4-optional
+#      - python-3.5-optional
+#      - python-3.6-optional
+#      # 3.7 optional disabled due to current shapely incompatibility
+#      # - python-3.7-optional
+#      - python-2.7-plot_ly
+#      - python-3.4-plot_ly
+#      - python-3.7-plot_ly
+#      - python-2-7-orca
+#      - python-3-5-orca
+#      - python-3-7-orca
+#
+#      - python-2-7-conda:
+#          requires:
+#            - python-2.7-core
+#            - python-2.7-optional
+#            - python-2.7-plot_ly
+#            - python-2-7-orca
+#
+#          filters:
+#            branches:
+#              only:
+#                - master
+#                - /release_.*/
+#                - /conda_build_.*/
+#
+#      - python-3-5-conda:
+#          requires:
+#            - python-3.5-core
+#            - python-3.5-optional
+##            - python-3.5-plot_ly
+#            - python-3-5-orca
+#
+#          filters:
+#            branches:
+#              only:
+#                - master
+#                - /release_.*/
+#                - /conda_build_.*/
+#
+#      - python-3-6-conda:
+#          requires:
+#            - python-3.6-core
+#            - python-3.6-optional
+##            - python-3.6-plot_ly
+##            - python-3-6-orca
+#
+#          filters:
+#            branches:
+#              only:
+#                - master
+#                - /release_.*/
+#                - /conda_build_.*/
+#
+#      - python-3-7-conda:
+#          requires:
+#            - python-3.7-core
+##            - python-3.7-optional
+#            - python-3.7-plot_ly
+#            - python-3-7-orca
+#
+#          filters:
+#            branches:
+#              only:
+#                - master
+#                - /release_.*/
+#                - /conda_build_.*/
