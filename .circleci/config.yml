@@ -388,8 +388,6 @@ jobs:
       - image: circleci/python:3.7-stretch-node-browsers
         environment:
           PLOTLY_TOX_PYTHON_37: python3.7
-          LC_ALL: en_US.UTF-8
-          LANG: en_US.UTF-8
 
     steps:
       - checkout
@@ -404,7 +402,9 @@ jobs:
           command: 'python setup.py updateplotlyjsdev'
       - run:
           name: Test with tox
-          command: 'tox -e py37-core'
+          command: |
+            locale
+            tox -e py37-core
           no_output_timeout: 20m
       - run:
           name: Commit
