@@ -414,8 +414,6 @@ jobs:
             git config --global user.name "Your Name"
             git add -A
             git commit -m "Codegen"
-            git format-patch -n HEAD^
-            sudo cp *.patch /dist
           when: always
       - run:
           name: Build source distribution package
