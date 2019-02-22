@@ -388,6 +388,7 @@ jobs:
       - image: circleci/python:3.7-stretch-node-browsers
         environment:
           PLOTLY_TOX_PYTHON_37: python3.7
+          LANG: en_US.UTF-8
 
     steps:
       - checkout
