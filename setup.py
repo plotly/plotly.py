@@ -217,8 +217,13 @@ def get_bundle_schema_urls(build_num):
 
     artifacts = request_json(url)
 
+    # Find archive
+    archives = [a for a in artifacts if a.get('path', None) == 'plotly.js.tgz']
+    archive = archives[0]
+
     # Find bundle
-    bundles = [a for a in artifacts if a.get('path', None) == 'plotly.js.tgz']
+    bundles = [a for a in artifacts if
+               a.get('path', None) == 'dist/plotly.min.js']
     bundle = bundles[0]
 
     # Find schema
@@ -226,7 +231,7 @@ def get_bundle_schema_urls(build_num):
                a.get('path', None) == 'dist/plot-schema.json']
     schema = schemas[0]
 
-    return bundle['url'], schema['url']
+    return archive['url'], bundle['url'], schema['url']
 
 
 class UpdateSchemaCommand(Command):
@@ -295,7 +300,7 @@ class UpdateBundleSchemaDevCommand(Command):
         branch = 'master'
         build_info = get_latest_publish_build_info(branch)
 
-        bundle_url, schema_url = get_bundle_schema_urls(
+        archive_url, bundle_url, schema_url = get_bundle_schema_urls(
             build_info['build_num'])
 
         # Update bundle in package data
@@ -310,7 +315,7 @@ class UpdateBundleSchemaDevCommand(Command):
             package_json = json.load(f)
 
         # Replace version with bundle url
-        package_json['dependencies']['plotly.js'] = bundle_url
+        package_json['dependencies']['plotly.js'] = archive_url
         with open(package_json_path, 'w') as f:
             json.dump(package_json, f, indent=2)
 
