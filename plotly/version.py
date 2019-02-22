@@ -1,5 +1,8 @@
-__version__ = '3.6.1'
-__frontend_version__ = '^0.7.1'
+from ._version import get_versions
+__version__ = get_versions()['version']
+del get_versions
+
+from ._widget_version import __frontend_version__
 
 
 def stable_semver():

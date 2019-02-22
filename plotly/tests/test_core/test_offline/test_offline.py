@@ -7,6 +7,7 @@ from __future__ import absolute_import
 import os
 from unittest import TestCase
 
+from nose.plugins.attrib import attr
 from requests.compat import json as _json
 
 import plotly
@@ -314,6 +315,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
 
         self.assertIn('"bogus": 42', html)
 
+    @attr('nodev')
     def test_plotlyjs_version(self):
         with open('js/package.json', 'rt') as f:
             package_json = json.load(f)

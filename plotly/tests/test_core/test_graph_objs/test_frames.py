@@ -68,6 +68,9 @@ class FramesTest(TestCase):
 
         matches = return_prop_descriptions(prop_descrip_text)
 
+        # Skip 'cmid' that is going to be added in plotly.js 1.45.0
+        matches = [m for m in matches if m != 'cmid']
+
         # It's OK if this needs to change, but we should check *something*.
         self.assertEqual(
             set(matches),
