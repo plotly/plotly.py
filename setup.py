@@ -8,7 +8,6 @@ import os
 import sys
 import platform
 import json
-import requests
 
 
 here = os.path.dirname(os.path.abspath(__file__))
@@ -154,6 +153,7 @@ class CodegenCommand(Command):
 
 
 def overwrite_schema(url):
+    import requests
     req = requests.get(url)
     assert req.status_code == 200
     with open('plotly/package_data/plot-schema.json', 'wb') as f:
@@ -161,6 +161,7 @@ def overwrite_schema(url):
 
 
 def overwrite_bundle(url):
+    import requests
     req = requests.get(url)
     assert req.status_code == 200
     with open('plotly/package_data/plotly.min.js', 'wb') as f:
@@ -188,6 +189,7 @@ __frontend_version__ = '{version}'
 
 
 def request_json(url):
+    import requests
     req = requests.get(url)
     return json.loads(req.content.decode('utf-8'))
 
