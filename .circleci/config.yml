@@ -405,7 +405,7 @@ jobs:
           name: Test with tox
           command: |
             locale
-            tox -e py37-core
+            tox -e py37-core -- -a '!nodev'
           no_output_timeout: 20m
       - run:
           name: Commit
