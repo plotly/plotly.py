@@ -435,7 +435,7 @@ jobs:
 
 workflows:
   version: 2
-  nightly:
+  dev_build:
     jobs:
       - plotlyjs_dev_build:
           filters:
