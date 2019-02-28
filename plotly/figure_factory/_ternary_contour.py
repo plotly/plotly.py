@@ -14,9 +14,7 @@ scipy_interp = optional_imports.get_module('scipy.interpolate')
 
 
 def _ternary_layout(title='Ternary contour plot', width=550, height=525,
-                    fontfamily='Balto, sans-serif',
-                    plot_bgcolor='rgb(240,240,240)',
-                    pole_labels=['a', 'b', 'c'], label_fontsize=16):
+                    pole_labels=['a', 'b', 'c']):
     """
     Layout of ternary contour plot, to be passed to ``go.FigureWidget``
     object.
@@ -29,34 +27,23 @@ def _ternary_layout(title='Ternary contour plot', width=550, height=525,
         Figure width.
     height : int
         Figure height.
-    fontfamily : str
-        Family of fonts
-    plot_bgcolor :
-        color of figure background
     pole_labels : str, default ['a', 'b', 'c']
         Names of the three poles of the triangle.
-    label_fontsize : int
-        Font size of pole labels.
     """
     return dict(title=title,
                 width=width, height=height,
-                font=dict(family=fontfamily),
-                plot_bgcolor=plot_bgcolor,
                 ternary=dict(sum=1,
-                             aaxis=dict(title=dict(text=pole_labels[0],
-                                            font=dict(size=label_fontsize)),
+                             aaxis=dict(title=dict(text=pole_labels[0]),
                                         min=0.01, linewidth=2,
                                         ticks='outside'),
-                             baxis=dict(title=dict(text=pole_labels[1],
-                                            font=dict(size=label_fontsize)),
+                             baxis=dict(title=dict(text=pole_labels[1]),
                                         min=0.01, linewidth=2,
                                         ticks='outside'),
-                             caxis=dict(title=dict(text=pole_labels[2],
-                                            font=dict(size=label_fontsize)),
+                             caxis=dict(title=dict(text=pole_labels[2]),
                                         min=0.01, linewidth=2,
                                         ticks='outside')),
                 showlegend=False,
-               )
+                )
 
 
 def _tooltip(a, b, c, z, mode='proportions'):
@@ -511,11 +498,9 @@ def create_ternary_contour(coordinates, values, pole_labels=['a', 'b', 'c'],
                            showscale=False, coloring=None,
                            colorscale='Bluered',
                            linecolor=None,
-                           plot_bgcolor='rgb(240,240,240)',
                            title=None,
                            interp_mode='ilr',
-                           showmarkers=False,
-                           label_fontsize=16):
+                           showmarkers=False):
     """
     Ternary contour plot.
 
@@ -551,8 +536,6 @@ def create_ternary_contour(coordinates, values, pole_labels=['a', 'b', 'c'],
     linecolor : None or rgb color
         Color used for lines. ``colorscale`` has to be set to None, otherwise
         line colors are determined from ``colorscale``.
-    plot_bgcolor :
-        color of figure background
     title : str or None
         Title of ternary plot
     interp_mode : 'ilr' (default) or 'cartesian'
@@ -562,8 +545,6 @@ def create_ternary_contour(coordinates, values, pole_labels=['a', 'b', 'c'],
     showmarkers : bool, default False
         If True, markers corresponding to input compositional points are
         superimposed on contours, using the same colorscale.
-    label_fontsize : int
-        Font size of pole labels.
 
     Examples
     ========
@@ -622,9 +603,7 @@ def create_ternary_contour(coordinates, values, pole_labels=['a', 'b', 'c'],
                                        interp_mode=interp_mode)
 
     layout = _ternary_layout(pole_labels=pole_labels,
-                             width=width, height=height, title=title,
-                             plot_bgcolor=plot_bgcolor,
-                             label_fontsize=label_fontsize)
+                             width=width, height=height, title=title)
 
     contour_trace = _contour_trace(gr_x, gr_y, grid_z,
                                    ncontours=ncontours,
@@ -644,7 +623,11 @@ def create_ternary_contour(coordinates, values, pole_labels=['a', 'b', 'c'],
         fig.add_scatterternary(a=a, b=b, c=c,
                                mode='markers',
                                marker={'color': values,
-                                       'colorscale': colorscale},
+                                       'colorscale': colorscale,
+                                       'line':{'color':'rgb(120, 120, 120)',
+                                               'width':1,
+                                               },
+                                       },
                                text=tooltip,
                                hoverinfo='text')
     if showscale:
