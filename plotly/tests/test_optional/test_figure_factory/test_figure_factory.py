@@ -2928,23 +2928,6 @@ class TestTernarycontour(NumpyTestUtilsMixin, TestCase):
             _ = ff.create_ternary_contour(np.stack((a, b, 2 - a - b)), z)
 
 
-    def test_tooltip(self):
-        a, b = np.mgrid[0:1:20j, 0:1:20j]
-        mask = a + b <= 1.
-        a = a[mask].ravel()
-        b = b[mask].ravel()
-        c = 1 - a - b
-        z = a * b * c
-        fig = ff.create_ternary_contour(np.stack((a, b, c)), z,
-                                       tooltip_mode='percents')
-        fig = ff.create_ternary_contour(np.stack((a, b, c)), z,
-                                       tooltip_mode='percent')
-
-        with self.assertRaises(ValueError):
-            fig = ff.create_ternary_contour(np.stack((a, b, c)), z,
-                                           tooltip_mode='wrong_mode')
-
-
     def test_simple_ternary_contour(self):
         a, b = np.mgrid[0:1:20j, 0:1:20j]
         mask = a + b < 1.
@@ -2957,6 +2940,39 @@ class TestTernarycontour(NumpyTestUtilsMixin, TestCase):
         np.testing.assert_array_almost_equal(fig2['data'][0]['a'],
                                              fig['data'][0]['a'],
                                              decimal=3)
+
+
+    def test_colorscale(self):
+        a, b = np.mgrid[0:1:20j, 0:1:20j]
+        mask = a + b < 1.
+        a = a[mask].ravel()
+        b = b[mask].ravel()
+        c = 1 - a - b
+        z = a * b * c
+        z /= z.max()
+        fig = ff.create_ternary_contour(np.stack((a, b, c)), z,
+                                        showscale=True)
+        fig2 = ff.create_ternary_contour(np.stack((a, b, c)), z,
+                                         showscale=True, showmarkers=True)
+        assert isinstance(fig.data[-1]['marker']['colorscale'], tuple)
+        assert isinstance(fig2.data[-1]['marker']['colorscale'], str)
+        assert fig.data[-1]['marker']['cmax'] == 1
+        assert fig2.data[-1]['marker']['cmax'] == 1
+
+
+    def check_pole_labels(self):
+        a, b = np.mgrid[0:1:20j, 0:1:20j]
+        mask = a + b < 1.
+        a = a[mask].ravel()
+        b = b[mask].ravel()
+        c = 1 - a - b
+        z = a * b * c
+        pole_labels = ['A', 'B', 'C']
+        fig = ff.create_ternary_contour(np.stack((a, b, c)), z,
+                                        pole_labels=pole_labels)
+        assert fig.layout.ternary.aaxis.title.text == pole_labels[0]
+        assert fig.data[-1].hovertemplate[0] == pole_labels[0]
+
 
     def test_optional_arguments(self):
         a, b = np.mgrid[0:1:20j, 0:1:20j]
@@ -2978,6 +2994,5 @@ class TestTernarycontour(NumpyTestUtilsMixin, TestCase):
                                             **arg_set)
             # This test does not work for ilr interpolation
             print(len(fig.data))
-            assert (len(fig.data) == ncontours + 1 + arg_set['showmarkers'] +
-                                                 arg_set['showscale'])
+            assert (len(fig.data) == ncontours + 2 + arg_set['showscale'])
 

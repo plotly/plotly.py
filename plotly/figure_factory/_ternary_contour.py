@@ -10,7 +10,7 @@ sk_measure = optional_imports.get_module('skimage.measure')
 scipy_interp = optional_imports.get_module('scipy.interpolate')
 
 
-# ----------- Layout and tooltip ------------------------------
+# -------------------------- Layout ------------------------------
 
 
 def _ternary_layout(title='Ternary contour plot', width=550, height=525,
@@ -325,6 +325,9 @@ def _add_outer_contour(all_contours, all_values, all_areas, all_colors,
 
     Then we add information for the outer contour for the different lists
     provided as arguments.
+
+    A discrete colormap with all used colors is also returned (to be used
+    by colorscale trace).
     """
     #  The exact value of outer contour is not used when defining the trace
     outer_contour = 20 * np.array([[0, 0, 1], [0, 1, 0.5]]).T
@@ -341,7 +344,17 @@ def _add_outer_contour(all_contours, all_values, all_areas, all_colors,
     all_colors = [colors[index]] + all_colors
     all_values = [values[index]] + all_values
     all_areas = [0] + all_areas
-    return all_contours, all_values, all_areas, all_colors
+    used_colors = [color for color in colors if color in all_colors]
+    # Define discrete colorscale
+    color_number = len(used_colors)
+    scale = np.linspace(0, 1, color_number + 1)
+    discrete_cm = []
+    for i, color in enumerate(used_colors):
+        discrete_cm.append([scale[i], used_colors[i]])
+        discrete_cm.append([scale[i + 1], used_colors[i]])
+    discrete_cm.append([scale[color_number], used_colors[color_number - 1]])
+
+    return all_contours, all_values, all_areas, all_colors, discrete_cm
 
 
 def _contour_trace(x, y, z, ncontours=None,
@@ -372,9 +385,6 @@ def _contour_trace(x, y, z, ncontours=None,
         'cartesian', contours are determined in Cartesian space.
     coloring : None or 'lines'
         How to display contour. Filled contours if None, lines if ``lines``.
-    tooltip_mode : str, 'proportions' or 'percents'
-        Coordinates inside the ternary plot can be displayed either as
-        proportions (adding up to 1) or as percents (adding up to 100).
     vmin, vmax : float
         Bounds of interval of values used for the colorspace
 
@@ -382,12 +392,16 @@ def _contour_trace(x, y, z, ncontours=None,
     =====
     """
     # Prepare colors
-    if colorscale is not None:
-        # We do not take extrema, for example for one single contour
-        # the color will be the middle point of the colormap
-        colors = _colors(ncontours + 2, colorscale)
-        color_min, color_max = colors[0], colors[-1]
-        colors = colors[1:-1]
+    # We do not take extrema, for example for one single contour
+    # the color will be the middle point of the colormap
+    colors = _colors(ncontours + 2, colorscale)
+    # Values used for contours, extrema are not used
+    # For example for a binary array [0, 1], the value of
+    # the contour for ncontours=1 is 0.5.
+    values = np.linspace(v_min, v_max, ncontours + 2)
+    color_min, color_max = colors[0], colors[-1]
+    colors = colors[1:-1]
+    values = values[1:-1]
 
     # Color of line contours
     if linecolor is None:
@@ -395,12 +409,7 @@ def _contour_trace(x, y, z, ncontours=None,
     else:
         colors = [linecolor] * ncontours
 
-    # Values used for contours, extrema are not used
-    # For example for a binary array [0, 1], the value of
-    # the contour for ncontours=1 is 0.5.
-    values = np.linspace(v_min, v_max, ncontours + 2)[1:-1]
-
-    # Retrieve all contours
+        # Retrieve all contours
     all_contours, all_values, all_areas, all_colors = _extract_contours(
                                                      z, values, colors)
 
@@ -408,13 +417,14 @@ def _contour_trace(x, y, z, ncontours=None,
     order = np.argsort(all_areas)[::-1]
 
     # Add outer contour
-    all_contours, all_values, all_areas, all_colors = _add_outer_contour(
+    all_contours, all_values, all_areas, all_colors, discrete_cm = \
+         _add_outer_contour(
          all_contours, all_values, all_areas, all_colors,
          values, all_values[order[0]], v_min, v_max,
          colors, color_min, color_max)
     order = np.concatenate(([0], order + 1))
 
-    # Compute traces, in the order of decreasing area
+        # Compute traces, in the order of decreasing area
     traces = []
     M, invM = _transform_barycentric_cartesian()
     dx = (x.max() - x.min()) / x.size
@@ -453,13 +463,13 @@ def _contour_trace(x, y, z, ncontours=None,
             trace['fill'] = None
         traces.append(trace)
 
-    return traces
+    return traces, discrete_cm
 
 # -------------------- Figure Factory for ternary contour -------------
 
 
 def create_ternary_contour(coordinates, values, pole_labels=['a', 'b', 'c'],
-                           tooltip_mode='proportions', width=500, height=500,
+                           width=500, height=500,
                            ncontours=None,
                            showscale=False, coloring=None,
                            colorscale='Bluered',
@@ -481,9 +491,6 @@ def create_ternary_contour(coordinates, values, pole_labels=['a', 'b', 'c'],
         Data points of field to be represented as contours.
     pole_labels : str, default ['a', 'b', 'c']
         Names of the three poles of the triangle.
-    tooltip_mode : str, 'proportions' or 'percents'
-        Coordinates inside the ternary plot can be displayed either as
-        proportions (adding up to 1) or as percents (adding up to 100).
     width : int
         Figure width.
     height : int
@@ -494,9 +501,6 @@ def create_ternary_contour(coordinates, values, pole_labels=['a', 'b', 'c'],
         If True, a colorbar showing the color scale is displayed.
     coloring : None or 'lines'
         How to display contour. Filled contours if None, lines if ``lines``.
-    showlabels : bool, default False
-        For line contours (coloring='lines'), the value of the contour is
-        displayed if showlabels is True.
     colorscale : None or str (Plotly colormap)
         colorscale of the contours.
     linecolor : None or rgb color
@@ -571,37 +575,41 @@ def create_ternary_contour(coordinates, values, pole_labels=['a', 'b', 'c'],
     layout = _ternary_layout(pole_labels=pole_labels,
                              width=width, height=height, title=title)
 
-    contour_trace = _contour_trace(gr_x, gr_y, grid_z,
-                                   ncontours=ncontours,
-                                   colorscale=colorscale,
-                                   linecolor=linecolor,
-                                   interp_mode=interp_mode,
-                                   coloring=coloring,
-                                   v_min=v_min,
-                                   v_max=v_max)
+    contour_trace, discrete_cm = _contour_trace(gr_x, gr_y, grid_z,
+                                                ncontours=ncontours,
+                                                colorscale=colorscale,
+                                                linecolor=linecolor,
+                                                interp_mode=interp_mode,
+                                                coloring=coloring,
+                                                v_min=v_min,
+                                                v_max=v_max)
 
     fig = go.Figure(data=contour_trace, layout=layout)
+
     opacity = 1 if showmarkers else 0
     a, b, c = coordinates
     hovertemplate = (pole_labels[0] + ": %{a:.3f}<br>"
                    + pole_labels[1] + ": %{b:.3f}<br>"
                    + pole_labels[2] + ": %{c:.3f}<br>"
                      "z: %{marker.color:.3f}")
+
     fig.add_scatterternary(a=a, b=b, c=c,
-                            mode='markers',
-                            marker={'color': values,
-                                    'colorscale': colorscale,
-                                    'line':{'color':'rgb(120, 120, 120)',
-                                            'width':1,
-                                            },
-                                    },
+                           mode='markers',
+                           marker={'color': values,
+                                   'colorscale': colorscale,
+                                   'line':{'color':'rgb(120, 120, 120)',
+                                           'width':1,},
+                                  },
                             opacity=opacity,
                             hovertemplate=hovertemplate)
     if showscale:
+        if not showmarkers:
+            colorscale = discrete_cm
         colorbar = dict({'type': 'scatterternary',
                          'a': [None], 'b': [None],
                          'c': [None],
-                         'marker': {'cmin': values.min(),
+                         'marker': {
+                                    'cmin': values.min(),
                                     'cmax': values.max(),
                                     'colorscale': colorscale,
                                     'showscale': True},
