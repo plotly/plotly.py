@@ -46,39 +46,6 @@ def _ternary_layout(title='Ternary contour plot', width=550, height=525,
                 )
 
 
-def _tooltip(a, b, c, z, mode='proportions'):
-    """
-    Tooltip annotations to be displayed on hover.
-
-    Parameters
-    ==========
-
-    a, b, c : 1-D array-like 
-        Barycentric coordinates.
-    z : 1-D array
-        Values (e.g. elevation values) at barycentric coordinates.
-    mode : str, 'proportions' or 'percents'
-        Coordinates inside the ternary plot can be displayed either as
-        proportions (adding up to 1) or as percents (adding up to 100).
-    """
-    N = len(a)
-    if np.isscalar(z):
-        z = z * np.ones(N)
-    if mode == 'proportions' or mode == 'proportion':
-        tooltip = ['a: %.2f' % round(a[i], 2) +
-                   '<br>b: %.2f' % round(b[i], 2) +
-                   '<br>c: %.2f' % round(c[i], 2) +
-                   '<br>z: %.2f' % round(z[i], 2) for i in range(N)]
-    elif mode == 'percents' or mode == 'percent':
-        tooltip = ['a: %d' % int(100 * a[i] + 0.5) +
-                   '<br>b: %d' % int(100 * b[i] + 0.5) +
-                   '<br>c: %d' % int(100 * c[i] + 0.5) +
-                   '<br>z: %.2f' % round(z[i], 2) for i in range(N)]
-    else:
-        raise ValueError("""tooltip mode must be either "proportions" or
-                          "percents".""")
-    return tooltip
-
 # ------------- Transformations of coordinates -------------------
 
 
@@ -380,7 +347,7 @@ def _add_outer_contour(all_contours, all_values, all_areas, all_colors,
 def _contour_trace(x, y, z, ncontours=None,
                    colorscale='Electric',
                    linecolor='rgb(150,150,150)', interp_mode='llr',
-                   coloring=None, tooltip_mode='proportions',
+                   coloring=None,
                    v_min=0, v_max=1):
     """
     Contour trace in Cartesian coordinates.
@@ -472,15 +439,14 @@ def _contour_trace(x, y, z, ncontours=None,
             a, b, c = bar_coords
         if _is_invalid_contour(x_contour, y_contour):
             continue
-        tooltip = _tooltip(a, b, c, val, mode=tooltip_mode)
 
         _col = all_colors[index] if coloring == 'lines' else linecolor
         trace = dict(
-            type='scatterternary', text=tooltip,
+            type='scatterternary',
             a=a, b=b, c=c, mode='lines',
             line=dict(color=_col, shape='spline', width=1),
             fill='toself', fillcolor=all_colors[index],
-            hoverinfo='text', showlegend=True,
+            showlegend=True,
             name='%.3f' % val
         )
         if coloring == 'lines':
@@ -611,25 +577,26 @@ def create_ternary_contour(coordinates, values, pole_labels=['a', 'b', 'c'],
                                    linecolor=linecolor,
                                    interp_mode=interp_mode,
                                    coloring=coloring,
-                                   tooltip_mode=tooltip_mode,
                                    v_min=v_min,
                                    v_max=v_max)
 
     fig = go.Figure(data=contour_trace, layout=layout)
-
-    if showmarkers:
-        a, b, c = coordinates
-        tooltip = _tooltip(a, b, c, values, mode=tooltip_mode)
-        fig.add_scatterternary(a=a, b=b, c=c,
-                               mode='markers',
-                               marker={'color': values,
-                                       'colorscale': colorscale,
-                                       'line':{'color':'rgb(120, 120, 120)',
-                                               'width':1,
-                                               },
-                                       },
-                               text=tooltip,
-                               hoverinfo='text')
+    opacity = 1 if showmarkers else 0
+    a, b, c = coordinates
+    hovertemplate = (pole_labels[0] + ": %{a:.3f}<br>"
+                   + pole_labels[1] + ": %{b:.3f}<br>"
+                   + pole_labels[2] + ": %{c:.3f}<br>"
+                     "z: %{marker.color:.3f}")
+    fig.add_scatterternary(a=a, b=b, c=c,
+                            mode='markers',
+                            marker={'color': values,
+                                    'colorscale': colorscale,
+                                    'line':{'color':'rgb(120, 120, 120)',
+                                            'width':1,
+                                            },
+                                    },
+                            opacity=opacity,
+                            hovertemplate=hovertemplate)
     if showscale:
         colorbar = dict({'type': 'scatterternary',
                          'a': [None], 'b': [None],
