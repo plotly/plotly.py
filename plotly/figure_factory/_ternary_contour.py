@@ -457,6 +457,7 @@ def _contour_trace(x, y, z, ncontours=None,
             line=dict(color=_col, shape='spline', width=1),
             fill='toself', fillcolor=all_colors[index],
             showlegend=True,
+            hoverinfo='skip',
             name='%.3f' % val
         )
         if coloring == 'lines':
