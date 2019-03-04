@@ -123,11 +123,11 @@ def _ilr_inverse(x):
     Intl Assoc for Math Geology, 2003, pp 31-30.
     """
     x = np.array(x)
-    matrix = np.array([[0.5,  1,  1.],
-                       [-0.5,  1,  1.],
-                       [0., 0.,  1.]])
-    s = np.sqrt(2)/2
-    t = np.sqrt(3/2)
+    matrix = np.array([[0.5, 1, 1.],
+                       [-0.5, 1, 1.],
+                       [0., 0., 1.]])
+    s = np.sqrt(2) / 2
+    t = np.sqrt(3 / 2)
     Sk = np.einsum('ik, kj -> ij', np.array([[s, t], [-s, t]]), x)
     Z = -np.log(1 + np.exp(Sk).sum(axis=0))
     log_barycentric = np.einsum('ik, kj -> ij',
@@ -160,8 +160,8 @@ def _prepare_barycentric_coord(b_coords):
         raise ValueError('A point should have  2 (a, b) or 3 (a, b, c)'
                          'barycentric coordinates')
     if ((len(b_coords) == 3) and
-         not np.allclose(b_coords.sum(axis=0), 1, rtol=0.01) and
-         not np.allclose(b_coords.sum(axis=0), 100, rtol=0.01)):
+            not np.allclose(b_coords.sum(axis=0), 1, rtol=0.01) and
+            not np.allclose(b_coords.sum(axis=0), 100, rtol=0.01)):
         msg = "The sum of coordinates should be 1 or 100 for all data points"
         raise ValueError(msg)
 
@@ -213,16 +213,17 @@ def _compute_grid(coordinates, values, interp_mode='ilr'):
     grid_z_other = scipy_interp.griddata(coord_points[:2].T, values,
                                          (grid_x, grid_y),
                                          method='nearest')
-    #mask_nan = np.isnan(grid_z)
-    #grid_z[mask_nan] = grid_z_other[mask_nan]
+    # mask_nan = np.isnan(grid_z)
+    # grid_z[mask_nan] = grid_z_other[mask_nan]
     return grid_z, gr_x, gr_y
+
 
 # ----------------------- Contour traces ----------------------
 
 
 def _polygon_area(x, y):
     return (0.5 * np.abs(np.dot(x, np.roll(y, 1))
-            - np.dot(y, np.roll(x, 1))))
+                         - np.dot(y, np.roll(x, 1))))
 
 
 def _colors(ncontours, colormap=None):
@@ -235,12 +236,12 @@ def _colors(ncontours, colormap=None):
         raise exceptions.PlotlyError(
             "Colorscale must be a valid Plotly Colorscale."
             "The available colorscale names are {}".format(
-                                clrs.PLOTLY_SCALES.keys()))
+                clrs.PLOTLY_SCALES.keys()))
     values = np.linspace(0, 1, ncontours)
     vals_cmap = np.array([pair[0] for pair in cmap])
     cols = np.array([pair[1] for pair in cmap])
     inds = np.searchsorted(vals_cmap, values)
-    if '#'in cols[0]:  # for Viridis
+    if '#' in cols[0]:  # for Viridis
         cols = [clrs.label_rgb(clrs.hex_to_rgb(col)) for col in cols]
 
     colors = [cols[0]]
@@ -312,8 +313,8 @@ def _extract_contours(im, values, colors):
 
 
 def _add_outer_contour(all_contours, all_values, all_areas, all_colors,
-                    values, val_outer, v_min, v_max,
-                    colors, color_min, color_max):
+                       values, val_outer, v_min, v_max,
+                       colors, color_min, color_max):
     """
     Utility function for _contour_trace
 
@@ -337,7 +338,7 @@ def _add_outer_contour(all_contours, all_values, all_areas, all_colors,
                              [values[-1] + delta_values]))
     colors = np.concatenate(([color_min], colors, [color_max]))
     index = np.nonzero(values == val_outer)[0][0]
-    if index < len(values)/2:
+    if index < len(values) / 2:
         index -= 1
     else:
         index += 1
@@ -424,7 +425,7 @@ def _contour_trace(x, y, z, ncontours=None,
          colors, color_min, color_max)
     order = np.concatenate(([0], order + 1))
 
-        # Compute traces, in the order of decreasing area
+    # Compute traces, in the order of decreasing area
     traces = []
     M, invM = _transform_barycentric_cartesian()
     dx = (x.max() - x.min()) / x.size
@@ -435,8 +436,8 @@ def _contour_trace(x, y, z, ncontours=None,
         if interp_mode == 'cartesian':
             bar_coords = np.dot(invM,
                                 np.stack((dx * x_contour,
-                                            dy * y_contour,
-                                            np.ones(x_contour.shape))))
+                                          dy * y_contour,
+                                          np.ones(x_contour.shape))))
         elif interp_mode == 'ilr':
             bar_coords = _ilr_inverse(np.stack((dx * x_contour + x.min(),
                                                 dy * y_contour +
@@ -465,6 +466,7 @@ def _contour_trace(x, y, z, ncontours=None,
         traces.append(trace)
 
     return traces, discrete_cm
+
 
 # -------------------- Figure Factory for ternary contour -------------
 
@@ -598,11 +600,11 @@ def create_ternary_contour(coordinates, values, pole_labels=['a', 'b', 'c'],
                            mode='markers',
                            marker={'color': values,
                                    'colorscale': colorscale,
-                                   'line':{'color': 'rgb(120, 120, 120)',
-                                           'width': int(coloring != 'lines')},
-                                  },
-                            opacity=opacity,
-                            hovertemplate=hovertemplate)
+                                   'line': {'color': 'rgb(120, 120, 120)',
+                                            'width': int(coloring != 'lines')},
+                                   },
+                           opacity=opacity,
+                           hovertemplate=hovertemplate)
     if showscale:
         if not showmarkers:
             colorscale = discrete_cm
