@@ -591,7 +591,7 @@ def create_ternary_contour(coordinates, values, pole_labels=['a', 'b', 'c'],
     hovertemplate = (pole_labels[0] + ": %{a:.3f}<br>"
                    + pole_labels[1] + ": %{b:.3f}<br>"
                    + pole_labels[2] + ": %{c:.3f}<br>"
-                     "z: %{marker.color:.3f}")
+                     "z: %{marker.color:.3f}<extra></extra>")
 
     fig.add_scatterternary(a=a, b=b, c=c,
                            mode='markers',
