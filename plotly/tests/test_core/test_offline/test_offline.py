@@ -23,6 +23,18 @@ fig = {
     )
 }
 
+fig_frames = {
+    'data': [
+        plotly.graph_objs.Scatter(x=[1, 2, 3], y=[10, 20, 30])
+    ],
+    'layout': plotly.graph_objs.Layout(
+        title='offline plot'
+    ),
+    'frames': [
+        {'layout': {'title': 'frame 1'}}
+    ]
+}
+
 
 resize_code_strings = [
             'window.addEventListener("resize", ',
@@ -52,6 +64,9 @@ mathjax_cdn_script = ('<script src="{cdn}{config}"></script>'
 
 mathjax_font = 'STIX-Web'
 
+add_frames = 'Plotly.addFrames'
+
+do_auto_play = 'Plotly.animate'
 
 class PlotlyOfflineBaseTestCase(TestCase):
     def tearDown(self):
@@ -396,3 +411,13 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
         self.assertNotIn(mathjax_cdn_script, html)
         self.assertIn(other_cdn+mathjax_config_str, html)
         self.assertIn(mathjax_font, html)
+
+    def test_auto_play(self):
+        html = plotly.offline.plot(fig_frames, output_type='div')
+        self.assertIn(add_frames, html)
+        self.assertIn(do_auto_play, html)
+
+    def test_no_auto_play(self):
+        html = plotly.offline.plot(fig_frames, output_type='div', auto_play=False)
+        self.assertIn(add_frames, html)
+        self.assertNotIn(do_auto_play, html)
