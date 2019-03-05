@@ -311,7 +311,7 @@ def init_notebook_mode(connected=False):
 
 
 def _plot_html(figure_or_data, config, validate, default_width,
-               default_height, global_requirejs):
+               default_height, global_requirejs, auto_play):
 
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
 
@@ -348,13 +348,20 @@ def _plot_html(figure_or_data, config, validate, default_width,
                                                          'https://plot.ly')
 
     if jframes:
+        if auto_play:
+            animate = (".then(function(){" +
+                       "Plotly.animate('{id}');".format(id=plotdivid) +
+                       "})")
+        else:
+            animate = ''
+
         script = '''
         Plotly.plot(
             '{id}',
             {data},
             {layout},
             {config}
-        ).then(function () {add_frames}).then(function(){animate})
+        ).then(function () {add_frames}){animate}
         '''.format(
             id=plotdivid,
             data=jdata,
@@ -363,7 +370,7 @@ def _plot_html(figure_or_data, config, validate, default_width,
             add_frames="{" + "return Plotly.addFrames('{id}',{frames}".format(
                 id=plotdivid, frames=jframes
             ) + ");}",
-            animate="{" + "Plotly.animate('{id}');".format(id=plotdivid) + "}"
+            animate=animate
         )
     else:
         script = 'Plotly.newPlot("{id}", {data}, {layout}, {config})'.format(
@@ -397,7 +404,7 @@ def _plot_html(figure_or_data, config, validate, default_width,
 
 def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
           validate=True, image=None, filename='plot_image', image_width=800,
-          image_height=600, config=None):
+          image_height=600, config=None, auto_play=True):
     """
     Draw plotly graphs inside an IPython or Jupyter notebook without
     connecting to an external server.
@@ -433,6 +440,9 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
     config (default=None) -- Plot view options dictionary. Keyword arguments
         `show_link` and `link_text` set the associated options in this
         dictionary if it doesn't contain them already.
+    auto_play (default=True) -- Whether to automatically start the animation
+        sequence if the figure contains frames. Has no effect if the figure
+        does not contain frames.
 
     Example:
     ```
@@ -473,8 +483,7 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
 
     if __PLOTLY_OFFLINE_INITIALIZED:
         plot_html, plotdivid, width, height = _plot_html(
-            figure_or_data, config, validate, '100%', 525, True
-        )
+            figure_or_data, config, validate, '100%', 525, True, auto_play)
         resize_script = ''
         if width == '100%' or height == '100%':
             resize_script = _build_resize_script(
@@ -515,7 +524,7 @@ def plot(figure_or_data, show_link=False, link_text='Export to plot.ly',
          validate=True, output_type='file', include_plotlyjs=True,
          filename='temp-plot.html', auto_open=True, image=None,
          image_filename='plot_image', image_width=800, image_height=600,
-         config=None, include_mathjax=False):
+         config=None, include_mathjax=False, auto_play=True):
     """ Create a plotly graph locally as an HTML document or string.
 
     Example:
@@ -625,6 +634,9 @@ def plot(figure_or_data, show_link=False, link_text='Export to plot.ly',
         If a string that ends in '.js', a script tag is included that
         references the specified path. This approach can be used to point the
         resulting HTML file to an alternative CDN.
+    auto_play (default=True) -- Whether to automatically start the animation
+        sequence on page load if the figure contains frames. Has no effect if
+        the figure does not contain frames.
     """
     if output_type not in ['div', 'file']:
         raise ValueError(
@@ -642,7 +654,7 @@ def plot(figure_or_data, show_link=False, link_text='Export to plot.ly',
 
     plot_html, plotdivid, width, height = _plot_html(
         figure_or_data, config, validate,
-        '100%', '100%', global_requirejs=False)
+        '100%', '100%', global_requirejs=False, auto_play=auto_play)
 
     # Build resize_script
     resize_script = ''
