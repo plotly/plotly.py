@@ -437,16 +437,10 @@ workflows:
   version: 2
   dev_build:
     jobs:
-      - plotlyjs_dev_build:
-          filters:
-            branches:
-              only:
-                - master
-                - bleeding_edge
+      - plotlyjs_dev_build
 
   build:
     jobs:
-
       - python-2.7-core
       - python-3.4-core
       - python-3.5-core
@@ -465,58 +459,3 @@ workflows:
       - python-3-5-orca
       - python-3-7-orca
 
-      - python-2-7-conda:
-          requires:
-            - python-2.7-core
-            - python-2.7-optional
-            - python-2.7-plot_ly
-            - python-2-7-orca
-
-          filters:
-            branches:
-              only:
-                - master
-                - /release_.*/
-                - /conda_build_.*/
-
-      - python-3-5-conda:
-          requires:
-            - python-3.5-core
-            - python-3.5-optional
-#            - python-3.5-plot_ly
-            - python-3-5-orca
-
-          filters:
-            branches:
-              only:
-                - master
-                - /release_.*/
-                - /conda_build_.*/
-
-      - python-3-6-conda:
-          requires:
-            - python-3.6-core
-            - python-3.6-optional
-#            - python-3.6-plot_ly
-#            - python-3-6-orca
-
-          filters:
-            branches:
-              only:
-                - master
-                - /release_.*/
-                - /conda_build_.*/
-
-      - python-3-7-conda:
-          requires:
-            - python-3.7-core
-#            - python-3.7-optional
-            - python-3.7-plot_ly
-            - python-3-7-orca
-
-          filters:
-            branches:
-              only:
-                - master
-                - /release_.*/
-                - /conda_build_.*/

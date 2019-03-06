@@ -11,6 +11,7 @@ source:
 build:
   number: 0
   script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -q"
+  noarch: python
 
 requirements:
   build:
