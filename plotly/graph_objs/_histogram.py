@@ -4,6 +4,29 @@ import copy
 
 class Histogram(BaseTraceType):
 
+    # alignmentgroup
+    # --------------
+    @property
+    def alignmentgroup(self):
+        """
+        Set several traces linked to the same position axis or matching
+        axes to the same alignmentgroup. This controls whether bars
+        compute their positional range dependently or independently.
+    
+        The 'alignmentgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['alignmentgroup']
+
+    @alignmentgroup.setter
+    def alignmentgroup(self, val):
+        self['alignmentgroup'] = val
+
     # autobinx
     # --------
     @property
@@ -514,6 +537,48 @@ class Histogram(BaseTraceType):
     def hovertemplatesrc(self, val):
         self['hovertemplatesrc'] = val
 
+    # hovertext
+    # ---------
+    @property
+    def hovertext(self):
+        """
+        Same as `text`.
+    
+        The 'hovertext' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self['hovertext']
+
+    @hovertext.setter
+    def hovertext(self, val):
+        self['hovertext'] = val
+
+    # hovertextsrc
+    # ------------
+    @property
+    def hovertextsrc(self):
+        """
+        Sets the source reference on plot.ly for  hovertext .
+    
+        The 'hovertextsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hovertextsrc']
+
+    @hovertextsrc.setter
+    def hovertextsrc(self, val):
+        self['hovertextsrc'] = val
+
     # ids
     # ---
     @property
@@ -616,6 +681,14 @@ class Histogram(BaseTraceType):
                     numerical array. Value should have the same
                     units as in `marker.color` and if set,
                     `marker.cmin` must be set as well.
+                cmid
+                    Sets the mid-point of the color domain by
+                    scaling `marker.cmin` and/or `marker.cmax` to
+                    be equidistant to this point. Has an effect
+                    only if in `marker.color`is set to a numerical
+                    array. Value should have the same units as in
+                    `marker.color`. Has no effect when
+                    `marker.cauto` is `false`.
                 cmin
                     Sets the lower bound of the color domain. Has
                     an effect only if in `marker.color`is set to a
@@ -749,6 +822,29 @@ class Histogram(BaseTraceType):
     @nbinsy.setter
     def nbinsy(self, val):
         self['nbinsy'] = val
+
+    # offsetgroup
+    # -----------
+    @property
+    def offsetgroup(self):
+        """
+        Set several traces linked to the same position axis or matching
+        axes to the same offsetgroup where bars of the same position
+        coordinate will line up.
+    
+        The 'offsetgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['offsetgroup']
+
+    @offsetgroup.setter
+    def offsetgroup(self, val):
+        self['offsetgroup'] = val
 
     # opacity
     # -------
@@ -905,12 +1001,10 @@ class Histogram(BaseTraceType):
     @property
     def text(self):
         """
-        Sets text elements associated with each (x,y) pair. If a single
-        string, the same string appears over all the data points. If an
-        array of string, the items are mapped in order to the this
-        trace's (x,y) coordinates. If trace `hoverinfo` contains a
-        "text" flag and "hovertext" is not set, these elements will be
-        seen in the hover labels.
+        Sets hover text elements associated with each bar. If a single
+        string, the same string appears over all bars. If an array of
+        string, the items are mapped in order to the this trace's
+        coordinates.
     
         The 'text' property is a string and must be specified as:
           - A string
@@ -1386,6 +1480,11 @@ class Histogram(BaseTraceType):
     @property
     def _prop_descriptions(self):
         return """\
+        alignmentgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same alignmentgroup. This controls
+            whether bars compute their positional range dependently
+            or independently.
         autobinx
             Obsolete: since v1.42 each bin attribute is auto-
             determined separately and `autobinx` is not needed.
@@ -1469,6 +1568,10 @@ class Histogram(BaseTraceType):
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -1497,6 +1600,10 @@ class Histogram(BaseTraceType):
             optimal bin size such that the histogram best
             visualizes the distribution of the data. Ignored if
             `ybins.size` is provided.
+        offsetgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same offsetgroup where bars of the
+            same position coordinate will line up.
         opacity
             Sets the opacity of the trace.
         orientation
@@ -1520,13 +1627,10 @@ class Histogram(BaseTraceType):
             plotly.graph_objs.histogram.Stream instance or dict
             with compatible properties
         text
-            Sets text elements associated with each (x,y) pair. If
-            a single string, the same string appears over all the
-            data points. If an array of string, the items are
-            mapped in order to the this trace's (x,y) coordinates.
-            If trace `hoverinfo` contains a "text" flag and
-            "hovertext" is not set, these elements will be seen in
-            the hover labels.
+            Sets hover text elements associated with each bar. If a
+            single string, the same string appears over all bars.
+            If an array of string, the items are mapped in order to
+            the this trace's coordinates.
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
@@ -1592,6 +1696,7 @@ class Histogram(BaseTraceType):
     def __init__(
         self,
         arg=None,
+        alignmentgroup=None,
         autobinx=None,
         autobiny=None,
         cumulative=None,
@@ -1606,6 +1711,8 @@ class Histogram(BaseTraceType):
         hoverlabel=None,
         hovertemplate=None,
         hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
         ids=None,
         idssrc=None,
         legendgroup=None,
@@ -1613,6 +1720,7 @@ class Histogram(BaseTraceType):
         name=None,
         nbinsx=None,
         nbinsy=None,
+        offsetgroup=None,
         opacity=None,
         orientation=None,
         selected=None,
@@ -1651,6 +1759,11 @@ class Histogram(BaseTraceType):
         arg
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.Histogram
+        alignmentgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same alignmentgroup. This controls
+            whether bars compute their positional range dependently
+            or independently.
         autobinx
             Obsolete: since v1.42 each bin attribute is auto-
             determined separately and `autobinx` is not needed.
@@ -1734,6 +1847,10 @@ class Histogram(BaseTraceType):
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -1762,6 +1879,10 @@ class Histogram(BaseTraceType):
             optimal bin size such that the histogram best
             visualizes the distribution of the data. Ignored if
             `ybins.size` is provided.
+        offsetgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same offsetgroup where bars of the
+            same position coordinate will line up.
         opacity
             Sets the opacity of the trace.
         orientation
@@ -1785,13 +1906,10 @@ class Histogram(BaseTraceType):
             plotly.graph_objs.histogram.Stream instance or dict
             with compatible properties
         text
-            Sets text elements associated with each (x,y) pair. If
-            a single string, the same string appears over all the
-            data points. If an array of string, the items are
-            mapped in order to the this trace's (x,y) coordinates.
-            If trace `hoverinfo` contains a "text" flag and
-            "hovertext" is not set, these elements will be seen in
-            the hover labels.
+            Sets hover text elements associated with each bar. If a
+            single string, the same string appears over all bars.
+            If an array of string, the items are mapped in order to
+            the this trace's coordinates.
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
@@ -1885,6 +2003,8 @@ an instance of plotly.graph_objs.Histogram"""
 
         # Initialize validators
         # ---------------------
+        self._validators['alignmentgroup'
+                        ] = v_histogram.AlignmentgroupValidator()
         self._validators['autobinx'] = v_histogram.AutobinxValidator()
         self._validators['autobiny'] = v_histogram.AutobinyValidator()
         self._validators['cumulative'] = v_histogram.CumulativeValidator()
@@ -1902,6 +2022,8 @@ an instance of plotly.graph_objs.Histogram"""
         )
         self._validators['hovertemplatesrc'
                         ] = v_histogram.HovertemplatesrcValidator()
+        self._validators['hovertext'] = v_histogram.HovertextValidator()
+        self._validators['hovertextsrc'] = v_histogram.HovertextsrcValidator()
         self._validators['ids'] = v_histogram.IdsValidator()
         self._validators['idssrc'] = v_histogram.IdssrcValidator()
         self._validators['legendgroup'] = v_histogram.LegendgroupValidator()
@@ -1909,6 +2031,7 @@ an instance of plotly.graph_objs.Histogram"""
         self._validators['name'] = v_histogram.NameValidator()
         self._validators['nbinsx'] = v_histogram.NbinsxValidator()
         self._validators['nbinsy'] = v_histogram.NbinsyValidator()
+        self._validators['offsetgroup'] = v_histogram.OffsetgroupValidator()
         self._validators['opacity'] = v_histogram.OpacityValidator()
         self._validators['orientation'] = v_histogram.OrientationValidator()
         self._validators['selected'] = v_histogram.SelectedValidator()
@@ -1935,6 +2058,9 @@ an instance of plotly.graph_objs.Histogram"""
 
         # Populate data dict with properties
         # ----------------------------------
+        _v = arg.pop('alignmentgroup', None)
+        self['alignmentgroup'
+            ] = alignmentgroup if alignmentgroup is not None else _v
         _v = arg.pop('autobinx', None)
         self['autobinx'] = autobinx if autobinx is not None else _v
         _v = arg.pop('autobiny', None)
@@ -1966,6 +2092,10 @@ an instance of plotly.graph_objs.Histogram"""
         _v = arg.pop('hovertemplatesrc', None)
         self['hovertemplatesrc'
             ] = hovertemplatesrc if hovertemplatesrc is not None else _v
+        _v = arg.pop('hovertext', None)
+        self['hovertext'] = hovertext if hovertext is not None else _v
+        _v = arg.pop('hovertextsrc', None)
+        self['hovertextsrc'] = hovertextsrc if hovertextsrc is not None else _v
         _v = arg.pop('ids', None)
         self['ids'] = ids if ids is not None else _v
         _v = arg.pop('idssrc', None)
@@ -1980,6 +2110,8 @@ an instance of plotly.graph_objs.Histogram"""
         self['nbinsx'] = nbinsx if nbinsx is not None else _v
         _v = arg.pop('nbinsy', None)
         self['nbinsy'] = nbinsy if nbinsy is not None else _v
+        _v = arg.pop('offsetgroup', None)
+        self['offsetgroup'] = offsetgroup if offsetgroup is not None else _v
         _v = arg.pop('opacity', None)
         self['opacity'] = opacity if opacity is not None else _v
         _v = arg.pop('orientation', None)

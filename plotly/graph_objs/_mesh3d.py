@@ -109,6 +109,29 @@ class Mesh3d(BaseTraceType):
     def cmax(self, val):
         self['cmax'] = val
 
+    # cmid
+    # ----
+    @property
+    def cmid(self):
+        """
+        Sets the mid-point of the color domain by scaling `cmin` and/or
+        `cmax` to be equidistant to this point. Value should have the
+        same units as `intensity`. Has no effect when `cauto` is
+        `false`.
+    
+        The 'cmid' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self['cmid']
+
+    @cmid.setter
+    def cmid(self, val):
+        self['cmid'] = val
+
     # cmin
     # ----
     @property
@@ -718,6 +741,102 @@ class Mesh3d(BaseTraceType):
     def hoverlabel(self, val):
         self['hoverlabel'] = val
 
+    # hovertemplate
+    # -------------
+    @property
+    def hovertemplate(self):
+        """
+        Template string used for rendering the information that appear
+        on hover box. Note that this will override `hoverinfo`.
+        Variables are inserted using %{variable}, for example "y:
+        %{y}". Numbers are formatted using d3-format's syntax
+        %{variable:d3-format}, for example "Price: %{y:$.2f}". See http
+        s://github.com/d3/d3-format/blob/master/README.md#locale_format
+        for details on the formatting syntax. The variables available
+        in `hovertemplate` are the ones emitted as event data described
+        at this link https://plot.ly/javascript/plotlyjs-events/#event-
+        data. Additionally, every attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        Anything contained in tag `<extra>` is displayed in the
+        secondary box, for example "<extra>{fullData.name}</extra>".
+    
+        The 'hovertemplate' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self['hovertemplate']
+
+    @hovertemplate.setter
+    def hovertemplate(self, val):
+        self['hovertemplate'] = val
+
+    # hovertemplatesrc
+    # ----------------
+    @property
+    def hovertemplatesrc(self):
+        """
+        Sets the source reference on plot.ly for  hovertemplate .
+    
+        The 'hovertemplatesrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hovertemplatesrc']
+
+    @hovertemplatesrc.setter
+    def hovertemplatesrc(self, val):
+        self['hovertemplatesrc'] = val
+
+    # hovertext
+    # ---------
+    @property
+    def hovertext(self):
+        """
+        Same as `text`.
+    
+        The 'hovertext' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self['hovertext']
+
+    @hovertext.setter
+    def hovertext(self, val):
+        self['hovertext'] = val
+
+    # hovertextsrc
+    # ------------
+    @property
+    def hovertextsrc(self):
+        """
+        Sets the source reference on plot.ly for  hovertext .
+    
+        The 'hovertextsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hovertextsrc']
+
+    @hovertextsrc.setter
+    def hovertextsrc(self, val):
+        self['hovertextsrc'] = val
+
     # i
     # -
     @property
@@ -1070,7 +1189,12 @@ class Mesh3d(BaseTraceType):
     @property
     def opacity(self):
         """
-        Sets the opacity of the surface.
+        Sets the opacity of the surface. Please note that in the case
+        of using high `opacity` values for example a value greater than
+        or equal to 0.5 on two surfaces (and 0.25 with four surfaces),
+        an overlay of multiple transparent surfaces may not perfectly
+        be sorted in depth by the webgl API. This behavior may be
+        improved in the near future and is subject to change.
     
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
@@ -1643,6 +1767,11 @@ class Mesh3d(BaseTraceType):
             Sets the upper bound of the color domain. Value should
             have the same units as `intensity` and if set, `cmin`
             must be set as well.
+        cmid
+            Sets the mid-point of the color domain by scaling
+            `cmin` and/or `cmax` to be equidistant to this point.
+            Value should have the same units as `intensity`. Has no
+            effect when `cauto` is `false`.
         cmin
             Sets the lower bound of the color domain. Value should
             have the same units as `intensity` and if set, `cmax`
@@ -1699,6 +1828,30 @@ class Mesh3d(BaseTraceType):
         hoverlabel
             plotly.graph_objs.mesh3d.Hoverlabel instance or dict
             with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         i
             A vector of vertex indices, i.e. integer values between
             0 and the length of the vertex vectors, representing
@@ -1757,7 +1910,13 @@ class Mesh3d(BaseTraceType):
             Sets the trace name. The trace name appear as the
             legend item and on hover.
         opacity
-            Sets the opacity of the surface.
+            Sets the opacity of the surface. Please note that in
+            the case of using high `opacity` values for example a
+            value greater than or equal to 0.5 on two surfaces (and
+            0.25 with four surfaces), an overlay of multiple
+            transparent surfaces may not perfectly be sorted in
+            depth by the webgl API. This behavior may be improved
+            in the near future and is subject to change.
         reversescale
             Reverses the color mapping if true. If true, `cmin`
             will correspond to the last color in the array and
@@ -1855,6 +2014,7 @@ class Mesh3d(BaseTraceType):
         autocolorscale=None,
         cauto=None,
         cmax=None,
+        cmid=None,
         cmin=None,
         color=None,
         colorbar=None,
@@ -1869,6 +2029,10 @@ class Mesh3d(BaseTraceType):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
         i=None,
         ids=None,
         idssrc=None,
@@ -1956,6 +2120,11 @@ class Mesh3d(BaseTraceType):
             Sets the upper bound of the color domain. Value should
             have the same units as `intensity` and if set, `cmin`
             must be set as well.
+        cmid
+            Sets the mid-point of the color domain by scaling
+            `cmin` and/or `cmax` to be equidistant to this point.
+            Value should have the same units as `intensity`. Has no
+            effect when `cauto` is `false`.
         cmin
             Sets the lower bound of the color domain. Value should
             have the same units as `intensity` and if set, `cmax`
@@ -2012,6 +2181,30 @@ class Mesh3d(BaseTraceType):
         hoverlabel
             plotly.graph_objs.mesh3d.Hoverlabel instance or dict
             with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         i
             A vector of vertex indices, i.e. integer values between
             0 and the length of the vertex vectors, representing
@@ -2070,7 +2263,13 @@ class Mesh3d(BaseTraceType):
             Sets the trace name. The trace name appear as the
             legend item and on hover.
         opacity
-            Sets the opacity of the surface.
+            Sets the opacity of the surface. Please note that in
+            the case of using high `opacity` values for example a
+            value greater than or equal to 0.5 on two surfaces (and
+            0.25 with four surfaces), an overlay of multiple
+            transparent surfaces may not perfectly be sorted in
+            depth by the webgl API. This behavior may be improved
+            in the near future and is subject to change.
         reversescale
             Reverses the color mapping if true. If true, `cmin`
             will correspond to the last color in the array and
@@ -2196,6 +2395,7 @@ an instance of plotly.graph_objs.Mesh3d"""
         self._validators['autocolorscale'] = v_mesh3d.AutocolorscaleValidator()
         self._validators['cauto'] = v_mesh3d.CautoValidator()
         self._validators['cmax'] = v_mesh3d.CmaxValidator()
+        self._validators['cmid'] = v_mesh3d.CmidValidator()
         self._validators['cmin'] = v_mesh3d.CminValidator()
         self._validators['color'] = v_mesh3d.ColorValidator()
         self._validators['colorbar'] = v_mesh3d.ColorBarValidator()
@@ -2210,6 +2410,11 @@ an instance of plotly.graph_objs.Mesh3d"""
         self._validators['hoverinfo'] = v_mesh3d.HoverinfoValidator()
         self._validators['hoverinfosrc'] = v_mesh3d.HoverinfosrcValidator()
         self._validators['hoverlabel'] = v_mesh3d.HoverlabelValidator()
+        self._validators['hovertemplate'] = v_mesh3d.HovertemplateValidator()
+        self._validators['hovertemplatesrc'
+                        ] = v_mesh3d.HovertemplatesrcValidator()
+        self._validators['hovertext'] = v_mesh3d.HovertextValidator()
+        self._validators['hovertextsrc'] = v_mesh3d.HovertextsrcValidator()
         self._validators['i'] = v_mesh3d.IValidator()
         self._validators['ids'] = v_mesh3d.IdsValidator()
         self._validators['idssrc'] = v_mesh3d.IdssrcValidator()
@@ -2259,6 +2464,8 @@ an instance of plotly.graph_objs.Mesh3d"""
         self['cauto'] = cauto if cauto is not None else _v
         _v = arg.pop('cmax', None)
         self['cmax'] = cmax if cmax is not None else _v
+        _v = arg.pop('cmid', None)
+        self['cmid'] = cmid if cmid is not None else _v
         _v = arg.pop('cmin', None)
         self['cmin'] = cmin if cmin is not None else _v
         _v = arg.pop('color', None)
@@ -2288,6 +2495,16 @@ an instance of plotly.graph_objs.Mesh3d"""
         self['hoverinfosrc'] = hoverinfosrc if hoverinfosrc is not None else _v
         _v = arg.pop('hoverlabel', None)
         self['hoverlabel'] = hoverlabel if hoverlabel is not None else _v
+        _v = arg.pop('hovertemplate', None)
+        self['hovertemplate'
+            ] = hovertemplate if hovertemplate is not None else _v
+        _v = arg.pop('hovertemplatesrc', None)
+        self['hovertemplatesrc'
+            ] = hovertemplatesrc if hovertemplatesrc is not None else _v
+        _v = arg.pop('hovertext', None)
+        self['hovertext'] = hovertext if hovertext is not None else _v
+        _v = arg.pop('hovertextsrc', None)
+        self['hovertextsrc'] = hovertextsrc if hovertextsrc is not None else _v
         _v = arg.pop('i', None)
         self['i'] = i if i is not None else _v
         _v = arg.pop('ids', None)

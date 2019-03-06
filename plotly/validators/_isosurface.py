@@ -31,6 +31,12 @@ class IsosurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the upper bound of the color domain. Value
                 should have the same units as `value` and if
                 set, `cmin` must be set as well.
+            cmid
+                Sets the mid-point of the color domain by
+                scaling `cmin` and/or `cmax` to be equidistant
+                to this point. Value should have the same units
+                as `value`. Has no effect when `cauto` is
+                `false`.
             cmin
                 Sets the lower bound of the color domain. Value
                 should have the same units as `value` and if
@@ -66,9 +72,8 @@ class IsosurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 customdata .
             flatshading
                 Determines whether or not normal smoothing is
-                applied to the isosurfaces, creating
-                isosurfaces with an angular, low-poly look via
-                flat reflections.
+                applied to the meshes, creating meshes with an
+                angular, low-poly look via flat reflections.
             hoverinfo
                 Determines which trace information appear on
                 hover. If `none` or `skip` are set, no
@@ -81,6 +86,33 @@ class IsosurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
             hoverlabel
                 plotly.graph_objs.isosurface.Hoverlabel
                 instance or dict with compatible properties
+            hovertemplate
+                Template string used for rendering the
+                information that appear on hover box. Note that
+                this will override `hoverinfo`. Variables are
+                inserted using %{variable}, for example "y:
+                %{y}". Numbers are formatted using d3-format's
+                syntax %{variable:d3-format}, for example
+                "Price: %{y:$.2f}". See https://github.com/d3/d
+                3-format/blob/master/README.md#locale_format
+                for details on the formatting syntax. The
+                variables available in `hovertemplate` are the
+                ones emitted as event data described at this
+                link https://plot.ly/javascript/plotlyjs-
+                events/#event-data. Additionally, every
+                attributes that can be specified per-point (the
+                ones that are `arrayOk: true`) are available.
+                Anything contained in tag `<extra>` is
+                displayed in the secondary box, for example
+                "<extra>{fullData.name}</extra>".
+            hovertemplatesrc
+                Sets the source reference on plot.ly for
+                hovertemplate .
+            hovertext
+                Same as `text`.
+            hovertextsrc
+                Sets the source reference on plot.ly for
+                hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -106,7 +138,14 @@ class IsosurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
             opacity
-                Sets the opacity of the trace.
+                Sets the opacity of the surface. Please note
+                that in the case of using high `opacity` values
+                for example a value greater than or equal to
+                0.5 on two surfaces (and 0.25 with four
+                surfaces), an overlay of multiple transparent
+                surfaces may not perfectly be sorted in depth
+                by the webgl API. This behavior may be improved
+                in the near future and is subject to change.
             reversescale
                 Reverses the color mapping if true. If true,
                 `cmin` will correspond to the last color in the

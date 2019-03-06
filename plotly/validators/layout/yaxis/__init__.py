@@ -46,6 +46,7 @@ from ._position import PositionValidator
 from ._overlaying import OverlayingValidator
 from ._nticks import NticksValidator
 from ._mirror import MirrorValidator
+from ._matches import MatchesValidator
 from ._linewidth import LinewidthValidator
 from ._linecolor import LinecolorValidator
 from ._layer import LayerValidator

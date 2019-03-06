@@ -558,6 +558,14 @@ class Scattermapbox(BaseTraceType):
                     numerical array. Value should have the same
                     units as in `marker.color` and if set,
                     `marker.cmin` must be set as well.
+                cmid
+                    Sets the mid-point of the color domain by
+                    scaling `marker.cmin` and/or `marker.cmax` to
+                    be equidistant to this point. Has an effect
+                    only if in `marker.color`is set to a numerical
+                    array. Value should have the same units as in
+                    `marker.color`. Has no effect when
+                    `marker.cauto` is `false`.
                 cmin
                     Sets the lower bound of the color domain. Has
                     an effect only if in `marker.color`is set to a
@@ -875,8 +883,9 @@ class Scattermapbox(BaseTraceType):
     @property
     def textfont(self):
         """
-        Sets the icon text font. Has an effect only when `type` is set
-        to "symbol".
+        Sets the icon text font (color=mapbox.layer.paint.text-color,
+        size=mapbox.layer.layout.text-size). Has an effect only when
+        `type` is set to "symbol".
     
         The 'textfont' property is an instance of Textfont
         that may be specified as:
@@ -1204,8 +1213,9 @@ class Scattermapbox(BaseTraceType):
             flag and "hovertext" is not set, these elements will be
             seen in the hover labels.
         textfont
-            Sets the icon text font. Has an effect only when `type`
-            is set to "symbol".
+            Sets the icon text font (color=mapbox.layer.paint.text-
+            color, size=mapbox.layer.layout.text-size). Has an
+            effect only when `type` is set to "symbol".
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.
@@ -1419,8 +1429,9 @@ class Scattermapbox(BaseTraceType):
             flag and "hovertext" is not set, these elements will be
             seen in the hover labels.
         textfont
-            Sets the icon text font. Has an effect only when `type`
-            is set to "symbol".
+            Sets the icon text font (color=mapbox.layer.paint.text-
+            color, size=mapbox.layer.layout.text-size). Has an
+            effect only when `type` is set to "symbol".
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.

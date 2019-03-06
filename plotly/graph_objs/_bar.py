@@ -4,6 +4,29 @@ import copy
 
 class Bar(BaseTraceType):
 
+    # alignmentgroup
+    # --------------
+    @property
+    def alignmentgroup(self):
+        """
+        Set several traces linked to the same position axis or matching
+        axes to the same alignmentgroup. This controls whether bars
+        compute their positional range dependently or independently.
+    
+        The 'alignmentgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['alignmentgroup']
+
+    @alignmentgroup.setter
+    def alignmentgroup(self, val):
+        self['alignmentgroup'] = val
+
     # base
     # ----
     @property
@@ -686,6 +709,14 @@ class Bar(BaseTraceType):
                     numerical array. Value should have the same
                     units as in `marker.color` and if set,
                     `marker.cmin` must be set as well.
+                cmid
+                    Sets the mid-point of the color domain by
+                    scaling `marker.cmin` and/or `marker.cmax` to
+                    be equidistant to this point. Has an effect
+                    only if in `marker.color`is set to a numerical
+                    array. Value should have the same units as in
+                    `marker.color`. Has no effect when
+                    `marker.cauto` is `false`.
                 cmin
                     Sets the lower bound of the color domain. Has
                     an effect only if in `marker.color`is set to a
@@ -794,6 +825,29 @@ class Bar(BaseTraceType):
     @offset.setter
     def offset(self, val):
         self['offset'] = val
+
+    # offsetgroup
+    # -----------
+    @property
+    def offsetgroup(self):
+        """
+        Set several traces linked to the same position axis or matching
+        axes to the same offsetgroup where bars of the same position
+        coordinate will line up.
+    
+        The 'offsetgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['offsetgroup']
+
+    @offsetgroup.setter
+    def offsetgroup(self, val):
+        self['offsetgroup'] = val
 
     # offsetsrc
     # ---------
@@ -1640,6 +1694,11 @@ class Bar(BaseTraceType):
     @property
     def _prop_descriptions(self):
         return """\
+        alignmentgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same alignmentgroup. This controls
+            whether bars compute their positional range dependently
+            or independently.
         base
             Sets where the bar base is drawn (in position axis
             units). In "stack" or "relative" barmode, traces that
@@ -1734,6 +1793,10 @@ class Bar(BaseTraceType):
             axis units). In "group" barmode, traces that set
             "offset" will be excluded and drawn in "overlay" mode
             instead.
+        offsetgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same offsetgroup where bars of the
+            same position coordinate will line up.
         offsetsrc
             Sets the source reference on plot.ly for  offset .
         opacity
@@ -1865,6 +1928,7 @@ class Bar(BaseTraceType):
     def __init__(
         self,
         arg=None,
+        alignmentgroup=None,
         base=None,
         basesrc=None,
         cliponaxis=None,
@@ -1889,6 +1953,7 @@ class Bar(BaseTraceType):
         marker=None,
         name=None,
         offset=None,
+        offsetgroup=None,
         offsetsrc=None,
         opacity=None,
         orientation=None,
@@ -1937,6 +2002,11 @@ class Bar(BaseTraceType):
         arg
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.Bar
+        alignmentgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same alignmentgroup. This controls
+            whether bars compute their positional range dependently
+            or independently.
         base
             Sets where the bar base is drawn (in position axis
             units). In "stack" or "relative" barmode, traces that
@@ -2031,6 +2101,10 @@ class Bar(BaseTraceType):
             axis units). In "group" barmode, traces that set
             "offset" will be excluded and drawn in "overlay" mode
             instead.
+        offsetgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same offsetgroup where bars of the
+            same position coordinate will line up.
         offsetsrc
             Sets the source reference on plot.ly for  offset .
         opacity
@@ -2190,6 +2264,7 @@ an instance of plotly.graph_objs.Bar"""
 
         # Initialize validators
         # ---------------------
+        self._validators['alignmentgroup'] = v_bar.AlignmentgroupValidator()
         self._validators['base'] = v_bar.BaseValidator()
         self._validators['basesrc'] = v_bar.BasesrcValidator()
         self._validators['cliponaxis'] = v_bar.CliponaxisValidator()
@@ -2215,6 +2290,7 @@ an instance of plotly.graph_objs.Bar"""
         self._validators['marker'] = v_bar.MarkerValidator()
         self._validators['name'] = v_bar.NameValidator()
         self._validators['offset'] = v_bar.OffsetValidator()
+        self._validators['offsetgroup'] = v_bar.OffsetgroupValidator()
         self._validators['offsetsrc'] = v_bar.OffsetsrcValidator()
         self._validators['opacity'] = v_bar.OpacityValidator()
         self._validators['orientation'] = v_bar.OrientationValidator()
@@ -2251,6 +2327,9 @@ an instance of plotly.graph_objs.Bar"""
 
         # Populate data dict with properties
         # ----------------------------------
+        _v = arg.pop('alignmentgroup', None)
+        self['alignmentgroup'
+            ] = alignmentgroup if alignmentgroup is not None else _v
         _v = arg.pop('base', None)
         self['base'] = base if base is not None else _v
         _v = arg.pop('basesrc', None)
@@ -2304,6 +2383,8 @@ an instance of plotly.graph_objs.Bar"""
         self['name'] = name if name is not None else _v
         _v = arg.pop('offset', None)
         self['offset'] = offset if offset is not None else _v
+        _v = arg.pop('offsetgroup', None)
+        self['offsetgroup'] = offsetgroup if offsetgroup is not None else _v
         _v = arg.pop('offsetsrc', None)
         self['offsetsrc'] = offsetsrc if offsetsrc is not None else _v
         _v = arg.pop('opacity', None)

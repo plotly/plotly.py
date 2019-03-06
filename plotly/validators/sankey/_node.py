@@ -21,6 +21,10 @@ class NodeValidator(_plotly_utils.basevalidators.CompoundValidator):
             colorsrc
                 Sets the source reference on plot.ly for  color
                 .
+            groups
+                Groups of nodes. Each group is defined by an
+                array with the indices of the nodes it
+                contains. Multiple groups can be specified.
             hoverinfo
                 Determines which trace information appear when
                 hovering nodes. If `none` or `skip` are set, no

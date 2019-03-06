@@ -253,6 +253,48 @@ class Ohlc(BaseTraceType):
     def hoverlabel(self, val):
         self['hoverlabel'] = val
 
+    # hovertext
+    # ---------
+    @property
+    def hovertext(self):
+        """
+        Same as `text`.
+    
+        The 'hovertext' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self['hovertext']
+
+    @hovertext.setter
+    def hovertext(self, val):
+        self['hovertext'] = val
+
+    # hovertextsrc
+    # ------------
+    @property
+    def hovertextsrc(self):
+        """
+        Sets the source reference on plot.ly for  hovertext .
+    
+        The 'hovertextsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hovertextsrc']
+
+    @hovertextsrc.setter
+    def hovertextsrc(self, val):
+        self['hovertextsrc'] = val
+
     # ids
     # ---
     @property
@@ -886,6 +928,10 @@ class Ohlc(BaseTraceType):
         hoverlabel
             plotly.graph_objs.ohlc.Hoverlabel instance or dict with
             compatible properties
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -997,6 +1043,8 @@ class Ohlc(BaseTraceType):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hovertext=None,
+        hovertextsrc=None,
         ids=None,
         idssrc=None,
         increasing=None,
@@ -1069,6 +1117,10 @@ class Ohlc(BaseTraceType):
         hoverlabel
             plotly.graph_objs.ohlc.Hoverlabel instance or dict with
             compatible properties
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -1208,6 +1260,8 @@ an instance of plotly.graph_objs.Ohlc"""
         self._validators['hoverinfo'] = v_ohlc.HoverinfoValidator()
         self._validators['hoverinfosrc'] = v_ohlc.HoverinfosrcValidator()
         self._validators['hoverlabel'] = v_ohlc.HoverlabelValidator()
+        self._validators['hovertext'] = v_ohlc.HovertextValidator()
+        self._validators['hovertextsrc'] = v_ohlc.HovertextsrcValidator()
         self._validators['ids'] = v_ohlc.IdsValidator()
         self._validators['idssrc'] = v_ohlc.IdssrcValidator()
         self._validators['increasing'] = v_ohlc.IncreasingValidator()
@@ -1257,6 +1311,10 @@ an instance of plotly.graph_objs.Ohlc"""
         self['hoverinfosrc'] = hoverinfosrc if hoverinfosrc is not None else _v
         _v = arg.pop('hoverlabel', None)
         self['hoverlabel'] = hoverlabel if hoverlabel is not None else _v
+        _v = arg.pop('hovertext', None)
+        self['hovertext'] = hovertext if hovertext is not None else _v
+        _v = arg.pop('hovertextsrc', None)
+        self['hovertextsrc'] = hovertextsrc if hovertextsrc is not None else _v
         _v = arg.pop('ids', None)
         self['ids'] = ids if ids is not None else _v
         _v = arg.pop('idssrc', None)

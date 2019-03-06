@@ -10,6 +10,12 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_class_str=kwargs.pop('data_class_str', 'Box'),
             data_docs=kwargs.pop(
                 'data_docs', """
+            alignmentgroup
+                Set several traces linked to the same position
+                axis or matching axes to the same
+                alignmentgroup. This controls whether bars
+                compute their positional range dependently or
+                independently.
             boxmean
                 If True, the mean of the box(es)' underlying
                 distribution is drawn as a dashed line inside
@@ -53,6 +59,11 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
             hoveron
                 Do the hover effects highlight individual boxes
                 or sample points or both?
+            hovertext
+                Same as `text`.
+            hovertextsrc
+                Sets the source reference on plot.ly for
+                hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -90,6 +101,11 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the width of the notches relative to the
                 box' width. For example, with 0, the notches
                 are as wide as the box(es).
+            offsetgroup
+                Set several traces linked to the same position
+                axis or matching axes to the same offsetgroup
+                where bars of the same position coordinate will
+                line up.
             opacity
                 Sets the opacity of the trace.
             orientation

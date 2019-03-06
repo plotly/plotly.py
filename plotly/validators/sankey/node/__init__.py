@@ -7,5 +7,6 @@ from ._hovertemplatesrc import HovertemplatesrcValidator
 from ._hovertemplate import HovertemplateValidator
 from ._hoverlabel import HoverlabelValidator
 from ._hoverinfo import HoverinfoValidator
+from ._groups import GroupsValidator
 from ._colorsrc import ColorsrcValidator
 from ._color import ColorValidator

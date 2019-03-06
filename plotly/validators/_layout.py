@@ -199,9 +199,11 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             meta
                 Assigns extra meta information that can be used
                 in various `text` attributes. Attributes such
-                as the graph, axis and colorbar `title.text`
-                and annotation `text` support `meta`. One can
-                access `meta` fields using template strings:
+                as the graph, axis and colorbar `title.text`,
+                annotation `text` `trace.name` in legend items,
+                `rangeselector`, `updatemenues` and `sliders`
+                `label` text all support `meta`. One can access
+                `meta` fields using template strings:
                 `%{meta[i]}` where `i` is the index of the
                 `meta` item in question.
             metasrc

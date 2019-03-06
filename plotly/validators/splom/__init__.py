@@ -18,6 +18,10 @@ from ._marker import MarkerValidator
 from ._legendgroup import LegendgroupValidator
 from ._idssrc import IdssrcValidator
 from ._ids import IdsValidator
+from ._hovertextsrc import HovertextsrcValidator
+from ._hovertext import HovertextValidator
+from ._hovertemplatesrc import HovertemplatesrcValidator
+from ._hovertemplate import HovertemplateValidator
 from ._hoverlabel import HoverlabelValidator
 from ._hoverinfosrc import HoverinfosrcValidator
 from ._hoverinfo import HoverinfoValidator

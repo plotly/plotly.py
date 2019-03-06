@@ -4,6 +4,29 @@ import copy
 
 class Box(BaseTraceType):
 
+    # alignmentgroup
+    # --------------
+    @property
+    def alignmentgroup(self):
+        """
+        Set several traces linked to the same position axis or matching
+        axes to the same alignmentgroup. This controls whether bars
+        compute their positional range dependently or independently.
+    
+        The 'alignmentgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['alignmentgroup']
+
+    @alignmentgroup.setter
+    def alignmentgroup(self, val):
+        self['alignmentgroup'] = val
+
     # boxmean
     # -------
     @property
@@ -276,6 +299,48 @@ class Box(BaseTraceType):
     def hoveron(self, val):
         self['hoveron'] = val
 
+    # hovertext
+    # ---------
+    @property
+    def hovertext(self):
+        """
+        Same as `text`.
+    
+        The 'hovertext' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self['hovertext']
+
+    @hovertext.setter
+    def hovertext(self, val):
+        self['hovertext'] = val
+
+    # hovertextsrc
+    # ------------
+    @property
+    def hovertextsrc(self):
+        """
+        Sets the source reference on plot.ly for  hovertext .
+    
+        The 'hovertextsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hovertextsrc']
+
+    @hovertextsrc.setter
+    def hovertextsrc(self, val):
+        self['hovertextsrc'] = val
+
     # ids
     # ---
     @property
@@ -503,6 +568,29 @@ class Box(BaseTraceType):
     @notchwidth.setter
     def notchwidth(self, val):
         self['notchwidth'] = val
+
+    # offsetgroup
+    # -----------
+    @property
+    def offsetgroup(self):
+        """
+        Set several traces linked to the same position axis or matching
+        axes to the same offsetgroup where bars of the same position
+        coordinate will line up.
+    
+        The 'offsetgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['offsetgroup']
+
+    @offsetgroup.setter
+    def offsetgroup(self, val):
+        self['offsetgroup'] = val
 
     # opacity
     # -------
@@ -1104,6 +1192,11 @@ class Box(BaseTraceType):
     @property
     def _prop_descriptions(self):
         return """\
+        alignmentgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same alignmentgroup. This controls
+            whether bars compute their positional range dependently
+            or independently.
         boxmean
             If True, the mean of the box(es)' underlying
             distribution is drawn as a dashed line inside the
@@ -1140,6 +1233,10 @@ class Box(BaseTraceType):
         hoveron
             Do the hover effects highlight individual boxes  or
             sample points or both?
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -1173,6 +1270,10 @@ class Box(BaseTraceType):
             Sets the width of the notches relative to the box'
             width. For example, with 0, the notches are as wide as
             the box(es).
+        offsetgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same offsetgroup where bars of the
+            same position coordinate will line up.
         opacity
             Sets the opacity of the trace.
         orientation
@@ -1284,6 +1385,7 @@ class Box(BaseTraceType):
     def __init__(
         self,
         arg=None,
+        alignmentgroup=None,
         boxmean=None,
         boxpoints=None,
         customdata=None,
@@ -1293,6 +1395,8 @@ class Box(BaseTraceType):
         hoverinfosrc=None,
         hoverlabel=None,
         hoveron=None,
+        hovertext=None,
+        hovertextsrc=None,
         ids=None,
         idssrc=None,
         jitter=None,
@@ -1302,6 +1406,7 @@ class Box(BaseTraceType):
         name=None,
         notched=None,
         notchwidth=None,
+        offsetgroup=None,
         opacity=None,
         orientation=None,
         pointpos=None,
@@ -1348,6 +1453,11 @@ class Box(BaseTraceType):
         arg
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.Box
+        alignmentgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same alignmentgroup. This controls
+            whether bars compute their positional range dependently
+            or independently.
         boxmean
             If True, the mean of the box(es)' underlying
             distribution is drawn as a dashed line inside the
@@ -1384,6 +1494,10 @@ class Box(BaseTraceType):
         hoveron
             Do the hover effects highlight individual boxes  or
             sample points or both?
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -1417,6 +1531,10 @@ class Box(BaseTraceType):
             Sets the width of the notches relative to the box'
             width. For example, with 0, the notches are as wide as
             the box(es).
+        offsetgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same offsetgroup where bars of the
+            same position coordinate will line up.
         opacity
             Sets the opacity of the trace.
         orientation
@@ -1556,6 +1674,7 @@ an instance of plotly.graph_objs.Box"""
 
         # Initialize validators
         # ---------------------
+        self._validators['alignmentgroup'] = v_box.AlignmentgroupValidator()
         self._validators['boxmean'] = v_box.BoxmeanValidator()
         self._validators['boxpoints'] = v_box.BoxpointsValidator()
         self._validators['customdata'] = v_box.CustomdataValidator()
@@ -1565,6 +1684,8 @@ an instance of plotly.graph_objs.Box"""
         self._validators['hoverinfosrc'] = v_box.HoverinfosrcValidator()
         self._validators['hoverlabel'] = v_box.HoverlabelValidator()
         self._validators['hoveron'] = v_box.HoveronValidator()
+        self._validators['hovertext'] = v_box.HovertextValidator()
+        self._validators['hovertextsrc'] = v_box.HovertextsrcValidator()
         self._validators['ids'] = v_box.IdsValidator()
         self._validators['idssrc'] = v_box.IdssrcValidator()
         self._validators['jitter'] = v_box.JitterValidator()
@@ -1574,6 +1695,7 @@ an instance of plotly.graph_objs.Box"""
         self._validators['name'] = v_box.NameValidator()
         self._validators['notched'] = v_box.NotchedValidator()
         self._validators['notchwidth'] = v_box.NotchwidthValidator()
+        self._validators['offsetgroup'] = v_box.OffsetgroupValidator()
         self._validators['opacity'] = v_box.OpacityValidator()
         self._validators['orientation'] = v_box.OrientationValidator()
         self._validators['pointpos'] = v_box.PointposValidator()
@@ -1602,6 +1724,9 @@ an instance of plotly.graph_objs.Box"""
 
         # Populate data dict with properties
         # ----------------------------------
+        _v = arg.pop('alignmentgroup', None)
+        self['alignmentgroup'
+            ] = alignmentgroup if alignmentgroup is not None else _v
         _v = arg.pop('boxmean', None)
         self['boxmean'] = boxmean if boxmean is not None else _v
         _v = arg.pop('boxpoints', None)
@@ -1621,6 +1746,10 @@ an instance of plotly.graph_objs.Box"""
         self['hoverlabel'] = hoverlabel if hoverlabel is not None else _v
         _v = arg.pop('hoveron', None)
         self['hoveron'] = hoveron if hoveron is not None else _v
+        _v = arg.pop('hovertext', None)
+        self['hovertext'] = hovertext if hovertext is not None else _v
+        _v = arg.pop('hovertextsrc', None)
+        self['hovertextsrc'] = hovertextsrc if hovertextsrc is not None else _v
         _v = arg.pop('ids', None)
         self['ids'] = ids if ids is not None else _v
         _v = arg.pop('idssrc', None)
@@ -1639,6 +1768,8 @@ an instance of plotly.graph_objs.Box"""
         self['notched'] = notched if notched is not None else _v
         _v = arg.pop('notchwidth', None)
         self['notchwidth'] = notchwidth if notchwidth is not None else _v
+        _v = arg.pop('offsetgroup', None)
+        self['offsetgroup'] = offsetgroup if offsetgroup is not None else _v
         _v = arg.pop('opacity', None)
         self['opacity'] = opacity if opacity is not None else _v
         _v = arg.pop('orientation', None)

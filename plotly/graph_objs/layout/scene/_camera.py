@@ -70,6 +70,34 @@ class Camera(BaseLayoutHierarchyType):
     def eye(self, val):
         self['eye'] = val
 
+    # projection
+    # ----------
+    @property
+    def projection(self):
+        """
+        The 'projection' property is an instance of Projection
+        that may be specified as:
+          - An instance of plotly.graph_objs.layout.scene.camera.Projection
+          - A dict of string/value properties that will be passed
+            to the Projection constructor
+    
+            Supported dict properties:
+                
+                type
+                    Sets the projection type. The projection type
+                    could be either "perspective" or
+                    "orthographic". The default is "perspective".
+
+        Returns
+        -------
+        plotly.graph_objs.layout.scene.camera.Projection
+        """
+        return self['projection']
+
+    @projection.setter
+    def projection(self, val):
+        self['projection'] = val
+
     # up
     # --
     @property
@@ -124,6 +152,9 @@ class Camera(BaseLayoutHierarchyType):
             Sets the (x,y,z) components of the 'eye' camera vector.
             This vector determines the view point about the origin
             of this scene.
+        projection
+            plotly.graph_objs.layout.scene.camera.Projection
+            instance or dict with compatible properties
         up
             Sets the (x,y,z) components of the 'up' camera vector.
             This vector determines the up direction of this scene
@@ -131,7 +162,15 @@ class Camera(BaseLayoutHierarchyType):
             z: 1}* which means that the z axis points up.
         """
 
-    def __init__(self, arg=None, center=None, eye=None, up=None, **kwargs):
+    def __init__(
+        self,
+        arg=None,
+        center=None,
+        eye=None,
+        projection=None,
+        up=None,
+        **kwargs
+    ):
         """
         Construct a new Camera object
         
@@ -149,6 +188,9 @@ class Camera(BaseLayoutHierarchyType):
             Sets the (x,y,z) components of the 'eye' camera vector.
             This vector determines the view point about the origin
             of this scene.
+        projection
+            plotly.graph_objs.layout.scene.camera.Projection
+            instance or dict with compatible properties
         up
             Sets the (x,y,z) components of the 'up' camera vector.
             This vector determines the up direction of this scene
@@ -189,6 +231,7 @@ an instance of plotly.graph_objs.layout.scene.Camera"""
         # ---------------------
         self._validators['center'] = v_camera.CenterValidator()
         self._validators['eye'] = v_camera.EyeValidator()
+        self._validators['projection'] = v_camera.ProjectionValidator()
         self._validators['up'] = v_camera.UpValidator()
 
         # Populate data dict with properties
@@ -197,6 +240,8 @@ an instance of plotly.graph_objs.layout.scene.Camera"""
         self['center'] = center if center is not None else _v
         _v = arg.pop('eye', None)
         self['eye'] = eye if eye is not None else _v
+        _v = arg.pop('projection', None)
+        self['projection'] = projection if projection is not None else _v
         _v = arg.pop('up', None)
         self['up'] = up if up is not None else _v
 

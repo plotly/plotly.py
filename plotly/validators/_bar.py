@@ -10,6 +10,12 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_class_str=kwargs.pop('data_class_str', 'Bar'),
             data_docs=kwargs.pop(
                 'data_docs', """
+            alignmentgroup
+                Set several traces linked to the same position
+                axis or matching axes to the same
+                alignmentgroup. This controls whether bars
+                compute their positional range dependently or
+                independently.
             base
                 Sets where the bar base is drawn (in position
                 axis units). In "stack" or "relative" barmode,
@@ -117,6 +123,11 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 position axis units). In "group" barmode,
                 traces that set "offset" will be excluded and
                 drawn in "overlay" mode instead.
+            offsetgroup
+                Set several traces linked to the same position
+                axis or matching axes to the same offsetgroup
+                where bars of the same position coordinate will
+                line up.
             offsetsrc
                 Sets the source reference on plot.ly for
                 offset .
