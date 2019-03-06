@@ -1,5 +1,6 @@
 from ._zsrc import ZsrcValidator
 from ._zmin import ZminValidator
+from ._zmid import ZmidValidator
 from ._zmax import ZmaxValidator
 from ._zauto import ZautoValidator
 from ._z import ZValidator

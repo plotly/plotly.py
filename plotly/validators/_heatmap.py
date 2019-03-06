@@ -65,6 +65,33 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
             hoverlabel
                 plotly.graph_objs.heatmap.Hoverlabel instance
                 or dict with compatible properties
+            hovertemplate
+                Template string used for rendering the
+                information that appear on hover box. Note that
+                this will override `hoverinfo`. Variables are
+                inserted using %{variable}, for example "y:
+                %{y}". Numbers are formatted using d3-format's
+                syntax %{variable:d3-format}, for example
+                "Price: %{y:$.2f}". See https://github.com/d3/d
+                3-format/blob/master/README.md#locale_format
+                for details on the formatting syntax. The
+                variables available in `hovertemplate` are the
+                ones emitted as event data described at this
+                link https://plot.ly/javascript/plotlyjs-
+                events/#event-data. Additionally, every
+                attributes that can be specified per-point (the
+                ones that are `arrayOk: true`) are available.
+                Anything contained in tag `<extra>` is
+                displayed in the secondary box, for example
+                "<extra>{fullData.name}</extra>".
+            hovertemplatesrc
+                Sets the source reference on plot.ly for
+                hovertemplate .
+            hovertext
+                Same as `text`.
+            hovertextsrc
+                Sets the source reference on plot.ly for
+                hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -213,6 +240,12 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the upper bound of the color domain. Value
                 should have the same units as in `z` and if
                 set, `zmin` must be set as well.
+            zmid
+                Sets the mid-point of the color domain by
+                scaling `zmin` and/or `zmax` to be equidistant
+                to this point. Value should have the same units
+                as in `z`. Has no effect when `zauto` is
+                `false`.
             zmin
                 Sets the lower bound of the color domain. Value
                 should have the same units as in `z` and if

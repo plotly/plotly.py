@@ -241,9 +241,11 @@ class Figure(BaseFigure):
                     meta
                         Assigns extra meta information that can be used
                         in various `text` attributes. Attributes such
-                        as the graph, axis and colorbar `title.text`
-                        and annotation `text` support `meta`. One can
-                        access `meta` fields using template strings:
+                        as the graph, axis and colorbar `title.text`,
+                        annotation `text` `trace.name` in legend items,
+                        `rangeselector`, `updatemenues` and `sliders`
+                        `label` text all support `meta`. One can access
+                        `meta` fields using template strings:
                         `%{meta[i]}` where `i` is the index of the
                         `meta` item in question.
                     metasrc
@@ -628,6 +630,7 @@ class Figure(BaseFigure):
 
     def add_bar(
         self,
+        alignmentgroup=None,
         base=None,
         basesrc=None,
         cliponaxis=None,
@@ -652,6 +655,7 @@ class Figure(BaseFigure):
         marker=None,
         name=None,
         offset=None,
+        offsetgroup=None,
         offsetsrc=None,
         opacity=None,
         orientation=None,
@@ -699,6 +703,11 @@ class Figure(BaseFigure):
 
         Parameters
         ----------
+        alignmentgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same alignmentgroup. This controls
+            whether bars compute their positional range dependently
+            or independently.
         base
             Sets where the bar base is drawn (in position axis
             units). In "stack" or "relative" barmode, traces that
@@ -793,6 +802,10 @@ class Figure(BaseFigure):
             axis units). In "group" barmode, traces that set
             "offset" will be excluded and drawn in "overlay" mode
             instead.
+        offsetgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same offsetgroup where bars of the
+            same position coordinate will line up.
         offsetsrc
             Sets the source reference on plot.ly for  offset .
         opacity
@@ -933,6 +946,7 @@ class Figure(BaseFigure):
         Bar
         """
         new_trace = Bar(
+            alignmentgroup=alignmentgroup,
             base=base,
             basesrc=basesrc,
             cliponaxis=cliponaxis,
@@ -957,6 +971,7 @@ class Figure(BaseFigure):
             marker=marker,
             name=name,
             offset=offset,
+            offsetgroup=offsetgroup,
             offsetsrc=offsetsrc,
             opacity=opacity,
             orientation=orientation,
@@ -1007,6 +1022,8 @@ class Figure(BaseFigure):
         hoverlabel=None,
         hovertemplate=None,
         hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
         ids=None,
         idssrc=None,
         legendgroup=None,
@@ -1096,6 +1113,10 @@ class Figure(BaseFigure):
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -1225,6 +1246,8 @@ class Figure(BaseFigure):
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
             hovertemplatesrc=hovertemplatesrc,
+            hovertext=hovertext,
+            hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
@@ -1259,6 +1282,7 @@ class Figure(BaseFigure):
 
     def add_box(
         self,
+        alignmentgroup=None,
         boxmean=None,
         boxpoints=None,
         customdata=None,
@@ -1268,6 +1292,8 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hoveron=None,
+        hovertext=None,
+        hovertextsrc=None,
         ids=None,
         idssrc=None,
         jitter=None,
@@ -1277,6 +1303,7 @@ class Figure(BaseFigure):
         name=None,
         notched=None,
         notchwidth=None,
+        offsetgroup=None,
         opacity=None,
         orientation=None,
         pointpos=None,
@@ -1322,6 +1349,11 @@ class Figure(BaseFigure):
 
         Parameters
         ----------
+        alignmentgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same alignmentgroup. This controls
+            whether bars compute their positional range dependently
+            or independently.
         boxmean
             If True, the mean of the box(es)' underlying
             distribution is drawn as a dashed line inside the
@@ -1358,6 +1390,10 @@ class Figure(BaseFigure):
         hoveron
             Do the hover effects highlight individual boxes  or
             sample points or both?
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -1391,6 +1427,10 @@ class Figure(BaseFigure):
             Sets the width of the notches relative to the box'
             width. For example, with 0, the notches are as wide as
             the box(es).
+        offsetgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same offsetgroup where bars of the
+            same position coordinate will line up.
         opacity
             Sets the opacity of the trace.
         orientation
@@ -1511,6 +1551,7 @@ class Figure(BaseFigure):
         Box
         """
         new_trace = Box(
+            alignmentgroup=alignmentgroup,
             boxmean=boxmean,
             boxpoints=boxpoints,
             customdata=customdata,
@@ -1520,6 +1561,8 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hoveron=hoveron,
+            hovertext=hovertext,
+            hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
             jitter=jitter,
@@ -1529,6 +1572,7 @@ class Figure(BaseFigure):
             name=name,
             notched=notched,
             notchwidth=notchwidth,
+            offsetgroup=offsetgroup,
             opacity=opacity,
             orientation=orientation,
             pointpos=pointpos,
@@ -1570,6 +1614,8 @@ class Figure(BaseFigure):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hovertext=None,
+        hovertextsrc=None,
         ids=None,
         idssrc=None,
         increasing=None,
@@ -1641,6 +1687,10 @@ class Figure(BaseFigure):
         hoverlabel
             plotly.graph_objs.candlestick.Hoverlabel instance or
             dict with compatible properties
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -1762,6 +1812,8 @@ class Figure(BaseFigure):
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
+            hovertext=hovertext,
+            hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
             increasing=increasing,
@@ -2048,6 +2100,8 @@ class Figure(BaseFigure):
         hoverlabel=None,
         hovertemplate=None,
         hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
         ids=None,
         idssrc=None,
         legendgroup=None,
@@ -2072,6 +2126,7 @@ class Figure(BaseFigure):
         z=None,
         zauto=None,
         zmax=None,
+        zmid=None,
         zmin=None,
         zsrc=None,
         row=None,
@@ -2152,6 +2207,10 @@ class Figure(BaseFigure):
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -2246,6 +2305,11 @@ class Figure(BaseFigure):
             Sets the upper bound of the color domain. Value should
             have the same units as in `z` and if set, `zmin` must
             be set as well.
+        zmid
+            Sets the mid-point of the color domain by scaling
+            `zmin` and/or `zmax` to be equidistant to this point.
+            Value should have the same units as in `z`. Has no
+            effect when `zauto` is `false`.
         zmin
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
@@ -2277,6 +2341,8 @@ class Figure(BaseFigure):
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
             hovertemplatesrc=hovertemplatesrc,
+            hovertext=hovertext,
+            hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
@@ -2301,6 +2367,7 @@ class Figure(BaseFigure):
             z=z,
             zauto=zauto,
             zmax=zmax,
+            zmid=zmid,
             zmin=zmin,
             zsrc=zsrc,
             **kwargs
@@ -2313,6 +2380,7 @@ class Figure(BaseFigure):
         autocolorscale=None,
         cauto=None,
         cmax=None,
+        cmid=None,
         cmin=None,
         colorbar=None,
         colorscale=None,
@@ -2321,6 +2389,10 @@ class Figure(BaseFigure):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
         ids=None,
         idssrc=None,
         legendgroup=None,
@@ -2387,6 +2459,11 @@ class Figure(BaseFigure):
             Sets the upper bound of the color domain. Value should
             have the same units as u/v/w norm and if set, `cmin`
             must be set as well.
+        cmid
+            Sets the mid-point of the color domain by scaling
+            `cmin` and/or `cmax` to be equidistant to this point.
+            Value should have the same units as u/v/w norm. Has no
+            effect when `cauto` is `false`.
         cmin
             Sets the lower bound of the color domain. Value should
             have the same units as u/v/w norm and if set, `cmax`
@@ -2423,6 +2500,30 @@ class Figure(BaseFigure):
         hoverlabel
             plotly.graph_objs.cone.Hoverlabel instance or dict with
             compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available. variable `norm` Anything contained in tag
+            `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -2443,7 +2544,13 @@ class Figure(BaseFigure):
             Sets the trace name. The trace name appear as the
             legend item and on hover.
         opacity
-            Sets the opacity of the surface.
+            Sets the opacity of the surface. Please note that in
+            the case of using high `opacity` values for example a
+            value greater than or equal to 0.5 on two surfaces (and
+            0.25 with four surfaces), an overlay of multiple
+            transparent surfaces may not perfectly be sorted in
+            depth by the webgl API. This behavior may be improved
+            in the near future and is subject to change.
         reversescale
             Reverses the color mapping if true. If true, `cmin`
             will correspond to the last color in the array and
@@ -2566,6 +2673,7 @@ class Figure(BaseFigure):
             autocolorscale=autocolorscale,
             cauto=cauto,
             cmax=cmax,
+            cmid=cmid,
             cmin=cmin,
             colorbar=colorbar,
             colorscale=colorscale,
@@ -2574,6 +2682,10 @@ class Figure(BaseFigure):
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
+            hovertemplate=hovertemplate,
+            hovertemplatesrc=hovertemplatesrc,
+            hovertext=hovertext,
+            hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
@@ -2626,6 +2738,10 @@ class Figure(BaseFigure):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
         ids=None,
         idssrc=None,
         legendgroup=None,
@@ -2660,6 +2776,7 @@ class Figure(BaseFigure):
         zauto=None,
         zhoverformat=None,
         zmax=None,
+        zmid=None,
         zmin=None,
         zsrc=None,
         row=None,
@@ -2738,6 +2855,30 @@ class Figure(BaseFigure):
         hoverlabel
             plotly.graph_objs.contour.Hoverlabel instance or dict
             with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -2873,6 +3014,11 @@ class Figure(BaseFigure):
             Sets the upper bound of the color domain. Value should
             have the same units as in `z` and if set, `zmin` must
             be set as well.
+        zmid
+            Sets the mid-point of the color domain by scaling
+            `zmin` and/or `zmax` to be equidistant to this point.
+            Value should have the same units as in `z`. Has no
+            effect when `zauto` is `false`.
         zmin
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
@@ -2907,6 +3053,10 @@ class Figure(BaseFigure):
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
+            hovertemplate=hovertemplate,
+            hovertemplatesrc=hovertemplatesrc,
+            hovertext=hovertext,
+            hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
@@ -2941,6 +3091,7 @@ class Figure(BaseFigure):
             zauto=zauto,
             zhoverformat=zhoverformat,
             zmax=zmax,
+            zmid=zmid,
             zmin=zmin,
             zsrc=zsrc,
             **kwargs
@@ -2971,6 +3122,8 @@ class Figure(BaseFigure):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hovertext=None,
+        hovertextsrc=None,
         ids=None,
         idssrc=None,
         legendgroup=None,
@@ -2994,6 +3147,7 @@ class Figure(BaseFigure):
         z=None,
         zauto=None,
         zmax=None,
+        zmid=None,
         zmin=None,
         zsrc=None,
         row=None,
@@ -3096,6 +3250,10 @@ class Figure(BaseFigure):
         hoverlabel
             plotly.graph_objs.contourcarpet.Hoverlabel instance or
             dict with compatible properties
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -3194,6 +3352,11 @@ class Figure(BaseFigure):
             Sets the upper bound of the color domain. Value should
             have the same units as in `z` and if set, `zmin` must
             be set as well.
+        zmid
+            Sets the mid-point of the color domain by scaling
+            `zmin` and/or `zmax` to be equidistant to this point.
+            Value should have the same units as in `z`. Has no
+            effect when `zauto` is `false`.
         zmin
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
@@ -3236,6 +3399,8 @@ class Figure(BaseFigure):
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
+            hovertext=hovertext,
+            hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
@@ -3259,6 +3424,7 @@ class Figure(BaseFigure):
             z=z,
             zauto=zauto,
             zmax=zmax,
+            zmid=zmid,
             zmin=zmin,
             zsrc=zsrc,
             **kwargs
@@ -3278,6 +3444,10 @@ class Figure(BaseFigure):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
         ids=None,
         idssrc=None,
         legendgroup=None,
@@ -3312,6 +3482,7 @@ class Figure(BaseFigure):
         zauto=None,
         zhoverformat=None,
         zmax=None,
+        zmid=None,
         zmin=None,
         zsmooth=None,
         zsrc=None,
@@ -3388,6 +3559,30 @@ class Figure(BaseFigure):
         hoverlabel
             plotly.graph_objs.heatmap.Hoverlabel instance or dict
             with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -3518,6 +3713,11 @@ class Figure(BaseFigure):
             Sets the upper bound of the color domain. Value should
             have the same units as in `z` and if set, `zmin` must
             be set as well.
+        zmid
+            Sets the mid-point of the color domain by scaling
+            `zmin` and/or `zmax` to be equidistant to this point.
+            Value should have the same units as in `z`. Has no
+            effect when `zauto` is `false`.
         zmin
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
@@ -3551,6 +3751,10 @@ class Figure(BaseFigure):
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
+            hovertemplate=hovertemplate,
+            hovertemplatesrc=hovertemplatesrc,
+            hovertext=hovertext,
+            hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
@@ -3585,6 +3789,7 @@ class Figure(BaseFigure):
             zauto=zauto,
             zhoverformat=zhoverformat,
             zmax=zmax,
+            zmid=zmid,
             zmin=zmin,
             zsmooth=zsmooth,
             zsrc=zsrc,
@@ -3633,6 +3838,7 @@ class Figure(BaseFigure):
         z=None,
         zauto=None,
         zmax=None,
+        zmid=None,
         zmin=None,
         zsrc=None,
         row=None,
@@ -3806,6 +4012,11 @@ class Figure(BaseFigure):
             Sets the upper bound of the color domain. Value should
             have the same units as in `z` and if set, `zmin` must
             be set as well.
+        zmid
+            Sets the mid-point of the color domain by scaling
+            `zmin` and/or `zmax` to be equidistant to this point.
+            Value should have the same units as in `z`. Has no
+            effect when `zauto` is `false`.
         zmin
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
@@ -3865,6 +4076,7 @@ class Figure(BaseFigure):
             z=z,
             zauto=zauto,
             zmax=zmax,
+            zmid=zmid,
             zmin=zmin,
             zsrc=zsrc,
             **kwargs
@@ -3873,6 +4085,7 @@ class Figure(BaseFigure):
 
     def add_histogram(
         self,
+        alignmentgroup=None,
         autobinx=None,
         autobiny=None,
         cumulative=None,
@@ -3887,6 +4100,8 @@ class Figure(BaseFigure):
         hoverlabel=None,
         hovertemplate=None,
         hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
         ids=None,
         idssrc=None,
         legendgroup=None,
@@ -3894,6 +4109,7 @@ class Figure(BaseFigure):
         name=None,
         nbinsx=None,
         nbinsy=None,
+        offsetgroup=None,
         opacity=None,
         orientation=None,
         selected=None,
@@ -3931,6 +4147,11 @@ class Figure(BaseFigure):
 
         Parameters
         ----------
+        alignmentgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same alignmentgroup. This controls
+            whether bars compute their positional range dependently
+            or independently.
         autobinx
             Obsolete: since v1.42 each bin attribute is auto-
             determined separately and `autobinx` is not needed.
@@ -4014,6 +4235,10 @@ class Figure(BaseFigure):
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -4042,6 +4267,10 @@ class Figure(BaseFigure):
             optimal bin size such that the histogram best
             visualizes the distribution of the data. Ignored if
             `ybins.size` is provided.
+        offsetgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same offsetgroup where bars of the
+            same position coordinate will line up.
         opacity
             Sets the opacity of the trace.
         orientation
@@ -4065,13 +4294,10 @@ class Figure(BaseFigure):
             plotly.graph_objs.histogram.Stream instance or dict
             with compatible properties
         text
-            Sets text elements associated with each (x,y) pair. If
-            a single string, the same string appears over all the
-            data points. If an array of string, the items are
-            mapped in order to the this trace's (x,y) coordinates.
-            If trace `hoverinfo` contains a "text" flag and
-            "hovertext" is not set, these elements will be seen in
-            the hover labels.
+            Sets hover text elements associated with each bar. If a
+            single string, the same string appears over all bars.
+            If an array of string, the items are mapped in order to
+            the this trace's coordinates.
         textsrc
             Sets the source reference on plot.ly for  text .
         uid
@@ -4146,6 +4372,7 @@ class Figure(BaseFigure):
         Histogram
         """
         new_trace = Histogram(
+            alignmentgroup=alignmentgroup,
             autobinx=autobinx,
             autobiny=autobiny,
             cumulative=cumulative,
@@ -4160,6 +4387,8 @@ class Figure(BaseFigure):
             hoverlabel=hoverlabel,
             hovertemplate=hovertemplate,
             hovertemplatesrc=hovertemplatesrc,
+            hovertext=hovertext,
+            hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
@@ -4167,6 +4396,7 @@ class Figure(BaseFigure):
             name=name,
             nbinsx=nbinsx,
             nbinsy=nbinsy,
+            offsetgroup=offsetgroup,
             opacity=opacity,
             orientation=orientation,
             selected=selected,
@@ -4207,6 +4437,8 @@ class Figure(BaseFigure):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
         ids=None,
         idssrc=None,
         legendgroup=None,
@@ -4239,6 +4471,7 @@ class Figure(BaseFigure):
         zauto=None,
         zhoverformat=None,
         zmax=None,
+        zmid=None,
         zmin=None,
         zsmooth=None,
         zsrc=None,
@@ -4334,6 +4567,26 @@ class Figure(BaseFigure):
         hoverlabel
             plotly.graph_objs.histogram2d.Hoverlabel instance or
             dict with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available. variable `z` Anything contained in tag
+            `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -4459,6 +4712,11 @@ class Figure(BaseFigure):
             Sets the upper bound of the color domain. Value should
             have the same units as in `z` and if set, `zmin` must
             be set as well.
+        zmid
+            Sets the mid-point of the color domain by scaling
+            `zmin` and/or `zmax` to be equidistant to this point.
+            Value should have the same units as in `z`. Has no
+            effect when `zauto` is `false`.
         zmin
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
@@ -4493,6 +4751,8 @@ class Figure(BaseFigure):
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
+            hovertemplate=hovertemplate,
+            hovertemplatesrc=hovertemplatesrc,
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
@@ -4525,6 +4785,7 @@ class Figure(BaseFigure):
             zauto=zauto,
             zhoverformat=zhoverformat,
             zmax=zmax,
+            zmid=zmid,
             zmin=zmin,
             zsmooth=zsmooth,
             zsrc=zsrc,
@@ -4548,6 +4809,8 @@ class Figure(BaseFigure):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
         ids=None,
         idssrc=None,
         legendgroup=None,
@@ -4580,6 +4843,7 @@ class Figure(BaseFigure):
         zauto=None,
         zhoverformat=None,
         zmax=None,
+        zmid=None,
         zmin=None,
         zsrc=None,
         row=None,
@@ -4682,6 +4946,26 @@ class Figure(BaseFigure):
         hoverlabel
             plotly.graph_objs.histogram2dcontour.Hoverlabel
             instance or dict with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available. variable `z` Anything contained in tag
+            `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -4812,6 +5096,11 @@ class Figure(BaseFigure):
             Sets the upper bound of the color domain. Value should
             have the same units as in `z` and if set, `zmin` must
             be set as well.
+        zmid
+            Sets the mid-point of the color domain by scaling
+            `zmin` and/or `zmax` to be equidistant to this point.
+            Value should have the same units as in `z`. Has no
+            effect when `zauto` is `false`.
         zmin
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
@@ -4846,6 +5135,8 @@ class Figure(BaseFigure):
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
+            hovertemplate=hovertemplate,
+            hovertemplatesrc=hovertemplatesrc,
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
@@ -4878,6 +5169,7 @@ class Figure(BaseFigure):
             zauto=zauto,
             zhoverformat=zhoverformat,
             zmax=zmax,
+            zmid=zmid,
             zmin=zmin,
             zsrc=zsrc,
             **kwargs
@@ -4890,6 +5182,7 @@ class Figure(BaseFigure):
         caps=None,
         cauto=None,
         cmax=None,
+        cmid=None,
         cmin=None,
         colorbar=None,
         colorscale=None,
@@ -4900,6 +5193,10 @@ class Figure(BaseFigure):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
         ids=None,
         idssrc=None,
         isomax=None,
@@ -4966,6 +5263,11 @@ class Figure(BaseFigure):
             Sets the upper bound of the color domain. Value should
             have the same units as `value` and if set, `cmin` must
             be set as well.
+        cmid
+            Sets the mid-point of the color domain by scaling
+            `cmin` and/or `cmax` to be equidistant to this point.
+            Value should have the same units as `value`. Has no
+            effect when `cauto` is `false`.
         cmin
             Sets the lower bound of the color domain. Value should
             have the same units as `value` and if set, `cmax` must
@@ -4997,8 +5299,8 @@ class Figure(BaseFigure):
             Sets the source reference on plot.ly for  customdata .
         flatshading
             Determines whether or not normal smoothing is applied
-            to the isosurfaces, creating isosurfaces with an
-            angular, low-poly look via flat reflections.
+            to the meshes, creating meshes with an angular, low-
+            poly look via flat reflections.
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -5009,6 +5311,30 @@ class Figure(BaseFigure):
         hoverlabel
             plotly.graph_objs.isosurface.Hoverlabel instance or
             dict with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -5033,7 +5359,13 @@ class Figure(BaseFigure):
             Sets the trace name. The trace name appear as the
             legend item and on hover.
         opacity
-            Sets the opacity of the trace.
+            Sets the opacity of the surface. Please note that in
+            the case of using high `opacity` values for example a
+            value greater than or equal to 0.5 on two surfaces (and
+            0.25 with four surfaces), an overlay of multiple
+            transparent surfaces may not perfectly be sorted in
+            depth by the webgl API. This behavior may be improved
+            in the near future and is subject to change.
         reversescale
             Reverses the color mapping if true. If true, `cmin`
             will correspond to the last color in the array and
@@ -5137,6 +5469,7 @@ class Figure(BaseFigure):
             caps=caps,
             cauto=cauto,
             cmax=cmax,
+            cmid=cmid,
             cmin=cmin,
             colorbar=colorbar,
             colorscale=colorscale,
@@ -5147,6 +5480,10 @@ class Figure(BaseFigure):
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
+            hovertemplate=hovertemplate,
+            hovertemplatesrc=hovertemplatesrc,
+            hovertext=hovertext,
+            hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
             isomax=isomax,
@@ -5188,6 +5525,7 @@ class Figure(BaseFigure):
         autocolorscale=None,
         cauto=None,
         cmax=None,
+        cmid=None,
         cmin=None,
         color=None,
         colorbar=None,
@@ -5202,6 +5540,10 @@ class Figure(BaseFigure):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
         i=None,
         ids=None,
         idssrc=None,
@@ -5288,6 +5630,11 @@ class Figure(BaseFigure):
             Sets the upper bound of the color domain. Value should
             have the same units as `intensity` and if set, `cmin`
             must be set as well.
+        cmid
+            Sets the mid-point of the color domain by scaling
+            `cmin` and/or `cmax` to be equidistant to this point.
+            Value should have the same units as `intensity`. Has no
+            effect when `cauto` is `false`.
         cmin
             Sets the lower bound of the color domain. Value should
             have the same units as `intensity` and if set, `cmax`
@@ -5344,6 +5691,30 @@ class Figure(BaseFigure):
         hoverlabel
             plotly.graph_objs.mesh3d.Hoverlabel instance or dict
             with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         i
             A vector of vertex indices, i.e. integer values between
             0 and the length of the vertex vectors, representing
@@ -5402,7 +5773,13 @@ class Figure(BaseFigure):
             Sets the trace name. The trace name appear as the
             legend item and on hover.
         opacity
-            Sets the opacity of the surface.
+            Sets the opacity of the surface. Please note that in
+            the case of using high `opacity` values for example a
+            value greater than or equal to 0.5 on two surfaces (and
+            0.25 with four surfaces), an overlay of multiple
+            transparent surfaces may not perfectly be sorted in
+            depth by the webgl API. This behavior may be improved
+            in the near future and is subject to change.
         reversescale
             Reverses the color mapping if true. If true, `cmin`
             will correspond to the last color in the array and
@@ -5509,6 +5886,7 @@ class Figure(BaseFigure):
             autocolorscale=autocolorscale,
             cauto=cauto,
             cmax=cmax,
+            cmid=cmid,
             cmin=cmin,
             color=color,
             colorbar=colorbar,
@@ -5523,6 +5901,10 @@ class Figure(BaseFigure):
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
+            hovertemplate=hovertemplate,
+            hovertemplatesrc=hovertemplatesrc,
+            hovertext=hovertext,
+            hovertextsrc=hovertextsrc,
             i=i,
             ids=ids,
             idssrc=idssrc,
@@ -5576,6 +5958,8 @@ class Figure(BaseFigure):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hovertext=None,
+        hovertextsrc=None,
         ids=None,
         idssrc=None,
         increasing=None,
@@ -5647,6 +6031,10 @@ class Figure(BaseFigure):
         hoverlabel
             plotly.graph_objs.ohlc.Hoverlabel instance or dict with
             compatible properties
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -5767,6 +6155,8 @@ class Figure(BaseFigure):
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
+            hovertext=hovertext,
+            hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
             increasing=increasing,
@@ -5807,6 +6197,7 @@ class Figure(BaseFigure):
         domain=None,
         hoverinfo=None,
         hoveron=None,
+        hovertemplate=None,
         labelfont=None,
         line=None,
         name=None,
@@ -5867,6 +6258,25 @@ class Figure(BaseFigure):
             per color per category. If `dimension`, hover
             interactions take place across all categories per
             dimension.
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available. variables `count`, `probability`,
+            `category`, `categorycount`, `colorcount` and
+            `bandcolorcount`. Anything contained in tag `<extra>`
+            is displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>".
         labelfont
             Sets the font for the `dimension` labels.
         line
@@ -5935,6 +6345,7 @@ class Figure(BaseFigure):
             domain=domain,
             hoverinfo=hoverinfo,
             hoveron=hoveron,
+            hovertemplate=hovertemplate,
             labelfont=labelfont,
             line=line,
             name=name,
@@ -7271,6 +7682,8 @@ class Figure(BaseFigure):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
         ids=None,
@@ -7350,6 +7763,26 @@ class Figure(BaseFigure):
         hoverlabel
             plotly.graph_objs.scatter3d.Hoverlabel instance or dict
             with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
         hovertext
             Sets text elements associated with each (x,y,z)
             triplet. If a single string, the same string appears
@@ -7502,6 +7935,8 @@ class Figure(BaseFigure):
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
+            hovertemplate=hovertemplate,
+            hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
             hovertextsrc=hovertextsrc,
             ids=ids,
@@ -7556,6 +7991,10 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hoveron=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
         ids=None,
         idssrc=None,
         legendgroup=None,
@@ -7592,19 +8031,11 @@ class Figure(BaseFigure):
         Parameters
         ----------
         a
-            Sets the quantity of component `a` in each data point.
-            If `a`, `b`, and `c` are all provided, they need not be
-            normalized, only the relative values matter. If only
-            two arrays are provided they must be normalized to
-            match `ternary<i>.sum`.
+            Sets the a-axis coordinates.
         asrc
             Sets the source reference on plot.ly for  a .
         b
-            Sets the quantity of component `a` in each data point.
-            If `a`, `b`, and `c` are all provided, they need not be
-            normalized, only the relative values matter. If only
-            two arrays are provided they must be normalized to
-            match `ternary<i>.sum`.
+            Sets the b-axis coordinates.
         bsrc
             Sets the source reference on plot.ly for  b .
         carpet
@@ -7652,6 +8083,34 @@ class Figure(BaseFigure):
             regions? If the fill is "toself" or "tonext" and there
             are no markers or text, then the default is "fills",
             otherwise it is "points".
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
+        hovertext
+            Sets hover text elements associated with each (a,b)
+            point. If a single string, the same string appears over
+            all the data points. If an array of strings, the items
+            are mapped in order to the the data points in (a,b). To
+            be seen, trace `hoverinfo` must contain a "text" flag.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -7697,10 +8156,13 @@ class Figure(BaseFigure):
             plotly.graph_objs.scattercarpet.Stream instance or dict
             with compatible properties
         text
-            Sets text elements associated with each (a,b,c) point.
-            If a single string, the same string appears over all
-            the data points. If an array of strings, the items are
-            mapped in order to the the data points in (a,b,c).
+            Sets text elements associated with each (a,b) point. If
+            a single string, the same string appears over all the
+            data points. If an array of strings, the items are
+            mapped in order to the the data points in (a,b). If
+            trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
+            the hover labels.
         textfont
             Sets the text font.
         textposition
@@ -7779,6 +8241,10 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hoveron=hoveron,
+            hovertemplate=hovertemplate,
+            hovertemplatesrc=hovertemplatesrc,
+            hovertext=hovertext,
+            hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
@@ -8601,8 +9067,9 @@ class Figure(BaseFigure):
             flag and "hovertext" is not set, these elements will be
             seen in the hover labels.
         textfont
-            Sets the icon text font. Has an effect only when `type`
-            is set to "symbol".
+            Sets the icon text font (color=mapbox.layer.paint.text-
+            color, size=mapbox.layer.layout.text-size). Has an
+            effect only when `type` is set to "symbol".
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.
@@ -9671,6 +10138,10 @@ class Figure(BaseFigure):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
         ids=None,
         idssrc=None,
         legendgroup=None,
@@ -9736,6 +10207,30 @@ class Figure(BaseFigure):
         hoverlabel
             plotly.graph_objs.splom.Hoverlabel instance or dict
             with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -9852,6 +10347,10 @@ class Figure(BaseFigure):
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
+            hovertemplate=hovertemplate,
+            hovertemplatesrc=hovertemplatesrc,
+            hovertext=hovertext,
+            hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
@@ -9881,6 +10380,7 @@ class Figure(BaseFigure):
         autocolorscale=None,
         cauto=None,
         cmax=None,
+        cmid=None,
         cmin=None,
         colorbar=None,
         colorscale=None,
@@ -9889,6 +10389,9 @@ class Figure(BaseFigure):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
+        hovertext=None,
         ids=None,
         idssrc=None,
         legendgroup=None,
@@ -9954,6 +10457,11 @@ class Figure(BaseFigure):
             Sets the upper bound of the color domain. Value should
             have the same units as u/v/w norm and if set, `cmin`
             must be set as well.
+        cmid
+            Sets the mid-point of the color domain by scaling
+            `cmin` and/or `cmax` to be equidistant to this point.
+            Value should have the same units as u/v/w norm. Has no
+            effect when `cauto` is `false`.
         cmin
             Sets the lower bound of the color domain. Value should
             have the same units as u/v/w norm and if set, `cmax`
@@ -9990,6 +10498,30 @@ class Figure(BaseFigure):
         hoverlabel
             plotly.graph_objs.streamtube.Hoverlabel instance or
             dict with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available. variables `tubex`, `tubey`, `tubez`,
+            `tubeu`, `tubev`, `tubew`, `norm` and `divergence`.
+            Anything contained in tag `<extra>` is displayed in the
+            secondary box, for example
+            "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
+        hovertext
+            Same as `text`.
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -10013,7 +10545,13 @@ class Figure(BaseFigure):
             Sets the trace name. The trace name appear as the
             legend item and on hover.
         opacity
-            Sets the opacity of the surface.
+            Sets the opacity of the surface. Please note that in
+            the case of using high `opacity` values for example a
+            value greater than or equal to 0.5 on two surfaces (and
+            0.25 with four surfaces), an overlay of multiple
+            transparent surfaces may not perfectly be sorted in
+            depth by the webgl API. This behavior may be improved
+            in the near future and is subject to change.
         reversescale
             Reverses the color mapping if true. If true, `cmin`
             will correspond to the last color in the array and
@@ -10120,6 +10658,7 @@ class Figure(BaseFigure):
             autocolorscale=autocolorscale,
             cauto=cauto,
             cmax=cmax,
+            cmid=cmid,
             cmin=cmin,
             colorbar=colorbar,
             colorscale=colorscale,
@@ -10128,6 +10667,9 @@ class Figure(BaseFigure):
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
+            hovertemplate=hovertemplate,
+            hovertemplatesrc=hovertemplatesrc,
+            hovertext=hovertext,
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
@@ -10169,6 +10711,7 @@ class Figure(BaseFigure):
         autocolorscale=None,
         cauto=None,
         cmax=None,
+        cmid=None,
         cmin=None,
         colorbar=None,
         colorscale=None,
@@ -10179,6 +10722,10 @@ class Figure(BaseFigure):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
         ids=None,
         idssrc=None,
         legendgroup=None,
@@ -10243,6 +10790,11 @@ class Figure(BaseFigure):
             Sets the upper bound of the color domain. Value should
             have the same units as z or surfacecolor and if set,
             `cmin` must be set as well.
+        cmid
+            Sets the mid-point of the color domain by scaling
+            `cmin` and/or `cmax` to be equidistant to this point.
+            Value should have the same units as z or surfacecolor.
+            Has no effect when `cauto` is `false`.
         cmin
             Sets the lower bound of the color domain. Value should
             have the same units as z or surfacecolor and if set,
@@ -10287,6 +10839,30 @@ class Figure(BaseFigure):
         hoverlabel
             plotly.graph_objs.surface.Hoverlabel instance or dict
             with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -10307,7 +10883,13 @@ class Figure(BaseFigure):
             Sets the trace name. The trace name appear as the
             legend item and on hover.
         opacity
-            Sets the opacity of the surface.
+            Sets the opacity of the surface. Please note that in
+            the case of using high `opacity` values for example a
+            value greater than or equal to 0.5 on two surfaces (and
+            0.25 with four surfaces), an overlay of multiple
+            transparent surfaces may not perfectly be sorted in
+            depth by the webgl API. This behavior may be improved
+            in the near future and is subject to change.
         reversescale
             Reverses the color mapping if true. If true, `cmin`
             will correspond to the last color in the array and
@@ -10409,6 +10991,7 @@ class Figure(BaseFigure):
             autocolorscale=autocolorscale,
             cauto=cauto,
             cmax=cmax,
+            cmid=cmid,
             cmin=cmin,
             colorbar=colorbar,
             colorscale=colorscale,
@@ -10419,6 +11002,10 @@ class Figure(BaseFigure):
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
+            hovertemplate=hovertemplate,
+            hovertemplatesrc=hovertemplatesrc,
+            hovertext=hovertext,
+            hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
             legendgroup=legendgroup,
@@ -10629,6 +11216,7 @@ class Figure(BaseFigure):
 
     def add_violin(
         self,
+        alignmentgroup=None,
         bandwidth=None,
         box=None,
         customdata=None,
@@ -10638,6 +11226,8 @@ class Figure(BaseFigure):
         hoverinfosrc=None,
         hoverlabel=None,
         hoveron=None,
+        hovertext=None,
+        hovertextsrc=None,
         ids=None,
         idssrc=None,
         jitter=None,
@@ -10646,6 +11236,7 @@ class Figure(BaseFigure):
         marker=None,
         meanline=None,
         name=None,
+        offsetgroup=None,
         opacity=None,
         orientation=None,
         pointpos=None,
@@ -10690,6 +11281,11 @@ class Figure(BaseFigure):
 
         Parameters
         ----------
+        alignmentgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same alignmentgroup. This controls
+            whether bars compute their positional range dependently
+            or independently.
         bandwidth
             Sets the bandwidth used to compute the kernel density
             estimate. By default, the bandwidth is determined by
@@ -10722,6 +11318,10 @@ class Figure(BaseFigure):
             Do the hover effects highlight individual violins or
             sample points or the kernel density estimate or any
             combination of them?
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -10752,6 +11352,10 @@ class Figure(BaseFigure):
             also be used for the position coordinate, if `x` and
             `x0` (`y` and `y0` if horizontal) are missing and the
             position axis is categorical
+        offsetgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same offsetgroup where bars of the
+            same position coordinate will line up.
         opacity
             Sets the opacity of the trace.
         orientation
@@ -10902,6 +11506,7 @@ class Figure(BaseFigure):
         Violin
         """
         new_trace = Violin(
+            alignmentgroup=alignmentgroup,
             bandwidth=bandwidth,
             box=box,
             customdata=customdata,
@@ -10911,6 +11516,8 @@ class Figure(BaseFigure):
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
             hoveron=hoveron,
+            hovertext=hovertext,
+            hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
             jitter=jitter,
@@ -10919,6 +11526,7 @@ class Figure(BaseFigure):
             marker=marker,
             meanline=meanline,
             name=name,
+            offsetgroup=offsetgroup,
             opacity=opacity,
             orientation=orientation,
             pointpos=pointpos,

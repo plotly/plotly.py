@@ -10,6 +10,12 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_class_str=kwargs.pop('data_class_str', 'Violin'),
             data_docs=kwargs.pop(
                 'data_docs', """
+            alignmentgroup
+                Set several traces linked to the same position
+                axis or matching axes to the same
+                alignmentgroup. This controls whether bars
+                compute their positional range dependently or
+                independently.
             bandwidth
                 Sets the bandwidth used to compute the kernel
                 density estimate. By default, the bandwidth is
@@ -47,6 +53,11 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Do the hover effects highlight individual
                 violins or sample points or the kernel density
                 estimate or any combination of them?
+            hovertext
+                Same as `text`.
+            hovertextsrc
+                Sets the source reference on plot.ly for
+                hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -80,6 +91,11 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 coordinate, if `x` and `x0` (`y` and `y0` if
                 horizontal) are missing and the position axis
                 is categorical
+            offsetgroup
+                Set several traces linked to the same position
+                axis or matching axes to the same offsetgroup
+                where bars of the same position coordinate will
+                line up.
             opacity
                 Sets the opacity of the trace.
             orientation

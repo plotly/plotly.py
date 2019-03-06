@@ -89,6 +89,30 @@ class Node(BaseTraceHierarchyType):
     def colorsrc(self, val):
         self['colorsrc'] = val
 
+    # groups
+    # ------
+    @property
+    def groups(self):
+        """
+        Groups of nodes. Each group is defined by an array with the
+        indices of the nodes it contains. Multiple groups can be
+        specified.
+    
+        The 'groups' property is an info array that may be specified as:
+        * a 2D list where:
+          The 'groups[i][j]' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        list
+        """
+        return self['groups']
+
+    @groups.setter
+    def groups(self, val):
+        self['groups'] = val
+
     # hoverinfo
     # ---------
     @property
@@ -354,6 +378,10 @@ class Node(BaseTraceHierarchyType):
             allow some visibility of what is beneath the node.
         colorsrc
             Sets the source reference on plot.ly for  color .
+        groups
+            Groups of nodes. Each group is defined by an array with
+            the indices of the nodes it contains. Multiple groups
+            can be specified.
         hoverinfo
             Determines which trace information appear when hovering
             nodes. If `none` or `skip` are set, no information is
@@ -401,6 +429,7 @@ class Node(BaseTraceHierarchyType):
         arg=None,
         color=None,
         colorsrc=None,
+        groups=None,
         hoverinfo=None,
         hoverlabel=None,
         hovertemplate=None,
@@ -431,6 +460,10 @@ class Node(BaseTraceHierarchyType):
             allow some visibility of what is beneath the node.
         colorsrc
             Sets the source reference on plot.ly for  color .
+        groups
+            Groups of nodes. Each group is defined by an array with
+            the indices of the nodes it contains. Multiple groups
+            can be specified.
         hoverinfo
             Determines which trace information appear when hovering
             nodes. If `none` or `skip` are set, no information is
@@ -506,6 +539,7 @@ an instance of plotly.graph_objs.sankey.Node"""
         # ---------------------
         self._validators['color'] = v_node.ColorValidator()
         self._validators['colorsrc'] = v_node.ColorsrcValidator()
+        self._validators['groups'] = v_node.GroupsValidator()
         self._validators['hoverinfo'] = v_node.HoverinfoValidator()
         self._validators['hoverlabel'] = v_node.HoverlabelValidator()
         self._validators['hovertemplate'] = v_node.HovertemplateValidator()
@@ -523,6 +557,8 @@ an instance of plotly.graph_objs.sankey.Node"""
         self['color'] = color if color is not None else _v
         _v = arg.pop('colorsrc', None)
         self['colorsrc'] = colorsrc if colorsrc is not None else _v
+        _v = arg.pop('groups', None)
+        self['groups'] = groups if groups is not None else _v
         _v = arg.pop('hoverinfo', None)
         self['hoverinfo'] = hoverinfo if hoverinfo is not None else _v
         _v = arg.pop('hoverlabel', None)

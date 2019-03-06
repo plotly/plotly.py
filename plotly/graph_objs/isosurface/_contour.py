@@ -68,8 +68,7 @@ class Contour(BaseTraceHierarchyType):
     @property
     def show(self):
         """
-        Sets whether or not dynamic contours are shown on hover.
-        Contours are more useful when hovering on caps and slices.
+        Sets whether or not dynamic contours are shown on hover
     
         The 'show' property must be specified as a bool
         (either True, or False)
@@ -118,9 +117,7 @@ class Contour(BaseTraceHierarchyType):
         color
             Sets the color of the contour lines.
         show
-            Sets whether or not dynamic contours are shown on
-            hover. Contours are more useful when hovering on caps
-            and slices.
+            Sets whether or not dynamic contours are shown on hover
         width
             Sets the width of the contour lines.
         """
@@ -137,9 +134,7 @@ class Contour(BaseTraceHierarchyType):
         color
             Sets the color of the contour lines.
         show
-            Sets whether or not dynamic contours are shown on
-            hover. Contours are more useful when hovering on caps
-            and slices.
+            Sets whether or not dynamic contours are shown on hover
         width
             Sets the width of the contour lines.
 

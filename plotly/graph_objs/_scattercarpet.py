@@ -9,10 +9,7 @@ class Scattercarpet(BaseTraceType):
     @property
     def a(self):
         """
-        Sets the quantity of component `a` in each data point. If `a`,
-        `b`, and `c` are all provided, they need not be normalized,
-        only the relative values matter. If only two arrays are
-        provided they must be normalized to match `ternary<i>.sum`.
+        Sets the a-axis coordinates.
     
         The 'a' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
@@ -52,10 +49,7 @@ class Scattercarpet(BaseTraceType):
     @property
     def b(self):
         """
-        Sets the quantity of component `a` in each data point. If `a`,
-        `b`, and `c` are all provided, they need not be normalized,
-        only the relative values matter. If only two arrays are
-        provided they must be normalized to match `ternary<i>.sum`.
+        Sets the b-axis coordinates.
     
         The 'b' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
@@ -388,6 +382,106 @@ class Scattercarpet(BaseTraceType):
     def hoveron(self, val):
         self['hoveron'] = val
 
+    # hovertemplate
+    # -------------
+    @property
+    def hovertemplate(self):
+        """
+        Template string used for rendering the information that appear
+        on hover box. Note that this will override `hoverinfo`.
+        Variables are inserted using %{variable}, for example "y:
+        %{y}". Numbers are formatted using d3-format's syntax
+        %{variable:d3-format}, for example "Price: %{y:$.2f}". See http
+        s://github.com/d3/d3-format/blob/master/README.md#locale_format
+        for details on the formatting syntax. The variables available
+        in `hovertemplate` are the ones emitted as event data described
+        at this link https://plot.ly/javascript/plotlyjs-events/#event-
+        data. Additionally, every attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        Anything contained in tag `<extra>` is displayed in the
+        secondary box, for example "<extra>{fullData.name}</extra>".
+    
+        The 'hovertemplate' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self['hovertemplate']
+
+    @hovertemplate.setter
+    def hovertemplate(self, val):
+        self['hovertemplate'] = val
+
+    # hovertemplatesrc
+    # ----------------
+    @property
+    def hovertemplatesrc(self):
+        """
+        Sets the source reference on plot.ly for  hovertemplate .
+    
+        The 'hovertemplatesrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hovertemplatesrc']
+
+    @hovertemplatesrc.setter
+    def hovertemplatesrc(self, val):
+        self['hovertemplatesrc'] = val
+
+    # hovertext
+    # ---------
+    @property
+    def hovertext(self):
+        """
+        Sets hover text elements associated with each (a,b) point. If a
+        single string, the same string appears over all the data
+        points. If an array of strings, the items are mapped in order
+        to the the data points in (a,b). To be seen, trace `hoverinfo`
+        must contain a "text" flag.
+    
+        The 'hovertext' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self['hovertext']
+
+    @hovertext.setter
+    def hovertext(self, val):
+        self['hovertext'] = val
+
+    # hovertextsrc
+    # ------------
+    @property
+    def hovertextsrc(self):
+        """
+        Sets the source reference on plot.ly for  hovertext .
+    
+        The 'hovertextsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hovertextsrc']
+
+    @hovertextsrc.setter
+    def hovertextsrc(self, val):
+        self['hovertextsrc'] = val
+
     # ids
     # ---
     @property
@@ -533,6 +627,14 @@ class Scattercarpet(BaseTraceType):
                     numerical array. Value should have the same
                     units as in `marker.color` and if set,
                     `marker.cmin` must be set as well.
+                cmid
+                    Sets the mid-point of the color domain by
+                    scaling `marker.cmin` and/or `marker.cmax` to
+                    be equidistant to this point. Has an effect
+                    only if in `marker.color`is set to a numerical
+                    array. Value should have the same units as in
+                    `marker.color`. Has no effect when
+                    `marker.cauto` is `false`.
                 cmin
                     Sets the lower bound of the color domain. Has
                     an effect only if in `marker.color`is set to a
@@ -814,10 +916,12 @@ class Scattercarpet(BaseTraceType):
     @property
     def text(self):
         """
-        Sets text elements associated with each (a,b,c) point. If a
+        Sets text elements associated with each (a,b) point. If a
         single string, the same string appears over all the data
         points. If an array of strings, the items are mapped in order
-        to the the data points in (a,b,c).
+        to the the data points in (a,b). If trace `hoverinfo` contains
+        a "text" flag and "hovertext" is not set, these elements will
+        be seen in the hover labels.
     
         The 'text' property is a string and must be specified as:
           - A string
@@ -1131,19 +1235,11 @@ class Scattercarpet(BaseTraceType):
     def _prop_descriptions(self):
         return """\
         a
-            Sets the quantity of component `a` in each data point.
-            If `a`, `b`, and `c` are all provided, they need not be
-            normalized, only the relative values matter. If only
-            two arrays are provided they must be normalized to
-            match `ternary<i>.sum`.
+            Sets the a-axis coordinates.
         asrc
             Sets the source reference on plot.ly for  a .
         b
-            Sets the quantity of component `a` in each data point.
-            If `a`, `b`, and `c` are all provided, they need not be
-            normalized, only the relative values matter. If only
-            two arrays are provided they must be normalized to
-            match `ternary<i>.sum`.
+            Sets the b-axis coordinates.
         bsrc
             Sets the source reference on plot.ly for  b .
         carpet
@@ -1191,6 +1287,34 @@ class Scattercarpet(BaseTraceType):
             regions? If the fill is "toself" or "tonext" and there
             are no markers or text, then the default is "fills",
             otherwise it is "points".
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
+        hovertext
+            Sets hover text elements associated with each (a,b)
+            point. If a single string, the same string appears over
+            all the data points. If an array of strings, the items
+            are mapped in order to the the data points in (a,b). To
+            be seen, trace `hoverinfo` must contain a "text" flag.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -1236,10 +1360,13 @@ class Scattercarpet(BaseTraceType):
             plotly.graph_objs.scattercarpet.Stream instance or dict
             with compatible properties
         text
-            Sets text elements associated with each (a,b,c) point.
-            If a single string, the same string appears over all
-            the data points. If an array of strings, the items are
-            mapped in order to the the data points in (a,b,c).
+            Sets text elements associated with each (a,b) point. If
+            a single string, the same string appears over all the
+            data points. If an array of strings, the items are
+            mapped in order to the the data points in (a,b). If
+            trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
+            the hover labels.
         textfont
             Sets the text font.
         textposition
@@ -1309,6 +1436,10 @@ class Scattercarpet(BaseTraceType):
         hoverinfosrc=None,
         hoverlabel=None,
         hoveron=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
         ids=None,
         idssrc=None,
         legendgroup=None,
@@ -1346,19 +1477,11 @@ class Scattercarpet(BaseTraceType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.Scattercarpet
         a
-            Sets the quantity of component `a` in each data point.
-            If `a`, `b`, and `c` are all provided, they need not be
-            normalized, only the relative values matter. If only
-            two arrays are provided they must be normalized to
-            match `ternary<i>.sum`.
+            Sets the a-axis coordinates.
         asrc
             Sets the source reference on plot.ly for  a .
         b
-            Sets the quantity of component `a` in each data point.
-            If `a`, `b`, and `c` are all provided, they need not be
-            normalized, only the relative values matter. If only
-            two arrays are provided they must be normalized to
-            match `ternary<i>.sum`.
+            Sets the b-axis coordinates.
         bsrc
             Sets the source reference on plot.ly for  b .
         carpet
@@ -1406,6 +1529,34 @@ class Scattercarpet(BaseTraceType):
             regions? If the fill is "toself" or "tonext" and there
             are no markers or text, then the default is "fills",
             otherwise it is "points".
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
+        hovertext
+            Sets hover text elements associated with each (a,b)
+            point. If a single string, the same string appears over
+            all the data points. If an array of strings, the items
+            are mapped in order to the the data points in (a,b). To
+            be seen, trace `hoverinfo` must contain a "text" flag.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -1451,10 +1602,13 @@ class Scattercarpet(BaseTraceType):
             plotly.graph_objs.scattercarpet.Stream instance or dict
             with compatible properties
         text
-            Sets text elements associated with each (a,b,c) point.
-            If a single string, the same string appears over all
-            the data points. If an array of strings, the items are
-            mapped in order to the the data points in (a,b,c).
+            Sets text elements associated with each (a,b) point. If
+            a single string, the same string appears over all the
+            data points. If an array of strings, the items are
+            mapped in order to the the data points in (a,b). If
+            trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
+            the hover labels.
         textfont
             Sets the text font.
         textposition
@@ -1555,6 +1709,13 @@ an instance of plotly.graph_objs.Scattercarpet"""
                         ] = v_scattercarpet.HoverinfosrcValidator()
         self._validators['hoverlabel'] = v_scattercarpet.HoverlabelValidator()
         self._validators['hoveron'] = v_scattercarpet.HoveronValidator()
+        self._validators['hovertemplate'
+                        ] = v_scattercarpet.HovertemplateValidator()
+        self._validators['hovertemplatesrc'
+                        ] = v_scattercarpet.HovertemplatesrcValidator()
+        self._validators['hovertext'] = v_scattercarpet.HovertextValidator()
+        self._validators['hovertextsrc'
+                        ] = v_scattercarpet.HovertextsrcValidator()
         self._validators['ids'] = v_scattercarpet.IdsValidator()
         self._validators['idssrc'] = v_scattercarpet.IdssrcValidator()
         self._validators['legendgroup'] = v_scattercarpet.LegendgroupValidator(
@@ -1614,6 +1775,16 @@ an instance of plotly.graph_objs.Scattercarpet"""
         self['hoverlabel'] = hoverlabel if hoverlabel is not None else _v
         _v = arg.pop('hoveron', None)
         self['hoveron'] = hoveron if hoveron is not None else _v
+        _v = arg.pop('hovertemplate', None)
+        self['hovertemplate'
+            ] = hovertemplate if hovertemplate is not None else _v
+        _v = arg.pop('hovertemplatesrc', None)
+        self['hovertemplatesrc'
+            ] = hovertemplatesrc if hovertemplatesrc is not None else _v
+        _v = arg.pop('hovertext', None)
+        self['hovertext'] = hovertext if hovertext is not None else _v
+        _v = arg.pop('hovertextsrc', None)
+        self['hovertextsrc'] = hovertextsrc if hovertextsrc is not None else _v
         _v = arg.pop('ids', None)
         self['ids'] = ids if ids is not None else _v
         _v = arg.pop('idssrc', None)

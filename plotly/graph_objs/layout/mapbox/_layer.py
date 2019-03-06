@@ -41,8 +41,9 @@ class Layer(BaseLayoutHierarchyType):
             Supported dict properties:
                 
                 radius
-                    Sets the circle radius. Has an effect only when
-                    `type` is set to "circle".
+                    Sets the circle radius
+                    (mapbox.layer.paint.circle-radius). Has an
+                    effect only when `type` is set to "circle".
 
         Returns
         -------
@@ -60,10 +61,12 @@ class Layer(BaseLayoutHierarchyType):
     def color(self):
         """
         Sets the primary layer color. If `type` is "circle", color
-        corresponds to the circle color If `type` is "line", color
-        corresponds to the line color If `type` is "fill", color
-        corresponds to the fill color If `type` is "symbol", color
-        corresponds to the icon color
+        corresponds to the circle color (mapbox.layer.paint.circle-
+        color) If `type` is "line", color corresponds to the line color
+        (mapbox.layer.paint.line-color) If `type` is "fill", color
+        corresponds to the fill color (mapbox.layer.paint.fill-color)
+        If `type` is "symbol", color corresponds to the icon color
+        (mapbox.layer.paint.icon-color)
     
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
@@ -131,8 +134,9 @@ class Layer(BaseLayoutHierarchyType):
             Supported dict properties:
                 
                 outlinecolor
-                    Sets the fill outline color. Has an effect only
-                    when `type` is set to "fill".
+                    Sets the fill outline color
+                    (mapbox.layer.paint.fill-outline-color). Has an
+                    effect only when `type` is set to "fill".
 
         Returns
         -------
@@ -157,9 +161,17 @@ class Layer(BaseLayoutHierarchyType):
     
             Supported dict properties:
                 
+                dash
+                    Sets the length of dashes and gaps
+                    (mapbox.layer.paint.line-dasharray). Has an
+                    effect only when `type` is set to "line".
+                dashsrc
+                    Sets the source reference on plot.ly for  dash
+                    .
                 width
-                    Sets the line width. Has an effect only when
-                    `type` is set to "line".
+                    Sets the line width (mapbox.layer.paint.line-
+                    width). Has an effect only when `type` is set
+                    to "line".
 
         Returns
         -------
@@ -170,6 +182,49 @@ class Layer(BaseLayoutHierarchyType):
     @line.setter
     def line(self, val):
         self['line'] = val
+
+    # maxzoom
+    # -------
+    @property
+    def maxzoom(self):
+        """
+        Sets the maximum zoom level (mapbox.layer.maxzoom). At zoom
+        levels equal to or greater than the maxzoom, the layer will be
+        hidden.
+    
+        The 'maxzoom' property is a number and may be specified as:
+          - An int or float in the interval [0, 24]
+
+        Returns
+        -------
+        int|float
+        """
+        return self['maxzoom']
+
+    @maxzoom.setter
+    def maxzoom(self, val):
+        self['maxzoom'] = val
+
+    # minzoom
+    # -------
+    @property
+    def minzoom(self):
+        """
+        Sets the minimum zoom level (mapbox.layer.minzoom). At zoom
+        levels less than the minzoom, the layer will be hidden.
+    
+        The 'minzoom' property is a number and may be specified as:
+          - An int or float in the interval [0, 24]
+
+        Returns
+        -------
+        int|float
+        """
+        return self['minzoom']
+
+    @minzoom.setter
+    def minzoom(self, val):
+        self['minzoom'] = val
 
     # name
     # ----
@@ -203,7 +258,14 @@ class Layer(BaseLayoutHierarchyType):
     @property
     def opacity(self):
         """
-        Sets the opacity of the layer.
+        Sets the opacity of the layer. If `type` is "circle", opacity
+        corresponds to the circle opacity (mapbox.layer.paint.circle-
+        opacity) If `type` is "line", opacity corresponds to the line
+        opacity (mapbox.layer.paint.line-opacity) If `type` is "fill",
+        opacity corresponds to the fill opacity
+        (mapbox.layer.paint.fill-opacity) If `type` is "symbol",
+        opacity corresponds to the icon/text opacity
+        (mapbox.layer.paint.text-opacity)
     
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
@@ -223,9 +285,10 @@ class Layer(BaseLayoutHierarchyType):
     @property
     def source(self):
         """
-        Sets the source data for this layer. Source can be either a
-        URL, a geojson object (with `sourcetype` set to "geojson") or
-        an array of tile URLS (with `sourcetype` set to "vector").
+        Sets the source data for this layer (mapbox.layer.source).
+        Source can be either a URL, a geojson object (with `sourcetype`
+        set to "geojson") or an array of tile URLS (with `sourcetype`
+        set to "vector").
     
         The 'source' property accepts values of any type
 
@@ -244,8 +307,9 @@ class Layer(BaseLayoutHierarchyType):
     @property
     def sourcelayer(self):
         """
-        Specifies the layer to use from a vector tile source. Required
-        for "vector" source type that supports multiple layers.
+        Specifies the layer to use from a vector tile source
+        (mapbox.layer.source-layer). Required for "vector" source type
+        that supports multiple layers.
     
         The 'sourcelayer' property is a string and must be specified as:
           - A string
@@ -297,16 +361,30 @@ class Layer(BaseLayoutHierarchyType):
             Supported dict properties:
                 
                 icon
-                    Sets the symbol icon image. Full list:
+                    Sets the symbol icon image
+                    (mapbox.layer.layout.icon-image). Full list:
                     https://www.mapbox.com/maki-icons/
                 iconsize
-                    Sets the symbol icon size. Has an effect only
-                    when `type` is set to "symbol".
+                    Sets the symbol icon size
+                    (mapbox.layer.layout.icon-size). Has an effect
+                    only when `type` is set to "symbol".
+                placement
+                    Sets the symbol and/or text placement
+                    (mapbox.layer.layout.symbol-placement). If
+                    `placement` is "point", the label is placed
+                    where the geometry is located If `placement` is
+                    "line", the label is placed along the line of
+                    the geometry If `placement` is "line-center",
+                    the label is placed on the center of the
+                    geometry
                 text
-                    Sets the symbol text.
+                    Sets the symbol text (mapbox.layer.layout.text-
+                    field).
                 textfont
-                    Sets the icon text font. Has an effect only
-                    when `type` is set to "symbol".
+                    Sets the icon text font
+                    (color=mapbox.layer.paint.text-color,
+                    size=mapbox.layer.layout.text-size). Has an
+                    effect only when `type` is set to "symbol".
                 textposition
                     Sets the positions of the `text` elements with
                     respects to the (x,y) coordinates.
@@ -354,9 +432,9 @@ class Layer(BaseLayoutHierarchyType):
     @property
     def type(self):
         """
-        Sets the layer type. Support for "raster", "background" types
-        is coming soon. Note that "line" and "fill" are not compatible
-        with Point GeoJSON geometries.
+        Sets the layer type (mapbox.layer.type). Support for "raster",
+        "background" types is coming soon. Note that "line" and "fill"
+        are not compatible with Point GeoJSON geometries.
     
         The 'type' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -412,16 +490,28 @@ class Layer(BaseLayoutHierarchyType):
             or dict with compatible properties
         color
             Sets the primary layer color. If `type` is "circle",
-            color corresponds to the circle color If `type` is
-            "line", color corresponds to the line color If `type`
-            is "fill", color corresponds to the fill color If
-            `type` is "symbol", color corresponds to the icon color
+            color corresponds to the circle color
+            (mapbox.layer.paint.circle-color) If `type` is "line",
+            color corresponds to the line color
+            (mapbox.layer.paint.line-color) If `type` is "fill",
+            color corresponds to the fill color
+            (mapbox.layer.paint.fill-color) If `type` is "symbol",
+            color corresponds to the icon color
+            (mapbox.layer.paint.icon-color)
         fill
             plotly.graph_objs.layout.mapbox.layer.Fill instance or
             dict with compatible properties
         line
             plotly.graph_objs.layout.mapbox.layer.Line instance or
             dict with compatible properties
+        maxzoom
+            Sets the maximum zoom level (mapbox.layer.maxzoom). At
+            zoom levels equal to or greater than the maxzoom, the
+            layer will be hidden.
+        minzoom
+            Sets the minimum zoom level (mapbox.layer.minzoom). At
+            zoom levels less than the minzoom, the layer will be
+            hidden.
         name
             When used in a template, named items are created in the
             output figure in addition to any items the figure
@@ -432,16 +522,25 @@ class Layer(BaseLayoutHierarchyType):
             false` to hide it). Has no effect outside of a
             template.
         opacity
-            Sets the opacity of the layer.
+            Sets the opacity of the layer. If `type` is "circle",
+            opacity corresponds to the circle opacity
+            (mapbox.layer.paint.circle-opacity) If `type` is
+            "line", opacity corresponds to the line opacity
+            (mapbox.layer.paint.line-opacity) If `type` is "fill",
+            opacity corresponds to the fill opacity
+            (mapbox.layer.paint.fill-opacity) If `type` is
+            "symbol", opacity corresponds to the icon/text opacity
+            (mapbox.layer.paint.text-opacity)
         source
-            Sets the source data for this layer. Source can be
-            either a URL, a geojson object (with `sourcetype` set
-            to "geojson") or an array of tile URLS (with
-            `sourcetype` set to "vector").
+            Sets the source data for this layer
+            (mapbox.layer.source). Source can be either a URL, a
+            geojson object (with `sourcetype` set to "geojson") or
+            an array of tile URLS (with `sourcetype` set to
+            "vector").
         sourcelayer
-            Specifies the layer to use from a vector tile source.
-            Required for "vector" source type that supports
-            multiple layers.
+            Specifies the layer to use from a vector tile source
+            (mapbox.layer.source-layer). Required for "vector"
+            source type that supports multiple layers.
         sourcetype
             Sets the source type for this layer. Support for
             "raster", "image" and "video" source types is coming
@@ -460,9 +559,10 @@ class Layer(BaseLayoutHierarchyType):
             matching item, this item will be hidden unless you
             explicitly show it with `visible: true`.
         type
-            Sets the layer type. Support for "raster", "background"
-            types is coming soon. Note that "line" and "fill" are
-            not compatible with Point GeoJSON geometries.
+            Sets the layer type (mapbox.layer.type). Support for
+            "raster", "background" types is coming soon. Note that
+            "line" and "fill" are not compatible with Point GeoJSON
+            geometries.
         visible
             Determines whether this layer is displayed
         """
@@ -475,6 +575,8 @@ class Layer(BaseLayoutHierarchyType):
         color=None,
         fill=None,
         line=None,
+        maxzoom=None,
+        minzoom=None,
         name=None,
         opacity=None,
         source=None,
@@ -503,16 +605,28 @@ class Layer(BaseLayoutHierarchyType):
             or dict with compatible properties
         color
             Sets the primary layer color. If `type` is "circle",
-            color corresponds to the circle color If `type` is
-            "line", color corresponds to the line color If `type`
-            is "fill", color corresponds to the fill color If
-            `type` is "symbol", color corresponds to the icon color
+            color corresponds to the circle color
+            (mapbox.layer.paint.circle-color) If `type` is "line",
+            color corresponds to the line color
+            (mapbox.layer.paint.line-color) If `type` is "fill",
+            color corresponds to the fill color
+            (mapbox.layer.paint.fill-color) If `type` is "symbol",
+            color corresponds to the icon color
+            (mapbox.layer.paint.icon-color)
         fill
             plotly.graph_objs.layout.mapbox.layer.Fill instance or
             dict with compatible properties
         line
             plotly.graph_objs.layout.mapbox.layer.Line instance or
             dict with compatible properties
+        maxzoom
+            Sets the maximum zoom level (mapbox.layer.maxzoom). At
+            zoom levels equal to or greater than the maxzoom, the
+            layer will be hidden.
+        minzoom
+            Sets the minimum zoom level (mapbox.layer.minzoom). At
+            zoom levels less than the minzoom, the layer will be
+            hidden.
         name
             When used in a template, named items are created in the
             output figure in addition to any items the figure
@@ -523,16 +637,25 @@ class Layer(BaseLayoutHierarchyType):
             false` to hide it). Has no effect outside of a
             template.
         opacity
-            Sets the opacity of the layer.
+            Sets the opacity of the layer. If `type` is "circle",
+            opacity corresponds to the circle opacity
+            (mapbox.layer.paint.circle-opacity) If `type` is
+            "line", opacity corresponds to the line opacity
+            (mapbox.layer.paint.line-opacity) If `type` is "fill",
+            opacity corresponds to the fill opacity
+            (mapbox.layer.paint.fill-opacity) If `type` is
+            "symbol", opacity corresponds to the icon/text opacity
+            (mapbox.layer.paint.text-opacity)
         source
-            Sets the source data for this layer. Source can be
-            either a URL, a geojson object (with `sourcetype` set
-            to "geojson") or an array of tile URLS (with
-            `sourcetype` set to "vector").
+            Sets the source data for this layer
+            (mapbox.layer.source). Source can be either a URL, a
+            geojson object (with `sourcetype` set to "geojson") or
+            an array of tile URLS (with `sourcetype` set to
+            "vector").
         sourcelayer
-            Specifies the layer to use from a vector tile source.
-            Required for "vector" source type that supports
-            multiple layers.
+            Specifies the layer to use from a vector tile source
+            (mapbox.layer.source-layer). Required for "vector"
+            source type that supports multiple layers.
         sourcetype
             Sets the source type for this layer. Support for
             "raster", "image" and "video" source types is coming
@@ -551,9 +674,10 @@ class Layer(BaseLayoutHierarchyType):
             matching item, this item will be hidden unless you
             explicitly show it with `visible: true`.
         type
-            Sets the layer type. Support for "raster", "background"
-            types is coming soon. Note that "line" and "fill" are
-            not compatible with Point GeoJSON geometries.
+            Sets the layer type (mapbox.layer.type). Support for
+            "raster", "background" types is coming soon. Note that
+            "line" and "fill" are not compatible with Point GeoJSON
+            geometries.
         visible
             Determines whether this layer is displayed
 
@@ -594,6 +718,8 @@ an instance of plotly.graph_objs.layout.mapbox.Layer"""
         self._validators['color'] = v_layer.ColorValidator()
         self._validators['fill'] = v_layer.FillValidator()
         self._validators['line'] = v_layer.LineValidator()
+        self._validators['maxzoom'] = v_layer.MaxzoomValidator()
+        self._validators['minzoom'] = v_layer.MinzoomValidator()
         self._validators['name'] = v_layer.NameValidator()
         self._validators['opacity'] = v_layer.OpacityValidator()
         self._validators['source'] = v_layer.SourceValidator()
@@ -617,6 +743,10 @@ an instance of plotly.graph_objs.layout.mapbox.Layer"""
         self['fill'] = fill if fill is not None else _v
         _v = arg.pop('line', None)
         self['line'] = line if line is not None else _v
+        _v = arg.pop('maxzoom', None)
+        self['maxzoom'] = maxzoom if maxzoom is not None else _v
+        _v = arg.pop('minzoom', None)
+        self['minzoom'] = minzoom if minzoom is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('opacity', None)

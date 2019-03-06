@@ -7,6 +7,7 @@ from ._sortpaths import SortpathsValidator
 from ._name import NameValidator
 from ._line import LineValidator
 from ._labelfont import LabelfontValidator
+from ._hovertemplate import HovertemplateValidator
 from ._hoveron import HoveronValidator
 from ._hoverinfo import HoverinfoValidator
 from ._domain import DomainValidator

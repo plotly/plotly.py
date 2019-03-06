@@ -77,6 +77,30 @@ class Line(BaseTraceHierarchyType):
     def cmax(self, val):
         self['cmax'] = val
 
+    # cmid
+    # ----
+    @property
+    def cmid(self):
+        """
+        Sets the mid-point of the color domain by scaling `line.cmin`
+        and/or `line.cmax` to be equidistant to this point. Has an
+        effect only if in `line.color`is set to a numerical array.
+        Value should have the same units as in `line.color`. Has no
+        effect when `line.cauto` is `false`.
+    
+        The 'cmid' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self['cmid']
+
+    @cmid.setter
+    def cmid(self, val):
+        self['cmid'] = val
+
     # cmin
     # ----
     @property
@@ -534,6 +558,13 @@ class Line(BaseTraceHierarchyType):
             only if in `line.color`is set to a numerical array.
             Value should have the same units as in `line.color` and
             if set, `line.cmin` must be set as well.
+        cmid
+            Sets the mid-point of the color domain by scaling
+            `line.cmin` and/or `line.cmax` to be equidistant to
+            this point. Has an effect only if in `line.color`is set
+            to a numerical array. Value should have the same units
+            as in `line.color`. Has no effect when `line.cauto` is
+            `false`.
         cmin
             Sets the lower bound of the color domain. Has an effect
             only if in `line.color`is set to a numerical array.
@@ -582,6 +613,7 @@ class Line(BaseTraceHierarchyType):
         autocolorscale=None,
         cauto=None,
         cmax=None,
+        cmid=None,
         cmin=None,
         color=None,
         colorbar=None,
@@ -620,6 +652,13 @@ class Line(BaseTraceHierarchyType):
             only if in `line.color`is set to a numerical array.
             Value should have the same units as in `line.color` and
             if set, `line.cmin` must be set as well.
+        cmid
+            Sets the mid-point of the color domain by scaling
+            `line.cmin` and/or `line.cmax` to be equidistant to
+            this point. Has an effect only if in `line.color`is set
+            to a numerical array. Value should have the same units
+            as in `line.color`. Has no effect when `line.cauto` is
+            `false`.
         cmin
             Sets the lower bound of the color domain. Has an effect
             only if in `line.color`is set to a numerical array.
@@ -696,6 +735,7 @@ an instance of plotly.graph_objs.parcoords.Line"""
         self._validators['autocolorscale'] = v_line.AutocolorscaleValidator()
         self._validators['cauto'] = v_line.CautoValidator()
         self._validators['cmax'] = v_line.CmaxValidator()
+        self._validators['cmid'] = v_line.CmidValidator()
         self._validators['cmin'] = v_line.CminValidator()
         self._validators['color'] = v_line.ColorValidator()
         self._validators['colorbar'] = v_line.ColorBarValidator()
@@ -713,6 +753,8 @@ an instance of plotly.graph_objs.parcoords.Line"""
         self['cauto'] = cauto if cauto is not None else _v
         _v = arg.pop('cmax', None)
         self['cmax'] = cmax if cmax is not None else _v
+        _v = arg.pop('cmid', None)
+        self['cmid'] = cmid if cmid is not None else _v
         _v = arg.pop('cmin', None)
         self['cmin'] = cmin if cmin is not None else _v
         _v = arg.pop('color', None)

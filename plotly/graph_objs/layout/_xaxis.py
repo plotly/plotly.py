@@ -689,6 +689,33 @@ class XAxis(BaseLayoutHierarchyType):
     def linewidth(self, val):
         self['linewidth'] = val
 
+    # matches
+    # -------
+    @property
+    def matches(self):
+        """
+        If set to another axis id (e.g. `x2`, `y`), the range of this
+        axis will match the range of the corresponding axis in data-
+        coordinates space. Moreover, matching axes share auto-range
+        values, category lists and histogram auto-bins. Note that
+        setting axes simultaneously in both a `scaleanchor` and a
+        `matches` constraint is currently forbidden. Moreover, note
+        that matching axes must have the same `type`.
+    
+        The 'matches' property is an enumeration that may be specified as:
+          - A string that matches one of the following regular expressions:
+                ['^x([2-9]|[1-9][0-9]+)?$', '^y([2-9]|[1-9][0-9]+)?$']
+
+        Returns
+        -------
+        Any
+        """
+        return self['matches']
+
+    @matches.setter
+    def matches(self, val):
+        self['matches'] = val
+
     # mirror
     # ------
     @property
@@ -987,7 +1014,9 @@ class XAxis(BaseLayoutHierarchyType):
         across subplots). Loops (`yaxis: {scaleanchor: *x*}, xaxis:
         {scaleanchor: *y*}` or longer) are redundant and the last
         constraint encountered will be ignored to avoid possible
-        inconsistent constraints via `scaleratio`.
+        inconsistent constraints via `scaleratio`. Note that setting
+        axes simultaneously in both a `scaleanchor` and a `matches`
+        constraint is currently forbidden.
     
         The 'scaleanchor' property is an enumeration that may be specified as:
           - A string that matches one of the following regular expressions:
@@ -2289,6 +2318,15 @@ class XAxis(BaseLayoutHierarchyType):
             Sets the axis line color.
         linewidth
             Sets the width (in px) of the axis line.
+        matches
+            If set to another axis id (e.g. `x2`, `y`), the range
+            of this axis will match the range of the corresponding
+            axis in data-coordinates space. Moreover, matching axes
+            share auto-range values, category lists and histogram
+            auto-bins. Note that setting axes simultaneously in
+            both a `scaleanchor` and a `matches` constraint is
+            currently forbidden. Moreover, note that matching axes
+            must have the same `type`.
         mirror
             Determines if the axis lines or/and ticks are mirrored
             to the opposite side of the plotting area. If True, the
@@ -2354,6 +2392,9 @@ class XAxis(BaseLayoutHierarchyType):
             {scaleanchor: *y*}` or longer) are redundant and the
             last constraint encountered will be ignored to avoid
             possible inconsistent constraints via `scaleratio`.
+            Note that setting axes simultaneously in both a
+            `scaleanchor` and a `matches` constraint is currently
+            forbidden.
         scaleratio
             If this axis is linked to another by `scaleanchor`,
             this determines the pixel to unit scale ratio. For
@@ -2552,6 +2593,7 @@ class XAxis(BaseLayoutHierarchyType):
         layer=None,
         linecolor=None,
         linewidth=None,
+        matches=None,
         mirror=None,
         nticks=None,
         overlaying=None,
@@ -2736,6 +2778,15 @@ class XAxis(BaseLayoutHierarchyType):
             Sets the axis line color.
         linewidth
             Sets the width (in px) of the axis line.
+        matches
+            If set to another axis id (e.g. `x2`, `y`), the range
+            of this axis will match the range of the corresponding
+            axis in data-coordinates space. Moreover, matching axes
+            share auto-range values, category lists and histogram
+            auto-bins. Note that setting axes simultaneously in
+            both a `scaleanchor` and a `matches` constraint is
+            currently forbidden. Moreover, note that matching axes
+            must have the same `type`.
         mirror
             Determines if the axis lines or/and ticks are mirrored
             to the opposite side of the plotting area. If True, the
@@ -2801,6 +2852,9 @@ class XAxis(BaseLayoutHierarchyType):
             {scaleanchor: *y*}` or longer) are redundant and the
             last constraint encountered will be ignored to avoid
             possible inconsistent constraints via `scaleratio`.
+            Note that setting axes simultaneously in both a
+            `scaleanchor` and a `matches` constraint is currently
+            forbidden.
         scaleratio
             If this axis is linked to another by `scaleanchor`,
             this determines the pixel to unit scale ratio. For
@@ -3027,6 +3081,7 @@ an instance of plotly.graph_objs.layout.XAxis"""
         self._validators['layer'] = v_xaxis.LayerValidator()
         self._validators['linecolor'] = v_xaxis.LinecolorValidator()
         self._validators['linewidth'] = v_xaxis.LinewidthValidator()
+        self._validators['matches'] = v_xaxis.MatchesValidator()
         self._validators['mirror'] = v_xaxis.MirrorValidator()
         self._validators['nticks'] = v_xaxis.NticksValidator()
         self._validators['overlaying'] = v_xaxis.OverlayingValidator()
@@ -3132,6 +3187,8 @@ an instance of plotly.graph_objs.layout.XAxis"""
         self['linecolor'] = linecolor if linecolor is not None else _v
         _v = arg.pop('linewidth', None)
         self['linewidth'] = linewidth if linewidth is not None else _v
+        _v = arg.pop('matches', None)
+        self['matches'] = matches if matches is not None else _v
         _v = arg.pop('mirror', None)
         self['mirror'] = mirror if mirror is not None else _v
         _v = arg.pop('nticks', None)

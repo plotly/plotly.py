@@ -78,6 +78,30 @@ class Marker(BaseTraceHierarchyType):
     def cmax(self, val):
         self['cmax'] = val
 
+    # cmid
+    # ----
+    @property
+    def cmid(self):
+        """
+        Sets the mid-point of the color domain by scaling `marker.cmin`
+        and/or `marker.cmax` to be equidistant to this point. Has an
+        effect only if in `marker.color`is set to a numerical array.
+        Value should have the same units as in `marker.color`. Has no
+        effect when `marker.cauto` is `false`.
+    
+        The 'cmid' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self['cmid']
+
+    @cmid.setter
+    def cmid(self, val):
+        self['cmid'] = val
+
     # cmin
     # ----
     @property
@@ -534,6 +558,15 @@ class Marker(BaseTraceHierarchyType):
                     to a numerical array. Value should have the
                     same units as in `marker.line.color` and if
                     set, `marker.line.cmin` must be set as well.
+                cmid
+                    Sets the mid-point of the color domain by
+                    scaling `marker.line.cmin` and/or
+                    `marker.line.cmax` to be equidistant to this
+                    point. Has an effect only if in
+                    `marker.line.color`is set to a numerical array.
+                    Value should have the same units as in
+                    `marker.line.color`. Has no effect when
+                    `marker.line.cauto` is `false`.
                 cmin
                     Sets the lower bound of the color domain. Has
                     an effect only if in `marker.line.color`is set
@@ -942,6 +975,13 @@ class Marker(BaseTraceHierarchyType):
             only if in `marker.color`is set to a numerical array.
             Value should have the same units as in `marker.color`
             and if set, `marker.cmin` must be set as well.
+        cmid
+            Sets the mid-point of the color domain by scaling
+            `marker.cmin` and/or `marker.cmax` to be equidistant to
+            this point. Has an effect only if in `marker.color`is
+            set to a numerical array. Value should have the same
+            units as in `marker.color`. Has no effect when
+            `marker.cauto` is `false`.
         cmin
             Sets the lower bound of the color domain. Has an effect
             only if in `marker.color`is set to a numerical array.
@@ -1028,6 +1068,7 @@ class Marker(BaseTraceHierarchyType):
         autocolorscale=None,
         cauto=None,
         cmax=None,
+        cmid=None,
         cmin=None,
         color=None,
         colorbar=None,
@@ -1078,6 +1119,13 @@ class Marker(BaseTraceHierarchyType):
             only if in `marker.color`is set to a numerical array.
             Value should have the same units as in `marker.color`
             and if set, `marker.cmin` must be set as well.
+        cmid
+            Sets the mid-point of the color domain by scaling
+            `marker.cmin` and/or `marker.cmax` to be equidistant to
+            this point. Has an effect only if in `marker.color`is
+            set to a numerical array. Value should have the same
+            units as in `marker.color`. Has no effect when
+            `marker.cauto` is `false`.
         cmin
             Sets the lower bound of the color domain. Has an effect
             only if in `marker.color`is set to a numerical array.
@@ -1192,6 +1240,7 @@ an instance of plotly.graph_objs.scatterpolar.Marker"""
         self._validators['autocolorscale'] = v_marker.AutocolorscaleValidator()
         self._validators['cauto'] = v_marker.CautoValidator()
         self._validators['cmax'] = v_marker.CmaxValidator()
+        self._validators['cmid'] = v_marker.CmidValidator()
         self._validators['cmin'] = v_marker.CminValidator()
         self._validators['color'] = v_marker.ColorValidator()
         self._validators['colorbar'] = v_marker.ColorBarValidator()
@@ -1221,6 +1270,8 @@ an instance of plotly.graph_objs.scatterpolar.Marker"""
         self['cauto'] = cauto if cauto is not None else _v
         _v = arg.pop('cmax', None)
         self['cmax'] = cmax if cmax is not None else _v
+        _v = arg.pop('cmid', None)
+        self['cmid'] = cmid if cmid is not None else _v
         _v = arg.pop('cmin', None)
         self['cmin'] = cmin if cmin is not None else _v
         _v = arg.pop('color', None)

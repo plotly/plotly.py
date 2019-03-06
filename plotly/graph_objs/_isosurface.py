@@ -106,6 +106,28 @@ class Isosurface(BaseTraceType):
     def cmax(self, val):
         self['cmax'] = val
 
+    # cmid
+    # ----
+    @property
+    def cmid(self):
+        """
+        Sets the mid-point of the color domain by scaling `cmin` and/or
+        `cmax` to be equidistant to this point. Value should have the
+        same units as `value`. Has no effect when `cauto` is `false`.
+    
+        The 'cmid' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self['cmid']
+
+    @cmid.setter
+    def cmid(self, val):
+        self['cmid'] = val
+
     # cmin
     # ----
     @property
@@ -414,8 +436,7 @@ class Isosurface(BaseTraceType):
                     Sets the color of the contour lines.
                 show
                     Sets whether or not dynamic contours are shown
-                    on hover. Contours are more useful when
-                    hovering on caps and slices.
+                    on hover
                 width
                     Sets the width of the contour lines.
 
@@ -478,8 +499,8 @@ class Isosurface(BaseTraceType):
     def flatshading(self):
         """
         Determines whether or not normal smoothing is applied to the
-        isosurfaces, creating isosurfaces with an angular, low-poly
-        look via flat reflections.
+        meshes, creating meshes with an angular, low-poly look via flat
+        reflections.
     
         The 'flatshading' property must be specified as a bool
         (either True, or False)
@@ -589,6 +610,102 @@ class Isosurface(BaseTraceType):
     @hoverlabel.setter
     def hoverlabel(self, val):
         self['hoverlabel'] = val
+
+    # hovertemplate
+    # -------------
+    @property
+    def hovertemplate(self):
+        """
+        Template string used for rendering the information that appear
+        on hover box. Note that this will override `hoverinfo`.
+        Variables are inserted using %{variable}, for example "y:
+        %{y}". Numbers are formatted using d3-format's syntax
+        %{variable:d3-format}, for example "Price: %{y:$.2f}". See http
+        s://github.com/d3/d3-format/blob/master/README.md#locale_format
+        for details on the formatting syntax. The variables available
+        in `hovertemplate` are the ones emitted as event data described
+        at this link https://plot.ly/javascript/plotlyjs-events/#event-
+        data. Additionally, every attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        Anything contained in tag `<extra>` is displayed in the
+        secondary box, for example "<extra>{fullData.name}</extra>".
+    
+        The 'hovertemplate' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self['hovertemplate']
+
+    @hovertemplate.setter
+    def hovertemplate(self, val):
+        self['hovertemplate'] = val
+
+    # hovertemplatesrc
+    # ----------------
+    @property
+    def hovertemplatesrc(self):
+        """
+        Sets the source reference on plot.ly for  hovertemplate .
+    
+        The 'hovertemplatesrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hovertemplatesrc']
+
+    @hovertemplatesrc.setter
+    def hovertemplatesrc(self, val):
+        self['hovertemplatesrc'] = val
+
+    # hovertext
+    # ---------
+    @property
+    def hovertext(self):
+        """
+        Same as `text`.
+    
+        The 'hovertext' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self['hovertext']
+
+    @hovertext.setter
+    def hovertext(self, val):
+        self['hovertext'] = val
+
+    # hovertextsrc
+    # ------------
+    @property
+    def hovertextsrc(self):
+        """
+        Sets the source reference on plot.ly for  hovertext .
+    
+        The 'hovertextsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hovertextsrc']
+
+    @hovertextsrc.setter
+    def hovertextsrc(self, val):
+        self['hovertextsrc'] = val
 
     # ids
     # ---
@@ -803,7 +920,12 @@ class Isosurface(BaseTraceType):
     @property
     def opacity(self):
         """
-        Sets the opacity of the trace.
+        Sets the opacity of the surface. Please note that in the case
+        of using high `opacity` values for example a value greater than
+        or equal to 0.5 on two surfaces (and 0.25 with four surfaces),
+        an overlay of multiple transparent surfaces may not perfectly
+        be sorted in depth by the webgl API. This behavior may be
+        improved in the near future and is subject to change.
     
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
@@ -1402,6 +1524,11 @@ class Isosurface(BaseTraceType):
             Sets the upper bound of the color domain. Value should
             have the same units as `value` and if set, `cmin` must
             be set as well.
+        cmid
+            Sets the mid-point of the color domain by scaling
+            `cmin` and/or `cmax` to be equidistant to this point.
+            Value should have the same units as `value`. Has no
+            effect when `cauto` is `false`.
         cmin
             Sets the lower bound of the color domain. Value should
             have the same units as `value` and if set, `cmax` must
@@ -1433,8 +1560,8 @@ class Isosurface(BaseTraceType):
             Sets the source reference on plot.ly for  customdata .
         flatshading
             Determines whether or not normal smoothing is applied
-            to the isosurfaces, creating isosurfaces with an
-            angular, low-poly look via flat reflections.
+            to the meshes, creating meshes with an angular, low-
+            poly look via flat reflections.
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -1445,6 +1572,30 @@ class Isosurface(BaseTraceType):
         hoverlabel
             plotly.graph_objs.isosurface.Hoverlabel instance or
             dict with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -1469,7 +1620,13 @@ class Isosurface(BaseTraceType):
             Sets the trace name. The trace name appear as the
             legend item and on hover.
         opacity
-            Sets the opacity of the trace.
+            Sets the opacity of the surface. Please note that in
+            the case of using high `opacity` values for example a
+            value greater than or equal to 0.5 on two surfaces (and
+            0.25 with four surfaces), an overlay of multiple
+            transparent surfaces may not perfectly be sorted in
+            depth by the webgl API. This behavior may be improved
+            in the near future and is subject to change.
         reversescale
             Reverses the color mapping if true. If true, `cmin`
             will correspond to the last color in the array and
@@ -1564,6 +1721,7 @@ class Isosurface(BaseTraceType):
         caps=None,
         cauto=None,
         cmax=None,
+        cmid=None,
         cmin=None,
         colorbar=None,
         colorscale=None,
@@ -1574,6 +1732,10 @@ class Isosurface(BaseTraceType):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
         ids=None,
         idssrc=None,
         isomax=None,
@@ -1641,6 +1803,11 @@ class Isosurface(BaseTraceType):
             Sets the upper bound of the color domain. Value should
             have the same units as `value` and if set, `cmin` must
             be set as well.
+        cmid
+            Sets the mid-point of the color domain by scaling
+            `cmin` and/or `cmax` to be equidistant to this point.
+            Value should have the same units as `value`. Has no
+            effect when `cauto` is `false`.
         cmin
             Sets the lower bound of the color domain. Value should
             have the same units as `value` and if set, `cmax` must
@@ -1672,8 +1839,8 @@ class Isosurface(BaseTraceType):
             Sets the source reference on plot.ly for  customdata .
         flatshading
             Determines whether or not normal smoothing is applied
-            to the isosurfaces, creating isosurfaces with an
-            angular, low-poly look via flat reflections.
+            to the meshes, creating meshes with an angular, low-
+            poly look via flat reflections.
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -1684,6 +1851,30 @@ class Isosurface(BaseTraceType):
         hoverlabel
             plotly.graph_objs.isosurface.Hoverlabel instance or
             dict with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -1708,7 +1899,13 @@ class Isosurface(BaseTraceType):
             Sets the trace name. The trace name appear as the
             legend item and on hover.
         opacity
-            Sets the opacity of the trace.
+            Sets the opacity of the surface. Please note that in
+            the case of using high `opacity` values for example a
+            value greater than or equal to 0.5 on two surfaces (and
+            0.25 with four surfaces), an overlay of multiple
+            transparent surfaces may not perfectly be sorted in
+            depth by the webgl API. This behavior may be improved
+            in the near future and is subject to change.
         reversescale
             Reverses the color mapping if true. If true, `cmin`
             will correspond to the last color in the array and
@@ -1832,6 +2029,7 @@ an instance of plotly.graph_objs.Isosurface"""
         self._validators['caps'] = v_isosurface.CapsValidator()
         self._validators['cauto'] = v_isosurface.CautoValidator()
         self._validators['cmax'] = v_isosurface.CmaxValidator()
+        self._validators['cmid'] = v_isosurface.CmidValidator()
         self._validators['cmin'] = v_isosurface.CminValidator()
         self._validators['colorbar'] = v_isosurface.ColorBarValidator()
         self._validators['colorscale'] = v_isosurface.ColorscaleValidator()
@@ -1843,6 +2041,12 @@ an instance of plotly.graph_objs.Isosurface"""
         self._validators['hoverinfo'] = v_isosurface.HoverinfoValidator()
         self._validators['hoverinfosrc'] = v_isosurface.HoverinfosrcValidator()
         self._validators['hoverlabel'] = v_isosurface.HoverlabelValidator()
+        self._validators['hovertemplate'
+                        ] = v_isosurface.HovertemplateValidator()
+        self._validators['hovertemplatesrc'
+                        ] = v_isosurface.HovertemplatesrcValidator()
+        self._validators['hovertext'] = v_isosurface.HovertextValidator()
+        self._validators['hovertextsrc'] = v_isosurface.HovertextsrcValidator()
         self._validators['ids'] = v_isosurface.IdsValidator()
         self._validators['idssrc'] = v_isosurface.IdssrcValidator()
         self._validators['isomax'] = v_isosurface.IsomaxValidator()
@@ -1888,6 +2092,8 @@ an instance of plotly.graph_objs.Isosurface"""
         self['cauto'] = cauto if cauto is not None else _v
         _v = arg.pop('cmax', None)
         self['cmax'] = cmax if cmax is not None else _v
+        _v = arg.pop('cmid', None)
+        self['cmid'] = cmid if cmid is not None else _v
         _v = arg.pop('cmin', None)
         self['cmin'] = cmin if cmin is not None else _v
         _v = arg.pop('colorbar', None)
@@ -1909,6 +2115,16 @@ an instance of plotly.graph_objs.Isosurface"""
         self['hoverinfosrc'] = hoverinfosrc if hoverinfosrc is not None else _v
         _v = arg.pop('hoverlabel', None)
         self['hoverlabel'] = hoverlabel if hoverlabel is not None else _v
+        _v = arg.pop('hovertemplate', None)
+        self['hovertemplate'
+            ] = hovertemplate if hovertemplate is not None else _v
+        _v = arg.pop('hovertemplatesrc', None)
+        self['hovertemplatesrc'
+            ] = hovertemplatesrc if hovertemplatesrc is not None else _v
+        _v = arg.pop('hovertext', None)
+        self['hovertext'] = hovertext if hovertext is not None else _v
+        _v = arg.pop('hovertextsrc', None)
+        self['hovertextsrc'] = hovertextsrc if hovertextsrc is not None else _v
         _v = arg.pop('ids', None)
         self['ids'] = ids if ids is not None else _v
         _v = arg.pop('idssrc', None)

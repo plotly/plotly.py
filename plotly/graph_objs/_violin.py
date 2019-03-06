@@ -4,6 +4,29 @@ import copy
 
 class Violin(BaseTraceType):
 
+    # alignmentgroup
+    # --------------
+    @property
+    def alignmentgroup(self):
+        """
+        Set several traces linked to the same position axis or matching
+        axes to the same alignmentgroup. This controls whether bars
+        compute their positional range dependently or independently.
+    
+        The 'alignmentgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['alignmentgroup']
+
+    @alignmentgroup.setter
+    def alignmentgroup(self, val):
+        self['alignmentgroup'] = val
+
     # bandwidth
     # ---------
     @property
@@ -287,6 +310,48 @@ class Violin(BaseTraceType):
     def hoveron(self, val):
         self['hoveron'] = val
 
+    # hovertext
+    # ---------
+    @property
+    def hovertext(self):
+        """
+        Same as `text`.
+    
+        The 'hovertext' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self['hovertext']
+
+    @hovertext.setter
+    def hovertext(self, val):
+        self['hovertext'] = val
+
+    # hovertextsrc
+    # ------------
+    @property
+    def hovertextsrc(self):
+        """
+        Sets the source reference on plot.ly for  hovertext .
+    
+        The 'hovertextsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hovertextsrc']
+
+    @hovertextsrc.setter
+    def hovertextsrc(self, val):
+        self['hovertextsrc'] = val
+
     # ids
     # ---
     @property
@@ -508,6 +573,29 @@ class Violin(BaseTraceType):
     @name.setter
     def name(self, val):
         self['name'] = val
+
+    # offsetgroup
+    # -----------
+    @property
+    def offsetgroup(self):
+        """
+        Set several traces linked to the same position axis or matching
+        axes to the same offsetgroup where bars of the same position
+        coordinate will line up.
+    
+        The 'offsetgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['offsetgroup']
+
+    @offsetgroup.setter
+    def offsetgroup(self, val):
+        self['offsetgroup'] = val
 
     # opacity
     # -------
@@ -1189,6 +1277,11 @@ class Violin(BaseTraceType):
     @property
     def _prop_descriptions(self):
         return """\
+        alignmentgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same alignmentgroup. This controls
+            whether bars compute their positional range dependently
+            or independently.
         bandwidth
             Sets the bandwidth used to compute the kernel density
             estimate. By default, the bandwidth is determined by
@@ -1221,6 +1314,10 @@ class Violin(BaseTraceType):
             Do the hover effects highlight individual violins or
             sample points or the kernel density estimate or any
             combination of them?
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -1251,6 +1348,10 @@ class Violin(BaseTraceType):
             also be used for the position coordinate, if `x` and
             `x0` (`y` and `y0` if horizontal) are missing and the
             position axis is categorical
+        offsetgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same offsetgroup where bars of the
+            same position coordinate will line up.
         opacity
             Sets the opacity of the trace.
         orientation
@@ -1392,6 +1493,7 @@ class Violin(BaseTraceType):
     def __init__(
         self,
         arg=None,
+        alignmentgroup=None,
         bandwidth=None,
         box=None,
         customdata=None,
@@ -1401,6 +1503,8 @@ class Violin(BaseTraceType):
         hoverinfosrc=None,
         hoverlabel=None,
         hoveron=None,
+        hovertext=None,
+        hovertextsrc=None,
         ids=None,
         idssrc=None,
         jitter=None,
@@ -1409,6 +1513,7 @@ class Violin(BaseTraceType):
         marker=None,
         meanline=None,
         name=None,
+        offsetgroup=None,
         opacity=None,
         orientation=None,
         pointpos=None,
@@ -1454,6 +1559,11 @@ class Violin(BaseTraceType):
         arg
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.Violin
+        alignmentgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same alignmentgroup. This controls
+            whether bars compute their positional range dependently
+            or independently.
         bandwidth
             Sets the bandwidth used to compute the kernel density
             estimate. By default, the bandwidth is determined by
@@ -1486,6 +1596,10 @@ class Violin(BaseTraceType):
             Do the hover effects highlight individual violins or
             sample points or the kernel density estimate or any
             combination of them?
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -1516,6 +1630,10 @@ class Violin(BaseTraceType):
             also be used for the position coordinate, if `x` and
             `x0` (`y` and `y0` if horizontal) are missing and the
             position axis is categorical
+        offsetgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same offsetgroup where bars of the
+            same position coordinate will line up.
         opacity
             Sets the opacity of the trace.
         orientation
@@ -1685,6 +1803,7 @@ an instance of plotly.graph_objs.Violin"""
 
         # Initialize validators
         # ---------------------
+        self._validators['alignmentgroup'] = v_violin.AlignmentgroupValidator()
         self._validators['bandwidth'] = v_violin.BandwidthValidator()
         self._validators['box'] = v_violin.BoxValidator()
         self._validators['customdata'] = v_violin.CustomdataValidator()
@@ -1694,6 +1813,8 @@ an instance of plotly.graph_objs.Violin"""
         self._validators['hoverinfosrc'] = v_violin.HoverinfosrcValidator()
         self._validators['hoverlabel'] = v_violin.HoverlabelValidator()
         self._validators['hoveron'] = v_violin.HoveronValidator()
+        self._validators['hovertext'] = v_violin.HovertextValidator()
+        self._validators['hovertextsrc'] = v_violin.HovertextsrcValidator()
         self._validators['ids'] = v_violin.IdsValidator()
         self._validators['idssrc'] = v_violin.IdssrcValidator()
         self._validators['jitter'] = v_violin.JitterValidator()
@@ -1702,6 +1823,7 @@ an instance of plotly.graph_objs.Violin"""
         self._validators['marker'] = v_violin.MarkerValidator()
         self._validators['meanline'] = v_violin.MeanlineValidator()
         self._validators['name'] = v_violin.NameValidator()
+        self._validators['offsetgroup'] = v_violin.OffsetgroupValidator()
         self._validators['opacity'] = v_violin.OpacityValidator()
         self._validators['orientation'] = v_violin.OrientationValidator()
         self._validators['pointpos'] = v_violin.PointposValidator()
@@ -1733,6 +1855,9 @@ an instance of plotly.graph_objs.Violin"""
 
         # Populate data dict with properties
         # ----------------------------------
+        _v = arg.pop('alignmentgroup', None)
+        self['alignmentgroup'
+            ] = alignmentgroup if alignmentgroup is not None else _v
         _v = arg.pop('bandwidth', None)
         self['bandwidth'] = bandwidth if bandwidth is not None else _v
         _v = arg.pop('box', None)
@@ -1752,6 +1877,10 @@ an instance of plotly.graph_objs.Violin"""
         self['hoverlabel'] = hoverlabel if hoverlabel is not None else _v
         _v = arg.pop('hoveron', None)
         self['hoveron'] = hoveron if hoveron is not None else _v
+        _v = arg.pop('hovertext', None)
+        self['hovertext'] = hovertext if hovertext is not None else _v
+        _v = arg.pop('hovertextsrc', None)
+        self['hovertextsrc'] = hovertextsrc if hovertextsrc is not None else _v
         _v = arg.pop('ids', None)
         self['ids'] = ids if ids is not None else _v
         _v = arg.pop('idssrc', None)
@@ -1768,6 +1897,8 @@ an instance of plotly.graph_objs.Violin"""
         self['meanline'] = meanline if meanline is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
+        _v = arg.pop('offsetgroup', None)
+        self['offsetgroup'] = offsetgroup if offsetgroup is not None else _v
         _v = arg.pop('opacity', None)
         self['opacity'] = opacity if opacity is not None else _v
         _v = arg.pop('orientation', None)

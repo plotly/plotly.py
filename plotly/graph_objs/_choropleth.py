@@ -517,6 +517,48 @@ class Choropleth(BaseTraceType):
     def hovertemplatesrc(self, val):
         self['hovertemplatesrc'] = val
 
+    # hovertext
+    # ---------
+    @property
+    def hovertext(self):
+        """
+        Same as `text`.
+    
+        The 'hovertext' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self['hovertext']
+
+    @hovertext.setter
+    def hovertext(self, val):
+        self['hovertext'] = val
+
+    # hovertextsrc
+    # ------------
+    @property
+    def hovertextsrc(self):
+        """
+        Sets the source reference on plot.ly for  hovertext .
+    
+        The 'hovertextsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hovertextsrc']
+
+    @hovertextsrc.setter
+    def hovertextsrc(self, val):
+        self['hovertextsrc'] = val
+
     # ids
     # ---
     @property
@@ -1078,6 +1120,28 @@ class Choropleth(BaseTraceType):
     def zmax(self, val):
         self['zmax'] = val
 
+    # zmid
+    # ----
+    @property
+    def zmid(self):
+        """
+        Sets the mid-point of the color domain by scaling `zmin` and/or
+        `zmax` to be equidistant to this point. Value should have the
+        same units as in `z`. Has no effect when `zauto` is `false`.
+    
+        The 'zmid' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self['zmid']
+
+    @zmid.setter
+    def zmid(self, val):
+        self['zmid'] = val
+
     # zmin
     # ----
     @property
@@ -1201,6 +1265,10 @@ class Choropleth(BaseTraceType):
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -1295,6 +1363,11 @@ class Choropleth(BaseTraceType):
             Sets the upper bound of the color domain. Value should
             have the same units as in `z` and if set, `zmin` must
             be set as well.
+        zmid
+            Sets the mid-point of the color domain by scaling
+            `zmin` and/or `zmax` to be equidistant to this point.
+            Value should have the same units as in `z`. Has no
+            effect when `zauto` is `false`.
         zmin
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
@@ -1317,6 +1390,8 @@ class Choropleth(BaseTraceType):
         hoverlabel=None,
         hovertemplate=None,
         hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
         ids=None,
         idssrc=None,
         legendgroup=None,
@@ -1341,6 +1416,7 @@ class Choropleth(BaseTraceType):
         z=None,
         zauto=None,
         zmax=None,
+        zmid=None,
         zmin=None,
         zsrc=None,
         **kwargs
@@ -1422,6 +1498,10 @@ class Choropleth(BaseTraceType):
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -1516,6 +1596,11 @@ class Choropleth(BaseTraceType):
             Sets the upper bound of the color domain. Value should
             have the same units as in `z` and if set, `zmin` must
             be set as well.
+        zmid
+            Sets the mid-point of the color domain by scaling
+            `zmin` and/or `zmax` to be equidistant to this point.
+            Value should have the same units as in `z`. Has no
+            effect when `zauto` is `false`.
         zmin
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
@@ -1570,6 +1655,8 @@ an instance of plotly.graph_objs.Choropleth"""
                         ] = v_choropleth.HovertemplateValidator()
         self._validators['hovertemplatesrc'
                         ] = v_choropleth.HovertemplatesrcValidator()
+        self._validators['hovertext'] = v_choropleth.HovertextValidator()
+        self._validators['hovertextsrc'] = v_choropleth.HovertextsrcValidator()
         self._validators['ids'] = v_choropleth.IdsValidator()
         self._validators['idssrc'] = v_choropleth.IdssrcValidator()
         self._validators['legendgroup'] = v_choropleth.LegendgroupValidator()
@@ -1595,6 +1682,7 @@ an instance of plotly.graph_objs.Choropleth"""
         self._validators['z'] = v_choropleth.ZValidator()
         self._validators['zauto'] = v_choropleth.ZautoValidator()
         self._validators['zmax'] = v_choropleth.ZmaxValidator()
+        self._validators['zmid'] = v_choropleth.ZmidValidator()
         self._validators['zmin'] = v_choropleth.ZminValidator()
         self._validators['zsrc'] = v_choropleth.ZsrcValidator()
 
@@ -1626,6 +1714,10 @@ an instance of plotly.graph_objs.Choropleth"""
         _v = arg.pop('hovertemplatesrc', None)
         self['hovertemplatesrc'
             ] = hovertemplatesrc if hovertemplatesrc is not None else _v
+        _v = arg.pop('hovertext', None)
+        self['hovertext'] = hovertext if hovertext is not None else _v
+        _v = arg.pop('hovertextsrc', None)
+        self['hovertextsrc'] = hovertextsrc if hovertextsrc is not None else _v
         _v = arg.pop('ids', None)
         self['ids'] = ids if ids is not None else _v
         _v = arg.pop('idssrc', None)
@@ -1675,6 +1767,8 @@ an instance of plotly.graph_objs.Choropleth"""
         self['zauto'] = zauto if zauto is not None else _v
         _v = arg.pop('zmax', None)
         self['zmax'] = zmax if zmax is not None else _v
+        _v = arg.pop('zmid', None)
+        self['zmid'] = zmid if zmid is not None else _v
         _v = arg.pop('zmin', None)
         self['zmin'] = zmin if zmin is not None else _v
         _v = arg.pop('zsrc', None)

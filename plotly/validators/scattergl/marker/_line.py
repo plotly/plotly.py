@@ -37,6 +37,15 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 to a numerical array. Value should have the
                 same units as in `marker.line.color` and if
                 set, `marker.line.cmin` must be set as well.
+            cmid
+                Sets the mid-point of the color domain by
+                scaling `marker.line.cmin` and/or
+                `marker.line.cmax` to be equidistant to this
+                point. Has an effect only if in
+                `marker.line.color`is set to a numerical array.
+                Value should have the same units as in
+                `marker.line.color`. Has no effect when
+                `marker.line.cauto` is `false`.
             cmin
                 Sets the lower bound of the color domain. Has
                 an effect only if in `marker.line.color`is set

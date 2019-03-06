@@ -653,6 +653,14 @@ class Scattergeo(BaseTraceType):
                     numerical array. Value should have the same
                     units as in `marker.color` and if set,
                     `marker.cmin` must be set as well.
+                cmid
+                    Sets the mid-point of the color domain by
+                    scaling `marker.cmin` and/or `marker.cmax` to
+                    be equidistant to this point. Has an effect
+                    only if in `marker.color`is set to a numerical
+                    array. Value should have the same units as in
+                    `marker.color`. Has no effect when
+                    `marker.cauto` is `false`.
                 cmin
                     Sets the lower bound of the color domain. Has
                     an effect only if in `marker.color`is set to a

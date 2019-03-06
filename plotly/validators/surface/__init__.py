@@ -27,6 +27,10 @@ from ._lighting import LightingValidator
 from ._legendgroup import LegendgroupValidator
 from ._idssrc import IdssrcValidator
 from ._ids import IdsValidator
+from ._hovertextsrc import HovertextsrcValidator
+from ._hovertext import HovertextValidator
+from ._hovertemplatesrc import HovertemplatesrcValidator
+from ._hovertemplate import HovertemplateValidator
 from ._hoverlabel import HoverlabelValidator
 from ._hoverinfosrc import HoverinfosrcValidator
 from ._hoverinfo import HoverinfoValidator
@@ -37,6 +41,7 @@ from ._contours import ContoursValidator
 from ._colorscale import ColorscaleValidator
 from ._colorbar import ColorBarValidator
 from ._cmin import CminValidator
+from ._cmid import CmidValidator
 from ._cmax import CmaxValidator
 from ._cauto import CautoValidator
 from ._autocolorscale import AutocolorscaleValidator

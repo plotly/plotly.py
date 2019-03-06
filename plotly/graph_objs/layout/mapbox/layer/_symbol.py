@@ -9,8 +9,8 @@ class Symbol(BaseLayoutHierarchyType):
     @property
     def icon(self):
         """
-        Sets the symbol icon image. Full list:
-        https://www.mapbox.com/maki-icons/
+        Sets the symbol icon image (mapbox.layer.layout.icon-image).
+        Full list: https://www.mapbox.com/maki-icons/
     
         The 'icon' property is a string and must be specified as:
           - A string
@@ -31,8 +31,8 @@ class Symbol(BaseLayoutHierarchyType):
     @property
     def iconsize(self):
         """
-        Sets the symbol icon size. Has an effect only when `type` is
-        set to "symbol".
+        Sets the symbol icon size (mapbox.layer.layout.icon-size). Has
+        an effect only when `type` is set to "symbol".
     
         The 'iconsize' property is a number and may be specified as:
           - An int or float
@@ -47,12 +47,38 @@ class Symbol(BaseLayoutHierarchyType):
     def iconsize(self, val):
         self['iconsize'] = val
 
+    # placement
+    # ---------
+    @property
+    def placement(self):
+        """
+        Sets the symbol and/or text placement
+        (mapbox.layer.layout.symbol-placement). If `placement` is
+        "point", the label is placed where the geometry is located If
+        `placement` is "line", the label is placed along the line of
+        the geometry If `placement` is "line-center", the label is
+        placed on the center of the geometry
+    
+        The 'placement' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['point', 'line', 'line-center']
+
+        Returns
+        -------
+        Any
+        """
+        return self['placement']
+
+    @placement.setter
+    def placement(self, val):
+        self['placement'] = val
+
     # text
     # ----
     @property
     def text(self):
         """
-        Sets the symbol text.
+        Sets the symbol text (mapbox.layer.layout.text-field).
     
         The 'text' property is a string and must be specified as:
           - A string
@@ -73,8 +99,9 @@ class Symbol(BaseLayoutHierarchyType):
     @property
     def textfont(self):
         """
-        Sets the icon text font. Has an effect only when `type` is set
-        to "symbol".
+        Sets the icon text font (color=mapbox.layer.paint.text-color,
+        size=mapbox.layer.layout.text-size). Has an effect only when
+        `type` is set to "symbol".
     
         The 'textfont' property is an instance of Textfont
         that may be specified as:
@@ -150,16 +177,26 @@ class Symbol(BaseLayoutHierarchyType):
     def _prop_descriptions(self):
         return """\
         icon
-            Sets the symbol icon image. Full list:
-            https://www.mapbox.com/maki-icons/
+            Sets the symbol icon image (mapbox.layer.layout.icon-
+            image). Full list: https://www.mapbox.com/maki-icons/
         iconsize
-            Sets the symbol icon size. Has an effect only when
-            `type` is set to "symbol".
+            Sets the symbol icon size (mapbox.layer.layout.icon-
+            size). Has an effect only when `type` is set to
+            "symbol".
+        placement
+            Sets the symbol and/or text placement
+            (mapbox.layer.layout.symbol-placement). If `placement`
+            is "point", the label is placed where the geometry is
+            located If `placement` is "line", the label is placed
+            along the line of the geometry If `placement` is "line-
+            center", the label is placed on the center of the
+            geometry
         text
-            Sets the symbol text.
+            Sets the symbol text (mapbox.layer.layout.text-field).
         textfont
-            Sets the icon text font. Has an effect only when `type`
-            is set to "symbol".
+            Sets the icon text font (color=mapbox.layer.paint.text-
+            color, size=mapbox.layer.layout.text-size). Has an
+            effect only when `type` is set to "symbol".
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.
@@ -170,6 +207,7 @@ class Symbol(BaseLayoutHierarchyType):
         arg=None,
         icon=None,
         iconsize=None,
+        placement=None,
         text=None,
         textfont=None,
         textposition=None,
@@ -185,16 +223,26 @@ class Symbol(BaseLayoutHierarchyType):
             an instance of
             plotly.graph_objs.layout.mapbox.layer.Symbol
         icon
-            Sets the symbol icon image. Full list:
-            https://www.mapbox.com/maki-icons/
+            Sets the symbol icon image (mapbox.layer.layout.icon-
+            image). Full list: https://www.mapbox.com/maki-icons/
         iconsize
-            Sets the symbol icon size. Has an effect only when
-            `type` is set to "symbol".
+            Sets the symbol icon size (mapbox.layer.layout.icon-
+            size). Has an effect only when `type` is set to
+            "symbol".
+        placement
+            Sets the symbol and/or text placement
+            (mapbox.layer.layout.symbol-placement). If `placement`
+            is "point", the label is placed where the geometry is
+            located If `placement` is "line", the label is placed
+            along the line of the geometry If `placement` is "line-
+            center", the label is placed on the center of the
+            geometry
         text
-            Sets the symbol text.
+            Sets the symbol text (mapbox.layer.layout.text-field).
         textfont
-            Sets the icon text font. Has an effect only when `type`
-            is set to "symbol".
+            Sets the icon text font (color=mapbox.layer.paint.text-
+            color, size=mapbox.layer.layout.text-size). Has an
+            effect only when `type` is set to "symbol".
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.
@@ -233,6 +281,7 @@ an instance of plotly.graph_objs.layout.mapbox.layer.Symbol"""
         # ---------------------
         self._validators['icon'] = v_symbol.IconValidator()
         self._validators['iconsize'] = v_symbol.IconsizeValidator()
+        self._validators['placement'] = v_symbol.PlacementValidator()
         self._validators['text'] = v_symbol.TextValidator()
         self._validators['textfont'] = v_symbol.TextfontValidator()
         self._validators['textposition'] = v_symbol.TextpositionValidator()
@@ -243,6 +292,8 @@ an instance of plotly.graph_objs.layout.mapbox.layer.Symbol"""
         self['icon'] = icon if icon is not None else _v
         _v = arg.pop('iconsize', None)
         self['iconsize'] = iconsize if iconsize is not None else _v
+        _v = arg.pop('placement', None)
+        self['placement'] = placement if placement is not None else _v
         _v = arg.pop('text', None)
         self['text'] = text if text is not None else _v
         _v = arg.pop('textfont', None)

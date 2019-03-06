@@ -151,8 +151,10 @@ class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "hovertext" is not set, these elements will be
                 seen in the hover labels.
             textfont
-                Sets the icon text font. Has an effect only
-                when `type` is set to "symbol".
+                Sets the icon text font
+                (color=mapbox.layer.paint.text-color,
+                size=mapbox.layer.layout.text-size). Has an
+                effect only when `type` is set to "symbol".
             textposition
                 Sets the positions of the `text` elements with
                 respects to the (x,y) coordinates.

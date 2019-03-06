@@ -526,9 +526,9 @@
                     "valType": "string",
                     "role": "info",
                     "dflt": "",
-                    "arrayOk": true,
                     "editType": "none",
-                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\"."
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\".",
+                    "arrayOk": true
                 },
                 "line": {
                     "color": {
@@ -1522,6 +1522,14 @@
                             },
                             "description": "Sets the upper bound of the color domain. Has an effect only if in `marker.line.color`is set to a numerical array. Value should have the same units as in `marker.line.color` and if set, `marker.line.cmin` must be set as well."
                         },
+                        "cmid": {
+                            "valType": "number",
+                            "role": "info",
+                            "dflt": null,
+                            "editType": "calc",
+                            "impliedEdits": {},
+                            "description": "Sets the mid-point of the color domain by scaling `marker.line.cmin` and/or `marker.line.cmax` to be equidistant to this point. Has an effect only if in `marker.line.color`is set to a numerical array. Value should have the same units as in `marker.line.color`. Has no effect when `marker.line.cauto` is `false`."
+                        },
                         "colorscale": {
                             "valType": "colorscale",
                             "role": "style",
@@ -1634,6 +1642,14 @@
                             "cauto": false
                         },
                         "description": "Sets the upper bound of the color domain. Has an effect only if in `marker.color`is set to a numerical array. Value should have the same units as in `marker.color` and if set, `marker.cmin` must be set as well."
+                    },
+                    "cmid": {
+                        "valType": "number",
+                        "role": "info",
+                        "dflt": null,
+                        "editType": "calc",
+                        "impliedEdits": {},
+                        "description": "Sets the mid-point of the color domain by scaling `marker.cmin` and/or `marker.cmax` to be equidistant to this point. Has an effect only if in `marker.color`is set to a numerical array. Value should have the same units as in `marker.color`. Has no effect when `marker.cauto` is `false`."
                     },
                     "colorscale": {
                         "valType": "colorscale",
@@ -2491,9 +2507,9 @@
                     "valType": "string",
                     "role": "info",
                     "dflt": "",
-                    "arrayOk": true,
                     "editType": "none",
-                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\"."
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\".",
+                    "arrayOk": true
                 },
                 "textposition": {
                     "valType": "enumerated",
@@ -2747,6 +2763,14 @@
                             },
                             "description": "Sets the upper bound of the color domain. Has an effect only if in `marker.line.color`is set to a numerical array. Value should have the same units as in `marker.line.color` and if set, `marker.line.cmin` must be set as well."
                         },
+                        "cmid": {
+                            "valType": "number",
+                            "role": "info",
+                            "dflt": null,
+                            "editType": "calc",
+                            "impliedEdits": {},
+                            "description": "Sets the mid-point of the color domain by scaling `marker.line.cmin` and/or `marker.line.cmax` to be equidistant to this point. Has an effect only if in `marker.line.color`is set to a numerical array. Value should have the same units as in `marker.line.color`. Has no effect when `marker.line.cauto` is `false`."
+                        },
                         "colorscale": {
                             "valType": "colorscale",
                             "role": "style",
@@ -2821,6 +2845,14 @@
                             "cauto": false
                         },
                         "description": "Sets the upper bound of the color domain. Has an effect only if in `marker.color`is set to a numerical array. Value should have the same units as in `marker.color` and if set, `marker.cmin` must be set as well."
+                    },
+                    "cmid": {
+                        "valType": "number",
+                        "role": "info",
+                        "dflt": null,
+                        "editType": "calc",
+                        "impliedEdits": {},
+                        "description": "Sets the mid-point of the color domain by scaling `marker.cmin` and/or `marker.cmax` to be equidistant to this point. Has an effect only if in `marker.color`is set to a numerical array. Value should have the same units as in `marker.color`. Has no effect when `marker.cauto` is `false`."
                     },
                     "colorscale": {
                         "valType": "colorscale",
@@ -3371,6 +3403,20 @@
                         "description": "Sets the source reference on plot.ly for  opacity .",
                         "editType": "none"
                     }
+                },
+                "offsetgroup": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "calc",
+                    "description": "Set several traces linked to the same position axis or matching axes to the same offsetgroup where bars of the same position coordinate will line up."
+                },
+                "alignmentgroup": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "calc",
+                    "description": "Set several traces linked to the same position axis or matching axes to the same alignmentgroup. This controls whether bars compute their positional range dependently or independently."
                 },
                 "selected": {
                     "marker": {
@@ -4132,6 +4178,14 @@
                     "editType": "calc",
                     "description": "Sets the text elements associated with each sample value. If a single string, the same string appears over all the data points. If an array of string, the items are mapped in order to the this trace's (x,y) coordinates. To be seen, trace `hoverinfo` must contain a *text* flag."
                 },
+                "hovertext": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "arrayOk": true,
+                    "editType": "style",
+                    "description": "Same as `text`."
+                },
                 "whiskerwidth": {
                     "valType": "number",
                     "min": 0,
@@ -4611,6 +4665,20 @@
                     "anim": true,
                     "description": "Sets the fill color. Defaults to a half-transparent variant of the line color, marker color, or marker line color, whichever is available."
                 },
+                "offsetgroup": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "calc",
+                    "description": "Set several traces linked to the same position axis or matching axes to the same offsetgroup where bars of the same position coordinate will line up."
+                },
+                "alignmentgroup": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "calc",
+                    "description": "Set several traces linked to the same position axis or matching axes to the same alignmentgroup. This controls whether bars compute their positional range dependently or independently."
+                },
                 "selected": {
                     "marker": {
                         "opacity": {
@@ -4778,6 +4846,12 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  text .",
+                    "editType": "none"
+                },
+                "hovertextsrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertext .",
                     "editType": "none"
                 }
             },
@@ -5016,6 +5090,16 @@
                     "editType": "calc",
                     "role": "object"
                 },
+                "transforms": {
+                    "items": {
+                        "transform": {
+                            "editType": "calc",
+                            "description": "An array of operations that manipulate the trace data, for example filtering or sorting the data arrays.",
+                            "role": "object"
+                        }
+                    },
+                    "role": "object"
+                },
                 "uirevision": {
                     "valType": "any",
                     "role": "info",
@@ -5098,6 +5182,12 @@
                     "description": "Sets the text elements associated with each z value.",
                     "role": "data"
                 },
+                "hovertext": {
+                    "valType": "data_array",
+                    "editType": "calc",
+                    "description": "Same as `text`.",
+                    "role": "data"
+                },
                 "transpose": {
                     "valType": "boolean",
                     "dflt": false,
@@ -5167,6 +5257,14 @@
                     "editType": "none",
                     "description": "Sets the hover text formatting rule using d3 formatting mini-languages which are very similar to those in Python. See: https://github.com/d3/d3-format/blob/master/README.md#locale_format"
                 },
+                "hovertemplate": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "none",
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\".",
+                    "arrayOk": true
+                },
                 "zauto": {
                     "valType": "boolean",
                     "role": "info",
@@ -5194,6 +5292,14 @@
                         "zauto": false
                     },
                     "description": "Sets the upper bound of the color domain. Value should have the same units as in `z` and if set, `zmin` must be set as well."
+                },
+                "zmid": {
+                    "valType": "number",
+                    "role": "info",
+                    "dflt": null,
+                    "editType": "calc",
+                    "impliedEdits": {},
+                    "description": "Sets the mid-point of the color domain by scaling `zmin` and/or `zmax` to be equidistant to this point. Value should have the same units as in `z`. Has no effect when `zauto` is `false`."
                 },
                 "colorscale": {
                     "valType": "colorscale",
@@ -5826,6 +5932,18 @@
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  text .",
                     "editType": "none"
+                },
+                "hovertextsrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertext .",
+                    "editType": "none"
+                },
+                "hovertemplatesrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertemplate .",
+                    "editType": "none"
                 }
             }
         },
@@ -6066,7 +6184,15 @@
                     "dflt": "",
                     "arrayOk": true,
                     "editType": "calc",
-                    "description": "Sets text elements associated with each (x,y) pair. If a single string, the same string appears over all the data points. If an array of string, the items are mapped in order to the this trace's (x,y) coordinates. If trace `hoverinfo` contains a *text* flag and *hovertext* is not set, these elements will be seen in the hover labels."
+                    "description": "Sets hover text elements associated with each bar. If a single string, the same string appears over all bars. If an array of string, the items are mapped in order to the this trace's coordinates."
+                },
+                "hovertext": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "arrayOk": true,
+                    "editType": "style",
+                    "description": "Same as `text`."
                 },
                 "orientation": {
                     "valType": "enumerated",
@@ -6218,9 +6344,9 @@
                     "valType": "string",
                     "role": "info",
                     "dflt": "",
-                    "arrayOk": true,
                     "editType": "none",
-                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available. variable `binNumber` Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\"."
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available. variable `binNumber` Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\".",
+                    "arrayOk": true
                 },
                 "marker": {
                     "line": {
@@ -6269,6 +6395,14 @@
                                 "cauto": false
                             },
                             "description": "Sets the upper bound of the color domain. Has an effect only if in `marker.line.color`is set to a numerical array. Value should have the same units as in `marker.line.color` and if set, `marker.line.cmin` must be set as well."
+                        },
+                        "cmid": {
+                            "valType": "number",
+                            "role": "info",
+                            "dflt": null,
+                            "editType": "calc",
+                            "impliedEdits": {},
+                            "description": "Sets the mid-point of the color domain by scaling `marker.line.cmin` and/or `marker.line.cmax` to be equidistant to this point. Has an effect only if in `marker.line.color`is set to a numerical array. Value should have the same units as in `marker.line.color`. Has no effect when `marker.line.cauto` is `false`."
                         },
                         "colorscale": {
                             "valType": "colorscale",
@@ -6344,6 +6478,14 @@
                             "cauto": false
                         },
                         "description": "Sets the upper bound of the color domain. Has an effect only if in `marker.color`is set to a numerical array. Value should have the same units as in `marker.color` and if set, `marker.cmin` must be set as well."
+                    },
+                    "cmid": {
+                        "valType": "number",
+                        "role": "info",
+                        "dflt": null,
+                        "editType": "calc",
+                        "impliedEdits": {},
+                        "description": "Sets the mid-point of the color domain by scaling `marker.cmin` and/or `marker.cmax` to be equidistant to this point. Has an effect only if in `marker.color`is set to a numerical array. Value should have the same units as in `marker.color`. Has no effect when `marker.cauto` is `false`."
                     },
                     "colorscale": {
                         "valType": "colorscale",
@@ -6895,6 +7037,20 @@
                         "editType": "none"
                     }
                 },
+                "offsetgroup": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "calc",
+                    "description": "Set several traces linked to the same position axis or matching axes to the same offsetgroup where bars of the same position coordinate will line up."
+                },
+                "alignmentgroup": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "calc",
+                    "description": "Set several traces linked to the same position axis or matching axes to the same alignmentgroup. This controls whether bars compute their positional range dependently or independently."
+                },
                 "selected": {
                     "marker": {
                         "opacity": {
@@ -7296,6 +7452,12 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  text .",
+                    "editType": "none"
+                },
+                "hovertextsrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertext .",
                     "editType": "none"
                 },
                 "hovertemplatesrc": {
@@ -7741,6 +7903,14 @@
                     "editType": "none",
                     "description": "Sets the hover text formatting rule using d3 formatting mini-languages which are very similar to those in Python. See: https://github.com/d3/d3-format/blob/master/README.md#locale_format"
                 },
+                "hovertemplate": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "none",
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available. variable `z` Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\".",
+                    "arrayOk": true
+                },
                 "zauto": {
                     "valType": "boolean",
                     "role": "info",
@@ -7768,6 +7938,14 @@
                         "zauto": false
                     },
                     "description": "Sets the upper bound of the color domain. Value should have the same units as in `z` and if set, `zmin` must be set as well."
+                },
+                "zmid": {
+                    "valType": "number",
+                    "role": "info",
+                    "dflt": null,
+                    "editType": "calc",
+                    "impliedEdits": {},
+                    "description": "Sets the mid-point of the color domain by scaling `zmin` and/or `zmax` to be equidistant to this point. Value should have the same units as in `z`. Has no effect when `zauto` is `false`."
                 },
                 "colorscale": {
                     "valType": "colorscale",
@@ -8393,6 +8571,12 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  z .",
+                    "editType": "none"
+                },
+                "hovertemplatesrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertemplate .",
                     "editType": "none"
                 }
             }
@@ -8957,6 +9141,14 @@
                     "editType": "none",
                     "description": "Sets the hover text formatting rule using d3 formatting mini-languages which are very similar to those in Python. See: https://github.com/d3/d3-format/blob/master/README.md#locale_format"
                 },
+                "hovertemplate": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "none",
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available. variable `z` Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\".",
+                    "arrayOk": true
+                },
                 "zauto": {
                     "valType": "boolean",
                     "role": "info",
@@ -8984,6 +9176,14 @@
                         "zauto": false
                     },
                     "description": "Sets the upper bound of the color domain. Value should have the same units as in `z` and if set, `zmin` must be set as well."
+                },
+                "zmid": {
+                    "valType": "number",
+                    "role": "info",
+                    "dflt": null,
+                    "editType": "calc",
+                    "impliedEdits": {},
+                    "description": "Sets the mid-point of the color domain by scaling `zmin` and/or `zmax` to be equidistant to this point. Value should have the same units as in `z`. Has no effect when `zauto` is `false`."
                 },
                 "colorscale": {
                     "valType": "colorscale",
@@ -9610,6 +9810,12 @@
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  z .",
                     "editType": "none"
+                },
+                "hovertemplatesrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertemplate .",
+                    "editType": "none"
                 }
             }
         },
@@ -9947,9 +10153,9 @@
                     "valType": "string",
                     "role": "info",
                     "dflt": "",
-                    "arrayOk": true,
                     "editType": "none",
-                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available. variables `label`, `color`, `value`, `percent` and `text`. Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\"."
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available. variables `label`, `color`, `value`, `percent` and `text`. Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\".",
+                    "arrayOk": true
                 },
                 "textposition": {
                     "valType": "enumerated",
@@ -10718,6 +10924,12 @@
                     "description": "Sets the text elements associated with each z value.",
                     "role": "data"
                 },
+                "hovertext": {
+                    "valType": "data_array",
+                    "editType": "calc",
+                    "description": "Same as `text`.",
+                    "role": "data"
+                },
                 "transpose": {
                     "valType": "boolean",
                     "dflt": false,
@@ -10751,6 +10963,14 @@
                     "role": "style",
                     "editType": "none",
                     "description": "Sets the hover text formatting rule using d3 formatting mini-languages which are very similar to those in Python. See: https://github.com/d3/d3-format/blob/master/README.md#locale_format"
+                },
+                "hovertemplate": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "none",
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\".",
+                    "arrayOk": true
                 },
                 "connectgaps": {
                     "valType": "boolean",
@@ -10989,6 +11209,14 @@
                         "zauto": false
                     },
                     "description": "Sets the upper bound of the color domain. Value should have the same units as in `z` and if set, `zmin` must be set as well."
+                },
+                "zmid": {
+                    "valType": "number",
+                    "role": "info",
+                    "dflt": null,
+                    "editType": "calc",
+                    "impliedEdits": {},
+                    "description": "Sets the mid-point of the color domain by scaling `zmin` and/or `zmax` to be equidistant to this point. Value should have the same units as in `z`. Has no effect when `zauto` is `false`."
                 },
                 "colorscale": {
                     "valType": "colorscale",
@@ -11620,6 +11848,18 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  text .",
+                    "editType": "none"
+                },
+                "hovertextsrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertext .",
+                    "editType": "none"
+                },
+                "hovertemplatesrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertemplate .",
                     "editType": "none"
                 }
             }
@@ -12364,6 +12604,14 @@
                             },
                             "description": "Sets the upper bound of the color domain. Has an effect only if in `marker.line.color`is set to a numerical array. Value should have the same units as in `marker.line.color` and if set, `marker.line.cmin` must be set as well."
                         },
+                        "cmid": {
+                            "valType": "number",
+                            "role": "info",
+                            "dflt": null,
+                            "editType": "calc",
+                            "impliedEdits": {},
+                            "description": "Sets the mid-point of the color domain by scaling `marker.line.cmin` and/or `marker.line.cmax` to be equidistant to this point. Has an effect only if in `marker.line.color`is set to a numerical array. Value should have the same units as in `marker.line.color`. Has no effect when `marker.line.cauto` is `false`."
+                        },
                         "colorscale": {
                             "valType": "colorscale",
                             "role": "style",
@@ -12475,6 +12723,14 @@
                             "cauto": false
                         },
                         "description": "Sets the upper bound of the color domain. Has an effect only if in `marker.color`is set to a numerical array. Value should have the same units as in `marker.color` and if set, `marker.cmin` must be set as well."
+                    },
+                    "cmid": {
+                        "valType": "number",
+                        "role": "info",
+                        "dflt": null,
+                        "editType": "calc",
+                        "impliedEdits": {},
+                        "description": "Sets the mid-point of the color domain by scaling `marker.cmin` and/or `marker.cmax` to be equidistant to this point. Has an effect only if in `marker.color`is set to a numerical array. Value should have the same units as in `marker.color`. Has no effect when `marker.cauto` is `false`."
                     },
                     "colorscale": {
                         "valType": "colorscale",
@@ -13204,9 +13460,9 @@
                     "valType": "string",
                     "role": "info",
                     "dflt": "",
-                    "arrayOk": true,
                     "editType": "none",
-                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\"."
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\".",
+                    "arrayOk": true
                 },
                 "subplot": {
                     "valType": "subplotid",
@@ -14024,6 +14280,14 @@
                     "editType": "calc",
                     "description": "Sets the text elements associated with each sample value. If a single string, the same string appears over all the data points. If an array of string, the items are mapped in order to the this trace's (x,y) coordinates. To be seen, trace `hoverinfo` must contain a *text* flag."
                 },
+                "hovertext": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "arrayOk": true,
+                    "editType": "style",
+                    "description": "Same as `text`."
+                },
                 "box": {
                     "visible": {
                         "valType": "boolean",
@@ -14102,6 +14366,20 @@
                     "role": "info",
                     "editType": "calc",
                     "description": "Determines on which side of the position value the density function making up one half of a violin is plotted. Useful when comparing two violin traces under *overlay* mode, where one trace has `side` set to *positive* and the other to *negative*."
+                },
+                "offsetgroup": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "calc",
+                    "description": "Set several traces linked to the same position axis or matching axes to the same offsetgroup where bars of the same position coordinate will line up."
+                },
+                "alignmentgroup": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "calc",
+                    "description": "Set several traces linked to the same position axis or matching axes to the same alignmentgroup. This controls whether bars compute their positional range dependently or independently."
                 },
                 "selected": {
                     "marker": {
@@ -14224,6 +14502,12 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  text .",
+                    "editType": "none"
+                },
+                "hovertextsrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertext .",
                     "editType": "none"
                 }
             },
@@ -14495,6 +14779,14 @@
                     "editType": "calc",
                     "description": "Sets text elements associated with each (x,y,z) triplet. If a single string, the same string appears over all the data points. If an array of string, the items are mapped in order to the this trace's (x,y,z) coordinates. To be seen, trace `hoverinfo` must contain a *text* flag."
                 },
+                "hovertemplate": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "calc",
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\".",
+                    "arrayOk": true
+                },
                 "mode": {
                     "valType": "flaglist",
                     "flags": [
@@ -14686,6 +14978,14 @@
                             "cauto": false
                         },
                         "description": "Sets the upper bound of the color domain. Has an effect only if in `line.color`is set to a numerical array. Value should have the same units as in `line.color` and if set, `line.cmin` must be set as well."
+                    },
+                    "cmid": {
+                        "valType": "number",
+                        "role": "info",
+                        "dflt": null,
+                        "editType": "calc",
+                        "impliedEdits": {},
+                        "description": "Sets the mid-point of the color domain by scaling `line.cmin` and/or `line.cmax` to be equidistant to this point. Has an effect only if in `line.color`is set to a numerical array. Value should have the same units as in `line.color`. Has no effect when `line.cauto` is `false`."
                     },
                     "colorscale": {
                         "valType": "colorscale",
@@ -15332,6 +15632,14 @@
                             },
                             "description": "Sets the upper bound of the color domain. Has an effect only if in `marker.line.color`is set to a numerical array. Value should have the same units as in `marker.line.color` and if set, `marker.line.cmin` must be set as well."
                         },
+                        "cmid": {
+                            "valType": "number",
+                            "role": "info",
+                            "dflt": null,
+                            "editType": "calc",
+                            "impliedEdits": {},
+                            "description": "Sets the mid-point of the color domain by scaling `marker.line.cmin` and/or `marker.line.cmax` to be equidistant to this point. Has an effect only if in `marker.line.color`is set to a numerical array. Value should have the same units as in `marker.line.color`. Has no effect when `marker.line.cauto` is `false`."
+                        },
                         "colorscale": {
                             "valType": "colorscale",
                             "role": "style",
@@ -15400,6 +15708,14 @@
                             "cauto": false
                         },
                         "description": "Sets the upper bound of the color domain. Has an effect only if in `marker.color`is set to a numerical array. Value should have the same units as in `marker.color` and if set, `marker.cmin` must be set as well."
+                    },
+                    "cmid": {
+                        "valType": "number",
+                        "role": "info",
+                        "dflt": null,
+                        "editType": "calc",
+                        "impliedEdits": {},
+                        "description": "Sets the mid-point of the color domain by scaling `marker.cmin` and/or `marker.cmax` to be equidistant to this point. Has an effect only if in `marker.color`is set to a numerical array. Value should have the same units as in `marker.color`. Has no effect when `marker.cauto` is `false`."
                     },
                     "colorscale": {
                         "valType": "colorscale",
@@ -15998,6 +16314,12 @@
                     "description": "Sets the source reference on plot.ly for  hovertext .",
                     "editType": "none"
                 },
+                "hovertemplatesrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertemplate .",
+                    "editType": "none"
+                },
                 "textpositionsrc": {
                     "valType": "string",
                     "role": "info",
@@ -16218,6 +16540,22 @@
                     "description": "Sets the text elements associated with each z value. If trace `hoverinfo` contains a *text* flag and *hovertext* is not set, these elements will be seen in the hover labels.",
                     "editType": "calc"
                 },
+                "hovertext": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "arrayOk": true,
+                    "description": "Same as `text`.",
+                    "editType": "calc"
+                },
+                "hovertemplate": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "calc",
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\".",
+                    "arrayOk": true
+                },
                 "surfacecolor": {
                     "valType": "data_array",
                     "description": "Sets the surface color values, used for setting a color scale independent of `z`.",
@@ -16251,6 +16589,14 @@
                         "cauto": false
                     },
                     "description": "Sets the upper bound of the color domain. Value should have the same units as z or surfacecolor and if set, `cmin` must be set as well."
+                },
+                "cmid": {
+                    "valType": "number",
+                    "role": "info",
+                    "dflt": null,
+                    "editType": "calc",
+                    "impliedEdits": {},
+                    "description": "Sets the mid-point of the color domain by scaling `cmin` and/or `cmax` to be equidistant to this point. Value should have the same units as z or surfacecolor. Has no effect when `cauto` is `false`."
                 },
                 "colorscale": {
                     "valType": "colorscale",
@@ -17121,7 +17467,7 @@
                     "min": 0,
                     "max": 1,
                     "dflt": 1,
-                    "description": "Sets the opacity of the surface.",
+                    "description": "Sets the opacity of the surface. Please note that in the case of using high `opacity` values for example a value greater than or equal to 0.5 on two surfaces (and 0.25 with four surfaces), an overlay of multiple transparent surfaces may not perfectly be sorted in depth by the webgl API. This behavior may be improved in the near future and is subject to change.",
                     "editType": "calc"
                 },
                 "_deprecated": {
@@ -17276,6 +17622,18 @@
                     "description": "Sets the source reference on plot.ly for  text .",
                     "editType": "none"
                 },
+                "hovertextsrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertext .",
+                    "editType": "none"
+                },
+                "hovertemplatesrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertemplate .",
+                    "editType": "none"
+                },
                 "surfacecolorsrc": {
                     "valType": "string",
                     "role": "info",
@@ -17321,15 +17679,6 @@
                     "dflt": "",
                     "editType": "style",
                     "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items."
-                },
-                "opacity": {
-                    "valType": "number",
-                    "role": "style",
-                    "min": 0,
-                    "max": 1,
-                    "dflt": 1,
-                    "editType": "style",
-                    "description": "Sets the opacity of the trace."
                 },
                 "name": {
                     "valType": "string",
@@ -17757,6 +18106,22 @@
                     "description": "Sets the text elements associated with the vertices. If trace `hoverinfo` contains a *text* flag and *hovertext* is not set, these elements will be seen in the hover labels.",
                     "editType": "calc"
                 },
+                "hovertext": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "arrayOk": true,
+                    "description": "Same as `text`.",
+                    "editType": "calc"
+                },
+                "hovertemplate": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "calc",
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\".",
+                    "arrayOk": true
+                },
                 "cauto": {
                     "valType": "boolean",
                     "role": "info",
@@ -17784,6 +18149,14 @@
                         "cauto": false
                     },
                     "description": "Sets the upper bound of the color domain. Value should have the same units as `value` and if set, `cmin` must be set as well."
+                },
+                "cmid": {
+                    "valType": "number",
+                    "role": "info",
+                    "dflt": null,
+                    "editType": "calc",
+                    "impliedEdits": {},
+                    "description": "Sets the mid-point of the color domain by scaling `cmin` and/or `cmax` to be equidistant to this point. Value should have the same units as `value`. Has no effect when `cauto` is `false`."
                 },
                 "colorscale": {
                     "valType": "colorscale",
@@ -18311,39 +18684,14 @@
                         "editType": "none"
                     }
                 },
-                "flatshading": {
-                    "valType": "boolean",
+                "opacity": {
+                    "valType": "number",
                     "role": "style",
-                    "dflt": false,
-                    "description": "Determines whether or not normal smoothing is applied to the isosurfaces, creating isosurfaces with an angular, low-poly look via flat reflections.",
+                    "min": 0,
+                    "max": 1,
+                    "dflt": 1,
+                    "description": "Sets the opacity of the surface. Please note that in the case of using high `opacity` values for example a value greater than or equal to 0.5 on two surfaces (and 0.25 with four surfaces), an overlay of multiple transparent surfaces may not perfectly be sorted in depth by the webgl API. This behavior may be improved in the near future and is subject to change.",
                     "editType": "calc"
-                },
-                "contour": {
-                    "show": {
-                        "valType": "boolean",
-                        "role": "info",
-                        "dflt": false,
-                        "description": "Sets whether or not dynamic contours are shown on hover. Contours are more useful when hovering on caps and slices.",
-                        "editType": "calc"
-                    },
-                    "color": {
-                        "valType": "color",
-                        "role": "style",
-                        "dflt": "#444",
-                        "description": "Sets the color of the contour lines.",
-                        "editType": "calc"
-                    },
-                    "width": {
-                        "valType": "number",
-                        "role": "style",
-                        "min": 1,
-                        "max": 16,
-                        "dflt": 2,
-                        "description": "Sets the width of the contour lines.",
-                        "editType": "calc"
-                    },
-                    "editType": "calc",
-                    "role": "object"
                 },
                 "lightposition": {
                     "x": {
@@ -18391,7 +18739,7 @@
                         "role": "style",
                         "min": 0,
                         "max": 1,
-                        "dflt": 0.000001,
+                        "dflt": 0,
                         "editType": "calc",
                         "description": "Epsilon for face normals calculation avoids math issues arising from degenerate geometry."
                     },
@@ -18441,6 +18789,40 @@
                         "description": "Represents the reflectance as a dependency of the viewing angle; e.g. paper is reflective when viewing it from the edge of the paper (almost 90 degrees), causing shine.",
                         "editType": "calc"
                     },
+                    "role": "object"
+                },
+                "flatshading": {
+                    "valType": "boolean",
+                    "role": "style",
+                    "dflt": true,
+                    "editType": "calc",
+                    "description": "Determines whether or not normal smoothing is applied to the meshes, creating meshes with an angular, low-poly look via flat reflections."
+                },
+                "contour": {
+                    "show": {
+                        "valType": "boolean",
+                        "role": "info",
+                        "dflt": false,
+                        "description": "Sets whether or not dynamic contours are shown on hover",
+                        "editType": "calc"
+                    },
+                    "color": {
+                        "valType": "color",
+                        "role": "style",
+                        "dflt": "#444",
+                        "description": "Sets the color of the contour lines.",
+                        "editType": "calc"
+                    },
+                    "width": {
+                        "valType": "number",
+                        "role": "style",
+                        "min": 1,
+                        "max": 16,
+                        "dflt": 2,
+                        "description": "Sets the width of the contour lines.",
+                        "editType": "calc"
+                    },
+                    "editType": "calc",
                     "role": "object"
                 },
                 "hoverinfo": {
@@ -18510,6 +18892,18 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  text .",
+                    "editType": "none"
+                },
+                "hovertextsrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertext .",
+                    "editType": "none"
+                },
+                "hovertemplatesrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertemplate .",
                     "editType": "none"
                 },
                 "hoverinfosrc": {
@@ -18744,6 +19138,22 @@
                     "editType": "calc",
                     "description": "Sets the text elements associated with the vertices. If trace `hoverinfo` contains a *text* flag and *hovertext* is not set, these elements will be seen in the hover labels."
                 },
+                "hovertext": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "arrayOk": true,
+                    "editType": "calc",
+                    "description": "Same as `text`."
+                },
+                "hovertemplate": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "calc",
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\".",
+                    "arrayOk": true
+                },
                 "delaunayaxis": {
                     "valType": "enumerated",
                     "role": "info",
@@ -18814,6 +19224,14 @@
                         "cauto": false
                     },
                     "description": "Sets the upper bound of the color domain. Value should have the same units as `intensity` and if set, `cmin` must be set as well."
+                },
+                "cmid": {
+                    "valType": "number",
+                    "role": "info",
+                    "dflt": null,
+                    "editType": "calc",
+                    "impliedEdits": {},
+                    "description": "Sets the mid-point of the color domain by scaling `cmin` and/or `cmax` to be equidistant to this point. Value should have the same units as `intensity`. Has no effect when `cauto` is `false`."
                 },
                 "colorscale": {
                     "valType": "colorscale",
@@ -19347,7 +19765,7 @@
                     "min": 0,
                     "max": 1,
                     "dflt": 1,
-                    "description": "Sets the opacity of the surface.",
+                    "description": "Sets the opacity of the surface. Please note that in the case of using high `opacity` values for example a value greater than or equal to 0.5 on two surfaces (and 0.25 with four surfaces), an overlay of multiple transparent surfaces may not perfectly be sorted in depth by the webgl API. This behavior may be improved in the near future and is subject to change.",
                     "editType": "calc"
                 },
                 "flatshading": {
@@ -19638,6 +20056,18 @@
                     "description": "Sets the source reference on plot.ly for  text .",
                     "editType": "none"
                 },
+                "hovertextsrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertext .",
+                    "editType": "none"
+                },
+                "hovertemplatesrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertemplate .",
+                    "editType": "none"
+                },
                 "intensitysrc": {
                     "valType": "string",
                     "role": "info",
@@ -19919,6 +20349,22 @@
                     "editType": "calc",
                     "description": "Sets the text elements associated with the cones. If trace `hoverinfo` contains a *text* flag and *hovertext* is not set, these elements will be seen in the hover labels."
                 },
+                "hovertext": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "arrayOk": true,
+                    "editType": "calc",
+                    "description": "Same as `text`."
+                },
+                "hovertemplate": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "calc",
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available. variable `norm` Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\".",
+                    "arrayOk": true
+                },
                 "cauto": {
                     "valType": "boolean",
                     "role": "info",
@@ -19946,6 +20392,14 @@
                         "cauto": false
                     },
                     "description": "Sets the upper bound of the color domain. Value should have the same units as u/v/w norm and if set, `cmin` must be set as well."
+                },
+                "cmid": {
+                    "valType": "number",
+                    "role": "info",
+                    "dflt": null,
+                    "editType": "calc",
+                    "impliedEdits": {},
+                    "description": "Sets the mid-point of the color domain by scaling `cmin` and/or `cmax` to be equidistant to this point. Value should have the same units as u/v/w norm. Has no effect when `cauto` is `false`."
                 },
                 "colorscale": {
                     "valType": "colorscale",
@@ -20479,7 +20933,7 @@
                     "min": 0,
                     "max": 1,
                     "dflt": 1,
-                    "description": "Sets the opacity of the surface.",
+                    "description": "Sets the opacity of the surface. Please note that in the case of using high `opacity` values for example a value greater than or equal to 0.5 on two surfaces (and 0.25 with four surfaces), an overlay of multiple transparent surfaces may not perfectly be sorted in depth by the webgl API. This behavior may be improved in the near future and is subject to change.",
                     "editType": "calc"
                 },
                 "lightposition": {
@@ -20663,6 +21117,18 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  text .",
+                    "editType": "none"
+                },
+                "hovertextsrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertext .",
+                    "editType": "none"
+                },
+                "hovertemplatesrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertemplate .",
                     "editType": "none"
                 },
                 "hoverinfosrc": {
@@ -20952,6 +21418,21 @@
                     "editType": "calc",
                     "description": "Sets a text element associated with this trace. If trace `hoverinfo` contains a *text* flag, this text element will be seen in all hover labels. Note that streamtube traces do not support array `text` values."
                 },
+                "hovertext": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "calc",
+                    "description": "Same as `text`."
+                },
+                "hovertemplate": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "calc",
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available. variables `tubex`, `tubey`, `tubez`, `tubeu`, `tubev`, `tubew`, `norm` and `divergence`. Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\".",
+                    "arrayOk": true
+                },
                 "cauto": {
                     "valType": "boolean",
                     "role": "info",
@@ -20979,6 +21460,14 @@
                         "cauto": false
                     },
                     "description": "Sets the upper bound of the color domain. Value should have the same units as u/v/w norm and if set, `cmin` must be set as well."
+                },
+                "cmid": {
+                    "valType": "number",
+                    "role": "info",
+                    "dflt": null,
+                    "editType": "calc",
+                    "impliedEdits": {},
+                    "description": "Sets the mid-point of the color domain by scaling `cmin` and/or `cmax` to be equidistant to this point. Value should have the same units as u/v/w norm. Has no effect when `cauto` is `false`."
                 },
                 "colorscale": {
                     "valType": "colorscale",
@@ -21512,7 +22001,7 @@
                     "min": 0,
                     "max": 1,
                     "dflt": 1,
-                    "description": "Sets the opacity of the surface.",
+                    "description": "Sets the opacity of the surface. Please note that in the case of using high `opacity` values for example a value greater than or equal to 0.5 on two surfaces (and 0.25 with four surfaces), an overlay of multiple transparent surfaces may not perfectly be sorted in depth by the webgl API. This behavior may be improved in the near future and is subject to change.",
                     "editType": "calc"
                 },
                 "lightposition": {
@@ -21691,6 +22180,12 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  w .",
+                    "editType": "none"
+                },
+                "hovertemplatesrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertemplate .",
                     "editType": "none"
                 },
                 "hoverinfosrc": {
@@ -22948,6 +23443,14 @@
                             },
                             "description": "Sets the upper bound of the color domain. Has an effect only if in `marker.line.color`is set to a numerical array. Value should have the same units as in `marker.line.color` and if set, `marker.line.cmin` must be set as well."
                         },
+                        "cmid": {
+                            "valType": "number",
+                            "role": "info",
+                            "dflt": null,
+                            "editType": "calc",
+                            "impliedEdits": {},
+                            "description": "Sets the mid-point of the color domain by scaling `marker.line.cmin` and/or `marker.line.cmax` to be equidistant to this point. Has an effect only if in `marker.line.color`is set to a numerical array. Value should have the same units as in `marker.line.color`. Has no effect when `marker.line.cauto` is `false`."
+                        },
                         "colorscale": {
                             "valType": "colorscale",
                             "role": "style",
@@ -23059,6 +23562,14 @@
                             "cauto": false
                         },
                         "description": "Sets the upper bound of the color domain. Has an effect only if in `marker.color`is set to a numerical array. Value should have the same units as in `marker.color` and if set, `marker.cmin` must be set as well."
+                    },
+                    "cmid": {
+                        "valType": "number",
+                        "role": "info",
+                        "dflt": null,
+                        "editType": "calc",
+                        "impliedEdits": {},
+                        "description": "Sets the mid-point of the color domain by scaling `marker.cmin` and/or `marker.cmax` to be equidistant to this point. Has an effect only if in `marker.color`is set to a numerical array. Value should have the same units as in `marker.color`. Has no effect when `marker.cauto` is `false`."
                     },
                     "colorscale": {
                         "valType": "colorscale",
@@ -23239,9 +23750,9 @@
                     "valType": "string",
                     "role": "info",
                     "dflt": "",
-                    "arrayOk": true,
                     "editType": "calc",
-                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\"."
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\".",
+                    "arrayOk": true
                 },
                 "geo": {
                     "valType": "subplotid",
@@ -23543,6 +24054,14 @@
                     "editType": "calc",
                     "description": "Sets the text elements associated with each location."
                 },
+                "hovertext": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "arrayOk": true,
+                    "editType": "calc",
+                    "description": "Same as `text`."
+                },
                 "marker": {
                     "line": {
                         "color": {
@@ -23651,9 +24170,9 @@
                     "valType": "string",
                     "role": "info",
                     "dflt": "",
-                    "arrayOk": true,
                     "editType": "none",
-                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\"."
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\".",
+                    "arrayOk": true
                 },
                 "zauto": {
                     "valType": "boolean",
@@ -23682,6 +24201,14 @@
                         "zauto": false
                     },
                     "description": "Sets the upper bound of the color domain. Value should have the same units as in `z` and if set, `zmin` must be set as well."
+                },
+                "zmid": {
+                    "valType": "number",
+                    "role": "info",
+                    "dflt": null,
+                    "editType": "calc",
+                    "impliedEdits": {},
+                    "description": "Sets the mid-point of the color domain by scaling `zmin` and/or `zmax` to be equidistant to this point. Value should have the same units as in `z`. Has no effect when `zauto` is `false`."
                 },
                 "colorscale": {
                     "valType": "colorscale",
@@ -24246,6 +24773,12 @@
                     "description": "Sets the source reference on plot.ly for  text .",
                     "editType": "none"
                 },
+                "hovertextsrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertext .",
+                    "editType": "none"
+                },
                 "hoverinfosrc": {
                     "valType": "string",
                     "role": "info",
@@ -24695,6 +25228,14 @@
                             "cauto": false
                         },
                         "description": "Sets the upper bound of the color domain. Has an effect only if in `marker.color`is set to a numerical array. Value should have the same units as in `marker.color` and if set, `marker.cmin` must be set as well."
+                    },
+                    "cmid": {
+                        "valType": "number",
+                        "role": "info",
+                        "dflt": null,
+                        "editType": "calc",
+                        "impliedEdits": {},
+                        "description": "Sets the mid-point of the color domain by scaling `marker.cmin` and/or `marker.cmax` to be equidistant to this point. Has an effect only if in `marker.color`is set to a numerical array. Value should have the same units as in `marker.color`. Has no effect when `marker.cauto` is `false`."
                     },
                     "colorscale": {
                         "valType": "colorscale",
@@ -25598,6 +26139,14 @@
                             },
                             "description": "Sets the upper bound of the color domain. Has an effect only if in `marker.line.color`is set to a numerical array. Value should have the same units as in `marker.line.color` and if set, `marker.line.cmin` must be set as well."
                         },
+                        "cmid": {
+                            "valType": "number",
+                            "role": "info",
+                            "dflt": null,
+                            "editType": "calc",
+                            "impliedEdits": {},
+                            "description": "Sets the mid-point of the color domain by scaling `marker.line.cmin` and/or `marker.line.cmax` to be equidistant to this point. Has an effect only if in `marker.line.color`is set to a numerical array. Value should have the same units as in `marker.line.color`. Has no effect when `marker.line.cauto` is `false`."
+                        },
                         "colorscale": {
                             "valType": "colorscale",
                             "role": "style",
@@ -25795,9 +26344,9 @@
                     "valType": "string",
                     "role": "info",
                     "dflt": "",
-                    "arrayOk": true,
                     "editType": "none",
-                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\"."
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\".",
+                    "arrayOk": true
                 },
                 "error_x": {
                     "visible": {
@@ -26391,6 +26940,13 @@
                                     "editType": "calc+clearAxisTypes",
                                     "description": "Sets the axis type for this dimension's generated x and y axes. Note that the axis `type` values set in layout take precedence over this attribute."
                                 },
+                                "matches": {
+                                    "valType": "boolean",
+                                    "dflt": false,
+                                    "role": "info",
+                                    "editType": "calc",
+                                    "description": "Determines whether or not the x & y axes generated by this dimension match. Equivalent to setting the `matches` axis attribute in the layout with the correct axis id."
+                                },
                                 "editType": "calc+clearAxisTypes",
                                 "role": "object"
                             },
@@ -26425,6 +26981,22 @@
                     "arrayOk": true,
                     "editType": "calc",
                     "description": "Sets text elements associated with each (x,y) pair to appear on hover. If a single string, the same string appears over all the data points. If an array of string, the items are mapped in order to the this trace's (x,y) coordinates."
+                },
+                "hovertext": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "arrayOk": true,
+                    "editType": "calc",
+                    "description": "Same as `text`."
+                },
+                "hovertemplate": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "none",
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\".",
+                    "arrayOk": true
                 },
                 "marker": {
                     "color": {
@@ -26461,6 +27033,14 @@
                             "cauto": false
                         },
                         "description": "Sets the upper bound of the color domain. Has an effect only if in `marker.color`is set to a numerical array. Value should have the same units as in `marker.color` and if set, `marker.cmin` must be set as well."
+                    },
+                    "cmid": {
+                        "valType": "number",
+                        "role": "info",
+                        "dflt": null,
+                        "editType": "calc",
+                        "impliedEdits": {},
+                        "description": "Sets the mid-point of the color domain by scaling `marker.cmin` and/or `marker.cmax` to be equidistant to this point. Has an effect only if in `marker.color`is set to a numerical array. Value should have the same units as in `marker.color`. Has no effect when `marker.cauto` is `false`."
                     },
                     "colorscale": {
                         "valType": "colorscale",
@@ -27364,6 +27944,14 @@
                             },
                             "description": "Sets the upper bound of the color domain. Has an effect only if in `marker.line.color`is set to a numerical array. Value should have the same units as in `marker.line.color` and if set, `marker.line.cmin` must be set as well."
                         },
+                        "cmid": {
+                            "valType": "number",
+                            "role": "info",
+                            "dflt": null,
+                            "editType": "calc",
+                            "impliedEdits": {},
+                            "description": "Sets the mid-point of the color domain by scaling `marker.line.cmin` and/or `marker.line.cmax` to be equidistant to this point. Has an effect only if in `marker.line.color`is set to a numerical array. Value should have the same units as in `marker.line.color`. Has no effect when `marker.line.cauto` is `false`."
+                        },
                         "colorscale": {
                             "valType": "colorscale",
                             "role": "style",
@@ -27578,6 +28166,18 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  text .",
+                    "editType": "none"
+                },
+                "hovertextsrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertext .",
+                    "editType": "none"
+                },
+                "hovertemplatesrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertemplate .",
                     "editType": "none"
                 }
             }
@@ -28327,6 +28927,14 @@
                         "zauto": false
                     },
                     "description": "Sets the upper bound of the color domain. Value should have the same units as in `z` and if set, `zmin` must be set as well."
+                },
+                "zmid": {
+                    "valType": "number",
+                    "role": "info",
+                    "dflt": null,
+                    "editType": "calc",
+                    "impliedEdits": {},
+                    "description": "Sets the mid-point of the color domain by scaling `zmin` and/or `zmax` to be equidistant to this point. Value should have the same units as in `z`. Has no effect when `zauto` is `false`."
                 },
                 "colorscale": {
                     "valType": "colorscale",
@@ -29337,6 +29945,14 @@
                         },
                         "description": "Sets the upper bound of the color domain. Has an effect only if in `line.color`is set to a numerical array. Value should have the same units as in `line.color` and if set, `line.cmin` must be set as well."
                     },
+                    "cmid": {
+                        "valType": "number",
+                        "role": "info",
+                        "dflt": null,
+                        "editType": "calc",
+                        "impliedEdits": {},
+                        "description": "Sets the mid-point of the color domain by scaling `line.cmin` and/or `line.cmax` to be equidistant to this point. Has an effect only if in `line.color`is set to a numerical array. Value should have the same units as in `line.color`. Has no effect when `line.cauto` is `false`."
+                    },
                     "colorscale": {
                         "valType": "colorscale",
                         "role": "style",
@@ -30126,6 +30742,13 @@
                     "editType": "plot",
                     "description": "Sets the hover interaction mode for the parcats diagram. If `category`, hover interaction take place per category. If `color`, hover interactions take place per color per category. If `dimension`, hover interactions take place across all categories per dimension."
                 },
+                "hovertemplate": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "plot",
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available. variables `count`, `probability`, `category`, `categorycount`, `colorcount` and `bandcolorcount`. Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\"."
+                },
                 "arrangement": {
                     "valType": "enumerated",
                     "values": [
@@ -30319,6 +30942,14 @@
                             "cauto": false
                         },
                         "description": "Sets the upper bound of the color domain. Has an effect only if in `line.color`is set to a numerical array. Value should have the same units as in `line.color` and if set, `line.cmin` must be set as well."
+                    },
+                    "cmid": {
+                        "valType": "number",
+                        "role": "info",
+                        "dflt": null,
+                        "editType": "calc",
+                        "impliedEdits": {},
+                        "description": "Sets the mid-point of the color domain by scaling `line.cmin` and/or `line.cmax` to be equidistant to this point. Has an effect only if in `line.color`is set to a numerical array. Value should have the same units as in `line.color`. Has no effect when `line.cauto` is `false`."
                     },
                     "colorscale": {
                         "valType": "colorscale",
@@ -30857,6 +31488,13 @@
                         "editType": "plot",
                         "description": "Sets the shape of the paths. If `linear`, paths are composed of straight lines. If `hspline`, paths are composed of horizontal curved splines"
                     },
+                    "hovertemplate": {
+                        "valType": "string",
+                        "role": "info",
+                        "dflt": "",
+                        "editType": "plot",
+                        "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available. variables `count` and `probability`. Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\"."
+                    },
                     "role": "object",
                     "colorsrc": {
                         "valType": "string",
@@ -31251,6 +31889,14 @@
                             "cauto": false
                         },
                         "description": "Sets the lower bound of the color domain. Has an effect only if in `marker.color`is set to a numerical array. Value should have the same units as in `marker.color` and if set, `marker.cmax` must be set as well."
+                    },
+                    "cmid": {
+                        "valType": "number",
+                        "role": "info",
+                        "dflt": null,
+                        "editType": "calc",
+                        "impliedEdits": {},
+                        "description": "Sets the mid-point of the color domain by scaling `marker.cmin` and/or `marker.cmax` to be equidistant to this point. Has an effect only if in `marker.color`is set to a numerical array. Value should have the same units as in `marker.color`. Has no effect when `marker.cauto` is `false`."
                     },
                     "autocolorscale": {
                         "valType": "boolean",
@@ -31834,7 +32480,7 @@
                         "role": "style",
                         "editType": "calc"
                     },
-                    "description": "Sets the icon text font. Has an effect only when `type` is set to *symbol*.",
+                    "description": "Sets the icon text font (color=mapbox.layer.paint.text-color, size=mapbox.layer.layout.text-size). Has an effect only when `type` is set to *symbol*.",
                     "editType": "calc",
                     "role": "object"
                 },
@@ -31938,9 +32584,9 @@
                     "valType": "string",
                     "role": "info",
                     "dflt": "",
-                    "arrayOk": true,
                     "editType": "calc",
-                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\"."
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\".",
+                    "arrayOk": true
                 },
                 "subplot": {
                     "valType": "subplotid",
@@ -32340,6 +32986,19 @@
                         "description": "The shown name of the node.",
                         "editType": "calc"
                     },
+                    "groups": {
+                        "valType": "info_array",
+                        "dimensions": 2,
+                        "freeLength": true,
+                        "dflt": [],
+                        "items": {
+                            "valType": "number",
+                            "editType": "calc"
+                        },
+                        "role": "info",
+                        "description": "Groups of nodes. Each group is defined by an array with the indices of the nodes it contains. Multiple groups can be specified.",
+                        "editType": "calc"
+                    },
                     "color": {
                         "valType": "color",
                         "role": "style",
@@ -32503,9 +33162,9 @@
                         "valType": "string",
                         "role": "info",
                         "dflt": "",
-                        "arrayOk": true,
                         "editType": "calc",
-                        "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available. variables `value` and `label`. Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\"."
+                        "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available. variables `value` and `label`. Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\".",
+                        "arrayOk": true
                     },
                     "description": "The nodes of the Sankey plot.",
                     "editType": "calc",
@@ -32703,13 +33362,74 @@
                         "valType": "string",
                         "role": "info",
                         "dflt": "",
-                        "arrayOk": true,
                         "editType": "calc",
-                        "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available. variables `value` and `label`. Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\"."
+                        "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available. variables `value` and `label`. Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\".",
+                        "arrayOk": true
+                    },
+                    "colorscales": {
+                        "items": {
+                            "concentrationscales": {
+                                "editType": "calc",
+                                "label": {
+                                    "valType": "string",
+                                    "role": "info",
+                                    "editType": "calc",
+                                    "description": "The label of the links to color based on their concentration within a flow.",
+                                    "dflt": ""
+                                },
+                                "cmax": {
+                                    "valType": "number",
+                                    "role": "info",
+                                    "editType": "calc",
+                                    "dflt": 1,
+                                    "description": "Sets the upper bound of the color domain."
+                                },
+                                "cmin": {
+                                    "valType": "number",
+                                    "role": "info",
+                                    "editType": "calc",
+                                    "dflt": 0,
+                                    "description": "Sets the lower bound of the color domain."
+                                },
+                                "colorscale": {
+                                    "valType": "colorscale",
+                                    "role": "style",
+                                    "editType": "calc",
+                                    "dflt": [
+                                        [
+                                            0,
+                                            "white"
+                                        ],
+                                        [
+                                            1,
+                                            "black"
+                                        ]
+                                    ],
+                                    "impliedEdits": {
+                                        "autocolorscale": false
+                                    },
+                                    "description": "Sets the colorscale. The colorscale must be an array containing arrays mapping a normalized value to an rgb, rgba, hex, hsl, hsv, or named color string. At minimum, a mapping for the lowest (0) and highest (1) values are required. For example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the bounds of the colorscale in color space, use`cmin` and `cmax`. Alternatively, `colorscale` may be a palette name string of the following list: Greys,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth,Electric,Viridis,Cividis."
+                                },
+                                "name": {
+                                    "valType": "string",
+                                    "role": "style",
+                                    "editType": "calc",
+                                    "description": "When used in a template, named items are created in the output figure in addition to any items the figure already has in this array. You can modify these items in the output figure by making your own item with `templateitemname` matching this `name` alongside your modifications (including `visible: false` or `enabled: false` to hide it). Has no effect outside of a template."
+                                },
+                                "templateitemname": {
+                                    "valType": "string",
+                                    "role": "info",
+                                    "editType": "calc",
+                                    "description": "Used to refer to a named item in this array in the template. Named items from the template will be created even without a matching item in the input figure, but you can modify one by making an item with `templateitemname` matching its `name`, alongside your modifications (including `visible: false` or `enabled: false` to hide it). If there is no template or no matching item, this item will be hidden unless you explicitly show it with `visible: true`."
+                                },
+                                "role": "object"
+                            }
+                        },
+                        "role": "object"
                     },
                     "description": "The links of the Sankey plot.",
-                    "editType": "calc",
                     "role": "object",
+                    "editType": "calc",
                     "labelsrc": {
                         "valType": "string",
                         "role": "info",
@@ -35150,13 +35870,13 @@
                 "a": {
                     "valType": "data_array",
                     "editType": "calc",
-                    "description": "Sets the quantity of component `a` in each data point. If `a`, `b`, and `c` are all provided, they need not be normalized, only the relative values matter. If only two arrays are provided they must be normalized to match `ternary<i>.sum`.",
+                    "description": "Sets the a-axis coordinates.",
                     "role": "data"
                 },
                 "b": {
                     "valType": "data_array",
                     "editType": "calc",
-                    "description": "Sets the quantity of component `a` in each data point. If `a`, `b`, and `c` are all provided, they need not be normalized, only the relative values matter. If only two arrays are provided they must be normalized to match `ternary<i>.sum`.",
+                    "description": "Sets the b-axis coordinates.",
                     "role": "data"
                 },
                 "mode": {
@@ -35180,7 +35900,15 @@
                     "dflt": "",
                     "arrayOk": true,
                     "editType": "calc",
-                    "description": "Sets text elements associated with each (a,b,c) point. If a single string, the same string appears over all the data points. If an array of strings, the items are mapped in order to the the data points in (a,b,c)."
+                    "description": "Sets text elements associated with each (a,b) point. If a single string, the same string appears over all the data points. If an array of strings, the items are mapped in order to the the data points in (a,b). If trace `hoverinfo` contains a *text* flag and *hovertext* is not set, these elements will be seen in the hover labels."
+                },
+                "hovertext": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "arrayOk": true,
+                    "editType": "style",
+                    "description": "Sets hover text elements associated with each (a,b) point. If a single string, the same string appears over all the data points. If an array of strings, the items are mapped in order to the the data points in (a,b). To be seen, trace `hoverinfo` must contain a *text* flag."
                 },
                 "line": {
                     "color": {
@@ -35658,6 +36386,14 @@
                             },
                             "description": "Sets the upper bound of the color domain. Has an effect only if in `marker.line.color`is set to a numerical array. Value should have the same units as in `marker.line.color` and if set, `marker.line.cmin` must be set as well."
                         },
+                        "cmid": {
+                            "valType": "number",
+                            "role": "info",
+                            "dflt": null,
+                            "editType": "calc",
+                            "impliedEdits": {},
+                            "description": "Sets the mid-point of the color domain by scaling `marker.line.cmin` and/or `marker.line.cmax` to be equidistant to this point. Has an effect only if in `marker.line.color`is set to a numerical array. Value should have the same units as in `marker.line.color`. Has no effect when `marker.line.cauto` is `false`."
+                        },
                         "colorscale": {
                             "valType": "colorscale",
                             "role": "style",
@@ -35769,6 +36505,14 @@
                             "cauto": false
                         },
                         "description": "Sets the upper bound of the color domain. Has an effect only if in `marker.color`is set to a numerical array. Value should have the same units as in `marker.color` and if set, `marker.cmin` must be set as well."
+                    },
+                    "cmid": {
+                        "valType": "number",
+                        "role": "info",
+                        "dflt": null,
+                        "editType": "calc",
+                        "impliedEdits": {},
+                        "description": "Sets the mid-point of the color domain by scaling `marker.cmin` and/or `marker.cmax` to be equidistant to this point. Has an effect only if in `marker.color`is set to a numerical array. Value should have the same units as in `marker.color`. Has no effect when `marker.cauto` is `false`."
                     },
                     "colorscale": {
                         "valType": "colorscale",
@@ -36493,6 +37237,14 @@
                     "editType": "style",
                     "description": "Do the hover effects highlight individual points (markers or line points) or do they highlight filled regions? If the fill is *toself* or *tonext* and there are no markers or text, then the default is *fills*, otherwise it is *points*."
                 },
+                "hovertemplate": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "none",
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\".",
+                    "arrayOk": true
+                },
                 "xaxis": {
                     "valType": "subplotid",
                     "role": "info",
@@ -36537,6 +37289,12 @@
                     "description": "Sets the source reference on plot.ly for  text .",
                     "editType": "none"
                 },
+                "hovertextsrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertext .",
+                    "editType": "none"
+                },
                 "textpositionsrc": {
                     "valType": "string",
                     "role": "info",
@@ -36547,6 +37305,12 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  hoverinfo .",
+                    "editType": "none"
+                },
+                "hovertemplatesrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertemplate .",
                     "editType": "none"
                 }
             }
@@ -36843,6 +37607,12 @@
                     "description": "Sets the text elements associated with each z value.",
                     "role": "data"
                 },
+                "hovertext": {
+                    "valType": "data_array",
+                    "editType": "calc",
+                    "description": "Same as `text`.",
+                    "role": "data"
+                },
                 "transpose": {
                     "valType": "boolean",
                     "dflt": false,
@@ -37099,6 +37869,14 @@
                         "zauto": false
                     },
                     "description": "Sets the upper bound of the color domain. Value should have the same units as in `z` and if set, `zmin` must be set as well."
+                },
+                "zmid": {
+                    "valType": "number",
+                    "role": "info",
+                    "dflt": null,
+                    "editType": "calc",
+                    "impliedEdits": {},
+                    "description": "Sets the mid-point of the color domain by scaling `zmin` and/or `zmax` to be equidistant to this point. Value should have the same units as in `z`. Has no effect when `zauto` is `false`."
                 },
                 "colorscale": {
                     "valType": "colorscale",
@@ -37681,6 +38459,12 @@
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  text .",
                     "editType": "none"
+                },
+                "hovertextsrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertext .",
+                    "editType": "none"
                 }
             }
         },
@@ -37960,6 +38744,14 @@
                     "editType": "calc",
                     "description": "Sets hover text elements associated with each sample point. If a single string, the same string appears over all the data points. If an array of string, the items are mapped in order to this trace's sample points."
                 },
+                "hovertext": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "arrayOk": true,
+                    "editType": "calc",
+                    "description": "Same as `text`."
+                },
                 "tickwidth": {
                     "valType": "number",
                     "min": 0,
@@ -38156,6 +38948,12 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  text .",
+                    "editType": "none"
+                },
+                "hovertextsrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertext .",
                     "editType": "none"
                 }
             }
@@ -38400,6 +39198,14 @@
                     "editType": "calc",
                     "description": "Sets hover text elements associated with each sample point. If a single string, the same string appears over all the data points. If an array of string, the items are mapped in order to this trace's sample points."
                 },
+                "hovertext": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "arrayOk": true,
+                    "editType": "calc",
+                    "description": "Same as `text`."
+                },
                 "whiskerwidth": {
                     "valType": "number",
                     "min": 0,
@@ -38596,6 +39402,12 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  text .",
+                    "editType": "none"
+                },
+                "hovertextsrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertext .",
                     "editType": "none"
                 }
             },
@@ -39864,6 +40676,14 @@
                             },
                             "description": "Sets the upper bound of the color domain. Has an effect only if in `marker.line.color`is set to a numerical array. Value should have the same units as in `marker.line.color` and if set, `marker.line.cmin` must be set as well."
                         },
+                        "cmid": {
+                            "valType": "number",
+                            "role": "info",
+                            "dflt": null,
+                            "editType": "calc",
+                            "impliedEdits": {},
+                            "description": "Sets the mid-point of the color domain by scaling `marker.line.cmin` and/or `marker.line.cmax` to be equidistant to this point. Has an effect only if in `marker.line.color`is set to a numerical array. Value should have the same units as in `marker.line.color`. Has no effect when `marker.line.cauto` is `false`."
+                        },
                         "colorscale": {
                             "valType": "colorscale",
                             "role": "style",
@@ -39976,6 +40796,14 @@
                             "cauto": false
                         },
                         "description": "Sets the upper bound of the color domain. Has an effect only if in `marker.color`is set to a numerical array. Value should have the same units as in `marker.color` and if set, `marker.cmin` must be set as well."
+                    },
+                    "cmid": {
+                        "valType": "number",
+                        "role": "info",
+                        "dflt": null,
+                        "editType": "calc",
+                        "impliedEdits": {},
+                        "description": "Sets the mid-point of the color domain by scaling `marker.cmin` and/or `marker.cmax` to be equidistant to this point. Has an effect only if in `marker.color`is set to a numerical array. Value should have the same units as in `marker.color`. Has no effect when `marker.cauto` is `false`."
                     },
                     "colorscale": {
                         "valType": "colorscale",
@@ -40158,9 +40986,9 @@
                     "valType": "string",
                     "role": "info",
                     "dflt": "",
-                    "arrayOk": true,
                     "editType": "none",
-                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\"."
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\".",
+                    "arrayOk": true
                 },
                 "selected": {
                     "marker": {
@@ -40588,9 +41416,9 @@
                     "valType": "string",
                     "role": "info",
                     "dflt": "",
-                    "arrayOk": true,
                     "editType": "none",
-                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\"."
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\".",
+                    "arrayOk": true
                 },
                 "line": {
                     "color": {
@@ -40683,6 +41511,14 @@
                             "cauto": false
                         },
                         "description": "Sets the upper bound of the color domain. Has an effect only if in `marker.color`is set to a numerical array. Value should have the same units as in `marker.color` and if set, `marker.cmin` must be set as well."
+                    },
+                    "cmid": {
+                        "valType": "number",
+                        "role": "info",
+                        "dflt": null,
+                        "editType": "calc",
+                        "impliedEdits": {},
+                        "description": "Sets the mid-point of the color domain by scaling `marker.cmin` and/or `marker.cmax` to be equidistant to this point. Has an effect only if in `marker.color`is set to a numerical array. Value should have the same units as in `marker.color`. Has no effect when `marker.cauto` is `false`."
                     },
                     "colorscale": {
                         "valType": "colorscale",
@@ -41586,6 +42422,14 @@
                             },
                             "description": "Sets the upper bound of the color domain. Has an effect only if in `marker.line.color`is set to a numerical array. Value should have the same units as in `marker.line.color` and if set, `marker.line.cmin` must be set as well."
                         },
+                        "cmid": {
+                            "valType": "number",
+                            "role": "info",
+                            "dflt": null,
+                            "editType": "calc",
+                            "impliedEdits": {},
+                            "description": "Sets the mid-point of the color domain by scaling `marker.line.cmin` and/or `marker.line.cmax` to be equidistant to this point. Has an effect only if in `marker.line.color`is set to a numerical array. Value should have the same units as in `marker.line.color`. Has no effect when `marker.line.cauto` is `false`."
+                        },
                         "colorscale": {
                             "valType": "colorscale",
                             "role": "style",
@@ -42193,6 +43037,14 @@
                     "editType": "calc",
                     "description": "Sets hover text elements associated with each bar. If a single string, the same string appears over all bars. If an array of string, the items are mapped in order to the this trace's coordinates."
                 },
+                "hovertext": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "arrayOk": true,
+                    "editType": "style",
+                    "description": "Same as `text`."
+                },
                 "marker": {
                     "line": {
                         "width": {
@@ -42240,6 +43092,14 @@
                                 "cauto": false
                             },
                             "description": "Sets the upper bound of the color domain. Has an effect only if in `marker.line.color`is set to a numerical array. Value should have the same units as in `marker.line.color` and if set, `marker.line.cmin` must be set as well."
+                        },
+                        "cmid": {
+                            "valType": "number",
+                            "role": "info",
+                            "dflt": null,
+                            "editType": "calc",
+                            "impliedEdits": {},
+                            "description": "Sets the mid-point of the color domain by scaling `marker.line.cmin` and/or `marker.line.cmax` to be equidistant to this point. Has an effect only if in `marker.line.color`is set to a numerical array. Value should have the same units as in `marker.line.color`. Has no effect when `marker.line.cauto` is `false`."
                         },
                         "colorscale": {
                             "valType": "colorscale",
@@ -42315,6 +43175,14 @@
                             "cauto": false
                         },
                         "description": "Sets the upper bound of the color domain. Has an effect only if in `marker.color`is set to a numerical array. Value should have the same units as in `marker.color` and if set, `marker.cmin` must be set as well."
+                    },
+                    "cmid": {
+                        "valType": "number",
+                        "role": "info",
+                        "dflt": null,
+                        "editType": "calc",
+                        "impliedEdits": {},
+                        "description": "Sets the mid-point of the color domain by scaling `marker.cmin` and/or `marker.cmax` to be equidistant to this point. Has an effect only if in `marker.color`is set to a numerical array. Value should have the same units as in `marker.color`. Has no effect when `marker.cauto` is `false`."
                     },
                     "colorscale": {
                         "valType": "colorscale",
@@ -42889,9 +43757,9 @@
                     "valType": "string",
                     "role": "info",
                     "dflt": "",
-                    "arrayOk": true,
                     "editType": "none",
-                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\"."
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". See https://github.com/d3/d3-format/blob/master/README.md#locale_format for details on the formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\".",
+                    "arrayOk": true
                 },
                 "selected": {
                     "marker": {
@@ -43010,6 +43878,12 @@
                     "valType": "string",
                     "role": "info",
                     "description": "Sets the source reference on plot.ly for  text .",
+                    "editType": "none"
+                },
+                "hovertextsrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  hovertext .",
                     "editType": "none"
                 },
                 "hoverinfosrc": {
@@ -44110,7 +44984,7 @@
             "meta": {
                 "valType": "data_array",
                 "editType": "plot",
-                "description": "Assigns extra meta information that can be used in various `text` attributes. Attributes such as the graph, axis and colorbar `title.text` and annotation `text` support `meta`. One can access `meta` fields using template strings: `%{meta[i]}` where `i` is the index of the `meta` item in question.",
+                "description": "Assigns extra meta information that can be used in various `text` attributes. Attributes such as the graph, axis and colorbar `title.text`, annotation `text` `trace.name` in legend items, `rangeselector`, `updatemenues` and `sliders` `label` text all support `meta`. One can access `meta` fields using template strings: `%{meta[i]}` where `i` is the index of the `meta` item in question.",
                 "role": "data"
             },
             "transition": {
@@ -44671,7 +45545,7 @@
                     ],
                     "role": "info",
                     "editType": "plot",
-                    "description": "If set to another axis id (e.g. `x2`, `y`), the range of this axis changes together with the range of the corresponding axis such that the scale of pixels per unit is in a constant ratio. Both axes are still zoomable, but when you zoom one, the other will zoom the same amount, keeping a fixed midpoint. `constrain` and `constraintoward` determine how we enforce the constraint. You can chain these, ie `yaxis: {scaleanchor: *x*}, xaxis2: {scaleanchor: *y*}` but you can only link axes of the same `type`. The linked axis can have the opposite letter (to constrain the aspect ratio) or the same letter (to match scales across subplots). Loops (`yaxis: {scaleanchor: *x*}, xaxis: {scaleanchor: *y*}` or longer) are redundant and the last constraint encountered will be ignored to avoid possible inconsistent constraints via `scaleratio`."
+                    "description": "If set to another axis id (e.g. `x2`, `y`), the range of this axis changes together with the range of the corresponding axis such that the scale of pixels per unit is in a constant ratio. Both axes are still zoomable, but when you zoom one, the other will zoom the same amount, keeping a fixed midpoint. `constrain` and `constraintoward` determine how we enforce the constraint. You can chain these, ie `yaxis: {scaleanchor: *x*}, xaxis2: {scaleanchor: *y*}` but you can only link axes of the same `type`. The linked axis can have the opposite letter (to constrain the aspect ratio) or the same letter (to match scales across subplots). Loops (`yaxis: {scaleanchor: *x*}, xaxis: {scaleanchor: *y*}` or longer) are redundant and the last constraint encountered will be ignored to avoid possible inconsistent constraints via `scaleratio`. Note that setting axes simultaneously in both a `scaleanchor` and a `matches` constraint is currently forbidden."
                 },
                 "scaleratio": {
                     "valType": "number",
@@ -44705,6 +45579,16 @@
                     "role": "info",
                     "editType": "plot",
                     "description": "If this axis needs to be compressed (either due to its own `scaleanchor` and `scaleratio` or those of the other axis), determines which direction we push the originally specified plot area. Options are *left*, *center* (default), and *right* for x axes, and *top*, *middle* (default), and *bottom* for y axes."
+                },
+                "matches": {
+                    "valType": "enumerated",
+                    "values": [
+                        "/^x([2-9]|[1-9][0-9]+)?$/",
+                        "/^y([2-9]|[1-9][0-9]+)?$/"
+                    ],
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "If set to another axis id (e.g. `x2`, `y`), the range of this axis will match the range of the corresponding axis in data-coordinates space. Moreover, matching axes share auto-range values, category lists and histogram auto-bins. Note that setting axes simultaneously in both a `scaleanchor` and a `matches` constraint is currently forbidden. Moreover, note that matching axes must have the same `type`."
                 },
                 "tickmode": {
                     "valType": "enumerated",
@@ -45744,7 +46628,7 @@
                     ],
                     "role": "info",
                     "editType": "plot",
-                    "description": "If set to another axis id (e.g. `x2`, `y`), the range of this axis changes together with the range of the corresponding axis such that the scale of pixels per unit is in a constant ratio. Both axes are still zoomable, but when you zoom one, the other will zoom the same amount, keeping a fixed midpoint. `constrain` and `constraintoward` determine how we enforce the constraint. You can chain these, ie `yaxis: {scaleanchor: *x*}, xaxis2: {scaleanchor: *y*}` but you can only link axes of the same `type`. The linked axis can have the opposite letter (to constrain the aspect ratio) or the same letter (to match scales across subplots). Loops (`yaxis: {scaleanchor: *x*}, xaxis: {scaleanchor: *y*}` or longer) are redundant and the last constraint encountered will be ignored to avoid possible inconsistent constraints via `scaleratio`."
+                    "description": "If set to another axis id (e.g. `x2`, `y`), the range of this axis changes together with the range of the corresponding axis such that the scale of pixels per unit is in a constant ratio. Both axes are still zoomable, but when you zoom one, the other will zoom the same amount, keeping a fixed midpoint. `constrain` and `constraintoward` determine how we enforce the constraint. You can chain these, ie `yaxis: {scaleanchor: *x*}, xaxis2: {scaleanchor: *y*}` but you can only link axes of the same `type`. The linked axis can have the opposite letter (to constrain the aspect ratio) or the same letter (to match scales across subplots). Loops (`yaxis: {scaleanchor: *x*}, xaxis: {scaleanchor: *y*}` or longer) are redundant and the last constraint encountered will be ignored to avoid possible inconsistent constraints via `scaleratio`. Note that setting axes simultaneously in both a `scaleanchor` and a `matches` constraint is currently forbidden."
                 },
                 "scaleratio": {
                     "valType": "number",
@@ -45778,6 +46662,16 @@
                     "role": "info",
                     "editType": "plot",
                     "description": "If this axis needs to be compressed (either due to its own `scaleanchor` and `scaleratio` or those of the other axis), determines which direction we push the originally specified plot area. Options are *left*, *center* (default), and *right* for x axes, and *top*, *middle* (default), and *bottom* for y axes."
+                },
+                "matches": {
+                    "valType": "enumerated",
+                    "values": [
+                        "/^x([2-9]|[1-9][0-9]+)?$/",
+                        "/^y([2-9]|[1-9][0-9]+)?$/"
+                    ],
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "If set to another axis id (e.g. `x2`, `y`), the range of this axis will match the range of the corresponding axis in data-coordinates space. Moreover, matching axes share auto-range values, category lists and histogram auto-bins. Note that setting axes simultaneously in both a `scaleanchor` and a `matches` constraint is currently forbidden. Moreover, note that matching axes must have the same `type`."
                 },
                 "tickmode": {
                     "valType": "enumerated",
@@ -47832,6 +48726,21 @@
                         },
                         "editType": "camera",
                         "description": "Sets the (x,y,z) components of the 'eye' camera vector. This vector determines the view point about the origin of this scene.",
+                        "role": "object"
+                    },
+                    "projection": {
+                        "type": {
+                            "valType": "enumerated",
+                            "role": "info",
+                            "values": [
+                                "perspective",
+                                "orthographic"
+                            ],
+                            "dflt": "perspective",
+                            "editType": "calc",
+                            "description": "Sets the projection type. The projection type could be either *perspective* or *orthographic*. The default is *perspective*."
+                        },
+                        "editType": "calc",
                         "role": "object"
                     },
                     "editType": "camera",
@@ -50728,21 +51637,21 @@
                     "valType": "number",
                     "dflt": 1,
                     "role": "info",
-                    "description": "Sets the zoom level of the map.",
+                    "description": "Sets the zoom level of the map (mapbox.zoom).",
                     "editType": "plot"
                 },
                 "bearing": {
                     "valType": "number",
                     "dflt": 0,
                     "role": "info",
-                    "description": "Sets the bearing angle of the map (in degrees counter-clockwise from North).",
+                    "description": "Sets the bearing angle of the map in degrees counter-clockwise from North (mapbox.bearing).",
                     "editType": "plot"
                 },
                 "pitch": {
                     "valType": "number",
                     "dflt": 0,
                     "role": "info",
-                    "description": "Sets the pitch angle of the map (in degrees, where *0* means perpendicular to the surface of the map).",
+                    "description": "Sets the pitch angle of the map (in degrees, where *0* means perpendicular to the surface of the map) (mapbox.pitch).",
                     "editType": "plot"
                 },
                 "layers": {
@@ -50769,14 +51678,14 @@
                             "source": {
                                 "valType": "any",
                                 "role": "info",
-                                "description": "Sets the source data for this layer. Source can be either a URL, a geojson object (with `sourcetype` set to *geojson*) or an array of tile URLS (with `sourcetype` set to *vector*).",
+                                "description": "Sets the source data for this layer (mapbox.layer.source). Source can be either a URL, a geojson object (with `sourcetype` set to *geojson*) or an array of tile URLS (with `sourcetype` set to *vector*).",
                                 "editType": "plot"
                             },
                             "sourcelayer": {
                                 "valType": "string",
                                 "dflt": "",
                                 "role": "info",
-                                "description": "Specifies the layer to use from a vector tile source. Required for *vector* source type that supports multiple layers.",
+                                "description": "Specifies the layer to use from a vector tile source (mapbox.layer.source-layer). Required for *vector* source type that supports multiple layers.",
                                 "editType": "plot"
                             },
                             "type": {
@@ -50789,7 +51698,7 @@
                                 ],
                                 "dflt": "circle",
                                 "role": "info",
-                                "description": "Sets the layer type. Support for *raster*, *background* types is coming soon. Note that *line* and *fill* are not compatible with Point GeoJSON geometries.",
+                                "description": "Sets the layer type (mapbox.layer.type). Support for *raster*, *background* types is coming soon. Note that *line* and *fill* are not compatible with Point GeoJSON geometries.",
                                 "editType": "plot"
                             },
                             "below": {
@@ -50803,7 +51712,7 @@
                                 "valType": "color",
                                 "dflt": "#444",
                                 "role": "style",
-                                "description": "Sets the primary layer color. If `type` is *circle*, color corresponds to the circle color If `type` is *line*, color corresponds to the line color If `type` is *fill*, color corresponds to the fill color If `type` is *symbol*, color corresponds to the icon color",
+                                "description": "Sets the primary layer color. If `type` is *circle*, color corresponds to the circle color (mapbox.layer.paint.circle-color) If `type` is *line*, color corresponds to the line color (mapbox.layer.paint.line-color) If `type` is *fill*, color corresponds to the fill color (mapbox.layer.paint.fill-color) If `type` is *symbol*, color corresponds to the icon color (mapbox.layer.paint.icon-color)",
                                 "editType": "plot"
                             },
                             "opacity": {
@@ -50812,7 +51721,25 @@
                                 "max": 1,
                                 "dflt": 1,
                                 "role": "info",
-                                "description": "Sets the opacity of the layer.",
+                                "description": "Sets the opacity of the layer. If `type` is *circle*, opacity corresponds to the circle opacity (mapbox.layer.paint.circle-opacity) If `type` is *line*, opacity corresponds to the line opacity (mapbox.layer.paint.line-opacity) If `type` is *fill*, opacity corresponds to the fill opacity (mapbox.layer.paint.fill-opacity) If `type` is *symbol*, opacity corresponds to the icon/text opacity (mapbox.layer.paint.text-opacity)",
+                                "editType": "plot"
+                            },
+                            "minzoom": {
+                                "valType": "number",
+                                "min": 0,
+                                "max": 24,
+                                "dflt": 0,
+                                "role": "info",
+                                "description": "Sets the minimum zoom level (mapbox.layer.minzoom). At zoom levels less than the minzoom, the layer will be hidden.",
+                                "editType": "plot"
+                            },
+                            "maxzoom": {
+                                "valType": "number",
+                                "min": 0,
+                                "max": 24,
+                                "dflt": 24,
+                                "role": "info",
+                                "description": "Sets the maximum zoom level (mapbox.layer.maxzoom). At zoom levels equal to or greater than the maxzoom, the layer will be hidden.",
                                 "editType": "plot"
                             },
                             "circle": {
@@ -50820,7 +51747,7 @@
                                     "valType": "number",
                                     "dflt": 15,
                                     "role": "style",
-                                    "description": "Sets the circle radius. Has an effect only when `type` is set to *circle*.",
+                                    "description": "Sets the circle radius (mapbox.layer.paint.circle-radius). Has an effect only when `type` is set to *circle*.",
                                     "editType": "plot"
                                 },
                                 "editType": "plot",
@@ -50831,18 +51758,30 @@
                                     "valType": "number",
                                     "dflt": 2,
                                     "role": "style",
-                                    "description": "Sets the line width. Has an effect only when `type` is set to *line*.",
+                                    "description": "Sets the line width (mapbox.layer.paint.line-width). Has an effect only when `type` is set to *line*.",
+                                    "editType": "plot"
+                                },
+                                "dash": {
+                                    "valType": "data_array",
+                                    "role": "data",
+                                    "description": "Sets the length of dashes and gaps (mapbox.layer.paint.line-dasharray). Has an effect only when `type` is set to *line*.",
                                     "editType": "plot"
                                 },
                                 "editType": "plot",
-                                "role": "object"
+                                "role": "object",
+                                "dashsrc": {
+                                    "valType": "string",
+                                    "role": "info",
+                                    "description": "Sets the source reference on plot.ly for  dash .",
+                                    "editType": "none"
+                                }
                             },
                             "fill": {
                                 "outlinecolor": {
                                     "valType": "color",
                                     "dflt": "#444",
                                     "role": "style",
-                                    "description": "Sets the fill outline color. Has an effect only when `type` is set to *fill*.",
+                                    "description": "Sets the fill outline color (mapbox.layer.paint.fill-outline-color). Has an effect only when `type` is set to *fill*.",
                                     "editType": "plot"
                                 },
                                 "editType": "plot",
@@ -50853,21 +51792,33 @@
                                     "valType": "string",
                                     "dflt": "marker",
                                     "role": "style",
-                                    "description": "Sets the symbol icon image. Full list: https://www.mapbox.com/maki-icons/",
+                                    "description": "Sets the symbol icon image (mapbox.layer.layout.icon-image). Full list: https://www.mapbox.com/maki-icons/",
                                     "editType": "plot"
                                 },
                                 "iconsize": {
                                     "valType": "number",
                                     "dflt": 10,
                                     "role": "style",
-                                    "description": "Sets the symbol icon size. Has an effect only when `type` is set to *symbol*.",
+                                    "description": "Sets the symbol icon size (mapbox.layer.layout.icon-size). Has an effect only when `type` is set to *symbol*.",
                                     "editType": "plot"
                                 },
                                 "text": {
                                     "valType": "string",
                                     "dflt": "",
                                     "role": "info",
-                                    "description": "Sets the symbol text.",
+                                    "description": "Sets the symbol text (mapbox.layer.layout.text-field).",
+                                    "editType": "plot"
+                                },
+                                "placement": {
+                                    "valType": "enumerated",
+                                    "values": [
+                                        "point",
+                                        "line",
+                                        "line-center"
+                                    ],
+                                    "dflt": "point",
+                                    "role": "info",
+                                    "description": "Sets the symbol and/or text placement (mapbox.layer.layout.symbol-placement). If `placement` is *point*, the label is placed where the geometry is located If `placement` is *line*, the label is placed along the line of the geometry If `placement` is *line-center*, the label is placed on the center of the geometry",
                                     "editType": "plot"
                                 },
                                 "textfont": {
@@ -50891,7 +51842,7 @@
                                         "role": "style",
                                         "editType": "plot"
                                     },
-                                    "description": "Sets the icon text font. Has an effect only when `type` is set to *symbol*.",
+                                    "description": "Sets the icon text font (color=mapbox.layer.paint.text-color, size=mapbox.layer.layout.text-size). Has an effect only when `type` is set to *symbol*.",
                                     "editType": "plot",
                                     "role": "object"
                                 },
