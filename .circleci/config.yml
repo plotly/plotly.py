@@ -437,12 +437,7 @@ workflows:
   version: 2
   dev_build:
     jobs:
-      - plotlyjs_dev_build:
-          filters:
-            branches:
-              only:
-                - master
-                - bleeding_edge
+      - plotlyjs_dev_build
 
   build:
     jobs:
