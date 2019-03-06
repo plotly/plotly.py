@@ -102,7 +102,9 @@ def _build_resize_script(plotdivid, plotly_root='Plotly'):
     resize_script = (
         '<script type="text/javascript">'
         'window.addEventListener("resize", function(){{'
-        '{plotly_root}.Plots.resize(document.getElementById("{id}"));}});'
+        'if (document.getElementById("{id}")) {{'
+        '{plotly_root}.Plots.resize(document.getElementById("{id}"));'
+        '}};}})'
         '</script>'
     ).format(plotly_root=plotly_root, id=plotdivid)
     return resize_script
@@ -289,14 +291,13 @@ def init_notebook_mode(connected=False):
             '{win_config}'
             '{mathjax_config}'
             '<script type=\'text/javascript\'>'
-            'if(!window._Plotly){{'
+            'require.undef("plotly");'
             'define(\'plotly\', function(require, exports, module) {{'
             '{script}'
             '}});'
             'require([\'plotly\'], function(Plotly) {{'
             'window._Plotly = Plotly;'
             '}});'
-            '}}'
             '</script>'
             '').format(script=get_plotlyjs(),
                        win_config=_window_plotly_config,
@@ -356,12 +357,14 @@ def _plot_html(figure_or_data, config, validate, default_width,
             animate = ''
 
         script = '''
+    if (document.getElementById("{id}")) {{
         Plotly.plot(
             '{id}',
             {data},
             {layout},
             {config}
         ).then(function () {add_frames}){animate}
+    }}
         '''.format(
             id=plotdivid,
             data=jdata,
@@ -373,7 +376,11 @@ def _plot_html(figure_or_data, config, validate, default_width,
             animate=animate
         )
     else:
-        script = 'Plotly.newPlot("{id}", {data}, {layout}, {config})'.format(
+        script = """
+if (document.getElementById("{id}")) {{
+    Plotly.newPlot("{id}", {data}, {layout}, {config}); 
+}}
+""".format(
             id=plotdivid,
             data=jdata,
             layout=jlayout,
