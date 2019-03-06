@@ -273,6 +273,14 @@ class Sankey(BaseTraceType):
                     each `link`. If `link.color` is omitted, then
                     by default, a translucent grey link will be
                     used.
+                concentrationscaless
+                    plotly.graph_objs.sankey.link.Concentrationscal
+                    es instance or dict with compatible properties
+                concentrationscalesdefaults
+                    When used in a template (as layout.template.dat
+                    a.sankey.link.concentrationscalesdefaults),
+                    sets the default property values to use for
+                    elements of sankey.link.colorscales
                 colorsrc
                     Sets the source reference on plot.ly for  color
                     .
@@ -393,6 +401,10 @@ class Sankey(BaseTraceType):
                 colorsrc
                     Sets the source reference on plot.ly for  color
                     .
+                groups
+                    Groups of nodes. Each group is defined by an
+                    array with the indices of the nodes it
+                    contains. Multiple groups can be specified.
                 hoverinfo
                     Determines which trace information appear when
                     hovering nodes. If `none` or `skip` are set, no

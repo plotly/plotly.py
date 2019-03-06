@@ -149,6 +149,16 @@ class XAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the axis line color.
             linewidth
                 Sets the width (in px) of the axis line.
+            matches
+                If set to another axis id (e.g. `x2`, `y`), the
+                range of this axis will match the range of the
+                corresponding axis in data-coordinates space.
+                Moreover, matching axes share auto-range
+                values, category lists and histogram auto-bins.
+                Note that setting axes simultaneously in both a
+                `scaleanchor` and a `matches` constraint is
+                currently forbidden. Moreover, note that
+                matching axes must have the same `type`.
             mirror
                 Determines if the axis lines or/and ticks are
                 mirrored to the opposite side of the plotting
@@ -220,7 +230,9 @@ class XAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 {scaleanchor: *y*}` or longer) are redundant
                 and the last constraint encountered will be
                 ignored to avoid possible inconsistent
-                constraints via `scaleratio`.
+                constraints via `scaleratio`. Note that setting
+                axes simultaneously in both a `scaleanchor` and
+                a `matches` constraint is currently forbidden.
             scaleratio
                 If this axis is linked to another by
                 `scaleanchor`, this determines the pixel to

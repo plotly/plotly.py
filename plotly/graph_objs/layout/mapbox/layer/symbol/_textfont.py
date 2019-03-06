@@ -145,8 +145,9 @@ class Textfont(BaseLayoutHierarchyType):
         """
         Construct a new Textfont object
         
-        Sets the icon text font. Has an effect only when `type` is set
-        to "symbol".
+        Sets the icon text font (color=mapbox.layer.paint.text-color,
+        size=mapbox.layer.layout.text-size). Has an effect only when
+        `type` is set to "symbol".
 
         Parameters
         ----------

@@ -283,6 +283,41 @@ class Parcats(BaseTraceType):
     def hoveron(self, val):
         self['hoveron'] = val
 
+    # hovertemplate
+    # -------------
+    @property
+    def hovertemplate(self):
+        """
+        Template string used for rendering the information that appear
+        on hover box. Note that this will override `hoverinfo`.
+        Variables are inserted using %{variable}, for example "y:
+        %{y}". Numbers are formatted using d3-format's syntax
+        %{variable:d3-format}, for example "Price: %{y:$.2f}". See http
+        s://github.com/d3/d3-format/blob/master/README.md#locale_format
+        for details on the formatting syntax. The variables available
+        in `hovertemplate` are the ones emitted as event data described
+        at this link https://plot.ly/javascript/plotlyjs-events/#event-
+        data. Additionally, every attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        variables `count`, `probability`, `category`, `categorycount`,
+        `colorcount` and `bandcolorcount`. Anything contained in tag
+        `<extra>` is displayed in the secondary box, for example
+        "<extra>{fullData.name}</extra>".
+    
+        The 'hovertemplate' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['hovertemplate']
+
+    @hovertemplate.setter
+    def hovertemplate(self, val):
+        self['hovertemplate'] = val
+
     # labelfont
     # ---------
     @property
@@ -365,6 +400,14 @@ class Parcats(BaseTraceType):
                     numerical array. Value should have the same
                     units as in `line.color` and if set,
                     `line.cmin` must be set as well.
+                cmid
+                    Sets the mid-point of the color domain by
+                    scaling `line.cmin` and/or `line.cmax` to be
+                    equidistant to this point. Has an effect only
+                    if in `line.color`is set to a numerical array.
+                    Value should have the same units as in
+                    `line.color`. Has no effect when `line.cauto`
+                    is `false`.
                 cmin
                     Sets the lower bound of the color domain. Has
                     an effect only if in `line.color`is set to a
@@ -399,6 +442,26 @@ class Parcats(BaseTraceType):
                 colorsrc
                     Sets the source reference on plot.ly for  color
                     .
+                hovertemplate
+                    Template string used for rendering the
+                    information that appear on hover box. Note that
+                    this will override `hoverinfo`. Variables are
+                    inserted using %{variable}, for example "y:
+                    %{y}". Numbers are formatted using d3-format's
+                    syntax %{variable:d3-format}, for example
+                    "Price: %{y:$.2f}". See https://github.com/d3/d
+                    3-format/blob/master/README.md#locale_format
+                    for details on the formatting syntax. The
+                    variables available in `hovertemplate` are the
+                    ones emitted as event data described at this
+                    link https://plot.ly/javascript/plotlyjs-
+                    events/#event-data. Additionally, every
+                    attributes that can be specified per-point (the
+                    ones that are `arrayOk: true`) are available.
+                    variables `count` and `probability`. Anything
+                    contained in tag `<extra>` is displayed in the
+                    secondary box, for example
+                    "<extra>{fullData.name}</extra>".
                 reversescale
                     Reverses the color mapping if true. Has an
                     effect only if in `line.color`is set to a
@@ -681,6 +744,25 @@ class Parcats(BaseTraceType):
             per color per category. If `dimension`, hover
             interactions take place across all categories per
             dimension.
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available. variables `count`, `probability`,
+            `category`, `categorycount`, `colorcount` and
+            `bandcolorcount`. Anything contained in tag `<extra>`
+            is displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>".
         labelfont
             Sets the font for the `dimension` labels.
         line
@@ -740,6 +822,7 @@ class Parcats(BaseTraceType):
         domain=None,
         hoverinfo=None,
         hoveron=None,
+        hovertemplate=None,
         labelfont=None,
         line=None,
         name=None,
@@ -801,6 +884,25 @@ class Parcats(BaseTraceType):
             per color per category. If `dimension`, hover
             interactions take place across all categories per
             dimension.
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available. variables `count`, `probability`,
+            `category`, `categorycount`, `colorcount` and
+            `bandcolorcount`. Anything contained in tag `<extra>`
+            is displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>".
         labelfont
             Sets the font for the `dimension` labels.
         line
@@ -888,6 +990,7 @@ an instance of plotly.graph_objs.Parcats"""
         self._validators['domain'] = v_parcats.DomainValidator()
         self._validators['hoverinfo'] = v_parcats.HoverinfoValidator()
         self._validators['hoveron'] = v_parcats.HoveronValidator()
+        self._validators['hovertemplate'] = v_parcats.HovertemplateValidator()
         self._validators['labelfont'] = v_parcats.LabelfontValidator()
         self._validators['line'] = v_parcats.LineValidator()
         self._validators['name'] = v_parcats.NameValidator()
@@ -919,6 +1022,9 @@ an instance of plotly.graph_objs.Parcats"""
         self['hoverinfo'] = hoverinfo if hoverinfo is not None else _v
         _v = arg.pop('hoveron', None)
         self['hoveron'] = hoveron if hoveron is not None else _v
+        _v = arg.pop('hovertemplate', None)
+        self['hovertemplate'
+            ] = hovertemplate if hovertemplate is not None else _v
         _v = arg.pop('labelfont', None)
         self['labelfont'] = labelfont if labelfont is not None else _v
         _v = arg.pop('line', None)

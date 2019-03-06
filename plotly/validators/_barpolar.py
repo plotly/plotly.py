@@ -67,6 +67,11 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
             hovertemplatesrc
                 Sets the source reference on plot.ly for
                 hovertemplate .
+            hovertext
+                Same as `text`.
+            hovertextsrc
+                Sets the source reference on plot.ly for
+                hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during

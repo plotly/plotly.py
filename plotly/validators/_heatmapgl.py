@@ -192,6 +192,12 @@ class HeatmapglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the upper bound of the color domain. Value
                 should have the same units as in `z` and if
                 set, `zmin` must be set as well.
+            zmid
+                Sets the mid-point of the color domain by
+                scaling `zmin` and/or `zmax` to be equidistant
+                to this point. Value should have the same units
+                as in `z`. Has no effect when `zauto` is
+                `false`.
             zmin
                 Sets the lower bound of the color domain. Value
                 should have the same units as in `z` and if

@@ -23,6 +23,7 @@ from ._selected import SelectedValidator
 from ._pointpos import PointposValidator
 from ._orientation import OrientationValidator
 from ._opacity import OpacityValidator
+from ._offsetgroup import OffsetgroupValidator
 from ._notchwidth import NotchwidthValidator
 from ._notched import NotchedValidator
 from ._name import NameValidator
@@ -32,6 +33,8 @@ from ._legendgroup import LegendgroupValidator
 from ._jitter import JitterValidator
 from ._idssrc import IdssrcValidator
 from ._ids import IdsValidator
+from ._hovertextsrc import HovertextsrcValidator
+from ._hovertext import HovertextValidator
 from ._hoveron import HoveronValidator
 from ._hoverlabel import HoverlabelValidator
 from ._hoverinfosrc import HoverinfosrcValidator
@@ -41,3 +44,4 @@ from ._customdatasrc import CustomdatasrcValidator
 from ._customdata import CustomdataValidator
 from ._boxpoints import BoxpointsValidator
 from ._boxmean import BoxmeanValidator
+from ._alignmentgroup import AlignmentgroupValidator

@@ -1,5 +1,6 @@
 from ._zsrc import ZsrcValidator
 from ._zmin import ZminValidator
+from ._zmid import ZmidValidator
 from ._zmax import ZmaxValidator
 from ._zhoverformat import ZhoverformatValidator
 from ._zauto import ZautoValidator
@@ -32,6 +33,8 @@ from ._line import LineValidator
 from ._legendgroup import LegendgroupValidator
 from ._idssrc import IdssrcValidator
 from ._ids import IdsValidator
+from ._hovertemplatesrc import HovertemplatesrcValidator
+from ._hovertemplate import HovertemplateValidator
 from ._hoverlabel import HoverlabelValidator
 from ._hoverinfosrc import HoverinfosrcValidator
 from ._hoverinfo import HoverinfoValidator

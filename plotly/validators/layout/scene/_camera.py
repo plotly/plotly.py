@@ -22,6 +22,9 @@ class CameraValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the (x,y,z) components of the 'eye' camera
                 vector. This vector determines the view point
                 about the origin of this scene.
+            projection
+                plotly.graph_objs.layout.scene.camera.Projectio
+                n instance or dict with compatible properties
             up
                 Sets the (x,y,z) components of the 'up' camera
                 vector. This vector determines the up direction

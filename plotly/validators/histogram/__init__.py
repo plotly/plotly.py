@@ -20,6 +20,7 @@ from ._selectedpoints import SelectedpointsValidator
 from ._selected import SelectedValidator
 from ._orientation import OrientationValidator
 from ._opacity import OpacityValidator
+from ._offsetgroup import OffsetgroupValidator
 from ._nbinsy import NbinsyValidator
 from ._nbinsx import NbinsxValidator
 from ._name import NameValidator
@@ -27,6 +28,8 @@ from ._marker import MarkerValidator
 from ._legendgroup import LegendgroupValidator
 from ._idssrc import IdssrcValidator
 from ._ids import IdsValidator
+from ._hovertextsrc import HovertextsrcValidator
+from ._hovertext import HovertextValidator
 from ._hovertemplatesrc import HovertemplatesrcValidator
 from ._hovertemplate import HovertemplateValidator
 from ._hoverlabel import HoverlabelValidator
@@ -41,3 +44,4 @@ from ._customdata import CustomdataValidator
 from ._cumulative import CumulativeValidator
 from ._autobiny import AutobinyValidator
 from ._autobinx import AutobinxValidator
+from ._alignmentgroup import AlignmentgroupValidator

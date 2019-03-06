@@ -11,21 +11,11 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs=kwargs.pop(
                 'data_docs', """
             a
-                Sets the quantity of component `a` in each data
-                point. If `a`, `b`, and `c` are all provided,
-                they need not be normalized, only the relative
-                values matter. If only two arrays are provided
-                they must be normalized to match
-                `ternary<i>.sum`.
+                Sets the a-axis coordinates.
             asrc
                 Sets the source reference on plot.ly for  a .
             b
-                Sets the quantity of component `a` in each data
-                point. If `a`, `b`, and `c` are all provided,
-                they need not be normalized, only the relative
-                values matter. If only two arrays are provided
-                they must be normalized to match
-                `ternary<i>.sum`.
+                Sets the b-axis coordinates.
             bsrc
                 Sets the source reference on plot.ly for  b .
             carpet
@@ -81,6 +71,38 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "toself" or "tonext" and there are no markers
                 or text, then the default is "fills", otherwise
                 it is "points".
+            hovertemplate
+                Template string used for rendering the
+                information that appear on hover box. Note that
+                this will override `hoverinfo`. Variables are
+                inserted using %{variable}, for example "y:
+                %{y}". Numbers are formatted using d3-format's
+                syntax %{variable:d3-format}, for example
+                "Price: %{y:$.2f}". See https://github.com/d3/d
+                3-format/blob/master/README.md#locale_format
+                for details on the formatting syntax. The
+                variables available in `hovertemplate` are the
+                ones emitted as event data described at this
+                link https://plot.ly/javascript/plotlyjs-
+                events/#event-data. Additionally, every
+                attributes that can be specified per-point (the
+                ones that are `arrayOk: true`) are available.
+                Anything contained in tag `<extra>` is
+                displayed in the secondary box, for example
+                "<extra>{fullData.name}</extra>".
+            hovertemplatesrc
+                Sets the source reference on plot.ly for
+                hovertemplate .
+            hovertext
+                Sets hover text elements associated with each
+                (a,b) point. If a single string, the same
+                string appears over all the data points. If an
+                array of strings, the items are mapped in order
+                to the the data points in (a,b). To be seen,
+                trace `hoverinfo` must contain a "text" flag.
+            hovertextsrc
+                Sets the source reference on plot.ly for
+                hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -130,11 +152,14 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 plotly.graph_objs.scattercarpet.Stream instance
                 or dict with compatible properties
             text
-                Sets text elements associated with each (a,b,c)
+                Sets text elements associated with each (a,b)
                 point. If a single string, the same string
                 appears over all the data points. If an array
                 of strings, the items are mapped in order to
-                the the data points in (a,b,c).
+                the the data points in (a,b). If trace
+                `hoverinfo` contains a "text" flag and
+                "hovertext" is not set, these elements will be
+                seen in the hover labels.
             textfont
                 Sets the text font.
             textposition

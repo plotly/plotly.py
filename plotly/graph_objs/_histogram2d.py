@@ -545,6 +545,61 @@ class Histogram2d(BaseTraceType):
     def hoverlabel(self, val):
         self['hoverlabel'] = val
 
+    # hovertemplate
+    # -------------
+    @property
+    def hovertemplate(self):
+        """
+        Template string used for rendering the information that appear
+        on hover box. Note that this will override `hoverinfo`.
+        Variables are inserted using %{variable}, for example "y:
+        %{y}". Numbers are formatted using d3-format's syntax
+        %{variable:d3-format}, for example "Price: %{y:$.2f}". See http
+        s://github.com/d3/d3-format/blob/master/README.md#locale_format
+        for details on the formatting syntax. The variables available
+        in `hovertemplate` are the ones emitted as event data described
+        at this link https://plot.ly/javascript/plotlyjs-events/#event-
+        data. Additionally, every attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        variable `z` Anything contained in tag `<extra>` is displayed
+        in the secondary box, for example
+        "<extra>{fullData.name}</extra>".
+    
+        The 'hovertemplate' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self['hovertemplate']
+
+    @hovertemplate.setter
+    def hovertemplate(self, val):
+        self['hovertemplate'] = val
+
+    # hovertemplatesrc
+    # ----------------
+    @property
+    def hovertemplatesrc(self):
+        """
+        Sets the source reference on plot.ly for  hovertemplate .
+    
+        The 'hovertemplatesrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hovertemplatesrc']
+
+    @hovertemplatesrc.setter
+    def hovertemplatesrc(self, val):
+        self['hovertemplatesrc'] = val
+
     # ids
     # ---
     @property
@@ -1349,6 +1404,28 @@ class Histogram2d(BaseTraceType):
     def zmax(self, val):
         self['zmax'] = val
 
+    # zmid
+    # ----
+    @property
+    def zmid(self):
+        """
+        Sets the mid-point of the color domain by scaling `zmin` and/or
+        `zmax` to be equidistant to this point. Value should have the
+        same units as in `z`. Has no effect when `zauto` is `false`.
+    
+        The 'zmid' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self['zmid']
+
+    @zmid.setter
+    def zmid(self, val):
+        self['zmid'] = val
+
     # zmin
     # ----
     @property
@@ -1504,6 +1581,26 @@ class Histogram2d(BaseTraceType):
         hoverlabel
             plotly.graph_objs.histogram2d.Hoverlabel instance or
             dict with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available. variable `z` Anything contained in tag
+            `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -1629,6 +1726,11 @@ class Histogram2d(BaseTraceType):
             Sets the upper bound of the color domain. Value should
             have the same units as in `z` and if set, `zmin` must
             be set as well.
+        zmid
+            Sets the mid-point of the color domain by scaling
+            `zmin` and/or `zmax` to be equidistant to this point.
+            Value should have the same units as in `z`. Has no
+            effect when `zauto` is `false`.
         zmin
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
@@ -1654,6 +1756,8 @@ class Histogram2d(BaseTraceType):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
         ids=None,
         idssrc=None,
         legendgroup=None,
@@ -1686,6 +1790,7 @@ class Histogram2d(BaseTraceType):
         zauto=None,
         zhoverformat=None,
         zmax=None,
+        zmid=None,
         zmin=None,
         zsmooth=None,
         zsrc=None,
@@ -1782,6 +1887,26 @@ class Histogram2d(BaseTraceType):
         hoverlabel
             plotly.graph_objs.histogram2d.Hoverlabel instance or
             dict with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available. variable `z` Anything contained in tag
+            `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>".
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -1907,6 +2032,11 @@ class Histogram2d(BaseTraceType):
             Sets the upper bound of the color domain. Value should
             have the same units as in `z` and if set, `zmin` must
             be set as well.
+        zmid
+            Sets the mid-point of the color domain by scaling
+            `zmin` and/or `zmax` to be equidistant to this point.
+            Value should have the same units as in `z`. Has no
+            effect when `zauto` is `false`.
         zmin
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
@@ -1963,6 +2093,10 @@ an instance of plotly.graph_objs.Histogram2d"""
         self._validators['hoverinfosrc'] = v_histogram2d.HoverinfosrcValidator(
         )
         self._validators['hoverlabel'] = v_histogram2d.HoverlabelValidator()
+        self._validators['hovertemplate'
+                        ] = v_histogram2d.HovertemplateValidator()
+        self._validators['hovertemplatesrc'
+                        ] = v_histogram2d.HovertemplatesrcValidator()
         self._validators['ids'] = v_histogram2d.IdsValidator()
         self._validators['idssrc'] = v_histogram2d.IdssrcValidator()
         self._validators['legendgroup'] = v_histogram2d.LegendgroupValidator()
@@ -1998,6 +2132,7 @@ an instance of plotly.graph_objs.Histogram2d"""
         self._validators['zhoverformat'] = v_histogram2d.ZhoverformatValidator(
         )
         self._validators['zmax'] = v_histogram2d.ZmaxValidator()
+        self._validators['zmid'] = v_histogram2d.ZmidValidator()
         self._validators['zmin'] = v_histogram2d.ZminValidator()
         self._validators['zsmooth'] = v_histogram2d.ZsmoothValidator()
         self._validators['zsrc'] = v_histogram2d.ZsrcValidator()
@@ -2030,6 +2165,12 @@ an instance of plotly.graph_objs.Histogram2d"""
         self['hoverinfosrc'] = hoverinfosrc if hoverinfosrc is not None else _v
         _v = arg.pop('hoverlabel', None)
         self['hoverlabel'] = hoverlabel if hoverlabel is not None else _v
+        _v = arg.pop('hovertemplate', None)
+        self['hovertemplate'
+            ] = hovertemplate if hovertemplate is not None else _v
+        _v = arg.pop('hovertemplatesrc', None)
+        self['hovertemplatesrc'
+            ] = hovertemplatesrc if hovertemplatesrc is not None else _v
         _v = arg.pop('ids', None)
         self['ids'] = ids if ids is not None else _v
         _v = arg.pop('idssrc', None)
@@ -2095,6 +2236,8 @@ an instance of plotly.graph_objs.Histogram2d"""
         self['zhoverformat'] = zhoverformat if zhoverformat is not None else _v
         _v = arg.pop('zmax', None)
         self['zmax'] = zmax if zmax is not None else _v
+        _v = arg.pop('zmid', None)
+        self['zmid'] = zmid if zmid is not None else _v
         _v = arg.pop('zmin', None)
         self['zmin'] = zmin if zmin is not None else _v
         _v = arg.pop('zsmooth', None)

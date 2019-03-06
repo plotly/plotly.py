@@ -77,6 +77,30 @@ class Line(BaseTraceHierarchyType):
     def cmax(self, val):
         self['cmax'] = val
 
+    # cmid
+    # ----
+    @property
+    def cmid(self):
+        """
+        Sets the mid-point of the color domain by scaling `line.cmin`
+        and/or `line.cmax` to be equidistant to this point. Has an
+        effect only if in `line.color`is set to a numerical array.
+        Value should have the same units as in `line.color`. Has no
+        effect when `line.cauto` is `false`.
+    
+        The 'cmid' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self['cmid']
+
+    @cmid.setter
+    def cmid(self, val):
+        self['cmid'] = val
+
     # cmin
     # ----
     @property
@@ -457,6 +481,40 @@ class Line(BaseTraceHierarchyType):
     def colorsrc(self, val):
         self['colorsrc'] = val
 
+    # hovertemplate
+    # -------------
+    @property
+    def hovertemplate(self):
+        """
+        Template string used for rendering the information that appear
+        on hover box. Note that this will override `hoverinfo`.
+        Variables are inserted using %{variable}, for example "y:
+        %{y}". Numbers are formatted using d3-format's syntax
+        %{variable:d3-format}, for example "Price: %{y:$.2f}". See http
+        s://github.com/d3/d3-format/blob/master/README.md#locale_format
+        for details on the formatting syntax. The variables available
+        in `hovertemplate` are the ones emitted as event data described
+        at this link https://plot.ly/javascript/plotlyjs-events/#event-
+        data. Additionally, every attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        variables `count` and `probability`. Anything contained in tag
+        `<extra>` is displayed in the secondary box, for example
+        "<extra>{fullData.name}</extra>".
+    
+        The 'hovertemplate' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['hovertemplate']
+
+    @hovertemplate.setter
+    def hovertemplate(self, val):
+        self['hovertemplate'] = val
+
     # reversescale
     # ------------
     @property
@@ -557,6 +615,13 @@ class Line(BaseTraceHierarchyType):
             only if in `line.color`is set to a numerical array.
             Value should have the same units as in `line.color` and
             if set, `line.cmin` must be set as well.
+        cmid
+            Sets the mid-point of the color domain by scaling
+            `line.cmin` and/or `line.cmax` to be equidistant to
+            this point. Has an effect only if in `line.color`is set
+            to a numerical array. Value should have the same units
+            as in `line.color`. Has no effect when `line.cauto` is
+            `false`.
         cmin
             Sets the lower bound of the color domain. Has an effect
             only if in `line.color`is set to a numerical array.
@@ -587,6 +652,24 @@ class Line(BaseTraceHierarchyType):
             s.
         colorsrc
             Sets the source reference on plot.ly for  color .
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available. variables `count` and `probability`.
+            Anything contained in tag `<extra>` is displayed in the
+            secondary box, for example
+            "<extra>{fullData.name}</extra>".
         reversescale
             Reverses the color mapping if true. Has an effect only
             if in `line.color`is set to a numerical array. If true,
@@ -609,11 +692,13 @@ class Line(BaseTraceHierarchyType):
         autocolorscale=None,
         cauto=None,
         cmax=None,
+        cmid=None,
         cmin=None,
         color=None,
         colorbar=None,
         colorscale=None,
         colorsrc=None,
+        hovertemplate=None,
         reversescale=None,
         shape=None,
         showscale=None,
@@ -648,6 +733,13 @@ class Line(BaseTraceHierarchyType):
             only if in `line.color`is set to a numerical array.
             Value should have the same units as in `line.color` and
             if set, `line.cmin` must be set as well.
+        cmid
+            Sets the mid-point of the color domain by scaling
+            `line.cmin` and/or `line.cmax` to be equidistant to
+            this point. Has an effect only if in `line.color`is set
+            to a numerical array. Value should have the same units
+            as in `line.color`. Has no effect when `line.cauto` is
+            `false`.
         cmin
             Sets the lower bound of the color domain. Has an effect
             only if in `line.color`is set to a numerical array.
@@ -678,6 +770,24 @@ class Line(BaseTraceHierarchyType):
             s.
         colorsrc
             Sets the source reference on plot.ly for  color .
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available. variables `count` and `probability`.
+            Anything contained in tag `<extra>` is displayed in the
+            secondary box, for example
+            "<extra>{fullData.name}</extra>".
         reversescale
             Reverses the color mapping if true. Has an effect only
             if in `line.color`is set to a numerical array. If true,
@@ -728,11 +838,13 @@ an instance of plotly.graph_objs.parcats.Line"""
         self._validators['autocolorscale'] = v_line.AutocolorscaleValidator()
         self._validators['cauto'] = v_line.CautoValidator()
         self._validators['cmax'] = v_line.CmaxValidator()
+        self._validators['cmid'] = v_line.CmidValidator()
         self._validators['cmin'] = v_line.CminValidator()
         self._validators['color'] = v_line.ColorValidator()
         self._validators['colorbar'] = v_line.ColorBarValidator()
         self._validators['colorscale'] = v_line.ColorscaleValidator()
         self._validators['colorsrc'] = v_line.ColorsrcValidator()
+        self._validators['hovertemplate'] = v_line.HovertemplateValidator()
         self._validators['reversescale'] = v_line.ReversescaleValidator()
         self._validators['shape'] = v_line.ShapeValidator()
         self._validators['showscale'] = v_line.ShowscaleValidator()
@@ -746,6 +858,8 @@ an instance of plotly.graph_objs.parcats.Line"""
         self['cauto'] = cauto if cauto is not None else _v
         _v = arg.pop('cmax', None)
         self['cmax'] = cmax if cmax is not None else _v
+        _v = arg.pop('cmid', None)
+        self['cmid'] = cmid if cmid is not None else _v
         _v = arg.pop('cmin', None)
         self['cmin'] = cmin if cmin is not None else _v
         _v = arg.pop('color', None)
@@ -756,6 +870,9 @@ an instance of plotly.graph_objs.parcats.Line"""
         self['colorscale'] = colorscale if colorscale is not None else _v
         _v = arg.pop('colorsrc', None)
         self['colorsrc'] = colorsrc if colorsrc is not None else _v
+        _v = arg.pop('hovertemplate', None)
+        self['hovertemplate'
+            ] = hovertemplate if hovertemplate is not None else _v
         _v = arg.pop('reversescale', None)
         self['reversescale'] = reversescale if reversescale is not None else _v
         _v = arg.pop('shape', None)

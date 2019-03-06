@@ -31,6 +31,7 @@ from ._outsidetextfont import OutsidetextfontValidator
 from ._orientation import OrientationValidator
 from ._opacity import OpacityValidator
 from ._offsetsrc import OffsetsrcValidator
+from ._offsetgroup import OffsetgroupValidator
 from ._offset import OffsetValidator
 from ._name import NameValidator
 from ._marker import MarkerValidator
@@ -55,3 +56,4 @@ from ._constraintext import ConstraintextValidator
 from ._cliponaxis import CliponaxisValidator
 from ._basesrc import BasesrcValidator
 from ._base import BaseValidator
+from ._alignmentgroup import AlignmentgroupValidator

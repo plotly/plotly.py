@@ -1449,8 +1449,8 @@ class Layout(BaseLayoutType):
                     access token can be set in the configuration
                     options under `mapboxAccessToken`.
                 bearing
-                    Sets the bearing angle of the map (in degrees
-                    counter-clockwise from North).
+                    Sets the bearing angle of the map in degrees
+                    counter-clockwise from North (mapbox.bearing).
                 center
                     plotly.graph_objs.layout.mapbox.Center instance
                     or dict with compatible properties
@@ -1468,7 +1468,7 @@ class Layout(BaseLayoutType):
                 pitch
                     Sets the pitch angle of the map (in degrees,
                     where 0 means perpendicular to the surface of
-                    the map).
+                    the map) (mapbox.pitch).
                 style
                     Sets the Mapbox map style. Either input one of
                     the default Mapbox style names or the URL to a
@@ -1478,7 +1478,7 @@ class Layout(BaseLayoutType):
                     the view: `center`, `zoom`, `bearing`, `pitch`.
                     Defaults to `layout.uirevision`.
                 zoom
-                    Sets the zoom level of the map.
+                    Sets the zoom level of the map (mapbox.zoom).
 
         Returns
         -------
@@ -1534,9 +1534,11 @@ class Layout(BaseLayoutType):
         """
         Assigns extra meta information that can be used in various
         `text` attributes. Attributes such as the graph, axis and
-        colorbar `title.text` and annotation `text` support `meta`. One
-        can access `meta` fields using template strings: `%{meta[i]}`
-        where `i` is the index of the `meta` item in question.
+        colorbar `title.text`, annotation `text` `trace.name` in legend
+        items, `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. One can access `meta` fields using
+        template strings: `%{meta[i]}` where `i` is the index of the
+        `meta` item in question.
     
         The 'meta' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
@@ -3116,6 +3118,16 @@ class Layout(BaseLayoutType):
                     Sets the axis line color.
                 linewidth
                     Sets the width (in px) of the axis line.
+                matches
+                    If set to another axis id (e.g. `x2`, `y`), the
+                    range of this axis will match the range of the
+                    corresponding axis in data-coordinates space.
+                    Moreover, matching axes share auto-range
+                    values, category lists and histogram auto-bins.
+                    Note that setting axes simultaneously in both a
+                    `scaleanchor` and a `matches` constraint is
+                    currently forbidden. Moreover, note that
+                    matching axes must have the same `type`.
                 mirror
                     Determines if the axis lines or/and ticks are
                     mirrored to the opposite side of the plotting
@@ -3187,7 +3199,9 @@ class Layout(BaseLayoutType):
                     {scaleanchor: *y*}` or longer) are redundant
                     and the last constraint encountered will be
                     ignored to avoid possible inconsistent
-                    constraints via `scaleratio`.
+                    constraints via `scaleratio`. Note that setting
+                    axes simultaneously in both a `scaleanchor` and
+                    a `matches` constraint is currently forbidden.
                 scaleratio
                     If this axis is linked to another by
                     `scaleanchor`, this determines the pixel to
@@ -3538,6 +3552,16 @@ class Layout(BaseLayoutType):
                     Sets the axis line color.
                 linewidth
                     Sets the width (in px) of the axis line.
+                matches
+                    If set to another axis id (e.g. `x2`, `y`), the
+                    range of this axis will match the range of the
+                    corresponding axis in data-coordinates space.
+                    Moreover, matching axes share auto-range
+                    values, category lists and histogram auto-bins.
+                    Note that setting axes simultaneously in both a
+                    `scaleanchor` and a `matches` constraint is
+                    currently forbidden. Moreover, note that
+                    matching axes must have the same `type`.
                 mirror
                     Determines if the axis lines or/and ticks are
                     mirrored to the opposite side of the plotting
@@ -3603,7 +3627,9 @@ class Layout(BaseLayoutType):
                     {scaleanchor: *y*}` or longer) are redundant
                     and the last constraint encountered will be
                     ignored to avoid possible inconsistent
-                    constraints via `scaleratio`.
+                    constraints via `scaleratio`. Note that setting
+                    axes simultaneously in both a `scaleanchor` and
+                    a `matches` constraint is currently forbidden.
                 scaleratio
                     If this axis is linked to another by
                     `scaleanchor`, this determines the pixel to
@@ -3984,10 +4010,12 @@ class Layout(BaseLayoutType):
         meta
             Assigns extra meta information that can be used in
             various `text` attributes. Attributes such as the
-            graph, axis and colorbar `title.text` and annotation
-            `text` support `meta`. One can access `meta` fields
-            using template strings: `%{meta[i]}` where `i` is the
-            index of the `meta` item in question.
+            graph, axis and colorbar `title.text`, annotation
+            `text` `trace.name` in legend items, `rangeselector`,
+            `updatemenues` and `sliders` `label` text all support
+            `meta`. One can access `meta` fields using template
+            strings: `%{meta[i]}` where `i` is the index of the
+            `meta` item in question.
         metasrc
             Sets the source reference on plot.ly for  meta .
         modebar
@@ -4401,10 +4429,12 @@ class Layout(BaseLayoutType):
         meta
             Assigns extra meta information that can be used in
             various `text` attributes. Attributes such as the
-            graph, axis and colorbar `title.text` and annotation
-            `text` support `meta`. One can access `meta` fields
-            using template strings: `%{meta[i]}` where `i` is the
-            index of the `meta` item in question.
+            graph, axis and colorbar `title.text`, annotation
+            `text` `trace.name` in legend items, `rangeselector`,
+            `updatemenues` and `sliders` `label` text all support
+            `meta`. One can access `meta` fields using template
+            strings: `%{meta[i]}` where `i` is the index of the
+            `meta` item in question.
         metasrc
             Sets the source reference on plot.ly for  meta .
         modebar

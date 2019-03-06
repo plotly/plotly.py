@@ -7,6 +7,8 @@ from ._sourcelayer import SourcelayerValidator
 from ._source import SourceValidator
 from ._opacity import OpacityValidator
 from ._name import NameValidator
+from ._minzoom import MinzoomValidator
+from ._maxzoom import MaxzoomValidator
 from ._line import LineValidator
 from ._fill import FillValidator
 from ._color import ColorValidator

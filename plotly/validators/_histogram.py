@@ -10,6 +10,12 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_class_str=kwargs.pop('data_class_str', 'Histogram'),
             data_docs=kwargs.pop(
                 'data_docs', """
+            alignmentgroup
+                Set several traces linked to the same position
+                axis or matching axes to the same
+                alignmentgroup. This controls whether bars
+                compute their positional range dependently or
+                independently.
             autobinx
                 Obsolete: since v1.42 each bin attribute is
                 auto-determined separately and `autobinx` is
@@ -101,6 +107,11 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
             hovertemplatesrc
                 Sets the source reference on plot.ly for
                 hovertemplate .
+            hovertext
+                Same as `text`.
+            hovertextsrc
+                Sets the source reference on plot.ly for
+                hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -130,6 +141,11 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 will decide the optimal bin size such that the
                 histogram best visualizes the distribution of
                 the data. Ignored if `ybins.size` is provided.
+            offsetgroup
+                Set several traces linked to the same position
+                axis or matching axes to the same offsetgroup
+                where bars of the same position coordinate will
+                line up.
             opacity
                 Sets the opacity of the trace.
             orientation
@@ -155,14 +171,11 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 plotly.graph_objs.histogram.Stream instance or
                 dict with compatible properties
             text
-                Sets text elements associated with each (x,y)
-                pair. If a single string, the same string
-                appears over all the data points. If an array
-                of string, the items are mapped in order to the
-                this trace's (x,y) coordinates. If trace
-                `hoverinfo` contains a "text" flag and
-                "hovertext" is not set, these elements will be
-                seen in the hover labels.
+                Sets hover text elements associated with each
+                bar. If a single string, the same string
+                appears over all bars. If an array of string,
+                the items are mapped in order to the this
+                trace's coordinates.
             textsrc
                 Sets the source reference on plot.ly for  text
                 .

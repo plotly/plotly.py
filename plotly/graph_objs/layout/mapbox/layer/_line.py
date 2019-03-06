@@ -4,13 +4,54 @@ import copy
 
 class Line(BaseLayoutHierarchyType):
 
+    # dash
+    # ----
+    @property
+    def dash(self):
+        """
+        Sets the length of dashes and gaps (mapbox.layer.paint.line-
+        dasharray). Has an effect only when `type` is set to "line".
+    
+        The 'dash' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self['dash']
+
+    @dash.setter
+    def dash(self, val):
+        self['dash'] = val
+
+    # dashsrc
+    # -------
+    @property
+    def dashsrc(self):
+        """
+        Sets the source reference on plot.ly for  dash .
+    
+        The 'dashsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['dashsrc']
+
+    @dashsrc.setter
+    def dashsrc(self, val):
+        self['dashsrc'] = val
+
     # width
     # -----
     @property
     def width(self):
         """
-        Sets the line width. Has an effect only when `type` is set to
-        "line".
+        Sets the line width (mapbox.layer.paint.line-width). Has an
+        effect only when `type` is set to "line".
     
         The 'width' property is a number and may be specified as:
           - An int or float
@@ -36,12 +77,20 @@ class Line(BaseLayoutHierarchyType):
     @property
     def _prop_descriptions(self):
         return """\
+        dash
+            Sets the length of dashes and gaps
+            (mapbox.layer.paint.line-dasharray). Has an effect only
+            when `type` is set to "line".
+        dashsrc
+            Sets the source reference on plot.ly for  dash .
         width
-            Sets the line width. Has an effect only when `type` is
-            set to "line".
+            Sets the line width (mapbox.layer.paint.line-width).
+            Has an effect only when `type` is set to "line".
         """
 
-    def __init__(self, arg=None, width=None, **kwargs):
+    def __init__(
+        self, arg=None, dash=None, dashsrc=None, width=None, **kwargs
+    ):
         """
         Construct a new Line object
         
@@ -51,9 +100,15 @@ class Line(BaseLayoutHierarchyType):
             dict of properties compatible with this constructor or
             an instance of
             plotly.graph_objs.layout.mapbox.layer.Line
+        dash
+            Sets the length of dashes and gaps
+            (mapbox.layer.paint.line-dasharray). Has an effect only
+            when `type` is set to "line".
+        dashsrc
+            Sets the source reference on plot.ly for  dash .
         width
-            Sets the line width. Has an effect only when `type` is
-            set to "line".
+            Sets the line width (mapbox.layer.paint.line-width).
+            Has an effect only when `type` is set to "line".
 
         Returns
         -------
@@ -87,10 +142,16 @@ an instance of plotly.graph_objs.layout.mapbox.layer.Line"""
 
         # Initialize validators
         # ---------------------
+        self._validators['dash'] = v_line.DashValidator()
+        self._validators['dashsrc'] = v_line.DashsrcValidator()
         self._validators['width'] = v_line.WidthValidator()
 
         # Populate data dict with properties
         # ----------------------------------
+        _v = arg.pop('dash', None)
+        self['dash'] = dash if dash is not None else _v
+        _v = arg.pop('dashsrc', None)
+        self['dashsrc'] = dashsrc if dashsrc is not None else _v
         _v = arg.pop('width', None)
         self['width'] = width if width is not None else _v
 

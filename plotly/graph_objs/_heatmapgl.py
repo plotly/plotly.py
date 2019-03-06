@@ -1128,6 +1128,28 @@ class Heatmapgl(BaseTraceType):
     def zmax(self, val):
         self['zmax'] = val
 
+    # zmid
+    # ----
+    @property
+    def zmid(self):
+        """
+        Sets the mid-point of the color domain by scaling `zmin` and/or
+        `zmax` to be equidistant to this point. Value should have the
+        same units as in `z`. Has no effect when `zauto` is `false`.
+    
+        The 'zmid' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self['zmid']
+
+    @zmid.setter
+    def zmid(self, val):
+        self['zmid'] = val
+
     # zmin
     # ----
     @property
@@ -1346,6 +1368,11 @@ class Heatmapgl(BaseTraceType):
             Sets the upper bound of the color domain. Value should
             have the same units as in `z` and if set, `zmin` must
             be set as well.
+        zmid
+            Sets the mid-point of the color domain by scaling
+            `zmin` and/or `zmax` to be equidistant to this point.
+            Value should have the same units as in `z`. Has no
+            effect when `zauto` is `false`.
         zmin
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
@@ -1396,6 +1423,7 @@ class Heatmapgl(BaseTraceType):
         z=None,
         zauto=None,
         zmax=None,
+        zmid=None,
         zmin=None,
         zsrc=None,
         **kwargs
@@ -1570,6 +1598,11 @@ class Heatmapgl(BaseTraceType):
             Sets the upper bound of the color domain. Value should
             have the same units as in `z` and if set, `zmin` must
             be set as well.
+        zmid
+            Sets the mid-point of the color domain by scaling
+            `zmin` and/or `zmax` to be equidistant to this point.
+            Value should have the same units as in `z`. Has no
+            effect when `zauto` is `false`.
         zmin
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
@@ -1651,6 +1684,7 @@ an instance of plotly.graph_objs.Heatmapgl"""
         self._validators['z'] = v_heatmapgl.ZValidator()
         self._validators['zauto'] = v_heatmapgl.ZautoValidator()
         self._validators['zmax'] = v_heatmapgl.ZmaxValidator()
+        self._validators['zmid'] = v_heatmapgl.ZmidValidator()
         self._validators['zmin'] = v_heatmapgl.ZminValidator()
         self._validators['zsrc'] = v_heatmapgl.ZsrcValidator()
 
@@ -1737,6 +1771,8 @@ an instance of plotly.graph_objs.Heatmapgl"""
         self['zauto'] = zauto if zauto is not None else _v
         _v = arg.pop('zmax', None)
         self['zmax'] = zmax if zmax is not None else _v
+        _v = arg.pop('zmid', None)
+        self['zmid'] = zmid if zmid is not None else _v
         _v = arg.pop('zmin', None)
         self['zmin'] = zmin if zmin is not None else _v
         _v = arg.pop('zsrc', None)

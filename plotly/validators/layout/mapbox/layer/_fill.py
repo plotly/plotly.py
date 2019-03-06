@@ -13,8 +13,9 @@ class FillValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs=kwargs.pop(
                 'data_docs', """
             outlinecolor
-                Sets the fill outline color. Has an effect only
-                when `type` is set to "fill".
+                Sets the fill outline color
+                (mapbox.layer.paint.fill-outline-color). Has an
+                effect only when `type` is set to "fill".
 """
             ),
             **kwargs

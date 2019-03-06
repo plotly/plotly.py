@@ -280,6 +280,48 @@ class Barpolar(BaseTraceType):
     def hovertemplatesrc(self, val):
         self['hovertemplatesrc'] = val
 
+    # hovertext
+    # ---------
+    @property
+    def hovertext(self):
+        """
+        Same as `text`.
+    
+        The 'hovertext' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self['hovertext']
+
+    @hovertext.setter
+    def hovertext(self, val):
+        self['hovertext'] = val
+
+    # hovertextsrc
+    # ------------
+    @property
+    def hovertextsrc(self):
+        """
+        Sets the source reference on plot.ly for  hovertext .
+    
+        The 'hovertextsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hovertextsrc']
+
+    @hovertextsrc.setter
+    def hovertextsrc(self, val):
+        self['hovertextsrc'] = val
+
     # ids
     # ---
     @property
@@ -382,6 +424,14 @@ class Barpolar(BaseTraceType):
                     numerical array. Value should have the same
                     units as in `marker.color` and if set,
                     `marker.cmin` must be set as well.
+                cmid
+                    Sets the mid-point of the color domain by
+                    scaling `marker.cmin` and/or `marker.cmax` to
+                    be equidistant to this point. Has an effect
+                    only if in `marker.color`is set to a numerical
+                    array. Value should have the same units as in
+                    `marker.color`. Has no effect when
+                    `marker.cauto` is `false`.
                 cmin
                     Sets the lower bound of the color domain. Has
                     an effect only if in `marker.color`is set to a
@@ -1067,6 +1117,10 @@ class Barpolar(BaseTraceType):
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -1187,6 +1241,8 @@ class Barpolar(BaseTraceType):
         hoverlabel=None,
         hovertemplate=None,
         hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
         ids=None,
         idssrc=None,
         legendgroup=None,
@@ -1277,6 +1333,10 @@ class Barpolar(BaseTraceType):
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -1426,6 +1486,8 @@ an instance of plotly.graph_objs.Barpolar"""
         self._validators['hovertemplate'] = v_barpolar.HovertemplateValidator()
         self._validators['hovertemplatesrc'
                         ] = v_barpolar.HovertemplatesrcValidator()
+        self._validators['hovertext'] = v_barpolar.HovertextValidator()
+        self._validators['hovertextsrc'] = v_barpolar.HovertextsrcValidator()
         self._validators['ids'] = v_barpolar.IdsValidator()
         self._validators['idssrc'] = v_barpolar.IdssrcValidator()
         self._validators['legendgroup'] = v_barpolar.LegendgroupValidator()
@@ -1483,6 +1545,10 @@ an instance of plotly.graph_objs.Barpolar"""
         _v = arg.pop('hovertemplatesrc', None)
         self['hovertemplatesrc'
             ] = hovertemplatesrc if hovertemplatesrc is not None else _v
+        _v = arg.pop('hovertext', None)
+        self['hovertext'] = hovertext if hovertext is not None else _v
+        _v = arg.pop('hovertextsrc', None)
+        self['hovertextsrc'] = hovertextsrc if hovertextsrc is not None else _v
         _v = arg.pop('ids', None)
         self['ids'] = ids if ids is not None else _v
         _v = arg.pop('idssrc', None)

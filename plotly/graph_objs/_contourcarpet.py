@@ -841,6 +841,46 @@ class Contourcarpet(BaseTraceType):
     def hoverlabel(self, val):
         self['hoverlabel'] = val
 
+    # hovertext
+    # ---------
+    @property
+    def hovertext(self):
+        """
+        Same as `text`.
+    
+        The 'hovertext' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self['hovertext']
+
+    @hovertext.setter
+    def hovertext(self, val):
+        self['hovertext'] = val
+
+    # hovertextsrc
+    # ------------
+    @property
+    def hovertextsrc(self):
+        """
+        Sets the source reference on plot.ly for  hovertext .
+    
+        The 'hovertextsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hovertextsrc']
+
+    @hovertextsrc.setter
+    def hovertextsrc(self, val):
+        self['hovertextsrc'] = val
+
     # ids
     # ---
     @property
@@ -1382,6 +1422,28 @@ class Contourcarpet(BaseTraceType):
     def zmax(self, val):
         self['zmax'] = val
 
+    # zmid
+    # ----
+    @property
+    def zmid(self):
+        """
+        Sets the mid-point of the color domain by scaling `zmin` and/or
+        `zmax` to be equidistant to this point. Value should have the
+        same units as in `z`. Has no effect when `zauto` is `false`.
+    
+        The 'zmid' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self['zmid']
+
+    @zmid.setter
+    def zmid(self, val):
+        self['zmid'] = val
+
     # zmin
     # ----
     @property
@@ -1527,6 +1589,10 @@ class Contourcarpet(BaseTraceType):
         hoverlabel
             plotly.graph_objs.contourcarpet.Hoverlabel instance or
             dict with compatible properties
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -1625,6 +1691,11 @@ class Contourcarpet(BaseTraceType):
             Sets the upper bound of the color domain. Value should
             have the same units as in `z` and if set, `zmin` must
             be set as well.
+        zmid
+            Sets the mid-point of the color domain by scaling
+            `zmin` and/or `zmax` to be equidistant to this point.
+            Value should have the same units as in `z`. Has no
+            effect when `zauto` is `false`.
         zmin
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
@@ -1658,6 +1729,8 @@ class Contourcarpet(BaseTraceType):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hovertext=None,
+        hovertextsrc=None,
         ids=None,
         idssrc=None,
         legendgroup=None,
@@ -1681,6 +1754,7 @@ class Contourcarpet(BaseTraceType):
         z=None,
         zauto=None,
         zmax=None,
+        zmid=None,
         zmin=None,
         zsrc=None,
         **kwargs
@@ -1784,6 +1858,10 @@ class Contourcarpet(BaseTraceType):
         hoverlabel
             plotly.graph_objs.contourcarpet.Hoverlabel instance or
             dict with compatible properties
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -1882,6 +1960,11 @@ class Contourcarpet(BaseTraceType):
             Sets the upper bound of the color domain. Value should
             have the same units as in `z` and if set, `zmin` must
             be set as well.
+        zmid
+            Sets the mid-point of the color domain by scaling
+            `zmin` and/or `zmax` to be equidistant to this point.
+            Value should have the same units as in `z`. Has no
+            effect when `zauto` is `false`.
         zmin
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
@@ -1947,6 +2030,9 @@ an instance of plotly.graph_objs.Contourcarpet"""
         self._validators['hoverinfosrc'
                         ] = v_contourcarpet.HoverinfosrcValidator()
         self._validators['hoverlabel'] = v_contourcarpet.HoverlabelValidator()
+        self._validators['hovertext'] = v_contourcarpet.HovertextValidator()
+        self._validators['hovertextsrc'
+                        ] = v_contourcarpet.HovertextsrcValidator()
         self._validators['ids'] = v_contourcarpet.IdsValidator()
         self._validators['idssrc'] = v_contourcarpet.IdssrcValidator()
         self._validators['legendgroup'] = v_contourcarpet.LegendgroupValidator(
@@ -1973,6 +2059,7 @@ an instance of plotly.graph_objs.Contourcarpet"""
         self._validators['z'] = v_contourcarpet.ZValidator()
         self._validators['zauto'] = v_contourcarpet.ZautoValidator()
         self._validators['zmax'] = v_contourcarpet.ZmaxValidator()
+        self._validators['zmid'] = v_contourcarpet.ZmidValidator()
         self._validators['zmin'] = v_contourcarpet.ZminValidator()
         self._validators['zsrc'] = v_contourcarpet.ZsrcValidator()
 
@@ -2024,6 +2111,10 @@ an instance of plotly.graph_objs.Contourcarpet"""
         self['hoverinfosrc'] = hoverinfosrc if hoverinfosrc is not None else _v
         _v = arg.pop('hoverlabel', None)
         self['hoverlabel'] = hoverlabel if hoverlabel is not None else _v
+        _v = arg.pop('hovertext', None)
+        self['hovertext'] = hovertext if hovertext is not None else _v
+        _v = arg.pop('hovertextsrc', None)
+        self['hovertextsrc'] = hovertextsrc if hovertextsrc is not None else _v
         _v = arg.pop('ids', None)
         self['ids'] = ids if ids is not None else _v
         _v = arg.pop('idssrc', None)
@@ -2071,6 +2162,8 @@ an instance of plotly.graph_objs.Contourcarpet"""
         self['zauto'] = zauto if zauto is not None else _v
         _v = arg.pop('zmax', None)
         self['zmax'] = zmax if zmax is not None else _v
+        _v = arg.pop('zmid', None)
+        self['zmid'] = zmid if zmid is not None else _v
         _v = arg.pop('zmin', None)
         self['zmin'] = zmin if zmin is not None else _v
         _v = arg.pop('zsrc', None)

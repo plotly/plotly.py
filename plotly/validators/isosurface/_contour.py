@@ -16,8 +16,7 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the color of the contour lines.
             show
                 Sets whether or not dynamic contours are shown
-                on hover. Contours are more useful when
-                hovering on caps and slices.
+                on hover
             width
                 Sets the width of the contour lines.
 """

@@ -16,8 +16,8 @@ class MapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 access token can be set in the configuration
                 options under `mapboxAccessToken`.
             bearing
-                Sets the bearing angle of the map (in degrees
-                counter-clockwise from North).
+                Sets the bearing angle of the map in degrees
+                counter-clockwise from North (mapbox.bearing).
             center
                 plotly.graph_objs.layout.mapbox.Center instance
                 or dict with compatible properties
@@ -35,7 +35,7 @@ class MapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
             pitch
                 Sets the pitch angle of the map (in degrees,
                 where 0 means perpendicular to the surface of
-                the map).
+                the map) (mapbox.pitch).
             style
                 Sets the Mapbox map style. Either input one of
                 the default Mapbox style names or the URL to a
@@ -45,7 +45,7 @@ class MapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the view: `center`, `zoom`, `bearing`, `pitch`.
                 Defaults to `layout.uirevision`.
             zoom
-                Sets the zoom level of the map.
+                Sets the zoom level of the map (mapbox.zoom).
 """
             ),
             **kwargs
