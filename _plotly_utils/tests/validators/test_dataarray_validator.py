@@ -14,7 +14,7 @@ def validator():
 # -----
 # ### Acceptance ###
 @pytest.mark.parametrize('val', [
-    [], [1], [''], (), ('Hello, ',  'world!'), ['A', 1, 'B', 0, 'C']
+    [], [1], [''], (), ('Hello, ',  'world!'), ['A', 1, 'B', 0, 'C'], [np.array(1), np.array(2)]
 ])
 def test_validator_acceptance_simple(val, validator):
     coerce_val = validator.validate_coerce(val)
