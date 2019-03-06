@@ -230,27 +230,6 @@ After all of the functionality for the release has been merged into master,
 create a branch named `release_X.Y.Z`. This branch will become the
 final version
 
-#### Bump to release candidate version
-Next increment the version of `plotly.py` to `X.Y.Zrc1`, and the version of
-`plotlywidget` to `A.B.C-rc.1`. In both cases `rc` is the semantic versioning
-code for Release Candidate. The number 1 means that this is the first release
-candidate, this number can be incremented if we need to publish multiple
-release candidates. Note that the `npm` suffix is `-rc.1` and the PyPI
-suffix is `rc1`.
-
- - `plotly/version.py`:
-   + Update `__version__` to `X.Y.Zrc1`
-   + Update `__frontend_version__` to `^A.B.C-rc.1` (Note the `^` prefix)
- - `js/package.json`
-   + Update `"version"` to `A.B.C-rc.1`
- 
-Publishing `plotly.py` and `plotlywidget` as release candidates
-allows us to go through the publication process, and test that the
-installed packages work properly before general users will get them by
-default. It also gives us the opportunity to ask specific users to test
-that their bug reports are in fact resolved before we pull the trigger
-on the official release.
-
 #### Finalize changelog
 Review the contents of `CHANGELOG.md`. We try to follow the
 [keepachangelog](https://keepachangelog.com/en/1.0.0/) guidelines.  Make sure
@@ -278,6 +257,38 @@ of the dependencies. Use the release candidate versions, this way we can point
 people to the README of the `release_X.Y.Z` as the instructions for trying out
 the release candidate.
 
+Note that the conda installation instructions must include
+"-c plotly/lable/test" rather than "-c plotly" in order to install the
+release candidate version.
+
+Commit Changelog and README updates.
+
+#### Bump to release candidate version
+ 1) Manually update the plotlywidget version to `A.B.C-rc.1` in the files
+specified below.
+
+ - `plotly/_widget_version.py`:
+   + Update `__frontend_version__` to `^A.B.C-rc.1` (Note the `^` prefix)
+ - `js/package.json`
+   + Update `"version"` to `A.B.C-rc.1`
+   
+ 2) Commit the changes
+ 
+ 3) Tag this commit on the release branch as `vX.Y.Zrc1` and `widget-vA.B.C-rc.1`
+   
+In both cases `rc` is the semantic versioning code for Release Candidate.
+   
+The number 1 means that this is the first release candidate, this number can
+be incremented if we need to publish multiple release candidates.
+Note that the `npm` suffix is `-rc.1` and the PyPI suffix is `rc1`.
+ 
+Publishing `plotly.py` and `plotlywidget` as release candidates
+allows us to go through the publication process, and test that the
+installed packages work properly before general users will get them by
+default. It also gives us the opportunity to ask specific users to test
+that their bug reports are in fact resolved before we pull the trigger
+on the official release.
+
 #### Publish release candidate to PyPI
 To upload to PyPI you'll also need to have `twine` installed:
 ```bash
@@ -285,7 +296,7 @@ To upload to PyPI you'll also need to have `twine` installed:
 ```
 
 And, you'll need the credentials file `~/.pypirc`. Request access from
-@theengineear and @chriddyp. Then, from inside the repository:
+@jonmmease and @chriddyp. Then, from inside the repository:
 
 ```bash
 (plotly.py) $ git checkout release_X.Y.Z
@@ -306,36 +317,13 @@ The `--tag next` part ensures that users won't install this version unless
 they explicitly ask for the version or for the version wtih the `next` tag.
 
 #### Publish release candidate to plotly anaconda channel
-Conda packages are built automatically on circleci for each push where all
-tests pass on `master` and `release_` branches.
+To publish package to the plotly anaconda channel you'll need to have the
+anaconda or miniconda distribution installed, and you'll need to have the
+`anaconda-client` package installed.
 
-Conda packages for Python X.Y are included as "artifacts" of the circleci
-job named `python-X-Y-conda`.
-
-First download the artifacts for each Python version: 
- - Click the "Details" button next to check named " ci/circleci: python-X-Y-conda". This will take you to the circleci dashboard for that job.
- - Click on the "Artifacts" tab, and expend the directory tree to root/project/artifacts/conda_packages_X.Y.zip.
- - Click to download this zip file.
-
-Then unzip all of the artifact zip files into the same directory. You should
-end up with a directory structure like
- - /path/to/packages
-   - conda_packages_2_7
-     - win-64
-       - plotly-X.Y.Z-py27_0.tar.bz2
-     - win-32
-       - plotly-X.Y.Z-py27_0.tar.bz2
-     - linux-64
-       - plotly-X.Y.Z-py27_0.tar.bz2
-     - ...
-   - conda_packages_3_5
-     - win-64
-       - plotly-X.Y.Z-py35_0.tar.bz2
-     - ...
-   - conda_packages_3_6
-     - ...
-   - conda_packages_3_7
-     - ...
+```bash
+(plotly.py) $ conda build recipe/
+```
 
 Next run `anaconda login` and enter the credentials for the plotly anaconda
 channel.
@@ -345,20 +333,15 @@ label will ensure that people will only download the release candidate version
 if they explicitly request it.
 
 ```
-$ anaconda upload --label test /path/to/packages/conda_packages_*/*/plotly-*.tar.bz2 
+$ anaconda upload --label test /path/to/anaconda3/conda-bld/noarch/plotly-*.tar.bz2 
 ```
 
 Then logout with `anaconda logout` 
 
 #### Manually test the release candidate
 Create a fresh virtual environment (or conda environment) and install
-the release candidate by following the new `README.md` instructions,
-replacing `X.Y.Z` with `X.Y.Zrc1` and `A.B.C` with `A.B.C-rc.1`.
-
-In particular 
- - `pip install plotly==X.Y.Z` -> `pip install plotly==X.Y.Zrc1`
- - `jupyter labextension install plotlywidget@A.B.C` ->
-    `jupyter labextension install plotlywidget@A.B.C-rc.1`
+the release candidate by following the new `README.md` instructions
+(the instructions updated above to include the release candidate versions)
 
 Run through the example notebooks at
 https://github.com/jonmmease/plotly_ipywidget_notebooks using the classic
@@ -372,22 +355,33 @@ If problems are found in the release candidate, fix them on the release
 branch and then publish another release candidate with the candidate number
 incremented.
 
+#### Finalize CHANGELOG and README
+Update CHANGELOG with release date and update README with final versions.
+
+In the conda installation instructions, be sure to change the
+"-c plotly/lable/test" argument to "-c plotly"
+ 
+Commit updates.
+
 #### Finalize versions
 When no problems are identified in the release candidate, remove the
 release candidate suffix from the following version strings:
- 
- - `plotly/version.py`:
-   + Update `__version__` to `X.Y.Z`
+
+ - `plotly/_widget_version.py`:
    + Update `__frontend_version__` to `^A.B.C` (Note the `^` prefix)
  - `js/package.json`
    + Update `"version"` to `A.B.C`
+   
+Commit and push to the release branch.
 
 #### Merge release into master
 Make sure the integration tests are passing on the release branch, then merge
 it into master on GitHub.
 
 Make sure tests also pass on master, then update your local master,
-tag this merge commit as `vX.Y.Z` (e.g. `v3.1.1`), and push the tag.
+tag this merge commit as `vX.Y.Z` (e.g. `v3.1.1`) and `widget-vA.B.C` 
+
+push the tag.
 
 ```bash
 (plotly.py) $ git checkout master
@@ -395,6 +389,8 @@ tag this merge commit as `vX.Y.Z` (e.g. `v3.1.1`), and push the tag.
 (plotly.py) $ git pull origin master
 (plotly.py) $ git tag vX.Y.Z
 (plotly.py) $ git push origin vX.Y.Z
+(plotly.py) $ git tag widget-vA.B.C
+(plotly.py) $ git push origin widget-vA.B.C
 ```
 
 #### Publishing to Pip
@@ -427,12 +423,10 @@ npm publish --access public
 Follow the anaconda upload instructions as described for the release candidate
 above, except:
 
- - Download the package artifacts from the circleci jobs that ran against
-   master.
  - Do not include the `--label test` argument when uploading
  
 ```
-$ anaconda upload /path/to/packages/conda_packages_*/*/plotly-*.tar.bz2 
+$ anaconda upload /path/to/anaconda3/conda-bld/noarch/plotly-*.tar.bz2 
 ```
 
 #### Add GitHub Release entry
