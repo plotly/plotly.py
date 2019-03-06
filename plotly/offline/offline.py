@@ -291,14 +291,13 @@ def init_notebook_mode(connected=False):
             '{win_config}'
             '{mathjax_config}'
             '<script type=\'text/javascript\'>'
-            'if(!window._Plotly){{'
+            'require.undef("plotly");'
             'define(\'plotly\', function(require, exports, module) {{'
             '{script}'
             '}});'
             'require([\'plotly\'], function(Plotly) {{'
             'window._Plotly = Plotly;'
             '}});'
-            '}}'
             '</script>'
             '').format(script=get_plotlyjs(),
                        win_config=_window_plotly_config,
