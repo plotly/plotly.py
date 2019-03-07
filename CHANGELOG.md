@@ -2,6 +2,34 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+
+## [3.7.0] - ???
+
+### Updated
+ - Updated Plotly.js to version 1.45.1. See the
+ [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1451----2019-03-05)
+ for more information.
+ 
+### Added
+ - Added new `auto_play` argument to offline `plot` and `iplot` to control
+ whether figures with frames are automatically animated when the figure is
+ loaded
+ ([#1447](https://github.com/plotly/plotly.py/pull/1447))
+ - Added support for uploading "offline" animations (those with inline data
+ arrays rather than grid references) to Chart Studio using `plotly.plotly.create_animations`
+ ([#1432](https://github.com/plotly/plotly.py/pull/1432))
+ 
+### Updated
+ - Updated implementation of the `ternary_contour` figure factory that was
+ added in 3.6.0. The new implementation uses the native plotly.js ternary axes
+ and provides ILR transform support.
+ ([#1418](https://github.com/plotly/plotly.py/pull/1418))
+ 
+### Fixed
+ - Fix validation for 0-dimensional numpy arrays
+ ([#1444](https://github.com/plotly/plotly.py/pull/1444)). Special thanks to 
+ [@ankokumoyashi](https://github.com/ankokumoyashi) for this contribution!
+ 
 ## [3.6.1] - 2019-02-08
 
 ### Updated
