@@ -66,7 +66,6 @@ module.exports = [
             libraryTarget: 'amd',
             publicPath: 'https://unpkg.com/plotlywidget@' + version + '/dist/'
         },
-        devtool: 'source-map',
         node: {
             fs: 'empty'
         },
