@@ -18,22 +18,6 @@ jobs:
           command: 'tox -e py27-core'
           no_output_timeout: 20m
 
-  python-3.4-core:
-    docker:
-      - image: circleci/python:3.4-stretch-node-browsers
-        environment:
-          PLOTLY_TOX_PYTHON_34: python3.4
-
-    steps:
-      - checkout
-      - run:
-          name: Install tox
-          command: 'sudo pip install tox'
-      - run:
-          name: Test with tox
-          command: 'tox -e py34-core'
-          no_output_timeout: 20m
-
   python-3.5-core:
     docker:
       - image: circleci/python:3.5-stretch-node-browsers
@@ -101,26 +85,6 @@ jobs:
       - run:
           name: Test with tox
           command: 'tox -e py27-optional'
-          no_output_timeout: 20m
-
-  python-3.4-optional:
-    docker:
-      - image: circleci/python:3.4-stretch-node-browsers
-        environment:
-          PLOTLY_TOX_PYTHON_34: python3.4
-
-    steps:
-      - checkout
-      - run:
-          name: Install tox
-          command: 'sudo pip install tox'
-      - run:
-          name: Install npm dependencies
-          command: cd plotly/tests/test_optional/test_jupyter && npm install
-          no_output_timeout: 20m
-      - run:
-          name: Test with tox
-          command: 'tox -e py34-optional'
           no_output_timeout: 20m
 
   python-3.5-optional:
@@ -200,11 +164,11 @@ jobs:
           command: 'tox -e py27-plot_ly'
           no_output_timeout: 20m
 
-  python-3.4-plot_ly:
+  python-3.5-plot_ly:
     docker:
-      - image: circleci/python:3.4-stretch-node-browsers
+      - image: circleci/python:3.5-stretch-node-browsers
         environment:
-          PLOTLY_TOX_PYTHON_34: python3.4
+          PLOTLY_TOX_PYTHON_35: python3.5
 
     steps:
       - checkout
@@ -213,7 +177,7 @@ jobs:
           command: 'sudo pip install tox'
       - run:
           name: Test with tox
-          command: 'tox -e py34-plot_ly'
+          command: 'tox -e py35-plot_ly'
           no_output_timeout: 20m
 
   python-3.7-plot_ly:
@@ -442,20 +406,17 @@ workflows:
   build:
     jobs:
       - python-2.7-core
-      - python-3.4-core
       - python-3.5-core
       - python-3.6-core
       - python-3.7-core
       - python-2.7-optional
-      - python-3.4-optional
       - python-3.5-optional
       - python-3.6-optional
       # 3.7 optional disabled due to current shapely incompatibility
       # - python-3.7-optional
       - python-2.7-plot_ly
-      - python-3.4-plot_ly
+      - python-3.5-plot_ly
       - python-3.7-plot_ly
       - python-2-7-orca
       - python-3-5-orca
       - python-3-7-orca
-
