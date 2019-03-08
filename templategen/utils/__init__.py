@@ -155,8 +155,8 @@ def initialize_template(annotation_defaults,
 
     # Bar outline
     template.data.bar = [
-        {'marker': {'line': {'width': 0.1, 'color': panel_background_clr}}}]
+        {'marker': {'line': {'width': 0.5, 'color': panel_background_clr}}}]
     template.data.barpolar = [
-        {'marker': {'line': {'width': 0.1, 'color': panel_background_clr}}}]
+        {'marker': {'line': {'width': 0.5, 'color': panel_background_clr}}}]
 
     return template
