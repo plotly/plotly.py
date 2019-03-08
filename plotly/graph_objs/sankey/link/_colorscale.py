@@ -2,7 +2,7 @@ from plotly.basedatatypes import BaseTraceHierarchyType
 import copy
 
 
-class Concentrationscales(BaseTraceHierarchyType):
+class Colorscale(BaseTraceHierarchyType):
 
     # cmax
     # ----
@@ -221,14 +221,13 @@ class Concentrationscales(BaseTraceHierarchyType):
         **kwargs
     ):
         """
-        Construct a new Concentrationscales object
+        Construct a new Colorscale object
         
         Parameters
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            plotly.graph_objs.sankey.link.Concentrationscales
+            an instance of plotly.graph_objs.sankey.link.Colorscale
         cmax
             Sets the upper bound of the color domain.
         cmin
@@ -270,9 +269,9 @@ class Concentrationscales(BaseTraceHierarchyType):
 
         Returns
         -------
-        Concentrationscales
+        Colorscale
         """
-        super(Concentrationscales, self).__init__('concentrationscaless')
+        super(Colorscale, self).__init__('colorscales')
 
         # Validate arg
         # ------------
@@ -285,9 +284,9 @@ class Concentrationscales(BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.sankey.link.Concentrationscales 
+The first argument to the plotly.graph_objs.sankey.link.Colorscale 
 constructor must be a dict or 
-an instance of plotly.graph_objs.sankey.link.Concentrationscales"""
+an instance of plotly.graph_objs.sankey.link.Colorscale"""
             )
 
         # Handle skip_invalid
@@ -296,20 +295,17 @@ an instance of plotly.graph_objs.sankey.link.Concentrationscales"""
 
         # Import validators
         # -----------------
-        from plotly.validators.sankey.link import (
-            concentrationscales as v_concentrationscales
-        )
+        from plotly.validators.sankey.link import (colorscale as v_colorscale)
 
         # Initialize validators
         # ---------------------
-        self._validators['cmax'] = v_concentrationscales.CmaxValidator()
-        self._validators['cmin'] = v_concentrationscales.CminValidator()
-        self._validators['colorscale'
-                        ] = v_concentrationscales.ColorscaleValidator()
-        self._validators['label'] = v_concentrationscales.LabelValidator()
-        self._validators['name'] = v_concentrationscales.NameValidator()
+        self._validators['cmax'] = v_colorscale.CmaxValidator()
+        self._validators['cmin'] = v_colorscale.CminValidator()
+        self._validators['colorscale'] = v_colorscale.ColorscaleValidator()
+        self._validators['label'] = v_colorscale.LabelValidator()
+        self._validators['name'] = v_colorscale.NameValidator()
         self._validators['templateitemname'
-                        ] = v_concentrationscales.TemplateitemnameValidator()
+                        ] = v_colorscale.TemplateitemnameValidator()
 
         # Populate data dict with properties
         # ----------------------------------

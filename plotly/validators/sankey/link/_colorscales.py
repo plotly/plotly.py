@@ -1,20 +1,17 @@
 import _plotly_utils.basevalidators
 
 
-class ConcentrationscalessValidator(
+class ColorscalesValidator(
     _plotly_utils.basevalidators.CompoundArrayValidator
 ):
 
     def __init__(
-        self,
-        plotly_name='concentrationscaless',
-        parent_name='sankey.link',
-        **kwargs
+        self, plotly_name='colorscales', parent_name='sankey.link', **kwargs
     ):
-        super(ConcentrationscalessValidator, self).__init__(
+        super(ColorscalesValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Concentrationscales'),
+            data_class_str=kwargs.pop('data_class_str', 'Colorscale'),
             data_docs=kwargs.pop(
                 'data_docs', """
             cmax

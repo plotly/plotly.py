@@ -1,15 +1,15 @@
 import _plotly_utils.basevalidators
 
 
-class TemplateitemnameValidator(_plotly_utils.basevalidators.StringValidator):
+class CmaxValidator(_plotly_utils.basevalidators.NumberValidator):
 
     def __init__(
         self,
-        plotly_name='templateitemname',
-        parent_name='sankey.link.concentrationscales',
+        plotly_name='cmax',
+        parent_name='sankey.link.colorscale',
         **kwargs
     ):
-        super(TemplateitemnameValidator, self).__init__(
+        super(CmaxValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop('edit_type', 'calc'),

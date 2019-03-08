@@ -6,7 +6,7 @@ class ColorscaleValidator(_plotly_utils.basevalidators.ColorscaleValidator):
     def __init__(
         self,
         plotly_name='colorscale',
-        parent_name='sankey.link.concentrationscales',
+        parent_name='sankey.link.colorscale',
         **kwargs
     ):
         super(ColorscaleValidator, self).__init__(
