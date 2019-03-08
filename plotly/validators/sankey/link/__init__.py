@@ -12,6 +12,6 @@ from ._hovertemplate import HovertemplateValidator
 from ._hoverlabel import HoverlabelValidator
 from ._hoverinfo import HoverinfoValidator
 from ._colorsrc import ColorsrcValidator
-from ._concentrationscalesdefaults import ConcentrationscalesValidator
-from ._concentrationscaless import ConcentrationscalessValidator
+from ._colorscaledefaults import ColorscaleValidator
+from ._colorscales import ColorscalesValidator
 from ._color import ColorValidator

@@ -78,12 +78,12 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 
 plotly.py may be installed using pip...
 ```
-pip install plotly==3.6.1
+pip install plotly==3.7.0rc1
 ```
 
 or conda.
 ```
-conda install -c plotly plotly=3.6.1
+conda install -c plotly/label/test plotly=3.7.0rc1
 ```
 
 ### Jupyter Notebook Support
@@ -126,10 +126,10 @@ set NODE_OPTIONS=--max-old-space-size=4096
 jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.38 --no-build
 
 # FigureWidget support
-jupyter labextension install plotlywidget@0.7.1 --no-build
+jupyter labextension install plotlywidget@0.8.0-rc.1 --no-build
 
 # offline iplot support
-jupyter labextension install @jupyterlab/plotly-extension@0.18.1 --no-build
+jupyter labextension install @jupyterlab/plotly-extension@0.18.2 --no-build
 
 # JupyterLab chart editor support (optional)
 jupyter labextension install jupyterlab-chart-editor@1.0 --no-build
@@ -166,7 +166,7 @@ and orca can be installed according to the instructions in the [orca README](htt
 If you're migrating from plotly.py version 2, please check out the [migration guide](migration-guide.md)
 
 ## Copyright and Licenses
-Code and documentation copyright 2018 Plotly, Inc.
+Code and documentation copyright 2019 Plotly, Inc.
 
 Code released under the [MIT license](LICENSE.txt).
 
