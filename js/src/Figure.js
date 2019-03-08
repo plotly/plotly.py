@@ -2,7 +2,7 @@ var widgets = require("@jupyter-widgets/base");
 var _ = require("lodash");
 
 window.PlotlyConfig = {MathJaxConfig: 'local'};
-var Plotly = require("plotly.js/dist/plotly");
+var Plotly = require("plotly.js/dist/plotly.min");
 var PlotlyIndex = require("plotly.js/src/lib/index");
 var semver_range = "^" + require("../package.json").version;
 

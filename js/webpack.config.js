@@ -37,7 +37,6 @@ module.exports = [
             path: path.resolve(__dirname, '..', 'plotlywidget', 'static'),
             libraryTarget: 'amd'
         },
-        devtool: 'source-map',
         node: {
             fs: 'empty'
         },
