@@ -3,11 +3,11 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [3.7.0] - ???
+## [3.7.0] - 2019-03-08
 
 ### Updated
  - Updated Plotly.js to version 1.45.2. See the
- [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1451----2019-03-05)
+ [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1452----2019-03-07)
  for more information.
  
 ### Added
@@ -26,6 +26,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
  ([#1418](https://github.com/plotly/plotly.py/pull/1418))
  
 ### Fixed
+ - Make sure the trace `selectedpoints` property of `FigureWidget` traces is
+ updated on the Python side in response to plotly.js selection events
+ ([#1433](https://github.com/plotly/plotly.py/issues/1433))
  - Fix validation for 0-dimensional numpy arrays
  ([#1444](https://github.com/plotly/plotly.py/pull/1444)). Special thanks to 
  [@ankokumoyashi](https://github.com/ankokumoyashi) for this contribution!
