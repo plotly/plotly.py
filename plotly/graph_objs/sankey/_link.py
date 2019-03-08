@@ -66,16 +66,16 @@ class Link(BaseTraceHierarchyType):
     def color(self, val):
         self['color'] = val
 
-    # concentrationscaless
-    # --------------------
+    # colorscales
+    # -----------
     @property
-    def concentrationscaless(self):
+    def colorscales(self):
         """
-        The 'concentrationscaless' property is a tuple of instances of
-        Concentrationscales that may be specified as:
-          - A list or tuple of instances of plotly.graph_objs.sankey.link.Concentrationscales
+        The 'colorscales' property is a tuple of instances of
+        Colorscale that may be specified as:
+          - A list or tuple of instances of plotly.graph_objs.sankey.link.Colorscale
           - A list or tuple of dicts of string/value properties that
-            will be passed to the Concentrationscales constructor
+            will be passed to the Colorscale constructor
     
             Supported dict properties:
                 
@@ -124,41 +124,41 @@ class Link(BaseTraceHierarchyType):
 
         Returns
         -------
-        tuple[plotly.graph_objs.sankey.link.Concentrationscales]
+        tuple[plotly.graph_objs.sankey.link.Colorscale]
         """
-        return self['concentrationscaless']
+        return self['colorscales']
 
-    @concentrationscaless.setter
-    def concentrationscaless(self, val):
-        self['concentrationscaless'] = val
+    @colorscales.setter
+    def colorscales(self, val):
+        self['colorscales'] = val
 
-    # concentrationscalesdefaults
-    # ---------------------------
+    # colorscaledefaults
+    # ------------------
     @property
-    def concentrationscalesdefaults(self):
+    def colorscaledefaults(self):
         """
         When used in a template (as
-        layout.template.data.sankey.link.concentrationscalesdefaults),
-        sets the default property values to use for elements of
+        layout.template.data.sankey.link.colorscaledefaults), sets the
+        default property values to use for elements of
         sankey.link.colorscales
     
-        The 'concentrationscalesdefaults' property is an instance of Concentrationscales
+        The 'colorscaledefaults' property is an instance of Colorscale
         that may be specified as:
-          - An instance of plotly.graph_objs.sankey.link.Concentrationscales
+          - An instance of plotly.graph_objs.sankey.link.Colorscale
           - A dict of string/value properties that will be passed
-            to the Concentrationscales constructor
+            to the Colorscale constructor
     
             Supported dict properties:
 
         Returns
         -------
-        plotly.graph_objs.sankey.link.Concentrationscales
+        plotly.graph_objs.sankey.link.Colorscale
         """
-        return self['concentrationscalesdefaults']
+        return self['colorscaledefaults']
 
-    @concentrationscalesdefaults.setter
-    def concentrationscalesdefaults(self, val):
-        self['concentrationscalesdefaults'] = val
+    @colorscaledefaults.setter
+    def colorscaledefaults(self, val):
+        self['colorscaledefaults'] = val
 
     # colorsrc
     # --------
@@ -523,13 +523,13 @@ class Link(BaseTraceHierarchyType):
             array for specifying color for each `link`. If
             `link.color` is omitted, then by default, a translucent
             grey link will be used.
-        concentrationscaless
-            plotly.graph_objs.sankey.link.Concentrationscales
-            instance or dict with compatible properties
-        concentrationscalesdefaults
-            When used in a template (as layout.template.data.sankey
-            .link.concentrationscalesdefaults), sets the default
-            property values to use for elements of
+        colorscales
+            plotly.graph_objs.sankey.link.Colorscale instance or
+            dict with compatible properties
+        colorscaledefaults
+            When used in a template (as
+            layout.template.data.sankey.link.colorscaledefaults),
+            sets the default property values to use for elements of
             sankey.link.colorscales
         colorsrc
             Sets the source reference on plot.ly for  color .
@@ -589,8 +589,8 @@ class Link(BaseTraceHierarchyType):
         self,
         arg=None,
         color=None,
-        concentrationscaless=None,
-        concentrationscalesdefaults=None,
+        colorscales=None,
+        colorscaledefaults=None,
         colorsrc=None,
         hoverinfo=None,
         hoverlabel=None,
@@ -622,13 +622,13 @@ class Link(BaseTraceHierarchyType):
             array for specifying color for each `link`. If
             `link.color` is omitted, then by default, a translucent
             grey link will be used.
-        concentrationscaless
-            plotly.graph_objs.sankey.link.Concentrationscales
-            instance or dict with compatible properties
-        concentrationscalesdefaults
-            When used in a template (as layout.template.data.sankey
-            .link.concentrationscalesdefaults), sets the default
-            property values to use for elements of
+        colorscales
+            plotly.graph_objs.sankey.link.Colorscale instance or
+            dict with compatible properties
+        colorscaledefaults
+            When used in a template (as
+            layout.template.data.sankey.link.colorscaledefaults),
+            sets the default property values to use for elements of
             sankey.link.colorscales
         colorsrc
             Sets the source reference on plot.ly for  color .
@@ -716,10 +716,8 @@ an instance of plotly.graph_objs.sankey.Link"""
         # Initialize validators
         # ---------------------
         self._validators['color'] = v_link.ColorValidator()
-        self._validators['concentrationscaless'
-                        ] = v_link.ConcentrationscalessValidator()
-        self._validators['concentrationscalesdefaults'
-                        ] = v_link.ConcentrationscalesValidator()
+        self._validators['colorscales'] = v_link.ColorscalesValidator()
+        self._validators['colorscaledefaults'] = v_link.ColorscaleValidator()
         self._validators['colorsrc'] = v_link.ColorsrcValidator()
         self._validators['hoverinfo'] = v_link.HoverinfoValidator()
         self._validators['hoverlabel'] = v_link.HoverlabelValidator()
@@ -740,14 +738,11 @@ an instance of plotly.graph_objs.sankey.Link"""
         # ----------------------------------
         _v = arg.pop('color', None)
         self['color'] = color if color is not None else _v
-        _v = arg.pop('concentrationscaless', None)
-        self[
-            'concentrationscaless'
-        ] = concentrationscaless if concentrationscaless is not None else _v
-        _v = arg.pop('concentrationscalesdefaults', None)
-        self[
-            'concentrationscalesdefaults'
-        ] = concentrationscalesdefaults if concentrationscalesdefaults is not None else _v
+        _v = arg.pop('colorscales', None)
+        self['colorscales'] = colorscales if colorscales is not None else _v
+        _v = arg.pop('colorscaledefaults', None)
+        self['colorscaledefaults'
+            ] = colorscaledefaults if colorscaledefaults is not None else _v
         _v = arg.pop('colorsrc', None)
         self['colorsrc'] = colorsrc if colorsrc is not None else _v
         _v = arg.pop('hoverinfo', None)

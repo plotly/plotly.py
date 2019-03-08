@@ -70,6 +70,13 @@ an item with matching `templateitemname` and `visible: false`."""
 
     layout['template'] = template
 
+    # Rename concentrationscales to colorscale to match conventions
+    items = plotly_schema['traces']['sankey']['attributes']\
+        ['link']['colorscales']['items']
+
+    if 'concentrationscales' in items:
+        items['colorscale'] = items.pop('concentrationscales')
+
 
 def perform_codegen():
     # Set root codegen output directory
@@ -217,7 +224,7 @@ def perform_codegen():
 
         # submodule import
         if node.child_compound_datatypes:
-            
+
             path_to_datatype_import_info.setdefault(key, []).append(
                 (f"plotly.graph_objs{node.parent_dotpath_str}",
                  node.name_undercase)

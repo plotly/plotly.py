@@ -4117,6 +4117,13 @@ class BaseTraceType(BaseTraceHierarchyType):
         """
         Dispatch points and selector info to selection callbacks
         """
+        if 'selectedpoints' in self:
+            # Update the selectedpoints property, which will notify all views
+            # of the selection change.  This is a special case because no
+            # restyle event is emitted by plotly.js on selection events
+            # even though these events update the selectedpoints property.
+            self.selectedpoints = points.point_inds
+
         for callback in self._select_callbacks:
             callback(self, points, selector)
 

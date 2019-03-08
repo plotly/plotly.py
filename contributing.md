@@ -359,7 +359,7 @@ incremented.
 Update CHANGELOG with release date and update README with final versions.
 
 In the conda installation instructions, be sure to change the
-"-c plotly/lable/test" argument to "-c plotly"
+"-c plotly/label/test" argument to "-c plotly"
  
 Commit updates.
 
