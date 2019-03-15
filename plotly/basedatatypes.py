@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 
 import collections
+from collections import OrderedDict
 import re
 import six
 from six import string_types
@@ -233,14 +234,14 @@ class BaseFigure(object):
         # are suitable as `data` elements of Plotly.animate, but not
         # the Plotly.update (See `_build_update_params_from_batch`)
         #
-        # type: typ.Dict[int, typ.Dict[str, typ.Any]]
-        self._batch_trace_edits = {}
+        # type: OrderedDict[int, OrderedDict[str, typ.Any]]
+        self._batch_trace_edits = OrderedDict()
 
         # ### Batch layout edits ###
         # Dict from layout properties to new layout values. This dict is
         # directly suitable for use in Plotly.animate and Plotly.update
-        # type: typ.Dict[str, typ.Any]
-        self._batch_layout_edits = {}
+        # type: collections.OrderedDict[str, typ.Any]
+        self._batch_layout_edits = OrderedDict()
 
         # Animation property validators
         # -----------------------------
@@ -772,7 +773,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         # Add key_path_str/val to saved batch edits
         else:
             if trace_index not in self._batch_trace_edits:
-                self._batch_trace_edits[trace_index] = {}
+                self._batch_trace_edits[trace_index] = OrderedDict()
             self._batch_trace_edits[trace_index][key_path_str] = val
 
     def _normalize_trace_indexes(self, trace_indexes):

@@ -208,3 +208,20 @@ class TestLayoutSubplots(TestCase):
         self.assertEqual(self.layout.scene6.dragmode, 'zoom')
         self.assertEqual(self.layout.mapbox7.zoom, 2)
         self.assertEqual(self.layout.polar8.sector, (0, 90))
+
+    def test_bug_1462(self):
+        # https: // github.com / plotly / plotly.py / issues / 1462
+        fig = go.Figure(data=[
+            go.Scatter(x=[1, 2], y=[1, 2], xaxis='x'),
+            go.Scatter(x=[2, 3], y=[2, 3], xaxis='x2')])
+
+        layout_dict = {
+            'grid': {'xaxes': ['x', 'x2'], 'yaxes': ['y']},
+            # 'xaxis': {'title': 'total_bill'},
+            'xaxis2': {'matches': 'x', 'title': {'text': 'total_bill'}}
+        }
+
+        fig.update(layout=layout_dict)
+        updated_layout_dict = fig.layout.to_plotly_json()
+
+        self.assertEqual(updated_layout_dict, layout_dict)
