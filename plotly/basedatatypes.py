@@ -392,6 +392,19 @@ class BaseFigure(object):
 
         return repr_str
 
+    def _repr_mimebundle_(self, include, exclude, **kwargs):
+        """
+        repr_mimebundle should accept include, exclude and **kwargs
+        """
+        import plotly.io as pio
+        data = pio.renderers._build_mime_bundle(self.to_dict())
+
+        if include:
+            data = {k: v for (k, v) in data.items() if k in include}
+        if exclude:
+            data = {k: v for (k, v) in data.items() if k not in exclude}
+        return data
+
     def update(self, dict1=None, **kwargs):
         """
         Update the properties of the figure with a dict and/or with

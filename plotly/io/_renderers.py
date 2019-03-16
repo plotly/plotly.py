@@ -524,9 +524,6 @@ def show(fig, renderer=None, validate=True):
 
 # Register renderers
 
-# JSON
-renderers['json'] = JsonRenderer()
-
 # Plotly mime type
 plotly_renderer = PlotlyRenderer()
 renderers['plotly_mimetype'] = plotly_renderer
@@ -541,6 +538,9 @@ renderers['notebook_connected'] = NotebookRenderer(
     config=config, connected=True)
 renderers['kaggle'] = KaggleRenderer(config=config)
 renderers['colab'] = ColabRenderer(config=config)
+
+# JSON
+renderers['json'] = JsonRenderer()
 
 # Static Image
 img_kwargs = dict(height=450, width=700)
