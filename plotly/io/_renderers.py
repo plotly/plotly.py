@@ -6,6 +6,7 @@ import textwrap
 import uuid
 import six
 import os
+import webbrowser
 
 from IPython.display import display_html, display
 
@@ -43,9 +44,11 @@ class RenderersConfig(object):
         return renderer
 
     def __setitem__(self, key, value):
-        if not isinstance(value, MimetypeRenderer):
-            raise ValueError(
-                'Renderer must be a subclass of MimetypeRenderer')
+        if not isinstance(value, (MimetypeRenderer, SideEffectRenderer)):
+            raise ValueError("""\
+Renderer must be a subclass of MimetypeRenderer or SideEffectRenderer.
+    Received value with type: {typ}""".format(typ=type(value)))
+
         self._renderers[key] = value
 
     def __delitem__(self, key):
@@ -130,7 +133,6 @@ Invalid named renderer(s) received: {}""".format(str(invalid)))
 
         return renderer_names
 
-
     def __repr__(self):
         return """\
 Renderers configuration
@@ -155,22 +157,35 @@ Renderers configuration
         return available
 
     def _build_mime_bundle(self, fig_dict, renderers_string=None):
-        mime_renderers = True
-        assert mime_renderers
-
         if renderers_string:
             renderer_names = self._validate_coerce_renderers(renderers_string)
             renderers_list = [self[name] for name in renderer_names]
             for renderer in renderers_list:
-                renderer.activate()
+                if isinstance(renderer, MimetypeRenderer):
+                    renderer.activate()
         else:
             renderers_list = self._default_renderers
 
         bundle = {}
         for renderer in renderers_list:
-            bundle.update(renderer.to_mimebundle(fig_dict))
+            if isinstance(renderer, MimetypeRenderer):
+                bundle.update(renderer.to_mimebundle(fig_dict))
 
         return bundle
+
+    def _perform_side_effect_rendering(self, fig_dict, renderers_string=None):
+        if renderers_string:
+            renderer_names = self._validate_coerce_renderers(renderers_string)
+            renderers_list = [self[name] for name in renderer_names]
+            for renderer in renderers_list:
+                if isinstance(renderer, SideEffectRenderer):
+                    renderer.activate()
+        else:
+            renderers_list = self._default_renderers
+
+        for renderer in renderers_list:
+            if isinstance(renderer, SideEffectRenderer):
+                renderer.render(fig_dict)
 
 
 # Make config a singleton object
@@ -180,7 +195,6 @@ del RenderersConfig
 
 
 class MimetypeRenderer(object):
-
     def activate(self):
         pass
 
@@ -511,15 +525,77 @@ class ColabRenderer(HtmlRenderer):
             auto_play=auto_play)
 
 
+class SideEffectRenderer(object):
+
+    def activate(self):
+        pass
+
+    def render(self, fig):
+        raise NotImplementedError()
+
+
+def open_html_in_browser(html):
+    """Display html in the default web browser without creating a temp file.
+
+    Instantiates a trivial http server and calls webbrowser.open with a URL
+    to retrieve html from that server.
+    """
+    from http.server import BaseHTTPRequestHandler, HTTPServer
+
+    if isinstance(html, six.string_types):
+        html = html.encode('utf8')
+
+    class OneShotRequestHandler(BaseHTTPRequestHandler):
+        def do_GET(self):
+            self.send_response(200)
+            self.send_header("Content-type", "text/html")
+            self.end_headers()
+
+            bufferSize = 1024*1024
+            for i in range(0, len(html), bufferSize):
+                self.wfile.write(html[i:i+bufferSize])
+
+        def log_message(self, format, *args):
+            # Silence stderr logging
+            pass
+
+    server = HTTPServer(('127.0.0.1', 0), OneShotRequestHandler)
+    webbrowser.open('http://127.0.0.1:%s' % server.server_port)
+    server.handle_request()
+
+
+class BrowserRenderer(SideEffectRenderer):
+    def __init__(self, config=None, auto_play=False):
+        self.config = config
+        self.auto_play = auto_play
+
+    def render(self, fig_dict):
+        renderer = HtmlRenderer(
+            connected=False,
+            fullhtml=True,
+            requirejs=False,
+            global_init=False,
+            config=self.config,
+            auto_play=self.auto_play)
+
+        bundle = renderer.to_mimebundle(fig_dict)
+        html = bundle['text/html']
+        open_html_in_browser(html)
+
+
 # Show
 def show(fig, renderer=None, validate=True):
     fig_dict = validate_coerce_fig_to_dict(fig, validate)
 
-    mime_renderers = True
-    if mime_renderers:
-        bundle = renderers._build_mime_bundle(
-            fig_dict, renderers_string=renderer)
+    # Mimetype renderers
+    bundle = renderers._build_mime_bundle(
+        fig_dict, renderers_string=renderer)
+    if bundle:
         display(bundle, raw=True)
+
+    # Side effect renderers
+    renderers._perform_side_effect_rendering(
+        fig_dict, renderers_string=renderer)
 
 
 # Register renderers
@@ -551,6 +627,9 @@ renderers['jpg'] = jpeg_renderer
 
 renderers['svg'] = SvgRenderer(**img_kwargs)
 renderers['pdf'] = PdfRenderer(**img_kwargs)
+
+# Side effects
+renderers['browser'] = BrowserRenderer(config=config)
 
 # Set default renderer
 default_renderer = 'plotly_mimetype'
