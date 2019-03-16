@@ -529,7 +529,7 @@ renderers['json'] = JsonRenderer()
 
 # Plotly mime type
 plotly_renderer = PlotlyRenderer()
-renderers['default'] = plotly_renderer
+renderers['plotly_mimetype'] = plotly_renderer
 renderers['jupyterlab'] = plotly_renderer
 renderers['nteract'] = plotly_renderer
 renderers['vscode'] = plotly_renderer
@@ -553,12 +553,12 @@ renderers['svg'] = SvgRenderer(**img_kwargs)
 renderers['pdf'] = PdfRenderer(**img_kwargs)
 
 # Set default renderer
-default_renderer = 'default'
+default_renderer = 'plotly_mimetype'
 
 # Check Colab
 try:
     import google.colab
-    default_renderer += 'colab'
+    default_renderer = 'colab'
 except ImportError:
     pass
 
