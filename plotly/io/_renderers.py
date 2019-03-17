@@ -19,7 +19,6 @@ class RenderersConfig(object):
     """
     Singleton object containing the current renderer configurations
     """
-
     def __init__(self):
         self._renderers = {}
         self._default_name = None
@@ -89,6 +88,13 @@ Renderer must be a subclass of MimetypeRenderer or SideEffectRenderer.
         figures when they are displayed in a jupyter notebook or when using
         the plotly.io.show function
 
+        Multiple renderers may be registered by separating their names with
+        '+' characters. For example, to specify rendering compatible with
+        the classic Jupyter Notebook, JupyterLab, and PDF export:
+
+        >>> import plotly.io as pio
+        >>> pio.renderers.default = 'notebook+jupyterlab+pdf'
+
         The names of available templates may be retrieved with:
 
         >>> import plotly.io as pio
@@ -118,6 +124,19 @@ Renderer must be a subclass of MimetypeRenderer or SideEffectRenderer.
             renderer.activate()
 
     def _validate_coerce_renderers(self, renderers_string):
+        """
+        Input a string and validate that it contains the names of one or more
+        valid renderers separated on '+' characters.  If valid, return
+        a list of the renderer names
+
+        Parameters
+        ----------
+        renderers_string: str
+
+        Returns
+        -------
+        list of str
+        """
         # Validate value
         if not isinstance(renderers_string, six.string_types):
             raise ValueError('Renderer must be specified as a string')
@@ -143,7 +162,7 @@ Renderers configuration
     def _available_templates_str(self):
         """
         Return nicely wrapped string representation of all
-        available template names
+        available renderer names
         """
         available = '\n'.join(textwrap.wrap(
             repr(list(self)),
@@ -154,6 +173,26 @@ Renderers configuration
         return available
 
     def _build_mime_bundle(self, fig_dict, renderers_string=None):
+        """
+        Build a mime bundle dict containing a kev/value pair for each
+        MimetypeRenderer specified in either the default renderer string,
+        or in the supplied renderers_string argument.
+
+        Note that this method skips any renderers that are not subclasses
+        of MimetypeRenderer.
+
+        Parameters
+        ----------
+        fig_dict: dict
+            Figure dictionary
+        renderers_string: str or None (default None)
+            Renderer string to process rather than the current default
+            renderer string
+
+        Returns
+        -------
+        dict
+        """
         if renderers_string:
             renderer_names = self._validate_coerce_renderers(renderers_string)
             renderers_list = [self[name] for name in renderer_names]
@@ -171,6 +210,26 @@ Renderers configuration
         return bundle
 
     def _perform_side_effect_rendering(self, fig_dict, renderers_string=None):
+        """
+        Perform side-effect rendering for each SideEffectRenderer specified
+        in either the default renderer string, or in the supplied
+        renderers_string argument.
+
+        Note that this method skips any renderers that are not subclasses
+        of SideEffectRenderer.
+
+        Parameters
+        ----------
+        fig_dict: dict
+            Figure dictionary
+        renderers_string: str or None (default None)
+            Renderer string to process rather than the current default
+            renderer string
+
+        Returns
+        -------
+        None
+        """
         if renderers_string:
             renderer_names = self._validate_coerce_renderers(renderers_string)
             renderers_list = [self[name] for name in renderer_names]
@@ -185,14 +244,36 @@ Renderers configuration
                 renderer.render(fig_dict)
 
 
-# Make config a singleton object
-# ------------------------------
+# Make renderers a singleton object
+# ---------------------------------
 renderers = RenderersConfig()
 del RenderersConfig
 
 
 # Show
 def show(fig, renderer=None, validate=True):
+    """
+    Show a figure using either the default renderer(s) or the renderer(s)
+    specified by the renderer argument
+
+    Parameters
+    ----------
+    fig: dict of Figure
+        The Figure object or figure dict to display
+
+    renderer: str or None (default None)
+        A string containing the names of one or more registered renderers
+        (separated by '+' characters) or None.  If None, then the default
+        renderers specified in plotly.io.renderers.default are used.
+
+    validate: bool (default True)
+        True if the figure should be validated before being shown,
+        False otherwise.
+
+    Returns
+    -------
+    None
+    """
     fig_dict = validate_coerce_fig_to_dict(fig, validate)
 
     # Mimetype renderers
@@ -207,6 +288,7 @@ def show(fig, renderer=None, validate=True):
 
 
 # Register renderers
+# ------------------
 
 # Plotly mime type
 plotly_renderer = PlotlyRenderer()
@@ -232,7 +314,6 @@ renderers['png'] = PngRenderer(**img_kwargs)
 jpeg_renderer = JpegRenderer(**img_kwargs)
 renderers['jpeg'] = jpeg_renderer
 renderers['jpg'] = jpeg_renderer
-
 renderers['svg'] = SvgRenderer(**img_kwargs)
 renderers['pdf'] = PdfRenderer(**img_kwargs)
 
@@ -242,9 +323,10 @@ renderers['firefox'] = BrowserRenderer(config=config, using='firefox')
 renderers['chrome'] = BrowserRenderer(config=config, using='chrome')
 
 # Set default renderer
+# --------------------
 default_renderer = 'plotly_mimetype'
 
-# Check Colab
+# Check if we're running in Google Colab
 try:
     import google.colab
 
@@ -252,7 +334,7 @@ try:
 except ImportError:
     pass
 
-# Check Kaggle
+# Check if we're running in a Kaggle notebook
 if os.path.exists('/kaggle/input'):
     default_renderer = 'kaggle'
 
