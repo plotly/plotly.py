@@ -360,13 +360,13 @@ class HtmlRenderer(MimetypeRenderer):
 
         # Handle fullhtml
         if self.fullhtml:
-            html_start = ''
-            html_end = ''
+            html_start = '<html>'
+            html_end = '</html>'
         else:
             html_start = ''
             html_end = ''
 
-        plotly_html_div = """
+        plotly_html_div = """\
 {html_start}
     {load_plotlyjs}
     <div id="{id}" class="plotly-graph-div"></div>
