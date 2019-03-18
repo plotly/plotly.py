@@ -4,13 +4,15 @@ import textwrap
 import six
 import os
 
-from IPython.display import display
+from plotly import optional_imports
 
 from plotly.io._base_renderers import (
     MimetypeRenderer, SideEffectRenderer, PlotlyRenderer, NotebookRenderer,
     KaggleRenderer, ColabRenderer, JsonRenderer, PngRenderer, JpegRenderer,
     SvgRenderer, PdfRenderer, BrowserRenderer)
 from plotly.io._utils import validate_coerce_fig_to_dict
+
+ipython_display = optional_imports.get_module('IPython.display')
 
 
 # Renderer configuration class
@@ -280,7 +282,11 @@ def show(fig, renderer=None, validate=True):
     bundle = renderers._build_mime_bundle(
         fig_dict, renderers_string=renderer)
     if bundle:
-        display(bundle, raw=True)
+        if not ipython_display:
+            raise ValueError(
+                'Mime type rendering requires ipython but it is not installed')
+
+        ipython_display.display(bundle, raw=True)
 
     # Side effect renderers
     renderers._perform_side_effect_rendering(
@@ -327,30 +333,32 @@ renderers['chrome'] = BrowserRenderer(config=config, using='chrome')
 default_renderer = None
 
 # Try to detect environment so that we can enable a useful default renderer
-try:
-    import google.colab
-    default_renderer = 'colab'
-except ImportError:
-    pass
+if ipython_display:
+    try:
+        import google.colab
+        default_renderer = 'colab'
+    except ImportError:
+        pass
 
-# Check if we're running in a Kaggle notebook
-if not default_renderer and os.path.exists('/kaggle/input'):
-    default_renderer = 'kaggle'
+    # Check if we're running in a Kaggle notebook
+    if not default_renderer and os.path.exists('/kaggle/input'):
+        default_renderer = 'kaggle'
 
-# Check if we're running in VSCode
-if not default_renderer and 'VSCODE_PID' in os.environ:
-    default_renderer = 'vscode'
+    # Check if we're running in VSCode
+    if not default_renderer and 'VSCODE_PID' in os.environ:
+        default_renderer = 'vscode'
 
-# Fallback to renderer combination that will work automatically in the
-# classic notebook, jupyterlab, nteract, vscode, and nbconvert HTML export.
-# We use 'notebook_connected' rather than 'notebook' to avoid bloating
-# notebook size and slowing down plotly.py initial import.
-# This comes at the cost of requiring internet connectivity to view,
-# but that is a preferable trade-off to adding ~3MB to each saved notebook.
-#
-# Note that this doesn't cause any problem for offline JupyterLab users.
-if not default_renderer:
-    default_renderer = 'notebook_connected+plotly_mimetype'
+    # Fallback to renderer combination that will work automatically in the
+    # classic notebook, jupyterlab, nteract, vscode, and nbconvert HTML
+    # export. We use 'notebook_connected' rather than 'notebook' to avoid
+    # bloating notebook size and slowing down plotly.py initial import.
+    # This comes at the cost of requiring internet connectivity to view,
+    # but that is a preferable trade-off to adding ~3MB to each saved
+    # notebook.
+    #
+    # Note that this doesn't cause any problem for offline JupyterLab users.
+    if not default_renderer:
+        default_renderer = 'notebook_connected+plotly_mimetype'
 
 # Set default renderer
 renderers.default = default_renderer

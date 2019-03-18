@@ -4,13 +4,13 @@ import webbrowser
 import uuid
 import inspect
 
-from IPython.display import display_html
 import six
-
 from plotly.io import to_json, to_image
-from plotly import utils
+from plotly import utils, optional_imports
 from plotly.io._orca import ensure_server
 from plotly.offline.offline import _get_jconfig, get_plotlyjs
+
+ipython_display = optional_imports.get_module('IPython.display')
 
 
 class RendererRepr(object):
@@ -214,6 +214,11 @@ class HtmlRenderer(MimetypeRenderer):
 
     def activate(self):
         if self.global_init:
+            if not ipython_display:
+                raise ValueError(
+                    'The {cls} class requires ipython but it is not installed'
+                    .format(cls=self.__class__.__name__))
+
             if not self.requirejs:
                 raise ValueError(
                     'global_init is only supported with requirejs=True')
@@ -255,7 +260,7 @@ class HtmlRenderer(MimetypeRenderer):
         </script>
         """.format(script=get_plotlyjs(), win_config=_window_plotly_config)
 
-            display_html(script, raw=True)
+            ipython_display.display_html(script, raw=True)
 
     def to_mimebundle(self, fig_dict):
         plotdivid = uuid.uuid4()
