@@ -12,14 +12,26 @@ from plotly.offline.offline import _get_jconfig, get_plotlyjs
 
 ipython_display = optional_imports.get_module('IPython.display')
 
+try:
+    from http.server import BaseHTTPRequestHandler, HTTPServer
+except ImportError:
+    # Python 2.7
+    from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
+
 
 class RendererRepr(object):
     """
     A mixin implementing a simple __repr__ for Renderer classes
     """
     def __repr__(self):
-        init_sig = inspect.signature(self.__init__)
-        init_args = list(init_sig.parameters.keys())
+        try:
+            init_sig = inspect.signature(self.__init__)
+            init_args = list(init_sig.parameters.keys())
+        except AttributeError:
+            # Python 2.7
+            argspec = inspect.getargspec(self.__init__)
+            init_args = [a for a in argspec.args if a != 'self']
+
         return "{cls}({attrs})\n{doc}".format(
             cls=self.__class__.__name__,
             attrs=", ".join("{}={!r}".format(k, self.__dict__[k])
@@ -471,8 +483,6 @@ def open_html_in_browser(html, using=None, new=0, autoraise=True):
     using, new, autoraise:
         See docstrings in webbrowser.get and webbrowser.open
     """
-    from http.server import BaseHTTPRequestHandler, HTTPServer
-
     if isinstance(html, six.string_types):
         html = html.encode('utf8')
 
