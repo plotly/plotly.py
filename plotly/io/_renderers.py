@@ -324,19 +324,30 @@ renderers['chrome'] = BrowserRenderer(config=config, using='chrome')
 
 # Set default renderer
 # --------------------
-default_renderer = 'plotly_mimetype'
+default_renderer = None
 
-# Check if we're running in Google Colab
+# Try to detect environment so that we can enable a useful default renderer
 try:
     import google.colab
-
     default_renderer = 'colab'
 except ImportError:
     pass
 
 # Check if we're running in a Kaggle notebook
-if os.path.exists('/kaggle/input'):
+if not default_renderer and os.path.exists('/kaggle/input'):
     default_renderer = 'kaggle'
+
+# Check if we're running in VSCode
+if not default_renderer and 'VSCODE_PID' in os.environ:
+    default_renderer = 'vscode'
+
+# Fallback to renderer combination that will work automatically in the
+# classic notebook, jupyterlab, nteract, vscode, and nbconvert HTML export.
+# We use 'notebook_connected' rather than 'notebook' to avoid bloating
+# notebook size.  This comes at the cost of requiring internet connectivity,
+# but that is a preferable trade-off to adding ~3MB to each saved notebook.
+if not default_renderer:
+    default_renderer = 'notebook_connected+plotly_mimetype'
 
 # Set default renderer
 renderers.default = default_renderer
