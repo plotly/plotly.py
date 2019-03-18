@@ -344,8 +344,11 @@ if not default_renderer and 'VSCODE_PID' in os.environ:
 # Fallback to renderer combination that will work automatically in the
 # classic notebook, jupyterlab, nteract, vscode, and nbconvert HTML export.
 # We use 'notebook_connected' rather than 'notebook' to avoid bloating
-# notebook size.  This comes at the cost of requiring internet connectivity,
+# notebook size and slowing down plotly.py initial import.
+# This comes at the cost of requiring internet connectivity to view,
 # but that is a preferable trade-off to adding ~3MB to each saved notebook.
+#
+# Note that this doesn't cause any problem for offline JupyterLab users.
 if not default_renderer:
     default_renderer = 'notebook_connected+plotly_mimetype'
 
