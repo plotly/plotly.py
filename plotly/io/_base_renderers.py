@@ -20,10 +20,11 @@ class RendererRepr(object):
     def __repr__(self):
         init_sig = inspect.signature(self.__init__)
         init_args = list(init_sig.parameters.keys())
-        return "{cls}({attrs})".format(
+        return "{cls}({attrs})\n{doc}".format(
             cls=self.__class__.__name__,
             attrs=", ".join("{}={!r}".format(k, self.__dict__[k])
-                           for k in init_args))
+                           for k in init_args),
+            doc=self.__doc__)
 
 
 class MimetypeRenderer(RendererRepr):
