@@ -2,6 +2,7 @@ import base64
 import json
 import webbrowser
 import uuid
+import inspect
 
 from IPython.display import display_html
 import six
@@ -12,7 +13,23 @@ from plotly.io._orca import ensure_server
 from plotly.offline.offline import _get_jconfig, get_plotlyjs
 
 
-class MimetypeRenderer(object):
+class RendererRepr(object):
+    """
+    A mixin implementing a simple __repr__ for Renderer classes
+    """
+    def __repr__(self):
+        init_sig = inspect.signature(self.__init__)
+        init_args = list(init_sig.parameters.keys())
+        return "{cls}({attrs})".format(
+            cls=self.__class__.__name__,
+            attrs=", ".join("{}={!r}".format(k, self.__dict__[k])
+                           for k in init_args))
+
+
+class MimetypeRenderer(RendererRepr):
+    """
+    Base class for all mime type renderers
+    """
     def activate(self):
         pass
 
@@ -21,6 +38,12 @@ class MimetypeRenderer(object):
 
 
 class JsonRenderer(MimetypeRenderer):
+    """
+    Renderer to display figures as JSON hierarchies.  This renderer is
+    compatible with JupyterLab and VSCode.
+
+    mime type: 'application/json'
+    """
     def to_mimebundle(self, fig_dict):
         value = json.loads(to_json(fig_dict))
         return {'application/json': value}
@@ -28,6 +51,13 @@ class JsonRenderer(MimetypeRenderer):
 
 # Plotly mimetype
 class PlotlyRenderer(MimetypeRenderer):
+    """
+    Renderer to display figures using the plotly mime type.  This renderer is
+    compatible with JupyterLab (using the @jupyterlab/plotly-extension),
+    VSCode, and nteract.
+
+    mime type: 'application/vnd.plotly.v1+json'
+    """
     def __init__(self, config=None):
         self.config = dict(config) if config else {}
 
@@ -40,6 +70,9 @@ class PlotlyRenderer(MimetypeRenderer):
 
 # Static Image
 class ImageRenderer(MimetypeRenderer):
+    """
+    Base class for all static image renderers
+    """
     def __init__(self,
                  mime_type,
                  b64_encode=False,
@@ -56,6 +89,7 @@ class ImageRenderer(MimetypeRenderer):
         self.scale = scale
 
     def activate(self):
+        # Start up orca server to reduce the delay on first render
         ensure_server()
 
     def to_mimebundle(self, fig_dict):
@@ -75,6 +109,14 @@ class ImageRenderer(MimetypeRenderer):
 
 
 class PngRenderer(ImageRenderer):
+    """
+    Renderer to display figures as static PNG images.  This renderer requires
+    the orca command-line utility and is broadly compatible across IPython
+    environments (classic Jupyter Notebook, JupyterLab, QtConsole, VSCode,
+    PyCharm, etc) and nbconvert targets (HTML, PDF, etc.).
+
+    mime type: 'image/png'
+    """
     def __init__(self, width=None, height=None, scale=None):
         super(PngRenderer, self).__init__(
             mime_type='image/png',
@@ -86,6 +128,14 @@ class PngRenderer(ImageRenderer):
 
 
 class SvgRenderer(ImageRenderer):
+    """
+    Renderer to display figures as static SVG images.  This renderer requires
+    the orca command-line utility and is broadly compatible across IPython
+    environments (classic Jupyter Notebook, JupyterLab, QtConsole, VSCode,
+    PyCharm, etc) and nbconvert targets (HTML, PDF, etc.).
+
+    mime type: 'image/svg+xml'
+    """
     def __init__(self, width=None, height=None, scale=None):
         super(SvgRenderer, self).__init__(
             mime_type='image/svg+xml',
@@ -96,23 +146,38 @@ class SvgRenderer(ImageRenderer):
             scale=scale)
 
 
-class PdfRenderer(ImageRenderer):
-    def __init__(self, width=None, height=None, scale=None):
-        super(PdfRenderer, self).__init__(
-            mime_type='application/pdf',
-            b64_encode=True,
-            format='pdf',
-            width=width,
-            height=height,
-            scale=scale)
-
-
 class JpegRenderer(ImageRenderer):
+    """
+    Renderer to display figures as static JPEG images.  This renderer requires
+    the orca command-line utility and is broadly compatible across IPython
+    environments (classic Jupyter Notebook, JupyterLab, QtConsole, VSCode,
+    PyCharm, etc) and nbconvert targets (HTML, PDF, etc.).
+
+    mime type: 'image/jpeg'
+    """
     def __init__(self, width=None, height=None, scale=None):
         super(JpegRenderer, self).__init__(
             mime_type='image/jpeg',
             b64_encode=True,
             format='jpg',
+            width=width,
+            height=height,
+            scale=scale)
+
+
+class PdfRenderer(ImageRenderer):
+    """
+    Renderer to display figures as static PDF images.  This renderer requires
+    the orca command-line utility and is compatible with JupyterLab and the
+    LaTeX-based nbconvert export to PDF.
+
+    mime type: 'application/pdf'
+    """
+    def __init__(self, width=None, height=None, scale=None):
+        super(PdfRenderer, self).__init__(
+            mime_type='application/pdf',
+            b64_encode=True,
+            format='pdf',
             width=width,
             height=height,
             scale=scale)
@@ -126,7 +191,11 @@ window.PlotlyConfig = {MathJaxConfig: 'local'};"""
 
 
 class HtmlRenderer(MimetypeRenderer):
+    """
+    Base class for all HTML mime type renderers
 
+    mime type: 'text/html'
+    """
     def __init__(self,
                  connected=False,
                  fullhtml=False,
@@ -304,6 +373,17 @@ class HtmlRenderer(MimetypeRenderer):
 
 
 class NotebookRenderer(HtmlRenderer):
+    """
+    Renderer to display interactive figures in the classic Jupyter Notebook.
+    This renderer is also useful for notebooks that will be converted to
+    HTML using nbconvert/nbviewer as it will produce standalone HTML files
+    that include interactive figures.
+
+    This renderer automatically performs global notebook initialization when
+    activated.
+
+    mime type: 'text/html'
+    """
     def __init__(self, connected=False, config=None, auto_play=False):
         super(NotebookRenderer, self).__init__(
             connected=connected,
@@ -316,7 +396,14 @@ class NotebookRenderer(HtmlRenderer):
 
 class KaggleRenderer(HtmlRenderer):
     """
-    Same as NotebookRenderer but with connected True
+    Renderer to display interactive figures in Kaggle Notebooks.
+
+    Same as NotebookRenderer but with connected=True so that the plotly.js
+    bundle is loaded from a CDN rather than being embedded in the notebook.
+
+    This renderer is enabled by default when running in a Kaggle notebook.
+
+    mime type: 'text/html'
     """
     def __init__(self, config=None, auto_play=False):
         super(KaggleRenderer, self).__init__(
@@ -330,7 +417,11 @@ class KaggleRenderer(HtmlRenderer):
 
 class ColabRenderer(HtmlRenderer):
     """
-    Google Colab compatible HTML renderer
+    Renderer to display interactive figures in Google Colab Notebooks.
+
+    This renderer is enabled by default when running in a Colab notebook.
+
+    mime type: 'text/html'
     """
     def __init__(self, config=None, auto_play=False):
         super(ColabRenderer, self).__init__(
@@ -342,8 +433,17 @@ class ColabRenderer(HtmlRenderer):
             auto_play=auto_play)
 
 
-class SideEffectRenderer(object):
+class SideEffectRenderer(RendererRepr):
+    """
+    Base class for side-effect renderers.  SideEffectRenderer subclasses
+    do not display figures inline in a notebook environment, but render
+    figures by some external means (e.g. a separate browser tab).
 
+    Unlike MimetypeRenderer subclasses, SideEffectRenderer subclasses are not
+    invoked when a figure is asked to display itself in the notebook.
+    Instead, they are invoked when the plotly.io.show function is called
+    on a figure.
+    """
     def activate(self):
         pass
 
@@ -352,10 +452,18 @@ class SideEffectRenderer(object):
 
 
 def open_html_in_browser(html, using=None, new=0, autoraise=True):
-    """Display html in the default web browser without creating a temp file.
+    """
+    Display html in a web browser without creating a temp file.
 
-    Instantiates a trivial http server and calls webbrowser.open with a URL
-    to retrieve html from that server.
+    Instantiates a trivial http server and uses the webbrowser modeul to
+    open a URL to retrieve html from that server.
+
+    Parameters
+    ----------
+    html: str
+        HTML string to display
+    using, new, autoraise:
+        See docstrings in webbrowser.get and webbrowser.open
     """
     from http.server import BaseHTTPRequestHandler, HTTPServer
 
@@ -386,6 +494,17 @@ def open_html_in_browser(html, using=None, new=0, autoraise=True):
 
 
 class BrowserRenderer(SideEffectRenderer):
+    """
+    Renderer to display interactive figures in an external web browser.
+    This renderer will open a new browser window or tab when the
+    plotly.io.show function is called on a figure.
+
+    This renderer has no ipython/jupyter dependencies and is a good choice
+    for use in environments that do not support the inline display of
+    interactive figures.
+
+    mime type: 'text/html'
+    """
     def __init__(self,
                  config=None,
                  auto_play=False,
