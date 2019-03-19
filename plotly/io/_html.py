@@ -114,6 +114,12 @@ def to_div(fig,
 
     # ## Serialize figure config ##
     config = _get_jconfig(config)
+
+    # Check whether we should add responsive
+    layout_dict = fig_dict.get('layout', {})
+    if layout_dict.get('width', None) is None:
+        config.setdefault('responsive', True)
+
     jconfig = json.dumps(config)
 
     # ## Get platform URL ##

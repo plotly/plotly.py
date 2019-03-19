@@ -319,7 +319,7 @@ renderers['nteract'] = plotly_renderer
 renderers['vscode'] = plotly_renderer
 
 # HTML-based
-config = {'responsive': True}
+config = {}
 renderers['notebook'] = NotebookRenderer(config=config)
 renderers['notebook_connected'] = NotebookRenderer(
     config=config, connected=True)
