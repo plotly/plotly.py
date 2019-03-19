@@ -362,8 +362,13 @@ class HtmlRenderer(MimetypeRenderer):
 
         # Handle fullhtml
         if self.fullhtml:
-            html_start = '<html>'
-            html_end = '</html>'
+            html_start = """\
+<html>
+<head><meta charset="utf-8"/></head>
+<body>"""
+            html_end = """\
+</body>
+</html>"""
         else:
             html_start = ''
             html_end = ''
