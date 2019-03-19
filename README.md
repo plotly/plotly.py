@@ -78,12 +78,12 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 
 plotly.py may be installed using pip...
 ```
-pip install plotly==3.7.0
+pip install plotly==3.7.1
 ```
 
 or conda.
 ```
-conda install -c plotly plotly=3.7.0
+conda install -c plotly plotly=3.7.1
 ```
 
 ### Jupyter Notebook Support
@@ -132,7 +132,7 @@ jupyter labextension install plotlywidget@0.8.0 --no-build
 jupyter labextension install @jupyterlab/plotly-extension@0.18.2 --no-build
 
 # JupyterLab chart editor support (optional)
-jupyter labextension install jupyterlab-chart-editor@1.0 --no-build
+jupyter labextension install jupyterlab-chart-editor@1.1 --no-build
 
 # Build extensions (must be done to activate extensions since --no-build is used above)
 jupyter lab build

@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [3.7.1] - 2019-03-19
+
+### Fixed
+ - Fixed `.update` on numbered axis objects for Python < 3.6
+ ([#1462](https://github.com/plotly/plotly.py/issues/1462),
+ [#1464](https://github.com/plotly/plotly.py/pull/1464))
+
 ## [3.7.0] - 2019-03-08
 
 ### Updated
