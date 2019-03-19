@@ -208,6 +208,8 @@ class PdfRenderer(ImageRenderer):
 _window_plotly_config = """\
 window.PlotlyConfig = {MathJaxConfig: 'local'};"""
 
+_mathjax_config = """\
+if (window.MathJax) {MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}"""
 
 class HtmlRenderer(MimetypeRenderer):
     """
@@ -246,6 +248,7 @@ class HtmlRenderer(MimetypeRenderer):
                 script = """\
         <script type="text/javascript">
         {win_config}
+        {mathjax_config}
         if (typeof require !== 'undefined') {{
         require.undef("plotly");
         requirejs.config({{
@@ -258,7 +261,8 @@ class HtmlRenderer(MimetypeRenderer):
         }});
         }}
         </script>
-        """.format(win_config=_window_plotly_config)
+        """.format(win_config=_window_plotly_config,
+                   mathjax_config=_mathjax_config)
 
             else:
                 # If not connected then we embed a copy of the plotly.js
@@ -266,6 +270,7 @@ class HtmlRenderer(MimetypeRenderer):
                 script = """\
         <script type="text/javascript">
         {win_config}
+        {mathjax_config}
         if (typeof require !== 'undefined') {{
         require.undef("plotly");
         define('plotly', function(require, exports, module) {{
@@ -276,7 +281,9 @@ class HtmlRenderer(MimetypeRenderer):
         }});
         }}
         </script>
-        """.format(script=get_plotlyjs(), win_config=_window_plotly_config)
+        """.format(script=get_plotlyjs(),
+                   win_config=_window_plotly_config,
+                   mathjax_config=_mathjax_config)
 
             ipython_display.display_html(script, raw=True)
 
