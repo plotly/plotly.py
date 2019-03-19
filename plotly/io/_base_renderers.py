@@ -211,6 +211,7 @@ window.PlotlyConfig = {MathJaxConfig: 'local'};"""
 _mathjax_config = """\
 if (window.MathJax) {MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}"""
 
+
 class HtmlRenderer(MimetypeRenderer):
     """
     Base class for all HTML mime type renderers
@@ -288,124 +289,35 @@ class HtmlRenderer(MimetypeRenderer):
             ipython_display.display_html(script, raw=True)
 
     def to_mimebundle(self, fig_dict):
-        plotdivid = uuid.uuid4()
 
-        # Serialize figure
-        jdata = json.dumps(
-            fig_dict.get('data', []), cls=utils.PlotlyJSONEncoder)
-        jlayout = json.dumps(
-            fig_dict.get('layout', {}), cls=utils.PlotlyJSONEncoder)
+        from plotly.io import to_div, to_html
 
-        if fig_dict.get('frames', None):
-            jframes = json.dumps(
-                fig_dict.get('frames', []), cls=utils.PlotlyJSONEncoder)
-        else:
-            jframes = None
-
-        # Serialize figure config
-        config = _get_jconfig(self.config)
-        jconfig = json.dumps(config)
-
-        # Platform URL
-        plotly_platform_url = config.get('plotly_domain', 'https://plot.ly')
-
-        # Build script body
-        if jframes:
-            if self.auto_play:
-                animate = """.then(function(){{
-                    Plotly.animate('{id}');
-                }}""".format(id=plotdivid)
-
-            else:
-                animate = ''
-
-            script = '''
-            if (document.getElementById("{id}")) {{
-                Plotly.plot(
-                    '{id}',
-                    {data},
-                    {layout},
-                    {config}
-                ).then(function () {add_frames}){animate}
-            }}
-                '''.format(
-                id=plotdivid,
-                data=jdata,
-                layout=jlayout,
-                config=jconfig,
-                add_frames="{" + "return Plotly.addFrames('{id}',{frames}".format(
-                    id=plotdivid, frames=jframes
-                ) + ");}",
-                animate=animate
-            )
-        else:
-            script = """
-        if (document.getElementById("{id}")) {{
-            Plotly.newPlot("{id}", {data}, {layout}, {config}); 
-        }}
-        """.format(
-                id=plotdivid,
-                data=jdata,
-                layout=jlayout,
-                config=jconfig)
-
-        # Build div
-
-        # Handle require
         if self.requirejs:
-            require_start = 'require(["plotly"], function(Plotly) {'
-            require_end = '});'
-            load_plotlyjs = ''
+            include_plotlyjs = 'require'
+            include_mathjax = False
+        elif self.connected:
+            include_plotlyjs = 'cdn'
+            include_mathjax = 'cdn'
         else:
-            require_start = ''
-            require_end = ''
-            if self.connected:
-                load_plotlyjs = """\
-<script type="text/javascript">{win_config}</script>
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>""".format(
-                    win_config=_window_plotly_config)
-            else:
-                load_plotlyjs = """\
-<script type="text/javascript">{win_config}</script>
-<script type="text/javascript">
-{plotlyjs}
-</script>""".format(win_config=_window_plotly_config, plotlyjs=get_plotlyjs())
+            include_plotlyjs = True
+            include_mathjax = 'cdn'
 
-        # Handle fullhtml
         if self.fullhtml:
-            html_start = """\
-<html>
-<head><meta charset="utf-8"/></head>
-<body>"""
-            html_end = """\
-</body>
-</html>"""
+            html = to_html(
+                fig_dict,
+                config=self.config,
+                auto_play=self.auto_play,
+                include_plotlyjs=include_plotlyjs,
+                include_mathjax=include_mathjax)
         else:
-            html_start = ''
-            html_end = ''
+            html = to_div(
+                fig_dict,
+                config=self.config,
+                auto_play=self.auto_play,
+                include_plotlyjs=include_plotlyjs,
+                include_mathjax=include_mathjax)
 
-        plotly_html_div = """\
-{html_start}
-    {load_plotlyjs}
-    <div id="{id}" class="plotly-graph-div"></div>
-    <script type="text/javascript">
-        {require_start}
-            window.PLOTLYENV=window.PLOTLYENV || {{}};
-            window.PLOTLYENV.BASE_URL='{plotly_platform_url}'
-            {script}
-        {require_end}
-    </script>
-{html_end}""".format(
-            html_start=html_start,
-            load_plotlyjs=load_plotlyjs,
-            id=plotdivid,
-            plotly_platform_url=plotly_platform_url,
-            require_start=require_start,
-            script=script,
-            require_end=require_end,
-            html_end=html_end)
-
-        return {'text/html': plotly_html_div}
+        return {'text/html': html}
 
 
 class NotebookRenderer(HtmlRenderer):
@@ -500,6 +412,7 @@ class IFrameRenderer(MimetypeRenderer):
         self.auto_play = auto_play
 
     def to_mimebundle(self, fig_dict):
+        from plotly.io import write_html
 
         # Make iframe size slightly larger than figure size to avoid
         # having iframe have its own scroll bar.
@@ -517,17 +430,6 @@ class IFrameRenderer(MimetypeRenderer):
             layout['height'] = 450
             iframe_height = layout['height'] + iframe_buffer
 
-        renderer = HtmlRenderer(
-            connected=False,
-            fullhtml=True,
-            requirejs=False,
-            global_init=False,
-            config=self.config,
-            auto_play=self.auto_play)
-
-        bundle = renderer.to_mimebundle(fig_dict)
-        html = bundle['text/html']
-
         # Build filename using ipython cell number
         ip = IPython.get_ipython()
         cell_number = list(ip.history_manager.get_tail(1))[0][1] + 1
@@ -538,9 +440,14 @@ class IFrameRenderer(MimetypeRenderer):
         # Make directory for
         os.makedirs(dirname, exist_ok=True)
 
-        # Write HTML
-        with open(filename, 'wt') as f:
-            f.write(html)
+        write_html(fig_dict,
+                   filename,
+                   config=self.config,
+                   auto_play=self.auto_play,
+                   include_plotlyjs='directory',
+                   include_mathjax='cdn',
+                   auto_open=False,
+                   validate=False)
 
         # Build IFrame
         iframe_html = """\
