@@ -9,7 +9,7 @@ from plotly import optional_imports
 from plotly.io._base_renderers import (
     MimetypeRenderer, SideEffectRenderer, PlotlyRenderer, NotebookRenderer,
     KaggleRenderer, ColabRenderer, JsonRenderer, PngRenderer, JpegRenderer,
-    SvgRenderer, PdfRenderer, BrowserRenderer)
+    SvgRenderer, PdfRenderer, BrowserRenderer, IFrameRenderer)
 from plotly.io._utils import validate_coerce_fig_to_dict
 
 ipython_display = optional_imports.get_module('IPython.display')
@@ -327,6 +327,7 @@ renderers['pdf'] = PdfRenderer(**img_kwargs)
 renderers['browser'] = BrowserRenderer(config=config)
 renderers['firefox'] = BrowserRenderer(config=config, using='firefox')
 renderers['chrome'] = BrowserRenderer(config=config, using='chrome')
+renderers['iframe'] = IFrameRenderer(config=config)
 
 # Set default renderer
 # --------------------

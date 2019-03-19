@@ -3,6 +3,7 @@ import json
 import webbrowser
 import uuid
 import inspect
+import os
 
 import six
 from plotly.io import to_json, to_image
@@ -11,6 +12,7 @@ from plotly.io._orca import ensure_server
 from plotly.offline.offline import _get_jconfig, get_plotlyjs
 
 ipython_display = optional_imports.get_module('IPython.display')
+IPython = optional_imports.get_module('IPython')
 
 try:
     from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -451,6 +453,93 @@ class ColabRenderer(HtmlRenderer):
             auto_play=auto_play)
 
 
+class IFrameRenderer(MimetypeRenderer):
+    """
+    Renderer to display interactive figures using an IFrame.  HTML
+    representations of Figures are saved to an `iframe_figures/` directory and
+    iframe HTML elements that reference these files are inserted into the
+    notebook.
+
+    With this approach, neither plotly.js nor the figure data are embedded in
+    the notebook, so this is a good choice for notebooks that contain so many
+    large figures that basic operations (like saving and opening) become
+    very slow.
+
+    Notebooks using this renderer will display properly when exported to HTML
+    as long as the `iframe_figures/` directory is placed in the same directory
+    as the exported html file.
+
+    Note that the HTML files in `iframe_figures/` are numbered according to
+    the IPython cell execution count and so they will start being overwritten
+    each time the kernel is restarted.  This directory may be deleted whenever
+    the kernel is restarted and it will be automatically recreated.
+
+    mime type: 'text/html'
+    """
+    def __init__(self,
+                 config=None,
+                 auto_play=False):
+
+        self.config = config
+        self.auto_play = auto_play
+
+    def to_mimebundle(self, fig_dict):
+
+        # Make iframe size slightly larger than figure size to avoid
+        # having iframe have its own scroll bar.
+        iframe_buffer = 20
+        layout = fig_dict.get('layout', {})
+        if 'width' in layout:
+            iframe_width = layout['width'] + iframe_buffer
+        else:
+            layout['width'] = 700
+            iframe_width = layout['width'] + iframe_buffer
+
+        if 'height' in layout:
+            iframe_height = layout['height'] + iframe_buffer
+        else:
+            layout['height'] = 450
+            iframe_height = layout['height'] + iframe_buffer
+
+        renderer = HtmlRenderer(
+            connected=False,
+            fullhtml=True,
+            requirejs=False,
+            global_init=False,
+            config=self.config,
+            auto_play=self.auto_play)
+
+        bundle = renderer.to_mimebundle(fig_dict)
+        html = bundle['text/html']
+
+        # Build filename using ipython cell number
+        ip = IPython.get_ipython()
+        cell_number = list(ip.history_manager.get_tail(1))[0][1] + 1
+        dirname = 'iframe_figures'
+        filename = '{dirname}/figure_{cell_number}.html'.format(
+            dirname=dirname, cell_number=cell_number)
+
+        # Make directory for
+        os.makedirs(dirname, exist_ok=True)
+
+        # Write HTML
+        with open(filename, 'wt') as f:
+            f.write(html)
+
+        # Build IFrame
+        iframe_html = """\
+<iframe
+    width="{width}"
+    height="{height}"
+    src="{src}"
+    frameborder="0"
+    allowfullscreen
+></iframe>
+""".format(width=iframe_width, height=iframe_height, src=filename)
+
+        return {'text/html': iframe_html}
+
+
 class SideEffectRenderer(RendererRepr):
     """
     Base class for side-effect renderers.  SideEffectRenderer subclasses
@@ -528,8 +617,6 @@ class BrowserRenderer(SideEffectRenderer):
                  new=0,
                  autoraise=True):
 
-        # TODO: add browser name and open num here
-        # define
         self.config = config
         self.auto_play = auto_play
         self.using = using
