@@ -24,8 +24,6 @@ ipython = optional_imports.get_module('IPython')
 ipython_display = optional_imports.get_module('IPython.display')
 matplotlib = optional_imports.get_module('matplotlib')
 
-__PLOTLY_OFFLINE_INITIALIZED = False
-
 __IMAGE_FORMATS = ['jpeg', 'png', 'webp', 'svg']
 
 
@@ -262,53 +260,15 @@ def init_notebook_mode(connected=False):
     your notebook, resulting in much larger notebook sizes compared to the case
     where `connected=True`.
     """
+    import plotly.io as pio
+
     if not ipython:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
-    global __PLOTLY_OFFLINE_INITIALIZED
-
     if connected:
-        # Inject plotly.js into the output cell
-        script_inject = (
-            '{win_config}'
-            '{mathjax_config}'
-            '<script>'
-            'requirejs.config({{'
-            'paths: {{ '
-            # Note we omit the extension .js because require will include it.
-            '\'plotly\': [\'https://cdn.plot.ly/plotly-latest.min\']}},'
-            '}});'
-            'if(!window._Plotly) {{'
-            'require([\'plotly\'],'
-            'function(plotly) {{window._Plotly=plotly;}});'
-            '}}'
-            '</script>'
-        ).format(win_config=_window_plotly_config,
-                 mathjax_config=_mathjax_config)
+        pio.renderers.default = 'notebook_connected+plotly_mimetype'
     else:
-        # Inject plotly.js into the output cell
-        script_inject = (
-            '{win_config}'
-            '{mathjax_config}'
-            '<script type=\'text/javascript\'>'
-            'require.undef("plotly");'
-            'define(\'plotly\', function(require, exports, module) {{'
-            '{script}'
-            '}});'
-            'require([\'plotly\'], function(Plotly) {{'
-            'window._Plotly = Plotly;'
-            '}});'
-            '</script>'
-            '').format(script=get_plotlyjs(),
-                       win_config=_window_plotly_config,
-                       mathjax_config=_mathjax_config)
-
-    display_bundle = {
-        'text/html': script_inject,
-        'text/vnd.plotly.v1+html': script_inject
-    }
-    ipython_display.display(display_bundle, raw=True)
-    __PLOTLY_OFFLINE_INITIALIZED = True
+        pio.renderers.default = 'notebook+plotly_mimetype'
 
 
 def _plot_html(figure_or_data, config, validate, default_width,
@@ -410,8 +370,8 @@ if (document.getElementById("{id}")) {{
 
 
 def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
-          validate=True, image=None, filename='plot_image', image_width=800,
-          image_height=600, config=None, auto_play=True):
+          validate=True, image=None, filename=None, image_width=None,
+          image_height=None, config=None, auto_play=True):
     """
     Draw plotly graphs inside an IPython or Jupyter notebook without
     connecting to an external server.
@@ -434,16 +394,8 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
                                has become outdated with your version of
                                graph_reference.json or if you need to include
                                extra, unnecessary keys in your figure.
-    image (default=None |'png' |'jpeg' |'svg' |'webp') -- This parameter sets
-        the format of the image to be downloaded, if we choose to download an
-        image. This parameter has a default value of None indicating that no
-        image should be downloaded. Please note: for higher resolution images
-        and more export options, consider making requests to our image servers.
-        Type: `help(py.image)` for more details.
     filename (default='plot') -- Sets the name of the file your image
         will be saved to. The extension should not be included.
-    image_height (default=600) -- Specifies the height of the image in `px`.
-    image_width (default=800) -- Specifies the width of the image in `px`.
     config (default=None) -- Plot view options dictionary. Keyword arguments
         `show_link` and `link_text` set the associated options in this
         dictionary if it doesn't contain them already.
@@ -461,70 +413,26 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
     iplot([{'x': [1, 2, 3], 'y': [5, 2, 7]}], image='png')
     ```
     """
+    import plotly.io as pio
+
     if not ipython:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
+
+    # Deprecations
+    if image:
+        warnings.warn("""
+    Image export using plotly.offline.plot is no longer supported.
+        Please use plotly.io.write_image instead""", DeprecationWarning)
 
     config = dict(config) if config else {}
     config.setdefault('showLink', show_link)
     config.setdefault('linkText', link_text)
 
-    jconfig = _get_jconfig(config)
-
+    # Get figure
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
 
-    # Though it can add quite a bit to the display-bundle size, we include
-    # multiple representations of the plot so that the display environment can
-    # choose which one to act on.
-    data = _json.loads(_json.dumps(figure['data'],
-                                   cls=plotly.utils.PlotlyJSONEncoder))
-    layout = _json.loads(_json.dumps(figure.get('layout', {}),
-                                     cls=plotly.utils.PlotlyJSONEncoder))
-    frames = _json.loads(_json.dumps(figure.get('frames', None),
-                                     cls=plotly.utils.PlotlyJSONEncoder))
-
-    fig = {'data': data, 'layout': layout, 'config': jconfig}
-    if frames:
-        fig['frames'] = frames
-
-    display_bundle = {'application/vnd.plotly.v1+json': fig}
-
-    if __PLOTLY_OFFLINE_INITIALIZED:
-        plot_html, plotdivid, width, height = _plot_html(
-            figure_or_data, config, validate, '100%', 525, True, auto_play)
-        resize_script = ''
-        if width == '100%' or height == '100%':
-            resize_script = _build_resize_script(
-                plotdivid, 'window._Plotly')
-
-        display_bundle['text/html'] = plot_html + resize_script
-        display_bundle['text/vnd.plotly.v1+html'] = plot_html + resize_script
-
-    ipython_display.display(display_bundle, raw=True)
-
-    if image:
-        if not __PLOTLY_OFFLINE_INITIALIZED:
-            raise PlotlyError('\n'.join([
-                'Plotly Offline mode has not been initialized in this notebook. '
-                'Run: ',
-                '',
-                'import plotly',
-                'plotly.offline.init_notebook_mode() '
-                '# run at the start of every ipython notebook',
-            ]))
-        if image not in __IMAGE_FORMATS:
-            raise ValueError('The image parameter must be one of the following'
-                             ': {}'.format(__IMAGE_FORMATS)
-                             )
-        # if image is given, and is a valid format, we will download the image
-        script = get_image_download_script('iplot').format(format=image,
-                                                           width=image_width,
-                                                           height=image_height,
-                                                           filename=filename,
-                                                           plot_id=plotdivid)
-        # allow time for the plot to draw
-        time.sleep(1)
-        # inject code to download an image of the plot
-        ipython_display.display(ipython_display.HTML(script))
+    # Show figure
+    pio.show(figure, validate=validate, config=config, auto_play=auto_play)
 
 
 def plot(figure_or_data, show_link=False, link_text='Export to plot.ly',

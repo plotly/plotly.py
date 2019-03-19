@@ -1,6 +1,8 @@
 from __future__ import absolute_import, division
 
 import textwrap
+from copy import copy
+
 import six
 import os
 
@@ -111,8 +113,10 @@ Renderer must be a subclass of MimetypeRenderer or SideEffectRenderer.
     @default.setter
     def default(self, value):
         # Handle None
-        if value is None:
-            self._default_name = None
+        if not value:
+            # _default_name should always be a string so we can do
+            # pio.renderers.default.split('+')
+            self._default_name = ''
             self._default_renderers = []
             return
 
@@ -174,7 +178,7 @@ Renderers configuration
         ))
         return available
 
-    def _build_mime_bundle(self, fig_dict, renderers_string=None):
+    def _build_mime_bundle(self, fig_dict, renderers_string=None, **kwargs):
         """
         Build a mime bundle dict containing a kev/value pair for each
         MimetypeRenderer specified in either the default renderer string,
@@ -207,11 +211,17 @@ Renderers configuration
         bundle = {}
         for renderer in renderers_list:
             if isinstance(renderer, MimetypeRenderer):
+                renderer = copy(renderer)
+                for k, v in kwargs.items():
+                    if hasattr(renderer, k):
+                        setattr(renderer, k, v)
+
                 bundle.update(renderer.to_mimebundle(fig_dict))
 
         return bundle
 
-    def _perform_side_effect_rendering(self, fig_dict, renderers_string=None):
+    def _perform_side_effect_rendering(
+            self, fig_dict, renderers_string=None, **kwargs):
         """
         Perform side-effect rendering for each SideEffectRenderer specified
         in either the default renderer string, or in the supplied
@@ -243,6 +253,11 @@ Renderers configuration
 
         for renderer in renderers_list:
             if isinstance(renderer, SideEffectRenderer):
+                renderer = copy(renderer)
+                for k, v in kwargs.items():
+                    if hasattr(renderer, k):
+                        setattr(renderer, k, v)
+
                 renderer.render(fig_dict)
 
 
@@ -253,7 +268,7 @@ del RenderersConfig
 
 
 # Show
-def show(fig, renderer=None, validate=True):
+def show(fig, renderer=None, validate=True, **kwargs):
     """
     Show a figure using either the default renderer(s) or the renderer(s)
     specified by the renderer argument
@@ -280,7 +295,7 @@ def show(fig, renderer=None, validate=True):
 
     # Mimetype renderers
     bundle = renderers._build_mime_bundle(
-        fig_dict, renderers_string=renderer)
+        fig_dict, renderers_string=renderer, **kwargs)
     if bundle:
         if not ipython_display:
             raise ValueError(
@@ -290,7 +305,7 @@ def show(fig, renderer=None, validate=True):
 
     # Side effect renderers
     renderers._perform_side_effect_rendering(
-        fig_dict, renderers_string=renderer)
+        fig_dict, renderers_string=renderer, **kwargs)
 
 
 # Register renderers

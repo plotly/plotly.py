@@ -40,6 +40,10 @@ class RendererRepr(object):
                            for k in init_args),
             doc=self.__doc__)
 
+    def __hash__(self):
+        # Constructor args fully define uniqueness
+        return hash(repr(self))
+
 
 class MimetypeRenderer(RendererRepr):
     """
