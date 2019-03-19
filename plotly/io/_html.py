@@ -13,8 +13,14 @@ from plotly import utils
 # Build script to set global PlotlyConfig object. This must execute before
 # plotly.js is loaded.
 _window_plotly_config = """\
-window.PlotlyConfig = {MathJaxConfig: 'local'};"""
+<script type="text/javascript">\
+window.PlotlyConfig = {MathJaxConfig: 'local'};\
+</script>"""
 
+_mathjax_config = """\
+<script type="text/javascript">\
+if (window.MathJax) {MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}\
+</script>"""
 
 def to_div(fig,
            config=None,
@@ -168,38 +174,35 @@ def to_div(fig,
 
     # Init plotlyjs. This block needs to run before plotly.js is loaded in
     # order for MathJax configuration to work properly
-    init_plotlyjs = """"<script type = "text/javascript">\
-window.PlotlyConfig = {MathJaxConfig: 'local'};</script>"""
-
     if include_plotlyjs == 'require':
         require_start = 'require(["plotly"], function(Plotly) {'
         require_end = '});'
 
     elif include_plotlyjs == 'cdn':
         load_plotlyjs = """\
-    {init_plotlyjs}
+    {win_config}
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>\
-""".format(init_plotlyjs=init_plotlyjs)
+""".format(win_config=_window_plotly_config)
 
     elif include_plotlyjs == 'directory':
         load_plotlyjs = """\
-    {init_plotlyjs}
+    {win_config}
     <script src="plotly.min.js"></script>\
-""".format(init_plotlyjs=init_plotlyjs)
+""".format(win_config=_window_plotly_config)
 
     elif (isinstance(include_plotlyjs, six.string_types) and
           include_plotlyjs.endswith('.js')):
         load_plotlyjs = """\
-    {init_plotlyjs}
+    {win_config}
     <script src="{url}"></script>\
-""".format(init_plotlyjs=init_plotlyjs,
+""".format(win_config=_window_plotly_config,
            url=include_plotlyjs_orig)
 
     elif include_plotlyjs:
         load_plotlyjs = """\
-    {init_plotlyjs}
+    {win_config}
     <script type="text/javascript">{plotlyjs}</script>\
-""".format(init_plotlyjs=init_plotlyjs,
+""".format(win_config=_window_plotly_config,
            plotlyjs=get_plotlyjs())
 
     # ## Handle loading/initializing MathJax ##
@@ -213,13 +216,13 @@ window.PlotlyConfig = {MathJaxConfig: 'local'};</script>"""
     if include_mathjax == 'cdn':
         mathjax_script = mathjax_template.format(
             url=('https://cdnjs.cloudflare.com' 
-                 '/ajax/libs/mathjax/2.7.5/MathJax.js'))
+                 '/ajax/libs/mathjax/2.7.5/MathJax.js')) + _mathjax_config
 
     elif (isinstance(include_mathjax, six.string_types) and
           include_mathjax.endswith('.js')):
 
         mathjax_script = mathjax_template.format(
-            url=include_mathjax_orig)
+            url=include_mathjax_orig) + _mathjax_config
     elif not include_mathjax:
         mathjax_script = ''
     else:

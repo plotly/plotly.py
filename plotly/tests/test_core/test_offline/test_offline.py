@@ -36,10 +36,7 @@ fig_frames = {
 }
 
 
-resize_code_strings = [
-            'window.addEventListener("resize", ',
-            'Plotly.Plots.resize('
-        ]
+resize_code_strings = ['"responsive": true']
 
 
 PLOTLYJS = plotly.offline.get_plotlyjs()
