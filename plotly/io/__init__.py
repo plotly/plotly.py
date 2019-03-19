@@ -8,3 +8,5 @@ from ._templates import templates, to_templated
 from ._renderers import renderers, show
 
 from . import base_renderers
+
+from ._html import to_div, to_html, write_html
