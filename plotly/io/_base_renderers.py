@@ -224,7 +224,8 @@ class HtmlRenderer(MimetypeRenderer):
                  requirejs=True,
                  global_init=False,
                  config=None,
-                 auto_play=False):
+                 auto_play=False,
+                 post_script=None):
 
         self.config = dict(config) if config else {}
         self.auto_play = auto_play
@@ -232,6 +233,7 @@ class HtmlRenderer(MimetypeRenderer):
         self.global_init = global_init
         self.requirejs = requirejs
         self.fullhtml = fullhtml
+        self.post_script = post_script
 
     def activate(self):
         if self.global_init:
@@ -308,14 +310,16 @@ class HtmlRenderer(MimetypeRenderer):
                 config=self.config,
                 auto_play=self.auto_play,
                 include_plotlyjs=include_plotlyjs,
-                include_mathjax=include_mathjax)
+                include_mathjax=include_mathjax,
+                post_script=self.post_script)
         else:
             html = to_div(
                 fig_dict,
                 config=self.config,
                 auto_play=self.auto_play,
                 include_plotlyjs=include_plotlyjs,
-                include_mathjax=include_mathjax)
+                include_mathjax=include_mathjax,
+                post_script=self.post_script)
 
         return {'text/html': html}
 
@@ -332,14 +336,19 @@ class NotebookRenderer(HtmlRenderer):
 
     mime type: 'text/html'
     """
-    def __init__(self, connected=False, config=None, auto_play=False):
+    def __init__(self,
+                 connected=False,
+                 config=None,
+                 auto_play=False,
+                 post_script=None):
         super(NotebookRenderer, self).__init__(
             connected=connected,
             fullhtml=False,
             requirejs=True,
             global_init=True,
             config=config,
-            auto_play=auto_play)
+            auto_play=auto_play,
+            post_script=post_script)
 
 
 class KaggleRenderer(HtmlRenderer):
@@ -353,14 +362,15 @@ class KaggleRenderer(HtmlRenderer):
 
     mime type: 'text/html'
     """
-    def __init__(self, config=None, auto_play=False):
+    def __init__(self, config=None, auto_play=False, post_script=None):
         super(KaggleRenderer, self).__init__(
             connected=True,
             fullhtml=False,
             requirejs=True,
             global_init=True,
             config=config,
-            auto_play=auto_play)
+            auto_play=auto_play,
+            post_script=post_script)
 
 
 class ColabRenderer(HtmlRenderer):
@@ -371,14 +381,15 @@ class ColabRenderer(HtmlRenderer):
 
     mime type: 'text/html'
     """
-    def __init__(self, config=None, auto_play=False):
+    def __init__(self, config=None, auto_play=False, post_script=None):
         super(ColabRenderer, self).__init__(
             connected=True,
             fullhtml=True,
             requirejs=False,
             global_init=False,
             config=config,
-            auto_play=auto_play)
+            auto_play=auto_play,
+            post_script=post_script)
 
 
 class IFrameRenderer(MimetypeRenderer):
@@ -406,10 +417,12 @@ class IFrameRenderer(MimetypeRenderer):
     """
     def __init__(self,
                  config=None,
-                 auto_play=False):
+                 auto_play=False,
+                 post_script=None):
 
         self.config = config
         self.auto_play = auto_play
+        self.post_script = post_script
 
     def to_mimebundle(self, fig_dict):
         from plotly.io import write_html
@@ -447,6 +460,7 @@ class IFrameRenderer(MimetypeRenderer):
                    include_plotlyjs='directory',
                    include_mathjax='cdn',
                    auto_open=False,
+                   post_script=self.post_script,
                    validate=False)
 
         # Build IFrame
@@ -538,13 +552,15 @@ class BrowserRenderer(SideEffectRenderer):
                  auto_play=False,
                  using=None,
                  new=0,
-                 autoraise=True):
+                 autoraise=True,
+                 post_script=None):
 
         self.config = config
         self.auto_play = auto_play
         self.using = using
         self.new = new
         self.autoraise = autoraise
+        self.post_script = post_script
 
     def render(self, fig_dict):
         renderer = HtmlRenderer(
@@ -553,7 +569,8 @@ class BrowserRenderer(SideEffectRenderer):
             requirejs=False,
             global_init=False,
             config=self.config,
-            auto_play=self.auto_play)
+            auto_play=self.auto_play,
+            post_script=self.post_script)
 
         bundle = renderer.to_mimebundle(fig_dict)
         html = bundle['text/html']

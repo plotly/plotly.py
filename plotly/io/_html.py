@@ -22,11 +22,13 @@ _mathjax_config = """\
 if (window.MathJax) {MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}\
 </script>"""
 
+
 def to_div(fig,
            config=None,
            auto_play=True,
            include_plotlyjs=True,
            include_mathjax=False,
+           post_script=None,
            validate=True):
     """
     Convert a figure to an HTML div representation
@@ -86,7 +88,13 @@ def to_div(fig,
         If a string that ends in '.js', a script tag is included that
         references the specified path. This approach can be used to point the
         resulting HTML div string to an alternative CDN.
-   validate: bool (default True)
+    post_script: str or None (default None)
+        JavaScript snippet to be included in the resulting div just after
+        plot creation.  The string may include '{plot_id}' placeholders that
+        will then be replaced by the `id` of the div element that the
+        plotly.js figure is associated with.  One application for this script
+        is to install custom plotly.js event handlers.
+    validate: bool (default True)
         True if the figure should be validated before being converted to
         JSON, False otherwise.
     Returns
@@ -98,7 +106,7 @@ def to_div(fig,
     fig_dict = validate_coerce_fig_to_dict(fig, validate)
 
     # ## Generate div id ##
-    plotdivid = uuid.uuid4()
+    plotdivid = str(uuid.uuid4())
 
     # ## Serialize figure ##
     jdata = json.dumps(
@@ -127,14 +135,21 @@ def to_div(fig,
 
     # ## Build script body ##
     # This is the part that actually calls Plotly.js
+    if post_script:
+        then_post_script = """.then(function(){{
+                        {post_script}
+                    }})""".format(
+            post_script=post_script.replace('{plot_id}', plotdivid))
+    else:
+        then_post_script = ''
+
     if jframes:
         if auto_play:
-            animate = """.then(function(){{
+            then_animate = """.then(function(){{
                         Plotly.animate('{id}');
                     }}""".format(id=plotdivid)
-
         else:
-            animate = ''
+            then_animate = ''
 
         script = '''
                 if (document.getElementById("{id}")) {{
@@ -143,7 +158,8 @@ def to_div(fig,
                         {data},
                         {layout},
                         {config}
-                    ).then(function () {add_frames}){animate}
+                    ).then(function () {add_frames})\
+{then_animate}{then_post_script}
                 }}
                     '''.format(
             id=plotdivid,
@@ -153,18 +169,21 @@ def to_div(fig,
             add_frames="{" + "return Plotly.addFrames('{id}',{frames}".format(
                 id=plotdivid, frames=jframes
             ) + ");}",
-            animate=animate
+            then_animate=then_animate,
+            then_post_script=then_post_script
         )
     else:
         script = """
             if (document.getElementById("{id}")) {{
-                Plotly.newPlot("{id}", {data}, {layout}, {config}); 
+                Plotly.newPlot("{id}", {data}, {layout}, {config})\
+{then_post_script}
             }}
             """.format(
             id=plotdivid,
             data=jdata,
             layout=jlayout,
-            config=jconfig)
+            config=jconfig,
+            then_post_script=then_post_script)
 
     # ## Handle loading/initializing plotly.js ##
     include_plotlyjs_orig = include_plotlyjs
@@ -247,8 +266,8 @@ include_mathjax may be specified as False, 'cdn', or a string ending with '.js'
         <script type="text/javascript">
             {require_start}
                 window.PLOTLYENV=window.PLOTLYENV || {{}};
-                window.PLOTLYENV.BASE_URL='{plotly_platform_url}'
-                {script}
+                window.PLOTLYENV.BASE_URL='{plotly_platform_url}';
+                {script};
             {require_end}
         </script>
     </div>""".format(
@@ -268,6 +287,7 @@ def to_html(fig,
             auto_play=True,
             include_plotlyjs=True,
             include_mathjax=False,
+            post_script=None,
             validate=True):
 
     div = to_div(fig,
@@ -275,6 +295,7 @@ def to_html(fig,
                  auto_play=auto_play,
                  include_plotlyjs=include_plotlyjs,
                  include_mathjax=include_mathjax,
+                 post_script=post_script,
                  validate=validate)
     return """\
 <html>
@@ -291,6 +312,7 @@ def write_html(fig,
                auto_play=True,
                include_plotlyjs=True,
                include_mathjax=False,
+               post_script=None,
                validate=True,
                auto_open=False):
 
@@ -301,6 +323,7 @@ def write_html(fig,
         auto_play=auto_play,
         include_plotlyjs=include_plotlyjs,
         include_mathjax=include_mathjax,
+        post_script=post_script,
         validate=validate)
 
     # Check if file is a string

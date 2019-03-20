@@ -220,18 +220,38 @@ def get_image_download_script(caller):
         raise ValueError('caller should only be one of `iplot` or `plot`')
 
     return(
-        ('<script>'
-         'function downloadimage(format, height, width,'
+        ('function downloadimage(format, height, width,'
          ' filename) {{'
-         'var p = document.getElementById(\'{plot_id}\');'
+         'var p = document.getElementById(\'{{plot_id}}\');'
          'Plotly.downloadImage(p, {{format: format, height: height, '
          'width: width, filename: filename}});}};' +
          check_start +
-         '{{downloadimage(\'{format}\', {height}, {width}, '
-         '\'{filename}\');}}' +
-         check_end +
-         '</script>')
-    )
+         'downloadimage(\'{format}\', {height}, {width}, '
+         '\'{filename}\');' +
+         check_end))
+
+
+def build_save_image_post_script(
+        image, image_filename, image_height, image_width, caller):
+    if image:
+        if image not in __IMAGE_FORMATS:
+            raise ValueError('The image parameter must be one of the '
+                             'following: {}'.format(__IMAGE_FORMATS)
+                             )
+        # if the check passes then download script is injected.
+        # write the download script:
+        script = get_image_download_script(caller)
+
+        # Replace none's with nulls
+        post_script = script.format(
+            format=image,
+            width=image_width,
+            height=image_height,
+            filename=image_filename)
+    else:
+        post_script = None
+
+    return post_script
 
 
 def init_notebook_mode(connected=False):
@@ -370,8 +390,8 @@ if (document.getElementById("{id}")) {{
 
 
 def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
-          validate=True, image=None, filename=None, image_width=None,
-          image_height=None, config=None, auto_play=True):
+          validate=True, image=None, filename='plot_image', image_width=800,
+          image_height=600, config=None, auto_play=True):
     """
     Draw plotly graphs inside an IPython or Jupyter notebook without
     connecting to an external server.
@@ -394,8 +414,16 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
                                has become outdated with your version of
                                graph_reference.json or if you need to include
                                extra, unnecessary keys in your figure.
+    image (default=None |'png' |'jpeg' |'svg' |'webp') -- This parameter sets
+        the format of the image to be downloaded, if we choose to download an
+        image. This parameter has a default value of None indicating that no
+        image should be downloaded. Please note: for higher resolution images
+        and more export options, consider making requests to our image servers.
+        Type: `help(py.image)` for more details.
     filename (default='plot') -- Sets the name of the file your image
         will be saved to. The extension should not be included.
+    image_height (default=600) -- Specifies the height of the image in `px`.
+    image_width (default=800) -- Specifies the width of the image in `px`.
     config (default=None) -- Plot view options dictionary. Keyword arguments
         `show_link` and `link_text` set the associated options in this
         dictionary if it doesn't contain them already.
@@ -431,14 +459,22 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
     # Get figure
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
 
+    # Handle image request
+    post_script = build_save_image_post_script(
+        image, filename, image_height, image_width, 'iplot')
+
     # Show figure
-    pio.show(figure, validate=validate, config=config, auto_play=auto_play)
+    pio.show(figure,
+             validate=validate,
+             config=config,
+             auto_play=auto_play,
+             post_script=post_script)
 
 
 def plot(figure_or_data, show_link=False, link_text='Export to plot.ly',
          validate=True, output_type='file', include_plotlyjs=True,
          filename='temp-plot.html', auto_open=True, image=None,
-         image_filename=None, image_width=None, image_height=None,
+         image_filename='plot_image', image_width=800, image_height=600,
          config=None, include_mathjax=False, auto_play=True):
     """ Create a plotly graph locally as an HTML document or string.
 
@@ -520,6 +556,16 @@ def plot(figure_or_data, show_link=False, link_text='Export to plot.ly',
     auto_open (default=True) -- If True, open the saved file in a
         web browser after saving.
         This argument only applies if `output_type` is 'file'.
+    image (default=None |'png' |'jpeg' |'svg' |'webp') -- This parameter sets
+        the format of the image to be downloaded, if we choose to download an
+        image. This parameter has a default value of None indicating that no
+        image should be downloaded. Please note: for higher resolution images
+        and more export options, consider making requests to our image servers.
+        Type: `help(py.image)` for more details.
+    image_filename (default='plot_image') -- Sets the name of the file your
+        image will be saved to. The extension should not be included.
+    image_height (default=600) -- Specifies the height of the image in `px`.
+    image_width (default=800) -- Specifies the width of the image in `px`.
     config (default=None) -- Plot view options dictionary. Keyword arguments
         `show_link` and `link_text` set the associated options in this
         dictionary if it doesn't contain them already.
@@ -574,6 +620,10 @@ Image export using plotly.offline.plot is no longer supported.
     if width == '100%' or height == '100%':
         config.setdefault('responsive', True)
 
+    # Handle image request
+    post_script = build_save_image_post_script(
+        image, image_filename, image_height, image_width, 'plot')
+
     if output_type == 'file':
         pio.write_html(
             figure,
@@ -582,6 +632,7 @@ Image export using plotly.offline.plot is no longer supported.
             auto_play=auto_play,
             include_plotlyjs=include_plotlyjs,
             include_mathjax=include_mathjax,
+            post_script=post_script,
             validate=validate,
             auto_open=auto_open)
         return filename
@@ -592,6 +643,7 @@ Image export using plotly.offline.plot is no longer supported.
             auto_play=auto_play,
             include_plotlyjs=include_plotlyjs,
             include_mathjax=include_mathjax,
+            post_script=post_script,
             validate=validate)
 
 
