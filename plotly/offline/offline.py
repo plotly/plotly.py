@@ -633,17 +633,19 @@ Image export using plotly.offline.plot is no longer supported.
             include_plotlyjs=include_plotlyjs,
             include_mathjax=include_mathjax,
             post_script=post_script,
+            full_html=True,
             validate=validate,
             auto_open=auto_open)
         return filename
     else:
-        return pio.to_div(
+        return pio.to_html(
             figure,
             config=config,
             auto_play=auto_play,
             include_plotlyjs=include_plotlyjs,
             include_mathjax=include_mathjax,
             post_script=post_script,
+            full_html=False,
             validate=validate)
 
 

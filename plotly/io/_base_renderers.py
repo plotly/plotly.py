@@ -1,7 +1,6 @@
 import base64
 import json
 import webbrowser
-import uuid
 import inspect
 import os
 
@@ -220,7 +219,7 @@ class HtmlRenderer(MimetypeRenderer):
     """
     def __init__(self,
                  connected=False,
-                 fullhtml=False,
+                 full_html=False,
                  requirejs=True,
                  global_init=False,
                  config=None,
@@ -232,7 +231,7 @@ class HtmlRenderer(MimetypeRenderer):
         self.connected = connected
         self.global_init = global_init
         self.requirejs = requirejs
-        self.fullhtml = fullhtml
+        self.full_html = full_html
         self.post_script = post_script
 
     def activate(self):
@@ -292,7 +291,7 @@ class HtmlRenderer(MimetypeRenderer):
 
     def to_mimebundle(self, fig_dict):
 
-        from plotly.io import to_div, to_html
+        from plotly.io import to_html
 
         if self.requirejs:
             include_plotlyjs = 'require'
@@ -304,22 +303,14 @@ class HtmlRenderer(MimetypeRenderer):
             include_plotlyjs = True
             include_mathjax = 'cdn'
 
-        if self.fullhtml:
-            html = to_html(
-                fig_dict,
-                config=self.config,
-                auto_play=self.auto_play,
-                include_plotlyjs=include_plotlyjs,
-                include_mathjax=include_mathjax,
-                post_script=self.post_script)
-        else:
-            html = to_div(
-                fig_dict,
-                config=self.config,
-                auto_play=self.auto_play,
-                include_plotlyjs=include_plotlyjs,
-                include_mathjax=include_mathjax,
-                post_script=self.post_script)
+        html = to_html(
+            fig_dict,
+            config=self.config,
+            auto_play=self.auto_play,
+            include_plotlyjs=include_plotlyjs,
+            include_mathjax=include_mathjax,
+            post_script=self.post_script,
+            full_html=self.full_html)
 
         return {'text/html': html}
 
@@ -343,7 +334,7 @@ class NotebookRenderer(HtmlRenderer):
                  post_script=None):
         super(NotebookRenderer, self).__init__(
             connected=connected,
-            fullhtml=False,
+            full_html=False,
             requirejs=True,
             global_init=True,
             config=config,
@@ -365,7 +356,7 @@ class KaggleRenderer(HtmlRenderer):
     def __init__(self, config=None, auto_play=False, post_script=None):
         super(KaggleRenderer, self).__init__(
             connected=True,
-            fullhtml=False,
+            full_html=False,
             requirejs=True,
             global_init=True,
             config=config,
@@ -384,7 +375,7 @@ class ColabRenderer(HtmlRenderer):
     def __init__(self, config=None, auto_play=False, post_script=None):
         super(ColabRenderer, self).__init__(
             connected=True,
-            fullhtml=True,
+            full_html=True,
             requirejs=False,
             global_init=False,
             config=config,
@@ -565,7 +556,7 @@ class BrowserRenderer(SideEffectRenderer):
     def render(self, fig_dict):
         renderer = HtmlRenderer(
             connected=False,
-            fullhtml=True,
+            full_html=True,
             requirejs=False,
             global_init=False,
             config=self.config,
