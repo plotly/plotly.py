@@ -397,13 +397,16 @@ class BaseFigure(object):
         repr_mimebundle should accept include, exclude and **kwargs
         """
         import plotly.io as pio
-        data = pio.renderers._build_mime_bundle(self.to_dict())
+        if pio.renderers.render_on_display:
+            data = pio.renderers._build_mime_bundle(self.to_dict())
 
-        if include:
-            data = {k: v for (k, v) in data.items() if k in include}
-        if exclude:
-            data = {k: v for (k, v) in data.items() if k not in exclude}
-        return data
+            if include:
+                data = {k: v for (k, v) in data.items() if k in include}
+            if exclude:
+                data = {k: v for (k, v) in data.items() if k not in exclude}
+            return data
+        else:
+            return None
 
     def update(self, dict1=None, **kwargs):
         """

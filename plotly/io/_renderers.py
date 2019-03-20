@@ -27,6 +27,7 @@ class RenderersConfig(object):
         self._renderers = {}
         self._default_name = None
         self._default_renderers = []
+        self._render_on_display = False
 
     # ### Magic methods ###
     # Make this act as a dict of renderers
@@ -128,6 +129,25 @@ Renderer must be a subclass of MimetypeRenderer or SideEffectRenderer.
         # Activate default renderer(s)
         for renderer in self._default_renderers:
             renderer.activate()
+
+    @property
+    def render_on_display(self):
+        """
+        If True, the default mimetype renderers will be used to render
+        figures when they are displayed in an IPython context.
+
+        Returns
+        -------
+        bool
+        """
+        return self._render_on_display
+
+    @render_on_display.setter
+    def render_on_display(self, val):
+        if val:
+            self._render_on_display = True
+        else:
+            self._render_on_display = False
 
     def _validate_coerce_renderers(self, renderers_string):
         """
@@ -374,7 +394,7 @@ if ipython_display:
     #
     # Note that this doesn't cause any problem for offline JupyterLab users.
     if not default_renderer:
-        default_renderer = 'notebook_connected+plotly_mimetype'
+        default_renderer = ''
 
 # Set default renderer
 renderers.default = default_renderer
