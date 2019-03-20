@@ -34,6 +34,10 @@ def test_json_renderer_mimetype(fig1):
     pio.renderers.default = 'json'
     expected = {'application/json': json.loads(pio.to_json(fig1))}
 
+    pio.renderers.render_on_display = False
+    assert fig1._repr_mimebundle_(None, None) is None
+
+    pio.renderers.render_on_display = True
     bundle = fig1._repr_mimebundle_(None, None)
     assert bundle == expected
 
@@ -74,6 +78,10 @@ def test_plotly_mimetype_renderer_mimetype(fig1, renderer):
     expected[plotly_mimetype]['config'] = {
         'plotlyServerURL': 'https://plot.ly'}
 
+    pio.renderers.render_on_display = False
+    assert fig1._repr_mimebundle_(None, None) is None
+
+    pio.renderers.render_on_display = True
     bundle = fig1._repr_mimebundle_(None, None)
     assert bundle == expected
 
@@ -109,6 +117,10 @@ def test_png_renderer_mimetype(fig1):
 
     expected = {'image/png': image_str}
 
+    pio.renderers.render_on_display = False
+    assert fig1._repr_mimebundle_(None, None) is None
+
+    pio.renderers.render_on_display = True
     bundle = fig1._repr_mimebundle_(None, None)
     assert bundle == expected
 
@@ -348,6 +360,10 @@ def test_mimetype_combination(fig1):
         plotly_mimetype: plotly_mimetype_dict,
     }
 
+    pio.renderers.render_on_display = False
+    assert fig1._repr_mimebundle_(None, None) is None
+
+    pio.renderers.render_on_display = True
     bundle = fig1._repr_mimebundle_(None, None)
     assert bundle == expected
 
