@@ -7,6 +7,7 @@ import six
 import os
 
 from plotly import optional_imports
+from _plotly_future_ import _future_flags
 
 from plotly.io._base_renderers import (
     MimetypeRenderer, SideEffectRenderer, PlotlyRenderer, NotebookRenderer,
@@ -148,54 +149,6 @@ Renderer must be a subclass of MimetypeRenderer or SideEffectRenderer.
             self._render_on_display = True
         else:
             self._render_on_display = False
-
-    def set_v4_defaults(self):
-        """
-        Configure the rendering system to match the default behavior of
-        plotly.py version 4
-        """
-        default_renderer = None
-
-        # Try to detect environment so that we can enable a useful
-        # default renderer
-        if ipython_display:
-            try:
-                import google.colab
-                default_renderer = 'colab'
-            except ImportError:
-                pass
-
-            # Check if we're running in a Kaggle notebook
-            if not default_renderer and os.path.exists('/kaggle/input'):
-                default_renderer = 'kaggle'
-
-            # Check if we're running in VSCode
-            if not default_renderer and 'VSCODE_PID' in os.environ:
-                default_renderer = 'vscode'
-
-            # Fallback to renderer combination that will work automatically
-            # in the classic notebook, jupyterlab, nteract, vscode, and
-            # nbconvert HTML export. We use 'notebook_connected' rather than
-            # 'notebook' to avoid bloating notebook size and slowing down
-            # plotly.py initial import. This comes at the cost of requiring
-            # internet connectivity to view, but that is a preferable
-            # trade-off to adding ~3MB to each saved notebook.
-            #
-            # Note that this doesn't cause any problem for offline
-            # JupyterLab users.
-            if not default_renderer:
-                default_renderer = 'notebook_connected+plotly_mimetype'
-
-        renderers.render_on_display = True
-        self.default = default_renderer
-
-    def set_v3_defaults(self):
-        """
-        Configure the rendering system to match the default behavior of
-        plotly.py version 3
-        """
-        self.render_on_display = False
-        self.default = 'plotly_mimetype'
 
     def _validate_coerce_renderers(self, renderers_string):
         """
@@ -415,4 +368,42 @@ renderers['iframe'] = IFrameRenderer(config=config)
 # Set default renderer
 # --------------------
 # This will change to renderers.set_v4_defaults() in version 4.0
-renderers.set_v3_defaults()
+if 'renderer_defaults' in _future_flags:
+    default_renderer = None
+
+    # Try to detect environment so that we can enable a useful
+    # default renderer
+    if ipython_display:
+        try:
+            import google.colab
+
+            default_renderer = 'colab'
+        except ImportError:
+            pass
+
+        # Check if we're running in a Kaggle notebook
+        if not default_renderer and os.path.exists('/kaggle/input'):
+            default_renderer = 'kaggle'
+
+        # Check if we're running in VSCode
+        if not default_renderer and 'VSCODE_PID' in os.environ:
+            default_renderer = 'vscode'
+
+        # Fallback to renderer combination that will work automatically
+        # in the classic notebook, jupyterlab, nteract, vscode, and
+        # nbconvert HTML export. We use 'notebook_connected' rather than
+        # 'notebook' to avoid bloating notebook size and slowing down
+        # plotly.py initial import. This comes at the cost of requiring
+        # internet connectivity to view, but that is a preferable
+        # trade-off to adding ~3MB to each saved notebook.
+        #
+        # Note that this doesn't cause any problem for offline
+        # JupyterLab users.
+        if not default_renderer:
+            default_renderer = 'notebook_connected+plotly_mimetype'
+
+    renderers.render_on_display = True
+    renderers.default = default_renderer
+else:
+    renderers.render_on_display = False
+    renderers.default = 'plotly_mimetype'
