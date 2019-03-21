@@ -20,13 +20,6 @@ from chart_studio import session, utils
 from chart_studio.files import CONFIG_FILE, CREDENTIALS_FILE, FILE_CONTENT
 from plotly.files import ensure_writable_plotly_dir
 
-DEFAULT_PLOTLY_COLORS = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
-                         'rgb(44, 160, 44)', 'rgb(214, 39, 40)',
-                         'rgb(148, 103, 189)', 'rgb(140, 86, 75)',
-                         'rgb(227, 119, 194)', 'rgb(127, 127, 127)',
-                         'rgb(188, 189, 34)', 'rgb(23, 190, 207)']
-
-
 REQUIRED_GANTT_KEYS = ['Task', 'Start', 'Finish']
 PLOTLY_SCALES = {'Greys': ['rgb(0,0,0)', 'rgb(255,255,255)'],
                  'YlGnBu': ['rgb(8,29,88)', 'rgb(255,255,217)'],
