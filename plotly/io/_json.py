@@ -7,6 +7,7 @@ import json
 from plotly.io._utils import (validate_coerce_fig_to_dict,
                               validate_coerce_output_type)
 
+
 def to_json(fig,
             validate=True,
             pretty=False,

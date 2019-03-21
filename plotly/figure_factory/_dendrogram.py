@@ -4,7 +4,8 @@ from __future__ import absolute_import
 
 from collections import OrderedDict
 
-from plotly import exceptions, optional_imports
+import plotly.exceptions
+from plotly import optional_imports
 from plotly.graph_objs import graph_objs
 
 # Optional imports, may be None for users that only use our core functionality.
@@ -81,7 +82,7 @@ def create_dendrogram(X, orientation="bottom", labels=None,
 
     s = X.shape
     if len(s) != 2:
-        exceptions.PlotlyError("X should be 2-dimensional array.")
+        plotly.exceptions.PlotlyError("X should be 2-dimensional array.")
 
     if distfun is None:
         distfun = scs.distance.pdist

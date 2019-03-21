@@ -67,7 +67,7 @@ class TemplatesConfig(object):
         return template
 
     def __setitem__(self, key, value):
-        self._templates[key] = self._validator.validate_coerce(value)
+        self._templates[key] = self._validate(value)
 
     def __delitem__(self, key):
         # Remove template
@@ -77,10 +77,12 @@ class TemplatesConfig(object):
         if self._default == key:
             self._default = None
 
-    def _validate(self, template):
+    def _validate(self, value):
         if not self._validator:
             from plotly.validators.layout import TemplateValidator
             self._validator = TemplateValidator()
+
+        return self._validator.validate_coerce(value)
 
     def keys(self):
         return self._templates.keys()
@@ -133,7 +135,7 @@ class TemplatesConfig(object):
         # Could be a Template object, the key of a registered template,
         # Or a string containing the names of multiple templates joined on
         # '+' characters
-        self._validator.validate_coerce(value)
+        self._validate(value)
         self._default = value
 
     def __repr__(self):
@@ -208,8 +210,8 @@ Templates configuration
             merged template
         """
         # Validate/copy input templates
-        result = self._validator.validate_coerce(template1)
-        other = self._validator.validate_coerce(template2)
+        result = self._validate(template1)
+        other = self._validate(template2)
 
         # Cycle traces
         for trace_type in result.data:

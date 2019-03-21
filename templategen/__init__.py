@@ -1,4 +1,4 @@
-from plotly.utils import PlotlyJSONEncoder
+from chart_studio.utils import PlotlyJSONEncoder
 import json
 from templategen.definitions import builders
 

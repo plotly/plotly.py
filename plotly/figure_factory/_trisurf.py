@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 
-from plotly import exceptions, optional_imports
+import plotly.exceptions
+from plotly import optional_imports
 import plotly.colors as clrs
 from plotly.graph_objs import graph_objs
 
@@ -18,7 +19,7 @@ def map_face2color(face, colormap, scale, vmin, vmax):
 
     """
     if vmin >= vmax:
-        raise exceptions.PlotlyError("Incorrect relation between vmin "
+        raise plotly.exceptions.PlotlyError("Incorrect relation between vmin "
                                      "and vmax. The vmin value cannot be "
                                      "bigger than or equal to the value "
                                      "of vmax.")
@@ -201,7 +202,7 @@ def trisurf(x, y, z, simplices, show_colorbar, edges_color, scale,
     z_edge = np.hstack([z_edge, z_edge_pull.reshape([1, -1])[0]])
 
     if not (len(x_edge) == len(y_edge) == len(z_edge)):
-        raise exceptions.PlotlyError("The lengths of x_edge, y_edge and "
+        raise plotly.exceptions.PlotlyError("The lengths of x_edge, y_edge and "
                                      "z_edge are not the same.")
 
     # define the lines for plotting

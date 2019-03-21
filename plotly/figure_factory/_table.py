@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 
-from plotly import exceptions, optional_imports
+import plotly.exceptions
+from plotly import optional_imports
 from plotly.graph_objs import graph_objs
 
 pd = optional_imports.get_module('pandas')
@@ -19,7 +20,7 @@ def validate_table(table_text, font_colors):
     """
     font_colors_len_options = [1, 3, len(table_text)]
     if len(font_colors) not in font_colors_len_options:
-        raise exceptions.PlotlyError("Oops, font_colors should be a list "
+        raise plotly.exceptions.PlotlyError("Oops, font_colors should be a list "
                                      "of length 1, 3 or len(text)")
 
 

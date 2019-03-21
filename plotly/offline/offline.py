@@ -9,15 +9,14 @@ import os
 import uuid
 import warnings
 import pkgutil
-import time
-import webbrowser
 
-import six
 from requests.compat import json as _json
 
 import plotly
-from plotly import optional_imports, tools, utils
-from plotly.exceptions import PlotlyError
+import plotly.tools
+from plotly import optional_imports
+
+from plotly.utils import PlotlyJSONEncoder
 from ._plotlyjs_version import __plotlyjs_version__
 
 ipython = optional_imports.get_module('IPython')
@@ -165,13 +164,13 @@ Unrecognized config options supplied: {bad_config}"""
 
         clean_config = config
     else:
-        config = plotly.plotly.get_config()
+        config = {}
         clean_config = dict((k, config[k]) for k in configkeys if k in config)
 
     # TODO: The get_config 'source of truth' should
     # really be somewhere other than plotly.plotly
-    plotly_platform_url = plotly.plotly.get_config().get('plotly_domain',
-                                                         'https://plot.ly')
+    plotly_platform_url = 'https://plot.ly'
+
     clean_config['plotlyServerURL'] = plotly_platform_url
 
     if (plotly_platform_url != 'https://plot.ly' and
@@ -294,7 +293,7 @@ def init_notebook_mode(connected=False):
 def _plot_html(figure_or_data, config, validate, default_width,
                default_height, global_requirejs, auto_play):
 
-    figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
+    figure = plotly.tools.return_figure_from_figure_or_data(figure_or_data, validate)
 
     width = figure.get('layout', {}).get('width', default_width)
     height = figure.get('layout', {}).get('height', default_height)
@@ -314,19 +313,18 @@ def _plot_html(figure_or_data, config, validate, default_width,
         height = str(height) + 'px'
 
     plotdivid = uuid.uuid4()
-    jdata = _json.dumps(figure.get('data', []), cls=utils.PlotlyJSONEncoder)
+    jdata = _json.dumps(figure.get('data', []), cls=PlotlyJSONEncoder)
     jlayout = _json.dumps(figure.get('layout', {}),
-                          cls=utils.PlotlyJSONEncoder)
+                          cls=PlotlyJSONEncoder)
 
     if figure.get('frames', None):
         jframes = _json.dumps(figure.get('frames', []),
-                              cls=utils.PlotlyJSONEncoder)
+                              cls=PlotlyJSONEncoder)
     else:
         jframes = None
 
     jconfig = _json.dumps(_get_jconfig(config))
-    plotly_platform_url = plotly.plotly.get_config().get('plotly_domain',
-                                                         'https://plot.ly')
+    plotly_platform_url = 'https://plot.ly'
 
     if jframes:
         if auto_play:
@@ -457,7 +455,7 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
     config.setdefault('linkText', link_text)
 
     # Get figure
-    figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
+    figure = plotly.tools.return_figure_from_figure_or_data(figure_or_data, validate)
 
     # Handle image request
     post_script = build_save_image_post_script(
@@ -613,7 +611,7 @@ Image export using plotly.offline.plot is no longer supported.
     config.setdefault('showLink', show_link)
     config.setdefault('linkText', link_text)
 
-    figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
+    figure = plotly.tools.return_figure_from_figure_or_data(figure_or_data, validate)
     width = figure.get('layout', {}).get('width', '100%')
     height = figure.get('layout', {}).get('height', '100%')
 
@@ -724,7 +722,7 @@ def plot_mpl(mpl_fig, resize=False, strip_style=False,
     plot_mpl(fig, image='png')
     ```
     """
-    plotly_plot = tools.mpl_to_plotly(mpl_fig, resize, strip_style, verbose)
+    plotly_plot = plotly.tools.mpl_to_plotly(mpl_fig, resize, strip_style, verbose)
     return plot(plotly_plot, show_link, link_text, validate, output_type,
                 include_plotlyjs, filename, auto_open,
                 image=image, image_filename=image_filename,
@@ -789,7 +787,7 @@ def iplot_mpl(mpl_fig, resize=False, strip_style=False,
     iplot_mpl(fig, image='jpeg')
     ```
     """
-    plotly_plot = tools.mpl_to_plotly(mpl_fig, resize, strip_style, verbose)
+    plotly_plot = plotly.tools.mpl_to_plotly(mpl_fig, resize, strip_style, verbose)
     return iplot(plotly_plot, show_link, link_text, validate,
                  image=image, filename=image_filename,
                  image_height=image_height, image_width=image_width)

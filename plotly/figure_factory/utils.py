@@ -1,17 +1,8 @@
 from __future__ import absolute_import
 
 import collections
-import decimal
-import six
 
-from plotly import exceptions
-from plotly.colors import (DEFAULT_PLOTLY_COLORS, PLOTLY_SCALES, color_parser,
-                           colorscale_to_colors, colorscale_to_scale,
-                           convert_to_RGB_255, find_intermediate_color,
-                           hex_to_rgb, label_rgb, n_colors,
-                           unconvert_from_RGB_255, unlabel_rgb,
-                           validate_colors, validate_colors_dict,
-                           validate_colorscale, validate_scale_values)
+import plotly.exceptions
 
 
 def is_sequence(obj):
@@ -29,14 +20,14 @@ def validate_index(index_vals):
     from numbers import Number
     if isinstance(index_vals[0], Number):
         if not all(isinstance(item, Number) for item in index_vals):
-            raise exceptions.PlotlyError("Error in indexing column. "
+            raise plotly.exceptions.PlotlyError("Error in indexing column. "
                                          "Make sure all entries of each "
                                          "column are all numbers or "
                                          "all strings.")
 
     elif isinstance(index_vals[0], str):
         if not all(isinstance(item, str) for item in index_vals):
-            raise exceptions.PlotlyError("Error in indexing column. "
+            raise plotly.exceptions.PlotlyError("Error in indexing column. "
                                          "Make sure all entries of each "
                                          "column are all numbers or "
                                          "all strings.")
@@ -53,13 +44,13 @@ def validate_dataframe(array):
     for vector in array:
         if isinstance(vector[0], Number):
             if not all(isinstance(item, Number) for item in vector):
-                raise exceptions.PlotlyError("Error in dataframe. "
+                raise plotly.exceptions.PlotlyError("Error in dataframe. "
                                              "Make sure all entries of "
                                              "each column are either "
                                              "numbers or strings.")
         elif isinstance(vector[0], str):
             if not all(isinstance(item, str) for item in vector):
-                raise exceptions.PlotlyError("Error in dataframe. "
+                raise plotly.exceptions.PlotlyError("Error in dataframe. "
                                              "Make sure all entries of "
                                              "each column are either "
                                              "numbers or strings.")
@@ -73,7 +64,7 @@ def validate_equal_length(*args):
     """
     length = len(args[0])
     if any(len(lst) != length for lst in args):
-        raise exceptions.PlotlyError("Oops! Your data lists or ndarrays "
+        raise plotly.exceptions.PlotlyError("Oops! Your data lists or ndarrays "
                                      "should be the same length.")
 
 
@@ -90,8 +81,8 @@ def validate_positive_scalars(**kwargs):
             if val <= 0:
                 raise ValueError('{} must be > 0, got {}'.format(key, val))
         except TypeError:
-            raise exceptions.PlotlyError('{} must be a number, got {}'
-                                         .format(key, val))
+            raise plotly.exceptions.PlotlyError('{} must be a number, got {}'
+                                                .format(key, val))
 
 
 def flatten(array):
@@ -105,7 +96,7 @@ def flatten(array):
     try:
         return [item for sublist in array for item in sublist]
     except TypeError:
-        raise exceptions.PlotlyError("Your data array could not be "
+        raise plotly.exceptions.PlotlyError("Your data array could not be "
                                      "flattened! Make sure your data is "
                                      "entered as lists or ndarrays!")
 
@@ -125,20 +116,20 @@ def endpts_to_intervals(endpts):
     length = len(endpts)
     # Check if endpts is a list or tuple
     if not (isinstance(endpts, (tuple)) or isinstance(endpts, (list))):
-        raise exceptions.PlotlyError("The intervals_endpts argument must "
+        raise plotly.exceptions.PlotlyError("The intervals_endpts argument must "
                                      "be a list or tuple of a sequence "
                                      "of increasing numbers.")
     # Check if endpts contains only numbers
     for item in endpts:
         if isinstance(item, str):
-            raise exceptions.PlotlyError("The intervals_endpts argument "
+            raise plotly.exceptions.PlotlyError("The intervals_endpts argument "
                                          "must be a list or tuple of a "
                                          "sequence of increasing "
                                          "numbers.")
     # Check if numbers in endpts are increasing
     for k in range(length - 1):
         if endpts[k] >= endpts[k + 1]:
-            raise exceptions.PlotlyError("The intervals_endpts argument "
+            raise plotly.exceptions.PlotlyError("The intervals_endpts argument "
                                          "must be a list or tuple of a "
                                          "sequence of increasing "
                                          "numbers.")
@@ -231,7 +222,7 @@ def list_of_options(iterable, conj='and', period=True):
     if the conjunction 'and' is selected.
     """
     if len(iterable) < 2:
-        raise exceptions.PlotlyError(
+        raise plotly.exceptions.PlotlyError(
             'Your list or tuple must contain at least 2 items.'
         )
     template = (len(iterable) - 2)*'{}, ' + '{} ' + conj + ' {}' + period*'.'

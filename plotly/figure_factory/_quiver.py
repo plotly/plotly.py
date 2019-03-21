@@ -2,7 +2,7 @@ from __future__ import absolute_import
 
 import math
 
-from plotly import exceptions
+import plotly.exceptions
 from plotly.graph_objs import graph_objs
 from plotly.figure_factory import utils
 
@@ -148,22 +148,22 @@ class _Quiver(object):
                  scale, arrow_scale, angle, scaleratio=1, **kwargs):
         try:
             x = utils.flatten(x)
-        except exceptions.PlotlyError:
+        except plotly.exceptions.PlotlyError:
             pass
 
         try:
             y = utils.flatten(y)
-        except exceptions.PlotlyError:
+        except plotly.exceptions.PlotlyError:
             pass
 
         try:
             u = utils.flatten(u)
-        except exceptions.PlotlyError:
+        except plotly.exceptions.PlotlyError:
             pass
 
         try:
             v = utils.flatten(v)
-        except exceptions.PlotlyError:
+        except plotly.exceptions.PlotlyError:
             pass
 
         self.x = x

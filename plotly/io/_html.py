@@ -115,15 +115,16 @@ def to_html(fig,
     plotdivid = str(uuid.uuid4())
 
     # ## Serialize figure ##
-    from plotly import utils
+    from plotly.utils import PlotlyJSONEncoder
+    opts = {'cls': PlotlyJSONEncoder, 'sort_keys': True}
     jdata = json.dumps(
-        fig_dict.get('data', []), cls=utils.PlotlyJSONEncoder)
+        fig_dict.get('data', []), **opts)
     jlayout = json.dumps(
-        fig_dict.get('layout', {}), cls=utils.PlotlyJSONEncoder)
+        fig_dict.get('layout', {}), **opts)
 
     if fig_dict.get('frames', None):
         jframes = json.dumps(
-            fig_dict.get('frames', []), cls=utils.PlotlyJSONEncoder)
+            fig_dict.get('frames', []), **opts)
     else:
         jframes = None
 
@@ -136,7 +137,7 @@ def to_html(fig,
     if layout_dict.get('width', None) is None:
         config.setdefault('responsive', True)
 
-    jconfig = json.dumps(config)
+    jconfig = json.dumps(config, **opts)
 
     # ## Get platform URL ##
     plotly_platform_url = config.get('plotly_domain', 'https://plot.ly')

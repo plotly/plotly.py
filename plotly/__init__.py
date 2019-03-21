@@ -29,24 +29,21 @@ Modules:
 from __future__ import absolute_import
 
 from plotly import (
-    # plotly,
-    # dashboard_objs,
-    # graph_objs,
-    # grid_objs,
-    # tools,
-    # utils,
-    # session,
-    # offline,
-    # colors,
+    graph_objs,
+    tools,
+    utils,
+    offline,
+    colors,
     io
 )
+
 # from plotly.version import __version__
 from _plotly_future_ import _future_flags
-#
-# from ._version import get_versions
-# __version__ = get_versions()['version']
-# del get_versions
 
-# # Set default template here to make sure import process is complete
-# if 'template_defaults' in _future_flags:
-#     io.templates._default = 'plotly'
+from ._version import get_versions
+__version__ = get_versions()['version']
+del get_versions
+
+# Set default template here to make sure import process is complete
+if 'template_defaults' in _future_flags:
+    io.templates._default = 'plotly'

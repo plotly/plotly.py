@@ -2,33 +2,33 @@ from __future__ import absolute_import
 
 from nose.tools import raises
 
+import plotly.tools
 from plotly.graph_objs import (Data, Figure, Layout, XAxis, YAxis)
-import plotly.tools as tls
 
 
 @raises(Exception)
 def test_non_integer_rows():
-    tls.get_subplots(rows=2.1)
+    plotly.tools.get_subplots(rows=2.1)
 
 
 @raises(Exception)
 def test_less_than_zero_rows():
-    tls.make_subplots(rows=-2)
+    plotly.tools.make_subplots(rows=-2)
 
 
 @raises(Exception)
 def test_non_integer_columns():
-    tls.get_subplots(columns=2/3)
+    plotly.tools.get_subplots(columns=2 / 3)
 
 
 @raises(Exception)
 def test_less_than_zero_cols():
-    tls.make_subplots(columns=-10)
+    plotly.tools.make_subplots(columns=-10)
 
 
 @raises(Exception)
 def test_wrong_kwarg():
-    tls.get_subplots(stuff='no gonna work')
+    plotly.tools.get_subplots(stuff='no gonna work')
 
 
 def test_get_single_plot():
@@ -45,7 +45,7 @@ def test_get_single_plot():
             )
         )
     )
-    assert tls.get_subplots() == expected
+    assert plotly.tools.get_subplots() == expected
 
 
 def test_two_row():
@@ -70,7 +70,7 @@ def test_two_row():
             )
         )
     )
-    assert tls.get_subplots(2) == expected
+    assert plotly.tools.get_subplots(2) == expected
 
 
 def test_two_column():
@@ -96,7 +96,7 @@ def test_two_column():
         )
     )
 
-    assert tls.get_subplots(1, 2) == expected
+    assert plotly.tools.get_subplots(1, 2) == expected
 
 
 def test_a_lot():
@@ -330,7 +330,7 @@ def test_a_lot():
         )
     )
 
-    fig = tls.get_subplots(4, 7, horizontal_spacing=0.1, vertical_spacing=0.15)
+    fig = plotly.tools.get_subplots(4, 7, horizontal_spacing=0.1, vertical_spacing=0.15)
 
     assert fig == expected
 
@@ -390,9 +390,9 @@ def test_spacing():
         )
     )
 
-    fig = tls.get_subplots(2, 3,
-                           horizontal_spacing=.05,
-                           vertical_spacing=.1)
+    fig = plotly.tools.get_subplots(2, 3,
+                                    horizontal_spacing=.05,
+                                    vertical_spacing=.1)
 
     assert fig == expected
 
@@ -644,6 +644,6 @@ def test_default_spacing():
         )
     )
 
-    fig = tls.get_subplots(rows=6, columns=5)
+    fig = plotly.tools.get_subplots(rows=6, columns=5)
 
     assert fig == expected

@@ -2,9 +2,9 @@ from __future__ import absolute_import
 
 from numbers import Number
 
-from plotly import exceptions, optional_imports
+import plotly.exceptions
+from plotly import optional_imports
 import plotly.colors as clrs
-from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
 from plotly.tools import make_subplots
 
@@ -273,7 +273,7 @@ def violin_colorscale(data, data_header, group_header, colors, use_colorscale,
     # make sure all group names are keys in group_stats
     for group in group_name:
         if group not in group_stats:
-            raise exceptions.PlotlyError("All values/groups in the index "
+            raise plotly.exceptions.PlotlyError("All values/groups in the index "
                                          "column must be represented "
                                          "as a key in group_stats.")
 
@@ -369,7 +369,7 @@ def violin_dict(data, data_header, group_header, colors, use_colorscale,
     # check if all group names appear in colors dict
     for group in group_name:
         if group not in colors:
-            raise exceptions.PlotlyError("If colors is a dictionary, all "
+            raise plotly.exceptions.PlotlyError("If colors is a dictionary, all "
                                          "the group names must appear as "
                                          "keys in colors.")
 
@@ -554,17 +554,17 @@ def create_violin(data, data_header=None, group_header=None, colors=None,
     if group_header is None:
         if isinstance(data, list):
             if len(data) <= 0:
-                raise exceptions.PlotlyError("If data is a list, it must be "
+                raise plotly.exceptions.PlotlyError("If data is a list, it must be "
                                              "nonempty and contain either "
                                              "numbers or dictionaries.")
 
             if not all(isinstance(element, Number) for element in data):
-                raise exceptions.PlotlyError("If data is a list, it must "
+                raise plotly.exceptions.PlotlyError("If data is a list, it must "
                                              "contain only numbers.")
 
         if pd and isinstance(data, pd.core.frame.DataFrame):
             if data_header is None:
-                raise exceptions.PlotlyError("data_header must be the "
+                raise plotly.exceptions.PlotlyError("data_header must be the "
                                              "column name with the "
                                              "desired numeric data for "
                                              "the violin plot.")
@@ -597,12 +597,12 @@ def create_violin(data, data_header=None, group_header=None, colors=None,
 
     else:
         if not isinstance(data, pd.core.frame.DataFrame):
-            raise exceptions.PlotlyError("Error. You must use a pandas "
+            raise plotly.exceptions.PlotlyError("Error. You must use a pandas "
                                          "DataFrame if you are using a "
                                          "group header.")
 
         if data_header is None:
-            raise exceptions.PlotlyError("data_header must be the column "
+            raise plotly.exceptions.PlotlyError("data_header must be the column "
                                          "name with the desired numeric "
                                          "data for the violin plot.")
 
@@ -624,17 +624,17 @@ def create_violin(data, data_header=None, group_header=None, colors=None,
                 return fig
         else:
             if isinstance(valid_colors, dict):
-                raise exceptions.PlotlyError("The colors param cannot be "
+                raise plotly.exceptions.PlotlyError("The colors param cannot be "
                                              "a dictionary if you are "
                                              "using a colorscale.")
 
             if len(valid_colors) < 2:
-                raise exceptions.PlotlyError("colors must be a list with "
+                raise plotly.exceptions.PlotlyError("colors must be a list with "
                                              "at least 2 colors. A "
                                              "Plotly scale is allowed.")
 
             if not isinstance(group_stats, dict):
-                raise exceptions.PlotlyError("Your group_stats param "
+                raise plotly.exceptions.PlotlyError("Your group_stats param "
                                              "must be a dictionary.")
 
             fig = violin_colorscale(

@@ -79,7 +79,7 @@ import decimal
 from numbers import Number
 import six
 
-from plotly import exceptions
+from plotly.exceptions import PlotlyError
 
 DEFAULT_PLOTLY_COLORS = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
                          'rgb(44, 160, 44)', 'rgb(214, 39, 40)',
@@ -263,7 +263,7 @@ def validate_colors(colors, colortype='tuple'):
         elif 'rgb' in colors or '#' in colors:
             colors = [colors]
         else:
-            raise exceptions.PlotlyError(
+            raise PlotlyError(
                 "If your colors variable is a string, it must be a "
                 "Plotly scale, an rgb color or a hex color.")
 
@@ -279,7 +279,7 @@ def validate_colors(colors, colortype='tuple'):
             each_color = color_parser(each_color, unlabel_rgb)
             for value in each_color:
                 if value > 255.0:
-                    raise exceptions.PlotlyError(
+                    raise PlotlyError(
                         "Whoops! The elements in your rgb colors "
                         "tuples cannot exceed 255.0."
                     )
@@ -295,7 +295,7 @@ def validate_colors(colors, colortype='tuple'):
         if isinstance(each_color, tuple):
             for value in each_color:
                 if value > 1.0:
-                    raise exceptions.PlotlyError(
+                    raise PlotlyError(
                         "Whoops! The elements in your colors tuples "
                         "cannot exceed 1.0."
                     )
@@ -319,7 +319,7 @@ def validate_colors_dict(colors, colortype='tuple'):
             colors[key] = color_parser(colors[key], unlabel_rgb)
             for value in colors[key]:
                 if value > 255.0:
-                    raise exceptions.PlotlyError(
+                    raise PlotlyError(
                         "Whoops! The elements in your rgb colors "
                         "tuples cannot exceed 255.0."
                     )
@@ -332,7 +332,7 @@ def validate_colors_dict(colors, colortype='tuple'):
         if isinstance(colors[key], tuple):
             for value in colors[key]:
                 if value > 1.0:
-                    raise exceptions.PlotlyError(
+                    raise PlotlyError(
                         "Whoops! The elements in your colors tuples "
                         "cannot exceed 1.0."
                     )
@@ -394,7 +394,7 @@ def convert_colors_to_same_type(colors, colortype='rgb', scale=None,
         validate_scale_values(scale)
 
         if len(colors_list) != len(scale):
-            raise exceptions.PlotlyError(
+            raise PlotlyError(
                 'Make sure that the length of your scale matches the length '
                 'of your list of colors which is {}.'.format(len(colors_list))
             )
@@ -432,7 +432,7 @@ def convert_colors_to_same_type(colors, colortype='rgb', scale=None,
             colors_list[j] = each_color
         return (colors_list, scale)
     else:
-        raise exceptions.PlotlyError('You must select either rgb or tuple '
+        raise PlotlyError('You must select either rgb or tuple '
                                      'for your colortype variable.')
 
 
@@ -471,7 +471,7 @@ def convert_dict_colors_to_same_type(colors_dict, colortype='rgb'):
             )
         return colors_dict
     else:
-        raise exceptions.PlotlyError('You must select either rgb or tuple '
+        raise PlotlyError('You must select either rgb or tuple '
                                      'for your colortype variable.')
 
 
@@ -487,17 +487,17 @@ def validate_scale_values(scale):
         the extraction of these values from the two-lists in order
     """
     if len(scale) < 2:
-        raise exceptions.PlotlyError('You must input a list of scale values '
+        raise PlotlyError('You must input a list of scale values '
                                      'that has at least two values.')
 
     if (scale[0] != 0) or (scale[-1] != 1):
-        raise exceptions.PlotlyError(
+        raise PlotlyError(
             'The first and last number in your scale must be 0.0 and 1.0 '
             'respectively.'
         )
 
     if not all(x < y for x, y in zip(scale, scale[1:])):
-            raise exceptions.PlotlyError(
+            raise PlotlyError(
                 "'scale' must be a list that contains a strictly increasing "
                 "sequence of numbers."
             )
@@ -507,9 +507,9 @@ def validate_colorscale(colorscale):
     """Validate the structure, scale values and colors of colorscale."""
     if not isinstance(colorscale, list):
         # TODO Write tests for these exceptions
-        raise exceptions.PlotlyError("A valid colorscale must be a list.")
+        raise PlotlyError("A valid colorscale must be a list.")
     if not all(isinstance(innerlist, list) for innerlist in colorscale):
-        raise exceptions.PlotlyError(
+        raise PlotlyError(
             "A valid colorscale must be a list of lists."
         )
     colorscale_colors = colorscale_to_colors(colorscale)
@@ -536,7 +536,7 @@ def make_colorscale(colors, scale=None):
 
     # validate minimum colors length of 2
     if len(colors) < 2:
-        raise exceptions.PlotlyError('You must input a list of colors that '
+        raise PlotlyError('You must input a list of colors that '
                                      'has at least two colors.')
 
     if scale is None:
@@ -545,7 +545,7 @@ def make_colorscale(colors, scale=None):
 
     else:
         if len(colors) != len(scale):
-            raise exceptions.PlotlyError('The length of colors and scale '
+            raise PlotlyError('The length of colors and scale '
                                          'must be the same.')
 
         validate_scale_values(scale)

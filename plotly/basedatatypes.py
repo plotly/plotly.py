@@ -8,20 +8,17 @@ from six import string_types
 import warnings
 from contextlib import contextmanager
 from copy import deepcopy, copy
-from pprint import PrettyPrinter
 
 from plotly.offline.offline import _get_jconfig
 from .optional_imports import get_module
 
-from . import offline as pyo
 from _plotly_utils.basevalidators import (
     CompoundValidator, CompoundArrayValidator, BaseDataValidator,
     BaseValidator, LiteralValidator
 )
 from . import animation
-from .callbacks import (Points, BoxSelector, LassoSelector,
-                        InputDeviceState)
-from .utils import ElidedPrettyPrinter
+from .callbacks import (Points, InputDeviceState)
+from plotly.utils import ElidedPrettyPrinter
 from .validators import (DataValidator, LayoutValidator, FramesValidator)
 
 # Optional imports

@@ -1,6 +1,7 @@
 from __future__ import absolute_import, division
 
-from plotly import exceptions, optional_imports
+import plotly.exceptions
+from plotly import optional_imports
 import plotly.colors as clrs
 from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
@@ -26,18 +27,18 @@ def validate_annotated_heatmap(z, x, y, annotation_text):
         utils.validate_equal_length(z, annotation_text)
         for lst in range(len(z)):
             if len(z[lst]) != len(annotation_text[lst]):
-                raise exceptions.PlotlyError("z and text should have the "
+                raise plotly.exceptions.PlotlyError("z and text should have the "
                                              "same dimensions")
 
     if x:
         if len(x) != len(z[0]):
-            raise exceptions.PlotlyError("oops, the x list that you "
+            raise plotly.exceptions.PlotlyError("oops, the x list that you "
                                          "provided does not match the "
                                          "width of your z matrix ")
 
     if y:
         if len(y) != len(z):
-            raise exceptions.PlotlyError("oops, the y list that you "
+            raise plotly.exceptions.PlotlyError("oops, the y list that you "
                                          "provided does not match the "
                                          "length of your z matrix ")
 

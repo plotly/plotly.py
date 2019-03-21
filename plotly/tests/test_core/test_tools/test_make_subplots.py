@@ -2,102 +2,102 @@ from __future__ import absolute_import
 
 from unittest import TestCase
 
+import plotly.tools
 from plotly.graph_objs import (Annotation, Annotations, Data, Figure, Font,
                                Layout, layout, Scene, XAxis, YAxis)
-import plotly.tools as tls
 
 
 class TestMakeSubplots(TestCase):
 
     def test_non_integer_rows(self):
         with self.assertRaises(Exception):
-            tls.make_subplots(rows=2.1)
+            plotly.tools.make_subplots(rows=2.1)
 
     def test_less_than_zero_rows(self):
         with self.assertRaises(Exception):
-            tls.make_subplots(rows=-2)
+            plotly.tools.make_subplots(rows=-2)
 
     def test_non_integer_cols(self):
         with self.assertRaises(Exception):
-            tls.make_subplots(cols=2/3)
+            plotly.tools.make_subplots(cols=2 / 3)
 
     def test_less_than_zero_cols(self):
         with self.assertRaises(Exception):
-            tls.make_subplots(cols=-10)
+            plotly.tools.make_subplots(cols=-10)
 
     def test_wrong_kwarg(self):
         with self.assertRaises(Exception):
-            tls.make_subplots(stuff='no gonna work')
+            plotly.tools.make_subplots(stuff='no gonna work')
 
     def test_start_cell_wrong_values(self):
         with self.assertRaises(Exception):
-            tls.make_subplots(rows=2, cols=2, start_cell='not gonna work')
+            plotly.tools.make_subplots(rows=2, cols=2, start_cell='not gonna work')
 
     def test_specs_wrong_type(self):
         with self.assertRaises(Exception):
-            tls.make_subplots(specs="not going to work")
+            plotly.tools.make_subplots(specs="not going to work")
 
     def test_specs_wrong_inner_type(self):
         with self.assertRaises(Exception):
-            tls.make_subplots(specs=[{}])
+            plotly.tools.make_subplots(specs=[{}])
 
     def test_specs_wrong_item_type(self):
         with self.assertRaises(Exception):
-            tls.make_subplots(specs=[[('not', 'going to work')]])
+            plotly.tools.make_subplots(specs=[[('not', 'going to work')]])
 
     def test_specs_wrong_item_key(self):
         with self.assertRaises(Exception):
-            tls.make_subplots(specs=[{'not': "going to work"}])
+            plotly.tools.make_subplots(specs=[{'not': "going to work"}])
 
     def test_specs_underspecified(self):
         with self.assertRaises(Exception):
-            tls.make_subplots(rows=2, specs=[{}])
-            tls.make_subplots(rows=2, cols=2, specs=[[{}, {}], [{}]])
+            plotly.tools.make_subplots(rows=2, specs=[{}])
+            plotly.tools.make_subplots(rows=2, cols=2, specs=[[{}, {}], [{}]])
 
     def test_specs_overspecified(self):
         with self.assertRaises(Exception):
-            tls.make_subplots(rows=2, specs=[[{}], [{}], [{}]])
-            tls.make_subplots(cols=2, specs=[{}, {}, {}])
+            plotly.tools.make_subplots(rows=2, specs=[[{}], [{}], [{}]])
+            plotly.tools.make_subplots(cols=2, specs=[{}, {}, {}])
 
     def test_specs_colspan_too_big(self):
         with self.assertRaises(Exception):
-            tls.make_subplots(cols=3, specs=[[{}, None, {'colspan': 2}]])
+            plotly.tools.make_subplots(cols=3, specs=[[{}, None, {'colspan': 2}]])
 
     def test_specs_rowspan_too_big(self):
         with self.assertRaises(Exception):
-            tls.make_subplots(rows=3, specs=[[{}], [None], [{'rowspan': 2}]])
+            plotly.tools.make_subplots(rows=3, specs=[[{}], [None], [{'rowspan': 2}]])
 
     def test_insets_wrong_type(self):
         with self.assertRaises(Exception):
-            tls.make_subplots(insets="not going to work")
+            plotly.tools.make_subplots(insets="not going to work")
 
     def test_insets_wrong_item(self):
         with self.assertRaises(Exception):
-            tls.make_subplots(insets=[{'not': "going to work"}])
+            plotly.tools.make_subplots(insets=[{'not': "going to work"}])
 
     def test_insets_wrong_cell_row(self):
         with self.assertRaises(Exception):
-            tls.make_subplots(insets=([{'cell': (0, 1)}]))
+            plotly.tools.make_subplots(insets=([{'cell': (0, 1)}]))
 
     def test_insets_wrong_cell_col(self):
         with self.assertRaises(Exception):
-            tls.make_subplots(insets=([{'cell': (1, 0)}]))
+            plotly.tools.make_subplots(insets=([{'cell': (1, 0)}]))
 
     def test_column_width_not_list(self):
         with self.assertRaises(Exception):
-            tls.make_subplots(rows=2, cols=2, column_width='not gonna work')
+            plotly.tools.make_subplots(rows=2, cols=2, column_width='not gonna work')
 
     def test_column_width_not_list_of_correct_numbers(self):
         with self.assertRaises(Exception):
-            tls.make_subplots(rows=2, cols=2, column_width=[0])
+            plotly.tools.make_subplots(rows=2, cols=2, column_width=[0])
 
     def test_row_width_not_list(self):
         with self.assertRaises(Exception):
-            tls.make_subplots(rows=2, cols=2, row_width='not gonna work')
+            plotly.tools.make_subplots(rows=2, cols=2, row_width='not gonna work')
 
     def test_row_width_not_list_of_correct_numbers(self):
         with self.assertRaises(Exception):
-            tls.make_subplots(rows=2, cols=2, row_width=[1])
+            plotly.tools.make_subplots(rows=2, cols=2, row_width=[1])
 
     def test_single_plot(self):
         expected = Figure(
@@ -113,7 +113,7 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        self.assertEqual(tls.make_subplots().to_plotly_json(),
+        self.assertEqual(plotly.tools.make_subplots().to_plotly_json(),
                          expected.to_plotly_json())
 
     def test_two_row(self):
@@ -138,7 +138,7 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        self.assertEqual(tls.make_subplots(rows=2).to_plotly_json(), expected.to_plotly_json())
+        self.assertEqual(plotly.tools.make_subplots(rows=2).to_plotly_json(), expected.to_plotly_json())
 
     def test_two_row_bottom_left(self):
         expected = Figure(
@@ -162,7 +162,7 @@ class TestMakeSubplots(TestCase):
                 ),
             )
         )
-        fig = tls.make_subplots(rows=2, start_cell='bottom-left')
+        fig = plotly.tools.make_subplots(rows=2, start_cell='bottom-left')
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_two_column(self):
@@ -187,7 +187,7 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        self.assertEqual(tls.make_subplots(cols=2).to_plotly_json(), expected.to_plotly_json())
+        self.assertEqual(plotly.tools.make_subplots(cols=2).to_plotly_json(), expected.to_plotly_json())
 
     def test_a_lot(self):
         expected = Figure(
@@ -419,7 +419,7 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        fig = tls.make_subplots(rows=4, cols=7)
+        fig = plotly.tools.make_subplots(rows=4, cols=7)
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_a_lot_bottom_left(self):
@@ -652,7 +652,7 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        fig = tls.make_subplots(rows=4, cols=7, start_cell='bottom-left')
+        fig = plotly.tools.make_subplots(rows=4, cols=7, start_cell='bottom-left')
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_spacing(self):
@@ -709,9 +709,9 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        fig = tls.make_subplots(rows=2, cols=3,
-                                horizontal_spacing=.05,
-                                vertical_spacing=.1)
+        fig = plotly.tools.make_subplots(rows=2, cols=3,
+                                         horizontal_spacing=.05,
+                                         vertical_spacing=.1)
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_specs(self):
@@ -752,8 +752,8 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        fig = tls.make_subplots(rows=2, cols=3,
-                                specs=[[{}, None, None],
+        fig = plotly.tools.make_subplots(rows=2, cols=3,
+                                         specs=[[{}, None, None],
                                        [{}, {}, {}]])
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
@@ -795,10 +795,10 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        fig = tls.make_subplots(rows=2, cols=3,
-                                specs=[[{}, None, None],
+        fig = plotly.tools.make_subplots(rows=2, cols=3,
+                                         specs=[[{}, None, None],
                                        [{}, {}, {}]],
-                                start_cell='bottom-left')
+                                         start_cell='bottom-left')
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_specs_colspan(self):
@@ -847,8 +847,8 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        fig = tls.make_subplots(rows=3, cols=2,
-                                specs=[[{'colspan': 2}, None],
+        fig = plotly.tools.make_subplots(rows=3, cols=2,
+                                         specs=[[{'colspan': 2}, None],
                                        [{}, {}],
                                        [{}, {}]])
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
@@ -907,8 +907,8 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        fig = tls.make_subplots(rows=3, cols=3,
-                                specs=[[{'rowspan': 3}, {}, {}],
+        fig = plotly.tools.make_subplots(rows=3, cols=3,
+                                         specs=[[{'rowspan': 3}, {}, {}],
                                        [None, {}, {}], [None, {'colspan': 2}, None]])
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
@@ -958,9 +958,9 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        fig = tls.make_subplots(rows=3, cols=3, specs=[[{}, {}, {'rowspan': 2}],
-                                [{'colspan': 2}, None, None],
-                                [{'colspan': 3}, None, None]])
+        fig = plotly.tools.make_subplots(rows=3, cols=3, specs=[[{}, {}, {'rowspan': 2}],
+                                                                [{'colspan': 2}, None, None],
+                                                                [{'colspan': 3}, None, None]])
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_specs_colspan_rowpan(self):
@@ -1017,8 +1017,8 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        fig = tls.make_subplots(rows=3, cols=3,
-                                specs=[[{'colspan': 2, 'rowspan': 2}, None, {}],
+        fig = plotly.tools.make_subplots(rows=3, cols=3,
+                                         specs=[[{'colspan': 2, 'rowspan': 2}, None, {}],
                                        [None, None, {}], [{}, {}, {}]])
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
@@ -1076,10 +1076,10 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        fig = tls.make_subplots(rows=3, cols=3,
-                                specs=[[{'colspan': 2, 'rowspan': 2}, None, {}],
+        fig = plotly.tools.make_subplots(rows=3, cols=3,
+                                         specs=[[{'colspan': 2, 'rowspan': 2}, None, {}],
                                        [None, None, {}], [{}, {}, {}]],
-                                start_cell='bottom-left')
+                                         start_cell='bottom-left')
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_specs_is_3d(self):
@@ -1110,8 +1110,8 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        fig = tls.make_subplots(rows=2, cols=2, specs=[[{'is_3d': True}, {}],
-                                                       [{'is_3d': True}, {}]])
+        fig = plotly.tools.make_subplots(rows=2, cols=2, specs=[[{'is_3d': True}, {}],
+                                                                [{'is_3d': True}, {}]])
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_specs_padding(self):
@@ -1152,9 +1152,9 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        fig = tls.make_subplots(rows=2, cols=2, horizontal_spacing=0,
-                                vertical_spacing=0,
-                                specs=[[{'l': 0.1}, {'b': 0.2}],
+        fig = plotly.tools.make_subplots(rows=2, cols=2, horizontal_spacing=0,
+                                         vertical_spacing=0,
+                                         specs=[[{'l': 0.1}, {'b': 0.2}],
                                        [{'t': 0.2}, {'r': 0.1}]])
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
@@ -1196,11 +1196,11 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        fig = tls.make_subplots(rows=2, cols=2,
-                                horizontal_spacing=0, vertical_spacing=0,
-                                specs=[[{'l': 0.1}, {'b': 0.2}],
+        fig = plotly.tools.make_subplots(rows=2, cols=2,
+                                         horizontal_spacing=0, vertical_spacing=0,
+                                         specs=[[{'l': 0.1}, {'b': 0.2}],
                                        [{'t': 0.2}, {'r': 0.1}]],
-                                start_cell='bottom-left')
+                                         start_cell='bottom-left')
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_shared_xaxes(self):
@@ -1248,7 +1248,7 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        fig = tls.make_subplots(rows=2, cols=3, shared_xaxes=True)
+        fig = plotly.tools.make_subplots(rows=2, cols=3, shared_xaxes=True)
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_shared_xaxes_bottom_left(self):
@@ -1296,8 +1296,8 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        fig = tls.make_subplots(rows=2, cols=3,
-                                shared_xaxes=True, start_cell='bottom-left')
+        fig = plotly.tools.make_subplots(rows=2, cols=3,
+                                         shared_xaxes=True, start_cell='bottom-left')
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_shared_yaxes(self):
@@ -1371,7 +1371,7 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        fig = tls.make_subplots(rows=5, cols=2, shared_yaxes=True)
+        fig = plotly.tools.make_subplots(rows=5, cols=2, shared_yaxes=True)
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_shared_xaxes_yaxes(self):
@@ -1408,8 +1408,8 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        fig = tls.make_subplots(rows=3, cols=3,
-                                shared_xaxes=True, shared_yaxes=True)
+        fig = plotly.tools.make_subplots(rows=3, cols=3,
+                                         shared_xaxes=True, shared_yaxes=True)
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_shared_xaxes_yaxes_bottom_left(self):
@@ -1446,9 +1446,9 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        fig = tls.make_subplots(rows=3, cols=3,
-                                shared_xaxes=True, shared_yaxes=True,
-                                start_cell='bottom-left')
+        fig = plotly.tools.make_subplots(rows=3, cols=3,
+                                         shared_xaxes=True, shared_yaxes=True,
+                                         start_cell='bottom-left')
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_shared_axes_list(self):
@@ -1483,8 +1483,8 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        fig = tls.make_subplots(rows=2, cols=2, shared_xaxes=[(1, 1), (2, 1)],
-                                shared_yaxes=[(1, 1), (1, 2)])
+        fig = plotly.tools.make_subplots(rows=2, cols=2, shared_xaxes=[(1, 1), (2, 1)],
+                                         shared_yaxes=[(1, 1), (1, 2)])
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_shared_axes_list_bottom_left(self):
@@ -1519,9 +1519,9 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        fig = tls.make_subplots(rows=2, cols=2, shared_xaxes=[(1, 1), (2, 1)],
-                                shared_yaxes=[(1, 1), (1, 2)],
-                                start_cell='bottom-left')
+        fig = plotly.tools.make_subplots(rows=2, cols=2, shared_xaxes=[(1, 1), (2, 1)],
+                                         shared_yaxes=[(1, 1), (1, 2)],
+                                         start_cell='bottom-left')
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_shared_axes_list_of_lists(self):
@@ -1572,7 +1572,7 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        fig = tls.make_subplots(
+        fig = plotly.tools.make_subplots(
             rows=2, cols=3, shared_xaxes=[[(1, 1), (2, 1)], [(1, 3), (2, 3)]]
         )
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
@@ -1625,9 +1625,9 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        fig = tls.make_subplots(rows=2, cols=3, shared_xaxes=[[(1, 1), (2, 1)],
-                                                              [(1, 3), (2, 3)]],
-                                start_cell='bottom-left')
+        fig = plotly.tools.make_subplots(rows=2, cols=3, shared_xaxes=[[(1, 1), (2, 1)],
+                                                                       [(1, 3), (2, 3)]],
+                                         start_cell='bottom-left')
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_insets(self):
@@ -1676,8 +1676,8 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        fig = tls.make_subplots(rows=2, cols=2,
-                                insets=[{'cell': (2, 2), 'l': 0.7, 'w': 0.2,
+        fig = plotly.tools.make_subplots(rows=2, cols=2,
+                                         insets=[{'cell': (2, 2), 'l': 0.7, 'w': 0.2,
                                          'b': 0.2, 'h': 0.5}])
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
@@ -1727,10 +1727,10 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        fig = tls.make_subplots(rows=2, cols=2,
-                                insets=[{'cell': (2, 2), 'l': 0.7, 'w': 0.2,
+        fig = plotly.tools.make_subplots(rows=2, cols=2,
+                                         insets=[{'cell': (2, 2), 'l': 0.7, 'w': 0.2,
                                          'b': 0.2, 'h': 0.5}],
-                                start_cell='bottom-left')
+                                         start_cell='bottom-left')
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_insets_multiple(self):
@@ -1771,8 +1771,8 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        fig = tls.make_subplots(rows=2, insets=[{'cell': (1, 1), 'l': 0.8},
-                                                {'cell': (2, 1), 'l': 0.8}])
+        fig = plotly.tools.make_subplots(rows=2, insets=[{'cell': (1, 1), 'l': 0.8},
+                                                         {'cell': (2, 1), 'l': 0.8}])
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_insets_multiple_bottom_left(self):
@@ -1813,10 +1813,10 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        fig = tls.make_subplots(rows=2,
-                                insets=[{'cell': (1, 1), 'l': 0.8},
+        fig = plotly.tools.make_subplots(rows=2,
+                                         insets=[{'cell': (1, 1), 'l': 0.8},
                                         {'cell': (2, 1), 'l': 0.8}],
-                                start_cell='bottom-left')
+                                         start_cell='bottom-left')
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_subplot_titles_2x1(self):
@@ -1866,7 +1866,7 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        fig = tls.make_subplots(rows=2, subplot_titles=('Title 1', 'Title 2'))
+        fig = plotly.tools.make_subplots(rows=2, subplot_titles=('Title 1', 'Title 2'))
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_subplot_titles_1x3(self):
@@ -1935,8 +1935,8 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        fig = tls.make_subplots(cols=3,
-                                subplot_titles=('Title 1', 'Title 2', 'Title 3'))
+        fig = plotly.tools.make_subplots(cols=3,
+                                         subplot_titles=('Title 1', 'Title 2', 'Title 3'))
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_subplot_titles_shared_axes(self):
@@ -2011,10 +2011,10 @@ class TestMakeSubplots(TestCase):
             )
         )
 
-        fig = tls.make_subplots(rows=2, cols=2,
-                                subplot_titles=('Title 1', 'Title 2',
+        fig = plotly.tools.make_subplots(rows=2, cols=2,
+                                         subplot_titles=('Title 1', 'Title 2',
                                                 'Title 3', 'Title 4'),
-                                shared_xaxes=True, shared_yaxes=True)
+                                         shared_xaxes=True, shared_yaxes=True)
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_subplot_titles_irregular_layout(self):
@@ -2083,9 +2083,9 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        fig = tls.make_subplots(rows=2, cols=2,
-                                subplot_titles=('Title 1', 'Title 2', 'Title 3'),
-                                specs=[[{}, {}], [{'colspan': 2}, None]])
+        fig = plotly.tools.make_subplots(rows=2, cols=2,
+                                         subplot_titles=('Title 1', 'Title 2', 'Title 3'),
+                                         specs=[[{}, {}], [{'colspan': 2}, None]])
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_subplot_titles_insets(self):
@@ -2125,8 +2125,8 @@ class TestMakeSubplots(TestCase):
                 )
             )
         )
-        fig = tls.make_subplots(insets=[{'cell': (1, 1), 'l': 0.7, 'b': 0.3}],
-                                subplot_titles=("", 'Inset'))
+        fig = plotly.tools.make_subplots(insets=[{'cell': (1, 1), 'l': 0.7, 'b': 0.3}],
+                                         subplot_titles=("", 'Inset'))
         self.assertEqual(fig, expected)
 
     def test_large_columns_no_errors(self):
@@ -2149,12 +2149,12 @@ class TestMakeSubplots(TestCase):
         v_space = 0.0
 
         # 2D
-        fig = tls.make_subplots(100, 1, vertical_spacing=v_space)
+        fig = plotly.tools.make_subplots(100, 1, vertical_spacing=v_space)
 
         # 3D
-        fig = tls.make_subplots(100, 1,
-                                vertical_spacing=v_space,
-                                specs=[[{'is_3d': True}] for _ in range(100)])
+        fig = plotly.tools.make_subplots(100, 1,
+                                         vertical_spacing=v_space,
+                                         specs=[[{'is_3d': True}] for _ in range(100)])
 
     def test_row_width_and_column_width(self):
 
@@ -2205,9 +2205,9 @@ class TestMakeSubplots(TestCase):
                        'yaxis3': {'anchor': 'x3', 'domain': [0.0, 0.1875]},
                        'yaxis4': {'anchor': 'x4', 'domain': [0.0, 0.1875]}}
         })
-        fig = tls.make_subplots(rows=2, cols=2,
-                                subplot_titles=('Title 1', 'Title 2', 'Title 3', 'Title 4'),
-                                row_width=[1, 3], column_width=[9, 1])
+        fig = plotly.tools.make_subplots(rows=2, cols=2,
+                                         subplot_titles=('Title 1', 'Title 2', 'Title 3', 'Title 4'),
+                                         row_width=[1, 3], column_width=[9, 1])
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
     def test_row_width_and_shared_yaxes(self):
@@ -2258,8 +2258,8 @@ class TestMakeSubplots(TestCase):
                        'yaxis2': {'anchor': 'x3', 'domain': [0.0, 0.1875]}}
         })
 
-        fig = tls.make_subplots(rows=2, cols=2, row_width=[1, 3], shared_yaxes=True,
-                                subplot_titles=('Title 1', 'Title 2', 'Title 3', 'Title 4'))
+        fig = plotly.tools.make_subplots(rows=2, cols=2, row_width=[1, 3], shared_yaxes=True,
+                                         subplot_titles=('Title 1', 'Title 2', 'Title 3', 'Title 4'))
 
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 

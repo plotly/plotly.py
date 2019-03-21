@@ -2,13 +2,10 @@ from __future__ import absolute_import
 
 from nose.tools import raises
 
+import plotly.tools
 from plotly.graph_objs import (Data, Figure, Layout, Scatter, Scatter3d, Scene,
                                XAxis, YAxis)
 from plotly.tests.utils import strip_dict_params
-
-import plotly.tools as tls
-
-import copy
 
 
 @raises(Exception)
@@ -27,14 +24,14 @@ def test_append_trace_before_make_subplots():
 @raises(Exception)
 def test_append_trace_row_out_of_range():
     trace = Scatter(x=[1, 2, 3], y=[2, 3, 4])
-    fig = tls.make_subplots(rows=2, cols=3)
+    fig = plotly.tools.make_subplots(rows=2, cols=3)
     fig.append_trace(trace, 10, 2)
 
 
 @raises(Exception)
 def test_append_trace_col_out_of_range():
     trace = Scatter(x=[1, 2, 3], y=[2, 3, 4])
-    fig = tls.make_subplots(rows=2, cols=3)
+    fig = plotly.tools.make_subplots(rows=2, cols=3)
     fig.append_trace(trace, 2, 0)
 
 
@@ -101,7 +98,7 @@ def test_append_scatter():
     )
 
     trace = Scatter(x=[1, 2, 3], y=[2, 3, 4])
-    fig = tls.make_subplots(rows=2, cols=3)
+    fig = plotly.tools.make_subplots(rows=2, cols=3)
     fig.append_trace(trace, 2, 2)
 
     d1, d2 = strip_dict_params(fig['data'][0], expected['data'][0])
@@ -114,7 +111,7 @@ def test_append_scatter():
 @raises(Exception)
 def test_append_scatter_after_deleting_xaxis():
     trace = Scatter(x=[1, 2, 3], y=[2, 3, 4])
-    fig = tls.make_subplots(rows=2, cols=3)
+    fig = plotly.tools.make_subplots(rows=2, cols=3)
     fig['layout'].pop('xaxis5', None)
     fig.append_trace(trace, 2, 2)
 
@@ -122,7 +119,7 @@ def test_append_scatter_after_deleting_xaxis():
 @raises(Exception)
 def test_append_scatter_after_deleting_yaxis():
     trace = Scatter(x=[1, 2, 3], y=[2, 3, 4])
-    fig = tls.make_subplots(rows=2, cols=3)
+    fig = plotly.tools.make_subplots(rows=2, cols=3)
     fig['layout'].pop('yaxis5', None)
     fig.append_trace(trace, 2, 2)
 
@@ -153,8 +150,8 @@ def test_append_scatter3d():
         )
     )
 
-    fig = tls.make_subplots(rows=2, cols=1,
-                            specs=[[{'is_3d': True}],
+    fig = plotly.tools.make_subplots(rows=2, cols=1,
+                                     specs=[[{'is_3d': True}],
                                    [{'is_3d': True}]])
     trace = Scatter3d(x=[1, 2, 3], y=[2, 3, 4], z=[1, 2, 3])
     fig.append_trace(trace, 1, 1)
@@ -172,8 +169,8 @@ def test_append_scatter3d():
 
 @raises(Exception)
 def test_append_scatter3d_after_deleting_scene():
-    fig = tls.make_subplots(rows=2, cols=1,
-                            specs=[[{'is_3d': True}],
+    fig = plotly.tools.make_subplots(rows=2, cols=1,
+                                     specs=[[{'is_3d': True}],
                                    [{'is_3d': True}]])
     trace = Scatter3d(x=[1, 2, 3], y=[2, 3, 4], z=[1, 2, 3])
     fig['layout'].pop('scene1', None)

@@ -616,7 +616,7 @@ class SrcValidator(BaseValidator):
     as a plotly.grid_objs.Column object""".format(plotly_name=self.plotly_name))
 
     def validate_coerce(self, v):
-        from plotly.grid_objs import Column
+        from chart_studio.grid_objs import Column
         if v is None:
             # Pass None through
             pass
