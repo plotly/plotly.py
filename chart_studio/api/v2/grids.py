@@ -1,7 +1,7 @@
 """Interface to Plotly's /v2/grids endpoints."""
 from __future__ import absolute_import
 
-from plotly.api.v2.utils import build_url, make_params, request
+from chart_studio.api.v2.utils import build_url, make_params, request
 
 RESOURCE = 'grids'
 

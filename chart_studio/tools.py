@@ -17,8 +17,8 @@ import copy
 import plotly.exceptions
 from plotly import optional_imports
 from chart_studio import session, utils
-from chart_studio.files import (CONFIG_FILE, CREDENTIALS_FILE, FILE_CONTENT,
-                                ensure_writable_plotly_dir)
+from chart_studio.files import CONFIG_FILE, CREDENTIALS_FILE, FILE_CONTENT
+from plotly.files import ensure_writable_plotly_dir
 
 DEFAULT_PLOTLY_COLORS = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
                          'rgb(44, 160, 44)', 'rgb(214, 39, 40)',

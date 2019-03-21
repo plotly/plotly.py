@@ -1,6 +1,7 @@
 import os
 
 # file structure
+from plotly.files import PLOTLY_DIR
 
 CREDENTIALS_FILE = os.path.join(PLOTLY_DIR, ".credentials")
 CONFIG_FILE = os.path.join(PLOTLY_DIR, ".config")

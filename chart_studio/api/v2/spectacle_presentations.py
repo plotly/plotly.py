@@ -3,7 +3,7 @@ Interface to Plotly's /v2/spectacle-presentations endpoint.
 """
 from __future__ import absolute_import
 
-from plotly.api.v2.utils import build_url, request
+from chart_studio.api.v2.utils import build_url, request
 
 RESOURCE = 'spectacle-presentations'
 

@@ -6,8 +6,9 @@ import warnings
 from requests.compat import json as _json
 
 from plotly import version
+from plotly.utils import PlotlyJSONEncoder
 from chart_studio import config, utils
-from plotly.api.v1.utils import request
+from chart_studio.api.v1.utils import request
 
 
 def clientresp(data, **kwargs):
@@ -23,7 +24,7 @@ def clientresp(data, **kwargs):
     creds = config.get_credentials()
     cfg = config.get_config()
 
-    dumps_kwargs = {'sort_keys': True, 'cls': utils.PlotlyJSONEncoder}
+    dumps_kwargs = {'sort_keys': True, 'cls': PlotlyJSONEncoder}
 
     payload = {
         'platform': 'python', 'version': version.stable_semver(),

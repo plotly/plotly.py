@@ -6,7 +6,7 @@ plotly.plotly.dashboard_ops.
 """
 from __future__ import absolute_import
 
-from plotly.api.v2.utils import build_url, request
+from chart_studio.api.v2.utils import build_url, request
 
 RESOURCE = 'dashboards'
 

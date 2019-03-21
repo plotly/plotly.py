@@ -7,8 +7,9 @@ from retrying import retry
 
 import plotly.exceptions
 from plotly import version
-from chart_studio import config, utils, exceptions
-from plotly.api.utils import basic_auth
+from chart_studio import config, exceptions
+from chart_studio.api.utils import basic_auth
+from plotly.utils import PlotlyJSONEncoder
 
 
 def make_params(**kwargs):
@@ -151,9 +152,10 @@ def request(method, url, **kwargs):
     # We have a special json encoding class for non-native objects.
     if kwargs.get('json') is not None:
         if kwargs.get('data'):
-            raise plotly.exceptions.PlotlyError('Cannot supply data and json kwargs.')
+            raise plotly.exceptions.PlotlyError(
+                'Cannot supply data and json kwargs.')
         kwargs['data'] = _json.dumps(kwargs.pop('json'), sort_keys=True,
-                                     cls=utils.PlotlyJSONEncoder)
+                                     cls=PlotlyJSONEncoder)
 
     # The config file determines whether reuqests should *verify*.
     kwargs['verify'] = config.get_config()['plotly_ssl_verification']

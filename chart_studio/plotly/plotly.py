@@ -43,7 +43,7 @@ from chart_studio.grid_objs import Grid
 from chart_studio.dashboard_objs import dashboard_objs as dashboard
 
 # This is imported like this for backwards compat. Careful if changing.
-from chart_studio.config import get_config
+from chart_studio.config import get_config, get_credentials
 
 __all__ = None
 

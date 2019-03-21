@@ -6,7 +6,7 @@ import ssl
 from six.moves import http_client
 from six.moves.urllib.parse import urlparse, unquote
 
-from plotly.api import utils
+from chart_studio.api import utils
 
 
 class Stream:
