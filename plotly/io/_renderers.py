@@ -10,7 +10,7 @@ from plotly import optional_imports
 from _plotly_future_ import _future_flags
 
 from plotly.io._base_renderers import (
-    MimetypeRenderer, SideEffectRenderer, PlotlyRenderer, NotebookRenderer,
+    MimetypeRenderer, ExternalRenderer, PlotlyRenderer, NotebookRenderer,
     KaggleRenderer, ColabRenderer, JsonRenderer, PngRenderer, JpegRenderer,
     SvgRenderer, PdfRenderer, BrowserRenderer, IFrameRenderer)
 from plotly.io._utils import validate_coerce_fig_to_dict
@@ -46,9 +46,9 @@ class RenderersConfig(object):
         return renderer
 
     def __setitem__(self, key, value):
-        if not isinstance(value, (MimetypeRenderer, SideEffectRenderer)):
+        if not isinstance(value, (MimetypeRenderer, ExternalRenderer)):
             raise ValueError("""\
-Renderer must be a subclass of MimetypeRenderer or SideEffectRenderer.
+Renderer must be a subclass of MimetypeRenderer or ExternalRenderer.
     Received value with type: {typ}""".format(typ=type(value)))
 
         self._renderers[key] = value
@@ -241,15 +241,15 @@ Renderers configuration
 
         return bundle
 
-    def _perform_side_effect_rendering(
+    def _perform_external_rendering(
             self, fig_dict, renderers_string=None, **kwargs):
         """
-        Perform side-effect rendering for each SideEffectRenderer specified
+        Perform external rendering for each ExternalRenderer specified
         in either the default renderer string, or in the supplied
         renderers_string argument.
 
         Note that this method skips any renderers that are not subclasses
-        of SideEffectRenderer.
+        of ExternalRenderer.
 
         Parameters
         ----------
@@ -267,13 +267,13 @@ Renderers configuration
             renderer_names = self._validate_coerce_renderers(renderers_string)
             renderers_list = [self[name] for name in renderer_names]
             for renderer in renderers_list:
-                if isinstance(renderer, SideEffectRenderer):
+                if isinstance(renderer, ExternalRenderer):
                     renderer.activate()
         else:
             renderers_list = self._default_renderers
 
         for renderer in renderers_list:
-            if isinstance(renderer, SideEffectRenderer):
+            if isinstance(renderer, ExternalRenderer):
                 renderer = copy(renderer)
                 for k, v in kwargs.items():
                     if hasattr(renderer, k):
@@ -324,8 +324,8 @@ def show(fig, renderer=None, validate=True, **kwargs):
 
         ipython_display.display(bundle, raw=True)
 
-    # Side effect renderers
-    renderers._perform_side_effect_rendering(
+    # external renderers
+    renderers._perform_external_rendering(
         fig_dict, renderers_string=renderer, **kwargs)
 
 
@@ -359,7 +359,7 @@ renderers['jpg'] = jpeg_renderer
 renderers['svg'] = SvgRenderer(**img_kwargs)
 renderers['pdf'] = PdfRenderer(**img_kwargs)
 
-# Side effects
+# External
 renderers['browser'] = BrowserRenderer(config=config)
 renderers['firefox'] = BrowserRenderer(config=config, using='firefox')
 renderers['chrome'] = BrowserRenderer(config=config, using='chrome')

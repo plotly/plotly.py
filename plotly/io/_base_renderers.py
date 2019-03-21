@@ -468,13 +468,13 @@ class IFrameRenderer(MimetypeRenderer):
         return {'text/html': iframe_html}
 
 
-class SideEffectRenderer(RendererRepr):
+class ExternalRenderer(RendererRepr):
     """
-    Base class for side-effect renderers.  SideEffectRenderer subclasses
+    Base class for external renderers.  ExternalRenderer subclasses
     do not display figures inline in a notebook environment, but render
     figures by some external means (e.g. a separate browser tab).
 
-    Unlike MimetypeRenderer subclasses, SideEffectRenderer subclasses are not
+    Unlike MimetypeRenderer subclasses, ExternalRenderer subclasses are not
     invoked when a figure is asked to display itself in the notebook.
     Instead, they are invoked when the plotly.io.show function is called
     on a figure.
@@ -526,7 +526,7 @@ def open_html_in_browser(html, using=None, new=0, autoraise=True):
     server.handle_request()
 
 
-class BrowserRenderer(SideEffectRenderer):
+class BrowserRenderer(ExternalRenderer):
     """
     Renderer to display interactive figures in an external web browser.
     This renderer will open a new browser window or tab when the
