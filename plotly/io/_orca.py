@@ -11,7 +11,6 @@ import warnings
 from copy import copy
 from contextlib import contextmanager
 
-import requests
 import retrying
 from six import string_types
 
@@ -707,7 +706,7 @@ orca configuration
 
 constants
 ---------
-    plotlyjs: {plotlyjs} 
+    plotlyjs: {plotlyjs}
     config_file: {config_file}
 
 """.format(port=self.port,
@@ -822,7 +821,7 @@ orca status
     port: {port}
     pid: {pid}
     command: {command}
-    
+
 """.format(executable=self.executable,
            version=self.version,
            port=self.port,
@@ -910,7 +909,7 @@ If you haven't installed orca yet, you can do so using conda as follows:
 Alternatively, see other installation methods in the orca project README at
 https://github.com/plotly/orca.
 
-After installation is complete, no further configuration should be needed. 
+After installation is complete, no further configuration should be needed.
 
 If you have installed orca, then for some reason plotly.py was unable to
 locate it. In this case, set the `plotly.io.orca.config.executable`
@@ -922,7 +921,7 @@ After updating this executable property, try the export operation again.
 If it is successful then you may want to save this configuration so that it
 will be applied automatically in future sessions. You can do this as follows:
 
-    >>> plotly.io.orca.config.save() 
+    >>> plotly.io.orca.config.save()
 
 If you're still having trouble, feel free to ask for help on the forums at
 https://community.plot.ly/c/api/python
@@ -1038,7 +1037,7 @@ This command returned the following error:
 The error encountered is that no version was reported by the orca executable.
 Here is the command that plotly.py ran to request the version:
 
-    $ {executable} --version  
+    $ {executable} --version
 """.format(executable=executable))
     else:
         version_result = version_result.decode()
@@ -1153,7 +1152,7 @@ Image generation requires the psutil package.
 
 Install using pip:
     $ pip install psutil
-    
+
 Install using conda:
     $ conda install psutil
 """)
@@ -1224,12 +1223,13 @@ def request_image_with_retrying(**kwargs):
     Helper method to perform an image request to a running orca server process
     with retrying logic.
     """
+    from requests import post
     server_url = 'http://{hostname}:{port}'.format(
         hostname='localhost', port=orca_state['port'])
 
     request_params = {k: v for k, v, in kwargs.items() if v is not None}
     json_str = json.dumps(request_params, cls=plotly.utils.PlotlyJSONEncoder)
-    response = requests.post(server_url + '/', data=json_str)
+    response = post(server_url + '/', data=json_str)
     return response
 
 
@@ -1351,7 +1351,7 @@ Please review the process and connection information below:
 
 {info}
 plotly.py will attempt to start the local server process again the next time
-an image export operation is performed. 
+an image export operation is performed.
 """.format(info=status_str))
 
     # Check response
@@ -1393,7 +1393,7 @@ Create a token in your mapbox account and then set it using:
 
 >>> plotly.io.orca.config.mapbox_access_token = 'pk.abc...'
 
-If you would like this token to be applied automatically in 
+If you would like this token to be applied automatically in
 future sessions, then save your orca configuration as follows:
 
 >>> plotly.io.orca.config.save()
@@ -1402,9 +1402,9 @@ future sessions, then save your orca configuration as follows:
             err_message += """
 Exporting to EPS format requires the poppler library.  You can install
 poppler on MacOS or Linux with:
- 
+
     $ conda install poppler
-    
+
 Or, you can install it on MacOS using homebrew with:
 
     $ brew install poppler
@@ -1498,7 +1498,7 @@ Please add a file extension or specify the type using the format parameter.
 For example:
 
     >>> import plotly.io as pio
-    >>> pio.write_image(fig, file_path, format='png') 
+    >>> pio.write_image(fig, file_path, format='png')
 """.format(file=file))
 
     # Request image

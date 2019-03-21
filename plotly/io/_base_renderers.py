@@ -6,9 +6,9 @@ import os
 
 import six
 from plotly.io import to_json, to_image
-from plotly import utils, optional_imports
+from plotly import optional_imports
+
 from plotly.io._orca import ensure_server
-from plotly.offline.offline import _get_jconfig, get_plotlyjs
 
 ipython_display = optional_imports.get_module('IPython.display')
 IPython = optional_imports.get_module('IPython')
@@ -80,6 +80,7 @@ class PlotlyRenderer(MimetypeRenderer):
         self.config = dict(config) if config else {}
 
     def to_mimebundle(self, fig_dict):
+        from plotly.offline.offline import _get_jconfig
         config = _get_jconfig(self.config)
         if config:
             fig_dict['config'] = config
@@ -267,6 +268,7 @@ class HtmlRenderer(MimetypeRenderer):
                    mathjax_config=_mathjax_config)
 
             else:
+                from plotly.offline.offline import get_plotlyjs
                 # If not connected then we embed a copy of the plotly.js
                 # library in the notebook
                 script = """\

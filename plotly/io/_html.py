@@ -6,9 +6,6 @@ import webbrowser
 import six
 
 from plotly.io._utils import validate_coerce_fig_to_dict
-from plotly.offline.offline import _get_jconfig, get_plotlyjs
-from plotly import utils
-
 
 # Build script to set global PlotlyConfig object. This must execute before
 # plotly.js is loaded.
@@ -118,6 +115,7 @@ def to_html(fig,
     plotdivid = str(uuid.uuid4())
 
     # ## Serialize figure ##
+    from plotly import utils
     jdata = json.dumps(
         fig_dict.get('data', []), cls=utils.PlotlyJSONEncoder)
     jlayout = json.dumps(
@@ -130,6 +128,7 @@ def to_html(fig,
         jframes = None
 
     # ## Serialize figure config ##
+    from plotly.offline.offline import _get_jconfig
     config = _get_jconfig(config)
 
     # Check whether we should add responsive
@@ -233,6 +232,7 @@ def to_html(fig,
                url=include_plotlyjs_orig)
 
     elif include_plotlyjs:
+        from plotly.offline.offline import get_plotlyjs
         load_plotlyjs = """\
         {win_config}
         <script type="text/javascript">{plotlyjs}</script>\
@@ -438,6 +438,7 @@ def write_html(fig,
             os.path.dirname(file), 'plotly.min.js')
 
         if not os.path.exists(bundle_path):
+            from plotly.offline.offline import get_plotlyjs
             with open(bundle_path, 'w') as f:
                 f.write(get_plotlyjs())
 

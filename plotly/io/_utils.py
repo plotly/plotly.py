@@ -1,17 +1,15 @@
 from __future__ import absolute_import
 
-import plotly
-from plotly.basedatatypes import BaseFigure
-import plotly.graph_objs as go
-
 
 def validate_coerce_fig_to_dict(fig, validate):
+    from plotly.basedatatypes import BaseFigure
+    from plotly.graph_objs import Figure
     if isinstance(fig, BaseFigure):
         fig_dict = fig.to_dict()
     elif isinstance(fig, dict):
         if validate:
             # This will raise an exception if fig is not a valid plotly figure
-            fig_dict = plotly.graph_objs.Figure(fig).to_plotly_json()
+            fig_dict = Figure(fig).to_plotly_json()
         else:
             fig_dict = fig
     else:
@@ -22,6 +20,8 @@ The fig parameter must be a dict or Figure.
 
 
 def validate_coerce_output_type(output_type):
+    import plotly.graph_objs as go
+
     if output_type == 'Figure' or output_type == go.Figure:
         cls = go.Figure
     elif (output_type == 'FigureWidget' or
