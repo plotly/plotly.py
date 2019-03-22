@@ -1242,7 +1242,8 @@ class FigureFactory(object):
 
 # get_config_defaults
 from chart_studio.tools import (get_config_defaults)
-get_config_defaults = _chart_studio_deprecation(get_config_defaults)
+get_config_defaults = _chart_studio_deprecation(
+    get_config_defaults)
 
 # ensure_local_plotly_files
 from chart_studio.tools import ensure_local_plotly_files
