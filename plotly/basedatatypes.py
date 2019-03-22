@@ -9,7 +9,6 @@ import warnings
 from contextlib import contextmanager
 from copy import deepcopy, copy
 
-from plotly.offline.offline import _get_jconfig
 from .optional_imports import get_module
 
 from _plotly_utils.basevalidators import (
@@ -21,9 +20,9 @@ from .callbacks import (Points, InputDeviceState)
 from plotly.utils import ElidedPrettyPrinter
 from .validators import (DataValidator, LayoutValidator, FramesValidator)
 
-# Optional imports
-# ----------------
-np = get_module('numpy')
+# # Optional imports
+# # ----------------
+# np = get_module('numpy')
 
 # Create Undefined sentinel value
 #   - Setting a property to None removes any existing value
@@ -198,6 +197,7 @@ class BaseFigure(object):
         # arbitrary config options like in plotly.offline.plot/iplot.  But
         # this will require a fair amount of testing to determine which
         # options are compatible with FigureWidget.
+        from plotly.offline.offline import _get_jconfig
         self._config = _get_jconfig(None)
 
         # Frames

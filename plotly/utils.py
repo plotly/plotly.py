@@ -12,10 +12,9 @@ from decorator import decorator
 from plotly.optional_imports import get_module
 
 # Optional imports, may be None for users that only use our core functionality.
-numpy = get_module('numpy')
-pandas = get_module('pandas')
-sage_all = get_module('sage.all')
-
+# numpy = get_module('numpy')
+# pandas = get_module('pandas')
+# sage_all = get_module('sage.all')
 
 PY36 = (
     sys.version_info.major == 3 and sys.version_info.minor == 6
@@ -33,6 +32,7 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
     version.
 
     """
+
     def coerce_to_strict(self, const):
         """
         This is used to ultimately *encode* into strict JSON, see `encode`

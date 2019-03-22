@@ -29,14 +29,15 @@ Modules:
 from __future__ import absolute_import
 from _plotly_future_ import _future_flags
 
-from plotly import (
-    graph_objs,
-    tools,
-    utils,
-    offline,
-    colors,
-    io
-)
+if 'non_recursive_imports' not in _future_flags:
+    from plotly import (
+        graph_objs,
+        tools,
+        utils,
+        offline,
+        colors,
+        io
+    )
 
 from plotly.version import __version__
 from ._version import get_versions
@@ -44,7 +45,8 @@ __version__ = get_versions()['version']
 del get_versions
 
 
-if 'extract_chart_studio' not in _future_flags:
+if ('extract_chart_studio' not in _future_flags
+        and 'non_recursive_imports' not in _future_flags):
     from plotly import (
         plotly,
         dashboard_objs,

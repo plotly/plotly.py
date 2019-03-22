@@ -18,16 +18,16 @@ from six import string_types
 np = None
 pd = None
 
-try:
-    np = import_module('numpy')
-
-    try:
-        pd = import_module('pandas')
-    except ImportError:
-        pass
-
-except ImportError:
-    pass
+# try:
+#     np = import_module('numpy')
+#
+#     try:
+#         pd = import_module('pandas')
+#     except ImportError:
+#         pass
+#
+# except ImportError:
+#     pass
 
 
 # back-port of fullmatch from Py3.4+

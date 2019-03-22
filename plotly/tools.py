@@ -8,7 +8,6 @@ Functions that USERS will possibly want access to.
 
 """
 from __future__ import absolute_import
-from _plotly_future_ import _chart_studio_deprecation
 import warnings
 
 import six
@@ -1241,51 +1240,56 @@ class FigureFactory(object):
 
 
 # get_config_defaults
-from chart_studio.tools import (get_config_defaults)
-get_config_defaults = _chart_studio_deprecation(
-    get_config_defaults)
+from _plotly_future_ import _future_flags
 
-# ensure_local_plotly_files
-from chart_studio.tools import ensure_local_plotly_files
-ensure_local_plotly_files = _chart_studio_deprecation(
-    ensure_local_plotly_files)
+if 'remove_deprecations' not in _future_flags:
+    from _plotly_future_ import _chart_studio_deprecation
 
-# set_credentials_file
-from chart_studio.tools import set_credentials_file
-set_credentials_file = _chart_studio_deprecation(
-    set_credentials_file)
+    from chart_studio.tools import (get_config_defaults)
+    get_config_defaults = _chart_studio_deprecation(
+        get_config_defaults)
 
-# get_credentials_file
-from chart_studio.tools import get_credentials_file
-get_credentials_file = _chart_studio_deprecation(
-    get_credentials_file)
+    # ensure_local_plotly_files
+    from chart_studio.tools import ensure_local_plotly_files
+    ensure_local_plotly_files = _chart_studio_deprecation(
+        ensure_local_plotly_files)
 
-# reset_credentials_file
-from chart_studio.tools import reset_credentials_file
-reset_credentials_file = _chart_studio_deprecation(
-    reset_credentials_file)
+    # set_credentials_file
+    from chart_studio.tools import set_credentials_file
+    set_credentials_file = _chart_studio_deprecation(
+        set_credentials_file)
 
-# set_config_file
-from chart_studio.tools import set_config_file
-set_config_file = _chart_studio_deprecation(
-    set_config_file)
+    # get_credentials_file
+    from chart_studio.tools import get_credentials_file
+    get_credentials_file = _chart_studio_deprecation(
+        get_credentials_file)
 
-# get_config_file
-from chart_studio.tools import get_config_file
-get_config_file = _chart_studio_deprecation(
-    get_config_file)
+    # reset_credentials_file
+    from chart_studio.tools import reset_credentials_file
+    reset_credentials_file = _chart_studio_deprecation(
+        reset_credentials_file)
 
-# reset_config_file
-from chart_studio.tools import reset_config_file
-reset_config_file = _chart_studio_deprecation(
-    reset_config_file)
+    # set_config_file
+    from chart_studio.tools import set_config_file
+    set_config_file = _chart_studio_deprecation(
+        set_config_file)
 
-# get_embed
-from chart_studio.tools import get_embed
-get_embed = _chart_studio_deprecation(
-    get_embed)
+    # get_config_file
+    from chart_studio.tools import get_config_file
+    get_config_file = _chart_studio_deprecation(
+        get_config_file)
 
-# embed
-from chart_studio.tools import embed
-embed = _chart_studio_deprecation(
-    embed)
+    # reset_config_file
+    from chart_studio.tools import reset_config_file
+    reset_config_file = _chart_studio_deprecation(
+        reset_config_file)
+
+    # get_embed
+    from chart_studio.tools import get_embed
+    get_embed = _chart_studio_deprecation(
+        get_embed)
+
+    # embed
+    from chart_studio.tools import embed
+    embed = _chart_studio_deprecation(
+        embed)

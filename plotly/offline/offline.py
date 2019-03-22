@@ -10,7 +10,8 @@ import uuid
 import warnings
 import pkgutil
 
-from requests.compat import json as _json
+import json as _json
+# from requests.compat import json as _json
 
 import plotly
 import plotly.tools
@@ -19,9 +20,9 @@ from plotly import optional_imports
 from plotly.utils import PlotlyJSONEncoder
 from ._plotlyjs_version import __plotlyjs_version__
 
-ipython = optional_imports.get_module('IPython')
-ipython_display = optional_imports.get_module('IPython.display')
-matplotlib = optional_imports.get_module('matplotlib')
+# ipython = optional_imports.get_module('IPython')
+# ipython_display = optional_imports.get_module('IPython.display')
+# matplotlib = optional_imports.get_module('matplotlib')
 
 __IMAGE_FORMATS = ['jpeg', 'png', 'webp', 'svg']
 
