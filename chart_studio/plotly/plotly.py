@@ -252,7 +252,7 @@ def plot(figure_or_data, validate=True, **plot_options):
 
     plot_options = _plot_option_logic(plot_options)
 
-    fig = tools._replace_newline(figure)  # does not mutate figure
+    fig = plotly.tools._replace_newline(figure)  # does not mutate figure
     data = fig.get('data', [])
     plot_options['layout'] = fig.get('layout', {})
     response = v1.clientresp(data, **plot_options)
@@ -516,7 +516,7 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
 
     if raw:
         return figure
-    return tools.get_graph_obj(figure, obj_type='Figure')
+    return plotly.tools.get_graph_obj(figure, obj_type='Figure')
 
 
 @plotly.utils.template_doc(**tools.get_config_file())
@@ -1381,7 +1381,7 @@ def add_share_key_to_url(plot_url, attempt=0):
 
 
 def _send_to_plotly(figure, **plot_options):
-    fig = tools._replace_newline(figure)  # does not mutate figure
+    fig = plotly.tools._replace_newline(figure)  # does not mutate figure
     data = fig.get('data', [])
     response = v1.clientresp(data, **plot_options)
 

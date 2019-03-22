@@ -15,45 +15,16 @@ import six
 import copy
 
 import plotly.exceptions
-from plotly import optional_imports
 from chart_studio import session, utils
 from chart_studio.files import CONFIG_FILE, CREDENTIALS_FILE, FILE_CONTENT
 from plotly.files import ensure_writable_plotly_dir
 
-REQUIRED_GANTT_KEYS = ['Task', 'Start', 'Finish']
-PLOTLY_SCALES = {'Greys': ['rgb(0,0,0)', 'rgb(255,255,255)'],
-                 'YlGnBu': ['rgb(8,29,88)', 'rgb(255,255,217)'],
-                 'Greens': ['rgb(0,68,27)', 'rgb(247,252,245)'],
-                 'YlOrRd': ['rgb(128,0,38)', 'rgb(255,255,204)'],
-                 'Bluered': ['rgb(0,0,255)', 'rgb(255,0,0)'],
-                 'RdBu': ['rgb(5,10,172)', 'rgb(178,10,28)'],
-                 'Reds': ['rgb(220,220,220)', 'rgb(178,10,28)'],
-                 'Blues': ['rgb(5,10,172)', 'rgb(220,220,220)'],
-                 'Picnic': ['rgb(0,0,255)', 'rgb(255,0,0)'],
-                 'Rainbow': ['rgb(150,0,90)', 'rgb(255,0,0)'],
-                 'Portland': ['rgb(12,51,131)', 'rgb(217,30,30)'],
-                 'Jet': ['rgb(0,0,131)', 'rgb(128,0,0)'],
-                 'Hot': ['rgb(0,0,0)', 'rgb(255,255,255)'],
-                 'Blackbody': ['rgb(0,0,0)', 'rgb(160,200,255)'],
-                 'Earth': ['rgb(0,0,130)', 'rgb(255,255,255)'],
-                 'Electric': ['rgb(0,0,0)', 'rgb(255,250,220)'],
-                 'Viridis': ['rgb(68,1,84)', 'rgb(253,231,37)']}
-
 # color constants for violin plot
-DEFAULT_FILLCOLOR = '#1f77b4'
-DEFAULT_HISTNORM = 'probability density'
-ALTERNATIVE_HISTNORM = 'probability'
 
 
 # Warning format
-def warning_on_one_line(message, category, filename, lineno,
-                        file=None, line=None):
-    return '%s:%s: %s:\n\n%s\n\n' % (filename, lineno, category.__name__,
-                                     message)
-warnings.formatwarning = warning_on_one_line
-
-ipython_core_display = optional_imports.get_module('IPython.core.display')
-sage_salvus = optional_imports.get_module('sage_salvus')
+from plotly.tools import ipython_core_display, \
+    sage_salvus
 
 
 def get_config_defaults():
@@ -410,52 +381,6 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
 
 
 ### graph_objs related tools ###
-
-
-def get_graph_obj(obj, obj_type=None):
-    """Returns a new graph object.
-
-    OLD FUNCTION: this will *silently* strip out invalid pieces of the object.
-    NEW FUNCTION: no striping of invalid pieces anymore - only raises error
-        on unrecognized graph_objs
-    """
-    # TODO: Deprecate or move. #283
-    from plotly.graph_objs import graph_objs
-    try:
-        cls = getattr(graph_objs, obj_type)
-    except (AttributeError, KeyError):
-        raise plotly.exceptions.PlotlyError(
-            "'{}' is not a recognized graph_obj.".format(obj_type)
-        )
-    return cls(obj)
-
-
-def _replace_newline(obj):
-    """Replaces '\n' with '<br>' for all strings in a collection."""
-    if isinstance(obj, dict):
-        d = dict()
-        for key, val in list(obj.items()):
-            d[key] = _replace_newline(val)
-        return d
-    elif isinstance(obj, list):
-        l = list()
-        for index, entry in enumerate(obj):
-            l += [_replace_newline(entry)]
-        return l
-    elif isinstance(obj, six.string_types):
-        s = obj.replace('\n', '<br>')
-        if s != obj:
-            warnings.warn("Looks like you used a newline character: '\\n'.\n\n"
-                          "Plotly uses a subset of HTML escape characters\n"
-                          "to do things like newline (<br>), bold (<b></b>),\n"
-                          "italics (<i></i>), etc. Your newline characters \n"
-                          "have been converted to '<br>' so they will show \n"
-                          "up right on your Plotly figure!")
-        return s
-    else:
-        return obj  # we return the actual reference... but DON'T mutate.
-
-
 if ipython_core_display:
     class PlotlyDisplay(ipython_core_display.HTML):
         """An IPython display object for use with plotly urls
@@ -474,107 +399,3 @@ if ipython_core_display:
 
         def _repr_html_(self):
             return self.embed_code
-
-# Default colours for finance charts
-_DEFAULT_INCREASING_COLOR = '#3D9970'  # http://clrs.cc
-_DEFAULT_DECREASING_COLOR = '#FF4136'
-
-DIAG_CHOICES = ['scatter', 'histogram', 'box']
-VALID_COLORMAP_TYPES = ['cat', 'seq']
-
-
-class FigureFactory(object):
-
-    @staticmethod
-    def _deprecated(old_method, new_method=None):
-        if new_method is None:
-            # The method name stayed the same.
-            new_method = old_method
-        warnings.warn(
-            'plotly.tools.FigureFactory.{} is deprecated. '
-            'Use plotly.figure_factory.{}'.format(old_method, new_method)
-        )
-
-    @staticmethod
-    def create_2D_density(*args, **kwargs):
-        FigureFactory._deprecated('create_2D_density', 'create_2d_density')
-        from plotly.figure_factory import create_2d_density
-        return create_2d_density(*args, **kwargs)
-
-    @staticmethod
-    def create_annotated_heatmap(*args, **kwargs):
-        FigureFactory._deprecated('create_annotated_heatmap')
-        from plotly.figure_factory import create_annotated_heatmap
-        return create_annotated_heatmap(*args, **kwargs)
-
-    @staticmethod
-    def create_candlestick(*args, **kwargs):
-        FigureFactory._deprecated('create_candlestick')
-        from plotly.figure_factory import create_candlestick
-        return create_candlestick(*args, **kwargs)
-
-    @staticmethod
-    def create_dendrogram(*args, **kwargs):
-        FigureFactory._deprecated('create_dendrogram')
-        from plotly.figure_factory import create_dendrogram
-        return create_dendrogram(*args, **kwargs)
-
-    @staticmethod
-    def create_distplot(*args, **kwargs):
-        FigureFactory._deprecated('create_distplot')
-        from plotly.figure_factory import create_distplot
-        return create_distplot(*args, **kwargs)
-
-    @staticmethod
-    def create_facet_grid(*args, **kwargs):
-        FigureFactory._deprecated('create_facet_grid')
-        from plotly.figure_factory import create_facet_grid
-        return create_facet_grid(*args, **kwargs)
-
-    @staticmethod
-    def create_gantt(*args, **kwargs):
-        FigureFactory._deprecated('create_gantt')
-        from plotly.figure_factory import create_gantt
-        return create_gantt(*args, **kwargs)
-
-    @staticmethod
-    def create_ohlc(*args, **kwargs):
-        FigureFactory._deprecated('create_ohlc')
-        from plotly.figure_factory import create_ohlc
-        return create_ohlc(*args, **kwargs)
-
-    @staticmethod
-    def create_quiver(*args, **kwargs):
-        FigureFactory._deprecated('create_quiver')
-        from plotly.figure_factory import create_quiver
-        return create_quiver(*args, **kwargs)
-
-    @staticmethod
-    def create_scatterplotmatrix(*args, **kwargs):
-        FigureFactory._deprecated('create_scatterplotmatrix')
-        from plotly.figure_factory import create_scatterplotmatrix
-        return create_scatterplotmatrix(*args, **kwargs)
-
-    @staticmethod
-    def create_streamline(*args, **kwargs):
-        FigureFactory._deprecated('create_streamline')
-        from plotly.figure_factory import create_streamline
-        return create_streamline(*args, **kwargs)
-
-    @staticmethod
-    def create_table(*args, **kwargs):
-        FigureFactory._deprecated('create_table')
-        from plotly.figure_factory import create_table
-        return create_table(*args, **kwargs)
-
-    @staticmethod
-    def create_trisurf(*args, **kwargs):
-        FigureFactory._deprecated('create_trisurf')
-        from plotly.figure_factory import create_trisurf
-        return create_trisurf(*args, **kwargs)
-
-    @staticmethod
-    def create_violin(*args, **kwargs):
-        FigureFactory._deprecated('create_violin')
-        from plotly.figure_factory import create_violin
-        return create_violin(*args, **kwargs)

@@ -11,7 +11,8 @@ import pkgutil
 import six
 from requests.compat import json as _json
 
-import plotly.utils
+from plotly import utils
+
 
 # For backwards compat, we keep this list of previously known objects.
 # Moving forward, we only add new trace names.
@@ -69,7 +70,7 @@ def get_graph_reference():
     """
     path = os.path.join('package_data', 'plot-schema.json')
     s = pkgutil.get_data('plotly', path).decode('utf-8')
-    graph_reference = plotly.utils.decode_unicode(_json.loads(s))
+    graph_reference = utils.decode_unicode(_json.loads(s))
 
     # TODO: Patch in frames info until it hits streambed. See #659
     graph_reference['frames'] = {
@@ -223,14 +224,14 @@ def get_attributes_dicts(object_name, parent_object_names=()):
 
     # We return a dict mapping paths to attributes. We also add in additional
     # attributes if defined.
-    attributes_dicts = {path: plotly.utils.get_by_path(GRAPH_REFERENCE, path)
+    attributes_dicts = {path: utils.get_by_path(GRAPH_REFERENCE, path)
                   for path in attribute_paths}
     attributes_dicts['additional_attributes'] = additional_attributes
 
     return attributes_dicts
 
 
-@plotly.utils.memoize()
+@utils.memoize()
 def _get_valid_attributes(object_name, parent_object_names):
     attributes = get_attributes_dicts(object_name, parent_object_names)
     # These are for documentation and quick lookups. They're just strings.
@@ -347,7 +348,7 @@ def attribute_path_to_object_names(attribute_container_path):
     return tuple(object_names)
 
 
-@plotly.utils.memoize()
+@utils.memoize()
 def _get_role(object_name, attribute, value_type, parent_object_names=()):
     """Private, more easily memoized version of get_role."""
     if attribute == 'type' and object_name in TRACE_NAMES:
@@ -459,7 +460,7 @@ def _get_objects():
 
     """
     objects = {}
-    for node, path in plotly.utils.node_generator(GRAPH_REFERENCE):
+    for node, path in utils.node_generator(GRAPH_REFERENCE):
 
         if any([key in path for key in GRAPH_REFERENCE['defs']['metaKeys']]):
             continue  # objects don't exist under nested meta keys
@@ -488,7 +489,7 @@ def _get_objects():
 def _patch_objects():
     """Things like Layout, Figure, and Data need to be included."""
     layout_attribute_paths = []
-    for node, path in plotly.utils.node_generator(GRAPH_REFERENCE):
+    for node, path in utils.node_generator(GRAPH_REFERENCE):
         if any([key in path for key in GRAPH_REFERENCE['defs']['metaKeys']]):
             continue  # objects don't exist under nested meta keys
 
@@ -519,7 +520,7 @@ def _patch_objects():
 def _get_arrays():
     """Very few arrays, but this dict is the complement of OBJECTS."""
     arrays = {}
-    for node, path in plotly.utils.node_generator(GRAPH_REFERENCE):
+    for node, path in utils.node_generator(GRAPH_REFERENCE):
 
         if any([key in path for key in GRAPH_REFERENCE['defs']['metaKeys']]):
             continue  # objects don't exist under nested meta keys

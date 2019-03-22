@@ -1,7 +1,7 @@
 from unittest import TestCase
 
 import plotly.graph_objs as go
-import plotly.tests.graph_reference as gr
+import plotly.graph_reference as gr
 
 OLD_CLASS_NAMES = ['AngularAxis', 'Annotation', 'Annotations', 'Area',
                    'Bar', 'Box', 'ColorBar', 'Contour', 'Contours',

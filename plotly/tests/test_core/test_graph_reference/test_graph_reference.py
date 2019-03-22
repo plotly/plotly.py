@@ -6,8 +6,8 @@ from __future__ import absolute_import
 
 from unittest import TestCase
 
-from plotly.tests import graph_reference as gr
-from plotly.tests.graph_reference import string_to_class_name, get_role
+from plotly import graph_reference as gr
+from plotly.graph_reference import string_to_class_name, get_role
 
 
 FAKE_API_DOMAIN = 'https://api.am.not.here.ly'
