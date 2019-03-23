@@ -1,33 +1,18 @@
+from __future__ import absolute_import
+
 import base64
 import numbers
 import textwrap
 import uuid
 from importlib import import_module
 import copy
-
 import io
 from copy import deepcopy
-
 import re
-
-# Optional imports
-# ----------------
 import sys
 from six import string_types
 
-np = None
-pd = None
-
-# try:
-#     np = import_module('numpy')
-#
-#     try:
-#         pd = import_module('pandas')
-#     except ImportError:
-#         pass
-#
-# except ImportError:
-#     pass
+from _plotly_utils.optional_imports import get_module
 
 
 # back-port of fullmatch from Py3.4+
@@ -50,6 +35,8 @@ def to_scalar_or_list(v):
     # Python native scalar type ('float' in the example above).
     # We explicitly check if is has the 'item' method, which conventionally
     # converts these types to native scalars.
+    np = get_module('numpy')
+    pd = get_module('pandas')
     if np and np.isscalar(v) and hasattr(v, 'item'):
         return v.item()
     if isinstance(v, (list, tuple)):
@@ -86,7 +73,8 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
     np.ndarray
         Numpy array with the 'WRITEABLE' flag set to False
     """
-
+    np = get_module('numpy')
+    pd = get_module('pandas')
     assert np is not None
 
     # ### Process kind ###
@@ -175,7 +163,9 @@ def is_numpy_convertable(v):
 def is_homogeneous_array(v):
     """
     Return whether a value is considered to be a homogeneous array
-    """    
+    """
+    np = get_module('numpy')
+    pd = get_module('pandas')
     if ((np and isinstance(v, np.ndarray) or
         (pd and isinstance(v, (pd.Series, pd.Index))))):
             return True
@@ -704,7 +694,7 @@ class NumberValidator(BaseValidator):
             # Pass None through
             pass
         elif self.array_ok and is_homogeneous_array(v):
-
+            np = get_module('numpy')
             try:
                 v_array = copy_to_readonly_numpy_array(v, force_numeric=True)
             except (ValueError, TypeError, OverflowError):
@@ -825,7 +815,7 @@ class IntegerValidator(BaseValidator):
             # Pass None through
             pass
         elif self.array_ok and is_homogeneous_array(v):
-
+            np = get_module('numpy')
             v_array = copy_to_readonly_numpy_array(v,
                                                    kind=('i', 'u'),
                                                    force_numeric=True)
@@ -964,6 +954,8 @@ class StringValidator(BaseValidator):
                     self.raise_invalid_elements(invalid_els)
 
             if is_homogeneous_array(v):
+                np = get_module('numpy')
+
                 # If not strict, let numpy cast elements to strings
                 v = copy_to_readonly_numpy_array(v, kind='U')
 
