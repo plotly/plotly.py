@@ -11,11 +11,6 @@ from decorator import decorator
 
 from plotly.optional_imports import get_module
 
-# Optional imports, may be None for users that only use our core functionality.
-# numpy = get_module('numpy')
-# pandas = get_module('pandas')
-# sage_all = get_module('sage.all')
-
 PY36 = (
     sys.version_info.major == 3 and sys.version_info.minor == 6
 )
@@ -142,6 +137,7 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
     @staticmethod
     def encode_as_sage(obj):
         """Attempt to convert sage.all.RR to floats and sage.all.ZZ to ints"""
+        sage_all = get_module('sage.all')
         if not sage_all:
             raise NotEncodable
 
@@ -155,6 +151,7 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
     @staticmethod
     def encode_as_pandas(obj):
         """Attempt to convert pandas.NaT"""
+        pandas = get_module('pandas')
         if not pandas:
             raise NotEncodable
 
@@ -166,6 +163,7 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
     @staticmethod
     def encode_as_numpy(obj):
         """Attempt to convert numpy.ma.core.masked"""
+        numpy = get_module('numpy')
         if not numpy:
             raise NotEncodable
 
@@ -292,6 +290,7 @@ class ElidedWrapper(object):
 
     @staticmethod
     def is_wrappable(v):
+        numpy = get_module('numpy')
         if (isinstance(v, (list, tuple)) and
                 len(v) > 0 and
                 not isinstance(v[0], dict)):
@@ -304,6 +303,7 @@ class ElidedWrapper(object):
             return False
 
     def __repr__(self):
+        numpy = get_module('numpy')
         if isinstance(self.v, (list, tuple)):
             # Handle lists/tuples
             res = _list_repr_elided(self.v,

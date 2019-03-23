@@ -15,14 +15,12 @@ import json as _json
 
 import plotly
 import plotly.tools
-from plotly import optional_imports
+
+from plotly.optional_imports import get_module
 
 from plotly.utils import PlotlyJSONEncoder
 from ._plotlyjs_version import __plotlyjs_version__
 
-# ipython = optional_imports.get_module('IPython')
-# ipython_display = optional_imports.get_module('IPython.display')
-# matplotlib = optional_imports.get_module('matplotlib')
 
 __IMAGE_FORMATS = ['jpeg', 'png', 'webp', 'svg']
 
@@ -281,7 +279,7 @@ def init_notebook_mode(connected=False):
     where `connected=True`.
     """
     import plotly.io as pio
-
+    ipython = get_module('ipython')
     if not ipython:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
@@ -442,6 +440,7 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
     """
     import plotly.io as pio
 
+    ipython = get_module('ipython')
     if not ipython:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
@@ -823,6 +822,8 @@ def enable_mpl_offline(resize=False, strip_style=False,
     ```
     """
     init_notebook_mode()
+    ipython = get_module('ipython')
+    matplotlib = get_module('matplotlib')
 
     ip = ipython.core.getipython.get_ipython()
     formatter = ip.display_formatter.formatters['text/html']

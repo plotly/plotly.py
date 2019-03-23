@@ -20,10 +20,6 @@ from .callbacks import (Points, InputDeviceState)
 from plotly.utils import ElidedPrettyPrinter
 from .validators import (DataValidator, LayoutValidator, FramesValidator)
 
-# # Optional imports
-# # ----------------
-# np = get_module('numpy')
-
 # Create Undefined sentinel value
 #   - Setting a property to None removes any existing value
 #   - Setting a property to Undefined leaves existing value unmodified
@@ -3499,6 +3495,7 @@ on_change callbacks are not supported in this case.
         bool
             True if v1 and v2 are equal, False otherwise
         """
+        np = get_module('numpy')
         if (np is not None and
                 (isinstance(v1, np.ndarray) or isinstance(v2, np.ndarray))):
             return np.array_equal(v1, v2)
