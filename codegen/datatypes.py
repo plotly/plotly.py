@@ -92,16 +92,16 @@ def build_datatype_py(node):
     # Imports
     # -------
     buffer.write(
-        f'from plotly.basedatatypes import {node.name_base_datatype}\n')
+        f'from plotly.basedatatypes '
+        f'import {node.name_base_datatype} as _{node.name_base_datatype}\n')
     buffer.write(
-        f'import copy\n')
-
+        f'import copy as _copy\n')
 
     # Write class definition
     # ----------------------
     buffer.write(f"""
 
-class {datatype_class}({node.name_base_datatype}):\n""")
+class {datatype_class}(_{node.name_base_datatype}):\n""")
 
     # ### Property definitions ###
     child_datatype_nodes = node.child_datatypes
@@ -235,7 +235,7 @@ class {datatype_class}({node.name_base_datatype}):\n""")
         elif isinstance(arg, self.__class__):
             arg = arg.to_plotly_json()
         elif isinstance(arg, dict):
-            arg = copy.copy(arg)
+            arg = _copy.copy(arg)
         else:
             raise ValueError(\"\"\"\\
 The first argument to the {class_name} 
@@ -311,7 +311,7 @@ LiteralValidator(plotly_name='{lit_name}',\
         # Reset skip_invalid
         # ------------------
         self._skip_invalid = False
-    """)
+""")
 
     # Return source string
     # --------------------
@@ -484,13 +484,20 @@ def write_datatype_py(outdir, node):
     -------
     None
     """
+
+    # Build file path
+    # ---------------
+    filepath = opath.join(outdir, 'graph_objs',
+                          *node.parent_path_parts,
+                          '__init__.py')
+
+    is_first = not opath.exists(filepath)
+
     # Generate source code
     # --------------------
     datatype_source = build_datatype_py(node)
 
     # Write file
     # ----------
-    filepath = opath.join(outdir, 'graph_objs',
-                          *node.parent_path_parts,
-                          '_' + node.name_undercase + '.py')
-    format_and_write_source_py(datatype_source, filepath)
+
+    format_and_write_source_py(datatype_source, filepath, leading_newlines=2)
