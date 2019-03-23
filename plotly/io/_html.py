@@ -119,9 +119,13 @@ def to_html(fig,
 
     # ## Serialize figure ##
     jdata = json.dumps(
-        fig_dict.get('data', []), cls=utils.PlotlyJSONEncoder)
+        fig_dict.get('data', []),
+        cls=utils.PlotlyJSONEncoder,
+        sort_keys=True)
     jlayout = json.dumps(
-        fig_dict.get('layout', {}), cls=utils.PlotlyJSONEncoder)
+        fig_dict.get('layout', {}),
+        cls=utils.PlotlyJSONEncoder,
+        sort_keys=True)
 
     if fig_dict.get('frames', None):
         jframes = json.dumps(
