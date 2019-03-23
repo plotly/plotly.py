@@ -77,7 +77,7 @@ class PlotlyRenderer(MimetypeRenderer):
     mime type: 'application/vnd.plotly.v1+json'
     """
     def __init__(self, config=None):
-        self.config = dict(config) if config else {}
+        self.config = config
 
     def to_mimebundle(self, fig_dict):
         from plotly.offline.offline import _get_jconfig

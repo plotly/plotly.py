@@ -163,13 +163,9 @@ Unrecognized config options supplied: {bad_config}"""
 
         clean_config = config
     else:
-        config = plotly.plotly.get_config()
-        clean_config = dict((k, config[k]) for k in configkeys if k in config)
+        clean_config = {}
 
-    # TODO: The get_config 'source of truth' should
-    # really be somewhere other than plotly.plotly
-    plotly_platform_url = plotly.plotly.get_config().get('plotly_domain',
-                                                         'https://plot.ly')
+    plotly_platform_url = plotly.tools.get_config_plotly_server_url()
 
     clean_config['plotlyServerURL'] = plotly_platform_url
 

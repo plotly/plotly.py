@@ -8,12 +8,16 @@ Functions that USERS will possibly want access to.
 
 """
 from __future__ import absolute_import
+
+import json
 import warnings
 
 import six
 import re
+import os
 
 from plotly import exceptions, optional_imports
+from plotly.files import PLOTLY_DIR
 
 DEFAULT_PLOTLY_COLORS = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
                          'rgb(44, 160, 44)', 'rgb(214, 39, 40)',
@@ -1237,6 +1241,33 @@ class FigureFactory(object):
         FigureFactory._deprecated('create_violin')
         from plotly.figure_factory import create_violin
         return create_violin(*args, **kwargs)
+
+
+def get_config_plotly_server_url():
+    """
+    Function to get the .config file's 'plotly_domain' without importing
+    the chart_studio package.  This property is needed to compute the default
+    value of the plotly.js config plotlyServerURL, so it is independent of
+    the chart_studio integration and still needs to live in
+
+    Returns
+    -------
+    str
+    """
+    config_file = os.path.join(PLOTLY_DIR, ".config")
+    default_server_url = 'https://plot.ly'
+    if not os.path.exists(config_file):
+        return default_server_url
+    with open(config_file, 'rt') as f:
+        try:
+            config_dict = json.load(f)
+            if not isinstance(config_dict, dict):
+                data = {}
+        except:
+            # TODO: issue a warning and bubble it up
+            data = {}
+
+    return config_dict.get('plotly_domain', default_server_url)
 
 
 # get_config_defaults
