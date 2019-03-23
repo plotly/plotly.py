@@ -256,7 +256,7 @@ def test_browser_renderer_show(fig1, renderer):
 # Validation
 # ----------
 @pytest.mark.parametrize(
-    'renderer', ['bogus', 'png+bogus', 'bogus+png'])
+    'renderer', ['bogus', 'json+bogus', 'bogus+chrome'])
 def test_reject_invalid_renderer(renderer):
     with pytest.raises(ValueError) as e:
         pio.renderers.default = renderer
@@ -265,6 +265,6 @@ def test_reject_invalid_renderer(renderer):
 
 
 @pytest.mark.parametrize(
-    'renderer', ['png', 'png+jpg', 'jpg+png+pdf+notebook+json'])
+    'renderer', ['json', 'json+firefox', 'chrome+colab+notebook+vscode'])
 def test_accept_valid_renderer(renderer):
     pio.renderers.default = renderer
