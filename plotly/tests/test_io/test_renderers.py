@@ -253,48 +253,10 @@ def test_browser_renderer_show(fig1, renderer):
     assert_not_requirejs(html)
 
 
-# Combination
-# -----------
-def test_mimetype_combination(fig1):
-    pio.renderers.default = 'pdf+jupyterlab'
-
-    # Configure renderer so that we can use the same parameters
-    # to build expected image below
-    pio.renderers['pdf'].width = 400
-    pio.renderers['pdf'].height = 500
-    pio.renderers['pdf'].scale = 1
-
-    # pdf
-    image_bytes = pio.to_image(
-        fig1, format='pdf', width=400, height=500, scale=1)
-
-    image_str = base64.b64encode(image_bytes).decode('utf8')
-
-    # plotly mimetype
-    plotly_mimetype_dict = json.loads(
-        pio.to_json(fig1, remove_uids=False))
-
-    plotly_mimetype_dict['config'] = {
-        'plotlyServerURL': 'https://plot.ly'}
-
-    # Build expected bundle
-    expected = {
-        'application/pdf': image_str,
-        plotly_mimetype: plotly_mimetype_dict,
-    }
-
-    pio.renderers.render_on_display = False
-    assert fig1._repr_mimebundle_(None, None) is None
-
-    pio.renderers.render_on_display = True
-    bundle = fig1._repr_mimebundle_(None, None)
-    assert bundle == expected
-
-
 # Validation
 # ----------
 @pytest.mark.parametrize(
-    'renderer', ['bogus', 'png+bogus', 'bogus+png'])
+    'renderer', ['bogus', 'json+bogus', 'bogus+chrome'])
 def test_reject_invalid_renderer(renderer):
     with pytest.raises(ValueError) as e:
         pio.renderers.default = renderer
@@ -303,6 +265,6 @@ def test_reject_invalid_renderer(renderer):
 
 
 @pytest.mark.parametrize(
-    'renderer', ['png', 'png+jpg', 'jpg+png+pdf+notebook+json'])
+    'renderer', ['json', 'json+firefox', 'chrome+colab+notebook+vscode'])
 def test_accept_valid_renderer(renderer):
     pio.renderers.default = renderer

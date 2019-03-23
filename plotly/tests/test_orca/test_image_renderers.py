@@ -1,15 +1,19 @@
 import base64
 import sys
+import json
 
 import pytest
 
 from plotly import io as pio
 import plotly.graph_objs as go
+from plotly.config import get_config
 
 if sys.version_info.major == 3 and sys.version_info.minor >= 3:
     import unittest.mock as mock
 else:
     import mock
+
+plotly_mimetype = 'application/vnd.plotly.v1+json'
 
 
 # fixtures
@@ -69,7 +73,7 @@ def test_svg_renderer_show(fig1):
     assert mock_kwargs == {'raw': True}
 
 
-def test_pdf_renderer_show_override_multi(fig1):
+def test_pdf_renderer_show_override(fig1):
     pio.renderers.default = None
 
     # Configure renderer so that we can use the same parameters
@@ -78,23 +82,52 @@ def test_pdf_renderer_show_override_multi(fig1):
     pio.renderers['png'].height = 500
     pio.renderers['png'].scale = 1
 
-    pio.renderers['pdf'].width = 400
-    pio.renderers['pdf'].height = 500
-    pio.renderers['pdf'].scale = 1
-
-    image_bytes_pdf = pio.to_image(
-        fig1, format='pdf', width=400, height=500, scale=1)
-
     image_bytes_png = pio.to_image(
         fig1, format='png', width=400, height=500, scale=1)
 
-    image_str_pdf = base64.b64encode(image_bytes_pdf).decode('utf8')
     image_str_png = base64.b64encode(image_bytes_png).decode('utf8')
 
     with mock.patch('IPython.display.display') as mock_display:
-        pio.show(fig1, renderer='pdf+png')
+        pio.show(fig1, renderer='png')
 
-    expected_bundle = {'application/pdf': image_str_pdf,
-                       'image/png': image_str_png}
+    expected_bundle = {'image/png': image_str_png}
 
     mock_display.assert_called_once_with(expected_bundle, raw=True)
+
+
+# Combination
+# -----------
+def test_mimetype_combination(fig1):
+    pio.renderers.default = 'png+jupyterlab'
+
+    # Configure renderer so that we can use the same parameters
+    # to build expected image below
+    pio.renderers['png'].width = 400
+    pio.renderers['png'].height = 500
+    pio.renderers['png'].scale = 1
+
+    # pdf
+    image_bytes = pio.to_image(
+        fig1, format='png', width=400, height=500, scale=1)
+
+    image_str = base64.b64encode(image_bytes).decode('utf8')
+
+    # plotly mimetype
+    plotly_mimetype_dict = json.loads(
+        pio.to_json(fig1, remove_uids=False))
+
+    plotly_mimetype_dict['config'] = {
+        'plotlyServerURL': get_config()['plotly_domain']}
+
+    # Build expected bundle
+    expected = {
+        'image/png': image_str,
+        plotly_mimetype: plotly_mimetype_dict,
+    }
+
+    pio.renderers.render_on_display = False
+    assert fig1._repr_mimebundle_(None, None) is None
+
+    pio.renderers.render_on_display = True
+    bundle = fig1._repr_mimebundle_(None, None)
+    assert bundle == expected
