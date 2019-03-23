@@ -163,12 +163,13 @@ Unrecognized config options supplied: {bad_config}"""
 
         clean_config = config
     else:
-        config = {}
+        config = plotly.plotly.get_config()
         clean_config = dict((k, config[k]) for k in configkeys if k in config)
 
     # TODO: The get_config 'source of truth' should
     # really be somewhere other than plotly.plotly
-    plotly_platform_url = 'https://plot.ly'
+    plotly_platform_url = plotly.plotly.get_config().get('plotly_domain',
+                                                         'https://plot.ly')
 
     clean_config['plotlyServerURL'] = plotly_platform_url
 
@@ -279,7 +280,7 @@ def init_notebook_mode(connected=False):
     where `connected=True`.
     """
     import plotly.io as pio
-    ipython = get_module('ipython')
+    ipython = get_module('IPython')
     if not ipython:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
@@ -323,7 +324,8 @@ def _plot_html(figure_or_data, config, validate, default_width,
         jframes = None
 
     jconfig = _json.dumps(_get_jconfig(config))
-    plotly_platform_url = 'https://plot.ly'
+    plotly_platform_url = plotly.plotly.get_config().get('plotly_domain',
+                                                         'https://plot.ly')
 
     if jframes:
         if auto_play:
@@ -440,7 +442,7 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
     """
     import plotly.io as pio
 
-    ipython = get_module('ipython')
+    ipython = get_module('IPython')
     if not ipython:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
@@ -822,7 +824,7 @@ def enable_mpl_offline(resize=False, strip_style=False,
     ```
     """
     init_notebook_mode()
-    ipython = get_module('ipython')
+    ipython = get_module('IPython')
     matplotlib = get_module('matplotlib')
 
     ip = ipython.core.getipython.get_ipython()
