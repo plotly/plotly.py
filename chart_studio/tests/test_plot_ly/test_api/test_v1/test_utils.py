@@ -4,12 +4,12 @@ from requests import Response
 from requests.compat import json as _json
 from requests.exceptions import ConnectionError
 
-from plotly.api.utils import to_native_utf8_string
-from plotly.api.v1 import utils
+from chart_studio.api.utils import to_native_utf8_string
+from chart_studio.api.v1 import utils
 from chart_studio.exceptions import PlotlyRequestError
 from plotly.exceptions import PlotlyError
 from chart_studio.session import sign_in
-from chart_studio.tests.test_plot_ly import PlotlyApiTestCase
+from chart_studio.tests.test_plot_ly.test_api import PlotlyApiTestCase
 from chart_studio.tests.utils import PlotlyTestCase
 
 import sys

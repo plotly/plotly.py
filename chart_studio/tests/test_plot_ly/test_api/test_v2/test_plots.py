@@ -1,7 +1,7 @@
 from __future__ import absolute_import
 
 from plotly.api.v2 import plots
-from chart_studio.tests.test_plot_ly import PlotlyApiTestCase
+from chart_studio.tests.test_plot_ly.test_api import PlotlyApiTestCase
 
 
 class PlotsTest(PlotlyApiTestCase):

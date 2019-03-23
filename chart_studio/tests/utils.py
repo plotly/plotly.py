@@ -2,7 +2,7 @@ import copy
 from unittest import TestCase
 
 from chart_studio import session, files, utils
-
+from plotly.files import ensure_writable_plotly_dir
 
 class PlotlyTestCase(TestCase):
 
@@ -39,9 +39,9 @@ class PlotlyTestCase(TestCase):
         self._config = utils.load_json_dict(files.CONFIG_FILE)
 
     def restore_files(self):
-        if self._credentials and files.ensure_writable_plotly_dir():
+        if self._credentials and ensure_writable_plotly_dir():
             utils.save_json_dict(files.CREDENTIALS_FILE, self._credentials)
-        if self._config and files.ensure_writable_plotly_dir():
+        if self._config and ensure_writable_plotly_dir():
             utils.save_json_dict(files.CONFIG_FILE, self._config)
 
     def stash_session(self):

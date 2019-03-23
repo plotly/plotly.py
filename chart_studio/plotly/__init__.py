@@ -10,7 +10,7 @@ verifiable account (username/api-key pair) and a network connection.
 from . plotly import (
     sign_in,
     update_plot_options,
-    # get_credentials,
+    get_credentials,
     iplot,
     plot,
     iplot_mpl,
@@ -26,5 +26,6 @@ from . plotly import (
     dashboard_ops,
     presentation_ops,
     create_animations,
-    icreate_animations
+    icreate_animations,
+    parse_grid_id_args
 )

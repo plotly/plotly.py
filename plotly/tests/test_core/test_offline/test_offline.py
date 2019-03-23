@@ -11,6 +11,7 @@ from nose.plugins.attrib import attr
 from requests.compat import json as _json
 
 import plotly
+from plotly.offline import get_plotlyjs
 import json
 
 
@@ -39,7 +40,7 @@ fig_frames = {
 resize_code_strings = ['"responsive": true']
 
 
-PLOTLYJS = plotly.offline.get_plotlyjs()
+PLOTLYJS = get_plotlyjs()
 
 plotly_config_script = """\
 <script type="text/javascript">\

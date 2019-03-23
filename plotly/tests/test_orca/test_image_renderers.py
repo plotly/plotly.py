@@ -6,7 +6,7 @@ import pytest
 
 from plotly import io as pio
 import plotly.graph_objs as go
-from plotly.config import get_config
+from plotly.tools import get_config_plotly_server_url
 
 if sys.version_info.major == 3 and sys.version_info.minor >= 3:
     import unittest.mock as mock
@@ -117,7 +117,7 @@ def test_mimetype_combination(fig1):
         pio.to_json(fig1, remove_uids=False))
 
     plotly_mimetype_dict['config'] = {
-        'plotlyServerURL': get_config()['plotly_domain']}
+        'plotlyServerURL': get_config_plotly_server_url()}
 
     # Build expected bundle
     expected = {

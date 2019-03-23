@@ -32,13 +32,13 @@ import plotly.exceptions
 import plotly.tools
 import plotly.utils
 from _plotly_utils.basevalidators import CompoundValidator, is_array
+from plotly.basedatatypes import BaseTraceType, BaseFigure, BaseLayoutType
+from plotly.graph_objs import Figure
+from plotly.utils import PlotlyJSONEncoder
+
 from chart_studio import files, session, tools, utils, exceptions
 from chart_studio.api import v1, v2
-from plotly.basedatatypes import BaseTraceType, BaseFigure, BaseLayoutType
 from chart_studio.plotly import chunked_requests
-
-from plotly.graph_objs import Figure
-
 from chart_studio.grid_objs import Grid
 from chart_studio.dashboard_objs import dashboard_objs as dashboard
 
@@ -690,7 +690,7 @@ class Stream:
             stream_object.update(dict(layout=layout))
 
         # TODO: allow string version of this?
-        jdata = _json.dumps(stream_object, cls=utils.PlotlyJSONEncoder)
+        jdata = _json.dumps(stream_object, cls=PlotlyJSONEncoder)
         jdata += "\n"
 
         try:
@@ -1120,7 +1120,7 @@ class grid_ops:
 
         # This is sorta gross, we need to double-encode this.
         body = {
-            'cols': _json.dumps(columns, cls=utils.PlotlyJSONEncoder)
+            'cols': _json.dumps(columns, cls=PlotlyJSONEncoder)
         }
         fid = grid_id
         response = v2.grids.col_create(fid, body)
