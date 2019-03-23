@@ -1,15 +1,19 @@
 import base64
 import sys
+import json
 
 import pytest
 
 from plotly import io as pio
 import plotly.graph_objs as go
+from plotly.config import get_config
 
 if sys.version_info.major == 3 and sys.version_info.minor >= 3:
     import unittest.mock as mock
 else:
     import mock
+
+plotly_mimetype = 'application/vnd.plotly.v1+json'
 
 
 # fixtures
@@ -98,3 +102,41 @@ def test_pdf_renderer_show_override_multi(fig1):
                        'image/png': image_str_png}
 
     mock_display.assert_called_once_with(expected_bundle, raw=True)
+
+
+# Combination
+# -----------
+def test_mimetype_combination(fig1):
+    pio.renderers.default = 'png+jupyterlab'
+
+    # Configure renderer so that we can use the same parameters
+    # to build expected image below
+    pio.renderers['png'].width = 400
+    pio.renderers['png'].height = 500
+    pio.renderers['png'].scale = 1
+
+    # pdf
+    image_bytes = pio.to_image(
+        fig1, format='png', width=400, height=500, scale=1)
+
+    image_str = base64.b64encode(image_bytes).decode('utf8')
+
+    # plotly mimetype
+    plotly_mimetype_dict = json.loads(
+        pio.to_json(fig1, remove_uids=False))
+
+    plotly_mimetype_dict['config'] = {
+        'plotlyServerURL': get_config()['plotly_domain']}
+
+    # Build expected bundle
+    expected = {
+        'image/png': image_str,
+        plotly_mimetype: plotly_mimetype_dict,
+    }
+
+    pio.renderers.render_on_display = False
+    assert fig1._repr_mimebundle_(None, None) is None
+
+    pio.renderers.render_on_display = True
+    bundle = fig1._repr_mimebundle_(None, None)
+    assert bundle == expected
