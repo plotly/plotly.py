@@ -70,24 +70,27 @@ class PlotlyOfflineMPLTestCase(TestCase):
             y = [100, 200, 300]
             plt.plot(x, y)
 
-            figure = plotly.tools.mpl_to_plotly(fig).to_plotly_json()
+            figure = plotly.tools.mpl_to_plotly(fig).to_dict()
             data = figure['data']
+
             layout = figure['layout']
 
             opts = {'cls': plotly.utils.PlotlyJSONEncoder, 'sort_keys': True}
-
             data_json = _json.dumps(data, **opts)
-            data_json_no_uid = re.sub(
-                '"uid": "[^"]+"', '"uid": ""', data_json)
             layout_json = _json.dumps(layout, **opts)
             html = self._read_html(plotly.offline.plot_mpl(fig))
             html_no_uid = re.sub(
                 '"uid": "[^"]+"', '"uid": ""', html)
 
+            # blank out uid before comparisons
+            data_json = re.sub('"uid": "[^"]+"', '"uid": ""', data_json)
+            html = re.sub('"uid": "[^"]+"', '"uid": ""', html)
+
             # just make sure a few of the parts are in here
             # like PlotlyOfflineTestCase(TestCase) in test_core
-            self.assertTrue(data_json_no_uid in html_no_uid)    # data is in there
-            self.assertTrue(layout_json in html)  # layout is in there too
-            self.assertTrue(PLOTLYJS in html)     # and the source code
+            self.assertTrue(data_json in html)      # data is in there
+            self.assertTrue(layout_json in html)    # layout is in there too
+            self.assertTrue(PLOTLYJS in html)       # and the source code
             # and it's an <html> doc
-            self.assertTrue(html.startswith('<html>') and html.endswith('</html>'))
+            self.assertTrue(html.startswith('<html>')
+                            and html.endswith('</html>'))
