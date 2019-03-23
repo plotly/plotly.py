@@ -144,7 +144,7 @@ def to_html(fig,
     jconfig = json.dumps(config)
 
     # ## Get platform URL ##
-    plotly_platform_url = config.get('plotly_domain', 'https://plot.ly')
+    plotly_platform_url = config.get('plotlyServerURL', 'https://plot.ly')
 
     # ## Build script body ##
     # This is the part that actually calls Plotly.js
