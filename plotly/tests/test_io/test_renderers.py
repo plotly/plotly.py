@@ -10,6 +10,7 @@ import requests
 import plotly.graph_objs as go
 import plotly.io as pio
 from plotly.offline import get_plotlyjs
+from plotly.tools import get_config_plotly_server_url
 
 if sys.version_info.major == 3 and sys.version_info.minor >= 3:
     import unittest.mock as mock
@@ -76,7 +77,7 @@ def test_plotly_mimetype_renderer_mimetype(fig1, renderer):
         pio.to_json(fig1, remove_uids=False))}
 
     expected[plotly_mimetype]['config'] = {
-        'plotlyServerURL': 'https://plot.ly'}
+        'plotlyServerURL': get_config_plotly_server_url()}
 
     pio.renderers.render_on_display = False
     assert fig1._repr_mimebundle_(None, None) is None
@@ -93,7 +94,7 @@ def test_plotly_mimetype_renderer_show(fig1, renderer):
         pio.to_json(fig1, remove_uids=False))}
 
     expected[plotly_mimetype]['config'] = {
-        'plotlyServerURL': 'https://plot.ly'}
+        'plotlyServerURL': get_config_plotly_server_url()}
 
     with mock.patch('IPython.display.display') as mock_display:
         pio.show(fig1)

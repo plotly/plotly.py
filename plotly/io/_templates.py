@@ -192,7 +192,7 @@ Templates configuration
         if args:
             return reduce(self._merge_2_templates, args)
         else:
-            from plotly.graph_objs.layout._template import Template
+            from plotly.graph_objs.layout import Template
             return Template()
 
     def _merge_2_templates(self, template1, template2):
