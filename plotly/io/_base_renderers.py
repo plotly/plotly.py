@@ -84,7 +84,11 @@ class PlotlyRenderer(MimetypeRenderer):
         config = _get_jconfig(self.config)
         if config:
             fig_dict['config'] = config
-        return {'application/vnd.plotly.v1+json': fig_dict}
+
+        json_compatible_fig_dict = json.loads(
+            to_json(fig_dict, validate=False, remove_uids=False))
+
+        return {'application/vnd.plotly.v1+json': json_compatible_fig_dict}
 
 
 # Static Image

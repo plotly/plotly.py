@@ -3,6 +3,7 @@ import sys
 import json
 
 import pytest
+import numpy as np
 
 from plotly import io as pio
 import plotly.graph_objs as go
@@ -21,7 +22,8 @@ plotly_mimetype = 'application/vnd.plotly.v1+json'
 @pytest.fixture
 def fig1(request):
     return go.Figure(data=[{'type': 'scatter',
-                            'marker': {'color': 'green'}}],
+                            'marker': {'color': 'green'},
+                            'y': np.array([2, 1, 3, 2, 4, 2])}],
                      layout={'title': {'text': 'Figure title'}})
 
 

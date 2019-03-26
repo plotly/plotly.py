@@ -15,6 +15,7 @@ from plotly.io._base_renderers import (
     SvgRenderer, PdfRenderer, BrowserRenderer, IFrameRenderer)
 from plotly.io._utils import validate_coerce_fig_to_dict
 
+ipython = optional_imports.get_module('IPython')
 ipython_display = optional_imports.get_module('IPython.display')
 
 
@@ -29,6 +30,7 @@ class RenderersConfig(object):
         self._default_name = None
         self._default_renderers = []
         self._render_on_display = False
+        self._to_activate = []
 
     # ### Magic methods ###
     # Make this act as a dict of renderers
@@ -127,9 +129,8 @@ Renderer must be a subclass of MimetypeRenderer or ExternalRenderer.
         self._default_name = value
         self._default_renderers = [self[name] for name in renderer_names]
 
-        # Activate default renderer(s)
-        for renderer in self._default_renderers:
-            renderer.activate()
+        # Register renderers for activation before their next use
+        self._to_activate.extend(self._default_renderers)
 
     @property
     def render_on_display(self):
@@ -149,6 +150,27 @@ Renderer must be a subclass of MimetypeRenderer or ExternalRenderer.
             self._render_on_display = True
         else:
             self._render_on_display = False
+
+    def _activate_pending_renderers(self, cls=object):
+        """
+        Activate all renderers that are waiting in the _to_activate list
+
+        Parameters
+        ----------
+        cls
+            Only activate renders that are subclasses of this class
+        """
+        to_activate_with_cls = [r for r in self._to_activate
+                                if cls and isinstance(r, cls)]
+
+        while to_activate_with_cls:
+            # Activate renderers from left to right so that right-most
+            # renderers take precedence
+            renderer = to_activate_with_cls.pop(0)
+            renderer.activate()
+
+        self._to_activate = [r for r in self._to_activate
+                             if not (cls and isinstance(r, cls))]
 
     def _validate_coerce_renderers(self, renderers_string):
         """
@@ -223,10 +245,14 @@ Renderers configuration
         if renderers_string:
             renderer_names = self._validate_coerce_renderers(renderers_string)
             renderers_list = [self[name] for name in renderer_names]
+
+            # Activate these non-default renderers
             for renderer in renderers_list:
                 if isinstance(renderer, MimetypeRenderer):
                     renderer.activate()
         else:
+            # Activate any pending default renderers
+            self._activate_pending_renderers(cls=MimetypeRenderer)
             renderers_list = self._default_renderers
 
         bundle = {}
@@ -266,10 +292,13 @@ Renderers configuration
         if renderers_string:
             renderer_names = self._validate_coerce_renderers(renderers_string)
             renderers_list = [self[name] for name in renderer_names]
+
+            # Activate these non-default renderers
             for renderer in renderers_list:
                 if isinstance(renderer, ExternalRenderer):
                     renderer.activate()
         else:
+            self._activate_pending_renderers(cls=ExternalRenderer)
             renderers_list = self._default_renderers
 
         for renderer in renderers_list:
@@ -363,6 +392,7 @@ renderers['pdf'] = PdfRenderer(**img_kwargs)
 renderers['browser'] = BrowserRenderer(config=config)
 renderers['firefox'] = BrowserRenderer(config=config, using='firefox')
 renderers['chrome'] = BrowserRenderer(config=config, using='chrome')
+renderers['chromium'] = BrowserRenderer(config=config, using='chromium')
 renderers['iframe'] = IFrameRenderer(config=config)
 
 # Set default renderer
@@ -373,7 +403,7 @@ if 'renderer_defaults' in _future_flags:
 
     # Try to detect environment so that we can enable a useful
     # default renderer
-    if ipython_display:
+    if ipython and ipython.get_ipython():
         try:
             import google.colab
 
@@ -401,6 +431,10 @@ if 'renderer_defaults' in _future_flags:
         # JupyterLab users.
         if not default_renderer:
             default_renderer = 'notebook_connected+plotly_mimetype'
+    else:
+        # If ipython isn't available, try to display figures in the default
+        # browser
+        default_renderer = 'browser'
 
     renderers.render_on_display = True
     renderers.default = default_renderer
