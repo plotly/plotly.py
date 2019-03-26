@@ -417,7 +417,7 @@ setup(name='plotly',
                 'plotly/matplotlylib',
                 'plotly/matplotlylib/mplexporter',
                 'plotly/matplotlylib/mplexporter/renderers',
-                # chart_studio
+                'chart_studio',
                 'chart_studio/api',
                 'chart_studio/api/v1',
                 'chart_studio/api/v2',
