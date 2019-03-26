@@ -363,6 +363,7 @@ renderers['pdf'] = PdfRenderer(**img_kwargs)
 renderers['browser'] = BrowserRenderer(config=config)
 renderers['firefox'] = BrowserRenderer(config=config, using='firefox')
 renderers['chrome'] = BrowserRenderer(config=config, using='chrome')
+renderers['chromium'] = BrowserRenderer(config=config, using='chromium')
 renderers['iframe'] = IFrameRenderer(config=config)
 
 # Set default renderer
