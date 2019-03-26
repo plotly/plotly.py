@@ -163,24 +163,26 @@ def test_colab_renderer_show(fig1):
     ('kaggle', True)])
 def test_notebook_connected_show(fig1, name, connected):
     # Set renderer
-    with mock.patch('IPython.display.display_html') as mock_display_html:
-        pio.renderers.default = name
-
-    # Get display call arguments
-    mock_call_args = mock_display_html.call_args
-    mock_arg1 = mock_call_args[0][0]
-
-    # Check init display contents
-    html = mock_arg1
-    if connected:
-        assert_connected(html)
-    else:
-        assert_offline(html)
+    pio.renderers.default = name
 
     # Show
-    with mock.patch('IPython.display.display') as mock_display:
-        pio.show(fig1)
+    with mock.patch('IPython.display.display_html') as mock_display_html:
+        with mock.patch('IPython.display.display') as mock_display:
+            pio.show(fig1)
 
+    # ### Check initialization ###
+    # Get display call arguments
+    mock_call_args_html = mock_display_html.call_args
+    mock_arg1_html = mock_call_args_html[0][0]
+
+    # Check init display contents
+    bundle_display_html = mock_arg1_html
+    if connected:
+        assert_connected(bundle_display_html)
+    else:
+        assert_offline(bundle_display_html)
+
+    # ### Check display call ###
     # Get display call arguments
     mock_call_args = mock_display.call_args
     mock_arg1 = mock_call_args[0][0]
@@ -189,9 +191,9 @@ def test_notebook_connected_show(fig1, name, connected):
     assert list(mock_arg1) == ['text/html']
 
     # Check html display contents
-    html = mock_arg1['text/html']
-    assert_not_full_html(html)
-    assert_requirejs(html)
+    bundle_html = mock_arg1['text/html']
+    assert_not_full_html(bundle_html)
+    assert_requirejs(bundle_html)
 
     # check kwargs
     mock_kwargs = mock_call_args[1]
