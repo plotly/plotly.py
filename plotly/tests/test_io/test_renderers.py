@@ -6,6 +6,7 @@ import time
 
 import pytest
 import requests
+import numpy as np
 
 import plotly.graph_objs as go
 import plotly.io as pio
@@ -24,6 +25,7 @@ else:
 @pytest.fixture
 def fig1(request):
     return go.Figure(data=[{'type': 'scatter',
+                            'y': np.array([2, 1, 3, 2, 4, 2]),
                             'marker': {'color': 'green'}}],
                      layout={'title': {'text': 'Figure title'}})
 
