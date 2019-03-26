@@ -431,6 +431,10 @@ if 'renderer_defaults' in _future_flags:
         # JupyterLab users.
         if not default_renderer:
             default_renderer = 'notebook_connected+plotly_mimetype'
+    else:
+        # If ipython isn't available, try to display figures in the default
+        # browser
+        default_renderer = 'browser'
 
     renderers.render_on_display = True
     renderers.default = default_renderer
