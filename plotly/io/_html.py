@@ -115,7 +115,7 @@ def to_html(fig,
     plotdivid = str(uuid.uuid4())
 
     # ## Serialize figure ##
-    from plotly.utils import PlotlyJSONEncoder
+    from _plotly_utils.utils import PlotlyJSONEncoder
     opts = {'cls': PlotlyJSONEncoder, 'sort_keys': True}
     jdata = json.dumps(
         fig_dict.get('data', []), **opts)

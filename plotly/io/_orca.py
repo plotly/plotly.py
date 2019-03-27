@@ -14,6 +14,7 @@ from contextlib import contextmanager
 import retrying
 from six import string_types
 
+import _plotly_utils.utils
 import plotly
 from plotly.files import PLOTLY_DIR, ensure_writable_plotly_dir
 from plotly.io._utils import validate_coerce_fig_to_dict
@@ -1228,7 +1229,7 @@ def request_image_with_retrying(**kwargs):
         hostname='localhost', port=orca_state['port'])
 
     request_params = {k: v for k, v, in kwargs.items() if v is not None}
-    json_str = json.dumps(request_params, cls=plotly.utils.PlotlyJSONEncoder)
+    json_str = json.dumps(request_params, cls=_plotly_utils.utils.PlotlyJSONEncoder)
     response = post(server_url + '/', data=json_str)
     return response
 

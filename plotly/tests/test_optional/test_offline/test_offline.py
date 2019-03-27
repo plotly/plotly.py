@@ -10,6 +10,7 @@ from requests.compat import json as _json
 
 from unittest import TestCase
 
+import _plotly_utils.utils
 import plotly
 from plotly import optional_imports
 
@@ -75,7 +76,7 @@ class PlotlyOfflineMPLTestCase(TestCase):
 
             layout = figure['layout']
 
-            opts = {'cls': plotly.utils.PlotlyJSONEncoder, 'sort_keys': True}
+            opts = {'cls': _plotly_utils.utils.PlotlyJSONEncoder, 'sort_keys': True}
             data_json = _json.dumps(data, **opts)
             layout_json = _json.dumps(layout, **opts)
             html = self._read_html(plotly.offline.plot_mpl(fig))

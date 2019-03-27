@@ -6,7 +6,7 @@ import warnings
 from requests.compat import json as _json
 
 from plotly import version
-from plotly.utils import PlotlyJSONEncoder
+from _plotly_utils.utils import PlotlyJSONEncoder
 from chart_studio import config, utils
 from chart_studio.api.v1.utils import request
 

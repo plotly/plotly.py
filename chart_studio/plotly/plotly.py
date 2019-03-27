@@ -28,13 +28,10 @@ import six
 import six.moves
 from requests.compat import json as _json
 
+import _plotly_utils.utils
 import _plotly_utils.exceptions
-import plotly.tools
-import plotly.utils
 from _plotly_utils.basevalidators import CompoundValidator, is_array
-from plotly.basedatatypes import BaseTraceType, BaseFigure, BaseLayoutType
-from plotly.graph_objs import Figure
-from plotly.utils import PlotlyJSONEncoder
+from _plotly_utils.utils import PlotlyJSONEncoder
 
 from chart_studio import files, session, tools, utils, exceptions
 from chart_studio.api import v1, v2
@@ -156,6 +153,7 @@ def iplot(figure_or_data, **plot_options):
     world_readable (default=True) -- Deprecated: use "sharing".
                                      Make this figure private/public
     """
+    from plotly.basedatatypes import BaseFigure, BaseLayoutType
     if 'auto_open' not in plot_options:
         plot_options['auto_open'] = False
     url = plot(figure_or_data, **plot_options)
@@ -223,6 +221,7 @@ def plot(figure_or_data, validate=True, **plot_options):
                                      Make this figure private/public
 
     """
+    import plotly.tools
     figure = plotly.tools.return_figure_from_figure_or_data(figure_or_data, validate)
     for entry in figure['data']:
         if ('type' in entry) and (entry['type'] == 'scattergl'):
@@ -292,6 +291,7 @@ def iplot_mpl(fig, resize=True, strip_style=False, update=None,
     plot_options -- run help(plotly.plotly.iplot)
 
     """
+    import plotly.tools
     fig = plotly.tools.mpl_to_plotly(fig, resize=resize, strip_style=strip_style)
     if update and isinstance(update, dict):
         fig.update(update)
@@ -324,6 +324,7 @@ def plot_mpl(fig, resize=True, strip_style=False, update=None, **plot_options):
     plot_options -- run help(plotly.plotly.plot)
 
     """
+    import plotly.tools
     fig = plotly.tools.mpl_to_plotly(fig, resize=resize, strip_style=strip_style)
     if update and isinstance(update, dict):
         fig.update(update)
@@ -443,6 +444,7 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
     Run `help(plotly.graph_objs.Figure)` for a list of valid properties.
 
     """
+    import plotly.tools
     plotly_rest_url = get_config()['plotly_domain']
     if file_id is None:  # assume we're using a url
         url = file_owner_or_url
@@ -519,7 +521,7 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
     return plotly.tools.get_graph_obj(figure, obj_type='Figure')
 
 
-@plotly.utils.template_doc(**tools.get_config_file())
+@_plotly_utils.utils.template_doc(**tools.get_config_file())
 class Stream:
     """
     Interface to Plotly's real-time graphing API.
@@ -556,7 +558,7 @@ class Stream:
     HTTP_PORT = 80
     HTTPS_PORT = 443
 
-    @plotly.utils.template_doc(**tools.get_config_file())
+    @_plotly_utils.utils.template_doc(**tools.get_config_file())
     def __init__(self, stream_id):
         """
         Initialize a Stream object with your unique stream_id.
@@ -678,6 +680,7 @@ class Stream:
         """
 
         # Convert trace objects to dictionaries
+        from plotly.basedatatypes import BaseTraceType
         if isinstance(trace, BaseTraceType):
             stream_object = trace.to_plotly_json()
         else:
@@ -746,6 +749,7 @@ class image:
 
         """
         # TODO: format is a built-in name... we shouldn't really use it
+        import plotly.tools
         figure = plotly.tools.return_figure_from_figure_or_data(figure_or_data, True)
 
         if format not in ['png', 'svg', 'jpeg', 'pdf', 'emf']:
@@ -1381,6 +1385,7 @@ def add_share_key_to_url(plot_url, attempt=0):
 
 
 def _send_to_plotly(figure, **plot_options):
+    import plotly.tools
     fig = plotly.tools._replace_newline(figure)  # does not mutate figure
     data = fig.get('data', [])
     response = v1.clientresp(data, **plot_options)
@@ -1746,6 +1751,8 @@ def _extract_grid_from_fig_like(fig, grid=None, path=''):
                 Columns are named with the path the corresponding data array
                 (e.g. 'data.0.marker.size')
     """
+    from plotly.basedatatypes import BaseFigure
+    from plotly.graph_objs import Figure
 
     if grid is None:
         # If not grid, this is top-level call so deep copy figure
@@ -1801,6 +1808,7 @@ def _set_grid_column_references(figure, grid):
     None
         Function modifies figure in-place
     """
+    from plotly.basedatatypes import BaseFigure
     for col in grid:
         prop_path = BaseFigure._str_to_dict_path(col.name)
         prop_parent = figure
@@ -2053,6 +2061,7 @@ def icreate_animations(figure, filename=None, sharing='public', auto_open=False)
     This function is based off `plotly.plotly.iplot`. See `plotly.plotly.
     create_animations` Doc String for param descriptions.
     """
+    from plotly.basedatatypes import BaseFigure, BaseLayoutType
     url = create_animations(figure, filename, sharing, auto_open)
 
     if isinstance(figure, dict):

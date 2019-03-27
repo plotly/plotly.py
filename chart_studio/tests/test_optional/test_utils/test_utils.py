@@ -1,5 +1,6 @@
 import json as _json
 
+import _plotly_utils.utils
 from chart_studio.grid_objs import Column
 from plotly import utils
 from plotly.tests.test_optional.test_utils.test_utils import numeric_list, \
@@ -13,7 +14,7 @@ def test_column_json_encoding():
         Column(np_list, 'col 3')
     ]
     json_columns = _json.dumps(
-        columns, cls=utils.PlotlyJSONEncoder, sort_keys=True
+        columns, cls=_plotly_utils.utils.PlotlyJSONEncoder, sort_keys=True
     )
     assert('[{"data": [1, 2, 3], "name": "col 1"}, '
            '{"data": [1, "A", "2014-01-05", '

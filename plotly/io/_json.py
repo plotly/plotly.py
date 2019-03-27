@@ -36,7 +36,7 @@ def to_json(fig,
     str
         Representation of figure as a JSON string
     """
-    from plotly.utils import PlotlyJSONEncoder
+    from _plotly_utils.utils import PlotlyJSONEncoder
 
     # Validate figure
     # ---------------

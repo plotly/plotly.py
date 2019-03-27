@@ -9,7 +9,7 @@ import _plotly_utils.exceptions
 from plotly import version
 from chart_studio import config, exceptions
 from chart_studio.api.utils import basic_auth
-from plotly.utils import PlotlyJSONEncoder
+from _plotly_utils.utils import PlotlyJSONEncoder
 
 
 def make_params(**kwargs):

@@ -18,7 +18,7 @@ import plotly.tools
 
 from plotly.optional_imports import get_module
 
-from plotly.utils import PlotlyJSONEncoder
+from _plotly_utils.utils import PlotlyJSONEncoder
 from ._plotlyjs_version import __plotlyjs_version__
 
 
