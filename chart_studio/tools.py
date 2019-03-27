@@ -15,14 +15,12 @@ import six
 import copy
 
 from _plotly_utils import optional_imports
+import _plotly_utils.exceptions
+from _plotly_utils.files import ensure_writable_plotly_dir
+
 from chart_studio import session, utils
 from chart_studio.files import CONFIG_FILE, CREDENTIALS_FILE, FILE_CONTENT
-import _plotly_utils.exceptions
 
-# color constants for violin plot
-
-
-# Warning format
 ipython_core_display = optional_imports.get_module('IPython.core.display')
 sage_salvus = optional_imports.get_module('sage_salvus')
 
@@ -45,7 +43,6 @@ def ensure_local_plotly_files():
     If the config or credential files aren't filled out, then write them
     to the disk.
     """
-    from plotly.files import ensure_writable_plotly_dir
     if ensure_writable_plotly_dir():
         for fn in [CREDENTIALS_FILE, CONFIG_FILE]:
             utils.ensure_file_exists(fn)
@@ -92,8 +89,6 @@ def set_credentials_file(username=None,
     :param (str) proxy_password: The pw associated with your Proxy un
 
     """
-    from plotly.files import ensure_writable_plotly_dir
-
     if not ensure_writable_plotly_dir():
         raise _plotly_utils.exceptions.PlotlyError("You don't have proper file permissions "
                                      "to run this function.")
@@ -157,8 +152,6 @@ def set_config_file(plotly_domain=None,
     :param (bool) world_readable: True = public, False = private
 
     """
-    from plotly.files import ensure_writable_plotly_dir
-
     if not ensure_writable_plotly_dir():
         raise _plotly_utils.exceptions.PlotlyError("You don't have proper file permissions "
                                      "to run this function.")
