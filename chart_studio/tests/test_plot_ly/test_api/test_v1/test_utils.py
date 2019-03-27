@@ -142,13 +142,13 @@ class RequestTest(PlotlyTestCase):
                 proxy_password='hydrated', plotly_proxy_authorization=False)
 
         # Mock the actual api call, we don't want to do network tests here.
-        patcher = patch('plotly.api.v1.utils.requests.request')
+        patcher = patch('chart_studio.api.v1.utils.requests.request')
         self.request_mock = patcher.start()
         self.addCleanup(patcher.stop)
         self.request_mock.return_value = MagicMock(Response)
 
         # Mock the validation function since we test that elsewhere.
-        patcher = patch('plotly.api.v1.utils.validate_response')
+        patcher = patch('chart_studio.api.v1.utils.validate_response')
         self.validate_response_mock = patcher.start()
         self.addCleanup(patcher.stop)
 

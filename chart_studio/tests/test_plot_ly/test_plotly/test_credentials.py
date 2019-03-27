@@ -19,7 +19,7 @@ class TestSignIn(PlotlyTestCase):
 
     def setUp(self):
         super(TestSignIn, self).setUp()
-        patcher = patch('plotly.api.v2.users.current')
+        patcher = patch('chart_studio.api.v2.users.current')
         self.users_current_mock = patcher.start()
         self.addCleanup(patcher.stop)
 

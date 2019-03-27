@@ -191,12 +191,12 @@ class RequestTest(PlotlyApiTestCase):
         super(RequestTest, self).setUp()
 
         # Mock the actual api call, we don't want to do network tests here.
-        self.request_mock = self.mock('plotly.api.v2.utils.requests.request')
+        self.request_mock = self.mock('chart_studio.api.v2.utils.requests.request')
         self.request_mock.return_value = self.get_response()
 
         # Mock the validation function since we can test that elsewhere.
         self.validate_response_mock = self.mock(
-            'plotly.api.v2.utils.validate_response')
+            'chart_studio.api.v2.utils.validate_response')
 
         self.method = 'get'
         self.url = 'https://foo.bar.does.not.exist.anywhere'

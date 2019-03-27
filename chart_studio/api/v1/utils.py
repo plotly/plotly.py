@@ -75,7 +75,7 @@ def request(method, url, **kwargs):
 
     """
     if kwargs.get('json', None) is not None:
-        # See plotly.api.v2.utils.request for examples on how to do this.
+        # See chart_studio.api.v2.utils.request for examples on how to do this.
         raise _plotly_utils.exceptions.PlotlyError(
             'V1 API does not handle arbitrary json.')
     kwargs['headers'] = dict(kwargs.get('headers', {}), **get_headers())

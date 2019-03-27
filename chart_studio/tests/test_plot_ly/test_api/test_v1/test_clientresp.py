@@ -1,7 +1,7 @@
 from __future__ import absolute_import
 
 from plotly import version
-from plotly.api.v1 import clientresp
+from chart_studio.api.v1 import clientresp
 from chart_studio.tests.test_plot_ly.test_api import PlotlyApiTestCase
 
 
@@ -16,11 +16,11 @@ class ClientrespTest(PlotlyApiTestCase):
         super(ClientrespTest, self).setUp()
 
         # Mock the actual api call, we don't want to do network tests here.
-        self.request_mock = self.mock('plotly.api.v1.utils.requests.request')
+        self.request_mock = self.mock('chart_studio.api.v1.utils.requests.request')
         self.request_mock.return_value = self.get_response(b'{}', 200)
 
         # Mock the validation function since we can test that elsewhere.
-        self.mock('plotly.api.v1.utils.validate_response')
+        self.mock('chart_studio.api.v1.utils.validate_response')
 
     def test_data_only(self):
         data = [{'y': [3, 5], 'name': Duck()}]

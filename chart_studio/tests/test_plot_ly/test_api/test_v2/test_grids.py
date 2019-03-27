@@ -12,11 +12,11 @@ class GridsTest(PlotlyApiTestCase):
         super(GridsTest, self).setUp()
 
         # Mock the actual api call, we don't want to do network tests here.
-        self.request_mock = self.mock('plotly.api.v2.utils.requests.request')
+        self.request_mock = self.mock('chart_studio.api.v2.utils.requests.request')
         self.request_mock.return_value = self.get_response()
 
         # Mock the validation function since we can test that elsewhere.
-        self.mock('plotly.api.v2.utils.validate_response')
+        self.mock('chart_studio.api.v2.utils.validate_response')
 
     def test_create(self):
         filename = 'a grid'

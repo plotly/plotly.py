@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 
-from plotly.api.v2 import folders
+from chart_studio.api.v2 import folders
 from chart_studio.tests.test_plot_ly.test_api import PlotlyApiTestCase
 
 
@@ -10,11 +10,11 @@ class FoldersTest(PlotlyApiTestCase):
         super(FoldersTest, self).setUp()
 
         # Mock the actual api call, we don't want to do network tests here.
-        self.request_mock = self.mock('plotly.api.v2.utils.requests.request')
+        self.request_mock = self.mock('chart_studio.api.v2.utils.requests.request')
         self.request_mock.return_value = self.get_response()
 
         # Mock the validation function since we can test that elsewhere.
-        self.mock('plotly.api.v2.utils.validate_response')
+        self.mock('chart_studio.api.v2.utils.validate_response')
 
     def test_create(self):
         path = '/foo/man/bar/'
