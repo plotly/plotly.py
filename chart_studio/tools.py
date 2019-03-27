@@ -14,17 +14,17 @@ import warnings
 import six
 import copy
 
-import plotly.exceptions
+from _plotly_utils import optional_imports
 from chart_studio import session, utils
 from chart_studio.files import CONFIG_FILE, CREDENTIALS_FILE, FILE_CONTENT
-from plotly.files import ensure_writable_plotly_dir
+import _plotly_utils.exceptions
 
 # color constants for violin plot
 
 
 # Warning format
-from plotly.tools import ipython_core_display, \
-    sage_salvus
+ipython_core_display = optional_imports.get_module('IPython.core.display')
+sage_salvus = optional_imports.get_module('sage_salvus')
 
 
 def get_config_defaults():
@@ -45,6 +45,7 @@ def ensure_local_plotly_files():
     If the config or credential files aren't filled out, then write them
     to the disk.
     """
+    from plotly.files import ensure_writable_plotly_dir
     if ensure_writable_plotly_dir():
         for fn in [CREDENTIALS_FILE, CONFIG_FILE]:
             utils.ensure_file_exists(fn)
@@ -91,8 +92,10 @@ def set_credentials_file(username=None,
     :param (str) proxy_password: The pw associated with your Proxy un
 
     """
+    from plotly.files import ensure_writable_plotly_dir
+
     if not ensure_writable_plotly_dir():
-        raise plotly.exceptions.PlotlyError("You don't have proper file permissions "
+        raise _plotly_utils.exceptions.PlotlyError("You don't have proper file permissions "
                                      "to run this function.")
     ensure_local_plotly_files()  # make sure what's there is OK
     credentials = get_credentials_file()
@@ -154,8 +157,10 @@ def set_config_file(plotly_domain=None,
     :param (bool) world_readable: True = public, False = private
 
     """
+    from plotly.files import ensure_writable_plotly_dir
+
     if not ensure_writable_plotly_dir():
-        raise plotly.exceptions.PlotlyError("You don't have proper file permissions "
+        raise _plotly_utils.exceptions.PlotlyError("You don't have proper file permissions "
                                      "to run this function.")
     ensure_local_plotly_files()  # make sure what's there is OK
     utils.validate_world_readable_and_sharing_settings({
@@ -262,7 +267,7 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
     if file_id is None:  # assume we're using a url
         url = file_owner_or_url
         if url[:len(plotly_rest_url)] != plotly_rest_url:
-            raise plotly.exceptions.PlotlyError(
+            raise _plotly_utils.exceptions.PlotlyError(
                 "Because you didn't supply a 'file_id' in the call, "
                 "we're assuming you're trying to snag a figure from a url. "
                 "You supplied the url, '{0}', we expected it to start with "
@@ -285,14 +290,14 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
     try:
         test_if_int = int(file_id)
     except ValueError:
-        raise plotly.exceptions.PlotlyError(
+        raise _plotly_utils.exceptions.PlotlyError(
             "The 'file_id' argument was not able to be converted into an "
             "integer number. Make sure that the positional 'file_id' argument "
             "is a number that can be converted into an integer or a string "
             "that can be converted into an integer."
         )
     if int(file_id) < 0:
-        raise plotly.exceptions.PlotlyError(
+        raise _plotly_utils.exceptions.PlotlyError(
             "The 'file_id' argument must be a non-negative number."
         )
     if share_key is '':

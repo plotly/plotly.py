@@ -12,7 +12,7 @@ from unittest import skipIf
 import six
 from nose.plugins.attrib import attr
 
-import plotly.exceptions
+import _plotly_utils.exceptions
 from chart_studio import exceptions
 from chart_studio.plotly import plotly as py
 from chart_studio.tests.utils import PlotlyTestCase
@@ -87,7 +87,7 @@ class GetFigureTest(PlotlyTestCase):
         ak = '786r5mecv0'
         url = "https://plot.ly/~PlotlyImageTest/1000000000/"
         py.sign_in(un, ak)
-        with self.assertRaises(plotly.exceptions.PlotlyError):
+        with self.assertRaises(_plotly_utils.exceptions.PlotlyError):
             py.get_figure(url)
 
     @attr('slow')

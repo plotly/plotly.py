@@ -5,7 +5,7 @@ from unittest import TestCase
 from nose.tools import raises
 
 import chart_studio.tools as tls
-from plotly.exceptions import PlotlyError
+from _plotly_utils.exceptions import PlotlyError
 
 
 def test_get_valid_embed():

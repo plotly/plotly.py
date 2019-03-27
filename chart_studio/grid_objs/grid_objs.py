@@ -5,7 +5,7 @@ grid_objs
 """
 from __future__ import absolute_import
 
-import plotly.exceptions
+import _plotly_utils.exceptions
 
 try:
     from collections.abc import MutableSequence
@@ -172,7 +172,7 @@ class Grid(MutableSequence):
         elif isinstance(columns_or_json, dict):
             # check that fid is entered
             if fid is None:
-                raise plotly.exceptions.PlotlyError(
+                raise _plotly_utils.exceptions.PlotlyError(
                     "If you are manually converting a raw json/dict grid "
                     "into a Grid instance, you must ensure that 'fid' is "
                     "set to your file ID. This looks like 'username:187'."
@@ -182,7 +182,7 @@ class Grid(MutableSequence):
 
             # check if 'cols' is a root key
             if 'cols' not in columns_or_json:
-                raise plotly.exceptions.PlotlyError(
+                raise _plotly_utils.exceptions.PlotlyError(
                     "'cols' must be a root key in your json grid."
                 )
 
@@ -192,7 +192,7 @@ class Grid(MutableSequence):
             for column_name in columns_or_json['cols']:
                 for key in grid_col_keys:
                     if key not in columns_or_json['cols'][column_name]:
-                        raise plotly.exceptions.PlotlyError(
+                        raise _plotly_utils.exceptions.PlotlyError(
                             "Each column name of your dictionary must have "
                             "'data', 'order' and 'uid' as keys."
                         )
@@ -293,7 +293,7 @@ class Grid(MutableSequence):
             col_names = []
             for column in self._columns:
                 col_names.append(column.name)
-            raise plotly.exceptions.PlotlyError(
+            raise _plotly_utils.exceptions.PlotlyError(
                 "Whoops, that column name doesn't match any of the column "
                 "names in your grid. You must pick from {cols}".format(cols=col_names)
             )

@@ -8,8 +8,7 @@ import warnings
 
 from nose.plugins.attrib import attr
 
-import plotly.exceptions
-from chart_studio import exceptions
+import _plotly_utils.exceptions
 from chart_studio.plotly import plotly as py
 from chart_studio.tests.utils import PlotlyTestCase
 
@@ -37,7 +36,7 @@ def _generate_image_get_returns_valid_image_test(image_format,
                 if image_format in ['png', 'jpeg']:
                     assert imghdr.what('', image) == image_format
                 return
-            except (KeyError, plotly.exceptions.PlotlyError):
+            except (KeyError, _plotly_utils.exceptions.PlotlyError):
                 if i == num_attempts - 1:
                     raise
 

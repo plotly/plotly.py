@@ -15,7 +15,7 @@ from nose.plugins.attrib import attr
 
 from chart_studio import plotly as py
 from chart_studio.exceptions import InputError, PlotlyRequestError
-from plotly.exceptions import PlotlyError
+from _plotly_utils.exceptions import PlotlyError
 from plotly.graph_objs import Scatter
 from chart_studio.grid_objs import Column, Grid
 from chart_studio.plotly import parse_grid_id_args

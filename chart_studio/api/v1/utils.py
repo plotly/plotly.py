@@ -4,7 +4,7 @@ import requests
 from requests.exceptions import RequestException
 from retrying import retry
 
-import plotly.exceptions
+import _plotly_utils.exceptions
 from chart_studio import config, exceptions
 from chart_studio.api.utils import basic_auth
 from chart_studio.api.v2.utils import should_retry
@@ -76,7 +76,7 @@ def request(method, url, **kwargs):
     """
     if kwargs.get('json', None) is not None:
         # See plotly.api.v2.utils.request for examples on how to do this.
-        raise plotly.exceptions.PlotlyError(
+        raise _plotly_utils.exceptions.PlotlyError(
             'V1 API does not handle arbitrary json.')
     kwargs['headers'] = dict(kwargs.get('headers', {}), **get_headers())
     kwargs['verify'] = config.get_config()['plotly_ssl_verification']

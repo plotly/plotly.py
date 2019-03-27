@@ -11,7 +11,7 @@ import re
 import string
 import warnings
 
-import plotly.exceptions
+import _plotly_utils.exceptions
 from chart_studio import exceptions
 from chart_studio.config import get_config
 
@@ -57,7 +57,7 @@ def list_of_options(iterable, conj='and', period=True):
     if the conjunction 'and' is selected.
     """
     if len(iterable) < 2:
-        raise plotly.exceptions.PlotlyError(
+        raise _plotly_utils.exceptions.PlotlyError(
             'Your list or tuple must contain at least 2 items.'
         )
     template = (len(iterable) - 2)*'{}, ' + '{} ' + conj + ' {}' + period*'.'
@@ -905,7 +905,7 @@ class Presentation(dict):
 
         if markdown_string:
             if style not in PRES_THEMES:
-                raise plotly.exceptions.PlotlyError(
+                raise _plotly_utils.exceptions.PlotlyError(
                     "Your presentation style must be {}".format(
                         list_of_options(PRES_THEMES, conj='or', period=True)
                     )
@@ -923,7 +923,7 @@ class Presentation(dict):
 
             # validate blocks of code
             if slide.count('```') % 2 != 0:
-                raise plotly.exceptions.PlotlyError(CODE_ENV_ERROR)
+                raise _plotly_utils.exceptions.PlotlyError(CODE_ENV_ERROR)
 
             # find code blocks
             code_indices = []
@@ -946,7 +946,7 @@ class Presentation(dict):
                     code_by_lines[0][3:]
                 ).lower()
                 if language == '' or language not in VALID_LANGUAGES:
-                    raise plotly.exceptions.PlotlyError(
+                    raise _plotly_utils.exceptions.PlotlyError(
                         "The language of your code block should be "
                         "clearly indicated after the first ``` that "
                         "begins the code block. The valid languages to "
@@ -978,7 +978,7 @@ class Presentation(dict):
                           _url_parens_contained('Image', line)):
                         if (line.startswith('Plotly(') and
                             get_config()['plotly_domain'] not in line):
-                            raise plotly.exceptions.PlotlyError(
+                            raise _plotly_utils.exceptions.PlotlyError(
                                 "You are attempting to insert a Plotly Chart "
                                 "in your slide but your url does not have "
                                 "your plotly domain '{}' in it.".format(

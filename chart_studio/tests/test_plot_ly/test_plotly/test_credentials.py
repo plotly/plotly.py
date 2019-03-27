@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 
-import plotly.exceptions
+import _plotly_utils.exceptions
 from chart_studio import plotly as py, exceptions
 import chart_studio.session as session
 import chart_studio.tools as tls
@@ -89,5 +89,5 @@ class TestSignIn(PlotlyTestCase):
         self.users_current_mock.side_effect = exceptions.PlotlyRequestError(
             'msg', 400, 'foobar'
         )
-        with self.assertRaisesRegexp(plotly.exceptions.PlotlyError, 'Sign in failed'):
+        with self.assertRaisesRegexp(_plotly_utils.exceptions.PlotlyError, 'Sign in failed'):
             py.sign_in('foo', 'bar')

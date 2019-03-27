@@ -10,7 +10,7 @@ preview of the Dashboard.
 
 import pprint
 
-import plotly.exceptions
+import _plotly_utils.exceptions
 from plotly import optional_imports
 from chart_studio import exceptions
 from plotly.utils import node_generator
@@ -251,7 +251,7 @@ class Dashboard(dict):
     def _insert(self, box_or_container, path):
         if any(first_second not in ['first', 'second']
                for first_second in path):
-            raise plotly.exceptions.PlotlyError(
+            raise _plotly_utils.exceptions.PlotlyError(
                 "Invalid path. Your 'path' list must only contain "
                 "the strings 'first' and 'second'."
             )
@@ -307,7 +307,7 @@ class Dashboard(dict):
         loc_in_dashboard = self['layout']
 
         if box_id not in box_ids_to_path.keys():
-            raise plotly.exceptions.PlotlyError(ID_NOT_VALID_MESSAGE)
+            raise _plotly_utils.exceptions.PlotlyError(ID_NOT_VALID_MESSAGE)
         for first_second in box_ids_to_path[box_id]:
             loc_in_dashboard = loc_in_dashboard[first_second]
         return loc_in_dashboard
@@ -487,15 +487,15 @@ class Dashboard(dict):
             )
         else:
             if box_id is None:
-                raise plotly.exceptions.PlotlyError(
+                raise _plotly_utils.exceptions.PlotlyError(
                     "Make sure the box_id is specfied if there is at least "
                     "one box in your dashboard."
                 )
             if box_id not in box_ids_to_path:
-                raise plotly.exceptions.PlotlyError(ID_NOT_VALID_MESSAGE)
+                raise _plotly_utils.exceptions.PlotlyError(ID_NOT_VALID_MESSAGE)
 
             if fill_percent < 0 or fill_percent > 100:
-                raise plotly.exceptions.PlotlyError(
+                raise _plotly_utils.exceptions.PlotlyError(
                     'fill_percent must be a number between 0 and 100 '
                     'inclusive'
                 )
@@ -528,7 +528,7 @@ class Dashboard(dict):
                     box_ids_to_path[box_id]
                 )
             else:
-                raise plotly.exceptions.PlotlyError(
+                raise _plotly_utils.exceptions.PlotlyError(
                     "If there is at least one box in your dashboard, you "
                     "must specify a valid side value. You must choose from "
                     "'above', 'below', 'left', and 'right'."
@@ -559,7 +559,7 @@ class Dashboard(dict):
         """
         box_ids_to_path = self._compute_box_ids()
         if box_id not in box_ids_to_path:
-            raise plotly.exceptions.PlotlyError(ID_NOT_VALID_MESSAGE)
+            raise _plotly_utils.exceptions.PlotlyError(ID_NOT_VALID_MESSAGE)
 
         path = box_ids_to_path[box_id]
         if path != ('first',):

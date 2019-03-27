@@ -20,7 +20,7 @@ import plotly.tools
 from chart_studio import session
 from chart_studio.tests.utils import PlotlyTestCase
 from plotly.plotly import plotly as py
-from plotly.exceptions import PlotlyError, PlotlyEmptyDataError
+from _plotly_utils.exceptions import PlotlyError, PlotlyEmptyDataError
 from chart_studio.files import CONFIG_FILE
 
 

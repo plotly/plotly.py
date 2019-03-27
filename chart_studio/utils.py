@@ -14,8 +14,8 @@ import warnings
 
 from requests.compat import json as _json
 
-from plotly.exceptions import PlotlyError
-from plotly.optional_imports import get_module
+from _plotly_utils.exceptions import PlotlyError
+from _plotly_utils.optional_imports import get_module
 
 # Optional imports, may be None for users that only use our core functionality.
 numpy = get_module('numpy')

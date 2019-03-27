@@ -28,7 +28,7 @@ import six
 import six.moves
 from requests.compat import json as _json
 
-import plotly.exceptions
+import _plotly_utils.exceptions
 import plotly.tools
 import plotly.utils
 from _plotly_utils.basevalidators import CompoundValidator, is_array
@@ -74,7 +74,7 @@ def sign_in(username, api_key, **kwargs):
         # with the given, username, api_key, and plotly_api_domain.
         v2.users.current()
     except exceptions.PlotlyRequestError:
-        raise plotly.exceptions.PlotlyError('Sign in failed.')
+        raise _plotly_utils.exceptions.PlotlyError('Sign in failed.')
 
 update_plot_options = session.update_session_plot_options
 
@@ -296,7 +296,7 @@ def iplot_mpl(fig, resize=True, strip_style=False, update=None,
     if update and isinstance(update, dict):
         fig.update(update)
     elif update is not None:
-        raise plotly.exceptions.PlotlyGraphObjectError(
+        raise _plotly_utils.exceptions.PlotlyGraphObjectError(
             "'update' must be dictionary-like and a valid plotly Figure "
             "object. Run 'help(plotly.graph_objs.Figure)' for more info."
         )
@@ -328,7 +328,7 @@ def plot_mpl(fig, resize=True, strip_style=False, update=None, **plot_options):
     if update and isinstance(update, dict):
         fig.update(update)
     elif update is not None:
-        raise plotly.exceptions.PlotlyGraphObjectError(
+        raise _plotly_utils.exceptions.PlotlyGraphObjectError(
             "'update' must be dictionary-like and a valid plotly Figure "
             "object. Run 'help(plotly.graph_objs.Figure)' for more info."
         )
@@ -447,7 +447,7 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
     if file_id is None:  # assume we're using a url
         url = file_owner_or_url
         if url[:len(plotly_rest_url)] != plotly_rest_url:
-            raise plotly.exceptions.PlotlyError(
+            raise _plotly_utils.exceptions.PlotlyError(
                 "Because you didn't supply a 'file_id' in the call, "
                 "we're assuming you're trying to snag a figure from a url. "
                 "You supplied the url, '{0}', we expected it to start with "
@@ -462,14 +462,14 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
     try:
         int(file_id)
     except ValueError:
-        raise plotly.exceptions.PlotlyError(
+        raise _plotly_utils.exceptions.PlotlyError(
             "The 'file_id' argument was not able to be converted into an "
             "integer number. Make sure that the positional 'file_id' argument "
             "is a number that can be converted into an integer or a string "
             "that can be converted into an integer."
         )
     if int(file_id) < 0:
-        raise plotly.exceptions.PlotlyError(
+        raise _plotly_utils.exceptions.PlotlyError(
             "The 'file_id' argument must be a non-negative number."
         )
 
@@ -608,7 +608,7 @@ class Stream:
         try:
             self._stream.write('\n', reconnect_on=reconnect_on)
         except AttributeError:
-            raise plotly.exceptions.PlotlyError(
+            raise _plotly_utils.exceptions.PlotlyError(
                 "Stream has not been opened yet, "
                 "cannot write to a closed connection. "
                 "Call `open()` on the stream to open the stream."
@@ -696,7 +696,7 @@ class Stream:
         try:
             self._stream.write(jdata, reconnect_on=reconnect_on)
         except AttributeError:
-            raise plotly.exceptions.PlotlyError(
+            raise _plotly_utils.exceptions.PlotlyError(
                 "Stream has not been opened yet, "
                 "cannot write to a closed connection. "
                 "Call `open()` on the stream to open the stream.")
@@ -713,7 +713,7 @@ class Stream:
         try:
             self._stream.close()
         except AttributeError:
-            raise plotly.exceptions.PlotlyError("Stream has not been opened yet.")
+            raise _plotly_utils.exceptions.PlotlyError("Stream has not been opened yet.")
 
 
 class image:
@@ -749,7 +749,7 @@ class image:
         figure = plotly.tools.return_figure_from_figure_or_data(figure_or_data, True)
 
         if format not in ['png', 'svg', 'jpeg', 'pdf', 'emf']:
-            raise plotly.exceptions.PlotlyError(
+            raise _plotly_utils.exceptions.PlotlyError(
                 "Invalid format. This version of your Plotly-Python "
                 "package currently only supports png, svg, jpeg, and pdf. "
                 "Learn more about image exporting, and the currently "
@@ -760,7 +760,7 @@ class image:
             try:
                 scale = float(scale)
             except:
-                raise plotly.exceptions.PlotlyError(
+                raise _plotly_utils.exceptions.PlotlyError(
                     "Invalid scale parameter. Scale must be a number."
                 )
 
@@ -809,7 +809,7 @@ class image:
         py.image.ishow(fig, 'png', scale=3)
         """
         if format == 'pdf':
-            raise plotly.exceptions.PlotlyError(
+            raise _plotly_utils.exceptions.PlotlyError(
                 "Aw, snap! "
                 "It's not currently possible to embed a pdf into "
                 "an IPython notebook. You can save the pdf "
@@ -946,7 +946,7 @@ class grid_ops:
     def ensure_uploaded(fid):
         if fid:
             return
-        raise plotly.exceptions.PlotlyError(
+        raise _plotly_utils.exceptions.PlotlyError(
             'This operation requires that the grid has already been uploaded '
             'to Plotly. Try `uploading` first.'
         )
@@ -1370,7 +1370,7 @@ def add_share_key_to_url(plot_url, attempt=0):
     if not share_key_enabled:
         attempt += 1
         if attempt == 50:
-            raise plotly.exceptions.PlotlyError(
+            raise _plotly_utils.exceptions.PlotlyError(
                 "The sharekey could not be enabled at this time so the graph "
                 "is saved as private. Try again to save as 'secret' later."
             )
@@ -1448,7 +1448,7 @@ def _create_or_update(data, filetype):
                 fid = matching_file['fid']
                 res = api_module.update(fid, data)
             else:
-                raise plotly.exceptions.PlotlyError("""
+                raise _plotly_utils.exceptions.PlotlyError("""
 '{filename}' is already a {other_filetype} in your account. 
 While you can overwrite {filetype}s with the same name, you can't overwrite
 files with a different type. Try deleting '{filename}' in your account or
@@ -1643,7 +1643,7 @@ class presentation_ops:
         elif sharing in ['private', 'secret']:
             world_readable = False
         else:
-            raise plotly.exceptions.PlotlyError(
+            raise _plotly_utils.exceptions.PlotlyError(
                 SHARING_ERROR_MSG
             )
         data = {
@@ -2010,7 +2010,7 @@ def create_animations(figure, filename=None, sharing='public', auto_open=True):
         payload['world_readable'] = False
         payload['share_key_enabled'] = True
     else:
-        raise plotly.exceptions.PlotlyError(
+        raise _plotly_utils.exceptions.PlotlyError(
             SHARING_ERROR_MSG
         )
 

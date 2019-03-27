@@ -11,7 +11,7 @@ from chart_studio.api.utils import to_native_utf8_string
 
 
 # Base Plotly Error
-from plotly.exceptions import PlotlyError
+from _plotly_utils.exceptions import PlotlyError
 
 
 class InputError(PlotlyError):

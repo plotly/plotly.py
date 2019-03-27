@@ -10,7 +10,7 @@ from __future__ import absolute_import
 from nose.plugins.attrib import attr
 from nose.tools import raises
 
-import plotly.exceptions
+import _plotly_utils.exceptions
 from plotly import optional_imports
 from chart_studio.plotly import plotly as py
 from unittest import TestCase
@@ -27,7 +27,7 @@ class PlotMPLTest(TestCase):
         py.sign_in('PlotlyImageTest', '786r5mecv0',
                    plotly_domain='https://plot.ly')
 
-    @raises(plotly.exceptions.PlotlyGraphObjectError)
+    @raises(_plotly_utils.exceptions.PlotlyGraphObjectError)
     def test_update_type_error(self):
         fig, ax = plt.subplots()
         ax.plot([1, 2, 3])

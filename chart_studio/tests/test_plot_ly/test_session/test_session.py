@@ -4,7 +4,7 @@ from chart_studio.tests.utils import PlotlyTestCase
 
 from chart_studio import session
 from chart_studio.session import update_session_plot_options, SHARING_OPTIONS
-from plotly.exceptions import PlotlyError
+from _plotly_utils.exceptions import PlotlyError
 
 
 class TestSession(PlotlyTestCase):

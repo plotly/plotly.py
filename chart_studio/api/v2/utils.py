@@ -5,7 +5,7 @@ from requests.compat import json as _json
 from requests.exceptions import RequestException
 from retrying import retry
 
-import plotly.exceptions
+import _plotly_utils.exceptions
 from plotly import version
 from chart_studio import config, exceptions
 from chart_studio.api.utils import basic_auth
@@ -152,7 +152,7 @@ def request(method, url, **kwargs):
     # We have a special json encoding class for non-native objects.
     if kwargs.get('json') is not None:
         if kwargs.get('data'):
-            raise plotly.exceptions.PlotlyError(
+            raise _plotly_utils.exceptions.PlotlyError(
                 'Cannot supply data and json kwargs.')
         kwargs['data'] = _json.dumps(kwargs.pop('json'), sort_keys=True,
                                      cls=PlotlyJSONEncoder)

@@ -8,7 +8,7 @@ A module intended for use with Nose.
 from __future__ import absolute_import
 
 from unittest import TestCase
-from plotly.exceptions import PlotlyError
+from _plotly_utils.exceptions import PlotlyError
 import chart_studio.dashboard_objs.dashboard_objs as dashboard
 
 
