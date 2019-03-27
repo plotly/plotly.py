@@ -44,7 +44,8 @@ __version__ = get_versions()['version']
 del get_versions
 
 
-if 'extract_chart_studio' not in _future_flags:
+if ('extract_chart_studio' not in _future_flags
+        and 'remove_deprecations' not in _future_flags):
     from plotly import (
         plotly,
         dashboard_objs,
