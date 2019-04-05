@@ -312,7 +312,7 @@ def init_notebook_mode(connected=False):
 
 
 def _plot_html(figure_or_data, config, validate, default_width,
-               default_height, global_requirejs, auto_play):
+               default_height, global_requirejs, auto_play, animation_opts=None):
 
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
 
@@ -350,9 +350,12 @@ def _plot_html(figure_or_data, config, validate, default_width,
 
     if jframes:
         if auto_play:
+            print(plotdivid)
             animate = (".then(function(){" +
-                       "Plotly.animate('{id}');".format(id=plotdivid) +
+                       "Plotly.animate('{id}',null{opts});".format(id=plotdivid,
+                       opts=", "+ str(animation_opts) if animation_opts is not None else "") + #{frame: {duration: '{dr}'}}  , null, {traces: [0]}
                        "})")
+
         else:
             animate = ''
 
@@ -378,7 +381,7 @@ def _plot_html(figure_or_data, config, validate, default_width,
     else:
         script = """
 if (document.getElementById("{id}")) {{
-    Plotly.newPlot("{id}", {data}, {layout}, {config}); 
+    Plotly.newPlot("{id}", {data}, {layout}, {config});
 }}
 """.format(
             id=plotdivid,
@@ -411,7 +414,7 @@ if (document.getElementById("{id}")) {{
 
 def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
           validate=True, image=None, filename='plot_image', image_width=800,
-          image_height=600, config=None, auto_play=True):
+          image_height=600, config=None, auto_play=True, animation_opts=None):
     """
     Draw plotly graphs inside an IPython or Jupyter notebook without
     connecting to an external server.
@@ -460,6 +463,21 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
     format you want. e.g. `image='png'`
     iplot([{'x': [1, 2, 3], 'y': [5, 2, 7]}], image='png')
     ```
+    animation_opts (default=None) -- Custom animation parameters to be passed
+    to the function Plotly.animate in Plotly.js in the form str(dict)
+    Example:
+    ```
+    from plotly.offline import iplot
+    figure = {'data': [{'x': [0, 1], 'y': [0, 1]}],
+              'layout': {'xaxis': {'range': [0, 5], 'autorange': False},
+                         'yaxis': {'range': [0, 5], 'autorange': False},
+                         'title': 'Start Title'},
+              'frames': [{'data': [{'x': [1, 2], 'y': [1, 2]}]},
+                         {'data': [{'x': [1, 4], 'y': [1, 4]}]},
+                         {'data': [{'x': [3, 4], 'y': [3, 4]}],
+                          'layout': {'title': 'End Title'}}]}
+    iplot(figure,animation_opts="{frame: {duration: 1}}")
+    ```
     """
     if not ipython:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
@@ -490,7 +508,8 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
 
     if __PLOTLY_OFFLINE_INITIALIZED:
         plot_html, plotdivid, width, height = _plot_html(
-            figure_or_data, config, validate, '100%', 525, True, auto_play)
+            figure_or_data, config, validate, '100%',
+            525, True, auto_play,animation_opts=animation_opts)
         resize_script = ''
         if width == '100%' or height == '100%':
             resize_script = _build_resize_script(
@@ -531,7 +550,7 @@ def plot(figure_or_data, show_link=False, link_text='Export to plot.ly',
          validate=True, output_type='file', include_plotlyjs=True,
          filename='temp-plot.html', auto_open=True, image=None,
          image_filename='plot_image', image_width=800, image_height=600,
-         config=None, include_mathjax=False, auto_play=True):
+         config=None, include_mathjax=False, auto_play=True, animation_opts=None):
     """ Create a plotly graph locally as an HTML document or string.
 
     Example:
@@ -644,6 +663,21 @@ def plot(figure_or_data, show_link=False, link_text='Export to plot.ly',
     auto_play (default=True) -- Whether to automatically start the animation
         sequence on page load if the figure contains frames. Has no effect if
         the figure does not contain frames.
+    animation_opts (default=None) -- Custom animation parameters to be passed
+    to the function Plotly.animate in Plotly.js in the form str(dict)
+    Example:
+    ```
+    from plotly.offline import plot
+    figure = {'data': [{'x': [0, 1], 'y': [0, 1]}],
+              'layout': {'xaxis': {'range': [0, 5], 'autorange': False},
+                         'yaxis': {'range': [0, 5], 'autorange': False},
+                         'title': 'Start Title'},
+              'frames': [{'data': [{'x': [1, 2], 'y': [1, 2]}]},
+                         {'data': [{'x': [1, 4], 'y': [1, 4]}]},
+                         {'data': [{'x': [3, 4], 'y': [3, 4]}],
+                          'layout': {'title': 'End Title'}}]}
+    plot(figure,animation_opts="{frame: {duration: 1}}")
+    ```
     """
     if output_type not in ['div', 'file']:
         raise ValueError(
@@ -661,7 +695,8 @@ def plot(figure_or_data, show_link=False, link_text='Export to plot.ly',
 
     plot_html, plotdivid, width, height = _plot_html(
         figure_or_data, config, validate,
-        '100%', '100%', global_requirejs=False, auto_play=auto_play)
+        '100%', '100%', global_requirejs=False,
+        auto_play=auto_play, animation_opts=animation_opts)
 
     # Build resize_script
     resize_script = ''
@@ -701,7 +736,7 @@ def plot(figure_or_data, show_link=False, link_text='Export to plot.ly',
 
     if include_mathjax == 'cdn':
         mathjax_script = _build_mathjax_script(
-            url=('https://cdnjs.cloudflare.com' 
+            url=('https://cdnjs.cloudflare.com'
                  '/ajax/libs/mathjax/2.7.5/MathJax.js')) + _mathjax_config
     elif (isinstance(include_mathjax, six.string_types) and
           include_mathjax.endswith('.js')):
@@ -714,7 +749,7 @@ def plot(figure_or_data, show_link=False, link_text='Export to plot.ly',
 Invalid value of type {typ} received as the include_mathjax argument
     Received value: {val}
 
-include_mathjax may be specified as False, 'cdn', or a string ending with '.js' 
+include_mathjax may be specified as False, 'cdn', or a string ending with '.js'
 """.format(typ=type(include_mathjax), val=repr(include_mathjax)))
 
     if output_type == 'file':
