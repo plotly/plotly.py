@@ -36,7 +36,7 @@ sage_all = get_module('sage.all')
 lock = threading.Lock()
 
 PY36 = (
-    sys.version_info.major == 3 and sys.version_info.minor == 6
+    sys.version_info.major == 3 and sys.version_info.minor >= 6
 )
 
 
