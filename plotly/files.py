@@ -27,12 +27,20 @@ FILE_CONTENT = {CREDENTIALS_FILE: {'username': '',
 def _permissions():
     try:
         if not os.path.exists(PLOTLY_DIR):
-            os.mkdir(PLOTLY_DIR)
+            try:
+                os.mkdir(PLOTLY_DIR)
+            except Exception:
+                # in case of race
+                if not os.path.isdir(PLOTLY_DIR):
+                    raise
         with open(TEST_FILE, 'w') as f:
             f.write('testing\n')
-        os.remove(TEST_FILE)
+        try:
+            os.remove(TEST_FILE)
+        except Exception:
+            pass
         return True
-    except:
+    except Exception: # Do not trap KeyboardInterrupt.
         return False
 
 
