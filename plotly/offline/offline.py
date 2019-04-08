@@ -290,6 +290,10 @@ def init_notebook_mode(connected=False):
     else:
         pio.renderers.default = 'notebook+plotly_mimetype'
 
+    # Trigger immediate activation of notebook. This way the plotly.js
+    # library reference is available to the notebook immediately
+    pio.renderers._activate_pending_renderers()
+
 
 def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
           validate=True, image=None, filename='plot_image', image_width=800,
