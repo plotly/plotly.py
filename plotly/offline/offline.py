@@ -338,6 +338,7 @@ def _plot_html(figure_or_data, config, validate, default_width,
     jlayout = _json.dumps(figure.get('layout', {}),
                           cls=utils.PlotlyJSONEncoder)
 
+
     if figure.get('frames', None):
         jframes = _json.dumps(figure.get('frames', []),
                               cls=utils.PlotlyJSONEncoder)
@@ -347,7 +348,7 @@ def _plot_html(figure_or_data, config, validate, default_width,
     jconfig = _json.dumps(_get_jconfig(config))
     plotly_platform_url = plotly.plotly.get_config().get('plotly_domain',
                                                          'https://plot.ly')
-
+                                                  
     if jframes:
         if auto_play:
             print(plotdivid)
