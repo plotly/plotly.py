@@ -35,7 +35,7 @@ sage_all = get_module('sage.all')
 ### incase people are using threading, we lock file reads
 lock = threading.Lock()
 
-PY36 = (
+PY36_OR_LATER = (
     sys.version_info.major == 3 and sys.version_info.minor >= 6
 )
 
@@ -289,9 +289,9 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
     @staticmethod
     def encode_as_datetime(obj):
         """Attempt to convert to utc-iso time string using datetime methods."""
-        # In PY36, isoformat() converts UTC
+        # Since PY36, isoformat() converts UTC
         # datetime.datetime objs to UTC T04:00:00
-        if not (PY36 and (isinstance(obj, datetime.datetime) and
+        if not (PY36_OR_LATER and (isinstance(obj, datetime.datetime) and
                 obj.tzinfo is None)):
             try:
                 obj = obj.astimezone(pytz.utc)
