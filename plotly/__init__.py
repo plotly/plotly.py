@@ -37,6 +37,7 @@ from ._version import get_versions
 __version__ = get_versions()['version']
 del get_versions
 
-# Set default template here to make sure import process is complet
+# Set default template here to make sure import process is complete
 if 'template_defaults' in _future_flags:
+    # Set _default to skip validation
     io.templates._default = 'plotly'

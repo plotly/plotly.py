@@ -1,4 +1,5 @@
 from __future__ import absolute_import
+
 from plotly.basedatatypes import BaseFigure
 from plotly.graph_objs import Figure
 from plotly.validators.layout import TemplateValidator
@@ -236,6 +237,7 @@ Templates configuration
 # ------------------------------
 templates = TemplatesConfig()
 del TemplatesConfig
+
 
 # Template utilities
 # ------------------

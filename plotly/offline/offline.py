@@ -238,11 +238,8 @@ def build_save_image_post_script(
             raise ValueError('The image parameter must be one of the '
                              'following: {}'.format(__IMAGE_FORMATS)
                              )
-        # if the check passes then download script is injected.
-        # write the download script:
-        script = get_image_download_script(caller)
 
-        # Replace none's with nulls
+        script = get_image_download_script(caller)
         post_script = script.format(
             format=image,
             width=image_width,
@@ -299,11 +296,7 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
           validate=True, image=None, filename='plot_image', image_width=800,
           image_height=600, config=None, auto_play=True):
     """
-    Draw plotly graphs inside an IPython or Jupyter notebook without
-    connecting to an external server.
-    To save the chart to Plotly Cloud or Plotly Enterprise, use
-    `plotly.plotly.iplot`.
-    To embed an image of the chart, use `plotly.image.ishow`.
+    Draw plotly graphs inside an IPython or Jupyter notebook
 
     figure_or_data -- a plotly.graph_objs.Figure or plotly.graph_objs.Data or
                       dict or list that describes a Plotly graph.
@@ -324,8 +317,8 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
         the format of the image to be downloaded, if we choose to download an
         image. This parameter has a default value of None indicating that no
         image should be downloaded. Please note: for higher resolution images
-        and more export options, consider making requests to our image servers.
-        Type: `help(py.image)` for more details.
+        and more export options, consider using plotly.io.write_image. See
+        https://plot.ly/python/static-image-export/ for more details.
     filename (default='plot') -- Sets the name of the file your image
         will be saved to. The extension should not be included.
     image_height (default=600) -- Specifies the height of the image in `px`.
@@ -351,12 +344,6 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
 
     if not ipython:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
-
-    # Deprecations
-    if image:
-        warnings.warn("""
-    Image export using plotly.offline.plot is no longer supported.
-        Please use plotly.io.write_image instead""", DeprecationWarning)
 
     config = dict(config) if config else {}
     config.setdefault('showLink', show_link)
@@ -507,12 +494,6 @@ def plot(figure_or_data, show_link=False, link_text='Export to plot.ly',
             "Your filename `" + filename + "` didn't end with .html. "
             "Adding .html to the end of your file.")
         filename += '.html'
-
-    # Deprecations
-    if image:
-        warnings.warn("""
-Image export using plotly.offline.plot is no longer supported.
-    Please use plotly.io.write_image instead""", DeprecationWarning)
 
     # Config
     config = dict(config) if config else {}
