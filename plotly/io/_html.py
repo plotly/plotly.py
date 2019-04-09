@@ -156,47 +156,34 @@ def to_html(fig,
     else:
         then_post_script = ''
 
+    then_addframes = ''
+    then_animate = ''
     if jframes:
+        then_addframes = """.then(function(){{
+                            Plotly.addFrames('{id}', {frames});
+                        }})""".format(id=plotdivid, frames=jframes)
+
         if auto_play:
             then_animate = """.then(function(){{
                             Plotly.animate('{id}');
-                        }}""".format(id=plotdivid)
-        else:
-            then_animate = ''
+                        }})""".format(id=plotdivid)
 
-        script = '''
-                    if (document.getElementById("{id}")) {{
-                        Plotly.plot(
-                            '{id}',
-                            {data},
-                            {layout},
-                            {config}
-                        ).then(function () {add_frames})\
-{then_animate}{then_post_script}
-                    }}
-                        '''.format(
-            id=plotdivid,
-            data=jdata,
-            layout=jlayout,
-            config=jconfig,
-            add_frames="{" + "return Plotly.addFrames('{id}',{frames}".format(
-                id=plotdivid, frames=jframes
-            ) + ");}",
-            then_animate=then_animate,
-            then_post_script=then_post_script
-        )
-    else:
-        script = """
+    script = """
                 if (document.getElementById("{id}")) {{
-                    Plotly.newPlot("{id}", {data}, {layout}, {config})\
-{then_post_script}
-                }}
-                """.format(
-            id=plotdivid,
-            data=jdata,
-            layout=jlayout,
-            config=jconfig,
-            then_post_script=then_post_script)
+                    Plotly.newPlot(
+                        '{id}',
+                        {data},
+                        {layout},
+                        {config}
+                    ){then_addframes}{then_animate}{then_post_script}
+                }}""".format(
+        id=plotdivid,
+        data=jdata,
+        layout=jlayout,
+        config=jconfig,
+        then_addframes=then_addframes,
+        then_animate=then_animate,
+        then_post_script=then_post_script)
 
     # ## Handle loading/initializing plotly.js ##
     include_plotlyjs_orig = include_plotlyjs
@@ -265,10 +252,10 @@ def to_html(fig,
         mathjax_script = ''
     else:
         raise ValueError("""\
-    Invalid value of type {typ} received as the include_mathjax argument
-        Received value: {val}
+Invalid value of type {typ} received as the include_mathjax argument
+    Received value: {val}
 
-    include_mathjax may be specified as False, 'cdn', or a string ending with '.js' 
+include_mathjax may be specified as False, 'cdn', or a string ending with '.js' 
     """.format(typ=type(include_mathjax), val=repr(include_mathjax)))
 
     plotly_html_div = """\
