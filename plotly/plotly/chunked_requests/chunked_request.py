@@ -4,9 +4,7 @@ import os
 import ssl
 
 from six.moves import http_client
-from six.moves.urllib.parse import urlparse, unquote
-
-from plotly.api import utils
+from six.moves.urllib.parse import urlparse
 
 
 class Stream:
@@ -27,7 +25,7 @@ class Stream:
         self._ssl_verification_enabled = ssl_verification_enabled
         self._connect()
 
-    def write(self, data, reconnect_on=('', 200, 502)):
+    def write(self, data, reconnect_on=('', 200, )):
         ''' Send `data` to the server in chunk-encoded form.
         Check the connection before writing and reconnect
         if disconnected and if the response status code is in `reconnect_on`.
@@ -88,34 +86,21 @@ class Stream:
 
         proxy_server = None
         proxy_port = None
-        proxy_username = None
-        proxy_password = None
-        proxy_auth = None
         ssl_enabled = self._ssl_enabled
 
         if ssl_enabled:
-            proxy = (os.environ.get("https_proxy") or
-                     os.environ.get("HTTPS_PROXY"))
+            proxy = os.environ.get("https_proxy")
         else:
-            proxy = (os.environ.get("http_proxy") or
-                     os.environ.get("HTTP_PROXY"))
-
-        no_proxy = os.environ.get("no_proxy") or os.environ.get("NO_PROXY")
+            proxy = os.environ.get("http_proxy")
+        no_proxy = os.environ.get("no_proxy")
         no_proxy_url = no_proxy and self._server in no_proxy
 
         if proxy and not no_proxy_url:
             p = urlparse(proxy)
             proxy_server = p.hostname
             proxy_port = p.port
-            proxy_username = p.username
-            proxy_password = p.password
 
-        if proxy_username and proxy_password:
-            username = unquote(proxy_username)
-            password = unquote(proxy_password)
-            proxy_auth = utils.basic_auth(username, password)
-
-        return proxy_server, proxy_port, proxy_auth
+        return proxy_server, proxy_port
 
     def _get_ssl_context(self):
         """
@@ -138,7 +123,7 @@ class Stream:
         port = self._port
         headers = self._headers
         ssl_enabled = self._ssl_enabled
-        proxy_server, proxy_port, proxy_auth = self._get_proxy_config()
+        proxy_server, proxy_port = self._get_proxy_config()
 
         if (proxy_server and proxy_port):
             if ssl_enabled:
@@ -150,12 +135,7 @@ class Stream:
                 self._conn = http_client.HTTPConnection(
                     proxy_server, proxy_port
                 )
-
-            tunnel_headers = None
-            if proxy_auth:
-                tunnel_headers = {'Proxy-Authorization': proxy_auth}
-
-            self._conn.set_tunnel(server, port, headers=tunnel_headers)
+            self._conn.set_tunnel(server, port)
         else:
             if ssl_enabled:
                 context = self._get_ssl_context()
