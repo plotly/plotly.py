@@ -172,7 +172,7 @@ def to_html(fig,
                             {layout},
                             {config}
                         ).then(function () {add_frames})\
-    {then_animate}{then_post_script}
+{then_animate}{then_post_script}
                     }}
                         '''.format(
             id=plotdivid,
@@ -189,7 +189,7 @@ def to_html(fig,
         script = """
                 if (document.getElementById("{id}")) {{
                     Plotly.newPlot("{id}", {data}, {layout}, {config})\
-    {then_post_script}
+{then_post_script}
                 }}
                 """.format(
             id=plotdivid,
