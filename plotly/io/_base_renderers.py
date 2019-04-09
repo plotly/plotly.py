@@ -20,10 +20,13 @@ except ImportError:
     from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 
 
-class RendererRepr(object):
+class BaseRenderer(object):
     """
-    A mixin implementing a simple __repr__ for Renderer classes
+    Base class for all renderers
     """
+    def activate(self):
+        pass
+
     def __repr__(self):
         try:
             init_sig = inspect.signature(self.__init__)
@@ -44,13 +47,10 @@ class RendererRepr(object):
         return hash(repr(self))
 
 
-class MimetypeRenderer(RendererRepr):
+class MimetypeRenderer(BaseRenderer):
     """
     Base class for all mime type renderers
     """
-    def activate(self):
-        pass
-
     def to_mimebundle(self, fig_dict):
         raise NotImplementedError()
 
@@ -63,7 +63,8 @@ class JsonRenderer(MimetypeRenderer):
     mime type: 'application/json'
     """
     def to_mimebundle(self, fig_dict):
-        value = json.loads(to_json(fig_dict))
+        value = json.loads(to_json(
+            fig_dict, validate=False, remove_uids=False))
         return {'application/json': value}
 
 
@@ -472,7 +473,7 @@ class IFrameRenderer(MimetypeRenderer):
         return {'text/html': iframe_html}
 
 
-class ExternalRenderer(RendererRepr):
+class ExternalRenderer(BaseRenderer):
     """
     Base class for external renderers.  ExternalRenderer subclasses
     do not display figures inline in a notebook environment, but render
@@ -483,8 +484,6 @@ class ExternalRenderer(RendererRepr):
     Instead, they are invoked when the plotly.io.show function is called
     on a figure.
     """
-    def activate(self):
-        pass
 
     def render(self, fig):
         raise NotImplementedError()
@@ -494,7 +493,7 @@ def open_html_in_browser(html, using=None, new=0, autoraise=True):
     """
     Display html in a web browser without creating a temp file.
 
-    Instantiates a trivial http server and uses the webbrowser modeul to
+    Instantiates a trivial http server and uses the webbrowser module to
     open a URL to retrieve html from that server.
 
     Parameters
