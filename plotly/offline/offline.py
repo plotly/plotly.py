@@ -24,8 +24,6 @@ ipython = optional_imports.get_module('IPython')
 ipython_display = optional_imports.get_module('IPython.display')
 matplotlib = optional_imports.get_module('matplotlib')
 
-__PLOTLY_OFFLINE_INITIALIZED = False
-
 __IMAGE_FORMATS = ['jpeg', 'png', 'webp', 'svg']
 
 
@@ -222,18 +220,35 @@ def get_image_download_script(caller):
         raise ValueError('caller should only be one of `iplot` or `plot`')
 
     return(
-        ('<script>'
-         'function downloadimage(format, height, width,'
+        ('function downloadimage(format, height, width,'
          ' filename) {{'
-         'var p = document.getElementById(\'{plot_id}\');'
+         'var p = document.getElementById(\'{{plot_id}}\');'
          'Plotly.downloadImage(p, {{format: format, height: height, '
          'width: width, filename: filename}});}};' +
          check_start +
-         '{{downloadimage(\'{format}\', {height}, {width}, '
-         '\'{filename}\');}}' +
-         check_end +
-         '</script>')
-    )
+         'downloadimage(\'{format}\', {height}, {width}, '
+         '\'{filename}\');' +
+         check_end))
+
+
+def build_save_image_post_script(
+        image, image_filename, image_height, image_width, caller):
+    if image:
+        if image not in __IMAGE_FORMATS:
+            raise ValueError('The image parameter must be one of the '
+                             'following: {}'.format(__IMAGE_FORMATS)
+                             )
+
+        script = get_image_download_script(caller)
+        post_script = script.format(
+            format=image,
+            width=image_width,
+            height=image_height,
+            filename=image_filename)
+    else:
+        post_script = None
+
+    return post_script
 
 
 def init_notebook_mode(connected=False):
@@ -262,166 +277,26 @@ def init_notebook_mode(connected=False):
     your notebook, resulting in much larger notebook sizes compared to the case
     where `connected=True`.
     """
+    import plotly.io as pio
+
     if not ipython:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
-    global __PLOTLY_OFFLINE_INITIALIZED
-
     if connected:
-        # Inject plotly.js into the output cell
-        script_inject = (
-            '{win_config}'
-            '{mathjax_config}'
-            '<script>'
-            'requirejs.config({{'
-            'paths: {{ '
-            # Note we omit the extension .js because require will include it.
-            '\'plotly\': [\'https://cdn.plot.ly/plotly-latest.min\']}},'
-            '}});'
-            'if(!window._Plotly) {{'
-            'require([\'plotly\'],'
-            'function(plotly) {{window._Plotly=plotly;}});'
-            '}}'
-            '</script>'
-        ).format(win_config=_window_plotly_config,
-                 mathjax_config=_mathjax_config)
+        pio.renderers.default = 'notebook_connected+plotly_mimetype'
     else:
-        # Inject plotly.js into the output cell
-        script_inject = (
-            '{win_config}'
-            '{mathjax_config}'
-            '<script type=\'text/javascript\'>'
-            'require.undef("plotly");'
-            'define(\'plotly\', function(require, exports, module) {{'
-            '{script}'
-            '}});'
-            'require([\'plotly\'], function(Plotly) {{'
-            'window._Plotly = Plotly;'
-            '}});'
-            '</script>'
-            '').format(script=get_plotlyjs(),
-                       win_config=_window_plotly_config,
-                       mathjax_config=_mathjax_config)
+        pio.renderers.default = 'notebook+plotly_mimetype'
 
-    display_bundle = {
-        'text/html': script_inject,
-        'text/vnd.plotly.v1+html': script_inject
-    }
-    ipython_display.display(display_bundle, raw=True)
-    __PLOTLY_OFFLINE_INITIALIZED = True
-
-
-def _plot_html(figure_or_data, config, validate, default_width,
-               default_height, global_requirejs, auto_play, animation_opts=None):
-
-    figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
-
-    width = figure.get('layout', {}).get('width', default_width)
-    height = figure.get('layout', {}).get('height', default_height)
-
-    try:
-        float(width)
-    except (ValueError, TypeError):
-        pass
-    else:
-        width = str(width) + 'px'
-
-    try:
-        float(height)
-    except (ValueError, TypeError):
-        pass
-    else:
-        height = str(height) + 'px'
-
-    plotdivid = uuid.uuid4()
-    jdata = _json.dumps(figure.get('data', []), cls=utils.PlotlyJSONEncoder)
-    jlayout = _json.dumps(figure.get('layout', {}),
-                          cls=utils.PlotlyJSONEncoder)
-
-
-    if figure.get('frames', None):
-        jframes = _json.dumps(figure.get('frames', []),
-                              cls=utils.PlotlyJSONEncoder)
-    else:
-        jframes = None
-
-    jconfig = _json.dumps(_get_jconfig(config))
-    plotly_platform_url = plotly.plotly.get_config().get('plotly_domain',
-                                                         'https://plot.ly')
-                                                  
-    if jframes:
-        if auto_play:
-            print(plotdivid)
-            animate = (".then(function(){" +
-                       "Plotly.animate('{id}',null{opts});".format(id=plotdivid,
-                       opts=", "+ str(animation_opts) if animation_opts is not None else "") + #{frame: {duration: '{dr}'}}  , null, {traces: [0]}
-                       "})")
-
-        else:
-            animate = ''
-
-        script = '''
-    if (document.getElementById("{id}")) {{
-        Plotly.plot(
-            '{id}',
-            {data},
-            {layout},
-            {config}
-        ).then(function () {add_frames}){animate}
-    }}
-        '''.format(
-            id=plotdivid,
-            data=jdata,
-            layout=jlayout,
-            config=jconfig,
-            add_frames="{" + "return Plotly.addFrames('{id}',{frames}".format(
-                id=plotdivid, frames=jframes
-            ) + ");}",
-            animate=animate
-        )
-    else:
-        script = """
-if (document.getElementById("{id}")) {{
-    Plotly.newPlot("{id}", {data}, {layout}, {config});
-}}
-""".format(
-            id=plotdivid,
-            data=jdata,
-            layout=jlayout,
-            config=jconfig)
-
-    optional_line1 = ('require(["plotly"], function(Plotly) {{ '
-                      if global_requirejs else '')
-    optional_line2 = ('}});' if global_requirejs else '')
-
-    plotly_html_div = (
-        ''
-        '<div id="{id}" style="height: {height}; width: {width};" '
-        'class="plotly-graph-div">'
-        '</div>'
-        '<script type="text/javascript">' +
-        optional_line1 +
-        'window.PLOTLYENV=window.PLOTLYENV || {{}};'
-        'window.PLOTLYENV.BASE_URL="' + plotly_platform_url + '";'
-        '{script}' +
-        optional_line2 +
-        '</script>'
-        '').format(
-        id=plotdivid, script=script,
-        height=height, width=width)
-
-    return plotly_html_div, plotdivid, width, height
+    # Trigger immediate activation of notebook. This way the plotly.js
+    # library reference is available to the notebook immediately
+    pio.renderers._activate_pending_renderers()
 
 
 def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
           validate=True, image=None, filename='plot_image', image_width=800,
           image_height=600, config=None, auto_play=True, animation_opts=None):
     """
-    Draw plotly graphs inside an IPython or Jupyter notebook without
-    connecting to an external server.
-    To save the chart to Plotly Cloud or Plotly Enterprise, use
-    `plotly.plotly.iplot`.
-    To embed an image of the chart, use `plotly.image.ishow`.
+    Draw plotly graphs inside an IPython or Jupyter notebook
 
     figure_or_data -- a plotly.graph_objs.Figure or plotly.graph_objs.Data or
                       dict or list that describes a Plotly graph.
@@ -442,8 +317,8 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
         the format of the image to be downloaded, if we choose to download an
         image. This parameter has a default value of None indicating that no
         image should be downloaded. Please note: for higher resolution images
-        and more export options, consider making requests to our image servers.
-        Type: `help(py.image)` for more details.
+        and more export options, consider using plotly.io.write_image. See
+        https://plot.ly/python/static-image-export/ for more details.
     filename (default='plot') -- Sets the name of the file your image
         will be saved to. The extension should not be included.
     image_height (default=600) -- Specifies the height of the image in `px`.
@@ -454,7 +329,9 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
     auto_play (default=True) -- Whether to automatically start the animation
         sequence if the figure contains frames. Has no effect if the figure
         does not contain frames.
-
+    animation_opts (default=None) -- Custom animation parameters to be passed
+        to the function Plotly.animate in Plotly.js in the form str(dict)
+        
     Example:
     ```
     from plotly.offline import init_notebook_mode, iplot
@@ -464,9 +341,8 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
     format you want. e.g. `image='png'`
     iplot([{'x': [1, 2, 3], 'y': [5, 2, 7]}], image='png')
     ```
-    animation_opts (default=None) -- Custom animation parameters to be passed
-    to the function Plotly.animate in Plotly.js in the form str(dict)
-    Example:
+    
+    animation_opts Example:
     ```
     from plotly.offline import iplot
     figure = {'data': [{'x': [0, 1], 'y': [0, 1]}],
@@ -480,6 +356,8 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
     iplot(figure,animation_opts="{frame: {duration: 1}}")
     ```
     """
+    import plotly.io as pio
+
     if not ipython:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
@@ -487,64 +365,19 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
     config.setdefault('showLink', show_link)
     config.setdefault('linkText', link_text)
 
-    jconfig = _get_jconfig(config)
-
+    # Get figure
     figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
 
-    # Though it can add quite a bit to the display-bundle size, we include
-    # multiple representations of the plot so that the display environment can
-    # choose which one to act on.
-    data = _json.loads(_json.dumps(figure['data'],
-                                   cls=plotly.utils.PlotlyJSONEncoder))
-    layout = _json.loads(_json.dumps(figure.get('layout', {}),
-                                     cls=plotly.utils.PlotlyJSONEncoder))
-    frames = _json.loads(_json.dumps(figure.get('frames', None),
-                                     cls=plotly.utils.PlotlyJSONEncoder))
+    # Handle image request
+    post_script = build_save_image_post_script(
+        image, filename, image_height, image_width, 'iplot')
 
-    fig = {'data': data, 'layout': layout, 'config': jconfig}
-    if frames:
-        fig['frames'] = frames
-
-    display_bundle = {'application/vnd.plotly.v1+json': fig}
-
-    if __PLOTLY_OFFLINE_INITIALIZED:
-        plot_html, plotdivid, width, height = _plot_html(
-            figure_or_data, config, validate, '100%',
-            525, True, auto_play,animation_opts=animation_opts)
-        resize_script = ''
-        if width == '100%' or height == '100%':
-            resize_script = _build_resize_script(
-                plotdivid, 'window._Plotly')
-
-        display_bundle['text/html'] = plot_html + resize_script
-        display_bundle['text/vnd.plotly.v1+html'] = plot_html + resize_script
-
-    ipython_display.display(display_bundle, raw=True)
-
-    if image:
-        if not __PLOTLY_OFFLINE_INITIALIZED:
-            raise PlotlyError('\n'.join([
-                'Plotly Offline mode has not been initialized in this notebook. '
-                'Run: ',
-                '',
-                'import plotly',
-                'plotly.offline.init_notebook_mode() '
-                '# run at the start of every ipython notebook',
-            ]))
-        if image not in __IMAGE_FORMATS:
-            raise ValueError('The image parameter must be one of the following'
-                             ': {}'.format(__IMAGE_FORMATS)
-                             )
-        # if image is given, and is a valid format, we will download the image
-        script = get_image_download_script('iplot').format(format=image,
-                                                           width=image_width,
-                                                           height=image_height,
-                                                           filename=filename,
-                                                           plot_id=plotdivid)
-        # allow time for the plot to draw
-        time.sleep(1)
-        # inject code to download an image of the plot
-        ipython_display.display(ipython_display.HTML(script))
+    # Show figure
+    pio.show(figure,
+             validate=validate,
+             config=config,
+             auto_play=auto_play,
+             post_script=post_script)
 
 
 def plot(figure_or_data, show_link=False, link_text='Export to plot.ly',
@@ -680,6 +513,9 @@ def plot(figure_or_data, show_link=False, link_text='Export to plot.ly',
     plot(figure,animation_opts="{frame: {duration: 1}}")
     ```
     """
+    import plotly.io as pio
+
+    # Output type
     if output_type not in ['div', 'file']:
         raise ValueError(
             "`output_type` argument must be 'div' or 'file'. "
@@ -690,124 +526,45 @@ def plot(figure_or_data, show_link=False, link_text='Export to plot.ly',
             "Adding .html to the end of your file.")
         filename += '.html'
 
+    # Config
     config = dict(config) if config else {}
     config.setdefault('showLink', show_link)
     config.setdefault('linkText', link_text)
 
-    plot_html, plotdivid, width, height = _plot_html(
-        figure_or_data, config, validate,
-        '100%', '100%', global_requirejs=False,
-        auto_play=auto_play, animation_opts=animation_opts)
+    figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
+    width = figure.get('layout', {}).get('width', '100%')
+    height = figure.get('layout', {}).get('height', '100%')
 
-    # Build resize_script
-    resize_script = ''
     if width == '100%' or height == '100%':
-        resize_script = _build_resize_script(plotdivid)
+        config.setdefault('responsive', True)
 
-    # Process include_plotlyjs and build plotly_js_script
-    include_plotlyjs_orig = include_plotlyjs
-    if isinstance(include_plotlyjs, six.string_types):
-        include_plotlyjs = include_plotlyjs.lower()
-
-    if include_plotlyjs == 'cdn':
-        plotly_js_script = _window_plotly_config + """\
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>"""
-    elif include_plotlyjs == 'directory':
-        plotly_js_script = (_window_plotly_config +
-                            '<script src="plotly.min.js"></script>')
-    elif (isinstance(include_plotlyjs, six.string_types) and
-          include_plotlyjs.endswith('.js')):
-        plotly_js_script = (_window_plotly_config +
-                            '<script src="{url}"></script>'.format(
-                                url=include_plotlyjs_orig))
-    elif include_plotlyjs:
-        plotly_js_script = ''.join([
-            _window_plotly_config,
-            '<script type="text/javascript">',
-            get_plotlyjs(),
-            '</script>',
-        ])
-    else:
-        plotly_js_script = ''
-
-    # Process include_mathjax and build mathjax_script
-    include_mathjax_orig = include_mathjax
-    if isinstance(include_mathjax, six.string_types):
-        include_mathjax = include_mathjax.lower()
-
-    if include_mathjax == 'cdn':
-        mathjax_script = _build_mathjax_script(
-            url=('https://cdnjs.cloudflare.com'
-                 '/ajax/libs/mathjax/2.7.5/MathJax.js')) + _mathjax_config
-    elif (isinstance(include_mathjax, six.string_types) and
-          include_mathjax.endswith('.js')):
-        mathjax_script = _build_mathjax_script(
-            url=include_mathjax_orig) + _mathjax_config
-    elif not include_mathjax:
-        mathjax_script = ''
-    else:
-        raise ValueError("""\
-Invalid value of type {typ} received as the include_mathjax argument
-    Received value: {val}
-
-include_mathjax may be specified as False, 'cdn', or a string ending with '.js'
-""".format(typ=type(include_mathjax), val=repr(include_mathjax)))
+    # Handle image request
+    post_script = build_save_image_post_script(
+        image, image_filename, image_height, image_width, 'plot')
 
     if output_type == 'file':
-        with open(filename, 'w') as f:
-            if image:
-                if image not in __IMAGE_FORMATS:
-                    raise ValueError('The image parameter must be one of the '
-                                     'following: {}'.format(__IMAGE_FORMATS)
-                                     )
-                # if the check passes then download script is injected.
-                # write the download script:
-                script = get_image_download_script('plot')
-                script = script.format(format=image,
-                                       width=image_width,
-                                       height=image_height,
-                                       filename=image_filename,
-                                       plot_id=plotdivid)
-            else:
-                script = ''
-
-            f.write(''.join([
-                '<html>',
-                '<head><meta charset="utf-8" /></head>',
-                '<body>',
-                mathjax_script,
-                plotly_js_script,
-                plot_html,
-                resize_script,
-                script,
-                '</body>',
-                '</html>']))
-
-        # Check if we should copy plotly.min.js to output directory
-        if include_plotlyjs == 'directory':
-            bundle_path = os.path.join(
-                os.path.dirname(filename), 'plotly.min.js')
-
-            if not os.path.exists(bundle_path):
-                with open(bundle_path, 'w') as f:
-                    f.write(get_plotlyjs())
-
-        url = 'file://' + os.path.abspath(filename)
-        if auto_open:
-            webbrowser.open(url)
-
-        return url
-
-    elif output_type == 'div':
-
-        return ''.join([
-                '<div>',
-                mathjax_script,
-                plotly_js_script,
-                plot_html,
-                resize_script,
-                '</div>',
-            ])
+        pio.write_html(
+            figure,
+            filename,
+            config=config,
+            auto_play=auto_play,
+            include_plotlyjs=include_plotlyjs,
+            include_mathjax=include_mathjax,
+            post_script=post_script,
+            full_html=True,
+            validate=validate,
+            auto_open=auto_open)
+        return filename
+    else:
+        return pio.to_html(
+            figure,
+            config=config,
+            auto_play=auto_play,
+            include_plotlyjs=include_plotlyjs,
+            include_mathjax=include_mathjax,
+            post_script=post_script,
+            full_html=False,
+            validate=validate)
 
 
 def plot_mpl(mpl_fig, resize=False, strip_style=False,
