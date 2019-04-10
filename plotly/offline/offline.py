@@ -6,19 +6,13 @@
 from __future__ import absolute_import
 
 import os
-import uuid
 import warnings
 import pkgutil
-
-import json as _json
-# from requests.compat import json as _json
-
 import plotly
 import plotly.tools
 
 from plotly.optional_imports import get_module
-
-from _plotly_utils.utils import PlotlyJSONEncoder
+from plotly import tools
 from ._plotlyjs_version import __plotlyjs_version__
 
 
