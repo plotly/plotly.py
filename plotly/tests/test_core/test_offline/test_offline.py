@@ -36,10 +36,7 @@ fig_frames = {
 }
 
 
-resize_code_strings = [
-            'window.addEventListener("resize", ',
-            'Plotly.Plots.resize('
-        ]
+resize_code_strings = ['"responsive": true']
 
 
 PLOTLYJS = plotly.offline.get_plotlyjs()
@@ -67,6 +64,8 @@ mathjax_font = 'STIX-Web'
 add_frames = 'Plotly.addFrames'
 
 do_auto_play = 'Plotly.animate'
+
+download_image = 'Plotly.downloadImage'
 
 class PlotlyOfflineBaseTestCase(TestCase):
     def tearDown(self):
@@ -418,6 +417,18 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
         self.assertIn(do_auto_play, html)
 
     def test_no_auto_play(self):
-        html = plotly.offline.plot(fig_frames, output_type='div', auto_play=False)
+        html = plotly.offline.plot(
+            fig_frames, output_type='div',auto_play=False)
         self.assertIn(add_frames, html)
         self.assertNotIn(do_auto_play, html)
+
+    def test_download_image(self):
+        # Not download image by default
+        html = plotly.offline.plot(
+            fig_frames, output_type='div', auto_play=False)
+        self.assertNotIn(download_image, html)
+
+        # Request download image
+        html = plotly.offline.plot(
+            fig_frames, output_type='div', auto_play=False, image='png')
+        self.assertIn(download_image, html)

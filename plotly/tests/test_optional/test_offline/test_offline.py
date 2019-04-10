@@ -3,7 +3,7 @@ test__offline
 
 """
 from __future__ import absolute_import
-
+import re
 from nose.tools import raises
 from nose.plugins.attrib import attr
 from requests.compat import json as _json
@@ -31,10 +31,6 @@ class PlotlyOfflineTestCase(TestCase):
 
     def test_iplot_works_without_init_notebook_mode(self):
         plotly.offline.iplot([{}])
-
-    @raises(plotly.exceptions.PlotlyError)
-    def test_iplot_doesnt_work_before_you_call_init_notebook_mode_when_requesting_download(self):
-        plotly.offline.iplot([{}], image='png')
 
     def test_iplot_works_after_you_call_init_notebook_mode(self):
         plotly.offline.init_notebook_mode()
@@ -74,17 +70,25 @@ class PlotlyOfflineMPLTestCase(TestCase):
             y = [100, 200, 300]
             plt.plot(x, y)
 
-            figure = plotly.tools.mpl_to_plotly(fig)
+            figure = plotly.tools.mpl_to_plotly(fig).to_dict()
             data = figure['data']
+
             layout = figure['layout']
-            data_json = _json.dumps(data, cls=plotly.utils.PlotlyJSONEncoder)
-            layout_json = _json.dumps(layout, cls=plotly.utils.PlotlyJSONEncoder)
+            data_json = _json.dumps(
+                data, cls=plotly.utils.PlotlyJSONEncoder, sort_keys=True)
+            layout_json = _json.dumps(
+                layout, cls=plotly.utils.PlotlyJSONEncoder, sort_keys=True)
             html = self._read_html(plotly.offline.plot_mpl(fig))
+
+            # blank out uid before comparisons
+            data_json = re.sub('"uid": "[^"]+"', '"uid": ""', data_json)
+            html = re.sub('"uid": "[^"]+"', '"uid": ""', html)
 
             # just make sure a few of the parts are in here
             # like PlotlyOfflineTestCase(TestCase) in test_core
-            self.assertTrue(data_json.split('"uid":')[0] in html)  # data is in there
-            self.assertTrue(layout_json in html)        # layout is in there too
-            self.assertTrue(PLOTLYJS in html)         # and the source code
+            self.assertTrue(data_json in html)      # data is in there
+            self.assertTrue(layout_json in html)    # layout is in there too
+            self.assertTrue(PLOTLYJS in html)       # and the source code
             # and it's an <html> doc
-            self.assertTrue(html.startswith('<html>') and html.endswith('</html>'))
+            self.assertTrue(html.startswith('<html>')
+                            and html.endswith('</html>'))
