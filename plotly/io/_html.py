@@ -30,6 +30,7 @@ def to_html(fig,
             include_mathjax=False,
             post_script=None,
             full_html=True,
+            animation_opts=None,
             validate=True):
     """
     Convert a figure to an HTML string representation.
@@ -102,6 +103,12 @@ def to_html(fig,
         If True, produce a string containing a complete HTML document
         starting with an <html> tag.  If False, produce a string containing
         a single <div> element.
+    animation_opts: dict or None (default None)
+        dict of custom animation parameters to be passed to the function
+        Plotly.animate in Plotly.js. See
+        https://github.com/plotly/plotly.js/blob/master/src/plots/animation_attributes.js
+        for available options. Has no effect if the figure does not contain
+        frames, or auto_play is False.
     validate: bool (default True)
         True if the figure should be validated before being converted to
         JSON, False otherwise.
@@ -164,9 +171,14 @@ def to_html(fig,
                         }})""".format(id=plotdivid, frames=jframes)
 
         if auto_play:
+            if animation_opts:
+                animation_opts_arg = ', ' + json.dumps(animation_opts)
+            else:
+                animation_opts_arg = ''
             then_animate = """.then(function(){{
-                            Plotly.animate('{id}');
-                        }})""".format(id=plotdivid)
+                            Plotly.animate('{id}', null{animation_opts});
+                        }})""".format(id=plotdivid,
+                                      animation_opts=animation_opts_arg)
 
     script = """
                 if (document.getElementById("{id}")) {{
@@ -299,6 +311,7 @@ def write_html(fig,
                include_mathjax=False,
                post_script=None,
                full_html=True,
+               animation_opts=None,
                validate=True,
                auto_open=False):
     """
@@ -390,6 +403,12 @@ def write_html(fig,
         If True, produce a string containing a complete HTML document
         starting with an <html> tag.  If False, produce a string containing
         a single <div> element.
+    animation_opts: dict or None (default None)
+        dict of custom animation parameters to be passed to the function
+        Plotly.animate in Plotly.js. See
+        https://github.com/plotly/plotly.js/blob/master/src/plots/animation_attributes.js
+        for available options. Has no effect if the figure does not contain
+        frames, or auto_play is False.
     validate: bool (default True)
         True if the figure should be validated before being converted to
         JSON, False otherwise.
@@ -411,7 +430,8 @@ def write_html(fig,
         include_mathjax=include_mathjax,
         post_script=post_script,
         full_html=full_html,
-        validate=validate)
+        validate=validate,
+        animation_opts=animation_opts)
 
     # Check if file is a string
     file_is_str = isinstance(file, six.string_types)

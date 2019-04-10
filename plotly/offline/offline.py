@@ -294,7 +294,7 @@ def init_notebook_mode(connected=False):
 
 def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
           validate=True, image=None, filename='plot_image', image_width=800,
-          image_height=600, config=None, auto_play=True):
+          image_height=600, config=None, auto_play=True, animation_opts=None):
     """
     Draw plotly graphs inside an IPython or Jupyter notebook
 
@@ -329,6 +329,11 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
     auto_play (default=True) -- Whether to automatically start the animation
         sequence if the figure contains frames. Has no effect if the figure
         does not contain frames.
+    animation_opts (default=None) -- dict of custom animation parameters to be
+        passed to the function Plotly.animate in Plotly.js. See
+        https://github.com/plotly/plotly.js/blob/master/src/plots/animation_attributes.js
+        for available options.  Has no effect if the figure
+        does not contain frames, or auto_play is False.
 
     Example:
     ```
@@ -338,6 +343,20 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
     # We can also download an image of the plot by setting the image to the
     format you want. e.g. `image='png'`
     iplot([{'x': [1, 2, 3], 'y': [5, 2, 7]}], image='png')
+    ```
+
+    animation_opts Example:
+    ```
+    from plotly.offline import iplot
+    figure = {'data': [{'x': [0, 1], 'y': [0, 1]}],
+              'layout': {'xaxis': {'range': [0, 5], 'autorange': False},
+                         'yaxis': {'range': [0, 5], 'autorange': False},
+                         'title': 'Start Title'},
+              'frames': [{'data': [{'x': [1, 2], 'y': [1, 2]}]},
+                         {'data': [{'x': [1, 4], 'y': [1, 4]}]},
+                         {'data': [{'x': [3, 4], 'y': [3, 4]}],
+                          'layout': {'title': 'End Title'}}]}
+    iplot(figure,animation_opts="{frame: {duration: 1}}")
     ```
     """
     import plotly.io as pio
@@ -361,14 +380,16 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
              validate=validate,
              config=config,
              auto_play=auto_play,
-             post_script=post_script)
+             post_script=post_script,
+             animation_opts=animation_opts)
 
 
 def plot(figure_or_data, show_link=False, link_text='Export to plot.ly',
          validate=True, output_type='file', include_plotlyjs=True,
          filename='temp-plot.html', auto_open=True, image=None,
          image_filename='plot_image', image_width=800, image_height=600,
-         config=None, include_mathjax=False, auto_play=True):
+         config=None, include_mathjax=False, auto_play=True,
+         animation_opts=None):
     """ Create a plotly graph locally as an HTML document or string.
 
     Example:
@@ -481,6 +502,25 @@ def plot(figure_or_data, show_link=False, link_text='Export to plot.ly',
     auto_play (default=True) -- Whether to automatically start the animation
         sequence on page load if the figure contains frames. Has no effect if
         the figure does not contain frames.
+    animation_opts (default=None) -- dict of custom animation parameters to be
+        passed to the function Plotly.animate in Plotly.js. See
+        https://github.com/plotly/plotly.js/blob/master/src/plots/animation_attributes.js
+        for available options. Has no effect if the figure does not contain
+        frames, or auto_play is False.
+
+    Example:
+    ```
+    from plotly.offline import plot
+    figure = {'data': [{'x': [0, 1], 'y': [0, 1]}],
+              'layout': {'xaxis': {'range': [0, 5], 'autorange': False},
+                         'yaxis': {'range': [0, 5], 'autorange': False},
+                         'title': 'Start Title'},
+              'frames': [{'data': [{'x': [1, 2], 'y': [1, 2]}]},
+                         {'data': [{'x': [1, 4], 'y': [1, 4]}]},
+                         {'data': [{'x': [3, 4], 'y': [3, 4]}],
+                          'layout': {'title': 'End Title'}}]}
+    plot(figure,animation_opts="{frame: {duration: 1}}")
+    ```
     """
     import plotly.io as pio
 
@@ -522,6 +562,7 @@ def plot(figure_or_data, show_link=False, link_text='Export to plot.ly',
             post_script=post_script,
             full_html=True,
             validate=validate,
+            animation_opts=animation_opts,
             auto_open=auto_open)
         return filename
     else:
@@ -533,7 +574,8 @@ def plot(figure_or_data, show_link=False, link_text='Export to plot.ly',
             include_mathjax=include_mathjax,
             post_script=post_script,
             full_html=False,
-            validate=validate)
+            validate=validate,
+            animation_opts=animation_opts)
 
 
 def plot_mpl(mpl_fig, resize=False, strip_style=False,
