@@ -8,6 +8,11 @@ import pytz
 from _plotly_utils.optional_imports import get_module
 
 
+PY36_OR_LATER = (
+    sys.version_info.major == 3 and sys.version_info.minor >= 6
+)
+
+
 class PlotlyJSONEncoder(_json.JSONEncoder):
     """
     Meant to be passed as the `cls` kwarg to json.dumps(obj, cls=..)
@@ -167,10 +172,10 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
     @staticmethod
     def encode_as_datetime(obj):
         """Attempt to convert to utc-iso time string using datetime methods."""
-        # In PY36, isoformat() converts UTC
+        # Since PY36, isoformat() converts UTC
         # datetime.datetime objs to UTC T04:00:00
-        if not (PY36 and (isinstance(obj, datetime.datetime) and
-                obj.tzinfo is None)):
+        if not (PY36_OR_LATER and (isinstance(obj, datetime.datetime) and
+                                   obj.tzinfo is None)):
             try:
                 obj = obj.astimezone(pytz.utc)
             except ValueError:
@@ -228,11 +233,6 @@ def iso_to_plotly_time_string(iso_string):
         return iso_string.replace('T00:00:00', '')
     else:
         return iso_string.replace('T', ' ')
-
-
-PY36 = (
-    sys.version_info.major == 3 and sys.version_info.minor == 6
-)
 
 
 def template_doc(**names):

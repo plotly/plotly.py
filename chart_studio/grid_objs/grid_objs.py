@@ -14,10 +14,8 @@ except ImportError:
 
 from requests.compat import json as _json
 
-from plotly import optional_imports
+from _plotly_utils.optional_imports import get_module
 from chart_studio import utils, exceptions
-
-pd = optional_imports.get_module('pandas')
 
 __all__ = None
 
@@ -156,6 +154,7 @@ class Grid(MutableSequence):
         ```
         """
         # TODO: verify that columns are actually columns
+        pd = get_module('pandas')
         if pd and isinstance(columns_or_json, pd.DataFrame):
             duplicate_name = utils.get_first_duplicate(columns_or_json.columns)
             if duplicate_name:

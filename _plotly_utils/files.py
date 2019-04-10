@@ -8,13 +8,21 @@ TEST_FILE = os.path.join(PLOTLY_DIR, ".permission_test")
 def _permissions():
     try:
         if not os.path.exists(PLOTLY_DIR):
-            os.mkdir(PLOTLY_DIR)
+            try:
+                os.mkdir(PLOTLY_DIR)
+            except Exception:
+                # in case of race
+                if not os.path.isdir(PLOTLY_DIR):
+                    raise
         with open(TEST_FILE, 'w') as f:
             f.write('testing\n')
-        os.remove(TEST_FILE)
+        try:
+            os.remove(TEST_FILE)
+        except Exception:
+            pass
         return True
-    except:
-        return False
+    except Exception: # Do not trap KeyboardInterrupt.
+        return Falseq
 
 
 _file_permissions = None

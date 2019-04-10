@@ -11,7 +11,6 @@ import numpy as np
 import plotly.graph_objs as go
 import plotly.io as pio
 from plotly.offline import get_plotlyjs
-from plotly.tools import get_config_plotly_server_url
 
 if sys.version_info.major == 3 and sys.version_info.minor >= 3:
     import unittest.mock as mock
@@ -35,7 +34,8 @@ def fig1(request):
 # ----
 def test_json_renderer_mimetype(fig1):
     pio.renderers.default = 'json'
-    expected = {'application/json': json.loads(pio.to_json(fig1))}
+    expected = {'application/json': json.loads(
+        pio.to_json(fig1, remove_uids=False))}
 
     pio.renderers.render_on_display = False
     assert fig1._repr_mimebundle_(None, None) is None
@@ -47,7 +47,8 @@ def test_json_renderer_mimetype(fig1):
 
 def test_json_renderer_show(fig1):
     pio.renderers.default = 'json'
-    expected_bundle = {'application/json': json.loads(pio.to_json(fig1))}
+    expected_bundle = {'application/json': json.loads(
+        pio.to_json(fig1, remove_uids=False))}
 
     with mock.patch('IPython.display.display') as mock_display:
         pio.show(fig1)
@@ -57,7 +58,8 @@ def test_json_renderer_show(fig1):
 
 def test_json_renderer_show_override(fig1):
     pio.renderers.default = 'notebook'
-    expected_bundle = {'application/json': json.loads(pio.to_json(fig1))}
+    expected_bundle = {'application/json': json.loads(
+        pio.to_json(fig1, remove_uids=False))}
 
     with mock.patch('IPython.display.display') as mock_display:
         pio.show(fig1, renderer='json')
@@ -79,7 +81,7 @@ def test_plotly_mimetype_renderer_mimetype(fig1, renderer):
         pio.to_json(fig1, remove_uids=False))}
 
     expected[plotly_mimetype]['config'] = {
-        'plotlyServerURL': get_config_plotly_server_url()}
+        'plotlyServerURL': 'https://plot.ly'}
 
     pio.renderers.render_on_display = False
     assert fig1._repr_mimebundle_(None, None) is None
@@ -96,7 +98,7 @@ def test_plotly_mimetype_renderer_show(fig1, renderer):
         pio.to_json(fig1, remove_uids=False))}
 
     expected[plotly_mimetype]['config'] = {
-        'plotlyServerURL': get_config_plotly_server_url()}
+        'plotlyServerURL': 'https://plot.ly'}
 
     with mock.patch('IPython.display.display') as mock_display:
         pio.show(fig1)

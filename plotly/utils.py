@@ -5,8 +5,7 @@ from collections import deque
 from pprint import PrettyPrinter
 
 from decorator import decorator
-
-from plotly.optional_imports import get_module
+from _plotly_utils.utils import *
 
 
 # Pretty printing

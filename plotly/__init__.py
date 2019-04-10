@@ -55,4 +55,5 @@ if ('extract_chart_studio' not in _future_flags
 
 # Set default template here to make sure import process is complete
 if 'template_defaults' in _future_flags:
+    # Set _default to skip validation
     io.templates._default = 'plotly'

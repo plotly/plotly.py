@@ -92,9 +92,12 @@ Renderer must be a subclass of MimetypeRenderer or ExternalRenderer.
         """
         The default renderer, or None if no there is no default
 
-        If not None, the default renderer is automatically used to render
-        figures when they are displayed in a jupyter notebook or when using
-        the plotly.io.show function
+        If not None, the default renderer is used to render
+        figures when the `plotly.io.show` function is called on a Figure.
+
+        If `plotly.io.renderers.render_on_display` is True, then the default
+        renderer will also be used to display Figures automatically when
+        displayed in the Jupyter Notebook
 
         Multiple renderers may be registered by separating their names with
         '+' characters. For example, to specify rendering compatible with
@@ -103,7 +106,7 @@ Renderer must be a subclass of MimetypeRenderer or ExternalRenderer.
         >>> import plotly.io as pio
         >>> pio.renderers.default = 'notebook+jupyterlab+pdf'
 
-        The names of available templates may be retrieved with:
+        The names of available renderers may be retrieved with:
 
         >>> import plotly.io as pio
         >>> list(pio.renderers)
@@ -146,10 +149,7 @@ Renderer must be a subclass of MimetypeRenderer or ExternalRenderer.
 
     @render_on_display.setter
     def render_on_display(self, val):
-        if val:
-            self._render_on_display = True
-        else:
-            self._render_on_display = False
+        self._render_on_display = bool(val)
 
     def _activate_pending_renderers(self, cls=object):
         """
@@ -206,9 +206,9 @@ Renderers configuration
     Available renderers:
 {available}
 """.format(default=repr(self.default),
-           available=self._available_templates_str())
+           available=self._available_renderers_str())
 
-    def _available_templates_str(self):
+    def _available_renderers_str(self):
         """
         Return nicely wrapped string representation of all
         available renderer names
@@ -397,8 +397,8 @@ renderers['iframe'] = IFrameRenderer(config=config)
 
 # Set default renderer
 # --------------------
-# This will change to renderers.set_v4_defaults() in version 4.0
 if 'renderer_defaults' in _future_flags:
+    # Version 4 renderer configuration
     default_renderer = None
 
     # Try to detect environment so that we can enable a useful
@@ -439,5 +439,6 @@ if 'renderer_defaults' in _future_flags:
     renderers.render_on_display = True
     renderers.default = default_renderer
 else:
+    # Version 3 defaults
     renderers.render_on_display = False
     renderers.default = 'plotly_mimetype'

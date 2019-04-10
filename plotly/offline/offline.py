@@ -233,11 +233,8 @@ def build_save_image_post_script(
             raise ValueError('The image parameter must be one of the '
                              'following: {}'.format(__IMAGE_FORMATS)
                              )
-        # if the check passes then download script is injected.
-        # write the download script:
-        script = get_image_download_script(caller)
 
-        # Replace none's with nulls
+        script = get_image_download_script(caller)
         post_script = script.format(
             format=image,
             width=image_width,
@@ -285,16 +282,16 @@ def init_notebook_mode(connected=False):
     else:
         pio.renderers.default = 'notebook+plotly_mimetype'
 
+    # Trigger immediate activation of notebook. This way the plotly.js
+    # library reference is available to the notebook immediately
+    pio.renderers._activate_pending_renderers()
+
 
 def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
           validate=True, image=None, filename='plot_image', image_width=800,
-          image_height=600, config=None, auto_play=True):
+          image_height=600, config=None, auto_play=True, animation_opts=None):
     """
-    Draw plotly graphs inside an IPython or Jupyter notebook without
-    connecting to an external server.
-    To save the chart to Plotly Cloud or Plotly Enterprise, use
-    `plotly.plotly.iplot`.
-    To embed an image of the chart, use `plotly.image.ishow`.
+    Draw plotly graphs inside an IPython or Jupyter notebook
 
     figure_or_data -- a plotly.graph_objs.Figure or plotly.graph_objs.Data or
                       dict or list that describes a Plotly graph.
@@ -315,8 +312,8 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
         the format of the image to be downloaded, if we choose to download an
         image. This parameter has a default value of None indicating that no
         image should be downloaded. Please note: for higher resolution images
-        and more export options, consider making requests to our image servers.
-        Type: `help(py.image)` for more details.
+        and more export options, consider using plotly.io.write_image. See
+        https://plot.ly/python/static-image-export/ for more details.
     filename (default='plot') -- Sets the name of the file your image
         will be saved to. The extension should not be included.
     image_height (default=600) -- Specifies the height of the image in `px`.
@@ -327,6 +324,11 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
     auto_play (default=True) -- Whether to automatically start the animation
         sequence if the figure contains frames. Has no effect if the figure
         does not contain frames.
+    animation_opts (default=None) -- dict of custom animation parameters to be
+        passed to the function Plotly.animate in Plotly.js. See
+        https://github.com/plotly/plotly.js/blob/master/src/plots/animation_attributes.js
+        for available options.  Has no effect if the figure
+        does not contain frames, or auto_play is False.
 
     Example:
     ```
@@ -336,6 +338,20 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
     # We can also download an image of the plot by setting the image to the
     format you want. e.g. `image='png'`
     iplot([{'x': [1, 2, 3], 'y': [5, 2, 7]}], image='png')
+    ```
+
+    animation_opts Example:
+    ```
+    from plotly.offline import iplot
+    figure = {'data': [{'x': [0, 1], 'y': [0, 1]}],
+              'layout': {'xaxis': {'range': [0, 5], 'autorange': False},
+                         'yaxis': {'range': [0, 5], 'autorange': False},
+                         'title': 'Start Title'},
+              'frames': [{'data': [{'x': [1, 2], 'y': [1, 2]}]},
+                         {'data': [{'x': [1, 4], 'y': [1, 4]}]},
+                         {'data': [{'x': [3, 4], 'y': [3, 4]}],
+                          'layout': {'title': 'End Title'}}]}
+    iplot(figure,animation_opts="{frame: {duration: 1}}")
     ```
     """
     import plotly.io as pio
@@ -355,7 +371,7 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
     config.setdefault('linkText', link_text)
 
     # Get figure
-    figure = plotly.tools.return_figure_from_figure_or_data(figure_or_data, validate)
+    figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
 
     # Handle image request
     post_script = build_save_image_post_script(
@@ -366,14 +382,16 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
              validate=validate,
              config=config,
              auto_play=auto_play,
-             post_script=post_script)
+             post_script=post_script,
+             animation_opts=animation_opts)
 
 
 def plot(figure_or_data, show_link=False, link_text='Export to plot.ly',
          validate=True, output_type='file', include_plotlyjs=True,
          filename='temp-plot.html', auto_open=True, image=None,
          image_filename='plot_image', image_width=800, image_height=600,
-         config=None, include_mathjax=False, auto_play=True):
+         config=None, include_mathjax=False, auto_play=True,
+         animation_opts=None):
     """ Create a plotly graph locally as an HTML document or string.
 
     Example:
@@ -486,6 +504,25 @@ def plot(figure_or_data, show_link=False, link_text='Export to plot.ly',
     auto_play (default=True) -- Whether to automatically start the animation
         sequence on page load if the figure contains frames. Has no effect if
         the figure does not contain frames.
+    animation_opts (default=None) -- dict of custom animation parameters to be
+        passed to the function Plotly.animate in Plotly.js. See
+        https://github.com/plotly/plotly.js/blob/master/src/plots/animation_attributes.js
+        for available options. Has no effect if the figure does not contain
+        frames, or auto_play is False.
+
+    Example:
+    ```
+    from plotly.offline import plot
+    figure = {'data': [{'x': [0, 1], 'y': [0, 1]}],
+              'layout': {'xaxis': {'range': [0, 5], 'autorange': False},
+                         'yaxis': {'range': [0, 5], 'autorange': False},
+                         'title': 'Start Title'},
+              'frames': [{'data': [{'x': [1, 2], 'y': [1, 2]}]},
+                         {'data': [{'x': [1, 4], 'y': [1, 4]}]},
+                         {'data': [{'x': [3, 4], 'y': [3, 4]}],
+                          'layout': {'title': 'End Title'}}]}
+    plot(figure,animation_opts="{frame: {duration: 1}}")
+    ```
     """
     import plotly.io as pio
 
@@ -500,18 +537,12 @@ def plot(figure_or_data, show_link=False, link_text='Export to plot.ly',
             "Adding .html to the end of your file.")
         filename += '.html'
 
-    # Deprecations
-    if image:
-        warnings.warn("""
-Image export using plotly.offline.plot is no longer supported.
-    Please use plotly.io.write_image instead""", DeprecationWarning)
-
     # Config
     config = dict(config) if config else {}
     config.setdefault('showLink', show_link)
     config.setdefault('linkText', link_text)
 
-    figure = plotly.tools.return_figure_from_figure_or_data(figure_or_data, validate)
+    figure = tools.return_figure_from_figure_or_data(figure_or_data, validate)
     width = figure.get('layout', {}).get('width', '100%')
     height = figure.get('layout', {}).get('height', '100%')
 
@@ -533,6 +564,7 @@ Image export using plotly.offline.plot is no longer supported.
             post_script=post_script,
             full_html=True,
             validate=validate,
+            animation_opts=animation_opts,
             auto_open=auto_open)
         return filename
     else:
@@ -544,7 +576,8 @@ Image export using plotly.offline.plot is no longer supported.
             include_mathjax=include_mathjax,
             post_script=post_script,
             full_html=False,
-            validate=validate)
+            validate=validate,
+            animation_opts=animation_opts)
 
 
 def plot_mpl(mpl_fig, resize=False, strip_style=False,

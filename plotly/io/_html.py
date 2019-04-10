@@ -6,6 +6,9 @@ import webbrowser
 import six
 
 from plotly.io._utils import validate_coerce_fig_to_dict
+from plotly.offline.offline import _get_jconfig, get_plotlyjs
+from plotly import utils
+
 
 # Build script to set global PlotlyConfig object. This must execute before
 # plotly.js is loaded.
@@ -27,6 +30,7 @@ def to_html(fig,
             include_mathjax=False,
             post_script=None,
             full_html=True,
+            animation_opts=None,
             validate=True):
     """
     Convert a figure to an HTML string representation.
@@ -99,6 +103,12 @@ def to_html(fig,
         If True, produce a string containing a complete HTML document
         starting with an <html> tag.  If False, produce a string containing
         a single <div> element.
+    animation_opts: dict or None (default None)
+        dict of custom animation parameters to be passed to the function
+        Plotly.animate in Plotly.js. See
+        https://github.com/plotly/plotly.js/blob/master/src/plots/animation_attributes.js
+        for available options. Has no effect if the figure does not contain
+        frames, or auto_play is False.
     validate: bool (default True)
         True if the figure should be validated before being converted to
         JSON, False otherwise.
@@ -115,21 +125,22 @@ def to_html(fig,
     plotdivid = str(uuid.uuid4())
 
     # ## Serialize figure ##
-    from _plotly_utils.utils import PlotlyJSONEncoder
-    opts = {'cls': PlotlyJSONEncoder, 'sort_keys': True}
     jdata = json.dumps(
-        fig_dict.get('data', []), **opts)
+        fig_dict.get('data', []),
+        cls=utils.PlotlyJSONEncoder,
+        sort_keys=True)
     jlayout = json.dumps(
-        fig_dict.get('layout', {}), **opts)
+        fig_dict.get('layout', {}),
+        cls=utils.PlotlyJSONEncoder,
+        sort_keys=True)
 
     if fig_dict.get('frames', None):
         jframes = json.dumps(
-            fig_dict.get('frames', []), **opts)
+            fig_dict.get('frames', []), cls=utils.PlotlyJSONEncoder)
     else:
         jframes = None
 
     # ## Serialize figure config ##
-    from plotly.offline.offline import _get_jconfig
     config = _get_jconfig(config)
 
     # Check whether we should add responsive
@@ -137,7 +148,7 @@ def to_html(fig,
     if layout_dict.get('width', None) is None:
         config.setdefault('responsive', True)
 
-    jconfig = json.dumps(config, **opts)
+    jconfig = json.dumps(config)
 
     # ## Get platform URL ##
     plotly_platform_url = config.get('plotlyServerURL', 'https://plot.ly')
@@ -152,47 +163,39 @@ def to_html(fig,
     else:
         then_post_script = ''
 
+    then_addframes = ''
+    then_animate = ''
     if jframes:
-        if auto_play:
-            then_animate = """.then(function(){{
-                            Plotly.animate('{id}');
-                        }}""".format(id=plotdivid)
-        else:
-            then_animate = ''
+        then_addframes = """.then(function(){{
+                            Plotly.addFrames('{id}', {frames});
+                        }})""".format(id=plotdivid, frames=jframes)
 
-        script = '''
-                    if (document.getElementById("{id}")) {{
-                        Plotly.plot(
-                            '{id}',
-                            {data},
-                            {layout},
-                            {config}
-                        ).then(function () {add_frames})\
-    {then_animate}{then_post_script}
-                    }}
-                        '''.format(
-            id=plotdivid,
-            data=jdata,
-            layout=jlayout,
-            config=jconfig,
-            add_frames="{" + "return Plotly.addFrames('{id}',{frames}".format(
-                id=plotdivid, frames=jframes
-            ) + ");}",
-            then_animate=then_animate,
-            then_post_script=then_post_script
-        )
-    else:
-        script = """
+        if auto_play:
+            if animation_opts:
+                animation_opts_arg = ', ' + json.dumps(animation_opts)
+            else:
+                animation_opts_arg = ''
+            then_animate = """.then(function(){{
+                            Plotly.animate('{id}', null{animation_opts});
+                        }})""".format(id=plotdivid,
+                                      animation_opts=animation_opts_arg)
+
+    script = """
                 if (document.getElementById("{id}")) {{
-                    Plotly.newPlot("{id}", {data}, {layout}, {config})\
-    {then_post_script}
-                }}
-                """.format(
-            id=plotdivid,
-            data=jdata,
-            layout=jlayout,
-            config=jconfig,
-            then_post_script=then_post_script)
+                    Plotly.newPlot(
+                        '{id}',
+                        {data},
+                        {layout},
+                        {config}
+                    ){then_addframes}{then_animate}{then_post_script}
+                }}""".format(
+        id=plotdivid,
+        data=jdata,
+        layout=jlayout,
+        config=jconfig,
+        then_addframes=then_addframes,
+        then_animate=then_animate,
+        then_post_script=then_post_script)
 
     # ## Handle loading/initializing plotly.js ##
     include_plotlyjs_orig = include_plotlyjs
@@ -233,7 +236,6 @@ def to_html(fig,
                url=include_plotlyjs_orig)
 
     elif include_plotlyjs:
-        from plotly.offline.offline import get_plotlyjs
         load_plotlyjs = """\
         {win_config}
         <script type="text/javascript">{plotlyjs}</script>\
@@ -262,10 +264,10 @@ def to_html(fig,
         mathjax_script = ''
     else:
         raise ValueError("""\
-    Invalid value of type {typ} received as the include_mathjax argument
-        Received value: {val}
+Invalid value of type {typ} received as the include_mathjax argument
+    Received value: {val}
 
-    include_mathjax may be specified as False, 'cdn', or a string ending with '.js' 
+include_mathjax may be specified as False, 'cdn', or a string ending with '.js' 
     """.format(typ=type(include_mathjax), val=repr(include_mathjax)))
 
     plotly_html_div = """\
@@ -309,6 +311,7 @@ def write_html(fig,
                include_mathjax=False,
                post_script=None,
                full_html=True,
+               animation_opts=None,
                validate=True,
                auto_open=False):
     """
@@ -400,6 +403,12 @@ def write_html(fig,
         If True, produce a string containing a complete HTML document
         starting with an <html> tag.  If False, produce a string containing
         a single <div> element.
+    animation_opts: dict or None (default None)
+        dict of custom animation parameters to be passed to the function
+        Plotly.animate in Plotly.js. See
+        https://github.com/plotly/plotly.js/blob/master/src/plots/animation_attributes.js
+        for available options. Has no effect if the figure does not contain
+        frames, or auto_play is False.
     validate: bool (default True)
         True if the figure should be validated before being converted to
         JSON, False otherwise.
@@ -421,7 +430,8 @@ def write_html(fig,
         include_mathjax=include_mathjax,
         post_script=post_script,
         full_html=full_html,
-        validate=validate)
+        validate=validate,
+        animation_opts=animation_opts)
 
     # Check if file is a string
     file_is_str = isinstance(file, six.string_types)
@@ -439,7 +449,6 @@ def write_html(fig,
             os.path.dirname(file), 'plotly.min.js')
 
         if not os.path.exists(bundle_path):
-            from plotly.offline.offline import get_plotlyjs
             with open(bundle_path, 'w') as f:
                 f.write(get_plotlyjs())
 

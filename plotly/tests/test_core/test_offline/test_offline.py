@@ -420,9 +420,28 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
 
     def test_no_auto_play(self):
         html = plotly.offline.plot(
-            fig_frames, output_type='div',auto_play=False)
+            fig_frames, output_type='div', auto_play=False)
         self.assertIn(add_frames, html)
         self.assertNotIn(do_auto_play, html)
+
+    def test_animation_opts(self):
+        animation_opts = {'frame': {'duration': 5000}}
+        expected_opts_str = json.dumps(animation_opts)
+
+        # When auto_play is False, animation options are skipped
+        html = plotly.offline.plot(
+            fig_frames, output_type='div', auto_play=False, animation_opts=animation_opts)
+        self.assertIn(add_frames, html)
+        self.assertNotIn(do_auto_play, html)
+        self.assertNotIn(expected_opts_str, html)
+
+        # When auto_play is True, animation options are included
+        html = plotly.offline.plot(
+            fig_frames, output_type='div', auto_play=True,
+            animation_opts=animation_opts)
+        self.assertIn(add_frames, html)
+        self.assertIn(do_auto_play, html)
+        self.assertIn(expected_opts_str, html)
 
     def test_download_image(self):
         # Not download image by default

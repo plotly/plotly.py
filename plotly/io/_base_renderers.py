@@ -6,9 +6,9 @@ import os
 
 import six
 from plotly.io import to_json, to_image
-from plotly import optional_imports
-
+from plotly import utils, optional_imports
 from plotly.io._orca import ensure_server
+from plotly.offline.offline import _get_jconfig, get_plotlyjs
 
 ipython_display = optional_imports.get_module('IPython.display')
 IPython = optional_imports.get_module('IPython')
@@ -20,10 +20,13 @@ except ImportError:
     from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 
 
-class RendererRepr(object):
+class BaseRenderer(object):
     """
-    A mixin implementing a simple __repr__ for Renderer classes
+    Base class for all renderers
     """
+    def activate(self):
+        pass
+
     def __repr__(self):
         try:
             init_sig = inspect.signature(self.__init__)
@@ -44,13 +47,10 @@ class RendererRepr(object):
         return hash(repr(self))
 
 
-class MimetypeRenderer(RendererRepr):
+class MimetypeRenderer(BaseRenderer):
     """
     Base class for all mime type renderers
     """
-    def activate(self):
-        pass
-
     def to_mimebundle(self, fig_dict):
         raise NotImplementedError()
 
@@ -63,7 +63,8 @@ class JsonRenderer(MimetypeRenderer):
     mime type: 'application/json'
     """
     def to_mimebundle(self, fig_dict):
-        value = json.loads(to_json(fig_dict))
+        value = json.loads(to_json(
+            fig_dict, validate=False, remove_uids=False))
         return {'application/json': value}
 
 
@@ -77,10 +78,9 @@ class PlotlyRenderer(MimetypeRenderer):
     mime type: 'application/vnd.plotly.v1+json'
     """
     def __init__(self, config=None):
-        self.config = config
+        self.config = dict(config) if config else {}
 
     def to_mimebundle(self, fig_dict):
-        from plotly.offline.offline import _get_jconfig
         config = _get_jconfig(self.config)
         if config:
             fig_dict['config'] = config
@@ -229,7 +229,8 @@ class HtmlRenderer(MimetypeRenderer):
                  global_init=False,
                  config=None,
                  auto_play=False,
-                 post_script=None):
+                 post_script=None,
+                 animation_opts=None):
 
         self.config = dict(config) if config else {}
         self.auto_play = auto_play
@@ -238,6 +239,7 @@ class HtmlRenderer(MimetypeRenderer):
         self.requirejs = requirejs
         self.full_html = full_html
         self.post_script = post_script
+        self.animation_opts = animation_opts
 
     def activate(self):
         if self.global_init:
@@ -272,7 +274,6 @@ class HtmlRenderer(MimetypeRenderer):
                    mathjax_config=_mathjax_config)
 
             else:
-                from plotly.offline.offline import get_plotlyjs
                 # If not connected then we embed a copy of the plotly.js
                 # library in the notebook
                 script = """\
@@ -316,7 +317,8 @@ class HtmlRenderer(MimetypeRenderer):
             include_plotlyjs=include_plotlyjs,
             include_mathjax=include_mathjax,
             post_script=self.post_script,
-            full_html=self.full_html)
+            full_html=self.full_html,
+            animation_opts=self.animation_opts)
 
         return {'text/html': html}
 
@@ -337,7 +339,8 @@ class NotebookRenderer(HtmlRenderer):
                  connected=False,
                  config=None,
                  auto_play=False,
-                 post_script=None):
+                 post_script=None,
+                 animation_opts=None):
         super(NotebookRenderer, self).__init__(
             connected=connected,
             full_html=False,
@@ -345,7 +348,8 @@ class NotebookRenderer(HtmlRenderer):
             global_init=True,
             config=config,
             auto_play=auto_play,
-            post_script=post_script)
+            post_script=post_script,
+            animation_opts=animation_opts)
 
 
 class KaggleRenderer(HtmlRenderer):
@@ -359,7 +363,12 @@ class KaggleRenderer(HtmlRenderer):
 
     mime type: 'text/html'
     """
-    def __init__(self, config=None, auto_play=False, post_script=None):
+    def __init__(self,
+                 config=None,
+                 auto_play=False,
+                 post_script=None,
+                 animation_opts=None):
+
         super(KaggleRenderer, self).__init__(
             connected=True,
             full_html=False,
@@ -367,7 +376,8 @@ class KaggleRenderer(HtmlRenderer):
             global_init=True,
             config=config,
             auto_play=auto_play,
-            post_script=post_script)
+            post_script=post_script,
+            animation_opts=animation_opts)
 
 
 class ColabRenderer(HtmlRenderer):
@@ -378,7 +388,12 @@ class ColabRenderer(HtmlRenderer):
 
     mime type: 'text/html'
     """
-    def __init__(self, config=None, auto_play=False, post_script=None):
+    def __init__(self,
+                 config=None,
+                 auto_play=False,
+                 post_script=None,
+                 animation_opts=None):
+
         super(ColabRenderer, self).__init__(
             connected=True,
             full_html=True,
@@ -386,7 +401,8 @@ class ColabRenderer(HtmlRenderer):
             global_init=False,
             config=config,
             auto_play=auto_play,
-            post_script=post_script)
+            post_script=post_script,
+            animation_opts=animation_opts)
 
 
 class IFrameRenderer(MimetypeRenderer):
@@ -415,11 +431,13 @@ class IFrameRenderer(MimetypeRenderer):
     def __init__(self,
                  config=None,
                  auto_play=False,
-                 post_script=None):
+                 post_script=None,
+                 animation_opts=None):
 
         self.config = config
         self.auto_play = auto_play
         self.post_script = post_script
+        self.animation_opts = animation_opts
 
     def to_mimebundle(self, fig_dict):
         from plotly.io import write_html
@@ -458,6 +476,7 @@ class IFrameRenderer(MimetypeRenderer):
                    include_mathjax='cdn',
                    auto_open=False,
                    post_script=self.post_script,
+                   animation_opts=self.animation_opts,
                    validate=False)
 
         # Build IFrame
@@ -474,7 +493,7 @@ class IFrameRenderer(MimetypeRenderer):
         return {'text/html': iframe_html}
 
 
-class ExternalRenderer(RendererRepr):
+class ExternalRenderer(BaseRenderer):
     """
     Base class for external renderers.  ExternalRenderer subclasses
     do not display figures inline in a notebook environment, but render
@@ -485,8 +504,6 @@ class ExternalRenderer(RendererRepr):
     Instead, they are invoked when the plotly.io.show function is called
     on a figure.
     """
-    def activate(self):
-        pass
 
     def render(self, fig):
         raise NotImplementedError()
@@ -496,7 +513,7 @@ def open_html_in_browser(html, using=None, new=0, autoraise=True):
     """
     Display html in a web browser without creating a temp file.
 
-    Instantiates a trivial http server and uses the webbrowser modeul to
+    Instantiates a trivial http server and uses the webbrowser module to
     open a URL to retrieve html from that server.
 
     Parameters
@@ -550,7 +567,8 @@ class BrowserRenderer(ExternalRenderer):
                  using=None,
                  new=0,
                  autoraise=True,
-                 post_script=None):
+                 post_script=None,
+                 animation_opts=None):
 
         self.config = config
         self.auto_play = auto_play
@@ -558,6 +576,7 @@ class BrowserRenderer(ExternalRenderer):
         self.new = new
         self.autoraise = autoraise
         self.post_script = post_script
+        self.animation_opts = animation_opts
 
     def render(self, fig_dict):
         renderer = HtmlRenderer(
@@ -567,7 +586,8 @@ class BrowserRenderer(ExternalRenderer):
             global_init=False,
             config=self.config,
             auto_play=self.auto_play,
-            post_script=self.post_script)
+            post_script=self.post_script,
+            animation_opts=self.animation_opts)
 
         bundle = renderer.to_mimebundle(fig_dict)
         html = bundle['text/html']
