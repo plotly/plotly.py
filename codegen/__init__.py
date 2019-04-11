@@ -173,7 +173,7 @@ def perform_codegen():
     for node in compound_frame_nodes:
         write_datatype_py(outdir, node)
 
-    # ## Deprecated ###
+    # ### Deprecated ###
     # These are deprecated legacy datatypes like graph_objs.Marker
     write_deprecated_datatypes(outdir)
 
@@ -232,8 +232,7 @@ except ImportError:
     # ### Output datatype __init__.py files ###
     graph_objs_pkg = opath.join(outdir, 'graph_objs')
     for path_parts, import_pairs in path_to_datatype_import_info.items():
-        write_init_py(
-            graph_objs_pkg, path_parts, import_pairs)
+        write_init_py(graph_objs_pkg, path_parts, import_pairs)
 
 
 if __name__ == '__main__':

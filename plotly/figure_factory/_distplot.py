@@ -1,7 +1,6 @@
 from __future__ import absolute_import
 
-import plotly.exceptions
-from plotly import optional_imports
+from plotly import exceptions, optional_imports
 from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
 
@@ -31,7 +30,7 @@ def validate_distplot(hist_data, curve_type):
         hist_data_types += (pd.core.series.Series,)
 
     if not isinstance(hist_data[0], hist_data_types):
-        raise plotly.exceptions.PlotlyError("Oops, this function was written "
+        raise exceptions.PlotlyError("Oops, this function was written "
                                      "to handle multiple datasets, if "
                                      "you want to plot just one, make "
                                      "sure your hist_data variable is "
@@ -40,7 +39,7 @@ def validate_distplot(hist_data, curve_type):
 
     curve_opts = ('kde', 'normal')
     if curve_type not in curve_opts:
-        raise plotly.exceptions.PlotlyError("curve_type must be defined as "
+        raise exceptions.PlotlyError("curve_type must be defined as "
                                      "'kde' or 'normal'")
 
     if not scipy:

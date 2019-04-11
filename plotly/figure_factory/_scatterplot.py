@@ -2,8 +2,7 @@ from __future__ import absolute_import
 
 import six
 
-import plotly.exceptions
-from plotly import optional_imports
+from plotly import exceptions, optional_imports
 import plotly.colors as clrs
 from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
@@ -31,20 +30,20 @@ def endpts_to_intervals(endpts):
     length = len(endpts)
     # Check if endpts is a list or tuple
     if not (isinstance(endpts, (tuple)) or isinstance(endpts, (list))):
-        raise plotly.exceptions.PlotlyError("The intervals_endpts argument must "
+        raise exceptions.PlotlyError("The intervals_endpts argument must "
                                      "be a list or tuple of a sequence "
                                      "of increasing numbers.")
     # Check if endpts contains only numbers
     for item in endpts:
         if isinstance(item, str):
-            raise plotly.exceptions.PlotlyError("The intervals_endpts argument "
+            raise exceptions.PlotlyError("The intervals_endpts argument "
                                          "must be a list or tuple of a "
                                          "sequence of increasing "
                                          "numbers.")
     # Check if numbers in endpts are increasing
     for k in range(length - 1):
         if endpts[k] >= endpts[k + 1]:
-            raise plotly.exceptions.PlotlyError("The intervals_endpts argument "
+            raise exceptions.PlotlyError("The intervals_endpts argument "
                                          "must be a list or tuple of a "
                                          "sequence of increasing "
                                          "numbers.")
@@ -97,24 +96,24 @@ def validate_scatterplotmatrix(df, index, diag, colormap_type, **kwargs):
 
     # Check if pandas dataframe
     if not isinstance(df, pd.core.frame.DataFrame):
-        raise plotly.exceptions.PlotlyError("Dataframe not inputed. Please "
+        raise exceptions.PlotlyError("Dataframe not inputed. Please "
                                      "use a pandas dataframe to pro"
                                      "duce a scatterplot matrix.")
 
     # Check if dataframe is 1 column or less
     if len(df.columns) <= 1:
-        raise plotly.exceptions.PlotlyError("Dataframe has only one column. To "
+        raise exceptions.PlotlyError("Dataframe has only one column. To "
                                      "use the scatterplot matrix, use at "
                                      "least 2 columns.")
 
     # Check that diag parameter is a valid selection
     if diag not in DIAG_CHOICES:
-        raise plotly.exceptions.PlotlyError("Make sure diag is set to "
+        raise exceptions.PlotlyError("Make sure diag is set to "
                                      "one of {}".format(DIAG_CHOICES))
 
     # Check that colormap_types is a valid selection
     if colormap_type not in VALID_COLORMAP_TYPES:
-        raise plotly.exceptions.PlotlyError("Must choose a valid colormap type. "
+        raise exceptions.PlotlyError("Must choose a valid colormap type. "
                                      "Either 'cat' or 'seq' for a cate"
                                      "gorical and sequential colormap "
                                      "respectively.")
@@ -123,7 +122,7 @@ def validate_scatterplotmatrix(df, index, diag, colormap_type, **kwargs):
     if 'marker' in kwargs:
         FORBIDDEN_PARAMS = ['size', 'color', 'colorscale']
         if any(param in kwargs['marker'] for param in FORBIDDEN_PARAMS):
-            raise plotly.exceptions.PlotlyError("Your kwargs dictionary cannot "
+            raise exceptions.PlotlyError("Your kwargs dictionary cannot "
                                          "include the 'size', 'color' or "
                                          "'colorscale' key words inside "
                                          "the marker dict since 'size' is "
@@ -1086,7 +1085,7 @@ def create_scatterplotmatrix(df, index=None, endpts=None, diag='scatter',
         colormap = clrs.validate_colors_dict(colormap, 'rgb')
     elif isinstance(colormap, six.string_types) and 'rgb' not in colormap and '#' not in colormap:
         if colormap not in clrs.PLOTLY_SCALES.keys():
-            raise plotly.exceptions.PlotlyError(
+            raise exceptions.PlotlyError(
                 "If 'colormap' is a string, it must be the name "
                 "of a Plotly Colorscale. The available colorscale "
                 "names are {}".format(clrs.PLOTLY_SCALES.keys())
@@ -1114,7 +1113,7 @@ def create_scatterplotmatrix(df, index=None, endpts=None, diag='scatter',
     else:
         # Validate index selection
         if index not in df:
-            raise plotly.exceptions.PlotlyError("Make sure you set the index "
+            raise exceptions.PlotlyError("Make sure you set the index "
                                          "input variable to one of the "
                                          "column names of your "
                                          "dataframe.")
@@ -1134,7 +1133,7 @@ def create_scatterplotmatrix(df, index=None, endpts=None, diag='scatter',
         if isinstance(colormap, dict):
             for key in colormap:
                 if not all(index in colormap for index in index_vals):
-                    raise plotly.exceptions.PlotlyError("If colormap is a "
+                    raise exceptions.PlotlyError("If colormap is a "
                                                  "dictionary, all the "
                                                  "names in the index "
                                                  "must be keys.")

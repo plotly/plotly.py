@@ -10,9 +10,7 @@ from unittest import TestCase
 from nose.plugins.attrib import attr
 from requests.compat import json as _json
 
-import _plotly_utils.utils
 import plotly
-from plotly.offline import get_plotlyjs
 import json
 
 
@@ -41,7 +39,7 @@ fig_frames = {
 resize_code_strings = ['"responsive": true']
 
 
-PLOTLYJS = get_plotlyjs()
+PLOTLYJS = plotly.offline.get_plotlyjs()
 
 plotly_config_script = """\
 <script type="text/javascript">\
@@ -95,7 +93,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
     def test_default_plot_generates_expected_html(self):
         layout_json = _json.dumps(
             fig['layout'],
-            cls=_plotly_utils.utils.PlotlyJSONEncoder)
+            cls=plotly.utils.PlotlyJSONEncoder)
 
         html = self._read_html(plotly.offline.plot(fig, auto_open=False))
 

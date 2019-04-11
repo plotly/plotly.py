@@ -55,7 +55,7 @@ class TemplatesConfig(object):
     def __getitem__(self, item):
         template = self._templates[item]
         if template is Lazy:
-            from plotly.graph_objs.layout._template import Template
+            from plotly.graph_objs.layout import Template
 
             # Load template from package data
             path = os.path.join('package_data', 'templates', item + '.json')

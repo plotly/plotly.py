@@ -1,8 +1,6 @@
 from __future__ import absolute_import
 
-import plotly.exceptions
-from plotly import optional_imports
-
+from plotly import exceptions, optional_imports
 import plotly.colors as clrs
 from plotly.figure_factory import utils
 from plotly.tools import make_subplots
@@ -776,7 +774,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
         )
 
     if not isinstance(df, pd.DataFrame):
-        raise plotly.exceptions.PlotlyError(
+        raise exceptions.PlotlyError(
             "You must input a pandas DataFrame."
         )
 
@@ -785,7 +783,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
 
     if trace_type in ['scatter', 'scattergl']:
         if not x or not y:
-            raise plotly.exceptions.PlotlyError(
+            raise exceptions.PlotlyError(
                 "You need to input 'x' and 'y' if you are you are using a "
                 "trace_type of 'scatter' or 'scattergl'."
             )
@@ -795,7 +793,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
             try:
                 df[key]
             except KeyError:
-                raise plotly.exceptions.PlotlyError(
+                raise exceptions.PlotlyError(
                     "x, y, facet_row, facet_col and color_name must be keys "
                     "in your dataframe."
                 )
@@ -805,12 +803,12 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
 
     # validate scales
     if scales not in ['fixed', 'free_x', 'free_y', 'free']:
-        raise plotly.exceptions.PlotlyError(
+        raise exceptions.PlotlyError(
             "'scales' must be set to 'fixed', 'free_x', 'free_y' and 'free'."
         )
 
     if trace_type not in VALID_TRACE_TYPES:
-        raise plotly.exceptions.PlotlyError(
+        raise exceptions.PlotlyError(
             "'trace_type' must be in {}".format(VALID_TRACE_TYPES)
         )
 
@@ -862,7 +860,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
             for key in df[facet_row].unique():
                 if key not in facet_row_labels.keys():
                     unique_keys = df[facet_row].unique().tolist()
-                    raise plotly.exceptions.PlotlyError(
+                    raise exceptions.PlotlyError(
                         CUSTOM_LABEL_ERROR.format(unique_keys)
                     )
     if facet_col:
@@ -872,7 +870,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
             for key in df[facet_col].unique():
                 if key not in facet_col_labels.keys():
                     unique_keys = df[facet_col].unique().tolist()
-                    raise plotly.exceptions.PlotlyError(
+                    raise exceptions.PlotlyError(
                         CUSTOM_LABEL_ERROR.format(unique_keys)
                     )
     show_legend = False
@@ -884,7 +882,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
 
                 for val in df[color_name].unique():
                     if val not in colormap.keys():
-                        raise plotly.exceptions.PlotlyError(
+                        raise exceptions.PlotlyError(
                             "If using 'colormap' as a dictionary, make sure "
                             "all the values of the colormap column are in "
                             "the keys of your dictionary."
@@ -913,7 +911,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
 
                 for val in df[color_name].unique():
                     if val not in colormap.keys():
-                        raise plotly.exceptions.PlotlyError(
+                        raise exceptions.PlotlyError(
                             "If using 'colormap' as a dictionary, make sure "
                             "all the values of the colormap column are in "
                             "the keys of your dictionary."
@@ -941,7 +939,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
                 if colormap in clrs.PLOTLY_SCALES.keys():
                     colorscale_list = clrs.PLOTLY_SCALES[colormap]
                 else:
-                    raise plotly.exceptions.PlotlyError(
+                    raise exceptions.PlotlyError(
                         "If 'colormap' is a string, it must be the name "
                         "of a Plotly Colorscale. The available colorscale "
                         "names are {}".format(clrs.PLOTLY_SCALES.keys())

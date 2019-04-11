@@ -491,8 +491,6 @@ def write_datatype_py(outdir, node):
                           *node.parent_path_parts,
                           '__init__.py')
 
-    is_first = not opath.exists(filepath)
-
     # Generate source code
     # --------------------
     datatype_source = build_datatype_py(node)

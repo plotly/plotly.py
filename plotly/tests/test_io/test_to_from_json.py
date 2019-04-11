@@ -1,4 +1,3 @@
-import _plotly_utils.utils
 import plotly.graph_objs as go
 import plotly.io as pio
 import pytest
@@ -29,10 +28,10 @@ def fig1(request):
 
 
 opts = {'separators': (',', ':'),
-        'cls': _plotly_utils.utils.PlotlyJSONEncoder,
+        'cls': plotly.utils.PlotlyJSONEncoder,
         'sort_keys': True}
 pretty_opts = {'indent': 2,
-               'cls': _plotly_utils.utils.PlotlyJSONEncoder,
+               'cls': plotly.utils.PlotlyJSONEncoder,
                'sort_keys': True}
 
 

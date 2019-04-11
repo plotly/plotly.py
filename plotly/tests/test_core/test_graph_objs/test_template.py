@@ -469,3 +469,11 @@ class TestMergeTemplates(TestCase):
         # Make sure input templates weren't modified
         self.assertEqual(self.template1, self.template1_orig)
         self.assertEqual(self.template2, self.template2_orig)
+
+    def test_set_default_template(self):
+        orig_default = pio.templates.default
+        pio.templates.default = 'plotly'
+        fig = go.Figure()
+        self.assertEqual(fig.layout.template.to_plotly_json(),
+                         pio.templates['plotly'].to_plotly_json())
+        pio.templates.default = orig_default

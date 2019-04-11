@@ -2,7 +2,7 @@ from __future__ import absolute_import
 
 import math
 
-import plotly.exceptions
+from plotly import exceptions
 from plotly.graph_objs import graph_objs
 from plotly.figure_factory import utils
 
@@ -119,8 +119,8 @@ def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
         quiver_obj = _Quiver(x, y, u, v, scale, arrow_scale, angle, scaleratio)
 
     barb_x, barb_y = quiver_obj.get_barbs()
-    arrow_x, arrow_y = quiver_obj.get_quiver_arrows()       
-        
+    arrow_x, arrow_y = quiver_obj.get_quiver_arrows()
+
     quiver_plot = graph_objs.Scatter(x=barb_x + arrow_x,
                                 y=barb_y + arrow_y,
                                 mode='lines', **kwargs)
@@ -148,22 +148,22 @@ class _Quiver(object):
                  scale, arrow_scale, angle, scaleratio=1, **kwargs):
         try:
             x = utils.flatten(x)
-        except plotly.exceptions.PlotlyError:
+        except exceptions.PlotlyError:
             pass
 
         try:
             y = utils.flatten(y)
-        except plotly.exceptions.PlotlyError:
+        except exceptions.PlotlyError:
             pass
 
         try:
             u = utils.flatten(u)
-        except plotly.exceptions.PlotlyError:
+        except exceptions.PlotlyError:
             pass
 
         try:
             v = utils.flatten(v)
-        except plotly.exceptions.PlotlyError:
+        except exceptions.PlotlyError:
             pass
 
         self.x = x

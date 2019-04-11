@@ -2,8 +2,7 @@ from __future__ import absolute_import
 
 from numbers import Number
 
-import plotly.exceptions
-from plotly import optional_imports
+from plotly import exceptions, optional_imports
 import plotly.colors as clrs
 from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
@@ -21,7 +20,7 @@ def validate_gantt(df):
         # validate that df has all the required keys
         for key in REQUIRED_GANTT_KEYS:
             if key not in df:
-                raise plotly.exceptions.PlotlyError(
+                raise exceptions.PlotlyError(
                     "The columns in your dataframe must include the "
                     "following keys: {0}".format(
                         ', '.join(REQUIRED_GANTT_KEYS))
@@ -39,15 +38,15 @@ def validate_gantt(df):
 
     # validate if df is a list
     if not isinstance(df, list):
-        raise plotly.exceptions.PlotlyError("You must input either a dataframe "
+        raise exceptions.PlotlyError("You must input either a dataframe "
                                      "or a list of dictionaries.")
 
     # validate if df is empty
     if len(df) <= 0:
-        raise plotly.exceptions.PlotlyError("Your list is empty. It must contain "
+        raise exceptions.PlotlyError("Your list is empty. It must contain "
                                      "at least one dictionary.")
     if not isinstance(df[0], dict):
-        raise plotly.exceptions.PlotlyError("Your list must only "
+        raise exceptions.PlotlyError("Your list must only "
                                      "include dictionaries.")
     return df
 
@@ -213,7 +212,7 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
     if isinstance(chart[0][index_col], Number):
         # check that colors has at least 2 colors
         if len(colors) < 2:
-            raise plotly.exceptions.PlotlyError(
+            raise exceptions.PlotlyError(
                 "You must use at least 2 colors in 'colors' if you "
                 "are using a colorscale. However only the first two "
                 "colors given will be used for the lower and upper "
@@ -298,7 +297,7 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
         index_vals.sort()
 
         if len(colors) < len(index_vals):
-            raise plotly.exceptions.PlotlyError(
+            raise exceptions.PlotlyError(
                 "Error. The number of colors in 'colors' must be no less "
                 "than the number of unique index values in your group "
                 "column."
@@ -467,7 +466,7 @@ def gantt_dict(chart, colors, title, index_col, show_colorbar, bar_width,
     # verify each value in index column appears in colors dictionary
     for key in index_vals:
         if key not in colors:
-            raise plotly.exceptions.PlotlyError(
+            raise exceptions.PlotlyError(
                 "If you are using colors as a dictionary, all of its "
                 "keys must be all the values in the index column."
             )
@@ -731,7 +730,7 @@ def create_gantt(df, colors=None, index_col=None, show_colorbar=False,
 
     if index_col:
         if index_col not in chart[0]:
-            raise plotly.exceptions.PlotlyError(
+            raise exceptions.PlotlyError(
                 "In order to use an indexing column and assign colors to "
                 "the values of the index, you must choose an actual "
                 "column name in the dataframe or key if a list of "
@@ -754,7 +753,7 @@ def create_gantt(df, colors=None, index_col=None, show_colorbar=False,
 
     if not index_col:
         if isinstance(colors, dict):
-            raise plotly.exceptions.PlotlyError(
+            raise exceptions.PlotlyError(
                 "Error. You have set colors to a dictionary but have not "
                 "picked an index. An index is required if you are "
                 "assigning colors to particular values in a dictioanry."

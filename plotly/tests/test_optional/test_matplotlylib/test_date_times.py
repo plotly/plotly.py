@@ -7,7 +7,7 @@ from unittest import TestCase
 import pandas as pd
 from nose.plugins.attrib import attr
 
-import plotly.tools
+import plotly.tools as tls
 from plotly import optional_imports
 
 matplotlylib = optional_imports.get_module('plotly.matplotlylib')
@@ -40,7 +40,7 @@ class TestDateTimes(TestCase):
         ax.plot_date(mpl_dates, y)
 
         # convert this figure to plotly's graph_objs
-        pfig = plotly.tools.mpl_to_plotly(fig)
+        pfig = tls.mpl_to_plotly(fig)
 
         print(date_strings)
         print(pfig['data'][0]['x'])
@@ -60,7 +60,7 @@ class TestDateTimes(TestCase):
         s.plot(x='Date')
 
         fig = plt.gcf()
-        pfig = plotly.tools.mpl_to_plotly(fig)
+        pfig = tls.mpl_to_plotly(fig)
 
         expected_x = ('2001-01-01 00:00:00',
                       '2001-01-02 00:00:00',

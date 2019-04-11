@@ -2,8 +2,7 @@ from __future__ import absolute_import
 
 import math
 
-import plotly.exceptions
-from plotly import optional_imports
+from plotly import exceptions, optional_imports
 from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
 
@@ -27,12 +26,12 @@ def validate_streamline(x, y):
         raise ImportError("FigureFactory.create_streamline requires numpy")
     for index in range(len(x) - 1):
         if ((x[index + 1] - x[index]) - (x[1] - x[0])) > .0001:
-            raise plotly.exceptions.PlotlyError("x must be a 1 dimensional, "
+            raise exceptions.PlotlyError("x must be a 1 dimensional, "
                                          "evenly spaced array")
     for index in range(len(y) - 1):
         if ((y[index + 1] - y[index]) -
                 (y[1] - y[0])) > .0001:
-            raise plotly.exceptions.PlotlyError("y must be a 1 dimensional, "
+            raise exceptions.PlotlyError("y must be a 1 dimensional, "
                                          "evenly spaced array")
 
 

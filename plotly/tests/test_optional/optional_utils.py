@@ -4,7 +4,7 @@ import numpy as np
 
 from plotly import optional_imports
 from plotly.tests.utils import is_num_list
-from plotly.utils import node_generator, get_by_path
+from plotly.utils import get_by_path, node_generator
 
 import copy
 

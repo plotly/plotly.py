@@ -354,12 +354,6 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
     if not ipython:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
-    # Deprecations
-    if image:
-        warnings.warn("""
-    Image export using plotly.offline.plot is no longer supported.
-        Please use plotly.io.write_image instead""", DeprecationWarning)
-
     config = dict(config) if config else {}
     config.setdefault('showLink', show_link)
     config.setdefault('linkText', link_text)

@@ -1,10 +1,9 @@
 from __future__ import absolute_import
 
+import collections
 import math
 
-import plotly.exceptions
-from plotly import optional_imports
-
+from plotly import exceptions, optional_imports
 import plotly.colors as clrs
 from plotly.figure_factory import utils
 
@@ -259,13 +258,13 @@ def create_bullet(data, markers=None, measures=None, ranges=None,
 
     if utils.is_sequence(data):
         if not all(isinstance(item, dict) for item in data):
-            raise plotly.exceptions.PlotlyError(
+            raise exceptions.PlotlyError(
                 'Every entry of the data argument list, tuple, etc must '
                 'be a dictionary.'
             )
 
     elif not isinstance(data, pd.DataFrame):
-        raise plotly.exceptions.PlotlyError(
+        raise exceptions.PlotlyError(
             'You must input a pandas DataFrame, or a list of dictionaries.'
         )
 
@@ -309,7 +308,7 @@ def create_bullet(data, markers=None, measures=None, ranges=None,
     for colors_list in [range_colors, measure_colors]:
         if colors_list:
             if len(colors_list) != 2:
-                raise plotly.exceptions.PlotlyError(
+                raise exceptions.PlotlyError(
                     "Both 'range_colors' or 'measure_colors' must be a list "
                     "of two valid colors."
                 )

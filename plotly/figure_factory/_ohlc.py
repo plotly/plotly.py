@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 
-import plotly.exceptions
+from plotly import exceptions
 from plotly.graph_objs import graph_objs
 from plotly.figure_factory import utils
 
@@ -29,7 +29,7 @@ def validate_ohlc(open, high, low, close, direction, **kwargs):
     for lst in [open, low, close]:
         for index in range(len(high)):
             if high[index] < lst[index]:
-                raise plotly.exceptions.PlotlyError("Oops! Looks like some of "
+                raise exceptions.PlotlyError("Oops! Looks like some of "
                                              "your high values are less "
                                              "the corresponding open, "
                                              "low, or close values. "
@@ -39,7 +39,7 @@ def validate_ohlc(open, high, low, close, direction, **kwargs):
     for lst in [open, high, close]:
         for index in range(len(low)):
             if low[index] > lst[index]:
-                raise plotly.exceptions.PlotlyError("Oops! Looks like some of "
+                raise exceptions.PlotlyError("Oops! Looks like some of "
                                              "your low values are greater "
                                              "than the corresponding high"
                                              ", open, or close values. "
@@ -48,7 +48,7 @@ def validate_ohlc(open, high, low, close, direction, **kwargs):
 
     direction_opts = ('increasing', 'decreasing', 'both')
     if direction not in direction_opts:
-        raise plotly.exceptions.PlotlyError("direction must be defined as "
+        raise exceptions.PlotlyError("direction must be defined as "
                                      "'increasing', 'decreasing', or "
                                      "'both'")
 

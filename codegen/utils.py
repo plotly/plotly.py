@@ -67,7 +67,7 @@ def format_and_write_source_py(py_source, filepath, leading_newlines=0):
             f.write(formatted_source)
 
 
-def build_from_imports_py(imports_info, append_to_all=False):
+def build_from_imports_py(imports_info):
     """
     Build a string containing a series of `from X import Y` lines
 
@@ -92,17 +92,11 @@ def build_from_imports_py(imports_info, append_to_all=False):
             from_pkg, class_name = import_info
             if isinstance(class_name, str):
                 class_name_str = class_name
-                class_name_list = f"['{class_name}']"
             else:
                 class_name_str = '(' + ', '.join(class_name) + ')'
-                class_name_list = "['" + "', '".join(class_name) + "']"
 
             buffer.write(f"""\
 from {from_pkg} import {class_name_str}\n""")
-
-            if append_to_all:
-                buffer.write(f"""\
-__all__.extend({class_name_list})\n""")
 
         elif isinstance(import_info, str):
             buffer.write(import_info)
@@ -110,7 +104,7 @@ __all__.extend({class_name_list})\n""")
     return buffer.getvalue()
 
 
-def write_init_py(pkg_root, path_parts, import_pairs, append_to_all=False):
+def write_init_py(pkg_root, path_parts, import_pairs):
     """
     Build __init__.py source code and write to a file
 
@@ -132,7 +126,7 @@ def write_init_py(pkg_root, path_parts, import_pairs, append_to_all=False):
     """
     # Generate source code
     # --------------------
-    init_source = build_from_imports_py(import_pairs, append_to_all)
+    init_source = build_from_imports_py(import_pairs)
 
     # Write file
     # ----------

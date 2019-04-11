@@ -1,7 +1,7 @@
 from __future__ import absolute_import
 import plotly.colors as clrs
-import plotly.exceptions
-
+from plotly.graph_objs import graph_objs as go
+from plotly import exceptions, optional_imports
 from plotly import optional_imports
 from plotly.graph_objs import graph_objs as go
 
@@ -233,7 +233,7 @@ def _colors(ncontours, colormap=None):
     if colormap in clrs.PLOTLY_SCALES.keys():
         cmap = clrs.PLOTLY_SCALES[colormap]
     else:
-        raise plotly.exceptions.PlotlyError(
+        raise exceptions.PlotlyError(
             "Colorscale must be a valid Plotly Colorscale."
             "The available colorscale names are {}".format(
                 clrs.PLOTLY_SCALES.keys()))

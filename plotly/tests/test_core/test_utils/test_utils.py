@@ -5,9 +5,8 @@ from unittest import TestCase
 
 from requests.compat import json as _json
 
-from plotly.utils import (
-    node_generator, get_by_path, memoize)
-from _plotly_utils.utils import PlotlyJSONEncoder
+from plotly.utils import (PlotlyJSONEncoder, get_by_path, memoize,
+                          node_generator)
 
 
 class TestJSONEncoder(TestCase):
