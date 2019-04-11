@@ -19,7 +19,7 @@ import chart_studio.tools as tls
 import plotly.tools
 from chart_studio import session
 from chart_studio.tests.utils import PlotlyTestCase
-from plotly.plotly import plotly as py
+from chart_studio.plotly import plotly as py
 from _plotly_utils.exceptions import PlotlyError, PlotlyEmptyDataError
 from chart_studio.files import CONFIG_FILE
 
