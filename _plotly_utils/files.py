@@ -22,7 +22,7 @@ def _permissions():
             pass
         return True
     except Exception: # Do not trap KeyboardInterrupt.
-        return Falseq
+        return False
 
 
 _file_permissions = None
