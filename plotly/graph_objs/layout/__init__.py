@@ -9085,6 +9085,9 @@ class Template(_BaseLayoutHierarchyType):
                 streamtube
                     plotly.graph_objs.layout.template.data.Streamtu
                     be instance or dict with compatible properties
+                sunburst
+                    plotly.graph_objs.layout.template.data.Sunburst
+                    instance or dict with compatible properties
                 surface
                     plotly.graph_objs.layout.template.data.Surface
                     instance or dict with compatible properties
@@ -9094,6 +9097,12 @@ class Template(_BaseLayoutHierarchyType):
                 violin
                     plotly.graph_objs.layout.template.data.Violin
                     instance or dict with compatible properties
+                volume
+                    plotly.graph_objs.layout.template.data.Volume
+                    instance or dict with compatible properties
+                waterfall
+                    plotly.graph_objs.layout.template.data.Waterfal
+                    l instance or dict with compatible properties
 
         Returns
         -------
@@ -15737,6 +15746,29 @@ class Legend(_BaseLayoutHierarchyType):
     def font(self, val):
         self['font'] = val
 
+    # itemsizing
+    # ----------
+    @property
+    def itemsizing(self):
+        """
+        Determines if the legend items symbols scale with their
+        corresponding "trace" attributes or remain "constant"
+        independent of the symbol size on the graph.
+    
+        The 'itemsizing' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['trace', 'constant']
+
+        Returns
+        -------
+        Any
+        """
+        return self['itemsizing']
+
+    @itemsizing.setter
+    def itemsizing(self, val):
+        self['itemsizing'] = val
+
     # orientation
     # -----------
     @property
@@ -15956,6 +15988,10 @@ class Legend(_BaseLayoutHierarchyType):
             legend.
         font
             Sets the font used to text the legend items.
+        itemsizing
+            Determines if the legend items symbols scale with their
+            corresponding "trace" attributes or remain "constant"
+            independent of the symbol size on the graph.
         orientation
             Sets the orientation of the legend.
         tracegroupgap
@@ -16000,6 +16036,7 @@ class Legend(_BaseLayoutHierarchyType):
         bordercolor=None,
         borderwidth=None,
         font=None,
+        itemsizing=None,
         orientation=None,
         tracegroupgap=None,
         traceorder=None,
@@ -16028,6 +16065,10 @@ class Legend(_BaseLayoutHierarchyType):
             legend.
         font
             Sets the font used to text the legend items.
+        itemsizing
+            Determines if the legend items symbols scale with their
+            corresponding "trace" attributes or remain "constant"
+            independent of the symbol size on the graph.
         orientation
             Sets the orientation of the legend.
         tracegroupgap
@@ -16100,6 +16141,7 @@ an instance of plotly.graph_objs.layout.Legend"""
         self._validators['bordercolor'] = v_legend.BordercolorValidator()
         self._validators['borderwidth'] = v_legend.BorderwidthValidator()
         self._validators['font'] = v_legend.FontValidator()
+        self._validators['itemsizing'] = v_legend.ItemsizingValidator()
         self._validators['orientation'] = v_legend.OrientationValidator()
         self._validators['tracegroupgap'] = v_legend.TracegroupgapValidator()
         self._validators['traceorder'] = v_legend.TraceorderValidator()
@@ -16120,6 +16162,8 @@ an instance of plotly.graph_objs.layout.Legend"""
         self['borderwidth'] = borderwidth if borderwidth is not None else _v
         _v = arg.pop('font', None)
         self['font'] = font if font is not None else _v
+        _v = arg.pop('itemsizing', None)
+        self['itemsizing'] = itemsizing if itemsizing is not None else _v
         _v = arg.pop('orientation', None)
         self['orientation'] = orientation if orientation is not None else _v
         _v = arg.pop('tracegroupgap', None)
@@ -16782,6 +16826,29 @@ import copy as _copy
 
 class Hoverlabel(_BaseLayoutHierarchyType):
 
+    # align
+    # -----
+    @property
+    def align(self):
+        """
+        Sets the horizontal alignment of the text content within hover
+        label box. Has an effect only if the hover label text spans
+        more two or more lines
+    
+        The 'align' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['left', 'right', 'auto']
+
+        Returns
+        -------
+        Any
+        """
+        return self['align']
+
+    @align.setter
+    def align(self, val):
+        self['align'] = val
+
     # bgcolor
     # -------
     @property
@@ -16983,6 +17050,10 @@ class Hoverlabel(_BaseLayoutHierarchyType):
     @property
     def _prop_descriptions(self):
         return """\
+        align
+            Sets the horizontal alignment of the text content
+            within hover label box. Has an effect only if the hover
+            label text spans more two or more lines
         bgcolor
             Sets the background color of all hover labels on graph
         bordercolor
@@ -17003,6 +17074,7 @@ class Hoverlabel(_BaseLayoutHierarchyType):
     def __init__(
         self,
         arg=None,
+        align=None,
         bgcolor=None,
         bordercolor=None,
         font=None,
@@ -17017,6 +17089,10 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.layout.Hoverlabel
+        align
+            Sets the horizontal alignment of the text content
+            within hover label box. Has an effect only if the hover
+            label text spans more two or more lines
         bgcolor
             Sets the background color of all hover labels on graph
         bordercolor
@@ -17065,6 +17141,7 @@ an instance of plotly.graph_objs.layout.Hoverlabel"""
 
         # Initialize validators
         # ---------------------
+        self._validators['align'] = v_hoverlabel.AlignValidator()
         self._validators['bgcolor'] = v_hoverlabel.BgcolorValidator()
         self._validators['bordercolor'] = v_hoverlabel.BordercolorValidator()
         self._validators['font'] = v_hoverlabel.FontValidator()
@@ -17072,6 +17149,8 @@ an instance of plotly.graph_objs.layout.Hoverlabel"""
 
         # Populate data dict with properties
         # ----------------------------------
+        _v = arg.pop('align', None)
+        self['align'] = align if align is not None else _v
         _v = arg.pop('bgcolor', None)
         self['bgcolor'] = bgcolor if bgcolor is not None else _v
         _v = arg.pop('bordercolor', None)

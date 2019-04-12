@@ -16,6 +16,9 @@ class ZValidator(_plotly_utils.basevalidators.CompoundValidator):
                 'data_docs', """
             color
                 Sets the color of the contour lines.
+            end
+                Sets the end contour level value. Must be more
+                than `contours.start`
             highlight
                 Determines whether or not contour lines about
                 the z dimension are highlighted on hover.
@@ -31,6 +34,12 @@ class ZValidator(_plotly_utils.basevalidators.CompoundValidator):
             show
                 Determines whether or not contour lines about
                 the z dimension are drawn.
+            size
+                Sets the step between each contour level. Must
+                be positive.
+            start
+                Sets the starting contour level value. Must be
+                less than `contours.end`
             usecolormap
                 An alternate to "color". Determines whether or
                 not the contour lines are colored using the
@@ -59,6 +68,9 @@ class YValidator(_plotly_utils.basevalidators.CompoundValidator):
                 'data_docs', """
             color
                 Sets the color of the contour lines.
+            end
+                Sets the end contour level value. Must be more
+                than `contours.start`
             highlight
                 Determines whether or not contour lines about
                 the y dimension are highlighted on hover.
@@ -74,6 +86,12 @@ class YValidator(_plotly_utils.basevalidators.CompoundValidator):
             show
                 Determines whether or not contour lines about
                 the y dimension are drawn.
+            size
+                Sets the step between each contour level. Must
+                be positive.
+            start
+                Sets the starting contour level value. Must be
+                less than `contours.end`
             usecolormap
                 An alternate to "color". Determines whether or
                 not the contour lines are colored using the
@@ -102,6 +120,9 @@ class XValidator(_plotly_utils.basevalidators.CompoundValidator):
                 'data_docs', """
             color
                 Sets the color of the contour lines.
+            end
+                Sets the end contour level value. Must be more
+                than `contours.start`
             highlight
                 Determines whether or not contour lines about
                 the x dimension are highlighted on hover.
@@ -117,6 +138,12 @@ class XValidator(_plotly_utils.basevalidators.CompoundValidator):
             show
                 Determines whether or not contour lines about
                 the x dimension are drawn.
+            size
+                Sets the step between each contour level. Must
+                be positive.
+            start
+                Sets the starting contour level value. Must be
+                less than `contours.end`
             usecolormap
                 An alternate to "color". Determines whether or
                 not the contour lines are colored using the

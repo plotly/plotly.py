@@ -1,5 +1,11 @@
 
 
+from plotly.graph_objs import Waterfall
+
+
+from plotly.graph_objs import Volume
+
+
 from plotly.graph_objs import Violin
 
 
@@ -7,6 +13,9 @@ from plotly.graph_objs import Table
 
 
 from plotly.graph_objs import Surface
+
+
+from plotly.graph_objs import Sunburst
 
 
 from plotly.graph_objs import Streamtube

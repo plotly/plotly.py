@@ -548,6 +548,50 @@ import copy as _copy
 
 class Hoverlabel(_BaseTraceHierarchyType):
 
+    # align
+    # -----
+    @property
+    def align(self):
+        """
+        Sets the horizontal alignment of the text content within hover
+        label box. Has an effect only if the hover label text spans
+        more two or more lines
+    
+        The 'align' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['left', 'right', 'auto']
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['align']
+
+    @align.setter
+    def align(self, val):
+        self['align'] = val
+
+    # alignsrc
+    # --------
+    @property
+    def alignsrc(self):
+        """
+        Sets the source reference on plot.ly for  align .
+    
+        The 'alignsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['alignsrc']
+
+    @alignsrc.setter
+    def alignsrc(self, val):
+        self['alignsrc'] = val
+
     # bgcolor
     # -------
     @property
@@ -768,11 +812,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
     @property
     def namelength(self):
         """
-        Sets the length (in number of characters) of the trace name in
-        the hover labels for this trace. -1 shows the whole name
-        regardless of length. 0-3 shows the first 0-3 characters, and
-        an integer >3 will show the whole name if it is less than that
-        many characters, but if it is longer, will truncate to
+        Sets the default length (in number of characters) of the trace
+        name in the hover labels for all traces. -1 shows the whole
+        name regardless of length. 0-3 shows the first 0-3 characters,
+        and an integer >3 will show the whole name if it is less than
+        that many characters, but if it is longer, will truncate to
         `namelength - 3` characters and add an ellipsis.
     
         The 'namelength' property is a integer and may be specified as:
@@ -821,6 +865,12 @@ class Hoverlabel(_BaseTraceHierarchyType):
     @property
     def _prop_descriptions(self):
         return """\
+        align
+            Sets the horizontal alignment of the text content
+            within hover label box. Has an effect only if the hover
+            label text spans more two or more lines
+        alignsrc
+            Sets the source reference on plot.ly for  align .
         bgcolor
             Sets the background color of the hover labels for this
             trace
@@ -834,13 +884,13 @@ class Hoverlabel(_BaseTraceHierarchyType):
         font
             Sets the font used in hover labels.
         namelength
-            Sets the length (in number of characters) of the trace
-            name in the hover labels for this trace. -1 shows the
-            whole name regardless of length. 0-3 shows the first
-            0-3 characters, and an integer >3 will show the whole
-            name if it is less than that many characters, but if it
-            is longer, will truncate to `namelength - 3` characters
-            and add an ellipsis.
+            Sets the default length (in number of characters) of
+            the trace name in the hover labels for all traces. -1
+            shows the whole name regardless of length. 0-3 shows
+            the first 0-3 characters, and an integer >3 will show
+            the whole name if it is less than that many characters,
+            but if it is longer, will truncate to `namelength - 3`
+            characters and add an ellipsis.
         namelengthsrc
             Sets the source reference on plot.ly for  namelength .
         """
@@ -848,6 +898,8 @@ class Hoverlabel(_BaseTraceHierarchyType):
     def __init__(
         self,
         arg=None,
+        align=None,
+        alignsrc=None,
         bgcolor=None,
         bgcolorsrc=None,
         bordercolor=None,
@@ -865,6 +917,12 @@ class Hoverlabel(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.surface.Hoverlabel
+        align
+            Sets the horizontal alignment of the text content
+            within hover label box. Has an effect only if the hover
+            label text spans more two or more lines
+        alignsrc
+            Sets the source reference on plot.ly for  align .
         bgcolor
             Sets the background color of the hover labels for this
             trace
@@ -878,13 +936,13 @@ class Hoverlabel(_BaseTraceHierarchyType):
         font
             Sets the font used in hover labels.
         namelength
-            Sets the length (in number of characters) of the trace
-            name in the hover labels for this trace. -1 shows the
-            whole name regardless of length. 0-3 shows the first
-            0-3 characters, and an integer >3 will show the whole
-            name if it is less than that many characters, but if it
-            is longer, will truncate to `namelength - 3` characters
-            and add an ellipsis.
+            Sets the default length (in number of characters) of
+            the trace name in the hover labels for all traces. -1
+            shows the whole name regardless of length. 0-3 shows
+            the first 0-3 characters, and an integer >3 will show
+            the whole name if it is less than that many characters,
+            but if it is longer, will truncate to `namelength - 3`
+            characters and add an ellipsis.
         namelengthsrc
             Sets the source reference on plot.ly for  namelength .
 
@@ -920,6 +978,8 @@ an instance of plotly.graph_objs.surface.Hoverlabel"""
 
         # Initialize validators
         # ---------------------
+        self._validators['align'] = v_hoverlabel.AlignValidator()
+        self._validators['alignsrc'] = v_hoverlabel.AlignsrcValidator()
         self._validators['bgcolor'] = v_hoverlabel.BgcolorValidator()
         self._validators['bgcolorsrc'] = v_hoverlabel.BgcolorsrcValidator()
         self._validators['bordercolor'] = v_hoverlabel.BordercolorValidator()
@@ -932,6 +992,10 @@ an instance of plotly.graph_objs.surface.Hoverlabel"""
 
         # Populate data dict with properties
         # ----------------------------------
+        _v = arg.pop('align', None)
+        self['align'] = align if align is not None else _v
+        _v = arg.pop('alignsrc', None)
+        self['alignsrc'] = alignsrc if alignsrc is not None else _v
         _v = arg.pop('bgcolor', None)
         self['bgcolor'] = bgcolor if bgcolor is not None else _v
         _v = arg.pop('bgcolorsrc', None)
@@ -979,6 +1043,9 @@ class Contours(_BaseTraceHierarchyType):
                 
                 color
                     Sets the color of the contour lines.
+                end
+                    Sets the end contour level value. Must be more
+                    than `contours.start`
                 highlight
                     Determines whether or not contour lines about
                     the x dimension are highlighted on hover.
@@ -994,6 +1061,12 @@ class Contours(_BaseTraceHierarchyType):
                 show
                     Determines whether or not contour lines about
                     the x dimension are drawn.
+                size
+                    Sets the step between each contour level. Must
+                    be positive.
+                start
+                    Sets the starting contour level value. Must be
+                    less than `contours.end`
                 usecolormap
                     An alternate to "color". Determines whether or
                     not the contour lines are colored using the
@@ -1026,6 +1099,9 @@ class Contours(_BaseTraceHierarchyType):
                 
                 color
                     Sets the color of the contour lines.
+                end
+                    Sets the end contour level value. Must be more
+                    than `contours.start`
                 highlight
                     Determines whether or not contour lines about
                     the y dimension are highlighted on hover.
@@ -1041,6 +1117,12 @@ class Contours(_BaseTraceHierarchyType):
                 show
                     Determines whether or not contour lines about
                     the y dimension are drawn.
+                size
+                    Sets the step between each contour level. Must
+                    be positive.
+                start
+                    Sets the starting contour level value. Must be
+                    less than `contours.end`
                 usecolormap
                     An alternate to "color". Determines whether or
                     not the contour lines are colored using the
@@ -1073,6 +1155,9 @@ class Contours(_BaseTraceHierarchyType):
                 
                 color
                     Sets the color of the contour lines.
+                end
+                    Sets the end contour level value. Must be more
+                    than `contours.start`
                 highlight
                     Determines whether or not contour lines about
                     the z dimension are highlighted on hover.
@@ -1088,6 +1173,12 @@ class Contours(_BaseTraceHierarchyType):
                 show
                     Determines whether or not contour lines about
                     the z dimension are drawn.
+                size
+                    Sets the step between each contour level. Must
+                    be positive.
+                start
+                    Sets the starting contour level value. Must be
+                    less than `contours.end`
                 usecolormap
                     An alternate to "color". Determines whether or
                     not the contour lines are colored using the

@@ -42,6 +42,41 @@ class UsecolormapValidator(_plotly_utils.basevalidators.BooleanValidator):
 import _plotly_utils.basevalidators
 
 
+class StartValidator(_plotly_utils.basevalidators.NumberValidator):
+
+    def __init__(
+        self, plotly_name='start', parent_name='surface.contours.z', **kwargs
+    ):
+        super(StartValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop('edit_type', 'calc'),
+            role=kwargs.pop('role', 'style'),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class SizeValidator(_plotly_utils.basevalidators.NumberValidator):
+
+    def __init__(
+        self, plotly_name='size', parent_name='surface.contours.z', **kwargs
+    ):
+        super(SizeValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop('edit_type', 'calc'),
+            min=kwargs.pop('min', 0),
+            role=kwargs.pop('role', 'style'),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class ShowValidator(_plotly_utils.basevalidators.BooleanValidator):
 
     def __init__(
@@ -155,6 +190,23 @@ class HighlightValidator(_plotly_utils.basevalidators.BooleanValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop('edit_type', 'calc'),
             role=kwargs.pop('role', 'info'),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class EndValidator(_plotly_utils.basevalidators.NumberValidator):
+
+    def __init__(
+        self, plotly_name='end', parent_name='surface.contours.z', **kwargs
+    ):
+        super(EndValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop('edit_type', 'calc'),
+            role=kwargs.pop('role', 'style'),
             **kwargs
         )
 

@@ -807,6 +807,33 @@ class Layout(_BaseLayoutType):
     def extendpiecolors(self, val):
         self['extendpiecolors'] = val
 
+    # extendsunburstcolors
+    # --------------------
+    @property
+    def extendsunburstcolors(self):
+        """
+        If `true`, the sunburst slice colors (whether given by
+        `sunburstcolorway` or inherited from `colorway`) will be
+        extended to three times its original length by first repeating
+        every color 20% lighter then each color 20% darker. This is
+        intended to reduce the likelihood of reusing the same color
+        when you have many slices, but you can set `false` to disable.
+        Colors provided in the trace, using `marker.colors`, are never
+        extended.
+    
+        The 'extendsunburstcolors' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self['extendsunburstcolors']
+
+    @extendsunburstcolors.setter
+    def extendsunburstcolors(self, val):
+        self['extendsunburstcolors'] = val
+
     # font
     # ----
     @property
@@ -1178,6 +1205,11 @@ class Layout(_BaseLayoutType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
                 bgcolor
                     Sets the background color of all hover labels
                     on graph
@@ -1385,6 +1417,11 @@ class Layout(_BaseLayoutType):
                     the legend.
                 font
                     Sets the font used to text the legend items.
+                itemsizing
+                    Determines if the legend items symbols scale
+                    with their corresponding "trace" attributes or
+                    remain "constant" independent of the symbol
+                    size on the graph.
                 orientation
                     Sets the orientation of the legend.
                 tracegroupgap
@@ -2450,6 +2487,30 @@ class Layout(_BaseLayoutType):
     def spikedistance(self, val):
         self['spikedistance'] = val
 
+    # sunburstcolorway
+    # ----------------
+    @property
+    def sunburstcolorway(self):
+        """
+        Sets the default sunburst slice colors. Defaults to the main
+        `colorway` used for trace colors. If you specify a new list
+        here it can still be extended with lighter and darker colors,
+        see `extendsunburstcolors`.
+    
+        The 'sunburstcolorway' property is a colorlist that may be specified
+        as a tuple, list, one-dimensional numpy array, or pandas Series of valid
+        color strings
+
+        Returns
+        -------
+        list
+        """
+        return self['sunburstcolorway']
+
+    @sunburstcolorway.setter
+    def sunburstcolorway(self, val):
+        self['sunburstcolorway'] = val
+
     # template
     # --------
     @property
@@ -2947,6 +3008,73 @@ class Layout(_BaseLayoutType):
     @violinmode.setter
     def violinmode(self, val):
         self['violinmode'] = val
+
+    # waterfallgap
+    # ------------
+    @property
+    def waterfallgap(self):
+        """
+        Sets the gap (in plot fraction) between bars of adjacent
+        location coordinates.
+    
+        The 'waterfallgap' property is a number and may be specified as:
+          - An int or float in the interval [0, 1]
+
+        Returns
+        -------
+        int|float
+        """
+        return self['waterfallgap']
+
+    @waterfallgap.setter
+    def waterfallgap(self, val):
+        self['waterfallgap'] = val
+
+    # waterfallgroupgap
+    # -----------------
+    @property
+    def waterfallgroupgap(self):
+        """
+        Sets the gap (in plot fraction) between bars of the same
+        location coordinate.
+    
+        The 'waterfallgroupgap' property is a number and may be specified as:
+          - An int or float in the interval [0, 1]
+
+        Returns
+        -------
+        int|float
+        """
+        return self['waterfallgroupgap']
+
+    @waterfallgroupgap.setter
+    def waterfallgroupgap(self, val):
+        self['waterfallgroupgap'] = val
+
+    # waterfallmode
+    # -------------
+    @property
+    def waterfallmode(self):
+        """
+        Determines how bars at the same location coordinate are
+        displayed on the graph. With "group", the bars are plotted next
+        to one another centered around the shared location. With
+        "overlay", the bars are plotted over one another, you might
+        need to an "opacity" to see multiple bars.
+    
+        The 'waterfallmode' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['group', 'overlay']
+
+        Returns
+        -------
+        Any
+        """
+        return self['waterfallmode']
+
+    @waterfallmode.setter
+    def waterfallmode(self, val):
+        self['waterfallmode'] = val
 
     # width
     # -----
@@ -3950,420 +4078,10 @@ class Layout(_BaseLayoutType):
             reusing the same color when you have many slices, but
             you can set `false` to disable. Colors provided in the
             trace, using `marker.colors`, are never extended.
-        font
-            Sets the global font. Note that fonts used in traces
-            and other layout components inherit from the global
-            font.
-        geo
-            plotly.graph_objs.layout.Geo instance or dict with
-            compatible properties
-        grid
-            plotly.graph_objs.layout.Grid instance or dict with
-            compatible properties
-        height
-            Sets the plot's height (in px).
-        hiddenlabels
-
-        hiddenlabelssrc
-            Sets the source reference on plot.ly for  hiddenlabels
-            .
-        hidesources
-            Determines whether or not a text link citing the data
-            source is placed at the bottom-right cored of the
-            figure. Has only an effect only on graphs that have
-            been generated via forked graphs from the plotly
-            service (at https://plot.ly or on-premise).
-        hoverdistance
-            Sets the default distance (in pixels) to look for data
-            to add hover labels (-1 means no cutoff, 0 means no
-            looking for data). This is only a real distance for
-            hovering on point-like objects, like scatter points.
-            For area-like objects (bars, scatter fills, etc)
-            hovering is on inside the area and off outside, but
-            these objects will not supersede hover on point-like
-            objects in case of conflict.
-        hoverlabel
-            plotly.graph_objs.layout.Hoverlabel instance or dict
-            with compatible properties
-        hovermode
-            Determines the mode of hover interactions. If
-            `clickmode` includes the "select" flag, `hovermode`
-            defaults to "closest". If `clickmode` lacks the
-            "select" flag, it defaults to "x" or "y" (depending on
-            the trace's `orientation` value) for plots based on
-            cartesian coordinates. For anything else the default
-            value is "closest".
-        images
-            plotly.graph_objs.layout.Image instance or dict with
-            compatible properties
-        imagedefaults
-            When used in a template (as
-            layout.template.layout.imagedefaults), sets the default
-            property values to use for elements of layout.images
-        legend
-            plotly.graph_objs.layout.Legend instance or dict with
-            compatible properties
-        mapbox
-            plotly.graph_objs.layout.Mapbox instance or dict with
-            compatible properties
-        margin
-            plotly.graph_objs.layout.Margin instance or dict with
-            compatible properties
-        meta
-            Assigns extra meta information that can be used in
-            various `text` attributes. Attributes such as the
-            graph, axis and colorbar `title.text`, annotation
-            `text` `trace.name` in legend items, `rangeselector`,
-            `updatemenues` and `sliders` `label` text all support
-            `meta`. One can access `meta` fields using template
-            strings: `%{meta[i]}` where `i` is the index of the
-            `meta` item in question.
-        metasrc
-            Sets the source reference on plot.ly for  meta .
-        modebar
-            plotly.graph_objs.layout.Modebar instance or dict with
-            compatible properties
-        orientation
-            Legacy polar charts are deprecated! Please switch to
-            "polar" subplots. Rotates the entire polar by the given
-            angle in legacy polar charts.
-        paper_bgcolor
-            Sets the color of paper where the graph is drawn.
-        piecolorway
-            Sets the default pie slice colors. Defaults to the main
-            `colorway` used for trace colors. If you specify a new
-            list here it can still be extended with lighter and
-            darker colors, see `extendpiecolors`.
-        plot_bgcolor
-            Sets the color of plotting area in-between x and y
-            axes.
-        polar
-            plotly.graph_objs.layout.Polar instance or dict with
-            compatible properties
-        radialaxis
-            plotly.graph_objs.layout.RadialAxis instance or dict
-            with compatible properties
-        scene
-            plotly.graph_objs.layout.Scene instance or dict with
-            compatible properties
-        selectdirection
-            When "dragmode" is set to "select", this limits the
-            selection of the drag to horizontal, vertical or
-            diagonal. "h" only allows horizontal selection, "v"
-            only vertical, "d" only diagonal and "any" sets no
-            limit.
-        selectionrevision
-            Controls persistence of user-driven changes in selected
-            points from all traces.
-        separators
-            Sets the decimal and thousand separators. For example,
-            *. * puts a '.' before decimals and a space between
-            thousands. In English locales, dflt is ".," but other
-            locales may alter this default.
-        shapes
-            plotly.graph_objs.layout.Shape instance or dict with
-            compatible properties
-        shapedefaults
-            When used in a template (as
-            layout.template.layout.shapedefaults), sets the default
-            property values to use for elements of layout.shapes
-        showlegend
-            Determines whether or not a legend is drawn. Default is
-            `true` if there is a trace to show and any of these: a)
-            Two or more traces would by default be shown in the
-            legend. b) One pie trace is shown in the legend. c) One
-            trace is explicitly given with `showlegend: true`.
-        sliders
-            plotly.graph_objs.layout.Slider instance or dict with
-            compatible properties
-        sliderdefaults
-            When used in a template (as
-            layout.template.layout.sliderdefaults), sets the
-            default property values to use for elements of
-            layout.sliders
-        spikedistance
-            Sets the default distance (in pixels) to look for data
-            to draw spikelines to (-1 means no cutoff, 0 means no
-            looking for data). As with hoverdistance, distance does
-            not apply to area-like objects. In addition, some
-            objects can be hovered on but will not generate
-            spikelines, such as scatter fills.
-        template
-            Default attributes to be applied to the plot. This
-            should be a dict with format: `{'layout':
-            layoutTemplate, 'data': {trace_type: [traceTemplate,
-            ...], ...}}` where `layoutTemplate` is a dict matching
-            the structure of `figure.layout` and `traceTemplate` is
-            a dict matching the structure of the trace with type
-            `trace_type` (e.g. 'scatter'). Alternatively, this may
-            be specified as an instance of
-            plotly.graph_objs.layout.Template.  Trace templates are
-            applied cyclically to traces of each type. Container
-            arrays (eg `annotations`) have special handling: An
-            object ending in `defaults` (eg `annotationdefaults`)
-            is applied to each array item. But if an item has a
-            `templateitemname` key we look in the template array
-            for an item with matching `name` and apply that
-            instead. If no matching `name` is found we mark the
-            item invisible. Any named template item not referenced
-            is appended to the end of the array, so this can be
-            used to add a watermark annotation or a logo image, for
-            example. To omit one of these items on the plot, make
-            an item with matching `templateitemname` and `visible:
-            false`.
-        ternary
-            plotly.graph_objs.layout.Ternary instance or dict with
-            compatible properties
-        title
-            plotly.graph_objs.layout.Title instance or dict with
-            compatible properties
-        titlefont
-            Deprecated: Please use layout.title.font instead. Sets
-            the title font. Note that the title's font used to be
-            customized by the now deprecated `titlefont` attribute.
-        transition
-            Sets transition options used during Plotly.react
-            updates.
-        uirevision
-            Used to allow user interactions with the plot to
-            persist after `Plotly.react` calls that are unaware of
-            these interactions. If `uirevision` is omitted, or if
-            it is given and it changed from the previous
-            `Plotly.react` call, the exact new figure is used. If
-            `uirevision` is truthy and did NOT change, any
-            attribute that has been affected by user interactions
-            and did not receive a different value in the new figure
-            will keep the interaction value. `layout.uirevision`
-            attribute serves as the default for `uirevision`
-            attributes in various sub-containers. For finer control
-            you can set these sub-attributes directly. For example,
-            if your app separately controls the data on the x and y
-            axes you might set `xaxis.uirevision=*time*` and
-            `yaxis.uirevision=*cost*`. Then if only the y data is
-            changed, you can update `yaxis.uirevision=*quantity*`
-            and the y axis range will reset but the x axis range
-            will retain any user-driven zoom.
-        updatemenus
-            plotly.graph_objs.layout.Updatemenu instance or dict
-            with compatible properties
-        updatemenudefaults
-            When used in a template (as
-            layout.template.layout.updatemenudefaults), sets the
-            default property values to use for elements of
-            layout.updatemenus
-        violingap
-            Sets the gap (in plot fraction) between violins of
-            adjacent location coordinates. Has no effect on traces
-            that have "width" set.
-        violingroupgap
-            Sets the gap (in plot fraction) between violins of the
-            same location coordinate. Has no effect on traces that
-            have "width" set.
-        violinmode
-            Determines how violins at the same location coordinate
-            are displayed on the graph. If "group", the violins are
-            plotted next to one another centered around the shared
-            location. If "overlay", the violins are plotted over
-            one another, you might need to set "opacity" to see
-            them multiple violins. Has no effect on traces that
-            have "width" set.
-        width
-            Sets the plot's width (in px).
-        xaxis
-            plotly.graph_objs.layout.XAxis instance or dict with
-            compatible properties
-        yaxis
-            plotly.graph_objs.layout.YAxis instance or dict with
-            compatible properties
-        """
-
-    _mapped_properties = {'titlefont': ('title', 'font')}
-
-    def __init__(
-        self,
-        arg=None,
-        angularaxis=None,
-        annotations=None,
-        annotationdefaults=None,
-        autosize=None,
-        bargap=None,
-        bargroupgap=None,
-        barmode=None,
-        barnorm=None,
-        boxgap=None,
-        boxgroupgap=None,
-        boxmode=None,
-        calendar=None,
-        clickmode=None,
-        colorscale=None,
-        colorway=None,
-        datarevision=None,
-        direction=None,
-        dragmode=None,
-        editrevision=None,
-        extendpiecolors=None,
-        font=None,
-        geo=None,
-        grid=None,
-        height=None,
-        hiddenlabels=None,
-        hiddenlabelssrc=None,
-        hidesources=None,
-        hoverdistance=None,
-        hoverlabel=None,
-        hovermode=None,
-        images=None,
-        imagedefaults=None,
-        legend=None,
-        mapbox=None,
-        margin=None,
-        meta=None,
-        metasrc=None,
-        modebar=None,
-        orientation=None,
-        paper_bgcolor=None,
-        piecolorway=None,
-        plot_bgcolor=None,
-        polar=None,
-        radialaxis=None,
-        scene=None,
-        selectdirection=None,
-        selectionrevision=None,
-        separators=None,
-        shapes=None,
-        shapedefaults=None,
-        showlegend=None,
-        sliders=None,
-        sliderdefaults=None,
-        spikedistance=None,
-        template=None,
-        ternary=None,
-        title=None,
-        titlefont=None,
-        transition=None,
-        uirevision=None,
-        updatemenus=None,
-        updatemenudefaults=None,
-        violingap=None,
-        violingroupgap=None,
-        violinmode=None,
-        width=None,
-        xaxis=None,
-        yaxis=None,
-        **kwargs
-    ):
-        """
-        Construct a new Layout object
-        
-        Parameters
-        ----------
-        arg
-            dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.Layout
-        angularaxis
-            plotly.graph_objs.layout.AngularAxis instance or dict
-            with compatible properties
-        annotations
-            plotly.graph_objs.layout.Annotation instance or dict
-            with compatible properties
-        annotationdefaults
-            When used in a template (as
-            layout.template.layout.annotationdefaults), sets the
-            default property values to use for elements of
-            layout.annotations
-        autosize
-            Determines whether or not a layout width or height that
-            has been left undefined by the user is initialized on
-            each relayout. Note that, regardless of this attribute,
-            an undefined layout width or height is always
-            initialized on the first call to plot.
-        bargap
-            Sets the gap (in plot fraction) between bars of
-            adjacent location coordinates.
-        bargroupgap
-            Sets the gap (in plot fraction) between bars of the
-            same location coordinate.
-        barmode
-            Determines how bars at the same location coordinate are
-            displayed on the graph. With "stack", the bars are
-            stacked on top of one another With "relative", the bars
-            are stacked on top of one another, with negative values
-            below the axis, positive values above With "group", the
-            bars are plotted next to one another centered around
-            the shared location. With "overlay", the bars are
-            plotted over one another, you might need to an
-            "opacity" to see multiple bars.
-        barnorm
-            Sets the normalization for bar traces on the graph.
-            With "fraction", the value of each bar is divided by
-            the sum of all values at that location coordinate.
-            "percent" is the same but multiplied by 100 to show
-            percentages.
-        boxgap
-            Sets the gap (in plot fraction) between boxes of
-            adjacent location coordinates. Has no effect on traces
-            that have "width" set.
-        boxgroupgap
-            Sets the gap (in plot fraction) between boxes of the
-            same location coordinate. Has no effect on traces that
-            have "width" set.
-        boxmode
-            Determines how boxes at the same location coordinate
-            are displayed on the graph. If "group", the boxes are
-            plotted next to one another centered around the shared
-            location. If "overlay", the boxes are plotted over one
-            another, you might need to set "opacity" to see them
-            multiple boxes. Has no effect on traces that have
-            "width" set.
-        calendar
-            Sets the default calendar system to use for
-            interpreting and displaying dates throughout the plot.
-        clickmode
-            Determines the mode of single click interactions.
-            "event" is the default value and emits the
-            `plotly_click` event. In addition this mode emits the
-            `plotly_selected` event in drag modes "lasso" and
-            "select", but with no event data attached (kept for
-            compatibility reasons). The "select" flag enables
-            selecting single data points via click. This mode also
-            supports persistent selections, meaning that pressing
-            Shift while clicking, adds to / subtracts from an
-            existing selection. "select" with `hovermode`: "x" can
-            be confusing, consider explicitly setting `hovermode`:
-            "closest" when using this feature. Selection events are
-            sent accordingly as long as "event" flag is set as
-            well. When the "event" flag is missing, `plotly_click`
-            and `plotly_selected` events are not fired.
-        colorscale
-            plotly.graph_objs.layout.Colorscale instance or dict
-            with compatible properties
-        colorway
-            Sets the default trace colors.
-        datarevision
-            If provided, a changed value tells `Plotly.react` that
-            one or more data arrays has changed. This way you can
-            modify arrays in-place rather than making a complete
-            new copy for an incremental change. If NOT provided,
-            `Plotly.react` assumes that data arrays are being
-            treated as immutable, thus any data array with a
-            different identity from its predecessor contains new
-            data.
-        direction
-            Legacy polar charts are deprecated! Please switch to
-            "polar" subplots. Sets the direction corresponding to
-            positive angles in legacy polar charts.
-        dragmode
-            Determines the mode of drag interactions. "select" and
-            "lasso" apply only to scatter traces with markers or
-            text. "orbit" and "turntable" apply only to 3D scenes.
-        editrevision
-            Controls persistence of user-driven changes in
-            `editable: true` configuration, other than trace names
-            and axis titles. Defaults to `layout.uirevision`.
-        extendpiecolors
-            If `true`, the pie slice colors (whether given by
-            `piecolorway` or inherited from `colorway`) will be
-            extended to three times its original length by first
+        extendsunburstcolors
+            If `true`, the sunburst slice colors (whether given by
+            `sunburstcolorway` or inherited from `colorway`) will
+            be extended to three times its original length by first
             repeating every color 20% lighter then each color 20%
             darker. This is intended to reduce the likelihood of
             reusing the same color when you have many slices, but
@@ -4507,6 +4225,11 @@ class Layout(_BaseLayoutType):
             not apply to area-like objects. In addition, some
             objects can be hovered on but will not generate
             spikelines, such as scatter fills.
+        sunburstcolorway
+            Sets the default sunburst slice colors. Defaults to the
+            main `colorway` used for trace colors. If you specify a
+            new list here it can still be extended with lighter and
+            darker colors, see `extendsunburstcolors`.
         template
             Default attributes to be applied to the plot. This
             should be a dict with format: `{'layout':
@@ -4586,6 +4309,470 @@ class Layout(_BaseLayoutType):
             one another, you might need to set "opacity" to see
             them multiple violins. Has no effect on traces that
             have "width" set.
+        waterfallgap
+            Sets the gap (in plot fraction) between bars of
+            adjacent location coordinates.
+        waterfallgroupgap
+            Sets the gap (in plot fraction) between bars of the
+            same location coordinate.
+        waterfallmode
+            Determines how bars at the same location coordinate are
+            displayed on the graph. With "group", the bars are
+            plotted next to one another centered around the shared
+            location. With "overlay", the bars are plotted over one
+            another, you might need to an "opacity" to see multiple
+            bars.
+        width
+            Sets the plot's width (in px).
+        xaxis
+            plotly.graph_objs.layout.XAxis instance or dict with
+            compatible properties
+        yaxis
+            plotly.graph_objs.layout.YAxis instance or dict with
+            compatible properties
+        """
+
+    _mapped_properties = {'titlefont': ('title', 'font')}
+
+    def __init__(
+        self,
+        arg=None,
+        angularaxis=None,
+        annotations=None,
+        annotationdefaults=None,
+        autosize=None,
+        bargap=None,
+        bargroupgap=None,
+        barmode=None,
+        barnorm=None,
+        boxgap=None,
+        boxgroupgap=None,
+        boxmode=None,
+        calendar=None,
+        clickmode=None,
+        colorscale=None,
+        colorway=None,
+        datarevision=None,
+        direction=None,
+        dragmode=None,
+        editrevision=None,
+        extendpiecolors=None,
+        extendsunburstcolors=None,
+        font=None,
+        geo=None,
+        grid=None,
+        height=None,
+        hiddenlabels=None,
+        hiddenlabelssrc=None,
+        hidesources=None,
+        hoverdistance=None,
+        hoverlabel=None,
+        hovermode=None,
+        images=None,
+        imagedefaults=None,
+        legend=None,
+        mapbox=None,
+        margin=None,
+        meta=None,
+        metasrc=None,
+        modebar=None,
+        orientation=None,
+        paper_bgcolor=None,
+        piecolorway=None,
+        plot_bgcolor=None,
+        polar=None,
+        radialaxis=None,
+        scene=None,
+        selectdirection=None,
+        selectionrevision=None,
+        separators=None,
+        shapes=None,
+        shapedefaults=None,
+        showlegend=None,
+        sliders=None,
+        sliderdefaults=None,
+        spikedistance=None,
+        sunburstcolorway=None,
+        template=None,
+        ternary=None,
+        title=None,
+        titlefont=None,
+        transition=None,
+        uirevision=None,
+        updatemenus=None,
+        updatemenudefaults=None,
+        violingap=None,
+        violingroupgap=None,
+        violinmode=None,
+        waterfallgap=None,
+        waterfallgroupgap=None,
+        waterfallmode=None,
+        width=None,
+        xaxis=None,
+        yaxis=None,
+        **kwargs
+    ):
+        """
+        Construct a new Layout object
+        
+        Parameters
+        ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Layout
+        angularaxis
+            plotly.graph_objs.layout.AngularAxis instance or dict
+            with compatible properties
+        annotations
+            plotly.graph_objs.layout.Annotation instance or dict
+            with compatible properties
+        annotationdefaults
+            When used in a template (as
+            layout.template.layout.annotationdefaults), sets the
+            default property values to use for elements of
+            layout.annotations
+        autosize
+            Determines whether or not a layout width or height that
+            has been left undefined by the user is initialized on
+            each relayout. Note that, regardless of this attribute,
+            an undefined layout width or height is always
+            initialized on the first call to plot.
+        bargap
+            Sets the gap (in plot fraction) between bars of
+            adjacent location coordinates.
+        bargroupgap
+            Sets the gap (in plot fraction) between bars of the
+            same location coordinate.
+        barmode
+            Determines how bars at the same location coordinate are
+            displayed on the graph. With "stack", the bars are
+            stacked on top of one another With "relative", the bars
+            are stacked on top of one another, with negative values
+            below the axis, positive values above With "group", the
+            bars are plotted next to one another centered around
+            the shared location. With "overlay", the bars are
+            plotted over one another, you might need to an
+            "opacity" to see multiple bars.
+        barnorm
+            Sets the normalization for bar traces on the graph.
+            With "fraction", the value of each bar is divided by
+            the sum of all values at that location coordinate.
+            "percent" is the same but multiplied by 100 to show
+            percentages.
+        boxgap
+            Sets the gap (in plot fraction) between boxes of
+            adjacent location coordinates. Has no effect on traces
+            that have "width" set.
+        boxgroupgap
+            Sets the gap (in plot fraction) between boxes of the
+            same location coordinate. Has no effect on traces that
+            have "width" set.
+        boxmode
+            Determines how boxes at the same location coordinate
+            are displayed on the graph. If "group", the boxes are
+            plotted next to one another centered around the shared
+            location. If "overlay", the boxes are plotted over one
+            another, you might need to set "opacity" to see them
+            multiple boxes. Has no effect on traces that have
+            "width" set.
+        calendar
+            Sets the default calendar system to use for
+            interpreting and displaying dates throughout the plot.
+        clickmode
+            Determines the mode of single click interactions.
+            "event" is the default value and emits the
+            `plotly_click` event. In addition this mode emits the
+            `plotly_selected` event in drag modes "lasso" and
+            "select", but with no event data attached (kept for
+            compatibility reasons). The "select" flag enables
+            selecting single data points via click. This mode also
+            supports persistent selections, meaning that pressing
+            Shift while clicking, adds to / subtracts from an
+            existing selection. "select" with `hovermode`: "x" can
+            be confusing, consider explicitly setting `hovermode`:
+            "closest" when using this feature. Selection events are
+            sent accordingly as long as "event" flag is set as
+            well. When the "event" flag is missing, `plotly_click`
+            and `plotly_selected` events are not fired.
+        colorscale
+            plotly.graph_objs.layout.Colorscale instance or dict
+            with compatible properties
+        colorway
+            Sets the default trace colors.
+        datarevision
+            If provided, a changed value tells `Plotly.react` that
+            one or more data arrays has changed. This way you can
+            modify arrays in-place rather than making a complete
+            new copy for an incremental change. If NOT provided,
+            `Plotly.react` assumes that data arrays are being
+            treated as immutable, thus any data array with a
+            different identity from its predecessor contains new
+            data.
+        direction
+            Legacy polar charts are deprecated! Please switch to
+            "polar" subplots. Sets the direction corresponding to
+            positive angles in legacy polar charts.
+        dragmode
+            Determines the mode of drag interactions. "select" and
+            "lasso" apply only to scatter traces with markers or
+            text. "orbit" and "turntable" apply only to 3D scenes.
+        editrevision
+            Controls persistence of user-driven changes in
+            `editable: true` configuration, other than trace names
+            and axis titles. Defaults to `layout.uirevision`.
+        extendpiecolors
+            If `true`, the pie slice colors (whether given by
+            `piecolorway` or inherited from `colorway`) will be
+            extended to three times its original length by first
+            repeating every color 20% lighter then each color 20%
+            darker. This is intended to reduce the likelihood of
+            reusing the same color when you have many slices, but
+            you can set `false` to disable. Colors provided in the
+            trace, using `marker.colors`, are never extended.
+        extendsunburstcolors
+            If `true`, the sunburst slice colors (whether given by
+            `sunburstcolorway` or inherited from `colorway`) will
+            be extended to three times its original length by first
+            repeating every color 20% lighter then each color 20%
+            darker. This is intended to reduce the likelihood of
+            reusing the same color when you have many slices, but
+            you can set `false` to disable. Colors provided in the
+            trace, using `marker.colors`, are never extended.
+        font
+            Sets the global font. Note that fonts used in traces
+            and other layout components inherit from the global
+            font.
+        geo
+            plotly.graph_objs.layout.Geo instance or dict with
+            compatible properties
+        grid
+            plotly.graph_objs.layout.Grid instance or dict with
+            compatible properties
+        height
+            Sets the plot's height (in px).
+        hiddenlabels
+
+        hiddenlabelssrc
+            Sets the source reference on plot.ly for  hiddenlabels
+            .
+        hidesources
+            Determines whether or not a text link citing the data
+            source is placed at the bottom-right cored of the
+            figure. Has only an effect only on graphs that have
+            been generated via forked graphs from the plotly
+            service (at https://plot.ly or on-premise).
+        hoverdistance
+            Sets the default distance (in pixels) to look for data
+            to add hover labels (-1 means no cutoff, 0 means no
+            looking for data). This is only a real distance for
+            hovering on point-like objects, like scatter points.
+            For area-like objects (bars, scatter fills, etc)
+            hovering is on inside the area and off outside, but
+            these objects will not supersede hover on point-like
+            objects in case of conflict.
+        hoverlabel
+            plotly.graph_objs.layout.Hoverlabel instance or dict
+            with compatible properties
+        hovermode
+            Determines the mode of hover interactions. If
+            `clickmode` includes the "select" flag, `hovermode`
+            defaults to "closest". If `clickmode` lacks the
+            "select" flag, it defaults to "x" or "y" (depending on
+            the trace's `orientation` value) for plots based on
+            cartesian coordinates. For anything else the default
+            value is "closest".
+        images
+            plotly.graph_objs.layout.Image instance or dict with
+            compatible properties
+        imagedefaults
+            When used in a template (as
+            layout.template.layout.imagedefaults), sets the default
+            property values to use for elements of layout.images
+        legend
+            plotly.graph_objs.layout.Legend instance or dict with
+            compatible properties
+        mapbox
+            plotly.graph_objs.layout.Mapbox instance or dict with
+            compatible properties
+        margin
+            plotly.graph_objs.layout.Margin instance or dict with
+            compatible properties
+        meta
+            Assigns extra meta information that can be used in
+            various `text` attributes. Attributes such as the
+            graph, axis and colorbar `title.text`, annotation
+            `text` `trace.name` in legend items, `rangeselector`,
+            `updatemenues` and `sliders` `label` text all support
+            `meta`. One can access `meta` fields using template
+            strings: `%{meta[i]}` where `i` is the index of the
+            `meta` item in question.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
+        modebar
+            plotly.graph_objs.layout.Modebar instance or dict with
+            compatible properties
+        orientation
+            Legacy polar charts are deprecated! Please switch to
+            "polar" subplots. Rotates the entire polar by the given
+            angle in legacy polar charts.
+        paper_bgcolor
+            Sets the color of paper where the graph is drawn.
+        piecolorway
+            Sets the default pie slice colors. Defaults to the main
+            `colorway` used for trace colors. If you specify a new
+            list here it can still be extended with lighter and
+            darker colors, see `extendpiecolors`.
+        plot_bgcolor
+            Sets the color of plotting area in-between x and y
+            axes.
+        polar
+            plotly.graph_objs.layout.Polar instance or dict with
+            compatible properties
+        radialaxis
+            plotly.graph_objs.layout.RadialAxis instance or dict
+            with compatible properties
+        scene
+            plotly.graph_objs.layout.Scene instance or dict with
+            compatible properties
+        selectdirection
+            When "dragmode" is set to "select", this limits the
+            selection of the drag to horizontal, vertical or
+            diagonal. "h" only allows horizontal selection, "v"
+            only vertical, "d" only diagonal and "any" sets no
+            limit.
+        selectionrevision
+            Controls persistence of user-driven changes in selected
+            points from all traces.
+        separators
+            Sets the decimal and thousand separators. For example,
+            *. * puts a '.' before decimals and a space between
+            thousands. In English locales, dflt is ".," but other
+            locales may alter this default.
+        shapes
+            plotly.graph_objs.layout.Shape instance or dict with
+            compatible properties
+        shapedefaults
+            When used in a template (as
+            layout.template.layout.shapedefaults), sets the default
+            property values to use for elements of layout.shapes
+        showlegend
+            Determines whether or not a legend is drawn. Default is
+            `true` if there is a trace to show and any of these: a)
+            Two or more traces would by default be shown in the
+            legend. b) One pie trace is shown in the legend. c) One
+            trace is explicitly given with `showlegend: true`.
+        sliders
+            plotly.graph_objs.layout.Slider instance or dict with
+            compatible properties
+        sliderdefaults
+            When used in a template (as
+            layout.template.layout.sliderdefaults), sets the
+            default property values to use for elements of
+            layout.sliders
+        spikedistance
+            Sets the default distance (in pixels) to look for data
+            to draw spikelines to (-1 means no cutoff, 0 means no
+            looking for data). As with hoverdistance, distance does
+            not apply to area-like objects. In addition, some
+            objects can be hovered on but will not generate
+            spikelines, such as scatter fills.
+        sunburstcolorway
+            Sets the default sunburst slice colors. Defaults to the
+            main `colorway` used for trace colors. If you specify a
+            new list here it can still be extended with lighter and
+            darker colors, see `extendsunburstcolors`.
+        template
+            Default attributes to be applied to the plot. This
+            should be a dict with format: `{'layout':
+            layoutTemplate, 'data': {trace_type: [traceTemplate,
+            ...], ...}}` where `layoutTemplate` is a dict matching
+            the structure of `figure.layout` and `traceTemplate` is
+            a dict matching the structure of the trace with type
+            `trace_type` (e.g. 'scatter'). Alternatively, this may
+            be specified as an instance of
+            plotly.graph_objs.layout.Template.  Trace templates are
+            applied cyclically to traces of each type. Container
+            arrays (eg `annotations`) have special handling: An
+            object ending in `defaults` (eg `annotationdefaults`)
+            is applied to each array item. But if an item has a
+            `templateitemname` key we look in the template array
+            for an item with matching `name` and apply that
+            instead. If no matching `name` is found we mark the
+            item invisible. Any named template item not referenced
+            is appended to the end of the array, so this can be
+            used to add a watermark annotation or a logo image, for
+            example. To omit one of these items on the plot, make
+            an item with matching `templateitemname` and `visible:
+            false`.
+        ternary
+            plotly.graph_objs.layout.Ternary instance or dict with
+            compatible properties
+        title
+            plotly.graph_objs.layout.Title instance or dict with
+            compatible properties
+        titlefont
+            Deprecated: Please use layout.title.font instead. Sets
+            the title font. Note that the title's font used to be
+            customized by the now deprecated `titlefont` attribute.
+        transition
+            Sets transition options used during Plotly.react
+            updates.
+        uirevision
+            Used to allow user interactions with the plot to
+            persist after `Plotly.react` calls that are unaware of
+            these interactions. If `uirevision` is omitted, or if
+            it is given and it changed from the previous
+            `Plotly.react` call, the exact new figure is used. If
+            `uirevision` is truthy and did NOT change, any
+            attribute that has been affected by user interactions
+            and did not receive a different value in the new figure
+            will keep the interaction value. `layout.uirevision`
+            attribute serves as the default for `uirevision`
+            attributes in various sub-containers. For finer control
+            you can set these sub-attributes directly. For example,
+            if your app separately controls the data on the x and y
+            axes you might set `xaxis.uirevision=*time*` and
+            `yaxis.uirevision=*cost*`. Then if only the y data is
+            changed, you can update `yaxis.uirevision=*quantity*`
+            and the y axis range will reset but the x axis range
+            will retain any user-driven zoom.
+        updatemenus
+            plotly.graph_objs.layout.Updatemenu instance or dict
+            with compatible properties
+        updatemenudefaults
+            When used in a template (as
+            layout.template.layout.updatemenudefaults), sets the
+            default property values to use for elements of
+            layout.updatemenus
+        violingap
+            Sets the gap (in plot fraction) between violins of
+            adjacent location coordinates. Has no effect on traces
+            that have "width" set.
+        violingroupgap
+            Sets the gap (in plot fraction) between violins of the
+            same location coordinate. Has no effect on traces that
+            have "width" set.
+        violinmode
+            Determines how violins at the same location coordinate
+            are displayed on the graph. If "group", the violins are
+            plotted next to one another centered around the shared
+            location. If "overlay", the violins are plotted over
+            one another, you might need to set "opacity" to see
+            them multiple violins. Has no effect on traces that
+            have "width" set.
+        waterfallgap
+            Sets the gap (in plot fraction) between bars of
+            adjacent location coordinates.
+        waterfallgroupgap
+            Sets the gap (in plot fraction) between bars of the
+            same location coordinate.
+        waterfallmode
+            Determines how bars at the same location coordinate are
+            displayed on the graph. With "group", the bars are
+            plotted next to one another centered around the shared
+            location. With "overlay", the bars are plotted over one
+            another, you might need to an "opacity" to see multiple
+            bars.
         width
             Sets the plot's width (in px).
         xaxis
@@ -4648,6 +4835,8 @@ an instance of plotly.graph_objs.Layout"""
         self._validators['editrevision'] = v_layout.EditrevisionValidator()
         self._validators['extendpiecolors'
                         ] = v_layout.ExtendpiecolorsValidator()
+        self._validators['extendsunburstcolors'
+                        ] = v_layout.ExtendsunburstcolorsValidator()
         self._validators['font'] = v_layout.FontValidator()
         self._validators['geo'] = v_layout.GeoValidator()
         self._validators['grid'] = v_layout.GridValidator()
@@ -4685,6 +4874,8 @@ an instance of plotly.graph_objs.Layout"""
         self._validators['sliders'] = v_layout.SlidersValidator()
         self._validators['sliderdefaults'] = v_layout.SliderValidator()
         self._validators['spikedistance'] = v_layout.SpikedistanceValidator()
+        self._validators['sunburstcolorway'
+                        ] = v_layout.SunburstcolorwayValidator()
         self._validators['template'] = v_layout.TemplateValidator()
         self._validators['ternary'] = v_layout.TernaryValidator()
         self._validators['title'] = v_layout.TitleValidator()
@@ -4695,6 +4886,10 @@ an instance of plotly.graph_objs.Layout"""
         self._validators['violingap'] = v_layout.ViolingapValidator()
         self._validators['violingroupgap'] = v_layout.ViolingroupgapValidator()
         self._validators['violinmode'] = v_layout.ViolinmodeValidator()
+        self._validators['waterfallgap'] = v_layout.WaterfallgapValidator()
+        self._validators['waterfallgroupgap'
+                        ] = v_layout.WaterfallgroupgapValidator()
+        self._validators['waterfallmode'] = v_layout.WaterfallmodeValidator()
         self._validators['width'] = v_layout.WidthValidator()
         self._validators['xaxis'] = v_layout.XAxisValidator()
         self._validators['yaxis'] = v_layout.YAxisValidator()
@@ -4743,6 +4938,10 @@ an instance of plotly.graph_objs.Layout"""
         _v = arg.pop('extendpiecolors', None)
         self['extendpiecolors'
             ] = extendpiecolors if extendpiecolors is not None else _v
+        _v = arg.pop('extendsunburstcolors', None)
+        self[
+            'extendsunburstcolors'
+        ] = extendsunburstcolors if extendsunburstcolors is not None else _v
         _v = arg.pop('font', None)
         self['font'] = font if font is not None else _v
         _v = arg.pop('geo', None)
@@ -4820,6 +5019,9 @@ an instance of plotly.graph_objs.Layout"""
         _v = arg.pop('spikedistance', None)
         self['spikedistance'
             ] = spikedistance if spikedistance is not None else _v
+        _v = arg.pop('sunburstcolorway', None)
+        self['sunburstcolorway'
+            ] = sunburstcolorway if sunburstcolorway is not None else _v
         _v = arg.pop('template', None)
         _v = template if template is not None else _v
         if _v is not None:
@@ -4848,12 +5050,4295 @@ an instance of plotly.graph_objs.Layout"""
             ] = violingroupgap if violingroupgap is not None else _v
         _v = arg.pop('violinmode', None)
         self['violinmode'] = violinmode if violinmode is not None else _v
+        _v = arg.pop('waterfallgap', None)
+        self['waterfallgap'] = waterfallgap if waterfallgap is not None else _v
+        _v = arg.pop('waterfallgroupgap', None)
+        self['waterfallgroupgap'
+            ] = waterfallgroupgap if waterfallgroupgap is not None else _v
+        _v = arg.pop('waterfallmode', None)
+        self['waterfallmode'
+            ] = waterfallmode if waterfallmode is not None else _v
         _v = arg.pop('width', None)
         self['width'] = width if width is not None else _v
         _v = arg.pop('xaxis', None)
         self['xaxis'] = xaxis if xaxis is not None else _v
         _v = arg.pop('yaxis', None)
         self['yaxis'] = yaxis if yaxis is not None else _v
+
+        # Process unknown kwargs
+        # ----------------------
+        self._process_kwargs(**dict(arg, **kwargs))
+
+        # Reset skip_invalid
+        # ------------------
+        self._skip_invalid = False
+
+
+from plotly.basedatatypes import BaseTraceType as _BaseTraceType
+import copy as _copy
+
+
+class Waterfall(_BaseTraceType):
+
+    # alignmentgroup
+    # --------------
+    @property
+    def alignmentgroup(self):
+        """
+        Set several traces linked to the same position axis or matching
+        axes to the same offsetgroup where bars of the same position
+        coordinate will line up.
+    
+        The 'alignmentgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['alignmentgroup']
+
+    @alignmentgroup.setter
+    def alignmentgroup(self, val):
+        self['alignmentgroup'] = val
+
+    # base
+    # ----
+    @property
+    def base(self):
+        """
+        Sets where the bar base is drawn (in position axis units).
+    
+        The 'base' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self['base']
+
+    @base.setter
+    def base(self, val):
+        self['base'] = val
+
+    # cliponaxis
+    # ----------
+    @property
+    def cliponaxis(self):
+        """
+        Determines whether the text nodes are clipped about the subplot
+        axes. To show the text nodes above axis lines and tick labels,
+        make sure to set `xaxis.layer` and `yaxis.layer` to *below
+        traces*.
+    
+        The 'cliponaxis' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self['cliponaxis']
+
+    @cliponaxis.setter
+    def cliponaxis(self, val):
+        self['cliponaxis'] = val
+
+    # connector
+    # ---------
+    @property
+    def connector(self):
+        """
+        The 'connector' property is an instance of Connector
+        that may be specified as:
+          - An instance of plotly.graph_objs.waterfall.Connector
+          - A dict of string/value properties that will be passed
+            to the Connector constructor
+    
+            Supported dict properties:
+                
+                line
+                    plotly.graph_objs.waterfall.connector.Line
+                    instance or dict with compatible properties
+                mode
+                    Sets the shape of connector lines.
+                visible
+                    Determines if connector lines are drawn.
+
+        Returns
+        -------
+        plotly.graph_objs.waterfall.Connector
+        """
+        return self['connector']
+
+    @connector.setter
+    def connector(self, val):
+        self['connector'] = val
+
+    # constraintext
+    # -------------
+    @property
+    def constraintext(self):
+        """
+        Constrain the size of text inside or outside a bar to be no
+        larger than the bar itself.
+    
+        The 'constraintext' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['inside', 'outside', 'both', 'none']
+
+        Returns
+        -------
+        Any
+        """
+        return self['constraintext']
+
+    @constraintext.setter
+    def constraintext(self, val):
+        self['constraintext'] = val
+
+    # customdata
+    # ----------
+    @property
+    def customdata(self):
+        """
+        Assigns extra data each datum. This may be useful when
+        listening to hover, click and selection events. Note that,
+        "scatter" traces also appends customdata items in the markers
+        DOM elements
+    
+        The 'customdata' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self['customdata']
+
+    @customdata.setter
+    def customdata(self, val):
+        self['customdata'] = val
+
+    # customdatasrc
+    # -------------
+    @property
+    def customdatasrc(self):
+        """
+        Sets the source reference on plot.ly for  customdata .
+    
+        The 'customdatasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['customdatasrc']
+
+    @customdatasrc.setter
+    def customdatasrc(self, val):
+        self['customdatasrc'] = val
+
+    # decreasing
+    # ----------
+    @property
+    def decreasing(self):
+        """
+        The 'decreasing' property is an instance of Decreasing
+        that may be specified as:
+          - An instance of plotly.graph_objs.waterfall.Decreasing
+          - A dict of string/value properties that will be passed
+            to the Decreasing constructor
+    
+            Supported dict properties:
+                
+                marker
+                    plotly.graph_objs.waterfall.decreasing.Marker
+                    instance or dict with compatible properties
+
+        Returns
+        -------
+        plotly.graph_objs.waterfall.Decreasing
+        """
+        return self['decreasing']
+
+    @decreasing.setter
+    def decreasing(self, val):
+        self['decreasing'] = val
+
+    # dx
+    # --
+    @property
+    def dx(self):
+        """
+        Sets the x coordinate step. See `x0` for more info.
+    
+        The 'dx' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self['dx']
+
+    @dx.setter
+    def dx(self, val):
+        self['dx'] = val
+
+    # dy
+    # --
+    @property
+    def dy(self):
+        """
+        Sets the y coordinate step. See `y0` for more info.
+    
+        The 'dy' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self['dy']
+
+    @dy.setter
+    def dy(self, val):
+        self['dy'] = val
+
+    # hoverinfo
+    # ---------
+    @property
+    def hoverinfo(self):
+        """
+        Determines which trace information appear on hover. If `none`
+        or `skip` are set, no information is displayed upon hovering.
+        But, if `none` is set, click and hover events are still fired.
+    
+        The 'hoverinfo' property is a flaglist and may be specified
+        as a string containing:
+          - Any combination of ['x', 'y', 'z', 'text', 'name'] joined with '+' characters
+            (e.g. 'x+y')
+            OR exactly one of ['all', 'none', 'skip'] (e.g. 'skip')
+          - A list or array of the above
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['hoverinfo']
+
+    @hoverinfo.setter
+    def hoverinfo(self, val):
+        self['hoverinfo'] = val
+
+    # hoverinfosrc
+    # ------------
+    @property
+    def hoverinfosrc(self):
+        """
+        Sets the source reference on plot.ly for  hoverinfo .
+    
+        The 'hoverinfosrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hoverinfosrc']
+
+    @hoverinfosrc.setter
+    def hoverinfosrc(self, val):
+        self['hoverinfosrc'] = val
+
+    # hoverlabel
+    # ----------
+    @property
+    def hoverlabel(self):
+        """
+        The 'hoverlabel' property is an instance of Hoverlabel
+        that may be specified as:
+          - An instance of plotly.graph_objs.waterfall.Hoverlabel
+          - A dict of string/value properties that will be passed
+            to the Hoverlabel constructor
+    
+            Supported dict properties:
+                
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
+                bgcolor
+                    Sets the background color of the hover labels
+                    for this trace
+                bgcolorsrc
+                    Sets the source reference on plot.ly for
+                    bgcolor .
+                bordercolor
+                    Sets the border color of the hover labels for
+                    this trace.
+                bordercolorsrc
+                    Sets the source reference on plot.ly for
+                    bordercolor .
+                font
+                    Sets the font used in hover labels.
+                namelength
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
+                namelengthsrc
+                    Sets the source reference on plot.ly for
+                    namelength .
+
+        Returns
+        -------
+        plotly.graph_objs.waterfall.Hoverlabel
+        """
+        return self['hoverlabel']
+
+    @hoverlabel.setter
+    def hoverlabel(self, val):
+        self['hoverlabel'] = val
+
+    # hovertemplate
+    # -------------
+    @property
+    def hovertemplate(self):
+        """
+        Template string used for rendering the information that appear
+        on hover box. Note that this will override `hoverinfo`.
+        Variables are inserted using %{variable}, for example "y:
+        %{y}". Numbers are formatted using d3-format's syntax
+        %{variable:d3-format}, for example "Price: %{y:$.2f}". See http
+        s://github.com/d3/d3-format/blob/master/README.md#locale_format
+        for details on the formatting syntax. The variables available
+        in `hovertemplate` are the ones emitted as event data described
+        at this link https://plot.ly/javascript/plotlyjs-events/#event-
+        data. Additionally, every attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        Anything contained in tag `<extra>` is displayed in the
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
+    
+        The 'hovertemplate' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self['hovertemplate']
+
+    @hovertemplate.setter
+    def hovertemplate(self, val):
+        self['hovertemplate'] = val
+
+    # hovertemplatesrc
+    # ----------------
+    @property
+    def hovertemplatesrc(self):
+        """
+        Sets the source reference on plot.ly for  hovertemplate .
+    
+        The 'hovertemplatesrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hovertemplatesrc']
+
+    @hovertemplatesrc.setter
+    def hovertemplatesrc(self, val):
+        self['hovertemplatesrc'] = val
+
+    # hovertext
+    # ---------
+    @property
+    def hovertext(self):
+        """
+        Sets hover text elements associated with each (x,y) pair. If a
+        single string, the same string appears over all the data
+        points. If an array of string, the items are mapped in order to
+        the this trace's (x,y) coordinates. To be seen, trace
+        `hoverinfo` must contain a "text" flag.
+    
+        The 'hovertext' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self['hovertext']
+
+    @hovertext.setter
+    def hovertext(self, val):
+        self['hovertext'] = val
+
+    # hovertextsrc
+    # ------------
+    @property
+    def hovertextsrc(self):
+        """
+        Sets the source reference on plot.ly for  hovertext .
+    
+        The 'hovertextsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hovertextsrc']
+
+    @hovertextsrc.setter
+    def hovertextsrc(self, val):
+        self['hovertextsrc'] = val
+
+    # ids
+    # ---
+    @property
+    def ids(self):
+        """
+        Assigns id labels to each datum. These ids for object constancy
+        of data points during animation. Should be an array of strings,
+        not numbers or any other type.
+    
+        The 'ids' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self['ids']
+
+    @ids.setter
+    def ids(self, val):
+        self['ids'] = val
+
+    # idssrc
+    # ------
+    @property
+    def idssrc(self):
+        """
+        Sets the source reference on plot.ly for  ids .
+    
+        The 'idssrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['idssrc']
+
+    @idssrc.setter
+    def idssrc(self, val):
+        self['idssrc'] = val
+
+    # increasing
+    # ----------
+    @property
+    def increasing(self):
+        """
+        The 'increasing' property is an instance of Increasing
+        that may be specified as:
+          - An instance of plotly.graph_objs.waterfall.Increasing
+          - A dict of string/value properties that will be passed
+            to the Increasing constructor
+    
+            Supported dict properties:
+                
+                marker
+                    plotly.graph_objs.waterfall.increasing.Marker
+                    instance or dict with compatible properties
+
+        Returns
+        -------
+        plotly.graph_objs.waterfall.Increasing
+        """
+        return self['increasing']
+
+    @increasing.setter
+    def increasing(self, val):
+        self['increasing'] = val
+
+    # insidetextfont
+    # --------------
+    @property
+    def insidetextfont(self):
+        """
+        Sets the font used for `text` lying inside the bar.
+    
+        The 'insidetextfont' property is an instance of Insidetextfont
+        that may be specified as:
+          - An instance of plotly.graph_objs.waterfall.Insidetextfont
+          - A dict of string/value properties that will be passed
+            to the Insidetextfont constructor
+    
+            Supported dict properties:
+                
+                color
+    
+                colorsrc
+                    Sets the source reference on plot.ly for  color
+                    .
+                family
+                    HTML font family - the typeface that will be
+                    applied by the web browser. The web browser
+                    will only be able to apply a font if it is
+                    available on the system which it operates.
+                    Provide multiple font families, separated by
+                    commas, to indicate the preference in which to
+                    apply fonts if they aren't available on the
+                    system. The plotly service (at https://plot.ly
+                    or on-premise) generates images on a server,
+                    where only a select number of fonts are
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
+                familysrc
+                    Sets the source reference on plot.ly for
+                    family .
+                size
+    
+                sizesrc
+                    Sets the source reference on plot.ly for  size
+                    .
+
+        Returns
+        -------
+        plotly.graph_objs.waterfall.Insidetextfont
+        """
+        return self['insidetextfont']
+
+    @insidetextfont.setter
+    def insidetextfont(self, val):
+        self['insidetextfont'] = val
+
+    # legendgroup
+    # -----------
+    @property
+    def legendgroup(self):
+        """
+        Sets the legend group for this trace. Traces part of the same
+        legend group hide/show at the same time when toggling legend
+        items.
+    
+        The 'legendgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['legendgroup']
+
+    @legendgroup.setter
+    def legendgroup(self, val):
+        self['legendgroup'] = val
+
+    # measure
+    # -------
+    @property
+    def measure(self):
+        """
+        An array containing types of values. By default the values are
+        considered as 'relative'. However; it is possible to use
+        'total' to compute the sums. Also 'absolute' could be applied
+        to reset the computed total or to declare an initial value
+        where needed.
+    
+        The 'measure' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self['measure']
+
+    @measure.setter
+    def measure(self, val):
+        self['measure'] = val
+
+    # measuresrc
+    # ----------
+    @property
+    def measuresrc(self):
+        """
+        Sets the source reference on plot.ly for  measure .
+    
+        The 'measuresrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['measuresrc']
+
+    @measuresrc.setter
+    def measuresrc(self, val):
+        self['measuresrc'] = val
+
+    # name
+    # ----
+    @property
+    def name(self):
+        """
+        Sets the trace name. The trace name appear as the legend item
+        and on hover.
+    
+        The 'name' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['name']
+
+    @name.setter
+    def name(self, val):
+        self['name'] = val
+
+    # offset
+    # ------
+    @property
+    def offset(self):
+        """
+        Shifts the position where the bar is drawn (in position axis
+        units). In "group" barmode, traces that set "offset" will be
+        excluded and drawn in "overlay" mode instead.
+    
+        The 'offset' property is a number and may be specified as:
+          - An int or float
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        int|float|numpy.ndarray
+        """
+        return self['offset']
+
+    @offset.setter
+    def offset(self, val):
+        self['offset'] = val
+
+    # offsetgroup
+    # -----------
+    @property
+    def offsetgroup(self):
+        """
+        Set several traces linked to the same position axis or matching
+        axes to the same offsetgroup where bars of the same position
+        coordinate will line up.
+    
+        The 'offsetgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['offsetgroup']
+
+    @offsetgroup.setter
+    def offsetgroup(self, val):
+        self['offsetgroup'] = val
+
+    # offsetsrc
+    # ---------
+    @property
+    def offsetsrc(self):
+        """
+        Sets the source reference on plot.ly for  offset .
+    
+        The 'offsetsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['offsetsrc']
+
+    @offsetsrc.setter
+    def offsetsrc(self, val):
+        self['offsetsrc'] = val
+
+    # opacity
+    # -------
+    @property
+    def opacity(self):
+        """
+        Sets the opacity of the trace.
+    
+        The 'opacity' property is a number and may be specified as:
+          - An int or float in the interval [0, 1]
+
+        Returns
+        -------
+        int|float
+        """
+        return self['opacity']
+
+    @opacity.setter
+    def opacity(self, val):
+        self['opacity'] = val
+
+    # orientation
+    # -----------
+    @property
+    def orientation(self):
+        """
+        Sets the orientation of the bars. With "v" ("h"), the value of
+        the each bar spans along the vertical (horizontal).
+    
+        The 'orientation' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['v', 'h']
+
+        Returns
+        -------
+        Any
+        """
+        return self['orientation']
+
+    @orientation.setter
+    def orientation(self, val):
+        self['orientation'] = val
+
+    # outsidetextfont
+    # ---------------
+    @property
+    def outsidetextfont(self):
+        """
+        Sets the font used for `text` lying outside the bar.
+    
+        The 'outsidetextfont' property is an instance of Outsidetextfont
+        that may be specified as:
+          - An instance of plotly.graph_objs.waterfall.Outsidetextfont
+          - A dict of string/value properties that will be passed
+            to the Outsidetextfont constructor
+    
+            Supported dict properties:
+                
+                color
+    
+                colorsrc
+                    Sets the source reference on plot.ly for  color
+                    .
+                family
+                    HTML font family - the typeface that will be
+                    applied by the web browser. The web browser
+                    will only be able to apply a font if it is
+                    available on the system which it operates.
+                    Provide multiple font families, separated by
+                    commas, to indicate the preference in which to
+                    apply fonts if they aren't available on the
+                    system. The plotly service (at https://plot.ly
+                    or on-premise) generates images on a server,
+                    where only a select number of fonts are
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
+                familysrc
+                    Sets the source reference on plot.ly for
+                    family .
+                size
+    
+                sizesrc
+                    Sets the source reference on plot.ly for  size
+                    .
+
+        Returns
+        -------
+        plotly.graph_objs.waterfall.Outsidetextfont
+        """
+        return self['outsidetextfont']
+
+    @outsidetextfont.setter
+    def outsidetextfont(self, val):
+        self['outsidetextfont'] = val
+
+    # selectedpoints
+    # --------------
+    @property
+    def selectedpoints(self):
+        """
+        Array containing integer indices of selected points. Has an
+        effect only for traces that support selections. Note that an
+        empty array means an empty selection where the `unselected` are
+        turned on for all points, whereas, any other non-array values
+        means no selection all where the `selected` and `unselected`
+        styles have no effect.
+    
+        The 'selectedpoints' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['selectedpoints']
+
+    @selectedpoints.setter
+    def selectedpoints(self, val):
+        self['selectedpoints'] = val
+
+    # showlegend
+    # ----------
+    @property
+    def showlegend(self):
+        """
+        Determines whether or not an item corresponding to this trace
+        is shown in the legend.
+    
+        The 'showlegend' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self['showlegend']
+
+    @showlegend.setter
+    def showlegend(self, val):
+        self['showlegend'] = val
+
+    # stream
+    # ------
+    @property
+    def stream(self):
+        """
+        The 'stream' property is an instance of Stream
+        that may be specified as:
+          - An instance of plotly.graph_objs.waterfall.Stream
+          - A dict of string/value properties that will be passed
+            to the Stream constructor
+    
+            Supported dict properties:
+                
+                maxpoints
+                    Sets the maximum number of points to keep on
+                    the plots from an incoming stream. If
+                    `maxpoints` is set to 50, only the newest 50
+                    points will be displayed on the plot.
+                token
+                    The stream id number links a data trace on a
+                    plot with a stream. See
+                    https://plot.ly/settings for more details.
+
+        Returns
+        -------
+        plotly.graph_objs.waterfall.Stream
+        """
+        return self['stream']
+
+    @stream.setter
+    def stream(self, val):
+        self['stream'] = val
+
+    # text
+    # ----
+    @property
+    def text(self):
+        """
+        Sets text elements associated with each (x,y) pair. If a single
+        string, the same string appears over all the data points. If an
+        array of string, the items are mapped in order to the this
+        trace's (x,y) coordinates. If trace `hoverinfo` contains a
+        "text" flag and "hovertext" is not set, these elements will be
+        seen in the hover labels.
+    
+        The 'text' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self['text']
+
+    @text.setter
+    def text(self, val):
+        self['text'] = val
+
+    # textfont
+    # --------
+    @property
+    def textfont(self):
+        """
+        Sets the font used for `text`.
+    
+        The 'textfont' property is an instance of Textfont
+        that may be specified as:
+          - An instance of plotly.graph_objs.waterfall.Textfont
+          - A dict of string/value properties that will be passed
+            to the Textfont constructor
+    
+            Supported dict properties:
+                
+                color
+    
+                colorsrc
+                    Sets the source reference on plot.ly for  color
+                    .
+                family
+                    HTML font family - the typeface that will be
+                    applied by the web browser. The web browser
+                    will only be able to apply a font if it is
+                    available on the system which it operates.
+                    Provide multiple font families, separated by
+                    commas, to indicate the preference in which to
+                    apply fonts if they aren't available on the
+                    system. The plotly service (at https://plot.ly
+                    or on-premise) generates images on a server,
+                    where only a select number of fonts are
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
+                familysrc
+                    Sets the source reference on plot.ly for
+                    family .
+                size
+    
+                sizesrc
+                    Sets the source reference on plot.ly for  size
+                    .
+
+        Returns
+        -------
+        plotly.graph_objs.waterfall.Textfont
+        """
+        return self['textfont']
+
+    @textfont.setter
+    def textfont(self, val):
+        self['textfont'] = val
+
+    # textposition
+    # ------------
+    @property
+    def textposition(self):
+        """
+        Specifies the location of the `text`. "inside" positions `text`
+        inside, next to the bar end (rotated and scaled if needed).
+        "outside" positions `text` outside, next to the bar end (scaled
+        if needed), unless there is another bar stacked on this one,
+        then the text gets pushed inside. "auto" tries to position
+        `text` inside the bar, but if the bar is too small and no bar
+        is stacked on this one the text is moved outside.
+    
+        The 'textposition' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['inside', 'outside', 'auto', 'none']
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['textposition']
+
+    @textposition.setter
+    def textposition(self, val):
+        self['textposition'] = val
+
+    # textpositionsrc
+    # ---------------
+    @property
+    def textpositionsrc(self):
+        """
+        Sets the source reference on plot.ly for  textposition .
+    
+        The 'textpositionsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['textpositionsrc']
+
+    @textpositionsrc.setter
+    def textpositionsrc(self, val):
+        self['textpositionsrc'] = val
+
+    # textsrc
+    # -------
+    @property
+    def textsrc(self):
+        """
+        Sets the source reference on plot.ly for  text .
+    
+        The 'textsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['textsrc']
+
+    @textsrc.setter
+    def textsrc(self, val):
+        self['textsrc'] = val
+
+    # totals
+    # ------
+    @property
+    def totals(self):
+        """
+        The 'totals' property is an instance of Totals
+        that may be specified as:
+          - An instance of plotly.graph_objs.waterfall.Totals
+          - A dict of string/value properties that will be passed
+            to the Totals constructor
+    
+            Supported dict properties:
+                
+                marker
+                    plotly.graph_objs.waterfall.totals.Marker
+                    instance or dict with compatible properties
+
+        Returns
+        -------
+        plotly.graph_objs.waterfall.Totals
+        """
+        return self['totals']
+
+    @totals.setter
+    def totals(self, val):
+        self['totals'] = val
+
+    # uid
+    # ---
+    @property
+    def uid(self):
+        """
+        Assign an id to this trace, Use this to provide object
+        constancy between traces during animations and transitions.
+    
+        The 'uid' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['uid']
+
+    @uid.setter
+    def uid(self, val):
+        self['uid'] = val
+
+    # uirevision
+    # ----------
+    @property
+    def uirevision(self):
+        """
+        Controls persistence of some user-driven changes to the trace:
+        `constraintrange` in `parcoords` traces, as well as some
+        `editable: true` modifications such as `name` and
+        `colorbar.title`. Defaults to `layout.uirevision`. Note that
+        other user-driven trace attribute changes are controlled by
+        `layout` attributes: `trace.visible` is controlled by
+        `layout.legend.uirevision`, `selectedpoints` is controlled by
+        `layout.selectionrevision`, and `colorbar.(x|y)` (accessible
+        with `config: {editable: true}`) is controlled by
+        `layout.editrevision`. Trace changes are tracked by `uid`,
+        which only falls back on trace index if no `uid` is provided.
+        So if your app can add/remove traces before the end of the
+        `data` array, such that the same trace has a different index,
+        you can still preserve user-driven changes if you give each
+        trace a `uid` that stays with it as it moves.
+    
+        The 'uirevision' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['uirevision']
+
+    @uirevision.setter
+    def uirevision(self, val):
+        self['uirevision'] = val
+
+    # visible
+    # -------
+    @property
+    def visible(self):
+        """
+        Determines whether or not this trace is visible. If
+        "legendonly", the trace is not drawn, but can appear as a
+        legend item (provided that the legend itself is visible).
+    
+        The 'visible' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                [True, False, 'legendonly']
+
+        Returns
+        -------
+        Any
+        """
+        return self['visible']
+
+    @visible.setter
+    def visible(self, val):
+        self['visible'] = val
+
+    # width
+    # -----
+    @property
+    def width(self):
+        """
+        Sets the bar width (in position axis units).
+    
+        The 'width' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        int|float|numpy.ndarray
+        """
+        return self['width']
+
+    @width.setter
+    def width(self, val):
+        self['width'] = val
+
+    # widthsrc
+    # --------
+    @property
+    def widthsrc(self):
+        """
+        Sets the source reference on plot.ly for  width .
+    
+        The 'widthsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['widthsrc']
+
+    @widthsrc.setter
+    def widthsrc(self, val):
+        self['widthsrc'] = val
+
+    # x
+    # -
+    @property
+    def x(self):
+        """
+        Sets the x coordinates.
+    
+        The 'x' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self['x']
+
+    @x.setter
+    def x(self, val):
+        self['x'] = val
+
+    # x0
+    # --
+    @property
+    def x0(self):
+        """
+        Alternate to `x`. Builds a linear space of x coordinates. Use
+        with `dx` where `x0` is the starting coordinate and `dx` the
+        step.
+    
+        The 'x0' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['x0']
+
+    @x0.setter
+    def x0(self, val):
+        self['x0'] = val
+
+    # xaxis
+    # -----
+    @property
+    def xaxis(self):
+        """
+        Sets a reference between this trace's x coordinates and a 2D
+        cartesian x axis. If "x" (the default value), the x coordinates
+        refer to `layout.xaxis`. If "x2", the x coordinates refer to
+        `layout.xaxis2`, and so on.
+    
+        The 'xaxis' property is an identifier of a particular
+        subplot, of type 'x', that may be specified as the string 'x'
+        optionally followed by an integer >= 1
+        (e.g. 'x', 'x1', 'x2', 'x3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self['xaxis']
+
+    @xaxis.setter
+    def xaxis(self, val):
+        self['xaxis'] = val
+
+    # xsrc
+    # ----
+    @property
+    def xsrc(self):
+        """
+        Sets the source reference on plot.ly for  x .
+    
+        The 'xsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['xsrc']
+
+    @xsrc.setter
+    def xsrc(self, val):
+        self['xsrc'] = val
+
+    # y
+    # -
+    @property
+    def y(self):
+        """
+        Sets the y coordinates.
+    
+        The 'y' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self['y']
+
+    @y.setter
+    def y(self, val):
+        self['y'] = val
+
+    # y0
+    # --
+    @property
+    def y0(self):
+        """
+        Alternate to `y`. Builds a linear space of y coordinates. Use
+        with `dy` where `y0` is the starting coordinate and `dy` the
+        step.
+    
+        The 'y0' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['y0']
+
+    @y0.setter
+    def y0(self, val):
+        self['y0'] = val
+
+    # yaxis
+    # -----
+    @property
+    def yaxis(self):
+        """
+        Sets a reference between this trace's y coordinates and a 2D
+        cartesian y axis. If "y" (the default value), the y coordinates
+        refer to `layout.yaxis`. If "y2", the y coordinates refer to
+        `layout.yaxis2`, and so on.
+    
+        The 'yaxis' property is an identifier of a particular
+        subplot, of type 'y', that may be specified as the string 'y'
+        optionally followed by an integer >= 1
+        (e.g. 'y', 'y1', 'y2', 'y3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self['yaxis']
+
+    @yaxis.setter
+    def yaxis(self, val):
+        self['yaxis'] = val
+
+    # ysrc
+    # ----
+    @property
+    def ysrc(self):
+        """
+        Sets the source reference on plot.ly for  y .
+    
+        The 'ysrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['ysrc']
+
+    @ysrc.setter
+    def ysrc(self, val):
+        self['ysrc'] = val
+
+    # type
+    # ----
+    @property
+    def type(self):
+        return self._props['type']
+
+    # property parent name
+    # --------------------
+    @property
+    def _parent_path_str(self):
+        return ''
+
+    # Self properties description
+    # ---------------------------
+    @property
+    def _prop_descriptions(self):
+        return """\
+        alignmentgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same offsetgroup where bars of the
+            same position coordinate will line up.
+        base
+            Sets where the bar base is drawn (in position axis
+            units).
+        cliponaxis
+            Determines whether the text nodes are clipped about the
+            subplot axes. To show the text nodes above axis lines
+            and tick labels, make sure to set `xaxis.layer` and
+            `yaxis.layer` to *below traces*.
+        connector
+            plotly.graph_objs.waterfall.Connector instance or dict
+            with compatible properties
+        constraintext
+            Constrain the size of text inside or outside a bar to
+            be no larger than the bar itself.
+        customdata
+            Assigns extra data each datum. This may be useful when
+            listening to hover, click and selection events. Note
+            that, "scatter" traces also appends customdata items in
+            the markers DOM elements
+        customdatasrc
+            Sets the source reference on plot.ly for  customdata .
+        decreasing
+            plotly.graph_objs.waterfall.Decreasing instance or dict
+            with compatible properties
+        dx
+            Sets the x coordinate step. See `x0` for more info.
+        dy
+            Sets the y coordinate step. See `y0` for more info.
+        hoverinfo
+            Determines which trace information appear on hover. If
+            `none` or `skip` are set, no information is displayed
+            upon hovering. But, if `none` is set, click and hover
+            events are still fired.
+        hoverinfosrc
+            Sets the source reference on plot.ly for  hoverinfo .
+        hoverlabel
+            plotly.graph_objs.waterfall.Hoverlabel instance or dict
+            with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
+        hovertext
+            Sets hover text elements associated with each (x,y)
+            pair. If a single string, the same string appears over
+            all the data points. If an array of string, the items
+            are mapped in order to the this trace's (x,y)
+            coordinates. To be seen, trace `hoverinfo` must contain
+            a "text" flag.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
+        ids
+            Assigns id labels to each datum. These ids for object
+            constancy of data points during animation. Should be an
+            array of strings, not numbers or any other type.
+        idssrc
+            Sets the source reference on plot.ly for  ids .
+        increasing
+            plotly.graph_objs.waterfall.Increasing instance or dict
+            with compatible properties
+        insidetextfont
+            Sets the font used for `text` lying inside the bar.
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
+        measure
+            An array containing types of values. By default the
+            values are considered as 'relative'. However; it is
+            possible to use 'total' to compute the sums. Also
+            'absolute' could be applied to reset the computed total
+            or to declare an initial value where needed.
+        measuresrc
+            Sets the source reference on plot.ly for  measure .
+        name
+            Sets the trace name. The trace name appear as the
+            legend item and on hover.
+        offset
+            Shifts the position where the bar is drawn (in position
+            axis units). In "group" barmode, traces that set
+            "offset" will be excluded and drawn in "overlay" mode
+            instead.
+        offsetgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same offsetgroup where bars of the
+            same position coordinate will line up.
+        offsetsrc
+            Sets the source reference on plot.ly for  offset .
+        opacity
+            Sets the opacity of the trace.
+        orientation
+            Sets the orientation of the bars. With "v" ("h"), the
+            value of the each bar spans along the vertical
+            (horizontal).
+        outsidetextfont
+            Sets the font used for `text` lying outside the bar.
+        selectedpoints
+            Array containing integer indices of selected points.
+            Has an effect only for traces that support selections.
+            Note that an empty array means an empty selection where
+            the `unselected` are turned on for all points, whereas,
+            any other non-array values means no selection all where
+            the `selected` and `unselected` styles have no effect.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
+        stream
+            plotly.graph_objs.waterfall.Stream instance or dict
+            with compatible properties
+        text
+            Sets text elements associated with each (x,y) pair. If
+            a single string, the same string appears over all the
+            data points. If an array of string, the items are
+            mapped in order to the this trace's (x,y) coordinates.
+            If trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
+            the hover labels.
+        textfont
+            Sets the font used for `text`.
+        textposition
+            Specifies the location of the `text`. "inside"
+            positions `text` inside, next to the bar end (rotated
+            and scaled if needed). "outside" positions `text`
+            outside, next to the bar end (scaled if needed), unless
+            there is another bar stacked on this one, then the text
+            gets pushed inside. "auto" tries to position `text`
+            inside the bar, but if the bar is too small and no bar
+            is stacked on this one the text is moved outside.
+        textpositionsrc
+            Sets the source reference on plot.ly for  textposition
+            .
+        textsrc
+            Sets the source reference on plot.ly for  text .
+        totals
+            plotly.graph_objs.waterfall.Totals instance or dict
+            with compatible properties
+        uid
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
+        visible
+            Determines whether or not this trace is visible. If
+            "legendonly", the trace is not drawn, but can appear as
+            a legend item (provided that the legend itself is
+            visible).
+        width
+            Sets the bar width (in position axis units).
+        widthsrc
+            Sets the source reference on plot.ly for  width .
+        x
+            Sets the x coordinates.
+        x0
+            Alternate to `x`. Builds a linear space of x
+            coordinates. Use with `dx` where `x0` is the starting
+            coordinate and `dx` the step.
+        xaxis
+            Sets a reference between this trace's x coordinates and
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
+            coordinates refer to `layout.xaxis2`, and so on.
+        xsrc
+            Sets the source reference on plot.ly for  x .
+        y
+            Sets the y coordinates.
+        y0
+            Alternate to `y`. Builds a linear space of y
+            coordinates. Use with `dy` where `y0` is the starting
+            coordinate and `dy` the step.
+        yaxis
+            Sets a reference between this trace's y coordinates and
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
+            coordinates refer to `layout.yaxis2`, and so on.
+        ysrc
+            Sets the source reference on plot.ly for  y .
+        """
+
+    def __init__(
+        self,
+        arg=None,
+        alignmentgroup=None,
+        base=None,
+        cliponaxis=None,
+        connector=None,
+        constraintext=None,
+        customdata=None,
+        customdatasrc=None,
+        decreasing=None,
+        dx=None,
+        dy=None,
+        hoverinfo=None,
+        hoverinfosrc=None,
+        hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
+        ids=None,
+        idssrc=None,
+        increasing=None,
+        insidetextfont=None,
+        legendgroup=None,
+        measure=None,
+        measuresrc=None,
+        name=None,
+        offset=None,
+        offsetgroup=None,
+        offsetsrc=None,
+        opacity=None,
+        orientation=None,
+        outsidetextfont=None,
+        selectedpoints=None,
+        showlegend=None,
+        stream=None,
+        text=None,
+        textfont=None,
+        textposition=None,
+        textpositionsrc=None,
+        textsrc=None,
+        totals=None,
+        uid=None,
+        uirevision=None,
+        visible=None,
+        width=None,
+        widthsrc=None,
+        x=None,
+        x0=None,
+        xaxis=None,
+        xsrc=None,
+        y=None,
+        y0=None,
+        yaxis=None,
+        ysrc=None,
+        **kwargs
+    ):
+        """
+        Construct a new Waterfall object
+        
+        Draws waterfall trace which is useful graph to displays the
+        contribution of various elements (either positive or negative)
+        in a bar chart. The data visualized by the span of the bars is
+        set in `y` if `orientation` is set th "v" (the default) and the
+        labels are set in `x`. By setting `orientation` to "h", the
+        roles are interchanged.
+
+        Parameters
+        ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Waterfall
+        alignmentgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same offsetgroup where bars of the
+            same position coordinate will line up.
+        base
+            Sets where the bar base is drawn (in position axis
+            units).
+        cliponaxis
+            Determines whether the text nodes are clipped about the
+            subplot axes. To show the text nodes above axis lines
+            and tick labels, make sure to set `xaxis.layer` and
+            `yaxis.layer` to *below traces*.
+        connector
+            plotly.graph_objs.waterfall.Connector instance or dict
+            with compatible properties
+        constraintext
+            Constrain the size of text inside or outside a bar to
+            be no larger than the bar itself.
+        customdata
+            Assigns extra data each datum. This may be useful when
+            listening to hover, click and selection events. Note
+            that, "scatter" traces also appends customdata items in
+            the markers DOM elements
+        customdatasrc
+            Sets the source reference on plot.ly for  customdata .
+        decreasing
+            plotly.graph_objs.waterfall.Decreasing instance or dict
+            with compatible properties
+        dx
+            Sets the x coordinate step. See `x0` for more info.
+        dy
+            Sets the y coordinate step. See `y0` for more info.
+        hoverinfo
+            Determines which trace information appear on hover. If
+            `none` or `skip` are set, no information is displayed
+            upon hovering. But, if `none` is set, click and hover
+            events are still fired.
+        hoverinfosrc
+            Sets the source reference on plot.ly for  hoverinfo .
+        hoverlabel
+            plotly.graph_objs.waterfall.Hoverlabel instance or dict
+            with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
+        hovertext
+            Sets hover text elements associated with each (x,y)
+            pair. If a single string, the same string appears over
+            all the data points. If an array of string, the items
+            are mapped in order to the this trace's (x,y)
+            coordinates. To be seen, trace `hoverinfo` must contain
+            a "text" flag.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
+        ids
+            Assigns id labels to each datum. These ids for object
+            constancy of data points during animation. Should be an
+            array of strings, not numbers or any other type.
+        idssrc
+            Sets the source reference on plot.ly for  ids .
+        increasing
+            plotly.graph_objs.waterfall.Increasing instance or dict
+            with compatible properties
+        insidetextfont
+            Sets the font used for `text` lying inside the bar.
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
+        measure
+            An array containing types of values. By default the
+            values are considered as 'relative'. However; it is
+            possible to use 'total' to compute the sums. Also
+            'absolute' could be applied to reset the computed total
+            or to declare an initial value where needed.
+        measuresrc
+            Sets the source reference on plot.ly for  measure .
+        name
+            Sets the trace name. The trace name appear as the
+            legend item and on hover.
+        offset
+            Shifts the position where the bar is drawn (in position
+            axis units). In "group" barmode, traces that set
+            "offset" will be excluded and drawn in "overlay" mode
+            instead.
+        offsetgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same offsetgroup where bars of the
+            same position coordinate will line up.
+        offsetsrc
+            Sets the source reference on plot.ly for  offset .
+        opacity
+            Sets the opacity of the trace.
+        orientation
+            Sets the orientation of the bars. With "v" ("h"), the
+            value of the each bar spans along the vertical
+            (horizontal).
+        outsidetextfont
+            Sets the font used for `text` lying outside the bar.
+        selectedpoints
+            Array containing integer indices of selected points.
+            Has an effect only for traces that support selections.
+            Note that an empty array means an empty selection where
+            the `unselected` are turned on for all points, whereas,
+            any other non-array values means no selection all where
+            the `selected` and `unselected` styles have no effect.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
+        stream
+            plotly.graph_objs.waterfall.Stream instance or dict
+            with compatible properties
+        text
+            Sets text elements associated with each (x,y) pair. If
+            a single string, the same string appears over all the
+            data points. If an array of string, the items are
+            mapped in order to the this trace's (x,y) coordinates.
+            If trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
+            the hover labels.
+        textfont
+            Sets the font used for `text`.
+        textposition
+            Specifies the location of the `text`. "inside"
+            positions `text` inside, next to the bar end (rotated
+            and scaled if needed). "outside" positions `text`
+            outside, next to the bar end (scaled if needed), unless
+            there is another bar stacked on this one, then the text
+            gets pushed inside. "auto" tries to position `text`
+            inside the bar, but if the bar is too small and no bar
+            is stacked on this one the text is moved outside.
+        textpositionsrc
+            Sets the source reference on plot.ly for  textposition
+            .
+        textsrc
+            Sets the source reference on plot.ly for  text .
+        totals
+            plotly.graph_objs.waterfall.Totals instance or dict
+            with compatible properties
+        uid
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
+        visible
+            Determines whether or not this trace is visible. If
+            "legendonly", the trace is not drawn, but can appear as
+            a legend item (provided that the legend itself is
+            visible).
+        width
+            Sets the bar width (in position axis units).
+        widthsrc
+            Sets the source reference on plot.ly for  width .
+        x
+            Sets the x coordinates.
+        x0
+            Alternate to `x`. Builds a linear space of x
+            coordinates. Use with `dx` where `x0` is the starting
+            coordinate and `dx` the step.
+        xaxis
+            Sets a reference between this trace's x coordinates and
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
+            coordinates refer to `layout.xaxis2`, and so on.
+        xsrc
+            Sets the source reference on plot.ly for  x .
+        y
+            Sets the y coordinates.
+        y0
+            Alternate to `y`. Builds a linear space of y
+            coordinates. Use with `dy` where `y0` is the starting
+            coordinate and `dy` the step.
+        yaxis
+            Sets a reference between this trace's y coordinates and
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
+            coordinates refer to `layout.yaxis2`, and so on.
+        ysrc
+            Sets the source reference on plot.ly for  y .
+
+        Returns
+        -------
+        Waterfall
+        """
+        super(Waterfall, self).__init__('waterfall')
+
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = _copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Waterfall 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Waterfall"""
+            )
+
+        # Handle skip_invalid
+        # -------------------
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+
+        # Import validators
+        # -----------------
+        from plotly.validators import (waterfall as v_waterfall)
+
+        # Initialize validators
+        # ---------------------
+        self._validators['alignmentgroup'
+                        ] = v_waterfall.AlignmentgroupValidator()
+        self._validators['base'] = v_waterfall.BaseValidator()
+        self._validators['cliponaxis'] = v_waterfall.CliponaxisValidator()
+        self._validators['connector'] = v_waterfall.ConnectorValidator()
+        self._validators['constraintext'] = v_waterfall.ConstraintextValidator(
+        )
+        self._validators['customdata'] = v_waterfall.CustomdataValidator()
+        self._validators['customdatasrc'] = v_waterfall.CustomdatasrcValidator(
+        )
+        self._validators['decreasing'] = v_waterfall.DecreasingValidator()
+        self._validators['dx'] = v_waterfall.DxValidator()
+        self._validators['dy'] = v_waterfall.DyValidator()
+        self._validators['hoverinfo'] = v_waterfall.HoverinfoValidator()
+        self._validators['hoverinfosrc'] = v_waterfall.HoverinfosrcValidator()
+        self._validators['hoverlabel'] = v_waterfall.HoverlabelValidator()
+        self._validators['hovertemplate'] = v_waterfall.HovertemplateValidator(
+        )
+        self._validators['hovertemplatesrc'
+                        ] = v_waterfall.HovertemplatesrcValidator()
+        self._validators['hovertext'] = v_waterfall.HovertextValidator()
+        self._validators['hovertextsrc'] = v_waterfall.HovertextsrcValidator()
+        self._validators['ids'] = v_waterfall.IdsValidator()
+        self._validators['idssrc'] = v_waterfall.IdssrcValidator()
+        self._validators['increasing'] = v_waterfall.IncreasingValidator()
+        self._validators['insidetextfont'
+                        ] = v_waterfall.InsidetextfontValidator()
+        self._validators['legendgroup'] = v_waterfall.LegendgroupValidator()
+        self._validators['measure'] = v_waterfall.MeasureValidator()
+        self._validators['measuresrc'] = v_waterfall.MeasuresrcValidator()
+        self._validators['name'] = v_waterfall.NameValidator()
+        self._validators['offset'] = v_waterfall.OffsetValidator()
+        self._validators['offsetgroup'] = v_waterfall.OffsetgroupValidator()
+        self._validators['offsetsrc'] = v_waterfall.OffsetsrcValidator()
+        self._validators['opacity'] = v_waterfall.OpacityValidator()
+        self._validators['orientation'] = v_waterfall.OrientationValidator()
+        self._validators['outsidetextfont'
+                        ] = v_waterfall.OutsidetextfontValidator()
+        self._validators['selectedpoints'
+                        ] = v_waterfall.SelectedpointsValidator()
+        self._validators['showlegend'] = v_waterfall.ShowlegendValidator()
+        self._validators['stream'] = v_waterfall.StreamValidator()
+        self._validators['text'] = v_waterfall.TextValidator()
+        self._validators['textfont'] = v_waterfall.TextfontValidator()
+        self._validators['textposition'] = v_waterfall.TextpositionValidator()
+        self._validators['textpositionsrc'
+                        ] = v_waterfall.TextpositionsrcValidator()
+        self._validators['textsrc'] = v_waterfall.TextsrcValidator()
+        self._validators['totals'] = v_waterfall.TotalsValidator()
+        self._validators['uid'] = v_waterfall.UidValidator()
+        self._validators['uirevision'] = v_waterfall.UirevisionValidator()
+        self._validators['visible'] = v_waterfall.VisibleValidator()
+        self._validators['width'] = v_waterfall.WidthValidator()
+        self._validators['widthsrc'] = v_waterfall.WidthsrcValidator()
+        self._validators['x'] = v_waterfall.XValidator()
+        self._validators['x0'] = v_waterfall.X0Validator()
+        self._validators['xaxis'] = v_waterfall.XAxisValidator()
+        self._validators['xsrc'] = v_waterfall.XsrcValidator()
+        self._validators['y'] = v_waterfall.YValidator()
+        self._validators['y0'] = v_waterfall.Y0Validator()
+        self._validators['yaxis'] = v_waterfall.YAxisValidator()
+        self._validators['ysrc'] = v_waterfall.YsrcValidator()
+
+        # Populate data dict with properties
+        # ----------------------------------
+        _v = arg.pop('alignmentgroup', None)
+        self['alignmentgroup'
+            ] = alignmentgroup if alignmentgroup is not None else _v
+        _v = arg.pop('base', None)
+        self['base'] = base if base is not None else _v
+        _v = arg.pop('cliponaxis', None)
+        self['cliponaxis'] = cliponaxis if cliponaxis is not None else _v
+        _v = arg.pop('connector', None)
+        self['connector'] = connector if connector is not None else _v
+        _v = arg.pop('constraintext', None)
+        self['constraintext'
+            ] = constraintext if constraintext is not None else _v
+        _v = arg.pop('customdata', None)
+        self['customdata'] = customdata if customdata is not None else _v
+        _v = arg.pop('customdatasrc', None)
+        self['customdatasrc'
+            ] = customdatasrc if customdatasrc is not None else _v
+        _v = arg.pop('decreasing', None)
+        self['decreasing'] = decreasing if decreasing is not None else _v
+        _v = arg.pop('dx', None)
+        self['dx'] = dx if dx is not None else _v
+        _v = arg.pop('dy', None)
+        self['dy'] = dy if dy is not None else _v
+        _v = arg.pop('hoverinfo', None)
+        self['hoverinfo'] = hoverinfo if hoverinfo is not None else _v
+        _v = arg.pop('hoverinfosrc', None)
+        self['hoverinfosrc'] = hoverinfosrc if hoverinfosrc is not None else _v
+        _v = arg.pop('hoverlabel', None)
+        self['hoverlabel'] = hoverlabel if hoverlabel is not None else _v
+        _v = arg.pop('hovertemplate', None)
+        self['hovertemplate'
+            ] = hovertemplate if hovertemplate is not None else _v
+        _v = arg.pop('hovertemplatesrc', None)
+        self['hovertemplatesrc'
+            ] = hovertemplatesrc if hovertemplatesrc is not None else _v
+        _v = arg.pop('hovertext', None)
+        self['hovertext'] = hovertext if hovertext is not None else _v
+        _v = arg.pop('hovertextsrc', None)
+        self['hovertextsrc'] = hovertextsrc if hovertextsrc is not None else _v
+        _v = arg.pop('ids', None)
+        self['ids'] = ids if ids is not None else _v
+        _v = arg.pop('idssrc', None)
+        self['idssrc'] = idssrc if idssrc is not None else _v
+        _v = arg.pop('increasing', None)
+        self['increasing'] = increasing if increasing is not None else _v
+        _v = arg.pop('insidetextfont', None)
+        self['insidetextfont'
+            ] = insidetextfont if insidetextfont is not None else _v
+        _v = arg.pop('legendgroup', None)
+        self['legendgroup'] = legendgroup if legendgroup is not None else _v
+        _v = arg.pop('measure', None)
+        self['measure'] = measure if measure is not None else _v
+        _v = arg.pop('measuresrc', None)
+        self['measuresrc'] = measuresrc if measuresrc is not None else _v
+        _v = arg.pop('name', None)
+        self['name'] = name if name is not None else _v
+        _v = arg.pop('offset', None)
+        self['offset'] = offset if offset is not None else _v
+        _v = arg.pop('offsetgroup', None)
+        self['offsetgroup'] = offsetgroup if offsetgroup is not None else _v
+        _v = arg.pop('offsetsrc', None)
+        self['offsetsrc'] = offsetsrc if offsetsrc is not None else _v
+        _v = arg.pop('opacity', None)
+        self['opacity'] = opacity if opacity is not None else _v
+        _v = arg.pop('orientation', None)
+        self['orientation'] = orientation if orientation is not None else _v
+        _v = arg.pop('outsidetextfont', None)
+        self['outsidetextfont'
+            ] = outsidetextfont if outsidetextfont is not None else _v
+        _v = arg.pop('selectedpoints', None)
+        self['selectedpoints'
+            ] = selectedpoints if selectedpoints is not None else _v
+        _v = arg.pop('showlegend', None)
+        self['showlegend'] = showlegend if showlegend is not None else _v
+        _v = arg.pop('stream', None)
+        self['stream'] = stream if stream is not None else _v
+        _v = arg.pop('text', None)
+        self['text'] = text if text is not None else _v
+        _v = arg.pop('textfont', None)
+        self['textfont'] = textfont if textfont is not None else _v
+        _v = arg.pop('textposition', None)
+        self['textposition'] = textposition if textposition is not None else _v
+        _v = arg.pop('textpositionsrc', None)
+        self['textpositionsrc'
+            ] = textpositionsrc if textpositionsrc is not None else _v
+        _v = arg.pop('textsrc', None)
+        self['textsrc'] = textsrc if textsrc is not None else _v
+        _v = arg.pop('totals', None)
+        self['totals'] = totals if totals is not None else _v
+        _v = arg.pop('uid', None)
+        self['uid'] = uid if uid is not None else _v
+        _v = arg.pop('uirevision', None)
+        self['uirevision'] = uirevision if uirevision is not None else _v
+        _v = arg.pop('visible', None)
+        self['visible'] = visible if visible is not None else _v
+        _v = arg.pop('width', None)
+        self['width'] = width if width is not None else _v
+        _v = arg.pop('widthsrc', None)
+        self['widthsrc'] = widthsrc if widthsrc is not None else _v
+        _v = arg.pop('x', None)
+        self['x'] = x if x is not None else _v
+        _v = arg.pop('x0', None)
+        self['x0'] = x0 if x0 is not None else _v
+        _v = arg.pop('xaxis', None)
+        self['xaxis'] = xaxis if xaxis is not None else _v
+        _v = arg.pop('xsrc', None)
+        self['xsrc'] = xsrc if xsrc is not None else _v
+        _v = arg.pop('y', None)
+        self['y'] = y if y is not None else _v
+        _v = arg.pop('y0', None)
+        self['y0'] = y0 if y0 is not None else _v
+        _v = arg.pop('yaxis', None)
+        self['yaxis'] = yaxis if yaxis is not None else _v
+        _v = arg.pop('ysrc', None)
+        self['ysrc'] = ysrc if ysrc is not None else _v
+
+        # Read-only literals
+        # ------------------
+        from _plotly_utils.basevalidators import LiteralValidator
+        self._props['type'] = 'waterfall'
+        self._validators['type'] = LiteralValidator(
+            plotly_name='type', parent_name='waterfall', val='waterfall'
+        )
+        arg.pop('type', None)
+
+        # Process unknown kwargs
+        # ----------------------
+        self._process_kwargs(**dict(arg, **kwargs))
+
+        # Reset skip_invalid
+        # ------------------
+        self._skip_invalid = False
+
+
+from plotly.basedatatypes import BaseTraceType as _BaseTraceType
+import copy as _copy
+
+
+class Volume(_BaseTraceType):
+
+    # autocolorscale
+    # --------------
+    @property
+    def autocolorscale(self):
+        """
+        Determines whether the colorscale is a default palette
+        (`autocolorscale: true`) or the palette determined by
+        `colorscale`. In case `colorscale` is unspecified or
+        `autocolorscale` is true, the default  palette will be chosen
+        according to whether numbers in the `color` array are all
+        positive, all negative or mixed.
+    
+        The 'autocolorscale' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self['autocolorscale']
+
+    @autocolorscale.setter
+    def autocolorscale(self, val):
+        self['autocolorscale'] = val
+
+    # caps
+    # ----
+    @property
+    def caps(self):
+        """
+        The 'caps' property is an instance of Caps
+        that may be specified as:
+          - An instance of plotly.graph_objs.volume.Caps
+          - A dict of string/value properties that will be passed
+            to the Caps constructor
+    
+            Supported dict properties:
+                
+                x
+                    plotly.graph_objs.volume.caps.X instance or
+                    dict with compatible properties
+                y
+                    plotly.graph_objs.volume.caps.Y instance or
+                    dict with compatible properties
+                z
+                    plotly.graph_objs.volume.caps.Z instance or
+                    dict with compatible properties
+
+        Returns
+        -------
+        plotly.graph_objs.volume.Caps
+        """
+        return self['caps']
+
+    @caps.setter
+    def caps(self, val):
+        self['caps'] = val
+
+    # cauto
+    # -----
+    @property
+    def cauto(self):
+        """
+        Determines whether or not the color domain is computed with
+        respect to the input data (here `value`) or the bounds set in
+        `cmin` and `cmax`  Defaults to `false` when `cmin` and `cmax`
+        are set by the user.
+    
+        The 'cauto' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self['cauto']
+
+    @cauto.setter
+    def cauto(self, val):
+        self['cauto'] = val
+
+    # cmax
+    # ----
+    @property
+    def cmax(self):
+        """
+        Sets the upper bound of the color domain. Value should have the
+        same units as `value` and if set, `cmin` must be set as well.
+    
+        The 'cmax' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self['cmax']
+
+    @cmax.setter
+    def cmax(self, val):
+        self['cmax'] = val
+
+    # cmid
+    # ----
+    @property
+    def cmid(self):
+        """
+        Sets the mid-point of the color domain by scaling `cmin` and/or
+        `cmax` to be equidistant to this point. Value should have the
+        same units as `value`. Has no effect when `cauto` is `false`.
+    
+        The 'cmid' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self['cmid']
+
+    @cmid.setter
+    def cmid(self, val):
+        self['cmid'] = val
+
+    # cmin
+    # ----
+    @property
+    def cmin(self):
+        """
+        Sets the lower bound of the color domain. Value should have the
+        same units as `value` and if set, `cmax` must be set as well.
+    
+        The 'cmin' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self['cmin']
+
+    @cmin.setter
+    def cmin(self, val):
+        self['cmin'] = val
+
+    # colorbar
+    # --------
+    @property
+    def colorbar(self):
+        """
+        The 'colorbar' property is an instance of ColorBar
+        that may be specified as:
+          - An instance of plotly.graph_objs.volume.ColorBar
+          - A dict of string/value properties that will be passed
+            to the ColorBar constructor
+    
+            Supported dict properties:
+                
+                bgcolor
+                    Sets the color of padded area.
+                bordercolor
+                    Sets the axis line color.
+                borderwidth
+                    Sets the width (in px) or the border enclosing
+                    this color bar.
+                dtick
+                    Sets the step in-between ticks on this axis.
+                    Use with `tick0`. Must be a positive number, or
+                    special strings available to "log" and "date"
+                    axes. If the axis `type` is "log", then ticks
+                    are set every 10^(n*dtick) where n is the tick
+                    number. For example, to set a tick mark at 1,
+                    10, 100, 1000, ... set dtick to 1. To set tick
+                    marks at 1, 100, 10000, ... set dtick to 2. To
+                    set tick marks at 1, 5, 25, 125, 625, 3125, ...
+                    set dtick to log_10(5), or 0.69897000433. "log"
+                    has several special values; "L<f>", where `f`
+                    is a positive number, gives ticks linearly
+                    spaced in value (but not position). For example
+                    `tick0` = 0.1, `dtick` = "L0.5" will put ticks
+                    at 0.1, 0.6, 1.1, 1.6 etc. To show powers of 10
+                    plus small digits between, use "D1" (all
+                    digits) or "D2" (only 2 and 5). `tick0` is
+                    ignored for "D1" and "D2". If the axis `type`
+                    is "date", then you must convert the time to
+                    milliseconds. For example, to set the interval
+                    between ticks to one day, set `dtick` to
+                    86400000.0. "date" also has special values
+                    "M<n>" gives ticks spaced by a number of
+                    months. `n` must be a positive integer. To set
+                    ticks on the 15th of every third month, set
+                    `tick0` to "2000-01-15" and `dtick` to "M3". To
+                    set ticks every 4 years, set `dtick` to "M48"
+                exponentformat
+                    Determines a formatting rule for the tick
+                    exponents. For example, consider the number
+                    1,000,000,000. If "none", it appears as
+                    1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
+                    "power", 1x10^9 (with 9 in a super script). If
+                    "SI", 1G. If "B", 1B.
+                len
+                    Sets the length of the color bar This measure
+                    excludes the padding of both ends. That is, the
+                    color bar length is this length minus the
+                    padding on both ends.
+                lenmode
+                    Determines whether this color bar's length
+                    (i.e. the measure in the color variation
+                    direction) is set in units of plot "fraction"
+                    or in *pixels. Use `len` to set the value.
+                nticks
+                    Specifies the maximum number of ticks for the
+                    particular axis. The actual number of ticks
+                    will be chosen automatically to be less than or
+                    equal to `nticks`. Has an effect only if
+                    `tickmode` is set to "auto".
+                outlinecolor
+                    Sets the axis line color.
+                outlinewidth
+                    Sets the width (in px) of the axis line.
+                separatethousands
+                    If "true", even 4-digit integers are separated
+                showexponent
+                    If "all", all exponents are shown besides their
+                    significands. If "first", only the exponent of
+                    the first tick is shown. If "last", only the
+                    exponent of the last tick is shown. If "none",
+                    no exponents appear.
+                showticklabels
+                    Determines whether or not the tick labels are
+                    drawn.
+                showtickprefix
+                    If "all", all tick labels are displayed with a
+                    prefix. If "first", only the first tick is
+                    displayed with a prefix. If "last", only the
+                    last tick is displayed with a suffix. If
+                    "none", tick prefixes are hidden.
+                showticksuffix
+                    Same as `showtickprefix` but for tick suffixes.
+                thickness
+                    Sets the thickness of the color bar This
+                    measure excludes the size of the padding, ticks
+                    and labels.
+                thicknessmode
+                    Determines whether this color bar's thickness
+                    (i.e. the measure in the constant color
+                    direction) is set in units of plot "fraction"
+                    or in "pixels". Use `thickness` to set the
+                    value.
+                tick0
+                    Sets the placement of the first tick on this
+                    axis. Use with `dtick`. If the axis `type` is
+                    "log", then you must take the log of your
+                    starting tick (e.g. to set the starting tick to
+                    100, set the `tick0` to 2) except when
+                    `dtick`=*L<f>* (see `dtick` for more info). If
+                    the axis `type` is "date", it should be a date
+                    string, like date data. If the axis `type` is
+                    "category", it should be a number, using the
+                    scale where each category is assigned a serial
+                    number from zero in the order it appears.
+                tickangle
+                    Sets the angle of the tick labels with respect
+                    to the horizontal. For example, a `tickangle`
+                    of -90 draws the tick labels vertically.
+                tickcolor
+                    Sets the tick color.
+                tickfont
+                    Sets the color bar's tick label font
+                tickformat
+                    Sets the tick label formatting rule using d3
+                    formatting mini-languages which are very
+                    similar to those in Python. For numbers, see: h
+                    ttps://github.com/d3/d3-format/blob/master/READ
+                    ME.md#locale_format And for dates see:
+                    https://github.com/d3/d3-time-
+                    format/blob/master/README.md#locale_format We
+                    add one item to d3's date formatter: "%{n}f"
+                    for fractional seconds with n digits. For
+                    example, *2016-10-13 09:15:23.456* with
+                    tickformat "%H~%M~%S.%2f" would display
+                    "09~15~23.46"
+                tickformatstops
+                    plotly.graph_objs.volume.colorbar.Tickformatsto
+                    p instance or dict with compatible properties
+                tickformatstopdefaults
+                    When used in a template (as layout.template.dat
+                    a.volume.colorbar.tickformatstopdefaults), sets
+                    the default property values to use for elements
+                    of volume.colorbar.tickformatstops
+                ticklen
+                    Sets the tick length (in px).
+                tickmode
+                    Sets the tick mode for this axis. If "auto",
+                    the number of ticks is set via `nticks`. If
+                    "linear", the placement of the ticks is
+                    determined by a starting position `tick0` and a
+                    tick step `dtick` ("linear" is the default
+                    value if `tick0` and `dtick` are provided). If
+                    "array", the placement of the ticks is set via
+                    `tickvals` and the tick text is `ticktext`.
+                    ("array" is the default value if `tickvals` is
+                    provided).
+                tickprefix
+                    Sets a tick label prefix.
+                ticks
+                    Determines whether ticks are drawn or not. If
+                    "", this axis' ticks are not drawn. If
+                    "outside" ("inside"), this axis' are drawn
+                    outside (inside) the axis lines.
+                ticksuffix
+                    Sets a tick label suffix.
+                ticktext
+                    Sets the text displayed at the ticks position
+                    via `tickvals`. Only has an effect if
+                    `tickmode` is set to "array". Used with
+                    `tickvals`.
+                ticktextsrc
+                    Sets the source reference on plot.ly for
+                    ticktext .
+                tickvals
+                    Sets the values at which ticks on this axis
+                    appear. Only has an effect if `tickmode` is set
+                    to "array". Used with `ticktext`.
+                tickvalssrc
+                    Sets the source reference on plot.ly for
+                    tickvals .
+                tickwidth
+                    Sets the tick width (in px).
+                title
+                    plotly.graph_objs.volume.colorbar.Title
+                    instance or dict with compatible properties
+                titlefont
+                    Deprecated: Please use
+                    volume.colorbar.title.font instead. Sets this
+                    color bar's title font. Note that the title's
+                    font used to be set by the now deprecated
+                    `titlefont` attribute.
+                titleside
+                    Deprecated: Please use
+                    volume.colorbar.title.side instead. Determines
+                    the location of color bar's title with respect
+                    to the color bar. Note that the title's
+                    location used to be set by the now deprecated
+                    `titleside` attribute.
+                x
+                    Sets the x position of the color bar (in plot
+                    fraction).
+                xanchor
+                    Sets this color bar's horizontal position
+                    anchor. This anchor binds the `x` position to
+                    the "left", "center" or "right" of the color
+                    bar.
+                xpad
+                    Sets the amount of padding (in px) along the x
+                    direction.
+                y
+                    Sets the y position of the color bar (in plot
+                    fraction).
+                yanchor
+                    Sets this color bar's vertical position anchor
+                    This anchor binds the `y` position to the
+                    "top", "middle" or "bottom" of the color bar.
+                ypad
+                    Sets the amount of padding (in px) along the y
+                    direction.
+
+        Returns
+        -------
+        plotly.graph_objs.volume.ColorBar
+        """
+        return self['colorbar']
+
+    @colorbar.setter
+    def colorbar(self, val):
+        self['colorbar'] = val
+
+    # colorscale
+    # ----------
+    @property
+    def colorscale(self):
+        """
+        Sets the colorscale. The colorscale must be an array containing
+        arrays mapping a normalized value to an rgb, rgba, hex, hsl,
+        hsv, or named color string. At minimum, a mapping for the
+        lowest (0) and highest (1) values are required. For example,
+        `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the
+        bounds of the colorscale in color space, use`cmin` and `cmax`.
+        Alternatively, `colorscale` may be a palette name string of the
+        following list: Greys,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Bl
+        ues,Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth,Electric,Vi
+        ridis,Cividis.
+    
+        The 'colorscale' property is a colorscale and may be
+        specified as:
+          - A list of 2-element lists where the first element is the
+            normalized color level value (starting at 0 and ending at 1), 
+            and the second item is a valid color string.
+            (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
+          - One of the following named colorscales:
+                ['Greys', 'YlGnBu', 'Greens', 'YlOrRd', 'Bluered', 'RdBu',
+                'Reds', 'Blues', 'Picnic', 'Rainbow', 'Portland', 'Jet',
+                'Hot', 'Blackbody', 'Earth', 'Electric', 'Viridis', 'Cividis']
+
+        Returns
+        -------
+        str
+        """
+        return self['colorscale']
+
+    @colorscale.setter
+    def colorscale(self, val):
+        self['colorscale'] = val
+
+    # contour
+    # -------
+    @property
+    def contour(self):
+        """
+        The 'contour' property is an instance of Contour
+        that may be specified as:
+          - An instance of plotly.graph_objs.volume.Contour
+          - A dict of string/value properties that will be passed
+            to the Contour constructor
+    
+            Supported dict properties:
+                
+                color
+                    Sets the color of the contour lines.
+                show
+                    Sets whether or not dynamic contours are shown
+                    on hover
+                width
+                    Sets the width of the contour lines.
+
+        Returns
+        -------
+        plotly.graph_objs.volume.Contour
+        """
+        return self['contour']
+
+    @contour.setter
+    def contour(self, val):
+        self['contour'] = val
+
+    # customdata
+    # ----------
+    @property
+    def customdata(self):
+        """
+        Assigns extra data each datum. This may be useful when
+        listening to hover, click and selection events. Note that,
+        "scatter" traces also appends customdata items in the markers
+        DOM elements
+    
+        The 'customdata' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self['customdata']
+
+    @customdata.setter
+    def customdata(self, val):
+        self['customdata'] = val
+
+    # customdatasrc
+    # -------------
+    @property
+    def customdatasrc(self):
+        """
+        Sets the source reference on plot.ly for  customdata .
+    
+        The 'customdatasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['customdatasrc']
+
+    @customdatasrc.setter
+    def customdatasrc(self, val):
+        self['customdatasrc'] = val
+
+    # flatshading
+    # -----------
+    @property
+    def flatshading(self):
+        """
+        Determines whether or not normal smoothing is applied to the
+        meshes, creating meshes with an angular, low-poly look via flat
+        reflections.
+    
+        The 'flatshading' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self['flatshading']
+
+    @flatshading.setter
+    def flatshading(self, val):
+        self['flatshading'] = val
+
+    # hoverinfo
+    # ---------
+    @property
+    def hoverinfo(self):
+        """
+        Determines which trace information appear on hover. If `none`
+        or `skip` are set, no information is displayed upon hovering.
+        But, if `none` is set, click and hover events are still fired.
+    
+        The 'hoverinfo' property is a flaglist and may be specified
+        as a string containing:
+          - Any combination of ['x', 'y', 'z', 'text', 'name'] joined with '+' characters
+            (e.g. 'x+y')
+            OR exactly one of ['all', 'none', 'skip'] (e.g. 'skip')
+          - A list or array of the above
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['hoverinfo']
+
+    @hoverinfo.setter
+    def hoverinfo(self, val):
+        self['hoverinfo'] = val
+
+    # hoverinfosrc
+    # ------------
+    @property
+    def hoverinfosrc(self):
+        """
+        Sets the source reference on plot.ly for  hoverinfo .
+    
+        The 'hoverinfosrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hoverinfosrc']
+
+    @hoverinfosrc.setter
+    def hoverinfosrc(self, val):
+        self['hoverinfosrc'] = val
+
+    # hoverlabel
+    # ----------
+    @property
+    def hoverlabel(self):
+        """
+        The 'hoverlabel' property is an instance of Hoverlabel
+        that may be specified as:
+          - An instance of plotly.graph_objs.volume.Hoverlabel
+          - A dict of string/value properties that will be passed
+            to the Hoverlabel constructor
+    
+            Supported dict properties:
+                
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
+                bgcolor
+                    Sets the background color of the hover labels
+                    for this trace
+                bgcolorsrc
+                    Sets the source reference on plot.ly for
+                    bgcolor .
+                bordercolor
+                    Sets the border color of the hover labels for
+                    this trace.
+                bordercolorsrc
+                    Sets the source reference on plot.ly for
+                    bordercolor .
+                font
+                    Sets the font used in hover labels.
+                namelength
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
+                namelengthsrc
+                    Sets the source reference on plot.ly for
+                    namelength .
+
+        Returns
+        -------
+        plotly.graph_objs.volume.Hoverlabel
+        """
+        return self['hoverlabel']
+
+    @hoverlabel.setter
+    def hoverlabel(self, val):
+        self['hoverlabel'] = val
+
+    # hovertemplate
+    # -------------
+    @property
+    def hovertemplate(self):
+        """
+        Template string used for rendering the information that appear
+        on hover box. Note that this will override `hoverinfo`.
+        Variables are inserted using %{variable}, for example "y:
+        %{y}". Numbers are formatted using d3-format's syntax
+        %{variable:d3-format}, for example "Price: %{y:$.2f}". See http
+        s://github.com/d3/d3-format/blob/master/README.md#locale_format
+        for details on the formatting syntax. The variables available
+        in `hovertemplate` are the ones emitted as event data described
+        at this link https://plot.ly/javascript/plotlyjs-events/#event-
+        data. Additionally, every attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        Anything contained in tag `<extra>` is displayed in the
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
+    
+        The 'hovertemplate' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self['hovertemplate']
+
+    @hovertemplate.setter
+    def hovertemplate(self, val):
+        self['hovertemplate'] = val
+
+    # hovertemplatesrc
+    # ----------------
+    @property
+    def hovertemplatesrc(self):
+        """
+        Sets the source reference on plot.ly for  hovertemplate .
+    
+        The 'hovertemplatesrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hovertemplatesrc']
+
+    @hovertemplatesrc.setter
+    def hovertemplatesrc(self, val):
+        self['hovertemplatesrc'] = val
+
+    # hovertext
+    # ---------
+    @property
+    def hovertext(self):
+        """
+        Same as `text`.
+    
+        The 'hovertext' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self['hovertext']
+
+    @hovertext.setter
+    def hovertext(self, val):
+        self['hovertext'] = val
+
+    # hovertextsrc
+    # ------------
+    @property
+    def hovertextsrc(self):
+        """
+        Sets the source reference on plot.ly for  hovertext .
+    
+        The 'hovertextsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hovertextsrc']
+
+    @hovertextsrc.setter
+    def hovertextsrc(self, val):
+        self['hovertextsrc'] = val
+
+    # ids
+    # ---
+    @property
+    def ids(self):
+        """
+        Assigns id labels to each datum. These ids for object constancy
+        of data points during animation. Should be an array of strings,
+        not numbers or any other type.
+    
+        The 'ids' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self['ids']
+
+    @ids.setter
+    def ids(self, val):
+        self['ids'] = val
+
+    # idssrc
+    # ------
+    @property
+    def idssrc(self):
+        """
+        Sets the source reference on plot.ly for  ids .
+    
+        The 'idssrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['idssrc']
+
+    @idssrc.setter
+    def idssrc(self, val):
+        self['idssrc'] = val
+
+    # isomax
+    # ------
+    @property
+    def isomax(self):
+        """
+        Sets the maximum boundary for iso-surface plot.
+    
+        The 'isomax' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self['isomax']
+
+    @isomax.setter
+    def isomax(self, val):
+        self['isomax'] = val
+
+    # isomin
+    # ------
+    @property
+    def isomin(self):
+        """
+        Sets the minimum boundary for iso-surface plot.
+    
+        The 'isomin' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self['isomin']
+
+    @isomin.setter
+    def isomin(self, val):
+        self['isomin'] = val
+
+    # lighting
+    # --------
+    @property
+    def lighting(self):
+        """
+        The 'lighting' property is an instance of Lighting
+        that may be specified as:
+          - An instance of plotly.graph_objs.volume.Lighting
+          - A dict of string/value properties that will be passed
+            to the Lighting constructor
+    
+            Supported dict properties:
+                
+                ambient
+                    Ambient light increases overall color
+                    visibility but can wash out the image.
+                diffuse
+                    Represents the extent that incident rays are
+                    reflected in a range of angles.
+                facenormalsepsilon
+                    Epsilon for face normals calculation avoids
+                    math issues arising from degenerate geometry.
+                fresnel
+                    Represents the reflectance as a dependency of
+                    the viewing angle; e.g. paper is reflective
+                    when viewing it from the edge of the paper
+                    (almost 90 degrees), causing shine.
+                roughness
+                    Alters specular reflection; the rougher the
+                    surface, the wider and less contrasty the
+                    shine.
+                specular
+                    Represents the level that incident rays are
+                    reflected in a single direction, causing shine.
+                vertexnormalsepsilon
+                    Epsilon for vertex normals calculation avoids
+                    math issues arising from degenerate geometry.
+
+        Returns
+        -------
+        plotly.graph_objs.volume.Lighting
+        """
+        return self['lighting']
+
+    @lighting.setter
+    def lighting(self, val):
+        self['lighting'] = val
+
+    # lightposition
+    # -------------
+    @property
+    def lightposition(self):
+        """
+        The 'lightposition' property is an instance of Lightposition
+        that may be specified as:
+          - An instance of plotly.graph_objs.volume.Lightposition
+          - A dict of string/value properties that will be passed
+            to the Lightposition constructor
+    
+            Supported dict properties:
+                
+                x
+                    Numeric vector, representing the X coordinate
+                    for each vertex.
+                y
+                    Numeric vector, representing the Y coordinate
+                    for each vertex.
+                z
+                    Numeric vector, representing the Z coordinate
+                    for each vertex.
+
+        Returns
+        -------
+        plotly.graph_objs.volume.Lightposition
+        """
+        return self['lightposition']
+
+    @lightposition.setter
+    def lightposition(self, val):
+        self['lightposition'] = val
+
+    # name
+    # ----
+    @property
+    def name(self):
+        """
+        Sets the trace name. The trace name appear as the legend item
+        and on hover.
+    
+        The 'name' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['name']
+
+    @name.setter
+    def name(self, val):
+        self['name'] = val
+
+    # opacity
+    # -------
+    @property
+    def opacity(self):
+        """
+        Sets the opacity of the surface. Please note that in the case
+        of using high `opacity` values for example a value greater than
+        or equal to 0.5 on two surfaces (and 0.25 with four surfaces),
+        an overlay of multiple transparent surfaces may not perfectly
+        be sorted in depth by the webgl API. This behavior may be
+        improved in the near future and is subject to change.
+    
+        The 'opacity' property is a number and may be specified as:
+          - An int or float in the interval [0, 1]
+
+        Returns
+        -------
+        int|float
+        """
+        return self['opacity']
+
+    @opacity.setter
+    def opacity(self, val):
+        self['opacity'] = val
+
+    # opacityscale
+    # ------------
+    @property
+    def opacityscale(self):
+        """
+        Sets the opacityscale. The opacityscale must be an array
+        containing arrays mapping a normalized value to an opacity
+        value. At minimum, a mapping for the lowest (0) and highest (1)
+        values are required. For example, `[[0, 1], [0.5, 0.2], [1,
+        1]]` means that higher/lower values would have higher opacity
+        values and those in the middle would be more transparent
+        Alternatively, `opacityscale` may be a palette name string of
+        the following list: 'min', 'max', 'extremes' and 'uniform'. The
+        default is 'uniform'.
+    
+        The 'opacityscale' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['opacityscale']
+
+    @opacityscale.setter
+    def opacityscale(self, val):
+        self['opacityscale'] = val
+
+    # reversescale
+    # ------------
+    @property
+    def reversescale(self):
+        """
+        Reverses the color mapping if true. If true, `cmin` will
+        correspond to the last color in the array and `cmax` will
+        correspond to the first color.
+    
+        The 'reversescale' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self['reversescale']
+
+    @reversescale.setter
+    def reversescale(self, val):
+        self['reversescale'] = val
+
+    # scene
+    # -----
+    @property
+    def scene(self):
+        """
+        Sets a reference between this trace's 3D coordinate system and
+        a 3D scene. If "scene" (the default value), the (x,y,z)
+        coordinates refer to `layout.scene`. If "scene2", the (x,y,z)
+        coordinates refer to `layout.scene2`, and so on.
+    
+        The 'scene' property is an identifier of a particular
+        subplot, of type 'scene', that may be specified as the string 'scene'
+        optionally followed by an integer >= 1
+        (e.g. 'scene', 'scene1', 'scene2', 'scene3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self['scene']
+
+    @scene.setter
+    def scene(self, val):
+        self['scene'] = val
+
+    # showscale
+    # ---------
+    @property
+    def showscale(self):
+        """
+        Determines whether or not a colorbar is displayed for this
+        trace.
+    
+        The 'showscale' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self['showscale']
+
+    @showscale.setter
+    def showscale(self, val):
+        self['showscale'] = val
+
+    # slices
+    # ------
+    @property
+    def slices(self):
+        """
+        The 'slices' property is an instance of Slices
+        that may be specified as:
+          - An instance of plotly.graph_objs.volume.Slices
+          - A dict of string/value properties that will be passed
+            to the Slices constructor
+    
+            Supported dict properties:
+                
+                x
+                    plotly.graph_objs.volume.slices.X instance or
+                    dict with compatible properties
+                y
+                    plotly.graph_objs.volume.slices.Y instance or
+                    dict with compatible properties
+                z
+                    plotly.graph_objs.volume.slices.Z instance or
+                    dict with compatible properties
+
+        Returns
+        -------
+        plotly.graph_objs.volume.Slices
+        """
+        return self['slices']
+
+    @slices.setter
+    def slices(self, val):
+        self['slices'] = val
+
+    # spaceframe
+    # ----------
+    @property
+    def spaceframe(self):
+        """
+        The 'spaceframe' property is an instance of Spaceframe
+        that may be specified as:
+          - An instance of plotly.graph_objs.volume.Spaceframe
+          - A dict of string/value properties that will be passed
+            to the Spaceframe constructor
+    
+            Supported dict properties:
+                
+                fill
+                    Sets the fill ratio of the `spaceframe`
+                    elements. The default fill value is 1 meaning
+                    that they are entirely shaded. Applying a
+                    `fill` ratio less than one would allow the
+                    creation of openings parallel to the edges.
+                show
+                    Displays/hides tetrahedron shapes between
+                    minimum and maximum iso-values. Often useful
+                    when either caps or surfaces are disabled or
+                    filled with values less than 1.
+
+        Returns
+        -------
+        plotly.graph_objs.volume.Spaceframe
+        """
+        return self['spaceframe']
+
+    @spaceframe.setter
+    def spaceframe(self, val):
+        self['spaceframe'] = val
+
+    # stream
+    # ------
+    @property
+    def stream(self):
+        """
+        The 'stream' property is an instance of Stream
+        that may be specified as:
+          - An instance of plotly.graph_objs.volume.Stream
+          - A dict of string/value properties that will be passed
+            to the Stream constructor
+    
+            Supported dict properties:
+                
+                maxpoints
+                    Sets the maximum number of points to keep on
+                    the plots from an incoming stream. If
+                    `maxpoints` is set to 50, only the newest 50
+                    points will be displayed on the plot.
+                token
+                    The stream id number links a data trace on a
+                    plot with a stream. See
+                    https://plot.ly/settings for more details.
+
+        Returns
+        -------
+        plotly.graph_objs.volume.Stream
+        """
+        return self['stream']
+
+    @stream.setter
+    def stream(self, val):
+        self['stream'] = val
+
+    # surface
+    # -------
+    @property
+    def surface(self):
+        """
+        The 'surface' property is an instance of Surface
+        that may be specified as:
+          - An instance of plotly.graph_objs.volume.Surface
+          - A dict of string/value properties that will be passed
+            to the Surface constructor
+    
+            Supported dict properties:
+                
+                count
+                    Sets the number of iso-surfaces between minimum
+                    and maximum iso-values. By default this value
+                    is 2 meaning that only minimum and maximum
+                    surfaces would be drawn.
+                fill
+                    Sets the fill ratio of the iso-surface. The
+                    default fill value of the surface is 1 meaning
+                    that they are entirely shaded. On the other
+                    hand Applying a `fill` ratio less than one
+                    would allow the creation of openings parallel
+                    to the edges.
+                pattern
+                    Sets the surface pattern of the iso-surface 3-D
+                    sections. The default pattern of the surface is
+                    `all` meaning that the rest of surface elements
+                    would be shaded. The check options (either 1 or
+                    2) could be used to draw half of the squares on
+                    the surface. Using various combinations of
+                    capital `A`, `B`, `C`, `D` and `E` may also be
+                    used to reduce the number of triangles on the
+                    iso-surfaces and creating other patterns of
+                    interest.
+                show
+                    Hides/displays surfaces between minimum and
+                    maximum iso-values.
+
+        Returns
+        -------
+        plotly.graph_objs.volume.Surface
+        """
+        return self['surface']
+
+    @surface.setter
+    def surface(self, val):
+        self['surface'] = val
+
+    # text
+    # ----
+    @property
+    def text(self):
+        """
+        Sets the text elements associated with the vertices. If trace
+        `hoverinfo` contains a "text" flag and "hovertext" is not set,
+        these elements will be seen in the hover labels.
+    
+        The 'text' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self['text']
+
+    @text.setter
+    def text(self, val):
+        self['text'] = val
+
+    # textsrc
+    # -------
+    @property
+    def textsrc(self):
+        """
+        Sets the source reference on plot.ly for  text .
+    
+        The 'textsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['textsrc']
+
+    @textsrc.setter
+    def textsrc(self, val):
+        self['textsrc'] = val
+
+    # uid
+    # ---
+    @property
+    def uid(self):
+        """
+        Assign an id to this trace, Use this to provide object
+        constancy between traces during animations and transitions.
+    
+        The 'uid' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['uid']
+
+    @uid.setter
+    def uid(self, val):
+        self['uid'] = val
+
+    # uirevision
+    # ----------
+    @property
+    def uirevision(self):
+        """
+        Controls persistence of some user-driven changes to the trace:
+        `constraintrange` in `parcoords` traces, as well as some
+        `editable: true` modifications such as `name` and
+        `colorbar.title`. Defaults to `layout.uirevision`. Note that
+        other user-driven trace attribute changes are controlled by
+        `layout` attributes: `trace.visible` is controlled by
+        `layout.legend.uirevision`, `selectedpoints` is controlled by
+        `layout.selectionrevision`, and `colorbar.(x|y)` (accessible
+        with `config: {editable: true}`) is controlled by
+        `layout.editrevision`. Trace changes are tracked by `uid`,
+        which only falls back on trace index if no `uid` is provided.
+        So if your app can add/remove traces before the end of the
+        `data` array, such that the same trace has a different index,
+        you can still preserve user-driven changes if you give each
+        trace a `uid` that stays with it as it moves.
+    
+        The 'uirevision' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['uirevision']
+
+    @uirevision.setter
+    def uirevision(self, val):
+        self['uirevision'] = val
+
+    # value
+    # -----
+    @property
+    def value(self):
+        """
+        Sets the 4th dimension (value) of the vertices.
+    
+        The 'value' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self['value']
+
+    @value.setter
+    def value(self, val):
+        self['value'] = val
+
+    # valuesrc
+    # --------
+    @property
+    def valuesrc(self):
+        """
+        Sets the source reference on plot.ly for  value .
+    
+        The 'valuesrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['valuesrc']
+
+    @valuesrc.setter
+    def valuesrc(self, val):
+        self['valuesrc'] = val
+
+    # visible
+    # -------
+    @property
+    def visible(self):
+        """
+        Determines whether or not this trace is visible. If
+        "legendonly", the trace is not drawn, but can appear as a
+        legend item (provided that the legend itself is visible).
+    
+        The 'visible' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                [True, False, 'legendonly']
+
+        Returns
+        -------
+        Any
+        """
+        return self['visible']
+
+    @visible.setter
+    def visible(self, val):
+        self['visible'] = val
+
+    # x
+    # -
+    @property
+    def x(self):
+        """
+        Sets the X coordinates of the vertices on X axis.
+    
+        The 'x' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self['x']
+
+    @x.setter
+    def x(self, val):
+        self['x'] = val
+
+    # xsrc
+    # ----
+    @property
+    def xsrc(self):
+        """
+        Sets the source reference on plot.ly for  x .
+    
+        The 'xsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['xsrc']
+
+    @xsrc.setter
+    def xsrc(self, val):
+        self['xsrc'] = val
+
+    # y
+    # -
+    @property
+    def y(self):
+        """
+        Sets the Y coordinates of the vertices on Y axis.
+    
+        The 'y' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self['y']
+
+    @y.setter
+    def y(self, val):
+        self['y'] = val
+
+    # ysrc
+    # ----
+    @property
+    def ysrc(self):
+        """
+        Sets the source reference on plot.ly for  y .
+    
+        The 'ysrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['ysrc']
+
+    @ysrc.setter
+    def ysrc(self, val):
+        self['ysrc'] = val
+
+    # z
+    # -
+    @property
+    def z(self):
+        """
+        Sets the Z coordinates of the vertices on Z axis.
+    
+        The 'z' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self['z']
+
+    @z.setter
+    def z(self, val):
+        self['z'] = val
+
+    # zsrc
+    # ----
+    @property
+    def zsrc(self):
+        """
+        Sets the source reference on plot.ly for  z .
+    
+        The 'zsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['zsrc']
+
+    @zsrc.setter
+    def zsrc(self, val):
+        self['zsrc'] = val
+
+    # type
+    # ----
+    @property
+    def type(self):
+        return self._props['type']
+
+    # property parent name
+    # --------------------
+    @property
+    def _parent_path_str(self):
+        return ''
+
+    # Self properties description
+    # ---------------------------
+    @property
+    def _prop_descriptions(self):
+        return """\
+        autocolorscale
+            Determines whether the colorscale is a default palette
+            (`autocolorscale: true`) or the palette determined by
+            `colorscale`. In case `colorscale` is unspecified or
+            `autocolorscale` is true, the default  palette will be
+            chosen according to whether numbers in the `color`
+            array are all positive, all negative or mixed.
+        caps
+            plotly.graph_objs.volume.Caps instance or dict with
+            compatible properties
+        cauto
+            Determines whether or not the color domain is computed
+            with respect to the input data (here `value`) or the
+            bounds set in `cmin` and `cmax`  Defaults to `false`
+            when `cmin` and `cmax` are set by the user.
+        cmax
+            Sets the upper bound of the color domain. Value should
+            have the same units as `value` and if set, `cmin` must
+            be set as well.
+        cmid
+            Sets the mid-point of the color domain by scaling
+            `cmin` and/or `cmax` to be equidistant to this point.
+            Value should have the same units as `value`. Has no
+            effect when `cauto` is `false`.
+        cmin
+            Sets the lower bound of the color domain. Value should
+            have the same units as `value` and if set, `cmax` must
+            be set as well.
+        colorbar
+            plotly.graph_objs.volume.ColorBar instance or dict with
+            compatible properties
+        colorscale
+            Sets the colorscale. The colorscale must be an array
+            containing arrays mapping a normalized value to an rgb,
+            rgba, hex, hsl, hsv, or named color string. At minimum,
+            a mapping for the lowest (0) and highest (1) values are
+            required. For example, `[[0, 'rgb(0,0,255)', [1,
+            'rgb(255,0,0)']]`. To control the bounds of the
+            colorscale in color space, use`cmin` and `cmax`.
+            Alternatively, `colorscale` may be a palette name
+            string of the following list: Greys,YlGnBu,Greens,YlOrR
+            d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
+            ot,Blackbody,Earth,Electric,Viridis,Cividis.
+        contour
+            plotly.graph_objs.volume.Contour instance or dict with
+            compatible properties
+        customdata
+            Assigns extra data each datum. This may be useful when
+            listening to hover, click and selection events. Note
+            that, "scatter" traces also appends customdata items in
+            the markers DOM elements
+        customdatasrc
+            Sets the source reference on plot.ly for  customdata .
+        flatshading
+            Determines whether or not normal smoothing is applied
+            to the meshes, creating meshes with an angular, low-
+            poly look via flat reflections.
+        hoverinfo
+            Determines which trace information appear on hover. If
+            `none` or `skip` are set, no information is displayed
+            upon hovering. But, if `none` is set, click and hover
+            events are still fired.
+        hoverinfosrc
+            Sets the source reference on plot.ly for  hoverinfo .
+        hoverlabel
+            plotly.graph_objs.volume.Hoverlabel instance or dict
+            with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
+        ids
+            Assigns id labels to each datum. These ids for object
+            constancy of data points during animation. Should be an
+            array of strings, not numbers or any other type.
+        idssrc
+            Sets the source reference on plot.ly for  ids .
+        isomax
+            Sets the maximum boundary for iso-surface plot.
+        isomin
+            Sets the minimum boundary for iso-surface plot.
+        lighting
+            plotly.graph_objs.volume.Lighting instance or dict with
+            compatible properties
+        lightposition
+            plotly.graph_objs.volume.Lightposition instance or dict
+            with compatible properties
+        name
+            Sets the trace name. The trace name appear as the
+            legend item and on hover.
+        opacity
+            Sets the opacity of the surface. Please note that in
+            the case of using high `opacity` values for example a
+            value greater than or equal to 0.5 on two surfaces (and
+            0.25 with four surfaces), an overlay of multiple
+            transparent surfaces may not perfectly be sorted in
+            depth by the webgl API. This behavior may be improved
+            in the near future and is subject to change.
+        opacityscale
+            Sets the opacityscale. The opacityscale must be an
+            array containing arrays mapping a normalized value to
+            an opacity value. At minimum, a mapping for the lowest
+            (0) and highest (1) values are required. For example,
+            `[[0, 1], [0.5, 0.2], [1, 1]]` means that higher/lower
+            values would have higher opacity values and those in
+            the middle would be more transparent Alternatively,
+            `opacityscale` may be a palette name string of the
+            following list: 'min', 'max', 'extremes' and 'uniform'.
+            The default is 'uniform'.
+        reversescale
+            Reverses the color mapping if true. If true, `cmin`
+            will correspond to the last color in the array and
+            `cmax` will correspond to the first color.
+        scene
+            Sets a reference between this trace's 3D coordinate
+            system and a 3D scene. If "scene" (the default value),
+            the (x,y,z) coordinates refer to `layout.scene`. If
+            "scene2", the (x,y,z) coordinates refer to
+            `layout.scene2`, and so on.
+        showscale
+            Determines whether or not a colorbar is displayed for
+            this trace.
+        slices
+            plotly.graph_objs.volume.Slices instance or dict with
+            compatible properties
+        spaceframe
+            plotly.graph_objs.volume.Spaceframe instance or dict
+            with compatible properties
+        stream
+            plotly.graph_objs.volume.Stream instance or dict with
+            compatible properties
+        surface
+            plotly.graph_objs.volume.Surface instance or dict with
+            compatible properties
+        text
+            Sets the text elements associated with the vertices. If
+            trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
+            the hover labels.
+        textsrc
+            Sets the source reference on plot.ly for  text .
+        uid
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
+        value
+            Sets the 4th dimension (value) of the vertices.
+        valuesrc
+            Sets the source reference on plot.ly for  value .
+        visible
+            Determines whether or not this trace is visible. If
+            "legendonly", the trace is not drawn, but can appear as
+            a legend item (provided that the legend itself is
+            visible).
+        x
+            Sets the X coordinates of the vertices on X axis.
+        xsrc
+            Sets the source reference on plot.ly for  x .
+        y
+            Sets the Y coordinates of the vertices on Y axis.
+        ysrc
+            Sets the source reference on plot.ly for  y .
+        z
+            Sets the Z coordinates of the vertices on Z axis.
+        zsrc
+            Sets the source reference on plot.ly for  z .
+        """
+
+    def __init__(
+        self,
+        arg=None,
+        autocolorscale=None,
+        caps=None,
+        cauto=None,
+        cmax=None,
+        cmid=None,
+        cmin=None,
+        colorbar=None,
+        colorscale=None,
+        contour=None,
+        customdata=None,
+        customdatasrc=None,
+        flatshading=None,
+        hoverinfo=None,
+        hoverinfosrc=None,
+        hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
+        ids=None,
+        idssrc=None,
+        isomax=None,
+        isomin=None,
+        lighting=None,
+        lightposition=None,
+        name=None,
+        opacity=None,
+        opacityscale=None,
+        reversescale=None,
+        scene=None,
+        showscale=None,
+        slices=None,
+        spaceframe=None,
+        stream=None,
+        surface=None,
+        text=None,
+        textsrc=None,
+        uid=None,
+        uirevision=None,
+        value=None,
+        valuesrc=None,
+        visible=None,
+        x=None,
+        xsrc=None,
+        y=None,
+        ysrc=None,
+        z=None,
+        zsrc=None,
+        **kwargs
+    ):
+        """
+        Construct a new Volume object
+        
+        Draws volume trace between iso-min and iso-max values with
+        coordinates given by four 1-dimensional arrays containing the
+        `value`, `x`, `y` and `z` of every vertex of a uniform or non-
+        uniform 3-D grid. Horizontal or vertical slices, caps as well
+        as spaceframe between iso-min and iso-max values could also be
+        drawn using this trace.
+
+        Parameters
+        ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Volume
+        autocolorscale
+            Determines whether the colorscale is a default palette
+            (`autocolorscale: true`) or the palette determined by
+            `colorscale`. In case `colorscale` is unspecified or
+            `autocolorscale` is true, the default  palette will be
+            chosen according to whether numbers in the `color`
+            array are all positive, all negative or mixed.
+        caps
+            plotly.graph_objs.volume.Caps instance or dict with
+            compatible properties
+        cauto
+            Determines whether or not the color domain is computed
+            with respect to the input data (here `value`) or the
+            bounds set in `cmin` and `cmax`  Defaults to `false`
+            when `cmin` and `cmax` are set by the user.
+        cmax
+            Sets the upper bound of the color domain. Value should
+            have the same units as `value` and if set, `cmin` must
+            be set as well.
+        cmid
+            Sets the mid-point of the color domain by scaling
+            `cmin` and/or `cmax` to be equidistant to this point.
+            Value should have the same units as `value`. Has no
+            effect when `cauto` is `false`.
+        cmin
+            Sets the lower bound of the color domain. Value should
+            have the same units as `value` and if set, `cmax` must
+            be set as well.
+        colorbar
+            plotly.graph_objs.volume.ColorBar instance or dict with
+            compatible properties
+        colorscale
+            Sets the colorscale. The colorscale must be an array
+            containing arrays mapping a normalized value to an rgb,
+            rgba, hex, hsl, hsv, or named color string. At minimum,
+            a mapping for the lowest (0) and highest (1) values are
+            required. For example, `[[0, 'rgb(0,0,255)', [1,
+            'rgb(255,0,0)']]`. To control the bounds of the
+            colorscale in color space, use`cmin` and `cmax`.
+            Alternatively, `colorscale` may be a palette name
+            string of the following list: Greys,YlGnBu,Greens,YlOrR
+            d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
+            ot,Blackbody,Earth,Electric,Viridis,Cividis.
+        contour
+            plotly.graph_objs.volume.Contour instance or dict with
+            compatible properties
+        customdata
+            Assigns extra data each datum. This may be useful when
+            listening to hover, click and selection events. Note
+            that, "scatter" traces also appends customdata items in
+            the markers DOM elements
+        customdatasrc
+            Sets the source reference on plot.ly for  customdata .
+        flatshading
+            Determines whether or not normal smoothing is applied
+            to the meshes, creating meshes with an angular, low-
+            poly look via flat reflections.
+        hoverinfo
+            Determines which trace information appear on hover. If
+            `none` or `skip` are set, no information is displayed
+            upon hovering. But, if `none` is set, click and hover
+            events are still fired.
+        hoverinfosrc
+            Sets the source reference on plot.ly for  hoverinfo .
+        hoverlabel
+            plotly.graph_objs.volume.Hoverlabel instance or dict
+            with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
+        ids
+            Assigns id labels to each datum. These ids for object
+            constancy of data points during animation. Should be an
+            array of strings, not numbers or any other type.
+        idssrc
+            Sets the source reference on plot.ly for  ids .
+        isomax
+            Sets the maximum boundary for iso-surface plot.
+        isomin
+            Sets the minimum boundary for iso-surface plot.
+        lighting
+            plotly.graph_objs.volume.Lighting instance or dict with
+            compatible properties
+        lightposition
+            plotly.graph_objs.volume.Lightposition instance or dict
+            with compatible properties
+        name
+            Sets the trace name. The trace name appear as the
+            legend item and on hover.
+        opacity
+            Sets the opacity of the surface. Please note that in
+            the case of using high `opacity` values for example a
+            value greater than or equal to 0.5 on two surfaces (and
+            0.25 with four surfaces), an overlay of multiple
+            transparent surfaces may not perfectly be sorted in
+            depth by the webgl API. This behavior may be improved
+            in the near future and is subject to change.
+        opacityscale
+            Sets the opacityscale. The opacityscale must be an
+            array containing arrays mapping a normalized value to
+            an opacity value. At minimum, a mapping for the lowest
+            (0) and highest (1) values are required. For example,
+            `[[0, 1], [0.5, 0.2], [1, 1]]` means that higher/lower
+            values would have higher opacity values and those in
+            the middle would be more transparent Alternatively,
+            `opacityscale` may be a palette name string of the
+            following list: 'min', 'max', 'extremes' and 'uniform'.
+            The default is 'uniform'.
+        reversescale
+            Reverses the color mapping if true. If true, `cmin`
+            will correspond to the last color in the array and
+            `cmax` will correspond to the first color.
+        scene
+            Sets a reference between this trace's 3D coordinate
+            system and a 3D scene. If "scene" (the default value),
+            the (x,y,z) coordinates refer to `layout.scene`. If
+            "scene2", the (x,y,z) coordinates refer to
+            `layout.scene2`, and so on.
+        showscale
+            Determines whether or not a colorbar is displayed for
+            this trace.
+        slices
+            plotly.graph_objs.volume.Slices instance or dict with
+            compatible properties
+        spaceframe
+            plotly.graph_objs.volume.Spaceframe instance or dict
+            with compatible properties
+        stream
+            plotly.graph_objs.volume.Stream instance or dict with
+            compatible properties
+        surface
+            plotly.graph_objs.volume.Surface instance or dict with
+            compatible properties
+        text
+            Sets the text elements associated with the vertices. If
+            trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
+            the hover labels.
+        textsrc
+            Sets the source reference on plot.ly for  text .
+        uid
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
+        value
+            Sets the 4th dimension (value) of the vertices.
+        valuesrc
+            Sets the source reference on plot.ly for  value .
+        visible
+            Determines whether or not this trace is visible. If
+            "legendonly", the trace is not drawn, but can appear as
+            a legend item (provided that the legend itself is
+            visible).
+        x
+            Sets the X coordinates of the vertices on X axis.
+        xsrc
+            Sets the source reference on plot.ly for  x .
+        y
+            Sets the Y coordinates of the vertices on Y axis.
+        ysrc
+            Sets the source reference on plot.ly for  y .
+        z
+            Sets the Z coordinates of the vertices on Z axis.
+        zsrc
+            Sets the source reference on plot.ly for  z .
+
+        Returns
+        -------
+        Volume
+        """
+        super(Volume, self).__init__('volume')
+
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = _copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Volume 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Volume"""
+            )
+
+        # Handle skip_invalid
+        # -------------------
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+
+        # Import validators
+        # -----------------
+        from plotly.validators import (volume as v_volume)
+
+        # Initialize validators
+        # ---------------------
+        self._validators['autocolorscale'] = v_volume.AutocolorscaleValidator()
+        self._validators['caps'] = v_volume.CapsValidator()
+        self._validators['cauto'] = v_volume.CautoValidator()
+        self._validators['cmax'] = v_volume.CmaxValidator()
+        self._validators['cmid'] = v_volume.CmidValidator()
+        self._validators['cmin'] = v_volume.CminValidator()
+        self._validators['colorbar'] = v_volume.ColorBarValidator()
+        self._validators['colorscale'] = v_volume.ColorscaleValidator()
+        self._validators['contour'] = v_volume.ContourValidator()
+        self._validators['customdata'] = v_volume.CustomdataValidator()
+        self._validators['customdatasrc'] = v_volume.CustomdatasrcValidator()
+        self._validators['flatshading'] = v_volume.FlatshadingValidator()
+        self._validators['hoverinfo'] = v_volume.HoverinfoValidator()
+        self._validators['hoverinfosrc'] = v_volume.HoverinfosrcValidator()
+        self._validators['hoverlabel'] = v_volume.HoverlabelValidator()
+        self._validators['hovertemplate'] = v_volume.HovertemplateValidator()
+        self._validators['hovertemplatesrc'
+                        ] = v_volume.HovertemplatesrcValidator()
+        self._validators['hovertext'] = v_volume.HovertextValidator()
+        self._validators['hovertextsrc'] = v_volume.HovertextsrcValidator()
+        self._validators['ids'] = v_volume.IdsValidator()
+        self._validators['idssrc'] = v_volume.IdssrcValidator()
+        self._validators['isomax'] = v_volume.IsomaxValidator()
+        self._validators['isomin'] = v_volume.IsominValidator()
+        self._validators['lighting'] = v_volume.LightingValidator()
+        self._validators['lightposition'] = v_volume.LightpositionValidator()
+        self._validators['name'] = v_volume.NameValidator()
+        self._validators['opacity'] = v_volume.OpacityValidator()
+        self._validators['opacityscale'] = v_volume.OpacityscaleValidator()
+        self._validators['reversescale'] = v_volume.ReversescaleValidator()
+        self._validators['scene'] = v_volume.SceneValidator()
+        self._validators['showscale'] = v_volume.ShowscaleValidator()
+        self._validators['slices'] = v_volume.SlicesValidator()
+        self._validators['spaceframe'] = v_volume.SpaceframeValidator()
+        self._validators['stream'] = v_volume.StreamValidator()
+        self._validators['surface'] = v_volume.SurfaceValidator()
+        self._validators['text'] = v_volume.TextValidator()
+        self._validators['textsrc'] = v_volume.TextsrcValidator()
+        self._validators['uid'] = v_volume.UidValidator()
+        self._validators['uirevision'] = v_volume.UirevisionValidator()
+        self._validators['value'] = v_volume.ValueValidator()
+        self._validators['valuesrc'] = v_volume.ValuesrcValidator()
+        self._validators['visible'] = v_volume.VisibleValidator()
+        self._validators['x'] = v_volume.XValidator()
+        self._validators['xsrc'] = v_volume.XsrcValidator()
+        self._validators['y'] = v_volume.YValidator()
+        self._validators['ysrc'] = v_volume.YsrcValidator()
+        self._validators['z'] = v_volume.ZValidator()
+        self._validators['zsrc'] = v_volume.ZsrcValidator()
+
+        # Populate data dict with properties
+        # ----------------------------------
+        _v = arg.pop('autocolorscale', None)
+        self['autocolorscale'
+            ] = autocolorscale if autocolorscale is not None else _v
+        _v = arg.pop('caps', None)
+        self['caps'] = caps if caps is not None else _v
+        _v = arg.pop('cauto', None)
+        self['cauto'] = cauto if cauto is not None else _v
+        _v = arg.pop('cmax', None)
+        self['cmax'] = cmax if cmax is not None else _v
+        _v = arg.pop('cmid', None)
+        self['cmid'] = cmid if cmid is not None else _v
+        _v = arg.pop('cmin', None)
+        self['cmin'] = cmin if cmin is not None else _v
+        _v = arg.pop('colorbar', None)
+        self['colorbar'] = colorbar if colorbar is not None else _v
+        _v = arg.pop('colorscale', None)
+        self['colorscale'] = colorscale if colorscale is not None else _v
+        _v = arg.pop('contour', None)
+        self['contour'] = contour if contour is not None else _v
+        _v = arg.pop('customdata', None)
+        self['customdata'] = customdata if customdata is not None else _v
+        _v = arg.pop('customdatasrc', None)
+        self['customdatasrc'
+            ] = customdatasrc if customdatasrc is not None else _v
+        _v = arg.pop('flatshading', None)
+        self['flatshading'] = flatshading if flatshading is not None else _v
+        _v = arg.pop('hoverinfo', None)
+        self['hoverinfo'] = hoverinfo if hoverinfo is not None else _v
+        _v = arg.pop('hoverinfosrc', None)
+        self['hoverinfosrc'] = hoverinfosrc if hoverinfosrc is not None else _v
+        _v = arg.pop('hoverlabel', None)
+        self['hoverlabel'] = hoverlabel if hoverlabel is not None else _v
+        _v = arg.pop('hovertemplate', None)
+        self['hovertemplate'
+            ] = hovertemplate if hovertemplate is not None else _v
+        _v = arg.pop('hovertemplatesrc', None)
+        self['hovertemplatesrc'
+            ] = hovertemplatesrc if hovertemplatesrc is not None else _v
+        _v = arg.pop('hovertext', None)
+        self['hovertext'] = hovertext if hovertext is not None else _v
+        _v = arg.pop('hovertextsrc', None)
+        self['hovertextsrc'] = hovertextsrc if hovertextsrc is not None else _v
+        _v = arg.pop('ids', None)
+        self['ids'] = ids if ids is not None else _v
+        _v = arg.pop('idssrc', None)
+        self['idssrc'] = idssrc if idssrc is not None else _v
+        _v = arg.pop('isomax', None)
+        self['isomax'] = isomax if isomax is not None else _v
+        _v = arg.pop('isomin', None)
+        self['isomin'] = isomin if isomin is not None else _v
+        _v = arg.pop('lighting', None)
+        self['lighting'] = lighting if lighting is not None else _v
+        _v = arg.pop('lightposition', None)
+        self['lightposition'
+            ] = lightposition if lightposition is not None else _v
+        _v = arg.pop('name', None)
+        self['name'] = name if name is not None else _v
+        _v = arg.pop('opacity', None)
+        self['opacity'] = opacity if opacity is not None else _v
+        _v = arg.pop('opacityscale', None)
+        self['opacityscale'] = opacityscale if opacityscale is not None else _v
+        _v = arg.pop('reversescale', None)
+        self['reversescale'] = reversescale if reversescale is not None else _v
+        _v = arg.pop('scene', None)
+        self['scene'] = scene if scene is not None else _v
+        _v = arg.pop('showscale', None)
+        self['showscale'] = showscale if showscale is not None else _v
+        _v = arg.pop('slices', None)
+        self['slices'] = slices if slices is not None else _v
+        _v = arg.pop('spaceframe', None)
+        self['spaceframe'] = spaceframe if spaceframe is not None else _v
+        _v = arg.pop('stream', None)
+        self['stream'] = stream if stream is not None else _v
+        _v = arg.pop('surface', None)
+        self['surface'] = surface if surface is not None else _v
+        _v = arg.pop('text', None)
+        self['text'] = text if text is not None else _v
+        _v = arg.pop('textsrc', None)
+        self['textsrc'] = textsrc if textsrc is not None else _v
+        _v = arg.pop('uid', None)
+        self['uid'] = uid if uid is not None else _v
+        _v = arg.pop('uirevision', None)
+        self['uirevision'] = uirevision if uirevision is not None else _v
+        _v = arg.pop('value', None)
+        self['value'] = value if value is not None else _v
+        _v = arg.pop('valuesrc', None)
+        self['valuesrc'] = valuesrc if valuesrc is not None else _v
+        _v = arg.pop('visible', None)
+        self['visible'] = visible if visible is not None else _v
+        _v = arg.pop('x', None)
+        self['x'] = x if x is not None else _v
+        _v = arg.pop('xsrc', None)
+        self['xsrc'] = xsrc if xsrc is not None else _v
+        _v = arg.pop('y', None)
+        self['y'] = y if y is not None else _v
+        _v = arg.pop('ysrc', None)
+        self['ysrc'] = ysrc if ysrc is not None else _v
+        _v = arg.pop('z', None)
+        self['z'] = z if z is not None else _v
+        _v = arg.pop('zsrc', None)
+        self['zsrc'] = zsrc if zsrc is not None else _v
+
+        # Read-only literals
+        # ------------------
+        from _plotly_utils.basevalidators import LiteralValidator
+        self._props['type'] = 'volume'
+        self._validators['type'] = LiteralValidator(
+            plotly_name='type', parent_name='volume', val='volume'
+        )
+        arg.pop('type', None)
 
         # Process unknown kwargs
         # ----------------------
@@ -5114,6 +9599,14 @@ class Violin(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -5129,14 +9622,15 @@ class Violin(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -5175,6 +9669,62 @@ class Violin(_BaseTraceType):
     @hoveron.setter
     def hoveron(self, val):
         self['hoveron'] = val
+
+    # hovertemplate
+    # -------------
+    @property
+    def hovertemplate(self):
+        """
+        Template string used for rendering the information that appear
+        on hover box. Note that this will override `hoverinfo`.
+        Variables are inserted using %{variable}, for example "y:
+        %{y}". Numbers are formatted using d3-format's syntax
+        %{variable:d3-format}, for example "Price: %{y:$.2f}". See http
+        s://github.com/d3/d3-format/blob/master/README.md#locale_format
+        for details on the formatting syntax. The variables available
+        in `hovertemplate` are the ones emitted as event data described
+        at this link https://plot.ly/javascript/plotlyjs-events/#event-
+        data. Additionally, every attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        Anything contained in tag `<extra>` is displayed in the
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
+    
+        The 'hovertemplate' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self['hovertemplate']
+
+    @hovertemplate.setter
+    def hovertemplate(self, val):
+        self['hovertemplate'] = val
+
+    # hovertemplatesrc
+    # ----------------
+    @property
+    def hovertemplatesrc(self):
+        """
+        Sets the source reference on plot.ly for  hovertemplate .
+    
+        The 'hovertemplatesrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hovertemplatesrc']
+
+    @hovertemplatesrc.setter
+    def hovertemplatesrc(self, val):
+        self['hovertemplatesrc'] = val
 
     # hovertext
     # ---------
@@ -5422,9 +9972,12 @@ class Violin(_BaseTraceType):
     def name(self):
         """
         Sets the trace name. The trace name appear as the legend item
-        and on hover. For box traces, the name will also be used for
+        and on hover. For violin traces, the name will also be used for
         the position coordinate, if `x` and `x0` (`y` and `y0` if
-        horizontal) are missing and the position axis is categorical
+        horizontal) are missing and the position axis is categorical.
+        Note that the trace name is also used as a default value for
+        attribute `scalegroup` (please see its description for
+        details).
     
         The 'name' property is a string and must be specified as:
           - A string
@@ -5562,7 +10115,10 @@ class Violin(_BaseTraceType):
         """
         If there are multiple violins that should be sized according to
         to some metric (see `scalemode`), link them by providing a non-
-        empty group id here shared by every trace in the same group.
+        empty group id here shared by every trace in the same group. If
+        a violin's `width` is undefined, `scalegroup` will default to
+        the trace's name. In this case, violins with the same names
+        will be linked together
     
         The 'scalegroup' property is a string and must be specified as:
           - A string
@@ -6180,6 +10736,27 @@ class Violin(_BaseTraceType):
             Do the hover effects highlight individual violins or
             sample points or the kernel density estimate or any
             combination of them?
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
         hovertext
             Same as `text`.
         hovertextsrc
@@ -6210,10 +10787,12 @@ class Violin(_BaseTraceType):
             compatible properties
         name
             Sets the trace name. The trace name appear as the
-            legend item and on hover. For box traces, the name will
-            also be used for the position coordinate, if `x` and
-            `x0` (`y` and `y0` if horizontal) are missing and the
-            position axis is categorical
+            legend item and on hover. For violin traces, the name
+            will also be used for the position coordinate, if `x`
+            and `x0` (`y` and `y0` if horizontal) are missing and
+            the position axis is categorical. Note that the trace
+            name is also used as a default value for attribute
+            `scalegroup` (please see its description for details).
         offsetgroup
             Set several traces linked to the same position axis or
             matching axes to the same offsetgroup where bars of the
@@ -6243,7 +10822,10 @@ class Violin(_BaseTraceType):
             If there are multiple violins that should be sized
             according to to some metric (see `scalemode`), link
             them by providing a non-empty group id here shared by
-            every trace in the same group.
+            every trace in the same group. If a violin's `width` is
+            undefined, `scalegroup` will default to the trace's
+            name. In this case, violins with the same names will be
+            linked together
         scalemode
             Sets the metric by which the width of each violin is
             determined."width" means each violin has the same (max)
@@ -6369,6 +10951,8 @@ class Violin(_BaseTraceType):
         hoverinfosrc=None,
         hoverlabel=None,
         hoveron=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
         ids=None,
@@ -6462,6 +11046,27 @@ class Violin(_BaseTraceType):
             Do the hover effects highlight individual violins or
             sample points or the kernel density estimate or any
             combination of them?
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
         hovertext
             Same as `text`.
         hovertextsrc
@@ -6492,10 +11097,12 @@ class Violin(_BaseTraceType):
             compatible properties
         name
             Sets the trace name. The trace name appear as the
-            legend item and on hover. For box traces, the name will
-            also be used for the position coordinate, if `x` and
-            `x0` (`y` and `y0` if horizontal) are missing and the
-            position axis is categorical
+            legend item and on hover. For violin traces, the name
+            will also be used for the position coordinate, if `x`
+            and `x0` (`y` and `y0` if horizontal) are missing and
+            the position axis is categorical. Note that the trace
+            name is also used as a default value for attribute
+            `scalegroup` (please see its description for details).
         offsetgroup
             Set several traces linked to the same position axis or
             matching axes to the same offsetgroup where bars of the
@@ -6525,7 +11132,10 @@ class Violin(_BaseTraceType):
             If there are multiple violins that should be sized
             according to to some metric (see `scalemode`), link
             them by providing a non-empty group id here shared by
-            every trace in the same group.
+            every trace in the same group. If a violin's `width` is
+            undefined, `scalegroup` will default to the trace's
+            name. In this case, violins with the same names will be
+            linked together
         scalemode
             Sets the metric by which the width of each violin is
             determined."width" means each violin has the same (max)
@@ -6679,6 +11289,9 @@ an instance of plotly.graph_objs.Violin"""
         self._validators['hoverinfosrc'] = v_violin.HoverinfosrcValidator()
         self._validators['hoverlabel'] = v_violin.HoverlabelValidator()
         self._validators['hoveron'] = v_violin.HoveronValidator()
+        self._validators['hovertemplate'] = v_violin.HovertemplateValidator()
+        self._validators['hovertemplatesrc'
+                        ] = v_violin.HovertemplatesrcValidator()
         self._validators['hovertext'] = v_violin.HovertextValidator()
         self._validators['hovertextsrc'] = v_violin.HovertextsrcValidator()
         self._validators['ids'] = v_violin.IdsValidator()
@@ -6743,6 +11356,12 @@ an instance of plotly.graph_objs.Violin"""
         self['hoverlabel'] = hoverlabel if hoverlabel is not None else _v
         _v = arg.pop('hoveron', None)
         self['hoveron'] = hoveron if hoveron is not None else _v
+        _v = arg.pop('hovertemplate', None)
+        self['hovertemplate'
+            ] = hovertemplate if hovertemplate is not None else _v
+        _v = arg.pop('hovertemplatesrc', None)
+        self['hovertemplatesrc'
+            ] = hovertemplatesrc if hovertemplatesrc is not None else _v
         _v = arg.pop('hovertext', None)
         self['hovertext'] = hovertext if hovertext is not None else _v
         _v = arg.pop('hovertextsrc', None)
@@ -7216,6 +11835,14 @@ class Table(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -7231,14 +11858,15 @@ class Table(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -7295,29 +11923,6 @@ class Table(_BaseTraceType):
     def idssrc(self, val):
         self['idssrc'] = val
 
-    # legendgroup
-    # -----------
-    @property
-    def legendgroup(self):
-        """
-        Sets the legend group for this trace. Traces part of the same
-        legend group hide/show at the same time when toggling legend
-        items.
-    
-        The 'legendgroup' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
-
-        Returns
-        -------
-        str
-        """
-        return self['legendgroup']
-
-    @legendgroup.setter
-    def legendgroup(self, val):
-        self['legendgroup'] = val
-
     # name
     # ----
     @property
@@ -7339,71 +11944,6 @@ class Table(_BaseTraceType):
     @name.setter
     def name(self, val):
         self['name'] = val
-
-    # opacity
-    # -------
-    @property
-    def opacity(self):
-        """
-        Sets the opacity of the trace.
-    
-        The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
-
-        Returns
-        -------
-        int|float
-        """
-        return self['opacity']
-
-    @opacity.setter
-    def opacity(self, val):
-        self['opacity'] = val
-
-    # selectedpoints
-    # --------------
-    @property
-    def selectedpoints(self):
-        """
-        Array containing integer indices of selected points. Has an
-        effect only for traces that support selections. Note that an
-        empty array means an empty selection where the `unselected` are
-        turned on for all points, whereas, any other non-array values
-        means no selection all where the `selected` and `unselected`
-        styles have no effect.
-    
-        The 'selectedpoints' property accepts values of any type
-
-        Returns
-        -------
-        Any
-        """
-        return self['selectedpoints']
-
-    @selectedpoints.setter
-    def selectedpoints(self, val):
-        self['selectedpoints'] = val
-
-    # showlegend
-    # ----------
-    @property
-    def showlegend(self):
-        """
-        Determines whether or not an item corresponding to this trace
-        is shown in the legend.
-    
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
-
-        Returns
-        -------
-        bool
-        """
-        return self['showlegend']
-
-    @showlegend.setter
-    def showlegend(self, val):
-        self['showlegend'] = val
 
     # stream
     # ------
@@ -7578,25 +12118,9 @@ class Table(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
-        legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
-        opacity
-            Sets the opacity of the trace.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
-        showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
         stream
             plotly.graph_objs.table.Stream instance or dict with
             compatible properties
@@ -7646,11 +12170,7 @@ class Table(_BaseTraceType):
         hoverlabel=None,
         ids=None,
         idssrc=None,
-        legendgroup=None,
         name=None,
-        opacity=None,
-        selectedpoints=None,
-        showlegend=None,
         stream=None,
         uid=None,
         uirevision=None,
@@ -7716,25 +12236,9 @@ class Table(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
-        legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
-        opacity
-            Sets the opacity of the trace.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
-        showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
         stream
             plotly.graph_objs.table.Stream instance or dict with
             compatible properties
@@ -7812,11 +12316,7 @@ an instance of plotly.graph_objs.Table"""
         self._validators['hoverlabel'] = v_table.HoverlabelValidator()
         self._validators['ids'] = v_table.IdsValidator()
         self._validators['idssrc'] = v_table.IdssrcValidator()
-        self._validators['legendgroup'] = v_table.LegendgroupValidator()
         self._validators['name'] = v_table.NameValidator()
-        self._validators['opacity'] = v_table.OpacityValidator()
-        self._validators['selectedpoints'] = v_table.SelectedpointsValidator()
-        self._validators['showlegend'] = v_table.ShowlegendValidator()
         self._validators['stream'] = v_table.StreamValidator()
         self._validators['uid'] = v_table.UidValidator()
         self._validators['uirevision'] = v_table.UirevisionValidator()
@@ -7855,17 +12355,8 @@ an instance of plotly.graph_objs.Table"""
         self['ids'] = ids if ids is not None else _v
         _v = arg.pop('idssrc', None)
         self['idssrc'] = idssrc if idssrc is not None else _v
-        _v = arg.pop('legendgroup', None)
-        self['legendgroup'] = legendgroup if legendgroup is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
-        _v = arg.pop('opacity', None)
-        self['opacity'] = opacity if opacity is not None else _v
-        _v = arg.pop('selectedpoints', None)
-        self['selectedpoints'
-            ] = selectedpoints if selectedpoints is not None else _v
-        _v = arg.pop('showlegend', None)
-        self['showlegend'] = showlegend if showlegend is not None else _v
         _v = arg.pop('stream', None)
         self['stream'] = stream if stream is not None else _v
         _v = arg.pop('uid', None)
@@ -8283,6 +12774,27 @@ class Surface(_BaseTraceType):
     def colorscale(self, val):
         self['colorscale'] = val
 
+    # connectgaps
+    # -----------
+    @property
+    def connectgaps(self):
+        """
+        Determines whether or not gaps (i.e. {nan} or missing values)
+        in the `z` data are filled in.
+    
+        The 'connectgaps' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self['connectgaps']
+
+    @connectgaps.setter
+    def connectgaps(self, val):
+        self['connectgaps'] = val
+
     # contours
     # --------
     @property
@@ -8440,6 +12952,14 @@ class Surface(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -8455,14 +12975,15 @@ class Surface(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -8494,7 +13015,9 @@ class Surface(_BaseTraceType):
         data. Additionally, every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
         Anything contained in tag `<extra>` is displayed in the
-        secondary box, for example "<extra>{fullData.name}</extra>".
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
     
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -8614,29 +13137,6 @@ class Surface(_BaseTraceType):
     @idssrc.setter
     def idssrc(self, val):
         self['idssrc'] = val
-
-    # legendgroup
-    # -----------
-    @property
-    def legendgroup(self):
-        """
-        Sets the legend group for this trace. Traces part of the same
-        legend group hide/show at the same time when toggling legend
-        items.
-    
-        The 'legendgroup' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
-
-        Returns
-        -------
-        str
-        """
-        return self['legendgroup']
-
-    @legendgroup.setter
-    def legendgroup(self, val):
-        self['legendgroup'] = val
 
     # lighting
     # --------
@@ -8806,51 +13306,6 @@ class Surface(_BaseTraceType):
     @scene.setter
     def scene(self, val):
         self['scene'] = val
-
-    # selectedpoints
-    # --------------
-    @property
-    def selectedpoints(self):
-        """
-        Array containing integer indices of selected points. Has an
-        effect only for traces that support selections. Note that an
-        empty array means an empty selection where the `unselected` are
-        turned on for all points, whereas, any other non-array values
-        means no selection all where the `selected` and `unselected`
-        styles have no effect.
-    
-        The 'selectedpoints' property accepts values of any type
-
-        Returns
-        -------
-        Any
-        """
-        return self['selectedpoints']
-
-    @selectedpoints.setter
-    def selectedpoints(self, val):
-        self['selectedpoints'] = val
-
-    # showlegend
-    # ----------
-    @property
-    def showlegend(self):
-        """
-        Determines whether or not an item corresponding to this trace
-        is shown in the legend.
-    
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
-
-        Returns
-        -------
-        bool
-        """
-        return self['showlegend']
-
-    @showlegend.setter
-    def showlegend(self, val):
-        self['showlegend'] = val
 
     # showscale
     # ---------
@@ -9318,6 +13773,9 @@ class Surface(_BaseTraceType):
             string of the following list: Greys,YlGnBu,Greens,YlOrR
             d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
             ot,Blackbody,Earth,Electric,Viridis,Cividis.
+        connectgaps
+            Determines whether or not gaps (i.e. {nan} or missing
+            values) in the `z` data are filled in.
         contours
             plotly.graph_objs.surface.Contours instance or dict
             with compatible properties
@@ -9359,7 +13817,8 @@ class Surface(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -9373,10 +13832,6 @@ class Surface(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
-        legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
         lighting
             plotly.graph_objs.surface.Lighting instance or dict
             with compatible properties
@@ -9404,16 +13859,6 @@ class Surface(_BaseTraceType):
             the (x,y,z) coordinates refer to `layout.scene`. If
             "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
-        showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -9490,6 +13935,7 @@ class Surface(_BaseTraceType):
         cmin=None,
         colorbar=None,
         colorscale=None,
+        connectgaps=None,
         contours=None,
         customdata=None,
         customdatasrc=None,
@@ -9503,15 +13949,12 @@ class Surface(_BaseTraceType):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
-        legendgroup=None,
         lighting=None,
         lightposition=None,
         name=None,
         opacity=None,
         reversescale=None,
         scene=None,
-        selectedpoints=None,
-        showlegend=None,
         showscale=None,
         stream=None,
         surfacecolor=None,
@@ -9590,6 +14033,9 @@ class Surface(_BaseTraceType):
             string of the following list: Greys,YlGnBu,Greens,YlOrR
             d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
             ot,Blackbody,Earth,Electric,Viridis,Cividis.
+        connectgaps
+            Determines whether or not gaps (i.e. {nan} or missing
+            values) in the `z` data are filled in.
         contours
             plotly.graph_objs.surface.Contours instance or dict
             with compatible properties
@@ -9631,7 +14077,8 @@ class Surface(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -9645,10 +14092,6 @@ class Surface(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
-        legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
         lighting
             plotly.graph_objs.surface.Lighting instance or dict
             with compatible properties
@@ -9676,16 +14119,6 @@ class Surface(_BaseTraceType):
             the (x,y,z) coordinates refer to `layout.scene`. If
             "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
-        showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -9791,6 +14224,7 @@ an instance of plotly.graph_objs.Surface"""
         self._validators['cmin'] = v_surface.CminValidator()
         self._validators['colorbar'] = v_surface.ColorBarValidator()
         self._validators['colorscale'] = v_surface.ColorscaleValidator()
+        self._validators['connectgaps'] = v_surface.ConnectgapsValidator()
         self._validators['contours'] = v_surface.ContoursValidator()
         self._validators['customdata'] = v_surface.CustomdataValidator()
         self._validators['customdatasrc'] = v_surface.CustomdatasrcValidator()
@@ -9805,16 +14239,12 @@ an instance of plotly.graph_objs.Surface"""
         self._validators['hovertextsrc'] = v_surface.HovertextsrcValidator()
         self._validators['ids'] = v_surface.IdsValidator()
         self._validators['idssrc'] = v_surface.IdssrcValidator()
-        self._validators['legendgroup'] = v_surface.LegendgroupValidator()
         self._validators['lighting'] = v_surface.LightingValidator()
         self._validators['lightposition'] = v_surface.LightpositionValidator()
         self._validators['name'] = v_surface.NameValidator()
         self._validators['opacity'] = v_surface.OpacityValidator()
         self._validators['reversescale'] = v_surface.ReversescaleValidator()
         self._validators['scene'] = v_surface.SceneValidator()
-        self._validators['selectedpoints'] = v_surface.SelectedpointsValidator(
-        )
-        self._validators['showlegend'] = v_surface.ShowlegendValidator()
         self._validators['showscale'] = v_surface.ShowscaleValidator()
         self._validators['stream'] = v_surface.StreamValidator()
         self._validators['surfacecolor'] = v_surface.SurfacecolorValidator()
@@ -9852,6 +14282,8 @@ an instance of plotly.graph_objs.Surface"""
         self['colorbar'] = colorbar if colorbar is not None else _v
         _v = arg.pop('colorscale', None)
         self['colorscale'] = colorscale if colorscale is not None else _v
+        _v = arg.pop('connectgaps', None)
+        self['connectgaps'] = connectgaps if connectgaps is not None else _v
         _v = arg.pop('contours', None)
         self['contours'] = contours if contours is not None else _v
         _v = arg.pop('customdata', None)
@@ -9881,8 +14313,6 @@ an instance of plotly.graph_objs.Surface"""
         self['ids'] = ids if ids is not None else _v
         _v = arg.pop('idssrc', None)
         self['idssrc'] = idssrc if idssrc is not None else _v
-        _v = arg.pop('legendgroup', None)
-        self['legendgroup'] = legendgroup if legendgroup is not None else _v
         _v = arg.pop('lighting', None)
         self['lighting'] = lighting if lighting is not None else _v
         _v = arg.pop('lightposition', None)
@@ -9896,11 +14326,6 @@ an instance of plotly.graph_objs.Surface"""
         self['reversescale'] = reversescale if reversescale is not None else _v
         _v = arg.pop('scene', None)
         self['scene'] = scene if scene is not None else _v
-        _v = arg.pop('selectedpoints', None)
-        self['selectedpoints'
-            ] = selectedpoints if selectedpoints is not None else _v
-        _v = arg.pop('showlegend', None)
-        self['showlegend'] = showlegend if showlegend is not None else _v
         _v = arg.pop('showscale', None)
         self['showscale'] = showscale if showscale is not None else _v
         _v = arg.pop('stream', None)
@@ -9945,6 +14370,1522 @@ an instance of plotly.graph_objs.Surface"""
         self._props['type'] = 'surface'
         self._validators['type'] = LiteralValidator(
             plotly_name='type', parent_name='surface', val='surface'
+        )
+        arg.pop('type', None)
+
+        # Process unknown kwargs
+        # ----------------------
+        self._process_kwargs(**dict(arg, **kwargs))
+
+        # Reset skip_invalid
+        # ------------------
+        self._skip_invalid = False
+
+
+from plotly.basedatatypes import BaseTraceType as _BaseTraceType
+import copy as _copy
+
+
+class Sunburst(_BaseTraceType):
+
+    # branchvalues
+    # ------------
+    @property
+    def branchvalues(self):
+        """
+        Determines how the items in `values` are summed. When set to
+        "total", items in `values` are taken to be value of all its
+        descendants. When set to "remainder", items in `values`
+        corresponding to the root and the branches sectors are taken to
+        be the extra part not part of the sum of the values at their
+        leaves.
+    
+        The 'branchvalues' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['remainder', 'total']
+
+        Returns
+        -------
+        Any
+        """
+        return self['branchvalues']
+
+    @branchvalues.setter
+    def branchvalues(self, val):
+        self['branchvalues'] = val
+
+    # customdata
+    # ----------
+    @property
+    def customdata(self):
+        """
+        Assigns extra data each datum. This may be useful when
+        listening to hover, click and selection events. Note that,
+        "scatter" traces also appends customdata items in the markers
+        DOM elements
+    
+        The 'customdata' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self['customdata']
+
+    @customdata.setter
+    def customdata(self, val):
+        self['customdata'] = val
+
+    # customdatasrc
+    # -------------
+    @property
+    def customdatasrc(self):
+        """
+        Sets the source reference on plot.ly for  customdata .
+    
+        The 'customdatasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['customdatasrc']
+
+    @customdatasrc.setter
+    def customdatasrc(self, val):
+        self['customdatasrc'] = val
+
+    # domain
+    # ------
+    @property
+    def domain(self):
+        """
+        The 'domain' property is an instance of Domain
+        that may be specified as:
+          - An instance of plotly.graph_objs.sunburst.Domain
+          - A dict of string/value properties that will be passed
+            to the Domain constructor
+    
+            Supported dict properties:
+                
+                column
+                    If there is a layout grid, use the domain for
+                    this column in the grid for this sunburst trace
+                    .
+                row
+                    If there is a layout grid, use the domain for
+                    this row in the grid for this sunburst trace .
+                x
+                    Sets the horizontal domain of this sunburst
+                    trace (in plot fraction).
+                y
+                    Sets the vertical domain of this sunburst trace
+                    (in plot fraction).
+
+        Returns
+        -------
+        plotly.graph_objs.sunburst.Domain
+        """
+        return self['domain']
+
+    @domain.setter
+    def domain(self, val):
+        self['domain'] = val
+
+    # hoverinfo
+    # ---------
+    @property
+    def hoverinfo(self):
+        """
+        Determines which trace information appear on hover. If `none`
+        or `skip` are set, no information is displayed upon hovering.
+        But, if `none` is set, click and hover events are still fired.
+    
+        The 'hoverinfo' property is a flaglist and may be specified
+        as a string containing:
+          - Any combination of ['label', 'text', 'value', 'name'] joined with '+' characters
+            (e.g. 'label+text')
+            OR exactly one of ['all', 'none', 'skip'] (e.g. 'skip')
+          - A list or array of the above
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['hoverinfo']
+
+    @hoverinfo.setter
+    def hoverinfo(self, val):
+        self['hoverinfo'] = val
+
+    # hoverinfosrc
+    # ------------
+    @property
+    def hoverinfosrc(self):
+        """
+        Sets the source reference on plot.ly for  hoverinfo .
+    
+        The 'hoverinfosrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hoverinfosrc']
+
+    @hoverinfosrc.setter
+    def hoverinfosrc(self, val):
+        self['hoverinfosrc'] = val
+
+    # hoverlabel
+    # ----------
+    @property
+    def hoverlabel(self):
+        """
+        The 'hoverlabel' property is an instance of Hoverlabel
+        that may be specified as:
+          - An instance of plotly.graph_objs.sunburst.Hoverlabel
+          - A dict of string/value properties that will be passed
+            to the Hoverlabel constructor
+    
+            Supported dict properties:
+                
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
+                bgcolor
+                    Sets the background color of the hover labels
+                    for this trace
+                bgcolorsrc
+                    Sets the source reference on plot.ly for
+                    bgcolor .
+                bordercolor
+                    Sets the border color of the hover labels for
+                    this trace.
+                bordercolorsrc
+                    Sets the source reference on plot.ly for
+                    bordercolor .
+                font
+                    Sets the font used in hover labels.
+                namelength
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
+                namelengthsrc
+                    Sets the source reference on plot.ly for
+                    namelength .
+
+        Returns
+        -------
+        plotly.graph_objs.sunburst.Hoverlabel
+        """
+        return self['hoverlabel']
+
+    @hoverlabel.setter
+    def hoverlabel(self, val):
+        self['hoverlabel'] = val
+
+    # hovertemplate
+    # -------------
+    @property
+    def hovertemplate(self):
+        """
+        Template string used for rendering the information that appear
+        on hover box. Note that this will override `hoverinfo`.
+        Variables are inserted using %{variable}, for example "y:
+        %{y}". Numbers are formatted using d3-format's syntax
+        %{variable:d3-format}, for example "Price: %{y:$.2f}". See http
+        s://github.com/d3/d3-format/blob/master/README.md#locale_format
+        for details on the formatting syntax. The variables available
+        in `hovertemplate` are the ones emitted as event data described
+        at this link https://plot.ly/javascript/plotlyjs-events/#event-
+        data. Additionally, every attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        Anything contained in tag `<extra>` is displayed in the
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
+    
+        The 'hovertemplate' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self['hovertemplate']
+
+    @hovertemplate.setter
+    def hovertemplate(self, val):
+        self['hovertemplate'] = val
+
+    # hovertemplatesrc
+    # ----------------
+    @property
+    def hovertemplatesrc(self):
+        """
+        Sets the source reference on plot.ly for  hovertemplate .
+    
+        The 'hovertemplatesrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hovertemplatesrc']
+
+    @hovertemplatesrc.setter
+    def hovertemplatesrc(self, val):
+        self['hovertemplatesrc'] = val
+
+    # hovertext
+    # ---------
+    @property
+    def hovertext(self):
+        """
+        Sets hover text elements associated with each sector. If a
+        single string, the same string appears for all data points. If
+        an array of string, the items are mapped in order of this
+        trace's sectors. To be seen, trace `hoverinfo` must contain a
+        "text" flag.
+    
+        The 'hovertext' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self['hovertext']
+
+    @hovertext.setter
+    def hovertext(self, val):
+        self['hovertext'] = val
+
+    # hovertextsrc
+    # ------------
+    @property
+    def hovertextsrc(self):
+        """
+        Sets the source reference on plot.ly for  hovertext .
+    
+        The 'hovertextsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hovertextsrc']
+
+    @hovertextsrc.setter
+    def hovertextsrc(self, val):
+        self['hovertextsrc'] = val
+
+    # ids
+    # ---
+    @property
+    def ids(self):
+        """
+        Assigns id labels to each datum. These ids for object constancy
+        of data points during animation. Should be an array of strings,
+        not numbers or any other type.
+    
+        The 'ids' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self['ids']
+
+    @ids.setter
+    def ids(self, val):
+        self['ids'] = val
+
+    # idssrc
+    # ------
+    @property
+    def idssrc(self):
+        """
+        Sets the source reference on plot.ly for  ids .
+    
+        The 'idssrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['idssrc']
+
+    @idssrc.setter
+    def idssrc(self, val):
+        self['idssrc'] = val
+
+    # insidetextfont
+    # --------------
+    @property
+    def insidetextfont(self):
+        """
+        Sets the font used for `textinfo` lying inside the pie.
+    
+        The 'insidetextfont' property is an instance of Insidetextfont
+        that may be specified as:
+          - An instance of plotly.graph_objs.sunburst.Insidetextfont
+          - A dict of string/value properties that will be passed
+            to the Insidetextfont constructor
+    
+            Supported dict properties:
+                
+                color
+    
+                colorsrc
+                    Sets the source reference on plot.ly for  color
+                    .
+                family
+                    HTML font family - the typeface that will be
+                    applied by the web browser. The web browser
+                    will only be able to apply a font if it is
+                    available on the system which it operates.
+                    Provide multiple font families, separated by
+                    commas, to indicate the preference in which to
+                    apply fonts if they aren't available on the
+                    system. The plotly service (at https://plot.ly
+                    or on-premise) generates images on a server,
+                    where only a select number of fonts are
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
+                familysrc
+                    Sets the source reference on plot.ly for
+                    family .
+                size
+    
+                sizesrc
+                    Sets the source reference on plot.ly for  size
+                    .
+
+        Returns
+        -------
+        plotly.graph_objs.sunburst.Insidetextfont
+        """
+        return self['insidetextfont']
+
+    @insidetextfont.setter
+    def insidetextfont(self, val):
+        self['insidetextfont'] = val
+
+    # labels
+    # ------
+    @property
+    def labels(self):
+        """
+        Sets the labels of each of the sunburst sectors.
+    
+        The 'labels' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self['labels']
+
+    @labels.setter
+    def labels(self, val):
+        self['labels'] = val
+
+    # labelssrc
+    # ---------
+    @property
+    def labelssrc(self):
+        """
+        Sets the source reference on plot.ly for  labels .
+    
+        The 'labelssrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['labelssrc']
+
+    @labelssrc.setter
+    def labelssrc(self, val):
+        self['labelssrc'] = val
+
+    # leaf
+    # ----
+    @property
+    def leaf(self):
+        """
+        The 'leaf' property is an instance of Leaf
+        that may be specified as:
+          - An instance of plotly.graph_objs.sunburst.Leaf
+          - A dict of string/value properties that will be passed
+            to the Leaf constructor
+    
+            Supported dict properties:
+                
+                opacity
+                    Sets the opacity of the leaves.
+
+        Returns
+        -------
+        plotly.graph_objs.sunburst.Leaf
+        """
+        return self['leaf']
+
+    @leaf.setter
+    def leaf(self, val):
+        self['leaf'] = val
+
+    # level
+    # -----
+    @property
+    def level(self):
+        """
+        Sets the level from which this sunburst trace hierarchy is
+        rendered. Set `level` to `''` to start the sunburst from the
+        root node in the hierarchy. Must be an "id" if `ids` is filled
+        in, otherwise plotly attempts to find a matching item in
+        `labels`.
+    
+        The 'level' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['level']
+
+    @level.setter
+    def level(self, val):
+        self['level'] = val
+
+    # marker
+    # ------
+    @property
+    def marker(self):
+        """
+        The 'marker' property is an instance of Marker
+        that may be specified as:
+          - An instance of plotly.graph_objs.sunburst.Marker
+          - A dict of string/value properties that will be passed
+            to the Marker constructor
+    
+            Supported dict properties:
+                
+                colors
+                    Sets the color of each sector of this sunburst
+                    chart. If not specified, the default trace
+                    color set is used to pick the sector colors.
+                colorssrc
+                    Sets the source reference on plot.ly for
+                    colors .
+                line
+                    plotly.graph_objs.sunburst.marker.Line instance
+                    or dict with compatible properties
+
+        Returns
+        -------
+        plotly.graph_objs.sunburst.Marker
+        """
+        return self['marker']
+
+    @marker.setter
+    def marker(self, val):
+        self['marker'] = val
+
+    # maxdepth
+    # --------
+    @property
+    def maxdepth(self):
+        """
+        Sets the number of rendered sunburst rings from any given
+        `level`. Set `maxdepth` to "-1" to render all the levels in the
+        hierarchy.
+    
+        The 'maxdepth' property is a integer and may be specified as:
+          - An int (or float that will be cast to an int)
+
+        Returns
+        -------
+        int
+        """
+        return self['maxdepth']
+
+    @maxdepth.setter
+    def maxdepth(self, val):
+        self['maxdepth'] = val
+
+    # name
+    # ----
+    @property
+    def name(self):
+        """
+        Sets the trace name. The trace name appear as the legend item
+        and on hover.
+    
+        The 'name' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['name']
+
+    @name.setter
+    def name(self, val):
+        self['name'] = val
+
+    # opacity
+    # -------
+    @property
+    def opacity(self):
+        """
+        Sets the opacity of the trace.
+    
+        The 'opacity' property is a number and may be specified as:
+          - An int or float in the interval [0, 1]
+
+        Returns
+        -------
+        int|float
+        """
+        return self['opacity']
+
+    @opacity.setter
+    def opacity(self, val):
+        self['opacity'] = val
+
+    # outsidetextfont
+    # ---------------
+    @property
+    def outsidetextfont(self):
+        """
+        Sets the font used for `textinfo` lying outside the pie.
+    
+        The 'outsidetextfont' property is an instance of Outsidetextfont
+        that may be specified as:
+          - An instance of plotly.graph_objs.sunburst.Outsidetextfont
+          - A dict of string/value properties that will be passed
+            to the Outsidetextfont constructor
+    
+            Supported dict properties:
+                
+                color
+    
+                colorsrc
+                    Sets the source reference on plot.ly for  color
+                    .
+                family
+                    HTML font family - the typeface that will be
+                    applied by the web browser. The web browser
+                    will only be able to apply a font if it is
+                    available on the system which it operates.
+                    Provide multiple font families, separated by
+                    commas, to indicate the preference in which to
+                    apply fonts if they aren't available on the
+                    system. The plotly service (at https://plot.ly
+                    or on-premise) generates images on a server,
+                    where only a select number of fonts are
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
+                familysrc
+                    Sets the source reference on plot.ly for
+                    family .
+                size
+    
+                sizesrc
+                    Sets the source reference on plot.ly for  size
+                    .
+
+        Returns
+        -------
+        plotly.graph_objs.sunburst.Outsidetextfont
+        """
+        return self['outsidetextfont']
+
+    @outsidetextfont.setter
+    def outsidetextfont(self, val):
+        self['outsidetextfont'] = val
+
+    # parents
+    # -------
+    @property
+    def parents(self):
+        """
+        Sets the parent sectors for each of the sunburst sectors. Empty
+        string items '' are understood to reference the root node in
+        the hierarchy. If `ids` is filled, `parents` items are
+        understood to be "ids" themselves. When `ids` is not set,
+        plotly attempts to find matching items in `labels`, but beware
+        they must be unique.
+    
+        The 'parents' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self['parents']
+
+    @parents.setter
+    def parents(self, val):
+        self['parents'] = val
+
+    # parentssrc
+    # ----------
+    @property
+    def parentssrc(self):
+        """
+        Sets the source reference on plot.ly for  parents .
+    
+        The 'parentssrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['parentssrc']
+
+    @parentssrc.setter
+    def parentssrc(self, val):
+        self['parentssrc'] = val
+
+    # stream
+    # ------
+    @property
+    def stream(self):
+        """
+        The 'stream' property is an instance of Stream
+        that may be specified as:
+          - An instance of plotly.graph_objs.sunburst.Stream
+          - A dict of string/value properties that will be passed
+            to the Stream constructor
+    
+            Supported dict properties:
+                
+                maxpoints
+                    Sets the maximum number of points to keep on
+                    the plots from an incoming stream. If
+                    `maxpoints` is set to 50, only the newest 50
+                    points will be displayed on the plot.
+                token
+                    The stream id number links a data trace on a
+                    plot with a stream. See
+                    https://plot.ly/settings for more details.
+
+        Returns
+        -------
+        plotly.graph_objs.sunburst.Stream
+        """
+        return self['stream']
+
+    @stream.setter
+    def stream(self, val):
+        self['stream'] = val
+
+    # text
+    # ----
+    @property
+    def text(self):
+        """
+        Sets text elements associated with each sector. If trace
+        `textinfo` contains a "text" flag, these elements will be seen
+        on the chart. If trace `hoverinfo` contains a "text" flag and
+        "hovertext" is not set, these elements will be seen in the
+        hover labels.
+    
+        The 'text' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self['text']
+
+    @text.setter
+    def text(self, val):
+        self['text'] = val
+
+    # textfont
+    # --------
+    @property
+    def textfont(self):
+        """
+        Sets the font used for `textinfo`.
+    
+        The 'textfont' property is an instance of Textfont
+        that may be specified as:
+          - An instance of plotly.graph_objs.sunburst.Textfont
+          - A dict of string/value properties that will be passed
+            to the Textfont constructor
+    
+            Supported dict properties:
+                
+                color
+    
+                colorsrc
+                    Sets the source reference on plot.ly for  color
+                    .
+                family
+                    HTML font family - the typeface that will be
+                    applied by the web browser. The web browser
+                    will only be able to apply a font if it is
+                    available on the system which it operates.
+                    Provide multiple font families, separated by
+                    commas, to indicate the preference in which to
+                    apply fonts if they aren't available on the
+                    system. The plotly service (at https://plot.ly
+                    or on-premise) generates images on a server,
+                    where only a select number of fonts are
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
+                familysrc
+                    Sets the source reference on plot.ly for
+                    family .
+                size
+    
+                sizesrc
+                    Sets the source reference on plot.ly for  size
+                    .
+
+        Returns
+        -------
+        plotly.graph_objs.sunburst.Textfont
+        """
+        return self['textfont']
+
+    @textfont.setter
+    def textfont(self, val):
+        self['textfont'] = val
+
+    # textinfo
+    # --------
+    @property
+    def textinfo(self):
+        """
+        Determines which trace information appear on the graph.
+    
+        The 'textinfo' property is a flaglist and may be specified
+        as a string containing:
+          - Any combination of ['label', 'text', 'value'] joined with '+' characters
+            (e.g. 'label+text')
+            OR exactly one of ['none'] (e.g. 'none')
+
+        Returns
+        -------
+        Any
+        """
+        return self['textinfo']
+
+    @textinfo.setter
+    def textinfo(self, val):
+        self['textinfo'] = val
+
+    # textsrc
+    # -------
+    @property
+    def textsrc(self):
+        """
+        Sets the source reference on plot.ly for  text .
+    
+        The 'textsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['textsrc']
+
+    @textsrc.setter
+    def textsrc(self, val):
+        self['textsrc'] = val
+
+    # uid
+    # ---
+    @property
+    def uid(self):
+        """
+        Assign an id to this trace, Use this to provide object
+        constancy between traces during animations and transitions.
+    
+        The 'uid' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['uid']
+
+    @uid.setter
+    def uid(self, val):
+        self['uid'] = val
+
+    # uirevision
+    # ----------
+    @property
+    def uirevision(self):
+        """
+        Controls persistence of some user-driven changes to the trace:
+        `constraintrange` in `parcoords` traces, as well as some
+        `editable: true` modifications such as `name` and
+        `colorbar.title`. Defaults to `layout.uirevision`. Note that
+        other user-driven trace attribute changes are controlled by
+        `layout` attributes: `trace.visible` is controlled by
+        `layout.legend.uirevision`, `selectedpoints` is controlled by
+        `layout.selectionrevision`, and `colorbar.(x|y)` (accessible
+        with `config: {editable: true}`) is controlled by
+        `layout.editrevision`. Trace changes are tracked by `uid`,
+        which only falls back on trace index if no `uid` is provided.
+        So if your app can add/remove traces before the end of the
+        `data` array, such that the same trace has a different index,
+        you can still preserve user-driven changes if you give each
+        trace a `uid` that stays with it as it moves.
+    
+        The 'uirevision' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['uirevision']
+
+    @uirevision.setter
+    def uirevision(self, val):
+        self['uirevision'] = val
+
+    # values
+    # ------
+    @property
+    def values(self):
+        """
+        Sets the values associated with each of the sunburst sectors.
+        Use with `branchvalues` to determine how the values are summed.
+    
+        The 'values' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self['values']
+
+    @values.setter
+    def values(self, val):
+        self['values'] = val
+
+    # valuessrc
+    # ---------
+    @property
+    def valuessrc(self):
+        """
+        Sets the source reference on plot.ly for  values .
+    
+        The 'valuessrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['valuessrc']
+
+    @valuessrc.setter
+    def valuessrc(self, val):
+        self['valuessrc'] = val
+
+    # visible
+    # -------
+    @property
+    def visible(self):
+        """
+        Determines whether or not this trace is visible. If
+        "legendonly", the trace is not drawn, but can appear as a
+        legend item (provided that the legend itself is visible).
+    
+        The 'visible' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                [True, False, 'legendonly']
+
+        Returns
+        -------
+        Any
+        """
+        return self['visible']
+
+    @visible.setter
+    def visible(self, val):
+        self['visible'] = val
+
+    # type
+    # ----
+    @property
+    def type(self):
+        return self._props['type']
+
+    # property parent name
+    # --------------------
+    @property
+    def _parent_path_str(self):
+        return ''
+
+    # Self properties description
+    # ---------------------------
+    @property
+    def _prop_descriptions(self):
+        return """\
+        branchvalues
+            Determines how the items in `values` are summed. When
+            set to "total", items in `values` are taken to be value
+            of all its descendants. When set to "remainder", items
+            in `values` corresponding to the root and the branches
+            sectors are taken to be the extra part not part of the
+            sum of the values at their leaves.
+        customdata
+            Assigns extra data each datum. This may be useful when
+            listening to hover, click and selection events. Note
+            that, "scatter" traces also appends customdata items in
+            the markers DOM elements
+        customdatasrc
+            Sets the source reference on plot.ly for  customdata .
+        domain
+            plotly.graph_objs.sunburst.Domain instance or dict with
+            compatible properties
+        hoverinfo
+            Determines which trace information appear on hover. If
+            `none` or `skip` are set, no information is displayed
+            upon hovering. But, if `none` is set, click and hover
+            events are still fired.
+        hoverinfosrc
+            Sets the source reference on plot.ly for  hoverinfo .
+        hoverlabel
+            plotly.graph_objs.sunburst.Hoverlabel instance or dict
+            with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
+        hovertext
+            Sets hover text elements associated with each sector.
+            If a single string, the same string appears for all
+            data points. If an array of string, the items are
+            mapped in order of this trace's sectors. To be seen,
+            trace `hoverinfo` must contain a "text" flag.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
+        ids
+            Assigns id labels to each datum. These ids for object
+            constancy of data points during animation. Should be an
+            array of strings, not numbers or any other type.
+        idssrc
+            Sets the source reference on plot.ly for  ids .
+        insidetextfont
+            Sets the font used for `textinfo` lying inside the pie.
+        labels
+            Sets the labels of each of the sunburst sectors.
+        labelssrc
+            Sets the source reference on plot.ly for  labels .
+        leaf
+            plotly.graph_objs.sunburst.Leaf instance or dict with
+            compatible properties
+        level
+            Sets the level from which this sunburst trace hierarchy
+            is rendered. Set `level` to `''` to start the sunburst
+            from the root node in the hierarchy. Must be an "id" if
+            `ids` is filled in, otherwise plotly attempts to find a
+            matching item in `labels`.
+        marker
+            plotly.graph_objs.sunburst.Marker instance or dict with
+            compatible properties
+        maxdepth
+            Sets the number of rendered sunburst rings from any
+            given `level`. Set `maxdepth` to "-1" to render all the
+            levels in the hierarchy.
+        name
+            Sets the trace name. The trace name appear as the
+            legend item and on hover.
+        opacity
+            Sets the opacity of the trace.
+        outsidetextfont
+            Sets the font used for `textinfo` lying outside the
+            pie.
+        parents
+            Sets the parent sectors for each of the sunburst
+            sectors. Empty string items '' are understood to
+            reference the root node in the hierarchy. If `ids` is
+            filled, `parents` items are understood to be "ids"
+            themselves. When `ids` is not set, plotly attempts to
+            find matching items in `labels`, but beware they must
+            be unique.
+        parentssrc
+            Sets the source reference on plot.ly for  parents .
+        stream
+            plotly.graph_objs.sunburst.Stream instance or dict with
+            compatible properties
+        text
+            Sets text elements associated with each sector. If
+            trace `textinfo` contains a "text" flag, these elements
+            will be seen on the chart. If trace `hoverinfo`
+            contains a "text" flag and "hovertext" is not set,
+            these elements will be seen in the hover labels.
+        textfont
+            Sets the font used for `textinfo`.
+        textinfo
+            Determines which trace information appear on the graph.
+        textsrc
+            Sets the source reference on plot.ly for  text .
+        uid
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
+        values
+            Sets the values associated with each of the sunburst
+            sectors. Use with `branchvalues` to determine how the
+            values are summed.
+        valuessrc
+            Sets the source reference on plot.ly for  values .
+        visible
+            Determines whether or not this trace is visible. If
+            "legendonly", the trace is not drawn, but can appear as
+            a legend item (provided that the legend itself is
+            visible).
+        """
+
+    def __init__(
+        self,
+        arg=None,
+        branchvalues=None,
+        customdata=None,
+        customdatasrc=None,
+        domain=None,
+        hoverinfo=None,
+        hoverinfosrc=None,
+        hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
+        ids=None,
+        idssrc=None,
+        insidetextfont=None,
+        labels=None,
+        labelssrc=None,
+        leaf=None,
+        level=None,
+        marker=None,
+        maxdepth=None,
+        name=None,
+        opacity=None,
+        outsidetextfont=None,
+        parents=None,
+        parentssrc=None,
+        stream=None,
+        text=None,
+        textfont=None,
+        textinfo=None,
+        textsrc=None,
+        uid=None,
+        uirevision=None,
+        values=None,
+        valuessrc=None,
+        visible=None,
+        **kwargs
+    ):
+        """
+        Construct a new Sunburst object
+        
+        Visualize hierarchal data spanning outward radially from root
+        to leaves. The sunburst sectors are determined by the entries
+        in "labels" or "ids" and in "parents".
+
+        Parameters
+        ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Sunburst
+        branchvalues
+            Determines how the items in `values` are summed. When
+            set to "total", items in `values` are taken to be value
+            of all its descendants. When set to "remainder", items
+            in `values` corresponding to the root and the branches
+            sectors are taken to be the extra part not part of the
+            sum of the values at their leaves.
+        customdata
+            Assigns extra data each datum. This may be useful when
+            listening to hover, click and selection events. Note
+            that, "scatter" traces also appends customdata items in
+            the markers DOM elements
+        customdatasrc
+            Sets the source reference on plot.ly for  customdata .
+        domain
+            plotly.graph_objs.sunburst.Domain instance or dict with
+            compatible properties
+        hoverinfo
+            Determines which trace information appear on hover. If
+            `none` or `skip` are set, no information is displayed
+            upon hovering. But, if `none` is set, click and hover
+            events are still fired.
+        hoverinfosrc
+            Sets the source reference on plot.ly for  hoverinfo .
+        hoverlabel
+            plotly.graph_objs.sunburst.Hoverlabel instance or dict
+            with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
+        hovertext
+            Sets hover text elements associated with each sector.
+            If a single string, the same string appears for all
+            data points. If an array of string, the items are
+            mapped in order of this trace's sectors. To be seen,
+            trace `hoverinfo` must contain a "text" flag.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
+        ids
+            Assigns id labels to each datum. These ids for object
+            constancy of data points during animation. Should be an
+            array of strings, not numbers or any other type.
+        idssrc
+            Sets the source reference on plot.ly for  ids .
+        insidetextfont
+            Sets the font used for `textinfo` lying inside the pie.
+        labels
+            Sets the labels of each of the sunburst sectors.
+        labelssrc
+            Sets the source reference on plot.ly for  labels .
+        leaf
+            plotly.graph_objs.sunburst.Leaf instance or dict with
+            compatible properties
+        level
+            Sets the level from which this sunburst trace hierarchy
+            is rendered. Set `level` to `''` to start the sunburst
+            from the root node in the hierarchy. Must be an "id" if
+            `ids` is filled in, otherwise plotly attempts to find a
+            matching item in `labels`.
+        marker
+            plotly.graph_objs.sunburst.Marker instance or dict with
+            compatible properties
+        maxdepth
+            Sets the number of rendered sunburst rings from any
+            given `level`. Set `maxdepth` to "-1" to render all the
+            levels in the hierarchy.
+        name
+            Sets the trace name. The trace name appear as the
+            legend item and on hover.
+        opacity
+            Sets the opacity of the trace.
+        outsidetextfont
+            Sets the font used for `textinfo` lying outside the
+            pie.
+        parents
+            Sets the parent sectors for each of the sunburst
+            sectors. Empty string items '' are understood to
+            reference the root node in the hierarchy. If `ids` is
+            filled, `parents` items are understood to be "ids"
+            themselves. When `ids` is not set, plotly attempts to
+            find matching items in `labels`, but beware they must
+            be unique.
+        parentssrc
+            Sets the source reference on plot.ly for  parents .
+        stream
+            plotly.graph_objs.sunburst.Stream instance or dict with
+            compatible properties
+        text
+            Sets text elements associated with each sector. If
+            trace `textinfo` contains a "text" flag, these elements
+            will be seen on the chart. If trace `hoverinfo`
+            contains a "text" flag and "hovertext" is not set,
+            these elements will be seen in the hover labels.
+        textfont
+            Sets the font used for `textinfo`.
+        textinfo
+            Determines which trace information appear on the graph.
+        textsrc
+            Sets the source reference on plot.ly for  text .
+        uid
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
+        values
+            Sets the values associated with each of the sunburst
+            sectors. Use with `branchvalues` to determine how the
+            values are summed.
+        valuessrc
+            Sets the source reference on plot.ly for  values .
+        visible
+            Determines whether or not this trace is visible. If
+            "legendonly", the trace is not drawn, but can appear as
+            a legend item (provided that the legend itself is
+            visible).
+
+        Returns
+        -------
+        Sunburst
+        """
+        super(Sunburst, self).__init__('sunburst')
+
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = _copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Sunburst 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Sunburst"""
+            )
+
+        # Handle skip_invalid
+        # -------------------
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+
+        # Import validators
+        # -----------------
+        from plotly.validators import (sunburst as v_sunburst)
+
+        # Initialize validators
+        # ---------------------
+        self._validators['branchvalues'] = v_sunburst.BranchvaluesValidator()
+        self._validators['customdata'] = v_sunburst.CustomdataValidator()
+        self._validators['customdatasrc'] = v_sunburst.CustomdatasrcValidator()
+        self._validators['domain'] = v_sunburst.DomainValidator()
+        self._validators['hoverinfo'] = v_sunburst.HoverinfoValidator()
+        self._validators['hoverinfosrc'] = v_sunburst.HoverinfosrcValidator()
+        self._validators['hoverlabel'] = v_sunburst.HoverlabelValidator()
+        self._validators['hovertemplate'] = v_sunburst.HovertemplateValidator()
+        self._validators['hovertemplatesrc'
+                        ] = v_sunburst.HovertemplatesrcValidator()
+        self._validators['hovertext'] = v_sunburst.HovertextValidator()
+        self._validators['hovertextsrc'] = v_sunburst.HovertextsrcValidator()
+        self._validators['ids'] = v_sunburst.IdsValidator()
+        self._validators['idssrc'] = v_sunburst.IdssrcValidator()
+        self._validators['insidetextfont'
+                        ] = v_sunburst.InsidetextfontValidator()
+        self._validators['labels'] = v_sunburst.LabelsValidator()
+        self._validators['labelssrc'] = v_sunburst.LabelssrcValidator()
+        self._validators['leaf'] = v_sunburst.LeafValidator()
+        self._validators['level'] = v_sunburst.LevelValidator()
+        self._validators['marker'] = v_sunburst.MarkerValidator()
+        self._validators['maxdepth'] = v_sunburst.MaxdepthValidator()
+        self._validators['name'] = v_sunburst.NameValidator()
+        self._validators['opacity'] = v_sunburst.OpacityValidator()
+        self._validators['outsidetextfont'
+                        ] = v_sunburst.OutsidetextfontValidator()
+        self._validators['parents'] = v_sunburst.ParentsValidator()
+        self._validators['parentssrc'] = v_sunburst.ParentssrcValidator()
+        self._validators['stream'] = v_sunburst.StreamValidator()
+        self._validators['text'] = v_sunburst.TextValidator()
+        self._validators['textfont'] = v_sunburst.TextfontValidator()
+        self._validators['textinfo'] = v_sunburst.TextinfoValidator()
+        self._validators['textsrc'] = v_sunburst.TextsrcValidator()
+        self._validators['uid'] = v_sunburst.UidValidator()
+        self._validators['uirevision'] = v_sunburst.UirevisionValidator()
+        self._validators['values'] = v_sunburst.ValuesValidator()
+        self._validators['valuessrc'] = v_sunburst.ValuessrcValidator()
+        self._validators['visible'] = v_sunburst.VisibleValidator()
+
+        # Populate data dict with properties
+        # ----------------------------------
+        _v = arg.pop('branchvalues', None)
+        self['branchvalues'] = branchvalues if branchvalues is not None else _v
+        _v = arg.pop('customdata', None)
+        self['customdata'] = customdata if customdata is not None else _v
+        _v = arg.pop('customdatasrc', None)
+        self['customdatasrc'
+            ] = customdatasrc if customdatasrc is not None else _v
+        _v = arg.pop('domain', None)
+        self['domain'] = domain if domain is not None else _v
+        _v = arg.pop('hoverinfo', None)
+        self['hoverinfo'] = hoverinfo if hoverinfo is not None else _v
+        _v = arg.pop('hoverinfosrc', None)
+        self['hoverinfosrc'] = hoverinfosrc if hoverinfosrc is not None else _v
+        _v = arg.pop('hoverlabel', None)
+        self['hoverlabel'] = hoverlabel if hoverlabel is not None else _v
+        _v = arg.pop('hovertemplate', None)
+        self['hovertemplate'
+            ] = hovertemplate if hovertemplate is not None else _v
+        _v = arg.pop('hovertemplatesrc', None)
+        self['hovertemplatesrc'
+            ] = hovertemplatesrc if hovertemplatesrc is not None else _v
+        _v = arg.pop('hovertext', None)
+        self['hovertext'] = hovertext if hovertext is not None else _v
+        _v = arg.pop('hovertextsrc', None)
+        self['hovertextsrc'] = hovertextsrc if hovertextsrc is not None else _v
+        _v = arg.pop('ids', None)
+        self['ids'] = ids if ids is not None else _v
+        _v = arg.pop('idssrc', None)
+        self['idssrc'] = idssrc if idssrc is not None else _v
+        _v = arg.pop('insidetextfont', None)
+        self['insidetextfont'
+            ] = insidetextfont if insidetextfont is not None else _v
+        _v = arg.pop('labels', None)
+        self['labels'] = labels if labels is not None else _v
+        _v = arg.pop('labelssrc', None)
+        self['labelssrc'] = labelssrc if labelssrc is not None else _v
+        _v = arg.pop('leaf', None)
+        self['leaf'] = leaf if leaf is not None else _v
+        _v = arg.pop('level', None)
+        self['level'] = level if level is not None else _v
+        _v = arg.pop('marker', None)
+        self['marker'] = marker if marker is not None else _v
+        _v = arg.pop('maxdepth', None)
+        self['maxdepth'] = maxdepth if maxdepth is not None else _v
+        _v = arg.pop('name', None)
+        self['name'] = name if name is not None else _v
+        _v = arg.pop('opacity', None)
+        self['opacity'] = opacity if opacity is not None else _v
+        _v = arg.pop('outsidetextfont', None)
+        self['outsidetextfont'
+            ] = outsidetextfont if outsidetextfont is not None else _v
+        _v = arg.pop('parents', None)
+        self['parents'] = parents if parents is not None else _v
+        _v = arg.pop('parentssrc', None)
+        self['parentssrc'] = parentssrc if parentssrc is not None else _v
+        _v = arg.pop('stream', None)
+        self['stream'] = stream if stream is not None else _v
+        _v = arg.pop('text', None)
+        self['text'] = text if text is not None else _v
+        _v = arg.pop('textfont', None)
+        self['textfont'] = textfont if textfont is not None else _v
+        _v = arg.pop('textinfo', None)
+        self['textinfo'] = textinfo if textinfo is not None else _v
+        _v = arg.pop('textsrc', None)
+        self['textsrc'] = textsrc if textsrc is not None else _v
+        _v = arg.pop('uid', None)
+        self['uid'] = uid if uid is not None else _v
+        _v = arg.pop('uirevision', None)
+        self['uirevision'] = uirevision if uirevision is not None else _v
+        _v = arg.pop('values', None)
+        self['values'] = values if values is not None else _v
+        _v = arg.pop('valuessrc', None)
+        self['valuessrc'] = valuessrc if valuessrc is not None else _v
+        _v = arg.pop('visible', None)
+        self['visible'] = visible if visible is not None else _v
+
+        # Read-only literals
+        # ------------------
+        from _plotly_utils.basevalidators import LiteralValidator
+        self._props['type'] = 'sunburst'
+        self._validators['type'] = LiteralValidator(
+            plotly_name='type', parent_name='sunburst', val='sunburst'
         )
         arg.pop('type', None)
 
@@ -10450,6 +16391,14 @@ class Streamtube(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -10465,14 +16414,15 @@ class Streamtube(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -10506,7 +16456,8 @@ class Streamtube(_BaseTraceType):
         variables `tubex`, `tubey`, `tubez`, `tubeu`, `tubev`, `tubew`,
         `norm` and `divergence`. Anything contained in tag `<extra>` is
         displayed in the secondary box, for example
-        "<extra>{fullData.name}</extra>".
+        "<extra>{fullData.name}</extra>". To hide the secondary box
+        completely, use an empty tag `<extra></extra>`.
     
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -10605,29 +16556,6 @@ class Streamtube(_BaseTraceType):
     @idssrc.setter
     def idssrc(self, val):
         self['idssrc'] = val
-
-    # legendgroup
-    # -----------
-    @property
-    def legendgroup(self):
-        """
-        Sets the legend group for this trace. Traces part of the same
-        legend group hide/show at the same time when toggling legend
-        items.
-    
-        The 'legendgroup' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
-
-        Returns
-        -------
-        str
-        """
-        return self['legendgroup']
-
-    @legendgroup.setter
-    def legendgroup(self, val):
-        self['legendgroup'] = val
 
     # lighting
     # --------
@@ -10824,51 +16752,6 @@ class Streamtube(_BaseTraceType):
     @scene.setter
     def scene(self, val):
         self['scene'] = val
-
-    # selectedpoints
-    # --------------
-    @property
-    def selectedpoints(self):
-        """
-        Array containing integer indices of selected points. Has an
-        effect only for traces that support selections. Note that an
-        empty array means an empty selection where the `unselected` are
-        turned on for all points, whereas, any other non-array values
-        means no selection all where the `selected` and `unselected`
-        styles have no effect.
-    
-        The 'selectedpoints' property accepts values of any type
-
-        Returns
-        -------
-        Any
-        """
-        return self['selectedpoints']
-
-    @selectedpoints.setter
-    def selectedpoints(self, val):
-        self['selectedpoints'] = val
-
-    # showlegend
-    # ----------
-    @property
-    def showlegend(self):
-        """
-        Determines whether or not an item corresponding to this trace
-        is shown in the legend.
-    
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
-
-        Returns
-        -------
-        bool
-        """
-        return self['showlegend']
-
-    @showlegend.setter
-    def showlegend(self, val):
-        self['showlegend'] = val
 
     # showscale
     # ---------
@@ -11419,7 +17302,8 @@ class Streamtube(_BaseTraceType):
             `tubeu`, `tubev`, `tubew`, `norm` and `divergence`.
             Anything contained in tag `<extra>` is displayed in the
             secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -11431,10 +17315,6 @@ class Streamtube(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
-        legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
         lighting
             plotly.graph_objs.streamtube.Lighting instance or dict
             with compatible properties
@@ -11465,16 +17345,6 @@ class Streamtube(_BaseTraceType):
             the (x,y,z) coordinates refer to `layout.scene`. If
             "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
-        showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -11566,7 +17436,6 @@ class Streamtube(_BaseTraceType):
         hovertext=None,
         ids=None,
         idssrc=None,
-        legendgroup=None,
         lighting=None,
         lightposition=None,
         maxdisplayed=None,
@@ -11574,8 +17443,6 @@ class Streamtube(_BaseTraceType):
         opacity=None,
         reversescale=None,
         scene=None,
-        selectedpoints=None,
-        showlegend=None,
         showscale=None,
         sizeref=None,
         starts=None,
@@ -11689,7 +17556,8 @@ class Streamtube(_BaseTraceType):
             `tubeu`, `tubev`, `tubew`, `norm` and `divergence`.
             Anything contained in tag `<extra>` is displayed in the
             secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -11701,10 +17569,6 @@ class Streamtube(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
-        legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
         lighting
             plotly.graph_objs.streamtube.Lighting instance or dict
             with compatible properties
@@ -11735,16 +17599,6 @@ class Streamtube(_BaseTraceType):
             the (x,y,z) coordinates refer to `layout.scene`. If
             "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
-        showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -11868,7 +17722,6 @@ an instance of plotly.graph_objs.Streamtube"""
         self._validators['hovertext'] = v_streamtube.HovertextValidator()
         self._validators['ids'] = v_streamtube.IdsValidator()
         self._validators['idssrc'] = v_streamtube.IdssrcValidator()
-        self._validators['legendgroup'] = v_streamtube.LegendgroupValidator()
         self._validators['lighting'] = v_streamtube.LightingValidator()
         self._validators['lightposition'
                         ] = v_streamtube.LightpositionValidator()
@@ -11877,9 +17730,6 @@ an instance of plotly.graph_objs.Streamtube"""
         self._validators['opacity'] = v_streamtube.OpacityValidator()
         self._validators['reversescale'] = v_streamtube.ReversescaleValidator()
         self._validators['scene'] = v_streamtube.SceneValidator()
-        self._validators['selectedpoints'
-                        ] = v_streamtube.SelectedpointsValidator()
-        self._validators['showlegend'] = v_streamtube.ShowlegendValidator()
         self._validators['showscale'] = v_streamtube.ShowscaleValidator()
         self._validators['sizeref'] = v_streamtube.SizerefValidator()
         self._validators['starts'] = v_streamtube.StartsValidator()
@@ -11941,8 +17791,6 @@ an instance of plotly.graph_objs.Streamtube"""
         self['ids'] = ids if ids is not None else _v
         _v = arg.pop('idssrc', None)
         self['idssrc'] = idssrc if idssrc is not None else _v
-        _v = arg.pop('legendgroup', None)
-        self['legendgroup'] = legendgroup if legendgroup is not None else _v
         _v = arg.pop('lighting', None)
         self['lighting'] = lighting if lighting is not None else _v
         _v = arg.pop('lightposition', None)
@@ -11958,11 +17806,6 @@ an instance of plotly.graph_objs.Streamtube"""
         self['reversescale'] = reversescale if reversescale is not None else _v
         _v = arg.pop('scene', None)
         self['scene'] = scene if scene is not None else _v
-        _v = arg.pop('selectedpoints', None)
-        self['selectedpoints'
-            ] = selectedpoints if selectedpoints is not None else _v
-        _v = arg.pop('showlegend', None)
-        self['showlegend'] = showlegend if showlegend is not None else _v
         _v = arg.pop('showscale', None)
         self['showscale'] = showscale if showscale is not None else _v
         _v = arg.pop('sizeref', None)
@@ -12245,6 +18088,14 @@ class Splom(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -12260,14 +18111,15 @@ class Splom(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -12299,7 +18151,9 @@ class Splom(_BaseTraceType):
         data. Additionally, every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
         Anything contained in tag `<extra>` is displayed in the
-        secondary box, for example "<extra>{fullData.name}</extra>".
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
     
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -13038,7 +18892,8 @@ class Splom(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -13239,7 +19094,8 @@ class Splom(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -13871,6 +19727,14 @@ class Scatterternary(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -13886,14 +19750,15 @@ class Scatterternary(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -13950,7 +19815,9 @@ class Scatterternary(_BaseTraceType):
         data. Additionally, every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
         Anything contained in tag `<extra>` is displayed in the
-        secondary box, for example "<extra>{fullData.name}</extra>".
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
     
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -14871,7 +20738,8 @@ class Scatterternary(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -15137,7 +21005,8 @@ class Scatterternary(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -15727,6 +21596,14 @@ class Scatterpolargl(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -15742,14 +21619,15 @@ class Scatterpolargl(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -15781,7 +21659,9 @@ class Scatterpolargl(_BaseTraceType):
         data. Additionally, every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
         Anything contained in tag `<extra>` is displayed in the
-        secondary box, for example "<extra>{fullData.name}</extra>".
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
     
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -16788,7 +22668,8 @@ class Scatterpolargl(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -17051,7 +22932,8 @@ class Scatterpolargl(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -17665,6 +23547,14 @@ class Scatterpolar(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -17680,14 +23570,15 @@ class Scatterpolar(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -17744,7 +23635,9 @@ class Scatterpolar(_BaseTraceType):
         data. Additionally, every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
         Anything contained in tag `<extra>` is displayed in the
-        secondary box, for example "<extra>{fullData.name}</extra>".
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
     
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -18766,7 +24659,8 @@ class Scatterpolar(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -19032,7 +24926,8 @@ class Scatterpolar(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -19577,6 +25472,14 @@ class Scattermapbox(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -19592,14 +25495,15 @@ class Scattermapbox(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -19631,7 +25535,9 @@ class Scattermapbox(_BaseTraceType):
         data. Additionally, every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
         Anything contained in tag `<extra>` is displayed in the
-        secondary box, for example "<extra>{fullData.name}</extra>".
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
     
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -20502,7 +26408,8 @@ class Scattermapbox(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -20718,7 +26625,8 @@ class Scattermapbox(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -21444,6 +27352,14 @@ class Scattergl(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -21459,14 +27375,15 @@ class Scattergl(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -21498,7 +27415,9 @@ class Scattergl(_BaseTraceType):
         data. Additionally, every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
         Anything contained in tag `<extra>` is displayed in the
-        secondary box, for example "<extra>{fullData.name}</extra>".
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
     
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -22554,7 +28473,8 @@ class Scattergl(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -22824,7 +28744,8 @@ class Scattergl(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -23398,6 +29319,14 @@ class Scattergeo(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -23413,14 +29342,15 @@ class Scattergeo(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -23452,7 +29382,9 @@ class Scattergeo(_BaseTraceType):
         data. Additionally, every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
         Anything contained in tag `<extra>` is displayed in the
-        secondary box, for example "<extra>{fullData.name}</extra>".
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
     
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -24420,7 +30352,8 @@ class Scattergeo(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -24655,7 +30588,8 @@ class Scattergeo(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -25288,6 +31222,14 @@ class Scattercarpet(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -25303,14 +31245,15 @@ class Scattercarpet(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -25367,7 +31310,9 @@ class Scattercarpet(_BaseTraceType):
         data. Additionally, every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
         Anything contained in tag `<extra>` is displayed in the
-        secondary box, for example "<extra>{fullData.name}</extra>".
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
     
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -26271,7 +32216,8 @@ class Scattercarpet(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -26513,7 +32459,8 @@ class Scattercarpet(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -27192,6 +33139,14 @@ class Scatter3d(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -27207,14 +33162,15 @@ class Scatter3d(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -27246,7 +33202,9 @@ class Scatter3d(_BaseTraceType):
         data. Additionally, every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
         Anything contained in tag `<extra>` is displayed in the
-        secondary box, for example "<extra>{fullData.name}</extra>".
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
     
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -27756,30 +33714,6 @@ class Scatter3d(_BaseTraceType):
     @scene.setter
     def scene(self, val):
         self['scene'] = val
-
-    # selectedpoints
-    # --------------
-    @property
-    def selectedpoints(self):
-        """
-        Array containing integer indices of selected points. Has an
-        effect only for traces that support selections. Note that an
-        empty array means an empty selection where the `unselected` are
-        turned on for all points, whereas, any other non-array values
-        means no selection all where the `selected` and `unselected`
-        styles have no effect.
-    
-        The 'selectedpoints' property accepts values of any type
-
-        Returns
-        -------
-        Any
-        """
-        return self['selectedpoints']
-
-    @selectedpoints.setter
-    def selectedpoints(self, val):
-        self['selectedpoints'] = val
 
     # showlegend
     # ----------
@@ -28391,7 +34325,8 @@ class Scatter3d(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -28441,13 +34376,6 @@ class Scatter3d(_BaseTraceType):
             the (x,y,z) coordinates refer to `layout.scene`. If
             "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
@@ -28552,7 +34480,6 @@ class Scatter3d(_BaseTraceType):
         opacity=None,
         projection=None,
         scene=None,
-        selectedpoints=None,
         showlegend=None,
         stream=None,
         surfaceaxis=None,
@@ -28636,7 +34563,8 @@ class Scatter3d(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -28686,13 +34614,6 @@ class Scatter3d(_BaseTraceType):
             the (x,y,z) coordinates refer to `layout.scene`. If
             "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
@@ -28828,8 +34749,6 @@ an instance of plotly.graph_objs.Scatter3d"""
         self._validators['opacity'] = v_scatter3d.OpacityValidator()
         self._validators['projection'] = v_scatter3d.ProjectionValidator()
         self._validators['scene'] = v_scatter3d.SceneValidator()
-        self._validators['selectedpoints'
-                        ] = v_scatter3d.SelectedpointsValidator()
         self._validators['showlegend'] = v_scatter3d.ShowlegendValidator()
         self._validators['stream'] = v_scatter3d.StreamValidator()
         self._validators['surfaceaxis'] = v_scatter3d.SurfaceaxisValidator()
@@ -28904,9 +34823,6 @@ an instance of plotly.graph_objs.Scatter3d"""
         self['projection'] = projection if projection is not None else _v
         _v = arg.pop('scene', None)
         self['scene'] = scene if scene is not None else _v
-        _v = arg.pop('selectedpoints', None)
-        self['selectedpoints'
-            ] = selectedpoints if selectedpoints is not None else _v
         _v = arg.pop('showlegend', None)
         self['showlegend'] = showlegend if showlegend is not None else _v
         _v = arg.pop('stream', None)
@@ -29451,6 +35367,14 @@ class Scatter(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -29466,14 +35390,15 @@ class Scatter(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -29530,7 +35455,9 @@ class Scatter(_BaseTraceType):
         data. Additionally, every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
         Anything contained in tag `<extra>` is displayed in the
-        secondary box, for example "<extra>{fullData.name}</extra>".
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
     
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -30806,7 +36733,8 @@ class Scatter(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -31159,7 +37087,8 @@ class Scatter(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -31723,6 +37652,14 @@ class Sankey(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -31738,14 +37675,15 @@ class Sankey(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -31801,29 +37739,6 @@ class Sankey(_BaseTraceType):
     @idssrc.setter
     def idssrc(self, val):
         self['idssrc'] = val
-
-    # legendgroup
-    # -----------
-    @property
-    def legendgroup(self):
-        """
-        Sets the legend group for this trace. Traces part of the same
-        legend group hide/show at the same time when toggling legend
-        items.
-    
-        The 'legendgroup' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
-
-        Returns
-        -------
-        str
-        """
-        return self['legendgroup']
-
-    @legendgroup.setter
-    def legendgroup(self, val):
-        self['legendgroup'] = val
 
     # link
     # ----
@@ -31885,7 +37800,9 @@ class Sankey(_BaseTraceType):
                     variables `value` and `label`. Anything
                     contained in tag `<extra>` is displayed in the
                     secondary box, for example
-                    "<extra>{fullData.name}</extra>".
+                    "<extra>{fullData.name}</extra>". To hide the
+                    secondary box completely, use an empty tag
+                    `<extra></extra>`.
                 hovertemplatesrc
                     Sets the source reference on plot.ly for
                     hovertemplate .
@@ -32006,7 +37923,9 @@ class Sankey(_BaseTraceType):
                     variables `value` and `label`. Anything
                     contained in tag `<extra>` is displayed in the
                     secondary box, for example
-                    "<extra>{fullData.name}</extra>".
+                    "<extra>{fullData.name}</extra>". To hide the
+                    secondary box completely, use an empty tag
+                    `<extra></extra>`.
                 hovertemplatesrc
                     Sets the source reference on plot.ly for
                     hovertemplate .
@@ -32022,6 +37941,14 @@ class Sankey(_BaseTraceType):
                     Sets the padding (in px) between the `nodes`.
                 thickness
                     Sets the thickness (in px) of the `nodes`.
+                x
+                    The normalized horizontal position of the node.
+                xsrc
+                    Sets the source reference on plot.ly for  x .
+                y
+                    The normalized vertical position of the node.
+                ysrc
+                    Sets the source reference on plot.ly for  y .
 
         Returns
         -------
@@ -32032,26 +37959,6 @@ class Sankey(_BaseTraceType):
     @node.setter
     def node(self, val):
         self['node'] = val
-
-    # opacity
-    # -------
-    @property
-    def opacity(self):
-        """
-        Sets the opacity of the trace.
-    
-        The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
-
-        Returns
-        -------
-        int|float
-        """
-        return self['opacity']
-
-    @opacity.setter
-    def opacity(self, val):
-        self['opacity'] = val
 
     # orientation
     # -----------
@@ -32097,27 +38004,6 @@ class Sankey(_BaseTraceType):
     @selectedpoints.setter
     def selectedpoints(self, val):
         self['selectedpoints'] = val
-
-    # showlegend
-    # ----------
-    @property
-    def showlegend(self):
-        """
-        Determines whether or not an item corresponding to this trace
-        is shown in the legend.
-    
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
-
-        Returns
-        -------
-        bool
-        """
-        return self['showlegend']
-
-    @showlegend.setter
-    def showlegend(self, val):
-        self['showlegend'] = val
 
     # stream
     # ------
@@ -32371,10 +38257,6 @@ class Sankey(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
-        legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
         link
             The links of the Sankey plot.
         name
@@ -32382,8 +38264,6 @@ class Sankey(_BaseTraceType):
             legend item and on hover.
         node
             The nodes of the Sankey plot.
-        opacity
-            Sets the opacity of the trace.
         orientation
             Sets the orientation of the Sankey diagram.
         selectedpoints
@@ -32393,9 +38273,6 @@ class Sankey(_BaseTraceType):
             the `unselected` are turned on for all points, whereas,
             any other non-array values means no selection all where
             the `selected` and `unselected` styles have no effect.
-        showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
         stream
             plotly.graph_objs.sankey.Stream instance or dict with
             compatible properties
@@ -32450,14 +38327,11 @@ class Sankey(_BaseTraceType):
         hoverlabel=None,
         ids=None,
         idssrc=None,
-        legendgroup=None,
         link=None,
         name=None,
         node=None,
-        opacity=None,
         orientation=None,
         selectedpoints=None,
-        showlegend=None,
         stream=None,
         textfont=None,
         uid=None,
@@ -32514,10 +38388,6 @@ class Sankey(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
-        legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
         link
             The links of the Sankey plot.
         name
@@ -32525,8 +38395,6 @@ class Sankey(_BaseTraceType):
             legend item and on hover.
         node
             The nodes of the Sankey plot.
-        opacity
-            Sets the opacity of the trace.
         orientation
             Sets the orientation of the Sankey diagram.
         selectedpoints
@@ -32536,9 +38404,6 @@ class Sankey(_BaseTraceType):
             the `unselected` are turned on for all points, whereas,
             any other non-array values means no selection all where
             the `selected` and `unselected` styles have no effect.
-        showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
         stream
             plotly.graph_objs.sankey.Stream instance or dict with
             compatible properties
@@ -32621,14 +38486,11 @@ an instance of plotly.graph_objs.Sankey"""
         self._validators['hoverlabel'] = v_sankey.HoverlabelValidator()
         self._validators['ids'] = v_sankey.IdsValidator()
         self._validators['idssrc'] = v_sankey.IdssrcValidator()
-        self._validators['legendgroup'] = v_sankey.LegendgroupValidator()
         self._validators['link'] = v_sankey.LinkValidator()
         self._validators['name'] = v_sankey.NameValidator()
         self._validators['node'] = v_sankey.NodeValidator()
-        self._validators['opacity'] = v_sankey.OpacityValidator()
         self._validators['orientation'] = v_sankey.OrientationValidator()
         self._validators['selectedpoints'] = v_sankey.SelectedpointsValidator()
-        self._validators['showlegend'] = v_sankey.ShowlegendValidator()
         self._validators['stream'] = v_sankey.StreamValidator()
         self._validators['textfont'] = v_sankey.TextfontValidator()
         self._validators['uid'] = v_sankey.UidValidator()
@@ -32656,23 +38518,17 @@ an instance of plotly.graph_objs.Sankey"""
         self['ids'] = ids if ids is not None else _v
         _v = arg.pop('idssrc', None)
         self['idssrc'] = idssrc if idssrc is not None else _v
-        _v = arg.pop('legendgroup', None)
-        self['legendgroup'] = legendgroup if legendgroup is not None else _v
         _v = arg.pop('link', None)
         self['link'] = link if link is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('node', None)
         self['node'] = node if node is not None else _v
-        _v = arg.pop('opacity', None)
-        self['opacity'] = opacity if opacity is not None else _v
         _v = arg.pop('orientation', None)
         self['orientation'] = orientation if orientation is not None else _v
         _v = arg.pop('selectedpoints', None)
         self['selectedpoints'
             ] = selectedpoints if selectedpoints is not None else _v
-        _v = arg.pop('showlegend', None)
-        self['showlegend'] = showlegend if showlegend is not None else _v
         _v = arg.pop('stream', None)
         self['stream'] = stream if stream is not None else _v
         _v = arg.pop('textfont', None)
@@ -32814,6 +38670,14 @@ class Pointcloud(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -32829,14 +38693,15 @@ class Pointcloud(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -33057,30 +38922,6 @@ class Pointcloud(_BaseTraceType):
     @opacity.setter
     def opacity(self, val):
         self['opacity'] = val
-
-    # selectedpoints
-    # --------------
-    @property
-    def selectedpoints(self):
-        """
-        Array containing integer indices of selected points. Has an
-        effect only for traces that support selections. Note that an
-        empty array means an empty selection where the `unselected` are
-        turned on for all points, whereas, any other non-array values
-        means no selection all where the `selected` and `unselected`
-        styles have no effect.
-    
-        The 'selectedpoints' property accepts values of any type
-
-        Returns
-        -------
-        Any
-        """
-        return self['selectedpoints']
-
-    @selectedpoints.setter
-    def selectedpoints(self, val):
-        self['selectedpoints'] = val
 
     # showlegend
     # ----------
@@ -33581,13 +39422,6 @@ class Pointcloud(_BaseTraceType):
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
@@ -33688,7 +39522,6 @@ class Pointcloud(_BaseTraceType):
         marker=None,
         name=None,
         opacity=None,
-        selectedpoints=None,
         showlegend=None,
         stream=None,
         text=None,
@@ -33767,13 +39600,6 @@ class Pointcloud(_BaseTraceType):
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
@@ -33903,8 +39729,6 @@ an instance of plotly.graph_objs.Pointcloud"""
         self._validators['marker'] = v_pointcloud.MarkerValidator()
         self._validators['name'] = v_pointcloud.NameValidator()
         self._validators['opacity'] = v_pointcloud.OpacityValidator()
-        self._validators['selectedpoints'
-                        ] = v_pointcloud.SelectedpointsValidator()
         self._validators['showlegend'] = v_pointcloud.ShowlegendValidator()
         self._validators['stream'] = v_pointcloud.StreamValidator()
         self._validators['text'] = v_pointcloud.TextValidator()
@@ -33954,9 +39778,6 @@ an instance of plotly.graph_objs.Pointcloud"""
         self['name'] = name if name is not None else _v
         _v = arg.pop('opacity', None)
         self['opacity'] = opacity if opacity is not None else _v
-        _v = arg.pop('selectedpoints', None)
-        self['selectedpoints'
-            ] = selectedpoints if selectedpoints is not None else _v
         _v = arg.pop('showlegend', None)
         self['showlegend'] = showlegend if showlegend is not None else _v
         _v = arg.pop('stream', None)
@@ -34221,6 +40042,14 @@ class Pie(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -34236,14 +40065,15 @@ class Pie(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -34276,7 +40106,9 @@ class Pie(_BaseTraceType):
         point (the ones that are `arrayOk: true`) are available.
         variables `label`, `color`, `value`, `percent` and `text`.
         Anything contained in tag `<extra>` is displayed in the
-        secondary box, for example "<extra>{fullData.name}</extra>".
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
     
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -34763,30 +40595,6 @@ class Pie(_BaseTraceType):
     @scalegroup.setter
     def scalegroup(self, val):
         self['scalegroup'] = val
-
-    # selectedpoints
-    # --------------
-    @property
-    def selectedpoints(self):
-        """
-        Array containing integer indices of selected points. Has an
-        effect only for traces that support selections. Note that an
-        empty array means an empty selection where the `unselected` are
-        turned on for all points, whereas, any other non-array values
-        means no selection all where the `selected` and `unselected`
-        styles have no effect.
-    
-        The 'selectedpoints' property accepts values of any type
-
-        Returns
-        -------
-        Any
-        """
-        return self['selectedpoints']
-
-    @selectedpoints.setter
-    def selectedpoints(self, val):
-        self['selectedpoints'] = val
 
     # showlegend
     # ----------
@@ -35328,7 +41136,9 @@ class Pie(_BaseTraceType):
             available. variables `label`, `color`, `value`,
             `percent` and `text`. Anything contained in tag
             `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>".
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -35390,13 +41200,6 @@ class Pie(_BaseTraceType):
             according to their totals, link them by providing a
             non-empty group id here shared by every trace in the
             same group.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
@@ -35505,7 +41308,6 @@ class Pie(_BaseTraceType):
         pullsrc=None,
         rotation=None,
         scalegroup=None,
-        selectedpoints=None,
         showlegend=None,
         sort=None,
         stream=None,
@@ -35582,7 +41384,9 @@ class Pie(_BaseTraceType):
             available. variables `label`, `color`, `value`,
             `percent` and `text`. Anything contained in tag
             `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>".
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -35644,13 +41448,6 @@ class Pie(_BaseTraceType):
             according to their totals, link them by providing a
             non-empty group id here shared by every trace in the
             same group.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
@@ -35783,7 +41580,6 @@ an instance of plotly.graph_objs.Pie"""
         self._validators['pullsrc'] = v_pie.PullsrcValidator()
         self._validators['rotation'] = v_pie.RotationValidator()
         self._validators['scalegroup'] = v_pie.ScalegroupValidator()
-        self._validators['selectedpoints'] = v_pie.SelectedpointsValidator()
         self._validators['showlegend'] = v_pie.ShowlegendValidator()
         self._validators['sort'] = v_pie.SortValidator()
         self._validators['stream'] = v_pie.StreamValidator()
@@ -35863,9 +41659,6 @@ an instance of plotly.graph_objs.Pie"""
         self['rotation'] = rotation if rotation is not None else _v
         _v = arg.pop('scalegroup', None)
         self['scalegroup'] = scalegroup if scalegroup is not None else _v
-        _v = arg.pop('selectedpoints', None)
-        self['selectedpoints'
-            ] = selectedpoints if selectedpoints is not None else _v
         _v = arg.pop('showlegend', None)
         self['showlegend'] = showlegend if showlegend is not None else _v
         _v = arg.pop('sort', None)
@@ -36136,52 +41929,6 @@ class Parcoords(_BaseTraceType):
     def domain(self, val):
         self['domain'] = val
 
-    # hoverinfo
-    # ---------
-    @property
-    def hoverinfo(self):
-        """
-        Determines which trace information appear on hover. If `none`
-        or `skip` are set, no information is displayed upon hovering.
-        But, if `none` is set, click and hover events are still fired.
-    
-        The 'hoverinfo' property is a flaglist and may be specified
-        as a string containing:
-          - Any combination of ['x', 'y', 'z', 'text', 'name'] joined with '+' characters
-            (e.g. 'x+y')
-            OR exactly one of ['all', 'none', 'skip'] (e.g. 'skip')
-          - A list or array of the above
-
-        Returns
-        -------
-        Any|numpy.ndarray
-        """
-        return self['hoverinfo']
-
-    @hoverinfo.setter
-    def hoverinfo(self, val):
-        self['hoverinfo'] = val
-
-    # hoverinfosrc
-    # ------------
-    @property
-    def hoverinfosrc(self):
-        """
-        Sets the source reference on plot.ly for  hoverinfo .
-    
-        The 'hoverinfosrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self['hoverinfosrc']
-
-    @hoverinfosrc.setter
-    def hoverinfosrc(self, val):
-        self['hoverinfosrc'] = val
-
     # ids
     # ---
     @property
@@ -36268,29 +42015,6 @@ class Parcoords(_BaseTraceType):
     @labelfont.setter
     def labelfont(self, val):
         self['labelfont'] = val
-
-    # legendgroup
-    # -----------
-    @property
-    def legendgroup(self):
-        """
-        Sets the legend group for this trace. Traces part of the same
-        legend group hide/show at the same time when toggling legend
-        items.
-    
-        The 'legendgroup' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
-
-        Returns
-        -------
-        str
-        """
-        return self['legendgroup']
-
-    @legendgroup.setter
-    def legendgroup(self, val):
-        self['legendgroup'] = val
 
     # line
     # ----
@@ -36414,26 +42138,6 @@ class Parcoords(_BaseTraceType):
     def name(self, val):
         self['name'] = val
 
-    # opacity
-    # -------
-    @property
-    def opacity(self):
-        """
-        Sets the opacity of the trace.
-    
-        The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
-
-        Returns
-        -------
-        int|float
-        """
-        return self['opacity']
-
-    @opacity.setter
-    def opacity(self, val):
-        self['opacity'] = val
-
     # rangefont
     # ---------
     @property
@@ -36478,51 +42182,6 @@ class Parcoords(_BaseTraceType):
     @rangefont.setter
     def rangefont(self, val):
         self['rangefont'] = val
-
-    # selectedpoints
-    # --------------
-    @property
-    def selectedpoints(self):
-        """
-        Array containing integer indices of selected points. Has an
-        effect only for traces that support selections. Note that an
-        empty array means an empty selection where the `unselected` are
-        turned on for all points, whereas, any other non-array values
-        means no selection all where the `selected` and `unselected`
-        styles have no effect.
-    
-        The 'selectedpoints' property accepts values of any type
-
-        Returns
-        -------
-        Any
-        """
-        return self['selectedpoints']
-
-    @selectedpoints.setter
-    def selectedpoints(self, val):
-        self['selectedpoints'] = val
-
-    # showlegend
-    # ----------
-    @property
-    def showlegend(self):
-        """
-        Determines whether or not an item corresponding to this trace
-        is shown in the legend.
-    
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
-
-        Returns
-        -------
-        bool
-        """
-        return self['showlegend']
-
-    @showlegend.setter
-    def showlegend(self, val):
-        self['showlegend'] = val
 
     # stream
     # ------
@@ -36715,13 +42374,6 @@ class Parcoords(_BaseTraceType):
         domain
             plotly.graph_objs.parcoords.Domain instance or dict
             with compatible properties
-        hoverinfo
-            Determines which trace information appear on hover. If
-            `none` or `skip` are set, no information is displayed
-            upon hovering. But, if `none` is set, click and hover
-            events are still fired.
-        hoverinfosrc
-            Sets the source reference on plot.ly for  hoverinfo .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -36730,30 +42382,14 @@ class Parcoords(_BaseTraceType):
             Sets the source reference on plot.ly for  ids .
         labelfont
             Sets the font for the `dimension` labels.
-        legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
         line
             plotly.graph_objs.parcoords.Line instance or dict with
             compatible properties
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
-        opacity
-            Sets the opacity of the trace.
         rangefont
             Sets the font for the `dimension` range values.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
-        showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
         stream
             plotly.graph_objs.parcoords.Stream instance or dict
             with compatible properties
@@ -36796,18 +42432,12 @@ class Parcoords(_BaseTraceType):
         dimensions=None,
         dimensiondefaults=None,
         domain=None,
-        hoverinfo=None,
-        hoverinfosrc=None,
         ids=None,
         idssrc=None,
         labelfont=None,
-        legendgroup=None,
         line=None,
         name=None,
-        opacity=None,
         rangefont=None,
-        selectedpoints=None,
-        showlegend=None,
         stream=None,
         tickfont=None,
         uid=None,
@@ -36845,13 +42475,6 @@ class Parcoords(_BaseTraceType):
         domain
             plotly.graph_objs.parcoords.Domain instance or dict
             with compatible properties
-        hoverinfo
-            Determines which trace information appear on hover. If
-            `none` or `skip` are set, no information is displayed
-            upon hovering. But, if `none` is set, click and hover
-            events are still fired.
-        hoverinfosrc
-            Sets the source reference on plot.ly for  hoverinfo .
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -36860,30 +42483,14 @@ class Parcoords(_BaseTraceType):
             Sets the source reference on plot.ly for  ids .
         labelfont
             Sets the font for the `dimension` labels.
-        legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
         line
             plotly.graph_objs.parcoords.Line instance or dict with
             compatible properties
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
-        opacity
-            Sets the opacity of the trace.
         rangefont
             Sets the font for the `dimension` range values.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
-        showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
         stream
             plotly.graph_objs.parcoords.Stream instance or dict
             with compatible properties
@@ -36956,19 +42563,12 @@ an instance of plotly.graph_objs.Parcoords"""
         self._validators['dimensiondefaults'] = v_parcoords.DimensionValidator(
         )
         self._validators['domain'] = v_parcoords.DomainValidator()
-        self._validators['hoverinfo'] = v_parcoords.HoverinfoValidator()
-        self._validators['hoverinfosrc'] = v_parcoords.HoverinfosrcValidator()
         self._validators['ids'] = v_parcoords.IdsValidator()
         self._validators['idssrc'] = v_parcoords.IdssrcValidator()
         self._validators['labelfont'] = v_parcoords.LabelfontValidator()
-        self._validators['legendgroup'] = v_parcoords.LegendgroupValidator()
         self._validators['line'] = v_parcoords.LineValidator()
         self._validators['name'] = v_parcoords.NameValidator()
-        self._validators['opacity'] = v_parcoords.OpacityValidator()
         self._validators['rangefont'] = v_parcoords.RangefontValidator()
-        self._validators['selectedpoints'
-                        ] = v_parcoords.SelectedpointsValidator()
-        self._validators['showlegend'] = v_parcoords.ShowlegendValidator()
         self._validators['stream'] = v_parcoords.StreamValidator()
         self._validators['tickfont'] = v_parcoords.TickfontValidator()
         self._validators['uid'] = v_parcoords.UidValidator()
@@ -36989,31 +42589,18 @@ an instance of plotly.graph_objs.Parcoords"""
             ] = dimensiondefaults if dimensiondefaults is not None else _v
         _v = arg.pop('domain', None)
         self['domain'] = domain if domain is not None else _v
-        _v = arg.pop('hoverinfo', None)
-        self['hoverinfo'] = hoverinfo if hoverinfo is not None else _v
-        _v = arg.pop('hoverinfosrc', None)
-        self['hoverinfosrc'] = hoverinfosrc if hoverinfosrc is not None else _v
         _v = arg.pop('ids', None)
         self['ids'] = ids if ids is not None else _v
         _v = arg.pop('idssrc', None)
         self['idssrc'] = idssrc if idssrc is not None else _v
         _v = arg.pop('labelfont', None)
         self['labelfont'] = labelfont if labelfont is not None else _v
-        _v = arg.pop('legendgroup', None)
-        self['legendgroup'] = legendgroup if legendgroup is not None else _v
         _v = arg.pop('line', None)
         self['line'] = line if line is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
-        _v = arg.pop('opacity', None)
-        self['opacity'] = opacity if opacity is not None else _v
         _v = arg.pop('rangefont', None)
         self['rangefont'] = rangefont if rangefont is not None else _v
-        _v = arg.pop('selectedpoints', None)
-        self['selectedpoints'
-            ] = selectedpoints if selectedpoints is not None else _v
-        _v = arg.pop('showlegend', None)
-        self['showlegend'] = showlegend if showlegend is not None else _v
         _v = arg.pop('stream', None)
         self['stream'] = stream if stream is not None else _v
         _v = arg.pop('tickfont', None)
@@ -37347,7 +42934,8 @@ class Parcats(_BaseTraceType):
         variables `count`, `probability`, `category`, `categorycount`,
         `colorcount` and `bandcolorcount`. Anything contained in tag
         `<extra>` is displayed in the secondary box, for example
-        "<extra>{fullData.name}</extra>".
+        "<extra>{fullData.name}</extra>". To hide the secondary box
+        completely, use an empty tag `<extra></extra>`.
     
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -37506,7 +43094,9 @@ class Parcats(_BaseTraceType):
                     variables `count` and `probability`. Anything
                     contained in tag `<extra>` is displayed in the
                     secondary box, for example
-                    "<extra>{fullData.name}</extra>".
+                    "<extra>{fullData.name}</extra>". To hide the
+                    secondary box completely, use an empty tag
+                    `<extra></extra>`.
                 reversescale
                     Reverses the color mapping if true. Has an
                     effect only if in `line.color`is set to a
@@ -37807,7 +43397,8 @@ class Parcats(_BaseTraceType):
             `category`, `categorycount`, `colorcount` and
             `bandcolorcount`. Anything contained in tag `<extra>`
             is displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         labelfont
             Sets the font for the `dimension` labels.
         line
@@ -37947,7 +43538,8 @@ class Parcats(_BaseTraceType):
             `category`, `categorycount`, `colorcount` and
             `bandcolorcount`. Anything contained in tag `<extra>`
             is displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         labelfont
             Sets the font for the `dimension` labels.
         line
@@ -38322,6 +43914,14 @@ class Ohlc(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -38337,14 +43937,15 @@ class Ohlc(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -40200,6 +45801,14 @@ class Mesh3d(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -40215,14 +45824,15 @@ class Mesh3d(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -40254,7 +45864,9 @@ class Mesh3d(_BaseTraceType):
         data. Additionally, every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
         Anything contained in tag `<extra>` is displayed in the
-        secondary box, for example "<extra>{fullData.name}</extra>".
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
     
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -40554,29 +46166,6 @@ class Mesh3d(_BaseTraceType):
     def ksrc(self, val):
         self['ksrc'] = val
 
-    # legendgroup
-    # -----------
-    @property
-    def legendgroup(self):
-        """
-        Sets the legend group for this trace. Traces part of the same
-        legend group hide/show at the same time when toggling legend
-        items.
-    
-        The 'legendgroup' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
-
-        Returns
-        -------
-        str
-        """
-        return self['legendgroup']
-
-    @legendgroup.setter
-    def legendgroup(self, val):
-        self['legendgroup'] = val
-
     # lighting
     # --------
     @property
@@ -40751,51 +46340,6 @@ class Mesh3d(_BaseTraceType):
     @scene.setter
     def scene(self, val):
         self['scene'] = val
-
-    # selectedpoints
-    # --------------
-    @property
-    def selectedpoints(self):
-        """
-        Array containing integer indices of selected points. Has an
-        effect only for traces that support selections. Note that an
-        empty array means an empty selection where the `unselected` are
-        turned on for all points, whereas, any other non-array values
-        means no selection all where the `selected` and `unselected`
-        styles have no effect.
-    
-        The 'selectedpoints' property accepts values of any type
-
-        Returns
-        -------
-        Any
-        """
-        return self['selectedpoints']
-
-    @selectedpoints.setter
-    def selectedpoints(self, val):
-        self['selectedpoints'] = val
-
-    # showlegend
-    # ----------
-    @property
-    def showlegend(self):
-        """
-        Determines whether or not an item corresponding to this trace
-        is shown in the legend.
-    
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
-
-        Returns
-        -------
-        bool
-        """
-        return self['showlegend']
-
-    @showlegend.setter
-    def showlegend(self, val):
-        self['showlegend'] = val
 
     # showscale
     # ---------
@@ -41340,7 +46884,8 @@ class Mesh3d(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -41392,10 +46937,6 @@ class Mesh3d(_BaseTraceType):
             is the third vertex of a triangle.
         ksrc
             Sets the source reference on plot.ly for  k .
-        legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
         lighting
             plotly.graph_objs.mesh3d.Lighting instance or dict with
             compatible properties
@@ -41423,16 +46964,6 @@ class Mesh3d(_BaseTraceType):
             the (x,y,z) coordinates refer to `layout.scene`. If
             "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
-        showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -41539,15 +47070,12 @@ class Mesh3d(_BaseTraceType):
         jsrc=None,
         k=None,
         ksrc=None,
-        legendgroup=None,
         lighting=None,
         lightposition=None,
         name=None,
         opacity=None,
         reversescale=None,
         scene=None,
-        selectedpoints=None,
-        showlegend=None,
         showscale=None,
         stream=None,
         text=None,
@@ -41693,7 +47221,8 @@ class Mesh3d(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -41745,10 +47274,6 @@ class Mesh3d(_BaseTraceType):
             is the third vertex of a triangle.
         ksrc
             Sets the source reference on plot.ly for  k .
-        legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
         lighting
             plotly.graph_objs.mesh3d.Lighting instance or dict with
             compatible properties
@@ -41776,16 +47301,6 @@ class Mesh3d(_BaseTraceType):
             the (x,y,z) coordinates refer to `layout.scene`. If
             "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
-        showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -41921,15 +47436,12 @@ an instance of plotly.graph_objs.Mesh3d"""
         self._validators['jsrc'] = v_mesh3d.JsrcValidator()
         self._validators['k'] = v_mesh3d.KValidator()
         self._validators['ksrc'] = v_mesh3d.KsrcValidator()
-        self._validators['legendgroup'] = v_mesh3d.LegendgroupValidator()
         self._validators['lighting'] = v_mesh3d.LightingValidator()
         self._validators['lightposition'] = v_mesh3d.LightpositionValidator()
         self._validators['name'] = v_mesh3d.NameValidator()
         self._validators['opacity'] = v_mesh3d.OpacityValidator()
         self._validators['reversescale'] = v_mesh3d.ReversescaleValidator()
         self._validators['scene'] = v_mesh3d.SceneValidator()
-        self._validators['selectedpoints'] = v_mesh3d.SelectedpointsValidator()
-        self._validators['showlegend'] = v_mesh3d.ShowlegendValidator()
         self._validators['showscale'] = v_mesh3d.ShowscaleValidator()
         self._validators['stream'] = v_mesh3d.StreamValidator()
         self._validators['text'] = v_mesh3d.TextValidator()
@@ -42021,8 +47533,6 @@ an instance of plotly.graph_objs.Mesh3d"""
         self['k'] = k if k is not None else _v
         _v = arg.pop('ksrc', None)
         self['ksrc'] = ksrc if ksrc is not None else _v
-        _v = arg.pop('legendgroup', None)
-        self['legendgroup'] = legendgroup if legendgroup is not None else _v
         _v = arg.pop('lighting', None)
         self['lighting'] = lighting if lighting is not None else _v
         _v = arg.pop('lightposition', None)
@@ -42036,11 +47546,6 @@ an instance of plotly.graph_objs.Mesh3d"""
         self['reversescale'] = reversescale if reversescale is not None else _v
         _v = arg.pop('scene', None)
         self['scene'] = scene if scene is not None else _v
-        _v = arg.pop('selectedpoints', None)
-        self['selectedpoints'
-            ] = selectedpoints if selectedpoints is not None else _v
-        _v = arg.pop('showlegend', None)
-        self['showlegend'] = showlegend if showlegend is not None else _v
         _v = arg.pop('showscale', None)
         self['showscale'] = showscale if showscale is not None else _v
         _v = arg.pop('stream', None)
@@ -42673,6 +48178,14 @@ class Isosurface(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -42688,14 +48201,15 @@ class Isosurface(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -42727,7 +48241,9 @@ class Isosurface(_BaseTraceType):
         data. Additionally, every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
         Anything contained in tag `<extra>` is displayed in the
-        secondary box, for example "<extra>{fullData.name}</extra>".
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
     
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -42887,29 +48403,6 @@ class Isosurface(_BaseTraceType):
     @isomin.setter
     def isomin(self, val):
         self['isomin'] = val
-
-    # legendgroup
-    # -----------
-    @property
-    def legendgroup(self):
-        """
-        Sets the legend group for this trace. Traces part of the same
-        legend group hide/show at the same time when toggling legend
-        items.
-    
-        The 'legendgroup' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
-
-        Returns
-        -------
-        str
-        """
-        return self['legendgroup']
-
-    @legendgroup.setter
-    def legendgroup(self, val):
-        self['legendgroup'] = val
 
     # lighting
     # --------
@@ -43085,51 +48578,6 @@ class Isosurface(_BaseTraceType):
     @scene.setter
     def scene(self, val):
         self['scene'] = val
-
-    # selectedpoints
-    # --------------
-    @property
-    def selectedpoints(self):
-        """
-        Array containing integer indices of selected points. Has an
-        effect only for traces that support selections. Note that an
-        empty array means an empty selection where the `unselected` are
-        turned on for all points, whereas, any other non-array values
-        means no selection all where the `selected` and `unselected`
-        styles have no effect.
-    
-        The 'selectedpoints' property accepts values of any type
-
-        Returns
-        -------
-        Any
-        """
-        return self['selectedpoints']
-
-    @selectedpoints.setter
-    def selectedpoints(self, val):
-        self['selectedpoints'] = val
-
-    # showlegend
-    # ----------
-    @property
-    def showlegend(self):
-        """
-        Determines whether or not an item corresponding to this trace
-        is shown in the legend.
-    
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
-
-        Returns
-        -------
-        bool
-        """
-        return self['showlegend']
-
-    @showlegend.setter
-    def showlegend(self, val):
-        self['showlegend'] = val
 
     # showscale
     # ---------
@@ -43687,7 +49135,8 @@ class Isosurface(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -43705,10 +49154,6 @@ class Isosurface(_BaseTraceType):
             Sets the maximum boundary for iso-surface plot.
         isomin
             Sets the minimum boundary for iso-surface plot.
-        legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
         lighting
             plotly.graph_objs.isosurface.Lighting instance or dict
             with compatible properties
@@ -43736,16 +49181,6 @@ class Isosurface(_BaseTraceType):
             the (x,y,z) coordinates refer to `layout.scene`. If
             "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
-        showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -43839,15 +49274,12 @@ class Isosurface(_BaseTraceType):
         idssrc=None,
         isomax=None,
         isomin=None,
-        legendgroup=None,
         lighting=None,
         lightposition=None,
         name=None,
         opacity=None,
         reversescale=None,
         scene=None,
-        selectedpoints=None,
-        showlegend=None,
         showscale=None,
         slices=None,
         spaceframe=None,
@@ -43966,7 +49398,8 @@ class Isosurface(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -43984,10 +49417,6 @@ class Isosurface(_BaseTraceType):
             Sets the maximum boundary for iso-surface plot.
         isomin
             Sets the minimum boundary for iso-surface plot.
-        legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
         lighting
             plotly.graph_objs.isosurface.Lighting instance or dict
             with compatible properties
@@ -44015,16 +49444,6 @@ class Isosurface(_BaseTraceType):
             the (x,y,z) coordinates refer to `layout.scene`. If
             "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
-        showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -44150,7 +49569,6 @@ an instance of plotly.graph_objs.Isosurface"""
         self._validators['idssrc'] = v_isosurface.IdssrcValidator()
         self._validators['isomax'] = v_isosurface.IsomaxValidator()
         self._validators['isomin'] = v_isosurface.IsominValidator()
-        self._validators['legendgroup'] = v_isosurface.LegendgroupValidator()
         self._validators['lighting'] = v_isosurface.LightingValidator()
         self._validators['lightposition'
                         ] = v_isosurface.LightpositionValidator()
@@ -44158,9 +49576,6 @@ an instance of plotly.graph_objs.Isosurface"""
         self._validators['opacity'] = v_isosurface.OpacityValidator()
         self._validators['reversescale'] = v_isosurface.ReversescaleValidator()
         self._validators['scene'] = v_isosurface.SceneValidator()
-        self._validators['selectedpoints'
-                        ] = v_isosurface.SelectedpointsValidator()
-        self._validators['showlegend'] = v_isosurface.ShowlegendValidator()
         self._validators['showscale'] = v_isosurface.ShowscaleValidator()
         self._validators['slices'] = v_isosurface.SlicesValidator()
         self._validators['spaceframe'] = v_isosurface.SpaceframeValidator()
@@ -44232,8 +49647,6 @@ an instance of plotly.graph_objs.Isosurface"""
         self['isomax'] = isomax if isomax is not None else _v
         _v = arg.pop('isomin', None)
         self['isomin'] = isomin if isomin is not None else _v
-        _v = arg.pop('legendgroup', None)
-        self['legendgroup'] = legendgroup if legendgroup is not None else _v
         _v = arg.pop('lighting', None)
         self['lighting'] = lighting if lighting is not None else _v
         _v = arg.pop('lightposition', None)
@@ -44247,11 +49660,6 @@ an instance of plotly.graph_objs.Isosurface"""
         self['reversescale'] = reversescale if reversescale is not None else _v
         _v = arg.pop('scene', None)
         self['scene'] = scene if scene is not None else _v
-        _v = arg.pop('selectedpoints', None)
-        self['selectedpoints'
-            ] = selectedpoints if selectedpoints is not None else _v
-        _v = arg.pop('showlegend', None)
-        self['showlegend'] = showlegend if showlegend is not None else _v
         _v = arg.pop('showscale', None)
         self['showscale'] = showscale if showscale is not None else _v
         _v = arg.pop('slices', None)
@@ -44927,6 +50335,14 @@ class Histogram2dContour(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -44942,14 +50358,15 @@ class Histogram2dContour(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -44982,7 +50399,8 @@ class Histogram2dContour(_BaseTraceType):
         point (the ones that are `arrayOk: true`) are available.
         variable `z` Anything contained in tag `<extra>` is displayed
         in the secondary box, for example
-        "<extra>{fullData.name}</extra>".
+        "<extra>{fullData.name}</extra>". To hide the secondary box
+        completely, use an empty tag `<extra></extra>`.
     
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -45286,30 +50704,6 @@ class Histogram2dContour(_BaseTraceType):
     @reversescale.setter
     def reversescale(self, val):
         self['reversescale'] = val
-
-    # selectedpoints
-    # --------------
-    @property
-    def selectedpoints(self):
-        """
-        Array containing integer indices of selected points. Has an
-        effect only for traces that support selections. Note that an
-        empty array means an empty selection where the `unselected` are
-        turned on for all points, whereas, any other non-array values
-        means no selection all where the `selected` and `unselected`
-        styles have no effect.
-    
-        The 'selectedpoints' property accepts values of any type
-
-        Returns
-        -------
-        Any
-        """
-        return self['selectedpoints']
-
-    @selectedpoints.setter
-    def selectedpoints(self, val):
-        self['selectedpoints'] = val
 
     # showlegend
     # ----------
@@ -46025,7 +51419,9 @@ class Histogram2dContour(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available. variable `z` Anything contained in tag
             `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>".
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -46072,13 +51468,6 @@ class Histogram2dContour(_BaseTraceType):
             Reverses the color mapping if true. If true, `zmin`
             will correspond to the last color in the array and
             `zmax` will correspond to the first color.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
@@ -46202,7 +51591,6 @@ class Histogram2dContour(_BaseTraceType):
         ncontours=None,
         opacity=None,
         reversescale=None,
-        selectedpoints=None,
         showlegend=None,
         showscale=None,
         stream=None,
@@ -46343,7 +51731,9 @@ class Histogram2dContour(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available. variable `z` Anything contained in tag
             `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>".
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -46390,13 +51780,6 @@ class Histogram2dContour(_BaseTraceType):
             Reverses the color mapping if true. If true, `zmin`
             will correspond to the last color in the array and
             `zmax` will correspond to the first color.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
@@ -46563,8 +51946,6 @@ an instance of plotly.graph_objs.Histogram2dContour"""
         self._validators['opacity'] = v_histogram2dcontour.OpacityValidator()
         self._validators['reversescale'
                         ] = v_histogram2dcontour.ReversescaleValidator()
-        self._validators['selectedpoints'
-                        ] = v_histogram2dcontour.SelectedpointsValidator()
         self._validators['showlegend'
                         ] = v_histogram2dcontour.ShowlegendValidator()
         self._validators['showscale'
@@ -46655,9 +52036,6 @@ an instance of plotly.graph_objs.Histogram2dContour"""
         self['opacity'] = opacity if opacity is not None else _v
         _v = arg.pop('reversescale', None)
         self['reversescale'] = reversescale if reversescale is not None else _v
-        _v = arg.pop('selectedpoints', None)
-        self['selectedpoints'
-            ] = selectedpoints if selectedpoints is not None else _v
         _v = arg.pop('showlegend', None)
         self['showlegend'] = showlegend if showlegend is not None else _v
         _v = arg.pop('showscale', None)
@@ -47235,6 +52613,14 @@ class Histogram2d(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -47250,14 +52636,15 @@ class Histogram2d(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -47290,7 +52677,8 @@ class Histogram2d(_BaseTraceType):
         point (the ones that are `arrayOk: true`) are available.
         variable `z` Anything contained in tag `<extra>` is displayed
         in the secondary box, for example
-        "<extra>{fullData.name}</extra>".
+        "<extra>{fullData.name}</extra>". To hide the secondary box
+        completely, use an empty tag `<extra></extra>`.
     
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -47368,29 +52756,6 @@ class Histogram2d(_BaseTraceType):
     @idssrc.setter
     def idssrc(self, val):
         self['idssrc'] = val
-
-    # legendgroup
-    # -----------
-    @property
-    def legendgroup(self):
-        """
-        Sets the legend group for this trace. Traces part of the same
-        legend group hide/show at the same time when toggling legend
-        items.
-    
-        The 'legendgroup' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
-
-        Returns
-        -------
-        str
-        """
-        return self['legendgroup']
-
-    @legendgroup.setter
-    def legendgroup(self, val):
-        self['legendgroup'] = val
 
     # marker
     # ------
@@ -47532,51 +52897,6 @@ class Histogram2d(_BaseTraceType):
     @reversescale.setter
     def reversescale(self, val):
         self['reversescale'] = val
-
-    # selectedpoints
-    # --------------
-    @property
-    def selectedpoints(self):
-        """
-        Array containing integer indices of selected points. Has an
-        effect only for traces that support selections. Note that an
-        empty array means an empty selection where the `unselected` are
-        turned on for all points, whereas, any other non-array values
-        means no selection all where the `selected` and `unselected`
-        styles have no effect.
-    
-        The 'selectedpoints' property accepts values of any type
-
-        Returns
-        -------
-        Any
-        """
-        return self['selectedpoints']
-
-    @selectedpoints.setter
-    def selectedpoints(self, val):
-        self['selectedpoints'] = val
-
-    # showlegend
-    # ----------
-    @property
-    def showlegend(self):
-        """
-        Determines whether or not an item corresponding to this trace
-        is shown in the legend.
-    
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
-
-        Returns
-        -------
-        bool
-        """
-        return self['showlegend']
-
-    @showlegend.setter
-    def showlegend(self, val):
-        self['showlegend'] = val
 
     # showscale
     # ---------
@@ -48324,7 +53644,9 @@ class Histogram2d(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available. variable `z` Anything contained in tag
             `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>".
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -48334,10 +53656,6 @@ class Histogram2d(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
-        legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
         marker
             plotly.graph_objs.histogram2d.Marker instance or dict
             with compatible properties
@@ -48362,16 +53680,6 @@ class Histogram2d(_BaseTraceType):
             Reverses the color mapping if true. If true, `zmin`
             will correspond to the last color in the array and
             `zmax` will correspond to the first color.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
-        showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -48487,15 +53795,12 @@ class Histogram2d(_BaseTraceType):
         hovertemplatesrc=None,
         ids=None,
         idssrc=None,
-        legendgroup=None,
         marker=None,
         name=None,
         nbinsx=None,
         nbinsy=None,
         opacity=None,
         reversescale=None,
-        selectedpoints=None,
-        showlegend=None,
         showscale=None,
         stream=None,
         uid=None,
@@ -48630,7 +53935,9 @@ class Histogram2d(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available. variable `z` Anything contained in tag
             `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>".
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -48640,10 +53947,6 @@ class Histogram2d(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
-        legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
         marker
             plotly.graph_objs.histogram2d.Marker instance or dict
             with compatible properties
@@ -48668,16 +53971,6 @@ class Histogram2d(_BaseTraceType):
             Reverses the color mapping if true. If true, `zmin`
             will correspond to the last color in the array and
             `zmax` will correspond to the first color.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
-        showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -48826,7 +54119,6 @@ an instance of plotly.graph_objs.Histogram2d"""
                         ] = v_histogram2d.HovertemplatesrcValidator()
         self._validators['ids'] = v_histogram2d.IdsValidator()
         self._validators['idssrc'] = v_histogram2d.IdssrcValidator()
-        self._validators['legendgroup'] = v_histogram2d.LegendgroupValidator()
         self._validators['marker'] = v_histogram2d.MarkerValidator()
         self._validators['name'] = v_histogram2d.NameValidator()
         self._validators['nbinsx'] = v_histogram2d.NbinsxValidator()
@@ -48834,9 +54126,6 @@ an instance of plotly.graph_objs.Histogram2d"""
         self._validators['opacity'] = v_histogram2d.OpacityValidator()
         self._validators['reversescale'] = v_histogram2d.ReversescaleValidator(
         )
-        self._validators['selectedpoints'
-                        ] = v_histogram2d.SelectedpointsValidator()
-        self._validators['showlegend'] = v_histogram2d.ShowlegendValidator()
         self._validators['showscale'] = v_histogram2d.ShowscaleValidator()
         self._validators['stream'] = v_histogram2d.StreamValidator()
         self._validators['uid'] = v_histogram2d.UidValidator()
@@ -48902,8 +54191,6 @@ an instance of plotly.graph_objs.Histogram2d"""
         self['ids'] = ids if ids is not None else _v
         _v = arg.pop('idssrc', None)
         self['idssrc'] = idssrc if idssrc is not None else _v
-        _v = arg.pop('legendgroup', None)
-        self['legendgroup'] = legendgroup if legendgroup is not None else _v
         _v = arg.pop('marker', None)
         self['marker'] = marker if marker is not None else _v
         _v = arg.pop('name', None)
@@ -48916,11 +54203,6 @@ an instance of plotly.graph_objs.Histogram2d"""
         self['opacity'] = opacity if opacity is not None else _v
         _v = arg.pop('reversescale', None)
         self['reversescale'] = reversescale if reversescale is not None else _v
-        _v = arg.pop('selectedpoints', None)
-        self['selectedpoints'
-            ] = selectedpoints if selectedpoints is not None else _v
-        _v = arg.pop('showlegend', None)
-        self['showlegend'] = showlegend if showlegend is not None else _v
         _v = arg.pop('showscale', None)
         self['showscale'] = showscale if showscale is not None else _v
         _v = arg.pop('stream', None)
@@ -49437,6 +54719,14 @@ class Histogram(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -49452,14 +54742,15 @@ class Histogram(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -49492,7 +54783,8 @@ class Histogram(_BaseTraceType):
         point (the ones that are `arrayOk: true`) are available.
         variable `binNumber` Anything contained in tag `<extra>` is
         displayed in the secondary box, for example
-        "<extra>{fullData.name}</extra>".
+        "<extra>{fullData.name}</extra>". To hide the secondary box
+        completely, use an empty tag `<extra></extra>`.
     
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -50556,7 +55848,9 @@ class Histogram(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available. variable `binNumber` Anything contained in
             tag `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>".
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -50835,7 +56129,9 @@ class Histogram(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available. variable `binNumber` Anything contained in
             tag `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>".
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -51611,6 +56907,14 @@ class Heatmapgl(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -51626,14 +56930,15 @@ class Heatmapgl(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -51689,29 +56994,6 @@ class Heatmapgl(_BaseTraceType):
     @idssrc.setter
     def idssrc(self, val):
         self['idssrc'] = val
-
-    # legendgroup
-    # -----------
-    @property
-    def legendgroup(self):
-        """
-        Sets the legend group for this trace. Traces part of the same
-        legend group hide/show at the same time when toggling legend
-        items.
-    
-        The 'legendgroup' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
-
-        Returns
-        -------
-        str
-        """
-        return self['legendgroup']
-
-    @legendgroup.setter
-    def legendgroup(self, val):
-        self['legendgroup'] = val
 
     # name
     # ----
@@ -51776,51 +57058,6 @@ class Heatmapgl(_BaseTraceType):
     @reversescale.setter
     def reversescale(self, val):
         self['reversescale'] = val
-
-    # selectedpoints
-    # --------------
-    @property
-    def selectedpoints(self):
-        """
-        Array containing integer indices of selected points. Has an
-        effect only for traces that support selections. Note that an
-        empty array means an empty selection where the `unselected` are
-        turned on for all points, whereas, any other non-array values
-        means no selection all where the `selected` and `unselected`
-        styles have no effect.
-    
-        The 'selectedpoints' property accepts values of any type
-
-        Returns
-        -------
-        Any
-        """
-        return self['selectedpoints']
-
-    @selectedpoints.setter
-    def selectedpoints(self, val):
-        self['selectedpoints'] = val
-
-    # showlegend
-    # ----------
-    @property
-    def showlegend(self):
-        """
-        Determines whether or not an item corresponding to this trace
-        is shown in the legend.
-    
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
-
-        Returns
-        -------
-        bool
-        """
-        return self['showlegend']
-
-    @showlegend.setter
-    def showlegend(self, val):
-        self['showlegend'] = val
 
     # showscale
     # ---------
@@ -52427,10 +57664,6 @@ class Heatmapgl(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
-        legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -52440,16 +57673,6 @@ class Heatmapgl(_BaseTraceType):
             Reverses the color mapping if true. If true, `zmin`
             will correspond to the last color in the array and
             `zmax` will correspond to the first color.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
-        showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -52566,12 +57789,9 @@ class Heatmapgl(_BaseTraceType):
         hoverlabel=None,
         ids=None,
         idssrc=None,
-        legendgroup=None,
         name=None,
         opacity=None,
         reversescale=None,
-        selectedpoints=None,
-        showlegend=None,
         showscale=None,
         stream=None,
         text=None,
@@ -52657,10 +57877,6 @@ class Heatmapgl(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
-        legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -52670,16 +57886,6 @@ class Heatmapgl(_BaseTraceType):
             Reverses the color mapping if true. If true, `zmin`
             will correspond to the last color in the array and
             `zmax` will correspond to the first color.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
-        showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -52826,13 +58032,9 @@ an instance of plotly.graph_objs.Heatmapgl"""
         self._validators['hoverlabel'] = v_heatmapgl.HoverlabelValidator()
         self._validators['ids'] = v_heatmapgl.IdsValidator()
         self._validators['idssrc'] = v_heatmapgl.IdssrcValidator()
-        self._validators['legendgroup'] = v_heatmapgl.LegendgroupValidator()
         self._validators['name'] = v_heatmapgl.NameValidator()
         self._validators['opacity'] = v_heatmapgl.OpacityValidator()
         self._validators['reversescale'] = v_heatmapgl.ReversescaleValidator()
-        self._validators['selectedpoints'
-                        ] = v_heatmapgl.SelectedpointsValidator()
-        self._validators['showlegend'] = v_heatmapgl.ShowlegendValidator()
         self._validators['showscale'] = v_heatmapgl.ShowscaleValidator()
         self._validators['stream'] = v_heatmapgl.StreamValidator()
         self._validators['text'] = v_heatmapgl.TextValidator()
@@ -52886,19 +58088,12 @@ an instance of plotly.graph_objs.Heatmapgl"""
         self['ids'] = ids if ids is not None else _v
         _v = arg.pop('idssrc', None)
         self['idssrc'] = idssrc if idssrc is not None else _v
-        _v = arg.pop('legendgroup', None)
-        self['legendgroup'] = legendgroup if legendgroup is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('opacity', None)
         self['opacity'] = opacity if opacity is not None else _v
         _v = arg.pop('reversescale', None)
         self['reversescale'] = reversescale if reversescale is not None else _v
-        _v = arg.pop('selectedpoints', None)
-        self['selectedpoints'
-            ] = selectedpoints if selectedpoints is not None else _v
-        _v = arg.pop('showlegend', None)
-        self['showlegend'] = showlegend if showlegend is not None else _v
         _v = arg.pop('showscale', None)
         self['showscale'] = showscale if showscale is not None else _v
         _v = arg.pop('stream', None)
@@ -53429,6 +58624,14 @@ class Heatmap(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -53444,14 +58647,15 @@ class Heatmap(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -53483,7 +58687,9 @@ class Heatmap(_BaseTraceType):
         data. Additionally, every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
         Anything contained in tag `<extra>` is displayed in the
-        secondary box, for example "<extra>{fullData.name}</extra>".
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
     
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -53602,29 +58808,6 @@ class Heatmap(_BaseTraceType):
     def idssrc(self, val):
         self['idssrc'] = val
 
-    # legendgroup
-    # -----------
-    @property
-    def legendgroup(self):
-        """
-        Sets the legend group for this trace. Traces part of the same
-        legend group hide/show at the same time when toggling legend
-        items.
-    
-        The 'legendgroup' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
-
-        Returns
-        -------
-        str
-        """
-        return self['legendgroup']
-
-    @legendgroup.setter
-    def legendgroup(self, val):
-        self['legendgroup'] = val
-
     # name
     # ----
     @property
@@ -53688,51 +58871,6 @@ class Heatmap(_BaseTraceType):
     @reversescale.setter
     def reversescale(self, val):
         self['reversescale'] = val
-
-    # selectedpoints
-    # --------------
-    @property
-    def selectedpoints(self):
-        """
-        Array containing integer indices of selected points. Has an
-        effect only for traces that support selections. Note that an
-        empty array means an empty selection where the `unselected` are
-        turned on for all points, whereas, any other non-array values
-        means no selection all where the `selected` and `unselected`
-        styles have no effect.
-    
-        The 'selectedpoints' property accepts values of any type
-
-        Returns
-        -------
-        Any
-        """
-        return self['selectedpoints']
-
-    @selectedpoints.setter
-    def selectedpoints(self, val):
-        self['selectedpoints'] = val
-
-    # showlegend
-    # ----------
-    @property
-    def showlegend(self):
-        """
-        Determines whether or not an item corresponding to this trace
-        is shown in the legend.
-    
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
-
-        Returns
-        -------
-        bool
-        """
-        return self['showlegend']
-
-    @showlegend.setter
-    def showlegend(self, val):
-        self['showlegend'] = val
 
     # showscale
     # ---------
@@ -54484,7 +59622,8 @@ class Heatmap(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -54498,10 +59637,6 @@ class Heatmap(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
-        legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -54511,16 +59646,6 @@ class Heatmap(_BaseTraceType):
             Reverses the color mapping if true. If true, `zmin`
             will correspond to the last color in the array and
             `zmax` will correspond to the first color.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
-        showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -54657,12 +59782,9 @@ class Heatmap(_BaseTraceType):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
-        legendgroup=None,
         name=None,
         opacity=None,
         reversescale=None,
-        selectedpoints=None,
-        showlegend=None,
         showscale=None,
         stream=None,
         text=None,
@@ -54783,7 +59905,8 @@ class Heatmap(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -54797,10 +59920,6 @@ class Heatmap(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
-        legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -54810,16 +59929,6 @@ class Heatmap(_BaseTraceType):
             Reverses the color mapping if true. If true, `zmin`
             will correspond to the last color in the array and
             `zmax` will correspond to the first color.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
-        showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -54986,13 +60095,9 @@ an instance of plotly.graph_objs.Heatmap"""
         self._validators['hovertextsrc'] = v_heatmap.HovertextsrcValidator()
         self._validators['ids'] = v_heatmap.IdsValidator()
         self._validators['idssrc'] = v_heatmap.IdssrcValidator()
-        self._validators['legendgroup'] = v_heatmap.LegendgroupValidator()
         self._validators['name'] = v_heatmap.NameValidator()
         self._validators['opacity'] = v_heatmap.OpacityValidator()
         self._validators['reversescale'] = v_heatmap.ReversescaleValidator()
-        self._validators['selectedpoints'] = v_heatmap.SelectedpointsValidator(
-        )
-        self._validators['showlegend'] = v_heatmap.ShowlegendValidator()
         self._validators['showscale'] = v_heatmap.ShowscaleValidator()
         self._validators['stream'] = v_heatmap.StreamValidator()
         self._validators['text'] = v_heatmap.TextValidator()
@@ -55064,19 +60169,12 @@ an instance of plotly.graph_objs.Heatmap"""
         self['ids'] = ids if ids is not None else _v
         _v = arg.pop('idssrc', None)
         self['idssrc'] = idssrc if idssrc is not None else _v
-        _v = arg.pop('legendgroup', None)
-        self['legendgroup'] = legendgroup if legendgroup is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('opacity', None)
         self['opacity'] = opacity if opacity is not None else _v
         _v = arg.pop('reversescale', None)
         self['reversescale'] = reversescale if reversescale is not None else _v
-        _v = arg.pop('selectedpoints', None)
-        self['selectedpoints'
-            ] = selectedpoints if selectedpoints is not None else _v
-        _v = arg.pop('showlegend', None)
-        self['showlegend'] = showlegend if showlegend is not None else _v
         _v = arg.pop('showscale', None)
         self['showscale'] = showscale if showscale is not None else _v
         _v = arg.pop('stream', None)
@@ -55962,6 +61060,14 @@ class Contourcarpet(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -55977,14 +61083,15 @@ class Contourcarpet(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -56228,30 +61335,6 @@ class Contourcarpet(_BaseTraceType):
     @reversescale.setter
     def reversescale(self, val):
         self['reversescale'] = val
-
-    # selectedpoints
-    # --------------
-    @property
-    def selectedpoints(self):
-        """
-        Array containing integer indices of selected points. Has an
-        effect only for traces that support selections. Note that an
-        empty array means an empty selection where the `unselected` are
-        turned on for all points, whereas, any other non-array values
-        means no selection all where the `selected` and `unselected`
-        styles have no effect.
-    
-        The 'selectedpoints' property accepts values of any type
-
-        Returns
-        -------
-        Any
-        """
-        return self['selectedpoints']
-
-    @selectedpoints.setter
-    def selectedpoints(self, val):
-        self['selectedpoints'] = val
 
     # showlegend
     # ----------
@@ -56779,13 +61862,6 @@ class Contourcarpet(_BaseTraceType):
             Reverses the color mapping if true. If true, `zmin`
             will correspond to the last color in the array and
             `zmax` will correspond to the first color.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
@@ -56897,7 +61973,6 @@ class Contourcarpet(_BaseTraceType):
         ncontours=None,
         opacity=None,
         reversescale=None,
-        selectedpoints=None,
         showlegend=None,
         showscale=None,
         stream=None,
@@ -57048,13 +62123,6 @@ class Contourcarpet(_BaseTraceType):
             Reverses the color mapping if true. If true, `zmin`
             will correspond to the last color in the array and
             `zmax` will correspond to the first color.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
@@ -57201,8 +62269,6 @@ an instance of plotly.graph_objs.Contourcarpet"""
         self._validators['opacity'] = v_contourcarpet.OpacityValidator()
         self._validators['reversescale'
                         ] = v_contourcarpet.ReversescaleValidator()
-        self._validators['selectedpoints'
-                        ] = v_contourcarpet.SelectedpointsValidator()
         self._validators['showlegend'] = v_contourcarpet.ShowlegendValidator()
         self._validators['showscale'] = v_contourcarpet.ShowscaleValidator()
         self._validators['stream'] = v_contourcarpet.StreamValidator()
@@ -57289,9 +62355,6 @@ an instance of plotly.graph_objs.Contourcarpet"""
         self['opacity'] = opacity if opacity is not None else _v
         _v = arg.pop('reversescale', None)
         self['reversescale'] = reversescale if reversescale is not None else _v
-        _v = arg.pop('selectedpoints', None)
-        self['selectedpoints'
-            ] = selectedpoints if selectedpoints is not None else _v
         _v = arg.pop('showlegend', None)
         self['showlegend'] = showlegend if showlegend is not None else _v
         _v = arg.pop('showscale', None)
@@ -57982,6 +63045,14 @@ class Contour(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -57997,14 +63068,15 @@ class Contour(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -58036,7 +63108,9 @@ class Contour(_BaseTraceType):
         data. Additionally, every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
         Anything contained in tag `<extra>` is displayed in the
-        secondary box, for example "<extra>{fullData.name}</extra>".
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
     
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -58303,30 +63377,6 @@ class Contour(_BaseTraceType):
     @reversescale.setter
     def reversescale(self, val):
         self['reversescale'] = val
-
-    # selectedpoints
-    # --------------
-    @property
-    def selectedpoints(self):
-        """
-        Array containing integer indices of selected points. Has an
-        effect only for traces that support selections. Note that an
-        empty array means an empty selection where the `unselected` are
-        turned on for all points, whereas, any other non-array values
-        means no selection all where the `selected` and `unselected`
-        styles have no effect.
-    
-        The 'selectedpoints' property accepts values of any type
-
-        Returns
-        -------
-        Any
-        """
-        return self['selectedpoints']
-
-    @selectedpoints.setter
-    def selectedpoints(self, val):
-        self['selectedpoints'] = val
 
     # showlegend
     # ----------
@@ -59051,7 +64101,8 @@ class Contour(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -59087,13 +64138,6 @@ class Contour(_BaseTraceType):
             Reverses the color mapping if true. If true, `zmin`
             will correspond to the last color in the array and
             `zmax` will correspond to the first color.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
@@ -59236,7 +64280,6 @@ class Contour(_BaseTraceType):
         ncontours=None,
         opacity=None,
         reversescale=None,
-        selectedpoints=None,
         showlegend=None,
         showscale=None,
         stream=None,
@@ -59358,7 +64401,8 @@ class Contour(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -59394,13 +64438,6 @@ class Contour(_BaseTraceType):
             Reverses the color mapping if true. If true, `zmin`
             will correspond to the last color in the array and
             `zmax` will correspond to the first color.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
@@ -59573,8 +64610,6 @@ an instance of plotly.graph_objs.Contour"""
         self._validators['ncontours'] = v_contour.NcontoursValidator()
         self._validators['opacity'] = v_contour.OpacityValidator()
         self._validators['reversescale'] = v_contour.ReversescaleValidator()
-        self._validators['selectedpoints'] = v_contour.SelectedpointsValidator(
-        )
         self._validators['showlegend'] = v_contour.ShowlegendValidator()
         self._validators['showscale'] = v_contour.ShowscaleValidator()
         self._validators['stream'] = v_contour.StreamValidator()
@@ -59662,9 +64697,6 @@ an instance of plotly.graph_objs.Contour"""
         self['opacity'] = opacity if opacity is not None else _v
         _v = arg.pop('reversescale', None)
         self['reversescale'] = reversescale if reversescale is not None else _v
-        _v = arg.pop('selectedpoints', None)
-        self['selectedpoints'
-            ] = selectedpoints if selectedpoints is not None else _v
         _v = arg.pop('showlegend', None)
         self['showlegend'] = showlegend if showlegend is not None else _v
         _v = arg.pop('showscale', None)
@@ -60253,6 +65285,14 @@ class Cone(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -60268,14 +65308,15 @@ class Cone(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -60308,7 +65349,8 @@ class Cone(_BaseTraceType):
         point (the ones that are `arrayOk: true`) are available.
         variable `norm` Anything contained in tag `<extra>` is
         displayed in the secondary box, for example
-        "<extra>{fullData.name}</extra>".
+        "<extra>{fullData.name}</extra>". To hide the secondary box
+        completely, use an empty tag `<extra></extra>`.
     
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -60428,29 +65470,6 @@ class Cone(_BaseTraceType):
     @idssrc.setter
     def idssrc(self, val):
         self['idssrc'] = val
-
-    # legendgroup
-    # -----------
-    @property
-    def legendgroup(self):
-        """
-        Sets the legend group for this trace. Traces part of the same
-        legend group hide/show at the same time when toggling legend
-        items.
-    
-        The 'legendgroup' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
-
-        Returns
-        -------
-        str
-        """
-        return self['legendgroup']
-
-    @legendgroup.setter
-    def legendgroup(self, val):
-        self['legendgroup'] = val
 
     # lighting
     # --------
@@ -60626,51 +65645,6 @@ class Cone(_BaseTraceType):
     @scene.setter
     def scene(self, val):
         self['scene'] = val
-
-    # selectedpoints
-    # --------------
-    @property
-    def selectedpoints(self):
-        """
-        Array containing integer indices of selected points. Has an
-        effect only for traces that support selections. Note that an
-        empty array means an empty selection where the `unselected` are
-        turned on for all points, whereas, any other non-array values
-        means no selection all where the `selected` and `unselected`
-        styles have no effect.
-    
-        The 'selectedpoints' property accepts values of any type
-
-        Returns
-        -------
-        Any
-        """
-        return self['selectedpoints']
-
-    @selectedpoints.setter
-    def selectedpoints(self, val):
-        self['selectedpoints'] = val
-
-    # showlegend
-    # ----------
-    @property
-    def showlegend(self):
-        """
-        Determines whether or not an item corresponding to this trace
-        is shown in the legend.
-    
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
-
-        Returns
-        -------
-        bool
-        """
-        return self['showlegend']
-
-    @showlegend.setter
-    def showlegend(self, val):
-        self['showlegend'] = val
 
     # showscale
     # ---------
@@ -61238,7 +66212,9 @@ class Cone(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available. variable `norm` Anything contained in tag
             `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>".
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -61252,10 +66228,6 @@ class Cone(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
-        legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
         lighting
             plotly.graph_objs.cone.Lighting instance or dict with
             compatible properties
@@ -61283,16 +66255,6 @@ class Cone(_BaseTraceType):
             the (x,y,z) coordinates refer to `layout.scene`. If
             "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
-        showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -61401,15 +66363,12 @@ class Cone(_BaseTraceType):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
-        legendgroup=None,
         lighting=None,
         lightposition=None,
         name=None,
         opacity=None,
         reversescale=None,
         scene=None,
-        selectedpoints=None,
-        showlegend=None,
         showscale=None,
         sizemode=None,
         sizeref=None,
@@ -61523,7 +66482,9 @@ class Cone(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available. variable `norm` Anything contained in tag
             `<extra>` is displayed in the secondary box, for
-            example "<extra>{fullData.name}</extra>".
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -61537,10 +66498,6 @@ class Cone(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
-        legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
         lighting
             plotly.graph_objs.cone.Lighting instance or dict with
             compatible properties
@@ -61568,16 +66525,6 @@ class Cone(_BaseTraceType):
             the (x,y,z) coordinates refer to `layout.scene`. If
             "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
-        showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -61715,15 +66662,12 @@ an instance of plotly.graph_objs.Cone"""
         self._validators['hovertextsrc'] = v_cone.HovertextsrcValidator()
         self._validators['ids'] = v_cone.IdsValidator()
         self._validators['idssrc'] = v_cone.IdssrcValidator()
-        self._validators['legendgroup'] = v_cone.LegendgroupValidator()
         self._validators['lighting'] = v_cone.LightingValidator()
         self._validators['lightposition'] = v_cone.LightpositionValidator()
         self._validators['name'] = v_cone.NameValidator()
         self._validators['opacity'] = v_cone.OpacityValidator()
         self._validators['reversescale'] = v_cone.ReversescaleValidator()
         self._validators['scene'] = v_cone.SceneValidator()
-        self._validators['selectedpoints'] = v_cone.SelectedpointsValidator()
-        self._validators['showlegend'] = v_cone.ShowlegendValidator()
         self._validators['showscale'] = v_cone.ShowscaleValidator()
         self._validators['sizemode'] = v_cone.SizemodeValidator()
         self._validators['sizeref'] = v_cone.SizerefValidator()
@@ -61790,8 +66734,6 @@ an instance of plotly.graph_objs.Cone"""
         self['ids'] = ids if ids is not None else _v
         _v = arg.pop('idssrc', None)
         self['idssrc'] = idssrc if idssrc is not None else _v
-        _v = arg.pop('legendgroup', None)
-        self['legendgroup'] = legendgroup if legendgroup is not None else _v
         _v = arg.pop('lighting', None)
         self['lighting'] = lighting if lighting is not None else _v
         _v = arg.pop('lightposition', None)
@@ -61805,11 +66747,6 @@ an instance of plotly.graph_objs.Cone"""
         self['reversescale'] = reversescale if reversescale is not None else _v
         _v = arg.pop('scene', None)
         self['scene'] = scene if scene is not None else _v
-        _v = arg.pop('selectedpoints', None)
-        self['selectedpoints'
-            ] = selectedpoints if selectedpoints is not None else _v
-        _v = arg.pop('showlegend', None)
-        self['showlegend'] = showlegend if showlegend is not None else _v
         _v = arg.pop('showscale', None)
         self['showscale'] = showscale if showscale is not None else _v
         _v = arg.pop('sizemode', None)
@@ -62299,6 +67236,14 @@ class Choropleth(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -62314,14 +67259,15 @@ class Choropleth(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -62353,7 +67299,9 @@ class Choropleth(_BaseTraceType):
         data. Additionally, every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
         Anything contained in tag `<extra>` is displayed in the
-        secondary box, for example "<extra>{fullData.name}</extra>".
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
     
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -62474,29 +67422,6 @@ class Choropleth(_BaseTraceType):
     def idssrc(self, val):
         self['idssrc'] = val
 
-    # legendgroup
-    # -----------
-    @property
-    def legendgroup(self):
-        """
-        Sets the legend group for this trace. Traces part of the same
-        legend group hide/show at the same time when toggling legend
-        items.
-    
-        The 'legendgroup' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
-
-        Returns
-        -------
-        str
-        """
-        return self['legendgroup']
-
-    @legendgroup.setter
-    def legendgroup(self, val):
-        self['legendgroup'] = val
-
     # locationmode
     # ------------
     @property
@@ -62614,26 +67539,6 @@ class Choropleth(_BaseTraceType):
     def name(self, val):
         self['name'] = val
 
-    # opacity
-    # -------
-    @property
-    def opacity(self):
-        """
-        Sets the opacity of the trace.
-    
-        The 'opacity' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
-
-        Returns
-        -------
-        int|float
-        """
-        return self['opacity']
-
-    @opacity.setter
-    def opacity(self, val):
-        self['opacity'] = val
-
     # reversescale
     # ------------
     @property
@@ -62706,27 +67611,6 @@ class Choropleth(_BaseTraceType):
     @selectedpoints.setter
     def selectedpoints(self, val):
         self['selectedpoints'] = val
-
-    # showlegend
-    # ----------
-    @property
-    def showlegend(self):
-        """
-        Determines whether or not an item corresponding to this trace
-        is shown in the legend.
-    
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
-
-        Returns
-        -------
-        bool
-        """
-        return self['showlegend']
-
-    @showlegend.setter
-    def showlegend(self, val):
-        self['showlegend'] = val
 
     # showscale
     # ---------
@@ -63134,7 +68018,8 @@ class Choropleth(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -63148,10 +68033,6 @@ class Choropleth(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
-        legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
         locationmode
             Determines the set of locations used to match entries
             in `locations` to regions on the map.
@@ -63166,8 +68047,6 @@ class Choropleth(_BaseTraceType):
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
-        opacity
-            Sets the opacity of the trace.
         reversescale
             Reverses the color mapping if true. If true, `zmin`
             will correspond to the last color in the array and
@@ -63182,9 +68061,6 @@ class Choropleth(_BaseTraceType):
             the `unselected` are turned on for all points, whereas,
             any other non-array values means no selection all where
             the `selected` and `unselected` styles have no effect.
-        showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -63267,17 +68143,14 @@ class Choropleth(_BaseTraceType):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
-        legendgroup=None,
         locationmode=None,
         locations=None,
         locationssrc=None,
         marker=None,
         name=None,
-        opacity=None,
         reversescale=None,
         selected=None,
         selectedpoints=None,
-        showlegend=None,
         showscale=None,
         stream=None,
         text=None,
@@ -63367,7 +68240,8 @@ class Choropleth(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -63381,10 +68255,6 @@ class Choropleth(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
-        legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
         locationmode
             Determines the set of locations used to match entries
             in `locations` to regions on the map.
@@ -63399,8 +68269,6 @@ class Choropleth(_BaseTraceType):
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
-        opacity
-            Sets the opacity of the trace.
         reversescale
             Reverses the color mapping if true. If true, `zmin`
             will correspond to the last color in the array and
@@ -63415,9 +68283,6 @@ class Choropleth(_BaseTraceType):
             the `unselected` are turned on for all points, whereas,
             any other non-array values means no selection all where
             the `selected` and `unselected` styles have no effect.
-        showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -63532,18 +68397,15 @@ an instance of plotly.graph_objs.Choropleth"""
         self._validators['hovertextsrc'] = v_choropleth.HovertextsrcValidator()
         self._validators['ids'] = v_choropleth.IdsValidator()
         self._validators['idssrc'] = v_choropleth.IdssrcValidator()
-        self._validators['legendgroup'] = v_choropleth.LegendgroupValidator()
         self._validators['locationmode'] = v_choropleth.LocationmodeValidator()
         self._validators['locations'] = v_choropleth.LocationsValidator()
         self._validators['locationssrc'] = v_choropleth.LocationssrcValidator()
         self._validators['marker'] = v_choropleth.MarkerValidator()
         self._validators['name'] = v_choropleth.NameValidator()
-        self._validators['opacity'] = v_choropleth.OpacityValidator()
         self._validators['reversescale'] = v_choropleth.ReversescaleValidator()
         self._validators['selected'] = v_choropleth.SelectedValidator()
         self._validators['selectedpoints'
                         ] = v_choropleth.SelectedpointsValidator()
-        self._validators['showlegend'] = v_choropleth.ShowlegendValidator()
         self._validators['showscale'] = v_choropleth.ShowscaleValidator()
         self._validators['stream'] = v_choropleth.StreamValidator()
         self._validators['text'] = v_choropleth.TextValidator()
@@ -63595,8 +68457,6 @@ an instance of plotly.graph_objs.Choropleth"""
         self['ids'] = ids if ids is not None else _v
         _v = arg.pop('idssrc', None)
         self['idssrc'] = idssrc if idssrc is not None else _v
-        _v = arg.pop('legendgroup', None)
-        self['legendgroup'] = legendgroup if legendgroup is not None else _v
         _v = arg.pop('locationmode', None)
         self['locationmode'] = locationmode if locationmode is not None else _v
         _v = arg.pop('locations', None)
@@ -63607,8 +68467,6 @@ an instance of plotly.graph_objs.Choropleth"""
         self['marker'] = marker if marker is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
-        _v = arg.pop('opacity', None)
-        self['opacity'] = opacity if opacity is not None else _v
         _v = arg.pop('reversescale', None)
         self['reversescale'] = reversescale if reversescale is not None else _v
         _v = arg.pop('selected', None)
@@ -63616,8 +68474,6 @@ an instance of plotly.graph_objs.Choropleth"""
         _v = arg.pop('selectedpoints', None)
         self['selectedpoints'
             ] = selectedpoints if selectedpoints is not None else _v
-        _v = arg.pop('showlegend', None)
-        self['showlegend'] = showlegend if showlegend is not None else _v
         _v = arg.pop('showscale', None)
         self['showscale'] = showscale if showscale is not None else _v
         _v = arg.pop('stream', None)
@@ -64560,6 +69416,14 @@ class Carpet(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -64575,14 +69439,15 @@ class Carpet(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -64639,29 +69504,6 @@ class Carpet(_BaseTraceType):
     def idssrc(self, val):
         self['idssrc'] = val
 
-    # legendgroup
-    # -----------
-    @property
-    def legendgroup(self):
-        """
-        Sets the legend group for this trace. Traces part of the same
-        legend group hide/show at the same time when toggling legend
-        items.
-    
-        The 'legendgroup' property is a string and must be specified as:
-          - A string
-          - A number that will be converted to a string
-
-        Returns
-        -------
-        str
-        """
-        return self['legendgroup']
-
-    @legendgroup.setter
-    def legendgroup(self, val):
-        self['legendgroup'] = val
-
     # name
     # ----
     @property
@@ -64703,51 +69545,6 @@ class Carpet(_BaseTraceType):
     @opacity.setter
     def opacity(self, val):
         self['opacity'] = val
-
-    # selectedpoints
-    # --------------
-    @property
-    def selectedpoints(self):
-        """
-        Array containing integer indices of selected points. Has an
-        effect only for traces that support selections. Note that an
-        empty array means an empty selection where the `unselected` are
-        turned on for all points, whereas, any other non-array values
-        means no selection all where the `selected` and `unselected`
-        styles have no effect.
-    
-        The 'selectedpoints' property accepts values of any type
-
-        Returns
-        -------
-        Any
-        """
-        return self['selectedpoints']
-
-    @selectedpoints.setter
-    def selectedpoints(self, val):
-        self['selectedpoints'] = val
-
-    # showlegend
-    # ----------
-    @property
-    def showlegend(self):
-        """
-        Determines whether or not an item corresponding to this trace
-        is shown in the legend.
-    
-        The 'showlegend' property must be specified as a bool
-        (either True, or False)
-
-        Returns
-        -------
-        bool
-        """
-        return self['showlegend']
-
-    @showlegend.setter
-    def showlegend(self, val):
-        self['showlegend'] = val
 
     # stream
     # ------
@@ -65075,25 +69872,11 @@ class Carpet(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
-        legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
-        showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
         stream
             plotly.graph_objs.carpet.Stream instance or dict with
             compatible properties
@@ -65171,11 +69954,8 @@ class Carpet(_BaseTraceType):
         hoverlabel=None,
         ids=None,
         idssrc=None,
-        legendgroup=None,
         name=None,
         opacity=None,
-        selectedpoints=None,
-        showlegend=None,
         stream=None,
         uid=None,
         uirevision=None,
@@ -65269,25 +70049,11 @@ class Carpet(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
-        legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
-        showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
         stream
             plotly.graph_objs.carpet.Stream instance or dict with
             compatible properties
@@ -65393,11 +70159,8 @@ an instance of plotly.graph_objs.Carpet"""
         self._validators['hoverlabel'] = v_carpet.HoverlabelValidator()
         self._validators['ids'] = v_carpet.IdsValidator()
         self._validators['idssrc'] = v_carpet.IdssrcValidator()
-        self._validators['legendgroup'] = v_carpet.LegendgroupValidator()
         self._validators['name'] = v_carpet.NameValidator()
         self._validators['opacity'] = v_carpet.OpacityValidator()
-        self._validators['selectedpoints'] = v_carpet.SelectedpointsValidator()
-        self._validators['showlegend'] = v_carpet.ShowlegendValidator()
         self._validators['stream'] = v_carpet.StreamValidator()
         self._validators['uid'] = v_carpet.UidValidator()
         self._validators['uirevision'] = v_carpet.UirevisionValidator()
@@ -65454,17 +70217,10 @@ an instance of plotly.graph_objs.Carpet"""
         self['ids'] = ids if ids is not None else _v
         _v = arg.pop('idssrc', None)
         self['idssrc'] = idssrc if idssrc is not None else _v
-        _v = arg.pop('legendgroup', None)
-        self['legendgroup'] = legendgroup if legendgroup is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('opacity', None)
         self['opacity'] = opacity if opacity is not None else _v
-        _v = arg.pop('selectedpoints', None)
-        self['selectedpoints'
-            ] = selectedpoints if selectedpoints is not None else _v
-        _v = arg.pop('showlegend', None)
-        self['showlegend'] = showlegend if showlegend is not None else _v
         _v = arg.pop('stream', None)
         self['stream'] = stream if stream is not None else _v
         _v = arg.pop('uid', None)
@@ -65724,6 +70480,14 @@ class Candlestick(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -65739,14 +70503,15 @@ class Candlestick(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -67142,6 +71907,14 @@ class Box(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -67157,14 +71930,15 @@ class Box(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -67201,6 +71975,62 @@ class Box(_BaseTraceType):
     @hoveron.setter
     def hoveron(self, val):
         self['hoveron'] = val
+
+    # hovertemplate
+    # -------------
+    @property
+    def hovertemplate(self):
+        """
+        Template string used for rendering the information that appear
+        on hover box. Note that this will override `hoverinfo`.
+        Variables are inserted using %{variable}, for example "y:
+        %{y}". Numbers are formatted using d3-format's syntax
+        %{variable:d3-format}, for example "Price: %{y:$.2f}". See http
+        s://github.com/d3/d3-format/blob/master/README.md#locale_format
+        for details on the formatting syntax. The variables available
+        in `hovertemplate` are the ones emitted as event data described
+        at this link https://plot.ly/javascript/plotlyjs-events/#event-
+        data. Additionally, every attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        Anything contained in tag `<extra>` is displayed in the
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
+    
+        The 'hovertemplate' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self['hovertemplate']
+
+    @hovertemplate.setter
+    def hovertemplate(self, val):
+        self['hovertemplate'] = val
+
+    # hovertemplatesrc
+    # ----------------
+    @property
+    def hovertemplatesrc(self):
+        """
+        Sets the source reference on plot.ly for  hovertemplate .
+    
+        The 'hovertemplatesrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hovertemplatesrc']
+
+    @hovertemplatesrc.setter
+    def hovertemplatesrc(self, val):
+        self['hovertemplatesrc'] = val
 
     # hovertext
     # ---------
@@ -68136,6 +72966,27 @@ class Box(_BaseTraceType):
         hoveron
             Do the hover effects highlight individual boxes  or
             sample points or both?
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
         hovertext
             Same as `text`.
         hovertextsrc
@@ -68298,6 +73149,8 @@ class Box(_BaseTraceType):
         hoverinfosrc=None,
         hoverlabel=None,
         hoveron=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
         hovertext=None,
         hovertextsrc=None,
         ids=None,
@@ -68397,6 +73250,27 @@ class Box(_BaseTraceType):
         hoveron
             Do the hover effects highlight individual boxes  or
             sample points or both?
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
         hovertext
             Same as `text`.
         hovertextsrc
@@ -68587,6 +73461,9 @@ an instance of plotly.graph_objs.Box"""
         self._validators['hoverinfosrc'] = v_box.HoverinfosrcValidator()
         self._validators['hoverlabel'] = v_box.HoverlabelValidator()
         self._validators['hoveron'] = v_box.HoveronValidator()
+        self._validators['hovertemplate'] = v_box.HovertemplateValidator()
+        self._validators['hovertemplatesrc'] = v_box.HovertemplatesrcValidator(
+        )
         self._validators['hovertext'] = v_box.HovertextValidator()
         self._validators['hovertextsrc'] = v_box.HovertextsrcValidator()
         self._validators['ids'] = v_box.IdsValidator()
@@ -68649,6 +73526,12 @@ an instance of plotly.graph_objs.Box"""
         self['hoverlabel'] = hoverlabel if hoverlabel is not None else _v
         _v = arg.pop('hoveron', None)
         self['hoveron'] = hoveron if hoveron is not None else _v
+        _v = arg.pop('hovertemplate', None)
+        self['hovertemplate'
+            ] = hovertemplate if hovertemplate is not None else _v
+        _v = arg.pop('hovertemplatesrc', None)
+        self['hovertemplatesrc'
+            ] = hovertemplatesrc if hovertemplatesrc is not None else _v
         _v = arg.pop('hovertext', None)
         self['hovertext'] = hovertext if hovertext is not None else _v
         _v = arg.pop('hovertextsrc', None)
@@ -68934,6 +73817,14 @@ class Barpolar(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -68949,14 +73840,15 @@ class Barpolar(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -68988,7 +73880,9 @@ class Barpolar(_BaseTraceType):
         data. Additionally, every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
         Anything contained in tag `<extra>` is displayed in the
-        secondary box, for example "<extra>{fullData.name}</extra>".
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
     
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -69858,7 +74752,8 @@ class Barpolar(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -70074,7 +74969,8 @@ class Barpolar(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -70787,6 +75683,14 @@ class Bar(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -70802,14 +75706,15 @@ class Bar(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -70841,7 +75746,9 @@ class Bar(_BaseTraceType):
         data. Additionally, every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
         Anything contained in tag `<extra>` is displayed in the
-        secondary box, for example "<extra>{fullData.name}</extra>".
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
     
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -72129,7 +77036,8 @@ class Bar(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -72437,7 +77345,8 @@ class Bar(_BaseTraceType):
             per-point (the ones that are `arrayOk: true`) are
             available.  Anything contained in tag `<extra>` is
             displayed in the secondary box, for example
-            "<extra>{fullData.name}</extra>".
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
             Sets the source reference on plot.ly for  hovertemplate
             .
@@ -72953,6 +77862,14 @@ class Area(_BaseTraceType):
     
             Supported dict properties:
                 
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
                 bgcolor
                     Sets the background color of the hover labels
                     for this trace
@@ -72968,14 +77885,15 @@ class Area(_BaseTraceType):
                 font
                     Sets the font used in hover labels.
                 namelength
-                    Sets the length (in number of characters) of
-                    the trace name in the hover labels for this
-                    trace. -1 shows the whole name regardless of
-                    length. 0-3 shows the first 0-3 characters, and
-                    an integer >3 will show the whole name if it is
-                    less than that many characters, but if it is
-                    longer, will truncate to `namelength - 3`
-                    characters and add an ellipsis.
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
                 namelengthsrc
                     Sets the source reference on plot.ly for
                     namelength .
@@ -73198,30 +78116,6 @@ class Area(_BaseTraceType):
     @rsrc.setter
     def rsrc(self, val):
         self['rsrc'] = val
-
-    # selectedpoints
-    # --------------
-    @property
-    def selectedpoints(self):
-        """
-        Array containing integer indices of selected points. Has an
-        effect only for traces that support selections. Note that an
-        empty array means an empty selection where the `unselected` are
-        turned on for all points, whereas, any other non-array values
-        means no selection all where the `selected` and `unselected`
-        styles have no effect.
-    
-        The 'selectedpoints' property accepts values of any type
-
-        Returns
-        -------
-        Any
-        """
-        return self['selectedpoints']
-
-    @selectedpoints.setter
-    def selectedpoints(self, val):
-        self['selectedpoints'] = val
 
     # showlegend
     # ----------
@@ -73455,13 +78349,6 @@ class Area(_BaseTraceType):
             legacy polar chart only.
         rsrc
             Sets the source reference on plot.ly for  r .
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
@@ -73519,7 +78406,6 @@ class Area(_BaseTraceType):
         opacity=None,
         r=None,
         rsrc=None,
-        selectedpoints=None,
         showlegend=None,
         stream=None,
         t=None,
@@ -73578,13 +78464,6 @@ class Area(_BaseTraceType):
             legacy polar chart only.
         rsrc
             Sets the source reference on plot.ly for  r .
-        selectedpoints
-            Array containing integer indices of selected points.
-            Has an effect only for traces that support selections.
-            Note that an empty array means an empty selection where
-            the `unselected` are turned on for all points, whereas,
-            any other non-array values means no selection all where
-            the `selected` and `unselected` styles have no effect.
         showlegend
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
@@ -73670,7 +78549,6 @@ an instance of plotly.graph_objs.Area"""
         self._validators['opacity'] = v_area.OpacityValidator()
         self._validators['r'] = v_area.RValidator()
         self._validators['rsrc'] = v_area.RsrcValidator()
-        self._validators['selectedpoints'] = v_area.SelectedpointsValidator()
         self._validators['showlegend'] = v_area.ShowlegendValidator()
         self._validators['stream'] = v_area.StreamValidator()
         self._validators['t'] = v_area.TValidator()
@@ -73708,9 +78586,6 @@ an instance of plotly.graph_objs.Area"""
         self['r'] = r if r is not None else _v
         _v = arg.pop('rsrc', None)
         self['rsrc'] = rsrc if rsrc is not None else _v
-        _v = arg.pop('selectedpoints', None)
-        self['selectedpoints'
-            ] = selectedpoints if selectedpoints is not None else _v
         _v = arg.pop('showlegend', None)
         self['showlegend'] = showlegend if showlegend is not None else _v
         _v = arg.pop('stream', None)
@@ -74009,9 +78884,12 @@ an instance of plotly.graph_objs.Frame"""
         self._skip_invalid = False
 
 
+from plotly.graph_objs import waterfall
+from plotly.graph_objs import volume
 from plotly.graph_objs import violin
 from plotly.graph_objs import table
 from plotly.graph_objs import surface
+from plotly.graph_objs import sunburst
 from plotly.graph_objs import streamtube
 from plotly.graph_objs import splom
 from plotly.graph_objs import scatterternary

@@ -23,8 +23,8 @@ class ZValidator(_plotly_utils.basevalidators.CompoundValidator):
                 to the edges.
             locations
                 Specifies the location(s) of slices on the
-                axis. When not locations specified slices would
-                be created for all points of the axis z except
+                axis. When not specified slices would be
+                created for all points of the axis z except
                 start and end.
             locationssrc
                 Sets the source reference on plot.ly for
@@ -61,8 +61,8 @@ class YValidator(_plotly_utils.basevalidators.CompoundValidator):
                 to the edges.
             locations
                 Specifies the location(s) of slices on the
-                axis. When not locations specified slices would
-                be created for all points of the axis y except
+                axis. When not specified slices would be
+                created for all points of the axis y except
                 start and end.
             locationssrc
                 Sets the source reference on plot.ly for
@@ -99,8 +99,8 @@ class XValidator(_plotly_utils.basevalidators.CompoundValidator):
                 to the edges.
             locations
                 Specifies the location(s) of slices on the
-                axis. When not locations specified slices would
-                be created for all points of the axis x except
+                axis. When not specified slices would be
+                created for all points of the axis x except
                 start and end.
             locationssrc
                 Sets the source reference on plot.ly for

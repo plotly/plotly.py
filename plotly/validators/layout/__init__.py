@@ -869,6 +869,62 @@ class WidthValidator(_plotly_utils.basevalidators.NumberValidator):
 import _plotly_utils.basevalidators
 
 
+class WaterfallmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
+
+    def __init__(
+        self, plotly_name='waterfallmode', parent_name='layout', **kwargs
+    ):
+        super(WaterfallmodeValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop('edit_type', 'calc'),
+            role=kwargs.pop('role', 'info'),
+            values=kwargs.pop('values', ['group', 'overlay']),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class WaterfallgroupgapValidator(_plotly_utils.basevalidators.NumberValidator):
+
+    def __init__(
+        self, plotly_name='waterfallgroupgap', parent_name='layout', **kwargs
+    ):
+        super(WaterfallgroupgapValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop('edit_type', 'calc'),
+            max=kwargs.pop('max', 1),
+            min=kwargs.pop('min', 0),
+            role=kwargs.pop('role', 'style'),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class WaterfallgapValidator(_plotly_utils.basevalidators.NumberValidator):
+
+    def __init__(
+        self, plotly_name='waterfallgap', parent_name='layout', **kwargs
+    ):
+        super(WaterfallgapValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop('edit_type', 'calc'),
+            max=kwargs.pop('max', 1),
+            min=kwargs.pop('min', 0),
+            role=kwargs.pop('role', 'style'),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class ViolinmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
 
     def __init__(
@@ -1217,6 +1273,25 @@ class TemplateValidator(_plotly_utils.basevalidators.BaseTemplateValidator):
                 instance or dict with compatible properties
 """
             ),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class SunburstcolorwayValidator(
+    _plotly_utils.basevalidators.ColorlistValidator
+):
+
+    def __init__(
+        self, plotly_name='sunburstcolorway', parent_name='layout', **kwargs
+    ):
+        super(SunburstcolorwayValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop('edit_type', 'calc'),
+            role=kwargs.pop('role', 'style'),
             **kwargs
         )
 
@@ -2055,6 +2130,11 @@ class LegendValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the legend.
             font
                 Sets the font used to text the legend items.
+            itemsizing
+                Determines if the legend items symbols scale
+                with their corresponding "trace" attributes or
+                remain "constant" independent of the symbol
+                size on the graph.
             orientation
                 Sets the orientation of the legend.
             tracegroupgap
@@ -2242,6 +2322,11 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_class_str=kwargs.pop('data_class_str', 'Hoverlabel'),
             data_docs=kwargs.pop(
                 'data_docs', """
+            align
+                Sets the horizontal alignment of the text
+                content within hover label box. Has an effect
+                only if the hover label text spans more two or
+                more lines
             bgcolor
                 Sets the background color of all hover labels
                 on graph
@@ -2577,6 +2662,28 @@ class FontValidator(_plotly_utils.basevalidators.CompoundValidator):
 
 """
             ),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class ExtendsunburstcolorsValidator(
+    _plotly_utils.basevalidators.BooleanValidator
+):
+
+    def __init__(
+        self,
+        plotly_name='extendsunburstcolors',
+        parent_name='layout',
+        **kwargs
+    ):
+        super(ExtendsunburstcolorsValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop('edit_type', 'calc'),
+            role=kwargs.pop('role', 'style'),
             **kwargs
         )
 

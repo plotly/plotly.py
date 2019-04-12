@@ -141,6 +141,9 @@ class DataValidator(_plotly_utils.basevalidators.CompoundValidator):
             streamtube
                 plotly.graph_objs.layout.template.data.Streamtu
                 be instance or dict with compatible properties
+            sunburst
+                plotly.graph_objs.layout.template.data.Sunburst
+                instance or dict with compatible properties
             surface
                 plotly.graph_objs.layout.template.data.Surface
                 instance or dict with compatible properties
@@ -150,6 +153,12 @@ class DataValidator(_plotly_utils.basevalidators.CompoundValidator):
             violin
                 plotly.graph_objs.layout.template.data.Violin
                 instance or dict with compatible properties
+            volume
+                plotly.graph_objs.layout.template.data.Volume
+                instance or dict with compatible properties
+            waterfall
+                plotly.graph_objs.layout.template.data.Waterfal
+                l instance or dict with compatible properties
 """
             ),
             **kwargs
