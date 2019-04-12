@@ -6,8 +6,13 @@ A module intended for use with Nose.
 
 """
 from __future__ import absolute_import
+from unittest import skip
 
-from plotly.graph_objs import Annotations, Data
+from nose.tools import raises
+
+from plotly.exceptions import (PlotlyError, PlotlyDictKeyError,
+                               PlotlyDictValueError, PlotlyListEntryError)
+from plotly.graph_objs import Annotation, Annotations, Data, Figure, Layout
 
 
 def setup():

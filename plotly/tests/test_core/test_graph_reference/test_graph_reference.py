@@ -4,11 +4,16 @@ A module to test functionality related to *using* the graph reference.
 """
 from __future__ import absolute_import
 
+import os
 from unittest import TestCase
 
-from plotly import graph_reference as gr
-from plotly.graph_reference import string_to_class_name, get_role
+from nose.plugins.attrib import attr
+from requests.compat import json as _json
 
+from plotly import graph_reference as gr
+from plotly.api import v2
+from plotly.graph_reference import string_to_class_name, get_role
+from plotly.tests.utils import PlotlyTestCase
 
 FAKE_API_DOMAIN = 'https://api.am.not.here.ly'
 
@@ -32,7 +37,7 @@ FAKE_API_DOMAIN = 'https://api.am.not.here.ly'
     #     self.assertEqual(schema, default_schema, msg=msg)
 
 
-class TestStringToClass(TestCase):
+class TestStringToClass(PlotlyTestCase):
 
     def test_capitalize_first_letter(self):
 

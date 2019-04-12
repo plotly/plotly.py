@@ -19,6 +19,7 @@ from requests.compat import json as _json
 
 from plotly import optional_imports, utils
 from plotly.graph_objs import Scatter, Scatter3d, Figure, Data
+from plotly.grid_objs import Column
 
 matplotlylib = optional_imports.get_module('plotly.matplotlylib')
 
@@ -173,6 +174,24 @@ df = pd.DataFrame(columns=['col 1'],
 
 rng = pd.date_range('1/1/2011', periods=2, freq='H')
 ts = pd.Series([1.5, 2.5], index=rng)
+
+
+def test_column_json_encoding():
+    columns = [
+        Column(numeric_list, 'col 1'),
+        Column(mixed_list, 'col 2'),
+        Column(np_list, 'col 3')
+    ]
+    json_columns = _json.dumps(
+        columns, cls=utils.PlotlyJSONEncoder, sort_keys=True
+    )
+    assert('[{"data": [1, 2, 3], "name": "col 1"}, '
+           '{"data": [1, "A", "2014-01-05", '
+           '"2014-01-05 01:01:01", '
+           '"2014-01-05 01:01:01.000001"], '
+           '"name": "col 2"}, '
+           '{"data": [1, 2, 3, null, null, null, '
+           '"2014-01-05"], "name": "col 3"}]' == json_columns)
 
 
 def test_figure_json_encoding():

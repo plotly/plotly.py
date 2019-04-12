@@ -1,5 +1,7 @@
 from unittest import TestCase
 
+from nose.tools import raises
+import plotly.tools as tls
 from plotly.exceptions import PlotlyError
 import plotly.colors as colors
 

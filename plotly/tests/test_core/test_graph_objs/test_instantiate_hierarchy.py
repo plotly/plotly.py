@@ -17,15 +17,7 @@ class HierarchyTest(TestCase):
         for datatypes_module in datatype_modules:
             module = importlib.import_module(datatypes_module)
             for name, obj in inspect.getmembers(module, inspect.isclass):
-                if name.startswith('_'):
-                    # Skip non-public classes
-                    continue
-                try:
-                    v = obj()
-                except Exception as e:
-                    print(name, obj)
-                    raise e
-
+                v = obj()
                 if obj.__module__ == 'plotly.graph_objs._deprecations':
                     self.assertTrue(
                         isinstance(v, list) or isinstance(v, dict)
