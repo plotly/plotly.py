@@ -35,8 +35,8 @@ class Z(_BaseTraceHierarchyType):
     def locations(self):
         """
         Specifies the location(s) of slices on the axis. When not
-        locations specified slices would be created for all points of
-        the axis z except start and end.
+        specified slices would be created for all points of the axis z
+        except start and end.
     
         The 'locations' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
@@ -111,8 +111,8 @@ class Z(_BaseTraceHierarchyType):
             openings parallel to the edges.
         locations
             Specifies the location(s) of slices on the axis. When
-            not locations specified slices would be created for all
-            points of the axis z except start and end.
+            not specified slices would be created for all points of
+            the axis z except start and end.
         locationssrc
             Sets the source reference on plot.ly for  locations .
         show
@@ -145,8 +145,8 @@ class Z(_BaseTraceHierarchyType):
             openings parallel to the edges.
         locations
             Specifies the location(s) of slices on the axis. When
-            not locations specified slices would be created for all
-            points of the axis z except start and end.
+            not specified slices would be created for all points of
+            the axis z except start and end.
         locationssrc
             Sets the source reference on plot.ly for  locations .
         show
@@ -245,8 +245,8 @@ class Y(_BaseTraceHierarchyType):
     def locations(self):
         """
         Specifies the location(s) of slices on the axis. When not
-        locations specified slices would be created for all points of
-        the axis y except start and end.
+        specified slices would be created for all points of the axis y
+        except start and end.
     
         The 'locations' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
@@ -321,8 +321,8 @@ class Y(_BaseTraceHierarchyType):
             openings parallel to the edges.
         locations
             Specifies the location(s) of slices on the axis. When
-            not locations specified slices would be created for all
-            points of the axis y except start and end.
+            not specified slices would be created for all points of
+            the axis y except start and end.
         locationssrc
             Sets the source reference on plot.ly for  locations .
         show
@@ -355,8 +355,8 @@ class Y(_BaseTraceHierarchyType):
             openings parallel to the edges.
         locations
             Specifies the location(s) of slices on the axis. When
-            not locations specified slices would be created for all
-            points of the axis y except start and end.
+            not specified slices would be created for all points of
+            the axis y except start and end.
         locationssrc
             Sets the source reference on plot.ly for  locations .
         show
@@ -455,8 +455,8 @@ class X(_BaseTraceHierarchyType):
     def locations(self):
         """
         Specifies the location(s) of slices on the axis. When not
-        locations specified slices would be created for all points of
-        the axis x except start and end.
+        specified slices would be created for all points of the axis x
+        except start and end.
     
         The 'locations' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
@@ -531,8 +531,8 @@ class X(_BaseTraceHierarchyType):
             openings parallel to the edges.
         locations
             Specifies the location(s) of slices on the axis. When
-            not locations specified slices would be created for all
-            points of the axis x except start and end.
+            not specified slices would be created for all points of
+            the axis x except start and end.
         locationssrc
             Sets the source reference on plot.ly for  locations .
         show
@@ -565,8 +565,8 @@ class X(_BaseTraceHierarchyType):
             openings parallel to the edges.
         locations
             Specifies the location(s) of slices on the axis. When
-            not locations specified slices would be created for all
-            points of the axis x except start and end.
+            not specified slices would be created for all points of
+            the axis x except start and end.
         locationssrc
             Sets the source reference on plot.ly for  locations .
         show

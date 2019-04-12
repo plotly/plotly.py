@@ -123,40 +123,6 @@ class StreamValidator(_plotly_utils.basevalidators.CompoundValidator):
 import _plotly_utils.basevalidators
 
 
-class ShowlegendValidator(_plotly_utils.basevalidators.BooleanValidator):
-
-    def __init__(
-        self, plotly_name='showlegend', parent_name='parcoords', **kwargs
-    ):
-        super(ShowlegendValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'style'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class SelectedpointsValidator(_plotly_utils.basevalidators.AnyValidator):
-
-    def __init__(
-        self, plotly_name='selectedpoints', parent_name='parcoords', **kwargs
-    ):
-        super(SelectedpointsValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
 class RangefontValidator(_plotly_utils.basevalidators.CompoundValidator):
 
     def __init__(
@@ -190,25 +156,6 @@ class RangefontValidator(_plotly_utils.basevalidators.CompoundValidator):
 
 """
             ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class OpacityValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='opacity', parent_name='parcoords', **kwargs
-    ):
-        super(OpacityValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'style'),
-            max=kwargs.pop('max', 1),
-            min=kwargs.pop('min', 0),
-            role=kwargs.pop('role', 'style'),
             **kwargs
         )
 
@@ -325,23 +272,6 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
 import _plotly_utils.basevalidators
 
 
-class LegendgroupValidator(_plotly_utils.basevalidators.StringValidator):
-
-    def __init__(
-        self, plotly_name='legendgroup', parent_name='parcoords', **kwargs
-    ):
-        super(LegendgroupValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'style'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
 class LabelfontValidator(_plotly_utils.basevalidators.CompoundValidator):
 
     def __init__(
@@ -408,43 +338,6 @@ class IdsValidator(_plotly_utils.basevalidators.DataArrayValidator):
             anim=kwargs.pop('anim', True),
             edit_type=kwargs.pop('edit_type', 'calc'),
             role=kwargs.pop('role', 'data'),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class HoverinfosrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(
-        self, plotly_name='hoverinfosrc', parent_name='parcoords', **kwargs
-    ):
-        super(HoverinfosrcValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class HoverinfoValidator(_plotly_utils.basevalidators.FlaglistValidator):
-
-    def __init__(
-        self, plotly_name='hoverinfo', parent_name='parcoords', **kwargs
-    ):
-        super(HoverinfoValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'none'),
-            extras=kwargs.pop('extras', ['all', 'none', 'skip']),
-            flags=kwargs.pop('flags', ['x', 'y', 'z', 'text', 'name']),
-            role=kwargs.pop('role', 'info'),
             **kwargs
         )
 

@@ -65,6 +65,27 @@ class Z(_BaseTraceHierarchyType):
     def color(self, val):
         self['color'] = val
 
+    # end
+    # ---
+    @property
+    def end(self):
+        """
+        Sets the end contour level value. Must be more than
+        `contours.start`
+    
+        The 'end' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self['end']
+
+    @end.setter
+    def end(self, val):
+        self['end'] = val
+
     # highlight
     # ---------
     @property
@@ -228,6 +249,47 @@ class Z(_BaseTraceHierarchyType):
     def show(self, val):
         self['show'] = val
 
+    # size
+    # ----
+    @property
+    def size(self):
+        """
+        Sets the step between each contour level. Must be positive.
+    
+        The 'size' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self['size']
+
+    @size.setter
+    def size(self, val):
+        self['size'] = val
+
+    # start
+    # -----
+    @property
+    def start(self):
+        """
+        Sets the starting contour level value. Must be less than
+        `contours.end`
+    
+        The 'start' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self['start']
+
+    @start.setter
+    def start(self, val):
+        self['start'] = val
+
     # usecolormap
     # -----------
     @property
@@ -282,6 +344,9 @@ class Z(_BaseTraceHierarchyType):
         return """\
         color
             Sets the color of the contour lines.
+        end
+            Sets the end contour level value. Must be more than
+            `contours.start`
         highlight
             Determines whether or not contour lines about the z
             dimension are highlighted on hover.
@@ -295,6 +360,12 @@ class Z(_BaseTraceHierarchyType):
         show
             Determines whether or not contour lines about the z
             dimension are drawn.
+        size
+            Sets the step between each contour level. Must be
+            positive.
+        start
+            Sets the starting contour level value. Must be less
+            than `contours.end`
         usecolormap
             An alternate to "color". Determines whether or not the
             contour lines are colored using the trace "colorscale".
@@ -306,11 +377,14 @@ class Z(_BaseTraceHierarchyType):
         self,
         arg=None,
         color=None,
+        end=None,
         highlight=None,
         highlightcolor=None,
         highlightwidth=None,
         project=None,
         show=None,
+        size=None,
+        start=None,
         usecolormap=None,
         width=None,
         **kwargs
@@ -325,6 +399,9 @@ class Z(_BaseTraceHierarchyType):
             an instance of plotly.graph_objs.surface.contours.Z
         color
             Sets the color of the contour lines.
+        end
+            Sets the end contour level value. Must be more than
+            `contours.start`
         highlight
             Determines whether or not contour lines about the z
             dimension are highlighted on hover.
@@ -338,6 +415,12 @@ class Z(_BaseTraceHierarchyType):
         show
             Determines whether or not contour lines about the z
             dimension are drawn.
+        size
+            Sets the step between each contour level. Must be
+            positive.
+        start
+            Sets the starting contour level value. Must be less
+            than `contours.end`
         usecolormap
             An alternate to "color". Determines whether or not the
             contour lines are colored using the trace "colorscale".
@@ -377,11 +460,14 @@ an instance of plotly.graph_objs.surface.contours.Z"""
         # Initialize validators
         # ---------------------
         self._validators['color'] = v_z.ColorValidator()
+        self._validators['end'] = v_z.EndValidator()
         self._validators['highlight'] = v_z.HighlightValidator()
         self._validators['highlightcolor'] = v_z.HighlightcolorValidator()
         self._validators['highlightwidth'] = v_z.HighlightwidthValidator()
         self._validators['project'] = v_z.ProjectValidator()
         self._validators['show'] = v_z.ShowValidator()
+        self._validators['size'] = v_z.SizeValidator()
+        self._validators['start'] = v_z.StartValidator()
         self._validators['usecolormap'] = v_z.UsecolormapValidator()
         self._validators['width'] = v_z.WidthValidator()
 
@@ -389,6 +475,8 @@ an instance of plotly.graph_objs.surface.contours.Z"""
         # ----------------------------------
         _v = arg.pop('color', None)
         self['color'] = color if color is not None else _v
+        _v = arg.pop('end', None)
+        self['end'] = end if end is not None else _v
         _v = arg.pop('highlight', None)
         self['highlight'] = highlight if highlight is not None else _v
         _v = arg.pop('highlightcolor', None)
@@ -401,6 +489,10 @@ an instance of plotly.graph_objs.surface.contours.Z"""
         self['project'] = project if project is not None else _v
         _v = arg.pop('show', None)
         self['show'] = show if show is not None else _v
+        _v = arg.pop('size', None)
+        self['size'] = size if size is not None else _v
+        _v = arg.pop('start', None)
+        self['start'] = start if start is not None else _v
         _v = arg.pop('usecolormap', None)
         self['usecolormap'] = usecolormap if usecolormap is not None else _v
         _v = arg.pop('width', None)
@@ -479,6 +571,27 @@ class Y(_BaseTraceHierarchyType):
     @color.setter
     def color(self, val):
         self['color'] = val
+
+    # end
+    # ---
+    @property
+    def end(self):
+        """
+        Sets the end contour level value. Must be more than
+        `contours.start`
+    
+        The 'end' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self['end']
+
+    @end.setter
+    def end(self, val):
+        self['end'] = val
 
     # highlight
     # ---------
@@ -643,6 +756,47 @@ class Y(_BaseTraceHierarchyType):
     def show(self, val):
         self['show'] = val
 
+    # size
+    # ----
+    @property
+    def size(self):
+        """
+        Sets the step between each contour level. Must be positive.
+    
+        The 'size' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self['size']
+
+    @size.setter
+    def size(self, val):
+        self['size'] = val
+
+    # start
+    # -----
+    @property
+    def start(self):
+        """
+        Sets the starting contour level value. Must be less than
+        `contours.end`
+    
+        The 'start' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self['start']
+
+    @start.setter
+    def start(self, val):
+        self['start'] = val
+
     # usecolormap
     # -----------
     @property
@@ -697,6 +851,9 @@ class Y(_BaseTraceHierarchyType):
         return """\
         color
             Sets the color of the contour lines.
+        end
+            Sets the end contour level value. Must be more than
+            `contours.start`
         highlight
             Determines whether or not contour lines about the y
             dimension are highlighted on hover.
@@ -710,6 +867,12 @@ class Y(_BaseTraceHierarchyType):
         show
             Determines whether or not contour lines about the y
             dimension are drawn.
+        size
+            Sets the step between each contour level. Must be
+            positive.
+        start
+            Sets the starting contour level value. Must be less
+            than `contours.end`
         usecolormap
             An alternate to "color". Determines whether or not the
             contour lines are colored using the trace "colorscale".
@@ -721,11 +884,14 @@ class Y(_BaseTraceHierarchyType):
         self,
         arg=None,
         color=None,
+        end=None,
         highlight=None,
         highlightcolor=None,
         highlightwidth=None,
         project=None,
         show=None,
+        size=None,
+        start=None,
         usecolormap=None,
         width=None,
         **kwargs
@@ -740,6 +906,9 @@ class Y(_BaseTraceHierarchyType):
             an instance of plotly.graph_objs.surface.contours.Y
         color
             Sets the color of the contour lines.
+        end
+            Sets the end contour level value. Must be more than
+            `contours.start`
         highlight
             Determines whether or not contour lines about the y
             dimension are highlighted on hover.
@@ -753,6 +922,12 @@ class Y(_BaseTraceHierarchyType):
         show
             Determines whether or not contour lines about the y
             dimension are drawn.
+        size
+            Sets the step between each contour level. Must be
+            positive.
+        start
+            Sets the starting contour level value. Must be less
+            than `contours.end`
         usecolormap
             An alternate to "color". Determines whether or not the
             contour lines are colored using the trace "colorscale".
@@ -792,11 +967,14 @@ an instance of plotly.graph_objs.surface.contours.Y"""
         # Initialize validators
         # ---------------------
         self._validators['color'] = v_y.ColorValidator()
+        self._validators['end'] = v_y.EndValidator()
         self._validators['highlight'] = v_y.HighlightValidator()
         self._validators['highlightcolor'] = v_y.HighlightcolorValidator()
         self._validators['highlightwidth'] = v_y.HighlightwidthValidator()
         self._validators['project'] = v_y.ProjectValidator()
         self._validators['show'] = v_y.ShowValidator()
+        self._validators['size'] = v_y.SizeValidator()
+        self._validators['start'] = v_y.StartValidator()
         self._validators['usecolormap'] = v_y.UsecolormapValidator()
         self._validators['width'] = v_y.WidthValidator()
 
@@ -804,6 +982,8 @@ an instance of plotly.graph_objs.surface.contours.Y"""
         # ----------------------------------
         _v = arg.pop('color', None)
         self['color'] = color if color is not None else _v
+        _v = arg.pop('end', None)
+        self['end'] = end if end is not None else _v
         _v = arg.pop('highlight', None)
         self['highlight'] = highlight if highlight is not None else _v
         _v = arg.pop('highlightcolor', None)
@@ -816,6 +996,10 @@ an instance of plotly.graph_objs.surface.contours.Y"""
         self['project'] = project if project is not None else _v
         _v = arg.pop('show', None)
         self['show'] = show if show is not None else _v
+        _v = arg.pop('size', None)
+        self['size'] = size if size is not None else _v
+        _v = arg.pop('start', None)
+        self['start'] = start if start is not None else _v
         _v = arg.pop('usecolormap', None)
         self['usecolormap'] = usecolormap if usecolormap is not None else _v
         _v = arg.pop('width', None)
@@ -894,6 +1078,27 @@ class X(_BaseTraceHierarchyType):
     @color.setter
     def color(self, val):
         self['color'] = val
+
+    # end
+    # ---
+    @property
+    def end(self):
+        """
+        Sets the end contour level value. Must be more than
+        `contours.start`
+    
+        The 'end' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self['end']
+
+    @end.setter
+    def end(self, val):
+        self['end'] = val
 
     # highlight
     # ---------
@@ -1058,6 +1263,47 @@ class X(_BaseTraceHierarchyType):
     def show(self, val):
         self['show'] = val
 
+    # size
+    # ----
+    @property
+    def size(self):
+        """
+        Sets the step between each contour level. Must be positive.
+    
+        The 'size' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self['size']
+
+    @size.setter
+    def size(self, val):
+        self['size'] = val
+
+    # start
+    # -----
+    @property
+    def start(self):
+        """
+        Sets the starting contour level value. Must be less than
+        `contours.end`
+    
+        The 'start' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self['start']
+
+    @start.setter
+    def start(self, val):
+        self['start'] = val
+
     # usecolormap
     # -----------
     @property
@@ -1112,6 +1358,9 @@ class X(_BaseTraceHierarchyType):
         return """\
         color
             Sets the color of the contour lines.
+        end
+            Sets the end contour level value. Must be more than
+            `contours.start`
         highlight
             Determines whether or not contour lines about the x
             dimension are highlighted on hover.
@@ -1125,6 +1374,12 @@ class X(_BaseTraceHierarchyType):
         show
             Determines whether or not contour lines about the x
             dimension are drawn.
+        size
+            Sets the step between each contour level. Must be
+            positive.
+        start
+            Sets the starting contour level value. Must be less
+            than `contours.end`
         usecolormap
             An alternate to "color". Determines whether or not the
             contour lines are colored using the trace "colorscale".
@@ -1136,11 +1391,14 @@ class X(_BaseTraceHierarchyType):
         self,
         arg=None,
         color=None,
+        end=None,
         highlight=None,
         highlightcolor=None,
         highlightwidth=None,
         project=None,
         show=None,
+        size=None,
+        start=None,
         usecolormap=None,
         width=None,
         **kwargs
@@ -1155,6 +1413,9 @@ class X(_BaseTraceHierarchyType):
             an instance of plotly.graph_objs.surface.contours.X
         color
             Sets the color of the contour lines.
+        end
+            Sets the end contour level value. Must be more than
+            `contours.start`
         highlight
             Determines whether or not contour lines about the x
             dimension are highlighted on hover.
@@ -1168,6 +1429,12 @@ class X(_BaseTraceHierarchyType):
         show
             Determines whether or not contour lines about the x
             dimension are drawn.
+        size
+            Sets the step between each contour level. Must be
+            positive.
+        start
+            Sets the starting contour level value. Must be less
+            than `contours.end`
         usecolormap
             An alternate to "color". Determines whether or not the
             contour lines are colored using the trace "colorscale".
@@ -1207,11 +1474,14 @@ an instance of plotly.graph_objs.surface.contours.X"""
         # Initialize validators
         # ---------------------
         self._validators['color'] = v_x.ColorValidator()
+        self._validators['end'] = v_x.EndValidator()
         self._validators['highlight'] = v_x.HighlightValidator()
         self._validators['highlightcolor'] = v_x.HighlightcolorValidator()
         self._validators['highlightwidth'] = v_x.HighlightwidthValidator()
         self._validators['project'] = v_x.ProjectValidator()
         self._validators['show'] = v_x.ShowValidator()
+        self._validators['size'] = v_x.SizeValidator()
+        self._validators['start'] = v_x.StartValidator()
         self._validators['usecolormap'] = v_x.UsecolormapValidator()
         self._validators['width'] = v_x.WidthValidator()
 
@@ -1219,6 +1489,8 @@ an instance of plotly.graph_objs.surface.contours.X"""
         # ----------------------------------
         _v = arg.pop('color', None)
         self['color'] = color if color is not None else _v
+        _v = arg.pop('end', None)
+        self['end'] = end if end is not None else _v
         _v = arg.pop('highlight', None)
         self['highlight'] = highlight if highlight is not None else _v
         _v = arg.pop('highlightcolor', None)
@@ -1231,6 +1503,10 @@ an instance of plotly.graph_objs.surface.contours.X"""
         self['project'] = project if project is not None else _v
         _v = arg.pop('show', None)
         self['show'] = show if show is not None else _v
+        _v = arg.pop('size', None)
+        self['size'] = size if size is not None else _v
+        _v = arg.pop('start', None)
+        self['start'] = start if start is not None else _v
         _v = arg.pop('usecolormap', None)
         self['usecolormap'] = usecolormap if usecolormap is not None else _v
         _v = arg.pop('width', None)

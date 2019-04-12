@@ -791,6 +791,29 @@ class Data(_BaseLayoutHierarchyType):
     def streamtube(self, val):
         self['streamtube'] = val
 
+    # sunburst
+    # --------
+    @property
+    def sunburst(self):
+        """
+        The 'sunburst' property is a tuple of instances of
+        Sunburst that may be specified as:
+          - A list or tuple of instances of plotly.graph_objs.layout.template.data.Sunburst
+          - A list or tuple of dicts of string/value properties that
+            will be passed to the Sunburst constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        tuple[plotly.graph_objs.layout.template.data.Sunburst]
+        """
+        return self['sunburst']
+
+    @sunburst.setter
+    def sunburst(self, val):
+        self['sunburst'] = val
+
     # surface
     # -------
     @property
@@ -859,6 +882,52 @@ class Data(_BaseLayoutHierarchyType):
     @violin.setter
     def violin(self, val):
         self['violin'] = val
+
+    # volume
+    # ------
+    @property
+    def volume(self):
+        """
+        The 'volume' property is a tuple of instances of
+        Volume that may be specified as:
+          - A list or tuple of instances of plotly.graph_objs.layout.template.data.Volume
+          - A list or tuple of dicts of string/value properties that
+            will be passed to the Volume constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        tuple[plotly.graph_objs.layout.template.data.Volume]
+        """
+        return self['volume']
+
+    @volume.setter
+    def volume(self, val):
+        self['volume'] = val
+
+    # waterfall
+    # ---------
+    @property
+    def waterfall(self):
+        """
+        The 'waterfall' property is a tuple of instances of
+        Waterfall that may be specified as:
+          - A list or tuple of instances of plotly.graph_objs.layout.template.data.Waterfall
+          - A list or tuple of dicts of string/value properties that
+            will be passed to the Waterfall constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        tuple[plotly.graph_objs.layout.template.data.Waterfall]
+        """
+        return self['waterfall']
+
+    @waterfall.setter
+    def waterfall(self, val):
+        self['waterfall'] = val
 
     # property parent name
     # --------------------
@@ -973,6 +1042,9 @@ class Data(_BaseLayoutHierarchyType):
         streamtube
             plotly.graph_objs.layout.template.data.Streamtube
             instance or dict with compatible properties
+        sunburst
+            plotly.graph_objs.layout.template.data.Sunburst
+            instance or dict with compatible properties
         surface
             plotly.graph_objs.layout.template.data.Surface instance
             or dict with compatible properties
@@ -982,6 +1054,12 @@ class Data(_BaseLayoutHierarchyType):
         violin
             plotly.graph_objs.layout.template.data.Violin instance
             or dict with compatible properties
+        volume
+            plotly.graph_objs.layout.template.data.Volume instance
+            or dict with compatible properties
+        waterfall
+            plotly.graph_objs.layout.template.data.Waterfall
+            instance or dict with compatible properties
         """
 
     def __init__(
@@ -1021,9 +1099,12 @@ class Data(_BaseLayoutHierarchyType):
         scatterternary=None,
         splom=None,
         streamtube=None,
+        sunburst=None,
         surface=None,
         table=None,
         violin=None,
+        volume=None,
+        waterfall=None,
         **kwargs
     ):
         """
@@ -1136,6 +1217,9 @@ class Data(_BaseLayoutHierarchyType):
         streamtube
             plotly.graph_objs.layout.template.data.Streamtube
             instance or dict with compatible properties
+        sunburst
+            plotly.graph_objs.layout.template.data.Sunburst
+            instance or dict with compatible properties
         surface
             plotly.graph_objs.layout.template.data.Surface instance
             or dict with compatible properties
@@ -1145,6 +1229,12 @@ class Data(_BaseLayoutHierarchyType):
         violin
             plotly.graph_objs.layout.template.data.Violin instance
             or dict with compatible properties
+        volume
+            plotly.graph_objs.layout.template.data.Volume instance
+            or dict with compatible properties
+        waterfall
+            plotly.graph_objs.layout.template.data.Waterfall
+            instance or dict with compatible properties
 
         Returns
         -------
@@ -1213,9 +1303,12 @@ an instance of plotly.graph_objs.layout.template.Data"""
         self._validators['scatterternary'] = v_data.ScatterternarysValidator()
         self._validators['splom'] = v_data.SplomsValidator()
         self._validators['streamtube'] = v_data.StreamtubesValidator()
+        self._validators['sunburst'] = v_data.SunburstsValidator()
         self._validators['surface'] = v_data.SurfacesValidator()
         self._validators['table'] = v_data.TablesValidator()
         self._validators['violin'] = v_data.ViolinsValidator()
+        self._validators['volume'] = v_data.VolumesValidator()
+        self._validators['waterfall'] = v_data.WaterfallsValidator()
 
         # Populate data dict with properties
         # ----------------------------------
@@ -1293,12 +1386,18 @@ an instance of plotly.graph_objs.layout.template.Data"""
         self['splom'] = splom if splom is not None else _v
         _v = arg.pop('streamtube', None)
         self['streamtube'] = streamtube if streamtube is not None else _v
+        _v = arg.pop('sunburst', None)
+        self['sunburst'] = sunburst if sunburst is not None else _v
         _v = arg.pop('surface', None)
         self['surface'] = surface if surface is not None else _v
         _v = arg.pop('table', None)
         self['table'] = table if table is not None else _v
         _v = arg.pop('violin', None)
         self['violin'] = violin if violin is not None else _v
+        _v = arg.pop('volume', None)
+        self['volume'] = volume if volume is not None else _v
+        _v = arg.pop('waterfall', None)
+        self['waterfall'] = waterfall if waterfall is not None else _v
 
         # Process unknown kwargs
         # ----------------------
