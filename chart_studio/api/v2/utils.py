@@ -6,7 +6,6 @@ from requests.exceptions import RequestException
 from retrying import retry
 
 import _plotly_utils.exceptions
-from plotly import version
 from chart_studio import config, exceptions
 from chart_studio.api.utils import basic_auth
 from _plotly_utils.utils import PlotlyJSONEncoder
@@ -94,6 +93,7 @@ def get_headers():
     :returns: (dict) Headers to add to a requests.request call.
 
     """
+    from plotly import version
     creds = config.get_credentials()
 
     headers = {

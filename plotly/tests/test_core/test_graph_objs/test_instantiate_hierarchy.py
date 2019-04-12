@@ -17,7 +17,14 @@ class HierarchyTest(TestCase):
         for datatypes_module in datatype_modules:
             module = importlib.import_module(datatypes_module)
             for name, obj in inspect.getmembers(module, inspect.isclass):
-                v = obj()
+                if name.startswith('_'):
+                    continue
+                try:
+                    v = obj()
+                except Exception:
+                    print('Failed to construct {obj} in module {module}'
+                          .format(obj=obj, module=datatypes_module))
+
                 if obj.__module__ == 'plotly.graph_objs._deprecations':
                     self.assertTrue(
                         isinstance(v, list) or isinstance(v, dict)

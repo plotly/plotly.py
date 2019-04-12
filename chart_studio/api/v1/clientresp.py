@@ -5,7 +5,7 @@ import warnings
 
 from requests.compat import json as _json
 
-from plotly import version
+
 from _plotly_utils.utils import PlotlyJSONEncoder
 from chart_studio import config, utils
 from chart_studio.api.v1.utils import request
@@ -21,6 +21,8 @@ def clientresp(data, **kwargs):
     :param (list) data: The data array from a figure.
 
     """
+    from plotly import version
+
     creds = config.get_credentials()
     cfg = config.get_config()
 

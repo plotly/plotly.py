@@ -11,9 +11,8 @@ preview of the Dashboard.
 import pprint
 
 import _plotly_utils.exceptions
-from plotly import optional_imports
+from _plotly_utils import optional_imports
 from chart_studio import exceptions
-from plotly.utils import node_generator
 
 IPython = optional_imports.get_module('IPython')
 
@@ -234,6 +233,8 @@ class Dashboard(dict):
             self['settings'] = content['settings']
 
     def _compute_box_ids(self):
+        from plotly.utils import node_generator
+
         box_ids_to_path = {}
         all_nodes = list(node_generator(self['layout']))
         all_nodes.sort(key=lambda x: x[1])
@@ -268,6 +269,8 @@ class Dashboard(dict):
             self['layout'] = box_or_container
 
     def _make_all_nodes_and_paths(self):
+        from plotly.utils import node_generator
+
         all_nodes = list(node_generator(self['layout']))
         all_nodes.sort(key=lambda x: x[1])
 
