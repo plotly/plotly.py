@@ -28,14 +28,14 @@ class OptionalImportsTest(TestCase):
                       'test_optional_imports.exploding_module')
 
         if sys.version_info.major == 3 and sys.version_info.minor >= 4:
-            with self.assertLogs('plotly.optional_imports', level='ERROR') as cm:
+            with self.assertLogs('_plotly_utils.optional_imports', level='ERROR') as cm:
                 module = get_module(module_str)
 
             # No exception should be raised and None should be returned
             self.assertIsNone(module)
 
             # Check logging level and log message
-            expected_start = ('ERROR:plotly.optional_imports:'
+            expected_start = ('ERROR:_plotly_utils.optional_imports:'
                               'Error importing optional module ' + module_str)
 
             self.assertEqual(

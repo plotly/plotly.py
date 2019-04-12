@@ -769,7 +769,7 @@ def create_facet_grid(df, x=None, y=None, facet_row=None, facet_col=None,
     ```
     """
     if not pd:
-        raise exceptions.ImportError(
+        raise ImportError(
             "'pandas' must be installed for this figure_factory."
         )
 

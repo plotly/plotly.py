@@ -8,25 +8,17 @@ from six import string_types
 import warnings
 from contextlib import contextmanager
 from copy import deepcopy, copy
-from pprint import PrettyPrinter
 
-from plotly.offline.offline import _get_jconfig
 from .optional_imports import get_module
 
-from . import offline as pyo
 from _plotly_utils.basevalidators import (
     CompoundValidator, CompoundArrayValidator, BaseDataValidator,
     BaseValidator, LiteralValidator
 )
 from . import animation
-from .callbacks import (Points, BoxSelector, LassoSelector,
-                        InputDeviceState)
-from .utils import ElidedPrettyPrinter
+from .callbacks import (Points, InputDeviceState)
+from plotly.utils import ElidedPrettyPrinter
 from .validators import (DataValidator, LayoutValidator, FramesValidator)
-
-# Optional imports
-# ----------------
-np = get_module('numpy')
 
 # Create Undefined sentinel value
 #   - Setting a property to None removes any existing value
@@ -201,6 +193,7 @@ class BaseFigure(object):
         # arbitrary config options like in plotly.offline.plot/iplot.  But
         # this will require a fair amount of testing to determine which
         # options are compatible with FigureWidget.
+        from plotly.offline.offline import _get_jconfig
         self._config = _get_jconfig(None)
 
         # Frames
@@ -3502,6 +3495,7 @@ on_change callbacks are not supported in this case.
         bool
             True if v1 and v2 are equal, False otherwise
         """
+        np = get_module('numpy')
         if (np is not None and
                 (isinstance(v1, np.ndarray) or isinstance(v2, np.ndarray))):
             return np.array_equal(v1, v2)

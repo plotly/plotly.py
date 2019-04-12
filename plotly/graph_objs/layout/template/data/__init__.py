@@ -1,37 +1,111 @@
-from ._violin import Violin
-from ._table import Table
-from ._surface import Surface
-from ._streamtube import Streamtube
-from ._splom import Splom
-from ._scatterternary import Scatterternary
-from ._scatter import Scatter
-from ._scatterpolar import Scatterpolar
-from ._scatterpolargl import Scatterpolargl
-from ._scattermapbox import Scattermapbox
-from ._scattergl import Scattergl
-from ._scattergeo import Scattergeo
-from ._scattercarpet import Scattercarpet
-from ._scatter3d import Scatter3d
-from ._sankey import Sankey
-from ._pointcloud import Pointcloud
-from ._pie import Pie
-from ._parcoords import Parcoords
-from ._parcats import Parcats
-from ._ohlc import Ohlc
-from ._mesh3d import Mesh3d
-from ._isosurface import Isosurface
-from ._histogram import Histogram
-from ._histogram2d import Histogram2d
-from ._histogram2dcontour import Histogram2dContour
-from ._heatmap import Heatmap
-from ._heatmapgl import Heatmapgl
-from ._contour import Contour
-from ._contourcarpet import Contourcarpet
-from ._cone import Cone
-from ._choropleth import Choropleth
-from ._carpet import Carpet
-from ._candlestick import Candlestick
-from ._box import Box
-from ._bar import Bar
-from ._barpolar import Barpolar
-from ._area import Area
+
+
+from plotly.graph_objs import Violin
+
+
+from plotly.graph_objs import Table
+
+
+from plotly.graph_objs import Surface
+
+
+from plotly.graph_objs import Streamtube
+
+
+from plotly.graph_objs import Splom
+
+
+from plotly.graph_objs import Scatterternary
+
+
+from plotly.graph_objs import Scatter
+
+
+from plotly.graph_objs import Scatterpolar
+
+
+from plotly.graph_objs import Scatterpolargl
+
+
+from plotly.graph_objs import Scattermapbox
+
+
+from plotly.graph_objs import Scattergl
+
+
+from plotly.graph_objs import Scattergeo
+
+
+from plotly.graph_objs import Scattercarpet
+
+
+from plotly.graph_objs import Scatter3d
+
+
+from plotly.graph_objs import Sankey
+
+
+from plotly.graph_objs import Pointcloud
+
+
+from plotly.graph_objs import Pie
+
+
+from plotly.graph_objs import Parcoords
+
+
+from plotly.graph_objs import Parcats
+
+
+from plotly.graph_objs import Ohlc
+
+
+from plotly.graph_objs import Mesh3d
+
+
+from plotly.graph_objs import Isosurface
+
+
+from plotly.graph_objs import Histogram
+
+
+from plotly.graph_objs import Histogram2d
+
+
+from plotly.graph_objs import Histogram2dContour
+
+
+from plotly.graph_objs import Heatmap
+
+
+from plotly.graph_objs import Heatmapgl
+
+
+from plotly.graph_objs import Contour
+
+
+from plotly.graph_objs import Contourcarpet
+
+
+from plotly.graph_objs import Cone
+
+
+from plotly.graph_objs import Choropleth
+
+
+from plotly.graph_objs import Carpet
+
+
+from plotly.graph_objs import Candlestick
+
+
+from plotly.graph_objs import Box
+
+
+from plotly.graph_objs import Bar
+
+
+from plotly.graph_objs import Barpolar
+
+
+from plotly.graph_objs import Area

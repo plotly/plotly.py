@@ -68,7 +68,6 @@ class {class_name}({superclass_name}):
     buffer.write(f""",
         **kwargs""")
 
-
     buffer.write(')')
 
     # ### Return buffer's string ###
@@ -105,9 +104,9 @@ def write_validator_py(outdir,
     # ----------
     filepath = opath.join(outdir, 'validators',
                           *node.parent_path_parts,
-                          '_' + node.name_property + '.py')
+                          '__init__.py')
 
-    format_and_write_source_py(validator_source, filepath)
+    format_and_write_source_py(validator_source, filepath, leading_newlines=2)
 
 
 def build_data_validator_params(base_trace_node: TraceNode):
@@ -248,5 +247,5 @@ def write_data_validator_py(outdir, base_trace_node: TraceNode):
 
     # Write file
     # ----------
-    filepath = opath.join(outdir, 'validators', '_data.py')
-    format_and_write_source_py(source, filepath)
+    filepath = opath.join(outdir, 'validators', '__init__.py')
+    format_and_write_source_py(source, filepath, leading_newlines=2)
