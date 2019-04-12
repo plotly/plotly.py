@@ -2,7 +2,7 @@ from __future__ import absolute_import
 
 from plotly.tests.utils import PlotlyTestCase
 
-from plotly import session
+from chart_studio import session
 from plotly.session import update_session_plot_options, SHARING_OPTIONS
 from plotly.exceptions import PlotlyError
 
@@ -26,7 +26,7 @@ class TestSession(PlotlyTestCase):
         # _session['plot_options'] should contain sharing key after
         # update_session_plot_options is called by correct arguments
         # 'public, 'private' or 'secret'
-        from plotly.session import _session
+        from chart_studio.session import _session
         for key in SHARING_OPTIONS:
             kwargs = {'sharing': key}
             update_session_plot_options(**kwargs)

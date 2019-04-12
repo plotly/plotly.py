@@ -32,7 +32,7 @@ def format_source(input_source):
     return formatted_source
 
 
-def format_and_write_source_py(py_source, filepath):
+def format_and_write_source_py(py_source, filepath, leading_newlines=0):
     """
     Format Python source code and write to a file, creating parent
     directories as needed.
@@ -62,7 +62,8 @@ def format_and_write_source_py(py_source, filepath):
 
         # Write file
         # ----------
-        with open(filepath, 'wt') as f:
+        formatted_source = '\n' * leading_newlines + formatted_source
+        with open(filepath, 'at') as f:
             f.write(formatted_source)
 
 
@@ -130,7 +131,8 @@ def write_init_py(pkg_root, path_parts, import_pairs):
     # Write file
     # ----------
     filepath = opath.join(pkg_root, *path_parts, '__init__.py')
-    format_and_write_source_py(init_source, filepath)
+    format_and_write_source_py(
+        init_source, filepath, leading_newlines=2)
 
 
 def format_description(desc):

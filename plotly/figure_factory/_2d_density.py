@@ -2,9 +2,9 @@ from __future__ import absolute_import
 
 from numbers import Number
 
-from plotly import exceptions
+import plotly.exceptions
+
 import plotly.colors as clrs
-from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
 
 
@@ -91,13 +91,13 @@ def create_2d_density(x, y, colorscale='Earth', ncontours=20,
     # validate x and y are filled with numbers only
     for array in [x, y]:
         if not all(isinstance(element, Number) for element in array):
-            raise exceptions.PlotlyError(
+            raise plotly.exceptions.PlotlyError(
                 "All elements of your 'x' and 'y' lists must be numbers."
             )
 
     # validate x and y are the same length
     if len(x) != len(y):
-        raise exceptions.PlotlyError(
+        raise plotly.exceptions.PlotlyError(
             "Both lists 'x' and 'y' must be the same length."
         )
 

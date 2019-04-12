@@ -1,8 +1,3 @@
-from plotly import exceptions, optional_imports
-import plotly.colors as clrs
-
-from plotly.figure_factory import utils
-
 import io
 import numpy as np
 import os
@@ -11,6 +6,11 @@ import warnings
 
 from math import log, floor
 from numbers import Number
+
+from plotly import optional_imports
+import plotly.colors as clrs
+from plotly.figure_factory import utils
+from plotly.exceptions import PlotlyError
 
 pd.options.mode.chained_assignment = None
 
@@ -606,7 +606,7 @@ def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
         centroid_marker.update({'opacity': 1})
 
     if len(fips) != len(values):
-        raise exceptions.PlotlyError(
+        raise PlotlyError(
             'fips and values must be the same length'
         )
 
@@ -634,7 +634,7 @@ def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
             if same_sets and no_duplicates:
                 LEVELS = order
             else:
-                raise exceptions.PlotlyError(
+                raise PlotlyError(
                     'if you are using a custom order of unique values from '
                     'your color column, you must: have all the unique values '
                     'in your order and have no duplicate items'
@@ -682,7 +682,7 @@ def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
             colorscale.append(int_rgb)
 
     if len(colorscale) < len(LEVELS):
-        raise exceptions.PlotlyError(
+        raise PlotlyError(
             "You have {} LEVELS. Your number of colors in 'colorscale' must "
             "be at least the number of LEVELS: {}. If you are "
             "using 'binning_endpoints' then 'colorscale' must have at "
@@ -697,7 +697,7 @@ def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
 
     # scope
     if isinstance(scope, str):
-        raise exceptions.PlotlyError(
+        raise PlotlyError(
             "'scope' must be a list/tuple/sequence"
         )
 

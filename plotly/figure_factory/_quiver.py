@@ -119,8 +119,8 @@ def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
         quiver_obj = _Quiver(x, y, u, v, scale, arrow_scale, angle, scaleratio)
 
     barb_x, barb_y = quiver_obj.get_barbs()
-    arrow_x, arrow_y = quiver_obj.get_quiver_arrows()       
-        
+    arrow_x, arrow_y = quiver_obj.get_quiver_arrows()
+
     quiver_plot = graph_objs.Scatter(x=barb_x + arrow_x,
                                 y=barb_y + arrow_y,
                                 mode='lines', **kwargs)

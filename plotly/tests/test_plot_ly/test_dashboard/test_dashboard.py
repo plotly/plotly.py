@@ -9,7 +9,7 @@ from __future__ import absolute_import
 
 from unittest import TestCase
 from plotly.exceptions import PlotlyError
-import plotly.dashboard_objs.dashboard_objs as dashboard
+import plotly.dashboard_objs as dashboard
 
 
 class TestDashboard(TestCase):

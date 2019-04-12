@@ -3,7 +3,7 @@ from __future__ import absolute_import
 from six import string_types
 import json
 
-from plotly.utils import PlotlyJSONEncoder
+
 from plotly.io._utils import (validate_coerce_fig_to_dict,
                               validate_coerce_output_type)
 
@@ -36,6 +36,8 @@ def to_json(fig,
     str
         Representation of figure as a JSON string
     """
+    from _plotly_utils.utils import PlotlyJSONEncoder
+
     # Validate figure
     # ---------------
     fig_dict = validate_coerce_fig_to_dict(fig, validate)

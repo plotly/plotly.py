@@ -6,23 +6,15 @@
 from __future__ import absolute_import
 
 import os
-import uuid
 import warnings
 import pkgutil
-import time
-import webbrowser
-
-import six
-from requests.compat import json as _json
-
 import plotly
-from plotly import optional_imports, tools, utils
-from plotly.exceptions import PlotlyError
+import plotly.tools
+
+from plotly.optional_imports import get_module
+from plotly import tools
 from ._plotlyjs_version import __plotlyjs_version__
 
-ipython = optional_imports.get_module('IPython')
-ipython_display = optional_imports.get_module('IPython.display')
-matplotlib = optional_imports.get_module('matplotlib')
 
 __IMAGE_FORMATS = ['jpeg', 'png', 'webp', 'svg']
 
@@ -165,13 +157,10 @@ Unrecognized config options supplied: {bad_config}"""
 
         clean_config = config
     else:
-        config = plotly.plotly.get_config()
-        clean_config = dict((k, config[k]) for k in configkeys if k in config)
+        clean_config = {}
 
-    # TODO: The get_config 'source of truth' should
-    # really be somewhere other than plotly.plotly
-    plotly_platform_url = plotly.plotly.get_config().get('plotly_domain',
-                                                         'https://plot.ly')
+    plotly_platform_url = plotly.tools.get_config_plotly_server_url()
+
     clean_config['plotlyServerURL'] = plotly_platform_url
 
     if (plotly_platform_url != 'https://plot.ly' and
@@ -278,7 +267,7 @@ def init_notebook_mode(connected=False):
     where `connected=True`.
     """
     import plotly.io as pio
-
+    ipython = get_module('IPython')
     if not ipython:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
@@ -361,6 +350,7 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
     """
     import plotly.io as pio
 
+    ipython = get_module('IPython')
     if not ipython:
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
@@ -653,7 +643,7 @@ def plot_mpl(mpl_fig, resize=False, strip_style=False,
     plot_mpl(fig, image='png')
     ```
     """
-    plotly_plot = tools.mpl_to_plotly(mpl_fig, resize, strip_style, verbose)
+    plotly_plot = plotly.tools.mpl_to_plotly(mpl_fig, resize, strip_style, verbose)
     return plot(plotly_plot, show_link, link_text, validate, output_type,
                 include_plotlyjs, filename, auto_open,
                 image=image, image_filename=image_filename,
@@ -718,7 +708,7 @@ def iplot_mpl(mpl_fig, resize=False, strip_style=False,
     iplot_mpl(fig, image='jpeg')
     ```
     """
-    plotly_plot = tools.mpl_to_plotly(mpl_fig, resize, strip_style, verbose)
+    plotly_plot = plotly.tools.mpl_to_plotly(mpl_fig, resize, strip_style, verbose)
     return iplot(plotly_plot, show_link, link_text, validate,
                  image=image, filename=image_filename,
                  image_height=image_height, image_width=image_width)
@@ -753,6 +743,8 @@ def enable_mpl_offline(resize=False, strip_style=False,
     ```
     """
     init_notebook_mode()
+    ipython = get_module('IPython')
+    matplotlib = get_module('matplotlib')
 
     ip = ipython.core.getipython.get_ipython()
     formatter = ip.display_formatter.formatters['text/html']

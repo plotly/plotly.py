@@ -16,7 +16,7 @@ import warnings
 from nose.plugins.attrib import attr
 
 import plotly.tools as tls
-from plotly import session
+from chart_studio import session
 from plotly.tests.utils import PlotlyTestCase
 from plotly.plotly import plotly as py
 from plotly.exceptions import PlotlyError, PlotlyEmptyDataError
@@ -284,7 +284,7 @@ class TestPlotOptionLogic(PlotlyTestCase):
         super(TestPlotOptionLogic, self).setUp()
 
         # Make sure we don't hit sign-in validation failures.
-        patcher = patch('plotly.api.v2.users.current')
+        patcher = patch('chart_studio.api.v2.users.current')
         self.users_current_mock = patcher.start()
         self.addCleanup(patcher.stop)
 

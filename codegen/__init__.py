@@ -189,38 +189,12 @@ def perform_codegen():
                          layout_validator,
                          frame_validator)
 
-    # Write validator __init__.py files
-    # ---------------------------------
-    # ### Write __init__.py files for each validator package ###
-    path_to_validator_import_info = {}
-    for node in all_datatype_nodes:
-        if node.is_mapped:
-            continue
-        key = node.parent_path_parts
-        path_to_validator_import_info.setdefault(key, []).append(
-            (f"._{node.name_property}", node.name_validator_class)
-        )
-
-    # Add Data validator
-    root_validator_pairs = path_to_validator_import_info[()]
-    root_validator_pairs.append(('._data', 'DataValidator'))
-
-    # Output validator __init__.py files
-    validators_pkg = opath.join(outdir, 'validators')
-    for path_parts, import_pairs in path_to_validator_import_info.items():
-        write_init_py(validators_pkg, path_parts, import_pairs)
-
     # Write datatype __init__.py files
     # --------------------------------
     # ### Build mapping from parent package to datatype class ###
     path_to_datatype_import_info = {}
     for node in all_compound_nodes:
         key = node.parent_path_parts
-
-        # class import
-        path_to_datatype_import_info.setdefault(key, []).append(
-            (f"._{node.name_undercase}", node.name_datatype_class)
-        )
 
         # submodule import
         if node.child_compound_datatypes:

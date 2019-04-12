@@ -17,7 +17,7 @@ import plotly.plotly as py
 from plotly.exceptions import InputError, PlotlyRequestError, PlotlyError
 from plotly.graph_objs import Scatter
 from plotly.grid_objs import Column, Grid
-from plotly.plotly.plotly import parse_grid_id_args
+from plotly.plotly import parse_grid_id_args
 from plotly.tests.utils import PlotlyTestCase
 
 

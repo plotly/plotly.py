@@ -1,12 +1,5 @@
 from __future__ import absolute_import
 
-from plotly.basedatatypes import BaseFigure
-from plotly.graph_objs import Figure
-from plotly.validators.layout import TemplateValidator
-from plotly.graph_objs.layout import Template
-from _plotly_utils.basevalidators import (
-    CompoundValidator, CompoundArrayValidator, is_array)
-
 import textwrap
 import pkgutil
 
@@ -45,7 +38,7 @@ class TemplatesConfig(object):
         for template_name in default_templates:
             self._templates[template_name] = Lazy
 
-        self._validator = TemplateValidator()
+        self._validator = None
         self._default = None
 
     # ### Magic methods ###
@@ -62,6 +55,8 @@ class TemplatesConfig(object):
     def __getitem__(self, item):
         template = self._templates[item]
         if template is Lazy:
+            from plotly.graph_objs.layout import Template
+
             # Load template from package data
             path = os.path.join('package_data', 'templates', item + '.json')
             template_str = pkgutil.get_data('plotly', path).decode('utf-8')
@@ -72,7 +67,7 @@ class TemplatesConfig(object):
         return template
 
     def __setitem__(self, key, value):
-        self._templates[key] = self._validator.validate_coerce(value)
+        self._templates[key] = self._validate(value)
 
     def __delitem__(self, key):
         # Remove template
@@ -81,6 +76,13 @@ class TemplatesConfig(object):
         # Check if we need to remove it as the default
         if self._default == key:
             self._default = None
+
+    def _validate(self, value):
+        if not self._validator:
+            from plotly.validators.layout import TemplateValidator
+            self._validator = TemplateValidator()
+
+        return self._validator.validate_coerce(value)
 
     def keys(self):
         return self._templates.keys()
@@ -133,7 +135,7 @@ class TemplatesConfig(object):
         # Could be a Template object, the key of a registered template,
         # Or a string containing the names of multiple templates joined on
         # '+' characters
-        self._validator.validate_coerce(value)
+        self._validate(value)
         self._default = value
 
     def __repr__(self):
@@ -190,6 +192,7 @@ Templates configuration
         if args:
             return reduce(self._merge_2_templates, args)
         else:
+            from plotly.graph_objs.layout import Template
             return Template()
 
     def _merge_2_templates(self, template1, template2):
@@ -207,8 +210,8 @@ Templates configuration
             merged template
         """
         # Validate/copy input templates
-        result = self._validator.validate_coerce(template1)
-        other = self._validator.validate_coerce(template2)
+        result = self._validate(template1)
+        other = self._validate(template2)
 
         # Cycle traces
         for trace_type in result.data:
@@ -238,7 +241,6 @@ Templates configuration
 templates = TemplatesConfig()
 del TemplatesConfig
 
-
 # Template utilities
 # ------------------
 def walk_push_to_template(fig_obj, template_obj, skip):
@@ -252,6 +254,9 @@ def walk_push_to_template(fig_obj, template_obj, skip):
     skip: set of str
         Set of names of properties to skip
     """
+    from _plotly_utils.basevalidators import (
+        CompoundValidator, CompoundArrayValidator, is_array)
+
     for prop in list(fig_obj._props):
         if prop == 'template' or prop in skip:
             # Avoid infinite recursion
@@ -395,6 +400,8 @@ def to_templated(fig, skip=('title', 'text')):
     """
 
     # process fig
+    from plotly.basedatatypes import BaseFigure
+    from plotly.graph_objs import Figure
     if not isinstance(fig, BaseFigure):
         fig = Figure(fig)
 

@@ -252,7 +252,7 @@ def create_bullet(data, markers=None, measures=None, ranges=None,
     """
     # validate df
     if not pd:
-        raise exceptions.ImportError(
+        raise ImportError(
             "'pandas' must be installed for this figure factory."
         )
 
