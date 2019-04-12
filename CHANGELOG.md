@@ -10,10 +10,24 @@ This project adheres to [Semantic Versioning](http://semver.org/).
  for more information.
  
 ### Added
-TODO
+ - Three new trace types: `sunburst` ([plotly/plotly.js#3594](https://github.com/plotly/plotly.js/pull/3594)),
+ `waterfall` ([plotly/plotly.js#3531](https://github.com/plotly/plotly.js/pull/3531)),
+ and `volume` ([plotly/plotly.js#3488](https://github.com/plotly/plotly.js/pull/3488)).
+ - New `plotly.io.to_html` and `plotly.io.write_html` functions to export
+ figures as html ([#1474](https://github.com/plotly/plotly.py/pull/1474)).
+ - Added `animation_opts` argument to `plotly.offline.plot` and
+ `plotly.offline.iplot` to control the auto-play animation settings
+ ([#1503](https://github.com/plotly/plotly.py/pull/1503)).  Special thanks
+ to [@TakodaS](https://github.com/TakodaS) for this contribution!
+  
 
 ### Fixed
-TODO
+ - Fix race condition when checking the permissions of the `.plotly` settings
+ directory ([#1498](https://github.com/plotly/plotly.py/pull/1498)). Special
+ thanks to [@pb-cdunn](https://github.com/pb-cdunn) for this contribution!
+ - Fix `OSError` when processing time series data using Python 3.7+
+ ([#1402](https://github.com/plotly/plotly.py/issues/1402),
+ [#1501](https://github.com/plotly/plotly.py/pull/1501))
  
 ## [3.7.1] - 2019-03-19
 
