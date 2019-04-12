@@ -3,6 +3,48 @@
 import _plotly_utils.basevalidators
 
 
+class WaterfallsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
+
+    def __init__(
+        self,
+        plotly_name='waterfall',
+        parent_name='layout.template.data',
+        **kwargs
+    ):
+        super(WaterfallsValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            data_class_str=kwargs.pop('data_class_str', 'Waterfall'),
+            data_docs=kwargs.pop('data_docs', """
+"""),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class VolumesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
+
+    def __init__(
+        self,
+        plotly_name='volume',
+        parent_name='layout.template.data',
+        **kwargs
+    ):
+        super(VolumesValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            data_class_str=kwargs.pop('data_class_str', 'Volume'),
+            data_docs=kwargs.pop('data_docs', """
+"""),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class ViolinsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
 
     def __init__(
@@ -57,6 +99,27 @@ class SurfacesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
             plotly_name=plotly_name,
             parent_name=parent_name,
             data_class_str=kwargs.pop('data_class_str', 'Surface'),
+            data_docs=kwargs.pop('data_docs', """
+"""),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class SunburstsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
+
+    def __init__(
+        self,
+        plotly_name='sunburst',
+        parent_name='layout.template.data',
+        **kwargs
+    ):
+        super(SunburstsValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            data_class_str=kwargs.pop('data_class_str', 'Sunburst'),
             data_docs=kwargs.pop('data_docs', """
 """),
             **kwargs

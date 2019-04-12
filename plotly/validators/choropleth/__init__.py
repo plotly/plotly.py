@@ -252,23 +252,6 @@ class ShowscaleValidator(_plotly_utils.basevalidators.BooleanValidator):
 import _plotly_utils.basevalidators
 
 
-class ShowlegendValidator(_plotly_utils.basevalidators.BooleanValidator):
-
-    def __init__(
-        self, plotly_name='showlegend', parent_name='choropleth', **kwargs
-    ):
-        super(ShowlegendValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'style'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
 class SelectedpointsValidator(_plotly_utils.basevalidators.AnyValidator):
 
     def __init__(
@@ -318,25 +301,6 @@ class ReversescaleValidator(_plotly_utils.basevalidators.BooleanValidator):
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'style'),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class OpacityValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='opacity', parent_name='choropleth', **kwargs
-    ):
-        super(OpacityValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'style'),
-            max=kwargs.pop('max', 1),
-            min=kwargs.pop('min', 0),
             role=kwargs.pop('role', 'style'),
             **kwargs
         )
@@ -435,23 +399,6 @@ class LocationmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             values=kwargs.pop(
                 'values', ['ISO-3', 'USA-states', 'country names']
             ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class LegendgroupValidator(_plotly_utils.basevalidators.StringValidator):
-
-    def __init__(
-        self, plotly_name='legendgroup', parent_name='choropleth', **kwargs
-    ):
-        super(LegendgroupValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'style'),
-            role=kwargs.pop('role', 'info'),
             **kwargs
         )
 
@@ -576,6 +523,14 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_class_str=kwargs.pop('data_class_str', 'Hoverlabel'),
             data_docs=kwargs.pop(
                 'data_docs', """
+            align
+                Sets the horizontal alignment of the text
+                content within hover label box. Has an effect
+                only if the hover label text spans more two or
+                more lines
+            alignsrc
+                Sets the source reference on plot.ly for  align
+                .
             bgcolor
                 Sets the background color of the hover labels
                 for this trace
@@ -591,14 +546,15 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
             font
                 Sets the font used in hover labels.
             namelength
-                Sets the length (in number of characters) of
-                the trace name in the hover labels for this
-                trace. -1 shows the whole name regardless of
-                length. 0-3 shows the first 0-3 characters, and
-                an integer >3 will show the whole name if it is
-                less than that many characters, but if it is
-                longer, will truncate to `namelength - 3`
-                characters and add an ellipsis.
+                Sets the default length (in number of
+                characters) of the trace name in the hover
+                labels for all traces. -1 shows the whole name
+                regardless of length. 0-3 shows the first 0-3
+                characters, and an integer >3 will show the
+                whole name if it is less than that many
+                characters, but if it is longer, will truncate
+                to `namelength - 3` characters and add an
+                ellipsis.
             namelengthsrc
                 Sets the source reference on plot.ly for
                 namelength .
