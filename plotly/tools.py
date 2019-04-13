@@ -443,6 +443,20 @@ def make_subplots(rows=1, cols=1,
           cols=2, the domains for each row from top to botton would be
           [0. 0.75] and [0.75, 1]
     """
+
+    from _plotly_future_ import _future_flags
+    if 'v4_subplots' in _future_flags:
+        import plotly.subplots
+        return plotly.subplots.make_subplots(
+            rows=rows,
+            cols=cols,
+            shared_xaxes=shared_xaxes,
+            shared_yaxes=shared_yaxes,
+            start_cell=start_cell,
+            print_grid=print_grid,
+            **kwargs
+        )
+
     # TODO: protected until #282
     from plotly.graph_objs import graph_objs
 
