@@ -165,6 +165,12 @@ and orca can be installed according to the instructions in the [orca README](htt
 ## Migration
 If you're migrating from plotly.py version 2, please check out the [migration guide](migration-guide.md)
 
+## Troubleshooting
+### Wrong Executable found
+If you meet issues with the `orca` executable not being the correct one, this may be due to another executable with the same name existing on your system. Please specify the complete path to the Plotly-Orca binary that you downloaded (for instance in the Miniconda folder) with the following command:
+
+`plotly.io.orca.config.executable = '/home/your_name/miniconda3/bin/orca'`
+
 ## Copyright and Licenses
 Code and documentation copyright 2019 Plotly, Inc.
 
