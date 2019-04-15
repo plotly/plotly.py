@@ -417,9 +417,11 @@ The port property must be an integer, but received value of type {typ}.
         -------
         str
         """
-        return ' '.join(self._props.get(
-            'executable_list',
-            ['orca']))
+        executable_list = self._props.get('executable_list', ['orca'])
+        if executable_list is None:
+            return None
+        else:
+            return ' '.join(executable_list)
 
     @executable.setter
     def executable(self, val):
@@ -774,7 +776,11 @@ class OrcaStatus(object):
 
         This property will be None if the `state` is 'unvalidated'.
         """
-        return ' '.join(self._props['executable_list'])
+        executable_list = self._props['executable_list']
+        if executable_list is None:
+            return None
+        else:
+            return ' '.join(executable_list)
 
     @property
     def version(self):
