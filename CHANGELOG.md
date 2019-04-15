@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [3.8.0] - ???
+## [3.8.0] - 2019-04-19
 
 ### Updated
  - Updated Plotly.js to version 1.47.1. See the
@@ -28,6 +28,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
  - Fix `OSError` when processing time series data using Python 3.7+
  ([#1402](https://github.com/plotly/plotly.py/issues/1402),
  [#1501](https://github.com/plotly/plotly.py/pull/1501))
+ 
+### Updated
+ - Align hoverlabels left and set legend items to constant-size in builtin
+ themes ([#1520](https://github.com/plotly/plotly.py/pull/1520))
  
 ## [3.7.1] - 2019-03-19
 
