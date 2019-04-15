@@ -417,7 +417,9 @@ The port property must be an integer, but received value of type {typ}.
         -------
         str
         """
-        return self._props.get('executable', 'orca')
+        return ' '.join(self._props.get(
+            'executable_list',
+            ['orca']))
 
     @executable.setter
     def executable(self, val):
@@ -429,7 +431,9 @@ The port property must be an integer, but received value of type {typ}.
                 raise ValueError("""
 The executable property must be a string, but received value of type {typ}.
     Received value: {val}""".format(typ=type(val), val=val))
-            self._props['executable'] = val
+            if isinstance(val, string_types):
+                val = [val]
+            self._props['executable_list'] = val
 
         # Server and validation must restart before setting is active
         reset_status()
@@ -738,7 +742,7 @@ class OrcaStatus(object):
     """
     _props = {
         'state': 'unvalidated',  # or 'validated' or 'running'
-        'executable': None,
+        'executable_list': None,
         'version': None,
         'pid': None,
         'port': None,
@@ -770,7 +774,7 @@ class OrcaStatus(object):
 
         This property will be None if the `state` is 'unvalidated'.
         """
-        return self._props['executable']
+        return ' '.join(self._props['executable_list'])
 
     @property
     def version(self):
@@ -851,7 +855,11 @@ def orca_env():
     to orca is transformed into a call to nodejs.
     See https://github.com/plotly/orca/issues/149#issuecomment-443506732
     """
-    clear_env_vars = ['NODE_OPTIONS', 'ELECTRON_RUN_AS_NODE']
+    clear_env_vars = [
+        'NODE_OPTIONS',
+        'ELECTRON_RUN_AS_NODE',
+        'LD_PRELOAD'
+    ]
     orig_env_vars = {}
 
     try:
@@ -949,6 +957,24 @@ Searched for executable '{executable}' on the following path:
             formatted_path=formatted_path,
             instructions=install_location_instructions))
 
+    executable_list = [executable]
+
+    # Check if we should run with Xvfb
+    # --------------------------------
+    if (sys.platform.startswith('linux') and
+            not os.environ.get('DISPLAY')):
+        # We're on linux without a display server. See if Xvfb is available
+        xvfb_run_executable = which('xvfb-run')
+
+        if xvfb_run_executable:
+            executable_list = [
+                xvfb_run_executable,
+                "--auto-servernum",
+                "--server-args",
+                "-screen 0 640x480x24 +extension RANDR +extension GLX",
+                executable
+            ]
+
     # Run executable with --help and see if it's our orca
     # ---------------------------------------------------
     invalid_executable_msg = """
@@ -964,7 +990,7 @@ this message for details on what went wrong.
     # ### Run with Popen so we get access to stdout and stderr
     with orca_env():
         p = subprocess.Popen(
-            [executable, '--help'],
+            executable_list + ['--help'],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE)
 
@@ -977,7 +1003,7 @@ Here is the error that was returned by the command
 
 [Return code: {returncode}]
 {err_msg}
-""".format(executable=executable,
+""".format(executable=' '.join(executable_list),
            err_msg=help_error.decode('utf-8'),
            returncode=p.returncode)
 
@@ -997,7 +1023,7 @@ orca with Xvfb.
         raise ValueError(invalid_executable_msg + """
 The error encountered is that no output was returned by the command
     $ {executable} --help
-""".format(executable=executable))
+""".format(executable=' '.join(executable_list)))
 
     if ("Plotly's image-exporting utilities" not in
             help_result.decode('utf-8')):
@@ -1006,14 +1032,14 @@ The error encountered is that unexpected output was returned by the command
     $ {executable} --help
 
 {help_result}
-""".format(executable=executable, help_result=help_result))
+""".format(executable=' '.join(executable_list), help_result=help_result))
 
     # Get orca version
     # ----------------
     # ### Run with Popen so we get access to stdout and stderr
     with orca_env():
         p = subprocess.Popen(
-            [executable, '--version'],
+            executable_list + ['--version'],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE)
 
@@ -1029,7 +1055,7 @@ This command returned the following error:
 
 [Return code: {returncode}]
 {err_msg}
-        """.format(executable=executable,
+        """.format(executable=' '.join(executable_list),
                    err_msg=version_error.decode('utf-8'),
                    returncode=p.returncode))
 
@@ -1039,11 +1065,11 @@ The error encountered is that no version was reported by the orca executable.
 Here is the command that plotly.py ran to request the version:
 
     $ {executable} --version
-""".format(executable=executable))
+""".format(executable=' '.join(executable_list)))
     else:
         version_result = version_result.decode()
 
-    status._props['executable'] = executable
+    status._props['executable_list'] = executable_list
     status._props['version'] = version_result.strip()
     status._props['state'] = 'validated'
 
@@ -1061,7 +1087,7 @@ def reset_status():
     None
     """
     shutdown_server()
-    status._props['executable'] = None
+    status._props['executable_list'] = None
     status._props['version'] = None
     status._props['state'] = 'unvalidated'
 
@@ -1179,10 +1205,11 @@ Install using conda:
                 orca_state['port'] = config.port
 
             # Build orca command list
-            cmd_list = [status.executable, 'serve',
-                        '-p', str(orca_state['port']),
-                        '--plotly', config.plotlyjs,
-                        '--graph-only']
+            cmd_list = status._props['executable_list'] + [
+                'serve',
+                '-p', str(orca_state['port']),
+                '--plotly', config.plotlyjs,
+                '--graph-only']
 
             if config.topojson:
                 cmd_list.extend(['--topojson', config.topojson])
@@ -1198,8 +1225,9 @@ Install using conda:
             # specified port.
             DEVNULL = open(os.devnull, 'wb')
             with orca_env():
-                orca_state['proc'] = subprocess.Popen(cmd_list,
-                                                      stdout=DEVNULL)
+                orca_state['proc'] = subprocess.Popen(
+                    cmd_list, stdout=DEVNULL
+                )
 
             # Update orca.status so the user has an accurate view
             # of the state of the orca server
