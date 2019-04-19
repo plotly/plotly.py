@@ -2,12 +2,31 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.8.1] - 2019-04-19
+
+### Updated
+ - Updated Plotly.js to version 1.47.3. See the
+ [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#plotlyjs-changelog)
+ for more information.
+ 
+### Fixed
+ - Fix MathJax rendering in Firefox ([plotly/plotly.js#3783](https://github.com/plotly/plotly.js/pull/3783))
+ - Fix vertical responsive resizing in exported HTML files
+ ([#1524](https://github.com/plotly/plotly.py/issues/1524),
+ [1525](https://github.com/plotly/plotly.py/pull/1525))
+ 
+### Changed
+ - Reverted change to `layout.legend.itemsizing = 'constant'` in built-in templates
+ that was made in 3.8.0. This resulted in unexpectedly large legend entries in
+ some common cases ([#1526](https://github.com/plotly/plotly.py/pull/1526)) 
+  
 ## [3.8.0] - 2019-04-15
 
 ### Updated
  - Updated Plotly.js to version 1.47.1. See the
  [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1471----2019-04-10)
  for more information.
+
  
 ### Added
  - Three new trace types: `sunburst` ([plotly/plotly.js#3594](https://github.com/plotly/plotly.js/pull/3594)),
