@@ -75,9 +75,6 @@ def initialize_template(annotation_defaults,
     # right-align hoverlabels
     template.layout.hoverlabel.align = 'left'
 
-    # fix size of legend items
-    template.layout.legend.itemsizing = 'constant'
-
     # Set background colors
     template.layout.paper_bgcolor = paper_clr
     template.layout.plot_bgcolor = panel_background_clr
