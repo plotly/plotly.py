@@ -44,7 +44,7 @@ def make_subplots(
         shared_xaxes=False,
         shared_yaxes=False,
         start_cell='top-left',
-        print_grid=True,
+        print_grid=False,
         horizontal_spacing=None,
         vertical_spacing=None,
         subplot_titles=None,

@@ -229,7 +229,7 @@ def get_subplots(rows=1, columns=1, print_grid=False, **kwargs):
 
 def make_subplots(rows=1, cols=1,
                   shared_xaxes=False, shared_yaxes=False,
-                  start_cell='top-left', print_grid=True,
+                  start_cell='top-left', print_grid=None,
                   **kwargs):
     """Return an instance of plotly.graph_objs.Figure
     with the subplots domain set in 'layout'.
@@ -456,6 +456,10 @@ def make_subplots(rows=1, cols=1,
             print_grid=print_grid,
             **kwargs
         )
+
+    # Handle default print_grid
+    if print_grid is None:
+        print_grid = True
 
     # TODO: protected until #282
     from plotly.graph_objs import graph_objs
