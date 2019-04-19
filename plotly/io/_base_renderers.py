@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 import base64
 import json
 import webbrowser
@@ -238,8 +239,8 @@ class HtmlRenderer(MimetypeRenderer):
         self.global_init = global_init
         self.requirejs = requirejs
         self.full_html = full_html
-        self.post_script = post_script
         self.animation_opts = animation_opts
+        self.post_script = post_script
 
     def activate(self):
         if self.global_init:
@@ -310,15 +311,50 @@ class HtmlRenderer(MimetypeRenderer):
             include_plotlyjs = True
             include_mathjax = 'cdn'
 
+        # build post script
+        post_script = ["""
+var gd = document.getElementById('{plot_id}');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+"""]
+
+        # Add user defined post script
+        if self.post_script:
+            if not isinstance(self.post_script, (list, tuple)):
+                post_script.append(self.post_script)
+            else:
+                post_script.extend(self.post_script)
+
         html = to_html(
             fig_dict,
             config=self.config,
             auto_play=self.auto_play,
             include_plotlyjs=include_plotlyjs,
             include_mathjax=include_mathjax,
-            post_script=self.post_script,
+            post_script=post_script,
             full_html=self.full_html,
-            animation_opts=self.animation_opts)
+            animation_opts=self.animation_opts,
+            default_width='100%',
+            default_height=525,
+        )
 
         return {'text/html': html}
 
@@ -446,17 +482,16 @@ class IFrameRenderer(MimetypeRenderer):
         # having iframe have its own scroll bar.
         iframe_buffer = 20
         layout = fig_dict.get('layout', {})
-        if 'width' in layout:
-            iframe_width = layout['width'] + iframe_buffer
-        else:
-            layout['width'] = 700
-            iframe_width = layout['width'] + iframe_buffer
 
-        if 'height' in layout:
+        if layout.get('width', False):
+            iframe_width = str(layout['width'] + iframe_buffer) + 'px'
+        else:
+            iframe_width = '100%'
+
+        if layout.get('height', False):
             iframe_height = layout['height'] + iframe_buffer
         else:
-            layout['height'] = 450
-            iframe_height = layout['height'] + iframe_buffer
+            iframe_height = str(525 + iframe_buffer) + 'px'
 
         # Build filename using ipython cell number
         ip = IPython.get_ipython()
@@ -477,11 +512,14 @@ class IFrameRenderer(MimetypeRenderer):
                    auto_open=False,
                    post_script=self.post_script,
                    animation_opts=self.animation_opts,
+                   default_width='100%',
+                   default_height=525,
                    validate=False)
 
         # Build IFrame
         iframe_html = """\
 <iframe
+    scrolling="no"
     width="{width}"
     height="{height}"
     src="{src}"
@@ -579,16 +617,17 @@ class BrowserRenderer(ExternalRenderer):
         self.animation_opts = animation_opts
 
     def render(self, fig_dict):
-        renderer = HtmlRenderer(
-            connected=False,
-            full_html=True,
-            requirejs=False,
-            global_init=False,
+        from plotly.io import to_html
+        html = to_html(
+            fig_dict,
             config=self.config,
             auto_play=self.auto_play,
+            include_plotlyjs=True,
+            include_mathjax='cdn',
             post_script=self.post_script,
-            animation_opts=self.animation_opts)
-
-        bundle = renderer.to_mimebundle(fig_dict)
-        html = bundle['text/html']
+            full_html=True,
+            animation_opts=self.animation_opts,
+            default_width='100%',
+            default_height='100%',
+        )
         open_html_in_browser(html, self.using, self.new, self.autoraise)
