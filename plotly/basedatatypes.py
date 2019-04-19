@@ -9,6 +9,7 @@ import warnings
 from contextlib import contextmanager
 from copy import deepcopy, copy
 
+from plotly.subplots import _set_trace_grid_reference, _get_grid_subplot
 from .optional_imports import get_module
 
 from _plotly_utils.basevalidators import (
@@ -1237,10 +1238,15 @@ Please use the add_trace method with the row and col parameters.
         try:
             grid_ref = self._grid_ref
         except AttributeError:
-            raise Exception("In order to use Figure.append_trace, "
+            raise Exception("In order to reference traces by row and column, "
                             "you must first use "
                             "plotly.tools.make_subplots "
-                            "to create a subplot grid.")
+                            "to create the figure with a subplot grid.")
+        from _plotly_future_ import _future_flags
+        if 'v4_subplots' in _future_flags:
+            return _set_trace_grid_reference(
+                trace, self.layout, grid_ref, row, col)
+
         if row <= 0:
             raise Exception("Row value is out of range. "
                             "Note: the starting cell is (1, 1)")
@@ -1270,6 +1276,38 @@ Please use the add_trace method with the row and col parameters.
                                 "cell got deleted.".format(r=row, c=col))
             trace['xaxis'] = ref[0]
             trace['yaxis'] = ref[1]
+
+    def get_subplot(self, row, col):
+        """
+        Return an object representing the subplot at the specified row
+        and column.  May only be used on Figures created using
+        plotly.tools.make_subplots
+
+        Parameters
+        ----------
+        row: int
+            1-based index of subplot row
+        col: int
+            1-based index of subplot column
+
+        Returns
+        -------
+        subplot
+            * None: if subplot is empty
+            * plotly.graph_objs.layout.Scene: if subplot type is 'scene'
+            * plotly.graph_objs.layout.Polar: if subplot type is 'polar'
+            * plotly.graph_objs.layout.Ternary: if subplot type is 'ternary'
+            * plotly.graph_objs.layout.Mapbox: if subplot type is 'ternary'
+            * SubplotDomain namedtuple with `x` and `y` fields:
+              if subplot type is 'domain'.
+                - x: length 2 list of the subplot start and stop width
+                - y: length 2 list of the subplot start and stop height
+            * SubplotXY namedtuple with `xaxis` and `yaxis` fields:
+              if subplot type is 'xy'.
+                - xaxis: plotly.graph_objs.layout.XAxis instance for subplot
+                - yaxis: plotly.graph_objs.layout.YAxis instance for subplot
+        """
+        return _get_grid_subplot(self, row, col)
 
     # Child property operations
     # -------------------------
