@@ -11,7 +11,8 @@ from __future__ import absolute_import, unicode_literals
 # little differently.
 import collections
 
-_subplot_types = {'scene', 'geo', 'polar', 'ternary', 'mapbox'}
+_single_subplot_types = {'scene', 'geo', 'polar', 'ternary', 'mapbox'}
+_subplot_types = set.union(_single_subplot_types, {'xy', 'domain'})
 
 # For most subplot types, a trace is associated with a particular subplot
 # using a trace property with a name that matches the subplot type. For
@@ -32,7 +33,7 @@ SubplotDomain = collections.namedtuple('SubplotDomain', ('x', 'y'))
 
 def _get_initial_max_subplot_ids():
     max_subplot_ids = {subplot_type: 0
-                       for subplot_type in _subplot_types}
+                       for subplot_type in _single_subplot_types}
     max_subplot_ids['xaxis'] = 0
     max_subplot_ids['yaxis'] = 0
     return max_subplot_ids
@@ -151,6 +152,9 @@ def make_subplots(
                 - 'mapbox': Mapbox subplot for scattermapbox
                 - 'domain': Subplot type for traces that are individually
                             positioned. pie, parcoords, parcats, etc.
+                - trace type: A trace type which will be used to determine
+                              the appropriate subplot type for that trace
+
             * colspan (int, default 1): number of subplot columns
                 for this subplot to span.
             * rowspan (int, default 1): number of subplot rows
@@ -547,8 +551,6 @@ The row_titles argument to make_subplots must be a list or tuple
     Received value of type {typ}: {val}""".format(
             typ=type(row_titles), val=repr(row_titles)))
 
-
-
     # Init layout
     # -----------
     layout = go.Layout()
@@ -909,9 +911,57 @@ def _init_subplot_domain(x_domain, y_domain):
     return ref_element
 
 
+def _subplot_type_for_trace(trace_type):
+    from plotly.validators import DataValidator
+    trace_validator = DataValidator()
+    if trace_type in trace_validator.class_strs_map:
+        # subplot_type is a trace name, find the subplot type for trace
+        trace = trace_validator.validate_coerce([{'type': trace_type}])[0]
+        if 'domain' in trace:
+            return 'domain'
+        elif 'xaxis' in trace and 'yaxis' in trace:
+            return 'xy'
+        elif 'geo' in trace:
+            return 'geo'
+        elif 'scene' in trace:
+            return 'scene'
+        elif 'subplot' in trace:
+            for t in _subplot_prop_named_subplot:
+                try:
+                    trace.subplot = t
+                    return t
+                except ValueError:
+                    pass
+
+    return None
+
+
+def _validate_coerce_subplot_type(subplot_type):
+
+    # Lowercase subplot_type
+    orig_subplot_type = subplot_type
+    subplot_type = subplot_type.lower()
+
+    # Check if it's a named subplot type
+    if subplot_type in _subplot_types:
+        return subplot_type
+
+    # Try to determine subplot type for trace
+    subplot_type = _subplot_type_for_trace(subplot_type)
+
+    if subplot_type is None:
+        raise ValueError('Unsupported subplot type: {}'
+                         .format(repr(orig_subplot_type)))
+    else:
+        return subplot_type
+
+
 def _init_subplot(
         layout, subplot_type, x_domain, y_domain, max_subplot_ids=None
 ):
+    # Normalize subplot type
+    subplot_type = _validate_coerce_subplot_type(subplot_type)
+
     if max_subplot_ids is None:
         max_subplot_ids = _get_initial_max_subplot_ids()
 
@@ -925,15 +975,15 @@ def _init_subplot(
         ref_element = _init_subplot_xy(
             layout, x_domain, y_domain, max_subplot_ids
         )
-    elif subplot_type in _subplot_types:
+    elif subplot_type in _single_subplot_types:
         ref_element = _init_subplot_single(
             layout, subplot_type, x_domain, y_domain, max_subplot_ids
         )
     elif subplot_type == 'domain':
         ref_element = _init_subplot_domain(x_domain, y_domain)
     else:
-        raise ValueError('Invalid subplot type {subplot_type}'
-                         .format(subplot_type=subplot_type))
+        raise ValueError('Unsupported subplot type: {}'
+                         .format(repr(subplot_type)))
 
     return ref_element
 
