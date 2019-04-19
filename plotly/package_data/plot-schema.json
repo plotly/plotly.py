@@ -14544,14 +14544,15 @@
                             "role": "style",
                             "editType": "style",
                             "anim": true,
-                            "description": "Sets the line color."
+                            "description": "Sets the line color.",
+                            "dflt": "#444"
                         },
                         "width": {
                             "valType": "number",
                             "min": 0,
                             "dflt": 2,
                             "role": "style",
-                            "editType": "style",
+                            "editType": "plot",
                             "anim": true,
                             "description": "Sets the line width (in px)."
                         },
