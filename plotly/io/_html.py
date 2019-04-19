@@ -31,6 +31,8 @@ def to_html(fig,
             post_script=None,
             full_html=True,
             animation_opts=None,
+            default_width='100%',
+            default_height='100%',
             validate=True):
     """
     Convert a figure to an HTML string representation.
@@ -93,10 +95,10 @@ def to_html(fig,
         If a string that ends in '.js', a script tag is included that
         references the specified path. This approach can be used to point the
         resulting HTML div string to an alternative CDN.
-    post_script: str or None (default None)
-        JavaScript snippet to be included in the resulting div just after
-        plot creation.  The string may include '{plot_id}' placeholders that
-        will then be replaced by the `id` of the div element that the
+    post_script: str or list or None (default None)
+        JavaScript snippet(s) to be included in the resulting div just after
+        plot creation.  The string(s) may include '{plot_id}' placeholders
+        that will then be replaced by the `id` of the div element that the
         plotly.js figure is associated with.  One application for this script
         is to install custom plotly.js event handlers.
     full_html: bool (default True)
@@ -109,6 +111,11 @@ def to_html(fig,
         https://github.com/plotly/plotly.js/blob/master/src/plots/animation_attributes.js
         for available options. Has no effect if the figure does not contain
         frames, or auto_play is False.
+    default_width, default_height: number or str (default '100%')
+        The default figure width/height to use if the provided figure does not
+        specify its own layout.width/layout.height property.  May be
+        specified in pixels as an integer (e.g. 500), or as a css width style
+        string (e.g. '500px', '100%').
     validate: bool (default True)
         True if the figure should be validated before being converted to
         JSON, False otherwise.
@@ -143,25 +150,47 @@ def to_html(fig,
     # ## Serialize figure config ##
     config = _get_jconfig(config)
 
-    # Check whether we should add responsive
-    layout_dict = fig_dict.get('layout', {})
-    if layout_dict.get('width', None) is None:
-        config.setdefault('responsive', True)
+    # Set responsive
+    config.setdefault('responsive', True)
 
     jconfig = json.dumps(config)
+
+    # Get div width/height
+    layout_dict = fig_dict.get('layout', {})
+    div_width = layout_dict.get('width', default_width)
+    div_height = layout_dict.get('height', default_height)
+
+    # Add 'px' suffix to numeric widths
+    try:
+        float(div_width)
+    except (ValueError, TypeError):
+        pass
+    else:
+        div_width = str(div_width) + 'px'
+
+    try:
+        float(div_height)
+    except (ValueError, TypeError):
+        pass
+    else:
+        div_height = str(div_height) + 'px'
 
     # ## Get platform URL ##
     plotly_platform_url = config.get('plotlyServerURL', 'https://plot.ly')
 
     # ## Build script body ##
     # This is the part that actually calls Plotly.js
+
+    # build post script snippet(s)
+    then_post_script = ''
     if post_script:
-        then_post_script = """.then(function(){{
+        if not isinstance(post_script, (list, tuple)):
+            post_script = [post_script]
+        for ps in post_script:
+            then_post_script += """.then(function(){{
                             {post_script}
                         }})""".format(
-            post_script=post_script.replace('{plot_id}', plotdivid))
-    else:
-        then_post_script = ''
+                post_script=ps.replace('{plot_id}', plotdivid))
 
     then_addframes = ''
     then_animate = ''
@@ -274,7 +303,8 @@ include_mathjax may be specified as False, 'cdn', or a string ending with '.js'
 <div>
         {mathjax_script}
         {load_plotlyjs}
-            <div id="{id}" class="plotly-graph-div"></div>
+            <div id="{id}" class="plotly-graph-div" \
+style="height:{height}; width:{width};"></div>
             <script type="text/javascript">
                 {require_start}
                     window.PLOTLYENV=window.PLOTLYENV || {{}};
@@ -286,6 +316,8 @@ include_mathjax may be specified as False, 'cdn', or a string ending with '.js'
         mathjax_script=mathjax_script,
         load_plotlyjs=load_plotlyjs,
         id=plotdivid,
+        width=div_width,
+        height=div_height,
         plotly_platform_url=plotly_platform_url,
         require_start=require_start,
         script=script,
@@ -313,6 +345,8 @@ def write_html(fig,
                full_html=True,
                animation_opts=None,
                validate=True,
+               default_width='100%',
+               default_height='100%',
                auto_open=False):
     """
     Write a figure to an HTML file representation
@@ -393,10 +427,10 @@ def write_html(fig,
         If a string that ends in '.js', a script tag is included that
         references the specified path. This approach can be used to point the
         resulting HTML div string to an alternative CDN.
-    post_script: str or None (default None)
-        JavaScript snippet to be included in the resulting div just after
-        plot creation.  The string may include '{plot_id}' placeholders that
-        will then be replaced by the `id` of the div element that the
+    post_script: str or list or None (default None)
+        JavaScript snippet(s) to be included in the resulting div just after
+        plot creation.  The string(s) may include '{plot_id}' placeholders
+        that will then be replaced by the `id` of the div element that the
         plotly.js figure is associated with.  One application for this script
         is to install custom plotly.js event handlers.
     full_html: bool (default True)
@@ -409,6 +443,11 @@ def write_html(fig,
         https://github.com/plotly/plotly.js/blob/master/src/plots/animation_attributes.js
         for available options. Has no effect if the figure does not contain
         frames, or auto_play is False.
+    default_width, default_height: number or str (default '100%')
+        The default figure width/height to use if the provided figure does not
+        specify its own layout.width/layout.height property.  May be
+        specified in pixels as an integer (e.g. 500), or as a css width style
+        string (e.g. '500px', '100%').
     validate: bool (default True)
         True if the figure should be validated before being converted to
         JSON, False otherwise.
@@ -430,8 +469,11 @@ def write_html(fig,
         include_mathjax=include_mathjax,
         post_script=post_script,
         full_html=full_html,
+        animation_opts=animation_opts,
+        default_width=default_width,
+        default_height=default_height,
         validate=validate,
-        animation_opts=animation_opts)
+    )
 
     # Check if file is a string
     file_is_str = isinstance(file, six.string_types)
