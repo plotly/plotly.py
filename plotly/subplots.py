@@ -516,7 +516,7 @@ The 'insets' argument to make_suplots must be a list of dictionaries.
         _check_keys_and_fill('insets', insets, inset_defaults)
 
     # ### shared_xaxes / shared_yaxes
-    valid_shared_vals = [None, True, False, 'rows', 'cols', 'all']
+    valid_shared_vals = [None, True, False, 'rows', 'columns', 'all']
     shared_err_msg = """
 The {arg} argument to make_subplots must be one of: {valid_vals}
     Received value of type {typ}: {val}"""
