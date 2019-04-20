@@ -9,7 +9,11 @@ import warnings
 from contextlib import contextmanager
 from copy import deepcopy, copy
 
-from plotly.subplots import _set_trace_grid_reference, _get_grid_subplot
+from plotly.subplots import (
+    _set_trace_grid_reference,
+    _get_grid_subplot,
+    _get_subplot_ref_for_trace,
+)
 from .optional_imports import get_module
 
 from _plotly_utils.basevalidators import (
@@ -603,6 +607,57 @@ class BaseFigure(object):
         # Update trace indexes
         for trace_ind, trace in enumerate(self._data_objs):
             trace._trace_ind = trace_ind
+
+    def select_traces(self, selector=None, row=None, col=None):
+
+        def select_eq(obj1, obj2):
+            try:
+                obj1 = obj1.to_plotly_json()
+            except Exception:
+                pass
+            try:
+                obj2 = obj2.to_plotly_json()
+            except Exception:
+                pass
+
+            return obj1 == obj2
+
+        if not selector:
+            selector = {}
+
+        if row is not None and col is not None:
+            grid_ref = self._validate_get_grid_ref()
+            grid_subplot_ref = grid_ref[row-1][col-1]
+            filter_by_subplot = True
+        else:
+            filter_by_subplot = False
+            grid_subplot_ref = None
+
+        for trace in self.data:
+            # Filter by subplot
+            if filter_by_subplot:
+                trace_subplot_ref = _get_subplot_ref_for_trace(trace)
+                if grid_subplot_ref != trace_subplot_ref:
+                    continue
+
+            # Filter by selector
+            if not all(
+                    k in trace and select_eq(trace[k], selector[k])
+                    for k in selector):
+                continue
+
+            yield trace
+
+    def for_each_trace(self, fn, selector=None, row=None, col=None):
+        for trace in self.select_traces(selector=selector, row=row, col=col):
+            fn(trace)
+
+        return self
+
+    def update_traces(self, patch, selector=None, row=None, col=None):
+        for trace in self.select_traces(selector=selector, row=row, col=col):
+            trace.update(patch)
+        return self
 
     # Restyle
     # -------
@@ -1235,13 +1290,8 @@ Please use the add_trace method with the row and col parameters.
         self.add_trace(trace=trace, row=row, col=col)
 
     def _set_trace_grid_position(self, trace, row, col):
-        try:
-            grid_ref = self._grid_ref
-        except AttributeError:
-            raise Exception("In order to reference traces by row and column, "
-                            "you must first use "
-                            "plotly.tools.make_subplots "
-                            "to create the figure with a subplot grid.")
+        grid_ref = self._validate_get_grid_ref()
+
         from _plotly_future_ import _future_flags
         if 'v4_subplots' in _future_flags:
             return _set_trace_grid_reference(
@@ -1276,6 +1326,16 @@ Please use the add_trace method with the row and col parameters.
                                 "cell got deleted.".format(r=row, c=col))
             trace['xaxis'] = ref[0]
             trace['yaxis'] = ref[1]
+
+    def _validate_get_grid_ref(self):
+        try:
+            grid_ref = self._grid_ref
+        except AttributeError:
+            raise Exception("In order to reference traces by row and column, "
+                            "you must first use "
+                            "plotly.tools.make_subplots "
+                            "to create the figure with a subplot grid.")
+        return grid_ref
 
     def get_subplot(self, row, col):
         """

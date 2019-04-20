@@ -624,7 +624,7 @@ The row_titles argument to make_subplots must be a list or tuple
             subplot_type = spec['type']
             grid_ref_element = _init_subplot(
                 layout, subplot_type, x_domain, y_domain, max_subplot_ids)
-            grid_ref_element['spec'] = spec
+            # grid_ref_element['spec'] = spec
             grid_ref[r][c] = grid_ref_element
 
     _configure_shared_axes(layout, grid_ref, 'x', shared_xaxes, row_dir)
@@ -846,15 +846,15 @@ def _init_subplot_xy(
     y_cnt = max_subplot_ids['yaxis'] + 1
 
     # Compute x/y labels (the values of trace.xaxis/trace.yaxis
-    x_label = "x{cnt}".format(cnt=x_cnt)
-    y_label = "y{cnt}".format(cnt=y_cnt)
+    x_label = "x{cnt}".format(cnt=x_cnt if x_cnt > 1 else '')
+    y_label = "y{cnt}".format(cnt=y_cnt if y_cnt > 1 else '')
 
     # Anchor x and y axes to each other
     x_anchor, y_anchor = y_label, x_label
 
     # Build layout.xaxis/layout.yaxis containers
-    xaxis_name = 'xaxis{cnt}'.format(cnt=x_cnt)
-    yaxis_name = 'yaxis{cnt}'.format(cnt=y_cnt)
+    xaxis_name = 'xaxis{cnt}'.format(cnt=x_cnt if x_cnt > 1 else '')
+    yaxis_name = 'yaxis{cnt}'.format(cnt=y_cnt if y_cnt > 1 else '')
     x_axis = {'domain': x_domain, 'anchor': x_anchor}
     y_axis = {'domain': y_domain, 'anchor': y_anchor}
 
@@ -882,7 +882,9 @@ def _init_subplot_single(
 
     # Add scene to layout
     cnt = max_subplot_ids[subplot_type] + 1
-    label = '{subplot_type}{cnt}'.format(subplot_type=subplot_type, cnt=cnt)
+    label = '{subplot_type}{cnt}'.format(
+        subplot_type=subplot_type,
+        cnt=cnt if cnt > 1 else '')
     scene = dict(domain={'x': x_domain, 'y': y_domain})
     layout[label] = scene
 
@@ -906,12 +908,13 @@ def _init_subplot_domain(x_domain, y_domain):
     ref_element = {
         'subplot_type': 'domain',
         'layout_keys': (),
-        'trace_kwargs': {'domain': {'x': x_domain, 'y': y_domain}}}
+        'trace_kwargs': {
+            'domain': {'x': tuple(x_domain), 'y': tuple(y_domain)}}}
 
     return ref_element
 
 
-def _subplot_type_for_trace(trace_type):
+def _subplot_type_for_trace_type(trace_type):
     from plotly.validators import DataValidator
     trace_validator = DataValidator()
     if trace_type in trace_validator.class_strs_map:
@@ -947,7 +950,7 @@ def _validate_coerce_subplot_type(subplot_type):
         return subplot_type
 
     # Try to determine subplot type for trace
-    subplot_type = _subplot_type_for_trace(subplot_type)
+    subplot_type = _subplot_type_for_trace_type(subplot_type)
 
     if subplot_type is None:
         raise ValueError('Unsupported subplot type: {}'
@@ -1306,3 +1309,46 @@ The col argument to get_subplot must be an integer where 1 <= row <= {cols}
     else:
         raise ValueError("""
 Unexpected subplot type with layout_keys of {}""".format(layout_keys))
+
+
+def _get_subplot_ref_for_trace(trace):
+
+    if 'domain' in trace:
+        return {
+            'subplot_type': 'domain',
+            'layout_keys': (),
+            'trace_kwargs': {
+                'domain': {'x': trace.domain.x,
+                           'y': trace.domain.y}}}
+
+    elif 'xaxis' in trace and 'yaxis' in trace:
+        xaxis_name = 'xaxis' + trace.xaxis[1:] if trace.xaxis else 'xaxis'
+        yaxis_name = 'yaxis' + trace.yaxis[1:] if trace.yaxis else 'yaxis'
+
+        return {
+            'subplot_type': 'xy',
+            'layout_keys': (xaxis_name, yaxis_name),
+            'trace_kwargs': {'xaxis': trace.xaxis, 'yaxis': trace.yaxis}
+        }
+    elif 'geo' in trace:
+        return {
+            'subplot_type': 'geo',
+            'layout_keys': (trace.geo,),
+            'trace_kwargs': {'geo': trace.geo}}
+    elif 'scene' in trace:
+        return {
+            'subplot_type': 'scene',
+            'layout_keys': (trace.scene,),
+            'trace_kwargs': {'scene': trace.scene}}
+    elif 'subplot' in trace:
+        for t in _subplot_prop_named_subplot:
+            try:
+                trace.subplot = t
+                return {
+                    'subplot_type': t,
+                    'layout_keys': (trace.subplot,),
+                    'trace_kwargs': {'subplot': trace.subplot}}
+            except ValueError:
+                pass
+
+    return None
