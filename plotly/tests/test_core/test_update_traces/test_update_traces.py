@@ -104,14 +104,15 @@ class TestSelectTraces(TestCase):
         )
 
         self.fig = fig
-        self.fig_no_grid = go.Figure(self.fig)
-        del self.fig_no_grid.__dict__['_grid_ref']
-        del self.fig_no_grid.__dict__['_grid_str']
+        self.fig_no_grid = go.Figure(self.fig.to_dict())
 
     def tearDown(self):
         _future_flags.remove('v4_subplots')
 
+    # select_traces
+    # -------------
     def assert_select_traces(self, expected_inds, selector=None, row=None, col=None, test_no_grid=False):
+        # Select traces on figure initialized with make_subplots
         trace_generator = self.fig.select_traces(
             selector=selector, row=row, col=col)
         self.assertTrue(inspect.isgenerator(trace_generator))
@@ -119,11 +120,23 @@ class TestSelectTraces(TestCase):
         trace_list = list(trace_generator)
         self.assertEqual(trace_list, [self.fig.data[i] for i in expected_inds])
 
+        # Select traces on figure not containing subplot info
         if test_no_grid:
             trace_generator = self.fig_no_grid.select_traces(
                 selector=selector, row=row, col=col)
             trace_list = list(trace_generator)
             self.assertEqual(trace_list, [self.fig_no_grid.data[i] for i in expected_inds])
+
+        # Test for each trace
+        trace_list = []
+        self.fig.for_each_trace(
+            lambda t: trace_list.append(t),
+            selector=selector,
+            row=row,
+            col=col,
+        )
+        self.assertEqual(
+            trace_list, [self.fig.data[i] for i in expected_inds])
 
     def test_select_by_type(self):
         self.assert_select_traces(
@@ -185,3 +198,6 @@ class TestSelectTraces(TestCase):
         # Valid row/col and valid selector but the intersection is empty
         self.assert_select_traces(
             [], selector={'type': 'markers'}, row=3, col=1)
+
+    # for_each_trace
+    # --------------

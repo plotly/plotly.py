@@ -1330,6 +1330,8 @@ Please use the add_trace method with the row and col parameters.
     def _validate_get_grid_ref(self):
         try:
             grid_ref = self._grid_ref
+            if grid_ref is None:
+                raise AttributeError('_grid_ref')
         except AttributeError:
             raise Exception("In order to reference traces by row and column, "
                             "you must first use "
