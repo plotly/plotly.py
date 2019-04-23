@@ -639,7 +639,30 @@ class BaseFigure(object):
             trace._trace_ind = trace_ind
 
     def select_traces(self, selector=None, row=None, col=None):
+        """
+        Select traces from a particular subplot cell and/or traces
+        that satisfy custom selection criteria.
 
+        Parameters
+        ----------
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            Traces will be selected if they contain properties corresponding
+            to all of the dictionary's keys, with values that exactly match
+            the supplied values. If None (the default), all traces are
+            selected.
+        row, col: int or None (default None)
+            Subplot row and column index of traces to select.
+            To select traces by row and column, the Figure must have been
+            created using plotly.subplots.make_subplots.  If None
+            (the default), all traces are selected.
+
+        Returns
+        -------
+        generator
+            Generator that iterates through all of the traces that satisfy
+            all of the specified selection criteria
+        """
         def select_eq(obj1, obj2):
             try:
                 obj1 = obj1.to_plotly_json()
@@ -679,12 +702,65 @@ class BaseFigure(object):
             yield trace
 
     def for_each_trace(self, fn, selector=None, row=None, col=None):
+        """
+        Apply a function to all traces that satisfy the specified selection
+        criteria
+
+        Parameters
+        ----------
+        fn:
+            Function that inputs a single trace object.
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            Traces will be selected if they contain properties corresponding
+            to all of the dictionary's keys, with values that exactly match
+            the supplied values. If None (the default), all traces are
+            selected.
+        row, col: int or None (default None)
+            Subplot row and column index of traces to select.
+            To select traces by row and column, the Figure must have been
+            created using plotly.subplots.make_subplots.  If None
+            (the default), all traces are selected.
+
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        """
         for trace in self.select_traces(selector=selector, row=row, col=col):
             fn(trace)
 
         return self
 
     def update_traces(self, patch, selector=None, row=None, col=None):
+        """
+        Perform a property update operation on all traces that satisfy the
+        specified selection criteria
+
+        Parameters
+        ----------
+        patch: dict
+            Dictionary of property updates to be applied to all traces that
+            satisfy the selection criteria.
+        fn:
+            Function that inputs a single trace object.
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            Traces will be selected if they contain properties corresponding
+            to all of the dictionary's keys, with values that exactly match
+            the supplied values. If None (the default), all traces are
+            selected.
+        row, col: int or None (default None)
+            Subplot row and column index of traces to select.
+            To select traces by row and column, the Figure must have been
+            created using plotly.subplots.make_subplots.  If None
+            (the default), all traces are selected.
+
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        """
         for trace in self.select_traces(selector=selector, row=row, col=col):
             trace.update(patch)
         return self
