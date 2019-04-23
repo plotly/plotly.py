@@ -54,7 +54,8 @@ class BaseFigure(object):
                  data=None,
                  layout_plotly=None,
                  frames=None,
-                 skip_invalid=False):
+                 skip_invalid=False,
+                 **kwargs):
         """
         Construct a BaseFigure object
 
@@ -262,6 +263,14 @@ class BaseFigure(object):
         # ### Check for default template ###
         self._initialize_layout_template()
 
+        # Process kwargs
+        # --------------
+        for k, v in kwargs.items():
+            if k in self:
+                self[k] = v
+            elif not skip_invalid:
+                raise TypeError('invalid Figure property: {}'.format(k))
+
     # Magic Methods
     # -------------
     def __reduce__(self):
@@ -371,7 +380,13 @@ class BaseFigure(object):
         return iter(('data', 'layout', 'frames'))
 
     def __contains__(self, prop):
-        return prop in ('data', 'layout', 'frames')
+        prop = BaseFigure._str_to_dict_path(prop)
+        if prop[0] not in ('data', 'layout', 'frames'):
+            return False
+        elif len(prop) == 1:
+            return True
+        else:
+            return prop[1:] in self[prop[0]]
 
     def __eq__(self, other):
         if not isinstance(other, BaseFigure):
