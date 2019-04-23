@@ -2532,8 +2532,16 @@ class BasePlotlyType(object):
         """
         Process any extra kwargs that are not predefined as constructor params
         """
-        if not self._skip_invalid:
-            self._raise_on_invalid_property_error(*kwargs.keys())
+        invalid_kwargs = {}
+        for k, v in kwargs.items():
+            if k in self:
+                # e.g. underscore kwargs like marker_line_color
+                self[k] = v
+            else:
+                invalid_kwargs[k] = v
+
+        if invalid_kwargs and not self._skip_invalid:
+            self._raise_on_invalid_property_error(*invalid_kwargs.keys())
 
     @property
     def plotly_name(self):
