@@ -1,13 +1,14 @@
 from __future__ import absolute_import
 from unittest import TestCase
 import inspect
+import copy
 
 import plotly.graph_objs as go
 from plotly.subplots import make_subplots
 from _plotly_future_ import _future_flags
 
 
-class TestSelectTraces(TestCase):
+class TestSelectForEachUpdateTraces(TestCase):
 
     def setUp(self):
         _future_flags.add('v4_subplots')
@@ -109,8 +110,8 @@ class TestSelectTraces(TestCase):
     def tearDown(self):
         _future_flags.remove('v4_subplots')
 
-    # select_traces
-    # -------------
+    # select_traces and for_each_trace
+    # --------------------------------
     def assert_select_traces(self, expected_inds, selector=None, row=None, col=None, test_no_grid=False):
         # Select traces on figure initialized with make_subplots
         trace_generator = self.fig.select_traces(
@@ -129,12 +130,14 @@ class TestSelectTraces(TestCase):
 
         # Test for each trace
         trace_list = []
-        self.fig.for_each_trace(
+        for_each_res = self.fig.for_each_trace(
             lambda t: trace_list.append(t),
             selector=selector,
             row=row,
             col=col,
         )
+        self.assertIs(for_each_res, self.fig)
+
         self.assertEqual(
             trace_list, [self.fig.data[i] for i in expected_inds])
 
@@ -199,5 +202,91 @@ class TestSelectTraces(TestCase):
         self.assert_select_traces(
             [], selector={'type': 'markers'}, row=3, col=1)
 
-    # for_each_trace
-    # --------------
+    def test_for_each_trace_lowercase_names(self):
+        # Names are all uppercase to start
+        original_names = [t.name for t in self.fig.data]
+        self.assertTrue([str.isupper(n) for n in original_names])
+
+        # Lower case names
+        result_fig = self.fig.for_each_trace(
+            lambda t: t.update(name=t.name.lower())
+        )
+
+        # Check chaning
+        self.assertIs(result_fig, self.fig)
+
+        # Check that names were altered
+        self.assertTrue(
+            all([t.name == n.lower()
+                 for t, n in zip(result_fig.data, original_names)]))
+
+    # test update_traces
+    # ------------------
+    def assert_update_traces(
+            self, patch, expected_inds, selector=None, row=None, col=None
+    ):
+        # Save off original figure
+        fig_orig = copy.deepcopy(self.fig)
+        for trace1, trace2 in zip(fig_orig.data, self.fig.data):
+            trace1.uid = trace2.uid
+
+        # Perform update
+        update_res = self.fig.update_traces(
+            patch, selector=selector, row=row, col=col
+        )
+
+        # Check chaining support
+        self.assertIs(update_res, self.fig)
+
+        # Check resulting traces
+        for i, (t_orig, t) in enumerate(zip(fig_orig.data, self.fig.data)):
+            if i in expected_inds:
+                # Check that traces are initially equal
+                self.assertNotEqual(t_orig, t)
+
+                # Check that traces are equal after update
+                t_orig.update(patch)
+
+            # Check that traces are equal
+            self.assertEqual(t_orig, t)
+
+    def test_update_traces_by_type(self):
+        self.assert_update_traces(
+            {'visible': 'legendonly'},
+            [0, 2],
+            selector={'type': 'scatter'}
+        )
+
+        self.assert_update_traces(
+            {'visible': 'legendonly'},
+            [1],
+            selector={'type': 'bar'},
+        )
+
+        self.assert_update_traces(
+            {'colorscale': 'Viridis'},
+            [3],
+            selector={'type': 'heatmap'}
+        )
+
+        self.assert_update_traces(
+            {'marker': {'line': {'color': 'yellow'}}},
+            [4, 5],
+            selector={'type': 'scatter3d'}
+        )
+
+        self.assert_update_traces(
+            {'line': {'dash': 'dot'}},
+            [6, 7],
+            selector={'type': 'scatterpolar'}
+        )
+
+        self.assert_update_traces(
+            {'dimensions': {1: {'label': 'Dimension 1'}}},
+            [8],
+            selector={'type': 'parcoords'}
+        )
+
+        self.assert_update_traces(
+            {'hoverinfo': 'label+percent'},
+            [], selector={'type': 'pie'})
