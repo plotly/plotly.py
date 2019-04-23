@@ -133,3 +133,10 @@ class FigureTest(TestCase):
         )
 
         self.assertEqual(fig.layout.title.text, 'Hello, Figure title!')
+
+    def test_add_trace_underscore_kwarg(self):
+        fig = go.Figure()
+
+        fig.add_scatter(y=[2, 1, 3], marker_line_color='green')
+
+        self.assertEqual(fig.data[0].marker.line.color, 'green')
