@@ -283,6 +283,13 @@ class TestSelectForEachUpdateTraces(TestCase):
             selector={'type': 'scatter3d'}
         )
 
+        # underscore syntax
+        self.assert_update_traces(
+            dict(marker_line_color='pink'),
+            [4, 5],
+            selector={'type': 'scatter3d'}
+        )
+
         self.assert_update_traces(
             {'line': {'dash': 'dot'}},
             [6, 7],
@@ -299,6 +306,14 @@ class TestSelectForEachUpdateTraces(TestCase):
         # Dot syntax
         self.assert_update_traces(
             {'dimensions[1].label': 'Dimension A'},
+            [8],
+            selector={'type': 'parcoords'}
+        )
+
+        # underscore syntax
+        # Dot syntax
+        self.assert_update_traces(
+            dict(dimensions_1_label='Dimension X'),
             [8],
             selector={'type': 'parcoords'}
         )

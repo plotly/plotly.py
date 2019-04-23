@@ -30,6 +30,11 @@ class TestAssignmentPrimitive(TestCase):
             'marker': {'colorbar': {
                 'title': {'font': {'family': 'courier'}}}}}
 
+        self.expected_nested_error_x = {
+            'type': 'scatter',
+            'name': 'scatter A',
+            'error_x': {'type': 'percent'}}
+
     def test_toplevel_attr(self):
         assert self.scatter.fillcolor is None
         self.scatter.fillcolor = 'green'
@@ -86,12 +91,20 @@ class TestAssignmentPrimitive(TestCase):
         d1, d2 = strip_dict_params(self.scatter, self.expected_nested)
         assert d1 == d2
 
-    def test_nested_update__dots(self):
+    def test_nested_update_dots(self):
         assert self.scatter['marker.colorbar.title.font.family'] is None
         self.scatter.update({'marker.colorbar.title.font.family': 'courier'})
 
         assert self.scatter['marker.colorbar.title.font.family'] == 'courier'
         d1, d2 = strip_dict_params(self.scatter, self.expected_nested)
+        assert d1 == d2
+
+    def test_nested_update_underscores(self):
+        assert self.scatter['error_x.type'] is None
+        self.scatter.update({'error_x_type': 'percent'})
+
+        assert self.scatter['error_x_type'] == 'percent'
+        d1, d2 = strip_dict_params(self.scatter, self.expected_nested_error_x)
         assert d1 == d2
 
 
@@ -472,6 +485,25 @@ class TestAssignCompoundArray(TestCase):
 
         # Update
         self.layout.update({'updatemenus[1].buttons[2].method': 'restyle'})
+
+        # Check
+        self.assertEqual(
+            self.layout['updatemenus[1].buttons[2].method'],
+            'restyle')
+        d1, d2 = strip_dict_params(self.layout, self.expected_layout2)
+        assert d1 == d2
+
+    def test_update_double_nested_underscore(self):
+        self.assertEqual(self.layout.updatemenus, ())
+
+        # Initialize empty updatemenus
+        self.layout['updatemenus'] = [{}, {}]
+
+        # Initialize empty buttons in updatemenu[1]
+        self.layout['updatemenus_1_buttons'] = [{}, {}, {}]
+
+        # Update
+        self.layout.update({'updatemenus_1_buttons_2_method': 'restyle'})
 
         # Check
         self.assertEqual(

@@ -37,6 +37,17 @@ class BaseFigure(object):
     """
     _bracket_re = re.compile('^(.*)\[(\d+)\]$')
 
+    _valid_underscore_properties = {
+        'error_x': 'error-x',
+        'error_y': 'error-y',
+        'error_z': 'error-z',
+        'copy_xstyle': 'copy-xstyle',
+        'copy_ystyle': 'copy-ystyle',
+        'copy_zstyle': 'copy-zstyle',
+        'paper_bgcolor': 'paper-bgcolor',
+        'plot_bgcolor': 'plot-bgcolor'
+    }
+
     # Constructor
     # -----------
     def __init__(self,
@@ -881,18 +892,20 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         """
         if isinstance(key_path_str, string_types) and \
                 '.' not in key_path_str and \
-                '[' not in key_path_str:
+                '[' not in key_path_str and \
+                '_' not in key_path_str:
             # Fast path for common case that avoids regular expressions
             return (key_path_str,)
         elif isinstance(key_path_str, tuple):
             # Nothing to do
             return key_path_str
         else:
-            # Split string on periods. e.g. 'foo.bar[1]' -> ['foo', 'bar[1]']
+            # Split string on periods.
+            # e.g. 'foo.bar_baz[1]' -> ['foo', 'bar_baz[1]']
             key_path = key_path_str.split('.')
 
             # Split out bracket indexes.
-            # e.g. ['foo', 'bar[1]'] -> ['foo', 'bar', '1']
+            # e.g. ['foo', 'bar_baz[1]'] -> ['foo', 'bar_baz', '1']
             key_path2 = []
             for key in key_path:
                 match = BaseFigure._bracket_re.match(key)
@@ -901,15 +914,39 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
                 else:
                     key_path2.append(key)
 
+            # Split out underscore
+            # e.g. ['foo', 'bar_baz', '1'] -> ['foo', 'bar', 'baz', '1']
+            key_path3 = []
+            underscore_props = BaseFigure._valid_underscore_properties
+            for key in key_path2:
+                if '_' in key[1:]:
+                    # For valid properties that contain underscores (error_x)
+                    # replace the underscores with hyphens to product them
+                    # from being split up
+                    for under_prop, hyphen_prop in underscore_props.items():
+                        key = key.replace(under_prop, hyphen_prop)
+
+                    # Split key on underscores
+                    key = key.split('_')
+
+                    # Replace hyphens with underscores to restore properties
+                    # that include underscores
+                    for i in range(len(key)):
+                        key[i] = key[i].replace('-', '_')
+
+                    key_path3.extend(key)
+                else:
+                    key_path3.append(key)
+
             # Convert elements to ints if possible.
             # e.g. ['foo', 'bar', '0'] -> ['foo', 'bar', 0]
-            for i in range(len(key_path2)):
+            for i in range(len(key_path3)):
                 try:
-                    key_path2[i] = int(key_path2[i])
+                    key_path3[i] = int(key_path3[i])
                 except ValueError as _:
                     pass
 
-            return tuple(key_path2)
+            return tuple(key_path3)
 
     @staticmethod
     def _set_in(d, key_path_str, v):
