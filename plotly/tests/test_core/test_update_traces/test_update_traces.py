@@ -269,8 +269,16 @@ class TestSelectForEachUpdateTraces(TestCase):
             selector={'type': 'heatmap'}
         )
 
+        # Nest dictionaries
         self.assert_update_traces(
             {'marker': {'line': {'color': 'yellow'}}},
+            [4, 5],
+            selector={'type': 'scatter3d'}
+        )
+
+        # dot syntax
+        self.assert_update_traces(
+            {'marker.line.color': 'cyan'},
             [4, 5],
             selector={'type': 'scatter3d'}
         )
@@ -281,12 +289,21 @@ class TestSelectForEachUpdateTraces(TestCase):
             selector={'type': 'scatterpolar'}
         )
 
+        # Nested dictionaries
         self.assert_update_traces(
             {'dimensions': {1: {'label': 'Dimension 1'}}},
             [8],
             selector={'type': 'parcoords'}
         )
 
+        # Dot syntax
+        self.assert_update_traces(
+            {'dimensions[1].label': 'Dimension A'},
+            [8],
+            selector={'type': 'parcoords'}
+        )
+
         self.assert_update_traces(
             {'hoverinfo': 'label+percent'},
-            [], selector={'type': 'pie'})
+            [], selector={'type': 'pie'}
+        )

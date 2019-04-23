@@ -122,6 +122,22 @@ class TestFigureProperties(TestCase):
         self.figure.update({'data': {0: {'marker': {'color': 'yellow'}}}})
         self.assertEqual(self.figure.data[0].marker.color, 'yellow')
 
+    def test_update_data_dots(self):
+        # Check initial marker color
+        self.assertEqual(self.figure.data[0].marker.color, 'green')
+
+        # Update with dict kwarg
+        self.figure.update(data={0: {'marker.color': 'blue'}})
+        self.assertEqual(self.figure.data[0].marker.color, 'blue')
+
+        # Update with list kwarg
+        self.figure.update(data=[{'marker.color': 'red'}])
+        self.assertEqual(self.figure.data[0].marker.color, 'red')
+
+        # Update with dict
+        self.figure.update({'data[0].marker.color': 'yellow'})
+        self.assertEqual(self.figure.data[0].marker.color, 'yellow')
+
     def test_update_data_empty(self):
         # Create figure with empty data (no traces)
         figure = go.Figure(layout={'width': 1000})

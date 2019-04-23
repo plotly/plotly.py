@@ -86,6 +86,14 @@ class TestAssignmentPrimitive(TestCase):
         d1, d2 = strip_dict_params(self.scatter, self.expected_nested)
         assert d1 == d2
 
+    def test_nested_update__dots(self):
+        assert self.scatter['marker.colorbar.title.font.family'] is None
+        self.scatter.update({'marker.colorbar.title.font.family': 'courier'})
+
+        assert self.scatter['marker.colorbar.title.font.family'] == 'courier'
+        d1, d2 = strip_dict_params(self.scatter, self.expected_nested)
+        assert d1 == d2
+
 
 class TestAssignmentCompound(TestCase):
 
@@ -453,4 +461,21 @@ class TestAssignCompoundArray(TestCase):
         d1, d2 = strip_dict_params(self.layout, self.expected_layout2)
         assert d1 == d2
 
+    def test_update_double_nested_dot(self):
+        self.assertEqual(self.layout.updatemenus, ())
 
+        # Initialize empty updatemenus
+        self.layout['updatemenus'] = [{}, {}]
+
+        # Initialize empty buttons in updatemenu[1]
+        self.layout['updatemenus.1.buttons'] = [{}, {}, {}]
+
+        # Update
+        self.layout.update({'updatemenus[1].buttons[2].method': 'restyle'})
+
+        # Check
+        self.assertEqual(
+            self.layout['updatemenus[1].buttons[2].method'],
+            'restyle')
+        d1, d2 = strip_dict_params(self.layout, self.expected_layout2)
+        assert d1 == d2

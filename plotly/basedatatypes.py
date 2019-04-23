@@ -451,7 +451,8 @@ class BaseFigure(object):
             for d in [dict1, kwargs]:
                 if d:
                     for k, v in d.items():
-                        if self[k] == ():
+                        update_target = self[k]
+                        if update_target == ():
                             # existing data or frames property is empty
                             # In this case we accept the v as is.
                             if k == 'data':
@@ -459,9 +460,12 @@ class BaseFigure(object):
                             else:
                                 # Accept v
                                 self[k] = v
-                        else:
+                        elif (isinstance(update_target, BasePlotlyType) or
+                              (isinstance(update_target, tuple) and
+                               isinstance(update_target[0], BasePlotlyType))):
                             BaseFigure._perform_update(self[k], v)
-
+                        else:
+                            self[k] = v
         return self
 
     # Data
@@ -2737,7 +2741,9 @@ class BasePlotlyType(object):
             plotly_obj = self[prop_path[:-1]]
             prop = prop_path[-1]
         else:
-            plotly_obj = self
+            prop_path = BaseFigure._str_to_dict_path(prop)
+            plotly_obj = self[prop_path[:-1]]
+            prop = prop_path[-1]
 
         # Return validator
         # ----------------
