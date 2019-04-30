@@ -1230,13 +1230,13 @@ class ColorValidator(BaseValidator):
                 # Valid rgb(a), hsl(a), hsv(a) color
                 # (e.g. rgba(10, 234, 200, 50%)
                 return v
-            elif v_normalized in ColorValidator.named_colors:
-                # Valid named color (e.g. 'coral')
-                return v
             elif fullmatch(ColorValidator.re_ddk, v_normalized):
                 # Valid var(--*) DDK theme variable, inspired by CSS syntax
                 # (e.g. var(--accent) )
                 # DDK will crawl & eval var(-- colors for Graph theming
+                return v
+            elif v_normalized in ColorValidator.named_colors:
+                # Valid named color (e.g. 'coral')
                 return v
             else:
                 # Not a valid color
