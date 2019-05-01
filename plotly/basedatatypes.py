@@ -4205,7 +4205,7 @@ class BaseTraceType(BaseTraceHierarchyType):
 
         append : bool
             If False (the default), this callback replaces any previously
-            defined on_selection callbacks for this trace. If True,
+            defined on_deselect callbacks for this trace. If True,
             this callback is appended to the list of any previously defined
             callbacks.
 
@@ -4218,11 +4218,11 @@ class BaseTraceType(BaseTraceHierarchyType):
         >>> from plotly.callbacks import Points
         >>> points = Points()
 
-        >>> def selection_fn(trace, points, selector):
+        >>> def deselect_fn(trace, points):
         ...     inds = points.point_inds
         ...     # Do something
 
-        >>> trace.on_selection(selection_fn)
+        >>> trace.on_deselect(deselect_fn)
 
         Note: The creation of the `points` object is optional,
         it's simply a convenience to help the text editor perform completion
