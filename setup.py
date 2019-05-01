@@ -377,12 +377,12 @@ class UpdatePlotlywidgetVersionCommand(Command):
 
 
 graph_objs_packages = [
-    d[0] for d in os.walk('plotly/graph_objs')
+    d[0].replace('/', '.') for d in os.walk('plotly/graph_objs')
     if not d[0].endswith('__pycache__')]
 
 
 validator_packages = [
-    d[0] for d in os.walk('plotly/validators')
+    d[0].replace('/', '.') for d in os.walk('plotly/validators')
     if not d[0].endswith('__pycache__')]
 
 versioneer_cmds = versioneer.get_cmdclass()
@@ -413,23 +413,23 @@ setup(name='plotly',
       license='MIT',
       packages=['plotly',
                 'plotlywidget',
-                'plotly/plotly',
-                'plotly/figure_factory',
-                'plotly/offline',
-                'plotly/io',
-                'plotly/matplotlylib',
-                'plotly/matplotlylib/mplexporter',
-                'plotly/matplotlylib/mplexporter/renderers',
+                'plotly.plotly',
+                'plotly.figure_factory',
+                'plotly.offline',
+                'plotly.io',
+                'plotly.matplotlylib',
+                'plotly.matplotlylib.mplexporter',
+                'plotly.matplotlylib.mplexporter.renderers',
                 'chart_studio',
-                'chart_studio/api',
-                'chart_studio/api/v1',
-                'chart_studio/api/v2',
-                'chart_studio/dashboard_objs',
-                'chart_studio/grid_objs',
-                'chart_studio/plotly',
-                'chart_studio/plotly/chunked_requests',
-                'chart_studio/presentation_objs',
-                'chart_studio/widgets',
+                'chart_studio.api',
+                'chart_studio.api.v1',
+                'chart_studio.api.v2',
+                'chart_studio.dashboard_objs',
+                'chart_studio.grid_objs',
+                'chart_studio.plotly',
+                'chart_studio.plotly.chunked_requests',
+                'chart_studio.presentation_objs',
+                'chart_studio.widgets',
                 '_plotly_utils',
                 '_plotly_future_',
                 ] + graph_objs_packages + validator_packages,
