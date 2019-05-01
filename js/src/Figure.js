@@ -750,6 +750,10 @@ var FigureView = widgets.DOMWidgetView.extend({
                     function (update) {
                         that.handle_plotly_selected(update)
                     });
+                that.el.on("plotly_deselect",
+                    function (update) {
+                        that.handle_plotly_deselect(update)
+                    });
                 that.el.on("plotly_doubleclick",
                     function (update) {
                         that.handle_plotly_doubleclick(update)
@@ -1080,6 +1084,17 @@ var FigureView = widgets.DOMWidgetView.extend({
     handle_plotly_selected: function (data) {
         this._send_points_callback_message(data, "plotly_selected");
     },
+    
+    /**
+     * Handle plotly_deselect events emitted by the Plotly.js library
+     * @param data
+     */
+    handle_plotly_deselect: function (data) {
+        data = {
+            points : []
+        }
+        this._send_points_callback_message(data, "plotly_deselect");
+    },    
 
     /**
      * Build and send a points callback message to the Python side
