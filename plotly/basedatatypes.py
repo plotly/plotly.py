@@ -4162,6 +4162,23 @@ class BaseTraceType(BaseTraceHierarchyType):
 
         if callback:
             self._select_callbacks.append(callback)
+        
+    def _dispatch_on_selection(self,
+                               points,
+                               selector):
+        """
+        Dispatch points and selector info to selection callbacks
+        """
+        if 'selectedpoints' in self:
+            # Update the selectedpoints property, which will notify all views
+            # of the selection change.  This is a special case because no
+            # restyle event is emitted by plotly.js on selection events
+            # even though these events update the selectedpoints property.
+            self.selectedpoints = points.point_inds
+
+        for callback in self._select_callbacks:
+            callback(self, points, selector)
+
 
     # deselect
     # ------
@@ -4216,23 +4233,7 @@ class BaseTraceType(BaseTraceHierarchyType):
 
         if callback:
             self._deselect_callbacks.append(callback)
-            
-    def _dispatch_on_selection(self,
-                               points,
-                               selector):
-        """
-        Dispatch points and selector info to selection callbacks
-        """
-        if 'selectedpoints' in self:
-            # Update the selectedpoints property, which will notify all views
-            # of the selection change.  This is a special case because no
-            # restyle event is emitted by plotly.js on selection events
-            # even though these events update the selectedpoints property.
-            self.selectedpoints = points.point_inds
-
-        for callback in self._select_callbacks:
-            callback(self, points, selector)
-
+                
     def _dispatch_on_deselect(self,
                                points):
         """
@@ -4245,7 +4246,7 @@ class BaseTraceType(BaseTraceHierarchyType):
             # even though these events update the selectedpoints property.
             self.selectedpoints = points.point_inds
 
-        for callback in self._select_callbacks:
+        for callback in self._deselect_callbacks:
             callback(self, points)
             
 class BaseFrameHierarchyType(BasePlotlyType):

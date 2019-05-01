@@ -736,7 +736,7 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
             elif event_type == 'plotly_selected':
                 trace._dispatch_on_selection(points, selector)
             elif event_type == 'plotly_deselect':
-                trace._dispatch_on_selection(points)
+                trace._dispatch_on_deselect(points)
 
         self._js2py_pointsCallback = None
 
