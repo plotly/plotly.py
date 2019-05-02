@@ -1033,6 +1033,7 @@ class ColorValidator(BaseValidator):
     """
     re_hex = re.compile('#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})')
     re_rgb_etc = re.compile('(rgb|hsl|hsv)a?\([\d.]+%?(,[\d.]+%?){2,3}\)')
+    re_ddk = re.compile('var\(\-\-.*\)')
 
     named_colors = [
         "aliceblue", "antiquewhite", "aqua", "aquamarine", "azure", "beige",
@@ -1228,6 +1229,11 @@ class ColorValidator(BaseValidator):
             # elif ColorValidator.re_rgb_etc.fullmatch(v_normalized):
                 # Valid rgb(a), hsl(a), hsv(a) color
                 # (e.g. rgba(10, 234, 200, 50%)
+                return v
+            elif fullmatch(ColorValidator.re_ddk, v_normalized):
+                # Valid var(--*) DDK theme variable, inspired by CSS syntax
+                # (e.g. var(--accent) )
+                # DDK will crawl & eval var(-- colors for Graph theming
                 return v
             elif v_normalized in ColorValidator.named_colors:
                 # Valid named color (e.g. 'coral')
