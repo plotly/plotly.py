@@ -38347,7 +38347,7 @@ class Sankey(_BaseTraceType):
         Sankey plots for network flow data analysis. The nodes are
         specified in `nodes` and the links between sources and targets
         in `links`. The colors are set in `nodes[i].color` and
-        `links[i].color`; otherwise defaults are used.
+        `links[i].color`, otherwise defaults are used.
 
         Parameters
         ----------
@@ -73201,8 +73201,8 @@ class Box(_BaseTraceType):
         Each box spans from quartile 1 (Q1) to quartile 3 (Q3). The
         second quartile (Q2) is marked by a line inside the box. By
         default, the whiskers correspond to the box' edges +/- 1.5
-        times the interquartile range (IQR = Q3-Q1), see "boxpoints"
-        for other options.
+        times the interquartile range (IQR: Q3-Q1), see "boxpoints" for
+        other options.
 
         Parameters
         ----------
