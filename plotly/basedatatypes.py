@@ -4242,7 +4242,7 @@ class BaseTraceType(BaseTraceHierarchyType):
             # of the selection change.  This is a special case because no
             # restyle event is emitted by plotly.js on selection events
             # even though these events update the selectedpoints property.
-            self.selectedpoints = points.point_inds
+            self.selectedpoints = None
 
         for callback in self._deselect_callbacks:
             callback(self, points)
