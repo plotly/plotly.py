@@ -12,7 +12,12 @@ from plotly.graph_objs import (
 class Figure(BaseFigure):
 
     def __init__(
-        self, data=None, layout=None, frames=None, skip_invalid=False
+        self,
+        data=None,
+        layout=None,
+        frames=None,
+        skip_invalid=False,
+        **kwargs
     ):
         """
         Create a new Figure instance
@@ -500,7 +505,8 @@ class Figure(BaseFigure):
             if a property in the specification of data, layout, or frames
             is invalid AND skip_invalid is False
         """
-        super(Figure, self).__init__(data, layout, frames, skip_invalid)
+        super(Figure,
+              self).__init__(data, layout, frames, skip_invalid, **kwargs)
 
     def add_area(
         self,

@@ -119,7 +119,8 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
                  data=None,
                  layout=None,
                  frames=None,
-                 skip_invalid=False):
+                 skip_invalid=False,
+                 **kwargs):
 
         # Call superclass constructors
         # ----------------------------
@@ -129,7 +130,8 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         super(BaseFigureWidget, self).__init__(data=data,
                                                layout_plotly=layout,
                                                frames=frames,
-                                               skip_invalid=skip_invalid)
+                                               skip_invalid=skip_invalid,
+                                               **kwargs)
 
         # Validate Frames
         # ---------------

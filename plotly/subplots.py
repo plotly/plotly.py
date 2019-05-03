@@ -306,17 +306,7 @@ def make_subplots(
     ...     cols=[1, 2, 1, 2])
     """
 
-    # Make sure we're in future subplots mode
-    from _plotly_future_ import _future_flags
-    if 'v4_subplots' not in _future_flags:
-        raise ValueError("""
-plotly.subplots.make_subplots may only be used in the
-v4_subplots _plotly_future_ mode.  To try it out, run
-
->>> from _plotly_future_ import v4_subplots
-
-before importing plotly.
-""")
+    _validate_v4_subplots('plotly.subplots.make_subplots')
 
     import plotly.graph_objs as go
 
@@ -624,11 +614,10 @@ The row_titles argument to make_subplots must be a list or tuple
             subplot_type = spec['type']
             grid_ref_element = _init_subplot(
                 layout, subplot_type, x_domain, y_domain, max_subplot_ids)
-            grid_ref_element['spec'] = spec
             grid_ref[r][c] = grid_ref_element
 
-    _configure_shared_axes(layout, grid_ref, 'x', shared_xaxes, row_dir)
-    _configure_shared_axes(layout, grid_ref, 'y', shared_yaxes, row_dir)
+    _configure_shared_axes(layout, grid_ref, specs, 'x', shared_xaxes, row_dir)
+    _configure_shared_axes(layout, grid_ref, specs, 'y', shared_yaxes, row_dir)
 
     # Build inset reference
     # ---------------------
@@ -769,7 +758,21 @@ The row_titles argument to make_subplots must be a list or tuple
     return fig
 
 
-def _configure_shared_axes(layout, grid_ref, x_or_y, shared, row_dir):
+def _validate_v4_subplots(method_name):
+    # Make sure we're in future subplots mode
+    from _plotly_future_ import _future_flags
+    if 'v4_subplots' not in _future_flags:
+        raise ValueError("""
+{method_name} may only be used in the
+v4_subplots _plotly_future_ mode.  To try it out, run
+
+>>> from _plotly_future_ import v4_subplots
+
+before importing plotly.
+""".format(method_name=method_name))
+
+
+def _configure_shared_axes(layout, grid_ref, specs, x_or_y, shared, row_dir):
     rows = len(grid_ref)
     cols = len(grid_ref[0])
 
@@ -780,14 +783,14 @@ def _configure_shared_axes(layout, grid_ref, x_or_y, shared, row_dir):
     else:
         rows_iter = range(rows)
 
-    def update_axis_matches(first_axis_id, ref, remove_label):
+    def update_axis_matches(first_axis_id, ref, spec, remove_label):
         if ref is None:
             return first_axis_id
 
         if x_or_y == 'x':
-            span = ref['spec']['colspan']
+            span = spec['colspan']
         else:
-            span = ref['spec']['rowspan']
+            span = spec['rowspan']
 
         if ref['subplot_type'] == 'xy' and span == 1:
             if first_axis_id is None:
@@ -808,8 +811,9 @@ def _configure_shared_axes(layout, grid_ref, x_or_y, shared, row_dir):
             ok_to_remove_label = x_or_y == 'x'
             for r in rows_iter:
                 ref = grid_ref[r][c]
+                spec = specs[r][c]
                 first_axis_id = update_axis_matches(
-                    first_axis_id, ref, ok_to_remove_label)
+                    first_axis_id, ref, spec, ok_to_remove_label)
 
     elif shared == 'rows' or (x_or_y == 'y' and shared is True):
         for r in rows_iter:
@@ -817,14 +821,16 @@ def _configure_shared_axes(layout, grid_ref, x_or_y, shared, row_dir):
             ok_to_remove_label = x_or_y == 'y'
             for c in range(cols):
                 ref = grid_ref[r][c]
+                spec = specs[r][c]
                 first_axis_id = update_axis_matches(
-                    first_axis_id, ref, ok_to_remove_label)
+                    first_axis_id, ref, spec, ok_to_remove_label)
 
     elif shared == 'all':
         first_axis_id = None
         for c in range(cols):
             for ri, r in enumerate(rows_iter):
                 ref = grid_ref[r][c]
+                spec = specs[r][c]
 
                 if x_or_y == 'y':
                     ok_to_remove_label = c > 0
@@ -832,7 +838,7 @@ def _configure_shared_axes(layout, grid_ref, x_or_y, shared, row_dir):
                     ok_to_remove_label = ri > 0 if row_dir > 0 else r < rows - 1
 
                 first_axis_id = update_axis_matches(
-                    first_axis_id, ref, ok_to_remove_label)
+                    first_axis_id, ref, spec, ok_to_remove_label)
 
 
 def _init_subplot_xy(
@@ -846,15 +852,15 @@ def _init_subplot_xy(
     y_cnt = max_subplot_ids['yaxis'] + 1
 
     # Compute x/y labels (the values of trace.xaxis/trace.yaxis
-    x_label = "x{cnt}".format(cnt=x_cnt)
-    y_label = "y{cnt}".format(cnt=y_cnt)
+    x_label = "x{cnt}".format(cnt=x_cnt if x_cnt > 1 else '')
+    y_label = "y{cnt}".format(cnt=y_cnt if y_cnt > 1 else '')
 
     # Anchor x and y axes to each other
     x_anchor, y_anchor = y_label, x_label
 
     # Build layout.xaxis/layout.yaxis containers
-    xaxis_name = 'xaxis{cnt}'.format(cnt=x_cnt)
-    yaxis_name = 'yaxis{cnt}'.format(cnt=y_cnt)
+    xaxis_name = 'xaxis{cnt}'.format(cnt=x_cnt if x_cnt > 1 else '')
+    yaxis_name = 'yaxis{cnt}'.format(cnt=y_cnt if y_cnt > 1 else '')
     x_axis = {'domain': x_domain, 'anchor': x_anchor}
     y_axis = {'domain': y_domain, 'anchor': y_anchor}
 
@@ -882,7 +888,9 @@ def _init_subplot_single(
 
     # Add scene to layout
     cnt = max_subplot_ids[subplot_type] + 1
-    label = '{subplot_type}{cnt}'.format(subplot_type=subplot_type, cnt=cnt)
+    label = '{subplot_type}{cnt}'.format(
+        subplot_type=subplot_type,
+        cnt=cnt if cnt > 1 else '')
     scene = dict(domain={'x': x_domain, 'y': y_domain})
     layout[label] = scene
 
@@ -906,12 +914,13 @@ def _init_subplot_domain(x_domain, y_domain):
     ref_element = {
         'subplot_type': 'domain',
         'layout_keys': (),
-        'trace_kwargs': {'domain': {'x': x_domain, 'y': y_domain}}}
+        'trace_kwargs': {
+            'domain': {'x': tuple(x_domain), 'y': tuple(y_domain)}}}
 
     return ref_element
 
 
-def _subplot_type_for_trace(trace_type):
+def _subplot_type_for_trace_type(trace_type):
     from plotly.validators import DataValidator
     trace_validator = DataValidator()
     if trace_type in trace_validator.class_strs_map:
@@ -947,7 +956,7 @@ def _validate_coerce_subplot_type(subplot_type):
         return subplot_type
 
     # Try to determine subplot type for trace
-    subplot_type = _subplot_type_for_trace(subplot_type)
+    subplot_type = _subplot_type_for_trace_type(subplot_type)
 
     if subplot_type is None:
         raise ValueError('Unsupported subplot type: {}'
@@ -1306,3 +1315,47 @@ The col argument to get_subplot must be an integer where 1 <= row <= {cols}
     else:
         raise ValueError("""
 Unexpected subplot type with layout_keys of {}""".format(layout_keys))
+
+
+def _get_subplot_ref_for_trace(trace):
+
+    if 'domain' in trace:
+        return {
+            'subplot_type': 'domain',
+            'layout_keys': (),
+            'trace_kwargs': {
+                'domain': {'x': trace.domain.x,
+                           'y': trace.domain.y}}}
+
+    elif 'xaxis' in trace and 'yaxis' in trace:
+        xaxis_name = 'xaxis' + trace.xaxis[1:] if trace.xaxis else 'xaxis'
+        yaxis_name = 'yaxis' + trace.yaxis[1:] if trace.yaxis else 'yaxis'
+
+        return {
+            'subplot_type': 'xy',
+            'layout_keys': (xaxis_name, yaxis_name),
+            'trace_kwargs': {'xaxis': trace.xaxis, 'yaxis': trace.yaxis}
+        }
+    elif 'geo' in trace:
+        return {
+            'subplot_type': 'geo',
+            'layout_keys': (trace.geo,),
+            'trace_kwargs': {'geo': trace.geo}}
+    elif 'scene' in trace:
+        return {
+            'subplot_type': 'scene',
+            'layout_keys': (trace.scene,),
+            'trace_kwargs': {'scene': trace.scene}}
+    elif 'subplot' in trace:
+        for t in _subplot_prop_named_subplot:
+            try:
+                validator = trace._get_prop_validator('subplot')
+                validator.validate_coerce(t)
+                return {
+                    'subplot_type': t,
+                    'layout_keys': (trace.subplot,),
+                    'trace_kwargs': {'subplot': trace.subplot}}
+            except ValueError:
+                pass
+
+    return None
