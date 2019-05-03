@@ -673,7 +673,7 @@ class BaseFigure(object):
             except Exception:
                 pass
 
-            return obj1 == obj2
+            return BasePlotlyType._vals_equal(obj1, obj2)
 
         if not selector:
             selector = {}
