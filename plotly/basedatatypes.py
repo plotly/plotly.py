@@ -4162,7 +4162,7 @@ class BaseTraceType(BaseTraceHierarchyType):
 
         if callback:
             self._select_callbacks.append(callback)
-        
+
     def _dispatch_on_selection(self,
                                points,
                                selector):
@@ -4179,15 +4179,14 @@ class BaseTraceType(BaseTraceHierarchyType):
         for callback in self._select_callbacks:
             callback(self, points, selector)
 
-
     # deselect
-    # ------
+    # --------
     def on_deselect(
             self,
             callback,
             append=False):
         """
-        Register function to be called when the user deselects points 
+        Register function to be called when the user deselects points
         in this trace using doubleclick.
 
         Note: Callbacks will only be triggered when the trace belongs to a
@@ -4233,9 +4232,8 @@ class BaseTraceType(BaseTraceHierarchyType):
 
         if callback:
             self._deselect_callbacks.append(callback)
-                
-    def _dispatch_on_deselect(self,
-                               points):
+
+    def _dispatch_on_deselect(self, points):
         """
         Dispatch points info to deselection callbacks
         """
@@ -4248,7 +4246,8 @@ class BaseTraceType(BaseTraceHierarchyType):
 
         for callback in self._deselect_callbacks:
             callback(self, points)
-            
+
+
 class BaseFrameHierarchyType(BasePlotlyType):
     """
     Base class for all types in the trace hierarchy
