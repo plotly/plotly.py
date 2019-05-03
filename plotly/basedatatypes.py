@@ -13,7 +13,7 @@ from plotly.subplots import (
     _set_trace_grid_reference,
     _get_grid_subplot,
     _get_subplot_ref_for_trace,
-)
+    _validate_v4_subplots)
 from .optional_imports import get_module
 
 from _plotly_utils.basevalidators import (
@@ -663,6 +663,24 @@ class BaseFigure(object):
             Generator that iterates through all of the traces that satisfy
             all of the specified selection criteria
         """
+        if not selector:
+            selector = {}
+
+        if row is not None and col is not None:
+            _validate_v4_subplots('select_traces')
+            grid_ref = self._validate_get_grid_ref()
+            grid_subplot_ref = grid_ref[row-1][col-1]
+            filter_by_subplot = True
+        else:
+            filter_by_subplot = False
+            grid_subplot_ref = None
+
+        return self._perform_select_traces(
+            filter_by_subplot, grid_subplot_ref, selector)
+
+    def _perform_select_traces(
+            self, filter_by_subplot, grid_subplot_ref, selector):
+
         def select_eq(obj1, obj2):
             try:
                 obj1 = obj1.to_plotly_json()
@@ -674,17 +692,6 @@ class BaseFigure(object):
                 pass
 
             return BasePlotlyType._vals_equal(obj1, obj2)
-
-        if not selector:
-            selector = {}
-
-        if row is not None and col is not None:
-            grid_ref = self._validate_get_grid_ref()
-            grid_subplot_ref = grid_ref[row-1][col-1]
-            filter_by_subplot = True
-        else:
-            filter_by_subplot = False
-            grid_subplot_ref = None
 
         for trace in self.data:
             # Filter by subplot
@@ -1012,7 +1019,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
             for key in key_path2:
                 if '_' in key[1:]:
                     # For valid properties that contain underscores (error_x)
-                    # replace the underscores with hyphens to product them
+                    # replace the underscores with hyphens to protect them
                     # from being split up
                     for under_prop, hyphen_prop in underscore_props.items():
                         key = key.replace(under_prop, hyphen_prop)

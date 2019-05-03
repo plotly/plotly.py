@@ -306,17 +306,7 @@ def make_subplots(
     ...     cols=[1, 2, 1, 2])
     """
 
-    # Make sure we're in future subplots mode
-    from _plotly_future_ import _future_flags
-    if 'v4_subplots' not in _future_flags:
-        raise ValueError("""
-plotly.subplots.make_subplots may only be used in the
-v4_subplots _plotly_future_ mode.  To try it out, run
-
->>> from _plotly_future_ import v4_subplots
-
-before importing plotly.
-""")
+    _validate_v4_subplots('plotly.subplots.make_subplots')
 
     import plotly.graph_objs as go
 
@@ -624,7 +614,6 @@ The row_titles argument to make_subplots must be a list or tuple
             subplot_type = spec['type']
             grid_ref_element = _init_subplot(
                 layout, subplot_type, x_domain, y_domain, max_subplot_ids)
-            # grid_ref_element['spec'] = spec
             grid_ref[r][c] = grid_ref_element
 
     _configure_shared_axes(layout, grid_ref, specs, 'x', shared_xaxes, row_dir)
@@ -767,6 +756,20 @@ The row_titles argument to make_subplots must be a list or tuple
     fig.__dict__['_grid_str'] = grid_str
 
     return fig
+
+
+def _validate_v4_subplots(method_name):
+    # Make sure we're in future subplots mode
+    from _plotly_future_ import _future_flags
+    if 'v4_subplots' not in _future_flags:
+        raise ValueError("""
+{method_name} may only be used in the
+v4_subplots _plotly_future_ mode.  To try it out, run
+
+>>> from _plotly_future_ import v4_subplots
+
+before importing plotly.
+""".format(method_name=method_name))
 
 
 def _configure_shared_axes(layout, grid_ref, specs, x_or_y, shared, row_dir):
@@ -1346,7 +1349,8 @@ def _get_subplot_ref_for_trace(trace):
     elif 'subplot' in trace:
         for t in _subplot_prop_named_subplot:
             try:
-                trace.subplot = t
+                validator = trace._get_prop_validator('subplot')
+                validator.validate_coerce(t)
                 return {
                     'subplot_type': t,
                     'layout_keys': (trace.subplot,),
