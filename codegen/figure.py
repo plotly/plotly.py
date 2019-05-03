@@ -68,7 +68,7 @@ class {fig_classname}({base_classname}):\n""")
 
     buffer.write(f"""
     def __init__(self, data=None, layout=None,
-                 frames=None, skip_invalid=False):
+                 frames=None, skip_invalid=False, **kwargs):
         \"\"\"
         Create a new {fig_classname} instance
         
@@ -95,7 +95,8 @@ class {fig_classname}({base_classname}):\n""")
             is invalid AND skip_invalid is False
         \"\"\"
         super({fig_classname} ,self).__init__(data, layout,
-                                              frames, skip_invalid)
+                                              frames, skip_invalid,
+                                              **kwargs)
     """)
 
     # ### add_trace methods for each trace type ###

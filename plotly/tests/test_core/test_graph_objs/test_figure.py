@@ -55,6 +55,7 @@ class FigureTest(TestCase):
                 'data': [{'type': 'bar', 'bogus': 123}],
                 'layout': {'bogus': 23, 'title': 'Figure title'},
             }],
+            bogus=123,
             skip_invalid=True)
 
         fig_dict = fig.to_dict()
@@ -93,7 +94,8 @@ class FigureTest(TestCase):
                 'data': [{'type': 'bar', 'showlegend': 'bad_value'}],
                 'layout': {'bgcolor': 'bad_color', 'title': 'Figure title'},
             }],
-            skip_invalid=True)
+            skip_invalid=True,
+        )
 
         fig_dict = fig.to_dict()
 
@@ -111,3 +113,30 @@ class FigureTest(TestCase):
                              'layout':
                                  {'title': {'text': 'Figure title'}}
                          }])
+
+    def test_raises_invalid_toplevel_kwarg(self):
+        with self.assertRaises(TypeError):
+            go.Figure(
+                data=[{'type': 'bar'}],
+                layout={'title': 'Figure title'},
+                frames=[{
+                    'data': [{'type': 'bar'}],
+                    'layout': {'title': 'Figure title'},
+                }],
+                bogus=123
+            )
+
+    def test_toplevel_underscore_kwarg(self):
+        fig = go.Figure(
+            data=[{'type': 'bar'}],
+            layout_title_text='Hello, Figure title!'
+        )
+
+        self.assertEqual(fig.layout.title.text, 'Hello, Figure title!')
+
+    def test_add_trace_underscore_kwarg(self):
+        fig = go.Figure()
+
+        fig.add_scatter(y=[2, 1, 3], marker_line_color='green')
+
+        self.assertEqual(fig.data[0].marker.line.color, 'green')
