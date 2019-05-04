@@ -158,11 +158,21 @@ class TestSelectForEachUpdateTraces(TestCase):
             [], selector={'type': 'pie'}, test_no_grid=True)
 
     def test_select_by_grid(self):
+        # Row and column
         self.assert_select_traces([0, 1], row=1, col=1)
         self.assert_select_traces([2, 3], row=2, col=1)
         self.assert_select_traces([4, 5], row=1, col=2)
         self.assert_select_traces([6, 7], row=2, col=2)
         self.assert_select_traces([8], row=3, col=1)
+
+        # Row only
+        self.assert_select_traces([0, 1, 4, 5], row=1)
+        self.assert_select_traces([2, 3, 6, 7], row=2)
+        self.assert_select_traces([8], row=3)
+
+        # Col only
+        self.assert_select_traces([0, 1, 2, 3, 8], col=1)
+        self.assert_select_traces([4, 5, 6, 7], col=2)
 
     def test_select_by_property_across_trace_types(self):
         self.assert_select_traces(
@@ -321,4 +331,26 @@ class TestSelectForEachUpdateTraces(TestCase):
         self.assert_update_traces(
             {'hoverinfo': 'label+percent'},
             [], selector={'type': 'pie'}
+        )
+
+    def test_update_traces_by_grid_and_selector(self):
+        self.assert_update_traces(
+            {'marker.size': 5},
+            [4, 6],
+            selector={'marker.color': 'green'},
+            col=2
+        )
+
+        self.assert_update_traces(
+            {'marker.size': 6},
+            [0, 4],
+            selector={'marker.color': 'green'},
+            row=1
+        )
+
+        self.assert_update_traces(
+            {'marker.size': 6},
+            [6],
+            selector={'marker.color': 'green'},
+            row=2, col=2
         )
