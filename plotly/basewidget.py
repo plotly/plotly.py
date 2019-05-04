@@ -558,7 +558,7 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
             # may include axes that weren't explicitly defined by the user.
             for proppath in delta_transform:
                 prop = proppath[0]
-                match = self.layout._subplotid_prop_re.match(prop)
+                match = self.layout._subplot_re_match(prop)
                 if match and prop not in self.layout:
                     # We need to create a subplotid object
                     self.layout[prop] = {}
