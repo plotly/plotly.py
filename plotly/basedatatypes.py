@@ -666,26 +666,36 @@ class BaseFigure(object):
         if not selector:
             selector = {}
 
-        if row is not None and col is not None:
+        if row is not None or col is not None:
             _validate_v4_subplots('select_traces')
             grid_ref = self._validate_get_grid_ref()
-            grid_subplot_ref = grid_ref[row-1][col-1]
             filter_by_subplot = True
+
+            if row is None:
+                # All rows for column
+                grid_subplot_refs = [ref_row[col-1] for ref_row in grid_ref]
+            elif col is None:
+                # All columns for row
+                grid_subplot_refs = grid_ref[row-1]
+            else:
+                # Single grid cell
+                grid_subplot_refs = [grid_ref[row-1][col-1]]
+
         else:
             filter_by_subplot = False
-            grid_subplot_ref = None
+            grid_subplot_refs = None
 
         return self._perform_select_traces(
-            filter_by_subplot, grid_subplot_ref, selector)
+            filter_by_subplot, grid_subplot_refs, selector)
 
     def _perform_select_traces(
-            self, filter_by_subplot, grid_subplot_ref, selector):
+            self, filter_by_subplot, grid_subplot_refs, selector):
 
         for trace in self.data:
             # Filter by subplot
             if filter_by_subplot:
                 trace_subplot_ref = _get_subplot_ref_for_trace(trace)
-                if grid_subplot_ref != trace_subplot_ref:
+                if trace_subplot_ref not in grid_subplot_refs:
                     continue
 
             # Filter by selector
