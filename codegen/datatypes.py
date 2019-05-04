@@ -103,6 +103,48 @@ def build_datatype_py(node):
 
 class {datatype_class}(_{node.name_base_datatype}):\n""")
 
+    # ### Layout subplot properties ###
+    if datatype_class == 'Layout':
+        subplot_nodes = [node for node in node.child_compound_datatypes
+                         if node.node_data.get('_isSubplotObj', False)]
+        subplot_names = [n.name_property for n in subplot_nodes]
+        buffer.write(f"""
+    _subplotid_prop_names = {repr(subplot_names)}
+    
+    import re
+    _subplotid_prop_re = re.compile(
+        '^(' + '|'.join(_subplotid_prop_names) + ')(\d+)$')
+""")
+
+        subplot_validator_names = [n.name_validator_class
+                                   for n in subplot_nodes]
+
+        validator_csv = ', '.join(subplot_validator_names)
+        subplot_dict_str = (
+                '{' +
+                ', '.join(f"'{subname}': {valname}" for subname, valname in
+                          zip(subplot_names, subplot_validator_names)) +
+                '}'
+        )
+
+        buffer.write(f"""
+    @property
+    def _subplotid_validators(self):
+        \"\"\"
+        dict of validator classes for each subplot type
+
+        Returns
+        -------
+        dict
+        \"\"\"
+        from plotly.validators.layout import ({validator_csv})
+
+        return {subplot_dict_str}
+        
+    def _subplot_re_match(self, prop):
+        return self._subplotid_prop_re.match(prop)
+""")
+
     # ### Property definitions ###
     child_datatype_nodes = node.child_datatypes
 

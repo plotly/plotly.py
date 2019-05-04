@@ -681,18 +681,6 @@ class BaseFigure(object):
     def _perform_select_traces(
             self, filter_by_subplot, grid_subplot_ref, selector):
 
-        def select_eq(obj1, obj2):
-            try:
-                obj1 = obj1.to_plotly_json()
-            except Exception:
-                pass
-            try:
-                obj2 = obj2.to_plotly_json()
-            except Exception:
-                pass
-
-            return BasePlotlyType._vals_equal(obj1, obj2)
-
         for trace in self.data:
             # Filter by subplot
             if filter_by_subplot:
@@ -701,12 +689,33 @@ class BaseFigure(object):
                     continue
 
             # Filter by selector
-            if not all(
-                    k in trace and select_eq(trace[k], selector[k])
-                    for k in selector):
+            if not self._selector_matches(trace, selector):
                 continue
 
             yield trace
+
+    @staticmethod
+    def _selector_matches(obj, selector):
+        if selector is None:
+            return True
+
+        for k in selector:
+            if k not in obj:
+                return False
+
+            obj_val = obj[k]
+            selector_val = selector[k]
+
+            if isinstance(obj_val, BasePlotlyType):
+                obj_val = obj_val.to_plotly_json()
+
+            if isinstance(selector_val, BasePlotlyType):
+                selector_val = selector_val.to_plotly_json()
+
+            if obj_val != selector_val:
+                return False
+
+        return True
 
     def for_each_trace(self, fn, selector=None, row=None, col=None):
         """
@@ -749,8 +758,6 @@ class BaseFigure(object):
         patch: dict
             Dictionary of property updates to be applied to all traces that
             satisfy the selection criteria.
-        fn:
-            Function that inputs a single trace object.
         selector: dict or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
@@ -771,6 +778,46 @@ class BaseFigure(object):
         for trace in self.select_traces(selector=selector, row=row, col=col):
             trace.update(patch)
         return self
+
+    def _select_layout_subplots_by_prefix(
+            self, prefix, selector=None, row=None, col=None):
+        """
+        Helper called by code generated select_* methods
+        """
+
+        if row is not None or col is not None:
+            # Build mapping from container keys ('xaxis2', 'scene4', etc.)
+            # to row/col pairs
+            grid_ref = self._validate_get_grid_ref()
+            container_to_row_col = {}
+            for r, subplot_row in enumerate(grid_ref):
+                for c, ref in enumerate(subplot_row):
+                    if ref is None:
+                        continue
+                    for layout_key in ref['layout_keys']:
+                        if layout_key.startswith(prefix):
+                            container_to_row_col[layout_key] = r + 1, c + 1
+        else:
+            container_to_row_col = None
+
+        for k in self.layout:
+            if k.startswith(prefix) and self.layout[k] is not None:
+
+                # Filter by row/col
+                if (row is not None and
+                        container_to_row_col.get(k, (None, None))[0] != row):
+                    # row specified and this is not a match
+                    continue
+                elif (col is not None and
+                      container_to_row_col.get(k, (None, None))[1] != col):
+                    # col specified and this is not a match
+                    continue
+
+                # Filter by selector
+                if not self._selector_matches(self.layout[k], selector):
+                    continue
+
+                yield self.layout[k]
 
     # Restyle
     # -------
@@ -2473,7 +2520,7 @@ Invalid property path '{key_path_str}' for layout
             if isinstance(plotly_obj, BaseLayoutType):
                 for key in update_obj:
                     if key not in plotly_obj:
-                        match = plotly_obj._subplotid_prop_re.match(key)
+                        match = plotly_obj._subplot_re_match(key)
                         if match:
                             # We need to create a subplotid object
                             plotly_obj[key] = {}
@@ -3031,7 +3078,7 @@ class BasePlotlyType(object):
                 else:
                     return False
             else:
-                if p in obj._validators:
+                if obj is not None and p in obj._validators:
                     obj = obj[p]
                 else:
                     return False
@@ -3798,18 +3845,6 @@ class BaseLayoutType(BaseLayoutHierarchyType):
     # for xaxis, yaxis, geo, ternary, and scene. But, we need to dynamically
     # generated properties/validators as needed for xaxis2, yaxis3, etc.
 
-    # # ### Create subplot property regular expression ###
-    _subplotid_prop_names = ['xaxis',
-                             'yaxis',
-                             'geo',
-                             'ternary',
-                             'scene',
-                             'mapbox',
-                             'polar']
-
-    _subplotid_prop_re = re.compile(
-        '^(' + '|'.join(_subplotid_prop_names) + ')(\d+)$')
-
     @property
     def _subplotid_validators(self):
         """
@@ -3819,20 +3854,10 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         -------
         dict
         """
-        from .validators.layout import (XAxisValidator, YAxisValidator,
-                                        GeoValidator, TernaryValidator,
-                                        SceneValidator, MapboxValidator,
-                                        PolarValidator)
+        raise NotImplementedError()
 
-        return {
-            'xaxis': XAxisValidator,
-            'yaxis': YAxisValidator,
-            'geo': GeoValidator,
-            'ternary': TernaryValidator,
-            'scene': SceneValidator,
-            'mapbox': MapboxValidator,
-            'polar': PolarValidator
-        }
+    def _subplot_re_match(self, prop):
+        raise NotImplementedError()
 
     def __init__(self, plotly_name, **kwargs):
         """
@@ -3872,14 +3897,14 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         unknown_kwargs = {
             k: v
             for k, v in kwargs.items()
-            if not self._subplotid_prop_re.match(k)
+            if not self._subplot_re_match(k)
         }
         super(BaseLayoutHierarchyType, self)._process_kwargs(**unknown_kwargs)
 
         subplot_kwargs = {
             k: v
             for k, v in kwargs.items()
-            if self._subplotid_prop_re.match(k)
+            if self._subplot_re_match(k)
         }
 
         for prop, value in subplot_kwargs.items():
@@ -3899,7 +3924,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         # Get regular expression match
         # ----------------------------
         # Note: we already tested that match exists in the constructor
-        match = self._subplotid_prop_re.match(prop)
+        match = self._subplot_re_match(prop)
         subplot_prop = match.group(1)
         suffix_digit = int(match.group(2))
 
@@ -3960,7 +3985,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         # Handle subplot suffix digit of 1
         # --------------------------------
         # Remove digit of 1 from subplot id (e.g.. xaxis1 -> xaxis)
-        match = self._subplotid_prop_re.match(prop)
+        match = self._subplot_re_match(prop)
 
         if match:
             subplot_prop = match.group(1)
@@ -4020,7 +4045,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
 
         # Check for subplot assignment
         # ----------------------------
-        match = self._subplotid_prop_re.match(prop)
+        match = self._subplot_re_match(prop)
         if match is None:
             # Set as ordinary property
             super(BaseLayoutHierarchyType, self).__setitem__(prop, value)
@@ -4034,7 +4059,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         """
         # Check for subplot assignment
         # ----------------------------
-        match = self._subplotid_prop_re.match(prop)
+        match = self._subplot_re_match(prop)
         if match is None:
             # Set as ordinary property
             super(BaseLayoutHierarchyType, self).__setattr__(prop, value)

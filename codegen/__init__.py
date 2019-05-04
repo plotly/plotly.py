@@ -126,6 +126,9 @@ def perform_codegen():
     all_layout_nodes = PlotlyNode.get_all_datatype_nodes(
         plotly_schema, LayoutNode)
 
+    subplot_nodes = [node for node in layout_node.child_compound_datatypes
+                     if node.node_data.get('_isSubplotObj', False)]
+
     # ### FrameNode ###
     compound_frame_nodes = PlotlyNode.get_all_compound_datatype_nodes(
         plotly_schema, FrameNode)
@@ -187,7 +190,8 @@ def perform_codegen():
                          base_traces_node,
                          data_validator,
                          layout_validator,
-                         frame_validator)
+                         frame_validator,
+                         subplot_nodes)
 
     # Write datatype __init__.py files
     # --------------------------------

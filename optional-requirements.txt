@@ -23,6 +23,7 @@ psutil
 
 ## codegen dependencies ##
 yapf
+inflect
 
 ## template generation ##
 colorcet

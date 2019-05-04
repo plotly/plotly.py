@@ -6,6 +6,42 @@ import copy as _copy
 
 class Layout(_BaseLayoutType):
 
+    _subplotid_prop_names = [
+        'geo', 'mapbox', 'polar', 'scene', 'ternary', 'xaxis', 'yaxis'
+    ]
+
+    import re
+    _subplotid_prop_re = re.compile(
+        '^(' + '|'.join(_subplotid_prop_names) + ')(\d+)$'
+    )
+
+    @property
+    def _subplotid_validators(self):
+        """
+        dict of validator classes for each subplot type
+
+        Returns
+        -------
+        dict
+        """
+        from plotly.validators.layout import (
+            GeoValidator, MapboxValidator, PolarValidator, SceneValidator,
+            TernaryValidator, XAxisValidator, YAxisValidator
+        )
+
+        return {
+            'geo': GeoValidator,
+            'mapbox': MapboxValidator,
+            'polar': PolarValidator,
+            'scene': SceneValidator,
+            'ternary': TernaryValidator,
+            'xaxis': XAxisValidator,
+            'yaxis': YAxisValidator
+        }
+
+    def _subplot_re_match(self, prop):
+        return self._subplotid_prop_re.match(prop)
+
     # angularaxis
     # -----------
     @property
