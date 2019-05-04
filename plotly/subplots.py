@@ -904,7 +904,7 @@ def _init_subplot_single(
         'trace_kwargs': {trace_key: label}}
 
     # increment max_subplot_id
-    max_subplot_ids['scene'] = cnt
+    max_subplot_ids[subplot_type] = cnt
 
     return ref_element
 
