@@ -4,6 +4,8 @@ from unittest import TestCase
 
 from plotly.graph_objs import Bar, Frames, Frame, Layout
 
+from nose.plugins.attrib import attr
+
 import re
 
 
@@ -44,6 +46,7 @@ class FramesTest(TestCase):
         # with self.assertRaises(exceptions.PlotlyListEntryError):
         #     frames.append(0)
 
+    @attr('nodev')
     def test_deeply_nested_layout_attributes(self):
         frames = Frame
         frames.layout = [Layout()]
@@ -58,6 +61,7 @@ class FramesTest(TestCase):
             {'color', 'family', 'size'}
         )
 
+    @attr('nodev')
     def test_deeply_nested_data_attributes(self):
         frames = Frame
         frames.data = [Bar()]
