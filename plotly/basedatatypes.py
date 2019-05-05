@@ -9,6 +9,7 @@ import warnings
 from contextlib import contextmanager
 from copy import deepcopy, copy
 
+from _plotly_utils.utils import _natural_sort_strings
 from plotly.subplots import (
     _set_trace_grid_reference,
     _get_grid_subplot,
@@ -810,7 +811,10 @@ class BaseFigure(object):
         else:
             container_to_row_col = None
 
-        for k in self.layout:
+        # Natural sort keys so that xaxis20 is after xaxis3
+        layout_keys = _natural_sort_strings(list(self.layout))
+
+        for k in layout_keys:
             if k.startswith(prefix) and self.layout[k] is not None:
 
                 # Filter by row/col
