@@ -297,7 +297,7 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: 'sudo pip install tox requests yapf pytz decorator retrying'
+          command: 'sudo pip install tox requests yapf pytz decorator retrying inflect'
       - run:
           name: Update plotlywidget version
           command: 'python setup.py updateplotlywidgetversion'
