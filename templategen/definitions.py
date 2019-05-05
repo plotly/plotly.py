@@ -496,6 +496,56 @@ def plotly_dark():
 builders['plotly_dark'] = plotly_dark
 
 
+def plotly_v4_colors():
+    template = Template()
+
+    # Plasma colorscale
+    # -----------------
+    # Get this from plotly_express logic after integration
+    colorscale = [
+        "#0d0887",
+        "#46039f",
+        "#7201a8",
+        "#9c179e",
+        "#bd3786",
+        "#d8576b",
+        "#ed7953",
+        "#fb9f3a",
+        "#fdca26",
+        "#f0f921",
+    ]
+    d = len(colorscale) - 1
+    colorscale = [
+        [(1.0 * i) / (1.0 * d), x]
+        for i, x in enumerate(colorscale)
+    ]
+
+    template.layout.colorscale.sequential = colorscale
+    template.data.heatmap = [dict(colorscale = colorscale)]
+    template.data.histogram2d = [dict(colorscale = colorscale)]
+    template.data.histogram2dcontour = [dict(colorscale = colorscale)]
+    template.data.contour = [dict(colorscale = colorscale)]
+
+    colorway = [
+        plotly_clrs['Cornflower'],
+        plotly_clrs['Sienna'],
+        plotly_clrs['Emerald'],
+        plotly_clrs['Lavender Shade'],
+        '#FFA15A',
+        plotly_clrs['Aqua Shade'],
+        '#FF6692',
+        '#B6E880',
+        '#FF97FF',
+        '#FECB52'
+    ]
+    template.layout.colorway = colorway
+
+    return template
+
+
+builders['plotly_v4_colors'] = plotly_v4_colors
+
+
 def presentation():
     """
     Template that increases the size of text and markers/lines for certain
