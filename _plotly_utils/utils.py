@@ -2,6 +2,7 @@ import datetime
 import decimal
 import json as _json
 import sys
+import re
 
 import pytz
 
@@ -242,3 +243,18 @@ def template_doc(**names):
                 func.__doc__ = func.__doc__.format(**names)
         return func
     return _decorator
+
+
+def _natural_sort_strings(vals, reverse=False):
+
+    def key(v):
+        v_parts = re.split(r'(\d+)', v)
+        for i in range(len(v_parts)):
+            try:
+                v_parts[i] = int(v_parts[i])
+            except ValueError:
+                # not an int
+                pass
+        return tuple(v_parts)
+
+    return sorted(vals, key=key, reverse=reverse)
