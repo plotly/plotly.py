@@ -759,14 +759,15 @@ class BaseFigure(object):
 
         return self
 
-    def update_traces(self, patch, selector=None, row=None, col=None):
+    def update_traces(
+            self, patch=None, selector=None, row=None, col=None, **kwargs):
         """
         Perform a property update operation on all traces that satisfy the
         specified selection criteria
 
         Parameters
         ----------
-        patch: dict
+        patch: dict or None (default None)
             Dictionary of property updates to be applied to all traces that
             satisfy the selection criteria.
         selector: dict or None (default None)
@@ -780,6 +781,10 @@ class BaseFigure(object):
             To select traces by row and column, the Figure must have been
             created using plotly.subplots.make_subplots.  If None
             (the default), all traces are selected.
+        **kwargs
+            Additional property updates to apply to each selected trace. If
+            a property is specified in both patch and in **kwargs then the
+            one in **kwargs takes precedence.
 
         Returns
         -------
@@ -787,7 +792,7 @@ class BaseFigure(object):
             Returns the Figure object that the method was called on
         """
         for trace in self.select_traces(selector=selector, row=row, col=col):
-            trace.update(patch)
+            trace.update(patch, **kwargs)
         return self
 
     def _select_layout_subplots_by_prefix(
