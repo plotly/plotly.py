@@ -1280,10 +1280,10 @@ def get_config_plotly_server_url():
         try:
             config_dict = json.load(f)
             if not isinstance(config_dict, dict):
-                data = {}
+                config_dict = {}
         except:
             # TODO: issue a warning and bubble it up
-            data = {}
+            config_dict = {}
 
     return config_dict.get('plotly_domain', default_server_url)
 
