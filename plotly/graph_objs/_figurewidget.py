@@ -12366,7 +12366,9 @@ class FigureWidget(BaseFigureWidget):
 
         return self
 
-    def update_geos(self, patch, selector=None, row=None, col=None):
+    def update_geos(
+        self, patch=None, selector=None, row=None, col=None, **kwargs
+    ):
         """
         Perform a property update operation on all geo objects
         that satisfy the specified selection criteria
@@ -12387,14 +12389,18 @@ class FigureWidget(BaseFigureWidget):
             To select geo objects by row and column, the Figure
             must have been created using plotly.subplots.make_subplots.
             If None (the default), all geo objects are selected.
-        
+        **kwargs
+            Additional property updates to apply to each selected
+            geo object. If a property is specified in
+            both patch and in **kwargs then the one in **kwargs
+            takes precedence.
         Returns
         -------
         self
             Returns the Figure object that the method was called on
         """
         for obj in self.select_geos(selector=selector, row=row, col=col):
-            obj.update(patch)
+            obj.update(patch, **kwargs)
 
         return self
 
@@ -12462,7 +12468,9 @@ class FigureWidget(BaseFigureWidget):
 
         return self
 
-    def update_mapboxes(self, patch, selector=None, row=None, col=None):
+    def update_mapboxes(
+        self, patch=None, selector=None, row=None, col=None, **kwargs
+    ):
         """
         Perform a property update operation on all mapbox objects
         that satisfy the specified selection criteria
@@ -12483,14 +12491,18 @@ class FigureWidget(BaseFigureWidget):
             To select mapbox objects by row and column, the Figure
             must have been created using plotly.subplots.make_subplots.
             If None (the default), all mapbox objects are selected.
-        
+        **kwargs
+            Additional property updates to apply to each selected
+            mapbox object. If a property is specified in
+            both patch and in **kwargs then the one in **kwargs
+            takes precedence.
         Returns
         -------
         self
             Returns the Figure object that the method was called on
         """
         for obj in self.select_mapboxes(selector=selector, row=row, col=col):
-            obj.update(patch)
+            obj.update(patch, **kwargs)
 
         return self
 
@@ -12558,7 +12570,9 @@ class FigureWidget(BaseFigureWidget):
 
         return self
 
-    def update_polars(self, patch, selector=None, row=None, col=None):
+    def update_polars(
+        self, patch=None, selector=None, row=None, col=None, **kwargs
+    ):
         """
         Perform a property update operation on all polar objects
         that satisfy the specified selection criteria
@@ -12579,14 +12593,18 @@ class FigureWidget(BaseFigureWidget):
             To select polar objects by row and column, the Figure
             must have been created using plotly.subplots.make_subplots.
             If None (the default), all polar objects are selected.
-        
+        **kwargs
+            Additional property updates to apply to each selected
+            polar object. If a property is specified in
+            both patch and in **kwargs then the one in **kwargs
+            takes precedence.
         Returns
         -------
         self
             Returns the Figure object that the method was called on
         """
         for obj in self.select_polars(selector=selector, row=row, col=col):
-            obj.update(patch)
+            obj.update(patch, **kwargs)
 
         return self
 
@@ -12654,7 +12672,9 @@ class FigureWidget(BaseFigureWidget):
 
         return self
 
-    def update_scenes(self, patch, selector=None, row=None, col=None):
+    def update_scenes(
+        self, patch=None, selector=None, row=None, col=None, **kwargs
+    ):
         """
         Perform a property update operation on all scene objects
         that satisfy the specified selection criteria
@@ -12675,14 +12695,18 @@ class FigureWidget(BaseFigureWidget):
             To select scene objects by row and column, the Figure
             must have been created using plotly.subplots.make_subplots.
             If None (the default), all scene objects are selected.
-        
+        **kwargs
+            Additional property updates to apply to each selected
+            scene object. If a property is specified in
+            both patch and in **kwargs then the one in **kwargs
+            takes precedence.
         Returns
         -------
         self
             Returns the Figure object that the method was called on
         """
         for obj in self.select_scenes(selector=selector, row=row, col=col):
-            obj.update(patch)
+            obj.update(patch, **kwargs)
 
         return self
 
@@ -12750,7 +12774,9 @@ class FigureWidget(BaseFigureWidget):
 
         return self
 
-    def update_ternaries(self, patch, selector=None, row=None, col=None):
+    def update_ternaries(
+        self, patch=None, selector=None, row=None, col=None, **kwargs
+    ):
         """
         Perform a property update operation on all ternary objects
         that satisfy the specified selection criteria
@@ -12771,14 +12797,18 @@ class FigureWidget(BaseFigureWidget):
             To select ternary objects by row and column, the Figure
             must have been created using plotly.subplots.make_subplots.
             If None (the default), all ternary objects are selected.
-        
+        **kwargs
+            Additional property updates to apply to each selected
+            ternary object. If a property is specified in
+            both patch and in **kwargs then the one in **kwargs
+            takes precedence.
         Returns
         -------
         self
             Returns the Figure object that the method was called on
         """
         for obj in self.select_ternaries(selector=selector, row=row, col=col):
-            obj.update(patch)
+            obj.update(patch, **kwargs)
 
         return self
 
@@ -12846,7 +12876,9 @@ class FigureWidget(BaseFigureWidget):
 
         return self
 
-    def update_xaxes(self, patch, selector=None, row=None, col=None):
+    def update_xaxes(
+        self, patch=None, selector=None, row=None, col=None, **kwargs
+    ):
         """
         Perform a property update operation on all xaxis objects
         that satisfy the specified selection criteria
@@ -12867,14 +12899,18 @@ class FigureWidget(BaseFigureWidget):
             To select xaxis objects by row and column, the Figure
             must have been created using plotly.subplots.make_subplots.
             If None (the default), all xaxis objects are selected.
-        
+        **kwargs
+            Additional property updates to apply to each selected
+            xaxis object. If a property is specified in
+            both patch and in **kwargs then the one in **kwargs
+            takes precedence.
         Returns
         -------
         self
             Returns the Figure object that the method was called on
         """
         for obj in self.select_xaxes(selector=selector, row=row, col=col):
-            obj.update(patch)
+            obj.update(patch, **kwargs)
 
         return self
 
@@ -12942,7 +12978,9 @@ class FigureWidget(BaseFigureWidget):
 
         return self
 
-    def update_yaxes(self, patch, selector=None, row=None, col=None):
+    def update_yaxes(
+        self, patch=None, selector=None, row=None, col=None, **kwargs
+    ):
         """
         Perform a property update operation on all yaxis objects
         that satisfy the specified selection criteria
@@ -12963,13 +13001,17 @@ class FigureWidget(BaseFigureWidget):
             To select yaxis objects by row and column, the Figure
             must have been created using plotly.subplots.make_subplots.
             If None (the default), all yaxis objects are selected.
-        
+        **kwargs
+            Additional property updates to apply to each selected
+            yaxis object. If a property is specified in
+            both patch and in **kwargs then the one in **kwargs
+            takes precedence.
         Returns
         -------
         self
             Returns the Figure object that the method was called on
         """
         for obj in self.select_yaxes(selector=selector, row=row, col=col):
-            obj.update(patch)
+            obj.update(patch, **kwargs)
 
         return self
