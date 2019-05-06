@@ -232,9 +232,8 @@ class TestSelectForEachUpdateTraces(TestCase):
 
     # test update_traces
     # ------------------
-    def assert_update_traces(
-            self, patch, expected_inds, selector=None, row=None, col=None
-    ):
+    def assert_update_traces(self, expected_inds, patch=None, selector=None,
+                             row=None, col=None, **kwargs):
         # Save off original figure
         fig_orig = copy.deepcopy(self.fig)
         for trace1, trace2 in zip(fig_orig.data, self.fig.data):
@@ -242,7 +241,7 @@ class TestSelectForEachUpdateTraces(TestCase):
 
         # Perform update
         update_res = self.fig.update_traces(
-            patch, selector=selector, row=row, col=col
+            patch, selector=selector, row=row, col=col, **kwargs
         )
 
         # Check chaining support
@@ -255,102 +254,70 @@ class TestSelectForEachUpdateTraces(TestCase):
                 self.assertNotEqual(t_orig, t)
 
                 # Check that traces are equal after update
-                t_orig.update(patch)
+                t_orig.update(patch, **kwargs)
 
             # Check that traces are equal
             self.assertEqual(t_orig, t)
 
     def test_update_traces_by_type(self):
-        self.assert_update_traces(
-            {'visible': 'legendonly'},
-            [0, 2],
-            selector={'type': 'scatter'}
-        )
+        self.assert_update_traces([0, 2], {'visible': 'legendonly'},
+                                  selector={'type': 'scatter'})
 
-        self.assert_update_traces(
-            {'visible': 'legendonly'},
-            [1],
-            selector={'type': 'bar'},
-        )
+        self.assert_update_traces([0, 2],
+                                  selector={'type': 'scatter'},
+                                  visible=False)
 
-        self.assert_update_traces(
-            {'colorscale': 'Viridis'},
-            [3],
-            selector={'type': 'heatmap'}
-        )
+        self.assert_update_traces([1], {'visible': 'legendonly'},
+                                  selector={'type': 'bar'})
+
+        self.assert_update_traces([3], {'colorscale': 'Viridis'},
+                                  selector={'type': 'heatmap'})
 
         # Nest dictionaries
-        self.assert_update_traces(
-            {'marker': {'line': {'color': 'yellow'}}},
-            [4, 5],
-            selector={'type': 'scatter3d'}
-        )
+        self.assert_update_traces([4, 5],
+                                  {'marker': {'line': {'color': 'yellow'}}},
+                                  selector={'type': 'scatter3d'})
 
         # dot syntax
-        self.assert_update_traces(
-            {'marker.line.color': 'cyan'},
-            [4, 5],
-            selector={'type': 'scatter3d'}
-        )
+        self.assert_update_traces([4, 5], {'marker.line.color': 'cyan'},
+                                  selector={'type': 'scatter3d'})
 
         # underscore syntax
-        self.assert_update_traces(
-            dict(marker_line_color='pink'),
-            [4, 5],
-            selector={'type': 'scatter3d'}
-        )
+        self.assert_update_traces([4, 5], dict(marker_line_color='pink'),
+                                  selector={'type': 'scatter3d'})
 
-        self.assert_update_traces(
-            {'line': {'dash': 'dot'}},
-            [6, 7],
-            selector={'type': 'scatterpolar'}
-        )
+        # underscore syntax with kwarg
+        self.assert_update_traces([4, 5],
+                                  selector={'type': 'scatter3d'},
+                                  marker_line_color='red')
+
+        self.assert_update_traces([6, 7], {'line': {'dash': 'dot'}},
+                                  selector={'type': 'scatterpolar'})
 
         # Nested dictionaries
-        self.assert_update_traces(
-            {'dimensions': {1: {'label': 'Dimension 1'}}},
-            [8],
-            selector={'type': 'parcoords'}
-        )
+        self.assert_update_traces([8], {
+            'dimensions': {1: {'label': 'Dimension 1'}}},
+                                  selector={'type': 'parcoords'})
 
         # Dot syntax
-        self.assert_update_traces(
-            {'dimensions[1].label': 'Dimension A'},
-            [8],
-            selector={'type': 'parcoords'}
-        )
+        self.assert_update_traces([8], {'dimensions[1].label': 'Dimension A'},
+                                  selector={'type': 'parcoords'})
 
         # underscore syntax
         # Dot syntax
-        self.assert_update_traces(
-            dict(dimensions_1_label='Dimension X'),
-            [8],
-            selector={'type': 'parcoords'}
-        )
+        self.assert_update_traces([8], dict(dimensions_1_label='Dimension X'),
+                                  selector={'type': 'parcoords'})
 
-        self.assert_update_traces(
-            {'hoverinfo': 'label+percent'},
-            [], selector={'type': 'pie'}
-        )
+        self.assert_update_traces([], {'hoverinfo': 'label+percent'},
+                                  selector={'type': 'pie'})
 
     def test_update_traces_by_grid_and_selector(self):
-        self.assert_update_traces(
-            {'marker.size': 5},
-            [4, 6],
-            selector={'marker.color': 'green'},
-            col=2
-        )
+        self.assert_update_traces([4, 6], {'marker.size': 5},
+                                  selector={'marker.color': 'green'}, col=2)
 
-        self.assert_update_traces(
-            {'marker.size': 6},
-            [0, 4],
-            selector={'marker.color': 'green'},
-            row=1
-        )
+        self.assert_update_traces([0, 4], {'marker.size': 6},
+                                  selector={'marker.color': 'green'}, row=1)
 
-        self.assert_update_traces(
-            {'marker.size': 6},
-            [6],
-            selector={'marker.color': 'green'},
-            row=2, col=2
-        )
+        self.assert_update_traces([6], {'marker.size': 6},
+                                  selector={'marker.color': 'green'}, row=2,
+                                  col=2)
