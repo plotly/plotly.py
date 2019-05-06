@@ -2,6 +2,57 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.9.0] - 2019-04-19
+
+### Updated
+ - Updated Plotly.js to version 1.47.4. See the
+ [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1474----2019-04-25)
+ for more information.
+
+
+### Added
+ - Added "magic underscore" support for specifying nested figure properties
+ ([#1534](https://github.com/plotly/plotly.py/pull/1534))
+ - Added `select_traces`, `for_each_trace`, and `update_traces` figure
+ methods for accessing and updating traces by subplot location and trace
+ properties
+ ([#1534](https://github.com/plotly/plotly.py/pull/1534))
+ - Added `select_*`, `for_each_*`, and `update_*` figure methods for
+ accessing and updating subplot objects (`xaxis`, `scene`, `polar`, etc)
+ ([#1548](https://github.com/plotly/plotly.py/pull/1548))
+ - Added support for Dash Design Kit style color specifications
+ ([#1541](https://github.com/plotly/plotly.py/pull/1541)). Thanks to
+ [@wbrgss](https://github.com/wbrgss) for this contribution!
+ - Added support for the `plotly_unselect` plotly.js event in a new
+ `on_unselect` trace method
+ ([#1542](https://github.com/plotly/plotly.py/pull/1542)). Thanks to
+ [@denphi](https://github.com/denphi) for this contribution!
+ 
+### Changed
+ - Changed the default colorscale to be `plasma` for the `plotly`, `plotly_white`, and
+ `plotly_dark` templates for plotly.py version 4
+ ([#1274](https://github.com/plotly/plotly.py/issues/1274),
+ [#1549](https://github.com/plotly/plotly.py/pull/1549))
+ - Reordered the default colorway for the `plotly`, `plotly_white`, and
+ `plotly_dark` templates for plotly.py version 4
+ ([#1549](https://github.com/plotly/plotly.py/pull/1549)) 
+
+### Fixed
+ - Fixed package listing in setup.py
+ ([#1543](https://github.com/plotly/plotly.py/pull/1543)).  Thanks to
+ [@jakevdp](https://github.com/jakevdp) for this contribution!
+ - Fixed built-in templates so that `heatmap` colorscales can be overridden
+ without specifying `autocolorscale=False`
+ ([#1454](https://github.com/plotly/plotly.py/issues/1454),
+ [#1549](https://github.com/plotly/plotly.py/pull/1549))
+ - Fix `UnboundLocalError` error in the presence of a missing or corrupt
+ `~/.plotly/.config` file
+ ([#1551](https://github.com/plotly/plotly.py/pull/1551))
+ - Fixed error when combining `sankey` traces with cartesian subplots
+ ([#1527](https://github.com/plotly/plotly.py/issues/1527),
+ [plotly/plotly.js#3802](https://github.com/plotly/plotly.js/pull/3802)) 
+ 
+ 
 ## [3.8.1] - 2019-04-19
 
 ### Updated
