@@ -218,7 +218,8 @@ class {fig_classname}({base_classname}):\n""")
 
         return self
 
-    def update_{plural_name}(self, patch, selector=None, row=None, col=None):
+    def update_{plural_name}(
+            self, patch=None, selector=None, row=None, col=None, **kwargs):
         \"\"\"
         Perform a property update operation on all {singular_name} objects
         that satisfy the specified selection criteria
@@ -239,7 +240,11 @@ class {fig_classname}({base_classname}):\n""")
             To select {singular_name} objects by row and column, the Figure
             must have been created using plotly.subplots.make_subplots.
             If None (the default), all {singular_name} objects are selected.
-        
+        **kwargs
+            Additional property updates to apply to each selected
+            {singular_name} object. If a property is specified in
+            both patch and in **kwargs then the one in **kwargs
+            takes precedence.
         Returns
         -------
         self
@@ -247,7 +252,7 @@ class {fig_classname}({base_classname}):\n""")
         \"\"\"
         for obj in self.select_{plural_name}(
                 selector=selector, row=row, col=col):
-            obj.update(patch)
+            obj.update(patch, **kwargs)
 
         return self""")
 

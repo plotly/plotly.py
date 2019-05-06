@@ -287,8 +287,8 @@ class TestSelectForEachUpdateSubplots(TestCase):
             selector={'angularaxis.rotation': 0})
 
     def assert_update_subplots(
-            self, subplot_type, subplots_name, expected_nums, patch,
-            selector=None, row=None, col=None, test_no_grid=False):
+            self, subplot_type, subplots_name, expected_nums, patch=None,
+            selector=None, row=None, col=None, test_no_grid=False, **kwargs):
 
         update_fn = getattr(Figure, 'update_' + subplots_name)
 
@@ -300,7 +300,7 @@ class TestSelectForEachUpdateSubplots(TestCase):
 
             # perform update_*
             update_res = update_fn(
-                fig, patch, selector=selector, row=row, col=col)
+                fig, patch, selector=selector, row=row, col=col, **kwargs)
             self.assertIs(update_res, fig)
 
             # Build expected layout keys
@@ -316,7 +316,7 @@ class TestSelectForEachUpdateSubplots(TestCase):
                 if k in expected_keys:
                     # Make sure sure there is an initial difference
                     self.assertNotEqual(orig_obj, new_obj)
-                    orig_obj.update(patch)
+                    orig_obj.update(patch, **kwargs)
 
                 self.assertEqual(new_obj, orig_obj)
 
@@ -470,3 +470,11 @@ class TestSelectForEachUpdateSubplots(TestCase):
             {'radialaxis.title.font.family': 'Rockwell'},
             row=2, col=3,
             selector={'angularaxis.rotation': 0})
+
+        # kwargs
+        self.assert_update_subplots(
+            'xaxis', 'xaxes', [1, 2],
+            title_font_family='Courier',
+            title_font_color='yellow',
+            row=1,
+            selector={'title.text': 'A'})
