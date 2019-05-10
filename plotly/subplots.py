@@ -27,7 +27,8 @@ _subplot_prop_named_subplot = {'polar', 'ternary', 'mapbox'}
 
 
 # Named tuple to hold an xaxis/yaxis pair that represent a single subplot
-SubplotXY = collections.namedtuple('SubplotXY', ('xaxis', 'yaxis'))
+SubplotXY = collections.namedtuple('SubplotXY',
+                                   ('xaxis', 'yaxis', 'secondary_yaxis'))
 SubplotDomain = collections.namedtuple('SubplotDomain', ('x', 'y'))
 
 
@@ -155,6 +156,9 @@ def make_subplots(
                 - trace type: A trace type which will be used to determine
                               the appropriate subplot type for that trace
 
+            * secondary_y (bool, default False): If True, create a secondary
+                y-axis positioned on the right side of the subplot. Only valid
+                if type='xy'.
             * colspan (int, default 1): number of subplot columns
                 for this subplot to span.
             * rowspan (int, default 1): number of subplot rows
@@ -461,14 +465,16 @@ dimensions ({rows} x {cols}).
             rows=rows, cols=cols, typ=type(specs), val=repr(specs)
         ))
 
-    # For backward compatibility, convert is_3d flag to type='scene' kwarg
     for row in specs:
         for spec in row:
+            # For backward compatibility,
+            # convert is_3d flag to type='scene' kwarg
             if spec and spec.pop('is_3d', None):
                 spec['type'] = 'scene'
 
     spec_defaults = dict(
         type='xy',
+        secondary_y=False,
         colspan=1,
         rowspan=1,
         l=0.0,
@@ -477,6 +483,15 @@ dimensions ({rows} x {cols}).
         t=0.0,
     )
     _check_keys_and_fill('specs', specs, spec_defaults)
+
+    # Validate secondary_y
+    for row in specs:
+        for spec in row:
+            if spec and spec['type'] != 'xy' and spec['secondary_y']:
+                raise ValueError("""
+The 'secondary_y' spec property is not supported for subplot of type '{s_typ}'
+     'secondary_y' is only supported for subplots of type 'xy'
+""".format(s_typ=spec['type']))
 
     # ### insets ###
     if insets is None or insets is False:
@@ -612,8 +627,10 @@ The row_titles argument to make_subplots must be a list or tuple
 
             # ### construct subplot container ###
             subplot_type = spec['type']
+            secondary_y = spec['secondary_y']
             grid_ref_element = _init_subplot(
-                layout, subplot_type, x_domain, y_domain, max_subplot_ids)
+                layout, subplot_type, secondary_y,
+                x_domain, y_domain, max_subplot_ids)
             grid_ref[r][c] = grid_ref_element
 
     _configure_shared_axes(layout, grid_ref, specs, 'x', shared_xaxes, row_dir)
@@ -842,7 +859,7 @@ def _configure_shared_axes(layout, grid_ref, specs, x_or_y, shared, row_dir):
 
 
 def _init_subplot_xy(
-        layout, x_domain, y_domain, max_subplot_ids=None
+        layout, secondary_y, x_domain, y_domain, max_subplot_ids=None
 ):
     if max_subplot_ids is None:
         max_subplot_ids = _get_initial_max_subplot_ids()
@@ -872,6 +889,21 @@ def _init_subplot_xy(
         'layout_keys': (xaxis_name, yaxis_name),
         'trace_kwargs': {'xaxis': x_label, 'yaxis': y_label}
     }
+
+    if secondary_y:
+        y_cnt += 1
+        secondary_y_label = "y{cnt}".format(cnt=y_cnt)
+        ref_element['secondary_trace_kwargs'] = {
+            'xaxis': x_label, 'yaxis': secondary_y_label
+        }
+
+        secondary_yaxis_name = 'yaxis{cnt}'.format(
+            cnt=y_cnt if y_cnt > 1 else '')
+        ref_element['secondary_layout_keys'] = (
+            xaxis_name, secondary_yaxis_name)
+
+        secondary_y_axis = {'overlaying': y_label, 'side': 'right'}
+        layout[secondary_yaxis_name] = secondary_y_axis
 
     # increment max_subplot_ids
     max_subplot_ids['xaxis'] = x_cnt
@@ -966,7 +998,8 @@ def _validate_coerce_subplot_type(subplot_type):
 
 
 def _init_subplot(
-        layout, subplot_type, x_domain, y_domain, max_subplot_ids=None
+        layout, subplot_type, secondary_y,
+        x_domain, y_domain, max_subplot_ids=None
 ):
     # Normalize subplot type
     subplot_type = _validate_coerce_subplot_type(subplot_type)
@@ -982,7 +1015,7 @@ def _init_subplot(
 
     if subplot_type == 'xy':
         ref_element = _init_subplot_xy(
-            layout, x_domain, y_domain, max_subplot_ids
+            layout, secondary_y, x_domain, y_domain, max_subplot_ids
         )
     elif subplot_type in _single_subplot_types:
         ref_element = _init_subplot_single(
@@ -1217,7 +1250,7 @@ def _build_grid_str(specs, grid_ref, insets, insets_ref, row_seq):
     return grid_str
 
 
-def _set_trace_grid_reference(trace, layout, grid_ref, row, col):
+def _set_trace_grid_reference(trace, grid_ref, row, col, secondary_y):
     if row <= 0:
         raise Exception("Row value is out of range. "
                         "Note: the starting cell is (1, 1)")
@@ -1238,7 +1271,18 @@ No subplot specified at grid position ({row}, {col})""".format(
             col=col
         ))
 
-    for k in ref['trace_kwargs']:
+    if secondary_y:
+        if 'secondary_trace_kwargs' not in ref:
+            raise ValueError("""
+Subplot with type '{subplot_type}' at grid position ({row}, {col}) was not
+created with the secondary_y spec property set to True. See the docstring
+for the specs argument to plotly.subplots.make_subplots for more information.
+""")
+        trace_kwargs = ref['secondary_trace_kwargs']
+    else:
+        trace_kwargs = ref['trace_kwargs']
+
+    for k in trace_kwargs:
         if k not in trace:
             raise ValueError("""\
 Trace type '{typ}' is not compatible with subplot type '{subplot_type}'
@@ -1311,13 +1355,21 @@ The col argument to get_subplot must be an integer where 1 <= row <= {cols}
     elif len(layout_keys) == 2:
         return SubplotXY(
             xaxis=fig.layout[layout_keys[0]],
-            yaxis=fig.layout[layout_keys[1]])
+            yaxis=fig.layout[layout_keys[1]],
+            secondary_yaxis=None
+        )
+    elif len(layout_keys) == 3:
+        return SubplotXY(
+            xaxis=fig.layout[layout_keys[0]],
+            yaxis=fig.layout[layout_keys[1]],
+            secondary_yaxis=fig.layout[layout_keys[2]],
+        )
     else:
         raise ValueError("""
 Unexpected subplot type with layout_keys of {}""".format(layout_keys))
 
 
-def _get_subplot_ref_for_trace(trace):
+def _get_subplot_ref_for_trace(trace, secondary_to_primary_y_axes):
 
     if 'domain' in trace:
         return {
@@ -1331,11 +1383,29 @@ def _get_subplot_ref_for_trace(trace):
         xaxis_name = 'xaxis' + trace.xaxis[1:] if trace.xaxis else 'xaxis'
         yaxis_name = 'yaxis' + trace.yaxis[1:] if trace.yaxis else 'yaxis'
 
-        return {
-            'subplot_type': 'xy',
-            'layout_keys': (xaxis_name, yaxis_name),
-            'trace_kwargs': {'xaxis': trace.xaxis, 'yaxis': trace.yaxis}
-        }
+        # Check whether this yaxis is secondary yaxis
+        if yaxis_name in secondary_to_primary_y_axes:
+            secondary_yaxis_name = yaxis_name
+            yaxis_name = secondary_to_primary_y_axes[secondary_yaxis_name]
+            y_label = 'y' + yaxis_name[5:]
+            secondary_y_label = 'y' + secondary_yaxis_name[5:]
+            return {
+                'subplot_type': 'xy',
+                'layout_keys': (xaxis_name, yaxis_name),
+                'trace_kwargs': {
+                    'xaxis': trace.xaxis, 'yaxis': y_label,
+                },
+                'secondary_trace_kwargs': {
+                    'xaxis': trace.xaxis, 'yaxis': secondary_y_label
+                },
+                'secondary_layout_keys': (xaxis_name, secondary_yaxis_name),
+            }
+        else:
+            return {
+                'subplot_type': 'xy',
+                'layout_keys': (xaxis_name, yaxis_name),
+                'trace_kwargs': {'xaxis': trace.xaxis, 'yaxis': trace.yaxis}
+            }
     elif 'geo' in trace:
         return {
             'subplot_type': 'geo',

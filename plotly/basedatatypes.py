@@ -796,23 +796,32 @@ class BaseFigure(object):
         return self
 
     def _select_layout_subplots_by_prefix(
-            self, prefix, selector=None, row=None, col=None):
+            self, prefix, selector=None, row=None, col=None, secondary_y=None):
         """
         Helper called by code generated select_* methods
         """
 
         if row is not None or col is not None:
             # Build mapping from container keys ('xaxis2', 'scene4', etc.)
-            # to row/col pairs
+            # to (row, col, secondary_y triplets)
             grid_ref = self._validate_get_grid_ref()
             container_to_row_col = {}
             for r, subplot_row in enumerate(grid_ref):
                 for c, ref in enumerate(subplot_row):
                     if ref is None:
                         continue
+
+                    # collect primary keys
                     for layout_key in ref['layout_keys']:
                         if layout_key.startswith(prefix):
-                            container_to_row_col[layout_key] = r + 1, c + 1
+                            container_to_row_col[layout_key] = (
+                                r + 1, c + 1, False)
+
+                    # collection secondary keys
+                    for layout_key in ref.get('secondary_layout_keys', ()):
+                        if layout_key.startswith(prefix):
+                            container_to_row_col[layout_key] = (
+                                r + 1, c + 1, True)
         else:
             container_to_row_col = None
 
@@ -830,6 +839,10 @@ class BaseFigure(object):
                 elif (col is not None and
                       container_to_row_col.get(k, (None, None))[1] != col):
                     # col specified and this is not a match
+                    continue
+                elif (secondary_y is not None and
+                      container_to_row_col.get(
+                          k, (None, None, None))[2] != secondary_y):
                     continue
 
                 # Filter by selector
@@ -1494,13 +1507,13 @@ Please use the add_trace method with the row and col parameters.
 
         self.add_trace(trace=trace, row=row, col=col)
 
-    def _set_trace_grid_position(self, trace, row, col):
+    def _set_trace_grid_position(self, trace, row, col, secondary_y=False):
         grid_ref = self._validate_get_grid_ref()
 
         from _plotly_future_ import _future_flags
         if 'v4_subplots' in _future_flags:
             return _set_trace_grid_reference(
-                trace, self.layout, grid_ref, row, col)
+                trace, grid_ref, row, col, secondary_y)
 
         if row <= 0:
             raise Exception("Row value is out of range. "
