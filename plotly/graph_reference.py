@@ -9,7 +9,7 @@ import re
 import pkgutil
 
 import six
-from requests.compat import json as _json
+import json as _json
 
 from plotly import utils
 

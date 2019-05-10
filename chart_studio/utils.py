@@ -12,7 +12,7 @@ import re
 import threading
 import warnings
 
-from requests.compat import json as _json
+import json as _json
 
 from _plotly_utils.exceptions import PlotlyError
 from _plotly_utils.optional_imports import get_module

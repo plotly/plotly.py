@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 
-from requests.compat import json as _json
+import json as _json
 from requests.exceptions import ConnectionError
 
 from plotly import version
