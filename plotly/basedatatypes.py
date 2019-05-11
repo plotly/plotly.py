@@ -639,7 +639,8 @@ class BaseFigure(object):
         for trace_ind, trace in enumerate(self._data_objs):
             trace._trace_ind = trace_ind
 
-    def select_traces(self, selector=None, row=None, col=None):
+    def select_traces(
+            self, selector=None, row=None, col=None, secondary_y=None):
         """
         Select traces from a particular subplot cell and/or traces
         that satisfy custom selection criteria.
@@ -657,7 +658,18 @@ class BaseFigure(object):
             To select traces by row and column, the Figure must have been
             created using plotly.subplots.make_subplots.  If None
             (the default), all traces are selected.
+        secondary_y: boolean or None (default None)
+            * If True, only select traces associated with the secondary
+              y-axis of the subplot.
+            * If False, only select traces associated with the primary
+              y-axis of the subplot.
+            * If None (the default), do not filter traces based on secondary
+              y-axis.
 
+            To select traces by secondary y-axis, the Figure must have been
+            created using plotly.subplots.make_subplots. See the docstring
+            for the specs argument to make_subplots for more info on
+            creating subplots with secondary y-axes.
         Returns
         -------
         generator
@@ -667,20 +679,40 @@ class BaseFigure(object):
         if not selector:
             selector = {}
 
-        if row is not None or col is not None:
+        if row is not None or col is not None or secondary_y is not None:
             _validate_v4_subplots('select_traces')
             grid_ref = self._validate_get_grid_ref()
             filter_by_subplot = True
 
-            if row is None:
+            if row is None and col is not None:
                 # All rows for column
-                grid_subplot_refs = [ref_row[col-1] for ref_row in grid_ref]
-            elif col is None:
+                grid_subplot_ref_tuples = [
+                    ref_row[col-1] for ref_row in grid_ref
+                ]
+            elif col is None and row is not None:
                 # All columns for row
-                grid_subplot_refs = grid_ref[row-1]
-            else:
+                grid_subplot_ref_tuples = grid_ref[row-1]
+            elif col is not None and row is not None:
                 # Single grid cell
-                grid_subplot_refs = [grid_ref[row-1][col-1]]
+                grid_subplot_ref_tuples = [grid_ref[row-1][col-1]]
+            else:
+                # row and col are None, secondary_y not None
+                grid_subplot_ref_tuples = [
+                    refs
+                    for refs_row in grid_ref
+                    for refs in refs_row
+                ]
+
+            # Collect list of subplot refs, taking secondary_y into account
+            grid_subplot_refs = []
+            for refs in grid_subplot_ref_tuples:
+                if not refs:
+                    continue
+                if secondary_y is not True:
+                    grid_subplot_refs.append(refs[0])
+
+                if secondary_y is not False and len(refs) > 1:
+                    grid_subplot_refs.append(refs[1])
 
         else:
             filter_by_subplot = False
@@ -728,7 +760,8 @@ class BaseFigure(object):
 
         return True
 
-    def for_each_trace(self, fn, selector=None, row=None, col=None):
+    def for_each_trace(
+            self, fn, selector=None, row=None, col=None, secondary_y=None):
         """
         Apply a function to all traces that satisfy the specified selection
         criteria
@@ -748,19 +781,38 @@ class BaseFigure(object):
             To select traces by row and column, the Figure must have been
             created using plotly.subplots.make_subplots.  If None
             (the default), all traces are selected.
+        secondary_y: boolean or None (default None)
+            * If True, only select traces associated with the secondary
+              y-axis of the subplot.
+            * If False, only select traces associated with the primary
+              y-axis of the subplot.
+            * If None (the default), do not filter traces based on secondary
+              y-axis.
 
+            To select traces by secondary y-axis, the Figure must have been
+            created using plotly.subplots.make_subplots. See the docstring
+            for the specs argument to make_subplots for more info on
+            creating subplots with secondary y-axes.
         Returns
         -------
         self
             Returns the Figure object that the method was called on
         """
-        for trace in self.select_traces(selector=selector, row=row, col=col):
+        for trace in self.select_traces(
+                selector=selector, row=row, col=col, secondary_y=secondary_y):
             fn(trace)
 
         return self
 
     def update_traces(
-            self, patch=None, selector=None, row=None, col=None, **kwargs):
+            self,
+            patch=None,
+            selector=None,
+            row=None,
+            col=None,
+            secondary_y=None,
+            **kwargs
+    ):
         """
         Perform a property update operation on all traces that satisfy the
         specified selection criteria
@@ -781,6 +833,18 @@ class BaseFigure(object):
             To select traces by row and column, the Figure must have been
             created using plotly.subplots.make_subplots.  If None
             (the default), all traces are selected.
+        secondary_y: boolean or None (default None)
+            * If True, only select traces associated with the secondary
+              y-axis of the subplot.
+            * If False, only select traces associated with the primary
+              y-axis of the subplot.
+            * If None (the default), do not filter traces based on secondary
+              y-axis.
+
+            To select traces by secondary y-axis, the Figure must have been
+            created using plotly.subplots.make_subplots. See the docstring
+            for the specs argument to make_subplots for more info on
+            creating subplots with secondary y-axes.
         **kwargs
             Additional property updates to apply to each selected trace. If
             a property is specified in both patch and in **kwargs then the
@@ -791,37 +855,40 @@ class BaseFigure(object):
         self
             Returns the Figure object that the method was called on
         """
-        for trace in self.select_traces(selector=selector, row=row, col=col):
+        for trace in self.select_traces(
+                selector=selector, row=row, col=col, secondary_y=secondary_y):
             trace.update(patch, **kwargs)
         return self
 
     def _select_layout_subplots_by_prefix(
-            self, prefix, selector=None, row=None, col=None, secondary_y=None):
+            self,
+            prefix,
+            selector=None,
+            row=None,
+            col=None,
+            secondary_y=None
+    ):
         """
         Helper called by code generated select_* methods
         """
 
-        if row is not None or col is not None:
+        if row is not None or col is not None or secondary_y is not None:
             # Build mapping from container keys ('xaxis2', 'scene4', etc.)
             # to (row, col, secondary_y triplets)
             grid_ref = self._validate_get_grid_ref()
             container_to_row_col = {}
             for r, subplot_row in enumerate(grid_ref):
-                for c, ref in enumerate(subplot_row):
-                    if ref is None:
+                for c, subplot_refs in enumerate(subplot_row):
+                    if not subplot_refs:
                         continue
 
                     # collect primary keys
-                    for layout_key in ref['layout_keys']:
-                        if layout_key.startswith(prefix):
-                            container_to_row_col[layout_key] = (
-                                r + 1, c + 1, False)
-
-                    # collection secondary keys
-                    for layout_key in ref.get('secondary_layout_keys', ()):
-                        if layout_key.startswith(prefix):
-                            container_to_row_col[layout_key] = (
-                                r + 1, c + 1, True)
+                    for i, subplot_ref in enumerate(subplot_refs):
+                        for layout_key in subplot_ref.layout_keys:
+                            if layout_key.startswith(prefix):
+                                is_secondary_y = i == 1
+                                container_to_row_col[layout_key] = (
+                                    r + 1, c + 1, is_secondary_y)
         else:
             container_to_row_col = None
 
@@ -1281,7 +1348,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         else:
             BaseFigure._raise_invalid_rows_cols(name=name, n=n, invalid=vals)
 
-    def add_trace(self, trace, row=None, col=None):
+    def add_trace(self, trace, row=None, col=None, secondary_y=None):
         """
         Add a trace to the figure
 
@@ -1299,15 +1366,26 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
                   - All remaining properties are passed to the constructor
                     of the specified trace type.
 
-        row : int or None (default)
+        row : int or None (default None)
             Subplot row index (starting from 1) for the trace to be added.
             Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.subplots.make_subplots`
+        col : int or None (default None)
             Subplot col index (starting from 1) for the trace to be added.
             Only valid if figure was created using
-            `plotly.tools.make_subplots`
-
+            `plotly.subplots.make_subplots`
+        secondary_y: boolean or None (default None)
+            If True, associate this trace with the secondary y-axis of the
+            subplot at the specified row and col. Only valid if all of the
+            following conditions are satisfied:
+              * The figure was created using `plotly.subplots.make_subplots`.
+              * The row and col arguments are not None
+              * The subplot at the specified row and col has type xy
+                (which is the default) and secondary_y True.  These
+                properties are specified in the specs argument to
+                make_subplots. See the make_subplots docstring for more info.
+              * The trace argument is a 2D cartesian trace
+                (scatter, bar, etc.)
         Returns
         -------
         BaseTraceType
@@ -1350,12 +1428,14 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
                 'Received col parameter but not row.\n'
                 'row and col must be specified together')
 
-        return self.add_traces(data=[trace],
-                               rows=[row] if row is not None else None,
-                               cols=[col] if col is not None else None
-                               )[0]
+        return self.add_traces(
+            data=[trace],
+            rows=[row] if row is not None else None,
+            cols=[col] if col is not None else None,
+            secondary_ys=[secondary_y] if secondary_y is not None else None
+        )[0]
 
-    def add_traces(self, data, rows=None, cols=None):
+    def add_traces(self, data, rows=None, cols=None, secondary_ys=None):
         """
         Add traces to the figure
 
@@ -1383,6 +1463,9 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
             List of subplot column indexes (starting from 1) for the traces
             to be added. Only valid if figure was created using
             `plotly.tools.make_subplots`
+        secondary_ys: None or list[boolean] (default None)
+            List of secondary_y booleans for traces to be added. See the
+            docstring for `add_trace` for more info.
 
         Returns
         -------
@@ -1432,10 +1515,22 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
                 'Received cols parameter but not rows.\n'
                 'rows and cols must be specified together')
 
+        # Process secondary_ys defaults
+        if secondary_ys is not None and rows is None:
+            # Default rows/cols to 1s if secondary_ys specified but not rows
+            # or cols
+            rows = [1] * len(secondary_ys)
+            cols = rows
+        elif secondary_ys is None and rows is not None:
+            # Default secondary_ys to Nones if secondary_ys is not specified
+            # but not rows and cols are specified
+            secondary_ys = [None] * len(rows)
+
         # Apply rows / cols
         if rows is not None:
-            for trace, row, col in zip(data, rows, cols):
-                self._set_trace_grid_position(trace, row, col)
+            for trace, row, col, secondary_y in \
+                    zip(data, rows, cols, secondary_ys):
+                self._set_trace_grid_position(trace, row, col, secondary_y)
 
         # Make deep copy of trace data (Optimize later if needed)
         new_traces_data = [deepcopy(trace._props) for trace in data]
@@ -1557,7 +1652,7 @@ Please use the add_trace method with the row and col parameters.
                             "to create the figure with a subplot grid.")
         return grid_ref
 
-    def get_subplot(self, row, col):
+    def get_subplot(self, row, col, secondary_y=False):
         """
         Return an object representing the subplot at the specified row
         and column.  May only be used on Figures created using
@@ -1587,7 +1682,7 @@ Please use the add_trace method with the row and col parameters.
                 - xaxis: plotly.graph_objs.layout.XAxis instance for subplot
                 - yaxis: plotly.graph_objs.layout.YAxis instance for subplot
         """
-        return _get_grid_subplot(self, row, col)
+        return _get_grid_subplot(self, row, col, secondary_y)
 
     # Child property operations
     # -------------------------
