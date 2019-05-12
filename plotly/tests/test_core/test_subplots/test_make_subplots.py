@@ -5,6 +5,7 @@ from unittest import TestCase
 from plotly.graph_objs import (Annotation, Annotations, Data, Figure, Font,
                                Layout, layout, Scene, XAxis, YAxis)
 import plotly.tools as tls
+from plotly import subplots
 
 
 class TestMakeSubplots(TestCase):
@@ -2170,4 +2171,47 @@ class TestMakeSubplots(TestCase):
 
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
 
-    # def test_row_width_and_shared_yaxes(self):
+    def test_secondary_y(self):
+        fig = subplots.make_subplots(
+            rows=1, cols=1, specs=[[{'secondary_y': True}]])
+
+        expected = Figure({
+            'data': [],
+            'layout': {'xaxis': {'anchor': 'y', 'domain': [0.0, 1.0]},
+                       'yaxis': {'anchor': 'x', 'domain': [0.0, 1.0]},
+                       'yaxis2': {'anchor': 'x',
+                                  'overlaying': 'y',
+                                  'side': 'right'}}
+        })
+
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
+
+    def test_secondary_y_traces(self):
+        fig = subplots.make_subplots(
+            rows=1, cols=1, specs=[[{'secondary_y': True}]])
+
+        fig.add_scatter(y=[1, 3, 2], name='First', row=1, col=1)
+        fig.add_scatter(
+            y=[2, 1, 3], name='second', row=1, col=1, secondary_y=True)
+        fig.update_traces(uid=None)
+
+        expected = Figure({
+            'data': [{'name': 'First',
+                      'type': 'scatter',
+                      'y': [1, 3, 2],
+                      'xaxis': 'x',
+                      'yaxis': 'y'},
+                     {'name': 'second',
+                      'type': 'scatter',
+                      'y': [2, 1, 3],
+                      'xaxis': 'x',
+                      'yaxis': 'y2'}],
+            'layout': {'xaxis': {'anchor': 'y', 'domain': [0.0, 1.0]},
+                       'yaxis': {'anchor': 'x', 'domain': [0.0, 1.0]},
+                       'yaxis2': {'anchor': 'x',
+                                  'overlaying': 'y',
+                                  'side': 'right'}}
+        })
+        expected.update_traces(uid=None)
+
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
