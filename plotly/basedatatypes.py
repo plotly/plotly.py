@@ -1664,7 +1664,13 @@ Please use the add_trace method with the row and col parameters.
             1-based index of subplot row
         col: int
             1-based index of subplot column
-
+        secondary_y: bool
+            If True, select the subplot that consists of the x-axis and the
+            secondary y-axis at the specified row/col. Only valid if the
+            subplot at row/col is an 2D cartesian subplot that was created
+            with a secondary y-axis.  See the docstring for the specs argument
+            to make_subplots for more info on creating a subplot with a
+            secondary y-axis.
         Returns
         -------
         subplot
