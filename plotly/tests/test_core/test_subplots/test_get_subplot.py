@@ -30,8 +30,8 @@ class TestGetSubplot(TestCase):
         fig.add_scatter(y=[2, 1, 3], row=1, col=1)
         fig.add_scatter(y=[2, 1, 3], row=1, col=2)
         fig.add_scatter(y=[1, 3, 2], row=1, col=2, secondary_y=True)
-        fig.add_trace(go.Scatterpolar(r=[2, 1, 3], theta=[20, 50, 125]), row=2,
-                      col=1)
+        fig.add_trace(go.Scatterpolar(
+            r=[2, 1, 3], theta=[20, 50, 125]), row=2, col=1)
         fig.add_traces([go.Scatterternary(a=[.2, .1, .3], b=[.4, .6, .5])],
                        rows=[2], cols=[2])
         fig.add_scatter3d(x=[2, 0, 1], y=[0, 1, 0], z=[0, 1, 2], mode='lines',
