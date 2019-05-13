@@ -2215,3 +2215,73 @@ class TestMakeSubplots(TestCase):
         expected.update_traces(uid=None)
 
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
+
+    def test_secondary_y_subplots(self):
+        fig = subplots.make_subplots(
+            rows=2,
+            cols=2,
+            specs=[[{'secondary_y': True}, {'secondary_y': True}],
+                   [{'secondary_y': True}, {'secondary_y': True}]]
+        )
+
+        fig.add_scatter(y=[1, 3, 2], name='First', row=1, col=1)
+        fig.add_scatter(
+            y=[2, 1, 3], name='Second', row=1, col=1, secondary_y=True)
+
+        fig.add_scatter(y=[4, 3, 2], name='Third', row=1, col=2)
+        fig.add_scatter(
+            y=[8, 1, 3], name='Forth', row=1, col=2, secondary_y=True)
+
+        fig.add_scatter(y=[0, 2, 4], name='Fifth', row=2, col=1)
+        fig.add_scatter(
+            y=[2, 1, 3], name='Sixth', row=2, col=1, secondary_y=True)
+
+        fig.add_scatter(y=[2, 4, 0], name='Fifth', row=2, col=2)
+        fig.add_scatter(
+            y=[2, 3, 6], name='Sixth', row=2, col=2, secondary_y=True)
+
+        fig.update_traces(uid=None)
+
+        expected = Figure({
+            'data': [
+                {'name': 'First', 'type': 'scatter',
+                 'xaxis': 'x', 'y': [1, 3, 2], 'yaxis': 'y'},
+                {'name': 'Second', 'type': 'scatter',
+                 'xaxis': 'x', 'y': [2, 1, 3], 'yaxis': 'y2'},
+                {'name': 'Third', 'type': 'scatter',
+                 'xaxis': 'x2', 'y': [4, 3, 2], 'yaxis': 'y3'},
+                {'name': 'Forth', 'type': 'scatter',
+                 'xaxis': 'x2', 'y': [8, 1, 3], 'yaxis': 'y4'},
+                {'name': 'Fifth', 'type': 'scatter',
+                 'xaxis': 'x3', 'y': [0, 2, 4], 'yaxis': 'y5'},
+                {'name': 'Sixth', 'type': 'scatter',
+                 'xaxis': 'x3', 'y': [2, 1, 3], 'yaxis': 'y6'},
+                {'name': 'Fifth', 'type': 'scatter',
+                 'xaxis': 'x4', 'y': [2, 4, 0], 'yaxis': 'y7'},
+                {'name': 'Sixth', 'type': 'scatter',
+                 'xaxis': 'x4', 'y': [2, 3, 6], 'yaxis': 'y8'}],
+            'layout': {
+                'xaxis': {'anchor': 'y', 'domain': [0.0, 0.45]},
+                'xaxis2': {'anchor': 'y3', 'domain': [0.55, 1.0]},
+                'xaxis3': {'anchor': 'y5', 'domain': [0.0, 0.45]},
+                'xaxis4': {'anchor': 'y7', 'domain': [0.55, 1.0]},
+                'yaxis': {'anchor': 'x', 'domain': [0.575, 1.0]},
+                'yaxis2': {'anchor': 'x',
+                           'overlaying': 'y', 'side': 'right'},
+                'yaxis3': {'anchor': 'x2',
+                           'domain': [0.575, 1.0]},
+                'yaxis4': {'anchor': 'x2',
+                           'overlaying': 'y3', 'side': 'right'},
+                'yaxis5': {'anchor': 'x3',
+                           'domain': [0.0, 0.425]},
+                'yaxis6': {'anchor': 'x3',
+                           'overlaying': 'y5', 'side': 'right'},
+                'yaxis7': {'anchor': 'x4',
+                           'domain': [0.0, 0.425]},
+                'yaxis8': {'anchor': 'x4',
+                           'overlaying': 'y7', 'side': 'right'}}
+        })
+
+        expected.update_traces(uid=None)
+
+        self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
