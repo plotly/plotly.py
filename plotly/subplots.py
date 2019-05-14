@@ -373,47 +373,6 @@ The 'start_cell` argument to make_subplots must be one of \
     if not subplot_titles:
         subplot_titles = [""] * rows * cols
 
-    # ### column_widths ###
-    if row_titles:
-        # Add a little breathing room between row labels and legend
-        max_width = 0.98
-    else:
-        max_width = 1.0
-    if column_widths is None:
-        widths = [(max_width - horizontal_spacing * (cols - 1)) / cols] * cols
-    elif isinstance(column_widths, (list, tuple)) and len(column_widths) == cols:
-        cum_sum = float(sum(column_widths))
-        widths = []
-        for w in column_widths:
-            widths.append(
-                (max_width - horizontal_spacing * (cols - 1)) * (w / cum_sum)
-            )
-    else:
-        raise ValueError("""
-The 'column_widths' argument to make_suplots must be a list of numbers of \
-length {cols}.
-    Received value of type {typ}: {val}""".format(
-            cols=cols, typ=type(cols), val=repr(column_widths)))
-
-    # ### row_heights ###
-    if row_heights is None:
-        heights = [(1. - vertical_spacing * (rows - 1)) / rows] * rows
-    elif isinstance(row_heights, (list, tuple)) and len(row_heights) == rows:
-        cum_sum = float(sum(row_heights))
-        heights = []
-        for h in row_heights:
-            heights.append(
-                (1. - vertical_spacing * (rows - 1)) * (h / cum_sum)
-            )
-        if row_dir < 0 and not use_legacy_row_heights_order:
-            heights = list(reversed(heights))
-    else:
-        raise ValueError("""
-The 'row_heights' argument to make_suplots must be a list of numbers of \
-length {rows}.
-    Received value of type {typ}: {val}""".format(
-            rows=rows, typ=type(cols), val=repr(row_heights)))
-
     # ### Helper to validate coerce elements of lists of dictionaries ###
     def _check_keys_and_fill(name, arg, defaults):
         def _checks(item, defaults):
@@ -488,8 +447,11 @@ dimensions ({rows} x {cols}).
     _check_keys_and_fill('specs', specs, spec_defaults)
 
     # Validate secondary_y
+    has_secondary_y = False
     for row in specs:
         for spec in row:
+            if spec is not None:
+                has_secondary_y = has_secondary_y or spec['secondary_y']
             if spec and spec['type'] != 'xy' and spec['secondary_y']:
                 raise ValueError("""
 The 'secondary_y' spec property is not supported for subplot of type '{s_typ}'
@@ -545,6 +507,54 @@ The {arg} argument to make_subplots must be one of: {valid_vals}
             typ=type(val),
             val=repr(val)
         ))
+
+    # ### column_widths ###
+    if has_secondary_y:
+        # Add room for secondary y-axis title
+        max_width = 0.94
+    elif row_titles:
+        # Add a little breathing room between row labels and legend
+        max_width = 0.98
+    else:
+        max_width = 1.0
+    if column_widths is None:
+        widths = [(max_width - horizontal_spacing * (
+                    cols - 1)) / cols] * cols
+    elif isinstance(column_widths, (list, tuple)) and len(
+            column_widths) == cols:
+        cum_sum = float(sum(column_widths))
+        widths = []
+        for w in column_widths:
+            widths.append(
+                (max_width - horizontal_spacing * (cols - 1)) * (
+                            w / cum_sum)
+            )
+    else:
+        raise ValueError("""
+The 'column_widths' argument to make_suplots must be a list of numbers of \
+length {cols}.
+    Received value of type {typ}: {val}""".format(
+            cols=cols, typ=type(cols), val=repr(column_widths)))
+
+    # ### row_heights ###
+    if row_heights is None:
+        heights = [(1. - vertical_spacing * (rows - 1)) / rows] * rows
+    elif isinstance(row_heights, (list, tuple)) and len(
+            row_heights) == rows:
+        cum_sum = float(sum(row_heights))
+        heights = []
+        for h in row_heights:
+            heights.append(
+                (1. - vertical_spacing * (rows - 1)) * (h / cum_sum)
+            )
+        if row_dir < 0 and not use_legacy_row_heights_order:
+            heights = list(reversed(heights))
+    else:
+        raise ValueError("""
+The 'row_heights' argument to make_suplots must be a list of numbers of \
+length {rows}.
+    Received value of type {typ}: {val}""".format(
+            rows=rows, typ=type(cols), val=repr(row_heights)))
 
     # ### column_titles / row_titles ###
     if column_titles and not isinstance(column_titles, (list, tuple)):

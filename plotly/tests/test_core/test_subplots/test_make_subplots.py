@@ -2177,7 +2177,7 @@ class TestMakeSubplots(TestCase):
 
         expected = Figure({
             'data': [],
-            'layout': {'xaxis': {'anchor': 'y', 'domain': [0.0, 1.0]},
+            'layout': {'xaxis': {'anchor': 'y', 'domain': [0.0, 0.94]},
                        'yaxis': {'anchor': 'x', 'domain': [0.0, 1.0]},
                        'yaxis2': {'anchor': 'x',
                                   'overlaying': 'y',
@@ -2206,7 +2206,7 @@ class TestMakeSubplots(TestCase):
                       'y': [2, 1, 3],
                       'xaxis': 'x',
                       'yaxis': 'y2'}],
-            'layout': {'xaxis': {'anchor': 'y', 'domain': [0.0, 1.0]},
+            'layout': {'xaxis': {'anchor': 'y', 'domain': [0.0, 0.94]},
                        'yaxis': {'anchor': 'x', 'domain': [0.0, 1.0]},
                        'yaxis2': {'anchor': 'x',
                                   'overlaying': 'y',
@@ -2261,10 +2261,10 @@ class TestMakeSubplots(TestCase):
                 {'name': 'Sixth', 'type': 'scatter',
                  'xaxis': 'x4', 'y': [2, 3, 6], 'yaxis': 'y8'}],
             'layout': {
-                'xaxis': {'anchor': 'y', 'domain': [0.0, 0.45]},
-                'xaxis2': {'anchor': 'y3', 'domain': [0.55, 1.0]},
-                'xaxis3': {'anchor': 'y5', 'domain': [0.0, 0.45]},
-                'xaxis4': {'anchor': 'y7', 'domain': [0.55, 1.0]},
+                'xaxis': {'anchor': 'y', 'domain': [0.0, 0.42]},
+                'xaxis2': {'anchor': 'y3', 'domain': [0.52, 0.94]},
+                'xaxis3': {'anchor': 'y5', 'domain': [0.0, 0.42]},
+                'xaxis4': {'anchor': 'y7', 'domain': [0.52, 0.94]},
                 'yaxis': {'anchor': 'x', 'domain': [0.575, 1.0]},
                 'yaxis2': {'anchor': 'x',
                            'overlaying': 'y', 'side': 'right'},
