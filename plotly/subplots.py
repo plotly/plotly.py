@@ -358,21 +358,6 @@ The 'start_cell` argument to make_subplots must be one of \
     Received value of type {typ}: {val}""".format(
             typ=type(start_cell), val=repr(start_cell)))
 
-    # ### horizontal_spacing ###
-    if horizontal_spacing is None:
-        horizontal_spacing = 0.2 / cols
-
-    # ### vertical_spacing ###
-    if vertical_spacing is None:
-        if subplot_titles:
-            vertical_spacing = 0.5 / rows
-        else:
-            vertical_spacing = 0.3 / rows
-
-    # ### subplot titles ###
-    if not subplot_titles:
-        subplot_titles = [""] * rows * cols
-
     # ### Helper to validate coerce elements of lists of dictionaries ###
     def _check_keys_and_fill(name, arg, defaults):
         def _checks(item, defaults):
@@ -508,6 +493,24 @@ The {arg} argument to make_subplots must be one of: {valid_vals}
             val=repr(val)
         ))
 
+    # ### horizontal_spacing ###
+    if horizontal_spacing is None:
+        if has_secondary_y:
+            horizontal_spacing = 0.4 / cols
+        else:
+            horizontal_spacing = 0.2 / cols
+
+    # ### vertical_spacing ###
+    if vertical_spacing is None:
+        if subplot_titles:
+            vertical_spacing = 0.5 / rows
+        else:
+            vertical_spacing = 0.3 / rows
+
+    # ### subplot titles ###
+    if not subplot_titles:
+        subplot_titles = [""] * rows * cols
+
     # ### column_widths ###
     if has_secondary_y:
         # Add room for secondary y-axis title
@@ -517,6 +520,7 @@ The {arg} argument to make_subplots must be one of: {valid_vals}
         max_width = 0.98
     else:
         max_width = 1.0
+
     if column_widths is None:
         widths = [(max_width - horizontal_spacing * (
                     cols - 1)) / cols] * cols
