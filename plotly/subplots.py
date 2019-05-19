@@ -538,7 +538,7 @@ The {arg} argument to make_subplots must be one of: {valid_vals}
 The 'column_widths' argument to make_suplots must be a list of numbers of \
 length {cols}.
     Received value of type {typ}: {val}""".format(
-            cols=cols, typ=type(cols), val=repr(column_widths)))
+            cols=cols, typ=type(column_widths), val=repr(column_widths)))
 
     # ### row_heights ###
     if row_heights is None:
@@ -558,7 +558,7 @@ length {cols}.
 The 'row_heights' argument to make_suplots must be a list of numbers of \
 length {rows}.
     Received value of type {typ}: {val}""".format(
-            rows=rows, typ=type(cols), val=repr(row_heights)))
+            rows=rows, typ=type(row_heights), val=repr(row_heights)))
 
     # ### column_titles / row_titles ###
     if column_titles and not isinstance(column_titles, (list, tuple)):
