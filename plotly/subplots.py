@@ -845,6 +845,8 @@ def _configure_shared_axes(layout, grid_ref, specs, x_or_y, shared, row_dir):
             first_axis_id = None
             ok_to_remove_label = x_or_y == 'x'
             for r in rows_iter:
+                if not grid_ref[r][c]:
+                    continue
                 subplot_ref = grid_ref[r][c][0]
                 spec = specs[r][c]
                 first_axis_id = update_axis_matches(
@@ -855,6 +857,8 @@ def _configure_shared_axes(layout, grid_ref, specs, x_or_y, shared, row_dir):
             first_axis_id = None
             ok_to_remove_label = x_or_y == 'y'
             for c in range(cols):
+                if not grid_ref[r][c]:
+                    continue
                 subplot_ref = grid_ref[r][c][0]
                 spec = specs[r][c]
                 first_axis_id = update_axis_matches(
@@ -864,6 +868,8 @@ def _configure_shared_axes(layout, grid_ref, specs, x_or_y, shared, row_dir):
         first_axis_id = None
         for c in range(cols):
             for ri, r in enumerate(rows_iter):
+                if not grid_ref[r][c]:
+                    continue
                 subplot_ref = grid_ref[r][c][0]
                 spec = specs[r][c]
 
