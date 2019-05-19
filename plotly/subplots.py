@@ -1072,7 +1072,6 @@ def _build_subplot_title_annotations(
         title_edge='top',
         offset=0
 ):
-
     # If shared_axes is False (default) use list_of_domains
     # This is used for insets and irregular layouts
     # if not shared_xaxes and not shared_yaxes:
@@ -1286,7 +1285,7 @@ def _build_grid_str(specs, grid_ref, insets, insets_ref, row_seq):
     return grid_str
 
 
-def _set_trace_grid_reference(trace, grid_ref, row, col, secondary_y):
+def _set_trace_grid_reference(trace, grid_ref, row, col, secondary_y=False):
     if row <= 0:
         raise Exception("Row value is out of range. "
                         "Note: the starting cell is (1, 1)")
