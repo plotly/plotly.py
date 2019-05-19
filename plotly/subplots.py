@@ -1285,7 +1285,9 @@ def _build_grid_str(specs, grid_ref, insets, insets_ref, row_seq):
     return grid_str
 
 
-def _set_trace_grid_reference(trace, grid_ref, row, col, secondary_y=False):
+def _set_trace_grid_reference(
+        trace, layout, grid_ref, row, col, secondary_y=False):
+
     if row <= 0:
         raise Exception("Row value is out of range. "
                         "Note: the starting cell is (1, 1)")

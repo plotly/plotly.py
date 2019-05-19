@@ -1602,13 +1602,14 @@ Please use the add_trace method with the row and col parameters.
 
         self.add_trace(trace=trace, row=row, col=col)
 
-    def _set_trace_grid_position(self, trace, row, col, secondary_y=False):
+    def _set_trace_grid_position(
+            self, trace, row, col, secondary_y=False):
         grid_ref = self._validate_get_grid_ref()
 
         from _plotly_future_ import _future_flags
         if 'v4_subplots' in _future_flags:
             return _set_trace_grid_reference(
-                trace, grid_ref, row, col, secondary_y)
+                trace, self.layout, grid_ref, row, col, secondary_y)
 
         if row <= 0:
             raise Exception("Row value is out of range. "
