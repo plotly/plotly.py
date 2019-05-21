@@ -133,7 +133,7 @@ Renderer must be a subclass of MimetypeRenderer or ExternalRenderer.
         self._default_renderers = [self[name] for name in renderer_names]
 
         # Register renderers for activation before their next use
-        self._to_activate.extend(self._default_renderers)
+        self._to_activate = list(self._default_renderers)
 
     @property
     def render_on_display(self):
