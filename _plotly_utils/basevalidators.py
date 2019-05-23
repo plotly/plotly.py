@@ -1454,14 +1454,9 @@ class SubplotidValidator(BaseValidator):
             self.base = dflt
         else:
             # e.g. regex == '/^y([2-9]|[1-9][0-9]+)?$/'
-            self.base = re.match('/\^(\w+)',
-                                 regex).group(1)
+            self.base = re.match('/\^(\w+)', regex).group(1)
 
-        if regex is not None:
-            # Remove leading/trailing '/' characters
-            self.regex = regex[1:-1]
-        else:
-            self.regex = dflt + "(\d*)"
+        self.regex = self.base + "(\d*)"
 
     def description(self):
 
