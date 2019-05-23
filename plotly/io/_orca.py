@@ -22,6 +22,8 @@ from plotly.optional_imports import get_module
 
 psutil = get_module('psutil')
 
+from _plotly_future_ import _future_flags
+
 # Valid image format constants
 # ----------------------------
 valid_formats = ('png', 'jpeg', 'webp', 'svg', 'pdf', 'eps')
@@ -668,6 +670,28 @@ but received value of type {typ}.
         shutdown_server()
 
     @property
+    def use_xvfb(self):
+        dflt = 'auto' if 'orca_defaults' in _future_flags else False
+        return self._props.get('use_xvfb', dflt)
+
+    @use_xvfb.setter
+    def use_xvfb(self, val):
+        valid_vals = [True, False, 'auto']
+        if val is None:
+            self._props.pop('use_xvfb', None)
+        else:
+            if val not in valid_vals:
+                raise ValueError("""
+The use_xvfb property must be one of {valid_vals}
+    Received value of type {typ}: {val}""".format(
+                    valid_vals=valid_vals, typ=type(val), val=repr(val)))
+
+            self._props['use_xvfb'] = val
+
+        # Server and validation must restart before setting is active
+        reset_status()
+
+    @property
     def plotlyjs(self):
         """
         The plotly.js bundle being used for image rendering.
@@ -710,6 +734,7 @@ orca configuration
     mathjax: {mathjax}
     topojson: {topojson}
     mapbox_access_token: {mapbox_access_token}
+    use_xvfb: {use_xvfb}
 
 constants
 ---------
@@ -727,7 +752,8 @@ constants
            topojson=self.topojson,
            mapbox_access_token=self.mapbox_access_token,
            plotlyjs=self.plotlyjs,
-           config_file=self.config_file)
+           config_file=self.config_file,
+           use_xvfb=self.use_xvfb)
 
 
 # Make config a singleton object
@@ -946,11 +972,10 @@ https://community.plot.ly/c/api/python
     # -------------------------
     # Search for executable name or path in config.executable
     executable = which(config.executable)
+    path = os.environ.get("PATH", os.defpath)
+    formatted_path = path.replace(os.pathsep, '\n    ')
 
     if executable is None:
-        path = os.environ.get("PATH", os.defpath)
-        formatted_path = path.replace(os.pathsep, '\n    ')
-
         raise ValueError("""
 The orca executable is required to export figures as static images,
 but it could not be found on the system path.
@@ -963,23 +988,36 @@ Searched for executable '{executable}' on the following path:
             formatted_path=formatted_path,
             instructions=install_location_instructions))
 
-    executable_list = [executable]
-
     # Check if we should run with Xvfb
     # --------------------------------
-    if (sys.platform.startswith('linux') and
-            not os.environ.get('DISPLAY')):
-        # We're on linux without a display server. See if Xvfb is available
-        xvfb_run_executable = which('xvfb-run')
+    xvfb_args = ["--auto-servernum",
+                 "--server-args",
+                 "-screen 0 640x480x24 +extension RANDR +extension GLX",
+                 executable]
 
-        if xvfb_run_executable:
-            executable_list = [
-                xvfb_run_executable,
-                "--auto-servernum",
-                "--server-args",
-                "-screen 0 640x480x24 +extension RANDR +extension GLX",
-                executable
-            ]
+    if config.use_xvfb == True:
+        # Use xvfb
+        xvfb_run_executable = which('xvfb-run')
+        if not xvfb_run_executable:
+            raise ValueError("""
+The plotly.io.orca.config.use_xvfb property is set to True, but the
+xvfb-run executable could not be found on the system path.
+
+Searched for the executable 'xvfb-run' on the following path:
+    {formatted_path}""".format(formatted_path=formatted_path))
+
+        executable_list = [xvfb_run_executable] + xvfb_args
+    elif (config.use_xvfb == 'auto' and
+          sys.platform.startswith('linux') and
+          not os.environ.get('DISPLAY') and
+          which('xvfb-run')):
+        # use_xvfb is 'auto', we're on linux without a display server,
+        # and xvfb-run is available. Use it.
+        xvfb_run_executable = which('xvfb-run')
+        executable_list = [xvfb_run_executable] + xvfb_args
+    else:
+        # Do not use xvfb
+        executable_list = [executable]
 
     # Run executable with --help and see if it's our orca
     # ---------------------------------------------------
