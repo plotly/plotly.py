@@ -7,12 +7,18 @@ from plotly.graph_objs import (
     Scattergl, Scattermapbox, Scatterpolar, Scatterpolargl, Scatterternary,
     Splom, Streamtube, Sunburst, Surface, Table, Violin, Volume, Waterfall
 )
+from plotly.subplots import _validate_v4_subplots
 
 
 class Figure(BaseFigure):
 
     def __init__(
-        self, data=None, layout=None, frames=None, skip_invalid=False
+        self,
+        data=None,
+        layout=None,
+        frames=None,
+        skip_invalid=False,
+        **kwargs
     ):
         """
         Create a new Figure instance
@@ -500,7 +506,8 @@ class Figure(BaseFigure):
             if a property in the specification of data, layout, or frames
             is invalid AND skip_invalid is False
         """
-        super(Figure, self).__init__(data, layout, frames, skip_invalid)
+        super(Figure,
+              self).__init__(data, layout, frames, skip_invalid, **kwargs)
 
     def add_area(
         self,
@@ -1371,8 +1378,8 @@ class Figure(BaseFigure):
         Each box spans from quartile 1 (Q1) to quartile 3 (Q3). The
         second quartile (Q2) is marked by a line inside the box. By
         default, the whiskers correspond to the box' edges +/- 1.5
-        times the interquartile range (IQR = Q3-Q1), see "boxpoints"
-        for other options.
+        times the interquartile range (IQR: Q3-Q1), see "boxpoints" for
+        other options.
 
         Parameters
         ----------
@@ -6930,7 +6937,7 @@ class Figure(BaseFigure):
         Sankey plots for network flow data analysis. The nodes are
         specified in `nodes` and the links between sources and targets
         in `links`. The colors are set in `nodes[i].color` and
-        `links[i].color`; otherwise defaults are used.
+        `links[i].color`, otherwise defaults are used.
 
         Parameters
         ----------
@@ -12294,3 +12301,717 @@ class Figure(BaseFigure):
             **kwargs
         )
         return self.add_trace(new_trace, row=row, col=col)
+
+    def select_geos(self, selector=None, row=None, col=None):
+        """
+        Select geo subplot objects from a particular subplot cell
+        and/or geo subplot objects that satisfy custom selection
+        criteria.
+
+        Parameters
+        ----------
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            geo objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all geo objects are selected.
+        row, col: int or None (default None)
+            Subplot row and column index of geo objects to select.
+            To select geo objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all geo objects are selected.
+
+        Returns
+        -------
+        generator
+            Generator that iterates through all of the geo
+            objects that satisfy all of the specified selection criteria
+        """
+        if row is not None or col is not None:
+            _validate_v4_subplots('select_geos')
+
+        return self._select_layout_subplots_by_prefix(
+            'geo', selector, row, col
+        )
+
+    def for_each_geo(self, fn, selector=None, row=None, col=None):
+        """
+        Apply a function to all geo objects that satisfy the
+        specified selection criteria
+        
+        Parameters
+        ----------
+        fn:
+            Function that inputs a single geo object.
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            geo objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all geo objects are selected.
+        row, col: int or None (default None)
+            Subplot row and column index of geo objects to select.
+            To select geo objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all geo objects are selected.
+        
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        """
+        for obj in self.select_geos(selector=selector, row=row, col=col):
+            fn(obj)
+
+        return self
+
+    def update_geos(
+        self, patch=None, selector=None, row=None, col=None, **kwargs
+    ):
+        """
+        Perform a property update operation on all geo objects
+        that satisfy the specified selection criteria
+        
+        Parameters
+        ----------
+        patch: dict
+            Dictionary of property updates to be applied to all
+            geo objects that satisfy the selection criteria.
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            geo objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all geo objects are selected.
+        row, col: int or None (default None)
+            Subplot row and column index of geo objects to select.
+            To select geo objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all geo objects are selected.
+        **kwargs
+            Additional property updates to apply to each selected
+            geo object. If a property is specified in
+            both patch and in **kwargs then the one in **kwargs
+            takes precedence.
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        """
+        for obj in self.select_geos(selector=selector, row=row, col=col):
+            obj.update(patch, **kwargs)
+
+        return self
+
+    def select_mapboxes(self, selector=None, row=None, col=None):
+        """
+        Select mapbox subplot objects from a particular subplot cell
+        and/or mapbox subplot objects that satisfy custom selection
+        criteria.
+
+        Parameters
+        ----------
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            mapbox objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all mapbox objects are selected.
+        row, col: int or None (default None)
+            Subplot row and column index of mapbox objects to select.
+            To select mapbox objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all mapbox objects are selected.
+
+        Returns
+        -------
+        generator
+            Generator that iterates through all of the mapbox
+            objects that satisfy all of the specified selection criteria
+        """
+        if row is not None or col is not None:
+            _validate_v4_subplots('select_mapboxes')
+
+        return self._select_layout_subplots_by_prefix(
+            'mapbox', selector, row, col
+        )
+
+    def for_each_mapbox(self, fn, selector=None, row=None, col=None):
+        """
+        Apply a function to all mapbox objects that satisfy the
+        specified selection criteria
+        
+        Parameters
+        ----------
+        fn:
+            Function that inputs a single mapbox object.
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            mapbox objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all mapbox objects are selected.
+        row, col: int or None (default None)
+            Subplot row and column index of mapbox objects to select.
+            To select mapbox objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all mapbox objects are selected.
+        
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        """
+        for obj in self.select_mapboxes(selector=selector, row=row, col=col):
+            fn(obj)
+
+        return self
+
+    def update_mapboxes(
+        self, patch=None, selector=None, row=None, col=None, **kwargs
+    ):
+        """
+        Perform a property update operation on all mapbox objects
+        that satisfy the specified selection criteria
+        
+        Parameters
+        ----------
+        patch: dict
+            Dictionary of property updates to be applied to all
+            mapbox objects that satisfy the selection criteria.
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            mapbox objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all mapbox objects are selected.
+        row, col: int or None (default None)
+            Subplot row and column index of mapbox objects to select.
+            To select mapbox objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all mapbox objects are selected.
+        **kwargs
+            Additional property updates to apply to each selected
+            mapbox object. If a property is specified in
+            both patch and in **kwargs then the one in **kwargs
+            takes precedence.
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        """
+        for obj in self.select_mapboxes(selector=selector, row=row, col=col):
+            obj.update(patch, **kwargs)
+
+        return self
+
+    def select_polars(self, selector=None, row=None, col=None):
+        """
+        Select polar subplot objects from a particular subplot cell
+        and/or polar subplot objects that satisfy custom selection
+        criteria.
+
+        Parameters
+        ----------
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            polar objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all polar objects are selected.
+        row, col: int or None (default None)
+            Subplot row and column index of polar objects to select.
+            To select polar objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all polar objects are selected.
+
+        Returns
+        -------
+        generator
+            Generator that iterates through all of the polar
+            objects that satisfy all of the specified selection criteria
+        """
+        if row is not None or col is not None:
+            _validate_v4_subplots('select_polars')
+
+        return self._select_layout_subplots_by_prefix(
+            'polar', selector, row, col
+        )
+
+    def for_each_polar(self, fn, selector=None, row=None, col=None):
+        """
+        Apply a function to all polar objects that satisfy the
+        specified selection criteria
+        
+        Parameters
+        ----------
+        fn:
+            Function that inputs a single polar object.
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            polar objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all polar objects are selected.
+        row, col: int or None (default None)
+            Subplot row and column index of polar objects to select.
+            To select polar objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all polar objects are selected.
+        
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        """
+        for obj in self.select_polars(selector=selector, row=row, col=col):
+            fn(obj)
+
+        return self
+
+    def update_polars(
+        self, patch=None, selector=None, row=None, col=None, **kwargs
+    ):
+        """
+        Perform a property update operation on all polar objects
+        that satisfy the specified selection criteria
+        
+        Parameters
+        ----------
+        patch: dict
+            Dictionary of property updates to be applied to all
+            polar objects that satisfy the selection criteria.
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            polar objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all polar objects are selected.
+        row, col: int or None (default None)
+            Subplot row and column index of polar objects to select.
+            To select polar objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all polar objects are selected.
+        **kwargs
+            Additional property updates to apply to each selected
+            polar object. If a property is specified in
+            both patch and in **kwargs then the one in **kwargs
+            takes precedence.
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        """
+        for obj in self.select_polars(selector=selector, row=row, col=col):
+            obj.update(patch, **kwargs)
+
+        return self
+
+    def select_scenes(self, selector=None, row=None, col=None):
+        """
+        Select scene subplot objects from a particular subplot cell
+        and/or scene subplot objects that satisfy custom selection
+        criteria.
+
+        Parameters
+        ----------
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            scene objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all scene objects are selected.
+        row, col: int or None (default None)
+            Subplot row and column index of scene objects to select.
+            To select scene objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all scene objects are selected.
+
+        Returns
+        -------
+        generator
+            Generator that iterates through all of the scene
+            objects that satisfy all of the specified selection criteria
+        """
+        if row is not None or col is not None:
+            _validate_v4_subplots('select_scenes')
+
+        return self._select_layout_subplots_by_prefix(
+            'scene', selector, row, col
+        )
+
+    def for_each_scene(self, fn, selector=None, row=None, col=None):
+        """
+        Apply a function to all scene objects that satisfy the
+        specified selection criteria
+        
+        Parameters
+        ----------
+        fn:
+            Function that inputs a single scene object.
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            scene objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all scene objects are selected.
+        row, col: int or None (default None)
+            Subplot row and column index of scene objects to select.
+            To select scene objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all scene objects are selected.
+        
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        """
+        for obj in self.select_scenes(selector=selector, row=row, col=col):
+            fn(obj)
+
+        return self
+
+    def update_scenes(
+        self, patch=None, selector=None, row=None, col=None, **kwargs
+    ):
+        """
+        Perform a property update operation on all scene objects
+        that satisfy the specified selection criteria
+        
+        Parameters
+        ----------
+        patch: dict
+            Dictionary of property updates to be applied to all
+            scene objects that satisfy the selection criteria.
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            scene objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all scene objects are selected.
+        row, col: int or None (default None)
+            Subplot row and column index of scene objects to select.
+            To select scene objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all scene objects are selected.
+        **kwargs
+            Additional property updates to apply to each selected
+            scene object. If a property is specified in
+            both patch and in **kwargs then the one in **kwargs
+            takes precedence.
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        """
+        for obj in self.select_scenes(selector=selector, row=row, col=col):
+            obj.update(patch, **kwargs)
+
+        return self
+
+    def select_ternaries(self, selector=None, row=None, col=None):
+        """
+        Select ternary subplot objects from a particular subplot cell
+        and/or ternary subplot objects that satisfy custom selection
+        criteria.
+
+        Parameters
+        ----------
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            ternary objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all ternary objects are selected.
+        row, col: int or None (default None)
+            Subplot row and column index of ternary objects to select.
+            To select ternary objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all ternary objects are selected.
+
+        Returns
+        -------
+        generator
+            Generator that iterates through all of the ternary
+            objects that satisfy all of the specified selection criteria
+        """
+        if row is not None or col is not None:
+            _validate_v4_subplots('select_ternaries')
+
+        return self._select_layout_subplots_by_prefix(
+            'ternary', selector, row, col
+        )
+
+    def for_each_ternary(self, fn, selector=None, row=None, col=None):
+        """
+        Apply a function to all ternary objects that satisfy the
+        specified selection criteria
+        
+        Parameters
+        ----------
+        fn:
+            Function that inputs a single ternary object.
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            ternary objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all ternary objects are selected.
+        row, col: int or None (default None)
+            Subplot row and column index of ternary objects to select.
+            To select ternary objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all ternary objects are selected.
+        
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        """
+        for obj in self.select_ternaries(selector=selector, row=row, col=col):
+            fn(obj)
+
+        return self
+
+    def update_ternaries(
+        self, patch=None, selector=None, row=None, col=None, **kwargs
+    ):
+        """
+        Perform a property update operation on all ternary objects
+        that satisfy the specified selection criteria
+        
+        Parameters
+        ----------
+        patch: dict
+            Dictionary of property updates to be applied to all
+            ternary objects that satisfy the selection criteria.
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            ternary objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all ternary objects are selected.
+        row, col: int or None (default None)
+            Subplot row and column index of ternary objects to select.
+            To select ternary objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all ternary objects are selected.
+        **kwargs
+            Additional property updates to apply to each selected
+            ternary object. If a property is specified in
+            both patch and in **kwargs then the one in **kwargs
+            takes precedence.
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        """
+        for obj in self.select_ternaries(selector=selector, row=row, col=col):
+            obj.update(patch, **kwargs)
+
+        return self
+
+    def select_xaxes(self, selector=None, row=None, col=None):
+        """
+        Select xaxis subplot objects from a particular subplot cell
+        and/or xaxis subplot objects that satisfy custom selection
+        criteria.
+
+        Parameters
+        ----------
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            xaxis objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all xaxis objects are selected.
+        row, col: int or None (default None)
+            Subplot row and column index of xaxis objects to select.
+            To select xaxis objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all xaxis objects are selected.
+
+        Returns
+        -------
+        generator
+            Generator that iterates through all of the xaxis
+            objects that satisfy all of the specified selection criteria
+        """
+        if row is not None or col is not None:
+            _validate_v4_subplots('select_xaxes')
+
+        return self._select_layout_subplots_by_prefix(
+            'xaxis', selector, row, col
+        )
+
+    def for_each_xaxis(self, fn, selector=None, row=None, col=None):
+        """
+        Apply a function to all xaxis objects that satisfy the
+        specified selection criteria
+        
+        Parameters
+        ----------
+        fn:
+            Function that inputs a single xaxis object.
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            xaxis objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all xaxis objects are selected.
+        row, col: int or None (default None)
+            Subplot row and column index of xaxis objects to select.
+            To select xaxis objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all xaxis objects are selected.
+        
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        """
+        for obj in self.select_xaxes(selector=selector, row=row, col=col):
+            fn(obj)
+
+        return self
+
+    def update_xaxes(
+        self, patch=None, selector=None, row=None, col=None, **kwargs
+    ):
+        """
+        Perform a property update operation on all xaxis objects
+        that satisfy the specified selection criteria
+        
+        Parameters
+        ----------
+        patch: dict
+            Dictionary of property updates to be applied to all
+            xaxis objects that satisfy the selection criteria.
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            xaxis objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all xaxis objects are selected.
+        row, col: int or None (default None)
+            Subplot row and column index of xaxis objects to select.
+            To select xaxis objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all xaxis objects are selected.
+        **kwargs
+            Additional property updates to apply to each selected
+            xaxis object. If a property is specified in
+            both patch and in **kwargs then the one in **kwargs
+            takes precedence.
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        """
+        for obj in self.select_xaxes(selector=selector, row=row, col=col):
+            obj.update(patch, **kwargs)
+
+        return self
+
+    def select_yaxes(self, selector=None, row=None, col=None):
+        """
+        Select yaxis subplot objects from a particular subplot cell
+        and/or yaxis subplot objects that satisfy custom selection
+        criteria.
+
+        Parameters
+        ----------
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            yaxis objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all yaxis objects are selected.
+        row, col: int or None (default None)
+            Subplot row and column index of yaxis objects to select.
+            To select yaxis objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all yaxis objects are selected.
+
+        Returns
+        -------
+        generator
+            Generator that iterates through all of the yaxis
+            objects that satisfy all of the specified selection criteria
+        """
+        if row is not None or col is not None:
+            _validate_v4_subplots('select_yaxes')
+
+        return self._select_layout_subplots_by_prefix(
+            'yaxis', selector, row, col
+        )
+
+    def for_each_yaxis(self, fn, selector=None, row=None, col=None):
+        """
+        Apply a function to all yaxis objects that satisfy the
+        specified selection criteria
+        
+        Parameters
+        ----------
+        fn:
+            Function that inputs a single yaxis object.
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            yaxis objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all yaxis objects are selected.
+        row, col: int or None (default None)
+            Subplot row and column index of yaxis objects to select.
+            To select yaxis objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all yaxis objects are selected.
+        
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        """
+        for obj in self.select_yaxes(selector=selector, row=row, col=col):
+            fn(obj)
+
+        return self
+
+    def update_yaxes(
+        self, patch=None, selector=None, row=None, col=None, **kwargs
+    ):
+        """
+        Perform a property update operation on all yaxis objects
+        that satisfy the specified selection criteria
+        
+        Parameters
+        ----------
+        patch: dict
+            Dictionary of property updates to be applied to all
+            yaxis objects that satisfy the selection criteria.
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            yaxis objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all yaxis objects are selected.
+        row, col: int or None (default None)
+            Subplot row and column index of yaxis objects to select.
+            To select yaxis objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all yaxis objects are selected.
+        **kwargs
+            Additional property updates to apply to each selected
+            yaxis object. If a property is specified in
+            both patch and in **kwargs then the one in **kwargs
+            takes precedence.
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        """
+        for obj in self.select_yaxes(selector=selector, row=row, col=col):
+            obj.update(patch, **kwargs)
+
+        return self

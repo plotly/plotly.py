@@ -28,7 +28,7 @@ def validator_aok_colorscale():
 # Array not ok, numbers not ok
 # ----------------------------
 @pytest.mark.parametrize('val',
-                         ['red', 'BLUE', 'rgb(255, 0, 0)', 'hsl(0, 100%, 50%)', 'hsla(0, 100%, 50%, 100%)',
+                         ['red', 'BLUE', 'rgb(255, 0, 0)', 'var(--accent)', 'hsl(0, 100%, 50%)', 'hsla(0, 100%, 50%, 100%)',
                           'hsv(0, 100%, 100%)', 'hsva(0, 100%, 100%, 50%)'])
 def test_acceptance(val, validator):
     assert validator.validate_coerce(val) == val
@@ -58,7 +58,7 @@ def test_rejection(val, validator):
 # ------------------------
 # ### Acceptance ###
 @pytest.mark.parametrize('val',
-                         ['red', 'BLUE', 23, 15, 'rgb(255, 0, 0)', 'hsl(0, 100%, 50%)', 'hsla(0, 100%, 50%, 100%)',
+                         ['red', 'BLUE', 23, 15, 'rgb(255, 0, 0)', 'var(--accent)', 'hsl(0, 100%, 50%)', 'hsla(0, 100%, 50%, 100%)',
                           'hsv(0, 100%, 100%)', 'hsva(0, 100%, 100%, 50%)'])
 def test_acceptance_colorscale(val, validator_colorscale):
     assert validator_colorscale.validate_coerce(val) == val

@@ -35,10 +35,6 @@ fig_frames = {
     ]
 }
 
-
-resize_code_strings = ['"responsive": true']
-
-
 PLOTLYJS = plotly.offline.get_plotlyjs()
 
 plotly_config_script = """\
@@ -265,45 +261,6 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
         self.assertNotIn('<html>', html)
         self.assertNotIn('</html>', html)
         self.assertTrue(html.startswith('<div>') and html.endswith('</div>'))
-
-    def test_autoresizing(self):
-
-        # If width or height wasn't specified, then we add a window resizer
-        html = self._read_html(plotly.offline.plot(fig, auto_open=False))
-        for resize_code_string in resize_code_strings:
-            self.assertIn(resize_code_string, html)
-
-        # If width or height was specified, then we don't resize
-        html = self._read_html(plotly.offline.plot({
-            'data': fig['data'],
-            'layout': {
-                'width': 500, 'height': 500
-            }
-        }, auto_open=False))
-        for resize_code_string in resize_code_strings:
-            self.assertNotIn(resize_code_string, html)
-
-    def test_autoresizing_div(self):
-
-        # If width or height wasn't specified, then we add a window resizer
-        for include_plotlyjs in [True, False, 'cdn', 'directory']:
-            html = plotly.offline.plot(fig,
-                                       output_type='div',
-                                       include_plotlyjs=include_plotlyjs)
-
-            for resize_code_string in resize_code_strings:
-                self.assertIn(resize_code_string, html)
-
-        # If width or height was specified, then we don't resize
-        html = plotly.offline.plot({
-            'data': fig['data'],
-            'layout': {
-                'width': 500, 'height': 500
-            }
-        }, output_type='div')
-
-        for resize_code_string in resize_code_strings:
-            self.assertNotIn(resize_code_string, html)
 
     def test_config(self):
         config = dict(linkText='Plotly rocks!',

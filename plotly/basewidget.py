@@ -119,7 +119,8 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
                  data=None,
                  layout=None,
                  frames=None,
-                 skip_invalid=False):
+                 skip_invalid=False,
+                 **kwargs):
 
         # Call superclass constructors
         # ----------------------------
@@ -129,7 +130,8 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         super(BaseFigureWidget, self).__init__(data=data,
                                                layout_plotly=layout,
                                                frames=frames,
-                                               skip_invalid=skip_invalid)
+                                               skip_invalid=skip_invalid,
+                                               **kwargs)
 
         # Validate Frames
         # ---------------
@@ -556,7 +558,7 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
             # may include axes that weren't explicitly defined by the user.
             for proppath in delta_transform:
                 prop = proppath[0]
-                match = self.layout._subplotid_prop_re.match(prop)
+                match = self.layout._subplot_re_match(prop)
                 if match and prop not in self.layout:
                     # We need to create a subplotid object
                     self.layout[prop] = {}
@@ -735,6 +737,8 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
                 trace._dispatch_on_unhover(points, state)
             elif event_type == 'plotly_selected':
                 trace._dispatch_on_selection(points, selector)
+            elif event_type == 'plotly_deselect':
+                trace._dispatch_on_deselect(points)
 
         self._js2py_pointsCallback = None
 

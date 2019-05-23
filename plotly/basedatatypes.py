@@ -9,6 +9,12 @@ import warnings
 from contextlib import contextmanager
 from copy import deepcopy, copy
 
+from _plotly_utils.utils import _natural_sort_strings
+from plotly.subplots import (
+    _set_trace_grid_reference,
+    _get_grid_subplot,
+    _get_subplot_ref_for_trace,
+    _validate_v4_subplots)
 from .optional_imports import get_module
 
 from _plotly_utils.basevalidators import (
@@ -32,13 +38,25 @@ class BaseFigure(object):
     """
     _bracket_re = re.compile('^(.*)\[(\d+)\]$')
 
+    _valid_underscore_properties = {
+        'error_x': 'error-x',
+        'error_y': 'error-y',
+        'error_z': 'error-z',
+        'copy_xstyle': 'copy-xstyle',
+        'copy_ystyle': 'copy-ystyle',
+        'copy_zstyle': 'copy-zstyle',
+        'paper_bgcolor': 'paper-bgcolor',
+        'plot_bgcolor': 'plot-bgcolor'
+    }
+
     # Constructor
     # -----------
     def __init__(self,
                  data=None,
                  layout_plotly=None,
                  frames=None,
-                 skip_invalid=False):
+                 skip_invalid=False,
+                 **kwargs):
         """
         Construct a BaseFigure object
 
@@ -246,6 +264,14 @@ class BaseFigure(object):
         # ### Check for default template ###
         self._initialize_layout_template()
 
+        # Process kwargs
+        # --------------
+        for k, v in kwargs.items():
+            if k in self:
+                self[k] = v
+            elif not skip_invalid:
+                raise TypeError('invalid Figure property: {}'.format(k))
+
     # Magic Methods
     # -------------
     def __reduce__(self):
@@ -355,7 +381,13 @@ class BaseFigure(object):
         return iter(('data', 'layout', 'frames'))
 
     def __contains__(self, prop):
-        return prop in ('data', 'layout', 'frames')
+        prop = BaseFigure._str_to_dict_path(prop)
+        if prop[0] not in ('data', 'layout', 'frames'):
+            return False
+        elif len(prop) == 1:
+            return True
+        else:
+            return prop[1:] in self[prop[0]]
 
     def __eq__(self, other):
         if not isinstance(other, BaseFigure):
@@ -446,7 +478,8 @@ class BaseFigure(object):
             for d in [dict1, kwargs]:
                 if d:
                     for k, v in d.items():
-                        if self[k] == ():
+                        update_target = self[k]
+                        if update_target == ():
                             # existing data or frames property is empty
                             # In this case we accept the v as is.
                             if k == 'data':
@@ -454,9 +487,12 @@ class BaseFigure(object):
                             else:
                                 # Accept v
                                 self[k] = v
-                        else:
+                        elif (isinstance(update_target, BasePlotlyType) or
+                              (isinstance(update_target, tuple) and
+                               isinstance(update_target[0], BasePlotlyType))):
                             BaseFigure._perform_update(self[k], v)
-
+                        else:
+                            self[k] = v
         return self
 
     # Data
@@ -602,6 +638,205 @@ class BaseFigure(object):
         # Update trace indexes
         for trace_ind, trace in enumerate(self._data_objs):
             trace._trace_ind = trace_ind
+
+    def select_traces(self, selector=None, row=None, col=None):
+        """
+        Select traces from a particular subplot cell and/or traces
+        that satisfy custom selection criteria.
+
+        Parameters
+        ----------
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            Traces will be selected if they contain properties corresponding
+            to all of the dictionary's keys, with values that exactly match
+            the supplied values. If None (the default), all traces are
+            selected.
+        row, col: int or None (default None)
+            Subplot row and column index of traces to select.
+            To select traces by row and column, the Figure must have been
+            created using plotly.subplots.make_subplots.  If None
+            (the default), all traces are selected.
+
+        Returns
+        -------
+        generator
+            Generator that iterates through all of the traces that satisfy
+            all of the specified selection criteria
+        """
+        if not selector:
+            selector = {}
+
+        if row is not None or col is not None:
+            _validate_v4_subplots('select_traces')
+            grid_ref = self._validate_get_grid_ref()
+            filter_by_subplot = True
+
+            if row is None:
+                # All rows for column
+                grid_subplot_refs = [ref_row[col-1] for ref_row in grid_ref]
+            elif col is None:
+                # All columns for row
+                grid_subplot_refs = grid_ref[row-1]
+            else:
+                # Single grid cell
+                grid_subplot_refs = [grid_ref[row-1][col-1]]
+
+        else:
+            filter_by_subplot = False
+            grid_subplot_refs = None
+
+        return self._perform_select_traces(
+            filter_by_subplot, grid_subplot_refs, selector)
+
+    def _perform_select_traces(
+            self, filter_by_subplot, grid_subplot_refs, selector):
+
+        for trace in self.data:
+            # Filter by subplot
+            if filter_by_subplot:
+                trace_subplot_ref = _get_subplot_ref_for_trace(trace)
+                if trace_subplot_ref not in grid_subplot_refs:
+                    continue
+
+            # Filter by selector
+            if not self._selector_matches(trace, selector):
+                continue
+
+            yield trace
+
+    @staticmethod
+    def _selector_matches(obj, selector):
+        if selector is None:
+            return True
+
+        for k in selector:
+            if k not in obj:
+                return False
+
+            obj_val = obj[k]
+            selector_val = selector[k]
+
+            if isinstance(obj_val, BasePlotlyType):
+                obj_val = obj_val.to_plotly_json()
+
+            if isinstance(selector_val, BasePlotlyType):
+                selector_val = selector_val.to_plotly_json()
+
+            if obj_val != selector_val:
+                return False
+
+        return True
+
+    def for_each_trace(self, fn, selector=None, row=None, col=None):
+        """
+        Apply a function to all traces that satisfy the specified selection
+        criteria
+
+        Parameters
+        ----------
+        fn:
+            Function that inputs a single trace object.
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            Traces will be selected if they contain properties corresponding
+            to all of the dictionary's keys, with values that exactly match
+            the supplied values. If None (the default), all traces are
+            selected.
+        row, col: int or None (default None)
+            Subplot row and column index of traces to select.
+            To select traces by row and column, the Figure must have been
+            created using plotly.subplots.make_subplots.  If None
+            (the default), all traces are selected.
+
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        """
+        for trace in self.select_traces(selector=selector, row=row, col=col):
+            fn(trace)
+
+        return self
+
+    def update_traces(
+            self, patch=None, selector=None, row=None, col=None, **kwargs):
+        """
+        Perform a property update operation on all traces that satisfy the
+        specified selection criteria
+
+        Parameters
+        ----------
+        patch: dict or None (default None)
+            Dictionary of property updates to be applied to all traces that
+            satisfy the selection criteria.
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            Traces will be selected if they contain properties corresponding
+            to all of the dictionary's keys, with values that exactly match
+            the supplied values. If None (the default), all traces are
+            selected.
+        row, col: int or None (default None)
+            Subplot row and column index of traces to select.
+            To select traces by row and column, the Figure must have been
+            created using plotly.subplots.make_subplots.  If None
+            (the default), all traces are selected.
+        **kwargs
+            Additional property updates to apply to each selected trace. If
+            a property is specified in both patch and in **kwargs then the
+            one in **kwargs takes precedence.
+
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        """
+        for trace in self.select_traces(selector=selector, row=row, col=col):
+            trace.update(patch, **kwargs)
+        return self
+
+    def _select_layout_subplots_by_prefix(
+            self, prefix, selector=None, row=None, col=None):
+        """
+        Helper called by code generated select_* methods
+        """
+
+        if row is not None or col is not None:
+            # Build mapping from container keys ('xaxis2', 'scene4', etc.)
+            # to row/col pairs
+            grid_ref = self._validate_get_grid_ref()
+            container_to_row_col = {}
+            for r, subplot_row in enumerate(grid_ref):
+                for c, ref in enumerate(subplot_row):
+                    if ref is None:
+                        continue
+                    for layout_key in ref['layout_keys']:
+                        if layout_key.startswith(prefix):
+                            container_to_row_col[layout_key] = r + 1, c + 1
+        else:
+            container_to_row_col = None
+
+        # Natural sort keys so that xaxis20 is after xaxis3
+        layout_keys = _natural_sort_strings(list(self.layout))
+
+        for k in layout_keys:
+            if k.startswith(prefix) and self.layout[k] is not None:
+
+                # Filter by row/col
+                if (row is not None and
+                        container_to_row_col.get(k, (None, None))[0] != row):
+                    # row specified and this is not a match
+                    continue
+                elif (col is not None and
+                      container_to_row_col.get(k, (None, None))[1] != col):
+                    # col specified and this is not a match
+                    continue
+
+                # Filter by selector
+                if not self._selector_matches(self.layout[k], selector):
+                    continue
+
+                yield self.layout[k]
 
     # Restyle
     # -------
@@ -821,18 +1056,20 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         """
         if isinstance(key_path_str, string_types) and \
                 '.' not in key_path_str and \
-                '[' not in key_path_str:
+                '[' not in key_path_str and \
+                '_' not in key_path_str:
             # Fast path for common case that avoids regular expressions
             return (key_path_str,)
         elif isinstance(key_path_str, tuple):
             # Nothing to do
             return key_path_str
         else:
-            # Split string on periods. e.g. 'foo.bar[1]' -> ['foo', 'bar[1]']
+            # Split string on periods.
+            # e.g. 'foo.bar_baz[1]' -> ['foo', 'bar_baz[1]']
             key_path = key_path_str.split('.')
 
             # Split out bracket indexes.
-            # e.g. ['foo', 'bar[1]'] -> ['foo', 'bar', '1']
+            # e.g. ['foo', 'bar_baz[1]'] -> ['foo', 'bar_baz', '1']
             key_path2 = []
             for key in key_path:
                 match = BaseFigure._bracket_re.match(key)
@@ -841,15 +1078,39 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
                 else:
                     key_path2.append(key)
 
+            # Split out underscore
+            # e.g. ['foo', 'bar_baz', '1'] -> ['foo', 'bar', 'baz', '1']
+            key_path3 = []
+            underscore_props = BaseFigure._valid_underscore_properties
+            for key in key_path2:
+                if '_' in key[1:]:
+                    # For valid properties that contain underscores (error_x)
+                    # replace the underscores with hyphens to protect them
+                    # from being split up
+                    for under_prop, hyphen_prop in underscore_props.items():
+                        key = key.replace(under_prop, hyphen_prop)
+
+                    # Split key on underscores
+                    key = key.split('_')
+
+                    # Replace hyphens with underscores to restore properties
+                    # that include underscores
+                    for i in range(len(key)):
+                        key[i] = key[i].replace('-', '_')
+
+                    key_path3.extend(key)
+                else:
+                    key_path3.append(key)
+
             # Convert elements to ints if possible.
             # e.g. ['foo', 'bar', '0'] -> ['foo', 'bar', 0]
-            for i in range(len(key_path2)):
+            for i in range(len(key_path3)):
                 try:
-                    key_path2[i] = int(key_path2[i])
+                    key_path3[i] = int(key_path3[i])
                 except ValueError as _:
                     pass
 
-            return tuple(key_path2)
+            return tuple(key_path3)
 
     @staticmethod
     def _set_in(d, key_path_str, v):
@@ -1234,13 +1495,13 @@ Please use the add_trace method with the row and col parameters.
         self.add_trace(trace=trace, row=row, col=col)
 
     def _set_trace_grid_position(self, trace, row, col):
-        try:
-            grid_ref = self._grid_ref
-        except AttributeError:
-            raise Exception("In order to use Figure.append_trace, "
-                            "you must first use "
-                            "plotly.tools.make_subplots "
-                            "to create a subplot grid.")
+        grid_ref = self._validate_get_grid_ref()
+
+        from _plotly_future_ import _future_flags
+        if 'v4_subplots' in _future_flags:
+            return _set_trace_grid_reference(
+                trace, self.layout, grid_ref, row, col)
+
         if row <= 0:
             raise Exception("Row value is out of range. "
                             "Note: the starting cell is (1, 1)")
@@ -1270,6 +1531,50 @@ Please use the add_trace method with the row and col parameters.
                                 "cell got deleted.".format(r=row, c=col))
             trace['xaxis'] = ref[0]
             trace['yaxis'] = ref[1]
+
+    def _validate_get_grid_ref(self):
+        try:
+            grid_ref = self._grid_ref
+            if grid_ref is None:
+                raise AttributeError('_grid_ref')
+        except AttributeError:
+            raise Exception("In order to reference traces by row and column, "
+                            "you must first use "
+                            "plotly.tools.make_subplots "
+                            "to create the figure with a subplot grid.")
+        return grid_ref
+
+    def get_subplot(self, row, col):
+        """
+        Return an object representing the subplot at the specified row
+        and column.  May only be used on Figures created using
+        plotly.tools.make_subplots
+
+        Parameters
+        ----------
+        row: int
+            1-based index of subplot row
+        col: int
+            1-based index of subplot column
+
+        Returns
+        -------
+        subplot
+            * None: if subplot is empty
+            * plotly.graph_objs.layout.Scene: if subplot type is 'scene'
+            * plotly.graph_objs.layout.Polar: if subplot type is 'polar'
+            * plotly.graph_objs.layout.Ternary: if subplot type is 'ternary'
+            * plotly.graph_objs.layout.Mapbox: if subplot type is 'ternary'
+            * SubplotDomain namedtuple with `x` and `y` fields:
+              if subplot type is 'domain'.
+                - x: length 2 list of the subplot start and stop width
+                - y: length 2 list of the subplot start and stop height
+            * SubplotXY namedtuple with `xaxis` and `yaxis` fields:
+              if subplot type is 'xy'.
+                - xaxis: plotly.graph_objs.layout.XAxis instance for subplot
+                - yaxis: plotly.graph_objs.layout.YAxis instance for subplot
+        """
+        return _get_grid_subplot(self, row, col)
 
     # Child property operations
     # -------------------------
@@ -2234,7 +2539,7 @@ Invalid property path '{key_path_str}' for layout
             if isinstance(plotly_obj, BaseLayoutType):
                 for key in update_obj:
                     if key not in plotly_obj:
-                        match = plotly_obj._subplotid_prop_re.match(key)
+                        match = plotly_obj._subplot_re_match(key)
                         if match:
                             # We need to create a subplotid object
                             plotly_obj[key] = {}
@@ -2391,8 +2696,16 @@ class BasePlotlyType(object):
         """
         Process any extra kwargs that are not predefined as constructor params
         """
-        if not self._skip_invalid:
-            self._raise_on_invalid_property_error(*kwargs.keys())
+        invalid_kwargs = {}
+        for k, v in kwargs.items():
+            if k in self:
+                # e.g. underscore kwargs like marker_line_color
+                self[k] = v
+            else:
+                invalid_kwargs[k] = v
+
+        if invalid_kwargs and not self._skip_invalid:
+            self._raise_on_invalid_property_error(*invalid_kwargs.keys())
 
     @property
     def plotly_name(self):
@@ -2637,7 +2950,9 @@ class BasePlotlyType(object):
             plotly_obj = self[prop_path[:-1]]
             prop = prop_path[-1]
         else:
-            plotly_obj = self
+            prop_path = BaseFigure._str_to_dict_path(prop)
+            plotly_obj = self[prop_path[:-1]]
+            prop = prop_path[-1]
 
         # Return validator
         # ----------------
@@ -2782,7 +3097,7 @@ class BasePlotlyType(object):
                 else:
                     return False
             else:
-                if p in obj._validators:
+                if obj is not None and p in obj._validators:
                     obj = obj[p]
                 else:
                     return False
@@ -3549,18 +3864,6 @@ class BaseLayoutType(BaseLayoutHierarchyType):
     # for xaxis, yaxis, geo, ternary, and scene. But, we need to dynamically
     # generated properties/validators as needed for xaxis2, yaxis3, etc.
 
-    # # ### Create subplot property regular expression ###
-    _subplotid_prop_names = ['xaxis',
-                             'yaxis',
-                             'geo',
-                             'ternary',
-                             'scene',
-                             'mapbox',
-                             'polar']
-
-    _subplotid_prop_re = re.compile(
-        '^(' + '|'.join(_subplotid_prop_names) + ')(\d+)$')
-
     @property
     def _subplotid_validators(self):
         """
@@ -3570,20 +3873,10 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         -------
         dict
         """
-        from .validators.layout import (XAxisValidator, YAxisValidator,
-                                        GeoValidator, TernaryValidator,
-                                        SceneValidator, MapboxValidator,
-                                        PolarValidator)
+        raise NotImplementedError()
 
-        return {
-            'xaxis': XAxisValidator,
-            'yaxis': YAxisValidator,
-            'geo': GeoValidator,
-            'ternary': TernaryValidator,
-            'scene': SceneValidator,
-            'mapbox': MapboxValidator,
-            'polar': PolarValidator
-        }
+    def _subplot_re_match(self, prop):
+        raise NotImplementedError()
 
     def __init__(self, plotly_name, **kwargs):
         """
@@ -3623,14 +3916,14 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         unknown_kwargs = {
             k: v
             for k, v in kwargs.items()
-            if not self._subplotid_prop_re.match(k)
+            if not self._subplot_re_match(k)
         }
         super(BaseLayoutHierarchyType, self)._process_kwargs(**unknown_kwargs)
 
         subplot_kwargs = {
             k: v
             for k, v in kwargs.items()
-            if self._subplotid_prop_re.match(k)
+            if self._subplot_re_match(k)
         }
 
         for prop, value in subplot_kwargs.items():
@@ -3650,7 +3943,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         # Get regular expression match
         # ----------------------------
         # Note: we already tested that match exists in the constructor
-        match = self._subplotid_prop_re.match(prop)
+        match = self._subplot_re_match(prop)
         subplot_prop = match.group(1)
         suffix_digit = int(match.group(2))
 
@@ -3711,7 +4004,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         # Handle subplot suffix digit of 1
         # --------------------------------
         # Remove digit of 1 from subplot id (e.g.. xaxis1 -> xaxis)
-        match = self._subplotid_prop_re.match(prop)
+        match = self._subplot_re_match(prop)
 
         if match:
             subplot_prop = match.group(1)
@@ -3771,7 +4064,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
 
         # Check for subplot assignment
         # ----------------------------
-        match = self._subplotid_prop_re.match(prop)
+        match = self._subplot_re_match(prop)
         if match is None:
             # Set as ordinary property
             super(BaseLayoutHierarchyType, self).__setitem__(prop, value)
@@ -3785,7 +4078,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         """
         # Check for subplot assignment
         # ----------------------------
-        match = self._subplotid_prop_re.match(prop)
+        match = self._subplot_re_match(prop)
         if match is None:
             # Set as ordinary property
             super(BaseLayoutHierarchyType, self).__setattr__(prop, value)
@@ -3870,6 +4163,9 @@ class BaseTraceType(BaseTraceHierarchyType):
 
         # ### Callbacks to be called on selection ###
         self._select_callbacks = []
+
+        # ### Callbacks to be called on deselect ###
+        self._deselect_callbacks = []
 
         # ### Trace index in figure ###
         self._trace_ind = None
@@ -4137,6 +4433,74 @@ class BaseTraceType(BaseTraceHierarchyType):
 
         for callback in self._select_callbacks:
             callback(self, points, selector)
+
+    # deselect
+    # --------
+    def on_deselect(
+            self,
+            callback,
+            append=False):
+        """
+        Register function to be called when the user deselects points
+        in this trace using doubleclick.
+
+        Note: Callbacks will only be triggered when the trace belongs to a
+        instance of plotly.graph_objs.FigureWidget and it is displayed in an
+        ipywidget context. Callbacks will not be triggered on figures
+        that are displayed using plot/iplot.
+
+        Parameters
+        ----------
+        callback
+            Callable function that accepts 3 arguments
+
+            - this trace
+            - plotly.callbacks.Points object
+
+        append : bool
+            If False (the default), this callback replaces any previously
+            defined on_deselect callbacks for this trace. If True,
+            this callback is appended to the list of any previously defined
+            callbacks.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
+        >>> from plotly.callbacks import Points
+        >>> points = Points()
+
+        >>> def deselect_fn(trace, points):
+        ...     inds = points.point_inds
+        ...     # Do something
+
+        >>> trace.on_deselect(deselect_fn)
+
+        Note: The creation of the `points` object is optional,
+        it's simply a convenience to help the text editor perform completion
+        on the `points` arguments inside `selection_fn`
+        """
+        if not append:
+            del self._deselect_callbacks[:]
+
+        if callback:
+            self._deselect_callbacks.append(callback)
+
+    def _dispatch_on_deselect(self, points):
+        """
+        Dispatch points info to deselection callbacks
+        """
+        if 'selectedpoints' in self:
+            # Update the selectedpoints property, which will notify all views
+            # of the selection change.  This is a special case because no
+            # restyle event is emitted by plotly.js on selection events
+            # even though these events update the selectedpoints property.
+            self.selectedpoints = None
+
+        for callback in self._deselect_callbacks:
+            callback(self, points)
 
 
 class BaseFrameHierarchyType(BasePlotlyType):

@@ -8,9 +8,12 @@ from codegen.datatypes import (reindent_validator_description,
                                add_constructor_params, add_docstring)
 from codegen.utils import PlotlyNode, format_and_write_source_py
 
+import inflect
+
 
 def build_figure_py(trace_node, base_package, base_classname, fig_classname,
-                    data_validator, layout_validator, frame_validator):
+                    data_validator, layout_validator, frame_validator,
+                    subplot_nodes):
     """
 
     Parameters
@@ -30,7 +33,8 @@ def build_figure_py(trace_node, base_package, base_classname, fig_classname,
         LayoutValidator instance
     frame_validator : CompoundArrayValidator
         FrameValidator instance
-
+    subplot_nodes: list of str
+        List of names of all of the layout subplot properties
     Returns
     -------
     str
@@ -53,6 +57,7 @@ def build_figure_py(trace_node, base_package, base_classname, fig_classname,
     # ### Import trace graph_obj classes ###
     trace_types_csv = ', '.join([n.name_datatype_class for n in trace_nodes])
     buffer.write(f'from plotly.graph_objs import ({trace_types_csv})\n')
+    buffer.write("from plotly.subplots import _validate_v4_subplots\n")
 
     # Write class definition
     # ----------------------
@@ -68,7 +73,7 @@ class {fig_classname}({base_classname}):\n""")
 
     buffer.write(f"""
     def __init__(self, data=None, layout=None,
-                 frames=None, skip_invalid=False):
+                 frames=None, skip_invalid=False, **kwargs):
         \"\"\"
         Create a new {fig_classname} instance
         
@@ -95,7 +100,8 @@ class {fig_classname}({base_classname}):\n""")
             is invalid AND skip_invalid is False
         \"\"\"
         super({fig_classname} ,self).__init__(data, layout,
-                                              frames, skip_invalid)
+                                              frames, skip_invalid,
+                                              **kwargs)
     """)
 
     # ### add_trace methods for each trace type ###
@@ -140,6 +146,116 @@ class {fig_classname}({base_classname}):\n""")
         buffer.write(f"""
         return self.add_trace(new_trace, row=row, col=col)""")
 
+    # update layout subplots
+    # ----------------------
+    inflect_eng = inflect.engine()
+    for subplot_node in subplot_nodes:
+        singular_name = subplot_node.name_property
+        plural_name = inflect_eng.plural_noun(singular_name)
+        buffer.write(f"""
+
+    def select_{plural_name}(self, selector=None, row=None, col=None):
+        \"\"\"
+        Select {singular_name} subplot objects from a particular subplot cell
+        and/or {singular_name} subplot objects that satisfy custom selection
+        criteria.
+
+        Parameters
+        ----------
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            {singular_name} objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all {singular_name} objects are selected.
+        row, col: int or None (default None)
+            Subplot row and column index of {singular_name} objects to select.
+            To select {singular_name} objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all {singular_name} objects are selected.
+
+        Returns
+        -------
+        generator
+            Generator that iterates through all of the {singular_name}
+            objects that satisfy all of the specified selection criteria
+        \"\"\"
+        if row is not None or col is not None:
+            _validate_v4_subplots('select_{plural_name}')
+
+        return self._select_layout_subplots_by_prefix(
+            '{singular_name}', selector, row, col)
+
+    def for_each_{singular_name}(self, fn, selector=None, row=None, col=None):
+        \"\"\"
+        Apply a function to all {singular_name} objects that satisfy the
+        specified selection criteria
+        
+        Parameters
+        ----------
+        fn:
+            Function that inputs a single {singular_name} object.
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            {singular_name} objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all {singular_name} objects are selected.
+        row, col: int or None (default None)
+            Subplot row and column index of {singular_name} objects to select.
+            To select {singular_name} objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all {singular_name} objects are selected.
+        
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        \"\"\"
+        for obj in self.select_{plural_name}(
+                selector=selector, row=row, col=col):
+            fn(obj)
+
+        return self
+
+    def update_{plural_name}(
+            self, patch=None, selector=None, row=None, col=None, **kwargs):
+        \"\"\"
+        Perform a property update operation on all {singular_name} objects
+        that satisfy the specified selection criteria
+        
+        Parameters
+        ----------
+        patch: dict
+            Dictionary of property updates to be applied to all
+            {singular_name} objects that satisfy the selection criteria.
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            {singular_name} objects will be selected if they contain
+            properties corresponding to all of the dictionary's keys, with
+            values that exactly match the supplied values. If None
+            (the default), all {singular_name} objects are selected.
+        row, col: int or None (default None)
+            Subplot row and column index of {singular_name} objects to select.
+            To select {singular_name} objects by row and column, the Figure
+            must have been created using plotly.subplots.make_subplots.
+            If None (the default), all {singular_name} objects are selected.
+        **kwargs
+            Additional property updates to apply to each selected
+            {singular_name} object. If a property is specified in
+            both patch and in **kwargs then the one in **kwargs
+            takes precedence.
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        \"\"\"
+        for obj in self.select_{plural_name}(
+                selector=selector, row=row, col=col):
+            obj.update(patch, **kwargs)
+
+        return self""")
+
     # Return source string
     # --------------------
     buffer.write('\n')
@@ -149,7 +265,8 @@ class {fig_classname}({base_classname}):\n""")
 def write_figure_classes(outdir, trace_node,
                          data_validator,
                          layout_validator,
-                         frame_validator):
+                         frame_validator,
+                         subplot_nodes):
     """
     Construct source code for the Figure and FigureWidget classes and
     write to graph_objs/_figure.py and graph_objs/_figurewidget.py
@@ -168,6 +285,8 @@ def write_figure_classes(outdir, trace_node,
         LayoutValidator instance
     frame_validator : CompoundArrayValidator
         FrameValidator instance
+    subplot_nodes: list of str
+        List of names of all of the layout subplot properties
 
     Returns
     -------
@@ -194,7 +313,8 @@ def write_figure_classes(outdir, trace_node,
                                         fig_classname,
                                         data_validator,
                                         layout_validator,
-                                        frame_validator)
+                                        frame_validator,
+                                        subplot_nodes)
 
         # ### Format and write to file###
         filepath = opath.join(outdir, 'graph_objs',

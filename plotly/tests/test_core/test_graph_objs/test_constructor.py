@@ -15,6 +15,11 @@ class TestGraphObjConstructor(TestCase):
         self.assertEqual(m.to_plotly_json(),
                          {'color': 'green'})
 
+    def test_valid_underscore_kwarg(self):
+        m = go.scatter.Marker(line_color='green')
+        self.assertEqual(m.to_plotly_json(),
+                         {'line': {'color': 'green'}})
+
     def test_valid_arg_obj(self):
         m = go.scatter.Marker(
             go.scatter.Marker(color='green'))

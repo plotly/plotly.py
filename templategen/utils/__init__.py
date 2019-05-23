@@ -75,9 +75,6 @@ def initialize_template(annotation_defaults,
     # right-align hoverlabels
     template.layout.hoverlabel.align = 'left'
 
-    # fix size of legend items
-    template.layout.legend.itemsizing = 'constant'
-
     # Set background colors
     template.layout.paper_bgcolor = paper_clr
     template.layout.plot_bgcolor = panel_background_clr
@@ -96,10 +93,10 @@ def initialize_template(annotation_defaults,
     if colorscale_diverging is not None:
         template.layout.colorscale.diverging = colorscale_diverging
 
-    template.data.heatmap[0].autocolorscale = True
-    template.data.histogram2d[0].autocolorscale = True
-    template.data.histogram2dcontour[0].autocolorscale = True
-    template.data.contour[0].autocolorscale = True
+    template.data.heatmap[0].colorscale = colorscale
+    template.data.histogram2d[0].colorscale = colorscale
+    template.data.histogram2dcontour[0].colorscale = colorscale
+    template.data.contour[0].colorscale = colorscale
 
     # Cartesian
     template.layout.xaxis = cartesian_axis

@@ -229,7 +229,7 @@ def get_subplots(rows=1, columns=1, print_grid=False, **kwargs):
 
 def make_subplots(rows=1, cols=1,
                   shared_xaxes=False, shared_yaxes=False,
-                  start_cell='top-left', print_grid=True,
+                  start_cell='top-left', print_grid=None,
                   **kwargs):
     """Return an instance of plotly.graph_objs.Figure
     with the subplots domain set in 'layout'.
@@ -443,6 +443,24 @@ def make_subplots(rows=1, cols=1,
           cols=2, the domains for each row from top to botton would be
           [0. 0.75] and [0.75, 1]
     """
+
+    from _plotly_future_ import _future_flags
+    if 'v4_subplots' in _future_flags:
+        import plotly.subplots
+        return plotly.subplots.make_subplots(
+            rows=rows,
+            cols=cols,
+            shared_xaxes=shared_xaxes,
+            shared_yaxes=shared_yaxes,
+            start_cell=start_cell,
+            print_grid=print_grid,
+            **kwargs
+        )
+
+    # Handle default print_grid
+    if print_grid is None:
+        print_grid = True
+
     # TODO: protected until #282
     from plotly.graph_objs import graph_objs
 
@@ -1262,10 +1280,10 @@ def get_config_plotly_server_url():
         try:
             config_dict = json.load(f)
             if not isinstance(config_dict, dict):
-                data = {}
+                config_dict = {}
         except:
             # TODO: issue a warning and bubble it up
-            data = {}
+            config_dict = {}
 
     return config_dict.get('plotly_domain', default_server_url)
 
