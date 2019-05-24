@@ -22,7 +22,8 @@ def _patched_plotly_plot(*args, **kwargs):
     filename_root, _ = os.path.splitext(filename)
     filename_html = filename_root + '.html'
     filename_png = filename_root + '.png'
-    figure = plotly.tools.return_figure_from_figure_or_data(*args, True)
+    fig_or_data = 
+    figure = plotly.tools.return_figure_from_figure_or_data(*(args, True))
     res = plotly_plot(*args, auto_open=False,
 		    filename=filename_html)
     plotly.io.write_image(figure, filename_png)
@@ -57,6 +58,10 @@ def plotly_sg_scraper(block, block_vars, gallery_conf, **kwargs):
     rst : str
         The ReSTructuredText that will be rendered to HTML containing
         the images.
+
+    Notes
+    -----
+    Add this function to the image scrapers 
     """
     examples_dirs = gallery_conf['examples_dirs']
     if isinstance(examples_dirs, (list, tuple)):
