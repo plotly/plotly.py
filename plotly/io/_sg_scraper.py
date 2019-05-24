@@ -22,7 +22,6 @@ def _patched_plotly_plot(*args, **kwargs):
     filename_root, _ = os.path.splitext(filename)
     filename_html = filename_root + '.html'
     filename_png = filename_root + '.png'
-    fig_or_data = 
     figure = plotly.tools.return_figure_from_figure_or_data(*(args, True))
     res = plotly_plot(*args, auto_open=False,
 		    filename=filename_html)
