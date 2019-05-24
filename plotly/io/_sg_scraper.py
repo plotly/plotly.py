@@ -18,7 +18,10 @@ def _patched_plotly_plot(*args, **kwargs):
     """
     stack = inspect.stack()
     # Name of script from which plot function was called is retrieved
-    filename = stack[1].filename # let's hope this is robust...
+    try:
+        filename = stack[1].filename # let's hope this is robust...
+    except: #python 2
+        filename = stack[1][1]
     filename_root, _ = os.path.splitext(filename)
     filename_html = filename_root + '.html'
     filename_png = filename_root + '.png'
