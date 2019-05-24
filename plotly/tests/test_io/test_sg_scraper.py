@@ -2,6 +2,20 @@ import plotly
 plotly_plot = plotly.offline.plot
 import os
 import shutil
+import pytest
+
+
+# Fixtures
+# --------
+@pytest.fixture()
+def setup():
+    # Reset orca state
+    plotly.io.orca.config.restore_defaults(reset_server=False)
+
+
+# Run setup before every test function in this file
+pytestmark = pytest.mark.usefixtures("setup")
+
 
 def execute_plotly_example():
     """
