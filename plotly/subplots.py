@@ -1350,12 +1350,12 @@ def _get_grid_subplot(fig, row, col, secondary_y=False):
     from _plotly_future_ import _future_flags
     if 'v4_subplots' not in _future_flags:
         raise ValueError("""
-    plotly.subplots.get_subplots may only be used in the
-    v4_subplots _plotly_future_ mode.  To try it out, run
+plotly.subplots.get_subplots may only be used in the
+v4_subplots _plotly_future_ mode.  To try it out, run
 
-    >>> from _plotly_future_ import v4_subplots
+>>> from _plotly_future_ import v4_subplots
 
-    before importing plotly.
+before importing plotly.
     """)
 
     try:
