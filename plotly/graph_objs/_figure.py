@@ -721,6 +721,7 @@ class Figure(BaseFigure):
         ysrc=None,
         row=None,
         col=None,
+        secondary_y=None,
         **kwargs
     ):
         """
@@ -971,6 +972,17 @@ class Figure(BaseFigure):
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
             `plotly.tools.make_subplots`
+        secondary_y: boolean or None (default None)
+            If True, associate this trace with the secondary y-axis of the
+            subplot at the specified row and col. Only valid if all of the
+            following conditions are satisfied:
+              * The figure was created using `plotly.subplots.make_subplots`.
+              * The row and col arguments are not None
+              * The subplot at the specified row and col has type xy
+                (which is the default) and secondary_y True.  These
+                properties are specified in the specs argument to
+                make_subplots. See the make_subplots docstring for more info.                
+
 
         Returns
         -------
@@ -1038,7 +1050,9 @@ class Figure(BaseFigure):
             ysrc=ysrc,
             **kwargs
         )
-        return self.add_trace(new_trace, row=row, col=col)
+        return self.add_trace(
+            new_trace, row=row, col=col, secondary_y=secondary_y
+        )
 
     def add_barpolar(
         self,
@@ -1365,6 +1379,7 @@ class Figure(BaseFigure):
         ysrc=None,
         row=None,
         col=None,
+        secondary_y=None,
         **kwargs
     ):
         """
@@ -1600,6 +1615,17 @@ class Figure(BaseFigure):
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
             `plotly.tools.make_subplots`
+        secondary_y: boolean or None (default None)
+            If True, associate this trace with the secondary y-axis of the
+            subplot at the specified row and col. Only valid if all of the
+            following conditions are satisfied:
+              * The figure was created using `plotly.subplots.make_subplots`.
+              * The row and col arguments are not None
+              * The subplot at the specified row and col has type xy
+                (which is the default) and secondary_y True.  These
+                properties are specified in the specs argument to
+                make_subplots. See the make_subplots docstring for more info.                
+
 
         Returns
         -------
@@ -1657,7 +1683,9 @@ class Figure(BaseFigure):
             ysrc=ysrc,
             **kwargs
         )
-        return self.add_trace(new_trace, row=row, col=col)
+        return self.add_trace(
+            new_trace, row=row, col=col, secondary_y=secondary_y
+        )
 
     def add_candlestick(
         self,
@@ -1700,6 +1728,7 @@ class Figure(BaseFigure):
         yaxis=None,
         row=None,
         col=None,
+        secondary_y=None,
         **kwargs
     ):
         """
@@ -1853,6 +1882,17 @@ class Figure(BaseFigure):
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
             `plotly.tools.make_subplots`
+        secondary_y: boolean or None (default None)
+            If True, associate this trace with the secondary y-axis of the
+            subplot at the specified row and col. Only valid if all of the
+            following conditions are satisfied:
+              * The figure was created using `plotly.subplots.make_subplots`.
+              * The row and col arguments are not None
+              * The subplot at the specified row and col has type xy
+                (which is the default) and secondary_y True.  These
+                properties are specified in the specs argument to
+                make_subplots. See the make_subplots docstring for more info.                
+
 
         Returns
         -------
@@ -1898,7 +1938,9 @@ class Figure(BaseFigure):
             yaxis=yaxis,
             **kwargs
         )
-        return self.add_trace(new_trace, row=row, col=col)
+        return self.add_trace(
+            new_trace, row=row, col=col, secondary_y=secondary_y
+        )
 
     def add_carpet(
         self,
@@ -1937,6 +1979,7 @@ class Figure(BaseFigure):
         ysrc=None,
         row=None,
         col=None,
+        secondary_y=None,
         **kwargs
     ):
         """
@@ -2081,6 +2124,17 @@ class Figure(BaseFigure):
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
             `plotly.tools.make_subplots`
+        secondary_y: boolean or None (default None)
+            If True, associate this trace with the secondary y-axis of the
+            subplot at the specified row and col. Only valid if all of the
+            following conditions are satisfied:
+              * The figure was created using `plotly.subplots.make_subplots`.
+              * The row and col arguments are not None
+              * The subplot at the specified row and col has type xy
+                (which is the default) and secondary_y True.  These
+                properties are specified in the specs argument to
+                make_subplots. See the make_subplots docstring for more info.                
+
 
         Returns
         -------
@@ -2122,7 +2176,9 @@ class Figure(BaseFigure):
             ysrc=ysrc,
             **kwargs
         )
-        return self.add_trace(new_trace, row=row, col=col)
+        return self.add_trace(
+            new_trace, row=row, col=col, secondary_y=secondary_y
+        )
 
     def add_choropleth(
         self,
@@ -2785,6 +2841,7 @@ class Figure(BaseFigure):
         zsrc=None,
         row=None,
         col=None,
+        secondary_y=None,
         **kwargs
     ):
         """
@@ -3031,6 +3088,17 @@ class Figure(BaseFigure):
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
             `plotly.tools.make_subplots`
+        secondary_y: boolean or None (default None)
+            If True, associate this trace with the secondary y-axis of the
+            subplot at the specified row and col. Only valid if all of the
+            following conditions are satisfied:
+              * The figure was created using `plotly.subplots.make_subplots`.
+              * The row and col arguments are not None
+              * The subplot at the specified row and col has type xy
+                (which is the default) and secondary_y True.  These
+                properties are specified in the specs argument to
+                make_subplots. See the make_subplots docstring for more info.                
+
 
         Returns
         -------
@@ -3093,7 +3161,9 @@ class Figure(BaseFigure):
             zsrc=zsrc,
             **kwargs
         )
-        return self.add_trace(new_trace, row=row, col=col)
+        return self.add_trace(
+            new_trace, row=row, col=col, secondary_y=secondary_y
+        )
 
     def add_contourcarpet(
         self,
@@ -3148,6 +3218,7 @@ class Figure(BaseFigure):
         zsrc=None,
         row=None,
         col=None,
+        secondary_y=None,
         **kwargs
     ):
         """
@@ -3360,6 +3431,17 @@ class Figure(BaseFigure):
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
             `plotly.tools.make_subplots`
+        secondary_y: boolean or None (default None)
+            If True, associate this trace with the secondary y-axis of the
+            subplot at the specified row and col. Only valid if all of the
+            following conditions are satisfied:
+              * The figure was created using `plotly.subplots.make_subplots`.
+              * The row and col arguments are not None
+              * The subplot at the specified row and col has type xy
+                (which is the default) and secondary_y True.  These
+                properties are specified in the specs argument to
+                make_subplots. See the make_subplots docstring for more info.                
+
 
         Returns
         -------
@@ -3417,7 +3499,9 @@ class Figure(BaseFigure):
             zsrc=zsrc,
             **kwargs
         )
-        return self.add_trace(new_trace, row=row, col=col)
+        return self.add_trace(
+            new_trace, row=row, col=col, secondary_y=secondary_y
+        )
 
     def add_heatmap(
         self,
@@ -3473,6 +3557,7 @@ class Figure(BaseFigure):
         zsrc=None,
         row=None,
         col=None,
+        secondary_y=None,
         **kwargs
     ):
         """
@@ -3706,6 +3791,17 @@ class Figure(BaseFigure):
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
             `plotly.tools.make_subplots`
+        secondary_y: boolean or None (default None)
+            If True, associate this trace with the secondary y-axis of the
+            subplot at the specified row and col. Only valid if all of the
+            following conditions are satisfied:
+              * The figure was created using `plotly.subplots.make_subplots`.
+              * The row and col arguments are not None
+              * The subplot at the specified row and col has type xy
+                (which is the default) and secondary_y True.  These
+                properties are specified in the specs argument to
+                make_subplots. See the make_subplots docstring for more info.                
+
 
         Returns
         -------
@@ -3764,7 +3860,9 @@ class Figure(BaseFigure):
             zsrc=zsrc,
             **kwargs
         )
-        return self.add_trace(new_trace, row=row, col=col)
+        return self.add_trace(
+            new_trace, row=row, col=col, secondary_y=secondary_y
+        )
 
     def add_heatmapgl(
         self,
@@ -3809,6 +3907,7 @@ class Figure(BaseFigure):
         zsrc=None,
         row=None,
         col=None,
+        secondary_y=None,
         **kwargs
     ):
         """
@@ -3983,6 +4082,17 @@ class Figure(BaseFigure):
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
             `plotly.tools.make_subplots`
+        secondary_y: boolean or None (default None)
+            If True, associate this trace with the secondary y-axis of the
+            subplot at the specified row and col. Only valid if all of the
+            following conditions are satisfied:
+              * The figure was created using `plotly.subplots.make_subplots`.
+              * The row and col arguments are not None
+              * The subplot at the specified row and col has type xy
+                (which is the default) and secondary_y True.  These
+                properties are specified in the specs argument to
+                make_subplots. See the make_subplots docstring for more info.                
+
 
         Returns
         -------
@@ -4030,7 +4140,9 @@ class Figure(BaseFigure):
             zsrc=zsrc,
             **kwargs
         )
-        return self.add_trace(new_trace, row=row, col=col)
+        return self.add_trace(
+            new_trace, row=row, col=col, secondary_y=secondary_y
+        )
 
     def add_histogram(
         self,
@@ -4083,6 +4195,7 @@ class Figure(BaseFigure):
         ysrc=None,
         row=None,
         col=None,
+        secondary_y=None,
         **kwargs
     ):
         """
@@ -4317,6 +4430,17 @@ class Figure(BaseFigure):
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
             `plotly.tools.make_subplots`
+        secondary_y: boolean or None (default None)
+            If True, associate this trace with the secondary y-axis of the
+            subplot at the specified row and col. Only valid if all of the
+            following conditions are satisfied:
+              * The figure was created using `plotly.subplots.make_subplots`.
+              * The row and col arguments are not None
+              * The subplot at the specified row and col has type xy
+                (which is the default) and secondary_y True.  These
+                properties are specified in the specs argument to
+                make_subplots. See the make_subplots docstring for more info.                
+
 
         Returns
         -------
@@ -4372,7 +4496,9 @@ class Figure(BaseFigure):
             ysrc=ysrc,
             **kwargs
         )
-        return self.add_trace(new_trace, row=row, col=col)
+        return self.add_trace(
+            new_trace, row=row, col=col, secondary_y=secondary_y
+        )
 
     def add_histogram2d(
         self,
@@ -4425,6 +4551,7 @@ class Figure(BaseFigure):
         zsrc=None,
         row=None,
         col=None,
+        secondary_y=None,
         **kwargs
     ):
         """
@@ -4669,6 +4796,17 @@ class Figure(BaseFigure):
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
             `plotly.tools.make_subplots`
+        secondary_y: boolean or None (default None)
+            If True, associate this trace with the secondary y-axis of the
+            subplot at the specified row and col. Only valid if all of the
+            following conditions are satisfied:
+              * The figure was created using `plotly.subplots.make_subplots`.
+              * The row and col arguments are not None
+              * The subplot at the specified row and col has type xy
+                (which is the default) and secondary_y True.  These
+                properties are specified in the specs argument to
+                make_subplots. See the make_subplots docstring for more info.                
+
 
         Returns
         -------
@@ -4724,7 +4862,9 @@ class Figure(BaseFigure):
             zsrc=zsrc,
             **kwargs
         )
-        return self.add_trace(new_trace, row=row, col=col)
+        return self.add_trace(
+            new_trace, row=row, col=col, secondary_y=secondary_y
+        )
 
     def add_histogram2dcontour(
         self,
@@ -4780,6 +4920,7 @@ class Figure(BaseFigure):
         zsrc=None,
         row=None,
         col=None,
+        secondary_y=None,
         **kwargs
     ):
         """
@@ -5042,6 +5183,17 @@ class Figure(BaseFigure):
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
             `plotly.tools.make_subplots`
+        secondary_y: boolean or None (default None)
+            If True, associate this trace with the secondary y-axis of the
+            subplot at the specified row and col. Only valid if all of the
+            following conditions are satisfied:
+              * The figure was created using `plotly.subplots.make_subplots`.
+              * The row and col arguments are not None
+              * The subplot at the specified row and col has type xy
+                (which is the default) and secondary_y True.  These
+                properties are specified in the specs argument to
+                make_subplots. See the make_subplots docstring for more info.                
+
 
         Returns
         -------
@@ -5100,7 +5252,9 @@ class Figure(BaseFigure):
             zsrc=zsrc,
             **kwargs
         )
-        return self.add_trace(new_trace, row=row, col=col)
+        return self.add_trace(
+            new_trace, row=row, col=col, secondary_y=secondary_y
+        )
 
     def add_isosurface(
         self,
@@ -5875,6 +6029,7 @@ class Figure(BaseFigure):
         yaxis=None,
         row=None,
         col=None,
+        secondary_y=None,
         **kwargs
     ):
         """
@@ -6027,6 +6182,17 @@ class Figure(BaseFigure):
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
             `plotly.tools.make_subplots`
+        secondary_y: boolean or None (default None)
+            If True, associate this trace with the secondary y-axis of the
+            subplot at the specified row and col. Only valid if all of the
+            following conditions are satisfied:
+              * The figure was created using `plotly.subplots.make_subplots`.
+              * The row and col arguments are not None
+              * The subplot at the specified row and col has type xy
+                (which is the default) and secondary_y True.  These
+                properties are specified in the specs argument to
+                make_subplots. See the make_subplots docstring for more info.                
+
 
         Returns
         -------
@@ -6072,7 +6238,9 @@ class Figure(BaseFigure):
             yaxis=yaxis,
             **kwargs
         )
-        return self.add_trace(new_trace, row=row, col=col)
+        return self.add_trace(
+            new_trace, row=row, col=col, secondary_y=secondary_y
+        )
 
     def add_parcats(
         self,
@@ -6717,6 +6885,7 @@ class Figure(BaseFigure):
         ysrc=None,
         row=None,
         col=None,
+        secondary_y=None,
         **kwargs
     ):
         """
@@ -6863,6 +7032,17 @@ class Figure(BaseFigure):
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
             `plotly.tools.make_subplots`
+        secondary_y: boolean or None (default None)
+            If True, associate this trace with the secondary y-axis of the
+            subplot at the specified row and col. Only valid if all of the
+            following conditions are satisfied:
+              * The figure was created using `plotly.subplots.make_subplots`.
+              * The row and col arguments are not None
+              * The subplot at the specified row and col has type xy
+                (which is the default) and secondary_y True.  These
+                properties are specified in the specs argument to
+                make_subplots. See the make_subplots docstring for more info.                
+
 
         Returns
         -------
@@ -6903,7 +7083,9 @@ class Figure(BaseFigure):
             ysrc=ysrc,
             **kwargs
         )
-        return self.add_trace(new_trace, row=row, col=col)
+        return self.add_trace(
+            new_trace, row=row, col=col, secondary_y=secondary_y
+        )
 
     def add_sankey(
         self,
@@ -7131,6 +7313,7 @@ class Figure(BaseFigure):
         ysrc=None,
         row=None,
         col=None,
+        secondary_y=None,
         **kwargs
     ):
         """
@@ -7428,6 +7611,17 @@ class Figure(BaseFigure):
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
             `plotly.tools.make_subplots`
+        secondary_y: boolean or None (default None)
+            If True, associate this trace with the secondary y-axis of the
+            subplot at the specified row and col. Only valid if all of the
+            following conditions are satisfied:
+              * The figure was created using `plotly.subplots.make_subplots`.
+              * The row and col arguments are not None
+              * The subplot at the specified row and col has type xy
+                (which is the default) and secondary_y True.  These
+                properties are specified in the specs argument to
+                make_subplots. See the make_subplots docstring for more info.                
+
 
         Returns
         -------
@@ -7493,7 +7687,9 @@ class Figure(BaseFigure):
             ysrc=ysrc,
             **kwargs
         )
-        return self.add_trace(new_trace, row=row, col=col)
+        return self.add_trace(
+            new_trace, row=row, col=col, secondary_y=secondary_y
+        )
 
     def add_scatter3d(
         self,
@@ -7836,6 +8032,7 @@ class Figure(BaseFigure):
         yaxis=None,
         row=None,
         col=None,
+        secondary_y=None,
         **kwargs
     ):
         """
@@ -8038,6 +8235,17 @@ class Figure(BaseFigure):
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
             `plotly.tools.make_subplots`
+        secondary_y: boolean or None (default None)
+            If True, associate this trace with the secondary y-axis of the
+            subplot at the specified row and col. Only valid if all of the
+            following conditions are satisfied:
+              * The figure was created using `plotly.subplots.make_subplots`.
+              * The row and col arguments are not None
+              * The subplot at the specified row and col has type xy
+                (which is the default) and secondary_y True.  These
+                properties are specified in the specs argument to
+                make_subplots. See the make_subplots docstring for more info.                
+
 
         Returns
         -------
@@ -8087,7 +8295,9 @@ class Figure(BaseFigure):
             yaxis=yaxis,
             **kwargs
         )
-        return self.add_trace(new_trace, row=row, col=col)
+        return self.add_trace(
+            new_trace, row=row, col=col, secondary_y=secondary_y
+        )
 
     def add_scattergeo(
         self,
@@ -8431,6 +8641,7 @@ class Figure(BaseFigure):
         ysrc=None,
         row=None,
         col=None,
+        secondary_y=None,
         **kwargs
     ):
         """
@@ -8655,6 +8866,17 @@ class Figure(BaseFigure):
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
             `plotly.tools.make_subplots`
+        secondary_y: boolean or None (default None)
+            If True, associate this trace with the secondary y-axis of the
+            subplot at the specified row and col. Only valid if all of the
+            following conditions are satisfied:
+              * The figure was created using `plotly.subplots.make_subplots`.
+              * The row and col arguments are not None
+              * The subplot at the specified row and col has type xy
+                (which is the default) and secondary_y True.  These
+                properties are specified in the specs argument to
+                make_subplots. See the make_subplots docstring for more info.                
+
 
         Returns
         -------
@@ -8710,7 +8932,9 @@ class Figure(BaseFigure):
             ysrc=ysrc,
             **kwargs
         )
-        return self.add_trace(new_trace, row=row, col=col)
+        return self.add_trace(
+            new_trace, row=row, col=col, secondary_y=secondary_y
+        )
 
     def add_scattermapbox(
         self,
@@ -11289,6 +11513,7 @@ class Figure(BaseFigure):
         ysrc=None,
         row=None,
         col=None,
+        secondary_y=None,
         **kwargs
     ):
         """
@@ -11548,6 +11773,17 @@ class Figure(BaseFigure):
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
             `plotly.tools.make_subplots`
+        secondary_y: boolean or None (default None)
+            If True, associate this trace with the secondary y-axis of the
+            subplot at the specified row and col. Only valid if all of the
+            following conditions are satisfied:
+              * The figure was created using `plotly.subplots.make_subplots`.
+              * The row and col arguments are not None
+              * The subplot at the specified row and col has type xy
+                (which is the default) and secondary_y True.  These
+                properties are specified in the specs argument to
+                make_subplots. See the make_subplots docstring for more info.                
+
 
         Returns
         -------
@@ -11607,7 +11843,9 @@ class Figure(BaseFigure):
             ysrc=ysrc,
             **kwargs
         )
-        return self.add_trace(new_trace, row=row, col=col)
+        return self.add_trace(
+            new_trace, row=row, col=col, secondary_y=secondary_y
+        )
 
     def add_volume(
         self,
@@ -12003,6 +12241,7 @@ class Figure(BaseFigure):
         ysrc=None,
         row=None,
         col=None,
+        secondary_y=None,
         **kwargs
     ):
         """
@@ -12239,6 +12478,17 @@ class Figure(BaseFigure):
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
             `plotly.tools.make_subplots`
+        secondary_y: boolean or None (default None)
+            If True, associate this trace with the secondary y-axis of the
+            subplot at the specified row and col. Only valid if all of the
+            following conditions are satisfied:
+              * The figure was created using `plotly.subplots.make_subplots`.
+              * The row and col arguments are not None
+              * The subplot at the specified row and col has type xy
+                (which is the default) and secondary_y True.  These
+                properties are specified in the specs argument to
+                make_subplots. See the make_subplots docstring for more info.                
+
 
         Returns
         -------
@@ -12300,7 +12550,9 @@ class Figure(BaseFigure):
             ysrc=ysrc,
             **kwargs
         )
-        return self.add_trace(new_trace, row=row, col=col)
+        return self.add_trace(
+            new_trace, row=row, col=col, secondary_y=secondary_y
+        )
 
     def select_geos(self, selector=None, row=None, col=None):
         """
@@ -12321,7 +12573,6 @@ class Figure(BaseFigure):
             To select geo objects by row and column, the Figure
             must have been created using plotly.subplots.make_subplots.
             If None (the default), all geo objects are selected.
-
         Returns
         -------
         generator
@@ -12355,7 +12606,6 @@ class Figure(BaseFigure):
             To select geo objects by row and column, the Figure
             must have been created using plotly.subplots.make_subplots.
             If None (the default), all geo objects are selected.
-        
         Returns
         -------
         self
@@ -12423,7 +12673,6 @@ class Figure(BaseFigure):
             To select mapbox objects by row and column, the Figure
             must have been created using plotly.subplots.make_subplots.
             If None (the default), all mapbox objects are selected.
-
         Returns
         -------
         generator
@@ -12457,7 +12706,6 @@ class Figure(BaseFigure):
             To select mapbox objects by row and column, the Figure
             must have been created using plotly.subplots.make_subplots.
             If None (the default), all mapbox objects are selected.
-        
         Returns
         -------
         self
@@ -12525,7 +12773,6 @@ class Figure(BaseFigure):
             To select polar objects by row and column, the Figure
             must have been created using plotly.subplots.make_subplots.
             If None (the default), all polar objects are selected.
-
         Returns
         -------
         generator
@@ -12559,7 +12806,6 @@ class Figure(BaseFigure):
             To select polar objects by row and column, the Figure
             must have been created using plotly.subplots.make_subplots.
             If None (the default), all polar objects are selected.
-        
         Returns
         -------
         self
@@ -12627,7 +12873,6 @@ class Figure(BaseFigure):
             To select scene objects by row and column, the Figure
             must have been created using plotly.subplots.make_subplots.
             If None (the default), all scene objects are selected.
-
         Returns
         -------
         generator
@@ -12661,7 +12906,6 @@ class Figure(BaseFigure):
             To select scene objects by row and column, the Figure
             must have been created using plotly.subplots.make_subplots.
             If None (the default), all scene objects are selected.
-        
         Returns
         -------
         self
@@ -12729,7 +12973,6 @@ class Figure(BaseFigure):
             To select ternary objects by row and column, the Figure
             must have been created using plotly.subplots.make_subplots.
             If None (the default), all ternary objects are selected.
-
         Returns
         -------
         generator
@@ -12763,7 +13006,6 @@ class Figure(BaseFigure):
             To select ternary objects by row and column, the Figure
             must have been created using plotly.subplots.make_subplots.
             If None (the default), all ternary objects are selected.
-        
         Returns
         -------
         self
@@ -12831,7 +13073,6 @@ class Figure(BaseFigure):
             To select xaxis objects by row and column, the Figure
             must have been created using plotly.subplots.make_subplots.
             If None (the default), all xaxis objects are selected.
-
         Returns
         -------
         generator
@@ -12865,7 +13106,6 @@ class Figure(BaseFigure):
             To select xaxis objects by row and column, the Figure
             must have been created using plotly.subplots.make_subplots.
             If None (the default), all xaxis objects are selected.
-        
         Returns
         -------
         self
@@ -12914,7 +13154,9 @@ class Figure(BaseFigure):
 
         return self
 
-    def select_yaxes(self, selector=None, row=None, col=None):
+    def select_yaxes(
+        self, selector=None, row=None, col=None, secondary_y=None
+    ):
         """
         Select yaxis subplot objects from a particular subplot cell
         and/or yaxis subplot objects that satisfy custom selection
@@ -12933,7 +13175,18 @@ class Figure(BaseFigure):
             To select yaxis objects by row and column, the Figure
             must have been created using plotly.subplots.make_subplots.
             If None (the default), all yaxis objects are selected.
-
+        secondary_y: boolean or None (default None)
+            * If True, only select yaxis objects associated with the secondary
+              y-axis of the subplot.
+            * If False, only select yaxis objects associated with the primary
+              y-axis of the subplot.
+            * If None (the default), do not filter yaxis objects based on
+              a secondary y-axis condition. 
+            
+            To select yaxis objects by secondary y-axis, the Figure must
+            have been created using plotly.subplots.make_subplots. See
+            the docstring for the specs argument to make_subplots for more
+            info on creating subplots with secondary y-axes.
         Returns
         -------
         generator
@@ -12944,10 +13197,12 @@ class Figure(BaseFigure):
             _validate_v4_subplots('select_yaxes')
 
         return self._select_layout_subplots_by_prefix(
-            'yaxis', selector, row, col
+            'yaxis', selector, row, col, secondary_y=secondary_y
         )
 
-    def for_each_yaxis(self, fn, selector=None, row=None, col=None):
+    def for_each_yaxis(
+        self, fn, selector=None, row=None, col=None, secondary_y=None
+    ):
         """
         Apply a function to all yaxis objects that satisfy the
         specified selection criteria
@@ -12967,19 +13222,38 @@ class Figure(BaseFigure):
             To select yaxis objects by row and column, the Figure
             must have been created using plotly.subplots.make_subplots.
             If None (the default), all yaxis objects are selected.
-        
+        secondary_y: boolean or None (default None)
+            * If True, only select yaxis objects associated with the secondary
+              y-axis of the subplot.
+            * If False, only select yaxis objects associated with the primary
+              y-axis of the subplot.
+            * If None (the default), do not filter yaxis objects based on
+              a secondary y-axis condition. 
+            
+            To select yaxis objects by secondary y-axis, the Figure must
+            have been created using plotly.subplots.make_subplots. See
+            the docstring for the specs argument to make_subplots for more
+            info on creating subplots with secondary y-axes.
         Returns
         -------
         self
             Returns the Figure object that the method was called on
         """
-        for obj in self.select_yaxes(selector=selector, row=row, col=col):
+        for obj in self.select_yaxes(
+            selector=selector, row=row, col=col, secondary_y=secondary_y
+        ):
             fn(obj)
 
         return self
 
     def update_yaxes(
-        self, patch=None, selector=None, row=None, col=None, **kwargs
+        self,
+        patch=None,
+        selector=None,
+        row=None,
+        col=None,
+        secondary_y=None,
+        **kwargs
     ):
         """
         Perform a property update operation on all yaxis objects
@@ -13001,6 +13275,18 @@ class Figure(BaseFigure):
             To select yaxis objects by row and column, the Figure
             must have been created using plotly.subplots.make_subplots.
             If None (the default), all yaxis objects are selected.
+        secondary_y: boolean or None (default None)
+            * If True, only select yaxis objects associated with the secondary
+              y-axis of the subplot.
+            * If False, only select yaxis objects associated with the primary
+              y-axis of the subplot.
+            * If None (the default), do not filter yaxis objects based on
+              a secondary y-axis condition. 
+            
+            To select yaxis objects by secondary y-axis, the Figure must
+            have been created using plotly.subplots.make_subplots. See
+            the docstring for the specs argument to make_subplots for more
+            info on creating subplots with secondary y-axes.
         **kwargs
             Additional property updates to apply to each selected
             yaxis object. If a property is specified in
@@ -13011,7 +13297,9 @@ class Figure(BaseFigure):
         self
             Returns the Figure object that the method was called on
         """
-        for obj in self.select_yaxes(selector=selector, row=row, col=col):
+        for obj in self.select_yaxes(
+            selector=selector, row=row, col=col, secondary_y=secondary_y
+        ):
             obj.update(patch, **kwargs)
 
         return self

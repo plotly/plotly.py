@@ -16,7 +16,7 @@ class TestSelectForEachUpdateTraces(TestCase):
             rows=3,
             cols=2,
             specs=[[{}, {'type': 'scene'}],
-                   [{}, {'type': 'polar'}],
+                   [{'secondary_y': True}, {'type': 'polar'}],
                    [{'type': 'domain', 'colspan': 2}, None]]
         ).update(layout={'height': 800})
 
@@ -104,6 +104,17 @@ class TestSelectForEachUpdateTraces(TestCase):
             col=1
         )
 
+        # data[9], (2, 1) with secondary_y
+        fig.add_scatter(
+            mode='lines',
+            y=[1, 2, 0],
+            line={'color': 'purple'},
+            name='C',
+            row=2,
+            col=1,
+            secondary_y=True
+        )
+
         self.fig = fig
         self.fig_no_grid = go.Figure(self.fig.to_dict())
 
@@ -112,10 +123,13 @@ class TestSelectForEachUpdateTraces(TestCase):
 
     # select_traces and for_each_trace
     # --------------------------------
-    def assert_select_traces(self, expected_inds, selector=None, row=None, col=None, test_no_grid=False):
+    def assert_select_traces(
+            self, expected_inds, selector=None,
+            row=None, col=None, secondary_y=None, test_no_grid=False):
+
         # Select traces on figure initialized with make_subplots
         trace_generator = self.fig.select_traces(
-            selector=selector, row=row, col=col)
+            selector=selector, row=row, col=col, secondary_y=secondary_y)
         self.assertTrue(inspect.isgenerator(trace_generator))
 
         trace_list = list(trace_generator)
@@ -124,7 +138,7 @@ class TestSelectForEachUpdateTraces(TestCase):
         # Select traces on figure not containing subplot info
         if test_no_grid:
             trace_generator = self.fig_no_grid.select_traces(
-                selector=selector, row=row, col=col)
+                selector=selector, row=row, col=col, secondary_y=secondary_y)
             trace_list = list(trace_generator)
             self.assertEqual(trace_list, [self.fig_no_grid.data[i] for i in expected_inds])
 
@@ -135,6 +149,7 @@ class TestSelectForEachUpdateTraces(TestCase):
             selector=selector,
             row=row,
             col=col,
+            secondary_y=secondary_y
         )
         self.assertIs(for_each_res, self.fig)
 
@@ -143,7 +158,7 @@ class TestSelectForEachUpdateTraces(TestCase):
 
     def test_select_by_type(self):
         self.assert_select_traces(
-            [0, 2], selector={'type': 'scatter'}, test_no_grid=True)
+            [0, 2, 9], selector={'type': 'scatter'}, test_no_grid=True)
         self.assert_select_traces(
             [1], selector={'type': 'bar'}, test_no_grid=True)
         self.assert_select_traces(
@@ -160,25 +175,30 @@ class TestSelectForEachUpdateTraces(TestCase):
     def test_select_by_grid(self):
         # Row and column
         self.assert_select_traces([0, 1], row=1, col=1)
-        self.assert_select_traces([2, 3], row=2, col=1)
+        self.assert_select_traces([2, 3, 9], row=2, col=1)
         self.assert_select_traces([4, 5], row=1, col=2)
         self.assert_select_traces([6, 7], row=2, col=2)
         self.assert_select_traces([8], row=3, col=1)
 
         # Row only
         self.assert_select_traces([0, 1, 4, 5], row=1)
-        self.assert_select_traces([2, 3, 6, 7], row=2)
+        self.assert_select_traces([2, 3, 6, 7, 9], row=2)
         self.assert_select_traces([8], row=3)
 
         # Col only
-        self.assert_select_traces([0, 1, 2, 3, 8], col=1)
+        self.assert_select_traces([0, 1, 2, 3, 8, 9], col=1)
         self.assert_select_traces([4, 5, 6, 7], col=2)
+
+    def test_select_by_secondary_y(self):
+        self.assert_select_traces([2, 3, 9], row=2, col=1)
+        self.assert_select_traces([2, 3], row=2, col=1, secondary_y=False)
+        self.assert_select_traces([9], row=2, col=1, secondary_y=True)
 
     def test_select_by_property_across_trace_types(self):
         self.assert_select_traces(
             [0, 4, 6], selector={'mode': 'markers'}, test_no_grid=True)
         self.assert_select_traces(
-            [2, 5, 7], selector={'mode': 'lines'}, test_no_grid=True)
+            [2, 5, 7, 9], selector={'mode': 'lines'}, test_no_grid=True)
         self.assert_select_traces(
             [0, 4],
             selector={'marker': {'color': 'green', 'size': 10}},
@@ -191,7 +211,7 @@ class TestSelectForEachUpdateTraces(TestCase):
         self.assert_select_traces(
             [0, 4, 6], selector={'marker.color': 'green'}, test_no_grid=True)
         self.assert_select_traces(
-            [2, 5, 8], selector={'line.color': 'purple'}, test_no_grid=True)
+            [2, 5, 8, 9], selector={'line.color': 'purple'}, test_no_grid=True)
 
     def test_select_property_and_grid(self):
         # (1, 1)
@@ -202,7 +222,7 @@ class TestSelectForEachUpdateTraces(TestCase):
 
         # (2, 1)
         self.assert_select_traces(
-            [2], selector={'mode': 'lines'}, row=2, col=1)
+            [2, 9], selector={'mode': 'lines'}, row=2, col=1)
 
         # (1, 2)
         self.assert_select_traces(
@@ -233,7 +253,7 @@ class TestSelectForEachUpdateTraces(TestCase):
     # test update_traces
     # ------------------
     def assert_update_traces(self, expected_inds, patch=None, selector=None,
-                             row=None, col=None, **kwargs):
+                             row=None, col=None, secondary_y=None, **kwargs):
         # Save off original figure
         fig_orig = copy.deepcopy(self.fig)
         for trace1, trace2 in zip(fig_orig.data, self.fig.data):
@@ -241,7 +261,8 @@ class TestSelectForEachUpdateTraces(TestCase):
 
         # Perform update
         update_res = self.fig.update_traces(
-            patch, selector=selector, row=row, col=col, **kwargs
+            patch, selector=selector, row=row, col=col,
+            secondary_y=secondary_y, **kwargs
         )
 
         # Check chaining support
@@ -260,10 +281,10 @@ class TestSelectForEachUpdateTraces(TestCase):
             self.assertEqual(t_orig, t)
 
     def test_update_traces_by_type(self):
-        self.assert_update_traces([0, 2], {'visible': 'legendonly'},
+        self.assert_update_traces([0, 2, 9], {'visible': 'legendonly'},
                                   selector={'type': 'scatter'})
 
-        self.assert_update_traces([0, 2],
+        self.assert_update_traces([0, 2, 9],
                                   selector={'type': 'scatter'},
                                   visible=False)
 
@@ -321,3 +342,6 @@ class TestSelectForEachUpdateTraces(TestCase):
         self.assert_update_traces([6], {'marker.size': 6},
                                   selector={'marker.color': 'green'}, row=2,
                                   col=2)
+
+        self.assert_update_traces([9], {'marker.size': 6},
+                                  col=1, secondary_y=True)
