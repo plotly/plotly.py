@@ -272,9 +272,9 @@ def init_notebook_mode(connected=False):
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
     if connected:
-        pio.renderers.default = 'notebook_connected+plotly_mimetype'
+        pio.renderers.default = 'plotly_mimetype+notebook_connected'
     else:
-        pio.renderers.default = 'notebook+plotly_mimetype'
+        pio.renderers.default = 'plotly_mimetype+notebook'
 
     # Trigger immediate activation of notebook. This way the plotly.js
     # library reference is available to the notebook immediately
