@@ -18,7 +18,9 @@ class TestSelectForEachUpdateSubplots(TestCase):
             rows=3,
             cols=3,
             specs=[[{}, {'type': 'scene'}, {}],
-                   [{}, {'type': 'polar'}, {'type': 'polar'}],
+                   [{'secondary_y': True},
+                    {'type': 'polar'},
+                    {'type': 'polar'}],
                    [{'type': 'xy', 'colspan': 2}, None, {'type': 'ternary'}]]
         ).update(layout={'height': 800})
 
@@ -50,15 +52,22 @@ class TestSelectForEachUpdateSubplots(TestCase):
 
     def assert_select_subplots(
             self, subplot_type, subplots_name, expected_nums,
-            selector=None, row=None, col=None, test_no_grid=False):
+            selector=None, row=None, col=None, secondary_y=None,
+            test_no_grid=False):
 
         select_fn = getattr(Figure, 'select_' + subplots_name)
         for_each_fn = getattr(Figure, 'for_each_' + subplot_type)
 
+        if secondary_y is not None:
+            sec_y_args = dict(secondary_y=secondary_y)
+        else:
+            sec_y_args = {}
+
         def check_select(fig):
             # Check select_*
             subplots = list(
-                select_fn(fig, selector=selector, row=row, col=col))
+                select_fn(fig, selector=selector,
+                          row=row, col=col, **sec_y_args))
             expected_keys = [
                 subplot_type + (str(cnt) if cnt > 1 else '')
                 for cnt in expected_nums
@@ -73,8 +82,7 @@ class TestSelectForEachUpdateSubplots(TestCase):
             subplots = []
             res = for_each_fn(
                 fig, lambda obj: subplots.append(obj),
-                selector=selector, row=row, col=col
-            )
+                selector=selector, row=row, col=col, **sec_y_args)
 
             self.assertIs(res, fig)
 
@@ -92,7 +100,7 @@ class TestSelectForEachUpdateSubplots(TestCase):
             'xaxis', 'xaxes', [1, 2, 3, 4], test_no_grid=True)
 
         self.assert_select_subplots(
-            'yaxis', 'yaxes', [1, 2, 3, 4], test_no_grid=True)
+            'yaxis', 'yaxes', [1, 2, 3, 4, 5], test_no_grid=True)
 
         self.assert_select_subplots(
             'scene', 'scenes', [1], test_no_grid=True)
@@ -126,6 +134,19 @@ class TestSelectForEachUpdateSubplots(TestCase):
 
         self.assert_select_subplots(
             'xaxis', 'xaxes', [], row=2, col=2)
+
+    def test_select_by_secondary_y(self):
+        self.assert_select_subplots(
+            'yaxis', 'yaxes', [4], secondary_y=True)
+
+        self.assert_select_subplots(
+            'yaxis', 'yaxes', [1, 2, 3, 5], secondary_y=False)
+
+        self.assert_select_subplots(
+            'yaxis', 'yaxes', [4], col=1, secondary_y=True)
+
+        self.assert_select_subplots(
+            'yaxis', 'yaxes', [], col=3, secondary_y=True)
 
     def test_select_by_type_and_selector(self):
         # xaxis
@@ -288,9 +309,15 @@ class TestSelectForEachUpdateSubplots(TestCase):
 
     def assert_update_subplots(
             self, subplot_type, subplots_name, expected_nums, patch=None,
-            selector=None, row=None, col=None, test_no_grid=False, **kwargs):
+            selector=None, row=None, col=None, secondary_y=None,
+            test_no_grid=False, **kwargs):
 
         update_fn = getattr(Figure, 'update_' + subplots_name)
+
+        if secondary_y is not None:
+            secy_kwargs = dict(secondary_y=secondary_y)
+        else:
+            secy_kwargs = {}
 
         def check_update(fig):
 
@@ -300,7 +327,9 @@ class TestSelectForEachUpdateSubplots(TestCase):
 
             # perform update_*
             update_res = update_fn(
-                fig, patch, selector=selector, row=row, col=col, **kwargs)
+                fig, patch, selector=selector, row=row, col=col,
+                **dict(kwargs, **secy_kwargs))
+
             self.assertIs(update_res, fig)
 
             # Build expected layout keys
@@ -331,7 +360,7 @@ class TestSelectForEachUpdateSubplots(TestCase):
             test_no_grid=True)
 
         self.assert_update_subplots(
-            'yaxis', 'yaxes', [1, 2, 3, 4],
+            'yaxis', 'yaxes', [1, 2, 3, 4, 5],
             {'range': [5, 10]},
             test_no_grid=True)
 
@@ -394,6 +423,17 @@ class TestSelectForEachUpdateSubplots(TestCase):
             {'angularaxis.rotation': 15},
             row=2,
             col=3)
+
+    def test_update_by_secondary_y(self):
+        self.assert_update_subplots(
+            'yaxis', 'yaxes', [4],
+            {'range': [5, 10]},
+            secondary_y=True)
+
+        self.assert_update_subplots(
+            'yaxis', 'yaxes', [1, 2, 3, 5],
+            {'range': [5, 10]},
+            secondary_y=False)
 
     def test_update_by_type_and_grid_and_selector(self):
         # xaxis

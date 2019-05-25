@@ -491,11 +491,16 @@ def add_docstring(buffer, node, header, prepend_extras=(), append_extras=()):
 
     # Write any append extras
     for p, v in append_extras:
-        v_wrapped = '\n'.join(textwrap.wrap(
-            v,
-            width=79-12,
-            initial_indent=' ' * 12,
-            subsequent_indent=' ' * 12))
+        if '\n' in v:
+            # If v contains newlines then assume it's already wrapped as
+            # desired
+            v_wrapped = v
+        else:
+            v_wrapped = '\n'.join(textwrap.wrap(
+                v,
+                width=79-12,
+                initial_indent=' ' * 12,
+                subsequent_indent=' ' * 12))
         buffer.write(f"""
         {p}
 {v_wrapped}""")
