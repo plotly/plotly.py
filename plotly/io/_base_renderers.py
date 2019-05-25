@@ -122,7 +122,9 @@ class ImageRenderer(MimetypeRenderer):
             format=self.format,
             width=self.width,
             height=self.height,
-            scale=self.scale)
+            scale=self.scale,
+            validate=False,
+        )
 
         if self.b64_encode:
             image_str = base64.b64encode(image_bytes).decode('utf8')
@@ -354,6 +356,7 @@ if (outputEl) {{
             animation_opts=self.animation_opts,
             default_width='100%',
             default_height=525,
+            validate=False,
         )
 
         return {'text/html': html}
@@ -503,18 +506,20 @@ class IFrameRenderer(MimetypeRenderer):
         # Make directory for
         os.makedirs(dirname, exist_ok=True)
 
-        write_html(fig_dict,
-                   filename,
-                   config=self.config,
-                   auto_play=self.auto_play,
-                   include_plotlyjs='directory',
-                   include_mathjax='cdn',
-                   auto_open=False,
-                   post_script=self.post_script,
-                   animation_opts=self.animation_opts,
-                   default_width='100%',
-                   default_height=525,
-                   validate=False)
+        write_html(
+            fig_dict,
+            filename,
+            config=self.config,
+            auto_play=self.auto_play,
+            include_plotlyjs='directory',
+            include_mathjax='cdn',
+            auto_open=False,
+            post_script=self.post_script,
+            animation_opts=self.animation_opts,
+            default_width='100%',
+            default_height=525,
+            validate=False,
+        )
 
         # Build IFrame
         iframe_html = """\
@@ -629,5 +634,6 @@ class BrowserRenderer(ExternalRenderer):
             animation_opts=self.animation_opts,
             default_width='100%',
             default_height='100%',
+            validate=False,
         )
         open_html_in_browser(html, self.using, self.new, self.autoraise)
