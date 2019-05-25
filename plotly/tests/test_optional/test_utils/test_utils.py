@@ -15,7 +15,7 @@ import pandas as pd
 import pytz
 from nose.plugins.attrib import attr
 from pandas.util.testing import assert_series_equal
-from requests.compat import json as _json
+import json as _json
 
 from plotly import optional_imports, utils
 from plotly.graph_objs import Scatter, Scatter3d, Figure, Data

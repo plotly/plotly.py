@@ -3,7 +3,7 @@ from __future__ import absolute_import
 
 import warnings
 
-from requests.compat import json as _json
+import json as _json
 
 
 from _plotly_utils.utils import PlotlyJSONEncoder

@@ -1,7 +1,7 @@
 from __future__ import absolute_import
 
 from requests import Response
-from requests.compat import json as _json
+import json as _json
 from requests.exceptions import ConnectionError
 
 from chart_studio.api.utils import to_native_utf8_string

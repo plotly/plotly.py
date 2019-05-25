@@ -6,7 +6,7 @@ import uuid
 from collections import deque
 import pkgutil
 
-from requests.compat import json as _json
+import json as _json
 
 # TODO: protected imports?
 import ipywidgets as widgets
