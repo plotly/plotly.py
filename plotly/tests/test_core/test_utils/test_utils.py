@@ -3,7 +3,7 @@ from __future__ import absolute_import
 from inspect import getargspec
 from unittest import TestCase
 
-from requests.compat import json as _json
+import json as _json
 
 from plotly.utils import (PlotlyJSONEncoder, get_by_path, memoize,
                           node_generator)

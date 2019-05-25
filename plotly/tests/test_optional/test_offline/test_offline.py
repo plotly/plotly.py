@@ -6,7 +6,7 @@ from __future__ import absolute_import
 import re
 from nose.tools import raises
 from nose.plugins.attrib import attr
-from requests.compat import json as _json
+import json as _json
 
 from unittest import TestCase
 

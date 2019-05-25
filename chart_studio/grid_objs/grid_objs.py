@@ -12,7 +12,7 @@ try:
 except ImportError:
     from collections import MutableSequence
 
-from requests.compat import json as _json
+import json as _json
 
 from _plotly_utils.optional_imports import get_module
 from chart_studio import utils, exceptions

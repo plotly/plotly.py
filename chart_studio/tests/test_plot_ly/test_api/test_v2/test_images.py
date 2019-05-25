@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 
-from requests.compat import json as _json
+import json as _json
 
 from chart_studio.api.v2 import images
 from chart_studio.tests.test_plot_ly.test_api import PlotlyApiTestCase

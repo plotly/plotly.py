@@ -10,7 +10,7 @@ import copy
 import requests
 import six
 from nose.plugins.attrib import attr
-from requests.compat import json as _json
+import json as _json
 
 from plotly.tests.utils import PlotlyTestCase
 

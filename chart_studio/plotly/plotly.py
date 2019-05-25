@@ -26,7 +26,7 @@ import webbrowser
 
 import six
 import six.moves
-from requests.compat import json as _json
+import json as _json
 
 import _plotly_utils.utils
 import _plotly_utils.exceptions

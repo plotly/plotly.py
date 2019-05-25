@@ -1,7 +1,7 @@
 from __future__ import absolute_import
 
 import requests
-from requests.compat import json as _json
+import json as _json
 from requests.exceptions import RequestException
 from retrying import retry
 

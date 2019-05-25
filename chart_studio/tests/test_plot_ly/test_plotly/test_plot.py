@@ -10,7 +10,7 @@ from __future__ import absolute_import
 import requests
 import six
 import sys
-from requests.compat import json as _json
+import json as _json
 import warnings
 
 from nose.plugins.attrib import attr
