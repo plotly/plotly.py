@@ -900,11 +900,13 @@ class BaseFigure(object):
 
                 # Filter by row/col
                 if (row is not None and
-                        container_to_row_col.get(k, (None, None))[0] != row):
+                        container_to_row_col.get(
+                            k, (None, None, None))[0] != row):
                     # row specified and this is not a match
                     continue
                 elif (col is not None and
-                      container_to_row_col.get(k, (None, None))[1] != col):
+                      container_to_row_col.get(
+                          k, (None, None, None))[1] != col):
                     # col specified and this is not a match
                     continue
                 elif (secondary_y is not None and
