@@ -1199,6 +1199,9 @@ def _build_grid_str(specs, grid_ref, insets, insets_ref, row_seq):
          })
 
         ref_str = ','.join(layout_keys)
+
+        # Replace yaxis2 -> y2
+        ref_str = ref_str.replace('axis', '')
         return '({r},{c}) {ref}'.format(
             r=r + 1,
             c=c + 1,
@@ -1277,8 +1280,13 @@ def _build_grid_str(specs, grid_ref, insets, insets_ref, row_seq):
             c = inset['cell'][1] - 1
             ref = grid_ref[r][c]
 
+            subplot_labels_str = ','.join(insets_ref[i_inset][0].layout_keys)
+
+            # Replace, e.g., yaxis2 -> y2
+            subplot_labels_str = subplot_labels_str.replace('axis', '')
+
             grid_str += (
-                    s_str + ','.join(insets_ref[i_inset][0].layout_keys)
+                    s_str + subplot_labels_str
                     + e_str + ' over ' +
                     s_str + _get_cell_str(r, c, ref) + e_str + '\n'
             )
