@@ -874,7 +874,7 @@ class BaseFigure(object):
 
         if row is not None or col is not None or secondary_y is not None:
             # Build mapping from container keys ('xaxis2', 'scene4', etc.)
-            # to (row, col, secondary_y triplets)
+            # to (row, col, secondary_y) triplets
             grid_ref = self._validate_get_grid_ref()
             container_to_row_col = {}
             for r, subplot_row in enumerate(grid_ref):
