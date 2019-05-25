@@ -113,6 +113,8 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
     _last_layout_edit_id = Integer(0).tag(sync=True)
     _last_trace_edit_id = Integer(0).tag(sync=True)
 
+    _set_trace_uid = True
+
     # Constructor
     # -----------
     def __init__(self,
