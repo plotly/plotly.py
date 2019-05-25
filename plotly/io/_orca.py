@@ -1057,9 +1057,17 @@ Here is the error that was returned by the command
 
             err_msg += """\
 Note: When used on Linux, orca requires an X11 display server, but none was
-detected. Please install X11, or configure your system with Xvfb. See
-the orca README (https://github.com/plotly/orca) for instructions on using
-orca with Xvfb.
+detected. Please install Xvfb and configure plotly.py to run orca using Xvfb
+as follows:
+
+    >>> import plotly.io as pio
+    >>> pio.orca.config.use_xvfb = True
+    
+You can save this configuration for use in future sessions as follows:
+    >>> pio.orca.config.save() 
+    
+See https://www.x.org/releases/X11R7.6/doc/man/man1/Xvfb.1.xhtml
+for more info on Xvfb
 """
         raise ValueError(err_msg)
 
