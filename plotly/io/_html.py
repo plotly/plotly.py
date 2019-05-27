@@ -157,8 +157,15 @@ def to_html(fig,
 
     # Get div width/height
     layout_dict = fig_dict.get('layout', {})
-    div_width = layout_dict.get('width', default_width)
-    div_height = layout_dict.get('height', default_height)
+    template_dict = (fig_dict
+                     .get('layout', {})
+                     .get('template', {})
+                     .get('layout', {}))
+
+    div_width = layout_dict.get(
+        'width', template_dict.get('width', default_width))
+    div_height = layout_dict.get(
+        'height', template_dict.get('height', default_height))
 
     # Add 'px' suffix to numeric widths
     try:
