@@ -7,5 +7,6 @@ from _plotly_future_ import (
     v4_subplots,
     orca_defaults,
     timezones,
+    trace_uids,
 )
 
