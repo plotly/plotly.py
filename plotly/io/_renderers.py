@@ -401,15 +401,27 @@ if 'renderer_defaults' in _future_flags:
     # Version 4 renderer configuration
     default_renderer = None
 
-    # Try to detect environment so that we can enable a useful
-    # default renderer
-    if ipython and ipython.get_ipython():
+    # Handle the PLOTLY_RENDERER environment variable
+    env_renderer = os.environ.get('PLOTLY_RENDERER', None)
+    if env_renderer:
         try:
-            import google.colab
+            renderers._validate_coerce_renderers(env_renderer)
+        except ValueError:
+            raise ValueError("""
+Invalid named renderer(s) specified in the 'PLOTLY_RENDERER'
+environment variable: {env_renderer}""".format(env_renderer=env_renderer))
 
-            default_renderer = 'colab'
-        except ImportError:
-            pass
+        default_renderer = env_renderer
+    elif ipython and ipython.get_ipython():
+        # Try to detect environment so that we can enable a useful
+        # default renderer
+        if not default_renderer:
+            try:
+                import google.colab
+
+                default_renderer = 'colab'
+            except ImportError:
+                pass
 
         # Check if we're running in a Kaggle notebook
         if not default_renderer and os.path.exists('/kaggle/input'):
