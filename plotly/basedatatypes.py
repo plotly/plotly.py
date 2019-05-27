@@ -26,6 +26,8 @@ from .callbacks import (Points, InputDeviceState)
 from plotly.utils import ElidedPrettyPrinter
 from .validators import (DataValidator, LayoutValidator, FramesValidator)
 
+from _plotly_future_ import _future_flags
+
 # Create Undefined sentinel value
 #   - Setting a property to None removes any existing value
 #   - Setting a property to Undefined leaves existing value unmodified
@@ -48,6 +50,8 @@ class BaseFigure(object):
         'paper_bgcolor': 'paper-bgcolor',
         'plot_bgcolor': 'plot-bgcolor'
     }
+
+    _set_trace_uid = 'trace_uids' not in _future_flags
 
     # Constructor
     # -----------
@@ -145,7 +149,7 @@ class BaseFigure(object):
         # ### Construct data validator ###
         # This is the validator that handles importing sequences of trace
         # objects
-        self._data_validator = DataValidator(set_uid=True)
+        self._data_validator = DataValidator(set_uid=self._set_trace_uid)
 
         # ### Import traces ###
         data = self._data_validator.validate_coerce(data,
@@ -513,9 +517,9 @@ class BaseFigure(object):
 
         # Validate new_data
         # -----------------
-        err_header = ('The data property of a figure may only be assigned '
+        err_header = ('The data property of a figure may only be assigned \n'
                       'a list or tuple that contains a permutation of a '
-                      'subset of itself\n')
+                      'subset of itself.\n')
 
         # ### Check valid input type ###
         if not isinstance(new_data, (list, tuple)):
@@ -531,16 +535,14 @@ class BaseFigure(object):
                     .format(typ=type(trace)))
                 raise ValueError(err_msg)
 
-        # ### Check UIDs ###
-        # Require that no new uids are introduced
-        orig_uids = [_trace['uid'] for _trace in self._data]
-        new_uids = [trace.uid for trace in new_data]
+        # ### Check trace objects ###
+        # Require that no new traces are introduced
+        orig_uids = [id(trace) for trace in self.data]
+        new_uids = [id(trace) for trace in new_data]
 
         invalid_uids = set(new_uids).difference(set(orig_uids))
         if invalid_uids:
-            err_msg = (
-                err_header + '    Invalid trace(s) with uid(s): {invalid_uids}'
-                .format(invalid_uids=invalid_uids))
+            err_msg = err_header
 
             raise ValueError(err_msg)
 
@@ -551,8 +553,7 @@ class BaseFigure(object):
         ]
         if duplicate_uids:
             err_msg = (
-                err_header + '    Received duplicated traces with uid(s): ' +
-                '{duplicate_uids}'.format(duplicate_uids=duplicate_uids))
+                err_header + '    Received duplicated traces')
 
             raise ValueError(err_msg)
 
@@ -562,8 +563,8 @@ class BaseFigure(object):
         delete_inds = []
 
         # ### Unparent removed traces ###
-        for i, _trace in enumerate(self._data):
-            if _trace['uid'] in remove_uids:
+        for i, trace in enumerate(self.data):
+            if id(trace) in remove_uids:
                 delete_inds.append(i)
 
                 # Unparent trace object to be removed
@@ -575,7 +576,7 @@ class BaseFigure(object):
         # ### Compute trace props / defaults after removal ###
         traces_props_post_removal = [t for t in self._data]
         traces_prop_defaults_post_removal = [t for t in self._data_defaults]
-        uids_post_removal = [trace_data['uid'] for trace_data in self._data]
+        uids_post_removal = [id(trace_data) for trace_data in self.data]
 
         for i in reversed(delete_inds):
             del traces_props_post_removal[i]
