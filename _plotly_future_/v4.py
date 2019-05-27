@@ -6,6 +6,7 @@ from _plotly_future_ import (
     remove_deprecations,
     v4_subplots,
     orca_defaults,
+    timezones,
     trace_uids,
 )
 
