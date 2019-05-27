@@ -407,6 +407,8 @@ class BaseFigure(object):
         terminal/notebook
         """
         props = self.to_plotly_json()
+
+        # Elide template
         template_props = props.get('layout', {}).get('template', {})
         if template_props:
             props['layout']['template'] = '...'
@@ -3399,6 +3401,10 @@ class BasePlotlyType(object):
         props = {p: v for p, v in props.items()
                  if p in self._validators and
                  not isinstance(self._validators[p], LiteralValidator)}
+
+        # Elide template
+        if 'template' in props:
+            props['template'] = '...'
 
         # Build repr string
         repr_str = BasePlotlyType._build_repr_for_class(
