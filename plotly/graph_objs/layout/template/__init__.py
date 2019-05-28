@@ -239,6 +239,52 @@ class Data(_BaseLayoutHierarchyType):
     def contour(self, val):
         self['contour'] = val
 
+    # funnelarea
+    # ----------
+    @property
+    def funnelarea(self):
+        """
+        The 'funnelarea' property is a tuple of instances of
+        Funnelarea that may be specified as:
+          - A list or tuple of instances of plotly.graph_objs.layout.template.data.Funnelarea
+          - A list or tuple of dicts of string/value properties that
+            will be passed to the Funnelarea constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        tuple[plotly.graph_objs.layout.template.data.Funnelarea]
+        """
+        return self['funnelarea']
+
+    @funnelarea.setter
+    def funnelarea(self, val):
+        self['funnelarea'] = val
+
+    # funnel
+    # ------
+    @property
+    def funnel(self):
+        """
+        The 'funnel' property is a tuple of instances of
+        Funnel that may be specified as:
+          - A list or tuple of instances of plotly.graph_objs.layout.template.data.Funnel
+          - A list or tuple of dicts of string/value properties that
+            will be passed to the Funnel constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        tuple[plotly.graph_objs.layout.template.data.Funnel]
+        """
+        return self['funnel']
+
+    @funnel.setter
+    def funnel(self, val):
+        self['funnel'] = val
+
     # heatmapgl
     # ---------
     @property
@@ -970,6 +1016,12 @@ class Data(_BaseLayoutHierarchyType):
         contour
             plotly.graph_objs.layout.template.data.Contour instance
             or dict with compatible properties
+        funnelarea
+            plotly.graph_objs.layout.template.data.Funnelarea
+            instance or dict with compatible properties
+        funnel
+            plotly.graph_objs.layout.template.data.Funnel instance
+            or dict with compatible properties
         heatmapgl
             plotly.graph_objs.layout.template.data.Heatmapgl
             instance or dict with compatible properties
@@ -1075,6 +1127,8 @@ class Data(_BaseLayoutHierarchyType):
         cone=None,
         contourcarpet=None,
         contour=None,
+        funnelarea=None,
+        funnel=None,
         heatmapgl=None,
         heatmap=None,
         histogram2dcontour=None,
@@ -1144,6 +1198,12 @@ class Data(_BaseLayoutHierarchyType):
             instance or dict with compatible properties
         contour
             plotly.graph_objs.layout.template.data.Contour instance
+            or dict with compatible properties
+        funnelarea
+            plotly.graph_objs.layout.template.data.Funnelarea
+            instance or dict with compatible properties
+        funnel
+            plotly.graph_objs.layout.template.data.Funnel instance
             or dict with compatible properties
         heatmapgl
             plotly.graph_objs.layout.template.data.Heatmapgl
@@ -1278,6 +1338,8 @@ an instance of plotly.graph_objs.layout.template.Data"""
         self._validators['cone'] = v_data.ConesValidator()
         self._validators['contourcarpet'] = v_data.ContourcarpetsValidator()
         self._validators['contour'] = v_data.ContoursValidator()
+        self._validators['funnelarea'] = v_data.FunnelareasValidator()
+        self._validators['funnel'] = v_data.FunnelsValidator()
         self._validators['heatmapgl'] = v_data.HeatmapglsValidator()
         self._validators['heatmap'] = v_data.HeatmapsValidator()
         self._validators['histogram2dcontour'
@@ -1333,6 +1395,10 @@ an instance of plotly.graph_objs.layout.template.Data"""
             ] = contourcarpet if contourcarpet is not None else _v
         _v = arg.pop('contour', None)
         self['contour'] = contour if contour is not None else _v
+        _v = arg.pop('funnelarea', None)
+        self['funnelarea'] = funnelarea if funnelarea is not None else _v
+        _v = arg.pop('funnel', None)
+        self['funnel'] = funnel if funnel is not None else _v
         _v = arg.pop('heatmapgl', None)
         self['heatmapgl'] = heatmapgl if heatmapgl is not None else _v
         _v = arg.pop('heatmap', None)

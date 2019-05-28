@@ -31,7 +31,7 @@
     "ify-loader": "^1.1.0"
   },
   "dependencies": {
-    "plotly.js": "1.47.4",
+    "plotly.js": "https://39664-45646037-gh.circle-artifacts.com/0/plotly.js.tgz",
     "@jupyter-widgets/base": "^1.0.0",
     "lodash": "^4.17.4"
   },
