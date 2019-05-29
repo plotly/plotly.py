@@ -954,6 +954,33 @@ class Marker(_BaseTraceHierarchyType):
     def color(self, val):
         self['color'] = val
 
+    # coloraxis
+    # ---------
+    @property
+    def coloraxis(self):
+        """
+        Sets a reference to a shared color axis. References to these
+        shared color axes are "coloraxis", "coloraxis2", "coloraxis3",
+        etc. Settings for these shared color axes are set in the
+        layout, under `layout.coloraxis`, `layout.coloraxis2`, etc.
+        Note that multiple color scales can be linked to the same color
+        axis.
+    
+        The 'coloraxis' property is an identifier of a particular
+        subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
+        optionally followed by an integer >= 1
+        (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self['coloraxis']
+
+    @coloraxis.setter
+    def coloraxis(self, val):
+        self['coloraxis'] = val
+
     # colorbar
     # --------
     @property
@@ -1306,6 +1333,15 @@ class Marker(_BaseTraceHierarchyType):
                     and min values of the array or relative to
                     `marker.line.cmin` and `marker.line.cmax` if
                     set.
+                coloraxis
+                    Sets a reference to a shared color axis.
+                    References to these shared color axes are
+                    "coloraxis", "coloraxis2", "coloraxis3", etc.
+                    Settings for these shared color axes are set in
+                    the layout, under `layout.coloraxis`,
+                    `layout.coloraxis2`, etc. Note that multiple
+                    color scales can be linked to the same color
+                    axis.
                 colorscale
                     Sets the colorscale. Has an effect only if in
                     `marker.line.color`is set to a numerical array.
@@ -1698,6 +1734,13 @@ class Marker(_BaseTraceHierarchyType):
             colorscale relative to the max and min values of the
             array or relative to `marker.cmin` and `marker.cmax` if
             set.
+        coloraxis
+            Sets a reference to a shared color axis. References to
+            these shared color axes are "coloraxis", "coloraxis2",
+            "coloraxis3", etc. Settings for these shared color axes
+            are set in the layout, under `layout.coloraxis`,
+            `layout.coloraxis2`, etc. Note that multiple color
+            scales can be linked to the same color axis.
         colorbar
             plotly.graph_objs.scattergl.marker.ColorBar instance or
             dict with compatible properties
@@ -1770,6 +1813,7 @@ class Marker(_BaseTraceHierarchyType):
         cmid=None,
         cmin=None,
         color=None,
+        coloraxis=None,
         colorbar=None,
         colorscale=None,
         colorsrc=None,
@@ -1834,6 +1878,13 @@ class Marker(_BaseTraceHierarchyType):
             colorscale relative to the max and min values of the
             array or relative to `marker.cmin` and `marker.cmax` if
             set.
+        coloraxis
+            Sets a reference to a shared color axis. References to
+            these shared color axes are "coloraxis", "coloraxis2",
+            "coloraxis3", etc. Settings for these shared color axes
+            are set in the layout, under `layout.coloraxis`,
+            `layout.coloraxis2`, etc. Note that multiple color
+            scales can be linked to the same color axis.
         colorbar
             plotly.graph_objs.scattergl.marker.ColorBar instance or
             dict with compatible properties
@@ -1934,6 +1985,7 @@ an instance of plotly.graph_objs.scattergl.Marker"""
         self._validators['cmid'] = v_marker.CmidValidator()
         self._validators['cmin'] = v_marker.CminValidator()
         self._validators['color'] = v_marker.ColorValidator()
+        self._validators['coloraxis'] = v_marker.ColoraxisValidator()
         self._validators['colorbar'] = v_marker.ColorBarValidator()
         self._validators['colorscale'] = v_marker.ColorscaleValidator()
         self._validators['colorsrc'] = v_marker.ColorsrcValidator()
@@ -1965,6 +2017,8 @@ an instance of plotly.graph_objs.scattergl.Marker"""
         self['cmin'] = cmin if cmin is not None else _v
         _v = arg.pop('color', None)
         self['color'] = color if color is not None else _v
+        _v = arg.pop('coloraxis', None)
+        self['coloraxis'] = coloraxis if coloraxis is not None else _v
         _v = arg.pop('colorbar', None)
         self['colorbar'] = colorbar if colorbar is not None else _v
         _v = arg.pop('colorscale', None)

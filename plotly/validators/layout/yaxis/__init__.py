@@ -1318,7 +1318,11 @@ class CategoryorderValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             values=kwargs.pop(
                 'values', [
                     'trace', 'category ascending', 'category descending',
-                    'array'
+                    'array', 'total ascending', 'total descending',
+                    'min ascending', 'min descending', 'max ascending',
+                    'max descending', 'sum ascending', 'sum descending',
+                    'mean ascending', 'mean descending', 'median ascending',
+                    'median descending'
                 ]
             ),
             **kwargs
