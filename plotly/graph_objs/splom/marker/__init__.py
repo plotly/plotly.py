@@ -193,6 +193,33 @@ class Line(_BaseTraceHierarchyType):
     def color(self, val):
         self['color'] = val
 
+    # coloraxis
+    # ---------
+    @property
+    def coloraxis(self):
+        """
+        Sets a reference to a shared color axis. References to these
+        shared color axes are "coloraxis", "coloraxis2", "coloraxis3",
+        etc. Settings for these shared color axes are set in the
+        layout, under `layout.coloraxis`, `layout.coloraxis2`, etc.
+        Note that multiple color scales can be linked to the same color
+        axis.
+    
+        The 'coloraxis' property is an identifier of a particular
+        subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
+        optionally followed by an integer >= 1
+        (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self['coloraxis']
+
+    @coloraxis.setter
+    def coloraxis(self, val):
+        self['coloraxis'] = val
+
     # colorscale
     # ----------
     @property
@@ -371,6 +398,13 @@ class Line(_BaseTraceHierarchyType):
             colorscale relative to the max and min values of the
             array or relative to `marker.line.cmin` and
             `marker.line.cmax` if set.
+        coloraxis
+            Sets a reference to a shared color axis. References to
+            these shared color axes are "coloraxis", "coloraxis2",
+            "coloraxis3", etc. Settings for these shared color axes
+            are set in the layout, under `layout.coloraxis`,
+            `layout.coloraxis2`, etc. Note that multiple color
+            scales can be linked to the same color axis.
         colorscale
             Sets the colorscale. Has an effect only if in
             `marker.line.color`is set to a numerical array. The
@@ -409,6 +443,7 @@ class Line(_BaseTraceHierarchyType):
         cmid=None,
         cmin=None,
         color=None,
+        coloraxis=None,
         colorscale=None,
         colorsrc=None,
         reversescale=None,
@@ -467,6 +502,13 @@ class Line(_BaseTraceHierarchyType):
             colorscale relative to the max and min values of the
             array or relative to `marker.line.cmin` and
             `marker.line.cmax` if set.
+        coloraxis
+            Sets a reference to a shared color axis. References to
+            these shared color axes are "coloraxis", "coloraxis2",
+            "coloraxis3", etc. Settings for these shared color axes
+            are set in the layout, under `layout.coloraxis`,
+            `layout.coloraxis2`, etc. Note that multiple color
+            scales can be linked to the same color axis.
         colorscale
             Sets the colorscale. Has an effect only if in
             `marker.line.color`is set to a numerical array. The
@@ -533,6 +575,7 @@ an instance of plotly.graph_objs.splom.marker.Line"""
         self._validators['cmid'] = v_line.CmidValidator()
         self._validators['cmin'] = v_line.CminValidator()
         self._validators['color'] = v_line.ColorValidator()
+        self._validators['coloraxis'] = v_line.ColoraxisValidator()
         self._validators['colorscale'] = v_line.ColorscaleValidator()
         self._validators['colorsrc'] = v_line.ColorsrcValidator()
         self._validators['reversescale'] = v_line.ReversescaleValidator()
@@ -554,6 +597,8 @@ an instance of plotly.graph_objs.splom.marker.Line"""
         self['cmin'] = cmin if cmin is not None else _v
         _v = arg.pop('color', None)
         self['color'] = color if color is not None else _v
+        _v = arg.pop('coloraxis', None)
+        self['coloraxis'] = coloraxis if coloraxis is not None else _v
         _v = arg.pop('colorscale', None)
         self['colorscale'] = colorscale if colorscale is not None else _v
         _v = arg.pop('colorsrc', None)

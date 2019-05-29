@@ -228,6 +228,26 @@ class YBinsValidator(_plotly_utils.basevalidators.CompoundValidator):
 import _plotly_utils.basevalidators
 
 
+class YbingroupValidator(_plotly_utils.basevalidators.StringValidator):
+
+    def __init__(
+        self,
+        plotly_name='ybingroup',
+        parent_name='histogram2dcontour',
+        **kwargs
+    ):
+        super(YbingroupValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop('edit_type', 'calc'),
+            role=kwargs.pop('role', 'info'),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class YAxisValidator(_plotly_utils.basevalidators.SubplotidValidator):
 
     def __init__(
@@ -355,6 +375,26 @@ class XBinsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers, and defaults to -0.5.
 """
             ),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class XbingroupValidator(_plotly_utils.basevalidators.StringValidator):
+
+    def __init__(
+        self,
+        plotly_name='xbingroup',
+        parent_name='histogram2dcontour',
+        **kwargs
+    ):
+        super(XbingroupValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop('edit_type', 'calc'),
+            role=kwargs.pop('role', 'info'),
             **kwargs
         )
 
@@ -633,6 +673,44 @@ class NameValidator(_plotly_utils.basevalidators.StringValidator):
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop('edit_type', 'style'),
+            role=kwargs.pop('role', 'info'),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class MetasrcValidator(_plotly_utils.basevalidators.SrcValidator):
+
+    def __init__(
+        self,
+        plotly_name='metasrc',
+        parent_name='histogram2dcontour',
+        **kwargs
+    ):
+        super(MetasrcValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop('edit_type', 'none'),
+            role=kwargs.pop('role', 'info'),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class MetaValidator(_plotly_utils.basevalidators.AnyValidator):
+
+    def __init__(
+        self, plotly_name='meta', parent_name='histogram2dcontour', **kwargs
+    ):
+        super(MetaValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            array_ok=kwargs.pop('array_ok', True),
+            edit_type=kwargs.pop('edit_type', 'plot'),
             role=kwargs.pop('role', 'info'),
             **kwargs
         )
@@ -1319,6 +1397,48 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 direction.
 """
             ),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class ColoraxisValidator(_plotly_utils.basevalidators.SubplotidValidator):
+
+    def __init__(
+        self,
+        plotly_name='coloraxis',
+        parent_name='histogram2dcontour',
+        **kwargs
+    ):
+        super(ColoraxisValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            dflt=kwargs.pop('dflt', None),
+            edit_type=kwargs.pop('edit_type', 'calc'),
+            regex=kwargs.pop('regex', '/^coloraxis([2-9]|[1-9][0-9]+)?$/'),
+            role=kwargs.pop('role', 'info'),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class BingroupValidator(_plotly_utils.basevalidators.StringValidator):
+
+    def __init__(
+        self,
+        plotly_name='bingroup',
+        parent_name='histogram2dcontour',
+        **kwargs
+    ):
+        super(BingroupValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop('edit_type', 'calc'),
+            role=kwargs.pop('role', 'info'),
             **kwargs
         )
 

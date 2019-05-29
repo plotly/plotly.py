@@ -48,7 +48,12 @@ class ZAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the `categoryarray` array, the sorting behavior
                 for that attribute will be identical to the
                 "trace" mode. The unspecified categories will
-                follow the categories in `categoryarray`.
+                follow the categories in `categoryarray`. Set
+                `categoryorder` to *total ascending* or *total
+                descending* if order should be determined by
+                the numerical order of the values. Similarly,
+                the order can be determined by the min, max,
+                sum, mean or median of all the values.
             color
                 Sets default for all colors associated with
                 this axis all at once: line, font, tick, and
@@ -349,7 +354,12 @@ class YAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the `categoryarray` array, the sorting behavior
                 for that attribute will be identical to the
                 "trace" mode. The unspecified categories will
-                follow the categories in `categoryarray`.
+                follow the categories in `categoryarray`. Set
+                `categoryorder` to *total ascending* or *total
+                descending* if order should be determined by
+                the numerical order of the values. Similarly,
+                the order can be determined by the min, max,
+                sum, mean or median of all the values.
             color
                 Sets default for all colors associated with
                 this axis all at once: line, font, tick, and
@@ -650,7 +660,12 @@ class XAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the `categoryarray` array, the sorting behavior
                 for that attribute will be identical to the
                 "trace" mode. The unspecified categories will
-                follow the categories in `categoryarray`.
+                follow the categories in `categoryarray`. Set
+                `categoryorder` to *total ascending* or *total
+                descending* if order should be determined by
+                the numerical order of the values. Similarly,
+                the order can be determined by the min, max,
+                sum, mean or median of all the values.
             color
                 Sets default for all colors associated with
                 this axis all at once: line, font, tick, and

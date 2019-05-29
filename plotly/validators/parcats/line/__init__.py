@@ -342,6 +342,25 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
 import _plotly_utils.basevalidators
 
 
+class ColoraxisValidator(_plotly_utils.basevalidators.SubplotidValidator):
+
+    def __init__(
+        self, plotly_name='coloraxis', parent_name='parcats.line', **kwargs
+    ):
+        super(ColoraxisValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            dflt=kwargs.pop('dflt', None),
+            edit_type=kwargs.pop('edit_type', 'calc'),
+            regex=kwargs.pop('regex', '/^coloraxis([2-9]|[1-9][0-9]+)?$/'),
+            role=kwargs.pop('role', 'info'),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
 
     def __init__(
@@ -351,7 +370,7 @@ class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
             plotly_name=plotly_name,
             parent_name=parent_name,
             array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'style'),
+            edit_type=kwargs.pop('edit_type', 'calc'),
             role=kwargs.pop('role', 'style'),
             colorscale_path=kwargs.pop(
                 'colorscale_path', 'parcats.line.colorscale'
@@ -371,7 +390,7 @@ class CminValidator(_plotly_utils.basevalidators.NumberValidator):
         super(CminValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
+            edit_type=kwargs.pop('edit_type', 'calc'),
             implied_edits=kwargs.pop('implied_edits', {'cauto': False}),
             role=kwargs.pop('role', 'info'),
             **kwargs
@@ -407,7 +426,7 @@ class CmaxValidator(_plotly_utils.basevalidators.NumberValidator):
         super(CmaxValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
+            edit_type=kwargs.pop('edit_type', 'calc'),
             implied_edits=kwargs.pop('implied_edits', {'cauto': False}),
             role=kwargs.pop('role', 'info'),
             **kwargs

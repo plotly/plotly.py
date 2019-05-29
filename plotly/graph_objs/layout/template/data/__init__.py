@@ -90,6 +90,12 @@ from plotly.graph_objs import Heatmap
 from plotly.graph_objs import Heatmapgl
 
 
+from plotly.graph_objs import Funnel
+
+
+from plotly.graph_objs import Funnelarea
+
+
 from plotly.graph_objs import Contour
 
 

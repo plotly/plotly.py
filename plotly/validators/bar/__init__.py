@@ -391,6 +391,21 @@ class TextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
 import _plotly_utils.basevalidators
 
 
+class TextangleValidator(_plotly_utils.basevalidators.AngleValidator):
+
+    def __init__(self, plotly_name='textangle', parent_name='bar', **kwargs):
+        super(TextangleValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop('edit_type', 'plot'),
+            role=kwargs.pop('role', 'info'),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class TextValidator(_plotly_utils.basevalidators.StringValidator):
 
     def __init__(self, plotly_name='text', parent_name='bar', **kwargs):
@@ -678,6 +693,37 @@ class NameValidator(_plotly_utils.basevalidators.StringValidator):
 import _plotly_utils.basevalidators
 
 
+class MetasrcValidator(_plotly_utils.basevalidators.SrcValidator):
+
+    def __init__(self, plotly_name='metasrc', parent_name='bar', **kwargs):
+        super(MetasrcValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop('edit_type', 'none'),
+            role=kwargs.pop('role', 'info'),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class MetaValidator(_plotly_utils.basevalidators.AnyValidator):
+
+    def __init__(self, plotly_name='meta', parent_name='bar', **kwargs):
+        super(MetaValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            array_ok=kwargs.pop('array_ok', True),
+            edit_type=kwargs.pop('edit_type', 'plot'),
+            role=kwargs.pop('role', 'info'),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
 
     def __init__(self, plotly_name='marker', parent_name='bar', **kwargs):
@@ -731,6 +777,15 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 mapped to the colorscale relative to the max
                 and min values of the array or relative to
                 `marker.cmin` and `marker.cmax` if set.
+            coloraxis
+                Sets a reference to a shared color axis.
+                References to these shared color axes are
+                "coloraxis", "coloraxis2", "coloraxis3", etc.
+                Settings for these shared color axes are set in
+                the layout, under `layout.coloraxis`,
+                `layout.coloraxis2`, etc. Note that multiple
+                color scales can be linked to the same color
+                axis.
             colorbar
                 plotly.graph_objs.bar.marker.ColorBar instance
                 or dict with compatible properties
@@ -838,6 +893,26 @@ class InsidetextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
                 .
 """
             ),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class InsidetextanchorValidator(
+    _plotly_utils.basevalidators.EnumeratedValidator
+):
+
+    def __init__(
+        self, plotly_name='insidetextanchor', parent_name='bar', **kwargs
+    ):
+        super(InsidetextanchorValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop('edit_type', 'plot'),
+            role=kwargs.pop('role', 'info'),
+            values=kwargs.pop('values', ['end', 'middle', 'start']),
             **kwargs
         )
 

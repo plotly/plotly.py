@@ -152,6 +152,37 @@ class NameValidator(_plotly_utils.basevalidators.StringValidator):
 import _plotly_utils.basevalidators
 
 
+class MetasrcValidator(_plotly_utils.basevalidators.SrcValidator):
+
+    def __init__(self, plotly_name='metasrc', parent_name='parcats', **kwargs):
+        super(MetasrcValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop('edit_type', 'none'),
+            role=kwargs.pop('role', 'info'),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class MetaValidator(_plotly_utils.basevalidators.AnyValidator):
+
+    def __init__(self, plotly_name='meta', parent_name='parcats', **kwargs):
+        super(MetaValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            array_ok=kwargs.pop('array_ok', True),
+            edit_type=kwargs.pop('edit_type', 'plot'),
+            role=kwargs.pop('role', 'info'),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
 
     def __init__(self, plotly_name='line', parent_name='parcats', **kwargs):
@@ -205,6 +236,15 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the colorscale relative to the max and min
                 values of the array or relative to `line.cmin`
                 and `line.cmax` if set.
+            coloraxis
+                Sets a reference to a shared color axis.
+                References to these shared color axes are
+                "coloraxis", "coloraxis2", "coloraxis3", etc.
+                Settings for these shared color axes are set in
+                the layout, under `layout.coloraxis`,
+                `layout.coloraxis2`, etc. Note that multiple
+                color scales can be linked to the same color
+                axis.
             colorbar
                 plotly.graph_objs.parcats.line.ColorBar
                 instance or dict with compatible properties

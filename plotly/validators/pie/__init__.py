@@ -98,12 +98,11 @@ class TitleValidator(_plotly_utils.basevalidators.TitleValidator):
                 that the title's position used to be set by the
                 now deprecated `titleposition` attribute.
             text
-                Sets the title of the pie chart. If it is
-                empty, no title is displayed. Note that before
-                the existence of `title.text`, the title's
-                contents used to be defined as the `title`
-                attribute itself. This behavior has been
-                deprecated.
+                Sets the title of the chart. If it is empty, no
+                title is displayed. Note that before the
+                existence of `title.text`, the title's contents
+                used to be defined as the `title` attribute
+                itself. This behavior has been deprecated.
 """
             ),
             **kwargs
@@ -154,7 +153,7 @@ class TextpositionValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             plotly_name=plotly_name,
             parent_name=parent_name,
             array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'calc'),
+            edit_type=kwargs.pop('edit_type', 'plot'),
             role=kwargs.pop('role', 'info'),
             values=kwargs.pop('values', ['inside', 'outside', 'auto', 'none']),
             **kwargs
@@ -446,6 +445,37 @@ class NameValidator(_plotly_utils.basevalidators.StringValidator):
 import _plotly_utils.basevalidators
 
 
+class MetasrcValidator(_plotly_utils.basevalidators.SrcValidator):
+
+    def __init__(self, plotly_name='metasrc', parent_name='pie', **kwargs):
+        super(MetasrcValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop('edit_type', 'none'),
+            role=kwargs.pop('role', 'info'),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class MetaValidator(_plotly_utils.basevalidators.AnyValidator):
+
+    def __init__(self, plotly_name='meta', parent_name='pie', **kwargs):
+        super(MetaValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            array_ok=kwargs.pop('array_ok', True),
+            edit_type=kwargs.pop('edit_type', 'plot'),
+            role=kwargs.pop('role', 'info'),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
 
     def __init__(self, plotly_name='marker', parent_name='pie', **kwargs):
@@ -456,9 +486,9 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs=kwargs.pop(
                 'data_docs', """
             colors
-                Sets the color of each sector of this pie
-                chart. If not specified, the default trace
-                color set is used to pick the sector colors.
+                Sets the color of each sector. If not
+                specified, the default trace color set is used
+                to pick the sector colors.
             colorssrc
                 Sets the source reference on plot.ly for
                 colors .

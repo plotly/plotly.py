@@ -7,7 +7,8 @@ import copy as _copy
 class Layout(_BaseLayoutType):
 
     _subplotid_prop_names = [
-        'geo', 'mapbox', 'polar', 'scene', 'ternary', 'xaxis', 'yaxis'
+        'coloraxis', 'geo', 'mapbox', 'polar', 'scene', 'ternary', 'xaxis',
+        'yaxis'
     ]
 
     import re
@@ -25,11 +26,12 @@ class Layout(_BaseLayoutType):
         dict
         """
         from plotly.validators.layout import (
-            GeoValidator, MapboxValidator, PolarValidator, SceneValidator,
-            TernaryValidator, XAxisValidator, YAxisValidator
+            ColoraxisValidator, GeoValidator, MapboxValidator, PolarValidator,
+            SceneValidator, TernaryValidator, XAxisValidator, YAxisValidator
         )
 
         return {
+            'coloraxis': ColoraxisValidator,
             'geo': GeoValidator,
             'mapbox': MapboxValidator,
             'polar': PolarValidator,
@@ -667,6 +669,86 @@ class Layout(_BaseLayoutType):
     def clickmode(self, val):
         self['clickmode'] = val
 
+    # coloraxis
+    # ---------
+    @property
+    def coloraxis(self):
+        """
+        The 'coloraxis' property is an instance of Coloraxis
+        that may be specified as:
+          - An instance of plotly.graph_objs.layout.Coloraxis
+          - A dict of string/value properties that will be passed
+            to the Coloraxis constructor
+    
+            Supported dict properties:
+                
+                autocolorscale
+                    Determines whether the colorscale is a default
+                    palette (`autocolorscale: true`) or the palette
+                    determined by `colorscale`. In case
+                    `colorscale` is unspecified or `autocolorscale`
+                    is true, the default  palette will be chosen
+                    according to whether numbers in the `color`
+                    array are all positive, all negative or mixed.
+                cauto
+                    Determines whether or not the color domain is
+                    computed with respect to the input data (here
+                    corresponding trace color array(s)) or the
+                    bounds set in `cmin` and `cmax`  Defaults to
+                    `false` when `cmin` and `cmax` are set by the
+                    user.
+                cmax
+                    Sets the upper bound of the color domain. Value
+                    should have the same units as corresponding
+                    trace color array(s) and if set, `cmin` must be
+                    set as well.
+                cmid
+                    Sets the mid-point of the color domain by
+                    scaling `cmin` and/or `cmax` to be equidistant
+                    to this point. Value should have the same units
+                    as corresponding trace color array(s). Has no
+                    effect when `cauto` is `false`.
+                cmin
+                    Sets the lower bound of the color domain. Value
+                    should have the same units as corresponding
+                    trace color array(s) and if set, `cmax` must be
+                    set as well.
+                colorbar
+                    plotly.graph_objs.layout.coloraxis.ColorBar
+                    instance or dict with compatible properties
+                colorscale
+                    Sets the colorscale. The colorscale must be an
+                    array containing arrays mapping a normalized
+                    value to an rgb, rgba, hex, hsl, hsv, or named
+                    color string. At minimum, a mapping for the
+                    lowest (0) and highest (1) values are required.
+                    For example, `[[0, 'rgb(0,0,255)', [1,
+                    'rgb(255,0,0)']]`. To control the bounds of the
+                    colorscale in color space, use`cmin` and
+                    `cmax`. Alternatively, `colorscale` may be a
+                    palette name string of the following list: Grey
+                    s,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Blues,
+                    Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth
+                    ,Electric,Viridis,Cividis.
+                reversescale
+                    Reverses the color mapping if true. If true,
+                    `cmin` will correspond to the last color in the
+                    array and `cmax` will correspond to the first
+                    color.
+                showscale
+                    Determines whether or not a colorbar is
+                    displayed for this trace.
+
+        Returns
+        -------
+        plotly.graph_objs.layout.Coloraxis
+        """
+        return self['coloraxis']
+
+    @coloraxis.setter
+    def coloraxis(self, val):
+        self['coloraxis'] = val
+
     # colorscale
     # ----------
     @property
@@ -817,6 +899,33 @@ class Layout(_BaseLayoutType):
     def editrevision(self, val):
         self['editrevision'] = val
 
+    # extendfunnelareacolors
+    # ----------------------
+    @property
+    def extendfunnelareacolors(self):
+        """
+        If `true`, the funnelarea slice colors (whether given by
+        `funnelareacolorway` or inherited from `colorway`) will be
+        extended to three times its original length by first repeating
+        every color 20% lighter then each color 20% darker. This is
+        intended to reduce the likelihood of reusing the same color
+        when you have many slices, but you can set `false` to disable.
+        Colors provided in the trace, using `marker.colors`, are never
+        extended.
+    
+        The 'extendfunnelareacolors' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self['extendfunnelareacolors']
+
+    @extendfunnelareacolors.setter
+    def extendfunnelareacolors(self, val):
+        self['extendfunnelareacolors'] = val
+
     # extendpiecolors
     # ---------------
     @property
@@ -915,6 +1024,98 @@ class Layout(_BaseLayoutType):
     @font.setter
     def font(self, val):
         self['font'] = val
+
+    # funnelareacolorway
+    # ------------------
+    @property
+    def funnelareacolorway(self):
+        """
+        Sets the default funnelarea slice colors. Defaults to the main
+        `colorway` used for trace colors. If you specify a new list
+        here it can still be extended with lighter and darker colors,
+        see `extendfunnelareacolors`.
+    
+        The 'funnelareacolorway' property is a colorlist that may be specified
+        as a tuple, list, one-dimensional numpy array, or pandas Series of valid
+        color strings
+
+        Returns
+        -------
+        list
+        """
+        return self['funnelareacolorway']
+
+    @funnelareacolorway.setter
+    def funnelareacolorway(self, val):
+        self['funnelareacolorway'] = val
+
+    # funnelgap
+    # ---------
+    @property
+    def funnelgap(self):
+        """
+        Sets the gap (in plot fraction) between bars of adjacent
+        location coordinates.
+    
+        The 'funnelgap' property is a number and may be specified as:
+          - An int or float in the interval [0, 1]
+
+        Returns
+        -------
+        int|float
+        """
+        return self['funnelgap']
+
+    @funnelgap.setter
+    def funnelgap(self, val):
+        self['funnelgap'] = val
+
+    # funnelgroupgap
+    # --------------
+    @property
+    def funnelgroupgap(self):
+        """
+        Sets the gap (in plot fraction) between bars of the same
+        location coordinate.
+    
+        The 'funnelgroupgap' property is a number and may be specified as:
+          - An int or float in the interval [0, 1]
+
+        Returns
+        -------
+        int|float
+        """
+        return self['funnelgroupgap']
+
+    @funnelgroupgap.setter
+    def funnelgroupgap(self, val):
+        self['funnelgroupgap'] = val
+
+    # funnelmode
+    # ----------
+    @property
+    def funnelmode(self):
+        """
+        Determines how bars at the same location coordinate are
+        displayed on the graph. With "stack", the bars are stacked on
+        top of one another With "group", the bars are plotted next to
+        one another centered around the shared location. With
+        "overlay", the bars are plotted over one another, you might
+        need to an "opacity" to see multiple bars.
+    
+        The 'funnelmode' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['stack', 'group', 'overlay']
+
+        Returns
+        -------
+        Any
+        """
+        return self['funnelmode']
+
+    @funnelmode.setter
+    def funnelmode(self, val):
+        self['funnelmode'] = val
 
     # geo
     # ---
@@ -1144,6 +1345,10 @@ class Layout(_BaseLayoutType):
     @property
     def hiddenlabels(self):
         """
+        hiddenlabels is the funnelarea & pie chart analog of
+        visible:'legendonly' but it can contain many labels, and can
+        simultaneously hide slices from several pies/funnelarea charts
+    
         The 'hiddenlabels' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1453,6 +1658,20 @@ class Layout(_BaseLayoutType):
                     the legend.
                 font
                     Sets the font used to text the legend items.
+                itemclick
+                    Determines the behavior on legend item click.
+                    "toggle" toggles the visibility of the item
+                    clicked on the graph. "toggleothers" makes the
+                    clicked item the sole visible item on the
+                    graph. False disable legend item click
+                    interactions.
+                itemdoubleclick
+                    Determines the behavior on legend item double-
+                    click. "toggle" toggles the visibility of the
+                    item clicked on the graph. "toggleothers" makes
+                    the clicked item the sole visible item on the
+                    graph. False disable legend item double-click
+                    interactions.
                 itemsizing
                     Determines if the legend items symbols scale
                     with their corresponding "trace" attributes or
@@ -1613,14 +1832,14 @@ class Layout(_BaseLayoutType):
         items, `rangeselector`, `updatemenues` and `sliders` `label`
         text all support `meta`. One can access `meta` fields using
         template strings: `%{meta[i]}` where `i` is the index of the
-        `meta` item in question.
+        `meta` item in question. `meta` can also be an object for
+        example `{key: value}` which can be accessed %{meta[key]}.
     
-        The 'meta' property is an array that may be specified as a tuple,
-        list, numpy array, or pandas Series
+        The 'meta' property accepts values of any type
 
         Returns
         -------
-        numpy.ndarray
+        Any|numpy.ndarray
         """
         return self['meta']
 
@@ -3186,7 +3405,12 @@ class Layout(_BaseLayoutType):
                     the `categoryarray` array, the sorting behavior
                     for that attribute will be identical to the
                     "trace" mode. The unspecified categories will
-                    follow the categories in `categoryarray`.
+                    follow the categories in `categoryarray`. Set
+                    `categoryorder` to *total ascending* or *total
+                    descending* if order should be determined by
+                    the numerical order of the values. Similarly,
+                    the order can be determined by the min, max,
+                    sum, mean or median of all the values.
                 color
                     Sets default for all colors associated with
                     this axis all at once: line, font, tick, and
@@ -3620,7 +3844,12 @@ class Layout(_BaseLayoutType):
                     the `categoryarray` array, the sorting behavior
                     for that attribute will be identical to the
                     "trace" mode. The unspecified categories will
-                    follow the categories in `categoryarray`.
+                    follow the categories in `categoryarray`. Set
+                    `categoryorder` to *total ascending* or *total
+                    descending* if order should be determined by
+                    the numerical order of the values. Similarly,
+                    the order can be determined by the min, max,
+                    sum, mean or median of all the values.
                 color
                     Sets default for all colors associated with
                     this axis all at once: line, font, tick, and
@@ -4079,6 +4308,9 @@ class Layout(_BaseLayoutType):
             sent accordingly as long as "event" flag is set as
             well. When the "event" flag is missing, `plotly_click`
             and `plotly_selected` events are not fired.
+        coloraxis
+            plotly.graph_objs.layout.Coloraxis instance or dict
+            with compatible properties
         colorscale
             plotly.graph_objs.layout.Colorscale instance or dict
             with compatible properties
@@ -4105,6 +4337,15 @@ class Layout(_BaseLayoutType):
             Controls persistence of user-driven changes in
             `editable: true` configuration, other than trace names
             and axis titles. Defaults to `layout.uirevision`.
+        extendfunnelareacolors
+            If `true`, the funnelarea slice colors (whether given
+            by `funnelareacolorway` or inherited from `colorway`)
+            will be extended to three times its original length by
+            first repeating every color 20% lighter then each color
+            20% darker. This is intended to reduce the likelihood
+            of reusing the same color when you have many slices,
+            but you can set `false` to disable. Colors provided in
+            the trace, using `marker.colors`, are never extended.
         extendpiecolors
             If `true`, the pie slice colors (whether given by
             `piecolorway` or inherited from `colorway`) will be
@@ -4127,6 +4368,26 @@ class Layout(_BaseLayoutType):
             Sets the global font. Note that fonts used in traces
             and other layout components inherit from the global
             font.
+        funnelareacolorway
+            Sets the default funnelarea slice colors. Defaults to
+            the main `colorway` used for trace colors. If you
+            specify a new list here it can still be extended with
+            lighter and darker colors, see
+            `extendfunnelareacolors`.
+        funnelgap
+            Sets the gap (in plot fraction) between bars of
+            adjacent location coordinates.
+        funnelgroupgap
+            Sets the gap (in plot fraction) between bars of the
+            same location coordinate.
+        funnelmode
+            Determines how bars at the same location coordinate are
+            displayed on the graph. With "stack", the bars are
+            stacked on top of one another With "group", the bars
+            are plotted next to one another centered around the
+            shared location. With "overlay", the bars are plotted
+            over one another, you might need to an "opacity" to see
+            multiple bars.
         geo
             plotly.graph_objs.layout.Geo instance or dict with
             compatible properties
@@ -4136,7 +4397,10 @@ class Layout(_BaseLayoutType):
         height
             Sets the plot's height (in px).
         hiddenlabels
-
+            hiddenlabels is the funnelarea & pie chart analog of
+            visible:'legendonly' but it can contain many labels,
+            and can simultaneously hide slices from several
+            pies/funnelarea charts
         hiddenlabelssrc
             Sets the source reference on plot.ly for  hiddenlabels
             .
@@ -4190,7 +4454,9 @@ class Layout(_BaseLayoutType):
             `updatemenues` and `sliders` `label` text all support
             `meta`. One can access `meta` fields using template
             strings: `%{meta[i]}` where `i` is the index of the
-            `meta` item in question.
+            `meta` item in question. `meta` can also be an object
+            for example `{key: value}` which can be accessed
+            %{meta[key]}.
         metasrc
             Sets the source reference on plot.ly for  meta .
         modebar
@@ -4386,15 +4652,21 @@ class Layout(_BaseLayoutType):
         boxmode=None,
         calendar=None,
         clickmode=None,
+        coloraxis=None,
         colorscale=None,
         colorway=None,
         datarevision=None,
         direction=None,
         dragmode=None,
         editrevision=None,
+        extendfunnelareacolors=None,
         extendpiecolors=None,
         extendsunburstcolors=None,
         font=None,
+        funnelareacolorway=None,
+        funnelgap=None,
+        funnelgroupgap=None,
+        funnelmode=None,
         geo=None,
         grid=None,
         height=None,
@@ -4530,6 +4802,9 @@ class Layout(_BaseLayoutType):
             sent accordingly as long as "event" flag is set as
             well. When the "event" flag is missing, `plotly_click`
             and `plotly_selected` events are not fired.
+        coloraxis
+            plotly.graph_objs.layout.Coloraxis instance or dict
+            with compatible properties
         colorscale
             plotly.graph_objs.layout.Colorscale instance or dict
             with compatible properties
@@ -4556,6 +4831,15 @@ class Layout(_BaseLayoutType):
             Controls persistence of user-driven changes in
             `editable: true` configuration, other than trace names
             and axis titles. Defaults to `layout.uirevision`.
+        extendfunnelareacolors
+            If `true`, the funnelarea slice colors (whether given
+            by `funnelareacolorway` or inherited from `colorway`)
+            will be extended to three times its original length by
+            first repeating every color 20% lighter then each color
+            20% darker. This is intended to reduce the likelihood
+            of reusing the same color when you have many slices,
+            but you can set `false` to disable. Colors provided in
+            the trace, using `marker.colors`, are never extended.
         extendpiecolors
             If `true`, the pie slice colors (whether given by
             `piecolorway` or inherited from `colorway`) will be
@@ -4578,6 +4862,26 @@ class Layout(_BaseLayoutType):
             Sets the global font. Note that fonts used in traces
             and other layout components inherit from the global
             font.
+        funnelareacolorway
+            Sets the default funnelarea slice colors. Defaults to
+            the main `colorway` used for trace colors. If you
+            specify a new list here it can still be extended with
+            lighter and darker colors, see
+            `extendfunnelareacolors`.
+        funnelgap
+            Sets the gap (in plot fraction) between bars of
+            adjacent location coordinates.
+        funnelgroupgap
+            Sets the gap (in plot fraction) between bars of the
+            same location coordinate.
+        funnelmode
+            Determines how bars at the same location coordinate are
+            displayed on the graph. With "stack", the bars are
+            stacked on top of one another With "group", the bars
+            are plotted next to one another centered around the
+            shared location. With "overlay", the bars are plotted
+            over one another, you might need to an "opacity" to see
+            multiple bars.
         geo
             plotly.graph_objs.layout.Geo instance or dict with
             compatible properties
@@ -4587,7 +4891,10 @@ class Layout(_BaseLayoutType):
         height
             Sets the plot's height (in px).
         hiddenlabels
-
+            hiddenlabels is the funnelarea & pie chart analog of
+            visible:'legendonly' but it can contain many labels,
+            and can simultaneously hide slices from several
+            pies/funnelarea charts
         hiddenlabelssrc
             Sets the source reference on plot.ly for  hiddenlabels
             .
@@ -4641,7 +4948,9 @@ class Layout(_BaseLayoutType):
             `updatemenues` and `sliders` `label` text all support
             `meta`. One can access `meta` fields using template
             strings: `%{meta[i]}` where `i` is the index of the
-            `meta` item in question.
+            `meta` item in question. `meta` can also be an object
+            for example `{key: value}` which can be accessed
+            %{meta[key]}.
         metasrc
             Sets the source reference on plot.ly for  meta .
         modebar
@@ -4863,17 +5172,25 @@ an instance of plotly.graph_objs.Layout"""
         self._validators['boxmode'] = v_layout.BoxmodeValidator()
         self._validators['calendar'] = v_layout.CalendarValidator()
         self._validators['clickmode'] = v_layout.ClickmodeValidator()
+        self._validators['coloraxis'] = v_layout.ColoraxisValidator()
         self._validators['colorscale'] = v_layout.ColorscaleValidator()
         self._validators['colorway'] = v_layout.ColorwayValidator()
         self._validators['datarevision'] = v_layout.DatarevisionValidator()
         self._validators['direction'] = v_layout.DirectionValidator()
         self._validators['dragmode'] = v_layout.DragmodeValidator()
         self._validators['editrevision'] = v_layout.EditrevisionValidator()
+        self._validators['extendfunnelareacolors'
+                        ] = v_layout.ExtendfunnelareacolorsValidator()
         self._validators['extendpiecolors'
                         ] = v_layout.ExtendpiecolorsValidator()
         self._validators['extendsunburstcolors'
                         ] = v_layout.ExtendsunburstcolorsValidator()
         self._validators['font'] = v_layout.FontValidator()
+        self._validators['funnelareacolorway'
+                        ] = v_layout.FunnelareacolorwayValidator()
+        self._validators['funnelgap'] = v_layout.FunnelgapValidator()
+        self._validators['funnelgroupgap'] = v_layout.FunnelgroupgapValidator()
+        self._validators['funnelmode'] = v_layout.FunnelmodeValidator()
         self._validators['geo'] = v_layout.GeoValidator()
         self._validators['grid'] = v_layout.GridValidator()
         self._validators['height'] = v_layout.HeightValidator()
@@ -4959,6 +5276,8 @@ an instance of plotly.graph_objs.Layout"""
         self['calendar'] = calendar if calendar is not None else _v
         _v = arg.pop('clickmode', None)
         self['clickmode'] = clickmode if clickmode is not None else _v
+        _v = arg.pop('coloraxis', None)
+        self['coloraxis'] = coloraxis if coloraxis is not None else _v
         _v = arg.pop('colorscale', None)
         self['colorscale'] = colorscale if colorscale is not None else _v
         _v = arg.pop('colorway', None)
@@ -4971,6 +5290,10 @@ an instance of plotly.graph_objs.Layout"""
         self['dragmode'] = dragmode if dragmode is not None else _v
         _v = arg.pop('editrevision', None)
         self['editrevision'] = editrevision if editrevision is not None else _v
+        _v = arg.pop('extendfunnelareacolors', None)
+        self[
+            'extendfunnelareacolors'
+        ] = extendfunnelareacolors if extendfunnelareacolors is not None else _v
         _v = arg.pop('extendpiecolors', None)
         self['extendpiecolors'
             ] = extendpiecolors if extendpiecolors is not None else _v
@@ -4980,6 +5303,16 @@ an instance of plotly.graph_objs.Layout"""
         ] = extendsunburstcolors if extendsunburstcolors is not None else _v
         _v = arg.pop('font', None)
         self['font'] = font if font is not None else _v
+        _v = arg.pop('funnelareacolorway', None)
+        self['funnelareacolorway'
+            ] = funnelareacolorway if funnelareacolorway is not None else _v
+        _v = arg.pop('funnelgap', None)
+        self['funnelgap'] = funnelgap if funnelgap is not None else _v
+        _v = arg.pop('funnelgroupgap', None)
+        self['funnelgroupgap'
+            ] = funnelgroupgap if funnelgroupgap is not None else _v
+        _v = arg.pop('funnelmode', None)
+        self['funnelmode'] = funnelmode if funnelmode is not None else _v
         _v = arg.pop('geo', None)
         self['geo'] = geo if geo is not None else _v
         _v = arg.pop('grid', None)
@@ -5122,8 +5455,8 @@ class Waterfall(_BaseTraceType):
     def alignmentgroup(self):
         """
         Set several traces linked to the same position axis or matching
-        axes to the same offsetgroup where bars of the same position
-        coordinate will line up.
+        axes to the same alignmentgroup. This controls whether bars
+        compute their positional range dependently or independently.
     
         The 'alignmentgroup' property is a string and must be specified as:
           - A string
@@ -5621,6 +5954,28 @@ class Waterfall(_BaseTraceType):
     def increasing(self, val):
         self['increasing'] = val
 
+    # insidetextanchor
+    # ----------------
+    @property
+    def insidetextanchor(self):
+        """
+        Determines if texts are kept at center or start/end points in
+        `textposition` "inside" mode.
+    
+        The 'insidetextanchor' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['end', 'middle', 'start']
+
+        Returns
+        -------
+        Any
+        """
+        return self['insidetextanchor']
+
+    @insidetextanchor.setter
+    def insidetextanchor(self, val):
+        self['insidetextanchor'] = val
+
     # insidetextfont
     # --------------
     @property
@@ -5742,6 +6097,54 @@ class Waterfall(_BaseTraceType):
     @measuresrc.setter
     def measuresrc(self, val):
         self['measuresrc'] = val
+
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
 
     # name
     # ----
@@ -6033,6 +6436,31 @@ class Waterfall(_BaseTraceType):
     def text(self, val):
         self['text'] = val
 
+    # textangle
+    # ---------
+    @property
+    def textangle(self):
+        """
+        Sets the angle of the tick labels with respect to the bar. For
+        example, a `tickangle` of -90 draws the tick labels vertically.
+        With "auto" the texts may automatically be rotated to fit with
+        the maximum size in bars.
+    
+        The 'textangle' property is a angle (in degrees) that may be
+        specified as a number between -180 and 180. Numeric values outside this
+        range are converted to the equivalent value
+        (e.g. 270 is converted to -90).
+
+        Returns
+        -------
+        int|float
+        """
+        return self['textangle']
+
+    @textangle.setter
+    def textangle(self, val):
+        self['textangle'] = val
+
     # textfont
     # --------
     @property
@@ -6087,6 +6515,31 @@ class Waterfall(_BaseTraceType):
     @textfont.setter
     def textfont(self, val):
         self['textfont'] = val
+
+    # textinfo
+    # --------
+    @property
+    def textinfo(self):
+        """
+        Determines which trace information appear on the graph. In the
+        case of having multiple waterfalls, totals are computed
+        separately (per trace).
+    
+        The 'textinfo' property is a flaglist and may be specified
+        as a string containing:
+          - Any combination of ['label', 'text', 'initial', 'delta', 'final'] joined with '+' characters
+            (e.g. 'label+text')
+            OR exactly one of ['none'] (e.g. 'none')
+
+        Returns
+        -------
+        Any
+        """
+        return self['textinfo']
+
+    @textinfo.setter
+    def textinfo(self, val):
+        self['textinfo'] = val
 
     # textposition
     # ------------
@@ -6493,8 +6946,9 @@ class Waterfall(_BaseTraceType):
         return """\
         alignmentgroup
             Set several traces linked to the same position axis or
-            matching axes to the same offsetgroup where bars of the
-            same position coordinate will line up.
+            matching axes to the same alignmentgroup. This controls
+            whether bars compute their positional range dependently
+            or independently.
         base
             Sets where the bar base is drawn (in position axis
             units).
@@ -6572,6 +7026,9 @@ class Waterfall(_BaseTraceType):
         increasing
             plotly.graph_objs.waterfall.Increasing instance or dict
             with compatible properties
+        insidetextanchor
+            Determines if texts are kept at center or start/end
+            points in `textposition` "inside" mode.
         insidetextfont
             Sets the font used for `text` lying inside the bar.
         legendgroup
@@ -6586,6 +7043,21 @@ class Waterfall(_BaseTraceType):
             or to declare an initial value where needed.
         measuresrc
             Sets the source reference on plot.ly for  measure .
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -6629,8 +7101,18 @@ class Waterfall(_BaseTraceType):
             If trace `hoverinfo` contains a "text" flag and
             "hovertext" is not set, these elements will be seen in
             the hover labels.
+        textangle
+            Sets the angle of the tick labels with respect to the
+            bar. For example, a `tickangle` of -90 draws the tick
+            labels vertically. With "auto" the texts may
+            automatically be rotated to fit with the maximum size
+            in bars.
         textfont
             Sets the font used for `text`.
+        textinfo
+            Determines which trace information appear on the graph.
+            In the case of having multiple waterfalls, totals are
+            computed separately (per trace).
         textposition
             Specifies the location of the `text`. "inside"
             positions `text` inside, next to the bar end (rotated
@@ -6730,10 +7212,13 @@ class Waterfall(_BaseTraceType):
         ids=None,
         idssrc=None,
         increasing=None,
+        insidetextanchor=None,
         insidetextfont=None,
         legendgroup=None,
         measure=None,
         measuresrc=None,
+        meta=None,
+        metasrc=None,
         name=None,
         offset=None,
         offsetgroup=None,
@@ -6745,7 +7230,9 @@ class Waterfall(_BaseTraceType):
         showlegend=None,
         stream=None,
         text=None,
+        textangle=None,
         textfont=None,
+        textinfo=None,
         textposition=None,
         textpositionsrc=None,
         textsrc=None,
@@ -6782,8 +7269,9 @@ class Waterfall(_BaseTraceType):
             an instance of plotly.graph_objs.Waterfall
         alignmentgroup
             Set several traces linked to the same position axis or
-            matching axes to the same offsetgroup where bars of the
-            same position coordinate will line up.
+            matching axes to the same alignmentgroup. This controls
+            whether bars compute their positional range dependently
+            or independently.
         base
             Sets where the bar base is drawn (in position axis
             units).
@@ -6861,6 +7349,9 @@ class Waterfall(_BaseTraceType):
         increasing
             plotly.graph_objs.waterfall.Increasing instance or dict
             with compatible properties
+        insidetextanchor
+            Determines if texts are kept at center or start/end
+            points in `textposition` "inside" mode.
         insidetextfont
             Sets the font used for `text` lying inside the bar.
         legendgroup
@@ -6875,6 +7366,21 @@ class Waterfall(_BaseTraceType):
             or to declare an initial value where needed.
         measuresrc
             Sets the source reference on plot.ly for  measure .
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -6918,8 +7424,18 @@ class Waterfall(_BaseTraceType):
             If trace `hoverinfo` contains a "text" flag and
             "hovertext" is not set, these elements will be seen in
             the hover labels.
+        textangle
+            Sets the angle of the tick labels with respect to the
+            bar. For example, a `tickangle` of -90 draws the tick
+            labels vertically. With "auto" the texts may
+            automatically be rotated to fit with the maximum size
+            in bars.
         textfont
             Sets the font used for `text`.
+        textinfo
+            Determines which trace information appear on the graph.
+            In the case of having multiple waterfalls, totals are
+            computed separately (per trace).
         textposition
             Specifies the location of the `text`. "inside"
             positions `text` inside, next to the bar end (rotated
@@ -7052,11 +7568,15 @@ an instance of plotly.graph_objs.Waterfall"""
         self._validators['ids'] = v_waterfall.IdsValidator()
         self._validators['idssrc'] = v_waterfall.IdssrcValidator()
         self._validators['increasing'] = v_waterfall.IncreasingValidator()
+        self._validators['insidetextanchor'
+                        ] = v_waterfall.InsidetextanchorValidator()
         self._validators['insidetextfont'
                         ] = v_waterfall.InsidetextfontValidator()
         self._validators['legendgroup'] = v_waterfall.LegendgroupValidator()
         self._validators['measure'] = v_waterfall.MeasureValidator()
         self._validators['measuresrc'] = v_waterfall.MeasuresrcValidator()
+        self._validators['meta'] = v_waterfall.MetaValidator()
+        self._validators['metasrc'] = v_waterfall.MetasrcValidator()
         self._validators['name'] = v_waterfall.NameValidator()
         self._validators['offset'] = v_waterfall.OffsetValidator()
         self._validators['offsetgroup'] = v_waterfall.OffsetgroupValidator()
@@ -7070,7 +7590,9 @@ an instance of plotly.graph_objs.Waterfall"""
         self._validators['showlegend'] = v_waterfall.ShowlegendValidator()
         self._validators['stream'] = v_waterfall.StreamValidator()
         self._validators['text'] = v_waterfall.TextValidator()
+        self._validators['textangle'] = v_waterfall.TextangleValidator()
         self._validators['textfont'] = v_waterfall.TextfontValidator()
+        self._validators['textinfo'] = v_waterfall.TextinfoValidator()
         self._validators['textposition'] = v_waterfall.TextpositionValidator()
         self._validators['textpositionsrc'
                         ] = v_waterfall.TextpositionsrcValidator()
@@ -7137,6 +7659,9 @@ an instance of plotly.graph_objs.Waterfall"""
         self['idssrc'] = idssrc if idssrc is not None else _v
         _v = arg.pop('increasing', None)
         self['increasing'] = increasing if increasing is not None else _v
+        _v = arg.pop('insidetextanchor', None)
+        self['insidetextanchor'
+            ] = insidetextanchor if insidetextanchor is not None else _v
         _v = arg.pop('insidetextfont', None)
         self['insidetextfont'
             ] = insidetextfont if insidetextfont is not None else _v
@@ -7146,6 +7671,10 @@ an instance of plotly.graph_objs.Waterfall"""
         self['measure'] = measure if measure is not None else _v
         _v = arg.pop('measuresrc', None)
         self['measuresrc'] = measuresrc if measuresrc is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('offset', None)
@@ -7170,8 +7699,12 @@ an instance of plotly.graph_objs.Waterfall"""
         self['stream'] = stream if stream is not None else _v
         _v = arg.pop('text', None)
         self['text'] = text if text is not None else _v
+        _v = arg.pop('textangle', None)
+        self['textangle'] = textangle if textangle is not None else _v
         _v = arg.pop('textfont', None)
         self['textfont'] = textfont if textfont is not None else _v
+        _v = arg.pop('textinfo', None)
+        self['textinfo'] = textinfo if textinfo is not None else _v
         _v = arg.pop('textposition', None)
         self['textposition'] = textposition if textposition is not None else _v
         _v = arg.pop('textpositionsrc', None)
@@ -7376,6 +7909,33 @@ class Volume(_BaseTraceType):
     @cmin.setter
     def cmin(self, val):
         self['cmin'] = val
+
+    # coloraxis
+    # ---------
+    @property
+    def coloraxis(self):
+        """
+        Sets a reference to a shared color axis. References to these
+        shared color axes are "coloraxis", "coloraxis2", "coloraxis3",
+        etc. Settings for these shared color axes are set in the
+        layout, under `layout.coloraxis`, `layout.coloraxis2`, etc.
+        Note that multiple color scales can be linked to the same color
+        axis.
+    
+        The 'coloraxis' property is an identifier of a particular
+        subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
+        optionally followed by an integer >= 1
+        (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self['coloraxis']
+
+    @coloraxis.setter
+    def coloraxis(self, val):
+        self['coloraxis'] = val
 
     # colorbar
     # --------
@@ -8108,6 +8668,54 @@ class Volume(_BaseTraceType):
     def lightposition(self, val):
         self['lightposition'] = val
 
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
+
     # name
     # ----
     @property
@@ -8728,6 +9336,13 @@ class Volume(_BaseTraceType):
             Sets the lower bound of the color domain. Value should
             have the same units as `value` and if set, `cmax` must
             be set as well.
+        coloraxis
+            Sets a reference to a shared color axis. References to
+            these shared color axes are "coloraxis", "coloraxis2",
+            "coloraxis3", etc. Settings for these shared color axes
+            are set in the layout, under `layout.coloraxis`,
+            `layout.coloraxis2`, etc. Note that multiple color
+            scales can be linked to the same color axis.
         colorbar
             plotly.graph_objs.volume.ColorBar instance or dict with
             compatible properties
@@ -8808,6 +9423,21 @@ class Volume(_BaseTraceType):
         lightposition
             plotly.graph_objs.volume.Lightposition instance or dict
             with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -8916,6 +9546,7 @@ class Volume(_BaseTraceType):
         cmax=None,
         cmid=None,
         cmin=None,
+        coloraxis=None,
         colorbar=None,
         colorscale=None,
         contour=None,
@@ -8935,6 +9566,8 @@ class Volume(_BaseTraceType):
         isomin=None,
         lighting=None,
         lightposition=None,
+        meta=None,
+        metasrc=None,
         name=None,
         opacity=None,
         opacityscale=None,
@@ -9003,6 +9636,13 @@ class Volume(_BaseTraceType):
             Sets the lower bound of the color domain. Value should
             have the same units as `value` and if set, `cmax` must
             be set as well.
+        coloraxis
+            Sets a reference to a shared color axis. References to
+            these shared color axes are "coloraxis", "coloraxis2",
+            "coloraxis3", etc. Settings for these shared color axes
+            are set in the layout, under `layout.coloraxis`,
+            `layout.coloraxis2`, etc. Note that multiple color
+            scales can be linked to the same color axis.
         colorbar
             plotly.graph_objs.volume.ColorBar instance or dict with
             compatible properties
@@ -9083,6 +9723,21 @@ class Volume(_BaseTraceType):
         lightposition
             plotly.graph_objs.volume.Lightposition instance or dict
             with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -9219,6 +9874,7 @@ an instance of plotly.graph_objs.Volume"""
         self._validators['cmax'] = v_volume.CmaxValidator()
         self._validators['cmid'] = v_volume.CmidValidator()
         self._validators['cmin'] = v_volume.CminValidator()
+        self._validators['coloraxis'] = v_volume.ColoraxisValidator()
         self._validators['colorbar'] = v_volume.ColorBarValidator()
         self._validators['colorscale'] = v_volume.ColorscaleValidator()
         self._validators['contour'] = v_volume.ContourValidator()
@@ -9239,6 +9895,8 @@ an instance of plotly.graph_objs.Volume"""
         self._validators['isomin'] = v_volume.IsominValidator()
         self._validators['lighting'] = v_volume.LightingValidator()
         self._validators['lightposition'] = v_volume.LightpositionValidator()
+        self._validators['meta'] = v_volume.MetaValidator()
+        self._validators['metasrc'] = v_volume.MetasrcValidator()
         self._validators['name'] = v_volume.NameValidator()
         self._validators['opacity'] = v_volume.OpacityValidator()
         self._validators['opacityscale'] = v_volume.OpacityscaleValidator()
@@ -9278,6 +9936,8 @@ an instance of plotly.graph_objs.Volume"""
         self['cmid'] = cmid if cmid is not None else _v
         _v = arg.pop('cmin', None)
         self['cmin'] = cmin if cmin is not None else _v
+        _v = arg.pop('coloraxis', None)
+        self['coloraxis'] = coloraxis if coloraxis is not None else _v
         _v = arg.pop('colorbar', None)
         self['colorbar'] = colorbar if colorbar is not None else _v
         _v = arg.pop('colorscale', None)
@@ -9320,6 +9980,10 @@ an instance of plotly.graph_objs.Volume"""
         _v = arg.pop('lightposition', None)
         self['lightposition'
             ] = lightposition if lightposition is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('opacity', None)
@@ -10001,6 +10665,54 @@ class Violin(_BaseTraceType):
     @meanline.setter
     def meanline(self, val):
         self['meanline'] = val
+
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
 
     # name
     # ----
@@ -10821,6 +11533,21 @@ class Violin(_BaseTraceType):
         meanline
             plotly.graph_objs.violin.Meanline instance or dict with
             compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover. For violin traces, the name
@@ -10998,6 +11725,8 @@ class Violin(_BaseTraceType):
         line=None,
         marker=None,
         meanline=None,
+        meta=None,
+        metasrc=None,
         name=None,
         offsetgroup=None,
         opacity=None,
@@ -11131,6 +11860,21 @@ class Violin(_BaseTraceType):
         meanline
             plotly.graph_objs.violin.Meanline instance or dict with
             compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover. For violin traces, the name
@@ -11337,6 +12081,8 @@ an instance of plotly.graph_objs.Violin"""
         self._validators['line'] = v_violin.LineValidator()
         self._validators['marker'] = v_violin.MarkerValidator()
         self._validators['meanline'] = v_violin.MeanlineValidator()
+        self._validators['meta'] = v_violin.MetaValidator()
+        self._validators['metasrc'] = v_violin.MetasrcValidator()
         self._validators['name'] = v_violin.NameValidator()
         self._validators['offsetgroup'] = v_violin.OffsetgroupValidator()
         self._validators['opacity'] = v_violin.OpacityValidator()
@@ -11416,6 +12162,10 @@ an instance of plotly.graph_objs.Violin"""
         self['marker'] = marker if marker is not None else _v
         _v = arg.pop('meanline', None)
         self['meanline'] = meanline if meanline is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('offsetgroup', None)
@@ -11959,6 +12709,54 @@ class Table(_BaseTraceType):
     def idssrc(self, val):
         self['idssrc'] = val
 
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
+
     # name
     # ----
     @property
@@ -12154,6 +12952,21 @@ class Table(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -12206,6 +13019,8 @@ class Table(_BaseTraceType):
         hoverlabel=None,
         ids=None,
         idssrc=None,
+        meta=None,
+        metasrc=None,
         name=None,
         stream=None,
         uid=None,
@@ -12272,6 +13087,21 @@ class Table(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -12352,6 +13182,8 @@ an instance of plotly.graph_objs.Table"""
         self._validators['hoverlabel'] = v_table.HoverlabelValidator()
         self._validators['ids'] = v_table.IdsValidator()
         self._validators['idssrc'] = v_table.IdssrcValidator()
+        self._validators['meta'] = v_table.MetaValidator()
+        self._validators['metasrc'] = v_table.MetasrcValidator()
         self._validators['name'] = v_table.NameValidator()
         self._validators['stream'] = v_table.StreamValidator()
         self._validators['uid'] = v_table.UidValidator()
@@ -12391,6 +13223,10 @@ an instance of plotly.graph_objs.Table"""
         self['ids'] = ids if ids is not None else _v
         _v = arg.pop('idssrc', None)
         self['idssrc'] = idssrc if idssrc is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('stream', None)
@@ -12540,6 +13376,33 @@ class Surface(_BaseTraceType):
     @cmin.setter
     def cmin(self, val):
         self['cmin'] = val
+
+    # coloraxis
+    # ---------
+    @property
+    def coloraxis(self):
+        """
+        Sets a reference to a shared color axis. References to these
+        shared color axes are "coloraxis", "coloraxis2", "coloraxis3",
+        etc. Settings for these shared color axes are set in the
+        layout, under `layout.coloraxis`, `layout.coloraxis2`, etc.
+        Note that multiple color scales can be linked to the same color
+        axis.
+    
+        The 'coloraxis' property is an identifier of a particular
+        subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
+        optionally followed by an integer >= 1
+        (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self['coloraxis']
+
+    @coloraxis.setter
+    def coloraxis(self, val):
+        self['coloraxis'] = val
 
     # colorbar
     # --------
@@ -13249,6 +14112,54 @@ class Surface(_BaseTraceType):
     def lightposition(self, val):
         self['lightposition'] = val
 
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
+
     # name
     # ----
     @property
@@ -13794,6 +14705,13 @@ class Surface(_BaseTraceType):
             Sets the lower bound of the color domain. Value should
             have the same units as z or surfacecolor and if set,
             `cmax` must be set as well.
+        coloraxis
+            Sets a reference to a shared color axis. References to
+            these shared color axes are "coloraxis", "coloraxis2",
+            "coloraxis3", etc. Settings for these shared color axes
+            are set in the layout, under `layout.coloraxis`,
+            `layout.coloraxis2`, etc. Note that multiple color
+            scales can be linked to the same color axis.
         colorbar
             plotly.graph_objs.surface.ColorBar instance or dict
             with compatible properties
@@ -13874,6 +14792,21 @@ class Surface(_BaseTraceType):
         lightposition
             plotly.graph_objs.surface.Lightposition instance or
             dict with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -13969,6 +14902,7 @@ class Surface(_BaseTraceType):
         cmax=None,
         cmid=None,
         cmin=None,
+        coloraxis=None,
         colorbar=None,
         colorscale=None,
         connectgaps=None,
@@ -13987,6 +14921,8 @@ class Surface(_BaseTraceType):
         idssrc=None,
         lighting=None,
         lightposition=None,
+        meta=None,
+        metasrc=None,
         name=None,
         opacity=None,
         reversescale=None,
@@ -14054,6 +14990,13 @@ class Surface(_BaseTraceType):
             Sets the lower bound of the color domain. Value should
             have the same units as z or surfacecolor and if set,
             `cmax` must be set as well.
+        coloraxis
+            Sets a reference to a shared color axis. References to
+            these shared color axes are "coloraxis", "coloraxis2",
+            "coloraxis3", etc. Settings for these shared color axes
+            are set in the layout, under `layout.coloraxis`,
+            `layout.coloraxis2`, etc. Note that multiple color
+            scales can be linked to the same color axis.
         colorbar
             plotly.graph_objs.surface.ColorBar instance or dict
             with compatible properties
@@ -14134,6 +15077,21 @@ class Surface(_BaseTraceType):
         lightposition
             plotly.graph_objs.surface.Lightposition instance or
             dict with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -14258,6 +15216,7 @@ an instance of plotly.graph_objs.Surface"""
         self._validators['cmax'] = v_surface.CmaxValidator()
         self._validators['cmid'] = v_surface.CmidValidator()
         self._validators['cmin'] = v_surface.CminValidator()
+        self._validators['coloraxis'] = v_surface.ColoraxisValidator()
         self._validators['colorbar'] = v_surface.ColorBarValidator()
         self._validators['colorscale'] = v_surface.ColorscaleValidator()
         self._validators['connectgaps'] = v_surface.ConnectgapsValidator()
@@ -14277,6 +15236,8 @@ an instance of plotly.graph_objs.Surface"""
         self._validators['idssrc'] = v_surface.IdssrcValidator()
         self._validators['lighting'] = v_surface.LightingValidator()
         self._validators['lightposition'] = v_surface.LightpositionValidator()
+        self._validators['meta'] = v_surface.MetaValidator()
+        self._validators['metasrc'] = v_surface.MetasrcValidator()
         self._validators['name'] = v_surface.NameValidator()
         self._validators['opacity'] = v_surface.OpacityValidator()
         self._validators['reversescale'] = v_surface.ReversescaleValidator()
@@ -14314,6 +15275,8 @@ an instance of plotly.graph_objs.Surface"""
         self['cmid'] = cmid if cmid is not None else _v
         _v = arg.pop('cmin', None)
         self['cmin'] = cmin if cmin is not None else _v
+        _v = arg.pop('coloraxis', None)
+        self['coloraxis'] = coloraxis if coloraxis is not None else _v
         _v = arg.pop('colorbar', None)
         self['colorbar'] = colorbar if colorbar is not None else _v
         _v = arg.pop('colorscale', None)
@@ -14354,6 +15317,10 @@ an instance of plotly.graph_objs.Surface"""
         _v = arg.pop('lightposition', None)
         self['lightposition'
             ] = lightposition if lightposition is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('opacity', None)
@@ -14784,7 +15751,7 @@ class Sunburst(_BaseTraceType):
     @property
     def insidetextfont(self):
         """
-        Sets the font used for `textinfo` lying inside the pie.
+        Sets the font used for `textinfo` lying inside the sector.
     
         The 'insidetextfont' property is an instance of Insidetextfont
         that may be specified as:
@@ -14979,6 +15946,54 @@ class Sunburst(_BaseTraceType):
     def maxdepth(self, val):
         self['maxdepth'] = val
 
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
+
     # name
     # ----
     @property
@@ -15026,7 +16041,7 @@ class Sunburst(_BaseTraceType):
     @property
     def outsidetextfont(self):
         """
-        Sets the font used for `textinfo` lying outside the pie.
+        Sets the font used for `textinfo` lying outside the sector.
     
         The 'outsidetextfont' property is an instance of Outsidetextfont
         that may be specified as:
@@ -15475,7 +16490,8 @@ class Sunburst(_BaseTraceType):
         idssrc
             Sets the source reference on plot.ly for  ids .
         insidetextfont
-            Sets the font used for `textinfo` lying inside the pie.
+            Sets the font used for `textinfo` lying inside the
+            sector.
         labels
             Sets the labels of each of the sunburst sectors.
         labelssrc
@@ -15496,6 +16512,21 @@ class Sunburst(_BaseTraceType):
             Sets the number of rendered sunburst rings from any
             given `level`. Set `maxdepth` to "-1" to render all the
             levels in the hierarchy.
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -15503,7 +16534,7 @@ class Sunburst(_BaseTraceType):
             Sets the opacity of the trace.
         outsidetextfont
             Sets the font used for `textinfo` lying outside the
-            pie.
+            sector.
         parents
             Sets the parent sectors for each of the sunburst
             sectors. Empty string items '' are understood to
@@ -15587,6 +16618,8 @@ class Sunburst(_BaseTraceType):
         level=None,
         marker=None,
         maxdepth=None,
+        meta=None,
+        metasrc=None,
         name=None,
         opacity=None,
         outsidetextfont=None,
@@ -15679,7 +16712,8 @@ class Sunburst(_BaseTraceType):
         idssrc
             Sets the source reference on plot.ly for  ids .
         insidetextfont
-            Sets the font used for `textinfo` lying inside the pie.
+            Sets the font used for `textinfo` lying inside the
+            sector.
         labels
             Sets the labels of each of the sunburst sectors.
         labelssrc
@@ -15700,6 +16734,21 @@ class Sunburst(_BaseTraceType):
             Sets the number of rendered sunburst rings from any
             given `level`. Set `maxdepth` to "-1" to render all the
             levels in the hierarchy.
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -15707,7 +16756,7 @@ class Sunburst(_BaseTraceType):
             Sets the opacity of the trace.
         outsidetextfont
             Sets the font used for `textinfo` lying outside the
-            pie.
+            sector.
         parents
             Sets the parent sectors for each of the sunburst
             sectors. Empty string items '' are understood to
@@ -15821,6 +16870,8 @@ an instance of plotly.graph_objs.Sunburst"""
         self._validators['level'] = v_sunburst.LevelValidator()
         self._validators['marker'] = v_sunburst.MarkerValidator()
         self._validators['maxdepth'] = v_sunburst.MaxdepthValidator()
+        self._validators['meta'] = v_sunburst.MetaValidator()
+        self._validators['metasrc'] = v_sunburst.MetasrcValidator()
         self._validators['name'] = v_sunburst.NameValidator()
         self._validators['opacity'] = v_sunburst.OpacityValidator()
         self._validators['outsidetextfont'
@@ -15884,6 +16935,10 @@ an instance of plotly.graph_objs.Sunburst"""
         self['marker'] = marker if marker is not None else _v
         _v = arg.pop('maxdepth', None)
         self['maxdepth'] = maxdepth if maxdepth is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('opacity', None)
@@ -16054,6 +17109,33 @@ class Streamtube(_BaseTraceType):
     @cmin.setter
     def cmin(self, val):
         self['cmin'] = val
+
+    # coloraxis
+    # ---------
+    @property
+    def coloraxis(self):
+        """
+        Sets a reference to a shared color axis. References to these
+        shared color axes are "coloraxis", "coloraxis2", "coloraxis3",
+        etc. Settings for these shared color axes are set in the
+        layout, under `layout.coloraxis`, `layout.coloraxis2`, etc.
+        Note that multiple color scales can be linked to the same color
+        axis.
+    
+        The 'coloraxis' property is an identifier of a particular
+        subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
+        optionally followed by an integer >= 1
+        (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self['coloraxis']
+
+    @coloraxis.setter
+    def coloraxis(self, val):
+        self['coloraxis'] = val
 
     # colorbar
     # --------
@@ -16695,6 +17777,54 @@ class Streamtube(_BaseTraceType):
     def maxdisplayed(self, val):
         self['maxdisplayed'] = val
 
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
+
     # name
     # ----
     @property
@@ -17288,6 +18418,13 @@ class Streamtube(_BaseTraceType):
             Sets the lower bound of the color domain. Value should
             have the same units as u/v/w norm and if set, `cmax`
             must be set as well.
+        coloraxis
+            Sets a reference to a shared color axis. References to
+            these shared color axes are "coloraxis", "coloraxis2",
+            "coloraxis3", etc. Settings for these shared color axes
+            are set in the layout, under `layout.coloraxis`,
+            `layout.coloraxis2`, etc. Note that multiple color
+            scales can be linked to the same color axis.
         colorbar
             plotly.graph_objs.streamtube.ColorBar instance or dict
             with compatible properties
@@ -17360,6 +18497,21 @@ class Streamtube(_BaseTraceType):
         maxdisplayed
             The maximum number of displayed segments in a
             streamtube.
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -17460,6 +18612,7 @@ class Streamtube(_BaseTraceType):
         cmax=None,
         cmid=None,
         cmin=None,
+        coloraxis=None,
         colorbar=None,
         colorscale=None,
         customdata=None,
@@ -17475,6 +18628,8 @@ class Streamtube(_BaseTraceType):
         lighting=None,
         lightposition=None,
         maxdisplayed=None,
+        meta=None,
+        metasrc=None,
         name=None,
         opacity=None,
         reversescale=None,
@@ -17542,6 +18697,13 @@ class Streamtube(_BaseTraceType):
             Sets the lower bound of the color domain. Value should
             have the same units as u/v/w norm and if set, `cmax`
             must be set as well.
+        coloraxis
+            Sets a reference to a shared color axis. References to
+            these shared color axes are "coloraxis", "coloraxis2",
+            "coloraxis3", etc. Settings for these shared color axes
+            are set in the layout, under `layout.coloraxis`,
+            `layout.coloraxis2`, etc. Note that multiple color
+            scales can be linked to the same color axis.
         colorbar
             plotly.graph_objs.streamtube.ColorBar instance or dict
             with compatible properties
@@ -17614,6 +18776,21 @@ class Streamtube(_BaseTraceType):
         maxdisplayed
             The maximum number of displayed segments in a
             streamtube.
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -17743,6 +18920,7 @@ an instance of plotly.graph_objs.Streamtube"""
         self._validators['cmax'] = v_streamtube.CmaxValidator()
         self._validators['cmid'] = v_streamtube.CmidValidator()
         self._validators['cmin'] = v_streamtube.CminValidator()
+        self._validators['coloraxis'] = v_streamtube.ColoraxisValidator()
         self._validators['colorbar'] = v_streamtube.ColorBarValidator()
         self._validators['colorscale'] = v_streamtube.ColorscaleValidator()
         self._validators['customdata'] = v_streamtube.CustomdataValidator()
@@ -17762,6 +18940,8 @@ an instance of plotly.graph_objs.Streamtube"""
         self._validators['lightposition'
                         ] = v_streamtube.LightpositionValidator()
         self._validators['maxdisplayed'] = v_streamtube.MaxdisplayedValidator()
+        self._validators['meta'] = v_streamtube.MetaValidator()
+        self._validators['metasrc'] = v_streamtube.MetasrcValidator()
         self._validators['name'] = v_streamtube.NameValidator()
         self._validators['opacity'] = v_streamtube.OpacityValidator()
         self._validators['reversescale'] = v_streamtube.ReversescaleValidator()
@@ -17800,6 +18980,8 @@ an instance of plotly.graph_objs.Streamtube"""
         self['cmid'] = cmid if cmid is not None else _v
         _v = arg.pop('cmin', None)
         self['cmin'] = cmin if cmin is not None else _v
+        _v = arg.pop('coloraxis', None)
+        self['coloraxis'] = coloraxis if coloraxis is not None else _v
         _v = arg.pop('colorbar', None)
         self['colorbar'] = colorbar if colorbar is not None else _v
         _v = arg.pop('colorscale', None)
@@ -17834,6 +19016,10 @@ an instance of plotly.graph_objs.Streamtube"""
             ] = lightposition if lightposition is not None else _v
         _v = arg.pop('maxdisplayed', None)
         self['maxdisplayed'] = maxdisplayed if maxdisplayed is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('opacity', None)
@@ -18390,6 +19576,15 @@ class Splom(_BaseTraceType):
                     mapped to the colorscale relative to the max
                     and min values of the array or relative to
                     `marker.cmin` and `marker.cmax` if set.
+                coloraxis
+                    Sets a reference to a shared color axis.
+                    References to these shared color axes are
+                    "coloraxis", "coloraxis2", "coloraxis3", etc.
+                    Settings for these shared color axes are set in
+                    the layout, under `layout.coloraxis`,
+                    `layout.coloraxis2`, etc. Note that multiple
+                    color scales can be linked to the same color
+                    axis.
                 colorbar
                     plotly.graph_objs.splom.marker.ColorBar
                     instance or dict with compatible properties
@@ -18469,6 +19664,54 @@ class Splom(_BaseTraceType):
     @marker.setter
     def marker(self, val):
         self['marker'] = val
+
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
 
     # name
     # ----
@@ -18950,6 +20193,21 @@ class Splom(_BaseTraceType):
         marker
             plotly.graph_objs.splom.Marker instance or dict with
             compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -19052,6 +20310,8 @@ class Splom(_BaseTraceType):
         idssrc=None,
         legendgroup=None,
         marker=None,
+        meta=None,
+        metasrc=None,
         name=None,
         opacity=None,
         selected=None,
@@ -19152,6 +20412,21 @@ class Splom(_BaseTraceType):
         marker
             plotly.graph_objs.splom.Marker instance or dict with
             compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -19283,6 +20558,8 @@ an instance of plotly.graph_objs.Splom"""
         self._validators['idssrc'] = v_splom.IdssrcValidator()
         self._validators['legendgroup'] = v_splom.LegendgroupValidator()
         self._validators['marker'] = v_splom.MarkerValidator()
+        self._validators['meta'] = v_splom.MetaValidator()
+        self._validators['metasrc'] = v_splom.MetasrcValidator()
         self._validators['name'] = v_splom.NameValidator()
         self._validators['opacity'] = v_splom.OpacityValidator()
         self._validators['selected'] = v_splom.SelectedValidator()
@@ -19338,6 +20615,10 @@ an instance of plotly.graph_objs.Splom"""
         self['legendgroup'] = legendgroup if legendgroup is not None else _v
         _v = arg.pop('marker', None)
         self['marker'] = marker if marker is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('opacity', None)
@@ -20101,6 +21382,15 @@ class Scatterternary(_BaseTraceType):
                     mapped to the colorscale relative to the max
                     and min values of the array or relative to
                     `marker.cmin` and `marker.cmax` if set.
+                coloraxis
+                    Sets a reference to a shared color axis.
+                    References to these shared color axes are
+                    "coloraxis", "coloraxis2", "coloraxis3", etc.
+                    Settings for these shared color axes are set in
+                    the layout, under `layout.coloraxis`,
+                    `layout.coloraxis2`, etc. Note that multiple
+                    color scales can be linked to the same color
+                    axis.
                 colorbar
                     plotly.graph_objs.scatterternary.marker.ColorBa
                     r instance or dict with compatible properties
@@ -20186,6 +21476,54 @@ class Scatterternary(_BaseTraceType):
     @marker.setter
     def marker(self, val):
         self['marker'] = val
+
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
 
     # mode
     # ----
@@ -20804,6 +22142,21 @@ class Scatterternary(_BaseTraceType):
         marker
             plotly.graph_objs.scatterternary.Marker instance or
             dict with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -20922,6 +22275,8 @@ class Scatterternary(_BaseTraceType):
         legendgroup=None,
         line=None,
         marker=None,
+        meta=None,
+        metasrc=None,
         mode=None,
         name=None,
         opacity=None,
@@ -21071,6 +22426,21 @@ class Scatterternary(_BaseTraceType):
         marker
             plotly.graph_objs.scatterternary.Marker instance or
             dict with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -21224,6 +22594,8 @@ an instance of plotly.graph_objs.Scatterternary"""
                         ] = v_scatterternary.LegendgroupValidator()
         self._validators['line'] = v_scatterternary.LineValidator()
         self._validators['marker'] = v_scatterternary.MarkerValidator()
+        self._validators['meta'] = v_scatterternary.MetaValidator()
+        self._validators['metasrc'] = v_scatterternary.MetasrcValidator()
         self._validators['mode'] = v_scatterternary.ModeValidator()
         self._validators['name'] = v_scatterternary.NameValidator()
         self._validators['opacity'] = v_scatterternary.OpacityValidator()
@@ -21301,6 +22673,10 @@ an instance of plotly.graph_objs.Scatterternary"""
         self['line'] = line if line is not None else _v
         _v = arg.pop('marker', None)
         self['marker'] = marker if marker is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('mode', None)
         self['mode'] = mode if mode is not None else _v
         _v = arg.pop('name', None)
@@ -21935,6 +23311,15 @@ class Scatterpolargl(_BaseTraceType):
                     mapped to the colorscale relative to the max
                     and min values of the array or relative to
                     `marker.cmin` and `marker.cmax` if set.
+                coloraxis
+                    Sets a reference to a shared color axis.
+                    References to these shared color axes are
+                    "coloraxis", "coloraxis2", "coloraxis3", etc.
+                    Settings for these shared color axes are set in
+                    the layout, under `layout.coloraxis`,
+                    `layout.coloraxis2`, etc. Note that multiple
+                    color scales can be linked to the same color
+                    axis.
                 colorbar
                     plotly.graph_objs.scatterpolargl.marker.ColorBa
                     r instance or dict with compatible properties
@@ -22014,6 +23399,54 @@ class Scatterpolargl(_BaseTraceType):
     @marker.setter
     def marker(self, val):
         self['marker'] = val
+
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
 
     # mode
     # ----
@@ -22734,6 +24167,21 @@ class Scatterpolargl(_BaseTraceType):
         marker
             plotly.graph_objs.scatterpolargl.Marker instance or
             dict with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -22858,6 +24306,8 @@ class Scatterpolargl(_BaseTraceType):
         legendgroup=None,
         line=None,
         marker=None,
+        meta=None,
+        metasrc=None,
         mode=None,
         name=None,
         opacity=None,
@@ -22998,6 +24448,21 @@ class Scatterpolargl(_BaseTraceType):
         marker
             plotly.graph_objs.scatterpolargl.Marker instance or
             dict with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -23157,6 +24622,8 @@ an instance of plotly.graph_objs.Scatterpolargl"""
                         ] = v_scatterpolargl.LegendgroupValidator()
         self._validators['line'] = v_scatterpolargl.LineValidator()
         self._validators['marker'] = v_scatterpolargl.MarkerValidator()
+        self._validators['meta'] = v_scatterpolargl.MetaValidator()
+        self._validators['metasrc'] = v_scatterpolargl.MetasrcValidator()
         self._validators['mode'] = v_scatterpolargl.ModeValidator()
         self._validators['name'] = v_scatterpolargl.NameValidator()
         self._validators['opacity'] = v_scatterpolargl.OpacityValidator()
@@ -23228,6 +24695,10 @@ an instance of plotly.graph_objs.Scatterpolargl"""
         self['line'] = line if line is not None else _v
         _v = arg.pop('marker', None)
         self['marker'] = marker if marker is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('mode', None)
         self['mode'] = mode if mode is not None else _v
         _v = arg.pop('name', None)
@@ -23921,6 +25392,15 @@ class Scatterpolar(_BaseTraceType):
                     mapped to the colorscale relative to the max
                     and min values of the array or relative to
                     `marker.cmin` and `marker.cmax` if set.
+                coloraxis
+                    Sets a reference to a shared color axis.
+                    References to these shared color axes are
+                    "coloraxis", "coloraxis2", "coloraxis3", etc.
+                    Settings for these shared color axes are set in
+                    the layout, under `layout.coloraxis`,
+                    `layout.coloraxis2`, etc. Note that multiple
+                    color scales can be linked to the same color
+                    axis.
                 colorbar
                     plotly.graph_objs.scatterpolar.marker.ColorBar
                     instance or dict with compatible properties
@@ -24006,6 +25486,54 @@ class Scatterpolar(_BaseTraceType):
     @marker.setter
     def marker(self, val):
         self['marker'] = val
+
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
 
     # mode
     # ----
@@ -24725,6 +26253,21 @@ class Scatterpolar(_BaseTraceType):
         marker
             plotly.graph_objs.scatterpolar.Marker instance or dict
             with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -24851,6 +26394,8 @@ class Scatterpolar(_BaseTraceType):
         legendgroup=None,
         line=None,
         marker=None,
+        meta=None,
+        metasrc=None,
         mode=None,
         name=None,
         opacity=None,
@@ -24992,6 +26537,21 @@ class Scatterpolar(_BaseTraceType):
         marker
             plotly.graph_objs.scatterpolar.Marker instance or dict
             with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -25151,6 +26711,8 @@ an instance of plotly.graph_objs.Scatterpolar"""
         self._validators['legendgroup'] = v_scatterpolar.LegendgroupValidator()
         self._validators['line'] = v_scatterpolar.LineValidator()
         self._validators['marker'] = v_scatterpolar.MarkerValidator()
+        self._validators['meta'] = v_scatterpolar.MetaValidator()
+        self._validators['metasrc'] = v_scatterpolar.MetasrcValidator()
         self._validators['mode'] = v_scatterpolar.ModeValidator()
         self._validators['name'] = v_scatterpolar.NameValidator()
         self._validators['opacity'] = v_scatterpolar.OpacityValidator()
@@ -25226,6 +26788,10 @@ an instance of plotly.graph_objs.Scatterpolar"""
         self['line'] = line if line is not None else _v
         _v = arg.pop('marker', None)
         self['marker'] = marker if marker is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('mode', None)
         self['mode'] = mode if mode is not None else _v
         _v = arg.pop('name', None)
@@ -25886,6 +27452,15 @@ class Scattermapbox(_BaseTraceType):
                     mapped to the colorscale relative to the max
                     and min values of the array or relative to
                     `marker.cmin` and `marker.cmax` if set.
+                coloraxis
+                    Sets a reference to a shared color axis.
+                    References to these shared color axes are
+                    "coloraxis", "coloraxis2", "coloraxis3", etc.
+                    Settings for these shared color axes are set in
+                    the layout, under `layout.coloraxis`,
+                    `layout.coloraxis2`, etc. Note that multiple
+                    color scales can be linked to the same color
+                    axis.
                 colorbar
                     plotly.graph_objs.scattermapbox.marker.ColorBar
                     instance or dict with compatible properties
@@ -25960,6 +27535,54 @@ class Scattermapbox(_BaseTraceType):
     @marker.setter
     def marker(self, val):
         self['marker'] = val
+
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
 
     # mode
     # ----
@@ -26482,6 +28105,21 @@ class Scattermapbox(_BaseTraceType):
         marker
             plotly.graph_objs.scattermapbox.Marker instance or dict
             with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -26586,6 +28224,8 @@ class Scattermapbox(_BaseTraceType):
         lon=None,
         lonsrc=None,
         marker=None,
+        meta=None,
+        metasrc=None,
         mode=None,
         name=None,
         opacity=None,
@@ -26699,6 +28339,21 @@ class Scattermapbox(_BaseTraceType):
         marker
             plotly.graph_objs.scattermapbox.Marker instance or dict
             with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -26838,6 +28493,8 @@ an instance of plotly.graph_objs.Scattermapbox"""
         self._validators['lon'] = v_scattermapbox.LonValidator()
         self._validators['lonsrc'] = v_scattermapbox.LonsrcValidator()
         self._validators['marker'] = v_scattermapbox.MarkerValidator()
+        self._validators['meta'] = v_scattermapbox.MetaValidator()
+        self._validators['metasrc'] = v_scattermapbox.MetasrcValidator()
         self._validators['mode'] = v_scattermapbox.ModeValidator()
         self._validators['name'] = v_scattermapbox.NameValidator()
         self._validators['opacity'] = v_scattermapbox.OpacityValidator()
@@ -26904,6 +28561,10 @@ an instance of plotly.graph_objs.Scattermapbox"""
         self['lonsrc'] = lonsrc if lonsrc is not None else _v
         _v = arg.pop('marker', None)
         self['marker'] = marker if marker is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('mode', None)
         self['mode'] = mode if mode is not None else _v
         _v = arg.pop('name', None)
@@ -27691,6 +29352,15 @@ class Scattergl(_BaseTraceType):
                     mapped to the colorscale relative to the max
                     and min values of the array or relative to
                     `marker.cmin` and `marker.cmax` if set.
+                coloraxis
+                    Sets a reference to a shared color axis.
+                    References to these shared color axes are
+                    "coloraxis", "coloraxis2", "coloraxis3", etc.
+                    Settings for these shared color axes are set in
+                    the layout, under `layout.coloraxis`,
+                    `layout.coloraxis2`, etc. Note that multiple
+                    color scales can be linked to the same color
+                    axis.
                 colorbar
                     plotly.graph_objs.scattergl.marker.ColorBar
                     instance or dict with compatible properties
@@ -27770,6 +29440,54 @@ class Scattergl(_BaseTraceType):
     @marker.setter
     def marker(self, val):
         self['marker'] = val
+
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
 
     # mode
     # ----
@@ -28539,6 +30257,21 @@ class Scattergl(_BaseTraceType):
         marker
             plotly.graph_objs.scattergl.Marker instance or dict
             with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         mode
             Determines the drawing mode for this scatter trace.
         name
@@ -28666,6 +30399,8 @@ class Scattergl(_BaseTraceType):
         legendgroup=None,
         line=None,
         marker=None,
+        meta=None,
+        metasrc=None,
         mode=None,
         name=None,
         opacity=None,
@@ -28810,6 +30545,21 @@ class Scattergl(_BaseTraceType):
         marker
             plotly.graph_objs.scattergl.Marker instance or dict
             with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         mode
             Determines the drawing mode for this scatter trace.
         name
@@ -28968,6 +30718,8 @@ an instance of plotly.graph_objs.Scattergl"""
         self._validators['legendgroup'] = v_scattergl.LegendgroupValidator()
         self._validators['line'] = v_scattergl.LineValidator()
         self._validators['marker'] = v_scattergl.MarkerValidator()
+        self._validators['meta'] = v_scattergl.MetaValidator()
+        self._validators['metasrc'] = v_scattergl.MetasrcValidator()
         self._validators['mode'] = v_scattergl.ModeValidator()
         self._validators['name'] = v_scattergl.NameValidator()
         self._validators['opacity'] = v_scattergl.OpacityValidator()
@@ -29044,6 +30796,10 @@ an instance of plotly.graph_objs.Scattergl"""
         self['line'] = line if line is not None else _v
         _v = arg.pop('marker', None)
         self['marker'] = marker if marker is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('mode', None)
         self['mode'] = mode if mode is not None else _v
         _v = arg.pop('name', None)
@@ -29803,6 +31559,15 @@ class Scattergeo(_BaseTraceType):
                     mapped to the colorscale relative to the max
                     and min values of the array or relative to
                     `marker.cmin` and `marker.cmax` if set.
+                coloraxis
+                    Sets a reference to a shared color axis.
+                    References to these shared color axes are
+                    "coloraxis", "coloraxis2", "coloraxis3", etc.
+                    Settings for these shared color axes are set in
+                    the layout, under `layout.coloraxis`,
+                    `layout.coloraxis2`, etc. Note that multiple
+                    color scales can be linked to the same color
+                    axis.
                 colorbar
                     plotly.graph_objs.scattergeo.marker.ColorBar
                     instance or dict with compatible properties
@@ -29885,6 +31650,54 @@ class Scattergeo(_BaseTraceType):
     @marker.setter
     def marker(self, val):
         self['marker'] = val
+
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
 
     # mode
     # ----
@@ -30435,6 +32248,21 @@ class Scattergeo(_BaseTraceType):
         marker
             plotly.graph_objs.scattergeo.Marker instance or dict
             with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -30542,6 +32370,8 @@ class Scattergeo(_BaseTraceType):
         lon=None,
         lonsrc=None,
         marker=None,
+        meta=None,
+        metasrc=None,
         mode=None,
         name=None,
         opacity=None,
@@ -30671,6 +32501,21 @@ class Scattergeo(_BaseTraceType):
         marker
             plotly.graph_objs.scattergeo.Marker instance or dict
             with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -30809,6 +32654,8 @@ an instance of plotly.graph_objs.Scattergeo"""
         self._validators['lon'] = v_scattergeo.LonValidator()
         self._validators['lonsrc'] = v_scattergeo.LonsrcValidator()
         self._validators['marker'] = v_scattergeo.MarkerValidator()
+        self._validators['meta'] = v_scattergeo.MetaValidator()
+        self._validators['metasrc'] = v_scattergeo.MetasrcValidator()
         self._validators['mode'] = v_scattergeo.ModeValidator()
         self._validators['name'] = v_scattergeo.NameValidator()
         self._validators['opacity'] = v_scattergeo.OpacityValidator()
@@ -30883,6 +32730,10 @@ an instance of plotly.graph_objs.Scattergeo"""
         self['lonsrc'] = lonsrc if lonsrc is not None else _v
         _v = arg.pop('marker', None)
         self['marker'] = marker if marker is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('mode', None)
         self['mode'] = mode if mode is not None else _v
         _v = arg.pop('name', None)
@@ -31596,6 +33447,15 @@ class Scattercarpet(_BaseTraceType):
                     mapped to the colorscale relative to the max
                     and min values of the array or relative to
                     `marker.cmin` and `marker.cmax` if set.
+                coloraxis
+                    Sets a reference to a shared color axis.
+                    References to these shared color axes are
+                    "coloraxis", "coloraxis2", "coloraxis3", etc.
+                    Settings for these shared color axes are set in
+                    the layout, under `layout.coloraxis`,
+                    `layout.coloraxis2`, etc. Note that multiple
+                    color scales can be linked to the same color
+                    axis.
                 colorbar
                     plotly.graph_objs.scattercarpet.marker.ColorBar
                     instance or dict with compatible properties
@@ -31681,6 +33541,54 @@ class Scattercarpet(_BaseTraceType):
     @marker.setter
     def marker(self, val):
         self['marker'] = val
+
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
 
     # mode
     # ----
@@ -32281,6 +34189,21 @@ class Scattercarpet(_BaseTraceType):
         marker
             plotly.graph_objs.scattercarpet.Marker instance or dict
             with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -32395,6 +34318,8 @@ class Scattercarpet(_BaseTraceType):
         legendgroup=None,
         line=None,
         marker=None,
+        meta=None,
+        metasrc=None,
         mode=None,
         name=None,
         opacity=None,
@@ -32524,6 +34449,21 @@ class Scattercarpet(_BaseTraceType):
         marker
             plotly.graph_objs.scattercarpet.Marker instance or dict
             with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -32673,6 +34613,8 @@ an instance of plotly.graph_objs.Scattercarpet"""
         )
         self._validators['line'] = v_scattercarpet.LineValidator()
         self._validators['marker'] = v_scattercarpet.MarkerValidator()
+        self._validators['meta'] = v_scattercarpet.MetaValidator()
+        self._validators['metasrc'] = v_scattercarpet.MetasrcValidator()
         self._validators['mode'] = v_scattercarpet.ModeValidator()
         self._validators['name'] = v_scattercarpet.NameValidator()
         self._validators['opacity'] = v_scattercarpet.OpacityValidator()
@@ -32746,6 +34688,10 @@ an instance of plotly.graph_objs.Scattercarpet"""
         self['line'] = line if line is not None else _v
         _v = arg.pop('marker', None)
         self['marker'] = marker if marker is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('mode', None)
         self['mode'] = mode if mode is not None else _v
         _v = arg.pop('name', None)
@@ -33445,6 +35391,18 @@ class Scatter3d(_BaseTraceType):
                     the colorscale relative to the max and min
                     values of the array or relative to `line.cmin`
                     and `line.cmax` if set.
+                coloraxis
+                    Sets a reference to a shared color axis.
+                    References to these shared color axes are
+                    "coloraxis", "coloraxis2", "coloraxis3", etc.
+                    Settings for these shared color axes are set in
+                    the layout, under `layout.coloraxis`,
+                    `layout.coloraxis2`, etc. Note that multiple
+                    color scales can be linked to the same color
+                    axis.
+                colorbar
+                    plotly.graph_objs.scatter3d.line.ColorBar
+                    instance or dict with compatible properties
                 colorscale
                     Sets the colorscale. Has an effect only if in
                     `line.color`is set to a numerical array. The
@@ -33546,6 +35504,15 @@ class Scatter3d(_BaseTraceType):
                     mapped to the colorscale relative to the max
                     and min values of the array or relative to
                     `marker.cmin` and `marker.cmax` if set.
+                coloraxis
+                    Sets a reference to a shared color axis.
+                    References to these shared color axes are
+                    "coloraxis", "coloraxis2", "coloraxis3", etc.
+                    Settings for these shared color axes are set in
+                    the layout, under `layout.coloraxis`,
+                    `layout.coloraxis2`, etc. Note that multiple
+                    color scales can be linked to the same color
+                    axis.
                 colorbar
                     plotly.graph_objs.scatter3d.marker.ColorBar
                     instance or dict with compatible properties
@@ -33622,6 +35589,54 @@ class Scatter3d(_BaseTraceType):
     @marker.setter
     def marker(self, val):
         self['marker'] = val
+
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
 
     # mode
     # ----
@@ -34391,6 +36406,21 @@ class Scatter3d(_BaseTraceType):
         marker
             plotly.graph_objs.scatter3d.Marker instance or dict
             with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -34511,6 +36541,8 @@ class Scatter3d(_BaseTraceType):
         legendgroup=None,
         line=None,
         marker=None,
+        meta=None,
+        metasrc=None,
         mode=None,
         name=None,
         opacity=None,
@@ -34629,6 +36661,21 @@ class Scatter3d(_BaseTraceType):
         marker
             plotly.graph_objs.scatter3d.Marker instance or dict
             with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -34780,6 +36827,8 @@ an instance of plotly.graph_objs.Scatter3d"""
         self._validators['legendgroup'] = v_scatter3d.LegendgroupValidator()
         self._validators['line'] = v_scatter3d.LineValidator()
         self._validators['marker'] = v_scatter3d.MarkerValidator()
+        self._validators['meta'] = v_scatter3d.MetaValidator()
+        self._validators['metasrc'] = v_scatter3d.MetasrcValidator()
         self._validators['mode'] = v_scatter3d.ModeValidator()
         self._validators['name'] = v_scatter3d.NameValidator()
         self._validators['opacity'] = v_scatter3d.OpacityValidator()
@@ -34849,6 +36898,10 @@ an instance of plotly.graph_objs.Scatter3d"""
         self['line'] = line if line is not None else _v
         _v = arg.pop('marker', None)
         self['marker'] = marker if marker is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('mode', None)
         self['mode'] = mode if mode is not None else _v
         _v = arg.pop('name', None)
@@ -35747,6 +37800,15 @@ class Scatter(_BaseTraceType):
                     mapped to the colorscale relative to the max
                     and min values of the array or relative to
                     `marker.cmin` and `marker.cmax` if set.
+                coloraxis
+                    Sets a reference to a shared color axis.
+                    References to these shared color axes are
+                    "coloraxis", "coloraxis2", "coloraxis3", etc.
+                    Settings for these shared color axes are set in
+                    the layout, under `layout.coloraxis`,
+                    `layout.coloraxis2`, etc. Note that multiple
+                    color scales can be linked to the same color
+                    axis.
                 colorbar
                     plotly.graph_objs.scatter.marker.ColorBar
                     instance or dict with compatible properties
@@ -35832,6 +37894,54 @@ class Scatter(_BaseTraceType):
     @marker.setter
     def marker(self, val):
         self['marker'] = val
+
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
 
     # mode
     # ----
@@ -36799,6 +38909,21 @@ class Scatter(_BaseTraceType):
         marker
             plotly.graph_objs.scatter.Marker instance or dict with
             compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -36977,6 +39102,8 @@ class Scatter(_BaseTraceType):
         legendgroup=None,
         line=None,
         marker=None,
+        meta=None,
+        metasrc=None,
         mode=None,
         name=None,
         opacity=None,
@@ -37153,6 +39280,21 @@ class Scatter(_BaseTraceType):
         marker
             plotly.graph_objs.scatter.Marker instance or dict with
             compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         mode
             Determines the drawing mode for this scatter trace. If
             the provided `mode` includes "text" then the `text`
@@ -37360,6 +39502,8 @@ an instance of plotly.graph_objs.Scatter"""
         self._validators['legendgroup'] = v_scatter.LegendgroupValidator()
         self._validators['line'] = v_scatter.LineValidator()
         self._validators['marker'] = v_scatter.MarkerValidator()
+        self._validators['meta'] = v_scatter.MetaValidator()
+        self._validators['metasrc'] = v_scatter.MetasrcValidator()
         self._validators['mode'] = v_scatter.ModeValidator()
         self._validators['name'] = v_scatter.NameValidator()
         self._validators['opacity'] = v_scatter.OpacityValidator()
@@ -37449,6 +39593,10 @@ an instance of plotly.graph_objs.Scatter"""
         self['line'] = line if line is not None else _v
         _v = arg.pop('marker', None)
         self['marker'] = marker if marker is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('mode', None)
         self['mode'] = mode if mode is not None else _v
         _v = arg.pop('name', None)
@@ -37879,6 +40027,54 @@ class Sankey(_BaseTraceType):
     def link(self, val):
         self['link'] = val
 
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
+
     # name
     # ----
     @property
@@ -38295,6 +40491,21 @@ class Sankey(_BaseTraceType):
             Sets the source reference on plot.ly for  ids .
         link
             The links of the Sankey plot.
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -38364,6 +40575,8 @@ class Sankey(_BaseTraceType):
         ids=None,
         idssrc=None,
         link=None,
+        meta=None,
+        metasrc=None,
         name=None,
         node=None,
         orientation=None,
@@ -38426,6 +40639,21 @@ class Sankey(_BaseTraceType):
             Sets the source reference on plot.ly for  ids .
         link
             The links of the Sankey plot.
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -38523,6 +40751,8 @@ an instance of plotly.graph_objs.Sankey"""
         self._validators['ids'] = v_sankey.IdsValidator()
         self._validators['idssrc'] = v_sankey.IdssrcValidator()
         self._validators['link'] = v_sankey.LinkValidator()
+        self._validators['meta'] = v_sankey.MetaValidator()
+        self._validators['metasrc'] = v_sankey.MetasrcValidator()
         self._validators['name'] = v_sankey.NameValidator()
         self._validators['node'] = v_sankey.NodeValidator()
         self._validators['orientation'] = v_sankey.OrientationValidator()
@@ -38556,6 +40786,10 @@ an instance of plotly.graph_objs.Sankey"""
         self['idssrc'] = idssrc if idssrc is not None else _v
         _v = arg.pop('link', None)
         self['link'] = link if link is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('node', None)
@@ -38916,6 +41150,54 @@ class Pointcloud(_BaseTraceType):
     @marker.setter
     def marker(self, val):
         self['marker'] = val
+
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
 
     # name
     # ----
@@ -39453,6 +41735,21 @@ class Pointcloud(_BaseTraceType):
         marker
             plotly.graph_objs.pointcloud.Marker instance or dict
             with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -39556,6 +41853,8 @@ class Pointcloud(_BaseTraceType):
         indicessrc=None,
         legendgroup=None,
         marker=None,
+        meta=None,
+        metasrc=None,
         name=None,
         opacity=None,
         showlegend=None,
@@ -39631,6 +41930,21 @@ class Pointcloud(_BaseTraceType):
         marker
             plotly.graph_objs.pointcloud.Marker instance or dict
             with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -39763,6 +42077,8 @@ an instance of plotly.graph_objs.Pointcloud"""
         self._validators['indicessrc'] = v_pointcloud.IndicessrcValidator()
         self._validators['legendgroup'] = v_pointcloud.LegendgroupValidator()
         self._validators['marker'] = v_pointcloud.MarkerValidator()
+        self._validators['meta'] = v_pointcloud.MetaValidator()
+        self._validators['metasrc'] = v_pointcloud.MetasrcValidator()
         self._validators['name'] = v_pointcloud.NameValidator()
         self._validators['opacity'] = v_pointcloud.OpacityValidator()
         self._validators['showlegend'] = v_pointcloud.ShowlegendValidator()
@@ -39810,6 +42126,10 @@ an instance of plotly.graph_objs.Pointcloud"""
         self['legendgroup'] = legendgroup if legendgroup is not None else _v
         _v = arg.pop('marker', None)
         self['marker'] = marker if marker is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('opacity', None)
@@ -40274,7 +42594,7 @@ class Pie(_BaseTraceType):
     @property
     def insidetextfont(self):
         """
-        Sets the font used for `textinfo` lying inside the pie.
+        Sets the font used for `textinfo` lying inside the sector.
     
         The 'insidetextfont' property is an instance of Insidetextfont
         that may be specified as:
@@ -40427,9 +42747,9 @@ class Pie(_BaseTraceType):
             Supported dict properties:
                 
                 colors
-                    Sets the color of each sector of this pie
-                    chart. If not specified, the default trace
-                    color set is used to pick the sector colors.
+                    Sets the color of each sector. If not
+                    specified, the default trace color set is used
+                    to pick the sector colors.
                 colorssrc
                     Sets the source reference on plot.ly for
                     colors .
@@ -40446,6 +42766,54 @@ class Pie(_BaseTraceType):
     @marker.setter
     def marker(self, val):
         self['marker'] = val
+
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
 
     # name
     # ----
@@ -40494,7 +42862,7 @@ class Pie(_BaseTraceType):
     @property
     def outsidetextfont(self):
         """
-        Sets the font used for `textinfo` lying outside the pie.
+        Sets the font used for `textinfo` lying outside the sector.
     
         The 'outsidetextfont' property is an instance of Outsidetextfont
         that may be specified as:
@@ -40614,9 +42982,9 @@ class Pie(_BaseTraceType):
     @property
     def scalegroup(self):
         """
-        If there are multiple pies that should be sized according to
-        their totals, link them by providing a non-empty group id here
-        shared by every trace in the same group.
+        If there are multiple pie charts that should be sized according
+        to their totals, link them by providing a non-empty group id
+        here shared by every trace in the same group.
     
         The 'scalegroup' property is a string and must be specified as:
           - A string
@@ -40893,12 +43261,11 @@ class Pie(_BaseTraceType):
                     that the title's position used to be set by the
                     now deprecated `titleposition` attribute.
                 text
-                    Sets the title of the pie chart. If it is
-                    empty, no title is displayed. Note that before
-                    the existence of `title.text`, the title's
-                    contents used to be defined as the `title`
-                    attribute itself. This behavior has been
-                    deprecated.
+                    Sets the title of the chart. If it is empty, no
+                    title is displayed. Note that before the
+                    existence of `title.text`, the title's contents
+                    used to be defined as the `title` attribute
+                    itself. This behavior has been deprecated.
 
         Returns
         -------
@@ -41051,8 +43418,8 @@ class Pie(_BaseTraceType):
     @property
     def values(self):
         """
-        Sets the values of the sectors of this pie chart. If omitted,
-        we count occurrences of each label.
+        Sets the values of the sectors. If omitted, we count
+        occurrences of each label.
     
         The 'values' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
@@ -41193,7 +43560,8 @@ class Pie(_BaseTraceType):
         idssrc
             Sets the source reference on plot.ly for  ids .
         insidetextfont
-            Sets the font used for `textinfo` lying inside the pie.
+            Sets the font used for `textinfo` lying inside the
+            sector.
         label0
             Alternate to `labels`. Builds a numeric set of labels.
             Use with `dlabel` where `label0` is the starting label
@@ -41213,6 +43581,21 @@ class Pie(_BaseTraceType):
         marker
             plotly.graph_objs.pie.Marker instance or dict with
             compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -41220,7 +43603,7 @@ class Pie(_BaseTraceType):
             Sets the opacity of the trace.
         outsidetextfont
             Sets the font used for `textinfo` lying outside the
-            pie.
+            sector.
         pull
             Sets the fraction of larger radius to pull the sectors
             out from the center. This can be a constant to pull all
@@ -41232,7 +43615,7 @@ class Pie(_BaseTraceType):
             Instead of the first slice starting at 12 o'clock,
             rotate to some other angle.
         scalegroup
-            If there are multiple pies that should be sized
+            If there are multiple pie charts that should be sized
             according to their totals, link them by providing a
             non-empty group id here shared by every trace in the
             same group.
@@ -41297,8 +43680,8 @@ class Pie(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         values
-            Sets the values of the sectors of this pie chart. If
-            omitted, we count occurrences of each label.
+            Sets the values of the sectors. If omitted, we count
+            occurrences of each label.
         valuessrc
             Sets the source reference on plot.ly for  values .
         visible
@@ -41337,6 +43720,8 @@ class Pie(_BaseTraceType):
         labelssrc=None,
         legendgroup=None,
         marker=None,
+        meta=None,
+        metasrc=None,
         name=None,
         opacity=None,
         outsidetextfont=None,
@@ -41441,7 +43826,8 @@ class Pie(_BaseTraceType):
         idssrc
             Sets the source reference on plot.ly for  ids .
         insidetextfont
-            Sets the font used for `textinfo` lying inside the pie.
+            Sets the font used for `textinfo` lying inside the
+            sector.
         label0
             Alternate to `labels`. Builds a numeric set of labels.
             Use with `dlabel` where `label0` is the starting label
@@ -41461,6 +43847,21 @@ class Pie(_BaseTraceType):
         marker
             plotly.graph_objs.pie.Marker instance or dict with
             compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -41468,7 +43869,7 @@ class Pie(_BaseTraceType):
             Sets the opacity of the trace.
         outsidetextfont
             Sets the font used for `textinfo` lying outside the
-            pie.
+            sector.
         pull
             Sets the fraction of larger radius to pull the sectors
             out from the center. This can be a constant to pull all
@@ -41480,7 +43881,7 @@ class Pie(_BaseTraceType):
             Instead of the first slice starting at 12 o'clock,
             rotate to some other angle.
         scalegroup
-            If there are multiple pies that should be sized
+            If there are multiple pie charts that should be sized
             according to their totals, link them by providing a
             non-empty group id here shared by every trace in the
             same group.
@@ -41545,8 +43946,8 @@ class Pie(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         values
-            Sets the values of the sectors of this pie chart. If
-            omitted, we count occurrences of each label.
+            Sets the values of the sectors. If omitted, we count
+            occurrences of each label.
         valuessrc
             Sets the source reference on plot.ly for  values .
         visible
@@ -41609,6 +44010,8 @@ an instance of plotly.graph_objs.Pie"""
         self._validators['labelssrc'] = v_pie.LabelssrcValidator()
         self._validators['legendgroup'] = v_pie.LegendgroupValidator()
         self._validators['marker'] = v_pie.MarkerValidator()
+        self._validators['meta'] = v_pie.MetaValidator()
+        self._validators['metasrc'] = v_pie.MetasrcValidator()
         self._validators['name'] = v_pie.NameValidator()
         self._validators['opacity'] = v_pie.OpacityValidator()
         self._validators['outsidetextfont'] = v_pie.OutsidetextfontValidator()
@@ -41680,6 +44083,10 @@ an instance of plotly.graph_objs.Pie"""
         self['legendgroup'] = legendgroup if legendgroup is not None else _v
         _v = arg.pop('marker', None)
         self['marker'] = marker if marker is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('opacity', None)
@@ -42109,6 +44516,15 @@ class Parcoords(_BaseTraceType):
                     the colorscale relative to the max and min
                     values of the array or relative to `line.cmin`
                     and `line.cmax` if set.
+                coloraxis
+                    Sets a reference to a shared color axis.
+                    References to these shared color axes are
+                    "coloraxis", "coloraxis2", "coloraxis3", etc.
+                    Settings for these shared color axes are set in
+                    the layout, under `layout.coloraxis`,
+                    `layout.coloraxis2`, etc. Note that multiple
+                    color scales can be linked to the same color
+                    axis.
                 colorbar
                     plotly.graph_objs.parcoords.line.ColorBar
                     instance or dict with compatible properties
@@ -42151,6 +44567,54 @@ class Parcoords(_BaseTraceType):
     @line.setter
     def line(self, val):
         self['line'] = val
+
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
 
     # name
     # ----
@@ -42421,6 +44885,21 @@ class Parcoords(_BaseTraceType):
         line
             plotly.graph_objs.parcoords.Line instance or dict with
             compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -42472,6 +44951,8 @@ class Parcoords(_BaseTraceType):
         idssrc=None,
         labelfont=None,
         line=None,
+        meta=None,
+        metasrc=None,
         name=None,
         rangefont=None,
         stream=None,
@@ -42522,6 +45003,21 @@ class Parcoords(_BaseTraceType):
         line
             plotly.graph_objs.parcoords.Line instance or dict with
             compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -42603,6 +45099,8 @@ an instance of plotly.graph_objs.Parcoords"""
         self._validators['idssrc'] = v_parcoords.IdssrcValidator()
         self._validators['labelfont'] = v_parcoords.LabelfontValidator()
         self._validators['line'] = v_parcoords.LineValidator()
+        self._validators['meta'] = v_parcoords.MetaValidator()
+        self._validators['metasrc'] = v_parcoords.MetasrcValidator()
         self._validators['name'] = v_parcoords.NameValidator()
         self._validators['rangefont'] = v_parcoords.RangefontValidator()
         self._validators['stream'] = v_parcoords.StreamValidator()
@@ -42633,6 +45131,10 @@ an instance of plotly.graph_objs.Parcoords"""
         self['labelfont'] = labelfont if labelfont is not None else _v
         _v = arg.pop('line', None)
         self['line'] = line if line is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('rangefont', None)
@@ -43089,6 +45591,15 @@ class Parcats(_BaseTraceType):
                     the colorscale relative to the max and min
                     values of the array or relative to `line.cmin`
                     and `line.cmax` if set.
+                coloraxis
+                    Sets a reference to a shared color axis.
+                    References to these shared color axes are
+                    "coloraxis", "coloraxis2", "coloraxis3", etc.
+                    Settings for these shared color axes are set in
+                    the layout, under `layout.coloraxis`,
+                    `layout.coloraxis2`, etc. Note that multiple
+                    color scales can be linked to the same color
+                    axis.
                 colorbar
                     plotly.graph_objs.parcats.line.ColorBar
                     instance or dict with compatible properties
@@ -43157,6 +45668,54 @@ class Parcats(_BaseTraceType):
     @line.setter
     def line(self, val):
         self['line'] = val
+
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
 
     # name
     # ----
@@ -43440,6 +45999,21 @@ class Parcats(_BaseTraceType):
         line
             plotly.graph_objs.parcats.Line instance or dict with
             compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -43497,6 +46071,8 @@ class Parcats(_BaseTraceType):
         hovertemplate=None,
         labelfont=None,
         line=None,
+        meta=None,
+        metasrc=None,
         name=None,
         sortpaths=None,
         stream=None,
@@ -43581,6 +46157,21 @@ class Parcats(_BaseTraceType):
         line
             plotly.graph_objs.parcats.Line instance or dict with
             compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -43666,6 +46257,8 @@ an instance of plotly.graph_objs.Parcats"""
         self._validators['hovertemplate'] = v_parcats.HovertemplateValidator()
         self._validators['labelfont'] = v_parcats.LabelfontValidator()
         self._validators['line'] = v_parcats.LineValidator()
+        self._validators['meta'] = v_parcats.MetaValidator()
+        self._validators['metasrc'] = v_parcats.MetasrcValidator()
         self._validators['name'] = v_parcats.NameValidator()
         self._validators['sortpaths'] = v_parcats.SortpathsValidator()
         self._validators['stream'] = v_parcats.StreamValidator()
@@ -43702,6 +46295,10 @@ an instance of plotly.graph_objs.Parcats"""
         self['labelfont'] = labelfont if labelfont is not None else _v
         _v = arg.pop('line', None)
         self['line'] = line if line is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('sortpaths', None)
@@ -44210,6 +46807,54 @@ class Ohlc(_BaseTraceType):
     def lowsrc(self, val):
         self['lowsrc'] = val
 
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
+
     # name
     # ----
     @property
@@ -44698,6 +47343,21 @@ class Ohlc(_BaseTraceType):
             Sets the low values.
         lowsrc
             Sets the source reference on plot.ly for  low .
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -44798,6 +47458,8 @@ class Ohlc(_BaseTraceType):
         line=None,
         low=None,
         lowsrc=None,
+        meta=None,
+        metasrc=None,
         name=None,
         opacity=None,
         open=None,
@@ -44887,6 +47549,21 @@ class Ohlc(_BaseTraceType):
             Sets the low values.
         lowsrc
             Sets the source reference on plot.ly for  low .
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -45015,6 +47692,8 @@ an instance of plotly.graph_objs.Ohlc"""
         self._validators['line'] = v_ohlc.LineValidator()
         self._validators['low'] = v_ohlc.LowValidator()
         self._validators['lowsrc'] = v_ohlc.LowsrcValidator()
+        self._validators['meta'] = v_ohlc.MetaValidator()
+        self._validators['metasrc'] = v_ohlc.MetasrcValidator()
         self._validators['name'] = v_ohlc.NameValidator()
         self._validators['opacity'] = v_ohlc.OpacityValidator()
         self._validators['open'] = v_ohlc.OpenValidator()
@@ -45075,6 +47754,10 @@ an instance of plotly.graph_objs.Ohlc"""
         self['low'] = low if low is not None else _v
         _v = arg.pop('lowsrc', None)
         self['lowsrc'] = lowsrc if lowsrc is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('opacity', None)
@@ -45347,6 +48030,33 @@ class Mesh3d(_BaseTraceType):
     @color.setter
     def color(self, val):
         self['color'] = val
+
+    # coloraxis
+    # ---------
+    @property
+    def coloraxis(self):
+        """
+        Sets a reference to a shared color axis. References to these
+        shared color axes are "coloraxis", "coloraxis2", "coloraxis3",
+        etc. Settings for these shared color axes are set in the
+        layout, under `layout.coloraxis`, `layout.coloraxis2`, etc.
+        Note that multiple color scales can be linked to the same color
+        axis.
+    
+        The 'coloraxis' property is an identifier of a particular
+        subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
+        optionally followed by an integer >= 1
+        (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self['coloraxis']
+
+    @coloraxis.setter
+    def coloraxis(self, val):
+        self['coloraxis'] = val
 
     # colorbar
     # --------
@@ -46283,6 +48993,54 @@ class Mesh3d(_BaseTraceType):
     def lightposition(self, val):
         self['lightposition'] = val
 
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
+
     # name
     # ----
     @property
@@ -46535,7 +49293,10 @@ class Mesh3d(_BaseTraceType):
     @property
     def vertexcolor(self):
         """
-        Sets the color of each vertex Overrides "color".
+        Sets the color of each vertex Overrides "color". While Red,
+        green and blue colors are in the range of 0 and 255; in the
+        case of having vertex color data in RGBA format, the alpha
+        color should be normalized to be between 0 and 1.
     
         The 'vertexcolor' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
@@ -46854,6 +49615,13 @@ class Mesh3d(_BaseTraceType):
             must be set as well.
         color
             Sets the color of the whole mesh
+        coloraxis
+            Sets a reference to a shared color axis. References to
+            these shared color axes are "coloraxis", "coloraxis2",
+            "coloraxis3", etc. Settings for these shared color axes
+            are set in the layout, under `layout.coloraxis`,
+            `layout.coloraxis2`, etc. Note that multiple color
+            scales can be linked to the same color axis.
         colorbar
             plotly.graph_objs.mesh3d.ColorBar instance or dict with
             compatible properties
@@ -46979,6 +49747,21 @@ class Mesh3d(_BaseTraceType):
         lightposition
             plotly.graph_objs.mesh3d.Lightposition instance or dict
             with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -47036,7 +49819,11 @@ class Mesh3d(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         vertexcolor
-            Sets the color of each vertex Overrides "color".
+            Sets the color of each vertex Overrides "color". While
+            Red, green and blue colors are in the range of 0 and
+            255; in the case of having vertex color data in RGBA
+            format, the alpha color should be normalized to be
+            between 0 and 1.
         vertexcolorsrc
             Sets the source reference on plot.ly for  vertexcolor .
         visible
@@ -47080,6 +49867,7 @@ class Mesh3d(_BaseTraceType):
         cmid=None,
         cmin=None,
         color=None,
+        coloraxis=None,
         colorbar=None,
         colorscale=None,
         contour=None,
@@ -47108,6 +49896,8 @@ class Mesh3d(_BaseTraceType):
         ksrc=None,
         lighting=None,
         lightposition=None,
+        meta=None,
+        metasrc=None,
         name=None,
         opacity=None,
         reversescale=None,
@@ -47191,6 +49981,13 @@ class Mesh3d(_BaseTraceType):
             must be set as well.
         color
             Sets the color of the whole mesh
+        coloraxis
+            Sets a reference to a shared color axis. References to
+            these shared color axes are "coloraxis", "coloraxis2",
+            "coloraxis3", etc. Settings for these shared color axes
+            are set in the layout, under `layout.coloraxis`,
+            `layout.coloraxis2`, etc. Note that multiple color
+            scales can be linked to the same color axis.
         colorbar
             plotly.graph_objs.mesh3d.ColorBar instance or dict with
             compatible properties
@@ -47316,6 +50113,21 @@ class Mesh3d(_BaseTraceType):
         lightposition
             plotly.graph_objs.mesh3d.Lightposition instance or dict
             with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -47373,7 +50185,11 @@ class Mesh3d(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         vertexcolor
-            Sets the color of each vertex Overrides "color".
+            Sets the color of each vertex Overrides "color". While
+            Red, green and blue colors are in the range of 0 and
+            255; in the case of having vertex color data in RGBA
+            format, the alpha color should be normalized to be
+            between 0 and 1.
         vertexcolorsrc
             Sets the source reference on plot.ly for  vertexcolor .
         visible
@@ -47445,6 +50261,7 @@ an instance of plotly.graph_objs.Mesh3d"""
         self._validators['cmid'] = v_mesh3d.CmidValidator()
         self._validators['cmin'] = v_mesh3d.CminValidator()
         self._validators['color'] = v_mesh3d.ColorValidator()
+        self._validators['coloraxis'] = v_mesh3d.ColoraxisValidator()
         self._validators['colorbar'] = v_mesh3d.ColorBarValidator()
         self._validators['colorscale'] = v_mesh3d.ColorscaleValidator()
         self._validators['contour'] = v_mesh3d.ContourValidator()
@@ -47474,6 +50291,8 @@ an instance of plotly.graph_objs.Mesh3d"""
         self._validators['ksrc'] = v_mesh3d.KsrcValidator()
         self._validators['lighting'] = v_mesh3d.LightingValidator()
         self._validators['lightposition'] = v_mesh3d.LightpositionValidator()
+        self._validators['meta'] = v_mesh3d.MetaValidator()
+        self._validators['metasrc'] = v_mesh3d.MetasrcValidator()
         self._validators['name'] = v_mesh3d.NameValidator()
         self._validators['opacity'] = v_mesh3d.OpacityValidator()
         self._validators['reversescale'] = v_mesh3d.ReversescaleValidator()
@@ -47514,6 +50333,8 @@ an instance of plotly.graph_objs.Mesh3d"""
         self['cmin'] = cmin if cmin is not None else _v
         _v = arg.pop('color', None)
         self['color'] = color if color is not None else _v
+        _v = arg.pop('coloraxis', None)
+        self['coloraxis'] = coloraxis if coloraxis is not None else _v
         _v = arg.pop('colorbar', None)
         self['colorbar'] = colorbar if colorbar is not None else _v
         _v = arg.pop('colorscale', None)
@@ -47574,6 +50395,10 @@ an instance of plotly.graph_objs.Mesh3d"""
         _v = arg.pop('lightposition', None)
         self['lightposition'
             ] = lightposition if lightposition is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('opacity', None)
@@ -47788,6 +50613,33 @@ class Isosurface(_BaseTraceType):
     @cmin.setter
     def cmin(self, val):
         self['cmin'] = val
+
+    # coloraxis
+    # ---------
+    @property
+    def coloraxis(self):
+        """
+        Sets a reference to a shared color axis. References to these
+        shared color axes are "coloraxis", "coloraxis2", "coloraxis3",
+        etc. Settings for these shared color axes are set in the
+        layout, under `layout.coloraxis`, `layout.coloraxis2`, etc.
+        Note that multiple color scales can be linked to the same color
+        axis.
+    
+        The 'coloraxis' property is an identifier of a particular
+        subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
+        optionally followed by an integer >= 1
+        (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self['coloraxis']
+
+    @coloraxis.setter
+    def coloraxis(self, val):
+        self['coloraxis'] = val
 
     # colorbar
     # --------
@@ -48521,6 +51373,54 @@ class Isosurface(_BaseTraceType):
     def lightposition(self, val):
         self['lightposition'] = val
 
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
+
     # name
     # ----
     @property
@@ -49116,6 +52016,13 @@ class Isosurface(_BaseTraceType):
             Sets the lower bound of the color domain. Value should
             have the same units as `value` and if set, `cmax` must
             be set as well.
+        coloraxis
+            Sets a reference to a shared color axis. References to
+            these shared color axes are "coloraxis", "coloraxis2",
+            "coloraxis3", etc. Settings for these shared color axes
+            are set in the layout, under `layout.coloraxis`,
+            `layout.coloraxis2`, etc. Note that multiple color
+            scales can be linked to the same color axis.
         colorbar
             plotly.graph_objs.isosurface.ColorBar instance or dict
             with compatible properties
@@ -49196,6 +52103,21 @@ class Isosurface(_BaseTraceType):
         lightposition
             plotly.graph_objs.isosurface.Lightposition instance or
             dict with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -49293,6 +52215,7 @@ class Isosurface(_BaseTraceType):
         cmax=None,
         cmid=None,
         cmin=None,
+        coloraxis=None,
         colorbar=None,
         colorscale=None,
         contour=None,
@@ -49312,6 +52235,8 @@ class Isosurface(_BaseTraceType):
         isomin=None,
         lighting=None,
         lightposition=None,
+        meta=None,
+        metasrc=None,
         name=None,
         opacity=None,
         reversescale=None,
@@ -49379,6 +52304,13 @@ class Isosurface(_BaseTraceType):
             Sets the lower bound of the color domain. Value should
             have the same units as `value` and if set, `cmax` must
             be set as well.
+        coloraxis
+            Sets a reference to a shared color axis. References to
+            these shared color axes are "coloraxis", "coloraxis2",
+            "coloraxis3", etc. Settings for these shared color axes
+            are set in the layout, under `layout.coloraxis`,
+            `layout.coloraxis2`, etc. Note that multiple color
+            scales can be linked to the same color axis.
         colorbar
             plotly.graph_objs.isosurface.ColorBar instance or dict
             with compatible properties
@@ -49459,6 +52391,21 @@ class Isosurface(_BaseTraceType):
         lightposition
             plotly.graph_objs.isosurface.Lightposition instance or
             dict with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -49585,6 +52532,7 @@ an instance of plotly.graph_objs.Isosurface"""
         self._validators['cmax'] = v_isosurface.CmaxValidator()
         self._validators['cmid'] = v_isosurface.CmidValidator()
         self._validators['cmin'] = v_isosurface.CminValidator()
+        self._validators['coloraxis'] = v_isosurface.ColoraxisValidator()
         self._validators['colorbar'] = v_isosurface.ColorBarValidator()
         self._validators['colorscale'] = v_isosurface.ColorscaleValidator()
         self._validators['contour'] = v_isosurface.ContourValidator()
@@ -49608,6 +52556,8 @@ an instance of plotly.graph_objs.Isosurface"""
         self._validators['lighting'] = v_isosurface.LightingValidator()
         self._validators['lightposition'
                         ] = v_isosurface.LightpositionValidator()
+        self._validators['meta'] = v_isosurface.MetaValidator()
+        self._validators['metasrc'] = v_isosurface.MetasrcValidator()
         self._validators['name'] = v_isosurface.NameValidator()
         self._validators['opacity'] = v_isosurface.OpacityValidator()
         self._validators['reversescale'] = v_isosurface.ReversescaleValidator()
@@ -49646,6 +52596,8 @@ an instance of plotly.graph_objs.Isosurface"""
         self['cmid'] = cmid if cmid is not None else _v
         _v = arg.pop('cmin', None)
         self['cmin'] = cmin if cmin is not None else _v
+        _v = arg.pop('coloraxis', None)
+        self['coloraxis'] = coloraxis if coloraxis is not None else _v
         _v = arg.pop('colorbar', None)
         self['colorbar'] = colorbar if colorbar is not None else _v
         _v = arg.pop('colorscale', None)
@@ -49688,6 +52640,10 @@ an instance of plotly.graph_objs.Isosurface"""
         _v = arg.pop('lightposition', None)
         self['lightposition'
             ] = lightposition if lightposition is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('opacity', None)
@@ -49850,6 +52806,56 @@ class Histogram2dContour(_BaseTraceType):
     @autocontour.setter
     def autocontour(self, val):
         self['autocontour'] = val
+
+    # bingroup
+    # --------
+    @property
+    def bingroup(self):
+        """
+        Set the `xbingroup` and `ybingroup` default prefix For example,
+        setting a `bingroup` of 1 on two histogram2d traces will make
+        them their x-bins and y-bins match separately.
+    
+        The 'bingroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['bingroup']
+
+    @bingroup.setter
+    def bingroup(self, val):
+        self['bingroup'] = val
+
+    # coloraxis
+    # ---------
+    @property
+    def coloraxis(self):
+        """
+        Sets a reference to a shared color axis. References to these
+        shared color axes are "coloraxis", "coloraxis2", "coloraxis3",
+        etc. Settings for these shared color axes are set in the
+        layout, under `layout.coloraxis`, `layout.coloraxis2`, etc.
+        Note that multiple color scales can be linked to the same color
+        axis.
+    
+        The 'coloraxis' property is an identifier of a particular
+        subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
+        optionally followed by an integer >= 1
+        (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self['coloraxis']
+
+    @coloraxis.setter
+    def coloraxis(self, val):
+        self['coloraxis'] = val
 
     # colorbar
     # --------
@@ -50605,6 +53611,54 @@ class Histogram2dContour(_BaseTraceType):
     def marker(self, val):
         self['marker'] = val
 
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
+
     # name
     # ----
     @property
@@ -50939,6 +53993,31 @@ class Histogram2dContour(_BaseTraceType):
     def xaxis(self, val):
         self['xaxis'] = val
 
+    # xbingroup
+    # ---------
+    @property
+    def xbingroup(self):
+        """
+        Set a group of histogram traces which will have compatible
+        x-bin settings. Using `xbingroup`, histogram2d and
+        histogram2dcontour traces  (on axes of the same axis type) can
+        have compatible x-bin settings. Note that the same `xbingroup`
+        value can be used to set (1D) histogram `bingroup`
+    
+        The 'xbingroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['xbingroup']
+
+    @xbingroup.setter
+    def xbingroup(self, val):
+        self['xbingroup'] = val
+
     # xbins
     # -----
     @property
@@ -51085,6 +54164,31 @@ class Histogram2dContour(_BaseTraceType):
     @yaxis.setter
     def yaxis(self, val):
         self['yaxis'] = val
+
+    # ybingroup
+    # ---------
+    @property
+    def ybingroup(self):
+        """
+        Set a group of histogram traces which will have compatible
+        y-bin settings. Using `ybingroup`, histogram2d and
+        histogram2dcontour traces  (on axes of the same axis type) can
+        have compatible y-bin settings. Note that the same `ybingroup`
+        value can be used to set (1D) histogram `bingroup`
+    
+        The 'ybingroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['ybingroup']
+
+    @ybingroup.setter
+    def ybingroup(self, val):
+        self['ybingroup'] = val
 
     # ybins
     # -----
@@ -51379,6 +54483,18 @@ class Histogram2dContour(_BaseTraceType):
             are picked by an algorithm. If True, the number of
             contour levels can be set in `ncontours`. If False, set
             the contour level attributes in `contours`.
+        bingroup
+            Set the `xbingroup` and `ybingroup` default prefix For
+            example, setting a `bingroup` of 1 on two histogram2d
+            traces will make them their x-bins and y-bins match
+            separately.
+        coloraxis
+            Sets a reference to a shared color axis. References to
+            these shared color axes are "coloraxis", "coloraxis2",
+            "coloraxis3", etc. Settings for these shared color axes
+            are set in the layout, under `layout.coloraxis`,
+            `layout.coloraxis2`, etc. Note that multiple color
+            scales can be linked to the same color axis.
         colorbar
             plotly.graph_objs.histogram2dcontour.ColorBar instance
             or dict with compatible properties
@@ -51477,6 +54593,21 @@ class Histogram2dContour(_BaseTraceType):
         marker
             plotly.graph_objs.histogram2dcontour.Marker instance or
             dict with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -51547,6 +54678,13 @@ class Histogram2dContour(_BaseTraceType):
             a 2D cartesian x axis. If "x" (the default value), the
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
+        xbingroup
+            Set a group of histogram traces which will have
+            compatible x-bin settings. Using `xbingroup`,
+            histogram2d and histogram2dcontour traces  (on axes of
+            the same axis type) can have compatible x-bin settings.
+            Note that the same `xbingroup` value can be used to set
+            (1D) histogram `bingroup`
         xbins
             plotly.graph_objs.histogram2dcontour.XBins instance or
             dict with compatible properties
@@ -51561,6 +54699,13 @@ class Histogram2dContour(_BaseTraceType):
             a 2D cartesian y axis. If "y" (the default value), the
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
+        ybingroup
+            Set a group of histogram traces which will have
+            compatible y-bin settings. Using `ybingroup`,
+            histogram2d and histogram2dcontour traces  (on axes of
+            the same axis type) can have compatible y-bin settings.
+            Note that the same `ybingroup` value can be used to set
+            (1D) histogram `bingroup`
         ybins
             plotly.graph_objs.histogram2dcontour.YBins instance or
             dict with compatible properties
@@ -51604,6 +54749,8 @@ class Histogram2dContour(_BaseTraceType):
         autobiny=None,
         autocolorscale=None,
         autocontour=None,
+        bingroup=None,
+        coloraxis=None,
         colorbar=None,
         colorscale=None,
         contours=None,
@@ -51621,6 +54768,8 @@ class Histogram2dContour(_BaseTraceType):
         legendgroup=None,
         line=None,
         marker=None,
+        meta=None,
+        metasrc=None,
         name=None,
         nbinsx=None,
         nbinsy=None,
@@ -51635,11 +54784,13 @@ class Histogram2dContour(_BaseTraceType):
         visible=None,
         x=None,
         xaxis=None,
+        xbingroup=None,
         xbins=None,
         xcalendar=None,
         xsrc=None,
         y=None,
         yaxis=None,
+        ybingroup=None,
         ybins=None,
         ycalendar=None,
         ysrc=None,
@@ -51691,6 +54842,18 @@ class Histogram2dContour(_BaseTraceType):
             are picked by an algorithm. If True, the number of
             contour levels can be set in `ncontours`. If False, set
             the contour level attributes in `contours`.
+        bingroup
+            Set the `xbingroup` and `ybingroup` default prefix For
+            example, setting a `bingroup` of 1 on two histogram2d
+            traces will make them their x-bins and y-bins match
+            separately.
+        coloraxis
+            Sets a reference to a shared color axis. References to
+            these shared color axes are "coloraxis", "coloraxis2",
+            "coloraxis3", etc. Settings for these shared color axes
+            are set in the layout, under `layout.coloraxis`,
+            `layout.coloraxis2`, etc. Note that multiple color
+            scales can be linked to the same color axis.
         colorbar
             plotly.graph_objs.histogram2dcontour.ColorBar instance
             or dict with compatible properties
@@ -51789,6 +54952,21 @@ class Histogram2dContour(_BaseTraceType):
         marker
             plotly.graph_objs.histogram2dcontour.Marker instance or
             dict with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -51859,6 +55037,13 @@ class Histogram2dContour(_BaseTraceType):
             a 2D cartesian x axis. If "x" (the default value), the
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
+        xbingroup
+            Set a group of histogram traces which will have
+            compatible x-bin settings. Using `xbingroup`,
+            histogram2d and histogram2dcontour traces  (on axes of
+            the same axis type) can have compatible x-bin settings.
+            Note that the same `xbingroup` value can be used to set
+            (1D) histogram `bingroup`
         xbins
             plotly.graph_objs.histogram2dcontour.XBins instance or
             dict with compatible properties
@@ -51873,6 +55058,13 @@ class Histogram2dContour(_BaseTraceType):
             a 2D cartesian y axis. If "y" (the default value), the
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
+        ybingroup
+            Set a group of histogram traces which will have
+            compatible y-bin settings. Using `ybingroup`,
+            histogram2d and histogram2dcontour traces  (on axes of
+            the same axis type) can have compatible y-bin settings.
+            Note that the same `ybingroup` value can be used to set
+            (1D) histogram `bingroup`
         ybins
             plotly.graph_objs.histogram2dcontour.YBins instance or
             dict with compatible properties
@@ -51948,6 +55140,9 @@ an instance of plotly.graph_objs.Histogram2dContour"""
                         ] = v_histogram2dcontour.AutocolorscaleValidator()
         self._validators['autocontour'
                         ] = v_histogram2dcontour.AutocontourValidator()
+        self._validators['bingroup'] = v_histogram2dcontour.BingroupValidator()
+        self._validators['coloraxis'
+                        ] = v_histogram2dcontour.ColoraxisValidator()
         self._validators['colorbar'] = v_histogram2dcontour.ColorBarValidator()
         self._validators['colorscale'
                         ] = v_histogram2dcontour.ColorscaleValidator()
@@ -51974,6 +55169,8 @@ an instance of plotly.graph_objs.Histogram2dContour"""
                         ] = v_histogram2dcontour.LegendgroupValidator()
         self._validators['line'] = v_histogram2dcontour.LineValidator()
         self._validators['marker'] = v_histogram2dcontour.MarkerValidator()
+        self._validators['meta'] = v_histogram2dcontour.MetaValidator()
+        self._validators['metasrc'] = v_histogram2dcontour.MetasrcValidator()
         self._validators['name'] = v_histogram2dcontour.NameValidator()
         self._validators['nbinsx'] = v_histogram2dcontour.NbinsxValidator()
         self._validators['nbinsy'] = v_histogram2dcontour.NbinsyValidator()
@@ -51993,12 +55190,16 @@ an instance of plotly.graph_objs.Histogram2dContour"""
         self._validators['visible'] = v_histogram2dcontour.VisibleValidator()
         self._validators['x'] = v_histogram2dcontour.XValidator()
         self._validators['xaxis'] = v_histogram2dcontour.XAxisValidator()
+        self._validators['xbingroup'
+                        ] = v_histogram2dcontour.XbingroupValidator()
         self._validators['xbins'] = v_histogram2dcontour.XBinsValidator()
         self._validators['xcalendar'
                         ] = v_histogram2dcontour.XcalendarValidator()
         self._validators['xsrc'] = v_histogram2dcontour.XsrcValidator()
         self._validators['y'] = v_histogram2dcontour.YValidator()
         self._validators['yaxis'] = v_histogram2dcontour.YAxisValidator()
+        self._validators['ybingroup'
+                        ] = v_histogram2dcontour.YbingroupValidator()
         self._validators['ybins'] = v_histogram2dcontour.YBinsValidator()
         self._validators['ycalendar'
                         ] = v_histogram2dcontour.YcalendarValidator()
@@ -52023,6 +55224,10 @@ an instance of plotly.graph_objs.Histogram2dContour"""
             ] = autocolorscale if autocolorscale is not None else _v
         _v = arg.pop('autocontour', None)
         self['autocontour'] = autocontour if autocontour is not None else _v
+        _v = arg.pop('bingroup', None)
+        self['bingroup'] = bingroup if bingroup is not None else _v
+        _v = arg.pop('coloraxis', None)
+        self['coloraxis'] = coloraxis if coloraxis is not None else _v
         _v = arg.pop('colorbar', None)
         self['colorbar'] = colorbar if colorbar is not None else _v
         _v = arg.pop('colorscale', None)
@@ -52060,6 +55265,10 @@ an instance of plotly.graph_objs.Histogram2dContour"""
         self['line'] = line if line is not None else _v
         _v = arg.pop('marker', None)
         self['marker'] = marker if marker is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('nbinsx', None)
@@ -52088,6 +55297,8 @@ an instance of plotly.graph_objs.Histogram2dContour"""
         self['x'] = x if x is not None else _v
         _v = arg.pop('xaxis', None)
         self['xaxis'] = xaxis if xaxis is not None else _v
+        _v = arg.pop('xbingroup', None)
+        self['xbingroup'] = xbingroup if xbingroup is not None else _v
         _v = arg.pop('xbins', None)
         self['xbins'] = xbins if xbins is not None else _v
         _v = arg.pop('xcalendar', None)
@@ -52098,6 +55309,8 @@ an instance of plotly.graph_objs.Histogram2dContour"""
         self['y'] = y if y is not None else _v
         _v = arg.pop('yaxis', None)
         self['yaxis'] = yaxis if yaxis is not None else _v
+        _v = arg.pop('ybingroup', None)
+        self['ybingroup'] = ybingroup if ybingroup is not None else _v
         _v = arg.pop('ybins', None)
         self['ybins'] = ybins if ybins is not None else _v
         _v = arg.pop('ycalendar', None)
@@ -52215,6 +55428,56 @@ class Histogram2d(_BaseTraceType):
     @autocolorscale.setter
     def autocolorscale(self, val):
         self['autocolorscale'] = val
+
+    # bingroup
+    # --------
+    @property
+    def bingroup(self):
+        """
+        Set the `xbingroup` and `ybingroup` default prefix For example,
+        setting a `bingroup` of 1 on two histogram2d traces will make
+        them their x-bins and y-bins match separately.
+    
+        The 'bingroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['bingroup']
+
+    @bingroup.setter
+    def bingroup(self, val):
+        self['bingroup'] = val
+
+    # coloraxis
+    # ---------
+    @property
+    def coloraxis(self):
+        """
+        Sets a reference to a shared color axis. References to these
+        shared color axes are "coloraxis", "coloraxis2", "coloraxis3",
+        etc. Settings for these shared color axes are set in the
+        layout, under `layout.coloraxis`, `layout.coloraxis2`, etc.
+        Note that multiple color scales can be linked to the same color
+        axis.
+    
+        The 'coloraxis' property is an identifier of a particular
+        subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
+        optionally followed by an integer >= 1
+        (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self['coloraxis']
+
+    @coloraxis.setter
+    def coloraxis(self, val):
+        self['coloraxis'] = val
 
     # colorbar
     # --------
@@ -52822,6 +56085,54 @@ class Histogram2d(_BaseTraceType):
     def marker(self, val):
         self['marker'] = val
 
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
+
     # name
     # ----
     @property
@@ -53111,6 +56422,31 @@ class Histogram2d(_BaseTraceType):
     def xaxis(self, val):
         self['xaxis'] = val
 
+    # xbingroup
+    # ---------
+    @property
+    def xbingroup(self):
+        """
+        Set a group of histogram traces which will have compatible
+        x-bin settings. Using `xbingroup`, histogram2d and
+        histogram2dcontour traces  (on axes of the same axis type) can
+        have compatible x-bin settings. Note that the same `xbingroup`
+        value can be used to set (1D) histogram `bingroup`
+    
+        The 'xbingroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['xbingroup']
+
+    @xbingroup.setter
+    def xbingroup(self, val):
+        self['xbingroup'] = val
+
     # xbins
     # -----
     @property
@@ -53277,6 +56613,31 @@ class Histogram2d(_BaseTraceType):
     @yaxis.setter
     def yaxis(self, val):
         self['yaxis'] = val
+
+    # ybingroup
+    # ---------
+    @property
+    def ybingroup(self):
+        """
+        Set a group of histogram traces which will have compatible
+        y-bin settings. Using `ybingroup`, histogram2d and
+        histogram2dcontour traces  (on axes of the same axis type) can
+        have compatible y-bin settings. Note that the same `ybingroup`
+        value can be used to set (1D) histogram `bingroup`
+    
+        The 'ybingroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['ybingroup']
+
+    @ybingroup.setter
+    def ybingroup(self, val):
+        self['ybingroup'] = val
 
     # ybins
     # -----
@@ -53607,6 +56968,18 @@ class Histogram2d(_BaseTraceType):
             `autocolorscale` is true, the default  palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
+        bingroup
+            Set the `xbingroup` and `ybingroup` default prefix For
+            example, setting a `bingroup` of 1 on two histogram2d
+            traces will make them their x-bins and y-bins match
+            separately.
+        coloraxis
+            Sets a reference to a shared color axis. References to
+            these shared color axes are "coloraxis", "coloraxis2",
+            "coloraxis3", etc. Settings for these shared color axes
+            are set in the layout, under `layout.coloraxis`,
+            `layout.coloraxis2`, etc. Note that multiple color
+            scales can be linked to the same color axis.
         colorbar
             plotly.graph_objs.histogram2d.ColorBar instance or dict
             with compatible properties
@@ -53695,6 +57068,21 @@ class Histogram2d(_BaseTraceType):
         marker
             plotly.graph_objs.histogram2d.Marker instance or dict
             with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -53756,6 +57144,13 @@ class Histogram2d(_BaseTraceType):
             a 2D cartesian x axis. If "x" (the default value), the
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
+        xbingroup
+            Set a group of histogram traces which will have
+            compatible x-bin settings. Using `xbingroup`,
+            histogram2d and histogram2dcontour traces  (on axes of
+            the same axis type) can have compatible x-bin settings.
+            Note that the same `xbingroup` value can be used to set
+            (1D) histogram `bingroup`
         xbins
             plotly.graph_objs.histogram2d.XBins instance or dict
             with compatible properties
@@ -53772,6 +57167,13 @@ class Histogram2d(_BaseTraceType):
             a 2D cartesian y axis. If "y" (the default value), the
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
+        ybingroup
+            Set a group of histogram traces which will have
+            compatible y-bin settings. Using `ybingroup`,
+            histogram2d and histogram2dcontour traces  (on axes of
+            the same axis type) can have compatible y-bin settings.
+            Note that the same `ybingroup` value can be used to set
+            (1D) histogram `bingroup`
         ybins
             plotly.graph_objs.histogram2d.YBins instance or dict
             with compatible properties
@@ -53818,6 +57220,8 @@ class Histogram2d(_BaseTraceType):
         autobinx=None,
         autobiny=None,
         autocolorscale=None,
+        bingroup=None,
+        coloraxis=None,
         colorbar=None,
         colorscale=None,
         customdata=None,
@@ -53832,6 +57236,8 @@ class Histogram2d(_BaseTraceType):
         ids=None,
         idssrc=None,
         marker=None,
+        meta=None,
+        metasrc=None,
         name=None,
         nbinsx=None,
         nbinsy=None,
@@ -53844,12 +57250,14 @@ class Histogram2d(_BaseTraceType):
         visible=None,
         x=None,
         xaxis=None,
+        xbingroup=None,
         xbins=None,
         xcalendar=None,
         xgap=None,
         xsrc=None,
         y=None,
         yaxis=None,
+        ybingroup=None,
         ybins=None,
         ycalendar=None,
         ygap=None,
@@ -53898,6 +57306,18 @@ class Histogram2d(_BaseTraceType):
             `autocolorscale` is true, the default  palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
+        bingroup
+            Set the `xbingroup` and `ybingroup` default prefix For
+            example, setting a `bingroup` of 1 on two histogram2d
+            traces will make them their x-bins and y-bins match
+            separately.
+        coloraxis
+            Sets a reference to a shared color axis. References to
+            these shared color axes are "coloraxis", "coloraxis2",
+            "coloraxis3", etc. Settings for these shared color axes
+            are set in the layout, under `layout.coloraxis`,
+            `layout.coloraxis2`, etc. Note that multiple color
+            scales can be linked to the same color axis.
         colorbar
             plotly.graph_objs.histogram2d.ColorBar instance or dict
             with compatible properties
@@ -53986,6 +57406,21 @@ class Histogram2d(_BaseTraceType):
         marker
             plotly.graph_objs.histogram2d.Marker instance or dict
             with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -54047,6 +57482,13 @@ class Histogram2d(_BaseTraceType):
             a 2D cartesian x axis. If "x" (the default value), the
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
+        xbingroup
+            Set a group of histogram traces which will have
+            compatible x-bin settings. Using `xbingroup`,
+            histogram2d and histogram2dcontour traces  (on axes of
+            the same axis type) can have compatible x-bin settings.
+            Note that the same `xbingroup` value can be used to set
+            (1D) histogram `bingroup`
         xbins
             plotly.graph_objs.histogram2d.XBins instance or dict
             with compatible properties
@@ -54063,6 +57505,13 @@ class Histogram2d(_BaseTraceType):
             a 2D cartesian y axis. If "y" (the default value), the
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
+        ybingroup
+            Set a group of histogram traces which will have
+            compatible y-bin settings. Using `ybingroup`,
+            histogram2d and histogram2dcontour traces  (on axes of
+            the same axis type) can have compatible y-bin settings.
+            Note that the same `ybingroup` value can be used to set
+            (1D) histogram `bingroup`
         ybins
             plotly.graph_objs.histogram2d.YBins instance or dict
             with compatible properties
@@ -54138,6 +57587,8 @@ an instance of plotly.graph_objs.Histogram2d"""
         self._validators['autobiny'] = v_histogram2d.AutobinyValidator()
         self._validators['autocolorscale'
                         ] = v_histogram2d.AutocolorscaleValidator()
+        self._validators['bingroup'] = v_histogram2d.BingroupValidator()
+        self._validators['coloraxis'] = v_histogram2d.ColoraxisValidator()
         self._validators['colorbar'] = v_histogram2d.ColorBarValidator()
         self._validators['colorscale'] = v_histogram2d.ColorscaleValidator()
         self._validators['customdata'] = v_histogram2d.CustomdataValidator()
@@ -54156,6 +57607,8 @@ an instance of plotly.graph_objs.Histogram2d"""
         self._validators['ids'] = v_histogram2d.IdsValidator()
         self._validators['idssrc'] = v_histogram2d.IdssrcValidator()
         self._validators['marker'] = v_histogram2d.MarkerValidator()
+        self._validators['meta'] = v_histogram2d.MetaValidator()
+        self._validators['metasrc'] = v_histogram2d.MetasrcValidator()
         self._validators['name'] = v_histogram2d.NameValidator()
         self._validators['nbinsx'] = v_histogram2d.NbinsxValidator()
         self._validators['nbinsy'] = v_histogram2d.NbinsyValidator()
@@ -54169,12 +57622,14 @@ an instance of plotly.graph_objs.Histogram2d"""
         self._validators['visible'] = v_histogram2d.VisibleValidator()
         self._validators['x'] = v_histogram2d.XValidator()
         self._validators['xaxis'] = v_histogram2d.XAxisValidator()
+        self._validators['xbingroup'] = v_histogram2d.XbingroupValidator()
         self._validators['xbins'] = v_histogram2d.XBinsValidator()
         self._validators['xcalendar'] = v_histogram2d.XcalendarValidator()
         self._validators['xgap'] = v_histogram2d.XgapValidator()
         self._validators['xsrc'] = v_histogram2d.XsrcValidator()
         self._validators['y'] = v_histogram2d.YValidator()
         self._validators['yaxis'] = v_histogram2d.YAxisValidator()
+        self._validators['ybingroup'] = v_histogram2d.YbingroupValidator()
         self._validators['ybins'] = v_histogram2d.YBinsValidator()
         self._validators['ycalendar'] = v_histogram2d.YcalendarValidator()
         self._validators['ygap'] = v_histogram2d.YgapValidator()
@@ -54198,6 +57653,10 @@ an instance of plotly.graph_objs.Histogram2d"""
         _v = arg.pop('autocolorscale', None)
         self['autocolorscale'
             ] = autocolorscale if autocolorscale is not None else _v
+        _v = arg.pop('bingroup', None)
+        self['bingroup'] = bingroup if bingroup is not None else _v
+        _v = arg.pop('coloraxis', None)
+        self['coloraxis'] = coloraxis if coloraxis is not None else _v
         _v = arg.pop('colorbar', None)
         self['colorbar'] = colorbar if colorbar is not None else _v
         _v = arg.pop('colorscale', None)
@@ -54229,6 +57688,10 @@ an instance of plotly.graph_objs.Histogram2d"""
         self['idssrc'] = idssrc if idssrc is not None else _v
         _v = arg.pop('marker', None)
         self['marker'] = marker if marker is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('nbinsx', None)
@@ -54253,6 +57716,8 @@ an instance of plotly.graph_objs.Histogram2d"""
         self['x'] = x if x is not None else _v
         _v = arg.pop('xaxis', None)
         self['xaxis'] = xaxis if xaxis is not None else _v
+        _v = arg.pop('xbingroup', None)
+        self['xbingroup'] = xbingroup if xbingroup is not None else _v
         _v = arg.pop('xbins', None)
         self['xbins'] = xbins if xbins is not None else _v
         _v = arg.pop('xcalendar', None)
@@ -54265,6 +57730,8 @@ an instance of plotly.graph_objs.Histogram2d"""
         self['y'] = y if y is not None else _v
         _v = arg.pop('yaxis', None)
         self['yaxis'] = yaxis if yaxis is not None else _v
+        _v = arg.pop('ybingroup', None)
+        self['ybingroup'] = ybingroup if ybingroup is not None else _v
         _v = arg.pop('ybins', None)
         self['ybins'] = ybins if ybins is not None else _v
         _v = arg.pop('ycalendar', None)
@@ -54382,6 +57849,33 @@ class Histogram(_BaseTraceType):
     @autobiny.setter
     def autobiny(self, val):
         self['autobiny'] = val
+
+    # bingroup
+    # --------
+    @property
+    def bingroup(self):
+        """
+        Set a group of histogram traces which will have compatible bin
+        settings. Note that traces on the same subplot and with the
+        same "orientation" under `barmode` "stack", "relative" and
+        "group" are forced into the same bingroup, Using `bingroup`,
+        traces under `barmode` "overlay" and on different axes (of the
+        same axis type) can have compatible bin settings. Note that
+        histogram and histogram2d* trace can share the same `bingroup`
+    
+        The 'bingroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['bingroup']
+
+    @bingroup.setter
+    def bingroup(self, val):
+        self['bingroup'] = val
 
     # cumulative
     # ----------
@@ -55021,6 +58515,15 @@ class Histogram(_BaseTraceType):
                     mapped to the colorscale relative to the max
                     and min values of the array or relative to
                     `marker.cmin` and `marker.cmax` if set.
+                coloraxis
+                    Sets a reference to a shared color axis.
+                    References to these shared color axes are
+                    "coloraxis", "coloraxis2", "coloraxis3", etc.
+                    Settings for these shared color axes are set in
+                    the layout, under `layout.coloraxis`,
+                    `layout.coloraxis2`, etc. Note that multiple
+                    color scales can be linked to the same color
+                    axis.
                 colorbar
                     plotly.graph_objs.histogram.marker.ColorBar
                     instance or dict with compatible properties
@@ -55072,6 +58575,54 @@ class Histogram(_BaseTraceType):
     @marker.setter
     def marker(self, val):
         self['marker'] = val
+
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
 
     # name
     # ----
@@ -55817,6 +59368,15 @@ class Histogram(_BaseTraceType):
             However, we accept `autobiny: true` or `false` and will
             update `ybins` accordingly before deleting `autobiny`
             from the trace.
+        bingroup
+            Set a group of histogram traces which will have
+            compatible bin settings. Note that traces on the same
+            subplot and with the same "orientation" under `barmode`
+            "stack", "relative" and "group" are forced into the
+            same bingroup, Using `bingroup`, traces under `barmode`
+            "overlay" and on different axes (of the same axis type)
+            can have compatible bin settings. Note that histogram
+            and histogram2d* trace can share the same `bingroup`
         cumulative
             plotly.graph_objs.histogram.Cumulative instance or dict
             with compatible properties
@@ -55907,6 +59467,21 @@ class Histogram(_BaseTraceType):
         marker
             plotly.graph_objs.histogram.Marker instance or dict
             with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -56021,6 +59596,7 @@ class Histogram(_BaseTraceType):
         alignmentgroup=None,
         autobinx=None,
         autobiny=None,
+        bingroup=None,
         cumulative=None,
         customdata=None,
         customdatasrc=None,
@@ -56039,6 +59615,8 @@ class Histogram(_BaseTraceType):
         idssrc=None,
         legendgroup=None,
         marker=None,
+        meta=None,
+        metasrc=None,
         name=None,
         nbinsx=None,
         nbinsy=None,
@@ -56098,6 +59676,15 @@ class Histogram(_BaseTraceType):
             However, we accept `autobiny: true` or `false` and will
             update `ybins` accordingly before deleting `autobiny`
             from the trace.
+        bingroup
+            Set a group of histogram traces which will have
+            compatible bin settings. Note that traces on the same
+            subplot and with the same "orientation" under `barmode`
+            "stack", "relative" and "group" are forced into the
+            same bingroup, Using `bingroup`, traces under `barmode`
+            "overlay" and on different axes (of the same axis type)
+            can have compatible bin settings. Note that histogram
+            and histogram2d* trace can share the same `bingroup`
         cumulative
             plotly.graph_objs.histogram.Cumulative instance or dict
             with compatible properties
@@ -56188,6 +59775,21 @@ class Histogram(_BaseTraceType):
         marker
             plotly.graph_objs.histogram.Marker instance or dict
             with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -56331,6 +59933,7 @@ an instance of plotly.graph_objs.Histogram"""
                         ] = v_histogram.AlignmentgroupValidator()
         self._validators['autobinx'] = v_histogram.AutobinxValidator()
         self._validators['autobiny'] = v_histogram.AutobinyValidator()
+        self._validators['bingroup'] = v_histogram.BingroupValidator()
         self._validators['cumulative'] = v_histogram.CumulativeValidator()
         self._validators['customdata'] = v_histogram.CustomdataValidator()
         self._validators['customdatasrc'] = v_histogram.CustomdatasrcValidator(
@@ -56352,6 +59955,8 @@ an instance of plotly.graph_objs.Histogram"""
         self._validators['idssrc'] = v_histogram.IdssrcValidator()
         self._validators['legendgroup'] = v_histogram.LegendgroupValidator()
         self._validators['marker'] = v_histogram.MarkerValidator()
+        self._validators['meta'] = v_histogram.MetaValidator()
+        self._validators['metasrc'] = v_histogram.MetasrcValidator()
         self._validators['name'] = v_histogram.NameValidator()
         self._validators['nbinsx'] = v_histogram.NbinsxValidator()
         self._validators['nbinsy'] = v_histogram.NbinsyValidator()
@@ -56389,6 +59994,8 @@ an instance of plotly.graph_objs.Histogram"""
         self['autobinx'] = autobinx if autobinx is not None else _v
         _v = arg.pop('autobiny', None)
         self['autobiny'] = autobiny if autobiny is not None else _v
+        _v = arg.pop('bingroup', None)
+        self['bingroup'] = bingroup if bingroup is not None else _v
         _v = arg.pop('cumulative', None)
         self['cumulative'] = cumulative if cumulative is not None else _v
         _v = arg.pop('customdata', None)
@@ -56428,6 +60035,10 @@ an instance of plotly.graph_objs.Histogram"""
         self['legendgroup'] = legendgroup if legendgroup is not None else _v
         _v = arg.pop('marker', None)
         self['marker'] = marker if marker is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('nbinsx', None)
@@ -56530,6 +60141,33 @@ class Heatmapgl(_BaseTraceType):
     @autocolorscale.setter
     def autocolorscale(self, val):
         self['autocolorscale'] = val
+
+    # coloraxis
+    # ---------
+    @property
+    def coloraxis(self):
+        """
+        Sets a reference to a shared color axis. References to these
+        shared color axes are "coloraxis", "coloraxis2", "coloraxis3",
+        etc. Settings for these shared color axes are set in the
+        layout, under `layout.coloraxis`, `layout.coloraxis2`, etc.
+        Note that multiple color scales can be linked to the same color
+        axis.
+    
+        The 'coloraxis' property is an identifier of a particular
+        subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
+        optionally followed by an integer >= 1
+        (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self['coloraxis']
+
+    @coloraxis.setter
+    def coloraxis(self, val):
+        self['coloraxis'] = val
 
     # colorbar
     # --------
@@ -57030,6 +60668,54 @@ class Heatmapgl(_BaseTraceType):
     @idssrc.setter
     def idssrc(self, val):
         self['idssrc'] = val
+
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
 
     # name
     # ----
@@ -57658,6 +61344,13 @@ class Heatmapgl(_BaseTraceType):
             `autocolorscale` is true, the default  palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
+        coloraxis
+            Sets a reference to a shared color axis. References to
+            these shared color axes are "coloraxis", "coloraxis2",
+            "coloraxis3", etc. Settings for these shared color axes
+            are set in the layout, under `layout.coloraxis`,
+            `layout.coloraxis2`, etc. Note that multiple color
+            scales can be linked to the same color axis.
         colorbar
             plotly.graph_objs.heatmapgl.ColorBar instance or dict
             with compatible properties
@@ -57700,6 +61393,21 @@ class Heatmapgl(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -57814,6 +61522,7 @@ class Heatmapgl(_BaseTraceType):
         self,
         arg=None,
         autocolorscale=None,
+        coloraxis=None,
         colorbar=None,
         colorscale=None,
         customdata=None,
@@ -57825,6 +61534,8 @@ class Heatmapgl(_BaseTraceType):
         hoverlabel=None,
         ids=None,
         idssrc=None,
+        meta=None,
+        metasrc=None,
         name=None,
         opacity=None,
         reversescale=None,
@@ -57871,6 +61582,13 @@ class Heatmapgl(_BaseTraceType):
             `autocolorscale` is true, the default  palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
+        coloraxis
+            Sets a reference to a shared color axis. References to
+            these shared color axes are "coloraxis", "coloraxis2",
+            "coloraxis3", etc. Settings for these shared color axes
+            are set in the layout, under `layout.coloraxis`,
+            `layout.coloraxis2`, etc. Note that multiple color
+            scales can be linked to the same color axis.
         colorbar
             plotly.graph_objs.heatmapgl.ColorBar instance or dict
             with compatible properties
@@ -57913,6 +61631,21 @@ class Heatmapgl(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -58056,6 +61789,7 @@ an instance of plotly.graph_objs.Heatmapgl"""
         # ---------------------
         self._validators['autocolorscale'
                         ] = v_heatmapgl.AutocolorscaleValidator()
+        self._validators['coloraxis'] = v_heatmapgl.ColoraxisValidator()
         self._validators['colorbar'] = v_heatmapgl.ColorBarValidator()
         self._validators['colorscale'] = v_heatmapgl.ColorscaleValidator()
         self._validators['customdata'] = v_heatmapgl.CustomdataValidator()
@@ -58068,6 +61802,8 @@ an instance of plotly.graph_objs.Heatmapgl"""
         self._validators['hoverlabel'] = v_heatmapgl.HoverlabelValidator()
         self._validators['ids'] = v_heatmapgl.IdsValidator()
         self._validators['idssrc'] = v_heatmapgl.IdssrcValidator()
+        self._validators['meta'] = v_heatmapgl.MetaValidator()
+        self._validators['metasrc'] = v_heatmapgl.MetasrcValidator()
         self._validators['name'] = v_heatmapgl.NameValidator()
         self._validators['opacity'] = v_heatmapgl.OpacityValidator()
         self._validators['reversescale'] = v_heatmapgl.ReversescaleValidator()
@@ -58101,6 +61837,8 @@ an instance of plotly.graph_objs.Heatmapgl"""
         _v = arg.pop('autocolorscale', None)
         self['autocolorscale'
             ] = autocolorscale if autocolorscale is not None else _v
+        _v = arg.pop('coloraxis', None)
+        self['coloraxis'] = coloraxis if coloraxis is not None else _v
         _v = arg.pop('colorbar', None)
         self['colorbar'] = colorbar if colorbar is not None else _v
         _v = arg.pop('colorscale', None)
@@ -58124,6 +61862,10 @@ an instance of plotly.graph_objs.Heatmapgl"""
         self['ids'] = ids if ids is not None else _v
         _v = arg.pop('idssrc', None)
         self['idssrc'] = idssrc if idssrc is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('opacity', None)
@@ -58227,6 +61969,33 @@ class Heatmap(_BaseTraceType):
     @autocolorscale.setter
     def autocolorscale(self, val):
         self['autocolorscale'] = val
+
+    # coloraxis
+    # ---------
+    @property
+    def coloraxis(self):
+        """
+        Sets a reference to a shared color axis. References to these
+        shared color axes are "coloraxis", "coloraxis2", "coloraxis3",
+        etc. Settings for these shared color axes are set in the
+        layout, under `layout.coloraxis`, `layout.coloraxis2`, etc.
+        Note that multiple color scales can be linked to the same color
+        axis.
+    
+        The 'coloraxis' property is an identifier of a particular
+        subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
+        optionally followed by an integer >= 1
+        (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self['coloraxis']
+
+    @coloraxis.setter
+    def coloraxis(self, val):
+        self['coloraxis'] = val
 
     # colorbar
     # --------
@@ -58843,6 +62612,54 @@ class Heatmap(_BaseTraceType):
     @idssrc.setter
     def idssrc(self, val):
         self['idssrc'] = val
+
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
 
     # name
     # ----
@@ -59603,6 +63420,13 @@ class Heatmap(_BaseTraceType):
             `autocolorscale` is true, the default  palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
+        coloraxis
+            Sets a reference to a shared color axis. References to
+            these shared color axes are "coloraxis", "coloraxis2",
+            "coloraxis3", etc. Settings for these shared color axes
+            are set in the layout, under `layout.coloraxis`,
+            `layout.coloraxis2`, etc. Note that multiple color
+            scales can be linked to the same color axis.
         colorbar
             plotly.graph_objs.heatmap.ColorBar instance or dict
             with compatible properties
@@ -59673,6 +63497,21 @@ class Heatmap(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -59802,6 +63641,7 @@ class Heatmap(_BaseTraceType):
         self,
         arg=None,
         autocolorscale=None,
+        coloraxis=None,
         colorbar=None,
         colorscale=None,
         connectgaps=None,
@@ -59818,6 +63658,8 @@ class Heatmap(_BaseTraceType):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        meta=None,
+        metasrc=None,
         name=None,
         opacity=None,
         reversescale=None,
@@ -59886,6 +63728,13 @@ class Heatmap(_BaseTraceType):
             `autocolorscale` is true, the default  palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
+        coloraxis
+            Sets a reference to a shared color axis. References to
+            these shared color axes are "coloraxis", "coloraxis2",
+            "coloraxis3", etc. Settings for these shared color axes
+            are set in the layout, under `layout.coloraxis`,
+            `layout.coloraxis2`, etc. Note that multiple color
+            scales can be linked to the same color axis.
         colorbar
             plotly.graph_objs.heatmap.ColorBar instance or dict
             with compatible properties
@@ -59956,6 +63805,21 @@ class Heatmap(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -60114,6 +63978,7 @@ an instance of plotly.graph_objs.Heatmap"""
         # ---------------------
         self._validators['autocolorscale'] = v_heatmap.AutocolorscaleValidator(
         )
+        self._validators['coloraxis'] = v_heatmap.ColoraxisValidator()
         self._validators['colorbar'] = v_heatmap.ColorBarValidator()
         self._validators['colorscale'] = v_heatmap.ColorscaleValidator()
         self._validators['connectgaps'] = v_heatmap.ConnectgapsValidator()
@@ -60131,6 +63996,8 @@ an instance of plotly.graph_objs.Heatmap"""
         self._validators['hovertextsrc'] = v_heatmap.HovertextsrcValidator()
         self._validators['ids'] = v_heatmap.IdsValidator()
         self._validators['idssrc'] = v_heatmap.IdssrcValidator()
+        self._validators['meta'] = v_heatmap.MetaValidator()
+        self._validators['metasrc'] = v_heatmap.MetasrcValidator()
         self._validators['name'] = v_heatmap.NameValidator()
         self._validators['opacity'] = v_heatmap.OpacityValidator()
         self._validators['reversescale'] = v_heatmap.ReversescaleValidator()
@@ -60170,6 +64037,8 @@ an instance of plotly.graph_objs.Heatmap"""
         _v = arg.pop('autocolorscale', None)
         self['autocolorscale'
             ] = autocolorscale if autocolorscale is not None else _v
+        _v = arg.pop('coloraxis', None)
+        self['coloraxis'] = coloraxis if coloraxis is not None else _v
         _v = arg.pop('colorbar', None)
         self['colorbar'] = colorbar if colorbar is not None else _v
         _v = arg.pop('colorscale', None)
@@ -60205,6 +64074,10 @@ an instance of plotly.graph_objs.Heatmap"""
         self['ids'] = ids if ids is not None else _v
         _v = arg.pop('idssrc', None)
         self['idssrc'] = idssrc if idssrc is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('opacity', None)
@@ -60278,6 +64151,3854 @@ an instance of plotly.graph_objs.Heatmap"""
         self._props['type'] = 'heatmap'
         self._validators['type'] = LiteralValidator(
             plotly_name='type', parent_name='heatmap', val='heatmap'
+        )
+        arg.pop('type', None)
+
+        # Process unknown kwargs
+        # ----------------------
+        self._process_kwargs(**dict(arg, **kwargs))
+
+        # Reset skip_invalid
+        # ------------------
+        self._skip_invalid = False
+
+
+from plotly.basedatatypes import BaseTraceType as _BaseTraceType
+import copy as _copy
+
+
+class Funnelarea(_BaseTraceType):
+
+    # aspectratio
+    # -----------
+    @property
+    def aspectratio(self):
+        """
+        Sets the ratio between height and width
+    
+        The 'aspectratio' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self['aspectratio']
+
+    @aspectratio.setter
+    def aspectratio(self, val):
+        self['aspectratio'] = val
+
+    # baseratio
+    # ---------
+    @property
+    def baseratio(self):
+        """
+        Sets the ratio between bottom length and maximum top length.
+    
+        The 'baseratio' property is a number and may be specified as:
+          - An int or float in the interval [0, 1]
+
+        Returns
+        -------
+        int|float
+        """
+        return self['baseratio']
+
+    @baseratio.setter
+    def baseratio(self, val):
+        self['baseratio'] = val
+
+    # customdata
+    # ----------
+    @property
+    def customdata(self):
+        """
+        Assigns extra data each datum. This may be useful when
+        listening to hover, click and selection events. Note that,
+        "scatter" traces also appends customdata items in the markers
+        DOM elements
+    
+        The 'customdata' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self['customdata']
+
+    @customdata.setter
+    def customdata(self, val):
+        self['customdata'] = val
+
+    # customdatasrc
+    # -------------
+    @property
+    def customdatasrc(self):
+        """
+        Sets the source reference on plot.ly for  customdata .
+    
+        The 'customdatasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['customdatasrc']
+
+    @customdatasrc.setter
+    def customdatasrc(self, val):
+        self['customdatasrc'] = val
+
+    # dlabel
+    # ------
+    @property
+    def dlabel(self):
+        """
+        Sets the label step. See `label0` for more info.
+    
+        The 'dlabel' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self['dlabel']
+
+    @dlabel.setter
+    def dlabel(self, val):
+        self['dlabel'] = val
+
+    # domain
+    # ------
+    @property
+    def domain(self):
+        """
+        The 'domain' property is an instance of Domain
+        that may be specified as:
+          - An instance of plotly.graph_objs.funnelarea.Domain
+          - A dict of string/value properties that will be passed
+            to the Domain constructor
+    
+            Supported dict properties:
+                
+                column
+                    If there is a layout grid, use the domain for
+                    this column in the grid for this funnelarea
+                    trace .
+                row
+                    If there is a layout grid, use the domain for
+                    this row in the grid for this funnelarea trace
+                    .
+                x
+                    Sets the horizontal domain of this funnelarea
+                    trace (in plot fraction).
+                y
+                    Sets the vertical domain of this funnelarea
+                    trace (in plot fraction).
+
+        Returns
+        -------
+        plotly.graph_objs.funnelarea.Domain
+        """
+        return self['domain']
+
+    @domain.setter
+    def domain(self, val):
+        self['domain'] = val
+
+    # hoverinfo
+    # ---------
+    @property
+    def hoverinfo(self):
+        """
+        Determines which trace information appear on hover. If `none`
+        or `skip` are set, no information is displayed upon hovering.
+        But, if `none` is set, click and hover events are still fired.
+    
+        The 'hoverinfo' property is a flaglist and may be specified
+        as a string containing:
+          - Any combination of ['label', 'text', 'value', 'percent', 'name'] joined with '+' characters
+            (e.g. 'label+text')
+            OR exactly one of ['all', 'none', 'skip'] (e.g. 'skip')
+          - A list or array of the above
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['hoverinfo']
+
+    @hoverinfo.setter
+    def hoverinfo(self, val):
+        self['hoverinfo'] = val
+
+    # hoverinfosrc
+    # ------------
+    @property
+    def hoverinfosrc(self):
+        """
+        Sets the source reference on plot.ly for  hoverinfo .
+    
+        The 'hoverinfosrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hoverinfosrc']
+
+    @hoverinfosrc.setter
+    def hoverinfosrc(self, val):
+        self['hoverinfosrc'] = val
+
+    # hoverlabel
+    # ----------
+    @property
+    def hoverlabel(self):
+        """
+        The 'hoverlabel' property is an instance of Hoverlabel
+        that may be specified as:
+          - An instance of plotly.graph_objs.funnelarea.Hoverlabel
+          - A dict of string/value properties that will be passed
+            to the Hoverlabel constructor
+    
+            Supported dict properties:
+                
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
+                bgcolor
+                    Sets the background color of the hover labels
+                    for this trace
+                bgcolorsrc
+                    Sets the source reference on plot.ly for
+                    bgcolor .
+                bordercolor
+                    Sets the border color of the hover labels for
+                    this trace.
+                bordercolorsrc
+                    Sets the source reference on plot.ly for
+                    bordercolor .
+                font
+                    Sets the font used in hover labels.
+                namelength
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
+                namelengthsrc
+                    Sets the source reference on plot.ly for
+                    namelength .
+
+        Returns
+        -------
+        plotly.graph_objs.funnelarea.Hoverlabel
+        """
+        return self['hoverlabel']
+
+    @hoverlabel.setter
+    def hoverlabel(self, val):
+        self['hoverlabel'] = val
+
+    # hovertemplate
+    # -------------
+    @property
+    def hovertemplate(self):
+        """
+        Template string used for rendering the information that appear
+        on hover box. Note that this will override `hoverinfo`.
+        Variables are inserted using %{variable}, for example "y:
+        %{y}". Numbers are formatted using d3-format's syntax
+        %{variable:d3-format}, for example "Price: %{y:$.2f}". See http
+        s://github.com/d3/d3-format/blob/master/README.md#locale_format
+        for details on the formatting syntax. The variables available
+        in `hovertemplate` are the ones emitted as event data described
+        at this link https://plot.ly/javascript/plotlyjs-events/#event-
+        data. Additionally, every attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        variables `label`, `color`, `value`, `percent` and `text`.
+        Anything contained in tag `<extra>` is displayed in the
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
+    
+        The 'hovertemplate' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self['hovertemplate']
+
+    @hovertemplate.setter
+    def hovertemplate(self, val):
+        self['hovertemplate'] = val
+
+    # hovertemplatesrc
+    # ----------------
+    @property
+    def hovertemplatesrc(self):
+        """
+        Sets the source reference on plot.ly for  hovertemplate .
+    
+        The 'hovertemplatesrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hovertemplatesrc']
+
+    @hovertemplatesrc.setter
+    def hovertemplatesrc(self, val):
+        self['hovertemplatesrc'] = val
+
+    # hovertext
+    # ---------
+    @property
+    def hovertext(self):
+        """
+        Sets hover text elements associated with each sector. If a
+        single string, the same string appears for all data points. If
+        an array of string, the items are mapped in order of this
+        trace's sectors. To be seen, trace `hoverinfo` must contain a
+        "text" flag.
+    
+        The 'hovertext' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self['hovertext']
+
+    @hovertext.setter
+    def hovertext(self, val):
+        self['hovertext'] = val
+
+    # hovertextsrc
+    # ------------
+    @property
+    def hovertextsrc(self):
+        """
+        Sets the source reference on plot.ly for  hovertext .
+    
+        The 'hovertextsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hovertextsrc']
+
+    @hovertextsrc.setter
+    def hovertextsrc(self, val):
+        self['hovertextsrc'] = val
+
+    # ids
+    # ---
+    @property
+    def ids(self):
+        """
+        Assigns id labels to each datum. These ids for object constancy
+        of data points during animation. Should be an array of strings,
+        not numbers or any other type.
+    
+        The 'ids' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self['ids']
+
+    @ids.setter
+    def ids(self, val):
+        self['ids'] = val
+
+    # idssrc
+    # ------
+    @property
+    def idssrc(self):
+        """
+        Sets the source reference on plot.ly for  ids .
+    
+        The 'idssrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['idssrc']
+
+    @idssrc.setter
+    def idssrc(self, val):
+        self['idssrc'] = val
+
+    # insidetextfont
+    # --------------
+    @property
+    def insidetextfont(self):
+        """
+        Sets the font used for `textinfo` lying inside the sector.
+    
+        The 'insidetextfont' property is an instance of Insidetextfont
+        that may be specified as:
+          - An instance of plotly.graph_objs.funnelarea.Insidetextfont
+          - A dict of string/value properties that will be passed
+            to the Insidetextfont constructor
+    
+            Supported dict properties:
+                
+                color
+    
+                colorsrc
+                    Sets the source reference on plot.ly for  color
+                    .
+                family
+                    HTML font family - the typeface that will be
+                    applied by the web browser. The web browser
+                    will only be able to apply a font if it is
+                    available on the system which it operates.
+                    Provide multiple font families, separated by
+                    commas, to indicate the preference in which to
+                    apply fonts if they aren't available on the
+                    system. The plotly service (at https://plot.ly
+                    or on-premise) generates images on a server,
+                    where only a select number of fonts are
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
+                familysrc
+                    Sets the source reference on plot.ly for
+                    family .
+                size
+    
+                sizesrc
+                    Sets the source reference on plot.ly for  size
+                    .
+
+        Returns
+        -------
+        plotly.graph_objs.funnelarea.Insidetextfont
+        """
+        return self['insidetextfont']
+
+    @insidetextfont.setter
+    def insidetextfont(self, val):
+        self['insidetextfont'] = val
+
+    # label0
+    # ------
+    @property
+    def label0(self):
+        """
+        Alternate to `labels`. Builds a numeric set of labels. Use with
+        `dlabel` where `label0` is the starting label and `dlabel` the
+        step.
+    
+        The 'label0' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self['label0']
+
+    @label0.setter
+    def label0(self, val):
+        self['label0'] = val
+
+    # labels
+    # ------
+    @property
+    def labels(self):
+        """
+        Sets the sector labels. If `labels` entries are duplicated, we
+        sum associated `values` or simply count occurrences if `values`
+        is not provided. For other array attributes (including color)
+        we use the first non-empty entry among all occurrences of the
+        label.
+    
+        The 'labels' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self['labels']
+
+    @labels.setter
+    def labels(self, val):
+        self['labels'] = val
+
+    # labelssrc
+    # ---------
+    @property
+    def labelssrc(self):
+        """
+        Sets the source reference on plot.ly for  labels .
+    
+        The 'labelssrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['labelssrc']
+
+    @labelssrc.setter
+    def labelssrc(self, val):
+        self['labelssrc'] = val
+
+    # legendgroup
+    # -----------
+    @property
+    def legendgroup(self):
+        """
+        Sets the legend group for this trace. Traces part of the same
+        legend group hide/show at the same time when toggling legend
+        items.
+    
+        The 'legendgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['legendgroup']
+
+    @legendgroup.setter
+    def legendgroup(self, val):
+        self['legendgroup'] = val
+
+    # marker
+    # ------
+    @property
+    def marker(self):
+        """
+        The 'marker' property is an instance of Marker
+        that may be specified as:
+          - An instance of plotly.graph_objs.funnelarea.Marker
+          - A dict of string/value properties that will be passed
+            to the Marker constructor
+    
+            Supported dict properties:
+                
+                colors
+                    Sets the color of each sector. If not
+                    specified, the default trace color set is used
+                    to pick the sector colors.
+                colorssrc
+                    Sets the source reference on plot.ly for
+                    colors .
+                line
+                    plotly.graph_objs.funnelarea.marker.Line
+                    instance or dict with compatible properties
+
+        Returns
+        -------
+        plotly.graph_objs.funnelarea.Marker
+        """
+        return self['marker']
+
+    @marker.setter
+    def marker(self, val):
+        self['marker'] = val
+
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
+
+    # name
+    # ----
+    @property
+    def name(self):
+        """
+        Sets the trace name. The trace name appear as the legend item
+        and on hover.
+    
+        The 'name' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['name']
+
+    @name.setter
+    def name(self, val):
+        self['name'] = val
+
+    # opacity
+    # -------
+    @property
+    def opacity(self):
+        """
+        Sets the opacity of the trace.
+    
+        The 'opacity' property is a number and may be specified as:
+          - An int or float in the interval [0, 1]
+
+        Returns
+        -------
+        int|float
+        """
+        return self['opacity']
+
+    @opacity.setter
+    def opacity(self, val):
+        self['opacity'] = val
+
+    # scalegroup
+    # ----------
+    @property
+    def scalegroup(self):
+        """
+        If there are multiple funnelareas that should be sized
+        according to their totals, link them by providing a non-empty
+        group id here shared by every trace in the same group.
+    
+        The 'scalegroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['scalegroup']
+
+    @scalegroup.setter
+    def scalegroup(self, val):
+        self['scalegroup'] = val
+
+    # showlegend
+    # ----------
+    @property
+    def showlegend(self):
+        """
+        Determines whether or not an item corresponding to this trace
+        is shown in the legend.
+    
+        The 'showlegend' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self['showlegend']
+
+    @showlegend.setter
+    def showlegend(self, val):
+        self['showlegend'] = val
+
+    # stream
+    # ------
+    @property
+    def stream(self):
+        """
+        The 'stream' property is an instance of Stream
+        that may be specified as:
+          - An instance of plotly.graph_objs.funnelarea.Stream
+          - A dict of string/value properties that will be passed
+            to the Stream constructor
+    
+            Supported dict properties:
+                
+                maxpoints
+                    Sets the maximum number of points to keep on
+                    the plots from an incoming stream. If
+                    `maxpoints` is set to 50, only the newest 50
+                    points will be displayed on the plot.
+                token
+                    The stream id number links a data trace on a
+                    plot with a stream. See
+                    https://plot.ly/settings for more details.
+
+        Returns
+        -------
+        plotly.graph_objs.funnelarea.Stream
+        """
+        return self['stream']
+
+    @stream.setter
+    def stream(self, val):
+        self['stream'] = val
+
+    # text
+    # ----
+    @property
+    def text(self):
+        """
+        Sets text elements associated with each sector. If trace
+        `textinfo` contains a "text" flag, these elements will be seen
+        on the chart. If trace `hoverinfo` contains a "text" flag and
+        "hovertext" is not set, these elements will be seen in the
+        hover labels.
+    
+        The 'text' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self['text']
+
+    @text.setter
+    def text(self, val):
+        self['text'] = val
+
+    # textfont
+    # --------
+    @property
+    def textfont(self):
+        """
+        Sets the font used for `textinfo`.
+    
+        The 'textfont' property is an instance of Textfont
+        that may be specified as:
+          - An instance of plotly.graph_objs.funnelarea.Textfont
+          - A dict of string/value properties that will be passed
+            to the Textfont constructor
+    
+            Supported dict properties:
+                
+                color
+    
+                colorsrc
+                    Sets the source reference on plot.ly for  color
+                    .
+                family
+                    HTML font family - the typeface that will be
+                    applied by the web browser. The web browser
+                    will only be able to apply a font if it is
+                    available on the system which it operates.
+                    Provide multiple font families, separated by
+                    commas, to indicate the preference in which to
+                    apply fonts if they aren't available on the
+                    system. The plotly service (at https://plot.ly
+                    or on-premise) generates images on a server,
+                    where only a select number of fonts are
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
+                familysrc
+                    Sets the source reference on plot.ly for
+                    family .
+                size
+    
+                sizesrc
+                    Sets the source reference on plot.ly for  size
+                    .
+
+        Returns
+        -------
+        plotly.graph_objs.funnelarea.Textfont
+        """
+        return self['textfont']
+
+    @textfont.setter
+    def textfont(self, val):
+        self['textfont'] = val
+
+    # textinfo
+    # --------
+    @property
+    def textinfo(self):
+        """
+        Determines which trace information appear on the graph.
+    
+        The 'textinfo' property is a flaglist and may be specified
+        as a string containing:
+          - Any combination of ['label', 'text', 'value', 'percent'] joined with '+' characters
+            (e.g. 'label+text')
+            OR exactly one of ['none'] (e.g. 'none')
+
+        Returns
+        -------
+        Any
+        """
+        return self['textinfo']
+
+    @textinfo.setter
+    def textinfo(self, val):
+        self['textinfo'] = val
+
+    # textposition
+    # ------------
+    @property
+    def textposition(self):
+        """
+        Specifies the location of the `textinfo`.
+    
+        The 'textposition' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['inside', 'none']
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['textposition']
+
+    @textposition.setter
+    def textposition(self, val):
+        self['textposition'] = val
+
+    # textpositionsrc
+    # ---------------
+    @property
+    def textpositionsrc(self):
+        """
+        Sets the source reference on plot.ly for  textposition .
+    
+        The 'textpositionsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['textpositionsrc']
+
+    @textpositionsrc.setter
+    def textpositionsrc(self, val):
+        self['textpositionsrc'] = val
+
+    # textsrc
+    # -------
+    @property
+    def textsrc(self):
+        """
+        Sets the source reference on plot.ly for  text .
+    
+        The 'textsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['textsrc']
+
+    @textsrc.setter
+    def textsrc(self, val):
+        self['textsrc'] = val
+
+    # title
+    # -----
+    @property
+    def title(self):
+        """
+        The 'title' property is an instance of Title
+        that may be specified as:
+          - An instance of plotly.graph_objs.funnelarea.Title
+          - A dict of string/value properties that will be passed
+            to the Title constructor
+    
+            Supported dict properties:
+                
+                font
+                    Sets the font used for `title`. Note that the
+                    title's font used to be set by the now
+                    deprecated `titlefont` attribute.
+                position
+                    Specifies the location of the `title`. Note
+                    that the title's position used to be set by the
+                    now deprecated `titleposition` attribute.
+                text
+                    Sets the title of the chart. If it is empty, no
+                    title is displayed. Note that before the
+                    existence of `title.text`, the title's contents
+                    used to be defined as the `title` attribute
+                    itself. This behavior has been deprecated.
+
+        Returns
+        -------
+        plotly.graph_objs.funnelarea.Title
+        """
+        return self['title']
+
+    @title.setter
+    def title(self, val):
+        self['title'] = val
+
+    # uid
+    # ---
+    @property
+    def uid(self):
+        """
+        Assign an id to this trace, Use this to provide object
+        constancy between traces during animations and transitions.
+    
+        The 'uid' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['uid']
+
+    @uid.setter
+    def uid(self, val):
+        self['uid'] = val
+
+    # uirevision
+    # ----------
+    @property
+    def uirevision(self):
+        """
+        Controls persistence of some user-driven changes to the trace:
+        `constraintrange` in `parcoords` traces, as well as some
+        `editable: true` modifications such as `name` and
+        `colorbar.title`. Defaults to `layout.uirevision`. Note that
+        other user-driven trace attribute changes are controlled by
+        `layout` attributes: `trace.visible` is controlled by
+        `layout.legend.uirevision`, `selectedpoints` is controlled by
+        `layout.selectionrevision`, and `colorbar.(x|y)` (accessible
+        with `config: {editable: true}`) is controlled by
+        `layout.editrevision`. Trace changes are tracked by `uid`,
+        which only falls back on trace index if no `uid` is provided.
+        So if your app can add/remove traces before the end of the
+        `data` array, such that the same trace has a different index,
+        you can still preserve user-driven changes if you give each
+        trace a `uid` that stays with it as it moves.
+    
+        The 'uirevision' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['uirevision']
+
+    @uirevision.setter
+    def uirevision(self, val):
+        self['uirevision'] = val
+
+    # values
+    # ------
+    @property
+    def values(self):
+        """
+        Sets the values of the sectors. If omitted, we count
+        occurrences of each label.
+    
+        The 'values' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self['values']
+
+    @values.setter
+    def values(self, val):
+        self['values'] = val
+
+    # valuessrc
+    # ---------
+    @property
+    def valuessrc(self):
+        """
+        Sets the source reference on plot.ly for  values .
+    
+        The 'valuessrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['valuessrc']
+
+    @valuessrc.setter
+    def valuessrc(self, val):
+        self['valuessrc'] = val
+
+    # visible
+    # -------
+    @property
+    def visible(self):
+        """
+        Determines whether or not this trace is visible. If
+        "legendonly", the trace is not drawn, but can appear as a
+        legend item (provided that the legend itself is visible).
+    
+        The 'visible' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                [True, False, 'legendonly']
+
+        Returns
+        -------
+        Any
+        """
+        return self['visible']
+
+    @visible.setter
+    def visible(self, val):
+        self['visible'] = val
+
+    # type
+    # ----
+    @property
+    def type(self):
+        return self._props['type']
+
+    # property parent name
+    # --------------------
+    @property
+    def _parent_path_str(self):
+        return ''
+
+    # Self properties description
+    # ---------------------------
+    @property
+    def _prop_descriptions(self):
+        return """\
+        aspectratio
+            Sets the ratio between height and width
+        baseratio
+            Sets the ratio between bottom length and maximum top
+            length.
+        customdata
+            Assigns extra data each datum. This may be useful when
+            listening to hover, click and selection events. Note
+            that, "scatter" traces also appends customdata items in
+            the markers DOM elements
+        customdatasrc
+            Sets the source reference on plot.ly for  customdata .
+        dlabel
+            Sets the label step. See `label0` for more info.
+        domain
+            plotly.graph_objs.funnelarea.Domain instance or dict
+            with compatible properties
+        hoverinfo
+            Determines which trace information appear on hover. If
+            `none` or `skip` are set, no information is displayed
+            upon hovering. But, if `none` is set, click and hover
+            events are still fired.
+        hoverinfosrc
+            Sets the source reference on plot.ly for  hoverinfo .
+        hoverlabel
+            plotly.graph_objs.funnelarea.Hoverlabel instance or
+            dict with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available. variables `label`, `color`, `value`,
+            `percent` and `text`. Anything contained in tag
+            `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
+        hovertext
+            Sets hover text elements associated with each sector.
+            If a single string, the same string appears for all
+            data points. If an array of string, the items are
+            mapped in order of this trace's sectors. To be seen,
+            trace `hoverinfo` must contain a "text" flag.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
+        ids
+            Assigns id labels to each datum. These ids for object
+            constancy of data points during animation. Should be an
+            array of strings, not numbers or any other type.
+        idssrc
+            Sets the source reference on plot.ly for  ids .
+        insidetextfont
+            Sets the font used for `textinfo` lying inside the
+            sector.
+        label0
+            Alternate to `labels`. Builds a numeric set of labels.
+            Use with `dlabel` where `label0` is the starting label
+            and `dlabel` the step.
+        labels
+            Sets the sector labels. If `labels` entries are
+            duplicated, we sum associated `values` or simply count
+            occurrences if `values` is not provided. For other
+            array attributes (including color) we use the first
+            non-empty entry among all occurrences of the label.
+        labelssrc
+            Sets the source reference on plot.ly for  labels .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
+        marker
+            plotly.graph_objs.funnelarea.Marker instance or dict
+            with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
+        name
+            Sets the trace name. The trace name appear as the
+            legend item and on hover.
+        opacity
+            Sets the opacity of the trace.
+        scalegroup
+            If there are multiple funnelareas that should be sized
+            according to their totals, link them by providing a
+            non-empty group id here shared by every trace in the
+            same group.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
+        stream
+            plotly.graph_objs.funnelarea.Stream instance or dict
+            with compatible properties
+        text
+            Sets text elements associated with each sector. If
+            trace `textinfo` contains a "text" flag, these elements
+            will be seen on the chart. If trace `hoverinfo`
+            contains a "text" flag and "hovertext" is not set,
+            these elements will be seen in the hover labels.
+        textfont
+            Sets the font used for `textinfo`.
+        textinfo
+            Determines which trace information appear on the graph.
+        textposition
+            Specifies the location of the `textinfo`.
+        textpositionsrc
+            Sets the source reference on plot.ly for  textposition
+            .
+        textsrc
+            Sets the source reference on plot.ly for  text .
+        title
+            plotly.graph_objs.funnelarea.Title instance or dict
+            with compatible properties
+        uid
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
+        values
+            Sets the values of the sectors. If omitted, we count
+            occurrences of each label.
+        valuessrc
+            Sets the source reference on plot.ly for  values .
+        visible
+            Determines whether or not this trace is visible. If
+            "legendonly", the trace is not drawn, but can appear as
+            a legend item (provided that the legend itself is
+            visible).
+        """
+
+    def __init__(
+        self,
+        arg=None,
+        aspectratio=None,
+        baseratio=None,
+        customdata=None,
+        customdatasrc=None,
+        dlabel=None,
+        domain=None,
+        hoverinfo=None,
+        hoverinfosrc=None,
+        hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
+        ids=None,
+        idssrc=None,
+        insidetextfont=None,
+        label0=None,
+        labels=None,
+        labelssrc=None,
+        legendgroup=None,
+        marker=None,
+        meta=None,
+        metasrc=None,
+        name=None,
+        opacity=None,
+        scalegroup=None,
+        showlegend=None,
+        stream=None,
+        text=None,
+        textfont=None,
+        textinfo=None,
+        textposition=None,
+        textpositionsrc=None,
+        textsrc=None,
+        title=None,
+        uid=None,
+        uirevision=None,
+        values=None,
+        valuessrc=None,
+        visible=None,
+        **kwargs
+    ):
+        """
+        Construct a new Funnelarea object
+        
+        Visualize stages in a process using area-encoded trapezoids.
+        This trace can be used to show data in a part-to-whole
+        representation similar to a "pie" trace, wherein each item
+        appears in a single stage. See also the "funnel" trace type for
+        a different approach to visualizing funnel data.
+
+        Parameters
+        ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Funnelarea
+        aspectratio
+            Sets the ratio between height and width
+        baseratio
+            Sets the ratio between bottom length and maximum top
+            length.
+        customdata
+            Assigns extra data each datum. This may be useful when
+            listening to hover, click and selection events. Note
+            that, "scatter" traces also appends customdata items in
+            the markers DOM elements
+        customdatasrc
+            Sets the source reference on plot.ly for  customdata .
+        dlabel
+            Sets the label step. See `label0` for more info.
+        domain
+            plotly.graph_objs.funnelarea.Domain instance or dict
+            with compatible properties
+        hoverinfo
+            Determines which trace information appear on hover. If
+            `none` or `skip` are set, no information is displayed
+            upon hovering. But, if `none` is set, click and hover
+            events are still fired.
+        hoverinfosrc
+            Sets the source reference on plot.ly for  hoverinfo .
+        hoverlabel
+            plotly.graph_objs.funnelarea.Hoverlabel instance or
+            dict with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available. variables `label`, `color`, `value`,
+            `percent` and `text`. Anything contained in tag
+            `<extra>` is displayed in the secondary box, for
+            example "<extra>{fullData.name}</extra>". To hide the
+            secondary box completely, use an empty tag
+            `<extra></extra>`.
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
+        hovertext
+            Sets hover text elements associated with each sector.
+            If a single string, the same string appears for all
+            data points. If an array of string, the items are
+            mapped in order of this trace's sectors. To be seen,
+            trace `hoverinfo` must contain a "text" flag.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
+        ids
+            Assigns id labels to each datum. These ids for object
+            constancy of data points during animation. Should be an
+            array of strings, not numbers or any other type.
+        idssrc
+            Sets the source reference on plot.ly for  ids .
+        insidetextfont
+            Sets the font used for `textinfo` lying inside the
+            sector.
+        label0
+            Alternate to `labels`. Builds a numeric set of labels.
+            Use with `dlabel` where `label0` is the starting label
+            and `dlabel` the step.
+        labels
+            Sets the sector labels. If `labels` entries are
+            duplicated, we sum associated `values` or simply count
+            occurrences if `values` is not provided. For other
+            array attributes (including color) we use the first
+            non-empty entry among all occurrences of the label.
+        labelssrc
+            Sets the source reference on plot.ly for  labels .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
+        marker
+            plotly.graph_objs.funnelarea.Marker instance or dict
+            with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
+        name
+            Sets the trace name. The trace name appear as the
+            legend item and on hover.
+        opacity
+            Sets the opacity of the trace.
+        scalegroup
+            If there are multiple funnelareas that should be sized
+            according to their totals, link them by providing a
+            non-empty group id here shared by every trace in the
+            same group.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
+        stream
+            plotly.graph_objs.funnelarea.Stream instance or dict
+            with compatible properties
+        text
+            Sets text elements associated with each sector. If
+            trace `textinfo` contains a "text" flag, these elements
+            will be seen on the chart. If trace `hoverinfo`
+            contains a "text" flag and "hovertext" is not set,
+            these elements will be seen in the hover labels.
+        textfont
+            Sets the font used for `textinfo`.
+        textinfo
+            Determines which trace information appear on the graph.
+        textposition
+            Specifies the location of the `textinfo`.
+        textpositionsrc
+            Sets the source reference on plot.ly for  textposition
+            .
+        textsrc
+            Sets the source reference on plot.ly for  text .
+        title
+            plotly.graph_objs.funnelarea.Title instance or dict
+            with compatible properties
+        uid
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
+        values
+            Sets the values of the sectors. If omitted, we count
+            occurrences of each label.
+        valuessrc
+            Sets the source reference on plot.ly for  values .
+        visible
+            Determines whether or not this trace is visible. If
+            "legendonly", the trace is not drawn, but can appear as
+            a legend item (provided that the legend itself is
+            visible).
+
+        Returns
+        -------
+        Funnelarea
+        """
+        super(Funnelarea, self).__init__('funnelarea')
+
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = _copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Funnelarea 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Funnelarea"""
+            )
+
+        # Handle skip_invalid
+        # -------------------
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+
+        # Import validators
+        # -----------------
+        from plotly.validators import (funnelarea as v_funnelarea)
+
+        # Initialize validators
+        # ---------------------
+        self._validators['aspectratio'] = v_funnelarea.AspectratioValidator()
+        self._validators['baseratio'] = v_funnelarea.BaseratioValidator()
+        self._validators['customdata'] = v_funnelarea.CustomdataValidator()
+        self._validators['customdatasrc'
+                        ] = v_funnelarea.CustomdatasrcValidator()
+        self._validators['dlabel'] = v_funnelarea.DlabelValidator()
+        self._validators['domain'] = v_funnelarea.DomainValidator()
+        self._validators['hoverinfo'] = v_funnelarea.HoverinfoValidator()
+        self._validators['hoverinfosrc'] = v_funnelarea.HoverinfosrcValidator()
+        self._validators['hoverlabel'] = v_funnelarea.HoverlabelValidator()
+        self._validators['hovertemplate'
+                        ] = v_funnelarea.HovertemplateValidator()
+        self._validators['hovertemplatesrc'
+                        ] = v_funnelarea.HovertemplatesrcValidator()
+        self._validators['hovertext'] = v_funnelarea.HovertextValidator()
+        self._validators['hovertextsrc'] = v_funnelarea.HovertextsrcValidator()
+        self._validators['ids'] = v_funnelarea.IdsValidator()
+        self._validators['idssrc'] = v_funnelarea.IdssrcValidator()
+        self._validators['insidetextfont'
+                        ] = v_funnelarea.InsidetextfontValidator()
+        self._validators['label0'] = v_funnelarea.Label0Validator()
+        self._validators['labels'] = v_funnelarea.LabelsValidator()
+        self._validators['labelssrc'] = v_funnelarea.LabelssrcValidator()
+        self._validators['legendgroup'] = v_funnelarea.LegendgroupValidator()
+        self._validators['marker'] = v_funnelarea.MarkerValidator()
+        self._validators['meta'] = v_funnelarea.MetaValidator()
+        self._validators['metasrc'] = v_funnelarea.MetasrcValidator()
+        self._validators['name'] = v_funnelarea.NameValidator()
+        self._validators['opacity'] = v_funnelarea.OpacityValidator()
+        self._validators['scalegroup'] = v_funnelarea.ScalegroupValidator()
+        self._validators['showlegend'] = v_funnelarea.ShowlegendValidator()
+        self._validators['stream'] = v_funnelarea.StreamValidator()
+        self._validators['text'] = v_funnelarea.TextValidator()
+        self._validators['textfont'] = v_funnelarea.TextfontValidator()
+        self._validators['textinfo'] = v_funnelarea.TextinfoValidator()
+        self._validators['textposition'] = v_funnelarea.TextpositionValidator()
+        self._validators['textpositionsrc'
+                        ] = v_funnelarea.TextpositionsrcValidator()
+        self._validators['textsrc'] = v_funnelarea.TextsrcValidator()
+        self._validators['title'] = v_funnelarea.TitleValidator()
+        self._validators['uid'] = v_funnelarea.UidValidator()
+        self._validators['uirevision'] = v_funnelarea.UirevisionValidator()
+        self._validators['values'] = v_funnelarea.ValuesValidator()
+        self._validators['valuessrc'] = v_funnelarea.ValuessrcValidator()
+        self._validators['visible'] = v_funnelarea.VisibleValidator()
+
+        # Populate data dict with properties
+        # ----------------------------------
+        _v = arg.pop('aspectratio', None)
+        self['aspectratio'] = aspectratio if aspectratio is not None else _v
+        _v = arg.pop('baseratio', None)
+        self['baseratio'] = baseratio if baseratio is not None else _v
+        _v = arg.pop('customdata', None)
+        self['customdata'] = customdata if customdata is not None else _v
+        _v = arg.pop('customdatasrc', None)
+        self['customdatasrc'
+            ] = customdatasrc if customdatasrc is not None else _v
+        _v = arg.pop('dlabel', None)
+        self['dlabel'] = dlabel if dlabel is not None else _v
+        _v = arg.pop('domain', None)
+        self['domain'] = domain if domain is not None else _v
+        _v = arg.pop('hoverinfo', None)
+        self['hoverinfo'] = hoverinfo if hoverinfo is not None else _v
+        _v = arg.pop('hoverinfosrc', None)
+        self['hoverinfosrc'] = hoverinfosrc if hoverinfosrc is not None else _v
+        _v = arg.pop('hoverlabel', None)
+        self['hoverlabel'] = hoverlabel if hoverlabel is not None else _v
+        _v = arg.pop('hovertemplate', None)
+        self['hovertemplate'
+            ] = hovertemplate if hovertemplate is not None else _v
+        _v = arg.pop('hovertemplatesrc', None)
+        self['hovertemplatesrc'
+            ] = hovertemplatesrc if hovertemplatesrc is not None else _v
+        _v = arg.pop('hovertext', None)
+        self['hovertext'] = hovertext if hovertext is not None else _v
+        _v = arg.pop('hovertextsrc', None)
+        self['hovertextsrc'] = hovertextsrc if hovertextsrc is not None else _v
+        _v = arg.pop('ids', None)
+        self['ids'] = ids if ids is not None else _v
+        _v = arg.pop('idssrc', None)
+        self['idssrc'] = idssrc if idssrc is not None else _v
+        _v = arg.pop('insidetextfont', None)
+        self['insidetextfont'
+            ] = insidetextfont if insidetextfont is not None else _v
+        _v = arg.pop('label0', None)
+        self['label0'] = label0 if label0 is not None else _v
+        _v = arg.pop('labels', None)
+        self['labels'] = labels if labels is not None else _v
+        _v = arg.pop('labelssrc', None)
+        self['labelssrc'] = labelssrc if labelssrc is not None else _v
+        _v = arg.pop('legendgroup', None)
+        self['legendgroup'] = legendgroup if legendgroup is not None else _v
+        _v = arg.pop('marker', None)
+        self['marker'] = marker if marker is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
+        _v = arg.pop('name', None)
+        self['name'] = name if name is not None else _v
+        _v = arg.pop('opacity', None)
+        self['opacity'] = opacity if opacity is not None else _v
+        _v = arg.pop('scalegroup', None)
+        self['scalegroup'] = scalegroup if scalegroup is not None else _v
+        _v = arg.pop('showlegend', None)
+        self['showlegend'] = showlegend if showlegend is not None else _v
+        _v = arg.pop('stream', None)
+        self['stream'] = stream if stream is not None else _v
+        _v = arg.pop('text', None)
+        self['text'] = text if text is not None else _v
+        _v = arg.pop('textfont', None)
+        self['textfont'] = textfont if textfont is not None else _v
+        _v = arg.pop('textinfo', None)
+        self['textinfo'] = textinfo if textinfo is not None else _v
+        _v = arg.pop('textposition', None)
+        self['textposition'] = textposition if textposition is not None else _v
+        _v = arg.pop('textpositionsrc', None)
+        self['textpositionsrc'
+            ] = textpositionsrc if textpositionsrc is not None else _v
+        _v = arg.pop('textsrc', None)
+        self['textsrc'] = textsrc if textsrc is not None else _v
+        _v = arg.pop('title', None)
+        self['title'] = title if title is not None else _v
+        _v = arg.pop('uid', None)
+        self['uid'] = uid if uid is not None else _v
+        _v = arg.pop('uirevision', None)
+        self['uirevision'] = uirevision if uirevision is not None else _v
+        _v = arg.pop('values', None)
+        self['values'] = values if values is not None else _v
+        _v = arg.pop('valuessrc', None)
+        self['valuessrc'] = valuessrc if valuessrc is not None else _v
+        _v = arg.pop('visible', None)
+        self['visible'] = visible if visible is not None else _v
+
+        # Read-only literals
+        # ------------------
+        from _plotly_utils.basevalidators import LiteralValidator
+        self._props['type'] = 'funnelarea'
+        self._validators['type'] = LiteralValidator(
+            plotly_name='type', parent_name='funnelarea', val='funnelarea'
+        )
+        arg.pop('type', None)
+
+        # Process unknown kwargs
+        # ----------------------
+        self._process_kwargs(**dict(arg, **kwargs))
+
+        # Reset skip_invalid
+        # ------------------
+        self._skip_invalid = False
+
+
+from plotly.basedatatypes import BaseTraceType as _BaseTraceType
+import copy as _copy
+
+
+class Funnel(_BaseTraceType):
+
+    # alignmentgroup
+    # --------------
+    @property
+    def alignmentgroup(self):
+        """
+        Set several traces linked to the same position axis or matching
+        axes to the same alignmentgroup. This controls whether bars
+        compute their positional range dependently or independently.
+    
+        The 'alignmentgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['alignmentgroup']
+
+    @alignmentgroup.setter
+    def alignmentgroup(self, val):
+        self['alignmentgroup'] = val
+
+    # cliponaxis
+    # ----------
+    @property
+    def cliponaxis(self):
+        """
+        Determines whether the text nodes are clipped about the subplot
+        axes. To show the text nodes above axis lines and tick labels,
+        make sure to set `xaxis.layer` and `yaxis.layer` to *below
+        traces*.
+    
+        The 'cliponaxis' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self['cliponaxis']
+
+    @cliponaxis.setter
+    def cliponaxis(self, val):
+        self['cliponaxis'] = val
+
+    # connector
+    # ---------
+    @property
+    def connector(self):
+        """
+        The 'connector' property is an instance of Connector
+        that may be specified as:
+          - An instance of plotly.graph_objs.funnel.Connector
+          - A dict of string/value properties that will be passed
+            to the Connector constructor
+    
+            Supported dict properties:
+                
+                fillcolor
+                    Sets the fill color.
+                line
+                    plotly.graph_objs.funnel.connector.Line
+                    instance or dict with compatible properties
+                visible
+                    Determines if connector regions and lines are
+                    drawn.
+
+        Returns
+        -------
+        plotly.graph_objs.funnel.Connector
+        """
+        return self['connector']
+
+    @connector.setter
+    def connector(self, val):
+        self['connector'] = val
+
+    # constraintext
+    # -------------
+    @property
+    def constraintext(self):
+        """
+        Constrain the size of text inside or outside a bar to be no
+        larger than the bar itself.
+    
+        The 'constraintext' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['inside', 'outside', 'both', 'none']
+
+        Returns
+        -------
+        Any
+        """
+        return self['constraintext']
+
+    @constraintext.setter
+    def constraintext(self, val):
+        self['constraintext'] = val
+
+    # customdata
+    # ----------
+    @property
+    def customdata(self):
+        """
+        Assigns extra data each datum. This may be useful when
+        listening to hover, click and selection events. Note that,
+        "scatter" traces also appends customdata items in the markers
+        DOM elements
+    
+        The 'customdata' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self['customdata']
+
+    @customdata.setter
+    def customdata(self, val):
+        self['customdata'] = val
+
+    # customdatasrc
+    # -------------
+    @property
+    def customdatasrc(self):
+        """
+        Sets the source reference on plot.ly for  customdata .
+    
+        The 'customdatasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['customdatasrc']
+
+    @customdatasrc.setter
+    def customdatasrc(self, val):
+        self['customdatasrc'] = val
+
+    # dx
+    # --
+    @property
+    def dx(self):
+        """
+        Sets the x coordinate step. See `x0` for more info.
+    
+        The 'dx' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self['dx']
+
+    @dx.setter
+    def dx(self, val):
+        self['dx'] = val
+
+    # dy
+    # --
+    @property
+    def dy(self):
+        """
+        Sets the y coordinate step. See `y0` for more info.
+    
+        The 'dy' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self['dy']
+
+    @dy.setter
+    def dy(self, val):
+        self['dy'] = val
+
+    # hoverinfo
+    # ---------
+    @property
+    def hoverinfo(self):
+        """
+        Determines which trace information appear on hover. If `none`
+        or `skip` are set, no information is displayed upon hovering.
+        But, if `none` is set, click and hover events are still fired.
+    
+        The 'hoverinfo' property is a flaglist and may be specified
+        as a string containing:
+          - Any combination of ['x', 'y', 'z', 'text', 'name'] joined with '+' characters
+            (e.g. 'x+y')
+            OR exactly one of ['all', 'none', 'skip'] (e.g. 'skip')
+          - A list or array of the above
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['hoverinfo']
+
+    @hoverinfo.setter
+    def hoverinfo(self, val):
+        self['hoverinfo'] = val
+
+    # hoverinfosrc
+    # ------------
+    @property
+    def hoverinfosrc(self):
+        """
+        Sets the source reference on plot.ly for  hoverinfo .
+    
+        The 'hoverinfosrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hoverinfosrc']
+
+    @hoverinfosrc.setter
+    def hoverinfosrc(self, val):
+        self['hoverinfosrc'] = val
+
+    # hoverlabel
+    # ----------
+    @property
+    def hoverlabel(self):
+        """
+        The 'hoverlabel' property is an instance of Hoverlabel
+        that may be specified as:
+          - An instance of plotly.graph_objs.funnel.Hoverlabel
+          - A dict of string/value properties that will be passed
+            to the Hoverlabel constructor
+    
+            Supported dict properties:
+                
+                align
+                    Sets the horizontal alignment of the text
+                    content within hover label box. Has an effect
+                    only if the hover label text spans more two or
+                    more lines
+                alignsrc
+                    Sets the source reference on plot.ly for  align
+                    .
+                bgcolor
+                    Sets the background color of the hover labels
+                    for this trace
+                bgcolorsrc
+                    Sets the source reference on plot.ly for
+                    bgcolor .
+                bordercolor
+                    Sets the border color of the hover labels for
+                    this trace.
+                bordercolorsrc
+                    Sets the source reference on plot.ly for
+                    bordercolor .
+                font
+                    Sets the font used in hover labels.
+                namelength
+                    Sets the default length (in number of
+                    characters) of the trace name in the hover
+                    labels for all traces. -1 shows the whole name
+                    regardless of length. 0-3 shows the first 0-3
+                    characters, and an integer >3 will show the
+                    whole name if it is less than that many
+                    characters, but if it is longer, will truncate
+                    to `namelength - 3` characters and add an
+                    ellipsis.
+                namelengthsrc
+                    Sets the source reference on plot.ly for
+                    namelength .
+
+        Returns
+        -------
+        plotly.graph_objs.funnel.Hoverlabel
+        """
+        return self['hoverlabel']
+
+    @hoverlabel.setter
+    def hoverlabel(self, val):
+        self['hoverlabel'] = val
+
+    # hovertemplate
+    # -------------
+    @property
+    def hovertemplate(self):
+        """
+        Template string used for rendering the information that appear
+        on hover box. Note that this will override `hoverinfo`.
+        Variables are inserted using %{variable}, for example "y:
+        %{y}". Numbers are formatted using d3-format's syntax
+        %{variable:d3-format}, for example "Price: %{y:$.2f}". See http
+        s://github.com/d3/d3-format/blob/master/README.md#locale_format
+        for details on the formatting syntax. The variables available
+        in `hovertemplate` are the ones emitted as event data described
+        at this link https://plot.ly/javascript/plotlyjs-events/#event-
+        data. Additionally, every attributes that can be specified per-
+        point (the ones that are `arrayOk: true`) are available.
+        Anything contained in tag `<extra>` is displayed in the
+        secondary box, for example "<extra>{fullData.name}</extra>". To
+        hide the secondary box completely, use an empty tag
+        `<extra></extra>`.
+    
+        The 'hovertemplate' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self['hovertemplate']
+
+    @hovertemplate.setter
+    def hovertemplate(self, val):
+        self['hovertemplate'] = val
+
+    # hovertemplatesrc
+    # ----------------
+    @property
+    def hovertemplatesrc(self):
+        """
+        Sets the source reference on plot.ly for  hovertemplate .
+    
+        The 'hovertemplatesrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hovertemplatesrc']
+
+    @hovertemplatesrc.setter
+    def hovertemplatesrc(self, val):
+        self['hovertemplatesrc'] = val
+
+    # hovertext
+    # ---------
+    @property
+    def hovertext(self):
+        """
+        Sets hover text elements associated with each (x,y) pair. If a
+        single string, the same string appears over all the data
+        points. If an array of string, the items are mapped in order to
+        the this trace's (x,y) coordinates. To be seen, trace
+        `hoverinfo` must contain a "text" flag.
+    
+        The 'hovertext' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self['hovertext']
+
+    @hovertext.setter
+    def hovertext(self, val):
+        self['hovertext'] = val
+
+    # hovertextsrc
+    # ------------
+    @property
+    def hovertextsrc(self):
+        """
+        Sets the source reference on plot.ly for  hovertext .
+    
+        The 'hovertextsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['hovertextsrc']
+
+    @hovertextsrc.setter
+    def hovertextsrc(self, val):
+        self['hovertextsrc'] = val
+
+    # ids
+    # ---
+    @property
+    def ids(self):
+        """
+        Assigns id labels to each datum. These ids for object constancy
+        of data points during animation. Should be an array of strings,
+        not numbers or any other type.
+    
+        The 'ids' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self['ids']
+
+    @ids.setter
+    def ids(self, val):
+        self['ids'] = val
+
+    # idssrc
+    # ------
+    @property
+    def idssrc(self):
+        """
+        Sets the source reference on plot.ly for  ids .
+    
+        The 'idssrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['idssrc']
+
+    @idssrc.setter
+    def idssrc(self, val):
+        self['idssrc'] = val
+
+    # insidetextanchor
+    # ----------------
+    @property
+    def insidetextanchor(self):
+        """
+        Determines if texts are kept at center or start/end points in
+        `textposition` "inside" mode.
+    
+        The 'insidetextanchor' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['end', 'middle', 'start']
+
+        Returns
+        -------
+        Any
+        """
+        return self['insidetextanchor']
+
+    @insidetextanchor.setter
+    def insidetextanchor(self, val):
+        self['insidetextanchor'] = val
+
+    # insidetextfont
+    # --------------
+    @property
+    def insidetextfont(self):
+        """
+        Sets the font used for `text` lying inside the bar.
+    
+        The 'insidetextfont' property is an instance of Insidetextfont
+        that may be specified as:
+          - An instance of plotly.graph_objs.funnel.Insidetextfont
+          - A dict of string/value properties that will be passed
+            to the Insidetextfont constructor
+    
+            Supported dict properties:
+                
+                color
+    
+                colorsrc
+                    Sets the source reference on plot.ly for  color
+                    .
+                family
+                    HTML font family - the typeface that will be
+                    applied by the web browser. The web browser
+                    will only be able to apply a font if it is
+                    available on the system which it operates.
+                    Provide multiple font families, separated by
+                    commas, to indicate the preference in which to
+                    apply fonts if they aren't available on the
+                    system. The plotly service (at https://plot.ly
+                    or on-premise) generates images on a server,
+                    where only a select number of fonts are
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
+                familysrc
+                    Sets the source reference on plot.ly for
+                    family .
+                size
+    
+                sizesrc
+                    Sets the source reference on plot.ly for  size
+                    .
+
+        Returns
+        -------
+        plotly.graph_objs.funnel.Insidetextfont
+        """
+        return self['insidetextfont']
+
+    @insidetextfont.setter
+    def insidetextfont(self, val):
+        self['insidetextfont'] = val
+
+    # legendgroup
+    # -----------
+    @property
+    def legendgroup(self):
+        """
+        Sets the legend group for this trace. Traces part of the same
+        legend group hide/show at the same time when toggling legend
+        items.
+    
+        The 'legendgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['legendgroup']
+
+    @legendgroup.setter
+    def legendgroup(self, val):
+        self['legendgroup'] = val
+
+    # marker
+    # ------
+    @property
+    def marker(self):
+        """
+        The 'marker' property is an instance of Marker
+        that may be specified as:
+          - An instance of plotly.graph_objs.funnel.Marker
+          - A dict of string/value properties that will be passed
+            to the Marker constructor
+    
+            Supported dict properties:
+                
+                autocolorscale
+                    Determines whether the colorscale is a default
+                    palette (`autocolorscale: true`) or the palette
+                    determined by `marker.colorscale`. Has an
+                    effect only if in `marker.color`is set to a
+                    numerical array. In case `colorscale` is
+                    unspecified or `autocolorscale` is true, the
+                    default  palette will be chosen according to
+                    whether numbers in the `color` array are all
+                    positive, all negative or mixed.
+                cauto
+                    Determines whether or not the color domain is
+                    computed with respect to the input data (here
+                    in `marker.color`) or the bounds set in
+                    `marker.cmin` and `marker.cmax`  Has an effect
+                    only if in `marker.color`is set to a numerical
+                    array. Defaults to `false` when `marker.cmin`
+                    and `marker.cmax` are set by the user.
+                cmax
+                    Sets the upper bound of the color domain. Has
+                    an effect only if in `marker.color`is set to a
+                    numerical array. Value should have the same
+                    units as in `marker.color` and if set,
+                    `marker.cmin` must be set as well.
+                cmid
+                    Sets the mid-point of the color domain by
+                    scaling `marker.cmin` and/or `marker.cmax` to
+                    be equidistant to this point. Has an effect
+                    only if in `marker.color`is set to a numerical
+                    array. Value should have the same units as in
+                    `marker.color`. Has no effect when
+                    `marker.cauto` is `false`.
+                cmin
+                    Sets the lower bound of the color domain. Has
+                    an effect only if in `marker.color`is set to a
+                    numerical array. Value should have the same
+                    units as in `marker.color` and if set,
+                    `marker.cmax` must be set as well.
+                color
+                    Sets themarkercolor. It accepts either a
+                    specific color or an array of numbers that are
+                    mapped to the colorscale relative to the max
+                    and min values of the array or relative to
+                    `marker.cmin` and `marker.cmax` if set.
+                coloraxis
+                    Sets a reference to a shared color axis.
+                    References to these shared color axes are
+                    "coloraxis", "coloraxis2", "coloraxis3", etc.
+                    Settings for these shared color axes are set in
+                    the layout, under `layout.coloraxis`,
+                    `layout.coloraxis2`, etc. Note that multiple
+                    color scales can be linked to the same color
+                    axis.
+                colorbar
+                    plotly.graph_objs.funnel.marker.ColorBar
+                    instance or dict with compatible properties
+                colorscale
+                    Sets the colorscale. Has an effect only if in
+                    `marker.color`is set to a numerical array. The
+                    colorscale must be an array containing arrays
+                    mapping a normalized value to an rgb, rgba,
+                    hex, hsl, hsv, or named color string. At
+                    minimum, a mapping for the lowest (0) and
+                    highest (1) values are required. For example,
+                    `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To
+                    control the bounds of the colorscale in color
+                    space, use`marker.cmin` and `marker.cmax`.
+                    Alternatively, `colorscale` may be a palette
+                    name string of the following list: Greys,YlGnBu
+                    ,Greens,YlOrRd,Bluered,RdBu,Reds,Blues,Picnic,R
+                    ainbow,Portland,Jet,Hot,Blackbody,Earth,Electri
+                    c,Viridis,Cividis.
+                colorsrc
+                    Sets the source reference on plot.ly for  color
+                    .
+                line
+                    plotly.graph_objs.funnel.marker.Line instance
+                    or dict with compatible properties
+                opacity
+                    Sets the opacity of the bars.
+                opacitysrc
+                    Sets the source reference on plot.ly for
+                    opacity .
+                reversescale
+                    Reverses the color mapping if true. Has an
+                    effect only if in `marker.color`is set to a
+                    numerical array. If true, `marker.cmin` will
+                    correspond to the last color in the array and
+                    `marker.cmax` will correspond to the first
+                    color.
+                showscale
+                    Determines whether or not a colorbar is
+                    displayed for this trace. Has an effect only if
+                    in `marker.color`is set to a numerical array.
+
+        Returns
+        -------
+        plotly.graph_objs.funnel.Marker
+        """
+        return self['marker']
+
+    @marker.setter
+    def marker(self, val):
+        self['marker'] = val
+
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
+
+    # name
+    # ----
+    @property
+    def name(self):
+        """
+        Sets the trace name. The trace name appear as the legend item
+        and on hover.
+    
+        The 'name' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['name']
+
+    @name.setter
+    def name(self, val):
+        self['name'] = val
+
+    # offset
+    # ------
+    @property
+    def offset(self):
+        """
+        Shifts the position where the bar is drawn (in position axis
+        units). In "group" barmode, traces that set "offset" will be
+        excluded and drawn in "overlay" mode instead.
+    
+        The 'offset' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self['offset']
+
+    @offset.setter
+    def offset(self, val):
+        self['offset'] = val
+
+    # offsetgroup
+    # -----------
+    @property
+    def offsetgroup(self):
+        """
+        Set several traces linked to the same position axis or matching
+        axes to the same offsetgroup where bars of the same position
+        coordinate will line up.
+    
+        The 'offsetgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['offsetgroup']
+
+    @offsetgroup.setter
+    def offsetgroup(self, val):
+        self['offsetgroup'] = val
+
+    # opacity
+    # -------
+    @property
+    def opacity(self):
+        """
+        Sets the opacity of the trace.
+    
+        The 'opacity' property is a number and may be specified as:
+          - An int or float in the interval [0, 1]
+
+        Returns
+        -------
+        int|float
+        """
+        return self['opacity']
+
+    @opacity.setter
+    def opacity(self, val):
+        self['opacity'] = val
+
+    # orientation
+    # -----------
+    @property
+    def orientation(self):
+        """
+        Sets the orientation of the funnels. With "v" ("h"), the value
+        of the each bar spans along the vertical (horizontal). By
+        default funnels are tend to be oriented horizontally; unless
+        only "y" array is presented or orientation is set to "v". Also
+        regarding graphs including only 'horizontal' funnels,
+        "autorange" on the "y-axis" are set to "reversed".
+    
+        The 'orientation' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['v', 'h']
+
+        Returns
+        -------
+        Any
+        """
+        return self['orientation']
+
+    @orientation.setter
+    def orientation(self, val):
+        self['orientation'] = val
+
+    # outsidetextfont
+    # ---------------
+    @property
+    def outsidetextfont(self):
+        """
+        Sets the font used for `text` lying outside the bar.
+    
+        The 'outsidetextfont' property is an instance of Outsidetextfont
+        that may be specified as:
+          - An instance of plotly.graph_objs.funnel.Outsidetextfont
+          - A dict of string/value properties that will be passed
+            to the Outsidetextfont constructor
+    
+            Supported dict properties:
+                
+                color
+    
+                colorsrc
+                    Sets the source reference on plot.ly for  color
+                    .
+                family
+                    HTML font family - the typeface that will be
+                    applied by the web browser. The web browser
+                    will only be able to apply a font if it is
+                    available on the system which it operates.
+                    Provide multiple font families, separated by
+                    commas, to indicate the preference in which to
+                    apply fonts if they aren't available on the
+                    system. The plotly service (at https://plot.ly
+                    or on-premise) generates images on a server,
+                    where only a select number of fonts are
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
+                familysrc
+                    Sets the source reference on plot.ly for
+                    family .
+                size
+    
+                sizesrc
+                    Sets the source reference on plot.ly for  size
+                    .
+
+        Returns
+        -------
+        plotly.graph_objs.funnel.Outsidetextfont
+        """
+        return self['outsidetextfont']
+
+    @outsidetextfont.setter
+    def outsidetextfont(self, val):
+        self['outsidetextfont'] = val
+
+    # selectedpoints
+    # --------------
+    @property
+    def selectedpoints(self):
+        """
+        Array containing integer indices of selected points. Has an
+        effect only for traces that support selections. Note that an
+        empty array means an empty selection where the `unselected` are
+        turned on for all points, whereas, any other non-array values
+        means no selection all where the `selected` and `unselected`
+        styles have no effect.
+    
+        The 'selectedpoints' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['selectedpoints']
+
+    @selectedpoints.setter
+    def selectedpoints(self, val):
+        self['selectedpoints'] = val
+
+    # showlegend
+    # ----------
+    @property
+    def showlegend(self):
+        """
+        Determines whether or not an item corresponding to this trace
+        is shown in the legend.
+    
+        The 'showlegend' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self['showlegend']
+
+    @showlegend.setter
+    def showlegend(self, val):
+        self['showlegend'] = val
+
+    # stream
+    # ------
+    @property
+    def stream(self):
+        """
+        The 'stream' property is an instance of Stream
+        that may be specified as:
+          - An instance of plotly.graph_objs.funnel.Stream
+          - A dict of string/value properties that will be passed
+            to the Stream constructor
+    
+            Supported dict properties:
+                
+                maxpoints
+                    Sets the maximum number of points to keep on
+                    the plots from an incoming stream. If
+                    `maxpoints` is set to 50, only the newest 50
+                    points will be displayed on the plot.
+                token
+                    The stream id number links a data trace on a
+                    plot with a stream. See
+                    https://plot.ly/settings for more details.
+
+        Returns
+        -------
+        plotly.graph_objs.funnel.Stream
+        """
+        return self['stream']
+
+    @stream.setter
+    def stream(self, val):
+        self['stream'] = val
+
+    # text
+    # ----
+    @property
+    def text(self):
+        """
+        Sets text elements associated with each (x,y) pair. If a single
+        string, the same string appears over all the data points. If an
+        array of string, the items are mapped in order to the this
+        trace's (x,y) coordinates. If trace `hoverinfo` contains a
+        "text" flag and "hovertext" is not set, these elements will be
+        seen in the hover labels.
+    
+        The 'text' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        str|numpy.ndarray
+        """
+        return self['text']
+
+    @text.setter
+    def text(self, val):
+        self['text'] = val
+
+    # textangle
+    # ---------
+    @property
+    def textangle(self):
+        """
+        Sets the angle of the tick labels with respect to the bar. For
+        example, a `tickangle` of -90 draws the tick labels vertically.
+        With "auto" the texts may automatically be rotated to fit with
+        the maximum size in bars.
+    
+        The 'textangle' property is a angle (in degrees) that may be
+        specified as a number between -180 and 180. Numeric values outside this
+        range are converted to the equivalent value
+        (e.g. 270 is converted to -90).
+
+        Returns
+        -------
+        int|float
+        """
+        return self['textangle']
+
+    @textangle.setter
+    def textangle(self, val):
+        self['textangle'] = val
+
+    # textfont
+    # --------
+    @property
+    def textfont(self):
+        """
+        Sets the font used for `text`.
+    
+        The 'textfont' property is an instance of Textfont
+        that may be specified as:
+          - An instance of plotly.graph_objs.funnel.Textfont
+          - A dict of string/value properties that will be passed
+            to the Textfont constructor
+    
+            Supported dict properties:
+                
+                color
+    
+                colorsrc
+                    Sets the source reference on plot.ly for  color
+                    .
+                family
+                    HTML font family - the typeface that will be
+                    applied by the web browser. The web browser
+                    will only be able to apply a font if it is
+                    available on the system which it operates.
+                    Provide multiple font families, separated by
+                    commas, to indicate the preference in which to
+                    apply fonts if they aren't available on the
+                    system. The plotly service (at https://plot.ly
+                    or on-premise) generates images on a server,
+                    where only a select number of fonts are
+                    installed and supported. These include "Arial",
+                    "Balto", "Courier New", "Droid Sans",, "Droid
+                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    Standard TT", "Open Sans", "Overpass", "PT Sans
+                    Narrow", "Raleway", "Times New Roman".
+                familysrc
+                    Sets the source reference on plot.ly for
+                    family .
+                size
+    
+                sizesrc
+                    Sets the source reference on plot.ly for  size
+                    .
+
+        Returns
+        -------
+        plotly.graph_objs.funnel.Textfont
+        """
+        return self['textfont']
+
+    @textfont.setter
+    def textfont(self, val):
+        self['textfont'] = val
+
+    # textinfo
+    # --------
+    @property
+    def textinfo(self):
+        """
+        Determines which trace information appear on the graph. In the
+        case of having multiple funnels, percentages & totals are
+        computed separately (per trace).
+    
+        The 'textinfo' property is a flaglist and may be specified
+        as a string containing:
+          - Any combination of ['label', 'text', 'percent initial', 'percent previous', 'percent total', 'value'] joined with '+' characters
+            (e.g. 'label+text')
+            OR exactly one of ['none'] (e.g. 'none')
+
+        Returns
+        -------
+        Any
+        """
+        return self['textinfo']
+
+    @textinfo.setter
+    def textinfo(self, val):
+        self['textinfo'] = val
+
+    # textposition
+    # ------------
+    @property
+    def textposition(self):
+        """
+        Specifies the location of the `text`. "inside" positions `text`
+        inside, next to the bar end (rotated and scaled if needed).
+        "outside" positions `text` outside, next to the bar end (scaled
+        if needed), unless there is another bar stacked on this one,
+        then the text gets pushed inside. "auto" tries to position
+        `text` inside the bar, but if the bar is too small and no bar
+        is stacked on this one the text is moved outside.
+    
+        The 'textposition' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['inside', 'outside', 'auto', 'none']
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['textposition']
+
+    @textposition.setter
+    def textposition(self, val):
+        self['textposition'] = val
+
+    # textpositionsrc
+    # ---------------
+    @property
+    def textpositionsrc(self):
+        """
+        Sets the source reference on plot.ly for  textposition .
+    
+        The 'textpositionsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['textpositionsrc']
+
+    @textpositionsrc.setter
+    def textpositionsrc(self, val):
+        self['textpositionsrc'] = val
+
+    # textsrc
+    # -------
+    @property
+    def textsrc(self):
+        """
+        Sets the source reference on plot.ly for  text .
+    
+        The 'textsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['textsrc']
+
+    @textsrc.setter
+    def textsrc(self, val):
+        self['textsrc'] = val
+
+    # uid
+    # ---
+    @property
+    def uid(self):
+        """
+        Assign an id to this trace, Use this to provide object
+        constancy between traces during animations and transitions.
+    
+        The 'uid' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self['uid']
+
+    @uid.setter
+    def uid(self, val):
+        self['uid'] = val
+
+    # uirevision
+    # ----------
+    @property
+    def uirevision(self):
+        """
+        Controls persistence of some user-driven changes to the trace:
+        `constraintrange` in `parcoords` traces, as well as some
+        `editable: true` modifications such as `name` and
+        `colorbar.title`. Defaults to `layout.uirevision`. Note that
+        other user-driven trace attribute changes are controlled by
+        `layout` attributes: `trace.visible` is controlled by
+        `layout.legend.uirevision`, `selectedpoints` is controlled by
+        `layout.selectionrevision`, and `colorbar.(x|y)` (accessible
+        with `config: {editable: true}`) is controlled by
+        `layout.editrevision`. Trace changes are tracked by `uid`,
+        which only falls back on trace index if no `uid` is provided.
+        So if your app can add/remove traces before the end of the
+        `data` array, such that the same trace has a different index,
+        you can still preserve user-driven changes if you give each
+        trace a `uid` that stays with it as it moves.
+    
+        The 'uirevision' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['uirevision']
+
+    @uirevision.setter
+    def uirevision(self, val):
+        self['uirevision'] = val
+
+    # visible
+    # -------
+    @property
+    def visible(self):
+        """
+        Determines whether or not this trace is visible. If
+        "legendonly", the trace is not drawn, but can appear as a
+        legend item (provided that the legend itself is visible).
+    
+        The 'visible' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                [True, False, 'legendonly']
+
+        Returns
+        -------
+        Any
+        """
+        return self['visible']
+
+    @visible.setter
+    def visible(self, val):
+        self['visible'] = val
+
+    # width
+    # -----
+    @property
+    def width(self):
+        """
+        Sets the bar width (in position axis units).
+    
+        The 'width' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self['width']
+
+    @width.setter
+    def width(self, val):
+        self['width'] = val
+
+    # x
+    # -
+    @property
+    def x(self):
+        """
+        Sets the x coordinates.
+    
+        The 'x' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self['x']
+
+    @x.setter
+    def x(self, val):
+        self['x'] = val
+
+    # x0
+    # --
+    @property
+    def x0(self):
+        """
+        Alternate to `x`. Builds a linear space of x coordinates. Use
+        with `dx` where `x0` is the starting coordinate and `dx` the
+        step.
+    
+        The 'x0' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['x0']
+
+    @x0.setter
+    def x0(self, val):
+        self['x0'] = val
+
+    # xaxis
+    # -----
+    @property
+    def xaxis(self):
+        """
+        Sets a reference between this trace's x coordinates and a 2D
+        cartesian x axis. If "x" (the default value), the x coordinates
+        refer to `layout.xaxis`. If "x2", the x coordinates refer to
+        `layout.xaxis2`, and so on.
+    
+        The 'xaxis' property is an identifier of a particular
+        subplot, of type 'x', that may be specified as the string 'x'
+        optionally followed by an integer >= 1
+        (e.g. 'x', 'x1', 'x2', 'x3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self['xaxis']
+
+    @xaxis.setter
+    def xaxis(self, val):
+        self['xaxis'] = val
+
+    # xsrc
+    # ----
+    @property
+    def xsrc(self):
+        """
+        Sets the source reference on plot.ly for  x .
+    
+        The 'xsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['xsrc']
+
+    @xsrc.setter
+    def xsrc(self, val):
+        self['xsrc'] = val
+
+    # y
+    # -
+    @property
+    def y(self):
+        """
+        Sets the y coordinates.
+    
+        The 'y' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self['y']
+
+    @y.setter
+    def y(self, val):
+        self['y'] = val
+
+    # y0
+    # --
+    @property
+    def y0(self):
+        """
+        Alternate to `y`. Builds a linear space of y coordinates. Use
+        with `dy` where `y0` is the starting coordinate and `dy` the
+        step.
+    
+        The 'y0' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self['y0']
+
+    @y0.setter
+    def y0(self, val):
+        self['y0'] = val
+
+    # yaxis
+    # -----
+    @property
+    def yaxis(self):
+        """
+        Sets a reference between this trace's y coordinates and a 2D
+        cartesian y axis. If "y" (the default value), the y coordinates
+        refer to `layout.yaxis`. If "y2", the y coordinates refer to
+        `layout.yaxis2`, and so on.
+    
+        The 'yaxis' property is an identifier of a particular
+        subplot, of type 'y', that may be specified as the string 'y'
+        optionally followed by an integer >= 1
+        (e.g. 'y', 'y1', 'y2', 'y3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self['yaxis']
+
+    @yaxis.setter
+    def yaxis(self, val):
+        self['yaxis'] = val
+
+    # ysrc
+    # ----
+    @property
+    def ysrc(self):
+        """
+        Sets the source reference on plot.ly for  y .
+    
+        The 'ysrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['ysrc']
+
+    @ysrc.setter
+    def ysrc(self, val):
+        self['ysrc'] = val
+
+    # type
+    # ----
+    @property
+    def type(self):
+        return self._props['type']
+
+    # property parent name
+    # --------------------
+    @property
+    def _parent_path_str(self):
+        return ''
+
+    # Self properties description
+    # ---------------------------
+    @property
+    def _prop_descriptions(self):
+        return """\
+        alignmentgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same alignmentgroup. This controls
+            whether bars compute their positional range dependently
+            or independently.
+        cliponaxis
+            Determines whether the text nodes are clipped about the
+            subplot axes. To show the text nodes above axis lines
+            and tick labels, make sure to set `xaxis.layer` and
+            `yaxis.layer` to *below traces*.
+        connector
+            plotly.graph_objs.funnel.Connector instance or dict
+            with compatible properties
+        constraintext
+            Constrain the size of text inside or outside a bar to
+            be no larger than the bar itself.
+        customdata
+            Assigns extra data each datum. This may be useful when
+            listening to hover, click and selection events. Note
+            that, "scatter" traces also appends customdata items in
+            the markers DOM elements
+        customdatasrc
+            Sets the source reference on plot.ly for  customdata .
+        dx
+            Sets the x coordinate step. See `x0` for more info.
+        dy
+            Sets the y coordinate step. See `y0` for more info.
+        hoverinfo
+            Determines which trace information appear on hover. If
+            `none` or `skip` are set, no information is displayed
+            upon hovering. But, if `none` is set, click and hover
+            events are still fired.
+        hoverinfosrc
+            Sets the source reference on plot.ly for  hoverinfo .
+        hoverlabel
+            plotly.graph_objs.funnel.Hoverlabel instance or dict
+            with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
+        hovertext
+            Sets hover text elements associated with each (x,y)
+            pair. If a single string, the same string appears over
+            all the data points. If an array of string, the items
+            are mapped in order to the this trace's (x,y)
+            coordinates. To be seen, trace `hoverinfo` must contain
+            a "text" flag.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
+        ids
+            Assigns id labels to each datum. These ids for object
+            constancy of data points during animation. Should be an
+            array of strings, not numbers or any other type.
+        idssrc
+            Sets the source reference on plot.ly for  ids .
+        insidetextanchor
+            Determines if texts are kept at center or start/end
+            points in `textposition` "inside" mode.
+        insidetextfont
+            Sets the font used for `text` lying inside the bar.
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
+        marker
+            plotly.graph_objs.funnel.Marker instance or dict with
+            compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
+        name
+            Sets the trace name. The trace name appear as the
+            legend item and on hover.
+        offset
+            Shifts the position where the bar is drawn (in position
+            axis units). In "group" barmode, traces that set
+            "offset" will be excluded and drawn in "overlay" mode
+            instead.
+        offsetgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same offsetgroup where bars of the
+            same position coordinate will line up.
+        opacity
+            Sets the opacity of the trace.
+        orientation
+            Sets the orientation of the funnels. With "v" ("h"),
+            the value of the each bar spans along the vertical
+            (horizontal). By default funnels are tend to be
+            oriented horizontally; unless only "y" array is
+            presented or orientation is set to "v". Also regarding
+            graphs including only 'horizontal' funnels, "autorange"
+            on the "y-axis" are set to "reversed".
+        outsidetextfont
+            Sets the font used for `text` lying outside the bar.
+        selectedpoints
+            Array containing integer indices of selected points.
+            Has an effect only for traces that support selections.
+            Note that an empty array means an empty selection where
+            the `unselected` are turned on for all points, whereas,
+            any other non-array values means no selection all where
+            the `selected` and `unselected` styles have no effect.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
+        stream
+            plotly.graph_objs.funnel.Stream instance or dict with
+            compatible properties
+        text
+            Sets text elements associated with each (x,y) pair. If
+            a single string, the same string appears over all the
+            data points. If an array of string, the items are
+            mapped in order to the this trace's (x,y) coordinates.
+            If trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
+            the hover labels.
+        textangle
+            Sets the angle of the tick labels with respect to the
+            bar. For example, a `tickangle` of -90 draws the tick
+            labels vertically. With "auto" the texts may
+            automatically be rotated to fit with the maximum size
+            in bars.
+        textfont
+            Sets the font used for `text`.
+        textinfo
+            Determines which trace information appear on the graph.
+            In the case of having multiple funnels, percentages &
+            totals are computed separately (per trace).
+        textposition
+            Specifies the location of the `text`. "inside"
+            positions `text` inside, next to the bar end (rotated
+            and scaled if needed). "outside" positions `text`
+            outside, next to the bar end (scaled if needed), unless
+            there is another bar stacked on this one, then the text
+            gets pushed inside. "auto" tries to position `text`
+            inside the bar, but if the bar is too small and no bar
+            is stacked on this one the text is moved outside.
+        textpositionsrc
+            Sets the source reference on plot.ly for  textposition
+            .
+        textsrc
+            Sets the source reference on plot.ly for  text .
+        uid
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
+        visible
+            Determines whether or not this trace is visible. If
+            "legendonly", the trace is not drawn, but can appear as
+            a legend item (provided that the legend itself is
+            visible).
+        width
+            Sets the bar width (in position axis units).
+        x
+            Sets the x coordinates.
+        x0
+            Alternate to `x`. Builds a linear space of x
+            coordinates. Use with `dx` where `x0` is the starting
+            coordinate and `dx` the step.
+        xaxis
+            Sets a reference between this trace's x coordinates and
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
+            coordinates refer to `layout.xaxis2`, and so on.
+        xsrc
+            Sets the source reference on plot.ly for  x .
+        y
+            Sets the y coordinates.
+        y0
+            Alternate to `y`. Builds a linear space of y
+            coordinates. Use with `dy` where `y0` is the starting
+            coordinate and `dy` the step.
+        yaxis
+            Sets a reference between this trace's y coordinates and
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
+            coordinates refer to `layout.yaxis2`, and so on.
+        ysrc
+            Sets the source reference on plot.ly for  y .
+        """
+
+    def __init__(
+        self,
+        arg=None,
+        alignmentgroup=None,
+        cliponaxis=None,
+        connector=None,
+        constraintext=None,
+        customdata=None,
+        customdatasrc=None,
+        dx=None,
+        dy=None,
+        hoverinfo=None,
+        hoverinfosrc=None,
+        hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
+        ids=None,
+        idssrc=None,
+        insidetextanchor=None,
+        insidetextfont=None,
+        legendgroup=None,
+        marker=None,
+        meta=None,
+        metasrc=None,
+        name=None,
+        offset=None,
+        offsetgroup=None,
+        opacity=None,
+        orientation=None,
+        outsidetextfont=None,
+        selectedpoints=None,
+        showlegend=None,
+        stream=None,
+        text=None,
+        textangle=None,
+        textfont=None,
+        textinfo=None,
+        textposition=None,
+        textpositionsrc=None,
+        textsrc=None,
+        uid=None,
+        uirevision=None,
+        visible=None,
+        width=None,
+        x=None,
+        x0=None,
+        xaxis=None,
+        xsrc=None,
+        y=None,
+        y0=None,
+        yaxis=None,
+        ysrc=None,
+        **kwargs
+    ):
+        """
+        Construct a new Funnel object
+        
+        Visualize stages in a process using length-encoded bars. This
+        trace can be used to show data in either a part-to-whole
+        representation wherein each item appears in a single stage, or
+        in a "drop-off" representation wherein each item appears in
+        each stage it traversed. See also the "funnelarea" trace type
+        for a different approach to visualizing funnel data.
+
+        Parameters
+        ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.Funnel
+        alignmentgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same alignmentgroup. This controls
+            whether bars compute their positional range dependently
+            or independently.
+        cliponaxis
+            Determines whether the text nodes are clipped about the
+            subplot axes. To show the text nodes above axis lines
+            and tick labels, make sure to set `xaxis.layer` and
+            `yaxis.layer` to *below traces*.
+        connector
+            plotly.graph_objs.funnel.Connector instance or dict
+            with compatible properties
+        constraintext
+            Constrain the size of text inside or outside a bar to
+            be no larger than the bar itself.
+        customdata
+            Assigns extra data each datum. This may be useful when
+            listening to hover, click and selection events. Note
+            that, "scatter" traces also appends customdata items in
+            the markers DOM elements
+        customdatasrc
+            Sets the source reference on plot.ly for  customdata .
+        dx
+            Sets the x coordinate step. See `x0` for more info.
+        dy
+            Sets the y coordinate step. See `y0` for more info.
+        hoverinfo
+            Determines which trace information appear on hover. If
+            `none` or `skip` are set, no information is displayed
+            upon hovering. But, if `none` is set, click and hover
+            events are still fired.
+        hoverinfosrc
+            Sets the source reference on plot.ly for  hoverinfo .
+        hoverlabel
+            plotly.graph_objs.funnel.Hoverlabel instance or dict
+            with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". See https://github.com/d3/d3-format
+            /blob/master/README.md#locale_format for details on the
+            formatting syntax. The variables available in
+            `hovertemplate` are the ones emitted as event data
+            described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available.  Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
+        hovertext
+            Sets hover text elements associated with each (x,y)
+            pair. If a single string, the same string appears over
+            all the data points. If an array of string, the items
+            are mapped in order to the this trace's (x,y)
+            coordinates. To be seen, trace `hoverinfo` must contain
+            a "text" flag.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
+        ids
+            Assigns id labels to each datum. These ids for object
+            constancy of data points during animation. Should be an
+            array of strings, not numbers or any other type.
+        idssrc
+            Sets the source reference on plot.ly for  ids .
+        insidetextanchor
+            Determines if texts are kept at center or start/end
+            points in `textposition` "inside" mode.
+        insidetextfont
+            Sets the font used for `text` lying inside the bar.
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
+        marker
+            plotly.graph_objs.funnel.Marker instance or dict with
+            compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
+        name
+            Sets the trace name. The trace name appear as the
+            legend item and on hover.
+        offset
+            Shifts the position where the bar is drawn (in position
+            axis units). In "group" barmode, traces that set
+            "offset" will be excluded and drawn in "overlay" mode
+            instead.
+        offsetgroup
+            Set several traces linked to the same position axis or
+            matching axes to the same offsetgroup where bars of the
+            same position coordinate will line up.
+        opacity
+            Sets the opacity of the trace.
+        orientation
+            Sets the orientation of the funnels. With "v" ("h"),
+            the value of the each bar spans along the vertical
+            (horizontal). By default funnels are tend to be
+            oriented horizontally; unless only "y" array is
+            presented or orientation is set to "v". Also regarding
+            graphs including only 'horizontal' funnels, "autorange"
+            on the "y-axis" are set to "reversed".
+        outsidetextfont
+            Sets the font used for `text` lying outside the bar.
+        selectedpoints
+            Array containing integer indices of selected points.
+            Has an effect only for traces that support selections.
+            Note that an empty array means an empty selection where
+            the `unselected` are turned on for all points, whereas,
+            any other non-array values means no selection all where
+            the `selected` and `unselected` styles have no effect.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
+        stream
+            plotly.graph_objs.funnel.Stream instance or dict with
+            compatible properties
+        text
+            Sets text elements associated with each (x,y) pair. If
+            a single string, the same string appears over all the
+            data points. If an array of string, the items are
+            mapped in order to the this trace's (x,y) coordinates.
+            If trace `hoverinfo` contains a "text" flag and
+            "hovertext" is not set, these elements will be seen in
+            the hover labels.
+        textangle
+            Sets the angle of the tick labels with respect to the
+            bar. For example, a `tickangle` of -90 draws the tick
+            labels vertically. With "auto" the texts may
+            automatically be rotated to fit with the maximum size
+            in bars.
+        textfont
+            Sets the font used for `text`.
+        textinfo
+            Determines which trace information appear on the graph.
+            In the case of having multiple funnels, percentages &
+            totals are computed separately (per trace).
+        textposition
+            Specifies the location of the `text`. "inside"
+            positions `text` inside, next to the bar end (rotated
+            and scaled if needed). "outside" positions `text`
+            outside, next to the bar end (scaled if needed), unless
+            there is another bar stacked on this one, then the text
+            gets pushed inside. "auto" tries to position `text`
+            inside the bar, but if the bar is too small and no bar
+            is stacked on this one the text is moved outside.
+        textpositionsrc
+            Sets the source reference on plot.ly for  textposition
+            .
+        textsrc
+            Sets the source reference on plot.ly for  text .
+        uid
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
+        visible
+            Determines whether or not this trace is visible. If
+            "legendonly", the trace is not drawn, but can appear as
+            a legend item (provided that the legend itself is
+            visible).
+        width
+            Sets the bar width (in position axis units).
+        x
+            Sets the x coordinates.
+        x0
+            Alternate to `x`. Builds a linear space of x
+            coordinates. Use with `dx` where `x0` is the starting
+            coordinate and `dx` the step.
+        xaxis
+            Sets a reference between this trace's x coordinates and
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
+            coordinates refer to `layout.xaxis2`, and so on.
+        xsrc
+            Sets the source reference on plot.ly for  x .
+        y
+            Sets the y coordinates.
+        y0
+            Alternate to `y`. Builds a linear space of y
+            coordinates. Use with `dy` where `y0` is the starting
+            coordinate and `dy` the step.
+        yaxis
+            Sets a reference between this trace's y coordinates and
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
+            coordinates refer to `layout.yaxis2`, and so on.
+        ysrc
+            Sets the source reference on plot.ly for  y .
+
+        Returns
+        -------
+        Funnel
+        """
+        super(Funnel, self).__init__('funnel')
+
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = _copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.Funnel 
+constructor must be a dict or 
+an instance of plotly.graph_objs.Funnel"""
+            )
+
+        # Handle skip_invalid
+        # -------------------
+        self._skip_invalid = kwargs.pop('skip_invalid', False)
+
+        # Import validators
+        # -----------------
+        from plotly.validators import (funnel as v_funnel)
+
+        # Initialize validators
+        # ---------------------
+        self._validators['alignmentgroup'] = v_funnel.AlignmentgroupValidator()
+        self._validators['cliponaxis'] = v_funnel.CliponaxisValidator()
+        self._validators['connector'] = v_funnel.ConnectorValidator()
+        self._validators['constraintext'] = v_funnel.ConstraintextValidator()
+        self._validators['customdata'] = v_funnel.CustomdataValidator()
+        self._validators['customdatasrc'] = v_funnel.CustomdatasrcValidator()
+        self._validators['dx'] = v_funnel.DxValidator()
+        self._validators['dy'] = v_funnel.DyValidator()
+        self._validators['hoverinfo'] = v_funnel.HoverinfoValidator()
+        self._validators['hoverinfosrc'] = v_funnel.HoverinfosrcValidator()
+        self._validators['hoverlabel'] = v_funnel.HoverlabelValidator()
+        self._validators['hovertemplate'] = v_funnel.HovertemplateValidator()
+        self._validators['hovertemplatesrc'
+                        ] = v_funnel.HovertemplatesrcValidator()
+        self._validators['hovertext'] = v_funnel.HovertextValidator()
+        self._validators['hovertextsrc'] = v_funnel.HovertextsrcValidator()
+        self._validators['ids'] = v_funnel.IdsValidator()
+        self._validators['idssrc'] = v_funnel.IdssrcValidator()
+        self._validators['insidetextanchor'
+                        ] = v_funnel.InsidetextanchorValidator()
+        self._validators['insidetextfont'] = v_funnel.InsidetextfontValidator()
+        self._validators['legendgroup'] = v_funnel.LegendgroupValidator()
+        self._validators['marker'] = v_funnel.MarkerValidator()
+        self._validators['meta'] = v_funnel.MetaValidator()
+        self._validators['metasrc'] = v_funnel.MetasrcValidator()
+        self._validators['name'] = v_funnel.NameValidator()
+        self._validators['offset'] = v_funnel.OffsetValidator()
+        self._validators['offsetgroup'] = v_funnel.OffsetgroupValidator()
+        self._validators['opacity'] = v_funnel.OpacityValidator()
+        self._validators['orientation'] = v_funnel.OrientationValidator()
+        self._validators['outsidetextfont'
+                        ] = v_funnel.OutsidetextfontValidator()
+        self._validators['selectedpoints'] = v_funnel.SelectedpointsValidator()
+        self._validators['showlegend'] = v_funnel.ShowlegendValidator()
+        self._validators['stream'] = v_funnel.StreamValidator()
+        self._validators['text'] = v_funnel.TextValidator()
+        self._validators['textangle'] = v_funnel.TextangleValidator()
+        self._validators['textfont'] = v_funnel.TextfontValidator()
+        self._validators['textinfo'] = v_funnel.TextinfoValidator()
+        self._validators['textposition'] = v_funnel.TextpositionValidator()
+        self._validators['textpositionsrc'
+                        ] = v_funnel.TextpositionsrcValidator()
+        self._validators['textsrc'] = v_funnel.TextsrcValidator()
+        self._validators['uid'] = v_funnel.UidValidator()
+        self._validators['uirevision'] = v_funnel.UirevisionValidator()
+        self._validators['visible'] = v_funnel.VisibleValidator()
+        self._validators['width'] = v_funnel.WidthValidator()
+        self._validators['x'] = v_funnel.XValidator()
+        self._validators['x0'] = v_funnel.X0Validator()
+        self._validators['xaxis'] = v_funnel.XAxisValidator()
+        self._validators['xsrc'] = v_funnel.XsrcValidator()
+        self._validators['y'] = v_funnel.YValidator()
+        self._validators['y0'] = v_funnel.Y0Validator()
+        self._validators['yaxis'] = v_funnel.YAxisValidator()
+        self._validators['ysrc'] = v_funnel.YsrcValidator()
+
+        # Populate data dict with properties
+        # ----------------------------------
+        _v = arg.pop('alignmentgroup', None)
+        self['alignmentgroup'
+            ] = alignmentgroup if alignmentgroup is not None else _v
+        _v = arg.pop('cliponaxis', None)
+        self['cliponaxis'] = cliponaxis if cliponaxis is not None else _v
+        _v = arg.pop('connector', None)
+        self['connector'] = connector if connector is not None else _v
+        _v = arg.pop('constraintext', None)
+        self['constraintext'
+            ] = constraintext if constraintext is not None else _v
+        _v = arg.pop('customdata', None)
+        self['customdata'] = customdata if customdata is not None else _v
+        _v = arg.pop('customdatasrc', None)
+        self['customdatasrc'
+            ] = customdatasrc if customdatasrc is not None else _v
+        _v = arg.pop('dx', None)
+        self['dx'] = dx if dx is not None else _v
+        _v = arg.pop('dy', None)
+        self['dy'] = dy if dy is not None else _v
+        _v = arg.pop('hoverinfo', None)
+        self['hoverinfo'] = hoverinfo if hoverinfo is not None else _v
+        _v = arg.pop('hoverinfosrc', None)
+        self['hoverinfosrc'] = hoverinfosrc if hoverinfosrc is not None else _v
+        _v = arg.pop('hoverlabel', None)
+        self['hoverlabel'] = hoverlabel if hoverlabel is not None else _v
+        _v = arg.pop('hovertemplate', None)
+        self['hovertemplate'
+            ] = hovertemplate if hovertemplate is not None else _v
+        _v = arg.pop('hovertemplatesrc', None)
+        self['hovertemplatesrc'
+            ] = hovertemplatesrc if hovertemplatesrc is not None else _v
+        _v = arg.pop('hovertext', None)
+        self['hovertext'] = hovertext if hovertext is not None else _v
+        _v = arg.pop('hovertextsrc', None)
+        self['hovertextsrc'] = hovertextsrc if hovertextsrc is not None else _v
+        _v = arg.pop('ids', None)
+        self['ids'] = ids if ids is not None else _v
+        _v = arg.pop('idssrc', None)
+        self['idssrc'] = idssrc if idssrc is not None else _v
+        _v = arg.pop('insidetextanchor', None)
+        self['insidetextanchor'
+            ] = insidetextanchor if insidetextanchor is not None else _v
+        _v = arg.pop('insidetextfont', None)
+        self['insidetextfont'
+            ] = insidetextfont if insidetextfont is not None else _v
+        _v = arg.pop('legendgroup', None)
+        self['legendgroup'] = legendgroup if legendgroup is not None else _v
+        _v = arg.pop('marker', None)
+        self['marker'] = marker if marker is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
+        _v = arg.pop('name', None)
+        self['name'] = name if name is not None else _v
+        _v = arg.pop('offset', None)
+        self['offset'] = offset if offset is not None else _v
+        _v = arg.pop('offsetgroup', None)
+        self['offsetgroup'] = offsetgroup if offsetgroup is not None else _v
+        _v = arg.pop('opacity', None)
+        self['opacity'] = opacity if opacity is not None else _v
+        _v = arg.pop('orientation', None)
+        self['orientation'] = orientation if orientation is not None else _v
+        _v = arg.pop('outsidetextfont', None)
+        self['outsidetextfont'
+            ] = outsidetextfont if outsidetextfont is not None else _v
+        _v = arg.pop('selectedpoints', None)
+        self['selectedpoints'
+            ] = selectedpoints if selectedpoints is not None else _v
+        _v = arg.pop('showlegend', None)
+        self['showlegend'] = showlegend if showlegend is not None else _v
+        _v = arg.pop('stream', None)
+        self['stream'] = stream if stream is not None else _v
+        _v = arg.pop('text', None)
+        self['text'] = text if text is not None else _v
+        _v = arg.pop('textangle', None)
+        self['textangle'] = textangle if textangle is not None else _v
+        _v = arg.pop('textfont', None)
+        self['textfont'] = textfont if textfont is not None else _v
+        _v = arg.pop('textinfo', None)
+        self['textinfo'] = textinfo if textinfo is not None else _v
+        _v = arg.pop('textposition', None)
+        self['textposition'] = textposition if textposition is not None else _v
+        _v = arg.pop('textpositionsrc', None)
+        self['textpositionsrc'
+            ] = textpositionsrc if textpositionsrc is not None else _v
+        _v = arg.pop('textsrc', None)
+        self['textsrc'] = textsrc if textsrc is not None else _v
+        _v = arg.pop('uid', None)
+        self['uid'] = uid if uid is not None else _v
+        _v = arg.pop('uirevision', None)
+        self['uirevision'] = uirevision if uirevision is not None else _v
+        _v = arg.pop('visible', None)
+        self['visible'] = visible if visible is not None else _v
+        _v = arg.pop('width', None)
+        self['width'] = width if width is not None else _v
+        _v = arg.pop('x', None)
+        self['x'] = x if x is not None else _v
+        _v = arg.pop('x0', None)
+        self['x0'] = x0 if x0 is not None else _v
+        _v = arg.pop('xaxis', None)
+        self['xaxis'] = xaxis if xaxis is not None else _v
+        _v = arg.pop('xsrc', None)
+        self['xsrc'] = xsrc if xsrc is not None else _v
+        _v = arg.pop('y', None)
+        self['y'] = y if y is not None else _v
+        _v = arg.pop('y0', None)
+        self['y0'] = y0 if y0 is not None else _v
+        _v = arg.pop('yaxis', None)
+        self['yaxis'] = yaxis if yaxis is not None else _v
+        _v = arg.pop('ysrc', None)
+        self['ysrc'] = ysrc if ysrc is not None else _v
+
+        # Read-only literals
+        # ------------------
+        from _plotly_utils.basevalidators import LiteralValidator
+        self._props['type'] = 'funnel'
+        self._validators['type'] = LiteralValidator(
+            plotly_name='type', parent_name='funnel', val='funnel'
         )
         arg.pop('type', None)
 
@@ -60535,6 +68256,33 @@ class Contourcarpet(_BaseTraceType):
     @carpet.setter
     def carpet(self, val):
         self['carpet'] = val
+
+    # coloraxis
+    # ---------
+    @property
+    def coloraxis(self):
+        """
+        Sets a reference to a shared color axis. References to these
+        shared color axes are "coloraxis", "coloraxis2", "coloraxis3",
+        etc. Settings for these shared color axes are set in the
+        layout, under `layout.coloraxis`, `layout.coloraxis2`, etc.
+        Note that multiple color scales can be linked to the same color
+        axis.
+    
+        The 'coloraxis' property is an identifier of a particular
+        subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
+        optionally followed by an integer >= 1
+        (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self['coloraxis']
+
+    @coloraxis.setter
+    def coloraxis(self, val):
+        self['coloraxis'] = val
 
     # colorbar
     # --------
@@ -61284,6 +69032,54 @@ class Contourcarpet(_BaseTraceType):
     def line(self, val):
         self['line'] = val
 
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
+
     # name
     # ----
     @property
@@ -61822,6 +69618,13 @@ class Contourcarpet(_BaseTraceType):
         carpet
             The `carpet` of the carpet axes on which this contour
             trace lies
+        coloraxis
+            Sets a reference to a shared color axis. References to
+            these shared color axes are "coloraxis", "coloraxis2",
+            "coloraxis3", etc. Settings for these shared color axes
+            are set in the layout, under `layout.coloraxis`,
+            `layout.coloraxis2`, etc. Note that multiple color
+            scales can be linked to the same color axis.
         colorbar
             plotly.graph_objs.contourcarpet.ColorBar instance or
             dict with compatible properties
@@ -61883,6 +69686,21 @@ class Contourcarpet(_BaseTraceType):
         line
             plotly.graph_objs.contourcarpet.Line instance or dict
             with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -61988,6 +69806,7 @@ class Contourcarpet(_BaseTraceType):
         bsrc=None,
         btype=None,
         carpet=None,
+        coloraxis=None,
         colorbar=None,
         colorscale=None,
         contours=None,
@@ -62005,6 +69824,8 @@ class Contourcarpet(_BaseTraceType):
         idssrc=None,
         legendgroup=None,
         line=None,
+        meta=None,
+        metasrc=None,
         name=None,
         ncontours=None,
         opacity=None,
@@ -62083,6 +69904,13 @@ class Contourcarpet(_BaseTraceType):
         carpet
             The `carpet` of the carpet axes on which this contour
             trace lies
+        coloraxis
+            Sets a reference to a shared color axis. References to
+            these shared color axes are "coloraxis", "coloraxis2",
+            "coloraxis3", etc. Settings for these shared color axes
+            are set in the layout, under `layout.coloraxis`,
+            `layout.coloraxis2`, etc. Note that multiple color
+            scales can be linked to the same color axis.
         colorbar
             plotly.graph_objs.contourcarpet.ColorBar instance or
             dict with compatible properties
@@ -62144,6 +69972,21 @@ class Contourcarpet(_BaseTraceType):
         line
             plotly.graph_objs.contourcarpet.Line instance or dict
             with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -62279,6 +70122,7 @@ an instance of plotly.graph_objs.Contourcarpet"""
         self._validators['bsrc'] = v_contourcarpet.BsrcValidator()
         self._validators['btype'] = v_contourcarpet.BtypeValidator()
         self._validators['carpet'] = v_contourcarpet.CarpetValidator()
+        self._validators['coloraxis'] = v_contourcarpet.ColoraxisValidator()
         self._validators['colorbar'] = v_contourcarpet.ColorBarValidator()
         self._validators['colorscale'] = v_contourcarpet.ColorscaleValidator()
         self._validators['contours'] = v_contourcarpet.ContoursValidator()
@@ -62300,6 +70144,8 @@ an instance of plotly.graph_objs.Contourcarpet"""
         self._validators['legendgroup'] = v_contourcarpet.LegendgroupValidator(
         )
         self._validators['line'] = v_contourcarpet.LineValidator()
+        self._validators['meta'] = v_contourcarpet.MetaValidator()
+        self._validators['metasrc'] = v_contourcarpet.MetasrcValidator()
         self._validators['name'] = v_contourcarpet.NameValidator()
         self._validators['ncontours'] = v_contourcarpet.NcontoursValidator()
         self._validators['opacity'] = v_contourcarpet.OpacityValidator()
@@ -62348,6 +70194,8 @@ an instance of plotly.graph_objs.Contourcarpet"""
         self['btype'] = btype if btype is not None else _v
         _v = arg.pop('carpet', None)
         self['carpet'] = carpet if carpet is not None else _v
+        _v = arg.pop('coloraxis', None)
+        self['coloraxis'] = coloraxis if coloraxis is not None else _v
         _v = arg.pop('colorbar', None)
         self['colorbar'] = colorbar if colorbar is not None else _v
         _v = arg.pop('colorscale', None)
@@ -62383,6 +70231,10 @@ an instance of plotly.graph_objs.Contourcarpet"""
         self['legendgroup'] = legendgroup if legendgroup is not None else _v
         _v = arg.pop('line', None)
         self['line'] = line if line is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('ncontours', None)
@@ -62499,6 +70351,33 @@ class Contour(_BaseTraceType):
     @autocontour.setter
     def autocontour(self, val):
         self['autocontour'] = val
+
+    # coloraxis
+    # ---------
+    @property
+    def coloraxis(self):
+        """
+        Sets a reference to a shared color axis. References to these
+        shared color axes are "coloraxis", "coloraxis2", "coloraxis3",
+        etc. Settings for these shared color axes are set in the
+        layout, under `layout.coloraxis`, `layout.coloraxis2`, etc.
+        Note that multiple color scales can be linked to the same color
+        axis.
+    
+        The 'coloraxis' property is an identifier of a particular
+        subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
+        optionally followed by an integer >= 1
+        (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self['coloraxis']
+
+    @coloraxis.setter
+    def coloraxis(self, val):
+        self['coloraxis'] = val
 
     # colorbar
     # --------
@@ -63326,6 +71205,54 @@ class Contour(_BaseTraceType):
     def line(self, val):
         self['line'] = val
 
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
+
     # name
     # ----
     @property
@@ -64074,6 +72001,13 @@ class Contour(_BaseTraceType):
             are picked by an algorithm. If True, the number of
             contour levels can be set in `ncontours`. If False, set
             the contour level attributes in `contours`.
+        coloraxis
+            Sets a reference to a shared color axis. References to
+            these shared color axes are "coloraxis", "coloraxis2",
+            "coloraxis3", etc. Settings for these shared color axes
+            are set in the layout, under `layout.coloraxis`,
+            `layout.coloraxis2`, etc. Note that multiple color
+            scales can be linked to the same color axis.
         colorbar
             plotly.graph_objs.contour.ColorBar instance or dict
             with compatible properties
@@ -64159,6 +72093,21 @@ class Contour(_BaseTraceType):
         line
             plotly.graph_objs.contour.Line instance or dict with
             compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -64292,6 +72241,7 @@ class Contour(_BaseTraceType):
         arg=None,
         autocolorscale=None,
         autocontour=None,
+        coloraxis=None,
         colorbar=None,
         colorscale=None,
         connectgaps=None,
@@ -64312,6 +72262,8 @@ class Contour(_BaseTraceType):
         idssrc=None,
         legendgroup=None,
         line=None,
+        meta=None,
+        metasrc=None,
         name=None,
         ncontours=None,
         opacity=None,
@@ -64374,6 +72326,13 @@ class Contour(_BaseTraceType):
             are picked by an algorithm. If True, the number of
             contour levels can be set in `ncontours`. If False, set
             the contour level attributes in `contours`.
+        coloraxis
+            Sets a reference to a shared color axis. References to
+            these shared color axes are "coloraxis", "coloraxis2",
+            "coloraxis3", etc. Settings for these shared color axes
+            are set in the layout, under `layout.coloraxis`,
+            `layout.coloraxis2`, etc. Note that multiple color
+            scales can be linked to the same color axis.
         colorbar
             plotly.graph_objs.contour.ColorBar instance or dict
             with compatible properties
@@ -64459,6 +72418,21 @@ class Contour(_BaseTraceType):
         line
             plotly.graph_objs.contour.Line instance or dict with
             compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -64621,6 +72595,7 @@ an instance of plotly.graph_objs.Contour"""
         self._validators['autocolorscale'] = v_contour.AutocolorscaleValidator(
         )
         self._validators['autocontour'] = v_contour.AutocontourValidator()
+        self._validators['coloraxis'] = v_contour.ColoraxisValidator()
         self._validators['colorbar'] = v_contour.ColorBarValidator()
         self._validators['colorscale'] = v_contour.ColorscaleValidator()
         self._validators['connectgaps'] = v_contour.ConnectgapsValidator()
@@ -64642,6 +72617,8 @@ an instance of plotly.graph_objs.Contour"""
         self._validators['idssrc'] = v_contour.IdssrcValidator()
         self._validators['legendgroup'] = v_contour.LegendgroupValidator()
         self._validators['line'] = v_contour.LineValidator()
+        self._validators['meta'] = v_contour.MetaValidator()
+        self._validators['metasrc'] = v_contour.MetasrcValidator()
         self._validators['name'] = v_contour.NameValidator()
         self._validators['ncontours'] = v_contour.NcontoursValidator()
         self._validators['opacity'] = v_contour.OpacityValidator()
@@ -64682,6 +72659,8 @@ an instance of plotly.graph_objs.Contour"""
             ] = autocolorscale if autocolorscale is not None else _v
         _v = arg.pop('autocontour', None)
         self['autocontour'] = autocontour if autocontour is not None else _v
+        _v = arg.pop('coloraxis', None)
+        self['coloraxis'] = coloraxis if coloraxis is not None else _v
         _v = arg.pop('colorbar', None)
         self['colorbar'] = colorbar if colorbar is not None else _v
         _v = arg.pop('colorscale', None)
@@ -64725,6 +72704,10 @@ an instance of plotly.graph_objs.Contour"""
         self['legendgroup'] = legendgroup if legendgroup is not None else _v
         _v = arg.pop('line', None)
         self['line'] = line if line is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('ncontours', None)
@@ -64951,6 +72934,33 @@ class Cone(_BaseTraceType):
     @cmin.setter
     def cmin(self, val):
         self['cmin'] = val
+
+    # coloraxis
+    # ---------
+    @property
+    def coloraxis(self):
+        """
+        Sets a reference to a shared color axis. References to these
+        shared color axes are "coloraxis", "coloraxis2", "coloraxis3",
+        etc. Settings for these shared color axes are set in the
+        layout, under `layout.coloraxis`, `layout.coloraxis2`, etc.
+        Note that multiple color scales can be linked to the same color
+        axis.
+    
+        The 'coloraxis' property is an identifier of a particular
+        subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
+        optionally followed by an integer >= 1
+        (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self['coloraxis']
+
+    @coloraxis.setter
+    def coloraxis(self, val):
+        self['coloraxis'] = val
 
     # colorbar
     # --------
@@ -65588,6 +73598,54 @@ class Cone(_BaseTraceType):
     def lightposition(self, val):
         self['lightposition'] = val
 
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
+
     # name
     # ----
     @property
@@ -66200,6 +74258,13 @@ class Cone(_BaseTraceType):
             Sets the lower bound of the color domain. Value should
             have the same units as u/v/w norm and if set, `cmax`
             must be set as well.
+        coloraxis
+            Sets a reference to a shared color axis. References to
+            these shared color axes are "coloraxis", "coloraxis2",
+            "coloraxis3", etc. Settings for these shared color axes
+            are set in the layout, under `layout.coloraxis`,
+            `layout.coloraxis2`, etc. Note that multiple color
+            scales can be linked to the same color axis.
         colorbar
             plotly.graph_objs.cone.ColorBar instance or dict with
             compatible properties
@@ -66270,6 +74335,21 @@ class Cone(_BaseTraceType):
         lightposition
             plotly.graph_objs.cone.Lightposition instance or dict
             with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -66386,6 +74466,7 @@ class Cone(_BaseTraceType):
         cmax=None,
         cmid=None,
         cmin=None,
+        coloraxis=None,
         colorbar=None,
         colorscale=None,
         customdata=None,
@@ -66401,6 +74482,8 @@ class Cone(_BaseTraceType):
         idssrc=None,
         lighting=None,
         lightposition=None,
+        meta=None,
+        metasrc=None,
         name=None,
         opacity=None,
         reversescale=None,
@@ -66470,6 +74553,13 @@ class Cone(_BaseTraceType):
             Sets the lower bound of the color domain. Value should
             have the same units as u/v/w norm and if set, `cmax`
             must be set as well.
+        coloraxis
+            Sets a reference to a shared color axis. References to
+            these shared color axes are "coloraxis", "coloraxis2",
+            "coloraxis3", etc. Settings for these shared color axes
+            are set in the layout, under `layout.coloraxis`,
+            `layout.coloraxis2`, etc. Note that multiple color
+            scales can be linked to the same color axis.
         colorbar
             plotly.graph_objs.cone.ColorBar instance or dict with
             compatible properties
@@ -66540,6 +74630,21 @@ class Cone(_BaseTraceType):
         lightposition
             plotly.graph_objs.cone.Lightposition instance or dict
             with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -66684,6 +74789,7 @@ an instance of plotly.graph_objs.Cone"""
         self._validators['cmax'] = v_cone.CmaxValidator()
         self._validators['cmid'] = v_cone.CmidValidator()
         self._validators['cmin'] = v_cone.CminValidator()
+        self._validators['coloraxis'] = v_cone.ColoraxisValidator()
         self._validators['colorbar'] = v_cone.ColorBarValidator()
         self._validators['colorscale'] = v_cone.ColorscaleValidator()
         self._validators['customdata'] = v_cone.CustomdataValidator()
@@ -66700,6 +74806,8 @@ an instance of plotly.graph_objs.Cone"""
         self._validators['idssrc'] = v_cone.IdssrcValidator()
         self._validators['lighting'] = v_cone.LightingValidator()
         self._validators['lightposition'] = v_cone.LightpositionValidator()
+        self._validators['meta'] = v_cone.MetaValidator()
+        self._validators['metasrc'] = v_cone.MetasrcValidator()
         self._validators['name'] = v_cone.NameValidator()
         self._validators['opacity'] = v_cone.OpacityValidator()
         self._validators['reversescale'] = v_cone.ReversescaleValidator()
@@ -66741,6 +74849,8 @@ an instance of plotly.graph_objs.Cone"""
         self['cmid'] = cmid if cmid is not None else _v
         _v = arg.pop('cmin', None)
         self['cmin'] = cmin if cmin is not None else _v
+        _v = arg.pop('coloraxis', None)
+        self['coloraxis'] = coloraxis if coloraxis is not None else _v
         _v = arg.pop('colorbar', None)
         self['colorbar'] = colorbar if colorbar is not None else _v
         _v = arg.pop('colorscale', None)
@@ -66775,6 +74885,10 @@ an instance of plotly.graph_objs.Cone"""
         _v = arg.pop('lightposition', None)
         self['lightposition'
             ] = lightposition if lightposition is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('opacity', None)
@@ -66874,6 +74988,33 @@ class Choropleth(_BaseTraceType):
     @autocolorscale.setter
     def autocolorscale(self, val):
         self['autocolorscale'] = val
+
+    # coloraxis
+    # ---------
+    @property
+    def coloraxis(self):
+        """
+        Sets a reference to a shared color axis. References to these
+        shared color axes are "coloraxis", "coloraxis2", "coloraxis3",
+        etc. Settings for these shared color axes are set in the
+        layout, under `layout.coloraxis`, `layout.coloraxis2`, etc.
+        Note that multiple color scales can be linked to the same color
+        axis.
+    
+        The 'coloraxis' property is an identifier of a particular
+        subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
+        optionally followed by an integer >= 1
+        (e.g. 'coloraxis', 'coloraxis1', 'coloraxis2', 'coloraxis3', etc.)
+
+        Returns
+        -------
+        str
+        """
+        return self['coloraxis']
+
+    @coloraxis.setter
+    def coloraxis(self, val):
+        self['coloraxis'] = val
 
     # colorbar
     # --------
@@ -67553,6 +75694,54 @@ class Choropleth(_BaseTraceType):
     def marker(self, val):
         self['marker'] = val
 
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
+
     # name
     # ----
     @property
@@ -68000,6 +76189,13 @@ class Choropleth(_BaseTraceType):
             `autocolorscale` is true, the default  palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
+        coloraxis
+            Sets a reference to a shared color axis. References to
+            these shared color axes are "coloraxis", "coloraxis2",
+            "coloraxis3", etc. Settings for these shared color axes
+            are set in the layout, under `layout.coloraxis`,
+            `layout.coloraxis2`, etc. Note that multiple color
+            scales can be linked to the same color axis.
         colorbar
             plotly.graph_objs.choropleth.ColorBar instance or dict
             with compatible properties
@@ -68080,6 +76276,21 @@ class Choropleth(_BaseTraceType):
         marker
             plotly.graph_objs.choropleth.Marker instance or dict
             with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -68165,6 +76376,7 @@ class Choropleth(_BaseTraceType):
         self,
         arg=None,
         autocolorscale=None,
+        coloraxis=None,
         colorbar=None,
         colorscale=None,
         customdata=None,
@@ -68183,6 +76395,8 @@ class Choropleth(_BaseTraceType):
         locations=None,
         locationssrc=None,
         marker=None,
+        meta=None,
+        metasrc=None,
         name=None,
         reversescale=None,
         selected=None,
@@ -68222,6 +76436,13 @@ class Choropleth(_BaseTraceType):
             `autocolorscale` is true, the default  palette will be
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
+        coloraxis
+            Sets a reference to a shared color axis. References to
+            these shared color axes are "coloraxis", "coloraxis2",
+            "coloraxis3", etc. Settings for these shared color axes
+            are set in the layout, under `layout.coloraxis`,
+            `layout.coloraxis2`, etc. Note that multiple color
+            scales can be linked to the same color axis.
         colorbar
             plotly.graph_objs.choropleth.ColorBar instance or dict
             with compatible properties
@@ -68302,6 +76523,21 @@ class Choropleth(_BaseTraceType):
         marker
             plotly.graph_objs.choropleth.Marker instance or dict
             with compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -68416,6 +76652,7 @@ an instance of plotly.graph_objs.Choropleth"""
         # ---------------------
         self._validators['autocolorscale'
                         ] = v_choropleth.AutocolorscaleValidator()
+        self._validators['coloraxis'] = v_choropleth.ColoraxisValidator()
         self._validators['colorbar'] = v_choropleth.ColorBarValidator()
         self._validators['colorscale'] = v_choropleth.ColorscaleValidator()
         self._validators['customdata'] = v_choropleth.CustomdataValidator()
@@ -68437,6 +76674,8 @@ an instance of plotly.graph_objs.Choropleth"""
         self._validators['locations'] = v_choropleth.LocationsValidator()
         self._validators['locationssrc'] = v_choropleth.LocationssrcValidator()
         self._validators['marker'] = v_choropleth.MarkerValidator()
+        self._validators['meta'] = v_choropleth.MetaValidator()
+        self._validators['metasrc'] = v_choropleth.MetasrcValidator()
         self._validators['name'] = v_choropleth.NameValidator()
         self._validators['reversescale'] = v_choropleth.ReversescaleValidator()
         self._validators['selected'] = v_choropleth.SelectedValidator()
@@ -68462,6 +76701,8 @@ an instance of plotly.graph_objs.Choropleth"""
         _v = arg.pop('autocolorscale', None)
         self['autocolorscale'
             ] = autocolorscale if autocolorscale is not None else _v
+        _v = arg.pop('coloraxis', None)
+        self['coloraxis'] = coloraxis if coloraxis is not None else _v
         _v = arg.pop('colorbar', None)
         self['colorbar'] = colorbar if colorbar is not None else _v
         _v = arg.pop('colorscale', None)
@@ -68501,6 +76742,10 @@ an instance of plotly.graph_objs.Choropleth"""
         self['locationssrc'] = locationssrc if locationssrc is not None else _v
         _v = arg.pop('marker', None)
         self['marker'] = marker if marker is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('reversescale', None)
@@ -69540,6 +77785,54 @@ class Carpet(_BaseTraceType):
     def idssrc(self, val):
         self['idssrc'] = val
 
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
+
     # name
     # ----
     @property
@@ -69908,6 +78201,21 @@ class Carpet(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -69990,6 +78298,8 @@ class Carpet(_BaseTraceType):
         hoverlabel=None,
         ids=None,
         idssrc=None,
+        meta=None,
+        metasrc=None,
         name=None,
         opacity=None,
         stream=None,
@@ -70085,6 +78395,21 @@ class Carpet(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -70195,6 +78520,8 @@ an instance of plotly.graph_objs.Carpet"""
         self._validators['hoverlabel'] = v_carpet.HoverlabelValidator()
         self._validators['ids'] = v_carpet.IdsValidator()
         self._validators['idssrc'] = v_carpet.IdssrcValidator()
+        self._validators['meta'] = v_carpet.MetaValidator()
+        self._validators['metasrc'] = v_carpet.MetasrcValidator()
         self._validators['name'] = v_carpet.NameValidator()
         self._validators['opacity'] = v_carpet.OpacityValidator()
         self._validators['stream'] = v_carpet.StreamValidator()
@@ -70253,6 +78580,10 @@ an instance of plotly.graph_objs.Carpet"""
         self['ids'] = ids if ids is not None else _v
         _v = arg.pop('idssrc', None)
         self['idssrc'] = idssrc if idssrc is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('opacity', None)
@@ -70774,6 +79105,54 @@ class Candlestick(_BaseTraceType):
     def lowsrc(self, val):
         self['lowsrc'] = val
 
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
+
     # name
     # ----
     @property
@@ -71262,6 +79641,21 @@ class Candlestick(_BaseTraceType):
             Sets the low values.
         lowsrc
             Sets the source reference on plot.ly for  low .
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -71363,6 +79757,8 @@ class Candlestick(_BaseTraceType):
         line=None,
         low=None,
         lowsrc=None,
+        meta=None,
+        metasrc=None,
         name=None,
         opacity=None,
         open=None,
@@ -71452,6 +79848,21 @@ class Candlestick(_BaseTraceType):
             Sets the low values.
         lowsrc
             Sets the source reference on plot.ly for  low .
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -71584,6 +79995,8 @@ an instance of plotly.graph_objs.Candlestick"""
         self._validators['line'] = v_candlestick.LineValidator()
         self._validators['low'] = v_candlestick.LowValidator()
         self._validators['lowsrc'] = v_candlestick.LowsrcValidator()
+        self._validators['meta'] = v_candlestick.MetaValidator()
+        self._validators['metasrc'] = v_candlestick.MetasrcValidator()
         self._validators['name'] = v_candlestick.NameValidator()
         self._validators['opacity'] = v_candlestick.OpacityValidator()
         self._validators['open'] = v_candlestick.OpenValidator()
@@ -71646,6 +80059,10 @@ an instance of plotly.graph_objs.Candlestick"""
         self['low'] = low if low is not None else _v
         _v = arg.pop('lowsrc', None)
         self['lowsrc'] = lowsrc if lowsrc is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('opacity', None)
@@ -72272,6 +80689,54 @@ class Box(_BaseTraceType):
     @marker.setter
     def marker(self, val):
         self['marker'] = val
+
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
 
     # name
     # ----
@@ -73048,6 +81513,21 @@ class Box(_BaseTraceType):
         marker
             plotly.graph_objs.box.Marker instance or dict with
             compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover. For box traces, the name will
@@ -73195,6 +81675,8 @@ class Box(_BaseTraceType):
         legendgroup=None,
         line=None,
         marker=None,
+        meta=None,
+        metasrc=None,
         name=None,
         notched=None,
         notchwidth=None,
@@ -73332,6 +81814,21 @@ class Box(_BaseTraceType):
         marker
             plotly.graph_objs.box.Marker instance or dict with
             compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover. For box traces, the name will
@@ -73508,6 +82005,8 @@ an instance of plotly.graph_objs.Box"""
         self._validators['legendgroup'] = v_box.LegendgroupValidator()
         self._validators['line'] = v_box.LineValidator()
         self._validators['marker'] = v_box.MarkerValidator()
+        self._validators['meta'] = v_box.MetaValidator()
+        self._validators['metasrc'] = v_box.MetasrcValidator()
         self._validators['name'] = v_box.NameValidator()
         self._validators['notched'] = v_box.NotchedValidator()
         self._validators['notchwidth'] = v_box.NotchwidthValidator()
@@ -73584,6 +82083,10 @@ an instance of plotly.graph_objs.Box"""
         self['line'] = line if line is not None else _v
         _v = arg.pop('marker', None)
         self['marker'] = marker if marker is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('notched', None)
@@ -74119,6 +82622,15 @@ class Barpolar(_BaseTraceType):
                     mapped to the colorscale relative to the max
                     and min values of the array or relative to
                     `marker.cmin` and `marker.cmax` if set.
+                coloraxis
+                    Sets a reference to a shared color axis.
+                    References to these shared color axes are
+                    "coloraxis", "coloraxis2", "coloraxis3", etc.
+                    Settings for these shared color axes are set in
+                    the layout, under `layout.coloraxis`,
+                    `layout.coloraxis2`, etc. Note that multiple
+                    color scales can be linked to the same color
+                    axis.
                 colorbar
                     plotly.graph_objs.barpolar.marker.ColorBar
                     instance or dict with compatible properties
@@ -74170,6 +82682,54 @@ class Barpolar(_BaseTraceType):
     @marker.setter
     def marker(self, val):
         self['marker'] = val
+
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
 
     # name
     # ----
@@ -74810,6 +83370,21 @@ class Barpolar(_BaseTraceType):
         marker
             plotly.graph_objs.barpolar.Marker instance or dict with
             compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -74923,6 +83498,8 @@ class Barpolar(_BaseTraceType):
         idssrc=None,
         legendgroup=None,
         marker=None,
+        meta=None,
+        metasrc=None,
         name=None,
         offset=None,
         offsetsrc=None,
@@ -75027,6 +83604,21 @@ class Barpolar(_BaseTraceType):
         marker
             plotly.graph_objs.barpolar.Marker instance or dict with
             compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -75169,6 +83761,8 @@ an instance of plotly.graph_objs.Barpolar"""
         self._validators['idssrc'] = v_barpolar.IdssrcValidator()
         self._validators['legendgroup'] = v_barpolar.LegendgroupValidator()
         self._validators['marker'] = v_barpolar.MarkerValidator()
+        self._validators['meta'] = v_barpolar.MetaValidator()
+        self._validators['metasrc'] = v_barpolar.MetasrcValidator()
         self._validators['name'] = v_barpolar.NameValidator()
         self._validators['offset'] = v_barpolar.OffsetValidator()
         self._validators['offsetsrc'] = v_barpolar.OffsetsrcValidator()
@@ -75234,6 +83828,10 @@ an instance of plotly.graph_objs.Barpolar"""
         self['legendgroup'] = legendgroup if legendgroup is not None else _v
         _v = arg.pop('marker', None)
         self['marker'] = marker if marker is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('offset', None)
@@ -75909,6 +84507,28 @@ class Bar(_BaseTraceType):
     def idssrc(self, val):
         self['idssrc'] = val
 
+    # insidetextanchor
+    # ----------------
+    @property
+    def insidetextanchor(self):
+        """
+        Determines if texts are kept at center or start/end points in
+        `textposition` "inside" mode.
+    
+        The 'insidetextanchor' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['end', 'middle', 'start']
+
+        Returns
+        -------
+        Any
+        """
+        return self['insidetextanchor']
+
+    @insidetextanchor.setter
+    def insidetextanchor(self, val):
+        self['insidetextanchor'] = val
+
     # insidetextfont
     # --------------
     @property
@@ -76044,6 +84664,15 @@ class Bar(_BaseTraceType):
                     mapped to the colorscale relative to the max
                     and min values of the array or relative to
                     `marker.cmin` and `marker.cmax` if set.
+                coloraxis
+                    Sets a reference to a shared color axis.
+                    References to these shared color axes are
+                    "coloraxis", "coloraxis2", "coloraxis3", etc.
+                    Settings for these shared color axes are set in
+                    the layout, under `layout.coloraxis`,
+                    `layout.coloraxis2`, etc. Note that multiple
+                    color scales can be linked to the same color
+                    axis.
                 colorbar
                     plotly.graph_objs.bar.marker.ColorBar instance
                     or dict with compatible properties
@@ -76095,6 +84724,54 @@ class Bar(_BaseTraceType):
     @marker.setter
     def marker(self, val):
         self['marker'] = val
+
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
 
     # name
     # ----
@@ -76479,6 +85156,31 @@ class Bar(_BaseTraceType):
     @text.setter
     def text(self, val):
         self['text'] = val
+
+    # textangle
+    # ---------
+    @property
+    def textangle(self):
+        """
+        Sets the angle of the tick labels with respect to the bar. For
+        example, a `tickangle` of -90 draws the tick labels vertically.
+        With "auto" the texts may automatically be rotated to fit with
+        the maximum size in bars.
+    
+        The 'textangle' property is a angle (in degrees) that may be
+        specified as a number between -180 and 180. Numeric values outside this
+        range are converted to the equivalent value
+        (e.g. 270 is converted to -90).
+
+        Returns
+        -------
+        int|float
+        """
+        return self['textangle']
+
+    @textangle.setter
+    def textangle(self, val):
+        self['textangle'] = val
 
     # textfont
     # --------
@@ -77092,6 +85794,9 @@ class Bar(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
+        insidetextanchor
+            Determines if texts are kept at center or start/end
+            points in `textposition` "inside" mode.
         insidetextfont
             Sets the font used for `text` lying inside the bar.
         legendgroup
@@ -77101,6 +85806,21 @@ class Bar(_BaseTraceType):
         marker
             plotly.graph_objs.bar.Marker instance or dict with
             compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -77157,6 +85877,12 @@ class Bar(_BaseTraceType):
             If trace `hoverinfo` contains a "text" flag and
             "hovertext" is not set, these elements will be seen in
             the hover labels.
+        textangle
+            Sets the angle of the tick labels with respect to the
+            bar. For example, a `tickangle` of -90 draws the tick
+            labels vertically. With "auto" the texts may
+            automatically be rotated to fit with the maximum size
+            in bars.
         textfont
             Sets the font used for `text`.
         textposition
@@ -77264,9 +85990,12 @@ class Bar(_BaseTraceType):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        insidetextanchor=None,
         insidetextfont=None,
         legendgroup=None,
         marker=None,
+        meta=None,
+        metasrc=None,
         name=None,
         offset=None,
         offsetgroup=None,
@@ -77282,6 +86011,7 @@ class Bar(_BaseTraceType):
         stream=None,
         t=None,
         text=None,
+        textangle=None,
         textfont=None,
         textposition=None,
         textpositionsrc=None,
@@ -77401,6 +86131,9 @@ class Bar(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
+        insidetextanchor
+            Determines if texts are kept at center or start/end
+            points in `textposition` "inside" mode.
         insidetextfont
             Sets the font used for `text` lying inside the bar.
         legendgroup
@@ -77410,6 +86143,21 @@ class Bar(_BaseTraceType):
         marker
             plotly.graph_objs.bar.Marker instance or dict with
             compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -77466,6 +86214,12 @@ class Bar(_BaseTraceType):
             If trace `hoverinfo` contains a "text" flag and
             "hovertext" is not set, these elements will be seen in
             the hover labels.
+        textangle
+            Sets the angle of the tick labels with respect to the
+            bar. For example, a `tickangle` of -90 draws the tick
+            labels vertically. With "auto" the texts may
+            automatically be rotated to fit with the maximum size
+            in bars.
         textfont
             Sets the font used for `text`.
         textposition
@@ -77602,9 +86356,13 @@ an instance of plotly.graph_objs.Bar"""
         self._validators['hovertextsrc'] = v_bar.HovertextsrcValidator()
         self._validators['ids'] = v_bar.IdsValidator()
         self._validators['idssrc'] = v_bar.IdssrcValidator()
+        self._validators['insidetextanchor'] = v_bar.InsidetextanchorValidator(
+        )
         self._validators['insidetextfont'] = v_bar.InsidetextfontValidator()
         self._validators['legendgroup'] = v_bar.LegendgroupValidator()
         self._validators['marker'] = v_bar.MarkerValidator()
+        self._validators['meta'] = v_bar.MetaValidator()
+        self._validators['metasrc'] = v_bar.MetasrcValidator()
         self._validators['name'] = v_bar.NameValidator()
         self._validators['offset'] = v_bar.OffsetValidator()
         self._validators['offsetgroup'] = v_bar.OffsetgroupValidator()
@@ -77620,6 +86378,7 @@ an instance of plotly.graph_objs.Bar"""
         self._validators['stream'] = v_bar.StreamValidator()
         self._validators['t'] = v_bar.TValidator()
         self._validators['text'] = v_bar.TextValidator()
+        self._validators['textangle'] = v_bar.TextangleValidator()
         self._validators['textfont'] = v_bar.TextfontValidator()
         self._validators['textposition'] = v_bar.TextpositionValidator()
         self._validators['textpositionsrc'] = v_bar.TextpositionsrcValidator()
@@ -77689,6 +86448,9 @@ an instance of plotly.graph_objs.Bar"""
         self['ids'] = ids if ids is not None else _v
         _v = arg.pop('idssrc', None)
         self['idssrc'] = idssrc if idssrc is not None else _v
+        _v = arg.pop('insidetextanchor', None)
+        self['insidetextanchor'
+            ] = insidetextanchor if insidetextanchor is not None else _v
         _v = arg.pop('insidetextfont', None)
         self['insidetextfont'
             ] = insidetextfont if insidetextfont is not None else _v
@@ -77696,6 +86458,10 @@ an instance of plotly.graph_objs.Bar"""
         self['legendgroup'] = legendgroup if legendgroup is not None else _v
         _v = arg.pop('marker', None)
         self['marker'] = marker if marker is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('offset', None)
@@ -77728,6 +86494,8 @@ an instance of plotly.graph_objs.Bar"""
         self['t'] = t if t is not None else _v
         _v = arg.pop('text', None)
         self['text'] = text if text is not None else _v
+        _v = arg.pop('textangle', None)
+        self['textangle'] = textangle if textangle is not None else _v
         _v = arg.pop('textfont', None)
         self['textfont'] = textfont if textfont is not None else _v
         _v = arg.pop('textposition', None)
@@ -78069,6 +86837,54 @@ class Area(_BaseTraceType):
     def marker(self, val):
         self['marker'] = val
 
+    # meta
+    # ----
+    @property
+    def meta(self):
+        """
+        Assigns extra meta information associated with this trace that
+        can be used in various text attributes. Attributes such as
+        trace `name`, graph, axis and colorbar `title.text`, annotation
+        `text` `rangeselector`, `updatemenues` and `sliders` `label`
+        text all support `meta`. To access the trace `meta` values in
+        an attribute in the same trace, simply use `%{meta[i]}` where
+        `i` is the index or key of the `meta` item in question. To
+        access trace `meta` in layout attributes, use
+        `%{data[n[.meta[i]}` where `i` is the index or key of the
+        `meta` and `n` is the trace index.
+    
+        The 'meta' property accepts values of any type
+
+        Returns
+        -------
+        Any|numpy.ndarray
+        """
+        return self['meta']
+
+    @meta.setter
+    def meta(self, val):
+        self['meta'] = val
+
+    # metasrc
+    # -------
+    @property
+    def metasrc(self):
+        """
+        Sets the source reference on plot.ly for  meta .
+    
+        The 'metasrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self['metasrc']
+
+    @metasrc.setter
+    def metasrc(self, val):
+        self['metasrc'] = val
+
     # name
     # ----
     @property
@@ -78374,6 +87190,21 @@ class Area(_BaseTraceType):
         marker
             plotly.graph_objs.area.Marker instance or dict with
             compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -78438,6 +87269,8 @@ class Area(_BaseTraceType):
         idssrc=None,
         legendgroup=None,
         marker=None,
+        meta=None,
+        metasrc=None,
         name=None,
         opacity=None,
         r=None,
@@ -78489,6 +87322,21 @@ class Area(_BaseTraceType):
         marker
             plotly.graph_objs.area.Marker instance or dict with
             compatible properties
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
         name
             Sets the trace name. The trace name appear as the
             legend item and on hover.
@@ -78581,6 +87429,8 @@ an instance of plotly.graph_objs.Area"""
         self._validators['idssrc'] = v_area.IdssrcValidator()
         self._validators['legendgroup'] = v_area.LegendgroupValidator()
         self._validators['marker'] = v_area.MarkerValidator()
+        self._validators['meta'] = v_area.MetaValidator()
+        self._validators['metasrc'] = v_area.MetasrcValidator()
         self._validators['name'] = v_area.NameValidator()
         self._validators['opacity'] = v_area.OpacityValidator()
         self._validators['r'] = v_area.RValidator()
@@ -78614,6 +87464,10 @@ an instance of plotly.graph_objs.Area"""
         self['legendgroup'] = legendgroup if legendgroup is not None else _v
         _v = arg.pop('marker', None)
         self['marker'] = marker if marker is not None else _v
+        _v = arg.pop('meta', None)
+        self['meta'] = meta if meta is not None else _v
+        _v = arg.pop('metasrc', None)
+        self['metasrc'] = metasrc if metasrc is not None else _v
         _v = arg.pop('name', None)
         self['name'] = name if name is not None else _v
         _v = arg.pop('opacity', None)
@@ -78950,6 +87804,8 @@ from plotly.graph_objs import histogram2d
 from plotly.graph_objs import histogram
 from plotly.graph_objs import heatmapgl
 from plotly.graph_objs import heatmap
+from plotly.graph_objs import funnelarea
+from plotly.graph_objs import funnel
 from plotly.graph_objs import contourcarpet
 from plotly.graph_objs import contour
 from plotly.graph_objs import cone

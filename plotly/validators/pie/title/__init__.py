@@ -9,7 +9,7 @@ class TextValidator(_plotly_utils.basevalidators.StringValidator):
         super(TextValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
+            edit_type=kwargs.pop('edit_type', 'plot'),
             role=kwargs.pop('role', 'info'),
             **kwargs
         )
@@ -26,7 +26,7 @@ class PositionValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         super(PositionValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
+            edit_type=kwargs.pop('edit_type', 'plot'),
             role=kwargs.pop('role', 'info'),
             values=kwargs.pop(
                 'values', [

@@ -649,6 +649,50 @@ class HeatmapglsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
 import _plotly_utils.basevalidators
 
 
+class FunnelsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
+
+    def __init__(
+        self,
+        plotly_name='funnel',
+        parent_name='layout.template.data',
+        **kwargs
+    ):
+        super(FunnelsValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            data_class_str=kwargs.pop('data_class_str', 'Funnel'),
+            data_docs=kwargs.pop('data_docs', """
+"""),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class FunnelareasValidator(
+    _plotly_utils.basevalidators.CompoundArrayValidator
+):
+
+    def __init__(
+        self,
+        plotly_name='funnelarea',
+        parent_name='layout.template.data',
+        **kwargs
+    ):
+        super(FunnelareasValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            data_class_str=kwargs.pop('data_class_str', 'Funnelarea'),
+            data_docs=kwargs.pop('data_docs', """
+"""),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class ContoursValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
 
     def __init__(

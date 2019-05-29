@@ -35,7 +35,7 @@ class SizeValidator(_plotly_utils.basevalidators.NumberValidator):
             plotly_name=plotly_name,
             parent_name=parent_name,
             array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'calc'),
+            edit_type=kwargs.pop('edit_type', 'plot'),
             min=kwargs.pop('min', 1),
             role=kwargs.pop('role', 'style'),
             **kwargs
@@ -77,7 +77,7 @@ class FamilyValidator(_plotly_utils.basevalidators.StringValidator):
             plotly_name=plotly_name,
             parent_name=parent_name,
             array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'calc'),
+            edit_type=kwargs.pop('edit_type', 'plot'),
             no_blank=kwargs.pop('no_blank', True),
             role=kwargs.pop('role', 'style'),
             strict=kwargs.pop('strict', True),

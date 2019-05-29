@@ -63,6 +63,12 @@ class DataValidator(_plotly_utils.basevalidators.CompoundValidator):
             contour
                 plotly.graph_objs.layout.template.data.Contour
                 instance or dict with compatible properties
+            funnelarea
+                plotly.graph_objs.layout.template.data.Funnelar
+                ea instance or dict with compatible properties
+            funnel
+                plotly.graph_objs.layout.template.data.Funnel
+                instance or dict with compatible properties
             heatmapgl
                 plotly.graph_objs.layout.template.data.Heatmapg
                 l instance or dict with compatible properties

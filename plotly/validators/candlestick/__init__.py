@@ -337,6 +337,41 @@ class NameValidator(_plotly_utils.basevalidators.StringValidator):
 import _plotly_utils.basevalidators
 
 
+class MetasrcValidator(_plotly_utils.basevalidators.SrcValidator):
+
+    def __init__(
+        self, plotly_name='metasrc', parent_name='candlestick', **kwargs
+    ):
+        super(MetasrcValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop('edit_type', 'none'),
+            role=kwargs.pop('role', 'info'),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class MetaValidator(_plotly_utils.basevalidators.AnyValidator):
+
+    def __init__(
+        self, plotly_name='meta', parent_name='candlestick', **kwargs
+    ):
+        super(MetaValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            array_ok=kwargs.pop('array_ok', True),
+            edit_type=kwargs.pop('edit_type', 'plot'),
+            role=kwargs.pop('role', 'info'),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class LowsrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(

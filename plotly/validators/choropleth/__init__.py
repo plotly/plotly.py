@@ -324,6 +324,39 @@ class NameValidator(_plotly_utils.basevalidators.StringValidator):
 import _plotly_utils.basevalidators
 
 
+class MetasrcValidator(_plotly_utils.basevalidators.SrcValidator):
+
+    def __init__(
+        self, plotly_name='metasrc', parent_name='choropleth', **kwargs
+    ):
+        super(MetasrcValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop('edit_type', 'none'),
+            role=kwargs.pop('role', 'info'),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class MetaValidator(_plotly_utils.basevalidators.AnyValidator):
+
+    def __init__(self, plotly_name='meta', parent_name='choropleth', **kwargs):
+        super(MetaValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            array_ok=kwargs.pop('array_ok', True),
+            edit_type=kwargs.pop('edit_type', 'plot'),
+            role=kwargs.pop('role', 'info'),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
 
     def __init__(
@@ -896,6 +929,25 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 direction.
 """
             ),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class ColoraxisValidator(_plotly_utils.basevalidators.SubplotidValidator):
+
+    def __init__(
+        self, plotly_name='coloraxis', parent_name='choropleth', **kwargs
+    ):
+        super(ColoraxisValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            dflt=kwargs.pop('dflt', None),
+            edit_type=kwargs.pop('edit_type', 'calc'),
+            regex=kwargs.pop('regex', '/^coloraxis([2-9]|[1-9][0-9]+)?$/'),
+            role=kwargs.pop('role', 'info'),
             **kwargs
         )
 

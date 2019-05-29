@@ -139,12 +139,20 @@ class RadialAxis(_BaseLayoutHierarchyType):
         not found in the `categoryarray` array, the sorting behavior
         for that attribute will be identical to the "trace" mode. The
         unspecified categories will follow the categories in
-        `categoryarray`.
+        `categoryarray`. Set `categoryorder` to *total ascending* or
+        *total descending* if order should be determined by the
+        numerical order of the values. Similarly, the order can be
+        determined by the min, max, sum, mean or median of all the
+        values.
     
         The 'categoryorder' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['trace', 'category ascending', 'category descending',
-                'array']
+                'array', 'total ascending', 'total descending', 'min
+                ascending', 'min descending', 'max ascending', 'max
+                descending', 'sum ascending', 'sum descending', 'mean
+                ascending', 'mean descending', 'median ascending', 'median
+                descending']
 
         Returns
         -------
@@ -1422,7 +1430,11 @@ class RadialAxis(_BaseLayoutHierarchyType):
             found in the `categoryarray` array, the sorting
             behavior for that attribute will be identical to the
             "trace" mode. The unspecified categories will follow
-            the categories in `categoryarray`.
+            the categories in `categoryarray`. Set `categoryorder`
+            to *total ascending* or *total descending* if order
+            should be determined by the numerical order of the
+            values. Similarly, the order can be determined by the
+            min, max, sum, mean or median of all the values.
         color
             Sets default for all colors associated with this axis
             all at once: line, font, tick, and grid colors. Grid
@@ -1726,7 +1738,11 @@ class RadialAxis(_BaseLayoutHierarchyType):
             found in the `categoryarray` array, the sorting
             behavior for that attribute will be identical to the
             "trace" mode. The unspecified categories will follow
-            the categories in `categoryarray`.
+            the categories in `categoryarray`. Set `categoryorder`
+            to *total ascending* or *total descending* if order
+            should be determined by the numerical order of the
+            values. Similarly, the order can be determined by the
+            min, max, sum, mean or median of all the values.
         color
             Sets default for all colors associated with this axis
             all at once: line, font, tick, and grid colors. Grid
@@ -2412,12 +2428,20 @@ class AngularAxis(_BaseLayoutHierarchyType):
         not found in the `categoryarray` array, the sorting behavior
         for that attribute will be identical to the "trace" mode. The
         unspecified categories will follow the categories in
-        `categoryarray`.
+        `categoryarray`. Set `categoryorder` to *total ascending* or
+        *total descending* if order should be determined by the
+        numerical order of the values. Similarly, the order can be
+        determined by the min, max, sum, mean or median of all the
+        values.
     
         The 'categoryorder' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['trace', 'category ascending', 'category descending',
-                'array']
+                'array', 'total ascending', 'total descending', 'min
+                ascending', 'min descending', 'max ascending', 'max
+                descending', 'sum ascending', 'sum descending', 'mean
+                ascending', 'mean descending', 'median ascending', 'median
+                descending']
 
         Returns
         -------
@@ -3611,7 +3635,11 @@ class AngularAxis(_BaseLayoutHierarchyType):
             found in the `categoryarray` array, the sorting
             behavior for that attribute will be identical to the
             "trace" mode. The unspecified categories will follow
-            the categories in `categoryarray`.
+            the categories in `categoryarray`. Set `categoryorder`
+            to *total ascending* or *total descending* if order
+            should be determined by the numerical order of the
+            values. Similarly, the order can be determined by the
+            min, max, sum, mean or median of all the values.
         color
             Sets default for all colors associated with this axis
             all at once: line, font, tick, and grid colors. Grid
@@ -3880,7 +3908,11 @@ class AngularAxis(_BaseLayoutHierarchyType):
             found in the `categoryarray` array, the sorting
             behavior for that attribute will be identical to the
             "trace" mode. The unspecified categories will follow
-            the categories in `categoryarray`.
+            the categories in `categoryarray`. Set `categoryorder`
+            to *total ascending* or *total descending* if order
+            should be determined by the numerical order of the
+            values. Similarly, the order can be determined by the
+            min, max, sum, mean or median of all the values.
         color
             Sets default for all colors associated with this axis
             all at once: line, font, tick, and grid colors. Grid
