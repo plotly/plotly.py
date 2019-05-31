@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 import re as _re
 import plotly.io as pio
 from plotly.basedatatypes import BaseFigure as _BaseFigure
