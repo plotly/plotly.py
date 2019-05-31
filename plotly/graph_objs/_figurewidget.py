@@ -1070,8 +1070,7 @@ class FigureWidget(BaseFigureWidget):
               * The subplot at the specified row and col has type xy
                 (which is the default) and secondary_y True.  These
                 properties are specified in the specs argument to
-                make_subplots. See the make_subplots docstring for more info.                
-
+                make_subplots. See the make_subplots docstring for more info.
 
         Returns
         -------
@@ -1753,8 +1752,7 @@ class FigureWidget(BaseFigureWidget):
               * The subplot at the specified row and col has type xy
                 (which is the default) and secondary_y True.  These
                 properties are specified in the specs argument to
-                make_subplots. See the make_subplots docstring for more info.                
-
+                make_subplots. See the make_subplots docstring for more info.
 
         Returns
         -------
@@ -2039,8 +2037,7 @@ class FigureWidget(BaseFigureWidget):
               * The subplot at the specified row and col has type xy
                 (which is the default) and secondary_y True.  These
                 properties are specified in the specs argument to
-                make_subplots. See the make_subplots docstring for more info.                
-
+                make_subplots. See the make_subplots docstring for more info.
 
         Returns
         -------
@@ -2300,8 +2297,7 @@ class FigureWidget(BaseFigureWidget):
               * The subplot at the specified row and col has type xy
                 (which is the default) and secondary_y True.  These
                 properties are specified in the specs argument to
-                make_subplots. See the make_subplots docstring for more info.                
-
+                make_subplots. See the make_subplots docstring for more info.
 
         Returns
         -------
@@ -3347,8 +3343,7 @@ class FigureWidget(BaseFigureWidget):
               * The subplot at the specified row and col has type xy
                 (which is the default) and secondary_y True.  These
                 properties are specified in the specs argument to
-                make_subplots. See the make_subplots docstring for more info.                
-
+                make_subplots. See the make_subplots docstring for more info.
 
         Returns
         -------
@@ -3709,6 +3704,16 @@ class FigureWidget(BaseFigureWidget):
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
             `plotly.tools.make_subplots`
+        secondary_y: boolean or None (default None)
+            If True, associate this trace with the secondary y-axis of the
+            subplot at the specified row and col. Only valid if all of the
+            following conditions are satisfied:
+              * The figure was created using `plotly.subplots.make_subplots`.
+              * The row and col arguments are not None
+              * The subplot at the specified row and col has type xy
+                (which is the default) and secondary_y True.  These
+                properties are specified in the specs argument to
+                make_subplots. See the make_subplots docstring for more info.
 
         Returns
         -------
@@ -3769,7 +3774,9 @@ class FigureWidget(BaseFigureWidget):
             zsrc=zsrc,
             **kwargs
         )
-        return self.add_trace(new_trace, row=row, col=col)
+        return self.add_trace(
+            new_trace, row=row, col=col, secondary_y=secondary_y
+        )
 
     def add_funnel(
         self,
@@ -3826,6 +3833,7 @@ class FigureWidget(BaseFigureWidget):
         ysrc=None,
         row=None,
         col=None,
+        secondary_y=None,
         **kwargs
     ):
         """
@@ -4074,6 +4082,16 @@ class FigureWidget(BaseFigureWidget):
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
             `plotly.tools.make_subplots`
+        secondary_y: boolean or None (default None)
+            If True, associate this trace with the secondary y-axis of the
+            subplot at the specified row and col. Only valid if all of the
+            following conditions are satisfied:
+              * The figure was created using `plotly.subplots.make_subplots`.
+              * The row and col arguments are not None
+              * The subplot at the specified row and col has type xy
+                (which is the default) and secondary_y True.  These
+                properties are specified in the specs argument to
+                make_subplots. See the make_subplots docstring for more info.
 
         Returns
         -------
@@ -4133,7 +4151,9 @@ class FigureWidget(BaseFigureWidget):
             ysrc=ysrc,
             **kwargs
         )
-        return self.add_trace(new_trace, row=row, col=col)
+        return self.add_trace(
+            new_trace, row=row, col=col, secondary_y=secondary_y
+        )
 
     def add_funnelarea(
         self,
@@ -4369,17 +4389,6 @@ class FigureWidget(BaseFigureWidget):
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
             `plotly.tools.make_subplots`
-        secondary_y: boolean or None (default None)
-            If True, associate this trace with the secondary y-axis of the
-            subplot at the specified row and col. Only valid if all of the
-            following conditions are satisfied:
-              * The figure was created using `plotly.subplots.make_subplots`.
-              * The row and col arguments are not None
-              * The subplot at the specified row and col has type xy
-                (which is the default) and secondary_y True.  These
-                properties are specified in the specs argument to
-                make_subplots. See the make_subplots docstring for more info.                
-
 
         Returns
         -------
@@ -4428,9 +4437,7 @@ class FigureWidget(BaseFigureWidget):
             visible=visible,
             **kwargs
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col)
 
     def add_heatmap(
         self,
@@ -4754,8 +4761,7 @@ class FigureWidget(BaseFigureWidget):
               * The subplot at the specified row and col has type xy
                 (which is the default) and secondary_y True.  These
                 properties are specified in the specs argument to
-                make_subplots. See the make_subplots docstring for more info.                
-
+                make_subplots. See the make_subplots docstring for more info.
 
         Returns
         -------
@@ -5073,8 +5079,7 @@ class FigureWidget(BaseFigureWidget):
               * The subplot at the specified row and col has type xy
                 (which is the default) and secondary_y True.  These
                 properties are specified in the specs argument to
-                make_subplots. See the make_subplots docstring for more info.                
-
+                make_subplots. See the make_subplots docstring for more info.
 
         Returns
         -------
@@ -5451,8 +5456,7 @@ class FigureWidget(BaseFigureWidget):
               * The subplot at the specified row and col has type xy
                 (which is the default) and secondary_y True.  These
                 properties are specified in the specs argument to
-                make_subplots. See the make_subplots docstring for more info.                
-
+                make_subplots. See the make_subplots docstring for more info.
 
         Returns
         -------
@@ -5867,8 +5871,7 @@ class FigureWidget(BaseFigureWidget):
               * The subplot at the specified row and col has type xy
                 (which is the default) and secondary_y True.  These
                 properties are specified in the specs argument to
-                make_subplots. See the make_subplots docstring for more info.                
-
+                make_subplots. See the make_subplots docstring for more info.
 
         Returns
         -------
@@ -6307,8 +6310,7 @@ class FigureWidget(BaseFigureWidget):
               * The subplot at the specified row and col has type xy
                 (which is the default) and secondary_y True.  These
                 properties are specified in the specs argument to
-                make_subplots. See the make_subplots docstring for more info.                
-
+                make_subplots. See the make_subplots docstring for more info.
 
         Returns
         -------
@@ -7389,8 +7391,7 @@ class FigureWidget(BaseFigureWidget):
               * The subplot at the specified row and col has type xy
                 (which is the default) and secondary_y True.  These
                 properties are specified in the specs argument to
-                make_subplots. See the make_subplots docstring for more info.                
-
+                make_subplots. See the make_subplots docstring for more info.
 
         Returns
         -------
@@ -8316,8 +8317,7 @@ class FigureWidget(BaseFigureWidget):
               * The subplot at the specified row and col has type xy
                 (which is the default) and secondary_y True.  These
                 properties are specified in the specs argument to
-                make_subplots. See the make_subplots docstring for more info.                
-
+                make_subplots. See the make_subplots docstring for more info.
 
         Returns
         -------
@@ -8933,8 +8933,7 @@ class FigureWidget(BaseFigureWidget):
               * The subplot at the specified row and col has type xy
                 (which is the default) and secondary_y True.  These
                 properties are specified in the specs argument to
-                make_subplots. See the make_subplots docstring for more info.                
-
+                make_subplots. See the make_subplots docstring for more info.
 
         Returns
         -------
@@ -9595,8 +9594,7 @@ class FigureWidget(BaseFigureWidget):
               * The subplot at the specified row and col has type xy
                 (which is the default) and secondary_y True.  These
                 properties are specified in the specs argument to
-                make_subplots. See the make_subplots docstring for more info.                
-
+                make_subplots. See the make_subplots docstring for more info.
 
         Returns
         -------
@@ -10264,8 +10262,7 @@ class FigureWidget(BaseFigureWidget):
               * The subplot at the specified row and col has type xy
                 (which is the default) and secondary_y True.  These
                 properties are specified in the specs argument to
-                make_subplots. See the make_subplots docstring for more info.                
-
+                make_subplots. See the make_subplots docstring for more info.
 
         Returns
         -------
@@ -13380,8 +13377,7 @@ class FigureWidget(BaseFigureWidget):
               * The subplot at the specified row and col has type xy
                 (which is the default) and secondary_y True.  These
                 properties are specified in the specs argument to
-                make_subplots. See the make_subplots docstring for more info.                
-
+                make_subplots. See the make_subplots docstring for more info.
 
         Returns
         -------
@@ -14149,8 +14145,7 @@ class FigureWidget(BaseFigureWidget):
               * The subplot at the specified row and col has type xy
                 (which is the default) and secondary_y True.  These
                 properties are specified in the specs argument to
-                make_subplots. See the make_subplots docstring for more info.                
-
+                make_subplots. See the make_subplots docstring for more info.
 
         Returns
         -------
@@ -14240,7 +14235,6 @@ class FigureWidget(BaseFigureWidget):
             To select coloraxis objects by row and column, the Figure
             must have been created using plotly.subplots.make_subplots.
             If None (the default), all coloraxis objects are selected.
-
         Returns
         -------
         generator
@@ -14274,7 +14268,6 @@ class FigureWidget(BaseFigureWidget):
             To select coloraxis objects by row and column, the Figure
             must have been created using plotly.subplots.make_subplots.
             If None (the default), all coloraxis objects are selected.
-        
         Returns
         -------
         self
