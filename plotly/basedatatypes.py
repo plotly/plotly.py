@@ -2621,7 +2621,7 @@ Invalid property path '{key_path_str}' for layout
 
     # plotly.io methods
     # -----------------
-    # Note that docstrings are auto-generated in plotly/__init__.py
+    # Note that docstrings are auto-generated in plotly/_docstring_gen.py
     def show(self, *args, **kwargs):
         import plotly.io as pio
         return pio.show(self, *args, **kwargs)
