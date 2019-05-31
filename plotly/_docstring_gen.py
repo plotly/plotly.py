@@ -1,7 +1,7 @@
 from __future__ import absolute_import
 import re as _re
 import plotly.io as pio
-from plotly.basedatatypes import BaseFigure as _BaseFigure
+from plotly.basedatatypes import BaseFigure
 import sys
 
 # Perform docstrings generation
@@ -18,11 +18,11 @@ def copy_doc_without_fig(from_fn, to_method):
         to_method.__doc__ = docstr
 
 
-copy_doc_without_fig(pio.show, _BaseFigure.show)
-copy_doc_without_fig(pio.to_json, _BaseFigure.to_json)
-copy_doc_without_fig(pio.write_json, _BaseFigure.write_json)
-copy_doc_without_fig(pio.to_html, _BaseFigure.to_html)
-copy_doc_without_fig(pio.write_html, _BaseFigure.write_html)
-copy_doc_without_fig(pio.to_image, _BaseFigure.to_image)
-copy_doc_without_fig(pio.write_image, _BaseFigure.write_image)
+copy_doc_without_fig(pio.show, BaseFigure.show)
+copy_doc_without_fig(pio.to_json, BaseFigure.to_json)
+copy_doc_without_fig(pio.write_json, BaseFigure.write_json)
+copy_doc_without_fig(pio.to_html, BaseFigure.to_html)
+copy_doc_without_fig(pio.write_html, BaseFigure.write_html)
+copy_doc_without_fig(pio.to_image, BaseFigure.to_image)
+copy_doc_without_fig(pio.write_image, BaseFigure.write_image)
 
