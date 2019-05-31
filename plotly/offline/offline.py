@@ -322,7 +322,7 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
         are used for the automatically started animation on page load. This 
         dict is passed to the function Plotly.animate in Plotly.js. See
         https://github.com/plotly/plotly.js/blob/master/src/plots/animation_attributes.js
-        for available options.  Has no effect if the figure
+        for available options. Has no effect if the figure
         does not contain frames, or auto_play is False.
 
     Example:
@@ -497,7 +497,7 @@ def plot(figure_or_data, show_link=False, link_text='Export to plot.ly',
         are used for the automatically started animation on page load. This 
         dict is passed to the function Plotly.animate in Plotly.js. See
         https://github.com/plotly/plotly.js/blob/master/src/plots/animation_attributes.js
-        for available options.  Has no effect if the figure
+        for available options. Has no effect if the figure
         does not contain frames, or auto_play is False.
 
     Example:
