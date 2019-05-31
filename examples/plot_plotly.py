@@ -31,6 +31,6 @@ trace_1 = go.Scatter(
     name='Below',
 )
 
-data = [trace_0, trace_1]
-res = plotly.offline.plot(data)
+fig = go.Figure(data=[trace_0, trace_1])
+plotly.io.show(fig)
 

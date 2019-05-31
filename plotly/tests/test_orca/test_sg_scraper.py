@@ -1,5 +1,4 @@
 import plotly
-plotly_plot = plotly.offline.plot
 import os
 import shutil
 import pytest
@@ -39,25 +38,23 @@ def execute_plotly_example():
         name='Above',
     )
 
-    data = [trace_0]
-    res = plotly.offline.plot(data)
+    fig = go.Figure(data=[trace_0])
+    plotly.io.show(fig)
 
 
-def test_monkey_patching():
+def test_scraper():
     from plotly.io._sg_scraper import plotly_sg_scraper
     # test that monkey-patching worked ok
-    assert plotly_plot != plotly.offline.plot
+    assert plotly.io.renderers.default == 'sphinx'
     # Use dummy values for arguments of plotly_sg_scraper
     block = '' # we don't need actually code
     import tempfile
     tempdir = tempfile.mkdtemp()
     gallery_conf = {'src_dir':tempdir,
-                    'examples_dirs':'plotly/tests/test_io'}
+                    'examples_dirs':'plotly/tests/test_orca'}
     names = iter(['0', '1', '2'])
     block_vars = {'image_path_iterator':names}
     execute_plotly_example()
     res = plotly_sg_scraper(block, block_vars, gallery_conf)
     shutil.rmtree(tempdir)
     assert ".. raw:: html" in res
-    plotly.offline.plot = plotly_plot
-    assert plotly_plot == plotly.offline.plot

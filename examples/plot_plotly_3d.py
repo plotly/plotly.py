@@ -28,4 +28,4 @@ layout = go.Layout(
     )
 )
 fig = go.Figure(data=data, layout=layout)
-plotly.offline.plot(fig)
+plotly.io.show(fig)
