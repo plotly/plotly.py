@@ -27,7 +27,6 @@ from plotly.utils import ElidedPrettyPrinter
 from .validators import (DataValidator, LayoutValidator, FramesValidator)
 
 from _plotly_future_ import _future_flags
-import plotly.io as pio
 
 # Create Undefined sentinel value
 #   - Setting a property to None removes any existing value
@@ -2624,24 +2623,31 @@ Invalid property path '{key_path_str}' for layout
     # -----------------
     # Note that docstrings are auto-generated in plotly/__init__.py
     def show(self, *args, **kwargs):
+        import plotly.io as pio
         return pio.show(self, *args, **kwargs)
 
     def to_json(self, *args, **kwargs):
+        import plotly.io as pio
         return pio.to_json(self, *args, **kwargs)
 
     def write_json(self, *args, **kwargs):
+        import plotly.io as pio
         return pio.write_json(self, *args, **kwargs)
 
     def to_html(self, *args, **kwargs):
+        import plotly.io as pio
         return pio.to_html(self, *args, **kwargs)
 
     def write_html(self, *args, **kwargs):
+        import plotly.io as pio
         return pio.write_html(self, *args, **kwargs)
 
     def to_image(self, *args, **kwargs):
+        import plotly.io as pio
         return pio.to_image(self, *args, **kwargs)
 
     def write_image(self, *args, **kwargs):
+        import plotly.io as pio
         return pio.write_image(self, *args, **kwargs)
 
     # Static helpers
