@@ -2,6 +2,49 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.10.0] - 2019-05-31
+
+### Updated
+ - Updated Plotly.js to version 1.48.1. See the
+ [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1481----2019-05-30)
+ for more information.
+ 
+### Added
+ - Added funnel trace
+ ([plotly/plotly.js#3817](https://github.com/plotly/plotly.js/pull/3817),
+ [plotly/plotly.js#3911](https://github.com/plotly/plotly.js/pull/3911))
+ - Added funnelarea traces
+ ([#3876](https://github.com/plotly/plotly.js/pull/3876),
+ [#3912](https://github.com/plotly/plotly.js/pull/3912))
+ - Added support for shared color axes via coloraxis attributes in the layout
+ ([#3803](https://github.com/plotly/plotly.js/pull/3803),
+ [#3786](https://github.com/plotly/plotly.js/pull/3786),
+ [#3901](https://github.com/plotly/plotly.js/pull/3901),
+ [#3916](https://github.com/plotly/plotly.js/pull/3916))
+ - Added support for sorting categorical cartesian axes by value
+ ([#3864](https://github.com/plotly/plotly.js/pull/3864))
+ - Added `bingroup` to `histogram`, `histogram2d` and `histogram2dcontour`
+ to group traces to have compatible auto-bin values
+ ([#3845](https://github.com/plotly/plotly.js/pull/3845))
+ - Add legend `itemclick` and `itemdoubleclick` attributes to set or disable
+ the legend item click and double-click behavior
+ ([#3862](https://github.com/plotly/plotly.js/pull/3862))
+ - Added support for calling orca through [Xvfb](https://www.x.org/releases/X11R7.6/doc/man/man1/Xvfb.1.xhtml)
+ to support static image export on Linux when X11 is not available
+ ([#1523](https://github.com/plotly/plotly.py/pull/1523)).
+
+### Fixed
+ - Fixed `PlotlyJSONEncoder` encoding error when `simplejson` is installed
+ ([#1556](https://github.com/plotly/plotly.py/issues/1556),
+ [#1561](https://github.com/plotly/plotly.py/pull/1561))
+ - HTML export now honors the figure height specified in the figure template
+ ([#1560](https://github.com/plotly/plotly.py/issues/1560))
+ - Fixed display height of figure displayed in JupyterLab
+ ([#1572](https://github.com/plotly/plotly.py/issues/1572),
+ [#1571](https://github.com/plotly/plotly.py/pull/1571))
+ - Fixed honouring of the `validate=False` option for all renderer types
+ ([#1576](https://github.com/plotly/plotly.py/pull/1576))
+ 
 ## [3.9.0] - 2019-04-19
 
 ### Updated

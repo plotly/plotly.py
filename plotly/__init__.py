@@ -35,7 +35,8 @@ from plotly import (
     utils,
     offline,
     colors,
-    io
+    io,
+    _docstring_gen
 )
 
 from plotly.version import __version__
