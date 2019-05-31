@@ -511,7 +511,7 @@ def plot(figure_or_data, show_link=False, link_text='Export to plot.ly',
                          {'data': [{'x': [1, 4], 'y': [1, 4]}]},
                          {'data': [{'x': [3, 4], 'y': [3, 4]}],
                           'layout': {'title': 'End Title'}}]}
-    iplot(figure, animation_opts={'frame': {'duration': 1}})
+    plot(figure, animation_opts={'frame': {'duration': 1}})
     ```
     """
     import plotly.io as pio
