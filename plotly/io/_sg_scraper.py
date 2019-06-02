@@ -1,23 +1,24 @@
 # This module defines an image scraper for sphinx-gallery
 # https://sphinx-gallery.github.io/
 # which can be used by projects using plotly in their documentation.
-# This module monkey-patches plotly.offline.plot, so we do not
-# import it in __init__.py
 import inspect, os
 
 import plotly
 from glob import glob
 import shutil
 
-plotly.io.renderers.default = 'sphinx' 
+plotly.io.renderers.default = 'sphinx_gallery' 
 
 
 def plotly_sg_scraper(block, block_vars, gallery_conf, **kwargs):
-    """Scrape Plotly figures.
+    """Scrape Plotly figures for galleries of examples using
+    sphinx-gallery.
 
-    Since the monkey-patched version of plotly.offline.plot generates
-    both html and static png files, we simply crawl these files and give
-    them the appropriate path.
+    Examples should use ``plotly.io.show()`` to display the figure with
+    the custom sphinx_gallery renderer.
+
+    Since the sphinx_gallery renderer generates both html and static png
+    files, we simply crawl these files and give them the appropriate path.
 
     Parameters
     ----------

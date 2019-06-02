@@ -395,7 +395,7 @@ renderers['firefox'] = BrowserRenderer(config=config, using='firefox')
 renderers['chrome'] = BrowserRenderer(config=config, using='chrome')
 renderers['chromium'] = BrowserRenderer(config=config, using='chromium')
 renderers['iframe'] = IFrameRenderer(config=config)
-renderers['sphinx'] = SphinxGalleryRenderer()
+renderers['sphinx_gallery'] = SphinxGalleryRenderer()
 
 # Set default renderer
 # --------------------

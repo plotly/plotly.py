@@ -1,4 +1,0 @@
-Narrative documentation
-=======================
-
-goes here
