@@ -45,7 +45,7 @@ def execute_plotly_example():
 def test_scraper():
     from plotly.io._sg_scraper import plotly_sg_scraper
     # test that monkey-patching worked ok
-    assert plotly.io.renderers.default == 'sphinx'
+    assert plotly.io.renderers.default == 'sphinx_gallery'
     # Use dummy values for arguments of plotly_sg_scraper
     block = '' # we don't need actually code
     import tempfile
