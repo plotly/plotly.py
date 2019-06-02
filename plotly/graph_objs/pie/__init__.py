@@ -91,7 +91,7 @@ class Title(_BaseTraceHierarchyType):
     @property
     def text(self):
         """
-        Sets the title of the pie chart. If it is empty, no title is
+        Sets the title of the chart. If it is empty, no title is
         displayed. Note that before the existence of `title.text`, the
         title's contents used to be defined as the `title` attribute
         itself. This behavior has been deprecated.
@@ -130,8 +130,8 @@ class Title(_BaseTraceHierarchyType):
             title's position used to be set by the now deprecated
             `titleposition` attribute.
         text
-            Sets the title of the pie chart. If it is empty, no
-            title is displayed. Note that before the existence of
+            Sets the title of the chart. If it is empty, no title
+            is displayed. Note that before the existence of
             `title.text`, the title's contents used to be defined
             as the `title` attribute itself. This behavior has been
             deprecated.
@@ -157,8 +157,8 @@ class Title(_BaseTraceHierarchyType):
             title's position used to be set by the now deprecated
             `titleposition` attribute.
         text
-            Sets the title of the pie chart. If it is empty, no
-            title is displayed. Note that before the existence of
+            Sets the title of the chart. If it is empty, no title
+            is displayed. Note that before the existence of
             `title.text`, the title's contents used to be defined
             as the `title` attribute itself. This behavior has been
             deprecated.
@@ -905,7 +905,7 @@ class Outsidetextfont(_BaseTraceHierarchyType):
         """
         Construct a new Outsidetextfont object
         
-        Sets the font used for `textinfo` lying outside the pie.
+        Sets the font used for `textinfo` lying outside the sector.
 
         Parameters
         ----------
@@ -1013,9 +1013,8 @@ class Marker(_BaseTraceHierarchyType):
     @property
     def colors(self):
         """
-        Sets the color of each sector of this pie chart. If not
-        specified, the default trace color set is used to pick the
-        sector colors.
+        Sets the color of each sector. If not specified, the default
+        trace color set is used to pick the sector colors.
     
         The 'colors' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
@@ -1098,9 +1097,9 @@ class Marker(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         colors
-            Sets the color of each sector of this pie chart. If not
-            specified, the default trace color set is used to pick
-            the sector colors.
+            Sets the color of each sector. If not specified, the
+            default trace color set is used to pick the sector
+            colors.
         colorssrc
             Sets the source reference on plot.ly for  colors .
         line
@@ -1120,9 +1119,9 @@ class Marker(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.pie.Marker
         colors
-            Sets the color of each sector of this pie chart. If not
-            specified, the default trace color set is used to pick
-            the sector colors.
+            Sets the color of each sector. If not specified, the
+            default trace color set is used to pick the sector
+            colors.
         colorssrc
             Sets the source reference on plot.ly for  colors .
         line
@@ -1409,7 +1408,7 @@ class Insidetextfont(_BaseTraceHierarchyType):
         """
         Construct a new Insidetextfont object
         
-        Sets the font used for `textinfo` lying inside the pie.
+        Sets the font used for `textinfo` lying inside the sector.
 
         Parameters
         ----------

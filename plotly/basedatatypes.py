@@ -2619,6 +2619,37 @@ Invalid property path '{key_path_str}' for layout
 
         return result
 
+    # plotly.io methods
+    # -----------------
+    # Note that docstrings are auto-generated in plotly/_docstring_gen.py
+    def show(self, *args, **kwargs):
+        import plotly.io as pio
+        return pio.show(self, *args, **kwargs)
+
+    def to_json(self, *args, **kwargs):
+        import plotly.io as pio
+        return pio.to_json(self, *args, **kwargs)
+
+    def write_json(self, *args, **kwargs):
+        import plotly.io as pio
+        return pio.write_json(self, *args, **kwargs)
+
+    def to_html(self, *args, **kwargs):
+        import plotly.io as pio
+        return pio.to_html(self, *args, **kwargs)
+
+    def write_html(self, *args, **kwargs):
+        import plotly.io as pio
+        return pio.write_html(self, *args, **kwargs)
+
+    def to_image(self, *args, **kwargs):
+        import plotly.io as pio
+        return pio.to_image(self, *args, **kwargs)
+
+    def write_image(self, *args, **kwargs):
+        import plotly.io as pio
+        return pio.write_image(self, *args, **kwargs)
+
     # Static helpers
     # --------------
     @staticmethod
