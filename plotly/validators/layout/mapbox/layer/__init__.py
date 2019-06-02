@@ -33,7 +33,7 @@ class TypeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop('edit_type', 'plot'),
             role=kwargs.pop('role', 'info'),
-            values=kwargs.pop("values", ["circle", "line", "fill", "symbol", "raster"]),
+            values=kwargs.pop('values', ['circle', 'line', 'fill', 'symbol', 'raster']),
             **kwargs
         )
 
@@ -125,7 +125,7 @@ class SourcetypeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop('edit_type', 'plot'),
             role=kwargs.pop('role', 'info'),
-            values=kwargs.pop("values", ["geojson", "vector", "raster"]),
+            values=kwargs.pop('values', ['geojson', 'vector', 'raster']),
             **kwargs
         )
 
