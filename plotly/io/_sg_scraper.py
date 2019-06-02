@@ -57,7 +57,7 @@ def plotly_sg_scraper(block, block_vars, gallery_conf, **kwargs):
     for html, png in zip(htmls, pngs):
         if png not in seen:
             seen |= set(png)
-            this_image_path_png = image_path_iterator.__next__()
+            this_image_path_png = next(image_path_iterator)
             this_image_path_html = (os.path.splitext(
                                     this_image_path_png)[0] + '.html')
             image_names.append(this_image_path_html)
