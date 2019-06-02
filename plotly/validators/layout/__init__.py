@@ -53,7 +53,12 @@ class YAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the `categoryarray` array, the sorting behavior
                 for that attribute will be identical to the
                 "trace" mode. The unspecified categories will
-                follow the categories in `categoryarray`.
+                follow the categories in `categoryarray`. Set
+                `categoryorder` to *total ascending* or *total
+                descending* if order should be determined by
+                the numerical order of the values. Similarly,
+                the order can be determined by the min, max,
+                sum, mean or median of all the values.
             color
                 Sets default for all colors associated with
                 this axis all at once: line, font, tick, and
@@ -475,7 +480,12 @@ class XAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the `categoryarray` array, the sorting behavior
                 for that attribute will be identical to the
                 "trace" mode. The unspecified categories will
-                follow the categories in `categoryarray`.
+                follow the categories in `categoryarray`. Set
+                `categoryorder` to *total ascending* or *total
+                descending* if order should be determined by
+                the numerical order of the values. Similarly,
+                the order can be determined by the min, max,
+                sum, mean or median of all the values.
             color
                 Sets default for all colors associated with
                 this axis all at once: line, font, tick, and
@@ -2011,14 +2021,15 @@ class MetasrcValidator(_plotly_utils.basevalidators.SrcValidator):
 import _plotly_utils.basevalidators
 
 
-class MetaValidator(_plotly_utils.basevalidators.DataArrayValidator):
+class MetaValidator(_plotly_utils.basevalidators.AnyValidator):
 
     def __init__(self, plotly_name='meta', parent_name='layout', **kwargs):
         super(MetaValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
+            array_ok=kwargs.pop('array_ok', True),
             edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'data'),
+            role=kwargs.pop('role', 'info'),
             **kwargs
         )
 
@@ -2130,6 +2141,20 @@ class LegendValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the legend.
             font
                 Sets the font used to text the legend items.
+            itemclick
+                Determines the behavior on legend item click.
+                "toggle" toggles the visibility of the item
+                clicked on the graph. "toggleothers" makes the
+                clicked item the sole visible item on the
+                graph. False disable legend item click
+                interactions.
+            itemdoubleclick
+                Determines the behavior on legend item double-
+                click. "toggle" toggles the visibility of the
+                item clicked on the graph. "toggleothers" makes
+                the clicked item the sole visible item on the
+                graph. False disable legend item double-click
+                interactions.
             itemsizing
                 Determines if the legend items symbols scale
                 with their corresponding "trace" attributes or
@@ -2631,6 +2656,81 @@ class GeoValidator(_plotly_utils.basevalidators.CompoundValidator):
 import _plotly_utils.basevalidators
 
 
+class FunnelmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
+
+    def __init__(
+        self, plotly_name='funnelmode', parent_name='layout', **kwargs
+    ):
+        super(FunnelmodeValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop('edit_type', 'calc'),
+            role=kwargs.pop('role', 'info'),
+            values=kwargs.pop('values', ['stack', 'group', 'overlay']),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class FunnelgroupgapValidator(_plotly_utils.basevalidators.NumberValidator):
+
+    def __init__(
+        self, plotly_name='funnelgroupgap', parent_name='layout', **kwargs
+    ):
+        super(FunnelgroupgapValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop('edit_type', 'calc'),
+            max=kwargs.pop('max', 1),
+            min=kwargs.pop('min', 0),
+            role=kwargs.pop('role', 'style'),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class FunnelgapValidator(_plotly_utils.basevalidators.NumberValidator):
+
+    def __init__(
+        self, plotly_name='funnelgap', parent_name='layout', **kwargs
+    ):
+        super(FunnelgapValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop('edit_type', 'calc'),
+            max=kwargs.pop('max', 1),
+            min=kwargs.pop('min', 0),
+            role=kwargs.pop('role', 'style'),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class FunnelareacolorwayValidator(
+    _plotly_utils.basevalidators.ColorlistValidator
+):
+
+    def __init__(
+        self, plotly_name='funnelareacolorway', parent_name='layout', **kwargs
+    ):
+        super(FunnelareacolorwayValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop('edit_type', 'calc'),
+            role=kwargs.pop('role', 'style'),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class FontValidator(_plotly_utils.basevalidators.CompoundValidator):
 
     def __init__(self, plotly_name='font', parent_name='layout', **kwargs):
@@ -2697,6 +2797,28 @@ class ExtendpiecolorsValidator(_plotly_utils.basevalidators.BooleanValidator):
         self, plotly_name='extendpiecolors', parent_name='layout', **kwargs
     ):
         super(ExtendpiecolorsValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop('edit_type', 'calc'),
+            role=kwargs.pop('role', 'style'),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class ExtendfunnelareacolorsValidator(
+    _plotly_utils.basevalidators.BooleanValidator
+):
+
+    def __init__(
+        self,
+        plotly_name='extendfunnelareacolors',
+        parent_name='layout',
+        **kwargs
+    ):
+        super(ExtendfunnelareacolorsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop('edit_type', 'calc'),
@@ -2819,6 +2941,82 @@ class ColorscaleValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the default sequential colorscale for
                 negative values. Note that `autocolorscale`
                 must be true for this attribute to work.
+"""
+            ),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class ColoraxisValidator(_plotly_utils.basevalidators.CompoundValidator):
+
+    def __init__(
+        self, plotly_name='coloraxis', parent_name='layout', **kwargs
+    ):
+        super(ColoraxisValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            data_class_str=kwargs.pop('data_class_str', 'Coloraxis'),
+            data_docs=kwargs.pop(
+                'data_docs', """
+            autocolorscale
+                Determines whether the colorscale is a default
+                palette (`autocolorscale: true`) or the palette
+                determined by `colorscale`. In case
+                `colorscale` is unspecified or `autocolorscale`
+                is true, the default  palette will be chosen
+                according to whether numbers in the `color`
+                array are all positive, all negative or mixed.
+            cauto
+                Determines whether or not the color domain is
+                computed with respect to the input data (here
+                corresponding trace color array(s)) or the
+                bounds set in `cmin` and `cmax`  Defaults to
+                `false` when `cmin` and `cmax` are set by the
+                user.
+            cmax
+                Sets the upper bound of the color domain. Value
+                should have the same units as corresponding
+                trace color array(s) and if set, `cmin` must be
+                set as well.
+            cmid
+                Sets the mid-point of the color domain by
+                scaling `cmin` and/or `cmax` to be equidistant
+                to this point. Value should have the same units
+                as corresponding trace color array(s). Has no
+                effect when `cauto` is `false`.
+            cmin
+                Sets the lower bound of the color domain. Value
+                should have the same units as corresponding
+                trace color array(s) and if set, `cmax` must be
+                set as well.
+            colorbar
+                plotly.graph_objs.layout.coloraxis.ColorBar
+                instance or dict with compatible properties
+            colorscale
+                Sets the colorscale. The colorscale must be an
+                array containing arrays mapping a normalized
+                value to an rgb, rgba, hex, hsl, hsv, or named
+                color string. At minimum, a mapping for the
+                lowest (0) and highest (1) values are required.
+                For example, `[[0, 'rgb(0,0,255)', [1,
+                'rgb(255,0,0)']]`. To control the bounds of the
+                colorscale in color space, use`cmin` and
+                `cmax`. Alternatively, `colorscale` may be a
+                palette name string of the following list: Grey
+                s,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Blues,
+                Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth
+                ,Electric,Viridis,Cividis.
+            reversescale
+                Reverses the color mapping if true. If true,
+                `cmin` will correspond to the last color in the
+                array and `cmax` will correspond to the first
+                color.
+            showscale
+                Determines whether or not a colorbar is
+                displayed for this trace.
 """
             ),
             **kwargs

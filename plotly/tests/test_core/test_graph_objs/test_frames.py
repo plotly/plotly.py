@@ -61,7 +61,6 @@ class FramesTest(TestCase):
             {'color', 'family', 'size'}
         )
 
-    @attr('nodev')
     def test_deeply_nested_data_attributes(self):
         frames = Frame
         frames.data = [Bar()]
@@ -79,7 +78,7 @@ class FramesTest(TestCase):
         self.assertEqual(
             set(matches),
             {'colorsrc', 'autocolorscale', 'cmin', 'colorscale', 'color',
-             'reversescale', 'width', 'cauto', 'widthsrc', 'cmax'}
+             'reversescale', 'width', 'cauto', 'widthsrc', 'cmax', 'coloraxis'}
         )
 
     def test_frame_only_attrs(self):

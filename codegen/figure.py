@@ -107,28 +107,72 @@ class {fig_classname}({base_classname}):\n""")
     # ### add_trace methods for each trace type ###
     for trace_node in trace_nodes:
 
+        include_secondary_y = bool([
+            d for d in trace_node.child_datatypes
+            if d.name_property == 'yaxis'
+        ])
+        if include_secondary_y:
+            secondary_y_1 = ', secondary_y=None'
+            secondary_y_2 = ', secondary_y=secondary_y'
+            secondary_y_docstring = f"""
+        secondary_y: boolean or None (default None)
+            * If True, only select yaxis objects associated with the secondary
+              y-axis of the subplot.
+            * If False, only select yaxis objects associated with the primary
+              y-axis of the subplot.
+            * If None (the default), do not filter yaxis objects based on
+              a secondary y-axis condition. 
+
+            To select yaxis objects by secondary y-axis, the Figure must
+            have been created using plotly.subplots.make_subplots. See
+            the docstring for the specs argument to make_subplots for more
+            info on creating subplots with secondary y-axes."""
+        else:
+            secondary_y_1 = ''
+            secondary_y_2 = ''
+            secondary_y_docstring = ''
+
         # #### Function signature ####
         buffer.write(f"""
     def add_{trace_node.plotly_name}(self""")
 
         # #### Function params####
+        param_extras = ['row', 'col']
+        if include_secondary_y:
+            param_extras.append('secondary_y')
         add_constructor_params(buffer,
                                trace_node.child_datatypes,
-                               append_extras=['row', 'col'])
+                               append_extras=param_extras)
 
         # #### Docstring ####
         header = f"Add a new {trace_node.name_datatype_class} trace"
 
-        extras = (('row : int or None (default)',
-                   'Subplot row index (starting from 1) for the trace to be '
-                   'added. Only valid if figure was created using '
-                   '`plotly.tools.make_subplots`'),
-                  ('col : int or None (default)',
-                   'Subplot col index (starting from 1) for the trace to be '
-                   'added. Only valid if figure was created using '
-                   '`plotly.tools.make_subplots`'))
+        doc_extras = [(
+            'row : int or None (default)',
+            'Subplot row index (starting from 1) for the trace to be '
+            'added. Only valid if figure was created using '
+            '`plotly.tools.make_subplots`'),
+            ('col : int or None (default)',
+             'Subplot col index (starting from 1) for the trace to be '
+             'added. Only valid if figure was created using '
+             '`plotly.tools.make_subplots`')]
 
-        add_docstring(buffer, trace_node, header, append_extras=extras)
+        if include_secondary_y:
+            doc_extras.append(
+                ('secondary_y: boolean or None (default None)', """\
+            If True, associate this trace with the secondary y-axis of the
+            subplot at the specified row and col. Only valid if all of the
+            following conditions are satisfied:
+              * The figure was created using `plotly.subplots.make_subplots`.
+              * The row and col arguments are not None
+              * The subplot at the specified row and col has type xy
+                (which is the default) and secondary_y True.  These
+                properties are specified in the specs argument to
+                make_subplots. See the make_subplots docstring for more info.\
+""")
+            )
+
+        add_docstring(buffer, trace_node, header, append_extras=doc_extras)
 
         # #### Function body ####
         buffer.write(f"""
@@ -143,8 +187,14 @@ class {fig_classname}({base_classname}):\n""")
         buffer.write(f"""
             **kwargs)""")
 
+        if include_secondary_y:
+            secondary_y_kwarg = ', secondary_y=secondary_y'
+        else:
+            secondary_y_kwarg = ''
+
         buffer.write(f"""
-        return self.add_trace(new_trace, row=row, col=col)""")
+        return self.add_trace(
+            new_trace, row=row, col=col{secondary_y_kwarg})""")
 
     # update layout subplots
     # ----------------------
@@ -152,9 +202,32 @@ class {fig_classname}({base_classname}):\n""")
     for subplot_node in subplot_nodes:
         singular_name = subplot_node.name_property
         plural_name = inflect_eng.plural_noun(singular_name)
+
+        if singular_name == 'yaxis':
+            secondary_y_1 = ', secondary_y=None'
+            secondary_y_2 = ', secondary_y=secondary_y'
+            secondary_y_docstring = f"""
+        secondary_y: boolean or None (default None)
+            * If True, only select yaxis objects associated with the secondary
+              y-axis of the subplot.
+            * If False, only select yaxis objects associated with the primary
+              y-axis of the subplot.
+            * If None (the default), do not filter yaxis objects based on
+              a secondary y-axis condition. 
+            
+            To select yaxis objects by secondary y-axis, the Figure must
+            have been created using plotly.subplots.make_subplots. See
+            the docstring for the specs argument to make_subplots for more
+            info on creating subplots with secondary y-axes."""
+        else:
+            secondary_y_1 = ''
+            secondary_y_2 = ''
+            secondary_y_docstring = ''
+
         buffer.write(f"""
 
-    def select_{plural_name}(self, selector=None, row=None, col=None):
+    def select_{plural_name}(
+            self, selector=None, row=None, col=None{secondary_y_1}):
         \"\"\"
         Select {singular_name} subplot objects from a particular subplot cell
         and/or {singular_name} subplot objects that satisfy custom selection
@@ -172,8 +245,8 @@ class {fig_classname}({base_classname}):\n""")
             Subplot row and column index of {singular_name} objects to select.
             To select {singular_name} objects by row and column, the Figure
             must have been created using plotly.subplots.make_subplots.
-            If None (the default), all {singular_name} objects are selected.
-
+            If None (the default), all {singular_name} objects are selected.\
+{secondary_y_docstring}
         Returns
         -------
         generator
@@ -184,9 +257,10 @@ class {fig_classname}({base_classname}):\n""")
             _validate_v4_subplots('select_{plural_name}')
 
         return self._select_layout_subplots_by_prefix(
-            '{singular_name}', selector, row, col)
+            '{singular_name}', selector, row, col{secondary_y_2})
 
-    def for_each_{singular_name}(self, fn, selector=None, row=None, col=None):
+    def for_each_{singular_name}(
+            self, fn, selector=None, row=None, col=None{secondary_y_1}):
         \"\"\"
         Apply a function to all {singular_name} objects that satisfy the
         specified selection criteria
@@ -205,21 +279,25 @@ class {fig_classname}({base_classname}):\n""")
             Subplot row and column index of {singular_name} objects to select.
             To select {singular_name} objects by row and column, the Figure
             must have been created using plotly.subplots.make_subplots.
-            If None (the default), all {singular_name} objects are selected.
-        
+            If None (the default), all {singular_name} objects are selected.\
+{secondary_y_docstring}
         Returns
         -------
         self
             Returns the Figure object that the method was called on
         \"\"\"
         for obj in self.select_{plural_name}(
-                selector=selector, row=row, col=col):
+                selector=selector, row=row, col=col{secondary_y_2}):
             fn(obj)
 
         return self
 
     def update_{plural_name}(
-            self, patch=None, selector=None, row=None, col=None, **kwargs):
+            self,
+            patch=None,
+            selector=None,
+            row=None, col=None{secondary_y_1},
+            **kwargs):
         \"\"\"
         Perform a property update operation on all {singular_name} objects
         that satisfy the specified selection criteria
@@ -239,7 +317,8 @@ class {fig_classname}({base_classname}):\n""")
             Subplot row and column index of {singular_name} objects to select.
             To select {singular_name} objects by row and column, the Figure
             must have been created using plotly.subplots.make_subplots.
-            If None (the default), all {singular_name} objects are selected.
+            If None (the default), all {singular_name} objects are selected.\
+{secondary_y_docstring}
         **kwargs
             Additional property updates to apply to each selected
             {singular_name} object. If a property is specified in
@@ -251,7 +330,7 @@ class {fig_classname}({base_classname}):\n""")
             Returns the Figure object that the method was called on
         \"\"\"
         for obj in self.select_{plural_name}(
-                selector=selector, row=row, col=col):
+                selector=selector, row=row, col=col{secondary_y_2}):
             obj.update(patch, **kwargs)
 
         return self""")

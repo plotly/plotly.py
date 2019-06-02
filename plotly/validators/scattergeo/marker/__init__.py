@@ -335,6 +335,15 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 and min values of the array or relative to
                 `marker.line.cmin` and `marker.line.cmax` if
                 set.
+            coloraxis
+                Sets a reference to a shared color axis.
+                References to these shared color axes are
+                "coloraxis", "coloraxis2", "coloraxis3", etc.
+                Settings for these shared color axes are set in
+                the layout, under `layout.coloraxis`,
+                `layout.coloraxis2`, etc. Note that multiple
+                color scales can be linked to the same color
+                axis.
             colorscale
                 Sets the colorscale. Has an effect only if in
                 `marker.line.color`is set to a numerical array.
@@ -681,6 +690,28 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 direction.
 """
             ),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class ColoraxisValidator(_plotly_utils.basevalidators.SubplotidValidator):
+
+    def __init__(
+        self,
+        plotly_name='coloraxis',
+        parent_name='scattergeo.marker',
+        **kwargs
+    ):
+        super(ColoraxisValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            dflt=kwargs.pop('dflt', None),
+            edit_type=kwargs.pop('edit_type', 'calc'),
+            regex=kwargs.pop('regex', '/^coloraxis([2-9]|[1-9][0-9]+)?$/'),
+            role=kwargs.pop('role', 'info'),
             **kwargs
         )
 

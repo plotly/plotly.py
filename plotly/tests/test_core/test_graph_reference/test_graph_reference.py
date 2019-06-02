@@ -8,7 +8,7 @@ import os
 from unittest import TestCase
 
 from nose.plugins.attrib import attr
-from requests.compat import json as _json
+import json as _json
 
 from plotly import graph_reference as gr
 from plotly.api import v2

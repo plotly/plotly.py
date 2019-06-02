@@ -688,7 +688,7 @@ class Outsidetextfont(_BaseTraceHierarchyType):
         """
         Construct a new Outsidetextfont object
         
-        Sets the font used for `textinfo` lying outside the pie.
+        Sets the font used for `textinfo` lying outside the sector.
 
         Parameters
         ----------
@@ -1294,7 +1294,7 @@ class Insidetextfont(_BaseTraceHierarchyType):
         """
         Construct a new Insidetextfont object
         
-        Sets the font used for `textinfo` lying inside the pie.
+        Sets the font used for `textinfo` lying inside the sector.
 
         Parameters
         ----------

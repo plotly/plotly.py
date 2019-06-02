@@ -272,9 +272,9 @@ def init_notebook_mode(connected=False):
         raise ImportError('`iplot` can only run inside an IPython Notebook.')
 
     if connected:
-        pio.renderers.default = 'notebook_connected+plotly_mimetype'
+        pio.renderers.default = 'plotly_mimetype+notebook_connected'
     else:
-        pio.renderers.default = 'notebook+plotly_mimetype'
+        pio.renderers.default = 'plotly_mimetype+notebook'
 
     # Trigger immediate activation of notebook. This way the plotly.js
     # library reference is available to the notebook immediately
@@ -316,12 +316,13 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
         `show_link` and `link_text` set the associated options in this
         dictionary if it doesn't contain them already.
     auto_play (default=True) -- Whether to automatically start the animation
-        sequence if the figure contains frames. Has no effect if the figure
-        does not contain frames.
-    animation_opts (default=None) -- dict of custom animation parameters to be
-        passed to the function Plotly.animate in Plotly.js. See
+        sequence on page load, if the figure contains frames. Has no effect if 
+        the figure does not contain frames.
+    animation_opts (default=None) -- Dict of custom animation parameters that 
+        are used for the automatically started animation on page load. This 
+        dict is passed to the function Plotly.animate in Plotly.js. See
         https://github.com/plotly/plotly.js/blob/master/src/plots/animation_attributes.js
-        for available options.  Has no effect if the figure
+        for available options. Has no effect if the figure
         does not contain frames, or auto_play is False.
 
     Example:
@@ -345,7 +346,7 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
                          {'data': [{'x': [1, 4], 'y': [1, 4]}]},
                          {'data': [{'x': [3, 4], 'y': [3, 4]}],
                           'layout': {'title': 'End Title'}}]}
-    iplot(figure,animation_opts="{frame: {duration: 1}}")
+    iplot(figure, animation_opts={'frame': {'duration': 1}})
     ```
     """
     import plotly.io as pio
@@ -390,7 +391,7 @@ def plot(figure_or_data, show_link=False, link_text='Export to plot.ly',
     plot([go.Scatter(x=[1, 2, 3], y=[3, 2, 6])], filename='my-graph.html')
     # We can also download an image of the plot by setting the image parameter
     # to the image format we want
-    plot([go.Scatter(x=[1, 2, 3], y=[3, 2, 6])], filename='my-graph.html'
+    plot([go.Scatter(x=[1, 2, 3], y=[3, 2, 6])], filename='my-graph.html',
          image='jpeg')
     ```
     More examples below.
@@ -492,11 +493,12 @@ def plot(figure_or_data, show_link=False, link_text='Export to plot.ly',
     auto_play (default=True) -- Whether to automatically start the animation
         sequence on page load if the figure contains frames. Has no effect if
         the figure does not contain frames.
-    animation_opts (default=None) -- dict of custom animation parameters to be
-        passed to the function Plotly.animate in Plotly.js. See
+    animation_opts (default=None) -- Dict of custom animation parameters that 
+        are used for the automatically started animation on page load. This 
+        dict is passed to the function Plotly.animate in Plotly.js. See
         https://github.com/plotly/plotly.js/blob/master/src/plots/animation_attributes.js
-        for available options. Has no effect if the figure does not contain
-        frames, or auto_play is False.
+        for available options. Has no effect if the figure
+        does not contain frames, or auto_play is False.
 
     Example:
     ```
@@ -509,7 +511,7 @@ def plot(figure_or_data, show_link=False, link_text='Export to plot.ly',
                          {'data': [{'x': [1, 4], 'y': [1, 4]}]},
                          {'data': [{'x': [3, 4], 'y': [3, 4]}],
                           'layout': {'title': 'End Title'}}]}
-    plot(figure,animation_opts="{frame: {duration: 1}}")
+    plot(figure, animation_opts={'frame': {'duration': 1}})
     ```
     """
     import plotly.io as pio

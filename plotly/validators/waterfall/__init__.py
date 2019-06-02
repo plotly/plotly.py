@@ -290,6 +290,28 @@ class TextpositionValidator(_plotly_utils.basevalidators.EnumeratedValidator):
 import _plotly_utils.basevalidators
 
 
+class TextinfoValidator(_plotly_utils.basevalidators.FlaglistValidator):
+
+    def __init__(
+        self, plotly_name='textinfo', parent_name='waterfall', **kwargs
+    ):
+        super(TextinfoValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            array_ok=kwargs.pop('array_ok', False),
+            edit_type=kwargs.pop('edit_type', 'plot'),
+            extras=kwargs.pop('extras', ['none']),
+            flags=kwargs.pop(
+                'flags', ['label', 'text', 'initial', 'delta', 'final']
+            ),
+            role=kwargs.pop('role', 'info'),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class TextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
 
     def __init__(
@@ -332,6 +354,23 @@ class TextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
                 .
 """
             ),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class TextangleValidator(_plotly_utils.basevalidators.AngleValidator):
+
+    def __init__(
+        self, plotly_name='textangle', parent_name='waterfall', **kwargs
+    ):
+        super(TextangleValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop('edit_type', 'plot'),
+            role=kwargs.pop('role', 'info'),
             **kwargs
         )
 
@@ -571,6 +610,39 @@ class NameValidator(_plotly_utils.basevalidators.StringValidator):
 import _plotly_utils.basevalidators
 
 
+class MetasrcValidator(_plotly_utils.basevalidators.SrcValidator):
+
+    def __init__(
+        self, plotly_name='metasrc', parent_name='waterfall', **kwargs
+    ):
+        super(MetasrcValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop('edit_type', 'none'),
+            role=kwargs.pop('role', 'info'),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class MetaValidator(_plotly_utils.basevalidators.AnyValidator):
+
+    def __init__(self, plotly_name='meta', parent_name='waterfall', **kwargs):
+        super(MetaValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            array_ok=kwargs.pop('array_ok', True),
+            edit_type=kwargs.pop('edit_type', 'plot'),
+            role=kwargs.pop('role', 'info'),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class MeasuresrcValidator(_plotly_utils.basevalidators.SrcValidator):
 
     def __init__(
@@ -664,6 +736,29 @@ class InsidetextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
                 .
 """
             ),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class InsidetextanchorValidator(
+    _plotly_utils.basevalidators.EnumeratedValidator
+):
+
+    def __init__(
+        self,
+        plotly_name='insidetextanchor',
+        parent_name='waterfall',
+        **kwargs
+    ):
+        super(InsidetextanchorValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop('edit_type', 'plot'),
+            role=kwargs.pop('role', 'info'),
+            values=kwargs.pop('values', ['end', 'middle', 'start']),
             **kwargs
         )
 

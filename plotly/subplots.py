@@ -27,8 +27,12 @@ _subplot_prop_named_subplot = {'polar', 'ternary', 'mapbox'}
 
 
 # Named tuple to hold an xaxis/yaxis pair that represent a single subplot
-SubplotXY = collections.namedtuple('SubplotXY', ('xaxis', 'yaxis'))
+SubplotXY = collections.namedtuple('SubplotXY',
+                                   ('xaxis', 'yaxis'))
 SubplotDomain = collections.namedtuple('SubplotDomain', ('x', 'y'))
+
+SubplotRef = collections.namedtuple(
+    'SubplotRef', ('subplot_type', 'layout_keys', 'trace_kwargs'))
 
 
 def _get_initial_max_subplot_ids():
@@ -155,6 +159,9 @@ def make_subplots(
                 - trace type: A trace type which will be used to determine
                               the appropriate subplot type for that trace
 
+            * secondary_y (bool, default False): If True, create a secondary
+                y-axis positioned on the right side of the subplot. Only valid
+                if type='xy'.
             * colspan (int, default 1): number of subplot columns
                 for this subplot to span.
             * rowspan (int, default 1): number of subplot rows
@@ -351,62 +358,6 @@ The 'start_cell` argument to make_subplots must be one of \
     Received value of type {typ}: {val}""".format(
             typ=type(start_cell), val=repr(start_cell)))
 
-    # ### horizontal_spacing ###
-    if horizontal_spacing is None:
-        horizontal_spacing = 0.2 / cols
-
-    # ### vertical_spacing ###
-    if vertical_spacing is None:
-        if subplot_titles:
-            vertical_spacing = 0.5 / rows
-        else:
-            vertical_spacing = 0.3 / rows
-
-    # ### subplot titles ###
-    if not subplot_titles:
-        subplot_titles = [""] * rows * cols
-
-    # ### column_widths ###
-    if row_titles:
-        # Add a little breathing room between row labels and legend
-        max_width = 0.98
-    else:
-        max_width = 1.0
-    if column_widths is None:
-        widths = [(max_width - horizontal_spacing * (cols - 1)) / cols] * cols
-    elif isinstance(column_widths, (list, tuple)) and len(column_widths) == cols:
-        cum_sum = float(sum(column_widths))
-        widths = []
-        for w in column_widths:
-            widths.append(
-                (max_width - horizontal_spacing * (cols - 1)) * (w / cum_sum)
-            )
-    else:
-        raise ValueError("""
-The 'column_widths' argument to make_suplots must be a list of numbers of \
-length {cols}.
-    Received value of type {typ}: {val}""".format(
-            cols=cols, typ=type(cols), val=repr(column_widths)))
-
-    # ### row_heights ###
-    if row_heights is None:
-        heights = [(1. - vertical_spacing * (rows - 1)) / rows] * rows
-    elif isinstance(row_heights, (list, tuple)) and len(row_heights) == rows:
-        cum_sum = float(sum(row_heights))
-        heights = []
-        for h in row_heights:
-            heights.append(
-                (1. - vertical_spacing * (rows - 1)) * (h / cum_sum)
-            )
-        if row_dir < 0 and not use_legacy_row_heights_order:
-            heights = list(reversed(heights))
-    else:
-        raise ValueError("""
-The 'row_heights' argument to make_suplots must be a list of numbers of \
-length {rows}.
-    Received value of type {typ}: {val}""".format(
-            rows=rows, typ=type(cols), val=repr(row_heights)))
-
     # ### Helper to validate coerce elements of lists of dictionaries ###
     def _check_keys_and_fill(name, arg, defaults):
         def _checks(item, defaults):
@@ -461,14 +412,16 @@ dimensions ({rows} x {cols}).
             rows=rows, cols=cols, typ=type(specs), val=repr(specs)
         ))
 
-    # For backward compatibility, convert is_3d flag to type='scene' kwarg
     for row in specs:
         for spec in row:
+            # For backward compatibility,
+            # convert is_3d flag to type='scene' kwarg
             if spec and spec.pop('is_3d', None):
                 spec['type'] = 'scene'
 
     spec_defaults = dict(
         type='xy',
+        secondary_y=False,
         colspan=1,
         rowspan=1,
         l=0.0,
@@ -477,6 +430,18 @@ dimensions ({rows} x {cols}).
         t=0.0,
     )
     _check_keys_and_fill('specs', specs, spec_defaults)
+
+    # Validate secondary_y
+    has_secondary_y = False
+    for row in specs:
+        for spec in row:
+            if spec is not None:
+                has_secondary_y = has_secondary_y or spec['secondary_y']
+            if spec and spec['type'] != 'xy' and spec['secondary_y']:
+                raise ValueError("""
+The 'secondary_y' spec property is not supported for subplot of type '{s_typ}'
+     'secondary_y' is only supported for subplots of type 'xy'
+""".format(s_typ=spec['type']))
 
     # ### insets ###
     if insets is None or insets is False:
@@ -527,6 +492,73 @@ The {arg} argument to make_subplots must be one of: {valid_vals}
             typ=type(val),
             val=repr(val)
         ))
+
+    # ### horizontal_spacing ###
+    if horizontal_spacing is None:
+        if has_secondary_y:
+            horizontal_spacing = 0.4 / cols
+        else:
+            horizontal_spacing = 0.2 / cols
+
+    # ### vertical_spacing ###
+    if vertical_spacing is None:
+        if subplot_titles:
+            vertical_spacing = 0.5 / rows
+        else:
+            vertical_spacing = 0.3 / rows
+
+    # ### subplot titles ###
+    if not subplot_titles:
+        subplot_titles = [""] * rows * cols
+
+    # ### column_widths ###
+    if has_secondary_y:
+        # Add room for secondary y-axis title
+        max_width = 0.94
+    elif row_titles:
+        # Add a little breathing room between row labels and legend
+        max_width = 0.98
+    else:
+        max_width = 1.0
+
+    if column_widths is None:
+        widths = [(max_width - horizontal_spacing * (
+                    cols - 1)) / cols] * cols
+    elif isinstance(column_widths, (list, tuple)) and len(
+            column_widths) == cols:
+        cum_sum = float(sum(column_widths))
+        widths = []
+        for w in column_widths:
+            widths.append(
+                (max_width - horizontal_spacing * (cols - 1)) * (
+                            w / cum_sum)
+            )
+    else:
+        raise ValueError("""
+The 'column_widths' argument to make_suplots must be a list of numbers of \
+length {cols}.
+    Received value of type {typ}: {val}""".format(
+            cols=cols, typ=type(column_widths), val=repr(column_widths)))
+
+    # ### row_heights ###
+    if row_heights is None:
+        heights = [(1. - vertical_spacing * (rows - 1)) / rows] * rows
+    elif isinstance(row_heights, (list, tuple)) and len(
+            row_heights) == rows:
+        cum_sum = float(sum(row_heights))
+        heights = []
+        for h in row_heights:
+            heights.append(
+                (1. - vertical_spacing * (rows - 1)) * (h / cum_sum)
+            )
+        if row_dir < 0 and not use_legacy_row_heights_order:
+            heights = list(reversed(heights))
+    else:
+        raise ValueError("""
+The 'row_heights' argument to make_suplots must be a list of numbers of \
+length {rows}.
+    Received value of type {typ}: {val}""".format(
+            rows=rows, typ=type(row_heights), val=repr(row_heights)))
 
     # ### column_titles / row_titles ###
     if column_titles and not isinstance(column_titles, (list, tuple)):
@@ -612,9 +644,11 @@ The row_titles argument to make_subplots must be a list or tuple
 
             # ### construct subplot container ###
             subplot_type = spec['type']
-            grid_ref_element = _init_subplot(
-                layout, subplot_type, x_domain, y_domain, max_subplot_ids)
-            grid_ref[r][c] = grid_ref_element
+            secondary_y = spec['secondary_y']
+            subplot_refs = _init_subplot(
+                layout, subplot_type, secondary_y,
+                x_domain, y_domain, max_subplot_ids)
+            grid_ref[r][c] = subplot_refs
 
     _configure_shared_axes(layout, grid_ref, specs, 'x', shared_xaxes, row_dir)
     _configure_shared_axes(layout, grid_ref, specs, 'y', shared_yaxes, row_dir)
@@ -658,10 +692,11 @@ The row_titles argument to make_subplots must be a list or tuple
 
             subplot_type = inset['type']
 
-            inset_ref_element = _init_subplot(
-                layout, subplot_type, x_domain, y_domain, max_subplot_ids)
+            subplot_refs = _init_subplot(
+                layout, subplot_type, False,
+                x_domain, y_domain, max_subplot_ids)
 
-            insets_ref[i_inset] = inset_ref_element
+            insets_ref[i_inset] = subplot_refs
 
     # Build grid_str
     # This is the message printed when print_grid=True
@@ -783,8 +818,8 @@ def _configure_shared_axes(layout, grid_ref, specs, x_or_y, shared, row_dir):
     else:
         rows_iter = range(rows)
 
-    def update_axis_matches(first_axis_id, ref, spec, remove_label):
-        if ref is None:
+    def update_axis_matches(first_axis_id, subplot_ref, spec, remove_label):
+        if subplot_ref is None:
             return first_axis_id
 
         if x_or_y == 'x':
@@ -792,12 +827,12 @@ def _configure_shared_axes(layout, grid_ref, specs, x_or_y, shared, row_dir):
         else:
             span = spec['rowspan']
 
-        if ref['subplot_type'] == 'xy' and span == 1:
+        if subplot_ref.subplot_type == 'xy' and span == 1:
             if first_axis_id is None:
-                first_axis_name = ref['layout_keys'][layout_key_ind]
+                first_axis_name = subplot_ref.layout_keys[layout_key_ind]
                 first_axis_id = first_axis_name.replace('axis', '')
             else:
-                axis_name = ref['layout_keys'][layout_key_ind]
+                axis_name = subplot_ref.layout_keys[layout_key_ind]
                 axis_to_match = layout[axis_name]
                 axis_to_match.matches = first_axis_id
                 if remove_label:
@@ -810,26 +845,32 @@ def _configure_shared_axes(layout, grid_ref, specs, x_or_y, shared, row_dir):
             first_axis_id = None
             ok_to_remove_label = x_or_y == 'x'
             for r in rows_iter:
-                ref = grid_ref[r][c]
+                if not grid_ref[r][c]:
+                    continue
+                subplot_ref = grid_ref[r][c][0]
                 spec = specs[r][c]
                 first_axis_id = update_axis_matches(
-                    first_axis_id, ref, spec, ok_to_remove_label)
+                    first_axis_id, subplot_ref, spec, ok_to_remove_label)
 
     elif shared == 'rows' or (x_or_y == 'y' and shared is True):
         for r in rows_iter:
             first_axis_id = None
             ok_to_remove_label = x_or_y == 'y'
             for c in range(cols):
-                ref = grid_ref[r][c]
+                if not grid_ref[r][c]:
+                    continue
+                subplot_ref = grid_ref[r][c][0]
                 spec = specs[r][c]
                 first_axis_id = update_axis_matches(
-                    first_axis_id, ref, spec, ok_to_remove_label)
+                    first_axis_id, subplot_ref, spec, ok_to_remove_label)
 
     elif shared == 'all':
         first_axis_id = None
         for c in range(cols):
             for ri, r in enumerate(rows_iter):
-                ref = grid_ref[r][c]
+                if not grid_ref[r][c]:
+                    continue
+                subplot_ref = grid_ref[r][c][0]
                 spec = specs[r][c]
 
                 if x_or_y == 'y':
@@ -838,11 +879,11 @@ def _configure_shared_axes(layout, grid_ref, specs, x_or_y, shared, row_dir):
                     ok_to_remove_label = ri > 0 if row_dir > 0 else r < rows - 1
 
                 first_axis_id = update_axis_matches(
-                    first_axis_id, ref, spec, ok_to_remove_label)
+                    first_axis_id, subplot_ref, spec, ok_to_remove_label)
 
 
 def _init_subplot_xy(
-        layout, x_domain, y_domain, max_subplot_ids=None
+        layout, secondary_y, x_domain, y_domain, max_subplot_ids=None
 ):
     if max_subplot_ids is None:
         max_subplot_ids = _get_initial_max_subplot_ids()
@@ -867,17 +908,36 @@ def _init_subplot_xy(
     layout[xaxis_name] = x_axis
     layout[yaxis_name] = y_axis
 
-    ref_element = {
-        'subplot_type': 'xy',
-        'layout_keys': (xaxis_name, yaxis_name),
-        'trace_kwargs': {'xaxis': x_label, 'yaxis': y_label}
-    }
+    subplot_refs = [SubplotRef(
+        subplot_type='xy',
+        layout_keys=(xaxis_name, yaxis_name),
+        trace_kwargs={'xaxis': x_label, 'yaxis': y_label}
+    )]
+
+    if secondary_y:
+        y_cnt += 1
+        secondary_yaxis_name = 'yaxis{cnt}'.format(
+            cnt=y_cnt if y_cnt > 1 else '')
+        secondary_y_label = "y{cnt}".format(cnt=y_cnt)
+
+        # Add secondary y-axis to subplot reference
+        subplot_refs.append(SubplotRef(
+            subplot_type='xy',
+            layout_keys=(xaxis_name, secondary_yaxis_name),
+            trace_kwargs={'xaxis': x_label, 'yaxis': secondary_y_label}
+        ))
+
+        # Add secondary y axis to layout
+        secondary_y_axis = {
+            'anchor': y_anchor, 'overlaying': y_label, 'side': 'right'
+        }
+        layout[secondary_yaxis_name] = secondary_y_axis
 
     # increment max_subplot_ids
     max_subplot_ids['xaxis'] = x_cnt
     max_subplot_ids['yaxis'] = y_cnt
 
-    return ref_element
+    return tuple(subplot_refs)
 
 
 def _init_subplot_single(
@@ -898,26 +958,28 @@ def _init_subplot_single(
                  if subplot_type in _subplot_prop_named_subplot
                  else subplot_type)
 
-    ref_element = {
-        'subplot_type': subplot_type,
-        'layout_keys': (label,),
-        'trace_kwargs': {trace_key: label}}
+    subplot_ref = SubplotRef(
+        subplot_type=subplot_type,
+        layout_keys=(label,),
+        trace_kwargs={trace_key: label}
+    )
 
     # increment max_subplot_id
     max_subplot_ids[subplot_type] = cnt
 
-    return ref_element
+    return (subplot_ref,)
 
 
 def _init_subplot_domain(x_domain, y_domain):
     # No change to layout since domain traces are labeled individually
-    ref_element = {
-        'subplot_type': 'domain',
-        'layout_keys': (),
-        'trace_kwargs': {
-            'domain': {'x': tuple(x_domain), 'y': tuple(y_domain)}}}
+    subplot_ref = SubplotRef(
+        subplot_type='domain',
+        layout_keys=(),
+        trace_kwargs={
+            'domain': {'x': tuple(x_domain), 'y': tuple(y_domain)}}
+    )
 
-    return ref_element
+    return (subplot_ref,)
 
 
 def _subplot_type_for_trace_type(trace_type):
@@ -966,7 +1028,8 @@ def _validate_coerce_subplot_type(subplot_type):
 
 
 def _init_subplot(
-        layout, subplot_type, x_domain, y_domain, max_subplot_ids=None
+        layout, subplot_type, secondary_y,
+        x_domain, y_domain, max_subplot_ids=None
 ):
     # Normalize subplot type
     subplot_type = _validate_coerce_subplot_type(subplot_type)
@@ -981,20 +1044,20 @@ def _init_subplot(
     y_domain = [max(0.0, y_domain[0]), min(1.0, y_domain[1])]
 
     if subplot_type == 'xy':
-        ref_element = _init_subplot_xy(
-            layout, x_domain, y_domain, max_subplot_ids
+        subplot_refs = _init_subplot_xy(
+            layout, secondary_y, x_domain, y_domain, max_subplot_ids
         )
     elif subplot_type in _single_subplot_types:
-        ref_element = _init_subplot_single(
+        subplot_refs = _init_subplot_single(
             layout, subplot_type, x_domain, y_domain, max_subplot_ids
         )
     elif subplot_type == 'domain':
-        ref_element = _init_subplot_domain(x_domain, y_domain)
+        subplot_refs = _init_subplot_domain(x_domain, y_domain)
     else:
         raise ValueError('Unsupported subplot type: {}'
                          .format(repr(subplot_type)))
 
-    return ref_element
+    return subplot_refs
 
 
 def _get_cartesian_label(x_or_y, r, c, cnt):
@@ -1009,7 +1072,6 @@ def _build_subplot_title_annotations(
         title_edge='top',
         offset=0
 ):
-
     # If shared_axes is False (default) use list_of_domains
     # This is used for insets and irregular layouts
     # if not shared_xaxes and not shared_yaxes:
@@ -1129,8 +1191,17 @@ def _build_grid_str(specs, grid_ref, insets, insets_ref, row_seq):
     _tmp = [['' for c in range(cols)] for r in range(rows)]
 
     # Define cell string as function of (r, c) and grid_ref
-    def _get_cell_str(r, c, ref):
-        ref_str = ','.join(ref['layout_keys'])
+    def _get_cell_str(r, c, subplot_refs):
+        layout_keys = sorted({
+            k
+            for ref in subplot_refs
+            for k in ref.layout_keys
+         })
+
+        ref_str = ','.join(layout_keys)
+
+        # Replace yaxis2 -> y2
+        ref_str = ref_str.replace('axis', '')
         return '({r},{c}) {ref}'.format(
             r=r + 1,
             c=c + 1,
@@ -1209,15 +1280,22 @@ def _build_grid_str(specs, grid_ref, insets, insets_ref, row_seq):
             c = inset['cell'][1] - 1
             ref = grid_ref[r][c]
 
+            subplot_labels_str = ','.join(insets_ref[i_inset][0].layout_keys)
+
+            # Replace, e.g., yaxis2 -> y2
+            subplot_labels_str = subplot_labels_str.replace('axis', '')
+
             grid_str += (
-                    s_str + ','.join(insets_ref[i_inset]['layout_keys']) + e_str +
-                    ' over ' +
+                    s_str + subplot_labels_str
+                    + e_str + ' over ' +
                     s_str + _get_cell_str(r, c, ref) + e_str + '\n'
             )
     return grid_str
 
 
-def _set_trace_grid_reference(trace, layout, grid_ref, row, col):
+def _set_trace_grid_reference(
+        trace, layout, grid_ref, row, col, secondary_y=False):
+
     if row <= 0:
         raise Exception("Row value is out of range. "
                         "Note: the starting cell is (1, 1)")
@@ -1225,20 +1303,31 @@ def _set_trace_grid_reference(trace, layout, grid_ref, row, col):
         raise Exception("Col value is out of range. "
                         "Note: the starting cell is (1, 1)")
     try:
-        ref = grid_ref[row - 1][col - 1]
+        subplot_refs = grid_ref[row - 1][col - 1]
     except IndexError:
         raise Exception("The (row, col) pair sent is out of "
                         "range. Use Figure.print_grid to view the "
                         "subplot grid. ")
 
-    if ref is None:
+    if not subplot_refs:
         raise ValueError("""
 No subplot specified at grid position ({row}, {col})""".format(
             row=row,
             col=col
         ))
 
-    for k in ref['trace_kwargs']:
+    if secondary_y:
+        if len(subplot_refs) < 2:
+            raise ValueError("""
+Subplot with type '{subplot_type}' at grid position ({row}, {col}) was not
+created with the secondary_y spec property set to True. See the docstring
+for the specs argument to plotly.subplots.make_subplots for more information.
+""")
+        trace_kwargs = subplot_refs[1].trace_kwargs
+    else:
+        trace_kwargs = subplot_refs[0].trace_kwargs
+
+    for k in trace_kwargs:
         if k not in trace:
             raise ValueError("""\
 Trace type '{typ}' is not compatible with subplot type '{subplot_type}'
@@ -1247,26 +1336,26 @@ at grid position ({row}, {col})
 See the docstring for the specs argument to plotly.subplots.make_subplot 
 for more information on subplot types""".format(
                 typ=trace.type,
-                subplot_type=ref['subplot_type'],
+                subplot_type=subplot_refs[0].subplot_type,
                 row=row,
                 col=col
             ))
 
     # Update trace reference
-    trace.update(ref['trace_kwargs'])
+    trace.update(trace_kwargs)
 
 
-def _get_grid_subplot(fig, row, col):
+def _get_grid_subplot(fig, row, col, secondary_y=False):
     # Make sure we're in future subplots mode
     from _plotly_future_ import _future_flags
     if 'v4_subplots' not in _future_flags:
         raise ValueError("""
-    plotly.subplots.get_subplots may only be used in the
-    v4_subplots _plotly_future_ mode.  To try it out, run
+plotly.subplots.get_subplots may only be used in the
+v4_subplots _plotly_future_ mode.  To try it out, run
 
-    >>> from _plotly_future_ import v4_subplots
+>>> from _plotly_future_ import v4_subplots
 
-    before importing plotly.
+before importing plotly.
     """)
 
     try:
@@ -1299,13 +1388,20 @@ The col argument to get_subplot must be an integer where 1 <= row <= {cols}
             val=repr(col)
         ))
 
-    ref = fig._grid_ref[row - 1][col - 1]
-    if ref is None:
+    subplot_refs = fig._grid_ref[row - 1][col - 1]
+    if not subplot_refs:
         return None
 
-    layout_keys = ref['layout_keys']
+    if secondary_y:
+        if len(subplot_refs) > 1:
+            layout_keys = subplot_refs[1].layout_keys
+        else:
+            return None
+    else:
+        layout_keys = subplot_refs[0].layout_keys
+
     if len(layout_keys) == 0:
-        return SubplotDomain(**ref['trace_kwargs']['domain'])
+        return SubplotDomain(**subplot_refs[0].trace_kwargs['domain'])
     elif len(layout_keys) == 1:
         return fig.layout[layout_keys[0]]
     elif len(layout_keys) == 2:
@@ -1320,41 +1416,45 @@ Unexpected subplot type with layout_keys of {}""".format(layout_keys))
 def _get_subplot_ref_for_trace(trace):
 
     if 'domain' in trace:
-        return {
-            'subplot_type': 'domain',
-            'layout_keys': (),
-            'trace_kwargs': {
+        return SubplotRef(
+            subplot_type='domain',
+            layout_keys=(),
+            trace_kwargs={
                 'domain': {'x': trace.domain.x,
-                           'y': trace.domain.y}}}
+                           'y': trace.domain.y}}
+        )
 
     elif 'xaxis' in trace and 'yaxis' in trace:
         xaxis_name = 'xaxis' + trace.xaxis[1:] if trace.xaxis else 'xaxis'
         yaxis_name = 'yaxis' + trace.yaxis[1:] if trace.yaxis else 'yaxis'
 
-        return {
-            'subplot_type': 'xy',
-            'layout_keys': (xaxis_name, yaxis_name),
-            'trace_kwargs': {'xaxis': trace.xaxis, 'yaxis': trace.yaxis}
-        }
+        return SubplotRef(
+            subplot_type='xy',
+            layout_keys=(xaxis_name, yaxis_name),
+            trace_kwargs={'xaxis': trace.xaxis, 'yaxis': trace.yaxis}
+        )
     elif 'geo' in trace:
-        return {
-            'subplot_type': 'geo',
-            'layout_keys': (trace.geo,),
-            'trace_kwargs': {'geo': trace.geo}}
+        return SubplotRef(
+            subplot_type='geo',
+            layout_keys=(trace.geo,),
+            trace_kwargs={'geo': trace.geo}
+        )
     elif 'scene' in trace:
-        return {
-            'subplot_type': 'scene',
-            'layout_keys': (trace.scene,),
-            'trace_kwargs': {'scene': trace.scene}}
+        return SubplotRef(
+            subplot_type='scene',
+            layout_keys=(trace.scene,),
+            trace_kwargs={'scene': trace.scene}
+        )
     elif 'subplot' in trace:
         for t in _subplot_prop_named_subplot:
             try:
                 validator = trace._get_prop_validator('subplot')
                 validator.validate_coerce(t)
-                return {
-                    'subplot_type': t,
-                    'layout_keys': (trace.subplot,),
-                    'trace_kwargs': {'subplot': trace.subplot}}
+                return SubplotRef(
+                    subplot_type=t,
+                    layout_keys=(trace.subplot,),
+                    trace_kwargs={'subplot': trace.subplot}
+                )
             except ValueError:
                 pass
 
