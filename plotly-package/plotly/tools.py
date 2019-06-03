@@ -684,9 +684,9 @@ class FigureFactory(object):
 def get_config_plotly_server_url():
     """
     Function to get the .config file's 'plotly_domain' without importing
-    the chart_studio package.  This property is needed to compute the default
+    the chartstudio package.  This property is needed to compute the default
     value of the plotly.js config plotlyServerURL, so it is independent of
-    the chart_studio integration and still needs to live in
+    the chartstudio integration and still needs to live in
 
     Returns
     -------
