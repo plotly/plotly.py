@@ -600,19 +600,21 @@ class SrcValidator(BaseValidator):
         super(SrcValidator, self).__init__(
             plotly_name=plotly_name, parent_name=parent_name, **kwargs)
 
+        self.chart_studio = get_module('chart_studio')
+
     def description(self):
         return ("""\
     The '{plotly_name}' property must be specified as a string or
     as a plotly.grid_objs.Column object""".format(plotly_name=self.plotly_name))
 
     def validate_coerce(self, v):
-        from chart_studio.grid_objs import Column
         if v is None:
             # Pass None through
             pass
         elif isinstance(v, string_types):
             pass
-        elif isinstance(v, Column):
+        elif self.chart_studio and \
+                isinstance(v, self.chart_studio.grid_objs.Column):
             # Convert to id string
             v = v.id
         else:
