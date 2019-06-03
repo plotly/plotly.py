@@ -437,7 +437,13 @@ elif ipython and ipython.get_ipython():
 else:
     # If ipython isn't available, try to display figures in the default
     # browser
-    default_renderer = 'browser'
+    import webbrowser
+    try:
+        webbrowser.get()
+        default_renderer = 'browser'
+    except webbrowser.Error:
+        # Default browser could not be loaded
+        pass
 
 renderers.render_on_display = True
 renderers.default = default_renderer
