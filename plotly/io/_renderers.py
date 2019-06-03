@@ -7,7 +7,6 @@ import six
 import os
 
 from plotly import optional_imports
-from _plotly_future_ import _future_flags
 
 from plotly.io._base_renderers import (
     MimetypeRenderer, ExternalRenderer, PlotlyRenderer, NotebookRenderer,
@@ -397,53 +396,48 @@ renderers['iframe'] = IFrameRenderer(config=config)
 
 # Set default renderer
 # --------------------
-if 'renderer_defaults' in _future_flags:
-    # Version 4 renderer configuration
-    default_renderer = None
+# Version 4 renderer configuration
+default_renderer = None
 
-    # Handle the PLOTLY_RENDERER environment variable
-    env_renderer = os.environ.get('PLOTLY_RENDERER', None)
-    if env_renderer:
-        try:
-            renderers._validate_coerce_renderers(env_renderer)
-        except ValueError:
-            raise ValueError("""
+# Handle the PLOTLY_RENDERER environment variable
+env_renderer = os.environ.get('PLOTLY_RENDERER', None)
+if env_renderer:
+    try:
+        renderers._validate_coerce_renderers(env_renderer)
+    except ValueError:
+        raise ValueError("""
 Invalid named renderer(s) specified in the 'PLOTLY_RENDERER'
 environment variable: {env_renderer}""".format(env_renderer=env_renderer))
 
-        default_renderer = env_renderer
-    elif ipython and ipython.get_ipython():
-        # Try to detect environment so that we can enable a useful
-        # default renderer
-        if not default_renderer:
-            try:
-                import google.colab
+    default_renderer = env_renderer
+elif ipython and ipython.get_ipython():
+    # Try to detect environment so that we can enable a useful
+    # default renderer
+    if not default_renderer:
+        try:
+            import google.colab
 
-                default_renderer = 'colab'
-            except ImportError:
-                pass
+            default_renderer = 'colab'
+        except ImportError:
+            pass
 
-        # Check if we're running in a Kaggle notebook
-        if not default_renderer and os.path.exists('/kaggle/input'):
-            default_renderer = 'kaggle'
+    # Check if we're running in a Kaggle notebook
+    if not default_renderer and os.path.exists('/kaggle/input'):
+        default_renderer = 'kaggle'
 
-        # Check if we're running in VSCode
-        if not default_renderer and 'VSCODE_PID' in os.environ:
-            default_renderer = 'vscode'
+    # Check if we're running in VSCode
+    if not default_renderer and 'VSCODE_PID' in os.environ:
+        default_renderer = 'vscode'
 
-        # Fallback to renderer combination that will work automatically
-        # in the classic notebook (offline), jupyterlab, nteract, vscode, and
-        # nbconvert HTML export.
-        if not default_renderer:
-            default_renderer = 'plotly_mimetype+notebook'
-    else:
-        # If ipython isn't available, try to display figures in the default
-        # browser
-        default_renderer = 'browser'
-
-    renderers.render_on_display = True
-    renderers.default = default_renderer
+    # Fallback to renderer combination that will work automatically
+    # in the classic notebook (offline), jupyterlab, nteract, vscode, and
+    # nbconvert HTML export.
+    if not default_renderer:
+        default_renderer = 'plotly_mimetype+notebook'
 else:
-    # Version 3 defaults
-    renderers.render_on_display = False
-    renderers.default = 'plotly_mimetype'
+    # If ipython isn't available, try to display figures in the default
+    # browser
+    default_renderer = 'browser'
+
+renderers.render_on_display = True
+renderers.default = default_renderer

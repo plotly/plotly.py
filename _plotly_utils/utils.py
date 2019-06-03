@@ -4,7 +4,6 @@ import json as _json
 import sys
 import re
 import pytz
-from _plotly_future_ import _future_flags
 
 from _plotly_utils.optional_imports import get_module
 
@@ -104,9 +103,7 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
             self.encode_as_sage,
             self.encode_as_numpy,
             self.encode_as_pandas,
-            (self.encode_as_datetime_v4
-             if 'timezones' in _future_flags
-             else self.encode_as_datetime),
+            self.encode_as_datetime_v4,
             self.encode_as_date,
             self.encode_as_list,  # because some values have `tolist` do last.
             self.encode_as_decimal

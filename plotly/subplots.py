@@ -313,8 +313,6 @@ def make_subplots(
     ...     cols=[1, 2, 1, 2])
     """
 
-    _validate_v4_subplots('plotly.subplots.make_subplots')
-
     import plotly.graph_objs as go
 
     # Handle backward compatibility
@@ -791,20 +789,6 @@ The row_titles argument to make_subplots must be a list or tuple
     fig.__dict__['_grid_str'] = grid_str
 
     return fig
-
-
-def _validate_v4_subplots(method_name):
-    # Make sure we're in future subplots mode
-    from _plotly_future_ import _future_flags
-    if 'v4_subplots' not in _future_flags:
-        raise ValueError("""
-{method_name} may only be used in the
-v4_subplots _plotly_future_ mode.  To try it out, run
-
->>> from _plotly_future_ import v4_subplots
-
-before importing plotly.
-""".format(method_name=method_name))
 
 
 def _configure_shared_axes(layout, grid_ref, specs, x_or_y, shared, row_dir):
@@ -1346,18 +1330,6 @@ for more information on subplot types""".format(
 
 
 def _get_grid_subplot(fig, row, col, secondary_y=False):
-    # Make sure we're in future subplots mode
-    from _plotly_future_ import _future_flags
-    if 'v4_subplots' not in _future_flags:
-        raise ValueError("""
-plotly.subplots.get_subplots may only be used in the
-v4_subplots _plotly_future_ mode.  To try it out, run
-
->>> from _plotly_future_ import v4_subplots
-
-before importing plotly.
-    """)
-
     try:
         grid_ref = fig._grid_ref
     except AttributeError:
