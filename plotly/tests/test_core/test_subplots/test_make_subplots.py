@@ -1,5 +1,4 @@
 from __future__ import absolute_import
-from _plotly_future_ import _future_flags
 
 from unittest import TestCase
 from plotly.graph_objs import (Annotation, Annotations, Data, Figure, Font,
@@ -14,13 +13,6 @@ class TestMakeSubplots(TestCase):
 
     In version 4, change this to test plotly.subplots.make_subplots directly
     """
-
-    def setUp(self):
-        # Use v4_subplots mode
-        _future_flags.add('v4_subplots')
-
-    def tearDown(self):
-        _future_flags.remove('v4_subplots')
 
     def test_non_integer_rows(self):
         with self.assertRaises(Exception):

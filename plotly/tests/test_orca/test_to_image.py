@@ -58,7 +58,8 @@ def format(request):
 
 @pytest.fixture()
 def fig1():
-    return go.Figure(data=[
+    pio.templates.default = None
+    yield go.Figure(data=[
         go.Bar(y=[2, 1, 4],
                marker=go.bar.Marker(color='purple',
                                     opacity=0.7)),
@@ -69,10 +70,12 @@ def fig1():
         'yaxis': {'showticklabels': False},
         'showlegend': False
     })
+    pio.templates.default = 'plotly'
 
 
 @pytest.fixture()
 def topofig():
+    pio.templates.default = None
     for col in topo_df.columns:
         topo_df[col] = topo_df[col].astype(str)
 
@@ -115,11 +118,13 @@ def topofig():
         font={'family': 'Arial', 'size': 12},
     )
 
-    return dict(data=data, layout=layout)
+    yield dict(data=data, layout=layout)
+    pio.templates.default = 'plotly'
 
 
 @pytest.fixture()
 def latexfig():
+    pio.templates.default = None
     trace1 = go.Scatter(
         x=[1, 2, 3, 4],
         y=[1, 4, 9, 16],
@@ -142,7 +147,8 @@ def latexfig():
         font={'family': 'Arial', 'size': 12}
     )
     fig = go.Figure(data=data, layout=layout)
-    return fig
+    yield fig
+    pio.templates.default = 'plotly'
 
 
 # Utilities

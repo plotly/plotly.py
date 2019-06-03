@@ -6,6 +6,7 @@ from nose.tools import raises
 
 import plotly.io as pio
 import plotly.graph_objs as go
+from plotly.tests.utils import TestCaseNoTemplate
 
 
 class TemplateTest(TestCase):
@@ -15,12 +16,15 @@ class TemplateTest(TestCase):
     def setUp(self):
         pio.templates['test_template'] = {
             'layout': {'font': {'family': 'Rockwell'}}}
+        pio.templates.default = None
 
     def tearDown(self):
         try:
             del pio.templates['test_template']
         except KeyError:
             pass
+
+        pio.templates.default = 'plotly'
 
     # template graph_objs tests
     # -------------------------
@@ -166,7 +170,7 @@ class TemplateTest(TestCase):
         self.assertIn('test_template', set(pio.templates))
 
 
-class TestToTemplated(TestCase):
+class TestToTemplated(TestCaseNoTemplate):
 
     def test_move_layout_nested_properties(self):
         fig = go.Figure(layout={'font': {'family': 'Courier New'},

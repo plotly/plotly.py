@@ -57,7 +57,6 @@ def build_figure_py(trace_node, base_package, base_classname, fig_classname,
     # ### Import trace graph_obj classes ###
     trace_types_csv = ', '.join([n.name_datatype_class for n in trace_nodes])
     buffer.write(f'from plotly.graph_objs import ({trace_types_csv})\n')
-    buffer.write("from plotly.subplots import _validate_v4_subplots\n")
 
     # Write class definition
     # ----------------------
@@ -253,8 +252,6 @@ class {fig_classname}({base_classname}):\n""")
             Generator that iterates through all of the {singular_name}
             objects that satisfy all of the specified selection criteria
         \"\"\"
-        if row is not None or col is not None:
-            _validate_v4_subplots('select_{plural_name}')
 
         return self._select_layout_subplots_by_prefix(
             '{singular_name}', selector, row, col{secondary_y_2})

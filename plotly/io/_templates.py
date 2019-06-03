@@ -8,10 +8,6 @@ import os
 import json
 from functools import reduce
 
-from six import string_types
-
-from _plotly_future_ import _future_flags
-
 try:
     from math import gcd
 except ImportError:
@@ -67,13 +63,6 @@ class TemplatesConfig(object):
             template_str = pkgutil.get_data('plotly', path).decode('utf-8')
             template_dict = json.loads(template_str)
             template = Template(template_dict)
-
-            if ('template_defaults' in _future_flags
-                    and isinstance(item, string_types)
-                    and item in ('plotly', 'plotly_white', 'plotly_dark')
-            ):
-                template = self.merge_templates(
-                    template, self['plotly_v4_colors'])
 
             self._templates[item] = template
 

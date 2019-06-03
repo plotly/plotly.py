@@ -11,6 +11,7 @@ from nose.plugins.attrib import attr
 import json as _json
 
 import plotly
+import plotly.io as pio
 import json
 
 
@@ -76,8 +77,12 @@ class PlotlyOfflineBaseTestCase(TestCase):
 
 
 class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
+
     def setUp(self):
-        pass
+        pio.templates.default = None
+
+    def tearDown(self):
+        pio.templates.default = 'plotly'
 
     def _read_html(self, file_url):
         """ Read and return the HTML contents from a file_url

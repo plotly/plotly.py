@@ -6,14 +6,11 @@ from unittest import TestCase
 import plotly.graph_objs as go
 from plotly.graph_objs import Figure
 from plotly.subplots import make_subplots
-from _plotly_future_ import _future_flags
 
 
 class TestSelectForEachUpdateSubplots(TestCase):
 
     def setUp(self):
-        _future_flags.add('v4_subplots')
-
         fig = make_subplots(
             rows=3,
             cols=3,
@@ -46,9 +43,6 @@ class TestSelectForEachUpdateSubplots(TestCase):
 
         self.fig = fig
         self.fig_no_grid = go.Figure(self.fig.to_dict())
-
-    def tearDown(self):
-        _future_flags.remove('v4_subplots')
 
     def assert_select_subplots(
             self, subplot_type, subplots_name, expected_nums,

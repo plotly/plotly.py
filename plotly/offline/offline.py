@@ -105,7 +105,7 @@ def _build_mathjax_script(url):
             .format(url=url))
 
 
-def _get_jconfig(config):
+def _get_jconfig(config=None):
 
     configkeys = (
         'staticPlot',
@@ -316,10 +316,10 @@ def iplot(figure_or_data, show_link=False, link_text='Export to plot.ly',
         `show_link` and `link_text` set the associated options in this
         dictionary if it doesn't contain them already.
     auto_play (default=True) -- Whether to automatically start the animation
-        sequence on page load, if the figure contains frames. Has no effect if 
+        sequence on page load, if the figure contains frames. Has no effect if
         the figure does not contain frames.
-    animation_opts (default=None) -- Dict of custom animation parameters that 
-        are used for the automatically started animation on page load. This 
+    animation_opts (default=None) -- Dict of custom animation parameters that
+        are used for the automatically started animation on page load. This
         dict is passed to the function Plotly.animate in Plotly.js. See
         https://github.com/plotly/plotly.js/blob/master/src/plots/animation_attributes.js
         for available options. Has no effect if the figure
@@ -493,8 +493,8 @@ def plot(figure_or_data, show_link=False, link_text='Export to plot.ly',
     auto_play (default=True) -- Whether to automatically start the animation
         sequence on page load if the figure contains frames. Has no effect if
         the figure does not contain frames.
-    animation_opts (default=None) -- Dict of custom animation parameters that 
-        are used for the automatically started animation on page load. This 
+    animation_opts (default=None) -- Dict of custom animation parameters that
+        are used for the automatically started animation on page load. This
         dict is passed to the function Plotly.animate in Plotly.js. See
         https://github.com/plotly/plotly.js/blob/master/src/plots/animation_attributes.js
         for available options. Has no effect if the figure

@@ -1,11 +1,10 @@
 from __future__ import absolute_import
 
-from unittest import TestCase
-
 import plotly.graph_objs as go
+from plotly.tests.utils import TestCaseNoTemplate
 
 
-class FigureTest(TestCase):
+class FigureTest(TestCaseNoTemplate):
 
     def test_instantiation(self):
 

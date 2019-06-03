@@ -1,6 +1,7 @@
 from unittest import TestCase
 import plotly.graph_objs as go
 from nose.tools import raises
+import plotly.io as pio
 
 
 class TestLayoutSubplots(TestCase):
@@ -8,6 +9,11 @@ class TestLayoutSubplots(TestCase):
     def setUp(self):
         # Construct initial scatter object
         self.layout = go.Layout()
+
+        pio.templates.default = None
+
+    def tearDown(self):
+        pio.templates.default = 'plotly'
 
     def test_initial_access_subplots(self):
 
@@ -217,7 +223,6 @@ class TestLayoutSubplots(TestCase):
 
         layout_dict = {
             'grid': {'xaxes': ['x', 'x2'], 'yaxes': ['y']},
-            # 'xaxis': {'title': 'total_bill'},
             'xaxis2': {'matches': 'x', 'title': {'text': 'total_bill'}}
         }
 

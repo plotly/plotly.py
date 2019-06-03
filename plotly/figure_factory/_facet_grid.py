@@ -3,7 +3,7 @@ from __future__ import absolute_import
 from plotly import exceptions, optional_imports
 import plotly.colors as clrs
 from plotly.figure_factory import utils
-from plotly.tools import make_subplots
+from plotly.subplots import make_subplots
 
 import math
 from numbers import Number

@@ -22,8 +22,6 @@ from plotly.optional_imports import get_module
 
 psutil = get_module('psutil')
 
-from _plotly_future_ import _future_flags
-
 # Valid image format constants
 # ----------------------------
 valid_formats = ('png', 'jpeg', 'webp', 'svg', 'pdf', 'eps')
@@ -671,7 +669,7 @@ but received value of type {typ}.
 
     @property
     def use_xvfb(self):
-        dflt = 'auto' if 'orca_defaults' in _future_flags else False
+        dflt = 'auto'
         return self._props.get('use_xvfb', dflt)
 
     @use_xvfb.setter

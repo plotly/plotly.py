@@ -1,11 +1,11 @@
 from __future__ import absolute_import
 
-from unittest import TestCase
 import plotly.graph_objs as go
 from collections import OrderedDict
+from plotly.tests.utils import TestCaseNoTemplate
 
 
-class FigureTest(TestCase):
+class FigureTest(TestCaseNoTemplate):
 
     def test_to_ordered_dict(self):
 
