@@ -25,8 +25,11 @@ Modules:
 - exceptions: defines our custom exception classes
 
 """
-
 from __future__ import absolute_import
+
+# https://packaging.python.org/guides/packaging-namespace-packages/
+#         pkgutil-style-namespace-packages
+__path__ = __import__('pkgutil').extend_path(__path__, __name__)
 
 from plotly import (
     graph_objs,
