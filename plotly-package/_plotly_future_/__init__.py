@@ -24,7 +24,7 @@ The _plotly_future_ module must be imported before the plotly module""")
 
 warnings.filterwarnings(
     'default',
-    '.*?is deprecated, please use chartstudio*',
+    '.*?is deprecated, please use chart_studio*',
     DeprecationWarning
 )
 
@@ -32,7 +32,7 @@ warnings.filterwarnings(
 def _chart_studio_warning(submodule):
     warnings.warn(
         'The plotly.{submodule} module is deprecated, '
-        'please use chartstudio.{submodule} instead'
+        'please use chart_studio.{submodule} instead'
             .format(submodule=submodule),
         DeprecationWarning,
         stacklevel=2)
@@ -41,8 +41,8 @@ def _chart_studio_warning(submodule):
 def _chart_studio_error(submodule):
     raise ImportError("""
 The plotly.{submodule} module is deprecated,
-please install the chartstudio package and use the
-chartstudio.{submodule} module instead. 
+please install the chart_studio package and use the
+chart_studio.{submodule} module instead. 
 """.format(submodule=submodule))
 
 
@@ -53,7 +53,7 @@ def _chart_studio_deprecation(fn):
     plotly_name = '.'.join(
         ['plotly'] + fn_module.split('.')[1:] + [fn_name])
     chart_studio_name = '.'.join(
-        ['chartstudio'] + fn_module.split('.')[1:] + [fn_name])
+        ['chart_studio'] + fn_module.split('.')[1:] + [fn_name])
 
     msg = """\
 {plotly_name} is deprecated, please use {chart_studio_name}\
