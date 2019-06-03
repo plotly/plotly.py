@@ -254,9 +254,3 @@ def _default_memoize_key_function(*args, **kwargs):
         return args, frozenset(kwargs.items())
     else:
         return args
-
-
-# Deprecations
-from _plotly_future_ import _future_flags
-if 'remove_deprecations' not in _future_flags:
-    from chart_studio.utils import *

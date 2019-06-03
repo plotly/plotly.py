@@ -30,13 +30,20 @@ warnings.filterwarnings(
 
 
 def _chart_studio_warning(submodule):
-    if 'extract_chart_studio' in _future_flags:
-        warnings.warn(
-            'The plotly.{submodule} module is deprecated, '
-            'please use chart_studio.{submodule} instead'
-                .format(submodule=submodule),
-            DeprecationWarning,
-            stacklevel=2)
+    warnings.warn(
+        'The plotly.{submodule} module is deprecated, '
+        'please use chart_studio.{submodule} instead'
+            .format(submodule=submodule),
+        DeprecationWarning,
+        stacklevel=2)
+
+
+def _chart_studio_error(submodule):
+    raise ImportError("""
+The plotly.{submodule} module is deprecated,
+please install the chart_studio package and use the
+chart_studio.{submodule} module instead. 
+""".format(submodule=submodule))
 
 
 def _chart_studio_deprecation(fn):
@@ -54,15 +61,14 @@ def _chart_studio_deprecation(fn):
 
     @functools.wraps(fn)
     def wrapper(*args, **kwargs):
-        if 'extract_chart_studio' in _future_flags:
-            warnings.warn(
-                msg,
-                DeprecationWarning,
-                stacklevel=2)
+        warnings.warn(
+            msg,
+            DeprecationWarning,
+            stacklevel=2)
 
         return fn(*args, **kwargs)
 
     return wrapper
 
 
-__all__ = ['_future_flags', '_chart_studio_warning']
+__all__ = ['_future_flags', '_chart_studio_error']
