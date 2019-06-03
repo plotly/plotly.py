@@ -1,7 +1,18 @@
 import warnings
 import functools
 
-_future_flags = set()
+# Initialize _future_flags with all future flags that are now always in
+# effect.
+_future_flags = {
+    'renderer_defaults',
+    'template_defaults',
+    'extract_chart_studio',
+    'remove_deprecations',
+    'v4_subplots',
+    'orca_defaults',
+    'timezones',
+    'trace_uids',
+}
 
 
 def _assert_plotly_not_imported():
