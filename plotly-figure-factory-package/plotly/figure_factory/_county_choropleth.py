@@ -26,8 +26,8 @@ def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
 
     abs_plotly_dir_path = os.path.dirname(abs_dir_path)
 
-    abs_package_data_dir_path = os.path.join(abs_plotly_dir_path,
-                                             'package_data')
+    abs_package_data_dir_path = os.path.join(
+        abs_plotly_dir_path, 'figure_factory', 'package_data')
 
     shape_pre2010 = 'gz_2010_us_050_00_500k.shp'
     shape_pre2010 =  os.path.join(abs_package_data_dir_path, shape_pre2010)

@@ -34,6 +34,7 @@ setup(
     packages=[
         "plotly.figure_factory",
     ],
+    package_data={'plotly.figure_factory': ['package_data/*']},
     install_requires=["plotly", "six"],
     zip_safe=False,
 )

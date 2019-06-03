@@ -20,7 +20,7 @@ from plotly.graph_objs import Figure
 # Load JS widget code
 # No officially recommended way to do this in any other way
 # http://mail.scipy.org/pipermail/ipython-dev/2014-April/013835.html
-js_widget_code = pkgutil.get_data('plotly',
+js_widget_code = pkgutil.get_data('chart_studio',
                                   'package_data/graphWidget.js'
                                   ).decode('utf-8')
 
