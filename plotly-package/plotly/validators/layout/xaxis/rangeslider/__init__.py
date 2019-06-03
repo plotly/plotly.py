@@ -100,8 +100,7 @@ class RangeValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                         'impliedEdits': {
                             '^autorange': False
                         }
-                    },
-                    {
+                    }, {
                         'valType': 'any',
                         'editType': 'calc',
                         'impliedEdits': {

@@ -1,8 +1,10 @@
 from setuptools import setup
+import os
 
 
 def readme():
-    with open("README.md") as f:
+    parent_dir = os.path.dirname(os.path.realpath(__file__))
+    with open(os.path.join(parent_dir, 'README.md')) as f:
         return f.read()
 
 

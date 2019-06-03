@@ -17,8 +17,7 @@ class YValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                         'min': 0,
                         'max': 1,
                         'editType': 'calc'
-                    },
-                    {
+                    }, {
                         'valType': 'number',
                         'min': 0,
                         'max': 1,
@@ -48,8 +47,7 @@ class XValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                         'min': 0,
                         'max': 1,
                         'editType': 'calc'
-                    },
-                    {
+                    }, {
                         'valType': 'number',
                         'min': 0,
                         'max': 1,
