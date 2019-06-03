@@ -222,6 +222,28 @@ linear_bmw_5_95_c86_n256 = [
     [i/(len(bmw_subset)-1), clr] for i, clr in enumerate(bmw_subset)
     if i % 16 == 0 or i == (len(bmw_subset)-1)]
 
+
+# Plasma colorscale
+# -----------------
+# Get this from plotly_express logic after integration
+plasma_colors = [
+    "#0d0887",
+    "#46039f",
+    "#7201a8",
+    "#9c179e",
+    "#bd3786",
+    "#d8576b",
+    "#ed7953",
+    "#fb9f3a",
+    "#fdca26",
+    "#f0f921",
+]
+
+plasma = [
+    [(1.0 * i) / (1.0 * (len(plasma_colors) - 1)), x]
+    for i, x in enumerate(plasma_colors)
+]
+
 jupyterlab_output_clr = 'rgb(17,17,17)'
 
 plotly_diverging = [
@@ -239,22 +261,23 @@ plotly_diverging = [
 ]
 
 plotly_colorway = [
-        plotly_clrs['Cornflower'],
-        plotly_clrs['Sienna'],
-        plotly_clrs['Emerald'],
-        plotly_clrs['Lavender Shade'],
-        plotly_clrs['Aqua Shade'],
-        plotly_clrs['Lavender'],
-        '#FECB52',
-        '#FFA15A',
-        '#FF6692',
-        '#B6E880'
+    plotly_clrs['Cornflower'],
+    plotly_clrs['Sienna'],
+    plotly_clrs['Emerald'],
+    plotly_clrs['Lavender Shade'],
+    '#FFA15A',
+    plotly_clrs['Aqua Shade'],
+    '#FF6692',
+    '#B6E880',
+    '#FF97FF',
+    '#FECB52',
 ]
+
 
 def plotly():
     # Define colors
     # -------------
-    colorscale = linear_bmw_5_95_c86_n256
+    colorscale = plasma
 
     # Set colorbar_common
     colorbar_common = dict(
@@ -326,7 +349,7 @@ builders['plotly'] = plotly
 def plotly_white():
     # Define colors
     # -------------
-    colorscale = linear_bmw_5_95_c86_n256
+    colorscale = plasma
 
     # Set colorbar_common
     colorbar_common = dict(
@@ -406,7 +429,7 @@ builders['plotly_white'] = plotly_white
 def plotly_dark():
     # Define colors
     # -------------
-    colorscale = linear_bmw_5_95_c86_n256
+    colorscale = plasma
 
     # Set colorbar_common
     colorbar_common = dict(
@@ -494,56 +517,6 @@ def plotly_dark():
 
 
 builders['plotly_dark'] = plotly_dark
-
-
-def plotly_v4_colors():
-    template = Template()
-
-    # Plasma colorscale
-    # -----------------
-    # Get this from plotly_express logic after integration
-    colorscale = [
-        "#0d0887",
-        "#46039f",
-        "#7201a8",
-        "#9c179e",
-        "#bd3786",
-        "#d8576b",
-        "#ed7953",
-        "#fb9f3a",
-        "#fdca26",
-        "#f0f921",
-    ]
-    d = len(colorscale) - 1
-    colorscale = [
-        [(1.0 * i) / (1.0 * d), x]
-        for i, x in enumerate(colorscale)
-    ]
-
-    template.layout.colorscale.sequential = colorscale
-    template.data.heatmap = [dict(colorscale = colorscale)]
-    template.data.histogram2d = [dict(colorscale = colorscale)]
-    template.data.histogram2dcontour = [dict(colorscale = colorscale)]
-    template.data.contour = [dict(colorscale = colorscale)]
-
-    colorway = [
-        plotly_clrs['Cornflower'],
-        plotly_clrs['Sienna'],
-        plotly_clrs['Emerald'],
-        plotly_clrs['Lavender Shade'],
-        '#FFA15A',
-        plotly_clrs['Aqua Shade'],
-        '#FF6692',
-        '#B6E880',
-        '#FF97FF',
-        '#FECB52'
-    ]
-    template.layout.colorway = colorway
-
-    return template
-
-
-builders['plotly_v4_colors'] = plotly_v4_colors
 
 
 def presentation():
