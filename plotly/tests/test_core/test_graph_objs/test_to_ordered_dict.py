@@ -1,17 +1,11 @@
 from __future__ import absolute_import
 
-from unittest import TestCase
 import plotly.graph_objs as go
 from collections import OrderedDict
-import plotly.io as pio
+from plotly.tests.utils import TestCaseNoTemplate
 
 
-class FigureTest(TestCase):
-    def setUp(self):
-        pio.templates.default = None
-
-    def tearDown(self):
-        pio.templates.default = 'plotly'
+class FigureTest(TestCaseNoTemplate):
 
     def test_to_ordered_dict(self):
 

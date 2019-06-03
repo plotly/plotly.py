@@ -1,5 +1,15 @@
 import copy
 from numbers import Number as Num
+from unittest import TestCase
+import plotly.io as pio
+
+
+class TestCaseNoTemplate(TestCase):
+    def setUp(self):
+        pio.templates.default = None
+
+    def tearDown(self):
+        pio.templates.default = 'plotly'
 
 
 def compare_dict(dict1, dict2, equivalent=True, msg='', tol=10e-8):
