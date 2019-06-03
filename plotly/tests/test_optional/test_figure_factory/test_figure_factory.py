@@ -2,11 +2,13 @@ from unittest import TestCase
 from plotly import optional_imports
 from plotly.graph_objs import graph_objs as go
 from plotly.exceptions import PlotlyError
+import plotly.io as pio
 
 import plotly.figure_factory as ff
 from plotly.tests.test_optional.optional_utils import NumpyTestUtilsMixin
 
 import numpy as np
+from plotly.tests.utils import TestCaseNoTemplate
 from scipy.spatial import Delaunay
 import pandas as pd
 
@@ -16,7 +18,7 @@ gp = optional_imports.get_module('geopandas')
 sk_measure = optional_imports.get_module('skimage.measure')
 
 
-class TestDistplot(NumpyTestUtilsMixin, TestCase):
+class TestDistplot(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
     def test_wrong_curve_type(self):
 
@@ -362,7 +364,7 @@ class TestDistplot(NumpyTestUtilsMixin, TestCase):
             self.assert_fig_equal(dp['data'][1], expected_dp_data_hist_2)
 
 
-class TestStreamline(TestCase):
+class TestStreamline(TestCaseNoTemplate):
 
     def test_wrong_arrow_scale(self):
 
@@ -453,7 +455,7 @@ class TestStreamline(TestCase):
                              expected_strln_0_100['x'])
 
 
-class TestDendrogram(NumpyTestUtilsMixin, TestCase):
+class TestDendrogram(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
     def test_default_dendrogram(self):
         X = np.array([[1, 2, 3, 4], [1, 1, 3, 4], [1, 2, 1, 4], [1, 2, 3, 1]])
@@ -788,7 +790,8 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCase):
         self.assertEqual(len(dendro.layout.xaxis.ticktext), 4)
         self.assertEqual(len(dendro.layout.xaxis.tickvals), 4)
 
-class TestTrisurf(NumpyTestUtilsMixin, TestCase):
+
+class TestTrisurf(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
     def test_vmin_and_vmax(self):
 
@@ -988,7 +991,7 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCase):
                                    str))
 
 
-class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
+class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
     def test_dataframe_input(self):
 
@@ -1314,7 +1317,7 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCase):
                                exp_scatter_plot_matrix['layout'])
 
 
-class TestGantt(NumpyTestUtilsMixin, TestCase):
+class TestGantt(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
     def test_df_dataframe(self):
 
@@ -1405,7 +1408,7 @@ class TestGantt(NumpyTestUtilsMixin, TestCase):
                                exp_gantt_chart['layout'])
 
 
-class TestViolin(NumpyTestUtilsMixin, TestCase):
+class TestViolin(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
     def test_colors_validation(self):
 
@@ -1996,7 +1999,7 @@ class TestViolin(NumpyTestUtilsMixin, TestCase):
                               exp_violin['layout'])
 
 
-class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
+class TestFacetGrid(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
     def test_data_must_be_dataframe(self):
         data = []
@@ -2116,96 +2119,106 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
         )
 
         exp_facet_grid = {
-            'data': [
-              {'marker': {'color': 'rgb(31, 119, 180)',
-               'line': {'color': 'darkgrey', 'width': 1},
-               'size': 8},
-               'mode': 'markers',
-               'opacity': 0.6,
-               'type': 'scatter',
-               'x': [1.8, 1.8, 2.0, 2.0, 1.8, 1.8, 2.0],
-               'xaxis': 'x',
-               'y': [18, 18, 20, 21, 18, 16, 20],
-               'yaxis': 'y'},
-              {'marker': {'color': 'rgb(31, 119, 180)',
-                'line': {'color': 'darkgrey', 'width': 1},
-                'size': 8},
-               'mode': 'markers',
-               'opacity': 0.6,
-               'type': 'scatter',
-               'x': [2.8, 2.8, 3.1],
-               'xaxis': 'x2',
-               'y': [16, 18, 18],
-               'yaxis': 'y'}],
-             'layout': {'annotations': [{'font': {'color': '#0f0f0f', 'size': 13},
-                'showarrow': False,
-                'text': '4',
-                'textangle': 0,
-                'x': 0.24625,
-                'xanchor': 'center',
-                'xref': 'paper',
-                'y': 1.03,
-                'yanchor': 'middle',
-                'yref': 'paper'},
-               {'font': {'color': '#0f0f0f', 'size': 13},
-                'showarrow': False,
-                'text': '6',
-                'textangle': 0,
-                'x': 0.7537499999999999,
-                'xanchor': 'center',
-                'xref': 'paper',
-                'y': 1.03,
-                'yanchor': 'middle',
-                'yref': 'paper'},
-               {'font': {'color': '#000000', 'size': 12},
-                'showarrow': False,
-                'text': 'displ',
-                'textangle': 0,
-                'x': 0.5,
-                'xanchor': 'center',
-                'xref': 'paper',
-                'y': -0.1,
-                'yanchor': 'middle',
-                'yref': 'paper'},
-               {'font': {'color': '#000000', 'size': 12},
-                'showarrow': False,
-                'text': 'cty',
-                'textangle': -90,
-                'x': -0.1,
-                'xanchor': 'center',
-                'xref': 'paper',
-                'y': 0.5,
-                'yanchor': 'middle',
-                'yref': 'paper'}],
-              'height': 600,
-              'legend': {'bgcolor': '#efefef',
-               'borderwidth': 1,
-               'x': 1.05,
-               'y': 1,
-               'yanchor': 'top'},
-              'paper_bgcolor': 'rgb(251, 251, 251)',
-              'showlegend': False,
-              'title': {'text': ''},
-              'width': 600,
-              'xaxis': {'anchor': 'y',
-               'domain': [0.0, 0.4925],
-               'dtick': 0.0,
-               'range': [0.85, 4.1575],
-               'ticklen': 0,
-               'zeroline': False},
-              'xaxis2': {'anchor': 'free',
-               'domain': [0.5075, 1.0],
-               'dtick': 0.0,
-               'position': 0.0,
-               'range': [0.85, 4.1575],
-               'ticklen': 0,
-               'zeroline': False},
-              'yaxis': {'anchor': 'x',
-               'domain': [0.0, 1.0],
-               'dtick': 1.0,
-               'range': [15.75, 21.2625],
-               'ticklen': 0,
-               'zeroline': False}}}
+            'data': [{'marker': {'color': 'rgb(31, 119, 180)',
+                                 'line': {'color': 'darkgrey', 'width': 1},
+                                 'size': 8},
+                      'mode': 'markers',
+                      'opacity': 0.6,
+                      'type': 'scatter',
+                      'x': [1.8, 1.8, 2.0, 2.0, 1.8, 1.8, 2.0],
+                      'xaxis': 'x',
+                      'y': [18, 18, 20, 21, 18, 16, 20],
+                      'yaxis': 'y'},
+                     {'marker': {'color': 'rgb(31, 119, 180)',
+                                 'line': {'color': 'darkgrey', 'width': 1},
+                                 'size': 8},
+                      'mode': 'markers',
+                      'opacity': 0.6,
+                      'type': 'scatter',
+                      'x': [2.8, 2.8, 3.1],
+                      'xaxis': 'x2',
+                      'y': [16, 18, 18],
+                      'yaxis': 'y2'}],
+            'layout': {'annotations': [{'font': {'color': '#0f0f0f',
+                                                 'size': 13},
+                                        'showarrow': False,
+                                        'text': '4',
+                                        'textangle': 0,
+                                        'x': 0.24625,
+                                        'xanchor': 'center',
+                                        'xref': 'paper',
+                                        'y': 1.03,
+                                        'yanchor': 'middle',
+                                        'yref': 'paper'},
+                                       {'font': {'color': '#0f0f0f',
+                                                 'size': 13},
+                                        'showarrow': False,
+                                        'text': '6',
+                                        'textangle': 0,
+                                        'x': 0.7537499999999999,
+                                        'xanchor': 'center',
+                                        'xref': 'paper',
+                                        'y': 1.03,
+                                        'yanchor': 'middle',
+                                        'yref': 'paper'},
+                                       {'font': {'color': '#000000',
+                                                 'size': 12},
+                                        'showarrow': False,
+                                        'text': 'displ',
+                                        'textangle': 0,
+                                        'x': 0.5,
+                                        'xanchor': 'center',
+                                        'xref': 'paper',
+                                        'y': -0.1,
+                                        'yanchor': 'middle',
+                                        'yref': 'paper'},
+                                       {'font': {'color': '#000000',
+                                                 'size': 12},
+                                        'showarrow': False,
+                                        'text': 'cty',
+                                        'textangle': -90,
+                                        'x': -0.1,
+                                        'xanchor': 'center',
+                                        'xref': 'paper',
+                                        'y': 0.5,
+                                        'yanchor': 'middle',
+                                        'yref': 'paper'}],
+                       'height': 600,
+                       'legend': {'bgcolor': '#efefef',
+                                  'borderwidth': 1,
+                                  'x': 1.05,
+                                  'y': 1,
+                                  'yanchor': 'top'},
+                       'paper_bgcolor': 'rgb(251, 251, 251)',
+                       'showlegend': False,
+                       'title': {'text': ''},
+                       'width': 600,
+                       'xaxis': {'anchor': 'y',
+                                 'domain': [0.0, 0.4925],
+                                 'dtick': 0,
+                                 'range': [0.85, 4.1575],
+                                 'ticklen': 0,
+                                 'zeroline': False},
+                       'xaxis2': {'anchor': 'y2',
+                                  'domain': [0.5075, 1.0],
+                                  'dtick': 0,
+                                  'range': [0.85, 4.1575],
+                                  'ticklen': 0,
+                                  'zeroline': False},
+                       'yaxis': {'anchor': 'x',
+                                 'domain': [0.0, 1.0],
+                                 'dtick': 1,
+                                 'range': [15.75, 21.2625],
+                                 'ticklen': 0,
+                                 'zeroline': False},
+                       'yaxis2': {'anchor': 'x2',
+                                  'domain': [0.0, 1.0],
+                                  'dtick': 1,
+                                  'matches': 'y',
+                                  'range': [15.75, 21.2625],
+                                  'showticklabels': False,
+                                  'ticklen': 0,
+                                  'zeroline': False}}}
 
         for j in [0, 1]:
             self.assert_fig_equal(
@@ -2219,7 +2232,7 @@ class TestFacetGrid(NumpyTestUtilsMixin, TestCase):
         )
 
 
-class TestBullet(NumpyTestUtilsMixin, TestCase):
+class TestBullet(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
     def test_df_as_list(self):
         df = [
@@ -2757,7 +2770,7 @@ class TestBullet(NumpyTestUtilsMixin, TestCase):
                                   exp_fig['data'][i])
 
 
-class TestChoropleth(NumpyTestUtilsMixin, TestCase):
+class TestChoropleth(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
     # run tests if required packages are installed
     if shapely and shapefile and gp:
@@ -2860,7 +2873,7 @@ class TestChoropleth(NumpyTestUtilsMixin, TestCase):
             self.assertEqual(fig['data'][2]['x'][:50], exp_fig_head)
 
 
-class TestQuiver(TestCase):
+class TestQuiver(TestCaseNoTemplate):
 
     def test_scaleratio_param(self):
         x,y = np.meshgrid(np.arange(0.5, 3.5, .5), np.arange(0.5, 4.5, .5))
@@ -2873,25 +2886,25 @@ class TestQuiver(TestCase):
         fig = ff.create_quiver(x, y, u, v, scale = 1, scaleratio = 0.5)
 
         exp_fig_head = [(
-            0.5, 
-            0.5883883476483185, 
+            0.5,
+            0.5883883476483185,
             None,
-            1.0, 
-            1.1118033988749896, 
-            None, 
-            1.5, 
-            1.6185854122563141, 
-            None, 
+            1.0,
+            1.1118033988749896,
+            None,
+            1.5,
+            1.6185854122563141,
+            None,
             2.0),
             (0.5,
             0.6767766952966369,
             None,
-            0.5, 
-            0.6118033988749895, 
-            None, 
-            0.5, 
-            0.5790569415042095, 
-            None, 
+            0.5,
+            0.6118033988749895,
+            None,
+            0.5,
+            0.5790569415042095,
+            None,
             0.5)]
 
         fig_head = [fig['data'][0]['x'][:10], fig['data'][0]['y'][:10]]
@@ -2899,7 +2912,7 @@ class TestQuiver(TestCase):
         self.assertEqual(fig_head, exp_fig_head)
 
 
-class TestTernarycontour(NumpyTestUtilsMixin, TestCase):
+class TestTernarycontour(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
     def test_wrong_coordinates(self):
         a, b = np.mgrid[0:1:20j, 0:1:20j]

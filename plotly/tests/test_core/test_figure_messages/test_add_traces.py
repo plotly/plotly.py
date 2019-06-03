@@ -32,9 +32,8 @@ class TestAddTracesMessage(TestCase):
         self.assertEqual(self.figure.data[-1].arrangement, 'snap')
 
         # Check message
-        new_uid = self.figure.data[-1].uid
         self.figure._send_addTraces_msg.assert_called_once_with(
-            [{'type': 'sankey', 'arrangement': 'snap', 'uid': new_uid}])
+            [{'type': 'sankey', 'arrangement': 'snap'}])
 
     def test_add_traces(self):
 
@@ -55,8 +54,6 @@ class TestAddTracesMessage(TestCase):
         new_uid2 = self.figure.data[-1].uid
         self.figure._send_addTraces_msg.assert_called_once_with(
             [{'type': 'sankey',
-              'arrangement': 'snap',
-              'uid': new_uid1},
+              'arrangement': 'snap'},
              {'type': 'histogram2dcontour',
-              'line': {'color': 'cyan'},
-              'uid': new_uid2}])
+              'line': {'color': 'cyan'}}])

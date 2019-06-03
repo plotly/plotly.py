@@ -8,7 +8,6 @@ from plotly.graph_objs import (
     Scatterternary, Splom, Streamtube, Sunburst, Surface, Table, Violin,
     Volume, Waterfall
 )
-from plotly.subplots import _validate_v4_subplots
 
 
 class FigureWidget(BaseFigureWidget):
@@ -14241,8 +14240,6 @@ class FigureWidget(BaseFigureWidget):
             Generator that iterates through all of the coloraxis
             objects that satisfy all of the specified selection criteria
         """
-        if row is not None or col is not None:
-            _validate_v4_subplots('select_coloraxes')
 
         return self._select_layout_subplots_by_prefix(
             'coloraxis', selector, row, col
@@ -14341,8 +14338,6 @@ class FigureWidget(BaseFigureWidget):
             Generator that iterates through all of the geo
             objects that satisfy all of the specified selection criteria
         """
-        if row is not None or col is not None:
-            _validate_v4_subplots('select_geos')
 
         return self._select_layout_subplots_by_prefix(
             'geo', selector, row, col
@@ -14441,8 +14436,6 @@ class FigureWidget(BaseFigureWidget):
             Generator that iterates through all of the mapbox
             objects that satisfy all of the specified selection criteria
         """
-        if row is not None or col is not None:
-            _validate_v4_subplots('select_mapboxes')
 
         return self._select_layout_subplots_by_prefix(
             'mapbox', selector, row, col
@@ -14541,8 +14534,6 @@ class FigureWidget(BaseFigureWidget):
             Generator that iterates through all of the polar
             objects that satisfy all of the specified selection criteria
         """
-        if row is not None or col is not None:
-            _validate_v4_subplots('select_polars')
 
         return self._select_layout_subplots_by_prefix(
             'polar', selector, row, col
@@ -14641,8 +14632,6 @@ class FigureWidget(BaseFigureWidget):
             Generator that iterates through all of the scene
             objects that satisfy all of the specified selection criteria
         """
-        if row is not None or col is not None:
-            _validate_v4_subplots('select_scenes')
 
         return self._select_layout_subplots_by_prefix(
             'scene', selector, row, col
@@ -14741,8 +14730,6 @@ class FigureWidget(BaseFigureWidget):
             Generator that iterates through all of the ternary
             objects that satisfy all of the specified selection criteria
         """
-        if row is not None or col is not None:
-            _validate_v4_subplots('select_ternaries')
 
         return self._select_layout_subplots_by_prefix(
             'ternary', selector, row, col
@@ -14841,8 +14828,6 @@ class FigureWidget(BaseFigureWidget):
             Generator that iterates through all of the xaxis
             objects that satisfy all of the specified selection criteria
         """
-        if row is not None or col is not None:
-            _validate_v4_subplots('select_xaxes')
 
         return self._select_layout_subplots_by_prefix(
             'xaxis', selector, row, col
@@ -14955,8 +14940,6 @@ class FigureWidget(BaseFigureWidget):
             Generator that iterates through all of the yaxis
             objects that satisfy all of the specified selection criteria
         """
-        if row is not None or col is not None:
-            _validate_v4_subplots('select_yaxes')
 
         return self._select_layout_subplots_by_prefix(
             'yaxis', selector, row, col, secondary_y=secondary_y

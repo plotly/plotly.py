@@ -13,8 +13,7 @@ from _plotly_utils.utils import _natural_sort_strings
 from plotly.subplots import (
     _set_trace_grid_reference,
     _get_grid_subplot,
-    _get_subplot_ref_for_trace,
-    _validate_v4_subplots)
+    _get_subplot_ref_for_trace)
 from .optional_imports import get_module
 
 from _plotly_utils.basevalidators import (
@@ -25,8 +24,6 @@ from . import animation
 from .callbacks import (Points, InputDeviceState)
 from plotly.utils import ElidedPrettyPrinter
 from .validators import (DataValidator, LayoutValidator, FramesValidator)
-
-from _plotly_future_ import _future_flags
 
 # Create Undefined sentinel value
 #   - Setting a property to None removes any existing value
@@ -51,7 +48,7 @@ class BaseFigure(object):
         'plot_bgcolor': 'plot-bgcolor'
     }
 
-    _set_trace_uid = 'trace_uids' not in _future_flags
+    _set_trace_uid = False
 
     # Constructor
     # -----------
@@ -683,7 +680,6 @@ class BaseFigure(object):
             selector = {}
 
         if row is not None or col is not None or secondary_y is not None:
-            _validate_v4_subplots('select_traces')
             grid_ref = self._validate_get_grid_ref()
             filter_by_subplot = True
 
@@ -1610,41 +1606,8 @@ Please use the add_trace method with the row and col parameters.
     def _set_trace_grid_position(
             self, trace, row, col, secondary_y=False):
         grid_ref = self._validate_get_grid_ref()
-
-        from _plotly_future_ import _future_flags
-        if 'v4_subplots' in _future_flags:
-            return _set_trace_grid_reference(
-                trace, self.layout, grid_ref, row, col, secondary_y)
-
-        if row <= 0:
-            raise Exception("Row value is out of range. "
-                            "Note: the starting cell is (1, 1)")
-        if col <= 0:
-            raise Exception("Col value is out of range. "
-                            "Note: the starting cell is (1, 1)")
-        try:
-            ref = grid_ref[row - 1][col - 1]
-        except IndexError:
-            raise Exception("The (row, col) pair sent is out of "
-                            "range. Use Figure.print_grid to view the "
-                            "subplot grid. ")
-        if 'scene' in ref[0]:
-            trace['scene'] = ref[0]
-            if ref[0] not in self['layout']:
-                raise Exception("Something went wrong. "
-                                "The scene object for ({r},{c}) "
-                                "subplot cell "
-                                "got deleted.".format(r=row, c=col))
-        else:
-            xaxis_key = "xaxis{ref}".format(ref=ref[0][1:])
-            yaxis_key = "yaxis{ref}".format(ref=ref[1][1:])
-            if (xaxis_key not in self['layout']
-                    or yaxis_key not in self['layout']):
-                raise Exception("Something went wrong. "
-                                "An axis object for ({r},{c}) subplot "
-                                "cell got deleted.".format(r=row, c=col))
-            trace['xaxis'] = ref[0]
-            trace['yaxis'] = ref[1]
+        return _set_trace_grid_reference(
+            trace, self.layout, grid_ref, row, col, secondary_y)
 
     def _validate_get_grid_ref(self):
         try:

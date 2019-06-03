@@ -5,13 +5,11 @@ import copy
 
 import plotly.graph_objs as go
 from plotly.subplots import make_subplots
-from _plotly_future_ import _future_flags
 
 
 class TestSelectForEachUpdateTraces(TestCase):
 
     def setUp(self):
-        _future_flags.add('v4_subplots')
         fig = make_subplots(
             rows=3,
             cols=2,
@@ -117,9 +115,6 @@ class TestSelectForEachUpdateTraces(TestCase):
 
         self.fig = fig
         self.fig_no_grid = go.Figure(self.fig.to_dict())
-
-    def tearDown(self):
-        _future_flags.remove('v4_subplots')
 
     # select_traces and for_each_trace
     # --------------------------------

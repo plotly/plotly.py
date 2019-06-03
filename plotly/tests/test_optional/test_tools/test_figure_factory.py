@@ -3,13 +3,15 @@ from unittest import TestCase
 
 import datetime
 import plotly.figure_factory as ff
+import plotly.io as pio
 
 from plotly.exceptions import PlotlyError
 from plotly.tests.test_optional.optional_utils import NumpyTestUtilsMixin
 from plotly.graph_objs import graph_objs
+from plotly.tests.utils import TestCaseNoTemplate
 
 
-class TestQuiver(TestCase, NumpyTestUtilsMixin):
+class TestQuiver(TestCaseNoTemplate, NumpyTestUtilsMixin):
 
     def test_unequal_xy_length(self):
 
@@ -124,7 +126,7 @@ class TestQuiver(TestCase, NumpyTestUtilsMixin):
                               expected_quiver['layout'])
 
 
-class TestFinanceCharts(TestCase, NumpyTestUtilsMixin):
+class TestFinanceCharts(TestCaseNoTemplate, NumpyTestUtilsMixin):
 
     def test_unequal_ohlc_length(self):
 
@@ -712,7 +714,7 @@ class TestFinanceCharts(TestCase, NumpyTestUtilsMixin):
         self.assert_fig_equal(candle['layout'], exp_candle['layout'])
 
 
-class TestAnnotatedHeatmap(TestCase, NumpyTestUtilsMixin):
+class TestAnnotatedHeatmap(TestCaseNoTemplate, NumpyTestUtilsMixin):
 
     def test_unequal_z_text_size(self):
 
@@ -1058,7 +1060,7 @@ class TestAnnotatedHeatmap(TestCase, NumpyTestUtilsMixin):
         self.assert_fig_equal(fig, expected)
 
 
-class TestTable(TestCase, NumpyTestUtilsMixin):
+class TestTable(TestCaseNoTemplate, NumpyTestUtilsMixin):
 
     def test_fontcolor_input(self):
 
@@ -1763,7 +1765,7 @@ class TestGantt(TestCase):
                          exp_gantt_chart['layout'])
 
 
-class Test2D_Density(TestCase, NumpyTestUtilsMixin):
+class Test2D_Density(TestCaseNoTemplate, NumpyTestUtilsMixin):
 
     def test_validate_2D_density(self):
 
