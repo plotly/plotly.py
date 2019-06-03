@@ -1,5 +1,4 @@
 from __future__ import absolute_import
-from _plotly_future_ import _future_flags
 
 from unittest import TestCase
 from plotly.graph_objs import Figure
@@ -9,13 +8,6 @@ from plotly.subplots import SubplotXY, SubplotDomain
 
 
 class TestGetSubplot(TestCase):
-    def setUp(self):
-        # Use v4_subplots mode
-        _future_flags.add('v4_subplots')
-
-    def tearDown(self):
-        _future_flags.remove('v4_subplots')
-
     def test_get_subplot(self):
         # Make Figure with subplot types
         fig = subplots.make_subplots(
