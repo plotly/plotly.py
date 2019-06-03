@@ -1,11 +1,14 @@
 from unittest import TestCase
 import plotly.graph_objs as go
 from nose.tools import raises
-
+import plotly.io as pio
 
 class TestFigureProperties(TestCase):
 
     def setUp(self):
+        # Disable default template
+        pio.templates.default = None
+
         # Construct initial scatter object
         self.figure = go.Figure(data=[go.Scatter(y=[3, 2, 1],
                                                  marker={'color': 'green'})],
@@ -13,6 +16,10 @@ class TestFigureProperties(TestCase):
                                 frames=[go.Frame(
                                     layout={'yaxis':
                                             {'title': 'f1'}})])
+
+    def tearDown(self):
+        # Reenable default template
+        pio.templates.default = 'plotly'
 
     def test_attr_access(self):
         scatt_uid = self.figure.data[0].uid
@@ -174,8 +181,6 @@ class TestFigureProperties(TestCase):
 
         # Compute expected figure dict (pop uids for comparison)
         result = figure.to_dict()
-        del result['data'][0]['uid']
-        del result['data'][1]['uid']
 
         # Perform comparison
         self.assertEqual(result, expected)

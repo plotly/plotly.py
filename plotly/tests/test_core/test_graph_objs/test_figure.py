@@ -3,9 +3,16 @@ from __future__ import absolute_import
 from unittest import TestCase
 
 import plotly.graph_objs as go
+import plotly.io as pio
 
 
 class FigureTest(TestCase):
+
+    def setUp(self):
+        pio.templates.default = None
+
+    def tearDown(self):
+        pio.templates.default = 'plotly'
 
     def test_instantiation(self):
 

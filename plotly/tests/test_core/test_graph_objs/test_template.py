@@ -15,12 +15,15 @@ class TemplateTest(TestCase):
     def setUp(self):
         pio.templates['test_template'] = {
             'layout': {'font': {'family': 'Rockwell'}}}
+        pio.templates.default = None
 
     def tearDown(self):
         try:
             del pio.templates['test_template']
         except KeyError:
             pass
+
+        pio.templates.default = 'plotly'
 
     # template graph_objs tests
     # -------------------------
@@ -167,6 +170,12 @@ class TemplateTest(TestCase):
 
 
 class TestToTemplated(TestCase):
+
+    def setUp(self):
+        pio.templates.default = None
+
+    def tearDown(self):
+        pio.templates.default = 'plotly'
 
     def test_move_layout_nested_properties(self):
         fig = go.Figure(layout={'font': {'family': 'Courier New'},
