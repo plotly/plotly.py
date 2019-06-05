@@ -221,7 +221,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
         # plot creates plotly.min.js in the output directory
         self.assertTrue(
             os.path.exists(os.path.join(here, 'plotly.min.js')))
-        with open('plotly.min.js', 'r') as f:
+        with open(os.path.join(here, 'plotly.min.js'), 'r') as f:
             self.assertEqual(f.read(), PLOTLYJS)
 
     def test_including_plotlyjs_directory_div(self):
