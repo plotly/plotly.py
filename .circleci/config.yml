@@ -220,8 +220,8 @@ jobs:
           command: |
             . /home/circleci/miniconda/etc/profile.d/conda.sh
             conda activate circle_optional
-            pytest --disable-warnings plotly/tests/test_core
-            pytest plotly/tests/test_orca
+            pytest --disable-warnings plotly-package/plotly/tests/test_core
+            pytest plotly-package/plotly/tests/test_orca
 
       - store_artifacts:
             path: plotly/tests/test_orca/images/linux/failed
@@ -250,8 +250,8 @@ jobs:
           command: |
             . /home/circleci/miniconda/etc/profile.d/conda.sh
             conda activate circle_optional
-            pytest --disable-warnings plotly/tests/test_core
-            pytest plotly/tests/test_orca
+            pytest --disable-warnings plotly-package/plotly/tests/test_core
+            pytest plotly-package/plotly/tests/test_orca
 
       - store_artifacts:
             path: plotly/tests/test_orca/images/linux/failed
@@ -280,8 +280,8 @@ jobs:
           command: |
             . /home/circleci/miniconda/etc/profile.d/conda.sh
             conda activate circle_optional
-            pytest --disable-warnings plotly/tests/test_core
-            pytest plotly/tests/test_orca
+            pytest --disable-warnings plotly-package/plotly/tests/test_core
+            pytest plotly-package/plotly/tests/test_orca
 
       - store_artifacts:
             path: plotly/tests/test_orca/images/linux/failed
