@@ -15,7 +15,7 @@ jobs:
           command: 'sudo pip install tox'
       - run:
           name: Test with tox
-          command: 'tox -e py27-core'
+          command: 'cd plotly-package; tox -e py27-core'
           no_output_timeout: 20m
 
   python-3.5-core:
@@ -31,7 +31,7 @@ jobs:
           command: 'sudo pip install tox'
       - run:
           name: Test with tox
-          command: 'tox -e py35-core'
+          command: 'cd plotly-package; tox -e py35-core'
           no_output_timeout: 20m
 
   python-3.6-core:
@@ -47,7 +47,7 @@ jobs:
           command: 'sudo pip install tox'
       - run:
           name: Test with tox
-          command: 'tox -e py36-core'
+          command: 'cd plotly-package; tox -e py36-core'
           no_output_timeout: 20m
 
   python-3.7-core:
@@ -63,7 +63,7 @@ jobs:
           command: 'sudo pip install tox'
       - run:
           name: Test with tox
-          command: 'tox -e py37-core'
+          command: 'cd plotly-package; tox -e py37-core'
           no_output_timeout: 20m
 
   # Optional
@@ -84,7 +84,7 @@ jobs:
           no_output_timeout: 20m
       - run:
           name: Test with tox
-          command: 'tox -e py27-optional'
+          command: 'cd plotly-package; tox -e py27-optional'
           no_output_timeout: 20m
 
   python-3.5-optional:
@@ -104,7 +104,7 @@ jobs:
           no_output_timeout: 20m
       - run:
           name: Test with tox
-          command: 'tox -e py35-optional'
+          command: 'cd plotly-package; tox -e py35-optional'
           no_output_timeout: 20m
 
   python-3.6-optional:
@@ -124,7 +124,7 @@ jobs:
           no_output_timeout: 20m
       - run:
           name: Test with tox
-          command: 'tox -e py36-optional'
+          command: 'cd plotly-package; tox -e py36-optional'
           no_output_timeout: 20m
 
   python-3.7-optional:
@@ -144,7 +144,7 @@ jobs:
           no_output_timeout: 20m
       - run:
           name: Test with tox
-          command: 'tox -e py37-optional'
+          command: 'cd plotly-package; tox -e py37-optional'
           no_output_timeout: 20m
 
   # Plot.ly
@@ -161,7 +161,7 @@ jobs:
           command: 'sudo pip install tox'
       - run:
           name: Test with tox
-          command: 'tox -e py27-plot_ly'
+          command: 'cd chart-studio-package; tox -e py27-plot_ly'
           no_output_timeout: 20m
 
   python-3.5-plot_ly:
@@ -177,7 +177,7 @@ jobs:
           command: 'sudo pip install tox'
       - run:
           name: Test with tox
-          command: 'tox -e py35-plot_ly'
+          command: 'cd chart-studio-package; tox -e py35-plot_ly'
           no_output_timeout: 20m
 
   python-3.7-plot_ly:
@@ -193,7 +193,7 @@ jobs:
           command: 'sudo pip install tox'
       - run:
           name: Test with tox
-          command: 'tox -e py37-plot_ly'
+          command: 'cd chart-studio-package; tox -e py37-plot_ly'
           no_output_timeout: 20m
 
   python-2-7-orca:
