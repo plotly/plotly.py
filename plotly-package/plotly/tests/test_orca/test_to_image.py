@@ -29,7 +29,10 @@ failed_dir = images_dir + 'failed/'
 tmp_dir = images_dir + 'tmp/'
 # These formats are deterministic. PDF and svg don't seem to be
 image_formats = ['eps']
-topo_df = pd.read_csv('plotly/tests/test_orca/resources/2011_us_ag_exports.csv')
+
+here = os.path.dirname(os.path.realpath(__file__))
+topo_df = pd.read_csv(
+    os.path.join(here, 'resources', '2011_us_ag_exports.csv'))
 
 # Fixtures
 # --------
