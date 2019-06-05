@@ -1,0 +1,32 @@
+sudo: false
+language: python
+
+python:
+  - 2.7
+  - 3.4
+  - 3.5
+
+env:
+  - DEPS="numpy=1.11 matplotlib=1.5 jinja2=2.8 pandas=0.18 nose"
+
+install:
+  - conda create -n testenv --yes python=$TRAVIS_PYTHON_VERSION
+  - source activate testenv
+  - conda install --yes $DEPS
+  - python setup.py install
+
+before_install:
+  # setup virtual x
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  # then install python version to test
+  - wget https://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
+  - chmod +x miniconda.sh
+  - bash miniconda.sh -b -p $HOME/miniconda
+  - export PATH="$HOME/miniconda/bin:$PATH"
+  # Learned the hard way: miniconda is not always up-to-date with conda.
+  - conda update --yes conda
+
+script:
+  - nosetests mplexporter
+
