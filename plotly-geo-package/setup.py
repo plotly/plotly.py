@@ -9,7 +9,7 @@ def readme():
 
 
 setup(
-    name="plotly-figure-factory",
+    name="plotly-geo",
     version="1.0.0a1",
     author="Chris P",
     author_email="chris@plot.ly",
@@ -17,7 +17,7 @@ setup(
     maintainer_email="jon@plot.ly",
     url="https://plot.ly/python/",
     project_urls={"Github": "https://github.com/plotly/plotly.py"},
-    description="An open-source, interactive graphing library for Python",
+    description="",
     long_description=readme(),
     long_description_content_type="text/markdown",
     classifiers=[
@@ -34,9 +34,7 @@ setup(
     ],
     license="MIT",
     packages=[
-        "plotly.figure_factory",
+        "_plotly_geo",
     ],
-    package_data={'plotly.figure_factory': ['package_data/*']},
-    install_requires=["plotly", "six"],
-    zip_safe=False,
+    package_data={'_plotly_geo': ['package_data/*']},
 )
