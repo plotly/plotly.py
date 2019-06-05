@@ -250,7 +250,7 @@ def test_write_image_string_no_extension_failure(fig1):
 
     # Use file extension to infer image type.
     with pytest.raises(ValueError) as err:
-        pio.write_image(fig1, os.path.join(file_path, 'fig1'))
+        pio.write_image(fig1, file_path)
 
     assert 'add a file extension or specify the type' in str(err.value)
 
@@ -261,7 +261,7 @@ def test_write_image_string_bad_extension_failure(fig1):
 
     # Use file extension to infer image type.
     with pytest.raises(ValueError) as err:
-        pio.write_image(fig1, os.path.join(file_path, 'fig1'))
+        pio.write_image(fig1, file_path)
 
     assert 'must be specified as one of the following' in str(err.value)
 
