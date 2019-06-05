@@ -83,7 +83,7 @@ def perform_codegen():
     # ---------------------------------
     # (relative to project root)
     abs_file_path = opath.realpath(__file__)
-    project_root = opath.dirname(opath.dirname(opath.dirname(abs_file_path)));
+    project_root = opath.dirname(opath.dirname(opath.dirname(abs_file_path)))
 
     outdir = opath.join(project_root, 'plotly-package', 'plotly')
 
@@ -106,7 +106,15 @@ def perform_codegen():
 
     # Load plotly schema
     # ------------------
-    with open('plotly-package/codegen/resources/plot-schema.json', 'r') as f:
+    plot_schema_path = opath.join(
+        project_root,
+        'plotly-package',
+        'codegen',
+        'resources',
+        'plot-schema.json',
+    )
+
+    with open(plot_schema_path, 'r') as f:
         plotly_schema = json.load(f)
 
     # Preprocess Schema
