@@ -307,12 +307,14 @@ jobs:
       - run:
           name: Test with tox
           command: |
+            cd plotly-package
             locale
             tox -e py37-core -- -a '!nodev'
           no_output_timeout: 20m
       - run:
           name: Commit
           command: |
+            cd plotly-package
             sudo mkdir /dist
             git config --global user.email "you@example.com"
             git config --global user.name "Your Name"
@@ -335,7 +337,7 @@ jobs:
             sudo cp ./plotlywidget* /dist
           when: always
       - store_artifacts:
-          path: /dist
+          path: plotly-package/dist
 
 workflows:
   version: 2
