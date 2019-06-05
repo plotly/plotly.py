@@ -3,9 +3,13 @@ from unittest import TestCase
 
 import _plotly_utils.utils
 from chart_studio.grid_objs import Column
-from plotly import utils
-from plotly.tests.test_optional.test_utils.test_utils import numeric_list, \
-    mixed_list, np_list
+from datetime import datetime as dt
+import numpy as np
+
+np_list = np.array([1, 2, 3, np.NaN, np.NAN, np.Inf, dt(2014, 1, 5)])
+numeric_list = [1, 2, 3]
+mixed_list = [1, 'A', dt(2014, 1, 5), dt(2014, 1, 5, 1, 1, 1),
+              dt(2014, 1, 5, 1, 1, 1, 1)]
 
 
 class TestJSONEncoder(TestCase):
