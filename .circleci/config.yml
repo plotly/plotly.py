@@ -300,10 +300,10 @@ jobs:
           command: 'sudo pip install tox requests yapf pytz decorator retrying inflect'
       - run:
           name: Update plotlywidget version
-          command: 'python setup.py updateplotlywidgetversion'
+          command: 'cd plotly-package; python setup.py updateplotlywidgetversion'
       - run:
           name: Update plotly.js to dev
-          command: 'python setup.py updateplotlyjsdev'
+          command: 'cd plotly-package; python setup.py updateplotlyjsdev'
       - run:
           name: Test with tox
           command: |
@@ -322,6 +322,7 @@ jobs:
       - run:
           name: Build source distribution package
           command: |
+            cd plotly-package
             python setup.py sdist
             sudo cp dist/* /dist
           when: always
