@@ -1,0 +1,3 @@
+node_modules
+fixtures/*.html
+!fixtures/*.ipynb

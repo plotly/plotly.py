@@ -15,7 +15,7 @@ jobs:
           command: 'sudo pip install tox'
       - run:
           name: Test with tox
-          command: 'tox -e py27-core'
+          command: 'cd plotly-package; tox -e py27-core'
           no_output_timeout: 20m
 
   python-3.5-core:
@@ -31,7 +31,7 @@ jobs:
           command: 'sudo pip install tox'
       - run:
           name: Test with tox
-          command: 'tox -e py35-core'
+          command: 'cd plotly-package; tox -e py35-core'
           no_output_timeout: 20m
 
   python-3.6-core:
@@ -47,7 +47,7 @@ jobs:
           command: 'sudo pip install tox'
       - run:
           name: Test with tox
-          command: 'tox -e py36-core'
+          command: 'cd plotly-package; tox -e py36-core'
           no_output_timeout: 20m
 
   python-3.7-core:
@@ -63,7 +63,7 @@ jobs:
           command: 'sudo pip install tox'
       - run:
           name: Test with tox
-          command: 'tox -e py37-core'
+          command: 'cd plotly-package; tox -e py37-core'
           no_output_timeout: 20m
 
   # Optional
@@ -80,11 +80,11 @@ jobs:
           command: 'sudo pip install tox'
       - run:
           name: Install npm dependencies
-          command: cd plotly/tests/test_optional/test_jupyter && npm install
+          command: cd plotly-package/plotly/tests/test_optional/test_jupyter && npm install
           no_output_timeout: 20m
       - run:
           name: Test with tox
-          command: 'tox -e py27-optional'
+          command: 'cd plotly-package; tox -e py27-optional'
           no_output_timeout: 20m
 
   python-3.5-optional:
@@ -100,11 +100,11 @@ jobs:
           command: 'sudo pip install tox'
       - run:
           name: Install npm dependencies
-          command: cd plotly/tests/test_optional/test_jupyter && npm install
+          command: cd plotly-package/plotly/tests/test_optional/test_jupyter && npm install
           no_output_timeout: 20m
       - run:
           name: Test with tox
-          command: 'tox -e py35-optional'
+          command: 'cd plotly-package; tox -e py35-optional'
           no_output_timeout: 20m
 
   python-3.6-optional:
@@ -120,11 +120,11 @@ jobs:
           command: 'sudo pip install tox'
       - run:
           name: Install npm dependencies
-          command: cd plotly/tests/test_optional/test_jupyter && npm install
+          command: cd plotly-package/plotly/tests/test_optional/test_jupyter && npm install
           no_output_timeout: 20m
       - run:
           name: Test with tox
-          command: 'tox -e py36-optional'
+          command: 'cd plotly-package; tox -e py36-optional'
           no_output_timeout: 20m
 
   python-3.7-optional:
@@ -140,11 +140,11 @@ jobs:
           command: 'sudo pip install tox'
       - run:
           name: Install npm dependencies
-          command: cd plotly/tests/test_optional/test_jupyter && npm install
+          command: cd plotly-package/plotly/tests/test_optional/test_jupyter && npm install
           no_output_timeout: 20m
       - run:
           name: Test with tox
-          command: 'tox -e py37-optional'
+          command: 'cd plotly-package; tox -e py37-optional'
           no_output_timeout: 20m
 
   # Plot.ly
@@ -161,7 +161,7 @@ jobs:
           command: 'sudo pip install tox'
       - run:
           name: Test with tox
-          command: 'tox -e py27-plot_ly'
+          command: 'cd chart-studio-package; tox -e py27-plot_ly'
           no_output_timeout: 20m
 
   python-3.5-plot_ly:
@@ -177,7 +177,7 @@ jobs:
           command: 'sudo pip install tox'
       - run:
           name: Test with tox
-          command: 'tox -e py35-plot_ly'
+          command: 'cd chart-studio-package; tox -e py35-plot_ly'
           no_output_timeout: 20m
 
   python-3.7-plot_ly:
@@ -193,7 +193,7 @@ jobs:
           command: 'sudo pip install tox'
       - run:
           name: Test with tox
-          command: 'tox -e py37-plot_ly'
+          command: 'cd chart-studio-package; tox -e py37-plot_ly'
           no_output_timeout: 20m
 
   python-2-7-orca:
@@ -220,8 +220,8 @@ jobs:
           command: |
             . /home/circleci/miniconda/etc/profile.d/conda.sh
             conda activate circle_optional
-            pytest --disable-warnings plotly/tests/test_core
-            pytest plotly/tests/test_orca
+            pytest --disable-warnings plotly-package/plotly/tests/test_core
+            pytest plotly-package/plotly/tests/test_orca
 
       - store_artifacts:
             path: plotly/tests/test_orca/images/linux/failed
@@ -250,8 +250,8 @@ jobs:
           command: |
             . /home/circleci/miniconda/etc/profile.d/conda.sh
             conda activate circle_optional
-            pytest --disable-warnings plotly/tests/test_core
-            pytest plotly/tests/test_orca
+            pytest --disable-warnings plotly-package/plotly/tests/test_core
+            pytest plotly-package/plotly/tests/test_orca
 
       - store_artifacts:
             path: plotly/tests/test_orca/images/linux/failed
@@ -280,8 +280,8 @@ jobs:
           command: |
             . /home/circleci/miniconda/etc/profile.d/conda.sh
             conda activate circle_optional
-            pytest --disable-warnings plotly/tests/test_core
-            pytest plotly/tests/test_orca
+            pytest --disable-warnings plotly-package/plotly/tests/test_core
+            pytest plotly-package/plotly/tests/test_orca
 
       - store_artifacts:
             path: plotly/tests/test_orca/images/linux/failed
@@ -300,19 +300,21 @@ jobs:
           command: 'sudo pip install tox requests yapf pytz decorator retrying inflect'
       - run:
           name: Update plotlywidget version
-          command: 'python setup.py updateplotlywidgetversion'
+          command: 'cd plotly-package; python setup.py updateplotlywidgetversion'
       - run:
           name: Update plotly.js to dev
-          command: 'python setup.py updateplotlyjsdev'
+          command: 'cd plotly-package; python setup.py updateplotlyjsdev'
       - run:
           name: Test with tox
           command: |
+            cd plotly-package
             locale
             tox -e py37-core -- -a '!nodev'
           no_output_timeout: 20m
       - run:
           name: Commit
           command: |
+            cd plotly-package
             sudo mkdir /dist
             git config --global user.email "you@example.com"
             git config --global user.name "Your Name"
@@ -322,6 +324,7 @@ jobs:
       - run:
           name: Build source distribution package
           command: |
+            cd plotly-package
             python setup.py sdist
             sudo cp dist/* /dist
           when: always
@@ -334,7 +337,7 @@ jobs:
             sudo cp ./plotlywidget* /dist
           when: always
       - store_artifacts:
-          path: /dist
+          path: plotly-package/dist
 
 workflows:
   version: 2

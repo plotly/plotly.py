@@ -1,5 +1,0 @@
-include LICENSE.txt
-include README.md
-include plotlywidget.json
-include versioneer.py
-include plotly/_version.py

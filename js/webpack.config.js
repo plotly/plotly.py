@@ -21,7 +21,8 @@ module.exports = [
         entry: './src/extension.js',
         output: {
             filename: 'extension.js',
-            path: path.resolve(__dirname, '..', 'plotlywidget', 'static'),
+            path: path.resolve(
+                __dirname, '..', 'plotly-package', 'plotlywidget', 'static'),
             libraryTarget: 'amd'
         }
     },
@@ -34,7 +35,8 @@ module.exports = [
         entry: './src/index.js',
         output: {
             filename: 'index.js',
-            path: path.resolve(__dirname, '..', 'plotlywidget', 'static'),
+            path: path.resolve(
+                __dirname, '..', 'plotly-package', 'plotlywidget', 'static'),
             libraryTarget: 'amd'
         },
         node: {

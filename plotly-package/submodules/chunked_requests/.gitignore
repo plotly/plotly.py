@@ -1,0 +1,10 @@
+
+*.pyc
+.ipynb_checkpoints/
+.ipynb_checkpoints/usage-checkpoint.ipynb
+
+.ipynb_checkpoints/usage-checkpoint.ipynb
+
+*node_modules*
+
+*.pyc
