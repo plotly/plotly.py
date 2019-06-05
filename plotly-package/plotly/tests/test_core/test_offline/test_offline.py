@@ -14,6 +14,14 @@ import plotly
 import plotly.io as pio
 import json
 
+project_root = os.path.dirname(
+    os.path.dirname(
+        os.path.dirname(
+            os.path.realpath(plotly.__file__))))
+
+here = os.path.dirname(os.path.realpath(__file__))
+html_filename = os.path.join(here, 'temp-plot.html')
+
 
 fig = {
     'data': [
@@ -64,14 +72,15 @@ do_auto_play = 'Plotly.animate'
 
 download_image = 'Plotly.downloadImage'
 
+
 class PlotlyOfflineBaseTestCase(TestCase):
     def tearDown(self):
         # Some offline tests produce an html file. Make sure we clean up :)
         try:
-            os.remove('temp-plot.html')
+            os.remove(os.path.join(here, 'temp-plot.html'))
             # Some tests that produce temp-plot.html
             # also produce plotly.min.js
-            os.remove('plotly.min.js')
+            os.remove(os.path.join(here, 'plotly.min.js'))
         except OSError:
             pass
 
@@ -96,7 +105,8 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
             fig['layout'],
             cls=plotly.utils.PlotlyJSONEncoder)
 
-        html = self._read_html(plotly.offline.plot(fig, auto_open=False))
+        html = self._read_html(plotly.offline.plot(
+            fig, auto_open=False, filename=html_filename))
 
         # I don't really want to test the entire script output, so
         # instead just make sure a few of the parts are in here?
@@ -120,6 +130,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
                 fig,
                 include_plotlyjs=include_plotlyjs,
                 output_type='file',
+                filename=html_filename,
                 auto_open=False))
 
             self.assertIn(plotly_config_script, html)
@@ -149,6 +160,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
                 fig,
                 include_plotlyjs=include_plotlyjs,
                 output_type='file',
+                filename=html_filename,
                 auto_open=False))
 
             self.assertNotIn(plotly_config_script, html)
@@ -173,6 +185,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
                 fig,
                 include_plotlyjs=include_plotlyjs,
                 output_type='file',
+                filename=html_filename,
                 auto_open=False))
             self.assertIn(plotly_config_script, html)
             self.assertNotIn(PLOTLYJS, html)
@@ -191,12 +204,14 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
             self.assertNotIn(directory_script, html)
 
     def test_including_plotlyjs_directory_html(self):
-        self.assertFalse(os.path.exists('plotly.min.js'))
+        self.assertFalse(
+            os.path.exists(os.path.join(here, 'plotly.min.js')))
 
         for include_plotlyjs in ['directory', 'Directory', 'DIRECTORY']:
             html = self._read_html(plotly.offline.plot(
                 fig,
                 include_plotlyjs=include_plotlyjs,
+                filename=html_filename,
                 auto_open=False))
             self.assertIn(plotly_config_script, html)
             self.assertNotIn(PLOTLYJS, html)
@@ -204,12 +219,14 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
             self.assertIn(directory_script, html)
 
         # plot creates plotly.min.js in the output directory
-        self.assertTrue(os.path.exists('plotly.min.js'))
+        self.assertTrue(
+            os.path.exists(os.path.join(here, 'plotly.min.js')))
         with open('plotly.min.js', 'r') as f:
             self.assertEqual(f.read(), PLOTLYJS)
 
     def test_including_plotlyjs_directory_div(self):
-        self.assertFalse(os.path.exists('plotly.min.js'))
+        self.assertFalse(
+            os.path.exists(os.path.join(here, 'plotly.min.js')))
 
         for include_plotlyjs in ['directory', 'Directory', 'DIRECTORY']:
             html = plotly.offline.plot(
@@ -238,6 +255,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
                 fig,
                 include_plotlyjs=include_plotlyjs,
                 output_type='file',
+                filename=html_filename,
                 auto_open=False))
             self.assertNotIn(PLOTLYJS, html)
             self.assertNotIn(cdn_script, html)
@@ -271,8 +289,8 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
         config = dict(linkText='Plotly rocks!',
                       showLink=True,
                       editable=True)
-        html = self._read_html(plotly.offline.plot(fig, config=config,
-                                                   auto_open=False))
+        html = self._read_html(plotly.offline.plot(
+            fig, config=config, auto_open=False, filename=html_filename))
         self.assertIn('"linkText": "Plotly rocks!"', html)
         self.assertIn('"showLink": true', html)
         self.assertIn('"editable": true', html)
@@ -282,7 +300,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
 
         def get_html():
             return self._read_html(plotly.offline.plot(
-                fig, config=config, auto_open=False))
+                fig, config=config, auto_open=False, filename=html_filename))
 
         # Attempts to validate warning ran into
         # https://bugs.python.org/issue29620, don't check warning for now.
@@ -293,7 +311,8 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
 
     @attr('nodev')
     def test_plotlyjs_version(self):
-        with open('js/package.json', 'rt') as f:
+        path = os.path.join(project_root, 'js', 'package.json')
+        with open(path, 'rt') as f:
             package_json = json.load(f)
             expected_version = package_json['dependencies']['plotly.js']
 
@@ -305,6 +324,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
             fig,
             include_mathjax=False,
             output_type='file',
+            filename=html_filename,
             auto_open=False))
 
         self.assertIn(plotly_config_script, html)
@@ -328,6 +348,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
             fig,
             include_mathjax='cdn',
             output_type='file',
+            filename=html_filename,
             auto_open=False))
 
         self.assertIn(plotly_config_script, html)
@@ -352,6 +373,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
             fig,
             include_mathjax=other_cdn,
             output_type='file',
+            filename=html_filename,
             auto_open=False))
 
         self.assertIn(plotly_config_script, html)
