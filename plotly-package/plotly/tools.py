@@ -485,31 +485,6 @@ def get_graph_obj(obj, obj_type=None):
     return cls(obj)
 
 
-def validate(obj, obj_type):
-    """Validate a dictionary, list, or graph object as 'obj_type'.
-
-    This will not alter the 'obj' referenced in the call signature. It will
-    raise an error if the 'obj' reference could not be instantiated as a
-    valid 'obj_type' graph object.
-
-    """
-    # TODO: Deprecate or move. #283
-    from plotly import graph_reference
-    from plotly.graph_objs import graph_objs
-
-    if obj_type not in graph_reference.CLASSES:
-        obj_type = graph_reference.string_to_class_name(obj_type)
-
-    try:
-        cls = getattr(graph_objs, obj_type)
-    #except AttributeError:
-    except ValueError:
-        raise exceptions.PlotlyError(
-            "'{0}' is not a recognizable graph_obj.".
-            format(obj_type))
-    cls(obj)  # this will raise on invalid keys/items
-
-
 def _replace_newline(obj):
     """Replaces '\n' with '<br>' for all strings in a collection."""
     if isinstance(obj, dict):
