@@ -1,0 +1,198 @@
+version: 2.0
+
+# Inspired by:
+# https://github.com/CircleCI-Public/circleci-demo-workflows/blob/workspace-forwarding/.circleci/config.yml
+# https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs
+#
+# For list of official CircleCI node.js images, go to:
+# https://hub.docker.com/r/circleci/node/tags/
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10.9.0
+    working_directory: ~/plotly.js
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            npm ci
+      - run:
+          name: List dependency versions
+          command: |
+            echo "npm: $(npm --version)"
+            echo "node: $(node --version)"
+            npm ls || true
+      - run:
+          name: Pretest
+          command: |
+            npm run pretest
+            npm run cibuild
+      - run:
+          command: rm -rf .git
+      - persist_to_workspace:
+          root: /home/circleci
+          paths:
+            - plotly.js
+
+  test-jasmine:
+    docker:
+      # need '-browsers' version to test in real (xvfb-wrapped) browsers
+      - image: circleci/node:10.9.0-browsers
+    parallelism: 2
+    working_directory: ~/plotly.js
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Run jasmine tests (batch 1)
+          command: ./.circleci/test.sh jasmine
+
+  test-jasmine2:
+    docker:
+      # need '-browsers' version to test in real (xvfb-wrapped) browsers
+      - image: circleci/node:10.9.0-browsers
+    parallelism: 3
+    working_directory: ~/plotly.js
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Run jasmine tests (batch 2)
+          command: ./.circleci/test.sh jasmine2
+
+  test-jasmine3:
+    docker:
+      # need '-browsers' version to test in real (xvfb-wrapped) browsers
+      - image: circleci/node:10.9.0-browsers
+    working_directory: ~/plotly.js
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Run jasmine tests (batch 3)
+          command: ./.circleci/test.sh jasmine3
+
+  test-image:
+    docker:
+      - image: plotly/testbed:latest
+    parallelism: 4
+    working_directory: /var/www/streambed/image_server/plotly.js/
+    steps:
+      - attach_workspace:
+          at: /var/www/streambed/image_server/
+      - run:
+          name: Run and setup container
+          command: |
+            supervisord &
+            npm run docker -- setup
+      - run:
+          name: Run image tests
+          command: ./.circleci/test.sh image
+      - store_artifacts:
+          path: build
+          destination: /
+
+  test-image2:
+    docker:
+      - image: plotly/testbed:latest
+    working_directory: /var/www/streambed/image_server/plotly.js/
+    steps:
+      - attach_workspace:
+          at: /var/www/streambed/image_server/
+      - run:
+          name: Run and setup container
+          command: |
+            supervisord &
+            npm run docker -- setup
+      - run:
+          name: Run image tests
+          command: ./.circleci/test.sh image2
+      - store_artifacts:
+          path: build
+          destination: /
+
+  test-syntax:
+    docker:
+      - image: circleci/node:10.9.0
+    working_directory: ~/plotly.js
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Run syntax tests
+          command: ./.circleci/test.sh syntax
+
+  test-bundle:
+    docker:
+      # need '-browsers' version to test in real (xvfb-wrapped) browsers
+      - image: circleci/node:10.9.0-browsers
+    working_directory: ~/plotly.js
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Run test-bundle
+          command: ./.circleci/test.sh bundle
+
+  publish:
+    docker:
+      - image: circleci/node:10.9.0
+    working_directory: ~/plotly.js
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Build dist/
+          command: npm run build
+      - store_artifacts:
+          path: dist
+          destination: dist
+      - run:
+          name: Pack tarball
+          command: |
+            npm pack
+            version=$(node -e "console.log(require('./package.json').version)")
+            mv plotly.js-$version.tgz plotly.js.tgz
+      - store_artifacts:
+          path: plotly.js.tgz
+          destination: /plotly.js.tgz
+      - run:
+          name: Show URLs to build files
+          command: |
+            PROJECT_NUM=45646037
+            echo https://$CIRCLE_BUILD_NUM-$PROJECT_NUM-gh.circle-artifacts.com/0/plotly.js.tgz
+            echo https://$CIRCLE_BUILD_NUM-$PROJECT_NUM-gh.circle-artifacts.com/0/dist/plotly.js
+            echo https://$CIRCLE_BUILD_NUM-$PROJECT_NUM-gh.circle-artifacts.com/0/dist/plotly.min.js
+            echo https://$CIRCLE_BUILD_NUM-$PROJECT_NUM-gh.circle-artifacts.com/0/dist/plot-schema.json
+
+workflows:
+  version: 2
+  build-and-test:
+    jobs:
+      - build
+      - test-bundle:
+          requires:
+            - build
+      - test-jasmine:
+          requires:
+            - build
+      - test-jasmine2:
+          requires:
+            - build
+      - test-jasmine3:
+          requires:
+            - build
+      - test-image:
+          requires:
+            - build
+      - test-image2:
+          requires:
+            - build
+      - test-syntax:
+          requires:
+            - build
+      - publish:
+          requires:
+            - build

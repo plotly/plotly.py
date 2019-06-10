@@ -1,0 +1,20 @@
+{
+  "name": "plotly/plotly.js",
+  "description": "The open source javascript graphing library that powers plotly",
+  "keywords": [
+      "graphing",
+      "plotting",
+      "data",
+      "visualization",
+      "plotly"
+  ],
+  "minimum-stability": "stable",
+  "homepage": "https://plot.ly/javascript/",
+  "license": "MIT",
+  "authors": [
+      {
+          "name": "Plotly, Inc.",
+          "email": "sales@plot.ly"
+      }
+  ]
+}

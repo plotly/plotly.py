@@ -1,0 +1,171 @@
+# A developer's guide to regl
+
+This document is to help make it easier to contribute to `regl`.  It describes how some common workflows associated and how to get started with helping out.
+
+## Basic set up
+
+To set up the development environment for regl, you first need to install [nodejs](https://nodejs.org/en/).  Any version >0.10 is supported.  Once this is done, you can install regl's development dependencies using the following npm command:
+
+```sh
+npm install
+```
+
+## Examples
+
+`regl` has tons of examples.  To run them locally, you can use [budo](https://github.com/mattdesl/budo), which is a minimal HTTP server integrated with browserify.  To install budo, run the following command:
+
+```sh
+npm install -g budo
+```
+
+Then go into the example folder and run any example with the following command:
+
+```sh
+budo basic.js --open
+```
+
+Where you can replace `basic.js` with the name of whatever example you want to run.
+
+### Adding an example
+
+To add an example, just create a javascript file in the `example` folder.  Each example should have a header comment at the top of the page that describes how it works.  This comment may contain HTML tags.
+
+If your example needs any static data, please put them in the `example/assets` directory.
+
+To add an image for your example, take a screen shot, name it `myexample.png` and place it in the `example/img` folder.
+
+## Style guidelines
+
+`regl` adheres to the [standard](https://github.com/feross/standard) style.  The reason for this is to prevent "bikeshed" type discussions about code style and configuration that distract from actual issues.
+
+In addition to the standard style guidelines, we also enforce two extra constraints for technical reasons:
+
+* All test cases, benchmarks and library code must be written using strict ES5 style.
+* All examples use ES6
+
+The reason we do not use ES6 in the library or test code is that regl supports node 0.10, which does not implement ES6.  Because the examples are meant to be illustrative we do not enforce the same strict compatibility requirements.
+
+For markdown, we're using [`remark`](https://github.com/wooorm/remark) and [`remark-lint`](https://github.com/wooorm/remark-lint).
+
+## Tests
+
+`regl` uses [tape](https://www.npmjs.com/package/tape) for unit testing.  As a result, you can run any specific unit test directly in node like you would any other script without using any special unit test harness.  For example, to just run the texture2D tests, you could run the following command from the root directory:
+
+```sh
+node test/texture2d.js
+```
+
+To run all of the test cases in a batch, use the `npm` test script, which is the following command:
+
+```sh
+npm test
+```
+
+**IMPORTANT** Before submitting a pull request, be sure to run the test cases first.  If you don't do it, the CI system will flag your PR and you won't be able to merge.
+
+Some test cases make use of browser specific extensions and may need to run in a browser environment.  To run the test suite in a browser, use the following command:
+
+```sh
+npm run test-browser
+```
+
+regl also uses istanbul to measure code coverage for the test suite.  To generate a coverage report, use the following command:
+
+```sh
+npm run cover
+```
+
+Then you can view the results in `coverage/lcov-report/index.html`
+
+### Adding a test case
+
+To add a test case, create a new file in the `test/` folder and then add a reference to it in `test/index.js`.  Take a look at the examples in the test folder for help.
+
+## Benchmarks
+
+To run the benchmarks, use this command:
+
+```sh
+npm run bench-node
+```
+
+This will run the benchmarks in `node.js`, and output the results to `stdout` in
+json-format. If you want to see prettified benchmarks results, run
+
+```sh
+npm run bench-node -- --pretty
+```
+
+If you want to run the benchmarks in the browser, just run
+
+```sh
+npm run bench-browser
+```
+
+If you want to run the benchmarks on a bunch of commits in the history
+of the repo, do
+
+```sh
+npm run bench-history 10
+```
+
+This script will, starting from the current HEAD, run the benchmarks
+through all the 10 latest commits, and write all the benchmark data as json to a
+file.
+
+Note that the script will run `git stash` before switching to the old
+commits, and then in the end it will switch to the original HEAD and run `git stash pop`,
+in order to ensure that no uncommited changes are lost.
+
+Also note that there is a so-called ancestor commit, and the script will NOT run any benchmarks beyond the ancestor commit. This is because that beyond this ancestor commit, the benchmarking environment had not yet been properly
+set up, so the benchmarking results produced by these commits should not be used.
+
+Then you can create pretty graphs from the benchmark data outputted
+from `bench-history`. Just do
+
+```sh
+npm run bench-graph bench/bench-result-2f95fbcf3e60dff98c4b.json
+```
+
+where `bench/bench-result-2f95fbcf3e60dff98c4b.json` is the file
+outputted by `bench-history`. The script will create an HTML-file with
+graphs made with `d3` from the data, and automatically open the HTML-file
+in your default browser.
+
+### Adding a benchmark
+
+The easiest way to add a new benchmark is to copy an existing benchmark (see for example `bench/clear.js`), modify it, and add an entry to `bench/list.js`
+
+### Size measurements
+
+You can also get a report of the current bundle size of regl using [disc](https://github.com/hughsk/disc).  [An up to date set of stats can be found in `www/size.html`.](https://regl-project.github.io/regl/www/size.html)
+
+To regenerate these results, run the command
+
+```sh
+npm run build-size
+```
+
+## Comparisons
+
+The [comparisons pages](https://regl-project.github.io/regl/www/compare.html) is autogenerated from the contents of the `compare/` directory.  Each sub directory in the compare directory contains a task, and each task directory contains several implementations of this task.
+
+An implementation may be either a raw JavaScript file (which is compiled with browserify) or an HTML web page.  Each task must contain an image of the expected results (called `expected.png`) and a description called `description.txt`.
+
+## Rebuilding the web assets
+
+To rebuild all redistributable assets and the static website, use the command:
+
+```sh
+npm run build
+```
+
+## Find something to do
+
+Check out the [change log](CHANGES.md) for planned features and tasks.
+
+There is also a list of [open issues on GitHub that need work](https://github.com/regl-project/regl/issues).  Anything with the "help wanted" tag may be good for a beginner starting out.
+
+Alternatively, if you want to propose a new feature or report a bug, you should open an issue on GitHub.
+
+There is also active discussion in the [gitter chat](https://gitter.im/regl-project/regl).  If you join there, you can usually find someone to talk to.

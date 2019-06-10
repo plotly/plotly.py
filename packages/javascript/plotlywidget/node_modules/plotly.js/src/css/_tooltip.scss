@@ -1,0 +1,95 @@
+//@see https://github.com/chinchang/hint.css
+
+$fontSize: 12px;
+
+$verticalPadding: 8px;
+$horizontalPadding: 10px;
+
+// default tooltip height
+$tooltipHeight: $fontSize + 2 * $verticalPadding !default;
+// border-width for tooltip arrow
+$arrowBorderWidth: 6px !default;
+// horizontal arrow offset
+$arrowOffsetX: 3 * $arrowBorderWidth !default;
+// text-shadow darken percentage
+$textShadowDarkenAmount: 25% !default;
+// transition distance
+$transitionDistance: 8px !default;
+// z-index for tooltips
+$zIndex: 1000000 !default;
+// Various colors
+// Default color is blackish
+$defaultColor: #69738a !default;
+// Error color
+$errorColor: hsl(1, 40%, 50%) !default;
+// Warning color
+$warningColor: hsl(38, 46%, 54%) !default;
+// Info Color
+$infoColor: hsl(200, 50%, 45%) !default;
+// Success Color
+$successColor: hsl(121, 32%, 40%) !default;
+
+
+[data-title] {
+    &:before, &:after {
+        position: absolute;
+        @include vendor('transform', translate3d(0, 0, 0));
+        display: none;
+        opacity: 0;
+        z-index: $zIndex;
+        pointer-events: none;
+
+        // @include vendor('transition', opacity 0.3s ease 0);
+        // @include vendor('transition-delay', 0);
+
+        top: 110%;
+        right: 50%;
+    }
+
+    &:hover:before, &:hover:after {
+        display: block;
+        opacity: 1;
+    }
+
+    // Top arrow
+    &:before {
+        content: '';
+        position: absolute;
+        background: transparent;
+        border: $arrowBorderWidth solid transparent;
+        z-index: $zIndex + 1;
+        margin-top: -2 * $arrowBorderWidth;
+        border-bottom-color: $defaultColor;
+        margin-right: -1 * $arrowBorderWidth;
+    }
+
+    /**
+     * tooltip body
+     */
+    &:after {
+        content: attr(data-title); // The magic!
+        background: $defaultColor;
+        color: white;
+        padding: $verticalPadding $horizontalPadding;
+        font-size: $fontSize;
+        line-height: $fontSize; // Vertical centering.
+        white-space: nowrap; // Prevent breaking to new line.
+        margin-right: -1 * $arrowOffsetX;
+        border-radius: 2px;
+    }
+}
+
+.vertical [data-title] {
+  &:before, &:after {
+    top: 0%;
+    right: 200%;
+  }
+
+  // Right arrow
+  &:before {
+    border: $arrowBorderWidth solid transparent;
+    border-left-color: $defaultColor;
+    margin-top: $verticalPadding;
+    margin-right: -1 * ($arrowOffsetX + 2 *  $arrowBorderWidth);
+  }
+}

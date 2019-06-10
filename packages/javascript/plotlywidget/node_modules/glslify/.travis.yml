@@ -1,0 +1,13 @@
+language: node_js
+install: npm install
+node_js:
+  - '4'
+  - '6'
+  - '8'
+  - '10'
+os:
+  - linux
+  - windows
+cache:
+  directories:
+    - 'node_modules'

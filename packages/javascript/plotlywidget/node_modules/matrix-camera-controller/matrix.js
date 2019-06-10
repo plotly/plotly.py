@@ -1,0 +1,198 @@
+'use strict'
+
+var bsearch   = require('binary-search-bounds')
+var m4interp  = require('mat4-interpolate')
+var invert44  = require('gl-mat4/invert')
+var rotateX   = require('gl-mat4/rotateX')
+var rotateY   = require('gl-mat4/rotateY')
+var rotateZ   = require('gl-mat4/rotateZ')
+var lookAt    = require('gl-mat4/lookAt')
+var translate = require('gl-mat4/translate')
+var scale     = require('gl-mat4/scale')
+var normalize = require('gl-vec3/normalize')
+
+var DEFAULT_CENTER = [0,0,0]
+
+module.exports = createMatrixCameraController
+
+function MatrixCameraController(initialMatrix) {
+  this._components    = initialMatrix.slice()
+  this._time          = [0]
+  this.prevMatrix     = initialMatrix.slice()
+  this.nextMatrix     = initialMatrix.slice()
+  this.computedMatrix = initialMatrix.slice()
+  this.computedInverse = initialMatrix.slice()
+  this.computedEye    = [0,0,0]
+  this.computedUp     = [0,0,0]
+  this.computedCenter = [0,0,0]
+  this.computedRadius = [0]
+  this._limits        = [-Infinity, Infinity]
+}
+
+var proto = MatrixCameraController.prototype
+
+proto.recalcMatrix = function(t) {
+  var time = this._time
+  var tidx = bsearch.le(time, t)
+  var mat = this.computedMatrix
+  if(tidx < 0) {
+    return
+  }
+  var comps = this._components
+  if(tidx === time.length-1) {
+    var ptr = 16*tidx
+    for(var i=0; i<16; ++i) {
+      mat[i] = comps[ptr++]
+    }
+  } else {
+    var dt = (time[tidx+1] - time[tidx])
+    var ptr = 16*tidx
+    var prev = this.prevMatrix
+    var allEqual = true
+    for(var i=0; i<16; ++i) {
+      prev[i] = comps[ptr++]
+    }
+    var next = this.nextMatrix
+    for(var i=0; i<16; ++i) {
+      next[i] = comps[ptr++]
+      allEqual = allEqual && (prev[i] === next[i])
+    }
+    if(dt < 1e-6 || allEqual) {
+      for(var i=0; i<16; ++i) {
+        mat[i] = prev[i]
+      }
+    } else {
+      m4interp(mat, prev, next, (t - time[tidx])/dt)
+    }
+  }
+
+  var up = this.computedUp
+  up[0] = mat[1]
+  up[1] = mat[5]
+  up[2] = mat[9]
+  normalize(up, up)
+
+  var imat = this.computedInverse
+  invert44(imat, mat)
+  var eye = this.computedEye
+  var w = imat[15]
+  eye[0] = imat[12]/w
+  eye[1] = imat[13]/w
+  eye[2] = imat[14]/w
+
+  var center = this.computedCenter
+  var radius = Math.exp(this.computedRadius[0])
+  for(var i=0; i<3; ++i) {
+    center[i] = eye[i] - mat[2+4*i] * radius
+  }
+}
+
+proto.idle = function(t) {
+  if(t < this.lastT()) {
+    return
+  }
+  var mc = this._components
+  var ptr = mc.length-16
+  for(var i=0; i<16; ++i) {
+    mc.push(mc[ptr++])
+  }
+  this._time.push(t)
+}
+
+proto.flush = function(t) {
+  var idx = bsearch.gt(this._time, t) - 2
+  if(idx < 0) {
+    return
+  }
+  this._time.splice(0, idx)
+  this._components.splice(0, 16*idx)
+}
+
+proto.lastT = function() {
+  return this._time[this._time.length-1]
+}
+
+proto.lookAt = function(t, eye, center, up) {
+  this.recalcMatrix(t)
+  eye    = eye || this.computedEye
+  center = center || DEFAULT_CENTER
+  up     = up || this.computedUp
+  this.setMatrix(t, lookAt(this.computedMatrix, eye, center, up))
+  var d2 = 0.0
+  for(var i=0; i<3; ++i) {
+    d2 += Math.pow(center[i] - eye[i], 2)
+  }
+  d2 = Math.log(Math.sqrt(d2))
+  this.computedRadius[0] = d2
+}
+
+proto.rotate = function(t, yaw, pitch, roll) {
+  this.recalcMatrix(t)
+  var mat = this.computedInverse
+  if(yaw)   rotateY(mat, mat, yaw)
+  if(pitch) rotateX(mat, mat, pitch)
+  if(roll)  rotateZ(mat, mat, roll)
+  this.setMatrix(t, invert44(this.computedMatrix, mat))
+}
+
+var tvec = [0,0,0]
+
+proto.pan = function(t, dx, dy, dz) {
+  tvec[0] = -(dx || 0.0)
+  tvec[1] = -(dy || 0.0)
+  tvec[2] = -(dz || 0.0)
+  this.recalcMatrix(t)
+  var mat = this.computedInverse
+  translate(mat, mat, tvec)
+  this.setMatrix(t, invert44(mat, mat))
+}
+
+proto.translate = function(t, dx, dy, dz) {
+  tvec[0] = dx || 0.0
+  tvec[1] = dy || 0.0
+  tvec[2] = dz || 0.0
+  this.recalcMatrix(t)
+  var mat = this.computedMatrix
+  translate(mat, mat, tvec)
+  this.setMatrix(t, mat)
+}
+
+proto.setMatrix = function(t, mat) {
+  if(t < this.lastT()) {
+    return
+  }
+  this._time.push(t)
+  for(var i=0; i<16; ++i) {
+    this._components.push(mat[i])
+  }
+}
+
+proto.setDistance = function(t, d) {
+  this.computedRadius[0] = d
+}
+
+proto.setDistanceLimits = function(a,b) {
+  var lim = this._limits
+  lim[0] = a
+  lim[1] = b
+}
+
+proto.getDistanceLimits = function(out) {
+  var lim = this._limits
+  if(out) {
+    out[0] = lim[0]
+    out[1] = lim[1]
+    return out
+  }
+  return lim
+}
+
+function createMatrixCameraController(options) {
+  options = options || {}
+  var matrix = options.matrix || 
+              [1,0,0,0,
+               0,1,0,0,
+               0,0,1,0,
+               0,0,0,1]
+  return new MatrixCameraController(matrix)
+}

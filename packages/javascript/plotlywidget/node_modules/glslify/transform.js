@@ -1,0 +1,308 @@
+var falafel = require('falafel')
+var duplexify = require('duplexify')
+var through = require('through2')
+var concat = require('concat-stream')
+var from = require('from2')
+var gdeps = require('glslify-deps')
+var glslBundle = require('glslify-bundle')
+var path = require('path')
+var seval = require('static-eval')
+var resolve = require('resolve')
+var gresolve = require('glsl-resolve')
+var extend = require('xtend')
+
+var glslfile0 = path.join(__dirname,'index.js')
+var glslfile1 = path.join(__dirname,'index')
+var parseOptions = {
+  ecmaVersion: 10,
+  sourceType: 'module',
+  allowReturnOutsideFunction: true,
+  allowImportExportEverywhere: true,
+  allowHashBang: true
+}
+
+module.exports = function (file, opts) {
+  if (path.extname(file) == '.json') return through()
+  if (!opts) opts = {}
+  var dir = path.dirname(file)
+  var glvar = null, mdir = dir
+  var evars = {
+    __dirname: dir,
+    __filename: file,
+    require: { resolve: resolve }
+  }
+
+  var sharedPosts = []
+  var sharedTransforms = updateSharedTransforms()
+
+  function evaluate (expr) {
+    return seval(expr, evars)
+  }
+
+  function updateSharedTransforms () {
+    ;[]
+      .concat(opts.post || [])
+      .concat(opts.p || [])
+      .forEach(function (post) {
+        post = Array.isArray(post) ? post : [post]
+        var name = post[0]
+        var opts = post[1] || {}
+        sharedPosts.push({ name: name, opts: opts, base: process.cwd() })
+      })
+
+    return []
+      .concat(opts.transform || [])
+      .concat(opts.t || [])
+      .filter(function (tr) {
+        var name = tr[0]
+        var opts = tr[1] || {}
+        if (!opts.post) return true
+        sharedPosts.push({ name: name, opts: opts, base: process.cwd() })
+      })
+  }
+
+  var d = duplexify()
+  var out = from(function () {})
+  d.setReadable(out)
+  d.setWritable(concat({ encoding: 'string' }, function (src) {
+    var pending = 1
+    if (src.indexOf('glslify') === -1) {
+      out.push(src)
+      out.push(null)
+      return
+    }
+
+    try { var fout = falafel(src, parseOptions, onnode) }
+    catch (err) { return d.emit('error', err) }
+    done()
+
+    function onnode (node) {
+      // case: path = require('path')
+      if (isRequirePath(node)) {
+        evars.path = path
+      } else if (isRequireGlslify(node, dir)) {
+        var p = node.parent.parent, pp = p.parent
+        if (isReqCallExpression(p, pp)) {
+          // case: require('glslify')(...)
+          pending++
+          callexpr(p, done)
+        } else if (p.type === 'VariableDeclarator') {
+          // case: var glvar = require('glslify')
+          glvar = p.id.name
+        } else if (isReqCallFile(p, pp)) {
+          // case: require('glslify').file(...)
+          pending++
+          callfile(pp, pp.callee.object.source(), done)
+        } else if (isReqCallCompile(p, pp)) {
+          // case: require('glslify').compile(...)
+          pending++
+          callcompile(pp, pp.callee.object.source(), done)
+        } else if (p.type === 'TaggedTemplateExpression') {
+          // case: require('glslify')`...`
+          pending++
+          tagexpr(p, done)
+        }
+      } else if (isCallExpression(node, glvar)) {
+        // case: glvar(...)
+        pending++
+        callexpr(node.parent, done)
+      } else if (isTagExpression(node, glvar)) {
+        // case: glvar`...`
+        pending++
+        tagexpr(node, done)
+      } else if (isCallFile(node, glvar)) {
+        // case: glvar.file(...)
+        pending++
+        callfile(node.parent.parent, glvar, done)
+      } else if (isCallCompile(node, glvar)) {
+        // case: glvar.compile(...)
+        pending++
+        callcompile(node.parent.parent, glvar, done)
+      }
+    }
+
+    function tagexpr (node, cb) {
+      var q = node.quasi
+      var shadersrc = q.quasis.map(function (s) {
+        return s.value.raw + '__GLX_PLACEHOLDER__'
+      }).join('')
+      var d = createDeps({ cwd: mdir })
+      d.inline(shadersrc, mdir, function (err, deps) {
+        if (err) return d.emit('error', err)
+        applyPostTransforms(null, deps, {}, function (err, bsrc) {
+          if (err) return d.emit('error', err)
+          node.update(node.tag.source() + '('
+            + JSON.stringify(bsrc.split('__GLX_PLACEHOLDER__'))
+            + [''].concat(q.expressions.map(function (e) {
+              return e.source()
+            })).join(',')
+            + ')')
+          cb()
+        })
+      })
+    }
+    function callexpr (p, cb) {
+      var marg = evaluate(p.arguments[0])
+      var mopts = p.arguments[1] ? evaluate(p.arguments[1]) || {} : {}
+      var d = createDeps({ cwd: mdir })
+      var resolved = null
+      if (/(void\s+main\s?\(.*\)|\n)/.test(marg)) { // source string
+        d.inline(marg, mdir, ondeps)
+      } else gresolve(marg, { basedir: mdir }, function (err, res) {
+        if (err) d.emit('error', err)
+        else d.add(resolved = res, ondeps)
+      })
+      function ondeps (err, deps) {
+        if (err) return d.emit('error', err)
+        applyPostTransforms(resolved, deps, mopts, function (err, bsrc) {
+          if (err) return d.emit('error', err)
+          p.update(p.callee.source()+'(['+JSON.stringify(bsrc)+'])')
+          cb()
+        })
+      }
+    }
+    function callcompile (p, glvar, cb) {
+      var mfile = evaluate(p.arguments[0])
+      var mopts = p.arguments[1] ? evaluate(p.arguments[1]) || {} : {}
+      var d = createDeps({ cwd: mdir })
+      d.inline(mfile, mdir, ondeps)
+      function ondeps (err, deps) {
+        if (err) return d.emit('error', err)
+        applyPostTransforms(null, deps, mopts, function (err, bsrc) {
+          if (err) return d.emit('error', err)
+          p.update(glvar + '([' + JSON.stringify(bsrc) + '])')
+          cb()
+        })
+      }
+    }
+    function callfile (p, glvar, cb) {
+      var mfile = evaluate(p.arguments[0])
+      gresolve(mfile, { basedir: mdir }, function (err, res) {
+        if (err) return d.emit('error', err)
+        var mopts = p.arguments[1] ? evaluate(p.arguments[1]) || {} : {}
+        var d = createDeps({ cwd: path.dirname(res) })
+        d.add(res, ondeps)
+        function ondeps (err, deps) {
+          if (err) return d.emit('error', err)
+          applyPostTransforms(res, deps, mopts, function (err, bsrc) {
+            if (err) return d.emit('error', err)
+            p.update(glvar + '([' + JSON.stringify(bsrc) + '])')
+            cb()
+          })
+        }
+      })
+    }
+    function done () {
+      if (--pending === 0) {
+        out.push(fout.toString())
+        out.push(null)
+      }
+    }
+  }))
+  return d
+
+  function createDeps (opts) {
+    var depper = gdeps(opts)
+    depper.on('error', function (err) { d.emit('error', err) })
+    depper.on('file', function (file) { d.emit('file', file) })
+    var transforms = sharedTransforms
+    transforms = Array.isArray(transforms) ? transforms : [transforms]
+    transforms.forEach(function(transform) {
+      transform = Array.isArray(transform) ? transform : [transform]
+      var name = transform[0]
+      var opts = transform[1] || {}
+      if (!opts.post) {
+        depper.transform(name, extend({}, opts))
+      }
+    })
+    return depper
+  }
+
+  function applyPostTransforms (rootFile, deps, mopts, done) {
+    var source = glslBundle(deps)
+    var localPosts = [].concat(mopts.transform || []).concat(mopts.t || [])
+      .map(function (transform) {
+        transform = Array.isArray(transform) ? transform : [transform]
+        var name = transform[0]
+        var opts = transform[1] || {}
+        return opts.post && { name: name, opts: opts, base: path.dirname(rootFile) }
+      })
+      .filter(Boolean)
+      .concat(sharedPosts)
+      .map(function (tr) {
+        if (typeof tr.name === "function") {
+          tr.tr = tr.name
+        } else {
+          var target = resolve.sync(tr.name, { basedir: tr.base || mdir })
+          tr.tr = require(target)
+        }
+        return tr
+      })
+
+    gdeps.prototype.applyTransforms(rootFile, source, localPosts, done);
+  }
+}
+
+function isRequirePath (node) {
+  return node.type === 'Identifier' && node.name === 'require'
+    && node.parent.type === 'CallExpression'
+    && node.parent.arguments[0]
+    && node.parent.arguments[0].type === 'Literal'
+    && node.parent.arguments[0].value === 'path'
+    && node.parent.parent.type === 'VariableDeclarator'
+}
+
+function isRequireGlslify (node, dir) {
+  return node.type === 'Identifier' && node.name === 'require'
+    && node.parent.type === 'CallExpression'
+    && node.parent.arguments[0]
+    && node.parent.arguments[0].type === 'Literal'
+    && (/^glslify(?:\/index(?:\.js)?)?/.test(node.parent.arguments[0].value)
+    || path.resolve(dir,node.parent.arguments[0].value) === __dirname
+    || path.resolve(dir,node.parent.arguments[0].value) === glslfile0
+    || path.resolve(dir,node.parent.arguments[0].value) === glslfile1)
+}
+
+function isReqCallExpression (node, parent) {
+  return node.type === 'CallExpression'
+    && parent.type === 'CallExpression'
+}
+
+function isReqCallFile (node, parent) {
+  return node.type === 'MemberExpression'
+    && node.property.name === 'file'
+    && parent.type === 'CallExpression'
+}
+
+function isReqCallCompile (node, parent) {
+  return node.type === 'MemberExpression'
+    && node.property.name === 'compile'
+    && parent.type === 'CallExpression'
+}
+
+function isCallExpression (node, glvar) {
+  return node.type === 'Identifier'
+    && node.name === glvar
+    && node.parent.type === 'CallExpression'
+}
+
+function isTagExpression (node, glvar) {
+  return node.type === 'TaggedTemplateExpression'
+    && node.tag.name === glvar
+}
+
+function isCallFile (node, glvar) {
+  return node.type === 'Identifier' && node.name === glvar
+    && node.parent.type === 'MemberExpression'
+    && node.parent.property.name === 'file'
+    && node.parent.parent.type === 'CallExpression'
+    && node.parent.parent.arguments[0]
+}
+
+function isCallCompile (node, glvar) {
+  return node.type === 'Identifier' && node.name === glvar
+    && node.parent.type === 'MemberExpression'
+    && node.parent.property.name === 'compile'
+    && node.parent.parent.type === 'CallExpression'
+    && node.parent.parent.arguments[0]
+}

@@ -1,0 +1,8 @@
+node_modules/
+bower.json
+.travis.yml
+bower_components/
+.editorconfig
+test/
+npm-debug.log
+test.js

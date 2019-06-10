@@ -1,0 +1,284 @@
+var check = require('./util/check')
+var isTypedArray = require('./util/is-typed-array')
+var isNDArrayLike = require('./util/is-ndarray')
+var values = require('./util/values')
+
+var primTypes = require('./constants/primitives.json')
+var usageTypes = require('./constants/usage.json')
+
+var GL_POINTS = 0
+var GL_LINES = 1
+var GL_TRIANGLES = 4
+
+var GL_BYTE = 5120
+var GL_UNSIGNED_BYTE = 5121
+var GL_SHORT = 5122
+var GL_UNSIGNED_SHORT = 5123
+var GL_INT = 5124
+var GL_UNSIGNED_INT = 5125
+
+var GL_ELEMENT_ARRAY_BUFFER = 34963
+
+var GL_STREAM_DRAW = 0x88E0
+var GL_STATIC_DRAW = 0x88E4
+
+module.exports = function wrapElementsState (gl, extensions, bufferState, stats) {
+  var elementSet = {}
+  var elementCount = 0
+
+  var elementTypes = {
+    'uint8': GL_UNSIGNED_BYTE,
+    'uint16': GL_UNSIGNED_SHORT
+  }
+
+  if (extensions.oes_element_index_uint) {
+    elementTypes.uint32 = GL_UNSIGNED_INT
+  }
+
+  function REGLElementBuffer (buffer) {
+    this.id = elementCount++
+    elementSet[this.id] = this
+    this.buffer = buffer
+    this.primType = GL_TRIANGLES
+    this.vertCount = 0
+    this.type = 0
+  }
+
+  REGLElementBuffer.prototype.bind = function () {
+    this.buffer.bind()
+  }
+
+  var bufferPool = []
+
+  function createElementStream (data) {
+    var result = bufferPool.pop()
+    if (!result) {
+      result = new REGLElementBuffer(bufferState.create(
+        null,
+        GL_ELEMENT_ARRAY_BUFFER,
+        true,
+        false)._buffer)
+    }
+    initElements(result, data, GL_STREAM_DRAW, -1, -1, 0, 0)
+    return result
+  }
+
+  function destroyElementStream (elements) {
+    bufferPool.push(elements)
+  }
+
+  function initElements (
+    elements,
+    data,
+    usage,
+    prim,
+    count,
+    byteLength,
+    type) {
+    elements.buffer.bind()
+    if (data) {
+      var predictedType = type
+      if (!type && (
+          !isTypedArray(data) ||
+         (isNDArrayLike(data) && !isTypedArray(data.data)))) {
+        predictedType = extensions.oes_element_index_uint
+          ? GL_UNSIGNED_INT
+          : GL_UNSIGNED_SHORT
+      }
+      bufferState._initBuffer(
+        elements.buffer,
+        data,
+        usage,
+        predictedType,
+        3)
+    } else {
+      gl.bufferData(GL_ELEMENT_ARRAY_BUFFER, byteLength, usage)
+      elements.buffer.dtype = dtype || GL_UNSIGNED_BYTE
+      elements.buffer.usage = usage
+      elements.buffer.dimension = 3
+      elements.buffer.byteLength = byteLength
+    }
+
+    var dtype = type
+    if (!type) {
+      switch (elements.buffer.dtype) {
+        case GL_UNSIGNED_BYTE:
+        case GL_BYTE:
+          dtype = GL_UNSIGNED_BYTE
+          break
+
+        case GL_UNSIGNED_SHORT:
+        case GL_SHORT:
+          dtype = GL_UNSIGNED_SHORT
+          break
+
+        case GL_UNSIGNED_INT:
+        case GL_INT:
+          dtype = GL_UNSIGNED_INT
+          break
+
+        default:
+          check.raise('unsupported type for element array')
+      }
+      elements.buffer.dtype = dtype
+    }
+    elements.type = dtype
+
+    // Check oes_element_index_uint extension
+    check(
+      dtype !== GL_UNSIGNED_INT ||
+      !!extensions.oes_element_index_uint,
+      '32 bit element buffers not supported, enable oes_element_index_uint first')
+
+    // try to guess default primitive type and arguments
+    var vertCount = count
+    if (vertCount < 0) {
+      vertCount = elements.buffer.byteLength
+      if (dtype === GL_UNSIGNED_SHORT) {
+        vertCount >>= 1
+      } else if (dtype === GL_UNSIGNED_INT) {
+        vertCount >>= 2
+      }
+    }
+    elements.vertCount = vertCount
+
+    // try to guess primitive type from cell dimension
+    var primType = prim
+    if (prim < 0) {
+      primType = GL_TRIANGLES
+      var dimension = elements.buffer.dimension
+      if (dimension === 1) primType = GL_POINTS
+      if (dimension === 2) primType = GL_LINES
+      if (dimension === 3) primType = GL_TRIANGLES
+    }
+    elements.primType = primType
+  }
+
+  function destroyElements (elements) {
+    stats.elementsCount--
+
+    check(elements.buffer !== null, 'must not double destroy elements')
+    delete elementSet[elements.id]
+    elements.buffer.destroy()
+    elements.buffer = null
+  }
+
+  function createElements (options, persistent) {
+    var buffer = bufferState.create(null, GL_ELEMENT_ARRAY_BUFFER, true)
+    var elements = new REGLElementBuffer(buffer._buffer)
+    stats.elementsCount++
+
+    function reglElements (options) {
+      if (!options) {
+        buffer()
+        elements.primType = GL_TRIANGLES
+        elements.vertCount = 0
+        elements.type = GL_UNSIGNED_BYTE
+      } else if (typeof options === 'number') {
+        buffer(options)
+        elements.primType = GL_TRIANGLES
+        elements.vertCount = options | 0
+        elements.type = GL_UNSIGNED_BYTE
+      } else {
+        var data = null
+        var usage = GL_STATIC_DRAW
+        var primType = -1
+        var vertCount = -1
+        var byteLength = 0
+        var dtype = 0
+        if (Array.isArray(options) ||
+            isTypedArray(options) ||
+            isNDArrayLike(options)) {
+          data = options
+        } else {
+          check.type(options, 'object', 'invalid arguments for elements')
+          if ('data' in options) {
+            data = options.data
+            check(
+                Array.isArray(data) ||
+                isTypedArray(data) ||
+                isNDArrayLike(data),
+                'invalid data for element buffer')
+          }
+          if ('usage' in options) {
+            check.parameter(
+              options.usage,
+              usageTypes,
+              'invalid element buffer usage')
+            usage = usageTypes[options.usage]
+          }
+          if ('primitive' in options) {
+            check.parameter(
+              options.primitive,
+              primTypes,
+              'invalid element buffer primitive')
+            primType = primTypes[options.primitive]
+          }
+          if ('count' in options) {
+            check(
+              typeof options.count === 'number' && options.count >= 0,
+              'invalid vertex count for elements')
+            vertCount = options.count | 0
+          }
+          if ('type' in options) {
+            check.parameter(
+              options.type,
+              elementTypes,
+              'invalid buffer type')
+            dtype = elementTypes[options.type]
+          }
+          if ('length' in options) {
+            byteLength = options.length | 0
+          } else {
+            byteLength = vertCount
+            if (dtype === GL_UNSIGNED_SHORT || dtype === GL_SHORT) {
+              byteLength *= 2
+            } else if (dtype === GL_UNSIGNED_INT || dtype === GL_INT) {
+              byteLength *= 4
+            }
+          }
+        }
+        initElements(
+          elements,
+          data,
+          usage,
+          primType,
+          vertCount,
+          byteLength,
+          dtype)
+      }
+
+      return reglElements
+    }
+
+    reglElements(options)
+
+    reglElements._reglType = 'elements'
+    reglElements._elements = elements
+    reglElements.subdata = function (data, offset) {
+      buffer.subdata(data, offset)
+      return reglElements
+    }
+    reglElements.destroy = function () {
+      destroyElements(elements)
+    }
+
+    return reglElements
+  }
+
+  return {
+    create: createElements,
+    createStream: createElementStream,
+    destroyStream: destroyElementStream,
+    getElements: function (elements) {
+      if (typeof elements === 'function' &&
+          elements._elements instanceof REGLElementBuffer) {
+        return elements._elements
+      }
+      return null
+    },
+    clear: function () {
+      values(elementSet).forEach(destroyElements)
+    }
+  }
+}

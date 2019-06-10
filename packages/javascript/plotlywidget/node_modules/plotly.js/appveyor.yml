@@ -1,0 +1,14 @@
+environment:
+  nodejs_version: "10"
+
+install:
+  - ps: Install-Product node $env:nodejs_version
+  # faster than `npm install`
+  - npm ci
+
+test_script:
+  - node --version
+  - npm --version
+  - npm run test-jasmine -- lib --IE11
+
+build: off

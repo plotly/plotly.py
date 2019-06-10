@@ -1,0 +1,10 @@
+{
+  // comment a
+  "a": 1,
+  "c": {
+    // comment deep c
+    "c": 2,
+    // comment deep a
+    "a": 1
+  }
+}

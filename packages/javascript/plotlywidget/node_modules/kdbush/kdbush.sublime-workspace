@@ -1,0 +1,2112 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"rand",
+				"randomInt"
+			],
+			[
+				"resul",
+				"resultPoints"
+			],
+			[
+				"reusl",
+				"resultPoints"
+			],
+			[
+				"used",
+				"used_heap_size"
+			],
+			[
+				"ran",
+				"randomInt"
+			],
+			[
+				"random",
+				"randomPoint"
+			],
+			[
+				"Array",
+				"ArrayType"
+			],
+			[
+				"Arr",
+				"ArrayType"
+			],
+			[
+				"sq",
+				"sqDist"
+			],
+			[
+				"rando",
+				"randomPoint"
+			],
+			[
+				"sort",
+				"sortKD"
+			],
+			[
+				"arra",
+				"arrayIndex"
+			],
+			[
+				"vali",
+				"validateStyleKey"
+			],
+			[
+				"paint",
+				"paintProperty"
+			],
+			[
+				"valid",
+				"validateStyle"
+			],
+			[
+				"pain",
+				"paintProperty"
+			],
+			[
+				"layou",
+				"layoutProperty"
+			],
+			[
+				"valida",
+				"validateStyle"
+			],
+			[
+				"vaida",
+				"validateStyle"
+			],
+			[
+				"lao",
+				"layoutName"
+			],
+			[
+				"cal",
+				"calculatePosMatrix"
+			],
+			[
+				"previ",
+				"previousProgram"
+			],
+			[
+				"elem",
+				"elementGroups"
+			],
+			[
+				"_update",
+				"_updateLayer"
+			],
+			[
+				"layer",
+				"layerId"
+			],
+			[
+				"update",
+				"updatePaintTransitions"
+			],
+			[
+				"de",
+				"declaration"
+			],
+			[
+				"klas",
+				"klassDeclarations"
+			],
+			[
+				"decl",
+				"declaration"
+			],
+			[
+				"_layou",
+				"_layoutFunctions"
+			],
+			[
+				"_clas",
+				"_classes"
+			],
+			[
+				"create",
+				"createAnimationLoop"
+			],
+			[
+				"upda",
+				"updateConstantValues"
+			],
+			[
+				"declar",
+				"declarations"
+			],
+			[
+				"dec",
+				"declarations"
+			],
+			[
+				"declarat",
+				"declaration"
+			],
+			[
+				"ac",
+				"activeClasses"
+			],
+			[
+				"remove",
+				"removedNames"
+			],
+			[
+				"updte",
+				"updatePaintTransition"
+			],
+			[
+				"_pain",
+				"_paintDeclarations"
+			],
+			[
+				"_class",
+				"_classOptions"
+			],
+			[
+				"fake",
+				"fakeImage"
+			],
+			[
+				"drg",
+				"dragPan"
+			],
+			[
+				"up",
+				"updatedSources"
+			],
+			[
+				"_on",
+				"_onTouchMove"
+			],
+			[
+				"_mouse",
+				"_onMouseMove"
+			],
+			[
+				"strin",
+				"stringify"
+			],
+			[
+				"flo",
+				"flooredZoom"
+			],
+			[
+				"zoo",
+				"zoomHistory"
+			],
+			[
+				"zom",
+				"zoomHistory"
+			],
+			[
+				"_",
+				"_calculate"
+			],
+			[
+				"tran",
+				"transition"
+			],
+			[
+				"re",
+				"reference"
+			],
+			[
+				"_cal",
+				"_calculateTransitioned"
+			],
+			[
+				"tra",
+				"transition"
+			],
+			[
+				"_pa",
+				"_paintFunctions"
+			],
+			[
+				"layout",
+				"layoutName"
+			],
+			[
+				"_layout",
+				"_layoutFunctions"
+			],
+			[
+				"ref",
+				"refLayer"
+			],
+			[
+				"get",
+				"getPaintValue"
+			],
+			[
+				"proto",
+				"prototype"
+			],
+			[
+				"la",
+				"layoutName"
+			],
+			[
+				"reca",
+				"recalculateStatic"
+			],
+			[
+				"zoom",
+				"zoomHistory"
+			],
+			[
+				"_lay",
+				"_layoutKeys"
+			],
+			[
+				"_la",
+				"_layoutSpecifications"
+			],
+			[
+				"layers",
+				"layersById"
+			],
+			[
+				"_broad",
+				"_broadcastAllLayers"
+			],
+			[
+				"seri",
+				"serialized"
+			],
+			[
+				"for",
+				"for	for (…) {…}"
+			],
+			[
+				"mapbox",
+				"mapboxgl"
+			],
+			[
+				"max",
+				"maxCoveringZoom"
+			],
+			[
+				"Buf",
+				"BufferType"
+			],
+			[
+				"parent",
+				"parentCoord"
+			],
+			[
+				"dist",
+				"distance"
+			],
+			[
+				"place",
+				"placeAt"
+			],
+			[
+				"ang",
+				"angleWindowSize"
+			],
+			[
+				"label",
+				"labelLength"
+			],
+			[
+				"cont",
+				"continuedLine"
+			],
+			[
+				"labe",
+				"labelLength"
+			],
+			[
+				"from",
+				"fromID"
+			],
+			[
+				"fro",
+				"fromID"
+			],
+			[
+				"Tile",
+				"TileCoord"
+			],
+			[
+				"sour",
+				"sourceLayerId"
+			],
+			[
+				"buc",
+				"bucketsById"
+			],
+			[
+				"new",
+				"newBuffers"
+			],
+			[
+				"redo",
+				"redoPlacementAfterDone"
+			],
+			[
+				"coll",
+				"collisionDebug"
+			],
+			[
+				"featu",
+				"featureFilter"
+			],
+			[
+				"buck",
+				"buckets"
+			],
+			[
+				"all",
+				"allBuckets"
+			],
+			[
+				"other",
+				"otherBuckets"
+			],
+			[
+				"fil",
+				"filterNotEmpty"
+			],
+			[
+				"s",
+				"symbol"
+			],
+			[
+				"nee",
+				"needsIcons"
+			],
+			[
+				"needs",
+				"needsGlyphs"
+			],
+			[
+				"attr",
+				"attributes"
+			],
+			[
+				"att",
+				"attr"
+			],
+			[
+				"com",
+				"compareResolve"
+			],
+			[
+				"icons",
+				"iconsNeeded"
+			],
+			[
+				"gly",
+				"glyphsNeeded"
+			],
+			[
+				"symb",
+				"symbolBucketDone"
+			],
+			[
+				"gety",
+				"getSimpleGlyphs"
+			],
+			[
+				"icon",
+				"iconName"
+			],
+			[
+				"stack",
+				"stacks"
+			],
+			[
+				"font",
+				"fontName"
+			],
+			[
+				"code",
+				"codepoints"
+			],
+			[
+				"Symbo",
+				"SymbolBucket"
+			],
+			[
+				"bucket",
+				"bucket"
+			],
+			[
+				"sym",
+				"symbolBuckets"
+			],
+			[
+				"parse",
+				"parseBucket"
+			],
+			[
+				"sy",
+				"symbolBucketsLoaded"
+			],
+			[
+				"sm",
+				"symbolBucketsLoaded"
+			],
+			[
+				"symbo",
+				"symbolBuckets"
+			],
+			[
+				"depe",
+				"dependenciesLoaded"
+			],
+			[
+				"spri",
+				"spriteLoaded"
+			],
+			[
+				"dpe",
+				"dependentBuckets"
+			],
+			[
+				"news",
+				"newIcons"
+			],
+			[
+				"bucke",
+				"bucketsInOrder"
+			],
+			[
+				"prot",
+				"prototype"
+			],
+			[
+				"Sym",
+				"SymbolBucket"
+			],
+			[
+				"rot",
+				"rotationMatrix"
+			],
+			[
+				"comp",
+				"compareCenterDist"
+			],
+			[
+				"cent",
+				"centerDist"
+			],
+			[
+				"cen",
+				"centerDist"
+			],
+			[
+				"cover",
+				"covering"
+			],
+			[
+				"ord",
+				"orderedIDs"
+			],
+			[
+				"or",
+				"ordered"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "'use strict';\n\nvar kdbush = require('./src/kdbush');\n\nvar points = [];\nfor (var i = 0; i < 1000000; i++) {\n    points.push(randomPoint(1000));\n}\n\nconsole.time('index ' + points.length + ' points');\nvar index = kdbush(points,\n    (p) => p.x,\n    (p) => p.y);\nconsole.timeEnd('index ' + points.length + ' points');\n\nconsole.time('10000 small bbox queries');\nfor (var i = 0; i < 10000; i++) {\n    var p = randomPoint(1000);\n    index.range(p.x - 1, p.y - 1, p.x + 1, p.y + 1);\n}\nconsole.timeEnd('10000 small bbox queries');\n\n\nconsole.time('10000 small radius queries');\nfor (var i = 0; i < 10000; i++) {\n    var p = randomPoint(1000);\n    index.within(p.x, p.y, 1);\n}\nconsole.timeEnd('10000 small radius queries');\n\n\nfunction randomPoint(max) {\n    return {\n        x: randomInt(max),\n        y: randomInt(max)\n    };\n}\n\nfunction randomInt(max) {\n    return Math.floor(Math.random() * max);\n}\n",
+			"file": "debug.js",
+			"file_size": 890,
+			"file_write_time": 131045560820000000,
+			"settings":
+			{
+				"buffer_size": 890,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "bench.js",
+			"settings":
+			{
+				"buffer_size": 1026,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "test.js",
+			"settings":
+			{
+				"buffer_size": 3670,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "bench-rbush.js",
+			"settings":
+			{
+				"buffer_size": 731,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/kdbush.js",
+			"settings":
+			{
+				"buffer_size": 1192,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "package.json",
+			"settings":
+			{
+				"buffer_size": 607,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": ".travis.yml",
+			"settings":
+			{
+				"buffer_size": 48,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "README.md",
+			"settings":
+			{
+				"buffer_size": 1769,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/sort.js",
+			"settings":
+			{
+				"buffer_size": 1818,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/range.js",
+			"settings":
+			{
+				"buffer_size": 1178,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "'use strict';\n\nmodule.exports = nearestNeighbor;\n\nfunction nearestNeighbor(ids, coords, qx, qy, nodeSize) {\n    var stack = [0, ids.length - 1, 0];\n    var result = [];\n    var best = ids[0];\n    var bestDist = sqDist(coords[2 * best], coords[2 * best + 1], qx, qy);\n    var x, y;\n\n    while (stack.length) {\n        var axis = stack.pop();\n        var right = stack.pop();\n        var left = stack.pop();\n\n        if (right - left <= nodeSize) {\n            for (var i = left; i <= right; i++) {\n                x = coords[2 * i];\n                y = coords[2 * i + 1];\n                if (x >= minX && x <= maxX && y >= minY && y <= maxY) result.push(ids[i]);\n            }\n            continue;\n        }\n\n        var m = Math.floor((left + right) / 2);\n\n        x = coords[2 * m];\n        y = coords[2 * m + 1];\n\n        if (sqDist(x, y, qx, qx) < \n\n        if (x >= minX && x <= maxX && y >= minY && y <= maxY) result.push(ids[m]);\n\n        var nextAxis = (axis + 1) % 2;\n\n        if (axis === 0 ? minX <= x : minY <= y) {\n            stack.push(left);\n            stack.push(m - 1);\n            stack.push(nextAxis);\n        }\n        if (axis === 0 ? maxX >= x : maxY >= y) {\n            stack.push(m + 1);\n            stack.push(right);\n            stack.push(nextAxis);\n        }\n    }\n\n    return result;\n}\n\nfunction sqDist(ax, ay, bx, by) {\n    var dx = ax - bx;\n    var dy = ay - by;\n    return dx * dx + dy * dy;\n}\n",
+			"file": "src/nn.js",
+			"file_size": 1427,
+			"file_write_time": 131050096790000000,
+			"settings":
+			{
+				"buffer_size": 1428,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/within.js",
+			"settings":
+			{
+				"buffer_size": 1210,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "'use strict';\n\nmodule.exports = within;\n\nfunction within(ids, coords, qx, qy, r) {\n    var stack = [0, ids.length - 1, 0];\n    var result = [];\n\n    var minX = qx - r;\n    var minY = qy - r;\n    var maxX = qx + r;\n    var maxY = qy + r;\n    var r2 = r * r;\n\n    while (stack.length) {\n        var axis = stack.pop();\n        var right = stack.pop();\n        var left = stack.pop();\n\n        if (right - left <= 64) {\n            for (var i = left; i <= right; i++) {\n                if (sqDist(coords[2 * i], coords[2 * i + 1], qx, qy) <= r2) result.push(ids[i]);\n            }\n\n        } else {\n            var m = Math.floor((left + right) / 2);\n\n            var x = coords[2 * m];\n            var y = coords[2 * m + 1];\n            if (sqDist(x, y, qx, qy) <= r2) result.push(ids[m]);\n\n            var nextAxis = (axis + 1) % 2;\n            var val = axis === 0 ? x : y;\n\n            if ((axis === 0 ? minX : minY) <= val) {\n                stack.push(left);\n                stack.push(m);\n                stack.push(nextAxis);\n            }\n            if ((axis === 0 ? maxX : maxY) >= val) {\n                stack.push(m);\n                stack.push(right);\n                stack.push(nextAxis);\n            }\n        }\n    }\n\n    return result;\n}\n\nfunction sqDist(ax, ay, bx, by) {\n    var dx = ax - bx;\n    var dy = ay - by;\n    return dx * dx + dy * dy;\n}\n",
+			"file": "within.js",
+			"file_size": 1365,
+			"file_write_time": 131045472920000000,
+			"settings":
+			{
+				"buffer_size": 1365,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "'use strict';\n\nmodule.exports = range;\n\nfunction range(ids, coords, minX, minY, maxX, maxY) {\n    var stack = [0, ids.length - 1, 0];\n    var result = [];\n    var x, y;\n\n    while (stack.length) {\n        var axis = stack.pop();\n        var right = stack.pop();\n        var left = stack.pop();\n\n        if (right - left <= 64) {\n            for (var i = left; i <= right; i++) {\n                x = coords[2 * i];\n                y = coords[2 * i + 1];\n                if (x >= minX && x <= maxX && y >= minY && y <= maxY) result.push(ids[i]);\n            }\n\n        } else {\n            var m = Math.floor((left + right) / 2);\n\n            x = coords[2 * m];\n            y = coords[2 * m + 1];\n            if (x >= minX && x <= maxX && y >= minY && y <= maxY) result.push(ids[m]);\n\n            var nextAxis = (axis + 1) % 2;\n            var val = axis === 0 ? x : y;\n\n            if ((axis === 0 ? minX : minY) <= val) {\n                stack.push(left);\n                stack.push(m);\n                stack.push(nextAxis);\n            }\n            if ((axis === 0 ? maxX : maxY) >= val) {\n                stack.push(m);\n                stack.push(right);\n                stack.push(nextAxis);\n            }\n        }\n    }\n\n    return result;\n}\n",
+			"file": "range.js",
+			"file_size": 1248,
+			"file_write_time": 131045472830000000,
+			"settings":
+			{
+				"buffer_size": 1248,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 356.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"ja",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"col",
+				"Color Picker"
+			],
+			[
+				"colo",
+				"Color Picker"
+			],
+			[
+				"jso",
+				"Set Syntax: JSON"
+			],
+			[
+				"pret",
+				"Pretty JSON: Format (Pretty Print) JSON"
+			],
+			[
+				"java",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"pretty",
+				"Pretty JSON: Format (Pretty Print) JSON"
+			],
+			[
+				"spa",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"space",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"spac",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"mark",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"glsl",
+				"Set Syntax: OpenGL SL"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"install ",
+				"Package Control: Install Package"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 431.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/mourner/projects/kdbush",
+		"/Users/mourner/projects/kdbush/src"
+	],
+	"file_history":
+	[
+		"/Users/mourner/projects/kdbush/debug-rbush.js",
+		"/Users/mourner/projects/kdbush/index.js",
+		"/Users/mourner/projects/kdbush/select.js",
+		"/Users/mourner/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/mourner/projects/mapbox-gl-js/test/js/geo/transform.test.js",
+		"/Users/mourner/projects/mapbox-gl-js/test/testutil/fixed.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/source/tile_coord.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/render/draw_line.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/style/style_declaration.js",
+		"/Users/mourner/projects/mapbox-gl-js/debug/site.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/util/util.js",
+		"/Users/mourner/projects/mapbox-gl-js/test/js/style/style.test.js",
+		"/Users/mourner/projects/mapbox-gl-js/test/js/ui/map.test.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/source/source.js",
+		"/Users/mourner/projects/mapbox-gl-js/mapbox-gl-js.sublime-project",
+		"/Users/mourner/projects/mapbox-gl-js/test/js/style/style_layer.test.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/source/vector_tile_source.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/style/style_transition.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/ui/map.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/source/geojson_source.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/style/style.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/style/style_layer.js",
+		"/Users/mourner/projects/mapbox-gl-js/package.json",
+		"/Users/mourner/projects/mapbox-gl-js/js/source/worker.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/util/ajax.js",
+		"/Users/mourner/projects/mapbox-gl-js/ci.sh",
+		"/Users/mourner/projects/mapbox-gl-js/docs/_posts/examples/3400-01-01-cluster.html",
+		"/Users/mourner/projects/mapbox-gl-js/circle.yml",
+		"/Users/mourner/projects/mapbox-gl-js/.eslintrc",
+		"/Users/mourner/projects/mapbox-gl-js/js/data/bucket.js",
+		"/Users/mourner/projects/mapbox-gl-js/test/js/data/fill_bucket.test.js",
+		"/Users/mourner/projects/mapbox-gl-js/server.js",
+		"/Users/mourner/projects/mapbox-gl-js/test/suite_implementation.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/util/canvas.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/util/browser.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/util/dispatcher.js",
+		"/Users/mourner/projects/mapbox-gl-js/test/render.test.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/render/painter.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/style/animation_loop.js",
+		"/Users/mourner/projects/mapbox-gl-js/docs/_posts/examples/3400-01-01-setstyle.html",
+		"/Users/mourner/projects/mapbox-gl-js/debug/index.html",
+		"/Users/mourner/projects/mapbox-gl-js/CHANGELOG.md",
+		"/Users/mourner/projects/mapbox-gl-js/js/render/draw_symbol.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/source/worker_tile.js",
+		"/Users/mourner/projects/mapbox-gl-js/docs/_posts/examples/3400-01-01-heatmap.html",
+		"/Users/mourner/projects/mapbox-gl-js/js/util/browser/dispatcher.js",
+		"/Users/mourner/projects/mapbox-gl-js/perf.log",
+		"/Users/mourner/projects/mapbox-gl-js/docs/api/index.html",
+		"/Users/mourner/projects/mapbox-gl-js/docs/_posts/examples/3400-01-22-measure.html",
+		"/Users/mourner/projects/mapbox-gl-js/bench/buffer_benchmark.js",
+		"/Users/mourner/projects/mapbox-gl-js/test-times.txt",
+		"/Users/mourner/projects/mapbox-gl-js/js/util/evented.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/render/draw_background.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/style/style_batch.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/source/geojson_wrapper.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/ui/interaction.js",
+		"/Users/mourner/projects/mapbox-gl-js/dist/mapbox-gl.css",
+		"/Users/mourner/projects/mapbox-gl-js/js/util/browser/dom.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/ui/handler/drag_pan.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/mapbox-gl.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/data/bucket/symbol_bucket.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/style/style_layer/line_style_layer.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/util/actor.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/util/browser/ajax.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/style/style_layer/symbol_style_layer.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/util/browser/browser.js",
+		"/Users/mourner/projects/mapbox-gl-js/docs/site.css",
+		"/Users/mourner/projects/mapbox-gl-js/js/render/draw_debug.js",
+		"/Users/mourner/projects/mapbox-gl-js/test/js/util/util.test.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/util/classify_rings.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/data/circle_bucket.js",
+		"/Users/mourner/projects/mapbox-gl-js/debug/route.json",
+		"/Users/mourner/projects/mapbox-gl-js/js/ui/camera.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/geo/transform.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/render/draw_circle.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/data/symbol_bucket.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/data/buffer.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/geo/lng_lat.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/source/tile_pyramid.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/data/fill_bucket.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/render/draw_fill.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/data/element_groups.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/data/buffer_set.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/source/tile.js",
+		"/Users/mourner/projects/mapbox-gl-js/debug/streets-v8.json",
+		"/Users/mourner/projects/mapbox-gl-js/js/symbol/get_anchors.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/render/gl_util.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/symbol/mergelines.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/symbol/resolve_text.js",
+		"/Users/mourner/projects/mapbox-gl-js/debug/style.json",
+		"/Users/mourner/projects/mapbox-gl-js/js/data/buffer/fill_elements_buffer.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/util/interpolate.js",
+		"/Users/mourner/projects/mapbox-gl-js/test/js/symbol/resolve_text.test.js",
+		"/Users/mourner/projects/mapbox-gl-js/test/js/data/symbol_bucket.test.js",
+		"/Users/mourner/projects/mapbox-gl-js/test/js/source/worker_tile.test.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/util/glyphs.js",
+		"/Users/mourner/projects/mapbox-gl-js/bench/fps/site.js",
+		"/Users/mourner/projects/mapbox-gl-js/bench/bucket-stats/site.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/data/create_bucket.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/symbol/glyph_source.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/symbol/sprite_atlas.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/data/line_bucket.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/symbol/glyph_atlas.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/symbol/resolve_icons.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/style/paint_properties.js",
+		"/Users/mourner/projects/mapbox-gl-js/test/js/source/tile_pyramid.test.js",
+		"/Users/mourner/projects/mapbox-gl-js/test/js/ui/camera.test.js",
+		"/Users/mourner/projects/mapbox-gl-js/test/js/source/geojson_source.test.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/geo/coordinate.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/render/line_atlas.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/data/buffer/line_vertex_buffer.js",
+		"/Users/mourner/projects/mapbox-gl-js/test/js/data/line_bucket.test.js",
+		"/Users/mourner/projects/mapbox-gl-js/test/js/data/create_bucket.test.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/render/draw_vertices.js",
+		"/Users/mourner/projects/mapbox-gl-js/test/js/buffer/buffer.test.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/data/buffer/collision_box_vertex_buffer.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/render/draw_collision_debug.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/data/buffer/symbol_vertex_buffer.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/data/buffer/outline_element_buffer.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/data/buffer/triangle_element_buffer.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/data/buffer/fill_vertex_buffer.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/data/buffer/circle_vertex_buffer.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/data/buffer/glyph_vertex_buffer.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/data/buffer/line_element_buffer.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/data/buffer/buffer_set.js",
+		"/Users/mourner/projects/mapbox-gl-js/test/js/buffer/icon_vertex_buffer.test.js",
+		"/Users/mourner/projects/mapbox-gl-js/test/js/buffer/fill_vertex_buffer.test.js",
+		"/Users/mourner/projects/mapbox-gl-js/js/data/buffer/icon_vertex_buffer.js"
+	],
+	"find":
+	{
+		"height": 48.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"99",
+			"p.",
+			" ",
+			"resultPoints[i]",
+			"coords",
+			"ids",
+			"1",
+			"Axis",
+			"axis",
+			"Axis",
+			"axis",
+			"Axis",
+			"axis",
+			"arrayType",
+			"kdbush",
+			"ArrayType",
+			"arrayType",
+			"ids, coords, ",
+			"Int32Array",
+			"kdbush",
+			"within",
+			"range",
+			"Int32Array",
+			"Float32Array",
+			"var ",
+			"16",
+			"1",
+			"sortKDFlat",
+			"10",
+			"1",
+			"coords, ids, ",
+			"Int32Array",
+			"arr",
+			"3",
+			"swapItem",
+			"arr",
+			"points",
+			"d, ",
+			"1",
+			"d * ",
+			" * d",
+			", d",
+			"d, ",
+			"d",
+			"Flat",
+			"flat",
+			"swapItem",
+			"d",
+			"swapItem",
+			"3",
+			"swapTriple",
+			"compare(",
+			"swap",
+			"arr[",
+			"sort",
+			"quickselect",
+			"partialSort",
+			"flat",
+			"unserializeLayers",
+			"layers",
+			"createLayerFamilies",
+			"layer = this.childLayers",
+			"layer = this.childLayers[0]",
+			"layer = this.childLayers[0] && ",
+			"StructArrayType(",
+			"stringif",
+			"package.",
+			"calculatePosMatrix",
+			"EXTENT",
+			"tilecoord",
+			"transform",
+			"_calcProjMatrix",
+			"posmatrix",
+			"calculateposmatrix",
+			"_validateLayer",
+			"validatestyle",
+			"_hasErrors",
+			"throwerro",
+			"emiterrors",
+			"throws",
+			"validatestyle",
+			"haserrors",
+			"validatest",
+			"getDeclarationValue",
+			"validate",
+			"_updateLayoutValue",
+			"_updateConstantValues",
+			"fixedcoord",
+			"pointcoordinate",
+			"getDash",
+			"draw",
+			"_renderTileClippingMasks",
+			"calculatePosMatrix",
+			"calculate",
+			"mat2",
+			"posmatr",
+			"sources",
+			"renderLayer",
+			"renderpass",
+			"draw",
+			"maxzoom",
+			"maxZoom",
+			"calculatePosMatrix",
+			"_redoTilePlacement",
+			"redoplacement",
+			"rotate",
+			"_redoPlacement",
+			"rotate",
+			"recalculate",
+			"zoomHistory",
+			"(i",
+			"getlayoutval",
+			"updateConstantValues",
+			"updateLayoutValue",
+			"applyPaintDeclaration",
+			".lastZoom",
+			"recalculate(",
+			"zoomHistory",
+			"getlayoutvalue",
+			"calculate",
+			"getlayoutvalue",
+			"recalculate",
+			"var bucket",
+			"_createProgram",
+			"previousProgram.numAttributes",
+			"nextProgram.numAttributes",
+			"objectValues",
+			"var "
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"updateTransitions",
+			"\"interactive\": false"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "debug.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 890,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								631,
+								631
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "bench.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1026,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								624,
+								624
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "test.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3670,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								121,
+								947
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "bench-rbush.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 731,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								440,
+								440
+							],
+							[
+								450,
+								450
+							],
+							[
+								460,
+								460
+							],
+							[
+								470,
+								470
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/kdbush.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1192,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								386,
+								386
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "package.json",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 607,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								446,
+								446
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": ".travis.yml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 48,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								33,
+								33
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/YAML/YAML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "README.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1769,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								239,
+								239
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/Markdown/Markdown.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "src/sort.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1818,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								472,
+								472
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 415.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "src/range.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1178,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								40,
+								1178
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 55.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "src/nn.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1428,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								707,
+								707
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "src/within.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1210,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								299,
+								299
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "within.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1365,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								831,
+								831
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "range.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1248,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								523,
+								523
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 13,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 24.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "kdbush.sublime-project",
+	"replace":
+	{
+		"height": 44.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"work",
+				"js/source/worker.js"
+			],
+			[
+				"ser",
+				"server.js"
+			],
+			[
+				"linebu",
+				"js/data/bucket/line_bucket.js"
+			],
+			[
+				"stru",
+				"js/util/struct_array.js"
+			],
+			[
+				"draw",
+				"js/render/draw_fill.js"
+			],
+			[
+				"draw_ra",
+				"js/render/draw_raster.js"
+			],
+			[
+				"tran",
+				"js/geo/transform.js"
+			],
+			[
+				"tile",
+				"js/source/tile_coord.js"
+			],
+			[
+				"pain",
+				"js/render/painter.js"
+			],
+			[
+				"map.te",
+				"test/js/ui/map.test.js"
+			],
+			[
+				"tile_",
+				"test/js/source/tile_coord.test.js"
+			],
+			[
+				"pa",
+				"js/render/painter.js"
+			],
+			[
+				"coo",
+				"js/geo/coordinate.js"
+			],
+			[
+				"coordin",
+				"js/geo/coordinate.js"
+			],
+			[
+				"sty",
+				"js/style/style.js"
+			],
+			[
+				"fixed",
+				"test/testutil/fixed.js"
+			],
+			[
+				"transform",
+				"test/js/geo/transform.test.js"
+			],
+			[
+				"coor",
+				"js/geo/coordinate.js"
+			],
+			[
+				"style",
+				"js/style/style.js"
+			],
+			[
+				"coordi",
+				"js/geo/coordinate.js"
+			],
+			[
+				"coord",
+				"js/source/tile_coord.js"
+			],
+			[
+				"vec",
+				"js/source/vector_tile_source.js"
+			],
+			[
+				"sour",
+				"js/source/source.js"
+			],
+			[
+				"map",
+				"js/ui/map.js"
+			],
+			[
+				"stylela",
+				"js/style/style_layer.js"
+			],
+			[
+				"stylet",
+				"js/style/style_transition.js"
+			],
+			[
+				"declar",
+				"js/style/style_declaration.js"
+			],
+			[
+				"drawl",
+				"js/render/draw_line.js"
+			],
+			[
+				"util",
+				"js/util/util.js"
+			],
+			[
+				"sou",
+				"js/source/source.js"
+			],
+			[
+				"renderp",
+				"js/render/painter.js"
+			],
+			[
+				"canvas",
+				"js/util/browser/canvas.js"
+			],
+			[
+				"style_layer.te",
+				"test/js/style/style_layer.test.js"
+			],
+			[
+				"style.te",
+				"test/js/style/style.test.js"
+			],
+			[
+				"si",
+				"debug/site.js"
+			],
+			[
+				"style_la",
+				"test/js/style/style_layer.test.js"
+			],
+			[
+				"",
+				"js/style/style.js"
+			],
+			[
+				"styl",
+				"js/style/style.js"
+			],
+			[
+				"style._",
+				"test/js/style/style_layer.test.js"
+			],
+			[
+				"style_d",
+				"js/style/style_declaration.js"
+			],
+			[
+				"geoj",
+				"js/source/geojson_source.js"
+			],
+			[
+				"site",
+				"debug/site.js"
+			],
+			[
+				"styletra",
+				"js/style/style_transition.js"
+			],
+			[
+				"stylelay",
+				"js/style/style_layer.js"
+			],
+			[
+				"clu",
+				"docs/_posts/examples/3400-01-01-cluster.html"
+			],
+			[
+				"packa",
+				"package.json"
+			],
+			[
+				"draw_s",
+				"js/render/draw_symbol.js"
+			],
+			[
+				"geojs",
+				"js/source/geojson_source.js"
+			],
+			[
+				"worker",
+				"js/source/worker_tile.js"
+			],
+			[
+				"in",
+				"debug/index.html"
+			],
+			[
+				"painter",
+				"js/render/painter.js"
+			],
+			[
+				"buck",
+				"js/data/bucket.js"
+			],
+			[
+				"fill",
+				"test/js/data/fill_bucket.test.js"
+			],
+			[
+				"ci.",
+				"ci.sh"
+			],
+			[
+				"aja",
+				"js/util/ajax.js"
+			],
+			[
+				"disp",
+				"js/util/dispatcher.js"
+			],
+			[
+				"di",
+				"js/util/browser/dispatcher.js"
+			],
+			[
+				"bro",
+				"js/util/browser.js"
+			],
+			[
+				"canva",
+				"js/util/canvas.js"
+			],
+			[
+				"ren",
+				"test/render.test.js"
+			],
+			[
+				"perf",
+				"perf.log"
+			],
+			[
+				"render",
+				"test/render.test.js"
+			],
+			[
+				"ajax",
+				"js/util/ajax.js"
+			],
+			[
+				"anim",
+				"js/style/animation_loop.js"
+			],
+			[
+				"brows",
+				"js/util/browser.js"
+			],
+			[
+				"rende",
+				"test/render.test.js"
+			],
+			[
+				"suite",
+				"test/suite_implementation.js"
+			],
+			[
+				"lay",
+				"js/style/style_layer.js"
+			],
+			[
+				"ind",
+				"debug/index.html"
+			],
+			[
+				"examples",
+				"docs/_posts/examples/3400-01-01-setstyle.html"
+			],
+			[
+				"test",
+				"test-times.txt"
+			],
+			[
+				"pac",
+				"package.json"
+			],
+			[
+				"style.",
+				"js/style/style.js"
+			],
+			[
+				"st",
+				"js/style/style_layer.js"
+			],
+			[
+				"layer",
+				"js/style/style_layer.js"
+			],
+			[
+				"even",
+				"js/util/evented.js"
+			],
+			[
+				"geojson",
+				"js/source/geojson_wrapper.js"
+			],
+			[
+				"browser",
+				"js/util/browser/browser.js"
+			],
+			[
+				"mapbox",
+				"dist/mapbox-gl.css"
+			],
+			[
+				"css",
+				"docs/site.css"
+			],
+			[
+				"dom",
+				"js/util/browser/dom.js"
+			],
+			[
+				"inter",
+				"js/ui/interaction.js"
+			],
+			[
+				"brwo",
+				"js/util/browser/browser.js"
+			],
+			[
+				"util/br",
+				"js/util/browser.js"
+			],
+			[
+				"drag",
+				"js/ui/handler/drag_pan.js"
+			],
+			[
+				"inte",
+				"js/ui/interaction.js"
+			],
+			[
+				"stl",
+				"js/style/style_layer.js"
+			],
+			[
+				"acto",
+				"js/util/actor.js"
+			],
+			[
+				"act",
+				"js/util/actor.js"
+			],
+			[
+				"wor",
+				"js/source/worker.js"
+			],
+			[
+				"styletest",
+				"test/js/style/style.test.js"
+			],
+			[
+				"symb",
+				"js/style/style_layer/symbol_style_layer.js"
+			],
+			[
+				"styleb",
+				"js/style/style_batch.js"
+			],
+			[
+				"clas",
+				"js/util/classify_rings.js"
+			],
+			[
+				"style.tes",
+				"test/js/style/style.test.js"
+			],
+			[
+				"batch",
+				"js/style/style_batch.js"
+			],
+			[
+				"style.test",
+				"test/js/style/style.test.js"
+			],
+			[
+				"lng",
+				"js/geo/lng_lat.js"
+			],
+			[
+				"route",
+				"debug/route.json"
+			],
+			[
+				"cam",
+				"js/ui/camera.js"
+			],
+			[
+				"styled",
+				"js/style/style_declaration.js"
+			],
+			[
+				"buf",
+				"js/data/buffer.js"
+			],
+			[
+				"ciur",
+				"js/data/circle_bucket.js"
+			],
+			[
+				"tilecoo",
+				"js/source/tile_coord.js"
+			],
+			[
+				"pack",
+				"package.json"
+			],
+			[
+				"py",
+				"js/source/tile_pyramid.js"
+			],
+			[
+				"til",
+				"js/source/tile_coord.js"
+			],
+			[
+				"pyr",
+				"js/source/tile_pyramid.js"
+			],
+			[
+				"tileco",
+				"js/source/tile_coord.js"
+			],
+			[
+				"tilec",
+				"js/source/tile_coord.js"
+			],
+			[
+				"tilep",
+				"js/source/tile_pyramid.js"
+			],
+			[
+				"class",
+				"js/util/classify_rings.js"
+			],
+			[
+				"fill_",
+				"test/js/data/fill_bucket.test.js"
+			],
+			[
+				"fillb",
+				"js/data/fill_bucket.js"
+			],
+			[
+				"ele",
+				"js/data/element_groups.js"
+			],
+			[
+				"buffe",
+				"js/data/buffer_set.js"
+			],
+			[
+				"fil",
+				"js/data/fill_bucket.js"
+			],
+			[
+				"elem",
+				"js/data/element_groups.js"
+			],
+			[
+				"ancho",
+				"js/symbol/get_anchors.js"
+			],
+			[
+				"merg",
+				"js/symbol/mergelines.js"
+			],
+			[
+				"stre",
+				"debug/streets-v8.json"
+			],
+			[
+				"resol",
+				"js/symbol/resolve_text.js"
+			],
+			[
+				"wo",
+				"js/source/worker_tile.js"
+			],
+			[
+				"creat",
+				"js/data/create_bucket.js"
+			],
+			[
+				"crea",
+				"js/data/create_bucket.js"
+			],
+			[
+				"create",
+				"js/data/create_bucket.js"
+			],
+			[
+				"geojson_",
+				"js/source/geojson_source.js"
+			],
+			[
+				"lineb",
+				"js/data/line_bucket.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "sup",
+		"selected_items":
+		[
+			[
+				"sup",
+				"~/projects/supercluster/supercluster.sublime-project"
+			],
+			[
+				"ear",
+				"~/projects/earcut/earcut.sublime-project"
+			],
+			[
+				"l",
+				"~/projects/Leaflet/Leaflet.sublime-project"
+			],
+			[
+				"rb",
+				"~/projects/rbush/rbush.sublime-project"
+			],
+			[
+				"geob",
+				"~/projects/geobuf/geobuf.sublime-project"
+			],
+			[
+				"lea",
+				"~/projects/Leaflet/Leaflet.sublime-project"
+			],
+			[
+				"",
+				"~/projects/Leaflet/Leaflet.sublime-project"
+			],
+			[
+				"geoj",
+				"~/projects/geojson-vt/geojson-vt.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 249.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

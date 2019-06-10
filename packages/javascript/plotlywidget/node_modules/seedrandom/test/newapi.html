@@ -1,0 +1,44 @@
+<html>
+<head>
+<link rel="stylesheet" href="lib/qunit.css">
+</head>
+<body>
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+<script src="lib/qunit.js"></script>
+<script src="../seedrandom.min.js"></script>
+<script>
+QUnit.module("New API Test");
+
+QUnit.test("Check that we can use new", function(assert) {
+
+assert.ok(true, "Seeded random created with new:");
+var check = [];
+var prng = new Math.seedrandom(1);
+var r;
+for (var j = 0; j < 5; ++j) {
+  r = prng();
+  assert.ok(true, r);
+  check.push(r);
+}
+assert.ok(true, "Native random:");
+for (var j = 0; j < 5; ++j) {
+  r = Math.random();
+  assert.ok(true, r);
+  check.push(r);
+}
+var seed = Math.seedrandom(1);
+assert.ok(true, "Overridden random without new " +
+  "(return value " + seed + "):");
+for (var j = 0; j < 10; ++j) {
+  r = Math.random();
+  if (j < 5) {
+    assert.equal(check[j], r, r + " vs " + check[j]);
+  } else {
+    assert.ok(check[j] != r, "unequal: " + r + " vs " + check[j]);
+  }
+}
+});
+</script>
+</body>
+</html>

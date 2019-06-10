@@ -1,0 +1,916 @@
+var check = require('./util/check')
+var values = require('./util/values')
+var extend = require('./util/extend')
+
+// We store these constants so that the minifier can inline them
+var GL_FRAMEBUFFER = 0x8D40
+var GL_RENDERBUFFER = 0x8D41
+
+var GL_TEXTURE_2D = 0x0DE1
+var GL_TEXTURE_CUBE_MAP_POSITIVE_X = 0x8515
+
+var GL_COLOR_ATTACHMENT0 = 0x8CE0
+var GL_DEPTH_ATTACHMENT = 0x8D00
+var GL_STENCIL_ATTACHMENT = 0x8D20
+var GL_DEPTH_STENCIL_ATTACHMENT = 0x821A
+
+var GL_FRAMEBUFFER_COMPLETE = 0x8CD5
+var GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT = 0x8CD6
+var GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT = 0x8CD7
+var GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS = 0x8CD9
+var GL_FRAMEBUFFER_UNSUPPORTED = 0x8CDD
+
+var GL_HALF_FLOAT_OES = 0x8D61
+var GL_UNSIGNED_BYTE = 0x1401
+var GL_FLOAT = 0x1406
+
+var GL_RGB = 0x1907
+var GL_RGBA = 0x1908
+
+var GL_DEPTH_COMPONENT = 0x1902
+
+var colorTextureFormatEnums = [
+  GL_RGB,
+  GL_RGBA
+]
+
+// for every texture format, store
+// the number of channels
+var textureFormatChannels = []
+textureFormatChannels[GL_RGBA] = 4
+textureFormatChannels[GL_RGB] = 3
+
+// for every texture type, store
+// the size in bytes.
+var textureTypeSizes = []
+textureTypeSizes[GL_UNSIGNED_BYTE] = 1
+textureTypeSizes[GL_FLOAT] = 4
+textureTypeSizes[GL_HALF_FLOAT_OES] = 2
+
+var GL_RGBA4 = 0x8056
+var GL_RGB5_A1 = 0x8057
+var GL_RGB565 = 0x8D62
+var GL_DEPTH_COMPONENT16 = 0x81A5
+var GL_STENCIL_INDEX8 = 0x8D48
+var GL_DEPTH_STENCIL = 0x84F9
+
+var GL_SRGB8_ALPHA8_EXT = 0x8C43
+
+var GL_RGBA32F_EXT = 0x8814
+
+var GL_RGBA16F_EXT = 0x881A
+var GL_RGB16F_EXT = 0x881B
+
+var colorRenderbufferFormatEnums = [
+  GL_RGBA4,
+  GL_RGB5_A1,
+  GL_RGB565,
+  GL_SRGB8_ALPHA8_EXT,
+  GL_RGBA16F_EXT,
+  GL_RGB16F_EXT,
+  GL_RGBA32F_EXT
+]
+
+var statusCode = {}
+statusCode[GL_FRAMEBUFFER_COMPLETE] = 'complete'
+statusCode[GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT] = 'incomplete attachment'
+statusCode[GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS] = 'incomplete dimensions'
+statusCode[GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT] = 'incomplete, missing attachment'
+statusCode[GL_FRAMEBUFFER_UNSUPPORTED] = 'unsupported'
+
+module.exports = function wrapFBOState (
+  gl,
+  extensions,
+  limits,
+  textureState,
+  renderbufferState,
+  stats) {
+  var framebufferState = {
+    cur: null,
+    next: null,
+    dirty: false,
+    setFBO: null
+  }
+
+  var colorTextureFormats = ['rgba']
+  var colorRenderbufferFormats = ['rgba4', 'rgb565', 'rgb5 a1']
+
+  if (extensions.ext_srgb) {
+    colorRenderbufferFormats.push('srgba')
+  }
+
+  if (extensions.ext_color_buffer_half_float) {
+    colorRenderbufferFormats.push('rgba16f', 'rgb16f')
+  }
+
+  if (extensions.webgl_color_buffer_float) {
+    colorRenderbufferFormats.push('rgba32f')
+  }
+
+  var colorTypes = ['uint8']
+  if (extensions.oes_texture_half_float) {
+    colorTypes.push('half float', 'float16')
+  }
+  if (extensions.oes_texture_float) {
+    colorTypes.push('float', 'float32')
+  }
+
+  function FramebufferAttachment (target, texture, renderbuffer) {
+    this.target = target
+    this.texture = texture
+    this.renderbuffer = renderbuffer
+
+    var w = 0
+    var h = 0
+    if (texture) {
+      w = texture.width
+      h = texture.height
+    } else if (renderbuffer) {
+      w = renderbuffer.width
+      h = renderbuffer.height
+    }
+    this.width = w
+    this.height = h
+  }
+
+  function decRef (attachment) {
+    if (attachment) {
+      if (attachment.texture) {
+        attachment.texture._texture.decRef()
+      }
+      if (attachment.renderbuffer) {
+        attachment.renderbuffer._renderbuffer.decRef()
+      }
+    }
+  }
+
+  function incRefAndCheckShape (attachment, width, height) {
+    if (!attachment) {
+      return
+    }
+    if (attachment.texture) {
+      var texture = attachment.texture._texture
+      var tw = Math.max(1, texture.width)
+      var th = Math.max(1, texture.height)
+      check(tw === width && th === height,
+        'inconsistent width/height for supplied texture')
+      texture.refCount += 1
+    } else {
+      var renderbuffer = attachment.renderbuffer._renderbuffer
+      check(
+        renderbuffer.width === width && renderbuffer.height === height,
+        'inconsistent width/height for renderbuffer')
+      renderbuffer.refCount += 1
+    }
+  }
+
+  function attach (location, attachment) {
+    if (attachment) {
+      if (attachment.texture) {
+        gl.framebufferTexture2D(
+          GL_FRAMEBUFFER,
+          location,
+          attachment.target,
+          attachment.texture._texture.texture,
+          0)
+      } else {
+        gl.framebufferRenderbuffer(
+          GL_FRAMEBUFFER,
+          location,
+          GL_RENDERBUFFER,
+          attachment.renderbuffer._renderbuffer.renderbuffer)
+      }
+    }
+  }
+
+  function parseAttachment (attachment) {
+    var target = GL_TEXTURE_2D
+    var texture = null
+    var renderbuffer = null
+
+    var data = attachment
+    if (typeof attachment === 'object') {
+      data = attachment.data
+      if ('target' in attachment) {
+        target = attachment.target | 0
+      }
+    }
+
+    check.type(data, 'function', 'invalid attachment data')
+
+    var type = data._reglType
+    if (type === 'texture2d') {
+      texture = data
+      check(target === GL_TEXTURE_2D)
+    } else if (type === 'textureCube') {
+      texture = data
+      check(
+        target >= GL_TEXTURE_CUBE_MAP_POSITIVE_X &&
+        target < GL_TEXTURE_CUBE_MAP_POSITIVE_X + 6,
+        'invalid cube map target')
+    } else if (type === 'renderbuffer') {
+      renderbuffer = data
+      target = GL_RENDERBUFFER
+    } else {
+      check.raise('invalid regl object for attachment')
+    }
+
+    return new FramebufferAttachment(target, texture, renderbuffer)
+  }
+
+  function allocAttachment (
+    width,
+    height,
+    isTexture,
+    format,
+    type) {
+    if (isTexture) {
+      var texture = textureState.create2D({
+        width: width,
+        height: height,
+        format: format,
+        type: type
+      })
+      texture._texture.refCount = 0
+      return new FramebufferAttachment(GL_TEXTURE_2D, texture, null)
+    } else {
+      var rb = renderbufferState.create({
+        width: width,
+        height: height,
+        format: format
+      })
+      rb._renderbuffer.refCount = 0
+      return new FramebufferAttachment(GL_RENDERBUFFER, null, rb)
+    }
+  }
+
+  function unwrapAttachment (attachment) {
+    return attachment && (attachment.texture || attachment.renderbuffer)
+  }
+
+  function resizeAttachment (attachment, w, h) {
+    if (attachment) {
+      if (attachment.texture) {
+        attachment.texture.resize(w, h)
+      } else if (attachment.renderbuffer) {
+        attachment.renderbuffer.resize(w, h)
+      }
+      attachment.width = w
+      attachment.height = h
+    }
+  }
+
+  var framebufferCount = 0
+  var framebufferSet = {}
+
+  function REGLFramebuffer () {
+    this.id = framebufferCount++
+    framebufferSet[this.id] = this
+
+    this.framebuffer = gl.createFramebuffer()
+    this.width = 0
+    this.height = 0
+
+    this.colorAttachments = []
+    this.depthAttachment = null
+    this.stencilAttachment = null
+    this.depthStencilAttachment = null
+  }
+
+  function decFBORefs (framebuffer) {
+    framebuffer.colorAttachments.forEach(decRef)
+    decRef(framebuffer.depthAttachment)
+    decRef(framebuffer.stencilAttachment)
+    decRef(framebuffer.depthStencilAttachment)
+  }
+
+  function destroy (framebuffer) {
+    var handle = framebuffer.framebuffer
+    check(handle, 'must not double destroy framebuffer')
+    gl.deleteFramebuffer(handle)
+    framebuffer.framebuffer = null
+    stats.framebufferCount--
+    delete framebufferSet[framebuffer.id]
+  }
+
+  function updateFramebuffer (framebuffer) {
+    var i
+
+    gl.bindFramebuffer(GL_FRAMEBUFFER, framebuffer.framebuffer)
+    var colorAttachments = framebuffer.colorAttachments
+    for (i = 0; i < colorAttachments.length; ++i) {
+      attach(GL_COLOR_ATTACHMENT0 + i, colorAttachments[i])
+    }
+    for (i = colorAttachments.length; i < limits.maxColorAttachments; ++i) {
+      gl.framebufferTexture2D(
+        GL_FRAMEBUFFER,
+        GL_COLOR_ATTACHMENT0 + i,
+        GL_TEXTURE_2D,
+        null,
+        0)
+    }
+
+    gl.framebufferTexture2D(
+      GL_FRAMEBUFFER,
+      GL_DEPTH_STENCIL_ATTACHMENT,
+      GL_TEXTURE_2D,
+      null,
+      0)
+    gl.framebufferTexture2D(
+      GL_FRAMEBUFFER,
+      GL_DEPTH_ATTACHMENT,
+      GL_TEXTURE_2D,
+      null,
+      0)
+    gl.framebufferTexture2D(
+      GL_FRAMEBUFFER,
+      GL_STENCIL_ATTACHMENT,
+      GL_TEXTURE_2D,
+      null,
+      0)
+
+    attach(GL_DEPTH_ATTACHMENT, framebuffer.depthAttachment)
+    attach(GL_STENCIL_ATTACHMENT, framebuffer.stencilAttachment)
+    attach(GL_DEPTH_STENCIL_ATTACHMENT, framebuffer.depthStencilAttachment)
+
+    // Check status code
+    var status = gl.checkFramebufferStatus(GL_FRAMEBUFFER)
+    if (!gl.isContextLost() && status !== GL_FRAMEBUFFER_COMPLETE) {
+      check.raise('framebuffer configuration not supported, status = ' +
+        statusCode[status])
+    }
+
+    gl.bindFramebuffer(GL_FRAMEBUFFER, framebufferState.next ? framebufferState.next.framebuffer : null)
+    framebufferState.cur = framebufferState.next
+
+    // FIXME: Clear error code here.  This is a work around for a bug in
+    // headless-gl
+    gl.getError()
+  }
+
+  function createFBO (a0, a1) {
+    var framebuffer = new REGLFramebuffer()
+    stats.framebufferCount++
+
+    function reglFramebuffer (a, b) {
+      var i
+
+      check(framebufferState.next !== framebuffer,
+        'can not update framebuffer which is currently in use')
+
+      var width = 0
+      var height = 0
+
+      var needsDepth = true
+      var needsStencil = true
+
+      var colorBuffer = null
+      var colorTexture = true
+      var colorFormat = 'rgba'
+      var colorType = 'uint8'
+      var colorCount = 1
+
+      var depthBuffer = null
+      var stencilBuffer = null
+      var depthStencilBuffer = null
+      var depthStencilTexture = false
+
+      if (typeof a === 'number') {
+        width = a | 0
+        height = (b | 0) || width
+      } else if (!a) {
+        width = height = 1
+      } else {
+        check.type(a, 'object', 'invalid arguments for framebuffer')
+        var options = a
+
+        if ('shape' in options) {
+          var shape = options.shape
+          check(Array.isArray(shape) && shape.length >= 2,
+            'invalid shape for framebuffer')
+          width = shape[0]
+          height = shape[1]
+        } else {
+          if ('radius' in options) {
+            width = height = options.radius
+          }
+          if ('width' in options) {
+            width = options.width
+          }
+          if ('height' in options) {
+            height = options.height
+          }
+        }
+
+        if ('color' in options ||
+            'colors' in options) {
+          colorBuffer =
+            options.color ||
+            options.colors
+          if (Array.isArray(colorBuffer)) {
+            check(
+              colorBuffer.length === 1 || extensions.webgl_draw_buffers,
+              'multiple render targets not supported')
+          }
+        }
+
+        if (!colorBuffer) {
+          if ('colorCount' in options) {
+            colorCount = options.colorCount | 0
+            check(colorCount > 0, 'invalid color buffer count')
+          }
+
+          if ('colorTexture' in options) {
+            colorTexture = !!options.colorTexture
+            colorFormat = 'rgba4'
+          }
+
+          if ('colorType' in options) {
+            colorType = options.colorType
+            if (!colorTexture) {
+              if (colorType === 'half float' || colorType === 'float16') {
+                check(extensions.ext_color_buffer_half_float,
+                  'you must enable EXT_color_buffer_half_float to use 16-bit render buffers')
+                colorFormat = 'rgba16f'
+              } else if (colorType === 'float' || colorType === 'float32') {
+                check(extensions.webgl_color_buffer_float,
+                  'you must enable WEBGL_color_buffer_float in order to use 32-bit floating point renderbuffers')
+                colorFormat = 'rgba32f'
+              }
+            } else {
+              check(extensions.oes_texture_float ||
+                !(colorType === 'float' || colorType === 'float32'),
+                'you must enable OES_texture_float in order to use floating point framebuffer objects')
+              check(extensions.oes_texture_half_float ||
+                !(colorType === 'half float' || colorType === 'float16'),
+                'you must enable OES_texture_half_float in order to use 16-bit floating point framebuffer objects')
+            }
+            check.oneOf(colorType, colorTypes, 'invalid color type')
+          }
+
+          if ('colorFormat' in options) {
+            colorFormat = options.colorFormat
+            if (colorTextureFormats.indexOf(colorFormat) >= 0) {
+              colorTexture = true
+            } else if (colorRenderbufferFormats.indexOf(colorFormat) >= 0) {
+              colorTexture = false
+            } else {
+              if (colorTexture) {
+                check.oneOf(
+                  options.colorFormat, colorTextureFormats,
+                  'invalid color format for texture')
+              } else {
+                check.oneOf(
+                  options.colorFormat, colorRenderbufferFormats,
+                  'invalid color format for renderbuffer')
+              }
+            }
+          }
+        }
+
+        if ('depthTexture' in options || 'depthStencilTexture' in options) {
+          depthStencilTexture = !!(options.depthTexture ||
+            options.depthStencilTexture)
+          check(!depthStencilTexture || extensions.webgl_depth_texture,
+            'webgl_depth_texture extension not supported')
+        }
+
+        if ('depth' in options) {
+          if (typeof options.depth === 'boolean') {
+            needsDepth = options.depth
+          } else {
+            depthBuffer = options.depth
+            needsStencil = false
+          }
+        }
+
+        if ('stencil' in options) {
+          if (typeof options.stencil === 'boolean') {
+            needsStencil = options.stencil
+          } else {
+            stencilBuffer = options.stencil
+            needsDepth = false
+          }
+        }
+
+        if ('depthStencil' in options) {
+          if (typeof options.depthStencil === 'boolean') {
+            needsDepth = needsStencil = options.depthStencil
+          } else {
+            depthStencilBuffer = options.depthStencil
+            needsDepth = false
+            needsStencil = false
+          }
+        }
+      }
+
+      // parse attachments
+      var colorAttachments = null
+      var depthAttachment = null
+      var stencilAttachment = null
+      var depthStencilAttachment = null
+
+      // Set up color attachments
+      if (Array.isArray(colorBuffer)) {
+        colorAttachments = colorBuffer.map(parseAttachment)
+      } else if (colorBuffer) {
+        colorAttachments = [parseAttachment(colorBuffer)]
+      } else {
+        colorAttachments = new Array(colorCount)
+        for (i = 0; i < colorCount; ++i) {
+          colorAttachments[i] = allocAttachment(
+            width,
+            height,
+            colorTexture,
+            colorFormat,
+            colorType)
+        }
+      }
+
+      check(extensions.webgl_draw_buffers || colorAttachments.length <= 1,
+        'you must enable the WEBGL_draw_buffers extension in order to use multiple color buffers.')
+      check(colorAttachments.length <= limits.maxColorAttachments,
+        'too many color attachments, not supported')
+
+      width = width || colorAttachments[0].width
+      height = height || colorAttachments[0].height
+
+      if (depthBuffer) {
+        depthAttachment = parseAttachment(depthBuffer)
+      } else if (needsDepth && !needsStencil) {
+        depthAttachment = allocAttachment(
+          width,
+          height,
+          depthStencilTexture,
+          'depth',
+          'uint32')
+      }
+
+      if (stencilBuffer) {
+        stencilAttachment = parseAttachment(stencilBuffer)
+      } else if (needsStencil && !needsDepth) {
+        stencilAttachment = allocAttachment(
+          width,
+          height,
+          false,
+          'stencil',
+          'uint8')
+      }
+
+      if (depthStencilBuffer) {
+        depthStencilAttachment = parseAttachment(depthStencilBuffer)
+      } else if (!depthBuffer && !stencilBuffer && needsStencil && needsDepth) {
+        depthStencilAttachment = allocAttachment(
+          width,
+          height,
+          depthStencilTexture,
+          'depth stencil',
+          'depth stencil')
+      }
+
+      check(
+        (!!depthBuffer) + (!!stencilBuffer) + (!!depthStencilBuffer) <= 1,
+        'invalid framebuffer configuration, can specify exactly one depth/stencil attachment')
+
+      var commonColorAttachmentSize = null
+
+      for (i = 0; i < colorAttachments.length; ++i) {
+        incRefAndCheckShape(colorAttachments[i], width, height)
+        check(!colorAttachments[i] ||
+          (colorAttachments[i].texture &&
+            colorTextureFormatEnums.indexOf(colorAttachments[i].texture._texture.format) >= 0) ||
+          (colorAttachments[i].renderbuffer &&
+            colorRenderbufferFormatEnums.indexOf(colorAttachments[i].renderbuffer._renderbuffer.format) >= 0),
+          'framebuffer color attachment ' + i + ' is invalid')
+
+        if (colorAttachments[i] && colorAttachments[i].texture) {
+          var colorAttachmentSize =
+              textureFormatChannels[colorAttachments[i].texture._texture.format] *
+              textureTypeSizes[colorAttachments[i].texture._texture.type]
+
+          if (commonColorAttachmentSize === null) {
+            commonColorAttachmentSize = colorAttachmentSize
+          } else {
+            // We need to make sure that all color attachments have the same number of bitplanes
+            // (that is, the same numer of bits per pixel)
+            // This is required by the GLES2.0 standard. See the beginning of Chapter 4 in that document.
+            check(commonColorAttachmentSize === colorAttachmentSize,
+                  'all color attachments much have the same number of bits per pixel.')
+          }
+        }
+      }
+      incRefAndCheckShape(depthAttachment, width, height)
+      check(!depthAttachment ||
+        (depthAttachment.texture &&
+          depthAttachment.texture._texture.format === GL_DEPTH_COMPONENT) ||
+        (depthAttachment.renderbuffer &&
+          depthAttachment.renderbuffer._renderbuffer.format === GL_DEPTH_COMPONENT16),
+        'invalid depth attachment for framebuffer object')
+      incRefAndCheckShape(stencilAttachment, width, height)
+      check(!stencilAttachment ||
+        (stencilAttachment.renderbuffer &&
+          stencilAttachment.renderbuffer._renderbuffer.format === GL_STENCIL_INDEX8),
+        'invalid stencil attachment for framebuffer object')
+      incRefAndCheckShape(depthStencilAttachment, width, height)
+      check(!depthStencilAttachment ||
+        (depthStencilAttachment.texture &&
+          depthStencilAttachment.texture._texture.format === GL_DEPTH_STENCIL) ||
+        (depthStencilAttachment.renderbuffer &&
+          depthStencilAttachment.renderbuffer._renderbuffer.format === GL_DEPTH_STENCIL),
+        'invalid depth-stencil attachment for framebuffer object')
+
+      // decrement references
+      decFBORefs(framebuffer)
+
+      framebuffer.width = width
+      framebuffer.height = height
+
+      framebuffer.colorAttachments = colorAttachments
+      framebuffer.depthAttachment = depthAttachment
+      framebuffer.stencilAttachment = stencilAttachment
+      framebuffer.depthStencilAttachment = depthStencilAttachment
+
+      reglFramebuffer.color = colorAttachments.map(unwrapAttachment)
+      reglFramebuffer.depth = unwrapAttachment(depthAttachment)
+      reglFramebuffer.stencil = unwrapAttachment(stencilAttachment)
+      reglFramebuffer.depthStencil = unwrapAttachment(depthStencilAttachment)
+
+      reglFramebuffer.width = framebuffer.width
+      reglFramebuffer.height = framebuffer.height
+
+      updateFramebuffer(framebuffer)
+
+      return reglFramebuffer
+    }
+
+    function resize (w_, h_) {
+      check(framebufferState.next !== framebuffer,
+        'can not resize a framebuffer which is currently in use')
+
+      var w = Math.max(w_ | 0, 1)
+      var h = Math.max((h_ | 0) || w, 1)
+      if (w === framebuffer.width && h === framebuffer.height) {
+        return reglFramebuffer
+      }
+
+      // resize all buffers
+      var colorAttachments = framebuffer.colorAttachments
+      for (var i = 0; i < colorAttachments.length; ++i) {
+        resizeAttachment(colorAttachments[i], w, h)
+      }
+      resizeAttachment(framebuffer.depthAttachment, w, h)
+      resizeAttachment(framebuffer.stencilAttachment, w, h)
+      resizeAttachment(framebuffer.depthStencilAttachment, w, h)
+
+      framebuffer.width = reglFramebuffer.width = w
+      framebuffer.height = reglFramebuffer.height = h
+
+      updateFramebuffer(framebuffer)
+
+      return reglFramebuffer
+    }
+
+    reglFramebuffer(a0, a1)
+
+    return extend(reglFramebuffer, {
+      resize: resize,
+      _reglType: 'framebuffer',
+      _framebuffer: framebuffer,
+      destroy: function () {
+        destroy(framebuffer)
+        decFBORefs(framebuffer)
+      },
+      use: function (block) {
+        framebufferState.setFBO({
+          framebuffer: reglFramebuffer
+        }, block)
+      }
+    })
+  }
+
+  function createCubeFBO (options) {
+    var faces = Array(6)
+
+    function reglFramebufferCube (a) {
+      var i
+
+      check(faces.indexOf(framebufferState.next) < 0,
+        'can not update framebuffer which is currently in use')
+
+      var params = {
+        color: null
+      }
+
+      var radius = 0
+
+      var colorBuffer = null
+      var colorFormat = 'rgba'
+      var colorType = 'uint8'
+      var colorCount = 1
+
+      if (typeof a === 'number') {
+        radius = a | 0
+      } else if (!a) {
+        radius = 1
+      } else {
+        check.type(a, 'object', 'invalid arguments for framebuffer')
+        var options = a
+
+        if ('shape' in options) {
+          var shape = options.shape
+          check(
+            Array.isArray(shape) && shape.length >= 2,
+            'invalid shape for framebuffer')
+          check(
+            shape[0] === shape[1],
+            'cube framebuffer must be square')
+          radius = shape[0]
+        } else {
+          if ('radius' in options) {
+            radius = options.radius | 0
+          }
+          if ('width' in options) {
+            radius = options.width | 0
+            if ('height' in options) {
+              check(options.height === radius, 'must be square')
+            }
+          } else if ('height' in options) {
+            radius = options.height | 0
+          }
+        }
+
+        if ('color' in options ||
+            'colors' in options) {
+          colorBuffer =
+            options.color ||
+            options.colors
+          if (Array.isArray(colorBuffer)) {
+            check(
+              colorBuffer.length === 1 || extensions.webgl_draw_buffers,
+              'multiple render targets not supported')
+          }
+        }
+
+        if (!colorBuffer) {
+          if ('colorCount' in options) {
+            colorCount = options.colorCount | 0
+            check(colorCount > 0, 'invalid color buffer count')
+          }
+
+          if ('colorType' in options) {
+            check.oneOf(
+              options.colorType, colorTypes,
+              'invalid color type')
+            colorType = options.colorType
+          }
+
+          if ('colorFormat' in options) {
+            colorFormat = options.colorFormat
+            check.oneOf(
+              options.colorFormat, colorTextureFormats,
+              'invalid color format for texture')
+          }
+        }
+
+        if ('depth' in options) {
+          params.depth = options.depth
+        }
+
+        if ('stencil' in options) {
+          params.stencil = options.stencil
+        }
+
+        if ('depthStencil' in options) {
+          params.depthStencil = options.depthStencil
+        }
+      }
+
+      var colorCubes
+      if (colorBuffer) {
+        if (Array.isArray(colorBuffer)) {
+          colorCubes = []
+          for (i = 0; i < colorBuffer.length; ++i) {
+            colorCubes[i] = colorBuffer[i]
+          }
+        } else {
+          colorCubes = [ colorBuffer ]
+        }
+      } else {
+        colorCubes = Array(colorCount)
+        var cubeMapParams = {
+          radius: radius,
+          format: colorFormat,
+          type: colorType
+        }
+        for (i = 0; i < colorCount; ++i) {
+          colorCubes[i] = textureState.createCube(cubeMapParams)
+        }
+      }
+
+      // Check color cubes
+      params.color = Array(colorCubes.length)
+      for (i = 0; i < colorCubes.length; ++i) {
+        var cube = colorCubes[i]
+        check(
+          typeof cube === 'function' && cube._reglType === 'textureCube',
+          'invalid cube map')
+        radius = radius || cube.width
+        check(
+          cube.width === radius && cube.height === radius,
+          'invalid cube map shape')
+        params.color[i] = {
+          target: GL_TEXTURE_CUBE_MAP_POSITIVE_X,
+          data: colorCubes[i]
+        }
+      }
+
+      for (i = 0; i < 6; ++i) {
+        for (var j = 0; j < colorCubes.length; ++j) {
+          params.color[j].target = GL_TEXTURE_CUBE_MAP_POSITIVE_X + i
+        }
+        // reuse depth-stencil attachments across all cube maps
+        if (i > 0) {
+          params.depth = faces[0].depth
+          params.stencil = faces[0].stencil
+          params.depthStencil = faces[0].depthStencil
+        }
+        if (faces[i]) {
+          (faces[i])(params)
+        } else {
+          faces[i] = createFBO(params)
+        }
+      }
+
+      return extend(reglFramebufferCube, {
+        width: radius,
+        height: radius,
+        color: colorCubes
+      })
+    }
+
+    function resize (radius_) {
+      var i
+      var radius = radius_ | 0
+      check(radius > 0 && radius <= limits.maxCubeMapSize,
+        'invalid radius for cube fbo')
+
+      if (radius === reglFramebufferCube.width) {
+        return reglFramebufferCube
+      }
+
+      var colors = reglFramebufferCube.color
+      for (i = 0; i < colors.length; ++i) {
+        colors[i].resize(radius)
+      }
+
+      for (i = 0; i < 6; ++i) {
+        faces[i].resize(radius)
+      }
+
+      reglFramebufferCube.width = reglFramebufferCube.height = radius
+
+      return reglFramebufferCube
+    }
+
+    reglFramebufferCube(options)
+
+    return extend(reglFramebufferCube, {
+      faces: faces,
+      resize: resize,
+      _reglType: 'framebufferCube',
+      destroy: function () {
+        faces.forEach(function (f) {
+          f.destroy()
+        })
+      }
+    })
+  }
+
+  function restoreFramebuffers () {
+    framebufferState.cur = null
+    framebufferState.next = null
+    framebufferState.dirty = true
+    values(framebufferSet).forEach(function (fb) {
+      fb.framebuffer = gl.createFramebuffer()
+      updateFramebuffer(fb)
+    })
+  }
+
+  return extend(framebufferState, {
+    getFramebuffer: function (object) {
+      if (typeof object === 'function' && object._reglType === 'framebuffer') {
+        var fbo = object._framebuffer
+        if (fbo instanceof REGLFramebuffer) {
+          return fbo
+        }
+      }
+      return null
+    },
+    create: createFBO,
+    createCube: createCubeFBO,
+    clear: function () {
+      values(framebufferSet).forEach(destroy)
+    },
+    restore: restoreFramebuffers
+  })
+}

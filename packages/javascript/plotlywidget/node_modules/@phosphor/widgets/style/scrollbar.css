@@ -1,0 +1,46 @@
+/*-----------------------------------------------------------------------------
+| Copyright (c) 2014-2017, PhosphorJS Contributors
+|
+| Distributed under the terms of the BSD 3-Clause License.
+|
+| The full license is in the file LICENSE, distributed with this software.
+|----------------------------------------------------------------------------*/
+
+
+.p-ScrollBar {
+  display: flex;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+.p-ScrollBar[data-orientation='horizontal'] {
+  flex-direction: row;
+}
+
+
+.p-ScrollBar[data-orientation='vertical'] {
+  flex-direction: column;
+}
+
+
+.p-ScrollBar-button {
+  box-sizing: border-box;
+  flex: 0 0 auto;
+}
+
+
+.p-ScrollBar-track {
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  flex: 1 1 auto;
+}
+
+
+.p-ScrollBar-thumb {
+  box-sizing: border-box;
+  position: absolute;
+}

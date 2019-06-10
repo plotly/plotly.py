@@ -1,0 +1,130 @@
+ndarray-like
+===
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependencies][dependencies-image]][dependencies-url]
+
+> Validates if a value is [ndarray](https://github.com/compute-io/ndarray)-like.
+
+
+## Installation
+
+``` bash
+$ npm install validate.io-ndarray-like
+```
+
+For use in the browser, use [browserify](https://github.com/substack/node-browserify).
+
+
+## Usage
+
+``` javascript
+var ndarrayLike = require( 'validate.io-ndarray-like' );
+```
+
+#### ndarrayLike( value )
+
+Validates if a value is [ndarray](https://github.com/compute-io/ndarray)-like.
+
+``` javascript
+var arr = {
+	'data': [1,2,3,4],
+	'shape': [2,2],
+	'strides': [2,1],
+	'offset': 0,
+	'dtype': 'generic',
+	'length': 4
+};
+
+console.log( ndarrayLike( arr ) );
+// returns true
+```
+
+
+## Examples
+
+``` javascript
+var ndarrayLike = require( 'validate.io-ndarray-like' );
+
+var arr = {
+	'data': [1,2,3,4],
+	'shape': [2,2],
+	'strides': [2,1],
+	'offset': 0,
+	'dtype': 'generic',
+	'length': 4
+};
+console.log( ndarrayLike( arr ) );
+// returns true
+
+console.log( ndarrayLike( [] ) );
+// returns false
+
+console.log( ndarrayLike( {} ) );
+// returns false
+
+console.log( ndarrayLike( null ) );
+// returns false
+```
+
+To run the example code from the top-level application directory,
+
+``` bash
+$ node ./examples/index.js
+```
+
+
+## Tests
+
+### Unit
+
+Unit tests use the [Mocha](http://mochajs.org) test framework with [Chai](http://chaijs.com) assertions. To run the tests, execute the following command in the top-level application directory:
+
+``` bash
+$ make test
+```
+
+All new feature development should have corresponding unit tests to validate correct functionality.
+
+
+### Test Coverage
+
+This repository uses [Istanbul](https://github.com/gotwarlost/istanbul) as its code coverage tool. To generate a test coverage report, execute the following command in the top-level application directory:
+
+``` bash
+$ make test-cov
+```
+
+Istanbul creates a `./reports/coverage` directory. To access an HTML version of the report,
+
+``` bash
+$ make view-cov
+```
+
+
+---
+## License
+
+[MIT license](http://opensource.org/licenses/MIT). 
+
+
+## Copyright
+
+Copyright &copy; 2015. Athan Reines.
+
+
+[npm-image]: http://img.shields.io/npm/v/validate.io-ndarray-like.svg
+[npm-url]: https://npmjs.org/package/validate.io-ndarray-like
+
+[travis-image]: http://img.shields.io/travis/validate-io/ndarray-like/master.svg
+[travis-url]: https://travis-ci.org/validate-io/ndarray-like
+
+[coveralls-image]: https://img.shields.io/coveralls/validate-io/ndarray-like/master.svg
+[coveralls-url]: https://coveralls.io/r/validate-io/ndarray-like?branch=master
+
+[dependencies-image]: http://img.shields.io/david/validate-io/ndarray-like.svg
+[dependencies-url]: https://david-dm.org/validate-io/ndarray-like
+
+[dev-dependencies-image]: http://img.shields.io/david/dev/validate-io/ndarray-like.svg
+[dev-dependencies-url]: https://david-dm.org/dev/validate-io/ndarray-like
+
+[github-issues-image]: http://img.shields.io/github/issues/validate-io/ndarray-like.svg
+[github-issues-url]: https://github.com/validate-io/ndarray-like/issues

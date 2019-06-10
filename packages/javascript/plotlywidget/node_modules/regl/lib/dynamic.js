@@ -1,0 +1,76 @@
+var VARIABLE_COUNTER = 0
+
+var DYN_FUNC = 0
+
+function DynamicVariable (type, data) {
+  this.id = (VARIABLE_COUNTER++)
+  this.type = type
+  this.data = data
+}
+
+function escapeStr (str) {
+  return str.replace(/\\/g, '\\\\').replace(/"/g, '\\"')
+}
+
+function splitParts (str) {
+  if (str.length === 0) {
+    return []
+  }
+
+  var firstChar = str.charAt(0)
+  var lastChar = str.charAt(str.length - 1)
+
+  if (str.length > 1 &&
+      firstChar === lastChar &&
+      (firstChar === '"' || firstChar === "'")) {
+    return ['"' + escapeStr(str.substr(1, str.length - 2)) + '"']
+  }
+
+  var parts = /\[(false|true|null|\d+|'[^']*'|"[^"]*")\]/.exec(str)
+  if (parts) {
+    return (
+      splitParts(str.substr(0, parts.index))
+      .concat(splitParts(parts[1]))
+      .concat(splitParts(str.substr(parts.index + parts[0].length)))
+    )
+  }
+
+  var subparts = str.split('.')
+  if (subparts.length === 1) {
+    return ['"' + escapeStr(str) + '"']
+  }
+
+  var result = []
+  for (var i = 0; i < subparts.length; ++i) {
+    result = result.concat(splitParts(subparts[i]))
+  }
+  return result
+}
+
+function toAccessorString (str) {
+  return '[' + splitParts(str).join('][') + ']'
+}
+
+function defineDynamic (type, data) {
+  return new DynamicVariable(type, toAccessorString(data + ''))
+}
+
+function isDynamic (x) {
+  return (typeof x === 'function' && !x._reglType) ||
+         x instanceof DynamicVariable
+}
+
+function unbox (x, path) {
+  if (typeof x === 'function') {
+    return new DynamicVariable(DYN_FUNC, x)
+  }
+  return x
+}
+
+module.exports = {
+  DynamicVariable: DynamicVariable,
+  define: defineDynamic,
+  isDynamic: isDynamic,
+  unbox: unbox,
+  accessor: toAccessorString
+}

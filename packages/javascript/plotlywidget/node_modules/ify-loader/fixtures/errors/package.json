@@ -1,0 +1,11 @@
+{
+  "name": "fixture",
+  "version": "1.0.0",
+  "browserify": {
+    "transform": [
+      "./error",
+      "./no-error",
+      "brfs"
+    ]
+  }
+}

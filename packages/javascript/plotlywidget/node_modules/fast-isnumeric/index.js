@@ -1,0 +1,24 @@
+/**
+ * inspired by is-number <https://github.com/jonschlinkert/is-number>
+ * but significantly simplified and sped up by ignoring number and string constructors
+ * ie these return false:
+ *   new Number(1)
+ *   new String('1')
+ */
+
+'use strict';
+
+var allBlankCharCodes = require('is-string-blank');
+
+module.exports = function(n) {
+    var type = typeof n;
+    if(type === 'string') {
+        var original = n;
+        n = +n;
+        // whitespace strings cast to zero - filter them out
+        if(n===0 && allBlankCharCodes(original)) return false;
+    }
+    else if(type !== 'number') return false;
+
+    return n - n < 1;
+};

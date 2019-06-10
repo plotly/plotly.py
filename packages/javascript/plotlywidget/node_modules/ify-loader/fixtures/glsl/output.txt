@@ -1,0 +1,12 @@
+
+precision mediump float;
+#define GLSLIFY 1
+#define GLSLIFY 1
+vec4 ones () {
+  return vec4(1);
+}
+
+void main () {
+  gl_FragColor = ones();
+}
+,

@@ -1,0 +1,7 @@
+{
+   // comment top a
+   "a": 1, // comment right a
+   /* comment top b */
+   "b": 2,
+   "// c": "// comment c"
+}

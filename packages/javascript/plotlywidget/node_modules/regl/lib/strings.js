@@ -1,0 +1,19 @@
+module.exports = function createStringStore () {
+  var stringIds = {'': 0}
+  var stringValues = ['']
+  return {
+    id: function (str) {
+      var result = stringIds[str]
+      if (result) {
+        return result
+      }
+      result = stringIds[str] = stringValues.length
+      stringValues.push(str)
+      return result
+    },
+
+    str: function (id) {
+      return stringValues[id]
+    }
+  }
+}

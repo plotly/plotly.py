@@ -1,0 +1,284 @@
+'use strict'
+
+document.body.style.margin = '0'
+
+
+const t = require('tape')
+const Text = require('./index')
+const fps = require('fps-indicator')()
+const gl = require('gl-util/context')()
+const panzoom = require('pan-zoom')
+
+
+
+let q = []
+
+
+t('font', t => {
+	let matrix = []
+
+	let family = ['Roboto', 'sans-serif']
+	let weights = require('css-font-weight-keywords')
+	let stretches = require('css-font-stretch-keywords')
+
+	for (let i = 4; i < weights.length; i++) {
+		let weight = weights[i]
+
+		for (let j = 1; j < stretches.length; j++) {
+			let stretch = stretches[j]
+			let normal = new Text(gl)
+			normal.update({
+				font: { family, weight, stretch },
+				position: [j * 40, i*20],
+				text: weight
+			})
+
+			q.push(normal)
+
+			// <text gl={gl} position={[j * 40, i * 20]} font={{family, weight, stretch}} text={weight}/>
+		}
+
+		for (let j = 1; j < stretches.length; j++) {
+			let stretch = stretches[j]
+			let italic = new Text(gl)
+			italic.update({
+				font: { family, weight, stretch, style: 'italic' },
+				position: [(stretches.length - 1 + j) * 40, i*20],
+				text: weight
+			})
+
+			q.push(italic)
+		}
+	}
+
+	t.end()
+})
+
+t('alignment', t => {
+	q.push(new Text({
+		gl,
+		offset: .5,
+		baseline: 'top',
+		align: 'left',
+		color: 'black',
+		font: 'Minion Pro',
+		position: [1, 1],
+		range: [0,0,2,2],
+		text: 'Middle',
+		kerning: true
+	}))
+	t.end()
+})
+
+t.skip('1e6 letters', t => {
+	let chars = 'abc'
+
+	let positions = [], text = []
+
+	for (let i = 0; i < 1e3; i++) {
+		for (let j = 0; j < 1e2; j++) {
+			text.push(chars)
+			positions.push([Math.random() * 1e3, Math.random() * 1e3])
+		}
+	}
+
+	q.push(new Text({
+		font: '16px Roboto',
+		color: 'black',
+		gl,
+		positions,
+		text
+	}))
+})
+
+t('changing font-size does not trigger text offsets recalc')
+
+t('spacing')
+
+t('color')
+
+t('baseline')
+
+t('array align, position, color, baseline, font, offset', t => {
+	let text = new Text(gl)
+
+	text.update({
+		text: ['red', 'green', 'blue'],
+		position: [[0,50], [150,50], [300,50]],
+		// color: 0x00ff00,
+		color: [0xff0000, 'green', 0x0000ff],
+		// baseline: 'bottom',
+		baseline: ['top', 'middle', 'bottom'],
+		// align: 'right',
+		align: ['left', 'center', 'right'],
+		font: ['sans-serif', 'serif', 'monospace'],
+
+		offset: [[0,0], [-1,-1], [-2,-2]],
+		opacity: [.5, .75, 1],
+	})
+	// text.update({opacity: [.1, .45, 1]})
+	// text.render()
+
+	q.push(text)
+
+	t.end()
+})
+
+t.skip('kerning', t => {
+	q.push(new Text({
+		gl,
+		offset: .5,
+		baseline: 'top',
+		align: 'left',
+		color: 'black',
+		font: 'Minion Pro',
+		position: [1, 1],
+		range: [0,0,2,2],
+		text: 'Middle',
+		kerning: true
+	}))
+})
+
+t('tracking (spacing)')
+
+t('viewport')
+
+t('range')
+
+t('offset', t => {
+	// numeric offset
+	q.push(new Text({
+		gl,
+		text: 'Offset',
+		range: [0,0,1,1],
+		position: [.5,.5],
+		fontSize: 24,
+		offset: 0
+	}))
+
+	// array offset
+	q.push(new Text({
+		gl,
+		text: 'Line2',
+		range: [0,0,1,1],
+		position: [.5,.5],
+		fontSize: 24,
+		offset: [0, 1]
+	}))
+})
+
+t('ignore spaces')
+
+t('canvas2d performance')
+
+t('Augment chars', t => {
+	q.push(new Text({
+		gl,
+		font: {
+			family: 'Minion Pro',
+			weight: 200,
+			size: 24
+		},
+		text: 'ABC',
+		position: [0, 100]
+	}))
+
+	q.push(new Text({
+		gl,
+		font: {
+			family: 'Minion Pro',
+			weight: 200,
+			size: 24
+		},
+		text: 'DEFG',
+		position: [0, 200]
+	}))
+
+	q.push(new Text({
+		gl,
+		font: {
+			family: 'Minion Pro',
+			weight: 200,
+			size: 32
+		},
+		text: 'HIJK',
+		position: [0, 300]
+	}))
+
+	t.end()
+})
+
+t.skip('updating offset twice does not invert sign')
+
+
+
+q.render = function (opts) {
+	if (opts) q.forEach(text => text.update(opts))
+	q.forEach(text => text.render())
+}
+
+setTimeout(() => {
+	let vp = q[0].viewport
+	let range = q[0].range || [vp.x, vp.y, vp.x + vp.width, vp.y + vp.height]
+	q.render()
+
+	panzoom(document.body, e => {
+		let canvas = gl.canvas
+
+		let w = canvas.offsetWidth
+		let h = canvas.offsetHeight
+
+		let rx = e.x / w
+		let ry = e.y / h
+
+		let xrange = range[2] - range[0],
+			yrange = range[3] - range[1]
+
+		if (e.dz) {
+			let dz = e.dz / w
+			range[0] -= rx * xrange * dz
+			range[2] += (1 - rx) * xrange * dz
+
+			// range[1] -= ry * yrange * dz
+			// range[3] += (1 - ry) * yrange * dz
+
+			range[1] -= (1 - ry) * yrange * dz
+			range[3] += ry * yrange * dz
+		}
+
+		range[0] -= xrange * e.dx / w
+		range[2] -= xrange * e.dx / w
+		// range[1] -= yrange * e.dy / h
+		// range[3] -= yrange * e.dy / h
+		range[1] += yrange * e.dy / h
+		range[3] += yrange * e.dy / h
+
+		q.render({ range })
+	})
+}, 50)
+
+
+
+
+// center cross
+let canvas = document.body.appendChild(
+	document.createElement('canvas')
+)
+canvas.style.position = 'absolute'
+canvas.style.left = 0
+canvas.style.top = 0
+canvas.width = window.innerWidth
+canvas.height = window.innerHeight
+let ctx = canvas.getContext('2d')
+
+// +
+ctx.fillStyle = 'blue'
+ctx.fillRect(canvas.width / 2 - 25, canvas.height / 2, 100, 1)
+ctx.fillRect(canvas.width / 2, canvas.height / 2 - 25, 1, 50)
+
+// ctx.fillRect(0, canvas.height - 50, 100, 1)
+
+// ctx.font = '48px Roboto'
+// ctx.textBaseline = 'top'
+// ctx.fillText('MiddleDitchThomas', canvas.width / 2, canvas.height / 2)
+

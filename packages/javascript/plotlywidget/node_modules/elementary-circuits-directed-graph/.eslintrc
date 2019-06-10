@@ -1,0 +1,67 @@
+{
+  "root": true,
+  "extends": [
+    "eslint:recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 5,
+  },
+  "globals": {
+    "Set": true,
+    "Map": true
+  },
+  "env": {
+    "commonjs": true
+  },
+  "rules": {
+    "no-trailing-spaces": [2],
+    "no-multiple-empty-lines": [2, {"max": 2, "maxEOF": 0}],
+    "eol-last": [2],
+    "indent": [0],
+    "indent-legacy": [2, 4, {"SwitchCase": 1}],
+    "max-len": [0, 80],
+    "brace-style": [0, "stroustrup", {"allowSingleLine": true}],
+    "curly": [2, "multi-line"],
+    "camelcase": [2, {"properties": "never"}],
+    "comma-spacing": [2, {"before": false, "after": true}],
+    "comma-style": [2, "last"],
+    "semi": [2],
+    "semi-spacing": [2, {"before": false, "after": true}],
+    "key-spacing": [2, {"beforeColon": false, "afterColon": true}],
+    "keyword-spacing": [2, {"overrides": {
+      "if": {"after": false},
+      "for": {"after": false},
+      "while": {"after": false},
+      "switch": {"after": false},
+      "catch": {"after": false}
+    }}],
+    "no-spaced-func": [2],
+    "space-in-parens": [2, "never"],
+    "space-before-function-paren": [2, "never"],
+    "space-before-blocks": [2],
+    "spaced-comment": [2, "always"],
+    "no-tabs": [2],
+    "no-multi-spaces": [2, {"ignoreEOLComments": true}],
+    "no-whitespace-before-property": [2],
+    "no-unexpected-multiline": [2],
+    "no-floating-decimal": [2],
+    "space-infix-ops": [2, {"int32Hint": true}],
+    "quotes": [2, "single"],
+    "dot-notation": [2],
+    "dot-location": [2, "property"],
+    "operator-linebreak": [2, "after"],
+    "eqeqeq": [2],
+    "new-cap": [2, { "capIsNewExceptionPattern": "^MathJax\\.." }],
+    "no-redeclare": [2, {"builtinGlobals": true}],
+    "no-shadow": [0, {"builtinGlobals": true}],
+    "block-scoped-var": [2],
+    "no-unused-vars": [2],
+    "one-var": [2, {"initialized": "never"}],
+    "no-undef-init": [2],
+    "no-use-before-define": [2, "nofunc"],
+    "no-loop-func": [2],
+    "no-console": [0],
+    "no-unused-labels": [2],
+    "no-useless-escape": [0]
+  }
+}

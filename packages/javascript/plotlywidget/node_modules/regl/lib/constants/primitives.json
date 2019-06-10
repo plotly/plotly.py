@@ -1,0 +1,12 @@
+{
+  "points": 0,
+  "point": 0,
+  "lines": 1,
+  "line": 1,
+  "line loop": 2,
+  "line strip": 3,
+  "triangles": 4,
+  "triangle": 4,
+  "triangle strip": 5,
+  "triangle fan": 6
+}

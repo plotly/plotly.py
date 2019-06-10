@@ -1,0 +1,23 @@
+<html>
+<head>
+<link rel="stylesheet" href="lib/qunit.css">
+</head>
+<body>
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+<script src="lib/qunit.js"></script>
+<script>
+function describe(name, fn) {
+  QUnit.module(name);
+  fn();
+}
+function it(desc, fn) {
+  QUnit.test(desc, function(a) {
+    fn();
+    a.ok(true);
+  });
+}
+</script>
+<script src="browserified.js"></script>
+</body>
+</html>

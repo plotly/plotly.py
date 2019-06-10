@@ -1,0 +1,36 @@
+var GL_FLOAT = 5126
+
+function AttributeRecord () {
+  this.state = 0
+
+  this.x = 0.0
+  this.y = 0.0
+  this.z = 0.0
+  this.w = 0.0
+
+  this.buffer = null
+  this.size = 0
+  this.normalized = false
+  this.type = GL_FLOAT
+  this.offset = 0
+  this.stride = 0
+  this.divisor = 0
+}
+
+module.exports = function wrapAttributeState (
+  gl,
+  extensions,
+  limits,
+  stringStore) {
+  var NUM_ATTRIBUTES = limits.maxAttributes
+  var attributeBindings = new Array(NUM_ATTRIBUTES)
+  for (var i = 0; i < NUM_ATTRIBUTES; ++i) {
+    attributeBindings[i] = new AttributeRecord()
+  }
+
+  return {
+    Record: AttributeRecord,
+    scope: {},
+    state: attributeBindings
+  }
+}

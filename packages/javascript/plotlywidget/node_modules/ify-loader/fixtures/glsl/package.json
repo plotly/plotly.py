@@ -1,0 +1,12 @@
+{
+  "name": "fixture",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "../../node_modules/.bin/webpack webpack.config.js"
+  },
+  "browserify": {
+    "transform": [
+      "glslify"
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+parserOptions:
+    sourceType: module
+
+extends:
+    "eslint:recommended"
+
+rules:
+    no-cond-assign: 0
+    no-constant-condition: 0

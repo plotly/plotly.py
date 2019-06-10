@@ -1,0 +1,45 @@
+@font-face {
+  font-family: 'plotlyjsicon';
+  src: url('#{$font-url}/ploticon/ploticon.eot?91282052');
+  src: url('#{$font-url}/ploticon/ploticon.eot?91282052#iefix') format('embedded-opentype'),
+       url('#{$font-url}/ploticon/ploticon.woff?91282052') format('woff'),
+       url('#{$font-url}/ploticon/ploticon.ttf?91282052') format('truetype'),
+       url('#{$font-url}/ploticon/ploticon.svg?91282052#ploticon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+[class^="plotlyjsicon-"]:before, [class*=" plotlyjsicon-"]:before {
+  font-family: "plotlyjsicon";
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.plotlyjsicon-undo:before { content: '\e800'; } /* '' */
+.plotlyjsicon-home:before { content: '\e801'; } /* '' */
+.plotlyjsicon-camera-retro:before { content: '\e802'; } /* '' */
+.plotlyjsicon-zoombox:before { content: '\e803'; } /* '' */
+.plotlyjsicon-pan:before { content: '\e804'; } /* '' */
+.plotlyjsicon-zoom_plus:before { content: '\e805'; } /* '' */
+.plotlyjsicon-zoom_minus:before { content: '\e806'; } /* '' */
+.plotlyjsicon-autoscale:before { content: '\e807'; } /* '' */
+.plotlyjsicon-tooltip_basic:before { content: '\e808'; } /* '' */
+.plotlyjsicon-tooltip_compare:before { content: '\e809'; } /* '' */
+.plotlyjsicon-plotlylogo:before { content: '\e80a'; } /* '' */
+.ploticon-z-axis:before { content: '\e80b'; } /* '' */
+.ploticon-3d_rotate:before { content: '\e80c'; } /* '' */
+.ploticon-camera:before { content: '\e80d'; } /* '' */
+.ploticon-movie:before { content: '\e80e'; } /* '' */
+.ploticon-question:before { content: '\e80f'; } /* '' */
+.ploticon-disk:before { content: '\e810'; } /* '' */
+.ploticon-lasso:before { content: '\e811'; } /* '' */
+.ploticon-selectbox:before { content: '\e812'; } /* '' */
