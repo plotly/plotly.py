@@ -11,6 +11,7 @@ from plotly import optional_imports
 import plotly.colors as clrs
 from plotly.figure_factory import utils
 from plotly.exceptions import PlotlyError
+import plotly.graph_objs as go
 
 pd.options.mode.chained_assignment = None
 
@@ -950,4 +951,4 @@ $ conda install -c plotly plotly-geo
         fig['layout']['yaxis']['range'][0] = center[1] - new_height * 0.5
         fig['layout']['yaxis']['range'][1] = center[1] + new_height * 0.5
 
-    return fig
+    return go.Figure(fig)
