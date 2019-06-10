@@ -20,7 +20,7 @@ plotly/presentation_objs/
 
 .idea
 
-js/node_modules/
+node_modules/
 
 .pytest_cache
 

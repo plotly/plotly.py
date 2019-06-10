@@ -1,3 +1,0 @@
-message C {
-  optional string c = 1;
-}

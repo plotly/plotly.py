@@ -1,5 +1,0 @@
-import "./b.proto";
-
-message A {
-  optional string a = 1;
-}

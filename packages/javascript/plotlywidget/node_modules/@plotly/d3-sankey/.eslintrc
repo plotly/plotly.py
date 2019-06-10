@@ -1,5 +1,0 @@
-parserOptions:
-    sourceType: "module"
-
-extends:
-    "eslint:recommended"

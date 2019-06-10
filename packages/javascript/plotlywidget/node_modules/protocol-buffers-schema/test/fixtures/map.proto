@@ -1,3 +1,0 @@
-message Data {
-  map<string,bytes> data = 1;
-}
