@@ -331,7 +331,7 @@ jobs:
       - run:
           name: npm-pack widget
           command: |
-            cd js/
+            cd packages/javascript/plotlywidget/
             npm install webpack
             npm pack
             sudo cp ./plotlywidget* /dist
