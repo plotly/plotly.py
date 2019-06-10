@@ -15,7 +15,7 @@ jobs:
           command: 'sudo pip install tox'
       - run:
           name: Test with tox
-          command: 'cd package/python/plotly; tox -e py27-core'
+          command: 'cd packages/python/plotly; tox -e py27-core'
           no_output_timeout: 20m
 
   python-3.5-core:
@@ -31,7 +31,7 @@ jobs:
           command: 'sudo pip install tox'
       - run:
           name: Test with tox
-          command: 'cd package/python/plotly; tox -e py35-core'
+          command: 'cd packages/python/plotly; tox -e py35-core'
           no_output_timeout: 20m
 
   python-3.6-core:
@@ -47,7 +47,7 @@ jobs:
           command: 'sudo pip install tox'
       - run:
           name: Test with tox
-          command: 'cd package/python/plotly; tox -e py36-core'
+          command: 'cd packages/python/plotly; tox -e py36-core'
           no_output_timeout: 20m
 
   python-3.7-core:
