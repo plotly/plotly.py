@@ -420,7 +420,7 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
     )
     layout['shapes'] = tasks
 
-    fig = dict(data=data, layout=layout)
+    fig = graph_objs.Figure(data=data, layout=layout)
     return fig
 
 
@@ -578,7 +578,7 @@ def gantt_dict(chart, colors, title, index_col, show_colorbar, bar_width,
     )
     layout['shapes'] = tasks
 
-    fig = dict(data=data, layout=layout)
+    fig = graph_objs.Figure(data=data, layout=layout)
     return fig
 
 
