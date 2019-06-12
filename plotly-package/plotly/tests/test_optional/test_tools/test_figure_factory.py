@@ -1651,22 +1651,20 @@ class TestGantt(TestCase):
         }
 
         self.assertEqual(test_gantt_chart['data'][0],
-                         exp_gantt_chart['data'][0])
+                         graph_objs.Scatter(exp_gantt_chart['data'][0]))
 
         self.assertEqual(test_gantt_chart['data'][1],
-                         exp_gantt_chart['data'][1])
+                         graph_objs.Scatter(exp_gantt_chart['data'][1]))
 
         self.assertEqual(test_gantt_chart['data'][2],
-                         exp_gantt_chart['data'][2])
+                         graph_objs.Scatter(exp_gantt_chart['data'][2]))
 
         self.assertEqual(test_gantt_chart['data'][3],
-                         exp_gantt_chart['data'][3])
+                         graph_objs.Scatter(exp_gantt_chart['data'][3]))
 
         self.assertEqual(test_gantt_chart['data'][4],
-                         exp_gantt_chart['data'][4])
+                         graph_objs.Scatter(exp_gantt_chart['data'][4]))
 
-        self.assertEqual(test_gantt_chart['layout'],
-                         exp_gantt_chart['layout'])
 
     def test_gantt_all_args(self):
 
@@ -1756,13 +1754,11 @@ class TestGantt(TestCase):
         }
 
         self.assertEqual(test_gantt_chart['data'][0],
-                         exp_gantt_chart['data'][0])
+                         graph_objs.Scatter(exp_gantt_chart['data'][0]))
 
         self.assertEqual(test_gantt_chart['data'][1],
-                         exp_gantt_chart['data'][1])
+                         graph_objs.Scatter(exp_gantt_chart['data'][1]))
 
-        self.assertEqual(test_gantt_chart['layout'],
-                         exp_gantt_chart['layout'])
 
 
 class Test2D_Density(TestCaseNoTemplate, NumpyTestUtilsMixin):
