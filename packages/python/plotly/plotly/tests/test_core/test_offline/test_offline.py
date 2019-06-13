@@ -14,10 +14,11 @@ import plotly
 import plotly.io as pio
 import json
 
-project_root = os.path.dirname(
+packages_root = os.path.dirname(
     os.path.dirname(
         os.path.dirname(
-            os.path.realpath(plotly.__file__))))
+            os.path.dirname(
+                os.path.realpath(plotly.__file__)))))
 
 here = os.path.dirname(os.path.realpath(__file__))
 html_filename = os.path.join(here, 'temp-plot.html')
@@ -311,7 +312,12 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
 
     @attr('nodev')
     def test_plotlyjs_version(self):
-        path = os.path.join(project_root, 'js', 'package.json')
+        path = os.path.join(
+            packages_root,
+            'javascript',
+            'plotlywidget',
+            'package.json',
+        )
         with open(path, 'rt') as f:
             package_json = json.load(f)
             expected_version = package_json['dependencies']['plotly.js']
