@@ -38,6 +38,8 @@ from plotly import (
     offline,
     colors,
     io,
+    data,
+    colors,
     _docstring_gen
 )
 
