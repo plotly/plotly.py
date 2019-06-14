@@ -139,3 +139,10 @@ class FigureTest(TestCaseNoTemplate):
         fig.add_scatter(y=[2, 1, 3], marker_line_color='green')
 
         self.assertEqual(fig.data[0].marker.line.color, 'green')
+
+    def test_scalar_trace_as_data(self):
+        fig = go.Figure(data=go.Waterfall(y=[2, 1, 3]))
+        self.assertEqual(fig.data, (go.Waterfall(y=[2, 1, 3]),))
+
+        fig = go.Figure(data=dict(type='waterfall', y=[2, 1, 3]))
+        self.assertEqual(fig.data, (go.Waterfall(y=[2, 1, 3]),))
