@@ -111,22 +111,6 @@ def test_append_scatter():
     assert d1 == d2
 
 
-@raises(Exception)
-def test_append_scatter_after_deleting_xaxis():
-    trace = Scatter(x=[1, 2, 3], y=[2, 3, 4])
-    fig = tls.make_subplots(rows=2, cols=3)
-    fig['layout'].pop('xaxis5', None)
-    fig.append_trace(trace, 2, 2)
-
-
-@raises(Exception)
-def test_append_scatter_after_deleting_yaxis():
-    trace = Scatter(x=[1, 2, 3], y=[2, 3, 4])
-    fig = tls.make_subplots(rows=2, cols=3)
-    fig['layout'].pop('yaxis5', None)
-    fig.append_trace(trace, 2, 2)
-
-
 def test_append_scatter3d():
     expected = Figure(
         data=Data([
@@ -168,13 +152,3 @@ def test_append_scatter3d():
 
     d1, d2 = strip_dict_params(fig['layout'], expected['layout'])
     assert d1 == d2
-
-
-@raises(Exception)
-def test_append_scatter3d_after_deleting_scene():
-    fig = tls.make_subplots(rows=2, cols=1,
-                            specs=[[{'is_3d': True}],
-                                   [{'is_3d': True}]])
-    trace = Scatter3d(x=[1, 2, 3], y=[2, 3, 4], z=[1, 2, 3])
-    fig['layout'].pop('scene1', None)
-    fig.append_trace(trace, 1, 1)
