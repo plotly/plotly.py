@@ -2268,6 +2268,8 @@ class BaseDataValidator(BaseValidator):
     that may be specified as:
       - A list or tuple of trace instances
         (e.g. [Scatter(...), Bar(...)])
+      - A single trace instance
+        (e.g. Scatter(...), Bar(...), etc.)
       - A list or tuple of dicts of string/value properties where:
         - The 'type' property specifies the trace type
 {trace_types}
@@ -2302,7 +2304,10 @@ class BaseDataValidator(BaseValidator):
 
         if v is None:
             v = []
-        elif isinstance(v, (list, tuple)):
+        else:
+            if not isinstance(v, (list, tuple)):
+                v = [v]
+
             trace_classes = tuple(self.class_map.values())
 
             res = []
@@ -2354,12 +2359,6 @@ class BaseDataValidator(BaseValidator):
             if self.set_uid:
                 for trace in v:
                     trace.uid = str(uuid.uuid4())
-
-        else:
-            if skip_invalid:
-                v = []
-            else:
-                self.raise_invalid_val(v)
 
         return v
 
