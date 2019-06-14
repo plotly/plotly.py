@@ -84,7 +84,7 @@ def test_rejection_type(validator):
     with pytest.raises(ValueError) as validation_failure:
         validator.validate_coerce(val)
 
-    assert "Invalid value" in str(validation_failure.value)
+    assert "Invalid element(s)" in str(validation_failure.value)
 
 
 def test_rejection_element_type(validator):
