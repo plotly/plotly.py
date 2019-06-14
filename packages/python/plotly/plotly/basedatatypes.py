@@ -859,6 +859,29 @@ class BaseFigure(object):
             trace.update(patch, **kwargs)
         return self
 
+    def update_layout(self, dict1=None, **kwargs):
+        """
+        Update the properties of the figure's layout with a dict and/or with
+        keyword arguments.
+
+        This recursively updates the structure of the original
+        layout with the values in the input dict / keyword arguments.
+
+        Parameters
+        ----------
+        dict1 : dict
+            Dictionary of properties to be updated
+        kwargs :
+            Keyword/value pair of properties to be updated
+
+        Returns
+        -------
+        BaseFigure
+            The Figure object that the update_layout method was called on
+        """
+        self.layout.update(dict1, **kwargs)
+        return self
+
     def _select_layout_subplots_by_prefix(
             self,
             prefix,
