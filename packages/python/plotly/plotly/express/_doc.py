@@ -358,5 +358,5 @@ def make_docstring(fn):
         )
         result += "    %s: %s\n" % (arg, d)
     result += "Returns:\n"
-    result += "    A `plotly_express.ExpressFigure` object."
+    result += "    A `Figure` object."
     return result

@@ -70,5 +70,4 @@ __all__ = [
     "colors",
     "set_mapbox_access_token",
     "get_trendline_results",
-    "ExpressFigure",
 ]
