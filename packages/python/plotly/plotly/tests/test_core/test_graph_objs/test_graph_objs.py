@@ -115,3 +115,40 @@ class TestBackwardsCompat(TestCase):
         self.assertIn('titlefont', obj)
         self.assertIn('titlefont.family', obj)
         self.assertIn('titlefont', iter(obj))
+
+
+class TestPop(TestCase):
+    def setUp(self):
+        self.layout = go.Layout(
+            width=1000,
+            title={'text': 'the title', 'font': {'size': 20}},
+            annotations=[{}, {}],
+            xaxis2={'range': [1, 2]}
+        )
+
+    def test_pop_valid_simple_prop(self):
+        self.assertEqual(self.layout.width, 1000)
+        self.assertEqual(self.layout.pop('width'), 1000)
+        self.assertIsNone(self.layout.width)
+
+    def test_pop_valid_compound_prop(self):
+        val = self.layout.title
+        self.assertEqual(self.layout.pop('title'), val)
+        self.assertEqual(self.layout.title, go.layout.Title())
+
+    def test_pop_valid_array_prop(self):
+        val = self.layout.annotations
+        self.assertEqual(self.layout.pop('annotations'), val)
+        self.assertEqual(self.layout.annotations, ())
+
+    def test_pop_valid_subplot_prop(self):
+        val = self.layout.xaxis2
+        self.assertEqual(self.layout.pop('xaxis2'), val)
+        self.assertEqual(self.layout.xaxis2, go.layout.XAxis())
+
+    def test_pop_invalid_prop_key_error(self):
+        with self.assertRaises(KeyError):
+            self.layout.pop('bogus')
+
+    def test_pop_invalid_prop_with_default(self):
+        self.assertEqual(self.layout.pop('bogus', 42), 42)
