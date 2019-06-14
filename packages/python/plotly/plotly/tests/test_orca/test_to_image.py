@@ -321,7 +321,7 @@ def test_invalid_figure_json():
     with pytest.raises(ValueError) as err:
         pio.to_image(bad_fig, format='png')
 
-    assert "Invalid value of type" in str(err.value)
+    assert "Invalid" in str(err.value)
 
     with pytest.raises(ValueError) as err:
         pio.to_image(bad_fig, format='png', validate=False)
