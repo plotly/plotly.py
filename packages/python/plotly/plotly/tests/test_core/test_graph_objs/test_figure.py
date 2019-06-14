@@ -146,3 +146,18 @@ class FigureTest(TestCaseNoTemplate):
 
         fig = go.Figure(data=dict(type='waterfall', y=[2, 1, 3]))
         self.assertEqual(fig.data, (go.Waterfall(y=[2, 1, 3]),))
+
+    def test_pop_data(self):
+        fig = go.Figure(data=go.Waterfall(y=[2, 1, 3]))
+        self.assertEqual(fig.pop('data'), (go.Waterfall(y=[2, 1, 3]),))
+        self.assertEqual(fig.data, ())
+
+    def test_pop_layout(self):
+        fig = go.Figure(layout=go.Layout(width=1000))
+        self.assertEqual(fig.pop('layout'), go.Layout(width=1000))
+        self.assertEqual(fig.layout, go.Layout())
+
+    def test_pop_invalid_key(self):
+        fig = go.Figure(layout=go.Layout(width=1000))
+        with self.assertRaises(KeyError):
+            fig.pop('bogus')

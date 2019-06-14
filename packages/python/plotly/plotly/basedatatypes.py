@@ -498,6 +498,37 @@ class BaseFigure(object):
                             self[k] = v
         return self
 
+    def pop(self, key, *args):
+        """
+        Remove the value associated with the specified key and return it
+
+        Parameters
+        ----------
+        key: str
+            Property name
+        dflt
+            The default value to return if key was not found in figure
+
+        Returns
+        -------
+        value
+            The removed value that was previously associated with key
+
+        Raises
+        ------
+        KeyError
+            If key is not in object and no dflt argument specified
+        """
+        # Handle default
+        if key not in self and args:
+            return args[0]
+        elif key in self:
+            val = self[key]
+            self[key] = None
+            return val
+        else:
+            raise KeyError(key)
+
     # Data
     # ----
     @property
@@ -519,6 +550,10 @@ class BaseFigure(object):
         err_header = ('The data property of a figure may only be assigned \n'
                       'a list or tuple that contains a permutation of a '
                       'subset of itself.\n')
+
+        # ### Treat None as empty ###
+        if new_data is None:
+            new_data = ()
 
         # ### Check valid input type ###
         if not isinstance(new_data, (list, tuple)):
@@ -3502,6 +3537,37 @@ class BasePlotlyType(object):
             BaseFigure._perform_update(self, kwargs)
 
         return self
+
+    def pop(self, key, *args):
+        """
+        Remove the value associated with the specified key and return it
+
+        Parameters
+        ----------
+        key: str
+            Property name
+        dflt
+            The default value to return if key was not found in object
+
+        Returns
+        -------
+        value
+            The removed value that was previously associated with key
+
+        Raises
+        ------
+        KeyError
+            If key is not in object and no dflt argument specified
+        """
+        # Handle default
+        if key not in self and args:
+            return args[0]
+        elif key in self:
+            val = self[key]
+            self[key] = None
+            return val
+        else:
+            raise KeyError(key)
 
     @property
     def _in_batch_mode(self):
