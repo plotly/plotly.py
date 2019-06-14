@@ -1033,9 +1033,9 @@ class ColorValidator(BaseValidator):
             ]
         },
     """
-    re_hex = re.compile('#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})')
-    re_rgb_etc = re.compile('(rgb|hsl|hsv)a?\([\d.]+%?(,[\d.]+%?){2,3}\)')
-    re_ddk = re.compile('var\(\-\-.*\)')
+    re_hex = re.compile(r'#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})')
+    re_rgb_etc = re.compile(r'(rgb|hsl|hsv)a?\([\d.]+%?(,[\d.]+%?){2,3}\)')
+    re_ddk = re.compile(r'var\(\-\-.*\)')
 
     named_colors = [
         "aliceblue", "antiquewhite", "aqua", "aquamarine", "azure", "beige",
@@ -1456,9 +1456,9 @@ class SubplotidValidator(BaseValidator):
             self.base = dflt
         else:
             # e.g. regex == '/^y([2-9]|[1-9][0-9]+)?$/'
-            self.base = re.match('/\^(\w+)', regex).group(1)
+            self.base = re.match(r'/\^(\w+)', regex).group(1)
 
-        self.regex = self.base + "(\d*)"
+        self.regex = self.base + r"(\d*)"
 
     def description(self):
 
