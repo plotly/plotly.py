@@ -22,8 +22,8 @@ requirements:
     {% endfor %}
 
 test:
-  imports:
-    - plotly_express
+#  imports:
+#    - chart_studio
 
 about:
   home: {{ sdata['url'] }}
