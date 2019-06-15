@@ -40,7 +40,6 @@ That's going to initialize the submodules we use in this project, update them so
 
 Here's what you need to know: changes to any files inside the following directories **will get overwritten**. These are synced with the submodules, if you need to change functionality there, you will need to make a pull request in the appropriate sub project repository.
 - chunked_requests
-- graph_reference
 - mplexporter
 
 Additionally, there are some project shortcuts that live in the `makefile` file. You can read all about this in the `make_instructions.txt` file. OR, just run:
