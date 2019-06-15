@@ -41,7 +41,7 @@ def _chart_studio_warning(submodule):
 def _chart_studio_error(submodule):
     raise ImportError("""
 The plotly.{submodule} module is deprecated,
-please install the chart_studio package and use the
+please install the chart-studio package and use the
 chart_studio.{submodule} module instead. 
 """.format(submodule=submodule))
 
