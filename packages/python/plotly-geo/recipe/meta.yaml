@@ -23,7 +23,7 @@ requirements:
 
 test:
   imports:
-    - plotly_express
+    - _plotly_geo
 
 about:
   home: {{ sdata['url'] }}

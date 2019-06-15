@@ -17,7 +17,7 @@ setup(
     maintainer_email="jon@plot.ly",
     url="https://plot.ly/python/",
     project_urls={"Github": "https://github.com/plotly/plotly.py"},
-    description="",
+    description="geo shape files for use with plotly.py",
     long_description=readme(),
     long_description_content_type="text/markdown",
     classifiers=[
@@ -25,8 +25,6 @@ setup(
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.3",
-        "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
