@@ -129,7 +129,6 @@ class TestPlot(PlotlyTestCase):
 
         kwargs = {'filename': 'test',
                   'auto_open': True,
-                  'fileopt': 'overwrite',
                   'validate': True,
                   'world_readable': False}
 
@@ -137,7 +136,6 @@ class TestPlot(PlotlyTestCase):
 
         expected_plot_option_logic = {'filename': 'test',
                                       'auto_open': True,
-                                      'fileopt': 'overwrite',
                                       'validate': True,
                                       'world_readable': False,
                                       'sharing': 'private'}
@@ -150,7 +148,6 @@ class TestPlot(PlotlyTestCase):
 
         kwargs = {'filename': 'test',
                   'auto_open': True,
-                  'fileopt': 'overwrite',
                   'validate': True,
                   'sharing': 'private'}
 
@@ -158,51 +155,6 @@ class TestPlot(PlotlyTestCase):
 
         expected_plot_option_logic = {'filename': 'test',
                                       'auto_open': True,
-                                      'fileopt': 'overwrite',
-                                      'validate': True,
-                                      'world_readable': False,
-                                      'sharing': 'private'}
-        self.assertEqual(plot_option_logic, expected_plot_option_logic)
-
-    def test_plot_option_fileopt_deprecations(self):
-
-        # Make sure DeprecationWarnings aren't filtered out by nose
-        warnings.filterwarnings('default', category=DeprecationWarning)
-
-        # If filename is not given and fileopt is not 'new',
-        # raise a deprecation warning
-        kwargs = {'auto_open': True,
-                  'fileopt': 'overwrite',
-                  'validate': True,
-                  'sharing': 'private'}
-
-        with warnings.catch_warnings(record=True) as w:
-            plot_option_logic = py._plot_option_logic(kwargs)
-            assert w[0].category == DeprecationWarning
-
-        expected_plot_option_logic = {'filename': 'plot from API',
-                                      'auto_open': True,
-                                      'fileopt': 'overwrite',
-                                      'validate': True,
-                                      'world_readable': False,
-                                      'sharing': 'private'}
-        self.assertEqual(plot_option_logic, expected_plot_option_logic)
-
-        # If filename is given and fileopt is not 'overwrite',
-        # raise a depreacation warning
-        kwargs = {'filename': 'test',
-                  'auto_open': True,
-                  'fileopt': 'append',
-                  'validate': True,
-                  'sharing': 'private'}
-
-        with warnings.catch_warnings(record=True) as w:
-            plot_option_logic = py._plot_option_logic(kwargs)
-            assert w[0].category == DeprecationWarning
-
-        expected_plot_option_logic = {'filename': 'test',
-                                      'auto_open': True,
-                                      'fileopt': 'append',
                                       'validate': True,
                                       'world_readable': False,
                                       'sharing': 'private'}
@@ -218,11 +170,10 @@ class TestPlot(PlotlyTestCase):
         fig = plotly.tools.return_figure_from_figure_or_data(self.simple_figure,
                                                              validate)
         kwargs = {'filename': 'is_share_key_included',
-                  'fileopt': 'overwrite',
                   'world_readable': False,
+                  'auto_open': False,
                   'sharing': 'secret'}
-        response = py._send_to_plotly(fig, **kwargs)
-        plot_url = response['url']
+        plot_url = py.plot(fig, **kwargs)
 
         self.assertTrue('share_key=' in plot_url)
 
@@ -233,7 +184,6 @@ class TestPlot(PlotlyTestCase):
         # be 200
 
         kwargs = {'filename': 'is_share_key_included',
-                  'fileopt': 'overwrite',
                   'auto_open': False,
                   'world_readable': False,
                   'sharing': 'secret'}
@@ -253,12 +203,12 @@ class TestPlot(PlotlyTestCase):
         # share_key is added it should be 200
 
         kwargs = {'filename': 'is_share_key_included',
-                  'fileopt': 'overwrite',
                   'world_readable': False,
+                  'auto_open': False,
                   'sharing': 'private'}
 
-        private_plot_url = py._send_to_plotly(self.simple_figure,
-                                              **kwargs)['url']
+        private_plot_url = py.plot(self.simple_figure,
+                                              **kwargs)
         private_plot_response = requests.get(private_plot_url + ".json")
 
         # The json file of the private plot should be 404
@@ -299,7 +249,7 @@ class TestPlotOptionLogic(PlotlyTestCase):
         options = py._plot_option_logic({})
         config_options = tls.get_config_file()
         for key in options:
-            if key != 'fileopt' and key in config_options:
+            if key in config_options:
                 self.assertEqual(options[key], config_options[key])
 
     def test_conflicting_plot_options_in_plot_option_logic(self):
