@@ -26,11 +26,23 @@ First, you'll need to *get* our project. This is the appropriate *clone* command
 git clone https://github.com/your_github_username/plotly.py.git
 ```
 
+### Create a virtual environment for plotly development
+TODO: Use virtualenv or conda, activate it
+
+### Install requirements
+pip install -r requirements.txt
+pip install -r optional-requirements.txt
+
+### Editable install of plotly.py
+pip install -e .
+
+
 ### Submodules
 
 Second, this project uses git submodules! They're both helpful and, at times, difficult to work with. The good news is you probably don't need to think about them! Just run the following shell command to make sure that your local repo is wired properly:
 
 **DO THIS (run this command in your new `plotly.py` directory)**
+
 
 ```bash
 make setup_subs
