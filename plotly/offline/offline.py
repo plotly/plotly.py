@@ -161,7 +161,8 @@ Unrecognized config options supplied: {bad_config}"""
 
     plotly_platform_url = plotly.tools.get_config_plotly_server_url()
 
-    clean_config['plotlyServerURL'] = plotly_platform_url
+    if not clean_config.get('plotlyServerURL', None):
+        clean_config['plotlyServerURL'] = plotly_platform_url
 
     if (plotly_platform_url != 'https://plot.ly' and
         clean_config.get('linkText', None) == 'Export to plot.ly'):
