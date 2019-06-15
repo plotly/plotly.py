@@ -51,8 +51,8 @@ if __name__ == '__main__':
         os.path.join(
             here,
             'submodules',
-            'mplexporter',
-            'mplexporter',
+            'chunked_requests',
+            'chunked_requests',
         ),
         os.path.join(chunked_dst),
     )
