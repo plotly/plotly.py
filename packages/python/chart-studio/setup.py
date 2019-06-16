@@ -10,7 +10,7 @@ def readme():
 
 setup(
     name="chart-studio",
-    version="1.0.0a1",
+    version="1.0.0a2",
     author="Chris P",
     author_email="chris@plot.ly",
     maintainer="Jon Mease",
@@ -34,16 +34,13 @@ setup(
     packages=[
         "chart_studio",
         "chart_studio.api",
-        "chart_studio.api.v1",
         "chart_studio.api.v2",
         "chart_studio.dashboard_objs",
         "chart_studio.grid_objs",
         "chart_studio.plotly",
         "chart_studio.plotly.chunked_requests",
         "chart_studio.presentation_objs",
-        "chart_studio.widgets",
     ],
-    package_data={'chart_studio': ['package_data/*']},
     install_requires=["plotly", "requests", "retrying>=1.3.3", "six"],
     zip_safe=False,
 )

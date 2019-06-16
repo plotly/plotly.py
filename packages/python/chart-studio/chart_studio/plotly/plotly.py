@@ -34,7 +34,7 @@ from _plotly_utils.basevalidators import CompoundValidator, is_array
 from _plotly_utils.utils import PlotlyJSONEncoder
 
 from chart_studio import files, session, tools, utils, exceptions
-from chart_studio.api import v1, v2
+from chart_studio.api import v2
 from chart_studio.plotly import chunked_requests
 from chart_studio.grid_objs import Grid
 from chart_studio.dashboard_objs import dashboard_objs as dashboard
@@ -46,16 +46,11 @@ __all__ = None
 
 DEFAULT_PLOT_OPTIONS = {
     'filename': "plot from API",
-    'fileopt': "new",
     'world_readable': files.FILE_CONTENT[files.CONFIG_FILE]['world_readable'],
     'auto_open': files.FILE_CONTENT[files.CONFIG_FILE]['auto_open'],
     'validate': True,
     'sharing': files.FILE_CONTENT[files.CONFIG_FILE]['sharing']
 }
-
-warnings.filterwarnings(
-    'default', r'The fileopt parameter is deprecated .*', DeprecationWarning
-)
 
 SHARING_ERROR_MSG = (
     "Whoops, sharing can only be set to either 'public', 'private', or "
@@ -91,27 +86,11 @@ def _plot_option_logic(plot_options_from_args):
     session_options = session.get_session_plot_options()
     plot_options_from_args = copy.deepcopy(plot_options_from_args)
 
-    # fileopt deprecation warnings
-    fileopt_warning = ('The fileopt parameter is deprecated '
-                       'and will be removed in plotly.py version 4')
-    if ('filename' in plot_options_from_args and
-            plot_options_from_args.get('fileopt', 'overwrite') != 'overwrite'):
-        warnings.warn(fileopt_warning, DeprecationWarning)
-
-    if ('filename' not in plot_options_from_args and
-            plot_options_from_args.get('fileopt', 'new') != 'new'):
-        warnings.warn(fileopt_warning, DeprecationWarning)
-
     # Validate options and fill in defaults w world_readable and sharing
     for option_set in [plot_options_from_args,
                        session_options, file_options]:
         utils.validate_world_readable_and_sharing_settings(option_set)
         utils.set_sharing_and_world_readable(option_set)
-
-        # dynamic defaults
-        if ('filename' in option_set and
-                'fileopt' not in option_set):
-            option_set['fileopt'] = 'overwrite'
 
     user_plot_options = {}
     user_plot_options.update(default_plot_options)
@@ -129,11 +108,6 @@ def iplot(figure_or_data, **plot_options):
 
     plot_options keyword arguments:
     filename (string) -- the name that will be associated with this figure
-    fileopt ('new' | 'overwrite' | 'extend' | 'append')
-        - 'new': create a new, unique url for this plot
-        - 'overwrite': overwrite the file associated with `filename` with this
-        - 'extend': add additional numbers (data) to existing traces
-        - 'append': add additional traces to existing data lists
     sharing ('public' | 'private' | 'secret') -- Toggle who can view this graph
         - 'public': Anyone can view this graph. It will appear in your profile
                     and can appear in search engines. You do not need to be
@@ -192,11 +166,6 @@ def plot(figure_or_data, validate=True, **plot_options):
 
     plot_options keyword arguments:
     filename (string) -- the name that will be associated with this figure
-    fileopt ('new' | 'overwrite' | 'extend' | 'append') -- 'new' creates a
-        'new': create a new, unique url for this plot
-        'overwrite': overwrite the file associated with `filename` with this
-        'extend': add additional numbers (data) to existing traces
-        'append': add additional traces to existing data lists
     auto_open (default=True) -- Toggle browser options
         True: open this plot in a new browser tab
         False: do not open plot in the browser, but do return the unique url
@@ -251,22 +220,83 @@ def plot(figure_or_data, validate=True, **plot_options):
 
     plot_options = _plot_option_logic(plot_options)
 
-    fig = plotly.tools._replace_newline(figure)  # does not mutate figure
-    data = fig.get('data', [])
-    plot_options['layout'] = fig.get('layout', {})
-    response = v1.clientresp(data, **plot_options)
+    # Initialize API payload
+    payload = {
+        'figure': figure,
+        'world_readable': True
+    }
 
-    # Check if the url needs a secret key
-    url = response.json()['url']
-    if plot_options['sharing'] == 'secret':
-        if 'share_key=' not in url:
-            # add_share_key_to_url updates the url to include the share_key
-            url = add_share_key_to_url(url)
+    # Process filename
+    filename = plot_options.get('filename', None)
+    if filename:
+        # Strip trailing slash
+        if filename[-1] == '/':
+            filename = filename[0:-1]
 
-    if plot_options['auto_open']:
-        _open_url(url)
+        # split off any parent directory
+        paths = filename.split('/')
+        parent_path = '/'.join(paths[0:-1])
+        filename = paths[-1]
 
-    return url
+        # Create parent directory
+        if parent_path != '':
+            file_ops.ensure_dirs(parent_path)
+            payload['parent_path'] = parent_path
+
+        payload['filename'] = filename
+    else:
+        parent_path = ''
+
+    # Process sharing
+    sharing = plot_options.get('sharing', None)
+    if sharing == 'public':
+        payload['world_readable'] = True
+    elif sharing == 'private':
+        payload['world_readable'] = False
+    elif sharing == 'secret':
+        payload['world_readable'] = False
+        payload['share_key_enabled'] = True
+    else:
+        raise _plotly_utils.exceptions.PlotlyError(
+            SHARING_ERROR_MSG
+        )
+
+    # Extract grid
+    figure, grid = _extract_grid_from_fig_like(figure)
+
+    # Upload grid if anything was extracted
+    if len(grid) > 0:
+        if not filename:
+            grid_filename = None
+        elif parent_path:
+            grid_filename = parent_path + '/' + filename + '_grid'
+        else:
+            grid_filename = filename + '_grid'
+
+        grid_ops.upload(grid=grid,
+                        filename=grid_filename,
+                        world_readable=payload['world_readable'],
+                        auto_open=False)
+
+        _set_grid_column_references(figure, grid)
+        payload['figure'] = figure
+
+    file_info = _create_or_update(payload, 'plot')
+
+    # Compute viewing URL
+    if sharing == 'secret':
+        web_url = (file_info['web_url'][:-1] +
+                   '?share_key=' + file_info['share_key'])
+    else:
+        web_url = file_info['web_url']
+
+    # Handle auto_open
+    auto_open = plot_options.get('auto_open', None)
+    if auto_open:
+        _open_url(web_url)
+
+    # Return URL
+    return web_url
 
 
 def iplot_mpl(fig, resize=True, strip_style=False, update=None,
@@ -1384,24 +1414,6 @@ def add_share_key_to_url(plot_url, attempt=0):
     return url_share_key
 
 
-def _send_to_plotly(figure, **plot_options):
-    import plotly.tools
-    fig = plotly.tools._replace_newline(figure)  # does not mutate figure
-    data = fig.get('data', [])
-    response = v1.clientresp(data, **plot_options)
-
-    parsed_content = response.json()
-
-    # Check if the url needs a secret key
-    if plot_options['sharing'] == 'secret':
-        url = parsed_content['url']
-        if 'share_key=' not in url:
-            # add_share_key_to_url updates the url to include the share_key
-            parsed_content['url'] = add_share_key_to_url(url)
-
-    return parsed_content
-
-
 def get_grid(grid_url, raw=False):
     """
     Returns the specified grid as a Grid instance or in JSON/dict form.
@@ -1447,7 +1459,12 @@ def _create_or_update(data, filetype):
     if filename:
         try:
             lookup_res = v2.files.lookup(filename)
-            matching_file = json.loads(lookup_res.content)
+            if isinstance(lookup_res.content, bytes):
+                content = lookup_res.content.decode('utf-8')
+            else:
+                content = lookup_res.content
+
+            matching_file = json.loads(content)
 
             if matching_file['filetype'] == filetype:
                 fid = matching_file['fid']
@@ -1984,74 +2001,14 @@ def create_animations(figure, filename=None, sharing='public', auto_open=True):
     py.create_animations(figure, 'growing_circles')
     ```
     """
-    payload = {
-        'figure': figure,
-        'world_readable': True
-    }
-
-    # set filename if specified
-    if filename:
-        # Strip trailing slash
-        if filename[-1] == '/':
-            filename = filename[0:-1]
-
-        # split off any parent directory
-        paths = filename.split('/')
-        parent_path = '/'.join(paths[0:-1])
-        filename = paths[-1]
-
-        # Create parent directory
-        if parent_path != '':
-            file_ops.ensure_dirs(parent_path)
-            payload['parent_path'] = parent_path
-
-        payload['filename'] = filename
-    else:
-        parent_path = ''
-
-    # set sharing
-    if sharing == 'public':
-        payload['world_readable'] = True
-    elif sharing == 'private':
-        payload['world_readable'] = False
-    elif sharing == 'secret':
-        payload['world_readable'] = False
-        payload['share_key_enabled'] = True
-    else:
-        raise _plotly_utils.exceptions.PlotlyError(
-            SHARING_ERROR_MSG
-        )
-
-    # Extract grid
-    figure, grid = _extract_grid_from_fig_like(figure)
-
-    if len(grid) > 0:
-        if not filename:
-            grid_filename = None
-        elif parent_path:
-            grid_filename = parent_path + '/' + filename + '_grid'
-        else:
-            grid_filename = filename + '_grid'
-
-        grid_ops.upload(grid=grid,
-                        filename=grid_filename,
-                        world_readable=payload['world_readable'],
-                        auto_open=False)
-        _set_grid_column_references(figure, grid)
-        payload['figure'] = figure
-
-    file_info = _create_or_update(payload, 'plot')
-
-    if sharing == 'secret':
-        web_url = (file_info['web_url'][:-1] +
-                   '?share_key=' + file_info['share_key'])
-    else:
-        web_url = file_info['web_url']
-
-    if auto_open:
-        _open_url(web_url)
-
-    return web_url
+    # This function is no longer needed since plot now supports figures with
+    # frames.  Delegate to this implementation for compatibility
+    return plot(
+        figure,
+        filename=filename,
+        sharing=sharing,
+        auto_open=auto_open,
+    )
 
 
 def icreate_animations(figure, filename=None, sharing='public', auto_open=False):
