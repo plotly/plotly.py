@@ -108,11 +108,6 @@ def iplot(figure_or_data, **plot_options):
 
     plot_options keyword arguments:
     filename (string) -- the name that will be associated with this figure
-    fileopt ('new' | 'overwrite' | 'extend' | 'append')
-        - 'new': create a new, unique url for this plot
-        - 'overwrite': overwrite the file associated with `filename` with this
-        - 'extend': add additional numbers (data) to existing traces
-        - 'append': add additional traces to existing data lists
     sharing ('public' | 'private' | 'secret') -- Toggle who can view this graph
         - 'public': Anyone can view this graph. It will appear in your profile
                     and can appear in search engines. You do not need to be
