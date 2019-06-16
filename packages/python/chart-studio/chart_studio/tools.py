@@ -384,24 +384,3 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
             "plot. If you just want the *embed code*,\ntry using "
             "`get_embed()` instead."
             '\nQuestions? {}'.format(feedback_contact))
-
-
-### graph_objs related tools ###
-if ipython_core_display:
-    class PlotlyDisplay(ipython_core_display.HTML):
-        """An IPython display object for use with plotly urls
-
-        PlotlyDisplay objects should be instantiated with a url for a plot.
-        IPython will *choose* the proper display representation from any
-        Python object, and using provided methods if they exist. By defining
-        the following, if an HTML display is unusable, the PlotlyDisplay
-        object can provide alternate representations.
-
-        """
-        def __init__(self, url, width, height):
-            self.resource = url
-            self.embed_code = get_embed(url, width=width, height=height)
-            super(PlotlyDisplay, self).__init__(data=self.embed_code)
-
-        def _repr_html_(self):
-            return self.embed_code
