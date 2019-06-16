@@ -1459,7 +1459,12 @@ def _create_or_update(data, filetype):
     if filename:
         try:
             lookup_res = v2.files.lookup(filename)
-            matching_file = json.loads(lookup_res.content)
+            if isinstance(lookup_res.content, bytes):
+                content = lookup_res.content.decode('utf-8')
+            else:
+                content = lookup_res.content
+
+            matching_file = json.loads(content)
 
             if matching_file['filetype'] == filetype:
                 fid = matching_file['fid']
