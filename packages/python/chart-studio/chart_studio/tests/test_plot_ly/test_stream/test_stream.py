@@ -35,7 +35,7 @@ class TestStreaming(PlotlyTestCase):
                       auto_open=False,
                       world_readable=True,
                       filename='stream-test')
-        assert url == 'https://plot.ly/~PythonAPI/461'
+        self.assertEqual('https://plot.ly/~PythonAPI/461/', url)
         time.sleep(.5)
 
     @attr('slow')
