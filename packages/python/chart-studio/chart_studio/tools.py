@@ -22,6 +22,8 @@ from chart_studio import session, utils
 from chart_studio.files import CONFIG_FILE, CREDENTIALS_FILE, FILE_CONTENT
 
 ipython_core_display = optional_imports.get_module('IPython.core.display')
+ipython_display = optional_imports.get_module('IPython.display')
+
 sage_salvus = optional_imports.get_module('sage_salvus')
 
 
@@ -231,30 +233,7 @@ def reset_config_file():
 
 
 ### embed tools ###
-
-def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
-    """Returns HTML code to embed figure on a webpage as an <iframe>
-
-    Plotly uniquely identifies figures with a 'file_owner'/'file_id' pair.
-    Since each file is given a corresponding unique url, you may also simply
-    pass a valid plotly url as the first argument.
-
-    Note, if you're using a file_owner string as the first argument, you MUST
-    specify a `file_id` keyword argument. Else, if you're using a url string
-    as the first argument, you MUST NOT specify a `file_id` keyword argument,
-    or file_id must be set to Python's None value.
-
-    Positional arguments:
-    file_owner_or_url (string) -- a valid plotly username OR a valid plotly url
-
-    Keyword arguments:
-    file_id (default=None) -- an int or string that can be converted to int
-                              if you're using a url, don't fill this in!
-    width (default="100%") -- an int or string corresp. to width of the figure
-    height (default="525") -- same as width but corresp. to the height of the
-                              figure
-
-    """
+def _get_embed_url(file_owner_or_url, file_id=None):
     plotly_rest_url = (session.get_session_config().get('plotly_domain') or
                        get_config_file()['plotly_domain'])
     if file_id is None:  # assume we're using a url
@@ -293,28 +272,55 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
         raise _plotly_utils.exceptions.PlotlyError(
             "The 'file_id' argument must be a non-negative number."
         )
-    if share_key is '':
-        s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\" "
-             "seamless=\"seamless\" "
-             "src=\"{plotly_rest_url}/"
-             "~{file_owner}/{file_id}.embed\" "
-             "height=\"{iframe_height}\" width=\"{iframe_width}\">"
-             "</iframe>").format(
-            plotly_rest_url=plotly_rest_url,
-            file_owner=file_owner, file_id=file_id,
-            iframe_height=height, iframe_width=width)
-    else:
-        s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\" "
-             "seamless=\"seamless\" "
-             "src=\"{plotly_rest_url}/"
-             "~{file_owner}/{file_id}.embed?share_key={share_key}\" "
-             "height=\"{iframe_height}\" width=\"{iframe_width}\">"
-             "</iframe>").format(
-            plotly_rest_url=plotly_rest_url,
-            file_owner=file_owner, file_id=file_id, share_key=share_key,
-            iframe_height=height, iframe_width=width)
 
-    return s
+    if share_key is '':
+        return "{plotly_rest_url}/~{file_owner}/{file_id}.embed".format(
+            plotly_rest_url=plotly_rest_url,
+            file_owner=file_owner,
+            file_id=file_id,
+        )
+    else:
+        return ("{plotly_rest_url}/~{file_owner}/"
+                "{file_id}.embed?share_key={share_key}").format(
+            plotly_rest_url=plotly_rest_url,
+            file_owner=file_owner,
+            file_id=file_id,
+            share_key=share_key,
+        )
+
+
+def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
+    """Returns HTML code to embed figure on a webpage as an <iframe>
+
+    Plotly uniquely identifies figures with a 'file_owner'/'file_id' pair.
+    Since each file is given a corresponding unique url, you may also simply
+    pass a valid plotly url as the first argument.
+
+    Note, if you're using a file_owner string as the first argument, you MUST
+    specify a `file_id` keyword argument. Else, if you're using a url string
+    as the first argument, you MUST NOT specify a `file_id` keyword argument,
+    or file_id must be set to Python's None value.
+
+    Positional arguments:
+    file_owner_or_url (string) -- a valid plotly username OR a valid plotly url
+
+    Keyword arguments:
+    file_id (default=None) -- an int or string that can be converted to int
+                              if you're using a url, don't fill this in!
+    width (default="100%") -- an int or string corresp. to width of the figure
+    height (default="525") -- same as width but corresp. to the height of the
+                              figure
+
+    """
+    embed_url = _get_embed_url(file_owner_or_url, file_id)
+
+    return ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\" "
+            "seamless=\"seamless\" "
+            "src=\"{embed_url}\" "
+            "height=\"{iframe_height}\" width=\"{iframe_width}\">"
+            "</iframe>").format(embed_url=embed_url,
+                                iframe_height=height,
+                                iframe_width=width)
 
 
 def embed(file_owner_or_url, file_id=None, width="100%", height=525):
@@ -361,7 +367,9 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
                 fid=file_id)
         else:
             url = file_owner_or_url
-        return PlotlyDisplay(url, width, height)
+
+        embed_url = _get_embed_url(url, file_id)
+        return ipython_display.IFrame(embed_url, width, height)
     else:
         if (get_config_defaults()['plotly_domain']
                 != session.get_session_config()['plotly_domain']):
@@ -376,24 +384,3 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
             "plot. If you just want the *embed code*,\ntry using "
             "`get_embed()` instead."
             '\nQuestions? {}'.format(feedback_contact))
-
-
-### graph_objs related tools ###
-if ipython_core_display:
-    class PlotlyDisplay(ipython_core_display.HTML):
-        """An IPython display object for use with plotly urls
-
-        PlotlyDisplay objects should be instantiated with a url for a plot.
-        IPython will *choose* the proper display representation from any
-        Python object, and using provided methods if they exist. By defining
-        the following, if an HTML display is unusable, the PlotlyDisplay
-        object can provide alternate representations.
-
-        """
-        def __init__(self, url, width, height):
-            self.resource = url
-            self.embed_code = get_embed(url, width=width, height=height)
-            super(PlotlyDisplay, self).__init__(data=self.embed_code)
-
-        def _repr_html_(self):
-            return self.embed_code
