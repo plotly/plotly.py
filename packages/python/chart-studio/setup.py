@@ -40,9 +40,7 @@ setup(
         "chart_studio.plotly",
         "chart_studio.plotly.chunked_requests",
         "chart_studio.presentation_objs",
-        "chart_studio.widgets",
     ],
-    package_data={'chart_studio': ['package_data/*']},
     install_requires=["plotly", "requests", "retrying>=1.3.3", "six"],
     zip_safe=False,
 )
