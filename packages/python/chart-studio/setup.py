@@ -34,7 +34,6 @@ setup(
     packages=[
         "chart_studio",
         "chart_studio.api",
-        "chart_studio.api.v1",
         "chart_studio.api.v2",
         "chart_studio.dashboard_objs",
         "chart_studio.grid_objs",
