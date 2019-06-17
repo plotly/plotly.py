@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="21px" height="20px" viewBox="0 0 21 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>plotly</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="plotly" transform="translate(-2.000000, -2.000000)">
+            <g id="Group">
+                <rect id="Rectangle-path" fill="#447ADB" fill-rule="nonzero" x="19.990599" y="19.1883099" width="2.36447716" height="2.80107981"></rect>
+                <rect id="Rectangle-path" fill="#447ADB" fill-rule="nonzero" x="17.0349949" y="16.2859937" width="2.36447716" height="5.70339593"></rect>
+                <rect id="Rectangle-path" fill="#447ADB" fill-rule="nonzero" x="14.1231878" y="2.01061033" width="2.36447716" height="19.9787793"></rect>
+                <rect id="Rectangle-path" fill="#447ADB" fill-rule="nonzero" x="11.2078477" y="7.69713615" width="2.36447716" height="14.2922535"></rect>
+                <rect id="Rectangle-path" fill="#447ADB" fill-rule="nonzero" x="8.28508629" y="4.86231612" width="2.36447716" height="17.1270736"></rect>
+                <rect id="Rectangle-path" fill="#447ADB" fill-rule="nonzero" x="5.29663959" y="13.4258529" width="2.36447716" height="8.56353678"></rect>
+                <rect id="Rectangle-path" fill="#447ADB" fill-rule="nonzero" x="2.37388832" y="19.2369484" width="2.36447716" height="2.75244131"></rect>
+                <polygon id="Shape" points="0 0 24 0 24 24 0 24"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>
