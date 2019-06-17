@@ -148,6 +148,16 @@ export class RenderedPlotly extends Widget implements IRenderMime.IRenderer {
           }
         });
       }
+
+
+      (<Plotly.PlotlyHTMLElement>(this.node)).on('plotly_webglcontextlost', () => {
+            const png_data = <string>model.data['image/png'];
+            if(png_data !== undefined && png_data !== null) {
+              // We have PNG data, use it
+              this.createImage(png_data);
+              return Promise.resolve();
+            }
+          });
     });
   }
 
