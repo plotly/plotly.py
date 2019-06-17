@@ -5,7 +5,7 @@ var base = require('@jupyter-widgets/base');
  * The widget manager provider.
  */
 module.exports = {
-  id: 'plotlywidget',
+  id: 'jupyterlab-plotly',
   requires: [base.IJupyterWidgetRegistry],
   activate: function(app, widgets) {
       widgets.registerWidget({
