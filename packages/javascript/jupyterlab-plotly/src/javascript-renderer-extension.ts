@@ -41,17 +41,90 @@ export class RenderedPlotly extends Widget implements IRenderMime.IRenderer {
     super();
     this.addClass(CSS_CLASS);
     this._mimeType = options.mimeType;
+
+    this._img_el = <HTMLImageElement>(document.createElement("img"));
+    this._img_el.className = 'plot-img';
+    this.node.appendChild(this._img_el);
+
+    // Install hover callback
+    this._img_el.addEventListener('mouseenter', event => {
+      this.createGraph(this._model);
+    })
   }
 
   /**
    * Render Plotly into this widget's node.
    */
   renderModel(model: IRenderMime.IMimeModel): Promise<void> {
+
+    if (this.hasGraphElement()) {
+      // We already have a graph, don't overwrite it
+      return Promise.resolve();
+    }
+
+    this._model = model;
+
+    const png_data = <string>model.data['image/png'];
+    if(png_data !== undefined && png_data !== null) {
+      // We have PNG data, use it
+      this.createImage(png_data);
+      return Promise.resolve();
+    } else {
+      // Create a new graph
+      return this.createGraph(model);
+    }
+  }
+
+  private hasGraphElement() {
+    return this.node.querySelector('.plot-container') !==  null
+  }
+
+  private createImage(png_data: string) {
+    this.hideGraph();
+    this._img_el.src = "data:image/png;base64," + <string>png_data;
+    this.showImage();
+  }
+
+  private hideGraph() {
+    // Hide any graph
+    let el = <HTMLDivElement>this.node.querySelector('.plot-container');
+    if (el !== null && el !== undefined) {
+      el.style.display = "none"
+    }
+  }
+
+  private showGraph() {
+    // Hide any graph
+    let el = <HTMLDivElement>this.node.querySelector('.plot-container');
+    if (el !== null && el !== undefined) {
+      el.style.display = "block"
+    }
+  }
+
+  private hideImage() {
+    // Hide any graph
+    let el = <HTMLImageElement>this.node.querySelector('.plot-img');
+    if (el !== null && el !== undefined) {
+      el.style.display = "none"
+    }
+  }
+
+  private showImage() {
+    // Hide any graph
+    let el = <HTMLImageElement>this.node.querySelector('.plot-img');
+    if (el !== null && el !== undefined) {
+      el.style.display = "block"
+    }
+  }
+
+  private createGraph(model: IRenderMime.IMimeModel) {
     const { data, layout, frames, config } = model.data[this._mimeType] as
       | any
       | IPlotlySpec;
-    // const metadata = model.metadata[this._mimeType] as any || {};
+
     return Plotly.react(this.node, data, layout, config).then(plot => {
+      this.showGraph();
+      this.hideImage();
       this.update();
       if (frames) {
         Plotly.addFrames(this.node, frames).then(() => {
@@ -96,7 +169,7 @@ export class RenderedPlotly extends Widget implements IRenderMime.IRenderer {
    * A message handler invoked on an `'update-request'` message.
    */
   protected onUpdateRequest(msg: Message): void {
-    if (this.isVisible) {
+    if (this.isVisible && this.hasGraphElement()) {
       Plotly.redraw(this.node).then(() => {
         Plotly.Plots.resize(this.node);
       });
@@ -104,6 +177,8 @@ export class RenderedPlotly extends Widget implements IRenderMime.IRenderer {
   }
 
   private _mimeType: string;
+  private _img_el: HTMLImageElement;
+  private _model: IRenderMime.IMimeModel
 }
 
 /**
