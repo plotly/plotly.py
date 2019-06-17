@@ -127,9 +127,7 @@ export class RenderedPlotly extends Widget implements IRenderMime.IRenderer {
       this.hideImage();
       this.update();
       if (frames) {
-        Plotly.addFrames(this.node, frames).then(() => {
-          Plotly.animate(this.node);
-        });
+        Plotly.addFrames(this.node, frames);
       }
       if (this.node.offsetWidth > 0 && this.node.offsetHeight > 0) {
         Plotly.toImage(plot, {
