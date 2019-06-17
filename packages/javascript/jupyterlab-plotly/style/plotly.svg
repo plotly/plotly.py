@@ -1,21 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="21px" height="20px" viewBox="0 0 21 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
-    <title>plotly</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="plotly" transform="translate(-2.000000, -2.000000)">
-            <g id="Group">
-                <rect id="Rectangle-path" fill="#447ADB" fill-rule="nonzero" x="19.990599" y="19.1883099" width="2.36447716" height="2.80107981"></rect>
-                <rect id="Rectangle-path" fill="#447ADB" fill-rule="nonzero" x="17.0349949" y="16.2859937" width="2.36447716" height="5.70339593"></rect>
-                <rect id="Rectangle-path" fill="#447ADB" fill-rule="nonzero" x="14.1231878" y="2.01061033" width="2.36447716" height="19.9787793"></rect>
-                <rect id="Rectangle-path" fill="#447ADB" fill-rule="nonzero" x="11.2078477" y="7.69713615" width="2.36447716" height="14.2922535"></rect>
-                <rect id="Rectangle-path" fill="#447ADB" fill-rule="nonzero" x="8.28508629" y="4.86231612" width="2.36447716" height="17.1270736"></rect>
-                <rect id="Rectangle-path" fill="#447ADB" fill-rule="nonzero" x="5.29663959" y="13.4258529" width="2.36447716" height="8.56353678"></rect>
-                <rect id="Rectangle-path" fill="#447ADB" fill-rule="nonzero" x="2.37388832" y="19.2369484" width="2.36447716" height="2.75244131"></rect>
-                <polygon id="Shape" points="0 0 24 0 24 24 0 24"></polygon>
-            </g>
-        </g>
-    </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 132">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #119dff;
+      }
+
+      .cls-2 {
+        fill: #25fefd;
+      }
+
+      .cls-3 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <title>plotly-logomark</title>
+  <g id="symbol">
+    <rect class="cls-1" width="132" height="132" rx="6" ry="6"/>
+    <circle class="cls-2" cx="78" cy="54" r="6"/>
+    <circle class="cls-2" cx="102" cy="30" r="6"/>
+    <circle class="cls-2" cx="78" cy="30" r="6"/>
+    <circle class="cls-2" cx="54" cy="30" r="6"/>
+    <circle class="cls-2" cx="30" cy="30" r="6"/>
+    <circle class="cls-2" cx="30" cy="54" r="6"/>
+    <path class="cls-3" d="M30,72a6,6,0,0,0-6,6v24a6,6,0,0,0,12,0V78A6,6,0,0,0,30,72Z"/>
+    <path class="cls-3" d="M78,72a6,6,0,0,0-6,6v24a6,6,0,0,0,12,0V78A6,6,0,0,0,78,72Z"/>
+    <path class="cls-3" d="M54,48a6,6,0,0,0-6,6v48a6,6,0,0,0,12,0V54A6,6,0,0,0,54,48Z"/>
+    <path class="cls-3" d="M102,48a6,6,0,0,0-6,6v48a6,6,0,0,0,12,0V54A6,6,0,0,0,102,48Z"/>
+  </g>
 </svg>
