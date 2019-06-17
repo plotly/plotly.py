@@ -331,10 +331,10 @@ jobs:
       - run:
           name: npm-pack widget
           command: |
-            cd packages/javascript/plotlywidget/
+            cd packages/javascript/jupyterlab-plotly/
             npm install webpack
             npm pack
-            sudo cp ./plotlywidget* /dist
+            sudo cp ./jupyterlab-plotly* /dist
           when: always
       - store_artifacts:
           path: packages/python/plotly/dist
