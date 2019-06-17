@@ -42,11 +42,12 @@ export class RenderedPlotly extends Widget implements IRenderMime.IRenderer {
     this.addClass(CSS_CLASS);
     this._mimeType = options.mimeType;
 
+    // Create image element
     this._img_el = <HTMLImageElement>(document.createElement("img"));
     this._img_el.className = 'plot-img';
     this.node.appendChild(this._img_el);
 
-    // Install hover callback
+    // Install image hover callback
     this._img_el.addEventListener('mouseenter', event => {
       this.createGraph(this._model);
     })
@@ -62,12 +63,14 @@ export class RenderedPlotly extends Widget implements IRenderMime.IRenderer {
       return Promise.resolve();
     }
 
+    // Save off reference to model so that we can regenerate the plot later
     this._model = model;
 
+    // Check for PNG data in mime bundle
     const png_data = <string>model.data['image/png'];
     if(png_data !== undefined && png_data !== null) {
       // We have PNG data, use it
-      this.createImage(png_data);
+      this.updateImage(png_data);
       return Promise.resolve();
     } else {
       // Create a new graph
@@ -76,17 +79,19 @@ export class RenderedPlotly extends Widget implements IRenderMime.IRenderer {
   }
 
   private hasGraphElement() {
+    // Check for the presence of the .plot-container element that plotly.js
+    // places at the top of the figure structure
     return this.node.querySelector('.plot-container') !==  null
   }
 
-  private createImage(png_data: string) {
+  private updateImage(png_data: string) {
     this.hideGraph();
     this._img_el.src = "data:image/png;base64," + <string>png_data;
     this.showImage();
   }
 
   private hideGraph() {
-    // Hide any graph
+    // Hide the graph if there is one
     let el = <HTMLDivElement>this.node.querySelector('.plot-container');
     if (el !== null && el !== undefined) {
       el.style.display = "none"
@@ -94,7 +99,7 @@ export class RenderedPlotly extends Widget implements IRenderMime.IRenderer {
   }
 
   private showGraph() {
-    // Hide any graph
+    // Show the graph if there is one
     let el = <HTMLDivElement>this.node.querySelector('.plot-container');
     if (el !== null && el !== undefined) {
       el.style.display = "block"
@@ -102,7 +107,7 @@ export class RenderedPlotly extends Widget implements IRenderMime.IRenderer {
   }
 
   private hideImage() {
-    // Hide any graph
+    // Hide the image element
     let el = <HTMLImageElement>this.node.querySelector('.plot-img');
     if (el !== null && el !== undefined) {
       el.style.display = "none"
@@ -110,7 +115,7 @@ export class RenderedPlotly extends Widget implements IRenderMime.IRenderer {
   }
 
   private showImage() {
-    // Hide any graph
+    // Show the image element
     let el = <HTMLImageElement>this.node.querySelector('.plot-img');
     if (el !== null && el !== undefined) {
       el.style.display = "block"
@@ -147,12 +152,12 @@ export class RenderedPlotly extends Widget implements IRenderMime.IRenderer {
         });
       }
 
-
+      // Handle webgl context lost events
       (<Plotly.PlotlyHTMLElement>(this.node)).on('plotly_webglcontextlost', () => {
             const png_data = <string>model.data['image/png'];
             if(png_data !== undefined && png_data !== null) {
               // We have PNG data, use it
-              this.createImage(png_data);
+              this.updateImage(png_data);
               return Promise.resolve();
             }
           });
