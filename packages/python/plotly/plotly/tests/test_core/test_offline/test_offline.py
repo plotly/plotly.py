@@ -315,7 +315,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
         path = os.path.join(
             packages_root,
             'javascript',
-            'plotlywidget',
+            'jupyterlab-plotly',
             'package.json',
         )
         with open(path, 'rt') as f:

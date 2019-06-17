@@ -47,7 +47,7 @@ module.exports = [
         },
         externals: ['@jupyter-widgets/base']
     },
-    {// Embeddable plotlywidget bundle
+    {// Embeddable jupyterlab-plotly bundle
      //
      // This bundle is generally almost identical to the notebook bundle
      // containing the custom widget views and models.
@@ -66,7 +66,7 @@ module.exports = [
             filename: 'index.js',
             path: path.resolve(__dirname, 'dist'),
             libraryTarget: 'amd',
-            publicPath: 'https://unpkg.com/plotlywidget@' + version + '/dist/'
+            publicPath: 'https://unpkg.com/jupyterlab-plotly@' + version + '/dist/'
         },
         node: {
             fs: 'empty'

@@ -1,7 +1,7 @@
 {
-  "name": "plotlywidget",
+  "name": "jupyterlab-plotly",
   "version": "0.11.0",
-  "description": "The plotly.py ipywidgets library",
+  "description": "The plotly JupyterLab extension",
   "author": "The plotly.py team",
   "license": "MIT",
   "main": "src/index.js",
@@ -24,7 +24,7 @@
   "scripts": {
     "build": "npm run build:src",
     "build:src": "rimraf dist && tsc",
-    "clean": "rimraf dist/ && rimraf  ../../python/plotly/plotlywidget/static'",
+    "clean": "rimraf dist/ && rimraf  ../../python/plotly/jupyterlab_plotly/static'",
     "prepublish": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
