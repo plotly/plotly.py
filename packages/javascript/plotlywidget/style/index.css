@@ -1,0 +1,32 @@
+/**
+  Copyright (c) Jupyter Development Team.
+  Distributed under the terms of the Modified BSD License.
+*/
+
+/* Add CSS variables to :root */
+:root {
+  --jp-icon-plotly: url('./plotly.svg');
+}
+
+/* Base styles */
+.jp-RenderedPlotly {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Document styles */
+.jp-MimeDocument .jp-RenderedPlotly {
+  overflow: hidden;
+}
+
+/* Output styles */
+.jp-OutputArea .jp-RenderedPlotly {
+  min-height: 360px;
+}
+
+/* Document icon */
+.jp-PlotlyIcon {
+  background-image: var(--jp-icon-plotly);
+}
