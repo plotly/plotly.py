@@ -21,6 +21,9 @@ xarray
 ## orca ##
 psutil
 
+## code formatting
+pre-commit
+
 ## codegen dependencies ##
 yapf
 inflect
