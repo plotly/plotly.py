@@ -384,7 +384,8 @@ class UpdatePlotlyJsDevCommand(Command):
 
 
 class UpdatePlotlywidgetVersionCommand(Command):
-    description = "Update package.json version of plotlywidget"
+    description = "Update package.json version of jupyterlab-plotly"
+
     user_options = []
 
     def initialize_options(self):
@@ -398,6 +399,7 @@ class UpdatePlotlywidgetVersionCommand(Command):
 
         # Update plotly.js url in package.json
         package_json_path = os.path.join(node_root, "package.json")
+
         with open(package_json_path, "r") as f:
             package_json = json.load(f)
 
