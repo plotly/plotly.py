@@ -17,7 +17,7 @@ class TextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
                 applied only when a selection exists.
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -43,5 +43,5 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 applied only when a selection exists.
 """,
             ),
-            **kwargs,
+            **kwargs
         )

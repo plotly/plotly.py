@@ -380,7 +380,7 @@ class Tickformatstop(_BaseTraceHierarchyType):
         name=None,
         templateitemname=None,
         value=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Tickformatstop object

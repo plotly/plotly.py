@@ -10,7 +10,7 @@ class WidthValidator(_plotly_utils.basevalidators.NumberValidator):
             max=kwargs.pop("max", 16),
             min=kwargs.pop("min", 1),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -26,7 +26,7 @@ class UsecolormapValidator(_plotly_utils.basevalidators.BooleanValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -40,7 +40,7 @@ class StartValidator(_plotly_utils.basevalidators.NumberValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -55,7 +55,7 @@ class SizeValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -69,7 +69,7 @@ class ShowValidator(_plotly_utils.basevalidators.BooleanValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -107,7 +107,7 @@ class ProjectValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the projected lines are shown in permanence.
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -125,7 +125,7 @@ class HighlightwidthValidator(_plotly_utils.basevalidators.NumberValidator):
             max=kwargs.pop("max", 16),
             min=kwargs.pop("min", 1),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -141,7 +141,7 @@ class HighlightcolorValidator(_plotly_utils.basevalidators.ColorValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -157,7 +157,7 @@ class HighlightValidator(_plotly_utils.basevalidators.BooleanValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -171,7 +171,7 @@ class EndValidator(_plotly_utils.basevalidators.NumberValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -185,5 +185,5 @@ class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )

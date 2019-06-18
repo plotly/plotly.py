@@ -10,7 +10,7 @@ class SequentialminusValidator(_plotly_utils.basevalidators.ColorscaleValidator)
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -26,7 +26,7 @@ class SequentialValidator(_plotly_utils.basevalidators.ColorscaleValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -42,5 +42,5 @@ class DivergingValidator(_plotly_utils.basevalidators.ColorscaleValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )

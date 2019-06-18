@@ -6,7 +6,7 @@ class TextpositionValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         self,
         plotly_name="textposition",
         parent_name="layout.mapbox.layer.symbol",
-        **kwargs,
+        **kwargs
     ):
         super(TextpositionValidator, self).__init__(
             plotly_name=plotly_name,
@@ -28,7 +28,7 @@ class TextpositionValidator(_plotly_utils.basevalidators.EnumeratedValidator):
                     "bottom right",
                 ],
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -68,7 +68,7 @@ class TextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
 
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -84,7 +84,7 @@ class TextValidator(_plotly_utils.basevalidators.StringValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -96,7 +96,7 @@ class PlacementValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         self,
         plotly_name="placement",
         parent_name="layout.mapbox.layer.symbol",
-        **kwargs,
+        **kwargs
     ):
         super(PlacementValidator, self).__init__(
             plotly_name=plotly_name,
@@ -104,7 +104,7 @@ class PlacementValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["point", "line", "line-center"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -120,7 +120,7 @@ class IconsizeValidator(_plotly_utils.basevalidators.NumberValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -136,5 +136,5 @@ class IconValidator(_plotly_utils.basevalidators.StringValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )

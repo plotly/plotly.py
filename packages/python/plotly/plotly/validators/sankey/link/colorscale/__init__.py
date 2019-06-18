@@ -6,14 +6,14 @@ class TemplateitemnameValidator(_plotly_utils.basevalidators.StringValidator):
         self,
         plotly_name="templateitemname",
         parent_name="sankey.link.colorscale",
-        **kwargs,
+        **kwargs
     ):
         super(TemplateitemnameValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -29,7 +29,7 @@ class NameValidator(_plotly_utils.basevalidators.StringValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -45,7 +45,7 @@ class LabelValidator(_plotly_utils.basevalidators.StringValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -62,7 +62,7 @@ class ColorscaleValidator(_plotly_utils.basevalidators.ColorscaleValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             implied_edits=kwargs.pop("implied_edits", {"autocolorscale": False}),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -78,7 +78,7 @@ class CminValidator(_plotly_utils.basevalidators.NumberValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -94,5 +94,5 @@ class CmaxValidator(_plotly_utils.basevalidators.NumberValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )

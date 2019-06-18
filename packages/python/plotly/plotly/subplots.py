@@ -60,7 +60,7 @@ def make_subplots(
     row_titles=None,
     x_title=None,
     y_title=None,
-    **kwargs,
+    **kwargs
 ):
     """
     Return an instance of plotly.graph_objs.Figure with predefined subplots
@@ -792,7 +792,7 @@ The row_titles argument to make_subplots must be a list or tuple
 
     # Handle displaying grid information
     if print_grid:
-        print(grid_str)
+        print (grid_str)
 
     # Build resulting figure
     fig = go.Figure(layout=layout)

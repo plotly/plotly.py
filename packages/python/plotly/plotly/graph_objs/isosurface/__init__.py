@@ -1107,7 +1107,7 @@ class Lighting(_BaseTraceHierarchyType):
         roughness=None,
         specular=None,
         vertexnormalsepsilon=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Lighting object
@@ -1580,7 +1580,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
         font=None,
         namelength=None,
         namelengthsrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Hoverlabel object
@@ -3361,7 +3361,7 @@ class ColorBar(_BaseTraceHierarchyType):
         y=None,
         yanchor=None,
         ypad=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new ColorBar object

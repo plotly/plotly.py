@@ -4727,7 +4727,7 @@ class Layout(_BaseLayoutType):
         width=None,
         xaxis=None,
         yaxis=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Layout object
@@ -7248,7 +7248,7 @@ class Waterfall(_BaseTraceType):
         y0=None,
         yaxis=None,
         ysrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Waterfall object
@@ -9574,7 +9574,7 @@ class Volume(_BaseTraceType):
         ysrc=None,
         z=None,
         zsrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Volume object
@@ -11737,7 +11737,7 @@ class Violin(_BaseTraceType):
         y0=None,
         yaxis=None,
         ysrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Violin object
@@ -13003,7 +13003,7 @@ class Table(_BaseTraceType):
         uid=None,
         uirevision=None,
         visible=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Table object
@@ -14920,7 +14920,7 @@ class Surface(_BaseTraceType):
         z=None,
         zcalendar=None,
         zsrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Surface object
@@ -16604,7 +16604,7 @@ class Sunburst(_BaseTraceType):
         values=None,
         valuessrc=None,
         visible=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Sunburst object
@@ -18618,7 +18618,7 @@ class Streamtube(_BaseTraceType):
         ysrc=None,
         z=None,
         zsrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Streamtube object
@@ -20285,7 +20285,7 @@ class Splom(_BaseTraceType):
         visible=None,
         xaxes=None,
         yaxes=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Splom object
@@ -22249,7 +22249,7 @@ class Scatterternary(_BaseTraceType):
         uirevision=None,
         unselected=None,
         visible=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Scatterternary object
@@ -24276,7 +24276,7 @@ class Scatterpolargl(_BaseTraceType):
         uirevision=None,
         unselected=None,
         visible=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Scatterpolargl object
@@ -26354,7 +26354,7 @@ class Scatterpolar(_BaseTraceType):
         uirevision=None,
         unselected=None,
         visible=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Scatterpolar object
@@ -28168,7 +28168,7 @@ class Scattermapbox(_BaseTraceType):
         uirevision=None,
         unselected=None,
         visible=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Scattermapbox object
@@ -30343,7 +30343,7 @@ class Scattergl(_BaseTraceType):
         yaxis=None,
         ycalendar=None,
         ysrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Scattergl object
@@ -32297,7 +32297,7 @@ class Scattergeo(_BaseTraceType):
         uirevision=None,
         unselected=None,
         visible=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Scattergeo object
@@ -34240,7 +34240,7 @@ class Scattercarpet(_BaseTraceType):
         visible=None,
         xaxis=None,
         yaxis=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Scattercarpet object
@@ -36459,7 +36459,7 @@ class Scatter3d(_BaseTraceType):
         z=None,
         zcalendar=None,
         zsrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Scatter3d object
@@ -39022,7 +39022,7 @@ class Scatter(_BaseTraceType):
         yaxis=None,
         ycalendar=None,
         ysrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Scatter object
@@ -40468,7 +40468,7 @@ class Sankey(_BaseTraceType):
         valueformat=None,
         valuesuffix=None,
         visible=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Sankey object
@@ -41755,7 +41755,7 @@ class Pointcloud(_BaseTraceType):
         ybounds=None,
         yboundssrc=None,
         ysrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Pointcloud object
@@ -43624,7 +43624,7 @@ class Pie(_BaseTraceType):
         values=None,
         valuessrc=None,
         visible=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Pie object
@@ -44834,7 +44834,7 @@ class Parcoords(_BaseTraceType):
         uid=None,
         uirevision=None,
         visible=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Parcoords object
@@ -45953,7 +45953,7 @@ class Parcats(_BaseTraceType):
         uid=None,
         uirevision=None,
         visible=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Parcats object
@@ -47352,7 +47352,7 @@ class Ohlc(_BaseTraceType):
         xcalendar=None,
         xsrc=None,
         yaxis=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Ohlc object
@@ -49793,7 +49793,7 @@ class Mesh3d(_BaseTraceType):
         z=None,
         zcalendar=None,
         zsrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Mesh3d object
@@ -52128,7 +52128,7 @@ class Isosurface(_BaseTraceType):
         ysrc=None,
         z=None,
         zsrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Isosurface object
@@ -54663,7 +54663,7 @@ class Histogram2dContour(_BaseTraceType):
         zmid=None,
         zmin=None,
         zsrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Histogram2dContour object
@@ -57115,7 +57115,7 @@ class Histogram2d(_BaseTraceType):
         zmin=None,
         zsmooth=None,
         zsrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Histogram2d object
@@ -59480,7 +59480,7 @@ class Histogram(_BaseTraceType):
         ybins=None,
         ycalendar=None,
         ysrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Histogram object
@@ -61393,7 +61393,7 @@ class Heatmapgl(_BaseTraceType):
         zmid=None,
         zmin=None,
         zsrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Heatmapgl object
@@ -63520,7 +63520,7 @@ class Heatmap(_BaseTraceType):
         zmin=None,
         zsmooth=None,
         zsrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Heatmap object
@@ -65281,7 +65281,7 @@ class Funnelarea(_BaseTraceType):
         values=None,
         valuessrc=None,
         visible=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Funnelarea object
@@ -67363,7 +67363,7 @@ class Funnel(_BaseTraceType):
         y0=None,
         yaxis=None,
         ysrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Funnel object
@@ -69655,7 +69655,7 @@ class Contourcarpet(_BaseTraceType):
         zmid=None,
         zmin=None,
         zsrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Contourcarpet object
@@ -72094,7 +72094,7 @@ class Contour(_BaseTraceType):
         zmid=None,
         zmin=None,
         zsrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Contour object
@@ -74304,7 +74304,7 @@ class Cone(_BaseTraceType):
         ysrc=None,
         z=None,
         zsrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Cone object
@@ -76207,7 +76207,7 @@ class Choropleth(_BaseTraceType):
         zmid=None,
         zmin=None,
         zsrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Choropleth object
@@ -78097,7 +78097,7 @@ class Carpet(_BaseTraceType):
         y=None,
         yaxis=None,
         ysrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Carpet object
@@ -79562,7 +79562,7 @@ class Candlestick(_BaseTraceType):
         xcalendar=None,
         xsrc=None,
         yaxis=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Candlestick object
@@ -81485,7 +81485,7 @@ class Box(_BaseTraceType):
         yaxis=None,
         ycalendar=None,
         ysrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Box object
@@ -83300,7 +83300,7 @@ class Barpolar(_BaseTraceType):
         visible=None,
         width=None,
         widthsrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Barpolar object
@@ -85806,7 +85806,7 @@ class Bar(_BaseTraceType):
         yaxis=None,
         ycalendar=None,
         ysrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Bar object
@@ -87048,7 +87048,7 @@ class Area(_BaseTraceType):
         uid=None,
         uirevision=None,
         visible=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Area object
@@ -87446,7 +87446,7 @@ class Frame(_BaseFrameHierarchyType):
         layout=None,
         name=None,
         traces=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Frame object

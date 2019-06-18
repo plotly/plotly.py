@@ -118,7 +118,7 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
             layout_plotly=layout,
             frames=frames,
             skip_invalid=skip_invalid,
-            **kwargs,
+            **kwargs
         )
 
         # Validate Frames

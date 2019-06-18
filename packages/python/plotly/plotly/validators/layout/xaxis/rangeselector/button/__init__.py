@@ -6,14 +6,14 @@ class VisibleValidator(_plotly_utils.basevalidators.BooleanValidator):
         self,
         plotly_name="visible",
         parent_name="layout.xaxis.rangeselector.button",
-        **kwargs,
+        **kwargs
     ):
         super(VisibleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -25,14 +25,14 @@ class TemplateitemnameValidator(_plotly_utils.basevalidators.StringValidator):
         self,
         plotly_name="templateitemname",
         parent_name="layout.xaxis.rangeselector.button",
-        **kwargs,
+        **kwargs
     ):
         super(TemplateitemnameValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -44,7 +44,7 @@ class StepmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         self,
         plotly_name="stepmode",
         parent_name="layout.xaxis.rangeselector.button",
-        **kwargs,
+        **kwargs
     ):
         super(StepmodeValidator, self).__init__(
             plotly_name=plotly_name,
@@ -52,7 +52,7 @@ class StepmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["backward", "todate"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -64,7 +64,7 @@ class StepValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         self,
         plotly_name="step",
         parent_name="layout.xaxis.rangeselector.button",
-        **kwargs,
+        **kwargs
     ):
         super(StepValidator, self).__init__(
             plotly_name=plotly_name,
@@ -74,7 +74,7 @@ class StepValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             values=kwargs.pop(
                 "values", ["month", "year", "day", "hour", "minute", "second", "all"]
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -86,14 +86,14 @@ class NameValidator(_plotly_utils.basevalidators.StringValidator):
         self,
         plotly_name="name",
         parent_name="layout.xaxis.rangeselector.button",
-        **kwargs,
+        **kwargs
     ):
         super(NameValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -105,14 +105,14 @@ class LabelValidator(_plotly_utils.basevalidators.StringValidator):
         self,
         plotly_name="label",
         parent_name="layout.xaxis.rangeselector.button",
-        **kwargs,
+        **kwargs
     ):
         super(LabelValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -124,7 +124,7 @@ class CountValidator(_plotly_utils.basevalidators.NumberValidator):
         self,
         plotly_name="count",
         parent_name="layout.xaxis.rangeselector.button",
-        **kwargs,
+        **kwargs
     ):
         super(CountValidator, self).__init__(
             plotly_name=plotly_name,
@@ -132,5 +132,5 @@ class CountValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "plot"),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )

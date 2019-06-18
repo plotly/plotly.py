@@ -464,7 +464,7 @@ class Button(_BaseLayoutHierarchyType):
         stepmode=None,
         templateitemname=None,
         visible=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Button object

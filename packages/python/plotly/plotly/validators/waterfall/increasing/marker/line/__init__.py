@@ -6,7 +6,7 @@ class WidthValidator(_plotly_utils.basevalidators.NumberValidator):
         self,
         plotly_name="width",
         parent_name="waterfall.increasing.marker.line",
-        **kwargs,
+        **kwargs
     ):
         super(WidthValidator, self).__init__(
             plotly_name=plotly_name,
@@ -16,7 +16,7 @@ class WidthValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "style"),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -28,7 +28,7 @@ class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
         self,
         plotly_name="color",
         parent_name="waterfall.increasing.marker.line",
-        **kwargs,
+        **kwargs
     ):
         super(ColorValidator, self).__init__(
             plotly_name=plotly_name,
@@ -36,5 +36,5 @@ class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
             array_ok=kwargs.pop("array_ok", False),
             edit_type=kwargs.pop("edit_type", "style"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )

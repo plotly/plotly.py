@@ -12,7 +12,7 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -163,5 +163,5 @@ class DataValidator(_plotly_utils.basevalidators.CompoundValidator):
                 l instance or dict with compatible properties
 """,
             ),
-            **kwargs,
+            **kwargs
         )

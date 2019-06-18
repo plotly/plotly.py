@@ -590,7 +590,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
         font=None,
         namelength=None,
         namelengthsrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Hoverlabel object
@@ -921,7 +921,7 @@ class Colorscale(_BaseTraceHierarchyType):
         label=None,
         name=None,
         templateitemname=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Colorscale object

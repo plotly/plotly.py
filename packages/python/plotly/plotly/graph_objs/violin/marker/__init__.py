@@ -202,7 +202,7 @@ class Line(_BaseTraceHierarchyType):
         outliercolor=None,
         outlierwidth=None,
         width=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Line object

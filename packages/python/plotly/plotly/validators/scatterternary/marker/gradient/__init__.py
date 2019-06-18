@@ -6,14 +6,14 @@ class TypesrcValidator(_plotly_utils.basevalidators.SrcValidator):
         self,
         plotly_name="typesrc",
         parent_name="scatterternary.marker.gradient",
-        **kwargs,
+        **kwargs
     ):
         super(TypesrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -31,7 +31,7 @@ class TypeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "style"),
             values=kwargs.pop("values", ["radial", "horizontal", "vertical", "none"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -43,14 +43,14 @@ class ColorsrcValidator(_plotly_utils.basevalidators.SrcValidator):
         self,
         plotly_name="colorsrc",
         parent_name="scatterternary.marker.gradient",
-        **kwargs,
+        **kwargs
     ):
         super(ColorsrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -62,7 +62,7 @@ class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
         self,
         plotly_name="color",
         parent_name="scatterternary.marker.gradient",
-        **kwargs,
+        **kwargs
     ):
         super(ColorValidator, self).__init__(
             plotly_name=plotly_name,
@@ -70,5 +70,5 @@ class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
             array_ok=kwargs.pop("array_ok", True),
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )

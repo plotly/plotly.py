@@ -663,7 +663,7 @@ class Button(_BaseLayoutHierarchyType):
         name=None,
         templateitemname=None,
         visible=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Button object

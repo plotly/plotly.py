@@ -9,7 +9,7 @@ class YanchorValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "legend"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["auto", "top", "middle", "bottom"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -25,7 +25,7 @@ class YValidator(_plotly_utils.basevalidators.NumberValidator):
             max=kwargs.pop("max", 3),
             min=kwargs.pop("min", -2),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -40,7 +40,7 @@ class XanchorValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "legend"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["auto", "left", "center", "right"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -56,7 +56,7 @@ class XValidator(_plotly_utils.basevalidators.NumberValidator):
             max=kwargs.pop("max", 3),
             min=kwargs.pop("min", -2),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -71,7 +71,7 @@ class ValignValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "legend"),
             role=kwargs.pop("role", "style"),
             values=kwargs.pop("values", ["top", "middle", "bottom"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -85,7 +85,7 @@ class UirevisionValidator(_plotly_utils.basevalidators.AnyValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -101,7 +101,7 @@ class TraceorderValidator(_plotly_utils.basevalidators.FlaglistValidator):
             extras=kwargs.pop("extras", ["normal"]),
             flags=kwargs.pop("flags", ["reversed", "grouped"]),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -118,7 +118,7 @@ class TracegroupgapValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "legend"),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -135,7 +135,7 @@ class OrientationValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "legend"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["v", "h"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -150,7 +150,7 @@ class ItemsizingValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "legend"),
             role=kwargs.pop("role", "style"),
             values=kwargs.pop("values", ["trace", "constant"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -167,7 +167,7 @@ class ItemdoubleclickValidator(_plotly_utils.basevalidators.EnumeratedValidator)
             edit_type=kwargs.pop("edit_type", "legend"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["toggle", "toggleothers", False]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -182,7 +182,7 @@ class ItemclickValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "legend"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["toggle", "toggleothers", False]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -220,7 +220,7 @@ class FontValidator(_plotly_utils.basevalidators.CompoundValidator):
 
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -237,7 +237,7 @@ class BorderwidthValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "legend"),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -253,7 +253,7 @@ class BordercolorValidator(_plotly_utils.basevalidators.ColorValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "legend"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -267,5 +267,5 @@ class BgcolorValidator(_plotly_utils.basevalidators.ColorValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "legend"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )

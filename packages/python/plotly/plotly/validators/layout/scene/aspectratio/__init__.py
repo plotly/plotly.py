@@ -12,7 +12,7 @@ class ZValidator(_plotly_utils.basevalidators.NumberValidator):
             implied_edits=kwargs.pop("implied_edits", {"^aspectmode": "manual"}),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -30,7 +30,7 @@ class YValidator(_plotly_utils.basevalidators.NumberValidator):
             implied_edits=kwargs.pop("implied_edits", {"^aspectmode": "manual"}),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -48,5 +48,5 @@ class XValidator(_plotly_utils.basevalidators.NumberValidator):
             implied_edits=kwargs.pop("implied_edits", {"^aspectmode": "manual"}),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )

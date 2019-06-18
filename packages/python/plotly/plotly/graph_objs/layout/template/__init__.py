@@ -1156,7 +1156,7 @@ class Data(_BaseLayoutHierarchyType):
         violin=None,
         volume=None,
         waterfall=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Data object

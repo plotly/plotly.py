@@ -10,7 +10,7 @@ class SizesrcValidator(_plotly_utils.basevalidators.SrcValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -28,7 +28,7 @@ class SizeValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "plot"),
             min=kwargs.pop("min", 1),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -44,7 +44,7 @@ class FamilysrcValidator(_plotly_utils.basevalidators.SrcValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -63,7 +63,7 @@ class FamilyValidator(_plotly_utils.basevalidators.StringValidator):
             no_blank=kwargs.pop("no_blank", True),
             role=kwargs.pop("role", "style"),
             strict=kwargs.pop("strict", True),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -79,7 +79,7 @@ class ColorsrcValidator(_plotly_utils.basevalidators.SrcValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -96,5 +96,5 @@ class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
             array_ok=kwargs.pop("array_ok", True),
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )

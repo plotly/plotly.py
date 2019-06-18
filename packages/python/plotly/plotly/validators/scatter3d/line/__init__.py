@@ -10,7 +10,7 @@ class WidthValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -24,7 +24,7 @@ class ShowscaleValidator(_plotly_utils.basevalidators.BooleanValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -40,7 +40,7 @@ class ReversescaleValidator(_plotly_utils.basevalidators.BooleanValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -57,7 +57,7 @@ class DashValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             values=kwargs.pop(
                 "values", ["solid", "dot", "dash", "longdash", "dashdot", "longdashdot"]
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -71,7 +71,7 @@ class ColorsrcValidator(_plotly_utils.basevalidators.SrcValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -88,7 +88,7 @@ class ColorscaleValidator(_plotly_utils.basevalidators.ColorscaleValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             implied_edits=kwargs.pop("implied_edits", {"autocolorscale": False}),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -316,7 +316,7 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 direction.
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -332,7 +332,7 @@ class ColoraxisValidator(_plotly_utils.basevalidators.SubplotidValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             regex=kwargs.pop("regex", "/^coloraxis([2-9]|[1-9][0-9]+)?$/"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -348,7 +348,7 @@ class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "style"),
             colorscale_path=kwargs.pop("colorscale_path", "scatter3d.line.colorscale"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -363,7 +363,7 @@ class CminValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             implied_edits=kwargs.pop("implied_edits", {"cauto": False}),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -378,7 +378,7 @@ class CmidValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             implied_edits=kwargs.pop("implied_edits", {}),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -393,7 +393,7 @@ class CmaxValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             implied_edits=kwargs.pop("implied_edits", {"cauto": False}),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -408,7 +408,7 @@ class CautoValidator(_plotly_utils.basevalidators.BooleanValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             implied_edits=kwargs.pop("implied_edits", {}),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -425,5 +425,5 @@ class AutocolorscaleValidator(_plotly_utils.basevalidators.BooleanValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             implied_edits=kwargs.pop("implied_edits", {}),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )

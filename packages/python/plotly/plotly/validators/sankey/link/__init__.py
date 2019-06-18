@@ -8,7 +8,7 @@ class ValuesrcValidator(_plotly_utils.basevalidators.SrcValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -22,7 +22,7 @@ class ValueValidator(_plotly_utils.basevalidators.DataArrayValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "data"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -36,7 +36,7 @@ class TargetsrcValidator(_plotly_utils.basevalidators.SrcValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -50,7 +50,7 @@ class TargetValidator(_plotly_utils.basevalidators.DataArrayValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "data"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -64,7 +64,7 @@ class SourcesrcValidator(_plotly_utils.basevalidators.SrcValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -78,7 +78,7 @@ class SourceValidator(_plotly_utils.basevalidators.DataArrayValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "data"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -108,7 +108,7 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 .
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -122,7 +122,7 @@ class LabelsrcValidator(_plotly_utils.basevalidators.SrcValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -136,7 +136,7 @@ class LabelValidator(_plotly_utils.basevalidators.DataArrayValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "data"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -152,7 +152,7 @@ class HovertemplatesrcValidator(_plotly_utils.basevalidators.SrcValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -169,7 +169,7 @@ class HovertemplateValidator(_plotly_utils.basevalidators.StringValidator):
             array_ok=kwargs.pop("array_ok", True),
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -222,7 +222,7 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 namelength .
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -237,7 +237,7 @@ class HoverinfoValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["all", "none", "skip"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -251,7 +251,7 @@ class ColorsrcValidator(_plotly_utils.basevalidators.SrcValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -271,7 +271,7 @@ class ColorscaleValidator(_plotly_utils.basevalidators.CompoundValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -331,7 +331,7 @@ class ColorscalesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 you explicitly show it with `visible: true`.
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -346,5 +346,5 @@ class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
             array_ok=kwargs.pop("array_ok", True),
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )

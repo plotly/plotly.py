@@ -9,7 +9,7 @@ class YrefValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "layoutstyle"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["container", "paper"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -24,7 +24,7 @@ class YanchorValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "layoutstyle"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["auto", "top", "middle", "bottom"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -40,7 +40,7 @@ class YValidator(_plotly_utils.basevalidators.NumberValidator):
             max=kwargs.pop("max", 1),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -55,7 +55,7 @@ class XrefValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "layoutstyle"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["container", "paper"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -70,7 +70,7 @@ class XanchorValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "layoutstyle"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["auto", "left", "center", "right"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -86,7 +86,7 @@ class XValidator(_plotly_utils.basevalidators.NumberValidator):
             max=kwargs.pop("max", 1),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -100,7 +100,7 @@ class TextValidator(_plotly_utils.basevalidators.StringValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "layoutstyle"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -130,7 +130,7 @@ class PadValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the component.
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -168,5 +168,5 @@ class FontValidator(_plotly_utils.basevalidators.CompoundValidator):
 
 """,
             ),
-            **kwargs,
+            **kwargs
         )

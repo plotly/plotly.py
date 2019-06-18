@@ -586,7 +586,7 @@ class Layer(_BaseLayoutHierarchyType):
         templateitemname=None,
         type=None,
         visible=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Layer object

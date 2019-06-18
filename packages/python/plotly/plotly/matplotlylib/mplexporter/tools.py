@@ -12,7 +12,7 @@ def ipynb_vega_init():
     try:
         from IPython.core.display import display, HTML
     except ImportError:
-        print("IPython Notebook could not be loaded.")
+        print ("IPython Notebook could not be loaded.")
 
     require_js = """
     if (window['d3'] === undefined) {{

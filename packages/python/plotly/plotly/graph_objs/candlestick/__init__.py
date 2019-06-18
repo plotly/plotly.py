@@ -822,7 +822,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
         namelength=None,
         namelengthsrc=None,
         split=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Hoverlabel object

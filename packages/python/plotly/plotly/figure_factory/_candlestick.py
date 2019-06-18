@@ -51,7 +51,7 @@ def make_increasing_candle(open, high, low, close, dates, **kwargs):
         y=increase_y,
         whiskerwidth=0,
         boxpoints=False,
-        **kwargs,
+        **kwargs
     )
 
     return [candle_incr_data]
@@ -91,7 +91,7 @@ def make_decreasing_candle(open, high, low, close, dates, **kwargs):
         y=decrease_y,
         whiskerwidth=0,
         boxpoints=False,
-        **kwargs,
+        **kwargs
     )
 
     return [candle_decr_data]

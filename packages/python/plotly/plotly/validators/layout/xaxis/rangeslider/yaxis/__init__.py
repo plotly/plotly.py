@@ -6,7 +6,7 @@ class RangemodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         self,
         plotly_name="rangemode",
         parent_name="layout.xaxis.rangeslider.yaxis",
-        **kwargs,
+        **kwargs
     ):
         super(RangemodeValidator, self).__init__(
             plotly_name=plotly_name,
@@ -14,7 +14,7 @@ class RangemodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "style"),
             values=kwargs.pop("values", ["auto", "fixed", "match"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -26,7 +26,7 @@ class RangeValidator(_plotly_utils.basevalidators.InfoArrayValidator):
         self,
         plotly_name="range",
         parent_name="layout.xaxis.rangeslider.yaxis",
-        **kwargs,
+        **kwargs
     ):
         super(RangeValidator, self).__init__(
             plotly_name=plotly_name,
@@ -40,5 +40,5 @@ class RangeValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                 ],
             ),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )

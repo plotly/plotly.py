@@ -10,7 +10,7 @@ class VisibleValidator(_plotly_utils.basevalidators.BooleanValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "arraydraw"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -24,7 +24,7 @@ class ValueValidator(_plotly_utils.basevalidators.StringValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "arraydraw"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -40,7 +40,7 @@ class TemplateitemnameValidator(_plotly_utils.basevalidators.StringValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "arraydraw"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -54,7 +54,7 @@ class NameValidator(_plotly_utils.basevalidators.StringValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "arraydraw"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -73,7 +73,7 @@ class MethodValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             values=kwargs.pop(
                 "values", ["restyle", "relayout", "animate", "update", "skip"]
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -87,7 +87,7 @@ class LabelValidator(_plotly_utils.basevalidators.StringValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "arraydraw"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -103,7 +103,7 @@ class ExecuteValidator(_plotly_utils.basevalidators.BooleanValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "arraydraw"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -126,5 +126,5 @@ class ArgsValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                 ],
             ),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )

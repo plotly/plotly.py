@@ -298,7 +298,7 @@ class ZAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the width (in px) of the zero line.
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -602,7 +602,7 @@ class YAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the width (in px) of the zero line.
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -906,7 +906,7 @@ class XAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the width (in px) of the zero line.
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -920,7 +920,7 @@ class UirevisionValidator(_plotly_utils.basevalidators.AnyValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -935,7 +935,7 @@ class HovermodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "modebar"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["closest", False]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -950,7 +950,7 @@ class DragmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["orbit", "turntable", "zoom", "pan", False]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -981,7 +981,7 @@ class DomainValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (in plot fraction).
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -1018,7 +1018,7 @@ class CameraValidator(_plotly_utils.basevalidators.CompoundValidator):
                 that the z axis points up.
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -1032,7 +1032,7 @@ class BgcolorValidator(_plotly_utils.basevalidators.ColorValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -1056,7 +1056,7 @@ class AspectratioValidator(_plotly_utils.basevalidators.CompoundValidator):
 
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -1072,7 +1072,7 @@ class AspectmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             implied_edits=kwargs.pop("implied_edits", {}),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["auto", "cube", "data", "manual"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -1092,7 +1092,7 @@ class AnnotationValidator(_plotly_utils.basevalidators.CompoundValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -1287,5 +1287,5 @@ class AnnotationsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 Sets the annotation's z position.
 """,
             ),
-            **kwargs,
+            **kwargs
         )

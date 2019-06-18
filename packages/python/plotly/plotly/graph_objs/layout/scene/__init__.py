@@ -1961,7 +1961,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         zeroline=None,
         zerolinecolor=None,
         zerolinewidth=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new ZAxis object
@@ -4406,7 +4406,7 @@ class YAxis(_BaseLayoutHierarchyType):
         zeroline=None,
         zerolinecolor=None,
         zerolinewidth=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new YAxis object
@@ -6851,7 +6851,7 @@ class XAxis(_BaseLayoutHierarchyType):
         zeroline=None,
         zerolinecolor=None,
         zerolinewidth=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new XAxis object
@@ -9133,7 +9133,7 @@ class Annotation(_BaseLayoutHierarchyType):
         yanchor=None,
         yshift=None,
         z=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Annotation object

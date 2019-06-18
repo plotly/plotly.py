@@ -10,7 +10,7 @@ class ValueValidator(_plotly_utils.basevalidators.AnyValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -27,7 +27,7 @@ class TypeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["levels", "constraint"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -44,7 +44,7 @@ class StartValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "plot"),
             implied_edits=kwargs.pop("implied_edits", {"^autocontour": False}),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -62,7 +62,7 @@ class SizeValidator(_plotly_utils.basevalidators.NumberValidator):
             implied_edits=kwargs.pop("implied_edits", {"^autocontour": False}),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -74,14 +74,14 @@ class ShowlinesValidator(_plotly_utils.basevalidators.BooleanValidator):
         self,
         plotly_name="showlines",
         parent_name="histogram2dcontour.contours",
-        **kwargs,
+        **kwargs
     ):
         super(ShowlinesValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -93,14 +93,14 @@ class ShowlabelsValidator(_plotly_utils.basevalidators.BooleanValidator):
         self,
         plotly_name="showlabels",
         parent_name="histogram2dcontour.contours",
-        **kwargs,
+        **kwargs
     ):
         super(ShowlabelsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -112,7 +112,7 @@ class OperationValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         self,
         plotly_name="operation",
         parent_name="histogram2dcontour.contours",
-        **kwargs,
+        **kwargs
     ):
         super(OperationValidator, self).__init__(
             plotly_name=plotly_name,
@@ -137,7 +137,7 @@ class OperationValidator(_plotly_utils.basevalidators.EnumeratedValidator):
                     ")[",
                 ],
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -149,14 +149,14 @@ class LabelformatValidator(_plotly_utils.basevalidators.StringValidator):
         self,
         plotly_name="labelformat",
         parent_name="histogram2dcontour.contours",
-        **kwargs,
+        **kwargs
     ):
         super(LabelformatValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -168,7 +168,7 @@ class LabelfontValidator(_plotly_utils.basevalidators.CompoundValidator):
         self,
         plotly_name="labelfont",
         parent_name="histogram2dcontour.contours",
-        **kwargs,
+        **kwargs
     ):
         super(LabelfontValidator, self).__init__(
             plotly_name=plotly_name,
@@ -199,7 +199,7 @@ class LabelfontValidator(_plotly_utils.basevalidators.CompoundValidator):
 
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -216,7 +216,7 @@ class EndValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "plot"),
             implied_edits=kwargs.pop("implied_edits", {"^autocontour": False}),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -228,7 +228,7 @@ class ColoringValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         self,
         plotly_name="coloring",
         parent_name="histogram2dcontour.contours",
-        **kwargs,
+        **kwargs
     ):
         super(ColoringValidator, self).__init__(
             plotly_name=plotly_name,
@@ -236,5 +236,5 @@ class ColoringValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "style"),
             values=kwargs.pop("values", ["fill", "heatmap", "lines", "none"]),
-            **kwargs,
+            **kwargs
         )

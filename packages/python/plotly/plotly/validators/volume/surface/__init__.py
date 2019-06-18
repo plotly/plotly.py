@@ -8,7 +8,7 @@ class ShowValidator(_plotly_utils.basevalidators.BooleanValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -24,7 +24,7 @@ class PatternValidator(_plotly_utils.basevalidators.FlaglistValidator):
             extras=kwargs.pop("extras", ["all", "odd", "even"]),
             flags=kwargs.pop("flags", ["A", "B", "C", "D", "E"]),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -40,7 +40,7 @@ class FillValidator(_plotly_utils.basevalidators.NumberValidator):
             max=kwargs.pop("max", 1),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -55,5 +55,5 @@ class CountValidator(_plotly_utils.basevalidators.IntegerValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             min=kwargs.pop("min", 1),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )

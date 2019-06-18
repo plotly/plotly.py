@@ -11,7 +11,7 @@ class SizeValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "colorbars"),
             min=kwargs.pop("min", 1),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -23,7 +23,7 @@ class FamilyValidator(_plotly_utils.basevalidators.StringValidator):
         self,
         plotly_name="family",
         parent_name="parcats.line.colorbar.tickfont",
-        **kwargs,
+        **kwargs
     ):
         super(FamilyValidator, self).__init__(
             plotly_name=plotly_name,
@@ -32,7 +32,7 @@ class FamilyValidator(_plotly_utils.basevalidators.StringValidator):
             no_blank=kwargs.pop("no_blank", True),
             role=kwargs.pop("role", "style"),
             strict=kwargs.pop("strict", True),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -44,12 +44,12 @@ class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
         self,
         plotly_name="color",
         parent_name="parcats.line.colorbar.tickfont",
-        **kwargs,
+        **kwargs
     ):
         super(ColorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "colorbars"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )

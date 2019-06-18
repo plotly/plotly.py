@@ -97,7 +97,7 @@ def make_increasing_ohlc(open, high, low, close, dates, **kwargs):
         y=flat_increase_y,
         mode="lines",
         showlegend=showlegend,
-        **kwargs,
+        **kwargs
     )
     return ohlc_incr
 

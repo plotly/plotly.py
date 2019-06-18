@@ -8,7 +8,7 @@ class VisibleValidator(_plotly_utils.basevalidators.BooleanValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -35,7 +35,7 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the line width (in px).
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -51,5 +51,5 @@ class FillcolorValidator(_plotly_utils.basevalidators.ColorValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "style"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )

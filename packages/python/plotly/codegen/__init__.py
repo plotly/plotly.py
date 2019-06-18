@@ -254,8 +254,8 @@ except ImportError:
         write_init_py(graph_objs_pkg, path_parts, import_pairs)
 
     # ### Run black code formatter on output directories ###
-    subprocess.call(["black", validators_pkgdir])
-    subprocess.call(["black", graph_objs_pkgdir])
+    subprocess.call(["black", "--target-version=py27", validators_pkgdir])
+    subprocess.call(["black", "--target-version=py27", graph_objs_pkgdir])
 
 
 if __name__ == "__main__":

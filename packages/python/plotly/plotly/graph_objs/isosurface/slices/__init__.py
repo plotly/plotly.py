@@ -125,7 +125,7 @@ class Z(_BaseTraceHierarchyType):
         locations=None,
         locationssrc=None,
         show=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Z object
@@ -335,7 +335,7 @@ class Y(_BaseTraceHierarchyType):
         locations=None,
         locationssrc=None,
         show=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Y object
@@ -545,7 +545,7 @@ class X(_BaseTraceHierarchyType):
         locations=None,
         locationssrc=None,
         show=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new X object

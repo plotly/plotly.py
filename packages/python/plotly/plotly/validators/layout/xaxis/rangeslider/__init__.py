@@ -25,7 +25,7 @@ class YAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 subplot is used.
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -41,7 +41,7 @@ class VisibleValidator(_plotly_utils.basevalidators.BooleanValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -59,7 +59,7 @@ class ThicknessValidator(_plotly_utils.basevalidators.NumberValidator):
             max=kwargs.pop("max", 1),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -91,7 +91,7 @@ class RangeValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                 ],
             ),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -103,7 +103,7 @@ class BorderwidthValidator(_plotly_utils.basevalidators.IntegerValidator):
         self,
         plotly_name="borderwidth",
         parent_name="layout.xaxis.rangeslider",
-        **kwargs,
+        **kwargs
     ):
         super(BorderwidthValidator, self).__init__(
             plotly_name=plotly_name,
@@ -111,7 +111,7 @@ class BorderwidthValidator(_plotly_utils.basevalidators.IntegerValidator):
             edit_type=kwargs.pop("edit_type", "plot"),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -123,14 +123,14 @@ class BordercolorValidator(_plotly_utils.basevalidators.ColorValidator):
         self,
         plotly_name="bordercolor",
         parent_name="layout.xaxis.rangeslider",
-        **kwargs,
+        **kwargs
     ):
         super(BordercolorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -146,7 +146,7 @@ class BgcolorValidator(_plotly_utils.basevalidators.ColorValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -163,5 +163,5 @@ class AutorangeValidator(_plotly_utils.basevalidators.BooleanValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             implied_edits=kwargs.pop("implied_edits", {}),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )

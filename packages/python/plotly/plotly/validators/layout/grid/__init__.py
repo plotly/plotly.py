@@ -9,7 +9,7 @@ class YsideValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["left", "left plot", "right plot", "right"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -25,7 +25,7 @@ class YgapValidator(_plotly_utils.basevalidators.NumberValidator):
             max=kwargs.pop("max", 1),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -48,7 +48,7 @@ class YaxesValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                 },
             ),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -63,7 +63,7 @@ class XsideValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["bottom", "bottom plot", "top plot", "top"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -79,7 +79,7 @@ class XgapValidator(_plotly_utils.basevalidators.NumberValidator):
             max=kwargs.pop("max", 1),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -102,7 +102,7 @@ class XaxesValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                 },
             ),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -126,7 +126,7 @@ class SubplotsValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                 },
             ),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -141,7 +141,7 @@ class RowsValidator(_plotly_utils.basevalidators.IntegerValidator):
             edit_type=kwargs.pop("edit_type", "plot"),
             min=kwargs.pop("min", 1),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -156,7 +156,7 @@ class RoworderValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["top to bottom", "bottom to top"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -171,7 +171,7 @@ class PatternValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["independent", "coupled"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -199,7 +199,7 @@ class DomainValidator(_plotly_utils.basevalidators.CompoundValidator):
                 around the edges.
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -214,5 +214,5 @@ class ColumnsValidator(_plotly_utils.basevalidators.IntegerValidator):
             edit_type=kwargs.pop("edit_type", "plot"),
             min=kwargs.pop("min", 1),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )

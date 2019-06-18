@@ -407,7 +407,7 @@ class Step(_BaseLayoutHierarchyType):
         templateitemname=None,
         value=None,
         visible=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Step object
@@ -1153,7 +1153,7 @@ class Currentvalue(_BaseLayoutHierarchyType):
         suffix=None,
         visible=None,
         xanchor=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Currentvalue object

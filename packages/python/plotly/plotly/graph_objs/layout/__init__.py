@@ -2523,7 +2523,7 @@ class YAxis(_BaseLayoutHierarchyType):
         zeroline=None,
         zerolinecolor=None,
         zerolinewidth=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new YAxis object
@@ -5828,7 +5828,7 @@ class XAxis(_BaseLayoutHierarchyType):
         zeroline=None,
         zerolinecolor=None,
         zerolinewidth=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new XAxis object
@@ -7168,7 +7168,7 @@ class Updatemenu(_BaseLayoutHierarchyType):
         xanchor=None,
         y=None,
         yanchor=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Updatemenu object
@@ -7858,7 +7858,7 @@ class Title(_BaseLayoutHierarchyType):
         y=None,
         yanchor=None,
         yref=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Title object
@@ -8857,7 +8857,7 @@ class Ternary(_BaseLayoutHierarchyType):
         domain=None,
         sum=None,
         uirevision=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Ternary object
@@ -10173,7 +10173,7 @@ class Slider(_BaseLayoutHierarchyType):
         xanchor=None,
         y=None,
         yanchor=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Slider object
@@ -11072,7 +11072,7 @@ class Shape(_BaseLayoutHierarchyType):
         yanchor=None,
         yref=None,
         ysizemode=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Shape object
@@ -12816,7 +12816,7 @@ class Scene(_BaseLayoutHierarchyType):
         xaxis=None,
         yaxis=None,
         zaxis=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Scene object
@@ -13323,7 +13323,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         tickorientation=None,
         ticksuffix=None,
         visible=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new RadialAxis object
@@ -14337,7 +14337,7 @@ class Polar(_BaseLayoutHierarchyType):
         radialaxis=None,
         sector=None,
         uirevision=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Polar object
@@ -14727,7 +14727,7 @@ class Modebar(_BaseLayoutHierarchyType):
         color=None,
         orientation=None,
         uirevision=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Modebar object
@@ -14972,7 +14972,7 @@ class Margin(_BaseLayoutHierarchyType):
         pad=None,
         r=None,
         t=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Margin object
@@ -15460,7 +15460,7 @@ class Mapbox(_BaseLayoutHierarchyType):
         style=None,
         uirevision=None,
         zoom=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Mapbox object
@@ -16132,7 +16132,7 @@ class Legend(_BaseLayoutHierarchyType):
         xanchor=None,
         y=None,
         yanchor=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Legend object
@@ -16751,7 +16751,7 @@ class Image(_BaseLayoutHierarchyType):
         y=None,
         yanchor=None,
         yref=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Image object
@@ -17182,7 +17182,7 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         bordercolor=None,
         font=None,
         namelength=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Hoverlabel object
@@ -17690,7 +17690,7 @@ class Grid(_BaseLayoutHierarchyType):
         yaxes=None,
         ygap=None,
         yside=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Grid object
@@ -19034,7 +19034,7 @@ class Geo(_BaseLayoutHierarchyType):
         subunitcolor=None,
         subunitwidth=None,
         uirevision=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Geo object
@@ -20185,7 +20185,7 @@ class Coloraxis(_BaseLayoutHierarchyType):
         colorscale=None,
         reversescale=None,
         showscale=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Coloraxis object
@@ -21765,7 +21765,7 @@ class Annotation(_BaseLayoutHierarchyType):
         yclick=None,
         yref=None,
         yshift=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Annotation object
@@ -22517,7 +22517,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         tickorientation=None,
         ticksuffix=None,
         visible=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new AngularAxis object

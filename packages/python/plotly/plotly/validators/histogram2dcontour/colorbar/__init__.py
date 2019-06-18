@@ -11,7 +11,7 @@ class YpadValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "colorbars"),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -28,7 +28,7 @@ class YanchorValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "colorbars"),
             role=kwargs.pop("role", "style"),
             values=kwargs.pop("values", ["top", "middle", "bottom"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -46,7 +46,7 @@ class YValidator(_plotly_utils.basevalidators.NumberValidator):
             max=kwargs.pop("max", 3),
             min=kwargs.pop("min", -2),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -63,7 +63,7 @@ class XpadValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "colorbars"),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -80,7 +80,7 @@ class XanchorValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "colorbars"),
             role=kwargs.pop("role", "style"),
             values=kwargs.pop("values", ["left", "center", "right"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -98,7 +98,7 @@ class XValidator(_plotly_utils.basevalidators.NumberValidator):
             max=kwargs.pop("max", 3),
             min=kwargs.pop("min", -2),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -133,7 +133,7 @@ class TitleValidator(_plotly_utils.basevalidators.TitleValidator):
                 been deprecated.
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -145,7 +145,7 @@ class TickwidthValidator(_plotly_utils.basevalidators.NumberValidator):
         self,
         plotly_name="tickwidth",
         parent_name="histogram2dcontour.colorbar",
-        **kwargs,
+        **kwargs
     ):
         super(TickwidthValidator, self).__init__(
             plotly_name=plotly_name,
@@ -153,7 +153,7 @@ class TickwidthValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "colorbars"),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -165,14 +165,14 @@ class TickvalssrcValidator(_plotly_utils.basevalidators.SrcValidator):
         self,
         plotly_name="tickvalssrc",
         parent_name="histogram2dcontour.colorbar",
-        **kwargs,
+        **kwargs
     ):
         super(TickvalssrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -184,14 +184,14 @@ class TickvalsValidator(_plotly_utils.basevalidators.DataArrayValidator):
         self,
         plotly_name="tickvals",
         parent_name="histogram2dcontour.colorbar",
-        **kwargs,
+        **kwargs
     ):
         super(TickvalsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "colorbars"),
             role=kwargs.pop("role", "data"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -203,14 +203,14 @@ class TicktextsrcValidator(_plotly_utils.basevalidators.SrcValidator):
         self,
         plotly_name="ticktextsrc",
         parent_name="histogram2dcontour.colorbar",
-        **kwargs,
+        **kwargs
     ):
         super(TicktextsrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -222,14 +222,14 @@ class TicktextValidator(_plotly_utils.basevalidators.DataArrayValidator):
         self,
         plotly_name="ticktext",
         parent_name="histogram2dcontour.colorbar",
-        **kwargs,
+        **kwargs
     ):
         super(TicktextValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "colorbars"),
             role=kwargs.pop("role", "data"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -241,14 +241,14 @@ class TicksuffixValidator(_plotly_utils.basevalidators.StringValidator):
         self,
         plotly_name="ticksuffix",
         parent_name="histogram2dcontour.colorbar",
-        **kwargs,
+        **kwargs
     ):
         super(TicksuffixValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "colorbars"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -265,7 +265,7 @@ class TicksValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "colorbars"),
             role=kwargs.pop("role", "style"),
             values=kwargs.pop("values", ["outside", "inside", ""]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -277,14 +277,14 @@ class TickprefixValidator(_plotly_utils.basevalidators.StringValidator):
         self,
         plotly_name="tickprefix",
         parent_name="histogram2dcontour.colorbar",
-        **kwargs,
+        **kwargs
     ):
         super(TickprefixValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "colorbars"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -296,7 +296,7 @@ class TickmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         self,
         plotly_name="tickmode",
         parent_name="histogram2dcontour.colorbar",
-        **kwargs,
+        **kwargs
     ):
         super(TickmodeValidator, self).__init__(
             plotly_name=plotly_name,
@@ -305,7 +305,7 @@ class TickmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             implied_edits=kwargs.pop("implied_edits", {}),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["auto", "linear", "array"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -322,7 +322,7 @@ class TicklenValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "colorbars"),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -334,7 +334,7 @@ class TickformatstopValidator(_plotly_utils.basevalidators.CompoundValidator):
         self,
         plotly_name="tickformatstopdefaults",
         parent_name="histogram2dcontour.colorbar",
-        **kwargs,
+        **kwargs
     ):
         super(TickformatstopValidator, self).__init__(
             plotly_name=plotly_name,
@@ -345,7 +345,7 @@ class TickformatstopValidator(_plotly_utils.basevalidators.CompoundValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -357,7 +357,7 @@ class TickformatstopsValidator(_plotly_utils.basevalidators.CompoundArrayValidat
         self,
         plotly_name="tickformatstops",
         parent_name="histogram2dcontour.colorbar",
-        **kwargs,
+        **kwargs
     ):
         super(TickformatstopsValidator, self).__init__(
             plotly_name=plotly_name,
@@ -401,7 +401,7 @@ class TickformatstopsValidator(_plotly_utils.basevalidators.CompoundArrayValidat
                 the same as "tickformat"
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -413,14 +413,14 @@ class TickformatValidator(_plotly_utils.basevalidators.StringValidator):
         self,
         plotly_name="tickformat",
         parent_name="histogram2dcontour.colorbar",
-        **kwargs,
+        **kwargs
     ):
         super(TickformatValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "colorbars"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -432,7 +432,7 @@ class TickfontValidator(_plotly_utils.basevalidators.CompoundValidator):
         self,
         plotly_name="tickfont",
         parent_name="histogram2dcontour.colorbar",
-        **kwargs,
+        **kwargs
     ):
         super(TickfontValidator, self).__init__(
             plotly_name=plotly_name,
@@ -463,7 +463,7 @@ class TickfontValidator(_plotly_utils.basevalidators.CompoundValidator):
 
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -475,14 +475,14 @@ class TickcolorValidator(_plotly_utils.basevalidators.ColorValidator):
         self,
         plotly_name="tickcolor",
         parent_name="histogram2dcontour.colorbar",
-        **kwargs,
+        **kwargs
     ):
         super(TickcolorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "colorbars"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -494,14 +494,14 @@ class TickangleValidator(_plotly_utils.basevalidators.AngleValidator):
         self,
         plotly_name="tickangle",
         parent_name="histogram2dcontour.colorbar",
-        **kwargs,
+        **kwargs
     ):
         super(TickangleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "colorbars"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -518,7 +518,7 @@ class Tick0Validator(_plotly_utils.basevalidators.AnyValidator):
             edit_type=kwargs.pop("edit_type", "colorbars"),
             implied_edits=kwargs.pop("implied_edits", {"tickmode": "linear"}),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -530,7 +530,7 @@ class ThicknessmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         self,
         plotly_name="thicknessmode",
         parent_name="histogram2dcontour.colorbar",
-        **kwargs,
+        **kwargs
     ):
         super(ThicknessmodeValidator, self).__init__(
             plotly_name=plotly_name,
@@ -538,7 +538,7 @@ class ThicknessmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "colorbars"),
             role=kwargs.pop("role", "style"),
             values=kwargs.pop("values", ["fraction", "pixels"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -550,7 +550,7 @@ class ThicknessValidator(_plotly_utils.basevalidators.NumberValidator):
         self,
         plotly_name="thickness",
         parent_name="histogram2dcontour.colorbar",
-        **kwargs,
+        **kwargs
     ):
         super(ThicknessValidator, self).__init__(
             plotly_name=plotly_name,
@@ -558,7 +558,7 @@ class ThicknessValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "colorbars"),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -570,7 +570,7 @@ class ShowticksuffixValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         self,
         plotly_name="showticksuffix",
         parent_name="histogram2dcontour.colorbar",
-        **kwargs,
+        **kwargs
     ):
         super(ShowticksuffixValidator, self).__init__(
             plotly_name=plotly_name,
@@ -578,7 +578,7 @@ class ShowticksuffixValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "colorbars"),
             role=kwargs.pop("role", "style"),
             values=kwargs.pop("values", ["all", "first", "last", "none"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -590,7 +590,7 @@ class ShowtickprefixValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         self,
         plotly_name="showtickprefix",
         parent_name="histogram2dcontour.colorbar",
-        **kwargs,
+        **kwargs
     ):
         super(ShowtickprefixValidator, self).__init__(
             plotly_name=plotly_name,
@@ -598,7 +598,7 @@ class ShowtickprefixValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "colorbars"),
             role=kwargs.pop("role", "style"),
             values=kwargs.pop("values", ["all", "first", "last", "none"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -610,14 +610,14 @@ class ShowticklabelsValidator(_plotly_utils.basevalidators.BooleanValidator):
         self,
         plotly_name="showticklabels",
         parent_name="histogram2dcontour.colorbar",
-        **kwargs,
+        **kwargs
     ):
         super(ShowticklabelsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "colorbars"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -629,7 +629,7 @@ class ShowexponentValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         self,
         plotly_name="showexponent",
         parent_name="histogram2dcontour.colorbar",
-        **kwargs,
+        **kwargs
     ):
         super(ShowexponentValidator, self).__init__(
             plotly_name=plotly_name,
@@ -637,7 +637,7 @@ class ShowexponentValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "colorbars"),
             role=kwargs.pop("role", "style"),
             values=kwargs.pop("values", ["all", "first", "last", "none"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -649,14 +649,14 @@ class SeparatethousandsValidator(_plotly_utils.basevalidators.BooleanValidator):
         self,
         plotly_name="separatethousands",
         parent_name="histogram2dcontour.colorbar",
-        **kwargs,
+        **kwargs
     ):
         super(SeparatethousandsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "colorbars"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -668,7 +668,7 @@ class OutlinewidthValidator(_plotly_utils.basevalidators.NumberValidator):
         self,
         plotly_name="outlinewidth",
         parent_name="histogram2dcontour.colorbar",
-        **kwargs,
+        **kwargs
     ):
         super(OutlinewidthValidator, self).__init__(
             plotly_name=plotly_name,
@@ -676,7 +676,7 @@ class OutlinewidthValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "colorbars"),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -688,14 +688,14 @@ class OutlinecolorValidator(_plotly_utils.basevalidators.ColorValidator):
         self,
         plotly_name="outlinecolor",
         parent_name="histogram2dcontour.colorbar",
-        **kwargs,
+        **kwargs
     ):
         super(OutlinecolorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "colorbars"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -712,7 +712,7 @@ class NticksValidator(_plotly_utils.basevalidators.IntegerValidator):
             edit_type=kwargs.pop("edit_type", "colorbars"),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -729,7 +729,7 @@ class LenmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "colorbars"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["fraction", "pixels"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -746,7 +746,7 @@ class LenValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "colorbars"),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -758,7 +758,7 @@ class ExponentformatValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         self,
         plotly_name="exponentformat",
         parent_name="histogram2dcontour.colorbar",
-        **kwargs,
+        **kwargs
     ):
         super(ExponentformatValidator, self).__init__(
             plotly_name=plotly_name,
@@ -766,7 +766,7 @@ class ExponentformatValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "colorbars"),
             role=kwargs.pop("role", "style"),
             values=kwargs.pop("values", ["none", "e", "E", "power", "SI", "B"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -783,7 +783,7 @@ class DtickValidator(_plotly_utils.basevalidators.AnyValidator):
             edit_type=kwargs.pop("edit_type", "colorbars"),
             implied_edits=kwargs.pop("implied_edits", {"tickmode": "linear"}),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -795,7 +795,7 @@ class BorderwidthValidator(_plotly_utils.basevalidators.NumberValidator):
         self,
         plotly_name="borderwidth",
         parent_name="histogram2dcontour.colorbar",
-        **kwargs,
+        **kwargs
     ):
         super(BorderwidthValidator, self).__init__(
             plotly_name=plotly_name,
@@ -803,7 +803,7 @@ class BorderwidthValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "colorbars"),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -815,14 +815,14 @@ class BordercolorValidator(_plotly_utils.basevalidators.ColorValidator):
         self,
         plotly_name="bordercolor",
         parent_name="histogram2dcontour.colorbar",
-        **kwargs,
+        **kwargs
     ):
         super(BordercolorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "colorbars"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -838,5 +838,5 @@ class BgcolorValidator(_plotly_utils.basevalidators.ColorValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "colorbars"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )

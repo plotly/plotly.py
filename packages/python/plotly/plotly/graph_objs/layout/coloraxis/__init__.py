@@ -1477,7 +1477,7 @@ class ColorBar(_BaseLayoutHierarchyType):
         y=None,
         yanchor=None,
         ypad=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new ColorBar object

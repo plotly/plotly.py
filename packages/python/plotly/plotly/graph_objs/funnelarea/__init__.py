@@ -433,7 +433,7 @@ class Textfont(_BaseTraceHierarchyType):
         familysrc=None,
         size=None,
         sizesrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Textfont object
@@ -1073,7 +1073,7 @@ class Insidetextfont(_BaseTraceHierarchyType):
         familysrc=None,
         size=None,
         sizesrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Insidetextfont object
@@ -1539,7 +1539,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
         font=None,
         namelength=None,
         namelengthsrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Hoverlabel object

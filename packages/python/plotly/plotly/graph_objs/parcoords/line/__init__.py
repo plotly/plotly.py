@@ -1476,7 +1476,7 @@ class ColorBar(_BaseTraceHierarchyType):
         y=None,
         yanchor=None,
         ypad=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new ColorBar object

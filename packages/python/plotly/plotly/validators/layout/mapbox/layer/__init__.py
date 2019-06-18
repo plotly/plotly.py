@@ -10,7 +10,7 @@ class VisibleValidator(_plotly_utils.basevalidators.BooleanValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -25,7 +25,7 @@ class TypeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["circle", "line", "fill", "symbol"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -37,14 +37,14 @@ class TemplateitemnameValidator(_plotly_utils.basevalidators.StringValidator):
         self,
         plotly_name="templateitemname",
         parent_name="layout.mapbox.layer",
-        **kwargs,
+        **kwargs
     ):
         super(TemplateitemnameValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -92,7 +92,7 @@ class SymbolValidator(_plotly_utils.basevalidators.CompoundValidator):
                 respects to the (x,y) coordinates.
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -109,7 +109,7 @@ class SourcetypeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["geojson", "vector"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -125,7 +125,7 @@ class SourcelayerValidator(_plotly_utils.basevalidators.StringValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -141,7 +141,7 @@ class SourceValidator(_plotly_utils.basevalidators.AnyValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -159,7 +159,7 @@ class OpacityValidator(_plotly_utils.basevalidators.NumberValidator):
             max=kwargs.pop("max", 1),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -173,7 +173,7 @@ class NameValidator(_plotly_utils.basevalidators.StringValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -191,7 +191,7 @@ class MinzoomValidator(_plotly_utils.basevalidators.NumberValidator):
             max=kwargs.pop("max", 24),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -209,7 +209,7 @@ class MaxzoomValidator(_plotly_utils.basevalidators.NumberValidator):
             max=kwargs.pop("max", 24),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -238,7 +238,7 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 to "line".
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -260,7 +260,7 @@ class FillValidator(_plotly_utils.basevalidators.CompoundValidator):
                 effect only when `type` is set to "fill".
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -276,7 +276,7 @@ class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -300,7 +300,7 @@ class CircleValidator(_plotly_utils.basevalidators.CompoundValidator):
                 effect only when `type` is set to "circle".
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -316,5 +316,5 @@ class BelowValidator(_plotly_utils.basevalidators.StringValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )

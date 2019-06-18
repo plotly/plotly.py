@@ -447,7 +447,7 @@ class Line(_BaseTraceHierarchyType):
         reversescale=None,
         width=None,
         widthsrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Line object
@@ -2328,7 +2328,7 @@ class ColorBar(_BaseTraceHierarchyType):
         y=None,
         yanchor=None,
         ypad=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new ColorBar object

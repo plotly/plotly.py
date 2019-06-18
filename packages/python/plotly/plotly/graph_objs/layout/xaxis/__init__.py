@@ -345,7 +345,7 @@ class Tickformatstop(_BaseLayoutHierarchyType):
         name=None,
         templateitemname=None,
         value=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Tickformatstop object
@@ -1006,7 +1006,7 @@ class Rangeslider(_BaseLayoutHierarchyType):
         thickness=None,
         visible=None,
         yaxis=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Rangeslider object
@@ -1644,7 +1644,7 @@ class Rangeselector(_BaseLayoutHierarchyType):
         xanchor=None,
         y=None,
         yanchor=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Rangeselector object

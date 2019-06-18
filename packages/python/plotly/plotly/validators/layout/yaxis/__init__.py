@@ -10,7 +10,7 @@ class ZerolinewidthValidator(_plotly_utils.basevalidators.NumberValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "ticks"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -26,7 +26,7 @@ class ZerolinecolorValidator(_plotly_utils.basevalidators.ColorValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "ticks"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -40,7 +40,7 @@ class ZerolineValidator(_plotly_utils.basevalidators.BooleanValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "ticks"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -54,7 +54,7 @@ class VisibleValidator(_plotly_utils.basevalidators.BooleanValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -68,7 +68,7 @@ class UirevisionValidator(_plotly_utils.basevalidators.AnyValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -85,7 +85,7 @@ class TypeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             values=kwargs.pop(
                 "values", ["-", "linear", "log", "date", "category", "multicategory"]
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -113,7 +113,7 @@ class TitleValidator(_plotly_utils.basevalidators.TitleValidator):
                 deprecated.
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -128,7 +128,7 @@ class TickwidthValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "ticks"),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -142,7 +142,7 @@ class TickvalssrcValidator(_plotly_utils.basevalidators.SrcValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -156,7 +156,7 @@ class TickvalsValidator(_plotly_utils.basevalidators.DataArrayValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "ticks"),
             role=kwargs.pop("role", "data"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -170,7 +170,7 @@ class TicktextsrcValidator(_plotly_utils.basevalidators.SrcValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -184,7 +184,7 @@ class TicktextValidator(_plotly_utils.basevalidators.DataArrayValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "ticks"),
             role=kwargs.pop("role", "data"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -198,7 +198,7 @@ class TicksuffixValidator(_plotly_utils.basevalidators.StringValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "ticks"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -213,7 +213,7 @@ class TicksonValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "ticks"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["labels", "boundaries"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -228,7 +228,7 @@ class TicksValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "ticks"),
             role=kwargs.pop("role", "style"),
             values=kwargs.pop("values", ["outside", "inside", ""]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -242,7 +242,7 @@ class TickprefixValidator(_plotly_utils.basevalidators.StringValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "ticks"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -258,7 +258,7 @@ class TickmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             implied_edits=kwargs.pop("implied_edits", {}),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["auto", "linear", "array"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -273,7 +273,7 @@ class TicklenValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "ticks"),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -293,7 +293,7 @@ class TickformatstopValidator(_plotly_utils.basevalidators.CompoundValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -346,7 +346,7 @@ class TickformatstopsValidator(_plotly_utils.basevalidators.CompoundArrayValidat
                 the same as "tickformat"
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -360,7 +360,7 @@ class TickformatValidator(_plotly_utils.basevalidators.StringValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "ticks"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -398,7 +398,7 @@ class TickfontValidator(_plotly_utils.basevalidators.CompoundValidator):
 
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -412,7 +412,7 @@ class TickcolorValidator(_plotly_utils.basevalidators.ColorValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "ticks"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -426,7 +426,7 @@ class TickangleValidator(_plotly_utils.basevalidators.AngleValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "ticks"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -441,7 +441,7 @@ class Tick0Validator(_plotly_utils.basevalidators.AnyValidator):
             edit_type=kwargs.pop("edit_type", "ticks"),
             implied_edits=kwargs.pop("implied_edits", {"tickmode": "linear"}),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -457,7 +457,7 @@ class SpikethicknessValidator(_plotly_utils.basevalidators.NumberValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -472,7 +472,7 @@ class SpikesnapValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "none"),
             role=kwargs.pop("role", "style"),
             values=kwargs.pop("values", ["data", "cursor"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -487,7 +487,7 @@ class SpikemodeValidator(_plotly_utils.basevalidators.FlaglistValidator):
             edit_type=kwargs.pop("edit_type", "none"),
             flags=kwargs.pop("flags", ["toaxis", "across", "marker"]),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -504,7 +504,7 @@ class SpikedashValidator(_plotly_utils.basevalidators.StringValidator):
             values=kwargs.pop(
                 "values", ["solid", "dot", "dash", "longdash", "dashdot", "longdashdot"]
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -518,7 +518,7 @@ class SpikecolorValidator(_plotly_utils.basevalidators.ColorValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -533,7 +533,7 @@ class SideValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["top", "bottom", "left", "right"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -550,7 +550,7 @@ class ShowticksuffixValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "ticks"),
             role=kwargs.pop("role", "style"),
             values=kwargs.pop("values", ["all", "first", "last", "none"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -567,7 +567,7 @@ class ShowtickprefixValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "ticks"),
             role=kwargs.pop("role", "style"),
             values=kwargs.pop("values", ["all", "first", "last", "none"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -583,7 +583,7 @@ class ShowticklabelsValidator(_plotly_utils.basevalidators.BooleanValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "ticks"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -597,7 +597,7 @@ class ShowspikesValidator(_plotly_utils.basevalidators.BooleanValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "modebar"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -611,7 +611,7 @@ class ShowlineValidator(_plotly_utils.basevalidators.BooleanValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "ticks+layoutstyle"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -625,7 +625,7 @@ class ShowgridValidator(_plotly_utils.basevalidators.BooleanValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "ticks"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -642,7 +642,7 @@ class ShowexponentValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "ticks"),
             role=kwargs.pop("role", "style"),
             values=kwargs.pop("values", ["all", "first", "last", "none"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -658,7 +658,7 @@ class ShowdividersValidator(_plotly_utils.basevalidators.BooleanValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "ticks"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -674,7 +674,7 @@ class SeparatethousandsValidator(_plotly_utils.basevalidators.BooleanValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "ticks"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -689,7 +689,7 @@ class ScaleratioValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "plot"),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -706,7 +706,7 @@ class ScaleanchorValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             values=kwargs.pop(
                 "values", ["/^x([2-9]|[1-9][0-9]+)?$/", "/^y([2-9]|[1-9][0-9]+)?$/"]
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -721,7 +721,7 @@ class RangemodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["normal", "tozero", "nonnegative"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -754,7 +754,7 @@ class RangeValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                 ],
             ),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -770,7 +770,7 @@ class PositionValidator(_plotly_utils.basevalidators.NumberValidator):
             max=kwargs.pop("max", 1),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -788,7 +788,7 @@ class OverlayingValidator(_plotly_utils.basevalidators.EnumeratedValidator):
                 "values",
                 ["free", "/^x([2-9]|[1-9][0-9]+)?$/", "/^y([2-9]|[1-9][0-9]+)?$/"],
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -803,7 +803,7 @@ class NticksValidator(_plotly_utils.basevalidators.IntegerValidator):
             edit_type=kwargs.pop("edit_type", "ticks"),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -818,7 +818,7 @@ class MirrorValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "ticks+layoutstyle"),
             role=kwargs.pop("role", "style"),
             values=kwargs.pop("values", [True, "ticks", False, "all", "allticks"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -835,7 +835,7 @@ class MatchesValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             values=kwargs.pop(
                 "values", ["/^x([2-9]|[1-9][0-9]+)?$/", "/^y([2-9]|[1-9][0-9]+)?$/"]
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -850,7 +850,7 @@ class LinewidthValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "ticks+layoutstyle"),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -864,7 +864,7 @@ class LinecolorValidator(_plotly_utils.basevalidators.ColorValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "layoutstyle"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -879,7 +879,7 @@ class LayerValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["above traces", "below traces"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -893,7 +893,7 @@ class HoverformatValidator(_plotly_utils.basevalidators.StringValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -908,7 +908,7 @@ class GridwidthValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "ticks"),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -922,7 +922,7 @@ class GridcolorValidator(_plotly_utils.basevalidators.ColorValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "ticks"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -936,7 +936,7 @@ class FixedrangeValidator(_plotly_utils.basevalidators.BooleanValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -953,7 +953,7 @@ class ExponentformatValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "ticks"),
             role=kwargs.pop("role", "style"),
             values=kwargs.pop("values", ["none", "e", "E", "power", "SI", "B"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -968,7 +968,7 @@ class DtickValidator(_plotly_utils.basevalidators.AnyValidator):
             edit_type=kwargs.pop("edit_type", "ticks"),
             implied_edits=kwargs.pop("implied_edits", {"tickmode": "linear"}),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -989,7 +989,7 @@ class DomainValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                 ],
             ),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -1005,7 +1005,7 @@ class DividerwidthValidator(_plotly_utils.basevalidators.NumberValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "ticks"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -1021,7 +1021,7 @@ class DividercolorValidator(_plotly_utils.basevalidators.ColorValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "ticks"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -1040,7 +1040,7 @@ class ConstraintowardValidator(_plotly_utils.basevalidators.EnumeratedValidator)
             values=kwargs.pop(
                 "values", ["left", "center", "right", "top", "middle", "bottom"]
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -1055,7 +1055,7 @@ class ConstrainValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["range", "domain"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -1069,7 +1069,7 @@ class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "ticks"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -1106,7 +1106,7 @@ class CategoryorderValidator(_plotly_utils.basevalidators.EnumeratedValidator):
                     "median descending",
                 ],
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -1122,7 +1122,7 @@ class CategoryarraysrcValidator(_plotly_utils.basevalidators.SrcValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -1138,7 +1138,7 @@ class CategoryarrayValidator(_plotly_utils.basevalidators.DataArrayValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "data"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -1173,7 +1173,7 @@ class CalendarValidator(_plotly_utils.basevalidators.EnumeratedValidator):
                     "ummalqura",
                 ],
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -1189,7 +1189,7 @@ class AutorangeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             implied_edits=kwargs.pop("implied_edits", {}),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", [True, False, "reversed"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -1203,7 +1203,7 @@ class AutomarginValidator(_plotly_utils.basevalidators.BooleanValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "ticks"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -1221,5 +1221,5 @@ class AnchorValidator(_plotly_utils.basevalidators.EnumeratedValidator):
                 "values",
                 ["free", "/^x([2-9]|[1-9][0-9]+)?$/", "/^y([2-9]|[1-9][0-9]+)?$/"],
             ),
-            **kwargs,
+            **kwargs
         )

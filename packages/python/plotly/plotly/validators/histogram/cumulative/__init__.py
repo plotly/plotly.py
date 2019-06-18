@@ -10,7 +10,7 @@ class EnabledValidator(_plotly_utils.basevalidators.BooleanValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -27,7 +27,7 @@ class DirectionValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["increasing", "decreasing"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -44,5 +44,5 @@ class CurrentbinValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["include", "exclude", "half"]),
-            **kwargs,
+            **kwargs
         )

@@ -169,13 +169,13 @@ class TestFinanceCharts(TestCaseNoTemplate, NumpyTestUtilsMixin):
             PlotlyError,
             "direction must be defined as " "'increasing', 'decreasing', or 'both'",
             ff.create_ohlc,
-            **kwargs,
+            **kwargs
         )
         self.assertRaisesRegexp(
             PlotlyError,
             "direction must be defined as " "'increasing', 'decreasing', or 'both'",
             ff.create_candlestick,
-            **kwargs,
+            **kwargs
         )
 
         kwargs = {
@@ -189,13 +189,13 @@ class TestFinanceCharts(TestCaseNoTemplate, NumpyTestUtilsMixin):
             PlotlyError,
             "direction must be defined as " "'increasing', 'decreasing', or 'both'",
             ff.create_ohlc,
-            **kwargs,
+            **kwargs
         )
         self.assertRaisesRegexp(
             PlotlyError,
             "direction must be defined as " "'increasing', 'decreasing', or 'both'",
             ff.create_candlestick,
-            **kwargs,
+            **kwargs
         )
 
     def test_high_highest_value(self):
@@ -214,7 +214,7 @@ class TestFinanceCharts(TestCaseNoTemplate, NumpyTestUtilsMixin):
             "Double check that your data "
             "is entered in O-H-L-C order",
             ff.create_ohlc,
-            **kwargs,
+            **kwargs
         )
         self.assertRaisesRegexp(
             PlotlyError,
@@ -225,7 +225,7 @@ class TestFinanceCharts(TestCaseNoTemplate, NumpyTestUtilsMixin):
             "Double check that your data "
             "is entered in O-H-L-C order",
             ff.create_candlestick,
-            **kwargs,
+            **kwargs
         )
 
     def test_low_lowest_value(self):
@@ -246,7 +246,7 @@ class TestFinanceCharts(TestCaseNoTemplate, NumpyTestUtilsMixin):
             "Double check that your data "
             "is entered in O-H-L-C order",
             ff.create_ohlc,
-            **kwargs,
+            **kwargs
         )
         self.assertRaisesRegexp(
             PlotlyError,
@@ -257,7 +257,7 @@ class TestFinanceCharts(TestCaseNoTemplate, NumpyTestUtilsMixin):
             "Double check that your data "
             "is entered in O-H-L-C order",
             ff.create_candlestick,
-            **kwargs,
+            **kwargs
         )
 
     def test_one_ohlc(self):

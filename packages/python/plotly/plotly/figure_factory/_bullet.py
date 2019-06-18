@@ -156,7 +156,7 @@ def _bullet(
             hoverinfo="x" if orientation == "h" else "y",
             xaxis="x{}".format(row + 1),
             yaxis="y{}".format(row + 1),
-            **scatter_options,
+            **scatter_options
         )
 
         fig.add_trace(markers)
@@ -195,7 +195,7 @@ def create_bullet(
     horizontal_spacing=None,
     vertical_spacing=None,
     scatter_options={},
-    **layout_options,
+    **layout_options
 ):
     """
     Returns figure for bullet chart.

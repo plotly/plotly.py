@@ -12,7 +12,7 @@ class ZValidator(_plotly_utils.basevalidators.NumberValidator):
             max=kwargs.pop("max", 100000),
             min=kwargs.pop("min", -100000),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -30,7 +30,7 @@ class YValidator(_plotly_utils.basevalidators.NumberValidator):
             max=kwargs.pop("max", 100000),
             min=kwargs.pop("min", -100000),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -48,5 +48,5 @@ class XValidator(_plotly_utils.basevalidators.NumberValidator):
             max=kwargs.pop("max", 100000),
             min=kwargs.pop("min", -100000),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )

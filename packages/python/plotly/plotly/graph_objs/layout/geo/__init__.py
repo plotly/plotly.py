@@ -424,7 +424,7 @@ class Lonaxis(_BaseLayoutHierarchyType):
         range=None,
         showgrid=None,
         tick0=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Lonaxis object
@@ -717,7 +717,7 @@ class Lataxis(_BaseLayoutHierarchyType):
         range=None,
         showgrid=None,
         tick0=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Lataxis object

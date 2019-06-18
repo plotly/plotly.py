@@ -20,7 +20,7 @@ class ZValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the z axis.
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -46,7 +46,7 @@ class YValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the y axis.
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -72,5 +72,5 @@ class XValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the x axis.
 """,
             ),
-            **kwargs,
+            **kwargs
         )

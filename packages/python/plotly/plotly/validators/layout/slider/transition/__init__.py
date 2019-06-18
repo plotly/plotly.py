@@ -51,7 +51,7 @@ class EasingValidator(_plotly_utils.basevalidators.EnumeratedValidator):
                     "bounce-in-out",
                 ],
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -68,5 +68,5 @@ class DurationValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "arraydraw"),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )

@@ -7,7 +7,7 @@ class TracesValidator(_plotly_utils.basevalidators.AnyValidator):
             plotly_name=plotly_name,
             parent_name=parent_name,
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -20,7 +20,7 @@ class NameValidator(_plotly_utils.basevalidators.StringValidator):
             plotly_name=plotly_name,
             parent_name=parent_name,
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -33,7 +33,7 @@ class LayoutValidator(plotly.validators.LayoutValidator):
             plotly_name=plotly_name,
             parent_name=parent_name,
             role=kwargs.pop("role", "object"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -46,7 +46,7 @@ class GroupValidator(_plotly_utils.basevalidators.StringValidator):
             plotly_name=plotly_name,
             parent_name=parent_name,
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -59,7 +59,7 @@ class DataValidator(plotly.validators.DataValidator):
             plotly_name=plotly_name,
             parent_name=parent_name,
             role=kwargs.pop("role", "object"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -72,5 +72,5 @@ class BaseframeValidator(_plotly_utils.basevalidators.StringValidator):
             plotly_name=plotly_name,
             parent_name=parent_name,
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )

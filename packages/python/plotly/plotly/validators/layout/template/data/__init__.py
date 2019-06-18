@@ -14,7 +14,7 @@ class WaterfallsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -34,7 +34,7 @@ class VolumesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -54,7 +54,7 @@ class ViolinsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -74,7 +74,7 @@ class TablesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -94,7 +94,7 @@ class SurfacesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -114,7 +114,7 @@ class SunburstsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -134,7 +134,7 @@ class StreamtubesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -154,7 +154,7 @@ class SplomsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -174,7 +174,7 @@ class ScatterternarysValidator(_plotly_utils.basevalidators.CompoundArrayValidat
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -194,7 +194,7 @@ class ScattersValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -214,7 +214,7 @@ class ScatterpolarsValidator(_plotly_utils.basevalidators.CompoundArrayValidator
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -234,7 +234,7 @@ class ScatterpolarglsValidator(_plotly_utils.basevalidators.CompoundArrayValidat
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -254,7 +254,7 @@ class ScattermapboxsValidator(_plotly_utils.basevalidators.CompoundArrayValidato
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -274,7 +274,7 @@ class ScatterglsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -294,7 +294,7 @@ class ScattergeosValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -314,7 +314,7 @@ class ScattercarpetsValidator(_plotly_utils.basevalidators.CompoundArrayValidato
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -334,7 +334,7 @@ class Scatter3dsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -354,7 +354,7 @@ class SankeysValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -374,7 +374,7 @@ class PointcloudsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -392,7 +392,7 @@ class PiesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -412,7 +412,7 @@ class ParcoordssValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -432,7 +432,7 @@ class ParcatssValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -452,7 +452,7 @@ class OhlcsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -472,7 +472,7 @@ class Mesh3dsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -492,7 +492,7 @@ class IsosurfacesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -512,7 +512,7 @@ class HistogramsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -532,7 +532,7 @@ class Histogram2dsValidator(_plotly_utils.basevalidators.CompoundArrayValidator)
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -544,7 +544,7 @@ class Histogram2dContoursValidator(_plotly_utils.basevalidators.CompoundArrayVal
         self,
         plotly_name="histogram2dcontour",
         parent_name="layout.template.data",
-        **kwargs,
+        **kwargs
     ):
         super(Histogram2dContoursValidator, self).__init__(
             plotly_name=plotly_name,
@@ -555,7 +555,7 @@ class Histogram2dContoursValidator(_plotly_utils.basevalidators.CompoundArrayVal
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -575,7 +575,7 @@ class HeatmapsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -595,7 +595,7 @@ class HeatmapglsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -615,7 +615,7 @@ class FunnelsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -635,7 +635,7 @@ class FunnelareasValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -655,7 +655,7 @@ class ContoursValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -675,7 +675,7 @@ class ContourcarpetsValidator(_plotly_utils.basevalidators.CompoundArrayValidato
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -695,7 +695,7 @@ class ConesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -715,7 +715,7 @@ class ChoroplethsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -735,7 +735,7 @@ class CarpetsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -755,7 +755,7 @@ class CandlesticksValidator(_plotly_utils.basevalidators.CompoundArrayValidator)
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -773,7 +773,7 @@ class BoxsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -791,7 +791,7 @@ class BarsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -811,7 +811,7 @@ class BarpolarsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -831,5 +831,5 @@ class AreasValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )

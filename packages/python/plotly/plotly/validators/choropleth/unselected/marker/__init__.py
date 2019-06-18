@@ -6,7 +6,7 @@ class OpacityValidator(_plotly_utils.basevalidators.NumberValidator):
         self,
         plotly_name="opacity",
         parent_name="choropleth.unselected.marker",
-        **kwargs,
+        **kwargs
     ):
         super(OpacityValidator, self).__init__(
             plotly_name=plotly_name,
@@ -15,5 +15,5 @@ class OpacityValidator(_plotly_utils.basevalidators.NumberValidator):
             max=kwargs.pop("max", 1),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )

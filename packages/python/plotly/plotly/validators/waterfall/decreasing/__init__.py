@@ -19,5 +19,5 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 ine instance or dict with compatible properties
 """,
             ),
-            **kwargs,
+            **kwargs
         )

@@ -504,7 +504,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
         font=None,
         namelength=None,
         namelengthsrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Hoverlabel object
@@ -1045,7 +1045,7 @@ class Header(_BaseTraceHierarchyType):
         suffixsrc=None,
         values=None,
         valuessrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Header object
@@ -1821,7 +1821,7 @@ class Cells(_BaseTraceHierarchyType):
         suffixsrc=None,
         values=None,
         valuessrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Cells object

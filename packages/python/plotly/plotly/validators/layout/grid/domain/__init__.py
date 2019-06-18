@@ -15,7 +15,7 @@ class YValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                 ],
             ),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -36,5 +36,5 @@ class XValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                 ],
             ),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )

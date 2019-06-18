@@ -6,14 +6,14 @@ class TextValidator(_plotly_utils.basevalidators.StringValidator):
         self,
         plotly_name="text",
         parent_name="scattermapbox.marker.colorbar.title",
-        **kwargs,
+        **kwargs
     ):
         super(TextValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -25,7 +25,7 @@ class SideValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         self,
         plotly_name="side",
         parent_name="scattermapbox.marker.colorbar.title",
-        **kwargs,
+        **kwargs
     ):
         super(SideValidator, self).__init__(
             plotly_name=plotly_name,
@@ -33,7 +33,7 @@ class SideValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "style"),
             values=kwargs.pop("values", ["right", "top", "bottom"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -45,7 +45,7 @@ class FontValidator(_plotly_utils.basevalidators.CompoundValidator):
         self,
         plotly_name="font",
         parent_name="scattermapbox.marker.colorbar.title",
-        **kwargs,
+        **kwargs
     ):
         super(FontValidator, self).__init__(
             plotly_name=plotly_name,
@@ -76,5 +76,5 @@ class FontValidator(_plotly_utils.basevalidators.CompoundValidator):
 
 """,
             ),
-            **kwargs,
+            **kwargs
         )

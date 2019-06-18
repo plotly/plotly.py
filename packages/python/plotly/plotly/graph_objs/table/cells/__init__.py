@@ -440,7 +440,7 @@ class Font(_BaseTraceHierarchyType):
         familysrc=None,
         size=None,
         sizesrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Font object

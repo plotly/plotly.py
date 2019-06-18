@@ -11,7 +11,7 @@ class SizeValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "ticks"),
             min=kwargs.pop("min", 1),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -29,7 +29,7 @@ class FamilyValidator(_plotly_utils.basevalidators.StringValidator):
             no_blank=kwargs.pop("no_blank", True),
             role=kwargs.pop("role", "style"),
             strict=kwargs.pop("strict", True),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -45,5 +45,5 @@ class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "ticks"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )

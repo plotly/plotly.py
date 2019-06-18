@@ -12,7 +12,7 @@ class SizeminValidator(_plotly_utils.basevalidators.NumberValidator):
             max=kwargs.pop("max", 2),
             min=kwargs.pop("min", 0.1),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -29,7 +29,7 @@ class SizemaxValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             min=kwargs.pop("min", 0.1),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -48,7 +48,7 @@ class OpacityValidator(_plotly_utils.basevalidators.NumberValidator):
             max=kwargs.pop("max", 1),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -63,7 +63,7 @@ class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
             array_ok=kwargs.pop("array_ok", False),
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -89,7 +89,7 @@ class BorderValidator(_plotly_utils.basevalidators.CompoundValidator):
                 may cause slower zooming and panning.
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -103,5 +103,5 @@ class BlendValidator(_plotly_utils.basevalidators.BooleanValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )

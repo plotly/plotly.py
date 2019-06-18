@@ -504,7 +504,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
         font=None,
         namelength=None,
         namelengthsrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Hoverlabel object
@@ -2653,7 +2653,7 @@ class Baxis(_BaseTraceHierarchyType):
         titlefont=None,
         titleoffset=None,
         type=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Baxis object
@@ -4887,7 +4887,7 @@ class Aaxis(_BaseTraceHierarchyType):
         titlefont=None,
         titleoffset=None,
         type=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Aaxis object

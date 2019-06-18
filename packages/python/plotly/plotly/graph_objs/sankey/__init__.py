@@ -910,7 +910,7 @@ class Node(_BaseTraceHierarchyType):
         xsrc=None,
         y=None,
         ysrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Node object
@@ -1698,7 +1698,7 @@ class Link(_BaseTraceHierarchyType):
         targetsrc=None,
         value=None,
         valuesrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Link object
@@ -2242,7 +2242,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
         font=None,
         namelength=None,
         namelengthsrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Hoverlabel object

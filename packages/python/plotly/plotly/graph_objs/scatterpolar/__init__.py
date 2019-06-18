@@ -372,7 +372,7 @@ class Textfont(_BaseTraceHierarchyType):
         familysrc=None,
         size=None,
         sizesrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Textfont object
@@ -1895,7 +1895,7 @@ class Marker(_BaseTraceHierarchyType):
         sizesrc=None,
         symbol=None,
         symbolsrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Marker object
@@ -2330,7 +2330,7 @@ class Line(_BaseTraceHierarchyType):
         shape=None,
         smoothing=None,
         width=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Line object
@@ -2783,7 +2783,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
         font=None,
         namelength=None,
         namelengthsrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Hoverlabel object

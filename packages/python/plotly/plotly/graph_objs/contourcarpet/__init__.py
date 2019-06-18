@@ -745,7 +745,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
         font=None,
         namelength=None,
         namelengthsrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Hoverlabel object
@@ -1220,7 +1220,7 @@ class Contours(_BaseTraceHierarchyType):
         start=None,
         type=None,
         value=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Contours object
@@ -2841,7 +2841,7 @@ class ColorBar(_BaseTraceHierarchyType):
         y=None,
         yanchor=None,
         ypad=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new ColorBar object

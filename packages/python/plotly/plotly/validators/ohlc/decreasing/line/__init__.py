@@ -12,7 +12,7 @@ class WidthValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "style"),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -31,7 +31,7 @@ class DashValidator(_plotly_utils.basevalidators.DashValidator):
             values=kwargs.pop(
                 "values", ["solid", "dot", "dash", "longdash", "dashdot", "longdashdot"]
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -48,5 +48,5 @@ class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
             anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "style"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )

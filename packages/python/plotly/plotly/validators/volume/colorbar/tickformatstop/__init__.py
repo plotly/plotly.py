@@ -6,14 +6,14 @@ class ValueValidator(_plotly_utils.basevalidators.StringValidator):
         self,
         plotly_name="value",
         parent_name="volume.colorbar.tickformatstop",
-        **kwargs,
+        **kwargs
     ):
         super(ValueValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -25,14 +25,14 @@ class TemplateitemnameValidator(_plotly_utils.basevalidators.StringValidator):
         self,
         plotly_name="templateitemname",
         parent_name="volume.colorbar.tickformatstop",
-        **kwargs,
+        **kwargs
     ):
         super(TemplateitemnameValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -48,7 +48,7 @@ class NameValidator(_plotly_utils.basevalidators.StringValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -60,14 +60,14 @@ class EnabledValidator(_plotly_utils.basevalidators.BooleanValidator):
         self,
         plotly_name="enabled",
         parent_name="volume.colorbar.tickformatstop",
-        **kwargs,
+        **kwargs
     ):
         super(EnabledValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -79,7 +79,7 @@ class DtickrangeValidator(_plotly_utils.basevalidators.InfoArrayValidator):
         self,
         plotly_name="dtickrange",
         parent_name="volume.colorbar.tickformatstop",
-        **kwargs,
+        **kwargs
     ):
         super(DtickrangeValidator, self).__init__(
             plotly_name=plotly_name,
@@ -93,5 +93,5 @@ class DtickrangeValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                 ],
             ),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )

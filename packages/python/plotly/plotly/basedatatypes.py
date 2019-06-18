@@ -1624,7 +1624,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
             raise Exception(
                 "Use plotly.tools.make_subplots " "to create a subplot grid."
             )
-        print(self._grid_str)
+        print (self._grid_str)
 
     def append_trace(self, trace, row, col):
         """
@@ -2213,7 +2213,7 @@ Invalid property path '{key_path_str}' for layout
                 restyle_data=restyle_changes,
                 relayout_data=relayout_changes,
                 trace_indexes=trace_indexes,
-                **msg_kwargs,
+                **msg_kwargs
             )
 
         # Dispatch changes

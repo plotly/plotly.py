@@ -6,7 +6,7 @@ class VertexnormalsepsilonValidator(_plotly_utils.basevalidators.NumberValidator
         self,
         plotly_name="vertexnormalsepsilon",
         parent_name="volume.lighting",
-        **kwargs,
+        **kwargs
     ):
         super(VertexnormalsepsilonValidator, self).__init__(
             plotly_name=plotly_name,
@@ -15,7 +15,7 @@ class VertexnormalsepsilonValidator(_plotly_utils.basevalidators.NumberValidator
             max=kwargs.pop("max", 1),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -31,7 +31,7 @@ class SpecularValidator(_plotly_utils.basevalidators.NumberValidator):
             max=kwargs.pop("max", 2),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -49,7 +49,7 @@ class RoughnessValidator(_plotly_utils.basevalidators.NumberValidator):
             max=kwargs.pop("max", 1),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -65,7 +65,7 @@ class FresnelValidator(_plotly_utils.basevalidators.NumberValidator):
             max=kwargs.pop("max", 5),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -83,7 +83,7 @@ class FacenormalsepsilonValidator(_plotly_utils.basevalidators.NumberValidator):
             max=kwargs.pop("max", 1),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -99,7 +99,7 @@ class DiffuseValidator(_plotly_utils.basevalidators.NumberValidator):
             max=kwargs.pop("max", 1),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -115,5 +115,5 @@ class AmbientValidator(_plotly_utils.basevalidators.NumberValidator):
             max=kwargs.pop("max", 1),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )

@@ -1690,7 +1690,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         type=None,
         uirevision=None,
         visible=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new RadialAxis object
@@ -3863,7 +3863,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         type=None,
         uirevision=None,
         visible=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new AngularAxis object

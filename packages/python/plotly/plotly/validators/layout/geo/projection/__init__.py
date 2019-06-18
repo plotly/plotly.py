@@ -37,7 +37,7 @@ class TypeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
                     "sinusoidal",
                 ],
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -54,7 +54,7 @@ class ScaleValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "plot"),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -84,7 +84,7 @@ class RotationValidator(_plotly_utils.basevalidators.CompoundValidator):
                 of 180 makes the map appear upside down.
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -107,5 +107,5 @@ class ParallelsValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                 ],
             ),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )

@@ -18,7 +18,7 @@ class UpValidator(_plotly_utils.basevalidators.CompoundValidator):
 
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -42,7 +42,7 @@ class ProjectionValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "orthographic". The default is "perspective".
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -66,7 +66,7 @@ class EyeValidator(_plotly_utils.basevalidators.CompoundValidator):
 
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -92,5 +92,5 @@ class CenterValidator(_plotly_utils.basevalidators.CompoundValidator):
 
 """,
             ),
-            **kwargs,
+            **kwargs
         )

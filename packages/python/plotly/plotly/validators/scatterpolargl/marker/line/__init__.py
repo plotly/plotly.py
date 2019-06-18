@@ -10,7 +10,7 @@ class WidthsrcValidator(_plotly_utils.basevalidators.SrcValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -29,7 +29,7 @@ class WidthValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -41,14 +41,14 @@ class ReversescaleValidator(_plotly_utils.basevalidators.BooleanValidator):
         self,
         plotly_name="reversescale",
         parent_name="scatterpolargl.marker.line",
-        **kwargs,
+        **kwargs
     ):
         super(ReversescaleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -64,7 +64,7 @@ class ColorsrcValidator(_plotly_utils.basevalidators.SrcValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -76,7 +76,7 @@ class ColorscaleValidator(_plotly_utils.basevalidators.ColorscaleValidator):
         self,
         plotly_name="colorscale",
         parent_name="scatterpolargl.marker.line",
-        **kwargs,
+        **kwargs
     ):
         super(ColorscaleValidator, self).__init__(
             plotly_name=plotly_name,
@@ -84,7 +84,7 @@ class ColorscaleValidator(_plotly_utils.basevalidators.ColorscaleValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             implied_edits=kwargs.pop("implied_edits", {"autocolorscale": False}),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -96,7 +96,7 @@ class ColoraxisValidator(_plotly_utils.basevalidators.SubplotidValidator):
         self,
         plotly_name="coloraxis",
         parent_name="scatterpolargl.marker.line",
-        **kwargs,
+        **kwargs
     ):
         super(ColoraxisValidator, self).__init__(
             plotly_name=plotly_name,
@@ -105,7 +105,7 @@ class ColoraxisValidator(_plotly_utils.basevalidators.SubplotidValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             regex=kwargs.pop("regex", "/^coloraxis([2-9]|[1-9][0-9]+)?$/"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -125,7 +125,7 @@ class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
             colorscale_path=kwargs.pop(
                 "colorscale_path", "scatterpolargl.marker.line.colorscale"
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -142,7 +142,7 @@ class CminValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             implied_edits=kwargs.pop("implied_edits", {"cauto": False}),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -159,7 +159,7 @@ class CmidValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             implied_edits=kwargs.pop("implied_edits", {}),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -176,7 +176,7 @@ class CmaxValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             implied_edits=kwargs.pop("implied_edits", {"cauto": False}),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -193,7 +193,7 @@ class CautoValidator(_plotly_utils.basevalidators.BooleanValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             implied_edits=kwargs.pop("implied_edits", {}),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -205,7 +205,7 @@ class AutocolorscaleValidator(_plotly_utils.basevalidators.BooleanValidator):
         self,
         plotly_name="autocolorscale",
         parent_name="scatterpolargl.marker.line",
-        **kwargs,
+        **kwargs
     ):
         super(AutocolorscaleValidator, self).__init__(
             plotly_name=plotly_name,
@@ -213,5 +213,5 @@ class AutocolorscaleValidator(_plotly_utils.basevalidators.BooleanValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             implied_edits=kwargs.pop("implied_edits", {}),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )

@@ -1251,7 +1251,7 @@ class Line(_BaseTraceHierarchyType):
         colorsrc=None,
         reversescale=None,
         showscale=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Line object
@@ -2279,7 +2279,7 @@ class Dimension(_BaseTraceHierarchyType):
         values=None,
         valuessrc=None,
         visible=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Dimension object

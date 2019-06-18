@@ -8,7 +8,7 @@ class ZoomValidator(_plotly_utils.basevalidators.NumberValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -22,7 +22,7 @@ class UirevisionValidator(_plotly_utils.basevalidators.AnyValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -48,7 +48,7 @@ class StyleValidator(_plotly_utils.basevalidators.AnyValidator):
                     "satellite-streets",
                 ],
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -62,7 +62,7 @@ class PitchValidator(_plotly_utils.basevalidators.NumberValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -82,7 +82,7 @@ class LayerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 """
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -190,7 +190,7 @@ class LayersValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 Determines whether this layer is displayed
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -221,7 +221,7 @@ class DomainValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (in plot fraction).
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -245,7 +245,7 @@ class CenterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 degrees East).
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -259,7 +259,7 @@ class BearingValidator(_plotly_utils.basevalidators.NumberValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -277,5 +277,5 @@ class AccesstokenValidator(_plotly_utils.basevalidators.StringValidator):
             no_blank=kwargs.pop("no_blank", True),
             role=kwargs.pop("role", "info"),
             strict=kwargs.pop("strict", True),
-            **kwargs,
+            **kwargs
         )

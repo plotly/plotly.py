@@ -10,7 +10,7 @@ class ValueValidator(_plotly_utils.basevalidators.AnyValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -27,7 +27,7 @@ class TypeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["levels", "constraint"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -44,7 +44,7 @@ class StartValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "plot"),
             implied_edits=kwargs.pop("implied_edits", {"^autocontour": False}),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -62,7 +62,7 @@ class SizeValidator(_plotly_utils.basevalidators.NumberValidator):
             implied_edits=kwargs.pop("implied_edits", {"^autocontour": False}),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -78,7 +78,7 @@ class ShowlinesValidator(_plotly_utils.basevalidators.BooleanValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -94,7 +94,7 @@ class ShowlabelsValidator(_plotly_utils.basevalidators.BooleanValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -128,7 +128,7 @@ class OperationValidator(_plotly_utils.basevalidators.EnumeratedValidator):
                     ")[",
                 ],
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -144,7 +144,7 @@ class LabelformatValidator(_plotly_utils.basevalidators.StringValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -184,7 +184,7 @@ class LabelfontValidator(_plotly_utils.basevalidators.CompoundValidator):
 
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -201,7 +201,7 @@ class EndValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "plot"),
             implied_edits=kwargs.pop("implied_edits", {"^autocontour": False}),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -218,5 +218,5 @@ class ColoringValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "style"),
             values=kwargs.pop("values", ["fill", "lines", "none"]),
-            **kwargs,
+            **kwargs
         )

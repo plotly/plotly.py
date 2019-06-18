@@ -298,7 +298,7 @@ class SymbolValidator(_plotly_utils.basevalidators.EnumeratedValidator):
                     "line-nw-open",
                 ],
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -315,7 +315,7 @@ class SizeValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -329,7 +329,7 @@ class OutliercolorValidator(_plotly_utils.basevalidators.ColorValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "style"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -347,7 +347,7 @@ class OpacityValidator(_plotly_utils.basevalidators.NumberValidator):
             max=kwargs.pop("max", 1),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -381,7 +381,7 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the marker points.
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -397,5 +397,5 @@ class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
             array_ok=kwargs.pop("array_ok", False),
             edit_type=kwargs.pop("edit_type", "style"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )

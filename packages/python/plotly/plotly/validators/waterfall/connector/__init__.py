@@ -10,7 +10,7 @@ class VisibleValidator(_plotly_utils.basevalidators.BooleanValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -25,7 +25,7 @@ class ModeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["spanning", "between"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -52,5 +52,5 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the line width (in px).
 """,
             ),
-            **kwargs,
+            **kwargs
         )

@@ -8,7 +8,7 @@ class UirevisionValidator(_plotly_utils.basevalidators.AnyValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -29,7 +29,7 @@ class SectorValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                 ],
             ),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -323,7 +323,7 @@ class RadialAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 axis, otherwise false
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -339,7 +339,7 @@ class HoleValidator(_plotly_utils.basevalidators.NumberValidator):
             max=kwargs.pop("max", 1),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -354,7 +354,7 @@ class GridshapeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "style"),
             values=kwargs.pop("values", ["circular", "linear"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -385,7 +385,7 @@ class DomainValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (in plot fraction).
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -399,7 +399,7 @@ class BgcolorValidator(_plotly_utils.basevalidators.ColorValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -414,7 +414,7 @@ class BarmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["stack", "overlay"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -430,7 +430,7 @@ class BargapValidator(_plotly_utils.basevalidators.NumberValidator):
             max=kwargs.pop("max", 1),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -694,5 +694,5 @@ class AngularAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 axis, otherwise false
 """,
             ),
-            **kwargs,
+            **kwargs
         )

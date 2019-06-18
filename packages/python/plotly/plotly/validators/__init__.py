@@ -454,7 +454,7 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 with compatible properties
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -751,7 +751,7 @@ class WaterfallValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  y .
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -1028,7 +1028,7 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  z .
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -1331,7 +1331,7 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  y .
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -1456,7 +1456,7 @@ class TableValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (provided that the legend itself is visible).
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -1715,7 +1715,7 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  z .
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -1925,7 +1925,7 @@ class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (provided that the legend itself is visible).
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -2178,7 +2178,7 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  z .
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -2379,7 +2379,7 @@ class SplomValidator(_plotly_utils.basevalidators.CompoundValidator):
                 and one less y-axis.
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -2645,7 +2645,7 @@ class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (provided that the legend itself is visible).
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -2905,7 +2905,7 @@ class ScatterpolarglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (provided that the legend itself is visible).
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -3164,7 +3164,7 @@ class ScatterpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (provided that the legend itself is visible).
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -3386,7 +3386,7 @@ class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (provided that the legend itself is visible).
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -3654,7 +3654,7 @@ class ScatterglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  y .
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -3892,7 +3892,7 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (provided that the legend itself is visible).
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -4136,7 +4136,7 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 refer to `layout.yaxis2`, and so on.
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -4365,7 +4365,7 @@ class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  z .
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -4717,7 +4717,7 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  y .
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -4855,7 +4855,7 @@ class SankeyValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (provided that the legend itself is visible).
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -5037,7 +5037,7 @@ class PointcloudValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  y .
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -5276,7 +5276,7 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (provided that the legend itself is visible).
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -5385,7 +5385,7 @@ class ParcoordsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (provided that the legend itself is visible).
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -5534,7 +5534,7 @@ class ParcatsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (provided that the legend itself is visible).
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -5717,7 +5717,7 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
                 refer to `layout.yaxis2`, and so on.
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -6064,7 +6064,7 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  z .
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -6328,7 +6328,7 @@ class IsosurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  z .
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -6661,7 +6661,7 @@ class Histogram2dContourValidator(_plotly_utils.basevalidators.CompoundValidator
                 Sets the source reference on plot.ly for  z .
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -6977,7 +6977,7 @@ class Histogram2dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  z .
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -7262,7 +7262,7 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  y .
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -7484,7 +7484,7 @@ class HeatmapglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  z .
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -7759,7 +7759,7 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  z .
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -7968,7 +7968,7 @@ class FunnelareaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (provided that the legend itself is visible).
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -8245,7 +8245,7 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  y .
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -8506,7 +8506,7 @@ class ContourcarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  z .
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -8803,7 +8803,7 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  z .
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -9077,7 +9077,7 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  z .
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -9312,7 +9312,7 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  z .
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -9485,7 +9485,7 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  y .
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -9669,7 +9669,7 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
                 refer to `layout.yaxis2`, and so on.
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -9943,7 +9943,7 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  y .
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -10161,7 +10161,7 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 .
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -10471,7 +10471,7 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  y .
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -10595,7 +10595,7 @@ class AreaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (provided that the legend itself is visible).
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -10636,7 +10636,7 @@ class FramesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 respective traces in the data attribute
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -10693,5 +10693,5 @@ class DataValidator(_plotly_utils.basevalidators.BaseDataValidator):
             },
             plotly_name=plotly_name,
             parent_name=parent_name,
-            **kwargs,
+            **kwargs
         )

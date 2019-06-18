@@ -1,6 +1,6 @@
 [tool.black]
 line-length = 88
-target_version = ['py37']
+target_version = ['py27', 'py35', 'py36', 'py37']
 include = '\.pyi?$'
 exclude = '''
 
@@ -19,5 +19,6 @@ exclude = '''
     | submodules
     | packages/javascript
   )/
+  | versioneer.py
 )
 '''

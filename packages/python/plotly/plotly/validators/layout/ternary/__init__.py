@@ -10,7 +10,7 @@ class UirevisionValidator(_plotly_utils.basevalidators.AnyValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -25,7 +25,7 @@ class SumValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "plot"),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -56,7 +56,7 @@ class DomainValidator(_plotly_utils.basevalidators.CompoundValidator):
                 subplot (in plot fraction).
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -277,7 +277,7 @@ class CaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `ternary<N>.uirevision`.
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -291,7 +291,7 @@ class BgcolorValidator(_plotly_utils.basevalidators.ColorValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "style"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -512,7 +512,7 @@ class BaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `ternary<N>.uirevision`.
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -733,5 +733,5 @@ class AaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `ternary<N>.uirevision`.
 """,
             ),
-            **kwargs,
+            **kwargs
         )

@@ -1740,7 +1740,7 @@ class Marker(_BaseTraceHierarchyType):
         opacitysrc=None,
         reversescale=None,
         showscale=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Marker object
@@ -2288,7 +2288,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
         font=None,
         namelength=None,
         namelengthsrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Hoverlabel object
@@ -2821,7 +2821,7 @@ class ErrorY(_BaseTraceHierarchyType):
         valueminus=None,
         visible=None,
         width=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new ErrorY object
@@ -3413,7 +3413,7 @@ class ErrorX(_BaseTraceHierarchyType):
         valueminus=None,
         visible=None,
         width=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new ErrorX object

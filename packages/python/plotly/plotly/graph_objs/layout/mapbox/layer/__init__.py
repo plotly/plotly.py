@@ -211,7 +211,7 @@ class Symbol(_BaseLayoutHierarchyType):
         text=None,
         textfont=None,
         textposition=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Symbol object

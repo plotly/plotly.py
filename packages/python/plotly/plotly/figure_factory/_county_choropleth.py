@@ -411,7 +411,7 @@ def create_choropleth(
     round_legend_values=False,
     exponent_format=False,
     legend_title="",
-    **layout_options,
+    **layout_options
 ):
     """
     Returns figure for county choropleth. Uses data from package_data.

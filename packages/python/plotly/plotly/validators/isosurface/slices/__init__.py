@@ -30,7 +30,7 @@ class ZValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the z dimension are drawn.
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -66,7 +66,7 @@ class YValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the y dimension are drawn.
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -102,5 +102,5 @@ class XValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the x dimension are drawn.
 """,
             ),
-            **kwargs,
+            **kwargs
         )

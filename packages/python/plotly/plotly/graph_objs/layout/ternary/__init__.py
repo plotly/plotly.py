@@ -1564,7 +1564,7 @@ class Caxis(_BaseLayoutHierarchyType):
         title=None,
         titlefont=None,
         uirevision=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Caxis object
@@ -3277,7 +3277,7 @@ class Baxis(_BaseLayoutHierarchyType):
         title=None,
         titlefont=None,
         uirevision=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Baxis object
@@ -4990,7 +4990,7 @@ class Aaxis(_BaseLayoutHierarchyType):
         title=None,
         titlefont=None,
         uirevision=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Aaxis object

@@ -16,7 +16,7 @@ class TextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the text font color of selected points.
 """,
             ),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -40,5 +40,5 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the marker opacity of selected points.
 """,
             ),
-            **kwargs,
+            **kwargs
         )

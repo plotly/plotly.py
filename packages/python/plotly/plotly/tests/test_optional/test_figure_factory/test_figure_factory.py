@@ -33,7 +33,7 @@ class TestDistplot(NumpyTestUtilsMixin, TestCaseNoTemplate):
             PlotlyError,
             "curve_type must be defined as " "'kde' or 'normal'",
             ff.create_distplot,
-            **kwargs,
+            **kwargs
         )
 
     def test_wrong_histdata_format(self):
@@ -4290,8 +4290,8 @@ class TestTernarycontour(NumpyTestUtilsMixin, TestCaseNoTemplate):
                 z,
                 interp_mode="cartesian",
                 ncontours=ncontours,
-                **arg_set,
+                **arg_set
             )
             # This test does not work for ilr interpolation
-            print(len(fig.data))
+            print (len(fig.data))
             assert len(fig.data) == ncontours + 2 + arg_set["showscale"]

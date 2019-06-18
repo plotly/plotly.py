@@ -1256,7 +1256,7 @@ class Marker(_BaseTraceHierarchyType):
         opacitysrc=None,
         reversescale=None,
         showscale=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Marker object
@@ -1804,7 +1804,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
         font=None,
         namelength=None,
         namelengthsrc=None,
-        **kwargs,
+        **kwargs
     ):
         """
         Construct a new Hoverlabel object

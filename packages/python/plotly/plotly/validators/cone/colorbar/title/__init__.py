@@ -8,7 +8,7 @@ class TextValidator(_plotly_utils.basevalidators.StringValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "colorbars"),
             role=kwargs.pop("role", "info"),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -23,7 +23,7 @@ class SideValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "colorbars"),
             role=kwargs.pop("role", "style"),
             values=kwargs.pop("values", ["right", "top", "bottom"]),
-            **kwargs,
+            **kwargs
         )
 
 
@@ -61,5 +61,5 @@ class FontValidator(_plotly_utils.basevalidators.CompoundValidator):
 
 """,
             ),
-            **kwargs,
+            **kwargs
         )
