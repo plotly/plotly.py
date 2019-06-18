@@ -1,17 +1,15 @@
-
-
 import _plotly_utils.basevalidators
 
 
 class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='layout', parent_name='', **kwargs):
+    def __init__(self, plotly_name="layout", parent_name="", **kwargs):
         super(LayoutValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Layout'),
+            data_class_str=kwargs.pop("data_class_str", "Layout"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             angularaxis
                 plotly.graph_objs.layout.AngularAxis instance
                 or dict with compatible properties
@@ -454,9 +452,9 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             yaxis
                 plotly.graph_objs.layout.YAxis instance or dict
                 with compatible properties
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -464,14 +462,14 @@ import _plotly_utils.basevalidators
 
 
 class WaterfallValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='waterfall', parent_name='', **kwargs):
+    def __init__(self, plotly_name="waterfall", parent_name="", **kwargs):
         super(WaterfallValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Waterfall'),
+            data_class_str=kwargs.pop("data_class_str", "Waterfall"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             alignmentgroup
                 Set several traces linked to the same position
                 axis or matching axes to the same
@@ -751,9 +749,9 @@ class WaterfallValidator(_plotly_utils.basevalidators.CompoundValidator):
                 refer to `layout.yaxis2`, and so on.
             ysrc
                 Sets the source reference on plot.ly for  y .
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -761,14 +759,14 @@ import _plotly_utils.basevalidators
 
 
 class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='volume', parent_name='', **kwargs):
+    def __init__(self, plotly_name="volume", parent_name="", **kwargs):
         super(VolumeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Volume'),
+            data_class_str=kwargs.pop("data_class_str", "Volume"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             autocolorscale
                 Determines whether the colorscale is a default
                 palette (`autocolorscale: true`) or the palette
@@ -1028,9 +1026,9 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 axis.
             zsrc
                 Sets the source reference on plot.ly for  z .
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -1038,14 +1036,14 @@ import _plotly_utils.basevalidators
 
 
 class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='violin', parent_name='', **kwargs):
+    def __init__(self, plotly_name="violin", parent_name="", **kwargs):
         super(ViolinValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Violin'),
+            data_class_str=kwargs.pop("data_class_str", "Violin"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             alignmentgroup
                 Set several traces linked to the same position
                 axis or matching axes to the same
@@ -1331,9 +1329,9 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 refer to `layout.yaxis2`, and so on.
             ysrc
                 Sets the source reference on plot.ly for  y .
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -1341,14 +1339,14 @@ import _plotly_utils.basevalidators
 
 
 class TableValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='table', parent_name='', **kwargs):
+    def __init__(self, plotly_name="table", parent_name="", **kwargs):
         super(TableValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Table'),
+            data_class_str=kwargs.pop("data_class_str", "Table"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             cells
                 plotly.graph_objs.table.Cells instance or dict
                 with compatible properties
@@ -1456,9 +1454,9 @@ class TableValidator(_plotly_utils.basevalidators.CompoundValidator):
                 visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -1466,14 +1464,14 @@ import _plotly_utils.basevalidators
 
 
 class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='surface', parent_name='', **kwargs):
+    def __init__(self, plotly_name="surface", parent_name="", **kwargs):
         super(SurfaceValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Surface'),
+            data_class_str=kwargs.pop("data_class_str", "Surface"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             autocolorscale
                 Determines whether the colorscale is a default
                 palette (`autocolorscale: true`) or the palette
@@ -1715,9 +1713,9 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 data.
             zsrc
                 Sets the source reference on plot.ly for  z .
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -1725,14 +1723,14 @@ import _plotly_utils.basevalidators
 
 
 class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='sunburst', parent_name='', **kwargs):
+    def __init__(self, plotly_name="sunburst", parent_name="", **kwargs):
         super(SunburstValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Sunburst'),
+            data_class_str=kwargs.pop("data_class_str", "Sunburst"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             branchvalues
                 Determines how the items in `values` are
                 summed. When set to "total", items in `values`
@@ -1925,9 +1923,9 @@ class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
                 visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -1935,14 +1933,14 @@ import _plotly_utils.basevalidators
 
 
 class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='streamtube', parent_name='', **kwargs):
+    def __init__(self, plotly_name="streamtube", parent_name="", **kwargs):
         super(StreamtubeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Streamtube'),
+            data_class_str=kwargs.pop("data_class_str", "Streamtube"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             autocolorscale
                 Determines whether the colorscale is a default
                 palette (`autocolorscale: true`) or the palette
@@ -2178,9 +2176,9 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the z coordinates of the vector field.
             zsrc
                 Sets the source reference on plot.ly for  z .
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -2188,14 +2186,14 @@ import _plotly_utils.basevalidators
 
 
 class SplomValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='splom', parent_name='', **kwargs):
+    def __init__(self, plotly_name="splom", parent_name="", **kwargs):
         super(SplomValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Splom'),
+            data_class_str=kwargs.pop("data_class_str", "Splom"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -2379,9 +2377,9 @@ class SplomValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `showupperhalf` or `showlowerhalf` is false,
                 this splom trace will generate one less x-axis
                 and one less y-axis.
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -2389,14 +2387,14 @@ import _plotly_utils.basevalidators
 
 
 class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='scatterternary', parent_name='', **kwargs):
+    def __init__(self, plotly_name="scatterternary", parent_name="", **kwargs):
         super(ScatterternaryValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Scatterternary'),
+            data_class_str=kwargs.pop("data_class_str", "Scatterternary"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             a
                 Sets the quantity of component `a` in each data
                 point. If `a`, `b`, and `c` are all provided,
@@ -2645,9 +2643,9 @@ class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundValidator):
                 visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -2655,14 +2653,14 @@ import _plotly_utils.basevalidators
 
 
 class ScatterpolarglValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='scatterpolargl', parent_name='', **kwargs):
+    def __init__(self, plotly_name="scatterpolargl", parent_name="", **kwargs):
         super(ScatterpolarglValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Scatterpolargl'),
+            data_class_str=kwargs.pop("data_class_str", "Scatterpolargl"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             connectgaps
                 Determines whether or not gaps (i.e. {nan} or
                 missing values) in the provided data arrays are
@@ -2905,9 +2903,9 @@ class ScatterpolarglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -2915,14 +2913,14 @@ import _plotly_utils.basevalidators
 
 
 class ScatterpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='scatterpolar', parent_name='', **kwargs):
+    def __init__(self, plotly_name="scatterpolar", parent_name="", **kwargs):
         super(ScatterpolarValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Scatterpolar'),
+            data_class_str=kwargs.pop("data_class_str", "Scatterpolar"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             cliponaxis
                 Determines whether or not markers and text
                 nodes are clipped about the subplot axes. To
@@ -3164,9 +3162,9 @@ class ScatterpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -3174,14 +3172,14 @@ import _plotly_utils.basevalidators
 
 
 class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='scattermapbox', parent_name='', **kwargs):
+    def __init__(self, plotly_name="scattermapbox", parent_name="", **kwargs):
         super(ScattermapboxValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Scattermapbox'),
+            data_class_str=kwargs.pop("data_class_str", "Scattermapbox"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             connectgaps
                 Determines whether or not gaps (i.e. {nan} or
                 missing values) in the provided data arrays are
@@ -3386,9 +3384,9 @@ class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -3396,14 +3394,14 @@ import _plotly_utils.basevalidators
 
 
 class ScatterglValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='scattergl', parent_name='', **kwargs):
+    def __init__(self, plotly_name="scattergl", parent_name="", **kwargs):
         super(ScatterglValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Scattergl'),
+            data_class_str=kwargs.pop("data_class_str", "Scattergl"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             connectgaps
                 Determines whether or not gaps (i.e. {nan} or
                 missing values) in the provided data arrays are
@@ -3654,9 +3652,9 @@ class ScatterglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 data.
             ysrc
                 Sets the source reference on plot.ly for  y .
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -3664,14 +3662,14 @@ import _plotly_utils.basevalidators
 
 
 class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='scattergeo', parent_name='', **kwargs):
+    def __init__(self, plotly_name="scattergeo", parent_name="", **kwargs):
         super(ScattergeoValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Scattergeo'),
+            data_class_str=kwargs.pop("data_class_str", "Scattergeo"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             connectgaps
                 Determines whether or not gaps (i.e. {nan} or
                 missing values) in the provided data arrays are
@@ -3892,9 +3890,9 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -3902,14 +3900,14 @@ import _plotly_utils.basevalidators
 
 
 class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='scattercarpet', parent_name='', **kwargs):
+    def __init__(self, plotly_name="scattercarpet", parent_name="", **kwargs):
         super(ScattercarpetValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Scattercarpet'),
+            data_class_str=kwargs.pop("data_class_str", "Scattercarpet"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             a
                 Sets the a-axis coordinates.
             asrc
@@ -4136,9 +4134,9 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (the default value), the y coordinates refer to
                 `layout.yaxis`. If "y2", the y coordinates
                 refer to `layout.yaxis2`, and so on.
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -4146,14 +4144,14 @@ import _plotly_utils.basevalidators
 
 
 class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='scatter3d', parent_name='', **kwargs):
+    def __init__(self, plotly_name="scatter3d", parent_name="", **kwargs):
         super(Scatter3dValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Scatter3d'),
+            data_class_str=kwargs.pop("data_class_str", "Scatter3d"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             connectgaps
                 Determines whether or not gaps (i.e. {nan} or
                 missing values) in the provided data arrays are
@@ -4365,9 +4363,9 @@ class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 data.
             zsrc
                 Sets the source reference on plot.ly for  z .
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -4375,14 +4373,14 @@ import _plotly_utils.basevalidators
 
 
 class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='scatter', parent_name='', **kwargs):
+    def __init__(self, plotly_name="scatter", parent_name="", **kwargs):
         super(ScatterValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Scatter'),
+            data_class_str=kwargs.pop("data_class_str", "Scatter"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             cliponaxis
                 Determines whether or not markers and text
                 nodes are clipped about the subplot axes. To
@@ -4717,9 +4715,9 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 data.
             ysrc
                 Sets the source reference on plot.ly for  y .
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -4727,14 +4725,14 @@ import _plotly_utils.basevalidators
 
 
 class SankeyValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='sankey', parent_name='', **kwargs):
+    def __init__(self, plotly_name="sankey", parent_name="", **kwargs):
         super(SankeyValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Sankey'),
+            data_class_str=kwargs.pop("data_class_str", "Sankey"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             arrangement
                 If value is `snap` (the default), the node
                 arrangement is assisted by automatic snapping
@@ -4855,9 +4853,9 @@ class SankeyValidator(_plotly_utils.basevalidators.CompoundValidator):
                 visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -4865,14 +4863,14 @@ import _plotly_utils.basevalidators
 
 
 class PointcloudValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='pointcloud', parent_name='', **kwargs):
+    def __init__(self, plotly_name="pointcloud", parent_name="", **kwargs):
         super(PointcloudValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Pointcloud'),
+            data_class_str=kwargs.pop("data_class_str", "Pointcloud"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -5037,9 +5035,9 @@ class PointcloudValidator(_plotly_utils.basevalidators.CompoundValidator):
                 ybounds .
             ysrc
                 Sets the source reference on plot.ly for  y .
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -5047,14 +5045,14 @@ import _plotly_utils.basevalidators
 
 
 class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='pie', parent_name='', **kwargs):
+    def __init__(self, plotly_name="pie", parent_name="", **kwargs):
         super(PieValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Pie'),
+            data_class_str=kwargs.pop("data_class_str", "Pie"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -5276,9 +5274,9 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -5286,14 +5284,14 @@ import _plotly_utils.basevalidators
 
 
 class ParcoordsValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='parcoords', parent_name='', **kwargs):
+    def __init__(self, plotly_name="parcoords", parent_name="", **kwargs):
         super(ParcoordsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Parcoords'),
+            data_class_str=kwargs.pop("data_class_str", "Parcoords"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -5385,9 +5383,9 @@ class ParcoordsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -5395,14 +5393,14 @@ import _plotly_utils.basevalidators
 
 
 class ParcatsValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='parcats', parent_name='', **kwargs):
+    def __init__(self, plotly_name="parcats", parent_name="", **kwargs):
         super(ParcatsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Parcats'),
+            data_class_str=kwargs.pop("data_class_str", "Parcats"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             arrangement
                 Sets the drag interaction mode for categories
                 and dimensions. If `perpendicular`, the
@@ -5534,9 +5532,9 @@ class ParcatsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -5544,14 +5542,14 @@ import _plotly_utils.basevalidators
 
 
 class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='ohlc', parent_name='', **kwargs):
+    def __init__(self, plotly_name="ohlc", parent_name="", **kwargs):
         super(OhlcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Ohlc'),
+            data_class_str=kwargs.pop("data_class_str", "Ohlc"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             close
                 Sets the close values.
             closesrc
@@ -5717,9 +5715,9 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (the default value), the y coordinates refer to
                 `layout.yaxis`. If "y2", the y coordinates
                 refer to `layout.yaxis2`, and so on.
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -5727,14 +5725,14 @@ import _plotly_utils.basevalidators
 
 
 class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='mesh3d', parent_name='', **kwargs):
+    def __init__(self, plotly_name="mesh3d", parent_name="", **kwargs):
         super(Mesh3dValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Mesh3d'),
+            data_class_str=kwargs.pop("data_class_str", "Mesh3d"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             alphahull
                 Determines how the mesh surface triangles are
                 derived from the set of vertices (points)
@@ -6064,9 +6062,9 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 data.
             zsrc
                 Sets the source reference on plot.ly for  z .
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -6074,14 +6072,14 @@ import _plotly_utils.basevalidators
 
 
 class IsosurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='isosurface', parent_name='', **kwargs):
+    def __init__(self, plotly_name="isosurface", parent_name="", **kwargs):
         super(IsosurfaceValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Isosurface'),
+            data_class_str=kwargs.pop("data_class_str", "Isosurface"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             autocolorscale
                 Determines whether the colorscale is a default
                 palette (`autocolorscale: true`) or the palette
@@ -6328,28 +6326,24 @@ class IsosurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 axis.
             zsrc
                 Sets the source reference on plot.ly for  z .
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
 import _plotly_utils.basevalidators
 
 
-class Histogram2dContourValidator(
-    _plotly_utils.basevalidators.CompoundValidator
-):
-
-    def __init__(
-        self, plotly_name='histogram2dcontour', parent_name='', **kwargs
-    ):
+class Histogram2dContourValidator(_plotly_utils.basevalidators.CompoundValidator):
+    def __init__(self, plotly_name="histogram2dcontour", parent_name="", **kwargs):
         super(Histogram2dContourValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Histogram2dContour'),
+            data_class_str=kwargs.pop("data_class_str", "Histogram2dContour"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             autobinx
                 Obsolete: since v1.42 each bin attribute is
                 auto-determined separately and `autobinx` is
@@ -6665,9 +6659,9 @@ class Histogram2dContourValidator(
                 set, `zmax` must be set as well.
             zsrc
                 Sets the source reference on plot.ly for  z .
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -6675,14 +6669,14 @@ import _plotly_utils.basevalidators
 
 
 class Histogram2dValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='histogram2d', parent_name='', **kwargs):
+    def __init__(self, plotly_name="histogram2d", parent_name="", **kwargs):
         super(Histogram2dValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Histogram2d'),
+            data_class_str=kwargs.pop("data_class_str", "Histogram2d"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             autobinx
                 Obsolete: since v1.42 each bin attribute is
                 auto-determined separately and `autobinx` is
@@ -6981,9 +6975,9 @@ class Histogram2dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 data.
             zsrc
                 Sets the source reference on plot.ly for  z .
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -6991,14 +6985,14 @@ import _plotly_utils.basevalidators
 
 
 class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='histogram', parent_name='', **kwargs):
+    def __init__(self, plotly_name="histogram", parent_name="", **kwargs):
         super(HistogramValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Histogram'),
+            data_class_str=kwargs.pop("data_class_str", "Histogram"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             alignmentgroup
                 Set several traces linked to the same position
                 axis or matching axes to the same
@@ -7266,9 +7260,9 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 data.
             ysrc
                 Sets the source reference on plot.ly for  y .
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -7276,14 +7270,14 @@ import _plotly_utils.basevalidators
 
 
 class HeatmapglValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='heatmapgl', parent_name='', **kwargs):
+    def __init__(self, plotly_name="heatmapgl", parent_name="", **kwargs):
         super(HeatmapglValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Heatmapgl'),
+            data_class_str=kwargs.pop("data_class_str", "Heatmapgl"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             autocolorscale
                 Determines whether the colorscale is a default
                 palette (`autocolorscale: true`) or the palette
@@ -7488,9 +7482,9 @@ class HeatmapglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 set, `zmax` must be set as well.
             zsrc
                 Sets the source reference on plot.ly for  z .
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -7498,14 +7492,14 @@ import _plotly_utils.basevalidators
 
 
 class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='heatmap', parent_name='', **kwargs):
+    def __init__(self, plotly_name="heatmap", parent_name="", **kwargs):
         super(HeatmapValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Heatmap'),
+            data_class_str=kwargs.pop("data_class_str", "Heatmap"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             autocolorscale
                 Determines whether the colorscale is a default
                 palette (`autocolorscale: true`) or the palette
@@ -7763,9 +7757,9 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 data.
             zsrc
                 Sets the source reference on plot.ly for  z .
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -7773,14 +7767,14 @@ import _plotly_utils.basevalidators
 
 
 class FunnelareaValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='funnelarea', parent_name='', **kwargs):
+    def __init__(self, plotly_name="funnelarea", parent_name="", **kwargs):
         super(FunnelareaValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Funnelarea'),
+            data_class_str=kwargs.pop("data_class_str", "Funnelarea"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             aspectratio
                 Sets the ratio between height and width
             baseratio
@@ -7972,9 +7966,9 @@ class FunnelareaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -7982,14 +7976,14 @@ import _plotly_utils.basevalidators
 
 
 class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='funnel', parent_name='', **kwargs):
+    def __init__(self, plotly_name="funnel", parent_name="", **kwargs):
         super(FunnelValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Funnel'),
+            data_class_str=kwargs.pop("data_class_str", "Funnel"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             alignmentgroup
                 Set several traces linked to the same position
                 axis or matching axes to the same
@@ -8249,9 +8243,9 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 refer to `layout.yaxis2`, and so on.
             ysrc
                 Sets the source reference on plot.ly for  y .
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -8259,14 +8253,14 @@ import _plotly_utils.basevalidators
 
 
 class ContourcarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='contourcarpet', parent_name='', **kwargs):
+    def __init__(self, plotly_name="contourcarpet", parent_name="", **kwargs):
         super(ContourcarpetValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Contourcarpet'),
+            data_class_str=kwargs.pop("data_class_str", "Contourcarpet"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             a
                 Sets the x coordinates.
             a0
@@ -8510,9 +8504,9 @@ class ContourcarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 set, `zmax` must be set as well.
             zsrc
                 Sets the source reference on plot.ly for  z .
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -8520,14 +8514,14 @@ import _plotly_utils.basevalidators
 
 
 class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='contour', parent_name='', **kwargs):
+    def __init__(self, plotly_name="contour", parent_name="", **kwargs):
         super(ContourValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Contour'),
+            data_class_str=kwargs.pop("data_class_str", "Contour"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             autocolorscale
                 Determines whether the colorscale is a default
                 palette (`autocolorscale: true`) or the palette
@@ -8807,9 +8801,9 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
                 set, `zmax` must be set as well.
             zsrc
                 Sets the source reference on plot.ly for  z .
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -8817,14 +8811,14 @@ import _plotly_utils.basevalidators
 
 
 class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='cone', parent_name='', **kwargs):
+    def __init__(self, plotly_name="cone", parent_name="", **kwargs):
         super(ConeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Cone'),
+            data_class_str=kwargs.pop("data_class_str", "Cone"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             anchor
                 Sets the cones' anchor with respect to their
                 x/y/z positions. Note that "cm" denote the
@@ -9081,9 +9075,9 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 of the displayed cones.
             zsrc
                 Sets the source reference on plot.ly for  z .
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -9091,14 +9085,14 @@ import _plotly_utils.basevalidators
 
 
 class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='choropleth', parent_name='', **kwargs):
+    def __init__(self, plotly_name="choropleth", parent_name="", **kwargs):
         super(ChoroplethValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Choropleth'),
+            data_class_str=kwargs.pop("data_class_str", "Choropleth"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             autocolorscale
                 Determines whether the colorscale is a default
                 palette (`autocolorscale: true`) or the palette
@@ -9316,9 +9310,9 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
                 set, `zmax` must be set as well.
             zsrc
                 Sets the source reference on plot.ly for  z .
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -9326,14 +9320,14 @@ import _plotly_utils.basevalidators
 
 
 class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='carpet', parent_name='', **kwargs):
+    def __init__(self, plotly_name="carpet", parent_name="", **kwargs):
         super(CarpetValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Carpet'),
+            data_class_str=kwargs.pop("data_class_str", "Carpet"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             a
                 An array containing values of the first
                 parameter value
@@ -9489,9 +9483,9 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 refer to `layout.yaxis2`, and so on.
             ysrc
                 Sets the source reference on plot.ly for  y .
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -9499,14 +9493,14 @@ import _plotly_utils.basevalidators
 
 
 class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='candlestick', parent_name='', **kwargs):
+    def __init__(self, plotly_name="candlestick", parent_name="", **kwargs):
         super(CandlestickValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Candlestick'),
+            data_class_str=kwargs.pop("data_class_str", "Candlestick"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             close
                 Sets the close values.
             closesrc
@@ -9673,9 +9667,9 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (the default value), the y coordinates refer to
                 `layout.yaxis`. If "y2", the y coordinates
                 refer to `layout.yaxis2`, and so on.
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -9683,14 +9677,14 @@ import _plotly_utils.basevalidators
 
 
 class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='box', parent_name='', **kwargs):
+    def __init__(self, plotly_name="box", parent_name="", **kwargs):
         super(BoxValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Box'),
+            data_class_str=kwargs.pop("data_class_str", "Box"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             alignmentgroup
                 Set several traces linked to the same position
                 axis or matching axes to the same
@@ -9947,9 +9941,9 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 data.
             ysrc
                 Sets the source reference on plot.ly for  y .
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -9957,14 +9951,14 @@ import _plotly_utils.basevalidators
 
 
 class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='barpolar', parent_name='', **kwargs):
+    def __init__(self, plotly_name="barpolar", parent_name="", **kwargs):
         super(BarpolarValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Barpolar'),
+            data_class_str=kwargs.pop("data_class_str", "Barpolar"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             base
                 Sets where the bar base is drawn (in radial
                 axis units). In "stack" barmode, traces that
@@ -10165,9 +10159,9 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
             widthsrc
                 Sets the source reference on plot.ly for  width
                 .
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -10175,14 +10169,14 @@ import _plotly_utils.basevalidators
 
 
 class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='bar', parent_name='', **kwargs):
+    def __init__(self, plotly_name="bar", parent_name="", **kwargs):
         super(BarValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Bar'),
+            data_class_str=kwargs.pop("data_class_str", "Bar"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             alignmentgroup
                 Set several traces linked to the same position
                 axis or matching axes to the same
@@ -10475,9 +10469,9 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 data.
             ysrc
                 Sets the source reference on plot.ly for  y .
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -10485,14 +10479,14 @@ import _plotly_utils.basevalidators
 
 
 class AreaValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='area', parent_name='', **kwargs):
+    def __init__(self, plotly_name="area", parent_name="", **kwargs):
         super(AreaValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Area'),
+            data_class_str=kwargs.pop("data_class_str", "Area"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -10599,9 +10593,9 @@ class AreaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 visible. If "legendonly", the trace is not
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -10609,14 +10603,14 @@ import _plotly_utils.basevalidators
 
 
 class FramesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-
-    def __init__(self, plotly_name='frames', parent_name='', **kwargs):
+    def __init__(self, plotly_name="frames", parent_name="", **kwargs):
         super(FramesValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Frame'),
+            data_class_str=kwargs.pop("data_class_str", "Frame"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             baseframe
                 The name of the frame into which this frame's
                 properties are merged before applying. This is
@@ -10640,9 +10634,9 @@ class FramesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
             traces
                 A list of trace indices that identify the
                 respective traces in the data attribute
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -10650,55 +10644,54 @@ import _plotly_utils.basevalidators
 
 
 class DataValidator(_plotly_utils.basevalidators.BaseDataValidator):
-
-    def __init__(self, plotly_name='data', parent_name='', **kwargs):
+    def __init__(self, plotly_name="data", parent_name="", **kwargs):
 
         super(DataValidator, self).__init__(
             class_strs_map={
-                'area': 'Area',
-                'bar': 'Bar',
-                'barpolar': 'Barpolar',
-                'box': 'Box',
-                'candlestick': 'Candlestick',
-                'carpet': 'Carpet',
-                'choropleth': 'Choropleth',
-                'cone': 'Cone',
-                'contour': 'Contour',
-                'contourcarpet': 'Contourcarpet',
-                'funnel': 'Funnel',
-                'funnelarea': 'Funnelarea',
-                'heatmap': 'Heatmap',
-                'heatmapgl': 'Heatmapgl',
-                'histogram': 'Histogram',
-                'histogram2d': 'Histogram2d',
-                'histogram2dcontour': 'Histogram2dContour',
-                'isosurface': 'Isosurface',
-                'mesh3d': 'Mesh3d',
-                'ohlc': 'Ohlc',
-                'parcats': 'Parcats',
-                'parcoords': 'Parcoords',
-                'pie': 'Pie',
-                'pointcloud': 'Pointcloud',
-                'sankey': 'Sankey',
-                'scatter': 'Scatter',
-                'scatter3d': 'Scatter3d',
-                'scattercarpet': 'Scattercarpet',
-                'scattergeo': 'Scattergeo',
-                'scattergl': 'Scattergl',
-                'scattermapbox': 'Scattermapbox',
-                'scatterpolar': 'Scatterpolar',
-                'scatterpolargl': 'Scatterpolargl',
-                'scatterternary': 'Scatterternary',
-                'splom': 'Splom',
-                'streamtube': 'Streamtube',
-                'sunburst': 'Sunburst',
-                'surface': 'Surface',
-                'table': 'Table',
-                'violin': 'Violin',
-                'volume': 'Volume',
-                'waterfall': 'Waterfall',
+                "area": "Area",
+                "bar": "Bar",
+                "barpolar": "Barpolar",
+                "box": "Box",
+                "candlestick": "Candlestick",
+                "carpet": "Carpet",
+                "choropleth": "Choropleth",
+                "cone": "Cone",
+                "contour": "Contour",
+                "contourcarpet": "Contourcarpet",
+                "funnel": "Funnel",
+                "funnelarea": "Funnelarea",
+                "heatmap": "Heatmap",
+                "heatmapgl": "Heatmapgl",
+                "histogram": "Histogram",
+                "histogram2d": "Histogram2d",
+                "histogram2dcontour": "Histogram2dContour",
+                "isosurface": "Isosurface",
+                "mesh3d": "Mesh3d",
+                "ohlc": "Ohlc",
+                "parcats": "Parcats",
+                "parcoords": "Parcoords",
+                "pie": "Pie",
+                "pointcloud": "Pointcloud",
+                "sankey": "Sankey",
+                "scatter": "Scatter",
+                "scatter3d": "Scatter3d",
+                "scattercarpet": "Scattercarpet",
+                "scattergeo": "Scattergeo",
+                "scattergl": "Scattergl",
+                "scattermapbox": "Scattermapbox",
+                "scatterpolar": "Scatterpolar",
+                "scatterpolargl": "Scatterpolargl",
+                "scatterternary": "Scatterternary",
+                "splom": "Splom",
+                "streamtube": "Streamtube",
+                "sunburst": "Sunburst",
+                "surface": "Surface",
+                "table": "Table",
+                "violin": "Violin",
+                "volume": "Volume",
+                "waterfall": "Waterfall",
             },
             plotly_name=plotly_name,
             parent_name=parent_name,
-            **kwargs
+            **kwargs,
         )

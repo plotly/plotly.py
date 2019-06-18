@@ -4,7 +4,8 @@ from nose.tools import raises
 
 
 class TestNoFrames(TestCase):
-    if 'FigureWidget' in go.__dict__.keys():
+    if "FigureWidget" in go.__dict__.keys():
+
         @raises(ValueError)
         def test_no_frames_in_constructor_kwarg(self):
             go.FigureWidget(frames=[{}])
@@ -14,10 +15,10 @@ class TestNoFrames(TestCase):
 
         @raises(ValueError)
         def test_no_frames_in_constructor_dict(self):
-            go.FigureWidget({'frames': [{}]})
+            go.FigureWidget({"frames": [{}]})
 
         def test_emtpy_frames_ok_as_constructor_dict_key(self):
-            go.FigureWidget({'frames': []})
+            go.FigureWidget({"frames": []})
 
         @raises(ValueError)
         def test_no_frames_assignment(self):

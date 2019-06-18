@@ -3,7 +3,7 @@ from __future__ import absolute_import
 
 from chart_studio.api.v2.utils import build_url, make_params, request
 
-RESOURCE = 'plots'
+RESOURCE = "plots"
 
 
 def create(body):
@@ -15,7 +15,7 @@ def create(body):
 
     """
     url = build_url(RESOURCE)
-    return request('post', url, json=body)
+    return request("post", url, json=body)
 
 
 def retrieve(fid, share_key=None):
@@ -29,7 +29,7 @@ def retrieve(fid, share_key=None):
     """
     url = build_url(RESOURCE, id=fid)
     params = make_params(share_key=share_key)
-    return request('get', url, params=params)
+    return request("get", url, params=params)
 
 
 def content(fid, share_key=None, inline_data=None, map_data=None):
@@ -48,10 +48,11 @@ def content(fid, share_key=None, inline_data=None, map_data=None):
     :returns: (requests.Response) Returns response directly from requests.
 
     """
-    url = build_url(RESOURCE, id=fid, route='content')
-    params = make_params(share_key=share_key, inline_data=inline_data,
-                         map_data=map_data)
-    return request('get', url, params=params)
+    url = build_url(RESOURCE, id=fid, route="content")
+    params = make_params(
+        share_key=share_key, inline_data=inline_data, map_data=map_data
+    )
+    return request("get", url, params=params)
 
 
 def update(fid, body):
@@ -64,7 +65,7 @@ def update(fid, body):
 
     """
     url = build_url(RESOURCE, id=fid)
-    return request('put', url, json=body)
+    return request("put", url, json=body)
 
 
 def trash(fid):
@@ -75,8 +76,8 @@ def trash(fid):
     :returns: (requests.Response) Returns response directly from requests.
 
     """
-    url = build_url(RESOURCE, id=fid, route='trash')
-    return request('post', url)
+    url = build_url(RESOURCE, id=fid, route="trash")
+    return request("post", url)
 
 
 def restore(fid):
@@ -87,8 +88,8 @@ def restore(fid):
     :returns: (requests.Response) Returns response directly from requests.
 
     """
-    url = build_url(RESOURCE, id=fid, route='restore')
-    return request('post', url)
+    url = build_url(RESOURCE, id=fid, route="restore")
+    return request("post", url)
 
 
 def permanent_delete(fid, params=None):
@@ -99,8 +100,8 @@ def permanent_delete(fid, params=None):
     :returns: (requests.Response) Returns response directly from requests.
 
     """
-    url = build_url(RESOURCE, id=fid, route='permanent_delete')
-    return request('delete', url, params=params)
+    url = build_url(RESOURCE, id=fid, route="permanent_delete")
+    return request("delete", url, params=params)
 
 
 def lookup(path, parent=None, user=None, exists=None):
@@ -114,6 +115,6 @@ def lookup(path, parent=None, user=None, exists=None):
     :returns: (requests.Response) Returns response directly from requests.
 
     """
-    url = build_url(RESOURCE, route='lookup')
+    url = build_url(RESOURCE, route="lookup")
     params = make_params(path=path, parent=parent, user=user, exists=exists)
-    return request('get', url, params=params)
+    return request("get", url, params=params)

@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -57,11 +55,11 @@ class Labelfont(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     # family
     # ------
@@ -88,11 +86,11 @@ class Labelfont(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['family']
+        return self["family"]
 
     @family.setter
     def family(self, val):
-        self['family'] = val
+        self["family"] = val
 
     # size
     # ----
@@ -106,17 +104,17 @@ class Labelfont(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['size']
+        return self["size"]
 
     @size.setter
     def size(self, val):
-        self['size'] = val
+        self["size"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'histogram2dcontour.contours'
+        return "histogram2dcontour.contours"
 
     # Self properties description
     # ---------------------------
@@ -180,7 +178,7 @@ class Labelfont(_BaseTraceHierarchyType):
         -------
         Labelfont
         """
-        super(Labelfont, self).__init__('labelfont')
+        super(Labelfont, self).__init__("labelfont")
 
         # Validate arg
         # ------------
@@ -200,28 +198,28 @@ an instance of plotly.graph_objs.histogram2dcontour.contours.Labelfont"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
         from plotly.validators.histogram2dcontour.contours import (
-            labelfont as v_labelfont
+            labelfont as v_labelfont,
         )
 
         # Initialize validators
         # ---------------------
-        self._validators['color'] = v_labelfont.ColorValidator()
-        self._validators['family'] = v_labelfont.FamilyValidator()
-        self._validators['size'] = v_labelfont.SizeValidator()
+        self._validators["color"] = v_labelfont.ColorValidator()
+        self._validators["family"] = v_labelfont.FamilyValidator()
+        self._validators["size"] = v_labelfont.SizeValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('color', None)
-        self['color'] = color if color is not None else _v
-        _v = arg.pop('family', None)
-        self['family'] = family if family is not None else _v
-        _v = arg.pop('size', None)
-        self['size'] = size if size is not None else _v
+        _v = arg.pop("color", None)
+        self["color"] = color if color is not None else _v
+        _v = arg.pop("family", None)
+        self["family"] = family if family is not None else _v
+        _v = arg.pop("size", None)
+        self["size"] = size if size is not None else _v
 
         # Process unknown kwargs
         # ----------------------

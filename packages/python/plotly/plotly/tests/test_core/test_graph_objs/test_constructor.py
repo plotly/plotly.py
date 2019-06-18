@@ -4,41 +4,29 @@ from nose.tools import raises
 
 
 class TestGraphObjConstructor(TestCase):
-
     def test_kwarg(self):
-        m = go.scatter.Marker(color='green')
-        self.assertEqual(m.to_plotly_json(),
-                         {'color': 'green'})
+        m = go.scatter.Marker(color="green")
+        self.assertEqual(m.to_plotly_json(), {"color": "green"})
 
     def test_valid_arg_dict(self):
-        m = go.scatter.Marker(dict(color='green'))
-        self.assertEqual(m.to_plotly_json(),
-                         {'color': 'green'})
+        m = go.scatter.Marker(dict(color="green"))
+        self.assertEqual(m.to_plotly_json(), {"color": "green"})
 
     def test_valid_underscore_kwarg(self):
-        m = go.scatter.Marker(line_color='green')
-        self.assertEqual(m.to_plotly_json(),
-                         {'line': {'color': 'green'}})
+        m = go.scatter.Marker(line_color="green")
+        self.assertEqual(m.to_plotly_json(), {"line": {"color": "green"}})
 
     def test_valid_arg_obj(self):
-        m = go.scatter.Marker(
-            go.scatter.Marker(color='green'))
+        m = go.scatter.Marker(go.scatter.Marker(color="green"))
 
-        self.assertEqual(m.to_plotly_json(),
-                         {'color': 'green'})
+        self.assertEqual(m.to_plotly_json(), {"color": "green"})
 
     def test_kwarg_takes_precedence(self):
-        m = go.scatter.Marker(
-            dict(color='green',
-                 size=12),
-            color='blue',
-            opacity=0.6
-        )
+        m = go.scatter.Marker(dict(color="green", size=12), color="blue", opacity=0.6)
 
-        self.assertEqual(m.to_plotly_json(),
-                         {'color': 'blue',
-                          'size': 12,
-                          'opacity': 0.6})
+        self.assertEqual(
+            m.to_plotly_json(), {"color": "blue", "size": 12, "opacity": 0.6}
+        )
 
     @raises(ValueError)
     def test_invalid_kwarg(self):
@@ -50,8 +38,8 @@ class TestGraphObjConstructor(TestCase):
 
     @raises(ValueError)
     def test_valid_arg_with_invalid_key_name(self):
-        go.scatter.Marker({'bogus': 12})
+        go.scatter.Marker({"bogus": 12})
 
     @raises(ValueError)
     def test_valid_arg_with_invalid_key_value(self):
-        go.scatter.Marker({'color': 'bogus'})
+        go.scatter.Marker({"color": "bogus"})

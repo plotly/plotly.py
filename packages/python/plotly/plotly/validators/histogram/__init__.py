@@ -1,17 +1,14 @@
-
-
 import _plotly_utils.basevalidators
 
 
 class YsrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(self, plotly_name='ysrc', parent_name='histogram', **kwargs):
+    def __init__(self, plotly_name="ysrc", parent_name="histogram", **kwargs):
         super(YsrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -19,24 +16,34 @@ import _plotly_utils.basevalidators
 
 
 class YcalendarValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(
-        self, plotly_name='ycalendar', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="ycalendar", parent_name="histogram", **kwargs):
         super(YcalendarValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
             values=kwargs.pop(
-                'values', [
-                    'gregorian', 'chinese', 'coptic', 'discworld', 'ethiopian',
-                    'hebrew', 'islamic', 'julian', 'mayan', 'nanakshahi',
-                    'nepali', 'persian', 'jalali', 'taiwan', 'thai',
-                    'ummalqura'
-                ]
+                "values",
+                [
+                    "gregorian",
+                    "chinese",
+                    "coptic",
+                    "discworld",
+                    "ethiopian",
+                    "hebrew",
+                    "islamic",
+                    "julian",
+                    "mayan",
+                    "nanakshahi",
+                    "nepali",
+                    "persian",
+                    "jalali",
+                    "taiwan",
+                    "thai",
+                    "ummalqura",
+                ],
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -44,14 +51,14 @@ import _plotly_utils.basevalidators
 
 
 class YBinsValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='ybins', parent_name='histogram', **kwargs):
+    def __init__(self, plotly_name="ybins", parent_name="histogram", **kwargs):
         super(YBinsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'YBins'),
+            data_class_str=kwargs.pop("data_class_str", "YBins"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             end
                 Sets the end value for the y axis bins. The
                 last bin may not end exactly at this value, we
@@ -96,9 +103,9 @@ class YBinsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 others are shifted down (if necessary) to
                 differ from that one by an integer number of
                 bins.
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -106,15 +113,14 @@ import _plotly_utils.basevalidators
 
 
 class YAxisValidator(_plotly_utils.basevalidators.SubplotidValidator):
-
-    def __init__(self, plotly_name='yaxis', parent_name='histogram', **kwargs):
+    def __init__(self, plotly_name="yaxis", parent_name="histogram", **kwargs):
         super(YAxisValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            dflt=kwargs.pop('dflt', 'y'),
-            edit_type=kwargs.pop('edit_type', 'calc+clearAxisTypes'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            dflt=kwargs.pop("dflt", "y"),
+            edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -122,14 +128,13 @@ import _plotly_utils.basevalidators
 
 
 class YValidator(_plotly_utils.basevalidators.DataArrayValidator):
-
-    def __init__(self, plotly_name='y', parent_name='histogram', **kwargs):
+    def __init__(self, plotly_name="y", parent_name="histogram", **kwargs):
         super(YValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc+clearAxisTypes'),
-            role=kwargs.pop('role', 'data'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
+            role=kwargs.pop("role", "data"),
+            **kwargs,
         )
 
 
@@ -137,14 +142,13 @@ import _plotly_utils.basevalidators
 
 
 class XsrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(self, plotly_name='xsrc', parent_name='histogram', **kwargs):
+    def __init__(self, plotly_name="xsrc", parent_name="histogram", **kwargs):
         super(XsrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -152,24 +156,34 @@ import _plotly_utils.basevalidators
 
 
 class XcalendarValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(
-        self, plotly_name='xcalendar', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="xcalendar", parent_name="histogram", **kwargs):
         super(XcalendarValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
             values=kwargs.pop(
-                'values', [
-                    'gregorian', 'chinese', 'coptic', 'discworld', 'ethiopian',
-                    'hebrew', 'islamic', 'julian', 'mayan', 'nanakshahi',
-                    'nepali', 'persian', 'jalali', 'taiwan', 'thai',
-                    'ummalqura'
-                ]
+                "values",
+                [
+                    "gregorian",
+                    "chinese",
+                    "coptic",
+                    "discworld",
+                    "ethiopian",
+                    "hebrew",
+                    "islamic",
+                    "julian",
+                    "mayan",
+                    "nanakshahi",
+                    "nepali",
+                    "persian",
+                    "jalali",
+                    "taiwan",
+                    "thai",
+                    "ummalqura",
+                ],
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -177,14 +191,14 @@ import _plotly_utils.basevalidators
 
 
 class XBinsValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='xbins', parent_name='histogram', **kwargs):
+    def __init__(self, plotly_name="xbins", parent_name="histogram", **kwargs):
         super(XBinsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'XBins'),
+            data_class_str=kwargs.pop("data_class_str", "XBins"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             end
                 Sets the end value for the x axis bins. The
                 last bin may not end exactly at this value, we
@@ -229,9 +243,9 @@ class XBinsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 others are shifted down (if necessary) to
                 differ from that one by an integer number of
                 bins.
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -239,15 +253,14 @@ import _plotly_utils.basevalidators
 
 
 class XAxisValidator(_plotly_utils.basevalidators.SubplotidValidator):
-
-    def __init__(self, plotly_name='xaxis', parent_name='histogram', **kwargs):
+    def __init__(self, plotly_name="xaxis", parent_name="histogram", **kwargs):
         super(XAxisValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            dflt=kwargs.pop('dflt', 'x'),
-            edit_type=kwargs.pop('edit_type', 'calc+clearAxisTypes'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            dflt=kwargs.pop("dflt", "x"),
+            edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -255,14 +268,13 @@ import _plotly_utils.basevalidators
 
 
 class XValidator(_plotly_utils.basevalidators.DataArrayValidator):
-
-    def __init__(self, plotly_name='x', parent_name='histogram', **kwargs):
+    def __init__(self, plotly_name="x", parent_name="histogram", **kwargs):
         super(XValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc+clearAxisTypes'),
-            role=kwargs.pop('role', 'data'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
+            role=kwargs.pop("role", "data"),
+            **kwargs,
         )
 
 
@@ -270,17 +282,14 @@ import _plotly_utils.basevalidators
 
 
 class VisibleValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(
-        self, plotly_name='visible', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="visible", parent_name="histogram", **kwargs):
         super(VisibleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
-            values=kwargs.pop('values', [True, False, 'legendonly']),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
+            values=kwargs.pop("values", [True, False, "legendonly"]),
+            **kwargs,
         )
 
 
@@ -288,25 +297,23 @@ import _plotly_utils.basevalidators
 
 
 class UnselectedValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='unselected', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="unselected", parent_name="histogram", **kwargs):
         super(UnselectedValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Unselected'),
+            data_class_str=kwargs.pop("data_class_str", "Unselected"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             marker
                 plotly.graph_objs.histogram.unselected.Marker
                 instance or dict with compatible properties
             textfont
                 plotly.graph_objs.histogram.unselected.Textfont
                 instance or dict with compatible properties
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -314,16 +321,13 @@ import _plotly_utils.basevalidators
 
 
 class UirevisionValidator(_plotly_utils.basevalidators.AnyValidator):
-
-    def __init__(
-        self, plotly_name='uirevision', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="uirevision", parent_name="histogram", **kwargs):
         super(UirevisionValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -331,15 +335,14 @@ import _plotly_utils.basevalidators
 
 
 class UidValidator(_plotly_utils.basevalidators.StringValidator):
-
-    def __init__(self, plotly_name='uid', parent_name='histogram', **kwargs):
+    def __init__(self, plotly_name="uid", parent_name="histogram", **kwargs):
         super(UidValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop('anim', True),
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            anim=kwargs.pop("anim", True),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -347,16 +350,13 @@ import _plotly_utils.basevalidators
 
 
 class TextsrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(
-        self, plotly_name='textsrc', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="textsrc", parent_name="histogram", **kwargs):
         super(TextsrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -364,15 +364,14 @@ import _plotly_utils.basevalidators
 
 
 class TextValidator(_plotly_utils.basevalidators.StringValidator):
-
-    def __init__(self, plotly_name='text', parent_name='histogram', **kwargs):
+    def __init__(self, plotly_name="text", parent_name="histogram", **kwargs):
         super(TextValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            array_ok=kwargs.pop("array_ok", True),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -380,16 +379,14 @@ import _plotly_utils.basevalidators
 
 
 class StreamValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='stream', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="stream", parent_name="histogram", **kwargs):
         super(StreamValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Stream'),
+            data_class_str=kwargs.pop("data_class_str", "Stream"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             maxpoints
                 Sets the maximum number of points to keep on
                 the plots from an incoming stream. If
@@ -399,9 +396,9 @@ class StreamValidator(_plotly_utils.basevalidators.CompoundValidator):
                 The stream id number links a data trace on a
                 plot with a stream. See
                 https://plot.ly/settings for more details.
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -409,16 +406,13 @@ import _plotly_utils.basevalidators
 
 
 class ShowlegendValidator(_plotly_utils.basevalidators.BooleanValidator):
-
-    def __init__(
-        self, plotly_name='showlegend', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="showlegend", parent_name="histogram", **kwargs):
         super(ShowlegendValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'style'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "style"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -426,16 +420,13 @@ import _plotly_utils.basevalidators
 
 
 class SelectedpointsValidator(_plotly_utils.basevalidators.AnyValidator):
-
-    def __init__(
-        self, plotly_name='selectedpoints', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="selectedpoints", parent_name="histogram", **kwargs):
         super(SelectedpointsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -443,25 +434,23 @@ import _plotly_utils.basevalidators
 
 
 class SelectedValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='selected', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="selected", parent_name="histogram", **kwargs):
         super(SelectedValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Selected'),
+            data_class_str=kwargs.pop("data_class_str", "Selected"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             marker
                 plotly.graph_objs.histogram.selected.Marker
                 instance or dict with compatible properties
             textfont
                 plotly.graph_objs.histogram.selected.Textfont
                 instance or dict with compatible properties
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -469,17 +458,14 @@ import _plotly_utils.basevalidators
 
 
 class OrientationValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(
-        self, plotly_name='orientation', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="orientation", parent_name="histogram", **kwargs):
         super(OrientationValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc+clearAxisTypes'),
-            role=kwargs.pop('role', 'info'),
-            values=kwargs.pop('values', ['v', 'h']),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
+            role=kwargs.pop("role", "info"),
+            values=kwargs.pop("values", ["v", "h"]),
+            **kwargs,
         )
 
 
@@ -487,18 +473,15 @@ import _plotly_utils.basevalidators
 
 
 class OpacityValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='opacity', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="opacity", parent_name="histogram", **kwargs):
         super(OpacityValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'style'),
-            max=kwargs.pop('max', 1),
-            min=kwargs.pop('min', 0),
-            role=kwargs.pop('role', 'style'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "style"),
+            max=kwargs.pop("max", 1),
+            min=kwargs.pop("min", 0),
+            role=kwargs.pop("role", "style"),
+            **kwargs,
         )
 
 
@@ -506,16 +489,13 @@ import _plotly_utils.basevalidators
 
 
 class OffsetgroupValidator(_plotly_utils.basevalidators.StringValidator):
-
-    def __init__(
-        self, plotly_name='offsetgroup', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="offsetgroup", parent_name="histogram", **kwargs):
         super(OffsetgroupValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -523,17 +503,14 @@ import _plotly_utils.basevalidators
 
 
 class NbinsyValidator(_plotly_utils.basevalidators.IntegerValidator):
-
-    def __init__(
-        self, plotly_name='nbinsy', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="nbinsy", parent_name="histogram", **kwargs):
         super(NbinsyValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            min=kwargs.pop('min', 0),
-            role=kwargs.pop('role', 'style'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            min=kwargs.pop("min", 0),
+            role=kwargs.pop("role", "style"),
+            **kwargs,
         )
 
 
@@ -541,17 +518,14 @@ import _plotly_utils.basevalidators
 
 
 class NbinsxValidator(_plotly_utils.basevalidators.IntegerValidator):
-
-    def __init__(
-        self, plotly_name='nbinsx', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="nbinsx", parent_name="histogram", **kwargs):
         super(NbinsxValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            min=kwargs.pop('min', 0),
-            role=kwargs.pop('role', 'style'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            min=kwargs.pop("min", 0),
+            role=kwargs.pop("role", "style"),
+            **kwargs,
         )
 
 
@@ -559,14 +533,13 @@ import _plotly_utils.basevalidators
 
 
 class NameValidator(_plotly_utils.basevalidators.StringValidator):
-
-    def __init__(self, plotly_name='name', parent_name='histogram', **kwargs):
+    def __init__(self, plotly_name="name", parent_name="histogram", **kwargs):
         super(NameValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'style'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "style"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -574,16 +547,13 @@ import _plotly_utils.basevalidators
 
 
 class MetasrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(
-        self, plotly_name='metasrc', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="metasrc", parent_name="histogram", **kwargs):
         super(MetasrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -591,15 +561,14 @@ import _plotly_utils.basevalidators
 
 
 class MetaValidator(_plotly_utils.basevalidators.AnyValidator):
-
-    def __init__(self, plotly_name='meta', parent_name='histogram', **kwargs):
+    def __init__(self, plotly_name="meta", parent_name="histogram", **kwargs):
         super(MetaValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            array_ok=kwargs.pop("array_ok", True),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -607,16 +576,14 @@ import _plotly_utils.basevalidators
 
 
 class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='marker', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="marker", parent_name="histogram", **kwargs):
         super(MarkerValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Marker'),
+            data_class_str=kwargs.pop("data_class_str", "Marker"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             autocolorscale
                 Determines whether the colorscale is a default
                 palette (`autocolorscale: true`) or the palette
@@ -711,9 +678,9 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not a colorbar is
                 displayed for this trace. Has an effect only if
                 in `marker.color`is set to a numerical array.
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -721,16 +688,13 @@ import _plotly_utils.basevalidators
 
 
 class LegendgroupValidator(_plotly_utils.basevalidators.StringValidator):
-
-    def __init__(
-        self, plotly_name='legendgroup', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="legendgroup", parent_name="histogram", **kwargs):
         super(LegendgroupValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'style'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "style"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -738,16 +702,13 @@ import _plotly_utils.basevalidators
 
 
 class IdssrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(
-        self, plotly_name='idssrc', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="idssrc", parent_name="histogram", **kwargs):
         super(IdssrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -755,15 +716,14 @@ import _plotly_utils.basevalidators
 
 
 class IdsValidator(_plotly_utils.basevalidators.DataArrayValidator):
-
-    def __init__(self, plotly_name='ids', parent_name='histogram', **kwargs):
+    def __init__(self, plotly_name="ids", parent_name="histogram", **kwargs):
         super(IdsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop('anim', True),
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'data'),
-            **kwargs
+            anim=kwargs.pop("anim", True),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "data"),
+            **kwargs,
         )
 
 
@@ -771,16 +731,13 @@ import _plotly_utils.basevalidators
 
 
 class HovertextsrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(
-        self, plotly_name='hovertextsrc', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="hovertextsrc", parent_name="histogram", **kwargs):
         super(HovertextsrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -788,17 +745,14 @@ import _plotly_utils.basevalidators
 
 
 class HovertextValidator(_plotly_utils.basevalidators.StringValidator):
-
-    def __init__(
-        self, plotly_name='hovertext', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="hovertext", parent_name="histogram", **kwargs):
         super(HovertextValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'style'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            array_ok=kwargs.pop("array_ok", True),
+            edit_type=kwargs.pop("edit_type", "style"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -806,19 +760,15 @@ import _plotly_utils.basevalidators
 
 
 class HovertemplatesrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
     def __init__(
-        self,
-        plotly_name='hovertemplatesrc',
-        parent_name='histogram',
-        **kwargs
+        self, plotly_name="hovertemplatesrc", parent_name="histogram", **kwargs
     ):
         super(HovertemplatesrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -826,17 +776,14 @@ import _plotly_utils.basevalidators
 
 
 class HovertemplateValidator(_plotly_utils.basevalidators.StringValidator):
-
-    def __init__(
-        self, plotly_name='hovertemplate', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="hovertemplate", parent_name="histogram", **kwargs):
         super(HovertemplateValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            array_ok=kwargs.pop("array_ok", True),
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -844,16 +791,14 @@ import _plotly_utils.basevalidators
 
 
 class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='hoverlabel', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="hoverlabel", parent_name="histogram", **kwargs):
         super(HoverlabelValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Hoverlabel'),
+            data_class_str=kwargs.pop("data_class_str", "Hoverlabel"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             align
                 Sets the horizontal alignment of the text
                 content within hover label box. Has an effect
@@ -889,9 +834,9 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
             namelengthsrc
                 Sets the source reference on plot.ly for
                 namelength .
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -899,16 +844,13 @@ import _plotly_utils.basevalidators
 
 
 class HoverinfosrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(
-        self, plotly_name='hoverinfosrc', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="hoverinfosrc", parent_name="histogram", **kwargs):
         super(HoverinfosrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -916,19 +858,16 @@ import _plotly_utils.basevalidators
 
 
 class HoverinfoValidator(_plotly_utils.basevalidators.FlaglistValidator):
-
-    def __init__(
-        self, plotly_name='hoverinfo', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="hoverinfo", parent_name="histogram", **kwargs):
         super(HoverinfoValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'none'),
-            extras=kwargs.pop('extras', ['all', 'none', 'skip']),
-            flags=kwargs.pop('flags', ['x', 'y', 'z', 'text', 'name']),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            array_ok=kwargs.pop("array_ok", True),
+            edit_type=kwargs.pop("edit_type", "none"),
+            extras=kwargs.pop("extras", ["all", "none", "skip"]),
+            flags=kwargs.pop("flags", ["x", "y", "z", "text", "name"]),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -936,22 +875,17 @@ import _plotly_utils.basevalidators
 
 
 class HistnormValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(
-        self, plotly_name='histnorm', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="histnorm", parent_name="histogram", **kwargs):
         super(HistnormValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "style"),
             values=kwargs.pop(
-                'values', [
-                    '', 'percent', 'probability', 'density',
-                    'probability density'
-                ]
+                "values",
+                ["", "percent", "probability", "density", "probability density"],
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -959,17 +893,14 @@ import _plotly_utils.basevalidators
 
 
 class HistfuncValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(
-        self, plotly_name='histfunc', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="histfunc", parent_name="histogram", **kwargs):
         super(HistfuncValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'style'),
-            values=kwargs.pop('values', ['count', 'sum', 'avg', 'min', 'max']),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "style"),
+            values=kwargs.pop("values", ["count", "sum", "avg", "min", "max"]),
+            **kwargs,
         )
 
 
@@ -977,16 +908,14 @@ import _plotly_utils.basevalidators
 
 
 class ErrorYValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='error_y', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="error_y", parent_name="histogram", **kwargs):
         super(ErrorYValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'ErrorY'),
+            data_class_str=kwargs.pop("data_class_str", "ErrorY"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             array
                 Sets the data corresponding the length of each
                 error bar. Values are plotted relative to the
@@ -1042,9 +971,9 @@ class ErrorYValidator(_plotly_utils.basevalidators.CompoundValidator):
             width
                 Sets the width (in px) of the cross-bar at both
                 ends of the error bars.
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -1052,16 +981,14 @@ import _plotly_utils.basevalidators
 
 
 class ErrorXValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='error_x', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="error_x", parent_name="histogram", **kwargs):
         super(ErrorXValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'ErrorX'),
+            data_class_str=kwargs.pop("data_class_str", "ErrorX"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             array
                 Sets the data corresponding the length of each
                 error bar. Values are plotted relative to the
@@ -1119,9 +1046,9 @@ class ErrorXValidator(_plotly_utils.basevalidators.CompoundValidator):
             width
                 Sets the width (in px) of the cross-bar at both
                 ends of the error bars.
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -1129,16 +1056,13 @@ import _plotly_utils.basevalidators
 
 
 class CustomdatasrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(
-        self, plotly_name='customdatasrc', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="customdatasrc", parent_name="histogram", **kwargs):
         super(CustomdatasrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -1146,16 +1070,13 @@ import _plotly_utils.basevalidators
 
 
 class CustomdataValidator(_plotly_utils.basevalidators.DataArrayValidator):
-
-    def __init__(
-        self, plotly_name='customdata', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="customdata", parent_name="histogram", **kwargs):
         super(CustomdataValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'data'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "data"),
+            **kwargs,
         )
 
 
@@ -1163,16 +1084,14 @@ import _plotly_utils.basevalidators
 
 
 class CumulativeValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='cumulative', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="cumulative", parent_name="histogram", **kwargs):
         super(CumulativeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Cumulative'),
+            data_class_str=kwargs.pop("data_class_str", "Cumulative"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             currentbin
                 Only applies if cumulative is enabled. Sets
                 whether the current bin is included, excluded,
@@ -1199,9 +1118,9 @@ class CumulativeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 points, and "probability" and *probability
                 density* both rise to the number of sample
                 points.
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -1209,16 +1128,13 @@ import _plotly_utils.basevalidators
 
 
 class BingroupValidator(_plotly_utils.basevalidators.StringValidator):
-
-    def __init__(
-        self, plotly_name='bingroup', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="bingroup", parent_name="histogram", **kwargs):
         super(BingroupValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -1226,16 +1142,13 @@ import _plotly_utils.basevalidators
 
 
 class AutobinyValidator(_plotly_utils.basevalidators.BooleanValidator):
-
-    def __init__(
-        self, plotly_name='autobiny', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="autobiny", parent_name="histogram", **kwargs):
         super(AutobinyValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'style'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "style"),
+            **kwargs,
         )
 
 
@@ -1243,16 +1156,13 @@ import _plotly_utils.basevalidators
 
 
 class AutobinxValidator(_plotly_utils.basevalidators.BooleanValidator):
-
-    def __init__(
-        self, plotly_name='autobinx', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="autobinx", parent_name="histogram", **kwargs):
         super(AutobinxValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'style'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "style"),
+            **kwargs,
         )
 
 
@@ -1260,14 +1170,11 @@ import _plotly_utils.basevalidators
 
 
 class AlignmentgroupValidator(_plotly_utils.basevalidators.StringValidator):
-
-    def __init__(
-        self, plotly_name='alignmentgroup', parent_name='histogram', **kwargs
-    ):
+    def __init__(self, plotly_name="alignmentgroup", parent_name="histogram", **kwargs):
         super(AlignmentgroupValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )

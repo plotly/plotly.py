@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -20,11 +18,11 @@ class Transition(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['duration']
+        return self["duration"]
 
     @duration.setter
     def duration(self, val):
-        self['duration'] = val
+        self["duration"] = val
 
     # easing
     # ------
@@ -49,17 +47,17 @@ class Transition(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['easing']
+        return self["easing"]
 
     @easing.setter
     def easing(self, val):
-        self['easing'] = val
+        self["easing"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.slider'
+        return "layout.slider"
 
     # Self properties description
     # ---------------------------
@@ -91,7 +89,7 @@ class Transition(_BaseLayoutHierarchyType):
         -------
         Transition
         """
-        super(Transition, self).__init__('transition')
+        super(Transition, self).__init__("transition")
 
         # Validate arg
         # ------------
@@ -111,25 +109,23 @@ an instance of plotly.graph_objs.layout.slider.Transition"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.slider import (
-            transition as v_transition
-        )
+        from plotly.validators.layout.slider import transition as v_transition
 
         # Initialize validators
         # ---------------------
-        self._validators['duration'] = v_transition.DurationValidator()
-        self._validators['easing'] = v_transition.EasingValidator()
+        self._validators["duration"] = v_transition.DurationValidator()
+        self._validators["easing"] = v_transition.EasingValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('duration', None)
-        self['duration'] = duration if duration is not None else _v
-        _v = arg.pop('easing', None)
-        self['easing'] = easing if easing is not None else _v
+        _v = arg.pop("duration", None)
+        self["duration"] = duration if duration is not None else _v
+        _v = arg.pop("easing", None)
+        self["easing"] = easing if easing is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -165,11 +161,11 @@ class Step(_BaseLayoutHierarchyType):
         -------
         list
         """
-        return self['args']
+        return self["args"]
 
     @args.setter
     def args(self, val):
-        self['args'] = val
+        self["args"] = val
 
     # execute
     # -------
@@ -191,11 +187,11 @@ class Step(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['execute']
+        return self["execute"]
 
     @execute.setter
     def execute(self, val):
-        self['execute'] = val
+        self["execute"] = val
 
     # label
     # -----
@@ -212,11 +208,11 @@ class Step(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['label']
+        return self["label"]
 
     @label.setter
     def label(self, val):
-        self['label'] = val
+        self["label"] = val
 
     # method
     # ------
@@ -238,11 +234,11 @@ class Step(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['method']
+        return self["method"]
 
     @method.setter
     def method(self, val):
-        self['method'] = val
+        self["method"] = val
 
     # name
     # ----
@@ -265,11 +261,11 @@ class Step(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
     # templateitemname
     # ----------------
@@ -293,11 +289,11 @@ class Step(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['templateitemname']
+        return self["templateitemname"]
 
     @templateitemname.setter
     def templateitemname(self, val):
-        self['templateitemname'] = val
+        self["templateitemname"] = val
 
     # value
     # -----
@@ -315,11 +311,11 @@ class Step(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['value']
+        return self["value"]
 
     @value.setter
     def value(self, val):
-        self['value'] = val
+        self["value"] = val
 
     # visible
     # -------
@@ -335,17 +331,17 @@ class Step(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.slider'
+        return "layout.slider"
 
     # Self properties description
     # ---------------------------
@@ -411,7 +407,7 @@ class Step(_BaseLayoutHierarchyType):
         templateitemname=None,
         value=None,
         visible=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Step object
@@ -472,7 +468,7 @@ class Step(_BaseLayoutHierarchyType):
         -------
         Step
         """
-        super(Step, self).__init__('steps')
+        super(Step, self).__init__("steps")
 
         # Validate arg
         # ------------
@@ -492,43 +488,43 @@ an instance of plotly.graph_objs.layout.slider.Step"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.slider import (step as v_step)
+        from plotly.validators.layout.slider import step as v_step
 
         # Initialize validators
         # ---------------------
-        self._validators['args'] = v_step.ArgsValidator()
-        self._validators['execute'] = v_step.ExecuteValidator()
-        self._validators['label'] = v_step.LabelValidator()
-        self._validators['method'] = v_step.MethodValidator()
-        self._validators['name'] = v_step.NameValidator()
-        self._validators['templateitemname'
-                        ] = v_step.TemplateitemnameValidator()
-        self._validators['value'] = v_step.ValueValidator()
-        self._validators['visible'] = v_step.VisibleValidator()
+        self._validators["args"] = v_step.ArgsValidator()
+        self._validators["execute"] = v_step.ExecuteValidator()
+        self._validators["label"] = v_step.LabelValidator()
+        self._validators["method"] = v_step.MethodValidator()
+        self._validators["name"] = v_step.NameValidator()
+        self._validators["templateitemname"] = v_step.TemplateitemnameValidator()
+        self._validators["value"] = v_step.ValueValidator()
+        self._validators["visible"] = v_step.VisibleValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('args', None)
-        self['args'] = args if args is not None else _v
-        _v = arg.pop('execute', None)
-        self['execute'] = execute if execute is not None else _v
-        _v = arg.pop('label', None)
-        self['label'] = label if label is not None else _v
-        _v = arg.pop('method', None)
-        self['method'] = method if method is not None else _v
-        _v = arg.pop('name', None)
-        self['name'] = name if name is not None else _v
-        _v = arg.pop('templateitemname', None)
-        self['templateitemname'
-            ] = templateitemname if templateitemname is not None else _v
-        _v = arg.pop('value', None)
-        self['value'] = value if value is not None else _v
-        _v = arg.pop('visible', None)
-        self['visible'] = visible if visible is not None else _v
+        _v = arg.pop("args", None)
+        self["args"] = args if args is not None else _v
+        _v = arg.pop("execute", None)
+        self["execute"] = execute if execute is not None else _v
+        _v = arg.pop("label", None)
+        self["label"] = label if label is not None else _v
+        _v = arg.pop("method", None)
+        self["method"] = method if method is not None else _v
+        _v = arg.pop("name", None)
+        self["name"] = name if name is not None else _v
+        _v = arg.pop("templateitemname", None)
+        self["templateitemname"] = (
+            templateitemname if templateitemname is not None else _v
+        )
+        _v = arg.pop("value", None)
+        self["value"] = value if value is not None else _v
+        _v = arg.pop("visible", None)
+        self["visible"] = visible if visible is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -560,11 +556,11 @@ class Pad(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['b']
+        return self["b"]
 
     @b.setter
     def b(self, val):
-        self['b'] = val
+        self["b"] = val
 
     # l
     # -
@@ -581,11 +577,11 @@ class Pad(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['l']
+        return self["l"]
 
     @l.setter
     def l(self, val):
-        self['l'] = val
+        self["l"] = val
 
     # r
     # -
@@ -602,11 +598,11 @@ class Pad(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['r']
+        return self["r"]
 
     @r.setter
     def r(self, val):
-        self['r'] = val
+        self["r"] = val
 
     # t
     # -
@@ -622,17 +618,17 @@ class Pad(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['t']
+        return self["t"]
 
     @t.setter
     def t(self, val):
-        self['t'] = val
+        self["t"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.slider'
+        return "layout.slider"
 
     # Self properties description
     # ---------------------------
@@ -681,7 +677,7 @@ class Pad(_BaseLayoutHierarchyType):
         -------
         Pad
         """
-        super(Pad, self).__init__('pad')
+        super(Pad, self).__init__("pad")
 
         # Validate arg
         # ------------
@@ -701,29 +697,29 @@ an instance of plotly.graph_objs.layout.slider.Pad"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.slider import (pad as v_pad)
+        from plotly.validators.layout.slider import pad as v_pad
 
         # Initialize validators
         # ---------------------
-        self._validators['b'] = v_pad.BValidator()
-        self._validators['l'] = v_pad.LValidator()
-        self._validators['r'] = v_pad.RValidator()
-        self._validators['t'] = v_pad.TValidator()
+        self._validators["b"] = v_pad.BValidator()
+        self._validators["l"] = v_pad.LValidator()
+        self._validators["r"] = v_pad.RValidator()
+        self._validators["t"] = v_pad.TValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('b', None)
-        self['b'] = b if b is not None else _v
-        _v = arg.pop('l', None)
-        self['l'] = l if l is not None else _v
-        _v = arg.pop('r', None)
-        self['r'] = r if r is not None else _v
-        _v = arg.pop('t', None)
-        self['t'] = t if t is not None else _v
+        _v = arg.pop("b", None)
+        self["b"] = b if b is not None else _v
+        _v = arg.pop("l", None)
+        self["l"] = l if l is not None else _v
+        _v = arg.pop("r", None)
+        self["r"] = r if r is not None else _v
+        _v = arg.pop("t", None)
+        self["t"] = t if t is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -791,11 +787,11 @@ class Font(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     # family
     # ------
@@ -822,11 +818,11 @@ class Font(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['family']
+        return self["family"]
 
     @family.setter
     def family(self, val):
-        self['family'] = val
+        self["family"] = val
 
     # size
     # ----
@@ -840,17 +836,17 @@ class Font(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['size']
+        return self["size"]
 
     @size.setter
     def size(self, val):
-        self['size'] = val
+        self["size"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.slider'
+        return "layout.slider"
 
     # Self properties description
     # ---------------------------
@@ -911,7 +907,7 @@ class Font(_BaseLayoutHierarchyType):
         -------
         Font
         """
-        super(Font, self).__init__('font')
+        super(Font, self).__init__("font")
 
         # Validate arg
         # ------------
@@ -931,26 +927,26 @@ an instance of plotly.graph_objs.layout.slider.Font"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.slider import (font as v_font)
+        from plotly.validators.layout.slider import font as v_font
 
         # Initialize validators
         # ---------------------
-        self._validators['color'] = v_font.ColorValidator()
-        self._validators['family'] = v_font.FamilyValidator()
-        self._validators['size'] = v_font.SizeValidator()
+        self._validators["color"] = v_font.ColorValidator()
+        self._validators["family"] = v_font.FamilyValidator()
+        self._validators["size"] = v_font.SizeValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('color', None)
-        self['color'] = color if color is not None else _v
-        _v = arg.pop('family', None)
-        self['family'] = family if family is not None else _v
-        _v = arg.pop('size', None)
-        self['size'] = size if size is not None else _v
+        _v = arg.pop("color", None)
+        self["color"] = color if color is not None else _v
+        _v = arg.pop("family", None)
+        self["family"] = family if family is not None else _v
+        _v = arg.pop("size", None)
+        self["size"] = size if size is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -1006,11 +1002,11 @@ class Currentvalue(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.slider.currentvalue.Font
         """
-        return self['font']
+        return self["font"]
 
     @font.setter
     def font(self, val):
-        self['font'] = val
+        self["font"] = val
 
     # offset
     # ------
@@ -1027,11 +1023,11 @@ class Currentvalue(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['offset']
+        return self["offset"]
 
     @offset.setter
     def offset(self, val):
-        self['offset'] = val
+        self["offset"] = val
 
     # prefix
     # ------
@@ -1049,11 +1045,11 @@ class Currentvalue(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['prefix']
+        return self["prefix"]
 
     @prefix.setter
     def prefix(self, val):
-        self['prefix'] = val
+        self["prefix"] = val
 
     # suffix
     # ------
@@ -1071,11 +1067,11 @@ class Currentvalue(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['suffix']
+        return self["suffix"]
 
     @suffix.setter
     def suffix(self, val):
-        self['suffix'] = val
+        self["suffix"] = val
 
     # visible
     # -------
@@ -1091,11 +1087,11 @@ class Currentvalue(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
     # xanchor
     # -------
@@ -1113,17 +1109,17 @@ class Currentvalue(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['xanchor']
+        return self["xanchor"]
 
     @xanchor.setter
     def xanchor(self, val):
-        self['xanchor'] = val
+        self["xanchor"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.slider'
+        return "layout.slider"
 
     # Self properties description
     # ---------------------------
@@ -1157,7 +1153,7 @@ class Currentvalue(_BaseLayoutHierarchyType):
         suffix=None,
         visible=None,
         xanchor=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Currentvalue object
@@ -1189,7 +1185,7 @@ class Currentvalue(_BaseLayoutHierarchyType):
         -------
         Currentvalue
         """
-        super(Currentvalue, self).__init__('currentvalue')
+        super(Currentvalue, self).__init__("currentvalue")
 
         # Validate arg
         # ------------
@@ -1209,37 +1205,35 @@ an instance of plotly.graph_objs.layout.slider.Currentvalue"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.slider import (
-            currentvalue as v_currentvalue
-        )
+        from plotly.validators.layout.slider import currentvalue as v_currentvalue
 
         # Initialize validators
         # ---------------------
-        self._validators['font'] = v_currentvalue.FontValidator()
-        self._validators['offset'] = v_currentvalue.OffsetValidator()
-        self._validators['prefix'] = v_currentvalue.PrefixValidator()
-        self._validators['suffix'] = v_currentvalue.SuffixValidator()
-        self._validators['visible'] = v_currentvalue.VisibleValidator()
-        self._validators['xanchor'] = v_currentvalue.XanchorValidator()
+        self._validators["font"] = v_currentvalue.FontValidator()
+        self._validators["offset"] = v_currentvalue.OffsetValidator()
+        self._validators["prefix"] = v_currentvalue.PrefixValidator()
+        self._validators["suffix"] = v_currentvalue.SuffixValidator()
+        self._validators["visible"] = v_currentvalue.VisibleValidator()
+        self._validators["xanchor"] = v_currentvalue.XanchorValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('font', None)
-        self['font'] = font if font is not None else _v
-        _v = arg.pop('offset', None)
-        self['offset'] = offset if offset is not None else _v
-        _v = arg.pop('prefix', None)
-        self['prefix'] = prefix if prefix is not None else _v
-        _v = arg.pop('suffix', None)
-        self['suffix'] = suffix if suffix is not None else _v
-        _v = arg.pop('visible', None)
-        self['visible'] = visible if visible is not None else _v
-        _v = arg.pop('xanchor', None)
-        self['xanchor'] = xanchor if xanchor is not None else _v
+        _v = arg.pop("font", None)
+        self["font"] = font if font is not None else _v
+        _v = arg.pop("offset", None)
+        self["offset"] = offset if offset is not None else _v
+        _v = arg.pop("prefix", None)
+        self["prefix"] = prefix if prefix is not None else _v
+        _v = arg.pop("suffix", None)
+        self["suffix"] = suffix if suffix is not None else _v
+        _v = arg.pop("visible", None)
+        self["visible"] = visible if visible is not None else _v
+        _v = arg.pop("xanchor", None)
+        self["xanchor"] = xanchor if xanchor is not None else _v
 
         # Process unknown kwargs
         # ----------------------

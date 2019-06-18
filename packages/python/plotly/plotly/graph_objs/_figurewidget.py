@@ -1,24 +1,53 @@
 from plotly.basewidget import BaseFigureWidget
 from plotly.graph_objs import (
-    Area, Bar, Barpolar, Box, Candlestick, Carpet, Choropleth, Cone, Contour,
-    Contourcarpet, Funnel, Funnelarea, Heatmap, Heatmapgl, Histogram,
-    Histogram2d, Histogram2dContour, Isosurface, Mesh3d, Ohlc, Parcats,
-    Parcoords, Pie, Pointcloud, Sankey, Scatter, Scatter3d, Scattercarpet,
-    Scattergeo, Scattergl, Scattermapbox, Scatterpolar, Scatterpolargl,
-    Scatterternary, Splom, Streamtube, Sunburst, Surface, Table, Violin,
-    Volume, Waterfall
+    Area,
+    Bar,
+    Barpolar,
+    Box,
+    Candlestick,
+    Carpet,
+    Choropleth,
+    Cone,
+    Contour,
+    Contourcarpet,
+    Funnel,
+    Funnelarea,
+    Heatmap,
+    Heatmapgl,
+    Histogram,
+    Histogram2d,
+    Histogram2dContour,
+    Isosurface,
+    Mesh3d,
+    Ohlc,
+    Parcats,
+    Parcoords,
+    Pie,
+    Pointcloud,
+    Sankey,
+    Scatter,
+    Scatter3d,
+    Scattercarpet,
+    Scattergeo,
+    Scattergl,
+    Scattermapbox,
+    Scatterpolar,
+    Scatterpolargl,
+    Scatterternary,
+    Splom,
+    Streamtube,
+    Sunburst,
+    Surface,
+    Table,
+    Violin,
+    Volume,
+    Waterfall,
 )
 
 
 class FigureWidget(BaseFigureWidget):
-
     def __init__(
-        self,
-        data=None,
-        layout=None,
-        frames=None,
-        skip_invalid=False,
-        **kwargs
+        self, data=None, layout=None, frames=None, skip_invalid=False, **kwargs
     ):
         """
         Create a new FigureWidget instance
@@ -549,8 +578,7 @@ class FigureWidget(BaseFigureWidget):
             if a property in the specification of data, layout, or frames
             is invalid AND skip_invalid is False
         """
-        super(FigureWidget,
-              self).__init__(data, layout, frames, skip_invalid, **kwargs)
+        super(FigureWidget, self).__init__(data, layout, frames, skip_invalid, **kwargs)
 
     def add_area(
         self,
@@ -578,7 +606,7 @@ class FigureWidget(BaseFigureWidget):
         visible=None,
         row=None,
         col=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Area trace
@@ -716,7 +744,7 @@ class FigureWidget(BaseFigureWidget):
             uid=uid,
             uirevision=uirevision,
             visible=visible,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -788,7 +816,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Bar trace
@@ -1141,11 +1169,9 @@ class FigureWidget(BaseFigureWidget):
             yaxis=yaxis,
             ycalendar=ycalendar,
             ysrc=ysrc,
-            **kwargs
+            **kwargs,
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_barpolar(
         self,
@@ -1194,7 +1220,7 @@ class FigureWidget(BaseFigureWidget):
         widthsrc=None,
         row=None,
         col=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Barpolar trace
@@ -1434,7 +1460,7 @@ class FigureWidget(BaseFigureWidget):
             visible=visible,
             width=width,
             widthsrc=widthsrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -1494,7 +1520,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Box trace
@@ -1811,11 +1837,9 @@ class FigureWidget(BaseFigureWidget):
             yaxis=yaxis,
             ycalendar=ycalendar,
             ysrc=ysrc,
-            **kwargs
+            **kwargs,
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_candlestick(
         self,
@@ -1861,7 +1885,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Candlestick trace
@@ -2084,11 +2108,9 @@ class FigureWidget(BaseFigureWidget):
             xcalendar=xcalendar,
             xsrc=xsrc,
             yaxis=yaxis,
-            **kwargs
+            **kwargs,
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_carpet(
         self,
@@ -2130,7 +2152,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Carpet trace
@@ -2340,11 +2362,9 @@ class FigureWidget(BaseFigureWidget):
             y=y,
             yaxis=yaxis,
             ysrc=ysrc,
-            **kwargs
+            **kwargs,
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_choropleth(
         self,
@@ -2390,7 +2410,7 @@ class FigureWidget(BaseFigureWidget):
         zsrc=None,
         row=None,
         col=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Choropleth trace
@@ -2643,7 +2663,7 @@ class FigureWidget(BaseFigureWidget):
             zmid=zmid,
             zmin=zmin,
             zsrc=zsrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -2700,7 +2720,7 @@ class FigureWidget(BaseFigureWidget):
         zsrc=None,
         row=None,
         col=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Cone trace
@@ -3001,7 +3021,7 @@ class FigureWidget(BaseFigureWidget):
             ysrc=ysrc,
             z=z,
             zsrc=zsrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -3067,7 +3087,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Contour trace
@@ -3408,11 +3428,9 @@ class FigureWidget(BaseFigureWidget):
             zmid=zmid,
             zmin=zmin,
             zsrc=zsrc,
-            **kwargs
+            **kwargs,
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_contourcarpet(
         self,
@@ -3471,7 +3489,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Contourcarpet trace
@@ -3773,11 +3791,9 @@ class FigureWidget(BaseFigureWidget):
             zmid=zmid,
             zmin=zmin,
             zsrc=zsrc,
-            **kwargs
+            **kwargs,
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_funnel(
         self,
@@ -3835,7 +3851,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Funnel trace
@@ -4150,11 +4166,9 @@ class FigureWidget(BaseFigureWidget):
             y0=y0,
             yaxis=yaxis,
             ysrc=ysrc,
-            **kwargs
+            **kwargs,
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_funnelarea(
         self,
@@ -4200,7 +4214,7 @@ class FigureWidget(BaseFigureWidget):
         visible=None,
         row=None,
         col=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Funnelarea trace
@@ -4436,7 +4450,7 @@ class FigureWidget(BaseFigureWidget):
             values=values,
             valuessrc=valuessrc,
             visible=visible,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -4498,7 +4512,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Heatmap trace
@@ -4822,11 +4836,9 @@ class FigureWidget(BaseFigureWidget):
             zmin=zmin,
             zsmooth=zsmooth,
             zsrc=zsrc,
-            **kwargs
+            **kwargs,
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_heatmapgl(
         self,
@@ -4875,7 +4887,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Heatmapgl trace
@@ -5129,11 +5141,9 @@ class FigureWidget(BaseFigureWidget):
             zmid=zmid,
             zmin=zmin,
             zsrc=zsrc,
-            **kwargs
+            **kwargs,
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_histogram(
         self,
@@ -5190,7 +5200,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Histogram trace
@@ -5514,11 +5524,9 @@ class FigureWidget(BaseFigureWidget):
             ybins=ybins,
             ycalendar=ycalendar,
             ysrc=ysrc,
-            **kwargs
+            **kwargs,
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_histogram2d(
         self,
@@ -5578,7 +5586,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Histogram2d trace
@@ -5932,11 +5940,9 @@ class FigureWidget(BaseFigureWidget):
             zmin=zmin,
             zsmooth=zsmooth,
             zsrc=zsrc,
-            **kwargs
+            **kwargs,
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_histogram2dcontour(
         self,
@@ -5999,7 +6005,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Histogram2dContour trace
@@ -6374,11 +6380,9 @@ class FigureWidget(BaseFigureWidget):
             zmid=zmid,
             zmin=zmin,
             zsrc=zsrc,
-            **kwargs
+            **kwargs,
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_isosurface(
         self,
@@ -6434,7 +6438,7 @@ class FigureWidget(BaseFigureWidget):
         zsrc=None,
         row=None,
         col=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Isosurface trace
@@ -6728,7 +6732,7 @@ class FigureWidget(BaseFigureWidget):
             ysrc=ysrc,
             z=z,
             zsrc=zsrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -6796,7 +6800,7 @@ class FigureWidget(BaseFigureWidget):
         zsrc=None,
         row=None,
         col=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Mesh3d trace
@@ -7168,7 +7172,7 @@ class FigureWidget(BaseFigureWidget):
             z=z,
             zcalendar=zcalendar,
             zsrc=zsrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -7216,7 +7220,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Ohlc trace
@@ -7438,11 +7442,9 @@ class FigureWidget(BaseFigureWidget):
             xcalendar=xcalendar,
             xsrc=xsrc,
             yaxis=yaxis,
-            **kwargs
+            **kwargs,
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_parcats(
         self,
@@ -7469,7 +7471,7 @@ class FigureWidget(BaseFigureWidget):
         visible=None,
         row=None,
         col=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Parcats trace
@@ -7633,7 +7635,7 @@ class FigureWidget(BaseFigureWidget):
             uid=uid,
             uirevision=uirevision,
             visible=visible,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -7659,7 +7661,7 @@ class FigureWidget(BaseFigureWidget):
         visible=None,
         row=None,
         col=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Parcoords trace
@@ -7783,7 +7785,7 @@ class FigureWidget(BaseFigureWidget):
             uid=uid,
             uirevision=uirevision,
             visible=visible,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -7838,7 +7840,7 @@ class FigureWidget(BaseFigureWidget):
         visible=None,
         row=None,
         col=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Pie trace
@@ -8105,7 +8107,7 @@ class FigureWidget(BaseFigureWidget):
             values=values,
             valuessrc=valuessrc,
             visible=visible,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -8148,7 +8150,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Pointcloud trace
@@ -8359,11 +8361,9 @@ class FigureWidget(BaseFigureWidget):
             ybounds=ybounds,
             yboundssrc=yboundssrc,
             ysrc=ysrc,
-            **kwargs
+            **kwargs,
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_sankey(
         self,
@@ -8391,7 +8391,7 @@ class FigureWidget(BaseFigureWidget):
         visible=None,
         row=None,
         col=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Sankey trace
@@ -8545,7 +8545,7 @@ class FigureWidget(BaseFigureWidget):
             valueformat=valueformat,
             valuesuffix=valuesuffix,
             visible=visible,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -8613,7 +8613,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Scatter trace
@@ -9000,11 +9000,9 @@ class FigureWidget(BaseFigureWidget):
             yaxis=yaxis,
             ycalendar=ycalendar,
             ysrc=ysrc,
-            **kwargs
+            **kwargs,
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_scatter3d(
         self,
@@ -9056,7 +9054,7 @@ class FigureWidget(BaseFigureWidget):
         zsrc=None,
         row=None,
         col=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Scatter3d trace
@@ -9317,7 +9315,7 @@ class FigureWidget(BaseFigureWidget):
             z=z,
             zcalendar=zcalendar,
             zsrc=zsrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -9369,7 +9367,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Scattercarpet trace
@@ -9645,11 +9643,9 @@ class FigureWidget(BaseFigureWidget):
             visible=visible,
             xaxis=xaxis,
             yaxis=yaxis,
-            **kwargs
+            **kwargs,
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_scattergeo(
         self,
@@ -9698,7 +9694,7 @@ class FigureWidget(BaseFigureWidget):
         visible=None,
         row=None,
         col=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Scattergeo trace
@@ -9957,7 +9953,7 @@ class FigureWidget(BaseFigureWidget):
             uirevision=uirevision,
             unselected=unselected,
             visible=visible,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -10015,7 +10011,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Scattergl trace
@@ -10319,11 +10315,9 @@ class FigureWidget(BaseFigureWidget):
             yaxis=yaxis,
             ycalendar=ycalendar,
             ysrc=ysrc,
-            **kwargs
+            **kwargs,
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_scattermapbox(
         self,
@@ -10368,7 +10362,7 @@ class FigureWidget(BaseFigureWidget):
         visible=None,
         row=None,
         col=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Scattermapbox trace
@@ -10608,7 +10602,7 @@ class FigureWidget(BaseFigureWidget):
             uirevision=uirevision,
             unselected=unselected,
             visible=visible,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -10663,7 +10657,7 @@ class FigureWidget(BaseFigureWidget):
         visible=None,
         row=None,
         col=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Scatterpolar trace
@@ -10953,7 +10947,7 @@ class FigureWidget(BaseFigureWidget):
             uirevision=uirevision,
             unselected=unselected,
             visible=visible,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -11006,7 +11000,7 @@ class FigureWidget(BaseFigureWidget):
         visible=None,
         row=None,
         col=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Scatterpolargl trace
@@ -11293,7 +11287,7 @@ class FigureWidget(BaseFigureWidget):
             uirevision=uirevision,
             unselected=unselected,
             visible=visible,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -11346,7 +11340,7 @@ class FigureWidget(BaseFigureWidget):
         visible=None,
         row=None,
         col=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Scatterternary trace
@@ -11636,7 +11630,7 @@ class FigureWidget(BaseFigureWidget):
             uirevision=uirevision,
             unselected=unselected,
             visible=visible,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -11678,7 +11672,7 @@ class FigureWidget(BaseFigureWidget):
         yaxes=None,
         row=None,
         col=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Splom trace
@@ -11903,7 +11897,7 @@ class FigureWidget(BaseFigureWidget):
             visible=visible,
             xaxes=xaxes,
             yaxes=yaxes,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -11958,7 +11952,7 @@ class FigureWidget(BaseFigureWidget):
         zsrc=None,
         row=None,
         col=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Streamtube trace
@@ -12243,7 +12237,7 @@ class FigureWidget(BaseFigureWidget):
             ysrc=ysrc,
             z=z,
             zsrc=zsrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -12288,7 +12282,7 @@ class FigureWidget(BaseFigureWidget):
         visible=None,
         row=None,
         col=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Sunburst trace
@@ -12516,7 +12510,7 @@ class FigureWidget(BaseFigureWidget):
             values=values,
             valuessrc=valuessrc,
             visible=visible,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -12572,7 +12566,7 @@ class FigureWidget(BaseFigureWidget):
         zsrc=None,
         row=None,
         col=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Surface trace
@@ -12863,7 +12857,7 @@ class FigureWidget(BaseFigureWidget):
             z=z,
             zcalendar=zcalendar,
             zsrc=zsrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -12892,7 +12886,7 @@ class FigureWidget(BaseFigureWidget):
         visible=None,
         row=None,
         col=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Table trace
@@ -13033,7 +13027,7 @@ class FigureWidget(BaseFigureWidget):
             uid=uid,
             uirevision=uirevision,
             visible=visible,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -13095,7 +13089,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Violin trace
@@ -13438,11 +13432,9 @@ class FigureWidget(BaseFigureWidget):
             y0=y0,
             yaxis=yaxis,
             ysrc=ysrc,
-            **kwargs
+            **kwargs,
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_volume(
         self,
@@ -13499,7 +13491,7 @@ class FigureWidget(BaseFigureWidget):
         zsrc=None,
         row=None,
         col=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Volume trace
@@ -13805,7 +13797,7 @@ class FigureWidget(BaseFigureWidget):
             ysrc=ysrc,
             z=z,
             zsrc=zsrc,
-            **kwargs
+            **kwargs,
         )
         return self.add_trace(new_trace, row=row, col=col)
 
@@ -13872,7 +13864,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Add a new Waterfall trace
@@ -14211,11 +14203,9 @@ class FigureWidget(BaseFigureWidget):
             y0=y0,
             yaxis=yaxis,
             ysrc=ysrc,
-            **kwargs
+            **kwargs,
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def select_coloraxes(self, selector=None, row=None, col=None):
         """
@@ -14243,9 +14233,7 @@ class FigureWidget(BaseFigureWidget):
             objects that satisfy all of the specified selection criteria
         """
 
-        return self._select_layout_subplots_by_prefix(
-            'coloraxis', selector, row, col
-        )
+        return self._select_layout_subplots_by_prefix("coloraxis", selector, row, col)
 
     def for_each_coloraxis(self, fn, selector=None, row=None, col=None):
         """
@@ -14277,9 +14265,7 @@ class FigureWidget(BaseFigureWidget):
 
         return self
 
-    def update_coloraxes(
-        self, patch=None, selector=None, row=None, col=None, **kwargs
-    ):
+    def update_coloraxes(self, patch=None, selector=None, row=None, col=None, **kwargs):
         """
         Perform a property update operation on all coloraxis objects
         that satisfy the specified selection criteria
@@ -14341,9 +14327,7 @@ class FigureWidget(BaseFigureWidget):
             objects that satisfy all of the specified selection criteria
         """
 
-        return self._select_layout_subplots_by_prefix(
-            'geo', selector, row, col
-        )
+        return self._select_layout_subplots_by_prefix("geo", selector, row, col)
 
     def for_each_geo(self, fn, selector=None, row=None, col=None):
         """
@@ -14375,9 +14359,7 @@ class FigureWidget(BaseFigureWidget):
 
         return self
 
-    def update_geos(
-        self, patch=None, selector=None, row=None, col=None, **kwargs
-    ):
+    def update_geos(self, patch=None, selector=None, row=None, col=None, **kwargs):
         """
         Perform a property update operation on all geo objects
         that satisfy the specified selection criteria
@@ -14439,9 +14421,7 @@ class FigureWidget(BaseFigureWidget):
             objects that satisfy all of the specified selection criteria
         """
 
-        return self._select_layout_subplots_by_prefix(
-            'mapbox', selector, row, col
-        )
+        return self._select_layout_subplots_by_prefix("mapbox", selector, row, col)
 
     def for_each_mapbox(self, fn, selector=None, row=None, col=None):
         """
@@ -14473,9 +14453,7 @@ class FigureWidget(BaseFigureWidget):
 
         return self
 
-    def update_mapboxes(
-        self, patch=None, selector=None, row=None, col=None, **kwargs
-    ):
+    def update_mapboxes(self, patch=None, selector=None, row=None, col=None, **kwargs):
         """
         Perform a property update operation on all mapbox objects
         that satisfy the specified selection criteria
@@ -14537,9 +14515,7 @@ class FigureWidget(BaseFigureWidget):
             objects that satisfy all of the specified selection criteria
         """
 
-        return self._select_layout_subplots_by_prefix(
-            'polar', selector, row, col
-        )
+        return self._select_layout_subplots_by_prefix("polar", selector, row, col)
 
     def for_each_polar(self, fn, selector=None, row=None, col=None):
         """
@@ -14571,9 +14547,7 @@ class FigureWidget(BaseFigureWidget):
 
         return self
 
-    def update_polars(
-        self, patch=None, selector=None, row=None, col=None, **kwargs
-    ):
+    def update_polars(self, patch=None, selector=None, row=None, col=None, **kwargs):
         """
         Perform a property update operation on all polar objects
         that satisfy the specified selection criteria
@@ -14635,9 +14609,7 @@ class FigureWidget(BaseFigureWidget):
             objects that satisfy all of the specified selection criteria
         """
 
-        return self._select_layout_subplots_by_prefix(
-            'scene', selector, row, col
-        )
+        return self._select_layout_subplots_by_prefix("scene", selector, row, col)
 
     def for_each_scene(self, fn, selector=None, row=None, col=None):
         """
@@ -14669,9 +14641,7 @@ class FigureWidget(BaseFigureWidget):
 
         return self
 
-    def update_scenes(
-        self, patch=None, selector=None, row=None, col=None, **kwargs
-    ):
+    def update_scenes(self, patch=None, selector=None, row=None, col=None, **kwargs):
         """
         Perform a property update operation on all scene objects
         that satisfy the specified selection criteria
@@ -14733,9 +14703,7 @@ class FigureWidget(BaseFigureWidget):
             objects that satisfy all of the specified selection criteria
         """
 
-        return self._select_layout_subplots_by_prefix(
-            'ternary', selector, row, col
-        )
+        return self._select_layout_subplots_by_prefix("ternary", selector, row, col)
 
     def for_each_ternary(self, fn, selector=None, row=None, col=None):
         """
@@ -14767,9 +14735,7 @@ class FigureWidget(BaseFigureWidget):
 
         return self
 
-    def update_ternaries(
-        self, patch=None, selector=None, row=None, col=None, **kwargs
-    ):
+    def update_ternaries(self, patch=None, selector=None, row=None, col=None, **kwargs):
         """
         Perform a property update operation on all ternary objects
         that satisfy the specified selection criteria
@@ -14831,9 +14797,7 @@ class FigureWidget(BaseFigureWidget):
             objects that satisfy all of the specified selection criteria
         """
 
-        return self._select_layout_subplots_by_prefix(
-            'xaxis', selector, row, col
-        )
+        return self._select_layout_subplots_by_prefix("xaxis", selector, row, col)
 
     def for_each_xaxis(self, fn, selector=None, row=None, col=None):
         """
@@ -14865,9 +14829,7 @@ class FigureWidget(BaseFigureWidget):
 
         return self
 
-    def update_xaxes(
-        self, patch=None, selector=None, row=None, col=None, **kwargs
-    ):
+    def update_xaxes(self, patch=None, selector=None, row=None, col=None, **kwargs):
         """
         Perform a property update operation on all xaxis objects
         that satisfy the specified selection criteria
@@ -14903,9 +14865,7 @@ class FigureWidget(BaseFigureWidget):
 
         return self
 
-    def select_yaxes(
-        self, selector=None, row=None, col=None, secondary_y=None
-    ):
+    def select_yaxes(self, selector=None, row=None, col=None, secondary_y=None):
         """
         Select yaxis subplot objects from a particular subplot cell
         and/or yaxis subplot objects that satisfy custom selection
@@ -14944,12 +14904,10 @@ class FigureWidget(BaseFigureWidget):
         """
 
         return self._select_layout_subplots_by_prefix(
-            'yaxis', selector, row, col, secondary_y=secondary_y
+            "yaxis", selector, row, col, secondary_y=secondary_y
         )
 
-    def for_each_yaxis(
-        self, fn, selector=None, row=None, col=None, secondary_y=None
-    ):
+    def for_each_yaxis(self, fn, selector=None, row=None, col=None, secondary_y=None):
         """
         Apply a function to all yaxis objects that satisfy the
         specified selection criteria
@@ -14994,13 +14952,7 @@ class FigureWidget(BaseFigureWidget):
         return self
 
     def update_yaxes(
-        self,
-        patch=None,
-        selector=None,
-        row=None,
-        col=None,
-        secondary_y=None,
-        **kwargs
+        self, patch=None, selector=None, row=None, col=None, secondary_y=None, **kwargs
     ):
         """
         Perform a property update operation on all yaxis objects

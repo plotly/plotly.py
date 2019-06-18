@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -22,11 +20,11 @@ class Axis(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['matches']
+        return self["matches"]
 
     @matches.setter
     def matches(self, val):
-        self['matches'] = val
+        self["matches"] = val
 
     # type
     # ----
@@ -45,17 +43,17 @@ class Axis(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['type']
+        return self["type"]
 
     @type.setter
     def type(self, val):
-        self['type'] = val
+        self["type"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'splom.dimension'
+        return "splom.dimension"
 
     # Self properties description
     # ---------------------------
@@ -96,7 +94,7 @@ class Axis(_BaseTraceHierarchyType):
         -------
         Axis
         """
-        super(Axis, self).__init__('axis')
+        super(Axis, self).__init__("axis")
 
         # Validate arg
         # ------------
@@ -116,23 +114,23 @@ an instance of plotly.graph_objs.splom.dimension.Axis"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.splom.dimension import (axis as v_axis)
+        from plotly.validators.splom.dimension import axis as v_axis
 
         # Initialize validators
         # ---------------------
-        self._validators['matches'] = v_axis.MatchesValidator()
-        self._validators['type'] = v_axis.TypeValidator()
+        self._validators["matches"] = v_axis.MatchesValidator()
+        self._validators["type"] = v_axis.TypeValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('matches', None)
-        self['matches'] = matches if matches is not None else _v
-        _v = arg.pop('type', None)
-        self['type'] = type if type is not None else _v
+        _v = arg.pop("matches", None)
+        self["matches"] = matches if matches is not None else _v
+        _v = arg.pop("type", None)
+        self["type"] = type if type is not None else _v
 
         # Process unknown kwargs
         # ----------------------

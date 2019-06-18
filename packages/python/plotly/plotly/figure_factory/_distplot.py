@@ -5,14 +5,14 @@ from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
 
 # Optional imports, may be None for users that only use our core functionality.
-np = optional_imports.get_module('numpy')
-pd = optional_imports.get_module('pandas')
-scipy = optional_imports.get_module('scipy')
-scipy_stats = optional_imports.get_module('scipy.stats')
+np = optional_imports.get_module("numpy")
+pd = optional_imports.get_module("pandas")
+scipy = optional_imports.get_module("scipy")
+scipy_stats = optional_imports.get_module("scipy.stats")
 
 
-DEFAULT_HISTNORM = 'probability density'
-ALTERNATIVE_HISTNORM = 'probability'
+DEFAULT_HISTNORM = "probability density"
+ALTERNATIVE_HISTNORM = "probability"
 
 
 def validate_distplot(hist_data, curve_type):
@@ -30,25 +30,37 @@ def validate_distplot(hist_data, curve_type):
         hist_data_types += (pd.core.series.Series,)
 
     if not isinstance(hist_data[0], hist_data_types):
-        raise exceptions.PlotlyError("Oops, this function was written "
-                                     "to handle multiple datasets, if "
-                                     "you want to plot just one, make "
-                                     "sure your hist_data variable is "
-                                     "still a list of lists, i.e. x = "
-                                     "[1, 2, 3] -> x = [[1, 2, 3]]")
+        raise exceptions.PlotlyError(
+            "Oops, this function was written "
+            "to handle multiple datasets, if "
+            "you want to plot just one, make "
+            "sure your hist_data variable is "
+            "still a list of lists, i.e. x = "
+            "[1, 2, 3] -> x = [[1, 2, 3]]"
+        )
 
-    curve_opts = ('kde', 'normal')
+    curve_opts = ("kde", "normal")
     if curve_type not in curve_opts:
-        raise exceptions.PlotlyError("curve_type must be defined as "
-                                     "'kde' or 'normal'")
+        raise exceptions.PlotlyError(
+            "curve_type must be defined as " "'kde' or 'normal'"
+        )
 
     if not scipy:
         raise ImportError("FigureFactory.create_distplot requires scipy")
 
 
-def create_distplot(hist_data, group_labels, bin_size=1., curve_type='kde',
-                    colors=None, rug_text=None, histnorm=DEFAULT_HISTNORM,
-                    show_hist=True, show_curve=True, show_rug=True):
+def create_distplot(
+    hist_data,
+    group_labels,
+    bin_size=1.0,
+    curve_type="kde",
+    colors=None,
+    rug_text=None,
+    histnorm=DEFAULT_HISTNORM,
+    show_hist=True,
+    show_curve=True,
+    show_rug=True,
+):
     """
     BETA function that creates a distplot similar to seaborn.distplot
 
@@ -176,25 +188,53 @@ def create_distplot(hist_data, group_labels, bin_size=1., curve_type='kde',
         bin_size = [bin_size] * len(hist_data)
 
     hist = _Distplot(
-        hist_data, histnorm, group_labels, bin_size,
-        curve_type, colors, rug_text,
-        show_hist, show_curve).make_hist()
+        hist_data,
+        histnorm,
+        group_labels,
+        bin_size,
+        curve_type,
+        colors,
+        rug_text,
+        show_hist,
+        show_curve,
+    ).make_hist()
 
-    if curve_type == 'normal':
+    if curve_type == "normal":
         curve = _Distplot(
-            hist_data, histnorm, group_labels, bin_size,
-            curve_type, colors, rug_text,
-            show_hist, show_curve).make_normal()
+            hist_data,
+            histnorm,
+            group_labels,
+            bin_size,
+            curve_type,
+            colors,
+            rug_text,
+            show_hist,
+            show_curve,
+        ).make_normal()
     else:
         curve = _Distplot(
-            hist_data, histnorm, group_labels, bin_size,
-            curve_type, colors, rug_text,
-            show_hist, show_curve).make_kde()
+            hist_data,
+            histnorm,
+            group_labels,
+            bin_size,
+            curve_type,
+            colors,
+            rug_text,
+            show_hist,
+            show_curve,
+        ).make_kde()
 
     rug = _Distplot(
-        hist_data, histnorm, group_labels, bin_size,
-        curve_type, colors, rug_text,
-        show_hist, show_curve).make_rug()
+        hist_data,
+        histnorm,
+        group_labels,
+        bin_size,
+        curve_type,
+        colors,
+        rug_text,
+        show_hist,
+        show_curve,
+    ).make_rug()
 
     data = []
     if show_hist:
@@ -204,30 +244,21 @@ def create_distplot(hist_data, group_labels, bin_size=1., curve_type='kde',
     if show_rug:
         data.append(rug)
         layout = graph_objs.Layout(
-            barmode='overlay',
-            hovermode='closest',
-            legend=dict(traceorder='reversed'),
-            xaxis1=dict(domain=[0.0, 1.0],
-                        anchor='y2',
-                        zeroline=False),
-            yaxis1=dict(domain=[0.35, 1],
-                        anchor='free',
-                        position=0.0),
-            yaxis2=dict(domain=[0, 0.25],
-                        anchor='x1',
-                        dtick=1,
-                        showticklabels=False))
+            barmode="overlay",
+            hovermode="closest",
+            legend=dict(traceorder="reversed"),
+            xaxis1=dict(domain=[0.0, 1.0], anchor="y2", zeroline=False),
+            yaxis1=dict(domain=[0.35, 1], anchor="free", position=0.0),
+            yaxis2=dict(domain=[0, 0.25], anchor="x1", dtick=1, showticklabels=False),
+        )
     else:
         layout = graph_objs.Layout(
-            barmode='overlay',
-            hovermode='closest',
-            legend=dict(traceorder='reversed'),
-            xaxis1=dict(domain=[0.0, 1.0],
-                        anchor='y2',
-                        zeroline=False),
-            yaxis1=dict(domain=[0., 1],
-                        anchor='free',
-                        position=0.0))
+            barmode="overlay",
+            hovermode="closest",
+            legend=dict(traceorder="reversed"),
+            xaxis1=dict(domain=[0.0, 1.0], anchor="y2", zeroline=False),
+            yaxis1=dict(domain=[0.0, 1], anchor="free", position=0.0),
+        )
 
     data = sum(data, [])
     return graph_objs.Figure(data=data, layout=layout)
@@ -237,9 +268,19 @@ class _Distplot(object):
     """
     Refer to TraceFactory.create_distplot() for docstring
     """
-    def __init__(self, hist_data, histnorm, group_labels,
-                 bin_size, curve_type, colors,
-                 rug_text, show_hist, show_curve):
+
+    def __init__(
+        self,
+        hist_data,
+        histnorm,
+        group_labels,
+        bin_size,
+        curve_type,
+        colors,
+        rug_text,
+        show_hist,
+        show_curve,
+    ):
         self.hist_data = hist_data
         self.histnorm = histnorm
         self.group_labels = group_labels
@@ -258,17 +299,23 @@ class _Distplot(object):
             self.colors = colors
         else:
             self.colors = [
-                "rgb(31, 119, 180)", "rgb(255, 127, 14)",
-                "rgb(44, 160, 44)", "rgb(214, 39, 40)",
-                "rgb(148, 103, 189)", "rgb(140, 86, 75)",
-                "rgb(227, 119, 194)", "rgb(127, 127, 127)",
-                "rgb(188, 189, 34)", "rgb(23, 190, 207)"]
+                "rgb(31, 119, 180)",
+                "rgb(255, 127, 14)",
+                "rgb(44, 160, 44)",
+                "rgb(214, 39, 40)",
+                "rgb(148, 103, 189)",
+                "rgb(140, 86, 75)",
+                "rgb(227, 119, 194)",
+                "rgb(127, 127, 127)",
+                "rgb(188, 189, 34)",
+                "rgb(23, 190, 207)",
+            ]
         self.curve_x = [None] * self.trace_number
         self.curve_y = [None] * self.trace_number
 
         for trace in self.hist_data:
-            self.start.append(min(trace) * 1.)
-            self.end.append(max(trace) * 1.)
+            self.start.append(min(trace) * 1.0)
+            self.end.append(max(trace) * 1.0)
 
     def make_hist(self):
         """
@@ -279,19 +326,23 @@ class _Distplot(object):
         hist = [None] * self.trace_number
 
         for index in range(self.trace_number):
-            hist[index] = dict(type='histogram',
-                               x=self.hist_data[index],
-                               xaxis='x1',
-                               yaxis='y1',
-                               histnorm=self.histnorm,
-                               name=self.group_labels[index],
-                               legendgroup=self.group_labels[index],
-                               marker=dict(color=self.colors[index % len(self.colors)]),
-                               autobinx=False,
-                               xbins=dict(start=self.start[index],
-                                          end=self.end[index],
-                                          size=self.bin_size[index]),
-                               opacity=.7)
+            hist[index] = dict(
+                type="histogram",
+                x=self.hist_data[index],
+                xaxis="x1",
+                yaxis="y1",
+                histnorm=self.histnorm,
+                name=self.group_labels[index],
+                legendgroup=self.group_labels[index],
+                marker=dict(color=self.colors[index % len(self.colors)]),
+                autobinx=False,
+                xbins=dict(
+                    start=self.start[index],
+                    end=self.end[index],
+                    size=self.bin_size[index],
+                ),
+                opacity=0.7,
+            )
         return hist
 
     def make_kde(self):
@@ -304,27 +355,30 @@ class _Distplot(object):
         """
         curve = [None] * self.trace_number
         for index in range(self.trace_number):
-            self.curve_x[index] = [self.start[index] +
-                                   x * (self.end[index] - self.start[index])
-                                   / 500 for x in range(500)]
-            self.curve_y[index] = (scipy_stats.gaussian_kde
-                                   (self.hist_data[index])
-                                   (self.curve_x[index]))
+            self.curve_x[index] = [
+                self.start[index] + x * (self.end[index] - self.start[index]) / 500
+                for x in range(500)
+            ]
+            self.curve_y[index] = scipy_stats.gaussian_kde(self.hist_data[index])(
+                self.curve_x[index]
+            )
 
             if self.histnorm == ALTERNATIVE_HISTNORM:
                 self.curve_y[index] *= self.bin_size[index]
 
         for index in range(self.trace_number):
-            curve[index] = dict(type='scatter',
-                                x=self.curve_x[index],
-                                y=self.curve_y[index],
-                                xaxis='x1',
-                                yaxis='y1',
-                                mode='lines',
-                                name=self.group_labels[index],
-                                legendgroup=self.group_labels[index],
-                                showlegend=False if self.show_hist else True,
-                                marker=dict(color=self.colors[index % len(self.colors)]))
+            curve[index] = dict(
+                type="scatter",
+                x=self.curve_x[index],
+                y=self.curve_y[index],
+                xaxis="x1",
+                yaxis="y1",
+                mode="lines",
+                name=self.group_labels[index],
+                legendgroup=self.group_labels[index],
+                showlegend=False if self.show_hist else True,
+                marker=dict(color=self.colors[index % len(self.colors)]),
+            )
         return curve
 
     def make_normal(self):
@@ -340,28 +394,31 @@ class _Distplot(object):
         sd = [None] * self.trace_number
 
         for index in range(self.trace_number):
-            mean[index], sd[index] = (scipy_stats.norm.fit
-                                      (self.hist_data[index]))
-            self.curve_x[index] = [self.start[index] +
-                                   x * (self.end[index] - self.start[index])
-                                   / 500 for x in range(500)]
+            mean[index], sd[index] = scipy_stats.norm.fit(self.hist_data[index])
+            self.curve_x[index] = [
+                self.start[index] + x * (self.end[index] - self.start[index]) / 500
+                for x in range(500)
+            ]
             self.curve_y[index] = scipy_stats.norm.pdf(
-                self.curve_x[index], loc=mean[index], scale=sd[index])
+                self.curve_x[index], loc=mean[index], scale=sd[index]
+            )
 
             if self.histnorm == ALTERNATIVE_HISTNORM:
                 self.curve_y[index] *= self.bin_size[index]
 
         for index in range(self.trace_number):
-            curve[index] = dict(type='scatter',
-                                x=self.curve_x[index],
-                                y=self.curve_y[index],
-                                xaxis='x1',
-                                yaxis='y1',
-                                mode='lines',
-                                name=self.group_labels[index],
-                                legendgroup=self.group_labels[index],
-                                showlegend=False if self.show_hist else True,
-                                marker=dict(color=self.colors[index % len(self.colors)]))
+            curve[index] = dict(
+                type="scatter",
+                x=self.curve_x[index],
+                y=self.curve_y[index],
+                xaxis="x1",
+                yaxis="y1",
+                mode="lines",
+                name=self.group_labels[index],
+                legendgroup=self.group_labels[index],
+                showlegend=False if self.show_hist else True,
+                marker=dict(color=self.colors[index % len(self.colors)]),
+            )
         return curve
 
     def make_rug(self):
@@ -373,18 +430,19 @@ class _Distplot(object):
         rug = [None] * self.trace_number
         for index in range(self.trace_number):
 
-            rug[index] = dict(type='scatter',
-                              x=self.hist_data[index],
-                              y=([self.group_labels[index]] *
-                                 len(self.hist_data[index])),
-                              xaxis='x1',
-                              yaxis='y2',
-                              mode='markers',
-                              name=self.group_labels[index],
-                              legendgroup=self.group_labels[index],
-                              showlegend=(False if self.show_hist or
-                                          self.show_curve else True),
-                              text=self.rug_text[index],
-                              marker=dict(color=self.colors[index % len(self.colors)],
-                                          symbol='line-ns-open'))
+            rug[index] = dict(
+                type="scatter",
+                x=self.hist_data[index],
+                y=([self.group_labels[index]] * len(self.hist_data[index])),
+                xaxis="x1",
+                yaxis="y2",
+                mode="markers",
+                name=self.group_labels[index],
+                legendgroup=self.group_labels[index],
+                showlegend=(False if self.show_hist or self.show_curve else True),
+                text=self.rug_text[index],
+                marker=dict(
+                    color=self.colors[index % len(self.colors)], symbol="line-ns-open"
+                ),
+            )
         return rug

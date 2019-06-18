@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -57,11 +55,11 @@ class Tickfont(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     # family
     # ------
@@ -88,11 +86,11 @@ class Tickfont(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['family']
+        return self["family"]
 
     @family.setter
     def family(self, val):
-        self['family'] = val
+        self["family"] = val
 
     # size
     # ----
@@ -106,17 +104,17 @@ class Tickfont(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['size']
+        return self["size"]
 
     @size.setter
     def size(self, val):
-        self['size'] = val
+        self["size"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'parcoords'
+        return "parcoords"
 
     # Self properties description
     # ---------------------------
@@ -177,7 +175,7 @@ class Tickfont(_BaseTraceHierarchyType):
         -------
         Tickfont
         """
-        super(Tickfont, self).__init__('tickfont')
+        super(Tickfont, self).__init__("tickfont")
 
         # Validate arg
         # ------------
@@ -197,26 +195,26 @@ an instance of plotly.graph_objs.parcoords.Tickfont"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.parcoords import (tickfont as v_tickfont)
+        from plotly.validators.parcoords import tickfont as v_tickfont
 
         # Initialize validators
         # ---------------------
-        self._validators['color'] = v_tickfont.ColorValidator()
-        self._validators['family'] = v_tickfont.FamilyValidator()
-        self._validators['size'] = v_tickfont.SizeValidator()
+        self._validators["color"] = v_tickfont.ColorValidator()
+        self._validators["family"] = v_tickfont.FamilyValidator()
+        self._validators["size"] = v_tickfont.SizeValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('color', None)
-        self['color'] = color if color is not None else _v
-        _v = arg.pop('family', None)
-        self['family'] = family if family is not None else _v
-        _v = arg.pop('size', None)
-        self['size'] = size if size is not None else _v
+        _v = arg.pop("color", None)
+        self["color"] = color if color is not None else _v
+        _v = arg.pop("family", None)
+        self["family"] = family if family is not None else _v
+        _v = arg.pop("size", None)
+        self["size"] = size if size is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -249,11 +247,11 @@ class Stream(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['maxpoints']
+        return self["maxpoints"]
 
     @maxpoints.setter
     def maxpoints(self, val):
-        self['maxpoints'] = val
+        self["maxpoints"] = val
 
     # token
     # -----
@@ -270,17 +268,17 @@ class Stream(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['token']
+        return self["token"]
 
     @token.setter
     def token(self, val):
-        self['token'] = val
+        self["token"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'parcoords'
+        return "parcoords"
 
     # Self properties description
     # ---------------------------
@@ -321,7 +319,7 @@ class Stream(_BaseTraceHierarchyType):
         -------
         Stream
         """
-        super(Stream, self).__init__('stream')
+        super(Stream, self).__init__("stream")
 
         # Validate arg
         # ------------
@@ -341,23 +339,23 @@ an instance of plotly.graph_objs.parcoords.Stream"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.parcoords import (stream as v_stream)
+        from plotly.validators.parcoords import stream as v_stream
 
         # Initialize validators
         # ---------------------
-        self._validators['maxpoints'] = v_stream.MaxpointsValidator()
-        self._validators['token'] = v_stream.TokenValidator()
+        self._validators["maxpoints"] = v_stream.MaxpointsValidator()
+        self._validators["token"] = v_stream.TokenValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('maxpoints', None)
-        self['maxpoints'] = maxpoints if maxpoints is not None else _v
-        _v = arg.pop('token', None)
-        self['token'] = token if token is not None else _v
+        _v = arg.pop("maxpoints", None)
+        self["maxpoints"] = maxpoints if maxpoints is not None else _v
+        _v = arg.pop("token", None)
+        self["token"] = token if token is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -425,11 +423,11 @@ class Rangefont(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     # family
     # ------
@@ -456,11 +454,11 @@ class Rangefont(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['family']
+        return self["family"]
 
     @family.setter
     def family(self, val):
-        self['family'] = val
+        self["family"] = val
 
     # size
     # ----
@@ -474,17 +472,17 @@ class Rangefont(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['size']
+        return self["size"]
 
     @size.setter
     def size(self, val):
-        self['size'] = val
+        self["size"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'parcoords'
+        return "parcoords"
 
     # Self properties description
     # ---------------------------
@@ -545,7 +543,7 @@ class Rangefont(_BaseTraceHierarchyType):
         -------
         Rangefont
         """
-        super(Rangefont, self).__init__('rangefont')
+        super(Rangefont, self).__init__("rangefont")
 
         # Validate arg
         # ------------
@@ -565,26 +563,26 @@ an instance of plotly.graph_objs.parcoords.Rangefont"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.parcoords import (rangefont as v_rangefont)
+        from plotly.validators.parcoords import rangefont as v_rangefont
 
         # Initialize validators
         # ---------------------
-        self._validators['color'] = v_rangefont.ColorValidator()
-        self._validators['family'] = v_rangefont.FamilyValidator()
-        self._validators['size'] = v_rangefont.SizeValidator()
+        self._validators["color"] = v_rangefont.ColorValidator()
+        self._validators["family"] = v_rangefont.FamilyValidator()
+        self._validators["size"] = v_rangefont.SizeValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('color', None)
-        self['color'] = color if color is not None else _v
-        _v = arg.pop('family', None)
-        self['family'] = family if family is not None else _v
-        _v = arg.pop('size', None)
-        self['size'] = size if size is not None else _v
+        _v = arg.pop("color", None)
+        self["color"] = color if color is not None else _v
+        _v = arg.pop("family", None)
+        self["family"] = family if family is not None else _v
+        _v = arg.pop("size", None)
+        self["size"] = size if size is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -621,11 +619,11 @@ class Line(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['autocolorscale']
+        return self["autocolorscale"]
 
     @autocolorscale.setter
     def autocolorscale(self, val):
-        self['autocolorscale'] = val
+        self["autocolorscale"] = val
 
     # cauto
     # -----
@@ -645,11 +643,11 @@ class Line(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['cauto']
+        return self["cauto"]
 
     @cauto.setter
     def cauto(self, val):
-        self['cauto'] = val
+        self["cauto"] = val
 
     # cmax
     # ----
@@ -668,11 +666,11 @@ class Line(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['cmax']
+        return self["cmax"]
 
     @cmax.setter
     def cmax(self, val):
-        self['cmax'] = val
+        self["cmax"] = val
 
     # cmid
     # ----
@@ -692,11 +690,11 @@ class Line(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['cmid']
+        return self["cmid"]
 
     @cmid.setter
     def cmid(self, val):
-        self['cmid'] = val
+        self["cmid"] = val
 
     # cmin
     # ----
@@ -715,11 +713,11 @@ class Line(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['cmin']
+        return self["cmin"]
 
     @cmin.setter
     def cmin(self, val):
-        self['cmin'] = val
+        self["cmin"] = val
 
     # color
     # -----
@@ -780,11 +778,11 @@ class Line(_BaseTraceHierarchyType):
         -------
         str|numpy.ndarray
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     # coloraxis
     # ---------
@@ -807,11 +805,11 @@ class Line(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['coloraxis']
+        return self["coloraxis"]
 
     @coloraxis.setter
     def coloraxis(self, val):
-        self['coloraxis'] = val
+        self["coloraxis"] = val
 
     # colorbar
     # --------
@@ -1041,11 +1039,11 @@ class Line(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.parcoords.line.ColorBar
         """
-        return self['colorbar']
+        return self["colorbar"]
 
     @colorbar.setter
     def colorbar(self, val):
-        self['colorbar'] = val
+        self["colorbar"] = val
 
     # colorscale
     # ----------
@@ -1079,11 +1077,11 @@ class Line(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['colorscale']
+        return self["colorscale"]
 
     @colorscale.setter
     def colorscale(self, val):
-        self['colorscale'] = val
+        self["colorscale"] = val
 
     # colorsrc
     # --------
@@ -1099,11 +1097,11 @@ class Line(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['colorsrc']
+        return self["colorsrc"]
 
     @colorsrc.setter
     def colorsrc(self, val):
-        self['colorsrc'] = val
+        self["colorsrc"] = val
 
     # reversescale
     # ------------
@@ -1122,11 +1120,11 @@ class Line(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['reversescale']
+        return self["reversescale"]
 
     @reversescale.setter
     def reversescale(self, val):
-        self['reversescale'] = val
+        self["reversescale"] = val
 
     # showscale
     # ---------
@@ -1144,17 +1142,17 @@ class Line(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['showscale']
+        return self["showscale"]
 
     @showscale.setter
     def showscale(self, val):
-        self['showscale'] = val
+        self["showscale"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'parcoords'
+        return "parcoords"
 
     # Self properties description
     # ---------------------------
@@ -1253,7 +1251,7 @@ class Line(_BaseTraceHierarchyType):
         colorsrc=None,
         reversescale=None,
         showscale=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Line object
@@ -1343,7 +1341,7 @@ class Line(_BaseTraceHierarchyType):
         -------
         Line
         """
-        super(Line, self).__init__('line')
+        super(Line, self).__init__("line")
 
         # Validate arg
         # ------------
@@ -1363,54 +1361,53 @@ an instance of plotly.graph_objs.parcoords.Line"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.parcoords import (line as v_line)
+        from plotly.validators.parcoords import line as v_line
 
         # Initialize validators
         # ---------------------
-        self._validators['autocolorscale'] = v_line.AutocolorscaleValidator()
-        self._validators['cauto'] = v_line.CautoValidator()
-        self._validators['cmax'] = v_line.CmaxValidator()
-        self._validators['cmid'] = v_line.CmidValidator()
-        self._validators['cmin'] = v_line.CminValidator()
-        self._validators['color'] = v_line.ColorValidator()
-        self._validators['coloraxis'] = v_line.ColoraxisValidator()
-        self._validators['colorbar'] = v_line.ColorBarValidator()
-        self._validators['colorscale'] = v_line.ColorscaleValidator()
-        self._validators['colorsrc'] = v_line.ColorsrcValidator()
-        self._validators['reversescale'] = v_line.ReversescaleValidator()
-        self._validators['showscale'] = v_line.ShowscaleValidator()
+        self._validators["autocolorscale"] = v_line.AutocolorscaleValidator()
+        self._validators["cauto"] = v_line.CautoValidator()
+        self._validators["cmax"] = v_line.CmaxValidator()
+        self._validators["cmid"] = v_line.CmidValidator()
+        self._validators["cmin"] = v_line.CminValidator()
+        self._validators["color"] = v_line.ColorValidator()
+        self._validators["coloraxis"] = v_line.ColoraxisValidator()
+        self._validators["colorbar"] = v_line.ColorBarValidator()
+        self._validators["colorscale"] = v_line.ColorscaleValidator()
+        self._validators["colorsrc"] = v_line.ColorsrcValidator()
+        self._validators["reversescale"] = v_line.ReversescaleValidator()
+        self._validators["showscale"] = v_line.ShowscaleValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('autocolorscale', None)
-        self['autocolorscale'
-            ] = autocolorscale if autocolorscale is not None else _v
-        _v = arg.pop('cauto', None)
-        self['cauto'] = cauto if cauto is not None else _v
-        _v = arg.pop('cmax', None)
-        self['cmax'] = cmax if cmax is not None else _v
-        _v = arg.pop('cmid', None)
-        self['cmid'] = cmid if cmid is not None else _v
-        _v = arg.pop('cmin', None)
-        self['cmin'] = cmin if cmin is not None else _v
-        _v = arg.pop('color', None)
-        self['color'] = color if color is not None else _v
-        _v = arg.pop('coloraxis', None)
-        self['coloraxis'] = coloraxis if coloraxis is not None else _v
-        _v = arg.pop('colorbar', None)
-        self['colorbar'] = colorbar if colorbar is not None else _v
-        _v = arg.pop('colorscale', None)
-        self['colorscale'] = colorscale if colorscale is not None else _v
-        _v = arg.pop('colorsrc', None)
-        self['colorsrc'] = colorsrc if colorsrc is not None else _v
-        _v = arg.pop('reversescale', None)
-        self['reversescale'] = reversescale if reversescale is not None else _v
-        _v = arg.pop('showscale', None)
-        self['showscale'] = showscale if showscale is not None else _v
+        _v = arg.pop("autocolorscale", None)
+        self["autocolorscale"] = autocolorscale if autocolorscale is not None else _v
+        _v = arg.pop("cauto", None)
+        self["cauto"] = cauto if cauto is not None else _v
+        _v = arg.pop("cmax", None)
+        self["cmax"] = cmax if cmax is not None else _v
+        _v = arg.pop("cmid", None)
+        self["cmid"] = cmid if cmid is not None else _v
+        _v = arg.pop("cmin", None)
+        self["cmin"] = cmin if cmin is not None else _v
+        _v = arg.pop("color", None)
+        self["color"] = color if color is not None else _v
+        _v = arg.pop("coloraxis", None)
+        self["coloraxis"] = coloraxis if coloraxis is not None else _v
+        _v = arg.pop("colorbar", None)
+        self["colorbar"] = colorbar if colorbar is not None else _v
+        _v = arg.pop("colorscale", None)
+        self["colorscale"] = colorscale if colorscale is not None else _v
+        _v = arg.pop("colorsrc", None)
+        self["colorsrc"] = colorsrc if colorsrc is not None else _v
+        _v = arg.pop("reversescale", None)
+        self["reversescale"] = reversescale if reversescale is not None else _v
+        _v = arg.pop("showscale", None)
+        self["showscale"] = showscale if showscale is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -1478,11 +1475,11 @@ class Labelfont(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     # family
     # ------
@@ -1509,11 +1506,11 @@ class Labelfont(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['family']
+        return self["family"]
 
     @family.setter
     def family(self, val):
-        self['family'] = val
+        self["family"] = val
 
     # size
     # ----
@@ -1527,17 +1524,17 @@ class Labelfont(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['size']
+        return self["size"]
 
     @size.setter
     def size(self, val):
-        self['size'] = val
+        self["size"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'parcoords'
+        return "parcoords"
 
     # Self properties description
     # ---------------------------
@@ -1598,7 +1595,7 @@ class Labelfont(_BaseTraceHierarchyType):
         -------
         Labelfont
         """
-        super(Labelfont, self).__init__('labelfont')
+        super(Labelfont, self).__init__("labelfont")
 
         # Validate arg
         # ------------
@@ -1618,26 +1615,26 @@ an instance of plotly.graph_objs.parcoords.Labelfont"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.parcoords import (labelfont as v_labelfont)
+        from plotly.validators.parcoords import labelfont as v_labelfont
 
         # Initialize validators
         # ---------------------
-        self._validators['color'] = v_labelfont.ColorValidator()
-        self._validators['family'] = v_labelfont.FamilyValidator()
-        self._validators['size'] = v_labelfont.SizeValidator()
+        self._validators["color"] = v_labelfont.ColorValidator()
+        self._validators["family"] = v_labelfont.FamilyValidator()
+        self._validators["size"] = v_labelfont.SizeValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('color', None)
-        self['color'] = color if color is not None else _v
-        _v = arg.pop('family', None)
-        self['family'] = family if family is not None else _v
-        _v = arg.pop('size', None)
-        self['size'] = size if size is not None else _v
+        _v = arg.pop("color", None)
+        self["color"] = color if color is not None else _v
+        _v = arg.pop("family", None)
+        self["family"] = family if family is not None else _v
+        _v = arg.pop("size", None)
+        self["size"] = size if size is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -1670,11 +1667,11 @@ class Domain(_BaseTraceHierarchyType):
         -------
         int
         """
-        return self['column']
+        return self["column"]
 
     @column.setter
     def column(self, val):
-        self['column'] = val
+        self["column"] = val
 
     # row
     # ---
@@ -1692,11 +1689,11 @@ class Domain(_BaseTraceHierarchyType):
         -------
         int
         """
-        return self['row']
+        return self["row"]
 
     @row.setter
     def row(self, val):
-        self['row'] = val
+        self["row"] = val
 
     # x
     # -
@@ -1718,11 +1715,11 @@ class Domain(_BaseTraceHierarchyType):
         -------
         list
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
     # y
     # -
@@ -1744,17 +1741,17 @@ class Domain(_BaseTraceHierarchyType):
         -------
         list
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'parcoords'
+        return "parcoords"
 
     # Self properties description
     # ---------------------------
@@ -1775,9 +1772,7 @@ class Domain(_BaseTraceHierarchyType):
             plot fraction).
         """
 
-    def __init__(
-        self, arg=None, column=None, row=None, x=None, y=None, **kwargs
-    ):
+    def __init__(self, arg=None, column=None, row=None, x=None, y=None, **kwargs):
         """
         Construct a new Domain object
         
@@ -1803,7 +1798,7 @@ class Domain(_BaseTraceHierarchyType):
         -------
         Domain
         """
-        super(Domain, self).__init__('domain')
+        super(Domain, self).__init__("domain")
 
         # Validate arg
         # ------------
@@ -1823,29 +1818,29 @@ an instance of plotly.graph_objs.parcoords.Domain"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.parcoords import (domain as v_domain)
+        from plotly.validators.parcoords import domain as v_domain
 
         # Initialize validators
         # ---------------------
-        self._validators['column'] = v_domain.ColumnValidator()
-        self._validators['row'] = v_domain.RowValidator()
-        self._validators['x'] = v_domain.XValidator()
-        self._validators['y'] = v_domain.YValidator()
+        self._validators["column"] = v_domain.ColumnValidator()
+        self._validators["row"] = v_domain.RowValidator()
+        self._validators["x"] = v_domain.XValidator()
+        self._validators["y"] = v_domain.YValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('column', None)
-        self['column'] = column if column is not None else _v
-        _v = arg.pop('row', None)
-        self['row'] = row if row is not None else _v
-        _v = arg.pop('x', None)
-        self['x'] = x if x is not None else _v
-        _v = arg.pop('y', None)
-        self['y'] = y if y is not None else _v
+        _v = arg.pop("column", None)
+        self["column"] = column if column is not None else _v
+        _v = arg.pop("row", None)
+        self["row"] = row if row is not None else _v
+        _v = arg.pop("x", None)
+        self["x"] = x if x is not None else _v
+        _v = arg.pop("y", None)
+        self["y"] = y if y is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -1891,11 +1886,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         list
         """
-        return self['constraintrange']
+        return self["constraintrange"]
 
     @constraintrange.setter
     def constraintrange(self, val):
-        self['constraintrange'] = val
+        self["constraintrange"] = val
 
     # label
     # -----
@@ -1912,11 +1907,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['label']
+        return self["label"]
 
     @label.setter
     def label(self, val):
-        self['label'] = val
+        self["label"] = val
 
     # multiselect
     # -----------
@@ -1932,11 +1927,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['multiselect']
+        return self["multiselect"]
 
     @multiselect.setter
     def multiselect(self, val):
-        self['multiselect'] = val
+        self["multiselect"] = val
 
     # name
     # ----
@@ -1959,11 +1954,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
     # range
     # -----
@@ -1986,11 +1981,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         list
         """
-        return self['range']
+        return self["range"]
 
     @range.setter
     def range(self, val):
-        self['range'] = val
+        self["range"] = val
 
     # templateitemname
     # ----------------
@@ -2014,11 +2009,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['templateitemname']
+        return self["templateitemname"]
 
     @templateitemname.setter
     def templateitemname(self, val):
-        self['templateitemname'] = val
+        self["templateitemname"] = val
 
     # tickformat
     # ----------
@@ -2037,11 +2032,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['tickformat']
+        return self["tickformat"]
 
     @tickformat.setter
     def tickformat(self, val):
-        self['tickformat'] = val
+        self["tickformat"] = val
 
     # ticktext
     # --------
@@ -2059,11 +2054,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['ticktext']
+        return self["ticktext"]
 
     @ticktext.setter
     def ticktext(self, val):
-        self['ticktext'] = val
+        self["ticktext"] = val
 
     # ticktextsrc
     # -----------
@@ -2079,11 +2074,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['ticktextsrc']
+        return self["ticktextsrc"]
 
     @ticktextsrc.setter
     def ticktextsrc(self, val):
-        self['ticktextsrc'] = val
+        self["ticktextsrc"] = val
 
     # tickvals
     # --------
@@ -2100,11 +2095,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['tickvals']
+        return self["tickvals"]
 
     @tickvals.setter
     def tickvals(self, val):
-        self['tickvals'] = val
+        self["tickvals"] = val
 
     # tickvalssrc
     # -----------
@@ -2120,11 +2115,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['tickvalssrc']
+        return self["tickvalssrc"]
 
     @tickvalssrc.setter
     def tickvalssrc(self, val):
-        self['tickvalssrc'] = val
+        self["tickvalssrc"] = val
 
     # values
     # ------
@@ -2143,11 +2138,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['values']
+        return self["values"]
 
     @values.setter
     def values(self, val):
-        self['values'] = val
+        self["values"] = val
 
     # valuessrc
     # ---------
@@ -2163,11 +2158,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['valuessrc']
+        return self["valuessrc"]
 
     @valuessrc.setter
     def valuessrc(self, val):
-        self['valuessrc'] = val
+        self["valuessrc"] = val
 
     # visible
     # -------
@@ -2184,17 +2179,17 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'parcoords'
+        return "parcoords"
 
     # Self properties description
     # ---------------------------
@@ -2284,7 +2279,7 @@ class Dimension(_BaseTraceHierarchyType):
         values=None,
         valuessrc=None,
         visible=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Dimension object
@@ -2366,7 +2361,7 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         Dimension
         """
-        super(Dimension, self).__init__('dimensions')
+        super(Dimension, self).__init__("dimensions")
 
         # Validate arg
         # ------------
@@ -2386,63 +2381,61 @@ an instance of plotly.graph_objs.parcoords.Dimension"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.parcoords import (dimension as v_dimension)
+        from plotly.validators.parcoords import dimension as v_dimension
 
         # Initialize validators
         # ---------------------
-        self._validators['constraintrange'
-                        ] = v_dimension.ConstraintrangeValidator()
-        self._validators['label'] = v_dimension.LabelValidator()
-        self._validators['multiselect'] = v_dimension.MultiselectValidator()
-        self._validators['name'] = v_dimension.NameValidator()
-        self._validators['range'] = v_dimension.RangeValidator()
-        self._validators['templateitemname'
-                        ] = v_dimension.TemplateitemnameValidator()
-        self._validators['tickformat'] = v_dimension.TickformatValidator()
-        self._validators['ticktext'] = v_dimension.TicktextValidator()
-        self._validators['ticktextsrc'] = v_dimension.TicktextsrcValidator()
-        self._validators['tickvals'] = v_dimension.TickvalsValidator()
-        self._validators['tickvalssrc'] = v_dimension.TickvalssrcValidator()
-        self._validators['values'] = v_dimension.ValuesValidator()
-        self._validators['valuessrc'] = v_dimension.ValuessrcValidator()
-        self._validators['visible'] = v_dimension.VisibleValidator()
+        self._validators["constraintrange"] = v_dimension.ConstraintrangeValidator()
+        self._validators["label"] = v_dimension.LabelValidator()
+        self._validators["multiselect"] = v_dimension.MultiselectValidator()
+        self._validators["name"] = v_dimension.NameValidator()
+        self._validators["range"] = v_dimension.RangeValidator()
+        self._validators["templateitemname"] = v_dimension.TemplateitemnameValidator()
+        self._validators["tickformat"] = v_dimension.TickformatValidator()
+        self._validators["ticktext"] = v_dimension.TicktextValidator()
+        self._validators["ticktextsrc"] = v_dimension.TicktextsrcValidator()
+        self._validators["tickvals"] = v_dimension.TickvalsValidator()
+        self._validators["tickvalssrc"] = v_dimension.TickvalssrcValidator()
+        self._validators["values"] = v_dimension.ValuesValidator()
+        self._validators["valuessrc"] = v_dimension.ValuessrcValidator()
+        self._validators["visible"] = v_dimension.VisibleValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('constraintrange', None)
-        self['constraintrange'
-            ] = constraintrange if constraintrange is not None else _v
-        _v = arg.pop('label', None)
-        self['label'] = label if label is not None else _v
-        _v = arg.pop('multiselect', None)
-        self['multiselect'] = multiselect if multiselect is not None else _v
-        _v = arg.pop('name', None)
-        self['name'] = name if name is not None else _v
-        _v = arg.pop('range', None)
-        self['range'] = range if range is not None else _v
-        _v = arg.pop('templateitemname', None)
-        self['templateitemname'
-            ] = templateitemname if templateitemname is not None else _v
-        _v = arg.pop('tickformat', None)
-        self['tickformat'] = tickformat if tickformat is not None else _v
-        _v = arg.pop('ticktext', None)
-        self['ticktext'] = ticktext if ticktext is not None else _v
-        _v = arg.pop('ticktextsrc', None)
-        self['ticktextsrc'] = ticktextsrc if ticktextsrc is not None else _v
-        _v = arg.pop('tickvals', None)
-        self['tickvals'] = tickvals if tickvals is not None else _v
-        _v = arg.pop('tickvalssrc', None)
-        self['tickvalssrc'] = tickvalssrc if tickvalssrc is not None else _v
-        _v = arg.pop('values', None)
-        self['values'] = values if values is not None else _v
-        _v = arg.pop('valuessrc', None)
-        self['valuessrc'] = valuessrc if valuessrc is not None else _v
-        _v = arg.pop('visible', None)
-        self['visible'] = visible if visible is not None else _v
+        _v = arg.pop("constraintrange", None)
+        self["constraintrange"] = constraintrange if constraintrange is not None else _v
+        _v = arg.pop("label", None)
+        self["label"] = label if label is not None else _v
+        _v = arg.pop("multiselect", None)
+        self["multiselect"] = multiselect if multiselect is not None else _v
+        _v = arg.pop("name", None)
+        self["name"] = name if name is not None else _v
+        _v = arg.pop("range", None)
+        self["range"] = range if range is not None else _v
+        _v = arg.pop("templateitemname", None)
+        self["templateitemname"] = (
+            templateitemname if templateitemname is not None else _v
+        )
+        _v = arg.pop("tickformat", None)
+        self["tickformat"] = tickformat if tickformat is not None else _v
+        _v = arg.pop("ticktext", None)
+        self["ticktext"] = ticktext if ticktext is not None else _v
+        _v = arg.pop("ticktextsrc", None)
+        self["ticktextsrc"] = ticktextsrc if ticktextsrc is not None else _v
+        _v = arg.pop("tickvals", None)
+        self["tickvals"] = tickvals if tickvals is not None else _v
+        _v = arg.pop("tickvalssrc", None)
+        self["tickvalssrc"] = tickvalssrc if tickvalssrc is not None else _v
+        _v = arg.pop("values", None)
+        self["values"] = values if values is not None else _v
+        _v = arg.pop("valuessrc", None)
+        self["valuessrc"] = valuessrc if valuessrc is not None else _v
+        _v = arg.pop("visible", None)
+        self["visible"] = visible if visible is not None else _v
 
         # Process unknown kwargs
         # ----------------------

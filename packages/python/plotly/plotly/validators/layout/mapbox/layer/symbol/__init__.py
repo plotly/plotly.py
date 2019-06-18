@@ -1,30 +1,34 @@
-
-
 import _plotly_utils.basevalidators
 
 
 class TextpositionValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
     def __init__(
         self,
-        plotly_name='textposition',
-        parent_name='layout.mapbox.layer.symbol',
-        **kwargs
+        plotly_name="textposition",
+        parent_name="layout.mapbox.layer.symbol",
+        **kwargs,
     ):
         super(TextpositionValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=kwargs.pop('array_ok', False),
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'style'),
+            array_ok=kwargs.pop("array_ok", False),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "style"),
             values=kwargs.pop(
-                'values', [
-                    'top left', 'top center', 'top right', 'middle left',
-                    'middle center', 'middle right', 'bottom left',
-                    'bottom center', 'bottom right'
-                ]
+                "values",
+                [
+                    "top left",
+                    "top center",
+                    "top right",
+                    "middle left",
+                    "middle center",
+                    "middle right",
+                    "bottom left",
+                    "bottom center",
+                    "bottom right",
+                ],
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -32,19 +36,16 @@ import _plotly_utils.basevalidators
 
 
 class TextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
-
     def __init__(
-        self,
-        plotly_name='textfont',
-        parent_name='layout.mapbox.layer.symbol',
-        **kwargs
+        self, plotly_name="textfont", parent_name="layout.mapbox.layer.symbol", **kwargs
     ):
         super(TextfontValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Textfont'),
+            data_class_str=kwargs.pop("data_class_str", "Textfont"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             color
 
             family
@@ -65,9 +66,9 @@ class TextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Narrow", "Raleway", "Times New Roman".
             size
 
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -75,19 +76,15 @@ import _plotly_utils.basevalidators
 
 
 class TextValidator(_plotly_utils.basevalidators.StringValidator):
-
     def __init__(
-        self,
-        plotly_name='text',
-        parent_name='layout.mapbox.layer.symbol',
-        **kwargs
+        self, plotly_name="text", parent_name="layout.mapbox.layer.symbol", **kwargs
     ):
         super(TextValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -95,20 +92,19 @@ import _plotly_utils.basevalidators
 
 
 class PlacementValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
     def __init__(
         self,
-        plotly_name='placement',
-        parent_name='layout.mapbox.layer.symbol',
-        **kwargs
+        plotly_name="placement",
+        parent_name="layout.mapbox.layer.symbol",
+        **kwargs,
     ):
         super(PlacementValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'info'),
-            values=kwargs.pop('values', ['point', 'line', 'line-center']),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "info"),
+            values=kwargs.pop("values", ["point", "line", "line-center"]),
+            **kwargs,
         )
 
 
@@ -116,19 +112,15 @@ import _plotly_utils.basevalidators
 
 
 class IconsizeValidator(_plotly_utils.basevalidators.NumberValidator):
-
     def __init__(
-        self,
-        plotly_name='iconsize',
-        parent_name='layout.mapbox.layer.symbol',
-        **kwargs
+        self, plotly_name="iconsize", parent_name="layout.mapbox.layer.symbol", **kwargs
     ):
         super(IconsizeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'style'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "style"),
+            **kwargs,
         )
 
 
@@ -136,17 +128,13 @@ import _plotly_utils.basevalidators
 
 
 class IconValidator(_plotly_utils.basevalidators.StringValidator):
-
     def __init__(
-        self,
-        plotly_name='icon',
-        parent_name='layout.mapbox.layer.symbol',
-        **kwargs
+        self, plotly_name="icon", parent_name="layout.mapbox.layer.symbol", **kwargs
     ):
         super(IconValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'style'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "style"),
+            **kwargs,
         )

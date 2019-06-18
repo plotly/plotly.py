@@ -2,16 +2,26 @@ import json
 import os.path as opath
 import shutil
 
-from codegen.datatypes import (build_datatype_py, write_datatype_py)
-from codegen.compatibility import (write_deprecated_datatypes,
-                                   write_graph_objs_graph_objs,
-                                   DEPRECATED_DATATYPES)
+from codegen.datatypes import build_datatype_py, write_datatype_py
+from codegen.compatibility import (
+    write_deprecated_datatypes,
+    write_graph_objs_graph_objs,
+    DEPRECATED_DATATYPES,
+)
 from codegen.figure import write_figure_classes
-from codegen.utils import (TraceNode, PlotlyNode, LayoutNode, FrameNode,
-                           write_init_py, ElementDefaultsNode)
-from codegen.validators import (write_validator_py,
-                                write_data_validator_py,
-                                get_data_validator_instance)
+from codegen.utils import (
+    TraceNode,
+    PlotlyNode,
+    LayoutNode,
+    FrameNode,
+    write_init_py,
+    ElementDefaultsNode,
+)
+from codegen.validators import (
+    write_validator_py,
+    write_data_validator_py,
+    get_data_validator_instance,
+)
 
 
 # Import notes
@@ -31,22 +41,15 @@ def preprocess_schema(plotly_schema):
 
     # Update template
     # ---------------
-    layout = plotly_schema['layout']['layoutAttributes']
+    layout = plotly_schema["layout"]["layoutAttributes"]
 
     # Create codegen-friendly template scheme
     template = {
         "data": {
-            trace + 's': {
-                'items': {
-                    trace: {
-                    },
-                },
-                "role": "object"
-            }
-            for trace in plotly_schema['traces']
+            trace + "s": {"items": {trace: {}}, "role": "object"}
+            for trace in plotly_schema["traces"]
         },
-        "layout": {
-        },
+        "layout": {},
         "description": """\
 Default attributes to be applied to the plot.
 This should be a dict with format: `{'layout': layoutTemplate, 'data':
@@ -65,17 +68,18 @@ apply that instead. If no matching `name` is found we mark the item
 invisible. Any named template item not referenced is appended to the
 end of the array, so this can be used to add a watermark annotation or a
 logo image, for example. To omit one of these items on the plot, make
-an item with matching `templateitemname` and `visible: false`."""
+an item with matching `templateitemname` and `visible: false`.""",
     }
 
-    layout['template'] = template
+    layout["template"] = template
 
     # Rename concentrationscales to colorscale to match conventions
-    items = plotly_schema['traces']['sankey']['attributes']\
-        ['link']['colorscales']['items']
+    items = plotly_schema["traces"]["sankey"]["attributes"]["link"]["colorscales"][
+        "items"
+    ]
 
-    if 'concentrationscales' in items:
-        items['colorscale'] = items.pop('concentrationscales')
+    if "concentrationscales" in items:
+        items["colorscale"] = items.pop("concentrationscales")
 
 
 def perform_codegen():
@@ -84,36 +88,32 @@ def perform_codegen():
     # (relative to project root)
     abs_file_path = opath.realpath(__file__)
     packages_py = opath.dirname(opath.dirname(opath.dirname(abs_file_path)))
-    outdir = opath.join(packages_py, 'plotly', 'plotly')
+    outdir = opath.join(packages_py, "plotly", "plotly")
 
     # Delete prior codegen output
     # ---------------------------
-    validators_pkgdir = opath.join(outdir, 'validators')
+    validators_pkgdir = opath.join(outdir, "validators")
     if opath.exists(validators_pkgdir):
         shutil.rmtree(validators_pkgdir)
 
-    graph_objs_pkgdir = opath.join(outdir, 'graph_objs')
+    graph_objs_pkgdir = opath.join(outdir, "graph_objs")
     if opath.exists(graph_objs_pkgdir):
         shutil.rmtree(graph_objs_pkgdir)
 
     # plotly/datatypes is not used anymore, but was at one point so we'll
     # still delete it if we find it in case a developer is upgrading from an
     # older version
-    datatypes_pkgdir = opath.join(outdir, 'datatypes')
+    datatypes_pkgdir = opath.join(outdir, "datatypes")
     if opath.exists(datatypes_pkgdir):
         shutil.rmtree(datatypes_pkgdir)
 
     # Load plotly schema
     # ------------------
     plot_schema_path = opath.join(
-        packages_py,
-        'plotly',
-        'codegen',
-        'resources',
-        'plot-schema.json',
+        packages_py, "plotly", "codegen", "resources", "plot-schema.json"
     )
 
-    with open(plot_schema_path, 'r') as f:
+    with open(plot_schema_path, "r") as f:
         plotly_schema = json.load(f)
 
     # Preprocess Schema
@@ -125,35 +125,38 @@ def perform_codegen():
     # ### TraceNode ###
     base_traces_node = TraceNode(plotly_schema)
     compound_trace_nodes = PlotlyNode.get_all_compound_datatype_nodes(
-        plotly_schema, TraceNode)
-    all_trace_nodes = PlotlyNode.get_all_datatype_nodes(
-        plotly_schema, TraceNode)
+        plotly_schema, TraceNode
+    )
+    all_trace_nodes = PlotlyNode.get_all_datatype_nodes(plotly_schema, TraceNode)
 
     # ### LayoutNode ###
     compound_layout_nodes = PlotlyNode.get_all_compound_datatype_nodes(
-        plotly_schema, LayoutNode)
+        plotly_schema, LayoutNode
+    )
     layout_node = compound_layout_nodes[0]
-    all_layout_nodes = PlotlyNode.get_all_datatype_nodes(
-        plotly_schema, LayoutNode)
+    all_layout_nodes = PlotlyNode.get_all_datatype_nodes(plotly_schema, LayoutNode)
 
-    subplot_nodes = [node for node in layout_node.child_compound_datatypes
-                     if node.node_data.get('_isSubplotObj', False)]
+    subplot_nodes = [
+        node
+        for node in layout_node.child_compound_datatypes
+        if node.node_data.get("_isSubplotObj", False)
+    ]
 
     # ### FrameNode ###
     compound_frame_nodes = PlotlyNode.get_all_compound_datatype_nodes(
-        plotly_schema, FrameNode)
+        plotly_schema, FrameNode
+    )
     frame_node = compound_frame_nodes[0]
-    all_frame_nodes = PlotlyNode.get_all_datatype_nodes(
-        plotly_schema, FrameNode)
+    all_frame_nodes = PlotlyNode.get_all_datatype_nodes(plotly_schema, FrameNode)
 
     # ### All nodes ###
-    all_datatype_nodes = (all_trace_nodes +
-                          all_layout_nodes +
-                          all_frame_nodes)
+    all_datatype_nodes = all_trace_nodes + all_layout_nodes + all_frame_nodes
 
-    all_compound_nodes = [node for node in all_datatype_nodes
-                          if node.is_compound and
-                          not isinstance(node, ElementDefaultsNode)]
+    all_compound_nodes = [
+        node
+        for node in all_datatype_nodes
+        if node.is_compound and not isinstance(node, ElementDefaultsNode)
+    ]
 
     # Write out validators
     # --------------------
@@ -196,12 +199,14 @@ def perform_codegen():
     layout_validator = layout_node.get_validator_instance()
     frame_validator = frame_node.get_validator_instance()
 
-    write_figure_classes(outdir,
-                         base_traces_node,
-                         data_validator,
-                         layout_validator,
-                         frame_validator,
-                         subplot_nodes)
+    write_figure_classes(
+        outdir,
+        base_traces_node,
+        data_validator,
+        layout_validator,
+        frame_validator,
+        subplot_nodes,
+    )
 
     # Write datatype __init__.py files
     # --------------------------------
@@ -214,8 +219,7 @@ def perform_codegen():
         if node.child_compound_datatypes:
 
             path_to_datatype_import_info.setdefault(key, []).append(
-                (f"plotly.graph_objs{node.parent_dotpath_str}",
-                 node.name_undercase)
+                (f"plotly.graph_objs{node.parent_dotpath_str}", node.name_undercase)
             )
 
     # ### Write plotly/graph_objs/graph_objs.py ###
@@ -225,7 +229,7 @@ def perform_codegen():
 
     # ### Add Figure and FigureWidget ###
     root_datatype_imports = path_to_datatype_import_info[()]
-    root_datatype_imports.append(('._figure', 'Figure'))
+    root_datatype_imports.append(("._figure", "Figure"))
 
     optional_figure_widget_import = """
 try:
@@ -241,13 +245,13 @@ except ImportError:
     root_datatype_imports.append(optional_figure_widget_import)
 
     # ### Add deprecations ###
-    root_datatype_imports.append(('._deprecations', DEPRECATED_DATATYPES.keys()))
+    root_datatype_imports.append(("._deprecations", DEPRECATED_DATATYPES.keys()))
 
     # ### Output datatype __init__.py files ###
-    graph_objs_pkg = opath.join(outdir, 'graph_objs')
+    graph_objs_pkg = opath.join(outdir, "graph_objs")
     for path_parts, import_pairs in path_to_datatype_import_info.items():
         write_init_py(graph_objs_pkg, path_parts, import_pairs)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     perform_codegen()

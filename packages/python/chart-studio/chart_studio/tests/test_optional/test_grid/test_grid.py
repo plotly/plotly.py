@@ -19,13 +19,12 @@ class TestDataframeToGrid(TestCase):
 
     # Test duplicate columns
     def test_duplicate_columns(self):
-        df = pd.DataFrame([[1, 'a'], [2, 'b']],
-                          columns=['col_1', 'col_1'])
+        df = pd.DataFrame([[1, "a"], [2, "b"]], columns=["col_1", "col_1"])
 
         expected_message = (
             "Yikes, plotly grids currently "
             "can't have duplicate column names. Rename "
-            "the column \"{}\" and try again.".format('col_1')
+            'the column "{}" and try again.'.format("col_1")
         )
 
         with self.assertRaisesRegexp(InputError, expected_message):

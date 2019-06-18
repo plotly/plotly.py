@@ -3,7 +3,7 @@ from __future__ import absolute_import
 
 from chart_studio.api.v2.utils import build_url, request
 
-RESOURCE = 'users'
+RESOURCE = "users"
 
 
 def current():
@@ -13,5 +13,5 @@ def current():
     :returns: (requests.Response) Returns response directly from requests.
 
     """
-    url = build_url(RESOURCE, route='current')
-    return request('get', url)
+    url = build_url(RESOURCE, route="current")
+    return request("get", url)

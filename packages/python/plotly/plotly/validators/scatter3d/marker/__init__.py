@@ -1,22 +1,16 @@
-
-
 import _plotly_utils.basevalidators
 
 
 class SymbolsrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
     def __init__(
-        self,
-        plotly_name='symbolsrc',
-        parent_name='scatter3d.marker',
-        **kwargs
+        self, plotly_name="symbolsrc", parent_name="scatter3d.marker", **kwargs
     ):
         super(SymbolsrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -24,23 +18,27 @@ import _plotly_utils.basevalidators
 
 
 class SymbolValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(
-        self, plotly_name='symbol', parent_name='scatter3d.marker', **kwargs
-    ):
+    def __init__(self, plotly_name="symbol", parent_name="scatter3d.marker", **kwargs):
         super(SymbolValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'style'),
+            array_ok=kwargs.pop("array_ok", True),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "style"),
             values=kwargs.pop(
-                'values', [
-                    'circle', 'circle-open', 'square', 'square-open',
-                    'diamond', 'diamond-open', 'cross', 'x'
-                ]
+                "values",
+                [
+                    "circle",
+                    "circle-open",
+                    "square",
+                    "square-open",
+                    "diamond",
+                    "diamond-open",
+                    "cross",
+                    "x",
+                ],
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -48,16 +46,13 @@ import _plotly_utils.basevalidators
 
 
 class SizesrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(
-        self, plotly_name='sizesrc', parent_name='scatter3d.marker', **kwargs
-    ):
+    def __init__(self, plotly_name="sizesrc", parent_name="scatter3d.marker", **kwargs):
         super(SizesrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -65,16 +60,13 @@ import _plotly_utils.basevalidators
 
 
 class SizerefValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='sizeref', parent_name='scatter3d.marker', **kwargs
-    ):
+    def __init__(self, plotly_name="sizeref", parent_name="scatter3d.marker", **kwargs):
         super(SizerefValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'style'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "style"),
+            **kwargs,
         )
 
 
@@ -82,17 +74,16 @@ import _plotly_utils.basevalidators
 
 
 class SizemodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
     def __init__(
-        self, plotly_name='sizemode', parent_name='scatter3d.marker', **kwargs
+        self, plotly_name="sizemode", parent_name="scatter3d.marker", **kwargs
     ):
         super(SizemodeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
-            values=kwargs.pop('values', ['diameter', 'area']),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
+            values=kwargs.pop("values", ["diameter", "area"]),
+            **kwargs,
         )
 
 
@@ -100,17 +91,14 @@ import _plotly_utils.basevalidators
 
 
 class SizeminValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='sizemin', parent_name='scatter3d.marker', **kwargs
-    ):
+    def __init__(self, plotly_name="sizemin", parent_name="scatter3d.marker", **kwargs):
         super(SizeminValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            min=kwargs.pop('min', 0),
-            role=kwargs.pop('role', 'style'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            min=kwargs.pop("min", 0),
+            role=kwargs.pop("role", "style"),
+            **kwargs,
         )
 
 
@@ -118,19 +106,16 @@ import _plotly_utils.basevalidators
 
 
 class SizeValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='size', parent_name='scatter3d.marker', **kwargs
-    ):
+    def __init__(self, plotly_name="size", parent_name="scatter3d.marker", **kwargs):
         super(SizeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop('anim', True),
-            array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            min=kwargs.pop('min', 0),
-            role=kwargs.pop('role', 'style'),
-            **kwargs
+            anim=kwargs.pop("anim", True),
+            array_ok=kwargs.pop("array_ok", True),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            min=kwargs.pop("min", 0),
+            role=kwargs.pop("role", "style"),
+            **kwargs,
         )
 
 
@@ -138,19 +123,15 @@ import _plotly_utils.basevalidators
 
 
 class ShowscaleValidator(_plotly_utils.basevalidators.BooleanValidator):
-
     def __init__(
-        self,
-        plotly_name='showscale',
-        parent_name='scatter3d.marker',
-        **kwargs
+        self, plotly_name="showscale", parent_name="scatter3d.marker", **kwargs
     ):
         super(ShowscaleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -158,19 +139,15 @@ import _plotly_utils.basevalidators
 
 
 class ReversescaleValidator(_plotly_utils.basevalidators.BooleanValidator):
-
     def __init__(
-        self,
-        plotly_name='reversescale',
-        parent_name='scatter3d.marker',
-        **kwargs
+        self, plotly_name="reversescale", parent_name="scatter3d.marker", **kwargs
     ):
         super(ReversescaleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'style'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "style"),
+            **kwargs,
         )
 
 
@@ -178,20 +155,17 @@ import _plotly_utils.basevalidators
 
 
 class OpacityValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='opacity', parent_name='scatter3d.marker', **kwargs
-    ):
+    def __init__(self, plotly_name="opacity", parent_name="scatter3d.marker", **kwargs):
         super(OpacityValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop('anim', True),
-            array_ok=kwargs.pop('array_ok', False),
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            max=kwargs.pop('max', 1),
-            min=kwargs.pop('min', 0),
-            role=kwargs.pop('role', 'style'),
-            **kwargs
+            anim=kwargs.pop("anim", True),
+            array_ok=kwargs.pop("array_ok", False),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            max=kwargs.pop("max", 1),
+            min=kwargs.pop("min", 0),
+            role=kwargs.pop("role", "style"),
+            **kwargs,
         )
 
 
@@ -199,16 +173,14 @@ import _plotly_utils.basevalidators
 
 
 class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='line', parent_name='scatter3d.marker', **kwargs
-    ):
+    def __init__(self, plotly_name="line", parent_name="scatter3d.marker", **kwargs):
         super(LineValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Line'),
+            data_class_str=kwargs.pop("data_class_str", "Line"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             autocolorscale
                 Determines whether the colorscale is a default
                 palette (`autocolorscale: true`) or the palette
@@ -294,9 +266,9 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
             width
                 Sets the width (in px) of the lines bounding
                 the marker points.
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -304,16 +276,15 @@ import _plotly_utils.basevalidators
 
 
 class ColorsrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
     def __init__(
-        self, plotly_name='colorsrc', parent_name='scatter3d.marker', **kwargs
+        self, plotly_name="colorsrc", parent_name="scatter3d.marker", **kwargs
     ):
         super(ColorsrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -321,22 +292,16 @@ import _plotly_utils.basevalidators
 
 
 class ColorscaleValidator(_plotly_utils.basevalidators.ColorscaleValidator):
-
     def __init__(
-        self,
-        plotly_name='colorscale',
-        parent_name='scatter3d.marker',
-        **kwargs
+        self, plotly_name="colorscale", parent_name="scatter3d.marker", **kwargs
     ):
         super(ColorscaleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            implied_edits=kwargs.pop(
-                'implied_edits', {'autocolorscale': False}
-            ),
-            role=kwargs.pop('role', 'style'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            implied_edits=kwargs.pop("implied_edits", {"autocolorscale": False}),
+            role=kwargs.pop("role", "style"),
+            **kwargs,
         )
 
 
@@ -344,16 +309,16 @@ import _plotly_utils.basevalidators
 
 
 class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
-
     def __init__(
-        self, plotly_name='colorbar', parent_name='scatter3d.marker', **kwargs
+        self, plotly_name="colorbar", parent_name="scatter3d.marker", **kwargs
     ):
         super(ColorBarValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'ColorBar'),
+            data_class_str=kwargs.pop("data_class_str", "ColorBar"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             bgcolor
                 Sets the color of padded area.
             bordercolor
@@ -564,9 +529,9 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
             ypad
                 Sets the amount of padding (in px) along the y
                 direction.
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -574,21 +539,17 @@ import _plotly_utils.basevalidators
 
 
 class ColoraxisValidator(_plotly_utils.basevalidators.SubplotidValidator):
-
     def __init__(
-        self,
-        plotly_name='coloraxis',
-        parent_name='scatter3d.marker',
-        **kwargs
+        self, plotly_name="coloraxis", parent_name="scatter3d.marker", **kwargs
     ):
         super(ColoraxisValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            dflt=kwargs.pop('dflt', None),
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            regex=kwargs.pop('regex', '/^coloraxis([2-9]|[1-9][0-9]+)?$/'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            dflt=kwargs.pop("dflt", None),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            regex=kwargs.pop("regex", "/^coloraxis([2-9]|[1-9][0-9]+)?$/"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -596,20 +557,17 @@ import _plotly_utils.basevalidators
 
 
 class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
-
-    def __init__(
-        self, plotly_name='color', parent_name='scatter3d.marker', **kwargs
-    ):
+    def __init__(self, plotly_name="color", parent_name="scatter3d.marker", **kwargs):
         super(ColorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'style'),
+            array_ok=kwargs.pop("array_ok", True),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "style"),
             colorscale_path=kwargs.pop(
-                'colorscale_path', 'scatter3d.marker.colorscale'
+                "colorscale_path", "scatter3d.marker.colorscale"
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -617,17 +575,14 @@ import _plotly_utils.basevalidators
 
 
 class CminValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='cmin', parent_name='scatter3d.marker', **kwargs
-    ):
+    def __init__(self, plotly_name="cmin", parent_name="scatter3d.marker", **kwargs):
         super(CminValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            implied_edits=kwargs.pop('implied_edits', {'cauto': False}),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            implied_edits=kwargs.pop("implied_edits", {"cauto": False}),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -635,17 +590,14 @@ import _plotly_utils.basevalidators
 
 
 class CmidValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='cmid', parent_name='scatter3d.marker', **kwargs
-    ):
+    def __init__(self, plotly_name="cmid", parent_name="scatter3d.marker", **kwargs):
         super(CmidValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            implied_edits=kwargs.pop('implied_edits', {}),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            implied_edits=kwargs.pop("implied_edits", {}),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -653,17 +605,14 @@ import _plotly_utils.basevalidators
 
 
 class CmaxValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='cmax', parent_name='scatter3d.marker', **kwargs
-    ):
+    def __init__(self, plotly_name="cmax", parent_name="scatter3d.marker", **kwargs):
         super(CmaxValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            implied_edits=kwargs.pop('implied_edits', {'cauto': False}),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            implied_edits=kwargs.pop("implied_edits", {"cauto": False}),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -671,17 +620,14 @@ import _plotly_utils.basevalidators
 
 
 class CautoValidator(_plotly_utils.basevalidators.BooleanValidator):
-
-    def __init__(
-        self, plotly_name='cauto', parent_name='scatter3d.marker', **kwargs
-    ):
+    def __init__(self, plotly_name="cauto", parent_name="scatter3d.marker", **kwargs):
         super(CautoValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            implied_edits=kwargs.pop('implied_edits', {}),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            implied_edits=kwargs.pop("implied_edits", {}),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -689,18 +635,14 @@ import _plotly_utils.basevalidators
 
 
 class AutocolorscaleValidator(_plotly_utils.basevalidators.BooleanValidator):
-
     def __init__(
-        self,
-        plotly_name='autocolorscale',
-        parent_name='scatter3d.marker',
-        **kwargs
+        self, plotly_name="autocolorscale", parent_name="scatter3d.marker", **kwargs
     ):
         super(AutocolorscaleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            implied_edits=kwargs.pop('implied_edits', {}),
-            role=kwargs.pop('role', 'style'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            implied_edits=kwargs.pop("implied_edits", {}),
+            role=kwargs.pop("role", "style"),
+            **kwargs,
         )

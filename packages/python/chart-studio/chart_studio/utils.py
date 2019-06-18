@@ -18,14 +18,13 @@ from _plotly_utils.exceptions import PlotlyError
 from _plotly_utils.optional_imports import get_module
 
 # Optional imports, may be None for users that only use our core functionality.
-numpy = get_module('numpy')
-pandas = get_module('pandas')
-sage_all = get_module('sage.all')
+numpy = get_module("numpy")
+pandas = get_module("pandas")
+sage_all = get_module("sage.all")
 
 
 ### incase people are using threading, we lock file reads
 lock = threading.Lock()
-
 
 
 http_msg = (
@@ -53,6 +52,7 @@ http_msg = (
 
 
 ### general file setup tools ###
+
 
 def load_json_dict(filename, *args):
     """Checks if file exists. Returns {} if something fails."""
@@ -90,7 +90,7 @@ def ensure_file_exists(filename):
     if not os.path.exists(filename):
         head, tail = os.path.split(filename)
         ensure_dir_exists(head)
-        with open(filename, 'w') as f:
+        with open(filename, "w") as f:
             pass  # just create the file
 
 
@@ -113,7 +113,7 @@ def get_first_duplicate(items):
 
 ### source key
 def is_source_key(key):
-    src_regex = re.compile(r'.+src$')
+    src_regex = re.compile(r".+src$")
     if src_regex.match(key) is not None:
         return True
     else:
@@ -122,25 +122,35 @@ def is_source_key(key):
 
 ### validation
 def validate_world_readable_and_sharing_settings(option_set):
-    if ('world_readable' in option_set and
-        option_set['world_readable'] is True and
-        'sharing' in option_set and
-        option_set['sharing'] is not None and
-            option_set['sharing'] != 'public'):
+    if (
+        "world_readable" in option_set
+        and option_set["world_readable"] is True
+        and "sharing" in option_set
+        and option_set["sharing"] is not None
+        and option_set["sharing"] != "public"
+    ):
         raise PlotlyError(
             "Looks like you are setting your plot privacy to both "
             "public and private.\n If you set world_readable as True, "
-            "sharing can only be set to 'public'")
-    elif ('world_readable' in option_set and
-          option_set['world_readable'] is False and
-          'sharing' in option_set and
-          option_set['sharing'] == 'public'):
+            "sharing can only be set to 'public'"
+        )
+    elif (
+        "world_readable" in option_set
+        and option_set["world_readable"] is False
+        and "sharing" in option_set
+        and option_set["sharing"] == "public"
+    ):
         raise PlotlyError(
             "Looks like you are setting your plot privacy to both "
             "public and private.\n If you set world_readable as "
-            "False, sharing can only be set to 'private' or 'secret'")
-    elif ('sharing' in option_set and
-          option_set['sharing'] not in ['public', 'private', 'secret', None]):
+            "False, sharing can only be set to 'private' or 'secret'"
+        )
+    elif "sharing" in option_set and option_set["sharing"] not in [
+        "public",
+        "private",
+        "secret",
+        None,
+    ]:
         raise PlotlyError(
             "The 'sharing' argument only accepts one of the following "
             "strings:\n'public' -- for public plots\n"
@@ -152,21 +162,20 @@ def validate_world_readable_and_sharing_settings(option_set):
 
 def validate_plotly_domains(option_set):
     domains_not_none = []
-    for d in ['plotly_domain', 'plotly_api_domain']:
+    for d in ["plotly_domain", "plotly_api_domain"]:
         if d in option_set and option_set[d]:
             domains_not_none.append(option_set[d])
 
-    if not all(d.lower().startswith('https') for d in domains_not_none):
+    if not all(d.lower().startswith("https") for d in domains_not_none):
         warnings.warn(http_msg, category=UserWarning)
 
 
 def set_sharing_and_world_readable(option_set):
-    if 'world_readable' in option_set and 'sharing' not in option_set:
-        option_set['sharing'] = (
-            'public' if option_set['world_readable'] else 'private')
+    if "world_readable" in option_set and "sharing" not in option_set:
+        option_set["sharing"] = "public" if option_set["world_readable"] else "private"
 
-    elif 'sharing' in option_set and 'world_readable' not in option_set:
-        if option_set['sharing'] == 'public':
-            option_set['world_readable'] = True
+    elif "sharing" in option_set and "world_readable" not in option_set:
+        if option_set["sharing"] == "public":
+            option_set["world_readable"] = True
         else:
-            option_set['world_readable'] = False
+            option_set["world_readable"] = False

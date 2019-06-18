@@ -1,20 +1,15 @@
-
-
 import _plotly_utils.basevalidators
 
 
 class VisibleValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(
-        self, plotly_name='visible', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="visible", parent_name="scatterpolar", **kwargs):
         super(VisibleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
-            values=kwargs.pop('values', [True, False, 'legendonly']),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
+            values=kwargs.pop("values", [True, False, "legendonly"]),
+            **kwargs,
         )
 
 
@@ -22,25 +17,23 @@ import _plotly_utils.basevalidators
 
 
 class UnselectedValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='unselected', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="unselected", parent_name="scatterpolar", **kwargs):
         super(UnselectedValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Unselected'),
+            data_class_str=kwargs.pop("data_class_str", "Unselected"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             marker
                 plotly.graph_objs.scatterpolar.unselected.Marke
                 r instance or dict with compatible properties
             textfont
                 plotly.graph_objs.scatterpolar.unselected.Textf
                 ont instance or dict with compatible properties
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -48,16 +41,13 @@ import _plotly_utils.basevalidators
 
 
 class UirevisionValidator(_plotly_utils.basevalidators.AnyValidator):
-
-    def __init__(
-        self, plotly_name='uirevision', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="uirevision", parent_name="scatterpolar", **kwargs):
         super(UirevisionValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -65,17 +55,14 @@ import _plotly_utils.basevalidators
 
 
 class UidValidator(_plotly_utils.basevalidators.StringValidator):
-
-    def __init__(
-        self, plotly_name='uid', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="uid", parent_name="scatterpolar", **kwargs):
         super(UidValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop('anim', True),
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            anim=kwargs.pop("anim", True),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -83,17 +70,14 @@ import _plotly_utils.basevalidators
 
 
 class ThetaunitValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(
-        self, plotly_name='thetaunit', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="thetaunit", parent_name="scatterpolar", **kwargs):
         super(ThetaunitValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc+clearAxisTypes'),
-            role=kwargs.pop('role', 'info'),
-            values=kwargs.pop('values', ['radians', 'degrees', 'gradians']),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
+            role=kwargs.pop("role", "info"),
+            values=kwargs.pop("values", ["radians", "degrees", "gradians"]),
+            **kwargs,
         )
 
 
@@ -101,16 +85,13 @@ import _plotly_utils.basevalidators
 
 
 class ThetasrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(
-        self, plotly_name='thetasrc', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="thetasrc", parent_name="scatterpolar", **kwargs):
         super(ThetasrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -118,16 +99,13 @@ import _plotly_utils.basevalidators
 
 
 class Theta0Validator(_plotly_utils.basevalidators.AnyValidator):
-
-    def __init__(
-        self, plotly_name='theta0', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="theta0", parent_name="scatterpolar", **kwargs):
         super(Theta0Validator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc+clearAxisTypes'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -135,16 +113,13 @@ import _plotly_utils.basevalidators
 
 
 class ThetaValidator(_plotly_utils.basevalidators.DataArrayValidator):
-
-    def __init__(
-        self, plotly_name='theta', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="theta", parent_name="scatterpolar", **kwargs):
         super(ThetaValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc+clearAxisTypes'),
-            role=kwargs.pop('role', 'data'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
+            role=kwargs.pop("role", "data"),
+            **kwargs,
         )
 
 
@@ -152,16 +127,13 @@ import _plotly_utils.basevalidators
 
 
 class TextsrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(
-        self, plotly_name='textsrc', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="textsrc", parent_name="scatterpolar", **kwargs):
         super(TextsrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -169,19 +141,15 @@ import _plotly_utils.basevalidators
 
 
 class TextpositionsrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
     def __init__(
-        self,
-        plotly_name='textpositionsrc',
-        parent_name='scatterpolar',
-        **kwargs
+        self, plotly_name="textpositionsrc", parent_name="scatterpolar", **kwargs
     ):
         super(TextpositionsrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -189,24 +157,30 @@ import _plotly_utils.basevalidators
 
 
 class TextpositionValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
     def __init__(
-        self, plotly_name='textposition', parent_name='scatterpolar', **kwargs
+        self, plotly_name="textposition", parent_name="scatterpolar", **kwargs
     ):
         super(TextpositionValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'style'),
+            array_ok=kwargs.pop("array_ok", True),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "style"),
             values=kwargs.pop(
-                'values', [
-                    'top left', 'top center', 'top right', 'middle left',
-                    'middle center', 'middle right', 'bottom left',
-                    'bottom center', 'bottom right'
-                ]
+                "values",
+                [
+                    "top left",
+                    "top center",
+                    "top right",
+                    "middle left",
+                    "middle center",
+                    "middle right",
+                    "bottom left",
+                    "bottom center",
+                    "bottom right",
+                ],
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -214,16 +188,14 @@ import _plotly_utils.basevalidators
 
 
 class TextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='textfont', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="textfont", parent_name="scatterpolar", **kwargs):
         super(TextfontValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Textfont'),
+            data_class_str=kwargs.pop("data_class_str", "Textfont"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             color
 
             colorsrc
@@ -253,9 +225,9 @@ class TextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
             sizesrc
                 Sets the source reference on plot.ly for  size
                 .
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -263,17 +235,14 @@ import _plotly_utils.basevalidators
 
 
 class TextValidator(_plotly_utils.basevalidators.StringValidator):
-
-    def __init__(
-        self, plotly_name='text', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="text", parent_name="scatterpolar", **kwargs):
         super(TextValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            array_ok=kwargs.pop("array_ok", True),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -281,17 +250,14 @@ import _plotly_utils.basevalidators
 
 
 class SubplotValidator(_plotly_utils.basevalidators.SubplotidValidator):
-
-    def __init__(
-        self, plotly_name='subplot', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="subplot", parent_name="scatterpolar", **kwargs):
         super(SubplotValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            dflt=kwargs.pop('dflt', 'polar'),
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            dflt=kwargs.pop("dflt", "polar"),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -299,16 +265,14 @@ import _plotly_utils.basevalidators
 
 
 class StreamValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='stream', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="stream", parent_name="scatterpolar", **kwargs):
         super(StreamValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Stream'),
+            data_class_str=kwargs.pop("data_class_str", "Stream"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             maxpoints
                 Sets the maximum number of points to keep on
                 the plots from an incoming stream. If
@@ -318,9 +282,9 @@ class StreamValidator(_plotly_utils.basevalidators.CompoundValidator):
                 The stream id number links a data trace on a
                 plot with a stream. See
                 https://plot.ly/settings for more details.
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -328,16 +292,13 @@ import _plotly_utils.basevalidators
 
 
 class ShowlegendValidator(_plotly_utils.basevalidators.BooleanValidator):
-
-    def __init__(
-        self, plotly_name='showlegend', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="showlegend", parent_name="scatterpolar", **kwargs):
         super(ShowlegendValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'style'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "style"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -345,19 +306,15 @@ import _plotly_utils.basevalidators
 
 
 class SelectedpointsValidator(_plotly_utils.basevalidators.AnyValidator):
-
     def __init__(
-        self,
-        plotly_name='selectedpoints',
-        parent_name='scatterpolar',
-        **kwargs
+        self, plotly_name="selectedpoints", parent_name="scatterpolar", **kwargs
     ):
         super(SelectedpointsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -365,25 +322,23 @@ import _plotly_utils.basevalidators
 
 
 class SelectedValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='selected', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="selected", parent_name="scatterpolar", **kwargs):
         super(SelectedValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Selected'),
+            data_class_str=kwargs.pop("data_class_str", "Selected"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             marker
                 plotly.graph_objs.scatterpolar.selected.Marker
                 instance or dict with compatible properties
             textfont
                 plotly.graph_objs.scatterpolar.selected.Textfon
                 t instance or dict with compatible properties
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -391,16 +346,13 @@ import _plotly_utils.basevalidators
 
 
 class RsrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(
-        self, plotly_name='rsrc', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="rsrc", parent_name="scatterpolar", **kwargs):
         super(RsrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -408,14 +360,13 @@ import _plotly_utils.basevalidators
 
 
 class R0Validator(_plotly_utils.basevalidators.AnyValidator):
-
-    def __init__(self, plotly_name='r0', parent_name='scatterpolar', **kwargs):
+    def __init__(self, plotly_name="r0", parent_name="scatterpolar", **kwargs):
         super(R0Validator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc+clearAxisTypes'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -423,14 +374,13 @@ import _plotly_utils.basevalidators
 
 
 class RValidator(_plotly_utils.basevalidators.DataArrayValidator):
-
-    def __init__(self, plotly_name='r', parent_name='scatterpolar', **kwargs):
+    def __init__(self, plotly_name="r", parent_name="scatterpolar", **kwargs):
         super(RValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc+clearAxisTypes'),
-            role=kwargs.pop('role', 'data'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
+            role=kwargs.pop("role", "data"),
+            **kwargs,
         )
 
 
@@ -438,18 +388,15 @@ import _plotly_utils.basevalidators
 
 
 class OpacityValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='opacity', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="opacity", parent_name="scatterpolar", **kwargs):
         super(OpacityValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'style'),
-            max=kwargs.pop('max', 1),
-            min=kwargs.pop('min', 0),
-            role=kwargs.pop('role', 'style'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "style"),
+            max=kwargs.pop("max", 1),
+            min=kwargs.pop("min", 0),
+            role=kwargs.pop("role", "style"),
+            **kwargs,
         )
 
 
@@ -457,16 +404,13 @@ import _plotly_utils.basevalidators
 
 
 class NameValidator(_plotly_utils.basevalidators.StringValidator):
-
-    def __init__(
-        self, plotly_name='name', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="name", parent_name="scatterpolar", **kwargs):
         super(NameValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'style'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "style"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -474,18 +418,15 @@ import _plotly_utils.basevalidators
 
 
 class ModeValidator(_plotly_utils.basevalidators.FlaglistValidator):
-
-    def __init__(
-        self, plotly_name='mode', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="mode", parent_name="scatterpolar", **kwargs):
         super(ModeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            extras=kwargs.pop('extras', ['none']),
-            flags=kwargs.pop('flags', ['lines', 'markers', 'text']),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            extras=kwargs.pop("extras", ["none"]),
+            flags=kwargs.pop("flags", ["lines", "markers", "text"]),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -493,16 +434,13 @@ import _plotly_utils.basevalidators
 
 
 class MetasrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(
-        self, plotly_name='metasrc', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="metasrc", parent_name="scatterpolar", **kwargs):
         super(MetasrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -510,17 +448,14 @@ import _plotly_utils.basevalidators
 
 
 class MetaValidator(_plotly_utils.basevalidators.AnyValidator):
-
-    def __init__(
-        self, plotly_name='meta', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="meta", parent_name="scatterpolar", **kwargs):
         super(MetaValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            array_ok=kwargs.pop("array_ok", True),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -528,16 +463,14 @@ import _plotly_utils.basevalidators
 
 
 class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='marker', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="marker", parent_name="scatterpolar", **kwargs):
         super(MarkerValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Marker'),
+            data_class_str=kwargs.pop("data_class_str", "Marker"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             autocolorscale
                 Determines whether the colorscale is a default
                 palette (`autocolorscale: true`) or the palette
@@ -666,9 +599,9 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
             symbolsrc
                 Sets the source reference on plot.ly for
                 symbol .
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -676,16 +609,14 @@ import _plotly_utils.basevalidators
 
 
 class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='line', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="line", parent_name="scatterpolar", **kwargs):
         super(LineValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Line'),
+            data_class_str=kwargs.pop("data_class_str", "Line"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             color
                 Sets the line color.
             dash
@@ -705,9 +636,9 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "linear" shape).
             width
                 Sets the line width (in px).
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -715,16 +646,13 @@ import _plotly_utils.basevalidators
 
 
 class LegendgroupValidator(_plotly_utils.basevalidators.StringValidator):
-
-    def __init__(
-        self, plotly_name='legendgroup', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="legendgroup", parent_name="scatterpolar", **kwargs):
         super(LegendgroupValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'style'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "style"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -732,16 +660,13 @@ import _plotly_utils.basevalidators
 
 
 class IdssrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(
-        self, plotly_name='idssrc', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="idssrc", parent_name="scatterpolar", **kwargs):
         super(IdssrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -749,17 +674,14 @@ import _plotly_utils.basevalidators
 
 
 class IdsValidator(_plotly_utils.basevalidators.DataArrayValidator):
-
-    def __init__(
-        self, plotly_name='ids', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="ids", parent_name="scatterpolar", **kwargs):
         super(IdsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop('anim', True),
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'data'),
-            **kwargs
+            anim=kwargs.pop("anim", True),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "data"),
+            **kwargs,
         )
 
 
@@ -767,16 +689,15 @@ import _plotly_utils.basevalidators
 
 
 class HovertextsrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
     def __init__(
-        self, plotly_name='hovertextsrc', parent_name='scatterpolar', **kwargs
+        self, plotly_name="hovertextsrc", parent_name="scatterpolar", **kwargs
     ):
         super(HovertextsrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -784,17 +705,14 @@ import _plotly_utils.basevalidators
 
 
 class HovertextValidator(_plotly_utils.basevalidators.StringValidator):
-
-    def __init__(
-        self, plotly_name='hovertext', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="hovertext", parent_name="scatterpolar", **kwargs):
         super(HovertextValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'style'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            array_ok=kwargs.pop("array_ok", True),
+            edit_type=kwargs.pop("edit_type", "style"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -802,19 +720,15 @@ import _plotly_utils.basevalidators
 
 
 class HovertemplatesrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
     def __init__(
-        self,
-        plotly_name='hovertemplatesrc',
-        parent_name='scatterpolar',
-        **kwargs
+        self, plotly_name="hovertemplatesrc", parent_name="scatterpolar", **kwargs
     ):
         super(HovertemplatesrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -822,20 +736,16 @@ import _plotly_utils.basevalidators
 
 
 class HovertemplateValidator(_plotly_utils.basevalidators.StringValidator):
-
     def __init__(
-        self,
-        plotly_name='hovertemplate',
-        parent_name='scatterpolar',
-        **kwargs
+        self, plotly_name="hovertemplate", parent_name="scatterpolar", **kwargs
     ):
         super(HovertemplateValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            array_ok=kwargs.pop("array_ok", True),
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -843,17 +753,14 @@ import _plotly_utils.basevalidators
 
 
 class HoveronValidator(_plotly_utils.basevalidators.FlaglistValidator):
-
-    def __init__(
-        self, plotly_name='hoveron', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="hoveron", parent_name="scatterpolar", **kwargs):
         super(HoveronValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'style'),
-            flags=kwargs.pop('flags', ['points', 'fills']),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "style"),
+            flags=kwargs.pop("flags", ["points", "fills"]),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -861,16 +768,14 @@ import _plotly_utils.basevalidators
 
 
 class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='hoverlabel', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="hoverlabel", parent_name="scatterpolar", **kwargs):
         super(HoverlabelValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Hoverlabel'),
+            data_class_str=kwargs.pop("data_class_str", "Hoverlabel"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             align
                 Sets the horizontal alignment of the text
                 content within hover label box. Has an effect
@@ -906,9 +811,9 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
             namelengthsrc
                 Sets the source reference on plot.ly for
                 namelength .
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -916,16 +821,15 @@ import _plotly_utils.basevalidators
 
 
 class HoverinfosrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
     def __init__(
-        self, plotly_name='hoverinfosrc', parent_name='scatterpolar', **kwargs
+        self, plotly_name="hoverinfosrc", parent_name="scatterpolar", **kwargs
     ):
         super(HoverinfosrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -933,19 +837,16 @@ import _plotly_utils.basevalidators
 
 
 class HoverinfoValidator(_plotly_utils.basevalidators.FlaglistValidator):
-
-    def __init__(
-        self, plotly_name='hoverinfo', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="hoverinfo", parent_name="scatterpolar", **kwargs):
         super(HoverinfoValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'none'),
-            extras=kwargs.pop('extras', ['all', 'none', 'skip']),
-            flags=kwargs.pop('flags', ['r', 'theta', 'text', 'name']),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            array_ok=kwargs.pop("array_ok", True),
+            edit_type=kwargs.pop("edit_type", "none"),
+            extras=kwargs.pop("extras", ["all", "none", "skip"]),
+            flags=kwargs.pop("flags", ["r", "theta", "text", "name"]),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -953,17 +854,14 @@ import _plotly_utils.basevalidators
 
 
 class FillcolorValidator(_plotly_utils.basevalidators.ColorValidator):
-
-    def __init__(
-        self, plotly_name='fillcolor', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="fillcolor", parent_name="scatterpolar", **kwargs):
         super(FillcolorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop('anim', True),
-            edit_type=kwargs.pop('edit_type', 'style'),
-            role=kwargs.pop('role', 'style'),
-            **kwargs
+            anim=kwargs.pop("anim", True),
+            edit_type=kwargs.pop("edit_type", "style"),
+            role=kwargs.pop("role", "style"),
+            **kwargs,
         )
 
 
@@ -971,17 +869,14 @@ import _plotly_utils.basevalidators
 
 
 class FillValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(
-        self, plotly_name='fill', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="fill", parent_name="scatterpolar", **kwargs):
         super(FillValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'style'),
-            values=kwargs.pop('values', ['none', 'toself', 'tonext']),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "style"),
+            values=kwargs.pop("values", ["none", "toself", "tonext"]),
+            **kwargs,
         )
 
 
@@ -989,16 +884,13 @@ import _plotly_utils.basevalidators
 
 
 class DthetaValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='dtheta', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="dtheta", parent_name="scatterpolar", **kwargs):
         super(DthetaValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -1006,14 +898,13 @@ import _plotly_utils.basevalidators
 
 
 class DrValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(self, plotly_name='dr', parent_name='scatterpolar', **kwargs):
+    def __init__(self, plotly_name="dr", parent_name="scatterpolar", **kwargs):
         super(DrValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -1021,19 +912,15 @@ import _plotly_utils.basevalidators
 
 
 class CustomdatasrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
     def __init__(
-        self,
-        plotly_name='customdatasrc',
-        parent_name='scatterpolar',
-        **kwargs
+        self, plotly_name="customdatasrc", parent_name="scatterpolar", **kwargs
     ):
         super(CustomdatasrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -1041,16 +928,13 @@ import _plotly_utils.basevalidators
 
 
 class CustomdataValidator(_plotly_utils.basevalidators.DataArrayValidator):
-
-    def __init__(
-        self, plotly_name='customdata', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="customdata", parent_name="scatterpolar", **kwargs):
         super(CustomdataValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'data'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "data"),
+            **kwargs,
         )
 
 
@@ -1058,16 +942,13 @@ import _plotly_utils.basevalidators
 
 
 class ConnectgapsValidator(_plotly_utils.basevalidators.BooleanValidator):
-
-    def __init__(
-        self, plotly_name='connectgaps', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="connectgaps", parent_name="scatterpolar", **kwargs):
         super(ConnectgapsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -1075,14 +956,11 @@ import _plotly_utils.basevalidators
 
 
 class CliponaxisValidator(_plotly_utils.basevalidators.BooleanValidator):
-
-    def __init__(
-        self, plotly_name='cliponaxis', parent_name='scatterpolar', **kwargs
-    ):
+    def __init__(self, plotly_name="cliponaxis", parent_name="scatterpolar", **kwargs):
         super(CliponaxisValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )

@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -23,11 +21,11 @@ class Z(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['fill']
+        return self["fill"]
 
     @fill.setter
     def fill(self, val):
-        self['fill'] = val
+        self["fill"] = val
 
     # locations
     # ---------
@@ -45,11 +43,11 @@ class Z(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['locations']
+        return self["locations"]
 
     @locations.setter
     def locations(self, val):
-        self['locations'] = val
+        self["locations"] = val
 
     # locationssrc
     # ------------
@@ -65,11 +63,11 @@ class Z(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['locationssrc']
+        return self["locationssrc"]
 
     @locationssrc.setter
     def locationssrc(self, val):
-        self['locationssrc'] = val
+        self["locationssrc"] = val
 
     # show
     # ----
@@ -86,17 +84,17 @@ class Z(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['show']
+        return self["show"]
 
     @show.setter
     def show(self, val):
-        self['show'] = val
+        self["show"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'isosurface.slices'
+        return "isosurface.slices"
 
     # Self properties description
     # ---------------------------
@@ -127,7 +125,7 @@ class Z(_BaseTraceHierarchyType):
         locations=None,
         locationssrc=None,
         show=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Z object
@@ -157,7 +155,7 @@ class Z(_BaseTraceHierarchyType):
         -------
         Z
         """
-        super(Z, self).__init__('z')
+        super(Z, self).__init__("z")
 
         # Validate arg
         # ------------
@@ -177,29 +175,29 @@ an instance of plotly.graph_objs.isosurface.slices.Z"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.isosurface.slices import (z as v_z)
+        from plotly.validators.isosurface.slices import z as v_z
 
         # Initialize validators
         # ---------------------
-        self._validators['fill'] = v_z.FillValidator()
-        self._validators['locations'] = v_z.LocationsValidator()
-        self._validators['locationssrc'] = v_z.LocationssrcValidator()
-        self._validators['show'] = v_z.ShowValidator()
+        self._validators["fill"] = v_z.FillValidator()
+        self._validators["locations"] = v_z.LocationsValidator()
+        self._validators["locationssrc"] = v_z.LocationssrcValidator()
+        self._validators["show"] = v_z.ShowValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('fill', None)
-        self['fill'] = fill if fill is not None else _v
-        _v = arg.pop('locations', None)
-        self['locations'] = locations if locations is not None else _v
-        _v = arg.pop('locationssrc', None)
-        self['locationssrc'] = locationssrc if locationssrc is not None else _v
-        _v = arg.pop('show', None)
-        self['show'] = show if show is not None else _v
+        _v = arg.pop("fill", None)
+        self["fill"] = fill if fill is not None else _v
+        _v = arg.pop("locations", None)
+        self["locations"] = locations if locations is not None else _v
+        _v = arg.pop("locationssrc", None)
+        self["locationssrc"] = locationssrc if locationssrc is not None else _v
+        _v = arg.pop("show", None)
+        self["show"] = show if show is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -233,11 +231,11 @@ class Y(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['fill']
+        return self["fill"]
 
     @fill.setter
     def fill(self, val):
-        self['fill'] = val
+        self["fill"] = val
 
     # locations
     # ---------
@@ -255,11 +253,11 @@ class Y(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['locations']
+        return self["locations"]
 
     @locations.setter
     def locations(self, val):
-        self['locations'] = val
+        self["locations"] = val
 
     # locationssrc
     # ------------
@@ -275,11 +273,11 @@ class Y(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['locationssrc']
+        return self["locationssrc"]
 
     @locationssrc.setter
     def locationssrc(self, val):
-        self['locationssrc'] = val
+        self["locationssrc"] = val
 
     # show
     # ----
@@ -296,17 +294,17 @@ class Y(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['show']
+        return self["show"]
 
     @show.setter
     def show(self, val):
-        self['show'] = val
+        self["show"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'isosurface.slices'
+        return "isosurface.slices"
 
     # Self properties description
     # ---------------------------
@@ -337,7 +335,7 @@ class Y(_BaseTraceHierarchyType):
         locations=None,
         locationssrc=None,
         show=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Y object
@@ -367,7 +365,7 @@ class Y(_BaseTraceHierarchyType):
         -------
         Y
         """
-        super(Y, self).__init__('y')
+        super(Y, self).__init__("y")
 
         # Validate arg
         # ------------
@@ -387,29 +385,29 @@ an instance of plotly.graph_objs.isosurface.slices.Y"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.isosurface.slices import (y as v_y)
+        from plotly.validators.isosurface.slices import y as v_y
 
         # Initialize validators
         # ---------------------
-        self._validators['fill'] = v_y.FillValidator()
-        self._validators['locations'] = v_y.LocationsValidator()
-        self._validators['locationssrc'] = v_y.LocationssrcValidator()
-        self._validators['show'] = v_y.ShowValidator()
+        self._validators["fill"] = v_y.FillValidator()
+        self._validators["locations"] = v_y.LocationsValidator()
+        self._validators["locationssrc"] = v_y.LocationssrcValidator()
+        self._validators["show"] = v_y.ShowValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('fill', None)
-        self['fill'] = fill if fill is not None else _v
-        _v = arg.pop('locations', None)
-        self['locations'] = locations if locations is not None else _v
-        _v = arg.pop('locationssrc', None)
-        self['locationssrc'] = locationssrc if locationssrc is not None else _v
-        _v = arg.pop('show', None)
-        self['show'] = show if show is not None else _v
+        _v = arg.pop("fill", None)
+        self["fill"] = fill if fill is not None else _v
+        _v = arg.pop("locations", None)
+        self["locations"] = locations if locations is not None else _v
+        _v = arg.pop("locationssrc", None)
+        self["locationssrc"] = locationssrc if locationssrc is not None else _v
+        _v = arg.pop("show", None)
+        self["show"] = show if show is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -443,11 +441,11 @@ class X(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['fill']
+        return self["fill"]
 
     @fill.setter
     def fill(self, val):
-        self['fill'] = val
+        self["fill"] = val
 
     # locations
     # ---------
@@ -465,11 +463,11 @@ class X(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['locations']
+        return self["locations"]
 
     @locations.setter
     def locations(self, val):
-        self['locations'] = val
+        self["locations"] = val
 
     # locationssrc
     # ------------
@@ -485,11 +483,11 @@ class X(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['locationssrc']
+        return self["locationssrc"]
 
     @locationssrc.setter
     def locationssrc(self, val):
-        self['locationssrc'] = val
+        self["locationssrc"] = val
 
     # show
     # ----
@@ -506,17 +504,17 @@ class X(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['show']
+        return self["show"]
 
     @show.setter
     def show(self, val):
-        self['show'] = val
+        self["show"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'isosurface.slices'
+        return "isosurface.slices"
 
     # Self properties description
     # ---------------------------
@@ -547,7 +545,7 @@ class X(_BaseTraceHierarchyType):
         locations=None,
         locationssrc=None,
         show=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new X object
@@ -577,7 +575,7 @@ class X(_BaseTraceHierarchyType):
         -------
         X
         """
-        super(X, self).__init__('x')
+        super(X, self).__init__("x")
 
         # Validate arg
         # ------------
@@ -597,29 +595,29 @@ an instance of plotly.graph_objs.isosurface.slices.X"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.isosurface.slices import (x as v_x)
+        from plotly.validators.isosurface.slices import x as v_x
 
         # Initialize validators
         # ---------------------
-        self._validators['fill'] = v_x.FillValidator()
-        self._validators['locations'] = v_x.LocationsValidator()
-        self._validators['locationssrc'] = v_x.LocationssrcValidator()
-        self._validators['show'] = v_x.ShowValidator()
+        self._validators["fill"] = v_x.FillValidator()
+        self._validators["locations"] = v_x.LocationsValidator()
+        self._validators["locationssrc"] = v_x.LocationssrcValidator()
+        self._validators["show"] = v_x.ShowValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('fill', None)
-        self['fill'] = fill if fill is not None else _v
-        _v = arg.pop('locations', None)
-        self['locations'] = locations if locations is not None else _v
-        _v = arg.pop('locationssrc', None)
-        self['locationssrc'] = locationssrc if locationssrc is not None else _v
-        _v = arg.pop('show', None)
-        self['show'] = show if show is not None else _v
+        _v = arg.pop("fill", None)
+        self["fill"] = fill if fill is not None else _v
+        _v = arg.pop("locations", None)
+        self["locations"] = locations if locations is not None else _v
+        _v = arg.pop("locationssrc", None)
+        self["locationssrc"] = locationssrc if locationssrc is not None else _v
+        _v = arg.pop("show", None)
+        self["show"] = show if show is not None else _v
 
         # Process unknown kwargs
         # ----------------------

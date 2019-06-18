@@ -36,10 +36,10 @@ from plotly import (
     io,
     data,
     colors,
-    _docstring_gen
+    _docstring_gen,
 )
 
 from plotly.version import __version__
 
 # Set default template here to make sure import process is complete
-io.templates._default = 'plotly'
+io.templates._default = "plotly"

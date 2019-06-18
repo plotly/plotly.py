@@ -1,31 +1,31 @@
 from plotly import graph_objs as go
 
 colorscale_parent_paths = [
-    ('histogram2dcontour',),
-    ('choropleth',),
-    ('histogram2d',),
-    ('heatmap',),
-    ('heatmapgl',),
-    ('contourcarpet',),
-    ('contour',),
-    ('surface',),
-    ('mesh3d',),
-    ('scatter', 'marker'),
-    ('parcoords', 'line'),
-    ('scatterpolargl', 'marker'),
-    ('bar', 'marker'),
-    ('scattergeo', 'marker'),
-    ('scatterpolar', 'marker'),
-    ('histogram', 'marker'),
-    ('scattergl', 'marker'),
-    ('scatter3d', 'line'),
-    ('scatter3d', 'marker'),
-    ('scattermapbox', 'marker'),
-    ('scatterternary', 'marker'),
-    ('scattercarpet', 'marker'),
-    ('scatter', 'marker', 'line'),
-    ('scatterpolargl', 'marker', 'line'),
-    ('bar', 'marker', 'line')
+    ("histogram2dcontour",),
+    ("choropleth",),
+    ("histogram2d",),
+    ("heatmap",),
+    ("heatmapgl",),
+    ("contourcarpet",),
+    ("contour",),
+    ("surface",),
+    ("mesh3d",),
+    ("scatter", "marker"),
+    ("parcoords", "line"),
+    ("scatterpolargl", "marker"),
+    ("bar", "marker"),
+    ("scattergeo", "marker"),
+    ("scatterpolar", "marker"),
+    ("histogram", "marker"),
+    ("scattergl", "marker"),
+    ("scatter3d", "line"),
+    ("scatter3d", "marker"),
+    ("scattermapbox", "marker"),
+    ("scatterternary", "marker"),
+    ("scattercarpet", "marker"),
+    ("scatter", "marker", "line"),
+    ("scatterpolargl", "marker", "line"),
+    ("bar", "marker", "line"),
 ]
 
 
@@ -37,27 +37,29 @@ def set_all_colorbars(template, colorbar):
         for trace in template.data[parent_path[0]]:
             parent = trace[parent_path[1:]]
 
-            if 'colorbar' in parent:
+            if "colorbar" in parent:
                 parent.colorbar = colorbar
 
 
-def initialize_template(annotation_defaults,
-                        axis_common,
-                        axis_ticks_clr,
-                        colorbar_common,
-                        colorscale,
-                        colorway,
-                        font_clr,
-                        panel_background_clr,
-                        panel_grid_clr,
-                        paper_clr,
-                        shape_defaults,
-                        table_cell_clr,
-                        table_header_clr,
-                        table_line_clr,
-                        zerolinecolor_clr,
-                        colorscale_minus=None,
-                        colorscale_diverging=None):
+def initialize_template(
+    annotation_defaults,
+    axis_common,
+    axis_ticks_clr,
+    colorbar_common,
+    colorscale,
+    colorway,
+    font_clr,
+    panel_background_clr,
+    panel_grid_clr,
+    paper_clr,
+    shape_defaults,
+    table_cell_clr,
+    table_header_clr,
+    table_line_clr,
+    zerolinecolor_clr,
+    colorscale_minus=None,
+    colorscale_diverging=None,
+):
 
     # Initialize template
     # -------------------
@@ -70,10 +72,10 @@ def initialize_template(annotation_defaults,
     template.layout.font.color = font_clr
 
     # hovermode
-    template.layout.hovermode = 'closest'
+    template.layout.hovermode = "closest"
 
     # right-align hoverlabels
-    template.layout.hoverlabel.align = 'left'
+    template.layout.hoverlabel.align = "left"
 
     # Set background colors
     template.layout.paper_bgcolor = paper_clr
@@ -110,8 +112,8 @@ def initialize_template(annotation_defaults,
     # 3D
     axis_3d = dict(cartesian_axis)
     if panel_background_clr:
-        axis_3d['backgroundcolor'] = panel_background_clr
-        axis_3d['showbackground'] = True
+        axis_3d["backgroundcolor"] = panel_background_clr
+        axis_3d["showbackground"] = True
     template.layout.scene.xaxis = axis_3d
     template.layout.scene.yaxis = axis_3d
     template.layout.scene.zaxis = axis_3d
@@ -131,10 +133,9 @@ def initialize_template(annotation_defaults,
         linecolor=panel_grid_clr,
         startlinecolor=axis_ticks_clr,
         endlinecolor=axis_ticks_clr,
-        minorgridcolor=panel_grid_clr)
-    template.data.carpet = [{
-        'aaxis': carpet_axis,
-        'baxis': carpet_axis}]
+        minorgridcolor=panel_grid_clr,
+    )
+    template.data.carpet = [{"aaxis": carpet_axis, "baxis": carpet_axis}]
 
     # Shape defaults
     template.layout.shapedefaults = shape_defaults
@@ -151,15 +152,25 @@ def initialize_template(annotation_defaults,
     template.layout.geo.lakecolor = paper_clr
 
     # Table
-    template.data.table = [{'header': {'fill': {'color': table_header_clr},
-                                       'line': {'color': table_line_clr},},
-                            'cells': {'fill': {'color': table_cell_clr},
-                                      'line': {'color': table_line_clr}}}]
+    template.data.table = [
+        {
+            "header": {
+                "fill": {"color": table_header_clr},
+                "line": {"color": table_line_clr},
+            },
+            "cells": {
+                "fill": {"color": table_cell_clr},
+                "line": {"color": table_line_clr},
+            },
+        }
+    ]
 
     # Bar outline
     template.data.bar = [
-        {'marker': {'line': {'width': 0.5, 'color': panel_background_clr}}}]
+        {"marker": {"line": {"width": 0.5, "color": panel_background_clr}}}
+    ]
     template.data.barpolar = [
-        {'marker': {'line': {'width': 0.5, 'color': panel_background_clr}}}]
+        {"marker": {"line": {"width": 0.5, "color": panel_background_clr}}}
+    ]
 
     return template

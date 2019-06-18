@@ -10,18 +10,17 @@ from unittest import TestCase
 
 class TestUpdateMethod(TestCase):
     def setUp(self):
-        print('Setup!')
+        print("Setup!")
 
     def test_update_dict(self):
-        title = 'this'
+        title = "this"
         fig = Figure()
         update_res1 = fig.update(layout=Layout(title=title))
         assert fig == Figure(layout=Layout(title=title))
-        update_res2 = fig['layout'].update(xaxis=XAxis())
+        update_res2 = fig["layout"].update(xaxis=XAxis())
         assert fig == Figure(layout=Layout(title=title, xaxis=XAxis()))
         assert update_res1 is fig
         assert update_res2 is fig.layout
-
 
     def test_update_list(self):
         trace1 = Scatter(x=[1, 2, 3], y=[2, 1, 2])
@@ -38,7 +37,6 @@ class TestUpdateMethod(TestCase):
         assert update_res1 is fig.data[0]
         assert update_res2 is fig.data[1]
 
-
     def test_update_dict_empty(self):
         trace1 = Scatter(x=[1, 2, 3], y=[2, 1, 2])
         trace2 = Scatter(x=[1, 2, 3], y=[3, 2, 1])
@@ -50,7 +48,6 @@ class TestUpdateMethod(TestCase):
         assert d1 == d2
         assert update_res is fig
 
-
     def test_update_list_empty(self):
         trace1 = Scatter(x=[1, 2, 3], y=[2, 1, 2])
         trace2 = Scatter(x=[1, 2, 3], y=[3, 2, 1])
@@ -61,15 +58,14 @@ class TestUpdateMethod(TestCase):
         d1, d2 = strip_dict_params(fig.data[1], Scatter(x=[1, 2, 3], y=[3, 2, 1]))
         assert d1 == d2
 
-
-    @skip('See https://github.com/plotly/python-api/issues/291')
+    @skip("See https://github.com/plotly/python-api/issues/291")
     def test_update_list_make_copies_false(self):
         trace1 = Scatter(x=[1, 2, 3], y=[2, 1, 2])
         trace2 = Scatter(x=[1, 2, 3], y=[3, 2, 1])
         data = Data([trace1, trace2])
         update = dict(x=[2, 3, 4], y=[1, 2, 3], line=Line())
         data.update(update, make_copies=False)
-        assert data[0]['line'] is data[1]['line']
+        assert data[0]["line"] is data[1]["line"]
 
     def test_update_uninitialized_list_with_list(self):
         """
@@ -79,12 +75,14 @@ class TestUpdateMethod(TestCase):
         See GH1072
         """
         layout = go.Layout()
-        layout.update(annotations=[
-            go.layout.Annotation(text='one'),
-            go.layout.Annotation(text='two'),
-        ])
+        layout.update(
+            annotations=[
+                go.layout.Annotation(text="one"),
+                go.layout.Annotation(text="two"),
+            ]
+        )
 
-        expected = {'annotations': [{'text': 'one'}, {'text': 'two'}]}
+        expected = {"annotations": [{"text": "one"}, {"text": "two"}]}
 
         self.assertEqual(len(layout.annotations), 2)
         self.assertEqual(layout.to_plotly_json(), expected)
@@ -98,12 +96,14 @@ class TestUpdateMethod(TestCase):
         is not obvious to the user.
         """
         layout = go.Layout(annotations=[])
-        layout.update(annotations=[
-            go.layout.Annotation(text='one'),
-            go.layout.Annotation(text='two'),
-        ])
+        layout.update(
+            annotations=[
+                go.layout.Annotation(text="one"),
+                go.layout.Annotation(text="two"),
+            ]
+        )
 
-        expected = {'annotations': [{'text': 'one'}, {'text': 'two'}]}
+        expected = {"annotations": [{"text": "one"}, {"text": "two"}]}
 
         self.assertEqual(len(layout.annotations), 2)
         self.assertEqual(layout.to_plotly_json(), expected)
@@ -114,15 +114,16 @@ class TestUpdateMethod(TestCase):
         index numbers to property dicts may be used to update select
         elements of the existing list
         """
-        layout = go.Layout(annotations=[
-            go.layout.Annotation(text='one'),
-            go.layout.Annotation(text='two'),
-        ])
+        layout = go.Layout(
+            annotations=[
+                go.layout.Annotation(text="one"),
+                go.layout.Annotation(text="two"),
+            ]
+        )
 
         layout.update(annotations={1: go.layout.Annotation(width=30)})
 
-        expected = {'annotations': [{'text': 'one'},
-                                    {'text': 'two', 'width': 30}]}
+        expected = {"annotations": [{"text": "one"}, {"text": "two", "width": 30}]}
 
         self.assertEqual(len(layout.annotations), 2)
         self.assertEqual(layout.to_plotly_json(), expected)

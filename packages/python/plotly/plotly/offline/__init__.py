@@ -3,7 +3,7 @@ offline
 ======
 This module provides offline functionality.
 """
-from . offline import (
+from .offline import (
     download_plotlyjs,
     get_plotlyjs_version,
     get_plotlyjs,
@@ -12,5 +12,5 @@ from . offline import (
     iplot,
     iplot_mpl,
     plot,
-    plot_mpl
+    plot_mpl,
 )

@@ -1,19 +1,14 @@
-
-
 import _plotly_utils.basevalidators
 
 
 class ValueValidator(_plotly_utils.basevalidators.AnyValidator):
-
-    def __init__(
-        self, plotly_name='value', parent_name='contour.contours', **kwargs
-    ):
+    def __init__(self, plotly_name="value", parent_name="contour.contours", **kwargs):
         super(ValueValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -21,17 +16,14 @@ import _plotly_utils.basevalidators
 
 
 class TypeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(
-        self, plotly_name='type', parent_name='contour.contours', **kwargs
-    ):
+    def __init__(self, plotly_name="type", parent_name="contour.contours", **kwargs):
         super(TypeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
-            values=kwargs.pop('values', ['levels', 'constraint']),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
+            values=kwargs.pop("values", ["levels", "constraint"]),
+            **kwargs,
         )
 
 
@@ -39,17 +31,14 @@ import _plotly_utils.basevalidators
 
 
 class StartValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='start', parent_name='contour.contours', **kwargs
-    ):
+    def __init__(self, plotly_name="start", parent_name="contour.contours", **kwargs):
         super(StartValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            implied_edits=kwargs.pop('implied_edits', {'^autocontour': False}),
-            role=kwargs.pop('role', 'style'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "plot"),
+            implied_edits=kwargs.pop("implied_edits", {"^autocontour": False}),
+            role=kwargs.pop("role", "style"),
+            **kwargs,
         )
 
 
@@ -57,18 +46,15 @@ import _plotly_utils.basevalidators
 
 
 class SizeValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='size', parent_name='contour.contours', **kwargs
-    ):
+    def __init__(self, plotly_name="size", parent_name="contour.contours", **kwargs):
         super(SizeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            implied_edits=kwargs.pop('implied_edits', {'^autocontour': False}),
-            min=kwargs.pop('min', 0),
-            role=kwargs.pop('role', 'style'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "plot"),
+            implied_edits=kwargs.pop("implied_edits", {"^autocontour": False}),
+            min=kwargs.pop("min", 0),
+            role=kwargs.pop("role", "style"),
+            **kwargs,
         )
 
 
@@ -76,19 +62,15 @@ import _plotly_utils.basevalidators
 
 
 class ShowlinesValidator(_plotly_utils.basevalidators.BooleanValidator):
-
     def __init__(
-        self,
-        plotly_name='showlines',
-        parent_name='contour.contours',
-        **kwargs
+        self, plotly_name="showlines", parent_name="contour.contours", **kwargs
     ):
         super(ShowlinesValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'style'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "style"),
+            **kwargs,
         )
 
 
@@ -96,19 +78,15 @@ import _plotly_utils.basevalidators
 
 
 class ShowlabelsValidator(_plotly_utils.basevalidators.BooleanValidator):
-
     def __init__(
-        self,
-        plotly_name='showlabels',
-        parent_name='contour.contours',
-        **kwargs
+        self, plotly_name="showlabels", parent_name="contour.contours", **kwargs
     ):
         super(ShowlabelsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'style'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "style"),
+            **kwargs,
         )
 
 
@@ -116,25 +94,33 @@ import _plotly_utils.basevalidators
 
 
 class OperationValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
     def __init__(
-        self,
-        plotly_name='operation',
-        parent_name='contour.contours',
-        **kwargs
+        self, plotly_name="operation", parent_name="contour.contours", **kwargs
     ):
         super(OperationValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
             values=kwargs.pop(
-                'values', [
-                    '=', '<', '>=', '>', '<=', '[]', '()', '[)', '(]', '][',
-                    ')(', '](', ')['
-                ]
+                "values",
+                [
+                    "=",
+                    "<",
+                    ">=",
+                    ">",
+                    "<=",
+                    "[]",
+                    "()",
+                    "[)",
+                    "(]",
+                    "][",
+                    ")(",
+                    "](",
+                    ")[",
+                ],
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -142,19 +128,15 @@ import _plotly_utils.basevalidators
 
 
 class LabelformatValidator(_plotly_utils.basevalidators.StringValidator):
-
     def __init__(
-        self,
-        plotly_name='labelformat',
-        parent_name='contour.contours',
-        **kwargs
+        self, plotly_name="labelformat", parent_name="contour.contours", **kwargs
     ):
         super(LabelformatValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'style'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "style"),
+            **kwargs,
         )
 
 
@@ -162,19 +144,16 @@ import _plotly_utils.basevalidators
 
 
 class LabelfontValidator(_plotly_utils.basevalidators.CompoundValidator):
-
     def __init__(
-        self,
-        plotly_name='labelfont',
-        parent_name='contour.contours',
-        **kwargs
+        self, plotly_name="labelfont", parent_name="contour.contours", **kwargs
     ):
         super(LabelfontValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Labelfont'),
+            data_class_str=kwargs.pop("data_class_str", "Labelfont"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             color
 
             family
@@ -195,9 +174,9 @@ class LabelfontValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Narrow", "Raleway", "Times New Roman".
             size
 
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -205,17 +184,14 @@ import _plotly_utils.basevalidators
 
 
 class EndValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='end', parent_name='contour.contours', **kwargs
-    ):
+    def __init__(self, plotly_name="end", parent_name="contour.contours", **kwargs):
         super(EndValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            implied_edits=kwargs.pop('implied_edits', {'^autocontour': False}),
-            role=kwargs.pop('role', 'style'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "plot"),
+            implied_edits=kwargs.pop("implied_edits", {"^autocontour": False}),
+            role=kwargs.pop("role", "style"),
+            **kwargs,
         )
 
 
@@ -223,15 +199,14 @@ import _plotly_utils.basevalidators
 
 
 class ColoringValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
     def __init__(
-        self, plotly_name='coloring', parent_name='contour.contours', **kwargs
+        self, plotly_name="coloring", parent_name="contour.contours", **kwargs
     ):
         super(ColoringValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'style'),
-            values=kwargs.pop('values', ['fill', 'heatmap', 'lines', 'none']),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "style"),
+            values=kwargs.pop("values", ["fill", "heatmap", "lines", "none"]),
+            **kwargs,
         )

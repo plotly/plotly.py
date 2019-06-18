@@ -1,17 +1,14 @@
-
-
 import _plotly_utils.basevalidators
 
 
 class ZsrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(self, plotly_name='zsrc', parent_name='mesh3d', **kwargs):
+    def __init__(self, plotly_name="zsrc", parent_name="mesh3d", **kwargs):
         super(ZsrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -19,24 +16,34 @@ import _plotly_utils.basevalidators
 
 
 class ZcalendarValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(
-        self, plotly_name='zcalendar', parent_name='mesh3d', **kwargs
-    ):
+    def __init__(self, plotly_name="zcalendar", parent_name="mesh3d", **kwargs):
         super(ZcalendarValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
             values=kwargs.pop(
-                'values', [
-                    'gregorian', 'chinese', 'coptic', 'discworld', 'ethiopian',
-                    'hebrew', 'islamic', 'julian', 'mayan', 'nanakshahi',
-                    'nepali', 'persian', 'jalali', 'taiwan', 'thai',
-                    'ummalqura'
-                ]
+                "values",
+                [
+                    "gregorian",
+                    "chinese",
+                    "coptic",
+                    "discworld",
+                    "ethiopian",
+                    "hebrew",
+                    "islamic",
+                    "julian",
+                    "mayan",
+                    "nanakshahi",
+                    "nepali",
+                    "persian",
+                    "jalali",
+                    "taiwan",
+                    "thai",
+                    "ummalqura",
+                ],
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -44,14 +51,13 @@ import _plotly_utils.basevalidators
 
 
 class ZValidator(_plotly_utils.basevalidators.DataArrayValidator):
-
-    def __init__(self, plotly_name='z', parent_name='mesh3d', **kwargs):
+    def __init__(self, plotly_name="z", parent_name="mesh3d", **kwargs):
         super(ZValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc+clearAxisTypes'),
-            role=kwargs.pop('role', 'data'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
+            role=kwargs.pop("role", "data"),
+            **kwargs,
         )
 
 
@@ -59,14 +65,13 @@ import _plotly_utils.basevalidators
 
 
 class YsrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(self, plotly_name='ysrc', parent_name='mesh3d', **kwargs):
+    def __init__(self, plotly_name="ysrc", parent_name="mesh3d", **kwargs):
         super(YsrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -74,24 +79,34 @@ import _plotly_utils.basevalidators
 
 
 class YcalendarValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(
-        self, plotly_name='ycalendar', parent_name='mesh3d', **kwargs
-    ):
+    def __init__(self, plotly_name="ycalendar", parent_name="mesh3d", **kwargs):
         super(YcalendarValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
             values=kwargs.pop(
-                'values', [
-                    'gregorian', 'chinese', 'coptic', 'discworld', 'ethiopian',
-                    'hebrew', 'islamic', 'julian', 'mayan', 'nanakshahi',
-                    'nepali', 'persian', 'jalali', 'taiwan', 'thai',
-                    'ummalqura'
-                ]
+                "values",
+                [
+                    "gregorian",
+                    "chinese",
+                    "coptic",
+                    "discworld",
+                    "ethiopian",
+                    "hebrew",
+                    "islamic",
+                    "julian",
+                    "mayan",
+                    "nanakshahi",
+                    "nepali",
+                    "persian",
+                    "jalali",
+                    "taiwan",
+                    "thai",
+                    "ummalqura",
+                ],
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -99,14 +114,13 @@ import _plotly_utils.basevalidators
 
 
 class YValidator(_plotly_utils.basevalidators.DataArrayValidator):
-
-    def __init__(self, plotly_name='y', parent_name='mesh3d', **kwargs):
+    def __init__(self, plotly_name="y", parent_name="mesh3d", **kwargs):
         super(YValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc+clearAxisTypes'),
-            role=kwargs.pop('role', 'data'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
+            role=kwargs.pop("role", "data"),
+            **kwargs,
         )
 
 
@@ -114,14 +128,13 @@ import _plotly_utils.basevalidators
 
 
 class XsrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(self, plotly_name='xsrc', parent_name='mesh3d', **kwargs):
+    def __init__(self, plotly_name="xsrc", parent_name="mesh3d", **kwargs):
         super(XsrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -129,24 +142,34 @@ import _plotly_utils.basevalidators
 
 
 class XcalendarValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(
-        self, plotly_name='xcalendar', parent_name='mesh3d', **kwargs
-    ):
+    def __init__(self, plotly_name="xcalendar", parent_name="mesh3d", **kwargs):
         super(XcalendarValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
             values=kwargs.pop(
-                'values', [
-                    'gregorian', 'chinese', 'coptic', 'discworld', 'ethiopian',
-                    'hebrew', 'islamic', 'julian', 'mayan', 'nanakshahi',
-                    'nepali', 'persian', 'jalali', 'taiwan', 'thai',
-                    'ummalqura'
-                ]
+                "values",
+                [
+                    "gregorian",
+                    "chinese",
+                    "coptic",
+                    "discworld",
+                    "ethiopian",
+                    "hebrew",
+                    "islamic",
+                    "julian",
+                    "mayan",
+                    "nanakshahi",
+                    "nepali",
+                    "persian",
+                    "jalali",
+                    "taiwan",
+                    "thai",
+                    "ummalqura",
+                ],
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -154,14 +177,13 @@ import _plotly_utils.basevalidators
 
 
 class XValidator(_plotly_utils.basevalidators.DataArrayValidator):
-
-    def __init__(self, plotly_name='x', parent_name='mesh3d', **kwargs):
+    def __init__(self, plotly_name="x", parent_name="mesh3d", **kwargs):
         super(XValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc+clearAxisTypes'),
-            role=kwargs.pop('role', 'data'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
+            role=kwargs.pop("role", "data"),
+            **kwargs,
         )
 
 
@@ -169,15 +191,14 @@ import _plotly_utils.basevalidators
 
 
 class VisibleValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(self, plotly_name='visible', parent_name='mesh3d', **kwargs):
+    def __init__(self, plotly_name="visible", parent_name="mesh3d", **kwargs):
         super(VisibleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
-            values=kwargs.pop('values', [True, False, 'legendonly']),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
+            values=kwargs.pop("values", [True, False, "legendonly"]),
+            **kwargs,
         )
 
 
@@ -185,16 +206,13 @@ import _plotly_utils.basevalidators
 
 
 class VertexcolorsrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(
-        self, plotly_name='vertexcolorsrc', parent_name='mesh3d', **kwargs
-    ):
+    def __init__(self, plotly_name="vertexcolorsrc", parent_name="mesh3d", **kwargs):
         super(VertexcolorsrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -202,16 +220,13 @@ import _plotly_utils.basevalidators
 
 
 class VertexcolorValidator(_plotly_utils.basevalidators.DataArrayValidator):
-
-    def __init__(
-        self, plotly_name='vertexcolor', parent_name='mesh3d', **kwargs
-    ):
+    def __init__(self, plotly_name="vertexcolor", parent_name="mesh3d", **kwargs):
         super(VertexcolorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'data'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "data"),
+            **kwargs,
         )
 
 
@@ -219,16 +234,13 @@ import _plotly_utils.basevalidators
 
 
 class UirevisionValidator(_plotly_utils.basevalidators.AnyValidator):
-
-    def __init__(
-        self, plotly_name='uirevision', parent_name='mesh3d', **kwargs
-    ):
+    def __init__(self, plotly_name="uirevision", parent_name="mesh3d", **kwargs):
         super(UirevisionValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -236,15 +248,14 @@ import _plotly_utils.basevalidators
 
 
 class UidValidator(_plotly_utils.basevalidators.StringValidator):
-
-    def __init__(self, plotly_name='uid', parent_name='mesh3d', **kwargs):
+    def __init__(self, plotly_name="uid", parent_name="mesh3d", **kwargs):
         super(UidValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop('anim', True),
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            anim=kwargs.pop("anim", True),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -252,14 +263,13 @@ import _plotly_utils.basevalidators
 
 
 class TextsrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(self, plotly_name='textsrc', parent_name='mesh3d', **kwargs):
+    def __init__(self, plotly_name="textsrc", parent_name="mesh3d", **kwargs):
         super(TextsrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -267,15 +277,14 @@ import _plotly_utils.basevalidators
 
 
 class TextValidator(_plotly_utils.basevalidators.StringValidator):
-
-    def __init__(self, plotly_name='text', parent_name='mesh3d', **kwargs):
+    def __init__(self, plotly_name="text", parent_name="mesh3d", **kwargs):
         super(TextValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            array_ok=kwargs.pop("array_ok", True),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -283,14 +292,14 @@ import _plotly_utils.basevalidators
 
 
 class StreamValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='stream', parent_name='mesh3d', **kwargs):
+    def __init__(self, plotly_name="stream", parent_name="mesh3d", **kwargs):
         super(StreamValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Stream'),
+            data_class_str=kwargs.pop("data_class_str", "Stream"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             maxpoints
                 Sets the maximum number of points to keep on
                 the plots from an incoming stream. If
@@ -300,9 +309,9 @@ class StreamValidator(_plotly_utils.basevalidators.CompoundValidator):
                 The stream id number links a data trace on a
                 plot with a stream. See
                 https://plot.ly/settings for more details.
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -310,16 +319,13 @@ import _plotly_utils.basevalidators
 
 
 class ShowscaleValidator(_plotly_utils.basevalidators.BooleanValidator):
-
-    def __init__(
-        self, plotly_name='showscale', parent_name='mesh3d', **kwargs
-    ):
+    def __init__(self, plotly_name="showscale", parent_name="mesh3d", **kwargs):
         super(ShowscaleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -327,15 +333,14 @@ import _plotly_utils.basevalidators
 
 
 class SceneValidator(_plotly_utils.basevalidators.SubplotidValidator):
-
-    def __init__(self, plotly_name='scene', parent_name='mesh3d', **kwargs):
+    def __init__(self, plotly_name="scene", parent_name="mesh3d", **kwargs):
         super(SceneValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            dflt=kwargs.pop('dflt', 'scene'),
-            edit_type=kwargs.pop('edit_type', 'calc+clearAxisTypes'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            dflt=kwargs.pop("dflt", "scene"),
+            edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -343,16 +348,13 @@ import _plotly_utils.basevalidators
 
 
 class ReversescaleValidator(_plotly_utils.basevalidators.BooleanValidator):
-
-    def __init__(
-        self, plotly_name='reversescale', parent_name='mesh3d', **kwargs
-    ):
+    def __init__(self, plotly_name="reversescale", parent_name="mesh3d", **kwargs):
         super(ReversescaleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'style'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "style"),
+            **kwargs,
         )
 
 
@@ -360,16 +362,15 @@ import _plotly_utils.basevalidators
 
 
 class OpacityValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(self, plotly_name='opacity', parent_name='mesh3d', **kwargs):
+    def __init__(self, plotly_name="opacity", parent_name="mesh3d", **kwargs):
         super(OpacityValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            max=kwargs.pop('max', 1),
-            min=kwargs.pop('min', 0),
-            role=kwargs.pop('role', 'style'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            max=kwargs.pop("max", 1),
+            min=kwargs.pop("min", 0),
+            role=kwargs.pop("role", "style"),
+            **kwargs,
         )
 
 
@@ -377,14 +378,13 @@ import _plotly_utils.basevalidators
 
 
 class NameValidator(_plotly_utils.basevalidators.StringValidator):
-
-    def __init__(self, plotly_name='name', parent_name='mesh3d', **kwargs):
+    def __init__(self, plotly_name="name", parent_name="mesh3d", **kwargs):
         super(NameValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'style'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "style"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -392,14 +392,13 @@ import _plotly_utils.basevalidators
 
 
 class MetasrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(self, plotly_name='metasrc', parent_name='mesh3d', **kwargs):
+    def __init__(self, plotly_name="metasrc", parent_name="mesh3d", **kwargs):
         super(MetasrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -407,15 +406,14 @@ import _plotly_utils.basevalidators
 
 
 class MetaValidator(_plotly_utils.basevalidators.AnyValidator):
-
-    def __init__(self, plotly_name='meta', parent_name='mesh3d', **kwargs):
+    def __init__(self, plotly_name="meta", parent_name="mesh3d", **kwargs):
         super(MetaValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            array_ok=kwargs.pop("array_ok", True),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -423,16 +421,14 @@ import _plotly_utils.basevalidators
 
 
 class LightpositionValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='lightposition', parent_name='mesh3d', **kwargs
-    ):
+    def __init__(self, plotly_name="lightposition", parent_name="mesh3d", **kwargs):
         super(LightpositionValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Lightposition'),
+            data_class_str=kwargs.pop("data_class_str", "Lightposition"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             x
                 Numeric vector, representing the X coordinate
                 for each vertex.
@@ -442,9 +438,9 @@ class LightpositionValidator(_plotly_utils.basevalidators.CompoundValidator):
             z
                 Numeric vector, representing the Z coordinate
                 for each vertex.
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -452,14 +448,14 @@ import _plotly_utils.basevalidators
 
 
 class LightingValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='lighting', parent_name='mesh3d', **kwargs):
+    def __init__(self, plotly_name="lighting", parent_name="mesh3d", **kwargs):
         super(LightingValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Lighting'),
+            data_class_str=kwargs.pop("data_class_str", "Lighting"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             ambient
                 Ambient light increases overall color
                 visibility but can wash out the image.
@@ -484,9 +480,9 @@ class LightingValidator(_plotly_utils.basevalidators.CompoundValidator):
             vertexnormalsepsilon
                 Epsilon for vertex normals calculation avoids
                 math issues arising from degenerate geometry.
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -494,14 +490,13 @@ import _plotly_utils.basevalidators
 
 
 class KsrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(self, plotly_name='ksrc', parent_name='mesh3d', **kwargs):
+    def __init__(self, plotly_name="ksrc", parent_name="mesh3d", **kwargs):
         super(KsrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -509,14 +504,13 @@ import _plotly_utils.basevalidators
 
 
 class KValidator(_plotly_utils.basevalidators.DataArrayValidator):
-
-    def __init__(self, plotly_name='k', parent_name='mesh3d', **kwargs):
+    def __init__(self, plotly_name="k", parent_name="mesh3d", **kwargs):
         super(KValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'data'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "data"),
+            **kwargs,
         )
 
 
@@ -524,14 +518,13 @@ import _plotly_utils.basevalidators
 
 
 class JsrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(self, plotly_name='jsrc', parent_name='mesh3d', **kwargs):
+    def __init__(self, plotly_name="jsrc", parent_name="mesh3d", **kwargs):
         super(JsrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -539,14 +532,13 @@ import _plotly_utils.basevalidators
 
 
 class JValidator(_plotly_utils.basevalidators.DataArrayValidator):
-
-    def __init__(self, plotly_name='j', parent_name='mesh3d', **kwargs):
+    def __init__(self, plotly_name="j", parent_name="mesh3d", **kwargs):
         super(JValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'data'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "data"),
+            **kwargs,
         )
 
 
@@ -554,14 +546,13 @@ import _plotly_utils.basevalidators
 
 
 class IsrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(self, plotly_name='isrc', parent_name='mesh3d', **kwargs):
+    def __init__(self, plotly_name="isrc", parent_name="mesh3d", **kwargs):
         super(IsrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -569,16 +560,13 @@ import _plotly_utils.basevalidators
 
 
 class IntensitysrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(
-        self, plotly_name='intensitysrc', parent_name='mesh3d', **kwargs
-    ):
+    def __init__(self, plotly_name="intensitysrc", parent_name="mesh3d", **kwargs):
         super(IntensitysrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -586,16 +574,13 @@ import _plotly_utils.basevalidators
 
 
 class IntensityValidator(_plotly_utils.basevalidators.DataArrayValidator):
-
-    def __init__(
-        self, plotly_name='intensity', parent_name='mesh3d', **kwargs
-    ):
+    def __init__(self, plotly_name="intensity", parent_name="mesh3d", **kwargs):
         super(IntensityValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'data'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "data"),
+            **kwargs,
         )
 
 
@@ -603,14 +588,13 @@ import _plotly_utils.basevalidators
 
 
 class IdssrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(self, plotly_name='idssrc', parent_name='mesh3d', **kwargs):
+    def __init__(self, plotly_name="idssrc", parent_name="mesh3d", **kwargs):
         super(IdssrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -618,15 +602,14 @@ import _plotly_utils.basevalidators
 
 
 class IdsValidator(_plotly_utils.basevalidators.DataArrayValidator):
-
-    def __init__(self, plotly_name='ids', parent_name='mesh3d', **kwargs):
+    def __init__(self, plotly_name="ids", parent_name="mesh3d", **kwargs):
         super(IdsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop('anim', True),
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'data'),
-            **kwargs
+            anim=kwargs.pop("anim", True),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "data"),
+            **kwargs,
         )
 
 
@@ -634,14 +617,13 @@ import _plotly_utils.basevalidators
 
 
 class IValidator(_plotly_utils.basevalidators.DataArrayValidator):
-
-    def __init__(self, plotly_name='i', parent_name='mesh3d', **kwargs):
+    def __init__(self, plotly_name="i", parent_name="mesh3d", **kwargs):
         super(IValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'data'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "data"),
+            **kwargs,
         )
 
 
@@ -649,16 +631,13 @@ import _plotly_utils.basevalidators
 
 
 class HovertextsrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(
-        self, plotly_name='hovertextsrc', parent_name='mesh3d', **kwargs
-    ):
+    def __init__(self, plotly_name="hovertextsrc", parent_name="mesh3d", **kwargs):
         super(HovertextsrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -666,17 +645,14 @@ import _plotly_utils.basevalidators
 
 
 class HovertextValidator(_plotly_utils.basevalidators.StringValidator):
-
-    def __init__(
-        self, plotly_name='hovertext', parent_name='mesh3d', **kwargs
-    ):
+    def __init__(self, plotly_name="hovertext", parent_name="mesh3d", **kwargs):
         super(HovertextValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            array_ok=kwargs.pop("array_ok", True),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -684,16 +660,13 @@ import _plotly_utils.basevalidators
 
 
 class HovertemplatesrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(
-        self, plotly_name='hovertemplatesrc', parent_name='mesh3d', **kwargs
-    ):
+    def __init__(self, plotly_name="hovertemplatesrc", parent_name="mesh3d", **kwargs):
         super(HovertemplatesrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -701,17 +674,14 @@ import _plotly_utils.basevalidators
 
 
 class HovertemplateValidator(_plotly_utils.basevalidators.StringValidator):
-
-    def __init__(
-        self, plotly_name='hovertemplate', parent_name='mesh3d', **kwargs
-    ):
+    def __init__(self, plotly_name="hovertemplate", parent_name="mesh3d", **kwargs):
         super(HovertemplateValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            array_ok=kwargs.pop("array_ok", True),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -719,16 +689,14 @@ import _plotly_utils.basevalidators
 
 
 class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='hoverlabel', parent_name='mesh3d', **kwargs
-    ):
+    def __init__(self, plotly_name="hoverlabel", parent_name="mesh3d", **kwargs):
         super(HoverlabelValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Hoverlabel'),
+            data_class_str=kwargs.pop("data_class_str", "Hoverlabel"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             align
                 Sets the horizontal alignment of the text
                 content within hover label box. Has an effect
@@ -764,9 +732,9 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
             namelengthsrc
                 Sets the source reference on plot.ly for
                 namelength .
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -774,16 +742,13 @@ import _plotly_utils.basevalidators
 
 
 class HoverinfosrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(
-        self, plotly_name='hoverinfosrc', parent_name='mesh3d', **kwargs
-    ):
+    def __init__(self, plotly_name="hoverinfosrc", parent_name="mesh3d", **kwargs):
         super(HoverinfosrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -791,19 +756,16 @@ import _plotly_utils.basevalidators
 
 
 class HoverinfoValidator(_plotly_utils.basevalidators.FlaglistValidator):
-
-    def __init__(
-        self, plotly_name='hoverinfo', parent_name='mesh3d', **kwargs
-    ):
+    def __init__(self, plotly_name="hoverinfo", parent_name="mesh3d", **kwargs):
         super(HoverinfoValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            extras=kwargs.pop('extras', ['all', 'none', 'skip']),
-            flags=kwargs.pop('flags', ['x', 'y', 'z', 'text', 'name']),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            array_ok=kwargs.pop("array_ok", True),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            extras=kwargs.pop("extras", ["all", "none", "skip"]),
+            flags=kwargs.pop("flags", ["x", "y", "z", "text", "name"]),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -811,16 +773,13 @@ import _plotly_utils.basevalidators
 
 
 class FlatshadingValidator(_plotly_utils.basevalidators.BooleanValidator):
-
-    def __init__(
-        self, plotly_name='flatshading', parent_name='mesh3d', **kwargs
-    ):
+    def __init__(self, plotly_name="flatshading", parent_name="mesh3d", **kwargs):
         super(FlatshadingValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'style'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "style"),
+            **kwargs,
         )
 
 
@@ -828,16 +787,13 @@ import _plotly_utils.basevalidators
 
 
 class FacecolorsrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(
-        self, plotly_name='facecolorsrc', parent_name='mesh3d', **kwargs
-    ):
+    def __init__(self, plotly_name="facecolorsrc", parent_name="mesh3d", **kwargs):
         super(FacecolorsrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -845,16 +801,13 @@ import _plotly_utils.basevalidators
 
 
 class FacecolorValidator(_plotly_utils.basevalidators.DataArrayValidator):
-
-    def __init__(
-        self, plotly_name='facecolor', parent_name='mesh3d', **kwargs
-    ):
+    def __init__(self, plotly_name="facecolor", parent_name="mesh3d", **kwargs):
         super(FacecolorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'data'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "data"),
+            **kwargs,
         )
 
 
@@ -862,17 +815,14 @@ import _plotly_utils.basevalidators
 
 
 class DelaunayaxisValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(
-        self, plotly_name='delaunayaxis', parent_name='mesh3d', **kwargs
-    ):
+    def __init__(self, plotly_name="delaunayaxis", parent_name="mesh3d", **kwargs):
         super(DelaunayaxisValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
-            values=kwargs.pop('values', ['x', 'y', 'z']),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
+            values=kwargs.pop("values", ["x", "y", "z"]),
+            **kwargs,
         )
 
 
@@ -880,16 +830,13 @@ import _plotly_utils.basevalidators
 
 
 class CustomdatasrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(
-        self, plotly_name='customdatasrc', parent_name='mesh3d', **kwargs
-    ):
+    def __init__(self, plotly_name="customdatasrc", parent_name="mesh3d", **kwargs):
         super(CustomdatasrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -897,16 +844,13 @@ import _plotly_utils.basevalidators
 
 
 class CustomdataValidator(_plotly_utils.basevalidators.DataArrayValidator):
-
-    def __init__(
-        self, plotly_name='customdata', parent_name='mesh3d', **kwargs
-    ):
+    def __init__(self, plotly_name="customdata", parent_name="mesh3d", **kwargs):
         super(CustomdataValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'data'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "data"),
+            **kwargs,
         )
 
 
@@ -914,14 +858,14 @@ import _plotly_utils.basevalidators
 
 
 class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='contour', parent_name='mesh3d', **kwargs):
+    def __init__(self, plotly_name="contour", parent_name="mesh3d", **kwargs):
         super(ContourValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Contour'),
+            data_class_str=kwargs.pop("data_class_str", "Contour"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             color
                 Sets the color of the contour lines.
             show
@@ -929,9 +873,9 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
                 on hover
             width
                 Sets the width of the contour lines.
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -939,19 +883,14 @@ import _plotly_utils.basevalidators
 
 
 class ColorscaleValidator(_plotly_utils.basevalidators.ColorscaleValidator):
-
-    def __init__(
-        self, plotly_name='colorscale', parent_name='mesh3d', **kwargs
-    ):
+    def __init__(self, plotly_name="colorscale", parent_name="mesh3d", **kwargs):
         super(ColorscaleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            implied_edits=kwargs.pop(
-                'implied_edits', {'autocolorscale': False}
-            ),
-            role=kwargs.pop('role', 'style'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            implied_edits=kwargs.pop("implied_edits", {"autocolorscale": False}),
+            role=kwargs.pop("role", "style"),
+            **kwargs,
         )
 
 
@@ -959,14 +898,14 @@ import _plotly_utils.basevalidators
 
 
 class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='colorbar', parent_name='mesh3d', **kwargs):
+    def __init__(self, plotly_name="colorbar", parent_name="mesh3d", **kwargs):
         super(ColorBarValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'ColorBar'),
+            data_class_str=kwargs.pop("data_class_str", "ColorBar"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             bgcolor
                 Sets the color of padded area.
             bordercolor
@@ -1175,9 +1114,9 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
             ypad
                 Sets the amount of padding (in px) along the y
                 direction.
-"""
+""",
             ),
-            **kwargs
+            **kwargs,
         )
 
 
@@ -1185,18 +1124,15 @@ import _plotly_utils.basevalidators
 
 
 class ColoraxisValidator(_plotly_utils.basevalidators.SubplotidValidator):
-
-    def __init__(
-        self, plotly_name='coloraxis', parent_name='mesh3d', **kwargs
-    ):
+    def __init__(self, plotly_name="coloraxis", parent_name="mesh3d", **kwargs):
         super(ColoraxisValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            dflt=kwargs.pop('dflt', None),
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            regex=kwargs.pop('regex', '/^coloraxis([2-9]|[1-9][0-9]+)?$/'),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            dflt=kwargs.pop("dflt", None),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            regex=kwargs.pop("regex", "/^coloraxis([2-9]|[1-9][0-9]+)?$/"),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -1204,15 +1140,14 @@ import _plotly_utils.basevalidators
 
 
 class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
-
-    def __init__(self, plotly_name='color', parent_name='mesh3d', **kwargs):
+    def __init__(self, plotly_name="color", parent_name="mesh3d", **kwargs):
         super(ColorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'style'),
-            colorscale_path=kwargs.pop('colorscale_path', 'mesh3d.colorscale'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "style"),
+            colorscale_path=kwargs.pop("colorscale_path", "mesh3d.colorscale"),
+            **kwargs,
         )
 
 
@@ -1220,15 +1155,14 @@ import _plotly_utils.basevalidators
 
 
 class CminValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(self, plotly_name='cmin', parent_name='mesh3d', **kwargs):
+    def __init__(self, plotly_name="cmin", parent_name="mesh3d", **kwargs):
         super(CminValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            implied_edits=kwargs.pop('implied_edits', {'cauto': False}),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            implied_edits=kwargs.pop("implied_edits", {"cauto": False}),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -1236,15 +1170,14 @@ import _plotly_utils.basevalidators
 
 
 class CmidValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(self, plotly_name='cmid', parent_name='mesh3d', **kwargs):
+    def __init__(self, plotly_name="cmid", parent_name="mesh3d", **kwargs):
         super(CmidValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            implied_edits=kwargs.pop('implied_edits', {}),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            implied_edits=kwargs.pop("implied_edits", {}),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -1252,15 +1185,14 @@ import _plotly_utils.basevalidators
 
 
 class CmaxValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(self, plotly_name='cmax', parent_name='mesh3d', **kwargs):
+    def __init__(self, plotly_name="cmax", parent_name="mesh3d", **kwargs):
         super(CmaxValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            implied_edits=kwargs.pop('implied_edits', {'cauto': False}),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            implied_edits=kwargs.pop("implied_edits", {"cauto": False}),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -1268,15 +1200,14 @@ import _plotly_utils.basevalidators
 
 
 class CautoValidator(_plotly_utils.basevalidators.BooleanValidator):
-
-    def __init__(self, plotly_name='cauto', parent_name='mesh3d', **kwargs):
+    def __init__(self, plotly_name="cauto", parent_name="mesh3d", **kwargs):
         super(CautoValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            implied_edits=kwargs.pop('implied_edits', {}),
-            role=kwargs.pop('role', 'info'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            implied_edits=kwargs.pop("implied_edits", {}),
+            role=kwargs.pop("role", "info"),
+            **kwargs,
         )
 
 
@@ -1284,17 +1215,14 @@ import _plotly_utils.basevalidators
 
 
 class AutocolorscaleValidator(_plotly_utils.basevalidators.BooleanValidator):
-
-    def __init__(
-        self, plotly_name='autocolorscale', parent_name='mesh3d', **kwargs
-    ):
+    def __init__(self, plotly_name="autocolorscale", parent_name="mesh3d", **kwargs):
         super(AutocolorscaleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            implied_edits=kwargs.pop('implied_edits', {}),
-            role=kwargs.pop('role', 'style'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            implied_edits=kwargs.pop("implied_edits", {}),
+            role=kwargs.pop("role", "style"),
+            **kwargs,
         )
 
 
@@ -1302,14 +1230,11 @@ import _plotly_utils.basevalidators
 
 
 class AlphahullValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='alphahull', parent_name='mesh3d', **kwargs
-    ):
+    def __init__(self, plotly_name="alphahull", parent_name="mesh3d", **kwargs):
         super(AlphahullValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'style'),
-            **kwargs
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "style"),
+            **kwargs,
         )

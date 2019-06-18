@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -57,11 +55,11 @@ class Font(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     # family
     # ------
@@ -88,11 +86,11 @@ class Font(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['family']
+        return self["family"]
 
     @family.setter
     def family(self, val):
-        self['family'] = val
+        self["family"] = val
 
     # size
     # ----
@@ -106,17 +104,17 @@ class Font(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['size']
+        return self["size"]
 
     @size.setter
     def size(self, val):
-        self['size'] = val
+        self["size"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.xaxis.rangeselector'
+        return "layout.xaxis.rangeselector"
 
     # Self properties description
     # ---------------------------
@@ -178,7 +176,7 @@ class Font(_BaseLayoutHierarchyType):
         -------
         Font
         """
-        super(Font, self).__init__('font')
+        super(Font, self).__init__("font")
 
         # Validate arg
         # ------------
@@ -198,28 +196,26 @@ an instance of plotly.graph_objs.layout.xaxis.rangeselector.Font"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.xaxis.rangeselector import (
-            font as v_font
-        )
+        from plotly.validators.layout.xaxis.rangeselector import font as v_font
 
         # Initialize validators
         # ---------------------
-        self._validators['color'] = v_font.ColorValidator()
-        self._validators['family'] = v_font.FamilyValidator()
-        self._validators['size'] = v_font.SizeValidator()
+        self._validators["color"] = v_font.ColorValidator()
+        self._validators["family"] = v_font.FamilyValidator()
+        self._validators["size"] = v_font.SizeValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('color', None)
-        self['color'] = color if color is not None else _v
-        _v = arg.pop('family', None)
-        self['family'] = family if family is not None else _v
-        _v = arg.pop('size', None)
-        self['size'] = size if size is not None else _v
+        _v = arg.pop("color", None)
+        self["color"] = color if color is not None else _v
+        _v = arg.pop("family", None)
+        self["family"] = family if family is not None else _v
+        _v = arg.pop("size", None)
+        self["size"] = size if size is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -251,11 +247,11 @@ class Button(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['count']
+        return self["count"]
 
     @count.setter
     def count(self, val):
-        self['count'] = val
+        self["count"] = val
 
     # label
     # -----
@@ -272,11 +268,11 @@ class Button(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['label']
+        return self["label"]
 
     @label.setter
     def label(self, val):
-        self['label'] = val
+        self["label"] = val
 
     # name
     # ----
@@ -299,11 +295,11 @@ class Button(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
     # step
     # ----
@@ -322,11 +318,11 @@ class Button(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['step']
+        return self["step"]
 
     @step.setter
     def step(self, val):
-        self['step'] = val
+        self["step"] = val
 
     # stepmode
     # --------
@@ -351,11 +347,11 @@ class Button(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['stepmode']
+        return self["stepmode"]
 
     @stepmode.setter
     def stepmode(self, val):
-        self['stepmode'] = val
+        self["stepmode"] = val
 
     # templateitemname
     # ----------------
@@ -379,11 +375,11 @@ class Button(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['templateitemname']
+        return self["templateitemname"]
 
     @templateitemname.setter
     def templateitemname(self, val):
-        self['templateitemname'] = val
+        self["templateitemname"] = val
 
     # visible
     # -------
@@ -399,17 +395,17 @@ class Button(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.xaxis.rangeselector'
+        return "layout.xaxis.rangeselector"
 
     # Self properties description
     # ---------------------------
@@ -468,7 +464,7 @@ class Button(_BaseLayoutHierarchyType):
         stepmode=None,
         templateitemname=None,
         visible=None,
-        **kwargs
+        **kwargs,
     ):
         """
         Construct a new Button object
@@ -527,7 +523,7 @@ class Button(_BaseLayoutHierarchyType):
         -------
         Button
         """
-        super(Button, self).__init__('buttons')
+        super(Button, self).__init__("buttons")
 
         # Validate arg
         # ------------
@@ -547,42 +543,40 @@ an instance of plotly.graph_objs.layout.xaxis.rangeselector.Button"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.xaxis.rangeselector import (
-            button as v_button
-        )
+        from plotly.validators.layout.xaxis.rangeselector import button as v_button
 
         # Initialize validators
         # ---------------------
-        self._validators['count'] = v_button.CountValidator()
-        self._validators['label'] = v_button.LabelValidator()
-        self._validators['name'] = v_button.NameValidator()
-        self._validators['step'] = v_button.StepValidator()
-        self._validators['stepmode'] = v_button.StepmodeValidator()
-        self._validators['templateitemname'
-                        ] = v_button.TemplateitemnameValidator()
-        self._validators['visible'] = v_button.VisibleValidator()
+        self._validators["count"] = v_button.CountValidator()
+        self._validators["label"] = v_button.LabelValidator()
+        self._validators["name"] = v_button.NameValidator()
+        self._validators["step"] = v_button.StepValidator()
+        self._validators["stepmode"] = v_button.StepmodeValidator()
+        self._validators["templateitemname"] = v_button.TemplateitemnameValidator()
+        self._validators["visible"] = v_button.VisibleValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('count', None)
-        self['count'] = count if count is not None else _v
-        _v = arg.pop('label', None)
-        self['label'] = label if label is not None else _v
-        _v = arg.pop('name', None)
-        self['name'] = name if name is not None else _v
-        _v = arg.pop('step', None)
-        self['step'] = step if step is not None else _v
-        _v = arg.pop('stepmode', None)
-        self['stepmode'] = stepmode if stepmode is not None else _v
-        _v = arg.pop('templateitemname', None)
-        self['templateitemname'
-            ] = templateitemname if templateitemname is not None else _v
-        _v = arg.pop('visible', None)
-        self['visible'] = visible if visible is not None else _v
+        _v = arg.pop("count", None)
+        self["count"] = count if count is not None else _v
+        _v = arg.pop("label", None)
+        self["label"] = label if label is not None else _v
+        _v = arg.pop("name", None)
+        self["name"] = name if name is not None else _v
+        _v = arg.pop("step", None)
+        self["step"] = step if step is not None else _v
+        _v = arg.pop("stepmode", None)
+        self["stepmode"] = stepmode if stepmode is not None else _v
+        _v = arg.pop("templateitemname", None)
+        self["templateitemname"] = (
+            templateitemname if templateitemname is not None else _v
+        )
+        _v = arg.pop("visible", None)
+        self["visible"] = visible if visible is not None else _v
 
         # Process unknown kwargs
         # ----------------------
