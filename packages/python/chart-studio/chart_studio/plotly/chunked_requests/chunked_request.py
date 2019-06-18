@@ -10,18 +10,11 @@ from chart_studio.api import utils
 
 
 class Stream:
-    def __init__(
-        self,
-        server,
-        port=80,
-        headers={},
-        url="/",
-        ssl_enabled=False,
-        ssl_verification_enabled=True,
-    ):
-        """ Initialize a stream object and an HTTP or HTTPS connection
+    def __init__(self, server, port=80, headers={}, url='/', ssl_enabled=False,
+                 ssl_verification_enabled=True):
+        ''' Initialize a stream object and an HTTP or HTTPS connection
         with chunked Transfer-Encoding to server:port with optional headers.
-        """
+        '''
         self.maxtries = 5
         self._tries = 0
         self._delay = 1
@@ -34,13 +27,13 @@ class Stream:
         self._ssl_verification_enabled = ssl_verification_enabled
         self._connect()
 
-    def write(self, data, reconnect_on=("", 200, 502)):
-        """ Send `data` to the server in chunk-encoded form.
+    def write(self, data, reconnect_on=('', 200, 502)):
+        ''' Send `data` to the server in chunk-encoded form.
         Check the connection before writing and reconnect
         if disconnected and if the response status code is in `reconnect_on`.
 
         The response may either be an HTTPResponse object or an empty string.
-        """
+        '''
 
         if not self._isconnected():
 
@@ -48,11 +41,9 @@ class Stream:
             response = self._getresponse()
 
             # Reconnect depending on the status code.
-            if (response == "" and "" in reconnect_on) or (
-                response
-                and isinstance(response, http_client.HTTPResponse)
-                and response.status in reconnect_on
-            ):
+            if ((response == '' and '' in reconnect_on) or
+                (response and isinstance(response, http_client.HTTPResponse) and
+                 response.status in reconnect_on)):
                 self._reconnect()
 
             elif response and isinstance(response, http_client.HTTPResponse):
@@ -65,25 +56,23 @@ class Stream:
                 # like Invalid Credentials.
                 # This allows the user to determine when
                 # to reconnect.
-                raise Exception(
-                    "Server responded with "
-                    "status code: {status_code}\n"
-                    "and message: {msg}.".format(
-                        status_code=response.status, msg=response.read()
-                    )
-                )
+                raise Exception("Server responded with "
+                                "status code: {status_code}\n"
+                                "and message: {msg}."
+                                .format(status_code=response.status,
+                                        msg=response.read()))
 
-            elif response == "":
-                raise Exception("Attempted to write but socket " "was not connected.")
+            elif response == '':
+                raise Exception("Attempted to write but socket "
+                                "was not connected.")
 
         try:
             msg = data
-            msglen = format(len(msg), "x")  # msg length in hex
+            msglen = format(len(msg), 'x')  # msg length in hex
             # Send the message in chunk-encoded form
             self._conn.sock.setblocking(1)
-            self._conn.send(
-                "{msglen}\r\n{msg}\r\n".format(msglen=msglen, msg=msg).encode("utf-8")
-            )
+            self._conn.send('{msglen}\r\n{msg}\r\n'
+                            .format(msglen=msglen, msg=msg).encode('utf-8'))
             self._conn.sock.setblocking(0)
         except http_client.socket.error:
             self._reconnect()
@@ -105,9 +94,11 @@ class Stream:
         ssl_enabled = self._ssl_enabled
 
         if ssl_enabled:
-            proxy = os.environ.get("https_proxy") or os.environ.get("HTTPS_PROXY")
+            proxy = (os.environ.get("https_proxy") or
+                     os.environ.get("HTTPS_PROXY"))
         else:
-            proxy = os.environ.get("http_proxy") or os.environ.get("HTTP_PROXY")
+            proxy = (os.environ.get("http_proxy") or
+                     os.environ.get("HTTP_PROXY"))
 
         no_proxy = os.environ.get("no_proxy") or os.environ.get("NO_PROXY")
         no_proxy_url = no_proxy and self._server in no_proxy
@@ -140,38 +131,42 @@ class Stream:
         return context
 
     def _connect(self):
-        """ Initialize an HTTP/HTTPS connection with chunked Transfer-Encoding
+        ''' Initialize an HTTP/HTTPS connection with chunked Transfer-Encoding
         to server:port with optional headers.
-        """
+        '''
         server = self._server
         port = self._port
         headers = self._headers
         ssl_enabled = self._ssl_enabled
         proxy_server, proxy_port, proxy_auth = self._get_proxy_config()
 
-        if proxy_server and proxy_port:
+        if (proxy_server and proxy_port):
             if ssl_enabled:
                 context = self._get_ssl_context()
                 self._conn = http_client.HTTPSConnection(
                     proxy_server, proxy_port, context=context
                 )
             else:
-                self._conn = http_client.HTTPConnection(proxy_server, proxy_port)
+                self._conn = http_client.HTTPConnection(
+                    proxy_server, proxy_port
+                )
 
             tunnel_headers = None
             if proxy_auth:
-                tunnel_headers = {"Proxy-Authorization": proxy_auth}
+                tunnel_headers = {'Proxy-Authorization': proxy_auth}
 
             self._conn.set_tunnel(server, port, headers=tunnel_headers)
         else:
             if ssl_enabled:
                 context = self._get_ssl_context()
-                self._conn = http_client.HTTPSConnection(server, port, context=context)
+                self._conn = http_client.HTTPSConnection(
+                    server, port, context=context
+                )
             else:
                 self._conn = http_client.HTTPConnection(server, port)
 
-        self._conn.putrequest("POST", self._url)
-        self._conn.putheader("Transfer-Encoding", "chunked")
+        self._conn.putrequest('POST', self._url)
+        self._conn.putheader('Transfer-Encoding', 'chunked')
         for header in headers:
             self._conn.putheader(header, headers[header])
         self._conn.endheaders()
@@ -179,18 +174,18 @@ class Stream:
         # Set blocking to False prevents recv
         # from blocking while waiting for a response.
         self._conn.sock.setblocking(False)
-        self._bytes = six.b("")
+        self._bytes = six.b('')
         self._reset_retries()
         time.sleep(0.5)
 
     def close(self):
-        """ Close the connection to server.
+        ''' Close the connection to server.
 
         If available, return a http_client.HTTPResponse object.
 
         Closing the connection involves sending the
         Transfer-Encoding terminating bytes.
-        """
+        '''
         self._reset_retries()
         self._closed = True
 
@@ -198,20 +193,20 @@ class Stream:
         # For some reason, either Python or node.js seems to
         # require an extra \r\n.
         try:
-            self._conn.send("\r\n0\r\n\r\n".encode("utf-8"))
+            self._conn.send('\r\n0\r\n\r\n'.encode('utf-8'))
         except http_client.socket.error:
             # In case the socket has already been closed
-            return ""
+            return ''
 
         return self._getresponse()
 
     def _getresponse(self):
-        """ Read from recv and return a HTTPResponse object if possible.
+        ''' Read from recv and return a HTTPResponse object if possible.
         Either
         1 - The client has succesfully closed the connection: Return ''
         2 - The server has already closed the connection: Return the response
             if possible.
-        """
+        '''
         # Wait for a response
         self._conn.sock.setblocking(True)
         # Parse the response
@@ -222,8 +217,8 @@ class Stream:
             except http_client.socket.error:
                 # For error 54: Connection reset by peer
                 # (and perhaps others)
-                return six.b("")
-            if _bytes == six.b(""):
+                return six.b('')
+            if _bytes == six.b(''):
                 break
             else:
                 response += _bytes
@@ -232,7 +227,7 @@ class Stream:
 
         # Convert the response string to a http_client.HTTPResponse
         # object with a bit of a hack
-        if response != six.b(""):
+        if response != six.b(''):
             # Taken from
             # http://pythonwise.blogspot.ca/2010/02/parse-http-response.html
             try:
@@ -240,11 +235,11 @@ class Stream:
                 response.begin()
             except:
                 # Bad headers ... etc.
-                response = six.b("")
+                response = six.b('')
         return response
 
     def _isconnected(self):
-        """ Return True if the socket is still connected
+        ''' Return True if the socket is still connected
         to the server, False otherwise.
 
         This check is done in 3 steps:
@@ -253,7 +248,7 @@ class Stream:
         3 - Check if the server has returned any data. If they have,
             assume that the server closed the response after they sent
             the data, i.e. that the data was the HTTP response.
-        """
+        '''
 
         # 1 - check if we've closed the connection.
         if self._closed:
@@ -268,7 +263,7 @@ class Stream:
             # 3 - Check if the server has returned any data.
             # If they have, then start to store the response
             # in _bytes.
-            self._bytes = six.b("")
+            self._bytes = six.b('')
             self._bytes = self._conn.sock.recv(1)
             return False
         except http_client.socket.error as e:
@@ -314,9 +309,9 @@ class Stream:
                 raise e
 
     def _reconnect(self):
-        """ Connect if disconnected.
+        ''' Connect if disconnected.
         Retry self.maxtries times with delays
-        """
+        '''
         if not self._isconnected():
             try:
                 self._connect()
@@ -340,8 +335,8 @@ class Stream:
         self._closed = False
 
     def _reset_retries(self):
-        """ Reset the connect counters and delays
-        """
+        ''' Reset the connect counters and delays
+        '''
         self._tries = 0
         self._delay = 1
 

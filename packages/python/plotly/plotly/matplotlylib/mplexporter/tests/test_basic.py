@@ -23,66 +23,57 @@ def _assert_output_equal(text1, text2):
 
 def test_lines():
     fig, ax = plt.subplots()
-    ax.plot(range(20), "-k")
+    ax.plot(range(20), '-k')
 
-    _assert_output_equal(
-        fake_renderer_output(fig, FakeRenderer),
-        """
+    _assert_output_equal(fake_renderer_output(fig, FakeRenderer),
+                         """
                          opening figure
                          opening axes
                          draw path with 20 vertices
                          closing axes
                          closing figure
-                         """,
-    )
+                         """)
 
-    _assert_output_equal(
-        fake_renderer_output(fig, FullFakeRenderer),
-        """
+    _assert_output_equal(fake_renderer_output(fig, FullFakeRenderer),
+                         """
                          opening figure
                          opening axes
                          draw line with 20 points
                          closing axes
                          closing figure
-                         """,
-    )
+                         """)
 
 
 def test_markers():
     fig, ax = plt.subplots()
-    ax.plot(range(2), "ok")
+    ax.plot(range(2), 'ok')
 
-    _assert_output_equal(
-        fake_renderer_output(fig, FakeRenderer),
-        """
+    _assert_output_equal(fake_renderer_output(fig, FakeRenderer),
+                         """
                          opening figure
                          opening axes
                          draw path with 25 vertices
                          draw path with 25 vertices
                          closing axes
                          closing figure
-                         """,
-    )
+                         """)
 
-    _assert_output_equal(
-        fake_renderer_output(fig, FullFakeRenderer),
-        """
+    _assert_output_equal(fake_renderer_output(fig, FullFakeRenderer),
+                         """
                          opening figure
                          opening axes
                          draw 2 markers
                          closing axes
                          closing figure
-                         """,
-    )
+                         """)
 
 
 def test_path_collection():
     fig, ax = plt.subplots()
     ax.scatter(range(3), range(3))
 
-    _assert_output_equal(
-        fake_renderer_output(fig, FakeRenderer),
-        """
+    _assert_output_equal(fake_renderer_output(fig, FakeRenderer),
+                         """
                          opening figure
                          opening axes
                          draw path with 25 vertices
@@ -90,19 +81,16 @@ def test_path_collection():
                          draw path with 25 vertices
                          closing axes
                          closing figure
-                         """,
-    )
+                         """)
 
-    _assert_output_equal(
-        fake_renderer_output(fig, FullFakeRenderer),
-        """
+    _assert_output_equal(fake_renderer_output(fig, FullFakeRenderer),
+                         """
                          opening figure
                          opening axes
                          draw path collection with 3 offsets
                          closing axes
                          closing figure
-                         """,
-    )
+                         """)
 
 
 def test_text():
@@ -112,9 +100,8 @@ def test_text():
     ax.set_title("my title")
     ax.text(0.5, 0.5, "my text")
 
-    _assert_output_equal(
-        fake_renderer_output(fig, FakeRenderer),
-        """
+    _assert_output_equal(fake_renderer_output(fig, FakeRenderer),
+                         """
                          opening figure
                          opening axes
                          draw text 'my text' None
@@ -123,8 +110,7 @@ def test_text():
                          draw text 'my title' title
                          closing axes
                          closing figure
-                         """,
-    )
+                         """)
 
 
 def test_path():
@@ -132,18 +118,15 @@ def test_path():
     ax.add_patch(plt.Circle((0, 0), 1))
     ax.add_patch(plt.Rectangle((0, 0), 1, 2))
 
-    _assert_output_equal(
-        fake_renderer_output(fig, FakeRenderer),
-        """
+    _assert_output_equal(fake_renderer_output(fig, FakeRenderer),
+                         """
                          opening figure
                          opening axes
                          draw path with 25 vertices
                          draw path with 4 vertices
                          closing axes
                          closing figure
-                         """,
-    )
-
+                         """)
 
 def test_Figure():
     """ if the fig is not associated with a canvas, FakeRenderer shall
@@ -153,27 +136,23 @@ def test_Figure():
     ax.add_patch(plt.Circle((0, 0), 1))
     ax.add_patch(plt.Rectangle((0, 0), 1, 2))
 
-    _assert_output_equal(
-        fake_renderer_output(fig, FakeRenderer),
-        """
+    _assert_output_equal(fake_renderer_output(fig, FakeRenderer),
+                         """
                          opening figure
                          opening axes
                          draw path with 25 vertices
                          draw path with 4 vertices
                          closing axes
                          closing figure
-                         """,
-    )
-
+                         """)
 
 def test_multiaxes():
     fig, ax = plt.subplots(2)
     ax[0].plot(range(4))
     ax[1].plot(range(10))
 
-    _assert_output_equal(
-        fake_renderer_output(fig, FakeRenderer),
-        """
+    _assert_output_equal(fake_renderer_output(fig, FakeRenderer),
+                         """
                          opening figure
                          opening axes
                          draw path with 4 vertices
@@ -182,37 +161,34 @@ def test_multiaxes():
                          draw path with 10 vertices
                          closing axes
                          closing figure
-                         """,
-    )
+                         """)
 
 
 def test_image():
     # Test fails for matplotlib 1.5+ because the size of the image
     # generated by matplotlib has changed.
-    if LooseVersion(matplotlib.__version__) >= LooseVersion("1.5.0"):
-        raise SkipTest("Test fails for matplotlib version > 1.5.0")
+    if LooseVersion(matplotlib.__version__) >= LooseVersion('1.5.0'):
+        raise SkipTest("Test fails for matplotlib version > 1.5.0");
     np.random.seed(0)  # image size depends on the seed
     fig, ax = plt.subplots(figsize=(2, 2))
-    ax.imshow(np.random.random((10, 10)), cmap=plt.cm.jet, interpolation="nearest")
-    _assert_output_equal(
-        fake_renderer_output(fig, FakeRenderer),
-        """
+    ax.imshow(np.random.random((10, 10)),
+              cmap=plt.cm.jet, interpolation='nearest')
+    _assert_output_equal(fake_renderer_output(fig, FakeRenderer),
+                         """
                          opening figure
                          opening axes
                          draw image of size 1240 
                          closing axes
                          closing figure
-                         """,
-    )
+                         """)
 
 
 def test_legend():
     fig, ax = plt.subplots()
-    ax.plot([1, 2, 3], label="label")
+    ax.plot([1, 2, 3], label='label')
     ax.legend().set_visible(False)
-    _assert_output_equal(
-        fake_renderer_output(fig, FakeRenderer),
-        """
+    _assert_output_equal(fake_renderer_output(fig, FakeRenderer),
+                         """
                          opening figure
                          opening axes
                          draw path with 3 vertices
@@ -220,18 +196,16 @@ def test_legend():
                          closing legend
                          closing axes
                          closing figure
-                         """,
-    )
+                         """)
 
 
 def test_legend_dots():
     fig, ax = plt.subplots()
-    ax.plot([1, 2, 3], label="label")
-    ax.plot([2, 2, 2], "o", label="dots")
+    ax.plot([1, 2, 3], label='label')
+    ax.plot([2, 2, 2], 'o', label='dots')
     ax.legend().set_visible(True)
-    _assert_output_equal(
-        fake_renderer_output(fig, FullFakeRenderer),
-        """
+    _assert_output_equal(fake_renderer_output(fig, FullFakeRenderer),
+                         """
                          opening figure
                          opening axes
                          draw line with 3 points
@@ -245,11 +219,10 @@ def test_legend_dots():
                          closing legend
                          closing axes
                          closing figure
-                         """,
-    )
+                         """)
 
 
 def test_blended():
     fig, ax = plt.subplots()
     ax.axvline(0)
-    # assert_warns(UserWarning, fake_renderer_output, fig, FakeRenderer)
+    #assert_warns(UserWarning, fake_renderer_output, fig, FakeRenderer)
