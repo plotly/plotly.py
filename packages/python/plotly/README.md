@@ -125,11 +125,8 @@ set NODE_OPTIONS=--max-old-space-size=4096
 # Jupyter widgets extension
 jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.38 --no-build
 
-# FigureWidget support
-jupyter labextension install plotlywidget@0.11.0 --no-build
-
-# offline iplot support
-jupyter labextension install @jupyterlab/plotly-extension@0.18.2 --no-build
+# FigureWidget support and offline iplot support
+jupyter labextension install jupyterlab-plotly@1.0.0-alpha.1 --no-build
 
 # JupyterLab chart editor support (optional)
 jupyter labextension install jupyterlab-chart-editor@1.1 --no-build
