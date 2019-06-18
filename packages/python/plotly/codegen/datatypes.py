@@ -2,7 +2,7 @@ import os.path as opath
 import textwrap
 from io import StringIO
 
-from codegen.utils import PlotlyNode, format_and_write_source_py
+from codegen.utils import PlotlyNode, write_source_py
 
 
 def get_typing_type(plotly_type, array_ok=False):
@@ -615,4 +615,4 @@ def write_datatype_py(outdir, node):
     # Write file
     # ----------
 
-    format_and_write_source_py(datatype_source, filepath, leading_newlines=2)
+    write_source_py(datatype_source, filepath, leading_newlines=2)

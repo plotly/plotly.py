@@ -1,7 +1,7 @@
 from io import StringIO
 from os import path as opath
 
-from codegen.utils import format_and_write_source_py
+from codegen.utils import write_source_py
 
 # Build dict with info about deprecated datatypes
 DEPRECATED_DATATYPES = {
@@ -181,7 +181,7 @@ def write_deprecated_datatypes(outdir):
 
     # Write file
     # ----------
-    format_and_write_source_py(datatype_source, filepath)
+    write_source_py(datatype_source, filepath)
 
 
 def write_graph_objs_graph_objs(outdir):

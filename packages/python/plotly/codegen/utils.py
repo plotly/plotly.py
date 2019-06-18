@@ -7,34 +7,10 @@ from io import StringIO
 from typing import List
 import re
 
-from yapf.yapflib.yapf_api import FormatCode
-
 
 # Source code utilities
 # =====================
-def format_source(input_source):
-    """
-    Use yapf to format a string containing Python source code
-
-    Parameters
-    ----------
-    input_source : str
-      String containing Python source code
-
-    Returns
-    -------
-    String containing yapf-formatted python source code
-    """
-    style_config = {
-        "based_on_style": "google",
-        "DEDENT_CLOSING_BRACKETS": True,
-        "COLUMN_LIMIT": 79,
-    }
-    formatted_source, _ = FormatCode(input_source, style_config=style_config)
-    return formatted_source
-
-
-def format_and_write_source_py(py_source, filepath, leading_newlines=0):
+def write_source_py(py_source, filepath, leading_newlines=0):
     """
     Format Python source code and write to a file, creating parent
     directories as needed.
@@ -51,12 +27,6 @@ def format_and_write_source_py(py_source, filepath, leading_newlines=0):
     None
     """
     if py_source:
-        try:
-            formatted_source = format_source(py_source)
-        except Exception as e:
-            print(py_source)
-            raise e
-
         # Make dir if needed
         # ------------------
         filedir = opath.dirname(filepath)
@@ -64,9 +34,9 @@ def format_and_write_source_py(py_source, filepath, leading_newlines=0):
 
         # Write file
         # ----------
-        formatted_source = "\n" * leading_newlines + formatted_source
+        py_source = "\n" * leading_newlines + py_source
         with open(filepath, "at") as f:
-            f.write(formatted_source)
+            f.write(py_source)
 
 
 def build_from_imports_py(imports_info):
@@ -135,7 +105,7 @@ def write_init_py(pkg_root, path_parts, import_pairs):
     # Write file
     # ----------
     filepath = opath.join(pkg_root, *path_parts, "__init__.py")
-    format_and_write_source_py(init_source, filepath, leading_newlines=2)
+    write_source_py(init_source, filepath, leading_newlines=2)
 
 
 def format_description(desc):

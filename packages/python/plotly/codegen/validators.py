@@ -2,7 +2,7 @@ import os.path as opath
 from io import StringIO
 
 import _plotly_utils.basevalidators
-from codegen.utils import PlotlyNode, TraceNode, format_and_write_source_py
+from codegen.utils import PlotlyNode, TraceNode, write_source_py
 
 
 def build_validator_py(node: PlotlyNode):
@@ -109,7 +109,7 @@ def write_validator_py(outdir, node: PlotlyNode):
     # ----------
     filepath = opath.join(outdir, "validators", *node.parent_path_parts, "__init__.py")
 
-    format_and_write_source_py(validator_source, filepath, leading_newlines=2)
+    write_source_py(validator_source, filepath, leading_newlines=2)
 
 
 def build_data_validator_params(base_trace_node: TraceNode):
@@ -260,4 +260,4 @@ def write_data_validator_py(outdir, base_trace_node: TraceNode):
     # Write file
     # ----------
     filepath = opath.join(outdir, "validators", "__init__.py")
-    format_and_write_source_py(source, filepath, leading_newlines=2)
+    write_source_py(source, filepath, leading_newlines=2)

@@ -1,6 +1,7 @@
 import json
 import os.path as opath
 import shutil
+import subprocess
 
 from codegen.datatypes import build_datatype_py, write_datatype_py
 from codegen.compatibility import (
@@ -251,6 +252,10 @@ except ImportError:
     graph_objs_pkg = opath.join(outdir, "graph_objs")
     for path_parts, import_pairs in path_to_datatype_import_info.items():
         write_init_py(graph_objs_pkg, path_parts, import_pairs)
+
+    # ### Run black code formatter on output directories ###
+    subprocess.call(["black", validators_pkgdir])
+    subprocess.call(["black", graph_objs_pkgdir])
 
 
 if __name__ == "__main__":

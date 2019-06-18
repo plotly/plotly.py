@@ -1,6 +1,5 @@
 from plotly.graph_objs import Layout
 
-
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 

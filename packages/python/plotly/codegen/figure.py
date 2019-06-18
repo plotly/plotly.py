@@ -11,7 +11,7 @@ from codegen.datatypes import (
     add_constructor_params,
     add_docstring,
 )
-from codegen.utils import PlotlyNode, format_and_write_source_py
+from codegen.utils import PlotlyNode, write_source_py
 
 import inflect
 
@@ -419,4 +419,4 @@ def write_figure_classes(
 
         # ### Format and write to file###
         filepath = opath.join(outdir, "graph_objs", f"_{fig_classname.lower()}.py")
-        format_and_write_source_py(figure_source, filepath)
+        write_source_py(figure_source, filepath)
