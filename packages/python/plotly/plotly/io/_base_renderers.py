@@ -11,8 +11,8 @@ from plotly import utils, optional_imports
 from plotly.io._orca import ensure_server
 from plotly.offline.offline import _get_jconfig, get_plotlyjs
 
-ipython_display = optional_imports.get_module('IPython.display')
-IPython = optional_imports.get_module('IPython')
+ipython_display = optional_imports.get_module("IPython.display")
+IPython = optional_imports.get_module("IPython")
 
 try:
     from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -25,6 +25,7 @@ class BaseRenderer(object):
     """
     Base class for all renderers
     """
+
     def activate(self):
         pass
 
@@ -35,13 +36,13 @@ class BaseRenderer(object):
         except AttributeError:
             # Python 2.7
             argspec = inspect.getargspec(self.__init__)
-            init_args = [a for a in argspec.args if a != 'self']
+            init_args = [a for a in argspec.args if a != "self"]
 
         return "{cls}({attrs})\n{doc}".format(
             cls=self.__class__.__name__,
-            attrs=", ".join("{}={!r}".format(k, self.__dict__[k])
-                           for k in init_args),
-            doc=self.__doc__)
+            attrs=", ".join("{}={!r}".format(k, self.__dict__[k]) for k in init_args),
+            doc=self.__doc__,
+        )
 
     def __hash__(self):
         # Constructor args fully define uniqueness
@@ -52,6 +53,7 @@ class MimetypeRenderer(BaseRenderer):
     """
     Base class for all mime type renderers
     """
+
     def to_mimebundle(self, fig_dict):
         raise NotImplementedError()
 
@@ -63,10 +65,10 @@ class JsonRenderer(MimetypeRenderer):
 
     mime type: 'application/json'
     """
+
     def to_mimebundle(self, fig_dict):
-        value = json.loads(to_json(
-            fig_dict, validate=False, remove_uids=False))
-        return {'application/json': value}
+        value = json.loads(to_json(fig_dict, validate=False, remove_uids=False))
+        return {"application/json": value}
 
 
 # Plotly mimetype
@@ -78,18 +80,20 @@ class PlotlyRenderer(MimetypeRenderer):
 
     mime type: 'application/vnd.plotly.v1+json'
     """
+
     def __init__(self, config=None):
         self.config = dict(config) if config else {}
 
     def to_mimebundle(self, fig_dict):
         config = _get_jconfig(self.config)
         if config:
-            fig_dict['config'] = config
+            fig_dict["config"] = config
 
         json_compatible_fig_dict = json.loads(
-            to_json(fig_dict, validate=False, remove_uids=False))
+            to_json(fig_dict, validate=False, remove_uids=False)
+        )
 
-        return {'application/vnd.plotly.v1+json': json_compatible_fig_dict}
+        return {"application/vnd.plotly.v1+json": json_compatible_fig_dict}
 
 
 # Static Image
@@ -97,13 +101,16 @@ class ImageRenderer(MimetypeRenderer):
     """
     Base class for all static image renderers
     """
-    def __init__(self,
-                 mime_type,
-                 b64_encode=False,
-                 format=None,
-                 width=None,
-                 height=None,
-                 scale=None):
+
+    def __init__(
+        self,
+        mime_type,
+        b64_encode=False,
+        format=None,
+        width=None,
+        height=None,
+        scale=None,
+    ):
 
         self.mime_type = mime_type
         self.b64_encode = b64_encode
@@ -127,9 +134,9 @@ class ImageRenderer(MimetypeRenderer):
         )
 
         if self.b64_encode:
-            image_str = base64.b64encode(image_bytes).decode('utf8')
+            image_str = base64.b64encode(image_bytes).decode("utf8")
         else:
-            image_str = image_bytes.decode('utf8')
+            image_str = image_bytes.decode("utf8")
 
         return {self.mime_type: image_str}
 
@@ -143,14 +150,16 @@ class PngRenderer(ImageRenderer):
 
     mime type: 'image/png'
     """
+
     def __init__(self, width=None, height=None, scale=None):
         super(PngRenderer, self).__init__(
-            mime_type='image/png',
+            mime_type="image/png",
             b64_encode=True,
-            format='png',
+            format="png",
             width=width,
             height=height,
-            scale=scale)
+            scale=scale,
+        )
 
 
 class SvgRenderer(ImageRenderer):
@@ -162,14 +171,16 @@ class SvgRenderer(ImageRenderer):
 
     mime type: 'image/svg+xml'
     """
+
     def __init__(self, width=None, height=None, scale=None):
         super(SvgRenderer, self).__init__(
-            mime_type='image/svg+xml',
+            mime_type="image/svg+xml",
             b64_encode=False,
-            format='svg',
+            format="svg",
             width=width,
             height=height,
-            scale=scale)
+            scale=scale,
+        )
 
 
 class JpegRenderer(ImageRenderer):
@@ -181,14 +192,16 @@ class JpegRenderer(ImageRenderer):
 
     mime type: 'image/jpeg'
     """
+
     def __init__(self, width=None, height=None, scale=None):
         super(JpegRenderer, self).__init__(
-            mime_type='image/jpeg',
+            mime_type="image/jpeg",
             b64_encode=True,
-            format='jpg',
+            format="jpg",
             width=width,
             height=height,
-            scale=scale)
+            scale=scale,
+        )
 
 
 class PdfRenderer(ImageRenderer):
@@ -199,14 +212,16 @@ class PdfRenderer(ImageRenderer):
 
     mime type: 'application/pdf'
     """
+
     def __init__(self, width=None, height=None, scale=None):
         super(PdfRenderer, self).__init__(
-            mime_type='application/pdf',
+            mime_type="application/pdf",
             b64_encode=True,
-            format='pdf',
+            format="pdf",
             width=width,
             height=height,
-            scale=scale)
+            scale=scale,
+        )
 
 
 # HTML
@@ -225,15 +240,18 @@ class HtmlRenderer(MimetypeRenderer):
 
     mime type: 'text/html'
     """
-    def __init__(self,
-                 connected=False,
-                 full_html=False,
-                 requirejs=True,
-                 global_init=False,
-                 config=None,
-                 auto_play=False,
-                 post_script=None,
-                 animation_opts=None):
+
+    def __init__(
+        self,
+        connected=False,
+        full_html=False,
+        requirejs=True,
+        global_init=False,
+        config=None,
+        auto_play=False,
+        post_script=None,
+        animation_opts=None,
+    ):
 
         self.config = dict(config) if config else {}
         self.auto_play = auto_play
@@ -248,12 +266,13 @@ class HtmlRenderer(MimetypeRenderer):
         if self.global_init:
             if not ipython_display:
                 raise ValueError(
-                    'The {cls} class requires ipython but it is not installed'
-                    .format(cls=self.__class__.__name__))
+                    "The {cls} class requires ipython but it is not installed".format(
+                        cls=self.__class__.__name__
+                    )
+                )
 
             if not self.requirejs:
-                raise ValueError(
-                    'global_init is only supported with requirejs=True')
+                raise ValueError("global_init is only supported with requirejs=True")
 
             if self.connected:
                 # Connected so we configure requirejs with the plotly CDN
@@ -273,8 +292,9 @@ class HtmlRenderer(MimetypeRenderer):
         }});
         }}
         </script>
-        """.format(win_config=_window_plotly_config,
-                   mathjax_config=_mathjax_config)
+        """.format(
+                    win_config=_window_plotly_config, mathjax_config=_mathjax_config
+                )
 
             else:
                 # If not connected then we embed a copy of the plotly.js
@@ -293,9 +313,11 @@ class HtmlRenderer(MimetypeRenderer):
         }});
         }}
         </script>
-        """.format(script=get_plotlyjs(),
-                   win_config=_window_plotly_config,
-                   mathjax_config=_mathjax_config)
+        """.format(
+                    script=get_plotlyjs(),
+                    win_config=_window_plotly_config,
+                    mathjax_config=_mathjax_config,
+                )
 
             ipython_display.display_html(script, raw=True)
 
@@ -304,17 +326,18 @@ class HtmlRenderer(MimetypeRenderer):
         from plotly.io import to_html
 
         if self.requirejs:
-            include_plotlyjs = 'require'
+            include_plotlyjs = "require"
             include_mathjax = False
         elif self.connected:
-            include_plotlyjs = 'cdn'
-            include_mathjax = 'cdn'
+            include_plotlyjs = "cdn"
+            include_mathjax = "cdn"
         else:
             include_plotlyjs = True
-            include_mathjax = 'cdn'
+            include_mathjax = "cdn"
 
         # build post script
-        post_script = ["""
+        post_script = [
+            """
 var gd = document.getElementById('{plot_id}');
 var x = new MutationObserver(function (mutations, observer) {{
         var display = window.getComputedStyle(gd).display;
@@ -336,7 +359,8 @@ var outputEl = gd.closest('.output');
 if (outputEl) {{
     x.observe(outputEl, {childList: true});
 }}
-"""]
+"""
+        ]
 
         # Add user defined post script
         if self.post_script:
@@ -354,12 +378,12 @@ if (outputEl) {{
             post_script=post_script,
             full_html=self.full_html,
             animation_opts=self.animation_opts,
-            default_width='100%',
+            default_width="100%",
             default_height=525,
             validate=False,
         )
 
-        return {'text/html': html}
+        return {"text/html": html}
 
 
 class NotebookRenderer(HtmlRenderer):
@@ -374,12 +398,15 @@ class NotebookRenderer(HtmlRenderer):
 
     mime type: 'text/html'
     """
-    def __init__(self,
-                 connected=False,
-                 config=None,
-                 auto_play=False,
-                 post_script=None,
-                 animation_opts=None):
+
+    def __init__(
+        self,
+        connected=False,
+        config=None,
+        auto_play=False,
+        post_script=None,
+        animation_opts=None,
+    ):
         super(NotebookRenderer, self).__init__(
             connected=connected,
             full_html=False,
@@ -388,7 +415,8 @@ class NotebookRenderer(HtmlRenderer):
             config=config,
             auto_play=auto_play,
             post_script=post_script,
-            animation_opts=animation_opts)
+            animation_opts=animation_opts,
+        )
 
 
 class KaggleRenderer(HtmlRenderer):
@@ -402,11 +430,10 @@ class KaggleRenderer(HtmlRenderer):
 
     mime type: 'text/html'
     """
-    def __init__(self,
-                 config=None,
-                 auto_play=False,
-                 post_script=None,
-                 animation_opts=None):
+
+    def __init__(
+        self, config=None, auto_play=False, post_script=None, animation_opts=None
+    ):
 
         super(KaggleRenderer, self).__init__(
             connected=True,
@@ -416,7 +443,8 @@ class KaggleRenderer(HtmlRenderer):
             config=config,
             auto_play=auto_play,
             post_script=post_script,
-            animation_opts=animation_opts)
+            animation_opts=animation_opts,
+        )
 
 
 class ColabRenderer(HtmlRenderer):
@@ -427,11 +455,10 @@ class ColabRenderer(HtmlRenderer):
 
     mime type: 'text/html'
     """
-    def __init__(self,
-                 config=None,
-                 auto_play=False,
-                 post_script=None,
-                 animation_opts=None):
+
+    def __init__(
+        self, config=None, auto_play=False, post_script=None, animation_opts=None
+    ):
 
         super(ColabRenderer, self).__init__(
             connected=True,
@@ -441,7 +468,8 @@ class ColabRenderer(HtmlRenderer):
             config=config,
             auto_play=auto_play,
             post_script=post_script,
-            animation_opts=animation_opts)
+            animation_opts=animation_opts,
+        )
 
 
 class IFrameRenderer(MimetypeRenderer):
@@ -467,11 +495,10 @@ class IFrameRenderer(MimetypeRenderer):
 
     mime type: 'text/html'
     """
-    def __init__(self,
-                 config=None,
-                 auto_play=False,
-                 post_script=None,
-                 animation_opts=None):
+
+    def __init__(
+        self, config=None, auto_play=False, post_script=None, animation_opts=None
+    ):
 
         self.config = config
         self.auto_play = auto_play
@@ -484,24 +511,25 @@ class IFrameRenderer(MimetypeRenderer):
         # Make iframe size slightly larger than figure size to avoid
         # having iframe have its own scroll bar.
         iframe_buffer = 20
-        layout = fig_dict.get('layout', {})
+        layout = fig_dict.get("layout", {})
 
-        if layout.get('width', False):
-            iframe_width = str(layout['width'] + iframe_buffer) + 'px'
+        if layout.get("width", False):
+            iframe_width = str(layout["width"] + iframe_buffer) + "px"
         else:
-            iframe_width = '100%'
+            iframe_width = "100%"
 
-        if layout.get('height', False):
-            iframe_height = layout['height'] + iframe_buffer
+        if layout.get("height", False):
+            iframe_height = layout["height"] + iframe_buffer
         else:
-            iframe_height = str(525 + iframe_buffer) + 'px'
+            iframe_height = str(525 + iframe_buffer) + "px"
 
         # Build filename using ipython cell number
         ip = IPython.get_ipython()
         cell_number = list(ip.history_manager.get_tail(1))[0][1] + 1
-        dirname = 'iframe_figures'
-        filename = '{dirname}/figure_{cell_number}.html'.format(
-            dirname=dirname, cell_number=cell_number)
+        dirname = "iframe_figures"
+        filename = "{dirname}/figure_{cell_number}.html".format(
+            dirname=dirname, cell_number=cell_number
+        )
 
         # Make directory for
         os.makedirs(dirname, exist_ok=True)
@@ -511,12 +539,12 @@ class IFrameRenderer(MimetypeRenderer):
             filename,
             config=self.config,
             auto_play=self.auto_play,
-            include_plotlyjs='directory',
-            include_mathjax='cdn',
+            include_plotlyjs="directory",
+            include_mathjax="cdn",
             auto_open=False,
             post_script=self.post_script,
             animation_opts=self.animation_opts,
-            default_width='100%',
+            default_width="100%",
             default_height=525,
             validate=False,
         )
@@ -531,9 +559,11 @@ class IFrameRenderer(MimetypeRenderer):
     frameborder="0"
     allowfullscreen
 ></iframe>
-""".format(width=iframe_width, height=iframe_height, src=filename)
+""".format(
+            width=iframe_width, height=iframe_height, src=filename
+        )
 
-        return {'text/html': iframe_html}
+        return {"text/html": iframe_html}
 
 
 class ExternalRenderer(BaseRenderer):
@@ -567,7 +597,7 @@ def open_html_in_browser(html, using=None, new=0, autoraise=True):
         See docstrings in webbrowser.get and webbrowser.open
     """
     if isinstance(html, six.string_types):
-        html = html.encode('utf8')
+        html = html.encode("utf8")
 
     class OneShotRequestHandler(BaseHTTPRequestHandler):
         def do_GET(self):
@@ -575,19 +605,18 @@ def open_html_in_browser(html, using=None, new=0, autoraise=True):
             self.send_header("Content-type", "text/html")
             self.end_headers()
 
-            bufferSize = 1024*1024
+            bufferSize = 1024 * 1024
             for i in range(0, len(html), bufferSize):
-                self.wfile.write(html[i:i+bufferSize])
+                self.wfile.write(html[i : i + bufferSize])
 
         def log_message(self, format, *args):
             # Silence stderr logging
             pass
 
-    server = HTTPServer(('127.0.0.1', 0), OneShotRequestHandler)
+    server = HTTPServer(("127.0.0.1", 0), OneShotRequestHandler)
     webbrowser.get(using).open(
-        'http://127.0.0.1:%s' % server.server_port,
-        new=new,
-        autoraise=autoraise)
+        "http://127.0.0.1:%s" % server.server_port, new=new, autoraise=autoraise
+    )
 
     server.handle_request()
 
@@ -604,14 +633,17 @@ class BrowserRenderer(ExternalRenderer):
 
     mime type: 'text/html'
     """
-    def __init__(self,
-                 config=None,
-                 auto_play=False,
-                 using=None,
-                 new=0,
-                 autoraise=True,
-                 post_script=None,
-                 animation_opts=None):
+
+    def __init__(
+        self,
+        config=None,
+        auto_play=False,
+        using=None,
+        new=0,
+        autoraise=True,
+        post_script=None,
+        animation_opts=None,
+    ):
 
         self.config = config
         self.auto_play = auto_play
@@ -623,17 +655,18 @@ class BrowserRenderer(ExternalRenderer):
 
     def render(self, fig_dict):
         from plotly.io import to_html
+
         html = to_html(
             fig_dict,
             config=self.config,
             auto_play=self.auto_play,
             include_plotlyjs=True,
-            include_mathjax='cdn',
+            include_mathjax="cdn",
             post_script=self.post_script,
             full_html=True,
             animation_opts=self.animation_opts,
-            default_width='100%',
-            default_height='100%',
+            default_width="100%",
+            default_height="100%",
             validate=False,
         )
         open_html_in_browser(html, self.using, self.new, self.autoraise)

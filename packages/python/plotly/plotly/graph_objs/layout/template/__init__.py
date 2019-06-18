@@ -1,7 +1,4 @@
-
-
 from plotly.graph_objs import Layout
-
 
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
@@ -26,11 +23,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Area]
         """
-        return self['area']
+        return self["area"]
 
     @area.setter
     def area(self, val):
-        self['area'] = val
+        self["area"] = val
 
     # barpolar
     # --------
@@ -49,11 +46,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Barpolar]
         """
-        return self['barpolar']
+        return self["barpolar"]
 
     @barpolar.setter
     def barpolar(self, val):
-        self['barpolar'] = val
+        self["barpolar"] = val
 
     # bar
     # ---
@@ -72,11 +69,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Bar]
         """
-        return self['bar']
+        return self["bar"]
 
     @bar.setter
     def bar(self, val):
-        self['bar'] = val
+        self["bar"] = val
 
     # box
     # ---
@@ -95,11 +92,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Box]
         """
-        return self['box']
+        return self["box"]
 
     @box.setter
     def box(self, val):
-        self['box'] = val
+        self["box"] = val
 
     # candlestick
     # -----------
@@ -118,11 +115,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Candlestick]
         """
-        return self['candlestick']
+        return self["candlestick"]
 
     @candlestick.setter
     def candlestick(self, val):
-        self['candlestick'] = val
+        self["candlestick"] = val
 
     # carpet
     # ------
@@ -141,11 +138,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Carpet]
         """
-        return self['carpet']
+        return self["carpet"]
 
     @carpet.setter
     def carpet(self, val):
-        self['carpet'] = val
+        self["carpet"] = val
 
     # choropleth
     # ----------
@@ -164,11 +161,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Choropleth]
         """
-        return self['choropleth']
+        return self["choropleth"]
 
     @choropleth.setter
     def choropleth(self, val):
-        self['choropleth'] = val
+        self["choropleth"] = val
 
     # cone
     # ----
@@ -187,11 +184,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Cone]
         """
-        return self['cone']
+        return self["cone"]
 
     @cone.setter
     def cone(self, val):
-        self['cone'] = val
+        self["cone"] = val
 
     # contourcarpet
     # -------------
@@ -210,11 +207,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Contourcarpet]
         """
-        return self['contourcarpet']
+        return self["contourcarpet"]
 
     @contourcarpet.setter
     def contourcarpet(self, val):
-        self['contourcarpet'] = val
+        self["contourcarpet"] = val
 
     # contour
     # -------
@@ -233,11 +230,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Contour]
         """
-        return self['contour']
+        return self["contour"]
 
     @contour.setter
     def contour(self, val):
-        self['contour'] = val
+        self["contour"] = val
 
     # funnelarea
     # ----------
@@ -256,11 +253,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Funnelarea]
         """
-        return self['funnelarea']
+        return self["funnelarea"]
 
     @funnelarea.setter
     def funnelarea(self, val):
-        self['funnelarea'] = val
+        self["funnelarea"] = val
 
     # funnel
     # ------
@@ -279,11 +276,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Funnel]
         """
-        return self['funnel']
+        return self["funnel"]
 
     @funnel.setter
     def funnel(self, val):
-        self['funnel'] = val
+        self["funnel"] = val
 
     # heatmapgl
     # ---------
@@ -302,11 +299,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Heatmapgl]
         """
-        return self['heatmapgl']
+        return self["heatmapgl"]
 
     @heatmapgl.setter
     def heatmapgl(self, val):
-        self['heatmapgl'] = val
+        self["heatmapgl"] = val
 
     # heatmap
     # -------
@@ -325,11 +322,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Heatmap]
         """
-        return self['heatmap']
+        return self["heatmap"]
 
     @heatmap.setter
     def heatmap(self, val):
-        self['heatmap'] = val
+        self["heatmap"] = val
 
     # histogram2dcontour
     # ------------------
@@ -348,11 +345,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Histogram2dContour]
         """
-        return self['histogram2dcontour']
+        return self["histogram2dcontour"]
 
     @histogram2dcontour.setter
     def histogram2dcontour(self, val):
-        self['histogram2dcontour'] = val
+        self["histogram2dcontour"] = val
 
     # histogram2d
     # -----------
@@ -371,11 +368,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Histogram2d]
         """
-        return self['histogram2d']
+        return self["histogram2d"]
 
     @histogram2d.setter
     def histogram2d(self, val):
-        self['histogram2d'] = val
+        self["histogram2d"] = val
 
     # histogram
     # ---------
@@ -394,11 +391,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Histogram]
         """
-        return self['histogram']
+        return self["histogram"]
 
     @histogram.setter
     def histogram(self, val):
-        self['histogram'] = val
+        self["histogram"] = val
 
     # isosurface
     # ----------
@@ -417,11 +414,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Isosurface]
         """
-        return self['isosurface']
+        return self["isosurface"]
 
     @isosurface.setter
     def isosurface(self, val):
-        self['isosurface'] = val
+        self["isosurface"] = val
 
     # mesh3d
     # ------
@@ -440,11 +437,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Mesh3d]
         """
-        return self['mesh3d']
+        return self["mesh3d"]
 
     @mesh3d.setter
     def mesh3d(self, val):
-        self['mesh3d'] = val
+        self["mesh3d"] = val
 
     # ohlc
     # ----
@@ -463,11 +460,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Ohlc]
         """
-        return self['ohlc']
+        return self["ohlc"]
 
     @ohlc.setter
     def ohlc(self, val):
-        self['ohlc'] = val
+        self["ohlc"] = val
 
     # parcats
     # -------
@@ -486,11 +483,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Parcats]
         """
-        return self['parcats']
+        return self["parcats"]
 
     @parcats.setter
     def parcats(self, val):
-        self['parcats'] = val
+        self["parcats"] = val
 
     # parcoords
     # ---------
@@ -509,11 +506,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Parcoords]
         """
-        return self['parcoords']
+        return self["parcoords"]
 
     @parcoords.setter
     def parcoords(self, val):
-        self['parcoords'] = val
+        self["parcoords"] = val
 
     # pie
     # ---
@@ -532,11 +529,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Pie]
         """
-        return self['pie']
+        return self["pie"]
 
     @pie.setter
     def pie(self, val):
-        self['pie'] = val
+        self["pie"] = val
 
     # pointcloud
     # ----------
@@ -555,11 +552,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Pointcloud]
         """
-        return self['pointcloud']
+        return self["pointcloud"]
 
     @pointcloud.setter
     def pointcloud(self, val):
-        self['pointcloud'] = val
+        self["pointcloud"] = val
 
     # sankey
     # ------
@@ -578,11 +575,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Sankey]
         """
-        return self['sankey']
+        return self["sankey"]
 
     @sankey.setter
     def sankey(self, val):
-        self['sankey'] = val
+        self["sankey"] = val
 
     # scatter3d
     # ---------
@@ -601,11 +598,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Scatter3d]
         """
-        return self['scatter3d']
+        return self["scatter3d"]
 
     @scatter3d.setter
     def scatter3d(self, val):
-        self['scatter3d'] = val
+        self["scatter3d"] = val
 
     # scattercarpet
     # -------------
@@ -624,11 +621,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Scattercarpet]
         """
-        return self['scattercarpet']
+        return self["scattercarpet"]
 
     @scattercarpet.setter
     def scattercarpet(self, val):
-        self['scattercarpet'] = val
+        self["scattercarpet"] = val
 
     # scattergeo
     # ----------
@@ -647,11 +644,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Scattergeo]
         """
-        return self['scattergeo']
+        return self["scattergeo"]
 
     @scattergeo.setter
     def scattergeo(self, val):
-        self['scattergeo'] = val
+        self["scattergeo"] = val
 
     # scattergl
     # ---------
@@ -670,11 +667,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Scattergl]
         """
-        return self['scattergl']
+        return self["scattergl"]
 
     @scattergl.setter
     def scattergl(self, val):
-        self['scattergl'] = val
+        self["scattergl"] = val
 
     # scattermapbox
     # -------------
@@ -693,11 +690,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Scattermapbox]
         """
-        return self['scattermapbox']
+        return self["scattermapbox"]
 
     @scattermapbox.setter
     def scattermapbox(self, val):
-        self['scattermapbox'] = val
+        self["scattermapbox"] = val
 
     # scatterpolargl
     # --------------
@@ -716,11 +713,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Scatterpolargl]
         """
-        return self['scatterpolargl']
+        return self["scatterpolargl"]
 
     @scatterpolargl.setter
     def scatterpolargl(self, val):
-        self['scatterpolargl'] = val
+        self["scatterpolargl"] = val
 
     # scatterpolar
     # ------------
@@ -739,11 +736,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Scatterpolar]
         """
-        return self['scatterpolar']
+        return self["scatterpolar"]
 
     @scatterpolar.setter
     def scatterpolar(self, val):
-        self['scatterpolar'] = val
+        self["scatterpolar"] = val
 
     # scatter
     # -------
@@ -762,11 +759,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Scatter]
         """
-        return self['scatter']
+        return self["scatter"]
 
     @scatter.setter
     def scatter(self, val):
-        self['scatter'] = val
+        self["scatter"] = val
 
     # scatterternary
     # --------------
@@ -785,11 +782,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Scatterternary]
         """
-        return self['scatterternary']
+        return self["scatterternary"]
 
     @scatterternary.setter
     def scatterternary(self, val):
-        self['scatterternary'] = val
+        self["scatterternary"] = val
 
     # splom
     # -----
@@ -808,11 +805,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Splom]
         """
-        return self['splom']
+        return self["splom"]
 
     @splom.setter
     def splom(self, val):
-        self['splom'] = val
+        self["splom"] = val
 
     # streamtube
     # ----------
@@ -831,11 +828,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Streamtube]
         """
-        return self['streamtube']
+        return self["streamtube"]
 
     @streamtube.setter
     def streamtube(self, val):
-        self['streamtube'] = val
+        self["streamtube"] = val
 
     # sunburst
     # --------
@@ -854,11 +851,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Sunburst]
         """
-        return self['sunburst']
+        return self["sunburst"]
 
     @sunburst.setter
     def sunburst(self, val):
-        self['sunburst'] = val
+        self["sunburst"] = val
 
     # surface
     # -------
@@ -877,11 +874,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Surface]
         """
-        return self['surface']
+        return self["surface"]
 
     @surface.setter
     def surface(self, val):
-        self['surface'] = val
+        self["surface"] = val
 
     # table
     # -----
@@ -900,11 +897,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Table]
         """
-        return self['table']
+        return self["table"]
 
     @table.setter
     def table(self, val):
-        self['table'] = val
+        self["table"] = val
 
     # violin
     # ------
@@ -923,11 +920,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Violin]
         """
-        return self['violin']
+        return self["violin"]
 
     @violin.setter
     def violin(self, val):
-        self['violin'] = val
+        self["violin"] = val
 
     # volume
     # ------
@@ -946,11 +943,11 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Volume]
         """
-        return self['volume']
+        return self["volume"]
 
     @volume.setter
     def volume(self, val):
-        self['volume'] = val
+        self["volume"] = val
 
     # waterfall
     # ---------
@@ -969,17 +966,17 @@ class Data(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.template.data.Waterfall]
         """
-        return self['waterfall']
+        return self["waterfall"]
 
     @waterfall.setter
     def waterfall(self, val):
-        self['waterfall'] = val
+        self["waterfall"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.template'
+        return "layout.template"
 
     # Self properties description
     # ---------------------------
@@ -1300,7 +1297,7 @@ class Data(_BaseLayoutHierarchyType):
         -------
         Data
         """
-        super(Data, self).__init__('data')
+        super(Data, self).__init__("data")
 
         # Validate arg
         # ------------
@@ -1320,150 +1317,145 @@ an instance of plotly.graph_objs.layout.template.Data"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.template import (data as v_data)
+        from plotly.validators.layout.template import data as v_data
 
         # Initialize validators
         # ---------------------
-        self._validators['area'] = v_data.AreasValidator()
-        self._validators['barpolar'] = v_data.BarpolarsValidator()
-        self._validators['bar'] = v_data.BarsValidator()
-        self._validators['box'] = v_data.BoxsValidator()
-        self._validators['candlestick'] = v_data.CandlesticksValidator()
-        self._validators['carpet'] = v_data.CarpetsValidator()
-        self._validators['choropleth'] = v_data.ChoroplethsValidator()
-        self._validators['cone'] = v_data.ConesValidator()
-        self._validators['contourcarpet'] = v_data.ContourcarpetsValidator()
-        self._validators['contour'] = v_data.ContoursValidator()
-        self._validators['funnelarea'] = v_data.FunnelareasValidator()
-        self._validators['funnel'] = v_data.FunnelsValidator()
-        self._validators['heatmapgl'] = v_data.HeatmapglsValidator()
-        self._validators['heatmap'] = v_data.HeatmapsValidator()
-        self._validators['histogram2dcontour'
-                        ] = v_data.Histogram2dContoursValidator()
-        self._validators['histogram2d'] = v_data.Histogram2dsValidator()
-        self._validators['histogram'] = v_data.HistogramsValidator()
-        self._validators['isosurface'] = v_data.IsosurfacesValidator()
-        self._validators['mesh3d'] = v_data.Mesh3dsValidator()
-        self._validators['ohlc'] = v_data.OhlcsValidator()
-        self._validators['parcats'] = v_data.ParcatssValidator()
-        self._validators['parcoords'] = v_data.ParcoordssValidator()
-        self._validators['pie'] = v_data.PiesValidator()
-        self._validators['pointcloud'] = v_data.PointcloudsValidator()
-        self._validators['sankey'] = v_data.SankeysValidator()
-        self._validators['scatter3d'] = v_data.Scatter3dsValidator()
-        self._validators['scattercarpet'] = v_data.ScattercarpetsValidator()
-        self._validators['scattergeo'] = v_data.ScattergeosValidator()
-        self._validators['scattergl'] = v_data.ScatterglsValidator()
-        self._validators['scattermapbox'] = v_data.ScattermapboxsValidator()
-        self._validators['scatterpolargl'] = v_data.ScatterpolarglsValidator()
-        self._validators['scatterpolar'] = v_data.ScatterpolarsValidator()
-        self._validators['scatter'] = v_data.ScattersValidator()
-        self._validators['scatterternary'] = v_data.ScatterternarysValidator()
-        self._validators['splom'] = v_data.SplomsValidator()
-        self._validators['streamtube'] = v_data.StreamtubesValidator()
-        self._validators['sunburst'] = v_data.SunburstsValidator()
-        self._validators['surface'] = v_data.SurfacesValidator()
-        self._validators['table'] = v_data.TablesValidator()
-        self._validators['violin'] = v_data.ViolinsValidator()
-        self._validators['volume'] = v_data.VolumesValidator()
-        self._validators['waterfall'] = v_data.WaterfallsValidator()
+        self._validators["area"] = v_data.AreasValidator()
+        self._validators["barpolar"] = v_data.BarpolarsValidator()
+        self._validators["bar"] = v_data.BarsValidator()
+        self._validators["box"] = v_data.BoxsValidator()
+        self._validators["candlestick"] = v_data.CandlesticksValidator()
+        self._validators["carpet"] = v_data.CarpetsValidator()
+        self._validators["choropleth"] = v_data.ChoroplethsValidator()
+        self._validators["cone"] = v_data.ConesValidator()
+        self._validators["contourcarpet"] = v_data.ContourcarpetsValidator()
+        self._validators["contour"] = v_data.ContoursValidator()
+        self._validators["funnelarea"] = v_data.FunnelareasValidator()
+        self._validators["funnel"] = v_data.FunnelsValidator()
+        self._validators["heatmapgl"] = v_data.HeatmapglsValidator()
+        self._validators["heatmap"] = v_data.HeatmapsValidator()
+        self._validators["histogram2dcontour"] = v_data.Histogram2dContoursValidator()
+        self._validators["histogram2d"] = v_data.Histogram2dsValidator()
+        self._validators["histogram"] = v_data.HistogramsValidator()
+        self._validators["isosurface"] = v_data.IsosurfacesValidator()
+        self._validators["mesh3d"] = v_data.Mesh3dsValidator()
+        self._validators["ohlc"] = v_data.OhlcsValidator()
+        self._validators["parcats"] = v_data.ParcatssValidator()
+        self._validators["parcoords"] = v_data.ParcoordssValidator()
+        self._validators["pie"] = v_data.PiesValidator()
+        self._validators["pointcloud"] = v_data.PointcloudsValidator()
+        self._validators["sankey"] = v_data.SankeysValidator()
+        self._validators["scatter3d"] = v_data.Scatter3dsValidator()
+        self._validators["scattercarpet"] = v_data.ScattercarpetsValidator()
+        self._validators["scattergeo"] = v_data.ScattergeosValidator()
+        self._validators["scattergl"] = v_data.ScatterglsValidator()
+        self._validators["scattermapbox"] = v_data.ScattermapboxsValidator()
+        self._validators["scatterpolargl"] = v_data.ScatterpolarglsValidator()
+        self._validators["scatterpolar"] = v_data.ScatterpolarsValidator()
+        self._validators["scatter"] = v_data.ScattersValidator()
+        self._validators["scatterternary"] = v_data.ScatterternarysValidator()
+        self._validators["splom"] = v_data.SplomsValidator()
+        self._validators["streamtube"] = v_data.StreamtubesValidator()
+        self._validators["sunburst"] = v_data.SunburstsValidator()
+        self._validators["surface"] = v_data.SurfacesValidator()
+        self._validators["table"] = v_data.TablesValidator()
+        self._validators["violin"] = v_data.ViolinsValidator()
+        self._validators["volume"] = v_data.VolumesValidator()
+        self._validators["waterfall"] = v_data.WaterfallsValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('area', None)
-        self['area'] = area if area is not None else _v
-        _v = arg.pop('barpolar', None)
-        self['barpolar'] = barpolar if barpolar is not None else _v
-        _v = arg.pop('bar', None)
-        self['bar'] = bar if bar is not None else _v
-        _v = arg.pop('box', None)
-        self['box'] = box if box is not None else _v
-        _v = arg.pop('candlestick', None)
-        self['candlestick'] = candlestick if candlestick is not None else _v
-        _v = arg.pop('carpet', None)
-        self['carpet'] = carpet if carpet is not None else _v
-        _v = arg.pop('choropleth', None)
-        self['choropleth'] = choropleth if choropleth is not None else _v
-        _v = arg.pop('cone', None)
-        self['cone'] = cone if cone is not None else _v
-        _v = arg.pop('contourcarpet', None)
-        self['contourcarpet'
-            ] = contourcarpet if contourcarpet is not None else _v
-        _v = arg.pop('contour', None)
-        self['contour'] = contour if contour is not None else _v
-        _v = arg.pop('funnelarea', None)
-        self['funnelarea'] = funnelarea if funnelarea is not None else _v
-        _v = arg.pop('funnel', None)
-        self['funnel'] = funnel if funnel is not None else _v
-        _v = arg.pop('heatmapgl', None)
-        self['heatmapgl'] = heatmapgl if heatmapgl is not None else _v
-        _v = arg.pop('heatmap', None)
-        self['heatmap'] = heatmap if heatmap is not None else _v
-        _v = arg.pop('histogram2dcontour', None)
-        self['histogram2dcontour'
-            ] = histogram2dcontour if histogram2dcontour is not None else _v
-        _v = arg.pop('histogram2d', None)
-        self['histogram2d'] = histogram2d if histogram2d is not None else _v
-        _v = arg.pop('histogram', None)
-        self['histogram'] = histogram if histogram is not None else _v
-        _v = arg.pop('isosurface', None)
-        self['isosurface'] = isosurface if isosurface is not None else _v
-        _v = arg.pop('mesh3d', None)
-        self['mesh3d'] = mesh3d if mesh3d is not None else _v
-        _v = arg.pop('ohlc', None)
-        self['ohlc'] = ohlc if ohlc is not None else _v
-        _v = arg.pop('parcats', None)
-        self['parcats'] = parcats if parcats is not None else _v
-        _v = arg.pop('parcoords', None)
-        self['parcoords'] = parcoords if parcoords is not None else _v
-        _v = arg.pop('pie', None)
-        self['pie'] = pie if pie is not None else _v
-        _v = arg.pop('pointcloud', None)
-        self['pointcloud'] = pointcloud if pointcloud is not None else _v
-        _v = arg.pop('sankey', None)
-        self['sankey'] = sankey if sankey is not None else _v
-        _v = arg.pop('scatter3d', None)
-        self['scatter3d'] = scatter3d if scatter3d is not None else _v
-        _v = arg.pop('scattercarpet', None)
-        self['scattercarpet'
-            ] = scattercarpet if scattercarpet is not None else _v
-        _v = arg.pop('scattergeo', None)
-        self['scattergeo'] = scattergeo if scattergeo is not None else _v
-        _v = arg.pop('scattergl', None)
-        self['scattergl'] = scattergl if scattergl is not None else _v
-        _v = arg.pop('scattermapbox', None)
-        self['scattermapbox'
-            ] = scattermapbox if scattermapbox is not None else _v
-        _v = arg.pop('scatterpolargl', None)
-        self['scatterpolargl'
-            ] = scatterpolargl if scatterpolargl is not None else _v
-        _v = arg.pop('scatterpolar', None)
-        self['scatterpolar'] = scatterpolar if scatterpolar is not None else _v
-        _v = arg.pop('scatter', None)
-        self['scatter'] = scatter if scatter is not None else _v
-        _v = arg.pop('scatterternary', None)
-        self['scatterternary'
-            ] = scatterternary if scatterternary is not None else _v
-        _v = arg.pop('splom', None)
-        self['splom'] = splom if splom is not None else _v
-        _v = arg.pop('streamtube', None)
-        self['streamtube'] = streamtube if streamtube is not None else _v
-        _v = arg.pop('sunburst', None)
-        self['sunburst'] = sunburst if sunburst is not None else _v
-        _v = arg.pop('surface', None)
-        self['surface'] = surface if surface is not None else _v
-        _v = arg.pop('table', None)
-        self['table'] = table if table is not None else _v
-        _v = arg.pop('violin', None)
-        self['violin'] = violin if violin is not None else _v
-        _v = arg.pop('volume', None)
-        self['volume'] = volume if volume is not None else _v
-        _v = arg.pop('waterfall', None)
-        self['waterfall'] = waterfall if waterfall is not None else _v
+        _v = arg.pop("area", None)
+        self["area"] = area if area is not None else _v
+        _v = arg.pop("barpolar", None)
+        self["barpolar"] = barpolar if barpolar is not None else _v
+        _v = arg.pop("bar", None)
+        self["bar"] = bar if bar is not None else _v
+        _v = arg.pop("box", None)
+        self["box"] = box if box is not None else _v
+        _v = arg.pop("candlestick", None)
+        self["candlestick"] = candlestick if candlestick is not None else _v
+        _v = arg.pop("carpet", None)
+        self["carpet"] = carpet if carpet is not None else _v
+        _v = arg.pop("choropleth", None)
+        self["choropleth"] = choropleth if choropleth is not None else _v
+        _v = arg.pop("cone", None)
+        self["cone"] = cone if cone is not None else _v
+        _v = arg.pop("contourcarpet", None)
+        self["contourcarpet"] = contourcarpet if contourcarpet is not None else _v
+        _v = arg.pop("contour", None)
+        self["contour"] = contour if contour is not None else _v
+        _v = arg.pop("funnelarea", None)
+        self["funnelarea"] = funnelarea if funnelarea is not None else _v
+        _v = arg.pop("funnel", None)
+        self["funnel"] = funnel if funnel is not None else _v
+        _v = arg.pop("heatmapgl", None)
+        self["heatmapgl"] = heatmapgl if heatmapgl is not None else _v
+        _v = arg.pop("heatmap", None)
+        self["heatmap"] = heatmap if heatmap is not None else _v
+        _v = arg.pop("histogram2dcontour", None)
+        self["histogram2dcontour"] = (
+            histogram2dcontour if histogram2dcontour is not None else _v
+        )
+        _v = arg.pop("histogram2d", None)
+        self["histogram2d"] = histogram2d if histogram2d is not None else _v
+        _v = arg.pop("histogram", None)
+        self["histogram"] = histogram if histogram is not None else _v
+        _v = arg.pop("isosurface", None)
+        self["isosurface"] = isosurface if isosurface is not None else _v
+        _v = arg.pop("mesh3d", None)
+        self["mesh3d"] = mesh3d if mesh3d is not None else _v
+        _v = arg.pop("ohlc", None)
+        self["ohlc"] = ohlc if ohlc is not None else _v
+        _v = arg.pop("parcats", None)
+        self["parcats"] = parcats if parcats is not None else _v
+        _v = arg.pop("parcoords", None)
+        self["parcoords"] = parcoords if parcoords is not None else _v
+        _v = arg.pop("pie", None)
+        self["pie"] = pie if pie is not None else _v
+        _v = arg.pop("pointcloud", None)
+        self["pointcloud"] = pointcloud if pointcloud is not None else _v
+        _v = arg.pop("sankey", None)
+        self["sankey"] = sankey if sankey is not None else _v
+        _v = arg.pop("scatter3d", None)
+        self["scatter3d"] = scatter3d if scatter3d is not None else _v
+        _v = arg.pop("scattercarpet", None)
+        self["scattercarpet"] = scattercarpet if scattercarpet is not None else _v
+        _v = arg.pop("scattergeo", None)
+        self["scattergeo"] = scattergeo if scattergeo is not None else _v
+        _v = arg.pop("scattergl", None)
+        self["scattergl"] = scattergl if scattergl is not None else _v
+        _v = arg.pop("scattermapbox", None)
+        self["scattermapbox"] = scattermapbox if scattermapbox is not None else _v
+        _v = arg.pop("scatterpolargl", None)
+        self["scatterpolargl"] = scatterpolargl if scatterpolargl is not None else _v
+        _v = arg.pop("scatterpolar", None)
+        self["scatterpolar"] = scatterpolar if scatterpolar is not None else _v
+        _v = arg.pop("scatter", None)
+        self["scatter"] = scatter if scatter is not None else _v
+        _v = arg.pop("scatterternary", None)
+        self["scatterternary"] = scatterternary if scatterternary is not None else _v
+        _v = arg.pop("splom", None)
+        self["splom"] = splom if splom is not None else _v
+        _v = arg.pop("streamtube", None)
+        self["streamtube"] = streamtube if streamtube is not None else _v
+        _v = arg.pop("sunburst", None)
+        self["sunburst"] = sunburst if sunburst is not None else _v
+        _v = arg.pop("surface", None)
+        self["surface"] = surface if surface is not None else _v
+        _v = arg.pop("table", None)
+        self["table"] = table if table is not None else _v
+        _v = arg.pop("violin", None)
+        self["violin"] = violin if violin is not None else _v
+        _v = arg.pop("volume", None)
+        self["volume"] = volume if volume is not None else _v
+        _v = arg.pop("waterfall", None)
+        self["waterfall"] = waterfall if waterfall is not None else _v
 
         # Process unknown kwargs
         # ----------------------

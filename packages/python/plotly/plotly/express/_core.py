@@ -340,17 +340,13 @@ def configure_cartesian_marginal_axes(args, fig, orders):
     # Configure axis ticks on marginal subplots
     if args["marginal_x"]:
         fig.update_yaxes(
-            showticklabels=False,
-            showgrid=args["marginal_x"] == "histogram",
-            row=nrows,
+            showticklabels=False, showgrid=args["marginal_x"] == "histogram", row=nrows
         )
         fig.update_xaxes(showgrid=True, row=nrows)
 
     if args["marginal_y"]:
         fig.update_xaxes(
-            showticklabels=False,
-            showgrid=args["marginal_y"] == "histogram",
-            col=ncols,
+            showticklabels=False, showgrid=args["marginal_y"] == "histogram", col=ncols
         )
         fig.update_yaxes(showgrid=True, col=ncols)
 
@@ -678,11 +674,11 @@ def apply_default_cascade(args):
             args["color_discrete_sequence"] = qualitative.Plotly
 
     # If both marginals and faceting are specified, faceting wins
-    if args.get('facet_col', None) and args.get('marginal_y', None):
-        args['marginal_y'] = None
+    if args.get("facet_col", None) and args.get("marginal_y", None):
+        args["marginal_y"] = None
 
-    if args.get('facet_row', None) and args.get('marginal_x', None):
-        args['marginal_x'] = None
+    if args.get("facet_row", None) and args.get("marginal_x", None):
+        args["marginal_x"] = None
 
 
 def infer_config(args, constructor, trace_patch):
@@ -1011,11 +1007,7 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
                 continue
 
             _set_trace_grid_reference(
-                trace,
-                fig.layout,
-                fig._grid_ref,
-                trace._subplot_row,
-                trace._subplot_col,
+                trace, fig.layout, fig._grid_ref, trace._subplot_row, trace._subplot_col
             )
 
     # Add traces, layout and frames to figure
@@ -1048,9 +1040,7 @@ def init_figure(
             else:
                 specs[row0][col0] = {"type": trace.type}
             if args.get("facet_row", None) and hasattr(trace, "_subplot_row_val"):
-                row_titles[row0] = (
-                    args["facet_row"] + "=" + str(trace._subplot_row_val)
-                )
+                row_titles[row0] = args["facet_row"] + "=" + str(trace._subplot_row_val)
 
             if args.get("facet_col", None) and hasattr(trace, "_subplot_col_val"):
                 column_titles[col0] = (

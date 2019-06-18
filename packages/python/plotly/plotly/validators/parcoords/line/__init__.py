@@ -1,18 +1,13 @@
-
-
 import _plotly_utils.basevalidators
 
 
 class ShowscaleValidator(_plotly_utils.basevalidators.BooleanValidator):
-
-    def __init__(
-        self, plotly_name='showscale', parent_name='parcoords.line', **kwargs
-    ):
+    def __init__(self, plotly_name="showscale", parent_name="parcoords.line", **kwargs):
         super(ShowscaleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -21,18 +16,14 @@ import _plotly_utils.basevalidators
 
 
 class ReversescaleValidator(_plotly_utils.basevalidators.BooleanValidator):
-
     def __init__(
-        self,
-        plotly_name='reversescale',
-        parent_name='parcoords.line',
-        **kwargs
+        self, plotly_name="reversescale", parent_name="parcoords.line", **kwargs
     ):
         super(ReversescaleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -41,15 +32,12 @@ import _plotly_utils.basevalidators
 
 
 class ColorsrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(
-        self, plotly_name='colorsrc', parent_name='parcoords.line', **kwargs
-    ):
+    def __init__(self, plotly_name="colorsrc", parent_name="parcoords.line", **kwargs):
         super(ColorsrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -58,18 +46,15 @@ import _plotly_utils.basevalidators
 
 
 class ColorscaleValidator(_plotly_utils.basevalidators.ColorscaleValidator):
-
     def __init__(
-        self, plotly_name='colorscale', parent_name='parcoords.line', **kwargs
+        self, plotly_name="colorscale", parent_name="parcoords.line", **kwargs
     ):
         super(ColorscaleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            implied_edits=kwargs.pop(
-                'implied_edits', {'autocolorscale': False}
-            ),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            implied_edits=kwargs.pop("implied_edits", {"autocolorscale": False}),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -78,16 +63,14 @@ import _plotly_utils.basevalidators
 
 
 class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='colorbar', parent_name='parcoords.line', **kwargs
-    ):
+    def __init__(self, plotly_name="colorbar", parent_name="parcoords.line", **kwargs):
         super(ColorBarValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'ColorBar'),
+            data_class_str=kwargs.pop("data_class_str", "ColorBar"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             bgcolor
                 Sets the color of padded area.
             bordercolor
@@ -298,7 +281,7 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
             ypad
                 Sets the amount of padding (in px) along the y
                 direction.
-"""
+""",
             ),
             **kwargs
         )
@@ -308,17 +291,14 @@ import _plotly_utils.basevalidators
 
 
 class ColoraxisValidator(_plotly_utils.basevalidators.SubplotidValidator):
-
-    def __init__(
-        self, plotly_name='coloraxis', parent_name='parcoords.line', **kwargs
-    ):
+    def __init__(self, plotly_name="coloraxis", parent_name="parcoords.line", **kwargs):
         super(ColoraxisValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            dflt=kwargs.pop('dflt', None),
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            regex=kwargs.pop('regex', '/^coloraxis([2-9]|[1-9][0-9]+)?$/'),
-            role=kwargs.pop('role', 'info'),
+            dflt=kwargs.pop("dflt", None),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            regex=kwargs.pop("regex", "/^coloraxis([2-9]|[1-9][0-9]+)?$/"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -327,19 +307,14 @@ import _plotly_utils.basevalidators
 
 
 class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
-
-    def __init__(
-        self, plotly_name='color', parent_name='parcoords.line', **kwargs
-    ):
+    def __init__(self, plotly_name="color", parent_name="parcoords.line", **kwargs):
         super(ColorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'style'),
-            colorscale_path=kwargs.pop(
-                'colorscale_path', 'parcoords.line.colorscale'
-            ),
+            array_ok=kwargs.pop("array_ok", True),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "style"),
+            colorscale_path=kwargs.pop("colorscale_path", "parcoords.line.colorscale"),
             **kwargs
         )
 
@@ -348,16 +323,13 @@ import _plotly_utils.basevalidators
 
 
 class CminValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='cmin', parent_name='parcoords.line', **kwargs
-    ):
+    def __init__(self, plotly_name="cmin", parent_name="parcoords.line", **kwargs):
         super(CminValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            implied_edits=kwargs.pop('implied_edits', {'cauto': False}),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            implied_edits=kwargs.pop("implied_edits", {"cauto": False}),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -366,16 +338,13 @@ import _plotly_utils.basevalidators
 
 
 class CmidValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='cmid', parent_name='parcoords.line', **kwargs
-    ):
+    def __init__(self, plotly_name="cmid", parent_name="parcoords.line", **kwargs):
         super(CmidValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            implied_edits=kwargs.pop('implied_edits', {}),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            implied_edits=kwargs.pop("implied_edits", {}),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -384,16 +353,13 @@ import _plotly_utils.basevalidators
 
 
 class CmaxValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='cmax', parent_name='parcoords.line', **kwargs
-    ):
+    def __init__(self, plotly_name="cmax", parent_name="parcoords.line", **kwargs):
         super(CmaxValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            implied_edits=kwargs.pop('implied_edits', {'cauto': False}),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            implied_edits=kwargs.pop("implied_edits", {"cauto": False}),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -402,16 +368,13 @@ import _plotly_utils.basevalidators
 
 
 class CautoValidator(_plotly_utils.basevalidators.BooleanValidator):
-
-    def __init__(
-        self, plotly_name='cauto', parent_name='parcoords.line', **kwargs
-    ):
+    def __init__(self, plotly_name="cauto", parent_name="parcoords.line", **kwargs):
         super(CautoValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            implied_edits=kwargs.pop('implied_edits', {}),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            implied_edits=kwargs.pop("implied_edits", {}),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -420,18 +383,14 @@ import _plotly_utils.basevalidators
 
 
 class AutocolorscaleValidator(_plotly_utils.basevalidators.BooleanValidator):
-
     def __init__(
-        self,
-        plotly_name='autocolorscale',
-        parent_name='parcoords.line',
-        **kwargs
+        self, plotly_name="autocolorscale", parent_name="parcoords.line", **kwargs
     ):
         super(AutocolorscaleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            implied_edits=kwargs.pop('implied_edits', {}),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            implied_edits=kwargs.pop("implied_edits", {}),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )

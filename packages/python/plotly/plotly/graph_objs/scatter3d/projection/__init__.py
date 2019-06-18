@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -20,11 +18,11 @@ class Z(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
     # scale
     # -----
@@ -41,11 +39,11 @@ class Z(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['scale']
+        return self["scale"]
 
     @scale.setter
     def scale(self, val):
-        self['scale'] = val
+        self["scale"] = val
 
     # show
     # ----
@@ -61,17 +59,17 @@ class Z(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['show']
+        return self["show"]
 
     @show.setter
     def show(self, val):
-        self['show'] = val
+        self["show"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'scatter3d.projection'
+        return "scatter3d.projection"
 
     # Self properties description
     # ---------------------------
@@ -88,9 +86,7 @@ class Z(_BaseTraceHierarchyType):
             axis.
         """
 
-    def __init__(
-        self, arg=None, opacity=None, scale=None, show=None, **kwargs
-    ):
+    def __init__(self, arg=None, opacity=None, scale=None, show=None, **kwargs):
         """
         Construct a new Z object
         
@@ -112,7 +108,7 @@ class Z(_BaseTraceHierarchyType):
         -------
         Z
         """
-        super(Z, self).__init__('z')
+        super(Z, self).__init__("z")
 
         # Validate arg
         # ------------
@@ -132,26 +128,26 @@ an instance of plotly.graph_objs.scatter3d.projection.Z"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.scatter3d.projection import (z as v_z)
+        from plotly.validators.scatter3d.projection import z as v_z
 
         # Initialize validators
         # ---------------------
-        self._validators['opacity'] = v_z.OpacityValidator()
-        self._validators['scale'] = v_z.ScaleValidator()
-        self._validators['show'] = v_z.ShowValidator()
+        self._validators["opacity"] = v_z.OpacityValidator()
+        self._validators["scale"] = v_z.ScaleValidator()
+        self._validators["show"] = v_z.ShowValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('opacity', None)
-        self['opacity'] = opacity if opacity is not None else _v
-        _v = arg.pop('scale', None)
-        self['scale'] = scale if scale is not None else _v
-        _v = arg.pop('show', None)
-        self['show'] = show if show is not None else _v
+        _v = arg.pop("opacity", None)
+        self["opacity"] = opacity if opacity is not None else _v
+        _v = arg.pop("scale", None)
+        self["scale"] = scale if scale is not None else _v
+        _v = arg.pop("show", None)
+        self["show"] = show if show is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -182,11 +178,11 @@ class Y(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
     # scale
     # -----
@@ -203,11 +199,11 @@ class Y(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['scale']
+        return self["scale"]
 
     @scale.setter
     def scale(self, val):
-        self['scale'] = val
+        self["scale"] = val
 
     # show
     # ----
@@ -223,17 +219,17 @@ class Y(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['show']
+        return self["show"]
 
     @show.setter
     def show(self, val):
-        self['show'] = val
+        self["show"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'scatter3d.projection'
+        return "scatter3d.projection"
 
     # Self properties description
     # ---------------------------
@@ -250,9 +246,7 @@ class Y(_BaseTraceHierarchyType):
             axis.
         """
 
-    def __init__(
-        self, arg=None, opacity=None, scale=None, show=None, **kwargs
-    ):
+    def __init__(self, arg=None, opacity=None, scale=None, show=None, **kwargs):
         """
         Construct a new Y object
         
@@ -274,7 +268,7 @@ class Y(_BaseTraceHierarchyType):
         -------
         Y
         """
-        super(Y, self).__init__('y')
+        super(Y, self).__init__("y")
 
         # Validate arg
         # ------------
@@ -294,26 +288,26 @@ an instance of plotly.graph_objs.scatter3d.projection.Y"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.scatter3d.projection import (y as v_y)
+        from plotly.validators.scatter3d.projection import y as v_y
 
         # Initialize validators
         # ---------------------
-        self._validators['opacity'] = v_y.OpacityValidator()
-        self._validators['scale'] = v_y.ScaleValidator()
-        self._validators['show'] = v_y.ShowValidator()
+        self._validators["opacity"] = v_y.OpacityValidator()
+        self._validators["scale"] = v_y.ScaleValidator()
+        self._validators["show"] = v_y.ShowValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('opacity', None)
-        self['opacity'] = opacity if opacity is not None else _v
-        _v = arg.pop('scale', None)
-        self['scale'] = scale if scale is not None else _v
-        _v = arg.pop('show', None)
-        self['show'] = show if show is not None else _v
+        _v = arg.pop("opacity", None)
+        self["opacity"] = opacity if opacity is not None else _v
+        _v = arg.pop("scale", None)
+        self["scale"] = scale if scale is not None else _v
+        _v = arg.pop("show", None)
+        self["show"] = show if show is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -344,11 +338,11 @@ class X(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
     # scale
     # -----
@@ -365,11 +359,11 @@ class X(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['scale']
+        return self["scale"]
 
     @scale.setter
     def scale(self, val):
-        self['scale'] = val
+        self["scale"] = val
 
     # show
     # ----
@@ -385,17 +379,17 @@ class X(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['show']
+        return self["show"]
 
     @show.setter
     def show(self, val):
-        self['show'] = val
+        self["show"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'scatter3d.projection'
+        return "scatter3d.projection"
 
     # Self properties description
     # ---------------------------
@@ -412,9 +406,7 @@ class X(_BaseTraceHierarchyType):
             axis.
         """
 
-    def __init__(
-        self, arg=None, opacity=None, scale=None, show=None, **kwargs
-    ):
+    def __init__(self, arg=None, opacity=None, scale=None, show=None, **kwargs):
         """
         Construct a new X object
         
@@ -436,7 +428,7 @@ class X(_BaseTraceHierarchyType):
         -------
         X
         """
-        super(X, self).__init__('x')
+        super(X, self).__init__("x")
 
         # Validate arg
         # ------------
@@ -456,26 +448,26 @@ an instance of plotly.graph_objs.scatter3d.projection.X"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.scatter3d.projection import (x as v_x)
+        from plotly.validators.scatter3d.projection import x as v_x
 
         # Initialize validators
         # ---------------------
-        self._validators['opacity'] = v_x.OpacityValidator()
-        self._validators['scale'] = v_x.ScaleValidator()
-        self._validators['show'] = v_x.ShowValidator()
+        self._validators["opacity"] = v_x.OpacityValidator()
+        self._validators["scale"] = v_x.ScaleValidator()
+        self._validators["show"] = v_x.ShowValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('opacity', None)
-        self['opacity'] = opacity if opacity is not None else _v
-        _v = arg.pop('scale', None)
-        self['scale'] = scale if scale is not None else _v
-        _v = arg.pop('show', None)
-        self['show'] = show if show is not None else _v
+        _v = arg.pop("opacity", None)
+        self["opacity"] = opacity if opacity is not None else _v
+        _v = arg.pop("scale", None)
+        self["scale"] = scale if scale is not None else _v
+        _v = arg.pop("show", None)
+        self["show"] = show if show is not None else _v
 
         # Process unknown kwargs
         # ----------------------

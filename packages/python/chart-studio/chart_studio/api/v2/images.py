@@ -3,7 +3,7 @@ from __future__ import absolute_import
 
 from chart_studio.api.v2.utils import build_url, request
 
-RESOURCE = 'images'
+RESOURCE = "images"
 
 
 def create(body):
@@ -15,4 +15,4 @@ def create(body):
 
     """
     url = build_url(RESOURCE)
-    return request('post', url, json=body)
+    return request("post", url, json=body)

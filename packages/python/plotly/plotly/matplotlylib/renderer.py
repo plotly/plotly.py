@@ -18,7 +18,9 @@ from plotly.matplotlylib import mpltools
 
 # Warning format
 def warning_on_one_line(msg, category, filename, lineno, file=None, line=None):
-    return '%s:%s: %s:\n\n%s\n\n' % (filename, lineno, category.__name__, msg)
+    return "%s:%s: %s:\n\n%s\n\n" % (filename, lineno, category.__name__, msg)
+
+
 warnings.formatwarning = warning_on_one_line
 
 
@@ -40,6 +42,7 @@ class PlotlyRenderer(Renderer):
     exporter.run(fig)  # ... et voila
 
     """
+
     def __init__(self):
         """Initialize PlotlyRenderer obj.
 
@@ -78,21 +81,21 @@ class PlotlyRenderer(Renderer):
         """
         self.msg += "Opening figure\n"
         self.mpl_fig = fig
-        self.plotly_fig['layout'] = go.Layout(
-            width=int(props['figwidth'] * props['dpi']),
-            height=int(props['figheight'] * props['dpi']),
+        self.plotly_fig["layout"] = go.Layout(
+            width=int(props["figwidth"] * props["dpi"]),
+            height=int(props["figheight"] * props["dpi"]),
             autosize=False,
-            hovermode='closest')
+            hovermode="closest",
+        )
         self.mpl_x_bounds, self.mpl_y_bounds = mpltools.get_axes_bounds(fig)
         margin = go.layout.Margin(
-            l=int(self.mpl_x_bounds[0] * self.plotly_fig['layout']['width']),
-            r=int(
-                (1-self.mpl_x_bounds[1]) * self.plotly_fig['layout']['width']),
-            t=int((1-self.mpl_y_bounds[1]) * self.plotly_fig['layout'][
-                'height']),
-            b=int(self.mpl_y_bounds[0] * self.plotly_fig['layout']['height']),
-            pad=0)
-        self.plotly_fig['layout']['margin'] = margin
+            l=int(self.mpl_x_bounds[0] * self.plotly_fig["layout"]["width"]),
+            r=int((1 - self.mpl_x_bounds[1]) * self.plotly_fig["layout"]["width"]),
+            t=int((1 - self.mpl_y_bounds[1]) * self.plotly_fig["layout"]["height"]),
+            b=int(self.mpl_y_bounds[0] * self.plotly_fig["layout"]["height"]),
+            pad=0,
+        )
+        self.plotly_fig["layout"]["margin"] = margin
 
     def close_figure(self, fig):
         """Closes figure by cleaning up data and layout dictionaries.
@@ -107,7 +110,7 @@ class PlotlyRenderer(Renderer):
         fig -- a matplotlib.figure.Figure object.
 
         """
-        self.plotly_fig['layout']['showlegend'] = False
+        self.plotly_fig["layout"]["showlegend"] = False
         self.msg += "Closing figure\n"
 
     def open_axes(self, ax, props):
@@ -143,45 +146,43 @@ class PlotlyRenderer(Renderer):
         """
         self.msg += "  Opening axes\n"
         self.current_mpl_ax = ax
-        self.bar_containers = [c for c in ax.containers  # empty is OK
-                               if c.__class__.__name__ == 'BarContainer']
+        self.bar_containers = [
+            c
+            for c in ax.containers  # empty is OK
+            if c.__class__.__name__ == "BarContainer"
+        ]
         self.current_bars = []
         self.axis_ct += 1
         # set defaults in axes
         xaxis = go.layout.XAxis(
-            anchor='y{0}'.format(self.axis_ct),
-            zeroline=False,
-            ticks='inside')
+            anchor="y{0}".format(self.axis_ct), zeroline=False, ticks="inside"
+        )
         yaxis = go.layout.YAxis(
-            anchor='x{0}'.format(self.axis_ct),
-            zeroline=False,
-            ticks='inside')
+            anchor="x{0}".format(self.axis_ct), zeroline=False, ticks="inside"
+        )
         # update defaults with things set in mpl
         mpl_xaxis, mpl_yaxis = mpltools.prep_xy_axis(
-            ax=ax,
-            props=props,
-            x_bounds=self.mpl_x_bounds,
-            y_bounds=self.mpl_y_bounds)
+            ax=ax, props=props, x_bounds=self.mpl_x_bounds, y_bounds=self.mpl_y_bounds
+        )
         xaxis.update(mpl_xaxis)
         yaxis.update(mpl_yaxis)
-        bottom_spine = mpltools.get_spine_visible(ax, 'bottom')
-        top_spine = mpltools.get_spine_visible(ax, 'top')
-        left_spine = mpltools.get_spine_visible(ax, 'left')
-        right_spine = mpltools.get_spine_visible(ax, 'right')
-        xaxis['mirror'] = mpltools.get_axis_mirror(bottom_spine, top_spine)
-        yaxis['mirror'] = mpltools.get_axis_mirror(left_spine, right_spine)
-        xaxis['showline'] = bottom_spine
-        yaxis['showline'] = top_spine
+        bottom_spine = mpltools.get_spine_visible(ax, "bottom")
+        top_spine = mpltools.get_spine_visible(ax, "top")
+        left_spine = mpltools.get_spine_visible(ax, "left")
+        right_spine = mpltools.get_spine_visible(ax, "right")
+        xaxis["mirror"] = mpltools.get_axis_mirror(bottom_spine, top_spine)
+        yaxis["mirror"] = mpltools.get_axis_mirror(left_spine, right_spine)
+        xaxis["showline"] = bottom_spine
+        yaxis["showline"] = top_spine
 
         # put axes in our figure
-        self.plotly_fig['layout']['xaxis{0}'.format(self.axis_ct)] = xaxis
-        self.plotly_fig['layout']['yaxis{0}'.format(self.axis_ct)] = yaxis
+        self.plotly_fig["layout"]["xaxis{0}".format(self.axis_ct)] = xaxis
+        self.plotly_fig["layout"]["yaxis{0}".format(self.axis_ct)] = yaxis
 
         # let all subsequent dates be handled properly if required
 
-        if 'type' in dir(xaxis) and xaxis['type'] == 'date':
+        if "type" in dir(xaxis) and xaxis["type"] == "date":
             self.x_is_mpl_date = True
-
 
     def close_axes(self, ax):
         """Close the axes object and clean up.
@@ -204,8 +205,13 @@ class PlotlyRenderer(Renderer):
         # sort bars according to bar containers
         mpl_traces = []
         for container in self.bar_containers:
-            mpl_traces.append([bar_props for bar_props in self.current_bars
-                               if bar_props['mplobj'] in container])
+            mpl_traces.append(
+                [
+                    bar_props
+                    for bar_props in self.current_bars
+                    if bar_props["mplobj"] in container
+                ]
+            )
         for trace in mpl_traces:
             self.draw_bar(trace)
 
@@ -223,80 +229,88 @@ class PlotlyRenderer(Renderer):
         """
         tol = 1e-10
         trace = [mpltools.make_bar(**bar_props) for bar_props in coll]
-        widths = [bar_props['x1'] - bar_props['x0'] for bar_props in trace]
-        heights = [bar_props['y1'] - bar_props['y0'] for bar_props in trace]
-        vertical = abs(
-            sum(widths[0] - widths[iii] for iii in range(len(widths)))
-        ) < tol
-        horizontal = abs(
-            sum(heights[0] - heights[iii] for iii in range(len(heights)))
-        ) < tol
+        widths = [bar_props["x1"] - bar_props["x0"] for bar_props in trace]
+        heights = [bar_props["y1"] - bar_props["y0"] for bar_props in trace]
+        vertical = abs(sum(widths[0] - widths[iii] for iii in range(len(widths)))) < tol
+        horizontal = (
+            abs(sum(heights[0] - heights[iii] for iii in range(len(heights)))) < tol
+        )
         if vertical and horizontal:
             # Check for monotonic x. Can't both be true!
-            x_zeros = [bar_props['x0'] for bar_props in trace]
-            if all((x_zeros[iii + 1] > x_zeros[iii]
-                    for iii in range(len(x_zeros[:-1])))):
-                orientation = 'v'
+            x_zeros = [bar_props["x0"] for bar_props in trace]
+            if all(
+                (x_zeros[iii + 1] > x_zeros[iii] for iii in range(len(x_zeros[:-1])))
+            ):
+                orientation = "v"
             else:
-                orientation = 'h'
+                orientation = "h"
         elif vertical:
-            orientation = 'v'
+            orientation = "v"
         else:
-            orientation = 'h'
-        if orientation == 'v':
+            orientation = "h"
+        if orientation == "v":
             self.msg += "    Attempting to draw a vertical bar chart\n"
-            old_heights = [bar_props['y1'] for bar_props in trace]
+            old_heights = [bar_props["y1"] for bar_props in trace]
             for bar in trace:
-                bar['y0'], bar['y1'] = 0, bar['y1'] - bar['y0']
-            new_heights = [bar_props['y1'] for bar_props in trace]
+                bar["y0"], bar["y1"] = 0, bar["y1"] - bar["y0"]
+            new_heights = [bar_props["y1"] for bar_props in trace]
             # check if we're stacked or not...
             for old, new in zip(old_heights, new_heights):
                 if abs(old - new) > tol:
-                    self.plotly_fig['layout']['barmode'] = 'stack'
-                    self.plotly_fig['layout']['hovermode'] = 'x'
-            x = [bar['x0'] + (bar['x1'] - bar['x0']) / 2 for bar in trace]
-            y = [bar['y1'] for bar in trace]
-            bar_gap = mpltools.get_bar_gap([bar['x0'] for bar in trace],
-                                           [bar['x1'] for bar in trace])
+                    self.plotly_fig["layout"]["barmode"] = "stack"
+                    self.plotly_fig["layout"]["hovermode"] = "x"
+            x = [bar["x0"] + (bar["x1"] - bar["x0"]) / 2 for bar in trace]
+            y = [bar["y1"] for bar in trace]
+            bar_gap = mpltools.get_bar_gap(
+                [bar["x0"] for bar in trace], [bar["x1"] for bar in trace]
+            )
             if self.x_is_mpl_date:
-                x = [bar['x0'] for bar in trace]
-                formatter = (self.current_mpl_ax.get_xaxis()
-                             .get_major_formatter().__class__.__name__)
+                x = [bar["x0"] for bar in trace]
+                formatter = (
+                    self.current_mpl_ax.get_xaxis()
+                    .get_major_formatter()
+                    .__class__.__name__
+                )
                 x = mpltools.mpl_dates_to_datestrings(x, formatter)
         else:
             self.msg += "    Attempting to draw a horizontal bar chart\n"
-            old_rights = [bar_props['x1'] for bar_props in trace]
+            old_rights = [bar_props["x1"] for bar_props in trace]
             for bar in trace:
-                bar['x0'], bar['x1'] = 0, bar['x1'] - bar['x0']
-            new_rights = [bar_props['x1'] for bar_props in trace]
+                bar["x0"], bar["x1"] = 0, bar["x1"] - bar["x0"]
+            new_rights = [bar_props["x1"] for bar_props in trace]
             # check if we're stacked or not...
             for old, new in zip(old_rights, new_rights):
                 if abs(old - new) > tol:
-                    self.plotly_fig['layout']['barmode'] = 'stack'
-                    self.plotly_fig['layout']['hovermode'] = 'y'
-            x = [bar['x1'] for bar in trace]
-            y = [bar['y0'] + (bar['y1'] - bar['y0']) / 2 for bar in trace]
-            bar_gap = mpltools.get_bar_gap([bar['y0'] for bar in trace],
-                                           [bar['y1'] for bar in trace])
+                    self.plotly_fig["layout"]["barmode"] = "stack"
+                    self.plotly_fig["layout"]["hovermode"] = "y"
+            x = [bar["x1"] for bar in trace]
+            y = [bar["y0"] + (bar["y1"] - bar["y0"]) / 2 for bar in trace]
+            bar_gap = mpltools.get_bar_gap(
+                [bar["y0"] for bar in trace], [bar["y1"] for bar in trace]
+            )
         bar = go.Bar(
             orientation=orientation,
             x=x,
             y=y,
-            xaxis='x{0}'.format(self.axis_ct),
-            yaxis='y{0}'.format(self.axis_ct),
-            opacity=trace[0]['alpha'],  # TODO: get all alphas if array?
+            xaxis="x{0}".format(self.axis_ct),
+            yaxis="y{0}".format(self.axis_ct),
+            opacity=trace[0]["alpha"],  # TODO: get all alphas if array?
             marker=go.bar.Marker(
-                color=trace[0]['facecolor'],  # TODO: get all
-                line=dict(width=trace[0]['edgewidth'])))  # TODO ditto
-        if len(bar['x']) > 1:
+                color=trace[0]["facecolor"],  # TODO: get all
+                line=dict(width=trace[0]["edgewidth"]),
+            ),
+        )  # TODO ditto
+        if len(bar["x"]) > 1:
             self.msg += "    Heck yeah, I drew that bar chart\n"
             self.plotly_fig.add_trace(bar),
             if bar_gap is not None:
-                self.plotly_fig['layout']['bargap'] = bar_gap
+                self.plotly_fig["layout"]["bargap"] = bar_gap
         else:
             self.msg += "    Bar chart not drawn\n"
-            warnings.warn('found box chart data with length <= 1, '
-                          'assuming data redundancy, not plotting.')
+            warnings.warn(
+                "found box chart data with length <= 1, "
+                "assuming data redundancy, not plotting."
+            )
 
     def draw_marked_line(self, **props):
         """Create a data dict for a line obj.
@@ -333,63 +347,70 @@ class PlotlyRenderer(Renderer):
         """
         self.msg += "    Attempting to draw a line "
         line, marker = {}, {}
-        if props['linestyle'] and props['markerstyle']:
+        if props["linestyle"] and props["markerstyle"]:
             self.msg += "... with both lines+markers\n"
             mode = "lines+markers"
-        elif props['linestyle']:
+        elif props["linestyle"]:
             self.msg += "... with just lines\n"
             mode = "lines"
-        elif props['markerstyle']:
+        elif props["markerstyle"]:
             self.msg += "... with just markers\n"
             mode = "markers"
-        if props['linestyle']:
-            color = \
-                mpltools.merge_color_and_opacity(props['linestyle']['color'],
-                                                 props['linestyle']['alpha'])
+        if props["linestyle"]:
+            color = mpltools.merge_color_and_opacity(
+                props["linestyle"]["color"], props["linestyle"]["alpha"]
+            )
 
-            #print(mpltools.convert_dash(props['linestyle']['dasharray']))
+            # print(mpltools.convert_dash(props['linestyle']['dasharray']))
             line = go.scatter.Line(
                 color=color,
-                width=props['linestyle']['linewidth'],
-                dash=mpltools.convert_dash(props['linestyle']['dasharray'])
+                width=props["linestyle"]["linewidth"],
+                dash=mpltools.convert_dash(props["linestyle"]["dasharray"]),
             )
-        if props['markerstyle']:
+        if props["markerstyle"]:
             marker = go.scatter.Marker(
-                opacity=props['markerstyle']['alpha'],
-                color=props['markerstyle']['facecolor'],
-                symbol=mpltools.convert_symbol(props['markerstyle']['marker']),
-                size=props['markerstyle']['markersize'],
+                opacity=props["markerstyle"]["alpha"],
+                color=props["markerstyle"]["facecolor"],
+                symbol=mpltools.convert_symbol(props["markerstyle"]["marker"]),
+                size=props["markerstyle"]["markersize"],
                 line=dict(
-                    color=props['markerstyle']['edgecolor'],
-                    width=props['markerstyle']['edgewidth']
-                )
+                    color=props["markerstyle"]["edgecolor"],
+                    width=props["markerstyle"]["edgewidth"],
+                ),
             )
-        if props['coordinates'] == 'data':
+        if props["coordinates"] == "data":
             marked_line = go.Scatter(
                 mode=mode,
-                name=(str(props['label']) if
-                      isinstance(props['label'], six.string_types) else
-                      props['label']),
-                x=[xy_pair[0] for xy_pair in props['data']],
-                y=[xy_pair[1] for xy_pair in props['data']],
-                xaxis='x{0}'.format(self.axis_ct),
-                yaxis='y{0}'.format(self.axis_ct),
+                name=(
+                    str(props["label"])
+                    if isinstance(props["label"], six.string_types)
+                    else props["label"]
+                ),
+                x=[xy_pair[0] for xy_pair in props["data"]],
+                y=[xy_pair[1] for xy_pair in props["data"]],
+                xaxis="x{0}".format(self.axis_ct),
+                yaxis="y{0}".format(self.axis_ct),
                 line=line,
-                marker=marker)
+                marker=marker,
+            )
             if self.x_is_mpl_date:
-                formatter = (self.current_mpl_ax.get_xaxis()
-                             .get_major_formatter().__class__.__name__)
-                marked_line['x'] = mpltools.mpl_dates_to_datestrings(
-                    marked_line['x'], formatter
+                formatter = (
+                    self.current_mpl_ax.get_xaxis()
+                    .get_major_formatter()
+                    .__class__.__name__
+                )
+                marked_line["x"] = mpltools.mpl_dates_to_datestrings(
+                    marked_line["x"], formatter
                 )
             self.plotly_fig.add_trace(marked_line),
             self.msg += "    Heck yeah, I drew that line\n"
         else:
-            self.msg += "    Line didn't have 'data' coordinates, " \
-                        "not drawing\n"
-            warnings.warn("Bummer! Plotly can currently only draw Line2D "
-                          "objects from matplotlib that are in 'data' "
-                          "coordinates!")
+            self.msg += "    Line didn't have 'data' coordinates, " "not drawing\n"
+            warnings.warn(
+                "Bummer! Plotly can currently only draw Line2D "
+                "objects from matplotlib that are in 'data' "
+                "coordinates!"
+            )
 
     def draw_image(self, **props):
         """Draw image.
@@ -399,9 +420,11 @@ class PlotlyRenderer(Renderer):
         """
         self.msg += "    Attempting to draw image\n"
         self.msg += "    Not drawing image\n"
-        warnings.warn("Aw. Snap! You're gonna have to hold off on "
-                      "the selfies for now. Plotly can't import "
-                      "images from matplotlib yet!")
+        warnings.warn(
+            "Aw. Snap! You're gonna have to hold off on "
+            "the selfies for now. Plotly can't import "
+            "images from matplotlib yet!"
+        )
 
     def draw_path_collection(self, **props):
         """Add a path collection to data list as a scatter plot.
@@ -434,24 +457,25 @@ class PlotlyRenderer(Renderer):
 
         """
         self.msg += "    Attempting to draw a path collection\n"
-        if props['offset_coordinates'] is 'data':
+        if props["offset_coordinates"] is "data":
             markerstyle = mpltools.get_markerstyle_from_collection(props)
             scatter_props = {
-                'coordinates': 'data',
-                'data': props['offsets'],
-                'label': None,
-                'markerstyle': markerstyle,
-                'linestyle': None
+                "coordinates": "data",
+                "data": props["offsets"],
+                "label": None,
+                "markerstyle": markerstyle,
+                "linestyle": None,
             }
             self.msg += "    Drawing path collection as markers\n"
             self.draw_marked_line(**scatter_props)
         else:
-            self.msg += "    Path collection not linked to 'data', " \
-                        "not drawing\n"
-            warnings.warn("Dang! That path collection is out of this "
-                          "world. I totally don't know what to do with "
-                          "it yet! Plotly can only import path "
-                          "collections linked to 'data' coordinates")
+            self.msg += "    Path collection not linked to 'data', " "not drawing\n"
+            warnings.warn(
+                "Dang! That path collection is out of this "
+                "world. I totally don't know what to do with "
+                "it yet! Plotly can only import path "
+                "collections linked to 'data' coordinates"
+            )
 
     def draw_path(self, **props):
         """Draw path, currently only attempts to draw bar charts.
@@ -484,8 +508,10 @@ class PlotlyRenderer(Renderer):
             self.current_bars += [props]
         else:
             self.msg += "    This path isn't a bar, not drawing\n"
-            warnings.warn("I found a path object that I don't think is part "
-                          "of a bar chart. Ignoring.")
+            warnings.warn(
+                "I found a path object that I don't think is part "
+                "of a bar chart. Ignoring."
+            )
 
     def draw_text(self, **props):
         """Create an annotation dict for a text obj.
@@ -517,7 +543,7 @@ class PlotlyRenderer(Renderer):
 
         """
         self.msg += "    Attempting to draw an mpl text object\n"
-        if not mpltools.check_corners(props['mplobj'], self.mpl_fig):
+        if not mpltools.check_corners(props["mplobj"], self.mpl_fig):
             warnings.warn(
                 "Looks like the annotation(s) you are trying \n"
                 "to draw lies/lay outside the given figure size.\n\n"
@@ -525,62 +551,70 @@ class PlotlyRenderer(Renderer):
                 "large enough to view the full text. To adjust \n"
                 "the size of the figure, use the 'width' and \n"
                 "'height' keys in the Layout object. Alternatively,\n"
-                "use the Margin object to adjust the figure's margins.")
-        align = props['mplobj']._multialignment
+                "use the Margin object to adjust the figure's margins."
+            )
+        align = props["mplobj"]._multialignment
         if not align:
-            align = props['style']['halign']  # mpl default
-        if 'annotations' not in self.plotly_fig['layout']:
-            self.plotly_fig['layout']['annotations'] = []
-        if props['text_type'] == 'xlabel':
+            align = props["style"]["halign"]  # mpl default
+        if "annotations" not in self.plotly_fig["layout"]:
+            self.plotly_fig["layout"]["annotations"] = []
+        if props["text_type"] == "xlabel":
             self.msg += "      Text object is an xlabel\n"
             self.draw_xlabel(**props)
-        elif props['text_type'] == 'ylabel':
+        elif props["text_type"] == "ylabel":
             self.msg += "      Text object is a ylabel\n"
             self.draw_ylabel(**props)
-        elif props['text_type'] == 'title':
+        elif props["text_type"] == "title":
             self.msg += "      Text object is a title\n"
             self.draw_title(**props)
         else:  # just a regular text annotation...
             self.msg += "      Text object is a normal annotation\n"
-            if props['coordinates'] is not 'data':
-                self.msg += "        Text object isn't linked to 'data' " \
-                            "coordinates\n"
-                x_px, y_px = props['mplobj'].get_transform().transform(
-                    props['position'])
-                x, y = mpltools.display_to_paper(
-                    x_px, y_px, self.plotly_fig['layout']
+            if props["coordinates"] is not "data":
+                self.msg += (
+                    "        Text object isn't linked to 'data' " "coordinates\n"
                 )
-                xref = 'paper'
-                yref = 'paper'
-                xanchor = props['style']['halign']  # no difference here!
-                yanchor = mpltools.convert_va(props['style']['valign'])
+                x_px, y_px = (
+                    props["mplobj"].get_transform().transform(props["position"])
+                )
+                x, y = mpltools.display_to_paper(x_px, y_px, self.plotly_fig["layout"])
+                xref = "paper"
+                yref = "paper"
+                xanchor = props["style"]["halign"]  # no difference here!
+                yanchor = mpltools.convert_va(props["style"]["valign"])
             else:
-                self.msg += "        Text object is linked to 'data' " \
-                            "coordinates\n"
-                x, y = props['position']
+                self.msg += "        Text object is linked to 'data' " "coordinates\n"
+                x, y = props["position"]
                 axis_ct = self.axis_ct
-                xaxis = self.plotly_fig['layout']['xaxis{0}'.format(axis_ct)]
-                yaxis = self.plotly_fig['layout']['yaxis{0}'.format(axis_ct)]
-                if (xaxis['range'][0] < x < xaxis['range'][1]
-                        and yaxis['range'][0] < y < yaxis['range'][1]):
-                    xref = 'x{0}'.format(self.axis_ct)
-                    yref = 'y{0}'.format(self.axis_ct)
+                xaxis = self.plotly_fig["layout"]["xaxis{0}".format(axis_ct)]
+                yaxis = self.plotly_fig["layout"]["yaxis{0}".format(axis_ct)]
+                if (
+                    xaxis["range"][0] < x < xaxis["range"][1]
+                    and yaxis["range"][0] < y < yaxis["range"][1]
+                ):
+                    xref = "x{0}".format(self.axis_ct)
+                    yref = "y{0}".format(self.axis_ct)
                 else:
-                    self.msg += "            Text object is outside " \
-                                "plotting area, making 'paper' reference.\n"
-                    x_px, y_px = props['mplobj'].get_transform().transform(
-                        props['position'])
-                    x, y = mpltools.display_to_paper(x_px, y_px,
-                                                     self.plotly_fig['layout'])
-                    xref = 'paper'
-                    yref = 'paper'
-                xanchor = props['style']['halign']  # no difference here!
-                yanchor = mpltools.convert_va(props['style']['valign'])
+                    self.msg += (
+                        "            Text object is outside "
+                        "plotting area, making 'paper' reference.\n"
+                    )
+                    x_px, y_px = (
+                        props["mplobj"].get_transform().transform(props["position"])
+                    )
+                    x, y = mpltools.display_to_paper(
+                        x_px, y_px, self.plotly_fig["layout"]
+                    )
+                    xref = "paper"
+                    yref = "paper"
+                xanchor = props["style"]["halign"]  # no difference here!
+                yanchor = mpltools.convert_va(props["style"]["valign"])
             annotation = go.layout.Annotation(
-                text=(str(props['text']) if
-                      isinstance(props['text'], six.string_types) else
-                      props['text']),
-                opacity=props['style']['alpha'],
+                text=(
+                    str(props["text"])
+                    if isinstance(props["text"], six.string_types)
+                    else props["text"]
+                ),
+                opacity=props["style"]["alpha"],
                 x=x,
                 y=y,
                 xref=xref,
@@ -590,11 +624,10 @@ class PlotlyRenderer(Renderer):
                 yanchor=yanchor,
                 showarrow=False,  # change this later?
                 font=go.layout.annotation.Font(
-                    color=props['style']['color'],
-                    size=props['style']['fontsize']
-                )
+                    color=props["style"]["color"], size=props["style"]["fontsize"]
+                ),
             )
-            self.plotly_fig['layout']['annotations'] += annotation,
+            self.plotly_fig["layout"]["annotations"] += (annotation,)
             self.msg += "    Heck, yeah I drew that annotation\n"
 
     def draw_title(self, **props):
@@ -625,36 +658,34 @@ class PlotlyRenderer(Renderer):
         """
         self.msg += "        Attempting to draw a title\n"
         if len(self.mpl_fig.axes) > 1:
-            self.msg += "          More than one subplot, adding title as " \
-                        "annotation\n"
-            x_px, y_px = props['mplobj'].get_transform().transform(props[
-                'position'])
-            x, y = mpltools.display_to_paper(x_px, y_px,
-                                             self.plotly_fig['layout'])
+            self.msg += (
+                "          More than one subplot, adding title as " "annotation\n"
+            )
+            x_px, y_px = props["mplobj"].get_transform().transform(props["position"])
+            x, y = mpltools.display_to_paper(x_px, y_px, self.plotly_fig["layout"])
             annotation = go.layout.Annotation(
-                text=props['text'],
+                text=props["text"],
                 font=go.layout.annotation.Font(
-                    color=props['style']['color'],
-                    size=props['style']['fontsize']
+                    color=props["style"]["color"], size=props["style"]["fontsize"]
                 ),
-                xref='paper',
-                yref='paper',
+                xref="paper",
+                yref="paper",
                 x=x,
                 y=y,
-                xanchor='center',
-                yanchor='bottom',
-                showarrow=False  # no arrow for a title!
+                xanchor="center",
+                yanchor="bottom",
+                showarrow=False,  # no arrow for a title!
             )
-            self.plotly_fig['layout']['annotations'] += annotation,
+            self.plotly_fig["layout"]["annotations"] += (annotation,)
         else:
-            self.msg += "          Only one subplot found, adding as a " \
-                        "plotly title\n"
-            self.plotly_fig['layout']['title'] = props['text']
-            titlefont = dict(
-                size=props['style']['fontsize'],
-                color=props['style']['color']
+            self.msg += (
+                "          Only one subplot found, adding as a " "plotly title\n"
             )
-            self.plotly_fig['layout']['titlefont'] = titlefont
+            self.plotly_fig["layout"]["title"] = props["text"]
+            titlefont = dict(
+                size=props["style"]["fontsize"], color=props["style"]["color"]
+            )
+            self.plotly_fig["layout"]["titlefont"] = titlefont
 
     def draw_xlabel(self, **props):
         """Add an xaxis label to the current subplot in layout dictionary.
@@ -680,12 +711,10 @@ class PlotlyRenderer(Renderer):
 
         """
         self.msg += "        Adding xlabel\n"
-        axis_key = 'xaxis{0}'.format(self.axis_ct)
-        self.plotly_fig['layout'][axis_key]['title'] = str(props['text'])
-        titlefont = dict(
-            size=props['style']['fontsize'],
-            color=props['style']['color'])
-        self.plotly_fig['layout'][axis_key]['titlefont'] = titlefont
+        axis_key = "xaxis{0}".format(self.axis_ct)
+        self.plotly_fig["layout"][axis_key]["title"] = str(props["text"])
+        titlefont = dict(size=props["style"]["fontsize"], color=props["style"]["color"])
+        self.plotly_fig["layout"][axis_key]["titlefont"] = titlefont
 
     def draw_ylabel(self, **props):
         """Add a yaxis label to the current subplot in layout dictionary.
@@ -711,12 +740,10 @@ class PlotlyRenderer(Renderer):
 
         """
         self.msg += "        Adding ylabel\n"
-        axis_key = 'yaxis{0}'.format(self.axis_ct)
-        self.plotly_fig['layout'][axis_key]['title'] = props['text']
-        titlefont = dict(
-            size=props['style']['fontsize'],
-            color=props['style']['color'])
-        self.plotly_fig['layout'][axis_key]['titlefont'] = titlefont
+        axis_key = "yaxis{0}".format(self.axis_ct)
+        self.plotly_fig["layout"][axis_key]["title"] = props["text"]
+        titlefont = dict(size=props["style"]["fontsize"], color=props["style"]["color"])
+        self.plotly_fig["layout"][axis_key]["titlefont"] = titlefont
 
     def resize(self):
         """Revert figure layout to allow plotly to resize.
@@ -728,9 +755,9 @@ class PlotlyRenderer(Renderer):
 
         """
         self.msg += "Resizing figure, deleting keys from layout\n"
-        for key in ['width', 'height', 'autosize', 'margin']:
+        for key in ["width", "height", "autosize", "margin"]:
             try:
-                del self.plotly_fig['layout'][key]
+                del self.plotly_fig["layout"][key]
             except (KeyError, AttributeError):
                 pass
 

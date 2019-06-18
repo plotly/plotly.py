@@ -1,18 +1,13 @@
-
-
 import _plotly_utils.basevalidators
 
 
 class ZoomValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='zoom', parent_name='layout.mapbox', **kwargs
-    ):
+    def __init__(self, plotly_name="zoom", parent_name="layout.mapbox", **kwargs):
         super(ZoomValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -21,15 +16,12 @@ import _plotly_utils.basevalidators
 
 
 class UirevisionValidator(_plotly_utils.basevalidators.AnyValidator):
-
-    def __init__(
-        self, plotly_name='uirevision', parent_name='layout.mapbox', **kwargs
-    ):
+    def __init__(self, plotly_name="uirevision", parent_name="layout.mapbox", **kwargs):
         super(UirevisionValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -38,20 +30,23 @@ import _plotly_utils.basevalidators
 
 
 class StyleValidator(_plotly_utils.basevalidators.AnyValidator):
-
-    def __init__(
-        self, plotly_name='style', parent_name='layout.mapbox', **kwargs
-    ):
+    def __init__(self, plotly_name="style", parent_name="layout.mapbox", **kwargs):
         super(StyleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "style"),
             values=kwargs.pop(
-                'values', [
-                    'basic', 'streets', 'outdoors', 'light', 'dark',
-                    'satellite', 'satellite-streets'
-                ]
+                "values",
+                [
+                    "basic",
+                    "streets",
+                    "outdoors",
+                    "light",
+                    "dark",
+                    "satellite",
+                    "satellite-streets",
+                ],
             ),
             **kwargs
         )
@@ -61,15 +56,12 @@ import _plotly_utils.basevalidators
 
 
 class PitchValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='pitch', parent_name='layout.mapbox', **kwargs
-    ):
+    def __init__(self, plotly_name="pitch", parent_name="layout.mapbox", **kwargs):
         super(PitchValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -78,19 +70,18 @@ import _plotly_utils.basevalidators
 
 
 class LayerValidator(_plotly_utils.basevalidators.CompoundValidator):
-
     def __init__(
-        self,
-        plotly_name='layerdefaults',
-        parent_name='layout.mapbox',
-        **kwargs
+        self, plotly_name="layerdefaults", parent_name="layout.mapbox", **kwargs
     ):
         super(LayerValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Layer'),
-            data_docs=kwargs.pop('data_docs', """
-"""),
+            data_class_str=kwargs.pop("data_class_str", "Layer"),
+            data_docs=kwargs.pop(
+                "data_docs",
+                """
+""",
+            ),
             **kwargs
         )
 
@@ -99,16 +90,14 @@ import _plotly_utils.basevalidators
 
 
 class LayersValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-
-    def __init__(
-        self, plotly_name='layers', parent_name='layout.mapbox', **kwargs
-    ):
+    def __init__(self, plotly_name="layers", parent_name="layout.mapbox", **kwargs):
         super(LayersValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Layer'),
+            data_class_str=kwargs.pop("data_class_str", "Layer"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             below
                 Determines if the layer will be inserted before
                 the layer with the specified ID. If omitted or
@@ -199,7 +188,7 @@ class LayersValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 not compatible with Point GeoJSON geometries.
             visible
                 Determines whether this layer is displayed
-"""
+""",
             ),
             **kwargs
         )
@@ -209,16 +198,14 @@ import _plotly_utils.basevalidators
 
 
 class DomainValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='domain', parent_name='layout.mapbox', **kwargs
-    ):
+    def __init__(self, plotly_name="domain", parent_name="layout.mapbox", **kwargs):
         super(DomainValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Domain'),
+            data_class_str=kwargs.pop("data_class_str", "Domain"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             column
                 If there is a layout grid, use the domain for
                 this column in the grid for this mapbox subplot
@@ -232,7 +219,7 @@ class DomainValidator(_plotly_utils.basevalidators.CompoundValidator):
             y
                 Sets the vertical domain of this mapbox subplot
                 (in plot fraction).
-"""
+""",
             ),
             **kwargs
         )
@@ -242,23 +229,21 @@ import _plotly_utils.basevalidators
 
 
 class CenterValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='center', parent_name='layout.mapbox', **kwargs
-    ):
+    def __init__(self, plotly_name="center", parent_name="layout.mapbox", **kwargs):
         super(CenterValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Center'),
+            data_class_str=kwargs.pop("data_class_str", "Center"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             lat
                 Sets the latitude of the center of the map (in
                 degrees North).
             lon
                 Sets the longitude of the center of the map (in
                 degrees East).
-"""
+""",
             ),
             **kwargs
         )
@@ -268,15 +253,12 @@ import _plotly_utils.basevalidators
 
 
 class BearingValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='bearing', parent_name='layout.mapbox', **kwargs
-    ):
+    def __init__(self, plotly_name="bearing", parent_name="layout.mapbox", **kwargs):
         super(BearingValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -285,16 +267,15 @@ import _plotly_utils.basevalidators
 
 
 class AccesstokenValidator(_plotly_utils.basevalidators.StringValidator):
-
     def __init__(
-        self, plotly_name='accesstoken', parent_name='layout.mapbox', **kwargs
+        self, plotly_name="accesstoken", parent_name="layout.mapbox", **kwargs
     ):
         super(AccesstokenValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            no_blank=kwargs.pop('no_blank', True),
-            role=kwargs.pop('role', 'info'),
-            strict=kwargs.pop('strict', True),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            no_blank=kwargs.pop("no_blank", True),
+            role=kwargs.pop("role", "info"),
+            strict=kwargs.pop("strict", True),
             **kwargs
         )

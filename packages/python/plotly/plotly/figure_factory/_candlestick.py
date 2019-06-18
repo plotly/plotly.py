@@ -1,9 +1,11 @@
 from __future__ import absolute_import
 
 from plotly.figure_factory import utils
-from plotly.figure_factory._ohlc import (_DEFAULT_INCREASING_COLOR,
-                                         _DEFAULT_DECREASING_COLOR,
-                                         validate_ohlc)
+from plotly.figure_factory._ohlc import (
+    _DEFAULT_INCREASING_COLOR,
+    _DEFAULT_DECREASING_COLOR,
+    validate_ohlc,
+)
 from plotly.graph_objs import graph_objs
 
 
@@ -29,25 +31,28 @@ def make_increasing_candle(open, high, low, close, dates, **kwargs):
         increasing candlesticks.
     """
     increase_x, increase_y = _Candlestick(
-        open, high, low, close, dates, **kwargs).get_candle_increase()
+        open, high, low, close, dates, **kwargs
+    ).get_candle_increase()
 
-    if 'line' in kwargs:
-        kwargs.setdefault('fillcolor', kwargs['line']['color'])
+    if "line" in kwargs:
+        kwargs.setdefault("fillcolor", kwargs["line"]["color"])
     else:
-        kwargs.setdefault('fillcolor', _DEFAULT_INCREASING_COLOR)
-    if 'name' in kwargs:
-        kwargs.setdefault('showlegend', True)
+        kwargs.setdefault("fillcolor", _DEFAULT_INCREASING_COLOR)
+    if "name" in kwargs:
+        kwargs.setdefault("showlegend", True)
     else:
-        kwargs.setdefault('showlegend', False)
-    kwargs.setdefault('name', 'Increasing')
-    kwargs.setdefault('line', dict(color=_DEFAULT_INCREASING_COLOR))
+        kwargs.setdefault("showlegend", False)
+    kwargs.setdefault("name", "Increasing")
+    kwargs.setdefault("line", dict(color=_DEFAULT_INCREASING_COLOR))
 
-    candle_incr_data = dict(type='box',
-                            x=increase_x,
-                            y=increase_y,
-                            whiskerwidth=0,
-                            boxpoints=False,
-                            **kwargs)
+    candle_incr_data = dict(
+        type="box",
+        x=increase_x,
+        y=increase_y,
+        whiskerwidth=0,
+        boxpoints=False,
+        **kwargs
+    )
 
     return [candle_incr_data]
 
@@ -69,28 +74,30 @@ def make_decreasing_candle(open, high, low, close, dates, **kwargs):
     """
 
     decrease_x, decrease_y = _Candlestick(
-        open, high, low, close, dates, **kwargs).get_candle_decrease()
+        open, high, low, close, dates, **kwargs
+    ).get_candle_decrease()
 
-    if 'line' in kwargs:
-        kwargs.setdefault('fillcolor', kwargs['line']['color'])
+    if "line" in kwargs:
+        kwargs.setdefault("fillcolor", kwargs["line"]["color"])
     else:
-        kwargs.setdefault('fillcolor', _DEFAULT_DECREASING_COLOR)
-    kwargs.setdefault('showlegend', False)
-    kwargs.setdefault('line', dict(color=_DEFAULT_DECREASING_COLOR))
-    kwargs.setdefault('name', 'Decreasing')
+        kwargs.setdefault("fillcolor", _DEFAULT_DECREASING_COLOR)
+    kwargs.setdefault("showlegend", False)
+    kwargs.setdefault("line", dict(color=_DEFAULT_DECREASING_COLOR))
+    kwargs.setdefault("name", "Decreasing")
 
-    candle_decr_data = dict(type='box',
-                            x=decrease_x,
-                            y=decrease_y,
-                            whiskerwidth=0,
-                            boxpoints=False,
-                            **kwargs)
+    candle_decr_data = dict(
+        type="box",
+        x=decrease_x,
+        y=decrease_y,
+        whiskerwidth=0,
+        boxpoints=False,
+        **kwargs
+    )
 
     return [candle_decr_data]
 
 
-def create_candlestick(open, high, low, close, dates=None, direction='both',
-                       **kwargs):
+def create_candlestick(open, high, low, close, dates=None, direction="both", **kwargs):
     """
     BETA function that creates a candlestick chart
 
@@ -211,19 +218,23 @@ def create_candlestick(open, high, low, close, dates=None, direction='both',
         utils.validate_equal_length(open, high, low, close)
     validate_ohlc(open, high, low, close, direction, **kwargs)
 
-    if direction is 'increasing':
-        candle_incr_data = make_increasing_candle(open, high, low, close,
-                                                  dates, **kwargs)
+    if direction is "increasing":
+        candle_incr_data = make_increasing_candle(
+            open, high, low, close, dates, **kwargs
+        )
         data = candle_incr_data
-    elif direction is 'decreasing':
-        candle_decr_data = make_decreasing_candle(open, high, low, close,
-                                                  dates, **kwargs)
+    elif direction is "decreasing":
+        candle_decr_data = make_decreasing_candle(
+            open, high, low, close, dates, **kwargs
+        )
         data = candle_decr_data
     else:
-        candle_incr_data = make_increasing_candle(open, high, low, close,
-                                                  dates, **kwargs)
-        candle_decr_data = make_decreasing_candle(open, high, low, close,
-                                                  dates, **kwargs)
+        candle_incr_data = make_increasing_candle(
+            open, high, low, close, dates, **kwargs
+        )
+        candle_decr_data = make_decreasing_candle(
+            open, high, low, close, dates, **kwargs
+        )
         data = candle_incr_data + candle_decr_data
 
     layout = graph_objs.Layout()
@@ -234,6 +245,7 @@ class _Candlestick(object):
     """
     Refer to FigureFactory.create_candlestick() for docstring.
     """
+
     def __init__(self, open, high, low, close, dates, **kwargs):
         self.open = open
         self.high = high

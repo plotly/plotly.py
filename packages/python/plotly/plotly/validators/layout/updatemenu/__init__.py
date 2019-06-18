@@ -1,19 +1,16 @@
-
-
 import _plotly_utils.basevalidators
 
 
 class YanchorValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
     def __init__(
-        self, plotly_name='yanchor', parent_name='layout.updatemenu', **kwargs
+        self, plotly_name="yanchor", parent_name="layout.updatemenu", **kwargs
     ):
         super(YanchorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'arraydraw'),
-            role=kwargs.pop('role', 'info'),
-            values=kwargs.pop('values', ['auto', 'top', 'middle', 'bottom']),
+            edit_type=kwargs.pop("edit_type", "arraydraw"),
+            role=kwargs.pop("role", "info"),
+            values=kwargs.pop("values", ["auto", "top", "middle", "bottom"]),
             **kwargs
         )
 
@@ -22,17 +19,14 @@ import _plotly_utils.basevalidators
 
 
 class YValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='y', parent_name='layout.updatemenu', **kwargs
-    ):
+    def __init__(self, plotly_name="y", parent_name="layout.updatemenu", **kwargs):
         super(YValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'arraydraw'),
-            max=kwargs.pop('max', 3),
-            min=kwargs.pop('min', -2),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "arraydraw"),
+            max=kwargs.pop("max", 3),
+            min=kwargs.pop("min", -2),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -41,16 +35,15 @@ import _plotly_utils.basevalidators
 
 
 class XanchorValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
     def __init__(
-        self, plotly_name='xanchor', parent_name='layout.updatemenu', **kwargs
+        self, plotly_name="xanchor", parent_name="layout.updatemenu", **kwargs
     ):
         super(XanchorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'arraydraw'),
-            role=kwargs.pop('role', 'info'),
-            values=kwargs.pop('values', ['auto', 'left', 'center', 'right']),
+            edit_type=kwargs.pop("edit_type", "arraydraw"),
+            role=kwargs.pop("role", "info"),
+            values=kwargs.pop("values", ["auto", "left", "center", "right"]),
             **kwargs
         )
 
@@ -59,17 +52,14 @@ import _plotly_utils.basevalidators
 
 
 class XValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='x', parent_name='layout.updatemenu', **kwargs
-    ):
+    def __init__(self, plotly_name="x", parent_name="layout.updatemenu", **kwargs):
         super(XValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'arraydraw'),
-            max=kwargs.pop('max', 3),
-            min=kwargs.pop('min', -2),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "arraydraw"),
+            max=kwargs.pop("max", 3),
+            min=kwargs.pop("min", -2),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -78,15 +68,14 @@ import _plotly_utils.basevalidators
 
 
 class VisibleValidator(_plotly_utils.basevalidators.BooleanValidator):
-
     def __init__(
-        self, plotly_name='visible', parent_name='layout.updatemenu', **kwargs
+        self, plotly_name="visible", parent_name="layout.updatemenu", **kwargs
     ):
         super(VisibleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'arraydraw'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "arraydraw"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -95,16 +84,13 @@ import _plotly_utils.basevalidators
 
 
 class TypeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(
-        self, plotly_name='type', parent_name='layout.updatemenu', **kwargs
-    ):
+    def __init__(self, plotly_name="type", parent_name="layout.updatemenu", **kwargs):
         super(TypeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'arraydraw'),
-            role=kwargs.pop('role', 'info'),
-            values=kwargs.pop('values', ['dropdown', 'buttons']),
+            edit_type=kwargs.pop("edit_type", "arraydraw"),
+            role=kwargs.pop("role", "info"),
+            values=kwargs.pop("values", ["dropdown", "buttons"]),
             **kwargs
         )
 
@@ -113,18 +99,14 @@ import _plotly_utils.basevalidators
 
 
 class TemplateitemnameValidator(_plotly_utils.basevalidators.StringValidator):
-
     def __init__(
-        self,
-        plotly_name='templateitemname',
-        parent_name='layout.updatemenu',
-        **kwargs
+        self, plotly_name="templateitemname", parent_name="layout.updatemenu", **kwargs
     ):
         super(TemplateitemnameValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'arraydraw'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "arraydraw"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -133,18 +115,14 @@ import _plotly_utils.basevalidators
 
 
 class ShowactiveValidator(_plotly_utils.basevalidators.BooleanValidator):
-
     def __init__(
-        self,
-        plotly_name='showactive',
-        parent_name='layout.updatemenu',
-        **kwargs
+        self, plotly_name="showactive", parent_name="layout.updatemenu", **kwargs
     ):
         super(ShowactiveValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'arraydraw'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "arraydraw"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -153,16 +131,14 @@ import _plotly_utils.basevalidators
 
 
 class PadValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='pad', parent_name='layout.updatemenu', **kwargs
-    ):
+    def __init__(self, plotly_name="pad", parent_name="layout.updatemenu", **kwargs):
         super(PadValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Pad'),
+            data_class_str=kwargs.pop("data_class_str", "Pad"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             b
                 The amount of padding (in px) along the bottom
                 of the component.
@@ -175,7 +151,7 @@ class PadValidator(_plotly_utils.basevalidators.CompoundValidator):
             t
                 The amount of padding (in px) along the top of
                 the component.
-"""
+""",
             ),
             **kwargs
         )
@@ -185,15 +161,12 @@ import _plotly_utils.basevalidators
 
 
 class NameValidator(_plotly_utils.basevalidators.StringValidator):
-
-    def __init__(
-        self, plotly_name='name', parent_name='layout.updatemenu', **kwargs
-    ):
+    def __init__(self, plotly_name="name", parent_name="layout.updatemenu", **kwargs):
         super(NameValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'arraydraw'),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "arraydraw"),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -202,16 +175,14 @@ import _plotly_utils.basevalidators
 
 
 class FontValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='font', parent_name='layout.updatemenu', **kwargs
-    ):
+    def __init__(self, plotly_name="font", parent_name="layout.updatemenu", **kwargs):
         super(FontValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Font'),
+            data_class_str=kwargs.pop("data_class_str", "Font"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             color
 
             family
@@ -232,7 +203,7 @@ class FontValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Narrow", "Raleway", "Times New Roman".
             size
 
-"""
+""",
             ),
             **kwargs
         )
@@ -242,19 +213,15 @@ import _plotly_utils.basevalidators
 
 
 class DirectionValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
     def __init__(
-        self,
-        plotly_name='direction',
-        parent_name='layout.updatemenu',
-        **kwargs
+        self, plotly_name="direction", parent_name="layout.updatemenu", **kwargs
     ):
         super(DirectionValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'arraydraw'),
-            role=kwargs.pop('role', 'info'),
-            values=kwargs.pop('values', ['left', 'right', 'up', 'down']),
+            edit_type=kwargs.pop("edit_type", "arraydraw"),
+            role=kwargs.pop("role", "info"),
+            values=kwargs.pop("values", ["left", "right", "up", "down"]),
             **kwargs
         )
 
@@ -263,19 +230,18 @@ import _plotly_utils.basevalidators
 
 
 class ButtonValidator(_plotly_utils.basevalidators.CompoundValidator):
-
     def __init__(
-        self,
-        plotly_name='buttondefaults',
-        parent_name='layout.updatemenu',
-        **kwargs
+        self, plotly_name="buttondefaults", parent_name="layout.updatemenu", **kwargs
     ):
         super(ButtonValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Button'),
-            data_docs=kwargs.pop('data_docs', """
-"""),
+            data_class_str=kwargs.pop("data_class_str", "Button"),
+            data_docs=kwargs.pop(
+                "data_docs",
+                """
+""",
+            ),
             **kwargs
         )
 
@@ -284,16 +250,16 @@ import _plotly_utils.basevalidators
 
 
 class ButtonsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-
     def __init__(
-        self, plotly_name='buttons', parent_name='layout.updatemenu', **kwargs
+        self, plotly_name="buttons", parent_name="layout.updatemenu", **kwargs
     ):
         super(ButtonsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Button'),
+            data_class_str=kwargs.pop("data_class_str", "Button"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             args
                 Sets the arguments values to be passed to the
                 Plotly method set in `method` on click.
@@ -341,7 +307,7 @@ class ButtonsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
             visible
                 Determines whether or not this button is
                 visible.
-"""
+""",
             ),
             **kwargs
         )
@@ -351,19 +317,15 @@ import _plotly_utils.basevalidators
 
 
 class BorderwidthValidator(_plotly_utils.basevalidators.NumberValidator):
-
     def __init__(
-        self,
-        plotly_name='borderwidth',
-        parent_name='layout.updatemenu',
-        **kwargs
+        self, plotly_name="borderwidth", parent_name="layout.updatemenu", **kwargs
     ):
         super(BorderwidthValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'arraydraw'),
-            min=kwargs.pop('min', 0),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "arraydraw"),
+            min=kwargs.pop("min", 0),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -372,18 +334,14 @@ import _plotly_utils.basevalidators
 
 
 class BordercolorValidator(_plotly_utils.basevalidators.ColorValidator):
-
     def __init__(
-        self,
-        plotly_name='bordercolor',
-        parent_name='layout.updatemenu',
-        **kwargs
+        self, plotly_name="bordercolor", parent_name="layout.updatemenu", **kwargs
     ):
         super(BordercolorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'arraydraw'),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "arraydraw"),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -392,15 +350,14 @@ import _plotly_utils.basevalidators
 
 
 class BgcolorValidator(_plotly_utils.basevalidators.ColorValidator):
-
     def __init__(
-        self, plotly_name='bgcolor', parent_name='layout.updatemenu', **kwargs
+        self, plotly_name="bgcolor", parent_name="layout.updatemenu", **kwargs
     ):
         super(BgcolorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'arraydraw'),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "arraydraw"),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -409,15 +366,12 @@ import _plotly_utils.basevalidators
 
 
 class ActiveValidator(_plotly_utils.basevalidators.IntegerValidator):
-
-    def __init__(
-        self, plotly_name='active', parent_name='layout.updatemenu', **kwargs
-    ):
+    def __init__(self, plotly_name="active", parent_name="layout.updatemenu", **kwargs):
         super(ActiveValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'arraydraw'),
-            min=kwargs.pop('min', -1),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "arraydraw"),
+            min=kwargs.pop("min", -1),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )

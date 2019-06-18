@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -23,11 +21,11 @@ class Project(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
     # y
     # -
@@ -46,11 +44,11 @@ class Project(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
     # z
     # -
@@ -69,17 +67,17 @@ class Project(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['z']
+        return self["z"]
 
     @z.setter
     def z(self, val):
-        self['z'] = val
+        self["z"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'surface.contours.y'
+        return "surface.contours.y"
 
     # Self properties description
     # ---------------------------
@@ -139,7 +137,7 @@ class Project(_BaseTraceHierarchyType):
         -------
         Project
         """
-        super(Project, self).__init__('project')
+        super(Project, self).__init__("project")
 
         # Validate arg
         # ------------
@@ -159,26 +157,26 @@ an instance of plotly.graph_objs.surface.contours.y.Project"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.surface.contours.y import (project as v_project)
+        from plotly.validators.surface.contours.y import project as v_project
 
         # Initialize validators
         # ---------------------
-        self._validators['x'] = v_project.XValidator()
-        self._validators['y'] = v_project.YValidator()
-        self._validators['z'] = v_project.ZValidator()
+        self._validators["x"] = v_project.XValidator()
+        self._validators["y"] = v_project.YValidator()
+        self._validators["z"] = v_project.ZValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('x', None)
-        self['x'] = x if x is not None else _v
-        _v = arg.pop('y', None)
-        self['y'] = y if y is not None else _v
-        _v = arg.pop('z', None)
-        self['z'] = z if z is not None else _v
+        _v = arg.pop("x", None)
+        self["x"] = x if x is not None else _v
+        _v = arg.pop("y", None)
+        self["y"] = y if y is not None else _v
+        _v = arg.pop("z", None)
+        self["z"] = z if z is not None else _v
 
         # Process unknown kwargs
         # ----------------------

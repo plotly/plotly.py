@@ -15,7 +15,6 @@ else:
 
 
 class PlotlyApiTestCase(PlotlyTestCase):
-
     def mock(self, path_string):
         patcher = patch(path_string)
         new_mock = patcher.start()
@@ -26,17 +25,17 @@ class PlotlyApiTestCase(PlotlyTestCase):
 
         super(PlotlyApiTestCase, self).setUp()
 
-        self.username = 'foo'
-        self.api_key = 'bar'
+        self.username = "foo"
+        self.api_key = "bar"
 
-        self.proxy_username = 'cnet'
-        self.proxy_password = 'hoopla'
-        self.stream_ids = ['heyThere']
+        self.proxy_username = "cnet"
+        self.proxy_password = "hoopla"
+        self.stream_ids = ["heyThere"]
 
-        self.plotly_api_domain = 'https://api.do.not.exist'
-        self.plotly_domain = 'https://who.am.i'
+        self.plotly_api_domain = "https://api.do.not.exist"
+        self.plotly_domain = "https://who.am.i"
         self.plotly_proxy_authorization = False
-        self.plotly_streaming_domain = 'stream.does.not.exist'
+        self.plotly_streaming_domain = "stream.does.not.exist"
         self.plotly_ssl_verification = True
 
         sign_in(
@@ -49,18 +48,18 @@ class PlotlyApiTestCase(PlotlyTestCase):
             plotly_api_domain=self.plotly_api_domain,
             plotly_streaming_domain=self.plotly_streaming_domain,
             plotly_proxy_authorization=self.plotly_proxy_authorization,
-            plotly_ssl_verification=self.plotly_ssl_verification
+            plotly_ssl_verification=self.plotly_ssl_verification,
         )
 
     def to_bytes(self, string):
         try:
-            return string.encode('utf-8')
+            return string.encode("utf-8")
         except AttributeError:
             return string
 
-    def get_response(self, content=b'', status_code=200):
+    def get_response(self, content=b"", status_code=200):
         response = Response()
         response.status_code = status_code
         response._content = content
-        response.encoding = 'utf-8'
+        response.encoding = "utf-8"
         return response
