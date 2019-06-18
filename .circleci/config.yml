@@ -1,6 +1,19 @@
 version: 2
 
 jobs:
+  check-code-formatting:
+    docker:
+      - image: circleci/python:3.7-stretch-node-browsers
+
+    steps:
+      - checkout
+      - run:
+          name: Install black
+          command: 'sudo pip install black'
+      - run:
+          name: Check formatting with black
+          command: 'black --check .'
+
   # Core
   python-2.7-core:
     docker:
@@ -341,6 +354,9 @@ jobs:
 
 workflows:
   version: 2
+  code_formatting:
+    jobs:
+      - check-code-formatting
   dev_build:
     jobs:
       - plotlyjs_dev_build
