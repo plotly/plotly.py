@@ -4,14 +4,10 @@ from six import string_types
 import json
 
 
-from plotly.io._utils import (validate_coerce_fig_to_dict,
-                              validate_coerce_output_type)
+from plotly.io._utils import validate_coerce_fig_to_dict, validate_coerce_output_type
 
 
-def to_json(fig,
-            validate=True,
-            pretty=False,
-            remove_uids=True):
+def to_json(fig, validate=True, pretty=False, remove_uids=True):
     """
     Convert a figure to a JSON string representation
 
@@ -45,17 +41,17 @@ def to_json(fig,
     # Remove trace uid
     # ----------------
     if remove_uids:
-        for trace in fig_dict.get('data', []):
-            trace.pop('uid', None)
+        for trace in fig_dict.get("data", []):
+            trace.pop("uid", None)
 
     # Dump to a JSON string and return
     # --------------------------------
-    opts = {'sort_keys': True}
+    opts = {"sort_keys": True}
     if pretty:
-        opts['indent'] = 2
+        opts["indent"] = 2
     else:
         # Remove all whitespace
-        opts['separators'] = (',', ':')
+        opts["separators"] = (",", ":")
 
     return json.dumps(fig_dict, cls=PlotlyJSONEncoder, **opts)
 
@@ -89,8 +85,7 @@ def write_json(fig, file, validate=True, pretty=False, remove_uids=True):
     # Get JSON string
     # ---------------
     # Pass through validate argument and let to_json handle validation logic
-    json_str = to_json(
-        fig, validate=validate, pretty=pretty, remove_uids=remove_uids)
+    json_str = to_json(fig, validate=validate, pretty=pretty, remove_uids=remove_uids)
 
     # Check if file is a string
     # -------------------------
@@ -99,13 +94,13 @@ def write_json(fig, file, validate=True, pretty=False, remove_uids=True):
     # Open file
     # ---------
     if file_is_str:
-        with open(file, 'w') as f:
+        with open(file, "w") as f:
             f.write(json_str)
     else:
         file.write(json_str)
 
 
-def from_json(value, output_type='Figure', skip_invalid=False):
+def from_json(value, output_type="Figure", skip_invalid=False):
     """
     Construct a figure from a JSON string
 
@@ -137,10 +132,13 @@ def from_json(value, output_type='Figure', skip_invalid=False):
     # Validate value
     # --------------
     if not isinstance(value, string_types):
-        raise ValueError("""
+        raise ValueError(
+            """
 from_json requires a string argument but received value of type {typ}
-    Received value: {value}""".format(typ=type(value),
-                                      value=value))
+    Received value: {value}""".format(
+                typ=type(value), value=value
+            )
+        )
 
     # Decode JSON
     # -----------
@@ -156,7 +154,7 @@ from_json requires a string argument but received value of type {typ}
     return fig
 
 
-def read_json(file, output_type='Figure', skip_invalid=False):
+def read_json(file, output_type="Figure", skip_invalid=False):
     """
     Construct a figure from the JSON contents of a local file or readable
     Python object
@@ -190,13 +188,11 @@ def read_json(file, output_type='Figure', skip_invalid=False):
     # Read file contents into JSON string
     # -----------------------------------
     if file_is_str:
-        with open(file, 'r') as f:
+        with open(file, "r") as f:
             json_str = f.read()
     else:
         json_str = file.read()
 
     # Construct and return figure
     # ---------------------------
-    return from_json(json_str,
-                     skip_invalid=skip_invalid,
-                     output_type=output_type)
+    return from_json(json_str, skip_invalid=skip_invalid, output_type=output_type)

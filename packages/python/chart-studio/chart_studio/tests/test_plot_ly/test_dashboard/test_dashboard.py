@@ -13,15 +13,14 @@ import chart_studio.dashboard_objs.dashboard_objs as dashboard
 
 
 class TestDashboard(TestCase):
-
     def test_invalid_path(self):
 
         my_box = {
-            'type': 'box',
-            'boxType': 'plot',
-            'fileId': 'AdamKulidjian:327',
-            'shareKey': None,
-            'title': 'box 1'
+            "type": "box",
+            "boxType": "plot",
+            "fileId": "AdamKulidjian:327",
+            "shareKey": None,
+            "title": "box 1",
         }
         dash = dashboard.Dashboard()
 
@@ -30,37 +29,37 @@ class TestDashboard(TestCase):
             "the strings 'first' and 'second'."
         )
 
-        self.assertRaisesRegexp(PlotlyError, message,
-                                dash._insert, my_box, 'third')
+        self.assertRaisesRegexp(PlotlyError, message, dash._insert, my_box, "third")
 
     def test_box_id_none(self):
 
         my_box = {
-            'type': 'box',
-            'boxType': 'plot',
-            'fileId': 'AdamKulidjian:327',
-            'shareKey': None,
-            'title': 'box 1'
+            "type": "box",
+            "boxType": "plot",
+            "fileId": "AdamKulidjian:327",
+            "shareKey": None,
+            "title": "box 1",
         }
 
         dash = dashboard.Dashboard()
-        dash.insert(my_box, 'above', None)
+        dash.insert(my_box, "above", None)
 
         message = (
             "Make sure the box_id is specfied if there is at least "
             "one box in your dashboard."
         )
 
-        self.assertRaisesRegexp(PlotlyError, message, dash.insert,
-                                my_box, 'above', None)
+        self.assertRaisesRegexp(
+            PlotlyError, message, dash.insert, my_box, "above", None
+        )
 
     def test_id_not_valid(self):
         my_box = {
-            'type': 'box',
-            'boxType': 'plot',
-            'fileId': 'AdamKulidjian:327',
-            'shareKey': None,
-            'title': 'box 1'
+            "type": "box",
+            "boxType": "plot",
+            "fileId": "AdamKulidjian:327",
+            "shareKey": None,
+            "title": "box 1",
         }
 
         message = (
@@ -69,11 +68,10 @@ class TestDashboard(TestCase):
         )
 
         dash = dashboard.Dashboard()
-        dash.insert(my_box, 'above', 1)
+        dash.insert(my_box, "above", 1)
 
         # insert box
-        self.assertRaisesRegexp(PlotlyError, message, dash.insert, my_box,
-                                'above', 0)
+        self.assertRaisesRegexp(PlotlyError, message, dash.insert, my_box, "above", 0)
         # get box by id
         self.assertRaisesRegexp(PlotlyError, message, dash.get_box, 0)
 
@@ -82,11 +80,11 @@ class TestDashboard(TestCase):
 
     def test_invalid_side(self):
         my_box = {
-            'type': 'box',
-            'boxType': 'plot',
-            'fileId': 'AdamKulidjian:327',
-            'shareKey': None,
-            'title': 'box 1'
+            "type": "box",
+            "boxType": "plot",
+            "fileId": "AdamKulidjian:327",
+            "shareKey": None,
+            "title": "box 1",
         }
 
         message = (
@@ -96,46 +94,55 @@ class TestDashboard(TestCase):
         )
 
         dash = dashboard.Dashboard()
-        dash.insert(my_box, 'above', 0)
+        dash.insert(my_box, "above", 0)
 
-        self.assertRaisesRegexp(PlotlyError, message, dash.insert,
-                                my_box, 'somewhere', 1)
+        self.assertRaisesRegexp(
+            PlotlyError, message, dash.insert, my_box, "somewhere", 1
+        )
 
     def test_dashboard_dict(self):
         my_box = {
-            'type': 'box',
-            'boxType': 'plot',
-            'fileId': 'AdamKulidjian:327',
-            'shareKey': None,
-            'title': 'box 1'
+            "type": "box",
+            "boxType": "plot",
+            "fileId": "AdamKulidjian:327",
+            "shareKey": None,
+            "title": "box 1",
         }
 
         dash = dashboard.Dashboard()
         dash.insert(my_box)
-        dash.insert(my_box, 'above', 1)
+        dash.insert(my_box, "above", 1)
 
         expected_dashboard = {
-            'layout': {'direction': 'vertical',
-                       'first': {'direction': 'vertical',
-                                 'first': {'boxType': 'plot',
-                                           'fileId': 'AdamKulidjian:327',
-                                           'shareKey': None,
-                                           'title': 'box 1',
-                                           'type': 'box'},
-                                 'second': {'boxType': 'plot',
-                                            'fileId': 'AdamKulidjian:327',
-                                            'shareKey': None,
-                                            'title': 'box 1',
-                                            'type': 'box'},
-                                 'size': 50,
-                                 'sizeUnit': '%',
-                                 'type': 'split'},
-                       'second': {'boxType': 'empty', 'type': 'box'},
-                   'size': 1500,
-                   'sizeUnit': 'px',
-                   'type': 'split'},
-            'settings': {},
-            'version': 2
+            "layout": {
+                "direction": "vertical",
+                "first": {
+                    "direction": "vertical",
+                    "first": {
+                        "boxType": "plot",
+                        "fileId": "AdamKulidjian:327",
+                        "shareKey": None,
+                        "title": "box 1",
+                        "type": "box",
+                    },
+                    "second": {
+                        "boxType": "plot",
+                        "fileId": "AdamKulidjian:327",
+                        "shareKey": None,
+                        "title": "box 1",
+                        "type": "box",
+                    },
+                    "size": 50,
+                    "sizeUnit": "%",
+                    "type": "split",
+                },
+                "second": {"boxType": "empty", "type": "box"},
+                "size": 1500,
+                "sizeUnit": "px",
+                "type": "split",
+            },
+            "settings": {},
+            "version": 2,
         }
 
-        self.assertEqual(dash['layout'], expected_dashboard['layout'])
+        self.assertEqual(dash["layout"], expected_dashboard["layout"])

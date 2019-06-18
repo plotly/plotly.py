@@ -3,7 +3,6 @@ import plotly.graph_objects as go
 
 
 class TestUpdateLayout(TestCase):
-
     def test_update_layout_kwargs(self):
         # Create initial figure
         fig = go.Figure()
@@ -12,8 +11,8 @@ class TestUpdateLayout(TestCase):
         # Grab copy of original figure
         orig_fig = go.Figure(fig)
 
-        fig.update_layout(title_font_family='Courier New')
-        orig_fig.layout.update(title_font_family='Courier New')
+        fig.update_layout(title_font_family="Courier New")
+        orig_fig.layout.update(title_font_family="Courier New")
         self.assertEqual(fig, orig_fig)
 
     def test_update_layout_dict(self):
@@ -24,6 +23,6 @@ class TestUpdateLayout(TestCase):
         # Grab copy of original figure
         orig_fig = go.Figure(fig)
 
-        fig.update_layout(dict(title=dict(font=dict(family='Courier New'))))
-        orig_fig.layout.update(title_font_family='Courier New')
+        fig.update_layout(dict(title=dict(font=dict(family="Courier New"))))
+        orig_fig.layout.update(title_font_family="Courier New")
         self.assertEqual(fig, orig_fig)

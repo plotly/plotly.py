@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -23,11 +21,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         list
         """
-        return self['range']
+        return self["range"]
 
     @range.setter
     def range(self, val):
-        self['range'] = val
+        self["range"] = val
 
     # rangemode
     # ---------
@@ -48,17 +46,17 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['rangemode']
+        return self["rangemode"]
 
     @rangemode.setter
     def rangemode(self, val):
-        self['rangemode'] = val
+        self["rangemode"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.xaxis.rangeslider'
+        return "layout.xaxis.rangeslider"
 
     # Self properties description
     # ---------------------------
@@ -100,7 +98,7 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         YAxis
         """
-        super(YAxis, self).__init__('yaxis')
+        super(YAxis, self).__init__("yaxis")
 
         # Validate arg
         # ------------
@@ -120,25 +118,23 @@ an instance of plotly.graph_objs.layout.xaxis.rangeslider.YAxis"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.xaxis.rangeslider import (
-            yaxis as v_yaxis
-        )
+        from plotly.validators.layout.xaxis.rangeslider import yaxis as v_yaxis
 
         # Initialize validators
         # ---------------------
-        self._validators['range'] = v_yaxis.RangeValidator()
-        self._validators['rangemode'] = v_yaxis.RangemodeValidator()
+        self._validators["range"] = v_yaxis.RangeValidator()
+        self._validators["rangemode"] = v_yaxis.RangemodeValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('range', None)
-        self['range'] = range if range is not None else _v
-        _v = arg.pop('rangemode', None)
-        self['rangemode'] = rangemode if rangemode is not None else _v
+        _v = arg.pop("range", None)
+        self["range"] = range if range is not None else _v
+        _v = arg.pop("rangemode", None)
+        self["rangemode"] = rangemode if rangemode is not None else _v
 
         # Process unknown kwargs
         # ----------------------

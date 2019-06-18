@@ -69,4 +69,4 @@ my_dboard.remove(1)
 # my_dboard.get_preview()
 ```
 """
-from . dashboard_objs import Dashboard
+from .dashboard_objs import Dashboard

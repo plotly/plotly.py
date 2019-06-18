@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -22,11 +20,11 @@ class Stream(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['maxpoints']
+        return self["maxpoints"]
 
     @maxpoints.setter
     def maxpoints(self, val):
-        self['maxpoints'] = val
+        self["maxpoints"] = val
 
     # token
     # -----
@@ -43,17 +41,17 @@ class Stream(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['token']
+        return self["token"]
 
     @token.setter
     def token(self, val):
-        self['token'] = val
+        self["token"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'table'
+        return "table"
 
     # Self properties description
     # ---------------------------
@@ -94,7 +92,7 @@ class Stream(_BaseTraceHierarchyType):
         -------
         Stream
         """
-        super(Stream, self).__init__('stream')
+        super(Stream, self).__init__("stream")
 
         # Validate arg
         # ------------
@@ -114,23 +112,23 @@ an instance of plotly.graph_objs.table.Stream"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.table import (stream as v_stream)
+        from plotly.validators.table import stream as v_stream
 
         # Initialize validators
         # ---------------------
-        self._validators['maxpoints'] = v_stream.MaxpointsValidator()
-        self._validators['token'] = v_stream.TokenValidator()
+        self._validators["maxpoints"] = v_stream.MaxpointsValidator()
+        self._validators["token"] = v_stream.TokenValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('maxpoints', None)
-        self['maxpoints'] = maxpoints if maxpoints is not None else _v
-        _v = arg.pop('token', None)
-        self['token'] = token if token is not None else _v
+        _v = arg.pop("maxpoints", None)
+        self["maxpoints"] = maxpoints if maxpoints is not None else _v
+        _v = arg.pop("token", None)
+        self["token"] = token if token is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -165,11 +163,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         Any|numpy.ndarray
         """
-        return self['align']
+        return self["align"]
 
     @align.setter
     def align(self, val):
-        self['align'] = val
+        self["align"] = val
 
     # alignsrc
     # --------
@@ -185,11 +183,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['alignsrc']
+        return self["alignsrc"]
 
     @alignsrc.setter
     def alignsrc(self, val):
-        self['alignsrc'] = val
+        self["alignsrc"] = val
 
     # bgcolor
     # -------
@@ -245,11 +243,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         str|numpy.ndarray
         """
-        return self['bgcolor']
+        return self["bgcolor"]
 
     @bgcolor.setter
     def bgcolor(self, val):
-        self['bgcolor'] = val
+        self["bgcolor"] = val
 
     # bgcolorsrc
     # ----------
@@ -265,11 +263,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['bgcolorsrc']
+        return self["bgcolorsrc"]
 
     @bgcolorsrc.setter
     def bgcolorsrc(self, val):
-        self['bgcolorsrc'] = val
+        self["bgcolorsrc"] = val
 
     # bordercolor
     # -----------
@@ -325,11 +323,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         str|numpy.ndarray
         """
-        return self['bordercolor']
+        return self["bordercolor"]
 
     @bordercolor.setter
     def bordercolor(self, val):
-        self['bordercolor'] = val
+        self["bordercolor"] = val
 
     # bordercolorsrc
     # --------------
@@ -345,11 +343,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['bordercolorsrc']
+        return self["bordercolorsrc"]
 
     @bordercolorsrc.setter
     def bordercolorsrc(self, val):
-        self['bordercolorsrc'] = val
+        self["bordercolorsrc"] = val
 
     # font
     # ----
@@ -400,11 +398,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.table.hoverlabel.Font
         """
-        return self['font']
+        return self["font"]
 
     @font.setter
     def font(self, val):
-        self['font'] = val
+        self["font"] = val
 
     # namelength
     # ----------
@@ -427,11 +425,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         int|numpy.ndarray
         """
-        return self['namelength']
+        return self["namelength"]
 
     @namelength.setter
     def namelength(self, val):
-        self['namelength'] = val
+        self["namelength"] = val
 
     # namelengthsrc
     # -------------
@@ -447,17 +445,17 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['namelengthsrc']
+        return self["namelengthsrc"]
 
     @namelengthsrc.setter
     def namelengthsrc(self, val):
-        self['namelengthsrc'] = val
+        self["namelengthsrc"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'table'
+        return "table"
 
     # Self properties description
     # ---------------------------
@@ -549,7 +547,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         Hoverlabel
         """
-        super(Hoverlabel, self).__init__('hoverlabel')
+        super(Hoverlabel, self).__init__("hoverlabel")
 
         # Validate arg
         # ------------
@@ -569,48 +567,44 @@ an instance of plotly.graph_objs.table.Hoverlabel"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.table import (hoverlabel as v_hoverlabel)
+        from plotly.validators.table import hoverlabel as v_hoverlabel
 
         # Initialize validators
         # ---------------------
-        self._validators['align'] = v_hoverlabel.AlignValidator()
-        self._validators['alignsrc'] = v_hoverlabel.AlignsrcValidator()
-        self._validators['bgcolor'] = v_hoverlabel.BgcolorValidator()
-        self._validators['bgcolorsrc'] = v_hoverlabel.BgcolorsrcValidator()
-        self._validators['bordercolor'] = v_hoverlabel.BordercolorValidator()
-        self._validators['bordercolorsrc'
-                        ] = v_hoverlabel.BordercolorsrcValidator()
-        self._validators['font'] = v_hoverlabel.FontValidator()
-        self._validators['namelength'] = v_hoverlabel.NamelengthValidator()
-        self._validators['namelengthsrc'
-                        ] = v_hoverlabel.NamelengthsrcValidator()
+        self._validators["align"] = v_hoverlabel.AlignValidator()
+        self._validators["alignsrc"] = v_hoverlabel.AlignsrcValidator()
+        self._validators["bgcolor"] = v_hoverlabel.BgcolorValidator()
+        self._validators["bgcolorsrc"] = v_hoverlabel.BgcolorsrcValidator()
+        self._validators["bordercolor"] = v_hoverlabel.BordercolorValidator()
+        self._validators["bordercolorsrc"] = v_hoverlabel.BordercolorsrcValidator()
+        self._validators["font"] = v_hoverlabel.FontValidator()
+        self._validators["namelength"] = v_hoverlabel.NamelengthValidator()
+        self._validators["namelengthsrc"] = v_hoverlabel.NamelengthsrcValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('align', None)
-        self['align'] = align if align is not None else _v
-        _v = arg.pop('alignsrc', None)
-        self['alignsrc'] = alignsrc if alignsrc is not None else _v
-        _v = arg.pop('bgcolor', None)
-        self['bgcolor'] = bgcolor if bgcolor is not None else _v
-        _v = arg.pop('bgcolorsrc', None)
-        self['bgcolorsrc'] = bgcolorsrc if bgcolorsrc is not None else _v
-        _v = arg.pop('bordercolor', None)
-        self['bordercolor'] = bordercolor if bordercolor is not None else _v
-        _v = arg.pop('bordercolorsrc', None)
-        self['bordercolorsrc'
-            ] = bordercolorsrc if bordercolorsrc is not None else _v
-        _v = arg.pop('font', None)
-        self['font'] = font if font is not None else _v
-        _v = arg.pop('namelength', None)
-        self['namelength'] = namelength if namelength is not None else _v
-        _v = arg.pop('namelengthsrc', None)
-        self['namelengthsrc'
-            ] = namelengthsrc if namelengthsrc is not None else _v
+        _v = arg.pop("align", None)
+        self["align"] = align if align is not None else _v
+        _v = arg.pop("alignsrc", None)
+        self["alignsrc"] = alignsrc if alignsrc is not None else _v
+        _v = arg.pop("bgcolor", None)
+        self["bgcolor"] = bgcolor if bgcolor is not None else _v
+        _v = arg.pop("bgcolorsrc", None)
+        self["bgcolorsrc"] = bgcolorsrc if bgcolorsrc is not None else _v
+        _v = arg.pop("bordercolor", None)
+        self["bordercolor"] = bordercolor if bordercolor is not None else _v
+        _v = arg.pop("bordercolorsrc", None)
+        self["bordercolorsrc"] = bordercolorsrc if bordercolorsrc is not None else _v
+        _v = arg.pop("font", None)
+        self["font"] = font if font is not None else _v
+        _v = arg.pop("namelength", None)
+        self["namelength"] = namelength if namelength is not None else _v
+        _v = arg.pop("namelengthsrc", None)
+        self["namelengthsrc"] = namelengthsrc if namelengthsrc is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -646,11 +640,11 @@ class Header(_BaseTraceHierarchyType):
         -------
         Any|numpy.ndarray
         """
-        return self['align']
+        return self["align"]
 
     @align.setter
     def align(self, val):
-        self['align'] = val
+        self["align"] = val
 
     # alignsrc
     # --------
@@ -666,11 +660,11 @@ class Header(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['alignsrc']
+        return self["alignsrc"]
 
     @alignsrc.setter
     def alignsrc(self, val):
-        self['alignsrc'] = val
+        self["alignsrc"] = val
 
     # fill
     # ----
@@ -697,11 +691,11 @@ class Header(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.table.header.Fill
         """
-        return self['fill']
+        return self["fill"]
 
     @fill.setter
     def fill(self, val):
-        self['fill'] = val
+        self["fill"] = val
 
     # font
     # ----
@@ -750,11 +744,11 @@ class Header(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.table.header.Font
         """
-        return self['font']
+        return self["font"]
 
     @font.setter
     def font(self, val):
-        self['font'] = val
+        self["font"] = val
 
     # format
     # ------
@@ -772,11 +766,11 @@ class Header(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['format']
+        return self["format"]
 
     @format.setter
     def format(self, val):
-        self['format'] = val
+        self["format"] = val
 
     # formatsrc
     # ---------
@@ -792,11 +786,11 @@ class Header(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['formatsrc']
+        return self["formatsrc"]
 
     @formatsrc.setter
     def formatsrc(self, val):
-        self['formatsrc'] = val
+        self["formatsrc"] = val
 
     # height
     # ------
@@ -812,11 +806,11 @@ class Header(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['height']
+        return self["height"]
 
     @height.setter
     def height(self, val):
-        self['height'] = val
+        self["height"] = val
 
     # line
     # ----
@@ -846,11 +840,11 @@ class Header(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.table.header.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
     # prefix
     # ------
@@ -868,11 +862,11 @@ class Header(_BaseTraceHierarchyType):
         -------
         str|numpy.ndarray
         """
-        return self['prefix']
+        return self["prefix"]
 
     @prefix.setter
     def prefix(self, val):
-        self['prefix'] = val
+        self["prefix"] = val
 
     # prefixsrc
     # ---------
@@ -888,11 +882,11 @@ class Header(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['prefixsrc']
+        return self["prefixsrc"]
 
     @prefixsrc.setter
     def prefixsrc(self, val):
-        self['prefixsrc'] = val
+        self["prefixsrc"] = val
 
     # suffix
     # ------
@@ -910,11 +904,11 @@ class Header(_BaseTraceHierarchyType):
         -------
         str|numpy.ndarray
         """
-        return self['suffix']
+        return self["suffix"]
 
     @suffix.setter
     def suffix(self, val):
-        self['suffix'] = val
+        self["suffix"] = val
 
     # suffixsrc
     # ---------
@@ -930,11 +924,11 @@ class Header(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['suffixsrc']
+        return self["suffixsrc"]
 
     @suffixsrc.setter
     def suffixsrc(self, val):
-        self['suffixsrc'] = val
+        self["suffixsrc"] = val
 
     # values
     # ------
@@ -953,11 +947,11 @@ class Header(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['values']
+        return self["values"]
 
     @values.setter
     def values(self, val):
-        self['values'] = val
+        self["values"] = val
 
     # valuessrc
     # ---------
@@ -973,17 +967,17 @@ class Header(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['valuessrc']
+        return self["valuessrc"]
 
     @valuessrc.setter
     def valuessrc(self, val):
-        self['valuessrc'] = val
+        self["valuessrc"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'table'
+        return "table"
 
     # Self properties description
     # ---------------------------
@@ -1108,7 +1102,7 @@ class Header(_BaseTraceHierarchyType):
         -------
         Header
         """
-        super(Header, self).__init__('header')
+        super(Header, self).__init__("header")
 
         # Validate arg
         # ------------
@@ -1128,59 +1122,59 @@ an instance of plotly.graph_objs.table.Header"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.table import (header as v_header)
+        from plotly.validators.table import header as v_header
 
         # Initialize validators
         # ---------------------
-        self._validators['align'] = v_header.AlignValidator()
-        self._validators['alignsrc'] = v_header.AlignsrcValidator()
-        self._validators['fill'] = v_header.FillValidator()
-        self._validators['font'] = v_header.FontValidator()
-        self._validators['format'] = v_header.FormatValidator()
-        self._validators['formatsrc'] = v_header.FormatsrcValidator()
-        self._validators['height'] = v_header.HeightValidator()
-        self._validators['line'] = v_header.LineValidator()
-        self._validators['prefix'] = v_header.PrefixValidator()
-        self._validators['prefixsrc'] = v_header.PrefixsrcValidator()
-        self._validators['suffix'] = v_header.SuffixValidator()
-        self._validators['suffixsrc'] = v_header.SuffixsrcValidator()
-        self._validators['values'] = v_header.ValuesValidator()
-        self._validators['valuessrc'] = v_header.ValuessrcValidator()
+        self._validators["align"] = v_header.AlignValidator()
+        self._validators["alignsrc"] = v_header.AlignsrcValidator()
+        self._validators["fill"] = v_header.FillValidator()
+        self._validators["font"] = v_header.FontValidator()
+        self._validators["format"] = v_header.FormatValidator()
+        self._validators["formatsrc"] = v_header.FormatsrcValidator()
+        self._validators["height"] = v_header.HeightValidator()
+        self._validators["line"] = v_header.LineValidator()
+        self._validators["prefix"] = v_header.PrefixValidator()
+        self._validators["prefixsrc"] = v_header.PrefixsrcValidator()
+        self._validators["suffix"] = v_header.SuffixValidator()
+        self._validators["suffixsrc"] = v_header.SuffixsrcValidator()
+        self._validators["values"] = v_header.ValuesValidator()
+        self._validators["valuessrc"] = v_header.ValuessrcValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('align', None)
-        self['align'] = align if align is not None else _v
-        _v = arg.pop('alignsrc', None)
-        self['alignsrc'] = alignsrc if alignsrc is not None else _v
-        _v = arg.pop('fill', None)
-        self['fill'] = fill if fill is not None else _v
-        _v = arg.pop('font', None)
-        self['font'] = font if font is not None else _v
-        _v = arg.pop('format', None)
-        self['format'] = format if format is not None else _v
-        _v = arg.pop('formatsrc', None)
-        self['formatsrc'] = formatsrc if formatsrc is not None else _v
-        _v = arg.pop('height', None)
-        self['height'] = height if height is not None else _v
-        _v = arg.pop('line', None)
-        self['line'] = line if line is not None else _v
-        _v = arg.pop('prefix', None)
-        self['prefix'] = prefix if prefix is not None else _v
-        _v = arg.pop('prefixsrc', None)
-        self['prefixsrc'] = prefixsrc if prefixsrc is not None else _v
-        _v = arg.pop('suffix', None)
-        self['suffix'] = suffix if suffix is not None else _v
-        _v = arg.pop('suffixsrc', None)
-        self['suffixsrc'] = suffixsrc if suffixsrc is not None else _v
-        _v = arg.pop('values', None)
-        self['values'] = values if values is not None else _v
-        _v = arg.pop('valuessrc', None)
-        self['valuessrc'] = valuessrc if valuessrc is not None else _v
+        _v = arg.pop("align", None)
+        self["align"] = align if align is not None else _v
+        _v = arg.pop("alignsrc", None)
+        self["alignsrc"] = alignsrc if alignsrc is not None else _v
+        _v = arg.pop("fill", None)
+        self["fill"] = fill if fill is not None else _v
+        _v = arg.pop("font", None)
+        self["font"] = font if font is not None else _v
+        _v = arg.pop("format", None)
+        self["format"] = format if format is not None else _v
+        _v = arg.pop("formatsrc", None)
+        self["formatsrc"] = formatsrc if formatsrc is not None else _v
+        _v = arg.pop("height", None)
+        self["height"] = height if height is not None else _v
+        _v = arg.pop("line", None)
+        self["line"] = line if line is not None else _v
+        _v = arg.pop("prefix", None)
+        self["prefix"] = prefix if prefix is not None else _v
+        _v = arg.pop("prefixsrc", None)
+        self["prefixsrc"] = prefixsrc if prefixsrc is not None else _v
+        _v = arg.pop("suffix", None)
+        self["suffix"] = suffix if suffix is not None else _v
+        _v = arg.pop("suffixsrc", None)
+        self["suffixsrc"] = suffixsrc if suffixsrc is not None else _v
+        _v = arg.pop("values", None)
+        self["values"] = values if values is not None else _v
+        _v = arg.pop("valuessrc", None)
+        self["valuessrc"] = valuessrc if valuessrc is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -1213,11 +1207,11 @@ class Domain(_BaseTraceHierarchyType):
         -------
         int
         """
-        return self['column']
+        return self["column"]
 
     @column.setter
     def column(self, val):
-        self['column'] = val
+        self["column"] = val
 
     # row
     # ---
@@ -1235,11 +1229,11 @@ class Domain(_BaseTraceHierarchyType):
         -------
         int
         """
-        return self['row']
+        return self["row"]
 
     @row.setter
     def row(self, val):
-        self['row'] = val
+        self["row"] = val
 
     # x
     # -
@@ -1261,11 +1255,11 @@ class Domain(_BaseTraceHierarchyType):
         -------
         list
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
     # y
     # -
@@ -1287,17 +1281,17 @@ class Domain(_BaseTraceHierarchyType):
         -------
         list
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'table'
+        return "table"
 
     # Self properties description
     # ---------------------------
@@ -1318,9 +1312,7 @@ class Domain(_BaseTraceHierarchyType):
             fraction).
         """
 
-    def __init__(
-        self, arg=None, column=None, row=None, x=None, y=None, **kwargs
-    ):
+    def __init__(self, arg=None, column=None, row=None, x=None, y=None, **kwargs):
         """
         Construct a new Domain object
         
@@ -1346,7 +1338,7 @@ class Domain(_BaseTraceHierarchyType):
         -------
         Domain
         """
-        super(Domain, self).__init__('domain')
+        super(Domain, self).__init__("domain")
 
         # Validate arg
         # ------------
@@ -1366,29 +1358,29 @@ an instance of plotly.graph_objs.table.Domain"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.table import (domain as v_domain)
+        from plotly.validators.table import domain as v_domain
 
         # Initialize validators
         # ---------------------
-        self._validators['column'] = v_domain.ColumnValidator()
-        self._validators['row'] = v_domain.RowValidator()
-        self._validators['x'] = v_domain.XValidator()
-        self._validators['y'] = v_domain.YValidator()
+        self._validators["column"] = v_domain.ColumnValidator()
+        self._validators["row"] = v_domain.RowValidator()
+        self._validators["x"] = v_domain.XValidator()
+        self._validators["y"] = v_domain.YValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('column', None)
-        self['column'] = column if column is not None else _v
-        _v = arg.pop('row', None)
-        self['row'] = row if row is not None else _v
-        _v = arg.pop('x', None)
-        self['x'] = x if x is not None else _v
-        _v = arg.pop('y', None)
-        self['y'] = y if y is not None else _v
+        _v = arg.pop("column", None)
+        self["column"] = column if column is not None else _v
+        _v = arg.pop("row", None)
+        self["row"] = row if row is not None else _v
+        _v = arg.pop("x", None)
+        self["x"] = x if x is not None else _v
+        _v = arg.pop("y", None)
+        self["y"] = y if y is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -1424,11 +1416,11 @@ class Cells(_BaseTraceHierarchyType):
         -------
         Any|numpy.ndarray
         """
-        return self['align']
+        return self["align"]
 
     @align.setter
     def align(self, val):
-        self['align'] = val
+        self["align"] = val
 
     # alignsrc
     # --------
@@ -1444,11 +1436,11 @@ class Cells(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['alignsrc']
+        return self["alignsrc"]
 
     @alignsrc.setter
     def alignsrc(self, val):
-        self['alignsrc'] = val
+        self["alignsrc"] = val
 
     # fill
     # ----
@@ -1475,11 +1467,11 @@ class Cells(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.table.cells.Fill
         """
-        return self['fill']
+        return self["fill"]
 
     @fill.setter
     def fill(self, val):
-        self['fill'] = val
+        self["fill"] = val
 
     # font
     # ----
@@ -1528,11 +1520,11 @@ class Cells(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.table.cells.Font
         """
-        return self['font']
+        return self["font"]
 
     @font.setter
     def font(self, val):
-        self['font'] = val
+        self["font"] = val
 
     # format
     # ------
@@ -1550,11 +1542,11 @@ class Cells(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['format']
+        return self["format"]
 
     @format.setter
     def format(self, val):
-        self['format'] = val
+        self["format"] = val
 
     # formatsrc
     # ---------
@@ -1570,11 +1562,11 @@ class Cells(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['formatsrc']
+        return self["formatsrc"]
 
     @formatsrc.setter
     def formatsrc(self, val):
-        self['formatsrc'] = val
+        self["formatsrc"] = val
 
     # height
     # ------
@@ -1590,11 +1582,11 @@ class Cells(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['height']
+        return self["height"]
 
     @height.setter
     def height(self, val):
-        self['height'] = val
+        self["height"] = val
 
     # line
     # ----
@@ -1624,11 +1616,11 @@ class Cells(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.table.cells.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
     # prefix
     # ------
@@ -1646,11 +1638,11 @@ class Cells(_BaseTraceHierarchyType):
         -------
         str|numpy.ndarray
         """
-        return self['prefix']
+        return self["prefix"]
 
     @prefix.setter
     def prefix(self, val):
-        self['prefix'] = val
+        self["prefix"] = val
 
     # prefixsrc
     # ---------
@@ -1666,11 +1658,11 @@ class Cells(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['prefixsrc']
+        return self["prefixsrc"]
 
     @prefixsrc.setter
     def prefixsrc(self, val):
-        self['prefixsrc'] = val
+        self["prefixsrc"] = val
 
     # suffix
     # ------
@@ -1688,11 +1680,11 @@ class Cells(_BaseTraceHierarchyType):
         -------
         str|numpy.ndarray
         """
-        return self['suffix']
+        return self["suffix"]
 
     @suffix.setter
     def suffix(self, val):
-        self['suffix'] = val
+        self["suffix"] = val
 
     # suffixsrc
     # ---------
@@ -1708,11 +1700,11 @@ class Cells(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['suffixsrc']
+        return self["suffixsrc"]
 
     @suffixsrc.setter
     def suffixsrc(self, val):
-        self['suffixsrc'] = val
+        self["suffixsrc"] = val
 
     # values
     # ------
@@ -1731,11 +1723,11 @@ class Cells(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['values']
+        return self["values"]
 
     @values.setter
     def values(self, val):
-        self['values'] = val
+        self["values"] = val
 
     # valuessrc
     # ---------
@@ -1751,17 +1743,17 @@ class Cells(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['valuessrc']
+        return self["valuessrc"]
 
     @valuessrc.setter
     def valuessrc(self, val):
-        self['valuessrc'] = val
+        self["valuessrc"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'table'
+        return "table"
 
     # Self properties description
     # ---------------------------
@@ -1886,7 +1878,7 @@ class Cells(_BaseTraceHierarchyType):
         -------
         Cells
         """
-        super(Cells, self).__init__('cells')
+        super(Cells, self).__init__("cells")
 
         # Validate arg
         # ------------
@@ -1906,59 +1898,59 @@ an instance of plotly.graph_objs.table.Cells"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.table import (cells as v_cells)
+        from plotly.validators.table import cells as v_cells
 
         # Initialize validators
         # ---------------------
-        self._validators['align'] = v_cells.AlignValidator()
-        self._validators['alignsrc'] = v_cells.AlignsrcValidator()
-        self._validators['fill'] = v_cells.FillValidator()
-        self._validators['font'] = v_cells.FontValidator()
-        self._validators['format'] = v_cells.FormatValidator()
-        self._validators['formatsrc'] = v_cells.FormatsrcValidator()
-        self._validators['height'] = v_cells.HeightValidator()
-        self._validators['line'] = v_cells.LineValidator()
-        self._validators['prefix'] = v_cells.PrefixValidator()
-        self._validators['prefixsrc'] = v_cells.PrefixsrcValidator()
-        self._validators['suffix'] = v_cells.SuffixValidator()
-        self._validators['suffixsrc'] = v_cells.SuffixsrcValidator()
-        self._validators['values'] = v_cells.ValuesValidator()
-        self._validators['valuessrc'] = v_cells.ValuessrcValidator()
+        self._validators["align"] = v_cells.AlignValidator()
+        self._validators["alignsrc"] = v_cells.AlignsrcValidator()
+        self._validators["fill"] = v_cells.FillValidator()
+        self._validators["font"] = v_cells.FontValidator()
+        self._validators["format"] = v_cells.FormatValidator()
+        self._validators["formatsrc"] = v_cells.FormatsrcValidator()
+        self._validators["height"] = v_cells.HeightValidator()
+        self._validators["line"] = v_cells.LineValidator()
+        self._validators["prefix"] = v_cells.PrefixValidator()
+        self._validators["prefixsrc"] = v_cells.PrefixsrcValidator()
+        self._validators["suffix"] = v_cells.SuffixValidator()
+        self._validators["suffixsrc"] = v_cells.SuffixsrcValidator()
+        self._validators["values"] = v_cells.ValuesValidator()
+        self._validators["valuessrc"] = v_cells.ValuessrcValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('align', None)
-        self['align'] = align if align is not None else _v
-        _v = arg.pop('alignsrc', None)
-        self['alignsrc'] = alignsrc if alignsrc is not None else _v
-        _v = arg.pop('fill', None)
-        self['fill'] = fill if fill is not None else _v
-        _v = arg.pop('font', None)
-        self['font'] = font if font is not None else _v
-        _v = arg.pop('format', None)
-        self['format'] = format if format is not None else _v
-        _v = arg.pop('formatsrc', None)
-        self['formatsrc'] = formatsrc if formatsrc is not None else _v
-        _v = arg.pop('height', None)
-        self['height'] = height if height is not None else _v
-        _v = arg.pop('line', None)
-        self['line'] = line if line is not None else _v
-        _v = arg.pop('prefix', None)
-        self['prefix'] = prefix if prefix is not None else _v
-        _v = arg.pop('prefixsrc', None)
-        self['prefixsrc'] = prefixsrc if prefixsrc is not None else _v
-        _v = arg.pop('suffix', None)
-        self['suffix'] = suffix if suffix is not None else _v
-        _v = arg.pop('suffixsrc', None)
-        self['suffixsrc'] = suffixsrc if suffixsrc is not None else _v
-        _v = arg.pop('values', None)
-        self['values'] = values if values is not None else _v
-        _v = arg.pop('valuessrc', None)
-        self['valuessrc'] = valuessrc if valuessrc is not None else _v
+        _v = arg.pop("align", None)
+        self["align"] = align if align is not None else _v
+        _v = arg.pop("alignsrc", None)
+        self["alignsrc"] = alignsrc if alignsrc is not None else _v
+        _v = arg.pop("fill", None)
+        self["fill"] = fill if fill is not None else _v
+        _v = arg.pop("font", None)
+        self["font"] = font if font is not None else _v
+        _v = arg.pop("format", None)
+        self["format"] = format if format is not None else _v
+        _v = arg.pop("formatsrc", None)
+        self["formatsrc"] = formatsrc if formatsrc is not None else _v
+        _v = arg.pop("height", None)
+        self["height"] = height if height is not None else _v
+        _v = arg.pop("line", None)
+        self["line"] = line if line is not None else _v
+        _v = arg.pop("prefix", None)
+        self["prefix"] = prefix if prefix is not None else _v
+        _v = arg.pop("prefixsrc", None)
+        self["prefixsrc"] = prefixsrc if prefixsrc is not None else _v
+        _v = arg.pop("suffix", None)
+        self["suffix"] = suffix if suffix is not None else _v
+        _v = arg.pop("suffixsrc", None)
+        self["suffixsrc"] = suffixsrc if suffixsrc is not None else _v
+        _v = arg.pop("values", None)
+        self["values"] = values if values is not None else _v
+        _v = arg.pop("valuessrc", None)
+        self["valuessrc"] = valuessrc if valuessrc is not None else _v
 
         # Process unknown kwargs
         # ----------------------

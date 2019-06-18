@@ -15,10 +15,10 @@ import plotly.graph_objs as go
 
 pd.options.mode.chained_assignment = None
 
-shapely = optional_imports.get_module('shapely')
-shapefile = optional_imports.get_module('shapefile')
-gp = optional_imports.get_module('geopandas')
-_plotly_geo = optional_imports.get_module('_plotly_geo')
+shapely = optional_imports.get_module("shapely")
+shapefile = optional_imports.get_module("shapefile")
+gp = optional_imports.get_module("geopandas")
+_plotly_geo = optional_imports.get_module("_plotly_geo")
 
 
 def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
@@ -28,34 +28,34 @@ def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
 
     abs_plotly_geo_path = os.path.dirname(abs_dir_path)
 
-    abs_package_data_dir_path = os.path.join(
-        abs_plotly_geo_path, 'package_data')
+    abs_package_data_dir_path = os.path.join(abs_plotly_geo_path, "package_data")
 
-    shape_pre2010 = 'gz_2010_us_050_00_500k.shp'
+    shape_pre2010 = "gz_2010_us_050_00_500k.shp"
     shape_pre2010 = os.path.join(abs_package_data_dir_path, shape_pre2010)
 
     df_shape_pre2010 = gp.read_file(shape_pre2010)
-    df_shape_pre2010['FIPS'] = (df_shape_pre2010['STATE'] +
-                                df_shape_pre2010['COUNTY'])
-    df_shape_pre2010['FIPS'] = pd.to_numeric(df_shape_pre2010['FIPS'])
+    df_shape_pre2010["FIPS"] = df_shape_pre2010["STATE"] + df_shape_pre2010["COUNTY"]
+    df_shape_pre2010["FIPS"] = pd.to_numeric(df_shape_pre2010["FIPS"])
 
-    states_path = 'cb_2016_us_state_500k.shp'
+    states_path = "cb_2016_us_state_500k.shp"
     states_path = os.path.join(abs_package_data_dir_path, states_path)
 
     df_state = gp.read_file(states_path)
-    df_state = df_state[['STATEFP', 'NAME', 'geometry']]
-    df_state = df_state.rename(columns={'NAME': 'STATE_NAME'})
+    df_state = df_state[["STATEFP", "NAME", "geometry"]]
+    df_state = df_state.rename(columns={"NAME": "STATE_NAME"})
 
-    filenames = ['cb_2016_us_county_500k.dbf',
-                 'cb_2016_us_county_500k.shp',
-                 'cb_2016_us_county_500k.shx']
+    filenames = [
+        "cb_2016_us_county_500k.dbf",
+        "cb_2016_us_county_500k.shp",
+        "cb_2016_us_county_500k.shx",
+    ]
 
     for j in range(len(filenames)):
         filenames[j] = os.path.join(abs_package_data_dir_path, filenames[j])
 
-    dbf = io.open(filenames[0], 'rb')
-    shp = io.open(filenames[1], 'rb')
-    shx = io.open(filenames[2], 'rb')
+    dbf = io.open(filenames[0], "rb")
+    shp = io.open(filenames[1], "rb")
+    shx = io.open(filenames[2], "rb")
 
     r = shapefile.Reader(shp=shp, shx=shx, dbf=dbf)
 
@@ -67,185 +67,196 @@ def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
 
     gdf = gp.GeoDataFrame(data=attributes, geometry=geometry)
 
-    gdf['FIPS'] = gdf['STATEFP'] + gdf['COUNTYFP']
-    gdf['FIPS'] = pd.to_numeric(gdf['FIPS'])
+    gdf["FIPS"] = gdf["STATEFP"] + gdf["COUNTYFP"]
+    gdf["FIPS"] = pd.to_numeric(gdf["FIPS"])
 
     # add missing counties
     f = 46113
     singlerow = pd.DataFrame(
         [
-            [st_to_state_name_dict['SD'], 'SD',
-             df_shape_pre2010[df_shape_pre2010['FIPS'] == f]['geometry'].iloc[0],
-             df_shape_pre2010[df_shape_pre2010['FIPS'] == f]['FIPS'].iloc[0],
-             '46', 'Shannon']
+            [
+                st_to_state_name_dict["SD"],
+                "SD",
+                df_shape_pre2010[df_shape_pre2010["FIPS"] == f]["geometry"].iloc[0],
+                df_shape_pre2010[df_shape_pre2010["FIPS"] == f]["FIPS"].iloc[0],
+                "46",
+                "Shannon",
+            ]
         ],
-        columns=['State', 'ST', 'geometry', 'FIPS', 'STATEFP', 'NAME'],
-        index=[max(gdf.index) + 1]
+        columns=["State", "ST", "geometry", "FIPS", "STATEFP", "NAME"],
+        index=[max(gdf.index) + 1],
     )
     gdf = gdf.append(singlerow)
 
     f = 51515
     singlerow = pd.DataFrame(
         [
-            [st_to_state_name_dict['VA'], 'VA',
-             df_shape_pre2010[df_shape_pre2010['FIPS'] == f]['geometry'].iloc[0],
-             df_shape_pre2010[df_shape_pre2010['FIPS'] == f]['FIPS'].iloc[0],
-             '51', 'Bedford City']
+            [
+                st_to_state_name_dict["VA"],
+                "VA",
+                df_shape_pre2010[df_shape_pre2010["FIPS"] == f]["geometry"].iloc[0],
+                df_shape_pre2010[df_shape_pre2010["FIPS"] == f]["FIPS"].iloc[0],
+                "51",
+                "Bedford City",
+            ]
         ],
-        columns=['State', 'ST', 'geometry', 'FIPS', 'STATEFP', 'NAME'],
-        index=[max(gdf.index) + 1]
+        columns=["State", "ST", "geometry", "FIPS", "STATEFP", "NAME"],
+        index=[max(gdf.index) + 1],
     )
     gdf = gdf.append(singlerow)
 
     f = 2270
     singlerow = pd.DataFrame(
         [
-            [st_to_state_name_dict['AK'], 'AK',
-             df_shape_pre2010[df_shape_pre2010['FIPS'] == f]['geometry'].iloc[0],
-             df_shape_pre2010[df_shape_pre2010['FIPS'] == f]['FIPS'].iloc[0],
-             '02', 'Wade Hampton']
+            [
+                st_to_state_name_dict["AK"],
+                "AK",
+                df_shape_pre2010[df_shape_pre2010["FIPS"] == f]["geometry"].iloc[0],
+                df_shape_pre2010[df_shape_pre2010["FIPS"] == f]["FIPS"].iloc[0],
+                "02",
+                "Wade Hampton",
+            ]
         ],
-        columns=['State', 'ST', 'geometry', 'FIPS', 'STATEFP', 'NAME'],
-        index=[max(gdf.index) + 1]
+        columns=["State", "ST", "geometry", "FIPS", "STATEFP", "NAME"],
+        index=[max(gdf.index) + 1],
     )
     gdf = gdf.append(singlerow)
 
-    row_2198 = gdf[gdf['FIPS'] == 2198]
+    row_2198 = gdf[gdf["FIPS"] == 2198]
     row_2198.index = [max(gdf.index) + 1]
-    row_2198.loc[row_2198.index[0], 'FIPS'] = 2201
-    row_2198.loc[row_2198.index[0], 'STATEFP'] = '02'
+    row_2198.loc[row_2198.index[0], "FIPS"] = 2201
+    row_2198.loc[row_2198.index[0], "STATEFP"] = "02"
     gdf = gdf.append(row_2198)
 
-    row_2105 = gdf[gdf['FIPS'] == 2105]
+    row_2105 = gdf[gdf["FIPS"] == 2105]
     row_2105.index = [max(gdf.index) + 1]
-    row_2105.loc[row_2105.index[0], 'FIPS'] = 2232
-    row_2105.loc[row_2105.index[0], 'STATEFP'] = '02'
+    row_2105.loc[row_2105.index[0], "FIPS"] = 2232
+    row_2105.loc[row_2105.index[0], "STATEFP"] = "02"
     gdf = gdf.append(row_2105)
-    gdf = gdf.rename(columns={'NAME': 'COUNTY_NAME'})
+    gdf = gdf.rename(columns={"NAME": "COUNTY_NAME"})
 
-    gdf_reduced = gdf[['FIPS', 'STATEFP', 'COUNTY_NAME', 'geometry']]
-    gdf_statefp = gdf_reduced.merge(df_state[['STATEFP', 'STATE_NAME']],
-                                    on='STATEFP')
+    gdf_reduced = gdf[["FIPS", "STATEFP", "COUNTY_NAME", "geometry"]]
+    gdf_statefp = gdf_reduced.merge(df_state[["STATEFP", "STATE_NAME"]], on="STATEFP")
 
     ST = []
-    for n in gdf_statefp['STATE_NAME']:
+    for n in gdf_statefp["STATE_NAME"]:
         ST.append(state_to_st_dict[n])
 
-    gdf_statefp['ST'] = ST
+    gdf_statefp["ST"] = ST
     return gdf_statefp, df_state
 
 
 st_to_state_name_dict = {
-    'AK': 'Alaska',
-    'AL': 'Alabama',
-    'AR': 'Arkansas',
-    'AZ': 'Arizona',
-    'CA': 'California',
-    'CO': 'Colorado',
-    'CT': 'Connecticut',
-    'DC': 'District of Columbia',
-    'DE': 'Delaware',
-    'FL': 'Florida',
-    'GA': 'Georgia',
-    'HI': 'Hawaii',
-    'IA': 'Iowa',
-    'ID': 'Idaho',
-    'IL': 'Illinois',
-    'IN': 'Indiana',
-    'KS': 'Kansas',
-    'KY': 'Kentucky',
-    'LA': 'Louisiana',
-    'MA': 'Massachusetts',
-    'MD': 'Maryland',
-    'ME': 'Maine',
-    'MI': 'Michigan',
-    'MN': 'Minnesota',
-    'MO': 'Missouri',
-    'MS': 'Mississippi',
-    'MT': 'Montana',
-    'NC': 'North Carolina',
-    'ND': 'North Dakota',
-    'NE': 'Nebraska',
-    'NH': 'New Hampshire',
-    'NJ': 'New Jersey',
-    'NM': 'New Mexico',
-    'NV': 'Nevada',
-    'NY': 'New York',
-    'OH': 'Ohio',
-    'OK': 'Oklahoma',
-    'OR': 'Oregon',
-    'PA': 'Pennsylvania',
-    'RI': 'Rhode Island',
-    'SC': 'South Carolina',
-    'SD': 'South Dakota',
-    'TN': 'Tennessee',
-    'TX': 'Texas',
-    'UT': 'Utah',
-    'VA': 'Virginia',
-    'VT': 'Vermont',
-    'WA': 'Washington',
-    'WI': 'Wisconsin',
-    'WV': 'West Virginia',
-    'WY': 'Wyoming'
+    "AK": "Alaska",
+    "AL": "Alabama",
+    "AR": "Arkansas",
+    "AZ": "Arizona",
+    "CA": "California",
+    "CO": "Colorado",
+    "CT": "Connecticut",
+    "DC": "District of Columbia",
+    "DE": "Delaware",
+    "FL": "Florida",
+    "GA": "Georgia",
+    "HI": "Hawaii",
+    "IA": "Iowa",
+    "ID": "Idaho",
+    "IL": "Illinois",
+    "IN": "Indiana",
+    "KS": "Kansas",
+    "KY": "Kentucky",
+    "LA": "Louisiana",
+    "MA": "Massachusetts",
+    "MD": "Maryland",
+    "ME": "Maine",
+    "MI": "Michigan",
+    "MN": "Minnesota",
+    "MO": "Missouri",
+    "MS": "Mississippi",
+    "MT": "Montana",
+    "NC": "North Carolina",
+    "ND": "North Dakota",
+    "NE": "Nebraska",
+    "NH": "New Hampshire",
+    "NJ": "New Jersey",
+    "NM": "New Mexico",
+    "NV": "Nevada",
+    "NY": "New York",
+    "OH": "Ohio",
+    "OK": "Oklahoma",
+    "OR": "Oregon",
+    "PA": "Pennsylvania",
+    "RI": "Rhode Island",
+    "SC": "South Carolina",
+    "SD": "South Dakota",
+    "TN": "Tennessee",
+    "TX": "Texas",
+    "UT": "Utah",
+    "VA": "Virginia",
+    "VT": "Vermont",
+    "WA": "Washington",
+    "WI": "Wisconsin",
+    "WV": "West Virginia",
+    "WY": "Wyoming",
 }
 
 state_to_st_dict = {
-    'Alabama': 'AL',
-    'Alaska': 'AK',
-    'American Samoa': 'AS',
-    'Arizona': 'AZ',
-    'Arkansas': 'AR',
-    'California': 'CA',
-    'Colorado': 'CO',
-    'Commonwealth of the Northern Mariana Islands': 'MP',
-    'Connecticut': 'CT',
-    'Delaware': 'DE',
-    'District of Columbia': 'DC',
-    'Florida': 'FL',
-    'Georgia': 'GA',
-    'Guam': 'GU',
-    'Hawaii': 'HI',
-    'Idaho': 'ID',
-    'Illinois': 'IL',
-    'Indiana': 'IN',
-    'Iowa': 'IA',
-    'Kansas': 'KS',
-    'Kentucky': 'KY',
-    'Louisiana': 'LA',
-    'Maine': 'ME',
-    'Maryland': 'MD',
-    'Massachusetts': 'MA',
-    'Michigan': 'MI',
-    'Minnesota': 'MN',
-    'Mississippi': 'MS',
-    'Missouri': 'MO',
-    'Montana': 'MT',
-    'Nebraska': 'NE',
-    'Nevada': 'NV',
-    'New Hampshire': 'NH',
-    'New Jersey': 'NJ',
-    'New Mexico': 'NM',
-    'New York': 'NY',
-    'North Carolina': 'NC',
-    'North Dakota': 'ND',
-    'Ohio': 'OH',
-    'Oklahoma': 'OK',
-    'Oregon': 'OR',
-    'Pennsylvania': 'PA',
-    'Puerto Rico': '',
-    'Rhode Island': 'RI',
-    'South Carolina': 'SC',
-    'South Dakota': 'SD',
-    'Tennessee': 'TN',
-    'Texas': 'TX',
-    'United States Virgin Islands': 'VI',
-    'Utah': 'UT',
-    'Vermont': 'VT',
-    'Virginia': 'VA',
-    'Washington': 'WA',
-    'West Virginia': 'WV',
-    'Wisconsin': 'WI',
-    'Wyoming': 'WY'
+    "Alabama": "AL",
+    "Alaska": "AK",
+    "American Samoa": "AS",
+    "Arizona": "AZ",
+    "Arkansas": "AR",
+    "California": "CA",
+    "Colorado": "CO",
+    "Commonwealth of the Northern Mariana Islands": "MP",
+    "Connecticut": "CT",
+    "Delaware": "DE",
+    "District of Columbia": "DC",
+    "Florida": "FL",
+    "Georgia": "GA",
+    "Guam": "GU",
+    "Hawaii": "HI",
+    "Idaho": "ID",
+    "Illinois": "IL",
+    "Indiana": "IN",
+    "Iowa": "IA",
+    "Kansas": "KS",
+    "Kentucky": "KY",
+    "Louisiana": "LA",
+    "Maine": "ME",
+    "Maryland": "MD",
+    "Massachusetts": "MA",
+    "Michigan": "MI",
+    "Minnesota": "MN",
+    "Mississippi": "MS",
+    "Missouri": "MO",
+    "Montana": "MT",
+    "Nebraska": "NE",
+    "Nevada": "NV",
+    "New Hampshire": "NH",
+    "New Jersey": "NJ",
+    "New Mexico": "NM",
+    "New York": "NY",
+    "North Carolina": "NC",
+    "North Dakota": "ND",
+    "Ohio": "OH",
+    "Oklahoma": "OK",
+    "Oregon": "OR",
+    "Pennsylvania": "PA",
+    "Puerto Rico": "",
+    "Rhode Island": "RI",
+    "South Carolina": "SC",
+    "South Dakota": "SD",
+    "Tennessee": "TN",
+    "Texas": "TX",
+    "United States Virgin Islands": "VI",
+    "Utah": "UT",
+    "Vermont": "VT",
+    "Virginia": "VA",
+    "Washington": "WA",
+    "West Virginia": "WV",
+    "Wisconsin": "WI",
+    "Wyoming": "WY",
 }
 
 USA_XRANGE = [-125.0, -65.0]
@@ -253,10 +264,10 @@ USA_YRANGE = [25.0, 49.0]
 
 
 def _human_format(number):
-    units = ['', 'K', 'M', 'G', 'T', 'P']
+    units = ["", "K", "M", "G", "T", "P"]
     k = 1000.0
     magnitude = int(floor(log(number, k)))
-    return '%.2f%s' % (number / k**magnitude, units[magnitude])
+    return "%.2f%s" % (number / k ** magnitude, units[magnitude])
 
 
 def _intervals_as_labels(array_of_intervals, round_legend_values, exponent_format):
@@ -265,19 +276,17 @@ def _intervals_as_labels(array_of_intervals, round_legend_values, exponent_forma
 
     Example: [-inf, 30] to '< 30'
     """
-    infs = [float('-inf'), float('inf')]
+    infs = [float("-inf"), float("inf")]
     string_intervals = []
     for interval in array_of_intervals:
         # round to 2nd decimal place
         if round_legend_values:
             rnd_interval = [
-                (int(interval[i]) if interval[i] not in infs else
-                 interval[i])
+                (int(interval[i]) if interval[i] not in infs else interval[i])
                 for i in range(2)
             ]
         else:
-            rnd_interval = [round(interval[0], 2),
-                            round(interval[1], 2)]
+            rnd_interval = [round(interval[0], 2), round(interval[1], 2)]
 
         num0 = rnd_interval[0]
         num1 = rnd_interval[1]
@@ -292,37 +301,52 @@ def _intervals_as_labels(array_of_intervals, round_legend_values, exponent_forma
             if num1 not in infs:
                 num1 = "{:,}".format(num1)
 
-        if num0 == float('-inf'):
-            as_str = '< {}'.format(num1)
-        elif num1 == float('inf'):
-            as_str = '> {}'.format(num0)
+        if num0 == float("-inf"):
+            as_str = "< {}".format(num1)
+        elif num1 == float("inf"):
+            as_str = "> {}".format(num0)
         else:
-            as_str = '{} - {}'.format(num0, num1)
+            as_str = "{} - {}".format(num0, num1)
         string_intervals.append(as_str)
     return string_intervals
 
 
-def _calculations(df, fips, values, index, f, simplify_county, level,
-                  x_centroids, y_centroids, centroid_text, x_traces,
-                  y_traces, fips_polygon_map):
+def _calculations(
+    df,
+    fips,
+    values,
+    index,
+    f,
+    simplify_county,
+    level,
+    x_centroids,
+    y_centroids,
+    centroid_text,
+    x_traces,
+    y_traces,
+    fips_polygon_map,
+):
     # 0-pad FIPS code to ensure exactly 5 digits
     padded_f = str(f).zfill(5)
-    if fips_polygon_map[f].type == 'Polygon':
-        x = fips_polygon_map[f].simplify(
-            simplify_county
-        ).exterior.xy[0].tolist()
-        y = fips_polygon_map[f].simplify(
-            simplify_county
-        ).exterior.xy[1].tolist()
+    if fips_polygon_map[f].type == "Polygon":
+        x = fips_polygon_map[f].simplify(simplify_county).exterior.xy[0].tolist()
+        y = fips_polygon_map[f].simplify(simplify_county).exterior.xy[1].tolist()
 
         x_c, y_c = fips_polygon_map[f].centroid.xy
-        county_name_str = str(df[df['FIPS'] == f]['COUNTY_NAME'].iloc[0])
-        state_name_str = str(df[df['FIPS'] == f]['STATE_NAME'].iloc[0])
+        county_name_str = str(df[df["FIPS"] == f]["COUNTY_NAME"].iloc[0])
+        state_name_str = str(df[df["FIPS"] == f]["STATE_NAME"].iloc[0])
 
         t_c = (
-            'County: ' + county_name_str + '<br>' +
-            'State: ' + state_name_str + '<br>' +
-            'FIPS: ' + padded_f + '<br>Value: ' + str(values[index])
+            "County: "
+            + county_name_str
+            + "<br>"
+            + "State: "
+            + state_name_str
+            + "<br>"
+            + "FIPS: "
+            + padded_f
+            + "<br>Value: "
+            + str(values[index])
         )
 
         x_centroids.append(x_c[0])
@@ -331,21 +355,32 @@ def _calculations(df, fips, values, index, f, simplify_county, level,
 
         x_traces[level] = x_traces[level] + x + [np.nan]
         y_traces[level] = y_traces[level] + y + [np.nan]
-    elif fips_polygon_map[f].type == 'MultiPolygon':
-        x = ([poly.simplify(simplify_county).exterior.xy[0].tolist() for
-              poly in fips_polygon_map[f]])
-        y = ([poly.simplify(simplify_county).exterior.xy[1].tolist() for
-              poly in fips_polygon_map[f]])
+    elif fips_polygon_map[f].type == "MultiPolygon":
+        x = [
+            poly.simplify(simplify_county).exterior.xy[0].tolist()
+            for poly in fips_polygon_map[f]
+        ]
+        y = [
+            poly.simplify(simplify_county).exterior.xy[1].tolist()
+            for poly in fips_polygon_map[f]
+        ]
 
         x_c = [poly.centroid.xy[0].tolist() for poly in fips_polygon_map[f]]
         y_c = [poly.centroid.xy[1].tolist() for poly in fips_polygon_map[f]]
 
-        county_name_str = str(df[df['FIPS'] == f]['COUNTY_NAME'].iloc[0])
-        state_name_str = str(df[df['FIPS'] == f]['STATE_NAME'].iloc[0])
+        county_name_str = str(df[df["FIPS"] == f]["COUNTY_NAME"].iloc[0])
+        state_name_str = str(df[df["FIPS"] == f]["STATE_NAME"].iloc[0])
         text = (
-            'County: ' + county_name_str + '<br>' +
-            'State: ' + state_name_str + '<br>' +
-            'FIPS: ' + padded_f + '<br>Value: ' + str(values[index])
+            "County: "
+            + county_name_str
+            + "<br>"
+            + "State: "
+            + state_name_str
+            + "<br>"
+            + "FIPS: "
+            + padded_f
+            + "<br>Value: "
+            + str(values[index])
         )
         t_c = [text for poly in fips_polygon_map[f]]
         x_centroids = x_c + x_centroids
@@ -358,13 +393,26 @@ def _calculations(df, fips, values, index, f, simplify_county, level,
     return x_traces, y_traces, x_centroids, y_centroids, centroid_text
 
 
-def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
-                      colorscale=None, order=None, simplify_county=0.02,
-                      simplify_state=0.02, asp=None, show_hover=True,
-                      show_state_data=True, state_outline=None,
-                      county_outline=None, centroid_marker=None,
-                      round_legend_values=False, exponent_format=False,
-                      legend_title='', **layout_options):
+def create_choropleth(
+    fips,
+    values,
+    scope=["usa"],
+    binning_endpoints=None,
+    colorscale=None,
+    order=None,
+    simplify_county=0.02,
+    simplify_state=0.02,
+    asp=None,
+    show_hover=True,
+    show_state_data=True,
+    state_outline=None,
+    county_outline=None,
+    centroid_marker=None,
+    round_legend_values=False,
+    exponent_format=False,
+    legend_title="",
+    **layout_options
+):
     """
     Returns figure for county choropleth. Uses data from package_data.
 
@@ -563,7 +611,8 @@ def create_choropleth(fips, values, scope=['usa'], binning_endpoints=None,
     """
     # ensure optional modules imported
     if not _plotly_geo:
-        raise ValueError("""
+        raise ValueError(
+            """
 The create_choropleth figure factory requires the plotly-geo package.
 Install using pip with:
 
@@ -572,7 +621,8 @@ $ pip install plotly-geo
 Or, install using conda with
 
 $ conda install -c plotly plotly-geo
-""")
+"""
+        )
 
     if not gp or not shapefile or not shapely:
         raise ImportError(
@@ -595,33 +645,23 @@ $ conda install -c plotly plotly-geo
             "```"
         )
 
-    df, df_state = _create_us_counties_df(st_to_state_name_dict,
-                                          state_to_st_dict)
+    df, df_state = _create_us_counties_df(st_to_state_name_dict, state_to_st_dict)
 
-    fips_polygon_map = dict(
-        zip(
-            df['FIPS'].tolist(),
-            df['geometry'].tolist()
-        )
-    )
+    fips_polygon_map = dict(zip(df["FIPS"].tolist(), df["geometry"].tolist()))
 
     if not state_outline:
-        state_outline = {'color': 'rgb(240, 240, 240)',
-                         'width': 1}
+        state_outline = {"color": "rgb(240, 240, 240)", "width": 1}
     if not county_outline:
-        county_outline = {'color': 'rgb(0, 0, 0)',
-                          'width': 0}
+        county_outline = {"color": "rgb(0, 0, 0)", "width": 0}
     if not centroid_marker:
-        centroid_marker = {'size': 3, 'color': 'white', 'opacity': 1}
+        centroid_marker = {"size": 3, "color": "white", "opacity": 1}
 
     # ensure centroid markers appear on selection
-    if 'opacity' not in centroid_marker:
-        centroid_marker.update({'opacity': 1})
+    if "opacity" not in centroid_marker:
+        centroid_marker.update({"opacity": 1})
 
     if len(fips) != len(values):
-        raise PlotlyError(
-            'fips and values must be the same length'
-        )
+        raise PlotlyError("fips and values must be the same length")
 
     # make fips, values into lists
     if isinstance(fips, pd.core.series.Series):
@@ -634,8 +674,7 @@ $ conda install -c plotly plotly-geo
 
     if binning_endpoints:
         intervals = utils.endpts_to_intervals(binning_endpoints)
-        LEVELS = _intervals_as_labels(intervals, round_legend_values,
-                                      exponent_format)
+        LEVELS = _intervals_as_labels(intervals, round_legend_values, exponent_format)
     else:
         if not order:
             LEVELS = sorted(list(set(values)))
@@ -648,26 +687,20 @@ $ conda install -c plotly plotly-geo
                 LEVELS = order
             else:
                 raise PlotlyError(
-                    'if you are using a custom order of unique values from '
-                    'your color column, you must: have all the unique values '
-                    'in your order and have no duplicate items'
+                    "if you are using a custom order of unique values from "
+                    "your color column, you must: have all the unique values "
+                    "in your order and have no duplicate items"
                 )
 
     if not colorscale:
         colorscale = []
-        viridis_colors = clrs.colorscale_to_colors(
-            clrs.PLOTLY_SCALES['Viridis']
-        )
-        viridis_colors = clrs.color_parser(
-            viridis_colors, clrs.hex_to_rgb
-        )
-        viridis_colors = clrs.color_parser(
-            viridis_colors, clrs.label_rgb
-        )
+        viridis_colors = clrs.colorscale_to_colors(clrs.PLOTLY_SCALES["Viridis"])
+        viridis_colors = clrs.color_parser(viridis_colors, clrs.hex_to_rgb)
+        viridis_colors = clrs.color_parser(viridis_colors, clrs.label_rgb)
         viri_len = len(viridis_colors) + 1
-        viri_intervals = utils.endpts_to_intervals(
-            list(np.linspace(0, 1, viri_len))
-        )[1:-1]
+        viri_intervals = utils.endpts_to_intervals(list(np.linspace(0, 1, viri_len)))[
+            1:-1
+        ]
 
         for L in np.linspace(0, 1, len(LEVELS)):
             for idx, inter in enumerate(viri_intervals):
@@ -676,14 +709,12 @@ $ conda install -c plotly plotly-geo
                 elif inter[0] < L <= inter[1]:
                     break
 
-            intermed = ((L - viri_intervals[idx][0]) /
-                        (viri_intervals[idx][1] - viri_intervals[idx][0]))
+            intermed = (L - viri_intervals[idx][0]) / (
+                viri_intervals[idx][1] - viri_intervals[idx][0]
+            )
 
             float_color = clrs.find_intermediate_color(
-                viridis_colors[idx],
-                viridis_colors[idx],
-                intermed,
-                colortype='rgb'
+                viridis_colors[idx], viridis_colors[idx], intermed, colortype="rgb"
             )
 
             # make R,G,B into int values
@@ -710,17 +741,20 @@ $ conda install -c plotly plotly-geo
 
     # scope
     if isinstance(scope, str):
-        raise PlotlyError(
-            "'scope' must be a list/tuple/sequence"
-        )
+        raise PlotlyError("'scope' must be a list/tuple/sequence")
 
     scope_names = []
-    extra_states = ['Alaska', 'Commonwealth of the Northern Mariana Islands',
-                    'Puerto Rico', 'Guam', 'United States Virgin Islands',
-                    'American Samoa']
+    extra_states = [
+        "Alaska",
+        "Commonwealth of the Northern Mariana Islands",
+        "Puerto Rico",
+        "Guam",
+        "United States Virgin Islands",
+        "American Samoa",
+    ]
     for state in scope:
-        if state.lower() == 'usa':
-            scope_names = df['STATE_NAME'].unique()
+        if state.lower() == "usa":
+            scope_names = df["STATE_NAME"].unique()
             scope_names = list(scope_names)
             for ex_st in extra_states:
                 try:
@@ -731,7 +765,7 @@ $ conda install -c plotly plotly-geo
             if state in st_to_state_name_dict.keys():
                 state = st_to_state_name_dict[state]
             scope_names.append(state)
-    df_state = df_state[df_state['STATE_NAME'].isin(scope_names)]
+    df_state = df_state[df_state["STATE_NAME"].isin(scope_names)]
 
     plot_data = []
     x_centroids = []
@@ -744,11 +778,26 @@ $ conda install -c plotly plotly-geo
             try:
                 fips_polygon_map[f].type
 
-                (x_traces, y_traces, x_centroids,
-                 y_centroids, centroid_text) = _calculations(
-                    df, fips, values, index, f, simplify_county, level,
-                    x_centroids, y_centroids, centroid_text, x_traces,
-                    y_traces, fips_polygon_map
+                (
+                    x_traces,
+                    y_traces,
+                    x_centroids,
+                    y_centroids,
+                    centroid_text,
+                ) = _calculations(
+                    df,
+                    fips,
+                    values,
+                    index,
+                    f,
+                    simplify_county,
+                    level,
+                    x_centroids,
+                    y_centroids,
+                    centroid_text,
+                    x_traces,
+                    y_traces,
+                    fips_polygon_map,
                 )
             except KeyError:
                 fips_not_in_shapefile.append(f)
@@ -763,40 +812,57 @@ $ conda install -c plotly plotly-geo
             try:
                 fips_polygon_map[f].type
 
-                (x_traces, y_traces, x_centroids,
-                 y_centroids, centroid_text) = _calculations(
-                    df, fips, values, index, f, simplify_county, level,
-                    x_centroids, y_centroids, centroid_text, x_traces,
-                    y_traces, fips_polygon_map
+                (
+                    x_traces,
+                    y_traces,
+                    x_centroids,
+                    y_centroids,
+                    centroid_text,
+                ) = _calculations(
+                    df,
+                    fips,
+                    values,
+                    index,
+                    f,
+                    simplify_county,
+                    level,
+                    x_centroids,
+                    y_centroids,
+                    centroid_text,
+                    x_traces,
+                    y_traces,
+                    fips_polygon_map,
                 )
             except KeyError:
                 fips_not_in_shapefile.append(f)
 
     if len(fips_not_in_shapefile) > 0:
         msg = (
-            'Unrecognized FIPS Values\n\nWhoops! It looks like you are '
-            'trying to pass at least one FIPS value that is not in '
-            'our shapefile of FIPS and data for the counties. Your '
-            'choropleth will still show up but these counties cannot '
-            'be shown.\nUnrecognized FIPS are: {}'.format(
-                fips_not_in_shapefile
-            )
+            "Unrecognized FIPS Values\n\nWhoops! It looks like you are "
+            "trying to pass at least one FIPS value that is not in "
+            "our shapefile of FIPS and data for the counties. Your "
+            "choropleth will still show up but these counties cannot "
+            "be shown.\nUnrecognized FIPS are: {}".format(fips_not_in_shapefile)
         )
         warnings.warn(msg)
 
     x_states = []
     y_states = []
     for index, row in df_state.iterrows():
-        if df_state['geometry'][index].type == 'Polygon':
+        if df_state["geometry"][index].type == "Polygon":
             x = row.geometry.simplify(simplify_state).exterior.xy[0].tolist()
             y = row.geometry.simplify(simplify_state).exterior.xy[1].tolist()
             x_states = x_states + x
             y_states = y_states + y
-        elif df_state['geometry'][index].type == 'MultiPolygon':
-            x = ([poly.simplify(simplify_state).exterior.xy[0].tolist() for
-                  poly in df_state['geometry'][index]])
-            y = ([poly.simplify(simplify_state).exterior.xy[1].tolist() for
-                  poly in df_state['geometry'][index]])
+        elif df_state["geometry"][index].type == "MultiPolygon":
+            x = [
+                poly.simplify(simplify_state).exterior.xy[0].tolist()
+                for poly in df_state["geometry"][index]
+            ]
+            y = [
+                poly.simplify(simplify_state).exterior.xy[1].tolist()
+                for poly in df_state["geometry"][index]
+            ]
             for segment in range(len(x)):
                 x_states = x_states + x[segment]
                 y_states = y_states + y[segment]
@@ -807,60 +873,60 @@ $ conda install -c plotly plotly-geo
 
     for lev in LEVELS:
         county_data = dict(
-            type='scatter',
-            mode='lines',
+            type="scatter",
+            mode="lines",
             x=x_traces[lev],
             y=y_traces[lev],
             line=county_outline,
-            fill='toself',
+            fill="toself",
             fillcolor=color_lookup[lev],
             name=lev,
-            hoverinfo='none',
+            hoverinfo="none",
         )
         plot_data.append(county_data)
 
     if show_hover:
         hover_points = dict(
-            type='scatter',
+            type="scatter",
             showlegend=False,
-            legendgroup='centroids',
+            legendgroup="centroids",
             x=x_centroids,
             y=y_centroids,
             text=centroid_text,
-            name='US Counties',
-            mode='markers',
-            marker={'color': 'white', 'opacity': 0},
-            hoverinfo='text'
+            name="US Counties",
+            mode="markers",
+            marker={"color": "white", "opacity": 0},
+            hoverinfo="text",
         )
         centroids_on_select = dict(
             selected=dict(marker=centroid_marker),
-            unselected=dict(marker=dict(opacity=0))
+            unselected=dict(marker=dict(opacity=0)),
         )
         hover_points.update(centroids_on_select)
         plot_data.append(hover_points)
 
     if show_state_data:
         state_data = dict(
-            type='scatter',
-            legendgroup='States',
+            type="scatter",
+            legendgroup="States",
             line=state_outline,
             x=x_states,
             y=y_states,
-            hoverinfo='text',
+            hoverinfo="text",
             showlegend=False,
-            mode='lines'
+            mode="lines",
         )
         plot_data.append(state_data)
 
     DEFAULT_LAYOUT = dict(
-        hovermode='closest',
+        hovermode="closest",
         xaxis=dict(
             autorange=False,
             range=USA_XRANGE,
             showgrid=False,
             zeroline=False,
             fixedrange=True,
-            showticklabels=False
+            showticklabels=False,
         ),
         yaxis=dict(
             autorange=False,
@@ -868,64 +934,58 @@ $ conda install -c plotly plotly-geo
             showgrid=False,
             zeroline=False,
             fixedrange=True,
-            showticklabels=False
+            showticklabels=False,
         ),
         margin=dict(t=40, b=20, r=20, l=20),
         width=900,
         height=450,
-        dragmode='select',
-        legend=dict(
-            traceorder='reversed',
-            xanchor='right',
-            yanchor='top',
-            x=1,
-            y=1
-        ),
-        annotations=[]
+        dragmode="select",
+        legend=dict(traceorder="reversed", xanchor="right", yanchor="top", x=1, y=1),
+        annotations=[],
     )
     fig = dict(data=plot_data, layout=DEFAULT_LAYOUT)
-    fig['layout'].update(layout_options)
-    fig['layout']['annotations'].append(
+    fig["layout"].update(layout_options)
+    fig["layout"]["annotations"].append(
         dict(
             x=1,
             y=1.05,
-            xref='paper',
-            yref='paper',
-            xanchor='right',
+            xref="paper",
+            yref="paper",
+            xanchor="right",
             showarrow=False,
-            text='<b>' + legend_title + '</b>'
+            text="<b>" + legend_title + "</b>",
         )
     )
 
-    if len(scope) == 1 and scope[0].lower() == 'usa':
+    if len(scope) == 1 and scope[0].lower() == "usa":
         xaxis_range_low = -125.0
         xaxis_range_high = -55.0
         yaxis_range_low = 25.0
         yaxis_range_high = 49.0
     else:
-        xaxis_range_low = float('inf')
-        xaxis_range_high = float('-inf')
-        yaxis_range_low = float('inf')
-        yaxis_range_high = float('-inf')
-        for trace in fig['data']:
-            if all(isinstance(n, Number) for n in trace['x']):
-                calc_x_min = min(trace['x'] or [float('inf')])
-                calc_x_max = max(trace['x'] or [float('-inf')])
+        xaxis_range_low = float("inf")
+        xaxis_range_high = float("-inf")
+        yaxis_range_low = float("inf")
+        yaxis_range_high = float("-inf")
+        for trace in fig["data"]:
+            if all(isinstance(n, Number) for n in trace["x"]):
+                calc_x_min = min(trace["x"] or [float("inf")])
+                calc_x_max = max(trace["x"] or [float("-inf")])
                 if calc_x_min < xaxis_range_low:
                     xaxis_range_low = calc_x_min
                 if calc_x_max > xaxis_range_high:
                     xaxis_range_high = calc_x_max
-            if all(isinstance(n, Number) for n in trace['y']):
-                calc_y_min = min(trace['y'] or [float('inf')])
-                calc_y_max = max(trace['y'] or [float('-inf')])
+            if all(isinstance(n, Number) for n in trace["y"]):
+                calc_y_min = min(trace["y"] or [float("inf")])
+                calc_y_max = max(trace["y"] or [float("-inf")])
                 if calc_y_min < yaxis_range_low:
                     yaxis_range_low = calc_y_min
                 if calc_y_max > yaxis_range_high:
                     yaxis_range_high = calc_y_max
 
     # camera zoom
-    fig['layout']['xaxis']['range'] = [xaxis_range_low, xaxis_range_high]
-    fig['layout']['yaxis']['range'] = [yaxis_range_low, yaxis_range_high]
+    fig["layout"]["xaxis"]["range"] = [xaxis_range_low, xaxis_range_high]
+    fig["layout"]["yaxis"]["range"] = [yaxis_range_low, yaxis_range_high]
 
     # aspect ratio
     if asp is None:
@@ -934,21 +994,25 @@ $ conda install -c plotly plotly-geo
         asp = usa_x_range / usa_y_range
 
     # based on your figure
-    width = float(fig['layout']['xaxis']['range'][1] -
-                  fig['layout']['xaxis']['range'][0])
-    height = float(fig['layout']['yaxis']['range'][1] -
-                   fig['layout']['yaxis']['range'][0])
+    width = float(
+        fig["layout"]["xaxis"]["range"][1] - fig["layout"]["xaxis"]["range"][0]
+    )
+    height = float(
+        fig["layout"]["yaxis"]["range"][1] - fig["layout"]["yaxis"]["range"][0]
+    )
 
-    center = (sum(fig['layout']['xaxis']['range']) / 2.,
-              sum(fig['layout']['yaxis']['range']) / 2.)
+    center = (
+        sum(fig["layout"]["xaxis"]["range"]) / 2.0,
+        sum(fig["layout"]["yaxis"]["range"]) / 2.0,
+    )
 
     if height / width > (1 / asp):
         new_width = asp * height
-        fig['layout']['xaxis']['range'][0] = center[0] - new_width * 0.5
-        fig['layout']['xaxis']['range'][1] = center[0] + new_width * 0.5
+        fig["layout"]["xaxis"]["range"][0] = center[0] - new_width * 0.5
+        fig["layout"]["xaxis"]["range"][1] = center[0] + new_width * 0.5
     else:
         new_height = (1 / asp) * width
-        fig['layout']['yaxis']['range'][0] = center[1] - new_height * 0.5
-        fig['layout']['yaxis']['range'][1] = center[1] + new_height * 0.5
+        fig["layout"]["yaxis"]["range"][0] = center[1] - new_height * 0.5
+        fig["layout"]["yaxis"]["range"][1] = center[1] + new_height * 0.5
 
     return go.Figure(fig)

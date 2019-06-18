@@ -4,4 +4,5 @@ from ._orca import (
     validate_executable,
     reset_status,
     config,
-    status)
+    status,
+)

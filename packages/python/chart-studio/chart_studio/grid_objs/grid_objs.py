@@ -56,6 +56,7 @@ class Column(object):
     py.plot([trace], filename='graph from grid')
     ```
     """
+
     def __init__(self, data, name):
         """
         Initialize a Plotly column with `data` and `name`.
@@ -69,7 +70,7 @@ class Column(object):
         # TODO: name type checking
         self.name = name
 
-        self.id = ''
+        self.id = ""
 
     def __str__(self):
         max_chars = 10
@@ -85,7 +86,7 @@ class Column(object):
         return 'Column("{0}", {1})'.format(self.data, self.name)
 
     def to_plotly_json(self):
-        return {'name': self.name, 'data': self.data}
+        return {"name": self.name, "data": self.data}
 
 
 class Grid(MutableSequence):
@@ -125,6 +126,7 @@ class Grid(MutableSequence):
     py.plot([trace], filename='graph from grid')
     ```
     """
+
     def __init__(self, columns_or_json, fid=None):
         """
         Initialize a grid with an iterable of `plotly.grid_objs.Column`
@@ -154,7 +156,7 @@ class Grid(MutableSequence):
         ```
         """
         # TODO: verify that columns are actually columns
-        pd = get_module('pandas')
+        pd = get_module("pandas")
         if pd and isinstance(columns_or_json, pd.DataFrame):
             duplicate_name = utils.get_first_duplicate(columns_or_json.columns)
             if duplicate_name:
@@ -166,7 +168,7 @@ class Grid(MutableSequence):
             for name in columns_or_json.columns:
                 all_columns.append(Column(columns_or_json[name].tolist(), name))
             self._columns = all_columns
-            self.id = ''
+            self.id = ""
 
         elif isinstance(columns_or_json, dict):
             # check that fid is entered
@@ -180,17 +182,17 @@ class Grid(MutableSequence):
             self.id = fid
 
             # check if 'cols' is a root key
-            if 'cols' not in columns_or_json:
+            if "cols" not in columns_or_json:
                 raise _plotly_utils.exceptions.PlotlyError(
                     "'cols' must be a root key in your json grid."
                 )
 
             # check if 'data', 'order' and 'uid' are not in columns
-            grid_col_keys = ['data', 'order', 'uid']
+            grid_col_keys = ["data", "order", "uid"]
 
-            for column_name in columns_or_json['cols']:
+            for column_name in columns_or_json["cols"]:
                 for key in grid_col_keys:
-                    if key not in columns_or_json['cols'][column_name]:
+                    if key not in columns_or_json["cols"][column_name]:
                         raise _plotly_utils.exceptions.PlotlyError(
                             "Each column name of your dictionary must have "
                             "'data', 'order' and 'uid' as keys."
@@ -198,26 +200,25 @@ class Grid(MutableSequence):
             # collect and sort all orders in case orders do not start
             # at zero or there are jump discontinuities between them
             all_orders = []
-            for column_name in columns_or_json['cols'].keys():
-                all_orders.append(columns_or_json['cols'][column_name]['order'])
+            for column_name in columns_or_json["cols"].keys():
+                all_orders.append(columns_or_json["cols"][column_name]["order"])
             all_orders.sort()
 
             # put columns in order in a list
             ordered_columns = []
             for order in all_orders:
-                for column_name in columns_or_json['cols'].keys():
-                    if columns_or_json['cols'][column_name]['order'] == order:
+                for column_name in columns_or_json["cols"].keys():
+                    if columns_or_json["cols"][column_name]["order"] == order:
                         break
 
-                ordered_columns.append(Column(
-                    columns_or_json['cols'][column_name]['data'],
-                    column_name)
+                ordered_columns.append(
+                    Column(columns_or_json["cols"][column_name]["data"], column_name)
                 )
             self._columns = ordered_columns
 
             # fill in column_ids
             for column in self:
-                column.id = self.id + ':' + columns_or_json['cols'][column.name]['uid']
+                column.id = self.id + ":" + columns_or_json["cols"][column.name]["uid"]
 
         else:
             column_names = [column.name for column in columns_or_json]
@@ -227,7 +228,7 @@ class Grid(MutableSequence):
                 raise exceptions.InputError(err)
 
             self._columns = list(columns_or_json)
-            self.id = ''
+            self.id = ""
 
     def __repr__(self):
         return self._columns.__repr__()
@@ -259,11 +260,11 @@ class Grid(MutableSequence):
             raise exceptions.InputError(err)
 
     def _to_plotly_grid_json(self):
-        grid_json = {'cols': {}}
+        grid_json = {"cols": {}}
         for column_index, column in enumerate(self):
-            grid_json['cols'][column.name] = {
-                'data': column.data,
-                'order': column_index
+            grid_json["cols"][column.name] = {
+                "data": column.data,
+                "order": column_index,
             }
         return grid_json
 

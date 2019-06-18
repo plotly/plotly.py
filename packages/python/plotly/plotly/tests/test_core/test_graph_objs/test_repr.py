@@ -4,13 +4,12 @@ import plotly.graph_objs as go
 
 
 class TestGraphObjRepr(TestCase):
-
     def test_trace_repr(self):
         N = 100
         scatt = go.Scatter(
             y=list(range(N)),
-            marker={'color': 'green',
-                    'opacity': [e / N for e in range(N)]})
+            marker={"color": "green", "opacity": [e / N for e in range(N)]},
+        )
 
         expected = """\
 Scatter({
@@ -40,8 +39,8 @@ Scatter({
         N = 1000
         scatt = go.Scatter(
             y=list(range(N)),
-            marker={'color': 'green',
-                    'opacity': [e / N for e in range(N)]})
+            marker={"color": "green", "opacity": [e / N for e in range(N)]},
+        )
 
         expected = """\
 Scatter({

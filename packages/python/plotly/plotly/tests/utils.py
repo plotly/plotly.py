@@ -9,40 +9,42 @@ class TestCaseNoTemplate(TestCase):
         pio.templates.default = None
 
     def tearDown(self):
-        pio.templates.default = 'plotly'
+        pio.templates.default = "plotly"
 
 
-def compare_dict(dict1, dict2, equivalent=True, msg='', tol=10e-8):
+def compare_dict(dict1, dict2, equivalent=True, msg="", tol=10e-8):
     for key in dict1:
         if key not in dict2:
-            return (False,
-                    "{0} should be {1}".format(
-                        list(dict1.keys()), list(dict2.keys())))
+            return (
+                False,
+                "{0} should be {1}".format(list(dict1.keys()), list(dict2.keys())),
+            )
     for key in dict1:
         if isinstance(dict1[key], dict):
-            equivalent, msg = compare_dict(dict1[key],
-                                           dict2[key],
-                                           tol=tol)
+            equivalent, msg = compare_dict(dict1[key], dict2[key], tol=tol)
         elif isinstance(dict1[key], Num) and isinstance(dict2[key], Num):
             if not comp_nums(dict1[key], dict2[key], tol):
-                return False, "['{0}'] = {1} should be {2}".format(key,
-                                                                   dict1[key],
-                                                                   dict2[key])
+                return (
+                    False,
+                    "['{0}'] = {1} should be {2}".format(key, dict1[key], dict2[key]),
+                )
         elif is_num_list(dict1[key]) and is_num_list(dict2[key]):
             if not comp_num_list(dict1[key], dict2[key], tol):
-                return False, "['{0}'] = {1} should be {2}".format(key,
-                                                                   dict1[key],
-                                                                   dict2[key])
+                return (
+                    False,
+                    "['{0}'] = {1} should be {2}".format(key, dict1[key], dict2[key]),
+                )
         elif not (dict1[key] == dict2[key]):
-                return False, "['{0}'] = {1} should be {2}".format(key,
-                                                                   dict1[key],
-                                                                   dict2[key])
+            return (
+                False,
+                "['{0}'] = {1} should be {2}".format(key, dict1[key], dict2[key]),
+            )
         if not equivalent:
             return False, "['{0}']".format(key) + msg
     return equivalent, msg
 
 
-def strip_dict_params(d1, d2, ignore=['uid']):
+def strip_dict_params(d1, d2, ignore=["uid"]):
     """
     Helper function for assert_dict_equal
 
@@ -55,12 +57,12 @@ def strip_dict_params(d1, d2, ignore=['uid']):
         they exist
     """
     # deep copy d1 and d2
-    if 'to_plotly_json' in dir(d1):
+    if "to_plotly_json" in dir(d1):
         d1_copy = copy.deepcopy(d1.to_plotly_json())
     else:
         d1_copy = copy.deepcopy(d1)
 
-    if 'to_plotly_json' in dir(d2):
+    if "to_plotly_json" in dir(d2):
         d2_copy = copy.deepcopy(d2.to_plotly_json())
     else:
         d2_copy = copy.deepcopy(d2)

@@ -1,19 +1,31 @@
 from io import StringIO
 from os import path as opath
 
-from _plotly_utils.basevalidators import (BaseDataValidator,
-                                          CompoundValidator,
-                                          CompoundArrayValidator)
-from codegen.datatypes import (reindent_validator_description,
-                               add_constructor_params, add_docstring)
-from codegen.utils import PlotlyNode, format_and_write_source_py
+from _plotly_utils.basevalidators import (
+    BaseDataValidator,
+    CompoundValidator,
+    CompoundArrayValidator,
+)
+from codegen.datatypes import (
+    reindent_validator_description,
+    add_constructor_params,
+    add_docstring,
+)
+from codegen.utils import PlotlyNode, write_source_py
 
 import inflect
 
 
-def build_figure_py(trace_node, base_package, base_classname, fig_classname,
-                    data_validator, layout_validator, frame_validator,
-                    subplot_nodes):
+def build_figure_py(
+    trace_node,
+    base_package,
+    base_classname,
+    fig_classname,
+    data_validator,
+    layout_validator,
+    frame_validator,
+    subplot_nodes,
+):
     """
 
     Parameters
@@ -52,17 +64,19 @@ def build_figure_py(trace_node, base_package, base_classname, fig_classname,
     # Write imports
     # -------------
     # ### Import base class ###
-    buffer.write(f'from plotly.{base_package} import {base_classname}\n')
+    buffer.write(f"from plotly.{base_package} import {base_classname}\n")
 
     # ### Import trace graph_obj classes ###
-    trace_types_csv = ', '.join([n.name_datatype_class for n in trace_nodes])
-    buffer.write(f'from plotly.graph_objs import ({trace_types_csv})\n')
+    trace_types_csv = ", ".join([n.name_datatype_class for n in trace_nodes])
+    buffer.write(f"from plotly.graph_objs import ({trace_types_csv})\n")
 
     # Write class definition
     # ----------------------
-    buffer.write(f"""
+    buffer.write(
+        f"""
 
-class {fig_classname}({base_classname}):\n""")
+class {fig_classname}({base_classname}):\n"""
+    )
 
     # ### Constructor ###
     # Build constructor description strings
@@ -70,7 +84,8 @@ class {fig_classname}({base_classname}):\n""")
     layout_description = reindent_validator_description(layout_validator, 8)
     frames_description = reindent_validator_description(frame_validator, 8)
 
-    buffer.write(f"""
+    buffer.write(
+        f"""
     def __init__(self, data=None, layout=None,
                  frames=None, skip_invalid=False, **kwargs):
         \"\"\"
@@ -101,44 +116,53 @@ class {fig_classname}({base_classname}):\n""")
         super({fig_classname} ,self).__init__(data, layout,
                                               frames, skip_invalid,
                                               **kwargs)
-    """)
+    """
+    )
 
     # ### add_trace methods for each trace type ###
     for trace_node in trace_nodes:
 
-        include_secondary_y = bool([
-            d for d in trace_node.child_datatypes
-            if d.name_property == 'yaxis'
-        ])
+        include_secondary_y = bool(
+            [d for d in trace_node.child_datatypes if d.name_property == "yaxis"]
+        )
 
         # #### Function signature ####
-        buffer.write(f"""
-    def add_{trace_node.plotly_name}(self""")
+        buffer.write(
+            f"""
+    def add_{trace_node.plotly_name}(self"""
+        )
 
         # #### Function params####
-        param_extras = ['row', 'col']
+        param_extras = ["row", "col"]
         if include_secondary_y:
-            param_extras.append('secondary_y')
-        add_constructor_params(buffer,
-                               trace_node.child_datatypes,
-                               append_extras=param_extras)
+            param_extras.append("secondary_y")
+        add_constructor_params(
+            buffer, trace_node.child_datatypes, append_extras=param_extras
+        )
 
         # #### Docstring ####
         header = f"Add a new {trace_node.name_datatype_class} trace"
 
-        doc_extras = [(
-            'row : int or None (default)',
-            'Subplot row index (starting from 1) for the trace to be '
-            'added. Only valid if figure was created using '
-            '`plotly.tools.make_subplots`'),
-            ('col : int or None (default)',
-             'Subplot col index (starting from 1) for the trace to be '
-             'added. Only valid if figure was created using '
-             '`plotly.tools.make_subplots`')]
+        doc_extras = [
+            (
+                "row : int or None (default)",
+                "Subplot row index (starting from 1) for the trace to be "
+                "added. Only valid if figure was created using "
+                "`plotly.tools.make_subplots`",
+            ),
+            (
+                "col : int or None (default)",
+                "Subplot col index (starting from 1) for the trace to be "
+                "added. Only valid if figure was created using "
+                "`plotly.tools.make_subplots`",
+            ),
+        ]
 
         if include_secondary_y:
             doc_extras.append(
-                ('secondary_y: boolean or None (default None)', """\
+                (
+                    "secondary_y: boolean or None (default None)",
+                    """\
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
             following conditions are satisfied:
@@ -148,7 +172,8 @@ class {fig_classname}({base_classname}):\n""")
                 (which is the default) and secondary_y True.  These
                 properties are specified in the specs argument to
                 make_subplots. See the make_subplots docstring for more info.\
-""")
+""",
+                )
             )
 
         add_docstring(
@@ -160,26 +185,34 @@ class {fig_classname}({base_classname}):\n""")
         )
 
         # #### Function body ####
-        buffer.write(f"""
+        buffer.write(
+            f"""
         new_trace = {trace_node.name_datatype_class}(
-        """)
+        """
+        )
 
         for i, subtype_node in enumerate(trace_node.child_datatypes):
             subtype_prop_name = subtype_node.name_property
-            buffer.write(f"""
-                {subtype_prop_name}={subtype_prop_name},""")
+            buffer.write(
+                f"""
+                {subtype_prop_name}={subtype_prop_name},"""
+            )
 
-        buffer.write(f"""
-            **kwargs)""")
+        buffer.write(
+            f"""
+            **kwargs)"""
+        )
 
         if include_secondary_y:
-            secondary_y_kwarg = ', secondary_y=secondary_y'
+            secondary_y_kwarg = ", secondary_y=secondary_y"
         else:
-            secondary_y_kwarg = ''
+            secondary_y_kwarg = ""
 
-        buffer.write(f"""
+        buffer.write(
+            f"""
         return self.add_trace(
-            new_trace, row=row, col=col{secondary_y_kwarg})""")
+            new_trace, row=row, col=col{secondary_y_kwarg})"""
+        )
 
     # update layout subplots
     # ----------------------
@@ -188,9 +221,9 @@ class {fig_classname}({base_classname}):\n""")
         singular_name = subplot_node.name_property
         plural_name = inflect_eng.plural_noun(singular_name)
 
-        if singular_name == 'yaxis':
-            secondary_y_1 = ', secondary_y=None'
-            secondary_y_2 = ', secondary_y=secondary_y'
+        if singular_name == "yaxis":
+            secondary_y_1 = ", secondary_y=None"
+            secondary_y_2 = ", secondary_y=secondary_y"
             secondary_y_docstring = f"""
         secondary_y: boolean or None (default None)
             * If True, only select yaxis objects associated with the secondary
@@ -205,11 +238,12 @@ class {fig_classname}({base_classname}):\n""")
             the docstring for the specs argument to make_subplots for more
             info on creating subplots with secondary y-axes."""
         else:
-            secondary_y_1 = ''
-            secondary_y_2 = ''
-            secondary_y_docstring = ''
+            secondary_y_1 = ""
+            secondary_y_2 = ""
+            secondary_y_docstring = ""
 
-        buffer.write(f"""
+        buffer.write(
+            f"""
 
     def select_{plural_name}(
             self, selector=None, row=None, col=None{secondary_y_1}):
@@ -316,19 +350,18 @@ class {fig_classname}({base_classname}):\n""")
                 selector=selector, row=row, col=col{secondary_y_2}):
             obj.update(patch, **kwargs)
 
-        return self""")
+        return self"""
+        )
 
     # Return source string
     # --------------------
-    buffer.write('\n')
+    buffer.write("\n")
     return buffer.getvalue()
 
 
-def write_figure_classes(outdir, trace_node,
-                         data_validator,
-                         layout_validator,
-                         frame_validator,
-                         subplot_nodes):
+def write_figure_classes(
+    outdir, trace_node, data_validator, layout_validator, frame_validator, subplot_nodes
+):
     """
     Construct source code for the Figure and FigureWidget classes and
     write to graph_objs/_figure.py and graph_objs/_figurewidget.py
@@ -358,27 +391,32 @@ def write_figure_classes(outdir, trace_node,
     # Validate inputs
     # ---------------
     if trace_node.node_path:
-        raise ValueError(f'Expected root trace node.\n'
-                         f'Received node with path "{trace_node.path_str}"')
+        raise ValueError(
+            f"Expected root trace node.\n"
+            f'Received node with path "{trace_node.path_str}"'
+        )
 
     # Loop over figure types
     # ----------------------
-    base_figures = [('basewidget', 'BaseFigureWidget', 'FigureWidget'),
-                    ('basedatatypes', 'BaseFigure', 'Figure')]
+    base_figures = [
+        ("basewidget", "BaseFigureWidget", "FigureWidget"),
+        ("basedatatypes", "BaseFigure", "Figure"),
+    ]
 
     for base_package, base_classname, fig_classname in base_figures:
 
         # ### Build figure source code string ###
-        figure_source = build_figure_py(trace_node,
-                                        base_package,
-                                        base_classname,
-                                        fig_classname,
-                                        data_validator,
-                                        layout_validator,
-                                        frame_validator,
-                                        subplot_nodes)
+        figure_source = build_figure_py(
+            trace_node,
+            base_package,
+            base_classname,
+            fig_classname,
+            data_validator,
+            layout_validator,
+            frame_validator,
+            subplot_nodes,
+        )
 
         # ### Format and write to file###
-        filepath = opath.join(outdir, 'graph_objs',
-                              f'_{fig_classname.lower()}.py')
-        format_and_write_source_py(figure_source, filepath)
+        filepath = opath.join(outdir, "graph_objs", f"_{fig_classname.lower()}.py")
+        write_source_py(figure_source, filepath)

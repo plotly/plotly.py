@@ -13,11 +13,13 @@ else:
 class TestMoveDeleteTracesMessages(TestCase):
     def setUp(self):
         # Construct initial scatter object
-        self.figure = go.Figure(data=[
-            go.Scatter(y=[3, 2, 1], marker={'color': 'green'}),
-            go.Bar(y=[3, 2, 1, 0, -1], marker={'opacity': 0.5}),
-            go.Sankey(arrangement='snap')
-        ])
+        self.figure = go.Figure(
+            data=[
+                go.Scatter(y=[3, 2, 1], marker={"color": "green"}),
+                go.Bar(y=[3, 2, 1, 0, -1], marker={"opacity": 0.5}),
+                go.Sankey(arrangement="snap"),
+            ]
+        )
 
         # Mock out the message methods
         self.figure._send_moveTraces_msg = MagicMock()
@@ -30,8 +32,7 @@ class TestMoveDeleteTracesMessages(TestCase):
         self.figure.data = [traces[2], traces[1], traces[0]]
 
         # Check messages
-        self.figure._send_moveTraces_msg.assert_called_once_with(
-            [0, 1, 2], [2, 1, 0])
+        self.figure._send_moveTraces_msg.assert_called_once_with([0, 1, 2], [2, 1, 0])
         self.assertFalse(self.figure._send_deleteTraces_msg.called)
 
     def test_move_traces_cycle(self):
@@ -41,8 +42,7 @@ class TestMoveDeleteTracesMessages(TestCase):
         self.figure.data = [traces[2], traces[0], traces[1]]
 
         # Check messages
-        self.figure._send_moveTraces_msg.assert_called_once_with(
-            [0, 1, 2], [1, 2, 0])
+        self.figure._send_moveTraces_msg.assert_called_once_with([0, 1, 2], [1, 2, 0])
         self.assertFalse(self.figure._send_deleteTraces_msg.called)
 
     def test_delete_single_traces(self):
@@ -78,19 +78,14 @@ class TestMoveDeleteTracesMessages(TestCase):
 
         # Check messages
         self.figure._send_deleteTraces_msg.assert_called_once_with([1])
-        self.figure._send_moveTraces_msg.assert_called_once_with(
-            [0, 1], [1, 0])
+        self.figure._send_moveTraces_msg.assert_called_once_with([0, 1], [1, 0])
 
     @raises(ValueError)
     def test_validate_assigned_traces_are_subset(self):
         traces = self.figure.data
-        self.figure.data = [traces[2],
-                            go.Scatter(y=[3, 2, 1]),
-                            traces[1]]
+        self.figure.data = [traces[2], go.Scatter(y=[3, 2, 1]), traces[1]]
 
     @raises(ValueError)
     def test_validate_assigned_traces_are_not_duplicates(self):
         traces = self.figure.data
-        self.figure.data = [traces[2],
-                            traces[1],
-                            traces[1]]
+        self.figure.data = [traces[2], traces[1], traces[1]]

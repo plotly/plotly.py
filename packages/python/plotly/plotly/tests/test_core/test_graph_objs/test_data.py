@@ -10,22 +10,27 @@ from unittest import skip
 
 from nose.tools import raises
 
-from plotly.exceptions import (PlotlyError, PlotlyDictKeyError,
-                               PlotlyDictValueError, PlotlyDataTypeError,
-                               PlotlyListEntryError)
+from plotly.exceptions import (
+    PlotlyError,
+    PlotlyDictKeyError,
+    PlotlyDictValueError,
+    PlotlyDataTypeError,
+    PlotlyListEntryError,
+)
 from plotly.graph_objs import Annotations, Data, Figure, Layout
 
 
 def setup():
     import warnings
-    warnings.filterwarnings('ignore')
+
+    warnings.filterwarnings("ignore")
 
 
 def test_trivial():
     assert Data() == list()
 
 
-#@raises(PlotlyError)
+# @raises(PlotlyError)
 def test_weird_instantiation():  # Python allows this...
     assert Data({}) == []
 
@@ -35,22 +40,22 @@ def test_default_scatter():
 
 
 def test_dict_instantiation():
-    Data([{'type': 'scatter'}])
+    Data([{"type": "scatter"}])
 
 
 # @raises(PlotlyDictKeyError)
 def test_dict_instantiation_key_error():
-    assert Data([{'not-a-key': 'anything'}]) == [{'not-a-key': 'anything'}]
+    assert Data([{"not-a-key": "anything"}]) == [{"not-a-key": "anything"}]
 
 
 # @raises(PlotlyDictValueError)
 def test_dict_instantiation_key_error_2():
-    assert Data([{'marker': 'not-a-dict'}]) == [{'marker': 'not-a-dict'}]
+    assert Data([{"marker": "not-a-dict"}]) == [{"marker": "not-a-dict"}]
 
 
 # @raises(PlotlyDataTypeError)
 def test_dict_instantiation_type_error():
-    assert Data([{'type': 'invalid_type'}]) == [{'type': 'invalid_type'}]
+    assert Data([{"type": "invalid_type"}]) == [{"type": "invalid_type"}]
 
 
 # @raises(PlotlyListEntryError)

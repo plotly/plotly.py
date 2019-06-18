@@ -4,6 +4,7 @@ from unittest import TestCase
 from chart_studio import session, files, utils
 from plotly.files import ensure_writable_plotly_dir
 
+
 class PlotlyTestCase(TestCase):
 
     # parent test case to assist with clean up of local credentials/config
@@ -17,17 +18,15 @@ class PlotlyTestCase(TestCase):
 
     @classmethod
     def setUpClass(cls):
-        session._session = {
-            'credentials': {},
-            'config': {},
-            'plot_options': {}
-        }
+        session._session = {"credentials": {}, "config": {}, "plot_options": {}}
 
     def setUp(self):
         self.stash_session()
         self.stash_files()
-        defaults = dict(files.FILE_CONTENT[files.CREDENTIALS_FILE],
-                        **files.FILE_CONTENT[files.CONFIG_FILE])
+        defaults = dict(
+            files.FILE_CONTENT[files.CREDENTIALS_FILE],
+            **files.FILE_CONTENT[files.CONFIG_FILE]
+        )
         session.sign_in(**defaults)
 
     def tearDown(self):

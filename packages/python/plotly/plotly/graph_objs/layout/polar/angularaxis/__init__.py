@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -25,11 +23,11 @@ class Tickformatstop(_BaseLayoutHierarchyType):
         -------
         list
         """
-        return self['dtickrange']
+        return self["dtickrange"]
 
     @dtickrange.setter
     def dtickrange(self, val):
-        self['dtickrange'] = val
+        self["dtickrange"] = val
 
     # enabled
     # -------
@@ -46,11 +44,11 @@ class Tickformatstop(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['enabled']
+        return self["enabled"]
 
     @enabled.setter
     def enabled(self, val):
-        self['enabled'] = val
+        self["enabled"] = val
 
     # name
     # ----
@@ -73,11 +71,11 @@ class Tickformatstop(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
     # templateitemname
     # ----------------
@@ -101,11 +99,11 @@ class Tickformatstop(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['templateitemname']
+        return self["templateitemname"]
 
     @templateitemname.setter
     def templateitemname(self, val):
-        self['templateitemname'] = val
+        self["templateitemname"] = val
 
     # value
     # -----
@@ -123,17 +121,17 @@ class Tickformatstop(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['value']
+        return self["value"]
 
     @value.setter
     def value(self, val):
-        self['value'] = val
+        self["value"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.polar.angularaxis'
+        return "layout.polar.angularaxis"
 
     # Self properties description
     # ---------------------------
@@ -226,7 +224,7 @@ class Tickformatstop(_BaseLayoutHierarchyType):
         -------
         Tickformatstop
         """
-        super(Tickformatstop, self).__init__('tickformatstops')
+        super(Tickformatstop, self).__init__("tickformatstops")
 
         # Validate arg
         # ------------
@@ -246,36 +244,38 @@ an instance of plotly.graph_objs.layout.polar.angularaxis.Tickformatstop"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
         from plotly.validators.layout.polar.angularaxis import (
-            tickformatstop as v_tickformatstop
+            tickformatstop as v_tickformatstop,
         )
 
         # Initialize validators
         # ---------------------
-        self._validators['dtickrange'] = v_tickformatstop.DtickrangeValidator()
-        self._validators['enabled'] = v_tickformatstop.EnabledValidator()
-        self._validators['name'] = v_tickformatstop.NameValidator()
-        self._validators['templateitemname'
-                        ] = v_tickformatstop.TemplateitemnameValidator()
-        self._validators['value'] = v_tickformatstop.ValueValidator()
+        self._validators["dtickrange"] = v_tickformatstop.DtickrangeValidator()
+        self._validators["enabled"] = v_tickformatstop.EnabledValidator()
+        self._validators["name"] = v_tickformatstop.NameValidator()
+        self._validators[
+            "templateitemname"
+        ] = v_tickformatstop.TemplateitemnameValidator()
+        self._validators["value"] = v_tickformatstop.ValueValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('dtickrange', None)
-        self['dtickrange'] = dtickrange if dtickrange is not None else _v
-        _v = arg.pop('enabled', None)
-        self['enabled'] = enabled if enabled is not None else _v
-        _v = arg.pop('name', None)
-        self['name'] = name if name is not None else _v
-        _v = arg.pop('templateitemname', None)
-        self['templateitemname'
-            ] = templateitemname if templateitemname is not None else _v
-        _v = arg.pop('value', None)
-        self['value'] = value if value is not None else _v
+        _v = arg.pop("dtickrange", None)
+        self["dtickrange"] = dtickrange if dtickrange is not None else _v
+        _v = arg.pop("enabled", None)
+        self["enabled"] = enabled if enabled is not None else _v
+        _v = arg.pop("name", None)
+        self["name"] = name if name is not None else _v
+        _v = arg.pop("templateitemname", None)
+        self["templateitemname"] = (
+            templateitemname if templateitemname is not None else _v
+        )
+        _v = arg.pop("value", None)
+        self["value"] = value if value is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -343,11 +343,11 @@ class Tickfont(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     # family
     # ------
@@ -374,11 +374,11 @@ class Tickfont(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['family']
+        return self["family"]
 
     @family.setter
     def family(self, val):
-        self['family'] = val
+        self["family"] = val
 
     # size
     # ----
@@ -392,17 +392,17 @@ class Tickfont(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['size']
+        return self["size"]
 
     @size.setter
     def size(self, val):
-        self['size'] = val
+        self["size"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.polar.angularaxis'
+        return "layout.polar.angularaxis"
 
     # Self properties description
     # ---------------------------
@@ -464,7 +464,7 @@ class Tickfont(_BaseLayoutHierarchyType):
         -------
         Tickfont
         """
-        super(Tickfont, self).__init__('tickfont')
+        super(Tickfont, self).__init__("tickfont")
 
         # Validate arg
         # ------------
@@ -484,28 +484,26 @@ an instance of plotly.graph_objs.layout.polar.angularaxis.Tickfont"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.polar.angularaxis import (
-            tickfont as v_tickfont
-        )
+        from plotly.validators.layout.polar.angularaxis import tickfont as v_tickfont
 
         # Initialize validators
         # ---------------------
-        self._validators['color'] = v_tickfont.ColorValidator()
-        self._validators['family'] = v_tickfont.FamilyValidator()
-        self._validators['size'] = v_tickfont.SizeValidator()
+        self._validators["color"] = v_tickfont.ColorValidator()
+        self._validators["family"] = v_tickfont.FamilyValidator()
+        self._validators["size"] = v_tickfont.SizeValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('color', None)
-        self['color'] = color if color is not None else _v
-        _v = arg.pop('family', None)
-        self['family'] = family if family is not None else _v
-        _v = arg.pop('size', None)
-        self['size'] = size if size is not None else _v
+        _v = arg.pop("color", None)
+        self["color"] = color if color is not None else _v
+        _v = arg.pop("family", None)
+        self["family"] = family if family is not None else _v
+        _v = arg.pop("size", None)
+        self["size"] = size if size is not None else _v
 
         # Process unknown kwargs
         # ----------------------

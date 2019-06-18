@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -21,11 +19,11 @@ class Pad(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['b']
+        return self["b"]
 
     @b.setter
     def b(self, val):
-        self['b'] = val
+        self["b"] = val
 
     # l
     # -
@@ -42,11 +40,11 @@ class Pad(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['l']
+        return self["l"]
 
     @l.setter
     def l(self, val):
-        self['l'] = val
+        self["l"] = val
 
     # r
     # -
@@ -63,11 +61,11 @@ class Pad(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['r']
+        return self["r"]
 
     @r.setter
     def r(self, val):
-        self['r'] = val
+        self["r"] = val
 
     # t
     # -
@@ -83,17 +81,17 @@ class Pad(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['t']
+        return self["t"]
 
     @t.setter
     def t(self, val):
-        self['t'] = val
+        self["t"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.title'
+        return "layout.title"
 
     # Self properties description
     # ---------------------------
@@ -147,7 +145,7 @@ class Pad(_BaseLayoutHierarchyType):
         -------
         Pad
         """
-        super(Pad, self).__init__('pad')
+        super(Pad, self).__init__("pad")
 
         # Validate arg
         # ------------
@@ -167,29 +165,29 @@ an instance of plotly.graph_objs.layout.title.Pad"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.title import (pad as v_pad)
+        from plotly.validators.layout.title import pad as v_pad
 
         # Initialize validators
         # ---------------------
-        self._validators['b'] = v_pad.BValidator()
-        self._validators['l'] = v_pad.LValidator()
-        self._validators['r'] = v_pad.RValidator()
-        self._validators['t'] = v_pad.TValidator()
+        self._validators["b"] = v_pad.BValidator()
+        self._validators["l"] = v_pad.LValidator()
+        self._validators["r"] = v_pad.RValidator()
+        self._validators["t"] = v_pad.TValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('b', None)
-        self['b'] = b if b is not None else _v
-        _v = arg.pop('l', None)
-        self['l'] = l if l is not None else _v
-        _v = arg.pop('r', None)
-        self['r'] = r if r is not None else _v
-        _v = arg.pop('t', None)
-        self['t'] = t if t is not None else _v
+        _v = arg.pop("b", None)
+        self["b"] = b if b is not None else _v
+        _v = arg.pop("l", None)
+        self["l"] = l if l is not None else _v
+        _v = arg.pop("r", None)
+        self["r"] = r if r is not None else _v
+        _v = arg.pop("t", None)
+        self["t"] = t if t is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -257,11 +255,11 @@ class Font(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     # family
     # ------
@@ -288,11 +286,11 @@ class Font(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['family']
+        return self["family"]
 
     @family.setter
     def family(self, val):
-        self['family'] = val
+        self["family"] = val
 
     # size
     # ----
@@ -306,17 +304,17 @@ class Font(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['size']
+        return self["size"]
 
     @size.setter
     def size(self, val):
-        self['size'] = val
+        self["size"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.title'
+        return "layout.title"
 
     # Self properties description
     # ---------------------------
@@ -378,7 +376,7 @@ class Font(_BaseLayoutHierarchyType):
         -------
         Font
         """
-        super(Font, self).__init__('font')
+        super(Font, self).__init__("font")
 
         # Validate arg
         # ------------
@@ -398,26 +396,26 @@ an instance of plotly.graph_objs.layout.title.Font"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.title import (font as v_font)
+        from plotly.validators.layout.title import font as v_font
 
         # Initialize validators
         # ---------------------
-        self._validators['color'] = v_font.ColorValidator()
-        self._validators['family'] = v_font.FamilyValidator()
-        self._validators['size'] = v_font.SizeValidator()
+        self._validators["color"] = v_font.ColorValidator()
+        self._validators["family"] = v_font.FamilyValidator()
+        self._validators["size"] = v_font.SizeValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('color', None)
-        self['color'] = color if color is not None else _v
-        _v = arg.pop('family', None)
-        self['family'] = family if family is not None else _v
-        _v = arg.pop('size', None)
-        self['size'] = size if size is not None else _v
+        _v = arg.pop("color", None)
+        self["color"] = color if color is not None else _v
+        _v = arg.pop("family", None)
+        self["family"] = family if family is not None else _v
+        _v = arg.pop("size", None)
+        self["size"] = size if size is not None else _v
 
         # Process unknown kwargs
         # ----------------------

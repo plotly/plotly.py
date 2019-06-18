@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -59,11 +57,11 @@ class Line(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     # dash
     # ----
@@ -85,11 +83,11 @@ class Line(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['dash']
+        return self["dash"]
 
     @dash.setter
     def dash(self, val):
-        self['dash'] = val
+        self["dash"] = val
 
     # width
     # -----
@@ -105,17 +103,17 @@ class Line(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['width']
+        return self["width"]
 
     @width.setter
     def width(self, val):
-        self['width'] = val
+        self["width"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'waterfall.connector'
+        return "waterfall.connector"
 
     # Self properties description
     # ---------------------------
@@ -157,7 +155,7 @@ class Line(_BaseTraceHierarchyType):
         -------
         Line
         """
-        super(Line, self).__init__('line')
+        super(Line, self).__init__("line")
 
         # Validate arg
         # ------------
@@ -177,26 +175,26 @@ an instance of plotly.graph_objs.waterfall.connector.Line"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.waterfall.connector import (line as v_line)
+        from plotly.validators.waterfall.connector import line as v_line
 
         # Initialize validators
         # ---------------------
-        self._validators['color'] = v_line.ColorValidator()
-        self._validators['dash'] = v_line.DashValidator()
-        self._validators['width'] = v_line.WidthValidator()
+        self._validators["color"] = v_line.ColorValidator()
+        self._validators["dash"] = v_line.DashValidator()
+        self._validators["width"] = v_line.WidthValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('color', None)
-        self['color'] = color if color is not None else _v
-        _v = arg.pop('dash', None)
-        self['dash'] = dash if dash is not None else _v
-        _v = arg.pop('width', None)
-        self['width'] = width if width is not None else _v
+        _v = arg.pop("color", None)
+        self["color"] = color if color is not None else _v
+        _v = arg.pop("dash", None)
+        self["dash"] = dash if dash is not None else _v
+        _v = arg.pop("width", None)
+        self["width"] = width if width is not None else _v
 
         # Process unknown kwargs
         # ----------------------

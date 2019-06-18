@@ -12,11 +12,11 @@ def _to_native_string(string, encoding):
 
 
 def to_native_utf8_string(string):
-    return _to_native_string(string, 'utf-8')
+    return _to_native_string(string, "utf-8")
 
 
 def to_native_ascii_string(string):
-    return _to_native_string(string, 'ascii')
+    return _to_native_string(string, "ascii")
 
 
 def basic_auth(username, password):
@@ -31,11 +31,11 @@ def basic_auth(username, password):
 
     """
     if isinstance(username, str):
-        username = username.encode('latin1')
+        username = username.encode("latin1")
 
     if isinstance(password, str):
-        password = password.encode('latin1')
+        password = password.encode("latin1")
 
-    return 'Basic ' + to_native_ascii_string(
-        b64encode(b':'.join((username, password))).strip()
+    return "Basic " + to_native_ascii_string(
+        b64encode(b":".join((username, password))).strip()
     )

@@ -64,6 +64,32 @@ Here's what you need to know: changes to any files inside the following director
 - `packages/python/chart-studio/chart_studio/plotly/chunked_requests`
 - `packages/python/plotly/plotly/matplotlylib/mplexporter`
     
+### Configure black code formatting
+This repo uses the [Black](https://black.readthedocs.io/en/stable/) code formatter,
+and the [pre-commit](https://pre-commit.com/) library to manage a git commit hook to
+run Black prior to each commit.  Both pre-commit and black are included in the
+`packages/python/plotly/optional-requirements.txt` file, so you should have them
+installed already if you've been following along.
+
+To enable the Black formatting git hook, run the following from within your virtual
+environment.
+
+```bash
+(plotly_dev) $ pre-commit install
+``` 
+
+Now, whenever you perform a commit, the Black formatter will run.  If the formatter
+makes no changes, then the commit will proceed.  But if the formatter does make changes,
+then the commit will abort.  To proceed, stage the files that the formatter
+modified and commit again.
+
+If you don't want to use `pre-commit`, then you can run black manually prior to making
+a PR as follows.
+
+```bash
+(plotly_dev) $ black .
+```
+
 ### Making a Development Branch
 
 Third, *don't* work in the `master` branch. As soon as you get your master branch ready, run:

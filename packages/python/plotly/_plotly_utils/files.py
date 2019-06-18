@@ -1,7 +1,8 @@
 import os
 
-PLOTLY_DIR = os.environ.get("PLOTLY_DIR",
-                            os.path.join(os.path.expanduser("~"), ".plotly"))
+PLOTLY_DIR = os.environ.get(
+    "PLOTLY_DIR", os.path.join(os.path.expanduser("~"), ".plotly")
+)
 TEST_FILE = os.path.join(PLOTLY_DIR, ".permission_test")
 
 
@@ -14,14 +15,14 @@ def _permissions():
                 # in case of race
                 if not os.path.isdir(PLOTLY_DIR):
                     raise
-        with open(TEST_FILE, 'w') as f:
-            f.write('testing\n')
+        with open(TEST_FILE, "w") as f:
+            f.write("testing\n")
         try:
             os.remove(TEST_FILE)
         except Exception:
             pass
         return True
-    except Exception: # Do not trap KeyboardInterrupt.
+    except Exception:  # Do not trap KeyboardInterrupt.
         return False
 
 

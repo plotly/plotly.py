@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -18,11 +16,11 @@ class Up(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
     # y
     # -
@@ -36,11 +34,11 @@ class Up(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
     # z
     # -
@@ -54,17 +52,17 @@ class Up(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['z']
+        return self["z"]
 
     @z.setter
     def z(self, val):
-        self['z'] = val
+        self["z"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.scene.camera'
+        return "layout.scene.camera"
 
     # Self properties description
     # ---------------------------
@@ -104,7 +102,7 @@ class Up(_BaseLayoutHierarchyType):
         -------
         Up
         """
-        super(Up, self).__init__('up')
+        super(Up, self).__init__("up")
 
         # Validate arg
         # ------------
@@ -124,26 +122,26 @@ an instance of plotly.graph_objs.layout.scene.camera.Up"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.scene.camera import (up as v_up)
+        from plotly.validators.layout.scene.camera import up as v_up
 
         # Initialize validators
         # ---------------------
-        self._validators['x'] = v_up.XValidator()
-        self._validators['y'] = v_up.YValidator()
-        self._validators['z'] = v_up.ZValidator()
+        self._validators["x"] = v_up.XValidator()
+        self._validators["y"] = v_up.YValidator()
+        self._validators["z"] = v_up.ZValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('x', None)
-        self['x'] = x if x is not None else _v
-        _v = arg.pop('y', None)
-        self['y'] = y if y is not None else _v
-        _v = arg.pop('z', None)
-        self['z'] = z if z is not None else _v
+        _v = arg.pop("x", None)
+        self["x"] = x if x is not None else _v
+        _v = arg.pop("y", None)
+        self["y"] = y if y is not None else _v
+        _v = arg.pop("z", None)
+        self["z"] = z if z is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -176,17 +174,17 @@ class Projection(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['type']
+        return self["type"]
 
     @type.setter
     def type(self, val):
-        self['type'] = val
+        self["type"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.scene.camera'
+        return "layout.scene.camera"
 
     # Self properties description
     # ---------------------------
@@ -218,7 +216,7 @@ class Projection(_BaseLayoutHierarchyType):
         -------
         Projection
         """
-        super(Projection, self).__init__('projection')
+        super(Projection, self).__init__("projection")
 
         # Validate arg
         # ------------
@@ -238,22 +236,20 @@ an instance of plotly.graph_objs.layout.scene.camera.Projection"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.scene.camera import (
-            projection as v_projection
-        )
+        from plotly.validators.layout.scene.camera import projection as v_projection
 
         # Initialize validators
         # ---------------------
-        self._validators['type'] = v_projection.TypeValidator()
+        self._validators["type"] = v_projection.TypeValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('type', None)
-        self['type'] = type if type is not None else _v
+        _v = arg.pop("type", None)
+        self["type"] = type if type is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -282,11 +278,11 @@ class Eye(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
     # y
     # -
@@ -300,11 +296,11 @@ class Eye(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
     # z
     # -
@@ -318,17 +314,17 @@ class Eye(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['z']
+        return self["z"]
 
     @z.setter
     def z(self, val):
-        self['z'] = val
+        self["z"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.scene.camera'
+        return "layout.scene.camera"
 
     # Self properties description
     # ---------------------------
@@ -368,7 +364,7 @@ class Eye(_BaseLayoutHierarchyType):
         -------
         Eye
         """
-        super(Eye, self).__init__('eye')
+        super(Eye, self).__init__("eye")
 
         # Validate arg
         # ------------
@@ -388,26 +384,26 @@ an instance of plotly.graph_objs.layout.scene.camera.Eye"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.scene.camera import (eye as v_eye)
+        from plotly.validators.layout.scene.camera import eye as v_eye
 
         # Initialize validators
         # ---------------------
-        self._validators['x'] = v_eye.XValidator()
-        self._validators['y'] = v_eye.YValidator()
-        self._validators['z'] = v_eye.ZValidator()
+        self._validators["x"] = v_eye.XValidator()
+        self._validators["y"] = v_eye.YValidator()
+        self._validators["z"] = v_eye.ZValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('x', None)
-        self['x'] = x if x is not None else _v
-        _v = arg.pop('y', None)
-        self['y'] = y if y is not None else _v
-        _v = arg.pop('z', None)
-        self['z'] = z if z is not None else _v
+        _v = arg.pop("x", None)
+        self["x"] = x if x is not None else _v
+        _v = arg.pop("y", None)
+        self["y"] = y if y is not None else _v
+        _v = arg.pop("z", None)
+        self["z"] = z if z is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -436,11 +432,11 @@ class Center(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
     # y
     # -
@@ -454,11 +450,11 @@ class Center(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
     # z
     # -
@@ -472,17 +468,17 @@ class Center(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['z']
+        return self["z"]
 
     @z.setter
     def z(self, val):
-        self['z'] = val
+        self["z"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.scene.camera'
+        return "layout.scene.camera"
 
     # Self properties description
     # ---------------------------
@@ -522,7 +518,7 @@ class Center(_BaseLayoutHierarchyType):
         -------
         Center
         """
-        super(Center, self).__init__('center')
+        super(Center, self).__init__("center")
 
         # Validate arg
         # ------------
@@ -542,26 +538,26 @@ an instance of plotly.graph_objs.layout.scene.camera.Center"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.scene.camera import (center as v_center)
+        from plotly.validators.layout.scene.camera import center as v_center
 
         # Initialize validators
         # ---------------------
-        self._validators['x'] = v_center.XValidator()
-        self._validators['y'] = v_center.YValidator()
-        self._validators['z'] = v_center.ZValidator()
+        self._validators["x"] = v_center.XValidator()
+        self._validators["y"] = v_center.YValidator()
+        self._validators["z"] = v_center.ZValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('x', None)
-        self['x'] = x if x is not None else _v
-        _v = arg.pop('y', None)
-        self['y'] = y if y is not None else _v
-        _v = arg.pop('z', None)
-        self['z'] = z if z is not None else _v
+        _v = arg.pop("x", None)
+        self["x"] = x if x is not None else _v
+        _v = arg.pop("y", None)
+        self["y"] = y if y is not None else _v
+        _v = arg.pop("z", None)
+        self["z"] = z if z is not None else _v
 
         # Process unknown kwargs
         # ----------------------

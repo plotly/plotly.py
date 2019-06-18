@@ -7,7 +7,7 @@ class PlotlyEmptyDataError(PlotlyError):
 
 
 class PlotlyGraphObjectError(PlotlyError):
-    def __init__(self, message='', path=(), notes=()):
+    def __init__(self, message="", path=(), notes=()):
         """
         General graph object error for validation failures.
 
@@ -25,20 +25,20 @@ class PlotlyGraphObjectError(PlotlyError):
     def __str__(self):
         """This is called by Python to present the error message."""
         format_dict = {
-            'message': self.message,
-            'path': '[' + ']['.join(repr(k) for k in self.path) + ']',
-            'notes': '\n'.join(self.notes)
+            "message": self.message,
+            "path": "[" + "][".join(repr(k) for k in self.path) + "]",
+            "notes": "\n".join(self.notes),
         }
-        return ('{message}\n\nPath To Error: {path}\n\n{notes}'
-                .format(**format_dict))
+        return "{message}\n\nPath To Error: {path}\n\n{notes}".format(**format_dict)
 
 
 class PlotlyDictKeyError(PlotlyGraphObjectError):
     def __init__(self, obj, path, notes=()):
         """See PlotlyGraphObjectError.__init__ for param docs."""
-        format_dict = {'attribute': path[-1], 'object_name': obj._name}
-        message = ("'{attribute}' is not allowed in '{object_name}'"
-                   .format(**format_dict))
+        format_dict = {"attribute": path[-1], "object_name": obj._name}
+        message = "'{attribute}' is not allowed in '{object_name}'".format(
+            **format_dict
+        )
         notes = [obj.help(return_help=True)] + list(notes)
         super(PlotlyDictKeyError, self).__init__(
             message=message, path=path, notes=notes
@@ -48,9 +48,10 @@ class PlotlyDictKeyError(PlotlyGraphObjectError):
 class PlotlyDictValueError(PlotlyGraphObjectError):
     def __init__(self, obj, path, notes=()):
         """See PlotlyGraphObjectError.__init__ for param docs."""
-        format_dict = {'attribute': path[-1], 'object_name': obj._name}
-        message = ("'{attribute}' has invalid value inside '{object_name}'"
-                   .format(**format_dict))
+        format_dict = {"attribute": path[-1], "object_name": obj._name}
+        message = "'{attribute}' has invalid value inside '{object_name}'".format(
+            **format_dict
+        )
         notes = [obj.help(path[-1], return_help=True)] + list(notes)
         super(PlotlyDictValueError, self).__init__(
             message=message, notes=notes, path=path
@@ -60,9 +61,10 @@ class PlotlyDictValueError(PlotlyGraphObjectError):
 class PlotlyListEntryError(PlotlyGraphObjectError):
     def __init__(self, obj, path, notes=()):
         """See PlotlyGraphObjectError.__init__ for param docs."""
-        format_dict = {'index': path[-1], 'object_name': obj._name}
-        message = ("Invalid entry found in '{object_name}' at index, '{index}'"
-                   .format(**format_dict))
+        format_dict = {"index": path[-1], "object_name": obj._name}
+        message = "Invalid entry found in '{object_name}' at index, '{index}'".format(
+            **format_dict
+        )
         notes = [obj.help(return_help=True)] + list(notes)
         super(PlotlyListEntryError, self).__init__(
             message=message, path=path, notes=notes
@@ -72,9 +74,10 @@ class PlotlyListEntryError(PlotlyGraphObjectError):
 class PlotlyDataTypeError(PlotlyGraphObjectError):
     def __init__(self, obj, path, notes=()):
         """See PlotlyGraphObjectError.__init__ for param docs."""
-        format_dict = {'index': path[-1], 'object_name': obj._name}
-        message = ("Invalid entry found in '{object_name}' at index, '{index}'"
-                   .format(**format_dict))
+        format_dict = {"index": path[-1], "object_name": obj._name}
+        message = "Invalid entry found in '{object_name}' at index, '{index}'".format(
+            **format_dict
+        )
         note = "It's invalid because it doesn't contain a valid 'type' value."
         notes = [note] + list(notes)
         super(PlotlyDataTypeError, self).__init__(

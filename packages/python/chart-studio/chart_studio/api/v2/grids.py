@@ -3,7 +3,7 @@ from __future__ import absolute_import
 
 from chart_studio.api.v2.utils import build_url, make_params, request
 
-RESOURCE = 'grids'
+RESOURCE = "grids"
 
 
 def create(body):
@@ -15,7 +15,7 @@ def create(body):
 
     """
     url = build_url(RESOURCE)
-    return request('post', url, json=body)
+    return request("post", url, json=body)
 
 
 def retrieve(fid, share_key=None):
@@ -29,7 +29,7 @@ def retrieve(fid, share_key=None):
     """
     url = build_url(RESOURCE, id=fid)
     params = make_params(share_key=share_key)
-    return request('get', url, params=params)
+    return request("get", url, params=params)
 
 
 def content(fid, share_key=None):
@@ -41,9 +41,9 @@ def content(fid, share_key=None):
     :returns: (requests.Response) Returns response directly from requests.
 
     """
-    url = build_url(RESOURCE, id=fid, route='content')
+    url = build_url(RESOURCE, id=fid, route="content")
     params = make_params(share_key=share_key)
-    return request('get', url, params=params)
+    return request("get", url, params=params)
 
 
 def update(fid, body):
@@ -56,7 +56,7 @@ def update(fid, body):
 
     """
     url = build_url(RESOURCE, id=fid)
-    return request('put', url, json=body)
+    return request("put", url, json=body)
 
 
 def trash(fid):
@@ -67,8 +67,8 @@ def trash(fid):
     :returns: (requests.Response) Returns response directly from requests.
 
     """
-    url = build_url(RESOURCE, id=fid, route='trash')
-    return request('post', url)
+    url = build_url(RESOURCE, id=fid, route="trash")
+    return request("post", url)
 
 
 def restore(fid):
@@ -79,8 +79,8 @@ def restore(fid):
     :returns: (requests.Response) Returns response directly from requests.
 
     """
-    url = build_url(RESOURCE, id=fid, route='restore')
-    return request('post', url)
+    url = build_url(RESOURCE, id=fid, route="restore")
+    return request("post", url)
 
 
 def permanent_delete(fid):
@@ -91,8 +91,8 @@ def permanent_delete(fid):
     :returns: (requests.Response) Returns response directly from requests.
 
     """
-    url = build_url(RESOURCE, id=fid, route='permanent_delete')
-    return request('delete', url)
+    url = build_url(RESOURCE, id=fid, route="permanent_delete")
+    return request("delete", url)
 
 
 def lookup(path, parent=None, user=None, exists=None):
@@ -106,9 +106,9 @@ def lookup(path, parent=None, user=None, exists=None):
     :returns: (requests.Response) Returns response directly from requests.
 
     """
-    url = build_url(RESOURCE, route='lookup')
+    url = build_url(RESOURCE, route="lookup")
     params = make_params(path=path, parent=parent, user=user, exists=exists)
-    return request('get', url, params=params)
+    return request("get", url, params=params)
 
 
 def col_create(fid, body):
@@ -120,8 +120,8 @@ def col_create(fid, body):
     :returns: (requests.Response) Returns response directly from requests.
 
     """
-    url = build_url(RESOURCE, id=fid, route='col')
-    return request('post', url, json=body)
+    url = build_url(RESOURCE, id=fid, route="col")
+    return request("post", url, json=body)
 
 
 def col_retrieve(fid, uid):
@@ -133,9 +133,9 @@ def col_retrieve(fid, uid):
     :returns: (requests.Response) Returns response directly from requests.
 
     """
-    url = build_url(RESOURCE, id=fid, route='col')
+    url = build_url(RESOURCE, id=fid, route="col")
     params = make_params(uid=uid)
-    return request('get', url, params=params)
+    return request("get", url, params=params)
 
 
 def col_update(fid, uid, body):
@@ -148,9 +148,9 @@ def col_update(fid, uid, body):
     :returns: (requests.Response) Returns response directly from requests.
 
     """
-    url = build_url(RESOURCE, id=fid, route='col')
+    url = build_url(RESOURCE, id=fid, route="col")
     params = make_params(uid=uid)
-    return request('put', url, json=body, params=params)
+    return request("put", url, json=body, params=params)
 
 
 def col_delete(fid, uid):
@@ -162,9 +162,9 @@ def col_delete(fid, uid):
     :returns: (requests.Response) Returns response directly from requests.
 
     """
-    url = build_url(RESOURCE, id=fid, route='col')
+    url = build_url(RESOURCE, id=fid, route="col")
     params = make_params(uid=uid)
-    return request('delete', url, params=params)
+    return request("delete", url, params=params)
 
 
 def row(fid, body):
@@ -176,5 +176,5 @@ def row(fid, body):
     :returns: (requests.Response) Returns response directly from requests.
 
     """
-    url = build_url(RESOURCE, id=fid, route='row')
-    return request('post', url, json=body)
+    url = build_url(RESOURCE, id=fid, route="row")
+    return request("post", url, json=body)

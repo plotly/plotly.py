@@ -1,18 +1,13 @@
-
-
 import _plotly_utils.basevalidators
 
 
 class TextValidator(_plotly_utils.basevalidators.StringValidator):
-
-    def __init__(
-        self, plotly_name='text', parent_name='cone.colorbar.title', **kwargs
-    ):
+    def __init__(self, plotly_name="text", parent_name="cone.colorbar.title", **kwargs):
         super(TextValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -21,16 +16,13 @@ import _plotly_utils.basevalidators
 
 
 class SideValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(
-        self, plotly_name='side', parent_name='cone.colorbar.title', **kwargs
-    ):
+    def __init__(self, plotly_name="side", parent_name="cone.colorbar.title", **kwargs):
         super(SideValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            role=kwargs.pop('role', 'style'),
-            values=kwargs.pop('values', ['right', 'top', 'bottom']),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            role=kwargs.pop("role", "style"),
+            values=kwargs.pop("values", ["right", "top", "bottom"]),
             **kwargs
         )
 
@@ -39,16 +31,14 @@ import _plotly_utils.basevalidators
 
 
 class FontValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='font', parent_name='cone.colorbar.title', **kwargs
-    ):
+    def __init__(self, plotly_name="font", parent_name="cone.colorbar.title", **kwargs):
         super(FontValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Font'),
+            data_class_str=kwargs.pop("data_class_str", "Font"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             color
 
             family
@@ -69,7 +59,7 @@ class FontValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Narrow", "Raleway", "Times New Roman".
             size
 
-"""
+""",
             ),
             **kwargs
         )

@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -21,11 +19,11 @@ class Border(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['arearatio']
+        return self["arearatio"]
 
     @arearatio.setter
     def arearatio(self, val):
-        self['arearatio'] = val
+        self["arearatio"] = val
 
     # color
     # -----
@@ -82,17 +80,17 @@ class Border(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'pointcloud.marker'
+        return "pointcloud.marker"
 
     # Self properties description
     # ---------------------------
@@ -132,7 +130,7 @@ class Border(_BaseTraceHierarchyType):
         -------
         Border
         """
-        super(Border, self).__init__('border')
+        super(Border, self).__init__("border")
 
         # Validate arg
         # ------------
@@ -152,23 +150,23 @@ an instance of plotly.graph_objs.pointcloud.marker.Border"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.pointcloud.marker import (border as v_border)
+        from plotly.validators.pointcloud.marker import border as v_border
 
         # Initialize validators
         # ---------------------
-        self._validators['arearatio'] = v_border.ArearatioValidator()
-        self._validators['color'] = v_border.ColorValidator()
+        self._validators["arearatio"] = v_border.ArearatioValidator()
+        self._validators["color"] = v_border.ColorValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('arearatio', None)
-        self['arearatio'] = arearatio if arearatio is not None else _v
-        _v = arg.pop('color', None)
-        self['color'] = color if color is not None else _v
+        _v = arg.pop("arearatio", None)
+        self["arearatio"] = arearatio if arearatio is not None else _v
+        _v = arg.pop("color", None)
+        self["color"] = color if color is not None else _v
 
         # Process unknown kwargs
         # ----------------------

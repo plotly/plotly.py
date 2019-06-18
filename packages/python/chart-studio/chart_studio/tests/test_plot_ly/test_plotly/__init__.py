@@ -2,4 +2,4 @@ import warnings
 
 
 def setup_package():
-    warnings.filterwarnings('ignore')
+    warnings.filterwarnings("ignore")

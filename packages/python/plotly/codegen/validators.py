@@ -2,8 +2,7 @@ import os.path as opath
 from io import StringIO
 
 import _plotly_utils.basevalidators
-from codegen.utils import (PlotlyNode, TraceNode,
-                           format_and_write_source_py)
+from codegen.utils import PlotlyNode, TraceNode, write_source_py
 
 
 def build_validator_py(node: PlotlyNode):
@@ -32,9 +31,8 @@ def build_validator_py(node: PlotlyNode):
     # Imports
     # -------
     # ### Import package of the validator's superclass ###
-    import_str = '.'.join(
-        node.name_base_validator.split('.')[:-1])
-    buffer.write(f'import {import_str }\n')
+    import_str = ".".join(node.name_base_validator.split(".")[:-1])
+    buffer.write(f"import {import_str }\n")
 
     # Build Validator
     # ---------------
@@ -44,38 +42,45 @@ def build_validator_py(node: PlotlyNode):
     # ### Write class definition ###
     class_name = node.name_validator_class
     superclass_name = node.name_base_validator
-    buffer.write(f"""
+    buffer.write(
+        f"""
 
 class {class_name}({superclass_name}):
     def __init__(self, plotly_name={params['plotly_name']},
                        parent_name={params['parent_name']},
-                       **kwargs):""")
+                       **kwargs):"""
+    )
 
     # ### Write constructor ###
-    buffer.write(f"""
+    buffer.write(
+        f"""
         super({class_name}, self).__init__(plotly_name=plotly_name,
-                         parent_name=parent_name""")
+                         parent_name=parent_name"""
+    )
 
     # Write out remaining constructor parameters
     for attr_name, attr_val in params.items():
-        if attr_name in ['plotly_name', 'parent_name']:
+        if attr_name in ["plotly_name", "parent_name"]:
             # plotly_name and parent_name are already handled
             continue
 
-        buffer.write(f""",
-                 {attr_name}=kwargs.pop('{attr_name}', {attr_val})""")
+        buffer.write(
+            f""",
+                 {attr_name}=kwargs.pop('{attr_name}', {attr_val})"""
+        )
 
-    buffer.write(f""",
-        **kwargs""")
+    buffer.write(
+        f""",
+        **kwargs"""
+    )
 
-    buffer.write(')')
+    buffer.write(")")
 
     # ### Return buffer's string ###
     return buffer.getvalue()
 
 
-def write_validator_py(outdir,
-                       node: PlotlyNode):
+def write_validator_py(outdir, node: PlotlyNode):
     """
     Build validator source code and write to a file
 
@@ -102,11 +107,9 @@ def write_validator_py(outdir,
 
     # Write file
     # ----------
-    filepath = opath.join(outdir, 'validators',
-                          *node.parent_path_parts,
-                          '__init__.py')
+    filepath = opath.join(outdir, "validators", *node.parent_path_parts, "__init__.py")
 
-    format_and_write_source_py(validator_source, filepath, leading_newlines=2)
+    write_source_py(validator_source, filepath, leading_newlines=2)
 
 
 def build_data_validator_params(base_trace_node: TraceNode):
@@ -131,24 +134,30 @@ def build_data_validator_params(base_trace_node: TraceNode):
     # This is the repr-form of a dict from trace propert name string
     # to the name of the trace datatype class in the graph_objs package.
     buffer = StringIO()
-    buffer.write('{\n')
+    buffer.write("{\n")
     for i, tracetype_node in enumerate(tracetype_nodes):
-        sfx = ',' if i < len(tracetype_nodes) else ''
+        sfx = "," if i < len(tracetype_nodes) else ""
         trace_name = tracetype_node.name_property
         trace_datatype_class = tracetype_node.name_datatype_class
-        buffer.write(f"""
-            '{trace_name}': '{trace_datatype_class}'{sfx}""")
+        buffer.write(
+            f"""
+            '{trace_name}': '{trace_datatype_class}'{sfx}"""
+        )
 
-    buffer.write("""
-        }""")
+    buffer.write(
+        """
+        }"""
+    )
 
     class_map_repr = buffer.getvalue()
 
     # Build params dict
     # -----------------
-    params = {'class_strs_map': class_map_repr,
-              'plotly_name': repr('data'),
-              'parent_name': repr('')}
+    params = {
+        "class_strs_map": class_map_repr,
+        "plotly_name": repr("data"),
+        "parent_name": repr(""),
+    }
 
     return params
 
@@ -176,7 +185,8 @@ def build_data_validator_py(base_trace_node: TraceNode):
     # -----------------
     buffer = StringIO()
 
-    buffer.write(f"""
+    buffer.write(
+        f"""
 import _plotly_utils.basevalidators
 
 class DataValidator(_plotly_utils.basevalidators.BaseDataValidator):
@@ -188,7 +198,8 @@ class DataValidator(_plotly_utils.basevalidators.BaseDataValidator):
         super(DataValidator, self).__init__(class_strs_map={params['class_strs_map']},
                          plotly_name=plotly_name,
                          parent_name=parent_name,
-                         **kwargs)""")
+                         **kwargs)"""
+    )
 
     return buffer.getvalue()
 
@@ -237,9 +248,10 @@ def write_data_validator_py(outdir, base_trace_node: TraceNode):
     # Validate inputs
     # ---------------
     if base_trace_node.node_path:
-        raise ValueError('Expected root trace node.\n'
-                         'Received node with path "%s"'
-                         % base_trace_node.path_str)
+        raise ValueError(
+            "Expected root trace node.\n"
+            'Received node with path "%s"' % base_trace_node.path_str
+        )
 
     # Build Source
     # ------------
@@ -247,5 +259,5 @@ def write_data_validator_py(outdir, base_trace_node: TraceNode):
 
     # Write file
     # ----------
-    filepath = opath.join(outdir, 'validators', '__init__.py')
-    format_and_write_source_py(source, filepath, leading_newlines=2)
+    filepath = opath.join(outdir, "validators", "__init__.py")
+    write_source_py(source, filepath, leading_newlines=2)

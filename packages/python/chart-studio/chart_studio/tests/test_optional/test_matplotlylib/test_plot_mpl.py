@@ -15,17 +15,16 @@ from plotly import optional_imports
 from chart_studio.plotly import plotly as py
 from unittest import TestCase
 
-matplotlylib = optional_imports.get_module('plotly.matplotlylib')
+matplotlylib = optional_imports.get_module("plotly.matplotlylib")
 
 if matplotlylib:
     import matplotlib.pyplot as plt
 
 
-@attr('matplotlib')
+@attr("matplotlib")
 class PlotMPLTest(TestCase):
     def setUp(self):
-        py.sign_in('PlotlyImageTest', '786r5mecv0',
-                   plotly_domain='https://plot.ly')
+        py.sign_in("PlotlyImageTest", "786r5mecv0", plotly_domain="https://plot.ly")
 
     @raises(_plotly_utils.exceptions.PlotlyGraphObjectError)
     def test_update_type_error(self):
@@ -38,18 +37,17 @@ class PlotMPLTest(TestCase):
     def test_update_validation_error(self):
         fig, ax = plt.subplots()
         ax.plot([1, 2, 3])
-        update = {'invalid': 'anything'}
+        update = {"invalid": "anything"}
         py.plot_mpl(fig, update=update, filename="nosetests", auto_open=False)
 
-    @attr('slow')
+    @attr("slow")
     def test_update(self):
         fig, ax = plt.subplots()
         ax.plot([1, 2, 3])
-        title = 'new title'
-        update = {'layout': {'title': title}}
-        url = py.plot_mpl(fig, update=update, filename="nosetests",
-                          auto_open=False)
-        un = url.replace("https://plot.ly/~", "").split('/')[0]
-        fid = url.replace("https://plot.ly/~", "").split('/')[1]
+        title = "new title"
+        update = {"layout": {"title": title}}
+        url = py.plot_mpl(fig, update=update, filename="nosetests", auto_open=False)
+        un = url.replace("https://plot.ly/~", "").split("/")[0]
+        fid = url.replace("https://plot.ly/~", "").split("/")[1]
         pfig = py.get_figure(un, fid)
-        assert pfig['layout']['title']['text'] == title
+        assert pfig["layout"]["title"]["text"] == title

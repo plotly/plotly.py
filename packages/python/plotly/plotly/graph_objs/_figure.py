@@ -1,24 +1,53 @@
 from plotly.basedatatypes import BaseFigure
 from plotly.graph_objs import (
-    Area, Bar, Barpolar, Box, Candlestick, Carpet, Choropleth, Cone, Contour,
-    Contourcarpet, Funnel, Funnelarea, Heatmap, Heatmapgl, Histogram,
-    Histogram2d, Histogram2dContour, Isosurface, Mesh3d, Ohlc, Parcats,
-    Parcoords, Pie, Pointcloud, Sankey, Scatter, Scatter3d, Scattercarpet,
-    Scattergeo, Scattergl, Scattermapbox, Scatterpolar, Scatterpolargl,
-    Scatterternary, Splom, Streamtube, Sunburst, Surface, Table, Violin,
-    Volume, Waterfall
+    Area,
+    Bar,
+    Barpolar,
+    Box,
+    Candlestick,
+    Carpet,
+    Choropleth,
+    Cone,
+    Contour,
+    Contourcarpet,
+    Funnel,
+    Funnelarea,
+    Heatmap,
+    Heatmapgl,
+    Histogram,
+    Histogram2d,
+    Histogram2dContour,
+    Isosurface,
+    Mesh3d,
+    Ohlc,
+    Parcats,
+    Parcoords,
+    Pie,
+    Pointcloud,
+    Sankey,
+    Scatter,
+    Scatter3d,
+    Scattercarpet,
+    Scattergeo,
+    Scattergl,
+    Scattermapbox,
+    Scatterpolar,
+    Scatterpolargl,
+    Scatterternary,
+    Splom,
+    Streamtube,
+    Sunburst,
+    Surface,
+    Table,
+    Violin,
+    Volume,
+    Waterfall,
 )
 
 
 class Figure(BaseFigure):
-
     def __init__(
-        self,
-        data=None,
-        layout=None,
-        frames=None,
-        skip_invalid=False,
-        **kwargs
+        self, data=None, layout=None, frames=None, skip_invalid=False, **kwargs
     ):
         """
         Create a new Figure instance
@@ -549,8 +578,7 @@ class Figure(BaseFigure):
             if a property in the specification of data, layout, or frames
             is invalid AND skip_invalid is False
         """
-        super(Figure,
-              self).__init__(data, layout, frames, skip_invalid, **kwargs)
+        super(Figure, self).__init__(data, layout, frames, skip_invalid, **kwargs)
 
     def add_area(
         self,
@@ -1143,9 +1171,7 @@ class Figure(BaseFigure):
             ysrc=ysrc,
             **kwargs
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_barpolar(
         self,
@@ -1813,9 +1839,7 @@ class Figure(BaseFigure):
             ysrc=ysrc,
             **kwargs
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_candlestick(
         self,
@@ -2086,9 +2110,7 @@ class Figure(BaseFigure):
             yaxis=yaxis,
             **kwargs
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_carpet(
         self,
@@ -2342,9 +2364,7 @@ class Figure(BaseFigure):
             ysrc=ysrc,
             **kwargs
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_choropleth(
         self,
@@ -3410,9 +3430,7 @@ class Figure(BaseFigure):
             zsrc=zsrc,
             **kwargs
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_contourcarpet(
         self,
@@ -3775,9 +3793,7 @@ class Figure(BaseFigure):
             zsrc=zsrc,
             **kwargs
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_funnel(
         self,
@@ -4152,9 +4168,7 @@ class Figure(BaseFigure):
             ysrc=ysrc,
             **kwargs
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_funnelarea(
         self,
@@ -4824,9 +4838,7 @@ class Figure(BaseFigure):
             zsrc=zsrc,
             **kwargs
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_heatmapgl(
         self,
@@ -5131,9 +5143,7 @@ class Figure(BaseFigure):
             zsrc=zsrc,
             **kwargs
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_histogram(
         self,
@@ -5516,9 +5526,7 @@ class Figure(BaseFigure):
             ysrc=ysrc,
             **kwargs
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_histogram2d(
         self,
@@ -5934,9 +5942,7 @@ class Figure(BaseFigure):
             zsrc=zsrc,
             **kwargs
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_histogram2dcontour(
         self,
@@ -6376,9 +6382,7 @@ class Figure(BaseFigure):
             zsrc=zsrc,
             **kwargs
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_isosurface(
         self,
@@ -7440,9 +7444,7 @@ class Figure(BaseFigure):
             yaxis=yaxis,
             **kwargs
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_parcats(
         self,
@@ -8361,9 +8363,7 @@ class Figure(BaseFigure):
             ysrc=ysrc,
             **kwargs
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_sankey(
         self,
@@ -9002,9 +9002,7 @@ class Figure(BaseFigure):
             ysrc=ysrc,
             **kwargs
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_scatter3d(
         self,
@@ -9647,9 +9645,7 @@ class Figure(BaseFigure):
             yaxis=yaxis,
             **kwargs
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_scattergeo(
         self,
@@ -10321,9 +10317,7 @@ class Figure(BaseFigure):
             ysrc=ysrc,
             **kwargs
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_scattermapbox(
         self,
@@ -13440,9 +13434,7 @@ class Figure(BaseFigure):
             ysrc=ysrc,
             **kwargs
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def add_volume(
         self,
@@ -14213,9 +14205,7 @@ class Figure(BaseFigure):
             ysrc=ysrc,
             **kwargs
         )
-        return self.add_trace(
-            new_trace, row=row, col=col, secondary_y=secondary_y
-        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
     def select_coloraxes(self, selector=None, row=None, col=None):
         """
@@ -14243,9 +14233,7 @@ class Figure(BaseFigure):
             objects that satisfy all of the specified selection criteria
         """
 
-        return self._select_layout_subplots_by_prefix(
-            'coloraxis', selector, row, col
-        )
+        return self._select_layout_subplots_by_prefix("coloraxis", selector, row, col)
 
     def for_each_coloraxis(self, fn, selector=None, row=None, col=None):
         """
@@ -14277,9 +14265,7 @@ class Figure(BaseFigure):
 
         return self
 
-    def update_coloraxes(
-        self, patch=None, selector=None, row=None, col=None, **kwargs
-    ):
+    def update_coloraxes(self, patch=None, selector=None, row=None, col=None, **kwargs):
         """
         Perform a property update operation on all coloraxis objects
         that satisfy the specified selection criteria
@@ -14341,9 +14327,7 @@ class Figure(BaseFigure):
             objects that satisfy all of the specified selection criteria
         """
 
-        return self._select_layout_subplots_by_prefix(
-            'geo', selector, row, col
-        )
+        return self._select_layout_subplots_by_prefix("geo", selector, row, col)
 
     def for_each_geo(self, fn, selector=None, row=None, col=None):
         """
@@ -14375,9 +14359,7 @@ class Figure(BaseFigure):
 
         return self
 
-    def update_geos(
-        self, patch=None, selector=None, row=None, col=None, **kwargs
-    ):
+    def update_geos(self, patch=None, selector=None, row=None, col=None, **kwargs):
         """
         Perform a property update operation on all geo objects
         that satisfy the specified selection criteria
@@ -14439,9 +14421,7 @@ class Figure(BaseFigure):
             objects that satisfy all of the specified selection criteria
         """
 
-        return self._select_layout_subplots_by_prefix(
-            'mapbox', selector, row, col
-        )
+        return self._select_layout_subplots_by_prefix("mapbox", selector, row, col)
 
     def for_each_mapbox(self, fn, selector=None, row=None, col=None):
         """
@@ -14473,9 +14453,7 @@ class Figure(BaseFigure):
 
         return self
 
-    def update_mapboxes(
-        self, patch=None, selector=None, row=None, col=None, **kwargs
-    ):
+    def update_mapboxes(self, patch=None, selector=None, row=None, col=None, **kwargs):
         """
         Perform a property update operation on all mapbox objects
         that satisfy the specified selection criteria
@@ -14537,9 +14515,7 @@ class Figure(BaseFigure):
             objects that satisfy all of the specified selection criteria
         """
 
-        return self._select_layout_subplots_by_prefix(
-            'polar', selector, row, col
-        )
+        return self._select_layout_subplots_by_prefix("polar", selector, row, col)
 
     def for_each_polar(self, fn, selector=None, row=None, col=None):
         """
@@ -14571,9 +14547,7 @@ class Figure(BaseFigure):
 
         return self
 
-    def update_polars(
-        self, patch=None, selector=None, row=None, col=None, **kwargs
-    ):
+    def update_polars(self, patch=None, selector=None, row=None, col=None, **kwargs):
         """
         Perform a property update operation on all polar objects
         that satisfy the specified selection criteria
@@ -14635,9 +14609,7 @@ class Figure(BaseFigure):
             objects that satisfy all of the specified selection criteria
         """
 
-        return self._select_layout_subplots_by_prefix(
-            'scene', selector, row, col
-        )
+        return self._select_layout_subplots_by_prefix("scene", selector, row, col)
 
     def for_each_scene(self, fn, selector=None, row=None, col=None):
         """
@@ -14669,9 +14641,7 @@ class Figure(BaseFigure):
 
         return self
 
-    def update_scenes(
-        self, patch=None, selector=None, row=None, col=None, **kwargs
-    ):
+    def update_scenes(self, patch=None, selector=None, row=None, col=None, **kwargs):
         """
         Perform a property update operation on all scene objects
         that satisfy the specified selection criteria
@@ -14733,9 +14703,7 @@ class Figure(BaseFigure):
             objects that satisfy all of the specified selection criteria
         """
 
-        return self._select_layout_subplots_by_prefix(
-            'ternary', selector, row, col
-        )
+        return self._select_layout_subplots_by_prefix("ternary", selector, row, col)
 
     def for_each_ternary(self, fn, selector=None, row=None, col=None):
         """
@@ -14767,9 +14735,7 @@ class Figure(BaseFigure):
 
         return self
 
-    def update_ternaries(
-        self, patch=None, selector=None, row=None, col=None, **kwargs
-    ):
+    def update_ternaries(self, patch=None, selector=None, row=None, col=None, **kwargs):
         """
         Perform a property update operation on all ternary objects
         that satisfy the specified selection criteria
@@ -14831,9 +14797,7 @@ class Figure(BaseFigure):
             objects that satisfy all of the specified selection criteria
         """
 
-        return self._select_layout_subplots_by_prefix(
-            'xaxis', selector, row, col
-        )
+        return self._select_layout_subplots_by_prefix("xaxis", selector, row, col)
 
     def for_each_xaxis(self, fn, selector=None, row=None, col=None):
         """
@@ -14865,9 +14829,7 @@ class Figure(BaseFigure):
 
         return self
 
-    def update_xaxes(
-        self, patch=None, selector=None, row=None, col=None, **kwargs
-    ):
+    def update_xaxes(self, patch=None, selector=None, row=None, col=None, **kwargs):
         """
         Perform a property update operation on all xaxis objects
         that satisfy the specified selection criteria
@@ -14903,9 +14865,7 @@ class Figure(BaseFigure):
 
         return self
 
-    def select_yaxes(
-        self, selector=None, row=None, col=None, secondary_y=None
-    ):
+    def select_yaxes(self, selector=None, row=None, col=None, secondary_y=None):
         """
         Select yaxis subplot objects from a particular subplot cell
         and/or yaxis subplot objects that satisfy custom selection
@@ -14944,12 +14904,10 @@ class Figure(BaseFigure):
         """
 
         return self._select_layout_subplots_by_prefix(
-            'yaxis', selector, row, col, secondary_y=secondary_y
+            "yaxis", selector, row, col, secondary_y=secondary_y
         )
 
-    def for_each_yaxis(
-        self, fn, selector=None, row=None, col=None, secondary_y=None
-    ):
+    def for_each_yaxis(self, fn, selector=None, row=None, col=None, secondary_y=None):
         """
         Apply a function to all yaxis objects that satisfy the
         specified selection criteria
@@ -14994,13 +14952,7 @@ class Figure(BaseFigure):
         return self
 
     def update_yaxes(
-        self,
-        patch=None,
-        selector=None,
-        row=None,
-        col=None,
-        secondary_y=None,
-        **kwargs
+        self, patch=None, selector=None, row=None, col=None, secondary_y=None, **kwargs
     ):
         """
         Perform a property update operation on all yaxis objects

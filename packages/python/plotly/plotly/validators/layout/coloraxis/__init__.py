@@ -1,21 +1,15 @@
-
-
 import _plotly_utils.basevalidators
 
 
 class ShowscaleValidator(_plotly_utils.basevalidators.BooleanValidator):
-
     def __init__(
-        self,
-        plotly_name='showscale',
-        parent_name='layout.coloraxis',
-        **kwargs
+        self, plotly_name="showscale", parent_name="layout.coloraxis", **kwargs
     ):
         super(ShowscaleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -24,18 +18,14 @@ import _plotly_utils.basevalidators
 
 
 class ReversescaleValidator(_plotly_utils.basevalidators.BooleanValidator):
-
     def __init__(
-        self,
-        plotly_name='reversescale',
-        parent_name='layout.coloraxis',
-        **kwargs
+        self, plotly_name="reversescale", parent_name="layout.coloraxis", **kwargs
     ):
         super(ReversescaleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -44,21 +34,15 @@ import _plotly_utils.basevalidators
 
 
 class ColorscaleValidator(_plotly_utils.basevalidators.ColorscaleValidator):
-
     def __init__(
-        self,
-        plotly_name='colorscale',
-        parent_name='layout.coloraxis',
-        **kwargs
+        self, plotly_name="colorscale", parent_name="layout.coloraxis", **kwargs
     ):
         super(ColorscaleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            implied_edits=kwargs.pop(
-                'implied_edits', {'autocolorscale': False}
-            ),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            implied_edits=kwargs.pop("implied_edits", {"autocolorscale": False}),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -67,16 +51,16 @@ import _plotly_utils.basevalidators
 
 
 class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
-
     def __init__(
-        self, plotly_name='colorbar', parent_name='layout.coloraxis', **kwargs
+        self, plotly_name="colorbar", parent_name="layout.coloraxis", **kwargs
     ):
         super(ColorBarValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'ColorBar'),
+            data_class_str=kwargs.pop("data_class_str", "ColorBar"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             bgcolor
                 Sets the color of padded area.
             bordercolor
@@ -287,7 +271,7 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
             ypad
                 Sets the amount of padding (in px) along the y
                 direction.
-"""
+""",
             ),
             **kwargs
         )
@@ -297,16 +281,13 @@ import _plotly_utils.basevalidators
 
 
 class CminValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='cmin', parent_name='layout.coloraxis', **kwargs
-    ):
+    def __init__(self, plotly_name="cmin", parent_name="layout.coloraxis", **kwargs):
         super(CminValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            implied_edits=kwargs.pop('implied_edits', {'cauto': False}),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            implied_edits=kwargs.pop("implied_edits", {"cauto": False}),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -315,16 +296,13 @@ import _plotly_utils.basevalidators
 
 
 class CmidValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='cmid', parent_name='layout.coloraxis', **kwargs
-    ):
+    def __init__(self, plotly_name="cmid", parent_name="layout.coloraxis", **kwargs):
         super(CmidValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            implied_edits=kwargs.pop('implied_edits', {}),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            implied_edits=kwargs.pop("implied_edits", {}),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -333,16 +311,13 @@ import _plotly_utils.basevalidators
 
 
 class CmaxValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='cmax', parent_name='layout.coloraxis', **kwargs
-    ):
+    def __init__(self, plotly_name="cmax", parent_name="layout.coloraxis", **kwargs):
         super(CmaxValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            implied_edits=kwargs.pop('implied_edits', {'cauto': False}),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            implied_edits=kwargs.pop("implied_edits", {"cauto": False}),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -351,16 +326,13 @@ import _plotly_utils.basevalidators
 
 
 class CautoValidator(_plotly_utils.basevalidators.BooleanValidator):
-
-    def __init__(
-        self, plotly_name='cauto', parent_name='layout.coloraxis', **kwargs
-    ):
+    def __init__(self, plotly_name="cauto", parent_name="layout.coloraxis", **kwargs):
         super(CautoValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            implied_edits=kwargs.pop('implied_edits', {}),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            implied_edits=kwargs.pop("implied_edits", {}),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -369,18 +341,14 @@ import _plotly_utils.basevalidators
 
 
 class AutocolorscaleValidator(_plotly_utils.basevalidators.BooleanValidator):
-
     def __init__(
-        self,
-        plotly_name='autocolorscale',
-        parent_name='layout.coloraxis',
-        **kwargs
+        self, plotly_name="autocolorscale", parent_name="layout.coloraxis", **kwargs
     ):
         super(AutocolorscaleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            implied_edits=kwargs.pop('implied_edits', {}),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            implied_edits=kwargs.pop("implied_edits", {}),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )

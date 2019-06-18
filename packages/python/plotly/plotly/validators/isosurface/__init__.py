@@ -1,16 +1,13 @@
-
-
 import _plotly_utils.basevalidators
 
 
 class ZsrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(self, plotly_name='zsrc', parent_name='isosurface', **kwargs):
+    def __init__(self, plotly_name="zsrc", parent_name="isosurface", **kwargs):
         super(ZsrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -19,13 +16,12 @@ import _plotly_utils.basevalidators
 
 
 class ZValidator(_plotly_utils.basevalidators.DataArrayValidator):
-
-    def __init__(self, plotly_name='z', parent_name='isosurface', **kwargs):
+    def __init__(self, plotly_name="z", parent_name="isosurface", **kwargs):
         super(ZValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc+clearAxisTypes'),
-            role=kwargs.pop('role', 'data'),
+            edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
+            role=kwargs.pop("role", "data"),
             **kwargs
         )
 
@@ -34,13 +30,12 @@ import _plotly_utils.basevalidators
 
 
 class YsrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(self, plotly_name='ysrc', parent_name='isosurface', **kwargs):
+    def __init__(self, plotly_name="ysrc", parent_name="isosurface", **kwargs):
         super(YsrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -49,13 +44,12 @@ import _plotly_utils.basevalidators
 
 
 class YValidator(_plotly_utils.basevalidators.DataArrayValidator):
-
-    def __init__(self, plotly_name='y', parent_name='isosurface', **kwargs):
+    def __init__(self, plotly_name="y", parent_name="isosurface", **kwargs):
         super(YValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc+clearAxisTypes'),
-            role=kwargs.pop('role', 'data'),
+            edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
+            role=kwargs.pop("role", "data"),
             **kwargs
         )
 
@@ -64,13 +58,12 @@ import _plotly_utils.basevalidators
 
 
 class XsrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(self, plotly_name='xsrc', parent_name='isosurface', **kwargs):
+    def __init__(self, plotly_name="xsrc", parent_name="isosurface", **kwargs):
         super(XsrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -79,13 +72,12 @@ import _plotly_utils.basevalidators
 
 
 class XValidator(_plotly_utils.basevalidators.DataArrayValidator):
-
-    def __init__(self, plotly_name='x', parent_name='isosurface', **kwargs):
+    def __init__(self, plotly_name="x", parent_name="isosurface", **kwargs):
         super(XValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc+clearAxisTypes'),
-            role=kwargs.pop('role', 'data'),
+            edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
+            role=kwargs.pop("role", "data"),
             **kwargs
         )
 
@@ -94,16 +86,13 @@ import _plotly_utils.basevalidators
 
 
 class VisibleValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(
-        self, plotly_name='visible', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="visible", parent_name="isosurface", **kwargs):
         super(VisibleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
-            values=kwargs.pop('values', [True, False, 'legendonly']),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
+            values=kwargs.pop("values", [True, False, "legendonly"]),
             **kwargs
         )
 
@@ -112,15 +101,12 @@ import _plotly_utils.basevalidators
 
 
 class ValuesrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(
-        self, plotly_name='valuesrc', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="valuesrc", parent_name="isosurface", **kwargs):
         super(ValuesrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -129,15 +115,12 @@ import _plotly_utils.basevalidators
 
 
 class ValueValidator(_plotly_utils.basevalidators.DataArrayValidator):
-
-    def __init__(
-        self, plotly_name='value', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="value", parent_name="isosurface", **kwargs):
         super(ValueValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc+clearAxisTypes'),
-            role=kwargs.pop('role', 'data'),
+            edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
+            role=kwargs.pop("role", "data"),
             **kwargs
         )
 
@@ -146,15 +129,12 @@ import _plotly_utils.basevalidators
 
 
 class UirevisionValidator(_plotly_utils.basevalidators.AnyValidator):
-
-    def __init__(
-        self, plotly_name='uirevision', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="uirevision", parent_name="isosurface", **kwargs):
         super(UirevisionValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -163,14 +143,13 @@ import _plotly_utils.basevalidators
 
 
 class UidValidator(_plotly_utils.basevalidators.StringValidator):
-
-    def __init__(self, plotly_name='uid', parent_name='isosurface', **kwargs):
+    def __init__(self, plotly_name="uid", parent_name="isosurface", **kwargs):
         super(UidValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop('anim', True),
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'info'),
+            anim=kwargs.pop("anim", True),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -179,15 +158,12 @@ import _plotly_utils.basevalidators
 
 
 class TextsrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(
-        self, plotly_name='textsrc', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="textsrc", parent_name="isosurface", **kwargs):
         super(TextsrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -196,14 +172,13 @@ import _plotly_utils.basevalidators
 
 
 class TextValidator(_plotly_utils.basevalidators.StringValidator):
-
-    def __init__(self, plotly_name='text', parent_name='isosurface', **kwargs):
+    def __init__(self, plotly_name="text", parent_name="isosurface", **kwargs):
         super(TextValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
+            array_ok=kwargs.pop("array_ok", True),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -212,16 +187,14 @@ import _plotly_utils.basevalidators
 
 
 class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='surface', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="surface", parent_name="isosurface", **kwargs):
         super(SurfaceValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Surface'),
+            data_class_str=kwargs.pop("data_class_str", "Surface"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             count
                 Sets the number of iso-surfaces between minimum
                 and maximum iso-values. By default this value
@@ -248,7 +221,7 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
             show
                 Hides/displays surfaces between minimum and
                 maximum iso-values.
-"""
+""",
             ),
             **kwargs
         )
@@ -258,16 +231,14 @@ import _plotly_utils.basevalidators
 
 
 class StreamValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='stream', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="stream", parent_name="isosurface", **kwargs):
         super(StreamValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Stream'),
+            data_class_str=kwargs.pop("data_class_str", "Stream"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             maxpoints
                 Sets the maximum number of points to keep on
                 the plots from an incoming stream. If
@@ -277,7 +248,7 @@ class StreamValidator(_plotly_utils.basevalidators.CompoundValidator):
                 The stream id number links a data trace on a
                 plot with a stream. See
                 https://plot.ly/settings for more details.
-"""
+""",
             ),
             **kwargs
         )
@@ -287,16 +258,14 @@ import _plotly_utils.basevalidators
 
 
 class SpaceframeValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='spaceframe', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="spaceframe", parent_name="isosurface", **kwargs):
         super(SpaceframeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Spaceframe'),
+            data_class_str=kwargs.pop("data_class_str", "Spaceframe"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             fill
                 Sets the fill ratio of the `spaceframe`
                 elements. The default fill value is 0.15
@@ -310,7 +279,7 @@ class SpaceframeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 minimum and maximum iso-values. Often useful
                 when either caps or surfaces are disabled or
                 filled with values less than 1.
-"""
+""",
             ),
             **kwargs
         )
@@ -320,16 +289,14 @@ import _plotly_utils.basevalidators
 
 
 class SlicesValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='slices', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="slices", parent_name="isosurface", **kwargs):
         super(SlicesValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Slices'),
+            data_class_str=kwargs.pop("data_class_str", "Slices"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             x
                 plotly.graph_objs.isosurface.slices.X instance
                 or dict with compatible properties
@@ -339,7 +306,7 @@ class SlicesValidator(_plotly_utils.basevalidators.CompoundValidator):
             z
                 plotly.graph_objs.isosurface.slices.Z instance
                 or dict with compatible properties
-"""
+""",
             ),
             **kwargs
         )
@@ -349,15 +316,12 @@ import _plotly_utils.basevalidators
 
 
 class ShowscaleValidator(_plotly_utils.basevalidators.BooleanValidator):
-
-    def __init__(
-        self, plotly_name='showscale', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="showscale", parent_name="isosurface", **kwargs):
         super(ShowscaleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -366,16 +330,13 @@ import _plotly_utils.basevalidators
 
 
 class SceneValidator(_plotly_utils.basevalidators.SubplotidValidator):
-
-    def __init__(
-        self, plotly_name='scene', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="scene", parent_name="isosurface", **kwargs):
         super(SceneValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            dflt=kwargs.pop('dflt', 'scene'),
-            edit_type=kwargs.pop('edit_type', 'calc+clearAxisTypes'),
-            role=kwargs.pop('role', 'info'),
+            dflt=kwargs.pop("dflt", "scene"),
+            edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -384,15 +345,12 @@ import _plotly_utils.basevalidators
 
 
 class ReversescaleValidator(_plotly_utils.basevalidators.BooleanValidator):
-
-    def __init__(
-        self, plotly_name='reversescale', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="reversescale", parent_name="isosurface", **kwargs):
         super(ReversescaleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -401,17 +359,14 @@ import _plotly_utils.basevalidators
 
 
 class OpacityValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='opacity', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="opacity", parent_name="isosurface", **kwargs):
         super(OpacityValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            max=kwargs.pop('max', 1),
-            min=kwargs.pop('min', 0),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            max=kwargs.pop("max", 1),
+            min=kwargs.pop("min", 0),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -420,13 +375,12 @@ import _plotly_utils.basevalidators
 
 
 class NameValidator(_plotly_utils.basevalidators.StringValidator):
-
-    def __init__(self, plotly_name='name', parent_name='isosurface', **kwargs):
+    def __init__(self, plotly_name="name", parent_name="isosurface", **kwargs):
         super(NameValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'style'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "style"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -435,15 +389,12 @@ import _plotly_utils.basevalidators
 
 
 class MetasrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(
-        self, plotly_name='metasrc', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="metasrc", parent_name="isosurface", **kwargs):
         super(MetasrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -452,14 +403,13 @@ import _plotly_utils.basevalidators
 
 
 class MetaValidator(_plotly_utils.basevalidators.AnyValidator):
-
-    def __init__(self, plotly_name='meta', parent_name='isosurface', **kwargs):
+    def __init__(self, plotly_name="meta", parent_name="isosurface", **kwargs):
         super(MetaValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'info'),
+            array_ok=kwargs.pop("array_ok", True),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -468,16 +418,14 @@ import _plotly_utils.basevalidators
 
 
 class LightpositionValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='lightposition', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="lightposition", parent_name="isosurface", **kwargs):
         super(LightpositionValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Lightposition'),
+            data_class_str=kwargs.pop("data_class_str", "Lightposition"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             x
                 Numeric vector, representing the X coordinate
                 for each vertex.
@@ -487,7 +435,7 @@ class LightpositionValidator(_plotly_utils.basevalidators.CompoundValidator):
             z
                 Numeric vector, representing the Z coordinate
                 for each vertex.
-"""
+""",
             ),
             **kwargs
         )
@@ -497,16 +445,14 @@ import _plotly_utils.basevalidators
 
 
 class LightingValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='lighting', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="lighting", parent_name="isosurface", **kwargs):
         super(LightingValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Lighting'),
+            data_class_str=kwargs.pop("data_class_str", "Lighting"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             ambient
                 Ambient light increases overall color
                 visibility but can wash out the image.
@@ -531,7 +477,7 @@ class LightingValidator(_plotly_utils.basevalidators.CompoundValidator):
             vertexnormalsepsilon
                 Epsilon for vertex normals calculation avoids
                 math issues arising from degenerate geometry.
-"""
+""",
             ),
             **kwargs
         )
@@ -541,15 +487,12 @@ import _plotly_utils.basevalidators
 
 
 class IsominValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='isomin', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="isomin", parent_name="isosurface", **kwargs):
         super(IsominValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -558,15 +501,12 @@ import _plotly_utils.basevalidators
 
 
 class IsomaxValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='isomax', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="isomax", parent_name="isosurface", **kwargs):
         super(IsomaxValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -575,15 +515,12 @@ import _plotly_utils.basevalidators
 
 
 class IdssrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(
-        self, plotly_name='idssrc', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="idssrc", parent_name="isosurface", **kwargs):
         super(IdssrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -592,14 +529,13 @@ import _plotly_utils.basevalidators
 
 
 class IdsValidator(_plotly_utils.basevalidators.DataArrayValidator):
-
-    def __init__(self, plotly_name='ids', parent_name='isosurface', **kwargs):
+    def __init__(self, plotly_name="ids", parent_name="isosurface", **kwargs):
         super(IdsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop('anim', True),
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'data'),
+            anim=kwargs.pop("anim", True),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "data"),
             **kwargs
         )
 
@@ -608,15 +544,12 @@ import _plotly_utils.basevalidators
 
 
 class HovertextsrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(
-        self, plotly_name='hovertextsrc', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="hovertextsrc", parent_name="isosurface", **kwargs):
         super(HovertextsrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -625,16 +558,13 @@ import _plotly_utils.basevalidators
 
 
 class HovertextValidator(_plotly_utils.basevalidators.StringValidator):
-
-    def __init__(
-        self, plotly_name='hovertext', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="hovertext", parent_name="isosurface", **kwargs):
         super(HovertextValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
+            array_ok=kwargs.pop("array_ok", True),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -643,18 +573,14 @@ import _plotly_utils.basevalidators
 
 
 class HovertemplatesrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
     def __init__(
-        self,
-        plotly_name='hovertemplatesrc',
-        parent_name='isosurface',
-        **kwargs
+        self, plotly_name="hovertemplatesrc", parent_name="isosurface", **kwargs
     ):
         super(HovertemplatesrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -663,16 +589,13 @@ import _plotly_utils.basevalidators
 
 
 class HovertemplateValidator(_plotly_utils.basevalidators.StringValidator):
-
-    def __init__(
-        self, plotly_name='hovertemplate', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="hovertemplate", parent_name="isosurface", **kwargs):
         super(HovertemplateValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
+            array_ok=kwargs.pop("array_ok", True),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -681,16 +604,14 @@ import _plotly_utils.basevalidators
 
 
 class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='hoverlabel', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="hoverlabel", parent_name="isosurface", **kwargs):
         super(HoverlabelValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Hoverlabel'),
+            data_class_str=kwargs.pop("data_class_str", "Hoverlabel"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             align
                 Sets the horizontal alignment of the text
                 content within hover label box. Has an effect
@@ -726,7 +647,7 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
             namelengthsrc
                 Sets the source reference on plot.ly for
                 namelength .
-"""
+""",
             ),
             **kwargs
         )
@@ -736,15 +657,12 @@ import _plotly_utils.basevalidators
 
 
 class HoverinfosrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(
-        self, plotly_name='hoverinfosrc', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="hoverinfosrc", parent_name="isosurface", **kwargs):
         super(HoverinfosrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -753,18 +671,15 @@ import _plotly_utils.basevalidators
 
 
 class HoverinfoValidator(_plotly_utils.basevalidators.FlaglistValidator):
-
-    def __init__(
-        self, plotly_name='hoverinfo', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="hoverinfo", parent_name="isosurface", **kwargs):
         super(HoverinfoValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            extras=kwargs.pop('extras', ['all', 'none', 'skip']),
-            flags=kwargs.pop('flags', ['x', 'y', 'z', 'text', 'name']),
-            role=kwargs.pop('role', 'info'),
+            array_ok=kwargs.pop("array_ok", True),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            extras=kwargs.pop("extras", ["all", "none", "skip"]),
+            flags=kwargs.pop("flags", ["x", "y", "z", "text", "name"]),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -773,15 +688,12 @@ import _plotly_utils.basevalidators
 
 
 class FlatshadingValidator(_plotly_utils.basevalidators.BooleanValidator):
-
-    def __init__(
-        self, plotly_name='flatshading', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="flatshading", parent_name="isosurface", **kwargs):
         super(FlatshadingValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -790,15 +702,12 @@ import _plotly_utils.basevalidators
 
 
 class CustomdatasrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(
-        self, plotly_name='customdatasrc', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="customdatasrc", parent_name="isosurface", **kwargs):
         super(CustomdatasrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -807,15 +716,12 @@ import _plotly_utils.basevalidators
 
 
 class CustomdataValidator(_plotly_utils.basevalidators.DataArrayValidator):
-
-    def __init__(
-        self, plotly_name='customdata', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="customdata", parent_name="isosurface", **kwargs):
         super(CustomdataValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'data'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "data"),
             **kwargs
         )
 
@@ -824,16 +730,14 @@ import _plotly_utils.basevalidators
 
 
 class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='contour', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="contour", parent_name="isosurface", **kwargs):
         super(ContourValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Contour'),
+            data_class_str=kwargs.pop("data_class_str", "Contour"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             color
                 Sets the color of the contour lines.
             show
@@ -841,7 +745,7 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
                 on hover
             width
                 Sets the width of the contour lines.
-"""
+""",
             ),
             **kwargs
         )
@@ -851,18 +755,13 @@ import _plotly_utils.basevalidators
 
 
 class ColorscaleValidator(_plotly_utils.basevalidators.ColorscaleValidator):
-
-    def __init__(
-        self, plotly_name='colorscale', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="colorscale", parent_name="isosurface", **kwargs):
         super(ColorscaleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            implied_edits=kwargs.pop(
-                'implied_edits', {'autocolorscale': False}
-            ),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            implied_edits=kwargs.pop("implied_edits", {"autocolorscale": False}),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -871,16 +770,14 @@ import _plotly_utils.basevalidators
 
 
 class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='colorbar', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="colorbar", parent_name="isosurface", **kwargs):
         super(ColorBarValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'ColorBar'),
+            data_class_str=kwargs.pop("data_class_str", "ColorBar"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             bgcolor
                 Sets the color of padded area.
             bordercolor
@@ -1090,7 +987,7 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
             ypad
                 Sets the amount of padding (in px) along the y
                 direction.
-"""
+""",
             ),
             **kwargs
         )
@@ -1100,17 +997,14 @@ import _plotly_utils.basevalidators
 
 
 class ColoraxisValidator(_plotly_utils.basevalidators.SubplotidValidator):
-
-    def __init__(
-        self, plotly_name='coloraxis', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="coloraxis", parent_name="isosurface", **kwargs):
         super(ColoraxisValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            dflt=kwargs.pop('dflt', None),
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            regex=kwargs.pop('regex', '/^coloraxis([2-9]|[1-9][0-9]+)?$/'),
-            role=kwargs.pop('role', 'info'),
+            dflt=kwargs.pop("dflt", None),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            regex=kwargs.pop("regex", "/^coloraxis([2-9]|[1-9][0-9]+)?$/"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -1119,14 +1013,13 @@ import _plotly_utils.basevalidators
 
 
 class CminValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(self, plotly_name='cmin', parent_name='isosurface', **kwargs):
+    def __init__(self, plotly_name="cmin", parent_name="isosurface", **kwargs):
         super(CminValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            implied_edits=kwargs.pop('implied_edits', {'cauto': False}),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            implied_edits=kwargs.pop("implied_edits", {"cauto": False}),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -1135,14 +1028,13 @@ import _plotly_utils.basevalidators
 
 
 class CmidValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(self, plotly_name='cmid', parent_name='isosurface', **kwargs):
+    def __init__(self, plotly_name="cmid", parent_name="isosurface", **kwargs):
         super(CmidValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            implied_edits=kwargs.pop('implied_edits', {}),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            implied_edits=kwargs.pop("implied_edits", {}),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -1151,14 +1043,13 @@ import _plotly_utils.basevalidators
 
 
 class CmaxValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(self, plotly_name='cmax', parent_name='isosurface', **kwargs):
+    def __init__(self, plotly_name="cmax", parent_name="isosurface", **kwargs):
         super(CmaxValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            implied_edits=kwargs.pop('implied_edits', {'cauto': False}),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            implied_edits=kwargs.pop("implied_edits", {"cauto": False}),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -1167,16 +1058,13 @@ import _plotly_utils.basevalidators
 
 
 class CautoValidator(_plotly_utils.basevalidators.BooleanValidator):
-
-    def __init__(
-        self, plotly_name='cauto', parent_name='isosurface', **kwargs
-    ):
+    def __init__(self, plotly_name="cauto", parent_name="isosurface", **kwargs):
         super(CautoValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            implied_edits=kwargs.pop('implied_edits', {}),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            implied_edits=kwargs.pop("implied_edits", {}),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -1185,14 +1073,14 @@ import _plotly_utils.basevalidators
 
 
 class CapsValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='caps', parent_name='isosurface', **kwargs):
+    def __init__(self, plotly_name="caps", parent_name="isosurface", **kwargs):
         super(CapsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Caps'),
+            data_class_str=kwargs.pop("data_class_str", "Caps"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             x
                 plotly.graph_objs.isosurface.caps.X instance or
                 dict with compatible properties
@@ -1202,7 +1090,7 @@ class CapsValidator(_plotly_utils.basevalidators.CompoundValidator):
             z
                 plotly.graph_objs.isosurface.caps.Z instance or
                 dict with compatible properties
-"""
+""",
             ),
             **kwargs
         )
@@ -1212,15 +1100,14 @@ import _plotly_utils.basevalidators
 
 
 class AutocolorscaleValidator(_plotly_utils.basevalidators.BooleanValidator):
-
     def __init__(
-        self, plotly_name='autocolorscale', parent_name='isosurface', **kwargs
+        self, plotly_name="autocolorscale", parent_name="isosurface", **kwargs
     ):
         super(AutocolorscaleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            implied_edits=kwargs.pop('implied_edits', {}),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            implied_edits=kwargs.pop("implied_edits", {}),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )

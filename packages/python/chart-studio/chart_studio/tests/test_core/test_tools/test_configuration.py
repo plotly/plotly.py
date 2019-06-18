@@ -7,7 +7,6 @@ from chart_studio.tools import get_config_defaults
 
 
 class TestGetConfigDefaults(TestCase):
-
     def test_config_dict_is_equivalent_copy(self):
 
         original = FILE_CONTENT[CONFIG_FILE]

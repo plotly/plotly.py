@@ -7,9 +7,9 @@ from plotly.graph_objs.layout import Image
 # --------
 @pytest.fixture()
 def validator():
-    return CompoundArrayValidator('prop', 'layout',
-                                  data_class_str='Image',
-                                  data_docs='')
+    return CompoundArrayValidator(
+        "prop", "layout", data_class_str="Image", data_docs=""
+    )
 
 
 # Tests
@@ -72,7 +72,7 @@ def test_rejection_type(validator):
 
 
 def test_rejection_element(validator):
-    val = ['a', 37]
+    val = ["a", 37]
 
     with pytest.raises(ValueError) as validation_failure:
         validator.validate_coerce(val)
@@ -86,23 +86,19 @@ def test_rejection_value(validator):
     with pytest.raises(ValueError) as validation_failure:
         validator.validate_coerce(val)
 
-    assert ("Invalid property specified for object of type "
-            "plotly.graph_objs.layout.Image" in
-            str(validation_failure.value))
+    assert (
+        "Invalid property specified for object of type "
+        "plotly.graph_objs.layout.Image" in str(validation_failure.value)
+    )
 
 
 def test_skip_invalid(validator):
-    val = [dict(opacity='bad_opacity',
-                x=23,
-                sizex=120),
-           dict(x=99,
-                bogus={'a': 23},
-                sizey=300)]
+    val = [
+        dict(opacity="bad_opacity", x=23, sizex=120),
+        dict(x=99, bogus={"a": 23}, sizey=300),
+    ]
 
-    expected = [dict(x=23,
-                     sizex=120),
-                dict(x=99,
-                     sizey=300)]
+    expected = [dict(x=23, sizex=120), dict(x=99, sizey=300)]
 
     res = validator.validate_coerce(val, skip_invalid=True)
     assert [el.to_plotly_json() for el in res] == expected

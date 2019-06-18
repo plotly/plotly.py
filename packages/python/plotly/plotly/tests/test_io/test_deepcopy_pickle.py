@@ -11,13 +11,17 @@ import plotly.io as pio
 # --------
 @pytest.fixture
 def fig1(request):
-    return go.Figure(data=[{'type': 'scattergl',
-                            'marker': {'color': 'green'}},
-                           {'type': 'parcoords',
-                            'dimensions': [{'values': [1, 2, 3]},
-                                           {'values': [3, 2, 1]}],
-                            'line': {'color': 'blue'}}],
-                     layout={'title': 'Figure title'})
+    return go.Figure(
+        data=[
+            {"type": "scattergl", "marker": {"color": "green"}},
+            {
+                "type": "parcoords",
+                "dimensions": [{"values": [1, 2, 3]}, {"values": [3, 2, 1]}],
+                "line": {"color": "blue"},
+            },
+        ],
+        layout={"title": "Figure title"},
+    )
 
 
 @pytest.fixture

@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -21,17 +19,17 @@ class Marker(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'choropleth.unselected'
+        return "choropleth.unselected"
 
     # Self properties description
     # ---------------------------
@@ -61,7 +59,7 @@ class Marker(_BaseTraceHierarchyType):
         -------
         Marker
         """
-        super(Marker, self).__init__('marker')
+        super(Marker, self).__init__("marker")
 
         # Validate arg
         # ------------
@@ -81,22 +79,20 @@ an instance of plotly.graph_objs.choropleth.unselected.Marker"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.choropleth.unselected import (
-            marker as v_marker
-        )
+        from plotly.validators.choropleth.unselected import marker as v_marker
 
         # Initialize validators
         # ---------------------
-        self._validators['opacity'] = v_marker.OpacityValidator()
+        self._validators["opacity"] = v_marker.OpacityValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('opacity', None)
-        self['opacity'] = opacity if opacity is not None else _v
+        _v = arg.pop("opacity", None)
+        self["opacity"] = opacity if opacity is not None else _v
 
         # Process unknown kwargs
         # ----------------------

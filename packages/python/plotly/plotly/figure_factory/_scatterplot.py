@@ -8,10 +8,10 @@ from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
 from plotly.tools import make_subplots
 
-pd = optional_imports.get_module('pandas')
+pd = optional_imports.get_module("pandas")
 
-DIAG_CHOICES = ['scatter', 'histogram', 'box']
-VALID_COLORMAP_TYPES = ['cat', 'seq']
+DIAG_CHOICES = ["scatter", "histogram", "box"]
+VALID_COLORMAP_TYPES = ["cat", "seq"]
 
 
 def endpts_to_intervals(endpts):
@@ -30,34 +30,40 @@ def endpts_to_intervals(endpts):
     length = len(endpts)
     # Check if endpts is a list or tuple
     if not (isinstance(endpts, (tuple)) or isinstance(endpts, (list))):
-        raise exceptions.PlotlyError("The intervals_endpts argument must "
-                                     "be a list or tuple of a sequence "
-                                     "of increasing numbers.")
+        raise exceptions.PlotlyError(
+            "The intervals_endpts argument must "
+            "be a list or tuple of a sequence "
+            "of increasing numbers."
+        )
     # Check if endpts contains only numbers
     for item in endpts:
         if isinstance(item, str):
-            raise exceptions.PlotlyError("The intervals_endpts argument "
-                                         "must be a list or tuple of a "
-                                         "sequence of increasing "
-                                         "numbers.")
+            raise exceptions.PlotlyError(
+                "The intervals_endpts argument "
+                "must be a list or tuple of a "
+                "sequence of increasing "
+                "numbers."
+            )
     # Check if numbers in endpts are increasing
     for k in range(length - 1):
         if endpts[k] >= endpts[k + 1]:
-            raise exceptions.PlotlyError("The intervals_endpts argument "
-                                         "must be a list or tuple of a "
-                                         "sequence of increasing "
-                                         "numbers.")
+            raise exceptions.PlotlyError(
+                "The intervals_endpts argument "
+                "must be a list or tuple of a "
+                "sequence of increasing "
+                "numbers."
+            )
     else:
         intervals = []
         # add -inf to intervals
-        intervals.append([float('-inf'), endpts[0]])
+        intervals.append([float("-inf"), endpts[0]])
         for k in range(length - 1):
             interval = []
             interval.append(endpts[k])
             interval.append(endpts[k + 1])
             intervals.append(interval)
         # add +inf to intervals
-        intervals.append([endpts[length - 1], float('inf')])
+        intervals.append([endpts[length - 1], float("inf")])
         return intervals
 
 
@@ -66,15 +72,13 @@ def hide_tick_labels_from_box_subplots(fig):
     Hides tick labels for box plots in scatterplotmatrix subplots.
     """
     boxplot_xaxes = []
-    for trace in fig['data']:
-        if trace['type'] == 'box':
+    for trace in fig["data"]:
+        if trace["type"] == "box":
             # stores the xaxes which correspond to boxplot subplots
             # since we use xaxis1, xaxis2, etc, in plotly.py
-            boxplot_xaxes.append(
-                'xaxis{}'.format(trace['xaxis'][1:])
-            )
+            boxplot_xaxes.append("xaxis{}".format(trace["xaxis"][1:]))
     for xaxis in boxplot_xaxes:
-        fig['layout'][xaxis]['showticklabels'] = False
+        fig["layout"][xaxis]["showticklabels"] = False
 
 
 def validate_scatterplotmatrix(df, index, diag, colormap_type, **kwargs):
@@ -91,49 +95,58 @@ def validate_scatterplotmatrix(df, index, diag, colormap_type, **kwargs):
         'colorscale'
     """
     if not pd:
-        raise ImportError("FigureFactory.scatterplotmatrix requires "
-                          "a pandas DataFrame.")
+        raise ImportError(
+            "FigureFactory.scatterplotmatrix requires " "a pandas DataFrame."
+        )
 
     # Check if pandas dataframe
     if not isinstance(df, pd.core.frame.DataFrame):
-        raise exceptions.PlotlyError("Dataframe not inputed. Please "
-                                     "use a pandas dataframe to pro"
-                                     "duce a scatterplot matrix.")
+        raise exceptions.PlotlyError(
+            "Dataframe not inputed. Please "
+            "use a pandas dataframe to pro"
+            "duce a scatterplot matrix."
+        )
 
     # Check if dataframe is 1 column or less
     if len(df.columns) <= 1:
-        raise exceptions.PlotlyError("Dataframe has only one column. To "
-                                     "use the scatterplot matrix, use at "
-                                     "least 2 columns.")
+        raise exceptions.PlotlyError(
+            "Dataframe has only one column. To "
+            "use the scatterplot matrix, use at "
+            "least 2 columns."
+        )
 
     # Check that diag parameter is a valid selection
     if diag not in DIAG_CHOICES:
-        raise exceptions.PlotlyError("Make sure diag is set to "
-                                     "one of {}".format(DIAG_CHOICES))
+        raise exceptions.PlotlyError(
+            "Make sure diag is set to " "one of {}".format(DIAG_CHOICES)
+        )
 
     # Check that colormap_types is a valid selection
     if colormap_type not in VALID_COLORMAP_TYPES:
-        raise exceptions.PlotlyError("Must choose a valid colormap type. "
-                                     "Either 'cat' or 'seq' for a cate"
-                                     "gorical and sequential colormap "
-                                     "respectively.")
+        raise exceptions.PlotlyError(
+            "Must choose a valid colormap type. "
+            "Either 'cat' or 'seq' for a cate"
+            "gorical and sequential colormap "
+            "respectively."
+        )
 
     # Check for not 'size' or 'color' in 'marker' of **kwargs
-    if 'marker' in kwargs:
-        FORBIDDEN_PARAMS = ['size', 'color', 'colorscale']
-        if any(param in kwargs['marker'] for param in FORBIDDEN_PARAMS):
-            raise exceptions.PlotlyError("Your kwargs dictionary cannot "
-                                         "include the 'size', 'color' or "
-                                         "'colorscale' key words inside "
-                                         "the marker dict since 'size' is "
-                                         "already an argument of the "
-                                         "scatterplot matrix function and "
-                                         "both 'color' and 'colorscale "
-                                         "are set internally.")
+    if "marker" in kwargs:
+        FORBIDDEN_PARAMS = ["size", "color", "colorscale"]
+        if any(param in kwargs["marker"] for param in FORBIDDEN_PARAMS):
+            raise exceptions.PlotlyError(
+                "Your kwargs dictionary cannot "
+                "include the 'size', 'color' or "
+                "'colorscale' key words inside "
+                "the marker dict since 'size' is "
+                "already an argument of the "
+                "scatterplot matrix function and "
+                "both 'color' and 'colorscale "
+                "are set internally."
+            )
 
 
-def scatterplot(dataframe, headers, diag, size, height, width, title,
-                **kwargs):
+def scatterplot(dataframe, headers, diag, size, height, width, title, **kwargs):
     """
     Refer to FigureFactory.create_scatterplotmatrix() for docstring
 
@@ -146,35 +159,23 @@ def scatterplot(dataframe, headers, diag, size, height, width, title,
     # Insert traces into trace_list
     for listy in dataframe:
         for listx in dataframe:
-            if (listx == listy) and (diag == 'histogram'):
-                trace = graph_objs.Histogram(
-                    x=listx,
-                    showlegend=False
-                )
-            elif (listx == listy) and (diag == 'box'):
-                trace = graph_objs.Box(
-                    y=listx,
-                    name=None,
-                    showlegend=False
-                )
+            if (listx == listy) and (diag == "histogram"):
+                trace = graph_objs.Histogram(x=listx, showlegend=False)
+            elif (listx == listy) and (diag == "box"):
+                trace = graph_objs.Box(y=listx, name=None, showlegend=False)
             else:
-                if 'marker' in kwargs:
-                    kwargs['marker']['size'] = size
+                if "marker" in kwargs:
+                    kwargs["marker"]["size"] = size
                     trace = graph_objs.Scatter(
-                        x=listx,
-                        y=listy,
-                        mode='markers',
-                        showlegend=False,
-                        **kwargs
+                        x=listx, y=listy, mode="markers", showlegend=False, **kwargs
                     )
                     trace_list.append(trace)
                 else:
                     trace = graph_objs.Scatter(
                         x=listx,
                         y=listy,
-                        mode='markers',
-                        marker=dict(
-                            size=size),
+                        mode="markers",
+                        marker=dict(size=size),
                         showlegend=False,
                         **kwargs
                     )
@@ -184,33 +185,39 @@ def scatterplot(dataframe, headers, diag, size, height, width, title,
     indices = range(1, dim + 1)
     for y_index in indices:
         for x_index in indices:
-            fig.append_trace(trace_list[trace_index],
-                             y_index,
-                             x_index)
+            fig.append_trace(trace_list[trace_index], y_index, x_index)
             trace_index += 1
 
     # Insert headers into the figure
     for j in range(dim):
-        xaxis_key = 'xaxis{}'.format((dim * dim) - dim + 1 + j)
-        fig['layout'][xaxis_key].update(title=headers[j])
+        xaxis_key = "xaxis{}".format((dim * dim) - dim + 1 + j)
+        fig["layout"][xaxis_key].update(title=headers[j])
     for j in range(dim):
-        yaxis_key = 'yaxis{}'.format(1 + (dim * j))
-        fig['layout'][yaxis_key].update(title=headers[j])
+        yaxis_key = "yaxis{}".format(1 + (dim * j))
+        fig["layout"][yaxis_key].update(title=headers[j])
 
-    fig['layout'].update(
-        height=height, width=width,
-        title=title,
-        showlegend=True
-    )
+    fig["layout"].update(height=height, width=width, title=title, showlegend=True)
 
     hide_tick_labels_from_box_subplots(fig)
 
     return fig
 
 
-def scatterplot_dict(dataframe, headers, diag, size,
-                      height, width, title, index, index_vals,
-                      endpts, colormap, colormap_type, **kwargs):
+def scatterplot_dict(
+    dataframe,
+    headers,
+    diag,
+    size,
+    height,
+    width,
+    title,
+    index,
+    index_vals,
+    endpts,
+    colormap,
+    colormap_type,
+    **kwargs
+):
     """
     Refer to FigureFactory.create_scatterplotmatrix() for docstring
 
@@ -246,29 +253,25 @@ def scatterplot_dict(dataframe, headers, diag, size,
                         new_listy.append(listy[j])
                 # Generate trace with VISIBLE icon
                 if legend_param == 1:
-                    if (listx == listy) and (diag == 'histogram'):
+                    if (listx == listy) and (diag == "histogram"):
                         trace = graph_objs.Histogram(
-                            x=new_listx,
-                            marker=dict(
-                                color=theme[name]),
-                            showlegend=True
+                            x=new_listx, marker=dict(color=theme[name]), showlegend=True
                         )
-                    elif (listx == listy) and (diag == 'box'):
+                    elif (listx == listy) and (diag == "box"):
                         trace = graph_objs.Box(
                             y=new_listx,
                             name=None,
-                            marker=dict(
-                                color=theme[name]),
-                            showlegend=True
+                            marker=dict(color=theme[name]),
+                            showlegend=True,
                         )
                     else:
-                        if 'marker' in kwargs:
-                            kwargs['marker']['size'] = size
-                            kwargs['marker']['color'] = theme[name]
+                        if "marker" in kwargs:
+                            kwargs["marker"]["size"] = size
+                            kwargs["marker"]["color"] = theme[name]
                             trace = graph_objs.Scatter(
                                 x=new_listx,
                                 y=new_listy,
-                                mode='markers',
+                                mode="markers",
                                 name=name,
                                 showlegend=True,
                                 **kwargs
@@ -277,39 +280,35 @@ def scatterplot_dict(dataframe, headers, diag, size,
                             trace = graph_objs.Scatter(
                                 x=new_listx,
                                 y=new_listy,
-                                mode='markers',
+                                mode="markers",
                                 name=name,
-                                marker=dict(
-                                    size=size,
-                                    color=theme[name]),
+                                marker=dict(size=size, color=theme[name]),
                                 showlegend=True,
                                 **kwargs
                             )
                 # Generate trace with INVISIBLE icon
                 else:
-                    if (listx == listy) and (diag == 'histogram'):
+                    if (listx == listy) and (diag == "histogram"):
                         trace = graph_objs.Histogram(
                             x=new_listx,
-                            marker=dict(
-                                color=theme[name]),
-                            showlegend=False
+                            marker=dict(color=theme[name]),
+                            showlegend=False,
                         )
-                    elif (listx == listy) and (diag == 'box'):
+                    elif (listx == listy) and (diag == "box"):
                         trace = graph_objs.Box(
                             y=new_listx,
                             name=None,
-                            marker=dict(
-                                color=theme[name]),
-                            showlegend=False
+                            marker=dict(color=theme[name]),
+                            showlegend=False,
                         )
                     else:
-                        if 'marker' in kwargs:
-                            kwargs['marker']['size'] = size
-                            kwargs['marker']['color'] = theme[name]
+                        if "marker" in kwargs:
+                            kwargs["marker"]["size"] = size
+                            kwargs["marker"]["color"] = theme[name]
                             trace = graph_objs.Scatter(
                                 x=new_listx,
                                 y=new_listy,
-                                mode='markers',
+                                mode="markers",
                                 name=name,
                                 showlegend=False,
                                 **kwargs
@@ -318,11 +317,9 @@ def scatterplot_dict(dataframe, headers, diag, size,
                             trace = graph_objs.Scatter(
                                 x=new_listx,
                                 y=new_listy,
-                                mode='markers',
+                                mode="markers",
                                 name=name,
-                                marker=dict(
-                                    size=size,
-                                    color=theme[name]),
+                                marker=dict(size=size, color=theme[name]),
                                 showlegend=False,
                                 **kwargs
                             )
@@ -336,42 +333,46 @@ def scatterplot_dict(dataframe, headers, diag, size,
     for y_index in indices:
         for x_index in indices:
             for name in sorted(trace_list[trace_index].keys()):
-                fig.append_trace(
-                    trace_list[trace_index][name],
-                    y_index,
-                    x_index)
+                fig.append_trace(trace_list[trace_index][name], y_index, x_index)
             trace_index += 1
 
     # Insert headers into the figure
     for j in range(dim):
-        xaxis_key = 'xaxis{}'.format((dim * dim) - dim + 1 + j)
-        fig['layout'][xaxis_key].update(title=headers[j])
+        xaxis_key = "xaxis{}".format((dim * dim) - dim + 1 + j)
+        fig["layout"][xaxis_key].update(title=headers[j])
 
     for j in range(dim):
-        yaxis_key = 'yaxis{}'.format(1 + (dim * j))
-        fig['layout'][yaxis_key].update(title=headers[j])
+        yaxis_key = "yaxis{}".format(1 + (dim * j))
+        fig["layout"][yaxis_key].update(title=headers[j])
 
     hide_tick_labels_from_box_subplots(fig)
 
-    if diag == 'histogram':
-        fig['layout'].update(
-            height=height, width=width,
-            title=title,
-            showlegend=True,
-            barmode='stack')
+    if diag == "histogram":
+        fig["layout"].update(
+            height=height, width=width, title=title, showlegend=True, barmode="stack"
+        )
         return fig
 
     else:
-        fig['layout'].update(
-            height=height, width=width,
-            title=title,
-            showlegend=True)
+        fig["layout"].update(height=height, width=width, title=title, showlegend=True)
         return fig
 
 
-def scatterplot_theme(dataframe, headers, diag, size, height, width, title,
-                      index, index_vals, endpts, colormap, colormap_type,
-                      **kwargs):
+def scatterplot_theme(
+    dataframe,
+    headers,
+    diag,
+    size,
+    height,
+    width,
+    title,
+    index,
+    index_vals,
+    endpts,
+    colormap,
+    colormap_type,
+    **kwargs
+):
     """
     Refer to FigureFactory.create_scatterplotmatrix() for docstring
 
@@ -388,12 +389,12 @@ def scatterplot_theme(dataframe, headers, diag, size, height, width, title,
         n_colors_len = len(unique_index_vals)
 
         # Convert colormap to list of n RGB tuples
-        if colormap_type == 'seq':
+        if colormap_type == "seq":
             foo = clrs.color_parser(colormap, clrs.unlabel_rgb)
             foo = clrs.n_colors(foo[0], foo[1], n_colors_len)
             theme = clrs.color_parser(foo, clrs.label_rgb)
 
-        if colormap_type == 'cat':
+        if colormap_type == "cat":
             # leave list of colors the same way
             theme = colormap
 
@@ -421,29 +422,27 @@ def scatterplot_theme(dataframe, headers, diag, size, height, width, title,
                             new_listy.append(listy[j])
                     # Generate trace with VISIBLE icon
                     if legend_param == 1:
-                        if (listx == listy) and (diag == 'histogram'):
+                        if (listx == listy) and (diag == "histogram"):
                             trace = graph_objs.Histogram(
                                 x=new_listx,
-                                marker=dict(
-                                    color=theme[c_indx]),
-                                showlegend=True
+                                marker=dict(color=theme[c_indx]),
+                                showlegend=True,
                             )
-                        elif (listx == listy) and (diag == 'box'):
+                        elif (listx == listy) and (diag == "box"):
                             trace = graph_objs.Box(
                                 y=new_listx,
                                 name=None,
-                                marker=dict(
-                                    color=theme[c_indx]),
-                                showlegend=True
+                                marker=dict(color=theme[c_indx]),
+                                showlegend=True,
                             )
                         else:
-                            if 'marker' in kwargs:
-                                kwargs['marker']['size'] = size
-                                kwargs['marker']['color'] = theme[c_indx]
+                            if "marker" in kwargs:
+                                kwargs["marker"]["size"] = size
+                                kwargs["marker"]["color"] = theme[c_indx]
                                 trace = graph_objs.Scatter(
                                     x=new_listx,
                                     y=new_listy,
-                                    mode='markers',
+                                    mode="markers",
                                     name=name,
                                     showlegend=True,
                                     **kwargs
@@ -452,39 +451,35 @@ def scatterplot_theme(dataframe, headers, diag, size, height, width, title,
                                 trace = graph_objs.Scatter(
                                     x=new_listx,
                                     y=new_listy,
-                                    mode='markers',
+                                    mode="markers",
                                     name=name,
-                                    marker=dict(
-                                        size=size,
-                                        color=theme[c_indx]),
+                                    marker=dict(size=size, color=theme[c_indx]),
                                     showlegend=True,
                                     **kwargs
                                 )
                     # Generate trace with INVISIBLE icon
                     else:
-                        if (listx == listy) and (diag == 'histogram'):
+                        if (listx == listy) and (diag == "histogram"):
                             trace = graph_objs.Histogram(
                                 x=new_listx,
-                                marker=dict(
-                                    color=theme[c_indx]),
-                                showlegend=False
+                                marker=dict(color=theme[c_indx]),
+                                showlegend=False,
                             )
-                        elif (listx == listy) and (diag == 'box'):
+                        elif (listx == listy) and (diag == "box"):
                             trace = graph_objs.Box(
                                 y=new_listx,
                                 name=None,
-                                marker=dict(
-                                    color=theme[c_indx]),
-                                showlegend=False
+                                marker=dict(color=theme[c_indx]),
+                                showlegend=False,
                             )
                         else:
-                            if 'marker' in kwargs:
-                                kwargs['marker']['size'] = size
-                                kwargs['marker']['color'] = theme[c_indx]
+                            if "marker" in kwargs:
+                                kwargs["marker"]["size"] = size
+                                kwargs["marker"]["color"] = theme[c_indx]
                                 trace = graph_objs.Scatter(
                                     x=new_listx,
                                     y=new_listy,
-                                    mode='markers',
+                                    mode="markers",
                                     name=name,
                                     showlegend=False,
                                     **kwargs
@@ -493,11 +488,9 @@ def scatterplot_theme(dataframe, headers, diag, size, height, width, title,
                                 trace = graph_objs.Scatter(
                                     x=new_listx,
                                     y=new_listy,
-                                    mode='markers',
+                                    mode="markers",
                                     name=name,
-                                    marker=dict(
-                                        size=size,
-                                        color=theme[c_indx]),
+                                    marker=dict(size=size, color=theme[c_indx]),
                                     showlegend=False,
                                     **kwargs
                                 )
@@ -514,43 +507,40 @@ def scatterplot_theme(dataframe, headers, diag, size, height, width, title,
         for y_index in indices:
             for x_index in indices:
                 for name in sorted(trace_list[trace_index].keys()):
-                    fig.append_trace(
-                        trace_list[trace_index][name],
-                        y_index,
-                        x_index)
+                    fig.append_trace(trace_list[trace_index][name], y_index, x_index)
                 trace_index += 1
 
         # Insert headers into the figure
         for j in range(dim):
-            xaxis_key = 'xaxis{}'.format((dim * dim) - dim + 1 + j)
-            fig['layout'][xaxis_key].update(title=headers[j])
+            xaxis_key = "xaxis{}".format((dim * dim) - dim + 1 + j)
+            fig["layout"][xaxis_key].update(title=headers[j])
 
         for j in range(dim):
-            yaxis_key = 'yaxis{}'.format(1 + (dim * j))
-            fig['layout'][yaxis_key].update(title=headers[j])
+            yaxis_key = "yaxis{}".format(1 + (dim * j))
+            fig["layout"][yaxis_key].update(title=headers[j])
 
         hide_tick_labels_from_box_subplots(fig)
 
-        if diag == 'histogram':
-            fig['layout'].update(
-                height=height, width=width,
+        if diag == "histogram":
+            fig["layout"].update(
+                height=height,
+                width=width,
                 title=title,
                 showlegend=True,
-                barmode='stack')
+                barmode="stack",
+            )
             return fig
 
-        elif diag == 'box':
-            fig['layout'].update(
-                height=height, width=width,
-                title=title,
-                showlegend=True)
+        elif diag == "box":
+            fig["layout"].update(
+                height=height, width=width, title=title, showlegend=True
+            )
             return fig
 
         else:
-            fig['layout'].update(
-                height=height, width=width,
-                title=title,
-                showlegend=True)
+            fig["layout"].update(
+                height=height, width=width, title=title, showlegend=True
+            )
             return fig
 
     else:
@@ -558,12 +548,12 @@ def scatterplot_theme(dataframe, headers, diag, size, height, width, title,
             intervals = utils.endpts_to_intervals(endpts)
 
             # Convert colormap to list of n RGB tuples
-            if colormap_type == 'seq':
+            if colormap_type == "seq":
                 foo = clrs.color_parser(colormap, clrs.unlabel_rgb)
                 foo = clrs.n_colors(foo[0], foo[1], len(intervals))
                 theme = clrs.color_parser(foo, clrs.label_rgb)
 
-            if colormap_type == 'cat':
+            if colormap_type == "cat":
                 # leave list of colors the same way
                 theme = colormap
 
@@ -589,30 +579,27 @@ def scatterplot_theme(dataframe, headers, diag, size, height, width, title,
                                 new_listy.append(listy[j])
                         # Generate trace with VISIBLE icon
                         if legend_param == 1:
-                            if (listx == listy) and (diag == 'histogram'):
+                            if (listx == listy) and (diag == "histogram"):
                                 trace = graph_objs.Histogram(
                                     x=new_listx,
-                                    marker=dict(
-                                        color=theme[c_indx]),
-                                    showlegend=True
+                                    marker=dict(color=theme[c_indx]),
+                                    showlegend=True,
                                 )
-                            elif (listx == listy) and (diag == 'box'):
+                            elif (listx == listy) and (diag == "box"):
                                 trace = graph_objs.Box(
                                     y=new_listx,
                                     name=None,
-                                    marker=dict(
-                                        color=theme[c_indx]),
-                                    showlegend=True
+                                    marker=dict(color=theme[c_indx]),
+                                    showlegend=True,
                                 )
                             else:
-                                if 'marker' in kwargs:
-                                    kwargs['marker']['size'] = size
-                                    (kwargs['marker']
-                                     ['color']) = theme[c_indx]
+                                if "marker" in kwargs:
+                                    kwargs["marker"]["size"] = size
+                                    (kwargs["marker"]["color"]) = theme[c_indx]
                                     trace = graph_objs.Scatter(
                                         x=new_listx,
                                         y=new_listy,
-                                        mode='markers',
+                                        mode="markers",
                                         name=str(interval),
                                         showlegend=True,
                                         **kwargs
@@ -621,40 +608,35 @@ def scatterplot_theme(dataframe, headers, diag, size, height, width, title,
                                     trace = graph_objs.Scatter(
                                         x=new_listx,
                                         y=new_listy,
-                                        mode='markers',
+                                        mode="markers",
                                         name=str(interval),
-                                        marker=dict(
-                                            size=size,
-                                            color=theme[c_indx]),
+                                        marker=dict(size=size, color=theme[c_indx]),
                                         showlegend=True,
                                         **kwargs
                                     )
                         # Generate trace with INVISIBLE icon
                         else:
-                            if (listx == listy) and (diag == 'histogram'):
+                            if (listx == listy) and (diag == "histogram"):
                                 trace = graph_objs.Histogram(
                                     x=new_listx,
-                                    marker=dict(
-                                        color=theme[c_indx]),
-                                    showlegend=False
+                                    marker=dict(color=theme[c_indx]),
+                                    showlegend=False,
                                 )
-                            elif (listx == listy) and (diag == 'box'):
+                            elif (listx == listy) and (diag == "box"):
                                 trace = graph_objs.Box(
                                     y=new_listx,
                                     name=None,
-                                    marker=dict(
-                                        color=theme[c_indx]),
-                                    showlegend=False
+                                    marker=dict(color=theme[c_indx]),
+                                    showlegend=False,
                                 )
                             else:
-                                if 'marker' in kwargs:
-                                    kwargs['marker']['size'] = size
-                                    (kwargs['marker']
-                                     ['color']) = theme[c_indx]
+                                if "marker" in kwargs:
+                                    kwargs["marker"]["size"] = size
+                                    (kwargs["marker"]["color"]) = theme[c_indx]
                                     trace = graph_objs.Scatter(
                                         x=new_listx,
                                         y=new_listy,
-                                        mode='markers',
+                                        mode="markers",
                                         name=str(interval),
                                         showlegend=False,
                                         **kwargs
@@ -663,11 +645,9 @@ def scatterplot_theme(dataframe, headers, diag, size, height, width, title,
                                     trace = graph_objs.Scatter(
                                         x=new_listx,
                                         y=new_listy,
-                                        mode='markers',
+                                        mode="markers",
                                         name=str(interval),
-                                        marker=dict(
-                                            size=size,
-                                            color=theme[c_indx]),
+                                        marker=dict(size=size, color=theme[c_indx]),
                                         showlegend=False,
                                         **kwargs
                                     )
@@ -685,41 +665,40 @@ def scatterplot_theme(dataframe, headers, diag, size, height, width, title,
                 for x_index in indices:
                     for interval in intervals:
                         fig.append_trace(
-                            trace_list[trace_index][str(interval)],
-                            y_index,
-                            x_index)
+                            trace_list[trace_index][str(interval)], y_index, x_index
+                        )
                     trace_index += 1
 
             # Insert headers into the figure
             for j in range(dim):
-                xaxis_key = 'xaxis{}'.format((dim * dim) - dim + 1 + j)
-                fig['layout'][xaxis_key].update(title=headers[j])
+                xaxis_key = "xaxis{}".format((dim * dim) - dim + 1 + j)
+                fig["layout"][xaxis_key].update(title=headers[j])
             for j in range(dim):
-                yaxis_key = 'yaxis{}'.format(1 + (dim * j))
-                fig['layout'][yaxis_key].update(title=headers[j])
+                yaxis_key = "yaxis{}".format(1 + (dim * j))
+                fig["layout"][yaxis_key].update(title=headers[j])
 
             hide_tick_labels_from_box_subplots(fig)
 
-            if diag == 'histogram':
-                fig['layout'].update(
-                    height=height, width=width,
+            if diag == "histogram":
+                fig["layout"].update(
+                    height=height,
+                    width=width,
                     title=title,
                     showlegend=True,
-                    barmode='stack')
+                    barmode="stack",
+                )
                 return fig
 
-            elif diag == 'box':
-                fig['layout'].update(
-                    height=height, width=width,
-                    title=title,
-                    showlegend=True)
+            elif diag == "box":
+                fig["layout"].update(
+                    height=height, width=width, title=title, showlegend=True
+                )
                 return fig
 
             else:
-                fig['layout'].update(
-                    height=height, width=width,
-                    title=title,
-                    showlegend=True)
+                fig["layout"].update(
+                    height=height, width=width, title=title, showlegend=True
+                )
                 return fig
 
         else:
@@ -731,7 +710,7 @@ def scatterplot_theme(dataframe, headers, diag, size, height, width, title,
 
             color = []
             for incr in range(len(theme)):
-                color.append([1. / (len(theme) - 1) * incr, theme[incr]])
+                color.append([1.0 / (len(theme) - 1) * incr, theme[incr]])
 
             dim = len(dataframe)
             fig = make_subplots(rows=dim, cols=dim, print_grid=False)
@@ -742,30 +721,24 @@ def scatterplot_theme(dataframe, headers, diag, size, height, width, title,
                 for listx in dataframe:
                     # Generate trace with VISIBLE icon
                     if legend_param == 1:
-                        if (listx == listy) and (diag == 'histogram'):
+                        if (listx == listy) and (diag == "histogram"):
                             trace = graph_objs.Histogram(
-                                x=listx,
-                                marker=dict(
-                                    color=theme[0]),
-                                showlegend=False
+                                x=listx, marker=dict(color=theme[0]), showlegend=False
                             )
-                        elif (listx == listy) and (diag == 'box'):
+                        elif (listx == listy) and (diag == "box"):
                             trace = graph_objs.Box(
-                                y=listx,
-                                marker=dict(
-                                    color=theme[0]),
-                                showlegend=False
+                                y=listx, marker=dict(color=theme[0]), showlegend=False
                             )
                         else:
-                            if 'marker' in kwargs:
-                                kwargs['marker']['size'] = size
-                                kwargs['marker']['color'] = index_vals
-                                kwargs['marker']['colorscale'] = color
-                                kwargs['marker']['showscale'] = True
+                            if "marker" in kwargs:
+                                kwargs["marker"]["size"] = size
+                                kwargs["marker"]["color"] = index_vals
+                                kwargs["marker"]["colorscale"] = color
+                                kwargs["marker"]["showscale"] = True
                                 trace = graph_objs.Scatter(
                                     x=listx,
                                     y=listy,
-                                    mode='markers',
+                                    mode="markers",
                                     showlegend=False,
                                     **kwargs
                                 )
@@ -773,41 +746,36 @@ def scatterplot_theme(dataframe, headers, diag, size, height, width, title,
                                 trace = graph_objs.Scatter(
                                     x=listx,
                                     y=listy,
-                                    mode='markers',
+                                    mode="markers",
                                     marker=dict(
                                         size=size,
                                         color=index_vals,
                                         colorscale=color,
-                                        showscale=True),
+                                        showscale=True,
+                                    ),
                                     showlegend=False,
                                     **kwargs
                                 )
                     # Generate trace with INVISIBLE icon
                     else:
-                        if (listx == listy) and (diag == 'histogram'):
+                        if (listx == listy) and (diag == "histogram"):
                             trace = graph_objs.Histogram(
-                                x=listx,
-                                marker=dict(
-                                    color=theme[0]),
-                                showlegend=False
+                                x=listx, marker=dict(color=theme[0]), showlegend=False
                             )
-                        elif (listx == listy) and (diag == 'box'):
+                        elif (listx == listy) and (diag == "box"):
                             trace = graph_objs.Box(
-                                y=listx,
-                                marker=dict(
-                                    color=theme[0]),
-                                showlegend=False
+                                y=listx, marker=dict(color=theme[0]), showlegend=False
                             )
                         else:
-                            if 'marker' in kwargs:
-                                kwargs['marker']['size'] = size
-                                kwargs['marker']['color'] = index_vals
-                                kwargs['marker']['colorscale'] = color
-                                kwargs['marker']['showscale'] = False
+                            if "marker" in kwargs:
+                                kwargs["marker"]["size"] = size
+                                kwargs["marker"]["color"] = index_vals
+                                kwargs["marker"]["colorscale"] = color
+                                kwargs["marker"]["showscale"] = False
                                 trace = graph_objs.Scatter(
                                     x=listx,
                                     y=listy,
-                                    mode='markers',
+                                    mode="markers",
                                     showlegend=False,
                                     **kwargs
                                 )
@@ -815,12 +783,13 @@ def scatterplot_theme(dataframe, headers, diag, size, height, width, title,
                                 trace = graph_objs.Scatter(
                                     x=listx,
                                     y=listy,
-                                    mode='markers',
+                                    mode="markers",
                                     marker=dict(
                                         size=size,
                                         color=index_vals,
                                         colorscale=color,
-                                        showscale=False),
+                                        showscale=False,
+                                    ),
                                     showlegend=False,
                                     **kwargs
                                 )
@@ -832,49 +801,58 @@ def scatterplot_theme(dataframe, headers, diag, size, height, width, title,
             indices = range(1, dim + 1)
             for y_index in indices:
                 for x_index in indices:
-                    fig.append_trace(trace_list[trace_index],
-                                     y_index,
-                                     x_index)
+                    fig.append_trace(trace_list[trace_index], y_index, x_index)
                     trace_index += 1
 
             # Insert headers into the figure
             for j in range(dim):
-                xaxis_key = 'xaxis{}'.format((dim * dim) - dim + 1 + j)
-                fig['layout'][xaxis_key].update(title=headers[j])
+                xaxis_key = "xaxis{}".format((dim * dim) - dim + 1 + j)
+                fig["layout"][xaxis_key].update(title=headers[j])
             for j in range(dim):
-                yaxis_key = 'yaxis{}'.format(1 + (dim * j))
-                fig['layout'][yaxis_key].update(title=headers[j])
+                yaxis_key = "yaxis{}".format(1 + (dim * j))
+                fig["layout"][yaxis_key].update(title=headers[j])
 
             hide_tick_labels_from_box_subplots(fig)
 
-            if diag == 'histogram':
-                fig['layout'].update(
-                    height=height, width=width,
+            if diag == "histogram":
+                fig["layout"].update(
+                    height=height,
+                    width=width,
                     title=title,
                     showlegend=True,
-                    barmode='stack')
+                    barmode="stack",
+                )
                 return fig
 
-            elif diag == 'box':
-                fig['layout'].update(
-                    height=height, width=width,
-                    title=title,
-                    showlegend=True)
+            elif diag == "box":
+                fig["layout"].update(
+                    height=height, width=width, title=title, showlegend=True
+                )
                 return fig
 
             else:
-                fig['layout'].update(
-                    height=height, width=width,
-                    title=title,
-                    showlegend=True)
+                fig["layout"].update(
+                    height=height, width=width, title=title, showlegend=True
+                )
                 return fig
 
 
-def create_scatterplotmatrix(df, index=None, endpts=None, diag='scatter',
-                             height=500, width=500, size=6,
-                             title='Scatterplot Matrix', colormap=None,
-                             colormap_type='cat', dataframe=None,
-                             headers=None, index_vals=None, **kwargs):
+def create_scatterplotmatrix(
+    df,
+    index=None,
+    endpts=None,
+    diag="scatter",
+    height=500,
+    width=500,
+    size=6,
+    title="Scatterplot Matrix",
+    colormap=None,
+    colormap_type="cat",
+    dataframe=None,
+    headers=None,
+    index_vals=None,
+    **kwargs
+):
     """
     Returns data for a scatterplot matrix.
 
@@ -1082,8 +1060,12 @@ def create_scatterplotmatrix(df, index=None, endpts=None, diag='scatter',
 
     # Validate colormap
     if isinstance(colormap, dict):
-        colormap = clrs.validate_colors_dict(colormap, 'rgb')
-    elif isinstance(colormap, six.string_types) and 'rgb' not in colormap and '#' not in colormap:
+        colormap = clrs.validate_colors_dict(colormap, "rgb")
+    elif (
+        isinstance(colormap, six.string_types)
+        and "rgb" not in colormap
+        and "#" not in colormap
+    ):
         if colormap not in clrs.PLOTLY_SCALES.keys():
             raise exceptions.PlotlyError(
                 "If 'colormap' is a string, it must be the name "
@@ -1095,10 +1077,9 @@ def create_scatterplotmatrix(df, index=None, endpts=None, diag='scatter',
             colormap = clrs.colorscale_to_colors(clrs.PLOTLY_SCALES[colormap])
             # keep only first and last item - fix later
             colormap = [colormap[0]] + [colormap[-1]]
-        colormap = clrs.validate_colors(colormap, 'rgb')
+        colormap = clrs.validate_colors(colormap, "rgb")
     else:
-        colormap = clrs.validate_colors(colormap, 'rgb')
-
+        colormap = clrs.validate_colors(colormap, "rgb")
 
     if not index:
         for name in df:
@@ -1107,16 +1088,19 @@ def create_scatterplotmatrix(df, index=None, endpts=None, diag='scatter',
             dataframe.append(df[name].values.tolist())
         # Check for same data-type in df columns
         utils.validate_dataframe(dataframe)
-        figure = scatterplot(dataframe, headers, diag, size, height, width,
-                             title, **kwargs)
+        figure = scatterplot(
+            dataframe, headers, diag, size, height, width, title, **kwargs
+        )
         return figure
     else:
         # Validate index selection
         if index not in df:
-            raise exceptions.PlotlyError("Make sure you set the index "
-                                         "input variable to one of the "
-                                         "column names of your "
-                                         "dataframe.")
+            raise exceptions.PlotlyError(
+                "Make sure you set the index "
+                "input variable to one of the "
+                "column names of your "
+                "dataframe."
+            )
         index_vals = df[index].values.tolist()
         for name in df:
             if name != index:
@@ -1133,21 +1117,43 @@ def create_scatterplotmatrix(df, index=None, endpts=None, diag='scatter',
         if isinstance(colormap, dict):
             for key in colormap:
                 if not all(index in colormap for index in index_vals):
-                    raise exceptions.PlotlyError("If colormap is a "
-                                                 "dictionary, all the "
-                                                 "names in the index "
-                                                 "must be keys.")
+                    raise exceptions.PlotlyError(
+                        "If colormap is a "
+                        "dictionary, all the "
+                        "names in the index "
+                        "must be keys."
+                    )
             figure = scatterplot_dict(
-                dataframe, headers, diag, size, height, width, title,
-                index, index_vals, endpts, colormap, colormap_type,
+                dataframe,
+                headers,
+                diag,
+                size,
+                height,
+                width,
+                title,
+                index,
+                index_vals,
+                endpts,
+                colormap,
+                colormap_type,
                 **kwargs
             )
             return figure
 
         else:
             figure = scatterplot_theme(
-                dataframe, headers, diag, size, height, width, title,
-                index, index_vals, endpts, colormap, colormap_type,
+                dataframe,
+                headers,
+                diag,
+                size,
+                height,
+                width,
+                title,
+                index,
+                index_vals,
+                endpts,
+                colormap,
+                colormap_type,
                 **kwargs
             )
             return figure

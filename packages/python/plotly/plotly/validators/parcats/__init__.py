@@ -1,17 +1,14 @@
-
-
 import _plotly_utils.basevalidators
 
 
 class VisibleValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(self, plotly_name='visible', parent_name='parcats', **kwargs):
+    def __init__(self, plotly_name="visible", parent_name="parcats", **kwargs):
         super(VisibleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
-            values=kwargs.pop('values', [True, False, 'legendonly']),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
+            values=kwargs.pop("values", [True, False, "legendonly"]),
             **kwargs
         )
 
@@ -20,15 +17,12 @@ import _plotly_utils.basevalidators
 
 
 class UirevisionValidator(_plotly_utils.basevalidators.AnyValidator):
-
-    def __init__(
-        self, plotly_name='uirevision', parent_name='parcats', **kwargs
-    ):
+    def __init__(self, plotly_name="uirevision", parent_name="parcats", **kwargs):
         super(UirevisionValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -37,14 +31,13 @@ import _plotly_utils.basevalidators
 
 
 class UidValidator(_plotly_utils.basevalidators.StringValidator):
-
-    def __init__(self, plotly_name='uid', parent_name='parcats', **kwargs):
+    def __init__(self, plotly_name="uid", parent_name="parcats", **kwargs):
         super(UidValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop('anim', True),
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'info'),
+            anim=kwargs.pop("anim", True),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -53,16 +46,14 @@ import _plotly_utils.basevalidators
 
 
 class TickfontValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='tickfont', parent_name='parcats', **kwargs
-    ):
+    def __init__(self, plotly_name="tickfont", parent_name="parcats", **kwargs):
         super(TickfontValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Tickfont'),
+            data_class_str=kwargs.pop("data_class_str", "Tickfont"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             color
 
             family
@@ -83,7 +74,7 @@ class TickfontValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Narrow", "Raleway", "Times New Roman".
             size
 
-"""
+""",
             ),
             **kwargs
         )
@@ -93,14 +84,14 @@ import _plotly_utils.basevalidators
 
 
 class StreamValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='stream', parent_name='parcats', **kwargs):
+    def __init__(self, plotly_name="stream", parent_name="parcats", **kwargs):
         super(StreamValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Stream'),
+            data_class_str=kwargs.pop("data_class_str", "Stream"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             maxpoints
                 Sets the maximum number of points to keep on
                 the plots from an incoming stream. If
@@ -110,7 +101,7 @@ class StreamValidator(_plotly_utils.basevalidators.CompoundValidator):
                 The stream id number links a data trace on a
                 plot with a stream. See
                 https://plot.ly/settings for more details.
-"""
+""",
             ),
             **kwargs
         )
@@ -120,16 +111,13 @@ import _plotly_utils.basevalidators
 
 
 class SortpathsValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(
-        self, plotly_name='sortpaths', parent_name='parcats', **kwargs
-    ):
+    def __init__(self, plotly_name="sortpaths", parent_name="parcats", **kwargs):
         super(SortpathsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'info'),
-            values=kwargs.pop('values', ['forward', 'backward']),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "info"),
+            values=kwargs.pop("values", ["forward", "backward"]),
             **kwargs
         )
 
@@ -138,13 +126,12 @@ import _plotly_utils.basevalidators
 
 
 class NameValidator(_plotly_utils.basevalidators.StringValidator):
-
-    def __init__(self, plotly_name='name', parent_name='parcats', **kwargs):
+    def __init__(self, plotly_name="name", parent_name="parcats", **kwargs):
         super(NameValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'style'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "style"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -153,13 +140,12 @@ import _plotly_utils.basevalidators
 
 
 class MetasrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(self, plotly_name='metasrc', parent_name='parcats', **kwargs):
+    def __init__(self, plotly_name="metasrc", parent_name="parcats", **kwargs):
         super(MetasrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -168,14 +154,13 @@ import _plotly_utils.basevalidators
 
 
 class MetaValidator(_plotly_utils.basevalidators.AnyValidator):
-
-    def __init__(self, plotly_name='meta', parent_name='parcats', **kwargs):
+    def __init__(self, plotly_name="meta", parent_name="parcats", **kwargs):
         super(MetaValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'info'),
+            array_ok=kwargs.pop("array_ok", True),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -184,14 +169,14 @@ import _plotly_utils.basevalidators
 
 
 class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='line', parent_name='parcats', **kwargs):
+    def __init__(self, plotly_name="line", parent_name="parcats", **kwargs):
         super(LineValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Line'),
+            data_class_str=kwargs.pop("data_class_str", "Line"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             autocolorscale
                 Determines whether the colorscale is a default
                 palette (`autocolorscale: true`) or the palette
@@ -303,7 +288,7 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not a colorbar is
                 displayed for this trace. Has an effect only if
                 in `line.color`is set to a numerical array.
-"""
+""",
             ),
             **kwargs
         )
@@ -313,16 +298,14 @@ import _plotly_utils.basevalidators
 
 
 class LabelfontValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='labelfont', parent_name='parcats', **kwargs
-    ):
+    def __init__(self, plotly_name="labelfont", parent_name="parcats", **kwargs):
         super(LabelfontValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Labelfont'),
+            data_class_str=kwargs.pop("data_class_str", "Labelfont"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             color
 
             family
@@ -343,7 +326,7 @@ class LabelfontValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Narrow", "Raleway", "Times New Roman".
             size
 
-"""
+""",
             ),
             **kwargs
         )
@@ -353,15 +336,12 @@ import _plotly_utils.basevalidators
 
 
 class HovertemplateValidator(_plotly_utils.basevalidators.StringValidator):
-
-    def __init__(
-        self, plotly_name='hovertemplate', parent_name='parcats', **kwargs
-    ):
+    def __init__(self, plotly_name="hovertemplate", parent_name="parcats", **kwargs):
         super(HovertemplateValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -370,14 +350,13 @@ import _plotly_utils.basevalidators
 
 
 class HoveronValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(self, plotly_name='hoveron', parent_name='parcats', **kwargs):
+    def __init__(self, plotly_name="hoveron", parent_name="parcats", **kwargs):
         super(HoveronValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'info'),
-            values=kwargs.pop('values', ['category', 'color', 'dimension']),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "info"),
+            values=kwargs.pop("values", ["category", "color", "dimension"]),
             **kwargs
         )
 
@@ -386,18 +365,15 @@ import _plotly_utils.basevalidators
 
 
 class HoverinfoValidator(_plotly_utils.basevalidators.FlaglistValidator):
-
-    def __init__(
-        self, plotly_name='hoverinfo', parent_name='parcats', **kwargs
-    ):
+    def __init__(self, plotly_name="hoverinfo", parent_name="parcats", **kwargs):
         super(HoverinfoValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=kwargs.pop('array_ok', False),
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            extras=kwargs.pop('extras', ['all', 'none', 'skip']),
-            flags=kwargs.pop('flags', ['count', 'probability']),
-            role=kwargs.pop('role', 'info'),
+            array_ok=kwargs.pop("array_ok", False),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            extras=kwargs.pop("extras", ["all", "none", "skip"]),
+            flags=kwargs.pop("flags", ["count", "probability"]),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -406,14 +382,14 @@ import _plotly_utils.basevalidators
 
 
 class DomainValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='domain', parent_name='parcats', **kwargs):
+    def __init__(self, plotly_name="domain", parent_name="parcats", **kwargs):
         super(DomainValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Domain'),
+            data_class_str=kwargs.pop("data_class_str", "Domain"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             column
                 If there is a layout grid, use the domain for
                 this column in the grid for this parcats trace
@@ -427,7 +403,7 @@ class DomainValidator(_plotly_utils.basevalidators.CompoundValidator):
             y
                 Sets the vertical domain of this parcats trace
                 (in plot fraction).
-"""
+""",
             ),
             **kwargs
         )
@@ -437,16 +413,18 @@ import _plotly_utils.basevalidators
 
 
 class DimensionValidator(_plotly_utils.basevalidators.CompoundValidator):
-
     def __init__(
-        self, plotly_name='dimensiondefaults', parent_name='parcats', **kwargs
+        self, plotly_name="dimensiondefaults", parent_name="parcats", **kwargs
     ):
         super(DimensionValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Dimension'),
-            data_docs=kwargs.pop('data_docs', """
-"""),
+            data_class_str=kwargs.pop("data_class_str", "Dimension"),
+            data_docs=kwargs.pop(
+                "data_docs",
+                """
+""",
+            ),
             **kwargs
         )
 
@@ -455,16 +433,14 @@ import _plotly_utils.basevalidators
 
 
 class DimensionsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-
-    def __init__(
-        self, plotly_name='dimensions', parent_name='parcats', **kwargs
-    ):
+    def __init__(self, plotly_name="dimensions", parent_name="parcats", **kwargs):
         super(DimensionsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Dimension'),
+            data_class_str=kwargs.pop("data_class_str", "Dimension"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             categoryarray
                 Sets the order in which categories in this
                 dimension appear. Only has an effect if
@@ -515,7 +491,7 @@ class DimensionsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
             visible
                 Shows the dimension when set to `true` (the
                 default). Hides the dimension for `false`.
-"""
+""",
             ),
             **kwargs
         )
@@ -525,15 +501,12 @@ import _plotly_utils.basevalidators
 
 
 class CountssrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(
-        self, plotly_name='countssrc', parent_name='parcats', **kwargs
-    ):
+    def __init__(self, plotly_name="countssrc", parent_name="parcats", **kwargs):
         super(CountssrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -542,15 +515,14 @@ import _plotly_utils.basevalidators
 
 
 class CountsValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(self, plotly_name='counts', parent_name='parcats', **kwargs):
+    def __init__(self, plotly_name="counts", parent_name="parcats", **kwargs):
         super(CountsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            min=kwargs.pop('min', 0),
-            role=kwargs.pop('role', 'info'),
+            array_ok=kwargs.pop("array_ok", True),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            min=kwargs.pop("min", 0),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -559,15 +531,12 @@ import _plotly_utils.basevalidators
 
 
 class BundlecolorsValidator(_plotly_utils.basevalidators.BooleanValidator):
-
-    def __init__(
-        self, plotly_name='bundlecolors', parent_name='parcats', **kwargs
-    ):
+    def __init__(self, plotly_name="bundlecolors", parent_name="parcats", **kwargs):
         super(BundlecolorsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -576,17 +545,12 @@ import _plotly_utils.basevalidators
 
 
 class ArrangementValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(
-        self, plotly_name='arrangement', parent_name='parcats', **kwargs
-    ):
+    def __init__(self, plotly_name="arrangement", parent_name="parcats", **kwargs):
         super(ArrangementValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'style'),
-            values=kwargs.pop(
-                'values', ['perpendicular', 'freeform', 'fixed']
-            ),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "style"),
+            values=kwargs.pop("values", ["perpendicular", "freeform", "fixed"]),
             **kwargs
         )

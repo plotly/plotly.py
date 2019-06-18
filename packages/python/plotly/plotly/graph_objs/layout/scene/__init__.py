@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -23,11 +21,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['autorange']
+        return self["autorange"]
 
     @autorange.setter
     def autorange(self, val):
-        self['autorange'] = val
+        self["autorange"] = val
 
     # backgroundcolor
     # ---------------
@@ -82,11 +80,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['backgroundcolor']
+        return self["backgroundcolor"]
 
     @backgroundcolor.setter
     def backgroundcolor(self, val):
-        self['backgroundcolor'] = val
+        self["backgroundcolor"] = val
 
     # calendar
     # --------
@@ -109,11 +107,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['calendar']
+        return self["calendar"]
 
     @calendar.setter
     def calendar(self, val):
-        self['calendar'] = val
+        self["calendar"] = val
 
     # categoryarray
     # -------------
@@ -131,11 +129,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['categoryarray']
+        return self["categoryarray"]
 
     @categoryarray.setter
     def categoryarray(self, val):
-        self['categoryarray'] = val
+        self["categoryarray"] = val
 
     # categoryarraysrc
     # ----------------
@@ -151,11 +149,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['categoryarraysrc']
+        return self["categoryarraysrc"]
 
     @categoryarraysrc.setter
     def categoryarraysrc(self, val):
-        self['categoryarraysrc'] = val
+        self["categoryarraysrc"] = val
 
     # categoryorder
     # -------------
@@ -191,11 +189,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['categoryorder']
+        return self["categoryorder"]
 
     @categoryorder.setter
     def categoryorder(self, val):
-        self['categoryorder'] = val
+        self["categoryorder"] = val
 
     # color
     # -----
@@ -253,11 +251,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     # dtick
     # -----
@@ -291,11 +289,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['dtick']
+        return self["dtick"]
 
     @dtick.setter
     def dtick(self, val):
-        self['dtick'] = val
+        self["dtick"] = val
 
     # exponentformat
     # --------------
@@ -316,11 +314,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['exponentformat']
+        return self["exponentformat"]
 
     @exponentformat.setter
     def exponentformat(self, val):
-        self['exponentformat'] = val
+        self["exponentformat"] = val
 
     # gridcolor
     # ---------
@@ -375,11 +373,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['gridcolor']
+        return self["gridcolor"]
 
     @gridcolor.setter
     def gridcolor(self, val):
-        self['gridcolor'] = val
+        self["gridcolor"] = val
 
     # gridwidth
     # ---------
@@ -395,11 +393,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['gridwidth']
+        return self["gridwidth"]
 
     @gridwidth.setter
     def gridwidth(self, val):
-        self['gridwidth'] = val
+        self["gridwidth"] = val
 
     # hoverformat
     # -----------
@@ -424,11 +422,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['hoverformat']
+        return self["hoverformat"]
 
     @hoverformat.setter
     def hoverformat(self, val):
-        self['hoverformat'] = val
+        self["hoverformat"] = val
 
     # linecolor
     # ---------
@@ -483,11 +481,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['linecolor']
+        return self["linecolor"]
 
     @linecolor.setter
     def linecolor(self, val):
-        self['linecolor'] = val
+        self["linecolor"] = val
 
     # linewidth
     # ---------
@@ -503,11 +501,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['linewidth']
+        return self["linewidth"]
 
     @linewidth.setter
     def linewidth(self, val):
-        self['linewidth'] = val
+        self["linewidth"] = val
 
     # mirror
     # ------
@@ -529,11 +527,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['mirror']
+        return self["mirror"]
 
     @mirror.setter
     def mirror(self, val):
-        self['mirror'] = val
+        self["mirror"] = val
 
     # nticks
     # ------
@@ -553,11 +551,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self['nticks']
+        return self["nticks"]
 
     @nticks.setter
     def nticks(self, val):
-        self['nticks'] = val
+        self["nticks"] = val
 
     # range
     # -----
@@ -583,11 +581,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         list
         """
-        return self['range']
+        return self["range"]
 
     @range.setter
     def range(self, val):
-        self['range'] = val
+        self["range"] = val
 
     # rangemode
     # ---------
@@ -608,11 +606,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['rangemode']
+        return self["rangemode"]
 
     @rangemode.setter
     def rangemode(self, val):
-        self['rangemode'] = val
+        self["rangemode"] = val
 
     # separatethousands
     # -----------------
@@ -628,11 +626,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['separatethousands']
+        return self["separatethousands"]
 
     @separatethousands.setter
     def separatethousands(self, val):
-        self['separatethousands'] = val
+        self["separatethousands"] = val
 
     # showaxeslabels
     # --------------
@@ -648,11 +646,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showaxeslabels']
+        return self["showaxeslabels"]
 
     @showaxeslabels.setter
     def showaxeslabels(self, val):
-        self['showaxeslabels'] = val
+        self["showaxeslabels"] = val
 
     # showbackground
     # --------------
@@ -668,11 +666,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showbackground']
+        return self["showbackground"]
 
     @showbackground.setter
     def showbackground(self, val):
-        self['showbackground'] = val
+        self["showbackground"] = val
 
     # showexponent
     # ------------
@@ -692,11 +690,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['showexponent']
+        return self["showexponent"]
 
     @showexponent.setter
     def showexponent(self, val):
-        self['showexponent'] = val
+        self["showexponent"] = val
 
     # showgrid
     # --------
@@ -713,11 +711,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showgrid']
+        return self["showgrid"]
 
     @showgrid.setter
     def showgrid(self, val):
-        self['showgrid'] = val
+        self["showgrid"] = val
 
     # showline
     # --------
@@ -733,11 +731,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showline']
+        return self["showline"]
 
     @showline.setter
     def showline(self, val):
-        self['showline'] = val
+        self["showline"] = val
 
     # showspikes
     # ----------
@@ -754,11 +752,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showspikes']
+        return self["showspikes"]
 
     @showspikes.setter
     def showspikes(self, val):
-        self['showspikes'] = val
+        self["showspikes"] = val
 
     # showticklabels
     # --------------
@@ -774,11 +772,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showticklabels']
+        return self["showticklabels"]
 
     @showticklabels.setter
     def showticklabels(self, val):
-        self['showticklabels'] = val
+        self["showticklabels"] = val
 
     # showtickprefix
     # --------------
@@ -798,11 +796,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['showtickprefix']
+        return self["showtickprefix"]
 
     @showtickprefix.setter
     def showtickprefix(self, val):
-        self['showtickprefix'] = val
+        self["showtickprefix"] = val
 
     # showticksuffix
     # --------------
@@ -819,11 +817,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['showticksuffix']
+        return self["showticksuffix"]
 
     @showticksuffix.setter
     def showticksuffix(self, val):
-        self['showticksuffix'] = val
+        self["showticksuffix"] = val
 
     # spikecolor
     # ----------
@@ -878,11 +876,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['spikecolor']
+        return self["spikecolor"]
 
     @spikecolor.setter
     def spikecolor(self, val):
-        self['spikecolor'] = val
+        self["spikecolor"] = val
 
     # spikesides
     # ----------
@@ -899,11 +897,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['spikesides']
+        return self["spikesides"]
 
     @spikesides.setter
     def spikesides(self, val):
-        self['spikesides'] = val
+        self["spikesides"] = val
 
     # spikethickness
     # --------------
@@ -919,11 +917,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['spikethickness']
+        return self["spikethickness"]
 
     @spikethickness.setter
     def spikethickness(self, val):
-        self['spikethickness'] = val
+        self["spikethickness"] = val
 
     # tick0
     # -----
@@ -946,11 +944,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['tick0']
+        return self["tick0"]
 
     @tick0.setter
     def tick0(self, val):
-        self['tick0'] = val
+        self["tick0"] = val
 
     # tickangle
     # ---------
@@ -970,11 +968,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['tickangle']
+        return self["tickangle"]
 
     @tickangle.setter
     def tickangle(self, val):
-        self['tickangle'] = val
+        self["tickangle"] = val
 
     # tickcolor
     # ---------
@@ -1029,11 +1027,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['tickcolor']
+        return self["tickcolor"]
 
     @tickcolor.setter
     def tickcolor(self, val):
-        self['tickcolor'] = val
+        self["tickcolor"] = val
 
     # tickfont
     # --------
@@ -1074,11 +1072,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.zaxis.Tickfont
         """
-        return self['tickfont']
+        return self["tickfont"]
 
     @tickfont.setter
     def tickfont(self, val):
-        self['tickfont'] = val
+        self["tickfont"] = val
 
     # tickformat
     # ----------
@@ -1103,11 +1101,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['tickformat']
+        return self["tickformat"]
 
     @tickformat.setter
     def tickformat(self, val):
-        self['tickformat'] = val
+        self["tickformat"] = val
 
     # tickformatstops
     # ---------------
@@ -1160,11 +1158,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.scene.zaxis.Tickformatstop]
         """
-        return self['tickformatstops']
+        return self["tickformatstops"]
 
     @tickformatstops.setter
     def tickformatstops(self, val):
-        self['tickformatstops'] = val
+        self["tickformatstops"] = val
 
     # tickformatstopdefaults
     # ----------------------
@@ -1188,11 +1186,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.zaxis.Tickformatstop
         """
-        return self['tickformatstopdefaults']
+        return self["tickformatstopdefaults"]
 
     @tickformatstopdefaults.setter
     def tickformatstopdefaults(self, val):
-        self['tickformatstopdefaults'] = val
+        self["tickformatstopdefaults"] = val
 
     # ticklen
     # -------
@@ -1208,11 +1206,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['ticklen']
+        return self["ticklen"]
 
     @ticklen.setter
     def ticklen(self, val):
-        self['ticklen'] = val
+        self["ticklen"] = val
 
     # tickmode
     # --------
@@ -1235,11 +1233,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['tickmode']
+        return self["tickmode"]
 
     @tickmode.setter
     def tickmode(self, val):
-        self['tickmode'] = val
+        self["tickmode"] = val
 
     # tickprefix
     # ----------
@@ -1256,11 +1254,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['tickprefix']
+        return self["tickprefix"]
 
     @tickprefix.setter
     def tickprefix(self, val):
-        self['tickprefix'] = val
+        self["tickprefix"] = val
 
     # ticks
     # -----
@@ -1279,11 +1277,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['ticks']
+        return self["ticks"]
 
     @ticks.setter
     def ticks(self, val):
-        self['ticks'] = val
+        self["ticks"] = val
 
     # ticksuffix
     # ----------
@@ -1300,11 +1298,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['ticksuffix']
+        return self["ticksuffix"]
 
     @ticksuffix.setter
     def ticksuffix(self, val):
-        self['ticksuffix'] = val
+        self["ticksuffix"] = val
 
     # ticktext
     # --------
@@ -1322,11 +1320,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['ticktext']
+        return self["ticktext"]
 
     @ticktext.setter
     def ticktext(self, val):
-        self['ticktext'] = val
+        self["ticktext"] = val
 
     # ticktextsrc
     # -----------
@@ -1342,11 +1340,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['ticktextsrc']
+        return self["ticktextsrc"]
 
     @ticktextsrc.setter
     def ticktextsrc(self, val):
-        self['ticktextsrc'] = val
+        self["ticktextsrc"] = val
 
     # tickvals
     # --------
@@ -1363,11 +1361,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['tickvals']
+        return self["tickvals"]
 
     @tickvals.setter
     def tickvals(self, val):
-        self['tickvals'] = val
+        self["tickvals"] = val
 
     # tickvalssrc
     # -----------
@@ -1383,11 +1381,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['tickvalssrc']
+        return self["tickvalssrc"]
 
     @tickvalssrc.setter
     def tickvalssrc(self, val):
-        self['tickvalssrc'] = val
+        self["tickvalssrc"] = val
 
     # tickwidth
     # ---------
@@ -1403,11 +1401,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['tickwidth']
+        return self["tickwidth"]
 
     @tickwidth.setter
     def tickwidth(self, val):
-        self['tickwidth'] = val
+        self["tickwidth"] = val
 
     # title
     # -----
@@ -1437,11 +1435,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.zaxis.Title
         """
-        return self['title']
+        return self["title"]
 
     @title.setter
     def title(self, val):
-        self['title'] = val
+        self["title"] = val
 
     # titlefont
     # ---------
@@ -1484,11 +1482,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         
         """
-        return self['titlefont']
+        return self["titlefont"]
 
     @titlefont.setter
     def titlefont(self, val):
-        self['titlefont'] = val
+        self["titlefont"] = val
 
     # type
     # ----
@@ -1507,11 +1505,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['type']
+        return self["type"]
 
     @type.setter
     def type(self, val):
-        self['type'] = val
+        self["type"] = val
 
     # visible
     # -------
@@ -1529,11 +1527,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
     # zeroline
     # --------
@@ -1551,11 +1549,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['zeroline']
+        return self["zeroline"]
 
     @zeroline.setter
     def zeroline(self, val):
-        self['zeroline'] = val
+        self["zeroline"] = val
 
     # zerolinecolor
     # -------------
@@ -1610,11 +1608,11 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['zerolinecolor']
+        return self["zerolinecolor"]
 
     @zerolinecolor.setter
     def zerolinecolor(self, val):
-        self['zerolinecolor'] = val
+        self["zerolinecolor"] = val
 
     # zerolinewidth
     # -------------
@@ -1630,17 +1628,17 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['zerolinewidth']
+        return self["zerolinewidth"]
 
     @zerolinewidth.setter
     def zerolinewidth(self, val):
-        self['zerolinewidth'] = val
+        self["zerolinewidth"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.scene'
+        return "layout.scene"
 
     # Self properties description
     # ---------------------------
@@ -1903,7 +1901,7 @@ class ZAxis(_BaseLayoutHierarchyType):
             Sets the width (in px) of the zero line.
         """
 
-    _mapped_properties = {'titlefont': ('title', 'font')}
+    _mapped_properties = {"titlefont": ("title", "font")}
 
     def __init__(
         self,
@@ -2232,7 +2230,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         -------
         ZAxis
         """
-        super(ZAxis, self).__init__('zaxis')
+        super(ZAxis, self).__init__("zaxis")
 
         # Validate arg
         # ------------
@@ -2252,205 +2250,189 @@ an instance of plotly.graph_objs.layout.scene.ZAxis"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.scene import (zaxis as v_zaxis)
+        from plotly.validators.layout.scene import zaxis as v_zaxis
 
         # Initialize validators
         # ---------------------
-        self._validators['autorange'] = v_zaxis.AutorangeValidator()
-        self._validators['backgroundcolor'] = v_zaxis.BackgroundcolorValidator(
-        )
-        self._validators['calendar'] = v_zaxis.CalendarValidator()
-        self._validators['categoryarray'] = v_zaxis.CategoryarrayValidator()
-        self._validators['categoryarraysrc'
-                        ] = v_zaxis.CategoryarraysrcValidator()
-        self._validators['categoryorder'] = v_zaxis.CategoryorderValidator()
-        self._validators['color'] = v_zaxis.ColorValidator()
-        self._validators['dtick'] = v_zaxis.DtickValidator()
-        self._validators['exponentformat'] = v_zaxis.ExponentformatValidator()
-        self._validators['gridcolor'] = v_zaxis.GridcolorValidator()
-        self._validators['gridwidth'] = v_zaxis.GridwidthValidator()
-        self._validators['hoverformat'] = v_zaxis.HoverformatValidator()
-        self._validators['linecolor'] = v_zaxis.LinecolorValidator()
-        self._validators['linewidth'] = v_zaxis.LinewidthValidator()
-        self._validators['mirror'] = v_zaxis.MirrorValidator()
-        self._validators['nticks'] = v_zaxis.NticksValidator()
-        self._validators['range'] = v_zaxis.RangeValidator()
-        self._validators['rangemode'] = v_zaxis.RangemodeValidator()
-        self._validators['separatethousands'
-                        ] = v_zaxis.SeparatethousandsValidator()
-        self._validators['showaxeslabels'] = v_zaxis.ShowaxeslabelsValidator()
-        self._validators['showbackground'] = v_zaxis.ShowbackgroundValidator()
-        self._validators['showexponent'] = v_zaxis.ShowexponentValidator()
-        self._validators['showgrid'] = v_zaxis.ShowgridValidator()
-        self._validators['showline'] = v_zaxis.ShowlineValidator()
-        self._validators['showspikes'] = v_zaxis.ShowspikesValidator()
-        self._validators['showticklabels'] = v_zaxis.ShowticklabelsValidator()
-        self._validators['showtickprefix'] = v_zaxis.ShowtickprefixValidator()
-        self._validators['showticksuffix'] = v_zaxis.ShowticksuffixValidator()
-        self._validators['spikecolor'] = v_zaxis.SpikecolorValidator()
-        self._validators['spikesides'] = v_zaxis.SpikesidesValidator()
-        self._validators['spikethickness'] = v_zaxis.SpikethicknessValidator()
-        self._validators['tick0'] = v_zaxis.Tick0Validator()
-        self._validators['tickangle'] = v_zaxis.TickangleValidator()
-        self._validators['tickcolor'] = v_zaxis.TickcolorValidator()
-        self._validators['tickfont'] = v_zaxis.TickfontValidator()
-        self._validators['tickformat'] = v_zaxis.TickformatValidator()
-        self._validators['tickformatstops'] = v_zaxis.TickformatstopsValidator(
-        )
-        self._validators['tickformatstopdefaults'
-                        ] = v_zaxis.TickformatstopValidator()
-        self._validators['ticklen'] = v_zaxis.TicklenValidator()
-        self._validators['tickmode'] = v_zaxis.TickmodeValidator()
-        self._validators['tickprefix'] = v_zaxis.TickprefixValidator()
-        self._validators['ticks'] = v_zaxis.TicksValidator()
-        self._validators['ticksuffix'] = v_zaxis.TicksuffixValidator()
-        self._validators['ticktext'] = v_zaxis.TicktextValidator()
-        self._validators['ticktextsrc'] = v_zaxis.TicktextsrcValidator()
-        self._validators['tickvals'] = v_zaxis.TickvalsValidator()
-        self._validators['tickvalssrc'] = v_zaxis.TickvalssrcValidator()
-        self._validators['tickwidth'] = v_zaxis.TickwidthValidator()
-        self._validators['title'] = v_zaxis.TitleValidator()
-        self._validators['type'] = v_zaxis.TypeValidator()
-        self._validators['visible'] = v_zaxis.VisibleValidator()
-        self._validators['zeroline'] = v_zaxis.ZerolineValidator()
-        self._validators['zerolinecolor'] = v_zaxis.ZerolinecolorValidator()
-        self._validators['zerolinewidth'] = v_zaxis.ZerolinewidthValidator()
+        self._validators["autorange"] = v_zaxis.AutorangeValidator()
+        self._validators["backgroundcolor"] = v_zaxis.BackgroundcolorValidator()
+        self._validators["calendar"] = v_zaxis.CalendarValidator()
+        self._validators["categoryarray"] = v_zaxis.CategoryarrayValidator()
+        self._validators["categoryarraysrc"] = v_zaxis.CategoryarraysrcValidator()
+        self._validators["categoryorder"] = v_zaxis.CategoryorderValidator()
+        self._validators["color"] = v_zaxis.ColorValidator()
+        self._validators["dtick"] = v_zaxis.DtickValidator()
+        self._validators["exponentformat"] = v_zaxis.ExponentformatValidator()
+        self._validators["gridcolor"] = v_zaxis.GridcolorValidator()
+        self._validators["gridwidth"] = v_zaxis.GridwidthValidator()
+        self._validators["hoverformat"] = v_zaxis.HoverformatValidator()
+        self._validators["linecolor"] = v_zaxis.LinecolorValidator()
+        self._validators["linewidth"] = v_zaxis.LinewidthValidator()
+        self._validators["mirror"] = v_zaxis.MirrorValidator()
+        self._validators["nticks"] = v_zaxis.NticksValidator()
+        self._validators["range"] = v_zaxis.RangeValidator()
+        self._validators["rangemode"] = v_zaxis.RangemodeValidator()
+        self._validators["separatethousands"] = v_zaxis.SeparatethousandsValidator()
+        self._validators["showaxeslabels"] = v_zaxis.ShowaxeslabelsValidator()
+        self._validators["showbackground"] = v_zaxis.ShowbackgroundValidator()
+        self._validators["showexponent"] = v_zaxis.ShowexponentValidator()
+        self._validators["showgrid"] = v_zaxis.ShowgridValidator()
+        self._validators["showline"] = v_zaxis.ShowlineValidator()
+        self._validators["showspikes"] = v_zaxis.ShowspikesValidator()
+        self._validators["showticklabels"] = v_zaxis.ShowticklabelsValidator()
+        self._validators["showtickprefix"] = v_zaxis.ShowtickprefixValidator()
+        self._validators["showticksuffix"] = v_zaxis.ShowticksuffixValidator()
+        self._validators["spikecolor"] = v_zaxis.SpikecolorValidator()
+        self._validators["spikesides"] = v_zaxis.SpikesidesValidator()
+        self._validators["spikethickness"] = v_zaxis.SpikethicknessValidator()
+        self._validators["tick0"] = v_zaxis.Tick0Validator()
+        self._validators["tickangle"] = v_zaxis.TickangleValidator()
+        self._validators["tickcolor"] = v_zaxis.TickcolorValidator()
+        self._validators["tickfont"] = v_zaxis.TickfontValidator()
+        self._validators["tickformat"] = v_zaxis.TickformatValidator()
+        self._validators["tickformatstops"] = v_zaxis.TickformatstopsValidator()
+        self._validators["tickformatstopdefaults"] = v_zaxis.TickformatstopValidator()
+        self._validators["ticklen"] = v_zaxis.TicklenValidator()
+        self._validators["tickmode"] = v_zaxis.TickmodeValidator()
+        self._validators["tickprefix"] = v_zaxis.TickprefixValidator()
+        self._validators["ticks"] = v_zaxis.TicksValidator()
+        self._validators["ticksuffix"] = v_zaxis.TicksuffixValidator()
+        self._validators["ticktext"] = v_zaxis.TicktextValidator()
+        self._validators["ticktextsrc"] = v_zaxis.TicktextsrcValidator()
+        self._validators["tickvals"] = v_zaxis.TickvalsValidator()
+        self._validators["tickvalssrc"] = v_zaxis.TickvalssrcValidator()
+        self._validators["tickwidth"] = v_zaxis.TickwidthValidator()
+        self._validators["title"] = v_zaxis.TitleValidator()
+        self._validators["type"] = v_zaxis.TypeValidator()
+        self._validators["visible"] = v_zaxis.VisibleValidator()
+        self._validators["zeroline"] = v_zaxis.ZerolineValidator()
+        self._validators["zerolinecolor"] = v_zaxis.ZerolinecolorValidator()
+        self._validators["zerolinewidth"] = v_zaxis.ZerolinewidthValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('autorange', None)
-        self['autorange'] = autorange if autorange is not None else _v
-        _v = arg.pop('backgroundcolor', None)
-        self['backgroundcolor'
-            ] = backgroundcolor if backgroundcolor is not None else _v
-        _v = arg.pop('calendar', None)
-        self['calendar'] = calendar if calendar is not None else _v
-        _v = arg.pop('categoryarray', None)
-        self['categoryarray'
-            ] = categoryarray if categoryarray is not None else _v
-        _v = arg.pop('categoryarraysrc', None)
-        self['categoryarraysrc'
-            ] = categoryarraysrc if categoryarraysrc is not None else _v
-        _v = arg.pop('categoryorder', None)
-        self['categoryorder'
-            ] = categoryorder if categoryorder is not None else _v
-        _v = arg.pop('color', None)
-        self['color'] = color if color is not None else _v
-        _v = arg.pop('dtick', None)
-        self['dtick'] = dtick if dtick is not None else _v
-        _v = arg.pop('exponentformat', None)
-        self['exponentformat'
-            ] = exponentformat if exponentformat is not None else _v
-        _v = arg.pop('gridcolor', None)
-        self['gridcolor'] = gridcolor if gridcolor is not None else _v
-        _v = arg.pop('gridwidth', None)
-        self['gridwidth'] = gridwidth if gridwidth is not None else _v
-        _v = arg.pop('hoverformat', None)
-        self['hoverformat'] = hoverformat if hoverformat is not None else _v
-        _v = arg.pop('linecolor', None)
-        self['linecolor'] = linecolor if linecolor is not None else _v
-        _v = arg.pop('linewidth', None)
-        self['linewidth'] = linewidth if linewidth is not None else _v
-        _v = arg.pop('mirror', None)
-        self['mirror'] = mirror if mirror is not None else _v
-        _v = arg.pop('nticks', None)
-        self['nticks'] = nticks if nticks is not None else _v
-        _v = arg.pop('range', None)
-        self['range'] = range if range is not None else _v
-        _v = arg.pop('rangemode', None)
-        self['rangemode'] = rangemode if rangemode is not None else _v
-        _v = arg.pop('separatethousands', None)
-        self['separatethousands'
-            ] = separatethousands if separatethousands is not None else _v
-        _v = arg.pop('showaxeslabels', None)
-        self['showaxeslabels'
-            ] = showaxeslabels if showaxeslabels is not None else _v
-        _v = arg.pop('showbackground', None)
-        self['showbackground'
-            ] = showbackground if showbackground is not None else _v
-        _v = arg.pop('showexponent', None)
-        self['showexponent'] = showexponent if showexponent is not None else _v
-        _v = arg.pop('showgrid', None)
-        self['showgrid'] = showgrid if showgrid is not None else _v
-        _v = arg.pop('showline', None)
-        self['showline'] = showline if showline is not None else _v
-        _v = arg.pop('showspikes', None)
-        self['showspikes'] = showspikes if showspikes is not None else _v
-        _v = arg.pop('showticklabels', None)
-        self['showticklabels'
-            ] = showticklabels if showticklabels is not None else _v
-        _v = arg.pop('showtickprefix', None)
-        self['showtickprefix'
-            ] = showtickprefix if showtickprefix is not None else _v
-        _v = arg.pop('showticksuffix', None)
-        self['showticksuffix'
-            ] = showticksuffix if showticksuffix is not None else _v
-        _v = arg.pop('spikecolor', None)
-        self['spikecolor'] = spikecolor if spikecolor is not None else _v
-        _v = arg.pop('spikesides', None)
-        self['spikesides'] = spikesides if spikesides is not None else _v
-        _v = arg.pop('spikethickness', None)
-        self['spikethickness'
-            ] = spikethickness if spikethickness is not None else _v
-        _v = arg.pop('tick0', None)
-        self['tick0'] = tick0 if tick0 is not None else _v
-        _v = arg.pop('tickangle', None)
-        self['tickangle'] = tickangle if tickangle is not None else _v
-        _v = arg.pop('tickcolor', None)
-        self['tickcolor'] = tickcolor if tickcolor is not None else _v
-        _v = arg.pop('tickfont', None)
-        self['tickfont'] = tickfont if tickfont is not None else _v
-        _v = arg.pop('tickformat', None)
-        self['tickformat'] = tickformat if tickformat is not None else _v
-        _v = arg.pop('tickformatstops', None)
-        self['tickformatstops'
-            ] = tickformatstops if tickformatstops is not None else _v
-        _v = arg.pop('tickformatstopdefaults', None)
-        self[
-            'tickformatstopdefaults'
-        ] = tickformatstopdefaults if tickformatstopdefaults is not None else _v
-        _v = arg.pop('ticklen', None)
-        self['ticklen'] = ticklen if ticklen is not None else _v
-        _v = arg.pop('tickmode', None)
-        self['tickmode'] = tickmode if tickmode is not None else _v
-        _v = arg.pop('tickprefix', None)
-        self['tickprefix'] = tickprefix if tickprefix is not None else _v
-        _v = arg.pop('ticks', None)
-        self['ticks'] = ticks if ticks is not None else _v
-        _v = arg.pop('ticksuffix', None)
-        self['ticksuffix'] = ticksuffix if ticksuffix is not None else _v
-        _v = arg.pop('ticktext', None)
-        self['ticktext'] = ticktext if ticktext is not None else _v
-        _v = arg.pop('ticktextsrc', None)
-        self['ticktextsrc'] = ticktextsrc if ticktextsrc is not None else _v
-        _v = arg.pop('tickvals', None)
-        self['tickvals'] = tickvals if tickvals is not None else _v
-        _v = arg.pop('tickvalssrc', None)
-        self['tickvalssrc'] = tickvalssrc if tickvalssrc is not None else _v
-        _v = arg.pop('tickwidth', None)
-        self['tickwidth'] = tickwidth if tickwidth is not None else _v
-        _v = arg.pop('title', None)
-        self['title'] = title if title is not None else _v
-        _v = arg.pop('titlefont', None)
+        _v = arg.pop("autorange", None)
+        self["autorange"] = autorange if autorange is not None else _v
+        _v = arg.pop("backgroundcolor", None)
+        self["backgroundcolor"] = backgroundcolor if backgroundcolor is not None else _v
+        _v = arg.pop("calendar", None)
+        self["calendar"] = calendar if calendar is not None else _v
+        _v = arg.pop("categoryarray", None)
+        self["categoryarray"] = categoryarray if categoryarray is not None else _v
+        _v = arg.pop("categoryarraysrc", None)
+        self["categoryarraysrc"] = (
+            categoryarraysrc if categoryarraysrc is not None else _v
+        )
+        _v = arg.pop("categoryorder", None)
+        self["categoryorder"] = categoryorder if categoryorder is not None else _v
+        _v = arg.pop("color", None)
+        self["color"] = color if color is not None else _v
+        _v = arg.pop("dtick", None)
+        self["dtick"] = dtick if dtick is not None else _v
+        _v = arg.pop("exponentformat", None)
+        self["exponentformat"] = exponentformat if exponentformat is not None else _v
+        _v = arg.pop("gridcolor", None)
+        self["gridcolor"] = gridcolor if gridcolor is not None else _v
+        _v = arg.pop("gridwidth", None)
+        self["gridwidth"] = gridwidth if gridwidth is not None else _v
+        _v = arg.pop("hoverformat", None)
+        self["hoverformat"] = hoverformat if hoverformat is not None else _v
+        _v = arg.pop("linecolor", None)
+        self["linecolor"] = linecolor if linecolor is not None else _v
+        _v = arg.pop("linewidth", None)
+        self["linewidth"] = linewidth if linewidth is not None else _v
+        _v = arg.pop("mirror", None)
+        self["mirror"] = mirror if mirror is not None else _v
+        _v = arg.pop("nticks", None)
+        self["nticks"] = nticks if nticks is not None else _v
+        _v = arg.pop("range", None)
+        self["range"] = range if range is not None else _v
+        _v = arg.pop("rangemode", None)
+        self["rangemode"] = rangemode if rangemode is not None else _v
+        _v = arg.pop("separatethousands", None)
+        self["separatethousands"] = (
+            separatethousands if separatethousands is not None else _v
+        )
+        _v = arg.pop("showaxeslabels", None)
+        self["showaxeslabels"] = showaxeslabels if showaxeslabels is not None else _v
+        _v = arg.pop("showbackground", None)
+        self["showbackground"] = showbackground if showbackground is not None else _v
+        _v = arg.pop("showexponent", None)
+        self["showexponent"] = showexponent if showexponent is not None else _v
+        _v = arg.pop("showgrid", None)
+        self["showgrid"] = showgrid if showgrid is not None else _v
+        _v = arg.pop("showline", None)
+        self["showline"] = showline if showline is not None else _v
+        _v = arg.pop("showspikes", None)
+        self["showspikes"] = showspikes if showspikes is not None else _v
+        _v = arg.pop("showticklabels", None)
+        self["showticklabels"] = showticklabels if showticklabels is not None else _v
+        _v = arg.pop("showtickprefix", None)
+        self["showtickprefix"] = showtickprefix if showtickprefix is not None else _v
+        _v = arg.pop("showticksuffix", None)
+        self["showticksuffix"] = showticksuffix if showticksuffix is not None else _v
+        _v = arg.pop("spikecolor", None)
+        self["spikecolor"] = spikecolor if spikecolor is not None else _v
+        _v = arg.pop("spikesides", None)
+        self["spikesides"] = spikesides if spikesides is not None else _v
+        _v = arg.pop("spikethickness", None)
+        self["spikethickness"] = spikethickness if spikethickness is not None else _v
+        _v = arg.pop("tick0", None)
+        self["tick0"] = tick0 if tick0 is not None else _v
+        _v = arg.pop("tickangle", None)
+        self["tickangle"] = tickangle if tickangle is not None else _v
+        _v = arg.pop("tickcolor", None)
+        self["tickcolor"] = tickcolor if tickcolor is not None else _v
+        _v = arg.pop("tickfont", None)
+        self["tickfont"] = tickfont if tickfont is not None else _v
+        _v = arg.pop("tickformat", None)
+        self["tickformat"] = tickformat if tickformat is not None else _v
+        _v = arg.pop("tickformatstops", None)
+        self["tickformatstops"] = tickformatstops if tickformatstops is not None else _v
+        _v = arg.pop("tickformatstopdefaults", None)
+        self["tickformatstopdefaults"] = (
+            tickformatstopdefaults if tickformatstopdefaults is not None else _v
+        )
+        _v = arg.pop("ticklen", None)
+        self["ticklen"] = ticklen if ticklen is not None else _v
+        _v = arg.pop("tickmode", None)
+        self["tickmode"] = tickmode if tickmode is not None else _v
+        _v = arg.pop("tickprefix", None)
+        self["tickprefix"] = tickprefix if tickprefix is not None else _v
+        _v = arg.pop("ticks", None)
+        self["ticks"] = ticks if ticks is not None else _v
+        _v = arg.pop("ticksuffix", None)
+        self["ticksuffix"] = ticksuffix if ticksuffix is not None else _v
+        _v = arg.pop("ticktext", None)
+        self["ticktext"] = ticktext if ticktext is not None else _v
+        _v = arg.pop("ticktextsrc", None)
+        self["ticktextsrc"] = ticktextsrc if ticktextsrc is not None else _v
+        _v = arg.pop("tickvals", None)
+        self["tickvals"] = tickvals if tickvals is not None else _v
+        _v = arg.pop("tickvalssrc", None)
+        self["tickvalssrc"] = tickvalssrc if tickvalssrc is not None else _v
+        _v = arg.pop("tickwidth", None)
+        self["tickwidth"] = tickwidth if tickwidth is not None else _v
+        _v = arg.pop("title", None)
+        self["title"] = title if title is not None else _v
+        _v = arg.pop("titlefont", None)
         _v = titlefont if titlefont is not None else _v
         if _v is not None:
-            self['titlefont'] = _v
-        _v = arg.pop('type', None)
-        self['type'] = type if type is not None else _v
-        _v = arg.pop('visible', None)
-        self['visible'] = visible if visible is not None else _v
-        _v = arg.pop('zeroline', None)
-        self['zeroline'] = zeroline if zeroline is not None else _v
-        _v = arg.pop('zerolinecolor', None)
-        self['zerolinecolor'
-            ] = zerolinecolor if zerolinecolor is not None else _v
-        _v = arg.pop('zerolinewidth', None)
-        self['zerolinewidth'
-            ] = zerolinewidth if zerolinewidth is not None else _v
+            self["titlefont"] = _v
+        _v = arg.pop("type", None)
+        self["type"] = type if type is not None else _v
+        _v = arg.pop("visible", None)
+        self["visible"] = visible if visible is not None else _v
+        _v = arg.pop("zeroline", None)
+        self["zeroline"] = zeroline if zeroline is not None else _v
+        _v = arg.pop("zerolinecolor", None)
+        self["zerolinecolor"] = zerolinecolor if zerolinecolor is not None else _v
+        _v = arg.pop("zerolinewidth", None)
+        self["zerolinewidth"] = zerolinewidth if zerolinewidth is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -2484,11 +2466,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['autorange']
+        return self["autorange"]
 
     @autorange.setter
     def autorange(self, val):
-        self['autorange'] = val
+        self["autorange"] = val
 
     # backgroundcolor
     # ---------------
@@ -2543,11 +2525,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['backgroundcolor']
+        return self["backgroundcolor"]
 
     @backgroundcolor.setter
     def backgroundcolor(self, val):
-        self['backgroundcolor'] = val
+        self["backgroundcolor"] = val
 
     # calendar
     # --------
@@ -2570,11 +2552,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['calendar']
+        return self["calendar"]
 
     @calendar.setter
     def calendar(self, val):
-        self['calendar'] = val
+        self["calendar"] = val
 
     # categoryarray
     # -------------
@@ -2592,11 +2574,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['categoryarray']
+        return self["categoryarray"]
 
     @categoryarray.setter
     def categoryarray(self, val):
-        self['categoryarray'] = val
+        self["categoryarray"] = val
 
     # categoryarraysrc
     # ----------------
@@ -2612,11 +2594,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['categoryarraysrc']
+        return self["categoryarraysrc"]
 
     @categoryarraysrc.setter
     def categoryarraysrc(self, val):
-        self['categoryarraysrc'] = val
+        self["categoryarraysrc"] = val
 
     # categoryorder
     # -------------
@@ -2652,11 +2634,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['categoryorder']
+        return self["categoryorder"]
 
     @categoryorder.setter
     def categoryorder(self, val):
-        self['categoryorder'] = val
+        self["categoryorder"] = val
 
     # color
     # -----
@@ -2714,11 +2696,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     # dtick
     # -----
@@ -2752,11 +2734,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['dtick']
+        return self["dtick"]
 
     @dtick.setter
     def dtick(self, val):
-        self['dtick'] = val
+        self["dtick"] = val
 
     # exponentformat
     # --------------
@@ -2777,11 +2759,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['exponentformat']
+        return self["exponentformat"]
 
     @exponentformat.setter
     def exponentformat(self, val):
-        self['exponentformat'] = val
+        self["exponentformat"] = val
 
     # gridcolor
     # ---------
@@ -2836,11 +2818,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['gridcolor']
+        return self["gridcolor"]
 
     @gridcolor.setter
     def gridcolor(self, val):
-        self['gridcolor'] = val
+        self["gridcolor"] = val
 
     # gridwidth
     # ---------
@@ -2856,11 +2838,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['gridwidth']
+        return self["gridwidth"]
 
     @gridwidth.setter
     def gridwidth(self, val):
-        self['gridwidth'] = val
+        self["gridwidth"] = val
 
     # hoverformat
     # -----------
@@ -2885,11 +2867,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['hoverformat']
+        return self["hoverformat"]
 
     @hoverformat.setter
     def hoverformat(self, val):
-        self['hoverformat'] = val
+        self["hoverformat"] = val
 
     # linecolor
     # ---------
@@ -2944,11 +2926,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['linecolor']
+        return self["linecolor"]
 
     @linecolor.setter
     def linecolor(self, val):
-        self['linecolor'] = val
+        self["linecolor"] = val
 
     # linewidth
     # ---------
@@ -2964,11 +2946,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['linewidth']
+        return self["linewidth"]
 
     @linewidth.setter
     def linewidth(self, val):
-        self['linewidth'] = val
+        self["linewidth"] = val
 
     # mirror
     # ------
@@ -2990,11 +2972,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['mirror']
+        return self["mirror"]
 
     @mirror.setter
     def mirror(self, val):
-        self['mirror'] = val
+        self["mirror"] = val
 
     # nticks
     # ------
@@ -3014,11 +2996,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self['nticks']
+        return self["nticks"]
 
     @nticks.setter
     def nticks(self, val):
-        self['nticks'] = val
+        self["nticks"] = val
 
     # range
     # -----
@@ -3044,11 +3026,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         list
         """
-        return self['range']
+        return self["range"]
 
     @range.setter
     def range(self, val):
-        self['range'] = val
+        self["range"] = val
 
     # rangemode
     # ---------
@@ -3069,11 +3051,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['rangemode']
+        return self["rangemode"]
 
     @rangemode.setter
     def rangemode(self, val):
-        self['rangemode'] = val
+        self["rangemode"] = val
 
     # separatethousands
     # -----------------
@@ -3089,11 +3071,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['separatethousands']
+        return self["separatethousands"]
 
     @separatethousands.setter
     def separatethousands(self, val):
-        self['separatethousands'] = val
+        self["separatethousands"] = val
 
     # showaxeslabels
     # --------------
@@ -3109,11 +3091,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showaxeslabels']
+        return self["showaxeslabels"]
 
     @showaxeslabels.setter
     def showaxeslabels(self, val):
-        self['showaxeslabels'] = val
+        self["showaxeslabels"] = val
 
     # showbackground
     # --------------
@@ -3129,11 +3111,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showbackground']
+        return self["showbackground"]
 
     @showbackground.setter
     def showbackground(self, val):
-        self['showbackground'] = val
+        self["showbackground"] = val
 
     # showexponent
     # ------------
@@ -3153,11 +3135,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['showexponent']
+        return self["showexponent"]
 
     @showexponent.setter
     def showexponent(self, val):
-        self['showexponent'] = val
+        self["showexponent"] = val
 
     # showgrid
     # --------
@@ -3174,11 +3156,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showgrid']
+        return self["showgrid"]
 
     @showgrid.setter
     def showgrid(self, val):
-        self['showgrid'] = val
+        self["showgrid"] = val
 
     # showline
     # --------
@@ -3194,11 +3176,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showline']
+        return self["showline"]
 
     @showline.setter
     def showline(self, val):
-        self['showline'] = val
+        self["showline"] = val
 
     # showspikes
     # ----------
@@ -3215,11 +3197,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showspikes']
+        return self["showspikes"]
 
     @showspikes.setter
     def showspikes(self, val):
-        self['showspikes'] = val
+        self["showspikes"] = val
 
     # showticklabels
     # --------------
@@ -3235,11 +3217,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showticklabels']
+        return self["showticklabels"]
 
     @showticklabels.setter
     def showticklabels(self, val):
-        self['showticklabels'] = val
+        self["showticklabels"] = val
 
     # showtickprefix
     # --------------
@@ -3259,11 +3241,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['showtickprefix']
+        return self["showtickprefix"]
 
     @showtickprefix.setter
     def showtickprefix(self, val):
-        self['showtickprefix'] = val
+        self["showtickprefix"] = val
 
     # showticksuffix
     # --------------
@@ -3280,11 +3262,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['showticksuffix']
+        return self["showticksuffix"]
 
     @showticksuffix.setter
     def showticksuffix(self, val):
-        self['showticksuffix'] = val
+        self["showticksuffix"] = val
 
     # spikecolor
     # ----------
@@ -3339,11 +3321,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['spikecolor']
+        return self["spikecolor"]
 
     @spikecolor.setter
     def spikecolor(self, val):
-        self['spikecolor'] = val
+        self["spikecolor"] = val
 
     # spikesides
     # ----------
@@ -3360,11 +3342,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['spikesides']
+        return self["spikesides"]
 
     @spikesides.setter
     def spikesides(self, val):
-        self['spikesides'] = val
+        self["spikesides"] = val
 
     # spikethickness
     # --------------
@@ -3380,11 +3362,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['spikethickness']
+        return self["spikethickness"]
 
     @spikethickness.setter
     def spikethickness(self, val):
-        self['spikethickness'] = val
+        self["spikethickness"] = val
 
     # tick0
     # -----
@@ -3407,11 +3389,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['tick0']
+        return self["tick0"]
 
     @tick0.setter
     def tick0(self, val):
-        self['tick0'] = val
+        self["tick0"] = val
 
     # tickangle
     # ---------
@@ -3431,11 +3413,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['tickangle']
+        return self["tickangle"]
 
     @tickangle.setter
     def tickangle(self, val):
-        self['tickangle'] = val
+        self["tickangle"] = val
 
     # tickcolor
     # ---------
@@ -3490,11 +3472,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['tickcolor']
+        return self["tickcolor"]
 
     @tickcolor.setter
     def tickcolor(self, val):
-        self['tickcolor'] = val
+        self["tickcolor"] = val
 
     # tickfont
     # --------
@@ -3535,11 +3517,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.yaxis.Tickfont
         """
-        return self['tickfont']
+        return self["tickfont"]
 
     @tickfont.setter
     def tickfont(self, val):
-        self['tickfont'] = val
+        self["tickfont"] = val
 
     # tickformat
     # ----------
@@ -3564,11 +3546,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['tickformat']
+        return self["tickformat"]
 
     @tickformat.setter
     def tickformat(self, val):
-        self['tickformat'] = val
+        self["tickformat"] = val
 
     # tickformatstops
     # ---------------
@@ -3621,11 +3603,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.scene.yaxis.Tickformatstop]
         """
-        return self['tickformatstops']
+        return self["tickformatstops"]
 
     @tickformatstops.setter
     def tickformatstops(self, val):
-        self['tickformatstops'] = val
+        self["tickformatstops"] = val
 
     # tickformatstopdefaults
     # ----------------------
@@ -3649,11 +3631,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.yaxis.Tickformatstop
         """
-        return self['tickformatstopdefaults']
+        return self["tickformatstopdefaults"]
 
     @tickformatstopdefaults.setter
     def tickformatstopdefaults(self, val):
-        self['tickformatstopdefaults'] = val
+        self["tickformatstopdefaults"] = val
 
     # ticklen
     # -------
@@ -3669,11 +3651,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['ticklen']
+        return self["ticklen"]
 
     @ticklen.setter
     def ticklen(self, val):
-        self['ticklen'] = val
+        self["ticklen"] = val
 
     # tickmode
     # --------
@@ -3696,11 +3678,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['tickmode']
+        return self["tickmode"]
 
     @tickmode.setter
     def tickmode(self, val):
-        self['tickmode'] = val
+        self["tickmode"] = val
 
     # tickprefix
     # ----------
@@ -3717,11 +3699,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['tickprefix']
+        return self["tickprefix"]
 
     @tickprefix.setter
     def tickprefix(self, val):
-        self['tickprefix'] = val
+        self["tickprefix"] = val
 
     # ticks
     # -----
@@ -3740,11 +3722,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['ticks']
+        return self["ticks"]
 
     @ticks.setter
     def ticks(self, val):
-        self['ticks'] = val
+        self["ticks"] = val
 
     # ticksuffix
     # ----------
@@ -3761,11 +3743,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['ticksuffix']
+        return self["ticksuffix"]
 
     @ticksuffix.setter
     def ticksuffix(self, val):
-        self['ticksuffix'] = val
+        self["ticksuffix"] = val
 
     # ticktext
     # --------
@@ -3783,11 +3765,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['ticktext']
+        return self["ticktext"]
 
     @ticktext.setter
     def ticktext(self, val):
-        self['ticktext'] = val
+        self["ticktext"] = val
 
     # ticktextsrc
     # -----------
@@ -3803,11 +3785,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['ticktextsrc']
+        return self["ticktextsrc"]
 
     @ticktextsrc.setter
     def ticktextsrc(self, val):
-        self['ticktextsrc'] = val
+        self["ticktextsrc"] = val
 
     # tickvals
     # --------
@@ -3824,11 +3806,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['tickvals']
+        return self["tickvals"]
 
     @tickvals.setter
     def tickvals(self, val):
-        self['tickvals'] = val
+        self["tickvals"] = val
 
     # tickvalssrc
     # -----------
@@ -3844,11 +3826,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['tickvalssrc']
+        return self["tickvalssrc"]
 
     @tickvalssrc.setter
     def tickvalssrc(self, val):
-        self['tickvalssrc'] = val
+        self["tickvalssrc"] = val
 
     # tickwidth
     # ---------
@@ -3864,11 +3846,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['tickwidth']
+        return self["tickwidth"]
 
     @tickwidth.setter
     def tickwidth(self, val):
-        self['tickwidth'] = val
+        self["tickwidth"] = val
 
     # title
     # -----
@@ -3898,11 +3880,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.yaxis.Title
         """
-        return self['title']
+        return self["title"]
 
     @title.setter
     def title(self, val):
-        self['title'] = val
+        self["title"] = val
 
     # titlefont
     # ---------
@@ -3945,11 +3927,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         
         """
-        return self['titlefont']
+        return self["titlefont"]
 
     @titlefont.setter
     def titlefont(self, val):
-        self['titlefont'] = val
+        self["titlefont"] = val
 
     # type
     # ----
@@ -3968,11 +3950,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['type']
+        return self["type"]
 
     @type.setter
     def type(self, val):
-        self['type'] = val
+        self["type"] = val
 
     # visible
     # -------
@@ -3990,11 +3972,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
     # zeroline
     # --------
@@ -4012,11 +3994,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['zeroline']
+        return self["zeroline"]
 
     @zeroline.setter
     def zeroline(self, val):
-        self['zeroline'] = val
+        self["zeroline"] = val
 
     # zerolinecolor
     # -------------
@@ -4071,11 +4053,11 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['zerolinecolor']
+        return self["zerolinecolor"]
 
     @zerolinecolor.setter
     def zerolinecolor(self, val):
-        self['zerolinecolor'] = val
+        self["zerolinecolor"] = val
 
     # zerolinewidth
     # -------------
@@ -4091,17 +4073,17 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['zerolinewidth']
+        return self["zerolinewidth"]
 
     @zerolinewidth.setter
     def zerolinewidth(self, val):
-        self['zerolinewidth'] = val
+        self["zerolinewidth"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.scene'
+        return "layout.scene"
 
     # Self properties description
     # ---------------------------
@@ -4364,7 +4346,7 @@ class YAxis(_BaseLayoutHierarchyType):
             Sets the width (in px) of the zero line.
         """
 
-    _mapped_properties = {'titlefont': ('title', 'font')}
+    _mapped_properties = {"titlefont": ("title", "font")}
 
     def __init__(
         self,
@@ -4693,7 +4675,7 @@ class YAxis(_BaseLayoutHierarchyType):
         -------
         YAxis
         """
-        super(YAxis, self).__init__('yaxis')
+        super(YAxis, self).__init__("yaxis")
 
         # Validate arg
         # ------------
@@ -4713,205 +4695,189 @@ an instance of plotly.graph_objs.layout.scene.YAxis"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.scene import (yaxis as v_yaxis)
+        from plotly.validators.layout.scene import yaxis as v_yaxis
 
         # Initialize validators
         # ---------------------
-        self._validators['autorange'] = v_yaxis.AutorangeValidator()
-        self._validators['backgroundcolor'] = v_yaxis.BackgroundcolorValidator(
-        )
-        self._validators['calendar'] = v_yaxis.CalendarValidator()
-        self._validators['categoryarray'] = v_yaxis.CategoryarrayValidator()
-        self._validators['categoryarraysrc'
-                        ] = v_yaxis.CategoryarraysrcValidator()
-        self._validators['categoryorder'] = v_yaxis.CategoryorderValidator()
-        self._validators['color'] = v_yaxis.ColorValidator()
-        self._validators['dtick'] = v_yaxis.DtickValidator()
-        self._validators['exponentformat'] = v_yaxis.ExponentformatValidator()
-        self._validators['gridcolor'] = v_yaxis.GridcolorValidator()
-        self._validators['gridwidth'] = v_yaxis.GridwidthValidator()
-        self._validators['hoverformat'] = v_yaxis.HoverformatValidator()
-        self._validators['linecolor'] = v_yaxis.LinecolorValidator()
-        self._validators['linewidth'] = v_yaxis.LinewidthValidator()
-        self._validators['mirror'] = v_yaxis.MirrorValidator()
-        self._validators['nticks'] = v_yaxis.NticksValidator()
-        self._validators['range'] = v_yaxis.RangeValidator()
-        self._validators['rangemode'] = v_yaxis.RangemodeValidator()
-        self._validators['separatethousands'
-                        ] = v_yaxis.SeparatethousandsValidator()
-        self._validators['showaxeslabels'] = v_yaxis.ShowaxeslabelsValidator()
-        self._validators['showbackground'] = v_yaxis.ShowbackgroundValidator()
-        self._validators['showexponent'] = v_yaxis.ShowexponentValidator()
-        self._validators['showgrid'] = v_yaxis.ShowgridValidator()
-        self._validators['showline'] = v_yaxis.ShowlineValidator()
-        self._validators['showspikes'] = v_yaxis.ShowspikesValidator()
-        self._validators['showticklabels'] = v_yaxis.ShowticklabelsValidator()
-        self._validators['showtickprefix'] = v_yaxis.ShowtickprefixValidator()
-        self._validators['showticksuffix'] = v_yaxis.ShowticksuffixValidator()
-        self._validators['spikecolor'] = v_yaxis.SpikecolorValidator()
-        self._validators['spikesides'] = v_yaxis.SpikesidesValidator()
-        self._validators['spikethickness'] = v_yaxis.SpikethicknessValidator()
-        self._validators['tick0'] = v_yaxis.Tick0Validator()
-        self._validators['tickangle'] = v_yaxis.TickangleValidator()
-        self._validators['tickcolor'] = v_yaxis.TickcolorValidator()
-        self._validators['tickfont'] = v_yaxis.TickfontValidator()
-        self._validators['tickformat'] = v_yaxis.TickformatValidator()
-        self._validators['tickformatstops'] = v_yaxis.TickformatstopsValidator(
-        )
-        self._validators['tickformatstopdefaults'
-                        ] = v_yaxis.TickformatstopValidator()
-        self._validators['ticklen'] = v_yaxis.TicklenValidator()
-        self._validators['tickmode'] = v_yaxis.TickmodeValidator()
-        self._validators['tickprefix'] = v_yaxis.TickprefixValidator()
-        self._validators['ticks'] = v_yaxis.TicksValidator()
-        self._validators['ticksuffix'] = v_yaxis.TicksuffixValidator()
-        self._validators['ticktext'] = v_yaxis.TicktextValidator()
-        self._validators['ticktextsrc'] = v_yaxis.TicktextsrcValidator()
-        self._validators['tickvals'] = v_yaxis.TickvalsValidator()
-        self._validators['tickvalssrc'] = v_yaxis.TickvalssrcValidator()
-        self._validators['tickwidth'] = v_yaxis.TickwidthValidator()
-        self._validators['title'] = v_yaxis.TitleValidator()
-        self._validators['type'] = v_yaxis.TypeValidator()
-        self._validators['visible'] = v_yaxis.VisibleValidator()
-        self._validators['zeroline'] = v_yaxis.ZerolineValidator()
-        self._validators['zerolinecolor'] = v_yaxis.ZerolinecolorValidator()
-        self._validators['zerolinewidth'] = v_yaxis.ZerolinewidthValidator()
+        self._validators["autorange"] = v_yaxis.AutorangeValidator()
+        self._validators["backgroundcolor"] = v_yaxis.BackgroundcolorValidator()
+        self._validators["calendar"] = v_yaxis.CalendarValidator()
+        self._validators["categoryarray"] = v_yaxis.CategoryarrayValidator()
+        self._validators["categoryarraysrc"] = v_yaxis.CategoryarraysrcValidator()
+        self._validators["categoryorder"] = v_yaxis.CategoryorderValidator()
+        self._validators["color"] = v_yaxis.ColorValidator()
+        self._validators["dtick"] = v_yaxis.DtickValidator()
+        self._validators["exponentformat"] = v_yaxis.ExponentformatValidator()
+        self._validators["gridcolor"] = v_yaxis.GridcolorValidator()
+        self._validators["gridwidth"] = v_yaxis.GridwidthValidator()
+        self._validators["hoverformat"] = v_yaxis.HoverformatValidator()
+        self._validators["linecolor"] = v_yaxis.LinecolorValidator()
+        self._validators["linewidth"] = v_yaxis.LinewidthValidator()
+        self._validators["mirror"] = v_yaxis.MirrorValidator()
+        self._validators["nticks"] = v_yaxis.NticksValidator()
+        self._validators["range"] = v_yaxis.RangeValidator()
+        self._validators["rangemode"] = v_yaxis.RangemodeValidator()
+        self._validators["separatethousands"] = v_yaxis.SeparatethousandsValidator()
+        self._validators["showaxeslabels"] = v_yaxis.ShowaxeslabelsValidator()
+        self._validators["showbackground"] = v_yaxis.ShowbackgroundValidator()
+        self._validators["showexponent"] = v_yaxis.ShowexponentValidator()
+        self._validators["showgrid"] = v_yaxis.ShowgridValidator()
+        self._validators["showline"] = v_yaxis.ShowlineValidator()
+        self._validators["showspikes"] = v_yaxis.ShowspikesValidator()
+        self._validators["showticklabels"] = v_yaxis.ShowticklabelsValidator()
+        self._validators["showtickprefix"] = v_yaxis.ShowtickprefixValidator()
+        self._validators["showticksuffix"] = v_yaxis.ShowticksuffixValidator()
+        self._validators["spikecolor"] = v_yaxis.SpikecolorValidator()
+        self._validators["spikesides"] = v_yaxis.SpikesidesValidator()
+        self._validators["spikethickness"] = v_yaxis.SpikethicknessValidator()
+        self._validators["tick0"] = v_yaxis.Tick0Validator()
+        self._validators["tickangle"] = v_yaxis.TickangleValidator()
+        self._validators["tickcolor"] = v_yaxis.TickcolorValidator()
+        self._validators["tickfont"] = v_yaxis.TickfontValidator()
+        self._validators["tickformat"] = v_yaxis.TickformatValidator()
+        self._validators["tickformatstops"] = v_yaxis.TickformatstopsValidator()
+        self._validators["tickformatstopdefaults"] = v_yaxis.TickformatstopValidator()
+        self._validators["ticklen"] = v_yaxis.TicklenValidator()
+        self._validators["tickmode"] = v_yaxis.TickmodeValidator()
+        self._validators["tickprefix"] = v_yaxis.TickprefixValidator()
+        self._validators["ticks"] = v_yaxis.TicksValidator()
+        self._validators["ticksuffix"] = v_yaxis.TicksuffixValidator()
+        self._validators["ticktext"] = v_yaxis.TicktextValidator()
+        self._validators["ticktextsrc"] = v_yaxis.TicktextsrcValidator()
+        self._validators["tickvals"] = v_yaxis.TickvalsValidator()
+        self._validators["tickvalssrc"] = v_yaxis.TickvalssrcValidator()
+        self._validators["tickwidth"] = v_yaxis.TickwidthValidator()
+        self._validators["title"] = v_yaxis.TitleValidator()
+        self._validators["type"] = v_yaxis.TypeValidator()
+        self._validators["visible"] = v_yaxis.VisibleValidator()
+        self._validators["zeroline"] = v_yaxis.ZerolineValidator()
+        self._validators["zerolinecolor"] = v_yaxis.ZerolinecolorValidator()
+        self._validators["zerolinewidth"] = v_yaxis.ZerolinewidthValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('autorange', None)
-        self['autorange'] = autorange if autorange is not None else _v
-        _v = arg.pop('backgroundcolor', None)
-        self['backgroundcolor'
-            ] = backgroundcolor if backgroundcolor is not None else _v
-        _v = arg.pop('calendar', None)
-        self['calendar'] = calendar if calendar is not None else _v
-        _v = arg.pop('categoryarray', None)
-        self['categoryarray'
-            ] = categoryarray if categoryarray is not None else _v
-        _v = arg.pop('categoryarraysrc', None)
-        self['categoryarraysrc'
-            ] = categoryarraysrc if categoryarraysrc is not None else _v
-        _v = arg.pop('categoryorder', None)
-        self['categoryorder'
-            ] = categoryorder if categoryorder is not None else _v
-        _v = arg.pop('color', None)
-        self['color'] = color if color is not None else _v
-        _v = arg.pop('dtick', None)
-        self['dtick'] = dtick if dtick is not None else _v
-        _v = arg.pop('exponentformat', None)
-        self['exponentformat'
-            ] = exponentformat if exponentformat is not None else _v
-        _v = arg.pop('gridcolor', None)
-        self['gridcolor'] = gridcolor if gridcolor is not None else _v
-        _v = arg.pop('gridwidth', None)
-        self['gridwidth'] = gridwidth if gridwidth is not None else _v
-        _v = arg.pop('hoverformat', None)
-        self['hoverformat'] = hoverformat if hoverformat is not None else _v
-        _v = arg.pop('linecolor', None)
-        self['linecolor'] = linecolor if linecolor is not None else _v
-        _v = arg.pop('linewidth', None)
-        self['linewidth'] = linewidth if linewidth is not None else _v
-        _v = arg.pop('mirror', None)
-        self['mirror'] = mirror if mirror is not None else _v
-        _v = arg.pop('nticks', None)
-        self['nticks'] = nticks if nticks is not None else _v
-        _v = arg.pop('range', None)
-        self['range'] = range if range is not None else _v
-        _v = arg.pop('rangemode', None)
-        self['rangemode'] = rangemode if rangemode is not None else _v
-        _v = arg.pop('separatethousands', None)
-        self['separatethousands'
-            ] = separatethousands if separatethousands is not None else _v
-        _v = arg.pop('showaxeslabels', None)
-        self['showaxeslabels'
-            ] = showaxeslabels if showaxeslabels is not None else _v
-        _v = arg.pop('showbackground', None)
-        self['showbackground'
-            ] = showbackground if showbackground is not None else _v
-        _v = arg.pop('showexponent', None)
-        self['showexponent'] = showexponent if showexponent is not None else _v
-        _v = arg.pop('showgrid', None)
-        self['showgrid'] = showgrid if showgrid is not None else _v
-        _v = arg.pop('showline', None)
-        self['showline'] = showline if showline is not None else _v
-        _v = arg.pop('showspikes', None)
-        self['showspikes'] = showspikes if showspikes is not None else _v
-        _v = arg.pop('showticklabels', None)
-        self['showticklabels'
-            ] = showticklabels if showticklabels is not None else _v
-        _v = arg.pop('showtickprefix', None)
-        self['showtickprefix'
-            ] = showtickprefix if showtickprefix is not None else _v
-        _v = arg.pop('showticksuffix', None)
-        self['showticksuffix'
-            ] = showticksuffix if showticksuffix is not None else _v
-        _v = arg.pop('spikecolor', None)
-        self['spikecolor'] = spikecolor if spikecolor is not None else _v
-        _v = arg.pop('spikesides', None)
-        self['spikesides'] = spikesides if spikesides is not None else _v
-        _v = arg.pop('spikethickness', None)
-        self['spikethickness'
-            ] = spikethickness if spikethickness is not None else _v
-        _v = arg.pop('tick0', None)
-        self['tick0'] = tick0 if tick0 is not None else _v
-        _v = arg.pop('tickangle', None)
-        self['tickangle'] = tickangle if tickangle is not None else _v
-        _v = arg.pop('tickcolor', None)
-        self['tickcolor'] = tickcolor if tickcolor is not None else _v
-        _v = arg.pop('tickfont', None)
-        self['tickfont'] = tickfont if tickfont is not None else _v
-        _v = arg.pop('tickformat', None)
-        self['tickformat'] = tickformat if tickformat is not None else _v
-        _v = arg.pop('tickformatstops', None)
-        self['tickformatstops'
-            ] = tickformatstops if tickformatstops is not None else _v
-        _v = arg.pop('tickformatstopdefaults', None)
-        self[
-            'tickformatstopdefaults'
-        ] = tickformatstopdefaults if tickformatstopdefaults is not None else _v
-        _v = arg.pop('ticklen', None)
-        self['ticklen'] = ticklen if ticklen is not None else _v
-        _v = arg.pop('tickmode', None)
-        self['tickmode'] = tickmode if tickmode is not None else _v
-        _v = arg.pop('tickprefix', None)
-        self['tickprefix'] = tickprefix if tickprefix is not None else _v
-        _v = arg.pop('ticks', None)
-        self['ticks'] = ticks if ticks is not None else _v
-        _v = arg.pop('ticksuffix', None)
-        self['ticksuffix'] = ticksuffix if ticksuffix is not None else _v
-        _v = arg.pop('ticktext', None)
-        self['ticktext'] = ticktext if ticktext is not None else _v
-        _v = arg.pop('ticktextsrc', None)
-        self['ticktextsrc'] = ticktextsrc if ticktextsrc is not None else _v
-        _v = arg.pop('tickvals', None)
-        self['tickvals'] = tickvals if tickvals is not None else _v
-        _v = arg.pop('tickvalssrc', None)
-        self['tickvalssrc'] = tickvalssrc if tickvalssrc is not None else _v
-        _v = arg.pop('tickwidth', None)
-        self['tickwidth'] = tickwidth if tickwidth is not None else _v
-        _v = arg.pop('title', None)
-        self['title'] = title if title is not None else _v
-        _v = arg.pop('titlefont', None)
+        _v = arg.pop("autorange", None)
+        self["autorange"] = autorange if autorange is not None else _v
+        _v = arg.pop("backgroundcolor", None)
+        self["backgroundcolor"] = backgroundcolor if backgroundcolor is not None else _v
+        _v = arg.pop("calendar", None)
+        self["calendar"] = calendar if calendar is not None else _v
+        _v = arg.pop("categoryarray", None)
+        self["categoryarray"] = categoryarray if categoryarray is not None else _v
+        _v = arg.pop("categoryarraysrc", None)
+        self["categoryarraysrc"] = (
+            categoryarraysrc if categoryarraysrc is not None else _v
+        )
+        _v = arg.pop("categoryorder", None)
+        self["categoryorder"] = categoryorder if categoryorder is not None else _v
+        _v = arg.pop("color", None)
+        self["color"] = color if color is not None else _v
+        _v = arg.pop("dtick", None)
+        self["dtick"] = dtick if dtick is not None else _v
+        _v = arg.pop("exponentformat", None)
+        self["exponentformat"] = exponentformat if exponentformat is not None else _v
+        _v = arg.pop("gridcolor", None)
+        self["gridcolor"] = gridcolor if gridcolor is not None else _v
+        _v = arg.pop("gridwidth", None)
+        self["gridwidth"] = gridwidth if gridwidth is not None else _v
+        _v = arg.pop("hoverformat", None)
+        self["hoverformat"] = hoverformat if hoverformat is not None else _v
+        _v = arg.pop("linecolor", None)
+        self["linecolor"] = linecolor if linecolor is not None else _v
+        _v = arg.pop("linewidth", None)
+        self["linewidth"] = linewidth if linewidth is not None else _v
+        _v = arg.pop("mirror", None)
+        self["mirror"] = mirror if mirror is not None else _v
+        _v = arg.pop("nticks", None)
+        self["nticks"] = nticks if nticks is not None else _v
+        _v = arg.pop("range", None)
+        self["range"] = range if range is not None else _v
+        _v = arg.pop("rangemode", None)
+        self["rangemode"] = rangemode if rangemode is not None else _v
+        _v = arg.pop("separatethousands", None)
+        self["separatethousands"] = (
+            separatethousands if separatethousands is not None else _v
+        )
+        _v = arg.pop("showaxeslabels", None)
+        self["showaxeslabels"] = showaxeslabels if showaxeslabels is not None else _v
+        _v = arg.pop("showbackground", None)
+        self["showbackground"] = showbackground if showbackground is not None else _v
+        _v = arg.pop("showexponent", None)
+        self["showexponent"] = showexponent if showexponent is not None else _v
+        _v = arg.pop("showgrid", None)
+        self["showgrid"] = showgrid if showgrid is not None else _v
+        _v = arg.pop("showline", None)
+        self["showline"] = showline if showline is not None else _v
+        _v = arg.pop("showspikes", None)
+        self["showspikes"] = showspikes if showspikes is not None else _v
+        _v = arg.pop("showticklabels", None)
+        self["showticklabels"] = showticklabels if showticklabels is not None else _v
+        _v = arg.pop("showtickprefix", None)
+        self["showtickprefix"] = showtickprefix if showtickprefix is not None else _v
+        _v = arg.pop("showticksuffix", None)
+        self["showticksuffix"] = showticksuffix if showticksuffix is not None else _v
+        _v = arg.pop("spikecolor", None)
+        self["spikecolor"] = spikecolor if spikecolor is not None else _v
+        _v = arg.pop("spikesides", None)
+        self["spikesides"] = spikesides if spikesides is not None else _v
+        _v = arg.pop("spikethickness", None)
+        self["spikethickness"] = spikethickness if spikethickness is not None else _v
+        _v = arg.pop("tick0", None)
+        self["tick0"] = tick0 if tick0 is not None else _v
+        _v = arg.pop("tickangle", None)
+        self["tickangle"] = tickangle if tickangle is not None else _v
+        _v = arg.pop("tickcolor", None)
+        self["tickcolor"] = tickcolor if tickcolor is not None else _v
+        _v = arg.pop("tickfont", None)
+        self["tickfont"] = tickfont if tickfont is not None else _v
+        _v = arg.pop("tickformat", None)
+        self["tickformat"] = tickformat if tickformat is not None else _v
+        _v = arg.pop("tickformatstops", None)
+        self["tickformatstops"] = tickformatstops if tickformatstops is not None else _v
+        _v = arg.pop("tickformatstopdefaults", None)
+        self["tickformatstopdefaults"] = (
+            tickformatstopdefaults if tickformatstopdefaults is not None else _v
+        )
+        _v = arg.pop("ticklen", None)
+        self["ticklen"] = ticklen if ticklen is not None else _v
+        _v = arg.pop("tickmode", None)
+        self["tickmode"] = tickmode if tickmode is not None else _v
+        _v = arg.pop("tickprefix", None)
+        self["tickprefix"] = tickprefix if tickprefix is not None else _v
+        _v = arg.pop("ticks", None)
+        self["ticks"] = ticks if ticks is not None else _v
+        _v = arg.pop("ticksuffix", None)
+        self["ticksuffix"] = ticksuffix if ticksuffix is not None else _v
+        _v = arg.pop("ticktext", None)
+        self["ticktext"] = ticktext if ticktext is not None else _v
+        _v = arg.pop("ticktextsrc", None)
+        self["ticktextsrc"] = ticktextsrc if ticktextsrc is not None else _v
+        _v = arg.pop("tickvals", None)
+        self["tickvals"] = tickvals if tickvals is not None else _v
+        _v = arg.pop("tickvalssrc", None)
+        self["tickvalssrc"] = tickvalssrc if tickvalssrc is not None else _v
+        _v = arg.pop("tickwidth", None)
+        self["tickwidth"] = tickwidth if tickwidth is not None else _v
+        _v = arg.pop("title", None)
+        self["title"] = title if title is not None else _v
+        _v = arg.pop("titlefont", None)
         _v = titlefont if titlefont is not None else _v
         if _v is not None:
-            self['titlefont'] = _v
-        _v = arg.pop('type', None)
-        self['type'] = type if type is not None else _v
-        _v = arg.pop('visible', None)
-        self['visible'] = visible if visible is not None else _v
-        _v = arg.pop('zeroline', None)
-        self['zeroline'] = zeroline if zeroline is not None else _v
-        _v = arg.pop('zerolinecolor', None)
-        self['zerolinecolor'
-            ] = zerolinecolor if zerolinecolor is not None else _v
-        _v = arg.pop('zerolinewidth', None)
-        self['zerolinewidth'
-            ] = zerolinewidth if zerolinewidth is not None else _v
+            self["titlefont"] = _v
+        _v = arg.pop("type", None)
+        self["type"] = type if type is not None else _v
+        _v = arg.pop("visible", None)
+        self["visible"] = visible if visible is not None else _v
+        _v = arg.pop("zeroline", None)
+        self["zeroline"] = zeroline if zeroline is not None else _v
+        _v = arg.pop("zerolinecolor", None)
+        self["zerolinecolor"] = zerolinecolor if zerolinecolor is not None else _v
+        _v = arg.pop("zerolinewidth", None)
+        self["zerolinewidth"] = zerolinewidth if zerolinewidth is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -4945,11 +4911,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['autorange']
+        return self["autorange"]
 
     @autorange.setter
     def autorange(self, val):
-        self['autorange'] = val
+        self["autorange"] = val
 
     # backgroundcolor
     # ---------------
@@ -5004,11 +4970,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['backgroundcolor']
+        return self["backgroundcolor"]
 
     @backgroundcolor.setter
     def backgroundcolor(self, val):
-        self['backgroundcolor'] = val
+        self["backgroundcolor"] = val
 
     # calendar
     # --------
@@ -5031,11 +4997,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['calendar']
+        return self["calendar"]
 
     @calendar.setter
     def calendar(self, val):
-        self['calendar'] = val
+        self["calendar"] = val
 
     # categoryarray
     # -------------
@@ -5053,11 +5019,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['categoryarray']
+        return self["categoryarray"]
 
     @categoryarray.setter
     def categoryarray(self, val):
-        self['categoryarray'] = val
+        self["categoryarray"] = val
 
     # categoryarraysrc
     # ----------------
@@ -5073,11 +5039,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['categoryarraysrc']
+        return self["categoryarraysrc"]
 
     @categoryarraysrc.setter
     def categoryarraysrc(self, val):
-        self['categoryarraysrc'] = val
+        self["categoryarraysrc"] = val
 
     # categoryorder
     # -------------
@@ -5113,11 +5079,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['categoryorder']
+        return self["categoryorder"]
 
     @categoryorder.setter
     def categoryorder(self, val):
-        self['categoryorder'] = val
+        self["categoryorder"] = val
 
     # color
     # -----
@@ -5175,11 +5141,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     # dtick
     # -----
@@ -5213,11 +5179,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['dtick']
+        return self["dtick"]
 
     @dtick.setter
     def dtick(self, val):
-        self['dtick'] = val
+        self["dtick"] = val
 
     # exponentformat
     # --------------
@@ -5238,11 +5204,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['exponentformat']
+        return self["exponentformat"]
 
     @exponentformat.setter
     def exponentformat(self, val):
-        self['exponentformat'] = val
+        self["exponentformat"] = val
 
     # gridcolor
     # ---------
@@ -5297,11 +5263,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['gridcolor']
+        return self["gridcolor"]
 
     @gridcolor.setter
     def gridcolor(self, val):
-        self['gridcolor'] = val
+        self["gridcolor"] = val
 
     # gridwidth
     # ---------
@@ -5317,11 +5283,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['gridwidth']
+        return self["gridwidth"]
 
     @gridwidth.setter
     def gridwidth(self, val):
-        self['gridwidth'] = val
+        self["gridwidth"] = val
 
     # hoverformat
     # -----------
@@ -5346,11 +5312,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['hoverformat']
+        return self["hoverformat"]
 
     @hoverformat.setter
     def hoverformat(self, val):
-        self['hoverformat'] = val
+        self["hoverformat"] = val
 
     # linecolor
     # ---------
@@ -5405,11 +5371,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['linecolor']
+        return self["linecolor"]
 
     @linecolor.setter
     def linecolor(self, val):
-        self['linecolor'] = val
+        self["linecolor"] = val
 
     # linewidth
     # ---------
@@ -5425,11 +5391,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['linewidth']
+        return self["linewidth"]
 
     @linewidth.setter
     def linewidth(self, val):
-        self['linewidth'] = val
+        self["linewidth"] = val
 
     # mirror
     # ------
@@ -5451,11 +5417,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['mirror']
+        return self["mirror"]
 
     @mirror.setter
     def mirror(self, val):
-        self['mirror'] = val
+        self["mirror"] = val
 
     # nticks
     # ------
@@ -5475,11 +5441,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self['nticks']
+        return self["nticks"]
 
     @nticks.setter
     def nticks(self, val):
-        self['nticks'] = val
+        self["nticks"] = val
 
     # range
     # -----
@@ -5505,11 +5471,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         list
         """
-        return self['range']
+        return self["range"]
 
     @range.setter
     def range(self, val):
-        self['range'] = val
+        self["range"] = val
 
     # rangemode
     # ---------
@@ -5530,11 +5496,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['rangemode']
+        return self["rangemode"]
 
     @rangemode.setter
     def rangemode(self, val):
-        self['rangemode'] = val
+        self["rangemode"] = val
 
     # separatethousands
     # -----------------
@@ -5550,11 +5516,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['separatethousands']
+        return self["separatethousands"]
 
     @separatethousands.setter
     def separatethousands(self, val):
-        self['separatethousands'] = val
+        self["separatethousands"] = val
 
     # showaxeslabels
     # --------------
@@ -5570,11 +5536,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showaxeslabels']
+        return self["showaxeslabels"]
 
     @showaxeslabels.setter
     def showaxeslabels(self, val):
-        self['showaxeslabels'] = val
+        self["showaxeslabels"] = val
 
     # showbackground
     # --------------
@@ -5590,11 +5556,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showbackground']
+        return self["showbackground"]
 
     @showbackground.setter
     def showbackground(self, val):
-        self['showbackground'] = val
+        self["showbackground"] = val
 
     # showexponent
     # ------------
@@ -5614,11 +5580,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['showexponent']
+        return self["showexponent"]
 
     @showexponent.setter
     def showexponent(self, val):
-        self['showexponent'] = val
+        self["showexponent"] = val
 
     # showgrid
     # --------
@@ -5635,11 +5601,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showgrid']
+        return self["showgrid"]
 
     @showgrid.setter
     def showgrid(self, val):
-        self['showgrid'] = val
+        self["showgrid"] = val
 
     # showline
     # --------
@@ -5655,11 +5621,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showline']
+        return self["showline"]
 
     @showline.setter
     def showline(self, val):
-        self['showline'] = val
+        self["showline"] = val
 
     # showspikes
     # ----------
@@ -5676,11 +5642,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showspikes']
+        return self["showspikes"]
 
     @showspikes.setter
     def showspikes(self, val):
-        self['showspikes'] = val
+        self["showspikes"] = val
 
     # showticklabels
     # --------------
@@ -5696,11 +5662,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showticklabels']
+        return self["showticklabels"]
 
     @showticklabels.setter
     def showticklabels(self, val):
-        self['showticklabels'] = val
+        self["showticklabels"] = val
 
     # showtickprefix
     # --------------
@@ -5720,11 +5686,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['showtickprefix']
+        return self["showtickprefix"]
 
     @showtickprefix.setter
     def showtickprefix(self, val):
-        self['showtickprefix'] = val
+        self["showtickprefix"] = val
 
     # showticksuffix
     # --------------
@@ -5741,11 +5707,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['showticksuffix']
+        return self["showticksuffix"]
 
     @showticksuffix.setter
     def showticksuffix(self, val):
-        self['showticksuffix'] = val
+        self["showticksuffix"] = val
 
     # spikecolor
     # ----------
@@ -5800,11 +5766,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['spikecolor']
+        return self["spikecolor"]
 
     @spikecolor.setter
     def spikecolor(self, val):
-        self['spikecolor'] = val
+        self["spikecolor"] = val
 
     # spikesides
     # ----------
@@ -5821,11 +5787,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['spikesides']
+        return self["spikesides"]
 
     @spikesides.setter
     def spikesides(self, val):
-        self['spikesides'] = val
+        self["spikesides"] = val
 
     # spikethickness
     # --------------
@@ -5841,11 +5807,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['spikethickness']
+        return self["spikethickness"]
 
     @spikethickness.setter
     def spikethickness(self, val):
-        self['spikethickness'] = val
+        self["spikethickness"] = val
 
     # tick0
     # -----
@@ -5868,11 +5834,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['tick0']
+        return self["tick0"]
 
     @tick0.setter
     def tick0(self, val):
-        self['tick0'] = val
+        self["tick0"] = val
 
     # tickangle
     # ---------
@@ -5892,11 +5858,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['tickangle']
+        return self["tickangle"]
 
     @tickangle.setter
     def tickangle(self, val):
-        self['tickangle'] = val
+        self["tickangle"] = val
 
     # tickcolor
     # ---------
@@ -5951,11 +5917,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['tickcolor']
+        return self["tickcolor"]
 
     @tickcolor.setter
     def tickcolor(self, val):
-        self['tickcolor'] = val
+        self["tickcolor"] = val
 
     # tickfont
     # --------
@@ -5996,11 +5962,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.xaxis.Tickfont
         """
-        return self['tickfont']
+        return self["tickfont"]
 
     @tickfont.setter
     def tickfont(self, val):
-        self['tickfont'] = val
+        self["tickfont"] = val
 
     # tickformat
     # ----------
@@ -6025,11 +5991,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['tickformat']
+        return self["tickformat"]
 
     @tickformat.setter
     def tickformat(self, val):
-        self['tickformat'] = val
+        self["tickformat"] = val
 
     # tickformatstops
     # ---------------
@@ -6082,11 +6048,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.scene.xaxis.Tickformatstop]
         """
-        return self['tickformatstops']
+        return self["tickformatstops"]
 
     @tickformatstops.setter
     def tickformatstops(self, val):
-        self['tickformatstops'] = val
+        self["tickformatstops"] = val
 
     # tickformatstopdefaults
     # ----------------------
@@ -6110,11 +6076,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.xaxis.Tickformatstop
         """
-        return self['tickformatstopdefaults']
+        return self["tickformatstopdefaults"]
 
     @tickformatstopdefaults.setter
     def tickformatstopdefaults(self, val):
-        self['tickformatstopdefaults'] = val
+        self["tickformatstopdefaults"] = val
 
     # ticklen
     # -------
@@ -6130,11 +6096,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['ticklen']
+        return self["ticklen"]
 
     @ticklen.setter
     def ticklen(self, val):
-        self['ticklen'] = val
+        self["ticklen"] = val
 
     # tickmode
     # --------
@@ -6157,11 +6123,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['tickmode']
+        return self["tickmode"]
 
     @tickmode.setter
     def tickmode(self, val):
-        self['tickmode'] = val
+        self["tickmode"] = val
 
     # tickprefix
     # ----------
@@ -6178,11 +6144,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['tickprefix']
+        return self["tickprefix"]
 
     @tickprefix.setter
     def tickprefix(self, val):
-        self['tickprefix'] = val
+        self["tickprefix"] = val
 
     # ticks
     # -----
@@ -6201,11 +6167,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['ticks']
+        return self["ticks"]
 
     @ticks.setter
     def ticks(self, val):
-        self['ticks'] = val
+        self["ticks"] = val
 
     # ticksuffix
     # ----------
@@ -6222,11 +6188,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['ticksuffix']
+        return self["ticksuffix"]
 
     @ticksuffix.setter
     def ticksuffix(self, val):
-        self['ticksuffix'] = val
+        self["ticksuffix"] = val
 
     # ticktext
     # --------
@@ -6244,11 +6210,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['ticktext']
+        return self["ticktext"]
 
     @ticktext.setter
     def ticktext(self, val):
-        self['ticktext'] = val
+        self["ticktext"] = val
 
     # ticktextsrc
     # -----------
@@ -6264,11 +6230,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['ticktextsrc']
+        return self["ticktextsrc"]
 
     @ticktextsrc.setter
     def ticktextsrc(self, val):
-        self['ticktextsrc'] = val
+        self["ticktextsrc"] = val
 
     # tickvals
     # --------
@@ -6285,11 +6251,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['tickvals']
+        return self["tickvals"]
 
     @tickvals.setter
     def tickvals(self, val):
-        self['tickvals'] = val
+        self["tickvals"] = val
 
     # tickvalssrc
     # -----------
@@ -6305,11 +6271,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['tickvalssrc']
+        return self["tickvalssrc"]
 
     @tickvalssrc.setter
     def tickvalssrc(self, val):
-        self['tickvalssrc'] = val
+        self["tickvalssrc"] = val
 
     # tickwidth
     # ---------
@@ -6325,11 +6291,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['tickwidth']
+        return self["tickwidth"]
 
     @tickwidth.setter
     def tickwidth(self, val):
-        self['tickwidth'] = val
+        self["tickwidth"] = val
 
     # title
     # -----
@@ -6359,11 +6325,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.xaxis.Title
         """
-        return self['title']
+        return self["title"]
 
     @title.setter
     def title(self, val):
-        self['title'] = val
+        self["title"] = val
 
     # titlefont
     # ---------
@@ -6406,11 +6372,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         
         """
-        return self['titlefont']
+        return self["titlefont"]
 
     @titlefont.setter
     def titlefont(self, val):
-        self['titlefont'] = val
+        self["titlefont"] = val
 
     # type
     # ----
@@ -6429,11 +6395,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['type']
+        return self["type"]
 
     @type.setter
     def type(self, val):
-        self['type'] = val
+        self["type"] = val
 
     # visible
     # -------
@@ -6451,11 +6417,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
     # zeroline
     # --------
@@ -6473,11 +6439,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['zeroline']
+        return self["zeroline"]
 
     @zeroline.setter
     def zeroline(self, val):
-        self['zeroline'] = val
+        self["zeroline"] = val
 
     # zerolinecolor
     # -------------
@@ -6532,11 +6498,11 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['zerolinecolor']
+        return self["zerolinecolor"]
 
     @zerolinecolor.setter
     def zerolinecolor(self, val):
-        self['zerolinecolor'] = val
+        self["zerolinecolor"] = val
 
     # zerolinewidth
     # -------------
@@ -6552,17 +6518,17 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['zerolinewidth']
+        return self["zerolinewidth"]
 
     @zerolinewidth.setter
     def zerolinewidth(self, val):
-        self['zerolinewidth'] = val
+        self["zerolinewidth"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.scene'
+        return "layout.scene"
 
     # Self properties description
     # ---------------------------
@@ -6825,7 +6791,7 @@ class XAxis(_BaseLayoutHierarchyType):
             Sets the width (in px) of the zero line.
         """
 
-    _mapped_properties = {'titlefont': ('title', 'font')}
+    _mapped_properties = {"titlefont": ("title", "font")}
 
     def __init__(
         self,
@@ -7154,7 +7120,7 @@ class XAxis(_BaseLayoutHierarchyType):
         -------
         XAxis
         """
-        super(XAxis, self).__init__('xaxis')
+        super(XAxis, self).__init__("xaxis")
 
         # Validate arg
         # ------------
@@ -7174,205 +7140,189 @@ an instance of plotly.graph_objs.layout.scene.XAxis"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.scene import (xaxis as v_xaxis)
+        from plotly.validators.layout.scene import xaxis as v_xaxis
 
         # Initialize validators
         # ---------------------
-        self._validators['autorange'] = v_xaxis.AutorangeValidator()
-        self._validators['backgroundcolor'] = v_xaxis.BackgroundcolorValidator(
-        )
-        self._validators['calendar'] = v_xaxis.CalendarValidator()
-        self._validators['categoryarray'] = v_xaxis.CategoryarrayValidator()
-        self._validators['categoryarraysrc'
-                        ] = v_xaxis.CategoryarraysrcValidator()
-        self._validators['categoryorder'] = v_xaxis.CategoryorderValidator()
-        self._validators['color'] = v_xaxis.ColorValidator()
-        self._validators['dtick'] = v_xaxis.DtickValidator()
-        self._validators['exponentformat'] = v_xaxis.ExponentformatValidator()
-        self._validators['gridcolor'] = v_xaxis.GridcolorValidator()
-        self._validators['gridwidth'] = v_xaxis.GridwidthValidator()
-        self._validators['hoverformat'] = v_xaxis.HoverformatValidator()
-        self._validators['linecolor'] = v_xaxis.LinecolorValidator()
-        self._validators['linewidth'] = v_xaxis.LinewidthValidator()
-        self._validators['mirror'] = v_xaxis.MirrorValidator()
-        self._validators['nticks'] = v_xaxis.NticksValidator()
-        self._validators['range'] = v_xaxis.RangeValidator()
-        self._validators['rangemode'] = v_xaxis.RangemodeValidator()
-        self._validators['separatethousands'
-                        ] = v_xaxis.SeparatethousandsValidator()
-        self._validators['showaxeslabels'] = v_xaxis.ShowaxeslabelsValidator()
-        self._validators['showbackground'] = v_xaxis.ShowbackgroundValidator()
-        self._validators['showexponent'] = v_xaxis.ShowexponentValidator()
-        self._validators['showgrid'] = v_xaxis.ShowgridValidator()
-        self._validators['showline'] = v_xaxis.ShowlineValidator()
-        self._validators['showspikes'] = v_xaxis.ShowspikesValidator()
-        self._validators['showticklabels'] = v_xaxis.ShowticklabelsValidator()
-        self._validators['showtickprefix'] = v_xaxis.ShowtickprefixValidator()
-        self._validators['showticksuffix'] = v_xaxis.ShowticksuffixValidator()
-        self._validators['spikecolor'] = v_xaxis.SpikecolorValidator()
-        self._validators['spikesides'] = v_xaxis.SpikesidesValidator()
-        self._validators['spikethickness'] = v_xaxis.SpikethicknessValidator()
-        self._validators['tick0'] = v_xaxis.Tick0Validator()
-        self._validators['tickangle'] = v_xaxis.TickangleValidator()
-        self._validators['tickcolor'] = v_xaxis.TickcolorValidator()
-        self._validators['tickfont'] = v_xaxis.TickfontValidator()
-        self._validators['tickformat'] = v_xaxis.TickformatValidator()
-        self._validators['tickformatstops'] = v_xaxis.TickformatstopsValidator(
-        )
-        self._validators['tickformatstopdefaults'
-                        ] = v_xaxis.TickformatstopValidator()
-        self._validators['ticklen'] = v_xaxis.TicklenValidator()
-        self._validators['tickmode'] = v_xaxis.TickmodeValidator()
-        self._validators['tickprefix'] = v_xaxis.TickprefixValidator()
-        self._validators['ticks'] = v_xaxis.TicksValidator()
-        self._validators['ticksuffix'] = v_xaxis.TicksuffixValidator()
-        self._validators['ticktext'] = v_xaxis.TicktextValidator()
-        self._validators['ticktextsrc'] = v_xaxis.TicktextsrcValidator()
-        self._validators['tickvals'] = v_xaxis.TickvalsValidator()
-        self._validators['tickvalssrc'] = v_xaxis.TickvalssrcValidator()
-        self._validators['tickwidth'] = v_xaxis.TickwidthValidator()
-        self._validators['title'] = v_xaxis.TitleValidator()
-        self._validators['type'] = v_xaxis.TypeValidator()
-        self._validators['visible'] = v_xaxis.VisibleValidator()
-        self._validators['zeroline'] = v_xaxis.ZerolineValidator()
-        self._validators['zerolinecolor'] = v_xaxis.ZerolinecolorValidator()
-        self._validators['zerolinewidth'] = v_xaxis.ZerolinewidthValidator()
+        self._validators["autorange"] = v_xaxis.AutorangeValidator()
+        self._validators["backgroundcolor"] = v_xaxis.BackgroundcolorValidator()
+        self._validators["calendar"] = v_xaxis.CalendarValidator()
+        self._validators["categoryarray"] = v_xaxis.CategoryarrayValidator()
+        self._validators["categoryarraysrc"] = v_xaxis.CategoryarraysrcValidator()
+        self._validators["categoryorder"] = v_xaxis.CategoryorderValidator()
+        self._validators["color"] = v_xaxis.ColorValidator()
+        self._validators["dtick"] = v_xaxis.DtickValidator()
+        self._validators["exponentformat"] = v_xaxis.ExponentformatValidator()
+        self._validators["gridcolor"] = v_xaxis.GridcolorValidator()
+        self._validators["gridwidth"] = v_xaxis.GridwidthValidator()
+        self._validators["hoverformat"] = v_xaxis.HoverformatValidator()
+        self._validators["linecolor"] = v_xaxis.LinecolorValidator()
+        self._validators["linewidth"] = v_xaxis.LinewidthValidator()
+        self._validators["mirror"] = v_xaxis.MirrorValidator()
+        self._validators["nticks"] = v_xaxis.NticksValidator()
+        self._validators["range"] = v_xaxis.RangeValidator()
+        self._validators["rangemode"] = v_xaxis.RangemodeValidator()
+        self._validators["separatethousands"] = v_xaxis.SeparatethousandsValidator()
+        self._validators["showaxeslabels"] = v_xaxis.ShowaxeslabelsValidator()
+        self._validators["showbackground"] = v_xaxis.ShowbackgroundValidator()
+        self._validators["showexponent"] = v_xaxis.ShowexponentValidator()
+        self._validators["showgrid"] = v_xaxis.ShowgridValidator()
+        self._validators["showline"] = v_xaxis.ShowlineValidator()
+        self._validators["showspikes"] = v_xaxis.ShowspikesValidator()
+        self._validators["showticklabels"] = v_xaxis.ShowticklabelsValidator()
+        self._validators["showtickprefix"] = v_xaxis.ShowtickprefixValidator()
+        self._validators["showticksuffix"] = v_xaxis.ShowticksuffixValidator()
+        self._validators["spikecolor"] = v_xaxis.SpikecolorValidator()
+        self._validators["spikesides"] = v_xaxis.SpikesidesValidator()
+        self._validators["spikethickness"] = v_xaxis.SpikethicknessValidator()
+        self._validators["tick0"] = v_xaxis.Tick0Validator()
+        self._validators["tickangle"] = v_xaxis.TickangleValidator()
+        self._validators["tickcolor"] = v_xaxis.TickcolorValidator()
+        self._validators["tickfont"] = v_xaxis.TickfontValidator()
+        self._validators["tickformat"] = v_xaxis.TickformatValidator()
+        self._validators["tickformatstops"] = v_xaxis.TickformatstopsValidator()
+        self._validators["tickformatstopdefaults"] = v_xaxis.TickformatstopValidator()
+        self._validators["ticklen"] = v_xaxis.TicklenValidator()
+        self._validators["tickmode"] = v_xaxis.TickmodeValidator()
+        self._validators["tickprefix"] = v_xaxis.TickprefixValidator()
+        self._validators["ticks"] = v_xaxis.TicksValidator()
+        self._validators["ticksuffix"] = v_xaxis.TicksuffixValidator()
+        self._validators["ticktext"] = v_xaxis.TicktextValidator()
+        self._validators["ticktextsrc"] = v_xaxis.TicktextsrcValidator()
+        self._validators["tickvals"] = v_xaxis.TickvalsValidator()
+        self._validators["tickvalssrc"] = v_xaxis.TickvalssrcValidator()
+        self._validators["tickwidth"] = v_xaxis.TickwidthValidator()
+        self._validators["title"] = v_xaxis.TitleValidator()
+        self._validators["type"] = v_xaxis.TypeValidator()
+        self._validators["visible"] = v_xaxis.VisibleValidator()
+        self._validators["zeroline"] = v_xaxis.ZerolineValidator()
+        self._validators["zerolinecolor"] = v_xaxis.ZerolinecolorValidator()
+        self._validators["zerolinewidth"] = v_xaxis.ZerolinewidthValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('autorange', None)
-        self['autorange'] = autorange if autorange is not None else _v
-        _v = arg.pop('backgroundcolor', None)
-        self['backgroundcolor'
-            ] = backgroundcolor if backgroundcolor is not None else _v
-        _v = arg.pop('calendar', None)
-        self['calendar'] = calendar if calendar is not None else _v
-        _v = arg.pop('categoryarray', None)
-        self['categoryarray'
-            ] = categoryarray if categoryarray is not None else _v
-        _v = arg.pop('categoryarraysrc', None)
-        self['categoryarraysrc'
-            ] = categoryarraysrc if categoryarraysrc is not None else _v
-        _v = arg.pop('categoryorder', None)
-        self['categoryorder'
-            ] = categoryorder if categoryorder is not None else _v
-        _v = arg.pop('color', None)
-        self['color'] = color if color is not None else _v
-        _v = arg.pop('dtick', None)
-        self['dtick'] = dtick if dtick is not None else _v
-        _v = arg.pop('exponentformat', None)
-        self['exponentformat'
-            ] = exponentformat if exponentformat is not None else _v
-        _v = arg.pop('gridcolor', None)
-        self['gridcolor'] = gridcolor if gridcolor is not None else _v
-        _v = arg.pop('gridwidth', None)
-        self['gridwidth'] = gridwidth if gridwidth is not None else _v
-        _v = arg.pop('hoverformat', None)
-        self['hoverformat'] = hoverformat if hoverformat is not None else _v
-        _v = arg.pop('linecolor', None)
-        self['linecolor'] = linecolor if linecolor is not None else _v
-        _v = arg.pop('linewidth', None)
-        self['linewidth'] = linewidth if linewidth is not None else _v
-        _v = arg.pop('mirror', None)
-        self['mirror'] = mirror if mirror is not None else _v
-        _v = arg.pop('nticks', None)
-        self['nticks'] = nticks if nticks is not None else _v
-        _v = arg.pop('range', None)
-        self['range'] = range if range is not None else _v
-        _v = arg.pop('rangemode', None)
-        self['rangemode'] = rangemode if rangemode is not None else _v
-        _v = arg.pop('separatethousands', None)
-        self['separatethousands'
-            ] = separatethousands if separatethousands is not None else _v
-        _v = arg.pop('showaxeslabels', None)
-        self['showaxeslabels'
-            ] = showaxeslabels if showaxeslabels is not None else _v
-        _v = arg.pop('showbackground', None)
-        self['showbackground'
-            ] = showbackground if showbackground is not None else _v
-        _v = arg.pop('showexponent', None)
-        self['showexponent'] = showexponent if showexponent is not None else _v
-        _v = arg.pop('showgrid', None)
-        self['showgrid'] = showgrid if showgrid is not None else _v
-        _v = arg.pop('showline', None)
-        self['showline'] = showline if showline is not None else _v
-        _v = arg.pop('showspikes', None)
-        self['showspikes'] = showspikes if showspikes is not None else _v
-        _v = arg.pop('showticklabels', None)
-        self['showticklabels'
-            ] = showticklabels if showticklabels is not None else _v
-        _v = arg.pop('showtickprefix', None)
-        self['showtickprefix'
-            ] = showtickprefix if showtickprefix is not None else _v
-        _v = arg.pop('showticksuffix', None)
-        self['showticksuffix'
-            ] = showticksuffix if showticksuffix is not None else _v
-        _v = arg.pop('spikecolor', None)
-        self['spikecolor'] = spikecolor if spikecolor is not None else _v
-        _v = arg.pop('spikesides', None)
-        self['spikesides'] = spikesides if spikesides is not None else _v
-        _v = arg.pop('spikethickness', None)
-        self['spikethickness'
-            ] = spikethickness if spikethickness is not None else _v
-        _v = arg.pop('tick0', None)
-        self['tick0'] = tick0 if tick0 is not None else _v
-        _v = arg.pop('tickangle', None)
-        self['tickangle'] = tickangle if tickangle is not None else _v
-        _v = arg.pop('tickcolor', None)
-        self['tickcolor'] = tickcolor if tickcolor is not None else _v
-        _v = arg.pop('tickfont', None)
-        self['tickfont'] = tickfont if tickfont is not None else _v
-        _v = arg.pop('tickformat', None)
-        self['tickformat'] = tickformat if tickformat is not None else _v
-        _v = arg.pop('tickformatstops', None)
-        self['tickformatstops'
-            ] = tickformatstops if tickformatstops is not None else _v
-        _v = arg.pop('tickformatstopdefaults', None)
-        self[
-            'tickformatstopdefaults'
-        ] = tickformatstopdefaults if tickformatstopdefaults is not None else _v
-        _v = arg.pop('ticklen', None)
-        self['ticklen'] = ticklen if ticklen is not None else _v
-        _v = arg.pop('tickmode', None)
-        self['tickmode'] = tickmode if tickmode is not None else _v
-        _v = arg.pop('tickprefix', None)
-        self['tickprefix'] = tickprefix if tickprefix is not None else _v
-        _v = arg.pop('ticks', None)
-        self['ticks'] = ticks if ticks is not None else _v
-        _v = arg.pop('ticksuffix', None)
-        self['ticksuffix'] = ticksuffix if ticksuffix is not None else _v
-        _v = arg.pop('ticktext', None)
-        self['ticktext'] = ticktext if ticktext is not None else _v
-        _v = arg.pop('ticktextsrc', None)
-        self['ticktextsrc'] = ticktextsrc if ticktextsrc is not None else _v
-        _v = arg.pop('tickvals', None)
-        self['tickvals'] = tickvals if tickvals is not None else _v
-        _v = arg.pop('tickvalssrc', None)
-        self['tickvalssrc'] = tickvalssrc if tickvalssrc is not None else _v
-        _v = arg.pop('tickwidth', None)
-        self['tickwidth'] = tickwidth if tickwidth is not None else _v
-        _v = arg.pop('title', None)
-        self['title'] = title if title is not None else _v
-        _v = arg.pop('titlefont', None)
+        _v = arg.pop("autorange", None)
+        self["autorange"] = autorange if autorange is not None else _v
+        _v = arg.pop("backgroundcolor", None)
+        self["backgroundcolor"] = backgroundcolor if backgroundcolor is not None else _v
+        _v = arg.pop("calendar", None)
+        self["calendar"] = calendar if calendar is not None else _v
+        _v = arg.pop("categoryarray", None)
+        self["categoryarray"] = categoryarray if categoryarray is not None else _v
+        _v = arg.pop("categoryarraysrc", None)
+        self["categoryarraysrc"] = (
+            categoryarraysrc if categoryarraysrc is not None else _v
+        )
+        _v = arg.pop("categoryorder", None)
+        self["categoryorder"] = categoryorder if categoryorder is not None else _v
+        _v = arg.pop("color", None)
+        self["color"] = color if color is not None else _v
+        _v = arg.pop("dtick", None)
+        self["dtick"] = dtick if dtick is not None else _v
+        _v = arg.pop("exponentformat", None)
+        self["exponentformat"] = exponentformat if exponentformat is not None else _v
+        _v = arg.pop("gridcolor", None)
+        self["gridcolor"] = gridcolor if gridcolor is not None else _v
+        _v = arg.pop("gridwidth", None)
+        self["gridwidth"] = gridwidth if gridwidth is not None else _v
+        _v = arg.pop("hoverformat", None)
+        self["hoverformat"] = hoverformat if hoverformat is not None else _v
+        _v = arg.pop("linecolor", None)
+        self["linecolor"] = linecolor if linecolor is not None else _v
+        _v = arg.pop("linewidth", None)
+        self["linewidth"] = linewidth if linewidth is not None else _v
+        _v = arg.pop("mirror", None)
+        self["mirror"] = mirror if mirror is not None else _v
+        _v = arg.pop("nticks", None)
+        self["nticks"] = nticks if nticks is not None else _v
+        _v = arg.pop("range", None)
+        self["range"] = range if range is not None else _v
+        _v = arg.pop("rangemode", None)
+        self["rangemode"] = rangemode if rangemode is not None else _v
+        _v = arg.pop("separatethousands", None)
+        self["separatethousands"] = (
+            separatethousands if separatethousands is not None else _v
+        )
+        _v = arg.pop("showaxeslabels", None)
+        self["showaxeslabels"] = showaxeslabels if showaxeslabels is not None else _v
+        _v = arg.pop("showbackground", None)
+        self["showbackground"] = showbackground if showbackground is not None else _v
+        _v = arg.pop("showexponent", None)
+        self["showexponent"] = showexponent if showexponent is not None else _v
+        _v = arg.pop("showgrid", None)
+        self["showgrid"] = showgrid if showgrid is not None else _v
+        _v = arg.pop("showline", None)
+        self["showline"] = showline if showline is not None else _v
+        _v = arg.pop("showspikes", None)
+        self["showspikes"] = showspikes if showspikes is not None else _v
+        _v = arg.pop("showticklabels", None)
+        self["showticklabels"] = showticklabels if showticklabels is not None else _v
+        _v = arg.pop("showtickprefix", None)
+        self["showtickprefix"] = showtickprefix if showtickprefix is not None else _v
+        _v = arg.pop("showticksuffix", None)
+        self["showticksuffix"] = showticksuffix if showticksuffix is not None else _v
+        _v = arg.pop("spikecolor", None)
+        self["spikecolor"] = spikecolor if spikecolor is not None else _v
+        _v = arg.pop("spikesides", None)
+        self["spikesides"] = spikesides if spikesides is not None else _v
+        _v = arg.pop("spikethickness", None)
+        self["spikethickness"] = spikethickness if spikethickness is not None else _v
+        _v = arg.pop("tick0", None)
+        self["tick0"] = tick0 if tick0 is not None else _v
+        _v = arg.pop("tickangle", None)
+        self["tickangle"] = tickangle if tickangle is not None else _v
+        _v = arg.pop("tickcolor", None)
+        self["tickcolor"] = tickcolor if tickcolor is not None else _v
+        _v = arg.pop("tickfont", None)
+        self["tickfont"] = tickfont if tickfont is not None else _v
+        _v = arg.pop("tickformat", None)
+        self["tickformat"] = tickformat if tickformat is not None else _v
+        _v = arg.pop("tickformatstops", None)
+        self["tickformatstops"] = tickformatstops if tickformatstops is not None else _v
+        _v = arg.pop("tickformatstopdefaults", None)
+        self["tickformatstopdefaults"] = (
+            tickformatstopdefaults if tickformatstopdefaults is not None else _v
+        )
+        _v = arg.pop("ticklen", None)
+        self["ticklen"] = ticklen if ticklen is not None else _v
+        _v = arg.pop("tickmode", None)
+        self["tickmode"] = tickmode if tickmode is not None else _v
+        _v = arg.pop("tickprefix", None)
+        self["tickprefix"] = tickprefix if tickprefix is not None else _v
+        _v = arg.pop("ticks", None)
+        self["ticks"] = ticks if ticks is not None else _v
+        _v = arg.pop("ticksuffix", None)
+        self["ticksuffix"] = ticksuffix if ticksuffix is not None else _v
+        _v = arg.pop("ticktext", None)
+        self["ticktext"] = ticktext if ticktext is not None else _v
+        _v = arg.pop("ticktextsrc", None)
+        self["ticktextsrc"] = ticktextsrc if ticktextsrc is not None else _v
+        _v = arg.pop("tickvals", None)
+        self["tickvals"] = tickvals if tickvals is not None else _v
+        _v = arg.pop("tickvalssrc", None)
+        self["tickvalssrc"] = tickvalssrc if tickvalssrc is not None else _v
+        _v = arg.pop("tickwidth", None)
+        self["tickwidth"] = tickwidth if tickwidth is not None else _v
+        _v = arg.pop("title", None)
+        self["title"] = title if title is not None else _v
+        _v = arg.pop("titlefont", None)
         _v = titlefont if titlefont is not None else _v
         if _v is not None:
-            self['titlefont'] = _v
-        _v = arg.pop('type', None)
-        self['type'] = type if type is not None else _v
-        _v = arg.pop('visible', None)
-        self['visible'] = visible if visible is not None else _v
-        _v = arg.pop('zeroline', None)
-        self['zeroline'] = zeroline if zeroline is not None else _v
-        _v = arg.pop('zerolinecolor', None)
-        self['zerolinecolor'
-            ] = zerolinecolor if zerolinecolor is not None else _v
-        _v = arg.pop('zerolinewidth', None)
-        self['zerolinewidth'
-            ] = zerolinewidth if zerolinewidth is not None else _v
+            self["titlefont"] = _v
+        _v = arg.pop("type", None)
+        self["type"] = type if type is not None else _v
+        _v = arg.pop("visible", None)
+        self["visible"] = visible if visible is not None else _v
+        _v = arg.pop("zeroline", None)
+        self["zeroline"] = zeroline if zeroline is not None else _v
+        _v = arg.pop("zerolinecolor", None)
+        self["zerolinecolor"] = zerolinecolor if zerolinecolor is not None else _v
+        _v = arg.pop("zerolinewidth", None)
+        self["zerolinewidth"] = zerolinewidth if zerolinewidth is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -7405,11 +7355,11 @@ class Domain(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self['column']
+        return self["column"]
 
     @column.setter
     def column(self, val):
-        self['column'] = val
+        self["column"] = val
 
     # row
     # ---
@@ -7427,11 +7377,11 @@ class Domain(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self['row']
+        return self["row"]
 
     @row.setter
     def row(self, val):
-        self['row'] = val
+        self["row"] = val
 
     # x
     # -
@@ -7453,11 +7403,11 @@ class Domain(_BaseLayoutHierarchyType):
         -------
         list
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
     # y
     # -
@@ -7479,17 +7429,17 @@ class Domain(_BaseLayoutHierarchyType):
         -------
         list
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.scene'
+        return "layout.scene"
 
     # Self properties description
     # ---------------------------
@@ -7510,9 +7460,7 @@ class Domain(_BaseLayoutHierarchyType):
             fraction).
         """
 
-    def __init__(
-        self, arg=None, column=None, row=None, x=None, y=None, **kwargs
-    ):
+    def __init__(self, arg=None, column=None, row=None, x=None, y=None, **kwargs):
         """
         Construct a new Domain object
         
@@ -7538,7 +7486,7 @@ class Domain(_BaseLayoutHierarchyType):
         -------
         Domain
         """
-        super(Domain, self).__init__('domain')
+        super(Domain, self).__init__("domain")
 
         # Validate arg
         # ------------
@@ -7558,29 +7506,29 @@ an instance of plotly.graph_objs.layout.scene.Domain"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.scene import (domain as v_domain)
+        from plotly.validators.layout.scene import domain as v_domain
 
         # Initialize validators
         # ---------------------
-        self._validators['column'] = v_domain.ColumnValidator()
-        self._validators['row'] = v_domain.RowValidator()
-        self._validators['x'] = v_domain.XValidator()
-        self._validators['y'] = v_domain.YValidator()
+        self._validators["column"] = v_domain.ColumnValidator()
+        self._validators["row"] = v_domain.RowValidator()
+        self._validators["x"] = v_domain.XValidator()
+        self._validators["y"] = v_domain.YValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('column', None)
-        self['column'] = column if column is not None else _v
-        _v = arg.pop('row', None)
-        self['row'] = row if row is not None else _v
-        _v = arg.pop('x', None)
-        self['x'] = x if x is not None else _v
-        _v = arg.pop('y', None)
-        self['y'] = y if y is not None else _v
+        _v = arg.pop("column", None)
+        self["column"] = column if column is not None else _v
+        _v = arg.pop("row", None)
+        self["row"] = row if row is not None else _v
+        _v = arg.pop("x", None)
+        self["x"] = x if x is not None else _v
+        _v = arg.pop("y", None)
+        self["y"] = y if y is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -7624,11 +7572,11 @@ class Camera(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.camera.Center
         """
-        return self['center']
+        return self["center"]
 
     @center.setter
     def center(self, val):
-        self['center'] = val
+        self["center"] = val
 
     # eye
     # ---
@@ -7657,11 +7605,11 @@ class Camera(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.camera.Eye
         """
-        return self['eye']
+        return self["eye"]
 
     @eye.setter
     def eye(self, val):
-        self['eye'] = val
+        self["eye"] = val
 
     # projection
     # ----------
@@ -7685,11 +7633,11 @@ class Camera(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.camera.Projection
         """
-        return self['projection']
+        return self["projection"]
 
     @projection.setter
     def projection(self, val):
-        self['projection'] = val
+        self["projection"] = val
 
     # up
     # --
@@ -7719,17 +7667,17 @@ class Camera(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.camera.Up
         """
-        return self['up']
+        return self["up"]
 
     @up.setter
     def up(self, val):
-        self['up'] = val
+        self["up"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.scene'
+        return "layout.scene"
 
     # Self properties description
     # ---------------------------
@@ -7756,13 +7704,7 @@ class Camera(_BaseLayoutHierarchyType):
         """
 
     def __init__(
-        self,
-        arg=None,
-        center=None,
-        eye=None,
-        projection=None,
-        up=None,
-        **kwargs
+        self, arg=None, center=None, eye=None, projection=None, up=None, **kwargs
     ):
         """
         Construct a new Camera object
@@ -7794,7 +7736,7 @@ class Camera(_BaseLayoutHierarchyType):
         -------
         Camera
         """
-        super(Camera, self).__init__('camera')
+        super(Camera, self).__init__("camera")
 
         # Validate arg
         # ------------
@@ -7814,29 +7756,29 @@ an instance of plotly.graph_objs.layout.scene.Camera"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.scene import (camera as v_camera)
+        from plotly.validators.layout.scene import camera as v_camera
 
         # Initialize validators
         # ---------------------
-        self._validators['center'] = v_camera.CenterValidator()
-        self._validators['eye'] = v_camera.EyeValidator()
-        self._validators['projection'] = v_camera.ProjectionValidator()
-        self._validators['up'] = v_camera.UpValidator()
+        self._validators["center"] = v_camera.CenterValidator()
+        self._validators["eye"] = v_camera.EyeValidator()
+        self._validators["projection"] = v_camera.ProjectionValidator()
+        self._validators["up"] = v_camera.UpValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('center', None)
-        self['center'] = center if center is not None else _v
-        _v = arg.pop('eye', None)
-        self['eye'] = eye if eye is not None else _v
-        _v = arg.pop('projection', None)
-        self['projection'] = projection if projection is not None else _v
-        _v = arg.pop('up', None)
-        self['up'] = up if up is not None else _v
+        _v = arg.pop("center", None)
+        self["center"] = center if center is not None else _v
+        _v = arg.pop("eye", None)
+        self["eye"] = eye if eye is not None else _v
+        _v = arg.pop("projection", None)
+        self["projection"] = projection if projection is not None else _v
+        _v = arg.pop("up", None)
+        self["up"] = up if up is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -7865,11 +7807,11 @@ class Aspectratio(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
     # y
     # -
@@ -7883,11 +7825,11 @@ class Aspectratio(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
     # z
     # -
@@ -7901,17 +7843,17 @@ class Aspectratio(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['z']
+        return self["z"]
 
     @z.setter
     def z(self, val):
-        self['z'] = val
+        self["z"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.scene'
+        return "layout.scene"
 
     # Self properties description
     # ---------------------------
@@ -7949,7 +7891,7 @@ class Aspectratio(_BaseLayoutHierarchyType):
         -------
         Aspectratio
         """
-        super(Aspectratio, self).__init__('aspectratio')
+        super(Aspectratio, self).__init__("aspectratio")
 
         # Validate arg
         # ------------
@@ -7969,28 +7911,26 @@ an instance of plotly.graph_objs.layout.scene.Aspectratio"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.scene import (
-            aspectratio as v_aspectratio
-        )
+        from plotly.validators.layout.scene import aspectratio as v_aspectratio
 
         # Initialize validators
         # ---------------------
-        self._validators['x'] = v_aspectratio.XValidator()
-        self._validators['y'] = v_aspectratio.YValidator()
-        self._validators['z'] = v_aspectratio.ZValidator()
+        self._validators["x"] = v_aspectratio.XValidator()
+        self._validators["y"] = v_aspectratio.YValidator()
+        self._validators["z"] = v_aspectratio.ZValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('x', None)
-        self['x'] = x if x is not None else _v
-        _v = arg.pop('y', None)
-        self['y'] = y if y is not None else _v
-        _v = arg.pop('z', None)
-        self['z'] = z if z is not None else _v
+        _v = arg.pop("x", None)
+        self["x"] = x if x is not None else _v
+        _v = arg.pop("y", None)
+        self["y"] = y if y is not None else _v
+        _v = arg.pop("z", None)
+        self["z"] = z if z is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -8025,11 +7965,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['align']
+        return self["align"]
 
     @align.setter
     def align(self, val):
-        self['align'] = val
+        self["align"] = val
 
     # arrowcolor
     # ----------
@@ -8084,11 +8024,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['arrowcolor']
+        return self["arrowcolor"]
 
     @arrowcolor.setter
     def arrowcolor(self, val):
-        self['arrowcolor'] = val
+        self["arrowcolor"] = val
 
     # arrowhead
     # ---------
@@ -8105,11 +8045,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self['arrowhead']
+        return self["arrowhead"]
 
     @arrowhead.setter
     def arrowhead(self, val):
-        self['arrowhead'] = val
+        self["arrowhead"] = val
 
     # arrowside
     # ---------
@@ -8128,11 +8068,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['arrowside']
+        return self["arrowside"]
 
     @arrowside.setter
     def arrowside(self, val):
-        self['arrowside'] = val
+        self["arrowside"] = val
 
     # arrowsize
     # ---------
@@ -8150,11 +8090,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['arrowsize']
+        return self["arrowsize"]
 
     @arrowsize.setter
     def arrowsize(self, val):
-        self['arrowsize'] = val
+        self["arrowsize"] = val
 
     # arrowwidth
     # ----------
@@ -8170,11 +8110,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['arrowwidth']
+        return self["arrowwidth"]
 
     @arrowwidth.setter
     def arrowwidth(self, val):
-        self['arrowwidth'] = val
+        self["arrowwidth"] = val
 
     # ax
     # --
@@ -8191,11 +8131,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['ax']
+        return self["ax"]
 
     @ax.setter
     def ax(self, val):
-        self['ax'] = val
+        self["ax"] = val
 
     # ay
     # --
@@ -8212,11 +8152,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['ay']
+        return self["ay"]
 
     @ay.setter
     def ay(self, val):
-        self['ay'] = val
+        self["ay"] = val
 
     # bgcolor
     # -------
@@ -8271,11 +8211,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['bgcolor']
+        return self["bgcolor"]
 
     @bgcolor.setter
     def bgcolor(self, val):
-        self['bgcolor'] = val
+        self["bgcolor"] = val
 
     # bordercolor
     # -----------
@@ -8330,11 +8270,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['bordercolor']
+        return self["bordercolor"]
 
     @bordercolor.setter
     def bordercolor(self, val):
-        self['bordercolor'] = val
+        self["bordercolor"] = val
 
     # borderpad
     # ---------
@@ -8351,11 +8291,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['borderpad']
+        return self["borderpad"]
 
     @borderpad.setter
     def borderpad(self, val):
-        self['borderpad'] = val
+        self["borderpad"] = val
 
     # borderwidth
     # -----------
@@ -8372,11 +8312,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['borderwidth']
+        return self["borderwidth"]
 
     @borderwidth.setter
     def borderwidth(self, val):
-        self['borderwidth'] = val
+        self["borderwidth"] = val
 
     # captureevents
     # -------------
@@ -8397,11 +8337,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['captureevents']
+        return self["captureevents"]
 
     @captureevents.setter
     def captureevents(self, val):
-        self['captureevents'] = val
+        self["captureevents"] = val
 
     # font
     # ----
@@ -8442,11 +8382,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.annotation.Font
         """
-        return self['font']
+        return self["font"]
 
     @font.setter
     def font(self, val):
-        self['font'] = val
+        self["font"] = val
 
     # height
     # ------
@@ -8463,11 +8403,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['height']
+        return self["height"]
 
     @height.setter
     def height(self, val):
-        self['height'] = val
+        self["height"] = val
 
     # hoverlabel
     # ----------
@@ -8499,11 +8439,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.scene.annotation.Hoverlabel
         """
-        return self['hoverlabel']
+        return self["hoverlabel"]
 
     @hoverlabel.setter
     def hoverlabel(self, val):
-        self['hoverlabel'] = val
+        self["hoverlabel"] = val
 
     # hovertext
     # ---------
@@ -8521,11 +8461,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['hovertext']
+        return self["hovertext"]
 
     @hovertext.setter
     def hovertext(self, val):
-        self['hovertext'] = val
+        self["hovertext"] = val
 
     # name
     # ----
@@ -8548,11 +8488,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
     # opacity
     # -------
@@ -8568,11 +8508,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
     # showarrow
     # ---------
@@ -8590,11 +8530,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showarrow']
+        return self["showarrow"]
 
     @showarrow.setter
     def showarrow(self, val):
-        self['showarrow'] = val
+        self["showarrow"] = val
 
     # standoff
     # --------
@@ -8614,11 +8554,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['standoff']
+        return self["standoff"]
 
     @standoff.setter
     def standoff(self, val):
-        self['standoff'] = val
+        self["standoff"] = val
 
     # startarrowhead
     # --------------
@@ -8635,11 +8575,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self['startarrowhead']
+        return self["startarrowhead"]
 
     @startarrowhead.setter
     def startarrowhead(self, val):
-        self['startarrowhead'] = val
+        self["startarrowhead"] = val
 
     # startarrowsize
     # --------------
@@ -8657,11 +8597,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['startarrowsize']
+        return self["startarrowsize"]
 
     @startarrowsize.setter
     def startarrowsize(self, val):
-        self['startarrowsize'] = val
+        self["startarrowsize"] = val
 
     # startstandoff
     # -------------
@@ -8681,11 +8621,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['startstandoff']
+        return self["startstandoff"]
 
     @startstandoff.setter
     def startstandoff(self, val):
-        self['startstandoff'] = val
+        self["startstandoff"] = val
 
     # templateitemname
     # ----------------
@@ -8709,11 +8649,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['templateitemname']
+        return self["templateitemname"]
 
     @templateitemname.setter
     def templateitemname(self, val):
-        self['templateitemname'] = val
+        self["templateitemname"] = val
 
     # text
     # ----
@@ -8733,11 +8673,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['text']
+        return self["text"]
 
     @text.setter
     def text(self, val):
-        self['text'] = val
+        self["text"] = val
 
     # textangle
     # ---------
@@ -8756,11 +8696,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['textangle']
+        return self["textangle"]
 
     @textangle.setter
     def textangle(self, val):
-        self['textangle'] = val
+        self["textangle"] = val
 
     # valign
     # ------
@@ -8779,11 +8719,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['valign']
+        return self["valign"]
 
     @valign.setter
     def valign(self, val):
-        self['valign'] = val
+        self["valign"] = val
 
     # visible
     # -------
@@ -8799,11 +8739,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
     # width
     # -----
@@ -8821,11 +8761,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['width']
+        return self["width"]
 
     @width.setter
     def width(self, val):
-        self['width'] = val
+        self["width"] = val
 
     # x
     # -
@@ -8840,11 +8780,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
     # xanchor
     # -------
@@ -8869,11 +8809,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['xanchor']
+        return self["xanchor"]
 
     @xanchor.setter
     def xanchor(self, val):
-        self['xanchor'] = val
+        self["xanchor"] = val
 
     # xshift
     # ------
@@ -8890,11 +8830,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['xshift']
+        return self["xshift"]
 
     @xshift.setter
     def xshift(self, val):
-        self['xshift'] = val
+        self["xshift"] = val
 
     # y
     # -
@@ -8909,11 +8849,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
     # yanchor
     # -------
@@ -8938,11 +8878,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['yanchor']
+        return self["yanchor"]
 
     @yanchor.setter
     def yanchor(self, val):
-        self['yanchor'] = val
+        self["yanchor"] = val
 
     # yshift
     # ------
@@ -8959,11 +8899,11 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['yshift']
+        return self["yshift"]
 
     @yshift.setter
     def yshift(self, val):
-        self['yshift'] = val
+        self["yshift"] = val
 
     # z
     # -
@@ -8978,17 +8918,17 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['z']
+        return self["z"]
 
     @z.setter
     def z(self, val):
-        self['z'] = val
+        self["z"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.scene'
+        return "layout.scene"
 
     # Self properties description
     # ---------------------------
@@ -9365,7 +9305,7 @@ class Annotation(_BaseLayoutHierarchyType):
         -------
         Annotation
         """
-        super(Annotation, self).__init__('annotations')
+        super(Annotation, self).__init__("annotations")
 
         # Validate arg
         # ------------
@@ -9385,138 +9325,130 @@ an instance of plotly.graph_objs.layout.scene.Annotation"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.scene import (annotation as v_annotation)
+        from plotly.validators.layout.scene import annotation as v_annotation
 
         # Initialize validators
         # ---------------------
-        self._validators['align'] = v_annotation.AlignValidator()
-        self._validators['arrowcolor'] = v_annotation.ArrowcolorValidator()
-        self._validators['arrowhead'] = v_annotation.ArrowheadValidator()
-        self._validators['arrowside'] = v_annotation.ArrowsideValidator()
-        self._validators['arrowsize'] = v_annotation.ArrowsizeValidator()
-        self._validators['arrowwidth'] = v_annotation.ArrowwidthValidator()
-        self._validators['ax'] = v_annotation.AxValidator()
-        self._validators['ay'] = v_annotation.AyValidator()
-        self._validators['bgcolor'] = v_annotation.BgcolorValidator()
-        self._validators['bordercolor'] = v_annotation.BordercolorValidator()
-        self._validators['borderpad'] = v_annotation.BorderpadValidator()
-        self._validators['borderwidth'] = v_annotation.BorderwidthValidator()
-        self._validators['captureevents'
-                        ] = v_annotation.CaptureeventsValidator()
-        self._validators['font'] = v_annotation.FontValidator()
-        self._validators['height'] = v_annotation.HeightValidator()
-        self._validators['hoverlabel'] = v_annotation.HoverlabelValidator()
-        self._validators['hovertext'] = v_annotation.HovertextValidator()
-        self._validators['name'] = v_annotation.NameValidator()
-        self._validators['opacity'] = v_annotation.OpacityValidator()
-        self._validators['showarrow'] = v_annotation.ShowarrowValidator()
-        self._validators['standoff'] = v_annotation.StandoffValidator()
-        self._validators['startarrowhead'
-                        ] = v_annotation.StartarrowheadValidator()
-        self._validators['startarrowsize'
-                        ] = v_annotation.StartarrowsizeValidator()
-        self._validators['startstandoff'
-                        ] = v_annotation.StartstandoffValidator()
-        self._validators['templateitemname'
-                        ] = v_annotation.TemplateitemnameValidator()
-        self._validators['text'] = v_annotation.TextValidator()
-        self._validators['textangle'] = v_annotation.TextangleValidator()
-        self._validators['valign'] = v_annotation.ValignValidator()
-        self._validators['visible'] = v_annotation.VisibleValidator()
-        self._validators['width'] = v_annotation.WidthValidator()
-        self._validators['x'] = v_annotation.XValidator()
-        self._validators['xanchor'] = v_annotation.XanchorValidator()
-        self._validators['xshift'] = v_annotation.XshiftValidator()
-        self._validators['y'] = v_annotation.YValidator()
-        self._validators['yanchor'] = v_annotation.YanchorValidator()
-        self._validators['yshift'] = v_annotation.YshiftValidator()
-        self._validators['z'] = v_annotation.ZValidator()
+        self._validators["align"] = v_annotation.AlignValidator()
+        self._validators["arrowcolor"] = v_annotation.ArrowcolorValidator()
+        self._validators["arrowhead"] = v_annotation.ArrowheadValidator()
+        self._validators["arrowside"] = v_annotation.ArrowsideValidator()
+        self._validators["arrowsize"] = v_annotation.ArrowsizeValidator()
+        self._validators["arrowwidth"] = v_annotation.ArrowwidthValidator()
+        self._validators["ax"] = v_annotation.AxValidator()
+        self._validators["ay"] = v_annotation.AyValidator()
+        self._validators["bgcolor"] = v_annotation.BgcolorValidator()
+        self._validators["bordercolor"] = v_annotation.BordercolorValidator()
+        self._validators["borderpad"] = v_annotation.BorderpadValidator()
+        self._validators["borderwidth"] = v_annotation.BorderwidthValidator()
+        self._validators["captureevents"] = v_annotation.CaptureeventsValidator()
+        self._validators["font"] = v_annotation.FontValidator()
+        self._validators["height"] = v_annotation.HeightValidator()
+        self._validators["hoverlabel"] = v_annotation.HoverlabelValidator()
+        self._validators["hovertext"] = v_annotation.HovertextValidator()
+        self._validators["name"] = v_annotation.NameValidator()
+        self._validators["opacity"] = v_annotation.OpacityValidator()
+        self._validators["showarrow"] = v_annotation.ShowarrowValidator()
+        self._validators["standoff"] = v_annotation.StandoffValidator()
+        self._validators["startarrowhead"] = v_annotation.StartarrowheadValidator()
+        self._validators["startarrowsize"] = v_annotation.StartarrowsizeValidator()
+        self._validators["startstandoff"] = v_annotation.StartstandoffValidator()
+        self._validators["templateitemname"] = v_annotation.TemplateitemnameValidator()
+        self._validators["text"] = v_annotation.TextValidator()
+        self._validators["textangle"] = v_annotation.TextangleValidator()
+        self._validators["valign"] = v_annotation.ValignValidator()
+        self._validators["visible"] = v_annotation.VisibleValidator()
+        self._validators["width"] = v_annotation.WidthValidator()
+        self._validators["x"] = v_annotation.XValidator()
+        self._validators["xanchor"] = v_annotation.XanchorValidator()
+        self._validators["xshift"] = v_annotation.XshiftValidator()
+        self._validators["y"] = v_annotation.YValidator()
+        self._validators["yanchor"] = v_annotation.YanchorValidator()
+        self._validators["yshift"] = v_annotation.YshiftValidator()
+        self._validators["z"] = v_annotation.ZValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('align', None)
-        self['align'] = align if align is not None else _v
-        _v = arg.pop('arrowcolor', None)
-        self['arrowcolor'] = arrowcolor if arrowcolor is not None else _v
-        _v = arg.pop('arrowhead', None)
-        self['arrowhead'] = arrowhead if arrowhead is not None else _v
-        _v = arg.pop('arrowside', None)
-        self['arrowside'] = arrowside if arrowside is not None else _v
-        _v = arg.pop('arrowsize', None)
-        self['arrowsize'] = arrowsize if arrowsize is not None else _v
-        _v = arg.pop('arrowwidth', None)
-        self['arrowwidth'] = arrowwidth if arrowwidth is not None else _v
-        _v = arg.pop('ax', None)
-        self['ax'] = ax if ax is not None else _v
-        _v = arg.pop('ay', None)
-        self['ay'] = ay if ay is not None else _v
-        _v = arg.pop('bgcolor', None)
-        self['bgcolor'] = bgcolor if bgcolor is not None else _v
-        _v = arg.pop('bordercolor', None)
-        self['bordercolor'] = bordercolor if bordercolor is not None else _v
-        _v = arg.pop('borderpad', None)
-        self['borderpad'] = borderpad if borderpad is not None else _v
-        _v = arg.pop('borderwidth', None)
-        self['borderwidth'] = borderwidth if borderwidth is not None else _v
-        _v = arg.pop('captureevents', None)
-        self['captureevents'
-            ] = captureevents if captureevents is not None else _v
-        _v = arg.pop('font', None)
-        self['font'] = font if font is not None else _v
-        _v = arg.pop('height', None)
-        self['height'] = height if height is not None else _v
-        _v = arg.pop('hoverlabel', None)
-        self['hoverlabel'] = hoverlabel if hoverlabel is not None else _v
-        _v = arg.pop('hovertext', None)
-        self['hovertext'] = hovertext if hovertext is not None else _v
-        _v = arg.pop('name', None)
-        self['name'] = name if name is not None else _v
-        _v = arg.pop('opacity', None)
-        self['opacity'] = opacity if opacity is not None else _v
-        _v = arg.pop('showarrow', None)
-        self['showarrow'] = showarrow if showarrow is not None else _v
-        _v = arg.pop('standoff', None)
-        self['standoff'] = standoff if standoff is not None else _v
-        _v = arg.pop('startarrowhead', None)
-        self['startarrowhead'
-            ] = startarrowhead if startarrowhead is not None else _v
-        _v = arg.pop('startarrowsize', None)
-        self['startarrowsize'
-            ] = startarrowsize if startarrowsize is not None else _v
-        _v = arg.pop('startstandoff', None)
-        self['startstandoff'
-            ] = startstandoff if startstandoff is not None else _v
-        _v = arg.pop('templateitemname', None)
-        self['templateitemname'
-            ] = templateitemname if templateitemname is not None else _v
-        _v = arg.pop('text', None)
-        self['text'] = text if text is not None else _v
-        _v = arg.pop('textangle', None)
-        self['textangle'] = textangle if textangle is not None else _v
-        _v = arg.pop('valign', None)
-        self['valign'] = valign if valign is not None else _v
-        _v = arg.pop('visible', None)
-        self['visible'] = visible if visible is not None else _v
-        _v = arg.pop('width', None)
-        self['width'] = width if width is not None else _v
-        _v = arg.pop('x', None)
-        self['x'] = x if x is not None else _v
-        _v = arg.pop('xanchor', None)
-        self['xanchor'] = xanchor if xanchor is not None else _v
-        _v = arg.pop('xshift', None)
-        self['xshift'] = xshift if xshift is not None else _v
-        _v = arg.pop('y', None)
-        self['y'] = y if y is not None else _v
-        _v = arg.pop('yanchor', None)
-        self['yanchor'] = yanchor if yanchor is not None else _v
-        _v = arg.pop('yshift', None)
-        self['yshift'] = yshift if yshift is not None else _v
-        _v = arg.pop('z', None)
-        self['z'] = z if z is not None else _v
+        _v = arg.pop("align", None)
+        self["align"] = align if align is not None else _v
+        _v = arg.pop("arrowcolor", None)
+        self["arrowcolor"] = arrowcolor if arrowcolor is not None else _v
+        _v = arg.pop("arrowhead", None)
+        self["arrowhead"] = arrowhead if arrowhead is not None else _v
+        _v = arg.pop("arrowside", None)
+        self["arrowside"] = arrowside if arrowside is not None else _v
+        _v = arg.pop("arrowsize", None)
+        self["arrowsize"] = arrowsize if arrowsize is not None else _v
+        _v = arg.pop("arrowwidth", None)
+        self["arrowwidth"] = arrowwidth if arrowwidth is not None else _v
+        _v = arg.pop("ax", None)
+        self["ax"] = ax if ax is not None else _v
+        _v = arg.pop("ay", None)
+        self["ay"] = ay if ay is not None else _v
+        _v = arg.pop("bgcolor", None)
+        self["bgcolor"] = bgcolor if bgcolor is not None else _v
+        _v = arg.pop("bordercolor", None)
+        self["bordercolor"] = bordercolor if bordercolor is not None else _v
+        _v = arg.pop("borderpad", None)
+        self["borderpad"] = borderpad if borderpad is not None else _v
+        _v = arg.pop("borderwidth", None)
+        self["borderwidth"] = borderwidth if borderwidth is not None else _v
+        _v = arg.pop("captureevents", None)
+        self["captureevents"] = captureevents if captureevents is not None else _v
+        _v = arg.pop("font", None)
+        self["font"] = font if font is not None else _v
+        _v = arg.pop("height", None)
+        self["height"] = height if height is not None else _v
+        _v = arg.pop("hoverlabel", None)
+        self["hoverlabel"] = hoverlabel if hoverlabel is not None else _v
+        _v = arg.pop("hovertext", None)
+        self["hovertext"] = hovertext if hovertext is not None else _v
+        _v = arg.pop("name", None)
+        self["name"] = name if name is not None else _v
+        _v = arg.pop("opacity", None)
+        self["opacity"] = opacity if opacity is not None else _v
+        _v = arg.pop("showarrow", None)
+        self["showarrow"] = showarrow if showarrow is not None else _v
+        _v = arg.pop("standoff", None)
+        self["standoff"] = standoff if standoff is not None else _v
+        _v = arg.pop("startarrowhead", None)
+        self["startarrowhead"] = startarrowhead if startarrowhead is not None else _v
+        _v = arg.pop("startarrowsize", None)
+        self["startarrowsize"] = startarrowsize if startarrowsize is not None else _v
+        _v = arg.pop("startstandoff", None)
+        self["startstandoff"] = startstandoff if startstandoff is not None else _v
+        _v = arg.pop("templateitemname", None)
+        self["templateitemname"] = (
+            templateitemname if templateitemname is not None else _v
+        )
+        _v = arg.pop("text", None)
+        self["text"] = text if text is not None else _v
+        _v = arg.pop("textangle", None)
+        self["textangle"] = textangle if textangle is not None else _v
+        _v = arg.pop("valign", None)
+        self["valign"] = valign if valign is not None else _v
+        _v = arg.pop("visible", None)
+        self["visible"] = visible if visible is not None else _v
+        _v = arg.pop("width", None)
+        self["width"] = width if width is not None else _v
+        _v = arg.pop("x", None)
+        self["x"] = x if x is not None else _v
+        _v = arg.pop("xanchor", None)
+        self["xanchor"] = xanchor if xanchor is not None else _v
+        _v = arg.pop("xshift", None)
+        self["xshift"] = xshift if xshift is not None else _v
+        _v = arg.pop("y", None)
+        self["y"] = y if y is not None else _v
+        _v = arg.pop("yanchor", None)
+        self["yanchor"] = yanchor if yanchor is not None else _v
+        _v = arg.pop("yshift", None)
+        self["yshift"] = yshift if yshift is not None else _v
+        _v = arg.pop("z", None)
+        self["z"] = z if z is not None else _v
 
         # Process unknown kwargs
         # ----------------------

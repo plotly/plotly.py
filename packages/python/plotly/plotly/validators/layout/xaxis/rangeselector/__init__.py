@@ -1,22 +1,16 @@
-
-
 import _plotly_utils.basevalidators
 
 
 class YanchorValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
     def __init__(
-        self,
-        plotly_name='yanchor',
-        parent_name='layout.xaxis.rangeselector',
-        **kwargs
+        self, plotly_name="yanchor", parent_name="layout.xaxis.rangeselector", **kwargs
     ):
         super(YanchorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'info'),
-            values=kwargs.pop('values', ['auto', 'top', 'middle', 'bottom']),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "info"),
+            values=kwargs.pop("values", ["auto", "top", "middle", "bottom"]),
             **kwargs
         )
 
@@ -25,20 +19,16 @@ import _plotly_utils.basevalidators
 
 
 class YValidator(_plotly_utils.basevalidators.NumberValidator):
-
     def __init__(
-        self,
-        plotly_name='y',
-        parent_name='layout.xaxis.rangeselector',
-        **kwargs
+        self, plotly_name="y", parent_name="layout.xaxis.rangeselector", **kwargs
     ):
         super(YValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            max=kwargs.pop('max', 3),
-            min=kwargs.pop('min', -2),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            max=kwargs.pop("max", 3),
+            min=kwargs.pop("min", -2),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -47,19 +37,15 @@ import _plotly_utils.basevalidators
 
 
 class XanchorValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
     def __init__(
-        self,
-        plotly_name='xanchor',
-        parent_name='layout.xaxis.rangeselector',
-        **kwargs
+        self, plotly_name="xanchor", parent_name="layout.xaxis.rangeselector", **kwargs
     ):
         super(XanchorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'info'),
-            values=kwargs.pop('values', ['auto', 'left', 'center', 'right']),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "info"),
+            values=kwargs.pop("values", ["auto", "left", "center", "right"]),
             **kwargs
         )
 
@@ -68,20 +54,16 @@ import _plotly_utils.basevalidators
 
 
 class XValidator(_plotly_utils.basevalidators.NumberValidator):
-
     def __init__(
-        self,
-        plotly_name='x',
-        parent_name='layout.xaxis.rangeselector',
-        **kwargs
+        self, plotly_name="x", parent_name="layout.xaxis.rangeselector", **kwargs
     ):
         super(XValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            max=kwargs.pop('max', 3),
-            min=kwargs.pop('min', -2),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            max=kwargs.pop("max", 3),
+            min=kwargs.pop("min", -2),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -90,18 +72,14 @@ import _plotly_utils.basevalidators
 
 
 class VisibleValidator(_plotly_utils.basevalidators.BooleanValidator):
-
     def __init__(
-        self,
-        plotly_name='visible',
-        parent_name='layout.xaxis.rangeselector',
-        **kwargs
+        self, plotly_name="visible", parent_name="layout.xaxis.rangeselector", **kwargs
     ):
         super(VisibleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -110,19 +88,16 @@ import _plotly_utils.basevalidators
 
 
 class FontValidator(_plotly_utils.basevalidators.CompoundValidator):
-
     def __init__(
-        self,
-        plotly_name='font',
-        parent_name='layout.xaxis.rangeselector',
-        **kwargs
+        self, plotly_name="font", parent_name="layout.xaxis.rangeselector", **kwargs
     ):
         super(FontValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Font'),
+            data_class_str=kwargs.pop("data_class_str", "Font"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             color
 
             family
@@ -143,7 +118,7 @@ class FontValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Narrow", "Raleway", "Times New Roman".
             size
 
-"""
+""",
             ),
             **kwargs
         )
@@ -153,19 +128,21 @@ import _plotly_utils.basevalidators
 
 
 class ButtonValidator(_plotly_utils.basevalidators.CompoundValidator):
-
     def __init__(
         self,
-        plotly_name='buttondefaults',
-        parent_name='layout.xaxis.rangeselector',
+        plotly_name="buttondefaults",
+        parent_name="layout.xaxis.rangeselector",
         **kwargs
     ):
         super(ButtonValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Button'),
-            data_docs=kwargs.pop('data_docs', """
-"""),
+            data_class_str=kwargs.pop("data_class_str", "Button"),
+            data_docs=kwargs.pop(
+                "data_docs",
+                """
+""",
+            ),
             **kwargs
         )
 
@@ -174,19 +151,16 @@ import _plotly_utils.basevalidators
 
 
 class ButtonsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-
     def __init__(
-        self,
-        plotly_name='buttons',
-        parent_name='layout.xaxis.rangeselector',
-        **kwargs
+        self, plotly_name="buttons", parent_name="layout.xaxis.rangeselector", **kwargs
     ):
         super(ButtonsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Button'),
+            data_class_str=kwargs.pop("data_class_str", "Button"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             count
                 Sets the number of steps to take to update the
                 range. Use with `step` to specify the update
@@ -232,7 +206,7 @@ class ButtonsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
             visible
                 Determines whether or not this button is
                 visible.
-"""
+""",
             ),
             **kwargs
         )
@@ -242,19 +216,18 @@ import _plotly_utils.basevalidators
 
 
 class BorderwidthValidator(_plotly_utils.basevalidators.NumberValidator):
-
     def __init__(
         self,
-        plotly_name='borderwidth',
-        parent_name='layout.xaxis.rangeselector',
+        plotly_name="borderwidth",
+        parent_name="layout.xaxis.rangeselector",
         **kwargs
     ):
         super(BorderwidthValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            min=kwargs.pop('min', 0),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            min=kwargs.pop("min", 0),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -263,18 +236,17 @@ import _plotly_utils.basevalidators
 
 
 class BordercolorValidator(_plotly_utils.basevalidators.ColorValidator):
-
     def __init__(
         self,
-        plotly_name='bordercolor',
-        parent_name='layout.xaxis.rangeselector',
+        plotly_name="bordercolor",
+        parent_name="layout.xaxis.rangeselector",
         **kwargs
     ):
         super(BordercolorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -283,18 +255,14 @@ import _plotly_utils.basevalidators
 
 
 class BgcolorValidator(_plotly_utils.basevalidators.ColorValidator):
-
     def __init__(
-        self,
-        plotly_name='bgcolor',
-        parent_name='layout.xaxis.rangeselector',
-        **kwargs
+        self, plotly_name="bgcolor", parent_name="layout.xaxis.rangeselector", **kwargs
     ):
         super(BgcolorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -303,17 +271,16 @@ import _plotly_utils.basevalidators
 
 
 class ActivecolorValidator(_plotly_utils.basevalidators.ColorValidator):
-
     def __init__(
         self,
-        plotly_name='activecolor',
-        parent_name='layout.xaxis.rangeselector',
+        plotly_name="activecolor",
+        parent_name="layout.xaxis.rangeselector",
         **kwargs
     ):
         super(ActivecolorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )

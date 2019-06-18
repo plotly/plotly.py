@@ -13,8 +13,9 @@ from plotly.exceptions import PlotlyError
 
 
 def test_trivial():
-    print(Scatter())
-    assert Scatter().to_plotly_json() == dict(type='scatter')
+    print (Scatter())
+    assert Scatter().to_plotly_json() == dict(type="scatter")
+
 
 # @raises(PlotlyError)  # TODO: decide if this SHOULD raise error...
 # def test_instantiation_error():
@@ -23,7 +24,7 @@ def test_trivial():
 
 # TODO: decide if this should raise error
 
-#def test_validate():
+# def test_validate():
 #    Scatter().validate()
 
 # @raises(PlotlyError)

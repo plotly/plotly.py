@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -20,11 +18,11 @@ class Rotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['lat']
+        return self["lat"]
 
     @lat.setter
     def lat(self, val):
-        self['lat'] = val
+        self["lat"] = val
 
     # lon
     # ---
@@ -41,11 +39,11 @@ class Rotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['lon']
+        return self["lon"]
 
     @lon.setter
     def lon(self, val):
-        self['lon'] = val
+        self["lon"] = val
 
     # roll
     # ----
@@ -62,17 +60,17 @@ class Rotation(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['roll']
+        return self["roll"]
 
     @roll.setter
     def roll(self, val):
-        self['roll'] = val
+        self["roll"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.geo.projection'
+        return "layout.geo.projection"
 
     # Self properties description
     # ---------------------------
@@ -112,7 +110,7 @@ class Rotation(_BaseLayoutHierarchyType):
         -------
         Rotation
         """
-        super(Rotation, self).__init__('rotation')
+        super(Rotation, self).__init__("rotation")
 
         # Validate arg
         # ------------
@@ -132,28 +130,26 @@ an instance of plotly.graph_objs.layout.geo.projection.Rotation"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.geo.projection import (
-            rotation as v_rotation
-        )
+        from plotly.validators.layout.geo.projection import rotation as v_rotation
 
         # Initialize validators
         # ---------------------
-        self._validators['lat'] = v_rotation.LatValidator()
-        self._validators['lon'] = v_rotation.LonValidator()
-        self._validators['roll'] = v_rotation.RollValidator()
+        self._validators["lat"] = v_rotation.LatValidator()
+        self._validators["lon"] = v_rotation.LonValidator()
+        self._validators["roll"] = v_rotation.RollValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('lat', None)
-        self['lat'] = lat if lat is not None else _v
-        _v = arg.pop('lon', None)
-        self['lon'] = lon if lon is not None else _v
-        _v = arg.pop('roll', None)
-        self['roll'] = roll if roll is not None else _v
+        _v = arg.pop("lat", None)
+        self["lat"] = lat if lat is not None else _v
+        _v = arg.pop("lon", None)
+        self["lon"] = lon if lon is not None else _v
+        _v = arg.pop("roll", None)
+        self["roll"] = roll if roll is not None else _v
 
         # Process unknown kwargs
         # ----------------------

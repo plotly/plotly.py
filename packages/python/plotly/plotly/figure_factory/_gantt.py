@@ -7,9 +7,9 @@ import plotly.colors as clrs
 from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
 
-pd = optional_imports.get_module('pandas')
+pd = optional_imports.get_module("pandas")
 
-REQUIRED_GANTT_KEYS = ['Task', 'Start', 'Finish']
+REQUIRED_GANTT_KEYS = ["Task", "Start", "Finish"]
 
 
 def validate_gantt(df):
@@ -22,8 +22,7 @@ def validate_gantt(df):
             if key not in df:
                 raise exceptions.PlotlyError(
                     "The columns in your dataframe must include the "
-                    "following keys: {0}".format(
-                        ', '.join(REQUIRED_GANTT_KEYS))
+                    "following keys: {0}".format(", ".join(REQUIRED_GANTT_KEYS))
                 )
 
         num_of_rows = len(df.index)
@@ -38,21 +37,34 @@ def validate_gantt(df):
 
     # validate if df is a list
     if not isinstance(df, list):
-        raise exceptions.PlotlyError("You must input either a dataframe "
-                                     "or a list of dictionaries.")
+        raise exceptions.PlotlyError(
+            "You must input either a dataframe " "or a list of dictionaries."
+        )
 
     # validate if df is empty
     if len(df) <= 0:
-        raise exceptions.PlotlyError("Your list is empty. It must contain "
-                                     "at least one dictionary.")
+        raise exceptions.PlotlyError(
+            "Your list is empty. It must contain " "at least one dictionary."
+        )
     if not isinstance(df[0], dict):
-        raise exceptions.PlotlyError("Your list must only "
-                                     "include dictionaries.")
+        raise exceptions.PlotlyError("Your list must only " "include dictionaries.")
     return df
 
 
-def gantt(chart, colors, title, bar_width, showgrid_x, showgrid_y, height,
-          width, tasks=None, task_names=None, data=None, group_tasks=False):
+def gantt(
+    chart,
+    colors,
+    title,
+    bar_width,
+    showgrid_x,
+    showgrid_y,
+    height,
+    width,
+    tasks=None,
+    task_names=None,
+    data=None,
+    group_tasks=False,
+):
     """
     Refer to create_gantt() for docstring
     """
@@ -64,25 +76,25 @@ def gantt(chart, colors, title, bar_width, showgrid_x, showgrid_y, height,
         data = []
 
     for index in range(len(chart)):
-        task = dict(x0=chart[index]['Start'],
-                    x1=chart[index]['Finish'],
-                    name=chart[index]['Task'])
-        if 'Description' in chart[index]:
-            task['description'] = chart[index]['Description']
+        task = dict(
+            x0=chart[index]["Start"],
+            x1=chart[index]["Finish"],
+            name=chart[index]["Task"],
+        )
+        if "Description" in chart[index]:
+            task["description"] = chart[index]["Description"]
         tasks.append(task)
 
     shape_template = {
-        'type': 'rect',
-        'xref': 'x',
-        'yref': 'y',
-        'opacity': 1,
-        'line': {
-            'width': 0,
-        }
+        "type": "rect",
+        "xref": "x",
+        "yref": "y",
+        "opacity": 1,
+        "line": {"width": 0},
     }
     # create the list of task names
     for index in range(len(tasks)):
-        tn = tasks[index]['name']
+        tn = tasks[index]["name"]
         # Is added to task_names if group_tasks is set to False,
         # or if the option is used (True) it only adds them if the
         # name is not already in the list
@@ -95,8 +107,8 @@ def gantt(chart, colors, title, bar_width, showgrid_x, showgrid_y, height,
 
     color_index = 0
     for index in range(len(tasks)):
-        tn = tasks[index]['name']
-        del tasks[index]['name']
+        tn = tasks[index]["name"]
+        del tasks[index]["name"]
         tasks[index].update(shape_template)
 
         # If group_tasks is True, all tasks with the same name belong
@@ -104,23 +116,23 @@ def gantt(chart, colors, title, bar_width, showgrid_x, showgrid_y, height,
         groupID = index
         if group_tasks:
             groupID = task_names.index(tn)
-        tasks[index]['y0'] = groupID - bar_width
-        tasks[index]['y1'] = groupID + bar_width
+        tasks[index]["y0"] = groupID - bar_width
+        tasks[index]["y1"] = groupID + bar_width
 
         # check if colors need to be looped
         if color_index >= len(colors):
             color_index = 0
-        tasks[index]['fillcolor'] = colors[color_index]
+        tasks[index]["fillcolor"] = colors[color_index]
         # Add a line for hover text and autorange
         entry = dict(
-            x=[tasks[index]['x0'], tasks[index]['x1']],
+            x=[tasks[index]["x0"], tasks[index]["x1"]],
             y=[groupID, groupID],
-            name='',
-            marker={'color': 'white'}
+            name="",
+            marker={"color": "white"},
         )
         if "description" in tasks[index]:
-            entry['text'] = tasks[index]['description']
-            del tasks[index]['description']
+            entry["text"] = tasks[index]["description"]
+            del tasks[index]["description"]
         data.append(entry)
         color_index += 1
 
@@ -130,7 +142,7 @@ def gantt(chart, colors, title, bar_width, showgrid_x, showgrid_y, height,
         height=height,
         width=width,
         shapes=[],
-        hovermode='closest',
+        hovermode="closest",
         yaxis=dict(
             showgrid=showgrid_y,
             ticktext=task_names,
@@ -143,42 +155,42 @@ def gantt(chart, colors, title, bar_width, showgrid_x, showgrid_y, height,
             showgrid=showgrid_x,
             zeroline=False,
             rangeselector=dict(
-                buttons=list([
-                    dict(count=7,
-                         label='1w',
-                         step='day',
-                         stepmode='backward'),
-                    dict(count=1,
-                         label='1m',
-                         step='month',
-                         stepmode='backward'),
-                    dict(count=6,
-                         label='6m',
-                         step='month',
-                         stepmode='backward'),
-                    dict(count=1,
-                         label='YTD',
-                         step='year',
-                         stepmode='todate'),
-                    dict(count=1,
-                         label='1y',
-                         step='year',
-                         stepmode='backward'),
-                    dict(step='all')
-                ])
+                buttons=list(
+                    [
+                        dict(count=7, label="1w", step="day", stepmode="backward"),
+                        dict(count=1, label="1m", step="month", stepmode="backward"),
+                        dict(count=6, label="6m", step="month", stepmode="backward"),
+                        dict(count=1, label="YTD", step="year", stepmode="todate"),
+                        dict(count=1, label="1y", step="year", stepmode="backward"),
+                        dict(step="all"),
+                    ]
+                )
             ),
-            type='date'
-        )
+            type="date",
+        ),
     )
-    layout['shapes'] = tasks
+    layout["shapes"] = tasks
 
     fig = graph_objs.Figure(data=data, layout=layout)
     return fig
 
 
-def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
-                     showgrid_x, showgrid_y, height, width, tasks=None,
-                     task_names=None, data=None, group_tasks=False):
+def gantt_colorscale(
+    chart,
+    colors,
+    title,
+    index_col,
+    show_colorbar,
+    bar_width,
+    showgrid_x,
+    showgrid_y,
+    height,
+    width,
+    tasks=None,
+    task_names=None,
+    data=None,
+    group_tasks=False,
+):
     """
     Refer to FigureFactory.create_gantt() for docstring
     """
@@ -191,21 +203,21 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
     showlegend = False
 
     for index in range(len(chart)):
-        task = dict(x0=chart[index]['Start'],
-                    x1=chart[index]['Finish'],
-                    name=chart[index]['Task'])
-        if 'Description' in chart[index]:
-            task['description'] = chart[index]['Description']
+        task = dict(
+            x0=chart[index]["Start"],
+            x1=chart[index]["Finish"],
+            name=chart[index]["Task"],
+        )
+        if "Description" in chart[index]:
+            task["description"] = chart[index]["Description"]
         tasks.append(task)
 
     shape_template = {
-        'type': 'rect',
-        'xref': 'x',
-        'yref': 'y',
-        'opacity': 1,
-        'line': {
-            'width': 0,
-        }
+        "type": "rect",
+        "xref": "x",
+        "yref": "y",
+        "opacity": 1,
+        "line": {"width": 0},
     }
 
     # compute the color for task based on indexing column
@@ -221,7 +233,7 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
 
         # create the list of task names
         for index in range(len(tasks)):
-            tn = tasks[index]['name']
+            tn = tasks[index]["name"]
             # Is added to task_names if group_tasks is set to False,
             # or if the option is used (True) it only adds them if the
             # name is not already in the list
@@ -233,8 +245,8 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
             task_names.reverse()
 
         for index in range(len(tasks)):
-            tn = tasks[index]['name']
-            del tasks[index]['name']
+            tn = tasks[index]["name"]
+            del tasks[index]["name"]
             tasks[index].update(shape_template)
 
             # If group_tasks is True, all tasks with the same name belong
@@ -242,8 +254,8 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
             groupID = index
             if group_tasks:
                 groupID = task_names.index(tn)
-            tasks[index]['y0'] = groupID - bar_width
-            tasks[index]['y1'] = groupID + bar_width
+            tasks[index]["y0"] = groupID - bar_width
+            tasks[index]["y1"] = groupID + bar_width
 
             # unlabel color
             colors = clrs.color_parser(colors, clrs.unlabel_rgb)
@@ -251,40 +263,38 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
             highcolor = colors[1]
 
             intermed = (chart[index][index_col]) / 100.0
-            intermed_color = clrs.find_intermediate_color(
-                lowcolor, highcolor, intermed
-            )
-            intermed_color = clrs.color_parser(
-                intermed_color, clrs.label_rgb
-            )
-            tasks[index]['fillcolor'] = intermed_color
+            intermed_color = clrs.find_intermediate_color(lowcolor, highcolor, intermed)
+            intermed_color = clrs.color_parser(intermed_color, clrs.label_rgb)
+            tasks[index]["fillcolor"] = intermed_color
             # relabel colors with 'rgb'
             colors = clrs.color_parser(colors, clrs.label_rgb)
 
             # add a line for hover text and autorange
             entry = dict(
-                x=[tasks[index]['x0'], tasks[index]['x1']],
+                x=[tasks[index]["x0"], tasks[index]["x1"]],
                 y=[groupID, groupID],
-                name='',
-                marker={'color': 'white'}
+                name="",
+                marker={"color": "white"},
             )
             if "description" in tasks[index]:
-                entry['text'] = tasks[index]['description']
-                del tasks[index]['description']
+                entry["text"] = tasks[index]["description"]
+                del tasks[index]["description"]
             data.append(entry)
 
         if show_colorbar is True:
             # generate dummy data for colorscale visibility
             data.append(
                 dict(
-                    x=[tasks[index]['x0'], tasks[index]['x0']],
+                    x=[tasks[index]["x0"], tasks[index]["x0"]],
                     y=[index, index],
-                    name='',
-                    marker={'color': 'white',
-                            'colorscale': [[0, colors[0]], [1, colors[1]]],
-                            'showscale': True,
-                            'cmax': 100,
-                            'cmin': 0}
+                    name="",
+                    marker={
+                        "color": "white",
+                        "colorscale": [[0, colors[0]], [1, colors[1]]],
+                        "showscale": True,
+                        "cmax": 100,
+                        "cmin": 0,
+                    },
                 )
             )
 
@@ -315,7 +325,7 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
 
         # create the list of task names
         for index in range(len(tasks)):
-            tn = tasks[index]['name']
+            tn = tasks[index]["name"]
             # Is added to task_names if group_tasks is set to False,
             # or if the option is used (True) it only adds them if the
             # name is not already in the list
@@ -327,31 +337,29 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
             task_names.reverse()
 
         for index in range(len(tasks)):
-            tn = tasks[index]['name']
-            del tasks[index]['name']
+            tn = tasks[index]["name"]
+            del tasks[index]["name"]
             tasks[index].update(shape_template)
             # If group_tasks is True, all tasks with the same name belong
             # to the same row.
             groupID = index
             if group_tasks:
                 groupID = task_names.index(tn)
-            tasks[index]['y0'] = groupID - bar_width
-            tasks[index]['y1'] = groupID + bar_width
+            tasks[index]["y0"] = groupID - bar_width
+            tasks[index]["y1"] = groupID + bar_width
 
-            tasks[index]['fillcolor'] = index_vals_dict[
-                chart[index][index_col]
-            ]
+            tasks[index]["fillcolor"] = index_vals_dict[chart[index][index_col]]
 
             # add a line for hover text and autorange
             entry = dict(
-                x=[tasks[index]['x0'], tasks[index]['x1']],
+                x=[tasks[index]["x0"], tasks[index]["x1"]],
                 y=[groupID, groupID],
-                name='',
-                marker={'color': 'white'}
+                name="",
+                marker={"color": "white"},
             )
             if "description" in tasks[index]:
-                entry['text'] = tasks[index]['description']
-                del tasks[index]['description']
+                entry["text"] = tasks[index]["description"]
+                del tasks[index]["description"]
             data.append(entry)
 
         if show_colorbar is True:
@@ -360,15 +368,12 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
             for k, index_value in enumerate(index_vals):
                 data.append(
                     dict(
-                        x=[tasks[index]['x0'], tasks[index]['x0']],
+                        x=[tasks[index]["x0"], tasks[index]["x0"]],
                         y=[k, k],
                         showlegend=True,
                         name=str(index_value),
-                        hoverinfo='none',
-                        marker=dict(
-                            color=colors[k],
-                            size=1
-                        )
+                        hoverinfo="none",
+                        marker=dict(color=colors[k], size=1),
                     )
                 )
 
@@ -378,7 +383,7 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
         height=height,
         width=width,
         shapes=[],
-        hovermode='closest',
+        hovermode="closest",
         yaxis=dict(
             showgrid=showgrid_y,
             ticktext=task_names,
@@ -391,42 +396,42 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
             showgrid=showgrid_x,
             zeroline=False,
             rangeselector=dict(
-                buttons=list([
-                    dict(count=7,
-                         label='1w',
-                         step='day',
-                         stepmode='backward'),
-                    dict(count=1,
-                         label='1m',
-                         step='month',
-                         stepmode='backward'),
-                    dict(count=6,
-                         label='6m',
-                         step='month',
-                         stepmode='backward'),
-                    dict(count=1,
-                         label='YTD',
-                         step='year',
-                         stepmode='todate'),
-                    dict(count=1,
-                         label='1y',
-                         step='year',
-                         stepmode='backward'),
-                    dict(step='all')
-                ])
+                buttons=list(
+                    [
+                        dict(count=7, label="1w", step="day", stepmode="backward"),
+                        dict(count=1, label="1m", step="month", stepmode="backward"),
+                        dict(count=6, label="6m", step="month", stepmode="backward"),
+                        dict(count=1, label="YTD", step="year", stepmode="todate"),
+                        dict(count=1, label="1y", step="year", stepmode="backward"),
+                        dict(step="all"),
+                    ]
+                )
             ),
-            type='date'
-        )
+            type="date",
+        ),
     )
-    layout['shapes'] = tasks
+    layout["shapes"] = tasks
 
     fig = dict(data=data, layout=layout)
     return fig
 
 
-def gantt_dict(chart, colors, title, index_col, show_colorbar, bar_width,
-               showgrid_x, showgrid_y, height, width, tasks=None,
-               task_names=None, data=None, group_tasks=False):
+def gantt_dict(
+    chart,
+    colors,
+    title,
+    index_col,
+    show_colorbar,
+    bar_width,
+    showgrid_x,
+    showgrid_y,
+    height,
+    width,
+    tasks=None,
+    task_names=None,
+    data=None,
+    group_tasks=False,
+):
     """
     Refer to FigureFactory.create_gantt() for docstring
     """
@@ -439,21 +444,21 @@ def gantt_dict(chart, colors, title, index_col, show_colorbar, bar_width,
     showlegend = False
 
     for index in range(len(chart)):
-        task = dict(x0=chart[index]['Start'],
-                    x1=chart[index]['Finish'],
-                    name=chart[index]['Task'])
-        if 'Description' in chart[index]:
-            task['description'] = chart[index]['Description']
+        task = dict(
+            x0=chart[index]["Start"],
+            x1=chart[index]["Finish"],
+            name=chart[index]["Task"],
+        )
+        if "Description" in chart[index]:
+            task["description"] = chart[index]["Description"]
         tasks.append(task)
 
     shape_template = {
-        'type': 'rect',
-        'xref': 'x',
-        'yref': 'y',
-        'opacity': 1,
-        'line': {
-            'width': 0,
-        }
+        "type": "rect",
+        "xref": "x",
+        "yref": "y",
+        "opacity": 1,
+        "line": {"width": 0},
     }
 
     index_vals = []
@@ -473,7 +478,7 @@ def gantt_dict(chart, colors, title, index_col, show_colorbar, bar_width,
 
     # create the list of task names
     for index in range(len(tasks)):
-        tn = tasks[index]['name']
+        tn = tasks[index]["name"]
         # Is added to task_names if group_tasks is set to False,
         # or if the option is used (True) it only adds them if the
         # name is not already in the list
@@ -485,8 +490,8 @@ def gantt_dict(chart, colors, title, index_col, show_colorbar, bar_width,
         task_names.reverse()
 
     for index in range(len(tasks)):
-        tn = tasks[index]['name']
-        del tasks[index]['name']
+        tn = tasks[index]["name"]
+        del tasks[index]["name"]
         tasks[index].update(shape_template)
 
         # If group_tasks is True, all tasks with the same name belong
@@ -494,22 +499,22 @@ def gantt_dict(chart, colors, title, index_col, show_colorbar, bar_width,
         groupID = index
         if group_tasks:
             groupID = task_names.index(tn)
-        tasks[index]['y0'] = groupID - bar_width
-        tasks[index]['y1'] = groupID + bar_width
+        tasks[index]["y0"] = groupID - bar_width
+        tasks[index]["y1"] = groupID + bar_width
 
-        tasks[index]['fillcolor'] = colors[chart[index][index_col]]
+        tasks[index]["fillcolor"] = colors[chart[index][index_col]]
 
         # add a line for hover text and autorange
         entry = dict(
-            x=[tasks[index]['x0'], tasks[index]['x1']],
+            x=[tasks[index]["x0"], tasks[index]["x1"]],
             y=[groupID, groupID],
             showlegend=False,
-            name='',
-            marker={'color': 'white'}
+            name="",
+            marker={"color": "white"},
         )
         if "description" in tasks[index]:
-            entry['text'] = tasks[index]['description']
-            del tasks[index]['description']
+            entry["text"] = tasks[index]["description"]
+            del tasks[index]["description"]
         data.append(entry)
 
     if show_colorbar is True:
@@ -518,15 +523,12 @@ def gantt_dict(chart, colors, title, index_col, show_colorbar, bar_width,
         for k, index_value in enumerate(index_vals):
             data.append(
                 dict(
-                    x=[tasks[index]['x0'], tasks[index]['x0']],
+                    x=[tasks[index]["x0"], tasks[index]["x0"]],
                     y=[k, k],
                     showlegend=True,
-                    hoverinfo='none',
+                    hoverinfo="none",
                     name=str(index_value),
-                    marker=dict(
-                        color=colors[index_value],
-                        size=1
-                    )
+                    marker=dict(color=colors[index_value], size=1),
                 )
             )
 
@@ -536,7 +538,7 @@ def gantt_dict(chart, colors, title, index_col, show_colorbar, bar_width,
         height=height,
         width=width,
         shapes=[],
-        hovermode='closest',
+        hovermode="closest",
         yaxis=dict(
             showgrid=showgrid_y,
             ticktext=task_names,
@@ -549,43 +551,43 @@ def gantt_dict(chart, colors, title, index_col, show_colorbar, bar_width,
             showgrid=showgrid_x,
             zeroline=False,
             rangeselector=dict(
-                buttons=list([
-                    dict(count=7,
-                         label='1w',
-                         step='day',
-                         stepmode='backward'),
-                    dict(count=1,
-                         label='1m',
-                         step='month',
-                         stepmode='backward'),
-                    dict(count=6,
-                         label='6m',
-                         step='month',
-                         stepmode='backward'),
-                    dict(count=1,
-                         label='YTD',
-                         step='year',
-                         stepmode='todate'),
-                    dict(count=1,
-                         label='1y',
-                         step='year',
-                         stepmode='backward'),
-                    dict(step='all')
-                ])
+                buttons=list(
+                    [
+                        dict(count=7, label="1w", step="day", stepmode="backward"),
+                        dict(count=1, label="1m", step="month", stepmode="backward"),
+                        dict(count=6, label="6m", step="month", stepmode="backward"),
+                        dict(count=1, label="YTD", step="year", stepmode="todate"),
+                        dict(count=1, label="1y", step="year", stepmode="backward"),
+                        dict(step="all"),
+                    ]
+                )
             ),
-            type='date'
-        )
+            type="date",
+        ),
     )
-    layout['shapes'] = tasks
+    layout["shapes"] = tasks
 
     fig = dict(data=data, layout=layout)
     return fig
 
 
-def create_gantt(df, colors=None, index_col=None, show_colorbar=False,
-                 reverse_colors=False, title='Gantt Chart', bar_width=0.2,
-                 showgrid_x=False, showgrid_y=False, height=600, width=900,
-                 tasks=None, task_names=None, data=None, group_tasks=False):
+def create_gantt(
+    df,
+    colors=None,
+    index_col=None,
+    show_colorbar=False,
+    reverse_colors=False,
+    title="Gantt Chart",
+    bar_width=0.2,
+    showgrid_x=False,
+    showgrid_y=False,
+    height=600,
+    width=900,
+    tasks=None,
+    task_names=None,
+    data=None,
+    group_tasks=False,
+):
     """
     Returns figure for a gantt chart
 
@@ -734,7 +736,8 @@ def create_gantt(df, colors=None, index_col=None, show_colorbar=False,
                 "In order to use an indexing column and assign colors to "
                 "the values of the index, you must choose an actual "
                 "column name in the dataframe or key if a list of "
-                "dictionaries is being used.")
+                "dictionaries is being used."
+            )
 
         # validate gantt index column
         index_list = []
@@ -744,9 +747,9 @@ def create_gantt(df, colors=None, index_col=None, show_colorbar=False,
 
     # Validate colors
     if isinstance(colors, dict):
-        colors = clrs.validate_colors_dict(colors, 'rgb')
+        colors = clrs.validate_colors_dict(colors, "rgb")
     else:
-        colors = clrs.validate_colors(colors, 'rgb')
+        colors = clrs.validate_colors(colors, "rgb")
 
     if reverse_colors is True:
         colors.reverse()
@@ -759,23 +762,54 @@ def create_gantt(df, colors=None, index_col=None, show_colorbar=False,
                 "assigning colors to particular values in a dictioanry."
             )
         fig = gantt(
-            chart, colors, title, bar_width, showgrid_x, showgrid_y,
-            height, width, tasks=None, task_names=None, data=None,
-            group_tasks=group_tasks
+            chart,
+            colors,
+            title,
+            bar_width,
+            showgrid_x,
+            showgrid_y,
+            height,
+            width,
+            tasks=None,
+            task_names=None,
+            data=None,
+            group_tasks=group_tasks,
         )
         return fig
     else:
         if not isinstance(colors, dict):
             fig = gantt_colorscale(
-                chart, colors, title, index_col, show_colorbar, bar_width,
-                showgrid_x, showgrid_y, height, width,
-                tasks=None, task_names=None, data=None, group_tasks=group_tasks
+                chart,
+                colors,
+                title,
+                index_col,
+                show_colorbar,
+                bar_width,
+                showgrid_x,
+                showgrid_y,
+                height,
+                width,
+                tasks=None,
+                task_names=None,
+                data=None,
+                group_tasks=group_tasks,
             )
             return fig
         else:
             fig = gantt_dict(
-                chart, colors, title, index_col, show_colorbar, bar_width,
-                showgrid_x, showgrid_y, height, width,
-                tasks=None, task_names=None, data=None, group_tasks=group_tasks
+                chart,
+                colors,
+                title,
+                index_col,
+                show_colorbar,
+                bar_width,
+                showgrid_x,
+                showgrid_y,
+                height,
+                width,
+                tasks=None,
+                task_names=None,
+                data=None,
+                group_tasks=group_tasks,
             )
             return fig

@@ -5,16 +5,17 @@ from plotly import exceptions, optional_imports
 from plotly import optional_imports
 from plotly.graph_objs import graph_objs as go
 
-np = optional_imports.get_module('numpy')
-sk_measure = optional_imports.get_module('skimage.measure')
-scipy_interp = optional_imports.get_module('scipy.interpolate')
+np = optional_imports.get_module("numpy")
+sk_measure = optional_imports.get_module("skimage.measure")
+scipy_interp = optional_imports.get_module("scipy.interpolate")
 
 
 # -------------------------- Layout ------------------------------
 
 
-def _ternary_layout(title='Ternary contour plot', width=550, height=525,
-                    pole_labels=['a', 'b', 'c']):
+def _ternary_layout(
+    title="Ternary contour plot", width=550, height=525, pole_labels=["a", "b", "c"]
+):
     """
     Layout of ternary contour plot, to be passed to ``go.FigureWidget``
     object.
@@ -30,20 +31,24 @@ def _ternary_layout(title='Ternary contour plot', width=550, height=525,
     pole_labels : str, default ['a', 'b', 'c']
         Names of the three poles of the triangle.
     """
-    return dict(title=title,
-                width=width, height=height,
-                ternary=dict(sum=1,
-                             aaxis=dict(title=dict(text=pole_labels[0]),
-                                        min=0.01, linewidth=2,
-                                        ticks='outside'),
-                             baxis=dict(title=dict(text=pole_labels[1]),
-                                        min=0.01, linewidth=2,
-                                        ticks='outside'),
-                             caxis=dict(title=dict(text=pole_labels[2]),
-                                        min=0.01, linewidth=2,
-                                        ticks='outside')),
-                showlegend=False,
-                )
+    return dict(
+        title=title,
+        width=width,
+        height=height,
+        ternary=dict(
+            sum=1,
+            aaxis=dict(
+                title=dict(text=pole_labels[0]), min=0.01, linewidth=2, ticks="outside"
+            ),
+            baxis=dict(
+                title=dict(text=pole_labels[1]), min=0.01, linewidth=2, ticks="outside"
+            ),
+            caxis=dict(
+                title=dict(text=pole_labels[2]), min=0.01, linewidth=2, ticks="outside"
+            ),
+        ),
+        showlegend=False,
+    )
 
 
 # ------------- Transformations of coordinates -------------------
@@ -70,13 +75,15 @@ def _replace_zero_coords(ternary_data, delta=0.0005):
     using nonparametric imputation, Mathematical Geology 35 (2003),
     pp 253-278.
     """
-    zero_mask = (ternary_data == 0)
+    zero_mask = ternary_data == 0
     is_any_coord_zero = np.any(zero_mask, axis=0)
 
     unity_complement = 1 - delta * is_any_coord_zero
     if np.any(unity_complement) < 0:
-        raise ValueError('The provided value of delta led to negative'
-                         'ternary coords.Set a smaller delta')
+        raise ValueError(
+            "The provided value of delta led to negative"
+            "ternary coords.Set a smaller delta"
+        )
     ternary_data = np.where(zero_mask, delta, unity_complement * ternary_data)
     return ternary_data
 
@@ -99,8 +106,9 @@ def _ilr_transform(barycentric):
     """
     barycentric = np.asarray(barycentric)
     x_0 = np.log(barycentric[0] / barycentric[1]) / np.sqrt(2)
-    x_1 = 1. / np.sqrt(6) * np.log(barycentric[0] * barycentric[1] /
-                                   barycentric[2] ** 2)
+    x_1 = (
+        1.0 / np.sqrt(6) * np.log(barycentric[0] * barycentric[1] / barycentric[2] ** 2)
+    )
     ilr_tdata = np.stack((x_0, x_1))
     return ilr_tdata
 
@@ -123,16 +131,14 @@ def _ilr_inverse(x):
     Intl Assoc for Math Geology, 2003, pp 31-30.
     """
     x = np.array(x)
-    matrix = np.array([[0.5, 1, 1.],
-                       [-0.5, 1, 1.],
-                       [0., 0., 1.]])
+    matrix = np.array([[0.5, 1, 1.0], [-0.5, 1, 1.0], [0.0, 0.0, 1.0]])
     s = np.sqrt(2) / 2
     t = np.sqrt(3 / 2)
-    Sk = np.einsum('ik, kj -> ij', np.array([[s, t], [-s, t]]), x)
+    Sk = np.einsum("ik, kj -> ij", np.array([[s, t], [-s, t]]), x)
     Z = -np.log(1 + np.exp(Sk).sum(axis=0))
-    log_barycentric = np.einsum('ik, kj -> ij',
-                                matrix,
-                                np.stack((2*s*x[0], t*x[1], Z)))
+    log_barycentric = np.einsum(
+        "ik, kj -> ij", matrix, np.stack((2 * s * x[0], t * x[1], Z))
+    )
     iilr_tdata = np.exp(log_barycentric)
     return iilr_tdata
 
@@ -153,15 +159,20 @@ def _prepare_barycentric_coord(b_coords):
     Check ternary coordinates and return the right barycentric coordinates.
     """
     if not isinstance(b_coords, (list, np.ndarray)):
-        raise ValueError('Data  should be either an array of shape (n,m),'
-                         'or a list of n m-lists, m=2 or 3')
+        raise ValueError(
+            "Data  should be either an array of shape (n,m),"
+            "or a list of n m-lists, m=2 or 3"
+        )
     b_coords = np.asarray(b_coords)
     if b_coords.shape[0] not in (2, 3):
-        raise ValueError('A point should have  2 (a, b) or 3 (a, b, c)'
-                         'barycentric coordinates')
-    if ((len(b_coords) == 3) and
-            not np.allclose(b_coords.sum(axis=0), 1, rtol=0.01) and
-            not np.allclose(b_coords.sum(axis=0), 100, rtol=0.01)):
+        raise ValueError(
+            "A point should have  2 (a, b) or 3 (a, b, c)" "barycentric coordinates"
+        )
+    if (
+        (len(b_coords) == 3)
+        and not np.allclose(b_coords.sum(axis=0), 1, rtol=0.01)
+        and not np.allclose(b_coords.sum(axis=0), 100, rtol=0.01)
+    ):
         msg = "The sum of coordinates should be 1 or 100 for all data points"
         raise ValueError(msg)
 
@@ -171,11 +182,11 @@ def _prepare_barycentric_coord(b_coords):
     else:
         A, B, C = b_coords / b_coords.sum(axis=0)
     if np.any(np.stack((A, B, C)) < 0):
-        raise ValueError('Barycentric coordinates should be positive.')
+        raise ValueError("Barycentric coordinates should be positive.")
     return np.stack((A, B, C))
 
 
-def _compute_grid(coordinates, values, interp_mode='ilr'):
+def _compute_grid(coordinates, values, interp_mode="ilr"):
     """
     Transform data points with Cartesian or ILR mapping, then Compute
     interpolation on a regular grid.
@@ -190,10 +201,10 @@ def _compute_grid(coordinates, values, interp_mode='ilr'):
     interp_mode : 'ilr' (default) or 'cartesian'
         Defines how data are interpolated to compute contours.
     """
-    if interp_mode == 'cartesian':
+    if interp_mode == "cartesian":
         M, invM = _transform_barycentric_cartesian()
-        coord_points = np.einsum('ik, kj -> ij', M, coordinates)
-    elif interp_mode == 'ilr':
+        coord_points = np.einsum("ik, kj -> ij", M, coordinates)
+    elif interp_mode == "ilr":
         coordinates = _replace_zero_coords(coordinates)
         coord_points = _ilr_transform(coordinates)
     else:
@@ -207,12 +218,12 @@ def _compute_grid(coordinates, values, interp_mode='ilr'):
     grid_x, grid_y = np.meshgrid(gr_x, gr_y)
     # We use cubic interpolation, except outside of the convex hull
     # of data points where we use nearest neighbor values.
-    grid_z = scipy_interp.griddata(coord_points[:2].T, values,
-                                   (grid_x, grid_y),
-                                   method='cubic')
-    grid_z_other = scipy_interp.griddata(coord_points[:2].T, values,
-                                         (grid_x, grid_y),
-                                         method='nearest')
+    grid_z = scipy_interp.griddata(
+        coord_points[:2].T, values, (grid_x, grid_y), method="cubic"
+    )
+    grid_z_other = scipy_interp.griddata(
+        coord_points[:2].T, values, (grid_x, grid_y), method="nearest"
+    )
     # mask_nan = np.isnan(grid_z)
     # grid_z[mask_nan] = grid_z_other[mask_nan]
     return grid_z, gr_x, gr_y
@@ -222,8 +233,7 @@ def _compute_grid(coordinates, values, interp_mode='ilr'):
 
 
 def _polygon_area(x, y):
-    return (0.5 * np.abs(np.dot(x, np.roll(y, 1))
-                         - np.dot(y, np.roll(x, 1))))
+    return 0.5 * np.abs(np.dot(x, np.roll(y, 1)) - np.dot(y, np.roll(x, 1)))
 
 
 def _colors(ncontours, colormap=None):
@@ -235,22 +245,22 @@ def _colors(ncontours, colormap=None):
     else:
         raise exceptions.PlotlyError(
             "Colorscale must be a valid Plotly Colorscale."
-            "The available colorscale names are {}".format(
-                clrs.PLOTLY_SCALES.keys()))
+            "The available colorscale names are {}".format(clrs.PLOTLY_SCALES.keys())
+        )
     values = np.linspace(0, 1, ncontours)
     vals_cmap = np.array([pair[0] for pair in cmap])
     cols = np.array([pair[1] for pair in cmap])
     inds = np.searchsorted(vals_cmap, values)
-    if '#' in cols[0]:  # for Viridis
+    if "#" in cols[0]:  # for Viridis
         cols = [clrs.label_rgb(clrs.hex_to_rgb(col)) for col in cols]
 
     colors = [cols[0]]
     for ind, val in zip(inds[1:], values[1:]):
         val1, val2 = vals_cmap[ind - 1], vals_cmap[ind]
         interm = (val - val1) / (val2 - val1)
-        col = clrs.find_intermediate_color(cols[ind - 1],
-                                           cols[ind], interm,
-                                           colortype='rgb')
+        col = clrs.find_intermediate_color(
+            cols[ind - 1], cols[ind], interm, colortype="rgb"
+        )
         colors.append(col)
     return colors
 
@@ -261,8 +271,7 @@ def _is_invalid_contour(x, y):
 
     Contours with an area of the order as 1 pixel are considered spurious.
     """
-    too_small = (np.all(np.abs(x - x[0]) < 2) and
-                 np.all(np.abs(y - y[0]) < 2))
+    too_small = np.all(np.abs(x - x[0]) < 2) and np.all(np.abs(y - y[0]) < 2)
     return too_small
 
 
@@ -285,8 +294,10 @@ def _extract_contours(im, values, colors):
     be a faster way to do this, but it works...
     """
     mask_nan = np.isnan(im)
-    im_min, im_max = (im[np.logical_not(mask_nan)].min(),
-                      im[np.logical_not(mask_nan)].max())
+    im_min, im_max = (
+        im[np.logical_not(mask_nan)].min(),
+        im[np.logical_not(mask_nan)].max(),
+    )
     zz_min = np.copy(im)
     zz_min[mask_nan] = 2 * im_min
     zz_max = np.copy(im)
@@ -300,10 +311,12 @@ def _extract_contours(im, values, colors):
         all_contours2.extend(contour_level2)
         all_values1.extend([val] * len(contour_level1))
         all_values2.extend([val] * len(contour_level2))
-        all_areas1.extend([_polygon_area(contour.T[1], contour.T[0])
-                           for contour in contour_level1])
-        all_areas2.extend([_polygon_area(contour.T[1], contour.T[0])
-                           for contour in contour_level2])
+        all_areas1.extend(
+            [_polygon_area(contour.T[1], contour.T[0]) for contour in contour_level1]
+        )
+        all_areas2.extend(
+            [_polygon_area(contour.T[1], contour.T[0]) for contour in contour_level2]
+        )
         all_colors1.extend([colors[i]] * len(contour_level1))
         all_colors2.extend([colors[i]] * len(contour_level2))
     if len(all_contours1) <= len(all_contours2):
@@ -312,9 +325,19 @@ def _extract_contours(im, values, colors):
         return all_contours2, all_values2, all_areas2, all_colors2
 
 
-def _add_outer_contour(all_contours, all_values, all_areas, all_colors,
-                       values, val_outer, v_min, v_max,
-                       colors, color_min, color_max):
+def _add_outer_contour(
+    all_contours,
+    all_values,
+    all_areas,
+    all_colors,
+    values,
+    val_outer,
+    v_min,
+    v_max,
+    colors,
+    color_min,
+    color_max,
+):
     """
     Utility function for _contour_trace
 
@@ -334,8 +357,9 @@ def _add_outer_contour(all_contours, all_values, all_areas, all_colors,
     outer_contour = 20 * np.array([[0, 0, 1], [0, 1, 0.5]]).T
     all_contours = [outer_contour] + all_contours
     delta_values = np.diff(values)[0]
-    values = np.concatenate(([values[0] - delta_values], values,
-                             [values[-1] + delta_values]))
+    values = np.concatenate(
+        ([values[0] - delta_values], values, [values[-1] + delta_values])
+    )
     colors = np.concatenate(([color_min], colors, [color_max]))
     index = np.nonzero(values == val_outer)[0][0]
     if index < len(values) / 2:
@@ -358,11 +382,18 @@ def _add_outer_contour(all_contours, all_values, all_areas, all_colors,
     return all_contours, all_values, all_areas, all_colors, discrete_cm
 
 
-def _contour_trace(x, y, z, ncontours=None,
-                   colorscale='Electric',
-                   linecolor='rgb(150,150,150)', interp_mode='llr',
-                   coloring=None,
-                   v_min=0, v_max=1):
+def _contour_trace(
+    x,
+    y,
+    z,
+    ncontours=None,
+    colorscale="Electric",
+    linecolor="rgb(150,150,150)",
+    interp_mode="llr",
+    coloring=None,
+    v_min=0,
+    v_max=1,
+):
     """
     Contour trace in Cartesian coordinates.
 
@@ -406,23 +437,32 @@ def _contour_trace(x, y, z, ncontours=None,
 
     # Color of line contours
     if linecolor is None:
-        linecolor = 'rgb(150, 150, 150)'
+        linecolor = "rgb(150, 150, 150)"
     else:
         colors = [linecolor] * ncontours
 
         # Retrieve all contours
     all_contours, all_values, all_areas, all_colors = _extract_contours(
-                                                     z, values, colors)
+        z, values, colors
+    )
 
     # Now sort contours by decreasing area
     order = np.argsort(all_areas)[::-1]
 
     # Add outer contour
-    all_contours, all_values, all_areas, all_colors, discrete_cm = \
-         _add_outer_contour(
-         all_contours, all_values, all_areas, all_colors,
-         values, all_values[order[0]], v_min, v_max,
-         colors, color_min, color_max)
+    all_contours, all_values, all_areas, all_colors, discrete_cm = _add_outer_contour(
+        all_contours,
+        all_values,
+        all_areas,
+        all_colors,
+        values,
+        all_values[order[0]],
+        v_min,
+        v_max,
+        colors,
+        color_min,
+        color_max,
+    )
     order = np.concatenate(([0], order + 1))
 
     # Compute traces, in the order of decreasing area
@@ -433,15 +473,15 @@ def _contour_trace(x, y, z, ncontours=None,
     for index in order:
         y_contour, x_contour = all_contours[index].T
         val = all_values[index]
-        if interp_mode == 'cartesian':
-            bar_coords = np.dot(invM,
-                                np.stack((dx * x_contour,
-                                          dy * y_contour,
-                                          np.ones(x_contour.shape))))
-        elif interp_mode == 'ilr':
-            bar_coords = _ilr_inverse(np.stack((dx * x_contour + x.min(),
-                                                dy * y_contour +
-                                                y.min())))
+        if interp_mode == "cartesian":
+            bar_coords = np.dot(
+                invM,
+                np.stack((dx * x_contour, dy * y_contour, np.ones(x_contour.shape))),
+            )
+        elif interp_mode == "ilr":
+            bar_coords = _ilr_inverse(
+                np.stack((dx * x_contour + x.min(), dy * y_contour + y.min()))
+            )
         if index == 0:  # outer triangle
             a = np.array([1, 0, 0])
             b = np.array([0, 1, 0])
@@ -451,18 +491,22 @@ def _contour_trace(x, y, z, ncontours=None,
         if _is_invalid_contour(x_contour, y_contour):
             continue
 
-        _col = all_colors[index] if coloring == 'lines' else linecolor
+        _col = all_colors[index] if coloring == "lines" else linecolor
         trace = dict(
-            type='scatterternary',
-            a=a, b=b, c=c, mode='lines',
-            line=dict(color=_col, shape='spline', width=1),
-            fill='toself', fillcolor=all_colors[index],
+            type="scatterternary",
+            a=a,
+            b=b,
+            c=c,
+            mode="lines",
+            line=dict(color=_col, shape="spline", width=1),
+            fill="toself",
+            fillcolor=all_colors[index],
             showlegend=True,
-            hoverinfo='skip',
-            name='%.3f' % val
+            hoverinfo="skip",
+            name="%.3f" % val,
         )
-        if coloring == 'lines':
-            trace['fill'] = None
+        if coloring == "lines":
+            trace["fill"] = None
         traces.append(trace)
 
     return traces, discrete_cm
@@ -471,15 +515,21 @@ def _contour_trace(x, y, z, ncontours=None,
 # -------------------- Figure Factory for ternary contour -------------
 
 
-def create_ternary_contour(coordinates, values, pole_labels=['a', 'b', 'c'],
-                           width=500, height=500,
-                           ncontours=None,
-                           showscale=False, coloring=None,
-                           colorscale='Bluered',
-                           linecolor=None,
-                           title=None,
-                           interp_mode='ilr',
-                           showmarkers=False):
+def create_ternary_contour(
+    coordinates,
+    values,
+    pole_labels=["a", "b", "c"],
+    width=500,
+    height=500,
+    ncontours=None,
+    showscale=False,
+    coloring=None,
+    colorscale="Bluered",
+    linecolor=None,
+    title=None,
+    interp_mode="ilr",
+    showmarkers=False,
+):
     """
     Ternary contour plot.
 
@@ -560,63 +610,86 @@ def create_ternary_contour(coordinates, values, pole_labels=['a', 'b', 'c'],
                                    pole_labels=['clay', 'quartz', 'fledspar'])
     """
     if scipy_interp is None:
-        raise ImportError("""\
-    The create_ternary_contour figure factory requires the scipy package""")
+        raise ImportError(
+            """\
+    The create_ternary_contour figure factory requires the scipy package"""
+        )
     if sk_measure is None:
-        raise ImportError("""\
+        raise ImportError(
+            """\
     The create_ternary_contour figure factory requires the scikit-image
-    package""")
+    package"""
+        )
     if colorscale is None:
         showscale = False
     if ncontours is None:
         ncontours = 5
     coordinates = _prepare_barycentric_coord(coordinates)
     v_min, v_max = values.min(), values.max()
-    grid_z, gr_x, gr_y = _compute_grid(coordinates, values,
-                                       interp_mode=interp_mode)
+    grid_z, gr_x, gr_y = _compute_grid(coordinates, values, interp_mode=interp_mode)
 
-    layout = _ternary_layout(pole_labels=pole_labels,
-                             width=width, height=height, title=title)
+    layout = _ternary_layout(
+        pole_labels=pole_labels, width=width, height=height, title=title
+    )
 
-    contour_trace, discrete_cm = _contour_trace(gr_x, gr_y, grid_z,
-                                                ncontours=ncontours,
-                                                colorscale=colorscale,
-                                                linecolor=linecolor,
-                                                interp_mode=interp_mode,
-                                                coloring=coloring,
-                                                v_min=v_min,
-                                                v_max=v_max)
+    contour_trace, discrete_cm = _contour_trace(
+        gr_x,
+        gr_y,
+        grid_z,
+        ncontours=ncontours,
+        colorscale=colorscale,
+        linecolor=linecolor,
+        interp_mode=interp_mode,
+        coloring=coloring,
+        v_min=v_min,
+        v_max=v_max,
+    )
 
     fig = go.Figure(data=contour_trace, layout=layout)
 
     opacity = 1 if showmarkers else 0
     a, b, c = coordinates
-    hovertemplate = (pole_labels[0] + ": %{a:.3f}<br>"
-                   + pole_labels[1] + ": %{b:.3f}<br>"
-                   + pole_labels[2] + ": %{c:.3f}<br>"
-                     "z: %{marker.color:.3f}<extra></extra>")
+    hovertemplate = (
+        pole_labels[0]
+        + ": %{a:.3f}<br>"
+        + pole_labels[1]
+        + ": %{b:.3f}<br>"
+        + pole_labels[2]
+        + ": %{c:.3f}<br>"
+        "z: %{marker.color:.3f}<extra></extra>"
+    )
 
-    fig.add_scatterternary(a=a, b=b, c=c,
-                           mode='markers',
-                           marker={'color': values,
-                                   'colorscale': colorscale,
-                                   'line': {'color': 'rgb(120, 120, 120)',
-                                            'width': int(coloring != 'lines')},
-                                   },
-                           opacity=opacity,
-                           hovertemplate=hovertemplate)
+    fig.add_scatterternary(
+        a=a,
+        b=b,
+        c=c,
+        mode="markers",
+        marker={
+            "color": values,
+            "colorscale": colorscale,
+            "line": {"color": "rgb(120, 120, 120)", "width": int(coloring != "lines")},
+        },
+        opacity=opacity,
+        hovertemplate=hovertemplate,
+    )
     if showscale:
         if not showmarkers:
             colorscale = discrete_cm
-        colorbar = dict({'type': 'scatterternary',
-                         'a': [None], 'b': [None],
-                         'c': [None],
-                         'marker': {
-                                    'cmin': values.min(),
-                                    'cmax': values.max(),
-                                    'colorscale': colorscale,
-                                    'showscale': True},
-                         'mode': 'markers'})
+        colorbar = dict(
+            {
+                "type": "scatterternary",
+                "a": [None],
+                "b": [None],
+                "c": [None],
+                "marker": {
+                    "cmin": values.min(),
+                    "cmax": values.max(),
+                    "colorscale": colorscale,
+                    "showscale": True,
+                },
+                "mode": "markers",
+            }
+        )
         fig.add_trace(colorbar)
 
     return fig

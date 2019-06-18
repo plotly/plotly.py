@@ -3,14 +3,9 @@ from plotly.utils import _list_repr_elided
 
 
 class InputDeviceState:
-    def __init__(self,
-                 ctrl=None,
-                 alt=None,
-                 shift=None,
-                 meta=None,
-                 button=None,
-                 buttons=None,
-                 **_):
+    def __init__(
+        self, ctrl=None, alt=None, shift=None, meta=None, button=None, buttons=None, **_
+    ):
 
         self._ctrl = ctrl
         self._alt = alt
@@ -33,7 +28,8 @@ InputDeviceState(
             meta=repr(self.meta),
             shift=repr(self.shift),
             button=repr(self.button),
-            buttons=repr(self.buttons))
+            buttons=repr(self.buttons),
+        )
 
     @property
     def alt(self):
@@ -126,13 +122,7 @@ InputDeviceState(
 
 
 class Points:
-
-    def __init__(self,
-                 point_inds=[],
-                 xs=[],
-                 ys=[],
-                 trace_name=None,
-                 trace_index=None):
+    def __init__(self, point_inds=[], xs=[], ys=[], trace_name=None, trace_index=None):
 
         self._point_inds = point_inds
         self._xs = xs
@@ -147,14 +137,14 @@ Points(point_inds={point_inds},
        ys={ys},
        trace_name={trace_name},
        trace_index={trace_index})""".format(
-            point_inds=_list_repr_elided(self.point_inds,
-                                         indent=len('Points(point_inds=')),
-            xs=_list_repr_elided(self.xs,
-                                 indent=len('       xs=')),
-            ys=_list_repr_elided(self.ys,
-                                 indent=len('       ys=')),
+            point_inds=_list_repr_elided(
+                self.point_inds, indent=len("Points(point_inds=")
+            ),
+            xs=_list_repr_elided(self.xs, indent=len("       xs=")),
+            ys=_list_repr_elided(self.ys, indent=len("       ys=")),
             trace_name=repr(self.trace_name),
-            trace_index=repr(self.trace_index))
+            trace_index=repr(self.trace_index),
+        )
 
     @property
     def point_inds(self):
@@ -214,7 +204,7 @@ Points(point_inds={point_inds},
 
 class BoxSelector:
     def __init__(self, xrange=None, yrange=None, **_):
-        self._type = 'box'
+        self._type = "box"
         self._xrange = xrange
         self._yrange = yrange
 
@@ -222,8 +212,8 @@ class BoxSelector:
         return """\
 BoxSelector(xrange={xrange},
             yrange={yrange})""".format(
-            xrange=self.xrange,
-            yrange=self.yrange)
+            xrange=self.xrange, yrange=self.yrange
+        )
 
     @property
     def type(self):
@@ -261,7 +251,7 @@ BoxSelector(xrange={xrange},
 
 class LassoSelector:
     def __init__(self, xs=None, ys=None, **_):
-        self._type = 'lasso'
+        self._type = "lasso"
         self._xs = xs
         self._ys = ys
 
@@ -269,10 +259,9 @@ class LassoSelector:
         return """\
 LassoSelector(xs={xs},
               ys={ys})""".format(
-            xs=_list_repr_elided(self.xs,
-                                 indent=len('LassoSelector(xs=')),
-            ys=_list_repr_elided(self.ys,
-                                 indent=len('              ys=')))
+            xs=_list_repr_elided(self.xs, indent=len("LassoSelector(xs=")),
+            ys=_list_repr_elided(self.ys, indent=len("              ys=")),
+        )
 
     @property
     def type(self):
