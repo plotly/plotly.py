@@ -151,7 +151,13 @@ class {fig_classname}({base_classname}):\n""")
 """)
             )
 
-        add_docstring(buffer, trace_node, header, append_extras=doc_extras)
+        add_docstring(
+            buffer,
+            trace_node,
+            header,
+            append_extras=doc_extras,
+            return_type=fig_classname,
+        )
 
         # #### Function body ####
         buffer.write(f"""
