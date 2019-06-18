@@ -21,21 +21,3 @@ if __name__ == "__main__":
     shutil.copytree(
         os.path.join(here, "submodules", "mplexporter", "mplexporter"), mpl_dst
     )
-
-    # Replace chunked_requests directory
-    chunked_dst = os.path.join(
-        here,
-        "packages",
-        "python",
-        "chart-studio",
-        "chart_studio",
-        "plotly",
-        "chunked_requests",
-    )
-
-    shutil.rmtree(chunked_dst, ignore_errors=True)
-
-    shutil.copytree(
-        os.path.join(here, "submodules", "chunked_requests", "chunked_requests"),
-        os.path.join(chunked_dst),
-    )
