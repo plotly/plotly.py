@@ -12,7 +12,7 @@ import json
 
 here = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(os.path.dirname(os.path.dirname(here)))
-node_root = os.path.join(project_root, 'packages', 'javascript', 'plotlywidget')
+node_root = os.path.join(project_root, 'packages', 'javascript', 'jupyterlab-plotly')
 is_repo = os.path.exists(os.path.join(project_root, '.git'))
 
 npm_path = os.pathsep.join([
@@ -27,7 +27,7 @@ def plotly_js_version():
         project_root,
         'packages',
         'javascript',
-        'plotlywidget',
+        'jupyterlab-plotly',
         'package.json',
     )
     with open(path, 'rt') as f:
