@@ -30,6 +30,8 @@ class FigureWidget(BaseFigureWidget):
             that may be specified as:
               - A list or tuple of trace instances
                 (e.g. [Scatter(...), Bar(...)])
+              - A single trace instance
+                (e.g. Scatter(...), Bar(...), etc.)
               - A list or tuple of dicts of string/value properties where:
                 - The 'type' property specifies the trace type
                     One of: ['area', 'bar', 'barpolar', 'box',
@@ -689,7 +691,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Area
+        FigureWidget
         """
         new_trace = Area(
             customdata=customdata,
@@ -1073,7 +1075,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Bar
+        FigureWidget
         """
         new_trace = Bar(
             alignmentgroup=alignmentgroup,
@@ -1386,7 +1388,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Barpolar
+        FigureWidget
         """
         new_trace = Barpolar(
             base=base,
@@ -1755,7 +1757,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Box
+        FigureWidget
         """
         new_trace = Box(
             alignmentgroup=alignmentgroup,
@@ -2040,7 +2042,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Candlestick
+        FigureWidget
         """
         new_trace = Candlestick(
             close=close,
@@ -2300,7 +2302,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Carpet
+        FigureWidget
         """
         new_trace = Carpet(
             a=a,
@@ -2598,7 +2600,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Choropleth
+        FigureWidget
         """
         new_trace = Choropleth(
             autocolorscale=autocolorscale,
@@ -2947,7 +2949,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Cone
+        FigureWidget
         """
         new_trace = Cone(
             anchor=anchor,
@@ -3346,7 +3348,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Contour
+        FigureWidget
         """
         new_trace = Contour(
             autocolorscale=autocolorscale,
@@ -3716,7 +3718,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Contourcarpet
+        FigureWidget
         """
         new_trace = Contourcarpet(
             a=a,
@@ -4094,7 +4096,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Funnel
+        FigureWidget
         """
         new_trace = Funnel(
             alignmentgroup=alignmentgroup,
@@ -4391,7 +4393,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Funnelarea
+        FigureWidget
         """
         new_trace = Funnelarea(
             aspectratio=aspectratio,
@@ -4764,7 +4766,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Heatmap
+        FigureWidget
         """
         new_trace = Heatmap(
             autocolorscale=autocolorscale,
@@ -5082,7 +5084,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Heatmapgl
+        FigureWidget
         """
         new_trace = Heatmapgl(
             autocolorscale=autocolorscale,
@@ -5459,7 +5461,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Histogram
+        FigureWidget
         """
         new_trace = Histogram(
             alignmentgroup=alignmentgroup,
@@ -5874,7 +5876,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Histogram2d
+        FigureWidget
         """
         new_trace = Histogram2d(
             autobinx=autobinx,
@@ -6313,7 +6315,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Histogram2dContour
+        FigureWidget
         """
         new_trace = Histogram2dContour(
             autobinx=autobinx,
@@ -6673,7 +6675,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Isosurface
+        FigureWidget
         """
         new_trace = Isosurface(
             autocolorscale=autocolorscale,
@@ -7103,7 +7105,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Mesh3d
+        FigureWidget
         """
         new_trace = Mesh3d(
             alphahull=alphahull,
@@ -7394,7 +7396,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Ohlc
+        FigureWidget
         """
         new_trace = Ohlc(
             close=close,
@@ -7607,7 +7609,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Parcats
+        FigureWidget
         """
         new_trace = Parcats(
             arrangement=arrangement,
@@ -7760,7 +7762,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Parcoords
+        FigureWidget
         """
         new_trace = Parcoords(
             customdata=customdata,
@@ -8053,7 +8055,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Pie
+        FigureWidget
         """
         new_trace = Pie(
             customdata=customdata,
@@ -8320,7 +8322,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Pointcloud
+        FigureWidget
         """
         new_trace = Pointcloud(
             customdata=customdata,
@@ -8518,7 +8520,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Sankey
+        FigureWidget
         """
         new_trace = Sankey(
             arrangement=arrangement,
@@ -8936,7 +8938,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Scatter
+        FigureWidget
         """
         new_trace = Scatter(
             cliponaxis=cliponaxis,
@@ -9266,7 +9268,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Scatter3d
+        FigureWidget
         """
         new_trace = Scatter3d(
             connectgaps=connectgaps,
@@ -9597,7 +9599,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Scattercarpet
+        FigureWidget
         """
         new_trace = Scattercarpet(
             a=a,
@@ -9909,7 +9911,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Scattergeo
+        FigureWidget
         """
         new_trace = Scattergeo(
             connectgaps=connectgaps,
@@ -10265,7 +10267,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Scattergl
+        FigureWidget
         """
         new_trace = Scattergl(
             connectgaps=connectgaps,
@@ -10564,7 +10566,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Scattermapbox
+        FigureWidget
         """
         new_trace = Scattermapbox(
             connectgaps=connectgaps,
@@ -10901,7 +10903,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Scatterpolar
+        FigureWidget
         """
         new_trace = Scatterpolar(
             cliponaxis=cliponaxis,
@@ -11243,7 +11245,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Scatterpolargl
+        FigureWidget
         """
         new_trace = Scatterpolargl(
             connectgaps=connectgaps,
@@ -11586,7 +11588,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Scatterternary
+        FigureWidget
         """
         new_trace = Scatterternary(
             a=a,
@@ -11864,7 +11866,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Splom
+        FigureWidget
         """
         new_trace = Splom(
             customdata=customdata,
@@ -12191,7 +12193,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Streamtube
+        FigureWidget
         """
         new_trace = Streamtube(
             autocolorscale=autocolorscale,
@@ -12474,7 +12476,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Sunburst
+        FigureWidget
         """
         new_trace = Sunburst(
             branchvalues=branchvalues,
@@ -12810,7 +12812,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Surface
+        FigureWidget
         """
         new_trace = Surface(
             autocolorscale=autocolorscale,
@@ -13007,7 +13009,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Table
+        FigureWidget
         """
         new_trace = Table(
             cells=cells,
@@ -13380,7 +13382,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Violin
+        FigureWidget
         """
         new_trace = Violin(
             alignmentgroup=alignmentgroup,
@@ -13749,7 +13751,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Volume
+        FigureWidget
         """
         new_trace = Volume(
             autocolorscale=autocolorscale,
@@ -14148,7 +14150,7 @@ class FigureWidget(BaseFigureWidget):
 
         Returns
         -------
-        Waterfall
+        FigureWidget
         """
         new_trace = Waterfall(
             alignmentgroup=alignmentgroup,

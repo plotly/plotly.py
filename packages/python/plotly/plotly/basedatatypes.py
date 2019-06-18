@@ -1447,12 +1447,12 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
                 (scatter, bar, etc.)
         Returns
         -------
-        BaseTraceType
-            The newly added trace
+        BaseFigure
+            The Figure that add_trace was called on
 
         Examples
         --------
-        >>> from plotly import tools
+        >>> from plotly import subplots
         >>> import plotly.graph_objs as go
 
         Add two Scatter traces to a figure
@@ -1462,11 +1462,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
 
 
         Add two Scatter traces to vertically stacked subplots
-        >>> fig = tools.make_subplots(rows=2)
-        This is the format of your plot grid:
-        [ (1,1) x1,y1 ]
-        [ (2,1) x2,y2 ]
-
+        >>> fig = subplots.make_subplots(rows=2)
         >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=1, col=1)
         >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=2, col=1)
         """
@@ -1492,7 +1488,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
             rows=[row] if row is not None else None,
             cols=[col] if col is not None else None,
             secondary_ys=[secondary_y] if secondary_y is not None else None
-        )[0]
+        )
 
     def add_traces(self, data, rows=None, cols=None, secondary_ys=None):
         """
@@ -1528,12 +1524,12 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
 
         Returns
         -------
-        tuple[BaseTraceType]
-            Tuple of the newly added traces
+        BaseFigure
+            The Figure that add_traces was called on
 
         Examples
         --------
-        >>> from plotly import tools
+        >>> from plotly import subplots
         >>> import plotly.graph_objs as go
 
         Add two Scatter traces to a figure
@@ -1542,11 +1538,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         ...                 go.Scatter(x=[1,2,3], y=[2,1,2])])
 
         Add two Scatter traces to vertically stacked subplots
-        >>> fig = tools.make_subplots(rows=2)
-        This is the format of your plot grid:
-        [ (1,1) x1,y1 ]
-        [ (2,1) x2,y2 ]
-
+        >>> fig = subplots.make_subplots(rows=2)
         >>> fig.add_traces([go.Scatter(x=[1,2,3], y=[2,1,2]),
         ...                 go.Scatter(x=[1,2,3], y=[2,1,2])],
         ...                 rows=[1, 2], cols=[1, 1])
@@ -1608,7 +1600,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         # Update messages
         self._send_addTraces_msg(new_traces_data)
 
-        return data
+        return self
 
     # Subplots
     # --------

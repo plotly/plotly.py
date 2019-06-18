@@ -265,7 +265,13 @@ class {datatype_class}(_{node.name_base_datatype}):\n""")
                f'dict of properties compatible with this constructor '
                f'or an instance of {class_name}')]
 
-    add_docstring(buffer, node, header=header, prepend_extras=extras)
+    add_docstring(
+        buffer,
+        node,
+        header=header,
+        prepend_extras=extras,
+        return_type=node.name_datatype_class,
+    )
 
     buffer.write(f"""
         super({datatype_class}, self).__init__('{node.name_property}')
@@ -424,7 +430,14 @@ def add_constructor_params(buffer,
         ):""")
 
 
-def add_docstring(buffer, node, header, prepend_extras=(), append_extras=()):
+def add_docstring(
+        buffer,
+        node,
+        header,
+        prepend_extras=(),
+        append_extras=(),
+        return_type=None,
+):
     """
     Write docstring for a compound datatype node
 
@@ -443,6 +456,8 @@ def add_docstring(buffer, node, header, prepend_extras=(), append_extras=()):
     append_extras :
         List or tuple of propery name / description pairs that should be
         included at the end of the docstring
+    return_type :
+        The docstring return type
     Returns
     -------
 
@@ -511,7 +526,7 @@ def add_docstring(buffer, node, header, prepend_extras=(), append_extras=()):
 
         Returns
         -------
-        {node.name_datatype_class}
+        {return_type}
         \"\"\"""")
 
 

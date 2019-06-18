@@ -110,26 +110,6 @@ class {fig_classname}({base_classname}):\n""")
             d for d in trace_node.child_datatypes
             if d.name_property == 'yaxis'
         ])
-        if include_secondary_y:
-            secondary_y_1 = ', secondary_y=None'
-            secondary_y_2 = ', secondary_y=secondary_y'
-            secondary_y_docstring = f"""
-        secondary_y: boolean or None (default None)
-            * If True, only select yaxis objects associated with the secondary
-              y-axis of the subplot.
-            * If False, only select yaxis objects associated with the primary
-              y-axis of the subplot.
-            * If None (the default), do not filter yaxis objects based on
-              a secondary y-axis condition. 
-
-            To select yaxis objects by secondary y-axis, the Figure must
-            have been created using plotly.subplots.make_subplots. See
-            the docstring for the specs argument to make_subplots for more
-            info on creating subplots with secondary y-axes."""
-        else:
-            secondary_y_1 = ''
-            secondary_y_2 = ''
-            secondary_y_docstring = ''
 
         # #### Function signature ####
         buffer.write(f"""
@@ -171,7 +151,13 @@ class {fig_classname}({base_classname}):\n""")
 """)
             )
 
-        add_docstring(buffer, trace_node, header, append_extras=doc_extras)
+        add_docstring(
+            buffer,
+            trace_node,
+            header,
+            append_extras=doc_extras,
+            return_type=fig_classname,
+        )
 
         # #### Function body ####
         buffer.write(f"""

@@ -1793,7 +1793,7 @@ def _extract_grid_from_fig_like(fig, grid=None, path=''):
         trace_type = trace_dict.get('type', 'scatter')
         if trace_type not in reference_traces:
             reference_traces[trace_type] = reference_fig.add_trace(
-                {'type': trace_type})
+                {'type': trace_type}).data[-1]
 
         reference_trace = reference_traces[trace_type]
         _extract_grid_graph_obj(
