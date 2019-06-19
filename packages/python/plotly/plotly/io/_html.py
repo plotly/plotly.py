@@ -152,8 +152,6 @@ def to_html(
     # Set responsive
     config.setdefault("responsive", True)
 
-    jconfig = json.dumps(config)
-
     # Get div width/height
     layout_dict = fig_dict.get("layout", {})
     template_dict = fig_dict.get("layout", {}).get("template", {}).get("layout", {})
@@ -177,7 +175,22 @@ def to_html(
         div_height = str(div_height) + "px"
 
     # ## Get platform URL ##
-    plotly_platform_url = config.get("plotlyServerURL", "https://plot.ly")
+    if config.get("showLink", False) or config.get("showSendToCloud", False):
+        # Figure is going to include a Chart Studio link or send-to-cloud button,
+        # So we need to configure the PLOTLYENV.BASE_URL property
+        base_url_line = """
+                    window.PLOTLYENV.BASE_URL='{plotly_platform_url}';\
+""".format(
+            plotly_platform_url=config.get("plotlyServerURL", "https://plot.ly")
+        )
+    else:
+        # Figure is not going to include a Chart Studio link or send-to-cloud button,
+        # In this case we don't want https://plot.ly to show up anywhere in the HTML
+        # output
+        config.pop("plotlyServerURL", None)
+        config.pop("linkText", None)
+        config.pop("showLink", None)
+        base_url_line = ""
 
     # ## Build script body ##
     # This is the part that actually calls Plotly.js
@@ -213,6 +226,9 @@ def to_html(
                         }})""".format(
                 id=plotdivid, animation_opts=animation_opts_arg
             )
+
+    # Serialize config dict to JSON
+    jconfig = json.dumps(config)
 
     script = """
                 if (document.getElementById("{id}")) {{
@@ -331,8 +347,7 @@ include_mathjax may be specified as False, 'cdn', or a string ending with '.js'
 style="height:{height}; width:{width};"></div>
             <script type="text/javascript">
                 {require_start}
-                    window.PLOTLYENV=window.PLOTLYENV || {{}};
-                    window.PLOTLYENV.BASE_URL='{plotly_platform_url}';
+                    window.PLOTLYENV=window.PLOTLYENV || {{}};{base_url_line}
                     {script};
                 {require_end}
             </script>
@@ -342,7 +357,7 @@ style="height:{height}; width:{width};"></div>
         id=plotdivid,
         width=div_width,
         height=div_height,
-        plotly_platform_url=plotly_platform_url,
+        base_url_line=base_url_line,
         require_start=require_start,
         script=script,
         require_end=require_end,
