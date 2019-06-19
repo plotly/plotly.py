@@ -113,33 +113,23 @@ class TestJSONEncoder(TestCase):
         res = utils.PlotlyJSONEncoder.encode_as_numpy(np.ma.core.masked)
         self.assertTrue(math.isnan(res))
 
-    def test_encode_valid_datetime(self):
-
-        # should *fail* without 'utcoffset' and 'isoformat' and '__sub__' attrs
-        # non_datetimes = [datetime.date(2013, 10, 1), 'noon', 56, '00:00:00']
-        non_datetimes = [datetime.date(2013, 10, 1)]
-        for obj in non_datetimes:
-            self.assertRaises(
-                utils.NotEncodable, utils.PlotlyJSONEncoder.encode_as_datetime, obj
-            )
-
     def test_encode_as_datetime(self):
         # should succeed with 'utcoffset', 'isoformat' and '__sub__' attrs
         res = utils.PlotlyJSONEncoder.encode_as_datetime(datetime.datetime(2013, 10, 1))
-        self.assertEqual(res, "2013-10-01")
+        self.assertEqual(res, "2013-10-01T00:00:00")
 
     def test_encode_as_datetime_with_microsecond(self):
         # should not include extraneous microsecond info if DNE
         res = utils.PlotlyJSONEncoder.encode_as_datetime(
             datetime.datetime(2013, 10, 1, microsecond=0)
         )
-        self.assertEqual(res, "2013-10-01")
+        self.assertEqual(res, "2013-10-01T00:00:00")
 
         # should include microsecond info if present
         res = utils.PlotlyJSONEncoder.encode_as_datetime(
             datetime.datetime(2013, 10, 1, microsecond=10)
         )
-        self.assertEqual(res, "2013-10-01 00:00:00.000010")
+        self.assertEqual(res, "2013-10-01T00:00:00.000010")
 
     def test_encode_as_datetime_with_localized_tz(self):
         # should convert tzinfo to utc. Note that in october, we're in EDT!
@@ -148,7 +138,7 @@ class TestJSONEncoder(TestCase):
         aware_datetime = pytz.timezone("US/Eastern").localize(naive_datetime)
 
         res = utils.PlotlyJSONEncoder.encode_as_datetime(aware_datetime)
-        self.assertEqual(res, "2013-10-01 04:00:00")
+        self.assertEqual(res, "2013-10-01T00:00:00-04:00")
 
     def test_encode_as_date(self):
 

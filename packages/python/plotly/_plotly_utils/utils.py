@@ -1,9 +1,7 @@
-import datetime
 import decimal
 import json as _json
 import sys
 import re
-import pytz
 
 from _plotly_utils.optional_imports import get_module
 
@@ -102,7 +100,7 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
             self.encode_as_sage,
             self.encode_as_numpy,
             self.encode_as_pandas,
-            self.encode_as_datetime_v4,
+            self.encode_as_datetime,
             self.encode_as_date,
             self.encode_as_list,  # because some values have `tolist` do last.
             self.encode_as_decimal,
@@ -169,41 +167,12 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
             raise NotEncodable
 
     @staticmethod
-    def encode_as_datetime_v4(obj):
+    def encode_as_datetime(obj):
         """Convert datetime objects to iso-format strings"""
         try:
             return obj.isoformat()
         except AttributeError:
             raise NotEncodable
-
-    @staticmethod
-    def encode_as_datetime(obj):
-        """Attempt to convert to utc-iso time string using datetime methods."""
-        # Since PY36, isoformat() converts UTC
-        # datetime.datetime objs to UTC T04:00:00
-        if not (
-            PY36_OR_LATER
-            and (isinstance(obj, datetime.datetime) and obj.tzinfo is None)
-        ):
-            try:
-                obj = obj.astimezone(pytz.utc)
-            except ValueError:
-                # we'll get a value error if trying to convert with naive datetime
-                pass
-            except TypeError:
-                # pandas throws a typeerror here instead of a value error, it's OK
-                pass
-            except AttributeError:
-                # we'll get an attribute error if astimezone DNE
-                raise NotEncodable
-
-        # now we need to get a nicely formatted time string
-        try:
-            time_string = obj.isoformat()
-        except AttributeError:
-            raise NotEncodable
-        else:
-            return iso_to_plotly_time_string(time_string)
 
     @staticmethod
     def encode_as_date(obj):

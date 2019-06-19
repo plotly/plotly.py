@@ -5,10 +5,10 @@ A module for converting from mpl language to plotly language.
 
 """
 import math
-import warnings
+import datetime
 
+import warnings
 import matplotlib.dates
-import pytz
 
 
 def check_bar_match(old_bar, new_bar):
@@ -542,7 +542,7 @@ def mpl_dates_to_datestrings(dates, mpl_formatter):
     if mpl_formatter == "TimeSeries_DateFormatter":
         try:
             dates = matplotlib.dates.epoch2num([date * 24 * 60 * 60 for date in dates])
-            dates = matplotlib.dates.num2date(dates, tz=pytz.utc)
+            dates = matplotlib.dates.num2date(dates)
         except:
             return _dates
 
@@ -551,7 +551,7 @@ def mpl_dates_to_datestrings(dates, mpl_formatter):
     # according to mpl --> try num2date(1)
     else:
         try:
-            dates = matplotlib.dates.num2date(dates, tz=pytz.utc)
+            dates = matplotlib.dates.num2date(dates)
         except:
             return _dates
 

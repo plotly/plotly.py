@@ -5,6 +5,7 @@ from copy import copy
 
 import six
 import os
+from distutils.version import LooseVersion
 
 from plotly import optional_imports
 
@@ -27,6 +28,7 @@ from plotly.io._utils import validate_coerce_fig_to_dict
 
 ipython = optional_imports.get_module("IPython")
 ipython_display = optional_imports.get_module("IPython.display")
+nbformat = optional_imports.get_module("nbformat")
 
 
 # Renderer configuration class
@@ -372,6 +374,11 @@ def show(fig, renderer=None, validate=True, **kwargs):
         if not ipython_display:
             raise ValueError(
                 "Mime type rendering requires ipython but it is not installed"
+            )
+
+        if not nbformat or LooseVersion(nbformat.__version__) < LooseVersion("4.2.0"):
+            raise ValueError(
+                "Mime type rendering requires nbformat>=4.2.0 but it is not installed"
             )
 
         ipython_display.display(bundle, raw=True)
