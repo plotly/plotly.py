@@ -1387,7 +1387,7 @@ Install using conda:
             orca_state["shutdown_timer"] = t
 
 
-@retrying.retry(wait_random_min=5, wait_random_max=10, stop_max_delay=30000)
+@retrying.retry(wait_random_min=5, wait_random_max=10, stop_max_delay=60000)
 def request_image_with_retrying(**kwargs):
     """
     Helper method to perform an image request to a running orca server process
@@ -1404,7 +1404,9 @@ def request_image_with_retrying(**kwargs):
     response = post(server_url + "/", data=json_str)
 
     if response.status_code == 522:
-        # Retry on "522: client socket timeout"
+        # On "522: client socket timeout", return server and keep trying
+        shutdown_server()
+        ensure_server()
         raise OSError("522: client socket timeout")
 
     return response
