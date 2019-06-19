@@ -5,9 +5,6 @@
 ###                                             ###
 ###################################################
 
-## http request dependencies ##
-requests
-
 ## python 2 to 3 compatibility ##
 six==1.8.0
 

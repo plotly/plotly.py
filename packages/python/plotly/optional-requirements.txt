@@ -18,8 +18,11 @@ nose==1.3.3
 pytest==3.5.1
 backports.tempfile==1.0
 xarray
-psutil
 pytz
+
+## orca dependencies ##
+requests
+psutil
 
 ## code formatting
 pre-commit

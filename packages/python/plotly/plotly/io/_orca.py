@@ -1325,6 +1325,20 @@ Install using conda:
 """
         )
 
+    # Validate requests
+    if not get_module("requests"):
+        raise ValueError(
+            """\
+Image generation requires the requests package.
+
+Install using pip:
+    $ pip install requests
+
+Install using conda:
+    $ conda install requests
+"""
+        )
+
     # Validate orca executable
     if status.state == "unvalidated":
         validate_executable()
