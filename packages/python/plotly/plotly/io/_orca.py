@@ -1402,6 +1402,11 @@ def request_image_with_retrying(**kwargs):
     request_params = {k: v for k, v, in kwargs.items() if v is not None}
     json_str = json.dumps(request_params, cls=_plotly_utils.utils.PlotlyJSONEncoder)
     response = post(server_url + "/", data=json_str)
+
+    if response.status_code == 522:
+        # Retry on "522: client socket timeout"
+        raise OSError("522: client socket timeout")
+
     return response
 
 
@@ -1546,6 +1551,7 @@ with the following error:
         # orca code base.
         # statusMsg: {
         #     400: 'invalid or malformed request syntax',
+        #     522: client socket timeout
         #     525: 'plotly.js error',
         #     526: 'plotly.js version 1.11.0 or up required',
         #     530: 'image conversion error'
