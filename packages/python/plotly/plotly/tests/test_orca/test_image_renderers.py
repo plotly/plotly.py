@@ -49,11 +49,18 @@ def test_png_renderer_mimetype(fig1):
     expected = {"image/png": image_str}
 
     pio.renderers.render_on_display = False
-    assert fig1._repr_mimebundle_(None, None) is None
+
+    with mock.patch("IPython.display.display") as mock_display:
+        fig1._ipython_display_()
+
+    # assert fig1._repr_mimebundle_(None, None) is None
+    mock_display.assert_not_called()
 
     pio.renderers.render_on_display = True
-    bundle = fig1._repr_mimebundle_(None, None)
-    assert bundle == expected
+    with mock.patch("IPython.display.display") as mock_display:
+        fig1._ipython_display_()
+
+    mock_display.assert_called_once_with(expected, raw=True)
 
 
 def test_svg_renderer_show(fig1):
@@ -131,8 +138,15 @@ def test_mimetype_combination(fig1):
     expected = {"image/png": image_str, plotly_mimetype: plotly_mimetype_dict}
 
     pio.renderers.render_on_display = False
-    assert fig1._repr_mimebundle_(None, None) is None
+
+    with mock.patch("IPython.display.display") as mock_display:
+        fig1._ipython_display_()
+
+    # assert fig1._repr_mimebundle_(None, None) is None
+    mock_display.assert_not_called()
 
     pio.renderers.render_on_display = True
-    bundle = fig1._repr_mimebundle_(None, None)
-    assert bundle == expected
+    with mock.patch("IPython.display.display") as mock_display:
+        fig1._ipython_display_()
+
+    mock_display.assert_called_once_with(expected, raw=True)
