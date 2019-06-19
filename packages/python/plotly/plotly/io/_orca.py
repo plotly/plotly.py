@@ -1387,7 +1387,7 @@ Install using conda:
             orca_state["shutdown_timer"] = t
 
 
-@retrying.retry(wait_random_min=5, wait_random_max=10, stop_max_delay=30000)
+@retrying.retry(wait_random_min=5, wait_random_max=10, stop_max_delay=60000)
 def request_image_with_retrying(**kwargs):
     """
     Helper method to perform an image request to a running orca server process
@@ -1402,6 +1402,13 @@ def request_image_with_retrying(**kwargs):
     request_params = {k: v for k, v, in kwargs.items() if v is not None}
     json_str = json.dumps(request_params, cls=_plotly_utils.utils.PlotlyJSONEncoder)
     response = post(server_url + "/", data=json_str)
+
+    if response.status_code == 522:
+        # On "522: client socket timeout", return server and keep trying
+        shutdown_server()
+        ensure_server()
+        raise OSError("522: client socket timeout")
+
     return response
 
 
@@ -1546,6 +1553,7 @@ with the following error:
         # orca code base.
         # statusMsg: {
         #     400: 'invalid or malformed request syntax',
+        #     522: client socket timeout
         #     525: 'plotly.js error',
         #     526: 'plotly.js version 1.11.0 or up required',
         #     530: 'image conversion error'

@@ -427,22 +427,16 @@ class BaseFigure(object):
 
         return repr_str
 
-    def _repr_mimebundle_(self, include, exclude, **kwargs):
+    def _ipython_display_(self):
         """
-        repr_mimebundle should accept include, exclude and **kwargs
+        Handle rich display of figures in ipython contexts
         """
         import plotly.io as pio
 
-        if pio.renderers.render_on_display:
-            data = pio.renderers._build_mime_bundle(self.to_dict())
-
-            if include:
-                data = {k: v for (k, v) in data.items() if k in include}
-            if exclude:
-                data = {k: v for (k, v) in data.items() if k not in exclude}
-            return data
+        if pio.renderers.render_on_display and pio.renderers.default:
+            pio.show(self)
         else:
-            return None
+            print (repr(self))
 
     def update(self, dict1=None, **kwargs):
         """

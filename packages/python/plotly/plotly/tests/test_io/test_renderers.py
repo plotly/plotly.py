@@ -43,11 +43,17 @@ def test_json_renderer_mimetype(fig1):
     expected = {"application/json": json.loads(pio.to_json(fig1, remove_uids=False))}
 
     pio.renderers.render_on_display = False
-    assert fig1._repr_mimebundle_(None, None) is None
+
+    with mock.patch("IPython.display.display") as mock_display:
+        fig1._ipython_display_()
+
+    mock_display.assert_not_called()
 
     pio.renderers.render_on_display = True
-    bundle = fig1._repr_mimebundle_(None, None)
-    assert bundle == expected
+    with mock.patch("IPython.display.display") as mock_display:
+        fig1._ipython_display_()
+
+    mock_display.assert_called_once_with(expected, raw=True)
 
 
 def test_json_renderer_show(fig1):
@@ -88,11 +94,17 @@ def test_plotly_mimetype_renderer_mimetype(fig1, renderer):
     expected[plotly_mimetype]["config"] = {"plotlyServerURL": "https://plot.ly"}
 
     pio.renderers.render_on_display = False
-    assert fig1._repr_mimebundle_(None, None) is None
+
+    with mock.patch("IPython.display.display") as mock_display:
+        fig1._ipython_display_()
+
+    mock_display.assert_not_called()
 
     pio.renderers.render_on_display = True
-    bundle = fig1._repr_mimebundle_(None, None)
-    assert bundle == expected
+    with mock.patch("IPython.display.display") as mock_display:
+        fig1._ipython_display_()
+
+    mock_display.assert_called_once_with(expected, raw=True)
 
 
 @pytest.mark.parametrize("renderer", plotly_mimetype_renderers)

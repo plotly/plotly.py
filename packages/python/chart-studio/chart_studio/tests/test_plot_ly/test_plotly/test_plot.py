@@ -166,7 +166,7 @@ class TestPlot(PlotlyTestCase):
             self.simple_figure, validate
         )
         kwargs = {
-            "filename": "is_share_key_included",
+            "filename": "is_share_key_included2",
             "world_readable": False,
             "auto_open": False,
             "sharing": "secret",
@@ -182,7 +182,7 @@ class TestPlot(PlotlyTestCase):
         # be 200
 
         kwargs = {
-            "filename": "is_share_key_included",
+            "filename": "is_share_key_included2",
             "auto_open": False,
             "world_readable": False,
             "sharing": "secret",
@@ -203,7 +203,7 @@ class TestPlot(PlotlyTestCase):
         # share_key is added it should be 200
 
         kwargs = {
-            "filename": "is_share_key_included",
+            "filename": "is_share_key_included2",
             "world_readable": False,
             "auto_open": False,
             "sharing": "private",

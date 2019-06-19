@@ -36,7 +36,7 @@ class TestStreaming(PlotlyTestCase):
             [Scatter(x=[], y=[], mode="markers", stream=stream)],
             auto_open=False,
             world_readable=True,
-            filename="stream-test",
+            filename="stream-test2",
         )
         self.assertTrue(url.startswith("https://plot.ly/~PythonAPI/"))
         time.sleep(0.5)
@@ -49,7 +49,7 @@ class TestStreaming(PlotlyTestCase):
             [Scatter(x=[], y=[], mode="markers", stream=stream)],
             auto_open=False,
             world_readable=True,
-            filename="stream-test",
+            filename="stream-test2",
         )
         time.sleep(0.5)
         my_stream = py.Stream(tk)
@@ -66,7 +66,7 @@ class TestStreaming(PlotlyTestCase):
             [Scatter(x=[], y=[], mode="markers", stream=stream)],
             auto_open=False,
             world_readable=True,
-            filename="stream-test",
+            filename="stream-test2",
         )
         time.sleep(0.5)
         my_stream = py.Stream(tk)
@@ -83,7 +83,7 @@ class TestStreaming(PlotlyTestCase):
             [Scatter(x=[], y=[], mode="markers", stream=stream)],
             auto_open=False,
             world_readable=True,
-            filename="stream-test",
+            filename="stream-test2",
         )
         time.sleep(0.5)
         title_0 = "some title i picked first"

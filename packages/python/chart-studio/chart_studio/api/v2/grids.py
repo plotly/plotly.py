@@ -95,6 +95,18 @@ def permanent_delete(fid):
     return request("delete", url)
 
 
+def destroy(fid):
+    """
+    Permanently delete a grid file from Plotly.
+
+    :param (str) fid: The `{username}:{idlocal}` identifier. E.g. `foo:88`.
+    :returns: (requests.Response) Returns response directly from requests.
+
+    """
+    url = build_url(RESOURCE, id=fid)
+    return request("delete", url)
+
+
 def lookup(path, parent=None, user=None, exists=None):
     """
     Retrieve a grid file from Plotly without needing a fid.
