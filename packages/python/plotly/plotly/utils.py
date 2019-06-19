@@ -1,10 +1,8 @@
 from __future__ import absolute_import, division
 
 import textwrap
-from collections import deque
 from pprint import PrettyPrinter
 
-from decorator import decorator
 from _plotly_utils.utils import *
 
 
@@ -209,47 +207,3 @@ def decode_unicode(coll):
                     pass
             coll[str(key)] = coll.pop(key)
     return coll
-
-
-def memoize(maxsize=128):
-    """
-    Memoize a function by its arguments. Note, if the wrapped function returns
-    a mutable result, the caller is responsible for *not* mutating the result
-    as it will mutate the cache itself.
-
-    :param (int|None) maxsize: Limit the number of cached results. This is a
-                               simple way to prevent memory leaks. Setting this
-                               to `None` will remember *all* calls. The 128
-                               number is used for parity with the Python 3.2
-                               `functools.lru_cache` tool.
-
-    """
-    keys = deque()
-    cache = {}
-
-    def _memoize(*all_args, **kwargs):
-        func = all_args[0]
-        args = all_args[1:]
-        key = _default_memoize_key_function(*args, **kwargs)
-
-        if key in keys:
-            return cache[key]
-
-        if maxsize is not None and len(keys) == maxsize:
-            cache.pop(keys.pop())
-
-        result = func(*args, **kwargs)
-        keys.appendleft(key)
-        cache[key] = result
-        return result
-
-    return decorator(_memoize)
-
-
-def _default_memoize_key_function(*args, **kwargs):
-    """Factored out in case we want to allow callers to specify this func."""
-    if kwargs:
-        # frozenset is used to ensure hashability
-        return args, frozenset(kwargs.items())
-    else:
-        return args
