@@ -1445,7 +1445,7 @@ def get_grid(grid_url, raw=False):
     return Grid(parsed_content, fid)
 
 
-def _create_or_overwrite(data, filetype):
+def _create_or_overwrite(data, filetype, max_retries=5):
     """
     Create or overwrite (if file exists) and grid, plot, spectacle,
     or dashboard object
@@ -1495,8 +1495,14 @@ def _create_or_overwrite(data, filetype):
             pass
 
     # Create file
-    res = api_module.create(data)
-    res.raise_for_status()
+    try:
+        res = api_module.create(data)
+        res.raise_for_status()
+    except exceptions.PlotlyRequestError as e:
+        if max_retries > 0 and "already exists" in e.message:
+            # Retry _create_or_overwrite
+            time.sleep(1)
+            _create_or_overwrite(data, filetype, max_retries=max_retries - 1)
 
     # Get resulting file content
     file_info = res.json()
