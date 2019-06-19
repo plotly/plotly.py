@@ -1094,7 +1094,7 @@ class grid_ops:
         if parent_path != "":
             payload["parent_path"] = parent_path
 
-        file_info = _create_or_overwrite(payload, "grid")
+        file_info = _create_or_overwrite_grid(payload)
 
         cols = file_info["cols"]
         fid = file_info["fid"]
@@ -1447,7 +1447,7 @@ def get_grid(grid_url, raw=False):
 
 def _create_or_update(data, filetype):
     """
-    Create or update (if file exists) and grid, plot, spectacle, or dashboard
+    Create or update (if file exists) and plot, spectacle, or dashboard
     object
     Parameters
     ----------
@@ -1509,10 +1509,9 @@ changing the filename.""".format(
     return file_info
 
 
-def _create_or_overwrite(data, filetype, max_retries=5):
+def _create_or_overwrite_grid(data, max_retries=3):
     """
-    Create or overwrite (if file exists) and grid, plot, spectacle,
-    or dashboard object
+    Create or overwrite (if file exists) a grid
 
     Parameters
     ----------
@@ -1526,7 +1525,7 @@ def _create_or_overwrite(data, filetype, max_retries=5):
     dict
         File info from API response
     """
-    api_module = getattr(v2, filetype + "s")
+    api_module = v2.grids
 
     # lookup if pre-existing filename already exists
     if "parent_path" in data:
@@ -1548,11 +1547,9 @@ def _create_or_overwrite(data, filetype, max_retries=5):
 
             # Delete fid
             # This requires sending file to trash and then deleting it
-            res = api_module.trash(fid)
+            res = api_module.destroy(fid)
             res.raise_for_status()
 
-            res = api_module.permanent_delete(fid)
-            res.raise_for_status()
         except exceptions.PlotlyRequestError as e:
             # Raise on trash or permanent delete
             # Pass through to try creating the file anyway
@@ -1565,7 +1562,7 @@ def _create_or_overwrite(data, filetype, max_retries=5):
         if max_retries > 0 and "already exists" in e.message:
             # Retry _create_or_overwrite
             time.sleep(1)
-            return _create_or_overwrite(data, filetype, max_retries=max_retries - 1)
+            return _create_or_overwrite_grid(data, max_retries=max_retries - 1)
         else:
             raise
 
