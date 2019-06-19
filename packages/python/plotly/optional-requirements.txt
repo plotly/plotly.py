@@ -19,6 +19,7 @@ pytest==3.5.1
 backports.tempfile==1.0
 xarray
 psutil
+pytz
 
 ## code formatting
 pre-commit
