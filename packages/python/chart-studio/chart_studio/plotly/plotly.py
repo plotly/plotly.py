@@ -282,7 +282,7 @@ def plot(figure_or_data, validate=True, **plot_options):
         _set_grid_column_references(figure, grid)
         payload["figure"] = figure
 
-    file_info = _create_or_overwrite(payload, "plot")
+    file_info = _create_or_update(payload, "plot")
 
     # Compute viewing URL
     if sharing == "secret":
@@ -1445,6 +1445,70 @@ def get_grid(grid_url, raw=False):
     return Grid(parsed_content, fid)
 
 
+def _create_or_update(data, filetype):
+    """
+    Create or update (if file exists) and grid, plot, spectacle, or dashboard
+    object
+    Parameters
+    ----------
+    data: dict
+        update/create API payload
+    filetype: str
+        One of 'plot', 'grid', 'spectacle_presentation', or 'dashboard'
+    Returns
+    -------
+    dict
+        File info from API response
+    """
+    api_module = getattr(v2, filetype + "s")
+
+    # lookup if pre-existing filename already exists
+    if "parent_path" in data:
+        filename = data["parent_path"] + "/" + data["filename"]
+    else:
+        filename = data.get("filename", None)
+
+    if filename:
+        try:
+            lookup_res = v2.files.lookup(filename)
+            if isinstance(lookup_res.content, bytes):
+                content = lookup_res.content.decode("utf-8")
+            else:
+                content = lookup_res.content
+
+            matching_file = json.loads(content)
+
+            if matching_file["filetype"] == filetype:
+                fid = matching_file["fid"]
+                res = api_module.update(fid, data)
+            else:
+                raise _plotly_utils.exceptions.PlotlyError(
+                    """
+'{filename}' is already a {other_filetype} in your account. 
+While you can overwrite {filetype}s with the same name, you can't overwrite
+files with a different type. Try deleting '{filename}' in your account or
+changing the filename.""".format(
+                        filename=filename,
+                        filetype=filetype,
+                        other_filetype=matching_file["filetype"],
+                    )
+                )
+
+        except exceptions.PlotlyRequestError:
+            res = api_module.create(data)
+    else:
+        res = api_module.create(data)
+
+    # Check response
+    res.raise_for_status()
+
+    # Get resulting file content
+    file_info = res.json()
+    file_info = file_info.get("file", file_info)
+
+    return file_info
+
+
 def _create_or_overwrite(data, filetype, max_retries=5):
     """
     Create or overwrite (if file exists) and grid, plot, spectacle,
@@ -1497,14 +1561,16 @@ def _create_or_overwrite(data, filetype, max_retries=5):
     # Create file
     try:
         res = api_module.create(data)
-        res.raise_for_status()
     except exceptions.PlotlyRequestError as e:
         if max_retries > 0 and "already exists" in e.message:
             # Retry _create_or_overwrite
             time.sleep(1)
-            _create_or_overwrite(data, filetype, max_retries=max_retries - 1)
+            return _create_or_overwrite(data, filetype, max_retries=max_retries - 1)
+        else:
+            raise
 
     # Get resulting file content
+    res.raise_for_status()
     file_info = res.json()
     file_info = file_info.get("file", file_info)
 
@@ -1592,7 +1658,7 @@ class dashboard_ops:
             "world_readable": world_readable,
         }
 
-        file_info = _create_or_overwrite(data, "dashboard")
+        file_info = _create_or_update(data, "dashboard")
 
         url = file_info["web_url"]
 
@@ -1689,7 +1755,7 @@ class presentation_ops:
             "world_readable": world_readable,
         }
 
-        file_info = _create_or_overwrite(data, "spectacle_presentation")
+        file_info = _create_or_update(data, "spectacle_presentation")
 
         url = file_info["web_url"]
 
