@@ -19,7 +19,6 @@ exclude = '''
     | submodules
     | packages/javascript
     | packages/python/plotly/plotly/matplotlylib/mplexporter
-    | packages/python/chart-studio/chart_studio/plotly/chunked_requests
   )/
   | versioneer.py
 )
