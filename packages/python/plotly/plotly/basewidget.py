@@ -730,6 +730,15 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
 
         self._js2py_pointsCallback = None
 
+    # Display
+    # -------
+    def _ipython_display_(self):
+        """
+        Handle rich display of figures in ipython contexts
+        """
+        # Override BaseFigure's display to make sure we display the widget version
+        widgets.DOMWidget._ipython_display_(self)
+
     # Callbacks
     # ---------
     def on_edits_completed(self, fn):
