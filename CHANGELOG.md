@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.0.0] - ???
+
+This is a new major version...
+
 ## [3.10.0] - 2019-05-31
 
 ### Updated
