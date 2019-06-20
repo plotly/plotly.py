@@ -466,16 +466,13 @@ class DimensionsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 ormat/blob/master/README.md#locale_format
             ticktext
                 Sets the text displayed at the ticks position
-                via `tickvals`. Only has an effect if
-                `tickmode` is set to "array". Used with
-                `tickvals`.
+                via `tickvals`.
             ticktextsrc
                 Sets the source reference on plot.ly for
                 ticktext .
             tickvals
                 Sets the values at which ticks on this axis
-                appear. Only has an effect if `tickmode` is set
-                to "array". Used with `ticktext`.
+                appear.
             tickvalssrc
                 Sets the source reference on plot.ly for
                 tickvals .
