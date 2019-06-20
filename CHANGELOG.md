@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.0.0] - ???
+
+This is a new major version...
+
 ## [3.10.0] - 2019-05-31
 
 ### Updated
@@ -641,7 +645,7 @@ must be installed:
    - From here forward, new versions of plotly.py will be published to the [plotly anaconda channel](https://anaconda.org/plotly/)
      on the same day they are published to PyPI.
      ([72ad0e4](https://github.com/plotly/plotly.py/commit/72ad0e4bf54bb8a06445d2ca55488ffc11c836a7))
-   - The [`README`](README.md) now includes conda installation instructions alongside the pip instructions. 
+   - The [`README`](packages/python/plotly-geo/README.md) now includes conda installation instructions alongside the pip instructions. 
    - In addition to the existing installation approaches, orca is now also available as a
      [conda package](https://anaconda.org/plotly/plotly-orca) from the plotly anaconda channel.
  
@@ -703,7 +707,7 @@ must be installed:
 
 ### JupyterLab Versions
 For use with JupyterLab, the following versions of the following packages
-must be installed. See [README.md](README.md) for instructions.
+must be installed. See [README.md](packages/python/plotly-geo/README.md) for instructions.
 
  - Python Packages
    - plotly==3.1.0
