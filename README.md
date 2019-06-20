@@ -53,7 +53,7 @@ Read about what's new in [plotly.py v3](https://medium.com/@plotlygraphs/introdu
 
 Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is a high-level, declarative charting library. plotly.js ships with over 30 chart types, including scientific charts, 3D graphs, statistical charts, SVG maps, financial charts, and more.
 
-`plotly.py` is [MIT Licensed](LICENSE.txt). Plotly graphs can be viewed in Jupyter notebooks, standalone HTML files, or hosted online on [plot.ly](https://plot.ly).
+`plotly.py` is [MIT Licensed](packages/python/chart-studio/LICENSE.txt). Plotly graphs can be viewed in Jupyter notebooks, standalone HTML files, or hosted online on [plot.ly](https://plot.ly).
 
 [Contact us](https://plot.ly/products/consulting-and-oem/) for Plotly.js consulting, dashboard development, application integration, and feature additions. Sharing your graphs online or in dashboards? Consider a [plot.ly subscription](https://plot.ly/products/cloud).
 
@@ -66,7 +66,7 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 
 - [Online Documentation](https://plot.ly/python)
 - [Contributing](contributing.md)
-- [Changelog](CHANGELOG.md)
+- [Changelog](packages/python/plotly-geo/CHANGELOG.md)
 - [Code of Conduct](CODE_OF_CONDUCT.md)
 - [Version 3 Migration Guide](migration-guide.md)
 - [New! Announcing Dash](https://medium.com/@plotlygraphs/introducing-dash-5ecf7191b503)
@@ -78,12 +78,12 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 
 plotly.py may be installed using pip...
 ```
-pip install plotly==3.10.0
+pip install plotly==4.0.0a4
 ```
 
 or conda.
 ```
-conda install -c plotly plotly=3.10.0
+conda install -c plotly/label/test plotly==4.0.0a4
 ```
 
 ### Jupyter Notebook Support
@@ -125,8 +125,8 @@ set NODE_OPTIONS=--max-old-space-size=4096
 # Jupyter widgets extension
 jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.38 --no-build
 
-# FigureWidget support and offline iplot support
-jupyter labextension install jupyterlab-plotly@1.0.0-alpha.1 --no-build
+# FigureWidget support and jupyterlab renderer support
+jupyter labextension install jupyterlab-plotly@1.0.0-alpha.2 --no-build
 
 # JupyterLab chart editor support (optional)
 jupyter labextension install jupyterlab-chart-editor@1.1 --no-build
@@ -159,12 +159,39 @@ pip install psutil
 
 and orca can be installed according to the instructions in the [orca README](https://github.com/plotly/orca).
 
+### Extended Geo Support
+Some plotly.py features rely on fairly large geographic shape files. The county
+choropleth figure factory is one such example. These shape files are distributed as a
+separate `plotly-geo` package.  This package can be installed using pip...
+
+```
+pip install plotly-geo==1.0.0a1
+```
+
+or conda
+```
+conda install -c plotly/label/test plotly-geo=1.0.0a1
+```
+
+### Chart Studio support
+The `chart-studio` package can be used to upload plotly figures to Plotly's Chart
+Studio Cloud or On-Prem service.  This package can be installed using pip...
+
+```
+pip install chart-studio==1.0.0a4
+```
+
+or conda
+```
+conda install -c plotly/label/test chart-studio=1.0.0a4
+```
+
 ## Migration
 If you're migrating from plotly.py version 2, please check out the [migration guide](migration-guide.md)
 
 ## Copyright and Licenses
 Code and documentation copyright 2019 Plotly, Inc.
 
-Code released under the [MIT license](LICENSE.txt).
+Code released under the [MIT license](packages/python/chart-studio/LICENSE.txt).
 
 Docs released under the [Creative Commons license](https://github.com/plotly/documentation/blob/source/LICENSE).
