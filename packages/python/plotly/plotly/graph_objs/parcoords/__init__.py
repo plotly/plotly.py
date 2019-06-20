@@ -2044,8 +2044,6 @@ class Dimension(_BaseTraceHierarchyType):
     def ticktext(self):
         """
         Sets the text displayed at the ticks position via `tickvals`.
-        Only has an effect if `tickmode` is set to "array". Used with
-        `tickvals`.
     
         The 'ticktext' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
@@ -2085,8 +2083,7 @@ class Dimension(_BaseTraceHierarchyType):
     @property
     def tickvals(self):
         """
-        Sets the values at which ticks on this axis appear. Only has an
-        effect if `tickmode` is set to "array". Used with `ticktext`.
+        Sets the values at which ticks on this axis appear.
     
         The 'tickvals' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
@@ -2239,14 +2236,11 @@ class Dimension(_BaseTraceHierarchyType):
             ocale_format
         ticktext
             Sets the text displayed at the ticks position via
-            `tickvals`. Only has an effect if `tickmode` is set to
-            "array". Used with `tickvals`.
+            `tickvals`.
         ticktextsrc
             Sets the source reference on plot.ly for  ticktext .
         tickvals
             Sets the values at which ticks on this axis appear.
-            Only has an effect if `tickmode` is set to "array".
-            Used with `ticktext`.
         tickvalssrc
             Sets the source reference on plot.ly for  tickvals .
         values
@@ -2335,14 +2329,11 @@ class Dimension(_BaseTraceHierarchyType):
             ocale_format
         ticktext
             Sets the text displayed at the ticks position via
-            `tickvals`. Only has an effect if `tickmode` is set to
-            "array". Used with `tickvals`.
+            `tickvals`.
         ticktextsrc
             Sets the source reference on plot.ly for  ticktext .
         tickvals
             Sets the values at which ticks on this axis appear.
-            Only has an effect if `tickmode` is set to "array".
-            Used with `ticktext`.
         tickvalssrc
             Sets the source reference on plot.ly for  tickvals .
         values
