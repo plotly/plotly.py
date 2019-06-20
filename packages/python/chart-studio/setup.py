@@ -10,7 +10,7 @@ def readme():
 
 setup(
     name="chart-studio",
-    version="1.0.0a3",
+    version="1.0.0a4",
     author="Chris P",
     author_email="chris@plot.ly",
     maintainer="Jon Mease",
