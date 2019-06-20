@@ -44144,16 +44144,13 @@ class Parcoords(_BaseTraceType):
                     ormat/blob/master/README.md#locale_format
                 ticktext
                     Sets the text displayed at the ticks position
-                    via `tickvals`. Only has an effect if
-                    `tickmode` is set to "array". Used with
-                    `tickvals`.
+                    via `tickvals`.
                 ticktextsrc
                     Sets the source reference on plot.ly for
                     ticktext .
                 tickvals
                     Sets the values at which ticks on this axis
-                    appear. Only has an effect if `tickmode` is set
-                    to "array". Used with `ticktext`.
+                    appear.
                 tickvalssrc
                     Sets the source reference on plot.ly for
                     tickvals .
@@ -65844,8 +65841,8 @@ class Funnel(_BaseTraceType):
     
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
-          - Any combination of ['x', 'y', 'z', 'text', 'name'] joined with '+' characters
-            (e.g. 'x+y')
+          - Any combination of ['name', 'x', 'y', 'text', 'percent initial', 'percent previous', 'percent total'] joined with '+' characters
+            (e.g. 'name+x')
             OR exactly one of ['all', 'none', 'skip'] (e.g. 'skip')
           - A list or array of the above
 
@@ -65954,10 +65951,11 @@ class Funnel(_BaseTraceType):
         at this link https://plot.ly/javascript/plotlyjs-events/#event-
         data. Additionally, every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
-        Anything contained in tag `<extra>` is displayed in the
-        secondary box, for example "<extra>{fullData.name}</extra>". To
-        hide the secondary box completely, use an empty tag
-        `<extra></extra>`.
+        variables `percentInitial`, `percentPrevious` and
+        `percentTotal`. Anything contained in tag `<extra>` is
+        displayed in the secondary box, for example
+        "<extra>{fullData.name}</extra>". To hide the secondary box
+        completely, use an empty tag `<extra></extra>`.
     
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -67132,8 +67130,10 @@ class Funnel(_BaseTraceType):
             https://plot.ly/javascript/plotlyjs-events/#event-data.
             Additionally, every attributes that can be specified
             per-point (the ones that are `arrayOk: true`) are
-            available.  Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
+            available. variables `percentInitial`,
+            `percentPrevious` and `percentTotal`. Anything
+            contained in tag `<extra>` is displayed in the
+            secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -67431,8 +67431,10 @@ class Funnel(_BaseTraceType):
             https://plot.ly/javascript/plotlyjs-events/#event-data.
             Additionally, every attributes that can be specified
             per-point (the ones that are `arrayOk: true`) are
-            available.  Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
+            available. variables `percentInitial`,
+            `percentPrevious` and `percentTotal`. Anything
+            contained in tag `<extra>` is displayed in the
+            secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
