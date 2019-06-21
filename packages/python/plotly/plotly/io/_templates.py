@@ -40,7 +40,6 @@ class TemplatesConfig(object):
             "plotly_dark",
             "presentation",
             "xgridoff",
-            "plotly_v4_colors",
         ]
 
         for template_name in default_templates:
