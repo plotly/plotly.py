@@ -659,19 +659,19 @@ def apply_default_cascade(args):
                 args["color_continuous_scale"] = [
                     x[1] for x in template.layout.colorscale.sequential
                 ]
-            except AttributeError:
+            except (AttributeError, TypeError):
                 pass
         if args["color_continuous_scale"] is None:
-            args["color_continuous_scale"] = sequential.Plasma
+            args["color_continuous_scale"] = sequential.Viridis
 
     if "color_discrete_sequence" in args:
         if args["color_discrete_sequence"] is None:
             try:
                 args["color_discrete_sequence"] = template.layout.colorway
-            except AttributeError:
+            except (AttributeError, TypeError):
                 pass
         if args["color_discrete_sequence"] is None:
-            args["color_discrete_sequence"] = qualitative.Plotly
+            args["color_discrete_sequence"] = qualitative.D3
 
     # If both marginals and faceting are specified, faceting wins
     if args.get("facet_col", None) and args.get("marginal_y", None):
