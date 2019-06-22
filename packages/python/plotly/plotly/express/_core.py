@@ -19,10 +19,8 @@ class PxDefaults(object):
         self.height = 600
         self.color_discrete_sequence = None
         self.color_continuous_scale = None
-        self.symbol_sequence = ["circle", "diamond", "square", "x", "cross"]
-        self.line_dash_sequence = ["solid", "dot", "dash", "longdash", "dashdot"] + [
-            "longdashdot"
-        ]
+        self.symbol_sequence = None
+        self.line_dash_sequence = None
         self.size_max = 20
 
 
@@ -672,6 +670,37 @@ def apply_default_cascade(args):
                 pass
         if args["color_discrete_sequence"] is None:
             args["color_discrete_sequence"] = qualitative.D3
+
+    # if symbol_sequence/line_dash_sequence not set explicitly or in px.defaults,
+    # see if we can defer to template. If not, set reasonable defaults
+    if "symbol_sequence" in args:
+        if args["symbol_sequence"] is None:
+            try:
+                args["symbol_sequence"] = [
+                    scatter.marker.symbol for scatter in template.data.scatter
+                ]
+            except (AttributeError, TypeError):
+                pass
+        if not args["symbol_sequence"] or not any(args["symbol_sequence"]):
+            args["symbol_sequence"] = ["circle", "diamond", "square", "x", "cross"]
+
+    if "line_dash_sequence" in args:
+        if args["line_dash_sequence"] is None:
+            try:
+                args["line_dash_sequence"] = [
+                    scatter.line.dash for scatter in template.data.scatter
+                ]
+            except (AttributeError, TypeError):
+                pass
+        if not args["line_dash_sequence"] or not any(args["line_dash_sequence"]):
+            args["line_dash_sequence"] = [
+                "solid",
+                "dot",
+                "dash",
+                "longdash",
+                "dashdot",
+                "longdashdot",
+            ]
 
     # If both marginals and faceting are specified, faceting wins
     if args.get("facet_col", None) and args.get("marginal_y", None):
