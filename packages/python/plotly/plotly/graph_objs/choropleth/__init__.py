@@ -43,8 +43,8 @@ class Unselected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            plotly.graph_objs.choropleth.unselected.Marker instance
-            or dict with compatible properties
+            plotly.graph_objects.choropleth.unselected.Marker
+            instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, marker=None, **kwargs):
@@ -57,8 +57,8 @@ class Unselected(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.choropleth.Unselected
         marker
-            plotly.graph_objs.choropleth.unselected.Marker instance
-            or dict with compatible properties
+            plotly.graph_objects.choropleth.unselected.Marker
+            instance or dict with compatible properties
 
         Returns
         -------
@@ -293,8 +293,8 @@ class Selected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            plotly.graph_objs.choropleth.selected.Marker instance
-            or dict with compatible properties
+            plotly.graph_objects.choropleth.selected.Marker
+            instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, marker=None, **kwargs):
@@ -307,8 +307,8 @@ class Selected(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.choropleth.Selected
         marker
-            plotly.graph_objs.choropleth.selected.Marker instance
-            or dict with compatible properties
+            plotly.graph_objects.choropleth.selected.Marker
+            instance or dict with compatible properties
 
         Returns
         -------
@@ -457,7 +457,7 @@ class Marker(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         line
-            plotly.graph_objs.choropleth.marker.Line instance or
+            plotly.graph_objects.choropleth.marker.Line instance or
             dict with compatible properties
         opacity
             Sets the opacity of the locations.
@@ -475,7 +475,7 @@ class Marker(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.choropleth.Marker
         line
-            plotly.graph_objs.choropleth.marker.Line instance or
+            plotly.graph_objects.choropleth.marker.Line instance or
             dict with compatible properties
         opacity
             Sets the opacity of the locations.
@@ -2361,8 +2361,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.choropleth.colorbar.Tickformatstop
-            instance or dict with compatible properties
+            A tuple of
+            plotly.graph_objects.choropleth.colorbar.Tickformatstop
+            instances or dicts with compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.chorop
             leth.colorbar.tickformatstopdefaults), sets the default
@@ -2402,8 +2403,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.choropleth.colorbar.Title instance or
-            dict with compatible properties
+            plotly.graph_objects.choropleth.colorbar.Title instance
+            or dict with compatible properties
         titlefont
             Deprecated: Please use choropleth.colorbar.title.font
             instead. Sets this color bar's title font. Note that
@@ -2609,8 +2610,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.choropleth.colorbar.Tickformatstop
-            instance or dict with compatible properties
+            A tuple of
+            plotly.graph_objects.choropleth.colorbar.Tickformatstop
+            instances or dicts with compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.chorop
             leth.colorbar.tickformatstopdefaults), sets the default
@@ -2650,8 +2652,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.choropleth.colorbar.Title instance or
-            dict with compatible properties
+            plotly.graph_objects.choropleth.colorbar.Title instance
+            or dict with compatible properties
         titlefont
             Deprecated: Please use choropleth.colorbar.title.font
             instead. Sets this color bar's title font. Note that

@@ -1138,9 +1138,9 @@ class Marker(_BaseTraceHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.funnel.marker.colorbar.Tickfo
-                    rmatstop instance or dict with compatible
-                    properties
+                    A tuple of plotly.graph_objects.funnel.marker.c
+                    olorbar.Tickformatstop instances or dicts with
+                    compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
                     a.funnel.marker.colorbar.tickformatstopdefaults
@@ -1187,8 +1187,8 @@ class Marker(_BaseTraceHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.funnel.marker.colorbar.Title
-                    instance or dict with compatible properties
+                    plotly.graph_objects.funnel.marker.colorbar.Tit
+                    le instance or dict with compatible properties
                 titlefont
                     Deprecated: Please use
                     funnel.marker.colorbar.title.font instead. Sets
@@ -1548,7 +1548,7 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.funnel.marker.ColorBar instance or
+            plotly.graph_objects.funnel.marker.ColorBar instance or
             dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
@@ -1567,8 +1567,8 @@ class Marker(_BaseTraceHierarchyType):
         colorsrc
             Sets the source reference on plot.ly for  color .
         line
-            plotly.graph_objs.funnel.marker.Line instance or dict
-            with compatible properties
+            plotly.graph_objects.funnel.marker.Line instance or
+            dict with compatible properties
         opacity
             Sets the opacity of the bars.
         opacitysrc
@@ -1660,7 +1660,7 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.funnel.marker.ColorBar instance or
+            plotly.graph_objects.funnel.marker.ColorBar instance or
             dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
@@ -1679,8 +1679,8 @@ class Marker(_BaseTraceHierarchyType):
         colorsrc
             Sets the source reference on plot.ly for  color .
         line
-            plotly.graph_objs.funnel.marker.Line instance or dict
-            with compatible properties
+            plotly.graph_objects.funnel.marker.Line instance or
+            dict with compatible properties
         opacity
             Sets the opacity of the bars.
         opacitysrc
@@ -2715,7 +2715,7 @@ class Connector(_BaseTraceHierarchyType):
         fillcolor
             Sets the fill color.
         line
-            plotly.graph_objs.funnel.connector.Line instance or
+            plotly.graph_objects.funnel.connector.Line instance or
             dict with compatible properties
         visible
             Determines if connector regions and lines are drawn.
@@ -2733,7 +2733,7 @@ class Connector(_BaseTraceHierarchyType):
         fillcolor
             Sets the fill color.
         line
-            plotly.graph_objs.funnel.connector.Line instance or
+            plotly.graph_objects.funnel.connector.Line instance or
             dict with compatible properties
         visible
             Determines if connector regions and lines are drawn.

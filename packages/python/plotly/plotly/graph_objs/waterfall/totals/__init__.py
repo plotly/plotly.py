@@ -109,8 +109,8 @@ class Marker(_BaseTraceHierarchyType):
             Sets the marker color of all intermediate sums and
             total values.
         line
-            plotly.graph_objs.waterfall.totals.marker.Line instance
-            or dict with compatible properties
+            plotly.graph_objects.waterfall.totals.marker.Line
+            instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, color=None, line=None, **kwargs):
@@ -127,8 +127,8 @@ class Marker(_BaseTraceHierarchyType):
             Sets the marker color of all intermediate sums and
             total values.
         line
-            plotly.graph_objs.waterfall.totals.marker.Line instance
-            or dict with compatible properties
+            plotly.graph_objects.waterfall.totals.marker.Line
+            instance or dict with compatible properties
 
         Returns
         -------

@@ -296,14 +296,14 @@ class SlicesValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             x
-                plotly.graph_objs.volume.slices.X instance or
-                dict with compatible properties
+                plotly.graph_objects.volume.slices.X instance
+                or dict with compatible properties
             y
-                plotly.graph_objs.volume.slices.Y instance or
-                dict with compatible properties
+                plotly.graph_objects.volume.slices.Y instance
+                or dict with compatible properties
             z
-                plotly.graph_objs.volume.slices.Z instance or
-                dict with compatible properties
+                plotly.graph_objects.volume.slices.Z instance
+                or dict with compatible properties
 """,
             ),
             **kwargs
@@ -913,8 +913,9 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
             tickformatstops
-                plotly.graph_objs.volume.colorbar.Tickformatsto
-                p instance or dict with compatible properties
+                A tuple of plotly.graph_objects.volume.colorbar
+                .Tickformatstop instances or dicts with
+                compatible properties
             tickformatstopdefaults
                 When used in a template (as layout.template.dat
                 a.volume.colorbar.tickformatstopdefaults), sets
@@ -960,7 +961,7 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickwidth
                 Sets the tick width (in px).
             title
-                plotly.graph_objs.volume.colorbar.Title
+                plotly.graph_objects.volume.colorbar.Title
                 instance or dict with compatible properties
             titlefont
                 Deprecated: Please use
@@ -1091,13 +1092,13 @@ class CapsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             x
-                plotly.graph_objs.volume.caps.X instance or
+                plotly.graph_objects.volume.caps.X instance or
                 dict with compatible properties
             y
-                plotly.graph_objs.volume.caps.Y instance or
+                plotly.graph_objects.volume.caps.Y instance or
                 dict with compatible properties
             z
-                plotly.graph_objs.volume.caps.Z instance or
+                plotly.graph_objects.volume.caps.Z instance or
                 dict with compatible properties
 """,
             ),

@@ -15,8 +15,9 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
             color
                 Sets the marker color of all decreasing values.
             line
-                plotly.graph_objs.waterfall.decreasing.marker.L
-                ine instance or dict with compatible properties
+                plotly.graph_objects.waterfall.decreasing.marke
+                r.Line instance or dict with compatible
+                properties
 """,
             ),
             **kwargs

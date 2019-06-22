@@ -706,14 +706,14 @@ class ContoursValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             x
-                plotly.graph_objs.surface.contours.X instance
-                or dict with compatible properties
+                plotly.graph_objects.surface.contours.X
+                instance or dict with compatible properties
             y
-                plotly.graph_objs.surface.contours.Y instance
-                or dict with compatible properties
+                plotly.graph_objects.surface.contours.Y
+                instance or dict with compatible properties
             z
-                plotly.graph_objs.surface.contours.Z instance
-                or dict with compatible properties
+                plotly.graph_objects.surface.contours.Z
+                instance or dict with compatible properties
 """,
             ),
             **kwargs
@@ -886,8 +886,9 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
             tickformatstops
-                plotly.graph_objs.surface.colorbar.Tickformatst
-                op instance or dict with compatible properties
+                A tuple of plotly.graph_objects.surface.colorba
+                r.Tickformatstop instances or dicts with
+                compatible properties
             tickformatstopdefaults
                 When used in a template (as layout.template.dat
                 a.surface.colorbar.tickformatstopdefaults),
@@ -933,7 +934,7 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickwidth
                 Sets the tick width (in px).
             title
-                plotly.graph_objs.surface.colorbar.Title
+                plotly.graph_objects.surface.colorbar.Title
                 instance or dict with compatible properties
             titlefont
                 Deprecated: Please use

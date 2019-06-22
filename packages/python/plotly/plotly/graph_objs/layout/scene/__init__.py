@@ -1835,8 +1835,9 @@ class ZAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.layout.scene.zaxis.Tickformatstop
-            instance or dict with compatible properties
+            A tuple of
+            plotly.graph_objects.layout.scene.zaxis.Tickformatstop
+            instances or dicts with compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.layout.scen
             e.zaxis.tickformatstopdefaults), sets the default
@@ -1876,8 +1877,8 @@ class ZAxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.layout.scene.zaxis.Title instance or
-            dict with compatible properties
+            plotly.graph_objects.layout.scene.zaxis.Title instance
+            or dict with compatible properties
         titlefont
             Deprecated: Please use layout.scene.zaxis.title.font
             instead. Sets this axis' title font. Note that the
@@ -2161,8 +2162,9 @@ class ZAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.layout.scene.zaxis.Tickformatstop
-            instance or dict with compatible properties
+            A tuple of
+            plotly.graph_objects.layout.scene.zaxis.Tickformatstop
+            instances or dicts with compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.layout.scen
             e.zaxis.tickformatstopdefaults), sets the default
@@ -2202,8 +2204,8 @@ class ZAxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.layout.scene.zaxis.Title instance or
-            dict with compatible properties
+            plotly.graph_objects.layout.scene.zaxis.Title instance
+            or dict with compatible properties
         titlefont
             Deprecated: Please use layout.scene.zaxis.title.font
             instead. Sets this axis' title font. Note that the
@@ -4280,8 +4282,9 @@ class YAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.layout.scene.yaxis.Tickformatstop
-            instance or dict with compatible properties
+            A tuple of
+            plotly.graph_objects.layout.scene.yaxis.Tickformatstop
+            instances or dicts with compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.layout.scen
             e.yaxis.tickformatstopdefaults), sets the default
@@ -4321,8 +4324,8 @@ class YAxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.layout.scene.yaxis.Title instance or
-            dict with compatible properties
+            plotly.graph_objects.layout.scene.yaxis.Title instance
+            or dict with compatible properties
         titlefont
             Deprecated: Please use layout.scene.yaxis.title.font
             instead. Sets this axis' title font. Note that the
@@ -4606,8 +4609,9 @@ class YAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.layout.scene.yaxis.Tickformatstop
-            instance or dict with compatible properties
+            A tuple of
+            plotly.graph_objects.layout.scene.yaxis.Tickformatstop
+            instances or dicts with compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.layout.scen
             e.yaxis.tickformatstopdefaults), sets the default
@@ -4647,8 +4651,8 @@ class YAxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.layout.scene.yaxis.Title instance or
-            dict with compatible properties
+            plotly.graph_objects.layout.scene.yaxis.Title instance
+            or dict with compatible properties
         titlefont
             Deprecated: Please use layout.scene.yaxis.title.font
             instead. Sets this axis' title font. Note that the
@@ -6725,8 +6729,9 @@ class XAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.layout.scene.xaxis.Tickformatstop
-            instance or dict with compatible properties
+            A tuple of
+            plotly.graph_objects.layout.scene.xaxis.Tickformatstop
+            instances or dicts with compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.layout.scen
             e.xaxis.tickformatstopdefaults), sets the default
@@ -6766,8 +6771,8 @@ class XAxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.layout.scene.xaxis.Title instance or
-            dict with compatible properties
+            plotly.graph_objects.layout.scene.xaxis.Title instance
+            or dict with compatible properties
         titlefont
             Deprecated: Please use layout.scene.xaxis.title.font
             instead. Sets this axis' title font. Note that the
@@ -7051,8 +7056,9 @@ class XAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.layout.scene.xaxis.Tickformatstop
-            instance or dict with compatible properties
+            A tuple of
+            plotly.graph_objects.layout.scene.xaxis.Tickformatstop
+            instances or dicts with compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.layout.scen
             e.xaxis.tickformatstopdefaults), sets the default
@@ -7092,8 +7098,8 @@ class XAxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.layout.scene.xaxis.Title instance or
-            dict with compatible properties
+            plotly.graph_objects.layout.scene.xaxis.Title instance
+            or dict with compatible properties
         titlefont
             Deprecated: Please use layout.scene.xaxis.title.font
             instead. Sets this axis' title font. Note that the
@@ -7694,7 +7700,7 @@ class Camera(_BaseLayoutHierarchyType):
             This vector determines the view point about the origin
             of this scene.
         projection
-            plotly.graph_objs.layout.scene.camera.Projection
+            plotly.graph_objects.layout.scene.camera.Projection
             instance or dict with compatible properties
         up
             Sets the (x,y,z) components of the 'up' camera vector.
@@ -7724,7 +7730,7 @@ class Camera(_BaseLayoutHierarchyType):
             This vector determines the view point about the origin
             of this scene.
         projection
-            plotly.graph_objs.layout.scene.camera.Projection
+            plotly.graph_objects.layout.scene.camera.Projection
             instance or dict with compatible properties
         up
             Sets the (x,y,z) components of the 'up' camera vector.
@@ -8985,7 +8991,7 @@ class Annotation(_BaseLayoutHierarchyType):
             (default) lets the text set the box height. Taller text
             will be clipped.
         hoverlabel
-            plotly.graph_objs.layout.scene.annotation.Hoverlabel
+            plotly.graph_objects.layout.scene.annotation.Hoverlabel
             instance or dict with compatible properties
         hovertext
             Sets text to appear when hovering over this annotation.
@@ -9194,7 +9200,7 @@ class Annotation(_BaseLayoutHierarchyType):
             (default) lets the text set the box height. Taller text
             will be clipped.
         hoverlabel
-            plotly.graph_objs.layout.scene.annotation.Hoverlabel
+            plotly.graph_objects.layout.scene.annotation.Hoverlabel
             instance or dict with compatible properties
         hovertext
             Sets text to appear when hovering over this annotation.

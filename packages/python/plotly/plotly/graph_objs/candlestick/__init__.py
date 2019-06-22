@@ -360,8 +360,8 @@ class Increasing(_BaseTraceHierarchyType):
             variant of the line color, marker color, or marker line
             color, whichever is available.
         line
-            plotly.graph_objs.candlestick.increasing.Line instance
-            or dict with compatible properties
+            plotly.graph_objects.candlestick.increasing.Line
+            instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, fillcolor=None, line=None, **kwargs):
@@ -378,8 +378,8 @@ class Increasing(_BaseTraceHierarchyType):
             variant of the line color, marker color, or marker line
             color, whichever is available.
         line
-            plotly.graph_objs.candlestick.increasing.Line instance
-            or dict with compatible properties
+            plotly.graph_objects.candlestick.increasing.Line
+            instance or dict with compatible properties
 
         Returns
         -------
@@ -1051,8 +1051,8 @@ class Decreasing(_BaseTraceHierarchyType):
             variant of the line color, marker color, or marker line
             color, whichever is available.
         line
-            plotly.graph_objs.candlestick.decreasing.Line instance
-            or dict with compatible properties
+            plotly.graph_objects.candlestick.decreasing.Line
+            instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, fillcolor=None, line=None, **kwargs):
@@ -1069,8 +1069,8 @@ class Decreasing(_BaseTraceHierarchyType):
             variant of the line color, marker color, or marker line
             color, whichever is available.
         line
-            plotly.graph_objs.candlestick.decreasing.Line instance
-            or dict with compatible properties
+            plotly.graph_objects.candlestick.decreasing.Line
+            instance or dict with compatible properties
 
         Returns
         -------

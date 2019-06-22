@@ -846,7 +846,7 @@ class Node(_BaseTraceHierarchyType):
             displayed upon hovering. But, if `none` is set, click
             and hover events are still fired.
         hoverlabel
-            plotly.graph_objs.sankey.node.Hoverlabel instance or
+            plotly.graph_objects.sankey.node.Hoverlabel instance or
             dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -875,7 +875,7 @@ class Node(_BaseTraceHierarchyType):
         labelsrc
             Sets the source reference on plot.ly for  label .
         line
-            plotly.graph_objs.sankey.node.Line instance or dict
+            plotly.graph_objects.sankey.node.Line instance or dict
             with compatible properties
         pad
             Sets the padding (in px) between the `nodes`.
@@ -941,7 +941,7 @@ class Node(_BaseTraceHierarchyType):
             displayed upon hovering. But, if `none` is set, click
             and hover events are still fired.
         hoverlabel
-            plotly.graph_objs.sankey.node.Hoverlabel instance or
+            plotly.graph_objects.sankey.node.Hoverlabel instance or
             dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -970,7 +970,7 @@ class Node(_BaseTraceHierarchyType):
         labelsrc
             Sets the source reference on plot.ly for  label .
         line
-            plotly.graph_objs.sankey.node.Line instance or dict
+            plotly.graph_objects.sankey.node.Line instance or dict
             with compatible properties
         pad
             Sets the padding (in px) between the `nodes`.
@@ -1616,8 +1616,8 @@ class Link(_BaseTraceHierarchyType):
             `link.color` is omitted, then by default, a translucent
             grey link will be used.
         colorscales
-            plotly.graph_objs.sankey.link.Colorscale instance or
-            dict with compatible properties
+            A tuple of plotly.graph_objects.sankey.link.Colorscale
+            instances or dicts with compatible properties
         colorscaledefaults
             When used in a template (as
             layout.template.data.sankey.link.colorscaledefaults),
@@ -1631,7 +1631,7 @@ class Link(_BaseTraceHierarchyType):
             displayed upon hovering. But, if `none` is set, click
             and hover events are still fired.
         hoverlabel
-            plotly.graph_objs.sankey.link.Hoverlabel instance or
+            plotly.graph_objects.sankey.link.Hoverlabel instance or
             dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1660,7 +1660,7 @@ class Link(_BaseTraceHierarchyType):
         labelsrc
             Sets the source reference on plot.ly for  label .
         line
-            plotly.graph_objs.sankey.link.Line instance or dict
+            plotly.graph_objects.sankey.link.Line instance or dict
             with compatible properties
         source
             An integer number `[0..nodes.length - 1]` that
@@ -1716,8 +1716,8 @@ class Link(_BaseTraceHierarchyType):
             `link.color` is omitted, then by default, a translucent
             grey link will be used.
         colorscales
-            plotly.graph_objs.sankey.link.Colorscale instance or
-            dict with compatible properties
+            A tuple of plotly.graph_objects.sankey.link.Colorscale
+            instances or dicts with compatible properties
         colorscaledefaults
             When used in a template (as
             layout.template.data.sankey.link.colorscaledefaults),
@@ -1731,7 +1731,7 @@ class Link(_BaseTraceHierarchyType):
             displayed upon hovering. But, if `none` is set, click
             and hover events are still fired.
         hoverlabel
-            plotly.graph_objs.sankey.link.Hoverlabel instance or
+            plotly.graph_objects.sankey.link.Hoverlabel instance or
             dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1760,7 +1760,7 @@ class Link(_BaseTraceHierarchyType):
         labelsrc
             Sets the source reference on plot.ly for  label .
         line
-            plotly.graph_objs.sankey.link.Line instance or dict
+            plotly.graph_objects.sankey.link.Line instance or dict
             with compatible properties
         source
             An integer number `[0..nodes.length - 1]` that

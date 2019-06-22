@@ -76,10 +76,10 @@ class Unselected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            plotly.graph_objs.scattercarpet.unselected.Marker
+            plotly.graph_objects.scattercarpet.unselected.Marker
             instance or dict with compatible properties
         textfont
-            plotly.graph_objs.scattercarpet.unselected.Textfont
+            plotly.graph_objects.scattercarpet.unselected.Textfont
             instance or dict with compatible properties
         """
 
@@ -94,10 +94,10 @@ class Unselected(_BaseTraceHierarchyType):
             an instance of
             plotly.graph_objs.scattercarpet.Unselected
         marker
-            plotly.graph_objs.scattercarpet.unselected.Marker
+            plotly.graph_objects.scattercarpet.unselected.Marker
             instance or dict with compatible properties
         textfont
-            plotly.graph_objs.scattercarpet.unselected.Textfont
+            plotly.graph_objects.scattercarpet.unselected.Textfont
             instance or dict with compatible properties
 
         Returns
@@ -687,10 +687,10 @@ class Selected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            plotly.graph_objs.scattercarpet.selected.Marker
+            plotly.graph_objects.scattercarpet.selected.Marker
             instance or dict with compatible properties
         textfont
-            plotly.graph_objs.scattercarpet.selected.Textfont
+            plotly.graph_objects.scattercarpet.selected.Textfont
             instance or dict with compatible properties
         """
 
@@ -704,10 +704,10 @@ class Selected(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.scattercarpet.Selected
         marker
-            plotly.graph_objs.scattercarpet.selected.Marker
+            plotly.graph_objects.scattercarpet.selected.Marker
             instance or dict with compatible properties
         textfont
-            plotly.graph_objs.scattercarpet.selected.Textfont
+            plotly.graph_objects.scattercarpet.selected.Textfont
             instance or dict with compatible properties
 
         Returns
@@ -1118,9 +1118,9 @@ class Marker(_BaseTraceHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.scattercarpet.marker.colorbar
-                    .Tickformatstop instance or dict with
-                    compatible properties
+                    A tuple of plotly.graph_objects.scattercarpet.m
+                    arker.colorbar.Tickformatstop instances or
+                    dicts with compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
                     a.scattercarpet.marker.colorbar.tickformatstopd
@@ -1167,8 +1167,8 @@ class Marker(_BaseTraceHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.scattercarpet.marker.colorbar
-                    .Title instance or dict with compatible
+                    plotly.graph_objects.scattercarpet.marker.color
+                    bar.Title instance or dict with compatible
                     properties
                 titlefont
                     Deprecated: Please use
@@ -1800,7 +1800,7 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.scattercarpet.marker.ColorBar
+            plotly.graph_objects.scattercarpet.marker.ColorBar
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
@@ -1819,11 +1819,11 @@ class Marker(_BaseTraceHierarchyType):
         colorsrc
             Sets the source reference on plot.ly for  color .
         gradient
-            plotly.graph_objs.scattercarpet.marker.Gradient
+            plotly.graph_objects.scattercarpet.marker.Gradient
             instance or dict with compatible properties
         line
-            plotly.graph_objs.scattercarpet.marker.Line instance or
-            dict with compatible properties
+            plotly.graph_objects.scattercarpet.marker.Line instance
+            or dict with compatible properties
         maxdisplayed
             Sets a maximum number of points to be drawn on the
             graph. 0 corresponds to no limit.
@@ -1952,7 +1952,7 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.scattercarpet.marker.ColorBar
+            plotly.graph_objects.scattercarpet.marker.ColorBar
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
@@ -1971,11 +1971,11 @@ class Marker(_BaseTraceHierarchyType):
         colorsrc
             Sets the source reference on plot.ly for  color .
         gradient
-            plotly.graph_objs.scattercarpet.marker.Gradient
+            plotly.graph_objects.scattercarpet.marker.Gradient
             instance or dict with compatible properties
         line
-            plotly.graph_objs.scattercarpet.marker.Line instance or
-            dict with compatible properties
+            plotly.graph_objects.scattercarpet.marker.Line instance
+            or dict with compatible properties
         maxdisplayed
             Sets a maximum number of points to be drawn on the
             graph. 0 corresponds to no limit.

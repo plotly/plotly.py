@@ -1349,8 +1349,9 @@ class ColorBar(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.layout.coloraxis.colorbar.Tickformats
-            top instance or dict with compatible properties
+            A tuple of plotly.graph_objects.layout.coloraxis.colorb
+            ar.Tickformatstop instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.layout.colo
             raxis.colorbar.tickformatstopdefaults), sets the
@@ -1390,7 +1391,7 @@ class ColorBar(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.layout.coloraxis.colorbar.Title
+            plotly.graph_objects.layout.coloraxis.colorbar.Title
             instance or dict with compatible properties
         titlefont
             Deprecated: Please use
@@ -1599,8 +1600,9 @@ class ColorBar(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.layout.coloraxis.colorbar.Tickformats
-            top instance or dict with compatible properties
+            A tuple of plotly.graph_objects.layout.coloraxis.colorb
+            ar.Tickformatstop instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.layout.colo
             raxis.colorbar.tickformatstopdefaults), sets the
@@ -1640,7 +1642,7 @@ class ColorBar(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.layout.coloraxis.colorbar.Title
+            plotly.graph_objects.layout.coloraxis.colorbar.Title
             instance or dict with compatible properties
         titlefont
             Deprecated: Please use

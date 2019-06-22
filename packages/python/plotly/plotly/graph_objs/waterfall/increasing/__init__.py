@@ -105,7 +105,7 @@ class Marker(_BaseTraceHierarchyType):
         color
             Sets the marker color of all increasing values.
         line
-            plotly.graph_objs.waterfall.increasing.marker.Line
+            plotly.graph_objects.waterfall.increasing.marker.Line
             instance or dict with compatible properties
         """
 
@@ -122,7 +122,7 @@ class Marker(_BaseTraceHierarchyType):
         color
             Sets the marker color of all increasing values.
         line
-            plotly.graph_objs.waterfall.increasing.marker.Line
+            plotly.graph_objects.waterfall.increasing.marker.Line
             instance or dict with compatible properties
 
         Returns

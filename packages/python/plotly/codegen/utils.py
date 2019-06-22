@@ -916,15 +916,40 @@ class PlotlyNode:
             raw_description = subtype_node.description
             if raw_description:
                 subtype_description = raw_description
-            elif subtype_node.is_compound:
-                class_name = (
-                    f"plotly.graph_objs"
-                    f"{subtype_node.parent_dotpath_str}."
-                    f"{subtype_node.name_datatype_class}"
+            elif subtype_node.is_array_element:
+                if (
+                    self.name_datatype_class == "Data"
+                    and self.parent
+                    and self.parent.name_datatype_class == "Template"
+                ):
+                    class_name = (
+                        f"plotly.graph_objects." f"{subtype_node.name_datatype_class}"
+                    )
+                else:
+                    class_name = (
+                        f"plotly.graph_objects"
+                        f"{subtype_node.parent_dotpath_str}."
+                        f"{subtype_node.name_datatype_class}"
+                    )
+                subtype_description = (
+                    f"A tuple of {class_name} instances or "
+                    "dicts with compatible properties"
                 )
+            elif subtype_node.is_compound:
+                if (
+                    subtype_node.name_datatype_class == "Layout"
+                    and self.name_datatype_class == "Template"
+                ):
+                    class_name = "plotly.graph_objects.Layout"
+                else:
+                    class_name = (
+                        f"plotly.graph_objects"
+                        f"{subtype_node.parent_dotpath_str}."
+                        f"{subtype_node.name_datatype_class}"
+                    )
 
                 subtype_description = (
-                    f"{class_name} instance or " "dict with compatible properties"
+                    f"{class_name} instance or dict with compatible properties"
                 )
             else:
                 subtype_description = ""

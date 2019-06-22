@@ -884,8 +884,8 @@ class Marker(_BaseTraceHierarchyType):
         colorssrc
             Sets the source reference on plot.ly for  colors .
         line
-            plotly.graph_objs.sunburst.marker.Line instance or dict
-            with compatible properties
+            plotly.graph_objects.sunburst.marker.Line instance or
+            dict with compatible properties
         """
 
     def __init__(self, arg=None, colors=None, colorssrc=None, line=None, **kwargs):
@@ -904,8 +904,8 @@ class Marker(_BaseTraceHierarchyType):
         colorssrc
             Sets the source reference on plot.ly for  colors .
         line
-            plotly.graph_objs.sunburst.marker.Line instance or dict
-            with compatible properties
+            plotly.graph_objects.sunburst.marker.Line instance or
+            dict with compatible properties
 
         Returns
         -------

@@ -214,11 +214,11 @@ class UnselectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             marker
-                plotly.graph_objs.scattergl.unselected.Marker
-                instance or dict with compatible properties
+                plotly.graph_objects.scattergl.unselected.Marke
+                r instance or dict with compatible properties
             textfont
-                plotly.graph_objs.scattergl.unselected.Textfont
-                instance or dict with compatible properties
+                plotly.graph_objects.scattergl.unselected.Textf
+                ont instance or dict with compatible properties
 """,
             ),
             **kwargs
@@ -443,11 +443,11 @@ class SelectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             marker
-                plotly.graph_objs.scattergl.selected.Marker
+                plotly.graph_objects.scattergl.selected.Marker
                 instance or dict with compatible properties
             textfont
-                plotly.graph_objs.scattergl.selected.Textfont
-                instance or dict with compatible properties
+                plotly.graph_objects.scattergl.selected.Textfon
+                t instance or dict with compatible properties
 """,
             ),
             **kwargs
@@ -595,7 +595,7 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color scales can be linked to the same color
                 axis.
             colorbar
-                plotly.graph_objs.scattergl.marker.ColorBar
+                plotly.graph_objects.scattergl.marker.ColorBar
                 instance or dict with compatible properties
             colorscale
                 Sets the colorscale. Has an effect only if in
@@ -617,7 +617,7 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  color
                 .
             line
-                plotly.graph_objs.scattergl.marker.Line
+                plotly.graph_objects.scattergl.marker.Line
                 instance or dict with compatible properties
             opacity
                 Sets the marker opacity.

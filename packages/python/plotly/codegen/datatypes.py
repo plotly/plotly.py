@@ -169,6 +169,9 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
                 f"plotly.graph_objs{node.dotpath_str}."
                 + f"{subtype_node.name_datatype_class}"
             )
+
+            # remap template traces to regular traces
+            prop_type = prop_type.replace("layout.template.data", "")
         elif subtype_node.is_mapped:
             prop_type = ""
         else:

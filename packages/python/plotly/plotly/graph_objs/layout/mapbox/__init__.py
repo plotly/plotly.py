@@ -486,8 +486,8 @@ class Layer(_BaseLayoutHierarchyType):
             layer with the specified ID. If omitted or set to '',
             the layer will be inserted above every existing layer.
         circle
-            plotly.graph_objs.layout.mapbox.layer.Circle instance
-            or dict with compatible properties
+            plotly.graph_objects.layout.mapbox.layer.Circle
+            instance or dict with compatible properties
         color
             Sets the primary layer color. If `type` is "circle",
             color corresponds to the circle color
@@ -499,11 +499,11 @@ class Layer(_BaseLayoutHierarchyType):
             color corresponds to the icon color
             (mapbox.layer.paint.icon-color)
         fill
-            plotly.graph_objs.layout.mapbox.layer.Fill instance or
-            dict with compatible properties
+            plotly.graph_objects.layout.mapbox.layer.Fill instance
+            or dict with compatible properties
         line
-            plotly.graph_objs.layout.mapbox.layer.Line instance or
-            dict with compatible properties
+            plotly.graph_objects.layout.mapbox.layer.Line instance
+            or dict with compatible properties
         maxzoom
             Sets the maximum zoom level (mapbox.layer.maxzoom). At
             zoom levels equal to or greater than the maxzoom, the
@@ -546,8 +546,8 @@ class Layer(_BaseLayoutHierarchyType):
             "raster", "image" and "video" source types is coming
             soon.
         symbol
-            plotly.graph_objs.layout.mapbox.layer.Symbol instance
-            or dict with compatible properties
+            plotly.graph_objects.layout.mapbox.layer.Symbol
+            instance or dict with compatible properties
         templateitemname
             Used to refer to a named item in this array in the
             template. Named items from the template will be created
@@ -601,8 +601,8 @@ class Layer(_BaseLayoutHierarchyType):
             layer with the specified ID. If omitted or set to '',
             the layer will be inserted above every existing layer.
         circle
-            plotly.graph_objs.layout.mapbox.layer.Circle instance
-            or dict with compatible properties
+            plotly.graph_objects.layout.mapbox.layer.Circle
+            instance or dict with compatible properties
         color
             Sets the primary layer color. If `type` is "circle",
             color corresponds to the circle color
@@ -614,11 +614,11 @@ class Layer(_BaseLayoutHierarchyType):
             color corresponds to the icon color
             (mapbox.layer.paint.icon-color)
         fill
-            plotly.graph_objs.layout.mapbox.layer.Fill instance or
-            dict with compatible properties
+            plotly.graph_objects.layout.mapbox.layer.Fill instance
+            or dict with compatible properties
         line
-            plotly.graph_objs.layout.mapbox.layer.Line instance or
-            dict with compatible properties
+            plotly.graph_objects.layout.mapbox.layer.Line instance
+            or dict with compatible properties
         maxzoom
             Sets the maximum zoom level (mapbox.layer.maxzoom). At
             zoom levels equal to or greater than the maxzoom, the
@@ -661,8 +661,8 @@ class Layer(_BaseLayoutHierarchyType):
             "raster", "image" and "video" source types is coming
             soon.
         symbol
-            plotly.graph_objs.layout.mapbox.layer.Symbol instance
-            or dict with compatible properties
+            plotly.graph_objects.layout.mapbox.layer.Symbol
+            instance or dict with compatible properties
         templateitemname
             Used to refer to a named item in this array in the
             template. Named items from the template will be created

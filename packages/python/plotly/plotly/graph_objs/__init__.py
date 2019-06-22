@@ -230,8 +230,8 @@ class Layout(_BaseLayoutType):
                     (default) lets the text set the box height.
                     Taller text will be clipped.
                 hoverlabel
-                    plotly.graph_objs.layout.annotation.Hoverlabel
-                    instance or dict with compatible properties
+                    plotly.graph_objects.layout.annotation.Hoverlab
+                    el instance or dict with compatible properties
                 hovertext
                     Sets text to appear when hovering over this
                     annotation. If omitted or blank, no hover label
@@ -723,7 +723,7 @@ class Layout(_BaseLayoutType):
                     trace color array(s) and if set, `cmax` must be
                     set as well.
                 colorbar
-                    plotly.graph_objs.layout.coloraxis.ColorBar
+                    plotly.graph_objects.layout.coloraxis.ColorBar
                     instance or dict with compatible properties
                 colorscale
                     Sets the colorscale. The colorscale must be an
@@ -1142,8 +1142,8 @@ class Layout(_BaseLayoutType):
                 bgcolor
                     Set the background color of the map
                 center
-                    plotly.graph_objs.layout.geo.Center instance or
-                    dict with compatible properties
+                    plotly.graph_objects.layout.geo.Center instance
+                    or dict with compatible properties
                 coastlinecolor
                     Sets the coastline color.
                 coastlinewidth
@@ -1154,8 +1154,8 @@ class Layout(_BaseLayoutType):
                     Sets line width (in px) of the country
                     boundaries.
                 domain
-                    plotly.graph_objs.layout.geo.Domain instance or
-                    dict with compatible properties
+                    plotly.graph_objects.layout.geo.Domain instance
+                    or dict with compatible properties
                 framecolor
                     Sets the color the frame.
                 framewidth
@@ -1165,15 +1165,15 @@ class Layout(_BaseLayoutType):
                 landcolor
                     Sets the land mass color.
                 lataxis
-                    plotly.graph_objs.layout.geo.Lataxis instance
-                    or dict with compatible properties
+                    plotly.graph_objects.layout.geo.Lataxis
+                    instance or dict with compatible properties
                 lonaxis
-                    plotly.graph_objs.layout.geo.Lonaxis instance
-                    or dict with compatible properties
+                    plotly.graph_objects.layout.geo.Lonaxis
+                    instance or dict with compatible properties
                 oceancolor
                     Sets the ocean color
                 projection
-                    plotly.graph_objs.layout.geo.Projection
+                    plotly.graph_objects.layout.geo.Projection
                     instance or dict with compatible properties
                 resolution
                     Sets the resolution of the base layers. The
@@ -1248,8 +1248,8 @@ class Layout(_BaseLayoutType):
                     different length, if you want to leave a row at
                     the end for non-cartesian subplots.
                 domain
-                    plotly.graph_objs.layout.grid.Domain instance
-                    or dict with compatible properties
+                    plotly.graph_objects.layout.grid.Domain
+                    instance or dict with compatible properties
                 pattern
                     If no `subplots`, `xaxes`, or `yaxes` are given
                     but we do have `rows` and `columns`, we can
@@ -1755,14 +1755,15 @@ class Layout(_BaseLayoutType):
                     Sets the bearing angle of the map in degrees
                     counter-clockwise from North (mapbox.bearing).
                 center
-                    plotly.graph_objs.layout.mapbox.Center instance
-                    or dict with compatible properties
+                    plotly.graph_objects.layout.mapbox.Center
+                    instance or dict with compatible properties
                 domain
-                    plotly.graph_objs.layout.mapbox.Domain instance
-                    or dict with compatible properties
+                    plotly.graph_objects.layout.mapbox.Domain
+                    instance or dict with compatible properties
                 layers
-                    plotly.graph_objs.layout.mapbox.Layer instance
-                    or dict with compatible properties
+                    A tuple of
+                    plotly.graph_objects.layout.mapbox.Layer
+                    instances or dicts with compatible properties
                 layerdefaults
                     When used in a template (as
                     layout.template.layout.mapbox.layerdefaults),
@@ -2095,7 +2096,7 @@ class Layout(_BaseLayoutType):
             Supported dict properties:
                 
                 angularaxis
-                    plotly.graph_objs.layout.polar.AngularAxis
+                    plotly.graph_objects.layout.polar.AngularAxis
                     instance or dict with compatible properties
                 bargap
                     Sets the gap between bars of adjacent location
@@ -2112,8 +2113,8 @@ class Layout(_BaseLayoutType):
                 bgcolor
                     Set the background color of the subplot
                 domain
-                    plotly.graph_objs.layout.polar.Domain instance
-                    or dict with compatible properties
+                    plotly.graph_objects.layout.polar.Domain
+                    instance or dict with compatible properties
                 gridshape
                     Determines if the radial axis grid lines and
                     angular axis line are drawn as "circular"
@@ -2127,7 +2128,7 @@ class Layout(_BaseLayoutType):
                     Sets the fraction of the radius to cut out of
                     the polar subplot.
                 radialaxis
-                    plotly.graph_objs.layout.polar.RadialAxis
+                    plotly.graph_objects.layout.polar.RadialAxis
                     instance or dict with compatible properties
                 sector
                     Sets angular span of this polar subplot with
@@ -2235,8 +2236,9 @@ class Layout(_BaseLayoutType):
             Supported dict properties:
                 
                 annotations
-                    plotly.graph_objs.layout.scene.Annotation
-                    instance or dict with compatible properties
+                    A tuple of
+                    plotly.graph_objects.layout.scene.Annotation
+                    instances or dicts with compatible properties
                 annotationdefaults
                     When used in a template (as layout.template.lay
                     out.scene.annotationdefaults), sets the default
@@ -2260,11 +2262,11 @@ class Layout(_BaseLayoutType):
                 bgcolor
     
                 camera
-                    plotly.graph_objs.layout.scene.Camera instance
-                    or dict with compatible properties
+                    plotly.graph_objects.layout.scene.Camera
+                    instance or dict with compatible properties
                 domain
-                    plotly.graph_objs.layout.scene.Domain instance
-                    or dict with compatible properties
+                    plotly.graph_objects.layout.scene.Domain
+                    instance or dict with compatible properties
                 dragmode
                     Determines the mode of drag interactions for
                     this scene.
@@ -2276,14 +2278,14 @@ class Layout(_BaseLayoutType):
                     camera attributes. Defaults to
                     `layout.uirevision`.
                 xaxis
-                    plotly.graph_objs.layout.scene.XAxis instance
-                    or dict with compatible properties
+                    plotly.graph_objects.layout.scene.XAxis
+                    instance or dict with compatible properties
                 yaxis
-                    plotly.graph_objs.layout.scene.YAxis instance
-                    or dict with compatible properties
+                    plotly.graph_objects.layout.scene.YAxis
+                    instance or dict with compatible properties
                 zaxis
-                    plotly.graph_objs.layout.scene.ZAxis instance
-                    or dict with compatible properties
+                    plotly.graph_objects.layout.scene.ZAxis
+                    instance or dict with compatible properties
 
         Returns
         -------
@@ -2382,8 +2384,8 @@ class Layout(_BaseLayoutType):
                     Specifies whether shapes are drawn below or
                     above traces.
                 line
-                    plotly.graph_objs.layout.shape.Line instance or
-                    dict with compatible properties
+                    plotly.graph_objects.layout.shape.Line instance
+                    or dict with compatible properties
                 name
                     When used in a template, named items are
                     created in the output figure in addition to any
@@ -2612,7 +2614,7 @@ class Layout(_BaseLayoutType):
                     Sets the width (in px) of the border enclosing
                     the slider.
                 currentvalue
-                    plotly.graph_objs.layout.slider.Currentvalue
+                    plotly.graph_objects.layout.slider.Currentvalue
                     instance or dict with compatible properties
                 font
                     Sets the font of the slider step labels.
@@ -2642,8 +2644,9 @@ class Layout(_BaseLayoutType):
                     Set the padding of the slider component along
                     each side.
                 steps
-                    plotly.graph_objs.layout.slider.Step instance
-                    or dict with compatible properties
+                    A tuple of
+                    plotly.graph_objects.layout.slider.Step
+                    instances or dicts with compatible properties
                 stepdefaults
                     When used in a template (as
                     layout.template.layout.slider.stepdefaults),
@@ -2668,7 +2671,7 @@ class Layout(_BaseLayoutType):
                 tickwidth
                     Sets the tick width (in px).
                 transition
-                    plotly.graph_objs.layout.slider.Transition
+                    plotly.graph_objects.layout.slider.Transition
                     instance or dict with compatible properties
                 visible
                     Determines whether or not the slider is
@@ -2809,11 +2812,11 @@ class Layout(_BaseLayoutType):
             Supported dict properties:
                 
                 data
-                    plotly.graph_objs.layout.template.Data instance
-                    or dict with compatible properties
-                layout
-                    plotly.graph_objs.layout.template.Layout
+                    plotly.graph_objects.layout.template.Data
                     instance or dict with compatible properties
+                layout
+                    plotly.graph_objects.Layout instance or dict
+                    with compatible properties
     
           - The name of a registered template where current registered templates
             are stored in the plotly.io.templates configuration object. The names
@@ -2849,18 +2852,18 @@ class Layout(_BaseLayoutType):
             Supported dict properties:
                 
                 aaxis
-                    plotly.graph_objs.layout.ternary.Aaxis instance
-                    or dict with compatible properties
+                    plotly.graph_objects.layout.ternary.Aaxis
+                    instance or dict with compatible properties
                 baxis
-                    plotly.graph_objs.layout.ternary.Baxis instance
-                    or dict with compatible properties
+                    plotly.graph_objects.layout.ternary.Baxis
+                    instance or dict with compatible properties
                 bgcolor
                     Set the background color of the subplot
                 caxis
-                    plotly.graph_objs.layout.ternary.Caxis instance
-                    or dict with compatible properties
+                    plotly.graph_objects.layout.ternary.Caxis
+                    instance or dict with compatible properties
                 domain
-                    plotly.graph_objs.layout.ternary.Domain
+                    plotly.graph_objects.layout.ternary.Domain
                     instance or dict with compatible properties
                 sum
                     The number each triplet should sum to, and the
@@ -3100,8 +3103,9 @@ class Layout(_BaseLayoutType):
                     Sets the width (in px) of the border enclosing
                     the update menu.
                 buttons
-                    plotly.graph_objs.layout.updatemenu.Button
-                    instance or dict with compatible properties
+                    A tuple of
+                    plotly.graph_objects.layout.updatemenu.Button
+                    instances or dicts with compatible properties
                 buttondefaults
                     When used in a template (as layout.template.lay
                     out.updatemenu.buttondefaults), sets the
@@ -3574,10 +3578,10 @@ class Layout(_BaseLayoutType):
                     negative, regardless of the input data. Applies
                     only to linear axes.
                 rangeselector
-                    plotly.graph_objs.layout.xaxis.Rangeselector
+                    plotly.graph_objects.layout.xaxis.Rangeselector
                     instance or dict with compatible properties
                 rangeslider
-                    plotly.graph_objs.layout.xaxis.Rangeslider
+                    plotly.graph_objects.layout.xaxis.Rangeslider
                     instance or dict with compatible properties
                 scaleanchor
                     If set to another axis id (e.g. `x2`, `y`), the
@@ -3704,8 +3708,9 @@ class Layout(_BaseLayoutType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.layout.xaxis.Tickformatstop
-                    instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.layout.xaxis.Ti
+                    ckformatstop instances or dicts with compatible
+                    properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.lay
                     out.xaxis.tickformatstopdefaults), sets the
@@ -3758,8 +3763,8 @@ class Layout(_BaseLayoutType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.layout.xaxis.Title instance
-                    or dict with compatible properties
+                    plotly.graph_objects.layout.xaxis.Title
+                    instance or dict with compatible properties
                 titlefont
                     Deprecated: Please use layout.xaxis.title.font
                     instead. Sets this axis' title font. Note that
@@ -4137,8 +4142,9 @@ class Layout(_BaseLayoutType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.layout.yaxis.Tickformatstop
-                    instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.layout.yaxis.Ti
+                    ckformatstop instances or dicts with compatible
+                    properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.lay
                     out.yaxis.tickformatstopdefaults), sets the
@@ -4191,8 +4197,8 @@ class Layout(_BaseLayoutType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.layout.yaxis.Title instance
-                    or dict with compatible properties
+                    plotly.graph_objects.layout.yaxis.Title
+                    instance or dict with compatible properties
                 titlefont
                     Deprecated: Please use layout.yaxis.title.font
                     instead. Sets this axis' title font. Note that
@@ -4244,11 +4250,11 @@ class Layout(_BaseLayoutType):
     def _prop_descriptions(self):
         return """\
         angularaxis
-            plotly.graph_objs.layout.AngularAxis instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.AngularAxis instance or
+            dict with compatible properties
         annotations
-            plotly.graph_objs.layout.Annotation instance or dict
-            with compatible properties
+            A tuple of plotly.graph_objects.layout.Annotation
+            instances or dicts with compatible properties
         annotationdefaults
             When used in a template (as
             layout.template.layout.annotationdefaults), sets the
@@ -4318,10 +4324,10 @@ class Layout(_BaseLayoutType):
             well. When the "event" flag is missing, `plotly_click`
             and `plotly_selected` events are not fired.
         coloraxis
-            plotly.graph_objs.layout.Coloraxis instance or dict
+            plotly.graph_objects.layout.Coloraxis instance or dict
             with compatible properties
         colorscale
-            plotly.graph_objs.layout.Colorscale instance or dict
+            plotly.graph_objects.layout.Colorscale instance or dict
             with compatible properties
         colorway
             Sets the default trace colors.
@@ -4398,10 +4404,10 @@ class Layout(_BaseLayoutType):
             over one another, you might need to an "opacity" to see
             multiple bars.
         geo
-            plotly.graph_objs.layout.Geo instance or dict with
+            plotly.graph_objects.layout.Geo instance or dict with
             compatible properties
         grid
-            plotly.graph_objs.layout.Grid instance or dict with
+            plotly.graph_objects.layout.Grid instance or dict with
             compatible properties
         height
             Sets the plot's height (in px).
@@ -4429,7 +4435,7 @@ class Layout(_BaseLayoutType):
             these objects will not supersede hover on point-like
             objects in case of conflict.
         hoverlabel
-            plotly.graph_objs.layout.Hoverlabel instance or dict
+            plotly.graph_objects.layout.Hoverlabel instance or dict
             with compatible properties
         hovermode
             Determines the mode of hover interactions. If
@@ -4440,21 +4446,21 @@ class Layout(_BaseLayoutType):
             cartesian coordinates. For anything else the default
             value is "closest".
         images
-            plotly.graph_objs.layout.Image instance or dict with
-            compatible properties
+            A tuple of plotly.graph_objects.layout.Image instances
+            or dicts with compatible properties
         imagedefaults
             When used in a template (as
             layout.template.layout.imagedefaults), sets the default
             property values to use for elements of layout.images
         legend
-            plotly.graph_objs.layout.Legend instance or dict with
-            compatible properties
+            plotly.graph_objects.layout.Legend instance or dict
+            with compatible properties
         mapbox
-            plotly.graph_objs.layout.Mapbox instance or dict with
-            compatible properties
+            plotly.graph_objects.layout.Mapbox instance or dict
+            with compatible properties
         margin
-            plotly.graph_objs.layout.Margin instance or dict with
-            compatible properties
+            plotly.graph_objects.layout.Margin instance or dict
+            with compatible properties
         meta
             Assigns extra meta information that can be used in
             various `text` attributes. Attributes such as the
@@ -4469,8 +4475,8 @@ class Layout(_BaseLayoutType):
         metasrc
             Sets the source reference on plot.ly for  meta .
         modebar
-            plotly.graph_objs.layout.Modebar instance or dict with
-            compatible properties
+            plotly.graph_objects.layout.Modebar instance or dict
+            with compatible properties
         orientation
             Legacy polar charts are deprecated! Please switch to
             "polar" subplots. Rotates the entire polar by the given
@@ -4486,13 +4492,13 @@ class Layout(_BaseLayoutType):
             Sets the color of plotting area in-between x and y
             axes.
         polar
-            plotly.graph_objs.layout.Polar instance or dict with
+            plotly.graph_objects.layout.Polar instance or dict with
             compatible properties
         radialaxis
-            plotly.graph_objs.layout.RadialAxis instance or dict
+            plotly.graph_objects.layout.RadialAxis instance or dict
             with compatible properties
         scene
-            plotly.graph_objs.layout.Scene instance or dict with
+            plotly.graph_objects.layout.Scene instance or dict with
             compatible properties
         selectdirection
             When "dragmode" is set to "select", this limits the
@@ -4509,8 +4515,8 @@ class Layout(_BaseLayoutType):
             thousands. In English locales, dflt is ".," but other
             locales may alter this default.
         shapes
-            plotly.graph_objs.layout.Shape instance or dict with
-            compatible properties
+            A tuple of plotly.graph_objects.layout.Shape instances
+            or dicts with compatible properties
         shapedefaults
             When used in a template (as
             layout.template.layout.shapedefaults), sets the default
@@ -4522,8 +4528,8 @@ class Layout(_BaseLayoutType):
             legend. b) One pie trace is shown in the legend. c) One
             trace is explicitly given with `showlegend: true`.
         sliders
-            plotly.graph_objs.layout.Slider instance or dict with
-            compatible properties
+            A tuple of plotly.graph_objects.layout.Slider instances
+            or dicts with compatible properties
         sliderdefaults
             When used in a template (as
             layout.template.layout.sliderdefaults), sets the
@@ -4565,10 +4571,10 @@ class Layout(_BaseLayoutType):
             an item with matching `templateitemname` and `visible:
             false`.
         ternary
-            plotly.graph_objs.layout.Ternary instance or dict with
-            compatible properties
+            plotly.graph_objects.layout.Ternary instance or dict
+            with compatible properties
         title
-            plotly.graph_objs.layout.Title instance or dict with
+            plotly.graph_objects.layout.Title instance or dict with
             compatible properties
         titlefont
             Deprecated: Please use layout.title.font instead. Sets
@@ -4597,8 +4603,8 @@ class Layout(_BaseLayoutType):
             and the y axis range will reset but the x axis range
             will retain any user-driven zoom.
         updatemenus
-            plotly.graph_objs.layout.Updatemenu instance or dict
-            with compatible properties
+            A tuple of plotly.graph_objects.layout.Updatemenu
+            instances or dicts with compatible properties
         updatemenudefaults
             When used in a template (as
             layout.template.layout.updatemenudefaults), sets the
@@ -4636,10 +4642,10 @@ class Layout(_BaseLayoutType):
         width
             Sets the plot's width (in px).
         xaxis
-            plotly.graph_objs.layout.XAxis instance or dict with
+            plotly.graph_objects.layout.XAxis instance or dict with
             compatible properties
         yaxis
-            plotly.graph_objs.layout.YAxis instance or dict with
+            plotly.graph_objects.layout.YAxis instance or dict with
             compatible properties
         """
 
@@ -4738,11 +4744,11 @@ class Layout(_BaseLayoutType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.Layout
         angularaxis
-            plotly.graph_objs.layout.AngularAxis instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.AngularAxis instance or
+            dict with compatible properties
         annotations
-            plotly.graph_objs.layout.Annotation instance or dict
-            with compatible properties
+            A tuple of plotly.graph_objects.layout.Annotation
+            instances or dicts with compatible properties
         annotationdefaults
             When used in a template (as
             layout.template.layout.annotationdefaults), sets the
@@ -4812,10 +4818,10 @@ class Layout(_BaseLayoutType):
             well. When the "event" flag is missing, `plotly_click`
             and `plotly_selected` events are not fired.
         coloraxis
-            plotly.graph_objs.layout.Coloraxis instance or dict
+            plotly.graph_objects.layout.Coloraxis instance or dict
             with compatible properties
         colorscale
-            plotly.graph_objs.layout.Colorscale instance or dict
+            plotly.graph_objects.layout.Colorscale instance or dict
             with compatible properties
         colorway
             Sets the default trace colors.
@@ -4892,10 +4898,10 @@ class Layout(_BaseLayoutType):
             over one another, you might need to an "opacity" to see
             multiple bars.
         geo
-            plotly.graph_objs.layout.Geo instance or dict with
+            plotly.graph_objects.layout.Geo instance or dict with
             compatible properties
         grid
-            plotly.graph_objs.layout.Grid instance or dict with
+            plotly.graph_objects.layout.Grid instance or dict with
             compatible properties
         height
             Sets the plot's height (in px).
@@ -4923,7 +4929,7 @@ class Layout(_BaseLayoutType):
             these objects will not supersede hover on point-like
             objects in case of conflict.
         hoverlabel
-            plotly.graph_objs.layout.Hoverlabel instance or dict
+            plotly.graph_objects.layout.Hoverlabel instance or dict
             with compatible properties
         hovermode
             Determines the mode of hover interactions. If
@@ -4934,21 +4940,21 @@ class Layout(_BaseLayoutType):
             cartesian coordinates. For anything else the default
             value is "closest".
         images
-            plotly.graph_objs.layout.Image instance or dict with
-            compatible properties
+            A tuple of plotly.graph_objects.layout.Image instances
+            or dicts with compatible properties
         imagedefaults
             When used in a template (as
             layout.template.layout.imagedefaults), sets the default
             property values to use for elements of layout.images
         legend
-            plotly.graph_objs.layout.Legend instance or dict with
-            compatible properties
+            plotly.graph_objects.layout.Legend instance or dict
+            with compatible properties
         mapbox
-            plotly.graph_objs.layout.Mapbox instance or dict with
-            compatible properties
+            plotly.graph_objects.layout.Mapbox instance or dict
+            with compatible properties
         margin
-            plotly.graph_objs.layout.Margin instance or dict with
-            compatible properties
+            plotly.graph_objects.layout.Margin instance or dict
+            with compatible properties
         meta
             Assigns extra meta information that can be used in
             various `text` attributes. Attributes such as the
@@ -4963,8 +4969,8 @@ class Layout(_BaseLayoutType):
         metasrc
             Sets the source reference on plot.ly for  meta .
         modebar
-            plotly.graph_objs.layout.Modebar instance or dict with
-            compatible properties
+            plotly.graph_objects.layout.Modebar instance or dict
+            with compatible properties
         orientation
             Legacy polar charts are deprecated! Please switch to
             "polar" subplots. Rotates the entire polar by the given
@@ -4980,13 +4986,13 @@ class Layout(_BaseLayoutType):
             Sets the color of plotting area in-between x and y
             axes.
         polar
-            plotly.graph_objs.layout.Polar instance or dict with
+            plotly.graph_objects.layout.Polar instance or dict with
             compatible properties
         radialaxis
-            plotly.graph_objs.layout.RadialAxis instance or dict
+            plotly.graph_objects.layout.RadialAxis instance or dict
             with compatible properties
         scene
-            plotly.graph_objs.layout.Scene instance or dict with
+            plotly.graph_objects.layout.Scene instance or dict with
             compatible properties
         selectdirection
             When "dragmode" is set to "select", this limits the
@@ -5003,8 +5009,8 @@ class Layout(_BaseLayoutType):
             thousands. In English locales, dflt is ".," but other
             locales may alter this default.
         shapes
-            plotly.graph_objs.layout.Shape instance or dict with
-            compatible properties
+            A tuple of plotly.graph_objects.layout.Shape instances
+            or dicts with compatible properties
         shapedefaults
             When used in a template (as
             layout.template.layout.shapedefaults), sets the default
@@ -5016,8 +5022,8 @@ class Layout(_BaseLayoutType):
             legend. b) One pie trace is shown in the legend. c) One
             trace is explicitly given with `showlegend: true`.
         sliders
-            plotly.graph_objs.layout.Slider instance or dict with
-            compatible properties
+            A tuple of plotly.graph_objects.layout.Slider instances
+            or dicts with compatible properties
         sliderdefaults
             When used in a template (as
             layout.template.layout.sliderdefaults), sets the
@@ -5059,10 +5065,10 @@ class Layout(_BaseLayoutType):
             an item with matching `templateitemname` and `visible:
             false`.
         ternary
-            plotly.graph_objs.layout.Ternary instance or dict with
-            compatible properties
+            plotly.graph_objects.layout.Ternary instance or dict
+            with compatible properties
         title
-            plotly.graph_objs.layout.Title instance or dict with
+            plotly.graph_objects.layout.Title instance or dict with
             compatible properties
         titlefont
             Deprecated: Please use layout.title.font instead. Sets
@@ -5091,8 +5097,8 @@ class Layout(_BaseLayoutType):
             and the y axis range will reset but the x axis range
             will retain any user-driven zoom.
         updatemenus
-            plotly.graph_objs.layout.Updatemenu instance or dict
-            with compatible properties
+            A tuple of plotly.graph_objects.layout.Updatemenu
+            instances or dicts with compatible properties
         updatemenudefaults
             When used in a template (as
             layout.template.layout.updatemenudefaults), sets the
@@ -5130,10 +5136,10 @@ class Layout(_BaseLayoutType):
         width
             Sets the plot's width (in px).
         xaxis
-            plotly.graph_objs.layout.XAxis instance or dict with
+            plotly.graph_objects.layout.XAxis instance or dict with
             compatible properties
         yaxis
-            plotly.graph_objs.layout.YAxis instance or dict with
+            plotly.graph_objects.layout.YAxis instance or dict with
             compatible properties
 
         Returns
@@ -5527,7 +5533,7 @@ class Waterfall(_BaseTraceType):
             Supported dict properties:
                 
                 line
-                    plotly.graph_objs.waterfall.connector.Line
+                    plotly.graph_objects.waterfall.connector.Line
                     instance or dict with compatible properties
                 mode
                     Sets the shape of connector lines.
@@ -5623,8 +5629,8 @@ class Waterfall(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.waterfall.decreasing.Marker
-                    instance or dict with compatible properties
+                    plotly.graph_objects.waterfall.decreasing.Marke
+                    r instance or dict with compatible properties
 
         Returns
         -------
@@ -5939,8 +5945,8 @@ class Waterfall(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.waterfall.increasing.Marker
-                    instance or dict with compatible properties
+                    plotly.graph_objects.waterfall.increasing.Marke
+                    r instance or dict with compatible properties
 
         Returns
         -------
@@ -6621,7 +6627,7 @@ class Waterfall(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.waterfall.totals.Marker
+                    plotly.graph_objects.waterfall.totals.Marker
                     instance or dict with compatible properties
 
         Returns
@@ -6956,8 +6962,8 @@ class Waterfall(_BaseTraceType):
             and tick labels, make sure to set `xaxis.layer` and
             `yaxis.layer` to *below traces*.
         connector
-            plotly.graph_objs.waterfall.Connector instance or dict
-            with compatible properties
+            plotly.graph_objects.waterfall.Connector instance or
+            dict with compatible properties
         constraintext
             Constrain the size of text inside or outside a bar to
             be no larger than the bar itself.
@@ -6969,8 +6975,8 @@ class Waterfall(_BaseTraceType):
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
         decreasing
-            plotly.graph_objs.waterfall.Decreasing instance or dict
-            with compatible properties
+            plotly.graph_objects.waterfall.Decreasing instance or
+            dict with compatible properties
         dx
             Sets the x coordinate step. See `x0` for more info.
         dy
@@ -6983,8 +6989,8 @@ class Waterfall(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.waterfall.Hoverlabel instance or dict
-            with compatible properties
+            plotly.graph_objects.waterfall.Hoverlabel instance or
+            dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
             appear on hover box. Note that this will override
@@ -7022,8 +7028,8 @@ class Waterfall(_BaseTraceType):
         idssrc
             Sets the source reference on plot.ly for  ids .
         increasing
-            plotly.graph_objs.waterfall.Increasing instance or dict
-            with compatible properties
+            plotly.graph_objects.waterfall.Increasing instance or
+            dict with compatible properties
         insidetextanchor
             Determines if texts are kept at center or start/end
             points in `textposition` "inside" mode.
@@ -7089,7 +7095,7 @@ class Waterfall(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.waterfall.Stream instance or dict
+            plotly.graph_objects.waterfall.Stream instance or dict
             with compatible properties
         text
             Sets text elements associated with each (x,y) pair. If
@@ -7126,7 +7132,7 @@ class Waterfall(_BaseTraceType):
         textsrc
             Sets the source reference on plot.ly for  text .
         totals
-            plotly.graph_objs.waterfall.Totals instance or dict
+            plotly.graph_objects.waterfall.Totals instance or dict
             with compatible properties
         uid
             Assign an id to this trace, Use this to provide object
@@ -7279,8 +7285,8 @@ class Waterfall(_BaseTraceType):
             and tick labels, make sure to set `xaxis.layer` and
             `yaxis.layer` to *below traces*.
         connector
-            plotly.graph_objs.waterfall.Connector instance or dict
-            with compatible properties
+            plotly.graph_objects.waterfall.Connector instance or
+            dict with compatible properties
         constraintext
             Constrain the size of text inside or outside a bar to
             be no larger than the bar itself.
@@ -7292,8 +7298,8 @@ class Waterfall(_BaseTraceType):
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
         decreasing
-            plotly.graph_objs.waterfall.Decreasing instance or dict
-            with compatible properties
+            plotly.graph_objects.waterfall.Decreasing instance or
+            dict with compatible properties
         dx
             Sets the x coordinate step. See `x0` for more info.
         dy
@@ -7306,8 +7312,8 @@ class Waterfall(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.waterfall.Hoverlabel instance or dict
-            with compatible properties
+            plotly.graph_objects.waterfall.Hoverlabel instance or
+            dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
             appear on hover box. Note that this will override
@@ -7345,8 +7351,8 @@ class Waterfall(_BaseTraceType):
         idssrc
             Sets the source reference on plot.ly for  ids .
         increasing
-            plotly.graph_objs.waterfall.Increasing instance or dict
-            with compatible properties
+            plotly.graph_objects.waterfall.Increasing instance or
+            dict with compatible properties
         insidetextanchor
             Determines if texts are kept at center or start/end
             points in `textposition` "inside" mode.
@@ -7412,7 +7418,7 @@ class Waterfall(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.waterfall.Stream instance or dict
+            plotly.graph_objects.waterfall.Stream instance or dict
             with compatible properties
         text
             Sets text elements associated with each (x,y) pair. If
@@ -7449,7 +7455,7 @@ class Waterfall(_BaseTraceType):
         textsrc
             Sets the source reference on plot.ly for  text .
         totals
-            plotly.graph_objs.waterfall.Totals instance or dict
+            plotly.graph_objects.waterfall.Totals instance or dict
             with compatible properties
         uid
             Assign an id to this trace, Use this to provide object
@@ -7787,13 +7793,13 @@ class Volume(_BaseTraceType):
             Supported dict properties:
                 
                 x
-                    plotly.graph_objs.volume.caps.X instance or
+                    plotly.graph_objects.volume.caps.X instance or
                     dict with compatible properties
                 y
-                    plotly.graph_objs.volume.caps.Y instance or
+                    plotly.graph_objects.volume.caps.Y instance or
                     dict with compatible properties
                 z
-                    plotly.graph_objs.volume.caps.Z instance or
+                    plotly.graph_objects.volume.caps.Z instance or
                     dict with compatible properties
 
         Returns
@@ -8058,8 +8064,9 @@ class Volume(_BaseTraceType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.volume.colorbar.Tickformatsto
-                    p instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.volume.colorbar
+                    .Tickformatstop instances or dicts with
+                    compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
                     a.volume.colorbar.tickformatstopdefaults), sets
@@ -8105,7 +8112,7 @@ class Volume(_BaseTraceType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.volume.colorbar.Title
+                    plotly.graph_objects.volume.colorbar.Title
                     instance or dict with compatible properties
                 titlefont
                     Deprecated: Please use
@@ -8855,14 +8862,14 @@ class Volume(_BaseTraceType):
             Supported dict properties:
                 
                 x
-                    plotly.graph_objs.volume.slices.X instance or
-                    dict with compatible properties
+                    plotly.graph_objects.volume.slices.X instance
+                    or dict with compatible properties
                 y
-                    plotly.graph_objs.volume.slices.Y instance or
-                    dict with compatible properties
+                    plotly.graph_objects.volume.slices.Y instance
+                    or dict with compatible properties
                 z
-                    plotly.graph_objs.volume.slices.Z instance or
-                    dict with compatible properties
+                    plotly.graph_objects.volume.slices.Z instance
+                    or dict with compatible properties
 
         Returns
         -------
@@ -9299,7 +9306,7 @@ class Volume(_BaseTraceType):
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         caps
-            plotly.graph_objs.volume.Caps instance or dict with
+            plotly.graph_objects.volume.Caps instance or dict with
             compatible properties
         cauto
             Determines whether or not the color domain is computed
@@ -9327,8 +9334,8 @@ class Volume(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.volume.ColorBar instance or dict with
-            compatible properties
+            plotly.graph_objects.volume.ColorBar instance or dict
+            with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
@@ -9342,8 +9349,8 @@ class Volume(_BaseTraceType):
             d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
             ot,Blackbody,Earth,Electric,Viridis,Cividis.
         contour
-            plotly.graph_objs.volume.Contour instance or dict with
-            compatible properties
+            plotly.graph_objects.volume.Contour instance or dict
+            with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -9363,7 +9370,7 @@ class Volume(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.volume.Hoverlabel instance or dict
+            plotly.graph_objects.volume.Hoverlabel instance or dict
             with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -9401,11 +9408,11 @@ class Volume(_BaseTraceType):
         isomin
             Sets the minimum boundary for iso-surface plot.
         lighting
-            plotly.graph_objs.volume.Lighting instance or dict with
-            compatible properties
-        lightposition
-            plotly.graph_objs.volume.Lightposition instance or dict
+            plotly.graph_objects.volume.Lighting instance or dict
             with compatible properties
+        lightposition
+            plotly.graph_objects.volume.Lightposition instance or
+            dict with compatible properties
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -9457,17 +9464,17 @@ class Volume(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         slices
-            plotly.graph_objs.volume.Slices instance or dict with
-            compatible properties
+            plotly.graph_objects.volume.Slices instance or dict
+            with compatible properties
         spaceframe
-            plotly.graph_objs.volume.Spaceframe instance or dict
+            plotly.graph_objects.volume.Spaceframe instance or dict
             with compatible properties
         stream
-            plotly.graph_objs.volume.Stream instance or dict with
-            compatible properties
+            plotly.graph_objects.volume.Stream instance or dict
+            with compatible properties
         surface
-            plotly.graph_objs.volume.Surface instance or dict with
-            compatible properties
+            plotly.graph_objects.volume.Surface instance or dict
+            with compatible properties
         text
             Sets the text elements associated with the vertices. If
             trace `hoverinfo` contains a "text" flag and
@@ -9599,7 +9606,7 @@ class Volume(_BaseTraceType):
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         caps
-            plotly.graph_objs.volume.Caps instance or dict with
+            plotly.graph_objects.volume.Caps instance or dict with
             compatible properties
         cauto
             Determines whether or not the color domain is computed
@@ -9627,8 +9634,8 @@ class Volume(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.volume.ColorBar instance or dict with
-            compatible properties
+            plotly.graph_objects.volume.ColorBar instance or dict
+            with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
@@ -9642,8 +9649,8 @@ class Volume(_BaseTraceType):
             d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
             ot,Blackbody,Earth,Electric,Viridis,Cividis.
         contour
-            plotly.graph_objs.volume.Contour instance or dict with
-            compatible properties
+            plotly.graph_objects.volume.Contour instance or dict
+            with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -9663,7 +9670,7 @@ class Volume(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.volume.Hoverlabel instance or dict
+            plotly.graph_objects.volume.Hoverlabel instance or dict
             with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -9701,11 +9708,11 @@ class Volume(_BaseTraceType):
         isomin
             Sets the minimum boundary for iso-surface plot.
         lighting
-            plotly.graph_objs.volume.Lighting instance or dict with
-            compatible properties
-        lightposition
-            plotly.graph_objs.volume.Lightposition instance or dict
+            plotly.graph_objects.volume.Lighting instance or dict
             with compatible properties
+        lightposition
+            plotly.graph_objects.volume.Lightposition instance or
+            dict with compatible properties
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -9757,17 +9764,17 @@ class Volume(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         slices
-            plotly.graph_objs.volume.Slices instance or dict with
-            compatible properties
+            plotly.graph_objects.volume.Slices instance or dict
+            with compatible properties
         spaceframe
-            plotly.graph_objs.volume.Spaceframe instance or dict
+            plotly.graph_objects.volume.Spaceframe instance or dict
             with compatible properties
         stream
-            plotly.graph_objs.volume.Stream instance or dict with
-            compatible properties
+            plotly.graph_objects.volume.Stream instance or dict
+            with compatible properties
         surface
-            plotly.graph_objs.volume.Surface instance or dict with
-            compatible properties
+            plotly.graph_objects.volume.Surface instance or dict
+            with compatible properties
         text
             Sets the text elements associated with the vertices. If
             trace `hoverinfo` contains a "text" flag and
@@ -10096,8 +10103,8 @@ class Violin(_BaseTraceType):
                 fillcolor
                     Sets the inner box plot fill color.
                 line
-                    plotly.graph_objs.violin.box.Line instance or
-                    dict with compatible properties
+                    plotly.graph_objects.violin.box.Line instance
+                    or dict with compatible properties
                 visible
                     Determines if an miniature box plot is drawn
                     inside the violins.
@@ -10585,8 +10592,8 @@ class Violin(_BaseTraceType):
                     and min values of the array or relative to
                     `marker.cmin` and `marker.cmax` if set.
                 line
-                    plotly.graph_objs.violin.marker.Line instance
-                    or dict with compatible properties
+                    plotly.graph_objects.violin.marker.Line
+                    instance or dict with compatible properties
                 opacity
                     Sets the marker opacity.
                 outliercolor
@@ -10900,7 +10907,7 @@ class Violin(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.violin.selected.Marker
+                    plotly.graph_objects.violin.selected.Marker
                     instance or dict with compatible properties
 
         Returns
@@ -11182,7 +11189,7 @@ class Violin(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.violin.unselected.Marker
+                    plotly.graph_objects.violin.unselected.Marker
                     instance or dict with compatible properties
 
         Returns
@@ -11437,7 +11444,7 @@ class Violin(_BaseTraceType):
             estimate. By default, the bandwidth is determined by
             Silverman's rule of thumb.
         box
-            plotly.graph_objs.violin.Box instance or dict with
+            plotly.graph_objects.violin.Box instance or dict with
             compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -11458,7 +11465,7 @@ class Violin(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.violin.Hoverlabel instance or dict
+            plotly.graph_objects.violin.Hoverlabel instance or dict
             with compatible properties
         hoveron
             Do the hover effects highlight individual violins or
@@ -11505,14 +11512,14 @@ class Violin(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         line
-            plotly.graph_objs.violin.Line instance or dict with
+            plotly.graph_objects.violin.Line instance or dict with
             compatible properties
         marker
-            plotly.graph_objs.violin.Marker instance or dict with
-            compatible properties
+            plotly.graph_objects.violin.Marker instance or dict
+            with compatible properties
         meanline
-            plotly.graph_objs.violin.Meanline instance or dict with
-            compatible properties
+            plotly.graph_objects.violin.Meanline instance or dict
+            with compatible properties
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -11575,8 +11582,8 @@ class Violin(_BaseTraceType):
             width*count* means the violins are scaled by the number
             of sample points makingup each violin.
         selected
-            plotly.graph_objs.violin.Selected instance or dict with
-            compatible properties
+            plotly.graph_objects.violin.Selected instance or dict
+            with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -11607,8 +11614,8 @@ class Violin(_BaseTraceType):
             settings, use mode "manual" and fill in the `span`
             attribute.
         stream
-            plotly.graph_objs.violin.Stream instance or dict with
-            compatible properties
+            plotly.graph_objects.violin.Stream instance or dict
+            with compatible properties
         text
             Sets the text elements associated with each sample
             value. If a single string, the same string appears over
@@ -11641,7 +11648,7 @@ class Violin(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            plotly.graph_objs.violin.Unselected instance or dict
+            plotly.graph_objects.violin.Unselected instance or dict
             with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -11764,7 +11771,7 @@ class Violin(_BaseTraceType):
             estimate. By default, the bandwidth is determined by
             Silverman's rule of thumb.
         box
-            plotly.graph_objs.violin.Box instance or dict with
+            plotly.graph_objects.violin.Box instance or dict with
             compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -11785,7 +11792,7 @@ class Violin(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.violin.Hoverlabel instance or dict
+            plotly.graph_objects.violin.Hoverlabel instance or dict
             with compatible properties
         hoveron
             Do the hover effects highlight individual violins or
@@ -11832,14 +11839,14 @@ class Violin(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         line
-            plotly.graph_objs.violin.Line instance or dict with
+            plotly.graph_objects.violin.Line instance or dict with
             compatible properties
         marker
-            plotly.graph_objs.violin.Marker instance or dict with
-            compatible properties
+            plotly.graph_objects.violin.Marker instance or dict
+            with compatible properties
         meanline
-            plotly.graph_objs.violin.Meanline instance or dict with
-            compatible properties
+            plotly.graph_objects.violin.Meanline instance or dict
+            with compatible properties
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -11902,8 +11909,8 @@ class Violin(_BaseTraceType):
             width*count* means the violins are scaled by the number
             of sample points makingup each violin.
         selected
-            plotly.graph_objs.violin.Selected instance or dict with
-            compatible properties
+            plotly.graph_objects.violin.Selected instance or dict
+            with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -11934,8 +11941,8 @@ class Violin(_BaseTraceType):
             settings, use mode "manual" and fill in the `span`
             attribute.
         stream
-            plotly.graph_objs.violin.Stream instance or dict with
-            compatible properties
+            plotly.graph_objects.violin.Stream instance or dict
+            with compatible properties
         text
             Sets the text elements associated with each sample
             value. If a single string, the same string appears over
@@ -11968,7 +11975,7 @@ class Violin(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            plotly.graph_objs.violin.Unselected instance or dict
+            plotly.graph_objects.violin.Unselected instance or dict
             with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -12253,11 +12260,11 @@ class Table(_BaseTraceType):
                     Sets the source reference on plot.ly for  align
                     .
                 fill
-                    plotly.graph_objs.table.cells.Fill instance or
-                    dict with compatible properties
+                    plotly.graph_objects.table.cells.Fill instance
+                    or dict with compatible properties
                 font
-                    plotly.graph_objs.table.cells.Font instance or
-                    dict with compatible properties
+                    plotly.graph_objects.table.cells.Font instance
+                    or dict with compatible properties
                 format
                     Sets the cell value formatting rule using d3
                     formatting mini-language which is similar to
@@ -12269,8 +12276,8 @@ class Table(_BaseTraceType):
                 height
                     The height of cells.
                 line
-                    plotly.graph_objs.table.cells.Line instance or
-                    dict with compatible properties
+                    plotly.graph_objects.table.cells.Line instance
+                    or dict with compatible properties
                 prefix
                     Prefix for cell values.
                 prefixsrc
@@ -12490,11 +12497,11 @@ class Table(_BaseTraceType):
                     Sets the source reference on plot.ly for  align
                     .
                 fill
-                    plotly.graph_objs.table.header.Fill instance or
-                    dict with compatible properties
+                    plotly.graph_objects.table.header.Fill instance
+                    or dict with compatible properties
                 font
-                    plotly.graph_objs.table.header.Font instance or
-                    dict with compatible properties
+                    plotly.graph_objects.table.header.Font instance
+                    or dict with compatible properties
                 format
                     Sets the cell value formatting rule using d3
                     formatting mini-language which is similar to
@@ -12506,8 +12513,8 @@ class Table(_BaseTraceType):
                 height
                     The height of cells.
                 line
-                    plotly.graph_objs.table.header.Line instance or
-                    dict with compatible properties
+                    plotly.graph_objects.table.header.Line instance
+                    or dict with compatible properties
                 prefix
                     Prefix for cell values.
                 prefixsrc
@@ -12885,7 +12892,7 @@ class Table(_BaseTraceType):
     def _prop_descriptions(self):
         return """\
         cells
-            plotly.graph_objs.table.Cells instance or dict with
+            plotly.graph_objects.table.Cells instance or dict with
             compatible properties
         columnorder
             Specifies the rendered order of the data columns; for
@@ -12908,10 +12915,10 @@ class Table(_BaseTraceType):
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
         domain
-            plotly.graph_objs.table.Domain instance or dict with
+            plotly.graph_objects.table.Domain instance or dict with
             compatible properties
         header
-            plotly.graph_objs.table.Header instance or dict with
+            plotly.graph_objects.table.Header instance or dict with
             compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
@@ -12921,7 +12928,7 @@ class Table(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.table.Hoverlabel instance or dict
+            plotly.graph_objects.table.Hoverlabel instance or dict
             with compatible properties
         ids
             Assigns id labels to each datum. These ids for object
@@ -12948,7 +12955,7 @@ class Table(_BaseTraceType):
             Sets the trace name. The trace name appear as the
             legend item and on hover.
         stream
-            plotly.graph_objs.table.Stream instance or dict with
+            plotly.graph_objects.table.Stream instance or dict with
             compatible properties
         uid
             Assign an id to this trace, Use this to provide object
@@ -13020,7 +13027,7 @@ class Table(_BaseTraceType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.Table
         cells
-            plotly.graph_objs.table.Cells instance or dict with
+            plotly.graph_objects.table.Cells instance or dict with
             compatible properties
         columnorder
             Specifies the rendered order of the data columns; for
@@ -13043,10 +13050,10 @@ class Table(_BaseTraceType):
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
         domain
-            plotly.graph_objs.table.Domain instance or dict with
+            plotly.graph_objects.table.Domain instance or dict with
             compatible properties
         header
-            plotly.graph_objs.table.Header instance or dict with
+            plotly.graph_objects.table.Header instance or dict with
             compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
@@ -13056,7 +13063,7 @@ class Table(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.table.Hoverlabel instance or dict
+            plotly.graph_objects.table.Hoverlabel instance or dict
             with compatible properties
         ids
             Assigns id labels to each datum. These ids for object
@@ -13083,7 +13090,7 @@ class Table(_BaseTraceType):
             Sets the trace name. The trace name appear as the
             legend item and on hover.
         stream
-            plotly.graph_objs.table.Stream instance or dict with
+            plotly.graph_objects.table.Stream instance or dict with
             compatible properties
         uid
             Assign an id to this trace, Use this to provide object
@@ -13517,8 +13524,9 @@ class Surface(_BaseTraceType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.surface.colorbar.Tickformatst
-                    op instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.surface.colorba
+                    r.Tickformatstop instances or dicts with
+                    compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
                     a.surface.colorbar.tickformatstopdefaults),
@@ -13564,7 +13572,7 @@ class Surface(_BaseTraceType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.surface.colorbar.Title
+                    plotly.graph_objects.surface.colorbar.Title
                     instance or dict with compatible properties
                 titlefont
                     Deprecated: Please use
@@ -13683,14 +13691,14 @@ class Surface(_BaseTraceType):
             Supported dict properties:
                 
                 x
-                    plotly.graph_objs.surface.contours.X instance
-                    or dict with compatible properties
+                    plotly.graph_objects.surface.contours.X
+                    instance or dict with compatible properties
                 y
-                    plotly.graph_objs.surface.contours.Y instance
-                    or dict with compatible properties
+                    plotly.graph_objects.surface.contours.Y
+                    instance or dict with compatible properties
                 z
-                    plotly.graph_objs.surface.contours.Z instance
-                    or dict with compatible properties
+                    plotly.graph_objects.surface.contours.Z
+                    instance or dict with compatible properties
 
         Returns
         -------
@@ -14688,7 +14696,7 @@ class Surface(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.surface.ColorBar instance or dict
+            plotly.graph_objects.surface.ColorBar instance or dict
             with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -14706,7 +14714,7 @@ class Surface(_BaseTraceType):
             Determines whether or not gaps (i.e. {nan} or missing
             values) in the `z` data are filled in.
         contours
-            plotly.graph_objs.surface.Contours instance or dict
+            plotly.graph_objects.surface.Contours instance or dict
             with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -14728,8 +14736,8 @@ class Surface(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.surface.Hoverlabel instance or dict
-            with compatible properties
+            plotly.graph_objects.surface.Hoverlabel instance or
+            dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
             appear on hover box. Note that this will override
@@ -14762,10 +14770,10 @@ class Surface(_BaseTraceType):
         idssrc
             Sets the source reference on plot.ly for  ids .
         lighting
-            plotly.graph_objs.surface.Lighting instance or dict
+            plotly.graph_objects.surface.Lighting instance or dict
             with compatible properties
         lightposition
-            plotly.graph_objs.surface.Lightposition instance or
+            plotly.graph_objects.surface.Lightposition instance or
             dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -14807,8 +14815,8 @@ class Surface(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            plotly.graph_objs.surface.Stream instance or dict with
-            compatible properties
+            plotly.graph_objects.surface.Stream instance or dict
+            with compatible properties
         surfacecolor
             Sets the surface color values, used for setting a color
             scale independent of `z`.
@@ -14973,7 +14981,7 @@ class Surface(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.surface.ColorBar instance or dict
+            plotly.graph_objects.surface.ColorBar instance or dict
             with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -14991,7 +14999,7 @@ class Surface(_BaseTraceType):
             Determines whether or not gaps (i.e. {nan} or missing
             values) in the `z` data are filled in.
         contours
-            plotly.graph_objs.surface.Contours instance or dict
+            plotly.graph_objects.surface.Contours instance or dict
             with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -15013,8 +15021,8 @@ class Surface(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.surface.Hoverlabel instance or dict
-            with compatible properties
+            plotly.graph_objects.surface.Hoverlabel instance or
+            dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
             appear on hover box. Note that this will override
@@ -15047,10 +15055,10 @@ class Surface(_BaseTraceType):
         idssrc
             Sets the source reference on plot.ly for  ids .
         lighting
-            plotly.graph_objs.surface.Lighting instance or dict
+            plotly.graph_objects.surface.Lighting instance or dict
             with compatible properties
         lightposition
-            plotly.graph_objs.surface.Lightposition instance or
+            plotly.graph_objects.surface.Lightposition instance or
             dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -15092,8 +15100,8 @@ class Surface(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            plotly.graph_objs.surface.Stream instance or dict with
-            compatible properties
+            plotly.graph_objects.surface.Stream instance or dict
+            with compatible properties
         surfacecolor
             Sets the surface color values, used for setting a color
             scale independent of `z`.
@@ -15880,8 +15888,8 @@ class Sunburst(_BaseTraceType):
                     Sets the source reference on plot.ly for
                     colors .
                 line
-                    plotly.graph_objs.sunburst.marker.Line instance
-                    or dict with compatible properties
+                    plotly.graph_objects.sunburst.marker.Line
+                    instance or dict with compatible properties
 
         Returns
         -------
@@ -16411,8 +16419,8 @@ class Sunburst(_BaseTraceType):
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
         domain
-            plotly.graph_objs.sunburst.Domain instance or dict with
-            compatible properties
+            plotly.graph_objects.sunburst.Domain instance or dict
+            with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -16421,8 +16429,8 @@ class Sunburst(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.sunburst.Hoverlabel instance or dict
-            with compatible properties
+            plotly.graph_objects.sunburst.Hoverlabel instance or
+            dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
             appear on hover box. Note that this will override
@@ -16466,8 +16474,8 @@ class Sunburst(_BaseTraceType):
         labelssrc
             Sets the source reference on plot.ly for  labels .
         leaf
-            plotly.graph_objs.sunburst.Leaf instance or dict with
-            compatible properties
+            plotly.graph_objects.sunburst.Leaf instance or dict
+            with compatible properties
         level
             Sets the level from which this sunburst trace hierarchy
             is rendered. Set `level` to `''` to start the sunburst
@@ -16475,8 +16483,8 @@ class Sunburst(_BaseTraceType):
             `ids` is filled in, otherwise plotly attempts to find a
             matching item in `labels`.
         marker
-            plotly.graph_objs.sunburst.Marker instance or dict with
-            compatible properties
+            plotly.graph_objects.sunburst.Marker instance or dict
+            with compatible properties
         maxdepth
             Sets the number of rendered sunburst rings from any
             given `level`. Set `maxdepth` to "-1" to render all the
@@ -16515,8 +16523,8 @@ class Sunburst(_BaseTraceType):
         parentssrc
             Sets the source reference on plot.ly for  parents .
         stream
-            plotly.graph_objs.sunburst.Stream instance or dict with
-            compatible properties
+            plotly.graph_objects.sunburst.Stream instance or dict
+            with compatible properties
         text
             Sets text elements associated with each sector. If
             trace `textinfo` contains a "text" flag, these elements
@@ -16633,8 +16641,8 @@ class Sunburst(_BaseTraceType):
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
         domain
-            plotly.graph_objs.sunburst.Domain instance or dict with
-            compatible properties
+            plotly.graph_objects.sunburst.Domain instance or dict
+            with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -16643,8 +16651,8 @@ class Sunburst(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.sunburst.Hoverlabel instance or dict
-            with compatible properties
+            plotly.graph_objects.sunburst.Hoverlabel instance or
+            dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
             appear on hover box. Note that this will override
@@ -16688,8 +16696,8 @@ class Sunburst(_BaseTraceType):
         labelssrc
             Sets the source reference on plot.ly for  labels .
         leaf
-            plotly.graph_objs.sunburst.Leaf instance or dict with
-            compatible properties
+            plotly.graph_objects.sunburst.Leaf instance or dict
+            with compatible properties
         level
             Sets the level from which this sunburst trace hierarchy
             is rendered. Set `level` to `''` to start the sunburst
@@ -16697,8 +16705,8 @@ class Sunburst(_BaseTraceType):
             `ids` is filled in, otherwise plotly attempts to find a
             matching item in `labels`.
         marker
-            plotly.graph_objs.sunburst.Marker instance or dict with
-            compatible properties
+            plotly.graph_objects.sunburst.Marker instance or dict
+            with compatible properties
         maxdepth
             Sets the number of rendered sunburst rings from any
             given `level`. Set `maxdepth` to "-1" to render all the
@@ -16737,8 +16745,8 @@ class Sunburst(_BaseTraceType):
         parentssrc
             Sets the source reference on plot.ly for  parents .
         stream
-            plotly.graph_objs.sunburst.Stream instance or dict with
-            compatible properties
+            plotly.graph_objects.sunburst.Stream instance or dict
+            with compatible properties
         text
             Sets text elements associated with each sector. If
             trace `textinfo` contains a "text" flag, these elements
@@ -17239,9 +17247,9 @@ class Streamtube(_BaseTraceType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.streamtube.colorbar.Tickforma
-                    tstop instance or dict with compatible
-                    properties
+                    A tuple of plotly.graph_objects.streamtube.colo
+                    rbar.Tickformatstop instances or dicts with
+                    compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
                     a.streamtube.colorbar.tickformatstopdefaults),
@@ -17287,7 +17295,7 @@ class Streamtube(_BaseTraceType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.streamtube.colorbar.Title
+                    plotly.graph_objects.streamtube.colorbar.Title
                     instance or dict with compatible properties
                 titlefont
                     Deprecated: Please use
@@ -18390,8 +18398,8 @@ class Streamtube(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.streamtube.ColorBar instance or dict
-            with compatible properties
+            plotly.graph_objects.streamtube.ColorBar instance or
+            dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
@@ -18419,7 +18427,7 @@ class Streamtube(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.streamtube.Hoverlabel instance or
+            plotly.graph_objects.streamtube.Hoverlabel instance or
             dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -18453,11 +18461,11 @@ class Streamtube(_BaseTraceType):
         idssrc
             Sets the source reference on plot.ly for  ids .
         lighting
-            plotly.graph_objs.streamtube.Lighting instance or dict
-            with compatible properties
-        lightposition
-            plotly.graph_objs.streamtube.Lightposition instance or
+            plotly.graph_objects.streamtube.Lighting instance or
             dict with compatible properties
+        lightposition
+            plotly.graph_objects.streamtube.Lightposition instance
+            or dict with compatible properties
         maxdisplayed
             The maximum number of displayed segments in a
             streamtube.
@@ -18505,10 +18513,10 @@ class Streamtube(_BaseTraceType):
             1, which avoids two max divergence tubes from touching
             at adjacent starting positions.
         starts
-            plotly.graph_objs.streamtube.Starts instance or dict
+            plotly.graph_objects.streamtube.Starts instance or dict
             with compatible properties
         stream
-            plotly.graph_objs.streamtube.Stream instance or dict
+            plotly.graph_objects.streamtube.Stream instance or dict
             with compatible properties
         text
             Sets a text element associated with this trace. If
@@ -18669,8 +18677,8 @@ class Streamtube(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.streamtube.ColorBar instance or dict
-            with compatible properties
+            plotly.graph_objects.streamtube.ColorBar instance or
+            dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
@@ -18698,7 +18706,7 @@ class Streamtube(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.streamtube.Hoverlabel instance or
+            plotly.graph_objects.streamtube.Hoverlabel instance or
             dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -18732,11 +18740,11 @@ class Streamtube(_BaseTraceType):
         idssrc
             Sets the source reference on plot.ly for  ids .
         lighting
-            plotly.graph_objs.streamtube.Lighting instance or dict
-            with compatible properties
-        lightposition
-            plotly.graph_objs.streamtube.Lightposition instance or
+            plotly.graph_objects.streamtube.Lighting instance or
             dict with compatible properties
+        lightposition
+            plotly.graph_objects.streamtube.Lightposition instance
+            or dict with compatible properties
         maxdisplayed
             The maximum number of displayed segments in a
             streamtube.
@@ -18784,10 +18792,10 @@ class Streamtube(_BaseTraceType):
             1, which avoids two max divergence tubes from touching
             at adjacent starting positions.
         starts
-            plotly.graph_objs.streamtube.Starts instance or dict
+            plotly.graph_objects.streamtube.Starts instance or dict
             with compatible properties
         stream
-            plotly.graph_objs.streamtube.Stream instance or dict
+            plotly.graph_objects.streamtube.Stream instance or dict
             with compatible properties
         text
             Sets a text element associated with this trace. If
@@ -19134,8 +19142,8 @@ class Splom(_BaseTraceType):
             Supported dict properties:
                 
                 axis
-                    plotly.graph_objs.splom.dimension.Axis instance
-                    or dict with compatible properties
+                    plotly.graph_objects.splom.dimension.Axis
+                    instance or dict with compatible properties
                 label
                     Sets the label corresponding to this splom
                     dimension.
@@ -19543,7 +19551,7 @@ class Splom(_BaseTraceType):
                     color scales can be linked to the same color
                     axis.
                 colorbar
-                    plotly.graph_objs.splom.marker.ColorBar
+                    plotly.graph_objects.splom.marker.ColorBar
                     instance or dict with compatible properties
                 colorscale
                     Sets the colorscale. Has an effect only if in
@@ -19565,8 +19573,8 @@ class Splom(_BaseTraceType):
                     Sets the source reference on plot.ly for  color
                     .
                 line
-                    plotly.graph_objs.splom.marker.Line instance or
-                    dict with compatible properties
+                    plotly.graph_objects.splom.marker.Line instance
+                    or dict with compatible properties
                 opacity
                     Sets the marker opacity.
                 opacitysrc
@@ -19726,7 +19734,7 @@ class Splom(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.splom.selected.Marker
+                    plotly.graph_objects.splom.selected.Marker
                     instance or dict with compatible properties
 
         Returns
@@ -19973,7 +19981,7 @@ class Splom(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.splom.unselected.Marker
+                    plotly.graph_objects.splom.unselected.Marker
                     instance or dict with compatible properties
 
         Returns
@@ -20092,11 +20100,11 @@ class Splom(_BaseTraceType):
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
         diagonal
-            plotly.graph_objs.splom.Diagonal instance or dict with
-            compatible properties
+            plotly.graph_objects.splom.Diagonal instance or dict
+            with compatible properties
         dimensions
-            plotly.graph_objs.splom.Dimension instance or dict with
-            compatible properties
+            A tuple of plotly.graph_objects.splom.Dimension
+            instances or dicts with compatible properties
         dimensiondefaults
             When used in a template (as
             layout.template.data.splom.dimensiondefaults), sets the
@@ -20110,7 +20118,7 @@ class Splom(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.splom.Hoverlabel instance or dict
+            plotly.graph_objects.splom.Hoverlabel instance or dict
             with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -20148,7 +20156,7 @@ class Splom(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         marker
-            plotly.graph_objs.splom.Marker instance or dict with
+            plotly.graph_objects.splom.Marker instance or dict with
             compatible properties
         meta
             Assigns extra meta information associated with this
@@ -20171,8 +20179,8 @@ class Splom(_BaseTraceType):
         opacity
             Sets the opacity of the trace.
         selected
-            plotly.graph_objs.splom.Selected instance or dict with
-            compatible properties
+            plotly.graph_objects.splom.Selected instance or dict
+            with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -20190,7 +20198,7 @@ class Splom(_BaseTraceType):
             Determines whether or not subplots on the upper half
             from the diagonal are displayed.
         stream
-            plotly.graph_objs.splom.Stream instance or dict with
+            plotly.graph_objects.splom.Stream instance or dict with
             compatible properties
         text
             Sets text elements associated with each (x,y) pair to
@@ -20223,7 +20231,7 @@ class Splom(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            plotly.graph_objs.splom.Unselected instance or dict
+            plotly.graph_objects.splom.Unselected instance or dict
             with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -20311,11 +20319,11 @@ class Splom(_BaseTraceType):
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
         diagonal
-            plotly.graph_objs.splom.Diagonal instance or dict with
-            compatible properties
+            plotly.graph_objects.splom.Diagonal instance or dict
+            with compatible properties
         dimensions
-            plotly.graph_objs.splom.Dimension instance or dict with
-            compatible properties
+            A tuple of plotly.graph_objects.splom.Dimension
+            instances or dicts with compatible properties
         dimensiondefaults
             When used in a template (as
             layout.template.data.splom.dimensiondefaults), sets the
@@ -20329,7 +20337,7 @@ class Splom(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.splom.Hoverlabel instance or dict
+            plotly.graph_objects.splom.Hoverlabel instance or dict
             with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -20367,7 +20375,7 @@ class Splom(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         marker
-            plotly.graph_objs.splom.Marker instance or dict with
+            plotly.graph_objects.splom.Marker instance or dict with
             compatible properties
         meta
             Assigns extra meta information associated with this
@@ -20390,8 +20398,8 @@ class Splom(_BaseTraceType):
         opacity
             Sets the opacity of the trace.
         selected
-            plotly.graph_objs.splom.Selected instance or dict with
-            compatible properties
+            plotly.graph_objects.splom.Selected instance or dict
+            with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -20409,7 +20417,7 @@ class Splom(_BaseTraceType):
             Determines whether or not subplots on the upper half
             from the diagonal are displayed.
         stream
-            plotly.graph_objs.splom.Stream instance or dict with
+            plotly.graph_objects.splom.Stream instance or dict with
             compatible properties
         text
             Sets text elements associated with each (x,y) pair to
@@ -20442,7 +20450,7 @@ class Splom(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            plotly.graph_objs.splom.Unselected instance or dict
+            plotly.graph_objects.splom.Unselected instance or dict
             with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -21346,8 +21354,9 @@ class Scatterternary(_BaseTraceType):
                     color scales can be linked to the same color
                     axis.
                 colorbar
-                    plotly.graph_objs.scatterternary.marker.ColorBa
-                    r instance or dict with compatible properties
+                    plotly.graph_objects.scatterternary.marker.Colo
+                    rBar instance or dict with compatible
+                    properties
                 colorscale
                     Sets the colorscale. Has an effect only if in
                     `marker.color`is set to a numerical array. The
@@ -21368,10 +21377,11 @@ class Scatterternary(_BaseTraceType):
                     Sets the source reference on plot.ly for  color
                     .
                 gradient
-                    plotly.graph_objs.scatterternary.marker.Gradien
-                    t instance or dict with compatible properties
+                    plotly.graph_objects.scatterternary.marker.Grad
+                    ient instance or dict with compatible
+                    properties
                 line
-                    plotly.graph_objs.scatterternary.marker.Line
+                    plotly.graph_objects.scatterternary.marker.Line
                     instance or dict with compatible properties
                 maxdisplayed
                     Sets a maximum number of points to be drawn on
@@ -21563,11 +21573,13 @@ class Scatterternary(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.scatterternary.selected.Marke
-                    r instance or dict with compatible properties
+                    plotly.graph_objects.scatterternary.selected.Ma
+                    rker instance or dict with compatible
+                    properties
                 textfont
-                    plotly.graph_objs.scatterternary.selected.Textf
-                    ont instance or dict with compatible properties
+                    plotly.graph_objects.scatterternary.selected.Te
+                    xtfont instance or dict with compatible
+                    properties
 
         Returns
         -------
@@ -21922,11 +21934,12 @@ class Scatterternary(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.scatterternary.unselected.Mar
-                    ker instance or dict with compatible properties
+                    plotly.graph_objects.scatterternary.unselected.
+                    Marker instance or dict with compatible
+                    properties
                 textfont
-                    plotly.graph_objs.scatterternary.unselected.Tex
-                    tfont instance or dict with compatible
+                    plotly.graph_objects.scatterternary.unselected.
+                    Textfont instance or dict with compatible
                     properties
 
         Returns
@@ -22042,8 +22055,8 @@ class Scatterternary(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.scatterternary.Hoverlabel instance or
-            dict with compatible properties
+            plotly.graph_objects.scatterternary.Hoverlabel instance
+            or dict with compatible properties
         hoveron
             Do the hover effects highlight individual points
             (markers or line points) or do they highlight filled
@@ -22091,10 +22104,10 @@ class Scatterternary(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         line
-            plotly.graph_objs.scatterternary.Line instance or dict
-            with compatible properties
+            plotly.graph_objects.scatterternary.Line instance or
+            dict with compatible properties
         marker
-            plotly.graph_objs.scatterternary.Marker instance or
+            plotly.graph_objects.scatterternary.Marker instance or
             dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -22124,8 +22137,8 @@ class Scatterternary(_BaseTraceType):
         opacity
             Sets the opacity of the trace.
         selected
-            plotly.graph_objs.scatterternary.Selected instance or
-            dict with compatible properties
+            plotly.graph_objects.scatterternary.Selected instance
+            or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -22137,7 +22150,7 @@ class Scatterternary(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.scatterternary.Stream instance or
+            plotly.graph_objects.scatterternary.Stream instance or
             dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
@@ -22192,8 +22205,8 @@ class Scatterternary(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            plotly.graph_objs.scatterternary.Unselected instance or
-            dict with compatible properties
+            plotly.graph_objects.scatterternary.Unselected instance
+            or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -22326,8 +22339,8 @@ class Scatterternary(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.scatterternary.Hoverlabel instance or
-            dict with compatible properties
+            plotly.graph_objects.scatterternary.Hoverlabel instance
+            or dict with compatible properties
         hoveron
             Do the hover effects highlight individual points
             (markers or line points) or do they highlight filled
@@ -22375,10 +22388,10 @@ class Scatterternary(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         line
-            plotly.graph_objs.scatterternary.Line instance or dict
-            with compatible properties
+            plotly.graph_objects.scatterternary.Line instance or
+            dict with compatible properties
         marker
-            plotly.graph_objs.scatterternary.Marker instance or
+            plotly.graph_objects.scatterternary.Marker instance or
             dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -22408,8 +22421,8 @@ class Scatterternary(_BaseTraceType):
         opacity
             Sets the opacity of the trace.
         selected
-            plotly.graph_objs.scatterternary.Selected instance or
-            dict with compatible properties
+            plotly.graph_objects.scatterternary.Selected instance
+            or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -22421,7 +22434,7 @@ class Scatterternary(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.scatterternary.Stream instance or
+            plotly.graph_objects.scatterternary.Stream instance or
             dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
@@ -22476,8 +22489,8 @@ class Scatterternary(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            plotly.graph_objs.scatterternary.Unselected instance or
-            dict with compatible properties
+            plotly.graph_objects.scatterternary.Unselected instance
+            or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -23265,8 +23278,9 @@ class Scatterpolargl(_BaseTraceType):
                     color scales can be linked to the same color
                     axis.
                 colorbar
-                    plotly.graph_objs.scatterpolargl.marker.ColorBa
-                    r instance or dict with compatible properties
+                    plotly.graph_objects.scatterpolargl.marker.Colo
+                    rBar instance or dict with compatible
+                    properties
                 colorscale
                     Sets the colorscale. Has an effect only if in
                     `marker.color`is set to a numerical array. The
@@ -23287,7 +23301,7 @@ class Scatterpolargl(_BaseTraceType):
                     Sets the source reference on plot.ly for  color
                     .
                 line
-                    plotly.graph_objs.scatterpolargl.marker.Line
+                    plotly.graph_objects.scatterpolargl.marker.Line
                     instance or dict with compatible properties
                 opacity
                     Sets the marker opacity.
@@ -23537,11 +23551,13 @@ class Scatterpolargl(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.scatterpolargl.selected.Marke
-                    r instance or dict with compatible properties
+                    plotly.graph_objects.scatterpolargl.selected.Ma
+                    rker instance or dict with compatible
+                    properties
                 textfont
-                    plotly.graph_objs.scatterpolargl.selected.Textf
-                    ont instance or dict with compatible properties
+                    plotly.graph_objects.scatterpolargl.selected.Te
+                    xtfont instance or dict with compatible
+                    properties
 
         Returns
         -------
@@ -23955,11 +23971,12 @@ class Scatterpolargl(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.scatterpolargl.unselected.Mar
-                    ker instance or dict with compatible properties
+                    plotly.graph_objects.scatterpolargl.unselected.
+                    Marker instance or dict with compatible
+                    properties
                 textfont
-                    plotly.graph_objs.scatterpolargl.unselected.Tex
-                    tfont instance or dict with compatible
+                    plotly.graph_objects.scatterpolargl.unselected.
+                    Textfont instance or dict with compatible
                     properties
 
         Returns
@@ -24063,8 +24080,8 @@ class Scatterpolargl(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.scatterpolargl.Hoverlabel instance or
-            dict with compatible properties
+            plotly.graph_objects.scatterpolargl.Hoverlabel instance
+            or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
             appear on hover box. Note that this will override
@@ -24106,10 +24123,10 @@ class Scatterpolargl(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         line
-            plotly.graph_objs.scatterpolargl.Line instance or dict
-            with compatible properties
+            plotly.graph_objects.scatterpolargl.Line instance or
+            dict with compatible properties
         marker
-            plotly.graph_objs.scatterpolargl.Marker instance or
+            plotly.graph_objects.scatterpolargl.Marker instance or
             dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -24147,8 +24164,8 @@ class Scatterpolargl(_BaseTraceType):
         rsrc
             Sets the source reference on plot.ly for  r .
         selected
-            plotly.graph_objs.scatterpolargl.Selected instance or
-            dict with compatible properties
+            plotly.graph_objects.scatterpolargl.Selected instance
+            or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -24160,7 +24177,7 @@ class Scatterpolargl(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.scatterpolargl.Stream instance or
+            plotly.graph_objects.scatterpolargl.Stream instance or
             dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
@@ -24219,8 +24236,8 @@ class Scatterpolargl(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            plotly.graph_objs.scatterpolargl.Unselected instance or
-            dict with compatible properties
+            plotly.graph_objects.scatterpolargl.Unselected instance
+            or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -24344,8 +24361,8 @@ class Scatterpolargl(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.scatterpolargl.Hoverlabel instance or
-            dict with compatible properties
+            plotly.graph_objects.scatterpolargl.Hoverlabel instance
+            or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
             appear on hover box. Note that this will override
@@ -24387,10 +24404,10 @@ class Scatterpolargl(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         line
-            plotly.graph_objs.scatterpolargl.Line instance or dict
-            with compatible properties
+            plotly.graph_objects.scatterpolargl.Line instance or
+            dict with compatible properties
         marker
-            plotly.graph_objs.scatterpolargl.Marker instance or
+            plotly.graph_objects.scatterpolargl.Marker instance or
             dict with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -24428,8 +24445,8 @@ class Scatterpolargl(_BaseTraceType):
         rsrc
             Sets the source reference on plot.ly for  r .
         selected
-            plotly.graph_objs.scatterpolargl.Selected instance or
-            dict with compatible properties
+            plotly.graph_objects.scatterpolargl.Selected instance
+            or dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -24441,7 +24458,7 @@ class Scatterpolargl(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.scatterpolargl.Stream instance or
+            plotly.graph_objects.scatterpolargl.Stream instance or
             dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
@@ -24500,8 +24517,8 @@ class Scatterpolargl(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            plotly.graph_objs.scatterpolargl.Unselected instance or
-            dict with compatible properties
+            plotly.graph_objects.scatterpolargl.Unselected instance
+            or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -25336,8 +25353,8 @@ class Scatterpolar(_BaseTraceType):
                     color scales can be linked to the same color
                     axis.
                 colorbar
-                    plotly.graph_objs.scatterpolar.marker.ColorBar
-                    instance or dict with compatible properties
+                    plotly.graph_objects.scatterpolar.marker.ColorB
+                    ar instance or dict with compatible properties
                 colorscale
                     Sets the colorscale. Has an effect only if in
                     `marker.color`is set to a numerical array. The
@@ -25358,10 +25375,10 @@ class Scatterpolar(_BaseTraceType):
                     Sets the source reference on plot.ly for  color
                     .
                 gradient
-                    plotly.graph_objs.scatterpolar.marker.Gradient
-                    instance or dict with compatible properties
+                    plotly.graph_objects.scatterpolar.marker.Gradie
+                    nt instance or dict with compatible properties
                 line
-                    plotly.graph_objs.scatterpolar.marker.Line
+                    plotly.graph_objects.scatterpolar.marker.Line
                     instance or dict with compatible properties
                 maxdisplayed
                     Sets a maximum number of points to be drawn on
@@ -25614,11 +25631,12 @@ class Scatterpolar(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.scatterpolar.selected.Marker
-                    instance or dict with compatible properties
+                    plotly.graph_objects.scatterpolar.selected.Mark
+                    er instance or dict with compatible properties
                 textfont
-                    plotly.graph_objs.scatterpolar.selected.Textfon
-                    t instance or dict with compatible properties
+                    plotly.graph_objects.scatterpolar.selected.Text
+                    font instance or dict with compatible
+                    properties
 
         Returns
         -------
@@ -26032,11 +26050,13 @@ class Scatterpolar(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.scatterpolar.unselected.Marke
-                    r instance or dict with compatible properties
+                    plotly.graph_objects.scatterpolar.unselected.Ma
+                    rker instance or dict with compatible
+                    properties
                 textfont
-                    plotly.graph_objs.scatterpolar.unselected.Textf
-                    ont instance or dict with compatible properties
+                    plotly.graph_objects.scatterpolar.unselected.Te
+                    xtfont instance or dict with compatible
+                    properties
 
         Returns
         -------
@@ -26133,8 +26153,8 @@ class Scatterpolar(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.scatterpolar.Hoverlabel instance or
-            dict with compatible properties
+            plotly.graph_objects.scatterpolar.Hoverlabel instance
+            or dict with compatible properties
         hoveron
             Do the hover effects highlight individual points
             (markers or line points) or do they highlight filled
@@ -26182,11 +26202,11 @@ class Scatterpolar(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         line
-            plotly.graph_objs.scatterpolar.Line instance or dict
+            plotly.graph_objects.scatterpolar.Line instance or dict
             with compatible properties
         marker
-            plotly.graph_objs.scatterpolar.Marker instance or dict
-            with compatible properties
+            plotly.graph_objects.scatterpolar.Marker instance or
+            dict with compatible properties
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -26223,7 +26243,7 @@ class Scatterpolar(_BaseTraceType):
         rsrc
             Sets the source reference on plot.ly for  r .
         selected
-            plotly.graph_objs.scatterpolar.Selected instance or
+            plotly.graph_objects.scatterpolar.Selected instance or
             dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -26236,8 +26256,8 @@ class Scatterpolar(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.scatterpolar.Stream instance or dict
-            with compatible properties
+            plotly.graph_objects.scatterpolar.Stream instance or
+            dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
             and a polar subplot. If "polar" (the default value),
@@ -26295,8 +26315,8 @@ class Scatterpolar(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            plotly.graph_objs.scatterpolar.Unselected instance or
-            dict with compatible properties
+            plotly.graph_objects.scatterpolar.Unselected instance
+            or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -26417,8 +26437,8 @@ class Scatterpolar(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.scatterpolar.Hoverlabel instance or
-            dict with compatible properties
+            plotly.graph_objects.scatterpolar.Hoverlabel instance
+            or dict with compatible properties
         hoveron
             Do the hover effects highlight individual points
             (markers or line points) or do they highlight filled
@@ -26466,11 +26486,11 @@ class Scatterpolar(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         line
-            plotly.graph_objs.scatterpolar.Line instance or dict
+            plotly.graph_objects.scatterpolar.Line instance or dict
             with compatible properties
         marker
-            plotly.graph_objs.scatterpolar.Marker instance or dict
-            with compatible properties
+            plotly.graph_objects.scatterpolar.Marker instance or
+            dict with compatible properties
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -26507,7 +26527,7 @@ class Scatterpolar(_BaseTraceType):
         rsrc
             Sets the source reference on plot.ly for  r .
         selected
-            plotly.graph_objs.scatterpolar.Selected instance or
+            plotly.graph_objects.scatterpolar.Selected instance or
             dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -26520,8 +26540,8 @@ class Scatterpolar(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.scatterpolar.Stream instance or dict
-            with compatible properties
+            plotly.graph_objects.scatterpolar.Stream instance or
+            dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
             and a polar subplot. If "polar" (the default value),
@@ -26579,8 +26599,8 @@ class Scatterpolar(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            plotly.graph_objs.scatterpolar.Unselected instance or
-            dict with compatible properties
+            plotly.graph_objects.scatterpolar.Unselected instance
+            or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -27388,8 +27408,8 @@ class Scattermapbox(_BaseTraceType):
                     color scales can be linked to the same color
                     axis.
                 colorbar
-                    plotly.graph_objs.scattermapbox.marker.ColorBar
-                    instance or dict with compatible properties
+                    plotly.graph_objects.scattermapbox.marker.Color
+                    Bar instance or dict with compatible properties
                 colorscale
                     Sets the colorscale. Has an effect only if in
                     `marker.color`is set to a numerical array. The
@@ -27592,8 +27612,8 @@ class Scattermapbox(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.scattermapbox.selected.Marker
-                    instance or dict with compatible properties
+                    plotly.graph_objects.scattermapbox.selected.Mar
+                    ker instance or dict with compatible properties
 
         Returns
         -------
@@ -27895,8 +27915,9 @@ class Scattermapbox(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.scattermapbox.unselected.Mark
-                    er instance or dict with compatible properties
+                    plotly.graph_objects.scattermapbox.unselected.M
+                    arker instance or dict with compatible
+                    properties
 
         Returns
         -------
@@ -27975,8 +27996,8 @@ class Scattermapbox(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.scattermapbox.Hoverlabel instance or
-            dict with compatible properties
+            plotly.graph_objects.scattermapbox.Hoverlabel instance
+            or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
             appear on hover box. Note that this will override
@@ -28022,15 +28043,15 @@ class Scattermapbox(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         line
-            plotly.graph_objs.scattermapbox.Line instance or dict
-            with compatible properties
+            plotly.graph_objects.scattermapbox.Line instance or
+            dict with compatible properties
         lon
             Sets the longitude coordinates (in degrees East).
         lonsrc
             Sets the source reference on plot.ly for  lon .
         marker
-            plotly.graph_objs.scattermapbox.Marker instance or dict
-            with compatible properties
+            plotly.graph_objects.scattermapbox.Marker instance or
+            dict with compatible properties
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -28057,7 +28078,7 @@ class Scattermapbox(_BaseTraceType):
         opacity
             Sets the opacity of the trace.
         selected
-            plotly.graph_objs.scattermapbox.Selected instance or
+            plotly.graph_objects.scattermapbox.Selected instance or
             dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -28070,8 +28091,8 @@ class Scattermapbox(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.scattermapbox.Stream instance or dict
-            with compatible properties
+            plotly.graph_objects.scattermapbox.Stream instance or
+            dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
             and a mapbox subplot. If "mapbox" (the default value),
@@ -28117,8 +28138,8 @@ class Scattermapbox(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            plotly.graph_objs.scattermapbox.Unselected instance or
-            dict with compatible properties
+            plotly.graph_objects.scattermapbox.Unselected instance
+            or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -28209,8 +28230,8 @@ class Scattermapbox(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.scattermapbox.Hoverlabel instance or
-            dict with compatible properties
+            plotly.graph_objects.scattermapbox.Hoverlabel instance
+            or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
             appear on hover box. Note that this will override
@@ -28256,15 +28277,15 @@ class Scattermapbox(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         line
-            plotly.graph_objs.scattermapbox.Line instance or dict
-            with compatible properties
+            plotly.graph_objects.scattermapbox.Line instance or
+            dict with compatible properties
         lon
             Sets the longitude coordinates (in degrees East).
         lonsrc
             Sets the source reference on plot.ly for  lon .
         marker
-            plotly.graph_objs.scattermapbox.Marker instance or dict
-            with compatible properties
+            plotly.graph_objects.scattermapbox.Marker instance or
+            dict with compatible properties
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -28291,7 +28312,7 @@ class Scattermapbox(_BaseTraceType):
         opacity
             Sets the opacity of the trace.
         selected
-            plotly.graph_objs.scattermapbox.Selected instance or
+            plotly.graph_objects.scattermapbox.Selected instance or
             dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -28304,8 +28325,8 @@ class Scattermapbox(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.scattermapbox.Stream instance or dict
-            with compatible properties
+            plotly.graph_objects.scattermapbox.Stream instance or
+            dict with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
             and a mapbox subplot. If "mapbox" (the default value),
@@ -28351,8 +28372,8 @@ class Scattermapbox(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            plotly.graph_objs.scattermapbox.Unselected instance or
-            dict with compatible properties
+            plotly.graph_objects.scattermapbox.Unselected instance
+            or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -29278,7 +29299,7 @@ class Scattergl(_BaseTraceType):
                     color scales can be linked to the same color
                     axis.
                 colorbar
-                    plotly.graph_objs.scattergl.marker.ColorBar
+                    plotly.graph_objects.scattergl.marker.ColorBar
                     instance or dict with compatible properties
                 colorscale
                     Sets the colorscale. Has an effect only if in
@@ -29300,7 +29321,7 @@ class Scattergl(_BaseTraceType):
                     Sets the source reference on plot.ly for  color
                     .
                 line
-                    plotly.graph_objs.scattergl.marker.Line
+                    plotly.graph_objects.scattergl.marker.Line
                     instance or dict with compatible properties
                 opacity
                     Sets the marker opacity.
@@ -29484,11 +29505,11 @@ class Scattergl(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.scattergl.selected.Marker
+                    plotly.graph_objects.scattergl.selected.Marker
                     instance or dict with compatible properties
                 textfont
-                    plotly.graph_objs.scattergl.selected.Textfont
-                    instance or dict with compatible properties
+                    plotly.graph_objects.scattergl.selected.Textfon
+                    t instance or dict with compatible properties
 
         Returns
         -------
@@ -29794,11 +29815,11 @@ class Scattergl(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.scattergl.unselected.Marker
-                    instance or dict with compatible properties
+                    plotly.graph_objects.scattergl.unselected.Marke
+                    r instance or dict with compatible properties
                 textfont
-                    plotly.graph_objs.scattergl.unselected.Textfont
-                    instance or dict with compatible properties
+                    plotly.graph_objects.scattergl.unselected.Textf
+                    ont instance or dict with compatible properties
 
         Returns
         -------
@@ -30085,10 +30106,10 @@ class Scattergl(_BaseTraceType):
         dy
             Sets the y coordinate step. See `y0` for more info.
         error_x
-            plotly.graph_objs.scattergl.ErrorX instance or dict
+            plotly.graph_objects.scattergl.ErrorX instance or dict
             with compatible properties
         error_y
-            plotly.graph_objs.scattergl.ErrorY instance or dict
+            plotly.graph_objects.scattergl.ErrorY instance or dict
             with compatible properties
         fill
             Sets the area to fill with a solid color. Defaults to
@@ -30125,8 +30146,8 @@ class Scattergl(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.scattergl.Hoverlabel instance or dict
-            with compatible properties
+            plotly.graph_objects.scattergl.Hoverlabel instance or
+            dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
             appear on hover box. Note that this will override
@@ -30168,10 +30189,10 @@ class Scattergl(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         line
-            plotly.graph_objs.scattergl.Line instance or dict with
-            compatible properties
+            plotly.graph_objects.scattergl.Line instance or dict
+            with compatible properties
         marker
-            plotly.graph_objs.scattergl.Marker instance or dict
+            plotly.graph_objects.scattergl.Marker instance or dict
             with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -30196,8 +30217,8 @@ class Scattergl(_BaseTraceType):
         opacity
             Sets the opacity of the trace.
         selected
-            plotly.graph_objs.scattergl.Selected instance or dict
-            with compatible properties
+            plotly.graph_objects.scattergl.Selected instance or
+            dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -30209,7 +30230,7 @@ class Scattergl(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.scattergl.Stream instance or dict
+            plotly.graph_objects.scattergl.Stream instance or dict
             with compatible properties
         text
             Sets text elements associated with each (x,y) pair. If
@@ -30252,8 +30273,8 @@ class Scattergl(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            plotly.graph_objs.scattergl.Unselected instance or dict
-            with compatible properties
+            plotly.graph_objects.scattergl.Unselected instance or
+            dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -30373,10 +30394,10 @@ class Scattergl(_BaseTraceType):
         dy
             Sets the y coordinate step. See `y0` for more info.
         error_x
-            plotly.graph_objs.scattergl.ErrorX instance or dict
+            plotly.graph_objects.scattergl.ErrorX instance or dict
             with compatible properties
         error_y
-            plotly.graph_objs.scattergl.ErrorY instance or dict
+            plotly.graph_objects.scattergl.ErrorY instance or dict
             with compatible properties
         fill
             Sets the area to fill with a solid color. Defaults to
@@ -30413,8 +30434,8 @@ class Scattergl(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.scattergl.Hoverlabel instance or dict
-            with compatible properties
+            plotly.graph_objects.scattergl.Hoverlabel instance or
+            dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
             appear on hover box. Note that this will override
@@ -30456,10 +30477,10 @@ class Scattergl(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         line
-            plotly.graph_objs.scattergl.Line instance or dict with
-            compatible properties
+            plotly.graph_objects.scattergl.Line instance or dict
+            with compatible properties
         marker
-            plotly.graph_objs.scattergl.Marker instance or dict
+            plotly.graph_objects.scattergl.Marker instance or dict
             with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -30484,8 +30505,8 @@ class Scattergl(_BaseTraceType):
         opacity
             Sets the opacity of the trace.
         selected
-            plotly.graph_objs.scattergl.Selected instance or dict
-            with compatible properties
+            plotly.graph_objects.scattergl.Selected instance or
+            dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -30497,7 +30518,7 @@ class Scattergl(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.scattergl.Stream instance or dict
+            plotly.graph_objects.scattergl.Stream instance or dict
             with compatible properties
         text
             Sets text elements associated with each (x,y) pair. If
@@ -30540,8 +30561,8 @@ class Scattergl(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            plotly.graph_objs.scattergl.Unselected instance or dict
-            with compatible properties
+            plotly.graph_objects.scattergl.Unselected instance or
+            dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -31478,7 +31499,7 @@ class Scattergeo(_BaseTraceType):
                     color scales can be linked to the same color
                     axis.
                 colorbar
-                    plotly.graph_objs.scattergeo.marker.ColorBar
+                    plotly.graph_objects.scattergeo.marker.ColorBar
                     instance or dict with compatible properties
                 colorscale
                     Sets the colorscale. Has an effect only if in
@@ -31500,10 +31521,10 @@ class Scattergeo(_BaseTraceType):
                     Sets the source reference on plot.ly for  color
                     .
                 gradient
-                    plotly.graph_objs.scattergeo.marker.Gradient
+                    plotly.graph_objects.scattergeo.marker.Gradient
                     instance or dict with compatible properties
                 line
-                    plotly.graph_objs.scattergeo.marker.Line
+                    plotly.graph_objects.scattergeo.marker.Line
                     instance or dict with compatible properties
                 opacity
                     Sets the marker opacity.
@@ -31692,11 +31713,11 @@ class Scattergeo(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.scattergeo.selected.Marker
+                    plotly.graph_objects.scattergeo.selected.Marker
                     instance or dict with compatible properties
                 textfont
-                    plotly.graph_objs.scattergeo.selected.Textfont
-                    instance or dict with compatible properties
+                    plotly.graph_objects.scattergeo.selected.Textfo
+                    nt instance or dict with compatible properties
 
         Returns
         -------
@@ -32003,11 +32024,12 @@ class Scattergeo(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.scattergeo.unselected.Marker
-                    instance or dict with compatible properties
+                    plotly.graph_objects.scattergeo.unselected.Mark
+                    er instance or dict with compatible properties
                 textfont
-                    plotly.graph_objs.scattergeo.unselected.Textfon
-                    t instance or dict with compatible properties
+                    plotly.graph_objects.scattergeo.unselected.Text
+                    font instance or dict with compatible
+                    properties
 
         Returns
         -------
@@ -32092,7 +32114,7 @@ class Scattergeo(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.scattergeo.Hoverlabel instance or
+            plotly.graph_objects.scattergeo.Hoverlabel instance or
             dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -32139,8 +32161,8 @@ class Scattergeo(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         line
-            plotly.graph_objs.scattergeo.Line instance or dict with
-            compatible properties
+            plotly.graph_objects.scattergeo.Line instance or dict
+            with compatible properties
         locationmode
             Determines the set of locations used to match entries
             in `locations` to regions on the map.
@@ -32155,7 +32177,7 @@ class Scattergeo(_BaseTraceType):
         lonsrc
             Sets the source reference on plot.ly for  lon .
         marker
-            plotly.graph_objs.scattergeo.Marker instance or dict
+            plotly.graph_objects.scattergeo.Marker instance or dict
             with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -32185,8 +32207,8 @@ class Scattergeo(_BaseTraceType):
         opacity
             Sets the opacity of the trace.
         selected
-            plotly.graph_objs.scattergeo.Selected instance or dict
-            with compatible properties
+            plotly.graph_objects.scattergeo.Selected instance or
+            dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -32198,7 +32220,7 @@ class Scattergeo(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.scattergeo.Stream instance or dict
+            plotly.graph_objects.scattergeo.Stream instance or dict
             with compatible properties
         text
             Sets text elements associated with each (lon,lat) pair
@@ -32242,7 +32264,7 @@ class Scattergeo(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            plotly.graph_objs.scattergeo.Unselected instance or
+            plotly.graph_objects.scattergeo.Unselected instance or
             dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -32345,7 +32367,7 @@ class Scattergeo(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.scattergeo.Hoverlabel instance or
+            plotly.graph_objects.scattergeo.Hoverlabel instance or
             dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -32392,8 +32414,8 @@ class Scattergeo(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         line
-            plotly.graph_objs.scattergeo.Line instance or dict with
-            compatible properties
+            plotly.graph_objects.scattergeo.Line instance or dict
+            with compatible properties
         locationmode
             Determines the set of locations used to match entries
             in `locations` to regions on the map.
@@ -32408,7 +32430,7 @@ class Scattergeo(_BaseTraceType):
         lonsrc
             Sets the source reference on plot.ly for  lon .
         marker
-            plotly.graph_objs.scattergeo.Marker instance or dict
+            plotly.graph_objects.scattergeo.Marker instance or dict
             with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -32438,8 +32460,8 @@ class Scattergeo(_BaseTraceType):
         opacity
             Sets the opacity of the trace.
         selected
-            plotly.graph_objs.scattergeo.Selected instance or dict
-            with compatible properties
+            plotly.graph_objects.scattergeo.Selected instance or
+            dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -32451,7 +32473,7 @@ class Scattergeo(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.scattergeo.Stream instance or dict
+            plotly.graph_objects.scattergeo.Stream instance or dict
             with compatible properties
         text
             Sets text elements associated with each (lon,lat) pair
@@ -32495,7 +32517,7 @@ class Scattergeo(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            plotly.graph_objs.scattergeo.Unselected instance or
+            plotly.graph_objects.scattergeo.Unselected instance or
             dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -33359,8 +33381,8 @@ class Scattercarpet(_BaseTraceType):
                     color scales can be linked to the same color
                     axis.
                 colorbar
-                    plotly.graph_objs.scattercarpet.marker.ColorBar
-                    instance or dict with compatible properties
+                    plotly.graph_objects.scattercarpet.marker.Color
+                    Bar instance or dict with compatible properties
                 colorscale
                     Sets the colorscale. Has an effect only if in
                     `marker.color`is set to a numerical array. The
@@ -33381,10 +33403,10 @@ class Scattercarpet(_BaseTraceType):
                     Sets the source reference on plot.ly for  color
                     .
                 gradient
-                    plotly.graph_objs.scattercarpet.marker.Gradient
-                    instance or dict with compatible properties
+                    plotly.graph_objects.scattercarpet.marker.Gradi
+                    ent instance or dict with compatible properties
                 line
-                    plotly.graph_objs.scattercarpet.marker.Line
+                    plotly.graph_objects.scattercarpet.marker.Line
                     instance or dict with compatible properties
                 maxdisplayed
                     Sets a maximum number of points to be drawn on
@@ -33576,11 +33598,12 @@ class Scattercarpet(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.scattercarpet.selected.Marker
-                    instance or dict with compatible properties
+                    plotly.graph_objects.scattercarpet.selected.Mar
+                    ker instance or dict with compatible properties
                 textfont
-                    plotly.graph_objs.scattercarpet.selected.Textfo
-                    nt instance or dict with compatible properties
+                    plotly.graph_objects.scattercarpet.selected.Tex
+                    tfont instance or dict with compatible
+                    properties
 
         Returns
         -------
@@ -33886,11 +33909,12 @@ class Scattercarpet(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.scattercarpet.unselected.Mark
-                    er instance or dict with compatible properties
+                    plotly.graph_objects.scattercarpet.unselected.M
+                    arker instance or dict with compatible
+                    properties
                 textfont
-                    plotly.graph_objs.scattercarpet.unselected.Text
-                    font instance or dict with compatible
+                    plotly.graph_objects.scattercarpet.unselected.T
+                    extfont instance or dict with compatible
                     properties
 
         Returns
@@ -34038,8 +34062,8 @@ class Scattercarpet(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.scattercarpet.Hoverlabel instance or
-            dict with compatible properties
+            plotly.graph_objects.scattercarpet.Hoverlabel instance
+            or dict with compatible properties
         hoveron
             Do the hover effects highlight individual points
             (markers or line points) or do they highlight filled
@@ -34086,11 +34110,11 @@ class Scattercarpet(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         line
-            plotly.graph_objs.scattercarpet.Line instance or dict
-            with compatible properties
+            plotly.graph_objects.scattercarpet.Line instance or
+            dict with compatible properties
         marker
-            plotly.graph_objs.scattercarpet.Marker instance or dict
-            with compatible properties
+            plotly.graph_objects.scattercarpet.Marker instance or
+            dict with compatible properties
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -34119,7 +34143,7 @@ class Scattercarpet(_BaseTraceType):
         opacity
             Sets the opacity of the trace.
         selected
-            plotly.graph_objs.scattercarpet.Selected instance or
+            plotly.graph_objects.scattercarpet.Selected instance or
             dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -34132,8 +34156,8 @@ class Scattercarpet(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.scattercarpet.Stream instance or dict
-            with compatible properties
+            plotly.graph_objects.scattercarpet.Stream instance or
+            dict with compatible properties
         text
             Sets text elements associated with each (a,b) point. If
             a single string, the same string appears over all the
@@ -34175,8 +34199,8 @@ class Scattercarpet(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            plotly.graph_objs.scattercarpet.Unselected instance or
-            dict with compatible properties
+            plotly.graph_objects.scattercarpet.Unselected instance
+            or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -34298,8 +34322,8 @@ class Scattercarpet(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.scattercarpet.Hoverlabel instance or
-            dict with compatible properties
+            plotly.graph_objects.scattercarpet.Hoverlabel instance
+            or dict with compatible properties
         hoveron
             Do the hover effects highlight individual points
             (markers or line points) or do they highlight filled
@@ -34346,11 +34370,11 @@ class Scattercarpet(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         line
-            plotly.graph_objs.scattercarpet.Line instance or dict
-            with compatible properties
+            plotly.graph_objects.scattercarpet.Line instance or
+            dict with compatible properties
         marker
-            plotly.graph_objs.scattercarpet.Marker instance or dict
-            with compatible properties
+            plotly.graph_objects.scattercarpet.Marker instance or
+            dict with compatible properties
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -34379,7 +34403,7 @@ class Scattercarpet(_BaseTraceType):
         opacity
             Sets the opacity of the trace.
         selected
-            plotly.graph_objs.scattercarpet.Selected instance or
+            plotly.graph_objects.scattercarpet.Selected instance or
             dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -34392,8 +34416,8 @@ class Scattercarpet(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.scattercarpet.Stream instance or dict
-            with compatible properties
+            plotly.graph_objects.scattercarpet.Stream instance or
+            dict with compatible properties
         text
             Sets text elements associated with each (a,b) point. If
             a single string, the same string appears over all the
@@ -34435,8 +34459,8 @@ class Scattercarpet(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            plotly.graph_objs.scattercarpet.Unselected instance or
-            dict with compatible properties
+            plotly.graph_objects.scattercarpet.Unselected instance
+            or dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -35291,7 +35315,7 @@ class Scatter3d(_BaseTraceType):
                     color scales can be linked to the same color
                     axis.
                 colorbar
-                    plotly.graph_objs.scatter3d.line.ColorBar
+                    plotly.graph_objects.scatter3d.line.ColorBar
                     instance or dict with compatible properties
                 colorscale
                     Sets the colorscale. Has an effect only if in
@@ -35404,7 +35428,7 @@ class Scatter3d(_BaseTraceType):
                     color scales can be linked to the same color
                     axis.
                 colorbar
-                    plotly.graph_objs.scatter3d.marker.ColorBar
+                    plotly.graph_objects.scatter3d.marker.ColorBar
                     instance or dict with compatible properties
                 colorscale
                     Sets the colorscale. Has an effect only if in
@@ -35426,7 +35450,7 @@ class Scatter3d(_BaseTraceType):
                     Sets the source reference on plot.ly for  color
                     .
                 line
-                    plotly.graph_objs.scatter3d.marker.Line
+                    plotly.graph_objects.scatter3d.marker.Line
                     instance or dict with compatible properties
                 opacity
                     Sets the marker opacity. Note that the marker
@@ -35612,13 +35636,13 @@ class Scatter3d(_BaseTraceType):
             Supported dict properties:
                 
                 x
-                    plotly.graph_objs.scatter3d.projection.X
+                    plotly.graph_objects.scatter3d.projection.X
                     instance or dict with compatible properties
                 y
-                    plotly.graph_objs.scatter3d.projection.Y
+                    plotly.graph_objects.scatter3d.projection.Y
                     instance or dict with compatible properties
                 z
-                    plotly.graph_objs.scatter3d.projection.Z
+                    plotly.graph_objects.scatter3d.projection.Z
                     instance or dict with compatible properties
 
         Returns
@@ -36232,13 +36256,13 @@ class Scatter3d(_BaseTraceType):
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
         error_x
-            plotly.graph_objs.scatter3d.ErrorX instance or dict
+            plotly.graph_objects.scatter3d.ErrorX instance or dict
             with compatible properties
         error_y
-            plotly.graph_objs.scatter3d.ErrorY instance or dict
+            plotly.graph_objects.scatter3d.ErrorY instance or dict
             with compatible properties
         error_z
-            plotly.graph_objs.scatter3d.ErrorZ instance or dict
+            plotly.graph_objects.scatter3d.ErrorZ instance or dict
             with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
@@ -36248,8 +36272,8 @@ class Scatter3d(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.scatter3d.Hoverlabel instance or dict
-            with compatible properties
+            plotly.graph_objects.scatter3d.Hoverlabel instance or
+            dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
             appear on hover box. Note that this will override
@@ -36291,10 +36315,10 @@ class Scatter3d(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         line
-            plotly.graph_objs.scatter3d.Line instance or dict with
-            compatible properties
+            plotly.graph_objects.scatter3d.Line instance or dict
+            with compatible properties
         marker
-            plotly.graph_objs.scatter3d.Marker instance or dict
+            plotly.graph_objects.scatter3d.Marker instance or dict
             with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -36324,8 +36348,8 @@ class Scatter3d(_BaseTraceType):
         opacity
             Sets the opacity of the trace.
         projection
-            plotly.graph_objs.scatter3d.Projection instance or dict
-            with compatible properties
+            plotly.graph_objects.scatter3d.Projection instance or
+            dict with compatible properties
         scene
             Sets a reference between this trace's 3D coordinate
             system and a 3D scene. If "scene" (the default value),
@@ -36336,7 +36360,7 @@ class Scatter3d(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.scatter3d.Stream instance or dict
+            plotly.graph_objects.scatter3d.Stream instance or dict
             with compatible properties
         surfaceaxis
             If "-1", the scatter points are not fill with a surface
@@ -36353,8 +36377,8 @@ class Scatter3d(_BaseTraceType):
             flag and "hovertext" is not set, these elements will be
             seen in the hover labels.
         textfont
-            plotly.graph_objs.scatter3d.Textfont instance or dict
-            with compatible properties
+            plotly.graph_objects.scatter3d.Textfont instance or
+            dict with compatible properties
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.
@@ -36487,13 +36511,13 @@ class Scatter3d(_BaseTraceType):
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
         error_x
-            plotly.graph_objs.scatter3d.ErrorX instance or dict
+            plotly.graph_objects.scatter3d.ErrorX instance or dict
             with compatible properties
         error_y
-            plotly.graph_objs.scatter3d.ErrorY instance or dict
+            plotly.graph_objects.scatter3d.ErrorY instance or dict
             with compatible properties
         error_z
-            plotly.graph_objs.scatter3d.ErrorZ instance or dict
+            plotly.graph_objects.scatter3d.ErrorZ instance or dict
             with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
@@ -36503,8 +36527,8 @@ class Scatter3d(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.scatter3d.Hoverlabel instance or dict
-            with compatible properties
+            plotly.graph_objects.scatter3d.Hoverlabel instance or
+            dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
             appear on hover box. Note that this will override
@@ -36546,10 +36570,10 @@ class Scatter3d(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         line
-            plotly.graph_objs.scatter3d.Line instance or dict with
-            compatible properties
+            plotly.graph_objects.scatter3d.Line instance or dict
+            with compatible properties
         marker
-            plotly.graph_objs.scatter3d.Marker instance or dict
+            plotly.graph_objects.scatter3d.Marker instance or dict
             with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -36579,8 +36603,8 @@ class Scatter3d(_BaseTraceType):
         opacity
             Sets the opacity of the trace.
         projection
-            plotly.graph_objs.scatter3d.Projection instance or dict
-            with compatible properties
+            plotly.graph_objects.scatter3d.Projection instance or
+            dict with compatible properties
         scene
             Sets a reference between this trace's 3D coordinate
             system and a 3D scene. If "scene" (the default value),
@@ -36591,7 +36615,7 @@ class Scatter3d(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.scatter3d.Stream instance or dict
+            plotly.graph_objects.scatter3d.Stream instance or dict
             with compatible properties
         surfaceaxis
             If "-1", the scatter points are not fill with a surface
@@ -36608,8 +36632,8 @@ class Scatter3d(_BaseTraceType):
             flag and "hovertext" is not set, these elements will be
             seen in the hover labels.
         textfont
-            plotly.graph_objs.scatter3d.Textfont instance or dict
-            with compatible properties
+            plotly.graph_objects.scatter3d.Textfont instance or
+            dict with compatible properties
         textposition
             Sets the positions of the `text` elements with respects
             to the (x,y) coordinates.
@@ -37695,7 +37719,7 @@ class Scatter(_BaseTraceType):
                     color scales can be linked to the same color
                     axis.
                 colorbar
-                    plotly.graph_objs.scatter.marker.ColorBar
+                    plotly.graph_objects.scatter.marker.ColorBar
                     instance or dict with compatible properties
                 colorscale
                     Sets the colorscale. Has an effect only if in
@@ -37717,11 +37741,11 @@ class Scatter(_BaseTraceType):
                     Sets the source reference on plot.ly for  color
                     .
                 gradient
-                    plotly.graph_objs.scatter.marker.Gradient
+                    plotly.graph_objects.scatter.marker.Gradient
                     instance or dict with compatible properties
                 line
-                    plotly.graph_objs.scatter.marker.Line instance
-                    or dict with compatible properties
+                    plotly.graph_objects.scatter.marker.Line
+                    instance or dict with compatible properties
                 maxdisplayed
                     Sets a maximum number of points to be drawn on
                     the graph. 0 corresponds to no limit.
@@ -37980,10 +38004,10 @@ class Scatter(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.scatter.selected.Marker
+                    plotly.graph_objects.scatter.selected.Marker
                     instance or dict with compatible properties
                 textfont
-                    plotly.graph_objs.scatter.selected.Textfont
+                    plotly.graph_objects.scatter.selected.Textfont
                     instance or dict with compatible properties
 
         Returns
@@ -38392,11 +38416,11 @@ class Scatter(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.scatter.unselected.Marker
+                    plotly.graph_objects.scatter.unselected.Marker
                     instance or dict with compatible properties
                 textfont
-                    plotly.graph_objs.scatter.unselected.Textfont
-                    instance or dict with compatible properties
+                    plotly.graph_objects.scatter.unselected.Textfon
+                    t instance or dict with compatible properties
 
         Returns
         -------
@@ -38689,11 +38713,11 @@ class Scatter(_BaseTraceType):
         dy
             Sets the y coordinate step. See `y0` for more info.
         error_x
-            plotly.graph_objs.scatter.ErrorX instance or dict with
-            compatible properties
+            plotly.graph_objects.scatter.ErrorX instance or dict
+            with compatible properties
         error_y
-            plotly.graph_objs.scatter.ErrorY instance or dict with
-            compatible properties
+            plotly.graph_objects.scatter.ErrorY instance or dict
+            with compatible properties
         fill
             Sets the area to fill with a solid color. Defaults to
             "none" unless this trace is stacked, then it gets
@@ -38740,8 +38764,8 @@ class Scatter(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.scatter.Hoverlabel instance or dict
-            with compatible properties
+            plotly.graph_objects.scatter.Hoverlabel instance or
+            dict with compatible properties
         hoveron
             Do the hover effects highlight individual points
             (markers or line points) or do they highlight filled
@@ -38789,11 +38813,11 @@ class Scatter(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         line
-            plotly.graph_objs.scatter.Line instance or dict with
+            plotly.graph_objects.scatter.Line instance or dict with
             compatible properties
         marker
-            plotly.graph_objs.scatter.Marker instance or dict with
-            compatible properties
+            plotly.graph_objects.scatter.Marker instance or dict
+            with compatible properties
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -38835,7 +38859,7 @@ class Scatter(_BaseTraceType):
         rsrc
             Sets the source reference on plot.ly for  r .
         selected
-            plotly.graph_objs.scatter.Selected instance or dict
+            plotly.graph_objects.scatter.Selected instance or dict
             with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -38872,8 +38896,8 @@ class Scatter(_BaseTraceType):
             fill-linked traces are not already consecutive, the
             later ones will be pushed down in the drawing order.
         stream
-            plotly.graph_objs.scatter.Stream instance or dict with
-            compatible properties
+            plotly.graph_objects.scatter.Stream instance or dict
+            with compatible properties
         t
             t coordinates in scatter traces are deprecated!Please
             switch to the "scatterpolar" trace type.Sets the
@@ -38921,8 +38945,8 @@ class Scatter(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            plotly.graph_objs.scatter.Unselected instance or dict
-            with compatible properties
+            plotly.graph_objects.scatter.Unselected instance or
+            dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -39060,11 +39084,11 @@ class Scatter(_BaseTraceType):
         dy
             Sets the y coordinate step. See `y0` for more info.
         error_x
-            plotly.graph_objs.scatter.ErrorX instance or dict with
-            compatible properties
+            plotly.graph_objects.scatter.ErrorX instance or dict
+            with compatible properties
         error_y
-            plotly.graph_objs.scatter.ErrorY instance or dict with
-            compatible properties
+            plotly.graph_objects.scatter.ErrorY instance or dict
+            with compatible properties
         fill
             Sets the area to fill with a solid color. Defaults to
             "none" unless this trace is stacked, then it gets
@@ -39111,8 +39135,8 @@ class Scatter(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.scatter.Hoverlabel instance or dict
-            with compatible properties
+            plotly.graph_objects.scatter.Hoverlabel instance or
+            dict with compatible properties
         hoveron
             Do the hover effects highlight individual points
             (markers or line points) or do they highlight filled
@@ -39160,11 +39184,11 @@ class Scatter(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         line
-            plotly.graph_objs.scatter.Line instance or dict with
+            plotly.graph_objects.scatter.Line instance or dict with
             compatible properties
         marker
-            plotly.graph_objs.scatter.Marker instance or dict with
-            compatible properties
+            plotly.graph_objects.scatter.Marker instance or dict
+            with compatible properties
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -39206,7 +39230,7 @@ class Scatter(_BaseTraceType):
         rsrc
             Sets the source reference on plot.ly for  r .
         selected
-            plotly.graph_objs.scatter.Selected instance or dict
+            plotly.graph_objects.scatter.Selected instance or dict
             with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -39243,8 +39267,8 @@ class Scatter(_BaseTraceType):
             fill-linked traces are not already consecutive, the
             later ones will be pushed down in the drawing order.
         stream
-            plotly.graph_objs.scatter.Stream instance or dict with
-            compatible properties
+            plotly.graph_objects.scatter.Stream instance or dict
+            with compatible properties
         t
             t coordinates in scatter traces are deprecated!Please
             switch to the "scatterpolar" trace type.Sets the
@@ -39292,8 +39316,8 @@ class Scatter(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            plotly.graph_objs.scatter.Unselected instance or dict
-            with compatible properties
+            plotly.graph_objects.scatter.Unselected instance or
+            dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -39826,8 +39850,9 @@ class Sankey(_BaseTraceType):
                     by default, a translucent grey link will be
                     used.
                 colorscales
-                    plotly.graph_objs.sankey.link.Colorscale
-                    instance or dict with compatible properties
+                    A tuple of
+                    plotly.graph_objects.sankey.link.Colorscale
+                    instances or dicts with compatible properties
                 colorscaledefaults
                     When used in a template (as layout.template.dat
                     a.sankey.link.colorscaledefaults), sets the
@@ -39843,7 +39868,7 @@ class Sankey(_BaseTraceType):
                     `none` is set, click and hover events are still
                     fired.
                 hoverlabel
-                    plotly.graph_objs.sankey.link.Hoverlabel
+                    plotly.graph_objects.sankey.link.Hoverlabel
                     instance or dict with compatible properties
                 hovertemplate
                     Template string used for rendering the
@@ -39876,8 +39901,8 @@ class Sankey(_BaseTraceType):
                     Sets the source reference on plot.ly for  label
                     .
                 line
-                    plotly.graph_objs.sankey.link.Line instance or
-                    dict with compatible properties
+                    plotly.graph_objects.sankey.link.Line instance
+                    or dict with compatible properties
                 source
                     An integer number `[0..nodes.length - 1]` that
                     represents the source node.
@@ -40014,7 +40039,7 @@ class Sankey(_BaseTraceType):
                     `none` is set, click and hover events are still
                     fired.
                 hoverlabel
-                    plotly.graph_objs.sankey.node.Hoverlabel
+                    plotly.graph_objects.sankey.node.Hoverlabel
                     instance or dict with compatible properties
                 hovertemplate
                     Template string used for rendering the
@@ -40047,8 +40072,8 @@ class Sankey(_BaseTraceType):
                     Sets the source reference on plot.ly for  label
                     .
                 line
-                    plotly.graph_objs.sankey.node.Line instance or
-                    dict with compatible properties
+                    plotly.graph_objects.sankey.node.Line instance
+                    or dict with compatible properties
                 pad
                     Sets the padding (in px) between the `nodes`.
                 thickness
@@ -40351,8 +40376,8 @@ class Sankey(_BaseTraceType):
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
         domain
-            plotly.graph_objs.sankey.Domain instance or dict with
-            compatible properties
+            plotly.graph_objects.sankey.Domain instance or dict
+            with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -40361,7 +40386,7 @@ class Sankey(_BaseTraceType):
             superseded by `node.hoverinfo` and `node.hoverinfo` for
             nodes and links respectively.
         hoverlabel
-            plotly.graph_objs.sankey.Hoverlabel instance or dict
+            plotly.graph_objects.sankey.Hoverlabel instance or dict
             with compatible properties
         ids
             Assigns id labels to each datum. These ids for object
@@ -40401,8 +40426,8 @@ class Sankey(_BaseTraceType):
             any other non-array values means no selection all where
             the `selected` and `unselected` styles have no effect.
         stream
-            plotly.graph_objs.sankey.Stream instance or dict with
-            compatible properties
+            plotly.graph_objects.sankey.Stream instance or dict
+            with compatible properties
         textfont
             Sets the font for node labels
         uid
@@ -40499,8 +40524,8 @@ class Sankey(_BaseTraceType):
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
         domain
-            plotly.graph_objs.sankey.Domain instance or dict with
-            compatible properties
+            plotly.graph_objects.sankey.Domain instance or dict
+            with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -40509,7 +40534,7 @@ class Sankey(_BaseTraceType):
             superseded by `node.hoverinfo` and `node.hoverinfo` for
             nodes and links respectively.
         hoverlabel
-            plotly.graph_objs.sankey.Hoverlabel instance or dict
+            plotly.graph_objects.sankey.Hoverlabel instance or dict
             with compatible properties
         ids
             Assigns id labels to each datum. These ids for object
@@ -40549,8 +40574,8 @@ class Sankey(_BaseTraceType):
             any other non-array values means no selection all where
             the `selected` and `unselected` styles have no effect.
         stream
-            plotly.graph_objs.sankey.Stream instance or dict with
-            compatible properties
+            plotly.graph_objects.sankey.Stream instance or dict
+            with compatible properties
         textfont
             Sets the font for node labels
         uid
@@ -40996,7 +41021,7 @@ class Pointcloud(_BaseTraceType):
                     `blend` to `true` reduces zoom/pan speed if
                     used with large numbers of points.
                 border
-                    plotly.graph_objs.pointcloud.marker.Border
+                    plotly.graph_objects.pointcloud.marker.Border
                     instance or dict with compatible properties
                 color
                     Sets the marker fill color. It accepts a
@@ -41588,7 +41613,7 @@ class Pointcloud(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.pointcloud.Hoverlabel instance or
+            plotly.graph_objects.pointcloud.Hoverlabel instance or
             dict with compatible properties
         ids
             Assigns id labels to each datum. These ids for object
@@ -41612,7 +41637,7 @@ class Pointcloud(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         marker
-            plotly.graph_objs.pointcloud.Marker instance or dict
+            plotly.graph_objects.pointcloud.Marker instance or dict
             with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -41638,7 +41663,7 @@ class Pointcloud(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.pointcloud.Stream instance or dict
+            plotly.graph_objects.pointcloud.Stream instance or dict
             with compatible properties
         text
             Sets text elements associated with each (x,y) pair. If
@@ -41783,7 +41808,7 @@ class Pointcloud(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.pointcloud.Hoverlabel instance or
+            plotly.graph_objects.pointcloud.Hoverlabel instance or
             dict with compatible properties
         ids
             Assigns id labels to each datum. These ids for object
@@ -41807,7 +41832,7 @@ class Pointcloud(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         marker
-            plotly.graph_objs.pointcloud.Marker instance or dict
+            plotly.graph_objects.pointcloud.Marker instance or dict
             with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -41833,7 +41858,7 @@ class Pointcloud(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.pointcloud.Stream instance or dict
+            plotly.graph_objects.pointcloud.Stream instance or dict
             with compatible properties
         text
             Sets text elements associated with each (x,y) pair. If
@@ -42632,8 +42657,8 @@ class Pie(_BaseTraceType):
                     Sets the source reference on plot.ly for
                     colors .
                 line
-                    plotly.graph_objs.pie.marker.Line instance or
-                    dict with compatible properties
+                    plotly.graph_objects.pie.marker.Line instance
+                    or dict with compatible properties
 
         Returns
         -------
@@ -43385,7 +43410,7 @@ class Pie(_BaseTraceType):
         dlabel
             Sets the label step. See `label0` for more info.
         domain
-            plotly.graph_objs.pie.Domain instance or dict with
+            plotly.graph_objects.pie.Domain instance or dict with
             compatible properties
         hole
             Sets the fraction of the radius to cut out of the pie.
@@ -43398,8 +43423,8 @@ class Pie(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.pie.Hoverlabel instance or dict with
-            compatible properties
+            plotly.graph_objects.pie.Hoverlabel instance or dict
+            with compatible properties
         hovertemplate
             Template string used for rendering the information that
             appear on hover box. Note that this will override
@@ -43457,7 +43482,7 @@ class Pie(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         marker
-            plotly.graph_objs.pie.Marker instance or dict with
+            plotly.graph_objects.pie.Marker instance or dict with
             compatible properties
         meta
             Assigns extra meta information associated with this
@@ -43504,7 +43529,7 @@ class Pie(_BaseTraceType):
             Determines whether or not the sectors are reordered
             from largest to smallest.
         stream
-            plotly.graph_objs.pie.Stream instance or dict with
+            plotly.graph_objects.pie.Stream instance or dict with
             compatible properties
         text
             Sets text elements associated with each sector. If
@@ -43524,7 +43549,7 @@ class Pie(_BaseTraceType):
         textsrc
             Sets the source reference on plot.ly for  text .
         title
-            plotly.graph_objs.pie.Title instance or dict with
+            plotly.graph_objects.pie.Title instance or dict with
             compatible properties
         titlefont
             Deprecated: Please use pie.title.font instead. Sets the
@@ -43651,7 +43676,7 @@ class Pie(_BaseTraceType):
         dlabel
             Sets the label step. See `label0` for more info.
         domain
-            plotly.graph_objs.pie.Domain instance or dict with
+            plotly.graph_objects.pie.Domain instance or dict with
             compatible properties
         hole
             Sets the fraction of the radius to cut out of the pie.
@@ -43664,8 +43689,8 @@ class Pie(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.pie.Hoverlabel instance or dict with
-            compatible properties
+            plotly.graph_objects.pie.Hoverlabel instance or dict
+            with compatible properties
         hovertemplate
             Template string used for rendering the information that
             appear on hover box. Note that this will override
@@ -43723,7 +43748,7 @@ class Pie(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         marker
-            plotly.graph_objs.pie.Marker instance or dict with
+            plotly.graph_objects.pie.Marker instance or dict with
             compatible properties
         meta
             Assigns extra meta information associated with this
@@ -43770,7 +43795,7 @@ class Pie(_BaseTraceType):
             Determines whether or not the sectors are reordered
             from largest to smallest.
         stream
-            plotly.graph_objs.pie.Stream instance or dict with
+            plotly.graph_objects.pie.Stream instance or dict with
             compatible properties
         text
             Sets text elements associated with each sector. If
@@ -43790,7 +43815,7 @@ class Pie(_BaseTraceType):
         textsrc
             Sets the source reference on plot.ly for  text .
         title
-            plotly.graph_objs.pie.Title instance or dict with
+            plotly.graph_objects.pie.Title instance or dict with
             compatible properties
         titlefont
             Deprecated: Please use pie.title.font instead. Sets the
@@ -44397,7 +44422,7 @@ class Parcoords(_BaseTraceType):
                     color scales can be linked to the same color
                     axis.
                 colorbar
-                    plotly.graph_objs.parcoords.line.ColorBar
+                    plotly.graph_objects.parcoords.line.ColorBar
                     instance or dict with compatible properties
                 colorscale
                     Sets the colorscale. Has an effect only if in
@@ -44743,7 +44768,7 @@ class Parcoords(_BaseTraceType):
             the default property values to use for elements of
             parcoords.dimensions
         domain
-            plotly.graph_objs.parcoords.Domain instance or dict
+            plotly.graph_objects.parcoords.Domain instance or dict
             with compatible properties
         ids
             Assigns id labels to each datum. These ids for object
@@ -44754,8 +44779,8 @@ class Parcoords(_BaseTraceType):
         labelfont
             Sets the font for the `dimension` labels.
         line
-            plotly.graph_objs.parcoords.Line instance or dict with
-            compatible properties
+            plotly.graph_objects.parcoords.Line instance or dict
+            with compatible properties
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -44777,7 +44802,7 @@ class Parcoords(_BaseTraceType):
         rangefont
             Sets the font for the `dimension` range values.
         stream
-            plotly.graph_objs.parcoords.Stream instance or dict
+            plotly.graph_objects.parcoords.Stream instance or dict
             with compatible properties
         tickfont
             Sets the font for the `dimension` tick values.
@@ -44861,7 +44886,7 @@ class Parcoords(_BaseTraceType):
             the default property values to use for elements of
             parcoords.dimensions
         domain
-            plotly.graph_objs.parcoords.Domain instance or dict
+            plotly.graph_objects.parcoords.Domain instance or dict
             with compatible properties
         ids
             Assigns id labels to each datum. These ids for object
@@ -44872,8 +44897,8 @@ class Parcoords(_BaseTraceType):
         labelfont
             Sets the font for the `dimension` labels.
         line
-            plotly.graph_objs.parcoords.Line instance or dict with
-            compatible properties
+            plotly.graph_objects.parcoords.Line instance or dict
+            with compatible properties
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -44895,7 +44920,7 @@ class Parcoords(_BaseTraceType):
         rangefont
             Sets the font for the `dimension` range values.
         stream
-            plotly.graph_objs.parcoords.Stream instance or dict
+            plotly.graph_objects.parcoords.Stream instance or dict
             with compatible properties
         tickfont
             Sets the font for the `dimension` tick values.
@@ -45471,7 +45496,7 @@ class Parcats(_BaseTraceType):
                     color scales can be linked to the same color
                     axis.
                 colorbar
-                    plotly.graph_objs.parcats.line.ColorBar
+                    plotly.graph_objects.parcats.line.ColorBar
                     instance or dict with compatible properties
                 colorscale
                     Sets the colorscale. Has an effect only if in
@@ -45830,8 +45855,8 @@ class Parcats(_BaseTraceType):
             the default property values to use for elements of
             parcats.dimensions
         domain
-            plotly.graph_objs.parcats.Domain instance or dict with
-            compatible properties
+            plotly.graph_objects.parcats.Domain instance or dict
+            with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -45867,7 +45892,7 @@ class Parcats(_BaseTraceType):
         labelfont
             Sets the font for the `dimension` labels.
         line
-            plotly.graph_objs.parcats.Line instance or dict with
+            plotly.graph_objects.parcats.Line instance or dict with
             compatible properties
         meta
             Assigns extra meta information associated with this
@@ -45893,8 +45918,8 @@ class Parcats(_BaseTraceType):
             If `backward`, sort paths based on dimensions
             categories from right to left.
         stream
-            plotly.graph_objs.parcats.Stream instance or dict with
-            compatible properties
+            plotly.graph_objects.parcats.Stream instance or dict
+            with compatible properties
         tickfont
             Sets the font for the `category` labels.
         uid
@@ -45988,8 +46013,8 @@ class Parcats(_BaseTraceType):
             the default property values to use for elements of
             parcats.dimensions
         domain
-            plotly.graph_objs.parcats.Domain instance or dict with
-            compatible properties
+            plotly.graph_objects.parcats.Domain instance or dict
+            with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -46025,7 +46050,7 @@ class Parcats(_BaseTraceType):
         labelfont
             Sets the font for the `dimension` labels.
         line
-            plotly.graph_objs.parcats.Line instance or dict with
+            plotly.graph_objects.parcats.Line instance or dict with
             compatible properties
         meta
             Assigns extra meta information associated with this
@@ -46051,8 +46076,8 @@ class Parcats(_BaseTraceType):
             If `backward`, sort paths based on dimensions
             categories from right to left.
         stream
-            plotly.graph_objs.parcats.Stream instance or dict with
-            compatible properties
+            plotly.graph_objects.parcats.Stream instance or dict
+            with compatible properties
         tickfont
             Sets the font for the `category` labels.
         uid
@@ -46306,8 +46331,8 @@ class Ohlc(_BaseTraceType):
             Supported dict properties:
                 
                 line
-                    plotly.graph_objs.ohlc.decreasing.Line instance
-                    or dict with compatible properties
+                    plotly.graph_objects.ohlc.decreasing.Line
+                    instance or dict with compatible properties
 
         Returns
         -------
@@ -46565,8 +46590,8 @@ class Ohlc(_BaseTraceType):
             Supported dict properties:
                 
                 line
-                    plotly.graph_objs.ohlc.increasing.Line instance
-                    or dict with compatible properties
+                    plotly.graph_objects.ohlc.increasing.Line
+                    instance or dict with compatible properties
 
         Returns
         -------
@@ -47174,8 +47199,8 @@ class Ohlc(_BaseTraceType):
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
         decreasing
-            plotly.graph_objs.ohlc.Decreasing instance or dict with
-            compatible properties
+            plotly.graph_objects.ohlc.Decreasing instance or dict
+            with compatible properties
         high
             Sets the high values.
         highsrc
@@ -47188,8 +47213,8 @@ class Ohlc(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.ohlc.Hoverlabel instance or dict with
-            compatible properties
+            plotly.graph_objects.ohlc.Hoverlabel instance or dict
+            with compatible properties
         hovertext
             Same as `text`.
         hovertextsrc
@@ -47201,14 +47226,14 @@ class Ohlc(_BaseTraceType):
         idssrc
             Sets the source reference on plot.ly for  ids .
         increasing
-            plotly.graph_objs.ohlc.Increasing instance or dict with
-            compatible properties
+            plotly.graph_objects.ohlc.Increasing instance or dict
+            with compatible properties
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
         line
-            plotly.graph_objs.ohlc.Line instance or dict with
+            plotly.graph_objects.ohlc.Line instance or dict with
             compatible properties
         low
             Sets the low values.
@@ -47249,7 +47274,7 @@ class Ohlc(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.ohlc.Stream instance or dict with
+            plotly.graph_objects.ohlc.Stream instance or dict with
             compatible properties
         text
             Sets hover text elements associated with each sample
@@ -47380,8 +47405,8 @@ class Ohlc(_BaseTraceType):
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
         decreasing
-            plotly.graph_objs.ohlc.Decreasing instance or dict with
-            compatible properties
+            plotly.graph_objects.ohlc.Decreasing instance or dict
+            with compatible properties
         high
             Sets the high values.
         highsrc
@@ -47394,8 +47419,8 @@ class Ohlc(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.ohlc.Hoverlabel instance or dict with
-            compatible properties
+            plotly.graph_objects.ohlc.Hoverlabel instance or dict
+            with compatible properties
         hovertext
             Same as `text`.
         hovertextsrc
@@ -47407,14 +47432,14 @@ class Ohlc(_BaseTraceType):
         idssrc
             Sets the source reference on plot.ly for  ids .
         increasing
-            plotly.graph_objs.ohlc.Increasing instance or dict with
-            compatible properties
+            plotly.graph_objects.ohlc.Increasing instance or dict
+            with compatible properties
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
         line
-            plotly.graph_objs.ohlc.Line instance or dict with
+            plotly.graph_objects.ohlc.Line instance or dict with
             compatible properties
         low
             Sets the low values.
@@ -47455,7 +47480,7 @@ class Ohlc(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.ohlc.Stream instance or dict with
+            plotly.graph_objects.ohlc.Stream instance or dict with
             compatible properties
         text
             Sets hover text elements associated with each sample
@@ -48066,8 +48091,9 @@ class Mesh3d(_BaseTraceType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.mesh3d.colorbar.Tickformatsto
-                    p instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.mesh3d.colorbar
+                    .Tickformatstop instances or dicts with
+                    compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
                     a.mesh3d.colorbar.tickformatstopdefaults), sets
@@ -48113,7 +48139,7 @@ class Mesh3d(_BaseTraceType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.mesh3d.colorbar.Title
+                    plotly.graph_objects.mesh3d.colorbar.Title
                     instance or dict with compatible properties
                 titlefont
                     Deprecated: Please use
@@ -49493,8 +49519,8 @@ class Mesh3d(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.mesh3d.ColorBar instance or dict with
-            compatible properties
+            plotly.graph_objects.mesh3d.ColorBar instance or dict
+            with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
@@ -49508,8 +49534,8 @@ class Mesh3d(_BaseTraceType):
             d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
             ot,Blackbody,Earth,Electric,Viridis,Cividis.
         contour
-            plotly.graph_objs.mesh3d.Contour instance or dict with
-            compatible properties
+            plotly.graph_objects.mesh3d.Contour instance or dict
+            with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -49540,7 +49566,7 @@ class Mesh3d(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.mesh3d.Hoverlabel instance or dict
+            plotly.graph_objects.mesh3d.Hoverlabel instance or dict
             with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -49612,11 +49638,11 @@ class Mesh3d(_BaseTraceType):
         ksrc
             Sets the source reference on plot.ly for  k .
         lighting
-            plotly.graph_objs.mesh3d.Lighting instance or dict with
-            compatible properties
-        lightposition
-            plotly.graph_objs.mesh3d.Lightposition instance or dict
+            plotly.graph_objects.mesh3d.Lighting instance or dict
             with compatible properties
+        lightposition
+            plotly.graph_objects.mesh3d.Lightposition instance or
+            dict with compatible properties
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -49657,8 +49683,8 @@ class Mesh3d(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            plotly.graph_objs.mesh3d.Stream instance or dict with
-            compatible properties
+            plotly.graph_objects.mesh3d.Stream instance or dict
+            with compatible properties
         text
             Sets the text elements associated with the vertices. If
             trace `hoverinfo` contains a "text" flag and
@@ -49859,8 +49885,8 @@ class Mesh3d(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.mesh3d.ColorBar instance or dict with
-            compatible properties
+            plotly.graph_objects.mesh3d.ColorBar instance or dict
+            with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
@@ -49874,8 +49900,8 @@ class Mesh3d(_BaseTraceType):
             d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
             ot,Blackbody,Earth,Electric,Viridis,Cividis.
         contour
-            plotly.graph_objs.mesh3d.Contour instance or dict with
-            compatible properties
+            plotly.graph_objects.mesh3d.Contour instance or dict
+            with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -49906,7 +49932,7 @@ class Mesh3d(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.mesh3d.Hoverlabel instance or dict
+            plotly.graph_objects.mesh3d.Hoverlabel instance or dict
             with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -49978,11 +50004,11 @@ class Mesh3d(_BaseTraceType):
         ksrc
             Sets the source reference on plot.ly for  k .
         lighting
-            plotly.graph_objs.mesh3d.Lighting instance or dict with
-            compatible properties
-        lightposition
-            plotly.graph_objs.mesh3d.Lightposition instance or dict
+            plotly.graph_objects.mesh3d.Lighting instance or dict
             with compatible properties
+        lightposition
+            plotly.graph_objects.mesh3d.Lightposition instance or
+            dict with compatible properties
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -50023,8 +50049,8 @@ class Mesh3d(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            plotly.graph_objs.mesh3d.Stream instance or dict with
-            compatible properties
+            plotly.graph_objects.mesh3d.Stream instance or dict
+            with compatible properties
         text
             Sets the text elements associated with the vertices. If
             trace `hoverinfo` contains a "text" flag and
@@ -50374,14 +50400,14 @@ class Isosurface(_BaseTraceType):
             Supported dict properties:
                 
                 x
-                    plotly.graph_objs.isosurface.caps.X instance or
-                    dict with compatible properties
+                    plotly.graph_objects.isosurface.caps.X instance
+                    or dict with compatible properties
                 y
-                    plotly.graph_objs.isosurface.caps.Y instance or
-                    dict with compatible properties
+                    plotly.graph_objects.isosurface.caps.Y instance
+                    or dict with compatible properties
                 z
-                    plotly.graph_objs.isosurface.caps.Z instance or
-                    dict with compatible properties
+                    plotly.graph_objects.isosurface.caps.Z instance
+                    or dict with compatible properties
 
         Returns
         -------
@@ -50645,9 +50671,9 @@ class Isosurface(_BaseTraceType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.isosurface.colorbar.Tickforma
-                    tstop instance or dict with compatible
-                    properties
+                    A tuple of plotly.graph_objects.isosurface.colo
+                    rbar.Tickformatstop instances or dicts with
+                    compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
                     a.isosurface.colorbar.tickformatstopdefaults),
@@ -50693,7 +50719,7 @@ class Isosurface(_BaseTraceType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.isosurface.colorbar.Title
+                    plotly.graph_objects.isosurface.colorbar.Title
                     instance or dict with compatible properties
                 titlefont
                     Deprecated: Please use
@@ -51416,14 +51442,14 @@ class Isosurface(_BaseTraceType):
             Supported dict properties:
                 
                 x
-                    plotly.graph_objs.isosurface.slices.X instance
-                    or dict with compatible properties
+                    plotly.graph_objects.isosurface.slices.X
+                    instance or dict with compatible properties
                 y
-                    plotly.graph_objs.isosurface.slices.Y instance
-                    or dict with compatible properties
+                    plotly.graph_objects.isosurface.slices.Y
+                    instance or dict with compatible properties
                 z
-                    plotly.graph_objs.isosurface.slices.Z instance
-                    or dict with compatible properties
+                    plotly.graph_objects.isosurface.slices.Z
+                    instance or dict with compatible properties
 
         Returns
         -------
@@ -51862,8 +51888,8 @@ class Isosurface(_BaseTraceType):
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         caps
-            plotly.graph_objs.isosurface.Caps instance or dict with
-            compatible properties
+            plotly.graph_objects.isosurface.Caps instance or dict
+            with compatible properties
         cauto
             Determines whether or not the color domain is computed
             with respect to the input data (here `value`) or the
@@ -51890,8 +51916,8 @@ class Isosurface(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.isosurface.ColorBar instance or dict
-            with compatible properties
+            plotly.graph_objects.isosurface.ColorBar instance or
+            dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
@@ -51905,8 +51931,8 @@ class Isosurface(_BaseTraceType):
             d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
             ot,Blackbody,Earth,Electric,Viridis,Cividis.
         contour
-            plotly.graph_objs.isosurface.Contour instance or dict
-            with compatible properties
+            plotly.graph_objects.isosurface.Contour instance or
+            dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -51926,7 +51952,7 @@ class Isosurface(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.isosurface.Hoverlabel instance or
+            plotly.graph_objects.isosurface.Hoverlabel instance or
             dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -51964,11 +51990,11 @@ class Isosurface(_BaseTraceType):
         isomin
             Sets the minimum boundary for iso-surface plot.
         lighting
-            plotly.graph_objs.isosurface.Lighting instance or dict
-            with compatible properties
-        lightposition
-            plotly.graph_objs.isosurface.Lightposition instance or
+            plotly.graph_objects.isosurface.Lighting instance or
             dict with compatible properties
+        lightposition
+            plotly.graph_objects.isosurface.Lightposition instance
+            or dict with compatible properties
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -52009,17 +52035,17 @@ class Isosurface(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         slices
-            plotly.graph_objs.isosurface.Slices instance or dict
+            plotly.graph_objects.isosurface.Slices instance or dict
             with compatible properties
         spaceframe
-            plotly.graph_objs.isosurface.Spaceframe instance or
+            plotly.graph_objects.isosurface.Spaceframe instance or
             dict with compatible properties
         stream
-            plotly.graph_objs.isosurface.Stream instance or dict
+            plotly.graph_objects.isosurface.Stream instance or dict
             with compatible properties
         surface
-            plotly.graph_objs.isosurface.Surface instance or dict
-            with compatible properties
+            plotly.graph_objects.isosurface.Surface instance or
+            dict with compatible properties
         text
             Sets the text elements associated with the vertices. If
             trace `hoverinfo` contains a "text" flag and
@@ -52150,8 +52176,8 @@ class Isosurface(_BaseTraceType):
             chosen according to whether numbers in the `color`
             array are all positive, all negative or mixed.
         caps
-            plotly.graph_objs.isosurface.Caps instance or dict with
-            compatible properties
+            plotly.graph_objects.isosurface.Caps instance or dict
+            with compatible properties
         cauto
             Determines whether or not the color domain is computed
             with respect to the input data (here `value`) or the
@@ -52178,8 +52204,8 @@ class Isosurface(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.isosurface.ColorBar instance or dict
-            with compatible properties
+            plotly.graph_objects.isosurface.ColorBar instance or
+            dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
@@ -52193,8 +52219,8 @@ class Isosurface(_BaseTraceType):
             d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
             ot,Blackbody,Earth,Electric,Viridis,Cividis.
         contour
-            plotly.graph_objs.isosurface.Contour instance or dict
-            with compatible properties
+            plotly.graph_objects.isosurface.Contour instance or
+            dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -52214,7 +52240,7 @@ class Isosurface(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.isosurface.Hoverlabel instance or
+            plotly.graph_objects.isosurface.Hoverlabel instance or
             dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -52252,11 +52278,11 @@ class Isosurface(_BaseTraceType):
         isomin
             Sets the minimum boundary for iso-surface plot.
         lighting
-            plotly.graph_objs.isosurface.Lighting instance or dict
-            with compatible properties
-        lightposition
-            plotly.graph_objs.isosurface.Lightposition instance or
+            plotly.graph_objects.isosurface.Lighting instance or
             dict with compatible properties
+        lightposition
+            plotly.graph_objects.isosurface.Lightposition instance
+            or dict with compatible properties
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -52297,17 +52323,17 @@ class Isosurface(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         slices
-            plotly.graph_objs.isosurface.Slices instance or dict
+            plotly.graph_objects.isosurface.Slices instance or dict
             with compatible properties
         spaceframe
-            plotly.graph_objs.isosurface.Spaceframe instance or
+            plotly.graph_objects.isosurface.Spaceframe instance or
             dict with compatible properties
         stream
-            plotly.graph_objs.isosurface.Stream instance or dict
+            plotly.graph_objects.isosurface.Stream instance or dict
             with compatible properties
         surface
-            plotly.graph_objs.isosurface.Surface instance or dict
-            with compatible properties
+            plotly.graph_objects.isosurface.Surface instance or
+            dict with compatible properties
         text
             Sets the text elements associated with the vertices. If
             trace `hoverinfo` contains a "text" flag and
@@ -52854,9 +52880,9 @@ class Histogram2dContour(_BaseTraceType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.histogram2dcontour.colorbar.T
-                    ickformatstop instance or dict with compatible
-                    properties
+                    A tuple of plotly.graph_objects.histogram2dcont
+                    our.colorbar.Tickformatstop instances or dicts
+                    with compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
                     a.histogram2dcontour.colorbar.tickformatstopdef
@@ -52903,8 +52929,8 @@ class Histogram2dContour(_BaseTraceType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.histogram2dcontour.colorbar.T
-                    itle instance or dict with compatible
+                    plotly.graph_objects.histogram2dcontour.colorba
+                    r.Title instance or dict with compatible
                     properties
                 titlefont
                     Deprecated: Please use
@@ -54355,8 +54381,8 @@ class Histogram2dContour(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.histogram2dcontour.ColorBar instance
-            or dict with compatible properties
+            plotly.graph_objects.histogram2dcontour.ColorBar
+            instance or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
@@ -54370,8 +54396,8 @@ class Histogram2dContour(_BaseTraceType):
             d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
             ot,Blackbody,Earth,Electric,Viridis,Cividis.
         contours
-            plotly.graph_objs.histogram2dcontour.Contours instance
-            or dict with compatible properties
+            plotly.graph_objects.histogram2dcontour.Contours
+            instance or dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -54412,7 +54438,7 @@ class Histogram2dContour(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.histogram2dcontour.Hoverlabel
+            plotly.graph_objects.histogram2dcontour.Hoverlabel
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -54447,11 +54473,11 @@ class Histogram2dContour(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         line
-            plotly.graph_objs.histogram2dcontour.Line instance or
-            dict with compatible properties
+            plotly.graph_objects.histogram2dcontour.Line instance
+            or dict with compatible properties
         marker
-            plotly.graph_objs.histogram2dcontour.Marker instance or
-            dict with compatible properties
+            plotly.graph_objects.histogram2dcontour.Marker instance
+            or dict with compatible properties
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -54501,8 +54527,8 @@ class Histogram2dContour(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            plotly.graph_objs.histogram2dcontour.Stream instance or
-            dict with compatible properties
+            plotly.graph_objects.histogram2dcontour.Stream instance
+            or dict with compatible properties
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -54545,8 +54571,8 @@ class Histogram2dContour(_BaseTraceType):
             Note that the same `xbingroup` value can be used to set
             (1D) histogram `bingroup`
         xbins
-            plotly.graph_objs.histogram2dcontour.XBins instance or
-            dict with compatible properties
+            plotly.graph_objects.histogram2dcontour.XBins instance
+            or dict with compatible properties
         xcalendar
             Sets the calendar system to use with `x` date data.
         xsrc
@@ -54566,8 +54592,8 @@ class Histogram2dContour(_BaseTraceType):
             Note that the same `ybingroup` value can be used to set
             (1D) histogram `bingroup`
         ybins
-            plotly.graph_objs.histogram2dcontour.YBins instance or
-            dict with compatible properties
+            plotly.graph_objects.histogram2dcontour.YBins instance
+            or dict with compatible properties
         ycalendar
             Sets the calendar system to use with `y` date data.
         ysrc
@@ -54714,8 +54740,8 @@ class Histogram2dContour(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.histogram2dcontour.ColorBar instance
-            or dict with compatible properties
+            plotly.graph_objects.histogram2dcontour.ColorBar
+            instance or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
@@ -54729,8 +54755,8 @@ class Histogram2dContour(_BaseTraceType):
             d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
             ot,Blackbody,Earth,Electric,Viridis,Cividis.
         contours
-            plotly.graph_objs.histogram2dcontour.Contours instance
-            or dict with compatible properties
+            plotly.graph_objects.histogram2dcontour.Contours
+            instance or dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -54771,7 +54797,7 @@ class Histogram2dContour(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.histogram2dcontour.Hoverlabel
+            plotly.graph_objects.histogram2dcontour.Hoverlabel
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -54806,11 +54832,11 @@ class Histogram2dContour(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         line
-            plotly.graph_objs.histogram2dcontour.Line instance or
-            dict with compatible properties
+            plotly.graph_objects.histogram2dcontour.Line instance
+            or dict with compatible properties
         marker
-            plotly.graph_objs.histogram2dcontour.Marker instance or
-            dict with compatible properties
+            plotly.graph_objects.histogram2dcontour.Marker instance
+            or dict with compatible properties
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -54860,8 +54886,8 @@ class Histogram2dContour(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            plotly.graph_objs.histogram2dcontour.Stream instance or
-            dict with compatible properties
+            plotly.graph_objects.histogram2dcontour.Stream instance
+            or dict with compatible properties
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -54904,8 +54930,8 @@ class Histogram2dContour(_BaseTraceType):
             Note that the same `xbingroup` value can be used to set
             (1D) histogram `bingroup`
         xbins
-            plotly.graph_objs.histogram2dcontour.XBins instance or
-            dict with compatible properties
+            plotly.graph_objects.histogram2dcontour.XBins instance
+            or dict with compatible properties
         xcalendar
             Sets the calendar system to use with `x` date data.
         xsrc
@@ -54925,8 +54951,8 @@ class Histogram2dContour(_BaseTraceType):
             Note that the same `ybingroup` value can be used to set
             (1D) histogram `bingroup`
         ybins
-            plotly.graph_objs.histogram2dcontour.YBins instance or
-            dict with compatible properties
+            plotly.graph_objects.histogram2dcontour.YBins instance
+            or dict with compatible properties
         ycalendar
             Sets the calendar system to use with `y` date data.
         ysrc
@@ -55459,9 +55485,9 @@ class Histogram2d(_BaseTraceType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.histogram2d.colorbar.Tickform
-                    atstop instance or dict with compatible
-                    properties
+                    A tuple of plotly.graph_objects.histogram2d.col
+                    orbar.Tickformatstop instances or dicts with
+                    compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
                     a.histogram2d.colorbar.tickformatstopdefaults),
@@ -55508,7 +55534,7 @@ class Histogram2d(_BaseTraceType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.histogram2d.colorbar.Title
+                    plotly.graph_objects.histogram2d.colorbar.Title
                     instance or dict with compatible properties
                 titlefont
                     Deprecated: Please use
@@ -56823,8 +56849,8 @@ class Histogram2d(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.histogram2d.ColorBar instance or dict
-            with compatible properties
+            plotly.graph_objects.histogram2d.ColorBar instance or
+            dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
@@ -56877,7 +56903,7 @@ class Histogram2d(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.histogram2d.Hoverlabel instance or
+            plotly.graph_objects.histogram2d.Hoverlabel instance or
             dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -56908,8 +56934,8 @@ class Histogram2d(_BaseTraceType):
         idssrc
             Sets the source reference on plot.ly for  ids .
         marker
-            plotly.graph_objs.histogram2d.Marker instance or dict
-            with compatible properties
+            plotly.graph_objects.histogram2d.Marker instance or
+            dict with compatible properties
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -56950,8 +56976,8 @@ class Histogram2d(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            plotly.graph_objs.histogram2d.Stream instance or dict
-            with compatible properties
+            plotly.graph_objects.histogram2d.Stream instance or
+            dict with compatible properties
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -56994,7 +57020,7 @@ class Histogram2d(_BaseTraceType):
             Note that the same `xbingroup` value can be used to set
             (1D) histogram `bingroup`
         xbins
-            plotly.graph_objs.histogram2d.XBins instance or dict
+            plotly.graph_objects.histogram2d.XBins instance or dict
             with compatible properties
         xcalendar
             Sets the calendar system to use with `x` date data.
@@ -57017,7 +57043,7 @@ class Histogram2d(_BaseTraceType):
             Note that the same `ybingroup` value can be used to set
             (1D) histogram `bingroup`
         ybins
-            plotly.graph_objs.histogram2d.YBins instance or dict
+            plotly.graph_objects.histogram2d.YBins instance or dict
             with compatible properties
         ycalendar
             Sets the calendar system to use with `y` date data.
@@ -57161,8 +57187,8 @@ class Histogram2d(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.histogram2d.ColorBar instance or dict
-            with compatible properties
+            plotly.graph_objects.histogram2d.ColorBar instance or
+            dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
@@ -57215,7 +57241,7 @@ class Histogram2d(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.histogram2d.Hoverlabel instance or
+            plotly.graph_objects.histogram2d.Hoverlabel instance or
             dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -57246,8 +57272,8 @@ class Histogram2d(_BaseTraceType):
         idssrc
             Sets the source reference on plot.ly for  ids .
         marker
-            plotly.graph_objs.histogram2d.Marker instance or dict
-            with compatible properties
+            plotly.graph_objects.histogram2d.Marker instance or
+            dict with compatible properties
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -57288,8 +57314,8 @@ class Histogram2d(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            plotly.graph_objs.histogram2d.Stream instance or dict
-            with compatible properties
+            plotly.graph_objects.histogram2d.Stream instance or
+            dict with compatible properties
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -57332,7 +57358,7 @@ class Histogram2d(_BaseTraceType):
             Note that the same `xbingroup` value can be used to set
             (1D) histogram `bingroup`
         xbins
-            plotly.graph_objs.histogram2d.XBins instance or dict
+            plotly.graph_objects.histogram2d.XBins instance or dict
             with compatible properties
         xcalendar
             Sets the calendar system to use with `x` date data.
@@ -57355,7 +57381,7 @@ class Histogram2d(_BaseTraceType):
             Note that the same `ybingroup` value can be used to set
             (1D) histogram `bingroup`
         ybins
-            plotly.graph_objs.histogram2d.YBins instance or dict
+            plotly.graph_objects.histogram2d.YBins instance or dict
             with compatible properties
         ycalendar
             Sets the calendar system to use with `y` date data.
@@ -58359,7 +58385,7 @@ class Histogram(_BaseTraceType):
                     color scales can be linked to the same color
                     axis.
                 colorbar
-                    plotly.graph_objs.histogram.marker.ColorBar
+                    plotly.graph_objects.histogram.marker.ColorBar
                     instance or dict with compatible properties
                 colorscale
                     Sets the colorscale. Has an effect only if in
@@ -58381,7 +58407,7 @@ class Histogram(_BaseTraceType):
                     Sets the source reference on plot.ly for  color
                     .
                 line
-                    plotly.graph_objs.histogram.marker.Line
+                    plotly.graph_objects.histogram.marker.Line
                     instance or dict with compatible properties
                 opacity
                     Sets the opacity of the bars.
@@ -58607,11 +58633,11 @@ class Histogram(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.histogram.selected.Marker
+                    plotly.graph_objects.histogram.selected.Marker
                     instance or dict with compatible properties
                 textfont
-                    plotly.graph_objs.histogram.selected.Textfont
-                    instance or dict with compatible properties
+                    plotly.graph_objects.histogram.selected.Textfon
+                    t instance or dict with compatible properties
 
         Returns
         -------
@@ -58815,11 +58841,11 @@ class Histogram(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.histogram.unselected.Marker
-                    instance or dict with compatible properties
+                    plotly.graph_objects.histogram.unselected.Marke
+                    r instance or dict with compatible properties
                 textfont
-                    plotly.graph_objs.histogram.unselected.Textfont
-                    instance or dict with compatible properties
+                    plotly.graph_objects.histogram.unselected.Textf
+                    ont instance or dict with compatible properties
 
         Returns
         -------
@@ -59212,8 +59238,8 @@ class Histogram(_BaseTraceType):
             can have compatible bin settings. Note that histogram
             and histogram2d* trace can share the same `bingroup`
         cumulative
-            plotly.graph_objs.histogram.Cumulative instance or dict
-            with compatible properties
+            plotly.graph_objects.histogram.Cumulative instance or
+            dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -59222,10 +59248,10 @@ class Histogram(_BaseTraceType):
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
         error_x
-            plotly.graph_objs.histogram.ErrorX instance or dict
+            plotly.graph_objects.histogram.ErrorX instance or dict
             with compatible properties
         error_y
-            plotly.graph_objs.histogram.ErrorY instance or dict
+            plotly.graph_objects.histogram.ErrorY instance or dict
             with compatible properties
         histfunc
             Specifies the binning function used for this histogram
@@ -59260,8 +59286,8 @@ class Histogram(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.histogram.Hoverlabel instance or dict
-            with compatible properties
+            plotly.graph_objects.histogram.Hoverlabel instance or
+            dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
             appear on hover box. Note that this will override
@@ -59299,7 +59325,7 @@ class Histogram(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         marker
-            plotly.graph_objs.histogram.Marker instance or dict
+            plotly.graph_objects.histogram.Marker instance or dict
             with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -59342,8 +59368,8 @@ class Histogram(_BaseTraceType):
             value of the each bar spans along the vertical
             (horizontal).
         selected
-            plotly.graph_objs.histogram.Selected instance or dict
-            with compatible properties
+            plotly.graph_objects.histogram.Selected instance or
+            dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -59355,7 +59381,7 @@ class Histogram(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.histogram.Stream instance or dict
+            plotly.graph_objects.histogram.Stream instance or dict
             with compatible properties
         text
             Sets hover text elements associated with each bar. If a
@@ -59387,8 +59413,8 @@ class Histogram(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            plotly.graph_objs.histogram.Unselected instance or dict
-            with compatible properties
+            plotly.graph_objects.histogram.Unselected instance or
+            dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -59402,8 +59428,8 @@ class Histogram(_BaseTraceType):
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xbins
-            plotly.graph_objs.histogram.XBins instance or dict with
-            compatible properties
+            plotly.graph_objects.histogram.XBins instance or dict
+            with compatible properties
         xcalendar
             Sets the calendar system to use with `x` date data.
         xsrc
@@ -59416,8 +59442,8 @@ class Histogram(_BaseTraceType):
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ybins
-            plotly.graph_objs.histogram.YBins instance or dict with
-            compatible properties
+            plotly.graph_objects.histogram.YBins instance or dict
+            with compatible properties
         ycalendar
             Sets the calendar system to use with `y` date data.
         ysrc
@@ -59520,8 +59546,8 @@ class Histogram(_BaseTraceType):
             can have compatible bin settings. Note that histogram
             and histogram2d* trace can share the same `bingroup`
         cumulative
-            plotly.graph_objs.histogram.Cumulative instance or dict
-            with compatible properties
+            plotly.graph_objects.histogram.Cumulative instance or
+            dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -59530,10 +59556,10 @@ class Histogram(_BaseTraceType):
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
         error_x
-            plotly.graph_objs.histogram.ErrorX instance or dict
+            plotly.graph_objects.histogram.ErrorX instance or dict
             with compatible properties
         error_y
-            plotly.graph_objs.histogram.ErrorY instance or dict
+            plotly.graph_objects.histogram.ErrorY instance or dict
             with compatible properties
         histfunc
             Specifies the binning function used for this histogram
@@ -59568,8 +59594,8 @@ class Histogram(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.histogram.Hoverlabel instance or dict
-            with compatible properties
+            plotly.graph_objects.histogram.Hoverlabel instance or
+            dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
             appear on hover box. Note that this will override
@@ -59607,7 +59633,7 @@ class Histogram(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         marker
-            plotly.graph_objs.histogram.Marker instance or dict
+            plotly.graph_objects.histogram.Marker instance or dict
             with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -59650,8 +59676,8 @@ class Histogram(_BaseTraceType):
             value of the each bar spans along the vertical
             (horizontal).
         selected
-            plotly.graph_objs.histogram.Selected instance or dict
-            with compatible properties
+            plotly.graph_objects.histogram.Selected instance or
+            dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -59663,7 +59689,7 @@ class Histogram(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.histogram.Stream instance or dict
+            plotly.graph_objects.histogram.Stream instance or dict
             with compatible properties
         text
             Sets hover text elements associated with each bar. If a
@@ -59695,8 +59721,8 @@ class Histogram(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            plotly.graph_objs.histogram.Unselected instance or dict
-            with compatible properties
+            plotly.graph_objects.histogram.Unselected instance or
+            dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -59710,8 +59736,8 @@ class Histogram(_BaseTraceType):
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
         xbins
-            plotly.graph_objs.histogram.XBins instance or dict with
-            compatible properties
+            plotly.graph_objects.histogram.XBins instance or dict
+            with compatible properties
         xcalendar
             Sets the calendar system to use with `x` date data.
         xsrc
@@ -59724,8 +59750,8 @@ class Histogram(_BaseTraceType):
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
         ybins
-            plotly.graph_objs.histogram.YBins instance or dict with
-            compatible properties
+            plotly.graph_objects.histogram.YBins instance or dict
+            with compatible properties
         ycalendar
             Sets the calendar system to use with `y` date data.
         ysrc
@@ -60134,9 +60160,9 @@ class Heatmapgl(_BaseTraceType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.heatmapgl.colorbar.Tickformat
-                    stop instance or dict with compatible
-                    properties
+                    A tuple of plotly.graph_objects.heatmapgl.color
+                    bar.Tickformatstop instances or dicts with
+                    compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
                     a.heatmapgl.colorbar.tickformatstopdefaults),
@@ -60182,7 +60208,7 @@ class Heatmapgl(_BaseTraceType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.heatmapgl.colorbar.Title
+                    plotly.graph_objects.heatmapgl.colorbar.Title
                     instance or dict with compatible properties
                 titlefont
                     Deprecated: Please use
@@ -61179,8 +61205,8 @@ class Heatmapgl(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.heatmapgl.ColorBar instance or dict
-            with compatible properties
+            plotly.graph_objects.heatmapgl.ColorBar instance or
+            dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
@@ -61212,8 +61238,8 @@ class Heatmapgl(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.heatmapgl.Hoverlabel instance or dict
-            with compatible properties
+            plotly.graph_objects.heatmapgl.Hoverlabel instance or
+            dict with compatible properties
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -61248,7 +61274,7 @@ class Heatmapgl(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            plotly.graph_objs.heatmapgl.Stream instance or dict
+            plotly.graph_objects.heatmapgl.Stream instance or dict
             with compatible properties
         text
             Sets the text elements associated with each z value.
@@ -61417,8 +61443,8 @@ class Heatmapgl(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.heatmapgl.ColorBar instance or dict
-            with compatible properties
+            plotly.graph_objects.heatmapgl.ColorBar instance or
+            dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
@@ -61450,8 +61476,8 @@ class Heatmapgl(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.heatmapgl.Hoverlabel instance or dict
-            with compatible properties
+            plotly.graph_objects.heatmapgl.Hoverlabel instance or
+            dict with compatible properties
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -61486,7 +61512,7 @@ class Heatmapgl(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            plotly.graph_objs.heatmapgl.Stream instance or dict
+            plotly.graph_objects.heatmapgl.Stream instance or dict
             with compatible properties
         text
             Sets the text elements associated with each z value.
@@ -61959,8 +61985,9 @@ class Heatmap(_BaseTraceType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.heatmap.colorbar.Tickformatst
-                    op instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.heatmap.colorba
+                    r.Tickformatstop instances or dicts with
+                    compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
                     a.heatmap.colorbar.tickformatstopdefaults),
@@ -62006,7 +62033,7 @@ class Heatmap(_BaseTraceType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.heatmap.colorbar.Title
+                    plotly.graph_objects.heatmap.colorbar.Title
                     instance or dict with compatible properties
                 titlefont
                     Deprecated: Please use
@@ -63252,7 +63279,7 @@ class Heatmap(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.heatmap.ColorBar instance or dict
+            plotly.graph_objects.heatmap.ColorBar instance or dict
             with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -63288,8 +63315,8 @@ class Heatmap(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.heatmap.Hoverlabel instance or dict
-            with compatible properties
+            plotly.graph_objects.heatmap.Hoverlabel instance or
+            dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
             appear on hover box. Note that this will override
@@ -63349,8 +63376,8 @@ class Heatmap(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            plotly.graph_objs.heatmap.Stream instance or dict with
-            compatible properties
+            plotly.graph_objects.heatmap.Stream instance or dict
+            with compatible properties
         text
             Sets the text elements associated with each z value.
         textsrc
@@ -63560,7 +63587,7 @@ class Heatmap(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.heatmap.ColorBar instance or dict
+            plotly.graph_objects.heatmap.ColorBar instance or dict
             with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -63596,8 +63623,8 @@ class Heatmap(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.heatmap.Hoverlabel instance or dict
-            with compatible properties
+            plotly.graph_objects.heatmap.Hoverlabel instance or
+            dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
             appear on hover box. Note that this will override
@@ -63657,8 +63684,8 @@ class Heatmap(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            plotly.graph_objs.heatmap.Stream instance or dict with
-            compatible properties
+            plotly.graph_objects.heatmap.Stream instance or dict
+            with compatible properties
         text
             Sets the text elements associated with each z value.
         textsrc
@@ -64546,7 +64573,7 @@ class Funnelarea(_BaseTraceType):
                     Sets the source reference on plot.ly for
                     colors .
                 line
-                    plotly.graph_objs.funnelarea.marker.Line
+                    plotly.graph_objects.funnelarea.marker.Line
                     instance or dict with compatible properties
 
         Returns
@@ -65079,7 +65106,7 @@ class Funnelarea(_BaseTraceType):
         dlabel
             Sets the label step. See `label0` for more info.
         domain
-            plotly.graph_objs.funnelarea.Domain instance or dict
+            plotly.graph_objects.funnelarea.Domain instance or dict
             with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
@@ -65089,7 +65116,7 @@ class Funnelarea(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.funnelarea.Hoverlabel instance or
+            plotly.graph_objects.funnelarea.Hoverlabel instance or
             dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -65148,7 +65175,7 @@ class Funnelarea(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         marker
-            plotly.graph_objs.funnelarea.Marker instance or dict
+            plotly.graph_objects.funnelarea.Marker instance or dict
             with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -65179,7 +65206,7 @@ class Funnelarea(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.funnelarea.Stream instance or dict
+            plotly.graph_objects.funnelarea.Stream instance or dict
             with compatible properties
         text
             Sets text elements associated with each sector. If
@@ -65199,7 +65226,7 @@ class Funnelarea(_BaseTraceType):
         textsrc
             Sets the source reference on plot.ly for  text .
         title
-            plotly.graph_objs.funnelarea.Title instance or dict
+            plotly.graph_objects.funnelarea.Title instance or dict
             with compatible properties
         uid
             Assign an id to this trace, Use this to provide object
@@ -65309,7 +65336,7 @@ class Funnelarea(_BaseTraceType):
         dlabel
             Sets the label step. See `label0` for more info.
         domain
-            plotly.graph_objs.funnelarea.Domain instance or dict
+            plotly.graph_objects.funnelarea.Domain instance or dict
             with compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
@@ -65319,7 +65346,7 @@ class Funnelarea(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.funnelarea.Hoverlabel instance or
+            plotly.graph_objects.funnelarea.Hoverlabel instance or
             dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -65378,7 +65405,7 @@ class Funnelarea(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         marker
-            plotly.graph_objs.funnelarea.Marker instance or dict
+            plotly.graph_objects.funnelarea.Marker instance or dict
             with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -65409,7 +65436,7 @@ class Funnelarea(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.funnelarea.Stream instance or dict
+            plotly.graph_objects.funnelarea.Stream instance or dict
             with compatible properties
         text
             Sets text elements associated with each sector. If
@@ -65429,7 +65456,7 @@ class Funnelarea(_BaseTraceType):
         textsrc
             Sets the source reference on plot.ly for  text .
         title
-            plotly.graph_objs.funnelarea.Title instance or dict
+            plotly.graph_objects.funnelarea.Title instance or dict
             with compatible properties
         uid
             Assign an id to this trace, Use this to provide object
@@ -65709,7 +65736,7 @@ class Funnel(_BaseTraceType):
                 fillcolor
                     Sets the fill color.
                 line
-                    plotly.graph_objs.funnel.connector.Line
+                    plotly.graph_objects.funnel.connector.Line
                     instance or dict with compatible properties
                 visible
                     Determines if connector regions and lines are
@@ -66247,7 +66274,7 @@ class Funnel(_BaseTraceType):
                     color scales can be linked to the same color
                     axis.
                 colorbar
-                    plotly.graph_objs.funnel.marker.ColorBar
+                    plotly.graph_objects.funnel.marker.ColorBar
                     instance or dict with compatible properties
                 colorscale
                     Sets the colorscale. Has an effect only if in
@@ -66269,8 +66296,8 @@ class Funnel(_BaseTraceType):
                     Sets the source reference on plot.ly for  color
                     .
                 line
-                    plotly.graph_objs.funnel.marker.Line instance
-                    or dict with compatible properties
+                    plotly.graph_objects.funnel.marker.Line
+                    instance or dict with compatible properties
                 opacity
                     Sets the opacity of the bars.
                 opacitysrc
@@ -67090,7 +67117,7 @@ class Funnel(_BaseTraceType):
             and tick labels, make sure to set `xaxis.layer` and
             `yaxis.layer` to *below traces*.
         connector
-            plotly.graph_objs.funnel.Connector instance or dict
+            plotly.graph_objects.funnel.Connector instance or dict
             with compatible properties
         constraintext
             Constrain the size of text inside or outside a bar to
@@ -67114,7 +67141,7 @@ class Funnel(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.funnel.Hoverlabel instance or dict
+            plotly.graph_objects.funnel.Hoverlabel instance or dict
             with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -67164,8 +67191,8 @@ class Funnel(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         marker
-            plotly.graph_objs.funnel.Marker instance or dict with
-            compatible properties
+            plotly.graph_objects.funnel.Marker instance or dict
+            with compatible properties
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -67216,8 +67243,8 @@ class Funnel(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.funnel.Stream instance or dict with
-            compatible properties
+            plotly.graph_objects.funnel.Stream instance or dict
+            with compatible properties
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the
@@ -67391,7 +67418,7 @@ class Funnel(_BaseTraceType):
             and tick labels, make sure to set `xaxis.layer` and
             `yaxis.layer` to *below traces*.
         connector
-            plotly.graph_objs.funnel.Connector instance or dict
+            plotly.graph_objects.funnel.Connector instance or dict
             with compatible properties
         constraintext
             Constrain the size of text inside or outside a bar to
@@ -67415,7 +67442,7 @@ class Funnel(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.funnel.Hoverlabel instance or dict
+            plotly.graph_objects.funnel.Hoverlabel instance or dict
             with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -67465,8 +67492,8 @@ class Funnel(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         marker
-            plotly.graph_objs.funnel.Marker instance or dict with
-            compatible properties
+            plotly.graph_objects.funnel.Marker instance or dict
+            with compatible properties
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -67517,8 +67544,8 @@ class Funnel(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.funnel.Stream instance or dict with
-            compatible properties
+            plotly.graph_objects.funnel.Stream instance or dict
+            with compatible properties
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the
@@ -68232,9 +68259,9 @@ class Contourcarpet(_BaseTraceType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.contourcarpet.colorbar.Tickfo
-                    rmatstop instance or dict with compatible
-                    properties
+                    A tuple of plotly.graph_objects.contourcarpet.c
+                    olorbar.Tickformatstop instances or dicts with
+                    compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
                     a.contourcarpet.colorbar.tickformatstopdefaults
@@ -68281,8 +68308,8 @@ class Contourcarpet(_BaseTraceType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.contourcarpet.colorbar.Title
-                    instance or dict with compatible properties
+                    plotly.graph_objects.contourcarpet.colorbar.Tit
+                    le instance or dict with compatible properties
                 titlefont
                     Deprecated: Please use
                     contourcarpet.colorbar.title.font instead. Sets
@@ -69436,7 +69463,7 @@ class Contourcarpet(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.contourcarpet.ColorBar instance or
+            plotly.graph_objects.contourcarpet.ColorBar instance or
             dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -69451,7 +69478,7 @@ class Contourcarpet(_BaseTraceType):
             d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
             ot,Blackbody,Earth,Electric,Viridis,Cividis.
         contours
-            plotly.graph_objs.contourcarpet.Contours instance or
+            plotly.graph_objects.contourcarpet.Contours instance or
             dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -69477,8 +69504,8 @@ class Contourcarpet(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.contourcarpet.Hoverlabel instance or
-            dict with compatible properties
+            plotly.graph_objects.contourcarpet.Hoverlabel instance
+            or dict with compatible properties
         hovertext
             Same as `text`.
         hovertextsrc
@@ -69494,8 +69521,8 @@ class Contourcarpet(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         line
-            plotly.graph_objs.contourcarpet.Line instance or dict
-            with compatible properties
+            plotly.graph_objects.contourcarpet.Line instance or
+            dict with compatible properties
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -69533,8 +69560,8 @@ class Contourcarpet(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            plotly.graph_objs.contourcarpet.Stream instance or dict
-            with compatible properties
+            plotly.graph_objects.contourcarpet.Stream instance or
+            dict with compatible properties
         text
             Sets the text elements associated with each z value.
         textsrc
@@ -69722,7 +69749,7 @@ class Contourcarpet(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.contourcarpet.ColorBar instance or
+            plotly.graph_objects.contourcarpet.ColorBar instance or
             dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -69737,7 +69764,7 @@ class Contourcarpet(_BaseTraceType):
             d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
             ot,Blackbody,Earth,Electric,Viridis,Cividis.
         contours
-            plotly.graph_objs.contourcarpet.Contours instance or
+            plotly.graph_objects.contourcarpet.Contours instance or
             dict with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -69763,8 +69790,8 @@ class Contourcarpet(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.contourcarpet.Hoverlabel instance or
-            dict with compatible properties
+            plotly.graph_objects.contourcarpet.Hoverlabel instance
+            or dict with compatible properties
         hovertext
             Same as `text`.
         hovertextsrc
@@ -69780,8 +69807,8 @@ class Contourcarpet(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         line
-            plotly.graph_objs.contourcarpet.Line instance or dict
-            with compatible properties
+            plotly.graph_objects.contourcarpet.Line instance or
+            dict with compatible properties
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -69819,8 +69846,8 @@ class Contourcarpet(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            plotly.graph_objs.contourcarpet.Stream instance or dict
-            with compatible properties
+            plotly.graph_objects.contourcarpet.Stream instance or
+            dict with compatible properties
         text
             Sets the text elements associated with each z value.
         textsrc
@@ -70317,8 +70344,9 @@ class Contour(_BaseTraceType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.contour.colorbar.Tickformatst
-                    op instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.contour.colorba
+                    r.Tickformatstop instances or dicts with
+                    compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
                     a.contour.colorbar.tickformatstopdefaults),
@@ -70364,7 +70392,7 @@ class Contour(_BaseTraceType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.contour.colorbar.Title
+                    plotly.graph_objects.contour.colorbar.Title
                     instance or dict with compatible properties
                 titlefont
                     Deprecated: Please use
@@ -71809,7 +71837,7 @@ class Contour(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.contour.ColorBar instance or dict
+            plotly.graph_objects.contour.ColorBar instance or dict
             with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -71827,7 +71855,7 @@ class Contour(_BaseTraceType):
             Determines whether or not gaps (i.e. {nan} or missing
             values) in the `z` data are filled in.
         contours
-            plotly.graph_objs.contour.Contours instance or dict
+            plotly.graph_objects.contour.Contours instance or dict
             with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -71853,8 +71881,8 @@ class Contour(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.contour.Hoverlabel instance or dict
-            with compatible properties
+            plotly.graph_objects.contour.Hoverlabel instance or
+            dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
             appear on hover box. Note that this will override
@@ -71891,7 +71919,7 @@ class Contour(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         line
-            plotly.graph_objs.contour.Line instance or dict with
+            plotly.graph_objects.contour.Line instance or dict with
             compatible properties
         meta
             Assigns extra meta information associated with this
@@ -71930,8 +71958,8 @@ class Contour(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            plotly.graph_objs.contour.Stream instance or dict with
-            compatible properties
+            plotly.graph_objects.contour.Stream instance or dict
+            with compatible properties
         text
             Sets the text elements associated with each z value.
         textsrc
@@ -72134,7 +72162,7 @@ class Contour(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.contour.ColorBar instance or dict
+            plotly.graph_objects.contour.ColorBar instance or dict
             with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
@@ -72152,7 +72180,7 @@ class Contour(_BaseTraceType):
             Determines whether or not gaps (i.e. {nan} or missing
             values) in the `z` data are filled in.
         contours
-            plotly.graph_objs.contour.Contours instance or dict
+            plotly.graph_objects.contour.Contours instance or dict
             with compatible properties
         customdata
             Assigns extra data each datum. This may be useful when
@@ -72178,8 +72206,8 @@ class Contour(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.contour.Hoverlabel instance or dict
-            with compatible properties
+            plotly.graph_objects.contour.Hoverlabel instance or
+            dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
             appear on hover box. Note that this will override
@@ -72216,7 +72244,7 @@ class Contour(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         line
-            plotly.graph_objs.contour.Line instance or dict with
+            plotly.graph_objects.contour.Line instance or dict with
             compatible properties
         meta
             Assigns extra meta information associated with this
@@ -72255,8 +72283,8 @@ class Contour(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            plotly.graph_objs.contour.Stream instance or dict with
-            compatible properties
+            plotly.graph_objects.contour.Stream instance or dict
+            with compatible properties
         text
             Sets the text elements associated with each z value.
         textsrc
@@ -72897,8 +72925,9 @@ class Cone(_BaseTraceType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.cone.colorbar.Tickformatstop
-                    instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.cone.colorbar.T
+                    ickformatstop instances or dicts with
+                    compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
                     a.cone.colorbar.tickformatstopdefaults), sets
@@ -72944,8 +72973,8 @@ class Cone(_BaseTraceType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.cone.colorbar.Title instance
-                    or dict with compatible properties
+                    plotly.graph_objects.cone.colorbar.Title
+                    instance or dict with compatible properties
                 titlefont
                     Deprecated: Please use cone.colorbar.title.font
                     instead. Sets this color bar's title font. Note
@@ -74063,8 +74092,8 @@ class Cone(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.cone.ColorBar instance or dict with
-            compatible properties
+            plotly.graph_objects.cone.ColorBar instance or dict
+            with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
@@ -74092,8 +74121,8 @@ class Cone(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.cone.Hoverlabel instance or dict with
-            compatible properties
+            plotly.graph_objects.cone.Hoverlabel instance or dict
+            with compatible properties
         hovertemplate
             Template string used for rendering the information that
             appear on hover box. Note that this will override
@@ -74127,11 +74156,11 @@ class Cone(_BaseTraceType):
         idssrc
             Sets the source reference on plot.ly for  ids .
         lighting
-            plotly.graph_objs.cone.Lighting instance or dict with
-            compatible properties
-        lightposition
-            plotly.graph_objs.cone.Lightposition instance or dict
+            plotly.graph_objects.cone.Lighting instance or dict
             with compatible properties
+        lightposition
+            plotly.graph_objects.cone.Lightposition instance or
+            dict with compatible properties
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -74189,7 +74218,7 @@ class Cone(_BaseTraceType):
             the same units as the u/v/w vector field, its the
             default value is half the sample's maximum vector norm.
         stream
-            plotly.graph_objs.cone.Stream instance or dict with
+            plotly.graph_objects.cone.Stream instance or dict with
             compatible properties
         text
             Sets the text elements associated with the cones. If
@@ -74358,8 +74387,8 @@ class Cone(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.cone.ColorBar instance or dict with
-            compatible properties
+            plotly.graph_objects.cone.ColorBar instance or dict
+            with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
@@ -74387,8 +74416,8 @@ class Cone(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.cone.Hoverlabel instance or dict with
-            compatible properties
+            plotly.graph_objects.cone.Hoverlabel instance or dict
+            with compatible properties
         hovertemplate
             Template string used for rendering the information that
             appear on hover box. Note that this will override
@@ -74422,11 +74451,11 @@ class Cone(_BaseTraceType):
         idssrc
             Sets the source reference on plot.ly for  ids .
         lighting
-            plotly.graph_objs.cone.Lighting instance or dict with
-            compatible properties
-        lightposition
-            plotly.graph_objs.cone.Lightposition instance or dict
+            plotly.graph_objects.cone.Lighting instance or dict
             with compatible properties
+        lightposition
+            plotly.graph_objects.cone.Lightposition instance or
+            dict with compatible properties
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -74484,7 +74513,7 @@ class Cone(_BaseTraceType):
             the same units as the u/v/w vector field, its the
             default value is half the sample's maximum vector norm.
         stream
-            plotly.graph_objs.cone.Stream instance or dict with
+            plotly.graph_objects.cone.Stream instance or dict with
             compatible properties
         text
             Sets the text elements associated with the cones. If
@@ -74948,9 +74977,9 @@ class Choropleth(_BaseTraceType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.choropleth.colorbar.Tickforma
-                    tstop instance or dict with compatible
-                    properties
+                    A tuple of plotly.graph_objects.choropleth.colo
+                    rbar.Tickformatstop instances or dicts with
+                    compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
                     a.choropleth.colorbar.tickformatstopdefaults),
@@ -74996,7 +75025,7 @@ class Choropleth(_BaseTraceType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.choropleth.colorbar.Title
+                    plotly.graph_objects.choropleth.colorbar.Title
                     instance or dict with compatible properties
                 titlefont
                     Deprecated: Please use
@@ -75470,7 +75499,7 @@ class Choropleth(_BaseTraceType):
             Supported dict properties:
                 
                 line
-                    plotly.graph_objs.choropleth.marker.Line
+                    plotly.graph_objects.choropleth.marker.Line
                     instance or dict with compatible properties
                 opacity
                     Sets the opacity of the locations.
@@ -75594,7 +75623,7 @@ class Choropleth(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.choropleth.selected.Marker
+                    plotly.graph_objects.choropleth.selected.Marker
                     instance or dict with compatible properties
 
         Returns
@@ -75796,8 +75825,8 @@ class Choropleth(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.choropleth.unselected.Marker
-                    instance or dict with compatible properties
+                    plotly.graph_objects.choropleth.unselected.Mark
+                    er instance or dict with compatible properties
 
         Returns
         -------
@@ -75991,8 +76020,8 @@ class Choropleth(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.choropleth.ColorBar instance or dict
-            with compatible properties
+            plotly.graph_objects.choropleth.ColorBar instance or
+            dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
@@ -76026,7 +76055,7 @@ class Choropleth(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.choropleth.Hoverlabel instance or
+            plotly.graph_objects.choropleth.Hoverlabel instance or
             dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -76068,7 +76097,7 @@ class Choropleth(_BaseTraceType):
         locationssrc
             Sets the source reference on plot.ly for  locations .
         marker
-            plotly.graph_objs.choropleth.Marker instance or dict
+            plotly.graph_objects.choropleth.Marker instance or dict
             with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -76093,8 +76122,8 @@ class Choropleth(_BaseTraceType):
             will correspond to the last color in the array and
             `zmax` will correspond to the first color.
         selected
-            plotly.graph_objs.choropleth.Selected instance or dict
-            with compatible properties
+            plotly.graph_objects.choropleth.Selected instance or
+            dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -76106,7 +76135,7 @@ class Choropleth(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            plotly.graph_objs.choropleth.Stream instance or dict
+            plotly.graph_objects.choropleth.Stream instance or dict
             with compatible properties
         text
             Sets the text elements associated with each location.
@@ -76135,7 +76164,7 @@ class Choropleth(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            plotly.graph_objs.choropleth.Unselected instance or
+            plotly.graph_objects.choropleth.Unselected instance or
             dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -76238,8 +76267,8 @@ class Choropleth(_BaseTraceType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.choropleth.ColorBar instance or dict
-            with compatible properties
+            plotly.graph_objects.choropleth.ColorBar instance or
+            dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
@@ -76273,7 +76302,7 @@ class Choropleth(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.choropleth.Hoverlabel instance or
+            plotly.graph_objects.choropleth.Hoverlabel instance or
             dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -76315,7 +76344,7 @@ class Choropleth(_BaseTraceType):
         locationssrc
             Sets the source reference on plot.ly for  locations .
         marker
-            plotly.graph_objs.choropleth.Marker instance or dict
+            plotly.graph_objects.choropleth.Marker instance or dict
             with compatible properties
         meta
             Assigns extra meta information associated with this
@@ -76340,8 +76369,8 @@ class Choropleth(_BaseTraceType):
             will correspond to the last color in the array and
             `zmax` will correspond to the first color.
         selected
-            plotly.graph_objs.choropleth.Selected instance or dict
-            with compatible properties
+            plotly.graph_objects.choropleth.Selected instance or
+            dict with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
             Has an effect only for traces that support selections.
@@ -76353,7 +76382,7 @@ class Choropleth(_BaseTraceType):
             Determines whether or not a colorbar is displayed for
             this trace.
         stream
-            plotly.graph_objs.choropleth.Stream instance or dict
+            plotly.graph_objects.choropleth.Stream instance or dict
             with compatible properties
         text
             Sets the text elements associated with each location.
@@ -76382,7 +76411,7 @@ class Choropleth(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            plotly.graph_objs.choropleth.Unselected instance or
+            plotly.graph_objects.choropleth.Unselected instance or
             dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
@@ -76814,8 +76843,9 @@ class Carpet(_BaseTraceType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.carpet.aaxis.Tickformatstop
-                    instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.carpet.aaxis.Ti
+                    ckformatstop instances or dicts with compatible
+                    properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
                     a.carpet.aaxis.tickformatstopdefaults), sets
@@ -76843,8 +76873,8 @@ class Carpet(_BaseTraceType):
                     Sets the source reference on plot.ly for
                     tickvals .
                 title
-                    plotly.graph_objs.carpet.aaxis.Title instance
-                    or dict with compatible properties
+                    plotly.graph_objects.carpet.aaxis.Title
+                    instance or dict with compatible properties
                 titlefont
                     Deprecated: Please use carpet.aaxis.title.font
                     instead. Sets this axis' title font. Note that
@@ -77112,8 +77142,9 @@ class Carpet(_BaseTraceType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.carpet.baxis.Tickformatstop
-                    instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.carpet.baxis.Ti
+                    ckformatstop instances or dicts with compatible
+                    properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
                     a.carpet.baxis.tickformatstopdefaults), sets
@@ -77141,8 +77172,8 @@ class Carpet(_BaseTraceType):
                     Sets the source reference on plot.ly for
                     tickvals .
                 title
-                    plotly.graph_objs.carpet.baxis.Title instance
-                    or dict with compatible properties
+                    plotly.graph_objects.carpet.baxis.Title
+                    instance or dict with compatible properties
                 titlefont
                     Deprecated: Please use carpet.baxis.title.font
                     instead. Sets this axis' title font. Note that
@@ -77929,7 +77960,7 @@ class Carpet(_BaseTraceType):
             coordinates. Use with `da` where `a0` is the starting
             coordinate and `da` the step.
         aaxis
-            plotly.graph_objs.carpet.Aaxis instance or dict with
+            plotly.graph_objects.carpet.Aaxis instance or dict with
             compatible properties
         asrc
             Sets the source reference on plot.ly for  a .
@@ -77941,7 +77972,7 @@ class Carpet(_BaseTraceType):
             coordinates. Use with `db` where `b0` is the starting
             coordinate and `db` the step.
         baxis
-            plotly.graph_objs.carpet.Baxis instance or dict with
+            plotly.graph_objects.carpet.Baxis instance or dict with
             compatible properties
         bsrc
             Sets the source reference on plot.ly for  b .
@@ -77980,7 +78011,7 @@ class Carpet(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.carpet.Hoverlabel instance or dict
+            plotly.graph_objects.carpet.Hoverlabel instance or dict
             with compatible properties
         ids
             Assigns id labels to each datum. These ids for object
@@ -78009,8 +78040,8 @@ class Carpet(_BaseTraceType):
         opacity
             Sets the opacity of the trace.
         stream
-            plotly.graph_objs.carpet.Stream instance or dict with
-            compatible properties
+            plotly.graph_objects.carpet.Stream instance or dict
+            with compatible properties
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -78123,7 +78154,7 @@ class Carpet(_BaseTraceType):
             coordinates. Use with `da` where `a0` is the starting
             coordinate and `da` the step.
         aaxis
-            plotly.graph_objs.carpet.Aaxis instance or dict with
+            plotly.graph_objects.carpet.Aaxis instance or dict with
             compatible properties
         asrc
             Sets the source reference on plot.ly for  a .
@@ -78135,7 +78166,7 @@ class Carpet(_BaseTraceType):
             coordinates. Use with `db` where `b0` is the starting
             coordinate and `db` the step.
         baxis
-            plotly.graph_objs.carpet.Baxis instance or dict with
+            plotly.graph_objects.carpet.Baxis instance or dict with
             compatible properties
         bsrc
             Sets the source reference on plot.ly for  b .
@@ -78174,7 +78205,7 @@ class Carpet(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.carpet.Hoverlabel instance or dict
+            plotly.graph_objects.carpet.Hoverlabel instance or dict
             with compatible properties
         ids
             Assigns id labels to each datum. These ids for object
@@ -78203,8 +78234,8 @@ class Carpet(_BaseTraceType):
         opacity
             Sets the opacity of the trace.
         stream
-            plotly.graph_objs.carpet.Stream instance or dict with
-            compatible properties
+            plotly.graph_objects.carpet.Stream instance or dict
+            with compatible properties
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -78522,8 +78553,8 @@ class Candlestick(_BaseTraceType):
                     color, or marker line color, whichever is
                     available.
                 line
-                    plotly.graph_objs.candlestick.decreasing.Line
-                    instance or dict with compatible properties
+                    plotly.graph_objects.candlestick.decreasing.Lin
+                    e instance or dict with compatible properties
 
         Returns
         -------
@@ -78786,8 +78817,8 @@ class Candlestick(_BaseTraceType):
                     color, or marker line color, whichever is
                     available.
                 line
-                    plotly.graph_objs.candlestick.increasing.Line
-                    instance or dict with compatible properties
+                    plotly.graph_objects.candlestick.increasing.Lin
+                    e instance or dict with compatible properties
 
         Returns
         -------
@@ -79388,7 +79419,7 @@ class Candlestick(_BaseTraceType):
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
         decreasing
-            plotly.graph_objs.candlestick.Decreasing instance or
+            plotly.graph_objects.candlestick.Decreasing instance or
             dict with compatible properties
         high
             Sets the high values.
@@ -79402,7 +79433,7 @@ class Candlestick(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.candlestick.Hoverlabel instance or
+            plotly.graph_objects.candlestick.Hoverlabel instance or
             dict with compatible properties
         hovertext
             Same as `text`.
@@ -79415,14 +79446,14 @@ class Candlestick(_BaseTraceType):
         idssrc
             Sets the source reference on plot.ly for  ids .
         increasing
-            plotly.graph_objs.candlestick.Increasing instance or
+            plotly.graph_objects.candlestick.Increasing instance or
             dict with compatible properties
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
         line
-            plotly.graph_objs.candlestick.Line instance or dict
+            plotly.graph_objects.candlestick.Line instance or dict
             with compatible properties
         low
             Sets the low values.
@@ -79463,8 +79494,8 @@ class Candlestick(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.candlestick.Stream instance or dict
-            with compatible properties
+            plotly.graph_objects.candlestick.Stream instance or
+            dict with compatible properties
         text
             Sets hover text elements associated with each sample
             point. If a single string, the same string appears over
@@ -79595,7 +79626,7 @@ class Candlestick(_BaseTraceType):
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
         decreasing
-            plotly.graph_objs.candlestick.Decreasing instance or
+            plotly.graph_objects.candlestick.Decreasing instance or
             dict with compatible properties
         high
             Sets the high values.
@@ -79609,7 +79640,7 @@ class Candlestick(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.candlestick.Hoverlabel instance or
+            plotly.graph_objects.candlestick.Hoverlabel instance or
             dict with compatible properties
         hovertext
             Same as `text`.
@@ -79622,14 +79653,14 @@ class Candlestick(_BaseTraceType):
         idssrc
             Sets the source reference on plot.ly for  ids .
         increasing
-            plotly.graph_objs.candlestick.Increasing instance or
+            plotly.graph_objects.candlestick.Increasing instance or
             dict with compatible properties
         legendgroup
             Sets the legend group for this trace. Traces part of
             the same legend group hide/show at the same time when
             toggling legend items.
         line
-            plotly.graph_objs.candlestick.Line instance or dict
+            plotly.graph_objects.candlestick.Line instance or dict
             with compatible properties
         low
             Sets the low values.
@@ -79670,8 +79701,8 @@ class Candlestick(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.candlestick.Stream instance or dict
-            with compatible properties
+            plotly.graph_objects.candlestick.Stream instance or
+            dict with compatible properties
         text
             Sets hover text elements associated with each sample
             point. If a single string, the same string appears over
@@ -80445,8 +80476,8 @@ class Box(_BaseTraceType):
                     and min values of the array or relative to
                     `marker.cmin` and `marker.cmax` if set.
                 line
-                    plotly.graph_objs.box.marker.Line instance or
-                    dict with compatible properties
+                    plotly.graph_objects.box.marker.Line instance
+                    or dict with compatible properties
                 opacity
                     Sets the marker opacity.
                 outliercolor
@@ -80687,8 +80718,8 @@ class Box(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.box.selected.Marker instance
-                    or dict with compatible properties
+                    plotly.graph_objects.box.selected.Marker
+                    instance or dict with compatible properties
 
         Returns
         -------
@@ -80893,7 +80924,7 @@ class Box(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.box.unselected.Marker
+                    plotly.graph_objects.box.unselected.Marker
                     instance or dict with compatible properties
 
         Returns
@@ -81243,8 +81274,8 @@ class Box(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.box.Hoverlabel instance or dict with
-            compatible properties
+            plotly.graph_objects.box.Hoverlabel instance or dict
+            with compatible properties
         hoveron
             Do the hover effects highlight individual boxes  or
             sample points or both?
@@ -81289,10 +81320,10 @@ class Box(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         line
-            plotly.graph_objs.box.Line instance or dict with
+            plotly.graph_objects.box.Line instance or dict with
             compatible properties
         marker
-            plotly.graph_objs.box.Marker instance or dict with
+            plotly.graph_objects.box.Marker instance or dict with
             compatible properties
         meta
             Assigns extra meta information associated with this
@@ -81338,7 +81369,7 @@ class Box(_BaseTraceType):
             correspond to positions to the right (left) for
             vertical boxes and above (below) for horizontal boxes
         selected
-            plotly.graph_objs.box.Selected instance or dict with
+            plotly.graph_objects.box.Selected instance or dict with
             compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -81351,7 +81382,7 @@ class Box(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.box.Stream instance or dict with
+            plotly.graph_objects.box.Stream instance or dict with
             compatible properties
         text
             Sets the text elements associated with each sample
@@ -81385,8 +81416,8 @@ class Box(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            plotly.graph_objs.box.Unselected instance or dict with
-            compatible properties
+            plotly.graph_objects.box.Unselected instance or dict
+            with compatible properties
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -81544,8 +81575,8 @@ class Box(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.box.Hoverlabel instance or dict with
-            compatible properties
+            plotly.graph_objects.box.Hoverlabel instance or dict
+            with compatible properties
         hoveron
             Do the hover effects highlight individual boxes  or
             sample points or both?
@@ -81590,10 +81621,10 @@ class Box(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         line
-            plotly.graph_objs.box.Line instance or dict with
+            plotly.graph_objects.box.Line instance or dict with
             compatible properties
         marker
-            plotly.graph_objs.box.Marker instance or dict with
+            plotly.graph_objects.box.Marker instance or dict with
             compatible properties
         meta
             Assigns extra meta information associated with this
@@ -81639,7 +81670,7 @@ class Box(_BaseTraceType):
             correspond to positions to the right (left) for
             vertical boxes and above (below) for horizontal boxes
         selected
-            plotly.graph_objs.box.Selected instance or dict with
+            plotly.graph_objects.box.Selected instance or dict with
             compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -81652,7 +81683,7 @@ class Box(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.box.Stream instance or dict with
+            plotly.graph_objects.box.Stream instance or dict with
             compatible properties
         text
             Sets the text elements associated with each sample
@@ -81686,8 +81717,8 @@ class Box(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            plotly.graph_objs.box.Unselected instance or dict with
-            compatible properties
+            plotly.graph_objects.box.Unselected instance or dict
+            with compatible properties
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -82410,7 +82441,7 @@ class Barpolar(_BaseTraceType):
                     color scales can be linked to the same color
                     axis.
                 colorbar
-                    plotly.graph_objs.barpolar.marker.ColorBar
+                    plotly.graph_objects.barpolar.marker.ColorBar
                     instance or dict with compatible properties
                 colorscale
                     Sets the colorscale. Has an effect only if in
@@ -82432,8 +82463,8 @@ class Barpolar(_BaseTraceType):
                     Sets the source reference on plot.ly for  color
                     .
                 line
-                    plotly.graph_objs.barpolar.marker.Line instance
-                    or dict with compatible properties
+                    plotly.graph_objects.barpolar.marker.Line
+                    instance or dict with compatible properties
                 opacity
                     Sets the opacity of the bars.
                 opacitysrc
@@ -82668,10 +82699,10 @@ class Barpolar(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.barpolar.selected.Marker
+                    plotly.graph_objects.barpolar.selected.Marker
                     instance or dict with compatible properties
                 textfont
-                    plotly.graph_objs.barpolar.selected.Textfont
+                    plotly.graph_objects.barpolar.selected.Textfont
                     instance or dict with compatible properties
 
         Returns
@@ -82984,11 +83015,11 @@ class Barpolar(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.barpolar.unselected.Marker
+                    plotly.graph_objects.barpolar.unselected.Marker
                     instance or dict with compatible properties
                 textfont
-                    plotly.graph_objs.barpolar.unselected.Textfont
-                    instance or dict with compatible properties
+                    plotly.graph_objects.barpolar.unselected.Textfo
+                    nt instance or dict with compatible properties
 
         Returns
         -------
@@ -83108,8 +83139,8 @@ class Barpolar(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.barpolar.Hoverlabel instance or dict
-            with compatible properties
+            plotly.graph_objects.barpolar.Hoverlabel instance or
+            dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
             appear on hover box. Note that this will override
@@ -83146,8 +83177,8 @@ class Barpolar(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         marker
-            plotly.graph_objs.barpolar.Marker instance or dict with
-            compatible properties
+            plotly.graph_objects.barpolar.Marker instance or dict
+            with compatible properties
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -83182,7 +83213,7 @@ class Barpolar(_BaseTraceType):
         rsrc
             Sets the source reference on plot.ly for  r .
         selected
-            plotly.graph_objs.barpolar.Selected instance or dict
+            plotly.graph_objects.barpolar.Selected instance or dict
             with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -83195,8 +83226,8 @@ class Barpolar(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.barpolar.Stream instance or dict with
-            compatible properties
+            plotly.graph_objects.barpolar.Stream instance or dict
+            with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
             and a polar subplot. If "polar" (the default value),
@@ -83243,8 +83274,8 @@ class Barpolar(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            plotly.graph_objs.barpolar.Unselected instance or dict
-            with compatible properties
+            plotly.graph_objects.barpolar.Unselected instance or
+            dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -83342,8 +83373,8 @@ class Barpolar(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.barpolar.Hoverlabel instance or dict
-            with compatible properties
+            plotly.graph_objects.barpolar.Hoverlabel instance or
+            dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
             appear on hover box. Note that this will override
@@ -83380,8 +83411,8 @@ class Barpolar(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         marker
-            plotly.graph_objs.barpolar.Marker instance or dict with
-            compatible properties
+            plotly.graph_objects.barpolar.Marker instance or dict
+            with compatible properties
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -83416,7 +83447,7 @@ class Barpolar(_BaseTraceType):
         rsrc
             Sets the source reference on plot.ly for  r .
         selected
-            plotly.graph_objs.barpolar.Selected instance or dict
+            plotly.graph_objects.barpolar.Selected instance or dict
             with compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -83429,8 +83460,8 @@ class Barpolar(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.barpolar.Stream instance or dict with
-            compatible properties
+            plotly.graph_objects.barpolar.Stream instance or dict
+            with compatible properties
         subplot
             Sets a reference between this trace's data coordinates
             and a polar subplot. If "polar" (the default value),
@@ -83477,8 +83508,8 @@ class Barpolar(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            plotly.graph_objs.barpolar.Unselected instance or dict
-            with compatible properties
+            plotly.graph_objects.barpolar.Unselected instance or
+            dict with compatible properties
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -84449,8 +84480,8 @@ class Bar(_BaseTraceType):
                     color scales can be linked to the same color
                     axis.
                 colorbar
-                    plotly.graph_objs.bar.marker.ColorBar instance
-                    or dict with compatible properties
+                    plotly.graph_objects.bar.marker.ColorBar
+                    instance or dict with compatible properties
                 colorscale
                     Sets the colorscale. Has an effect only if in
                     `marker.color`is set to a numerical array. The
@@ -84471,8 +84502,8 @@ class Bar(_BaseTraceType):
                     Sets the source reference on plot.ly for  color
                     .
                 line
-                    plotly.graph_objs.bar.marker.Line instance or
-                    dict with compatible properties
+                    plotly.graph_objects.bar.marker.Line instance
+                    or dict with compatible properties
                 opacity
                     Sets the opacity of the bars.
                 opacitysrc
@@ -84789,10 +84820,10 @@ class Bar(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.bar.selected.Marker instance
-                    or dict with compatible properties
+                    plotly.graph_objects.bar.selected.Marker
+                    instance or dict with compatible properties
                 textfont
-                    plotly.graph_objs.bar.selected.Textfont
+                    plotly.graph_objects.bar.selected.Textfont
                     instance or dict with compatible properties
 
         Returns
@@ -85169,10 +85200,10 @@ class Bar(_BaseTraceType):
             Supported dict properties:
                 
                 marker
-                    plotly.graph_objs.bar.unselected.Marker
+                    plotly.graph_objects.bar.unselected.Marker
                     instance or dict with compatible properties
                 textfont
-                    plotly.graph_objs.bar.unselected.Textfont
+                    plotly.graph_objects.bar.unselected.Textfont
                     instance or dict with compatible properties
 
         Returns
@@ -85518,10 +85549,10 @@ class Bar(_BaseTraceType):
         dy
             Sets the y coordinate step. See `y0` for more info.
         error_x
-            plotly.graph_objs.bar.ErrorX instance or dict with
+            plotly.graph_objects.bar.ErrorX instance or dict with
             compatible properties
         error_y
-            plotly.graph_objs.bar.ErrorY instance or dict with
+            plotly.graph_objects.bar.ErrorY instance or dict with
             compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
@@ -85531,8 +85562,8 @@ class Bar(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.bar.Hoverlabel instance or dict with
-            compatible properties
+            plotly.graph_objects.bar.Hoverlabel instance or dict
+            with compatible properties
         hovertemplate
             Template string used for rendering the information that
             appear on hover box. Note that this will override
@@ -85579,7 +85610,7 @@ class Bar(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         marker
-            plotly.graph_objs.bar.Marker instance or dict with
+            plotly.graph_objects.bar.Marker instance or dict with
             compatible properties
         meta
             Assigns extra meta information associated with this
@@ -85625,7 +85656,7 @@ class Bar(_BaseTraceType):
         rsrc
             Sets the source reference on plot.ly for  r .
         selected
-            plotly.graph_objs.bar.Selected instance or dict with
+            plotly.graph_objects.bar.Selected instance or dict with
             compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -85638,7 +85669,7 @@ class Bar(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.bar.Stream instance or dict with
+            plotly.graph_objects.bar.Stream instance or dict with
             compatible properties
         t
             t coordinates in scatter traces are deprecated!Please
@@ -85699,8 +85730,8 @@ class Bar(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            plotly.graph_objs.bar.Unselected instance or dict with
-            compatible properties
+            plotly.graph_objects.bar.Unselected instance or dict
+            with compatible properties
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -85855,10 +85886,10 @@ class Bar(_BaseTraceType):
         dy
             Sets the y coordinate step. See `y0` for more info.
         error_x
-            plotly.graph_objs.bar.ErrorX instance or dict with
+            plotly.graph_objects.bar.ErrorX instance or dict with
             compatible properties
         error_y
-            plotly.graph_objs.bar.ErrorY instance or dict with
+            plotly.graph_objects.bar.ErrorY instance or dict with
             compatible properties
         hoverinfo
             Determines which trace information appear on hover. If
@@ -85868,8 +85899,8 @@ class Bar(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.bar.Hoverlabel instance or dict with
-            compatible properties
+            plotly.graph_objects.bar.Hoverlabel instance or dict
+            with compatible properties
         hovertemplate
             Template string used for rendering the information that
             appear on hover box. Note that this will override
@@ -85916,7 +85947,7 @@ class Bar(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         marker
-            plotly.graph_objs.bar.Marker instance or dict with
+            plotly.graph_objects.bar.Marker instance or dict with
             compatible properties
         meta
             Assigns extra meta information associated with this
@@ -85962,7 +85993,7 @@ class Bar(_BaseTraceType):
         rsrc
             Sets the source reference on plot.ly for  r .
         selected
-            plotly.graph_objs.bar.Selected instance or dict with
+            plotly.graph_objects.bar.Selected instance or dict with
             compatible properties
         selectedpoints
             Array containing integer indices of selected points.
@@ -85975,7 +86006,7 @@ class Bar(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.bar.Stream instance or dict with
+            plotly.graph_objects.bar.Stream instance or dict with
             compatible properties
         t
             t coordinates in scatter traces are deprecated!Please
@@ -86036,8 +86067,8 @@ class Bar(_BaseTraceType):
             preserve user-driven changes if you give each trace a
             `uid` that stays with it as it moves.
         unselected
-            plotly.graph_objs.bar.Unselected instance or dict with
-            compatible properties
+            plotly.graph_objects.bar.Unselected instance or dict
+            with compatible properties
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -86943,8 +86974,8 @@ class Area(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.area.Hoverlabel instance or dict with
-            compatible properties
+            plotly.graph_objects.area.Hoverlabel instance or dict
+            with compatible properties
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -86956,7 +86987,7 @@ class Area(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         marker
-            plotly.graph_objs.area.Marker instance or dict with
+            plotly.graph_objects.area.Marker instance or dict with
             compatible properties
         meta
             Assigns extra meta information associated with this
@@ -86988,7 +87019,7 @@ class Area(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.area.Stream instance or dict with
+            plotly.graph_objects.area.Stream instance or dict with
             compatible properties
         t
             Area traces are deprecated! Please switch to the
@@ -87075,8 +87106,8 @@ class Area(_BaseTraceType):
         hoverinfosrc
             Sets the source reference on plot.ly for  hoverinfo .
         hoverlabel
-            plotly.graph_objs.area.Hoverlabel instance or dict with
-            compatible properties
+            plotly.graph_objects.area.Hoverlabel instance or dict
+            with compatible properties
         ids
             Assigns id labels to each datum. These ids for object
             constancy of data points during animation. Should be an
@@ -87088,7 +87119,7 @@ class Area(_BaseTraceType):
             the same legend group hide/show at the same time when
             toggling legend items.
         marker
-            plotly.graph_objs.area.Marker instance or dict with
+            plotly.graph_objects.area.Marker instance or dict with
             compatible properties
         meta
             Assigns extra meta information associated with this
@@ -87120,7 +87151,7 @@ class Area(_BaseTraceType):
             Determines whether or not an item corresponding to this
             trace is shown in the legend.
         stream
-            plotly.graph_objs.area.Stream instance or dict with
+            plotly.graph_objects.area.Stream instance or dict with
             compatible properties
         t
             Area traces are deprecated! Please switch to the

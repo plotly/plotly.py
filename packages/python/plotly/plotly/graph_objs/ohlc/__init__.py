@@ -342,8 +342,8 @@ class Increasing(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         line
-            plotly.graph_objs.ohlc.increasing.Line instance or dict
-            with compatible properties
+            plotly.graph_objects.ohlc.increasing.Line instance or
+            dict with compatible properties
         """
 
     def __init__(self, arg=None, line=None, **kwargs):
@@ -356,8 +356,8 @@ class Increasing(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.ohlc.Increasing
         line
-            plotly.graph_objs.ohlc.increasing.Line instance or dict
-            with compatible properties
+            plotly.graph_objects.ohlc.increasing.Line instance or
+            dict with compatible properties
 
         Returns
         -------
@@ -965,8 +965,8 @@ class Decreasing(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         line
-            plotly.graph_objs.ohlc.decreasing.Line instance or dict
-            with compatible properties
+            plotly.graph_objects.ohlc.decreasing.Line instance or
+            dict with compatible properties
         """
 
     def __init__(self, arg=None, line=None, **kwargs):
@@ -979,8 +979,8 @@ class Decreasing(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.ohlc.Decreasing
         line
-            plotly.graph_objs.ohlc.decreasing.Line instance or dict
-            with compatible properties
+            plotly.graph_objects.ohlc.decreasing.Line instance or
+            dict with compatible properties
 
         Returns
         -------

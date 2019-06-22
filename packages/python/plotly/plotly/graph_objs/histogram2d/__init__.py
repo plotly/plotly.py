@@ -2531,8 +2531,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.histogram2d.colorbar.Tickformatstop
-            instance or dict with compatible properties
+            A tuple of plotly.graph_objects.histogram2d.colorbar.Ti
+            ckformatstop instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.histog
             ram2d.colorbar.tickformatstopdefaults), sets the
@@ -2572,8 +2573,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.histogram2d.colorbar.Title instance
-            or dict with compatible properties
+            plotly.graph_objects.histogram2d.colorbar.Title
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use histogram2d.colorbar.title.font
             instead. Sets this color bar's title font. Note that
@@ -2779,8 +2780,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.histogram2d.colorbar.Tickformatstop
-            instance or dict with compatible properties
+            A tuple of plotly.graph_objects.histogram2d.colorbar.Ti
+            ckformatstop instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.histog
             ram2d.colorbar.tickformatstopdefaults), sets the
@@ -2820,8 +2822,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.histogram2d.colorbar.Title instance
-            or dict with compatible properties
+            plotly.graph_objects.histogram2d.colorbar.Title
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use histogram2d.colorbar.title.font
             instead. Sets this color bar's title font. Note that

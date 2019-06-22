@@ -949,9 +949,9 @@ class Line(_BaseTraceHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.parcoords.line.colorbar.Tickf
-                    ormatstop instance or dict with compatible
-                    properties
+                    A tuple of plotly.graph_objects.parcoords.line.
+                    colorbar.Tickformatstop instances or dicts with
+                    compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
                     a.parcoords.line.colorbar.tickformatstopdefault
@@ -998,8 +998,8 @@ class Line(_BaseTraceHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.parcoords.line.colorbar.Title
-                    instance or dict with compatible properties
+                    plotly.graph_objects.parcoords.line.colorbar.Ti
+                    tle instance or dict with compatible properties
                 titlefont
                     Deprecated: Please use
                     parcoords.line.colorbar.title.font instead.
@@ -1206,8 +1206,8 @@ class Line(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.parcoords.line.ColorBar instance or
-            dict with compatible properties
+            plotly.graph_objects.parcoords.line.ColorBar instance
+            or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
             `line.color`is set to a numerical array. The colorscale
@@ -1308,8 +1308,8 @@ class Line(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.parcoords.line.ColorBar instance or
-            dict with compatible properties
+            plotly.graph_objects.parcoords.line.ColorBar instance
+            or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
             `line.color`is set to a numerical array. The colorscale

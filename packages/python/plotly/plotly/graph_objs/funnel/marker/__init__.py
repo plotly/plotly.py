@@ -1967,8 +1967,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.funnel.marker.colorbar.Tickformatstop
-            instance or dict with compatible properties
+            A tuple of plotly.graph_objects.funnel.marker.colorbar.
+            Tickformatstop instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.funnel
             .marker.colorbar.tickformatstopdefaults), sets the
@@ -2008,8 +2009,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.funnel.marker.colorbar.Title instance
-            or dict with compatible properties
+            plotly.graph_objects.funnel.marker.colorbar.Title
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use
             funnel.marker.colorbar.title.font instead. Sets this
@@ -2215,8 +2216,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.funnel.marker.colorbar.Tickformatstop
-            instance or dict with compatible properties
+            A tuple of plotly.graph_objects.funnel.marker.colorbar.
+            Tickformatstop instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.funnel
             .marker.colorbar.tickformatstopdefaults), sets the
@@ -2256,8 +2258,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.funnel.marker.colorbar.Title instance
-            or dict with compatible properties
+            plotly.graph_objects.funnel.marker.colorbar.Title
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use
             funnel.marker.colorbar.title.font instead. Sets this

@@ -2346,6 +2346,16 @@ class CompoundValidator(BaseValidator):
 
             parent_parts = parent_name.split(".")
             module_str = ".".join(["plotly.graph_objs"] + parent_parts[1:])
+        elif parent_name == "layout.template" and data_class_str == "Layout":
+            # Remap template's layout to regular layout
+            module_str = "plotly.graph_objs"
+        elif "layout.template.data" in parent_name:
+            # Remap template's traces to regular traces
+            parent_name = parent_name.replace("layout.template.data.", "")
+            if parent_name:
+                module_str = "plotly.graph_objs." + parent_name
+            else:
+                module_str = "plotly.graph_objs"
         elif parent_name:
             module_str = "plotly.graph_objs." + parent_name
         else:

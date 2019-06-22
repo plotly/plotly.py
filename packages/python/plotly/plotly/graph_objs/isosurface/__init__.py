@@ -662,14 +662,14 @@ class Slices(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         x
-            plotly.graph_objs.isosurface.slices.X instance or dict
-            with compatible properties
+            plotly.graph_objects.isosurface.slices.X instance or
+            dict with compatible properties
         y
-            plotly.graph_objs.isosurface.slices.Y instance or dict
-            with compatible properties
+            plotly.graph_objects.isosurface.slices.Y instance or
+            dict with compatible properties
         z
-            plotly.graph_objs.isosurface.slices.Z instance or dict
-            with compatible properties
+            plotly.graph_objects.isosurface.slices.Z instance or
+            dict with compatible properties
         """
 
     def __init__(self, arg=None, x=None, y=None, z=None, **kwargs):
@@ -682,14 +682,14 @@ class Slices(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.isosurface.Slices
         x
-            plotly.graph_objs.isosurface.slices.X instance or dict
-            with compatible properties
+            plotly.graph_objects.isosurface.slices.X instance or
+            dict with compatible properties
         y
-            plotly.graph_objs.isosurface.slices.Y instance or dict
-            with compatible properties
+            plotly.graph_objects.isosurface.slices.Y instance or
+            dict with compatible properties
         z
-            plotly.graph_objs.isosurface.slices.Z instance or dict
-            with compatible properties
+            plotly.graph_objects.isosurface.slices.Z instance or
+            dict with compatible properties
 
         Returns
         -------
@@ -3234,8 +3234,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.isosurface.colorbar.Tickformatstop
-            instance or dict with compatible properties
+            A tuple of
+            plotly.graph_objects.isosurface.colorbar.Tickformatstop
+            instances or dicts with compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.isosur
             face.colorbar.tickformatstopdefaults), sets the default
@@ -3275,8 +3276,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.isosurface.colorbar.Title instance or
-            dict with compatible properties
+            plotly.graph_objects.isosurface.colorbar.Title instance
+            or dict with compatible properties
         titlefont
             Deprecated: Please use isosurface.colorbar.title.font
             instead. Sets this color bar's title font. Note that
@@ -3482,8 +3483,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.isosurface.colorbar.Tickformatstop
-            instance or dict with compatible properties
+            A tuple of
+            plotly.graph_objects.isosurface.colorbar.Tickformatstop
+            instances or dicts with compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.isosur
             face.colorbar.tickformatstopdefaults), sets the default
@@ -3523,8 +3525,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.isosurface.colorbar.Title instance or
-            dict with compatible properties
+            plotly.graph_objects.isosurface.colorbar.Title instance
+            or dict with compatible properties
         titlefont
             Deprecated: Please use isosurface.colorbar.title.font
             instead. Sets this color bar's title font. Note that
@@ -3868,13 +3870,13 @@ class Caps(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         x
-            plotly.graph_objs.isosurface.caps.X instance or dict
+            plotly.graph_objects.isosurface.caps.X instance or dict
             with compatible properties
         y
-            plotly.graph_objs.isosurface.caps.Y instance or dict
+            plotly.graph_objects.isosurface.caps.Y instance or dict
             with compatible properties
         z
-            plotly.graph_objs.isosurface.caps.Z instance or dict
+            plotly.graph_objects.isosurface.caps.Z instance or dict
             with compatible properties
         """
 
@@ -3888,13 +3890,13 @@ class Caps(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.isosurface.Caps
         x
-            plotly.graph_objs.isosurface.caps.X instance or dict
+            plotly.graph_objects.isosurface.caps.X instance or dict
             with compatible properties
         y
-            plotly.graph_objs.isosurface.caps.Y instance or dict
+            plotly.graph_objects.isosurface.caps.Y instance or dict
             with compatible properties
         z
-            plotly.graph_objs.isosurface.caps.Z instance or dict
+            plotly.graph_objects.isosurface.caps.Z instance or dict
             with compatible properties
 
         Returns

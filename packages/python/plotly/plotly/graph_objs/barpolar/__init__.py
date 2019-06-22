@@ -73,11 +73,11 @@ class Unselected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            plotly.graph_objs.barpolar.unselected.Marker instance
-            or dict with compatible properties
+            plotly.graph_objects.barpolar.unselected.Marker
+            instance or dict with compatible properties
         textfont
-            plotly.graph_objs.barpolar.unselected.Textfont instance
-            or dict with compatible properties
+            plotly.graph_objects.barpolar.unselected.Textfont
+            instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, marker=None, textfont=None, **kwargs):
@@ -90,11 +90,11 @@ class Unselected(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.barpolar.Unselected
         marker
-            plotly.graph_objs.barpolar.unselected.Marker instance
-            or dict with compatible properties
+            plotly.graph_objects.barpolar.unselected.Marker
+            instance or dict with compatible properties
         textfont
-            plotly.graph_objs.barpolar.unselected.Textfont instance
-            or dict with compatible properties
+            plotly.graph_objects.barpolar.unselected.Textfont
+            instance or dict with compatible properties
 
         Returns
         -------
@@ -360,11 +360,11 @@ class Selected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            plotly.graph_objs.barpolar.selected.Marker instance or
-            dict with compatible properties
-        textfont
-            plotly.graph_objs.barpolar.selected.Textfont instance
+            plotly.graph_objects.barpolar.selected.Marker instance
             or dict with compatible properties
+        textfont
+            plotly.graph_objects.barpolar.selected.Textfont
+            instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, marker=None, textfont=None, **kwargs):
@@ -377,11 +377,11 @@ class Selected(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.barpolar.Selected
         marker
-            plotly.graph_objs.barpolar.selected.Marker instance or
-            dict with compatible properties
-        textfont
-            plotly.graph_objs.barpolar.selected.Textfont instance
+            plotly.graph_objects.barpolar.selected.Marker instance
             or dict with compatible properties
+        textfont
+            plotly.graph_objects.barpolar.selected.Textfont
+            instance or dict with compatible properties
 
         Returns
         -------
@@ -791,9 +791,9 @@ class Marker(_BaseTraceHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.barpolar.marker.colorbar.Tick
-                    formatstop instance or dict with compatible
-                    properties
+                    A tuple of plotly.graph_objects.barpolar.marker
+                    .colorbar.Tickformatstop instances or dicts
+                    with compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
                     a.barpolar.marker.colorbar.tickformatstopdefaul
@@ -840,8 +840,9 @@ class Marker(_BaseTraceHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.barpolar.marker.colorbar.Titl
-                    e instance or dict with compatible properties
+                    plotly.graph_objects.barpolar.marker.colorbar.T
+                    itle instance or dict with compatible
+                    properties
                 titlefont
                     Deprecated: Please use
                     barpolar.marker.colorbar.title.font instead.
@@ -1201,8 +1202,8 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.barpolar.marker.ColorBar instance or
-            dict with compatible properties
+            plotly.graph_objects.barpolar.marker.ColorBar instance
+            or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
             `marker.color`is set to a numerical array. The
@@ -1220,8 +1221,8 @@ class Marker(_BaseTraceHierarchyType):
         colorsrc
             Sets the source reference on plot.ly for  color .
         line
-            plotly.graph_objs.barpolar.marker.Line instance or dict
-            with compatible properties
+            plotly.graph_objects.barpolar.marker.Line instance or
+            dict with compatible properties
         opacity
             Sets the opacity of the bars.
         opacitysrc
@@ -1313,8 +1314,8 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.barpolar.marker.ColorBar instance or
-            dict with compatible properties
+            plotly.graph_objects.barpolar.marker.ColorBar instance
+            or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
             `marker.color`is set to a numerical array. The
@@ -1332,8 +1333,8 @@ class Marker(_BaseTraceHierarchyType):
         colorsrc
             Sets the source reference on plot.ly for  color .
         line
-            plotly.graph_objs.barpolar.marker.Line instance or dict
-            with compatible properties
+            plotly.graph_objects.barpolar.marker.Line instance or
+            dict with compatible properties
         opacity
             Sets the opacity of the bars.
         opacitysrc
