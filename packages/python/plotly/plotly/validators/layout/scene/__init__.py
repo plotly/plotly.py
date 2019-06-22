@@ -222,9 +222,9 @@ class ZAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
             tickformatstops
-                plotly.graph_objs.layout.scene.zaxis.Tickformat
-                stop instance or dict with compatible
-                properties
+                A tuple of plotly.graph_objects.layout.scene.za
+                xis.Tickformatstop instances or dicts with
+                compatible properties
             tickformatstopdefaults
                 When used in a template (as layout.template.lay
                 out.scene.zaxis.tickformatstopdefaults), sets
@@ -270,7 +270,7 @@ class ZAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickwidth
                 Sets the tick width (in px).
             title
-                plotly.graph_objs.layout.scene.zaxis.Title
+                plotly.graph_objects.layout.scene.zaxis.Title
                 instance or dict with compatible properties
             titlefont
                 Deprecated: Please use
@@ -526,9 +526,9 @@ class YAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
             tickformatstops
-                plotly.graph_objs.layout.scene.yaxis.Tickformat
-                stop instance or dict with compatible
-                properties
+                A tuple of plotly.graph_objects.layout.scene.ya
+                xis.Tickformatstop instances or dicts with
+                compatible properties
             tickformatstopdefaults
                 When used in a template (as layout.template.lay
                 out.scene.yaxis.tickformatstopdefaults), sets
@@ -574,7 +574,7 @@ class YAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickwidth
                 Sets the tick width (in px).
             title
-                plotly.graph_objs.layout.scene.yaxis.Title
+                plotly.graph_objects.layout.scene.yaxis.Title
                 instance or dict with compatible properties
             titlefont
                 Deprecated: Please use
@@ -830,9 +830,9 @@ class XAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
             tickformatstops
-                plotly.graph_objs.layout.scene.xaxis.Tickformat
-                stop instance or dict with compatible
-                properties
+                A tuple of plotly.graph_objects.layout.scene.xa
+                xis.Tickformatstop instances or dicts with
+                compatible properties
             tickformatstopdefaults
                 When used in a template (as layout.template.lay
                 out.scene.xaxis.tickformatstopdefaults), sets
@@ -878,7 +878,7 @@ class XAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickwidth
                 Sets the tick width (in px).
             title
-                plotly.graph_objs.layout.scene.xaxis.Title
+                plotly.graph_objects.layout.scene.xaxis.Title
                 instance or dict with compatible properties
             titlefont
                 Deprecated: Please use
@@ -1008,8 +1008,9 @@ class CameraValidator(_plotly_utils.basevalidators.CompoundValidator):
                 vector. This vector determines the view point
                 about the origin of this scene.
             projection
-                plotly.graph_objs.layout.scene.camera.Projectio
-                n instance or dict with compatible properties
+                plotly.graph_objects.layout.scene.camera.Projec
+                tion instance or dict with compatible
+                properties
             up
                 Sets the (x,y,z) components of the 'up' camera
                 vector. This vector determines the up direction
@@ -1162,8 +1163,8 @@ class AnnotationsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 (default) lets the text set the box height.
                 Taller text will be clipped.
             hoverlabel
-                plotly.graph_objs.layout.scene.annotation.Hover
-                label instance or dict with compatible
+                plotly.graph_objects.layout.scene.annotation.Ho
+                verlabel instance or dict with compatible
                 properties
             hovertext
                 Sets text to appear when hovering over this

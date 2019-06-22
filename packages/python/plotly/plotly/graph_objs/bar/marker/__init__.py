@@ -1965,8 +1965,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.bar.marker.colorbar.Tickformatstop
-            instance or dict with compatible properties
+            A tuple of
+            plotly.graph_objects.bar.marker.colorbar.Tickformatstop
+            instances or dicts with compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.bar.ma
             rker.colorbar.tickformatstopdefaults), sets the default
@@ -2006,8 +2007,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.bar.marker.colorbar.Title instance or
-            dict with compatible properties
+            plotly.graph_objects.bar.marker.colorbar.Title instance
+            or dict with compatible properties
         titlefont
             Deprecated: Please use bar.marker.colorbar.title.font
             instead. Sets this color bar's title font. Note that
@@ -2213,8 +2214,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.bar.marker.colorbar.Tickformatstop
-            instance or dict with compatible properties
+            A tuple of
+            plotly.graph_objects.bar.marker.colorbar.Tickformatstop
+            instances or dicts with compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.bar.ma
             rker.colorbar.tickformatstopdefaults), sets the default
@@ -2254,8 +2256,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.bar.marker.colorbar.Title instance or
-            dict with compatible properties
+            plotly.graph_objects.bar.marker.colorbar.Title instance
+            or dict with compatible properties
         titlefont
             Deprecated: Please use bar.marker.colorbar.title.font
             instead. Sets this color bar's title font. Note that

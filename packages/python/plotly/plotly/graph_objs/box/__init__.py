@@ -49,7 +49,7 @@ class Unselected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            plotly.graph_objs.box.unselected.Marker instance or
+            plotly.graph_objects.box.unselected.Marker instance or
             dict with compatible properties
         """
 
@@ -63,7 +63,7 @@ class Unselected(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.box.Unselected
         marker
-            plotly.graph_objs.box.unselected.Marker instance or
+            plotly.graph_objects.box.unselected.Marker instance or
             dict with compatible properties
 
         Returns
@@ -303,8 +303,8 @@ class Selected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            plotly.graph_objs.box.selected.Marker instance or dict
-            with compatible properties
+            plotly.graph_objects.box.selected.Marker instance or
+            dict with compatible properties
         """
 
     def __init__(self, arg=None, marker=None, **kwargs):
@@ -317,8 +317,8 @@ class Selected(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.box.Selected
         marker
-            plotly.graph_objs.box.selected.Marker instance or dict
-            with compatible properties
+            plotly.graph_objects.box.selected.Marker instance or
+            dict with compatible properties
 
         Returns
         -------
@@ -677,8 +677,8 @@ class Marker(_BaseTraceHierarchyType):
             array or relative to `marker.cmin` and `marker.cmax` if
             set.
         line
-            plotly.graph_objs.box.marker.Line instance or dict with
-            compatible properties
+            plotly.graph_objects.box.marker.Line instance or dict
+            with compatible properties
         opacity
             Sets the marker opacity.
         outliercolor
@@ -719,8 +719,8 @@ class Marker(_BaseTraceHierarchyType):
             array or relative to `marker.cmin` and `marker.cmax` if
             set.
         line
-            plotly.graph_objs.box.marker.Line instance or dict with
-            compatible properties
+            plotly.graph_objects.box.marker.Line instance or dict
+            with compatible properties
         opacity
             Sets the marker opacity.
         outliercolor

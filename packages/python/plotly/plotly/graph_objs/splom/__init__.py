@@ -49,8 +49,8 @@ class Unselected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            plotly.graph_objs.splom.unselected.Marker instance or
-            dict with compatible properties
+            plotly.graph_objects.splom.unselected.Marker instance
+            or dict with compatible properties
         """
 
     def __init__(self, arg=None, marker=None, **kwargs):
@@ -63,8 +63,8 @@ class Unselected(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.splom.Unselected
         marker
-            plotly.graph_objs.splom.unselected.Marker instance or
-            dict with compatible properties
+            plotly.graph_objects.splom.unselected.Marker instance
+            or dict with compatible properties
 
         Returns
         -------
@@ -303,7 +303,7 @@ class Selected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            plotly.graph_objs.splom.selected.Marker instance or
+            plotly.graph_objects.splom.selected.Marker instance or
             dict with compatible properties
         """
 
@@ -317,7 +317,7 @@ class Selected(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.splom.Selected
         marker
-            plotly.graph_objs.splom.selected.Marker instance or
+            plotly.graph_objects.splom.selected.Marker instance or
             dict with compatible properties
 
         Returns
@@ -725,9 +725,9 @@ class Marker(_BaseTraceHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.splom.marker.colorbar.Tickfor
-                    matstop instance or dict with compatible
-                    properties
+                    A tuple of plotly.graph_objects.splom.marker.co
+                    lorbar.Tickformatstop instances or dicts with
+                    compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
                     a.splom.marker.colorbar.tickformatstopdefaults)
@@ -774,8 +774,8 @@ class Marker(_BaseTraceHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.splom.marker.colorbar.Title
-                    instance or dict with compatible properties
+                    plotly.graph_objects.splom.marker.colorbar.Titl
+                    e instance or dict with compatible properties
                 titlefont
                     Deprecated: Please use
                     splom.marker.colorbar.title.font instead. Sets
@@ -1348,7 +1348,7 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.splom.marker.ColorBar instance or
+            plotly.graph_objects.splom.marker.ColorBar instance or
             dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
@@ -1367,7 +1367,7 @@ class Marker(_BaseTraceHierarchyType):
         colorsrc
             Sets the source reference on plot.ly for  color .
         line
-            plotly.graph_objs.splom.marker.Line instance or dict
+            plotly.graph_objects.splom.marker.Line instance or dict
             with compatible properties
         opacity
             Sets the marker opacity.
@@ -1492,7 +1492,7 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.splom.marker.ColorBar instance or
+            plotly.graph_objects.splom.marker.ColorBar instance or
             dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
@@ -1511,7 +1511,7 @@ class Marker(_BaseTraceHierarchyType):
         colorsrc
             Sets the source reference on plot.ly for  color .
         line
-            plotly.graph_objs.splom.marker.Line instance or dict
+            plotly.graph_objects.splom.marker.Line instance or dict
             with compatible properties
         opacity
             Sets the marker opacity.
@@ -2330,8 +2330,8 @@ class Dimension(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         axis
-            plotly.graph_objs.splom.dimension.Axis instance or dict
-            with compatible properties
+            plotly.graph_objects.splom.dimension.Axis instance or
+            dict with compatible properties
         label
             Sets the label corresponding to this splom dimension.
         name
@@ -2385,8 +2385,8 @@ class Dimension(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.splom.Dimension
         axis
-            plotly.graph_objs.splom.dimension.Axis instance or dict
-            with compatible properties
+            plotly.graph_objects.splom.dimension.Axis instance or
+            dict with compatible properties
         label
             Sets the label corresponding to this splom dimension.
         name

@@ -353,8 +353,8 @@ class Z(_BaseTraceHierarchyType):
         highlightwidth
             Sets the width of the highlighted contour lines.
         project
-            plotly.graph_objs.surface.contours.z.Project instance
-            or dict with compatible properties
+            plotly.graph_objects.surface.contours.z.Project
+            instance or dict with compatible properties
         show
             Determines whether or not contour lines about the z
             dimension are drawn.
@@ -408,8 +408,8 @@ class Z(_BaseTraceHierarchyType):
         highlightwidth
             Sets the width of the highlighted contour lines.
         project
-            plotly.graph_objs.surface.contours.z.Project instance
-            or dict with compatible properties
+            plotly.graph_objects.surface.contours.z.Project
+            instance or dict with compatible properties
         show
             Determines whether or not contour lines about the z
             dimension are drawn.
@@ -858,8 +858,8 @@ class Y(_BaseTraceHierarchyType):
         highlightwidth
             Sets the width of the highlighted contour lines.
         project
-            plotly.graph_objs.surface.contours.y.Project instance
-            or dict with compatible properties
+            plotly.graph_objects.surface.contours.y.Project
+            instance or dict with compatible properties
         show
             Determines whether or not contour lines about the y
             dimension are drawn.
@@ -913,8 +913,8 @@ class Y(_BaseTraceHierarchyType):
         highlightwidth
             Sets the width of the highlighted contour lines.
         project
-            plotly.graph_objs.surface.contours.y.Project instance
-            or dict with compatible properties
+            plotly.graph_objects.surface.contours.y.Project
+            instance or dict with compatible properties
         show
             Determines whether or not contour lines about the y
             dimension are drawn.
@@ -1363,8 +1363,8 @@ class X(_BaseTraceHierarchyType):
         highlightwidth
             Sets the width of the highlighted contour lines.
         project
-            plotly.graph_objs.surface.contours.x.Project instance
-            or dict with compatible properties
+            plotly.graph_objects.surface.contours.x.Project
+            instance or dict with compatible properties
         show
             Determines whether or not contour lines about the x
             dimension are drawn.
@@ -1418,8 +1418,8 @@ class X(_BaseTraceHierarchyType):
         highlightwidth
             Sets the width of the highlighted contour lines.
         project
-            plotly.graph_objs.surface.contours.x.Project instance
-            or dict with compatible properties
+            plotly.graph_objects.surface.contours.x.Project
+            instance or dict with compatible properties
         show
             Determines whether or not contour lines about the x
             dimension are drawn.

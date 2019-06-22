@@ -114,8 +114,8 @@ class UnselectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             marker
-                plotly.graph_objs.choropleth.unselected.Marker
-                instance or dict with compatible properties
+                plotly.graph_objects.choropleth.unselected.Mark
+                er instance or dict with compatible properties
 """,
             ),
             **kwargs
@@ -250,7 +250,7 @@ class SelectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             marker
-                plotly.graph_objs.choropleth.selected.Marker
+                plotly.graph_objects.choropleth.selected.Marker
                 instance or dict with compatible properties
 """,
             ),
@@ -328,7 +328,7 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             line
-                plotly.graph_objs.choropleth.marker.Line
+                plotly.graph_objects.choropleth.marker.Line
                 instance or dict with compatible properties
             opacity
                 Sets the opacity of the locations.
@@ -752,9 +752,9 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
             tickformatstops
-                plotly.graph_objs.choropleth.colorbar.Tickforma
-                tstop instance or dict with compatible
-                properties
+                A tuple of plotly.graph_objects.choropleth.colo
+                rbar.Tickformatstop instances or dicts with
+                compatible properties
             tickformatstopdefaults
                 When used in a template (as layout.template.dat
                 a.choropleth.colorbar.tickformatstopdefaults),
@@ -800,7 +800,7 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickwidth
                 Sets the tick width (in px).
             title
-                plotly.graph_objs.choropleth.colorbar.Title
+                plotly.graph_objects.choropleth.colorbar.Title
                 instance or dict with compatible properties
             titlefont
                 Deprecated: Please use

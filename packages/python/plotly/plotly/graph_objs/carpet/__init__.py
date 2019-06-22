@@ -2545,8 +2545,9 @@ class Baxis(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.carpet.baxis.Tickformatstop instance
-            or dict with compatible properties
+            A tuple of
+            plotly.graph_objects.carpet.baxis.Tickformatstop
+            instances or dicts with compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.carpet
             .baxis.tickformatstopdefaults), sets the default
@@ -2571,8 +2572,8 @@ class Baxis(_BaseTraceHierarchyType):
         tickvalssrc
             Sets the source reference on plot.ly for  tickvals .
         title
-            plotly.graph_objs.carpet.baxis.Title instance or dict
-            with compatible properties
+            plotly.graph_objects.carpet.baxis.Title instance or
+            dict with compatible properties
         titlefont
             Deprecated: Please use carpet.baxis.title.font instead.
             Sets this axis' title font. Note that the title's font
@@ -2814,8 +2815,9 @@ class Baxis(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.carpet.baxis.Tickformatstop instance
-            or dict with compatible properties
+            A tuple of
+            plotly.graph_objects.carpet.baxis.Tickformatstop
+            instances or dicts with compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.carpet
             .baxis.tickformatstopdefaults), sets the default
@@ -2840,8 +2842,8 @@ class Baxis(_BaseTraceHierarchyType):
         tickvalssrc
             Sets the source reference on plot.ly for  tickvals .
         title
-            plotly.graph_objs.carpet.baxis.Title instance or dict
-            with compatible properties
+            plotly.graph_objects.carpet.baxis.Title instance or
+            dict with compatible properties
         titlefont
             Deprecated: Please use carpet.baxis.title.font instead.
             Sets this axis' title font. Note that the title's font
@@ -4779,8 +4781,9 @@ class Aaxis(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.carpet.aaxis.Tickformatstop instance
-            or dict with compatible properties
+            A tuple of
+            plotly.graph_objects.carpet.aaxis.Tickformatstop
+            instances or dicts with compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.carpet
             .aaxis.tickformatstopdefaults), sets the default
@@ -4805,8 +4808,8 @@ class Aaxis(_BaseTraceHierarchyType):
         tickvalssrc
             Sets the source reference on plot.ly for  tickvals .
         title
-            plotly.graph_objs.carpet.aaxis.Title instance or dict
-            with compatible properties
+            plotly.graph_objects.carpet.aaxis.Title instance or
+            dict with compatible properties
         titlefont
             Deprecated: Please use carpet.aaxis.title.font instead.
             Sets this axis' title font. Note that the title's font
@@ -5048,8 +5051,9 @@ class Aaxis(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.carpet.aaxis.Tickformatstop instance
-            or dict with compatible properties
+            A tuple of
+            plotly.graph_objects.carpet.aaxis.Tickformatstop
+            instances or dicts with compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.carpet
             .aaxis.tickformatstopdefaults), sets the default
@@ -5074,8 +5078,8 @@ class Aaxis(_BaseTraceHierarchyType):
         tickvalssrc
             Sets the source reference on plot.ly for  tickvals .
         title
-            plotly.graph_objs.carpet.aaxis.Title instance or dict
-            with compatible properties
+            plotly.graph_objects.carpet.aaxis.Title instance or
+            dict with compatible properties
         titlefont
             Deprecated: Please use carpet.aaxis.title.font instead.
             Sets this axis' title font. Note that the title's font

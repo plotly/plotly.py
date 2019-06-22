@@ -1467,8 +1467,9 @@ class Caxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.layout.ternary.caxis.Tickformatstop
-            instance or dict with compatible properties
+            A tuple of plotly.graph_objects.layout.ternary.caxis.Ti
+            ckformatstop instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.layout.tern
             ary.caxis.tickformatstopdefaults), sets the default
@@ -1508,8 +1509,8 @@ class Caxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.layout.ternary.caxis.Title instance
-            or dict with compatible properties
+            plotly.graph_objects.layout.ternary.caxis.Title
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use layout.ternary.caxis.title.font
             instead. Sets this axis' title font. Note that the
@@ -1700,8 +1701,9 @@ class Caxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.layout.ternary.caxis.Tickformatstop
-            instance or dict with compatible properties
+            A tuple of plotly.graph_objects.layout.ternary.caxis.Ti
+            ckformatstop instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.layout.tern
             ary.caxis.tickformatstopdefaults), sets the default
@@ -1741,8 +1743,8 @@ class Caxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.layout.ternary.caxis.Title instance
-            or dict with compatible properties
+            plotly.graph_objects.layout.ternary.caxis.Title
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use layout.ternary.caxis.title.font
             instead. Sets this axis' title font. Note that the
@@ -3180,8 +3182,9 @@ class Baxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.layout.ternary.baxis.Tickformatstop
-            instance or dict with compatible properties
+            A tuple of plotly.graph_objects.layout.ternary.baxis.Ti
+            ckformatstop instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.layout.tern
             ary.baxis.tickformatstopdefaults), sets the default
@@ -3221,8 +3224,8 @@ class Baxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.layout.ternary.baxis.Title instance
-            or dict with compatible properties
+            plotly.graph_objects.layout.ternary.baxis.Title
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use layout.ternary.baxis.title.font
             instead. Sets this axis' title font. Note that the
@@ -3413,8 +3416,9 @@ class Baxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.layout.ternary.baxis.Tickformatstop
-            instance or dict with compatible properties
+            A tuple of plotly.graph_objects.layout.ternary.baxis.Ti
+            ckformatstop instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.layout.tern
             ary.baxis.tickformatstopdefaults), sets the default
@@ -3454,8 +3458,8 @@ class Baxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.layout.ternary.baxis.Title instance
-            or dict with compatible properties
+            plotly.graph_objects.layout.ternary.baxis.Title
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use layout.ternary.baxis.title.font
             instead. Sets this axis' title font. Note that the
@@ -4893,8 +4897,9 @@ class Aaxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.layout.ternary.aaxis.Tickformatstop
-            instance or dict with compatible properties
+            A tuple of plotly.graph_objects.layout.ternary.aaxis.Ti
+            ckformatstop instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.layout.tern
             ary.aaxis.tickformatstopdefaults), sets the default
@@ -4934,8 +4939,8 @@ class Aaxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.layout.ternary.aaxis.Title instance
-            or dict with compatible properties
+            plotly.graph_objects.layout.ternary.aaxis.Title
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use layout.ternary.aaxis.title.font
             instead. Sets this axis' title font. Note that the
@@ -5126,8 +5131,9 @@ class Aaxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.layout.ternary.aaxis.Tickformatstop
-            instance or dict with compatible properties
+            A tuple of plotly.graph_objects.layout.ternary.aaxis.Ti
+            ckformatstop instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.layout.tern
             ary.aaxis.tickformatstopdefaults), sets the default
@@ -5167,8 +5173,8 @@ class Aaxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.layout.ternary.aaxis.Title instance
-            or dict with compatible properties
+            plotly.graph_objects.layout.ternary.aaxis.Title
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use layout.ternary.aaxis.title.font
             instead. Sets this axis' title font. Note that the

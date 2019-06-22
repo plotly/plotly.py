@@ -993,10 +993,10 @@ class Header(_BaseTraceHierarchyType):
         alignsrc
             Sets the source reference on plot.ly for  align .
         fill
-            plotly.graph_objs.table.header.Fill instance or dict
+            plotly.graph_objects.table.header.Fill instance or dict
             with compatible properties
         font
-            plotly.graph_objs.table.header.Font instance or dict
+            plotly.graph_objects.table.header.Font instance or dict
             with compatible properties
         format
             Sets the cell value formatting rule using d3 formatting
@@ -1008,7 +1008,7 @@ class Header(_BaseTraceHierarchyType):
         height
             The height of cells.
         line
-            plotly.graph_objs.table.header.Line instance or dict
+            plotly.graph_objects.table.header.Line instance or dict
             with compatible properties
         prefix
             Prefix for cell values.
@@ -1064,10 +1064,10 @@ class Header(_BaseTraceHierarchyType):
         alignsrc
             Sets the source reference on plot.ly for  align .
         fill
-            plotly.graph_objs.table.header.Fill instance or dict
+            plotly.graph_objects.table.header.Fill instance or dict
             with compatible properties
         font
-            plotly.graph_objs.table.header.Font instance or dict
+            plotly.graph_objects.table.header.Font instance or dict
             with compatible properties
         format
             Sets the cell value formatting rule using d3 formatting
@@ -1079,7 +1079,7 @@ class Header(_BaseTraceHierarchyType):
         height
             The height of cells.
         line
-            plotly.graph_objs.table.header.Line instance or dict
+            plotly.graph_objects.table.header.Line instance or dict
             with compatible properties
         prefix
             Prefix for cell values.
@@ -1769,10 +1769,10 @@ class Cells(_BaseTraceHierarchyType):
         alignsrc
             Sets the source reference on plot.ly for  align .
         fill
-            plotly.graph_objs.table.cells.Fill instance or dict
+            plotly.graph_objects.table.cells.Fill instance or dict
             with compatible properties
         font
-            plotly.graph_objs.table.cells.Font instance or dict
+            plotly.graph_objects.table.cells.Font instance or dict
             with compatible properties
         format
             Sets the cell value formatting rule using d3 formatting
@@ -1784,7 +1784,7 @@ class Cells(_BaseTraceHierarchyType):
         height
             The height of cells.
         line
-            plotly.graph_objs.table.cells.Line instance or dict
+            plotly.graph_objects.table.cells.Line instance or dict
             with compatible properties
         prefix
             Prefix for cell values.
@@ -1840,10 +1840,10 @@ class Cells(_BaseTraceHierarchyType):
         alignsrc
             Sets the source reference on plot.ly for  align .
         fill
-            plotly.graph_objs.table.cells.Fill instance or dict
+            plotly.graph_objects.table.cells.Fill instance or dict
             with compatible properties
         font
-            plotly.graph_objs.table.cells.Font instance or dict
+            plotly.graph_objects.table.cells.Font instance or dict
             with compatible properties
         format
             Sets the cell value formatting rule using d3 formatting
@@ -1855,7 +1855,7 @@ class Cells(_BaseTraceHierarchyType):
         height
             The height of cells.
         line
-            plotly.graph_objs.table.cells.Line instance or dict
+            plotly.graph_objects.table.cells.Line instance or dict
             with compatible properties
         prefix
             Prefix for cell values.

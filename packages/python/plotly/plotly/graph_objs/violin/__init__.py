@@ -49,8 +49,8 @@ class Unselected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            plotly.graph_objs.violin.unselected.Marker instance or
-            dict with compatible properties
+            plotly.graph_objects.violin.unselected.Marker instance
+            or dict with compatible properties
         """
 
     def __init__(self, arg=None, marker=None, **kwargs):
@@ -63,8 +63,8 @@ class Unselected(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.violin.Unselected
         marker
-            plotly.graph_objs.violin.unselected.Marker instance or
-            dict with compatible properties
+            plotly.graph_objects.violin.unselected.Marker instance
+            or dict with compatible properties
 
         Returns
         -------
@@ -303,7 +303,7 @@ class Selected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            plotly.graph_objs.violin.selected.Marker instance or
+            plotly.graph_objects.violin.selected.Marker instance or
             dict with compatible properties
         """
 
@@ -317,7 +317,7 @@ class Selected(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.violin.Selected
         marker
-            plotly.graph_objs.violin.selected.Marker instance or
+            plotly.graph_objects.violin.selected.Marker instance or
             dict with compatible properties
 
         Returns
@@ -882,8 +882,8 @@ class Marker(_BaseTraceHierarchyType):
             array or relative to `marker.cmin` and `marker.cmax` if
             set.
         line
-            plotly.graph_objs.violin.marker.Line instance or dict
-            with compatible properties
+            plotly.graph_objects.violin.marker.Line instance or
+            dict with compatible properties
         opacity
             Sets the marker opacity.
         outliercolor
@@ -924,8 +924,8 @@ class Marker(_BaseTraceHierarchyType):
             array or relative to `marker.cmin` and `marker.cmax` if
             set.
         line
-            plotly.graph_objs.violin.marker.Line instance or dict
-            with compatible properties
+            plotly.graph_objects.violin.marker.Line instance or
+            dict with compatible properties
         opacity
             Sets the marker opacity.
         outliercolor
@@ -1795,8 +1795,8 @@ class Box(_BaseTraceHierarchyType):
         fillcolor
             Sets the inner box plot fill color.
         line
-            plotly.graph_objs.violin.box.Line instance or dict with
-            compatible properties
+            plotly.graph_objects.violin.box.Line instance or dict
+            with compatible properties
         visible
             Determines if an miniature box plot is drawn inside the
             violins.
@@ -1820,8 +1820,8 @@ class Box(_BaseTraceHierarchyType):
         fillcolor
             Sets the inner box plot fill color.
         line
-            plotly.graph_objs.violin.box.Line instance or dict with
-            compatible properties
+            plotly.graph_objects.violin.box.Line instance or dict
+            with compatible properties
         visible
             Determines if an miniature box plot is drawn inside the
             violins.

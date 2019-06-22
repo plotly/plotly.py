@@ -557,10 +557,10 @@ class Unselected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            plotly.graph_objs.histogram.unselected.Marker instance
-            or dict with compatible properties
+            plotly.graph_objects.histogram.unselected.Marker
+            instance or dict with compatible properties
         textfont
-            plotly.graph_objs.histogram.unselected.Textfont
+            plotly.graph_objects.histogram.unselected.Textfont
             instance or dict with compatible properties
         """
 
@@ -574,10 +574,10 @@ class Unselected(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.histogram.Unselected
         marker
-            plotly.graph_objs.histogram.unselected.Marker instance
-            or dict with compatible properties
+            plotly.graph_objects.histogram.unselected.Marker
+            instance or dict with compatible properties
         textfont
-            plotly.graph_objs.histogram.unselected.Textfont
+            plotly.graph_objects.histogram.unselected.Textfont
             instance or dict with compatible properties
 
         Returns
@@ -844,11 +844,11 @@ class Selected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            plotly.graph_objs.histogram.selected.Marker instance or
-            dict with compatible properties
-        textfont
-            plotly.graph_objs.histogram.selected.Textfont instance
+            plotly.graph_objects.histogram.selected.Marker instance
             or dict with compatible properties
+        textfont
+            plotly.graph_objects.histogram.selected.Textfont
+            instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, marker=None, textfont=None, **kwargs):
@@ -861,11 +861,11 @@ class Selected(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.histogram.Selected
         marker
-            plotly.graph_objs.histogram.selected.Marker instance or
-            dict with compatible properties
-        textfont
-            plotly.graph_objs.histogram.selected.Textfont instance
+            plotly.graph_objects.histogram.selected.Marker instance
             or dict with compatible properties
+        textfont
+            plotly.graph_objects.histogram.selected.Textfont
+            instance or dict with compatible properties
 
         Returns
         -------
@@ -1275,9 +1275,9 @@ class Marker(_BaseTraceHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.histogram.marker.colorbar.Tic
-                    kformatstop instance or dict with compatible
-                    properties
+                    A tuple of plotly.graph_objects.histogram.marke
+                    r.colorbar.Tickformatstop instances or dicts
+                    with compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
                     a.histogram.marker.colorbar.tickformatstopdefau
@@ -1324,8 +1324,9 @@ class Marker(_BaseTraceHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.histogram.marker.colorbar.Tit
-                    le instance or dict with compatible properties
+                    plotly.graph_objects.histogram.marker.colorbar.
+                    Title instance or dict with compatible
+                    properties
                 titlefont
                     Deprecated: Please use
                     histogram.marker.colorbar.title.font instead.
@@ -1685,8 +1686,8 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.histogram.marker.ColorBar instance or
-            dict with compatible properties
+            plotly.graph_objects.histogram.marker.ColorBar instance
+            or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
             `marker.color`is set to a numerical array. The
@@ -1704,7 +1705,7 @@ class Marker(_BaseTraceHierarchyType):
         colorsrc
             Sets the source reference on plot.ly for  color .
         line
-            plotly.graph_objs.histogram.marker.Line instance or
+            plotly.graph_objects.histogram.marker.Line instance or
             dict with compatible properties
         opacity
             Sets the opacity of the bars.
@@ -1797,8 +1798,8 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.histogram.marker.ColorBar instance or
-            dict with compatible properties
+            plotly.graph_objects.histogram.marker.ColorBar instance
+            or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
             `marker.color`is set to a numerical array. The
@@ -1816,7 +1817,7 @@ class Marker(_BaseTraceHierarchyType):
         colorsrc
             Sets the source reference on plot.ly for  color .
         line
-            plotly.graph_objs.histogram.marker.Line instance or
+            plotly.graph_objects.histogram.marker.Line instance or
             dict with compatible properties
         opacity
             Sets the opacity of the bars.

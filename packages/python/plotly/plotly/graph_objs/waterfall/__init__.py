@@ -21,8 +21,8 @@ class Totals(_BaseTraceHierarchyType):
                     Sets the marker color of all intermediate sums
                     and total values.
                 line
-                    plotly.graph_objs.waterfall.totals.marker.Line
-                    instance or dict with compatible properties
+                    plotly.graph_objects.waterfall.totals.marker.Li
+                    ne instance or dict with compatible properties
 
         Returns
         -------
@@ -46,8 +46,8 @@ class Totals(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            plotly.graph_objs.waterfall.totals.Marker instance or
-            dict with compatible properties
+            plotly.graph_objects.waterfall.totals.Marker instance
+            or dict with compatible properties
         """
 
     def __init__(self, arg=None, marker=None, **kwargs):
@@ -60,8 +60,8 @@ class Totals(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.waterfall.Totals
         marker
-            plotly.graph_objs.waterfall.totals.Marker instance or
-            dict with compatible properties
+            plotly.graph_objects.waterfall.totals.Marker instance
+            or dict with compatible properties
 
         Returns
         -------
@@ -1239,8 +1239,9 @@ class Increasing(_BaseTraceHierarchyType):
                 color
                     Sets the marker color of all increasing values.
                 line
-                    plotly.graph_objs.waterfall.increasing.marker.L
-                    ine instance or dict with compatible properties
+                    plotly.graph_objects.waterfall.increasing.marke
+                    r.Line instance or dict with compatible
+                    properties
 
         Returns
         -------
@@ -1264,8 +1265,8 @@ class Increasing(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            plotly.graph_objs.waterfall.increasing.Marker instance
-            or dict with compatible properties
+            plotly.graph_objects.waterfall.increasing.Marker
+            instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, marker=None, **kwargs):
@@ -1278,8 +1279,8 @@ class Increasing(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.waterfall.Increasing
         marker
-            plotly.graph_objs.waterfall.increasing.Marker instance
-            or dict with compatible properties
+            plotly.graph_objects.waterfall.increasing.Marker
+            instance or dict with compatible properties
 
         Returns
         -------
@@ -1827,8 +1828,9 @@ class Decreasing(_BaseTraceHierarchyType):
                 color
                     Sets the marker color of all decreasing values.
                 line
-                    plotly.graph_objs.waterfall.decreasing.marker.L
-                    ine instance or dict with compatible properties
+                    plotly.graph_objects.waterfall.decreasing.marke
+                    r.Line instance or dict with compatible
+                    properties
 
         Returns
         -------
@@ -1852,8 +1854,8 @@ class Decreasing(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            plotly.graph_objs.waterfall.decreasing.Marker instance
-            or dict with compatible properties
+            plotly.graph_objects.waterfall.decreasing.Marker
+            instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, marker=None, **kwargs):
@@ -1866,8 +1868,8 @@ class Decreasing(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.waterfall.Decreasing
         marker
-            plotly.graph_objs.waterfall.decreasing.Marker instance
-            or dict with compatible properties
+            plotly.graph_objects.waterfall.decreasing.Marker
+            instance or dict with compatible properties
 
         Returns
         -------
@@ -2009,8 +2011,8 @@ class Connector(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         line
-            plotly.graph_objs.waterfall.connector.Line instance or
-            dict with compatible properties
+            plotly.graph_objects.waterfall.connector.Line instance
+            or dict with compatible properties
         mode
             Sets the shape of connector lines.
         visible
@@ -2027,8 +2029,8 @@ class Connector(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.waterfall.Connector
         line
-            plotly.graph_objs.waterfall.connector.Line instance or
-            dict with compatible properties
+            plotly.graph_objects.waterfall.connector.Line instance
+            or dict with compatible properties
         mode
             Sets the shape of connector lines.
         visible

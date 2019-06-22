@@ -56,11 +56,11 @@ class UnselectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             marker
-                plotly.graph_objs.barpolar.unselected.Marker
+                plotly.graph_objects.barpolar.unselected.Marker
                 instance or dict with compatible properties
             textfont
-                plotly.graph_objs.barpolar.unselected.Textfont
-                instance or dict with compatible properties
+                plotly.graph_objects.barpolar.unselected.Textfo
+                nt instance or dict with compatible properties
 """,
             ),
             **kwargs
@@ -265,10 +265,10 @@ class SelectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             marker
-                plotly.graph_objs.barpolar.selected.Marker
+                plotly.graph_objects.barpolar.selected.Marker
                 instance or dict with compatible properties
             textfont
-                plotly.graph_objs.barpolar.selected.Textfont
+                plotly.graph_objects.barpolar.selected.Textfont
                 instance or dict with compatible properties
 """,
             ),
@@ -472,7 +472,7 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color scales can be linked to the same color
                 axis.
             colorbar
-                plotly.graph_objs.barpolar.marker.ColorBar
+                plotly.graph_objects.barpolar.marker.ColorBar
                 instance or dict with compatible properties
             colorscale
                 Sets the colorscale. Has an effect only if in
@@ -494,8 +494,8 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  color
                 .
             line
-                plotly.graph_objs.barpolar.marker.Line instance
-                or dict with compatible properties
+                plotly.graph_objects.barpolar.marker.Line
+                instance or dict with compatible properties
             opacity
                 Sets the opacity of the bars.
             opacitysrc

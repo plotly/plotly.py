@@ -2369,8 +2369,9 @@ class YAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.layout.yaxis.Tickformatstop instance
-            or dict with compatible properties
+            A tuple of
+            plotly.graph_objects.layout.yaxis.Tickformatstop
+            instances or dicts with compatible properties
         tickformatstopdefaults
             When used in a template (as
             layout.template.layout.yaxis.tickformatstopdefaults),
@@ -2417,8 +2418,8 @@ class YAxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.layout.yaxis.Title instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.yaxis.Title instance or
+            dict with compatible properties
         titlefont
             Deprecated: Please use layout.yaxis.title.font instead.
             Sets this axis' title font. Note that the title's font
@@ -2825,8 +2826,9 @@ class YAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.layout.yaxis.Tickformatstop instance
-            or dict with compatible properties
+            A tuple of
+            plotly.graph_objects.layout.yaxis.Tickformatstop
+            instances or dicts with compatible properties
         tickformatstopdefaults
             When used in a template (as
             layout.template.layout.yaxis.tickformatstopdefaults),
@@ -2873,8 +2875,8 @@ class YAxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.layout.yaxis.Title instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.yaxis.Title instance or
+            dict with compatible properties
         titlefont
             Deprecated: Please use layout.yaxis.title.font instead.
             Sets this axis' title font. Note that the title's font
@@ -4162,8 +4164,9 @@ class XAxis(_BaseLayoutHierarchyType):
                     be visible. If visible, perpendicular axes will
                     be set to `fixedrange`
                 yaxis
-                    plotly.graph_objs.layout.xaxis.rangeslider.YAxi
-                    s instance or dict with compatible properties
+                    plotly.graph_objects.layout.xaxis.rangeslider.Y
+                    Axis instance or dict with compatible
+                    properties
 
         Returns
         -------
@@ -5553,11 +5556,11 @@ class XAxis(_BaseLayoutHierarchyType):
             "nonnegative", the range is non-negative, regardless of
             the input data. Applies only to linear axes.
         rangeselector
-            plotly.graph_objs.layout.xaxis.Rangeselector instance
-            or dict with compatible properties
+            plotly.graph_objects.layout.xaxis.Rangeselector
+            instance or dict with compatible properties
         rangeslider
-            plotly.graph_objs.layout.xaxis.Rangeslider instance or
-            dict with compatible properties
+            plotly.graph_objects.layout.xaxis.Rangeslider instance
+            or dict with compatible properties
         scaleanchor
             If set to another axis id (e.g. `x2`, `y`), the range
             of this axis changes together with the range of the
@@ -5672,8 +5675,9 @@ class XAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.layout.xaxis.Tickformatstop instance
-            or dict with compatible properties
+            A tuple of
+            plotly.graph_objects.layout.xaxis.Tickformatstop
+            instances or dicts with compatible properties
         tickformatstopdefaults
             When used in a template (as
             layout.template.layout.xaxis.tickformatstopdefaults),
@@ -5720,8 +5724,8 @@ class XAxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.layout.xaxis.Title instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.xaxis.Title instance or
+            dict with compatible properties
         titlefont
             Deprecated: Please use layout.xaxis.title.font instead.
             Sets this axis' title font. Note that the title's font
@@ -6017,11 +6021,11 @@ class XAxis(_BaseLayoutHierarchyType):
             "nonnegative", the range is non-negative, regardless of
             the input data. Applies only to linear axes.
         rangeselector
-            plotly.graph_objs.layout.xaxis.Rangeselector instance
-            or dict with compatible properties
+            plotly.graph_objects.layout.xaxis.Rangeselector
+            instance or dict with compatible properties
         rangeslider
-            plotly.graph_objs.layout.xaxis.Rangeslider instance or
-            dict with compatible properties
+            plotly.graph_objects.layout.xaxis.Rangeslider instance
+            or dict with compatible properties
         scaleanchor
             If set to another axis id (e.g. `x2`, `y`), the range
             of this axis changes together with the range of the
@@ -6136,8 +6140,9 @@ class XAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.layout.xaxis.Tickformatstop instance
-            or dict with compatible properties
+            A tuple of
+            plotly.graph_objects.layout.xaxis.Tickformatstop
+            instances or dicts with compatible properties
         tickformatstopdefaults
             When used in a template (as
             layout.template.layout.xaxis.tickformatstopdefaults),
@@ -6184,8 +6189,8 @@ class XAxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.layout.xaxis.Title instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.xaxis.Title instance or
+            dict with compatible properties
         titlefont
             Deprecated: Please use layout.xaxis.title.font instead.
             Sets this axis' title font. Note that the title's font
@@ -7086,8 +7091,9 @@ class Updatemenu(_BaseLayoutHierarchyType):
             Sets the width (in px) of the border enclosing the
             update menu.
         buttons
-            plotly.graph_objs.layout.updatemenu.Button instance or
-            dict with compatible properties
+            A tuple of
+            plotly.graph_objects.layout.updatemenu.Button instances
+            or dicts with compatible properties
         buttondefaults
             When used in a template (as
             layout.template.layout.updatemenu.buttondefaults), sets
@@ -7189,8 +7195,9 @@ class Updatemenu(_BaseLayoutHierarchyType):
             Sets the width (in px) of the border enclosing the
             update menu.
         buttons
-            plotly.graph_objs.layout.updatemenu.Button instance or
-            dict with compatible properties
+            A tuple of
+            plotly.graph_objects.layout.updatemenu.Button instances
+            or dicts with compatible properties
         buttondefaults
             When used in a template (as
             layout.template.layout.updatemenu.buttondefaults), sets
@@ -8149,9 +8156,9 @@ class Ternary(_BaseLayoutHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.layout.ternary.aaxis.Tickform
-                    atstop instance or dict with compatible
-                    properties
+                    A tuple of plotly.graph_objects.layout.ternary.
+                    aaxis.Tickformatstop instances or dicts with
+                    compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.lay
                     out.ternary.aaxis.tickformatstopdefaults), sets
@@ -8197,7 +8204,7 @@ class Ternary(_BaseLayoutHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.layout.ternary.aaxis.Title
+                    plotly.graph_objects.layout.ternary.aaxis.Title
                     instance or dict with compatible properties
                 titlefont
                     Deprecated: Please use
@@ -8376,9 +8383,9 @@ class Ternary(_BaseLayoutHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.layout.ternary.baxis.Tickform
-                    atstop instance or dict with compatible
-                    properties
+                    A tuple of plotly.graph_objects.layout.ternary.
+                    baxis.Tickformatstop instances or dicts with
+                    compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.lay
                     out.ternary.baxis.tickformatstopdefaults), sets
@@ -8424,7 +8431,7 @@ class Ternary(_BaseLayoutHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.layout.ternary.baxis.Title
+                    plotly.graph_objects.layout.ternary.baxis.Title
                     instance or dict with compatible properties
                 titlefont
                     Deprecated: Please use
@@ -8662,9 +8669,9 @@ class Ternary(_BaseLayoutHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.layout.ternary.caxis.Tickform
-                    atstop instance or dict with compatible
-                    properties
+                    A tuple of plotly.graph_objects.layout.ternary.
+                    caxis.Tickformatstop instances or dicts with
+                    compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.lay
                     out.ternary.caxis.tickformatstopdefaults), sets
@@ -8710,7 +8717,7 @@ class Ternary(_BaseLayoutHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.layout.ternary.caxis.Title
+                    plotly.graph_objects.layout.ternary.caxis.Title
                     instance or dict with compatible properties
                 titlefont
                     Deprecated: Please use
@@ -8825,18 +8832,18 @@ class Ternary(_BaseLayoutHierarchyType):
     def _prop_descriptions(self):
         return """\
         aaxis
-            plotly.graph_objs.layout.ternary.Aaxis instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.ternary.Aaxis instance or
+            dict with compatible properties
         baxis
-            plotly.graph_objs.layout.ternary.Baxis instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.ternary.Baxis instance or
+            dict with compatible properties
         bgcolor
             Set the background color of the subplot
         caxis
-            plotly.graph_objs.layout.ternary.Caxis instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.ternary.Caxis instance or
+            dict with compatible properties
         domain
-            plotly.graph_objs.layout.ternary.Domain instance or
+            plotly.graph_objects.layout.ternary.Domain instance or
             dict with compatible properties
         sum
             The number each triplet should sum to, and the maximum
@@ -8868,18 +8875,18 @@ class Ternary(_BaseLayoutHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.layout.Ternary
         aaxis
-            plotly.graph_objs.layout.ternary.Aaxis instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.ternary.Aaxis instance or
+            dict with compatible properties
         baxis
-            plotly.graph_objs.layout.ternary.Baxis instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.ternary.Baxis instance or
+            dict with compatible properties
         bgcolor
             Set the background color of the subplot
         caxis
-            plotly.graph_objs.layout.ternary.Caxis instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.ternary.Caxis instance or
+            dict with compatible properties
         domain
-            plotly.graph_objs.layout.ternary.Domain instance or
+            plotly.graph_objects.layout.ternary.Domain instance or
             dict with compatible properties
         sum
             The number each triplet should sum to, and the maximum
@@ -8975,138 +8982,132 @@ class Template(_BaseLayoutHierarchyType):
             Supported dict properties:
                 
                 area
-                    plotly.graph_objs.layout.template.data.Area
-                    instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Area instances
+                    or dicts with compatible properties
                 barpolar
-                    plotly.graph_objs.layout.template.data.Barpolar
-                    instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Barpolar
+                    instances or dicts with compatible properties
                 bar
-                    plotly.graph_objs.layout.template.data.Bar
-                    instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Bar instances
+                    or dicts with compatible properties
                 box
-                    plotly.graph_objs.layout.template.data.Box
-                    instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Box instances
+                    or dicts with compatible properties
                 candlestick
-                    plotly.graph_objs.layout.template.data.Candlest
-                    ick instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Candlestick
+                    instances or dicts with compatible properties
                 carpet
-                    plotly.graph_objs.layout.template.data.Carpet
-                    instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Carpet
+                    instances or dicts with compatible properties
                 choropleth
-                    plotly.graph_objs.layout.template.data.Chorople
-                    th instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Choropleth
+                    instances or dicts with compatible properties
                 cone
-                    plotly.graph_objs.layout.template.data.Cone
-                    instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Cone instances
+                    or dicts with compatible properties
                 contourcarpet
-                    plotly.graph_objs.layout.template.data.Contourc
-                    arpet instance or dict with compatible
-                    properties
+                    A tuple of plotly.graph_objects.Contourcarpet
+                    instances or dicts with compatible properties
                 contour
-                    plotly.graph_objs.layout.template.data.Contour
-                    instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Contour
+                    instances or dicts with compatible properties
                 funnelarea
-                    plotly.graph_objs.layout.template.data.Funnelar
-                    ea instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Funnelarea
+                    instances or dicts with compatible properties
                 funnel
-                    plotly.graph_objs.layout.template.data.Funnel
-                    instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Funnel
+                    instances or dicts with compatible properties
                 heatmapgl
-                    plotly.graph_objs.layout.template.data.Heatmapg
-                    l instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Heatmapgl
+                    instances or dicts with compatible properties
                 heatmap
-                    plotly.graph_objs.layout.template.data.Heatmap
-                    instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Heatmap
+                    instances or dicts with compatible properties
                 histogram2dcontour
-                    plotly.graph_objs.layout.template.data.Histogra
-                    m2dContour instance or dict with compatible
-                    properties
+                    A tuple of
+                    plotly.graph_objects.Histogram2dContour
+                    instances or dicts with compatible properties
                 histogram2d
-                    plotly.graph_objs.layout.template.data.Histogra
-                    m2d instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Histogram2d
+                    instances or dicts with compatible properties
                 histogram
-                    plotly.graph_objs.layout.template.data.Histogra
-                    m instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Histogram
+                    instances or dicts with compatible properties
                 isosurface
-                    plotly.graph_objs.layout.template.data.Isosurfa
-                    ce instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Isosurface
+                    instances or dicts with compatible properties
                 mesh3d
-                    plotly.graph_objs.layout.template.data.Mesh3d
-                    instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Mesh3d
+                    instances or dicts with compatible properties
                 ohlc
-                    plotly.graph_objs.layout.template.data.Ohlc
-                    instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Ohlc instances
+                    or dicts with compatible properties
                 parcats
-                    plotly.graph_objs.layout.template.data.Parcats
-                    instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Parcats
+                    instances or dicts with compatible properties
                 parcoords
-                    plotly.graph_objs.layout.template.data.Parcoord
-                    s instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Parcoords
+                    instances or dicts with compatible properties
                 pie
-                    plotly.graph_objs.layout.template.data.Pie
-                    instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Pie instances
+                    or dicts with compatible properties
                 pointcloud
-                    plotly.graph_objs.layout.template.data.Pointclo
-                    ud instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Pointcloud
+                    instances or dicts with compatible properties
                 sankey
-                    plotly.graph_objs.layout.template.data.Sankey
-                    instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Sankey
+                    instances or dicts with compatible properties
                 scatter3d
-                    plotly.graph_objs.layout.template.data.Scatter3
-                    d instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Scatter3d
+                    instances or dicts with compatible properties
                 scattercarpet
-                    plotly.graph_objs.layout.template.data.Scatterc
-                    arpet instance or dict with compatible
-                    properties
+                    A tuple of plotly.graph_objects.Scattercarpet
+                    instances or dicts with compatible properties
                 scattergeo
-                    plotly.graph_objs.layout.template.data.Scatterg
-                    eo instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Scattergeo
+                    instances or dicts with compatible properties
                 scattergl
-                    plotly.graph_objs.layout.template.data.Scatterg
-                    l instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Scattergl
+                    instances or dicts with compatible properties
                 scattermapbox
-                    plotly.graph_objs.layout.template.data.Scatterm
-                    apbox instance or dict with compatible
-                    properties
+                    A tuple of plotly.graph_objects.Scattermapbox
+                    instances or dicts with compatible properties
                 scatterpolargl
-                    plotly.graph_objs.layout.template.data.Scatterp
-                    olargl instance or dict with compatible
-                    properties
+                    A tuple of plotly.graph_objects.Scatterpolargl
+                    instances or dicts with compatible properties
                 scatterpolar
-                    plotly.graph_objs.layout.template.data.Scatterp
-                    olar instance or dict with compatible
-                    properties
+                    A tuple of plotly.graph_objects.Scatterpolar
+                    instances or dicts with compatible properties
                 scatter
-                    plotly.graph_objs.layout.template.data.Scatter
-                    instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Scatter
+                    instances or dicts with compatible properties
                 scatterternary
-                    plotly.graph_objs.layout.template.data.Scattert
-                    ernary instance or dict with compatible
-                    properties
+                    A tuple of plotly.graph_objects.Scatterternary
+                    instances or dicts with compatible properties
                 splom
-                    plotly.graph_objs.layout.template.data.Splom
-                    instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Splom instances
+                    or dicts with compatible properties
                 streamtube
-                    plotly.graph_objs.layout.template.data.Streamtu
-                    be instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Streamtube
+                    instances or dicts with compatible properties
                 sunburst
-                    plotly.graph_objs.layout.template.data.Sunburst
-                    instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Sunburst
+                    instances or dicts with compatible properties
                 surface
-                    plotly.graph_objs.layout.template.data.Surface
-                    instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Surface
+                    instances or dicts with compatible properties
                 table
-                    plotly.graph_objs.layout.template.data.Table
-                    instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Table instances
+                    or dicts with compatible properties
                 violin
-                    plotly.graph_objs.layout.template.data.Violin
-                    instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Violin
+                    instances or dicts with compatible properties
                 volume
-                    plotly.graph_objs.layout.template.data.Volume
-                    instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Volume
+                    instances or dicts with compatible properties
                 waterfall
-                    plotly.graph_objs.layout.template.data.Waterfal
-                    l instance or dict with compatible properties
+                    A tuple of plotly.graph_objects.Waterfall
+                    instances or dicts with compatible properties
 
         Returns
         -------
@@ -9125,7 +9126,7 @@ class Template(_BaseLayoutHierarchyType):
         """
         The 'layout' property is an instance of Layout
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.template.Layout
+          - An instance of plotly.graph_objs.Layout
           - A dict of string/value properties that will be passed
             to the Layout constructor
     
@@ -9153,11 +9154,11 @@ class Template(_BaseLayoutHierarchyType):
     def _prop_descriptions(self):
         return """\
         data
-            plotly.graph_objs.layout.template.Data instance or dict
-            with compatible properties
-        layout
-            plotly.graph_objs.layout.template.Layout instance or
+            plotly.graph_objects.layout.template.Data instance or
             dict with compatible properties
+        layout
+            plotly.graph_objects.Layout instance or dict with
+            compatible properties
         """
 
     def __init__(self, arg=None, data=None, layout=None, **kwargs):
@@ -9190,11 +9191,11 @@ class Template(_BaseLayoutHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.layout.Template
         data
-            plotly.graph_objs.layout.template.Data instance or dict
-            with compatible properties
-        layout
-            plotly.graph_objs.layout.template.Layout instance or
+            plotly.graph_objects.layout.template.Data instance or
             dict with compatible properties
+        layout
+            plotly.graph_objects.Layout instance or dict with
+            compatible properties
 
         Returns
         -------
@@ -10075,8 +10076,8 @@ class Slider(_BaseLayoutHierarchyType):
             Sets the width (in px) of the border enclosing the
             slider.
         currentvalue
-            plotly.graph_objs.layout.slider.Currentvalue instance
-            or dict with compatible properties
+            plotly.graph_objects.layout.slider.Currentvalue
+            instance or dict with compatible properties
         font
             Sets the font of the slider step labels.
         len
@@ -10102,8 +10103,8 @@ class Slider(_BaseLayoutHierarchyType):
             Set the padding of the slider component along each
             side.
         steps
-            plotly.graph_objs.layout.slider.Step instance or dict
-            with compatible properties
+            A tuple of plotly.graph_objects.layout.slider.Step
+            instances or dicts with compatible properties
         stepdefaults
             When used in a template (as
             layout.template.layout.slider.stepdefaults), sets the
@@ -10126,8 +10127,8 @@ class Slider(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         transition
-            plotly.graph_objs.layout.slider.Transition instance or
-            dict with compatible properties
+            plotly.graph_objects.layout.slider.Transition instance
+            or dict with compatible properties
         visible
             Determines whether or not the slider is visible.
         x
@@ -10197,8 +10198,8 @@ class Slider(_BaseLayoutHierarchyType):
             Sets the width (in px) of the border enclosing the
             slider.
         currentvalue
-            plotly.graph_objs.layout.slider.Currentvalue instance
-            or dict with compatible properties
+            plotly.graph_objects.layout.slider.Currentvalue
+            instance or dict with compatible properties
         font
             Sets the font of the slider step labels.
         len
@@ -10224,8 +10225,8 @@ class Slider(_BaseLayoutHierarchyType):
             Set the padding of the slider component along each
             side.
         steps
-            plotly.graph_objs.layout.slider.Step instance or dict
-            with compatible properties
+            A tuple of plotly.graph_objects.layout.slider.Step
+            instances or dicts with compatible properties
         stepdefaults
             When used in a template (as
             layout.template.layout.slider.stepdefaults), sets the
@@ -10248,8 +10249,8 @@ class Slider(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         transition
-            plotly.graph_objs.layout.slider.Transition instance or
-            dict with compatible properties
+            plotly.graph_objects.layout.slider.Transition instance
+            or dict with compatible properties
         visible
             Determines whether or not the slider is visible.
         x
@@ -10924,7 +10925,7 @@ class Shape(_BaseLayoutHierarchyType):
             Specifies whether shapes are drawn below or above
             traces.
         line
-            plotly.graph_objs.layout.shape.Line instance or dict
+            plotly.graph_objects.layout.shape.Line instance or dict
             with compatible properties
         name
             When used in a template, named items are created in the
@@ -11088,7 +11089,7 @@ class Shape(_BaseLayoutHierarchyType):
             Specifies whether shapes are drawn below or above
             traces.
         line
-            plotly.graph_objs.layout.shape.Line instance or dict
+            plotly.graph_objects.layout.shape.Line instance or dict
             with compatible properties
         name
             When used in a template, named items are created in the
@@ -11390,8 +11391,8 @@ class Scene(_BaseLayoutHierarchyType):
                     (default) lets the text set the box height.
                     Taller text will be clipped.
                 hoverlabel
-                    plotly.graph_objs.layout.scene.annotation.Hover
-                    label instance or dict with compatible
+                    plotly.graph_objects.layout.scene.annotation.Ho
+                    verlabel instance or dict with compatible
                     properties
                 hovertext
                     Sets text to appear when hovering over this
@@ -11692,8 +11693,9 @@ class Scene(_BaseLayoutHierarchyType):
                     vector. This vector determines the view point
                     about the origin of this scene.
                 projection
-                    plotly.graph_objs.layout.scene.camera.Projectio
-                    n instance or dict with compatible properties
+                    plotly.graph_objects.layout.scene.camera.Projec
+                    tion instance or dict with compatible
+                    properties
                 up
                     Sets the (x,y,z) components of the 'up' camera
                     vector. This vector determines the up direction
@@ -12035,9 +12037,9 @@ class Scene(_BaseLayoutHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.layout.scene.xaxis.Tickformat
-                    stop instance or dict with compatible
-                    properties
+                    A tuple of plotly.graph_objects.layout.scene.xa
+                    xis.Tickformatstop instances or dicts with
+                    compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.lay
                     out.scene.xaxis.tickformatstopdefaults), sets
@@ -12083,7 +12085,7 @@ class Scene(_BaseLayoutHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.layout.scene.xaxis.Title
+                    plotly.graph_objects.layout.scene.xaxis.Title
                     instance or dict with compatible properties
                 titlefont
                     Deprecated: Please use
@@ -12345,9 +12347,9 @@ class Scene(_BaseLayoutHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.layout.scene.yaxis.Tickformat
-                    stop instance or dict with compatible
-                    properties
+                    A tuple of plotly.graph_objects.layout.scene.ya
+                    xis.Tickformatstop instances or dicts with
+                    compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.lay
                     out.scene.yaxis.tickformatstopdefaults), sets
@@ -12393,7 +12395,7 @@ class Scene(_BaseLayoutHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.layout.scene.yaxis.Title
+                    plotly.graph_objects.layout.scene.yaxis.Title
                     instance or dict with compatible properties
                 titlefont
                     Deprecated: Please use
@@ -12655,9 +12657,9 @@ class Scene(_BaseLayoutHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.layout.scene.zaxis.Tickformat
-                    stop instance or dict with compatible
-                    properties
+                    A tuple of plotly.graph_objects.layout.scene.za
+                    xis.Tickformatstop instances or dicts with
+                    compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.lay
                     out.scene.zaxis.tickformatstopdefaults), sets
@@ -12703,7 +12705,7 @@ class Scene(_BaseLayoutHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.layout.scene.zaxis.Title
+                    plotly.graph_objects.layout.scene.zaxis.Title
                     instance or dict with compatible properties
                 titlefont
                     Deprecated: Please use
@@ -12752,8 +12754,8 @@ class Scene(_BaseLayoutHierarchyType):
     def _prop_descriptions(self):
         return """\
         annotations
-            plotly.graph_objs.layout.scene.Annotation instance or
-            dict with compatible properties
+            A tuple of plotly.graph_objects.layout.scene.Annotation
+            instances or dicts with compatible properties
         annotationdefaults
             When used in a template (as
             layout.template.layout.scene.annotationdefaults), sets
@@ -12775,11 +12777,11 @@ class Scene(_BaseLayoutHierarchyType):
         bgcolor
 
         camera
-            plotly.graph_objs.layout.scene.Camera instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.scene.Camera instance or
+            dict with compatible properties
         domain
-            plotly.graph_objs.layout.scene.Domain instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.scene.Domain instance or
+            dict with compatible properties
         dragmode
             Determines the mode of drag interactions for this
             scene.
@@ -12790,14 +12792,14 @@ class Scene(_BaseLayoutHierarchyType):
             Controls persistence of user-driven changes in camera
             attributes. Defaults to `layout.uirevision`.
         xaxis
-            plotly.graph_objs.layout.scene.XAxis instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.scene.XAxis instance or
+            dict with compatible properties
         yaxis
-            plotly.graph_objs.layout.scene.YAxis instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.scene.YAxis instance or
+            dict with compatible properties
         zaxis
-            plotly.graph_objs.layout.scene.ZAxis instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.scene.ZAxis instance or
+            dict with compatible properties
         """
 
     def __init__(
@@ -12827,8 +12829,8 @@ class Scene(_BaseLayoutHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.layout.Scene
         annotations
-            plotly.graph_objs.layout.scene.Annotation instance or
-            dict with compatible properties
+            A tuple of plotly.graph_objects.layout.scene.Annotation
+            instances or dicts with compatible properties
         annotationdefaults
             When used in a template (as
             layout.template.layout.scene.annotationdefaults), sets
@@ -12850,11 +12852,11 @@ class Scene(_BaseLayoutHierarchyType):
         bgcolor
 
         camera
-            plotly.graph_objs.layout.scene.Camera instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.scene.Camera instance or
+            dict with compatible properties
         domain
-            plotly.graph_objs.layout.scene.Domain instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.scene.Domain instance or
+            dict with compatible properties
         dragmode
             Determines the mode of drag interactions for this
             scene.
@@ -12865,14 +12867,14 @@ class Scene(_BaseLayoutHierarchyType):
             Controls persistence of user-driven changes in camera
             attributes. Defaults to `layout.uirevision`.
         xaxis
-            plotly.graph_objs.layout.scene.XAxis instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.scene.XAxis instance or
+            dict with compatible properties
         yaxis
-            plotly.graph_objs.layout.scene.YAxis instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.scene.YAxis instance or
+            dict with compatible properties
         zaxis
-            plotly.graph_objs.layout.scene.ZAxis instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.scene.ZAxis instance or
+            dict with compatible properties
 
         Returns
         -------
@@ -13656,9 +13658,9 @@ class Polar(_BaseLayoutHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.layout.polar.angularaxis.Tick
-                    formatstop instance or dict with compatible
-                    properties
+                    A tuple of plotly.graph_objects.layout.polar.an
+                    gularaxis.Tickformatstop instances or dicts
+                    with compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.lay
                     out.polar.angularaxis.tickformatstopdefaults),
@@ -14137,9 +14139,9 @@ class Polar(_BaseLayoutHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.layout.polar.radialaxis.Tickf
-                    ormatstop instance or dict with compatible
-                    properties
+                    A tuple of plotly.graph_objects.layout.polar.ra
+                    dialaxis.Tickformatstop instances or dicts with
+                    compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.lay
                     out.polar.radialaxis.tickformatstopdefaults),
@@ -14186,8 +14188,8 @@ class Polar(_BaseLayoutHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.layout.polar.radialaxis.Title
-                    instance or dict with compatible properties
+                    plotly.graph_objects.layout.polar.radialaxis.Ti
+                    tle instance or dict with compatible properties
                 titlefont
                     Deprecated: Please use
                     layout.polar.radialaxis.title.font instead.
@@ -14281,8 +14283,8 @@ class Polar(_BaseLayoutHierarchyType):
     def _prop_descriptions(self):
         return """\
         angularaxis
-            plotly.graph_objs.layout.polar.AngularAxis instance or
-            dict with compatible properties
+            plotly.graph_objects.layout.polar.AngularAxis instance
+            or dict with compatible properties
         bargap
             Sets the gap between bars of adjacent location
             coordinates. Values are unitless, they represent
@@ -14297,8 +14299,8 @@ class Polar(_BaseLayoutHierarchyType):
         bgcolor
             Set the background color of the subplot
         domain
-            plotly.graph_objs.layout.polar.Domain instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.polar.Domain instance or
+            dict with compatible properties
         gridshape
             Determines if the radial axis grid lines and angular
             axis line are drawn as "circular" sectors or as
@@ -14311,8 +14313,8 @@ class Polar(_BaseLayoutHierarchyType):
             Sets the fraction of the radius to cut out of the polar
             subplot.
         radialaxis
-            plotly.graph_objs.layout.polar.RadialAxis instance or
-            dict with compatible properties
+            plotly.graph_objects.layout.polar.RadialAxis instance
+            or dict with compatible properties
         sector
             Sets angular span of this polar subplot with two angles
             (in degrees). Sector are assumed to be spanned in the
@@ -14348,8 +14350,8 @@ class Polar(_BaseLayoutHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.layout.Polar
         angularaxis
-            plotly.graph_objs.layout.polar.AngularAxis instance or
-            dict with compatible properties
+            plotly.graph_objects.layout.polar.AngularAxis instance
+            or dict with compatible properties
         bargap
             Sets the gap between bars of adjacent location
             coordinates. Values are unitless, they represent
@@ -14364,8 +14366,8 @@ class Polar(_BaseLayoutHierarchyType):
         bgcolor
             Set the background color of the subplot
         domain
-            plotly.graph_objs.layout.polar.Domain instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.polar.Domain instance or
+            dict with compatible properties
         gridshape
             Determines if the radial axis grid lines and angular
             axis line are drawn as "circular" sectors or as
@@ -14378,8 +14380,8 @@ class Polar(_BaseLayoutHierarchyType):
             Sets the fraction of the radius to cut out of the polar
             subplot.
         radialaxis
-            plotly.graph_objs.layout.polar.RadialAxis instance or
-            dict with compatible properties
+            plotly.graph_objects.layout.polar.RadialAxis instance
+            or dict with compatible properties
         sector
             Sets angular span of this polar subplot with two angles
             (in degrees). Sector are assumed to be spanned in the
@@ -15194,7 +15196,7 @@ class Mapbox(_BaseLayoutHierarchyType):
                     set to '', the layer will be inserted above
                     every existing layer.
                 circle
-                    plotly.graph_objs.layout.mapbox.layer.Circle
+                    plotly.graph_objects.layout.mapbox.layer.Circle
                     instance or dict with compatible properties
                 color
                     Sets the primary layer color. If `type` is
@@ -15207,10 +15209,10 @@ class Mapbox(_BaseLayoutHierarchyType):
                     "symbol", color corresponds to the icon color
                     (mapbox.layer.paint.icon-color)
                 fill
-                    plotly.graph_objs.layout.mapbox.layer.Fill
+                    plotly.graph_objects.layout.mapbox.layer.Fill
                     instance or dict with compatible properties
                 line
-                    plotly.graph_objs.layout.mapbox.layer.Line
+                    plotly.graph_objects.layout.mapbox.layer.Line
                     instance or dict with compatible properties
                 maxzoom
                     Sets the maximum zoom level
@@ -15258,7 +15260,7 @@ class Mapbox(_BaseLayoutHierarchyType):
                     for "raster", "image" and "video" source types
                     is coming soon.
                 symbol
-                    plotly.graph_objs.layout.mapbox.layer.Symbol
+                    plotly.graph_objects.layout.mapbox.layer.Symbol
                     instance or dict with compatible properties
                 templateitemname
                     Used to refer to a named item in this array in
@@ -15418,14 +15420,14 @@ class Mapbox(_BaseLayoutHierarchyType):
             Sets the bearing angle of the map in degrees counter-
             clockwise from North (mapbox.bearing).
         center
-            plotly.graph_objs.layout.mapbox.Center instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.mapbox.Center instance or
+            dict with compatible properties
         domain
-            plotly.graph_objs.layout.mapbox.Domain instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.mapbox.Domain instance or
+            dict with compatible properties
         layers
-            plotly.graph_objs.layout.mapbox.Layer instance or dict
-            with compatible properties
+            A tuple of plotly.graph_objects.layout.mapbox.Layer
+            instances or dicts with compatible properties
         layerdefaults
             When used in a template (as
             layout.template.layout.mapbox.layerdefaults), sets the
@@ -15478,14 +15480,14 @@ class Mapbox(_BaseLayoutHierarchyType):
             Sets the bearing angle of the map in degrees counter-
             clockwise from North (mapbox.bearing).
         center
-            plotly.graph_objs.layout.mapbox.Center instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.mapbox.Center instance or
+            dict with compatible properties
         domain
-            plotly.graph_objs.layout.mapbox.Domain instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.mapbox.Domain instance or
+            dict with compatible properties
         layers
-            plotly.graph_objs.layout.mapbox.Layer instance or dict
-            with compatible properties
+            A tuple of plotly.graph_objects.layout.mapbox.Layer
+            instances or dicts with compatible properties
         layerdefaults
             When used in a template (as
             layout.template.layout.mapbox.layerdefaults), sets the
@@ -17611,8 +17613,8 @@ class Grid(_BaseLayoutHierarchyType):
             to have a different length, if you want to leave a row
             at the end for non-cartesian subplots.
         domain
-            plotly.graph_objs.layout.grid.Domain instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.grid.Domain instance or
+            dict with compatible properties
         pattern
             If no `subplots`, `xaxes`, or `yaxes` are given but we
             do have `rows` and `columns`, we can generate defaults
@@ -17708,8 +17710,8 @@ class Grid(_BaseLayoutHierarchyType):
             to have a different length, if you want to leave a row
             at the end for non-cartesian subplots.
         domain
-            plotly.graph_objs.layout.grid.Domain instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.grid.Domain instance or
+            dict with compatible properties
         pattern
             If no `subplots`, `xaxes`, or `yaxes` are given but we
             do have `rows` and `columns`, we can generate defaults
@@ -18514,8 +18516,9 @@ class Geo(_BaseLayoutHierarchyType):
                     parallels (tangent, secant) where the cone
                     intersects the sphere.
                 rotation
-                    plotly.graph_objs.layout.geo.projection.Rotatio
-                    n instance or dict with compatible properties
+                    plotly.graph_objects.layout.geo.projection.Rota
+                    tion instance or dict with compatible
+                    properties
                 scale
                     Zooms in or out on the map view. A scale of 1
                     corresponds to the largest zoom level that fits
@@ -18931,7 +18934,7 @@ class Geo(_BaseLayoutHierarchyType):
         bgcolor
             Set the background color of the map
         center
-            plotly.graph_objs.layout.geo.Center instance or dict
+            plotly.graph_objects.layout.geo.Center instance or dict
             with compatible properties
         coastlinecolor
             Sets the coastline color.
@@ -18942,7 +18945,7 @@ class Geo(_BaseLayoutHierarchyType):
         countrywidth
             Sets line width (in px) of the country boundaries.
         domain
-            plotly.graph_objs.layout.geo.Domain instance or dict
+            plotly.graph_objects.layout.geo.Domain instance or dict
             with compatible properties
         framecolor
             Sets the color the frame.
@@ -18953,15 +18956,15 @@ class Geo(_BaseLayoutHierarchyType):
         landcolor
             Sets the land mass color.
         lataxis
-            plotly.graph_objs.layout.geo.Lataxis instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.geo.Lataxis instance or
+            dict with compatible properties
         lonaxis
-            plotly.graph_objs.layout.geo.Lonaxis instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.geo.Lonaxis instance or
+            dict with compatible properties
         oceancolor
             Sets the ocean color
         projection
-            plotly.graph_objs.layout.geo.Projection instance or
+            plotly.graph_objects.layout.geo.Projection instance or
             dict with compatible properties
         resolution
             Sets the resolution of the base layers. The values have
@@ -19047,7 +19050,7 @@ class Geo(_BaseLayoutHierarchyType):
         bgcolor
             Set the background color of the map
         center
-            plotly.graph_objs.layout.geo.Center instance or dict
+            plotly.graph_objects.layout.geo.Center instance or dict
             with compatible properties
         coastlinecolor
             Sets the coastline color.
@@ -19058,7 +19061,7 @@ class Geo(_BaseLayoutHierarchyType):
         countrywidth
             Sets line width (in px) of the country boundaries.
         domain
-            plotly.graph_objs.layout.geo.Domain instance or dict
+            plotly.graph_objects.layout.geo.Domain instance or dict
             with compatible properties
         framecolor
             Sets the color the frame.
@@ -19069,15 +19072,15 @@ class Geo(_BaseLayoutHierarchyType):
         landcolor
             Sets the land mass color.
         lataxis
-            plotly.graph_objs.layout.geo.Lataxis instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.geo.Lataxis instance or
+            dict with compatible properties
         lonaxis
-            plotly.graph_objs.layout.geo.Lonaxis instance or dict
-            with compatible properties
+            plotly.graph_objects.layout.geo.Lonaxis instance or
+            dict with compatible properties
         oceancolor
             Sets the ocean color
         projection
-            plotly.graph_objs.layout.geo.Projection instance or
+            plotly.graph_objects.layout.geo.Projection instance or
             dict with compatible properties
         resolution
             Sets the resolution of the base layers. The values have
@@ -19936,9 +19939,9 @@ class Coloraxis(_BaseLayoutHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.layout.coloraxis.colorbar.Tic
-                    kformatstop instance or dict with compatible
-                    properties
+                    A tuple of plotly.graph_objects.layout.coloraxi
+                    s.colorbar.Tickformatstop instances or dicts
+                    with compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.lay
                     out.coloraxis.colorbar.tickformatstopdefaults),
@@ -19985,8 +19988,9 @@ class Coloraxis(_BaseLayoutHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.layout.coloraxis.colorbar.Tit
-                    le instance or dict with compatible properties
+                    plotly.graph_objects.layout.coloraxis.colorbar.
+                    Title instance or dict with compatible
+                    properties
                 titlefont
                     Deprecated: Please use
                     layout.coloraxis.colorbar.title.font instead.
@@ -20150,8 +20154,8 @@ class Coloraxis(_BaseLayoutHierarchyType):
             have the same units as corresponding trace color
             array(s) and if set, `cmax` must be set as well.
         colorbar
-            plotly.graph_objs.layout.coloraxis.ColorBar instance or
-            dict with compatible properties
+            plotly.graph_objects.layout.coloraxis.ColorBar instance
+            or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
@@ -20222,8 +20226,8 @@ class Coloraxis(_BaseLayoutHierarchyType):
             have the same units as corresponding trace color
             array(s) and if set, `cmax` must be set as well.
         colorbar
-            plotly.graph_objs.layout.coloraxis.ColorBar instance or
-            dict with compatible properties
+            plotly.graph_objects.layout.coloraxis.ColorBar instance
+            or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
@@ -21577,8 +21581,8 @@ class Annotation(_BaseLayoutHierarchyType):
             (default) lets the text set the box height. Taller text
             will be clipped.
         hoverlabel
-            plotly.graph_objs.layout.annotation.Hoverlabel instance
-            or dict with compatible properties
+            plotly.graph_objects.layout.annotation.Hoverlabel
+            instance or dict with compatible properties
         hovertext
             Sets text to appear when hovering over this annotation.
             If omitted or blank, no hover label will appear.
@@ -21863,8 +21867,8 @@ class Annotation(_BaseLayoutHierarchyType):
             (default) lets the text set the box height. Taller text
             will be clipped.
         hoverlabel
-            plotly.graph_objs.layout.annotation.Hoverlabel instance
-            or dict with compatible properties
+            plotly.graph_objects.layout.annotation.Hoverlabel
+            instance or dict with compatible properties
         hovertext
             Sets text to appear when hovering over this annotation.
             If omitted or blank, no hover label will appear.

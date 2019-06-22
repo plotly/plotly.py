@@ -76,10 +76,10 @@ class Unselected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            plotly.graph_objs.scatterpolargl.unselected.Marker
+            plotly.graph_objects.scatterpolargl.unselected.Marker
             instance or dict with compatible properties
         textfont
-            plotly.graph_objs.scatterpolargl.unselected.Textfont
+            plotly.graph_objects.scatterpolargl.unselected.Textfont
             instance or dict with compatible properties
         """
 
@@ -94,10 +94,10 @@ class Unselected(_BaseTraceHierarchyType):
             an instance of
             plotly.graph_objs.scatterpolargl.Unselected
         marker
-            plotly.graph_objs.scatterpolargl.unselected.Marker
+            plotly.graph_objects.scatterpolargl.unselected.Marker
             instance or dict with compatible properties
         textfont
-            plotly.graph_objs.scatterpolargl.unselected.Textfont
+            plotly.graph_objects.scatterpolargl.unselected.Textfont
             instance or dict with compatible properties
 
         Returns
@@ -688,10 +688,10 @@ class Selected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            plotly.graph_objs.scatterpolargl.selected.Marker
+            plotly.graph_objects.scatterpolargl.selected.Marker
             instance or dict with compatible properties
         textfont
-            plotly.graph_objs.scatterpolargl.selected.Textfont
+            plotly.graph_objects.scatterpolargl.selected.Textfont
             instance or dict with compatible properties
         """
 
@@ -706,10 +706,10 @@ class Selected(_BaseTraceHierarchyType):
             an instance of
             plotly.graph_objs.scatterpolargl.Selected
         marker
-            plotly.graph_objs.scatterpolargl.selected.Marker
+            plotly.graph_objects.scatterpolargl.selected.Marker
             instance or dict with compatible properties
         textfont
-            plotly.graph_objs.scatterpolargl.selected.Textfont
+            plotly.graph_objects.scatterpolargl.selected.Textfont
             instance or dict with compatible properties
 
         Returns
@@ -1120,9 +1120,9 @@ class Marker(_BaseTraceHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.scatterpolargl.marker.colorba
-                    r.Tickformatstop instance or dict with
-                    compatible properties
+                    A tuple of plotly.graph_objects.scatterpolargl.
+                    marker.colorbar.Tickformatstop instances or
+                    dicts with compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
                     a.scatterpolargl.marker.colorbar.tickformatstop
@@ -1169,8 +1169,8 @@ class Marker(_BaseTraceHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.scatterpolargl.marker.colorba
-                    r.Title instance or dict with compatible
+                    plotly.graph_objects.scatterpolargl.marker.colo
+                    rbar.Title instance or dict with compatible
                     properties
                 titlefont
                     Deprecated: Please use
@@ -1744,7 +1744,7 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.scatterpolargl.marker.ColorBar
+            plotly.graph_objects.scatterpolargl.marker.ColorBar
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
@@ -1763,8 +1763,8 @@ class Marker(_BaseTraceHierarchyType):
         colorsrc
             Sets the source reference on plot.ly for  color .
         line
-            plotly.graph_objs.scatterpolargl.marker.Line instance
-            or dict with compatible properties
+            plotly.graph_objects.scatterpolargl.marker.Line
+            instance or dict with compatible properties
         opacity
             Sets the marker opacity.
         opacitysrc
@@ -1888,7 +1888,7 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.scatterpolargl.marker.ColorBar
+            plotly.graph_objects.scatterpolargl.marker.ColorBar
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
@@ -1907,8 +1907,8 @@ class Marker(_BaseTraceHierarchyType):
         colorsrc
             Sets the source reference on plot.ly for  color .
         line
-            plotly.graph_objs.scatterpolargl.marker.Line instance
-            or dict with compatible properties
+            plotly.graph_objects.scatterpolargl.marker.Line
+            instance or dict with compatible properties
         opacity
             Sets the marker opacity.
         opacitysrc

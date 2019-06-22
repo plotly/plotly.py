@@ -29,138 +29,132 @@ class DataValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             area
-                plotly.graph_objs.layout.template.data.Area
-                instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Area instances
+                or dicts with compatible properties
             barpolar
-                plotly.graph_objs.layout.template.data.Barpolar
-                instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Barpolar
+                instances or dicts with compatible properties
             bar
-                plotly.graph_objs.layout.template.data.Bar
-                instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Bar instances
+                or dicts with compatible properties
             box
-                plotly.graph_objs.layout.template.data.Box
-                instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Box instances
+                or dicts with compatible properties
             candlestick
-                plotly.graph_objs.layout.template.data.Candlest
-                ick instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Candlestick
+                instances or dicts with compatible properties
             carpet
-                plotly.graph_objs.layout.template.data.Carpet
-                instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Carpet
+                instances or dicts with compatible properties
             choropleth
-                plotly.graph_objs.layout.template.data.Chorople
-                th instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Choropleth
+                instances or dicts with compatible properties
             cone
-                plotly.graph_objs.layout.template.data.Cone
-                instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Cone instances
+                or dicts with compatible properties
             contourcarpet
-                plotly.graph_objs.layout.template.data.Contourc
-                arpet instance or dict with compatible
-                properties
+                A tuple of plotly.graph_objects.Contourcarpet
+                instances or dicts with compatible properties
             contour
-                plotly.graph_objs.layout.template.data.Contour
-                instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Contour
+                instances or dicts with compatible properties
             funnelarea
-                plotly.graph_objs.layout.template.data.Funnelar
-                ea instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Funnelarea
+                instances or dicts with compatible properties
             funnel
-                plotly.graph_objs.layout.template.data.Funnel
-                instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Funnel
+                instances or dicts with compatible properties
             heatmapgl
-                plotly.graph_objs.layout.template.data.Heatmapg
-                l instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Heatmapgl
+                instances or dicts with compatible properties
             heatmap
-                plotly.graph_objs.layout.template.data.Heatmap
-                instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Heatmap
+                instances or dicts with compatible properties
             histogram2dcontour
-                plotly.graph_objs.layout.template.data.Histogra
-                m2dContour instance or dict with compatible
-                properties
+                A tuple of
+                plotly.graph_objects.Histogram2dContour
+                instances or dicts with compatible properties
             histogram2d
-                plotly.graph_objs.layout.template.data.Histogra
-                m2d instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Histogram2d
+                instances or dicts with compatible properties
             histogram
-                plotly.graph_objs.layout.template.data.Histogra
-                m instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Histogram
+                instances or dicts with compatible properties
             isosurface
-                plotly.graph_objs.layout.template.data.Isosurfa
-                ce instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Isosurface
+                instances or dicts with compatible properties
             mesh3d
-                plotly.graph_objs.layout.template.data.Mesh3d
-                instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Mesh3d
+                instances or dicts with compatible properties
             ohlc
-                plotly.graph_objs.layout.template.data.Ohlc
-                instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Ohlc instances
+                or dicts with compatible properties
             parcats
-                plotly.graph_objs.layout.template.data.Parcats
-                instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Parcats
+                instances or dicts with compatible properties
             parcoords
-                plotly.graph_objs.layout.template.data.Parcoord
-                s instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Parcoords
+                instances or dicts with compatible properties
             pie
-                plotly.graph_objs.layout.template.data.Pie
-                instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Pie instances
+                or dicts with compatible properties
             pointcloud
-                plotly.graph_objs.layout.template.data.Pointclo
-                ud instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Pointcloud
+                instances or dicts with compatible properties
             sankey
-                plotly.graph_objs.layout.template.data.Sankey
-                instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Sankey
+                instances or dicts with compatible properties
             scatter3d
-                plotly.graph_objs.layout.template.data.Scatter3
-                d instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Scatter3d
+                instances or dicts with compatible properties
             scattercarpet
-                plotly.graph_objs.layout.template.data.Scatterc
-                arpet instance or dict with compatible
-                properties
+                A tuple of plotly.graph_objects.Scattercarpet
+                instances or dicts with compatible properties
             scattergeo
-                plotly.graph_objs.layout.template.data.Scatterg
-                eo instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Scattergeo
+                instances or dicts with compatible properties
             scattergl
-                plotly.graph_objs.layout.template.data.Scatterg
-                l instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Scattergl
+                instances or dicts with compatible properties
             scattermapbox
-                plotly.graph_objs.layout.template.data.Scatterm
-                apbox instance or dict with compatible
-                properties
+                A tuple of plotly.graph_objects.Scattermapbox
+                instances or dicts with compatible properties
             scatterpolargl
-                plotly.graph_objs.layout.template.data.Scatterp
-                olargl instance or dict with compatible
-                properties
+                A tuple of plotly.graph_objects.Scatterpolargl
+                instances or dicts with compatible properties
             scatterpolar
-                plotly.graph_objs.layout.template.data.Scatterp
-                olar instance or dict with compatible
-                properties
+                A tuple of plotly.graph_objects.Scatterpolar
+                instances or dicts with compatible properties
             scatter
-                plotly.graph_objs.layout.template.data.Scatter
-                instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Scatter
+                instances or dicts with compatible properties
             scatterternary
-                plotly.graph_objs.layout.template.data.Scattert
-                ernary instance or dict with compatible
-                properties
+                A tuple of plotly.graph_objects.Scatterternary
+                instances or dicts with compatible properties
             splom
-                plotly.graph_objs.layout.template.data.Splom
-                instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Splom instances
+                or dicts with compatible properties
             streamtube
-                plotly.graph_objs.layout.template.data.Streamtu
-                be instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Streamtube
+                instances or dicts with compatible properties
             sunburst
-                plotly.graph_objs.layout.template.data.Sunburst
-                instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Sunburst
+                instances or dicts with compatible properties
             surface
-                plotly.graph_objs.layout.template.data.Surface
-                instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Surface
+                instances or dicts with compatible properties
             table
-                plotly.graph_objs.layout.template.data.Table
-                instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Table instances
+                or dicts with compatible properties
             violin
-                plotly.graph_objs.layout.template.data.Violin
-                instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Violin
+                instances or dicts with compatible properties
             volume
-                plotly.graph_objs.layout.template.data.Volume
-                instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Volume
+                instances or dicts with compatible properties
             waterfall
-                plotly.graph_objs.layout.template.data.Waterfal
-                l instance or dict with compatible properties
+                A tuple of plotly.graph_objects.Waterfall
+                instances or dicts with compatible properties
 """,
             ),
             **kwargs

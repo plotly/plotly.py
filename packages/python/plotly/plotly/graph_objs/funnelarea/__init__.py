@@ -775,7 +775,7 @@ class Marker(_BaseTraceHierarchyType):
         colorssrc
             Sets the source reference on plot.ly for  colors .
         line
-            plotly.graph_objs.funnelarea.marker.Line instance or
+            plotly.graph_objects.funnelarea.marker.Line instance or
             dict with compatible properties
         """
 
@@ -795,7 +795,7 @@ class Marker(_BaseTraceHierarchyType):
         colorssrc
             Sets the source reference on plot.ly for  colors .
         line
-            plotly.graph_objs.funnelarea.marker.Line instance or
+            plotly.graph_objects.funnelarea.marker.Line instance or
             dict with compatible properties
 
         Returns

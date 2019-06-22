@@ -3289,8 +3289,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.histogram2dcontour.colorbar.Tickforma
-            tstop instance or dict with compatible properties
+            A tuple of plotly.graph_objects.histogram2dcontour.colo
+            rbar.Tickformatstop instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.histog
             ram2dcontour.colorbar.tickformatstopdefaults), sets the
@@ -3330,7 +3331,7 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.histogram2dcontour.colorbar.Title
+            plotly.graph_objects.histogram2dcontour.colorbar.Title
             instance or dict with compatible properties
         titlefont
             Deprecated: Please use
@@ -3540,8 +3541,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.histogram2dcontour.colorbar.Tickforma
-            tstop instance or dict with compatible properties
+            A tuple of plotly.graph_objects.histogram2dcontour.colo
+            rbar.Tickformatstop instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.histog
             ram2dcontour.colorbar.tickformatstopdefaults), sets the
@@ -3581,7 +3583,7 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.histogram2dcontour.colorbar.Title
+            plotly.graph_objects.histogram2dcontour.colorbar.Title
             instance or dict with compatible properties
         titlefont
             Deprecated: Please use

@@ -543,13 +543,13 @@ class Projection(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         x
-            plotly.graph_objs.scatter3d.projection.X instance or
+            plotly.graph_objects.scatter3d.projection.X instance or
             dict with compatible properties
         y
-            plotly.graph_objs.scatter3d.projection.Y instance or
+            plotly.graph_objects.scatter3d.projection.Y instance or
             dict with compatible properties
         z
-            plotly.graph_objs.scatter3d.projection.Z instance or
+            plotly.graph_objects.scatter3d.projection.Z instance or
             dict with compatible properties
         """
 
@@ -563,13 +563,13 @@ class Projection(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.scatter3d.Projection
         x
-            plotly.graph_objs.scatter3d.projection.X instance or
+            plotly.graph_objects.scatter3d.projection.X instance or
             dict with compatible properties
         y
-            plotly.graph_objs.scatter3d.projection.Y instance or
+            plotly.graph_objects.scatter3d.projection.Y instance or
             dict with compatible properties
         z
-            plotly.graph_objs.scatter3d.projection.Z instance or
+            plotly.graph_objects.scatter3d.projection.Z instance or
             dict with compatible properties
 
         Returns
@@ -983,9 +983,9 @@ class Marker(_BaseTraceHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.scatter3d.marker.colorbar.Tic
-                    kformatstop instance or dict with compatible
-                    properties
+                    A tuple of plotly.graph_objects.scatter3d.marke
+                    r.colorbar.Tickformatstop instances or dicts
+                    with compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
                     a.scatter3d.marker.colorbar.tickformatstopdefau
@@ -1032,8 +1032,9 @@ class Marker(_BaseTraceHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.scatter3d.marker.colorbar.Tit
-                    le instance or dict with compatible properties
+                    plotly.graph_objects.scatter3d.marker.colorbar.
+                    Title instance or dict with compatible
+                    properties
                 titlefont
                     Deprecated: Please use
                     scatter3d.marker.colorbar.title.font instead.
@@ -1524,8 +1525,8 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.scatter3d.marker.ColorBar instance or
-            dict with compatible properties
+            plotly.graph_objects.scatter3d.marker.ColorBar instance
+            or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
             `marker.color`is set to a numerical array. The
@@ -1543,7 +1544,7 @@ class Marker(_BaseTraceHierarchyType):
         colorsrc
             Sets the source reference on plot.ly for  color .
         line
-            plotly.graph_objs.scatter3d.marker.Line instance or
+            plotly.graph_objects.scatter3d.marker.Line instance or
             dict with compatible properties
         opacity
             Sets the marker opacity. Note that the marker opacity
@@ -1665,8 +1666,8 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.scatter3d.marker.ColorBar instance or
-            dict with compatible properties
+            plotly.graph_objects.scatter3d.marker.ColorBar instance
+            or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
             `marker.color`is set to a numerical array. The
@@ -1684,7 +1685,7 @@ class Marker(_BaseTraceHierarchyType):
         colorsrc
             Sets the source reference on plot.ly for  color .
         line
-            plotly.graph_objs.scatter3d.marker.Line instance or
+            plotly.graph_objects.scatter3d.marker.Line instance or
             dict with compatible properties
         opacity
             Sets the marker opacity. Note that the marker opacity
@@ -2188,9 +2189,9 @@ class Line(_BaseTraceHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.scatter3d.line.colorbar.Tickf
-                    ormatstop instance or dict with compatible
-                    properties
+                    A tuple of plotly.graph_objects.scatter3d.line.
+                    colorbar.Tickformatstop instances or dicts with
+                    compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
                     a.scatter3d.line.colorbar.tickformatstopdefault
@@ -2237,8 +2238,8 @@ class Line(_BaseTraceHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.scatter3d.line.colorbar.Title
-                    instance or dict with compatible properties
+                    plotly.graph_objects.scatter3d.line.colorbar.Ti
+                    tle instance or dict with compatible properties
                 titlefont
                     Deprecated: Please use
                     scatter3d.line.colorbar.title.font instead.
@@ -2487,8 +2488,8 @@ class Line(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.scatter3d.line.ColorBar instance or
-            dict with compatible properties
+            plotly.graph_objects.scatter3d.line.ColorBar instance
+            or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
             `line.color`is set to a numerical array. The colorscale
@@ -2595,8 +2596,8 @@ class Line(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.scatter3d.line.ColorBar instance or
-            dict with compatible properties
+            plotly.graph_objects.scatter3d.line.ColorBar instance
+            or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
             `line.color`is set to a numerical array. The colorscale

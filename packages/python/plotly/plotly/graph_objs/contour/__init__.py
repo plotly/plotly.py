@@ -2715,8 +2715,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.contour.colorbar.Tickformatstop
-            instance or dict with compatible properties
+            A tuple of
+            plotly.graph_objects.contour.colorbar.Tickformatstop
+            instances or dicts with compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.contou
             r.colorbar.tickformatstopdefaults), sets the default
@@ -2756,7 +2757,7 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.contour.colorbar.Title instance or
+            plotly.graph_objects.contour.colorbar.Title instance or
             dict with compatible properties
         titlefont
             Deprecated: Please use contour.colorbar.title.font
@@ -2963,8 +2964,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.contour.colorbar.Tickformatstop
-            instance or dict with compatible properties
+            A tuple of
+            plotly.graph_objects.contour.colorbar.Tickformatstop
+            instances or dicts with compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.contou
             r.colorbar.tickformatstopdefaults), sets the default
@@ -3004,7 +3006,7 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.contour.colorbar.Title instance or
+            plotly.graph_objects.contour.colorbar.Title instance or
             dict with compatible properties
         titlefont
             Deprecated: Please use contour.colorbar.title.font

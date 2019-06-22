@@ -1048,7 +1048,7 @@ class Contours(_BaseTraceHierarchyType):
                     Sets the width of the highlighted contour
                     lines.
                 project
-                    plotly.graph_objs.surface.contours.x.Project
+                    plotly.graph_objects.surface.contours.x.Project
                     instance or dict with compatible properties
                 show
                     Determines whether or not contour lines about
@@ -1104,7 +1104,7 @@ class Contours(_BaseTraceHierarchyType):
                     Sets the width of the highlighted contour
                     lines.
                 project
-                    plotly.graph_objs.surface.contours.y.Project
+                    plotly.graph_objects.surface.contours.y.Project
                     instance or dict with compatible properties
                 show
                     Determines whether or not contour lines about
@@ -1160,7 +1160,7 @@ class Contours(_BaseTraceHierarchyType):
                     Sets the width of the highlighted contour
                     lines.
                 project
-                    plotly.graph_objs.surface.contours.z.Project
+                    plotly.graph_objects.surface.contours.z.Project
                     instance or dict with compatible properties
                 show
                     Determines whether or not contour lines about
@@ -1200,14 +1200,14 @@ class Contours(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         x
-            plotly.graph_objs.surface.contours.X instance or dict
-            with compatible properties
+            plotly.graph_objects.surface.contours.X instance or
+            dict with compatible properties
         y
-            plotly.graph_objs.surface.contours.Y instance or dict
-            with compatible properties
+            plotly.graph_objects.surface.contours.Y instance or
+            dict with compatible properties
         z
-            plotly.graph_objs.surface.contours.Z instance or dict
-            with compatible properties
+            plotly.graph_objects.surface.contours.Z instance or
+            dict with compatible properties
         """
 
     def __init__(self, arg=None, x=None, y=None, z=None, **kwargs):
@@ -1220,14 +1220,14 @@ class Contours(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.surface.Contours
         x
-            plotly.graph_objs.surface.contours.X instance or dict
-            with compatible properties
+            plotly.graph_objects.surface.contours.X instance or
+            dict with compatible properties
         y
-            plotly.graph_objs.surface.contours.Y instance or dict
-            with compatible properties
+            plotly.graph_objects.surface.contours.Y instance or
+            dict with compatible properties
         z
-            plotly.graph_objs.surface.contours.Z instance or dict
-            with compatible properties
+            plotly.graph_objects.surface.contours.Z instance or
+            dict with compatible properties
 
         Returns
         -------
@@ -2633,8 +2633,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.surface.colorbar.Tickformatstop
-            instance or dict with compatible properties
+            A tuple of
+            plotly.graph_objects.surface.colorbar.Tickformatstop
+            instances or dicts with compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.surfac
             e.colorbar.tickformatstopdefaults), sets the default
@@ -2674,7 +2675,7 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.surface.colorbar.Title instance or
+            plotly.graph_objects.surface.colorbar.Title instance or
             dict with compatible properties
         titlefont
             Deprecated: Please use surface.colorbar.title.font
@@ -2881,8 +2882,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.surface.colorbar.Tickformatstop
-            instance or dict with compatible properties
+            A tuple of
+            plotly.graph_objects.surface.colorbar.Tickformatstop
+            instances or dicts with compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.surfac
             e.colorbar.tickformatstopdefaults), sets the default
@@ -2922,7 +2924,7 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.surface.colorbar.Title instance or
+            plotly.graph_objects.surface.colorbar.Title instance or
             dict with compatible properties
         titlefont
             Deprecated: Please use surface.colorbar.title.font
