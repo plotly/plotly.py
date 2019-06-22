@@ -40,6 +40,7 @@ class TemplatesConfig(object):
             "plotly_dark",
             "presentation",
             "xgridoff",
+            "none",
         ]
 
         for template_name in default_templates:
@@ -64,13 +65,17 @@ class TemplatesConfig(object):
         if template is Lazy:
             from plotly.graph_objs.layout import Template
 
-            # Load template from package data
-            path = os.path.join("package_data", "templates", item + ".json")
-            template_str = pkgutil.get_data("plotly", path).decode("utf-8")
-            template_dict = json.loads(template_str)
-            template = Template(template_dict)
+            if item == "none":
+                # "none" is a special built-in named template that applied no defaults
+                self._templates[item] = Template()
+            else:
+                # Load template from package data
+                path = os.path.join("package_data", "templates", item + ".json")
+                template_str = pkgutil.get_data("plotly", path).decode("utf-8")
+                template_dict = json.loads(template_str)
+                template = Template(template_dict)
 
-            self._templates[item] = template
+                self._templates[item] = template
 
         return template
 

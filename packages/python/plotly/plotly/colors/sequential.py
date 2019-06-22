@@ -105,6 +105,7 @@ from .colorbrewer import (  # noqa: F401
     PuBuGn,
     PuRd,
     Purples,
+    RdBu,
     RdPu,
     Reds,
     YlGn,
