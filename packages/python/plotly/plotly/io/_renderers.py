@@ -423,7 +423,8 @@ renderers["browser"] = BrowserRenderer(config=config)
 renderers["firefox"] = BrowserRenderer(config=config, using="firefox")
 renderers["chrome"] = BrowserRenderer(config=config, using="chrome")
 renderers["chromium"] = BrowserRenderer(config=config, using="chromium")
-renderers["iframe"] = IFrameRenderer(config=config)
+renderers["iframe"] = IFrameRenderer(config=config, include_plotlyjs=True)
+renderers["iframe_connected"] = IFrameRenderer(config=config, include_plotlyjs="cdn")
 
 # Set default renderer
 # --------------------
