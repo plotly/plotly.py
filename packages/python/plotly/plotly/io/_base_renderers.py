@@ -525,13 +525,19 @@ class IFrameRenderer(MimetypeRenderer):
     """
 
     def __init__(
-        self, config=None, auto_play=False, post_script=None, animation_opts=None
+        self,
+        config=None,
+        auto_play=False,
+        post_script=None,
+        animation_opts=None,
+        include_plotlyjs=True,
     ):
 
         self.config = config
         self.auto_play = auto_play
         self.post_script = post_script
         self.animation_opts = animation_opts
+        self.include_plotlyjs = include_plotlyjs
 
     def to_mimebundle(self, fig_dict):
         from plotly.io import write_html
@@ -567,7 +573,7 @@ class IFrameRenderer(MimetypeRenderer):
             filename,
             config=self.config,
             auto_play=self.auto_play,
-            include_plotlyjs="directory",
+            include_plotlyjs=self.include_plotlyjs,
             include_mathjax="cdn",
             auto_open=False,
             post_script=self.post_script,
