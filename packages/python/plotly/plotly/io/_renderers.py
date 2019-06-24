@@ -15,6 +15,7 @@ from plotly.io._base_renderers import (
     PlotlyRenderer,
     NotebookRenderer,
     KaggleRenderer,
+    AzureRenderer,
     ColabRenderer,
     JsonRenderer,
     PngRenderer,
@@ -402,6 +403,7 @@ config = {}
 renderers["notebook"] = NotebookRenderer(config=config)
 renderers["notebook_connected"] = NotebookRenderer(config=config, connected=True)
 renderers["kaggle"] = KaggleRenderer(config=config)
+renderers["azure"] = AzureRenderer(config=config)
 renderers["colab"] = ColabRenderer(config=config)
 
 # JSON
@@ -457,6 +459,10 @@ elif ipython and ipython.get_ipython():
     # Check if we're running in a Kaggle notebook
     if not default_renderer and os.path.exists("/kaggle/input"):
         default_renderer = "kaggle"
+
+    # Check if we're running in an Azure Notebook
+    if not default_renderer and "AZURE_NOTEBOOKS_HOST" in os.environ:
+        default_renderer = "azure"
 
     # Check if we're running in VSCode
     if not default_renderer and "VSCODE_PID" in os.environ:

@@ -447,6 +447,34 @@ class KaggleRenderer(HtmlRenderer):
         )
 
 
+class AzureRenderer(HtmlRenderer):
+    """
+    Renderer to display interactive figures in Azure Notebooks.
+
+    Same as NotebookRenderer but with connected=True so that the plotly.js
+    bundle is loaded from a CDN rather than being embedded in the notebook.
+
+    This renderer is enabled by default when running in an Azure notebook.
+
+    mime type: 'text/html'
+    """
+
+    def __init__(
+        self, config=None, auto_play=False, post_script=None, animation_opts=None
+    ):
+
+        super(AzureRenderer, self).__init__(
+            connected=True,
+            full_html=False,
+            requirejs=True,
+            global_init=True,
+            config=config,
+            auto_play=auto_play,
+            post_script=post_script,
+            animation_opts=animation_opts,
+        )
+
+
 class ColabRenderer(HtmlRenderer):
     """
     Renderer to display interactive figures in Google Colab Notebooks.
