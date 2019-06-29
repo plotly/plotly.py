@@ -276,9 +276,9 @@ def plotly():
     # Common axis common properties
     axis_common = dict(gridcolor="white", linecolor="white", ticks="")
 
-    # semi-transparent black and no outline
-    annotation_clr = plotly_clrs["Rhino Dark"]
-    shape_defaults = dict(fillcolor=annotation_clr, line={"width": 0}, opacity=0.4)
+    # Near black line color, no fill
+    annotation_clr = plotly_clrs["Rhino Core"]
+    shape_defaults = dict(line_color=annotation_clr)
 
     # Remove arrow head and make line thinner
     annotation_defaults = {
@@ -343,9 +343,9 @@ def plotly_white():
         ticks="",
     )
 
-    # semi-transparent black and no outline
-    annotation_clr = plotly_clrs["Rhino Dark"]
-    shape_defaults = dict(fillcolor=annotation_clr, line={"width": 0}, opacity=0.4)
+    # Near black line color, no fill
+    annotation_clr = plotly_clrs["Rhino Core"]
+    shape_defaults = dict(line_color=annotation_clr)
 
     # Remove arrow head and make line thinner
     annotation_defaults = {
@@ -416,9 +416,9 @@ def plotly_dark():
     grid_color = plotly_clrs["Rhino Dark"]
     axis_common = dict(gridcolor=grid_color, linecolor=grid_color, ticks="")
 
-    # semi-transparent black and no outline
+    # Near white line color, no fill
     annotation_clr = plotly_clrs["Rhino Light 4"]
-    shape_defaults = dict(fillcolor=annotation_clr, line={"width": 0}, opacity=0.4)
+    shape_defaults = dict(line_color=annotation_clr)
 
     # Remove arrow head and make line thinner
     annotation_defaults = {
