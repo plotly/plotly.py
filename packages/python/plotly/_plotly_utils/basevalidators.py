@@ -1526,7 +1526,7 @@ class ColorscaleValidator(BaseValidator):
             )
 
             self._named_colorscales = {
-                c[0]: c[1]
+                c[0].lower(): c[1]
                 for c in colorscale_members
                 if isinstance(c, tuple)
                 and len(c) == 2
@@ -1571,9 +1571,10 @@ class ColorscaleValidator(BaseValidator):
         if v is None:
             v_valid = True
         elif isinstance(v, string_types):
-            if v in self.named_colorscales:
+            v_lower = v.lower()
+            if v_lower in self.named_colorscales:
                 # Convert to color list
-                v = self.named_colorscales[v]
+                v = self.named_colorscales[v_lower]
 
                 # Convert to list of lists colorscale
                 d = len(v) - 1
