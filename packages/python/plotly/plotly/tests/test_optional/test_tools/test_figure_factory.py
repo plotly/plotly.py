@@ -1097,18 +1097,27 @@ class TestAnnotatedHeatmap(TestCaseNoTemplate, NumpyTestUtilsMixin):
             {
                 "data": [
                     {
-                        "colorscale": "Greens",
+                        "colorscale": [
+                            [0.0, "rgb(247,252,245)"],
+                            [0.125, "rgb(229,245,224)"],
+                            [0.25, "rgb(199,233,192)"],
+                            [0.375, "rgb(161,217,155)"],
+                            [0.5, "rgb(116,196,118)"],
+                            [0.625, "rgb(65,171,93)"],
+                            [0.75, "rgb(35,139,69)"],
+                            [0.875, "rgb(0,109,44)"],
+                            [1.0, "rgb(0,68,27)"],
+                        ],
                         "reversescale": True,
                         "showscale": True,
                         "type": "heatmap",
-                        "uid": "baeae9f0-d650-4507-99ba-97226bb8fe6c",
                         "z": [[0.1, 0.0, 0.0], [0.0, 1.0, 0.1]],
                     }
                 ],
                 "layout": {
                     "annotations": [
                         {
-                            "font": {"color": "#000000"},
+                            "font": {"color": "#FFFFFF"},
                             "showarrow": False,
                             "text": "0.1",
                             "x": 0,
@@ -1117,7 +1126,7 @@ class TestAnnotatedHeatmap(TestCaseNoTemplate, NumpyTestUtilsMixin):
                             "yref": "y",
                         },
                         {
-                            "font": {"color": "#000000"},
+                            "font": {"color": "#FFFFFF"},
                             "showarrow": False,
                             "text": "0.0",
                             "x": 1,
@@ -1126,7 +1135,7 @@ class TestAnnotatedHeatmap(TestCaseNoTemplate, NumpyTestUtilsMixin):
                             "yref": "y",
                         },
                         {
-                            "font": {"color": "#000000"},
+                            "font": {"color": "#FFFFFF"},
                             "showarrow": False,
                             "text": "0.0",
                             "x": 2,
@@ -1135,7 +1144,7 @@ class TestAnnotatedHeatmap(TestCaseNoTemplate, NumpyTestUtilsMixin):
                             "yref": "y",
                         },
                         {
-                            "font": {"color": "#000000"},
+                            "font": {"color": "#FFFFFF"},
                             "showarrow": False,
                             "text": "0.0",
                             "x": 0,
@@ -1144,7 +1153,7 @@ class TestAnnotatedHeatmap(TestCaseNoTemplate, NumpyTestUtilsMixin):
                             "yref": "y",
                         },
                         {
-                            "font": {"color": "#FFFFFF"},
+                            "font": {"color": "#000000"},
                             "showarrow": False,
                             "text": "1.0",
                             "x": 1,
@@ -1153,7 +1162,7 @@ class TestAnnotatedHeatmap(TestCaseNoTemplate, NumpyTestUtilsMixin):
                             "yref": "y",
                         },
                         {
-                            "font": {"color": "#000000"},
+                            "font": {"color": "#FFFFFF"},
                             "showarrow": False,
                             "text": "0.1",
                             "x": 2,
