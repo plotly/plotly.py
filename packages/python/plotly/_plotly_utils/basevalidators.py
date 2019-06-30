@@ -1234,6 +1234,7 @@ class ColorValidator(BaseValidator):
         "red",
         "rosybrown",
         "royalblue",
+        "rebeccapurple",
         "saddlebrown",
         "salmon",
         "sandybrown",
