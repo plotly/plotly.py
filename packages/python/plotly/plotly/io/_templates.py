@@ -67,7 +67,8 @@ class TemplatesConfig(object):
 
             if item == "none":
                 # "none" is a special built-in named template that applied no defaults
-                self._templates[item] = Template()
+                template = Template()
+                self._templates[item] = template
             else:
                 # Load template from package data
                 path = os.path.join("package_data", "templates", item + ".json")
