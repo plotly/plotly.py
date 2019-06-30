@@ -104,15 +104,6 @@ class TestPropertyPresentation(TestCase):
         # Presented as tuple of tuples
         self.assertEqual(self.scatter.marker.colorscale, ((0, "red"), (1, "green")))
 
-    def test_present_colorscale_str(self):
-        self.assertIsNone(self.scatter.marker.colorscale)
-
-        # Assign string
-        self.scatter.marker.colorscale = "Viridis"
-
-        # Presented as a string
-        self.assertEqual(self.scatter.marker.colorscale, "Viridis")
-
 
 class TestPropertyIterContains(TestCase):
     def setUp(self):
