@@ -1982,12 +1982,12 @@ class Layout(_BaseLayoutType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
@@ -2065,12 +2065,12 @@ class Layout(_BaseLayoutType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
@@ -8177,14 +8177,28 @@ class Volume(_BaseTraceType):
     
         The 'colorscale' property is a colorscale and may be
         specified as:
+          - A list of colors that will be spaced evenly to create the colorscale.
+            Many predefined colorscale lists are included in the sequential, diverging,
+            and cyclical modules in the plotly.colors package.
           - A list of 2-element lists where the first element is the
             normalized color level value (starting at 0 and ending at 1), 
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
-                ['Greys', 'YlGnBu', 'Greens', 'YlOrRd', 'Bluered', 'RdBu',
-                'Reds', 'Blues', 'Picnic', 'Rainbow', 'Portland', 'Jet',
-                'Hot', 'Blackbody', 'Earth', 'Electric', 'Viridis', 'Cividis']
+                ['Aggrnyl', 'Agsunset', 'Armyrose', 'Blackbody', 'Bluered', 'Blues',
+                 'Blugrn', 'Bluyl', 'BrBG', 'Brwnyl', 'BuGn', 'BuPu', 'Burg',
+                 'Burgyl', 'Cividis', 'Darkmint', 'Earth', 'Edge', 'Electric',
+                 'Emrld', 'Fall', 'Geyser', 'GnBu', 'Greens', 'Greys', 'HSV', 'Hot',
+                 'IceFire', 'Inferno', 'Jet', 'Magenta', 'Magma', 'Mint', 'OrRd',
+                 'Oranges', 'Oryel', 'PRGn', 'Peach', 'Phase', 'PiYG', 'Picnic',
+                 'Pinkyl', 'Plasma', 'Plotly3', 'Portland', 'PuBu', 'PuBuGn',
+                 'PuOr', 'PuRd', 'Purp', 'Purples', 'Purpor', 'Rainbow', 'RdBu',
+                 'RdGy', 'RdPu', 'RdYlBu', 'RdYlGn', 'Redor', 'Reds', 'Spectral',
+                 'Sunset', 'Sunsetdark', 'Teal', 'Tealgrn', 'Tealrose', 'Temps',
+                 'Tropic', 'Twilight', 'Viridis', 'YlGn', 'YlGnBu', 'YlOrBr',
+                 'YlOrRd', 'algae', 'amp', 'balance', 'curl', 'deep', 'delta',
+                 'dense', 'gray', 'haline', 'ice', 'matter', 'mrybm', 'mygbm',
+                 'solar', 'speed', 'tempo', 'thermal', 'turbid']
 
         Returns
         -------
@@ -10210,12 +10224,12 @@ class Violin(_BaseTraceType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
@@ -13637,14 +13651,28 @@ class Surface(_BaseTraceType):
     
         The 'colorscale' property is a colorscale and may be
         specified as:
+          - A list of colors that will be spaced evenly to create the colorscale.
+            Many predefined colorscale lists are included in the sequential, diverging,
+            and cyclical modules in the plotly.colors package.
           - A list of 2-element lists where the first element is the
             normalized color level value (starting at 0 and ending at 1), 
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
-                ['Greys', 'YlGnBu', 'Greens', 'YlOrRd', 'Bluered', 'RdBu',
-                'Reds', 'Blues', 'Picnic', 'Rainbow', 'Portland', 'Jet',
-                'Hot', 'Blackbody', 'Earth', 'Electric', 'Viridis', 'Cividis']
+                ['Aggrnyl', 'Agsunset', 'Armyrose', 'Blackbody', 'Bluered', 'Blues',
+                 'Blugrn', 'Bluyl', 'BrBG', 'Brwnyl', 'BuGn', 'BuPu', 'Burg',
+                 'Burgyl', 'Cividis', 'Darkmint', 'Earth', 'Edge', 'Electric',
+                 'Emrld', 'Fall', 'Geyser', 'GnBu', 'Greens', 'Greys', 'HSV', 'Hot',
+                 'IceFire', 'Inferno', 'Jet', 'Magenta', 'Magma', 'Mint', 'OrRd',
+                 'Oranges', 'Oryel', 'PRGn', 'Peach', 'Phase', 'PiYG', 'Picnic',
+                 'Pinkyl', 'Plasma', 'Plotly3', 'Portland', 'PuBu', 'PuBuGn',
+                 'PuOr', 'PuRd', 'Purp', 'Purples', 'Purpor', 'Rainbow', 'RdBu',
+                 'RdGy', 'RdPu', 'RdYlBu', 'RdYlGn', 'Redor', 'Reds', 'Spectral',
+                 'Sunset', 'Sunsetdark', 'Teal', 'Tealgrn', 'Tealrose', 'Temps',
+                 'Tropic', 'Twilight', 'Viridis', 'YlGn', 'YlGnBu', 'YlOrBr',
+                 'YlOrRd', 'algae', 'amp', 'balance', 'curl', 'deep', 'delta',
+                 'dense', 'gray', 'haline', 'ice', 'matter', 'mrybm', 'mygbm',
+                 'solar', 'speed', 'tempo', 'thermal', 'turbid']
 
         Returns
         -------
@@ -17360,14 +17388,28 @@ class Streamtube(_BaseTraceType):
     
         The 'colorscale' property is a colorscale and may be
         specified as:
+          - A list of colors that will be spaced evenly to create the colorscale.
+            Many predefined colorscale lists are included in the sequential, diverging,
+            and cyclical modules in the plotly.colors package.
           - A list of 2-element lists where the first element is the
             normalized color level value (starting at 0 and ending at 1), 
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
-                ['Greys', 'YlGnBu', 'Greens', 'YlOrRd', 'Bluered', 'RdBu',
-                'Reds', 'Blues', 'Picnic', 'Rainbow', 'Portland', 'Jet',
-                'Hot', 'Blackbody', 'Earth', 'Electric', 'Viridis', 'Cividis']
+                ['Aggrnyl', 'Agsunset', 'Armyrose', 'Blackbody', 'Bluered', 'Blues',
+                 'Blugrn', 'Bluyl', 'BrBG', 'Brwnyl', 'BuGn', 'BuPu', 'Burg',
+                 'Burgyl', 'Cividis', 'Darkmint', 'Earth', 'Edge', 'Electric',
+                 'Emrld', 'Fall', 'Geyser', 'GnBu', 'Greens', 'Greys', 'HSV', 'Hot',
+                 'IceFire', 'Inferno', 'Jet', 'Magenta', 'Magma', 'Mint', 'OrRd',
+                 'Oranges', 'Oryel', 'PRGn', 'Peach', 'Phase', 'PiYG', 'Picnic',
+                 'Pinkyl', 'Plasma', 'Plotly3', 'Portland', 'PuBu', 'PuBuGn',
+                 'PuOr', 'PuRd', 'Purp', 'Purples', 'Purpor', 'Rainbow', 'RdBu',
+                 'RdGy', 'RdPu', 'RdYlBu', 'RdYlGn', 'Redor', 'Reds', 'Spectral',
+                 'Sunset', 'Sunsetdark', 'Teal', 'Tealgrn', 'Tealrose', 'Temps',
+                 'Tropic', 'Twilight', 'Viridis', 'YlGn', 'YlGnBu', 'YlOrBr',
+                 'YlOrRd', 'algae', 'amp', 'balance', 'curl', 'deep', 'delta',
+                 'dense', 'gray', 'haline', 'ice', 'matter', 'mrybm', 'mygbm',
+                 'solar', 'speed', 'tempo', 'thermal', 'turbid']
 
         Returns
         -------
@@ -20930,12 +20972,12 @@ class Scatterternary(_BaseTraceType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
@@ -22889,12 +22931,12 @@ class Scatterpolargl(_BaseTraceType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
@@ -24929,12 +24971,12 @@ class Scatterpolar(_BaseTraceType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
@@ -26944,12 +26986,12 @@ class Scattermapbox(_BaseTraceType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
@@ -28910,12 +28952,12 @@ class Scattergl(_BaseTraceType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
@@ -30940,12 +30982,12 @@ class Scattergeo(_BaseTraceType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
@@ -32957,12 +32999,12 @@ class Scattercarpet(_BaseTraceType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
@@ -35799,12 +35841,12 @@ class Scatter3d(_BaseTraceType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
@@ -37260,12 +37302,12 @@ class Scatter(_BaseTraceType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
@@ -47907,12 +47949,12 @@ class Mesh3d(_BaseTraceType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
           - A number that will be interpreted as a color
             according to mesh3d.colorscale
 
@@ -48204,14 +48246,28 @@ class Mesh3d(_BaseTraceType):
     
         The 'colorscale' property is a colorscale and may be
         specified as:
+          - A list of colors that will be spaced evenly to create the colorscale.
+            Many predefined colorscale lists are included in the sequential, diverging,
+            and cyclical modules in the plotly.colors package.
           - A list of 2-element lists where the first element is the
             normalized color level value (starting at 0 and ending at 1), 
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
-                ['Greys', 'YlGnBu', 'Greens', 'YlOrRd', 'Bluered', 'RdBu',
-                'Reds', 'Blues', 'Picnic', 'Rainbow', 'Portland', 'Jet',
-                'Hot', 'Blackbody', 'Earth', 'Electric', 'Viridis', 'Cividis']
+                ['Aggrnyl', 'Agsunset', 'Armyrose', 'Blackbody', 'Bluered', 'Blues',
+                 'Blugrn', 'Bluyl', 'BrBG', 'Brwnyl', 'BuGn', 'BuPu', 'Burg',
+                 'Burgyl', 'Cividis', 'Darkmint', 'Earth', 'Edge', 'Electric',
+                 'Emrld', 'Fall', 'Geyser', 'GnBu', 'Greens', 'Greys', 'HSV', 'Hot',
+                 'IceFire', 'Inferno', 'Jet', 'Magenta', 'Magma', 'Mint', 'OrRd',
+                 'Oranges', 'Oryel', 'PRGn', 'Peach', 'Phase', 'PiYG', 'Picnic',
+                 'Pinkyl', 'Plasma', 'Plotly3', 'Portland', 'PuBu', 'PuBuGn',
+                 'PuOr', 'PuRd', 'Purp', 'Purples', 'Purpor', 'Rainbow', 'RdBu',
+                 'RdGy', 'RdPu', 'RdYlBu', 'RdYlGn', 'Redor', 'Reds', 'Spectral',
+                 'Sunset', 'Sunsetdark', 'Teal', 'Tealgrn', 'Tealrose', 'Temps',
+                 'Tropic', 'Twilight', 'Viridis', 'YlGn', 'YlGnBu', 'YlOrBr',
+                 'YlOrRd', 'algae', 'amp', 'balance', 'curl', 'deep', 'delta',
+                 'dense', 'gray', 'haline', 'ice', 'matter', 'mrybm', 'mygbm',
+                 'solar', 'speed', 'tempo', 'thermal', 'turbid']
 
         Returns
         -------
@@ -50784,14 +50840,28 @@ class Isosurface(_BaseTraceType):
     
         The 'colorscale' property is a colorscale and may be
         specified as:
+          - A list of colors that will be spaced evenly to create the colorscale.
+            Many predefined colorscale lists are included in the sequential, diverging,
+            and cyclical modules in the plotly.colors package.
           - A list of 2-element lists where the first element is the
             normalized color level value (starting at 0 and ending at 1), 
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
-                ['Greys', 'YlGnBu', 'Greens', 'YlOrRd', 'Bluered', 'RdBu',
-                'Reds', 'Blues', 'Picnic', 'Rainbow', 'Portland', 'Jet',
-                'Hot', 'Blackbody', 'Earth', 'Electric', 'Viridis', 'Cividis']
+                ['Aggrnyl', 'Agsunset', 'Armyrose', 'Blackbody', 'Bluered', 'Blues',
+                 'Blugrn', 'Bluyl', 'BrBG', 'Brwnyl', 'BuGn', 'BuPu', 'Burg',
+                 'Burgyl', 'Cividis', 'Darkmint', 'Earth', 'Edge', 'Electric',
+                 'Emrld', 'Fall', 'Geyser', 'GnBu', 'Greens', 'Greys', 'HSV', 'Hot',
+                 'IceFire', 'Inferno', 'Jet', 'Magenta', 'Magma', 'Mint', 'OrRd',
+                 'Oranges', 'Oryel', 'PRGn', 'Peach', 'Phase', 'PiYG', 'Picnic',
+                 'Pinkyl', 'Plasma', 'Plotly3', 'Portland', 'PuBu', 'PuBuGn',
+                 'PuOr', 'PuRd', 'Purp', 'Purples', 'Purpor', 'Rainbow', 'RdBu',
+                 'RdGy', 'RdPu', 'RdYlBu', 'RdYlGn', 'Redor', 'Reds', 'Spectral',
+                 'Sunset', 'Sunsetdark', 'Teal', 'Tealgrn', 'Tealrose', 'Temps',
+                 'Tropic', 'Twilight', 'Viridis', 'YlGn', 'YlGnBu', 'YlOrBr',
+                 'YlOrRd', 'algae', 'amp', 'balance', 'curl', 'deep', 'delta',
+                 'dense', 'gray', 'haline', 'ice', 'matter', 'mrybm', 'mygbm',
+                 'solar', 'speed', 'tempo', 'thermal', 'turbid']
 
         Returns
         -------
@@ -52995,14 +53065,28 @@ class Histogram2dContour(_BaseTraceType):
     
         The 'colorscale' property is a colorscale and may be
         specified as:
+          - A list of colors that will be spaced evenly to create the colorscale.
+            Many predefined colorscale lists are included in the sequential, diverging,
+            and cyclical modules in the plotly.colors package.
           - A list of 2-element lists where the first element is the
             normalized color level value (starting at 0 and ending at 1), 
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
-                ['Greys', 'YlGnBu', 'Greens', 'YlOrRd', 'Bluered', 'RdBu',
-                'Reds', 'Blues', 'Picnic', 'Rainbow', 'Portland', 'Jet',
-                'Hot', 'Blackbody', 'Earth', 'Electric', 'Viridis', 'Cividis']
+                ['Aggrnyl', 'Agsunset', 'Armyrose', 'Blackbody', 'Bluered', 'Blues',
+                 'Blugrn', 'Bluyl', 'BrBG', 'Brwnyl', 'BuGn', 'BuPu', 'Burg',
+                 'Burgyl', 'Cividis', 'Darkmint', 'Earth', 'Edge', 'Electric',
+                 'Emrld', 'Fall', 'Geyser', 'GnBu', 'Greens', 'Greys', 'HSV', 'Hot',
+                 'IceFire', 'Inferno', 'Jet', 'Magenta', 'Magma', 'Mint', 'OrRd',
+                 'Oranges', 'Oryel', 'PRGn', 'Peach', 'Phase', 'PiYG', 'Picnic',
+                 'Pinkyl', 'Plasma', 'Plotly3', 'Portland', 'PuBu', 'PuBuGn',
+                 'PuOr', 'PuRd', 'Purp', 'Purples', 'Purpor', 'Rainbow', 'RdBu',
+                 'RdGy', 'RdPu', 'RdYlBu', 'RdYlGn', 'Redor', 'Reds', 'Spectral',
+                 'Sunset', 'Sunsetdark', 'Teal', 'Tealgrn', 'Tealrose', 'Temps',
+                 'Tropic', 'Twilight', 'Viridis', 'YlGn', 'YlGnBu', 'YlOrBr',
+                 'YlOrRd', 'algae', 'amp', 'balance', 'curl', 'deep', 'delta',
+                 'dense', 'gray', 'haline', 'ice', 'matter', 'mrybm', 'mygbm',
+                 'solar', 'speed', 'tempo', 'thermal', 'turbid']
 
         Returns
         -------
@@ -55599,14 +55683,28 @@ class Histogram2d(_BaseTraceType):
     
         The 'colorscale' property is a colorscale and may be
         specified as:
+          - A list of colors that will be spaced evenly to create the colorscale.
+            Many predefined colorscale lists are included in the sequential, diverging,
+            and cyclical modules in the plotly.colors package.
           - A list of 2-element lists where the first element is the
             normalized color level value (starting at 0 and ending at 1), 
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
-                ['Greys', 'YlGnBu', 'Greens', 'YlOrRd', 'Bluered', 'RdBu',
-                'Reds', 'Blues', 'Picnic', 'Rainbow', 'Portland', 'Jet',
-                'Hot', 'Blackbody', 'Earth', 'Electric', 'Viridis', 'Cividis']
+                ['Aggrnyl', 'Agsunset', 'Armyrose', 'Blackbody', 'Bluered', 'Blues',
+                 'Blugrn', 'Bluyl', 'BrBG', 'Brwnyl', 'BuGn', 'BuPu', 'Burg',
+                 'Burgyl', 'Cividis', 'Darkmint', 'Earth', 'Edge', 'Electric',
+                 'Emrld', 'Fall', 'Geyser', 'GnBu', 'Greens', 'Greys', 'HSV', 'Hot',
+                 'IceFire', 'Inferno', 'Jet', 'Magenta', 'Magma', 'Mint', 'OrRd',
+                 'Oranges', 'Oryel', 'PRGn', 'Peach', 'Phase', 'PiYG', 'Picnic',
+                 'Pinkyl', 'Plasma', 'Plotly3', 'Portland', 'PuBu', 'PuBuGn',
+                 'PuOr', 'PuRd', 'Purp', 'Purples', 'Purpor', 'Rainbow', 'RdBu',
+                 'RdGy', 'RdPu', 'RdYlBu', 'RdYlGn', 'Redor', 'Reds', 'Spectral',
+                 'Sunset', 'Sunsetdark', 'Teal', 'Tealgrn', 'Tealrose', 'Temps',
+                 'Tropic', 'Twilight', 'Viridis', 'YlGn', 'YlGnBu', 'YlOrBr',
+                 'YlOrRd', 'algae', 'amp', 'balance', 'curl', 'deep', 'delta',
+                 'dense', 'gray', 'haline', 'ice', 'matter', 'mrybm', 'mygbm',
+                 'solar', 'speed', 'tempo', 'thermal', 'turbid']
 
         Returns
         -------
@@ -60273,14 +60371,28 @@ class Heatmapgl(_BaseTraceType):
     
         The 'colorscale' property is a colorscale and may be
         specified as:
+          - A list of colors that will be spaced evenly to create the colorscale.
+            Many predefined colorscale lists are included in the sequential, diverging,
+            and cyclical modules in the plotly.colors package.
           - A list of 2-element lists where the first element is the
             normalized color level value (starting at 0 and ending at 1), 
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
-                ['Greys', 'YlGnBu', 'Greens', 'YlOrRd', 'Bluered', 'RdBu',
-                'Reds', 'Blues', 'Picnic', 'Rainbow', 'Portland', 'Jet',
-                'Hot', 'Blackbody', 'Earth', 'Electric', 'Viridis', 'Cividis']
+                ['Aggrnyl', 'Agsunset', 'Armyrose', 'Blackbody', 'Bluered', 'Blues',
+                 'Blugrn', 'Bluyl', 'BrBG', 'Brwnyl', 'BuGn', 'BuPu', 'Burg',
+                 'Burgyl', 'Cividis', 'Darkmint', 'Earth', 'Edge', 'Electric',
+                 'Emrld', 'Fall', 'Geyser', 'GnBu', 'Greens', 'Greys', 'HSV', 'Hot',
+                 'IceFire', 'Inferno', 'Jet', 'Magenta', 'Magma', 'Mint', 'OrRd',
+                 'Oranges', 'Oryel', 'PRGn', 'Peach', 'Phase', 'PiYG', 'Picnic',
+                 'Pinkyl', 'Plasma', 'Plotly3', 'Portland', 'PuBu', 'PuBuGn',
+                 'PuOr', 'PuRd', 'Purp', 'Purples', 'Purpor', 'Rainbow', 'RdBu',
+                 'RdGy', 'RdPu', 'RdYlBu', 'RdYlGn', 'Redor', 'Reds', 'Spectral',
+                 'Sunset', 'Sunsetdark', 'Teal', 'Tealgrn', 'Tealrose', 'Temps',
+                 'Tropic', 'Twilight', 'Viridis', 'YlGn', 'YlGnBu', 'YlOrBr',
+                 'YlOrRd', 'algae', 'amp', 'balance', 'curl', 'deep', 'delta',
+                 'dense', 'gray', 'haline', 'ice', 'matter', 'mrybm', 'mygbm',
+                 'solar', 'speed', 'tempo', 'thermal', 'turbid']
 
         Returns
         -------
@@ -62098,14 +62210,28 @@ class Heatmap(_BaseTraceType):
     
         The 'colorscale' property is a colorscale and may be
         specified as:
+          - A list of colors that will be spaced evenly to create the colorscale.
+            Many predefined colorscale lists are included in the sequential, diverging,
+            and cyclical modules in the plotly.colors package.
           - A list of 2-element lists where the first element is the
             normalized color level value (starting at 0 and ending at 1), 
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
-                ['Greys', 'YlGnBu', 'Greens', 'YlOrRd', 'Bluered', 'RdBu',
-                'Reds', 'Blues', 'Picnic', 'Rainbow', 'Portland', 'Jet',
-                'Hot', 'Blackbody', 'Earth', 'Electric', 'Viridis', 'Cividis']
+                ['Aggrnyl', 'Agsunset', 'Armyrose', 'Blackbody', 'Bluered', 'Blues',
+                 'Blugrn', 'Bluyl', 'BrBG', 'Brwnyl', 'BuGn', 'BuPu', 'Burg',
+                 'Burgyl', 'Cividis', 'Darkmint', 'Earth', 'Edge', 'Electric',
+                 'Emrld', 'Fall', 'Geyser', 'GnBu', 'Greens', 'Greys', 'HSV', 'Hot',
+                 'IceFire', 'Inferno', 'Jet', 'Magenta', 'Magma', 'Mint', 'OrRd',
+                 'Oranges', 'Oryel', 'PRGn', 'Peach', 'Phase', 'PiYG', 'Picnic',
+                 'Pinkyl', 'Plasma', 'Plotly3', 'Portland', 'PuBu', 'PuBuGn',
+                 'PuOr', 'PuRd', 'Purp', 'Purples', 'Purpor', 'Rainbow', 'RdBu',
+                 'RdGy', 'RdPu', 'RdYlBu', 'RdYlGn', 'Redor', 'Reds', 'Spectral',
+                 'Sunset', 'Sunsetdark', 'Teal', 'Tealgrn', 'Tealrose', 'Temps',
+                 'Tropic', 'Twilight', 'Viridis', 'YlGn', 'YlGnBu', 'YlOrBr',
+                 'YlOrRd', 'algae', 'amp', 'balance', 'curl', 'deep', 'delta',
+                 'dense', 'gray', 'haline', 'ice', 'matter', 'mrybm', 'mygbm',
+                 'solar', 'speed', 'tempo', 'thermal', 'turbid']
 
         Returns
         -------
@@ -68373,14 +68499,28 @@ class Contourcarpet(_BaseTraceType):
     
         The 'colorscale' property is a colorscale and may be
         specified as:
+          - A list of colors that will be spaced evenly to create the colorscale.
+            Many predefined colorscale lists are included in the sequential, diverging,
+            and cyclical modules in the plotly.colors package.
           - A list of 2-element lists where the first element is the
             normalized color level value (starting at 0 and ending at 1), 
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
-                ['Greys', 'YlGnBu', 'Greens', 'YlOrRd', 'Bluered', 'RdBu',
-                'Reds', 'Blues', 'Picnic', 'Rainbow', 'Portland', 'Jet',
-                'Hot', 'Blackbody', 'Earth', 'Electric', 'Viridis', 'Cividis']
+                ['Aggrnyl', 'Agsunset', 'Armyrose', 'Blackbody', 'Bluered', 'Blues',
+                 'Blugrn', 'Bluyl', 'BrBG', 'Brwnyl', 'BuGn', 'BuPu', 'Burg',
+                 'Burgyl', 'Cividis', 'Darkmint', 'Earth', 'Edge', 'Electric',
+                 'Emrld', 'Fall', 'Geyser', 'GnBu', 'Greens', 'Greys', 'HSV', 'Hot',
+                 'IceFire', 'Inferno', 'Jet', 'Magenta', 'Magma', 'Mint', 'OrRd',
+                 'Oranges', 'Oryel', 'PRGn', 'Peach', 'Phase', 'PiYG', 'Picnic',
+                 'Pinkyl', 'Plasma', 'Plotly3', 'Portland', 'PuBu', 'PuBuGn',
+                 'PuOr', 'PuRd', 'Purp', 'Purples', 'Purpor', 'Rainbow', 'RdBu',
+                 'RdGy', 'RdPu', 'RdYlBu', 'RdYlGn', 'Redor', 'Reds', 'Spectral',
+                 'Sunset', 'Sunsetdark', 'Teal', 'Tealgrn', 'Tealrose', 'Temps',
+                 'Tropic', 'Twilight', 'Viridis', 'YlGn', 'YlGnBu', 'YlOrBr',
+                 'YlOrRd', 'algae', 'amp', 'balance', 'curl', 'deep', 'delta',
+                 'dense', 'gray', 'haline', 'ice', 'matter', 'mrybm', 'mygbm',
+                 'solar', 'speed', 'tempo', 'thermal', 'turbid']
 
         Returns
         -------
@@ -68603,12 +68743,12 @@ class Contourcarpet(_BaseTraceType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
           - A number that will be interpreted as a color
             according to contourcarpet.colorscale
 
@@ -70457,14 +70597,28 @@ class Contour(_BaseTraceType):
     
         The 'colorscale' property is a colorscale and may be
         specified as:
+          - A list of colors that will be spaced evenly to create the colorscale.
+            Many predefined colorscale lists are included in the sequential, diverging,
+            and cyclical modules in the plotly.colors package.
           - A list of 2-element lists where the first element is the
             normalized color level value (starting at 0 and ending at 1), 
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
-                ['Greys', 'YlGnBu', 'Greens', 'YlOrRd', 'Bluered', 'RdBu',
-                'Reds', 'Blues', 'Picnic', 'Rainbow', 'Portland', 'Jet',
-                'Hot', 'Blackbody', 'Earth', 'Electric', 'Viridis', 'Cividis']
+                ['Aggrnyl', 'Agsunset', 'Armyrose', 'Blackbody', 'Bluered', 'Blues',
+                 'Blugrn', 'Bluyl', 'BrBG', 'Brwnyl', 'BuGn', 'BuPu', 'Burg',
+                 'Burgyl', 'Cividis', 'Darkmint', 'Earth', 'Edge', 'Electric',
+                 'Emrld', 'Fall', 'Geyser', 'GnBu', 'Greens', 'Greys', 'HSV', 'Hot',
+                 'IceFire', 'Inferno', 'Jet', 'Magenta', 'Magma', 'Mint', 'OrRd',
+                 'Oranges', 'Oryel', 'PRGn', 'Peach', 'Phase', 'PiYG', 'Picnic',
+                 'Pinkyl', 'Plasma', 'Plotly3', 'Portland', 'PuBu', 'PuBuGn',
+                 'PuOr', 'PuRd', 'Purp', 'Purples', 'Purpor', 'Rainbow', 'RdBu',
+                 'RdGy', 'RdPu', 'RdYlBu', 'RdYlGn', 'Redor', 'Reds', 'Spectral',
+                 'Sunset', 'Sunsetdark', 'Teal', 'Tealgrn', 'Tealrose', 'Temps',
+                 'Tropic', 'Twilight', 'Viridis', 'YlGn', 'YlGnBu', 'YlOrBr',
+                 'YlOrRd', 'algae', 'amp', 'balance', 'curl', 'deep', 'delta',
+                 'dense', 'gray', 'haline', 'ice', 'matter', 'mrybm', 'mygbm',
+                 'solar', 'speed', 'tempo', 'thermal', 'turbid']
 
         Returns
         -------
@@ -70710,12 +70864,12 @@ class Contour(_BaseTraceType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
           - A number that will be interpreted as a color
             according to contour.colorscale
 
@@ -73036,14 +73190,28 @@ class Cone(_BaseTraceType):
     
         The 'colorscale' property is a colorscale and may be
         specified as:
+          - A list of colors that will be spaced evenly to create the colorscale.
+            Many predefined colorscale lists are included in the sequential, diverging,
+            and cyclical modules in the plotly.colors package.
           - A list of 2-element lists where the first element is the
             normalized color level value (starting at 0 and ending at 1), 
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
-                ['Greys', 'YlGnBu', 'Greens', 'YlOrRd', 'Bluered', 'RdBu',
-                'Reds', 'Blues', 'Picnic', 'Rainbow', 'Portland', 'Jet',
-                'Hot', 'Blackbody', 'Earth', 'Electric', 'Viridis', 'Cividis']
+                ['Aggrnyl', 'Agsunset', 'Armyrose', 'Blackbody', 'Bluered', 'Blues',
+                 'Blugrn', 'Bluyl', 'BrBG', 'Brwnyl', 'BuGn', 'BuPu', 'Burg',
+                 'Burgyl', 'Cividis', 'Darkmint', 'Earth', 'Edge', 'Electric',
+                 'Emrld', 'Fall', 'Geyser', 'GnBu', 'Greens', 'Greys', 'HSV', 'Hot',
+                 'IceFire', 'Inferno', 'Jet', 'Magenta', 'Magma', 'Mint', 'OrRd',
+                 'Oranges', 'Oryel', 'PRGn', 'Peach', 'Phase', 'PiYG', 'Picnic',
+                 'Pinkyl', 'Plasma', 'Plotly3', 'Portland', 'PuBu', 'PuBuGn',
+                 'PuOr', 'PuRd', 'Purp', 'Purples', 'Purpor', 'Rainbow', 'RdBu',
+                 'RdGy', 'RdPu', 'RdYlBu', 'RdYlGn', 'Redor', 'Reds', 'Spectral',
+                 'Sunset', 'Sunsetdark', 'Teal', 'Tealgrn', 'Tealrose', 'Temps',
+                 'Tropic', 'Twilight', 'Viridis', 'YlGn', 'YlGnBu', 'YlOrBr',
+                 'YlOrRd', 'algae', 'amp', 'balance', 'curl', 'deep', 'delta',
+                 'dense', 'gray', 'haline', 'ice', 'matter', 'mrybm', 'mygbm',
+                 'solar', 'speed', 'tempo', 'thermal', 'turbid']
 
         Returns
         -------
@@ -75090,14 +75258,28 @@ class Choropleth(_BaseTraceType):
     
         The 'colorscale' property is a colorscale and may be
         specified as:
+          - A list of colors that will be spaced evenly to create the colorscale.
+            Many predefined colorscale lists are included in the sequential, diverging,
+            and cyclical modules in the plotly.colors package.
           - A list of 2-element lists where the first element is the
             normalized color level value (starting at 0 and ending at 1), 
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
-                ['Greys', 'YlGnBu', 'Greens', 'YlOrRd', 'Bluered', 'RdBu',
-                'Reds', 'Blues', 'Picnic', 'Rainbow', 'Portland', 'Jet',
-                'Hot', 'Blackbody', 'Earth', 'Electric', 'Viridis', 'Cividis']
+                ['Aggrnyl', 'Agsunset', 'Armyrose', 'Blackbody', 'Bluered', 'Blues',
+                 'Blugrn', 'Bluyl', 'BrBG', 'Brwnyl', 'BuGn', 'BuPu', 'Burg',
+                 'Burgyl', 'Cividis', 'Darkmint', 'Earth', 'Edge', 'Electric',
+                 'Emrld', 'Fall', 'Geyser', 'GnBu', 'Greens', 'Greys', 'HSV', 'Hot',
+                 'IceFire', 'Inferno', 'Jet', 'Magenta', 'Magma', 'Mint', 'OrRd',
+                 'Oranges', 'Oryel', 'PRGn', 'Peach', 'Phase', 'PiYG', 'Picnic',
+                 'Pinkyl', 'Plasma', 'Plotly3', 'Portland', 'PuBu', 'PuBuGn',
+                 'PuOr', 'PuRd', 'Purp', 'Purples', 'Purpor', 'Rainbow', 'RdBu',
+                 'RdGy', 'RdPu', 'RdYlBu', 'RdYlGn', 'Redor', 'Reds', 'Spectral',
+                 'Sunset', 'Sunsetdark', 'Teal', 'Tealgrn', 'Tealrose', 'Temps',
+                 'Tropic', 'Twilight', 'Viridis', 'YlGn', 'YlGnBu', 'YlOrBr',
+                 'YlOrRd', 'algae', 'amp', 'balance', 'curl', 'deep', 'delta',
+                 'dense', 'gray', 'haline', 'ice', 'matter', 'mrybm', 'mygbm',
+                 'solar', 'speed', 'tempo', 'thermal', 'turbid']
 
         Returns
         -------
@@ -77311,12 +77493,12 @@ class Carpet(_BaseTraceType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
@@ -80096,12 +80278,12 @@ class Box(_BaseTraceType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
