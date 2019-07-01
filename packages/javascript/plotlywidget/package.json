@@ -1,6 +1,6 @@
 {
   "name": "plotlywidget",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.1",
   "description": "The plotly JupyterLab extension",
   "author": "The plotly.py team",
   "license": "MIT",
@@ -35,8 +35,7 @@
     "typescript": "~3.1.1"
   },
   "dependencies": {
-    "plotly.js": "1.48.3",
-    "@types/plotly.js": "^1.44.9",
+    "plotly.js": "^1.48.3",
     "@jupyter-widgets/base": "^2.0.0-rc.2",
     "@phosphor/messaging": "^1.2.3",
     "@phosphor/widgets": "^1.8.1",
