@@ -79,7 +79,7 @@ import decimal
 from numbers import Number
 import six
 
-from plotly import exceptions
+from _plotly_utils import exceptions
 
 
 # Built-in qualitative color sequences and sequential,

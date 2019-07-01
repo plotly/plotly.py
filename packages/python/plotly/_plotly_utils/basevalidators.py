@@ -1234,6 +1234,7 @@ class ColorValidator(BaseValidator):
         "red",
         "rosybrown",
         "royalblue",
+        "rebeccapurple",
         "saddlebrown",
         "salmon",
         "sandybrown",
@@ -1503,46 +1504,63 @@ class ColorscaleValidator(BaseValidator):
         },
     """
 
-    named_colorscales = [
-        "Greys",
-        "YlGnBu",
-        "Greens",
-        "YlOrRd",
-        "Bluered",
-        "RdBu",
-        "Reds",
-        "Blues",
-        "Picnic",
-        "Rainbow",
-        "Portland",
-        "Jet",
-        "Hot",
-        "Blackbody",
-        "Earth",
-        "Electric",
-        "Viridis",
-        "Cividis",
-    ]
-
     def __init__(self, plotly_name, parent_name, **kwargs):
         super(ColorscaleValidator, self).__init__(
             plotly_name=plotly_name, parent_name=parent_name, **kwargs
         )
 
+        # named colorscales initialized on first use
+        self._named_colorscales = None
+
+    @property
+    def named_colorscales(self):
+        if self._named_colorscales is None:
+            import inspect
+            import itertools
+            from plotly import colors
+
+            colorscale_members = itertools.chain(
+                inspect.getmembers(colors.sequential),
+                inspect.getmembers(colors.diverging),
+                inspect.getmembers(colors.cyclical),
+            )
+
+            self._named_colorscales = {
+                c[0].lower(): c[1]
+                for c in colorscale_members
+                if isinstance(c, tuple)
+                and len(c) == 2
+                and isinstance(c[0], str)
+                and isinstance(c[1], list)
+            }
+
+        return self._named_colorscales
+
     def description(self):
+        colorscales_str = "\n".join(
+            textwrap.wrap(
+                repr(sorted(list(self.named_colorscales))),
+                initial_indent=" " * 12,
+                subsequent_indent=" " * 13,
+                break_on_hyphens=False,
+                width=80,
+            )
+        )
+
         desc = """\
     The '{plotly_name}' property is a colorscale and may be
     specified as:
+      - A list of colors that will be spaced evenly to create the colorscale.
+        Many predefined colorscale lists are included in the sequential, diverging,
+        and cyclical modules in the plotly.colors package.
       - A list of 2-element lists where the first element is the
         normalized color level value (starting at 0 and ending at 1), 
         and the second item is a valid color string.
         (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
       - One of the following named colorscales:
-            ['Greys', 'YlGnBu', 'Greens', 'YlOrRd', 'Bluered', 'RdBu',
-            'Reds', 'Blues', 'Picnic', 'Rainbow', 'Portland', 'Jet',
-            'Hot', 'Blackbody', 'Earth', 'Electric', 'Viridis', 'Cividis']
-        """.format(
-            plotly_name=self.plotly_name
+{colorscales_str}
+""".format(
+            plotly_name=self.plotly_name, colorscales_str=colorscales_str
         )
 
         return desc
@@ -1551,38 +1569,53 @@ class ColorscaleValidator(BaseValidator):
         v_valid = False
 
         if v is None:
-            # Pass None through
-            pass
-        if v is None:
             v_valid = True
         elif isinstance(v, string_types):
-            v_match = [
-                el
-                for el in ColorscaleValidator.named_colorscales
-                if el.lower() == v.lower()
-            ]
-            if v_match:
+            v_lower = v.lower()
+            if v_lower in self.named_colorscales:
+                # Convert to color list
+                v = self.named_colorscales[v_lower]
+
+                # Convert to list of lists colorscale
+                d = len(v) - 1
+                v = [[(1.0 * i) / (1.0 * d), x] for i, x in enumerate(v)]
+
                 v_valid = True
 
         elif is_array(v) and len(v) > 0:
-            invalid_els = [
-                e
-                for e in v
-                if (
-                    not is_array(e)
-                    or len(e) != 2
-                    or not isinstance(e[0], numbers.Number)
-                    or not (0 <= e[0] <= 1)
-                    or not isinstance(e[1], string_types)
-                    or ColorValidator.perform_validate_coerce(e[1]) is None
-                )
-            ]
+            # If firset element is a string, treat as colorsequence
+            if isinstance(v[0], string_types):
+                invalid_els = [
+                    e for e in v if ColorValidator.perform_validate_coerce(e) is None
+                ]
 
-            if len(invalid_els) == 0:
-                v_valid = True
+                if len(invalid_els) == 0:
+                    v_valid = True
 
-                # Convert to list of lists
-                v = [[e[0], ColorValidator.perform_validate_coerce(e[1])] for e in v]
+                    # Convert to list of lists colorscale
+                    d = len(v) - 1
+                    v = [[(1.0 * i) / (1.0 * d), x] for i, x in enumerate(v)]
+            else:
+                invalid_els = [
+                    e
+                    for e in v
+                    if (
+                        not is_array(e)
+                        or len(e) != 2
+                        or not isinstance(e[0], numbers.Number)
+                        or not (0 <= e[0] <= 1)
+                        or not isinstance(e[1], string_types)
+                        or ColorValidator.perform_validate_coerce(e[1]) is None
+                    )
+                ]
+
+                if len(invalid_els) == 0:
+                    v_valid = True
+
+                    # Convert to list of lists
+                    v = [
+                        [e[0], ColorValidator.perform_validate_coerce(e[1])] for e in v
+                    ]
 
         if not v_valid:
             self.raise_invalid_val(v)

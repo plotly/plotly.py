@@ -44,12 +44,12 @@ class Tickfont(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
@@ -537,12 +537,12 @@ class Line(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
           - A number that will be interpreted as a color
             according to parcats.line.colorscale
           - A list or array of any of the above
@@ -837,14 +837,28 @@ class Line(_BaseTraceHierarchyType):
     
         The 'colorscale' property is a colorscale and may be
         specified as:
+          - A list of colors that will be spaced evenly to create the colorscale.
+            Many predefined colorscale lists are included in the sequential, diverging,
+            and cyclical modules in the plotly.colors package.
           - A list of 2-element lists where the first element is the
             normalized color level value (starting at 0 and ending at 1), 
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
-                ['Greys', 'YlGnBu', 'Greens', 'YlOrRd', 'Bluered', 'RdBu',
-                'Reds', 'Blues', 'Picnic', 'Rainbow', 'Portland', 'Jet',
-                'Hot', 'Blackbody', 'Earth', 'Electric', 'Viridis', 'Cividis']
+                ['Aggrnyl', 'Agsunset', 'Armyrose', 'Blackbody', 'Bluered', 'Blues',
+                 'Blugrn', 'Bluyl', 'BrBG', 'Brwnyl', 'BuGn', 'BuPu', 'Burg',
+                 'Burgyl', 'Cividis', 'Darkmint', 'Earth', 'Edge', 'Electric',
+                 'Emrld', 'Fall', 'Geyser', 'GnBu', 'Greens', 'Greys', 'HSV', 'Hot',
+                 'IceFire', 'Inferno', 'Jet', 'Magenta', 'Magma', 'Mint', 'OrRd',
+                 'Oranges', 'Oryel', 'PRGn', 'Peach', 'Phase', 'PiYG', 'Picnic',
+                 'Pinkyl', 'Plasma', 'Plotly3', 'Portland', 'PuBu', 'PuBuGn',
+                 'PuOr', 'PuRd', 'Purp', 'Purples', 'Purpor', 'Rainbow', 'RdBu',
+                 'RdGy', 'RdPu', 'RdYlBu', 'RdYlGn', 'Redor', 'Reds', 'Spectral',
+                 'Sunset', 'Sunsetdark', 'Teal', 'Tealgrn', 'Tealrose', 'Temps',
+                 'Tropic', 'Twilight', 'Viridis', 'YlGn', 'YlGnBu', 'YlOrBr',
+                 'YlOrRd', 'algae', 'amp', 'balance', 'curl', 'deep', 'delta',
+                 'dense', 'gray', 'haline', 'ice', 'matter', 'mrybm', 'mygbm',
+                 'solar', 'speed', 'tempo', 'thermal', 'turbid']
 
         Returns
         -------
@@ -1349,12 +1363,12 @@ class Labelfont(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
