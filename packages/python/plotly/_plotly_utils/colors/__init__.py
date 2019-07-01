@@ -94,6 +94,7 @@ from . import (  # noqa: F401
     cmocean,
     colorbrewer,
     carto,
+    plotlyjs,
 )
 
 DEFAULT_PLOTLY_COLORS = [
