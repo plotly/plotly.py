@@ -8185,20 +8185,20 @@ class Volume(_BaseTraceType):
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
-                ['Aggrnyl', 'Agsunset', 'Armyrose', 'Blackbody', 'Bluered', 'Blues',
-                 'Blugrn', 'Bluyl', 'BrBG', 'Brwnyl', 'BuGn', 'BuPu', 'Burg',
-                 'Burgyl', 'Cividis', 'Darkmint', 'Earth', 'Edge', 'Electric',
-                 'Emrld', 'Fall', 'Geyser', 'GnBu', 'Greens', 'Greys', 'HSV', 'Hot',
-                 'IceFire', 'Inferno', 'Jet', 'Magenta', 'Magma', 'Mint', 'OrRd',
-                 'Oranges', 'Oryel', 'PRGn', 'Peach', 'Phase', 'PiYG', 'Picnic',
-                 'Pinkyl', 'Plasma', 'Plotly3', 'Portland', 'PuBu', 'PuBuGn',
-                 'PuOr', 'PuRd', 'Purp', 'Purples', 'Purpor', 'Rainbow', 'RdBu',
-                 'RdGy', 'RdPu', 'RdYlBu', 'RdYlGn', 'Redor', 'Reds', 'Spectral',
-                 'Sunset', 'Sunsetdark', 'Teal', 'Tealgrn', 'Tealrose', 'Temps',
-                 'Tropic', 'Twilight', 'Viridis', 'YlGn', 'YlGnBu', 'YlOrBr',
-                 'YlOrRd', 'algae', 'amp', 'balance', 'curl', 'deep', 'delta',
-                 'dense', 'gray', 'haline', 'ice', 'matter', 'mrybm', 'mygbm',
-                 'solar', 'speed', 'tempo', 'thermal', 'turbid']
+                ['aggrnyl', 'agsunset', 'algae', 'amp', 'armyrose', 'balance',
+                 'blackbody', 'bluered', 'blues', 'blugrn', 'bluyl', 'brbg',
+                 'brwnyl', 'bugn', 'bupu', 'burg', 'burgyl', 'cividis', 'curl',
+                 'darkmint', 'deep', 'delta', 'dense', 'earth', 'edge', 'electric',
+                 'emrld', 'fall', 'geyser', 'gnbu', 'gray', 'greens', 'greys',
+                 'haline', 'hot', 'hsv', 'ice', 'icefire', 'inferno', 'jet',
+                 'magenta', 'magma', 'matter', 'mint', 'mrybm', 'mygbm', 'oranges',
+                 'orrd', 'oryel', 'peach', 'phase', 'picnic', 'pinkyl', 'piyg',
+                 'plasma', 'plotly3', 'portland', 'prgn', 'pubu', 'pubugn', 'puor',
+                 'purd', 'purp', 'purples', 'purpor', 'rainbow', 'rdbu', 'rdgy',
+                 'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
+                 'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
+                 'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
 
         Returns
         -------
@@ -13659,20 +13659,20 @@ class Surface(_BaseTraceType):
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
-                ['Aggrnyl', 'Agsunset', 'Armyrose', 'Blackbody', 'Bluered', 'Blues',
-                 'Blugrn', 'Bluyl', 'BrBG', 'Brwnyl', 'BuGn', 'BuPu', 'Burg',
-                 'Burgyl', 'Cividis', 'Darkmint', 'Earth', 'Edge', 'Electric',
-                 'Emrld', 'Fall', 'Geyser', 'GnBu', 'Greens', 'Greys', 'HSV', 'Hot',
-                 'IceFire', 'Inferno', 'Jet', 'Magenta', 'Magma', 'Mint', 'OrRd',
-                 'Oranges', 'Oryel', 'PRGn', 'Peach', 'Phase', 'PiYG', 'Picnic',
-                 'Pinkyl', 'Plasma', 'Plotly3', 'Portland', 'PuBu', 'PuBuGn',
-                 'PuOr', 'PuRd', 'Purp', 'Purples', 'Purpor', 'Rainbow', 'RdBu',
-                 'RdGy', 'RdPu', 'RdYlBu', 'RdYlGn', 'Redor', 'Reds', 'Spectral',
-                 'Sunset', 'Sunsetdark', 'Teal', 'Tealgrn', 'Tealrose', 'Temps',
-                 'Tropic', 'Twilight', 'Viridis', 'YlGn', 'YlGnBu', 'YlOrBr',
-                 'YlOrRd', 'algae', 'amp', 'balance', 'curl', 'deep', 'delta',
-                 'dense', 'gray', 'haline', 'ice', 'matter', 'mrybm', 'mygbm',
-                 'solar', 'speed', 'tempo', 'thermal', 'turbid']
+                ['aggrnyl', 'agsunset', 'algae', 'amp', 'armyrose', 'balance',
+                 'blackbody', 'bluered', 'blues', 'blugrn', 'bluyl', 'brbg',
+                 'brwnyl', 'bugn', 'bupu', 'burg', 'burgyl', 'cividis', 'curl',
+                 'darkmint', 'deep', 'delta', 'dense', 'earth', 'edge', 'electric',
+                 'emrld', 'fall', 'geyser', 'gnbu', 'gray', 'greens', 'greys',
+                 'haline', 'hot', 'hsv', 'ice', 'icefire', 'inferno', 'jet',
+                 'magenta', 'magma', 'matter', 'mint', 'mrybm', 'mygbm', 'oranges',
+                 'orrd', 'oryel', 'peach', 'phase', 'picnic', 'pinkyl', 'piyg',
+                 'plasma', 'plotly3', 'portland', 'prgn', 'pubu', 'pubugn', 'puor',
+                 'purd', 'purp', 'purples', 'purpor', 'rainbow', 'rdbu', 'rdgy',
+                 'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
+                 'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
+                 'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
 
         Returns
         -------
@@ -17396,20 +17396,20 @@ class Streamtube(_BaseTraceType):
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
-                ['Aggrnyl', 'Agsunset', 'Armyrose', 'Blackbody', 'Bluered', 'Blues',
-                 'Blugrn', 'Bluyl', 'BrBG', 'Brwnyl', 'BuGn', 'BuPu', 'Burg',
-                 'Burgyl', 'Cividis', 'Darkmint', 'Earth', 'Edge', 'Electric',
-                 'Emrld', 'Fall', 'Geyser', 'GnBu', 'Greens', 'Greys', 'HSV', 'Hot',
-                 'IceFire', 'Inferno', 'Jet', 'Magenta', 'Magma', 'Mint', 'OrRd',
-                 'Oranges', 'Oryel', 'PRGn', 'Peach', 'Phase', 'PiYG', 'Picnic',
-                 'Pinkyl', 'Plasma', 'Plotly3', 'Portland', 'PuBu', 'PuBuGn',
-                 'PuOr', 'PuRd', 'Purp', 'Purples', 'Purpor', 'Rainbow', 'RdBu',
-                 'RdGy', 'RdPu', 'RdYlBu', 'RdYlGn', 'Redor', 'Reds', 'Spectral',
-                 'Sunset', 'Sunsetdark', 'Teal', 'Tealgrn', 'Tealrose', 'Temps',
-                 'Tropic', 'Twilight', 'Viridis', 'YlGn', 'YlGnBu', 'YlOrBr',
-                 'YlOrRd', 'algae', 'amp', 'balance', 'curl', 'deep', 'delta',
-                 'dense', 'gray', 'haline', 'ice', 'matter', 'mrybm', 'mygbm',
-                 'solar', 'speed', 'tempo', 'thermal', 'turbid']
+                ['aggrnyl', 'agsunset', 'algae', 'amp', 'armyrose', 'balance',
+                 'blackbody', 'bluered', 'blues', 'blugrn', 'bluyl', 'brbg',
+                 'brwnyl', 'bugn', 'bupu', 'burg', 'burgyl', 'cividis', 'curl',
+                 'darkmint', 'deep', 'delta', 'dense', 'earth', 'edge', 'electric',
+                 'emrld', 'fall', 'geyser', 'gnbu', 'gray', 'greens', 'greys',
+                 'haline', 'hot', 'hsv', 'ice', 'icefire', 'inferno', 'jet',
+                 'magenta', 'magma', 'matter', 'mint', 'mrybm', 'mygbm', 'oranges',
+                 'orrd', 'oryel', 'peach', 'phase', 'picnic', 'pinkyl', 'piyg',
+                 'plasma', 'plotly3', 'portland', 'prgn', 'pubu', 'pubugn', 'puor',
+                 'purd', 'purp', 'purples', 'purpor', 'rainbow', 'rdbu', 'rdgy',
+                 'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
+                 'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
+                 'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
 
         Returns
         -------
@@ -48254,20 +48254,20 @@ class Mesh3d(_BaseTraceType):
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
-                ['Aggrnyl', 'Agsunset', 'Armyrose', 'Blackbody', 'Bluered', 'Blues',
-                 'Blugrn', 'Bluyl', 'BrBG', 'Brwnyl', 'BuGn', 'BuPu', 'Burg',
-                 'Burgyl', 'Cividis', 'Darkmint', 'Earth', 'Edge', 'Electric',
-                 'Emrld', 'Fall', 'Geyser', 'GnBu', 'Greens', 'Greys', 'HSV', 'Hot',
-                 'IceFire', 'Inferno', 'Jet', 'Magenta', 'Magma', 'Mint', 'OrRd',
-                 'Oranges', 'Oryel', 'PRGn', 'Peach', 'Phase', 'PiYG', 'Picnic',
-                 'Pinkyl', 'Plasma', 'Plotly3', 'Portland', 'PuBu', 'PuBuGn',
-                 'PuOr', 'PuRd', 'Purp', 'Purples', 'Purpor', 'Rainbow', 'RdBu',
-                 'RdGy', 'RdPu', 'RdYlBu', 'RdYlGn', 'Redor', 'Reds', 'Spectral',
-                 'Sunset', 'Sunsetdark', 'Teal', 'Tealgrn', 'Tealrose', 'Temps',
-                 'Tropic', 'Twilight', 'Viridis', 'YlGn', 'YlGnBu', 'YlOrBr',
-                 'YlOrRd', 'algae', 'amp', 'balance', 'curl', 'deep', 'delta',
-                 'dense', 'gray', 'haline', 'ice', 'matter', 'mrybm', 'mygbm',
-                 'solar', 'speed', 'tempo', 'thermal', 'turbid']
+                ['aggrnyl', 'agsunset', 'algae', 'amp', 'armyrose', 'balance',
+                 'blackbody', 'bluered', 'blues', 'blugrn', 'bluyl', 'brbg',
+                 'brwnyl', 'bugn', 'bupu', 'burg', 'burgyl', 'cividis', 'curl',
+                 'darkmint', 'deep', 'delta', 'dense', 'earth', 'edge', 'electric',
+                 'emrld', 'fall', 'geyser', 'gnbu', 'gray', 'greens', 'greys',
+                 'haline', 'hot', 'hsv', 'ice', 'icefire', 'inferno', 'jet',
+                 'magenta', 'magma', 'matter', 'mint', 'mrybm', 'mygbm', 'oranges',
+                 'orrd', 'oryel', 'peach', 'phase', 'picnic', 'pinkyl', 'piyg',
+                 'plasma', 'plotly3', 'portland', 'prgn', 'pubu', 'pubugn', 'puor',
+                 'purd', 'purp', 'purples', 'purpor', 'rainbow', 'rdbu', 'rdgy',
+                 'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
+                 'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
+                 'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
 
         Returns
         -------
@@ -50848,20 +50848,20 @@ class Isosurface(_BaseTraceType):
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
-                ['Aggrnyl', 'Agsunset', 'Armyrose', 'Blackbody', 'Bluered', 'Blues',
-                 'Blugrn', 'Bluyl', 'BrBG', 'Brwnyl', 'BuGn', 'BuPu', 'Burg',
-                 'Burgyl', 'Cividis', 'Darkmint', 'Earth', 'Edge', 'Electric',
-                 'Emrld', 'Fall', 'Geyser', 'GnBu', 'Greens', 'Greys', 'HSV', 'Hot',
-                 'IceFire', 'Inferno', 'Jet', 'Magenta', 'Magma', 'Mint', 'OrRd',
-                 'Oranges', 'Oryel', 'PRGn', 'Peach', 'Phase', 'PiYG', 'Picnic',
-                 'Pinkyl', 'Plasma', 'Plotly3', 'Portland', 'PuBu', 'PuBuGn',
-                 'PuOr', 'PuRd', 'Purp', 'Purples', 'Purpor', 'Rainbow', 'RdBu',
-                 'RdGy', 'RdPu', 'RdYlBu', 'RdYlGn', 'Redor', 'Reds', 'Spectral',
-                 'Sunset', 'Sunsetdark', 'Teal', 'Tealgrn', 'Tealrose', 'Temps',
-                 'Tropic', 'Twilight', 'Viridis', 'YlGn', 'YlGnBu', 'YlOrBr',
-                 'YlOrRd', 'algae', 'amp', 'balance', 'curl', 'deep', 'delta',
-                 'dense', 'gray', 'haline', 'ice', 'matter', 'mrybm', 'mygbm',
-                 'solar', 'speed', 'tempo', 'thermal', 'turbid']
+                ['aggrnyl', 'agsunset', 'algae', 'amp', 'armyrose', 'balance',
+                 'blackbody', 'bluered', 'blues', 'blugrn', 'bluyl', 'brbg',
+                 'brwnyl', 'bugn', 'bupu', 'burg', 'burgyl', 'cividis', 'curl',
+                 'darkmint', 'deep', 'delta', 'dense', 'earth', 'edge', 'electric',
+                 'emrld', 'fall', 'geyser', 'gnbu', 'gray', 'greens', 'greys',
+                 'haline', 'hot', 'hsv', 'ice', 'icefire', 'inferno', 'jet',
+                 'magenta', 'magma', 'matter', 'mint', 'mrybm', 'mygbm', 'oranges',
+                 'orrd', 'oryel', 'peach', 'phase', 'picnic', 'pinkyl', 'piyg',
+                 'plasma', 'plotly3', 'portland', 'prgn', 'pubu', 'pubugn', 'puor',
+                 'purd', 'purp', 'purples', 'purpor', 'rainbow', 'rdbu', 'rdgy',
+                 'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
+                 'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
+                 'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
 
         Returns
         -------
@@ -53073,20 +53073,20 @@ class Histogram2dContour(_BaseTraceType):
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
-                ['Aggrnyl', 'Agsunset', 'Armyrose', 'Blackbody', 'Bluered', 'Blues',
-                 'Blugrn', 'Bluyl', 'BrBG', 'Brwnyl', 'BuGn', 'BuPu', 'Burg',
-                 'Burgyl', 'Cividis', 'Darkmint', 'Earth', 'Edge', 'Electric',
-                 'Emrld', 'Fall', 'Geyser', 'GnBu', 'Greens', 'Greys', 'HSV', 'Hot',
-                 'IceFire', 'Inferno', 'Jet', 'Magenta', 'Magma', 'Mint', 'OrRd',
-                 'Oranges', 'Oryel', 'PRGn', 'Peach', 'Phase', 'PiYG', 'Picnic',
-                 'Pinkyl', 'Plasma', 'Plotly3', 'Portland', 'PuBu', 'PuBuGn',
-                 'PuOr', 'PuRd', 'Purp', 'Purples', 'Purpor', 'Rainbow', 'RdBu',
-                 'RdGy', 'RdPu', 'RdYlBu', 'RdYlGn', 'Redor', 'Reds', 'Spectral',
-                 'Sunset', 'Sunsetdark', 'Teal', 'Tealgrn', 'Tealrose', 'Temps',
-                 'Tropic', 'Twilight', 'Viridis', 'YlGn', 'YlGnBu', 'YlOrBr',
-                 'YlOrRd', 'algae', 'amp', 'balance', 'curl', 'deep', 'delta',
-                 'dense', 'gray', 'haline', 'ice', 'matter', 'mrybm', 'mygbm',
-                 'solar', 'speed', 'tempo', 'thermal', 'turbid']
+                ['aggrnyl', 'agsunset', 'algae', 'amp', 'armyrose', 'balance',
+                 'blackbody', 'bluered', 'blues', 'blugrn', 'bluyl', 'brbg',
+                 'brwnyl', 'bugn', 'bupu', 'burg', 'burgyl', 'cividis', 'curl',
+                 'darkmint', 'deep', 'delta', 'dense', 'earth', 'edge', 'electric',
+                 'emrld', 'fall', 'geyser', 'gnbu', 'gray', 'greens', 'greys',
+                 'haline', 'hot', 'hsv', 'ice', 'icefire', 'inferno', 'jet',
+                 'magenta', 'magma', 'matter', 'mint', 'mrybm', 'mygbm', 'oranges',
+                 'orrd', 'oryel', 'peach', 'phase', 'picnic', 'pinkyl', 'piyg',
+                 'plasma', 'plotly3', 'portland', 'prgn', 'pubu', 'pubugn', 'puor',
+                 'purd', 'purp', 'purples', 'purpor', 'rainbow', 'rdbu', 'rdgy',
+                 'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
+                 'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
+                 'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
 
         Returns
         -------
@@ -55691,20 +55691,20 @@ class Histogram2d(_BaseTraceType):
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
-                ['Aggrnyl', 'Agsunset', 'Armyrose', 'Blackbody', 'Bluered', 'Blues',
-                 'Blugrn', 'Bluyl', 'BrBG', 'Brwnyl', 'BuGn', 'BuPu', 'Burg',
-                 'Burgyl', 'Cividis', 'Darkmint', 'Earth', 'Edge', 'Electric',
-                 'Emrld', 'Fall', 'Geyser', 'GnBu', 'Greens', 'Greys', 'HSV', 'Hot',
-                 'IceFire', 'Inferno', 'Jet', 'Magenta', 'Magma', 'Mint', 'OrRd',
-                 'Oranges', 'Oryel', 'PRGn', 'Peach', 'Phase', 'PiYG', 'Picnic',
-                 'Pinkyl', 'Plasma', 'Plotly3', 'Portland', 'PuBu', 'PuBuGn',
-                 'PuOr', 'PuRd', 'Purp', 'Purples', 'Purpor', 'Rainbow', 'RdBu',
-                 'RdGy', 'RdPu', 'RdYlBu', 'RdYlGn', 'Redor', 'Reds', 'Spectral',
-                 'Sunset', 'Sunsetdark', 'Teal', 'Tealgrn', 'Tealrose', 'Temps',
-                 'Tropic', 'Twilight', 'Viridis', 'YlGn', 'YlGnBu', 'YlOrBr',
-                 'YlOrRd', 'algae', 'amp', 'balance', 'curl', 'deep', 'delta',
-                 'dense', 'gray', 'haline', 'ice', 'matter', 'mrybm', 'mygbm',
-                 'solar', 'speed', 'tempo', 'thermal', 'turbid']
+                ['aggrnyl', 'agsunset', 'algae', 'amp', 'armyrose', 'balance',
+                 'blackbody', 'bluered', 'blues', 'blugrn', 'bluyl', 'brbg',
+                 'brwnyl', 'bugn', 'bupu', 'burg', 'burgyl', 'cividis', 'curl',
+                 'darkmint', 'deep', 'delta', 'dense', 'earth', 'edge', 'electric',
+                 'emrld', 'fall', 'geyser', 'gnbu', 'gray', 'greens', 'greys',
+                 'haline', 'hot', 'hsv', 'ice', 'icefire', 'inferno', 'jet',
+                 'magenta', 'magma', 'matter', 'mint', 'mrybm', 'mygbm', 'oranges',
+                 'orrd', 'oryel', 'peach', 'phase', 'picnic', 'pinkyl', 'piyg',
+                 'plasma', 'plotly3', 'portland', 'prgn', 'pubu', 'pubugn', 'puor',
+                 'purd', 'purp', 'purples', 'purpor', 'rainbow', 'rdbu', 'rdgy',
+                 'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
+                 'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
+                 'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
 
         Returns
         -------
@@ -60379,20 +60379,20 @@ class Heatmapgl(_BaseTraceType):
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
-                ['Aggrnyl', 'Agsunset', 'Armyrose', 'Blackbody', 'Bluered', 'Blues',
-                 'Blugrn', 'Bluyl', 'BrBG', 'Brwnyl', 'BuGn', 'BuPu', 'Burg',
-                 'Burgyl', 'Cividis', 'Darkmint', 'Earth', 'Edge', 'Electric',
-                 'Emrld', 'Fall', 'Geyser', 'GnBu', 'Greens', 'Greys', 'HSV', 'Hot',
-                 'IceFire', 'Inferno', 'Jet', 'Magenta', 'Magma', 'Mint', 'OrRd',
-                 'Oranges', 'Oryel', 'PRGn', 'Peach', 'Phase', 'PiYG', 'Picnic',
-                 'Pinkyl', 'Plasma', 'Plotly3', 'Portland', 'PuBu', 'PuBuGn',
-                 'PuOr', 'PuRd', 'Purp', 'Purples', 'Purpor', 'Rainbow', 'RdBu',
-                 'RdGy', 'RdPu', 'RdYlBu', 'RdYlGn', 'Redor', 'Reds', 'Spectral',
-                 'Sunset', 'Sunsetdark', 'Teal', 'Tealgrn', 'Tealrose', 'Temps',
-                 'Tropic', 'Twilight', 'Viridis', 'YlGn', 'YlGnBu', 'YlOrBr',
-                 'YlOrRd', 'algae', 'amp', 'balance', 'curl', 'deep', 'delta',
-                 'dense', 'gray', 'haline', 'ice', 'matter', 'mrybm', 'mygbm',
-                 'solar', 'speed', 'tempo', 'thermal', 'turbid']
+                ['aggrnyl', 'agsunset', 'algae', 'amp', 'armyrose', 'balance',
+                 'blackbody', 'bluered', 'blues', 'blugrn', 'bluyl', 'brbg',
+                 'brwnyl', 'bugn', 'bupu', 'burg', 'burgyl', 'cividis', 'curl',
+                 'darkmint', 'deep', 'delta', 'dense', 'earth', 'edge', 'electric',
+                 'emrld', 'fall', 'geyser', 'gnbu', 'gray', 'greens', 'greys',
+                 'haline', 'hot', 'hsv', 'ice', 'icefire', 'inferno', 'jet',
+                 'magenta', 'magma', 'matter', 'mint', 'mrybm', 'mygbm', 'oranges',
+                 'orrd', 'oryel', 'peach', 'phase', 'picnic', 'pinkyl', 'piyg',
+                 'plasma', 'plotly3', 'portland', 'prgn', 'pubu', 'pubugn', 'puor',
+                 'purd', 'purp', 'purples', 'purpor', 'rainbow', 'rdbu', 'rdgy',
+                 'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
+                 'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
+                 'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
 
         Returns
         -------
@@ -62218,20 +62218,20 @@ class Heatmap(_BaseTraceType):
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
-                ['Aggrnyl', 'Agsunset', 'Armyrose', 'Blackbody', 'Bluered', 'Blues',
-                 'Blugrn', 'Bluyl', 'BrBG', 'Brwnyl', 'BuGn', 'BuPu', 'Burg',
-                 'Burgyl', 'Cividis', 'Darkmint', 'Earth', 'Edge', 'Electric',
-                 'Emrld', 'Fall', 'Geyser', 'GnBu', 'Greens', 'Greys', 'HSV', 'Hot',
-                 'IceFire', 'Inferno', 'Jet', 'Magenta', 'Magma', 'Mint', 'OrRd',
-                 'Oranges', 'Oryel', 'PRGn', 'Peach', 'Phase', 'PiYG', 'Picnic',
-                 'Pinkyl', 'Plasma', 'Plotly3', 'Portland', 'PuBu', 'PuBuGn',
-                 'PuOr', 'PuRd', 'Purp', 'Purples', 'Purpor', 'Rainbow', 'RdBu',
-                 'RdGy', 'RdPu', 'RdYlBu', 'RdYlGn', 'Redor', 'Reds', 'Spectral',
-                 'Sunset', 'Sunsetdark', 'Teal', 'Tealgrn', 'Tealrose', 'Temps',
-                 'Tropic', 'Twilight', 'Viridis', 'YlGn', 'YlGnBu', 'YlOrBr',
-                 'YlOrRd', 'algae', 'amp', 'balance', 'curl', 'deep', 'delta',
-                 'dense', 'gray', 'haline', 'ice', 'matter', 'mrybm', 'mygbm',
-                 'solar', 'speed', 'tempo', 'thermal', 'turbid']
+                ['aggrnyl', 'agsunset', 'algae', 'amp', 'armyrose', 'balance',
+                 'blackbody', 'bluered', 'blues', 'blugrn', 'bluyl', 'brbg',
+                 'brwnyl', 'bugn', 'bupu', 'burg', 'burgyl', 'cividis', 'curl',
+                 'darkmint', 'deep', 'delta', 'dense', 'earth', 'edge', 'electric',
+                 'emrld', 'fall', 'geyser', 'gnbu', 'gray', 'greens', 'greys',
+                 'haline', 'hot', 'hsv', 'ice', 'icefire', 'inferno', 'jet',
+                 'magenta', 'magma', 'matter', 'mint', 'mrybm', 'mygbm', 'oranges',
+                 'orrd', 'oryel', 'peach', 'phase', 'picnic', 'pinkyl', 'piyg',
+                 'plasma', 'plotly3', 'portland', 'prgn', 'pubu', 'pubugn', 'puor',
+                 'purd', 'purp', 'purples', 'purpor', 'rainbow', 'rdbu', 'rdgy',
+                 'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
+                 'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
+                 'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
 
         Returns
         -------
@@ -68507,20 +68507,20 @@ class Contourcarpet(_BaseTraceType):
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
-                ['Aggrnyl', 'Agsunset', 'Armyrose', 'Blackbody', 'Bluered', 'Blues',
-                 'Blugrn', 'Bluyl', 'BrBG', 'Brwnyl', 'BuGn', 'BuPu', 'Burg',
-                 'Burgyl', 'Cividis', 'Darkmint', 'Earth', 'Edge', 'Electric',
-                 'Emrld', 'Fall', 'Geyser', 'GnBu', 'Greens', 'Greys', 'HSV', 'Hot',
-                 'IceFire', 'Inferno', 'Jet', 'Magenta', 'Magma', 'Mint', 'OrRd',
-                 'Oranges', 'Oryel', 'PRGn', 'Peach', 'Phase', 'PiYG', 'Picnic',
-                 'Pinkyl', 'Plasma', 'Plotly3', 'Portland', 'PuBu', 'PuBuGn',
-                 'PuOr', 'PuRd', 'Purp', 'Purples', 'Purpor', 'Rainbow', 'RdBu',
-                 'RdGy', 'RdPu', 'RdYlBu', 'RdYlGn', 'Redor', 'Reds', 'Spectral',
-                 'Sunset', 'Sunsetdark', 'Teal', 'Tealgrn', 'Tealrose', 'Temps',
-                 'Tropic', 'Twilight', 'Viridis', 'YlGn', 'YlGnBu', 'YlOrBr',
-                 'YlOrRd', 'algae', 'amp', 'balance', 'curl', 'deep', 'delta',
-                 'dense', 'gray', 'haline', 'ice', 'matter', 'mrybm', 'mygbm',
-                 'solar', 'speed', 'tempo', 'thermal', 'turbid']
+                ['aggrnyl', 'agsunset', 'algae', 'amp', 'armyrose', 'balance',
+                 'blackbody', 'bluered', 'blues', 'blugrn', 'bluyl', 'brbg',
+                 'brwnyl', 'bugn', 'bupu', 'burg', 'burgyl', 'cividis', 'curl',
+                 'darkmint', 'deep', 'delta', 'dense', 'earth', 'edge', 'electric',
+                 'emrld', 'fall', 'geyser', 'gnbu', 'gray', 'greens', 'greys',
+                 'haline', 'hot', 'hsv', 'ice', 'icefire', 'inferno', 'jet',
+                 'magenta', 'magma', 'matter', 'mint', 'mrybm', 'mygbm', 'oranges',
+                 'orrd', 'oryel', 'peach', 'phase', 'picnic', 'pinkyl', 'piyg',
+                 'plasma', 'plotly3', 'portland', 'prgn', 'pubu', 'pubugn', 'puor',
+                 'purd', 'purp', 'purples', 'purpor', 'rainbow', 'rdbu', 'rdgy',
+                 'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
+                 'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
+                 'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
 
         Returns
         -------
@@ -70605,20 +70605,20 @@ class Contour(_BaseTraceType):
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
-                ['Aggrnyl', 'Agsunset', 'Armyrose', 'Blackbody', 'Bluered', 'Blues',
-                 'Blugrn', 'Bluyl', 'BrBG', 'Brwnyl', 'BuGn', 'BuPu', 'Burg',
-                 'Burgyl', 'Cividis', 'Darkmint', 'Earth', 'Edge', 'Electric',
-                 'Emrld', 'Fall', 'Geyser', 'GnBu', 'Greens', 'Greys', 'HSV', 'Hot',
-                 'IceFire', 'Inferno', 'Jet', 'Magenta', 'Magma', 'Mint', 'OrRd',
-                 'Oranges', 'Oryel', 'PRGn', 'Peach', 'Phase', 'PiYG', 'Picnic',
-                 'Pinkyl', 'Plasma', 'Plotly3', 'Portland', 'PuBu', 'PuBuGn',
-                 'PuOr', 'PuRd', 'Purp', 'Purples', 'Purpor', 'Rainbow', 'RdBu',
-                 'RdGy', 'RdPu', 'RdYlBu', 'RdYlGn', 'Redor', 'Reds', 'Spectral',
-                 'Sunset', 'Sunsetdark', 'Teal', 'Tealgrn', 'Tealrose', 'Temps',
-                 'Tropic', 'Twilight', 'Viridis', 'YlGn', 'YlGnBu', 'YlOrBr',
-                 'YlOrRd', 'algae', 'amp', 'balance', 'curl', 'deep', 'delta',
-                 'dense', 'gray', 'haline', 'ice', 'matter', 'mrybm', 'mygbm',
-                 'solar', 'speed', 'tempo', 'thermal', 'turbid']
+                ['aggrnyl', 'agsunset', 'algae', 'amp', 'armyrose', 'balance',
+                 'blackbody', 'bluered', 'blues', 'blugrn', 'bluyl', 'brbg',
+                 'brwnyl', 'bugn', 'bupu', 'burg', 'burgyl', 'cividis', 'curl',
+                 'darkmint', 'deep', 'delta', 'dense', 'earth', 'edge', 'electric',
+                 'emrld', 'fall', 'geyser', 'gnbu', 'gray', 'greens', 'greys',
+                 'haline', 'hot', 'hsv', 'ice', 'icefire', 'inferno', 'jet',
+                 'magenta', 'magma', 'matter', 'mint', 'mrybm', 'mygbm', 'oranges',
+                 'orrd', 'oryel', 'peach', 'phase', 'picnic', 'pinkyl', 'piyg',
+                 'plasma', 'plotly3', 'portland', 'prgn', 'pubu', 'pubugn', 'puor',
+                 'purd', 'purp', 'purples', 'purpor', 'rainbow', 'rdbu', 'rdgy',
+                 'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
+                 'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
+                 'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
 
         Returns
         -------
@@ -73198,20 +73198,20 @@ class Cone(_BaseTraceType):
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
-                ['Aggrnyl', 'Agsunset', 'Armyrose', 'Blackbody', 'Bluered', 'Blues',
-                 'Blugrn', 'Bluyl', 'BrBG', 'Brwnyl', 'BuGn', 'BuPu', 'Burg',
-                 'Burgyl', 'Cividis', 'Darkmint', 'Earth', 'Edge', 'Electric',
-                 'Emrld', 'Fall', 'Geyser', 'GnBu', 'Greens', 'Greys', 'HSV', 'Hot',
-                 'IceFire', 'Inferno', 'Jet', 'Magenta', 'Magma', 'Mint', 'OrRd',
-                 'Oranges', 'Oryel', 'PRGn', 'Peach', 'Phase', 'PiYG', 'Picnic',
-                 'Pinkyl', 'Plasma', 'Plotly3', 'Portland', 'PuBu', 'PuBuGn',
-                 'PuOr', 'PuRd', 'Purp', 'Purples', 'Purpor', 'Rainbow', 'RdBu',
-                 'RdGy', 'RdPu', 'RdYlBu', 'RdYlGn', 'Redor', 'Reds', 'Spectral',
-                 'Sunset', 'Sunsetdark', 'Teal', 'Tealgrn', 'Tealrose', 'Temps',
-                 'Tropic', 'Twilight', 'Viridis', 'YlGn', 'YlGnBu', 'YlOrBr',
-                 'YlOrRd', 'algae', 'amp', 'balance', 'curl', 'deep', 'delta',
-                 'dense', 'gray', 'haline', 'ice', 'matter', 'mrybm', 'mygbm',
-                 'solar', 'speed', 'tempo', 'thermal', 'turbid']
+                ['aggrnyl', 'agsunset', 'algae', 'amp', 'armyrose', 'balance',
+                 'blackbody', 'bluered', 'blues', 'blugrn', 'bluyl', 'brbg',
+                 'brwnyl', 'bugn', 'bupu', 'burg', 'burgyl', 'cividis', 'curl',
+                 'darkmint', 'deep', 'delta', 'dense', 'earth', 'edge', 'electric',
+                 'emrld', 'fall', 'geyser', 'gnbu', 'gray', 'greens', 'greys',
+                 'haline', 'hot', 'hsv', 'ice', 'icefire', 'inferno', 'jet',
+                 'magenta', 'magma', 'matter', 'mint', 'mrybm', 'mygbm', 'oranges',
+                 'orrd', 'oryel', 'peach', 'phase', 'picnic', 'pinkyl', 'piyg',
+                 'plasma', 'plotly3', 'portland', 'prgn', 'pubu', 'pubugn', 'puor',
+                 'purd', 'purp', 'purples', 'purpor', 'rainbow', 'rdbu', 'rdgy',
+                 'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
+                 'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
+                 'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
 
         Returns
         -------
@@ -75266,20 +75266,20 @@ class Choropleth(_BaseTraceType):
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
-                ['Aggrnyl', 'Agsunset', 'Armyrose', 'Blackbody', 'Bluered', 'Blues',
-                 'Blugrn', 'Bluyl', 'BrBG', 'Brwnyl', 'BuGn', 'BuPu', 'Burg',
-                 'Burgyl', 'Cividis', 'Darkmint', 'Earth', 'Edge', 'Electric',
-                 'Emrld', 'Fall', 'Geyser', 'GnBu', 'Greens', 'Greys', 'HSV', 'Hot',
-                 'IceFire', 'Inferno', 'Jet', 'Magenta', 'Magma', 'Mint', 'OrRd',
-                 'Oranges', 'Oryel', 'PRGn', 'Peach', 'Phase', 'PiYG', 'Picnic',
-                 'Pinkyl', 'Plasma', 'Plotly3', 'Portland', 'PuBu', 'PuBuGn',
-                 'PuOr', 'PuRd', 'Purp', 'Purples', 'Purpor', 'Rainbow', 'RdBu',
-                 'RdGy', 'RdPu', 'RdYlBu', 'RdYlGn', 'Redor', 'Reds', 'Spectral',
-                 'Sunset', 'Sunsetdark', 'Teal', 'Tealgrn', 'Tealrose', 'Temps',
-                 'Tropic', 'Twilight', 'Viridis', 'YlGn', 'YlGnBu', 'YlOrBr',
-                 'YlOrRd', 'algae', 'amp', 'balance', 'curl', 'deep', 'delta',
-                 'dense', 'gray', 'haline', 'ice', 'matter', 'mrybm', 'mygbm',
-                 'solar', 'speed', 'tempo', 'thermal', 'turbid']
+                ['aggrnyl', 'agsunset', 'algae', 'amp', 'armyrose', 'balance',
+                 'blackbody', 'bluered', 'blues', 'blugrn', 'bluyl', 'brbg',
+                 'brwnyl', 'bugn', 'bupu', 'burg', 'burgyl', 'cividis', 'curl',
+                 'darkmint', 'deep', 'delta', 'dense', 'earth', 'edge', 'electric',
+                 'emrld', 'fall', 'geyser', 'gnbu', 'gray', 'greens', 'greys',
+                 'haline', 'hot', 'hsv', 'ice', 'icefire', 'inferno', 'jet',
+                 'magenta', 'magma', 'matter', 'mint', 'mrybm', 'mygbm', 'oranges',
+                 'orrd', 'oryel', 'peach', 'phase', 'picnic', 'pinkyl', 'piyg',
+                 'plasma', 'plotly3', 'portland', 'prgn', 'pubu', 'pubugn', 'puor',
+                 'purd', 'purp', 'purples', 'purpor', 'rainbow', 'rdbu', 'rdgy',
+                 'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
+                 'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
+                 'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
 
         Returns
         -------
