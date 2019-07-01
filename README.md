@@ -78,12 +78,12 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 
 plotly.py may be installed using pip...
 ```
-pip install plotly==4.0.0a4
+pip install plotly==4.0.0a8
 ```
 
 or conda.
 ```
-conda install -c plotly/label/test plotly==4.0.0a4
+conda install -c plotly/label/test plotly==4.0.0a8
 ```
 
 ### Jupyter Notebook Support
@@ -129,7 +129,7 @@ jupyter labextension install @jupyter-widgets/jupyterlab-manager@1.0.0-rc.2 --no
 jupyter labextension install plotlywidget@1.0.0-alpha.3 --no-build
 
 # and jupyterlab renderer support
-jupyter labextension install jupyterlab-plotly@1.0.0-alpha.3 --no-build
+jupyter labextension install jupyterlab-plotly@1.0.0-alpha.5 --no-build
 
 # JupyterLab chart editor support (optional)
 jupyter labextension install jupyterlab-chart-editor@1.1 --no-build
@@ -181,12 +181,12 @@ The `chart-studio` package can be used to upload plotly figures to Plotly's Char
 Studio Cloud or On-Prem service.  This package can be installed using pip...
 
 ```
-pip install chart-studio==1.0.0a4
+pip install chart-studio==1.0.0a5
 ```
 
 or conda
 ```
-conda install -c plotly/label/test chart-studio=1.0.0a4
+conda install -c plotly/label/test chart-studio=1.0.0a5
 ```
 
 ## Migration
