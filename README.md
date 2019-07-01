@@ -91,13 +91,13 @@ For use in the Jupyter Notebook, install the `notebook` and `ipywidgets`
 packages using pip...
 
 ```
-pip install "notebook>=5.3" "ipywidgets>=7.2"
+pip install "notebook>=5.3" "ipywidgets==7.4"
 ```
 
 or conda.
 
 ```
-conda install "notebook>=5.3" "ipywidgets>=7.2"
+conda install "notebook>=5.3" "ipywidgets=7.4"
 ```
 
 ### JupyterLab Support (Python 3.5+)
@@ -105,13 +105,13 @@ For use in JupyterLab, install the `jupyterlab` and `ipywidgets`
 packages using pip... 
 
 ```
-pip install jupyterlab==1.0 "ipywidgets>=7.2"
+pip install jupyterlab==0.35 "ipywidgets==7.4"
 ```
 
 or conda.
 
 ```
-conda install jupyterlab=1.0 "ipywidgets>=7.2"
+conda install jupyterlab=0.35 "ipywidgets=7.2"
 ```
 
 Then run the following commands to install the required JupyterLab extensions:
@@ -126,7 +126,7 @@ set NODE_OPTIONS=--max-old-space-size=4096
 jupyter labextension install @jupyter-widgets/jupyterlab-manager@1.0.0-rc.2 --no-build
 
 # FigureWidget support
-jupyter labextension install plotlywidget@1.0.0-alpha.3 --no-build
+jupyter labextension install plotlywidget@0.38 --no-build
 
 # and jupyterlab renderer support
 jupyter labextension install jupyterlab-plotly@1.0.0-alpha.5 --no-build
