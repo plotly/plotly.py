@@ -45,7 +45,6 @@ from chart_studio.config import get_config, get_credentials
 __all__ = None
 
 DEFAULT_PLOT_OPTIONS = {
-    "filename": "plot from API",
     "world_readable": files.FILE_CONTENT[files.CONFIG_FILE]["world_readable"],
     "auto_open": files.FILE_CONTENT[files.CONFIG_FILE]["auto_open"],
     "validate": True,
@@ -97,7 +96,9 @@ def _plot_option_logic(plot_options_from_args):
     user_plot_options.update(session_options)
     user_plot_options.update(plot_options_from_args)
     user_plot_options = {
-        k: v for k, v in user_plot_options.items() if k in default_plot_options
+        k: v
+        for k, v in user_plot_options.items()
+        if k in default_plot_options or k == "filename"
     }
 
     return user_plot_options
@@ -240,7 +241,7 @@ def plot(figure_or_data, validate=True, **plot_options):
         filename = paths[-1]
 
         # Create parent directory
-        if parent_path != "":
+        if parent_path:
             file_ops.ensure_dirs(parent_path)
             payload["parent_path"] = parent_path
 
@@ -1065,6 +1066,8 @@ class grid_ops:
         if meta is not None:
             grid_json["metadata"] = meta
 
+        payload = {"data": grid_json, "world_readable": world_readable}
+
         # Make a folder path
         if filename:
             if filename[-1] == "/":
@@ -1076,23 +1079,10 @@ class grid_ops:
 
             if parent_path != "":
                 file_ops.ensure_dirs(parent_path)
-        else:
-            # Create anonymous grid name
-            hash_val = hash(json.dumps(grid_json, sort_keys=True))
-            id = base64.urlsafe_b64encode(str(hash_val).encode("utf8"))
-            id_str = id.decode(encoding="utf8").replace("=", "")
-            filename = "grid_" + id_str
-            # filename = 'grid_' + str(hash_val)
-            parent_path = ""
 
-        payload = {
-            "filename": filename,
-            "data": grid_json,
-            "world_readable": world_readable,
-        }
-
-        if parent_path != "":
-            payload["parent_path"] = parent_path
+            payload["filename"] = filename
+            if parent_path:
+                payload["parent_path"] = parent_path
 
         file_info = _create_or_overwrite_grid(payload)
 
