@@ -52,7 +52,7 @@ def create_annotated_heatmap(
     x=None,
     y=None,
     annotation_text=None,
-    colorscale="RdBu",
+    colorscale="Plasma",
     font_colors=None,
     showscale=False,
     reversescale=False,

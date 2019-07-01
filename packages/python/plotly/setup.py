@@ -467,9 +467,9 @@ setup(
         "plotly.matplotlylib.mplexporter.renderers",
         "plotly.figure_factory",
         "plotly.data",
-        "plotly.colors",
         "plotly.express",
         "_plotly_utils",
+        "_plotly_utils.colors",
         "_plotly_future_",
     ]
     + graph_objs_packages

@@ -628,12 +628,12 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
           - A list or array of any of the above
 
         Returns
@@ -708,12 +708,12 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
           - A list or array of any of the above
 
         Returns
@@ -1060,12 +1060,12 @@ class ColorBar(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
@@ -1119,12 +1119,12 @@ class ColorBar(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
@@ -1330,12 +1330,12 @@ class ColorBar(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
@@ -1613,12 +1613,12 @@ class ColorBar(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------

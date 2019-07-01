@@ -4253,7 +4253,7 @@ class TestTernarycontour(NumpyTestUtilsMixin, TestCaseNoTemplate):
             np.stack((a, b, c)), z, showscale=True, showmarkers=True
         )
         assert isinstance(fig.data[-1]["marker"]["colorscale"], tuple)
-        assert isinstance(fig2.data[-1]["marker"]["colorscale"], str)
+        assert isinstance(fig2.data[-1]["marker"]["colorscale"], tuple)
         assert fig.data[-1]["marker"]["cmax"] == 1
         assert fig2.data[-1]["marker"]["cmax"] == 1
 

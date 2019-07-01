@@ -1,6 +1,8 @@
 import plotly.graph_objs as go
 import plotly.io as pio
 from collections import namedtuple, OrderedDict
+
+from _plotly_utils.basevalidators import ColorscaleValidator
 from .colors import qualitative, sequential
 import math
 import pandas
@@ -1005,11 +1007,12 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
         colorvar = "z" if constructor == go.Histogram2d else "color"
         range_color = args["range_color"] or [None, None]
         d = len(args["color_continuous_scale"]) - 1
+
+        colorscale_validator = ColorscaleValidator("colorscale", "make_figure")
         layout_patch["coloraxis1"] = dict(
-            colorscale=[
-                [(1.0 * i) / (1.0 * d), x]
-                for i, x in enumerate(args["color_continuous_scale"])
-            ],
+            colorscale=colorscale_validator.validate_coerce(
+                args["color_continuous_scale"]
+            ),
             cmid=args["color_continuous_midpoint"],
             cmin=range_color[0],
             cmax=range_color[1],

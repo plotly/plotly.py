@@ -1,7 +1,9 @@
 import pytest
 from _plotly_utils.basevalidators import ColorscaleValidator
+from _plotly_utils import colors
 import numpy as np
-
+import inspect
+import itertools
 
 # Fixtures
 # --------
@@ -10,45 +12,65 @@ def validator():
     return ColorscaleValidator("prop", "parent")
 
 
-@pytest.fixture(
-    params=[
-        "Greys",
-        "YlGnBu",
-        "Greens",
-        "YlOrRd",
-        "Bluered",
-        "RdBu",
-        "Reds",
-        "Blues",
-        "Picnic",
-        "Rainbow",
-        "Portland",
-        "Jet",
-        "Hot",
-        "Blackbody",
-        "Earth",
-        "Electric",
-        "Viridis",
-        "Cividis",
-    ]
+colorscale_members = itertools.chain(
+    inspect.getmembers(colors.sequential),
+    inspect.getmembers(colors.diverging),
+    inspect.getmembers(colors.cyclical),
 )
+
+named_colorscales = {
+    c[0]: c[1]
+    for c in colorscale_members
+    if isinstance(c, tuple)
+    and len(c) == 2
+    and isinstance(c[0], str)
+    and isinstance(c[1], list)
+}
+
+
+@pytest.fixture(params=list(named_colorscales))
 def named_colorscale(request):
     return request.param
+
+
+@pytest.fixture(params=list(named_colorscales))
+def seqence_colorscale(request):
+    return named_colorscales[request.param]
 
 
 # Tests
 # -----
 # ### Acceptance by name ###
 def test_acceptance_named(named_colorscale, validator):
-    # As-is
-    assert validator.validate_coerce(named_colorscale) == named_colorscale
+    # Get expected value of named colorscale
+    d = len(named_colorscales[named_colorscale]) - 1
+    expected = [
+        [(1.0 * i) / (1.0 * d), x]
+        for i, x in enumerate(named_colorscales[named_colorscale])
+    ]
+
+    assert validator.validate_coerce(named_colorscale) == expected
 
     # Uppercase
-    assert (
-        validator.validate_coerce(named_colorscale.upper()) == named_colorscale.upper()
-    )
+    assert validator.validate_coerce(named_colorscale.upper()) == expected
 
-    assert validator.present(named_colorscale) == named_colorscale
+    # Present as tuples
+    expected_tuples = tuple((c[0], c[1]) for c in expected)
+    assert validator.present(expected) == expected_tuples
+
+
+# ### Acceptance by name ###
+def test_acceptance_sequence(seqence_colorscale, validator):
+    # Get expected value of named colorscale
+    d = len(seqence_colorscale) - 1
+    expected = [[(1.0 * i) / (1.0 * d), x] for i, x in enumerate(seqence_colorscale)]
+
+    # Accepted as is
+    assert validator.validate_coerce(seqence_colorscale) == expected
+
+    # Present as tuples
+    expected_tuples = tuple((c[0], c[1]) for c in expected)
+    assert validator.present(expected) == expected_tuples
 
 
 # ### Acceptance as array ###

@@ -14,7 +14,7 @@ def swatches():
 
 swatches.__doc__ = _swatches.__doc__
 
-Plotly = [
+Plotly3 = [
     "#0508b8",
     "#1910d8",
     "#3c19f0",
@@ -91,6 +91,8 @@ Plasma = [
     "#fdca26",
     "#f0f921",
 ]
+
+from .plotlyjs import Blackbody, Bluered, Electric, Hot, Jet, Rainbow  # noqa: F401
 
 from .colorbrewer import (  # noqa: F401
     Blues,
