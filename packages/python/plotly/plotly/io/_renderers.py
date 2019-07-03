@@ -471,6 +471,10 @@ elif ipython and ipython.get_ipython():
     if not default_renderer and "VSCODE_PID" in os.environ:
         default_renderer = "vscode"
 
+    # Cheick if we're running in nteract
+    if not default_renderer and "NTERACT_EXE" in os.environ:
+        default_renderer = "nteract"
+
     # Fallback to renderer combination that will work automatically
     # in the classic notebook (offline), jupyterlab, nteract, vscode, and
     # nbconvert HTML export.
