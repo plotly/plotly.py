@@ -11,7 +11,8 @@ from plotly import optional_imports
 from plotly.io._base_renderers import (
     MimetypeRenderer, ExternalRenderer, PlotlyRenderer, NotebookRenderer,
     KaggleRenderer, ColabRenderer, JsonRenderer, PngRenderer, JpegRenderer,
-    SvgRenderer, PdfRenderer, BrowserRenderer, IFrameRenderer)
+    SvgRenderer, PdfRenderer, BrowserRenderer, IFrameRenderer,
+    SphinxGalleryRenderer)
 from plotly.io._utils import validate_coerce_fig_to_dict
 
 ipython = optional_imports.get_module('IPython')
@@ -393,6 +394,7 @@ renderers['firefox'] = BrowserRenderer(config=config, using='firefox')
 renderers['chrome'] = BrowserRenderer(config=config, using='chrome')
 renderers['chromium'] = BrowserRenderer(config=config, using='chromium')
 renderers['iframe'] = IFrameRenderer(config=config)
+renderers['sphinx_gallery'] = SphinxGalleryRenderer()
 
 # Set default renderer
 # --------------------
