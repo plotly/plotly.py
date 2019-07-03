@@ -24,6 +24,7 @@ from plotly.io._base_renderers import (
     PdfRenderer,
     BrowserRenderer,
     IFrameRenderer,
+    SphinxGalleryRenderer,
 )
 from plotly.io._utils import validate_coerce_fig_to_dict
 
@@ -425,6 +426,7 @@ renderers["chrome"] = BrowserRenderer(config=config, using="chrome")
 renderers["chromium"] = BrowserRenderer(config=config, using="chromium")
 renderers["iframe"] = IFrameRenderer(config=config, include_plotlyjs=True)
 renderers["iframe_connected"] = IFrameRenderer(config=config, include_plotlyjs="cdn")
+renderers["sphinx_gallery"] = SphinxGalleryRenderer()
 
 # Set default renderer
 # --------------------
