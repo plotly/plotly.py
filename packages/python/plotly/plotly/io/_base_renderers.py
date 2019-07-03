@@ -6,10 +6,11 @@ import inspect
 import os
 
 import six
-from plotly.io import to_json, to_image
+from plotly.io import to_json, to_image, write_image, write_html
 from plotly import utils, optional_imports
 from plotly.io._orca import ensure_server
 from plotly.offline.offline import _get_jconfig, get_plotlyjs
+from plotly.tools import return_figure_from_figure_or_data
 
 ipython_display = optional_imports.get_module("IPython.display")
 IPython = optional_imports.get_module("IPython")
@@ -704,3 +705,19 @@ class BrowserRenderer(ExternalRenderer):
             validate=False,
         )
         open_html_in_browser(html, self.using, self.new, self.autoraise)
+
+
+class SphinxGalleryRenderer(ExternalRenderer):
+    def render(self, fig_dict):
+        stack = inspect.stack()
+        # Name of script from which plot function was called is retrieved
+        try:
+            filename = stack[3].filename  # let's hope this is robust...
+        except:  # python 2
+            filename = stack[3][1]
+        filename_root, _ = os.path.splitext(filename)
+        filename_html = filename_root + ".html"
+        filename_png = filename_root + ".png"
+        figure = return_figure_from_figure_or_data(fig_dict, True)
+        _ = write_html(fig_dict, file=filename_html)
+        write_image(figure, filename_png)
