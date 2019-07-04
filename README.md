@@ -78,12 +78,12 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 
 plotly.py may be installed using pip...
 ```
-pip install plotly==4.0.0a8
+pip install plotly==4.0.0a9
 ```
 
 or conda.
 ```
-conda install -c plotly/label/test plotly==4.0.0a8
+conda install -c plotly/label/test plotly==4.0.0a9
 ```
 
 ### Jupyter Notebook Support
@@ -91,13 +91,13 @@ For use in the Jupyter Notebook, install the `notebook` and `ipywidgets`
 packages using pip...
 
 ```
-pip install "notebook>=5.3" "ipywidgets==7.4"
+pip install "notebook>=5.3" "ipywidgets==7.5"
 ```
 
 or conda.
 
 ```
-conda install "notebook>=5.3" "ipywidgets=7.4"
+conda install -c conda-forge "notebook>=5.3" "ipywidgets=7.5"
 ```
 
 ### JupyterLab Support (Python 3.5+)
@@ -105,13 +105,13 @@ For use in JupyterLab, install the `jupyterlab` and `ipywidgets`
 packages using pip... 
 
 ```
-pip install jupyterlab==0.35 "ipywidgets==7.4"
+pip install jupyterlab==1.0.0 "ipywidgets==7.5"
 ```
 
 or conda.
 
 ```
-conda install jupyterlab=0.35 "ipywidgets=7.2"
+conda install -c conda-forge jupyterlab=1.0.0 "ipywidgets=7.5"
 ```
 
 Then run the following commands to install the required JupyterLab extensions:
@@ -123,10 +123,10 @@ export NODE_OPTIONS=--max-old-space-size=4096
 set NODE_OPTIONS=--max-old-space-size=4096
 
 # Jupyter widgets extension
-jupyter labextension install @jupyter-widgets/jupyterlab-manager@1.0.0-rc.2 --no-build
+jupyter labextension install @jupyter-widgets/jupyterlab-manager@1.0.0 --no-build
 
 # FigureWidget support
-jupyter labextension install plotlywidget@0.38 --no-build
+jupyter labextension install plotlywidget@1.0.0-alpha.4 --no-build
 
 # and jupyterlab renderer support
 jupyter labextension install jupyterlab-plotly@1.0.0-alpha.5 --no-build
