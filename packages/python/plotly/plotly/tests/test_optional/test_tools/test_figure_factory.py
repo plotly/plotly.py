@@ -1944,7 +1944,7 @@ class TestGantt(TestCase):
                     ],
                     "showlegend": True,
                     "title": "Gantt Chart",
-                    "width": 900,
+                    "width": 800,
                     "xaxis": {
                         "rangeselector": {
                             "buttons": [

@@ -582,7 +582,7 @@ def create_gantt(
     showgrid_x=False,
     showgrid_y=False,
     height=600,
-    width=900,
+    width=800,
     tasks=None,
     task_names=None,
     data=None,
