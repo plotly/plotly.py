@@ -584,7 +584,7 @@ def gantt_dict(chart, colors, title, index_col, show_colorbar, bar_width,
 
 def create_gantt(df, colors=None, index_col=None, show_colorbar=False,
                  reverse_colors=False, title='Gantt Chart', bar_width=0.2,
-                 showgrid_x=False, showgrid_y=False, height=600, width=800,
+                 showgrid_x=False, showgrid_y=False, height=600, width=900,
                  tasks=None, task_names=None, data=None, group_tasks=False):
     """
     Returns figure for a gantt chart
