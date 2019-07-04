@@ -12,6 +12,9 @@ def setup():
     plotly.io.orca.config.restore_defaults(reset_server=False)
 
 
+here = os.path.dirname(os.path.abspath(__file__))
+
+
 # Run setup before every test function in this file
 pytestmark = pytest.mark.usefixtures("setup")
 
@@ -47,7 +50,7 @@ def test_scraper():
     import tempfile
 
     tempdir = tempfile.mkdtemp()
-    gallery_conf = {"src_dir": tempdir, "examples_dirs": "plotly/tests/test_orca"}
+    gallery_conf = {"src_dir": tempdir, "examples_dirs": here}
     names = iter(["0", "1", "2"])
     block_vars = {"image_path_iterator": names}
     execute_plotly_example()

@@ -412,7 +412,7 @@ def gantt_colorscale(
     )
     layout["shapes"] = tasks
 
-    fig = dict(data=data, layout=layout)
+    fig = graph_objs.Figure(data=data, layout=layout)
     return fig
 
 
@@ -567,7 +567,7 @@ def gantt_dict(
     )
     layout["shapes"] = tasks
 
-    fig = dict(data=data, layout=layout)
+    fig = graph_objs.Figure(data=data, layout=layout)
     return fig
 
 
@@ -582,7 +582,7 @@ def create_gantt(
     showgrid_x=False,
     showgrid_y=False,
     height=600,
-    width=900,
+    width=800,
     tasks=None,
     task_names=None,
     data=None,
