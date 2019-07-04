@@ -168,8 +168,14 @@ def initialize_template(
     ]
 
     # Bar outline
+    # Changing marker line color also affects error color,
+    # so reset default error colors
     template.data.bar = [
-        {"marker": {"line": {"width": 0.5, "color": panel_background_clr}}}
+        {
+            "marker": {"line": {"width": 0.5, "color": panel_background_clr}},
+            "error_x": {"color": font_clr},
+            "error_y": {"color": font_clr},
+        }
     ]
     template.data.barpolar = [
         {"marker": {"line": {"width": 0.5, "color": panel_background_clr}}}
