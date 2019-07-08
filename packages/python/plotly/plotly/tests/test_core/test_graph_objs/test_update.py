@@ -127,3 +127,33 @@ class TestUpdateMethod(TestCase):
 
         self.assertEqual(len(layout.annotations), 2)
         self.assertEqual(layout.to_plotly_json(), expected)
+
+    def test_update_initialize_nonempty_list_with_list_extends(self):
+        layout = go.Layout(
+            annotations=[
+                go.layout.Annotation(text="one"),
+                go.layout.Annotation(text="two"),
+            ]
+        )
+
+        layout.update(
+            annotations=[
+                go.layout.Annotation(width=10),
+                go.layout.Annotation(width=20),
+                go.layout.Annotation(width=30),
+                go.layout.Annotation(width=40),
+                go.layout.Annotation(width=50),
+            ]
+        )
+
+        expected = {
+            "annotations": [
+                {"text": "one", "width": 10},
+                {"text": "two", "width": 20},
+                {"width": 30},
+                {"width": 40},
+                {"width": 50},
+            ]
+        }
+
+        self.assertEqual(layout.to_plotly_json(), expected)

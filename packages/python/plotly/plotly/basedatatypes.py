@@ -2755,6 +2755,15 @@ Invalid property path '{key_path_str}' for layout
                         # plotly_obj has an existing non-empty array for key
                         # In this case we merge val into the existing elements
                         BaseFigure._perform_update(plotly_obj[key], val)
+
+                        # If update tuple is longer that current tuple, append the
+                        # extra elements to the end
+                        if isinstance(val, (list, tuple)) and len(val) > len(
+                            plotly_obj[key]
+                        ):
+                            plotly_obj[key] = plotly_obj[key] + tuple(
+                                val[len(plotly_obj[key]) :]
+                            )
                     else:
                         # plotly_obj is an empty or uninitialized list for key
                         # In this case we accept val as is
