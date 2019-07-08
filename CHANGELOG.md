@@ -43,6 +43,7 @@ This is a major release that includes many new features, and a few breaking chan
  - The `plotly.graph_objs` module has been moved to `plotly.graph_objects`, though it is still available at the previous location for backward compatibility ([#1614](https://github.com/plotly/plotly.py/pull/1614))
  - Trace `uid` properties are only generated automatically when a trace is added to a `FigureWidget`.  When a trace is added to a standard `Figure` graph object the input `uid`, if provided, is accepted as is ([#1580](https://github.com/plotly/plotly.py/pull/1580)).
  - `datetime` objects that include timezones are not longer converted to UTC ([#1581](https://github.com/plotly/plotly.py/pull/1581))
+ - When a tuple property (e.g. `layout.annotations`) is updated with a list/tuple that is longer than the current value, the extra elements are appended to the end of the tuple.
 
 ### Fixed
  - Fixed visibility of `bar` trace error bars in built-in templates ([1656](https://github.com/plotly/plotly.py/pull/1656))
