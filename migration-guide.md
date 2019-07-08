@@ -1,5 +1,86 @@
+# Migration to Version 4
+This section contains guidance for migrating from plotly.py version 3 to version 4.
+
+## Online features moved to chart-studio package.
+Prior versions of plotly.py contained functionality for creating figures in both "online" and "offline" modes.  In "online" mode figures were uploaded to the Chart Studio cloud (or on-premise) service, whereas in "offline" mode figures were rendered locally.  In version 4, all "online" functionality has been removed from the main `plotly` distribution package and moved to the new `chart-studio` distribution package.
+
+To migrate version 3 "online" functionality, first install the `chart-studio` package using pip...
+
+```
+$ pip install chart-studio
+``` 
+
+of conda.
+
+```
+$ conda install -c plotly chart-studio
+```
+
+Then, update your Python import statements to import "online" functionality from the top-level `chart_studio` package, rather than the top-level `plotly` package.  For example. replace
+
+```python
+from plotly.plotly import plot, iplot
+```
+
+with
+
+```python
+from chart_studio.plotly import plot, iplot
+```
+
+Similarly, 
+`plotly.api` -> `chart_studio.api`
+`plotly.dashboard_objs` -> `chart_studio.dashboard_objs`
+`plotly.grid_objs` -> `chart_studio.grid_objs`
+`plotly.presentation_objs` -> `chart_studio.presentation_objs`
+`plotly.widgets` -> `chart_studio.widgets`
+
+
+## New default theme
+A new default theme has been enabled for figures created with plotly.py version 4. You can revert to the version 3 figure appearance by disabling the default theme as follows:
+
+```python
+import plotly.io as pio
+pio.templates.default = 'none'
+```
+See https://plot.ly/python-next/renderers for more information on theming in plotly.py version 4
+
+## Add trace return value
+In version 3, the `add_trace` graph object figure method returned a reference to the newly created trace. This was also the case for the `add_{trace_type}` methods (e.g. `add_scatter`, `add_bar`, etc.).  In version 4, these methods return a reference to the calling figure.  This change was made to support method chaining of figure operations. For example
+
+```python
+from plotly.subplots import make_subplots
+(make_subplots(rows=1, cols=2)
+ .add_scatter(y=[2, 1, 3], row=1, col=1)
+ .add_bar(y=[3, 2, 1], row=1, col=2)
+ .update_layout(title_text='Figure title')
+ .show())
+```
+
+Code that relied on the `add_*` methods to return a reference to the newly created trace can be updated as follows.
+
+
+
+
+## Renderers framework
+Version 4 introduces a new renderers framework that is a generalization of the `plotly.offline.init_notebook_mode` and `plotly.offline.iplot` functions for displaying figures.  The `plotly.offline.iplot` function is still available and has been reimplemented on top of the renderers framework, so no changes are required when poritng to version 4.  Going forward, we recommend using the renderers framework directly. See https://plot.ly/python-next/renderers for more information.
+
+
+
+
+
+
+
+## Removals
+
+### fileopt argument removal
+The `fileopt` argument to `chart_studio.plotly.plot` has been removed, so in-place modifications to previously published figures are no longer supported.
+
+
+
+
 # Migration to Version 3
-There are many new and great features in Plotly 3.0 including deeper Jupyter integration, deeper figure validation, improved performance, and more. This guide contains the a summary of the breaking changes that you need to be aware of when migrating code from version 2 to version 3.
+There are many new and great features in plotly.py 3.0 including deeper Jupyter integration, deeper figure validation, improved performance, and more. This guide contains a summary of the breaking changes that you need to be aware of when migrating code from version 2 to version 3.
 
 For a high level overview, read our [announcement post](https://medium.com/@plotlygraphs/introducing-plotly-py-3-0-0-7bb1333f69c6).
 
