@@ -4,7 +4,49 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [4.0.0] - ???
 
-This is a new major version...
+This is a major release that includes many new features, and a few breaking changes. See the [version 4 announcement]() for a summary of the important changes.
+
+### Updated
+ - Updated Plotly.js to version 1.48.3. See the
+ [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1483----2019-06-13)
+ for more information.
+
+### Added
+ - The Plotly Express tech preview (https://medium.com/@plotlygraphs/introducing-plotly-express-808df010143d) has been integrated as the `plotly.express` module ([#1613](https://github.com/plotly/plotly.py/pull/1613))
+ - Added a new renderers framework the supports rendering figure in a wide variety of contexts ([#1474](https://github.com/plotly/plotly.py/pull/1474)). See the new [Displaying Plotly Figures](https://plot.ly/python/next/renderers) documentation page for more information.
+ - Added `plotly.io.write_html` and `plotly.io.to_html` functions for exporting figures to HTML ([1474](https://github.com/plotly/plotly.py/pull/1474)). Also available as `.write_html` and `.to_html` figure methods.
+ - Added new figure methods for batch updating figure properties (`update_layout`, `update_traces`, `update_xaxes`, etc.) ([#1624](https://github.com/plotly/plotly.py/pull/1624)).  See the new [Creating and Updating Figures](https://plot.ly/python/next/creating-and-updating-figures/) documentation page for more details.
+ - Added support for all trace types in `make_subplots` ([#1528](https://github.com/plotly/plotly.py/pull/1528))
+ - Added support for secondary y-axes in `make_subplots` ([#1564](https://github.com/plotly/plotly.py/pull/1564))
+ - Support passing a scalar trace object (rather than a list or tuple of trace objects) as the `data` property to the `Figure` constructor ([#1614](https://github.com/plotly/plotly.py/pull/1614))
+ - Added dictionary-stule `.pop` method to graph object classes ([#1614](https://github.com/plotly/plotly.py/pull/1614))
+ - New `jupyterlab-plotly` JupyterLab extension for rendering figures in JupyterLab. Replaces the `@jupyterlab/plotly-extension` extension, and includes JupyterLab 1.0 support.
+ - Added new suite of built-in colorscales to the `plotly.colors` module, and support for specifying this wide range of colorscales by name. Also added support for specifying colorscales as a list of colors, in which case the color spacing is assumed to be uniform ([#1647](https://github.com/plotly/plotly.py/pull/1647)).
+ - Added `sphinx-gallery` renderer for embedding plotly figures in [Sphinx-Gallery](https://sphinx-gallery.github.io/) ([#1577](https://github.com/plotly/plotly.py/pull/1577), [plotly/plotly-sphinx-gallery](https://github.com/plotly/plotly-sphinx-gallery)).
+ 
+### Removed
+ - The follow modules for interfacing with the Chart Studio cloud service have been removed from plotly.py and moved to the new `chart-studio` distribution package.  The following modules have been moved to a new top-level `chart_studio` module:
+   - `plotly.plotly` -> `chart_studio.plotly`
+   - `plotly.api` -> `chart_studio.api`
+   - `plotly.dashboard_objs` -> `chart_studio.dashboard_objs`
+   - `plotly.grid_objs` -> `chart_studio.grid_objs`
+   - `plotly.presentation_objs` -> `chart_studio.presentation_objs`
+ - The legacy `plotly.widgets.GraphWidget` class for displaying online figures hosted by Chart Studio as ipywidgets has been removed. Please use the offline, and much more capable, `plotly.graph_objects.FigureWidget` class instead.
+ - The `fileopt` argument to `chart_studio.plotly.plot` has been removed, so in-place modifications to previously published figures are no longer supported, and a figure will always overwrite a figure with the same name. 
+
+### Changed
+ - The `'plotly'` template is used as the default theme across all figures.
+ - In order to reduce the size of the core `plotly` distribution package, the bundled geographic shape files used by the `create_choropleth` figure factory have been moved to a new optional `plotly-geo` distribution package ([1604](https://github.com/plotly/plotly.py/pull/1604))
+ - For consistency with other figure factories, the `create_choropleth`  and `create_gantt` figure factories now always returns `Figure` objects, rather than dictionaries ([#1600](https://github.com/plotly/plotly.py/pull/1600), [#1607](https://github.com/plotly/plotly.py/pull/1607)).
+ - Figure add trace methods (`.add_trace`, `.add_traces`, `.add_scatter`, etc.) now return a reference to the calling figure, rather than the newly created trace ([#1624](https://github.com/plotly/plotly.py/pull/1624))
+ - `plotly.tools.make_subplots` has been moved to `plotly.subplots.make_subplots`, though it is still available at the previous location for backward compatibility
+ - The `plotly.graph_objs` module has been moved to `plotly.graph_objects`, though it is still available at the previous location for backward compatibility ([#1614](https://github.com/plotly/plotly.py/pull/1614))
+ - Trace `uid` properties are only generated automatically when a trace is added to a `FigureWidget`.  When a trace is added to a standard `Figure` graph object the input `uid`, if provided, is accepted as is ([#1580](https://github.com/plotly/plotly.py/pull/1580)).
+ - `datetime` objects that include timezones are not longer converted to UTC ([#1581](https://github.com/plotly/plotly.py/pull/1581))
+
+### Fixed
+ - Fixed visibility of `bar` trace error bars in built-in templates ([1656](https://github.com/plotly/plotly.py/pull/1656))
+
 
 ## [3.10.0] - 2019-05-31
 
