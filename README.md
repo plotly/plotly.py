@@ -78,12 +78,12 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 
 plotly.py may be installed using pip...
 ```
-pip install plotly==4.0.0a9
+pip install plotly==4.0.0rc1
 ```
 
 or conda.
 ```
-conda install -c plotly/label/test plotly==4.0.0a9
+conda install -c plotly/label/test plotly==4.0.0rc1
 ```
 
 ### Jupyter Notebook Support
@@ -105,13 +105,13 @@ For use in JupyterLab, install the `jupyterlab` and `ipywidgets`
 packages using pip... 
 
 ```
-pip install jupyterlab==1.0.0 "ipywidgets==7.5"
+pip install jupyterlab==1.0 "ipywidgets==7.5"
 ```
 
 or conda.
 
 ```
-conda install -c conda-forge jupyterlab=1.0.0 "ipywidgets=7.5"
+conda install -c defaults -c conda-forge jupyterlab=1.0 "ipywidgets=7.5"
 ```
 
 Then run the following commands to install the required JupyterLab extensions:
@@ -123,16 +123,16 @@ export NODE_OPTIONS=--max-old-space-size=4096
 set NODE_OPTIONS=--max-old-space-size=4096
 
 # Jupyter widgets extension
-jupyter labextension install @jupyter-widgets/jupyterlab-manager@1.0.0 --no-build
+jupyter labextension install @jupyter-widgets/jupyterlab-manager@1.0 --no-build
 
 # FigureWidget support
-jupyter labextension install plotlywidget@1.0.0-alpha.4 --no-build
+jupyter labextension install plotlywidget@1.0.0-rc.1 --no-build
 
 # and jupyterlab renderer support
-jupyter labextension install jupyterlab-plotly@1.0.0-alpha.5 --no-build
+jupyter labextension install jupyterlab-plotly@1.0.0-rc.1 --no-build
 
 # JupyterLab chart editor support (optional)
-jupyter labextension install jupyterlab-chart-editor@1.1 --no-build
+jupyter labextension install jupyterlab-chart-editor@1.2 --no-build
 
 # Build extensions (must be done to activate extensions since --no-build is used above)
 jupyter lab build
@@ -168,12 +168,12 @@ choropleth figure factory is one such example. These shape files are distributed
 separate `plotly-geo` package.  This package can be installed using pip...
 
 ```
-pip install plotly-geo==1.0.0a1
+pip install plotly-geo==1.0.0rc1
 ```
 
 or conda
 ```
-conda install -c plotly/label/test plotly-geo=1.0.0a1
+conda install -c plotly/label/test plotly-geo=1.0.0rc1
 ```
 
 ### Chart Studio support
@@ -181,16 +181,18 @@ The `chart-studio` package can be used to upload plotly figures to Plotly's Char
 Studio Cloud or On-Prem service.  This package can be installed using pip...
 
 ```
-pip install chart-studio==1.0.0a5
+pip install chart-studio==1.0.0rc1
 ```
 
 or conda
 ```
-conda install -c plotly/label/test chart-studio=1.0.0a5
+conda install -c plotly/label/test chart-studio=1.0.0rc1
 ```
 
 ## Migration
-If you're migrating from plotly.py version 2, please check out the [migration guide](migration-guide.md)
+If you're migrating from plotly.py version 3, please check out the [Version 4 migration guide](https://plot.ly/python/next/v4-migration/)
+
+If you're migrating from plotly.py version 2, please check out the [Version 3 migration guide](migration-guide.md)
 
 ## Copyright and Licenses
 Code and documentation copyright 2019 Plotly, Inc.
