@@ -745,7 +745,6 @@ def create_gantt(df, colors=None, index_col=None, show_colorbar=False,
                  tasks=None, task_names=None, data=None, group_tasks=False, show_hover_fill=True):
     """
     Returns figure for a gantt chart
-
     :param (array|list) df: input data for gantt chart. Must be either a
         a dataframe or a list. If dataframe, the columns must include
         'Task', 'Start' and 'Finish'. Other columns can be included and
