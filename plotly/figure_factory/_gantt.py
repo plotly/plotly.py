@@ -237,7 +237,8 @@ def gantt(chart, colors, title, bar_width, showgrid_x, showgrid_y, height,
         )
     )
 
-    fig = dict(data=list(scatter_data_dict.values()), layout=layout)
+    #fig = dict(data=list(scatter_data_dict.values()), layout=layout)
+    fig = dict(data=[scatter_data_dict[k] for k in scatter_data_dict], layout=layout)
     return fig
 
 
@@ -548,7 +549,8 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
         )
     )
 
-    fig = dict(data=list(scatter_data_dict.values()), layout=layout)
+    # fig = dict(data=list(scatter_data_dict.values()), layout=layout)
+    fig = dict(data=[scatter_data_dict[k] for k in scatter_data_dict], layout=layout)
     return fig
 
 
@@ -735,7 +737,8 @@ def gantt_dict(chart, colors, title, index_col, show_colorbar, bar_width,
         )
     )
 
-    fig = dict(data=list(scatter_data_dict.values()), layout=layout)
+    # fig = dict(data=list(scatter_data_dict.values()), layout=layout)
+    fig = dict(data=[scatter_data_dict[k] for k in scatter_data_dict], layout=layout)
     return fig
 
 
