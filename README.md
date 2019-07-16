@@ -97,7 +97,7 @@ pip install "notebook>=5.3" "ipywidgets==7.5"
 or conda.
 
 ```
-conda install -c conda-forge "notebook>=5.3" "ipywidgets=7.5"
+conda install "notebook>=5.3" "ipywidgets=7.5"
 ```
 
 ### JupyterLab Support (Python 3.5+)
@@ -111,7 +111,7 @@ pip install jupyterlab==1.0 "ipywidgets==7.5"
 or conda.
 
 ```
-conda install -c defaults -c conda-forge jupyterlab=1.0 "ipywidgets=7.5"
+conda install jupyterlab=1.0 "ipywidgets=7.5"
 ```
 
 Then run the following commands to install the required JupyterLab extensions:
