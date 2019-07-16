@@ -52,6 +52,7 @@ __all__ = [
     "density_contour",
     "density_heatmap",
     "line",
+    "line_3d",
     "line_polar",
     "line_ternary",
     "line_mapbox",
