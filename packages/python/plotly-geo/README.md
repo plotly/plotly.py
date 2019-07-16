@@ -1,0 +1,1 @@
+Package containing the geo shape files used by plotly.py
