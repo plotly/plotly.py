@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [4.0.0] - ???
+## [4.0.0] - 2019-07-16
 
 This is a major release that includes many new features, and a few breaking changes. See the [version 4 announcement]() for a summary of the important changes.
 
