@@ -1,0 +1,50 @@
+{% set data = load_setup_py_data(setup_file='../setup.py', from_recipe_dir=True) %}
+{% set version = data.get('version') %}
+
+package:
+  name: plotly
+  version: {{ version }}
+
+source:
+  path: ../../../../
+
+build:
+  number: 0
+  script: |
+    cd packages/python/plotly
+    {{ PYTHON }} setup.py sdist
+    {{ PYTHON }} -m pip install dist/plotly-{{ version }}.tar.gz --no-deps --ignore-installed --no-cache-dir -q
+  noarch: python
+
+requirements:
+  build:
+    - python
+    - pip
+    - nodejs
+    - setuptools
+  run:
+    - python
+    - retrying >=1.3.3
+    - six
+
+test:
+  imports:
+    - plotly
+
+about:
+  home: https://plot.ly/python/
+  license: MIT
+  license_file: '{{ environ["RECIPE_DIR"] }}/LICENSE.txt'
+  summary: 'An interactive JavaScript-based visualization library for Python'
+  description: |
+    plotly.py is an interactive, open-source, and JavaScript-based graphing
+    library for Python. Built on top of plotly.js, plotly.py is a high-level,
+    declarative charting library that includes over 30 chart types,
+    including scientific charts, 3D graphs, statistical charts, SVG maps,
+    financial charts, and more.
+  doc_url: https://plot.ly/python/
+  dev_url: https://github.com/plotly/plotly.py
+
+extra:
+  recipe-maintainers:
+    - jonmmease

@@ -1,0 +1,55 @@
+### Optional Dependencies for Additional Plotly Functionality   ###
+###                                                             ###
+### To install, run:                                            ###
+###      $ pip install -r optional-requirements.txt             ###
+###                                                             ###
+###################################################################
+
+## numpy (technically, this is covered by matplotlib's deps) ##
+numpy
+
+## matplotlylib dependencies - moving away from 1.3.1 ##
+# matplotlib==2.2.2
+
+## testing dependencies ##
+coverage==4.3.1
+mock==2.0.0
+nose==1.3.3
+pytest==3.5.1
+backports.tempfile==1.0
+xarray
+pytz
+
+## orca dependencies ##
+requests
+psutil
+
+## code formatting
+pre-commit
+
+## codegen dependencies ##
+inflect
+
+## template generation ##
+colorcet
+
+## ipython ##
+ipython
+
+## pandas deps for some matplotlib functionality ##
+pandas
+
+## scipy deps for some FigureFactory functions ##
+scipy
+
+## jupyter ##
+jupyter
+ipykernel
+
+## deps for _county_choropleth.py figure factory
+pyshp
+geopandas
+shapely
+
+# image uri conversion
+pillow
