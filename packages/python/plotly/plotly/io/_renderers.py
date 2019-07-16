@@ -471,9 +471,20 @@ elif ipython and ipython.get_ipython():
     if not default_renderer and "VSCODE_PID" in os.environ:
         default_renderer = "vscode"
 
-    # Cheick if we're running in nteract
+    # Check if we're running in nteract
     if not default_renderer and "NTERACT_EXE" in os.environ:
         default_renderer = "nteract"
+
+    # Check if we're running in spyder and orca is installed
+    if not default_renderer and "SPYDER_ARGS" in os.environ:
+        try:
+            from plotly.io.orca import validate_executable
+
+            validate_executable()
+            default_renderer = "svg"
+        except ValueError:
+            # orca not found
+            pass
 
     # Fallback to renderer combination that will work automatically
     # in the classic notebook (offline), jupyterlab, nteract, vscode, and
