@@ -10,7 +10,7 @@ def readme():
 
 setup(
     name="plotly-geo",
-    version="1.0.0rc1",
+    version="1.0.0",
     author="Chris P",
     author_email="chris@plot.ly",
     maintainer="Jon Mease",
