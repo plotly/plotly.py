@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [4.0.0] - 2019-07-16
 
-This is a major release that includes many new features, and a few breaking changes. See the [version 4 announcement]() for a summary of the important changes.
+This is a major release that includes many new features, and a few breaking changes. See the [version 4 announcement](https://community.plot.ly/t/introducing-plotly-py-4-0-0rc1/25639) for a summary of the important changes.
 
 ### Updated
  - Updated Plotly.js to version 1.48.3. See the
