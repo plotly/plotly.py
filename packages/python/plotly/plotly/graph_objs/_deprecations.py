@@ -475,7 +475,7 @@ class Scene(dict):
     """
     plotly.graph_objs.Scene is deprecated.
 Please replace it with one of the following more specific types
-  - plotly.graph_objs.Scene
+  - plotly.graph_objs.layout.Scene
 
     """
 
@@ -483,13 +483,13 @@ Please replace it with one of the following more specific types
         """
         plotly.graph_objs.Scene is deprecated.
 Please replace it with one of the following more specific types
-  - plotly.graph_objs.Scene
+  - plotly.graph_objs.layout.Scene
 
         """
         warnings.warn(
             """plotly.graph_objs.Scene is deprecated.
 Please replace it with one of the following more specific types
-  - plotly.graph_objs.Scene
+  - plotly.graph_objs.layout.Scene
 """,
             DeprecationWarning,
         )
