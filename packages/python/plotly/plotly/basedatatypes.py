@@ -642,8 +642,9 @@ class BaseFigure(object):
         # ### Check whether a move is needed ###
         if not all([i1 == i2 for i1, i2 in zip(new_inds, current_inds)]):
 
-            # #### Update widget, if any ####
-            self._send_moveTraces_msg(current_inds, new_inds)
+            # #### Save off index lists for moveTraces message ####
+            msg_current_inds = current_inds
+            msg_new_inds = new_inds
 
             # #### Reorder trace elements ####
             # We do so in-place so we don't trigger traitlet property
@@ -663,6 +664,9 @@ class BaseFigure(object):
             # #### Insert by new_inds in forward order ####
             for ni, trace_data in zip(new_inds, moving_traces_data):
                 self._data.insert(ni, trace_data)
+
+            # #### Update widget, if any ####
+            self._send_moveTraces_msg(msg_current_inds, msg_new_inds)
 
         # ### Update data defaults ###
         # There is to front-end syncronization to worry about so this
